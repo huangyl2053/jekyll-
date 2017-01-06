@@ -16,19 +16,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ChosaAnser01 {
 
     /**
-     * コード:1 名称:なし 略称:なし
+     * コード:1 名称:ない 略称:ない
      */
-    なし("1", "なし"),
+    ない("1", "ない", "ない"),
     /**
-     * コード:2 名称:あり 略称:あり
+     * コード:2 名称:ある 略称:ある
      */
-    あり("2", "あり");
+    ある("2", "ある", "ある");
     private final RString code;
     private final RString fullName;
+    private final RString ryakusho;
 
-    private ChosaAnser01(String code, String fullname) {
+    private ChosaAnser01(String code, String fullname, String ryakusho) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -47,6 +49,15 @@ public enum ChosaAnser01 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 認定調査項目内容01の略称を返します。
+     *
+     * @return 認定調査項目内容01の略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**

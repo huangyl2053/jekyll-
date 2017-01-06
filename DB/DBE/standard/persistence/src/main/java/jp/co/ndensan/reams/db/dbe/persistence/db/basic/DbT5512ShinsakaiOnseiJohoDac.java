@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho.renban;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJoho.renban;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -52,6 +52,23 @@ public class DbT5512ShinsakaiOnseiJohoDac implements ISaveable<DbT5512ShinsakaiO
                                 eq(shinsakaiKaisaiNo, 介護認定審査会開催番号),
                                 eq(renban, 連番))).
                 toObject(DbT5512ShinsakaiOnseiJohoEntity.class);
+    }
+
+    /**
+     * 介護認定審査会開催番号に合致する介護認定審査会音声情報を取得します。
+     *
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @return DbT5512ShinsakaiOnseiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5512ShinsakaiOnseiJohoEntity> selectByKey(RString 介護認定審査会開催番号) throws NullPointerException {
+        requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5512ShinsakaiOnseiJoho.class).
+                where(eq(shinsakaiKaisaiNo, 介護認定審査会開催番号)).
+                toList(DbT5512ShinsakaiOnseiJohoEntity.class);
     }
 
     /**

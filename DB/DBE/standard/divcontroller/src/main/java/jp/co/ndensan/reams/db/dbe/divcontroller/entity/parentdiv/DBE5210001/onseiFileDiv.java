@@ -4,7 +4,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.IOnseiFileOperatorDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.OnseiFileOperatorDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,10 +24,10 @@ public class onseiFileDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("uplUploadPanel")
-    private UploadPanel uplUploadPanel;
-    @JsonProperty("btnAddOnseiFile")
-    private Button btnAddOnseiFile;
+    @JsonProperty("crOnseiFiles")
+    private ControlRepeater<OnseiFileOperatorDiv> crOnseiFiles;
+    @JsonProperty("OnseiUpload")
+    private OnseiUploadDiv OnseiUpload;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +36,62 @@ public class onseiFileDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getuplUploadPanel
-     * @return uplUploadPanel
+     * getcrOnseiFiles
+     * @return crOnseiFiles
      */
-    @JsonProperty("uplUploadPanel")
+    @JsonIgnore
+    public ControlRepeater<IOnseiFileOperatorDiv> getCrOnseiFiles() {
+        return ControlRepeater.class.cast(crOnseiFiles);
+    }
+
+    /*
+     * setcrOnseiFiles
+     * @param crOnseiFiles crOnseiFiles
+     */
+    @JsonIgnore
+    public void setCrOnseiFiles(ControlRepeater<IOnseiFileOperatorDiv> crOnseiFiles) {
+        this.crOnseiFiles = ControlRepeater.class.cast(crOnseiFiles);
+    }
+
+    /*
+     * getOnseiUpload
+     * @return OnseiUpload
+     */
+    @JsonProperty("OnseiUpload")
+    public OnseiUploadDiv getOnseiUpload() {
+        return OnseiUpload;
+    }
+
+    /*
+     * setOnseiUpload
+     * @param OnseiUpload OnseiUpload
+     */
+    @JsonProperty("OnseiUpload")
+    public void setOnseiUpload(OnseiUploadDiv OnseiUpload) {
+        this.OnseiUpload = OnseiUpload;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
     public UploadPanel getUplUploadPanel() {
-        return uplUploadPanel;
+        return this.getOnseiUpload().getUplUploadPanel();
     }
 
-    /*
-     * setuplUploadPanel
-     * @param uplUploadPanel uplUploadPanel
-     */
-    @JsonProperty("uplUploadPanel")
-    public void setUplUploadPanel(UploadPanel uplUploadPanel) {
-        this.uplUploadPanel = uplUploadPanel;
+    @JsonIgnore
+    public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
+        this.getOnseiUpload().setUplUploadPanel(uplUploadPanel);
     }
 
-    /*
-     * getbtnAddOnseiFile
-     * @return btnAddOnseiFile
-     */
-    @JsonProperty("btnAddOnseiFile")
+    @JsonIgnore
     public Button getBtnAddOnseiFile() {
-        return btnAddOnseiFile;
+        return this.getOnseiUpload().getBtnAddOnseiFile();
     }
 
-    /*
-     * setbtnAddOnseiFile
-     * @param btnAddOnseiFile btnAddOnseiFile
-     */
-    @JsonProperty("btnAddOnseiFile")
-    public void setBtnAddOnseiFile(Button btnAddOnseiFile) {
-        this.btnAddOnseiFile = btnAddOnseiFile;
+    @JsonIgnore
+    public void  setBtnAddOnseiFile(Button btnAddOnseiFile) {
+        this.getOnseiUpload().setBtnAddOnseiFile(btnAddOnseiFile);
     }
 
     // </editor-fold>

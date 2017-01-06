@@ -151,15 +151,18 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      * 依頼書・認定調査票(OCR)・主治医意見書印刷に初期化を設定します。
      *
      * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param 市町村コード 保険者DDLの選択値とする市町村コード
      * @param 遷移元画面区分 遷移元画面区分
      */
-    public void initialize(List<ShinseishoKanriNo> 申請書管理番号リスト, GamenSeniKbn 遷移元画面区分) {
+    public void initialize(List<ShinseishoKanriNo> 申請書管理番号リスト, LasdecCode 市町村コード, GamenSeniKbn 遷移元画面区分) {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村コード);
         RString 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(申請書管理番号リスト,
                 証記載保険者番号);
         ChosaIraishoAndChosahyoAndIkenshoPrintFinder printFinder = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance();
         if (GamenSeniKbn.認定調査依頼.equals(遷移元画面区分)) {
+            div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE220001.getReportId());
             div.getNinteiChosa().setDisplayNone(false);
             div.getShujiiIkensho().setDisplayNone(true);
             List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = printFinder.get認定調査依頼情報(parameter).records();
@@ -194,13 +197,15 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             setDisableToNinteiChosaChk();
             RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
             if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
                 div.getRadTeishutsuKigen().setDisabled(true);
             } else {
                 div.getRadTeishutsuKigen().setDisabled(false);
             }
+            set認定調査印刷帳票初期選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         } else {
+            div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE230001.getReportId());
             div.getCcdHokenshaList().setDisplayNone(true);
             div.getNinteiChosa().setDisplayNone(true);
             div.getShujiiIkensho().setDisplayNone(false);
@@ -243,116 +248,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getDgShujiiIkensho().setDataSource(rowList);
             RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                    div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+                    div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
             if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
                 div.getRadTeishutsuKigen().setDisabled(true);
                 div.getTeishutsuKigen().setIsOpen(false);
             } else {
                 div.getRadTeishutsuKigen().setDisabled(false);
             }
-            List<RString> keyChkInsatsuIkenshoList = new ArrayList<>();
-            List<KeyValueDataSource> dataSourceChkInsatsuIkenshoList = new ArrayList<>();
-            RString 主治医意見書作成依頼_手動_意見書作成依頼書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_意見書作成依頼書_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_意見書作成依頼書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_意見書作成依頼書_出力有無 != null && !主治医意見書作成依頼_意見書作成依頼書_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_意見書作成依頼書_出力有無)) {
-                RString value = new RString("意見書作成依頼書");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY0, value);
-                dataSourceChkInsatsuIkenshoList.add(dateSource);
-                if (主治医意見書作成依頼_手動_意見書作成依頼書 != null && !主治医意見書作成依頼_手動_意見書作成依頼書.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_意見書作成依頼書)) {
-                    keyChkInsatsuIkenshoList.add(KEY0);
-                }
-            }
-            RString 主治医意見書作成依頼_手動_意見書作成依頼一覧表 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼一覧表, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_意見書作成依頼一覧表_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_意見書作成依頼一覧表_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_意見書作成依頼一覧表_出力有無 != null && !主治医意見書作成依頼_意見書作成依頼一覧表_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_意見書作成依頼一覧表_出力有無)) {
-                RString value = new RString("意見書作成依頼一覧表");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY1, value);
-                dataSourceChkInsatsuIkenshoList.add(dateSource);
-                if (主治医意見書作成依頼_手動_意見書作成依頼一覧表 != null && !主治医意見書作成依頼_手動_意見書作成依頼一覧表.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_意見書作成依頼一覧表)) {
-                    keyChkInsatsuIkenshoList.add(KEY1);
-                }
-            }
-            if (dataSourceChkInsatsuIkenshoList.isEmpty()) {
-                div.getChkInsatsuIkensho().setDisplayNone(true);
-            } else {
-                div.getChkInsatsuIkensho().setDataSource(dataSourceChkInsatsuIkenshoList);
-                div.getChkInsatsuIkensho().setSelectedItemsByKey(keyChkInsatsuIkenshoList);
-            }
-            List<RString> keyChkIkenshoSakuseiIchiranList = new ArrayList<>();
-            List<KeyValueDataSource> dataSourceChkIkenshoSakuseiIchiranList = new ArrayList<>();
-            LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
-            RString 意見書用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ,
-                    RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
-            RString 主治医意見書作成依頼_手動_主治医意見書記入用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_記入用紙_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_記入用紙_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_記入用紙_出力有無 != null && !主治医意見書作成依頼_記入用紙_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_記入用紙_出力有無)) {
-                RString value = new RString("主治医意見書記入用紙");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY0, value);
-                dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
-                if (主治医意見書作成依頼_手動_主治医意見書記入用紙 != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙)) {
-                    if (CONFIGVALUE1.equals(意見書用紙タイプ)) {
-                        keyChkIkenshoSakuseiIchiranList.add(KEY0);
-                    }
-                }
-            }
-            RString 主治医意見書作成依頼_手動_主治医意見書記入用紙OCR = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_記入用紙OCR_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_記入用紙OCR_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_記入用紙OCR_出力有無 != null && !主治医意見書作成依頼_記入用紙OCR_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_記入用紙OCR_出力有無)) {
-                RString value = new RString("主治医意見書記入用紙OCR");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY1, value);
-                dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
-                if (主治医意見書作成依頼_手動_主治医意見書記入用紙OCR != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙OCR.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙OCR)) {
-                    if (CONFIGVALUE2.equals(意見書用紙タイプ)) {
-                        keyChkIkenshoSakuseiIchiranList.add(KEY1);
-                    }
-                }
-            }
-            RString 主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_デザイン用紙_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_デザイン用紙_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_デザイン用紙_出力有無 != null && !主治医意見書作成依頼_デザイン用紙_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_デザイン用紙_出力有無)) {
-                RString value = new RString("主治医意見書記入用紙デザイン");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY2, value);
-                dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
-                if (主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙 != null && !主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY2);
-                }
-            }
-            RString 主治医意見書作成依頼_手動_主治医意見書作成料請求書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_作成料請求書_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_作成料請求書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_作成料請求書_出力有無 != null && !主治医意見書作成依頼_作成料請求書_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_作成料請求書_出力有無)) {
-                RString value = new RString("主治医意見書作成料請求書");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY3, value);
-                dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
-                if (主治医意見書作成依頼_手動_主治医意見書作成料請求書 != null && !主治医意見書作成依頼_手動_主治医意見書作成料請求書.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書作成料請求書)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY3);
-                }
-            }
-            RString 主治医意見書作成依頼_手動_介護保険診断命令書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険診断命令書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_介護保険診断命令書_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_介護保険診断命令書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_介護保険診断命令書_出力有無 != null && !主治医意見書作成依頼_介護保険診断命令書_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_介護保険診断命令書_出力有無)) {
-                RString value = new RString("介護保険診断命令書");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY4, value);
-                dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
-                if (主治医意見書作成依頼_手動_介護保険診断命令書 != null && !主治医意見書作成依頼_手動_介護保険診断命令書.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_介護保険診断命令書)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY4);
-                }
-            }
-            RString 主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            RString 主治医意見書作成依頼_提出意見書_出力有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_提出意見書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (主治医意見書作成依頼_提出意見書_出力有無 != null && !主治医意見書作成依頼_提出意見書_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_提出意見書_出力有無)) {
-                RString value = new RString("介護保険指定医依頼兼主治医意見書提出依頼書");
-                KeyValueDataSource dateSource = new KeyValueDataSource(KEY5, value);
-                dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
-                if (主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書 != null && !主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書)) {
-                    keyChkIkenshoSakuseiIchiranList.add(KEY5);
-                }
-            }
-            if (dataSourceChkIkenshoSakuseiIchiranList.isEmpty()) {
-                div.getChkIkenshoSakuseiIchiran().setDisplayNone(true);
-            } else {
-                div.getChkIkenshoSakuseiIchiran().setDataSource(dataSourceChkIkenshoSakuseiIchiranList);
-                div.getChkIkenshoSakuseiIchiran().setSelectedItemsByKey(keyChkIkenshoSakuseiIchiranList);
-            }
+            set主治医意見書作成依頼印刷帳票初期選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         }
         div.setHiddenData(getInputData());
     }
@@ -427,6 +330,228 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
     }
 
+    private void set認定調査印刷帳票初期選択(RString 保険者市町村コード) {
+        RDate nowDate = RDate.getNowDate();
+        List<RString> 依頼書選択selectedKeys = new ArrayList<>();
+        RString 認定調査依頼_手動_認定調査依頼書
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査依頼書)) {
+            依頼書選択selectedKeys.add(KEY0);
+        }
+        RString 認定調査依頼_手動_認定調査依頼該当者履歴一覧
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼該当者履歴一覧, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査依頼該当者履歴一覧)) {
+            依頼書選択selectedKeys.add(KEY1);
+        }
+        div.getChk().setSelectedItemsByKey(依頼書選択selectedKeys);
+
+        List<RString> 調査票選択selectedKeys = new ArrayList<>();
+        RString 認定調査依頼_手動_認定調査票_概況調査
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_概況調査, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票_概況調査)) {
+            依頼書選択selectedKeys.add(KEY0);
+        }
+        RString 認定調査依頼_手動_認定調査票_基本調査
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_基本調査, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票_基本調査)) {
+            依頼書選択selectedKeys.add(KEY1);
+        }
+        RString 認定調査依頼_手動_認定調査票_特記事項
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票_特記事項)) {
+            依頼書選択selectedKeys.add(KEY2);
+        }
+        RString 認定調査依頼_手動_調査特記_概況特記
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_調査特記_概況特記)) {
+            依頼書選択selectedKeys.add(KEY3);
+        }
+        div.getChkChosahyo().setSelectedItemsByKey(調査票選択selectedKeys);
+
+        List<RString> 調査票OCR選択selectedKeys = new ArrayList<>();
+        RString 認定調査依頼_手動_認定調査票OCR_概況調査
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_概況調査, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_概況調査)) {
+            調査票OCR選択selectedKeys.add(KEY0);
+        }
+        RString 認定調査依頼_手動_認定調査票OCR_基本調査
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_基本調査, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_基本調査)) {
+            調査票OCR選択selectedKeys.add(KEY1);
+        }
+        RString 認定調査依頼_手動_認定調査票OCR_特記事項
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_特記事項)) {
+            調査票OCR選択selectedKeys.add(KEY2);
+        }
+        RString 認定調査依頼_手動_調査特記OCR_概況特記
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記OCR_概況特記, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_調査特記OCR_概況特記)) {
+            調査票OCR選択selectedKeys.add(KEY3);
+        }
+        div.getChkOcrChosahyo().setSelectedItemsByKey(調査票OCR選択selectedKeys);
+
+        List<RString> 調査票選択2selectedKeys = new ArrayList<>();
+        RString 認定調査依頼_手動_認定調査票差異チェック票
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票差異チェック票)) {
+            調査票選択2selectedKeys.add(KEY0);
+        }
+        RString 認定調査依頼_手動_認定調査票_特記事項_フリー様式
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票_特記事項_フリー様式)) {
+            調査票選択2selectedKeys.add(KEY1);
+        }
+        div.getChkChosahyo2().setSelectedItemsByKey(調査票選択2selectedKeys);
+    }
+
+    private void set主治医意見書作成依頼印刷帳票初期選択(RString 保険者市町村コード) {
+        List<RString> keyChkInsatsuIkenshoList = new ArrayList<>();
+        List<KeyValueDataSource> dataSourceChkInsatsuIkenshoList = new ArrayList<>();
+        RString 主治医意見書作成依頼_手動_意見書作成依頼書 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_意見書作成依頼書_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_意見書作成依頼書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_意見書作成依頼書_出力有無 != null
+                && !主治医意見書作成依頼_意見書作成依頼書_出力有無.isEmpty()
+                && CONFIGVALUE1.equals(主治医意見書作成依頼_意見書作成依頼書_出力有無)) {
+            RString value = new RString("意見書作成依頼書");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY0, value);
+            dataSourceChkInsatsuIkenshoList.add(dateSource);
+            if (主治医意見書作成依頼_手動_意見書作成依頼書 != null
+                    && !主治医意見書作成依頼_手動_意見書作成依頼書.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_意見書作成依頼書)) {
+                keyChkInsatsuIkenshoList.add(KEY0);
+            }
+        }
+        RString 主治医意見書作成依頼_手動_意見書作成依頼一覧表 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼一覧表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_意見書作成依頼一覧表_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_意見書作成依頼一覧表_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_意見書作成依頼一覧表_出力有無 != null
+                && !主治医意見書作成依頼_意見書作成依頼一覧表_出力有無.isEmpty()
+                && CONFIGVALUE1.equals(主治医意見書作成依頼_意見書作成依頼一覧表_出力有無)) {
+            RString value = new RString("意見書作成依頼一覧表");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY1, value);
+            dataSourceChkInsatsuIkenshoList.add(dateSource);
+            if (主治医意見書作成依頼_手動_意見書作成依頼一覧表 != null
+                    && !主治医意見書作成依頼_手動_意見書作成依頼一覧表.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_意見書作成依頼一覧表)) {
+                keyChkInsatsuIkenshoList.add(KEY1);
+            }
+        }
+        if (dataSourceChkInsatsuIkenshoList.isEmpty()) {
+            div.getChkInsatsuIkensho().setDisplayNone(true);
+        } else {
+            div.getChkInsatsuIkensho().setDataSource(dataSourceChkInsatsuIkenshoList);
+            div.getChkInsatsuIkensho().setSelectedItemsByKey(keyChkInsatsuIkenshoList);
+        }
+        List<RString> keyChkIkenshoSakuseiIchiranList = new ArrayList<>();
+        List<KeyValueDataSource> dataSourceChkIkenshoSakuseiIchiranList = new ArrayList<>();
+        RString 意見書用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ,
+                RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        RString 主治医意見書作成依頼_手動_主治医意見書記入用紙 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_記入用紙_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_記入用紙_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_記入用紙_出力有無 != null && !主治医意見書作成依頼_記入用紙_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_記入用紙_出力有無)) {
+            RString value = new RString("主治医意見書記入用紙");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY0, value);
+            dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
+            if (主治医意見書作成依頼_手動_主治医意見書記入用紙 != null
+                    && !主治医意見書作成依頼_手動_主治医意見書記入用紙.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙)) {
+                if (CONFIGVALUE1.equals(意見書用紙タイプ)) {
+                    keyChkIkenshoSakuseiIchiranList.add(KEY0);
+                }
+            }
+        }
+        RString 主治医意見書作成依頼_手動_主治医意見書記入用紙OCR = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_記入用紙OCR_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_記入用紙OCR_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_記入用紙OCR_出力有無 != null
+                && !主治医意見書作成依頼_記入用紙OCR_出力有無.isEmpty()
+                && CONFIGVALUE1.equals(主治医意見書作成依頼_記入用紙OCR_出力有無)) {
+            RString value = new RString("主治医意見書記入用紙OCR");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY1, value);
+            dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
+            if (主治医意見書作成依頼_手動_主治医意見書記入用紙OCR != null
+                    && !主治医意見書作成依頼_手動_主治医意見書記入用紙OCR.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙OCR)) {
+                if (CONFIGVALUE2.equals(意見書用紙タイプ)) {
+                    keyChkIkenshoSakuseiIchiranList.add(KEY1);
+                }
+            }
+        }
+        RString 主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_デザイン用紙_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_デザイン用紙_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_デザイン用紙_出力有無 != null && !主治医意見書作成依頼_デザイン用紙_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_デザイン用紙_出力有無)) {
+            RString value = new RString("主治医意見書記入用紙デザイン");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY2, value);
+            dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
+            if (主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙 != null
+                    && !主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙)) {
+                keyChkIkenshoSakuseiIchiranList.add(KEY2);
+            }
+        }
+        RString 主治医意見書作成依頼_手動_主治医意見書作成料請求書 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_作成料請求書_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_作成料請求書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_作成料請求書_出力有無 != null && !主治医意見書作成依頼_作成料請求書_出力有無.isEmpty() && CONFIGVALUE1.equals(主治医意見書作成依頼_作成料請求書_出力有無)) {
+            RString value = new RString("主治医意見書作成料請求書");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY3, value);
+            dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
+            if (主治医意見書作成依頼_手動_主治医意見書作成料請求書 != null
+                    && !主治医意見書作成依頼_手動_主治医意見書作成料請求書.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_主治医意見書作成料請求書)) {
+                keyChkIkenshoSakuseiIchiranList.add(KEY3);
+            }
+        }
+        RString 主治医意見書作成依頼_手動_介護保険診断命令書 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_介護保険診断命令書, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_介護保険診断命令書_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_介護保険診断命令書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_介護保険診断命令書_出力有無 != null
+                && !主治医意見書作成依頼_介護保険診断命令書_出力有無.isEmpty()
+                && CONFIGVALUE1.equals(主治医意見書作成依頼_介護保険診断命令書_出力有無)) {
+            RString value = new RString("介護保険診断命令書");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY4, value);
+            dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
+            if (主治医意見書作成依頼_手動_介護保険診断命令書 != null
+                    && !主治医意見書作成依頼_手動_介護保険診断命令書.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_介護保険診断命令書)) {
+                keyChkIkenshoSakuseiIchiranList.add(KEY4);
+            }
+        }
+        RString 主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 主治医意見書作成依頼_提出意見書_出力有無 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成依頼_提出意見書_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (主治医意見書作成依頼_提出意見書_出力有無 != null
+                && !主治医意見書作成依頼_提出意見書_出力有無.isEmpty()
+                && CONFIGVALUE1.equals(主治医意見書作成依頼_提出意見書_出力有無)) {
+            RString value = new RString("介護保険指定医依頼兼主治医意見書提出依頼書");
+            KeyValueDataSource dateSource = new KeyValueDataSource(KEY5, value);
+            dataSourceChkIkenshoSakuseiIchiranList.add(dateSource);
+            if (主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書 != null
+                    && !主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書.isEmpty()
+                    && CONFIGVALUE1.equals(主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書)) {
+                keyChkIkenshoSakuseiIchiranList.add(KEY5);
+            }
+        }
+        if (dataSourceChkIkenshoSakuseiIchiranList.isEmpty()) {
+            div.getChkIkenshoSakuseiIchiran().setDisplayNone(true);
+        } else {
+            div.getChkIkenshoSakuseiIchiran().setDataSource(dataSourceChkIkenshoSakuseiIchiranList);
+            div.getChkIkenshoSakuseiIchiran().setSelectedItemsByKey(keyChkIkenshoSakuseiIchiranList);
+        }
+    }
+
     private RString getInputData() {
         RStringBuilder inputData = new RStringBuilder();
         inputData.append(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
@@ -478,7 +603,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     }
 
     private void setDisableToNinteiChosaChk() {
-        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+        RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         RDate 適用基準日 = RDate.getNowDate();
         RString 概況調査_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ,
                 適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
@@ -541,6 +666,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
 
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
         RString タイトル = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
+        Map<Integer, RString> 通知文
+                = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
         for (dgNinteiChosa_Row row : selectedItems) {
 
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
@@ -551,13 +680,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (!list.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = list.get(0);
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
-                RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate());
+                RString 文書番号 = div.getCcdBunshoNo().get文書番号();
                 RString customerBarCode = RString.EMPTY;
                 if (!RString.isNullOrEmpty(business.get調査委託先郵便番号()) && !RString.isNullOrEmpty(business.get調査委託先住所())) {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get調査委託先郵便番号(), business.get調査委託先住所());
                 }
-                Map<Integer, RString> 通知文
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
 
                 RString 誕生日明治 = HOUSI;
                 RString 誕生日大正 = HOUSI;
@@ -587,7 +714,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 }
                 ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                        RString.EMPTY,
+                        div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString(),
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -597,13 +725,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         文書番号,
-                        business.get調査委託先郵便番号(),
+                        RString.isNullOrEmpty(business.get調査委託先郵便番号())
+                        ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
                         business.get調査委託先住所(),
                         business.get事業者名称(),
                         business.get調査員氏名(),
                         get名称付与(),
                         customerBarCode,
-                        business.get被保険者番号(),
+                        RString.EMPTY,
                         タイトル,
                         通知文.get(1),
                         被保険者番号リスト.get(0),
@@ -624,10 +753,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get被保険者氏名(),
                         性別男,
                         性別女,
-                        new YubinNo(business.get郵便番号()).getEditedYubinNo(),
+                        RString.isNullOrEmpty(business.get郵便番号())
+                        ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
                         business.get住所(),
                         business.get電話番号(),
-                        business.get訪問調査先郵便番号(),
+                        RString.isNullOrEmpty(business.get訪問調査先郵便番号())
+                        ? RString.EMPTY : new YubinNo(business.get訪問調査先郵便番号()).getEditedYubinNo(),
                         business.get訪問調査先住所(),
                         business.get訪問調査先名称(),
                         business.get訪問調査先電話番号(),
@@ -676,7 +807,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
-                    business.get調査委託先郵便番号(),
+                    RString.isNullOrEmpty(business.get調査委託先郵便番号())
+                    ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
                     business.get調査委託先住所(),
                     business.get事業者名称(),
                     business.get調査員氏名(),
@@ -1081,10 +1213,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoSakuseiIraishoItem> create意見書作成依頼書_パラメータ() {
         List<ShujiiIkenshoSakuseiIraishoItem> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
         int 宛名連番 = 1;
         int 連番 = 1;
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1093,7 +1224,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 ShujiiIkenshoSakuseiIraishoItem item = new ShujiiIkenshoSakuseiIraishoItem();
-                item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), FlexibleDate.getNowDate()));
+                item.setBunshoNo(div.getCcdBunshoNo().get文書番号());
                 if (!RString.isNullOrEmpty(business.get医療機関郵便番号())) {
                     item.setYubinNo1(new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo());
                 }
@@ -1116,7 +1247,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     item.setCustomerBarCode(RString.EMPTY);
                 }
 
-                item.setSonota(business.get被保険者番号());
+                item.setSonota(RString.EMPTY);
                 RStringBuilder builder = new RStringBuilder();
                 builder.append("*");
                 builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
@@ -1185,9 +1316,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<IkenshoSakuseiIraiIchiranhyoItem> create意見書作成依頼一覧表_パラメータ() {
         List<IkenshoSakuseiIraiIchiranhyoItem> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         }
         ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
@@ -1247,8 +1377,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoSakuseiRyoSeikyushoItem> create主治医意見書作成料請求書_パラメータ() {
         List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1322,9 +1451,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報1_パラメータ() {
         List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
 
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1387,7 +1515,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
         return itemList;
     }
-    
+
     /**
      * 主治医意見書記入情報2印刷用パラメータを作成します。
      *
@@ -1395,9 +1523,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報2_パラメータ() {
         List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
 
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1445,9 +1572,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<IkenshokinyuyoshiBusiness> create主治医意見書記入情報3_パラメータ() {
         List<IkenshokinyuyoshiBusiness> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
 
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1496,9 +1622,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<KaigohokenShindanMeireishoHeaderItem> create介護保険診断命令書_パラメータ() {
         List<KaigohokenShindanMeireishoHeaderItem> itemList = new ArrayList<>();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
         RString 受診場所 = div.getShindanMeirei().getTxtJushinBasho().getValue();
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
 
@@ -1553,8 +1678,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     public List<ShujiiIkenshoTeishutsuIraishoItem> create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ() {
         List<ShujiiIkenshoTeishutsuIraishoItem> itemList = new ArrayList<>();
         ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
-        List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
-        for (dgShujiiIkensho_Row row : selectedItems) {
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             RString hihokenshaNo = row.getHohokenshaBango().padRight(RString.HALF_SPACE, 数字_10);
             item.setBunshoNo(ReportUtil.get文書番号(SubGyomuCode.DBE認定支援,
                     ReportIdDBZ.DBE236001.getReportId(), FlexibleDate.getNowDate()));
@@ -1746,7 +1870,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         if (年号.startsWith(元号_明治)) {
             item.setBirthGengoShowa(HOUSI);
             item.setBirthGengoTaisho(HOUSI);
-                    
+
         } else if (年号.startsWith(元号_大正)) {
             item.setBirthGengoMeiji(HOUSI);
             item.setBirthGengoShowa(HOUSI);
@@ -1996,7 +2120,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
         return 要介護詳細;
     }
-    
+
     private RString getConfigValue(ConfigNameDBE config) {
         return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }

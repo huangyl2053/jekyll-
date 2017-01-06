@@ -53,6 +53,15 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
     }
 
     /**
+     * insertTimestampのgetメソッドです。
+     *
+     * @return insertTimestamp
+     */
+    public RDateTime getInsertTimestamp() {
+        return insertTimestamp;
+    }
+
+    /**
      * isDeletedのgetメソッドです。
      *
      * @return isDeleted
@@ -142,8 +151,7 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
      * このエンティティの主キーが他の{@literal DbT5512ShinsakaiOnseiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5512ShinsakaiOnseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT5512ShinsakaiOnseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5512ShinsakaiOnseiJohoEntity other) {

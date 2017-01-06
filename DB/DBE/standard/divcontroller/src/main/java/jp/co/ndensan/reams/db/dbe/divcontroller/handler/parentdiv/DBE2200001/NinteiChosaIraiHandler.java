@@ -686,6 +686,11 @@ public class NinteiChosaIraiHandler {
         if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査依頼書)) {
             selectedItems.add(DDL_KEY0);
         }
+        RString 認定調査依頼_手動_認定調査依頼該当者履歴一覧
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼該当者履歴一覧, nowDate, SubGyomuCode.DBE認定支援, 保険者コード);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査依頼該当者履歴一覧)) {
+            selectedItems.add(DDL_KEY1);
+        }
         div.getChkirai().setSelectedItemsByKey(selectedItems);
     }
 

@@ -16,18 +16,15 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshutsuryo
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchiranReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -38,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0190-030 duanzhanli
  */
-public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKekkaJohoShutsuryokuRelateEntity> {
+public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiKekkaJohoShutsuryokuRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshutsuryoku."
@@ -50,7 +47,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     private KaigoKekkaTaishouIchiranBodyItem bodyItem;
     private HanteiKekkaJohoShutsuryokuProcessParamter processPrm;
     private HanteiKekkaJohoShutsuryokuMybitisParamter mybatisPrm;
-    private static int gokai;
+    private int index;
     @BatchWriter
     private BatchReportWriter<KekkatsuchiTaishoshaIchiranReportSource> batchWrite;
     private ReportSourceWriter<KekkatsuchiTaishoshaIchiranReportSource> reportSourceWriter;
@@ -59,6 +56,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     protected void initialize() {
         mybatisPrm = processPrm.toHanteiKekkaJohoShutsuryokuMybitisParamter();
         page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
+        index = 1;
     }
 
     @Override
@@ -74,20 +72,21 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     }
 
     @Override
-    protected void process(HanteiKekkaJohoShutsuryokuRelateEntity entity) {
-        bodyItem = setBodyItem(entity);
-        gokai++;
+    protected void usualProcess(HanteiKekkaJohoShutsuryokuRelateEntity entity) {
+        bodyItem = setBodyItem(entity, index);
+
         headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
                 entity.getShichosonMeisho(),
                 processPrm.getNijiHanteiYMDFrom(),
                 processPrm.getNijiHanteiYMDTo(),
                 RDate.getNowDate().toDateString(),
-                gokai);
+                index);
         KaigoKekkaTaishouIchiranReport report = KaigoKekkaTaishouIchiranReport.createFrom(headItem, bodyItem);
         report.writeBy(reportSourceWriter);
+        index = index + 1;
     }
 
-    private KaigoKekkaTaishouIchiranBodyItem setBodyItem(HanteiKekkaJohoShutsuryokuRelateEntity entity) {
+    private KaigoKekkaTaishouIchiranBodyItem setBodyItem(HanteiKekkaJohoShutsuryokuRelateEntity entity, int index) {
         return new KaigoKekkaTaishouIchiranBodyItem(
                 entity.getShinsakaiKaisaiNo(),
                 entity.getShinsakaiKaisaiYMD(),
@@ -97,6 +96,18 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
                 entity.getHihokenshaKana(),
                 entity.getSeinengappiYMD(),
                 Seibetsu.toValue(entity.getSeibetsu()).get名称(),
-                YokaigoJotaiKubun09.toValue(entity.getNijiHanteiKekka()).get名称());
+                YokaigoJotaiKubun09.toValue(entity.getNijiHanteiKekka()).get名称(),
+                index);
+    }
+
+    @Override
+    protected void keyBreakProcess(HanteiKekkaJohoShutsuryokuRelateEntity current) {
+        if (!getBefore().getShoKisaiHokenshaNo().value().equals(current.getShoKisaiHokenshaNo().value())) {
+            index = 1;
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
     }
 }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.Ima
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesyutsuryoku.YokaigoninteiimageShutsuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -113,6 +115,7 @@ public class ImagePanel {
     }
 
     private List<RString> createDownloadFileList(ImagePanelDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
+        RString localCopyPath = ViewStateHolder.get(ViewStateKeys.イメージ取込み, RString.class);
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
         List<RString> 存在するファイル = finder.getSharedFile();
         List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(ImageFileItem.getGaikyoChosaImageFileList_ALL(), 存在するファイル);
@@ -136,7 +139,9 @@ public class ImagePanel {
         }
         List<RString> result = new ArrayList<>();
         for (RString fileName : fileList) {
-            result.add(ro_sfed.getDirectAccessPath().concat(fileName).concat(拡張子));
+            if (Directory.exists(Path.combinePath(localCopyPath, fileName))) {
+                result.add(Path.combinePath(localCopyPath, fileName));
+            }
         }
         return result.isEmpty() ? Collections.EMPTY_LIST : result;
     }

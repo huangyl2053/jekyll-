@@ -94,19 +94,19 @@ public enum ReportIdDBZ {
     /**
      * 認定調査票（特記事項）-調査項目有り-白黒の帳票ＩＤです。
      */
-    DBE221021_Ari_Mono(new ReportId("DBE221021_chosahyoTokkijiko_Ari_Mono"), getReportName複数()),
+    DBE221021_Ari_Mono(new ReportId("DBE221021_ChosahyoTokkijikoKomokuAri"), getReportName複数()),
     /**
      * 認定調査票（特記事項）-調査項目有り-カラーの帳票ＩＤです。
      */
-    DBE221021_Ari_Color(new ReportId("DBE221021_chosahyoTokkijiko_Ari_Color"), getReportName複数()),
+    DBE221021_Ari_Color(new ReportId("DBE221021_ChosahyoTokkijikoKomokuAri"), getReportName複数()),
     /**
      * 認定調査票（特記事項）-調査項目なし-白黒の帳票ＩＤです。
      */
-    DBE221024_Nashi_Mono(new ReportId("DBE221024_chosahyoTokkijiko_Nashi_Mono"), getReportName複数()),
+    DBE221024_Nashi_Mono(new ReportId("DBE221024_ChosahyoTokkijikoKomokuAriTenyuryoku"), getReportName複数()),
     /**
      * 認定調査票（特記事項）-調査項目なし-カラーの帳票ＩＤです。
      */
-    DBE221024_Nashi_Color(new ReportId("DBE221024_chosahyoTokkijiko_Nashi_Color"), getReportName複数()),
+    DBE221024_Nashi_Color(new ReportId("DBE221024_ChosahyoTokkijikoKomokuAriTenyuryoku"), getReportName複数()),
     /**
      * 認定調査票OCR（特記事項）-両面の帳票ＩＤです。
      */

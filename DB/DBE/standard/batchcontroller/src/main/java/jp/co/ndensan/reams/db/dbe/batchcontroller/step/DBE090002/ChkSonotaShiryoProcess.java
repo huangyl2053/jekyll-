@@ -207,13 +207,8 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_A_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_A_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME_A);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_A_BAK)) ? FILENAME_A_BAK : FILENAME_A;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
@@ -224,13 +219,8 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_B_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_B_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME_B);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_B_BAK)) ? FILENAME_B_BAK : FILENAME_B;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
@@ -241,13 +231,8 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_C_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_C_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME_C);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_C_BAK)) ? FILENAME_C_BAK : FILENAME_C;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
@@ -258,13 +243,8 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_D_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_D_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME_D);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_D_BAK)) ? FILENAME_D_BAK : FILENAME_D;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
@@ -275,13 +255,8 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_E_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_E_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME_E);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_E_BAK)) ? FILENAME_E_BAK : FILENAME_E;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
@@ -292,20 +267,15 @@ public class ChkSonotaShiryoProcess extends BatchProcessBase<YokaigoninteiEntity
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
             List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            boolean マスキングファイルあり = existマスキングファイル(entryInfoList, FILENAME_F_BAK);
-            RString fineFullPath;
-            if (マスキングファイルあり) {
-                fineFullPath = getFilePath(path, FILENAME_F_BAK);
-            } else {
-                fineFullPath = getFilePath(path, FILENAME_F);
-            }
+            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_F_BAK)) ? FILENAME_F_BAK : FILENAME_F;
+            RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
 
     private boolean existマスキングファイル(List<SharedFileEntryInfoEntity> entryInfoList, RString ファイル名) {
         for (SharedFileEntryInfoEntity entryInfo : entryInfoList) {
-            if (ファイル名.equals(entryInfo.getFilesEntity().getSharedFileName())) {
+            if (entryInfo.getFilesEntity().getPathname().endsWith(ファイル名)) {
                 return true;
             }
         }

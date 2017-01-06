@@ -23,7 +23,7 @@
      "layoutName": "DBE2060001",
      "layoutTitle": "完了処理・認定調査結果入手",
      "eventName": "調査結果登録遷移",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2210001",

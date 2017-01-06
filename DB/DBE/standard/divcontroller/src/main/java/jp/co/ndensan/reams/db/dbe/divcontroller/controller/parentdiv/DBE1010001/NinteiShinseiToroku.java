@@ -387,27 +387,27 @@ public class NinteiShinseiToroku {
             validationMessages.add(getValidationHandler(div).被保険者区分チェック());
             ShinseishoKanriNo 申請書管理番号 = get申請書管理番号(div);
             NinteiShinseiJoho ninteiShinseiJoho = get要介護認定申請情報(div, 申請書管理番号);
-            Boolean 変更有無フラグ1 = ninteiShinseiJoho.toEntity().hasChanged();
+//            Boolean 変更有無フラグ1 = ninteiShinseiJoho.toEntity().hasChanged();
             ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, true, 申請書管理番号);
-            Boolean 変更有無フラグ2 = shinseitodokedeJoho.toEntity().hasChanged();
+//            Boolean 変更有無フラグ2 = shinseitodokedeJoho.toEntity().hasChanged();
             ShinseiRirekiJoho shinseiRirekiJoho = get申請履歴情報(申請書管理番号);
-            Boolean 変更有無フラグ3 = shinseiRirekiJoho.toEntity().hasChanged();
-            Boolean 変更有無フラグ4 = false;
-            for (RenrakusakiJoho renrakusakiJoho : zenkaiJoho.getDbdBusiness()) {
-                RenrakusakiJoho renrakusakiJohoset = set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号);
-                変更有無フラグ4 = renrakusakiJohoset.toEntity().hasChanged();
-                if (変更有無フラグ4) {
-                    break;
-                }
-            }
-            Boolean 変更有無フラグ5 = 審査会委員除外情報変更有無フラグ(申請書管理番号, dataList);
+//            Boolean 変更有無フラグ3 = shinseiRirekiJoho.toEntity().hasChanged();
+//            Boolean 変更有無フラグ4 = false;
+//            for (RenrakusakiJoho renrakusakiJoho : zenkaiJoho.getDbdBusiness()) {
+//                RenrakusakiJoho renrakusakiJohoset = set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号);
+//                変更有無フラグ4 = renrakusakiJohoset.toEntity().hasChanged();
+//                if (変更有無フラグ4) {
+//                    break;
+//                }
+//            }
+//            Boolean 変更有無フラグ5 = 審査会委員除外情報変更有無フラグ(申請書管理番号, dataList);
             
-            if (!(変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4 || 変更有無フラグ5)) {
-                validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
-            }
-            if (validationMessages.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
+//            if (!(変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4 || 変更有無フラグ5)) {
+//                validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
+//            }
+//            if (validationMessages.iterator().hasNext()) {
+//                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+//            }
             
             manager.save要介護認定申請情報(ninteiShinseiJoho);
             manager.save申請届出情報(shinseitodokedeJoho);
@@ -605,7 +605,7 @@ public class NinteiShinseiToroku {
                 .getTxtShinseiYMD().getValue()));
         shinseiJohoBuilder.set被保険者区分コード(kihonJohoInputDiv.getDdlHihokenshaKubun().getSelectedKey());
         if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get年齢())) {
-            shinseiJohoBuilder.set年齢(Integer.parseInt(div.getCcdAtenaInfo().get年齢().toString()));
+            shinseiJohoBuilder.set年齢(Integer.parseInt(div.getCcdAtenaInfo().get年齢().replace(歳, RString.EMPTY).toString()));
         }
         shinseiJohoBuilder.set認定申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().getValue());

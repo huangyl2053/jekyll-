@@ -27,8 +27,12 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     private TextBoxTime txtKaisaiStartTime;
     @JsonProperty("txtKaisaiEndTime")
     private TextBoxTime txtKaisaiEndTime;
+    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
+    private Button btnReflectKaisaiTimeToShinsakaiIinIchiran;
     @JsonProperty("txtShoyoTime")
     private TextBoxNum txtShoyoTime;
+    @JsonProperty("btnCalcShoyoTime")
+    private Button btnCalcShoyoTime;
     @JsonProperty("txtJissiSu")
     private TextBoxNum txtJissiSu;
     @JsonProperty("ddlKaisaiBasho")
@@ -95,6 +99,24 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     }
 
     /*
+     * getbtnReflectKaisaiTimeToShinsakaiIinIchiran
+     * @return btnReflectKaisaiTimeToShinsakaiIinIchiran
+     */
+    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
+    public Button getBtnReflectKaisaiTimeToShinsakaiIinIchiran() {
+        return btnReflectKaisaiTimeToShinsakaiIinIchiran;
+    }
+
+    /*
+     * setbtnReflectKaisaiTimeToShinsakaiIinIchiran
+     * @param btnReflectKaisaiTimeToShinsakaiIinIchiran btnReflectKaisaiTimeToShinsakaiIinIchiran
+     */
+    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
+    public void setBtnReflectKaisaiTimeToShinsakaiIinIchiran(Button btnReflectKaisaiTimeToShinsakaiIinIchiran) {
+        this.btnReflectKaisaiTimeToShinsakaiIinIchiran = btnReflectKaisaiTimeToShinsakaiIinIchiran;
+    }
+
+    /*
      * gettxtShoyoTime
      * @return txtShoyoTime
      */
@@ -110,6 +132,24 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     @JsonProperty("txtShoyoTime")
     public void setTxtShoyoTime(TextBoxNum txtShoyoTime) {
         this.txtShoyoTime = txtShoyoTime;
+    }
+
+    /*
+     * getbtnCalcShoyoTime
+     * @return btnCalcShoyoTime
+     */
+    @JsonProperty("btnCalcShoyoTime")
+    public Button getBtnCalcShoyoTime() {
+        return btnCalcShoyoTime;
+    }
+
+    /*
+     * setbtnCalcShoyoTime
+     * @param btnCalcShoyoTime btnCalcShoyoTime
+     */
+    @JsonProperty("btnCalcShoyoTime")
+    public void setBtnCalcShoyoTime(Button btnCalcShoyoTime) {
+        this.btnCalcShoyoTime = btnCalcShoyoTime;
     }
 
     /*

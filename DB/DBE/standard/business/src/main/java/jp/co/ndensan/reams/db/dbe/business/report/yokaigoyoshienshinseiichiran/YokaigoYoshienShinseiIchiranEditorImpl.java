@@ -99,7 +99,7 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
     }
 
     private void editListShinseiIchiran8(YokaigoYoshienShinseiIchiranReportSource reportSource) {
-        Code 厚労省認定ソフトバージョン = item.getKoroshoIfShikibetsuCode();
+        Code 厚労省認定ソフトバージョン = item.getZenkaiKoroshoIfShikibetsuCode();
         Code kubunCode = item.getNijiHanteiYokaigoJotaiKubun();
         RString zenkaiKoroshoIfShikibetsu = RString.EMPTY;
         if (厚労省認定ソフトバージョン != null) {

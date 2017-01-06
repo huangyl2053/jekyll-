@@ -64,7 +64,15 @@ public class ShujiiIkenshoIraiCsvEntity {
     private final RString 入所施設コード;
     @CsvField(order = 230, name = "入所施設")
     private final RString 入所施設;
-    @CsvField(order = 240, name = "経過日数")
+    @CsvField(order = 240, name = "意見書督促発行日")
+    private final RString 意見書督促発行日;
+    @CsvField(order = 250, name = "意見書督促方法")
+    private final RString 意見書督促方法;
+    @CsvField(order = 260, name = "意見書督促回数")
+    private final Decimal 意見書督促回数;
+    @CsvField(order = 270, name = "意見書督促期限")
+    private final RString 意見書督促期限;
+    @CsvField(order = 280, name = "経過日数")
     private final int 経過日数;
 
     /**
@@ -92,6 +100,10 @@ public class ShujiiIkenshoIraiCsvEntity {
      * @param 住所 住所
      * @param 入所施設コード 入所施設コード
      * @param 入所施設 入所施設
+     * @param 意見書督促発行日 意見書督促発行日
+     * @param  意見書督促方法 意見書督促方法
+     * @param 意見書督促回数 意見書督促回数
+     * @param 意見書督促期限 意見書督促期限
      * @param 経過日数 経過日数
      */
     public ShujiiIkenshoIraiCsvEntity(
@@ -118,6 +130,10 @@ public class ShujiiIkenshoIraiCsvEntity {
             RString 住所,
             RString 入所施設コード,
             RString 入所施設,
+            RString 意見書督促発行日,
+            RString 意見書督促方法,
+            Decimal 意見書督促回数,
+            RString 意見書督促期限,
             int 経過日数) {
         this.申請書管理番号 = 申請書管理番号;
         this.状態 = 状態;
@@ -142,6 +158,10 @@ public class ShujiiIkenshoIraiCsvEntity {
         this.住所 = 住所;
         this.入所施設コード = 入所施設コード;
         this.入所施設 = 入所施設;
+        this.意見書督促発行日 = 意見書督促発行日;
+        this.意見書督促方法 = 意見書督促方法;
+        this.意見書督促回数 = 意見書督促回数;
+        this.意見書督促期限 = 意見書督促期限;
         this.経過日数 = 経過日数;
     }
 }

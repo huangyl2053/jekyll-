@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsChikokuUmu;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.IOnseiFileOperatorDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -49,7 +51,7 @@ public class ShinsakaiKaisaiKekkaHandler {
      *
      * @param saiYoteiJoho ヘッドエリア内容
      */
-    public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho) {
+    public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho, List<ShinsakaiOnseiJoho2> 音声情報リスト) {
         for (int i = 0; i < saiYoteiJoho.size(); i++) {
             ShinsakaiKaisaiYoteiJohoBusiness business = saiYoteiJoho.get(i);
             div.getTxtShinsakaiMeisho().setValue(business.get審査会名称());
@@ -74,6 +76,7 @@ public class ShinsakaiKaisaiKekkaHandler {
         } else {
             div.setModel(new RString("更新モード"));
         }
+        set音声情報(音声情報リスト);
     }
 
     /**
@@ -132,6 +135,115 @@ public class ShinsakaiKaisaiKekkaHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_UPDATE, Boolean.TRUE);
         div.setDisabled(true);
         div.getIinMiwariate().setDisplayNone(false);
+    }
+
+    /**
+     * 開催開始時刻を返します。
+     *
+     * @return 開催開始時刻
+     */
+    public RTime get開催開始時刻() {
+        return div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue();
+    }
+
+    /**
+     * 開催終了時刻を返します。
+     *
+     * @return 開催終了時刻
+     */
+    public RTime get開催終了時刻() {
+        return div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue();
+    }
+
+    /**
+     * 指定された開始時刻を委員一覧の出席時刻に設定します。
+     *
+     * @param 開始時刻 開始時刻
+     */
+    public void set委員一覧出席時刻(RTime 開始時刻) {
+        for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
+            boolean is欠席 = row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称());
+            boolean is遅刻 = row.getChikokuUmu().getSelectedValue().equals(IsChikokuUmu.遅刻.get名称());
+            if (is欠席 || is遅刻) {
+                continue;
+            }
+            row.getShussekiTime().setValue(開始時刻);
+        }
+    }
+
+    /**
+     * 指定された開始時刻を委員一覧の出席時刻に設定します。
+     *
+     * @param 終了時刻 開始時刻
+     */
+    public void set委員一覧退席時刻(RTime 終了時刻) {
+        for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
+            boolean is欠席 = row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称());
+            boolean is早退 = row.getSotaiUmu().getSelectedValue().equals(IssotaiUmu.早退.get名称());
+            if (is欠席 || is早退) {
+                continue;
+            }
+            row.getTaisekiTime().setValue(終了時刻);
+        }
+    }
+
+    /**
+     * 開催開始時刻と終了時刻から所要時間の分の数を算出します。
+     *
+     * @return 開催開始時刻と終了時刻から算出された所要時間の分の数
+     */
+    public long get所要時間from開催期間() {
+        RTime 開始時刻 = get開催開始時刻();
+        RTime 終了時刻 = get開催終了時刻();
+        if (開始時刻 == null || 終了時刻 == null) {
+            return 0;
+        }
+        if (終了時刻.isBefore(開始時刻)) {
+            return 0;
+        }
+        return 開始時刻.minutesDuration(終了時刻);
+    }
+
+    /**
+     * 渡された所要時間を設定します。
+     *
+     * @param 所要時間 所要時間
+     */
+    public void set所要時間(long 所要時間) {
+        if (所要時間 == 0) {
+            div.getShinsakaiKaisaiInfo().getTxtShoyoTime().clearValue();
+        } else {
+            div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new Decimal(所要時間));
+        }
+    }
+
+    /**
+     * 音声情報を追加表示します。
+     *
+     * @param 音声情報 音声情報
+     * @param 追加日時 追加日時
+     */
+    public void add音声情報(ShinsakaiOnseiJoho2 音声情報, RDateTime 追加日時) {
+        IOnseiFileOperatorDiv 音声情報共有子Div = div.getCrOnseiFiles().getNewRepeatControlInstance();
+        音声情報共有子Div.initialize(音声情報, 追加日時);
+        if (div.getCrOnseiFiles().isDisplayNone()) {
+            List<IOnseiFileOperatorDiv> 音声情報共有子DivList = new ArrayList<>();
+            音声情報共有子DivList.add(音声情報共有子Div);
+            div.getCrOnseiFiles().setRepeateData(音声情報共有子DivList);
+            div.getCrOnseiFiles().setDisplayNone(false);
+        } else {
+            div.getCrOnseiFiles().getRepeateData().add(音声情報共有子Div);
+        }
+    }
+
+    private void set音声情報(List<ShinsakaiOnseiJoho2> 音声情報リスト) {
+        div.getCrOnseiFiles().setDisplayNone(true);
+        if (音声情報リスト == null || 音声情報リスト.isEmpty()) {
+            return;
+        }
+        for (ShinsakaiOnseiJoho2 音声情報 : 音声情報リスト) {
+            add音声情報(音声情報, 音声情報.getInsertTimestamp());
+        }
     }
 
     private List<KeyValueDataSource> setKaigoninteiShinsakaiGichoKubunCode() {

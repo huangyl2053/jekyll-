@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -44,7 +44,7 @@ public class ShinsakaiTaishoshaValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         List<dgTaishoshaIchiran_Row> ichiranList = div.getDgTaishoshaIchiran().getDataSource();
         if (ichiranList.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.該当データなし), div.getDgTaishoshaIchiran()));
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(DbeInformationMessages.対象者の割り当てがありません), div.getDgTaishoshaIchiran()));
         }
         return validPairs;
     }

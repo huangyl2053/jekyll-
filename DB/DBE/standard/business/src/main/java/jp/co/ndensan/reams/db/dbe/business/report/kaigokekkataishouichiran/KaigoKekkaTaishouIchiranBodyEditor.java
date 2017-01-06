@@ -25,16 +25,14 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEditor {
 
     private final KaigoKekkaTaishouIchiranBodyItem item;
-    private final RString index;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link KaigoKekkaTaishouIchiranBodyItem}
      */
-    protected KaigoKekkaTaishouIchiranBodyEditor(KaigoKekkaTaishouIchiranBodyItem item, RString index) {
+    protected KaigoKekkaTaishouIchiranBodyEditor(KaigoKekkaTaishouIchiranBodyItem item) {
         this.item = item;
-        this.index = index;
     }
 
     @Override
@@ -45,7 +43,7 @@ class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEdi
     private KekkatsuchiTaishoshaIchiranReportSource editBody(KekkatsuchiTaishoshaIchiranReportSource source) {
 
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.listKekkatsuchi_1 = index;
+        source.listKekkatsuchi_1 = new RString(item.getIndex());
         source.listKekkatsuchi_2 = item.getListKekkatsuchi_2();
         RStringBuilder listKekkatsuchi_3 = new RStringBuilder();
         listKekkatsuchi_3.append((new RDate(item.getListKekkatsuchi_3().toString()).wareki()).eraType(EraType.KANJI_RYAKU).
