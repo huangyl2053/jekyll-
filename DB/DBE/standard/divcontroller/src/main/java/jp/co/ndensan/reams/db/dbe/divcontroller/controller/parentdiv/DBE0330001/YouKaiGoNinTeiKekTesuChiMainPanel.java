@@ -155,11 +155,13 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         if (div.getTxtNijiHanteiKikan().getToValue() != null) {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
+        RString 市町村コード = div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().toString().isEmpty()
+                ? RString.EMPTY : div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().code市町村RString();
         RString 主治医医療機関コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode();
         RString 主治医コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getDoctorCode();
         List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
-                        .createSelectListParam(div.getCcdHokensha().getSelectedItem().get市町村コード().code市町村RString(),
+                        .createSelectListParam(市町村コード,
                                 dateFrom,
                                 dateTo,
                                 主治医医療機関コード, 主治医コード, false, 希望のみFlag)).records();
