@@ -376,33 +376,59 @@ public class ChkNinteiChosahyo12Process extends BatchProcessBase<YokaigoninteiEn
     private List<RString> setサービス状況02(List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity,
             List<DbT5208NinteichosahyoServiceJokyoFlagEntity> dbt5208Entity) {
         List<RString> サービス区分リスト = new ArrayList<>();
-        サービス区分リスト.add(RString.isNullOrEmpty(bodyItem.getサービス区分コード()) ? RString.EMPTY
-                : ServiceKubunCode.toValue(bodyItem.getサービス区分コード()).get名称());
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 0)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番1)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番2)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番3)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番4)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番5)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番6)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番10)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番7)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番8)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番15)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番9)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番11)));
-        if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
-            サービス区分リスト.add(new RString("1"));
+        if (RString.isNullOrEmpty(bodyItem.getサービス区分コード())
+                || bodyItem.getサービス区分コード().equals(ServiceKubunCode.なし.getコード())) {
+            サービス区分リスト.add(RString.isNullOrEmpty(bodyItem.getサービス区分コード()) ? RString.EMPTY
+                    : ServiceKubunCode.toValue(bodyItem.getサービス区分コード()).get名称());
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(RString.EMPTY);
         } else {
-            サービス区分リスト.add(new RString("0"));
+            サービス区分リスト.add(ServiceKubunCode.toValue(bodyItem.getサービス区分コード()).get名称());
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 0)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番1)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番2)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番3)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番4)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番5)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番6)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番10)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番7)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番8)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番15)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番9)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番11)));
+            if (dbt5208Entity != null && !dbt5208Entity.isEmpty() && dbt5208Entity.get(0).getServiceJokyoFlag()) {
+                サービス区分リスト.add(new RString("あり"));
+            } else {
+                サービス区分リスト.add(new RString("なし"));
+            }
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番12)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番13)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番14)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番16)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番17)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番18)));
+            サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番19)));
         }
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番12)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番13)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番14)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番16)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番17)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番18)));
-        サービス区分リスト.add(new RString(getサービス状況02(dbt5207Entity, 連番19)));
         return サービス区分リスト;
     }
 
@@ -449,7 +475,7 @@ public class ChkNinteiChosahyo12Process extends BatchProcessBase<YokaigoninteiEn
         ninteiEntity.set審査日_日(entity.get審査会開催日() == null ? RString.EMPTY : entity.get審査会開催日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         ninteiEntity.setタイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査情報票, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        ninteiEntity.set年齢(entity.get年齢());
+        ninteiEntity.set年齢(new RStringBuilder().append(entity.get年齢()).append(new RString(" 歳")).toRString());
         ninteiEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
         setBodyItem01(ninteiEntity, entity);
         return ninteiEntity;

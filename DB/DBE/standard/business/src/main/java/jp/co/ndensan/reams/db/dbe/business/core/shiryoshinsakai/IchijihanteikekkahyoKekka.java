@@ -55,10 +55,10 @@ public class IchijihanteikekkahyoKekka {
      * @param 第１群 第１群
      */
     public void set麻痺今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第１群) {
-        if (ChosaAnser01.あり.getコード().equals(今回結果コード) && ChosaAnser01.なし.getコード().equals(前回調査結果コード)) {
+        if (ChosaAnser01.ある.getコード().equals(今回結果コード) && ChosaAnser01.ない.getコード().equals(前回調査結果コード)) {
             第１群.set段階改善フラグ(段階悪化);
             第１群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if (ChosaAnser01.あり.getコード().equals(前回調査結果コード) && ChosaAnser01.なし.getコード().equals(今回結果コード)) {
+        } else if (ChosaAnser01.ある.getコード().equals(前回調査結果コード) && ChosaAnser01.ない.getコード().equals(今回結果コード)) {
             第１群.set段階改善フラグ(段階改善);
             第１群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
         } else {

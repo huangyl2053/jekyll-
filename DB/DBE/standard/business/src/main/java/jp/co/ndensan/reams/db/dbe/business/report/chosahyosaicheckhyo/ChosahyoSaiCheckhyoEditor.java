@@ -314,10 +314,10 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
 
     private RString setChosaAnser01(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
-        if (ChosaAnser01.あり.getコード().equals(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser01.あり.get名称();
-        } else if (ChosaAnser01.なし.getコード().equals(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser01.なし.get名称();
+        if (ChosaAnser01.ある.getコード().equals(zenkaiChosakekkaNo)) {
+            chosaAnser = ChosaAnser01.ある.get名称();
+        } else if (ChosaAnser01.ない.getコード().equals(zenkaiChosakekkaNo)) {
+            chosaAnser = ChosaAnser01.ない.get名称();
         }
         return chosaAnser;
     }

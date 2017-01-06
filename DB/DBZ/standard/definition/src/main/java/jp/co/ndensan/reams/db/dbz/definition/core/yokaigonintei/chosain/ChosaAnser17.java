@@ -16,27 +16,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ChosaAnser17 {
 
     /**
-     * コード:1 名称:できる（特別な場合でもできる） 略称:できる_特別な場合でもできる
+     * コード:1 名称:できる（特別な場合でもできる） 略称:できる
      */
-    できる_特別な場合でもできる("1", "できる（特別な場合でもできる）"),
+    できる_特別な場合でもできる("1", "できる（特別な場合でもできる）", "できる"),
     /**
-     * コード:2 名称:特別な場合を除いてできる 略称:特別な場合を除いてできる
+     * コード:2 名称:特別な場合を除いてできる 略称:特別な場合以外可
      */
-    特別な場合を除いてできる("2", "特別な場合を除いてできる"),
+    特別な場合を除いてできる("2", "特別な場合を除いてできる", "特別な場合以外可"),
     /**
      * コード:3 名称:日常的に困難 略称:日常的に困難
      */
-    日常的に困難("3", "日常的に困難"),
+    日常的に困難("3", "日常的に困難", "日常的に困難"),
     /**
      * コード:4 名称:できない 略称:できない
      */
-    できない("4", "できない");
+    できない("4", "できない", "できない");
     private final RString code;
     private final RString fullName;
+    private final RString ryakusho;
 
-    private ChosaAnser17(String code, String fullname) {
+    private ChosaAnser17(String code, String fullname, String ryakusho) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -55,6 +57,15 @@ public enum ChosaAnser17 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 認定調査項目内容17の略称を返します。
+     *
+     * @return 認定調査項目内容17の略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**

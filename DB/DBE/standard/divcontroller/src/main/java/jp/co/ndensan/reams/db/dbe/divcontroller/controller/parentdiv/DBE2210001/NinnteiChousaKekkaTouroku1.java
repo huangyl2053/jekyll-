@@ -961,7 +961,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             更新処理(div);
             前排他キーの解除();
-            div.getKanryoMessage().getCcdKanryoMessage().setMessage(
+            div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
         }

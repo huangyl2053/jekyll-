@@ -16,23 +16,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ChosaAnser02 {
 
     /**
-     * コード:1 名称:つかまらないでできる 略称:つかまらないでできる
+     * コード:1 名称:つかまらないでできる 略称:できる
      */
-    つかまらないでできる("1", "つかまらないでできる"),
+    つかまらないでできる("1", "つかまらないでできる", "できる"),
     /**
-     * コード:2 名称:何かにつかまればできる 略称:何かにつかまればできる
+     * コード:2 名称:何かにつかまればできる 略称:つかまれば可
      */
-    何かにつかまればできる("2", "何かにつかまればできる"),
+    何かにつかまればできる("2", "何かにつかまればできる", "つかまれば可"),
     /**
      * コード:3 名称:できない 略称:できない
      */
-    できない("3", "できない");
+    できない("3", "できない", "できない");
     private final RString code;
     private final RString fullName;
+    private final RString ryakusho;
 
-    private ChosaAnser02(String code, String fullname) {
+    private ChosaAnser02(String code, String fullname, String ryakusho) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -51,6 +53,15 @@ public enum ChosaAnser02 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 認定調査項目内容02の略称を返します。
+     *
+     * @return 認定調査項目内容02の略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**
