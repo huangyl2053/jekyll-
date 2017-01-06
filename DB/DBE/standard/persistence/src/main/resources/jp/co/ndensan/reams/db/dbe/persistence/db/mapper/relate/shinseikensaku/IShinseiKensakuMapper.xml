@@ -42,7 +42,7 @@
             <include refid="tablesWithParameter"/>
         ORDER BY
             DbT5101NinteiShinseiJoho."hihokenshaKana",
-            DbT5101NinteiShinseiJoho."ninteiShinseiYMD"
+            DbT5101NinteiShinseiJoho."ninteiShinseiYMD" DESC
         LIMIT #{limitCount}
     </select>
 
