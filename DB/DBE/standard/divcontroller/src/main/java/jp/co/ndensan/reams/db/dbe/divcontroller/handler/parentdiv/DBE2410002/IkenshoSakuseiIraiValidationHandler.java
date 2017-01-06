@@ -45,22 +45,6 @@ public class IkenshoSakuseiIraiValidationHandler {
     }
 
     /**
-     * 選択した帳票を発行のチェックを処理します。
-     *
-     * @return チェック結果
-     */
-    public ValidationMessageControlPairs check発行() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(印刷書類チェック());
-        if (div.getChkPrint().getSelectedKeys().contains(SELECTED_KEY3)) {
-            validationMessages.add(期間チェック());
-            validationMessages.add(受診日が未入力チェック());
-        }
-        validationMessages.add(指定日付が未入力チェック());
-        return validationMessages;
-    }
-
-    /**
      * 保存のチェックを処理します。
      *
      * @return ValidationMessageControlPairs
@@ -69,69 +53,6 @@ public class IkenshoSakuseiIraiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(主治医医療機関チェック());
         validationMessages.add(主治医チェック());
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 印刷書類チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getChkIrai().getSelectedKeys().isEmpty() && div.getChkPrint().getSelectedKeys().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                            UrErrorMessages.未指定, 発行書類.toString()), div.getChkIrai(), div.getChkPrint()));
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 期間チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (期間指定_期間指定.equals(div.getRadJyushin().getSelectedKey())) {
-            if (div.getTxtJyushinKikan().getFromValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診予定開始日.toString()), div.getTxtJyushinKikan()));
-            }
-            if (div.getTxtJyushinKikan().getToValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診予定終了日.toString()), div.getTxtJyushinKikan()));
-            }
-            if (div.getTxtJyushinKikan().getFromValue() != null
-                    && div.getTxtJyushinKikan().getToValue() != null
-                    && div.getTxtJyushinKikan().getToValue().isBefore(div.getTxtJyushinKikan().getFromValue())) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                                UrErrorMessages.終了日が開始日以前), div.getTxtJyushinKikan()));
-            }
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 受診日が未入力チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (受診期間_日時指定.equals(div.getRadJyushin().getSelectedKey())) {
-            if (div.getTxtJyushinymd().getValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診日.toString()), div.getTxtJyushinymd()));
-            }
-            if (div.getTxtJyushintime().getValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診時分.toString()), div.getTxtJyushintime()));
-            }
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 指定日付が未入力チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (提出期限_指定日付.equals(div.getRadKigen().getSelectedKey())) {
-            if (div.getTxtKigenymd().getValue() == null) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new IkenshoSakuseiIraiValidationHandler.IkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 指定日付.toString()), div.getTxtKigenymd()));
-            }
-        }
         return validationMessages;
     }
 
