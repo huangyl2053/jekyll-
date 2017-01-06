@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -349,11 +350,14 @@ public class ShujiiIkenshoTorokuTotal {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().
-                replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
+
         if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
-            return ResponseData.of(div).forwardWithEventName(DBE2310001TransitionEventName.申請者検索結果一覧に戻る).respond();
+            IParentResponse<ShujiiIkenshoTorokuTotalDiv> response = ResponseData.of(div);
+            response.addMessage(UrInformationMessages.保存終了.getMessage());
+            return response.forwardWithEventName(DBE2310001TransitionEventName.申請者検索結果一覧に戻る).respond();
         } else {
+            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
         }
     }
