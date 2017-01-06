@@ -18,8 +18,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ5100001.Kai
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteishinseijyohokensaku.YokaigoninteishinseijyohokensakuFinder;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -122,6 +124,33 @@ public class KaigoNinteiShinseiKensaku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 最近処理者の「表示する」を押下した時の処理です。
+     *
+     * @param div KaigoNinteiShinseiKensakuDiv
+     * @return ResponseData<KaigoNinteiShinseiKensakuDiv>
+     */
+    public ResponseData<KaigoNinteiShinseiKensakuDiv> onSaikinshorishaClick(KaigoNinteiShinseiKensakuDiv div) {
+        ValidationMessageControlPairs pairs = div.getCcdNinteiShinseishaFinder().getSaikinShorishaDiv().validate();
+        if (pairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        RString hihokenshaNo = div.getCcdNinteiShinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
+        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().setValue(hihokenshaNo);
+        介護認定申請情報の検索(div);
+        if (!ResponseHolder.isReRequest()) {
+        } else {
+            return ResponseData.of(div).respond();
+        }
+        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().clearValue();
+        if (div.getDgKensakuKekkaIchiran().getDataSource() == null
+                || div.getDgKensakuKekkaIchiran().getDataSource().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
+        getHandler(div).setJyoTai(get受給と認定の判定(), 検索状態);
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 検索結果一覧に選択ボタンの処理。
      *

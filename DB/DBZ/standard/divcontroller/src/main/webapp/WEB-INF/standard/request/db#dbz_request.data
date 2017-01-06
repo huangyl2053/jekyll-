@@ -91,6 +91,7 @@ dbz/db/dbz/IryohokenRirekiCommonChildDiv/onClick_ModifyButton
 dbz/db/dbz/IryohokenRirekiCommonChildDiv/onClick_SelectButton
 dbz/db/dbz/IryohokenRirekiCommonChildDiv/onClick_btnCancel
 dbz/db/dbz/IryohokenRirekiCommonChildDiv/onClick_btnIryohokenKakute
+dbz/db/dbz/IryohokenRirekiCommonChildDiv/onClick_btnModoru
 dbz/db/dbz/IryohokenRirekiCommonChildDiv/onLoad
 dbz/db/dbz/JigyoshaInputGuide/onClick_btnSearchJigyosha
 dbz/db/dbz/JigyoshaInputGuide/onSelectBySelectButton_dgSearchResultJigyosha
@@ -134,6 +135,7 @@ dbz/db/dbz/KaigoNinteiShinseiKensaku/onClick_btnKensaku
 dbz/db/dbz/KaigoNinteiShinseiKensaku/onClick_btnModoru
 dbz/db/dbz/KaigoNinteiShinseiKensaku/onClick_btnSaiKensaku
 dbz/db/dbz/KaigoNinteiShinseiKensaku/onLoad
+dbz/db/dbz/KaigoNinteiShinseiKensaku/onSaikinshorishaClick
 dbz/db/dbz/KaigoNinteiShinseiKensaku/onSelect_dgKensakuKekkaIchiran
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun
 dbz/db/dbz/KaigoNinteiShinseiKihonJohoInput/onBeforeOpenDialog_btnServiceSakujoTeikeibun
@@ -281,6 +283,7 @@ dbz/db/dbz/NinteiChosaJokyo/onOKClose_btnIryoKikanGuide
 dbz/db/dbz/NinteiChosaJokyo/onOKClose_btnItakusakiGuide
 dbz/db/dbz/NinteiChosaJokyo/onOKClose_btnShujiiGuide
 dbz/db/dbz/NinteiChosaJokyo/onOkClose_btnChosainGuide
+dbz/db/dbz/NinteiInput/onBlur_yokaigodo
 dbz/db/dbz/NinteiInput/onChange_radNinteiKubun
 dbz/db/dbz/NinteiInput/onClick_btnAfter12Month
 dbz/db/dbz/NinteiInput/onClick_btnAfter18Month
@@ -444,6 +447,7 @@ dbz/db/dbz/ShisetsuJohoCommonChildDiv/onBlur_nyuryokuShisetsuKodo
 dbz/db/dbz/ShisetsuJohoCommonChildDiv/onChange_daichoShubetsu
 dbz/db/dbz/ShisetsuJohoCommonChildDiv/onOkClose_btnSenTaKu
 dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onClick_btnAddShisetsuNyutaisho
+dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onClick_btnModoru
 dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onClick_btnShisetsuNyutaishoKakutei
 dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onClick_btnShisetsuNyutaishoTorikeshi
 dbz/db/dbz/ShisetsuNyutaishoRirekiKanri/onLoad
