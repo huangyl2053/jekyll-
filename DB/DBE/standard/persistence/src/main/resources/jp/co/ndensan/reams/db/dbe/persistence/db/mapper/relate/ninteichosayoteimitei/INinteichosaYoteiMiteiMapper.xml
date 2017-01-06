@@ -156,6 +156,10 @@
         AND DbT5101."logicalDeletedFlag" = FALSE
         AND #{認定調査依頼先変更者一覧表申請日From} <![CDATA[<=]]>   DbT5101."ninteiShinseiYMD"
         AND DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定調査依頼先変更者一覧表申請日To}
+        AND
+        exists (SELECT 'X' FROM rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
+                 WHERE DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND 
+                       DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" <![CDATA[>]]> 1)
         ORDER BY
         DbT5101."shoKisaiHokenshaNo" ASC,
         DbT5101."ninteiShinseiYMD" ASC,
@@ -248,24 +252,22 @@
         AND DbT5201."logicalDeletedFlag" = FALSE
         AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX(rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
         WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
-        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
-        ON DbT5301."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
-        AND DbT5301."logicalDeletedFlag" = FALSE
-        AND DbT5301."ikenshoIraiRirekiNo" = (SELECT MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
-        WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
-        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
+        ON DbT5202."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
+        AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+        AND DbT5202."ninteichosaJisshiYMD" IS NOT NULL
+        INNER JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203
         ON DbT5203."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5201."ninteichosaIraiRirekiNo" = DbT5203."ninteichosaRirekiNo"
-        LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
-        ON DbT5211."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
-        AND DbT5201."ninteichosaIraiRirekiNo" = DbT5211."ninteichosaRirekiNo"
+        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211
+        ON DbT5211."shinseishoKanriNo"=DbT5203."shinseishoKanriNo"
+        AND DbT5203."ninteichosaRirekiNo" = DbT5211."ninteichosaRirekiNo"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        <if test="未割当">
+            AND DbT5105."ninteichosaKanryoYMD" IS NULL
+        </if>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="申請日範囲指定">
@@ -324,29 +326,28 @@
         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
-        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
-        ON DbT5201."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
-        AND DbT5201."logicalDeletedFlag" = FALSE
-        AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX(rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
+        INNER JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203
+        ON DbT5203."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
+        AND DbT5203."ninteichosaRirekiNo" = (SELECT MAX(rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
         WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
         INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON DbT5301."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5301."logicalDeletedFlag" = FALSE
         AND DbT5301."ikenshoIraiRirekiNo" = (SELECT MAX(rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
         WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
-        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203
-        ON DbT5203."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
-        AND DbT5201."ninteichosaIraiRirekiNo" = DbT5203."ninteichosaRirekiNo"
-        LEFT JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
+        ON DbT5302."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
+        AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        AND DbT5302."ikenshoReadYMD" IS NOT NULL
+        INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304
         ON DbT5304."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5304."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        <if test="未割当">
+        AND DbT5105."ikenshoTorokuKanryoYMD" IS NULL
+        </if>
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="申請日範囲指定">

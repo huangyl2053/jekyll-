@@ -69,7 +69,7 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
         parameter.setIraisakihenkymdFrom(処理日開始.toDateString());
         parameter.setIraisakihenkymdTo(処理日終了.toDateString());
         parameter.setCheckListJoken(true);
-        parameter.setJoken3(new RString("3"));
+        parameter.setJoken3(new RString("2"));
         parameter.setCheckListShinseiYMDFrom(処理日開始.toDateString());
         parameter.setCheckListShinseiYMDTo(処理日終了.toDateString());
         parameter.setShinsakai(new RString("4"));
