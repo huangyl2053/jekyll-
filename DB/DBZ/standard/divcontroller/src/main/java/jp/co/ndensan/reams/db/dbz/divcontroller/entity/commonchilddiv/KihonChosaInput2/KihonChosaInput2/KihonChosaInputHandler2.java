@@ -10,8 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaSpecial;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -19,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -92,6 +96,67 @@ public class KihonChosaInputHandler2 {
         KihonChosaInputFinder finder = KihonChosaInputFinder.createInstance();
         List<KihonChosaSpecial> 認定調査特記情報List = finder.get認定調査特記情報(申請書管理番号);        
         onLoad第二群生活機能(認定調査基本情報リスト, 認定調査前回結果表示);
+        setTokkiJikouDisabled(申請書管理番号, 認定調査依頼履歴番号);
+    }
+    
+    private void setTokkiJikouDisabled(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+        ArrayList<RString> tokkiJikouNoList = setTokkiJikouNoList();
+        NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+        ArrayList<RString> gaitouTokkiJikouNoList = new ArrayList<>();
+        for (RString tokkiJikouNo : tokkiJikouNoList) {
+            gaitouTokkiJikouNoList.add(tokkiJikouNo);
+            ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(申請書管理番号, Integer.parseInt(認定調査依頼履歴番号.toString()), gaitouTokkiJikouNoList);
+            if (list.isEmpty()
+                    || RString.isNullOrEmpty(tokkiJikouNo)) {
+                setDisabled(tokkiJikouNo);
+            }
+            gaitouTokkiJikouNoList.clear();
+        }
+    }
+    
+    private ArrayList<RString> setTokkiJikouNoList() {
+        ArrayList<RString> tokkiJikouNoList = new ArrayList<>();
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.移乗.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.移動.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.えん下.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.食事摂取.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.排尿.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.排便.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.口腔清潔.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.洗顔.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.整髪.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.上衣の着脱.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.ズボン等の着脱.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.外出頻度.get認定調査票_特記情報_認定調査特記事項番号());
+        return tokkiJikouNoList;
+    }
+    
+    private void setDisabled(RString tokkiJikouNo) {
+        if(NinteiChosaTokkiJikou.移乗.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnIjyo().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.移動.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnIdou().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.えん下.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnEnka().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.食事摂取.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnShokuji().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.排尿.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnHainyo().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.排便.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnHaiben().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.口腔清潔.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKokou().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.洗顔.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnSengan().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.整髪.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnSeihatsu().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.上衣の着脱.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnUwagi().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.ズボン等の着脱.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnZubon().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.外出頻度.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnHindo().setDisabled(true);
+        }
     }
 
     private List<RString> get特記事項番号List(ShinseishoKanriNo 申請書管理番号) {

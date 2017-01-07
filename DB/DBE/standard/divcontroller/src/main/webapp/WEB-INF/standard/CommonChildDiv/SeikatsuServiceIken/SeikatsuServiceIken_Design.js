@@ -4,6 +4,10 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_chkHokohojoShiyo = function () {
+                return "onChange_chkHokohojoShiyo";
+            };
+
             Events.onChange_radGenzaiEiyoJotai = function () {
                 return "onChange_radGenzaiEiyoJotai";
             };

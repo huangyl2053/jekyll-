@@ -51,7 +51,7 @@ class KojinShinchokuJokyohyoBodyEditor implements IKojinShinchokuJokyohyoEditor 
             listJokyo_3.append(jokyo_3.eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.ZERO).toDateString());
+                    fillType(FillType.BLANK).toDateString());
             source.listJokyo_3 = listJokyo_3.toRString();
         }
         if (RString.isNullOrEmpty(item.getListJokyo_4())) {
@@ -61,7 +61,7 @@ class KojinShinchokuJokyohyoBodyEditor implements IKojinShinchokuJokyohyoEditor 
             listJokyo_4.append(jokyo_4.eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.ZERO).toDateString());
+                    fillType(FillType.BLANK).toDateString());
             source.listJokyo_4 = listJokyo_4.toRString();
         }
         if (RString.isNullOrEmpty(item.getListJokyo_5())) {
@@ -71,7 +71,7 @@ class KojinShinchokuJokyohyoBodyEditor implements IKojinShinchokuJokyohyoEditor 
             listJokyo_5.append(jokyo_5.eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.ZERO).toDateString());
+                    fillType(FillType.BLANK).toDateString());
             source.listJokyo_5 = listJokyo_5.toRString();
         }
         return source;

@@ -10,8 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaSpecial;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -19,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -187,6 +191,76 @@ public class KihonChosaInputHandler4 {
         ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記情報List);
         div.getKoudoShogai().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(認定調査特記情報ArrayList));
         onLoad第四群精神_行動障害(認定調査基本情報リスト, 認定調査前回結果表示);
+        setTokkiJikouDisabled(申請書管理番号, 認定調査依頼履歴番号);
+    }
+    
+    private void setTokkiJikouDisabled(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+        ArrayList<RString> tokkiJikouNoList = setTokkiJikouNoList();
+        NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+        ArrayList<RString> gaitouTokkiJikouNoList = new ArrayList<>();
+        for (RString tokkiJikouNo : tokkiJikouNoList) {
+            gaitouTokkiJikouNoList.add(tokkiJikouNo);
+            ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(申請書管理番号, Integer.parseInt(認定調査依頼履歴番号.toString()), gaitouTokkiJikouNoList);
+            if (list.isEmpty()
+                    || RString.isNullOrEmpty(tokkiJikouNo)) {
+                setDisabled(tokkiJikouNo);
+            }
+            gaitouTokkiJikouNoList.clear();
+        }
+    }
+    
+    private ArrayList<RString> setTokkiJikouNoList() {
+        ArrayList<RString> tokkiJikouNoList = new ArrayList<>();
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.被害的.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.作話.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.感情が不安定.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.昼夜逆転.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.同じ話をする.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.大声をだす.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.介護に抵抗.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.落ち着きなし.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.一人で出たがる.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.収集癖.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.物や衣類を壊す.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.ひどい物忘れ.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.独り言_独り笑い.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.自分勝手に行動する.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.話がまとまらない.get認定調査票_特記情報_認定調査特記事項番号());
+        return tokkiJikouNoList;
+    }
+    
+    private void setDisabled(RString tokkiJikouNo) {
+        if(NinteiChosaTokkiJikou.被害的.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnHiryaku().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.作話.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnTukuriHanashi().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.感情が不安定.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKanjyo().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.昼夜逆転.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnChuyaku().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.同じ話をする.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnOnajiHanashi().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.大声をだす.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnBigVoice().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.介護に抵抗.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnTeikou().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.落ち着きなし.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnOchituki().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.一人で出たがる.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnOutLonly().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.収集癖.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnShushu().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.物や衣類を壊す.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKowasu().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.ひどい物忘れ.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnMonoWasure().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.独り言_独り笑い.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnHitoriWarai().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.自分勝手に行動する.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKateKodo().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.話がまとまらない.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnMatomeNai().setDisabled(true);
+        }
     }
 
     private List<RString> get特記事項番号List(ShinseishoKanriNo 申請書管理番号) {

@@ -10,14 +10,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaSpecial;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -206,6 +210,67 @@ public class KihonChosaInputHandler6 {
         ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記情報List);
         div.getTokubetsuIryo().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(認定調査特記情報ArrayList));
         onLoad第六群特別な医療(認定調査基本情報リスト, 認定調査前回結果表示);
+        setTokkiJikouDisabled(申請書管理番号, 認定調査依頼履歴番号);
+    }
+    
+    private void setTokkiJikouDisabled(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+        ArrayList<RString> tokkiJikouNoList = setTokkiJikouNoList();
+        NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+        ArrayList<RString> gaitouTokkiJikouNoList = new ArrayList<>();
+        for (RString tokkiJikouNo : tokkiJikouNoList) {
+            gaitouTokkiJikouNoList.add(tokkiJikouNo);
+            ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(申請書管理番号, Integer.parseInt(認定調査依頼履歴番号.toString()), gaitouTokkiJikouNoList);
+            if (list.isEmpty()
+                    || RString.isNullOrEmpty(tokkiJikouNo)) {
+                setDisabled(tokkiJikouNo);
+            }
+            gaitouTokkiJikouNoList.clear();
+        }
+    }
+    
+    private ArrayList<RString> setTokkiJikouNoList() {
+        ArrayList<RString> tokkiJikouNoList = new ArrayList<>();
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.点滴の管理.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.中心静脈栄養.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.透析.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.ストーマの処置.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.酸素療法.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.レスピレーター.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.気管切開.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.疼痛の看護.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.経管栄養.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.モニター測定.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.じょくそうの処置.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.カテーテル.get認定調査票_特記情報_認定調査特記事項番号());
+        return tokkiJikouNoList;
+    }
+    
+    private void setDisabled(RString tokkiJikouNo) {
+        if(NinteiChosaTokkiJikou.点滴の管理.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnTenteki().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.中心静脈栄養.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnSeimyaku().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.透析.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnTouseki().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.ストーマの処置.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnSutoma().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.酸素療法.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnSansou().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.レスピレーター.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnResupireta().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.気管切開.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKikan().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.疼痛の看護.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnToutsu().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.経管栄養.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKeikan().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.モニター測定.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnMonita().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.じょくそうの処置.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnJyokuso().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.カテーテル.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnbtnKateru().setDisabled(true);
+        }
     }
 
     private List<RString> get特記事項番号List(ShinseishoKanriNo 申請書管理番号) {

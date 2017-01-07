@@ -1028,7 +1028,7 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadKakoTaijuHenka().setSelectedKey(selectKey);
+            div.getRadKikiude().setSelectedKey(selectKey);
         }
     }
 

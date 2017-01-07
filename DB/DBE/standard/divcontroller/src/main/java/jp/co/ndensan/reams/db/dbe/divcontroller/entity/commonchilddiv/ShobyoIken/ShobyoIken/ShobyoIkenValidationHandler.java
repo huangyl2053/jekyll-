@@ -69,7 +69,7 @@ public class ShobyoIkenValidationHandler {
 
     private static enum IdocheckMessages implements IValidationMessage {
 
-        validation(UrErrorMessages.既に登録済, "原因疾患コード");
+        validation(UrErrorMessages.存在しない, "原因疾患コード");
 
         private final Message message;
 
