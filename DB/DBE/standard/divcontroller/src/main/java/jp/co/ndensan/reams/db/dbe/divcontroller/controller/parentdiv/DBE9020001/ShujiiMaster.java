@@ -352,12 +352,12 @@ public class ShujiiMaster {
     }
 
     /**
-     * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、主治医一覧エリアへ戻ります。
+     * 戻るボタンが押下された場合、入力明細エリアの入力内容を破棄し、主治医一覧エリアへ戻ります。
      *
      * @param div ShujiiMasterDiv
      * @return ResponseData<ShujiiMasterDiv>
      */
-    public ResponseData<ShujiiMasterDiv> onClick_btnTorikeshi(ShujiiMasterDiv div) {
+    public ResponseData<ShujiiMasterDiv> onClick_btnModoru(ShujiiMasterDiv div) {
 
         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
 

@@ -218,7 +218,12 @@ dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnPulish
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onClick_BtnShutsutyoku
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onLoad
 dbe/db/dbe/IkenshoSakuseiHoshuShokai/onSort_dgIkenshoSakuseiHoshu
+dbe/db/dbe/IkenshoSakuseiIrai/onChange_radJyushin
 dbe/db/dbe/IkenshoSakuseiIrai/onChange_radKigen
+dbe/db/dbe/IkenshoSakuseiIrai/onClick_Chkprint
+dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkou
+dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkouCheck
+dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnHakkouKanryo
 dbe/db/dbe/IkenshoSakuseiIrai/onClick_btnUpdate
 dbe/db/dbe/IkenshoSakuseiIrai/onLoad
 dbe/db/dbe/IkenshoSakuseiJissekiShokai/onChange_State
@@ -689,7 +694,6 @@ dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnBackShujiiIchiran
 dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnChosaininsert
 dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnClearKensakuJoken
 dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnComplete
-dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnCsvKozaNashi
 dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnInsert
 dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnKakutei
 dbe/db/dbe/NinteichosaItakusakiMaster/onClick_btnOutputCsv
@@ -1114,7 +1118,7 @@ dbe/db/dbe/ShujiiMaster/onClick_btnReSearch
 dbe/db/dbe/ShujiiMaster/onClick_btnSearch
 dbe/db/dbe/ShujiiMaster/onClick_btnToSearchIryoKikan
 dbe/db/dbe/ShujiiMaster/onClick_btnToSearchShichoson
-dbe/db/dbe/ShujiiMaster/onClick_btnTorikeshi
+dbe/db/dbe/ShujiiMaster/onClick_btnModoru
 dbe/db/dbe/ShujiiMaster/onClick_btnUpdate
 dbe/db/dbe/ShujiiMaster/onLoad
 dbe/db/dbe/ShujiiMaster/onSelectByDeleteButton_dgShujiiIchiran
@@ -1138,6 +1142,7 @@ dbe/db/dbe/TaishouWaritsuke/onClick_Waritsuke
 dbe/db/dbe/TaishouWaritsuke/onClick_btnComplete
 dbe/db/dbe/TaishouWaritsuke/onClick_btnContinue
 dbe/db/dbe/TaishouWaritsuke/onLoad
+dbe/db/dbe/TaishouWaritsuke/onStateTransition
 dbe/db/dbe/TextMasking/onClick_btnHozon
 dbe/db/dbe/TextMasking/onClick_btnModoru
 dbe/db/dbe/TextMasking/onLoad

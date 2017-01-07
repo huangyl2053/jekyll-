@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class TaishouWaritsuke {
 
     private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
-    private static final RString 審査会割付を完了する = new RString("btnComplete");
     private static final RString 完了メッセージ = new RString("認定審査会対象者割付");
 
     /**
@@ -54,9 +53,20 @@ public class TaishouWaritsuke {
     public ResponseData<TaishouWaritsukeDiv> onLoad(TaishouWaritsukeDiv div) {
         RString 介護認定審査会番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会番号, RString.class);
         getHandler(div).initializtion(介護認定審査会番号);
-        getHandler(div).setCommonButtonDisabled();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
+    }
+
+    /**
+     * 審査会割付で遷移<br/>
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<TaishouWaritsukeDiv> onStateTransition(TaishouWaritsukeDiv div) {
+        if (ResponseHolder.getState().equals(DBE5160001StateName.審査会割付.getName())) {
+            getHandler(div).setCommonButtonDisabled();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -169,9 +179,8 @@ public class TaishouWaritsuke {
         }
         if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
                 equals(ResponseHolder.getMessageCode().toString())) {
-            RString 介護認定審査会番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会番号, RString.class);
-            handler.initializtion(介護認定審査会番号);
-            handler.setCommonButtonDisabled();
+            onLoad(div);
+            getHandler(div).setCommonButtonDisabled();
         }
         return ResponseData.of(div).respond();
     }
@@ -194,8 +203,7 @@ public class TaishouWaritsuke {
             }
             if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
                     equals(ResponseHolder.getMessageCode().toString())) {
-                RString 介護認定審査会番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会番号, RString.class);
-                getHandler(div).initializtion(介護認定審査会番号);
+                onLoad(div);
                 getHandler(div).setCommonButtonDisabled();
             }
             return ResponseData.of(div).respond();
@@ -209,13 +217,16 @@ public class TaishouWaritsuke {
                 if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-                    登録処理(div);
+                    TaishouWaritsukeHandler handler = getHandler(div);
+                    handler.介護認定審査会割付情報更新();
+                    handler.対象者一覧検索();
+                    handler.候補者一覧検索();
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
                     return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
                 }
                 if (ResponseHolder.isReRequest() && UrInformationMessages.保存終了.getMessage().getCode().
                         equals(ResponseHolder.getMessageCode().toString())) {
-                    RString 介護認定審査会番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会番号, RString.class);
-                    getHandler(div).initializtion(介護認定審査会番号);
+                    onLoad(div);
                     getHandler(div).setCommonButtonDisabled();
                 }
                 return ResponseData.of(div).respond();
@@ -261,10 +272,8 @@ public class TaishouWaritsuke {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_btnContinue(TaishouWaritsukeDiv div) {
-        RString 介護認定審査会番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会番号, RString.class);
-        getHandler(div).initializtion(介護認定審査会番号);
+        onLoad(div);
         getHandler(div).setCommonButtonDisabled();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
     }
 
@@ -352,7 +361,6 @@ public class TaishouWaritsuke {
         handler.対象者一覧検索();
         handler.候補者一覧検索();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
     }
 
     private static class DBE5160001ErrorMessage implements IMessageGettable, IValidationMessage {
