@@ -28,10 +28,8 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     private static final RString 更新モード = new RString("修正");
     private static final RString 追加モード = new RString("追加");
     private static final RString 削除モード = new RString("削除");
-    private static final RString 通常 = new RString("通常");
-    private static final RString 削除 = new RString("削除");
-    private static final boolean 有効 = true;
-    private static final boolean 全て = false;
+    private static final RString 有効 = new RString("有効");
+    private static final RString 無効 = new RString("無効");
 
     private final NinteiShinsakaiKaisaibashoTorokuDiv div;
 
@@ -74,9 +72,9 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
                         開催場所電話番号,
                         RString.EMPTY);
                 if (shinsakaiKaisaiBashoJoho.is介護認定審査会開催場所状況()) {
-                    row.setKaisaibashoJokyo(通常);
+                    row.setKaisaibashoJokyo(有効);
                 } else {
-                    row.setKaisaibashoJokyo(削除);
+                    row.setKaisaibashoJokyo(無効);
                 }
                 rowList.add(row);
                 i++;
@@ -119,7 +117,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
             if (追加モード.equals(clickedItem.getJyotai())) {
                 rowList.remove(div.getDgKaisaibashoIchiran().getClickedRowId());
             } else {
-                clickedItem.setJyotai(削除);
+                clickedItem.setJyotai(削除モード);
                 clear開催場所編集エリア();
                 set開催場所編集エリア非活性();
                 clickedItem.setModifyButtonState(DataGridButtonState.Disabled);
@@ -235,10 +233,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         builder.set介護認定審査会開催場所住所(row.getKaisaibashoJusho());
         builder.set介護認定審査会開催場所名称(row.getKaisaibashoMeisho());
         builder.set介護認定審査会開催場所電話番号(new TelNo(row.getKaisaibashoTelNo()));
-        if (通常.equals(row.getKaisaibashoJokyo())) {
-            builder.set介護認定審査会開催場所状況(有効);
-        } else if (削除.equals(row.getKaisaibashoJokyo())) {
-            builder.set介護認定審査会開催場所状況(全て);
+        if (有効.equals(row.getKaisaibashoJokyo())) {
+            builder.set介護認定審査会開催場所状況(true);
+        } else if (無効.equals(row.getKaisaibashoJokyo())) {
+            builder.set介護認定審査会開催場所状況(false);
         }
         return builder.build();
     }
@@ -251,9 +249,9 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         clickedItem.setKaisaibashoJusho(div.getTxtKaisaibashoJusho().getValue());
         clickedItem.setKaisaiChikuCode(div.getCcdKaisaiChikuCode().getCode().getColumnValue());
         if (div.getDdlKaisaiBashoJokyo().getSelectedIndex() == 0) {
-            clickedItem.setKaisaibashoJokyo(通常);
+            clickedItem.setKaisaibashoJokyo(有効);
         } else if (div.getDdlKaisaiBashoJokyo().getSelectedIndex() == 1) {
-            clickedItem.setKaisaibashoJokyo(削除);
+            clickedItem.setKaisaibashoJokyo(無効);
         }
     }
 
@@ -263,9 +261,9 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getTxtKaisaibashoJusho().setValue(RString.isNullOrEmpty(clickedItem.getKaisaibashoJusho()) ? RString.EMPTY : clickedItem.getKaisaibashoJusho());
         div.getTxtTelNumber().setDomain(new TelNo(RString.isNullOrEmpty(clickedItem.getKaisaibashoTelNo()) ? RString.EMPTY : clickedItem.getKaisaibashoTelNo()));
 //        div.getTxtKaisaibashoJusho().setValue(clickedItem.getKaisaibashoJusho());
-        if (通常.equals(clickedItem.getKaisaibashoJokyo())) {
+        if (有効.equals(clickedItem.getKaisaibashoJokyo())) {
             div.getDdlKaisaiBashoJokyo().setSelectedIndex(0);
-        } else if (削除.equals(clickedItem.getKaisaibashoJokyo())) {
+        } else if (無効.equals(clickedItem.getKaisaibashoJokyo())) {
             div.getDdlKaisaiBashoJokyo().setSelectedIndex(1);
         }
         get開催地区内容(clickedItem);
