@@ -236,7 +236,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                 break;
             // 要介護認定調査票（概況特記）
             case DBE221051:
-                property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
+                property = ChosahyoGaikyochosaProperty.createPropertyFor概況特記用紙();
                 break;
             default:
                 return;

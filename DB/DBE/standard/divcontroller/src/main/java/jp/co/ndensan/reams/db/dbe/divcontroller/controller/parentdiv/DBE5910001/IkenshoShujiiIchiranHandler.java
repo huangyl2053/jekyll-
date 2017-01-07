@@ -82,26 +82,10 @@ public class IkenshoShujiiIchiranHandler {
         DBE591001_IryokikanShujiiParameter batchParameter = new DBE591001_IryokikanShujiiParameter();
         batchParameter.setShichosonCode(RString.isNullOrEmpty(市町村コード) ? RString.EMPTY : 市町村コード);
         batchParameter.setShichosonName(RString.isNullOrEmpty(市町村名称) ? 全市町村 : 市町村名称);
-        if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeFrom().getValue())) {
-            batchParameter.setIryoKikanCodeFrom(new RString("0000000000"));
-        } else {
-            batchParameter.setIryoKikanCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
-        }
-        if (RString.isNullOrEmpty(div.getTxtIryoKikanCodeTo().getValue())) {
-            batchParameter.setIryoKikanCodeTo(new RString("9999999999"));
-        } else {
-            batchParameter.setIryoKikanCodeTo(div.getTxtIryoKikanCodeTo().getValue());
-        }
-        if (RString.isNullOrEmpty(div.getTxtShujiiCodeFrom().getValue())) {
-            batchParameter.setShujiiCodeFrom(new RString("00000000"));
-        } else {
-            batchParameter.setShujiiCodeFrom(div.getTxtShujiiCodeFrom().getValue());
-        }
-        if (RString.isNullOrEmpty(div.getTxtShujiiCodeTo().getValue())) {
-            batchParameter.setShujiiCodeTo(new RString("99999999"));
-        } else {
-            batchParameter.setShujiiCodeTo(div.getTxtShujiiCodeTo().getValue());
-        }
+        batchParameter.setIryoKikanCodeFrom(div.getTxtIryoKikanCodeFrom().getValue());
+        batchParameter.setIryoKikanCodeTo(div.getTxtIryoKikanCodeTo().getValue());
+        batchParameter.setShujiiCodeFrom(div.getTxtShujiiCodeFrom().getValue());
+        batchParameter.setShujiiCodeTo(div.getTxtShujiiCodeTo().getValue());
         batchParameter.setJyokyo(div.getRadJyokyo().getSelectedKey());
         batchParameter.setOutputSort(div.getDdlOutputSort().getSelectedKey());
         batchParameter.setNextpage(div.getDdlNextpage().getSelectedKey());

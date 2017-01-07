@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.INinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,12 +34,10 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     private ShinseishaIchiranDiv ShinseishaIchiran;
     @JsonProperty("ShujiiIkenshoIraiJohoInput")
     private ShujiiIkenshoIraiJohoInputDiv ShujiiIkenshoIraiJohoInput;
-    @JsonProperty("iraiprint")
-    private iraiprintDiv iraiprint;
-    @JsonProperty("meireisho")
-    private meireishoDiv meireisho;
     @JsonProperty("hdnClickedButton")
     private RString hdnClickedButton;
+    @JsonProperty("hiddenIuputModel")
+    private RString hiddenIuputModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -104,42 +100,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     /*
-     * getiraiprint
-     * @return iraiprint
-     */
-    @JsonProperty("iraiprint")
-    public iraiprintDiv getIraiprint() {
-        return iraiprint;
-    }
-
-    /*
-     * setiraiprint
-     * @param iraiprint iraiprint
-     */
-    @JsonProperty("iraiprint")
-    public void setIraiprint(iraiprintDiv iraiprint) {
-        this.iraiprint = iraiprint;
-    }
-
-    /*
-     * getmeireisho
-     * @return meireisho
-     */
-    @JsonProperty("meireisho")
-    public meireishoDiv getMeireisho() {
-        return meireisho;
-    }
-
-    /*
-     * setmeireisho
-     * @param meireisho meireisho
-     */
-    @JsonProperty("meireisho")
-    public void setMeireisho(meireishoDiv meireisho) {
-        this.meireisho = meireisho;
-    }
-
-    /*
      * gethdnClickedButton
      * @return hdnClickedButton
      */
@@ -158,6 +118,24 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     /*
+     * gethiddenIuputModel
+     * @return hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public RString getHiddenIuputModel() {
+        return hiddenIuputModel;
+    }
+
+    /*
+     * sethiddenIuputModel
+     * @param hiddenIuputModel hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public void setHiddenIuputModel(RString hiddenIuputModel) {
+        this.hiddenIuputModel = hiddenIuputModel;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -168,16 +146,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public void  setBtnClear(Button btnClear) {
         this.getKensakuOption().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getKensakuOption().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getKensakuOption().setBtnKensaku(btnKensaku);
     }
 
     @JsonIgnore
@@ -203,6 +171,16 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public void  setDgShinseishaIchiran(DataGrid<dgShinseishaIchiran_Row> dgShinseishaIchiran) {
         this.getShinseishaIchiran().setDgShinseishaIchiran(dgShinseishaIchiran);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnPrint() {
+        return this.getShinseishaIchiran().getBtnPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnPrint(ButtonDialog btnPrint) {
+        this.getShinseishaIchiran().setBtnPrint(btnPrint);
     }
 
     @JsonIgnore
@@ -248,201 +226,6 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public void  setBtnIrai(Button btnIrai) {
         this.getShujiiIkenshoIraiJohoInput().setBtnIrai(btnIrai);
-    }
-
-    @JsonIgnore
-    public Label getPrintName() {
-        return this.getIraiprint().getPrintName();
-    }
-
-    @JsonIgnore
-    public void  setPrintName(Label printName) {
-        this.getIraiprint().setPrintName(printName);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getIraiSho() {
-        return this.getIraiprint().getIraiSho();
-    }
-
-    @JsonIgnore
-    public void  setIraiSho(CheckBoxList iraiSho) {
-        this.getIraiprint().setIraiSho(iraiSho);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtHakobi() {
-        return this.getIraiprint().getTxtHakobi();
-    }
-
-    @JsonIgnore
-    public void  setTxtHakobi(TextBoxDate txtHakobi) {
-        this.getIraiprint().setTxtHakobi(txtHakobi);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadkigen() {
-        return this.getIraiprint().getRadkigen();
-    }
-
-    @JsonIgnore
-    public void  setRadkigen(RadioButton radkigen) {
-        this.getIraiprint().setRadkigen(radkigen);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtkigenymd() {
-        return this.getIraiprint().getTxtkigenymd();
-    }
-
-    @JsonIgnore
-    public void  setTxtkigenymd(TextBoxDate txtkigenymd) {
-        this.getIraiprint().setTxtkigenymd(txtkigenymd);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getIraiIchiranHyo() {
-        return this.getIraiprint().getIraiIchiranHyo();
-    }
-
-    @JsonIgnore
-    public void  setIraiIchiranHyo(CheckBoxList iraiIchiranHyo) {
-        this.getIraiprint().setIraiIchiranHyo(iraiIchiranHyo);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getKinyoYoshi() {
-        return this.getIraiprint().getKinyoYoshi();
-    }
-
-    @JsonIgnore
-    public void  setKinyoYoshi(CheckBoxList kinyoYoshi) {
-        this.getIraiprint().setKinyoYoshi(kinyoYoshi);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getKinyuYoshiOCR() {
-        return this.getIraiprint().getKinyuYoshiOCR();
-    }
-
-    @JsonIgnore
-    public void  setKinyuYoshiOCR(CheckBoxList kinyuYoshiOCR) {
-        this.getIraiprint().setKinyuYoshiOCR(kinyuYoshiOCR);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getKinyuYoshiDesign() {
-        return this.getIraiprint().getKinyuYoshiDesign();
-    }
-
-    @JsonIgnore
-    public void  setKinyuYoshiDesign(CheckBoxList kinyuYoshiDesign) {
-        this.getIraiprint().setKinyuYoshiDesign(kinyuYoshiDesign);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getSeikyuSho() {
-        return this.getIraiprint().getSeikyuSho();
-    }
-
-    @JsonIgnore
-    public void  setSeikyuSho(CheckBoxList seikyuSho) {
-        this.getIraiprint().setSeikyuSho(seikyuSho);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getMeireiSho() {
-        return this.getIraiprint().getMeireiSho();
-    }
-
-    @JsonIgnore
-    public void  setMeireiSho(CheckBoxList meireiSho) {
-        this.getIraiprint().setMeireiSho(meireiSho);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getTeishutsuIraiSho() {
-        return this.getIraiprint().getTeishutsuIraiSho();
-    }
-
-    @JsonIgnore
-    public void  setTeishutsuIraiSho(CheckBoxList teishutsuIraiSho) {
-        this.getIraiprint().setTeishutsuIraiSho(teishutsuIraiSho);
-    }
-
-    @JsonIgnore
-    public IBunshoBangoInputDiv getBunshoBango() {
-        return this.getIraiprint().getBunshoBango();
-    }
-
-    @JsonIgnore
-    public RadioButton getRadjyushin() {
-        return this.getMeireisho().getRadjyushin();
-    }
-
-    @JsonIgnore
-    public void  setRadjyushin(RadioButton radjyushin) {
-        this.getMeireisho().setRadjyushin(radjyushin);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtjyushinymd() {
-        return this.getMeireisho().getTxtjyushinymd();
-    }
-
-    @JsonIgnore
-    public void  setTxtjyushinymd(TextBoxDate txtjyushinymd) {
-        this.getMeireisho().setTxtjyushinymd(txtjyushinymd);
-    }
-
-    @JsonIgnore
-    public TextBoxTime getTxtjyushintime() {
-        return this.getMeireisho().getTxtjyushintime();
-    }
-
-    @JsonIgnore
-    public void  setTxtjyushintime(TextBoxTime txtjyushintime) {
-        this.getMeireisho().setTxtjyushintime(txtjyushintime);
-    }
-
-    @JsonIgnore
-    public Space getSpSpace1() {
-        return this.getMeireisho().getSpSpace1();
-    }
-
-    @JsonIgnore
-    public void  setSpSpace1(Space spSpace1) {
-        this.getMeireisho().setSpSpace1(spSpace1);
-    }
-
-    @JsonIgnore
-    public Space getSpSpace2() {
-        return this.getMeireisho().getSpSpace2();
-    }
-
-    @JsonIgnore
-    public void  setSpSpace2(Space spSpace2) {
-        this.getMeireisho().setSpSpace2(spSpace2);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtJyushinKikan() {
-        return this.getMeireisho().getTxtJyushinKikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtJyushinKikan(TextBoxDateRange txtJyushinKikan) {
-        this.getMeireisho().setTxtJyushinKikan(txtJyushinKikan);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtjyushinbasho() {
-        return this.getMeireisho().getTxtjyushinbasho();
-    }
-
-    @JsonIgnore
-    public void  setTxtjyushinbasho(TextBox txtjyushinbasho) {
-        this.getMeireisho().setTxtjyushinbasho(txtjyushinbasho);
     }
 
     // </editor-fold>

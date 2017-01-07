@@ -63,17 +63,21 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
         source.printTimeStamp = systemDateTime.toRString();
 
         source.title = new RString("介護保険 医療機関・主治医一覧表");
-        RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
-        iryoKikanCodeBulider.append(item.getIryoKikanCodeFrom());
-        iryoKikanCodeBulider.append(KANA);
-        iryoKikanCodeBulider.append(item.getIryoKikanCodeTo());
-        source.iryoKikanCode = iryoKikanCodeBulider.toRString();
+        if (!RString.isNullOrEmpty(item.getIryoKikanCodeFrom()) || !RString.isNullOrEmpty(item.getIryoKikanCodeTo())) {
+            RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
+            iryoKikanCodeBulider.append(item.getIryoKikanCodeFrom());
+            iryoKikanCodeBulider.append(KANA);
+            iryoKikanCodeBulider.append(item.getIryoKikanCodeTo());
+            source.iryoKikanCode = iryoKikanCodeBulider.toRString();
+        }
 
-        RStringBuilder shujiiCodeBulider = new RStringBuilder();
-        shujiiCodeBulider.append(item.getShujiiCodeFrom());
-        shujiiCodeBulider.append(KANA);
-        shujiiCodeBulider.append(item.getShujiiCodeTo());
-        source.shujiiCode = shujiiCodeBulider.toRString();
+        if (!RString.isNullOrEmpty(item.getShujiiCodeFrom()) || !RString.isNullOrEmpty(item.getShujiiCodeTo())) {
+            RStringBuilder shujiiCodeBulider = new RStringBuilder();
+            shujiiCodeBulider.append(item.getShujiiCodeFrom());
+            shujiiCodeBulider.append(KANA);
+            shujiiCodeBulider.append(item.getShujiiCodeTo());
+            source.shujiiCode = shujiiCodeBulider.toRString();
+        }
 
         source.shujiiJokyo = ShujiiHateiJokyo.toValue(item.getShujiiJokyo()).get名称();
         source.dataShubetsu = new RString("医療機関マスタ");
