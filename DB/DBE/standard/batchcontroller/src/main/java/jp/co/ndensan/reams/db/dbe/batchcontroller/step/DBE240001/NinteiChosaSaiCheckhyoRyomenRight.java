@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 public class NinteiChosaSaiCheckhyoRyomenRight extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
-            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
+            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書tmp");
     private static final ReportIdDBZ 帳票 = ReportIdDBZ.DBE292002;
     private HomonChosaIraishoProcessParamter processParamter;
     private HomonChosaIraishoBusiness business;

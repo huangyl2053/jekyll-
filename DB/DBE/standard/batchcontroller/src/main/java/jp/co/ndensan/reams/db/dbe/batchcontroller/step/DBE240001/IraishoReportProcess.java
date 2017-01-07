@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
-            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
+            + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書tmp");
     private static final ReportId 帳票ID = ReportIdDBZ.DBE220001.getReportId();
     private HomonChosaIraishoBusiness business;
     private NinshoshaSource ninshoshaSource;

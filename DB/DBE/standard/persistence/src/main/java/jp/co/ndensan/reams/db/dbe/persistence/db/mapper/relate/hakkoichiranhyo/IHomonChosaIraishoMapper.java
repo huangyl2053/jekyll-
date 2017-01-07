@@ -39,4 +39,12 @@ public interface IHomonChosaIraishoMapper {
      * @return List<HomonChosaIraishoRelateEntity>
      */
     List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧(HomonChosaIraishoMybitisParamter parameter);
+
+    /**
+     * 認定調査依頼発行一覧表を取得します。
+     *
+     * @param param 訪問調査依頼書発行のパラメータ
+     * @return List<HomonChosaIraishoRelateEntity>
+     */
+    List<HomonChosaIraishoRelateEntity> get訪問調査依頼書tmp(HomonChosaIraishoMybitisParamter param);
 }
