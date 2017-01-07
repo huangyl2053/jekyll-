@@ -116,7 +116,7 @@
         INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
         ON DbT5101."shinseishoKanriNo"=DbT5121."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_Zenkai
-        ON DbT5121."shinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
+        ON DbT5121."zenkaiShinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102_Zenkai
         ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5102_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116_Zenkai
@@ -202,7 +202,7 @@
         INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
         ON DbT5101."shinseishoKanriNo"=DbT5121."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_Zenkai
-        ON DbT5121."shinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
+        ON DbT5121."zenkaiShinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102_Zenkai
         ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5102_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116_Zenkai

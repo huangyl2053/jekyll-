@@ -108,7 +108,7 @@ public class TaishouWaritsukeHandler {
     }
 
     /**
-     * フッターエリアを設定。
+     * フッターエリアを初期化。
      */
     public void setCommonButtonDisabled() {
         RString 進捗状況 = div.getTxtStatus().getValue();
@@ -119,11 +119,6 @@ public class TaishouWaritsukeHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
-        } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
-        }
-        if (!ShinsakaiShinchokuJokyo.未開催.get画面表示名称().equals(進捗状況)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
         }
     }
 
@@ -247,9 +242,7 @@ public class TaishouWaritsukeHandler {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, true);
-        if (ShinsakaiShinchokuJokyo.未開催.get画面表示名称().equals(div.getTxtStatus().getValue())) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
-        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
         div.getBtnJidoWaritsuke().setDisabled(false);
         div.getBtnWaritsuke().setDisabled(false);
         div.getBtnWaritsukeKaijo().setDisabled(false);
@@ -357,9 +350,6 @@ public class TaishouWaritsukeHandler {
         RString 性別;
         RString 被保区分;
         RString 申請区分_申請時;
-        TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
-        TextBoxFlexibleDate 前回有効期間開始日 = new TextBoxFlexibleDate();
-        TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
         RString 調査票_寝たきり度;
         RString 調査票_認知度;
         RString 意見書_寝たきり度;
@@ -396,8 +386,11 @@ public class TaishouWaritsukeHandler {
             } catch (IllegalArgumentException e) {
                 申請区分_申請時 = RString.EMPTY;
             }
+            TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
             認定申請日.setValue(taishouichiran.get認定申請年月日());
+            TextBoxFlexibleDate 前回有効期間開始日 = new TextBoxFlexibleDate();
             前回有効期間開始日.setValue(taishouichiran.get前回認定有効期間_開始());
+            TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
             前回有効期間終了日.setValue(taishouichiran.get前回認定有効期間_終了());
             try {
                 調査票_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
@@ -524,9 +517,6 @@ public class TaishouWaritsukeHandler {
         RString 性別;
         RString 被保区分;
         RString 申請区分_申請時;
-        TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
-        TextBoxFlexibleDate 前回有効期間開始日 = new TextBoxFlexibleDate();
-        TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
         RString 調査票_寝たきり度;
         RString 調査票_認知度;
         RString 意見書_寝たきり度;
@@ -561,8 +551,11 @@ public class TaishouWaritsukeHandler {
             } catch (IllegalArgumentException e) {
                 申請区分_申請時 = RString.EMPTY;
             }
+            TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
             認定申請日.setValue(kohoshaIchiran.get認定申請年月日());
+            TextBoxFlexibleDate 前回有効期間開始日 = new TextBoxFlexibleDate();
             前回有効期間開始日.setValue(kohoshaIchiran.get前回認定有効期間_開始());
+            TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
             前回有効期間終了日.setValue(kohoshaIchiran.get前回認定有効期間_終了());
             try {
                 調査票_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
