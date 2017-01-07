@@ -672,8 +672,16 @@ public class NinteiChosaIraiHandler {
             div.getCcdBunshoBangoInput().setDisabled(true);
         }
         init認定調査依頼書(nowDate, 保険者コード);
-        init認定調査票_デザイン用紙(nowDate, 保険者コード);
-        init認定調査票_OCR(nowDate, 保険者コード);
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票_概況調査_用紙タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
+            div.getChkchosa().setDisplayNone(true);
+            div.getChkchosaOcr().setDisplayNone(false);
+            init認定調査票_OCR(nowDate, 保険者コード);
+        } else {
+            div.getChkchosa().setDisplayNone(false);
+            div.getChkchosaOcr().setDisplayNone(true);
+            init認定調査票_デザイン用紙(nowDate, 保険者コード);
+        }
         init認定調査票_特記事項(nowDate, 保険者コード);
         init認定調査票_その他(nowDate, 保険者コード);
         init提出期限(nowDate);
@@ -697,6 +705,7 @@ public class NinteiChosaIraiHandler {
     private void init認定調査票_デザイン用紙(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
+
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_認定調査票デザイン用紙));
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
