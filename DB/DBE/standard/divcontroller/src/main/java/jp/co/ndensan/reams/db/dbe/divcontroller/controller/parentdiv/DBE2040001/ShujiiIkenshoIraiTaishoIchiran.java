@@ -90,6 +90,16 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
         getHandler(div).initialize();
+        if (ViewStateHolder.containsKey(ViewStateKeys.申請書管理番号.name())) {
+            ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+            for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+                if (row.getShinseishoKanriNo().equals(申請書管理番号.value())) {
+                    row.setSelected(true);
+                    ViewStateHolder.remove(ViewStateKeys.申請書管理番号);
+                    break;
+                }
+            }
+        }
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 
