@@ -49,10 +49,6 @@ module DBE {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokki"));
             }
 
-            public imgTokkiJiko(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
-            }
-
             public btnCancel(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnCancel"));
             }

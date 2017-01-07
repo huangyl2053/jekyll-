@@ -22,9 +22,23 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getRadNinchishoShuhenShojoUmu().getSelectedKey().contains(KEY_1)
-                    && div.getChkNinchishoShuhenShojo().getSelectedKeys().isEmpty()
-                    && div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().isEmpty());
+                    return !(div.getNinchishoShuhenShojo().getRadNinchishoShuhenShojoUmu()
+                    .getSelectedKey().contains(KEY_1)
+                    && div.getNinchishoShuhenShojo().getChkNinchishoShuhenShojo()
+                    .getSelectedKeys().isEmpty()
+                    && div.getNinchishoShuhenShojo().getChkNinchishoShuhenShojoSonota()
+                    .getSelectedKeys().isEmpty());
+                }
+            },
+    /**
+     * 認知症周辺症状詳細チェックです。
+     */
+    認知症周辺症状詳細その他入力チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getNinchishoShuhenShojo().getChkNinchishoShuhenShojoSonota().getSelectedKeys().contains(KEY_0)
+                    && div.getNinchishoShuhenShojo().getTxtSonotaKinyu().getValue().isEmpty());
                 }
             },
     /**
@@ -34,8 +48,8 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().contains(KEY_0)
-                    && div.getTxtSonotaKinyu().getValue().isEmpty());
+                    return !(div.getSonotaShojo().getRadSonotaShojo().getSelectedKey().contains(KEY_1)
+                    && div.getSonotaShojo().getTxtShojomei().getValue().isEmpty());
                 }
             },
     /**
@@ -45,8 +59,8 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getRadSenmonJushin().getSelectedKey().contains(KEY_1)
-                    && div.getTxtShosaiTokkiJiko().getValue().isEmpty());
+                    return !(div.getSonotaShojo().getRadSenmonJushin().getSelectedKey().contains(KEY_1)
+                    && div.getSonotaShojo().getTxtShosaiTokkiJiko().getValue().isEmpty());
                 }
             },
     /**
@@ -56,8 +70,78 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getChkShishiKesson().getSelectedKeys().contains(KEY_0)
-                    && div.getTxtShishiKessonBui().getValue().isEmpty());
+                    return !(div.getKaradaJotai().getChkShishiKesson().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getTxtShishiKessonBui().getValue().isEmpty());
+                }
+            },
+    /**
+     * 麻痺チェックです。
+     */
+    麻痺チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getKaradaJotai().getChkShishiKesson().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getChkMigiJoshiMahi().getSelectedKeys().isEmpty()
+                    && div.getKaradaJotai().getChkMigiKashiMahi().getSelectedKeys().isEmpty()
+                    && div.getKaradaJotai().getChkHidariJoshiMahi().getSelectedKeys().isEmpty()
+                    && div.getKaradaJotai().getChkHidariKashiMahi().getSelectedKeys().isEmpty()
+                    && div.getKaradaJotai().getChkSonotaMahi().getSelectedKeys().isEmpty());
+                }
+            },
+    /**
+     * 麻痺右上肢程度チェックです。
+     */
+    麻痺右上肢程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getKaradaJotai().getChkMigiJoshiMahi().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getRadMigiJoshiMahiTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
+     * 麻痺右下肢程度チェックです。
+     */
+    麻痺右下肢程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getKaradaJotai().getChkMigiKashiMahi().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getRadMigiKashiMahiTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
+     * 麻痺左上肢程度チェックです。
+     */
+    麻痺左上肢程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getKaradaJotai().getChkHidariJoshiMahi().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getRadHidariJoshiMahiTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
+     * 麻痺左下肢程度チェックです。
+     */
+    麻痺左下肢程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getKaradaJotai().getChkHidariKashiMahi().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getRadHidariKashiMahiTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
+     * 麻痺その他程度チェックです。
+     */
+    麻痺その他部位程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getKaradaJotai().getChkSonotaMahi().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getRadSonotaMahiTeido().getSelectedKey().isEmpty());
                 }
             },
     /**
@@ -67,8 +151,8 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getChkSonotaMahi().getSelectedKeys().contains(KEY_0)
-                    && div.getTxtSonotaMahiBui().getValue().isEmpty());
+                    return !(div.getKaradaJotai().getChkSonotaMahi().getSelectedKeys().contains(KEY_0)
+                    && div.getKaradaJotai().getTxtSonotaMahiBui().getValue().isEmpty());
                 }
             },
     /**
@@ -83,6 +167,17 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 }
             },
     /**
+     * 筋力の低下程度チェックです。
+     */
+    筋力の低下程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getChkKinryokuTeika().getSelectedKeys().contains(KEY_0)
+                    && div.getRadKinryokuTeikaTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
      * 関節の拘縮部位ェックです。
      */
     関節の拘縮部位チェック {
@@ -91,6 +186,17 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkKansetsuKoshuku().getSelectedKeys().contains(KEY_0)
                     && div.getTxtKansetsuKoshukuBui().getValue().isEmpty());
+                }
+            },
+    /**
+     * 関節の拘縮程度ェックです。
+     */
+    関節の拘縮程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getChkKansetsuKoshuku().getSelectedKeys().contains(KEY_0)
+                    && div.getRadKansetsuKoshukuTeido().getSelectedKey().isEmpty());
                 }
             },
     /**
@@ -105,6 +211,30 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 }
             },
     /**
+     * 関節の痛み程度チェックです。
+     */
+    関節の痛み程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getChkKansetsuItami().getSelectedKeys().contains(KEY_0)
+                    && div.getRadKansetsuItamiTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
+     * 失調・不随意運動詳細部位必須チェックです。
+     */
+    失調不随意運動詳細部位必須チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getChkShicchoFuzuii().getSelectedKeys().contains(KEY_0)
+                    && div.getChkFuzuiiJoshi().getSelectedKeys().isEmpty()
+                    && div.getChkFuzuiiKashi().getSelectedKeys().isEmpty()
+                    && div.getChkTaikan().getSelectedKeys().isEmpty());
+                }
+            },
+    /**
      * 褥瘡部位チェックです。
      */
     褥瘡部位チェック {
@@ -116,6 +246,17 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 }
             },
     /**
+     * 褥瘡程度チェックです。
+     */
+    褥瘡程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getChkJokuso().getSelectedKeys().contains(KEY_0)
+                    && div.getRadJokusoTeido().getSelectedKey().isEmpty());
+                }
+            },
+    /**
      * その他の皮膚疾患部位チェックです。
      */
     その他の皮膚疾患部位チェック {
@@ -124,6 +265,17 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getChkSonotaHifuShikkan().getSelectedKeys().contains(KEY_0)
                     && div.getTxtSonotaHifuShikkanBui().getValue().isEmpty());
+                }
+            },
+    /**
+     * その他の皮膚疾患程度チェックです。
+     */
+    その他の皮膚疾患程度チェック {
+
+                @Override
+                public boolean apply(ShinshinIkenDiv div) {
+                    return !(div.getChkSonotaHifuShikkan().getSelectedKeys().contains(KEY_0)
+                    && div.getRadSonotaHifuShikkanTeido().getSelectedKey().isEmpty());
                 }
             };
 

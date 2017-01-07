@@ -43,10 +43,6 @@ var DBE;
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokki"));
             };
 
-            Controls.prototype.imgTokkiJiko = function () {
-                return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
-            };
-
             Controls.prototype.btnCancel = function () {
                 return new UZA.Button(this.convFiledName("btnCancel"));
             };
