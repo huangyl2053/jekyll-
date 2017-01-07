@@ -202,9 +202,11 @@ public class ChosaJisshishaJohoHandler {
         } else if (ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
             div.getTxtJisshiBashoMeisho().clearValue();
             div.getTxtJisshiBashoMeisho().setDisabled(false);
+            div.getTxtJisshiBashoMeisho().setReadOnly(false);
         } else {
             div.getTxtJisshiBashoMeisho().clearValue();
             div.getTxtJisshiBashoMeisho().setDisabled(false);
+            div.getTxtJisshiBashoMeisho().setReadOnly(false);
         }
     }
 }
