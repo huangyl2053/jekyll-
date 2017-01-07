@@ -54,10 +54,10 @@ public class NinteiChosaIraiShokaiHandler {
         for (NinteiChosaIraiShokaiMaster entity : ninteiChosaList) {
             dgNinteiChosaIrai_Row row = new dgNinteiChosaIrai_Row();
             row.setNo(new RString(Integer.toString(no)));
-            row.setNinteiShinseiDate(日期フォマト(entity.getNinteiShinseiYMD()));
+            row.getNinteiShinseiDate().setValue(entity.getNinteiShinseiYMD());
             row.setShinseiKubun(get申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
-            row.setShinseiTorikeshiDate(日期フォマト(entity.getTorisageYMD()));
-            row.setNinteiDate(日期フォマト(entity.getNijiHanteiYMD()));
+            row.getShinseiTorikeshiDate().setValue(entity.getTorisageYMD());
+            row.getNinteiDate().setValue(entity.getNijiHanteiYMD());
             RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
                     entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
             if (new RString("なし").equals(要介護度)) {
@@ -67,7 +67,7 @@ public class NinteiChosaIraiShokaiHandler {
                         entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
             }
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
-            row.setChosaIraiDate(日期フォマト(entity.getNinteichosaIraiYMD()));
+            row.getChosaIraiDate().setValue(entity.getNinteichosaIraiYMD());
             row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
             row.setNinteichosaItakusakiName(entity.getJigyoshaMeisho());
             row.setNinteiChosainCode(entity.getNinteiChosainCode().getColumnValue());

@@ -14,9 +14,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.DBE9
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.DBE9010001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiIryoKikanMasterDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiIryoKikanMasterKozaMitorokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterValidationHandler;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoCSVEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -75,6 +77,7 @@ public class ShujiiIryoKikanMaster {
     private static final RString 四マスタ優先表示市町村識別ID
             = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表.csv");
 
     /**
      * コンストラクタです。
@@ -707,5 +710,49 @@ public class ShujiiIryoKikanMaster {
 
     private KoseiShujiiIryoKikanMasterValidationHandler getValidationHandler(ShujiiIryoKikanMasterDiv div) {
         return new KoseiShujiiIryoKikanMasterValidationHandler(div);
+    }
+        /**
+     * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶを出力します。
+     *
+     * @param div NinteichosaItakusakiMainDiv
+     * @param response
+     * @return IDownLoadServletResponse
+     */
+    public IDownLoadServletResponse onClick_btnCsvKozaNashi(ShujiiIryoKikanMasterDiv div, IDownLoadServletResponse response) {
+
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
+        try (CsvWriter<ShujiiIryoKikanMasterKozaMitorokuCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
+            for (dgShujiiIchiran_Row row : dataList) {
+                if (row.getKinyuKikanCode().isNull() || row.getKinyuKikanCode().isEmpty()) {
+                    csvWriter.writeLine(getCsvDataSonota(row));
+                }
+            }
+            csvWriter.close();
+        }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(OUTPUT_CSV_FILE_NAME));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, OUTPUT_CSV_FILE_NAME), response);
+    }
+    private ShujiiIryoKikanMasterKozaMitorokuCsvEntity getCsvDataSonota(dgShujiiIchiran_Row row) {
+        ShujiiIryoKikanMasterKozaMitorokuCsvEntity data = new ShujiiIryoKikanMasterKozaMitorokuCsvEntity(
+                row.getShichosonCode(),
+                row.getShichoson(),
+                new RString(row.getShujiiIryoKikanCode().toString()),
+                row.getIryoKikanCode(),
+                row.getShujiiIryoKikan(),
+                row.getShujiiIryoKikankana(),
+                row.getYubinNo(),
+                row.getJusho(),
+                row.getTelNo(),
+                row.getFaxNo(),
+                row.getDaihyosha(),
+                row.getDaihyoshakana(),
+                row.getJokyoFlag());
+        return data;
     }
 }

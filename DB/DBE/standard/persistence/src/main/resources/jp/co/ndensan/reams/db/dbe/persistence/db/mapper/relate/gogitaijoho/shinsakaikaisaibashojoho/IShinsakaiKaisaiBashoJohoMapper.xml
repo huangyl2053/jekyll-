@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体割当委員情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.shinsakaikaisaibashojoho.IShinsakaiKaisaiBashoJohoMapper">
+
+    <select id="is開催場所削除不可" resultType="boolean"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500" resultOrdered="true">
+        SELECT
+            (SELECT COUNT(*)
+                FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+                WHERE "shinsakaiKaisaiYoteiBashoCode" = #{開催場所コード} AND "isDeleted" = false
+            ) +
+            (SELECT COUNT(*)
+                FROM rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"
+                WHERE "shinsakaiKaisaiBashoCode" = #{開催場所コード} AND "isDeleted" = false
+            ) +
+            (SELECT COUNT(*)
+                FROM rgdb."DbT5591GogitaiJoho"
+                WHERE "shinsakaiKaisaiBashoCode" = #{開催場所コード} AND "isDeleted" = false
+            ) <![CDATA[ > ]]> 0 AS "canNotDelete"
+    </select>
+</mapper>

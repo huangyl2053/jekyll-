@@ -93,7 +93,7 @@ class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor 
             shinseiYMD.append(shinsei.eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.ZERO).toDateString());
+                    fillType(FillType.BLANK).toDateString());
             source.shinseiYMD = shinseiYMD.toRString();
         }
         source.seibetsu = item.getSeibetsu();
@@ -106,7 +106,7 @@ class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor 
             birthYMD.append(birth.eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.ZERO).toDateString());
+                    fillType(FillType.BLANK).toDateString());
             source.birthYMD = birthYMD.toRString();
         }
         source.age = item.getAge();

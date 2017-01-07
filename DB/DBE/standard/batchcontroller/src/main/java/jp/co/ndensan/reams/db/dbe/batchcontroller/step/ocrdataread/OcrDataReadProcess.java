@@ -652,72 +652,153 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     private void dbT5207EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
         for (int i = 1; i <= 20; i++) {
             DbT5207NinteichosahyoServiceJokyoEntity entityService = new DbT5207NinteichosahyoServiceJokyoEntity();
+            RString 回数;
+            switch (i) {
+                case 連番1:
+                    回数 = ocrデータ解析結果.get訪問介護の回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番2:
+                    回数 = ocrデータ解析結果.get訪問入浴介護の回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番3:
+                    回数 = ocrデータ解析結果.get訪問看護の回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番4:
+                    回数 = ocrデータ解析結果.get訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番5:
+                    回数 = ocrデータ解析結果.get居宅療養管理指導の回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番6:
+                    回数 = ocrデータ解析結果.get通所看護の回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番7:
+                    回数 = ocrデータ解析結果.get通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番8:
+                    回数 = ocrデータ解析結果.get短期入所生活介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番9:
+                    回数 = ocrデータ解析結果.get短期入所療養介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番10:
+                    回数 = ocrデータ解析結果.get特定施設入所者生活介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番11:
+                    回数 = ocrデータ解析結果.get福祉用具貸与の品目();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番12:
+                    回数 = ocrデータ解析結果.get福祉用具購入の品目();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番13:
+                    回数 = ocrデータ解析結果.get夜間対応型訪問介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番14:
+                    回数 = ocrデータ解析結果.get認知症対応型通所介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番15:
+                    回数 = ocrデータ解析結果.get小規模多機能型居宅介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番16:
+                    回数 = ocrデータ解析結果.get認知症対応型共同生活介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番17:
+                    回数 = ocrデータ解析結果.get地域密着型特定施設入居者生活介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番18:
+                    回数 = ocrデータ解析結果.get地域密着型介護老人福祉施設入居者生活介護の日数();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番19:
+                    回数 = ocrデータ解析結果.get随時対応型訪問介護看護();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+                case 連番20:
+                    回数 = ocrデータ解析結果.get随時対応型訪問介護看護();
+                    if (RString.isNullOrEmpty(回数)) {
+                        continue;
+                    }
+                    entityService.setServiceJokyo(Integer.parseInt(回数.toString()));
+                    break;
+            }
             entityService.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
             entityService.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
             entityService.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
             entityService.setRemban(i);
-            switch (i) {
-                case 連番1:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問介護の回数().toString()));
-                    break;
-                case 連番2:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問入浴介護の回数().toString()));
-                    break;
-                case 連番3:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問看護の回数().toString()));
-                    break;
-                case 連番4:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数().toString()));
-                    break;
-                case 連番5:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get居宅療養管理指導の回数().toString()));
-                    break;
-                case 連番6:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get通所看護の回数().toString()));
-                    break;
-                case 連番7:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数().toString()));
-                    break;
-                case 連番8:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get短期入所生活介護の日数().toString()));
-                    break;
-                case 連番9:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get短期入所療養介護の日数().toString()));
-                    break;
-                case 連番10:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get特定施設入所者生活介護の日数().toString()));
-                    break;
-                case 連番11:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get福祉用具貸与の品目().toString()));
-                    break;
-                case 連番12:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get福祉用具購入の品目().toString()));
-                    break;
-                case 連番13:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get夜間対応型訪問介護の日数().toString()));
-                    break;
-                case 連番14:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get認知症対応型通所介護の日数().toString()));
-                    break;
-                case 連番15:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get小規模多機能型居宅介護の日数().toString()));
-                    break;
-                case 連番16:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get認知症対応型共同生活介護の日数().toString()));
-                    break;
-                case 連番17:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get地域密着型特定施設入居者生活介護の日数().toString()));
-                    break;
-                case 連番18:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get地域密着型介護老人福祉施設入居者生活介護の日数().toString()));
-                    break;
-                case 連番19:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get随時対応型訪問介護看護().toString()));
-                    break;
-                case 連番20:
-                    entityService.setServiceJokyo(Integer.parseInt(ocrデータ解析結果.get随時対応型訪問介護看護().toString()));
-                    break;
-            }
             writerService.insert(entityService);
         }
     }
@@ -1330,5 +1411,5 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         }
         return Boolean.FALSE;
     }
-
+                         
 }

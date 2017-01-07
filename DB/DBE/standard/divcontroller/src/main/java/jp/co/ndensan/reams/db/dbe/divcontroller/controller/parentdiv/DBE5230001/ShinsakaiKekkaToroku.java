@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
@@ -64,7 +63,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShinsakaiKekkaToroku {
 
     private static final RString HASDATA = new RString("1");
-    private static final RString 審査結果登録 = new RString("審査結果登録");
     private static final RString 排他キーprefix = new RString("DBE審査会審査結果登録_");
     private static final RString 認定調査状況ダイアログ_照会モード = new RString("1");
     private static final int 更新申請可能日数 = 61;
@@ -92,12 +90,15 @@ public class ShinsakaiKekkaToroku {
     public ResponseData<ShinsakaiKekkaTorokuDiv> onLoad(ShinsakaiKekkaTorokuDiv div) {
 
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         List<ShinsakaiKekkaTorokuBusiness> headList = manager.getヘッドエリア内容検索(開催番号).records();
         List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList = manager.get審査会委員一覧検索(開催番号).records();
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        handler.onLoad(headList, iChiRanList);
-        handler.clear個別表示欄();
-        handler.set個別表示欄入力不可();
+        if (申請書管理番号 == null || 申請書管理番号.isEmpty()) {
+            handler.initalize(headList, iChiRanList);
+        } else {
+            handler.initalize(headList, iChiRanList, 申請書管理番号);
+        }
         List<ShinsakaiWariateJoho> yoteiJohoList = manager.get介護認定審査会割当情報(開催番号).records();
         Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
@@ -204,6 +205,7 @@ public class ShinsakaiKekkaToroku {
      */
     public ResponseData onClick_btnBack(ShinsakaiKekkaTorokuDiv div) {
         前排他キーの解除();
+        removeViewState();
         return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
     }
 
@@ -228,9 +230,11 @@ public class ShinsakaiKekkaToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             審査結果登録処理(div);
             前排他キーの解除();
-            div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
-                    .replace(審査結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBE5230001StateName.完了);
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+        }
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            removeViewState();
+            return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -755,5 +759,14 @@ public class ShinsakaiKekkaToroku {
     private LockingKey create排他キー() {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         return new LockingKey(排他キーprefix.concat(開催番号));
+    }
+
+    private void removeViewState() {
+        ViewStateHolder.remove(ViewStateKeys.介護認定審査会開催予定情報.name());
+        ViewStateHolder.remove(ViewStateKeys.要介護認定申請情報.name());
+        ViewStateHolder.remove(ViewStateKeys.要介護認定結果情報.name());
+        ViewStateHolder.remove(ViewStateKeys.要介護認定完了情報.name());
+        ViewStateHolder.remove(ViewStateKeys.開催番号.name());
+        ViewStateHolder.remove(ViewStateKeys.申請書管理番号.name());
     }
 }

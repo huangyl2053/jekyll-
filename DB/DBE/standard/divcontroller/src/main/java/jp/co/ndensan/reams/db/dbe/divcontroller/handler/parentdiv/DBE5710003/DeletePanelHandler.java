@@ -200,7 +200,7 @@ public class DeletePanelHandler {
             File.move(Path.combinePath(localCopyPath, targetImageFile), Path.combinePath(localCopyPath, afterReNameImageFile), options);
             SharedAppendOption option = new SharedAppendOption();
             option.overWrite(true);
-            SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, SLASH.concat(SLASH).concat(afterReNameImageFile))),
+            SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, SLASH.concat(SLASH).concat(SLASH).concat(afterReNameImageFile))),
                     "", option);
         }
     }

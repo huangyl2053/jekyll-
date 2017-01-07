@@ -120,6 +120,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInputBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
@@ -266,6 +267,16 @@ public class NinnteiChousaKekkaTouroku1Handler {
     public void 調査実施者情報子DIV初期化(ChosaJisshishaJohoModel model) {
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Input);
         div.getCcdChosaJisshishaJoho().intialize(model);
+        div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setDisabled(false);
+        div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setReadOnly(false);
+        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setReadOnly(true);
+        } else {
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(false);
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setReadOnly(false);
+        }
+        div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setRequired(false);
     }
 
     /**

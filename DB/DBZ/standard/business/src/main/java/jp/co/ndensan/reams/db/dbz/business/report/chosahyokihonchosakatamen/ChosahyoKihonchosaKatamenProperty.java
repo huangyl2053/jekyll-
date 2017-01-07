@@ -21,6 +21,6 @@ public class ChosahyoKihonchosaKatamenProperty extends ReportPropertyBase<Chosah
      * コンストラクタです。
      */
     public ChosahyoKihonchosaKatamenProperty() {
-        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221012.getReportId());
+        super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221004.getReportId());
     }
 }

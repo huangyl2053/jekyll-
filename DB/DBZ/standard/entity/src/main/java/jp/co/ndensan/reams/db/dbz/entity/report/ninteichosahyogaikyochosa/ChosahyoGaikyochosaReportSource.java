@@ -197,5 +197,7 @@ public class ChosahyoGaikyochosaReportSource implements IReportSource {
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation hishokenshaNo;
+    @ReportItem(name = "layoutIndex")
+    public Integer layoutIndex;
 // </editor-fold>
 }

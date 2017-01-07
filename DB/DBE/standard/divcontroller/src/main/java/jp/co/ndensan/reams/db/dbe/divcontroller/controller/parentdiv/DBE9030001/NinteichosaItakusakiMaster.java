@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.DBE9030001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiJohoCsvEntity;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiKozaMitorokuJohoCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDivSpec;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
@@ -108,6 +109,7 @@ public class NinteichosaItakusakiMaster {
     private static final RString 納税準備 = new RString("納税準備");
     private static final RString 貯蓄 = new RString("貯蓄");
     private static final RString その他 = new RString("その他");
+    private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表.csv");
 
     /**
      * 画面初期化処理です。
@@ -262,6 +264,61 @@ public class NinteichosaItakusakiMaster {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+    }
+
+    /**
+     * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶを出力します。
+     *
+     * @param div NinteichosaItakusakiMainDiv
+     * @param response
+     * @return IDownLoadServletResponse
+     */
+    public IDownLoadServletResponse onClick_btnCsvKozaNashi(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
+
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
+        try (CsvWriter<NinteichosaItakusakiKozaMitorokuJohoCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgChosainIchiran_Row> dataList = div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource();
+            int rowIndex = 0;
+            for (dgChosainIchiran_Row row : dataList) {
+                if (row.getKinyuKikanCode().isNull() || row.getKinyuKikanCode().isEmpty()) {
+                    csvWriter.writeLine(getCsvDataSonota(div, row, rowIndex));
+                    rowIndex++;
+                }
+            }
+            csvWriter.close();
+        }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(OUTPUT_CSV_FILE_NAME));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, OUTPUT_CSV_FILE_NAME), response);
+    }
+
+    private NinteichosaItakusakiKozaMitorokuJohoCsvEntity getCsvDataSonota(NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex) {
+        NinteichosaItakusakiKozaMitorokuJohoCsvEntity csvEntity = new NinteichosaItakusakiKozaMitorokuJohoCsvEntity();
+        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
+        csvEntity.set市町村(row.getShichoson());
+        csvEntity.set調査委託先コード(row.getChosaItakusakiCode().getValue());
+        csvEntity.set事業者番号(row.getJigyoshaNo());
+        csvEntity.set調査委託先名称(row.getChosaItakusakiMeisho());
+        csvEntity.set調査委託先カナ名称(row.getChosaItakusakiKana());
+        csvEntity.set郵便番号(row.getYubinNo());
+        csvEntity.set住所(row.getJusho());
+        csvEntity.set電話番号(row.getTelNo());
+        csvEntity.setＦＡＸ番号(row.getFaxNo());
+        csvEntity.set機関代表者氏名(row.getKikanDaihyoshaName());
+        csvEntity.set機関代表者カナ氏名(row.getKikanDaihyoshaKanaName());
+        csvEntity.set調査委託区分(row.getChosaItakuKubun());
+        csvEntity.set特定調査員表示フラグ(row.getTokuteiChosainDispFlag());
+        csvEntity.set割付定員(new RString(row.getWaritsukeTeiin().getValue().toString()));
+        csvEntity.set割付地区コード(row.getChikuCode());
+        csvEntity.set割付地区名称(row.getChikuName());
+        csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
+        csvEntity.set機関の区分(row.getKikanKubun());
+        csvEntity.set状況フラグ(row.getJokyoFlag());
+        return csvEntity;
     }
 
     /**

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinse
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.NinteiChosaIraiShudouDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouValidationHandler;
@@ -168,7 +169,7 @@ public class NinteiChosaIraiShudou {
             ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE2010002TransitionEventName.個人依頼内容更新に戻る).respond();
     }
 
     private void saveData(NinteiChosaIraiShudouDiv div) {

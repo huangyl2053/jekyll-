@@ -10,8 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaSpecial;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -19,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -161,6 +165,70 @@ public class KihonChosaInputHandler1 {
         ArrayList<RString> 認定調査特記情報ArrayList = new ArrayList<>(認定調査特記情報List);
         div.getDaiichigunShintaiKino().setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(認定調査特記情報ArrayList));
         onLoad第一群身体機能(認定調査基本情報リスト, 認定調査前回結果表示);
+        setTokkiJikouDisabled(申請書管理番号, 認定調査依頼履歴番号);
+    }
+    
+    private void setTokkiJikouDisabled(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+        ArrayList<RString> tokkiJikouNoList = setTokkiJikouNoList();
+        NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+        ArrayList<RString> gaitouTokkiJikouNoList = new ArrayList<>();
+        for (RString tokkiJikouNo : tokkiJikouNoList) {
+            gaitouTokkiJikouNoList.add(tokkiJikouNo);
+            ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(申請書管理番号, Integer.parseInt(認定調査依頼履歴番号.toString()), gaitouTokkiJikouNoList);
+            if (list.isEmpty()
+                    || RString.isNullOrEmpty(tokkiJikouNo)) {
+                setDisabled(tokkiJikouNo);
+            }
+            gaitouTokkiJikouNoList.clear();
+        }
+    }
+    
+    private ArrayList<RString> setTokkiJikouNoList() {
+        ArrayList<RString> tokkiJikouNoList = new ArrayList<>();
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.拘縮の有無.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.寝返り.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.起き上がり.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.座位保持.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.両足での立位保持.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.歩行.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.立ち上がり.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.片足での立位.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.洗身.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.つめ切り.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.視力.get認定調査票_特記情報_認定調査特記事項番号());
+        tokkiJikouNoList.add(NinteiChosaTokkiJikou.聴力.get認定調査票_特記情報_認定調査特記事項番号());
+        return tokkiJikouNoList;
+    }
+    
+    private void setDisabled(RString tokkiJikouNo) {
+        if(NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnMahi().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.拘縮の有無.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKoshuku().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.寝返り.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnNeKaeri().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.起き上がり.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnOkiAgari().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.座位保持.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnZai().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.両足での立位保持.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnRyoAshi().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.歩行.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnBuko().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.立ち上がり.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnTachiAgari().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.片足での立位.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnKataAshi().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.洗身.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnSenshin().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.つめ切り.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnTumeKiri().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.視力.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnShiryoku().setDisabled(true);
+        } else if (NinteiChosaTokkiJikou.聴力.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+            div.getBtnChoryoku().setDisabled(true);
+        }
     }
 
     private List<RString> get特記事項番号List(ShinseishoKanriNo 申請書管理番号) {

@@ -661,8 +661,10 @@ LIMIT (#{limitCount})
         AND 
         DbT5101."chikuCode"  =  #{chikuCode}                                          
     </if>
+    <if test = "isShisetsuNyushoFlag">		
         AND 
         DbT5101."shisetsuNyushoFlag"  =  #{isShisetsuNyushoFlag}       
+    </if>
 </sql>
 
  <sql id="認定_認定調査情報">
