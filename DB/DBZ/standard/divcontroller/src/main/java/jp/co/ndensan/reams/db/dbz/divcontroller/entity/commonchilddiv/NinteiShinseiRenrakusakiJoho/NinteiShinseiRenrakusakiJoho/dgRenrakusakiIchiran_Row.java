@@ -3,12 +3,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 21 21:04:29 JST 2016 
+ * Fri Jan 06 21:45:35 JST 2017 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -19,9 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgRenrakusakiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
-    private RString renban;
+    private TextBoxNum renban;
     private RString shimei;
     private RString tsuzukigara;
     private RString jusho;
@@ -36,7 +37,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
 
     public dgRenrakusakiIchiran_Row() {
         super();
-        this.renban = RString.EMPTY;
+        this.renban = new TextBoxNum();
         this.shimei = RString.EMPTY;
         this.tsuzukigara = RString.EMPTY;
         this.jusho = RString.EMPTY;
@@ -62,7 +63,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgRenrakusakiIchiran_Row(RString renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, RString yusenJuni, RString renrakusakiKuBun, RString sisyo, RString kanaShimei, RString yuubinBango, RString shinseishoKanriNo) {
+    public dgRenrakusakiIchiran_Row(TextBoxNum renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, RString yusenJuni, RString renrakusakiKuBun, RString sisyo, RString kanaShimei, RString yuubinBango, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("renban", renban);
         this.setOriginalData("shimei", shimei);
@@ -90,7 +91,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
-    public RString getRenban() {
+    public TextBoxNum getRenban() {
         return renban;
     }
 
@@ -138,7 +139,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         return shinseishoKanriNo;
     }
 
-    public void setRenban(RString renban) {
+    public void setRenban(TextBoxNum renban) {
         this.setOriginalData("renban", renban);
         this.renban = renban;
     }

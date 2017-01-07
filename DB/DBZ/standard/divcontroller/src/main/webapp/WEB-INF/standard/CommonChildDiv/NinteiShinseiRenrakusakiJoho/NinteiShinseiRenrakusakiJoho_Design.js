@@ -88,7 +88,7 @@ var DBZ;
             };
 
             Controls.prototype.txtRenban = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtRenban"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRenban"));
             };
 
             Controls.prototype.ddlRenrakusakiKubun = function () {
