@@ -526,7 +526,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set意見書入手日(nullToEmpty(entity.getIkenshoJuryoYMD()));
         eucEntity.set調査依頼日(nullToEmpty(entity.getNinteichosaIraiYMD()));
         eucEntity.set調査実施日(nullToEmpty(entity.getNinteichosaJisshiYMD()));
-        eucEntity.set指定居宅介護支援事業者等番号(nullToEmpty(entity.getJigyoshaNo()));
+        eucEntity.set指定居宅介護支援事業者等番号(nullToEmpty(entity.getNinteichosaItakusakiCode()));
         eucEntity.set委託区分(nullToEmpty(entity.getChosaItakuKubun()));
         eucEntity.set認定調査員番号(nullToEmpty(entity.getNinteiChosainCode()));
         eucEntity.set認定調査員資格コード(nullToEmpty(entity.getChosainShikaku()));

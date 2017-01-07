@@ -54,7 +54,7 @@ public class ShinchokuDataOutputRelateEntity {
     private RString 主治医一時remban69;
     private RString ninteichosaIraiYMD;
     private RString ninteichosaJisshiYMD;
-    private RString jigyoshaNo;
+    private RString ninteichosaItakusakiCode;
     private RString chosaItakuKubun;
     private RString ninteiChosainCode;
     private RString chosainShikaku;
