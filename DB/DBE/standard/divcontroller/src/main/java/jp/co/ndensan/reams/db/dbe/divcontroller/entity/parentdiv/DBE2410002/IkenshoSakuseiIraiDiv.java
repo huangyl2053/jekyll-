@@ -29,8 +29,6 @@ public class IkenshoSakuseiIraiDiv extends Panel {
      */
     @JsonProperty("IkenshoIraiTorokuPanel")
     private IkenshoIraiTorokuPanelDiv IkenshoIraiTorokuPanel;
-    @JsonProperty("iraiprintPanel")
-    private iraiprintPanelDiv iraiprintPanel;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("ikenshoIraiRirekiNo")
@@ -58,24 +56,6 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     @JsonProperty("IkenshoIraiTorokuPanel")
     public void setIkenshoIraiTorokuPanel(IkenshoIraiTorokuPanelDiv IkenshoIraiTorokuPanel) {
         this.IkenshoIraiTorokuPanel = IkenshoIraiTorokuPanel;
-    }
-
-    /*
-     * getiraiprintPanel
-     * @return iraiprintPanel
-     */
-    @JsonProperty("iraiprintPanel")
-    public iraiprintPanelDiv getIraiprintPanel() {
-        return iraiprintPanel;
-    }
-
-    /*
-     * setiraiprintPanel
-     * @param iraiprintPanel iraiprintPanel
-     */
-    @JsonProperty("iraiprintPanel")
-    public void setIraiprintPanel(iraiprintPanelDiv iraiprintPanel) {
-        this.iraiprintPanel = iraiprintPanel;
     }
 
     /*
@@ -131,26 +111,6 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiInput() {
         return this.getIkenshoIraiTorokuPanel().getCcdShujiiInput();
-    }
-
-    @JsonIgnore
-    public RadioButton getRadKigen() {
-        return this.getIraiprintPanel().getRadKigen();
-    }
-
-    @JsonIgnore
-    public void  setRadKigen(RadioButton radKigen) {
-        this.getIraiprintPanel().setRadKigen(radKigen);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtKigenymd() {
-        return this.getIraiprintPanel().getTxtKigenymd();
-    }
-
-    @JsonIgnore
-    public void  setTxtKigenymd(TextBoxDate txtKigenymd) {
-        this.getIraiprintPanel().setTxtKigenymd(txtKigenymd);
     }
 
     // </editor-fold>

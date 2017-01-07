@@ -14,12 +14,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudou;
 import jp.co.ndensan.reams.db.dbe.definition.core.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,14 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class IkenshoSakuseiIraiHandler {
 
     private final IkenshoSakuseiIraiDiv div;
-    private static final RString SELECTED_KEY0 = new RString("key0");
-    private static final RString SELECTED_KEY1 = new RString("key1");
-    private static final RString SELECTED_KEY2 = new RString("key2");
     private static final int 初期履歴番号 = 1;
     private static final int 初期作成回数 = 1;
-    private static final RString 主治医意見書作成期限設定方法_1 = new RString("1");
     private static final int 数字_1 = 1;
-    private static final RString 指定医 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -73,44 +65,6 @@ public class IkenshoSakuseiIraiHandler {
         if (主治医意見書作成依頼.get主治医意見書作成依頼年月日() != null && !主治医意見書作成依頼.get主治医意見書作成依頼年月日().isEmpty()) {
             div.getTxtSakuseiIraiD().setValue(new RDate(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString()));
         }
-        
-        boolean is指定医 = false;
-        if (主治医意見書作成依頼.get医師区分コード() != null && 指定医.equals(主治医意見書作成依頼.get医師区分コード().value())) {
-            is指定医 = true;
-        }
-        setCheckBoxValue();
-    }
-
-    private void setCheckBoxValue() {
-
-        if (SELECTED_KEY2.equals(div.getRadKigen().getSelectedKey())) {
-            div.getTxtKigenymd().setDisabled(false);
-        } else {
-            div.getTxtKigenymd().setDisabled(true);
-        }
-    }
-
-    private FlexibleDate get主治医意見書作成期限年月日(FlexibleDate 認定申請年月日, IkenshoSakuseiIraiDiv div) {
-        RString コンフィグ_主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        FlexibleDate 提出期限;
-        RString key = div.getRadKigen().getSelectedKey();
-        int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-        if (主治医意見書作成期限設定方法_1.equals(コンフィグ_主治医意見書作成期限設定方法)) {
-            if (SELECTED_KEY0.equals(key)) {
-                提出期限 = div.getTxtSakuseiIraiD().getValue() != null
-                        ? new FlexibleDate(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数).toDateString()) : FlexibleDate.EMPTY;
-            } else if (SELECTED_KEY1.equals(key)) {
-                提出期限 = FlexibleDate.EMPTY;
-            } else {
-                提出期限 = (div.getTxtKigenymd().getValue() != null
-                        ? new FlexibleDate(div.getTxtKigenymd().getValue().plusDay(期限日数).toDateString()) : FlexibleDate.EMPTY);
-            }
-        } else {
-            提出期限 = 認定申請年月日 != null ? 認定申請年月日.plusDay(期限日数) : FlexibleDate.EMPTY;
-        }
-        return 提出期限;
     }
     
     /**
@@ -151,7 +105,7 @@ public class IkenshoSakuseiIraiHandler {
             builder.set医師区分コード(new Code(IshiKubun.主治医.getCode()));
         }
         builder.set主治医意見書作成依頼年月日(new FlexibleDate(div.getTxtSakuseiIraiD().getValue().toDateString()));
-        builder.set主治医意見書作成期限年月日(get主治医意見書作成期限年月日(要介護認定申請情報.get認定申請年月日(), div));
+        builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
         builder.set論理削除フラグ(false);
         builder.build().toEntity().setState(EntityDataState.Added);
         list.add(builder.build());

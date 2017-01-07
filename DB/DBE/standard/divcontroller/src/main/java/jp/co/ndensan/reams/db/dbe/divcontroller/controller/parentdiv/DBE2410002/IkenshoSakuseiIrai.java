@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.Iken
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshosakuseiirai.IkenshoSakuseiIraiManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -27,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -42,12 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class IkenshoSakuseiIrai {
 
-    private static final RString SELECTED_KEY0 = new RString("key0");
-    private static final RString SELECTED_KEY1 = new RString("key1");
-    private static final RString SELECTED_KEY2 = new RString("key2");
-    private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString 指定医 = new RString("2");
-    private static RDate 認定申請年月日 = null;
 
     /**
      * 主治医意見書作成依頼(手動)の初期化です。
@@ -75,15 +67,12 @@ public class IkenshoSakuseiIrai {
             div.setReadOnly(true);
             throw new PessimisticLockingException();
         }
-        認定申請年月日 = new RDate(主治医意見書作成依頼.get認定申請年月日().toString());
         createHandler(div).initialize(主治医意見書作成依頼);
         div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
-        onChange_radKigen(div);
         
         if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
                 div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())) {
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
-            div.getIraiprintPanel().setDisabled(true);
             return ResponseData.of(div).setState(DBE2410002StateName.ReadOnly);
         }
 
@@ -96,37 +85,6 @@ public class IkenshoSakuseiIrai {
         lockingKey.append(new RString("ShinseishoKanriNo"));
         lockingKey.append(申請書管理番号.value());
         return new LockingKey(lockingKey.toRString());
-    }
-
-    /**
-     * 提出期限変更時、画面状態を制御します。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<IkenshoSakuseiIraiDiv> onChange_radKigen(IkenshoSakuseiIraiDiv div) {
-        RString コンフィグ_主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString key = div.getRadKigen().getSelectedKey();
-        int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-        if (CONFIGVALUE1.equals(コンフィグ_主治医意見書作成期限設定方法)) {
-            if (SELECTED_KEY0.equals(key)) {
-                div.getTxtKigenymd().setDisabled(true);
-                if (div.getTxtSakuseiIraiD().getValue() != null) {
-                    div.getTxtKigenymd().setValue(div.getTxtSakuseiIraiD().getValue().plusDay(期限日数));
-                }
-            } else if (SELECTED_KEY1.equals(key)) {
-                div.getTxtKigenymd().setDisabled(true);
-                div.getTxtKigenymd().clearValue();
-            } else if (SELECTED_KEY2.equals(key)) {
-                div.getTxtKigenymd().setDisabled(false);
-            }
-        } else if (認定申請年月日 != null) {
-            div.getTxtKigenymd().setValue(認定申請年月日.plusDay(期限日数));
-            div.getRadKigen().setDisabled(true);
-        }
-        return ResponseData.of(div).respond();
     }
     
     /**
