@@ -81,6 +81,21 @@ module DBZ
                     this.controls.NinteiShinseiRiyu().readOnly = false;
 
                 }
+                public ShinkiShinseiMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = true;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = true;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = true;
+                    this.controls.ddlHihokenshaKubun().readOnly = true;
+                    this.controls.chkShikakuShutokuMae().readOnly = true;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
+
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+
+                }
                 public RirekiShuseiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
