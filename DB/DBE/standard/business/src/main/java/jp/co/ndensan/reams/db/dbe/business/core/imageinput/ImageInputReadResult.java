@@ -21,7 +21,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ImageInputReadResult {
 
+    private static final RString 意見書_表 = new RString("701");
+    private static final RString 意見書_裏 = new RString("702");
+    private static final RString 意見書_ID777 = new RString("777");
+    private static final RString 意見書_ID778 = new RString("778");
+    private static final RString 意見書_ID777_CA3 = new RString("ID777");
+    private static final RString 意見書_ID778_CA3 = new RString("ID778");
+    private static final RString MS_PATH_SEPARATOR = new RString("\\");
+
+    //key
+    @lombok.Setter(lombok.AccessLevel.PRIVATE)
+    private ImageInputReadResultKey key;
+
+    // 1行の内容
     private RString データ行_文字列;
+
+    //OCRID
+    private OCRID ocrID;
+
+    //sheetID
+    private RString sheetID;
 
     // ID701　ここから
     private RString 保険者番号;
@@ -127,26 +146,11 @@ public class ImageInputReadResult {
     // ５．その他特記すべき事項
     private RString 主治医への結果連絡;
 
-    //ID777
-    private RString ID777_記入日;
-    private RString ID777_受領日;
-    private RString ID777_障害高齢者の自立度;
-    private RString ID777_認知症高齢者の自立度;
-    private RString ID777_短期記憶;
-    private RString ID777_認知能力;
-    private RString ID777_伝達能力;
-    private RString ID777_食事行為;
-    private RString ID777_主治医への結果連絡;
+    // 全体イメージ（帳票一面のイメージ）中で、表側の画像を示すインデックス（規定外、規定外IDで利用する）
+    private RString 全体イメージ表側インデックス;
 
+    // ca3ファイルの持つ画像ファイル名
     private List<RString> imageFileNames;
-
-    private static final RString 意見書_表 = new RString("701");
-    private static final RString 意見書_裏 = new RString("702");
-    private static final RString 意見書_ID777 = new RString("777");
-    private static final RString 意見書_ID778 = new RString("778");
-    private static final RString 意見書_ID777_CA3 = new RString("ID777");
-    private static final RString 意見書_ID778_CA3 = new RString("ID778");
-    private static final RString MS_PATH_SEPARATOR = new RString("\\");
 
     /**
      * 行を解析した結果より、インスタンスを生成します。
@@ -163,15 +167,19 @@ public class ImageInputReadResult {
     private static ImageInputReadResult parseデータ行(RString line) {
         ImageInputReadResult result = new ImageInputReadResult();
         result.clear();
+        result.setデータ行_文字列(line);
         List<RString> columns = Collections.unmodifiableList(line.split(","));
         if (columns == null) {
             return result;
         }
         RString ID = columns.get(0);
         if (意見書_表.equals(ID)) {
+            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setSheetID(columns.get(1));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
+            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
             result.set同意の有無(columns.get(5));
             result.set最終診察日(get西暦_年(columns.get(6)));
             result.set記入日(get西暦_年(columns.get(7)));
@@ -200,9 +208,12 @@ public class ImageInputReadResult {
             result.set専門科医受診(columns.get(30));
 
         } else if (意見書_裏.equals(ID)) {
+            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setSheetID(columns.get(1));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
+            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
             result.set利き腕(columns.get(5));
             result.set過去6ヶ月間の体重の変化(columns.get(6));
             result.set四肢欠損(columns.get(7));
@@ -249,23 +260,30 @@ public class ImageInputReadResult {
             result.set主治医への結果連絡(columns.get(48));
 
         } else if (意見書_ID777.equals(ID)) {
+            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setSheetID(columns.get(1));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
-            result.setID777_記入日(get西暦_年(columns.get(5)));
-            result.setID777_受領日(get西暦_年(columns.get(6)));
-            result.setID777_障害高齢者の自立度(columns.get(7));
-            result.setID777_認知症高齢者の自立度(columns.get(8));
-            result.setID777_短期記憶(columns.get(9));
-            result.setID777_認知能力(columns.get(10));
-            result.setID777_伝達能力(columns.get(11));
-            result.setID777_食事行為(columns.get(12));
-            result.setID777_主治医への結果連絡(columns.get(13));
+            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.set記入日(get西暦_年(columns.get(5)));
+            result.set受領日(get西暦_年(columns.get(6)));
+            result.set障害高齢者の自立度(columns.get(7));
+            result.set認知症高齢者の自立度(columns.get(8));
+            result.set短期記憶(columns.get(9));
+            result.set認知能力(columns.get(10));
+            result.set伝達能力(columns.get(11));
+            result.set食事行為(columns.get(12));
+            result.set主治医への結果連絡(columns.get(13));
+            result.set全体イメージ表側インデックス(columns.get(13));
 
         } else if (意見書_ID778.equals(ID)) {
+            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setSheetID(columns.get(1));
             result.set保険者番号((columns.get(2)));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
+            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
 
         } else if (意見書_ID777_CA3.equals(ID) || 意見書_ID778_CA3.equals(ID)) {
             List<RString> fileNames = new ArrayList<>();
@@ -302,6 +320,11 @@ public class ImageInputReadResult {
      * 文字列項目の値は{@link RString#EMPTY}、{@code Collection}の場合は空のインスタンスで初期化します。
      */
     public void clear() {
+        this.データ行_文字列 = RString.EMPTY;
+        this.key = ImageInputReadResultKey.EMPTY;
+        this.ocrID = OCRID.EMPTY;
+        this.sheetID = RString.EMPTY;
+
         this.保険者番号 = RString.EMPTY;
         this.申請日 = RString.EMPTY;
         this.被保険者番号 = RString.EMPTY;
@@ -377,16 +400,7 @@ public class ImageInputReadResult {
         this.感染症 = RString.EMPTY;
         this.主治医への結果連絡 = RString.EMPTY;
 
-        //ID777
-        this.ID777_記入日 = RString.EMPTY;
-        this.ID777_受領日 = RString.EMPTY;
-        this.ID777_障害高齢者の自立度 = RString.EMPTY;
-        this.ID777_認知症高齢者の自立度 = RString.EMPTY;
-        this.ID777_短期記憶 = RString.EMPTY;
-        this.ID777_認知能力 = RString.EMPTY;
-        this.ID777_伝達能力 = RString.EMPTY;
-        this.ID777_食事行為 = RString.EMPTY;
-        this.ID777_主治医への結果連絡 = RString.EMPTY;
+        this.全体イメージ表側インデックス = RString.EMPTY;
 
         this.imageFileNames = new ArrayList<>();
     }
