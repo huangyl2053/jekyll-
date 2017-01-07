@@ -4,10 +4,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.INinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -17,21 +19,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoNinteiShinseiKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnJokenClear")
-    private Button btnJokenClear;
-    @JsonProperty("txtMaxKensu")
-    private TextBoxNum txtMaxKensu;
-    @JsonProperty("KensakuKekka")
-    private KensakuKekkaDiv KensakuKekka;
-    @JsonProperty("ccdNinteiShinseishaFinder")
-    private NinteiShinseishaFinderDiv ccdNinteiShinseishaFinder;
+    @JsonProperty("KensakuJoken")
+    private KensakuJokenDiv KensakuJoken;
+    @JsonProperty("ShinseiJohoIchiran")
+    private ShinseiJohoIchiranDiv ShinseiJohoIchiran;
+    @JsonProperty("hdnShinseiKensaku")
+    private RString hdnShinseiKensaku;
+    @JsonProperty("wfParameter")
+    private RString wfParameter;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,79 +42,123 @@ public class KaigoNinteiShinseiKensakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnJokenClear
-     * @return btnJokenClear
+     * getKensakuJoken
+     * @return KensakuJoken
      */
-    @JsonProperty("btnJokenClear")
-    public Button getBtnJokenClear() {
-        return btnJokenClear;
+    @JsonProperty("KensakuJoken")
+    public KensakuJokenDiv getKensakuJoken() {
+        return KensakuJoken;
     }
 
     /*
-     * setbtnJokenClear
-     * @param btnJokenClear btnJokenClear
+     * setKensakuJoken
+     * @param KensakuJoken KensakuJoken
      */
-    @JsonProperty("btnJokenClear")
-    public void setBtnJokenClear(Button btnJokenClear) {
-        this.btnJokenClear = btnJokenClear;
+    @JsonProperty("KensakuJoken")
+    public void setKensakuJoken(KensakuJokenDiv KensakuJoken) {
+        this.KensakuJoken = KensakuJoken;
     }
 
     /*
-     * gettxtMaxKensu
-     * @return txtMaxKensu
+     * getShinseiJohoIchiran
+     * @return ShinseiJohoIchiran
      */
-    @JsonProperty("txtMaxKensu")
-    public TextBoxNum getTxtMaxKensu() {
-        return txtMaxKensu;
+    @JsonProperty("ShinseiJohoIchiran")
+    public ShinseiJohoIchiranDiv getShinseiJohoIchiran() {
+        return ShinseiJohoIchiran;
     }
 
     /*
-     * settxtMaxKensu
-     * @param txtMaxKensu txtMaxKensu
+     * setShinseiJohoIchiran
+     * @param ShinseiJohoIchiran ShinseiJohoIchiran
      */
-    @JsonProperty("txtMaxKensu")
-    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
-        this.txtMaxKensu = txtMaxKensu;
+    @JsonProperty("ShinseiJohoIchiran")
+    public void setShinseiJohoIchiran(ShinseiJohoIchiranDiv ShinseiJohoIchiran) {
+        this.ShinseiJohoIchiran = ShinseiJohoIchiran;
     }
 
     /*
-     * getKensakuKekka
-     * @return KensakuKekka
+     * gethdnShinseiKensaku
+     * @return hdnShinseiKensaku
      */
-    @JsonProperty("KensakuKekka")
-    public KensakuKekkaDiv getKensakuKekka() {
-        return KensakuKekka;
+    @JsonProperty("hdnShinseiKensaku")
+    public RString getHdnShinseiKensaku() {
+        return hdnShinseiKensaku;
     }
 
     /*
-     * setKensakuKekka
-     * @param KensakuKekka KensakuKekka
+     * sethdnShinseiKensaku
+     * @param hdnShinseiKensaku hdnShinseiKensaku
      */
-    @JsonProperty("KensakuKekka")
-    public void setKensakuKekka(KensakuKekkaDiv KensakuKekka) {
-        this.KensakuKekka = KensakuKekka;
+    @JsonProperty("hdnShinseiKensaku")
+    public void setHdnShinseiKensaku(RString hdnShinseiKensaku) {
+        this.hdnShinseiKensaku = hdnShinseiKensaku;
     }
 
     /*
-     * getccdNinteiShinseishaFinder
-     * @return ccdNinteiShinseishaFinder
+     * getwfParameter
+     * @return wfParameter
      */
-    @JsonProperty("ccdNinteiShinseishaFinder")
-    public INinteiShinseishaFinderDiv getCcdNinteiShinseishaFinder() {
-        return ccdNinteiShinseishaFinder;
+    @JsonProperty("wfParameter")
+    public RString getWfParameter() {
+        return wfParameter;
+    }
+
+    /*
+     * setwfParameter
+     * @param wfParameter wfParameter
+     */
+    @JsonProperty("wfParameter")
+    public void setWfParameter(RString wfParameter) {
+        this.wfParameter = wfParameter;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public DataGrid<dgKensakuKekkaIchiran_Row> getDgKensakuKekkaIchiran() {
-        return this.getKensakuKekka().getDgKensakuKekkaIchiran();
+    public KensakuOptionDiv getKensakuOption() {
+        return this.getKensakuJoken().getKensakuOption();
     }
 
     @JsonIgnore
-    public void  setDgKensakuKekkaIchiran(DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran) {
-        this.getKensakuKekka().setDgKensakuKekkaIchiran(dgKensakuKekkaIchiran);
+    public void  setKensakuOption(KensakuOptionDiv KensakuOption) {
+        this.getKensakuJoken().setKensakuOption(KensakuOption);
+    }
+
+    @JsonIgnore
+    public Button getBtnClear() {
+        return this.getKensakuJoken().getKensakuOption().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getKensakuJoken().getKensakuOption().setBtnClear(btnClear);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaxDisp() {
+        return this.getKensakuJoken().getKensakuOption().getTxtMaxDisp();
+    }
+
+    @JsonIgnore
+    public void  setTxtMaxDisp(TextBoxNum txtMaxDisp) {
+        this.getKensakuJoken().getKensakuOption().setTxtMaxDisp(txtMaxDisp);
+    }
+
+    @JsonIgnore
+    public INinteiShinseishaFinderDiv getCcdNinteishinseishaFinder() {
+        return this.getKensakuJoken().getCcdNinteishinseishaFinder();
+    }
+
+    @JsonIgnore
+    public DataGrid<dgShinseiJoho_Row> getDgShinseiJoho() {
+        return this.getShinseiJohoIchiran().getDgShinseiJoho();
+    }
+
+    @JsonIgnore
+    public void  setDgShinseiJoho(DataGrid<dgShinseiJoho_Row> dgShinseiJoho) {
+        this.getShinseiJohoIchiran().setDgShinseiJoho(dgShinseiJoho);
     }
 
     // </editor-fold>

@@ -9,20 +9,22 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KensakuKekka のクラスファイル 
+ * KensakuOption のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KensakuKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+public class KensakuOptionDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgKensakuKekkaIchiran")
-    private DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran;
+    @JsonProperty("btnClear")
+    private Button btnClear;
+    @JsonProperty("txtMaxDisp")
+    private TextBoxNum txtMaxDisp;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +33,39 @@ public class KensakuKekkaDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgKensakuKekkaIchiran
-     * @return dgKensakuKekkaIchiran
+     * getbtnClear
+     * @return btnClear
      */
-    @JsonProperty("dgKensakuKekkaIchiran")
-    public DataGrid<dgKensakuKekkaIchiran_Row> getDgKensakuKekkaIchiran() {
-        return dgKensakuKekkaIchiran;
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
     }
 
     /*
-     * setdgKensakuKekkaIchiran
-     * @param dgKensakuKekkaIchiran dgKensakuKekkaIchiran
+     * setbtnClear
+     * @param btnClear btnClear
      */
-    @JsonProperty("dgKensakuKekkaIchiran")
-    public void setDgKensakuKekkaIchiran(DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran) {
-        this.dgKensakuKekkaIchiran = dgKensakuKekkaIchiran;
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
+    }
+
+    /*
+     * gettxtMaxDisp
+     * @return txtMaxDisp
+     */
+    @JsonProperty("txtMaxDisp")
+    public TextBoxNum getTxtMaxDisp() {
+        return txtMaxDisp;
+    }
+
+    /*
+     * settxtMaxDisp
+     * @param txtMaxDisp txtMaxDisp
+     */
+    @JsonProperty("txtMaxDisp")
+    public void setTxtMaxDisp(TextBoxNum txtMaxDisp) {
+        this.txtMaxDisp = txtMaxDisp;
     }
 
     // </editor-fold>

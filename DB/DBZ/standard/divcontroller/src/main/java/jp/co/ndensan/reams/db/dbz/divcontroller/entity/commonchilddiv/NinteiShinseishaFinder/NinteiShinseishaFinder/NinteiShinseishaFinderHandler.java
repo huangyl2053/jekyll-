@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishafinder.NinteiShinseishaFinderParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
@@ -45,6 +46,7 @@ public class NinteiShinseishaFinderHandler {
     private final NinteiShinseishaFinderDiv div;
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
+    private static final RString みなし2号申請チェックキー = new RString("True");
 
     /**
      * コンストラクタです。
@@ -65,6 +67,20 @@ public class NinteiShinseishaFinderHandler {
     }
 
     /**
+     * パラメタの内容を初期状態としてセットした状態で初期化します。
+     *
+     * @param parameter パラメタ
+     */
+    public void initialize(NinteiShinseishaFinderParameter parameter) {
+        initialize();
+        div.getDdlHokenshaNumber().loadHokenshaList(parameter.get業務分類());
+        setみなし2号申請チェック(parameter.isCheckedみなし2号申請());
+        if (parameter.get証記載保険者番号() != null) {
+            div.getDdlHokenshaNumber().setSelectedShoKisaiHokenshaNoIfExist(parameter.get証記載保険者番号());
+        }
+    }
+
+    /**
      * 最近処理者を使用しない場合の検索画面初期化処理です。
      */
     public void initialize_最近処理者非表示() {
@@ -72,6 +88,12 @@ public class NinteiShinseishaFinderHandler {
         div.getCcdSaikinShorisha().setVisible(false);
         div.getCcdSaikinShorisha().setDisplayNone(true);
         initialize共通処理();
+    }
+
+    public NinteiShinseishaFinderParameter getParameter() {
+        NinteiShinseishaFinderParameter parameter = new NinteiShinseishaFinderParameter();
+
+        return parameter;
     }
 
     /**
@@ -300,7 +322,7 @@ public class NinteiShinseishaFinderHandler {
             div.setHdnChosainCode(RString.EMPTY);
         }
     }
-    
+
     /**
      * 入力された認定調査員氏名からコード名称を取得します。
      */
@@ -311,7 +333,7 @@ public class NinteiShinseishaFinderHandler {
             div.setHdnChosainCode(RString.EMPTY);
         }
     }
-    
+
     /**
      * 入力された主治医医療機関からコード名称を取得します。
      */
@@ -326,7 +348,7 @@ public class NinteiShinseishaFinderHandler {
             div.setHdnShujiiCode(RString.EMPTY);
         }
     }
-    
+
     /**
      * 入力された主治医氏名からコード名称を取得します。
      */
@@ -337,7 +359,7 @@ public class NinteiShinseishaFinderHandler {
             div.setHdnShujiiCode(RString.EMPTY);
         }
     }
-    
+
     /**
      * 前回情報に入力された認定調査委託先からコード名称を取得します。
      */
@@ -357,7 +379,7 @@ public class NinteiShinseishaFinderHandler {
             div.getTxtZenkaiShujiiIryokikanName().clearValue();
         }
     }
-    
+
     private void initKihonJoho() {
         List<KeyValueDataSource> ddlHihokenshaKubun = new ArrayList<>();
         ddlHihokenshaKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
@@ -555,4 +577,13 @@ public class NinteiShinseishaFinderHandler {
         return list.isEmpty() ? Collections.<RString>emptyList()
                 : Arrays.asList(list.get(list.size() - 1).getKey());
     }
+
+    private void setみなし2号申請チェック(boolean checked) {
+        List<RString> selectedItems = new ArrayList();
+        if (checked) {
+            selectedItems.add(みなし2号申請チェックキー);
+        }
+        div.getChkMinashiFlag().setSelectedItemsByKey(selectedItems);
+    }
+
 }
