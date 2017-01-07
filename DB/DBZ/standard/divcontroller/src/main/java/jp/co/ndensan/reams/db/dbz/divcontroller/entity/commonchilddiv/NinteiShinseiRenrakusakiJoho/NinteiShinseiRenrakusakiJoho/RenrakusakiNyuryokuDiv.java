@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @reamsid_L DBZ-1300-100 dongyabin
  */
 public class RenrakusakiNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,7 +23,7 @@ public class RenrakusakiNyuryokuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtRenban")
-    private TextBoxCode txtRenban;
+    private TextBoxNum txtRenban;
     @JsonProperty("ddlRenrakusakiKubun")
     private DropDownList ddlRenrakusakiKubun;
     @JsonProperty("ddlShisho")
@@ -58,7 +58,7 @@ public class RenrakusakiNyuryokuDiv extends Panel {
      * @return txtRenban
      */
     @JsonProperty("txtRenban")
-    public TextBoxCode getTxtRenban() {
+    public TextBoxNum getTxtRenban() {
         return txtRenban;
     }
 
@@ -67,7 +67,7 @@ public class RenrakusakiNyuryokuDiv extends Panel {
      * @param txtRenban txtRenban
      */
     @JsonProperty("txtRenban")
-    public void setTxtRenban(TextBoxCode txtRenban) {
+    public void setTxtRenban(TextBoxNum txtRenban) {
         this.txtRenban = txtRenban;
     }
 

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.geninshikkan.GeninShikkan;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.geninshikkan.GeninShikkanIdentifier;
@@ -1008,6 +1009,27 @@ public class NinteiShinseiJohoBuilder {
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
+    /**
+     * 要介護認定申請情報のキー情報について判定します。<br>
+     * 要介護認定申請情報に関連できる主治医意見書作成依頼情報である場合、下記の処理に遷移します。<br>
+     * キーが一致する場合は主治医意見書作成依頼情報リストに主治医意見書作成依頼情報{@link Todokedesha}をセットします。<br>
+     * キーが一致しない場合、新たに追加します。<br>
+     * @param 主治医意見書作成依頼情報リスト
+     * @return Builder
+     * @throws IllegalStateException キーが一致しない場合
+     */
+    public NinteiShinseiJohoBuilder setShujiiIkenshoIraiJoho(List<ShujiiIkenshoIraiJoho> 主治医意見書作成依頼情報リスト) {
+        for (ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 : 主治医意見書作成依頼情報リスト) {
+            if (hasSameIdentifier1(主治医意見書作成依頼情報.identifier())) {
+                shujiiIkenshoIraiJoho.add(主治医意見書作成依頼情報);
+            }
+        }
+        if (shujiiIkenshoIraiJoho.values().isEmpty()) {
+            throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+        }
+        return this;
+    }
+    
     private boolean hasSameIdentifier1(ShujiiIkenshoIraiJohoIdentifier 主治医意見書作成依頼情報識別子) {
         return (id.get申請書管理番号().equals(主治医意見書作成依頼情報識別子.get申請書管理番号()));
     }

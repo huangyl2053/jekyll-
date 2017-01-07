@@ -60,12 +60,12 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
     public void writeBy(ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter) {
         if (itemList != null) {
             for (ChosahyoGaikyochosaItem chosahyoGaikyochosaItem : itemList) {
-                IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(chosahyoGaikyochosaItem);
+                IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(chosahyoGaikyochosaItem, 0);
                 IChosahyoGaikyochosaBuilder builder = new ChosahyoGaikyochosaBuilderImpl(editor);
                 reportSourceWriter.writeLine(builder);
             }
         } else {
-            IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(item);
+            IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(item, 0);
             IChosahyoGaikyochosaBuilder builder = new ChosahyoGaikyochosaBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }

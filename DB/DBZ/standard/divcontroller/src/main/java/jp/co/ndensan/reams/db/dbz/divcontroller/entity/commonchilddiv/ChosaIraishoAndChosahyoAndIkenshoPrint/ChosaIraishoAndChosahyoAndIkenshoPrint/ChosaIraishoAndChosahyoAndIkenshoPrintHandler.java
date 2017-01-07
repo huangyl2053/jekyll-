@@ -136,6 +136,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
     private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
     private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
+    private static final KeyValueDataSource DATA_SOURCE_概況特記 = new KeyValueDataSource(new RString("3"), new RString("認定調査票(概況特記)"));
     private final ChosaIraishoAndChosahyoAndIkenshoPrintDiv div;
 
     /**
@@ -194,7 +195,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgNinteiChosa().setDataSource(rowList);
-            setDisableToNinteiChosaChk();
             RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
@@ -203,7 +203,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             } else {
                 div.getRadTeishutsuKigen().setDisabled(false);
             }
-            set認定調査印刷帳票初期選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+            setChk認定調査印刷帳票選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         } else {
             div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE230001.getReportId());
             div.getCcdHokenshaList().setDisplayNone(true);
@@ -330,8 +330,26 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
     }
 
-    private void set認定調査印刷帳票初期選択(RString 保険者市町村コード) {
+    private void setChk認定調査印刷帳票選択(RString 保険者市町村コード) {
         RDate nowDate = RDate.getNowDate();
+
+        RString 認定調査票_概況調査_用紙タイプ
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査票_概況調査_用紙タイプ)) {
+            div.getChkChosahyo().setDisplayNone(true);
+        } else if (CONFIGVALUE2.equals(認定調査票_概況調査_用紙タイプ)) {
+            div.getChkOcrChosahyo().setDisplayNone(true);
+        }
+
+        RString 認定調査票_概況特記_出力有無
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (CONFIGVALUE1.equals(認定調査票_概況特記_出力有無)) {
+            List<KeyValueDataSource> dataSource = div.getChkChosahyo().getDataSource();
+            dataSource.add(DATA_SOURCE_概況特記);
+            List<KeyValueDataSource> ocrDataSource = div.getChkOcrChosahyo().getDataSource();
+            ocrDataSource.add(DATA_SOURCE_概況特記);
+        }
+
         List<RString> 依頼書選択selectedKeys = new ArrayList<>();
         RString 認定調査依頼_手動_認定調査依頼書
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
@@ -363,7 +381,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
         RString 認定調査依頼_手動_調査特記_概況特記
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        if (CONFIGVALUE1.equals(認定調査依頼_手動_調査特記_概況特記)) {
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_調査特記_概況特記)
+                && CONFIGVALUE1.equals(認定調査票_概況特記_出力有無)) {
             依頼書選択selectedKeys.add(KEY3);
         }
         div.getChkChosahyo().setSelectedItemsByKey(調査票選択selectedKeys);
@@ -371,13 +390,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<RString> 調査票OCR選択selectedKeys = new ArrayList<>();
         RString 認定調査依頼_手動_認定調査票OCR_概況調査
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_概況調査, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_概況調査)) {
-            調査票OCR選択selectedKeys.add(KEY0);
-        }
         RString 認定調査依頼_手動_認定調査票OCR_基本調査
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_基本調査, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_基本調査)) {
-            調査票OCR選択selectedKeys.add(KEY1);
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_概況調査)
+                || CONFIGVALUE1.equals(認定調査依頼_手動_認定調査票OCR_基本調査)) {
+            調査票OCR選択selectedKeys.add(KEY0);
         }
         RString 認定調査依頼_手動_認定調査票OCR_特記事項
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
@@ -386,7 +403,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         }
         RString 認定調査依頼_手動_調査特記OCR_概況特記
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記OCR_概況特記, nowDate, SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        if (CONFIGVALUE1.equals(認定調査依頼_手動_調査特記OCR_概況特記)) {
+        if (CONFIGVALUE1.equals(認定調査依頼_手動_調査特記OCR_概況特記)
+                && CONFIGVALUE1.equals(認定調査票_概況特記_出力有無)) {
             調査票OCR選択selectedKeys.add(KEY3);
         }
         div.getChkOcrChosahyo().setSelectedItemsByKey(調査票OCR選択selectedKeys);
@@ -600,52 +618,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             inputData.append(div.getTxtKyotsuDay().getValue().toDateString());
         }
         return inputData.toRString();
-    }
-
-    private void setDisableToNinteiChosaChk() {
-        RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
-        RDate 適用基準日 = RDate.getNowDate();
-        RString 概況調査_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況調査_用紙タイプ,
-                適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
-        List<RString> keyList = new ArrayList<>();
-        List<RString> ocrKeyList = new ArrayList<>();
-        if (CONFIGVALUE1.equals(概況調査_用紙タイプ)) {
-            keyList.add(KEY0);
-        } else {
-            ocrKeyList.add(KEY0);
-        }
-        RString 基本調査_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_基本調査_用紙タイプ,
-                適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
-        if (CONFIGVALUE1.equals(基本調査_用紙タイプ)) {
-            keyList.add(KEY1);
-        } else {
-            ocrKeyList.add(KEY1);
-        }
-        RString 特記事項_用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_用紙タイプ,
-                適用基準日, SubGyomuCode.DBE認定支援, 市町村コード);
-        if (CONFIGVALUE1.equals(特記事項_用紙タイプ)) {
-            keyList.add(KEY2);
-        } else {
-            ocrKeyList.add(KEY2);
-        }
-        div.getChkChosahyo().setDisabledItemsByKey(keyList);
-        div.getChkOcrChosahyo().setDisabledItemsByKey(ocrKeyList);
-    }
-
-    private void setDisableToShujiiIkenshoChk() {
-        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
-        RString 意見書用紙タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書用紙タイプ,
-                RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
-
-        if (CONFIGVALUE1.equals(意見書用紙タイプ)) {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(KEY0);
-            div.getChkIkenshoSakuseiIchiran().setDisabledItemsByKey(keyList);
-        } else {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(KEY1);
-            div.getChkIkenshoSakuseiIchiran().setDisabledItemsByKey(keyList);
-        }
     }
 
     private RString nullToEmpty(RString obj) {
@@ -943,16 +915,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         get要支援詳細(前回要介護状態区分コード),
                         get要介護(前回要介護状態区分コード),
                         get要介護詳細(前回要介護状態区分コード),
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY,
-                        RString.EMPTY);
+                        被保険者番号リスト.get(0),
+                        被保険者番号リスト.get(1),
+                        被保険者番号リスト.get(2),
+                        被保険者番号リスト.get(INDEX_3),
+                        被保険者番号リスト.get(INDEX_4),
+                        被保険者番号リスト.get(INDEX_5),
+                        被保険者番号リスト.get(INDEX_6),
+                        被保険者番号リスト.get(INDEX_7),
+                        被保険者番号リスト.get(INDEX_8),
+                        被保険者番号リスト.get(INDEX_9));
                 itemList.add(item);
             }
         }

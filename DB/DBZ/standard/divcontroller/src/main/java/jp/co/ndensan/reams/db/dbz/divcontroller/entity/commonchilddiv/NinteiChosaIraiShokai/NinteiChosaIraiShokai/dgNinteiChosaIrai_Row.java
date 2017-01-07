@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 22 16:51:42 JST 2016 
+ * Fri Jan 06 21:16:46 JST 2017 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -19,16 +20,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosaIrai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     private RString no;
-    private RString ninteiShinseiDate;
+    private TextBoxFlexibleDate ninteiShinseiDate;
     private RString shinseiKubun;
-    private RString shinseiTorikeshiDate;
-    private RString ninteiDate;
+    private TextBoxFlexibleDate shinseiTorikeshiDate;
+    private TextBoxFlexibleDate ninteiDate;
     private RString yokaigodo;
     private RString yukoKikan;
-    private RString chosaIraiDate;
+    private TextBoxFlexibleDate chosaIraiDate;
     private RString ninteichosaItakusakiCode;
     private RString ninteichosaItakusakiName;
     private RString ninteiChosainCode;
@@ -38,13 +39,13 @@ public class dgNinteiChosaIrai_Row extends DataRow {
     public dgNinteiChosaIrai_Row() {
         super();
         this.no = RString.EMPTY;
-        this.ninteiShinseiDate = RString.EMPTY;
+        this.ninteiShinseiDate = new TextBoxFlexibleDate();
         this.shinseiKubun = RString.EMPTY;
-        this.shinseiTorikeshiDate = RString.EMPTY;
-        this.ninteiDate = RString.EMPTY;
+        this.shinseiTorikeshiDate = new TextBoxFlexibleDate();
+        this.ninteiDate = new TextBoxFlexibleDate();
         this.yokaigodo = RString.EMPTY;
         this.yukoKikan = RString.EMPTY;
-        this.chosaIraiDate = RString.EMPTY;
+        this.chosaIraiDate = new TextBoxFlexibleDate();
         this.ninteichosaItakusakiCode = RString.EMPTY;
         this.ninteichosaItakusakiName = RString.EMPTY;
         this.ninteiChosainCode = RString.EMPTY;
@@ -65,7 +66,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgNinteiChosaIrai_Row(RString no, RString ninteiShinseiDate, RString shinseiKubun, RString shinseiTorikeshiDate, RString ninteiDate, RString yokaigodo, RString yukoKikan, RString chosaIraiDate, RString ninteichosaItakusakiCode, RString ninteichosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString rirekiNo) {
+    public dgNinteiChosaIrai_Row(RString no, TextBoxFlexibleDate ninteiShinseiDate, RString shinseiKubun, TextBoxFlexibleDate shinseiTorikeshiDate, TextBoxFlexibleDate ninteiDate, RString yokaigodo, RString yukoKikan, TextBoxFlexibleDate chosaIraiDate, RString ninteichosaItakusakiCode, RString ninteichosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString rirekiNo) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
@@ -99,7 +100,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         return no;
     }
 
-    public RString getNinteiShinseiDate() {
+    public TextBoxFlexibleDate getNinteiShinseiDate() {
         return ninteiShinseiDate;
     }
 
@@ -107,11 +108,11 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         return shinseiKubun;
     }
 
-    public RString getShinseiTorikeshiDate() {
+    public TextBoxFlexibleDate getShinseiTorikeshiDate() {
         return shinseiTorikeshiDate;
     }
 
-    public RString getNinteiDate() {
+    public TextBoxFlexibleDate getNinteiDate() {
         return ninteiDate;
     }
 
@@ -123,7 +124,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         return yukoKikan;
     }
 
-    public RString getChosaIraiDate() {
+    public TextBoxFlexibleDate getChosaIraiDate() {
         return chosaIraiDate;
     }
 
@@ -152,7 +153,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.no = no;
     }
 
-    public void setNinteiShinseiDate(RString ninteiShinseiDate) {
+    public void setNinteiShinseiDate(TextBoxFlexibleDate ninteiShinseiDate) {
         this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
         this.ninteiShinseiDate = ninteiShinseiDate;
     }
@@ -162,12 +163,12 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.shinseiKubun = shinseiKubun;
     }
 
-    public void setShinseiTorikeshiDate(RString shinseiTorikeshiDate) {
+    public void setShinseiTorikeshiDate(TextBoxFlexibleDate shinseiTorikeshiDate) {
         this.setOriginalData("shinseiTorikeshiDate", shinseiTorikeshiDate);
         this.shinseiTorikeshiDate = shinseiTorikeshiDate;
     }
 
-    public void setNinteiDate(RString ninteiDate) {
+    public void setNinteiDate(TextBoxFlexibleDate ninteiDate) {
         this.setOriginalData("ninteiDate", ninteiDate);
         this.ninteiDate = ninteiDate;
     }
@@ -182,7 +183,7 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.yukoKikan = yukoKikan;
     }
 
-    public void setChosaIraiDate(RString chosaIraiDate) {
+    public void setChosaIraiDate(TextBoxFlexibleDate chosaIraiDate) {
         this.setOriginalData("chosaIraiDate", chosaIraiDate);
         this.chosaIraiDate = chosaIraiDate;
     }

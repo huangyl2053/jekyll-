@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.shinsakaikaisaibashojoho.IShinsakaiKaisaiBashoJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5592ShinsakaiKaisaiBashoJohoMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -53,7 +56,8 @@ public class ShinsakaiKaisaiBashoJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiBashoJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiBashoJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiBashoJohoManager}のインスタンス
      */
     public static ShinsakaiKaisaiBashoJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiBashoJohoManager.class);
@@ -161,9 +165,19 @@ public class ShinsakaiKaisaiBashoJohoManager {
     public boolean 介護認定審査会開催場所情報の削除(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
         requireNonNull(介護認定審査会開催場所情報,
                 UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報.toString()));
+        if (is介護認定審査会開催場所削除不可(介護認定審査会開催場所情報.get介護認定審査会開催場所コード())) {
+            throw new ApplicationException(DbeErrorMessages.介護認定審査会開催場所削除不可.getMessage()
+                    .replace(介護認定審査会開催場所情報.get介護認定審査会開催場所コード().toString()));
+        }
         DbT5592ShinsakaiKaisaiBashoJohoEntity dbT5592Entity = 介護認定審査会開催場所情報.toEntity();
         dbT5592Entity.setState(EntityDataState.Deleted);
         return 1 == dac.save(dbT5592Entity);
+    }
+
+    private boolean is介護認定審査会開催場所削除不可(RString 介護認定審査会開催場所コード) {
+        requireNonNull(介護認定審査会開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所コード"));
+        IShinsakaiKaisaiBashoJohoMapper mapper = mapperProvider.create(IShinsakaiKaisaiBashoJohoMapper.class);
+        return mapper.is開催場所削除不可(介護認定審査会開催場所コード);
     }
 
     /**

@@ -13,9 +13,11 @@ import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadI
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoDesignKatamenProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyoAndKihonchosaReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoKihonchosaProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoOcrKatamenProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoOcrRyomenProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Property;
@@ -153,7 +155,7 @@ public class NinteiChosaIraiPrintService {
         if (!認定調査票_概況調査List.isEmpty()) {
             list.add(ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List));
         }
-        ChosahyoGaikyochosaProperty property = new ChosahyoGaikyochosaProperty();
+        ChosahyoGaikyochosaProperty property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
         try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
             for (ChosahyoGaikyochosaReport report : list) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -179,6 +181,13 @@ public class NinteiChosaIraiPrintService {
                 report.writeBy(reportSourceWriter);
             }
         }
+        ChosahyoKihonchosaProperty kihonProperty = new ChosahyoKihonchosaProperty();
+        try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(kihonProperty, reportManager)) {
+            for (ChosahyoGaikyochosaReport report : list) {
+                ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
     }
 
     /**
@@ -187,13 +196,10 @@ public class NinteiChosaIraiPrintService {
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
      */
     public void print認定調査票OCR両面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
-        List<ChosahyoGaikyochosaReport> list = new ArrayList<>();
         if (!認定調査票_概況調査List.isEmpty()) {
-            list.add(ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List));
-        }
-        ChosahyoOcrRyomenProperty property = new ChosahyoOcrRyomenProperty();
-        try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
-            for (ChosahyoGaikyochosaReport report : list) {
+            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List);
+            ChosahyoOcrRyomenProperty property = new ChosahyoOcrRyomenProperty();
+            try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }
@@ -206,13 +212,10 @@ public class NinteiChosaIraiPrintService {
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
      */
     public void print認定調査票OCR片面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
-        List<ChosahyoGaikyochosaReport> list = new ArrayList<>();
         if (!認定調査票_概況調査List.isEmpty()) {
-            list.add(ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List));
-        }
-        ChosahyoOcrKatamenProperty property = new ChosahyoOcrKatamenProperty();
-        try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
-            for (ChosahyoGaikyochosaReport report : list) {
+            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List);
+            ChosahyoOcrKatamenProperty property = new ChosahyoOcrKatamenProperty();
+            try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }

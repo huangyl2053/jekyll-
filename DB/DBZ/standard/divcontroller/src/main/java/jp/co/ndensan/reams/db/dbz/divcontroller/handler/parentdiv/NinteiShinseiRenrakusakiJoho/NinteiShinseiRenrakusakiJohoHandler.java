@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -120,6 +122,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
             div.getBtnModoru().setDisabled(false);
             div.getBtnKakutei().setVisible(false);
             div.getBtnToroku().setVisible(false);
+            div.getBtnShinkiTsuika().setDisplayNone(true);
+            div.getBtnFukushaTsuika().setDisplayNone(true);
+            div.getBtnZenkaiFukusha().setDisplayNone(true);
         } else {
             div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.ShokaiMode);
         }
@@ -132,8 +137,10 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void setRenrakusaki(List<RenrakusakiJoho> renrakusakiJohoList) {
         List<dgRenrakusakiIchiran_Row> dateSource = new ArrayList<>();
+        TextBoxNum remban = new TextBoxNum();
         for (RenrakusakiJoho renrakusakiJoho : renrakusakiJohoList) {
-            dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(new RString(String.valueOf(renrakusakiJoho.get連番())),
+            remban.setValue(Decimal.valueOf(renrakusakiJoho.get連番()));
+            dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(remban,
                     renrakusakiJoho.get連絡先氏名() == null ? RString.EMPTY : renrakusakiJoho.
                     get連絡先氏名().getColumnValue(),
                     renrakusakiJoho.get連絡先続柄(),
@@ -159,7 +166,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void set連絡先入力情報() {
         dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
-        div.getTxtRenban().setValue(row.getRenban());
+        div.getTxtRenban().setValue(row.getRenban().getValue());
         div.getTxtShimei().setValue(row.getShimei());
     }
 
@@ -186,7 +193,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void set連絡先入力() {
         dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
-        div.getTxtRenban().setValue(row.getRenban());
+        div.getTxtRenban().setValue(row.getRenban().getValue());
         div.getTxtShimei().setValue(row.getShimei());
         div.getTxtKanaShimei().setValue(row.getKanaShimei());
         div.getTxtYubinNo().setValue(RString.isNullOrEmpty(row.getYuubinBango()) ? YubinNo.EMPTY : new YubinNo(row.getYuubinBango()));
@@ -218,7 +225,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set追加の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban().getValue(),
+        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban(),
                 nullTOEmpty(div.getTxtShimei().getValue()),
                 nullTOEmpty(RString.EMPTY),
                 nullTOEmpty(div.getTxtJusho().getValue()),
@@ -236,7 +243,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set修正の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban().getValue(),
+        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban(),
                 nullTOEmpty(div.getTxtShimei().getValue()),
                 nullTOEmpty(RString.EMPTY),
                 nullTOEmpty(div.getTxtJusho().getValue()),

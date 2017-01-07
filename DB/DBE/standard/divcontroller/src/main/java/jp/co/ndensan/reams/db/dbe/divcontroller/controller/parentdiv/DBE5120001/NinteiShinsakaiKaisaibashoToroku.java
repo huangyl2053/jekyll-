@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -48,6 +50,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
 
     private static final RString 更新モード = new RString("修正");
     private static final RString 追加モード = new RString("追加");
+    private static final RString 削除モード = new RString("削除");
     private static final RString 通常 = new RString("通常");
     private static final RString デフォルト検索条件 = new RString("yuuKo");
     private static final boolean 有効 = true;
@@ -145,11 +148,13 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
-                    UrQuestionMessages.削除の確認.getMessage().evaluate());
+            RString 状態 = div.getDgKaisaibashoIchiran().getClickedItem().getJyotai();
+            Message message = 削除モード.equals(状態)
+                    ? DbzQuestionMessages.削除取消の確認.getMessage() : UrQuestionMessages.削除の確認.getMessage();
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if ((new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                || new RString(DbzQuestionMessages.削除取消の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).set開催場所一覧の削除();
             div.getBtnTsuika().setDisabled(false);

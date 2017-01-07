@@ -93,8 +93,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("RenrakusakiNyuryoku"));
             }
 
-            public txtRenban(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtRenban"));
+            public txtRenban(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRenban"));
             }
 
             public ddlRenrakusakiKubun(): UZA.DropDownList {

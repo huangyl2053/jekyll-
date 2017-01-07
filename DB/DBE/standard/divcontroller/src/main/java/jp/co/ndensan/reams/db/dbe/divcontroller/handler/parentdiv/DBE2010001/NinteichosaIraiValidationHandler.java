@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteichosaIraiValidationHandler {
 
+    private static final RString 未 = new RString("未");
     private final NinteichosaIraiDiv div;
 
     /**
@@ -49,6 +50,14 @@ public class NinteichosaIraiValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
+        } else {
+            List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
+            for (dgNinteiTaskList_Row row : selected) {
+                if (row.getJotai().equals(未)) {
+                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
+                    break;
+                }
+            }
         }
         return validationMessages;
     }
@@ -183,7 +192,8 @@ public class NinteichosaIraiValidationHandler {
         理由付き完了不可(DbzErrorMessages.理由付き完了不可, "認定調査依頼先が未確定"),
         理由付き完了不可_認定調査期限年月日(DbzErrorMessages.理由付き完了不可, "認定調査期限年月日が未設定"),
         理由付き完了不可_依頼書出力年月日(DbzErrorMessages.理由付き完了不可, "依頼書出力年月日が未設定"),
-        理由付き完了不可_調査票等出力年月日(DbzErrorMessages.理由付き完了不可, "調査票等出力年月日が未設定");
+        理由付き完了不可_調査票等出力年月日(DbzErrorMessages.理由付き完了不可, "調査票等出力年月日が未設定"),
+        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付);
 
         private final Message message;
 

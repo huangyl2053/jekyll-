@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuOptionDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +25,6 @@ public class KensakuOptionDiv extends Panel {
      */
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("btnKensaku")
-    private Button btnKensaku;
     @JsonProperty("txtMaxDisp")
     private TextBoxNum txtMaxDisp;
     @JsonProperty("ccdNinteishinseishaFinder")
@@ -54,24 +52,6 @@ public class KensakuOptionDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear = btnClear;
-    }
-
-    /*
-     * getbtnKensaku
-     * @return btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public Button getBtnKensaku() {
-        return btnKensaku;
-    }
-
-    /*
-     * setbtnKensaku
-     * @param btnKensaku btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku = btnKensaku;
     }
 
     /*

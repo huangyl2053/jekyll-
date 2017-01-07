@@ -7,24 +7,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ5100001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbz.business.core.HokenshaNinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigonintei.YouKaiGoNinTeiShinJyuKyuParameter;
-import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigonintei.YouKaiGoNinTeiShinNiTeiParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.KaigoNinteiShinseiKensakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.dgKensakuKekkaIchiran_Row;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.dgShinseiJoho_Row;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -36,13 +39,11 @@ public class KaigoNinteiShinseiKensakuHandler {
 
     private final KaigoNinteiShinseiKensakuDiv div;
 
-    private final RString 施設入所_あり = new RString("key0");
-    private static final RString 戻るボタン = new RString("btnCommonModoru");
-    private static final RString 再検索 = new RString("btnResearch");
-    private static final RString 検索 = new RString("btnSearch");
-    private static final RString 検索状態 = new RString("検索状態");
-    private static final RString MINASHI_FLAG_KEY = new RString("True");
-    private static final long NUM = 100L;
+    private static final RString 戻るボタン = new RString("btnBack");
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
+    private static final RString KEY2 = new RString("key2");
+    private static final RString KEY3 = new RString("key3");
 
     /**
      * コンストラクタです。
@@ -56,454 +57,745 @@ public class KaigoNinteiShinseiKensakuHandler {
     /**
      * 画面初期化処理。
      *
+     * @param 検索制御_最大取得件数上限 検索制御_最大取得件数上限
+     * @param 検索制御_最大取得件数 検索制御_最大取得件数
+     * @param is戻るボタン表示 戻るボタン表示可否
+     * @param isクリアボタン表示 クリアボタン表示可否
+     * @param is最大取得件数表示 最大取得件数表示可否
      */
-    public void initialize() {
-        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().setMode_MinashiType(NinteiShinseishaFinderDiv.MinashiType.NotMinashi);
-        div.getCcdNinteiShinseishaFinder().initialize();
-        div.getTxtMaxKensu().setValue(Decimal.valueOf(NUM));
+    public void initialize(
+            Decimal 検索制御_最大取得件数上限,
+            Decimal 検索制御_最大取得件数,
+            boolean is戻るボタン表示,
+            boolean isクリアボタン表示,
+            boolean is最大取得件数表示) {
+        div.getTxtMaxDisp().setMaxValue(検索制御_最大取得件数上限);
+        div.getTxtMaxDisp().setValue(検索制御_最大取得件数);
+        List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
+        div.getDgShinseiJoho().setDataSource(dataSource);
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るボタン, !is戻るボタン表示);
+        div.getBtnClear().setDisplayNone(isクリアボタン表示);
+        div.getTxtMaxDisp().setDisplayNone(is最大取得件数表示);
     }
 
     /**
-     * 状態の設定。
-     *
-     * @param 受給認定 GyomuBunrui
-     * @param 状態フラグ RString
+     * 申請一覧Gridをクリアします。
      */
-    public void setJyoTai(GyomuBunrui 受給認定, RString 状態フラグ) {
-
-        if (GyomuBunrui.介護事務.equals(受給認定)) {
-
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るボタン, true);
-        }
-        if (検索状態.equals(状態フラグ)) {
-
-            div.getKensakuKekka().setDisplayNone(false);
-            div.getCcdNinteiShinseishaFinder().setDisplayNone(true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索, false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索, true);
-        } else {
-
-            div.getKensakuKekka().setDisplayNone(true);
-            div.getCcdNinteiShinseishaFinder().setDisplayNone(false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(再検索, true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(検索, false);
-        }
+    public void clearSearchResult() {
+        div.getDgShinseiJoho().setDataSource(new ArrayList<dgShinseiJoho_Row>());
     }
 
     /**
-     * 介護認定申請情報受給にグリッドを設定します。
+     * 申請一覧Gridにデータを設定します。
      *
-     * @param 介護認定申請情報受給 介護認定申請情報受給
+     * @param searchResult 検索結果
      */
-    public void 介護認定申請情報受給_グリッドの設定(SearchResult<HokenshaNinteiShinseiJoho> 介護認定申請情報受給) {
-
-        List<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiranList = new ArrayList();
-        int 検索件数 = 0;
-        if (div.getTxtMaxKensu().getValue() != null) {
-            検索件数 = div.getTxtMaxKensu().getValue().intValue();
-        }
-        if (!介護認定申請情報受給.records().isEmpty()) {
-
-            int rowSize;
-            if (介護認定申請情報受給.records().size() < 検索件数) {
-                rowSize = 介護認定申請情報受給.records().size();
-            } else {
-                rowSize = 検索件数;
+    public void bindSearchResult(SearchResult<ShinseiKensakuBusiness> searchResult) {
+        List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
+        for (ShinseiKensakuBusiness business : searchResult.records()) {
+            dgShinseiJoho_Row row = new dgShinseiJoho_Row();
+            row.setHokensha(nullToEmpty(business.get市町村名称()));
+            row.setHihokenshaNo(nullToEmpty(business.get被保険者番号()));
+            AtenaMeisho 被保険者氏名 = business.get被保険者氏名();
+            if (被保険者氏名 != null) {
+                row.setShimei(nullToEmpty(被保険者氏名.getColumnValue()));
             }
-            for (int i = 0; i < rowSize; i++) {
-
-                HokenshaNinteiShinseiJoho shinseiJoho = 介護認定申請情報受給.records().get(i);
-                dgKensakuKekkaIchiran_Row dgJigyoshaItiran = new dgKensakuKekkaIchiran_Row();
-                dgJigyoshaItiran.setHihokenshaNo(nullTOEmpty(shinseiJoho.get被保険者番号()));
-                if (shinseiJoho.get被保険者氏名() != null) {
-                    dgJigyoshaItiran.setShimei(nullTOEmpty(shinseiJoho.get被保険者氏名().value()));
-                }
-                dgJigyoshaItiran.setHihokenshaKubun(shinseiJoho.get被保険者区分コード());
-                RString 性別 = RString.EMPTY;
-                if (Seibetsu.男.getコード().
-                        equals(shinseiJoho.get性別().value())) {
-                    性別 = Seibetsu.男.get名称();
-                } else if (Seibetsu.女.getコード().
-                        equals(shinseiJoho.get性別().value())) {
-                    性別 = Seibetsu.女.get名称();
-                }
-                dgJigyoshaItiran.setSeibetsu(性別);
-                if (shinseiJoho.get生年月日() != null
-                        && !shinseiJoho.get生年月日().isEmpty()) {
-                    dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報受給.
-                            records().get(i).get生年月日().toString()));
-                }
-                if (shinseiJoho.get郵便番号() != null) {
-                    dgJigyoshaItiran.setYubinNo(shinseiJoho.get郵便番号().value());
-                }
-                if (shinseiJoho.get住所() != null) {
-                    dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
-                }
-                if (shinseiJoho.get申請書管理番号() != null
-                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
-                    dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
-                }
-                dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
+            FlexibleDate 生年月日 = business.get生年月日();
+            if (生年月日 != null && !生年月日.isEmpty()) {
+                TextBoxDate hihokenshaBirthDay = new TextBoxDate();
+                hihokenshaBirthDay.setValue(new RDate(生年月日.toString()));
+                row.setHihokenshaBirthDay(hihokenshaBirthDay);
             }
-            DataGridSetting dataGrid = div.getDgKensakuKekkaIchiran().getGridSetting();
-            dataGrid.setLimitRowCount(検索件数);
-            dataGrid.setSelectedRowCount(介護認定申請情報受給.totalCount());
-            div.getDgKensakuKekkaIchiran().setGridSetting(dataGrid);
-            div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
-            setClearbtnAndMaxkensuDisplayNone(true);
-        } else {
-            div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
-        }
-    }
-
-    /**
-     * 介護認定申請情報認定にグリッドを設定します。
-     *
-     * @param 介護認定申請情報認定 介護認定申請情報認定
-     */
-    public void 介護認定申請情報認定_グリッドの設定(SearchResult<NinteiShinseiJoho> 介護認定申請情報認定) {
-
-        List<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiranList = new ArrayList();
-        int 検索件数 = 0;
-        if (div.getTxtMaxKensu().getValue() != null) {
-            検索件数 = div.getTxtMaxKensu().getValue().intValue();
-        }
-        if (!介護認定申請情報認定.records().isEmpty()) {
-
-            int rowSize;
-            if (介護認定申請情報認定.records().size() < 検索件数) {
-                rowSize = 介護認定申請情報認定.records().size();
-            } else {
-                rowSize = 検索件数;
+            row.getHihokenshaNenrei().setValue(new Decimal(business.get年齢()));
+            Code 性別 = business.get性別();
+            if (性別 != null) {
+                row.setHihokenshaSeibetsu(Seibetsu.toValue(性別.value()).get名称());
             }
-            for (int i = 0; i < rowSize; i++) {
-
-                NinteiShinseiJoho shinseiJoho = 介護認定申請情報認定.records().get(i);
-                dgKensakuKekkaIchiran_Row dgJigyoshaItiran = new dgKensakuKekkaIchiran_Row();
-                dgJigyoshaItiran.setHihokenshaNo(nullTOEmpty(shinseiJoho.get被保険者番号()));
-                if (shinseiJoho.get被保険者氏名() != null) {
-                    dgJigyoshaItiran.setShimei(nullTOEmpty(shinseiJoho.get被保険者氏名().value()));
-                }
-                dgJigyoshaItiran.setHihokenshaKubun(shinseiJoho.get被保険者区分コード());
-                RString 性別 = RString.EMPTY;
-                if (Seibetsu.男.getコード().toString().
-                        equals(shinseiJoho.get性別().toString())) {
-                    性別 = Seibetsu.男.get名称();
-                } else if (Seibetsu.女.getコード().toString().
-                        equals(shinseiJoho.get性別().toString())) {
-                    性別 = Seibetsu.女.get名称();
-                }
-                dgJigyoshaItiran.setSeibetsu(性別);
-                if (shinseiJoho.get生年月日() != null
-                        && !shinseiJoho.get生年月日().isEmpty()) {
-                    dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報認定.
-                            records().get(i).get生年月日().toString()));
-                }
-                if (shinseiJoho.get郵便番号() != null) {
-                    dgJigyoshaItiran.setYubinNo(shinseiJoho.get郵便番号().value());
-                }
-                if (shinseiJoho.get住所() != null) {
-                    dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
-                }
-                if (shinseiJoho.get申請書管理番号() != null
-                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
-                    dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
-                }
-                dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
+            FlexibleDate 認定申請年月日 = business.get認定申請年月日();
+            if (認定申請年月日 != null && !認定申請年月日.isEmpty()) {
+                TextBoxDate shinseiDay = new TextBoxDate();
+                shinseiDay.setValue(new RDate(認定申請年月日.toString()));
+                row.setShinseiDay(shinseiDay);
             }
-            DataGridSetting dataGrid = div.getDgKensakuKekkaIchiran().getGridSetting();
-            dataGrid.setLimitRowCount(検索件数);
-            dataGrid.setSelectedRowCount(介護認定申請情報認定.totalCount());
-            div.getDgKensakuKekkaIchiran().setGridSetting(dataGrid);
-            div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
-            setClearbtnAndMaxkensuDisplayNone(true);
-        } else {
-
-            div.getDgKensakuKekkaIchiran().setDataSource(dgKensakuKekkaIchiranList);
+            Code 申請時_コード = business.get認定申請区分_申請時_コード();
+            if (申請時_コード != null) {
+                row.setShinseikubunshinseiji(NinteiShinseiShinseijiKubunCode.toValue(申請時_コード.value()).get名称());
+            }
+            YubinNo 郵便番号 = business.get郵便番号();
+            if (郵便番号 != null) {
+                row.setYubinno(郵便番号.getEditedYubinNo());
+            }
+            TelNo 電話番号 = business.get電話番号();
+            if (電話番号 != null) {
+                row.setTelno(電話番号.value());
+            }
+            AtenaJusho 住所 = business.get住所();
+            if (住所 != null) {
+                row.setJyusho(住所.getColumnValue());
+            }
+            ShinseishoKanriNo 申請書管理番号 = business.get申請書管理番号();
+            if (申請書管理番号 != null) {
+                row.setShinseishoKanriNo(申請書管理番号.value());
+            }
+            row.setShoKisaiHokenshaNo(nullToEmpty(business.get証記載保険者番号()));
+            row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
+            row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
+            dataSource.add(row);
         }
+        div.getDgShinseiJoho().setDataSource(dataSource);
+        div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大表示件数());
+        div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
     }
 
     /**
-     * 介護認定申請情報受給Parameterの設定。
+     * 一覧上の先頭レコードを返します。
      *
-     * @return YouKaiGoNinTeiShinParameter 介護認定申請情報受給Parameter
+     * @return 先頭レコード
      */
-    public YouKaiGoNinTeiShinJyuKyuParameter 介護認定申請情報受給Parameter() {
-
-        int 認定有効期間 = 0;
-        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv();
-        if (!RString.isNullOrEmpty(finderDiv.
-                getTxtZenkaiNinteiYukoKikan().getValue())) {
-            認定有効期間 = Integer.valueOf(finderDiv.
-                    getTxtZenkaiNinteiYukoKikan().getValue().toString());
+    public dgShinseiJoho_Row get先頭レコード() {
+        if (div.getDgShinseiJoho().getDataSource().isEmpty()) {
+            return null;
         }
-        int 検索件数 = 0;
-        if (div.getTxtMaxKensu().getValue() != null) {
-            検索件数 = div.getTxtMaxKensu().getValue().intValue();
-        }
-        return YouKaiGoNinTeiShinJyuKyuParameter.
-                createParam_受給(
-                        finderDiv.getTxtHihokenshaNumber().getValue(),
-                        finderDiv.getDdlHokenshaNumber().
-                        getSelectedItem().get証記載保険者番号().value(),
-                        finderDiv.getDdlShichosonCode().getSelectedKey(),
-                        finderDiv.getTxtHihokenshaName().getValue(),
-                        finderDiv.getDdlHihokenshaNameMatchType().getSelectedKey(),
-                        !finderDiv.getChkMinashiFlag().getSelectedKeys().isEmpty(),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiShinseiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiShinseiDateRange().getToValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtBirthDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtBirthDateRange().getToValue()),
-                        new Code(finderDiv.getDdlShinseijiShinseiKubun().getSelectedKey()),
-                        性別男の取得(),
-                        性別女の取得(),
-                        finderDiv.getDdlHihokenshaKubun().getSelectedKey(),
-                        new Code(finderDiv.getDdlHoreiShinseiji().getSelectedKey()),
-                        new Code(finderDiv.getDdlShoriKubun().getSelectedKey()),
-                        finderDiv.getTxtYubinNo().getValue(),
-                        new ChikuCode(finderDiv.getDdlChiku().getSelectedKey()),
-                        is入所施設あり(),
-                        //TODO n8178 城間　認定申請検索修正のために追加した条件が受給に絡むのか不明。必要であれば受給側のパラメータを修正して、以下のフラグを渡すこと
-                        //is入所施設条件無視(),
-                        finderDiv.getTxtNinteiChosaItakusakiName().getValue(),
-                        finderDiv.getTxtNinteiChosainName().getValue(),
-                        new Code(finderDiv.getDdlChosaJisshiBasho().getSelectedKey()),
-                        new Code(finderDiv.getDdlChosaKubun().getSelectedKey()),
-                        rdateToFlexibleDate(finderDiv.getTxtChosaJisshiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtChosaJisshiDateRange().getToValue()),
-                        new Code(finderDiv.getDdlNinteiChosaNetakirido().getSelectedKey()),
-                        new Code(finderDiv.getDdlNinteiChosaNinchido().getSelectedKey()),
-                        finderDiv.getTxtShujiiIryokikanName().getValue(),
-                        finderDiv.getTxtShujiiName().getValue(),
-                        new Code(finderDiv.getDdlShujiIkubun().getSelectedKey()),
-                        rdateToFlexibleDate(finderDiv.getTxtIkenshoKinyuDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtIkenshoKinyuDateRange().getToValue()),
-                        finderDiv.getDdlShujiJohoNetakirido().getSelectedKey(),
-                        finderDiv.getDdlShujiJohoNinchido().getSelectedKey(),
-                        rdateToFlexibleDate(finderDiv.getTxtIchijiHanteiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtIchijiHanteiDateRange().getToValue()),
-                        new Code(finderDiv.getDdlIchijiHanteiKekka().getSelectedKey()),
-                        finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue(),
-                        finderDiv.getTxtZenkaiShujiiIryokikanName().getValue(),
-                        new Code(finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey()),
-                        認定有効期間,
-                        rdateToFlexibleDate(finderDiv.getTxtZenkaiYukoKaishiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtZenkaiYukoKaishiDateRange().getToValue()),
-                        !finderDiv.getChkTsuchiShori().getSelectedKeys().isEmpty(),
-                        検索件数);
+        return div.getDgShinseiJoho().getDataSource().get(0);
     }
 
     /**
-     * 介護認定申請情報認定Parameterの設定。
+     * 一覧上のの選択されたレコードを返します。
      *
-     * @return YouKaiGoNinTeiShinParameter 介護認定申請情報認定Parameter
+     * @return 選択レコード
      */
-    public YouKaiGoNinTeiShinNiTeiParameter 介護認定申請情報認定Parameter() {
-
-        int 認定有効期間 = 0;
-        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv();
-        if (!RString.isNullOrEmpty(finderDiv.
-                getTxtNinteiYukoKikan().getValue())) {
-            認定有効期間 = Integer.valueOf(finderDiv.
-                    getTxtNinteiYukoKikan().getValue().toString());
-        }
-        int 前回認定有効期間 = 0;
-        if (!RString.isNullOrEmpty(finderDiv.
-                getTxtZenkaiNinteiYukoKikan().getValue())) {
-            前回認定有効期間 = Integer.valueOf(finderDiv.
-                    getTxtZenkaiNinteiYukoKikan().getValue().toString());
-        }
-        int 経過日数Form = 0;
-        boolean is経過日数Form = false;
-        if (finderDiv
-                .getTxtShinseiKeikaNissu().getFromValue() != null) {
-            経過日数Form = finderDiv
-                    .getTxtShinseiKeikaNissu().getFromValue().intValue();
-            is経過日数Form = true;
-        }
-        int 経過日数To = 0;
-        boolean is経過日数To = false;
-        if (finderDiv
-                .getTxtShinseiKeikaNissu().getToValue() != null) {
-            経過日数To = finderDiv
-                    .getTxtShinseiKeikaNissu().getToValue().intValue();
-            is経過日数To = true;
-        }
-        int 検索件数 = 0;
-        if (div.getTxtMaxKensu().getValue() != null) {
-            検索件数 = div.getTxtMaxKensu().getValue().intValue();
-        }
-        return YouKaiGoNinTeiShinNiTeiParameter.
-                createParam_認定(
-                        finderDiv.getTxtHihokenshaNumber().getValue(),
-                        finderDiv.getDdlHokenshaNumber().
-                        getSelectedItem().get証記載保険者番号().value(),
-                        finderDiv.getDdlShichosonCode().getSelectedKey(),
-                        finderDiv.getTxtHihokenshaName().getValue(),
-                        finderDiv.getDdlHihokenshaNameMatchType().getSelectedKey(),
-                        !finderDiv.getChkMinashiFlag().getSelectedKeys().isEmpty(),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiShinseiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiShinseiDateRange().getToValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtBirthDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtBirthDateRange().getToValue()),
-                        new Code(finderDiv.getDdlShinseijiShinseiKubun().getSelectedKey()),
-                        性別男の取得(),
-                        性別女の取得(),
-                        finderDiv.getDdlHihokenshaKubun().getSelectedKey(),
-                        new Code(finderDiv.getDdlHoreiShinseiji().getSelectedKey()),
-                        new Code(finderDiv.getDdlShoriKubun().getSelectedKey()),
-                        finderDiv.getTxtYubinNo().getValue(),
-                        new ChikuCode(finderDiv.getDdlChiku().getSelectedKey()),
-                        is入所施設あり(),
-                        is入所施設条件無視(),
-                        finderDiv.getTxtNinteiChosaItakusakiName().getValue(),
-                        finderDiv.getTxtNinteiChosainName().getValue(),
-                        new Code(finderDiv.getDdlChosaJisshiBasho().getSelectedKey()),
-                        new Code(finderDiv.getDdlChosaKubun().getSelectedKey()),
-                        rdateToFlexibleDate(finderDiv.getTxtChosaJisshiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtChosaJisshiDateRange().getToValue()),
-                        new Code(finderDiv.getDdlNinteiChosaNetakirido().getSelectedKey()),
-                        new Code(finderDiv.getDdlNinteiChosaNinchido().getSelectedKey()),
-                        finderDiv.getTxtShujiiIryokikanName().getValue(),
-                        finderDiv.getTxtShujiiName().getValue(),
-                        new Code(finderDiv.getDdlShujiIkubun().getSelectedKey()),
-                        rdateToFlexibleDate(finderDiv.getTxtIkenshoKinyuDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtIkenshoKinyuDateRange().getToValue()),
-                        finderDiv.getDdlShujiJohoNetakirido().getSelectedKey(),
-                        finderDiv.getDdlShujiJohoNinchido().getSelectedKey(),
-                        rdateToFlexibleDate(finderDiv.getTxtIchijiHanteiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtIchijiHanteiDateRange().getToValue()),
-                        new Code(finderDiv.getDdlIchijiHanteiKekka().getSelectedKey()),
-                        rdateToFlexibleDate(finderDiv.getTxtIchiGoHanteiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtIchiGoHanteiDateRange().getToValue()),
-                        new Code(finderDiv.getDdlIchiGohanteiKekka().getSelectedKey()),
-                        new Code(finderDiv.getDdlNijiHanteiKekka().getSelectedKey()),
-                        認定有効期間,
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiYukoKaishiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiYukoKaishiDateRange().getToValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiYukoShuryoDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNinteiYukoShuryoDateRange().getToValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNijiHanteiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtNijiHanteiDateRange().getToValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtKaisaiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtKaisaiDateRange().getToValue()),
-                        finderDiv.getTxtKaisaiNumberStart().getValue(),
-                        finderDiv.getTxtKaisaiNumberEnd().getValue(),
-                        finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue(),
-                        finderDiv.getTxtZenkaiShujiiIryokikanName().getValue(),
-                        new Code(finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey()),
-                        前回認定有効期間,
-                        rdateToFlexibleDate(finderDiv.getTxtZenkaiYukoKaishiDateRange().getFromValue()),
-                        rdateToFlexibleDate(finderDiv.getTxtZenkaiYukoKaishiDateRange().getToValue()),
-                        finderDiv.getCcdGeninShikkan().getCode(),
-                        RDate.getNowDate().plusDay(経過日数Form).toFlexibleDate(),
-                        RDate.getNowDate().plusDay(経過日数To).toFlexibleDate(),
-                        !finderDiv.
-                        getChkKoshinTaishoChushutsu().getSelectedKeys().isEmpty(),
-                        new Code(NinteiShinseiYukoKubunCode.仮状態.getコード()),
-                        !finderDiv.
-                        getChkIchijiHantei().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkShinseiUketsuke().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkMasking().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkChosaIrai().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkShinsakaiToroku().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkIkenshoIrai().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkNijiHantei().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkChosaNyushu().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkIkenshoNyushu().getSelectedKeys().isEmpty(),
-                        !finderDiv.
-                        getChkGetsureiShori().getSelectedKeys().isEmpty(),
-                        検索件数,
-                        is経過日数Form,
-                        is経過日数To
-                        );
+    public dgShinseiJoho_Row get選択レコード() {
+        return div.getDgShinseiJoho().getClickedItem();
     }
 
     /**
-     * みなしフラグを選択します。
+     * 引数で渡された行を最近処理者を追加します。
      *
+     * @param row データグリッドレコード
      */
-    public void setMinashiFlagCheck() {
-        List<RString> selectedItems = new ArrayList();
-        selectedItems.add(MINASHI_FLAG_KEY);
-        div.getCcdNinteiShinseishaFinder().getNinteiShinseishaFinderDiv().getChkMinashiFlag().setSelectedItemsByKey(selectedItems);
+    public void add最近処理者(dgShinseiJoho_Row row) {
+        div.getCcdNinteishinseishaFinder().updateSaikinShorisha(
+                get選択被保険者番号(row),
+                get選択被保険者氏名(row));
+        div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
     }
 
     /**
-     * 「条件をクリアする」ボタンと最大表示件数の表示かを設定します。
+     * 引数で与えられたデータグリッドレコードの申請書管理番号を返します。
      *
-     * @param flag 表示フラグ
+     * @param row データグリッドレコード
+     * @return 申請書管理番号
      */
-    public void setClearbtnAndMaxkensuDisplayNone(boolean flag) {
-        div.getBtnJokenClear().setDisplayNone(flag);
-        div.getTxtMaxKensu().setDisplayNone(flag);
-    }
-    
-    private FlexibleDate rdateToFlexibleDate(RDate date) {
-        if (date != null) {
-            return date.toFlexibleDate();
-        } 
-        return FlexibleDate.EMPTY;
+    public static RString get選択申請書管理番号(dgShinseiJoho_Row row) {
+        return row.getShinseishoKanriNo();
+
     }
 
-    private RString nullTOEmpty(RString 項目) {
-        if (項目 == null || 項目.isEmpty()) {
+    /**
+     * 引数で与えられたデータグリッドレコードの被保険者番号を返します。
+     *
+     * @param row データグリッドレコード
+     * @return 被保険者番号
+     */
+    public static RString get選択被保険者番号(dgShinseiJoho_Row row) {
+        return row.getHihokenshaNo();
+
+    }
+
+    /**
+     * 引数で与えられたデータグリッドレコードの被保険者番号を返します。
+     *
+     * @param row データグリッドレコード
+     * @return 氏名
+     */
+    public static RString get選択被保険者氏名(dgShinseiJoho_Row row) {
+        return row.getShimei();
+
+    }
+
+    private int get最大表示件数() {
+        return Integer.parseInt(div.getTxtMaxDisp().getValue().toString());
+    }
+
+    private RString nullToEmpty(RString obj) {
+        if (obj == null) {
             return RString.EMPTY;
+        } else {
+            return obj;
         }
-        return 項目;
     }
 
-    private Code 性別男の取得() {
-
-        RString 性別_男 = RString.EMPTY;
-        for (RString seibetsu : div.getCcdNinteiShinseishaFinder().
-                getNinteiShinseishaFinderDiv().getChkSeibetsu().getSelectedValues()) {
-            if (Seibetsu.男.get名称().equals(seibetsu)) {
-                性別_男 = Seibetsu.男.getコード();
-            }
-        }
-        return new Code(性別_男);
+    public ShinseiKensakuMapperParameter createMapperParameter() {
+        ShinseiKensakuMapperParameter result = new ShinseiKensakuMapperParameter();
+        result.setLimitCount(get最大表示件数());
+        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
+        editShosaiJokenForParameter(finderDiv, result, finderDiv.getTxtHihokenshaNumber().getValue());
+        editNinteiChosaForParameter(finderDiv, result);
+        editShujiiJohoForParameter(finderDiv, result);
+        editShinsakaiJohoForParameter(finderDiv, result);
+        editZenkaiJohoForParameter(finderDiv, result);
+        editNowPhaseForParameter(finderDiv, result);
+        editChkForParameter(finderDiv, result);
+        return result;
     }
 
-    private Code 性別女の取得() {
-
-        RString 性別_女 = RString.EMPTY;
-        for (RString seibetsu : div.getCcdNinteiShinseishaFinder().
-                getNinteiShinseishaFinderDiv().getChkSeibetsu().getSelectedValues()) {
-            if (Seibetsu.女.get名称().equals(seibetsu)) {
-                性別_女 = Seibetsu.女.getコード();
-            }
-        }
-        return new Code(性別_女);
+    public ShinseiKensakuMapperParameter createMapperParameter最近処理者() {
+        ShinseiKensakuMapperParameter result = new ShinseiKensakuMapperParameter();
+        result.setLimitCount(get最大表示件数());
+        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
+        editShosaiJokenForParameter(finderDiv, result, finderDiv.getSaikinShorishaDiv().getSelectedHihokenshaNo());
+        editNinteiChosaForParameter(finderDiv, result);
+        editShujiiJohoForParameter(finderDiv, result);
+        editShinsakaiJohoForParameter(finderDiv, result);
+        editZenkaiJohoForParameter(finderDiv, result);
+        editNowPhaseForParameter(finderDiv, result);
+        editChkForParameter(finderDiv, result);
+        return result;
     }
 
-    private boolean is入所施設あり() {
-        List<RString> 施設入所の有無List = div.getCcdNinteiShinseishaFinder().
-                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().getSelectedKeys();
-        boolean isAllSelectableOrNoSelected = div.getCcdNinteiShinseishaFinder().
-                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().isAllSelected() || 施設入所の有無List.isEmpty();
+    private void editShinsakaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useNinteiKekkaJoho = false;
+        RString 二次判定要介護状態区分コード = finderDiv.getDdlNijiHanteiKekka().getSelectedKey();
+        if (!RString.isNullOrEmpty(二次判定要介護状態区分コード)) {
+            parameter.setNijiHanteiYokaigoJotaiKubun(二次判定要介護状態区分コード);
+            parameter.setUseNijiHanteiYokaigoJotaiKubun(true);
+            useNinteiKekkaJoho = true;
+        }
+        RString 認定有効期間 = finderDiv.getTxtNinteiYukoKikan().getValue();
+        if (!RString.isNullOrEmpty(認定有効期間)) {
+            parameter.setNijiHanteiNinteiYukoKikan(Integer.parseInt(認定有効期間.toString()));
+            parameter.setUseNijiHanteiNinteiYukoKikan(true);
+            useNinteiKekkaJoho = true;
+        }
+        RDate 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
+        if (認定有効な申請時点 != null) {
+            parameter.setYokaiYMD(認定有効な申請時点.toDateString());
+            parameter.setUseYokaiYMD(true);
+            useNinteiKekkaJoho = true;
+        }
+        RDate 認定有効開始日FROM = finderDiv.getTxtNinteiYukoKaishiDateRange().getFromValue();
+        if (認定有効開始日FROM != null) {
+            parameter.setNinteiYukoKaishiYMDFrom(認定有効開始日FROM.toFlexibleDate());
+            parameter.setUseNinteiYukoKaishiYMDFrom(true);
+            useNinteiKekkaJoho = true;
+        }
+        RDate 認定有効開始日To = finderDiv.getTxtNinteiYukoKaishiDateRange().getToValue();
+        if (認定有効開始日To != null) {
+            parameter.setNinteiYukoKaishiYMDTo(認定有効開始日To.toFlexibleDate());
+            parameter.setUseNinteiYukoKaishiYMDTo(true);
+            useNinteiKekkaJoho = true;
+        }
+
+        RDate 認定有効終了日FROM = finderDiv.getTxtNinteiYukoShuryoDateRange().getFromValue();
+        if (認定有効終了日FROM != null) {
+            parameter.setNinteiYukoShuryoYMDFrom(認定有効終了日FROM.toFlexibleDate());
+            parameter.setUseNinteiYukoShuryoYMDFrom(true);
+            useNinteiKekkaJoho = true;
+        }
+        RDate 認定有効終了日To = finderDiv.getTxtNinteiYukoShuryoDateRange().getToValue();
+        if (認定有効終了日To != null) {
+            parameter.setNinteiYukoShuryoYMDTo(認定有効終了日To.toFlexibleDate());
+            parameter.setUseNinteiYukoShuryoYMDTo(true);
+            useNinteiKekkaJoho = true;
+        }
+        RDate 二次判定日FROM = finderDiv.getTxtNijiHanteiDateRange().getFromValue();
+        if (二次判定日FROM != null) {
+            parameter.setNijiHanteiYMDFrom(二次判定日FROM.toFlexibleDate());
+            parameter.setUseNijiHanteiYMDFrom(true);
+            useNinteiKekkaJoho = true;
+        }
+        RDate 二次判定日To = finderDiv.getTxtNijiHanteiDateRange().getToValue();
+        if (二次判定日To != null) {
+            parameter.setNijiHanteiYMDTo(二次判定日To.toFlexibleDate());
+            parameter.setUseNijiHanteiYMDTo(true);
+            useNinteiKekkaJoho = true;
+        }
+        RString 開催番号FROM = finderDiv.getTxtKaisaiNumberStart().getValue();
+        if (!RString.isNullOrEmpty(開催番号FROM)) {
+            parameter.setShinsakaiKaisaiNoFrom(開催番号FROM);
+            parameter.setUseShinsakaiKaisaiNoFrom(true);
+            useNinteiKekkaJoho = true;
+        }
+        RString 開催番号To = finderDiv.getTxtKaisaiNumberEnd().getValue();
+        if (!RString.isNullOrEmpty(開催番号To)) {
+            parameter.setShinsakaiKaisaiNoTo(開催番号To);
+            parameter.setUseShinsakaiKaisaiNoTo(true);
+            useNinteiKekkaJoho = true;
+        }
+
+        parameter.setUseNinteiKekkaJoho(useNinteiKekkaJoho);
+        editKaisaiDateForParameter(finderDiv, parameter);
+    }
+
+    private void editKaisaiDateForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useShinsakaiKaisaiKekkaJoho = false;
+        RDate 開催日FROM = finderDiv.getTxtKaisaiDateRange().getFromValue();
+        if (開催日FROM != null) {
+            parameter.setShinsakaiKaisaiYMDFrom(開催日FROM.toFlexibleDate());
+            parameter.setUseShinsakaiKaisaiYMDFrom(true);
+            useShinsakaiKaisaiKekkaJoho = true;
+        }
+        RDate 開催日To = finderDiv.getTxtKaisaiDateRange().getToValue();
+        if (開催日To != null) {
+            parameter.setShinsakaiKaisaiYMDTo(開催日To.toFlexibleDate());
+            parameter.setUseShinsakaiKaisaiYMDTo(true);
+            useShinsakaiKaisaiKekkaJoho = true;
+        }
+        parameter.setUseShinsakaiKaisaiKekkaJoho(useShinsakaiKaisaiKekkaJoho);
+    }
+
+    private void editZenkaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        RString 前回認定調査委託先 = finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue();
+        if (!RString.isNullOrEmpty(前回認定調査委託先)) {
+            parameter.setZenkaiNinteiChosaItakusaki(finderDiv.getHdnZenkaiChosaItakusakiCode());
+            parameter.setUseZenkaiNinteiChosaItakusaki(true);
+        }
+        RString 前回主治医医療機関 = finderDiv.getTxtZenkaiShujiiIryokikanName().getValue();
+        if (!RString.isNullOrEmpty(前回主治医医療機関)) {
+            parameter.setZenkaiShujiiIryokikanCode(finderDiv.getHdnZenkaiShujiiIryokikanCode());
+            parameter.setUseZenkaiShujiiIryokikanCode(true);
+        }
+
+        RString 前回二次判定結果コード = finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey();
+        if (!RString.isNullOrEmpty(前回二次判定結果コード)) {
+            parameter.setZenkaiJotaiKubunCode(前回二次判定結果コード);
+            parameter.setUseZenkaiJotaiKubunCode(true);
+        }
+
+        RString 前回認定有効期間 = finderDiv.getTxtZenkaiNinteiYukoKikan().getValue();
+        if (!RString.isNullOrEmpty(前回認定有効期間)) {
+            parameter.setZenkaiYukoKikan(Integer.parseInt(前回認定有効期間.toString()));
+            parameter.setUseZenkaiYukoKikan(true);
+        }
+
+        RDate 設定有効開始日FROM = finderDiv.getTxtZenkaiYukoKaishiDateRange().getFromValue();
+        if (設定有効開始日FROM != null) {
+            parameter.setZenkaiYukoKikanStartFrom(設定有効開始日FROM.toFlexibleDate());
+            parameter.setUseZenkaiYukoKikanStartFrom(true);
+        }
+        RDate 設定有効開始日To = finderDiv.getTxtZenkaiYukoKaishiDateRange().getToValue();
+        if (設定有効開始日To != null) {
+            parameter.setZenkaiYukoKikanStartTo(設定有効開始日To.toFlexibleDate());
+            parameter.setUseZenkaiYukoKikanStartTo(true);
+        }
+        RString 原因疾患 = finderDiv.getCcdGeninShikkan().getCode().value();
+        if (!RString.isNullOrEmpty(原因疾患)) {
+            parameter.setGeninShikkanCode(原因疾患);
+            parameter.setUseGeninShikkanCode(true);
+            parameter.setUseGeninShikkan(true);
+        }
+        Decimal 申請経過日数FROM = finderDiv.getTxtShinseiKeikaNissu().getFromValue();
+        FlexibleDate nowDate = FlexibleDate.getNowDate();
+        if (申請経過日数FROM != null) {
+            parameter.setShinseiKeikaDaysForm(nowDate.minusDay(申請経過日数FROM.intValue()));
+            parameter.setUseShinseiKeikaDaysForm(true);
+        }
+        Decimal 申請経過日数To = finderDiv.getTxtShinseiKeikaNissu().getToValue();
+        if (申請経過日数To != null) {
+            parameter.setShinseiKeikaDaysTo(nowDate.minusDay(申請経過日数To.intValue()));
+            parameter.setUseShinseiKeikaDaysTo(true);
+        }
+    }
+
+    private void editShujiiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        RString 主治医医療機関 = finderDiv.getTxtShujiiIryokikanName().getValue();
+        if (!RString.isNullOrEmpty(主治医医療機関)) {
+            parameter.setShujiiIryokikanCode(finderDiv.getHdnShujiiIryokikanCode());
+            parameter.setUseShujiiIryokikanCode(true);
+            parameter.setShujiiShichosonCode(finderDiv.getHdnShujiiShichosonCode());
+            parameter.setUseShujiiShichosonCode(true);
+        }
+        RString 主治医氏名 = finderDiv.getTxtShujiiName().getValue();
+        if (!RString.isNullOrEmpty(主治医氏名)) {
+            parameter.setShujiiCode(finderDiv.getHdnShujiiCode());
+            parameter.setUseShujiiCode(true);
+        }
+
+        RString 医師区分コード = finderDiv.getDdlShujiIkubun().getSelectedKey();
+        if (!RString.isNullOrEmpty(医師区分コード)) {
+            parameter.setIshiKubunCode(医師区分コード);
+            parameter.setUseIshiKubunCode(true);
+            parameter.setUseShujiiIkenshoIraiJoho(true);
+        }
+        boolean useShujiiIkenshoJoho = false;
+        RDate 意見書受領日FROM = finderDiv.getTxtIkenshoKinyuDateRange().getFromValue();
+        if (意見書受領日FROM != null) {
+            parameter.setIkenshoJuryoYMDFrom(意見書受領日FROM.toFlexibleDate());
+            parameter.setUseIkenshoJuryoYMDFrom(true);
+            useShujiiIkenshoJoho = true;
+        }
+        RDate 意見書受領日To = finderDiv.getTxtIkenshoKinyuDateRange().getToValue();
+        if (意見書受領日To != null) {
+            parameter.setIkenshoJuryoYMDTo(意見書受領日To.toFlexibleDate());
+            useShujiiIkenshoJoho = true;
+        }
+        parameter.setUseShujiiIkenshoJoho(useShujiiIkenshoJoho);
+        boolean useShujiiIkenshoIkenItem = false;
+        RString 意見項目13 = finderDiv.getDdlShujiJohoNetakirido().getSelectedKey();
+        if (!RString.isNullOrEmpty(意見項目13)) {
+            parameter.setIkenItem13(意見項目13);
+            parameter.setUseIkenItem13(true);
+            useShujiiIkenshoIkenItem = true;
+        }
+        RString 意見項目14 = finderDiv.getDdlShujiJohoNinchido().getSelectedKey();
+        if (!RString.isNullOrEmpty(意見項目14)) {
+            parameter.setIkenItem14(意見項目14);
+            parameter.setUseIkenItem14(true);
+            useShujiiIkenshoIkenItem = true;
+        }
+        parameter.setUseShujiiIkenshoIkenItem(useShujiiIkenshoIkenItem);
+        boolean useIchijiHanteiKekkaJoho = false;
+        RDate 一次判定日FROM = finderDiv.getTxtIchijiHanteiDateRange().getFromValue();
+        if (一次判定日FROM != null) {
+            parameter.setIchijiHanteiYMDFrom(一次判定日FROM.toFlexibleDate());
+            parameter.setUseIchijiHanteiYMDFrom(true);
+            useIchijiHanteiKekkaJoho = true;
+        }
+        RDate 一次判定日To = finderDiv.getTxtIchijiHanteiDateRange().getToValue();
+        if (一次判定日To != null) {
+            parameter.setIchijiHanteiYMDTo(一次判定日To.toFlexibleDate());
+            parameter.setUseIchijiHanteiYMDTo(true);
+            useIchijiHanteiKekkaJoho = true;
+        }
+        RString 一次判定結果コード = finderDiv.getDdlIchijiHanteiKekka().getSelectedKey();
+        if (!RString.isNullOrEmpty(一次判定結果コード)) {
+            parameter.setIchijiHanteiKekkaCode(一次判定結果コード);
+            parameter.setUseIchijiHanteiKekkaCode(true);
+            useIchijiHanteiKekkaJoho = true;
+        }
+        parameter.setUseIchijiHanteiKekkaJoho(useIchijiHanteiKekkaJoho);
+        editIchiGohanteiForParameter(finderDiv, parameter);
+    }
+
+    private void editIchiGohanteiForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useIchiGojiHanteiKekkaJoho = false;
+        RDate ichiGoHanteiDateFrom = finderDiv.getTxtIchiGoHanteiDateRange().getFromValue();
+        if (ichiGoHanteiDateFrom != null) {
+            parameter.setIchiGojiHanteiYMDFrom(ichiGoHanteiDateFrom.toFlexibleDate());
+            parameter.setUseIchiGojiHanteiYMDFrom(true);
+            useIchiGojiHanteiKekkaJoho = true;
+        }
+        RDate ichiGoHanteiDateTo = finderDiv.getTxtIchiGoHanteiDateRange().getToValue();
+        if (ichiGoHanteiDateTo != null) {
+            parameter.setIchiGojiHanteiYMDTo(ichiGoHanteiDateTo.toFlexibleDate());
+            parameter.setUseIchiGojiHanteiYMDTo(true);
+            useIchiGojiHanteiKekkaJoho = true;
+        }
+        RString ichiGohanteiKekka = finderDiv.getDdlIchiGohanteiKekka().getSelectedKey();
+        if (!RString.isNullOrEmpty(ichiGohanteiKekka)) {
+            parameter.setIchiGojiHanteiKekkaCode(ichiGohanteiKekka);
+            parameter.setUseIchiGojiHanteiKekkaCode(true);
+            useIchiGojiHanteiKekkaJoho = true;
+        }
+        parameter.setUseIchiGojiHanteiKekkaJoho(useIchiGojiHanteiKekkaJoho);
+    }
+
+    private void editNinteiChosaForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        RString 被保険者区分コード = finderDiv.getDdlHihokenshaKubun().getSelectedKey();
+        if (!RString.isNullOrEmpty(被保険者区分コード)) {
+            parameter.setHihokenshaKubunCode(被保険者区分コード);
+            parameter.setUseHihokenshaKubunCode(true);
+        }
+        RString 認定申請区分法令コード = finderDiv.getDdlHoreiShinseiji().getSelectedKey();
+        if (!RString.isNullOrEmpty(認定申請区分法令コード)) {
+            parameter.setNinteiShinseiHoreiKubunCode(認定申請区分法令コード);
+            parameter.setUseNinteiShinseiHoreiKubunCode(true);
+        }
+        RString 処理状態区分 = finderDiv.getDdlShoriKubun().getSelectedKey();
+        if (!RString.isNullOrEmpty(処理状態区分)) {
+            parameter.setShoriJotaiKubun(処理状態区分);
+            parameter.setUseShoriJotaiKubun(true);
+        }
+        RString 厚労省IF識別コード = finderDiv.getDdlKoroshoShikibetsuCode().getSelectedKey();
+        if (!RString.isNullOrEmpty(厚労省IF識別コード)) {
+            parameter.setKoroshoIfShikibetsuCode(厚労省IF識別コード);
+            parameter.setUseKoroshoIfShikibetsuCode(true);
+        }
+        RString 郵便番号 = finderDiv.getTxtYubinNo().getValue().value();
+        if (!RString.isNullOrEmpty(郵便番号)) {
+            parameter.setYubinNo(郵便番号);
+            parameter.setUseYubinNo(true);
+        }
+        RString 地区コード = finderDiv.getDdlChiku().getSelectedKey();
+        if (!RString.isNullOrEmpty(地区コード)) {
+            parameter.setChikuCode(地区コード);
+            parameter.setUseChikuCode(true);
+        }
+        List<RString> 施設入所の有無List = finderDiv.getChkShisetsuNyusho().getSelectedKeys();
+        boolean isAllSelectableOrNoSelected = finderDiv.getChkShisetsuNyusho().isAllSelected() || 施設入所の有無List.isEmpty();
         if (!isAllSelectableOrNoSelected) {
             RString 施設入所の有無 = 施設入所の有無List.get(0);
-            if (施設入所_あり.equals(施設入所の有無)) {
-                return true;
+            if (KEY0.equals(施設入所の有無)) {
+                parameter.setShisetsuNyushoFlag(true);
             }
+            if (KEY1.equals(施設入所の有無)) {
+                parameter.setShisetsuNyushoFlag(false);
+            }
+            parameter.setIgnoreShisetsuNyusho(false);
+        } else {
+            parameter.setShisetsuNyushoFlag(false);
+            parameter.setIgnoreShisetsuNyusho(true);
         }
-        return false;
+
+        RString 認定調査委託先コード = finderDiv.getTxtNinteiChosaItakusakiName().getValue();
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
+            parameter.setNinteiChosaItakusakiCode(finderDiv.getHdnChosaItakusakiCode());
+            parameter.setUseNinteiChosaItakusakiCode(true);
+            parameter.setChosaShichosonCode(finderDiv.getHdnChosaShichosonCode());
+            parameter.setUseChosaShichosonCode(true);
+        }
+
+        RString 認定調査員氏名 = finderDiv.getTxtNinteiChosainName().getValue();
+        if (!RString.isNullOrEmpty(認定調査員氏名)) {
+            parameter.setNinteiChosainCode(finderDiv.getHdnChosainCode());
+            parameter.setUseNinteiChosainCode(true);
+        }
+        boolean useNinteichosahyoGaikyoChosa = false;
+        RString 認定調査実施場所コード = finderDiv.getDdlChosaJisshiBasho().getSelectedKey();
+        if (!RString.isNullOrEmpty(認定調査実施場所コード)) {
+            parameter.setChosaJisshiBashoCode(認定調査実施場所コード);
+            parameter.setUseChosaJisshiBashoCode(true);
+            useNinteichosahyoGaikyoChosa = true;
+        }
+        RString 認定調査区分コード = finderDiv.getDdlChosaKubun().getSelectedKey();
+        if (!RString.isNullOrEmpty(認定調査区分コード)) {
+            parameter.setNinteiChosaKubunCode(認定調査区分コード);
+            parameter.setUseNinteiChosaKubunCode(true);
+            useNinteichosahyoGaikyoChosa = true;
+        }
+        RDate 調査実施日FROM = finderDiv.getTxtChosaJisshiDateRange().getFromValue();
+        if (調査実施日FROM != null) {
+            parameter.setNinteichosaJisshiYMDFrom(調査実施日FROM.toFlexibleDate());
+            parameter.setUseNinteichosaJisshiYMDFrom(true);
+            useNinteichosahyoGaikyoChosa = true;
+        }
+        RDate 調査実施日TO = finderDiv.getTxtChosaJisshiDateRange().getToValue();
+        if (調査実施日TO != null) {
+            parameter.setNinteichosaJisshiYMDTo(調査実施日TO.toFlexibleDate());
+            parameter.setUseNinteichosaJisshiYMDTo(true);
+            useNinteichosahyoGaikyoChosa = true;
+        }
+        parameter.setUseNinteichosahyoGaikyoChosa(useNinteichosahyoGaikyoChosa);
+        boolean useNinteichosahyoKihonChosa = false;
+        RString 寝きたり度 = finderDiv.getDdlNinteiChosaNetakirido().getSelectedKey();
+        if (!RString.isNullOrEmpty(寝きたり度)) {
+            parameter.setNichijoSeikatsuJiritsudoCode(寝きたり度);
+            parameter.setUseNichijoSeikatsuJiritsudoCd(true);
+            useNinteichosahyoKihonChosa = true;
+        }
+        RString 認知度 = finderDiv.getDdlNinteiChosaNinchido().getSelectedKey();
+        if (!RString.isNullOrEmpty(認知度)) {
+            parameter.setNichijoSeikatsuJiritsudo(認知度);
+            parameter.setUseNichijoSeikatsuJiritsudo(true);
+            useNinteichosahyoKihonChosa = true;
+        }
+        parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
 
-    private boolean is入所施設条件無視() {
-        List<RString> 施設入所の有無List = div.getCcdNinteiShinseishaFinder().
-                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().getSelectedKeys();
-        boolean isAllSelectableOrNoSelected = div.getCcdNinteiShinseishaFinder().
-                getNinteiShinseishaFinderDiv().getChkShisetsuNyusho().isAllSelected() || 施設入所の有無List.isEmpty();
-        return isAllSelectableOrNoSelected;
+    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter, RString 被保険者番号) {
+        if (RString.isNullOrEmpty(被保険者番号)) {
+            parameter.setUseHihokenshaNo(false);
+        } else {
+            parameter.setHihokenshaNo(被保険者番号);
+            parameter.setUseHihokenshaNo(true);
+        }
+        RString 証記載保険者番号 = finderDiv.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().value();
+        if (!RString.isNullOrEmpty(証記載保険者番号)) {
+            parameter.setShoKisaiHokenshaNo(証記載保険者番号);
+            parameter.setUseShoKisaiHokenshaNo(true);
+        }
+
+        RString 支所コード = finderDiv.getDdlShichosonCode().getSelectedKey();
+        if (!RString.isNullOrEmpty(支所コード)) {
+            parameter.setShishoCode(支所コード);
+            parameter.setUseShishoCode(true);
+        }
+
+        RString 被保険者氏名 = finderDiv.getTxtHihokenshaName().getValue().replace(RString.FULL_SPACE, RString.EMPTY);
+        if (!RString.isNullOrEmpty(被保険者氏名)) {
+            RString hihokenshaNameMatchType = finderDiv.getDdlHihokenshaNameMatchType().getSelectedKey();
+            if (KEY0.equals(hihokenshaNameMatchType)) {
+                parameter.set前方一致(true);
+            } else if (KEY1.equals(hihokenshaNameMatchType)) {
+                parameter.set完全一致(true);
+            } else if (KEY2.equals(hihokenshaNameMatchType)) {
+                parameter.set部分一致(true);
+            } else if (KEY3.equals(hihokenshaNameMatchType)) {
+                parameter.set後方一致(true);
+            }
+            parameter.set被保険者名(被保険者氏名);
+        }
+        List<KeyValueDataSource> みなし２号申請 = finderDiv.getChkMinashiFlag().getSelectedItems();
+        if (みなし２号申請.isEmpty()) {
+            parameter.setMinashiNigoEtcTaishoFlag(false);
+        } else {
+            parameter.setMinashiNigoEtcTaishoFlag(true);
+        }
+        RDate 認定申請日FROM = finderDiv.getTxtNinteiShinseiDateRange().getFromValue();
+        if (認定申請日FROM != null) {
+            parameter.setNinteiShinseiYMDFrom(認定申請日FROM.toFlexibleDate());
+            parameter.setUseNinteiShinseiYMDFrom(true);
+        }
+
+        RDate 認定申請日To = finderDiv.getTxtNinteiShinseiDateRange().getToValue();
+        if (認定申請日To != null) {
+            parameter.setNinteiShinseiYMDTo(認定申請日To.toFlexibleDate());
+            parameter.setUseNinteiShinseiYMDTo(true);
+        }
+        RDate 生年月日From = finderDiv.getTxtBirthDateRange().getFromValue();
+        if (生年月日From != null) {
+            parameter.setSeinengappiYMDFrom(生年月日From.toFlexibleDate());
+            parameter.setUseSeinengappiYMDFrom(true);
+        }
+        RDate 生年月日To = finderDiv.getTxtBirthDateRange().getToValue();
+        if (生年月日To != null) {
+            parameter.setSeinengappiYMDTo(生年月日To.toFlexibleDate());
+            parameter.setUseSeinengappiYMDTo(true);
+        }
+        RString 認定申請区分申請時コード = finderDiv.getDdlShinseijiShinseiKubun().getSelectedKey();
+        if (!RString.isNullOrEmpty(認定申請区分申請時コード)) {
+            parameter.setNinteiShinseiShinseijiKubun(認定申請区分申請時コード);
+            parameter.setUseNinteiShinseiShinseijiKubun(true);
+        }
+        edit性別ForParameter(finderDiv, parameter);
     }
+
+    private void edit性別ForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        List<KeyValueDataSource> 性別 = finderDiv.getChkSeibetsu().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 性別) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setMan(true);
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setWoman(true);
+            }
+        }
+    }
+
+    private void editChkForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useNinteiKanryoJoho = false;
+        List<KeyValueDataSource> 申請受付処理状態CHK = finderDiv.getChkShinseiUketsuke().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 申請受付処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setShinseiUketsukeKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setShinseiUketsukeMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+
+        List<KeyValueDataSource> 調査依頼処理状態CHK = finderDiv.getChkChosaIrai().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 調査依頼処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setChosaIraiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setChosaIraiMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 意見書依頼処理状態CHK = finderDiv.getChkIkenshoIrai().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 意見書依頼処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setIkenshoIraiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setIkenshoIraiMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 調査入手処理状態CHK = finderDiv.getChkChosaNyushu().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 調査入手処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setChosaNyushuKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setChosaNyushuMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 意見書入手処理状態CHK = finderDiv.getChkIkenshoNyushu().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 意見書入手処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setIkenshoNyushuKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setIkenshoNyushuMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 一次判定処理状態CHK = finderDiv.getChkIchijiHantei().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 一次判定処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setIchijiHanteiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setIchijiHanteiMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        parameter.setUseNinteiKanryoJoho(useNinteiKanryoJoho);
+        editChkForParameter2(finderDiv, parameter);
+    }
+
+    private void editChkForParameter2(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        boolean useNinteiKanryoJoho = parameter.isUseNinteiKanryoJoho();
+        List<KeyValueDataSource> マスキング処理状態CHK = finderDiv.getChkMasking().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : マスキング処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setMaskingKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setMaskingMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 審査会登録処理状態CHK = finderDiv.getChkShinsakaiToroku().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 審査会登録処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setShinsakaiTorokuKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setShinsakaiTorokuMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 二次判定処理状態CHK = finderDiv.getChkNijiHantei().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 二次判定処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setNijiHanteiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setNijiHanteiMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        List<KeyValueDataSource> 月例処理処理状態CHK = finderDiv.getChkGetsureiShori().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 月例処理処理状態CHK) {
+            if (KEY0.equals(keyValueDataSource.getKey())) {
+                parameter.setGetsureiShoriKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+            if (KEY1.equals(keyValueDataSource.getKey())) {
+                parameter.setGetsureiShoriMiKanryo(true);
+                useNinteiKanryoJoho = true;
+            }
+        }
+        parameter.setUseNinteiKanryoJoho(useNinteiKanryoJoho);
+    }
+
+    private void editNowPhaseForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
+        parameter.setNowPhaseBlank(true);
+    }
+
 }

@@ -693,7 +693,7 @@
         from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
         where
         "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-        and "mst"."ikenshoIraiRirekiNo" > "slv"."ikenshoIraiRirekiNo"
+        and "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
         )
         and "mst"."logicalDeletedFlag" = false
         ) AS DbT5301
@@ -822,7 +822,7 @@
         from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
         where
         "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-        and "mst"."ikenshoIraiRirekiNo" > "slv"."ikenshoIraiRirekiNo"
+        and "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
         )
         and "mst"."logicalDeletedFlag" = false
         ) AS DbT5301

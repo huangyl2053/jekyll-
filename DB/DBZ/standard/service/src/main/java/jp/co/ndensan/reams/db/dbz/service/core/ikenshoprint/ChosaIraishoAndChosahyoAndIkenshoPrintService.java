@@ -29,9 +29,12 @@ import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.Kai
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.ShujiiIkenshoTeishutsuIraishoReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyoAndKihonchosaReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoOcrKatamenProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoOcrRyomenProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeProperty;
@@ -217,18 +220,30 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 認定調査票(概況調査)を出力します。
      *
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
+     * @param reportId 帳票ID定義Enum
      */
-    public void print認定調査票_概況調査(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
-        List<ChosahyoGaikyochosaReport> list = new ArrayList<>();
-        if (!認定調査票_概況調査List.isEmpty()) {
-            list.add(ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List));
+    public void print認定調査票_概況調査(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, ReportIdDBZ reportId) {
+        ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List);
+        ChosahyoGaikyochosaProperty property;
+        switch (reportId) {
+            // 要介護認定調査票（デザイン）両面
+            case DBE221001:
+                property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
+                break;
+            // 要介護認定調査票（デザイン）片面
+            case DBE221002:
+                property = ChosahyoGaikyochosaProperty.createPropertyFor片面デザイン用紙();
+                break;
+            // 要介護認定調査票（概況特記）
+            case DBE221051:
+                property = ChosahyoGaikyochosaProperty.createPropertyFor概況特記用紙();
+                break;
+            default:
+                return;
         }
-        ChosahyoGaikyochosaProperty property = new ChosahyoGaikyochosaProperty();
         try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
-            for (ChosahyoGaikyochosaReport report : list) {
-                ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-                report.writeBy(reportSourceWriter);
-            }
+            ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            report.writeBy(reportSourceWriter);
         }
     }
 
@@ -246,6 +261,38 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         try (ReportAssembler<ChosahyoKihonchosaKatamenReportSource> assembler = createAssembler(property, reportManager)) {
             for (ChosahyoKihonchosaKatamenReport report : list) {
                 ReportSourceWriter<ChosahyoKihonchosaKatamenReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 要介護認定調査票（概況調査＋基本調査　両面印刷のOCR）を出力します。
+     *
+     * @param 認定調査票_概況調査List 認定調査票_概況調査List
+     */
+    public void print認定調査票_OCR両面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
+        if (!認定調査票_概況調査List.isEmpty()) {
+            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List);
+            ChosahyoOcrRyomenProperty property = new ChosahyoOcrRyomenProperty();
+            try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 要介護認定調査票（概況調査＋基本調査　片面印刷のOCR）を出力します。
+     *
+     * @param 認定調査票_概況調査List 認定調査票_概況調査List
+     */
+    public void print認定調査票_OCR片面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
+        if (!認定調査票_概況調査List.isEmpty()) {
+            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List);
+            ChosahyoOcrKatamenProperty property = new ChosahyoOcrKatamenProperty();
+            try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
+                ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }
         }

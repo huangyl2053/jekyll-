@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinseishaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class ShinseishaIchiranDiv extends Panel {
      */
     @JsonProperty("dgShinseishaIchiran")
     private DataGrid<dgShinseishaIchiran_Row> dgShinseishaIchiran;
+    @JsonProperty("btnPrint")
+    private ButtonDialog btnPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class ShinseishaIchiranDiv extends Panel {
     @JsonProperty("dgShinseishaIchiran")
     public void setDgShinseishaIchiran(DataGrid<dgShinseishaIchiran_Row> dgShinseishaIchiran) {
         this.dgShinseishaIchiran = dgShinseishaIchiran;
+    }
+
+    /*
+     * getbtnPrint
+     * @return btnPrint
+     */
+    @JsonProperty("btnPrint")
+    public ButtonDialog getBtnPrint() {
+        return btnPrint;
+    }
+
+    /*
+     * setbtnPrint
+     * @param btnPrint btnPrint
+     */
+    @JsonProperty("btnPrint")
+    public void setBtnPrint(ButtonDialog btnPrint) {
+        this.btnPrint = btnPrint;
     }
 
     // </editor-fold>

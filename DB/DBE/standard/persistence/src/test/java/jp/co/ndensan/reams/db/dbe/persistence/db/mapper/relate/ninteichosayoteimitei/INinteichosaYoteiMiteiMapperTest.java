@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayotei
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyoikenshochecklist.ChosahyoIkenshoCheckListParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairaihenko.NinteichosaIraiHenkoMiteiParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaihenko.NinteichosaIraiHenkoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,6 +37,13 @@ public class INinteichosaYoteiMiteiMapperTest extends DbeTestDacBase {
         assertTrue(true);
     }
 
+//    @Test
+//    public void get依頼変更者情報_動作確認() {
+//        List<NinteichosaIraiHenkoRelateEntity> result = sut.getNinteichosaIraiHenko(create依頼変更者検索条件());
+//        System.out.println("チェックリスト対象者 件数：" + result.size());
+//        assertTrue(true);
+//    }
+//
     private ChosahyoIkenshoCheckListParamter create意見書依頼未処理者情報検索条件() {
         RString 作成条件 = new RString("2");
         RString 申請日開始 = new RString("20010101");
@@ -49,6 +58,15 @@ public class INinteichosaYoteiMiteiMapperTest extends DbeTestDacBase {
                         RString.EMPTY,
                         作成条件,
                         市町村6);
+        return param;
+    }
+
+    private NinteichosaIraiHenkoMiteiParamter create依頼変更者検索条件() {
+        RString 申請日開始 = new RString("19000101");
+        RString 申請日終了 = new RString("20170101");
+        LasdecCode code = new LasdecCode("202119");
+        NinteichosaIraiHenkoMiteiParamter param = NinteichosaIraiHenkoMiteiParamter
+                .createParamter(申請日開始, 申請日終了, code);
         return param;
     }
 

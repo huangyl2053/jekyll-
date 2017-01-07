@@ -47,10 +47,6 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("InsatsuTaishoShitei"));
             };
 
-            Controls.prototype.ccdHokenshaList = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
-            };
-
             Controls.prototype.NinteiChosa = function () {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             };
@@ -137,10 +133,6 @@ var DBZ;
 
             Controls.prototype.txtHakkoYMD = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtHakkoYMD"));
-            };
-
-            Controls.prototype.ccdBunshoNo = function () {
-                return new DBZ.BunshoBangoInput.ModeController(this.convFiledName("ccdBunshoNo"));
             };
 
             Controls.prototype.TeishutsuKigen = function () {

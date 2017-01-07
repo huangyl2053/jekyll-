@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.Breakers;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  *
@@ -29,6 +31,21 @@ public class ChosahyoOcrRyomenProperty extends ReportPropertyBase<ChosahyoGaikyo
     @Override
     protected Breakers<ChosahyoGaikyochosaReportSource> defineBreakers(Breakers<ChosahyoGaikyochosaReportSource> breakers,
             BreakerCatalog<ChosahyoGaikyochosaReportSource> catalog) {
-        return breakers.add(catalog.simpleLayoutBreaker(new RString("hihokenshaNo1"), new RString("hishokenshaNo1"))).fixed();
+        return breakers.add(catalog.new SimpleLayoutBreaker(
+
+            new RString("layoutIndex")) {
+            @Override
+            public ReportLineRecord<ChosahyoGaikyochosaReportSource> occuredBreak(ReportLineRecord<ChosahyoGaikyochosaReportSource> currentRecord,
+                    ReportLineRecord<ChosahyoGaikyochosaReportSource> nextRecord,
+                    ReportDynamicChart dynamicChart) {
+                int layout = currentRecord.getSource().layoutIndex;
+                currentRecord.setFormGroupIndex(layout);
+                if (nextRecord != null && nextRecord.getSource() != null) {
+                    layout = nextRecord.getSource().layoutIndex;
+                    nextRecord.setFormGroupIndex(layout);
+                }
+                return currentRecord;
+            }
+        }).fixed();
     }
 }

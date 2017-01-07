@@ -672,8 +672,16 @@ public class NinteiChosaIraiHandler {
             div.getCcdBunshoBangoInput().setDisabled(true);
         }
         init認定調査依頼書(nowDate, 保険者コード);
-        init認定調査票_デザイン用紙(nowDate, 保険者コード);
-        init認定調査票_OCR(nowDate, 保険者コード);
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票_概況調査_用紙タイプ, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
+            div.getChkchosa().setDisplayNone(true);
+            div.getChkchosaOcr().setDisplayNone(false);
+            init認定調査票_OCR(nowDate, 保険者コード);
+        } else {
+            div.getChkchosa().setDisplayNone(false);
+            div.getChkchosaOcr().setDisplayNone(true);
+            init認定調査票_デザイン用紙(nowDate, 保険者コード);
+        }
         init認定調査票_特記事項(nowDate, 保険者コード);
         init認定調査票_その他(nowDate, 保険者コード);
         init提出期限(nowDate);
@@ -697,13 +705,14 @@ public class NinteiChosaIraiHandler {
     private void init認定調査票_デザイン用紙(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_認定調査票デザイン用紙));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY0);
             }
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項デザイン用紙));
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);
@@ -720,13 +729,13 @@ public class NinteiChosaIraiHandler {
     private void init認定調査票_OCR(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_認定調査票OCR));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY0);
             }
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項OCR));
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);
@@ -743,19 +752,19 @@ public class NinteiChosaIraiHandler {
     private void init認定調査票_特記事項(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_特記事項_項目有り));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY0);
             }
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目無し_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_項目無し_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_特記事項_項目無し));
-            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, nowDate, SubGyomuCode.DBE認定支援))) {
+            if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);
             }
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY2, CHKNAME_特記事項_フリータイプ));
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY2);
@@ -772,13 +781,13 @@ public class NinteiChosaIraiHandler {
     private void init認定調査票_その他(RDate nowDate, RString 保険者コード) {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> selectedItems = new ArrayList();
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査差異チェック票_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査差異チェック票_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY0, CHKNAME_差異チェック票));
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY0);
             }
         }
-        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, nowDate, SubGyomuCode.DBE認定支援))) {
+        if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
             dataSource.add(new KeyValueDataSource(DDL_KEY1, CHKNAME_概況特記));
             if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, nowDate, SubGyomuCode.DBE認定支援, 保険者コード))) {
                 selectedItems.add(DDL_KEY1);

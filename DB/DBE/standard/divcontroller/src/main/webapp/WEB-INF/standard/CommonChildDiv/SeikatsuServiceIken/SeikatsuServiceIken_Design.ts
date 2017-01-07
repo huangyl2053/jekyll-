@@ -8,6 +8,10 @@ module DBE {
 
         export class Events {
 
+            public static onChange_chkHokohojoShiyo(): string {
+                return "onChange_chkHokohojoShiyo";
+            }
+
             public static onChange_radGenzaiEiyoJotai(): string {
                 return "onChange_radGenzaiEiyoJotai";
             }

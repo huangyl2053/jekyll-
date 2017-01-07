@@ -44,9 +44,13 @@ public enum ReportIdDBZ {
      */
     DBE221001(new ReportId("DBE221001_ChosahyoDesignRyomen"), new RString("要介護認定調査票（デザイン用紙）")),
     /**
-     * 要介護認定調査票（デザイン）片面の帳票ＩＤです。
+     * 要介護認定調査票（デザイン）片面の概況調査の帳票ＩＤです。
      */
     DBE221002(new ReportId("DBE221002_ChosahyoDesignKatamen"), new RString("要介護認定調査票（デザイン用紙）")),
+    /**
+     * 要介護認定調査票（デザイン）片面の基本調査の帳票ＩＤです。
+     */
+    DBE221004(new ReportId("DBE221004_ChosahyoDesignKatamenKihon"), new RString("要介護認定調査票（デザイン用紙）")),
     /**
      * 要介護認定調査票OCR両面の帳票ＩＤです。
      */

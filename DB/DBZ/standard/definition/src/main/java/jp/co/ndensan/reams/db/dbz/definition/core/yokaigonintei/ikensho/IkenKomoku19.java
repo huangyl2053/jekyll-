@@ -26,7 +26,11 @@ public enum IkenKomoku19 {
     /**
      * コード:3 名称:改善 略称:定義なし
      */
-    悪化("3", "悪化");
+    悪化("3", "悪化"),
+    /**
+     * コード:9 名称:記載なし 略称:定義なし
+     */
+    記載なし("9", "記載なし");
 
     private final RString code;
     private final RString fullName;

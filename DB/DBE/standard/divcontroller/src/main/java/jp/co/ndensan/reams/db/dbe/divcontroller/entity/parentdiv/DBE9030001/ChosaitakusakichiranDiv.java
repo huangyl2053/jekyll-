@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaitakusakichiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class ChosaitakusakichiranDiv extends Panel {
     private ButtonDownLoad btnOutputCsv;
     @JsonProperty("btnOutputCsvCheck")
     private Button btnOutputCsvCheck;
+    @JsonProperty("btnCsvKozaNashi")
+    private ButtonDownLoad btnCsvKozaNashi;
     @JsonProperty("dgChosainIchiran")
     private DataGrid<dgChosainIchiran_Row> dgChosainIchiran;
 
@@ -88,6 +90,24 @@ public class ChosaitakusakichiranDiv extends Panel {
     @JsonProperty("btnOutputCsvCheck")
     public void setBtnOutputCsvCheck(Button btnOutputCsvCheck) {
         this.btnOutputCsvCheck = btnOutputCsvCheck;
+    }
+
+    /*
+     * getbtnCsvKozaNashi
+     * @return btnCsvKozaNashi
+     */
+    @JsonProperty("btnCsvKozaNashi")
+    public ButtonDownLoad getBtnCsvKozaNashi() {
+        return btnCsvKozaNashi;
+    }
+
+    /*
+     * setbtnCsvKozaNashi
+     * @param btnCsvKozaNashi btnCsvKozaNashi
+     */
+    @JsonProperty("btnCsvKozaNashi")
+    public void setBtnCsvKozaNashi(ButtonDownLoad btnCsvKozaNashi) {
+        this.btnCsvKozaNashi = btnCsvKozaNashi;
     }
 
     /*

@@ -20,14 +20,16 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor {
 
     private final ChosahyoGaikyochosaItem item;
+    private final int layoutIndex;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link ChosahyoGaikyochosaItem}
      */
-    protected ChosahyoGaikyochosaEditorImpl(ChosahyoGaikyochosaItem item) {
+    protected ChosahyoGaikyochosaEditorImpl(ChosahyoGaikyochosaItem item, int layoutIndex) {
         this.item = item;
+        this.layoutIndex = layoutIndex;
     }
 
     /**
@@ -139,6 +141,7 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         source.hihokenshaNo8 = item.getHihokenshaNo8();
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
+        source.layoutIndex = layoutIndex;
         return source;
     }
 }

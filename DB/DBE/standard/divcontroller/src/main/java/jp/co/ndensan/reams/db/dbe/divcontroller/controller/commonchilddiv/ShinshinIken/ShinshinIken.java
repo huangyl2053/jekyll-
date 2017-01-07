@@ -234,11 +234,6 @@ public class ShinshinIken {
      * @return ResponseData<ShinshinIkenDiv>
      */
     public ResponseData<ShinshinIkenDiv> onClickBtnKakutei(ShinshinIkenDiv div) {
-
-        ValidationMessageControlPairs validIro = getValidationHandler(div).validateIro();
-        if (validIro.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validIro).respond();
-        }
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakutei();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();

@@ -34,12 +34,12 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -340,26 +340,33 @@ public class ShujiiIkenshoTorokuTotal {
             RString beforeChange = getHandler(div).getDataRString();
             if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))
                     || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                        UrQuestionMessages.保存の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
+            if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            } else {
+                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                        replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
+                return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
+            }
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
 
-        if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
-            IParentResponse<ShujiiIkenshoTorokuTotalDiv> response = ResponseData.of(div);
-            response.addMessage(UrInformationMessages.保存終了.getMessage());
-            return response.forwardWithEventName(DBE2310001TransitionEventName.申請者検索結果一覧に戻る).respond();
-        } else {
-            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
+            return ResponseData.of(div).forwardWithEventName(DBE2310001TransitionEventName.申請者検索結果一覧に戻る).respond();
         }
+        return ResponseData.of(div).respond();
     }
 
     private ShujiiIkenshoTorokuHandler getHandler(ShujiiIkenshoTorokuTotalDiv div) {
