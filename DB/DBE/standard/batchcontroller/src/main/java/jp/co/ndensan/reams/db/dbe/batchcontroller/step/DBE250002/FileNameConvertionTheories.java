@@ -43,11 +43,12 @@ public enum FileNameConvertionTheories {
      */
     abstract RString convert(RString fileName);
 
+    //TODO ファイル名が一元管理されていない。他の機能を修正すると予期しない影響がありそうで怖いので、ここでも個別に定義する。
     private static final RString 主治医意見書_表;
     private static final RString 主治医意見書_裏;
 
     static {
-        主治医意見書_表 = new RString("E0001.png"); //TODO 要確認。どこかenumで一元管理されていないか…？
+        主治医意見書_表 = new RString("E0001.png");
         主治医意見書_裏 = new RString("E0002.png");
     }
 }

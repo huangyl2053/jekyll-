@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
+package jp.co.ndensan.reams.db.dbe.definition.core.ocr;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -12,11 +12,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum OCRID {
 
+    /**
+     * 意見書OCR 1枚目
+     */
     _701("701"),
+    /**
+     * 意見書OCR 2枚目
+     */
     _702("702"),
+    /**
+     * 意見書規定外 表
+     */
     _777("777"),
+    /**
+     * 意見書規定外 裏
+     */
     _778("778"),
+    /**
+     * その他資料
+     */
     _801("801"),
+    /**
+     * 空（nullObject）
+     */
     EMPTY;
 
     private final RString theValue;

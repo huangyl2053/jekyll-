@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1580-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ImageinputResult {
+public class ImageinputRelate {
 
     private final ImageinputRelateEntity entity;
 
@@ -27,7 +27,7 @@ public class ImageinputResult {
      *
      * @param entity イメージ取込み関連データRelateEntity
      */
-    public ImageinputResult(ImageinputRelateEntity entity) {
+    public ImageinputRelate(ImageinputRelateEntity entity) {
         this.entity = entity;
     }
 

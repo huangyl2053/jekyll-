@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
+package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,15 +11,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * {@link ImageInputReadResult}の同一申請に関するキー項目です。
  */
-public final class ImageInputReadResultKey {
+public final class ShinseiKey {
 
     /**
      * すべて空文字の場合の値です。
      */
-    public static final ImageInputReadResultKey EMPTY;
+    public static final ShinseiKey EMPTY;
 
     static {
-        EMPTY = new ImageInputReadResultKey(RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        EMPTY = new ShinseiKey(RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     private final RString 証記載保険者番号;
@@ -31,7 +31,7 @@ public final class ImageInputReadResultKey {
      * @param 被保険者番号 被保険者番号
      * @param 認定申請日 認定申請日
      */
-    public ImageInputReadResultKey(RString 証記載保険者番号, RString 被保険者番号, RString 認定申請日) {
+    public ShinseiKey(RString 証記載保険者番号, RString 被保険者番号, RString 認定申請日) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.認定申請日 = 認定申請日;
@@ -72,7 +72,7 @@ public final class ImageInputReadResultKey {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ImageInputReadResultKey other = (ImageInputReadResultKey) obj;
+        final ShinseiKey other = (ShinseiKey) obj;
         if (!Objects.equals(this.証記載保険者番号, other.証記載保険者番号)) {
             return false;
         }

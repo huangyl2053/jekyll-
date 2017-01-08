@@ -3,35 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
+package jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho;
 
-import java.util.ArrayList;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * OCR情報受入＿バッチ イメージ取込み結果 クラスです。
- *
- * @author n2818
+ * OCRIKEN.csvの取込結果1行を扱います。
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ImageInputReadResult {
+public final class OcrIken {
 
     private static final RString 意見書_表 = new RString("701");
     private static final RString 意見書_裏 = new RString("702");
     private static final RString 意見書_ID777 = new RString("777");
     private static final RString 意見書_ID778 = new RString("778");
-    private static final RString 意見書_ID777_CA3 = new RString("ID777");
-    private static final RString 意見書_ID778_CA3 = new RString("ID778");
-    private static final RString MS_PATH_SEPARATOR = new RString("\\");
 
     //key
     @lombok.Setter(lombok.AccessLevel.PRIVATE)
-    private ImageInputReadResultKey key;
+    private ShinseiKey key;
 
     // 1行の内容
     private RString データ行_文字列;
@@ -40,7 +37,7 @@ public class ImageInputReadResult {
     private OCRID ocrID;
 
     //sheetID
-    private RString sheetID;
+    private SheetID sheetID;
 
     // ID701　ここから
     private RString 保険者番号;
@@ -149,8 +146,8 @@ public class ImageInputReadResult {
     // 全体イメージ（帳票一面のイメージ）中で、表側の画像を示すインデックス（規定外、規定外IDで利用する）
     private RString 全体イメージ表側インデックス;
 
-    // ca3ファイルの持つ画像ファイル名
-    private List<RString> imageFileNames;
+    private OcrIken() {
+    }
 
     /**
      * 行を解析した結果より、インスタンスを生成します。
@@ -160,26 +157,27 @@ public class ImageInputReadResult {
      * @param line 行
      * @return 行データタイプ
      */
-    public static ImageInputReadResult parsed(RString line) {
+    public static OcrIken parsed(RString line) {
         return parseデータ行(line);
     }
 
-    private static ImageInputReadResult parseデータ行(RString line) {
-        ImageInputReadResult result = new ImageInputReadResult();
+    private static OcrIken parseデータ行(RString line) {
+        OcrIken result = new OcrIken();
         result.clear();
         result.setデータ行_文字列(line);
         List<RString> columns = Collections.unmodifiableList(line.split(","));
         if (columns == null) {
             return result;
         }
-        RString ID = columns.get(0);
-        if (意見書_表.equals(ID)) {
+        RString ocrID = columns.get(0);
+        if (意見書_表.equals(ocrID)) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 32 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(columns.get(1));
+            result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
-            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
             result.set同意の有無(columns.get(5));
             result.set最終診察日(get西暦_年(columns.get(6)));
             result.set記入日(get西暦_年(columns.get(7)));
@@ -207,13 +205,14 @@ public class ImageInputReadResult {
             result.set精神神経症状(columns.get(29));
             result.set専門科医受診(columns.get(30));
 
-        } else if (意見書_裏.equals(ID)) {
+        } else if (意見書_裏.equals(ocrID)) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 50 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(columns.get(1));
+            result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
-            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
             result.set利き腕(columns.get(5));
             result.set過去6ヶ月間の体重の変化(columns.get(6));
             result.set四肢欠損(columns.get(7));
@@ -259,13 +258,14 @@ public class ImageInputReadResult {
             result.set感染症(columns.get(47));
             result.set主治医への結果連絡(columns.get(48));
 
-        } else if (意見書_ID777.equals(ID)) {
+        } else if (意見書_ID777.equals(ocrID)) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 16 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(columns.get(1));
+            result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
-            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
             result.set記入日(get西暦_年(columns.get(5)));
             result.set受領日(get西暦_年(columns.get(6)));
             result.set障害高齢者の自立度(columns.get(7));
@@ -275,26 +275,17 @@ public class ImageInputReadResult {
             result.set伝達能力(columns.get(11));
             result.set食事行為(columns.get(12));
             result.set主治医への結果連絡(columns.get(13));
-            result.set全体イメージ表側インデックス(columns.get(13));
+            result.set全体イメージ表側インデックス(columns.get(14));
 
-        } else if (意見書_ID778.equals(ID)) {
+        } else if (意見書_ID778.equals(ocrID)) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 7 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(columns.get(1));
+            result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号((columns.get(2)));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
-            result.setKey(new ImageInputReadResultKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
 
-        } else if (意見書_ID777_CA3.equals(ID) || 意見書_ID778_CA3.equals(ID)) {
-            List<RString> fileNames = new ArrayList<>();
-            for (RString column : columns) {
-                if (!column.contains(MS_PATH_SEPARATOR)) {
-                    continue;
-                }
-                RString fileName = toFileNameRemovingFolderPath(column);
-                fileNames.add(fileName);
-            }
-            result.setImageFileNames(fileNames);
         }
         return result;
     }
@@ -310,20 +301,16 @@ public class ImageInputReadResult {
         return result.toDateString();
     }
 
-    private static RString toFileNameRemovingFolderPath(RString fileName) {
-        return fileName.substringEmptyOnError(fileName.lastIndexOf(MS_PATH_SEPARATOR));
-    }
-
     /**
      * 各要素を初期化します。
      *
      * 文字列項目の値は{@link RString#EMPTY}、{@code Collection}の場合は空のインスタンスで初期化します。
      */
-    public void clear() {
+    private void clear() {
         this.データ行_文字列 = RString.EMPTY;
-        this.key = ImageInputReadResultKey.EMPTY;
+        this.key = ShinseiKey.EMPTY;
         this.ocrID = OCRID.EMPTY;
-        this.sheetID = RString.EMPTY;
+        this.sheetID = SheetID.EMPTY;
 
         this.保険者番号 = RString.EMPTY;
         this.申請日 = RString.EMPTY;
@@ -401,7 +388,5 @@ public class ImageInputReadResult {
         this.主治医への結果連絡 = RString.EMPTY;
 
         this.全体イメージ表側インデックス = RString.EMPTY;
-
-        this.imageFileNames = new ArrayList<>();
     }
 }

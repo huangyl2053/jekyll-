@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2260001
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputResult;
+import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.ImageinputDiv;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.Toro
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.TorokuDataCollection;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001.ImageinputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001.ImageinputValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFindler;
+import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -280,7 +280,7 @@ public class Imageinput {
         if (dataList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
-        ImageinputFindler service = ImageinputFindler.createInstance();
+        ImageinputFinder service = ImageinputFinder.createInstance();
         List<TorokuData> dB更新用 = new ArrayList<>();
         for (TorokuData csvData : dataList) {
             ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(csvData.get保険者番号(),
@@ -291,7 +291,7 @@ public class Imageinput {
             } else {
                 csvData.setOK_NG(チェックOK);
             }
-            List<ImageinputResult> 関連データList = service.get関連データ(param).records();
+            List<ImageinputRelate> 関連データList = service.get関連データ(param).records();
             if (チェックOK.equals(csvData.getOK_NG())) {
                 if (関連データList.isEmpty()) {
                     csvData.setOK_NG(チェックNG);
@@ -299,7 +299,7 @@ public class Imageinput {
                     csvData.setOK_NG(チェックOK);
                 }
             }
-            for (ImageinputResult 関連データ : 関連データList) {
+            for (ImageinputRelate 関連データ : 関連データList) {
                 AccessLogger.log(AccessLogType.照会, toPersonalData(関連データ.getT5101_被保険者番号()));
                 csvData.setT5101_厚労省IF識別コード(関連データ.getT5101_厚労省IF識別コード());
                 csvData.setT5101_申請書管理番号(関連データ.getT5101_申請書管理番号());

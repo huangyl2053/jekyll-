@@ -6,13 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrTorikomiUtil;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -23,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.Comparators;
 
 /**
  * イメージ取込み_バッチフロークラスです。
@@ -32,23 +34,16 @@ import jp.co.ndensan.reams.uz.uza.util.Comparators;
  */
 public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageTorikomiParameter> {
 
-    private List<RString> filePathList;
     OcrImageReadProcessParameter processParameter;
 
     @Override
     protected void defineFlow() {
         final RDate PROCESSING_DATE = RDate.getNowDate();
         final List<RString> FILE_PATHS = readAllOcrDataFileTo(Directory.createTmpDirectory());
-        final List<RString> IMAGE_FILE_PATHS = new ArrayList<>();
-
-        /* PNGファイルだけ先に処理して、IMAGE_FILE_PATHSにセットする */
-        Collections.sort(filePathList, new PNGsFirstComparator());
-        for (RString currentFilePath : FILE_PATHS) {
-            if (isPNGFile(currentFilePath)) {
-                IMAGE_FILE_PATHS.add(currentFilePath);
-                continue;
-            }
-            processParameter = new OcrImageReadProcessParameter(PROCESSING_DATE, currentFilePath, IMAGE_FILE_PATHS);
+        Map<OcrDataType, OcrFiles> map = OcrTorikomiUtil.groupingByType(FILE_PATHS);
+        final OcrFiles IMAGE_FILE_PATHS = map.get(OcrDataType.イメージファイル);
+        for (OcrDataType type : Arrays.asList(OcrDataType.意見書, OcrDataType.その他資料)) {
+            processParameter = new OcrImageReadProcessParameter(PROCESSING_DATE, map.get(type), IMAGE_FILE_PATHS);
             executeStep(OCRイメージの読み込み_PROCESS);
         }
     }
@@ -77,29 +72,15 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
         List<RString> list = new ArrayList<>();
         for (File file : directory.listFiles()) {
             if (file.isFile()) {
-                list.add(new RString(file.getAbsolutePath()));
+                try {
+                    list.add(new RString(file.getCanonicalPath()));
+                } catch (IOException ex) {
+                    //TODO 例外処理。エラーリスト出力等が必要か…。
+                }
             } else {
                 list.addAll(setFilePath(file));
             }
         }
         return list;
-    }
-
-    private static class PNGsFirstComparator implements Comparator<RString> {
-
-        @Override
-        public int compare(RString o1, RString o2) {
-            if (isPNGFile(o1)) {
-                return -1;
-            }
-            if (isPNGFile(o2)) {
-                return -1;
-            }
-            return Objects.compare(o1, o2, Comparators.naturalOrder());
-        }
-    }
-
-    private static boolean isPNGFile(RString text) {
-        return text.endsWith(".png") || text.endsWith(".PNG");
     }
 }

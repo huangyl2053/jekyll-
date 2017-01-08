@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,12 +25,14 @@ public enum ZaitakuShisetsuKubun {
      */
     施設("2", "施設");
 
-    private final RString code;
+    private final RString codeValue;
+    private final Code code;
     private final RString fullName;
 
     private ZaitakuShisetsuKubun(String code, String fullname) {
-        this.code = new RString(code);
+        this.codeValue = new RString(code);
         this.fullName = new RString(fullname);
+        this.code = new Code(code);
     }
 
     /**
@@ -38,6 +41,15 @@ public enum ZaitakuShisetsuKubun {
      * @return 在宅/施設区分のコード
      */
     public RString getコード() {
+        return codeValue;
+    }
+
+    /**
+     * 在宅/施設区分のコードを{@link Code}型で返します。
+     *
+     * @return 在宅/施設区分のコード（{@link Code}型）
+     */
+    public Code getCode() {
         return code;
     }
 
@@ -59,7 +71,7 @@ public enum ZaitakuShisetsuKubun {
     public static ZaitakuShisetsuKubun toValue(RString code) {
 
         for (ZaitakuShisetsuKubun zaitakuShisetsuKubun : ZaitakuShisetsuKubun.values()) {
-            if (zaitakuShisetsuKubun.code.equals(code)) {
+            if (zaitakuShisetsuKubun.codeValue.equals(code)) {
                 return zaitakuShisetsuKubun;
             }
         }
