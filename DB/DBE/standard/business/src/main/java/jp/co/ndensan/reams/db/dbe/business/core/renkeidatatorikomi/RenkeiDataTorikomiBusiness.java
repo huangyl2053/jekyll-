@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity;
@@ -40,6 +41,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -54,6 +56,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Torisage
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
@@ -640,10 +643,10 @@ public class RenkeiDataTorikomiBusiness {
     }
     
     /**
-     * DbT5105NinteiKanryoJohoEntityの設定メソッドです。
+     * DbT5121ShinseiRirekiJohoEntityの設定メソッドです。
      * 
      * @param entity DbT5101RelateEntity
-     * @return DbT5105NinteiKanryoJohoEntity
+     * @return DbT5121ShinseiRirekiJohoEntity
      */
     public DbT5121ShinseiRirekiJohoEntity getDbT5121Entity(DbT5101RelateEntity entity) {
         DbT5121ShinseiRirekiJohoEntity dbt5121Entity = new DbT5121ShinseiRirekiJohoEntity();
@@ -655,6 +658,54 @@ public class RenkeiDataTorikomiBusiness {
             dbt5121Entity.setZenkaiShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号_ZERO17));
         }
         return dbt5121Entity;
+    }
+    
+    /**
+     * DbT5129TennyuShiboEntityの設定メソッドです。
+     * 
+     * @param entity DbT5101RelateEntity
+     * @return DbT5129TennyuShiboEntity
+     */
+    public DbT5129TennyuShiboEntity getDbT5129Entity(DbT5101RelateEntity entity) {
+        DbT5129TennyuShiboEntity dbt5129Entity = new DbT5129TennyuShiboEntity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        dbt5129Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+        dbt5129Entity.setNijiHanteiYMD(new FlexibleDate(dbt5101tempEntity.get認定申請日()));
+        dbt5129Entity.setNijiHanteiYokaigoJotaiKubunCode(new Code(dbt5101tempEntity.get前回の審査会結果()));
+        FlexibleDate 前回認定有効開始期間 = new FlexibleDate(RString.EMPTY);
+        FlexibleDate 前回認定有効終了期間 = new FlexibleDate(RString.EMPTY);
+        if (dbt5101tempEntity.get前回の認定有効開始期間() != null && !dbt5101tempEntity.get前回の認定有効開始期間().isEmpty()) {
+            前回認定有効開始期間 = new FlexibleDate(dbt5101tempEntity.get前回の認定有効開始期間());
+        }
+        if (dbt5101tempEntity.get前回の認定有効終了期間() != null && !dbt5101tempEntity.get前回の認定有効終了期間().isEmpty()) {
+            前回認定有効終了期間 = new FlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間());
+        }
+        int 前回認定有効期間 = 0;
+        if (前回認定有効開始期間.isEmpty() && 前回認定有効終了期間.isEmpty()) {
+            前回認定有効期間 = 前回認定有効終了期間.getBetweenMonths(前回認定有効開始期間);
+        }
+        dbt5129Entity.setNijiHanteiNinteiYukoKikan(前回認定有効期間);
+        dbt5129Entity.setNijiHanteiNinteiYukoKaishiYMD(前回認定有効開始期間);
+        dbt5129Entity.setNijiHanteiNinteiYukoShuryoYMD(前回認定有効終了期間);
+        dbt5129Entity.setShinsakaiKaisaiNo(new RString("0"));
+        dbt5129Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
+        return dbt5129Entity;
+    }
+    
+    /**
+     * DbT5130ShiboEntityの設定メソッドです。
+     * 
+     * @param entity DbT5101RelateEntity
+     * @return DbT5130ShiboEntity
+     */
+    public DbT5130ShiboEntity getDbT5130Entity(DbT5101RelateEntity entity) {
+        DbT5130ShiboEntity dbt5130Entity = new DbT5130ShiboEntity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        dbt5130Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+        dbt5130Entity.setNijiHanteiYMD(new FlexibleDate(dbt5101tempEntity.get認定申請日()));
+        dbt5130Entity.setShinsakaiKaisaiNo(new RString("0"));
+        dbt5130Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
+        return dbt5130Entity;
     }
 
     private FlexibleDate setFlexibleDate(RString value, RString config) {
@@ -778,10 +829,6 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setYubinNo(getYubinNo(dbt5101tempEntity.get郵便番号()));
         dbt5101Entity.setJusho(getAtenaJusho(dbt5101tempEntity.get住所()));
         dbt5101Entity.setTelNo(getTelNo(dbt5101tempEntity.get本人連絡先1()));
-        dbt5101Entity.setZenYokaigoKubunCode(getCode(dbt5101tempEntity.get前回の審査会結果()));
-        dbt5101Entity.setZenkaiNinteiYMD(getFlexibleDate(dbt5101tempEntity.get二次判定日()));
-        dbt5101Entity.setZenkaiYukoKikanStart(getFlexibleDate(dbt5101tempEntity.get前回の認定有効開始期間()));
-        dbt5101Entity.setZenkaiYukoKikanEnd(getFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間()));
         dbt5101Entity.setNigoTokuteiShippeiCode(getCode(dbt5101tempEntity.get特定疾病コード()));
         dbt5101Entity.setNinteiChosaItakusakiCode(getChosaItakusakiCode(dbt5101tempEntity.get調査委託先コード()));
         dbt5101Entity.setShujiiIryokikanCode(getShujiiIryokikanCode(dbt5101tempEntity.get主治医医療機関コード()));
