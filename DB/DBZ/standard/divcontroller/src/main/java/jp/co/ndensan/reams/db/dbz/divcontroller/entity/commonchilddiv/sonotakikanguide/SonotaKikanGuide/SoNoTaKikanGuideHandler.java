@@ -71,7 +71,7 @@ public class SoNoTaKikanGuideHandler {
         div.getTxtSonotaKikanName().clearValue();
         div.getRadHaisi().setSelectedKey(含まない);
         set調査委託先区();
-        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
+        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
