@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.basic;
 
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
@@ -59,6 +60,15 @@ public class ShujiiIkenshoIkenItemNewManager {
     @Transaction
     public DbT5304ShujiiIkenshoIkenItemEntity select主治医意見書(ShinseishoKanriNo shinseishoKanriNo, int 主治医意見書作成依頼履歴番号, int 連番) {
         return dac.selectByMainKey(shinseishoKanriNo, 主治医意見書作成依頼履歴番号, 連番);
+    }
+
+    /**
+     * @param 申請書管理番号 申請書管理番号
+     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
+     * @return 指定の申請書管理番号、主治医意見書作成依頼履歴番号に該当する全意見書意見項目
+     */
+    public List<DbT5304ShujiiIkenshoIkenItemEntity> select主治医意見書意見項目(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号) {
+        return dac.selectByKey(申請書管理番号, 主治医意見書作成依頼履歴番号);
     }
 
     /**

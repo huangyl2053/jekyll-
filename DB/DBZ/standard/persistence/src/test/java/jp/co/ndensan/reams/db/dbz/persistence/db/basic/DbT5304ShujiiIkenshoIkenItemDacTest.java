@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5304ShujiiIkenshoIkenItemDac;
 import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5304ShujiiIkenshoIkenItemEntityGenerator;
@@ -73,16 +73,16 @@ public class DbT5304ShujiiIkenshoIkenItemDacTest extends DbzTestDacBase {
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT5304ShujiiIkenshoIkenItemEntity insertedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_主治医意見書作成依頼履歴番号);
+                    DEFAULT_主治医意見書作成依頼履歴番号).get(0);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
-        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            DbT5304ShujiiIkenshoIkenItemEntity insertedRecord = sut.selectByKey(
+        public void 存在しない主キーを渡すと_selectByKeyは_sizeが0のListを返す() {
+            List<DbT5304ShujiiIkenshoIkenItemEntity> insertedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
                     DEFAULT_主治医意見書作成依頼履歴番号);
-            assertThat(insertedRecord, is(nullValue()));
+            assertThat(insertedRecord.size(), is(0));
         }
     }
 
@@ -132,7 +132,7 @@ public class DbT5304ShujiiIkenshoIkenItemDacTest extends DbzTestDacBase {
         public void 要介護認定主治医意見書意見項目エンティティを渡すと_updateは_要介護認定主治医意見書意見項目を更新する() {
             DbT5304ShujiiIkenshoIkenItemEntity updateRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_主治医意見書作成依頼履歴番号);
+                    DEFAULT_主治医意見書作成依頼履歴番号).get(0);
             // TODO  主キー以外の項目を変更してください
             // updateRecord.set変更したい項目(75);
 
@@ -140,7 +140,7 @@ public class DbT5304ShujiiIkenshoIkenItemDacTest extends DbzTestDacBase {
 
             DbT5304ShujiiIkenshoIkenItemEntity updatedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_主治医意見書作成依頼履歴番号);
+                    DEFAULT_主治医意見書作成依頼履歴番号).get(0);
 
             // TODO  主キー以外の項目を変更してください
             // assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
@@ -160,14 +160,14 @@ public class DbT5304ShujiiIkenshoIkenItemDacTest extends DbzTestDacBase {
         public void 要介護認定主治医意見書意見項目エンティティを渡すと_deleteは_要介護認定主治医意見書意見項目を削除する() {
             DbT5304ShujiiIkenshoIkenItemEntity deletedEntity = sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_主治医意見書作成依頼履歴番号);
+                    DEFAULT_主治医意見書作成依頼履歴番号).get(0);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
                     DEFAULT_申請書管理番号,
-                    DEFAULT_主治医意見書作成依頼履歴番号), is(nullValue()));
+                    DEFAULT_主治医意見書作成依頼履歴番号).get(0), is(nullValue()));
         }
     }
 

@@ -45,6 +45,7 @@ public class ShujiiIkenshoIkenItemManager {
      * @param 申請書管理番号 申請書管理番号
      * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      * @return ShujiiIkenshoIkenItem
+     * @deprecated どの連番の要素が取得されるかわからないこのメソッドは、利用するべきではありません。
      */
     @Transaction
     public ShujiiIkenshoIkenItem get要介護認定主治医意見書意見項目(
@@ -53,12 +54,13 @@ public class ShujiiIkenshoIkenItemManager {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(主治医意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼履歴番号"));
 
-        DbT5304ShujiiIkenshoIkenItemEntity entity = dac.selectByKey(
+        List<DbT5304ShujiiIkenshoIkenItemEntity> entities = dac.selectByKey(
                 申請書管理番号,
                 主治医意見書作成依頼履歴番号);
-        if (entity == null) {
+        if (entities.isEmpty()) {
             return null;
         }
+        DbT5304ShujiiIkenshoIkenItemEntity entity = entities.get(0);
         entity.initializeMd5();
         return new ShujiiIkenshoIkenItem(entity);
     }

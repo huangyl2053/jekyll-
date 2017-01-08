@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.ocr;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -84,7 +85,7 @@ public enum OcrDataType {
     }
 
     static OcrDataType toValueFromFilePath(RString filePath) {
-        List<OcrDataType> without非該当 = Arrays.asList(values());
+        List<OcrDataType> without非該当 = new ArrayList<>(Arrays.asList(values()));
         without非該当.removeAll(Arrays.asList(非該当));
         for (OcrDataType value : without非該当) {
             if (value.matches(filePath)) {

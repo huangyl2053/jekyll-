@@ -38,7 +38,7 @@ public class DbT5304ShujiiIkenshoIkenItemDac implements ISaveable<DbT5304ShujiiI
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public DbT5304ShujiiIkenshoIkenItemEntity selectByKey(
+    public List<DbT5304ShujiiIkenshoIkenItemEntity> selectByKey(
             ShinseishoKanriNo 申請書管理番号,
             int 主治医意見書作成依頼履歴番号) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
@@ -51,10 +51,10 @@ public class DbT5304ShujiiIkenshoIkenItemDac implements ISaveable<DbT5304ShujiiI
                 where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ikenshoIraiRirekiNo, 主治医意見書作成依頼履歴番号))).
-                toObject(DbT5304ShujiiIkenshoIkenItemEntity.class);
+                toList(DbT5304ShujiiIkenshoIkenItemEntity.class);
     }
-    
-        /**
+
+    /**
      * 主キーで要介護認定主治医意見書意見項目を取得します。
      *
      * @param 申請書管理番号 申請書管理番号

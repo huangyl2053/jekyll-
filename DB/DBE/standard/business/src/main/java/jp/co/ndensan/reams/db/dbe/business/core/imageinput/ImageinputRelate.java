@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -159,6 +160,13 @@ public class ImageinputRelate {
      */
     public RString getT5101_厚労省IF識別コード() {
         return entity.getT5101_厚労省IF識別コード();
+    }
+
+    /**
+     * @return 厚労省IF識別コード
+     */
+    public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
+        return KoroshoIfShikibetsuCode.toValue(getT5101_厚労省IF識別コード());
     }
 
     /**

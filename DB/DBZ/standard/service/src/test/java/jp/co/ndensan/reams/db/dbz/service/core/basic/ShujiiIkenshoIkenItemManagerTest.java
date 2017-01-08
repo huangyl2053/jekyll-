@@ -67,7 +67,8 @@ public class ShujiiIkenshoIkenItemManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5304ShujiiIkenshoIkenItemEntity entity = DbT5304ShujiiIkenshoIkenItemEntityGenerator.createDbT5304ShujiiIkenshoIkenItemEntity();
-            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(entity);
+            List<DbT5304ShujiiIkenshoIkenItemEntity> list = Arrays.asList(entity);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(list);
 
             ShinseishoKanriNo 申請書管理番号 = DbT5304ShujiiIkenshoIkenItemEntityGenerator.DEFAULT_申請書管理番号;
             int 主治医意見書作成依頼履歴番号 = DbT5304ShujiiIkenshoIkenItemEntityGenerator.DEFAULT_主治医意見書作成依頼履歴番号;
