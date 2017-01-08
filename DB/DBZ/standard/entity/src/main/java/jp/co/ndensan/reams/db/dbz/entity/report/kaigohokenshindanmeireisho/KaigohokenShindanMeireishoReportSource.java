@@ -80,15 +80,17 @@ public class KaigohokenShindanMeireishoReportSource implements IReportSource {
     public RString iryokikanName;
     @ReportItem(name = "tantoIshiName", order = 32)
     public RString tantoIshiName;
-    @ReportItem(name = "iryokikanJusho", order = 33)
+    @ReportItem(name = "iryokikanYubinNo", length = 8, order = 33)
+    public RString iryokikanYubinNo;
+    @ReportItem(name = "iryokikanJusho", order = 34)
     public RString iryokikanJusho;
-    @ReportItem(name = "telNo", length = 14, order = 34)
+    @ReportItem(name = "telNo", length = 14, order = 35)
     public RString telNo;
-    @ReportItem(name = "jushinKikan", length = 25, order = 35)
+    @ReportItem(name = "jushinKikan", length = 25, order = 36)
     public RString jushinKikan;
-    @ReportItem(name = "jushinArea", order = 36)
+    @ReportItem(name = "jushinArea", order = 37)
     public RString jushinArea;
-    @ReportItem(name = "tsuchibun2", order = 37)
+    @ReportItem(name = "tsuchibun2", order = 38)
     public RString tsuchibun2;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

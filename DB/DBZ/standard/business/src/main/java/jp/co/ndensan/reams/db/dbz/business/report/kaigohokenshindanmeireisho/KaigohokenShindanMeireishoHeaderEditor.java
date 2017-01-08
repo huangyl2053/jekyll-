@@ -50,6 +50,7 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
     private KaigohokenShindanMeireishoReportSource editHeader(KaigohokenShindanMeireishoReportSource source) {
 
         source.title = item.getTitle();
+        source.bunshoNo = item.getBunshoNo();
         source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
@@ -86,6 +87,7 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
         source.hihokenshaNo10 = hihokenshaNo.substring(結束_位置9, 結束_位置10);
         source.iryokikanName = item.getIryokikanName();
         source.tantoIshiName = item.getTantoIshiName();
+        source.iryokikanYubinNo = item.getIryokikanYubinNo();
         source.iryokikanJusho = item.getIryokikanJusho();
         source.telNo = item.getTelNo();
         if (item.getJushinKikan() == null || item.getJushinKikan().isEmpty()) {

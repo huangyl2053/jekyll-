@@ -1610,6 +1610,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 Map<Integer, RString> 通知文
                         = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
                 KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
+                        div.getCcdBunshoNo().get文書番号(),
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -1619,8 +1620,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
-                        getEditedYubinNo(business.get医療機関郵便番号()),
-                        business.get医療機関住所(),
+                        getEditedYubinNo(business.get郵便番号()),
+                        business.get住所(),
                         business.get被保険者氏名(),
                         get名称付与(),
                         customerBarCode,
@@ -1629,6 +1630,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get被保険者番号(),
                         business.get医療機関名称(),
                         business.get主治医氏名(),
+                        business.get医療機関郵便番号(),
                         business.get医療機関住所(),
                         business.get医療機関電話番号(),
                         get受診日時または期間(),
