@@ -252,11 +252,6 @@
         AND DbT5201."logicalDeletedFlag" = FALSE
         AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX(rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
         WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
-<!--        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
-        ON DbT5202."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
-        AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
-        AND DbT5202."ninteichosaJisshiYMD" IS NOT NULL
-        INNER JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS DbT5203-->
         INNER JOIN (SELECT * FROM rgdb."DbT5203NinteichosahyoKihonChosa"  AS mst WHERE EXISTS(SELECT 'X' FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" as slv
         WHERE mst."shinseishoKanriNo"=slv."shinseishoKanriNo"
         AND mst."ninteichosaRirekiNo"=slv."ninteichosaRirekiNo"
@@ -274,8 +269,7 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-        AND DbT5302."ikenshoReadYMD" IS NOT NULL
-        
+        AND DbT5302."ikenshoReadYMD" IS NOT NULL        
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -343,14 +337,12 @@
         AND DbT5201."logicalDeletedFlag" = FALSE
         AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX(rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
         WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
-        
         INNER JOIN (SELECT * FROM rgdb."DbT5203NinteichosahyoKihonChosa"  AS mst WHERE EXISTS(SELECT 'X' FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" as slv
                  WHERE mst."shinseishoKanriNo"=slv."shinseishoKanriNo"
                  AND mst."ninteichosaRirekiNo"=slv."ninteichosaRirekiNo"
                  AND slv."ninteichosaJisshiYMD" IS NOT NULL)) AS DbT5203
         ON DbT5203."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5203."ninteichosaRirekiNo"=DbT5201."ninteichosaIraiRirekiNo"
-
         INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         ON DbT5301."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5301."logicalDeletedFlag" = FALSE
