@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -68,7 +69,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  * @reamsid_L DBE-1360-010 suguangjun
  */
 public class NinteichosaItakusakiMain {
-
+    
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
@@ -122,9 +123,11 @@ public class NinteichosaItakusakiMain {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         searchChosainInfo(div);
+        div.setHdnShichosonCode(div.getCcdhokensha().getSelectedItem().get証記載保険者番号().value());
+        div.setHdnShichosonName(div.getCcdhokensha().getSelectedItem().get市町村名称());
         return ResponseData.of(div).setState(DBE9050001StateName.一覧);
     }
-
+    
     private void searchChosainInfo(NinteichosaItakusakiMainDiv div) {
         boolean jokyoFlag = false;
         if (div.getRadSearchHaisiFlag().getSelectedIndex() == 0) {
@@ -140,13 +143,13 @@ public class NinteichosaItakusakiMain {
                 div.getChosainSearch().getDdlkikankubun().getSelectedKey(),
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue());
         List<SonotaKikanJohoEntity> sonotaKikanJohoList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
-
+        
         boolean 検索条件初期値 = true;
         if (parameter.isUser機関カナ名称() || parameter.isUser機関の区分() || parameter.isUser機関コードFrom() || parameter.isUser機関コードTo()
                 || parameter.isUser機関名称() || parameter.isUser調査委託区分() || !parameter.is廃止フラグ()) {
             検索条件初期値 = false;
         }
-
+        
         if (sonotaKikanJohoList.isEmpty() && !検索条件初期値) {
             ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(new ArrayList<SonotaKikanJoho>()));
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
@@ -171,6 +174,11 @@ public class NinteichosaItakusakiMain {
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setDataSource(getHandler(div).setItakukubun());
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDataSource(getHandler(div).setKikankubun());
         getHandler(div).clearChosaitakusakiJohoInput();
+        if (!RString.isNullOrEmpty(div.getHdnShichosonCode()) && !RString.isNullOrEmpty(div.getHdnShichosonName())) {
+            div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setHokenjaNo(div.getHdnShichosonCode());
+            div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setHokenjaName(div.getHdnShichosonName());
+            div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(true);
+        }
         div.getChosaitakusakiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
@@ -244,7 +252,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMainDiv div, IDownLoadServletResponse response) {
-
+        
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<NinteichosaItakusakiCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
@@ -261,7 +269,7 @@ public class NinteichosaItakusakiMain {
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
-
+    
     private NinteichosaItakusakiCsvEntity getCsvData(dgSonotaKikanIchiran_Row row) {
         RString waritsukeTeiin = RString.EMPTY;
         if (row.getWaritsukeTeiin() != null) {
@@ -337,7 +345,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnKakutei(NinteichosaItakusakiMainDiv div) {
-
+        
         RString イベント状態 = div.getChosaitakusakiJohoInput().getState();
         int sonotaKikanJohoCount = NinteichosaMasterFinder.createInstance().getSonotaKikanJohoCount(NinteichosaMasterSearchParameter.
                 createParamForSelectByKey(new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
@@ -348,7 +356,7 @@ public class NinteichosaItakusakiMain {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         Models<SonotaKikanJohoIdentifier, SonotaKikanJoho> models = ViewStateHolder.get(ViewStateKeys.その他機関マスタ検索結果, Models.class);
-
+        
         if (状態_追加.equals(イベント状態)) {
             SonotaKikanJoho sonotaKikanJoho = new SonotaKikanJoho(
                     new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
@@ -434,7 +442,7 @@ public class NinteichosaItakusakiMain {
         }
         return ResponseData.of(div).respond();
     }
-
+    
     private ValidationMessageControlPairs validateForDelete(NinteichosaItakusakiMainDiv div) {
         List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
         NinteichosaMasterFinder masterFinder = NinteichosaMasterFinder.createInstance();
@@ -486,7 +494,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnReSearch(NinteichosaItakusakiMainDiv div) {
-
+        
         List<dgSonotaKikanIchiran_Row> ichiranList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
         boolean isUpdate = false;
         for (dgSonotaKikanIchiran_Row row : ichiranList) {
@@ -526,11 +534,11 @@ public class NinteichosaItakusakiMain {
         div.setHdnTxtShikibetsuCode(new RString("004"));
         return ResponseData.of(div).respond();
     }
-
+    
     private NinteichosaItakusakiMainHandler getHandler(NinteichosaItakusakiMainDiv div) {
         return new NinteichosaItakusakiMainHandler(div);
     }
-
+    
     private NinteichosaMainValidationHandler getValidationHandler(NinteichosaItakusakiMainDiv div) {
         return new NinteichosaMainValidationHandler(div);
     }
@@ -543,7 +551,7 @@ public class NinteichosaItakusakiMain {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnCsvKozaNashi(NinteichosaItakusakiMainDiv div, IDownLoadServletResponse response) {
-
+        
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
         try (CsvWriter<SonotaKikanJohoCSVEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
@@ -562,7 +570,7 @@ public class NinteichosaItakusakiMain {
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, OUTPUT_CSV_FILE_NAME), response);
     }
-
+    
     private SonotaKikanJohoCSVEntity getCsvDataSonota(dgSonotaKikanIchiran_Row row) {
         SonotaKikanJohoCSVEntity data = new SonotaKikanJohoCSVEntity(
                 row.getHokensha(),
@@ -669,7 +677,7 @@ public class NinteichosaItakusakiMain {
                 .append(row調査委託区分)
                 .toRString();
     }
-
+    
     private RString set機関の区分(RString row機関の区分) {
         RStringBuilder 機関区分編集 = new RStringBuilder();
         return row機関の区分.isEmpty()
@@ -681,7 +689,7 @@ public class NinteichosaItakusakiMain {
                 .append(row機関の区分)
                 .toRString();
     }
-
+    
     private RString set預金種別(RString 預金種別コード) {
         if (!預金種別コード.isEmpty()) {
             switch (預金種別コード.toInt()) {
@@ -698,6 +706,6 @@ public class NinteichosaItakusakiMain {
             }
         }
         return RString.EMPTY;
-
+        
     }
 }
