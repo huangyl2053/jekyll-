@@ -67,9 +67,21 @@ public class ShinsakaiIinWaritsuke {
                 .search審査会開催予定情報Of開催番号(開催番号).records();
         getHandler(div).onLoad(kaisaiYoteiJohoList, 開催番号);
         List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.search審査会委員情報Of開催番号(開催番号, 開催年月日).records();
-        getHandler(div).setDataGrid(iinJoholist);
         Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models
                 = Models.create(iinJohomanager.searchByKaisaiNo(開催番号).records());
+        if (models != null && !models.values().isEmpty() && !models.values().contains(null)) {
+            List<RString> shinsakaiWariateIinCodeList = new ArrayList<>();
+            for (ShinsakaiWariateIinJoho2 model : models.values()) {
+                shinsakaiWariateIinCodeList.add(model.get介護認定審査会委員コード());
+            }
+            List<ShinsakaiiinJoho> shinsakaiWariateIinJohoList = new ArrayList<>();
+            List<ShinsakaiiinJoho> shinsakaiNotWariateIinJohoList = new ArrayList<>();
+            getHandler(div).setShinsakaiWariateIinJohoList(iinJoholist, shinsakaiWariateIinCodeList,
+                    shinsakaiWariateIinJohoList, shinsakaiNotWariateIinJohoList);
+            getHandler(div).setShinsakaiIinDataGrid(shinsakaiWariateIinJohoList, shinsakaiNotWariateIinJohoList);
+        } else {
+            getHandler(div).setDataGrid(iinJoholist);
+        }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会割当委員情報_一覧, models);
         return ResponseData.of(div).respond();
     }
@@ -188,5 +200,5 @@ public class ShinsakaiIinWaritsuke {
 
     private ShinsakaiIinWaritsukeValidationHandler getValidationHandler(ShinsakaiIinWaritsukeDiv div) {
         return new ShinsakaiIinWaritsukeValidationHandler(div);
-    }
+    }    
 }

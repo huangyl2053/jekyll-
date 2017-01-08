@@ -71,15 +71,9 @@
             ,dbT5594."haishiFlag" AS "haishiFlag"
             ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
             ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
-            ,CASE WHEN  dbT5503."shinsakaiKaisaiNo" IS NOT NULL THEN
-                TRUE
-            ELSE
-                dbT5593."substituteFlag"
-            END AS "substituteFlag"
+            ,dbT5593."substituteFlag" AS "substituteFlag"
         FROM
             rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501
-                LEFT JOIN  rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
-                    ON dbT5503."shinsakaiKaisaiNo" = dbT5501."shinsakaiKaisaiNo"
                 INNER JOIN  rgdb."DbT5591GogitaiJoho" dbT5591
                     ON dbT5591."gogitaiNo" = dbT5501."gogitaiNo"
                     AND dbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
@@ -104,13 +98,6 @@
                         AND dbT5595."shoKisaiHokenshaNo" = dbT5914."shoKisaiHokenshaNo"
         WHERE
             dbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
-            AND dbT5594."shinsakaiIinCode" NOT IN (
-                                                SELECT
-                                                    dbT5503."shinsakaiIinCode"
-                                                FROM rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
-                                                WHERE dbT5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
-                                                AND dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
-                                                )
         AND dbT5594."haishiFlag" = false
         AND "shinsakaiIinShuryoYMD" >= #{kaisaiYMD}
     </select>

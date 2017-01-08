@@ -3,18 +3,23 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 27 13:57:33 CST 2016
+ * Sat Jan 07 16:17:46 JST 2017 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgShinsakaiIinKoseiIchiran_Row のクラスファイル
- *
+ * dgShinsakaiIinKoseiIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     private RString shinsakaiIinCode;
     private RString shinsakaiIinName;
@@ -23,7 +28,6 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
     private RString shinsakaiInnShikaku;
     private RString gogitaichoKubun;
     private RString shukketsuKubun;
-    private RString haishiFlag;
     private RString shinsakaiIinKaishibi;
     private RString shinsakaiIinShuryobi;
 
@@ -36,7 +40,6 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
         this.shinsakaiInnShikaku = RString.EMPTY;
         this.gogitaichoKubun = RString.EMPTY;
         this.shukketsuKubun = RString.EMPTY;
-        this.haishiFlag = RString.EMPTY;
         this.shinsakaiIinKaishibi = RString.EMPTY;
         this.shinsakaiIinShuryobi = RString.EMPTY;
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
@@ -46,12 +49,11 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
         this.setOriginalData("shinsakaiInnShikaku", shinsakaiInnShikaku);
         this.setOriginalData("gogitaichoKubun", gogitaichoKubun);
         this.setOriginalData("shukketsuKubun", shukketsuKubun);
-        this.setOriginalData("haishiFlag", haishiFlag);
         this.setOriginalData("shinsakaiIinKaishibi", shinsakaiIinKaishibi);
         this.setOriginalData("shinsakaiIinShuryobi", shinsakaiIinShuryobi);
     }
 
-    public dgShinsakaiIinKoseiIchiran_Row(RString shinsakaiIinCode, RString shinsakaiIinName, RString shozokuKikan, RString sex, RString shinsakaiInnShikaku, RString gogitaichoKubun, RString shukketsuKubun, RString haishiFlag, RString shinsakaiIinKaishibi, RString shinsakaiIinShuryobi) {
+    public dgShinsakaiIinKoseiIchiran_Row(RString shinsakaiIinCode, RString shinsakaiIinName, RString shozokuKikan, RString sex, RString shinsakaiInnShikaku, RString gogitaichoKubun, RString shukketsuKubun, RString shinsakaiIinKaishibi, RString shinsakaiIinShuryobi) {
         super();
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shinsakaiIinName", shinsakaiIinName);
@@ -60,7 +62,6 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
         this.setOriginalData("shinsakaiInnShikaku", shinsakaiInnShikaku);
         this.setOriginalData("gogitaichoKubun", gogitaichoKubun);
         this.setOriginalData("shukketsuKubun", shukketsuKubun);
-        this.setOriginalData("haishiFlag", haishiFlag);
         this.setOriginalData("shinsakaiIinKaishibi", shinsakaiIinKaishibi);
         this.setOriginalData("shinsakaiIinShuryobi", shinsakaiIinShuryobi);
         this.shinsakaiIinCode = shinsakaiIinCode;
@@ -70,7 +71,6 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
         this.shinsakaiInnShikaku = shinsakaiInnShikaku;
         this.gogitaichoKubun = gogitaichoKubun;
         this.shukketsuKubun = shukketsuKubun;
-        this.haishiFlag = haishiFlag;
         this.shinsakaiIinKaishibi = shinsakaiIinKaishibi;
         this.shinsakaiIinShuryobi = shinsakaiIinShuryobi;
     }
@@ -101,10 +101,6 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
 
     public RString getShukketsuKubun() {
         return shukketsuKubun;
-    }
-
-    public RString getHaishiFlag() {
-        return haishiFlag;
     }
 
     public RString getShinsakaiIinKaishibi() {
@@ -148,11 +144,6 @@ public class dgShinsakaiIinKoseiIchiran_Row extends DataRow {
     public void setShukketsuKubun(RString shukketsuKubun) {
         this.setOriginalData("shukketsuKubun", shukketsuKubun);
         this.shukketsuKubun = shukketsuKubun;
-    }
-
-    public void setHaishiFlag(RString haishiFlag) {
-        this.setOriginalData("haishiFlag", haishiFlag);
-        this.haishiFlag = haishiFlag;
     }
 
     public void setShinsakaiIinKaishibi(RString shinsakaiIinKaishibi) {

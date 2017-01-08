@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
@@ -85,6 +87,39 @@ public class ShinsakaiIinWaritsukeHandler {
         }
         div.getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);
     }
+    
+    public void setShinsakaiWariateIinJohoList(List<ShinsakaiiinJoho> iinJoholist,
+            List<RString> shinsakaiWariateIinCodeList,
+            List<ShinsakaiiinJoho> shinsakaiWariateIinJohoList,
+            List<ShinsakaiiinJoho> shinsakaiNotWariateIinJohoList) {
+        for (ShinsakaiiinJoho shinsakaiIinJoho : iinJoholist) {
+            if (shinsakaiWariateIinCodeList.contains(shinsakaiIinJoho.get介護認定審査会委員コード())) {
+                shinsakaiWariateIinJohoList.add(shinsakaiIinJoho);
+            } else {
+                shinsakaiNotWariateIinJohoList.add(shinsakaiIinJoho);
+            }
+        }
+    }
+
+    /**
+     * 介護認定審査会委員(構成)一覧gridエリア。
+     *
+     * @param shinsakaiWariateIinJohoList 審査会割当委員情報リスト
+     * @param shinsakaiNotWariateIinJohoList 審査会Not割当委員情報リスト
+     */
+    public void setShinsakaiIinDataGrid(List<ShinsakaiiinJoho> shinsakaiWariateIinJohoList,
+            List<ShinsakaiiinJoho> shinsakaiNotWariateIinJohoList) {
+        List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = new ArrayList<>();
+        List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
+        for (ShinsakaiiinJoho shinsakaiIinJoho : shinsakaiWariateIinJohoList) {
+            set構成一覧DataGrid(koseiIchiranGridList, shinsakaiIinJoho);
+        }
+        for (ShinsakaiiinJoho shinsakaiIinJoho : shinsakaiNotWariateIinJohoList) {
+            set一覧DataGrid(ichiranGridList, shinsakaiIinJoho);
+        }
+        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
+        div.getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
+    }
 
     /**
      * 介護認定審査会委員(構成)一覧gridエリア。
@@ -94,30 +129,11 @@ public class ShinsakaiIinWaritsukeHandler {
     public void setDataGrid(List<ShinsakaiiinJoho> list) {
         List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = new ArrayList<>();
         List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            ShinsakaiiinJoho business = list.get(i);
-            if (business.is補欠区分()) {
-                set一覧DataGrid(ichiranGridList, business);
+        for (ShinsakaiiinJoho shinsakaiIinJoho : list) {
+            if (shinsakaiIinJoho.is補欠区分()) {
+                set一覧DataGrid(ichiranGridList, shinsakaiIinJoho);
             } else {
-                dgShinsakaiIinKoseiIchiran_Row koseiIchiran_Row = new dgShinsakaiIinKoseiIchiran_Row();
-                koseiIchiran_Row.setShinsakaiIinCode(nullToEmpty(business.get介護認定審査会委員コード()));
-                koseiIchiran_Row.setShinsakaiIinName(nullToEmpty(business.get介護認定審査会委員氏名()));
-                koseiIchiran_Row.setShozokuKikan(nullToEmpty(business.get所属機関()));
-                koseiIchiran_Row.setSex(Seibetsu.toValue(nullToEmpty(business.get性別())).get名称());
-                koseiIchiran_Row.setShinsakaiInnShikaku(Sikaku.toValue(
-                        nullToEmpty(business.get介護認定審査会委員資格())).get名称());
-                koseiIchiran_Row.setGogitaichoKubun(通常.equals(nullToEmpty(business.get合議体長区分())) ? RString.EMPTY
-                        : GogitaichoKubunCode.toValue(nullToEmpty(business.get合議体長区分())).get名称());
-                koseiIchiran_Row.setShukketsuKubun(IsShusseki.出席.get名称());
-                koseiIchiran_Row.setHaishiFlag(IsHaishi.廃止.equals(IsHaishi.toValue(business.is廃止フラグ()))
-                        ? 廃止フラグ_不可 : 廃止フラグ_登録可);
-                koseiIchiran_Row.setShinsakaiIinKaishibi(kaishiYMDtoEmpty(business.get介護認定審査会委員開始日()).isEmpty() ? null
-                        : new RDate(business.get介護認定審査会委員開始日()
-                                .toString()).wareki().toDateString());
-                koseiIchiran_Row.setShinsakaiIinShuryobi(shuryoYMDtoEmpty(business.get介護認定審査会委員終了日()).isEmpty() ? null
-                        : new RDate(business.get介護認定審査会委員終了日()
-                                .toString()).wareki().toDateString());
-                koseiIchiranGridList.add(koseiIchiran_Row);
+                set構成一覧DataGrid(koseiIchiranGridList, shinsakaiIinJoho);
             }
         }
         div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
@@ -162,7 +178,6 @@ public class ShinsakaiIinWaritsukeHandler {
         row.setShinsakaiInnShikaku(shinsakaiIinIchiranRow.getShinsakaiIinShikaku());
         row.setGogitaichoKubun(shinsakaiIinIchiranRow.getGogitaichoKubun());
         row.setShukketsuKubun(shinsakaiIinIchiranRow.getShukketsuKubun());
-        row.setHaishiFlag(shinsakaiIinIchiranRow.getHaishiFlag());
         row.setShinsakaiIinKaishibi(shinsakaiIinIchiranRow.getShinsakaiIinKaishibi());
         row.setShinsakaiIinShuryobi(shinsakaiIinIchiranRow.getShinsakaiIinShuryobi());
         div.getDgShinsakaiIinKoseiIchiran().getDataSource().add(row);
@@ -180,9 +195,12 @@ public class ShinsakaiIinWaritsukeHandler {
         row.setShozokuKikan(shinsakaiIinKoseiIchiranRow.getShozokuKikan());
         row.setSex(shinsakaiIinKoseiIchiranRow.getSex());
         row.setShinsakaiIinShikaku(shinsakaiIinKoseiIchiranRow.getShinsakaiInnShikaku());
-        row.setHaishiFlag(shinsakaiIinKoseiIchiranRow.getHaishiFlag());
-        row.setShinsakaiIinKaishibi(new RDate(nullToEmpty(shinsakaiIinKoseiIchiranRow.getShinsakaiIinKaishibi()).toString()).wareki().toDateString());
-        row.setShinsakaiIinShuryobi(new RDate(nullToEmpty(shinsakaiIinKoseiIchiranRow.getShinsakaiIinShuryobi()).toString()).wareki().toDateString());
+        row.setShinsakaiIinKaishibi(kaishiYMDtoEmpty(shinsakaiIinKoseiIchiranRow.getShinsakaiIinKaishibi()).isEmpty() ? RString.EMPTY
+                : new RDate(shinsakaiIinKoseiIchiranRow.getShinsakaiIinKaishibi()
+                        .toString()).wareki().toDateString());
+        row.setShinsakaiIinShuryobi(shuryoYMDtoEmpty(shinsakaiIinKoseiIchiranRow.getShinsakaiIinShuryobi()).isEmpty() ? RString.EMPTY
+                : new RDate(shinsakaiIinKoseiIchiranRow.getShinsakaiIinShuryobi()
+                        .toString()).wareki().toDateString());
         row.setGogitaichoKubun(shinsakaiIinKoseiIchiranRow.getGogitaichoKubun());
         row.setShukketsuKubun(shinsakaiIinKoseiIchiranRow.getShukketsuKubun());
         div.getDgShinsakaiIinIchiran().getDataSource().add(row);
@@ -206,7 +224,28 @@ public class ShinsakaiIinWaritsukeHandler {
         LockingKey lockingKey = new LockingKey(new RString("ShinsakaiNo"));
         RealInitialLocker.release(lockingKey);
     }
-
+    
+    private void set構成一覧DataGrid(List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList,
+            ShinsakaiiinJoho shinsakaiIinJoho) {
+        dgShinsakaiIinKoseiIchiran_Row koseiIchiran_Row = new dgShinsakaiIinKoseiIchiran_Row();
+        koseiIchiran_Row.setShinsakaiIinCode(nullToEmpty(shinsakaiIinJoho.get介護認定審査会委員コード()));
+        koseiIchiran_Row.setShinsakaiIinName(nullToEmpty(shinsakaiIinJoho.get介護認定審査会委員氏名()));
+        koseiIchiran_Row.setShozokuKikan(nullToEmpty(shinsakaiIinJoho.get所属機関()));
+        koseiIchiran_Row.setSex(Seibetsu.toValue(nullToEmpty(shinsakaiIinJoho.get性別())).get名称());
+        koseiIchiran_Row.setShinsakaiInnShikaku(Sikaku.toValue(
+                nullToEmpty(shinsakaiIinJoho.get介護認定審査会委員資格())).get名称());
+        koseiIchiran_Row.setGogitaichoKubun(通常.equals(nullToEmpty(shinsakaiIinJoho.get合議体長区分())) ? RString.EMPTY
+                : GogitaichoKubunCode.toValue(nullToEmpty(shinsakaiIinJoho.get合議体長区分())).get名称());
+        koseiIchiran_Row.setShukketsuKubun(IsShusseki.出席.get名称());
+        koseiIchiran_Row.setShinsakaiIinKaishibi(kaishiYMDtoEmpty(shinsakaiIinJoho.get介護認定審査会委員開始日()).isEmpty() ? null
+                : new RDate(shinsakaiIinJoho.get介護認定審査会委員開始日()
+                        .toString()).wareki().toDateString());
+        koseiIchiran_Row.setShinsakaiIinShuryobi(shuryoYMDtoEmpty(shinsakaiIinJoho.get介護認定審査会委員終了日()).isEmpty() ? null
+                : new RDate(shinsakaiIinJoho.get介護認定審査会委員終了日()
+                        .toString()).wareki().toDateString());
+        koseiIchiranGridList.add(koseiIchiran_Row);
+    }
+    
     private void set一覧DataGrid(List<dgShinsakaiIinIchiran_Row> ichiranGridList, ShinsakaiiinJoho business) {
         dgShinsakaiIinIchiran_Row ichiran_Row = new dgShinsakaiIinIchiran_Row();
         ichiran_Row.setShinsakaiIinCode(nullToEmpty(business.get介護認定審査会委員コード()));
@@ -215,8 +254,6 @@ public class ShinsakaiIinWaritsukeHandler {
         ichiran_Row.setSex(Seibetsu.toValue(nullToEmpty(business.get性別())).get名称());
         ichiran_Row.setShinsakaiIinShikaku(Sikaku.toValue(
                 nullToEmpty(business.get介護認定審査会委員資格())).get名称());
-        ichiran_Row.setHaishiFlag(IsHaishi.廃止.equals(IsHaishi.toValue(business.is廃止フラグ()))
-                ? 廃止フラグ_不可 : 廃止フラグ_登録可);
         ichiran_Row.setShinsakaiIinKaishibi(kaishiYMDtoEmpty(business.get介護認定審査会委員開始日()).isEmpty() ? RString.EMPTY
                 : new RDate(business.get介護認定審査会委員開始日()
                         .toString()).wareki().toDateString());
