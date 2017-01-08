@@ -92,4 +92,11 @@ public final class OcrFiles implements Iterable<RString> {
     public Iterator<RString> iterator() {
         return this.elements.iterator();
     }
+
+    /**
+     * @return 要素を持たないとき@code true}. それ以外は{@code false}.
+     */
+    public boolean isEmpty() {
+        return this.elements.isEmpty();
+    }
 }

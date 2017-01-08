@@ -43,7 +43,11 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
         Map<OcrDataType, OcrFiles> map = OcrTorikomiUtil.groupingByType(FILE_PATHS);
         final OcrFiles IMAGE_FILE_PATHS = map.get(OcrDataType.イメージファイル);
         for (OcrDataType type : Arrays.asList(OcrDataType.意見書, OcrDataType.その他資料)) {
-            processParameter = new OcrImageReadProcessParameter(PROCESSING_DATE, map.get(type), IMAGE_FILE_PATHS);
+            OcrFiles files = map.get(type);
+            if (files.isEmpty()) {
+                continue;
+            }
+            processParameter = new OcrImageReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
             executeStep(OCRイメージの読み込み_PROCESS);
         }
     }

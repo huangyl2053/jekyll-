@@ -45,7 +45,7 @@ public final class CatalogLine {
     }
 
     private static RString toFileNameRemovingFolderPath(RString fileName) {
-        return fileName.substringEmptyOnError(fileName.lastIndexOf(MS_PATH_SEPARATOR));
+        return fileName.substringEmptyOnError(fileName.lastIndexOf(MS_PATH_SEPARATOR) + 1);
     }
 
     /**

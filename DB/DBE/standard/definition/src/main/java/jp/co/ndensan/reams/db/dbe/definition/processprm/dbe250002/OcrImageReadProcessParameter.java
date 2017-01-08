@@ -36,6 +36,6 @@ public class OcrImageReadProcessParameter implements IBatchProcessParameter {
     ) {
         this.処理日 = 処理日;
         this.ファイルPath = ファイルPath;
-        this.imageFilePaths = ファイルPath;
+        this.imageFilePaths = imageFilePaths;
     }
 }

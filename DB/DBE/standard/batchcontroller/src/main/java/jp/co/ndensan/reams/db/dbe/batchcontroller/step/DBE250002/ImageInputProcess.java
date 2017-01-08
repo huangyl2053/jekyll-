@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkensho
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -53,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -81,8 +82,6 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     @BatchWriter
     private BatchPermanentTableWriter<DbT5302ShujiiIkenshoJohoEntity> writer_DbT5302;
     @BatchWriter
-    private BatchPermanentTableWriter<DbT5303ShujiiIkenshoKinyuItemEntity> writer_DbT5303;
-    @BatchWriter
     private BatchPermanentTableWriter<DbT5304ShujiiIkenshoIkenItemEntity> writer_DbT5304;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5115ImageEntity> writer_DbT5115;
@@ -104,7 +103,6 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     @Override
     protected void createWriter() {
         writer_DbT5302 = new BatchPermanentTableWriter<>(DbT5302ShujiiIkenshoJohoEntity.class);
-        writer_DbT5303 = new BatchPermanentTableWriter<>(DbT5303ShujiiIkenshoKinyuItemEntity.class);
         writer_DbT5304 = new BatchPermanentTableWriter<>(DbT5304ShujiiIkenshoIkenItemEntity.class);
         writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
     }
@@ -212,6 +210,12 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         OcrIken value = sameKeyValues.get(0);
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                    .append("カタログデータの取得に失敗しました。 ")
+                    .append("SheetID下8桁：").append(value.getSheetID().get帳票一連ID下8桁())
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return false;
         }
         FileNameConvertionTheories converter = (value.getOcrID() == OCRID._777)
@@ -312,11 +316,29 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             this.writer_DbT5115.insert(entityImage);
             return true;
         } else {
-            ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
+            ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
                     .fromString(ir.getT5101_証記載保険者番号().concat(ir.getT5101_被保険者番号())), ir.getT5115_イメージ共有ファイルID());
-            SharedFile.deleteFileInEntry(or_sfd, 主治医意見書_表_BAK.toString());
-            SharedFile.deleteFileInEntry(or_sfd, 主治医意見書_裏_BAK.toString());
-            return SharedFile.appendNewFile(or_sfd, targetDirectory, RString.EMPTY.toString());
+            deleteIfExists(ro_sfd, 主治医意見書_表_BAK, 主治医意見書_裏_BAK);
+            return SharedFile.appendNewFile(ro_sfd, targetDirectory, RString.EMPTY.toString());
+        }
+    }
+
+    private static void deleteIfExists(ReadOnlySharedFileEntryDescriptor ro_sfd, final RString... targes) {
+        RString tmpDirectoryPath = Directory.createTmpDirectory();
+        SharedFile.copyToLocal(ro_sfd, new FilesystemPath(tmpDirectoryPath));
+        java.io.File tmpDirectory = new java.io.File(tmpDirectoryPath.toString());
+        for (final RString target : targes) {
+            _deleteIfExistsIn(tmpDirectory, target, ro_sfd);
+        }
+        tmpDirectory.delete();
+    }
+
+    private static void _deleteIfExistsIn(java.io.File tmpDirectory, final RString target, ReadOnlySharedFileEntryDescriptor ro_sfd) {
+        for (String fileName : tmpDirectory.list()) {
+            if (!fileName.contains(target)) {
+                continue;
+            }
+            SharedFile.deleteFileInEntry(ro_sfd, target.toString());
         }
     }
 
