@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -241,13 +241,73 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtDispMax() {
-        return this.getKensakuJoken().getTxtDispMax();
+    public TextBoxCode getTxtShinsakaiIinCodeFrom() {
+        return this.getKensakuJoken().getTxtShinsakaiIinCodeFrom();
     }
 
     @JsonIgnore
-    public void  setTxtDispMax(TextBoxNum txtDispMax) {
-        this.getKensakuJoken().setTxtDispMax(txtDispMax);
+    public void  setTxtShinsakaiIinCodeFrom(TextBoxCode txtShinsakaiIinCodeFrom) {
+        this.getKensakuJoken().setTxtShinsakaiIinCodeFrom(txtShinsakaiIinCodeFrom);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtShinsakaiIinCodeTo() {
+        return this.getKensakuJoken().getTxtShinsakaiIinCodeTo();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiIinCodeTo(TextBoxCode txtShinsakaiIinCodeTo) {
+        this.getKensakuJoken().setTxtShinsakaiIinCodeTo(txtShinsakaiIinCodeTo);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlShinsainShikakuMeisho() {
+        return this.getKensakuJoken().getDdlShinsainShikakuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlShinsainShikakuMeisho(DropDownList ddlShinsainShikakuMeisho) {
+        this.getKensakuJoken().setDdlShinsainShikakuMeisho(ddlShinsainShikakuMeisho);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShinsakaiIinName() {
+        return this.getKensakuJoken().getTxtShinsakaiIinName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiIinName(TextBox txtShinsakaiIinName) {
+        this.getKensakuJoken().setTxtShinsakaiIinName(txtShinsakaiIinName);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlShinsakaiIinMeisho() {
+        return this.getKensakuJoken().getDdlShinsakaiIinMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlShinsakaiIinMeisho(DropDownList ddlShinsakaiIinMeisho) {
+        this.getKensakuJoken().setDdlShinsakaiIinMeisho(ddlShinsakaiIinMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxKana getTxtShinsakaiIinKanaName() {
+        return this.getKensakuJoken().getTxtShinsakaiIinKanaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiIinKanaName(TextBoxKana txtShinsakaiIinKanaName) {
+        this.getKensakuJoken().setTxtShinsakaiIinKanaName(txtShinsakaiIinKanaName);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlShinsakaiIinKanaMeisho() {
+        return this.getKensakuJoken().getDdlShinsakaiIinKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlShinsakaiIinKanaMeisho(DropDownList ddlShinsakaiIinKanaMeisho) {
+        this.getKensakuJoken().setDdlShinsakaiIinKanaMeisho(ddlShinsakaiIinKanaMeisho);
     }
 
     @JsonIgnore
@@ -261,6 +321,16 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtDispMax() {
+        return this.getKensakuJoken().getTxtDispMax();
+    }
+
+    @JsonIgnore
+    public void  setTxtDispMax(TextBoxNum txtDispMax) {
+        this.getKensakuJoken().setTxtDispMax(txtDispMax);
+    }
+
+    @JsonIgnore
     public Button getBtnShinsakaiIinAdd() {
         return this.getShinsakaiIinJohoIchiran().getBtnShinsakaiIinAdd();
     }
@@ -271,12 +341,12 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKozaMitorokuCSV() {
+    public ButtonDownLoad getBtnKozaMitorokuCSV() {
         return this.getShinsakaiIinJohoIchiran().getBtnKozaMitorokuCSV();
     }
 
     @JsonIgnore
-    public void  setBtnKozaMitorokuCSV(Button btnKozaMitorokuCSV) {
+    public void  setBtnKozaMitorokuCSV(ButtonDownLoad btnKozaMitorokuCSV) {
         this.getShinsakaiIinJohoIchiran().setBtnKozaMitorokuCSV(btnKozaMitorokuCSV);
     }
 

@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -53,6 +54,8 @@ public class ShinsakaiIinJohoTorokuHandler {
     private static final RString KEY_有効 = new RString("key1");
     private static final RString ZERO = new RString("0");
     private final ShinsakaiIinJohoTorokuDiv div;
+    private static final RString KEY_0 = new RString("key0");
+    private static final int INDEX_0 = 0;
 
     /**
      * コンストラクタです。
@@ -64,13 +67,32 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     /**
-     * 画面初期化、画面項目に設定されている値をクリアする
+     * 画面初期化をする
      */
     public void load() {
         div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        List<KeyValueDataSource> shikakuDataSource = new ArrayList<>();
+        for (Sikaku sikaku : Sikaku.values()) {
+            shikakuDataSource.add(new KeyValueDataSource(sikaku.getコード(), sikaku.get名称()));
+        }
+        div.getDdlShinsainShikakuMeisho().setDataSource(shikakuDataSource);
+    }
+
+    /**
+     * 検索条件入力項目をクリアします。
+     */
+    public void clearKensakuJoken() {
+        div.getRadHyojiJoken().setSelectedKey(KEY_0);
+        div.getTxtShinsakaiIinCodeFrom().clearValue();
+        div.getTxtShinsakaiIinCodeTo().clearValue();
+        div.getTxtShinsakaiIinName().clearValue();
+        div.getTxtShinsakaiIinKanaName().clearValue();
+        div.getDdlShinsakaiIinMeisho().setSelectedIndex(INDEX_0);
+        div.getDdlShinsakaiIinKanaMeisho().setSelectedIndex(INDEX_0);
+        div.getDdlShinsainShikakuMeisho().setSelectedIndex(INDEX_0);
     }
 
     /**
@@ -412,7 +434,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         return false;
 
     }
-
 
     /**
      * 審査会委員一覧情報は初期状態にセットする。
