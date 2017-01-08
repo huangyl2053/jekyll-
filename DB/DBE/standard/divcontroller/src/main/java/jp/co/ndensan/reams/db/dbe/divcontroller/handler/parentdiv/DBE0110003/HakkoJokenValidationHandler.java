@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -108,7 +110,7 @@ public class HakkoJokenValidationHandler {
 
             if (!div.getTxtYoteiMiteishaShinseiYMD().isDisabled()) {
                 if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
-                    RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                    RString 限界日 = 遡及限界日.minusDay(1).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
                     IraiGyomuShokaiShinseiDateMessage message = new HakkoJokenValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
                     validPairs.add(new ValidationMessageControlPair(message));
                 }
@@ -137,7 +139,7 @@ public class HakkoJokenValidationHandler {
 
             if (!div.getTxtIraisakiHenkoshaIchiranShinseiYMD().isDisabled()) {
                 if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
-                    RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                    RString 限界日 = 遡及限界日.minusDay(1).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
                     IraiGyomuShokaiShinseiDateMessage message = new HakkoJokenValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
                     validPairs.add(new ValidationMessageControlPair(message));
                 }
@@ -166,7 +168,7 @@ public class HakkoJokenValidationHandler {
 
             if (!div.getTxtCheckListShinseiYMD().isDisabled()) {
                 if (申請日開始.isBefore(遡及限界日) || 申請日終了.isBefore(遡及限界日)) {
-                    RString 限界日 = 遡及限界日.minusDay(1).seireki().separator(Separator.JAPANESE).fillType(FillType.NONE).toDateString();
+                    RString 限界日 = 遡及限界日.minusDay(1).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
                     IraiGyomuShokaiShinseiDateMessage message = new HakkoJokenValidationHandler.IraiGyomuShokaiShinseiDateMessage(DbeErrorMessages.申請日不正_照会不可, 限界日);
                     validPairs.add(new ValidationMessageControlPair(message));
                 }

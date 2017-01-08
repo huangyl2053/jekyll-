@@ -57,8 +57,8 @@ public class DBE012001_ChosaInfoPrintTest extends DbeTestBase {
     }
 
     private static DBE012001_ChosaInfoPrintParameter createBatchParameter() {
-        RDate 処理日開始 = new RDate(2014, 3, 1);
-        RDate 処理日終了 = new RDate(2014, 3, 1);
+        RDate 処理日開始 = new RDate(2000, 3, 1);
+        RDate 処理日終了 = new RDate(2017, 3, 1);
         DBE012001_ChosaInfoPrintParameter parameter = new DBE012001_ChosaInfoPrintParameter();
 
         parameter.setNinteichosayoteimitei(false);

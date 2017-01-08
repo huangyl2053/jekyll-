@@ -41,7 +41,7 @@ public class NinteichosaItakusakiCsvEntity {
     private final RString waritsukeChiku;
     @CsvField(order = 120, name = "機関の区分")
     private final RString kikanKubun;
-    @CsvField(order = 130, name = "廃止フラグ")
+    @CsvField(order = 130, name = "その他機関の状況")
     private final RString haishiFlag;
     @CsvField(order = 140, name = "金融機関コード")
     private final RString kinyuKikan;
