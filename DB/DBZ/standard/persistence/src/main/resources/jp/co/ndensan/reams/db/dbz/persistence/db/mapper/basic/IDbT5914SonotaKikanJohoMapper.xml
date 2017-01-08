@@ -96,7 +96,7 @@
             </if>
             <if test="isその他機関コードFromFlag">
                 AND
-                #{その他機関コードFrom} <![CDATA[<=]]> dbT5914SonotaKi."dbT5914SonotaKikanJoho_sonotaKikanCode"
+                #{その他機関コードFrom} <![CDATA[<=]]> DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_sonotaKikanCode"
             </if>
             <if test="isその他機関コードToFlag">
                 AND

@@ -19,6 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigohokenShindanMeireishoHeaderItem {
 
+    private RString bunshoNo;
     private RString hakkoYMD;
     private RString denshiKoin;
     private RString ninshoshaYakushokuMei;
@@ -39,6 +40,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
     private RString hihokenshaNo;
     private RString iryokikanName;
     private RString tantoIshiName;
+    private RString iryokikanYubinNo;
     private RString iryokikanJusho;
     private RString telNo;
     private RString jushinKikan;
@@ -54,6 +56,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
     /**
      * インスタンスを生成します。
      *
+     * @param bunshoNo 文書番号
      * @param hakkoYMD 証明発行YMD
      * @param denshiKoin 電子公印
      * @param ninshoshaYakushokuMei 認証者役職名
@@ -73,6 +76,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
      * @param hihokenshaNo 被保険者番号
      * @param iryokikanName 名称
      * @param tantoIshiName 担当医師名
+     * @param iryokikanYubinNo 所在地郵便番号
      * @param iryokikanJusho 所在地
      * @param telNo 電話番号
      * @param jushinKikan 診断を受ける日時
@@ -81,6 +85,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
      * @param title 帳票名
      */
     public KaigohokenShindanMeireishoHeaderItem(
+            RString bunshoNo,
             RString hakkoYMD,
             RString denshiKoin,
             RString ninshoshaYakushokuMei,
@@ -100,12 +105,14 @@ public class KaigohokenShindanMeireishoHeaderItem {
             RString hihokenshaNo,
             RString iryokikanName,
             RString tantoIshiName,
+            RString iryokikanYubinNo,
             RString iryokikanJusho,
             RString telNo,
             RString jushinKikan,
             RString jushinArea,
             RString tsuchibun2,
             RString title) {
+        this.bunshoNo = bunshoNo;
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
@@ -125,6 +132,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
         this.hihokenshaNo = hihokenshaNo;
         this.iryokikanName = iryokikanName;
         this.tantoIshiName = tantoIshiName;
+        this.iryokikanYubinNo = iryokikanYubinNo;
         this.iryokikanJusho = iryokikanJusho;
         this.telNo = telNo;
         this.jushinKikan = jushinKikan;

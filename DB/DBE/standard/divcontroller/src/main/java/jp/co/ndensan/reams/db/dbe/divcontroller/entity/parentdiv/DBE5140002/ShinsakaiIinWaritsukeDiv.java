@@ -4,24 +4,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * ShinsakaiIinWaritsuke のクラスファイル
- *
+ * ShinsakaiIinWaritsuke のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShinsakaiIinWaritsukeDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,18 +25,18 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     private TextBox txtKaigoNinteiShinsakai;
     @JsonProperty("txtGogitai")
     private TextBox txtGogitai;
-    @JsonProperty("txtKaishiYoteiTime")
-    private TextBoxTime txtKaishiYoteiTime;
-    @JsonProperty("chkDummyKubun")
-    private CheckBoxList chkDummyKubun;
-    @JsonProperty("txtKaisaiYoteibi")
-    private TextBoxDate txtKaisaiYoteibi;
-    @JsonProperty("txtKaisaiBasho")
-    private TextBox txtKaisaiBasho;
-    @JsonProperty("txtShuryoYoteiTime")
-    private TextBoxTime txtShuryoYoteiTime;
     @JsonProperty("txtYoteiTeiin")
     private TextBox txtYoteiTeiin;
+    @JsonProperty("chkDummyKubun")
+    private CheckBoxList chkDummyKubun;
+    @JsonProperty("txtKaisaiBasho")
+    private TextBox txtKaisaiBasho;
+    @JsonProperty("txtKaisaiYoteibi")
+    private TextBoxDate txtKaisaiYoteibi;
+    @JsonProperty("txtKaishiYoteiTime")
+    private TextBoxTime txtKaishiYoteiTime;
+    @JsonProperty("txtShuryoYoteiTime")
+    private TextBoxTime txtShuryoYoteiTime;
     @JsonProperty("chkSeishinkai")
     private CheckBoxList chkSeishinkai;
     @JsonProperty("lblShinsakaiIinKoseiIchiran")
@@ -104,21 +97,21 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     }
 
     /*
-     * gettxtKaishiYoteiTime
-     * @return txtKaishiYoteiTime
+     * gettxtYoteiTeiin
+     * @return txtYoteiTeiin
      */
-    @JsonProperty("txtKaishiYoteiTime")
-    public TextBoxTime getTxtKaishiYoteiTime() {
-        return txtKaishiYoteiTime;
+    @JsonProperty("txtYoteiTeiin")
+    public TextBox getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
     }
 
     /*
-     * settxtKaishiYoteiTime
-     * @param txtKaishiYoteiTime txtKaishiYoteiTime
+     * settxtYoteiTeiin
+     * @param txtYoteiTeiin txtYoteiTeiin
      */
-    @JsonProperty("txtKaishiYoteiTime")
-    public void setTxtKaishiYoteiTime(TextBoxTime txtKaishiYoteiTime) {
-        this.txtKaishiYoteiTime = txtKaishiYoteiTime;
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBox txtYoteiTeiin) {
+        this.txtYoteiTeiin = txtYoteiTeiin;
     }
 
     /*
@@ -140,24 +133,6 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     }
 
     /*
-     * gettxtKaisaiYoteibi
-     * @return txtKaisaiYoteibi
-     */
-    @JsonProperty("txtKaisaiYoteibi")
-    public TextBoxDate getTxtKaisaiYoteibi() {
-        return txtKaisaiYoteibi;
-    }
-
-    /*
-     * settxtKaisaiYoteibi
-     * @param txtKaisaiYoteibi txtKaisaiYoteibi
-     */
-    @JsonProperty("txtKaisaiYoteibi")
-    public void setTxtKaisaiYoteibi(TextBoxDate txtKaisaiYoteibi) {
-        this.txtKaisaiYoteibi = txtKaisaiYoteibi;
-    }
-
-    /*
      * gettxtKaisaiBasho
      * @return txtKaisaiBasho
      */
@@ -176,6 +151,42 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     }
 
     /*
+     * gettxtKaisaiYoteibi
+     * @return txtKaisaiYoteibi
+     */
+    @JsonProperty("txtKaisaiYoteibi")
+    public TextBoxDate getTxtKaisaiYoteibi() {
+        return txtKaisaiYoteibi;
+    }
+
+    /*
+     * settxtKaisaiYoteibi
+     * @param txtKaisaiYoteibi txtKaisaiYoteibi
+     */
+    @JsonProperty("txtKaisaiYoteibi")
+    public void setTxtKaisaiYoteibi(TextBoxDate txtKaisaiYoteibi) {
+        this.txtKaisaiYoteibi = txtKaisaiYoteibi;
+    }
+
+    /*
+     * gettxtKaishiYoteiTime
+     * @return txtKaishiYoteiTime
+     */
+    @JsonProperty("txtKaishiYoteiTime")
+    public TextBoxTime getTxtKaishiYoteiTime() {
+        return txtKaishiYoteiTime;
+    }
+
+    /*
+     * settxtKaishiYoteiTime
+     * @param txtKaishiYoteiTime txtKaishiYoteiTime
+     */
+    @JsonProperty("txtKaishiYoteiTime")
+    public void setTxtKaishiYoteiTime(TextBoxTime txtKaishiYoteiTime) {
+        this.txtKaishiYoteiTime = txtKaishiYoteiTime;
+    }
+
+    /*
      * gettxtShuryoYoteiTime
      * @return txtShuryoYoteiTime
      */
@@ -191,24 +202,6 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     @JsonProperty("txtShuryoYoteiTime")
     public void setTxtShuryoYoteiTime(TextBoxTime txtShuryoYoteiTime) {
         this.txtShuryoYoteiTime = txtShuryoYoteiTime;
-    }
-
-    /*
-     * gettxtYoteiTeiin
-     * @return txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public TextBox getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
-    }
-
-    /*
-     * settxtYoteiTeiin
-     * @param txtYoteiTeiin txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBox txtYoteiTeiin) {
-        this.txtYoteiTeiin = txtYoteiTeiin;
     }
 
     /*

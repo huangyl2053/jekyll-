@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoTorokuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranEntity;
 
@@ -30,7 +31,7 @@ public interface IShinsakaiIinJohoMapper {
      * @param 介護認定審査会委員情報検索条件 介護認定審査会委員情報検索条件
      * @return List<ShinsakaiIinJohoEntity>
      */
-    List<ShinsakaiIinJohoEntity> get審査会委員情報By表示条件(ShinsakaiIinJohoMapperParameter 介護認定審査会委員情報検索条件);
+    List<ShinsakaiIinJohoEntity> get審査会委員情報By表示条件(ShinsakaiIinJohoTorokuMapperParameter 介護認定審査会委員情報検索条件);
 
     /**
      * 選択行の審査会委員コードで所属機関一覧情報List取得します。

@@ -49,6 +49,46 @@
             <if test="!isSubeteHyoji">
                 "haishiFlag" = FALSE
             </if>
+            <if test="isSubeteHyoji">
+                ("haishiFlag" = FALSE OR "haishiFlag" = TRUE)
+            </if>
+            <if  test="uses審査会委員コードFrom">
+                AND "shinsakaiIinCode" <![CDATA[>=]]> #{審査会委員コードFrom}
+            </if>
+            <if  test="uses審査会委員コードTo">
+                AND "shinsakaiIinCode"  <![CDATA[<=]]> #{審査会委員コードTo}
+            </if> 
+            <if test="uses審査会委員資格">
+                AND "shinsakaiIinShikakuCode" = #{審査会委員資格}
+            </if>
+            <if test="uses審査員氏名">
+               <if test="uses審査員氏名前方一致">
+                     AND "shinsakaiIinShimei" LIKE #{審査員氏名} || '%'
+                </if>
+                <if test="uses審査員氏名後方一致">
+                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名}
+                </if>
+                <if test="uses審査員氏名完全一致">
+                     AND "shinsakaiIinShimei" = #{審査員氏名}
+                </if>
+                <if test="uses審査員氏名部分一致">
+                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名} || '%'
+                </if>  
+            </if>     
+            <if test="uses審査員カナ名称">
+               <if test="uses審査員カナ名称前方一致">
+                     AND "shinsakaiIinKanaShimei" LIKE #{審査員カナ名称} || '%'
+                </if>
+                <if test="uses審査員カナ名称後方一致">
+                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称}
+                </if>
+                <if test="uses審査員カナ名称完全一致">
+                     AND "shinsakaiIinKanaShimei" = #{審査員カナ名称}
+                </if>
+                <if test="uses審査員カナ名称部分一致">
+                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称} || '%'
+                </if>  
+            </if>   
         </where>
         ORDER BY "dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
         LIMIT #{dispMax}) AS dbT5594ShinsakaiIinJoho

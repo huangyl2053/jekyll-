@@ -3,25 +3,29 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 27 13:57:33 CST 2016
+ * Sat Jan 07 16:17:46 JST 2017 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgShinsakaiIinIchiran_Row のクラスファイル
- *
+ * dgShinsakaiIinIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinsakaiIinIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     private RString shinsakaiIinCode;
     private RString shinsakaiIinName;
     private RString shozokuKikan;
     private RString sex;
     private RString shinsakaiIinShikaku;
-    private RString haishiFlag;
     private RString shinsakaiIinKaishibi;
     private RString shinsakaiIinShuryobi;
     private RString gogitaichoKubun;
@@ -34,7 +38,6 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.shozokuKikan = RString.EMPTY;
         this.sex = RString.EMPTY;
         this.shinsakaiIinShikaku = RString.EMPTY;
-        this.haishiFlag = RString.EMPTY;
         this.shinsakaiIinKaishibi = RString.EMPTY;
         this.shinsakaiIinShuryobi = RString.EMPTY;
         this.gogitaichoKubun = RString.EMPTY;
@@ -44,21 +47,19 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.setOriginalData("shozokuKikan", shozokuKikan);
         this.setOriginalData("sex", sex);
         this.setOriginalData("shinsakaiIinShikaku", shinsakaiIinShikaku);
-        this.setOriginalData("haishiFlag", haishiFlag);
         this.setOriginalData("shinsakaiIinKaishibi", shinsakaiIinKaishibi);
         this.setOriginalData("shinsakaiIinShuryobi", shinsakaiIinShuryobi);
         this.setOriginalData("gogitaichoKubun", gogitaichoKubun);
         this.setOriginalData("shukketsuKubun", shukketsuKubun);
     }
 
-    public dgShinsakaiIinIchiran_Row(RString shinsakaiIinCode, RString shinsakaiIinName, RString shozokuKikan, RString sex, RString shinsakaiIinShikaku, RString haishiFlag, RString shinsakaiIinKaishibi, RString shinsakaiIinShuryobi, RString gogitaichoKubun, RString shukketsuKubun) {
+    public dgShinsakaiIinIchiran_Row(RString shinsakaiIinCode, RString shinsakaiIinName, RString shozokuKikan, RString sex, RString shinsakaiIinShikaku, RString shinsakaiIinKaishibi, RString shinsakaiIinShuryobi, RString gogitaichoKubun, RString shukketsuKubun) {
         super();
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shinsakaiIinName", shinsakaiIinName);
         this.setOriginalData("shozokuKikan", shozokuKikan);
         this.setOriginalData("sex", sex);
         this.setOriginalData("shinsakaiIinShikaku", shinsakaiIinShikaku);
-        this.setOriginalData("haishiFlag", haishiFlag);
         this.setOriginalData("shinsakaiIinKaishibi", shinsakaiIinKaishibi);
         this.setOriginalData("shinsakaiIinShuryobi", shinsakaiIinShuryobi);
         this.setOriginalData("gogitaichoKubun", gogitaichoKubun);
@@ -68,7 +69,6 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
         this.shozokuKikan = shozokuKikan;
         this.sex = sex;
         this.shinsakaiIinShikaku = shinsakaiIinShikaku;
-        this.haishiFlag = haishiFlag;
         this.shinsakaiIinKaishibi = shinsakaiIinKaishibi;
         this.shinsakaiIinShuryobi = shinsakaiIinShuryobi;
         this.gogitaichoKubun = gogitaichoKubun;
@@ -93,10 +93,6 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
 
     public RString getShinsakaiIinShikaku() {
         return shinsakaiIinShikaku;
-    }
-
-    public RString getHaishiFlag() {
-        return haishiFlag;
     }
 
     public RString getShinsakaiIinKaishibi() {
@@ -138,11 +134,6 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
     public void setShinsakaiIinShikaku(RString shinsakaiIinShikaku) {
         this.setOriginalData("shinsakaiIinShikaku", shinsakaiIinShikaku);
         this.shinsakaiIinShikaku = shinsakaiIinShikaku;
-    }
-
-    public void setHaishiFlag(RString haishiFlag) {
-        this.setOriginalData("haishiFlag", haishiFlag);
-        this.haishiFlag = haishiFlag;
     }
 
     public void setShinsakaiIinKaishibi(RString shinsakaiIinKaishibi) {

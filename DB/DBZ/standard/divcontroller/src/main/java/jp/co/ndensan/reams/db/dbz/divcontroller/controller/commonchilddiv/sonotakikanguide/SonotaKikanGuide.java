@@ -63,7 +63,7 @@ public class SonotaKikanGuide {
             含まないFlag = true;
         }
         List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
-                .createその他機関情報の取得キー作成(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value(),
+                .createその他機関情報の取得キー作成(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
                         div.getTxtSonotaKikanCodefrom().getValue(),
                         div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
                         div.getTxtSonotaKikanName().getValue(),

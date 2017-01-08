@@ -39,6 +39,10 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     private RString hdnTxtSubGyomuCode;
     @JsonProperty("hdnTxtShikibetsuCode")
     private RString hdnTxtShikibetsuCode;
+    @JsonProperty("hdnShichosonCode")
+    private RString hdnShichosonCode;
+    @JsonProperty("hdnShichosonName")
+    private RString hdnShichosonName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -143,6 +147,42 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     @JsonProperty("hdnTxtShikibetsuCode")
     public void setHdnTxtShikibetsuCode(RString hdnTxtShikibetsuCode) {
         this.hdnTxtShikibetsuCode = hdnTxtShikibetsuCode;
+    }
+
+    /*
+     * gethdnShichosonCode
+     * @return hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public RString getHdnShichosonCode() {
+        return hdnShichosonCode;
+    }
+
+    /*
+     * sethdnShichosonCode
+     * @param hdnShichosonCode hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public void setHdnShichosonCode(RString hdnShichosonCode) {
+        this.hdnShichosonCode = hdnShichosonCode;
+    }
+
+    /*
+     * gethdnShichosonName
+     * @return hdnShichosonName
+     */
+    @JsonProperty("hdnShichosonName")
+    public RString getHdnShichosonName() {
+        return hdnShichosonName;
+    }
+
+    /*
+     * sethdnShichosonName
+     * @param hdnShichosonName hdnShichosonName
+     */
+    @JsonProperty("hdnShichosonName")
+    public void setHdnShichosonName(RString hdnShichosonName) {
+        this.hdnShichosonName = hdnShichosonName;
     }
 
     /*
