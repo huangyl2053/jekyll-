@@ -1076,7 +1076,8 @@ dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnOutputCsv
 dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnReSearch
 dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnSave
 dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnSearchKoseiShujiiIryoKikan
-dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnTorikeshi
+dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnModoru
+dbe/db/dbe/ShujiiIryoKikanMaster/onClick_btnBackSearchShujii
 dbe/db/dbe/ShujiiIryoKikanMaster/onLoad
 dbe/db/dbe/ShujiiIryoKikanMaster/onOkClose
 dbe/db/dbe/ShujiiIryoKikanMaster/onSelectByDeleteButton_dgShujiiIchiran

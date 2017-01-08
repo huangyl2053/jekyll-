@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001.KoseiShujiiIryoKikanMasterValidationHandler;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoCSVEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -29,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJohoIdentif
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -49,11 +49,19 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -425,12 +433,12 @@ public class ShujiiIryoKikanMaster {
     }
 
     /**
-     * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、主治医医療機関情報一覧エリアへ戻ります。
+     * 戻るボタンが押下された場合、入力明細エリアの入力内容を破棄し、主治医医療機関情報一覧エリアへ戻ります。
      *
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnTorikeshi(ShujiiIryoKikanMasterDiv div) {
+    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnModoru(ShujiiIryoKikanMasterDiv div) {
         boolean 状態 = ViewStateHolder.get(ViewStateKeys.状態, boolean.class);
         if ((状態_追加.equals(div.getShujiiJohoInput().getState())
                 || 状態_修正.equals(div.getShujiiJohoInput().getState()))
@@ -469,6 +477,31 @@ public class ShujiiIryoKikanMaster {
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnKakutei(ShujiiIryoKikanMasterDiv div) {
+        boolean 金融機関exist = !div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().validResult金融機関().existsError();
+        DropDownList 預金種別 = div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu();
+        TextBoxCode 口座番号 = div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo();
+        TextBoxKana 口座名義人 = div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin();
+        boolean 預金種別exist = !RString.EMPTY.equals(預金種別.getSelectedValue());
+        boolean 口座番号exist = !RString.EMPTY.equals(口座番号.getValue());
+        boolean 口座名義人exist = !RString.EMPTY.equals(口座名義人.getValue());
+        if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist) {
+            ValidationMessageControlPairs validPairs = div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().validResult金融機関();
+
+            if (!預金種別exist) {
+                validPairs.add(new ValidationMessageControlPair(validationErrorMessage.預金種別, 預金種別));
+            }
+            if (!口座番号exist) {
+                validPairs.add(new ValidationMessageControlPair(validationErrorMessage.口座番号, 口座番号));
+            }
+            if (!口座名義人exist) {
+                validPairs.add(new ValidationMessageControlPair(validationErrorMessage.口座名義人, 口座名義人));
+            }
+
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        
         RString イベント状態 = div.getShujiiJohoInput().getState();
         boolean 状態 = ViewStateHolder.get(ViewStateKeys.状態, boolean.class);
         if (状態) {
@@ -526,6 +559,22 @@ public class ShujiiIryoKikanMaster {
 
         return ResponseData.of(div)
                 .setState(DBE9010001StateName.医療機関一覧);
+    }
+    private enum validationErrorMessage implements IValidationMessage {
+
+        預金種別(UrErrorMessages.必須項目),
+        口座番号(UrErrorMessages.必須項目),
+        口座名義人(UrErrorMessages.必須項目);
+        private final Message message;
+
+        private validationErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 
     /**
@@ -681,6 +730,16 @@ public class ShujiiIryoKikanMaster {
             return ResponseData.of(div).forwardWithEventName(DBE9010001TransitionEventName.主治医マスタに遷移).respond();
         }
         return ResponseData.of(div).respond();
+    }
+    /**
+     * 主治医を登録ボタンボタン押下で、主治医マスタに戻ります。
+     *
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackSearchShujii(ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).clearKensakuJoken();
+        return ResponseData.of(div).setState(DBE9010001StateName.検索);
     }
 
     /**
