@@ -837,6 +837,8 @@
         rgdb."DbT5101NinteiShinseiJoho" "dbT5101_NinteiShinseiJoho"
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051 ON DbT7051."shoKisaiHokenshaNo" = "dbT5101_NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        INNER JOIN (<include refid="selectSoshonDataSakuseiTaishosha" />) AS "SoshonDataSakuseiTaishosha"
+        ON "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo" = "SoshonDataSakuseiTaishosha"."shinseishoKanriNo"
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" "dbT5105_NinteiKanryoJoho" ON "dbT5105_NinteiKanryoJoho"."shinseishoKanriNo" = "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo"
         INNER JOIN
