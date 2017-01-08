@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoh
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoTorokuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.DBE5130001StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinTorokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.KozaMitorokuShinsakaiIinCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShinsaInJohoIchiran_Row;
@@ -75,7 +76,8 @@ public class ShinsakaiIinJohoToroku {
     private static final RString ハイフン = new RString("-");
     private static final int INT_3 = 3;
     private static final int INT_7 = 7;
-    private static final RString CSVファイル名 = new RString("口座情報未登録機関一覧表（審査会委員）.csv");
+    private static final RString CSVファイル名 = new RString("介護認定審査会員登録.csv");
+    private static final RString 口座情報未登録_CSVファイル名 = new RString("口座情報未登録機関一覧表.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
@@ -509,7 +511,61 @@ public class ShinsakaiIinJohoToroku {
     }
 
     /**
-     * 口座情報未登録一覧（審査会委員）を出力するボタンが押下された場合、ＣＳＶを出力します。
+     * ＣＳＶを出力するボタンが押下された場合、ＣＳＶを出力します。
+     *
+     * @param div ShinsakaiIinJohoTorokuDiv
+     * @param response IDownLoadServletResponse
+     * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
+     */
+    public IDownLoadServletResponse onClick_btnOutputCsv(ShinsakaiIinJohoTorokuDiv div, IDownLoadServletResponse response) {
+
+        getValidationHandler(div).validateForCsv();
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        try (CsvWriter<ShinsakaiIinTorokuCsvEntity> csvWriter
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+            List<dgShinsaInJohoIchiran_Row> dataList = div.getDgShinsaInJohoIchiran().getDataSource();
+            for (dgShinsaInJohoIchiran_Row row : dataList) {
+                csvWriter.writeLine(getCsvData(row));
+            }
+            csvWriter.close();
+        }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        sfd = SharedFile.defineSharedFile(sfd);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
+        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+    }
+
+    private ShinsakaiIinTorokuCsvEntity getCsvData(dgShinsaInJohoIchiran_Row row) {
+        RString 担当地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.審査会地区コード.getコード(),
+                new Code(row.getShinsakaiChikuCode()));
+        ShinsakaiIinTorokuCsvEntity data = new ShinsakaiIinTorokuCsvEntity(
+                row.getShinsainCode(),
+                row.getShimei(),
+                row.getKanaShimei(),
+                editコード名称(row.getShikakuCodeCode(), row.getShikakuCode()),
+                editコード名称(row.getShinsakaiChikuCode(), 担当地区名称),
+                editCsv日付(row.getShinsakaiIinKaishiYMD().getValue()),
+                editCsv日付(row.getShinsakaiIinShuryoYMD().getValue()),
+                Edit郵便番号(row.getYubinNo()),
+                row.getJusho(),
+                row.getTelNo1(),
+                row.getFaxNo(),
+                editCsv日付(row.getHaishiYMD().getValue()),
+                row.getKinyuKikanCode(),
+                row.getKinyuKikanShitenCode(),
+                row.getYokinShubetsu(),
+                row.getKozaNo(),
+                row.getKanaShimei(),
+                row.getKozaMeiginin()
+        );
+        return data;
+    }
+
+    /**
+     * 口座情報未登録一覧を出力するボタンが押下された場合、ＣＳＶを出力します。
      *
      * @param div ShinsakaiIinJohoTorokuDiv
      * @param response IDownLoadServletResponse
@@ -517,8 +573,8 @@ public class ShinsakaiIinJohoToroku {
      */
     public IDownLoadServletResponse onClick_btnKozaMitorokuCSV(ShinsakaiIinJohoTorokuDiv div, IDownLoadServletResponse response) {
 
-        getValidationHandler(div).validateForKozaMitorokuCsv();
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        getValidationHandler(div).validateForCsv();
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 口座情報未登録_CSVファイル名);
         try (CsvWriter<KozaMitorokuShinsakaiIinCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
@@ -530,11 +586,11 @@ public class ShinsakaiIinJohoToroku {
             }
             csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(口座情報未登録_CSVファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 口座情報未登録_CSVファイル名), response);
 
     }
 

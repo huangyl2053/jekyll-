@@ -341,6 +341,16 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDownLoad getBtnOutputCsv() {
+        return this.getShinsakaiIinJohoIchiran().getBtnOutputCsv();
+    }
+
+    @JsonIgnore
+    public void  setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
+        this.getShinsakaiIinJohoIchiran().setBtnOutputCsv(btnOutputCsv);
+    }
+
+    @JsonIgnore
     public ButtonDownLoad getBtnKozaMitorokuCSV() {
         return this.getShinsakaiIinJohoIchiran().getBtnKozaMitorokuCSV();
     }
