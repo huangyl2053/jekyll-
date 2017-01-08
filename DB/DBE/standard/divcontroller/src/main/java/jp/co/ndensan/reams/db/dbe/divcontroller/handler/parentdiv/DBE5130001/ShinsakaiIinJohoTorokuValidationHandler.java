@@ -162,7 +162,7 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
      * ＣＳＶを出力するボタンを押下するとき、バリデーションチェックを行う。
      *
      */
-    public void validateForKozaMitorokuCsv() {
+    public void validateForCsv() {
         List<dgShinsaInJohoIchiran_Row> ichiranList = div.getDgShinsaInJohoIchiran().getDataSource();
         if (ichiranList.isEmpty()) {
             throw new ApplicationException(ShinsakaiIinJohoTorokuValidationMessage.該当データなし.getMessage());

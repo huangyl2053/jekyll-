@@ -23,6 +23,8 @@ public class ShinsakaiIinJohoIchiranDiv extends Panel {
      */
     @JsonProperty("btnShinsakaiIinAdd")
     private Button btnShinsakaiIinAdd;
+    @JsonProperty("btnOutputCsv")
+    private ButtonDownLoad btnOutputCsv;
     @JsonProperty("btnKozaMitorokuCSV")
     private ButtonDownLoad btnKozaMitorokuCSV;
     @JsonProperty("dgShinsaInJohoIchiran")
@@ -50,6 +52,24 @@ public class ShinsakaiIinJohoIchiranDiv extends Panel {
     @JsonProperty("btnShinsakaiIinAdd")
     public void setBtnShinsakaiIinAdd(Button btnShinsakaiIinAdd) {
         this.btnShinsakaiIinAdd = btnShinsakaiIinAdd;
+    }
+
+    /*
+     * getbtnOutputCsv
+     * @return btnOutputCsv
+     */
+    @JsonProperty("btnOutputCsv")
+    public ButtonDownLoad getBtnOutputCsv() {
+        return btnOutputCsv;
+    }
+
+    /*
+     * setbtnOutputCsv
+     * @param btnOutputCsv btnOutputCsv
+     */
+    @JsonProperty("btnOutputCsv")
+    public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
+        this.btnOutputCsv = btnOutputCsv;
     }
 
     /*
