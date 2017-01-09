@@ -167,7 +167,7 @@ public final class ImageJohoMaskingParameter {
             is被保険者番号 = true;
         }
         return new ImageJohoMaskingParameter(市町村コード, 日付範囲開始, 日付範囲終了,
-                ShoriJotaiKubun.取下.getコード(), ShoriJotaiKubun.延期.getコード(),
+                ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(),
                 TokkijikoTextImageKubun.イメージ.getコード(), new RString("001"),
                 申請書管理番号リスト, 被保険者番号, 最大表示件数,
                 is用紙タイプ, is画面, isメニュー, is保険者, is審査会開催予定日, is日付範囲開始, is日付範囲終了,
