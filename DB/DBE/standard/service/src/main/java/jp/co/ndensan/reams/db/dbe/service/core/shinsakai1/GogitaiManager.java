@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohoshinsakai.GogitaiJoho
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohoshinsakai.IGogitaiJohoShinsaMapper;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -53,12 +54,13 @@ public class GogitaiManager {
     /**
      * 合議体情報のリストを取得処理です。
      *
+     * @param 基準日 {@link RDate}
      * @return 合議体情報
      */
-    public SearchResult<GogitaiJohoShinsaRelateBusiness> get合議体情報() {
+    public SearchResult<GogitaiJohoShinsaRelateBusiness> get合議体情報(RDate 基準日) {
         List<GogitaiJohoShinsaRelateBusiness> 合議体情報 = new ArrayList<>();
         IGogitaiJohoShinsaMapper mapper = mapperProvider.create(IGogitaiJohoShinsaMapper.class);
-        List<GogitaiJohoShinsaRelateEntity> entityList = mapper.get合議体情報();
+        List<GogitaiJohoShinsaRelateEntity> entityList = mapper.get合議体情報(基準日);
         for (GogitaiJohoShinsaRelateEntity entity : entityList) {
             合議体情報.add(new GogitaiJohoShinsaRelateBusiness(entity));
         }

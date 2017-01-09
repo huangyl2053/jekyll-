@@ -57,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -70,7 +69,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
-import org.joda.time.YearMonth;
 
 /**
  *
@@ -903,7 +901,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getLblMonth2().setText(setLblMonthWareki(date.getYearMonth()));
         モード = モード_初期化;
         set介護認定審査会開催予定一覧(年月);
-        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList = gogitaiManager.get合議体情報();
+        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList = gogitaiManager.get合議体情報(date);
         set合議体情報(gogitaiBusinessList);
         div.getTxtSeteibi().setValue(date);
         if (date.getDayValue() == 1) {
@@ -937,6 +935,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
+        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
+                = gogitaiManager.get合議体情報(new RDate(date2.getYearValue(), date2.getDayValue()));
+        set合議体情報(gogitaiBusinessList);
         clear入力();
     }
 
@@ -959,6 +960,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
+        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
+                = gogitaiManager.get合議体情報(new RDate(date2.getYearValue(), date2.getDayValue()));
+        set合議体情報(gogitaiBusinessList);
         clear入力();
     }
 
@@ -978,6 +982,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
+        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
+                = gogitaiManager.get合議体情報(new RDate(date2.getYearValue(), date2.getDayValue()));
+        set合議体情報(gogitaiBusinessList);
         clear入力();
     }
 

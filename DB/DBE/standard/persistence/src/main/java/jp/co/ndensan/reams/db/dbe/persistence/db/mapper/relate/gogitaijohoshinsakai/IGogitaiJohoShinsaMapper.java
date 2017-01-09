@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohoshins
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,9 +22,10 @@ public interface IGogitaiJohoShinsaMapper {
     /**
      * 合議体情報の取得処理です。
      *
+     * @param 基準日 {@link RDate}
      * @return 合議体情報 List<GogitaiJohoShinsaRelateEntity>
      */
-    List<GogitaiJohoShinsaRelateEntity> get合議体情報();
+    List<GogitaiJohoShinsaRelateEntity> get合議体情報(RDate 基準日);
 
     /**
      * 開催予定情報の取得処理です。

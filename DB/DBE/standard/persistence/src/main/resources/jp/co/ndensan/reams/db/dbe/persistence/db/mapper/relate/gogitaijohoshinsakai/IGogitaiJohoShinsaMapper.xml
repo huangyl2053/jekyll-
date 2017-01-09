@@ -13,12 +13,14 @@
         <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get合議体情報"
-            resultMap="resultMap_GogitaiJoho" fetchSize="500">
+            resultMap="resultMap_GogitaiJoho" parameterType="jp.co.ndensan.reams.uz.uza.lang.RDate" fetchSize="500">
         SELECT
         DbT5591."gogitaiNo" AS "gogitaiNo"
         ,DbT5591."gogitaiMei" AS "gogitaiMei"
         ,DbT5591."gogitaiSeishinkaSonzaiFlag"  AS "gogitaiSeishinkaSonzaiFlag"
         ,DbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+        ,DbT5591."gogitaiYukoKikanKaishiYMD"
+        ,DbT5591."gogitaiYukoKikanShuryoYMD"
         FROM
         rgdb."DbT5591GogitaiJoho" AS DbT5591
         INNER JOIN
@@ -33,6 +35,10 @@
         rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
         ON
         DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
+        WHERE
+        DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{基準日}
+        AND
+        DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[<=]]> #{基準日}
         ORDER BY
         "gogitaiNo"
     </select>
@@ -66,7 +72,7 @@
         DbT5501."gogitaiNo" =  DbT5591."gogitaiNo"
         AND
         DBT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
-        AND 
+        AND
         DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
         DbT5501."shinsakaiKaisaiYoteiYMD" = #{コピー日}
