@@ -53,7 +53,7 @@ public class NinteichosaIraiValidationHandler {
         } else {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : selected) {
-                if (row.getJotai().equals(未)) {
+                if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty()) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
                     break;
                 }

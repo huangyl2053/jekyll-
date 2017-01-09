@@ -297,19 +297,19 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         int 認定調査作成期限日数
                 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援).toString());
         FlexibleDate 認定調査期限年月日 = null;
-        if (CONFIGVALUE1.equals(認定調査期限設定方法)) {
-            if (KEY0.equals(radTeishutsuKigen)) {
+        if (KEY0.equals(radTeishutsuKigen)) {
+            if (CONFIGVALUE1.equals(認定調査期限設定方法)) {
                 FlexibleDate 認定調査依頼年月日 = ninteichosaIraiJoho.get認定調査依頼年月日();
                 認定調査期限年月日 = 認定調査依頼年月日.plusDay(認定調査作成期限日数);
-            } else if (KEY1.equals(radTeishutsuKigen)) {
-                認定調査期限年月日 = FlexibleDate.EMPTY;
-            } else if (KEY2.equals(radTeishutsuKigen)) {
-                RDate 共通日 = div.getTxtKyotsuDay().getValue();
-                認定調査期限年月日
-                        = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(認定調査作成期限日数).toDateString()));
+            } else if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
+                認定調査期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).plusDay(認定調査作成期限日数).toDateString());
             }
-        } else if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
-            認定調査期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).plusDay(認定調査作成期限日数).toDateString());
+        } else if (KEY1.equals(radTeishutsuKigen)) {
+            認定調査期限年月日 = FlexibleDate.EMPTY;
+        } else if (KEY2.equals(radTeishutsuKigen)) {
+            RDate 共通日 = div.getTxtKyotsuDay().getValue();
+            認定調査期限年月日
+                    = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.toDateString()));
         }
         ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set認定調査期限年月日(認定調査期限年月日);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();

@@ -195,13 +195,15 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgNinteiChosa().setDataSource(rowList);
-            RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+            RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
-            if (CONFIGVALUE2.equals(認定調査期限設定方法)) {
-                div.getRadTeishutsuKigen().setDisabled(true);
+            if (CONFIGVALUE1.equals(依頼書期限設定)) {
+                div.getRadTeishutsuKigen().setSelectedKey(KEY0);
+            } else if (CONFIGVALUE2.equals(依頼書期限設定)) {
+                div.getRadTeishutsuKigen().setSelectedKey(KEY1);
             } else {
-                div.getRadTeishutsuKigen().setDisabled(false);
+                div.getRadTeishutsuKigen().setSelectedKey(KEY2);
             }
             setChk認定調査印刷帳票選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         } else {
@@ -246,14 +248,15 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
-            RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
+            RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
-            if (CONFIGVALUE2.equals(主治医意見書作成期限設定方法)) {
-                div.getRadTeishutsuKigen().setDisabled(true);
-                div.getTeishutsuKigen().setIsOpen(false);
+            if (CONFIGVALUE1.equals(依頼書期限設定)) {
+                div.getRadTeishutsuKigen().setSelectedKey(KEY0);
+            } else if (CONFIGVALUE2.equals(依頼書期限設定)) {
+                div.getRadTeishutsuKigen().setSelectedKey(KEY1);
             } else {
-                div.getRadTeishutsuKigen().setDisabled(false);
+                div.getRadTeishutsuKigen().setSelectedKey(KEY2);
             }
             set主治医意見書作成依頼印刷帳票初期選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         }
@@ -326,6 +329,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getTxtKyotsuDay().setReadOnly(false);
             div.getTxtKyotsuDay().setRequired(true);
         } else {
+            div.getTxtKyotsuDay().clearValue();
             div.getTxtKyotsuDay().setReadOnly(true);
         }
     }

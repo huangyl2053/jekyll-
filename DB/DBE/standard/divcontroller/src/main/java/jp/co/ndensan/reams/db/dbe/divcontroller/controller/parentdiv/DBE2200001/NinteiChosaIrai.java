@@ -725,15 +725,16 @@ public class NinteiChosaIrai {
                     認定調査期限年月日 = new FlexibleDate(div.getTxtkigenymd().getValue().toDateString());
                 }
                 認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
-                        .set依頼書出力年月日(発行日)
-                        .set認定調査期限年月日(認定調査期限年月日)
-                        .build();
-                ninteichosaIraiJohoManager.save認定調査依頼情報(認定調査依頼情報.modifiedModel());
-            } else {
-                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set依頼書出力年月日(発行日)
-                        .set調査票等出力年月日(発行日).build();
-                ninteichosaIraiJohoManager.save認定調査依頼情報(認定調査依頼情報.modifiedModel());
+                        .set認定調査期限年月日(認定調査期限年月日).build();
             }
+            if (!div.getChkirai().getSelectedKeys().isEmpty()) {
+                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set依頼書出力年月日(発行日).build();
+            }
+            if (!div.getChkchosa().getSelectedKeys().isEmpty()
+                    || !div.getChkchosaOcr().getSelectedKeys().isEmpty()) {
+                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set調査票等出力年月日(発行日).build();
+            }
+            ninteichosaIraiJohoManager.save認定調査依頼情報(認定調査依頼情報.modifiedModel());
         }
     }
 

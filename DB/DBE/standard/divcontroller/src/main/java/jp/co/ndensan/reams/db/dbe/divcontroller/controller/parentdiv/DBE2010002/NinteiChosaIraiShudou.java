@@ -161,7 +161,7 @@ public class NinteiChosaIraiShudou {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {            
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             saveData(div);
             ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             List<NinteiShinseiJoho> 更新用認定調査依頼List = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
@@ -182,9 +182,9 @@ public class NinteiChosaIraiShudou {
         RString 認定調査員コード = div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue();
         Code 認定調査依頼区分コード = new Code(div.getNinteichosaIraiByHand().getDdlIraiKubun().getSelectedKey());
         Code 調査区分コード;
-        if(NinteiChousaIraiKubunCode.初回.getコード().equals(認定調査依頼区分コード.value())){
+        if (NinteiChousaIraiKubunCode.初回.getコード().equals(認定調査依頼区分コード.value())) {
             調査区分コード = new Code(ChosaKubun.新規調査.getコード());
-        }else{
+        } else {
             調査区分コード = new Code(ChosaKubun.再調査.getコード());
         }
         FlexibleDate 認定調査依頼年月日 = FlexibleDate.EMPTY;
@@ -322,15 +322,38 @@ public class NinteiChosaIraiShudou {
         if (div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null) {
             認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
         }
-
+        FlexibleDate 発行日 = FlexibleDate.EMPTY;
+        if (div.getTxtHokkoymd().getValue() != null) {
+            発行日 = new FlexibleDate(div.getTxtHokkoymd().getValue().toDateString());
+        }
         NinteiShinseiJohoIdentifier ninteiShinseiJohoIdentifier = new NinteiShinseiJohoIdentifier(申請書管理番号);
         NinteiShinseiJoho 要介護認定申請情報 = 認定調査依頼情報List.get(ninteiShinseiJohoIdentifier);
         RString モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
-        if (修正モード.equals(モード)) {
-            FlexibleDate 発行日 = FlexibleDate.EMPTY;
-            if (div.getTxtHokkoymd().getValue() != null) {
-                発行日 = new FlexibleDate(div.getTxtHokkoymd().getValue().toDateString());
+        if (新規モード.equals(モード)) {
+            RString 厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
+            Code 認定調査依頼区分コード = new Code(div.getNinteichosaIraiByHand().getDdlIraiKubun().getSelectedKey());
+            NinteichosaIraiJoho 認定調査依頼情報 = new NinteichosaIraiJoho(申請書管理番号, 1);
+            認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード))
+                    .set認定調査委託先コード(認定調査委託先コード)
+                    .set認定調査員コード(認定調査員コード)
+                    .set認定調査依頼区分コード(認定調査依頼区分コード)
+                    .set認定調査回数(1)
+                    .set認定調査依頼年月日(認定調査依頼年月日)
+                    .set認定調査期限年月日(get認定調査期限年月日(div, 認定調査依頼年月日)).set論理削除フラグ(false)
+                    .set認定調査督促年月日(FlexibleDate.EMPTY).set認定調査督促メモ(RString.EMPTY).build();
+            if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
+                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
+                        .set依頼書出力年月日(発行日).build();
             }
+            if (!(div.getChkNinteichosaDesign().getSelectedKeys().isEmpty()
+                    && div.getChkNinteichosaOcr().getSelectedKeys().isEmpty()
+                    && div.getChkSaiCheck().getSelectedKeys().isEmpty()
+                    && div.getChkTokkiJko().getSelectedKeys().isEmpty())) {
+                認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
+                        .set調査票等出力年月日(発行日).build();
+            }
+            NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(認定調査依頼情報);
+        } else if (修正モード.equals(モード)) {
             NinteichosaIraiJohoIdentifier ninteichosaIraiJohoIdentifier = new NinteichosaIraiJohoIdentifier(
                     申請書管理番号, Integer.parseInt(認定調査依頼履歴番号.toString()));
             NinteichosaIraiJoho ninteichosaIraiJoho = 要介護認定申請情報.getNinteichosaIraiJoho(ninteichosaIraiJohoIdentifier);

@@ -1437,7 +1437,11 @@ public enum ConfigNameDBE {
     /**
      * 特記事項判定日
      */
-    特記事項判定日("特記事項判定日");
+    特記事項判定日("特記事項判定日"),
+    /**
+     * 依頼書期限設定
+     */
+    依頼書期限設定("依頼書期限設定");
 
     private final RString fullName;
 
