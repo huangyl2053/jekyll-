@@ -544,6 +544,7 @@
         <result property="関係"  column="関係"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="審査会開催日"  column="審査会開催日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="一次判定結果"  column="一次判定結果"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="一次判定結果_認知症加算"  column="一次判定結果_認知症加算"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定結果"  column="二次判定結果"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定年月日"  column="二次判定年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="認定有効期間開始年月日"  column="認定有効期間開始年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -639,6 +640,7 @@
             ,DbT5150RenrakusakiJoho."renrakusakiTuzukigara" AS 関係
             ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" AS 審査会開催日
             ,DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode" AS 一次判定結果
+            ,DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaNinchishoKasanCode" AS 一次判定結果_認知症加算
             ,DbT5102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定結果
             ,DbT5102NinteiKekkaJoho."nijiHanteiYMD" AS 二次判定年月日
             ,DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoKaishiYMD" AS 認定有効期間開始年月日

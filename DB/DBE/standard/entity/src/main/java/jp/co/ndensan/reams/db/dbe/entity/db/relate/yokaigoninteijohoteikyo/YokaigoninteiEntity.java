@@ -46,6 +46,7 @@ public class YokaigoninteiEntity {
     private RString 関係;
     private FlexibleDate 審査会開催日;
     private RString 一次判定結果;
+    private RString 一次判定結果_認知症加算;
     private RString 二次判定結果;
     private FlexibleDate 二次判定年月日;
     private FlexibleDate 認定有効期間開始年月日;

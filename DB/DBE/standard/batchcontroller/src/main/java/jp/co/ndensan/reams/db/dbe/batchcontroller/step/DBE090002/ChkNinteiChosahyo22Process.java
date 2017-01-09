@@ -623,32 +623,84 @@ public class ChkNinteiChosahyo22Process extends BatchProcessBase<YokaigoninteiEn
 
     private void setBodyItem02(NinteiChosaJohohyoEntity ninteiEntity, YokaigoninteiEntity entity) {
         if (判定結果コード09.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
-            ninteiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果()).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果_認知症加算()).get名称())
+                            .toRString();
+                }
+            }
+            ninteiEntity.set一次判定結果(一次判定結果);
             ninteiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun09.toValue(entity.get二次判定結果()).get名称());
             ninteiEntity.set前回判定結果(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun09.toValue(entity.get前回認定結果()).get名称());
         }
         if (判定結果コード06.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
-            ninteiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果()).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果()).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(IchijiHanteiKekkaCode06.toValue(entity.get一次判定結果_認知症加算()).get名称())
+                            .toRString();
+                }
+            }
+            ninteiEntity.set一次判定結果(一次判定結果);
             ninteiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun06.toValue(entity.get二次判定結果()).get名称());
             ninteiEntity.set前回判定結果(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun06.toValue(entity.get前回認定結果()).get名称());
         }
         if (判定結果コード02.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
-            ninteiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode02.toValue(entity.get一次判定結果()).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = IchijiHanteiKekkaCode02.toValue(entity.get一次判定結果()).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(IchijiHanteiKekkaCode02.toValue(entity.get一次判定結果_認知症加算()).get名称())
+                            .toRString();
+                }
+            }
+            ninteiEntity.set一次判定結果(一次判定結果);
             ninteiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun02.toValue(entity.get二次判定結果()).get名称());
             ninteiEntity.set前回判定結果(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun02.toValue(entity.get前回認定結果()).get名称());
         }
         if (判定結果コード99.equals(entity.get厚労省IF識別コード().substring(0, 2))) {
-            ninteiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode99.toValue(entity.get一次判定結果()).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = IchijiHanteiKekkaCode99.toValue(entity.get一次判定結果()).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(IchijiHanteiKekkaCode99.toValue(entity.get一次判定結果_認知症加算()).get名称())
+                            .toRString();
+                }
+            }
+            ninteiEntity.set一次判定結果(一次判定結果);
             ninteiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun99.toValue(entity.get二次判定結果()).get名称());
             ninteiEntity.set前回判定結果(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY

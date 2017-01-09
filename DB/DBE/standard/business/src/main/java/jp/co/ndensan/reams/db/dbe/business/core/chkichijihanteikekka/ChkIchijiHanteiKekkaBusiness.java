@@ -940,15 +940,15 @@ public final class ChkIchijiHanteiKekkaBusiness {
     public static List<RString> set身体機能_起居動作リスト(List<RString> list, IchijihanteikekkahyoEntity bodyItem) {
         List<RString> 身体機能_起居動作リスト = new ArrayList<>();
         身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
-        身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_101));
+        身体機能_起居動作リスト.add(RString.EMPTY);
+        身体機能_起居動作リスト.add(RString.EMPTY);
+        身体機能_起居動作リスト.add(RString.EMPTY);
+        身体機能_起居動作リスト.add(RString.EMPTY);
         if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
             身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
-            身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_102));
+            身体機能_起居動作リスト.add(RString.EMPTY);
+            身体機能_起居動作リスト.add(RString.EMPTY);
+            身体機能_起居動作リスト.add(RString.EMPTY);
             身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_103));
             身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_104));
             身体機能_起居動作リスト.add(get特記事項有無(list, 特記事項番号_105));

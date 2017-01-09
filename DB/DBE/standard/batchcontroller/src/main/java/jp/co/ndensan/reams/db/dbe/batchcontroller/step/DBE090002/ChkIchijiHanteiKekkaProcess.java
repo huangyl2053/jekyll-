@@ -49,7 +49,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Genzaino
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
@@ -86,6 +85,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
@@ -228,6 +228,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
     private static final int 合議体番号_LENGTH = 6;
+    private static final RString アスタリスク = new RString("* * * * * *");
     List<RString> list;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
     List<DbT5211NinteichosahyoChosaItemEntity> 調査項目;
@@ -998,12 +999,18 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
             社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番58, 連番3).isEmpty() ? RString.EMPTY
                     : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称17(dbt5211Entity, 連番58)
                     : is厚労省識別コードが06A_02A(bodyItem.get前回厚労省IF識別コード()) ? get略称17(dbt5211Entity, 連番37) : RString.EMPTY);
-            社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番59, 連番4).isEmpty() ? RString.EMPTY
-                    : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番59) : RString.EMPTY);
-            社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番60, 連番5).isEmpty() ? RString.EMPTY
-                    : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称10(dbt5211Entity, 連番60) : RString.EMPTY);
-            社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番61, 連番6).isEmpty() ? RString.EMPTY
-                    : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称10(dbt5211Entity, 連番61) : RString.EMPTY);
+            if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード())) {
+                社会生活への適応4リスト.add(アスタリスク);
+                社会生活への適応4リスト.add(アスタリスク);
+                社会生活への適応4リスト.add(アスタリスク);
+            } else {
+                社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番59, 連番4).isEmpty() ? RString.EMPTY
+                        : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番59) : RString.EMPTY);
+                社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番60, 連番5).isEmpty() ? RString.EMPTY
+                        : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称10(dbt5211Entity, 連番60) : RString.EMPTY);
+                社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番61, 連番6).isEmpty() ? RString.EMPTY
+                        : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称10(dbt5211Entity, 連番61) : RString.EMPTY);
+            }
         }
         if (識別コード06A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get厚労省IF識別コード())) {
             社会生活への適応4リスト.add(機能差分結果_社会生活(調査項目, dbt5211Entity, 連番34, 連番1).isEmpty() ? RString.EMPTY
@@ -1058,7 +1065,21 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 社会生活への適応4リスト.add(get略称10(前回調査項目, 連番60));
                 社会生活への適応4リスト.add(get略称10(前回調査項目, 連番61));
             }
-            if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
+            if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード())) {
+                社会生活への適応4リスト.add(get略称22(前回調査項目, 連番34));
+                社会生活への適応4リスト.add(get略称22(前回調査項目, 連番35));
+                社会生活への適応4リスト.add(get略称17(前回調査項目, 連番37));
+                if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
+                    社会生活への適応4リスト.add(アスタリスク);
+                    社会生活への適応4リスト.add(アスタリスク);
+                    社会生活への適応4リスト.add(アスタリスク);
+                } else {
+                    社会生活への適応4リスト.add(RString.EMPTY);
+                    社会生活への適応4リスト.add(RString.EMPTY);
+                    社会生活への適応4リスト.add(RString.EMPTY);
+                }
+            }
+            if (識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
                 社会生活への適応4リスト.add(get略称22(前回調査項目, 連番34));
                 社会生活への適応4リスト.add(get略称22(前回調査項目, 連番35));
                 社会生活への適応4リスト.add(get略称17(前回調査項目, 連番37));
@@ -1247,12 +1268,18 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
         精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番52, 連番12).isEmpty() ? RString.EMPTY
                 : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番52)
                 : is厚労省識別コードが06A_02A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番66) : get略称16(dbt5211Entity, 連番42));
-        精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番53, 連番13).isEmpty() ? RString.EMPTY
-                : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番53) : RString.EMPTY);
-        精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番54, 連番14).isEmpty() ? RString.EMPTY
-                : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番54) : RString.EMPTY);
-        精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番55, 連番15).isEmpty() ? RString.EMPTY
-                : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番55) : RString.EMPTY);
+        if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード())) {
+            精神_行動障害4リスト.add(アスタリスク);
+            精神_行動障害4リスト.add(アスタリスク);
+            精神_行動障害4リスト.add(アスタリスク);
+        } else {
+            精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番53, 連番13).isEmpty() ? RString.EMPTY
+                    : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番53) : RString.EMPTY);
+            精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番54, 連番14).isEmpty() ? RString.EMPTY
+                    : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番54) : RString.EMPTY);
+            精神_行動障害4リスト.add(機能差分結果_精神障害(調査項目, dbt5211Entity, 連番55, 連番15).isEmpty() ? RString.EMPTY
+                    : is厚労省識別コードが09B_09A(bodyItem.get前回厚労省IF識別コード()) ? get略称16(dbt5211Entity, 連番55) : RString.EMPTY);
+        }
         return 精神_行動障害4リスト;
     }
 
@@ -1375,7 +1402,30 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 精神_行動障害4リスト.add(get略称16(前回調査項目, 連番54));
                 精神_行動障害4リスト.add(get略称16(前回調査項目, 連番55));
             }
-            if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード()) || 識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
+            if (識別コード06A.equals(bodyItem.get前回厚労省IF識別コード())) {
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番48));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番49));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番51));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番52));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番54));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番55));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番56));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番58));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番60));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番61));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番63));
+                精神_行動障害4リスト.add(get略称16(前回調査項目, 連番66));
+                if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())) {
+                    精神_行動障害4リスト.add(アスタリスク);
+                    精神_行動障害4リスト.add(アスタリスク);
+                    精神_行動障害4リスト.add(アスタリスク);
+                } else {
+                    精神_行動障害4リスト.add(RString.EMPTY);
+                    精神_行動障害4リスト.add(RString.EMPTY);
+                    精神_行動障害4リスト.add(RString.EMPTY);
+                }
+            }
+            if (識別コード02A.equals(bodyItem.get前回厚労省IF識別コード())) {
                 精神_行動障害4リスト.add(get略称16(前回調査項目, 連番48));
                 精神_行動障害4リスト.add(get略称16(前回調査項目, 連番49));
                 精神_行動障害4リスト.add(get略称16(前回調査項目, 連番51));
@@ -2550,6 +2600,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 return 連番32;
             } else if (連番 == 連番11) {
                 return 連番33;
+            } else if (連番 == 連番12) {
+                return 連番80;
             }
         } else if (識別コード02A.equals(前回厚労省IF識別コード)) {
             if (連番 == 連番1) {
@@ -2574,8 +2626,6 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 return 連番32;
             } else if (連番 == 連番11) {
                 return 連番33;
-            } else if (連番 == 連番12) {
-                return 連番80;
             }
         }
         return 0;
@@ -3577,8 +3627,28 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 : TokuteiShippei.toValue(remove半角スペース(entity.get特定疾病())).get名称());
         ichijiEntity.set状態像名称(RString.isNullOrEmpty(entity.get要介護状態像例コード()) ? RString.EMPTY
                 : YokaigoJotaizoReiCode.toValue(remove半角スペース(entity.get要介護状態像例コード())).get名称());
-        ichijiEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間() == null ? new RString("0")
-                : new RString(new Decimal(entity.get要介護認定等基準時間().toString()).divide(時間算出用数値_10).toString()));
+        RString 要介護認定等基準時間;
+        if (entity.get要介護認定等基準時間() == null) {
+            要介護認定等基準時間 = new RString("0");
+        } else {
+            要介護認定等基準時間 = new RStringBuilder()
+                    .append(new Decimal(entity.get要介護認定等基準時間().toString()).divide(時間算出用数値_10).toString("##0.0"))
+                    .append("分")
+                    .toRString();
+            if (entity.get要介護認定等基準時間_認知症加算() != null) {
+                要介護認定等基準時間 = new RStringBuilder()
+                        .append(要介護認定等基準時間)
+                        .append(" ＋ ")
+                        .append(new Decimal(entity.get要介護認定等基準時間_認知症加算().toString()).divide(時間算出用数値_10).toString("##0.0"))
+                        .append("分 ＝ ")
+                        .append(new Decimal(entity.get要介護認定等基準時間().toString())
+                                .add(new Decimal(entity.get要介護認定等基準時間_認知症加算().toString()))
+                                .divide(時間算出用数値_10).toString("##0.0"))
+                        .append("分")
+                        .toRString();
+            }
+        }
+        ichijiEntity.set要介護認定等基準時間(要介護認定等基準時間);
         List<EachBarImage> imageList = new ArrayList();
         if (0 < getNumber(entity.get要介護認定等基準時間_食事())) {
             imageList.add(new EachBarImage(getNumber(entity.get要介護認定等基準時間_食事()), BarImageType.PATTERN1));
@@ -3644,7 +3714,8 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 || entity.get蓋然性().equals(new RString("0"))
                 || entity.get蓋然性().equals(new RString("-1")))
                 ? RString.EMPTY
-                : new RString(new Decimal(entity.get蓋然性().toString()).divide(時間算出用数値_10).toString()));
+                : RStringUtil.convert半角to全角(new RString(
+                                new Decimal(entity.get蓋然性().toString()).divide(時間算出用数値_10).toString("##0.0"))));
         ichijiEntity.set状態の安定性(RString.isNullOrEmpty(entity.get安定性()) ? RString.EMPTY
                 : JotaiAnteiseiCode.toValue(remove半角スペース(entity.get安定性())).get名称());
         ichijiEntity.set給付区分(RString.isNullOrEmpty(entity.get給付区分()) ? RString.EMPTY
@@ -3739,8 +3810,21 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                     : YokaigoJotaiKubun09.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun09.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
-            ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode09.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = IchijiHanteiKekkaCode09.toValue(remove半角スペース(entity.get一次判定結果())).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(IchijiHanteiKekkaCode09.toValue(remove半角スペース(entity.get一次判定結果_認知症加算())).get名称())
+                            .toRString();
+                }
+            }
+            ichijiEntity.set一次判定結果(一次判定結果);
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun09.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
@@ -3749,8 +3833,21 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                     : YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
-            ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : IchijiHanteiKekkaCode06.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get一次判定結果())).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get一次判定結果_認知症加算())).get名称())
+                            .toRString();
+                }
+            }
+            ichijiEntity.set一次判定結果(一次判定結果);
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun06.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
@@ -3762,8 +3859,21 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                     : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
-            ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get一次判定結果())).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get一次判定結果_認知症加算())).get名称())
+                            .toRString();
+                }
+            }
+            ichijiEntity.set一次判定結果(一次判定結果);
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun02.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }
@@ -3772,8 +3882,21 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                     : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get前々回要介護度())).get名称());
             ichijiEntity.set前回要介護度(RString.isNullOrEmpty(entity.get前回認定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get前回認定結果())).get名称());
-            ichijiEntity.set一次判定結果(RString.isNullOrEmpty(entity.get一次判定結果()) ? RString.EMPTY
-                    : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get一次判定結果())).get名称());
+            RString 一次判定結果;
+            if (RString.isNullOrEmpty(entity.get一次判定結果())) {
+                一次判定結果 = RString.EMPTY;
+            } else {
+                一次判定結果 = YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get一次判定結果())).get名称();
+                if (!RString.isNullOrEmpty(entity.get一次判定結果_認知症加算())
+                        && !entity.get一次判定結果().equals(entity.get一次判定結果_認知症加算())) {
+                    一次判定結果 = new RStringBuilder()
+                            .append(一次判定結果)
+                            .append("→")
+                            .append(YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get一次判定結果_認知症加算())).get名称())
+                            .toRString();
+                }
+            }
+            ichijiEntity.set一次判定結果(一次判定結果);
             ichijiEntity.set二次判定結果(RString.isNullOrEmpty(entity.get二次判定結果()) ? RString.EMPTY
                     : YokaigoJotaiKubun99.toValue(remove半角スペース(entity.get二次判定結果())).get名称());
         }

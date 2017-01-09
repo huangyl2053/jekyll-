@@ -112,6 +112,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.listkijunTime_6 = item.get要介護認定等基準時間_BPSD関連();
         source.listkijunTime_7 = item.get要介護認定等基準時間_機能訓練();
         source.listkijunTime_8 = item.get要介護認定等基準時間_医療関連();
+        source.listkijunTime_9 = item.get要介護認定等基準時間_認知症加算();
         source.gurafuKijunTime = item.get要介護認定等基準時間イメージ();
         RString 警告コード = item.get警告コード();
         if (!RString.isNullOrEmpty(警告コード)) {
@@ -135,10 +136,9 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
         source.listChukanhyoka_5 = item.get中間評価項目得点第5群();
         source.chosaNinchishoJiritsudo = item.get認定調査結果認知症高齢者自立度();
         source.ikenNinchishoJiritsudo = item.get意見書認知症高齢者自立度();
-        RStringBuilder 蓋然性 = new RStringBuilder();
-        蓋然性.append(item.get認知症自立度Ⅱ以上の蓋然性());
-        蓋然性.append(new RString("%"));
-        source.manzensei = 蓋然性.toRString();
+        source.manzensei = (!item.get認知症自立度Ⅱ以上の蓋然性().isEmpty())
+                ? new RStringBuilder().append(item.get認知症自立度Ⅱ以上の蓋然性()).append(new RString("％")).toRString()
+                : RString.EMPTY;
         source.jotainoanteisei = item.get状態の安定性();
         source.kyufukubun = item.get給付区分();
         source.sabisuName = item.get現在のサービス利用状況名();

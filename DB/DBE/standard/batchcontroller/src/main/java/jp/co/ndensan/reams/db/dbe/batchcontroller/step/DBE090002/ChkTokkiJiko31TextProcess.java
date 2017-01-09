@@ -96,6 +96,16 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
     protected void beforeExecute() {
         mapper = getMapper(IYokaigoNinteiJohoTeikyoMapper.class);
         特記事項リスト = mapper.get特記事項リスト(processPrm.toYokaigoBatchMybitisParamter());
+        List<NinteichosaRelateEntity> その他特記事項リスト = new ArrayList<>();
+        for (NinteichosaRelateEntity 特記事項 : 特記事項リスト) {
+            if (特記事項.get特記事項番号().equals(NinteichosaKomoku09B.その他特記事項.get調査特記事項番序())) {
+                その他特記事項リスト.add(特記事項);
+            }
+        }
+        for (NinteichosaRelateEntity その他特記事項 : その他特記事項リスト) {
+            特記事項リスト.remove(その他特記事項);
+            特記事項リスト.add(その他特記事項);
+        }
     }
 
     @Override
@@ -144,28 +154,60 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
         set出力条件表();
     }
 
+    private RString get特記事項番号(List<NinteichosaRelateEntity> 特記事項区分, int 連番, TokkiText1A4Entity ninteiEntity) {
+        RString 特記事項番号 = RString.EMPTY;
+        if (連番 < 特記事項区分.size()) {
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                NinteichosaKomoku09B 認定調査項目 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku09B.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                NinteichosaKomoku09A 認定調査項目 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku09A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                NinteichosaKomoku06A 認定調査項目 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku06A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                NinteichosaKomoku02A 認定調査項目 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku02A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+            }
+            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                NinteichosaKomoku99A 認定調査項目 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku99A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+            }
+        }
+        return 特記事項番号;
+    }
+
     private RString get特記事項名称(List<NinteichosaRelateEntity> 特記事項区分, int 連番, TokkiText1A4Entity ninteiEntity) {
         RString 名称 = RString.EMPTY;
         if (連番 < 特記事項区分.size()) {
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
             }
             if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
                     && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get名称();
+                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
             }
         }
         return 名称;
@@ -225,7 +267,7 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
                     && すべて.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
                 TokkiTextEntity tokki = new TokkiTextEntity();
                 tokki.set特記事項(entity.get(i).get特記事項());
-                tokki.set特記事項番号(entity.get(i).get特記事項番号());
+                tokki.set特記事項番号(get特記事項番号(entity, i, ninteiEntity));
                 tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
                 tokki.set特記事項連番(entity.get(i).get特記事項連番());
                 特記事項List.add(tokki);
@@ -234,7 +276,7 @@ public class ChkTokkiJiko31TextProcess extends BatchProcessBase<YokaigoninteiEnt
                     && 一つずつ.equals(DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
                 TokkiTextEntity tokki = new TokkiTextEntity();
                 tokki.set特記事項(entity.get(i).get特記事項());
-                tokki.set特記事項番号(entity.get(i).get特記事項番号());
+                tokki.set特記事項番号(get特記事項番号(entity, i, ninteiEntity));
                 tokki.set特記事項名称(get特記事項名称(entity, i, ninteiEntity));
                 tokki.set特記事項連番(entity.get(i).get特記事項連番());
                 特記事項番号リスト.add(tokki);
