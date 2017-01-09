@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.Shinsa
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -96,7 +97,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString GETSU = new RString("月");
     private static final RString 分割 = new RString("-");
     private static final RString FUNN = new RString(":");
-    private static final RString 中止 = new RString("2");
+    private static final RString 中止 = ShinsakaiShinchokuJokyo.中止.getコード();
+    private static final RString 未開催 = ShinsakaiShinchokuJokyo.未開催.getコード();
     private static final RString BREAK = new RString("<br/>");
     private static final RString 種類 = new RString("精");
     private static final RString FONT_RED_ZEN = new RString("<font color='#FF0000'>");
@@ -356,7 +358,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
         モード = モード_中止;
-        set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai1());
+        set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai1());
         return ResponseData.of(div).respond();
     }
 
@@ -377,7 +379,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
         モード = モード_中止;
-        set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai2());
+        set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai2());
         return ResponseData.of(div).respond();
     }
 
@@ -398,7 +400,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
         モード = モード_中止;
-        set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai3());
+        set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai3());
         return ResponseData.of(div).respond();
     }
 
@@ -419,7 +421,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
         モード = モード_中止;
-        set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai4());
+        set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai4());
         return ResponseData.of(div).respond();
     }
 
@@ -657,7 +659,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                     ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(parameter.get開催番号().trim());
                     ShinsakaiKaisaiYoteiJoho yoteiJoho = models.get(key);
                     ShinsakaiKaisaiYoteiJohoBuilder builder = yoteiJoho.createBuilderForEdit();
-                    builder.set介護認定審査会進捗状況(new Code(中止));
+                    builder.set介護認定審査会進捗状況(new Code(parameter.get介護認定審査会進捗状況()));
                     yoteiJoho.toEntity().setState(EntityDataState.Modified);
                     yoteiTorokuManager.insertOrUpdate(builder.build());
                 }
@@ -795,7 +797,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private ValidationMessageControlPairs getTorokuCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
-        ValidationMessageControlPairs validPairs = validationHandler.保存可否Check();
+        ValidationMessageControlPairs validPairs = validationHandler.保存可否Check(yoteiJohoEntityList2);
         validPairs = validationHandler.合議体存在Check(validPairs);
         validPairs = validationHandler.合議体重複チェック(validPairs);
         validPairs = validationHandler.設定日未選択チェック(validPairs);
@@ -996,26 +998,44 @@ public class ShinsakaiKaisaiYoteiToroku {
         set開催予定入力欄(setibichi);
     }
 
-    private void set中止(TextBox kaisaiGogitai) {
+    private void set中止Or未開催(TextBox kaisaiGogitai) {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             RString 開催時間 = getFormat時間枠(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiTime().getValue());
             RString 開催合議体 = new RString(kaisaiGogitai.getValue().toString());
-            set内部中止(開催時間, 開催合議体);
+            set内部中止Or未開催(開催時間, 開催合議体);
             set介護認定審査会開催予定一覧(div.getTxtSeteibi().getValue().getYearMonth().toDateString());
         }
     }
 
-    private void set内部中止(RString 開催時間, RString 開催合議体) {
+    private void set内部中止Or未開催(RString 開催時間, RString 開催合議体) {
         for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
             if (new RString(entity.get日付().toString()).equals(div.getTxtSeteibi().getValue().toDateString())
                     && get検索時間枠(entity.get開始予定時刻(), entity.get終了予定時刻()).equals(開催時間)
                     && entity.get合議体番号() == Integer.valueOf(開催合議体.toString())) {
-                entity.set介護認定審査会進捗状況(中止);
-                entity.set変更(true);
+                set中止Or未開催(entity);
                 break;
             }
+        }
+    }
+
+    private void set中止Or未開催(ShinsakaiKaisaiYoteiJohoParameter entity) {
+        if (entity.get介護認定審査会進捗状況().equals(未開催)) {
+            entity.set介護認定審査会進捗状況(中止);
+            set変更(entity);
+        } else if (entity.get介護認定審査会進捗状況().equals(中止)) {
+            entity.set介護認定審査会進捗状況(未開催);
+            set変更(entity);
+        }
+
+    }
+
+    private void set変更(ShinsakaiKaisaiYoteiJohoParameter entity) {
+        if (entity.is変更()) {
+            entity.set変更(false);
+        } else {
+            entity.set変更(true);
         }
     }
 

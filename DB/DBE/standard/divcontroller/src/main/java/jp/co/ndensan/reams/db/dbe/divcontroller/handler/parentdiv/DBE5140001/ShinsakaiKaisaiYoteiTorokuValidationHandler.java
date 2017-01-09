@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgKa
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiGogitaiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -39,7 +40,8 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_6 = 6;
-    private static final RString 未開催 = new RString("1");
+    private static final RString 未開催 = ShinsakaiShinchokuJokyo.未開催.getコード();
+    private static final RString 中止 = ShinsakaiShinchokuJokyo.中止.getコード();
     private static final RString 分割 = new RString("-");
     private static final RString FUNN = new RString(":");
     private static final RString NENNDO = new RString("年");
@@ -59,9 +61,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 保存可否をチェックします。
      *
+     * @param yoteiJohoEntityList2 yoteiJohoEntityList2
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 保存可否Check() {
+    public ValidationMessageControlPairs 保存可否Check(List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList2) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgKaisaiYoteiNyuryokuran_Row> dgNyuryokuRowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
         boolean hozon = false;
@@ -69,7 +72,8 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
             if ((!dgNyuryokuRow.getKaisaiGogitai1().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai1().getValue().isEmpty())
                     || (!dgNyuryokuRow.getKaisaiGogitai2().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai2().getValue().isEmpty())
                     || (!dgNyuryokuRow.getKaisaiGogitai3().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai3().getValue().isEmpty())
-                    || (!dgNyuryokuRow.getKaisaiGogitai4().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai4().getValue().isEmpty())) {
+                    || (!dgNyuryokuRow.getKaisaiGogitai4().isDisabled() && !dgNyuryokuRow.getKaisaiGogitai4().getValue().isEmpty())
+                    || is変更あり(yoteiJohoEntityList2)) {
                 hozon = true;
                 break;
             }
@@ -80,6 +84,15 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
                             UrErrorMessages.更新対象のデータがない), div.getDgKaisaiYoteiNyuryokuran()));
         }
         return validationMessages;
+    }
+
+    private boolean is変更あり(List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList2) {
+        for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
+            if (entity.is変更()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -390,7 +403,7 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
         for (ShinsakaiKaisaiYoteiJohoParameter entity : shinsakaEntityList) {
             if (new RString(entity.get日付().toString()).equals(seteibi.toDateString()) && entity.get開始予定時刻().equals(開始時間)
                     && entity.get終了予定時刻().equals(終了時間) && Integer.valueOf(開催合議体.toString()) == entity.get合議体番号()
-                    && !未開催.equals(entity.get介護認定審査会進捗状況())) {
+                    && !(未開催.equals(entity.get介護認定審査会進捗状況()) || 中止.equals(entity.get介護認定審査会進捗状況()))) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.予定中止不可),
                         div.getDgKaisaiYoteiNyuryokuran()));
