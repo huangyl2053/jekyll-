@@ -340,9 +340,7 @@ public class ShujiiIkenshoTorokuTotal {
             RString beforeChange = getHandler(div).getDataRString();
             if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))
                     || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                        UrQuestionMessages.保存の確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+                return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
         }
