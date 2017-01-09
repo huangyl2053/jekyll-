@@ -40,52 +40,38 @@ public class ShinsakaiScheduleHakkoValidationHandler {
     }
 
     /**
-     * 介護認定審査会開催予定期間入力チェックです。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs 介護認定審査会開催予定期間入力チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if ((!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
-                || !div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty())
-                && (div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue() == null
-                || div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue() == null)) {
-            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
-                    UrErrorMessages.必須, KIKAN.toString()), div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan()));
-        }
-        return validationMessages;
-    }
-
-    /**
      * 印刷対象介護認定審査会委員選択チェックです。
      *
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs 印刷対象介護認定審査会委員選択チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validationMessageControlPairs = new ValidationMessageControlPairs();
         List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
         if (!selectKey.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))
                 && div.getDgShinsakaiScheduleKagami().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
+            validationMessageControlPairs.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
                     UrErrorMessages.選択されていない, NIIN.toString()), div.getDgShinsakaiScheduleKagami()));
         }
-        return validationMessages;
+        return validationMessageControlPairs;
     }
 
     /**
-     * 選択チェックです。
+     * 選択チェックです。 スケジュール表と鑑がセットで選択さｒてていない場合、バリデーションエラーとします。
      *
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs 選択チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs validationMessageControlPairs = new ValidationMessageControlPairs();
         if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
+                && !div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty()) {
+            validationMessageControlPairs.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
+                    UrErrorMessages.選択されていない, JYOKEN.toString()), div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami()));
+        } else if (!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().isEmpty()
                 && div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
-                    UrErrorMessages.選択されていない, JYOKEN.toString()), div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule(),
-                    div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami()));
+            validationMessageControlPairs.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
+                    UrErrorMessages.選択されていない, JYOKEN.toString()), div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule()));
         }
-        return validationMessages;
+        return validationMessageControlPairs;
     }
 
     /**
@@ -95,7 +81,7 @@ public class ShinsakaiScheduleHakkoValidationHandler {
      */
     public ValidationMessageControlPairs 年間チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()
+        if (!div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().getSelectedKeys().isEmpty()
                 && div.getShinsakaiScheduleSrch().getTxtNendo().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(new ShinsakaiScheduleHakkocheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり, NENDO.toString()), div.getShinsakaiScheduleSrch().getTxtNendo()));

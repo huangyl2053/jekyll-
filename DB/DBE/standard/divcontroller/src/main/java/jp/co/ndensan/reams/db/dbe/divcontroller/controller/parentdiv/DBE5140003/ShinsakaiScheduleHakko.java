@@ -140,22 +140,11 @@ public class ShinsakaiScheduleHakko {
     }
 
     private ValidationMessageControlPairs getCheck(ShinsakaiScheduleHakkoValidationHandler validationHandler) {
-        ValidationMessageControlPairs validPairs = validationHandler.介護認定審査会開催予定期間入力チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.選択チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.印刷対象介護認定審査会委員選択チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.年間チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
+
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(validationHandler.選択チェック());
+        validPairs.add(validationHandler.印刷対象介護認定審査会委員選択チェック());
+        validPairs.add(validationHandler.年間チェック());
         return validPairs;
     }
 }

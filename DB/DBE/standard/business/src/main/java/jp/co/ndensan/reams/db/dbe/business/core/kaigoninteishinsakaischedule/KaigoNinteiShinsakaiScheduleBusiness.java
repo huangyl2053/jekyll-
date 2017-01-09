@@ -45,7 +45,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     private final KaigoNinteiShinsakaiScheduleProcessParamter processParamter;
     private boolean 合議体FLAG;
     private RDate predate;
-    private Map<RString, List<RString>> gogitaiMap;
+    private final Map<RString, List<RString>> gogitaiMap;
 
     /**
      * コンストラクタです。
@@ -165,7 +165,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get4月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160401");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("0401")).toString());
         entity.setListGogitai1_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai1_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai1_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -291,7 +291,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get5月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160501");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("0501")).toString());
         entity.setListGogitai2_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai2_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai2_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -418,7 +418,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get6月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160601");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("0601")).toString());
         entity.setListGogitai3_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai3_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai3_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -544,7 +544,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get7月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160701");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("0701")).toString());
         entity.setListGogitai4_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai4_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai4_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -671,7 +671,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get8月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160801");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("0801")).toString());
         entity.setListGogitai5_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai5_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai5_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -798,7 +798,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get9月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160901");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("0901")).toString());
         entity.setListGogitai6_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai6_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai6_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -924,7 +924,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get10月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20161001");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("1001")).toString());
         entity.setListGogitai7_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai7_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai7_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -1051,7 +1051,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get11月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20161101");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("1101")).toString());
         entity.setListGogitai8_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai8_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai8_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -1177,7 +1177,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get12月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20161201");
+        RDate date年月日 = new RDate(processParamter.getNendo().concat(new RString("1201")).toString());
         entity.setListGogitai9_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai9_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai9_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -1304,7 +1304,8 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get1月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160101");
+        RYear 指定翌年 = new RYear(processParamter.getNendo()).plusYear(1);
+        RDate date年月日 = new RDate(new RString(指定翌年.getYearValue()).concat(new RString("0101")).toString());
         entity.setListGogitai10_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai10_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai10_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -1431,7 +1432,8 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get2月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160201");
+        RYear 指定翌年 = new RYear(processParamter.getNendo()).plusYear(1);
+        RDate date年月日 = new RDate(new RString(指定翌年.getYearValue()).concat(new RString("0201")).toString());
         entity.setListGogitai11_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai11_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai11_3(nullToMap(date年月日, 合議体Map, index + 2));
@@ -1566,7 +1568,8 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
     }
 
     private void get3月GogitaiEntity(Map<RString, List<RString>> 合議体Map, int index, GogitaiRelateEntity entity) {
-        RDate date年月日 = new RDate("20160301");
+        RYear 指定翌年 = new RYear(processParamter.getNendo()).plusYear(1);
+        RDate date年月日 = new RDate(new RString(指定翌年.getYearValue()).concat(new RString("0301")).toString());
         entity.setListGogitai12_1(nullToMap(date年月日, 合議体Map, index));
         entity.setListGogitai12_2(nullToMap(date年月日, 合議体Map, index + 1));
         entity.setListGogitai12_3(nullToMap(date年月日, 合議体Map, index + 2));
