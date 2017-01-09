@@ -196,6 +196,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getShimeiText(),
                         item.getMeishoFuyo(),
                         item.getJigyoshaNo(),
+                        item.getTitle(),
                         item.getTsuchibun1(),
                         item.getTsuchibun2(),
                         item.getListIchiranhyo_1(),
@@ -423,7 +424,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                 item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
                 item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
                 item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
-                item.setTitle(ReportIdDBZ.DBE230001.getReportName());
+                item.setTitle(item.getTitle());
                 item.setRemban(new RString(String.valueOf(i++)));
             }
             ShujiiIkenshoSakuseiIraishoReport report = ShujiiIkenshoSakuseiIraishoReport.createFrom(itemlist);

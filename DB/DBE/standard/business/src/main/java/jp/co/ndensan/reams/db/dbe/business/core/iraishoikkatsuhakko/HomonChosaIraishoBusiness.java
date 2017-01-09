@@ -269,6 +269,7 @@ public class HomonChosaIraishoBusiness {
                 entity.get代表者名(),
                 get認定調査依頼一覧表名称付与(),
                 entity.get事業者番号(),
+                通知文Map.get(0),
                 通知文Map.get(1),
                 通知文Map.get(2),
                 new RString(String.valueOf(連番)),

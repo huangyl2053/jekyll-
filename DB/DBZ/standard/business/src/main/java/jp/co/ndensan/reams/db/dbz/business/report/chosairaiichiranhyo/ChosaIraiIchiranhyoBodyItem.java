@@ -32,6 +32,7 @@ public class ChosaIraiIchiranhyoBodyItem {
     private final RString shimeiText;
     private final RString meishoFuyo;
     private final RString jigyoshaNo;
+    private final RString title;
     private final RString tsuchibun1;
     private final RString tsuchibun2;
     private final RString listIchiranhyo_1;
@@ -65,6 +66,7 @@ public class ChosaIraiIchiranhyoBodyItem {
      * @param shimeiText 宛名氏名
      * @param meishoFuyo 宛名名称付与
      * @param jigyoshaNo 事業者番号
+     * @param title タイトル
      * @param tsuchibun1 通知文1
      * @param tsuchibun2 通知文2
      * @param listIchiranhyo_1 No.
@@ -96,6 +98,7 @@ public class ChosaIraiIchiranhyoBodyItem {
             RString shimeiText,
             RString meishoFuyo,
             RString jigyoshaNo,
+            RString title,
             RString tsuchibun1,
             RString tsuchibun2,
             RString listIchiranhyo_1,
@@ -125,6 +128,7 @@ public class ChosaIraiIchiranhyoBodyItem {
         this.shimeiText = shimeiText;
         this.meishoFuyo = meishoFuyo;
         this.jigyoshaNo = jigyoshaNo;
+        this.title = title;
         this.tsuchibun1 = tsuchibun1;
         this.tsuchibun2 = tsuchibun2;
         this.listIchiranhyo_1 = listIchiranhyo_1;

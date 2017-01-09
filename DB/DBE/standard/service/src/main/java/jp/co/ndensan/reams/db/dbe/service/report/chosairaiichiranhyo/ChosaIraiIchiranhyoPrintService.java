@@ -71,6 +71,7 @@ public class ChosaIraiIchiranhyoPrintService {
                             bodyItem.getShimeiText(),
                             bodyItem.getMeishoFuyo(),
                             bodyItem.getJigyoshaNo(),
+                            bodyItem.getTitle(),
                             bodyItem.getTsuchibun1(),
                             bodyItem.getTsuchibun2(),
                             bodyItem.getListIchiranhyo_1(),

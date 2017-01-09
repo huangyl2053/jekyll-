@@ -637,7 +637,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
 
         List<ChosaIraishoHeadItem> chosaIraishoHeadItemList = new ArrayList<>();
-        RString タイトル = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
         Map<Integer, RString> 通知文
@@ -705,7 +704,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         get名称付与(),
                         customerBarCode,
                         RString.EMPTY,
-                        タイトル,
+                        通知文.get(0),
                         通知文.get(1),
                         被保険者番号リスト.get(0),
                         被保険者番号リスト.get(1),
@@ -736,7 +735,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get訪問調査先電話番号(),
                         認定申請年月日,
                         set認定調査提出期限(business),
-                        通知文.get(2)
+                        通知文.containsKey(2) ? 通知文.get(2) : RString.EMPTY
                 );
                 chosaIraishoHeadItemList.add(item);
             }
@@ -762,8 +761,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 .get認定調査依頼一覧表(parameter).records();
         List<ChosaIraiIchiranhyoBodyItem> chosaIraishoHeadItemList = new ArrayList<>();
         int 連番 = 1;
+        RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
         Map<Integer, RString> 通知文
-                = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220002.getReportId(), KamokuCode.EMPTY, 1);
+                = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220002.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
             RString 認定申請区分 = business.get認定申請区分_申請時_コード();
             if (!RString.isNullOrEmpty(認定申請区分)) {
@@ -786,8 +787,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get調査員氏名(),
                     get名称付与(),
                     business.get事業者番号(),
-                    通知文.get(1),
-                    通知文.get(2),
+                    通知文.containsKey(0) ? 通知文.get(0) : RString.EMPTY,
+                    通知文.containsKey(1) ? 通知文.get(1) : RString.EMPTY,
+                    通知文.containsKey(2) ? 通知文.get(2) : RString.EMPTY,
                     new RString(連番++),
                     business.get調査員氏名(),
                     business.get被保険者番号(),
@@ -1226,10 +1228,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 builder.append("#");
                 item.setAtenaRenban(builder.toRString());
                 item.setRemban(new RString(String.valueOf(連番++)));
-                item.setTitle(ReportIdDBZ.DBE230001.getReportName());
+                RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+                int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
                 Map<Integer, RString> 通知文Map
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), KamokuCode.EMPTY, 1);
-                item.setTsuchibun1(通知文Map.get(1));
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
+                item.setTitle(通知文Map.containsKey(0) ? 通知文Map.get(0) : RString.EMPTY);
+                item.setTsuchibun1(通知文Map.containsKey(1) ? 通知文Map.get(1) : RString.EMPTY);
                 item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード()).get名称());
 
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
@@ -1273,7 +1277,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                             separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 }
-                item.setTsuchibun2(通知文Map.get(2));
+                item.setTsuchibun2(通知文Map.containsKey(2) ? 通知文Map.get(2) : RString.EMPTY);
                 item.setShoriName(IkenshoIraiKubun.toValue(business.get主治医意見書依頼区分()).get名称());
                 itemList.add(item);
             }
@@ -1298,9 +1302,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
                 .get意見書作成依頼一覧表(parameter).records();
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
-
+            RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
             Map<Integer, RString> 通知文Map
-                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(), KamokuCode.EMPTY, 1);
+                    = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
             RString 生年月日 = new FlexibleDate(business.get生年月日()).wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
@@ -1327,7 +1332,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get代表者名(),
                     get名称付与(),
                     get印刷日時(),
-                    通知文Map.get(1),
+                    (通知文Map.containsKey(0)) ? 通知文Map.get(0) : RString.EMPTY,
+                    (通知文Map.containsKey(1)) ? 通知文Map.get(1) : RString.EMPTY,
                     business.get主治医氏名(),
                     business.get被保険者番号(),
                     business.get被保険者氏名(),

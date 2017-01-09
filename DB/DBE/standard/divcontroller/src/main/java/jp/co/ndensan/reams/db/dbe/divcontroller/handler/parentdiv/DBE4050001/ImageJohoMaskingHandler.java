@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -212,7 +211,8 @@ public class ImageJohoMaskingHandler {
 
         taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         outputImagePath = Directory.createTmpDirectory();
-        imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
+//        imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
+        imagePath = outputImagePath;
 
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()));
 

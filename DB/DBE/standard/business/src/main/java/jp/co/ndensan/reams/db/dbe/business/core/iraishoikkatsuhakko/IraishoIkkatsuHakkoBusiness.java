@@ -605,6 +605,7 @@ public class IraishoIkkatsuHakkoBusiness {
                 entity.get代表者名(),
                 get名称付与(),
                 get印刷日時(),
+                通知文Map.get(0),
                 通知文Map.get(1),
                 entity.get主治医氏名(),
                 entity.get被保険者番号(),
@@ -715,7 +716,7 @@ public class IraishoIkkatsuHakkoBusiness {
         if (!RString.isNullOrEmpty(日付)) {
             FlexibleDate flexibleDate = new FlexibleDate(日付);
             和暦 = flexibleDate.wareki().eraType(EraType.KANJI_RYAKU).toDateString();
-            }
+        }
         return 和暦;
     }
 
