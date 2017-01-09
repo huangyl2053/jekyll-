@@ -34,6 +34,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
     private RString shimeiText;
     private RString meishoFuyo;
     private RString printTimeStamp;
+    private RString title;
     private RString tsuchibun1;
     private RString listIchiranhyo_2;
     private RString listIchiranhyo_3;
@@ -84,7 +85,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
             RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakeru,
             RString ninshoshaShimeiKakenai, RString koinMojiretsu, RString koinShoryaku, RString yubinNo1,
             RString jushoText, RString kikanNameText, RString shimeiText, RString meishoFuyo, RString printTimeStamp,
-            RString tsuchibun1, RString listIchiranhyo_2, RString listIchiranhyo_3, RString listIchiranhyo_4,
+            RString title, RString tsuchibun1, RString listIchiranhyo_2, RString listIchiranhyo_3, RString listIchiranhyo_4,
             RString listIchiranhyo_5, RString listIchiranhyo_6, RString listIchiranhyo_7, RString listIchiranhyo_8,
             RString listIchiranhyo_9,
             RString shujiiIryokikanCode) {
@@ -106,6 +107,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
         this.shimeiText = shimeiText;
         this.meishoFuyo = meishoFuyo;
         this.printTimeStamp = printTimeStamp;
+        this.title = title;
         this.tsuchibun1 = tsuchibun1;
         this.listIchiranhyo_2 = listIchiranhyo_2;
         this.listIchiranhyo_3 = listIchiranhyo_3;

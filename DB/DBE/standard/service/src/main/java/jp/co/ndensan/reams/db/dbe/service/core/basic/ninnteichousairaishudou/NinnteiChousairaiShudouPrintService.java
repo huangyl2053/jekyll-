@@ -276,6 +276,7 @@ public class NinnteiChousairaiShudouPrintService {
                         item.getShimeiText(),
                         item.getMeishoFuyo(),
                         item.getJigyoshaNo(),
+                        item.getTitle(),
                         item.getTsuchibun1(),
                         item.getTsuchibun2(),
                         item.getListIchiranhyo_1(),

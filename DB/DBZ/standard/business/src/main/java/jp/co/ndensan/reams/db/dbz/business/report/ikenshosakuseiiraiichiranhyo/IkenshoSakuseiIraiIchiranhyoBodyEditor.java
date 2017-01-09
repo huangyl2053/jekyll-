@@ -50,6 +50,7 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
         source.shimeiText = item.getShimeiText();
         source.meishoFuyo = item.getMeishoFuyo();
         source.printTimeStamp = item.getPrintTimeStamp();
+        source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.listIchiranhyo_1 = new RString(String.valueOf(index));
         source.listIchiranhyo_2 = item.getListIchiranhyo_2();

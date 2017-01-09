@@ -75,6 +75,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.shimeiText = item.getShimeiText();
         source.meishoFuyo = item.getMeishoFuyo();
         source.jigyoshaNo = item.getJigyoshaNo();
+        source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.tsuchibun2 = item.getTsuchibun2();
         source.listIchiranhyo_1 = item.getListIchiranhyo_1();
