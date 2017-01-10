@@ -68,7 +68,6 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
         createHandler(div).load();
-        div.getTxtShujiiIkensahoSakuseiIraiDay().setValue(RDate.getNowDate());
         return ResponseData.of(div).respond();
     }
 

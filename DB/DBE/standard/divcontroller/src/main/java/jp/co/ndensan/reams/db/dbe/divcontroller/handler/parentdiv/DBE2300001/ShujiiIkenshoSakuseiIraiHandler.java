@@ -78,6 +78,26 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
         div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                 SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtShujiiIkensahoSakuseiIraiDay().setValue(RDate.getNowDate());
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNowPhase().setSelectedKey(KanryoInfoPhase.意見書依頼.getコード());
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoIrai().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaIrai().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaNyushu().setDisabled(false);
+        RString 処理状態完了 = new RString("key0");
+        RString 処理状態未完了 = new RString("key1");
+        List<RString> selectedkeyMikann = new ArrayList();
+        List<RString> selectedkeyKanryo = new ArrayList();
+        selectedkeyMikann.add(処理状態未完了);
+        selectedkeyKanryo.add(処理状態完了);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIchijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkMasking().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinsakaiToroku().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoNyushu().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
     }
 
     /**
