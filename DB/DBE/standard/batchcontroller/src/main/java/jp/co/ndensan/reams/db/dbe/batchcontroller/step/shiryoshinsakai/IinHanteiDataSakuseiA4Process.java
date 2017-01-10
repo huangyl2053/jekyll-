@@ -86,9 +86,10 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     @Override
     protected void keyBreakProcess(HanteiJohoEntity t) {
-        if (データ件数 % 満ページ件数 == 0) {
-            IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
-            report.writeBy(reportSourceWriter);
-        }
+        //TODO n8178 城間 ブレーク時にデータを出力する意図が不明。帳票に入りきらなくなったら次ページに自動で印字されるはず。
+//        if (データ件数 % 満ページ件数 == 0) {
+//            IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
+//            report.writeBy(reportSourceWriter);
+//        }
     }
 }
