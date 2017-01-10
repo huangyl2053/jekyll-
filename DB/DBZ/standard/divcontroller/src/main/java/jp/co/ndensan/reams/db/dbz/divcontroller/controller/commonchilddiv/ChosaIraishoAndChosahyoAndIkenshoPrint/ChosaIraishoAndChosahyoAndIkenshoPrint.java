@@ -231,13 +231,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (GamenSeniKbn.認定調査依頼.equals(model.get遷移元画面区分())) {
             List<dgNinteiChosa_Row> selectedItems = div.getDgNinteiChosa().getDataSource();
-
             for (dgNinteiChosa_Row row : selectedItems) {
                 update認定調査依頼情報(div, row);
             }
         }
         if (GamenSeniKbn.主治医意見書依頼.equals(model.get遷移元画面区分())) {
-            List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getSelectedItems();
+            List<dgShujiiIkensho_Row> selectedItems = div.getDgShujiiIkensho().getDataSource();
             for (dgShujiiIkensho_Row row : selectedItems) {
                 update主治医意見書依頼情報(div, row);
             }
@@ -258,19 +257,19 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         int 作成期限日数
                 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, date, SubGyomuCode.DBE認定支援).toString());
         FlexibleDate 作成期限年月日 = null;
-        if (CONFIGVALUE1.equals(期限設定方法)) {
-            if (KEY0.equals(radTeishutsuKigen)) {
+        if (KEY0.equals(radTeishutsuKigen)) {
+            if (CONFIGVALUE1.equals(期限設定方法)) {
                 FlexibleDate 依頼年月日 = shujiiIkenshoIraiJoho.get主治医意見書作成依頼年月日();
                 作成期限年月日 = 依頼年月日.plusDay(作成期限日数);
-            } else if (KEY1.equals(radTeishutsuKigen)) {
-                作成期限年月日 = FlexibleDate.EMPTY;
-            } else if (KEY2.equals(radTeishutsuKigen)) {
-                RDate 共通日 = div.getTxtKyotsuDay().getValue();
-                作成期限年月日
-                        = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
+            } else if (CONFIGVALUE2.equals(期限設定方法)) {
+                作成期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).toDateString()).plusDay(作成期限日数);
             }
-        } else if (CONFIGVALUE2.equals(期限設定方法)) {
-            作成期限年月日 = new FlexibleDate(new RDate(row.getNinteiShinseibi().toString()).toDateString()).plusDay(作成期限日数);
+        } else if (KEY1.equals(radTeishutsuKigen)) {
+            作成期限年月日 = FlexibleDate.EMPTY;
+        } else if (KEY2.equals(radTeishutsuKigen)) {
+            RDate 共通日 = div.getTxtKyotsuDay().getValue();
+            作成期限年月日
+                    = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
         }
         shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set主治医意見書作成期限年月日(作成期限年月日);
         FlexibleDate システム日付 = FlexibleDate.getNowDate();

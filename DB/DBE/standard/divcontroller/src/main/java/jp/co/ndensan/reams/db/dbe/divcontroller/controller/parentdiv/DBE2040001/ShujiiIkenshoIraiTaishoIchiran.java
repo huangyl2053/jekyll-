@@ -271,6 +271,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return ShujiiIkenshoIraiTaishoIchiranDiv
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onOkClose_btnIraishoToOutput(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        getHandler(div).画面変更より最新データを検索();
         return ResponseData.of(div).respond();
     }
 
