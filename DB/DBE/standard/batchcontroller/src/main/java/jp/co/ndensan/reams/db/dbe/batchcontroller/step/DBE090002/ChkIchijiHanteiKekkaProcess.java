@@ -228,7 +228,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
     private static final int IMAGE_WIDTH = 540;
     private static final int IMAGE_HEIGHT = 40;
     private static final int 合議体番号_LENGTH = 6;
-    private static final RString ハイフン = new RString("    －");
+    private static final RString ハイフン = new RString("－");
     private static final RString アスタリスク = new RString("* * * * * *");
     List<RString> list;
     List<DbT5207NinteichosahyoServiceJokyoEntity> dbt5207Entity;
@@ -3842,7 +3842,9 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                 : JotaiAnteiseiCode.toValue(remove半角スペース(entity.get安定性())).get名称());
         ichijiEntity.set給付区分(RString.isNullOrEmpty(entity.get給付区分()) ? RString.EMPTY
                 : SuiteiKyufuKubunCode.toValue(remove半角スペース(entity.get給付区分())).get名称());
-        ichijiEntity.set現在のサービス利用状況名(RString.isNullOrEmpty(entity.getサービス区分コード()) ? RString.EMPTY
+        ichijiEntity.set現在のサービス利用状況名(
+                (RString.isNullOrEmpty(entity.getサービス区分コード()) || entity.getサービス区分コード().equals(ServiceKubunCode.なし.getコード()))
+                ? RString.EMPTY
                 : ServiceKubunCode.toValue(remove半角スペース(entity.getサービス区分コード())).get名称());
         ichijiEntity.set厚労省IF識別コード(entity.get厚労省IF識別コード());
         ichijiEntity.set前回厚労省IF識別コード(entity.get前回厚労省IF識別コード());

@@ -141,7 +141,7 @@ public class IchijihanteikekkahyoEditor implements IIchijihanteikekkahyoEditor {
                 : RString.EMPTY;
         source.jotainoanteisei = item.get状態の安定性();
         source.kyufukubun = item.get給付区分();
-        source.sabisuName = item.get現在のサービス利用状況名();
+        source.sabisuKubun = item.get現在のサービス利用状況名();
         source.sabisuName1 = item.getサービス名称1();
         source.sabisuName2 = item.getサービス名称2();
         source.sabisuName3 = item.getサービス名称3();
