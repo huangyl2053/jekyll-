@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJohoEditor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +32,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkenshoKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -55,7 +55,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
 import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  *
@@ -64,20 +63,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class ImageInputProcess extends BatchProcessBase<RString> {
 
     private static final RString PATH_SEPARATOR = new RString(File.separator);
-    private static final int 切り出し桁数 = 1;
-    private static final int 桁数固定値_内科 = 0;
-    private static final int 桁数固定値_皮膚科 = 1;
-    private static final int 桁数固定値_リハビリテーション科 = 2;
-    private static final int 桁数固定値_精神科 = 3;
-    private static final int 桁数固定値_泌尿器科 = 4;
-    private static final int 桁数固定値_歯科 = 5;
-    private static final int 桁数固定値_外科 = 6;
-    private static final int 桁数固定値_婦人科 = 7;
-    private static final int 桁数固定値_その他受診科 = 8;
-    private static final int 桁数固定値_整形外科 = 9;
-    private static final int 桁数固定値_眼科 = 10;
-    private static final int 桁数固定値_脳神経外科 = 11;
-    private static final int 桁数固定値_耳鼻咽喉科 = 12;
+
     private static final RString 主治医意見書_表_BAK = new RString("E0001_BAK.png");
     private static final RString 主治医意見書_裏_BAK = new RString("E0002_BAK.png");
 
@@ -119,34 +105,18 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void process(RString line) {
-        final OcrIken 取込解析結果 = OcrIken.parsed(line);
-        if (hasBreak(this.key, 取込解析結果.getKey())) {
+        final OcrIken ocrIken = OcrIken.parsed(line);
+        if (hasBreak(this.key, ocrIken.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 /* ブレイク処理 */
-                /*----------------------------------------------------------------------------------*/
-                _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                        .append("/* イメージ取り込み処理開始")
-                        .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
-                        .append(" 被保険者番号：").append(key.get被保険者番号())
-                        .append(" 認定申請日：").append(key.get認定申請日())
-                        .append(" 処理対象レコード数：").append(this.cache.size())
-                        .append("*/")
-                        .toString());
                 keyBreakProcess(this.key, this.cache);
-                _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                        .append("/* イメージ取り込み処理終了")
-                        .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
-                        .append(" 被保険者番号：").append(key.get被保険者番号())
-                        .append(" 認定申請日：").append(key.get認定申請日())
-                        .append("*/")
-                        .toString());
-                /* キャッシュのクリア と キーの更新 */
             }
+            /* キャッシュのクリアとキーの更新 */
             this.cache = new ArrayList<>();
-            this.key = 取込解析結果.getKey();
+            this.key = ocrIken.getKey();
         }
         /* キャッシュへの追加 */
-        this.cache.add(取込解析結果);
+        this.cache.add(ocrIken);
     }
 
     private static boolean hasBreak(ShinseiKey before, ShinseiKey current) {
@@ -159,15 +129,30 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         keyBreakProcess(this.key, this.cache);
     }
 
-    private static boolean isID777orID778() {
-        return true;
-    }
-
     private void keyBreakProcess(ShinseiKey key, List<OcrIken> sameKeyValues) {
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                .append("/* イメージ取り込み処理開始")
+                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
+                .append(" 被保険者番号：").append(key.get被保険者番号())
+                .append(" 認定申請日：").append(key.get認定申請日())
+                .append(" 処理対象レコード数：").append(this.cache.size())
+                .append("*/")
+                .toString());
         //TODO 現在、ID=777, ID=778 限定の処理となっている。ID=701等を取り込む場合には検討が必要。
         if (isID777orID778()) {
             processID777or778(key, sameKeyValues);
         }
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                .append("/* イメージ取り込み処理終了")
+                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
+                .append(" 被保険者番号：").append(key.get被保険者番号())
+                .append(" 認定申請日：").append(key.get認定申請日())
+                .append("*/")
+                .toString());
+    }
+
+    private static boolean isID777orID778() {
+        return true;
     }
 
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
@@ -206,19 +191,25 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             return; //TODO 不正のため、エラーリスト出力対象。
         }
 
-        OcrIken 取込解析結果 = getAnyID777優先(sameKeyValues);
-        if (ir.getT5302_主治医意見書情報().isEmpty()) {
-            writer_DbT5302.insert(新規追加_DbT5302_要介護認定主治医意見書情報(ir, 取込解析結果));
-        } else {
-            writer_DbT5302.update(データ更新_DbT5302_要介護認定主治医意見書情報(ir, 取込解析結果));
+        OcrIken ocrIken = getAnyID777優先(sameKeyValues);
+        DbT5302ShujiiIkenshoJohoEntity dbT5302 = createOrEdit主治医意見書情報(ir, ocrIken);
+        switch (dbT5302.getState()) {
+            case Added:
+                writer_DbT5302.insert(dbT5302);
+                break;
+            case Modified:
+                writer_DbT5302.update(dbT5302);
+                break;
+            default:
         }
-        for (DbT5304ShujiiIkenshoIkenItemEntity entity : データ更新_DbT5304_要介護認定主治医意見書意見項目(ir, 取込解析結果)) {
-            if (entity.getState() == EntityDataState.Added) {
-                writer_DbT5304.insert(entity);
-                continue;
-            }
-            if (entity.getState() == EntityDataState.Modified) {
-                writer_DbT5304.update(entity);
+        for (DbT5304ShujiiIkenshoIkenItemEntity dbT5304 : createOrEdit主治医意見書意見項目s(ir, ocrIken)) {
+            switch (dbT5304.getState()) {
+                case Added:
+                    writer_DbT5304.insert(dbT5304);
+                    continue;
+                case Modified:
+                    writer_DbT5304.update(dbT5304);
+                default:
             }
         }
 
@@ -235,10 +226,11 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             return; //TODO 不正のため、エラーリスト出力対象。
         }
 
-        boolean saveSucceeds = saveImageJoho(new FilesystemPath(tempDirectoryPath), ir);
+        boolean saveSucceeds = saveImageJoho(this.writer_DbT5115, new FilesystemPath(tempDirectoryPath), ir);
         if (saveSucceeds) {
             return;
         }
+        //TODO 不正のため、エラーリスト出力対象。
         /*----------------------------------------------------------------------------------*/
         _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
                 .append("イメージ情報の保存に失敗しました。")
@@ -265,7 +257,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     .append(" SheetID下8桁：").append(value.getSheetID().get帳票一連ID下8桁())
                     .toString());
             /*----------------------------------------------------------------------------------*/
-            return false;
+            return false; //TODO 不正のため、エラーリスト出力対象。
         }
         FileNameConvertionTheories converter = (value.getOcrID() == OCRID._777)
                 ? FileNameConvertionTheories.ID777
@@ -301,7 +293,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     .append("OCRIKEN.csvから対象のレコードが取得できませんでした。 ")
                     .toString());
             /*----------------------------------------------------------------------------------*/
-            return false;
+            return false; //TODO 不正のため、エラーリスト出力対象。
         }
         CatalogLine ca3_777 = this.catalog.find(Models.ID777, csv_777.getSheetID()).orElse(null);
         if (ca3_777 == null) {
@@ -312,7 +304,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     .append(" SheetID下8桁：").append(csv_777.getSheetID().get帳票一連ID下8桁())
                     .toString());
             /*----------------------------------------------------------------------------------*/
-            return false;
+            return false; //TODO 不正のため、エラーリスト出力対象。
         }
         CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, csv_778.getSheetID()).orElse(null);
         if (ca3_778 != null) {
@@ -329,7 +321,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                         .append("裏面の取得に失敗しました。")
                         .toString());
                 /*----------------------------------------------------------------------------------*/
-                return false;
+                return false; //TODO 不正のため、エラーリスト出力対象。
             }
             return copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames().subList(0, 1),
                     this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
@@ -381,7 +373,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     /**
      * イメージ情報の新規登録と、共有ファイルエントリの作成・追加を行います。
      */
-    private boolean saveImageJoho(FilesystemPath targetDirectory, ImageinputRelate ir) {
+    private static boolean saveImageJoho(BatchPermanentTableWriter<DbT5115ImageEntity> dbWriter, FilesystemPath targetDirectory, ImageinputRelate ir) {
         if (targetDirectory == null) {
             return false;
         }
@@ -393,7 +385,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             DbT5115ImageEntity entityImage = new DbT5115ImageEntity();
             entityImage.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
             entityImage.setImageSharedFileId(sharedFileID);
-            this.writer_DbT5115.insert(entityImage);
+            dbWriter.insert(entityImage);
             return true;
         } else {
             ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
@@ -424,7 +416,16 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         }
     }
 
-    private DbT5302ShujiiIkenshoJohoEntity 新規追加_DbT5302_要介護認定主治医意見書情報(ImageinputRelate ir, OcrIken 取込解析結果) {
+    private static DbT5302ShujiiIkenshoJohoEntity createOrEdit主治医意見書情報(ImageinputRelate ir, OcrIken ocrIken) {
+        DbT5302ShujiiIkenshoJohoEntity entity = ir.getT5302_主治医意見書情報().isEmpty()
+                ? newDbT5302ShujiiIkenshoJohoEntity(ir, ocrIken)
+                : ir.getT5302_主治医意見書情報().get(0);
+        entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
+        OcrShujiiIkenshoJohoEditor.edit(entity, ocrIken);
+        return entity;
+    }
+
+    private static DbT5302ShujiiIkenshoJohoEntity newDbT5302ShujiiIkenshoJohoEntity(ImageinputRelate ir, OcrIken ocrIken) {
         DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
         entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
@@ -432,68 +433,17 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         entity.setIkenshoIraiKubun(ir.getT5301_主治医意見書依頼区分());
         entity.setShujiiIryoKikanCode(ir.getT5301_主治医医療機関コード());
         entity.setShujiiCode(ir.getT5301_主治医コード());
-        entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
         entity.setSonotaJushinKaMei(RString.EMPTY);
-        return 共通編集_DbT5302_要介護認定主治医意見書情報(entity, ir, 取込解析結果);
-    }
-
-    private DbT5302ShujiiIkenshoJohoEntity データ更新_DbT5302_要介護認定主治医意見書情報(ImageinputRelate ir, OcrIken 取込解析結果) {
-        DbT5302ShujiiIkenshoJohoEntity entity = ir.getT5302_主治医意見書情報().get(0);
-        return 共通編集_DbT5302_要介護認定主治医意見書情報(entity, ir, 取込解析結果);
-    }
-
-    private DbT5302ShujiiIkenshoJohoEntity 共通編集_DbT5302_要介護認定主治医意見書情報(DbT5302ShujiiIkenshoJohoEntity entity,
-            ImageinputRelate ir, OcrIken 取込解析結果) {
-        entity.setIkenshoJuryoYMD(new FlexibleDate(取込解析結果.get受領日()));
-        entity.setIkenshoKinyuYMD(new FlexibleDate(取込解析結果.get記入日()));
-        entity.setIkenshoSakuseiKaisuKubun(new Code(取込解析結果.get意見書作成回数()));
-        if (ir.isT5101_施設入所の有無()) {
-            entity.setZaitakuShisetsuKubun(ZaitakuShisetsuKubun.施設.getCode());
-        } else {
-            entity.setZaitakuShisetsuKubun(ZaitakuShisetsuKubun.在宅.getCode());
-        }
-        entity.setIkenshoDoiFlag(フラグ変換_RStringToBoolean(取込解析結果.get同意の有無()));
-        entity.setSaishuShinryoYMD(new FlexibleDate(取込解析結果.get最終診察日()));
-        entity.setExistTakaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get他科受診の有無()));
-        edit受診中の他科項目(entity, 取込解析結果);
         entity.setShindamMei1(RString.EMPTY);
-        entity.setHasshoYMD1(取込解析結果.get発症年月日１());
         entity.setShindamMei2(RString.EMPTY);
-        entity.setHasshoYMD2(取込解析結果.get発症年月日２());
         entity.setShindamMei3(RString.EMPTY);
-        entity.setHasshoYMD3(取込解析結果.get発症年月日３());
-        entity.setAnteisei(取込解析結果.get症状の安定性());
-        entity.setNijiHanteiKekkaRenrakuFlag(フラグ変換_RStringToBoolean(取込解析結果.get主治医への結果連絡()));
         return entity;
     }
 
-    private static boolean フラグ変換_RStringToBoolean(RString target) {
-        return target.equals(new RString("1"));
-    }
-
-    private static void edit受診中の他科項目(DbT5302ShujiiIkenshoJohoEntity entity, OcrIken 取込解析結果) {
-        if (取込解析結果.get記入のあった科().isEmpty()) {
-            return;
-        }
-        entity.setExistNaikaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_内科, 桁数固定値_内科 + 切り出し桁数)));
-        entity.setExistSeishinkaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_精神科, 桁数固定値_精神科 + 切り出し桁数)));
-        entity.setExistGekaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_外科, 桁数固定値_外科 + 切り出し桁数)));
-        entity.setExistSeikeigekaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_整形外科, 桁数固定値_整形外科 + 切り出し桁数)));
-        entity.setExistNoshinkeigekaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_脳神経外科, 桁数固定値_脳神経外科 + 切り出し桁数)));
-        entity.setExistHifukaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_皮膚科, 桁数固定値_皮膚科 + 切り出し桁数)));
-        entity.setExistHinyokikaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_泌尿器科, 桁数固定値_泌尿器科 + 切り出し桁数)));
-        entity.setExistFujinkaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_婦人科, 桁数固定値_婦人科 + 切り出し桁数)));
-        entity.setExistJibiinkokaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_耳鼻咽喉科, 桁数固定値_耳鼻咽喉科 + 切り出し桁数)));
-        entity.setExistRehabilitationkaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_リハビリテーション科, 桁数固定値_リハビリテーション科 + 切り出し桁数)));
-        entity.setExistShikaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_歯科, 桁数固定値_歯科 + 切り出し桁数)));
-        entity.setExistGankaJushinFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_眼科, 桁数固定値_眼科 + 切り出し桁数)));
-        entity.setExistSonotaJushinkaFlag(フラグ変換_RStringToBoolean(取込解析結果.get記入のあった科().substring(桁数固定値_その他受診科, 桁数固定値_その他受診科 + 切り出し桁数)));
-    }
-
-    private List<DbT5304ShujiiIkenshoIkenItemEntity> データ更新_DbT5304_要介護認定主治医意見書意見項目(ImageinputRelate ir, OcrIken 取込解析結果) {
+    private static List<DbT5304ShujiiIkenshoIkenItemEntity> createOrEdit主治医意見書意見項目s(ImageinputRelate ir, OcrIken ocrIken) {
         final Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> map = find意見書意見項目(ir);
         final RString 厚労省IF識別コード = ir.getT5101_厚労省IF識別コード();
-        final IIkenshoIkenKomokuAccessor accessor = IkenshoIkenKomokuAccessorFactory.createInstance(取込解析結果, 厚労省IF識別コード);
+        final IIkenshoIkenKomokuAccessor accessor = IkenshoIkenKomokuAccessorFactory.createInstance(ocrIken, 厚労省IF識別コード);
         final List<DbT5304ShujiiIkenshoIkenItemEntity> entities = new ArrayList<>();
         for (IIkenshoKomokuMapping komoku : IkenshoKomokuMappings.valuesOf(厚労省IF識別コード)) {
             final int 連番 = komoku.get連番();

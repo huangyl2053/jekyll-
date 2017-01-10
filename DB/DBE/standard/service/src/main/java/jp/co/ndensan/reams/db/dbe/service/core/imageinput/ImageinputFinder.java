@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMap
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput.IImageinputMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -63,8 +64,15 @@ public class ImageinputFinder {
         IImageinputMapper mapper = mapperProvider.create(IImageinputMapper.class);
         List<ImageinputRelateEntity> entityList = mapper.get関連データ(paramter);
         for (ImageinputRelateEntity entity : entityList) {
+            initMd5(entity.get主治医意見書情報());
             imageinputList.add(new ImageinputRelate(entity));
         }
         return SearchResult.of(imageinputList, 0, false);
+    }
+
+    private static void initMd5(List<? extends DbTableEntityBase<?>> entities) {
+        for (DbTableEntityBase<?> entity : entities) {
+            entity.initializeMd5();
+        }
     }
 }
