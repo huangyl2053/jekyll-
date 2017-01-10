@@ -53,7 +53,7 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     private IShiryoShinsakaiIinMapper mapper;
     private IinTuutishoMyBatisParameter myBatisParameter;
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
-            new RString(ShinsakaiKaisaiOshiraseTsuchiReportSource.ReportSourceFields.gogitaiNo.name())));
+            new RString(ShinsakaiKaisaiOshiraseTsuchiReportSource.ReportSourceFields.shimeiText.name())));
     private ShinsakaiKaisaiOshiraseTsuchiItem item;
     @BatchWriter
     private BatchReportWriter<ShinsakaiKaisaiOshiraseTsuchiReportSource> batchWrite;

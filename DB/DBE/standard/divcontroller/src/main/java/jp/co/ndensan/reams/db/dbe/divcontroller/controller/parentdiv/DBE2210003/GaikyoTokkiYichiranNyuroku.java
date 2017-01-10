@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.ValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
@@ -54,6 +57,8 @@ public class GaikyoTokkiYichiranNyuroku {
     private static final RString KEY3 = new RString("3");
     private static final RString KEY4 = new RString("4");
     private static final RString KEY5 = new RString("5");
+    private static final RString 概況特記登録ボタン_表示 = new RString("1");
+    private static final RString 概況特記登録ボタン_非表示 = new RString("2");
 
     private enum DBE2210003Keys {
 
@@ -735,7 +740,11 @@ public class GaikyoTokkiYichiranNyuroku {
         boolean notEmpty = getHandler(div).onClick_btnBack();
 
         if (!ResponseHolder.isReRequest() && (!notEmpty)) {
-            return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
+            if (概況特記登録ボタン_非表示.equals(DbBusinessConfig.get(ConfigNameDBE.概況特記登録ボタン_表示有無, RDate.getNowDate()))) {
+                return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録_概況特記非表示に戻る).respond();
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
+            }
         }
         if (!ResponseHolder.isReRequest() && (notEmpty)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -746,7 +755,11 @@ public class GaikyoTokkiYichiranNyuroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             前排他キーの解除();
-            return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
+            if (概況特記登録ボタン_非表示.equals(DbBusinessConfig.get(ConfigNameDBE.概況特記登録ボタン_表示有無, RDate.getNowDate()))) {
+                return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録_概況特記非表示に戻る).respond();
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }

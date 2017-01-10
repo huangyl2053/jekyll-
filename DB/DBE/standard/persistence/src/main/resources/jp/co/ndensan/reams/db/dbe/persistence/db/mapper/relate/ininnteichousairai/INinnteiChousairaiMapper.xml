@@ -18,10 +18,26 @@
         "DbT5910NinteichosaItakusakiJoho"."kikanKubun" AS Temp_kikanKubun,
         SUM(COALESCE("ninteichosaIraiJohoZimi".waritsukeCount, 0)) AS Temp_waritsukeCount
         FROM
-        rgdb."DbT5910NinteichosaItakusakiJoho"
+        (SELECT *
+        FROM rgdb."DbT5910NinteichosaItakusakiJoho"
+        WHERE
+        "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" = TRUE
+        <if test= "証記載保険者番号!=null and !証記載保険者番号.isEmpty()">
+            AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" IN (
+            SELECT
+            dbT7051."shichosonCode" AS shichosonCode
+            FROM
+            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+            WHERE
+            dbT7051."shoKisaiHokenshaNo" = #{証記載保険者番号}
+            )
+        </if>) as "DbT5910NinteichosaItakusakiJoho"      
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
+        ON "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
         LEFT JOIN (
         SELECT
         "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" AS Temp_ninteichosaItakusakiCode,
+        "DbT7051KoseiShichosonMaster"."shichosonCode" AS Temp_shichosonCode,
         CASE WHEN "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
@@ -31,6 +47,10 @@
         END AS waritsukeCount
         FROM
         rgdb."DbT5201NinteichosaIraiJoho"
+        INNER JOIN
+        rgdb."DbT5101NinteiShinseiJoho" dbT5101 ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" ON dbT5101."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
         INNER JOIN (
         SELECT
         MAX("ninteichosaIraiRirekiNo") AS Temp_ninteichosaIraiRirekiNo,
@@ -54,21 +74,8 @@
         "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "shinseishoKanriRirekiNo".Temp_ninteichosaIraiRirekiNo
         AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = FALSE
         ) AS "ninteichosaIraiJohoZimi"
-        ON "ninteichosaIraiJohoZimi".Temp_ninteichosaItakusakiCode = "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
-        ON "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
-        WHERE
-        "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" = TRUE
-        <if test= "証記載保険者番号!=null and !証記載保険者番号.isEmpty()">
-            AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" IN (
-            SELECT
-            dbT7051."shichosonCode" AS shichosonCode
-            FROM
-            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
-            WHERE
-            dbT7051."shoKisaiHokenshaNo" = #{証記載保険者番号}
-            )
-        </if>
+        ON "ninteichosaIraiJohoZimi".Temp_ninteichosaItakusakiCode = "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode"        
+        AND "ninteichosaIraiJohoZimi".Temp_shichosonCode = "DbT5910NinteichosaItakusakiJoho"."shichosonCode"
         GROUP BY
         "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode",
         "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho",
