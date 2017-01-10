@@ -95,9 +95,16 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
                 psmJohoEntity = mapper.getその他宛名情報(myBatisParameter);
             }
         }
-        for (ShinsakaiYoteiJohoEntity 情報 : 委員情報) {
+        if (委員情報 != null && !委員情報.isEmpty()) {
+            for (ShinsakaiYoteiJohoEntity 情報 : 委員情報) {
+                item = new ShinsakaiKaisaiOshiraseTsuchiItem();
+                通知文設定(情報, psmJohoEntity);
+                ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
+                report.writeBy(reportSourceWriter);
+            }
+        } else {
             item = new ShinsakaiKaisaiOshiraseTsuchiItem();
-            通知文設定(情報, psmJohoEntity);
+            通知文設定(null, psmJohoEntity);
             ShinsakaiKaisaiOshiraseTsuchiReport report = new ShinsakaiKaisaiOshiraseTsuchiReport(item);
             report.writeBy(reportSourceWriter);
         }
@@ -116,6 +123,12 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
     }
 
     private void 通知文設定(ShinsakaiYoteiJohoEntity 委員情報, PsmJohoEntity psmJohoEntity) {
+        通知文本文設定(psmJohoEntity);
+        通知文開催情報設定(委員情報);
+        item.set通知文3(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号).get(項目番号));
+    }
+
+    private void 通知文本文設定(PsmJohoEntity psmJohoEntity) {
         FlexibleDate 基準日 = new FlexibleDate(RDate.getNowDate().toDateString());
         NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(),
                 基準日, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
@@ -150,6 +163,9 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         item.set予定時刻(paramter.getShinsakaiKaishiYoteiTime());
         item.set開催会場(paramter.getShinsakaiKaisaiBasho());
         item.set合議体(new RString(paramter.getGogitaiNo()));
+    }
+
+    private void 通知文開催情報設定(ShinsakaiYoteiJohoEntity 委員情報) {
         if (委員情報 != null) {
             if (委員情報.getShinsakaiIinShimei() != null && !委員情報.getShinsakaiIinShimei().isEmpty()) {
                 item.set宛名氏名(委員情報.getShinsakaiIinShimei().getColumnValue());
@@ -164,7 +180,6 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
                 item.set電話番号(委員情報.getShinsakaiKaisaiBashoTelNo().getColumnValue());
             }
         }
-        item.set通知文3(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号).get(項目番号));
     }
 
     @Override
