@@ -693,7 +693,7 @@ public class ShinshinIkenHandler {
             }
         }
         if (!flag) {
-            div.getRadNichijoNinchiNoryoku().setSelectedKey(KEY_2);
+            div.getRadNichijoNinchiNoryoku().setSelectedKey(KEY_4);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
                     Integer.valueOf(履歴番号.toString()), 認知能力).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
@@ -709,7 +709,7 @@ public class ShinshinIkenHandler {
             }
         }
         if (!flag) {
-            div.getRadIshiDentatsuNoryoku().setSelectedKey(KEY_2);
+            div.getRadIshiDentatsuNoryoku().setSelectedKey(KEY_4);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
                     Integer.valueOf(履歴番号.toString()), 伝達能力).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
