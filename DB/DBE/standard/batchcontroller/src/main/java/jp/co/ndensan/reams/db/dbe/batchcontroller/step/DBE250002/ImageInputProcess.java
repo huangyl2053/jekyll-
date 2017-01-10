@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -59,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  *
  */
+//TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
 public class ImageInputProcess extends BatchProcessBase<RString> {
 
     private static final RString PATH_SEPARATOR = new RString(File.separator);
@@ -119,12 +121,29 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     protected void process(RString line) {
         final OcrIken 取込解析結果 = OcrIken.parsed(line);
         if (hasBreak(this.key, 取込解析結果.getKey())) {
-            /* ブレイク処理 */
-            keyBreakProcess(this.key, this.cache);
-            /* キャッシュのクリア と キーの更新 */
+            if (!Objects.equals(ShinseiKey.EMPTY, key)) {
+                /* ブレイク処理 */
+                /*----------------------------------------------------------------------------------*/
+                _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                        .append("/* イメージ取り込み処理開始")
+                        .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
+                        .append(" 被保険者番号：").append(key.get被保険者番号())
+                        .append(" 認定申請日：").append(key.get認定申請日())
+                        .append(" 処理対象レコード数：").append(this.cache.size())
+                        .append("*/")
+                        .toString());
+                keyBreakProcess(this.key, this.cache);
+                _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                        .append("/* イメージ取り込み処理終了")
+                        .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
+                        .append(" 被保険者番号：").append(key.get被保険者番号())
+                        .append(" 認定申請日：").append(key.get認定申請日())
+                        .append("*/")
+                        .toString());
+                /* キャッシュのクリア と キーの更新 */
+            }
             this.cache = new ArrayList<>();
             this.key = 取込解析結果.getKey();
-            return;
         }
         /* キャッシュへの追加 */
         this.cache.add(取込解析結果);
@@ -154,6 +173,12 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
     private void processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
         if (sameKeyValues.isEmpty() || 3 <= sameKeyValues.size()) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("処理対象データsize不正です。")
+                    .append(" size：").append(sameKeyValues.size())
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return; //TODO 不正のため、エラーリスト出力対象。
         }
         ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(
@@ -163,10 +188,21 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         );
         List<ImageinputRelate> 関連データ = ImageinputFinder.createInstance().get関連データ(param).records();
         if (関連データ.isEmpty()) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("関連データの取得に失敗しました。")
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return; //TODO 不正のため、エラーリスト出力対象。
         }
         ImageinputRelate ir = 関連データ.get(0);
         if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                    .append("過去の制度です。処理をskipします。")
+                    .append(" 厚労省IF識別コード：").append(ir.get厚労省IF識別コード().getコード())
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return; //TODO 不正のため、エラーリスト出力対象。
         }
 
@@ -187,14 +223,27 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         }
 
         RString tempDirectoryPath = Directory.createTmpDirectory();
-        boolean successes = (sameKeyValues.size() == 1)
+        boolean copySucceeds = (sameKeyValues.size() == 1)
                 ? copyImageFilesToDirectory_ID777or778_1line(tempDirectoryPath, sameKeyValues)
                 : copyImageFilesToDirectory_ID777or778_2lines(tempDirectoryPath, sameKeyValues);
-        if (!successes) {
+        if (!copySucceeds) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("イメージのコピーに失敗しました。")
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return; //TODO 不正のため、エラーリスト出力対象。
         }
 
-        saveImageJoho(new FilesystemPath(tempDirectoryPath), ir);
+        boolean saveSucceeds = saveImageJoho(new FilesystemPath(tempDirectoryPath), ir);
+        if (saveSucceeds) {
+            return;
+        }
+        /*----------------------------------------------------------------------------------*/
+        _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                .append("イメージ情報の保存に失敗しました。")
+                .toString());
+        /*----------------------------------------------------------------------------------*/
     }
 
     OcrIken getAnyID777優先(List<OcrIken> sameKeyValues) {
@@ -211,9 +260,9 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
             /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
                     .append("カタログデータの取得に失敗しました。 ")
-                    .append("SheetID下8桁：").append(value.getSheetID().get帳票一連ID下8桁())
+                    .append(" SheetID下8桁：").append(value.getSheetID().get帳票一連ID下8桁())
                     .toString());
             /*----------------------------------------------------------------------------------*/
             return false;
@@ -247,19 +296,49 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             }
         }
         if (csv_777 == null || csv_778 == null) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("OCRIKEN.csvから対象のレコードが取得できませんでした。 ")
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return false;
         }
         CatalogLine ca3_777 = this.catalog.find(Models.ID777, csv_777.getSheetID()).orElse(null);
         if (ca3_777 == null) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("カタログデータの取得に失敗しました。 ")
+                    .append(" モデル：").append(Models.ID777)
+                    .append(" SheetID下8桁：").append(csv_777.getSheetID().get帳票一連ID下8桁())
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
             return false;
         }
         CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, csv_778.getSheetID()).orElse(null);
         if (ca3_778 != null) {
-            boolean result = copyImageFilesToDirectory(targetDirectoryPath, ca3_778.getImageFileNames().subList(0, 1),
-                    this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777_reversed);
-            return result || copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames().subList(0, 1),
-                    this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777_reversed);
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                    .append("表面は OCRID = 777 から、裏面は OCRID = 778 から画像を取得します。")
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
+            boolean copyRimenSucceeds = copyImageFilesToDirectory(targetDirectoryPath, ca3_778.getImageFileNames().subList(0, 1),
+                    this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
+            if (!copyRimenSucceeds) {
+                /*----------------------------------------------------------------------------------*/
+                _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                        .append("裏面の取得に失敗しました。")
+                        .toString());
+                /*----------------------------------------------------------------------------------*/
+                return false;
+            }
+            return copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames().subList(0, 1),
+                    this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
         }
+        /*----------------------------------------------------------------------------------*/
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                .append("表面・裏面とも、OCRID = 777 から画像を取得します。")
+                .toString());
+        /*----------------------------------------------------------------------------------*/
         FileNameConvertionTheories theory
                 = new RString("1").equals(csv_777.get全体イメージ表側インデックス())
                         ? FileNameConvertionTheories.ID777
@@ -293,7 +372,8 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 //入力ファイル不正の可能性あり。適切な処理の検討が必要。
                 continue;
             }
-            File.copy(path, new RStringBuilder(directoryPath).append(PATH_SEPARATOR).append(converter.convert(imageFileName)).toRString());
+            RString newFilePath = new RStringBuilder(directoryPath).append(PATH_SEPARATOR).append(converter.convert(imageFileName)).toRString();
+            File.copy(path, newFilePath);
         }
         return true;
     }
@@ -319,7 +399,9 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
                     .fromString(ir.getT5101_証記載保険者番号().concat(ir.getT5101_被保険者番号())), ir.getT5115_イメージ共有ファイルID());
             deleteIfExists(ro_sfd, 主治医意見書_表_BAK, 主治医意見書_裏_BAK);
-            return SharedFile.appendNewFile(ro_sfd, targetDirectory, RString.EMPTY.toString());
+            SharedAppendOption option = new SharedAppendOption();
+            option.overWrite(true);
+            return SharedFile.appendNewFile(ro_sfd, targetDirectory, RString.EMPTY.toString(), option);
         }
     }
 

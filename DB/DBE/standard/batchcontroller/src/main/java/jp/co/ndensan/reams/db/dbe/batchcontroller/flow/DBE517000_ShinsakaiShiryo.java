@@ -34,31 +34,16 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
 
     @Override
     protected void defineFlow() {
-        boolean is資料作成済 = false;
-        if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())
-                || 選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())
-                || 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
-                || 選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
-                || 選択.equals(getParameter().getChohyoIin_ikenshoFalg())
-                || 選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())
-                || 選択.equals(getParameter().getChohyoIin_tuutishoFalg())
-                || 選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
+        boolean is資料作成 = false;
+        if (isOutputShinsakaiIinShinsakaiShiryo()) {
             executeStep(委員_審査会資料一括作成);
-            is資料作成済 = true;
+            is資料作成 = true;
         }
-        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
-                || 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
-                || 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
-                || 選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())
-                || 選択.equals(getParameter().getChoyoJimu_ikenshoFalg())
-                || 選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())
-                || 選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())
-                || 選択.equals(getParameter().getChoyoJimu_hanteiFalg())
-                || 選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
+        if (isOutputJimukyokuinShinsakaiShiryo()) {
             executeStep(事務局_審査会資料一括作成);
-            is資料作成済 = true;
+            is資料作成 = true;
         }
-        if (is資料作成済) {
+        if (is資料作成) {
             executeStep(審査会開催予定情報更新);
             executeStep(出力条件表出力);
         }
@@ -109,8 +94,14 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     @Step(出力条件表出力)
     protected IBatchFlowCommand createOutputJokenhyoFactory() {
         Map<RString, RString> 帳票Map = new HashMap<>();
-        Map<RString, RString> 帳票Map1 = getResult(Map.class, 事務局_審査会資料一括作成, new RString("出力帳票一覧"));
-        Map<RString, RString> 帳票Map2 = getResult(Map.class, 委員_審査会資料一括作成, new RString("出力帳票一覧"));
+        Map<RString, RString> 帳票Map1 = null;
+        Map<RString, RString> 帳票Map2 = null;
+        if (isOutputJimukyokuinShinsakaiShiryo()) {
+            帳票Map1 = getResult(Map.class, 事務局_審査会資料一括作成, new RString("出力帳票一覧"));
+        }
+        if (isOutputShinsakaiIinShinsakaiShiryo()) {
+            帳票Map2 = getResult(Map.class, 委員_審査会資料一括作成, new RString("出力帳票一覧"));
+        }
         if (帳票Map1 != null) {
             帳票Map.putAll(帳票Map1);
         }
@@ -119,5 +110,34 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
         }
         return simpleBatch(OutputJokenhyoFactoryProcess.class)
                 .arguments(getParameter().toOutputJokenhyoFactoryProcessParameter(帳票Map)).define();
+    }
+
+    private boolean isOutputShinsakaiIinShinsakaiShiryo() {
+        if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())
+                || 選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())
+                || 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
+                || 選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
+                || 選択.equals(getParameter().getChohyoIin_ikenshoFalg())
+                || 選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())
+                || 選択.equals(getParameter().getChohyoIin_tuutishoFalg())
+                || 選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isOutputJimukyokuinShinsakaiShiryo() {
+        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
+                || 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
+                || 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
+                || 選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())
+                || 選択.equals(getParameter().getChoyoJimu_ikenshoFalg())
+                || 選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())
+                || 選択.equals(getParameter().getChoyoJimu_gaikyouTokkiFalg())
+                || 選択.equals(getParameter().getChoyoJimu_hanteiFalg())
+                || 選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
+            return true;
+        }
+        return false;
     }
 }
