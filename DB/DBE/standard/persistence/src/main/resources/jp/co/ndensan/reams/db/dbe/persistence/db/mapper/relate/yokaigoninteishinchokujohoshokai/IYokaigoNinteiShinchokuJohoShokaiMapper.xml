@@ -113,9 +113,9 @@
         DbT5101."shinseishoKanriNo",
         DbT5201."ninteichosaIraiRirekiNo"
     </sql>
-    
+
     <sql id="mainTable">
-        WITH DbT5101 AS (SELECT 
+        WITH DbT5101 AS (SELECT
         DbT5101.*,
         TB.tokki AS "tokki",
         DbT5116."ichijiHanteiYMD",
@@ -134,6 +134,8 @@
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502 ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND (DbT5502."hanteiKekkaCode"='01' OR DbT5502."hanteiKekkaCode" IS NULL)
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511 ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5591GogitaiJoho" AS DbT5591 ON DbT5511."gogitaiNo" = DbT5591."gogitaiNo"
+            AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
+            AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501 ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116 ON DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN (SELECT DISTINCT "shinseishoKanriNo", '●' AS  tokki from rgdb."DbT5205NinteichosahyoTokkijiko") TB ON TB."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
@@ -152,7 +154,7 @@
                         AND replace(replace(DbT5101."hihokenshaKana",' ',''),'　','')
                     </if>
                     <if test="!searchesShimeiByKana">
-                        AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','') 
+                        AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','')
                     </if>
                     <if test="matchTypekey1">
                         LIKE #{shimei}||'%'
@@ -187,8 +189,6 @@
             <if test="kensakuOptionKey2">
                 AND DbT5101."torisageKubunCode" <![CDATA[<>]]>  #{torisageKubunCode}
             </if>
-            AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
-            AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
         </where>
         )
     </sql>
