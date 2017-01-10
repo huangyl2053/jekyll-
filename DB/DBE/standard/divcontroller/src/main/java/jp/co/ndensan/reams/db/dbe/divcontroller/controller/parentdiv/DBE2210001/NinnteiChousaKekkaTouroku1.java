@@ -123,6 +123,8 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final int 地域密着型介護老人福祉施設入所者生活介護 = 18;
     private static final int 定期巡回_随時対応型訪問介護看護 = 19;
     private static final int 看護小規模多機能型居宅介護 = 20;
+    private static final RString 概況特記登録ボタン_表示 = new RString("1");
+    private static final RString 概況特記登録ボタン_非表示 = new RString("2");
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -145,7 +147,6 @@ public class NinnteiChousaKekkaTouroku1 {
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
         boolean is再調査の場合 = Boolean.FALSE;
-
         if (dbt5211 != null && gaikyoChosa != null
                 && 前回値使用.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果表示, RDate.getNowDate()))) {
             is再調査の場合 = Boolean.TRUE;
@@ -216,7 +217,12 @@ public class NinnteiChousaKekkaTouroku1 {
         ViewStateHolder.put(ViewStateKeys.記入者名称, div.getCcdChosaJisshishaJoho().getTxtKinyushaName().getText());
         ViewStateHolder.put(ViewStateKeys.調査区分, div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getText());
 
-        return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録);
+        if (概況特記登録ボタン_非表示.equals(DbBusinessConfig.get(ConfigNameDBE.概況特記登録ボタン_表示有無, RDate.getNowDate()))) {
+            return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_概況特記非表示);
+        } else {
+            return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録);
+        }
+        //return ResponseData.of(div).respond();
     }
 
     /**

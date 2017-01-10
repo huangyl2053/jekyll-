@@ -109,6 +109,20 @@
      "eventName": "処理終了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2210003",
+     "layoutTitle": "特記一覧登録",
+     "eventName": "認定調査結果登録_概況特記非表示に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2210001",
+     "toLayoutTitle": "認定調査結果登録",
+     "toState": "調査結果登録_概況特記非表示"
     }
    ]
   }
