@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.DBE5140002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinIchiran_Row;
@@ -173,12 +174,31 @@ public class ShinsakaiIinWaritsuke {
             }
             List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList
                     = div.getDgShinsakaiIinKoseiIchiran().getDataSource();
+
+            boolean is議長Set = false;
+            GogitaichoKubunCode 合議体長to議長コード = GogitaichoKubunCode.副合議体長;
+            for (dgShinsakaiIinKoseiIchiran_Row row : koseiIchiranGridList) {
+                GogitaichoKubunCode rowGogitaichoKubun = RString.EMPTY.equals(row.getGogitaichoKubun()) ? GogitaichoKubunCode.通常
+                        : GogitaichoKubunCode.toValueOfName(row.getGogitaichoKubun());
+                if (GogitaichoKubunCode.合議体長.equals(rowGogitaichoKubun)) {
+                    合議体長to議長コード = GogitaichoKubunCode.合議体長;
+                    break;
+                }
+            }
+
             for (dgShinsakaiIinKoseiIchiran_Row row : koseiIchiranGridList) {
                 ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(開催番号, row.getShinsakaiIinCode());
                 ShinsakaiWariateIinJoho2Builder builder = wariateIinJoho.createBuilderForEdit();
                 builder.set介護認定審査会開催年月日(new FlexibleDate(div.getTxtKaisaiYoteibi().getValue().toDateString()));
-                builder.set介護認定審査会議長区分コード(new Code(RString.EMPTY.equals(row.getGogitaichoKubun()) ? new RString("0")
-                        : GogitaichoKubunCode.toValueOfName(row.getGogitaichoKubun()).getコード()));
+
+                GogitaichoKubunCode rowGogitaichoKubun = RString.EMPTY.equals(row.getGogitaichoKubun()) ? GogitaichoKubunCode.通常
+                        : GogitaichoKubunCode.toValueOfName(row.getGogitaichoKubun());
+                builder.set介護認定審査会議長区分コード(new Code(KaigoninteiShinsakaiGichoKubunCode.委員.getコード()));
+                if (!is議長Set && 合議体長to議長コード.equals(rowGogitaichoKubun)) {
+                    is議長Set = true;
+                    builder.set介護認定審査会議長区分コード(new Code(KaigoninteiShinsakaiGichoKubunCode.議長.getコード()));
+                }
+
                 builder.set委員出席(true);
                 builder.set委員遅刻有無(false);
                 builder.set委員出席時間(new RString(
@@ -200,5 +220,5 @@ public class ShinsakaiIinWaritsuke {
 
     private ShinsakaiIinWaritsukeValidationHandler getValidationHandler(ShinsakaiIinWaritsukeDiv div) {
         return new ShinsakaiIinWaritsukeValidationHandler(div);
-    }    
+    }
 }

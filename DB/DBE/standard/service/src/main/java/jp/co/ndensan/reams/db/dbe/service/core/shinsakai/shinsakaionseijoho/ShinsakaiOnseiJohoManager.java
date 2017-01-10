@@ -44,7 +44,8 @@ public class ShinsakaiOnseiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiOnseiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiOnseiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiOnseiJohoManager}のインスタンス
      */
     public static ShinsakaiOnseiJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiOnseiJohoManager.class);
@@ -78,7 +79,6 @@ public class ShinsakaiOnseiJohoManager {
      * 主キーに合致する介護認定審査会音声情報を返します。
      *
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
-     * @param 連番 連番
      * @return ShinsakaiOnseiJoho
      */
     @Transaction
