@@ -231,6 +231,10 @@ public class CyoSaiRaiBusiness {
         return entity.getNinteichosaIraiKaisu();
     }
 
+    public RString get今回調査委託先コード() {
+        return entity.getNinteichosaItakusakiCode();
+    }
+
     /**
      * 今回調査委託先を返します。
      *

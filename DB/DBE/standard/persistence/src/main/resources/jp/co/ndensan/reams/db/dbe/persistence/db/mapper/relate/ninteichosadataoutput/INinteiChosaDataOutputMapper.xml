@@ -64,13 +64,14 @@
        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
        ON DbT5913."shichosonCode" = DbT7051."shichosonCode"
        AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
-       WHERE
-       <if test= "!isShichoson">
-        AND DbT7051."shichosonCode" = #{shichosonCode}
-       </if>
-       <if test="isNinteichosaItakusakiCode">
-        AND  DbT5913."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
-       </if>
+       <where>
+        <if test= "!isShichoson">
+            AND DbT7051."shichosonCode" = #{shichosonCode}
+        </if>
+        <if test="isNinteichosaItakusakiCode">
+            AND  DbT5913."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
+        </if>
+       </where>
        ORDER BY "調査員コード"
     </select>
 

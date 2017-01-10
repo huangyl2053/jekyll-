@@ -17,7 +17,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆ 要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆認定調査依頼情報＆ 介護事業者＆認定調査委託先情報＆認定調査委託先情報＆調査員情報＆ 認定調査委託先情報＆RelateEntityクラスです。
+ * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆ 要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆認定調査依頼情報＆
+ * 介護事業者＆認定調査委託先情報＆認定調査委託先情報＆調査員情報＆ 認定調査委託先情報＆RelateEntityクラスです。
  *
  * @reamsid_L DBE-3000-160 houtianpeng
  */
@@ -48,6 +49,7 @@ public class CyoSaiRaiRelateEntity {
     private RString ninteichosaTokusokuHoho;
     private int ninteichosaTokusokuKaisu;
     private int ninteichosaIraiKaisu;
+    private RString ninteichosaItakusakiCode;
     private RString jigyoshaMeisho;
     private RString chosainShimei;
     private RString before_jigyoshaMeisho;
