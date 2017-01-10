@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link GogitaiJoho}の編集を行うビルダークラスです。
@@ -156,6 +157,17 @@ public class GogitaiJohoBuilder {
     public GogitaiJohoBuilder set合議体精神科医存在フラグ(boolean 合議体精神科医存在フラグ) {
         requireNonNull(合議体精神科医存在フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体精神科医存在フラグ"));
         entity.setGogitaiSeishinkaSonzaiFlag(合議体精神科医存在フラグ);
+        return this;
+    }
+    
+    /**
+     * 状態を設定します。
+     *
+     * @param dataState EntityDataState
+     * @return {@link GogitaiJohoBuilder}
+     */
+    public GogitaiJohoBuilder setState(EntityDataState dataState) {
+        entity.setState(dataState);
         return this;
     }
 

@@ -237,6 +237,17 @@ public class GogitaiJohoSakuseiHandler {
         各ボタン活性設定(Boolean.TRUE);
 
     }
+    
+    /**
+     *
+     * 削除モードの場合、合議体詳細情報の設定します。
+     * @param flag setDisabledFlag
+     *
+     */
+    public void 合議体詳細情報削除モード設定(boolean flag) {
+        div.getBtnback().setDisabled(flag);
+        div.getBtnKosin().setDisabled(flag);
+    }
 
     private void 各ボタン活性設定(boolean flag) {
         div.getBtnTsuika().setDisabled(flag);
