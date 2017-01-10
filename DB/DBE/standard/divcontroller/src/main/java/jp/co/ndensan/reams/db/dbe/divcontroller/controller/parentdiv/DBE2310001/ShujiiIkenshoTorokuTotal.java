@@ -326,6 +326,16 @@ public class ShujiiIkenshoTorokuTotal {
     }
 
     /**
+     * 完了ボタン押下時のイベントです。
+     *
+     * @param div 主治医意見書登録Div
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnKanryo(ShujiiIkenshoTorokuTotalDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 保存するボタンを押下の場合、主治医意見書入手へ遷移します。
      *
      * @param div 主治医意見書登録Div

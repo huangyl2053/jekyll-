@@ -41,6 +41,7 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     private static final int INDEX_4 = 4;
     private static final int INDEX_6 = 6;
     private static final RString 未開催 = ShinsakaiShinchokuJokyo.未開催.getコード();
+    private static final RString 未開催_割付完了 = ShinsakaiShinchokuJokyo.未開催_割付完了.getコード();
     private static final RString 中止 = ShinsakaiShinchokuJokyo.中止.getコード();
     private static final RString 分割 = new RString("-");
     private static final RString FUNN = new RString(":");
@@ -402,11 +403,17 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
         RString 終了時間 = row.getKaisaiTime().getValue().split(分割.toString()).get(1).replace(FUNN, RString.EMPTY);
         for (ShinsakaiKaisaiYoteiJohoParameter entity : shinsakaEntityList) {
             if (new RString(entity.get日付().toString()).equals(seteibi.toDateString()) && entity.get開始予定時刻().equals(開始時間)
-                    && entity.get終了予定時刻().equals(終了時間) && Integer.valueOf(開催合議体.toString()) == entity.get合議体番号()
-                    && !(未開催.equals(entity.get介護認定審査会進捗状況()) || 中止.equals(entity.get介護認定審査会進捗状況()))) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.予定中止不可),
-                        div.getDgKaisaiYoteiNyuryokuran()));
+                    && entity.get終了予定時刻().equals(終了時間) && Integer.valueOf(開催合議体.toString()) == entity.get合議体番号()) {
+                if (未開催_割付完了.equals(entity.get介護認定審査会進捗状況())) {
+                    validationMessages.add(new ValidationMessageControlPair(
+                            new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.割付済審査会中止不可),
+                            div.getDgKaisaiYoteiNyuryokuran()));
+                } else if (!(未開催.equals(entity.get介護認定審査会進捗状況())
+                        || 中止.equals(entity.get介護認定審査会進捗状況()))) {
+                    validationMessages.add(new ValidationMessageControlPair(
+                            new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(DbeErrorMessages.予定中止不可),
+                            div.getDgKaisaiYoteiNyuryokuran()));
+                }
             }
         }
     }

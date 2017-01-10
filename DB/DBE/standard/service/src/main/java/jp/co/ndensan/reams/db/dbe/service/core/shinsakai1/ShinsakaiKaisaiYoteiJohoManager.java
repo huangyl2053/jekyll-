@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJ
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteijoho.IShinsakaiKaisaiYoteiJohoMapper;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShinsakaiKaisaiYoteiJohoManager {
 
     private final MapperProvider mapperProvider;
-    private static final RString 未開催 = new RString("1");
+    private static final RString 未開催 = ShinsakaiShinchokuJokyo.未開催.getコード();
     private static final RString 審査会名称 = new RString("第○○審査会");
 
     /**
