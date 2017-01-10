@@ -3635,7 +3635,7 @@ public class ChkIchijiHanteiKekkaProcess extends BatchProcessBase<YokaigoninteiE
                     .append(new Decimal(entity.get要介護認定等基準時間().toString()).divide(時間算出用数値_10).toString("##0.0"))
                     .append("分")
                     .toRString();
-            if (entity.get要介護認定等基準時間_認知症加算() != null) {
+            if (entity.get要介護認定等基準時間_認知症加算() != null && !entity.get要介護認定等基準時間_認知症加算().equals(new RString("0"))) {
                 要介護認定等基準時間 = new RStringBuilder()
                         .append(要介護認定等基準時間)
                         .append(" ＋ ")
