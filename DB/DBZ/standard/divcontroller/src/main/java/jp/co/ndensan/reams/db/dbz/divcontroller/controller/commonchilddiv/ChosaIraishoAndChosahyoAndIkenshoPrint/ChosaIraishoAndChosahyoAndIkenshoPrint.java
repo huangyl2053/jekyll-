@@ -272,13 +272,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                     = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
         }
         shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set主治医意見書作成期限年月日(作成期限年月日);
-        FlexibleDate システム日付 = FlexibleDate.getNowDate();
+        FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkoYMD().getValue().toString());
         if (!div.getChkInsatsuIkensho().getSelectedKeys().isEmpty()) {
-            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set依頼書出力年月日(システム日付);
+            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set依頼書出力年月日(発行日);
         }
         List<RString> selectedKeys = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
         if (selectedKeys.contains(KEY0) || selectedKeys.contains(KEY1)) {
-            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set意見書出力年月日(システム日付);
+            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set意見書出力年月日(発行日);
         }
         ShujiiIkenshoIraiJohoManager.createInstance().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
     }
@@ -311,13 +311,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                     = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.toDateString()));
         }
         ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set認定調査期限年月日(認定調査期限年月日);
-        FlexibleDate システム日付 = FlexibleDate.getNowDate();
+        FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkoYMD().getValue().toString());
         if (!div.getChk().getSelectedKeys().isEmpty()) {
-            ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set依頼書出力年月日(システム日付);
+            ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set依頼書出力年月日(発行日);
         }
         if (!div.getChkChosahyo().getSelectedKeys().isEmpty()
                 || !div.getChkOcrChosahyo().getSelectedKeys().isEmpty()) {
-            ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set調査票等出力年月日(システム日付);
+            ninteichosaIraiJohoBuilder = ninteichosaIraiJohoBuilder.set調査票等出力年月日(発行日);
         }
         NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJohoBuilder.build().modifiedModel());
     }
