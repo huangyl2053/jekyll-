@@ -25,7 +25,20 @@ public final class OcrIken {
     private static final RString 意見書_裏 = new RString("702");
     private static final RString 意見書_ID777 = new RString("777");
     private static final RString 意見書_ID778 = new RString("778");
-
+    private static final int 切り出し桁数 = 1;
+    private static final int 桁数固定値_内科 = 0;
+    private static final int 桁数固定値_皮膚科 = 1;
+    private static final int 桁数固定値_リハビリテーション科 = 2;
+    private static final int 桁数固定値_精神科 = 3;
+    private static final int 桁数固定値_泌尿器科 = 4;
+    private static final int 桁数固定値_歯科 = 5;
+    private static final int 桁数固定値_外科 = 6;
+    private static final int 桁数固定値_婦人科 = 7;
+    private static final int 桁数固定値_その他受診科 = 8;
+    private static final int 桁数固定値_整形外科 = 9;
+    private static final int 桁数固定値_眼科 = 10;
+    private static final int 桁数固定値_脳神経外科 = 11;
+    private static final int 桁数固定値_耳鼻咽喉科 = 12;
     //key
     @lombok.Setter(lombok.AccessLevel.PRIVATE)
     private ShinseiKey key;
@@ -54,6 +67,19 @@ public final class OcrIken {
     // （３）他科受信の有無
     private RString 他科受診の有無;
     private RString 記入のあった科; // 内科, 皮膚科,リハビリテーション科,精神科,泌尿器科,歯科,外科,婦人科,その他,整形外科,眼科,脳神経外科,耳鼻咽喉科;
+    private RString 内科受診の有無;
+    private RString 精神科受診の有無;
+    private RString 外科受診の有無;
+    private RString 整形外科受診の有無;
+    private RString 脳神経外科の有無;
+    private RString 皮膚科受診の有無;
+    private RString 泌尿器科受診の有無;
+    private RString 婦人科受診の有無;
+    private RString 耳鼻咽喉科受診の有無;
+    private RString リハビリテーション科受診の有無;
+    private RString 歯科受診の有無;
+    private RString 眼科の有無;
+    private RString その他受診科の有無;
     // １．傷病に関する意見
     // （１）診断名
     private RString 発症年月日１和暦;
@@ -171,7 +197,7 @@ public final class OcrIken {
         }
         RString ocrID = columns.get(0);
         if (意見書_表.equals(ocrID)) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 32 LINES
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 33 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
@@ -185,6 +211,7 @@ public final class OcrIken {
             result.set意見書作成回数(columns.get(9));
             result.set他科受診の有無(columns.get(10));
             result.set記入のあった科(columns.get(11));
+            result.set受診科(columns.get(11));
             result.set発症年月日１和暦(columns.get(12));
             result.set発症年月日１(get西暦_年(columns.get(13)));
             result.set発症年月日２和暦(columns.get(14));
@@ -281,7 +308,7 @@ public final class OcrIken {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 7 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号((columns.get(2)));
+            result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
             result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
@@ -299,6 +326,22 @@ public final class OcrIken {
         RString 和暦 = 年号.concat(和暦_日付);
         RDate result = new RDate(和暦.toString());
         return result.toDateString();
+    }
+
+    private void set受診科(RString 記入のあった科) {
+        this.set内科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_内科, 桁数固定値_内科 + 切り出し桁数));
+        this.set精神科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_精神科, 桁数固定値_精神科 + 切り出し桁数));
+        this.set外科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_外科, 桁数固定値_外科 + 切り出し桁数));
+        this.set整形外科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_整形外科, 桁数固定値_整形外科 + 切り出し桁数));
+        this.set脳神経外科の有無(記入のあった科.substringEmptyOnError(桁数固定値_脳神経外科, 桁数固定値_脳神経外科 + 切り出し桁数));
+        this.set皮膚科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_皮膚科, 桁数固定値_皮膚科 + 切り出し桁数));
+        this.set泌尿器科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_泌尿器科, 桁数固定値_泌尿器科 + 切り出し桁数));
+        this.set婦人科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_婦人科, 桁数固定値_婦人科 + 切り出し桁数));
+        this.set耳鼻咽喉科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_耳鼻咽喉科, 桁数固定値_耳鼻咽喉科 + 切り出し桁数));
+        this.setリハビリテーション科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_リハビリテーション科, 桁数固定値_リハビリテーション科 + 切り出し桁数));
+        this.set歯科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_歯科, 桁数固定値_歯科 + 切り出し桁数));
+        this.set眼科の有無(記入のあった科.substringEmptyOnError(桁数固定値_眼科, 桁数固定値_眼科 + 切り出し桁数));
+        this.setその他受診科の有無(記入のあった科.substringEmptyOnError(桁数固定値_その他受診科, 桁数固定値_その他受診科 + 切り出し桁数));
     }
 
     /**
@@ -322,6 +365,21 @@ public final class OcrIken {
         this.意見書作成回数 = RString.EMPTY;
         this.他科受診の有無 = RString.EMPTY;
         this.記入のあった科 = RString.EMPTY;
+
+        this.内科受診の有無 = RString.EMPTY;
+        this.精神科受診の有無 = RString.EMPTY;
+        this.外科受診の有無 = RString.EMPTY;
+        this.整形外科受診の有無 = RString.EMPTY;
+        this.脳神経外科の有無 = RString.EMPTY;
+        this.皮膚科受診の有無 = RString.EMPTY;
+        this.泌尿器科受診の有無 = RString.EMPTY;
+        this.婦人科受診の有無 = RString.EMPTY;
+        this.耳鼻咽喉科受診の有無 = RString.EMPTY;
+        this.リハビリテーション科受診の有無 = RString.EMPTY;
+        this.歯科受診の有無 = RString.EMPTY;
+        this.眼科の有無 = RString.EMPTY;
+        this.その他受診科の有無 = RString.EMPTY;
+
         this.発症年月日１和暦 = RString.EMPTY;
         this.発症年月日１ = RString.EMPTY;
         this.発症年月日２和暦 = RString.EMPTY;

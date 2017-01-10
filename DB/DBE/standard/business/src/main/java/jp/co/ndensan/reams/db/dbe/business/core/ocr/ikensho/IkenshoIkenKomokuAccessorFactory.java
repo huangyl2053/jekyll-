@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * {@link IIkenshoIkenKomokuAccessor}を生成します。
  */
-public class IkenshoIkenKomokuAccessorFactory {
+public final class IkenshoIkenKomokuAccessorFactory {
 
     private IkenshoIkenKomokuAccessorFactory() {
     }
@@ -77,13 +77,13 @@ public class IkenshoIkenKomokuAccessorFactory {
                 case 寝たきり度:
                     return oi.get障害高齢者の自立度();
                 case 認知症高齢者の日常生活自立度:
-                    return oi.get認知症高齢者の自立度();
+                    return to記載なし(oi.get認知症高齢者の自立度());
                 case 短期記憶:
-                    return oi.get短期記憶();
+                    return to記載なし(oi.get短期記憶());
                 case 認知能力:
-                    return oi.get認知能力();
+                    return to記載なし(oi.get認知能力());
                 case 伝達能力:
-                    return oi.get伝達能力();
+                    return to記載なし(oi.get伝達能力());
                 case 認知症の周辺症状:
                     return oi.get問題行動の有無();
                 case 幻視_幻聴:
@@ -187,7 +187,7 @@ public class IkenshoIkenKomokuAccessorFactory {
                 case 歩行補助具_装具の使用_屋内で使用:
                     return oi.get歩行補助具装具の使用().substringEmptyOnError(2);
                 case 食事行為:
-                    return oi.get食事行為();
+                    return to記載なし(oi.get食事行為());
                 case 現在の栄養状態:
                     return oi.get現在の栄養状況();
                 case 尿失禁:
@@ -280,5 +280,12 @@ public class IkenshoIkenKomokuAccessorFactory {
                     return RString.EMPTY;
             }
         }
+
+        private static RString to記載なし(RString value) {
+            return OCR_記載なし.equals(value) ? DB_記載なし : value;
+        }
+
+        private static final RString OCR_記載なし = new RString("0");
+        private static final RString DB_記載なし = new RString("9");
     }
 }
