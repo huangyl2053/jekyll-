@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
@@ -69,6 +70,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 依頼書・認定調査票(OCR)・主治医意見書印刷のハンドラークラスです。
@@ -328,10 +331,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         if (KEY2.equals(key)) {
             div.getTxtKyotsuDay().setReadOnly(false);
             div.getTxtKyotsuDay().setRequired(true);
+            IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
+            div.getTxtKyotsuDay().setValue(get共通日初期値(model.get遷移元画面区分()));
         } else {
             div.getTxtKyotsuDay().clearValue();
             div.getTxtKyotsuDay().setReadOnly(true);
         }
+    }
+
+    private static RDate get共通日初期値(GamenSeniKbn 画面区分) {
+        ConfigNameDBE config = (画面区分 == GamenSeniKbn.認定調査依頼)
+                ? ConfigNameDBE.認定調査期限日数
+                : ConfigNameDBE.主治医意見書作成期限日数;
+        int day = Integer.valueOf(BusinessConfig.get(config, SubGyomuCode.DBE認定支援).toString());
+        return RDate.getNowDate().plusDay(day);
     }
 
     private void setChk認定調査印刷帳票選択(RString 保険者市町村コード) {
@@ -701,7 +714,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         RString.EMPTY,
                         文書番号,
                         RString.isNullOrEmpty(business.get調査委託先郵便番号())
-                        ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
+                                ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
                         business.get調査委託先住所(),
                         business.get事業者名称(),
                         business.get調査員氏名(),
@@ -729,11 +742,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         性別男,
                         性別女,
                         RString.isNullOrEmpty(business.get郵便番号())
-                        ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
+                                ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
                         business.get住所(),
                         business.get電話番号(),
                         RString.isNullOrEmpty(business.get訪問調査先郵便番号())
-                        ? RString.EMPTY : new YubinNo(business.get訪問調査先郵便番号()).getEditedYubinNo(),
+                                ? RString.EMPTY : new YubinNo(business.get訪問調査先郵便番号()).getEditedYubinNo(),
                         business.get訪問調査先住所(),
                         business.get訪問調査先名称(),
                         business.get訪問調査先電話番号(),
@@ -785,7 +798,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.isNullOrEmpty(business.get調査委託先郵便番号())
-                    ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
+                            ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
                     business.get調査委託先住所(),
                     business.get事業者名称(),
                     business.get調査員氏名(),
@@ -910,7 +923,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get連絡先携帯番号(),
                         business.get連絡先氏名(),
                         !RString.isNullOrEmpty(business.get連絡先続柄())
-                        ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
+                                ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
                         RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
