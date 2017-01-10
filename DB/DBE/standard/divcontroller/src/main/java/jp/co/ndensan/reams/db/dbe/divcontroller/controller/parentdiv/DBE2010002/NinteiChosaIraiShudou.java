@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
@@ -46,13 +45,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -272,45 +268,45 @@ public class NinteiChosaIraiShudou {
         return 認定調査期限年月日;
     }
 
-    /**
-     * 「発行するボタンを押すチェック処理です。
-     *
-     * @param div NinteiChosaIraiShudouDiv
-     * @return ResponseData<SourceDataCollection>
-     */
-    public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnPrint_check(NinteiChosaIraiShudouDiv div) {
-
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).印刷帳票チェック();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 選択された帳票を発行するボタンを押す処理です。
-     *
-     * @param div NinteiChosaIraiShudouDiv
-     * @return ResponseData<SourceDataCollection>
-     */
-    public ResponseData<SourceDataCollection> onClick_btnPrint(NinteiChosaIraiShudouDiv div) {
-        ResponseData<SourceDataCollection> response = new ResponseData<>();
-        updateData(div);
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号.value()));
-        try (ReportManager reportManager = new ReportManager()) {
-            printData(div, reportManager);
-            response.data = reportManager.publish();
-        }
-        List<NinteiShinseiJoho> 更新用認定調査依頼List = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
-                NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value())).records();
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
-        return response;
-    }
+//    /**
+//     * 「発行するボタンを押すチェック処理です。
+//     *
+//     * @param div NinteiChosaIraiShudouDiv
+//     * @return ResponseData<SourceDataCollection>
+//     */
+//    public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnPrint_check(NinteiChosaIraiShudouDiv div) {
+//
+//        ValidationMessageControlPairs validPairs = getValidationHandler(div).印刷帳票チェック();
+//        if (validPairs.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+//        }
+//        if (!ResponseHolder.isReRequest()) {
+//            return ResponseData.of(div).addMessage(DbQuestionMessages.処理実行の確認.getMessage()).respond();
+//        }
+//
+//        return ResponseData.of(div).respond();
+//    }
+//
+//    /**
+//     * 選択された帳票を発行するボタンを押す処理です。
+//     *
+//     * @param div NinteiChosaIraiShudouDiv
+//     * @return ResponseData<SourceDataCollection>
+//     */
+//    public ResponseData<SourceDataCollection> onClick_btnPrint(NinteiChosaIraiShudouDiv div) {
+//        ResponseData<SourceDataCollection> response = new ResponseData<>();
+//        updateData(div);
+//        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号.value()));
+//        try (ReportManager reportManager = new ReportManager()) {
+//            printData(div, reportManager);
+//            response.data = reportManager.publish();
+//        }
+//        List<NinteiShinseiJoho> 更新用認定調査依頼List = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
+//                NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value())).records();
+//        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(更新用認定調査依頼List));
+//        return response;
+//    }
 
     private void updateData(NinteiChosaIraiShudouDiv div) {
         Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> 認定調査依頼情報List = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, Models.class);
@@ -539,32 +535,32 @@ public class NinteiChosaIraiShudou {
         }
     }
 
-    /**
-     * 「選択した帳票を発行する」ボタンを押すAfter処理です。
-     *
-     * @param div NinteiChosaIraiShudouDiv
-     * @return ResponseData<SourceDataCollection>
-     */
-    public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnPrint_after(NinteiChosaIraiShudouDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
-                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, CONFIGVALUE1);
-            } else {
-                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, RString.EMPTY);
-            }
-            if (div.getChkNinteichosaDesign().getSelectedKeys().isEmpty()
-                    && div.getChkNinteichosaOcr().getSelectedKeys().isEmpty()
-                    && div.getChkSaiCheck().getSelectedKeys().isEmpty()
-                    && div.getChkTokkiJko().getSelectedKeys().isEmpty()) {
-                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, RString.EMPTY);
-            } else {
-                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
-            }
-            RealInitialLocker.release(get排他キー());
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理")).respond();
-        }
-        return ResponseData.of(div).respond();
-    }
+//    /**
+//     * 「選択した帳票を発行する」ボタンを押すAfter処理です。
+//     *
+//     * @param div NinteiChosaIraiShudouDiv
+//     * @return ResponseData<SourceDataCollection>
+//     */
+//    public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnPrint_after(NinteiChosaIraiShudouDiv div) {
+//        if (!ResponseHolder.isReRequest()) {
+//            if (!div.getChkIrai().getSelectedKeys().isEmpty()) {
+//                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, CONFIGVALUE1);
+//            } else {
+//                ViewStateHolder.put(ViewStateKeys.依頼書出力年月日_更新区分, RString.EMPTY);
+//            }
+//            if (div.getChkNinteichosaDesign().getSelectedKeys().isEmpty()
+//                    && div.getChkNinteichosaOcr().getSelectedKeys().isEmpty()
+//                    && div.getChkSaiCheck().getSelectedKeys().isEmpty()
+//                    && div.getChkTokkiJko().getSelectedKeys().isEmpty()) {
+//                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, RString.EMPTY);
+//            } else {
+//                ViewStateHolder.put(ViewStateKeys.調査票等出力年月日_更新区分, CONFIGVALUE1);
+//            }
+//            RealInitialLocker.release(get排他キー());
+//            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("発行処理")).respond();
+//        }
+//        return ResponseData.of(div).respond();
+//    }
 
     private PersonalData toPersonalData(RString shinsei) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"), shinsei);

@@ -116,6 +116,9 @@ public class NinteiChosaIraiShudouHandler {
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShichosonCode(認定調査依頼.get市町村コード());
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShinseishoKanriNo(認定調査依頼.get申請書管理番号());
             div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(認定調査依頼.get申請書管理番号()));
+            if (認定調査依頼.get認定調査依頼区分コード() != null) {
+                div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(認定調査依頼.get認定調査依頼区分コード());
+            }
             if (!RString.isNullOrEmpty(認定調査依頼.get認定調査依頼履歴番号())) {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(true);
             } else {
@@ -146,7 +149,7 @@ public class NinteiChosaIraiShudouHandler {
         RString 認定調査票差異チェック票 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, 市町村コード);
         RString 調査特記_概況特記 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, 市町村コード);
         RString 認定調査依頼該当者履歴一覧 = getConfigValue(ConfigNameDBE.認定調査依頼_手動_認定調査依頼該当者履歴一覧, 市町村コード);
-        
+
         //TODO 出力有無フラグについて対応方法が不明
         RString 認定調査票_デザイン用紙_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, 市町村コード);
         RString 認定調査票_特記事項_デザイン用紙_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, 市町村コード);
@@ -157,7 +160,7 @@ public class NinteiChosaIraiShudouHandler {
         RString 認定調査票_特記事項_フリータイプ_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, 市町村コード);
         RString 認定調査票_概況特記_出力有無 = getConfigValue(ConfigNameDBE.認定調査票_概況特記_出力有無, 市町村コード);
         RString 認定調査差異チェック票_出力有無 = getConfigValue(ConfigNameDBE.認定調査差異チェック票_出力有無, 市町村コード);
-                                                                        
+
 //        if (デザインシートOCR.equals(用紙タイプ)) {
 //            認定調査票 = 選択;
 //            認定調査票_特記事項 = 選択;
@@ -166,7 +169,6 @@ public class NinteiChosaIraiShudouHandler {
 //            認定調査票OCR = 選択;
 //            認定調査票OCR_特記事項 = 選択;
 //        }
-
         List<RString> selectedItemList = new ArrayList();
         if (選択.equals(認定調査依頼書)) {
             selectedItemList.add(DDL_KEY0);
