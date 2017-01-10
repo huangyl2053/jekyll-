@@ -110,6 +110,7 @@
         rgdb."DbT5913ChosainJoho"
         LEFT JOIN (
         SELECT
+        "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" AS Temp_ninteiChosaItakusakiCode,
         "DbT5201NinteichosaIraiJoho"."ninteiChosainCode" AS Temp_ninteiChosainCode,
         CASE WHEN "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
@@ -143,7 +144,11 @@
         "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = "shinseishoKanriRirekiNo".Temp_ninteichosaIraiRirekiNo
         AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = FALSE
         ) AS "ninteichosaIraiJohoZimi"
-        ON "ninteichosaIraiJohoZimi".Temp_ninteiChosainCode = "DbT5913ChosainJoho"."ninteiChosainCode"
+        ON
+        "ninteichosaIraiJohoZimi".Temp_ninteiChosaItakusakiCode = "DbT5913ChosainJoho"."ninteiChosaItakusakiCode"
+        AND "ninteichosaIraiJohoZimi".Temp_ninteiChosainCode = "DbT5913ChosainJoho"."ninteiChosainCode"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
+        ON "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
         WHERE
         "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
         <if test= "証記載保険者番号!=null and !証記載保険者番号.isEmpty()">
