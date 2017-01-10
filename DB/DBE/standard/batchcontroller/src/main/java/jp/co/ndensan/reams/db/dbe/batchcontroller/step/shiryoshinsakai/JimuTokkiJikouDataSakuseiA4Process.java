@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.TokkiJiko;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.report.tokkijiko.TokkiJikoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.tokkijiko.TokkiJikoReportLayoutBreaker;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -93,16 +94,12 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         report.writeBy(reportSourceWriter);
     }
 
-    private RString copySharedFile(RDateTime sharedFileId, RString filename) {
-        if (sharedFileId == null || RString.isNullOrEmpty(filename)) {
+    private RString copySharedFile(RDateTime sharedFileId, RString sharedFileName) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
             return RString.EMPTY;
         }
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename),
-                        sharedFileId);
         try {
-            return new RString(SharedFile.copyToLocal(
-                    descriptor, new FilesystemPath(batchWriter.getImageFolderPath())).getCanonicalPath());
+            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriter.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
