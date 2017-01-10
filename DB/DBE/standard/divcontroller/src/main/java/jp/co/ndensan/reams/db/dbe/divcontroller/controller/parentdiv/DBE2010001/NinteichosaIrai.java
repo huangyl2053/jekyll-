@@ -219,7 +219,7 @@ public class NinteichosaIrai {
         param.setShinseishoKanriNoList(申請書管理番号リスト);
         param.setHihokenshaNoList(被保険者番号リスト);
         param.setNinteiChosainCode(RString.EMPTY);
-        param.setNinteichosaItakusakiCode(RString.EMPTY);
+        param.setNinteichosaItakusakiCode(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getKonkaiChosaItakusaki());
         param.setShichosonCode(RString.EMPTY);
 
         FlowParameters fp = FlowParameters.of(new RString("key"), "Batch");

@@ -71,7 +71,7 @@ public class NinteiChosaDataOutputProcessParamter implements IBatchProcessParame
         return NinteiChosaDataOutputBatchMybitisParameter.createSelectByKeyParam(ninteichosaItakusakiCode,
                 null,
                 null,
-                null,
+                shichosonCode,
                 null);
     }
 }

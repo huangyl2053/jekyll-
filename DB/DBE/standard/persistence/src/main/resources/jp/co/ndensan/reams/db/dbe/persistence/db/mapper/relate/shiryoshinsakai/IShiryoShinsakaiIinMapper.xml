@@ -725,7 +725,7 @@
             ON dbt5102."shinseishoKanriNo" = dbt5101Zenkai."shinseishoKanriNo"
         ) AS ZenShinsakaiWariateJoho
         ON
-        ZenShinsakaiWariateJoho.dbt5502_shinseishoKanriNo = dbt5502."shinseishoKanriNo"
+        ZenShinsakaiWariateJoho."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         WHERE
         dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND
