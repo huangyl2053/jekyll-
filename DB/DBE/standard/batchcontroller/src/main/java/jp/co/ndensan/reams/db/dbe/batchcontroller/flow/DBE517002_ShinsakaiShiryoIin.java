@@ -131,7 +131,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
         return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
-
+    
     /**
      * 委員特記事項+一次判定結果情報データの作成を行います。
      *

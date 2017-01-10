@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
@@ -31,6 +32,14 @@ public class DBEImageUtil {
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
         return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(toCopyPath)).getCanonicalPath());
+    }
+    
+    public static RString copySharedFilesBatch(RDateTime sharedFileId, RString sharedFileName, RString batchImageFolderPath) {
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(
+                Path.combinePath(batchImageFolderPath, new RString(sharedFileId.toString())))).getCanonicalPath());
     }
     
     public static RString sanitizePath(RString imagePath) {
