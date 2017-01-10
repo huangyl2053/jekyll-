@@ -90,6 +90,7 @@ public class NinteiChosaIrai {
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
+    private static dgChosaItakusakiIchiran_Row chosaItakusakiRow;
 
     /**
      * 画面初期化処理です。
@@ -137,19 +138,19 @@ public class NinteiChosaIrai {
      */
     public ResponseData<NinteiChosaIraiDiv> onSelect_dgChosaItakusakiIchiran(NinteiChosaIraiDiv div) {
         NinteiChosaIraiHandler handler = getHandler(div);
-        dgChosaItakusakiIchiran_Row row = div.getDgChosaItakusakiIchiran().getSelectedItems().get(0);
-        handler.set委託先基本情報(row);
-        ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
-        ViewStateHolder.put(ViewStateKeys.市町村コード, row.getHokenshaCode());
-        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
-        ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
-        ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, row.getWaritsukeTeiin().getText());
+        chosaItakusakiRow = div.getDgChosaItakusakiIchiran().getActiveRow();
+        handler.set委託先基本情報(chosaItakusakiRow);
+        ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(chosaItakusakiRow.getChosaItakusakiCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, chosaItakusakiRow.getHokenshaCode());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, chosaItakusakiRow.getChosaItakusakiCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.保険者名称, chosaItakusakiRow.getHokenshaName());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, chosaItakusakiRow.getWaritsukeTeiin().getText());
 
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(保険者番号, 支所コード, chosaItakusakiCode);
         List<NinnteiChousairaiBusiness> 調査員情報List = NinnteiChousairaiFinder.createInstance().get調査員(parameter);
-        handler.set調査員情報一覧(調査員情報List, row);
+        handler.set調査員情報一覧(調査員情報List, chosaItakusakiRow);
         return ResponseData.of(div).respond();
     }
 
@@ -349,6 +350,7 @@ public class NinteiChosaIrai {
                 return ResponseData.of(div).respond();
             }
         }
+        chosaItakusakiRow = null;
         handler.load(false);
         return ResponseData.of(div).setState(DBE2200001StateName.初期表示);
     }
@@ -391,19 +393,19 @@ public class NinteiChosaIrai {
                 return ResponseData.of(div).respond();
             }
         }
-        dgChosaItakusakiIchiran_Row row = div.getDgChosaItakusakiIchiran().getActiveRow();
-        ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(row.getChosaItakusakiCode().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
 
-        ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
-        ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, row.getWaritsukeTeiin().getText());
+        ChosaItakusakiCode chosaItakusakiCode = new ChosaItakusakiCode(chosaItakusakiRow.getChosaItakusakiCode().getValue());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, chosaItakusakiRow.getChosaItakusakiCode().getValue());
+
+        ViewStateHolder.put(ViewStateKeys.保険者名称, chosaItakusakiRow.getHokenshaName());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, chosaItakusakiRow.getWaritsukeTeiin().getText());
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(
                 保険者番号, 支所コード, chosaItakusakiCode);
         List<NinnteiChousairaiBusiness> 調査員情報一覧 = NinnteiChousairaiFinder.createInstance().get調査員(parameter);
         handler.reset委託先基本情報();
-        handler.set調査員情報一覧(調査員情報一覧, row);
+        handler.set調査員情報一覧(調査員情報一覧, chosaItakusakiRow);
         return ResponseData.of(div).setState(DBE2200001StateName.委託先選択後);
     }
 
