@@ -46,15 +46,26 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnDataOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
+            RString chosaItakusaki = selected.get(0).getKonkaiChosaItakusaki();
+
             for (dgNinteiTaskList_Row row : selected) {
                 if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty()) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
+                    break;
+                }
+
+                if (row.getKonkaiChosaItakusaki() == null || row.getKonkaiChosaItakusaki().isEmpty()) {
+                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先未設定));
+                    break;
+                } else if (!chosaItakusaki.equals(row.getKonkaiChosaItakusaki())) {
+                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先が同一ではない));
                     break;
                 }
             }
@@ -193,7 +204,9 @@ public class NinteichosaIraiValidationHandler {
         理由付き完了不可_認定調査期限年月日(DbzErrorMessages.理由付き完了不可, "認定調査期限年月日が未設定"),
         理由付き完了不可_依頼書出力年月日(DbzErrorMessages.理由付き完了不可, "依頼書出力年月日が未設定"),
         理由付き完了不可_調査票等出力年月日(DbzErrorMessages.理由付き完了不可, "調査票等出力年月日が未設定"),
-        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付);
+        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
+        委託先未設定(DbeErrorMessages.委託先未設定),
+        委託先が同一ではない(DbeErrorMessages.委託先が同一ではない);
 
         private final Message message;
 

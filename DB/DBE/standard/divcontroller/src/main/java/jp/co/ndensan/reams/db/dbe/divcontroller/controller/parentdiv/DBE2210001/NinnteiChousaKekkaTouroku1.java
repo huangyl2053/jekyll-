@@ -584,7 +584,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnIchiHanteiJisshi(NinnteiChousaKekkaTouroku1Div div) {
-        ViewStateHolder.put(ViewStateKeys.モード, ModeType.SHOKAI_MODE);
+        ViewStateHolder.put(ViewStateKeys.モード, ModeType.ADD_MODE);
         return ResponseData.of(div).respond();
     }
 

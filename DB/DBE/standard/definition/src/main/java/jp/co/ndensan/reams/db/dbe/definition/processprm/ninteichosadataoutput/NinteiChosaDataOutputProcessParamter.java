@@ -61,4 +61,17 @@ public class NinteiChosaDataOutputProcessParamter implements IBatchProcessParame
                 shichosonCode,
                 csvTempTableName);
     }
+
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @return NinteiChosaDataOutputBatchMybitisParameter
+     */
+    public NinteiChosaDataOutputBatchMybitisParameter to認定調査員取得Parameter() {
+        return NinteiChosaDataOutputBatchMybitisParameter.createSelectByKeyParam(ninteichosaItakusakiCode,
+                null,
+                null,
+                null,
+                null);
+    }
 }

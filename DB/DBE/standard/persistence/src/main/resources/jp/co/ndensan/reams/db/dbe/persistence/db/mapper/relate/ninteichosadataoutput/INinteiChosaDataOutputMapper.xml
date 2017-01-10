@@ -57,11 +57,11 @@
          DbT5913."faxNo" AS "ＦＡＸ番号",
          DbT5913."shozokuKikanName" AS "所属機関名称"
        FROM
-         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
-         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
-           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
-         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
-           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
          INNER JOIN
                rgdb."DbT5913ChosainJoho" AS DbT5913
             ON
@@ -81,12 +81,15 @@
     AND DbT5105."centerSoshinYMD" IS NULL
     AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
     AND DbT5101."logicalDeletedFlag" = false
-   <if test= "isShinseishoKanriNo">
-       AND DbT5101."shinseishoKanriNo" IN
+    <if test= "isShinseishoKanriNo">
+        AND DbT5101."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
-   </if>
-   <if test= "!isShichoson">    
-       AND DbT7051."shichosonCode" = #{shichosonCode}
+    </if>
+    <if test= "!isShichoson">
+        AND DbT7051."shichosonCode" = #{shichosonCode}
+    </if>
+    <if test="isNinteichosaItakusakiCode">
+        AND  DbT5913."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
     </if>
     </select>
 
@@ -110,34 +113,34 @@
          , DbT5101."ninteiShinseiYMD" AS "認定申請年月日"
          , DbT5206."shuso" AS "概況特記事項主訴"
          , DbT5206."kazokuJokyo" AS "概況特記事項家族状況"
-         , DbT5206."kyojuKankyo" AS "概況特記事項居住環境" 
-         , DbT5206."kikaiKiki" AS "概況特記事項機器器械" 
+         , DbT5206."kyojuKankyo" AS "概況特記事項居住環境"
+         , DbT5206."kikaiKiki" AS "概況特記事項機器器械"
        FROM
-         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
-         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
-           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-           AND DbT5201."ninteichosaIraiRirekiNo" = ( 
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+           AND DbT5201."ninteichosaIraiRirekiNo" = (
              SELECT
-               MAX("ninteichosaIraiRirekiNo") 
+               MAX("ninteichosaIraiRirekiNo")
              FROM
-               rgdb."DbT5201NinteichosaIraiJoho" 
+               rgdb."DbT5201NinteichosaIraiJoho"
              WHERE
                "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-           ) 
-           AND DbT5201."logicalDeletedFlag" = false 
-         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
-           ON DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo" 
-           AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo" 
-           AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode" 
+           )
+           AND DbT5201."logicalDeletedFlag" = false
+         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
+           ON DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+           AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+           AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode"
            AND DbT5202."gaikyoChosaTextImageKubun" = #{imageKubun}
-         INNER JOIN rgdb."DbT5206GaikyoTokki" AS DbT5206 
-           ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
-           AND DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo" 
-           AND DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun" 
-         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
-           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
-         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
-           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+         INNER JOIN rgdb."DbT5206GaikyoTokki" AS DbT5206
+           ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+           AND DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+           AND DbT5206."gaikyoTokkiTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun"
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
        WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -156,7 +159,7 @@
        AND DbT5201."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
-   <if test= "!isShichoson">    
+   <if test= "!isShichoson">
        AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
     </select>
@@ -182,50 +185,50 @@
          , '1' AS "前回今回区分"
          , DbT5205Zenkai."ninteichosaTokkijikoNo" AS "認定調査特記事項番号"
          , DbT5205Zenkai."ninteichosaTokkijikoRemban" AS "認定調査特記事項連番"
-         , regexp_replace(DbT5205Zenkai."tokkiJiko",E'(\r\n|\r|\n|\t)','','g') AS "特記事項" 
+         , regexp_replace(DbT5205Zenkai."tokkiJiko",E'(\r\n|\r|\n|\t)','','g') AS "特記事項"
        FROM
-         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
-         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121 
-           ON DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Zenkai 
-           ON DbT5101Zenkai."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo" 
-         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Zenkai 
-           ON DbT5201Zenkai."shinseishoKanriNo" = DbT5101Zenkai."shinseishoKanriNo" 
-           AND DbT5201Zenkai."ninteichosaIraiRirekiNo" = ( 
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+           ON DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101Zenkai
+           ON DbT5101Zenkai."shinseishoKanriNo" = DbT5121."zenkaiShinseishoKanriNo"
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Zenkai
+           ON DbT5201Zenkai."shinseishoKanriNo" = DbT5101Zenkai."shinseishoKanriNo"
+           AND DbT5201Zenkai."ninteichosaIraiRirekiNo" = (
              SELECT
-               MAX("ninteichosaIraiRirekiNo") 
+               MAX("ninteichosaIraiRirekiNo")
              FROM
-               rgdb."DbT5201NinteichosaIraiJoho" 
+               rgdb."DbT5201NinteichosaIraiJoho"
              WHERE
                "shinseishoKanriNo" = DbT5101Zenkai."shinseishoKanriNo"
-           ) 
-           AND DbT5201Zenkai."logicalDeletedFlag" = false 
-         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202Zenkai 
-           ON DbT5202Zenkai."shinseishoKanriNo" = DbT5201Zenkai."shinseishoKanriNo" 
-           AND DbT5202Zenkai."ninteichosaRirekiNo" = DbT5201Zenkai."ninteichosaIraiRirekiNo" 
-           AND DbT5202Zenkai."koroshoIfShikibetsuCode" = DbT5201Zenkai."koroshoIfShikibetsuCode" 
+           )
+           AND DbT5201Zenkai."logicalDeletedFlag" = false
+         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202Zenkai
+           ON DbT5202Zenkai."shinseishoKanriNo" = DbT5201Zenkai."shinseishoKanriNo"
+           AND DbT5202Zenkai."ninteichosaRirekiNo" = DbT5201Zenkai."ninteichosaIraiRirekiNo"
+           AND DbT5202Zenkai."koroshoIfShikibetsuCode" = DbT5201Zenkai."koroshoIfShikibetsuCode"
            AND DbT5202Zenkai."gaikyoChosaTextImageKubun" = #{imageKubun}
-         INNER JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205Zenkai 
-           ON DbT5205Zenkai."shinseishoKanriNo" = DbT5202Zenkai."shinseishoKanriNo" 
-           AND DbT5205Zenkai."ninteichosaRirekiNo" = DbT5202Zenkai."ninteichosaRirekiNo" 
-           AND DbT5205Zenkai."tokkijikoTextImageKubun" = DbT5202Zenkai."gaikyoChosaTextImageKubun" 
+         INNER JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205Zenkai
+           ON DbT5205Zenkai."shinseishoKanriNo" = DbT5202Zenkai."shinseishoKanriNo"
+           AND DbT5205Zenkai."ninteichosaRirekiNo" = DbT5202Zenkai."ninteichosaRirekiNo"
+           AND DbT5205Zenkai."tokkijikoTextImageKubun" = DbT5202Zenkai."gaikyoChosaTextImageKubun"
 
          --今回分のデータを取得（条件抽出のため）
-         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
-           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
-         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
-           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
-         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
-           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-           AND DbT5201."ninteichosaIraiRirekiNo" = ( 
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+           AND DbT5201."ninteichosaIraiRirekiNo" = (
              SELECT
-               MAX("ninteichosaIraiRirekiNo") 
+               MAX("ninteichosaIraiRirekiNo")
              FROM
-               rgdb."DbT5201NinteichosaIraiJoho" 
+               rgdb."DbT5201NinteichosaIraiJoho"
              WHERE
                "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-           ) 
-           AND DbT5201."logicalDeletedFlag" = false 
+           )
+           AND DbT5201."logicalDeletedFlag" = false
        WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -244,10 +247,10 @@
        AND DbT5201."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
-   <if test= "!isShichoson">    
+   <if test= "!isShichoson">
        AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
-          
+
        UNION ALL
 
        --今回分取得
@@ -259,33 +262,33 @@
          , '2' AS "前回今回区分"
          , DbT5205."ninteichosaTokkijikoNo" AS "認定調査特記事項番号"
          , DbT5205."ninteichosaTokkijikoRemban" AS "認定調査特記事項連番"
-         , regexp_replace(DbT5205."tokkiJiko",E'(\r\n|\r|\n|\t)','','g') AS "特記事項" 
+         , regexp_replace(DbT5205."tokkiJiko",E'(\r\n|\r|\n|\t)','','g') AS "特記事項"
        FROM
-         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
-         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201 
-           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
-           AND DbT5201."ninteichosaIraiRirekiNo" = ( 
+         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+           ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+           AND DbT5201."ninteichosaIraiRirekiNo" = (
              SELECT
-               MAX("ninteichosaIraiRirekiNo") 
+               MAX("ninteichosaIraiRirekiNo")
              FROM
-               rgdb."DbT5201NinteichosaIraiJoho" 
+               rgdb."DbT5201NinteichosaIraiJoho"
              WHERE
                "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-           ) 
-           AND DbT5201."logicalDeletedFlag" = false 
-         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
-           ON DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo" 
-           AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo" 
-           AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode" 
+           )
+           AND DbT5201."logicalDeletedFlag" = false
+         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
+           ON DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+           AND DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+           AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode"
            AND DbT5202."gaikyoChosaTextImageKubun" = #{imageKubun}
-         INNER JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205 
-           ON DbT5205."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
-           AND DbT5205."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo" 
-           AND DbT5205."tokkijikoTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun" 
-         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
-           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo" 
-         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
-           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+         INNER JOIN rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205
+           ON DbT5205."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+           AND DbT5205."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+           AND DbT5205."tokkijikoTextImageKubun" = DbT5202."gaikyoChosaTextImageKubun"
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+           ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+           ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
        WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
     AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -304,7 +307,7 @@
        AND DbT5201."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
-   <if test= "!isShichoson">    
+   <if test= "!isShichoson">
        AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
     </select>
@@ -442,7 +445,7 @@
         <result property="調査項目連番" column="調査項目連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
   <select resultOrdered="true" id="get認定調査データ出力" resultMap="resultMap_getNinteiChosaData"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
     SELECT
@@ -564,96 +567,96 @@
        AND DbT5201."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
    </if>
-   <if test= "!isShichoson">    
+   <if test= "!isShichoson">
        AND DbT7051."shichosonCode" = #{shichosonCode}
     </if>
   </select>
 
   <select resultOrdered="true" id="getDbT5207" resultMap="resultMap_getCsvTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
-      SELECT 
+      SELECT
       <include refid="selectItem" />,
         DbT5207."remban" AS "状況連番",
         DbT5207."serviceJokyo" AS "状況"
       FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
-      LEFT JOIN 
-      rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207 
-      ON DbT5207."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      LEFT JOIN
+      rgdb."DbT5207NinteichosahyoServiceJokyo" AS DbT5207
+      ON DbT5207."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号"
       AND  DbT5207."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
-      AND DbT5207."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      AND DbT5207."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード"
       ORDER BY
         "申請書管理番号",
         "状況連番"
   </select>
-  
+
   <select resultOrdered="true" id="getDbT5208" resultMap="resultMap_getCsvTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
-      SELECT 
+      SELECT
       <include refid="selectItem" />,
         DbT5208."remban" AS "状況フラグ連番",
         DbT5208."serviceJokyoFlag" AS "状況フラグ"
       FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
-      LEFT JOIN 
+      LEFT JOIN
       rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS DbT5208
-      ON DbT5208."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      ON DbT5208."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号"
       AND DbT5208."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
-      AND DbT5208."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      AND DbT5208."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード"
       ORDER BY
         "申請書管理番号",
         "状況フラグ連番"
   </select>
-  
+
   <select resultOrdered="true" id="getDbT5209" resultMap="resultMap_getCsvTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
-      SELECT 
+      SELECT
       <include refid="selectItem" />,
         DbT5209."remban" AS "記入項目連番",
         regexp_replace(DbT5209."serviceJokyoKinyu",E'(\r\n|\r|\n|\t)','','g') AS "状況記入"
       FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
-      LEFT JOIN 
+      LEFT JOIN
       rgdb."DbT5209NinteichosahyoKinyuItem" AS DbT5209
-      ON DbT5209."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      ON DbT5209."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号"
       AND DbT5209."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
-      AND DbT5209."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      AND DbT5209."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード"
       ORDER BY
         "申請書管理番号",
         "記入項目連番"
   </select>
-  
+
   <select resultOrdered="true" id="getDbT5210" resultMap="resultMap_getCsvTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
-      SELECT 
+      SELECT
       <include refid="selectItem" />,
         DbT5210."remban" AS "施設利用連番",
         DbT5210."shisetsuRiyoFlag" AS "施設利用フラグ"
       FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
-      LEFT JOIN 
+      LEFT JOIN
       rgdb."DbT5210NinteichosahyoShisetsuRiyo"AS DbT5210
-      ON DbT5210."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      ON DbT5210."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号"
       AND DbT5210."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
-      AND DbT5210."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      AND DbT5210."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード"
       ORDER BY
         "申請書管理番号",
         "施設利用連番"
   </select>
-  
+
   <select resultOrdered="true" id="getDbT5211" resultMap="resultMap_getCsvTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
-      SELECT 
+      SELECT
       <include refid="selectItem" />,
         DbT5211."remban" AS "調査項目連番",
         DbT5211."researchItem" AS "調査項目"
       FROM  &quot;${csvTempTableName}&quot; AS "CsvTempTable"
-      LEFT JOIN 
+      LEFT JOIN
       rgdb."DbT5211NinteichosahyoChosaItem"AS DbT5211
-      ON DbT5211."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号" 
+      ON DbT5211."shinseishoKanriNo" :: text = "CsvTempTable"."申請書管理番号"
       AND DbT5211."ninteichosaRirekiNo" :: text = "CsvTempTable"."認定調査依頼履歴番号"
-      AND DbT5211."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード" 
+      AND DbT5211."koroshoIfShikibetsuCode" :: text = "CsvTempTable"."厚労省IF識別コード"
       ORDER BY
         "申請書管理番号",
         "調査項目連番"
   </select>
-  
+
     <select resultOrdered="true" id="getDbT5201NinteichosaIraiJoho"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
@@ -681,10 +684,10 @@
     FROM
         rgdb."DbT5121ShinseiRirekiJoho"
     WHERE
-        "shinseishoKanriNo" IN 
+        "shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
     </select>
-    
+
     <resultMap id="resultMap_CsvOutPutTable"
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity"
                autoMapping="true">
@@ -694,10 +697,10 @@
         <association  property="前回分Entity"
                      resultMap="resultMap_getCsvTableZenkai"/>
     </resultMap>
-    
+
     <select resultOrdered="true" id="getCsvTable" resultMap="resultMap_CsvOutPutTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputCsvMybitisParameter" fetchSize="500">
-        SELECT 
+        SELECT
         <include refid="selectItem" />,
         <include refid="selectItemZenkai" />
         FROM &quot;${csvTempTableName}&quot; AS "CsvTempTable"
@@ -706,7 +709,7 @@
         ON
         "CsvTempTable".申請書管理番号 = "CsvTempTableZenkai".前回申請書管理番号
     </select>
-      
+
   <!--今回分のresultMap-->
   <resultMap id="resultMap_getCsvTable" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity" autoMapping="true">
         <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -989,7 +992,7 @@
         <result property="調査項目連番74" column="調査項目連番74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目74" column="調査項目74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
   </resultMap>
-  
+
   <!--前回分のresultMap-->
   <resultMap id="resultMap_getCsvTableZenkai" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity" autoMapping="true">
         <result property="申請書管理番号" column="申請書管理番号_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1272,7 +1275,7 @@
         <result property="調査項目連番74" column="調査項目連番74_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目74" column="調査項目74_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
   </resultMap>
-      
+
     <sql id="selectItem">
       "CsvTempTable"."申請書管理番号"
       ,"CsvTempTable"."前回申請書管理番号"
@@ -1816,5 +1819,5 @@
       ,"CsvTempTableZenkai"."調査項目連番74" AS "調査項目連番74_前回"
       ,"CsvTempTableZenkai"."調査項目74" AS "調査項目74_前回"
     </sql>
-      
+
 </mapper>

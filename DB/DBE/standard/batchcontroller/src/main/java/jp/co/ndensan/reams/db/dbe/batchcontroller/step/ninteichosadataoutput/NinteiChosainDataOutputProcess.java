@@ -52,7 +52,7 @@ public class NinteiChosainDataOutputProcess extends BatchProcessBase<NinteiChosa
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaDataOutputBatchMybitisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.to認定調査員取得Parameter());
     }
 
     @Override
