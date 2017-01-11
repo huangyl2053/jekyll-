@@ -43,7 +43,6 @@ public class ImageJohoMaskingDialog {
     private static final int WIDTH_600 = 600;
     private static final int HEIGHT_100 = 100;
     private static final int HEIGHT_200 = 200;
-    private static RString imagePath;
 
     /**
      * 画面起動時に呼ばれるイベント
@@ -52,7 +51,7 @@ public class ImageJohoMaskingDialog {
      * @return ResponseData<イメージ情報マスキングダイアログ>
      */
     public ResponseData<ImageJohoMaskingDialogDiv> onLoad(ImageJohoMaskingDialogDiv div) {
-        imagePath = div.getHiddenImagePath();
+        RString imagePath = div.getHiddenImagePath();
         div.getCcdImageMasking().initialize();
         div.getCcdImageMasking().setDefaultMaskSource(getMaskData());
         div.getCcdImageMasking().setImageSource(getImageSource(imagePath));
@@ -67,7 +66,8 @@ public class ImageJohoMaskingDialog {
      */
     public ResponseData<ImageJohoMaskingDialogDiv> onClick_btnHozon(ImageJohoMaskingDialogDiv div) {
 
-        RString imageSavePath = get保存先();
+        RString imagePath = div.getHiddenImagePath();
+        RString imageSavePath = get保存先(imagePath);
 
         File file = new File(imageSavePath.toString());
         byte[] binary = div.getCcdImageMasking().getEditedImageBinary();
@@ -92,7 +92,7 @@ public class ImageJohoMaskingDialog {
         return ResponseData.of(div).respond();
     }
 
-    private RString get保存先() {
+    private RString get保存先(RString imagePath) {
         RString newImagePath;
         RString imagePathEnd = imagePath.substring(imagePath.length() - 判定用終端文字数, imagePath.length());
         if (imagePathEnd.equals(new RString("_NEW.png"))) {
