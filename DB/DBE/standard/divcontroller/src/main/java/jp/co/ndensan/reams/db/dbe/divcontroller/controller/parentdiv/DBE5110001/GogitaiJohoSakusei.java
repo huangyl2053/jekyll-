@@ -523,7 +523,8 @@ public class GogitaiJohoSakusei {
                     manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {
-                    manager.saveWithDeletePhysical(koshinmaedate(gogitaiJoho));
+                    manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
+                    manager.saveGogitaiJoho(gogitaiJoho);
                     GogitaiWariateIinJohoManager gogitaiWariateIinJohoManager = GogitaiWariateIinJohoManager.createInstance();
                     for (GogitaiWariateIinJoho gogitaiWariateIinJoho : gogitaiJohoModel.get(gogitaiJoho.identifier()).getGogitaiWariateIinJohoList()) {
                         gogitaiWariateIinJohoManager.save(gogitaiWariateIinJoho);
