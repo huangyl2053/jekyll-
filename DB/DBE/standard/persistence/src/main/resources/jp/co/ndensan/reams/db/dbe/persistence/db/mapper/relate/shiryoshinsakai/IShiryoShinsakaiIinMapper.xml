@@ -107,9 +107,14 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         DISTINCT
-        dbt5503."shinsakaiIinCode" AS dbt5503_shinsakaiIinCode
+        dbt5503."shinsakaiIinCode" AS dbt5503_shinsakaiIinCode,
+        dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
         FROM
         rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
+        LEFT JOIN
+        rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
+        ON
+        dbt5594."shinsakaiIinCode" = dbt5503."shinsakaiIinCode"
         WHERE
         dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         ORDER BY

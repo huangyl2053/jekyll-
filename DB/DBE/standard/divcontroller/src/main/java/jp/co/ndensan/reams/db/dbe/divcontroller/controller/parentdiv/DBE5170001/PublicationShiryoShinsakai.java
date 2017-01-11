@@ -112,6 +112,19 @@ public class PublicationShiryoShinsakai {
     }
 
     /**
+     * 審査会委員用印刷帳票チェックボックス2を変更する場合、表示項目を変更する。
+     *
+     * @param div PublicationShiryoShinsakaiDiv
+     * @return ResponseData<PublicationShiryoShinsakaiDiv>
+     */
+    public ResponseData<PublicationShiryoShinsakaiDiv> onClick_chkPrintChohyoIin2(PublicationShiryoShinsakaiDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).onClick_chkPrintChohyoIin2();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「実行する」を押下場合、入力チェックを実行します。
      *
      * @param div PublicationShiryoShinsakaiDiv

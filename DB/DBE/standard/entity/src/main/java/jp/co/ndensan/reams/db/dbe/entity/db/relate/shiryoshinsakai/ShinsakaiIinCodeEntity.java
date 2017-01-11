@@ -18,4 +18,5 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinsakaiIinCodeEntity {
 
     private RString shinsakaiIinCode;
+    private RString shinsaIinName;
 }

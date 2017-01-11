@@ -60,6 +60,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     private static final String CHOHYOIIN_HANTEIFALG = "chohyoIin_hanteiFalg";
     private static final String CHOHYOIIN_TAISHOUSHAFALG = "chohyoIin_taishoushaFalg";
     private static final String CHOYOIIN_SONOTASIRYOFALG = "choyoIin_sonotaSiryoFalg";
+    private static final String BUNSHOKANRINO = "bunshoKanriNo";
 
     @BatchParameter(key = SHINSAKAIKAISAINO, name = "介護認定審査会開催番号")
     private RString shinsakaiKaisaiNo;
@@ -119,6 +120,8 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     private RString chohyoIin_tuutishoFalg;
     @BatchParameter(key = CHOHYOIIN_HANTEIFALG, name = "委員用予備判定記入表フラグ")
     private RString chohyoIin_hanteiFalg;
+    @BatchParameter(key = BUNSHOKANRINO, name = "文書管理番号")
+    private RString bunshoKanriNo;
 
     /**
      * コンストラクタです。
@@ -158,6 +161,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
+     * @param bunshoKanriNo 文書管理番号
      */
     public DBE517000_ShinsakaiShiryoParameter(
             RString shinsakaiKaisaiNo,
@@ -188,7 +192,8 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
             RString chohyoIin_ikenshoFalg,
             RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
-            RString chohyoIin_hanteiFalg) {
+            RString chohyoIin_hanteiFalg,
+            RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiBasho = shinsakaiKaisaiBasho;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
@@ -218,6 +223,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
         this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
+        this.bunshoKanriNo = bunshoKanriNo;
     }
 
     /**
@@ -233,7 +239,8 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
                 printHou,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
-                gogitaiNo);
+                gogitaiNo,
+                bunshoKanriNo);
     }
 
     /**
@@ -277,7 +284,8 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     public IinTuikaSiryoProcessParameter toIinTuikaSiryoProcessParameter() {
         return new IinTuikaSiryoProcessParameter(shinsakaiKaisaiNo,
                 shuturyokuSutairu,
-                printHou);
+                printHou,
+                bunshoKanriNo);
     }
 
     /**
@@ -317,6 +325,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
                 choyoJimu_gaikyouTokkiFalg,
                 choyoJimu_hanteiFalg,
                 choyoJimu_gaikyouTokkiIranFalg,
+                bunshoKanriNo,
                 帳票一覧Map);
     }
 
@@ -347,6 +356,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
                 chohyoIin_sonotaSiryoFalg,
                 chohyoIin_tuutishoFalg,
                 chohyoIin_hanteiFalg,
+                bunshoKanriNo,
                 帳票一覧Map);
     }
 

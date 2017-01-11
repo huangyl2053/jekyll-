@@ -45,6 +45,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     private static final String TOKKIPLUSITIFLAG = "tokkiPlusItiFlag";
     private static final String IKENSYOFLAG = "ikensyoFlag";
     private static final String YOBIHENTEIFLAG = "yobiHenteiFlag";
+    private static final String BUNSHOKANRINO = "bunshoKanriNo";
 
     @BatchParameter(key = SHINSAKAIKAISAINO, name = "介護認定審査会開催番号")
     private RString shinsakaiKaisaiNo;
@@ -84,6 +85,8 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     private RString ikensyoFlag;
     @BatchParameter(key = YOBIHENTEIFLAG, name = "予備判定記入表フラグ")
     private RString yobiHenteiFlag;
+    @BatchParameter(key = BUNSHOKANRINO, name = "文書管理番号")
+    private RString bunshoKanriNo;
     private Map<RString, RString> 帳票一覧Map;
 
     /**
@@ -115,6 +118,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
      * @param tokkiPlusItiFlag 特記事項+一次判定フラグ
      * @param ikensyoFlag 主治医意見書フラグ
      * @param yobiHenteiFlag 予備判定記入表フラグ
+     * @param bunshoKanriNo 文書管理番号
      */
     public DBE526002_JIzenShinsakekkaTorokuSakuseiParameter(RString shinsakaiKaisaiNo,
             FlexibleDate shinsakaiKaisaiYoteiYMD,
@@ -134,7 +138,8 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
             RString itiHenteiKekkaFlag,
             RString tokkiPlusItiFlag,
             RString ikensyoFlag,
-            RString yobiHenteiFlag) {
+            RString yobiHenteiFlag,
+            RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
@@ -154,6 +159,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
         this.tokkiPlusItiFlag = tokkiPlusItiFlag;
         this.ikensyoFlag = ikensyoFlag;
         this.yobiHenteiFlag = yobiHenteiFlag;
+        this.bunshoKanriNo = bunshoKanriNo;
     }
 
     /**
@@ -215,6 +221,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 RString.EMPTY,
                 tuutiFlag,
                 yobiHenteiFlag,
+                bunshoKanriNo,
                 帳票一覧Map
         );
     }
