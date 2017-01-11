@@ -128,7 +128,7 @@ public class NinteichosaIrai {
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            List<dgNinteiTaskList_Row> dataList = requestDiv.getDgNinteiTaskList().getSelectedItems();
+            List<dgNinteiTaskList_Row> dataList = requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                         row.getShinseishoKanriNo()));
@@ -212,15 +212,15 @@ public class NinteichosaIrai {
         DBE224001_NinteichosaDataOutputParameter param = new DBE224001_NinteichosaDataOutputParameter();
         List<RString> 申請書管理番号リスト = new ArrayList<>();
         List<RString> 被保険者番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
+        for (dgNinteiTaskList_Row row : requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems()) {
             申請書管理番号リスト.add(row.getShinseishoKanriNo());
             被保険者番号リスト.add(row.getHihoNumber());
         }
         param.setShinseishoKanriNoList(申請書管理番号リスト);
         param.setHihokenshaNoList(被保険者番号リスト);
         param.setNinteiChosainCode(RString.EMPTY);
-        param.setNinteichosaItakusakiCode(requestDiv.getDgNinteiTaskList().getSelectedItems().get(0).getKonkaiChosaItakusaki());
-        param.setShichosonCode(RString.EMPTY);
+        param.setNinteichosaItakusakiCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems().get(0).getKonkaiChosaItakusakiCode());
+        param.setShichosonCode(requestDiv.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
 
         FlowParameters fp = FlowParameters.of(new RString("key"), "Batch");
         FlowParameterAccessor.merge(fp);
