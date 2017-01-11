@@ -155,8 +155,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
                 : new YubinNo(psmJohoEntity.getYubinNo()).getEditedYubinNo());
         item.set宛名住所(psmJohoEntity.getJusho());
         item.set宛名機関名(psmJohoEntity.getKikanMeisho());
-        if (entity.getShinsaIinName() != null && !entity.getShinsaIinName().isEmpty()) {
-            item.set宛名氏名(entity.getShinsaIinName());
+        if (entity.getShinsakaiIinShimei() != null && !entity.getShinsakaiIinShimei().isEmpty()) {
+            item.set宛名氏名(entity.getShinsakaiIinShimei().getColumnValue());
         }
         item.set宛名名称付与(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 発行日, SubGyomuCode.DBE認定支援));
         item.set発行日(発行日);

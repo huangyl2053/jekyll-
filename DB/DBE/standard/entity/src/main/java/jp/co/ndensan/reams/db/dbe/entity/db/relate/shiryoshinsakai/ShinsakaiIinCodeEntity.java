@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,5 +19,5 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinsakaiIinCodeEntity {
 
     private RString shinsakaiIinCode;
-    private RString shinsaIinName;
+    private AtenaMeisho shinsakaiIinShimei;
 }

@@ -863,6 +863,7 @@
 
     <resultMap id="Result_ShinsakaiIinCode" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinCodeEntity" autoMapping="true">
         <result property="shinsakaiIinCode" column="dbt5503_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiIinShimei" column="dbt5594_shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
     </resultMap>
 
     <resultMap id="Result_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity" autoMapping="true">
