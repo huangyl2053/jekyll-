@@ -16,7 +16,8 @@
         "DbT5910NinteichosaItakusakiJoho"."shichosonCode" AS Temp_shichosonCode,
         "DbT7051KoseiShichosonMaster"."shichosonMeisho" AS shichosonMeisho,
         "DbT5910NinteichosaItakusakiJoho"."kikanKubun" AS Temp_kikanKubun,
-        SUM(COALESCE("ninteichosaIraiJohoZimi".waritsukeCount, 0)) AS Temp_waritsukeCount
+        SUM(COALESCE("ninteichosaIraiJohoZimi".waritsukeCount, 0)) AS Temp_waritsukeCount,
+        "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" AS ShoKisaiHokenshaNo
         FROM
         (SELECT *
         FROM rgdb."DbT5910NinteichosaItakusakiJoho"
@@ -85,7 +86,8 @@
         "DbT5910NinteichosaItakusakiJoho"."shichosonCode",
         "DbT5910NinteichosaItakusakiJoho"."telNo",
         "DbT5910NinteichosaItakusakiJoho"."kikanKubun",
-        "DbT7051KoseiShichosonMaster"."shichosonMeisho"
+        "DbT7051KoseiShichosonMaster"."shichosonMeisho",
+        "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
     </select>
 
     <resultMap id="result_NinnteiChousairaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinnteiChousairaiEntity">
@@ -99,6 +101,7 @@
         <result property="kikanKubun" column="Temp_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukesumiKensu" column="Temp_waritsukeCount"/>
+        <result property="shoKisaiHokenshaNo" column="ShoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="select調査員" resultMap="result_ChousaIn"

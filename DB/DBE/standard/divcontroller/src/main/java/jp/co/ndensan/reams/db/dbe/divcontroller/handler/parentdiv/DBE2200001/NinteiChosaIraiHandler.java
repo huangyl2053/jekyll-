@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
@@ -64,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -190,6 +192,7 @@ public class NinteiChosaIraiHandler {
                 row.setHokenshaCode((認定調査委託先.getShichosonCode() != null) ? 認定調査委託先.getShichosonCode().value() : RString.EMPTY);
                 row.setHokenshaName(nullToEmpty(認定調査委託先.getShichosonMeisho()));
             }
+            row.setShoKisaiHokenshaNo(認定調査委託先.getShoKisaiHokenshaNo());
             dataSource.add(row);
         }
         div.getDgChosaItakusakiIchiran().getFilterList().clear();
@@ -202,8 +205,10 @@ public class NinteiChosaIraiHandler {
      * @param 調査員List 調査員情報一覧List
      * @param selectRow dgChosaItakusakiIchiran_Row
      */
-    public void set調査員情報一覧(List<NinnteiChousairaiBusiness> 調査員List, dgChosaItakusakiIchiran_Row selectRow) {
+    public void set調査員情報一覧(List<NinnteiChousairaiBusiness> 調査員List) {
         List<dgchosainIchiran_Row> dataSource = new ArrayList<>();
+        RString 保険者コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
+        RString 保険者名称 = ViewStateHolder.get(ViewStateKeys.保険者名称, RString.class);
         for (NinnteiChousairaiBusiness 調査員 : 調査員List) {
             dgchosainIchiran_Row row = new dgchosainIchiran_Row();
             row.getChosainCode().setValue(nullToEmpty(調査員.getNinteiChosainNo()));
@@ -229,8 +234,8 @@ public class NinteiChosaIraiHandler {
                 row.setChosainShikaku(Sikaku.toValue(調査員.getChosainShikaku()).get名称());
             }
             row.setChosaKanoNinzuPerMonth(new RString(調査員.getChosaKanoNinzuPerMonth()));
-            row.setHokenshaCode(nullToEmpty(selectRow.getHokenshaCode()));
-            row.setHokenshaName(nullToEmpty(selectRow.getHokenshaName()));
+            row.setHokenshaCode(nullToEmpty(保険者コード));
+            row.setHokenshaName(nullToEmpty(保険者名称));
             dataSource.add(row);
         }
         div.getDgchosainIchiran().getFilterList().clear();

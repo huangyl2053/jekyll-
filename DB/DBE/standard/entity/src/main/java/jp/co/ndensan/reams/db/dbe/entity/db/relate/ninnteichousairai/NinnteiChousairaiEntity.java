@@ -39,4 +39,5 @@ public class NinnteiChousairaiEntity {
     private RString chosainShikaku;
     private int chosaKanoNinzuPerMonth;
     private RString shichosonMeisho;
+    private RString shoKisaiHokenshaNo;
 }
