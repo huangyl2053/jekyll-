@@ -350,8 +350,8 @@ public class NinteiChosaIrai {
                 return ResponseData.of(div).respond();
             }
         }
-        chosaItakusakiRow = null;
         handler.load(false);
+        chosaItakusakiRow = null;
         return ResponseData.of(div).setState(DBE2200001StateName.初期表示);
     }
 
@@ -371,6 +371,7 @@ public class NinteiChosaIrai {
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().get認定調査委託先(parameter);
         handler.set認定調査委託先一覧(認定調査委託先List);
+        chosaItakusakiRow = null;
         return ResponseData.of(div).setState(DBE2200001StateName.初期表示);
     }
 

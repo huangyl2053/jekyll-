@@ -76,6 +76,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE221024_NASHI_MONO = new RString("DBE221024_chosahyoTokkijiko_Nashi_Mono");
     private static final RString DBE221021_ARI_COLOR = new RString("DBE221021_chosahyoTokkijiko_Ari_Color");
     private static final RString DBE221021_ARI_MONO = new RString("DBE221021_chosahyoTokkijiko_Ari_Mono");
+    private static final RString DBE221041 = new RString("DBE221041_tokkijikoOCR");
     private static final RString DBE221042_RYOMEN = new RString("DBE221042_tokkijikoOCR_Ryomen");
     private static final RString DBE221042_KATAMEN = new RString("DBE221042_tokkijikoOCR_Katamen");
     private static final RString DBE221031_FREE_COLOR = new RString("DBE221031_chosahyoTokkijiko_Free_Color");
@@ -555,6 +556,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (DBE221021_ARI_MONO.equals(rseValue)) {
             printService.print認定調査票_特記事項(
                     getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221021_Ari_Mono.getReportId());
+        }
+        if (DBE221041.equals(rseValue)) {
+            printService.print認定調査票_特記事項(
+                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221041.getReportId());
         }
         if (DBE221042_RYOMEN.equals(rseValue)) {
             printService.print認定調査票_特記事項(
