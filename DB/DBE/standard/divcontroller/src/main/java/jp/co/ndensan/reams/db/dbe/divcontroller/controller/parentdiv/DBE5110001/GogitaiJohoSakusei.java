@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -452,6 +453,10 @@ public class GogitaiJohoSakusei {
                 validationMessages.add(getValidationHandler(div).kaishiToShuryoYMDCheck());
                 validationMessages.add(getValidationHandler(div).kaishiYoteiToShuryoYoteiTimeCheck());
             }
+            
+            if(JYOTAI_CODE_ADD.equals(jyotai) || JYOTAI_CODE_UPD.equals(jyotai)){
+               validationMessages.add(getValidationHandler(div).yukoKikanCheck());
+            }  
 //        validationMessages.add(getValidationHandler(div).shinsainListRequiredCheck());
 //        validationMessages.add(getValidationHandler(div).shinsainPersonNumCheck());
             if (validationMessages.iterator().hasNext()) {
