@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
  * @reamsid_L DBE-3000-095 wangjie2
  */
 public class KihonChosaInput6Div extends Panel implements IKihonChosaInput6Div {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
