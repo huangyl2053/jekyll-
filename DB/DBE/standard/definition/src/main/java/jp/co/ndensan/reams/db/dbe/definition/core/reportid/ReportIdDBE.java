@@ -68,9 +68,13 @@ public enum ReportIdDBE {
      */
     DBE517038(new ReportId("DBE517038_ichijihanteikekkahyo"), new RString("委員用一次判定結果票A4")),
     /**
+     * 事務局用主治医意見書A3の帳票ID。
+     */
+    DBE517005(new ReportId("DBE517005_ShujiiikenshoA3"), new RString("事務局用主治医意見書A3")),
+    /**
      * 委員用主治医意見書A3の帳票ID。
      */
-    DBE517005(new ReportId("DBE517005_ShujiiikenshoA3"), new RString("委員用主治医意見書A3")),
+    DBE517205(new ReportId("DBE517205_ShujiiikenshoA3"), new RString("委員用主治医意見書A3")),
     /**
      * 委員用主治医意見書A4の帳票ID。
      */
@@ -88,9 +92,17 @@ public enum ReportIdDBE {
      */
     DBE517001(new ReportId("DBE517001_ShinsakaishiryoA3"), new RString("事務局用介護認定審査対象者一覧表A3")),
     /**
+     * 委員用介護認定審査対象者一覧表A3の帳票ID。
+     */
+    DBE517201(new ReportId("DBE517201_ShinsakaishiryoA3"), new RString("委員用介護認定審査対象者一覧表A3")),
+    /**
      * 事務局用介護認定審査対象者一覧表A4の帳票ID。
      */
     DBE517011(new ReportId("DBE517011_ShinsakaishiryoA4"), new RString("事務局用介護認定審査対象者一覧表A4")),
+    /**
+     * 委員用介護認定審査対象者一覧表A4の帳票ID。
+     */
+    DBE517211(new ReportId("DBE517211_ShinsakaishiryoA4"), new RString("委員用介護認定審査対象者一覧表A4")),
     /**
      * 医療機関・主治医一覧表の帳票ID。
      */
@@ -125,9 +137,13 @@ public enum ReportIdDBE {
      */
     DBE233002(new ReportId("DBE233002_ShujiiIkenshoTokusokuTaishoshaIchiranhyo"), new RString("主治医意見書督促対象者一覧表")),
     /**
-     * その他資料A3の帳票ID。
+     * 事務局用その他資料A3の帳票ID。
      */
-    DBE517006(new ReportId("DBE517006_SonotashiryoA3"), new RString("その他資料")),
+    DBE517006(new ReportId("DBE517006_SonotashiryoA3"), new RString("事務局用その他資料")),
+    /**
+     * 委員用その他資料A3の帳票ID。
+     */
+    DBE517206(new ReportId("DBE517206_SonotashiryoA3"), new RString("委員用その他資料")),
     /**
      * 主治医意見書作成依頼一覧の帳票ＩＤです。
      */
@@ -292,13 +308,21 @@ public enum ReportIdDBE {
      */
     DBE701008(new ReportId("DBE701008_ShinsakaiShukeihyo"), new RString("介護認定審査会集計表（申請区分別）")),
     /**
-     * その他資料A4の帳票ＩＤです。
+     * 事務局用その他資料A4の帳票ＩＤです。
      */
-    DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("その他資料")),
+    DBE517016(new ReportId("DBE517016_SonotashiryoA4"), new RString("事務局用その他資料")),
     /**
-     * 主治医意見書の帳票ＩＤです。
+     * 委員用その他資料A4の帳票ＩＤです。
      */
-    DBE517151(new ReportId("DBE517151_Shujiiikensho1A4"), new RString("主治医意見書")),
+    DBE517216(new ReportId("DBE517216_SonotashiryoA4"), new RString("委員用その他資料")),
+    /**
+     * 事務局用主治医意見書の帳票ＩＤです。
+     */
+    DBE517151(new ReportId("DBE517151_Shujiiikensho1A4"), new RString("事務局用主治医意見書")),
+    /**
+     * 委員用主治医意見書の帳票ＩＤです。
+     */
+    DBE517251(new ReportId("DBE517251_Shujiiikensho1A4"), new RString("委員用主治医意見書")),
     /**
      * 一次判定結果の帳票ＩＤです。
      */
@@ -380,9 +404,13 @@ public enum ReportIdDBE {
      */
     DBE091003(new ReportId("DBE091003_NinteiChosaTokkiImage"), new RString("主治医意見書TSOLタイプ表")),
     /**
-     * 特記事項（すべて連結）の帳票ＩＤです。
+     * 事務局用特記事項（すべて連結）の帳票ＩＤです。
      */
     DBE517131(new ReportId("DBE517131_TokkiText1A4All"), new RString("事務局用特記事項")),
+    /**
+     * 委員特記事項（すべて連結）の帳票ＩＤです。
+     */
+    DBE517231(new ReportId("DBE517231_TokkiText1A4All"), new RString("委員用特記事項")),
     /**
      * 特記事項（１つずつ）の帳票ＩＤです。
      */
