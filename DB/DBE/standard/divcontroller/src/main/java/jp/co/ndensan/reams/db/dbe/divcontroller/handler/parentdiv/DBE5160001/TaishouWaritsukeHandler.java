@@ -650,7 +650,7 @@ public class TaishouWaritsukeHandler {
 
         dgTaishoshaIchiran_Row taishoshaIchiran_Row = new dgTaishoshaIchiran_Row(
                 kohoshaIchiran_Row.getJotaiFlag(),
-                kohoshaIchiran_Row.getShinsajunKakuteiFlag(),
+                審査順確定フラグ_確定,
                 kohoshaIchiran_Row.getShinseishoKanriNo(),
                 no,
                 kohoshaIchiran_Row.getPriority(),
@@ -696,7 +696,7 @@ public class TaishouWaritsukeHandler {
 
         dgWaritsukeKohoshaIchiran_Row kohoshaIchiran_Row = new dgWaritsukeKohoshaIchiran_Row(
                 taishoshaIchiran_Row.getJotaiFlag(),
-                taishoshaIchiran_Row.getShinsajunKakuteiFlag(),
+                審査順確定フラグ_確定しない,
                 taishoshaIchiran_Row.getShinseishoKanriNo(),
                 new RString(候補者一覧GridMaxNo + 1),
                 taishoshaIchiran_Row.getPriority(),

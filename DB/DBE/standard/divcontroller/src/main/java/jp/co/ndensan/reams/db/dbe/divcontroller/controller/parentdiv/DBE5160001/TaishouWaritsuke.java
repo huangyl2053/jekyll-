@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TaishouWaritsuke {
 
+    private static final RString 審査会割付を完了する = new RString("btnComplete");
     private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
     private static final RString 完了メッセージ = new RString("認定審査会対象者割付");
 
@@ -181,6 +182,7 @@ public class TaishouWaritsuke {
                 equals(ResponseHolder.getMessageCode().toString())) {
             onLoad(div);
             getHandler(div).setCommonButtonDisabled();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
         }
         return ResponseData.of(div).respond();
     }
@@ -205,6 +207,7 @@ public class TaishouWaritsuke {
                     equals(ResponseHolder.getMessageCode().toString())) {
                 onLoad(div);
                 getHandler(div).setCommonButtonDisabled();
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
             }
             return ResponseData.of(div).respond();
         } else {
@@ -228,6 +231,7 @@ public class TaishouWaritsuke {
                         equals(ResponseHolder.getMessageCode().toString())) {
                     onLoad(div);
                     getHandler(div).setCommonButtonDisabled();
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, false);
                 }
                 return ResponseData.of(div).respond();
             }

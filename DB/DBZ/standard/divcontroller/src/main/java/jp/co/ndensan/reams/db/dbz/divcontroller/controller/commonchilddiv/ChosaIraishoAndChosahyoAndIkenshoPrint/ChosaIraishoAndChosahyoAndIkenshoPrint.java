@@ -151,20 +151,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnModoru(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
-        if (getHandler(div).isUpdate()) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
-            }
-            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                RealInitialLocker.release(new LockingKey(排他キー));
-                return ResponseData.of(div).dialogOKClose();
-            }
-        } else {
             RealInitialLocker.release(new LockingKey(排他キー));
             return ResponseData.of(div).dialogOKClose();
-        }
-        return ResponseData.of(div).respond();
     }
 
     /**
