@@ -80,7 +80,7 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517016.getReportId().value())
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517216.getReportId().value())
                 .addBreak(new BreakerCatalog<SonotashiryoA4ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A4))
                 .create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);

@@ -85,7 +85,7 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517251.getReportId().value())
                 .addBreak(new BreakerCatalog<Shujiiikensho1A4ReportSource>().new SimpleLayoutBreaker(
                     Shujiiikensho1A4ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override

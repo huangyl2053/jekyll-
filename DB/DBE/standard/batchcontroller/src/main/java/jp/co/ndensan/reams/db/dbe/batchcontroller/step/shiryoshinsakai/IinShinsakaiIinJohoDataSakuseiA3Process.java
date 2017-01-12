@@ -73,7 +73,7 @@ public class IinShinsakaiIinJohoDataSakuseiA3Process extends BatchProcessBase<Sh
 
     @Override
     protected void createWriter() {
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517001.getReportId().value()).create();
+        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517201.getReportId().value()).create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);
     }
 
