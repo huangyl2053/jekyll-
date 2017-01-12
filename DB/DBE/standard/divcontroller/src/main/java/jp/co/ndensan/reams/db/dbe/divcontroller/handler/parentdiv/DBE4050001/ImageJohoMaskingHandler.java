@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokkiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJoho;
@@ -52,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * イメージ情報マスキングの抽象Handlerクラスです。
@@ -68,18 +70,13 @@ public class ImageJohoMaskingHandler {
     private static final int 特記事項連番終了位置 = 8;
     private static final int 意見書_表ページ = 1;
     private static final int 意見書_裏ページ = 2;
-    private static final RString ALL_SHICHOSON_KEY = new RString("000000");
     private static final RString 状態_削除作業用 = new RString("削除");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString イメージファイル終端 = new RString(".png");
     private static final RString BAKファイル終端 = new RString("_BAK.png");
     private static final RString 編集後ファイル終端 = new RString("_NEW.png");
-    private static final RString ローカルファイル名 = new RString("IMG");
-    private static RString outputImagePath;
-    private static RString imagePath;
-    private static dgImageMaskShoriTaishosha_Row taishoshaRow;
-    private static ImageJohoMaskingParameter param;
+//    private static final RString ローカルファイル名 = new RString("IMG");
 
     /**
      * コンストラクタです。
@@ -100,11 +97,11 @@ public class ImageJohoMaskingHandler {
     }
 
     /**
-     * 検索用パラメーターを設定します
+     * 設定したパラメーターを用いて対象者のリストを作成します
      *
-     * @param shinseishoKanriNoList 申請書管理番号のリスト
+     * @return マスキング対象者のリスト
      */
-    public void set検索用パラメーター(ShinseishoKanriNoList shinseishoKanriNoList) {
+    public List<ImageJohoMaskingResult> get対象者for画面() {
         FlexibleDate fromYMD;
         FlexibleDate toYMD;
         if (div.getTxtSearchYMD().getFromValue() != null) {
@@ -117,22 +114,32 @@ public class ImageJohoMaskingHandler {
         } else {
             toYMD = FlexibleDate.EMPTY;
         }
-        param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
-                shinseishoKanriNoList != null ? LasdecCode.EMPTY : div.getCcdHokensya().getSelectedItem().get市町村コード(),
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : fromYMD,
-                shinseishoKanriNoList != null ? FlexibleDate.MAX : toYMD,
-                shinseishoKanriNoList != null ? RString.EMPTY : div.getDdlKensakuTaisho().getSelectedKey(),
-                shinseishoKanriNoList != null ? shinseishoKanriNoList.getShinseishoKanriNoS() : null,
-                shinseishoKanriNoList != null ? RString.EMPTY : div.getTxtHihokenshaNumber().getValue(),
+        ImageJohoMaskingParameter param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
+                div.getCcdHokensya().getSelectedItem().get市町村コード(),
+                fromYMD,
+                toYMD,
+                div.getDdlKensakuTaisho().getSelectedKey(),
+                null,
+                div.getTxtHihokenshaNumber().getValue(),
                 div.getTxtMaxDisp().getValue());
+        return ImageJohoMaskingFinder.createInstance().getDataForLoad(param).records();
     }
 
     /**
      * 設定したパラメーターを用いて対象者のリストを作成します
      *
+     * @param shinseishoKanriNoList 申請書管理番号のリスト
      * @return マスキング対象者のリスト
      */
-    public List<ImageJohoMaskingResult> get対象者() {
+    public List<ImageJohoMaskingResult> get対象者forリスト(ShinseishoKanriNoList shinseishoKanriNoList) {
+        ImageJohoMaskingParameter param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
+                LasdecCode.EMPTY,
+                FlexibleDate.MAX,
+                FlexibleDate.MAX,
+                RString.EMPTY,
+                shinseishoKanriNoList.getShinseishoKanriNoS(),
+                RString.EMPTY,
+                div.getTxtMaxDisp().getValue());
         return ImageJohoMaskingFinder.createInstance().getDataForLoad(param).records();
     }
 
@@ -209,21 +216,29 @@ public class ImageJohoMaskingHandler {
      */
     public void setMeisai() {
 
-        taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
-        outputImagePath = Directory.createTmpDirectory();
-//        imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
-        imagePath = outputImagePath;
+        dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
+        RString outputImagePath = Directory.createTmpDirectory();
+        RString imagePath = outputImagePath;
+//        RString imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
+        ViewStateHolder.put(ViewStateKeys.イメージ情報, imagePath);
 
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()));
-
         RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
         RDateTime 共有ファイルID = RDateTime.parse(taishoshaRow.get共有ファイルID().toString());
+        ViewStateHolder.put(ViewStateKeys.共有ファイル名, ファイル名);
+        ViewStateHolder.put(ViewStateKeys.イメージ共有ファイルID, 共有ファイルID);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, taishoshaRow.get申請書管理番号());
+        ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, taishoshaRow.get認定調査依頼履歴番号());
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, taishoshaRow.get主治医意見書作成依頼履歴番号());
+        ViewStateHolder.put(ViewStateKeys.帳票分類ID, taishoshaRow.get帳票ID());
+
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), 共有ファイルID);
         try {
             SharedFile.copyToLocal(descriptor, new FilesystemPath(outputImagePath));
         } catch (Exception ex) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
+
         File file = new File(imagePath.toString());
         if (file.exists()) {
             setMaskingTaisho(file);
@@ -236,6 +251,8 @@ public class ImageJohoMaskingHandler {
         if (files.length == 0) {
             return;
         }
+
+        RString imagePath = ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class);
         for (String imageFile : files) {
             dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
             row.setImageName(new RString(imageFile));
@@ -321,17 +338,18 @@ public class ImageJohoMaskingHandler {
                 saveSharedFile(row);
             }
         }
-        taishoshaRow = null;
     }
 
     private void saveSharedFile(dgImageMaskingTaisho_Row row) {
-        RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
-        RDateTime 共有ファイルID = RDateTime.parse(taishoshaRow.get共有ファイルID().toString());
+        RString ファイル名 = ViewStateHolder.get(ViewStateKeys.共有ファイル名, RString.class);
+        RDateTime 共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), 共有ファイルID);
         SharedAppendOption option = new SharedAppendOption();
         option.overWrite(true);
-        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), ローカルファイル名.toString(), option);
-        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), ローカルファイル名.toString(), option);
+        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), "", option);
+        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), "", option);
+//        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), ローカルファイル名.toString(), option);
+//        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), ローカルファイル名.toString(), option);
     }
 
     private void saveLocalFile(dgImageMaskingTaisho_Row row) {
@@ -353,9 +371,12 @@ public class ImageJohoMaskingHandler {
 
     private void saveGamenData(dgImageMaskingTaisho_Row row) {
         if (row.getState().equals(状態_追加)) {
+            ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+            int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
+
             if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
-                GaikyoChosaTokki gaikyotokki = new GaikyoChosaTokki(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()),
-                        Integer.parseInt(taishoshaRow.get認定調査依頼履歴番号().toString()),
+                GaikyoChosaTokki gaikyotokki = new GaikyoChosaTokki(申請書管理番号,
+                        認定調査依頼履歴番号,
                         TokkijikoTextImageKubun.イメージ.getコード());
 
                 GaikyoChosaTokkiBuilder builder = gaikyotokki.createBuilderForEdit();
@@ -366,10 +387,13 @@ public class ImageJohoMaskingHandler {
             } else if (row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称())
                     || row.getImageName().equals(マスク有りイメージ一覧.E0002.getイメージ日本語名称())) {
 
+                int 主治医意見書作成依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
+                Code 帳票分類ID = new Code(ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class));
+
                 IkenshoImageJoho imageJoho = new IkenshoImageJoho(
-                        new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()),
-                        Integer.parseInt(taishoshaRow.get主治医意見書作成依頼履歴番号().toString()),
-                        new Code(taishoshaRow.get帳票ID()), GenponMaskKubun.マスク.getコード(),
+                        申請書管理番号,
+                        主治医意見書作成依頼履歴番号,
+                        帳票分類ID, GenponMaskKubun.マスク.getコード(),
                         row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? 意見書_表ページ : 意見書_裏ページ);
 
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
@@ -380,8 +404,8 @@ public class ImageJohoMaskingHandler {
                     && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
                 int 連番 = Integer.parseInt(row.getEditImagePath().substring(row.getEditImagePath().length() - 特記事項連番開始位置, row.getEditImagePath().length() - 特記事項連番終了位置).toString()) + 1;
                 NinteichosahyoTokkijiko tokkijiko = new NinteichosahyoTokkijiko(
-                        new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()),
-                        Integer.parseInt(taishoshaRow.get認定調査依頼履歴番号().toString()),
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
                         マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
                         連番,
                         TokkijikoTextImageKubun.イメージ.getコード(),

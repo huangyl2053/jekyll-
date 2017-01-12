@@ -112,6 +112,10 @@ public enum ReportIdDBZ {
      */
     DBE221024_Nashi_Color(new ReportId("DBE221024_ChosahyoTokkijikoKomokuAriTenyuryoku"), getReportName複数()),
     /**
+     * 認定調査票OCR（特記事項）帳票ＩＤです。
+     */
+    DBE221041(new ReportId("DBE221041_tokkijikoOCR"), new RString("認定調査票OCR（特記事項）")),
+    /**
      * 認定調査票OCR（特記事項）-両面の帳票ＩＤです。
      */
     DBE221042_Ryomen(new ReportId("DBE221042_tokkijikoOCR_Ryomen"), new RString("認定調査票OCR（特記事項）")),

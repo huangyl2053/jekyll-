@@ -135,7 +135,8 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
             }
         } else if (ReportIdDBZ.DBE221003.getReportId().equals(id)
                 || ReportIdDBZ.DBE221031.getReportId().equals(id)
-                || ReportIdDBZ.DBE221032.getReportId().equals(id)) {
+                || ReportIdDBZ.DBE221032.getReportId().equals(id)
+                || ReportIdDBZ.DBE221041.getReportId().equals(id)) {
             if (business == null) {
                 for (ChosahyoTokkijikoBusiness chosahyoTokkijikoBusiness : businessList) {
                     IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(chosahyoTokkijikoBusiness);

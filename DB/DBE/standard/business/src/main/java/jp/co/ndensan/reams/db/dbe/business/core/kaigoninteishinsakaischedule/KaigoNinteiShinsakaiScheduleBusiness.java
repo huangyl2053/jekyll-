@@ -89,6 +89,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
         RYear from年度 = new RDate(processParamter.getShinsakaiKaisaiKikanFrom().toString()).getNendo();
         RYear to年度 = new RDate(processParamter.getShinsakaiKaisaiKikanTo().toString()).getNendo();
         RStringBuilder 年度 = new RStringBuilder();
+        RDate 作成日 = RDate.getNowDate();
         if (from年度.equals(to年度)) {
             年度.append(get和暦年度(from年度)).append("年度");
         } else {
@@ -96,6 +97,7 @@ public class KaigoNinteiShinsakaiScheduleBusiness {
         }
         headItem.set年度(年度.toRString());
         headItem.set広域連合(DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        headItem.set作成年月日(作成日);
         return headItem;
     }
 

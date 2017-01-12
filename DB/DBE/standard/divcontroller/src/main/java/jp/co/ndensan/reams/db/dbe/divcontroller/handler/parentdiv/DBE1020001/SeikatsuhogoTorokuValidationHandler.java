@@ -103,19 +103,6 @@ public class SeikatsuhogoTorokuValidationHandler {
         return validationMessages;
     }
 
-    /**
-     *
-     * 住所をチェックします。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs jushoCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdZenkokuJushoInput().get全国住所コード().value())) {
-            validationMessages.add(new ValidationMessageControlPair(SeikatsuhogoTorokuMessages.住所));
-        }
-        return validationMessages;
-    }
 
     /**
      *
@@ -143,7 +130,6 @@ public class SeikatsuhogoTorokuValidationHandler {
         validationMessages.add(shimeiCheck());
         validationMessages.add(kanaShimeiCheck());
         validationMessages.add(yubinNoCheck());
-        validationMessages.add(jushoCheck());
         validationMessages.add(telNoCheck());
         return validationMessages;
     }
@@ -155,7 +141,6 @@ public class SeikatsuhogoTorokuValidationHandler {
         申請者氏名(UrErrorMessages.必須項目_追加メッセージあり, "申請者氏名"),
         申請者カナ氏名(UrErrorMessages.必須項目_追加メッセージあり, "申請者カナ氏名"),
         郵便番号(UrErrorMessages.必須項目_追加メッセージあり, "郵便番号"),
-        住所(UrErrorMessages.必須項目_追加メッセージあり, "住所"),
         電話番号(UrErrorMessages.必須項目_追加メッセージあり, "電話番号");
 
         private final Message message;

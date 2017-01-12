@@ -46,15 +46,6 @@ public class NinteiShinseiTorokuResult {
     }
 
     /**
-     * 申請種別を取得します。
-     *
-     * @return 申請種別
-     */
-    public Code get申請種別() {
-        return entity.get申請種別();
-    }
-
-    /**
      * 申請書区分を取得します。
      *
      * @return 申請書区分
@@ -62,16 +53,7 @@ public class NinteiShinseiTorokuResult {
     public RString get申請書区分() {
         return entity.get申請書区分();
     }
-
-    /**
-     * 申請状況を取得します。
-     *
-     * @return 申請状況
-     */
-    public RString get申請状況() {
-        return entity.get申請状況();
-    }
-
+    
     /**
      * 申請日を取得します。
      *
@@ -100,39 +82,12 @@ public class NinteiShinseiTorokuResult {
     }
 
     /**
-     * 支所コードを取得します。
-     *
-     * @return 支所コード
-     */
-    public RString get支所コード() {
-        return entity.get支所コード();
-    }
-
-    /**
-     * 旧措置者フラグを取得します。
-     *
-     * @return 旧措置者フラグ
-     */
-    public boolean is旧措置者フラグ() {
-        return entity.is旧措置者フラグ();
-    }
-
-    /**
      * 被保険者区分コードを取得します。
      *
      * @return 被保険者区分コード
      */
     public RString get被保険者区分コード() {
         return entity.get被保険者区分コード();
-    }
-
-    /**
-     * 資格取得前申請フラグを取得します。
-     *
-     * @return 資格取得前申請フラグ
-     */
-    public boolean is資格取得前申請フラグ() {
-        return entity.is資格取得前申請フラグ();
     }
 
     /**
@@ -316,102 +271,12 @@ public class NinteiShinseiTorokuResult {
     }
 
     /**
-     * 異動事由を取得します。
-     *
-     * @return 異動事由
-     */
-    public Code get異動事由() {
-        return entity.get異動事由();
-    }
-
-    /**
-     * 削除事由コードを取得します。
-     *
-     * @return 削除事由コード
-     */
-    public Code get削除事由コード() {
-        return entity.get削除事由コード();
-    }
-
-    /**
-     * 理由を取得します。
-     *
-     * @return 理由
-     */
-    public RString get理由() {
-        return entity.get理由();
-    }
-
-    /**
-     * 喪失年月日を取得します。
-     *
-     * @return 喪失年月日
-     */
-    public FlexibleDate get喪失年月日() {
-        return entity.get喪失年月日();
-    }
-
-    /**
      * 取下年月日を取得します。
      *
      * @return 取下年月日
      */
     public FlexibleDate get取下年月日() {
         return entity.get取下年月日();
-    }
-
-    /**
-     * 当初認定有効開始年月日を取得します。
-     *
-     * @return 当初認定有効開始年月日
-     */
-    public FlexibleDate get当初認定有効開始年月日() {
-        return entity.get当初認定有効開始年月日();
-    }
-
-    /**
-     * 当初認定有効終了年月日を取得します。
-     *
-     * @return 当初認定有効終了年月日
-     */
-    public FlexibleDate get当初認定有効終了年月日() {
-        return entity.get当初認定有効終了年月日();
-    }
-
-    /**
-     * 受給資格証明書発行年月日１を取得します。
-     *
-     * @return 受給資格証明書発行年月日１
-     */
-    public FlexibleDate get受給資格証明書発行年月日１() {
-        return entity.get受給資格証明書発行年月日１();
-    }
-
-    /**
-     * 受給資格証明書発行年月日２を取得します。
-     *
-     * @return 受給資格証明書発行年月日２
-     */
-    public FlexibleDate get受給資格証明書発行年月日２() {
-        return entity.get受給資格証明書発行年月日２();
-    }
-
-    /**
-     * 台帳種別を取得します。
-     *
-     * @return 台帳種別
-     */
-    public RString get台帳種別() {
-        return entity.get台帳種別();
-    }
-
-    /**
-     * 入所施設種類を取得します。
-     *
-     * @return 入所施設種類
-     */
-    public RString get入所施設種類() {
-        return entity.get入所施設種類();
     }
 
     /**
@@ -430,51 +295,6 @@ public class NinteiShinseiTorokuResult {
      */
     public LasdecCode get市町村コード() {
         return entity.get市町村コード();
-    }
-
-    /**
-     * 要介護認定状態区分コードを取得します。
-     *
-     * @return 要介護認定状態区分コード
-     */
-    public Code get要介護認定状態区分コード() {
-        return entity.get要介護認定状態区分コード();
-    }
-
-    /**
-     * 認定有効期間開始年月日を取得します。
-     *
-     * @return 認定有効期間開始年月日
-     */
-    public FlexibleDate get認定有効期間開始年月日() {
-        return entity.get認定有効期間開始年月日();
-    }
-
-    /**
-     * 認定有効期間終了年月日を取得します。
-     *
-     * @return 認定有効期間終了年月日
-     */
-    public FlexibleDate get認定有効期間終了年月日() {
-        return entity.get認定有効期間終了年月日();
-    }
-
-    /**
-     * 認定年月日を取得します。
-     *
-     * @return 認定年月日
-     */
-    public FlexibleDate get認定年月日() {
-        return entity.get認定年月日();
-    }
-
-    /**
-     * 介護認定審査会意見を取得します。
-     *
-     * @return 介護認定審査会意見
-     */
-    public RString get介護認定審査会意見() {
-        return entity.get介護認定審査会意見();
     }
 
     /**
@@ -511,5 +331,158 @@ public class NinteiShinseiTorokuResult {
      */
     public ShikibetsuCode get識別コード() {
         return entity.get識別コード();
+    }
+    
+    /**
+     * 申請届出代行区分コードを取得します。
+     *
+     * @return 申請届出代行区分コード
+     */
+    public Code get申請届出代行区分コード() {
+        return entity.get申請届出代行区分コード();
+    }
+    
+    /**
+     * 申請届出者氏名を取得します。
+     *
+     * @return 申請届出者氏名
+     */
+    public RString get申請届出者氏名() {
+        return entity.get申請届出者氏名();
+    }
+    
+    /**
+     * 申請届出者氏名カナを取得します。
+     *
+     * @return 申請届出者氏名カナ
+     */
+    public RString get申請届出者氏名カナ() {
+        return entity.get申請届出者氏名カナ();
+    }
+    
+    /**
+     * 申請届出者続柄を取得します。
+     *
+     * @return 申請届出者続柄
+     */
+    public RString get申請届出者続柄() {
+        return entity.get申請届出者続柄();
+    }
+    
+    /**
+     * 申請届出代行事業者番号を取得します。
+     *
+     * @return 申請届出代行事業者番号
+     */
+    public JigyoshaNo get申請届出代行事業者番号() {
+        return entity.get申請届出代行事業者番号();
+    }
+    
+    /**
+     * 事業者区分を取得します。
+     *
+     * @return 事業者区分
+     */
+    public RString get事業者区分() {
+        return entity.get事業者区分();
+    }
+    
+    /**
+     * 申請届出者郵便番号を取得します。
+     *
+     * @return 申請届出者郵便番号
+     */
+    public YubinNo get申請届出者郵便番号() {
+        return entity.get申請届出者郵便番号();
+    }
+    
+    /**
+     * 申請届出者住所を取得します。
+     *
+     * @return 申請届出者住所
+     */
+    public RString get申請届出者住所() {
+        return entity.get申請届出者住所();
+    }
+    
+    /**
+     * 申請届出者電話番号を取得します。
+     *
+     * @return 申請届出者電話番号
+     */
+    public TelNo get申請届出者電話番号() {
+        return entity.get申請届出者電話番号();
+    }
+    
+    /**
+     * 取下区分コードを取得します。
+     *
+     * @return 取下区分コード
+     */
+    public Code get取下区分コード() {
+        return entity.get取下区分コード();
+    }
+    
+    /**
+     * 取下理由を取得します。
+     *
+     * @return 取下理由
+     */
+    public RString get取下理由() {
+        return entity.get取下理由();
+    }
+    
+    /**
+     * 延期決定年月日を取得します。
+     *
+     * @return 延期決定年月日
+     */
+    public FlexibleDate get延期決定年月日() {
+        return entity.get延期決定年月日();
+    }
+    
+    /**
+     * 延期理由を取得します。
+     *
+     * @return 延期理由
+     */
+    public RString get延期理由() {
+        return entity.get延期理由();
+    }
+    
+    /**
+     * 延期通知発行年月日を取得します。
+     *
+     * @return 延期通知発行年月日
+     */
+    public FlexibleDate get延期通知発行年月日() {
+        return entity.get延期通知発行年月日();
+    }
+    
+    /**
+     * 延期見込期間開始年月日を取得します。
+     *
+     * @return 延期見込期間開始年月日
+     */
+    public FlexibleDate get延期見込期間開始年月日() {
+        return entity.get延期見込期間開始年月日();
+    }
+    
+    /**
+     * 延期見込期間終了年月日を取得します。
+     *
+     * @return 延期見込期間終了年月日
+     */
+    public FlexibleDate get延期見込期間終了年月日() {
+        return entity.get延期見込期間終了年月日();
+    }
+    
+    /**
+     * 延期通知発行回数を取得します。
+     *
+     * @return 延期通知発行回数
+     */
+    public int get延期通知発行回数() {
+        return entity.get延期通知発行回数();
     }
 }

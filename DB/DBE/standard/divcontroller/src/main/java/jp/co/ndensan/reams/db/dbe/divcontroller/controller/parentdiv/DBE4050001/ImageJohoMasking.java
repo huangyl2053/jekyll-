@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ImageJohoMasking {
 
-    private boolean isFrom完了画面 = false;
+    private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
 
     /**
      * コンストラクタです。
@@ -52,9 +52,7 @@ public class ImageJohoMasking {
         getHandler(div).initialize();
         ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
         if (shinseishoKanriNoList != null) {
-            isFrom完了画面 = true;
-            getHandler(div).set検索用パラメーター(shinseishoKanriNoList);
-            List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者();
+            List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者forリスト(shinseishoKanriNoList);
             if (!ResponseHolder.isReRequest() && resultList.isEmpty()) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
@@ -71,8 +69,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTaishoKensaku(ImageJohoMaskingDiv div) {
-        getHandler(div).set検索用パラメーター(null);
-        List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者();
+        List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者for画面();
         if (!ResponseHolder.isReRequest() && resultList.isEmpty()) {
             throw new ApplicationException(UrInformationMessages.該当データなし.getMessage());
         }
@@ -204,10 +201,12 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnContinue(ImageJohoMaskingDiv div) {
-        getHandler(div).get対象者();
-        if (isFrom完了画面) {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
+            getHandler(div).get対象者forリスト(shinseishoKanriNoList);
             return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         } else {
+            getHandler(div).get対象者for画面();
             return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
         }
     }
@@ -219,7 +218,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnComplete(ImageJohoMaskingDiv div) {
-        if (isFrom完了画面) {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
             return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
         } else {
             return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.終了する).respond();

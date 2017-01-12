@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -50,6 +52,7 @@ public class SeikatsuhogoToroku {
     private final KoseiShichosonShishoMasterManager manager;
     private final SeikatsuhogoTorokuFinder finder;
     private final NinteiShinseiJohoManager shinseiJohoManager;
+    private boolean ninteiTandokuDounyuFlag;
 
     /**
      * コンストラクタです。
@@ -60,6 +63,17 @@ public class SeikatsuhogoToroku {
         manager = KoseiShichosonShishoMasterManager.createInstance();
         finder = SeikatsuhogoTorokuFinder.createInstance();
         shinseiJohoManager = NinteiShinseiJohoManager.createInstance();
+        ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        ninteiTandokuDounyuFlag = Boolean.FALSE;
+        if (security.get導入形態コード().equals(new Code("111"))) {
+            ninteiTandokuDounyuFlag = Boolean.TRUE;
+            
+        } else {
+            security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            if (security.get導入形態コード().equals(new Code("211"))) {
+                ninteiTandokuDounyuFlag = Boolean.TRUE;
+            }
+        }
     }
 
     /**
@@ -80,7 +94,7 @@ public class SeikatsuhogoToroku {
         } else {
             div.getBtnSaiban().setDisabled(false);
         }
-        getHandler(div).load(result, list);
+        getHandler(div).load(result, list, ninteiTandokuDounyuFlag);
         return ResponseData.of(div).respond();
     }
     
@@ -118,6 +132,11 @@ public class SeikatsuhogoToroku {
             if (ninteiShinseiJoho.get識別コード() != null) {
                 div.getTxtShikibetsuCode().setValue(ninteiShinseiJoho.get識別コード().value());
             }
+        }
+        if (ninteiTandokuDounyuFlag) {
+          ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
+          ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
+          div.getBtnAtenaKensaku().setVisible(false);
         }
         return ResponseData.of(div).respond();
     }

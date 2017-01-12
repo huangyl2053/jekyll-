@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 
@@ -228,31 +229,24 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                     result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
         }
-        if (result.get申請状況() !=null && !result.get申請状況().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiJokyo(ShinseiJokyoKubun.toValue(result.get申請状況()).get名称());
-        }
         div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
-        if (result.get申請種別() != null) {
-            div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.toValue(result.get申請種別().value()));
-        }
         if (result.get認定申請区分申請時コード() != null) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分申請時コード().value()));
         }
         if (result.get認定申請区分法令コード() != null && !result.get認定申請区分法令コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(result.get認定申請区分法令コード().value()));
         }
-        div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(result.get支所コード()));
-        if (result.is旧措置者フラグ()) {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(new RString("key0"));
-            div.getCcdKaigoNinteiShinseiKihon().setKyuSochisha(keyList);
-        }
+//        if (result.is旧措置者フラグ()) {
+//            List<RString> keyList = new ArrayList<>();
+//            keyList.add(new RString("key0"));
+//            div.getCcdKaigoNinteiShinseiKihon().setKyuSochisha(keyList);
+//        }
         div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.toValue(result.get被保険者区分コード()));
-        if (result.is資格取得前申請フラグ()) {
-            List<RString> keyList = new ArrayList<>();
-            keyList.add(new RString("key0"));
-            div.getCcdKaigoNinteiShinseiKihon().setChkShikakuShutokuMae(keyList);
-        }
+//        if (result.is資格取得前申請フラグ()) {
+//            List<RString> keyList = new ArrayList<>();
+//            keyList.add(new RString("key0"));
+//            div.getCcdKaigoNinteiShinseiKihon().setChkShikakuShutokuMae(keyList);
+//        }
         if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
         }
@@ -275,45 +269,36 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdChodsItakusakiAndChosainInput().setHdnShichosonCode(result.get市町村コード().value());
         div.getCcdChodsItakusakiAndChosainInput().setChosainRenrakuJiko(result.get調査員への連絡事項());
 
-        if (result.get削除事由コード() != null) {
-            div.getCcdShinseiSonotaJohoInput().set削除事由(result.get削除事由コード().value());
-        }
-        div.getCcdShinseiSonotaJohoInput().set理由(result.get理由());
-        div.getCcdShinseiSonotaJohoInput().set取消日(result.get取下年月日());
-        div.getCcdShinseiSonotaJohoInput().set喪失日(result.get喪失年月日());
-        div.getCcdShinseiSonotaJohoInput().set発行日2(result.get受給資格証明書発行年月日２());
-        div.getCcdShinseiSonotaJohoInput().set発行日１(result.get受給資格証明書発行年月日１());
-        div.getCcdShinseiSonotaJohoInput().set当初認定期間From(result.get当初認定有効開始年月日());
-        div.getCcdShinseiSonotaJohoInput().set当初認定期間To(result.get当初認定有効終了年月日());
-        if (result.get異動事由() != null) {
-            div.getCcdShinseiSonotaJohoInput().set異動事由(result.get異動事由().value());
-        }
         div.getCcdShisetsuJoho().initialize();
         if (result.get入所施設コード() != null) {
             div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(result.get入所施設コード().value());
         }
-        div.getCcdShisetsuJoho().set施設種類(result.get入所施設種類());
 
         div.setHdnShichosonCode(result.get市町村コード().value());
 
         NinteiInputDataPassModel ninteiInput = new NinteiInputDataPassModel();
         ninteiInput.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
-        if (result.get要介護認定状態区分コード() != null) {
-            ninteiInput.set要介護度コード(result.get要介護認定状態区分コード().value());
-            ninteiInput.set要介護度名称(YokaigoJotaiKubun99A.toValue(result.get要介護認定状態区分コード().value()).getName());
-        }
-        RDate 認定年月日 = flexibleDateToRDate(result.get認定年月日());
-        RDate 有効開始年月日 = flexibleDateToRDate(result.get認定有効期間開始年月日());
-        RDate 有効終了年月日 = flexibleDateToRDate(result.get認定有効期間終了年月日());
-        
-        ninteiInput.set認定年月日(認定年月日);
-        ninteiInput.set有効開始年月日(有効開始年月日);
-        ninteiInput.set有効終了年月日(有効終了年月日);
-        ninteiInput.set審査会意見(result.get介護認定審査会意見());
         ninteiInput.set申請書管理番号(管理番号);
         div.getCcdNinteiInput().initialize(ninteiInput);
+        
+        if (result.get延期決定年月日() != null && !result.get延期決定年月日().isEmpty()) {
+            div.getTxtEnkiKetteiYMD().setValue(flexibleDateToRDate(result.get延期決定年月日()));
+        }
+        if (result.get延期見込期間開始年月日() != null && !result.get延期見込期間開始年月日().isEmpty()) {
+            div.getTxtEnkiMikomiKikan().setFromValue(flexibleDateToRDate(result.get延期見込期間開始年月日()));
+        }
+        if (result.get延期見込期間終了年月日() != null && !result.get延期見込期間終了年月日().isEmpty()) {
+            div.getTxtEnkiMikomiKikan().setToValue(flexibleDateToRDate(result.get延期見込期間終了年月日()));
+        }
+        if (result.get延期通知発行年月日() != null && !result.get延期通知発行年月日().isEmpty()) {
+            div.getTxtEnkiTsuchiHakkoYMD().setValue(flexibleDateToRDate(result.get延期通知発行年月日()));
+        }
+        div.getTxtEnkiRiyu().setValue(result.get延期理由());
+        div.getTxtEnkiTsuchishoHakkoCount().setValue(new Decimal(result.get延期通知発行回数()));
+        
     }
-        private RDate flexibleDateToRDate(FlexibleDate date) {
+    
+    private RDate flexibleDateToRDate(FlexibleDate date) {
         if (date == null || FlexibleDate.EMPTY.equals(date)) {
             return RDate.MIN;
         }

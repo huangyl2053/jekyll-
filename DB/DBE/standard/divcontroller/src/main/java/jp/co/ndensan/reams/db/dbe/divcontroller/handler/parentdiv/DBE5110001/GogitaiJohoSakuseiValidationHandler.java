@@ -6,15 +6,21 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHoketsuShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -225,6 +231,56 @@ public class GogitaiJohoSakuseiValidationHandler {
 
         return validationMessages;
     }
+    
+     /**
+     *
+     * 合議体一覧データの存在をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs yukoKikanCheck() {
+        ShinsakaiIinJohoManager shinsakaiIinJohoManager = ShinsakaiIinJohoManager.createInstance();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        int i = 0;
+        for (dgShinsainList_Row shinsainRow : div.getDgShinsainList().getDataSource()) {
+            i++;
+            ShinsakaiIinJohoMapperParameter parameter = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(shinsainRow.getShinsakaiIinCode());
+            ShinsakaiIinJoho shinsakaiIinJoho = shinsakaiIinJohoManager.get介護認定審査会委員情報(parameter);
+            if (shinsakaiIinJoho.get介護認定審査会委員終了年月日() != null) {
+                if (shinsakaiIinJoho.get介護認定審査会委員終了年月日().isBefore(new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()))) {
+                    validationMessages.add(new ValidationMessageControlPair(new RRVMessages(DbzErrorMessages.理由付き確定不可, i + "行目の審査会委員が期間外")));
+                    return validationMessages;
+                }
+            }
+            if (shinsakaiIinJoho.get介護認定審査会委員開始年月日() != null) {
+                if (shinsakaiIinJoho.get介護認定審査会委員開始年月日().
+                    isAfter(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()))) {
+                    validationMessages.add(new ValidationMessageControlPair(new RRVMessages(DbzErrorMessages.理由付き確定不可, i + "行目の審査会委員が期間外")));
+                    return validationMessages;
+                }
+            }
+        }
+        int j = 0;
+        for (dgHoketsuShinsainList_Row row : div.getDgHoketsuShinsainList().getDataSource()) {
+            j++;
+            ShinsakaiIinJohoMapperParameter parameter = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(row.getHoketsuShinsakaiIinCode());
+            ShinsakaiIinJoho shinsakaiIinJoho = shinsakaiIinJohoManager.get介護認定審査会委員情報(parameter);
+            if (shinsakaiIinJoho.get介護認定審査会委員終了年月日() != null) {
+                if (shinsakaiIinJoho.get介護認定審査会委員終了年月日().isBefore(new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString()))) {
+                    validationMessages.add(new ValidationMessageControlPair(new RRVMessages(DbzErrorMessages.理由付き確定不可, j + "行目の補欠委員が期間外")));
+                    return validationMessages;
+                }
+            }
+            if (shinsakaiIinJoho.get介護認定審査会委員開始年月日() != null) {
+                if (shinsakaiIinJoho.get介護認定審査会委員開始年月日().
+                    isAfter(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()))) {
+                    validationMessages.add(new ValidationMessageControlPair(new RRVMessages(DbzErrorMessages.理由付き確定不可, j + "行目の補欠委員が期間外")));
+                    return validationMessages;
+                }
+            }
+        }
+        return validationMessages;
+    }
 
     /**
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
@@ -282,6 +338,20 @@ public class GogitaiJohoSakuseiValidationHandler {
         private final Message message;
 
         private GogitaiJohoSakuseiMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+        
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+    
+    private static final class RRVMessages implements IValidationMessage {
+
+        private final Message message;
+
+        private RRVMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

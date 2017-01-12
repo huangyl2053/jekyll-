@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.jizenshinsakaishiryopublication.JizenShinsakaiShiryoPublicationBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526002.DBE526002_JIzenShinsakekkaTorokuSakuseiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210010.JizenShinsakaiShiryoPublicationDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -125,6 +126,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票chk);
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
                 .setSelectedItemsByKey(印刷審査会資料chk);
+        div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
     }
 
     /**
@@ -135,11 +137,17 @@ public class JizenShinsakaiShiryoPublicationHandler {
                 .contains(印刷帳票_審査会資料)) {
             div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabled(false);
             set選択chk();
-        } else if (!div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
-                .contains(印刷帳票_審査会資料)) {
+        } else {
             List<RString> keys = new ArrayList<>();
+            div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(keys);
             div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(keys);
             div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabled(true);
+        }
+        if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
+                .contains(印刷帳票_審査会開催通知書)) {
+            div.getPublishingCondition().getCcdBunshoNoInput().setDisabled(false);
+        } else {
+            div.getPublishingCondition().getCcdBunshoNoInput().setDisabled(true);
         }
     }
 
@@ -235,6 +243,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
                     .getTxtCopyNumForShinsakaiIin1().getValue().toString()));
         }
         setバッチ(batchParameter);
+        batchParameter.setBunshoKanriNo(div.getPublishingCondition().getCcdBunshoNoInput().get文書番号());
         return batchParameter;
     }
 

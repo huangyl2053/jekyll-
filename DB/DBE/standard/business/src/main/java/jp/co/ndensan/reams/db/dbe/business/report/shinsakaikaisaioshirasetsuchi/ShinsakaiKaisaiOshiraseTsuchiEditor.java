@@ -77,11 +77,11 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
         source.listKaisaiJoho_2 = item.get開催日() != null && !item.get開催日().isEmpty()
                 ? item.get開催日().wareki().toDateString() : RString.EMPTY;
         source.listKaisaiJoho_3 = RString.isNullOrEmpty(item.get開催時刻()) ? RString.EMPTY : get開催時刻();
-        source.listKaisaiJoho_4 = item.get合議体番号().padZeroToLeft(INT_2);
-        source.listKaisaiJoho_5 = item.get会場();
-        source.listJusho_1 = item.get住所();
-        source.listTelNo_1 = item.get電話番号();
-        source.tsuchibun3 = item.get通知文3();
+        source.listKaisaiJoho_4 = RString.isNullOrEmpty(item.get合議体番号()) ? RString.EMPTY : item.get合議体番号().padZeroToLeft(INT_2);
+        source.listKaisaiJoho_5 = RString.isNullOrEmpty(item.get会場()) ? RString.EMPTY : item.get会場();
+        source.listJusho_1 = RString.isNullOrEmpty(item.get住所()) ? RString.EMPTY : item.get住所();
+        source.listTelNo_1 = RString.isNullOrEmpty(item.get電話番号()) ? RString.EMPTY : item.get電話番号();
+        source.tsuchibun3 = RString.isNullOrEmpty(item.get通知文3()) ? RString.EMPTY : item.get通知文3();
         return source;
     }
 

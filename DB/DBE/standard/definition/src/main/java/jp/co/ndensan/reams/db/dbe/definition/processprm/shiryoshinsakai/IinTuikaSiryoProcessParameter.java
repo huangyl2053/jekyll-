@@ -23,6 +23,7 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
     private RString shinsakaiKaisaiNo;
     private RString shuturyokuSutairu;
     private RString printHou;
+    private RString bunshoKanriNo;
 
     /**
      * コンストラクタです。
@@ -30,14 +31,17 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
+     * @param bunshoKanriNo 文書管理番号
      */
     public IinTuikaSiryoProcessParameter(
             RString shinsakaiKaisaiNo,
             RString shuturyokuSutairu,
-            RString printHou) {
+            RString printHou,
+            RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
+        this.bunshoKanriNo = bunshoKanriNo;
     }
 
     /**
@@ -46,7 +50,7 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      * @return IinTuutishoMyBatisParameter
      */
     public IinTuutishoMyBatisParameter toIinTuutishoMyBatisParameter() {
-        return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo);
+        return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo, bunshoKanriNo);
     }
 
     /**

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 22 11:18:26 JST 2016 
+ * Wed Jan 11 10:42:53 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgChosaItakusakiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private TextBoxCode chosaItakusakiCode;
     private RString chosaItakusakiMeisho;
@@ -33,6 +33,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
     private RString chosaItakusakiKubun;
     private RString hokenshaCode;
     private RString hokenshaName;
+    private RString shoKisaiHokenshaNo;
 
     public dgChosaItakusakiIchiran_Row() {
         super();
@@ -46,6 +47,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.chosaItakusakiKubun = RString.EMPTY;
         this.hokenshaCode = RString.EMPTY;
         this.hokenshaName = RString.EMPTY;
+        this.shoKisaiHokenshaNo = RString.EMPTY;
         this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
         this.setOriginalData("chosaItakusakiMeisho", chosaItakusakiMeisho);
         this.setOriginalData("chosaChiku", chosaChiku);
@@ -56,9 +58,10 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.setOriginalData("chosaItakusakiKubun", chosaItakusakiKubun);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
     }
 
-    public dgChosaItakusakiIchiran_Row(TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString chosaChiku, TextBoxNum waritsukeTeiin, TextBoxNum waritsukeZumi, RString chosaItakusakiJusho, RString chosaItakusakiTelNo, RString chosaItakusakiKubun, RString hokenshaCode, RString hokenshaName) {
+    public dgChosaItakusakiIchiran_Row(TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString chosaChiku, TextBoxNum waritsukeTeiin, TextBoxNum waritsukeZumi, RString chosaItakusakiJusho, RString chosaItakusakiTelNo, RString chosaItakusakiKubun, RString hokenshaCode, RString hokenshaName, RString shoKisaiHokenshaNo) {
         super();
         this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
         this.setOriginalData("chosaItakusakiMeisho", chosaItakusakiMeisho);
@@ -70,6 +73,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.setOriginalData("chosaItakusakiKubun", chosaItakusakiKubun);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.chosaItakusakiCode = chosaItakusakiCode;
         this.chosaItakusakiMeisho = chosaItakusakiMeisho;
         this.chosaChiku = chosaChiku;
@@ -80,6 +84,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.chosaItakusakiKubun = chosaItakusakiKubun;
         this.hokenshaCode = hokenshaCode;
         this.hokenshaName = hokenshaName;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     public TextBoxCode getChosaItakusakiCode() {
@@ -120,6 +125,10 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
 
     public RString getHokenshaName() {
         return hokenshaName;
+    }
+
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     public void setChosaItakusakiCode(TextBoxCode chosaItakusakiCode) {
@@ -170,6 +179,11 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
     public void setHokenshaName(RString hokenshaName) {
         this.setOriginalData("hokenshaName", hokenshaName);
         this.hokenshaName = hokenshaName;
+    }
+
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     // </editor-fold>

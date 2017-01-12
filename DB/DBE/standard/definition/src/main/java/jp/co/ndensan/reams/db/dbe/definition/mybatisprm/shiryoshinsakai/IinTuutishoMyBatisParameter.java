@@ -27,13 +27,16 @@ public class IinTuutishoMyBatisParameter implements IMyBatisParameter {
     private RString ninteiChosaItakusakiCode;
     private RString ninteiChosainCode;
     private RString sonotaKikanCode;
+    private RString bunshoKanriNo;
 
     /**
      * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param bunshoKanriNo 文書管理番号
      */
-    public IinTuutishoMyBatisParameter(RString shinsakaiKaisaiNo) {
+    public IinTuutishoMyBatisParameter(RString shinsakaiKaisaiNo, RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.bunshoKanriNo = bunshoKanriNo;
     }
 }

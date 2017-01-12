@@ -29,7 +29,6 @@ public class DeletePanelHandler {
     private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
     private static final RString イメージファイル原本名 = new RString("_BAK");
     private static final RString イメージファイル拡張子 = new RString(".png");
-    private static final RString SLASH = new RString("/");
 
     /**
      * コンストラクタです。
@@ -176,7 +175,7 @@ public class DeletePanelHandler {
             List<RString> deleteImageFileList) {
         for (RString deleteTargetImageFile : deleteTargetImageFileList) {
             if (isExistsImageFile(deleteTargetImageFile, deleteImageFileList)) {
-                SharedFile.deleteFileInEntry(descriptor, SLASH.concat(deleteTargetImageFile.concat(イメージファイル拡張子)).toString());
+                SharedFile.deleteFileInEntry(descriptor, deleteTargetImageFile.concat(イメージファイル拡張子).toString());
             }
         }
     }
@@ -188,7 +187,7 @@ public class DeletePanelHandler {
                 appendNewImageFile(descriptor, localCopyPath,
                         deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子));
                 SharedFile.deleteFileInEntry(descriptor,
-                        SLASH.concat(deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子)).toString());
+                        deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子).toString());
             }
         }
     }
@@ -200,7 +199,7 @@ public class DeletePanelHandler {
             File.move(Path.combinePath(localCopyPath, targetImageFile), Path.combinePath(localCopyPath, afterReNameImageFile), options);
             SharedAppendOption option = new SharedAppendOption();
             option.overWrite(true);
-            SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, SLASH.concat(SLASH).concat(SLASH).concat(afterReNameImageFile))),
+            SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, afterReNameImageFile)),
                     "", option);
         }
     }

@@ -182,4 +182,13 @@ public class NinnteiChousairaiBusiness {
         return entity.getChosaKanoNinzuPerMonth();
     }
 
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString getShoKisaiHokenshaNo() {
+        return entity.getShoKisaiHokenshaNo();
+    }
+
 }

@@ -162,16 +162,25 @@ public class GogitaiJohoManager {
     }
 
     /**
-     * 合議体情報{@link GogitaiJoho}を保存します、合議体割当委員情報{@link GogitaiWariateIinJoho}を物理削除します。
+     * 合議体割当委員情報{@link GogitaiWariateIinJoho}を物理削除します。
      *
      * @param 合議体情報 合議体情報
-     * @return 削除あり:true、削除なし:false <br>
-     * いずれかのテーブルに削除があればtrueを返す
      */
     @Transaction
-    public boolean saveWithDeletePhysical(GogitaiJoho 合議体情報) {
+    public void deletePhysicalGogitaiWariateIinJoho(GogitaiJoho 合議体情報) {
         requireNonNull(合議体情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報"));
         deletePhysical合議体割当委員情報リスト(合議体情報.getGogitaiWariateIinJohoList());
+    }
+    
+     /**
+     * 合議体情報{@link GogitaiJoho}を保存します。
+     *
+     * @param 合議体情報 合議体情報
+     * @return 更新あり:true、更新なし:false
+     */
+    @Transaction
+    public boolean saveGogitaiJoho(GogitaiJoho 合議体情報) {
+        requireNonNull(合議体情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報"));
         return 1 == 合議体情報Dac.save(合議体情報.toEntity());
     }
 

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManage
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -76,6 +77,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE221024_NASHI_MONO = new RString("DBE221024_chosahyoTokkijiko_Nashi_Mono");
     private static final RString DBE221021_ARI_COLOR = new RString("DBE221021_chosahyoTokkijiko_Ari_Color");
     private static final RString DBE221021_ARI_MONO = new RString("DBE221021_chosahyoTokkijiko_Ari_Mono");
+    private static final RString DBE221041 = new RString("DBE221041_tokkijikoOCR");
     private static final RString DBE221042_RYOMEN = new RString("DBE221042_tokkijikoOCR_Ryomen");
     private static final RString DBE221042_KATAMEN = new RString("DBE221042_tokkijikoOCR_Katamen");
     private static final RString DBE221031_FREE_COLOR = new RString("DBE221031_chosahyoTokkijiko_Free_Color");
@@ -279,6 +281,23 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         List<RString> selectedKeys = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
         if (selectedKeys.contains(KEY0) || selectedKeys.contains(KEY1)) {
             shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set意見書出力年月日(発行日);
+        }
+        List<RString> ichiran = div.getChkIkenshoSakuseiIchiran().getSelectedKeys();
+        if (ichiran.contains(KEY4)) {
+            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set介護保険診断命令書発行有無(true);
+            shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信場所(div.getShindanMeirei().getTxtJushinBasho().getValue());
+            RString radJyushinKikan = div.getShindanMeirei().getRadJyushinKikan().getSelectedKey();
+            if (KEY0.equals(radJyushinKikan)) {
+                shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信期間区分(new Code(KEY1));
+                shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信日(new FlexibleDate(div.getShindanMeirei().getTxtJyushinymd().getValue().toDateString()));
+                RString 受信時分 = new RString(String.format("%02d",div.getShindanMeirei().getTxtJushinTime().getValue().getHour())
+                    + String.format("%02d",div.getShindanMeirei().getTxtJushinTime().getValue().getMinute()));
+                shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信時分(受信時分);
+            } else {
+                shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信期間区分(new Code(KEY2));
+                shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信期間開始(new FlexibleDate(div.getShindanMeirei().getTxtJushinKikan().getFromValue().toDateString()));
+                shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信期間終了(new FlexibleDate(div.getShindanMeirei().getTxtJushinKikan().getToValue().toDateString()));
+            }
         }
         ShujiiIkenshoIraiJohoManager.createInstance().save主治医意見書作成依頼情報(shujiiIkenshoIraiJohoBuilder.build().modifiedModel());
     }
@@ -555,6 +574,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (DBE221021_ARI_MONO.equals(rseValue)) {
             printService.print認定調査票_特記事項(
                     getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221021_Ari_Mono.getReportId());
+        }
+        if (DBE221041.equals(rseValue)) {
+            printService.print認定調査票_特記事項(
+                    getHandler(div).create認定調査票_特記事項パラメータ(), ReportIdDBZ.DBE221041.getReportId());
         }
         if (DBE221042_RYOMEN.equals(rseValue)) {
             printService.print認定調査票_特記事項(

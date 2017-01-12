@@ -32,6 +32,10 @@ public class ShinsakaiScheduleHakko {
 
     private static final RString 介護認定審査会スケジュール表鑑 = new RString("key0");
     private static final RString JIKO_BTTON = new RString("btnHakko");
+    private final RString 帳票出力区分1 = new RString("1");
+    private final RString 帳票出力区分2 = new RString("2");
+    private final RString 帳票出力区分3 = new RString("3");
+    private final RString 帳票出力区分4 = new RString("4");
 
     /**
      * 画面初期化処理です。
@@ -54,17 +58,40 @@ public class ShinsakaiScheduleHakko {
     /**
      * 介護認定審査会スケジュール表（鑑）チェックボックスを押下した際に実行します。
      *
-     * @param div 介護認定審査会開催予定登録3div
+     * @param div 介護認定審査会開催予定登録div
      * @return ResponseData<ShinsakaiScheduleHakkoDiv>
      */
-    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnCheckBoxJin(ShinsakaiScheduleHakkoDiv div) {
-        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
-        if (!selectKey.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))) {
+    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnCheckBox(ShinsakaiScheduleHakkoDiv div) {
+        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys();
+        List<RString> selectKey_Kagami = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
+        if (!selectKey.isEmpty()
+                && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))
+                && selectKey_Kagami.isEmpty()) {
             ShinsakaiiinJohoManager shinsakaiiinJohoManager = InstanceProvider.create(ShinsakaiiinJohoManager.class);
             SearchResult<ShinsakaiIinJohoGoitaiBusiness> shoriDateKanri = shinsakaiiinJohoManager.search審査会委員情報();
             setDgShinsakaiScheduleKagami(shoriDateKanri, div);
             div.getDgShinsakaiScheduleKagami().setVisible(true);
-        } else {
+        } else if (selectKey.isEmpty() && selectKey_Kagami.isEmpty()) {
+            div.getDgShinsakaiScheduleKagami().setVisible(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 介護認定審査会スケジュール表（鑑）チェックボックスを押下した際に実行します。
+     *
+     * @param div 介護認定審査会開催予定登録3div
+     * @return ResponseData<ShinsakaiScheduleHakkoDiv>
+     */
+    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnCheckBoxJin(ShinsakaiScheduleHakkoDiv div) {
+        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys();
+        List<RString> selectKey_Kagami = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
+        if (!selectKey_Kagami.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey_Kagami.get(0))) {
+            ShinsakaiiinJohoManager shinsakaiiinJohoManager = InstanceProvider.create(ShinsakaiiinJohoManager.class);
+            SearchResult<ShinsakaiIinJohoGoitaiBusiness> shoriDateKanri = shinsakaiiinJohoManager.search審査会委員情報();
+            setDgShinsakaiScheduleKagami(shoriDateKanri, div);
+            div.getDgShinsakaiScheduleKagami().setVisible(true);
+        } else if (selectKey.isEmpty() && selectKey_Kagami.isEmpty()) {
             div.getDgShinsakaiScheduleKagami().setVisible(false);
         }
         return ResponseData.of(div).respond();
@@ -128,14 +155,28 @@ public class ShinsakaiScheduleHakko {
             審査会委員コードリスト.add(row.getShinsakaiIinCode());
         }
         RString nendoParameter = RString.EMPTY;
-        RString kubun = new RString("1");
+        RString kubun = 帳票出力区分1;
         if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
             nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().getYear().toDateString();
-            kubun = new RString("2");
+            kubun = 帳票出力区分2;
+        } else if (div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().isAllSelected()
+                && !div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().isAllSelected()) {
+            kubun = 帳票出力区分3;
+        } else if (!div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().isAllSelected()
+                && div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().isAllSelected()) {
+            kubun = 帳票出力区分4;
+        }
+        RString From期間 = null;
+        RString To期間 = null;
+        if (div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue() != null) {
+            From期間 = div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString();
+        }
+        if (div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue() != null) {
+            To期間 = div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString();
         }
         return new DBE514001_ShinsakaiScheduleParameter(
-                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString(),
-                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(),
+                From期間,
+                To期間,
                 nendoParameter, kubun, 審査会委員コードリスト);
     }
 
@@ -145,6 +186,7 @@ public class ShinsakaiScheduleHakko {
         validPairs.add(validationHandler.選択チェック());
         validPairs.add(validationHandler.印刷対象介護認定審査会委員選択チェック());
         validPairs.add(validationHandler.年間チェック());
+        validPairs.add(validationHandler.審査会開催予定期間入力チェック());
         return validPairs;
     }
 }

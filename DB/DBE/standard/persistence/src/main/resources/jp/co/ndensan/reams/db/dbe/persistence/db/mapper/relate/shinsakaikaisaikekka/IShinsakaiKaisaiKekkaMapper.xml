@@ -66,18 +66,18 @@
         ,DbT5503ShinsakaiWariateIinJoho."existSotaiFlag"  AS "existSotaiFlag"
         ,DbT5503ShinsakaiWariateIinJoho."taisekiTime" AS "taisekiTime"
         FROM
-        rgdb."DbT5503ShinsakaiWariateIinJoho"  DbT5503ShinsakaiWariateIinJoho
-        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501ShinsakaiKaisaiYoteiJoho
-        ON DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501ShinsakaiKaisaiYoteiJoho
+        INNER JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503ShinsakaiWariateIinJoho
+        ON dbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = dbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo"
         INNER JOIN rgdb."DbT5594ShinsakaiIinJoho"  DbT5594ShinsakaiIinJoho
         ON DbT5594ShinsakaiIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
-        INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" DbT5593GogitaiWariateIinJoho
+        LEFT JOIN rgdb."DbT5593GogitaiWariateIinJoho" DbT5593GogitaiWariateIinJoho
         ON DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" = DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode"
         AND DbT5593GogitaiWariateIinJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
         AND DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
         AND DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DbT5593GogitaiWariateIinJoho."gogitaiYukoKikanShuryoYMD"
         WHERE
-        TRIM(DbT5503ShinsakaiWariateIinJoho."shinsakaiKaisaiNo") =TRIM(#{開催番号})
+        TRIM(dbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo") =TRIM(#{開催番号})
         ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" desc , DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" asc
     </select>
     <resultMap id="resultMap_ShinsakaiWariateIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiWariateIinJohoEntity" autoMapping="true">

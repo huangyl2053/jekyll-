@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.ShutsuryokuStyle;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -84,13 +86,7 @@ public class PublicationShiryoShinsakaiHandler {
         set審査会資料選択可能の設定();
         List<RString> 事務 = new ArrayList<>();
         事務.add(印刷帳票_概況特記);
-        List<RString> 事務_審査会資料 = new ArrayList<>();
-        List<RString> 委員_審査会資料 = new ArrayList<>();
-        事務_審査会資料.add(印刷帳票_特記事項_一次判定);
-        委員_審査会資料.add(印刷帳票_特記事項_一次判定);
         div.getChkPrintChoyoJimu2().setDisabledItemsByKey(事務);
-        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(事務_審査会資料);
-        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(委員_審査会資料);
         div.getTxtShiryoNoStart().setDisabled(true);
         div.getTxtSiryoNoEnd().setDisabled(true);
     }
@@ -299,6 +295,14 @@ public class PublicationShiryoShinsakaiHandler {
             div.getChkPrintChohyoIin2().setSelectedItemsByKey(new ArrayList<RString>());
             div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
         }
+        setCcdBunshoNoInputControl();
+    }
+
+    /**
+     * 審査会委員用印刷帳票チェックボックス2を変更する場合、表示項目を変更する。
+     */
+    public void onClick_chkPrintChohyoIin2() {
+        setCcdBunshoNoInputControl();
     }
 
     /**
@@ -451,7 +455,8 @@ public class PublicationShiryoShinsakaiHandler {
                 委員用主治医意見書フラグ,
                 委員用その他資料フラグ,
                 委員用審査会開催通知書フラグ,
-                委員用予備判定記入表フラグ);
+                委員用予備判定記入表フラグ,
+                div.getCcdBunshoNoInput().get文書番号());
     }
 
     private void 出力条件の設定() {
@@ -489,11 +494,7 @@ public class PublicationShiryoShinsakaiHandler {
             事務局_概況特記.add(印刷帳票_予備判定記入票);
             事務局_概況特記.add(印刷帳票_概況特記一覧);
 
-            印刷帳票_事務局審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_事務局審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_事務局審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_事務局審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_事務局審査会資料.add(印刷帳票_その他資料);
+            set審査会資料By出力スタイル(印刷帳票_事務局審査会資料);
         }
         div.getChkPrintChoyoJimu().setSelectedItemsByKey(事務局_印刷帳票);
         div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料);
@@ -516,15 +517,33 @@ public class PublicationShiryoShinsakaiHandler {
             委員_概況特記.add(印刷帳票_概況特記);
             委員_概況特記.add(印刷帳票_予備判定記入票);
 
-            印刷帳票_委員審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_委員審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_委員審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_委員審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_委員審査会資料.add(印刷帳票_その他資料);
+            set審査会資料By出力スタイル(印刷帳票_委員審査会資料);
         }
         div.getChkPrintChohyoIin().setSelectedItemsByKey(委員_印刷帳票);
         div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料);
         div.getChkPrintChohyoIin2().setSelectedItemsByKey(委員_概況特記);
+        div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+    }
+
+    private void set審査会資料ALL(List<RString> 審査会資料リスト) {
+        審査会資料リスト.add(印刷帳票_審査会対象者一覧);
+        審査会資料リスト.add(印刷帳票_特記事項);
+        審査会資料リスト.add(印刷帳票_一次判定結果票);
+        審査会資料リスト.add(印刷帳票_特記事項_一次判定);
+        審査会資料リスト.add(印刷帳票_主治医意見書);
+        審査会資料リスト.add(印刷帳票_その他資料);
+    }
+
+    private void set審査会資料By出力スタイル(List<RString> 審査会資料リスト) {
+        審査会資料リスト.add(印刷帳票_審査会対象者一覧);
+        審査会資料リスト.add(印刷帳票_主治医意見書);
+        審査会資料リスト.add(印刷帳票_その他資料);
+        if (ShutsuryokuStyle.A4縦.getコード().equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+            審査会資料リスト.add(印刷帳票_特記事項);
+            審査会資料リスト.add(印刷帳票_一次判定結果票);
+        } else {
+            審査会資料リスト.add(印刷帳票_特記事項_一次判定);
+        }
     }
 
     private void 事務局用の審査会資料設定(List<RString> 事務局_印刷帳票, List<RString> 印刷帳票_事務局審査会資料) {
@@ -553,13 +572,7 @@ public class PublicationShiryoShinsakaiHandler {
             }
         } else {
             事務局_印刷帳票.add(印刷帳票_審査会資料);
-
-            印刷帳票_事務局審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_事務局審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_事務局審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_事務局審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_事務局審査会資料.add(印刷帳票_その他資料);
-
+            set審査会資料By出力スタイル(印刷帳票_事務局審査会資料);
         }
     }
 
@@ -589,12 +602,7 @@ public class PublicationShiryoShinsakaiHandler {
             }
         } else {
             委員_印刷帳票.add(印刷帳票_審査会資料);
-
-            印刷帳票_委員審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_委員審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_委員審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_委員審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_委員審査会資料.add(印刷帳票_その他資料);
+            set審査会資料By出力スタイル(印刷帳票_委員審査会資料);
         }
     }
 
@@ -619,24 +627,34 @@ public class PublicationShiryoShinsakaiHandler {
     private void set審査会資料選択可能の設定() {
         List<RString> 印刷帳票_事務局審査会資料 = new ArrayList<>();
         if (!div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_審査会資料)) {
-            印刷帳票_事務局審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_事務局審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_事務局審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_事務局審査会資料.add(印刷帳票_特記事項_一次判定);
-            印刷帳票_事務局審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_事務局審査会資料.add(印刷帳票_その他資料);
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_事務局審査会資料);
+            set審査会資料ALL(印刷帳票_事務局審査会資料);
             div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(印刷帳票_事務局審査会資料);
         }
 
         List<RString> 印刷帳票_委員審査会資料 = new ArrayList<>();
         if (!div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_審査会資料)) {
-            印刷帳票_委員審査会資料.add(印刷帳票_審査会対象者一覧);
-            印刷帳票_委員審査会資料.add(印刷帳票_特記事項);
-            印刷帳票_委員審査会資料.add(印刷帳票_一次判定結果票);
-            印刷帳票_委員審査会資料.add(印刷帳票_特記事項_一次判定);
-            印刷帳票_委員審査会資料.add(印刷帳票_主治医意見書);
-            印刷帳票_委員審査会資料.add(印刷帳票_その他資料);
+            div.getChkPrintChohyoShinsakaiJimu().setSelectedItemsByKey(印刷帳票_委員審査会資料);
+            set審査会資料ALL(印刷帳票_委員審査会資料);
             div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(印刷帳票_委員審査会資料);
+        }
+
+        List<RString> 審査会資料リスト = new ArrayList<>();
+        if (ShutsuryokuStyle.A4縦.getコード().equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+            審査会資料リスト.add(印刷帳票_特記事項_一次判定);
+        } else {
+            審査会資料リスト.add(印刷帳票_特記事項);
+            審査会資料リスト.add(印刷帳票_一次判定結果票);
+        }
+        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(審査会資料リスト);
+        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(審査会資料リスト);
+    }
+
+    private void setCcdBunshoNoInputControl() {
+        if (div.getChkPrintChohyoIin2().getSelectedKeys().contains(印刷帳票_審査会開催通知書)) {
+            div.getCcdBunshoNoInput().setDisabled(false);
+        } else {
+            div.getCcdBunshoNoInput().setDisabled(true);
         }
     }
 }
