@@ -773,7 +773,8 @@
         , dbt5101."hihokenshaName"
         , dbt5101."seibetsu"
         , dbt5101."age"
-        , zenkaiJoho."koroshoIfShikibetsuCode"
+        , dbt5101."koroshoIfShikibetsuCode" AS "konkaiIfShikibetsuCode"
+        , zenkaiJoho."koroshoIfShikibetsuCode" AS "zenkaiIfShikibetsuCode"
         , zenkaiJoho."nijiHanteiYokaigoJotaiKubunCode"
         , zenkaiJoho."nijiHanteiNinteiYukoKikan"
         , zenkaiJoho."nijiHanteiNinteiYukoKaishiYMD"
@@ -905,7 +906,8 @@
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="age" column="age" />
-        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="konkaiIfShikibetsuCode" column="konkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="zenkaiIfShikibetsuCode" column="zenkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiNinteiYukoKikan" column="nijiHanteiNinteiYukoKikan" />
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

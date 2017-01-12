@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護認定審査対象者一覧表A4のEditorクラスです。
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
 
     private static final int INT_4 = 4;
+    private static final int ROUND_UP_VALUE = 2;
+    private static final int DIVIDE_VALUE = 10;
     private final JimuShinsakaishiryoBusiness business;
 
     /**
@@ -65,7 +68,11 @@ public class ShinsakaishiryoA4Editor implements IShinsakaishiryoA4Editor {
         source.listShinsei_8 = business.get前回期間();
         source.listShinsei_9 = business.get一次判定();
         source.listShinsei_10 = business.get警告();
-        source.listShinsei_11 = business.get基準時間();
+
+        int businessValue = Integer.parseInt(business.get基準時間().toString());
+        Decimal decimal = new Decimal(businessValue).divide(DIVIDE_VALUE).roundUpTo(ROUND_UP_VALUE);
+        source.listShinsei_11 = new RString(decimal.toString());
+
         source.listShinsei_12 = RString.EMPTY;
         source.listShinsei_13 = RString.EMPTY;
         if (business.is事務局()) {

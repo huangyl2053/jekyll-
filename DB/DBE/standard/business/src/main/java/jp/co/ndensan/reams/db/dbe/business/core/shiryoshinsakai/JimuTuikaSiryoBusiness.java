@@ -145,7 +145,7 @@ public class JimuTuikaSiryoBusiness {
      * @return 一次判定
      */
     public RString get一次判定() {
-        return get要介護認定一次判定結果(entity.getKoroshoIfShikibetsuCode(), entity.getIchijiHanteiKekkaCode(),
+        return get要介護認定一次判定結果(entity.getKonkaiIfShikibetsuCode(), entity.getIchijiHanteiKekkaCode(),
                 entity.getIchijiHanteiKekkaNinchishoKasanCode());
     }
 
@@ -385,17 +385,17 @@ public class JimuTuikaSiryoBusiness {
     private RString get要介護状態区分(Code 状態区分コード) {
         if (状態区分コード != null && !状態区分コード.isEmpty()) {
             RStringBuilder builder = new RStringBuilder("要介護状態区分コード");
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.getKoroshoIfShikibetsuCode().value())) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.getKonkaiIfShikibetsuCode().value())) {
                 return builder.append(YokaigoJotaiKubun99.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.getKoroshoIfShikibetsuCode().value())) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.getKonkaiIfShikibetsuCode().value())) {
                 return builder.append(YokaigoJotaiKubun02.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.getKoroshoIfShikibetsuCode().value())) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.getKonkaiIfShikibetsuCode().value())) {
                 return builder.append(YokaigoJotaiKubun06.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
             }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.getKoroshoIfShikibetsuCode().value())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.getKoroshoIfShikibetsuCode().value())) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.getKonkaiIfShikibetsuCode().value())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.getKonkaiIfShikibetsuCode().value())) {
                 return builder.append(YokaigoJotaiKubun09.toValue(状態区分コード.getColumnValue()).get名称()).toRString();
             }
         }

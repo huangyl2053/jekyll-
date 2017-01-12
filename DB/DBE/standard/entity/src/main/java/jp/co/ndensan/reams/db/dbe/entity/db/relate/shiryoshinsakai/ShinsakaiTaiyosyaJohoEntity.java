@@ -28,7 +28,8 @@ public class ShinsakaiTaiyosyaJohoEntity {
     private AtenaMeisho hihokenshaName;
     private Code seibetsu;
     private int age;
-    private Code koroshoIfShikibetsuCode;
+    private Code konkaiIfShikibetsuCode;
+    private Code zenkaiIfShikibetsuCode;
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private int nijiHanteiNinteiYukoKikan;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;

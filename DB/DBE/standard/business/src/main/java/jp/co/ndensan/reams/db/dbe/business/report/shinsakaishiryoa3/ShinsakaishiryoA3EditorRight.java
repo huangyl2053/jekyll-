@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa3.ShinsakaishiryoA3ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 介護認定審査対象者一覧表A3のEditorクラスです。
@@ -59,7 +61,13 @@ public class ShinsakaishiryoA3EditorRight implements IShinsakaishiryoA3Editor {
             source.listShinsei2_11 = RString.EMPTY;
             source.listZenkaiｙukokikan2_1 = business.get前回期間_下();
             source.listYukokikan2_1 = RString.EMPTY;
-            source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
+            if (business.is事務局()) {
+                source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
+                if (business.get申請書管理番号() != null && !business.get申請書管理番号().isEmpty()) {
+                    source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                            business.get申請書管理番号().getColumnValue());
+                }
+            }
         }
         return source;
     }

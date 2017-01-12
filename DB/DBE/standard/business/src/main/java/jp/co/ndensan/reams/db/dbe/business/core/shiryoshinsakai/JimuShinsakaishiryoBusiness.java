@@ -269,7 +269,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return 前回二次
      */
     public RString get前回二次() {
-        return get要介護状態区分(johoEntity.getKoroshoIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
+        return get要介護状態区分(johoEntity.getZenkaiIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
     /**
@@ -287,7 +287,7 @@ public class JimuShinsakaishiryoBusiness {
      * @return 一次判定
      */
     public RString get一次判定() {
-        return get要介護認定一次判定結果(johoEntity.getKoroshoIfShikibetsuCode(),
+        return get要介護認定一次判定結果(johoEntity.getKonkaiIfShikibetsuCode(),
                 johoEntity.getIchijiHanteiKekkaCode(), johoEntity.getIchijiHanteiKekkaNinchishoKasanCode());
     }
 
@@ -327,7 +327,8 @@ public class JimuShinsakaishiryoBusiness {
      * @return 二次判定
      */
     public RString get二次判定() {
-        return get要介護状態区分(johoEntity.getKoroshoIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
+        //TODO n8178 城間 前回二次判定取得との差が不明。使用状況検索でも引っかからないので不要か？
+        return get要介護状態区分(johoEntity.getZenkaiIfShikibetsuCode(), johoEntity.getNijiHanteiYokaigoJotaiKubunCode());
     }
 
     /**

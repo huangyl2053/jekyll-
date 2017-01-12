@@ -39,7 +39,7 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
             + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(IinYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
-    private static final int 満ページ件数 = 10;
+    //private static final int 満ページ件数 = 10;
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IinYobihanteiKinyuhyoBusiness business;
