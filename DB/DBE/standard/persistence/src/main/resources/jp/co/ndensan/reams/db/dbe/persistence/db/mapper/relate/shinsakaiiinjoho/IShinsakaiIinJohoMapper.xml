@@ -105,6 +105,75 @@
         dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
     </select>
 
+    <select resultOrdered="true" id="get審査会委員情報By表示条件件数"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
+            resultType="int" fetchSize="500">
+        SELECT
+        count(0)
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        FROM
+        rgdb."DbT5594ShinsakaiIinJoho"
+        <where>
+            <if test="!isSubeteHyoji">
+                "haishiFlag" = FALSE
+            </if>
+            <if test="isSubeteHyoji">
+                ("haishiFlag" = FALSE OR "haishiFlag" = TRUE)
+            </if>
+            <if  test="uses審査会委員コードFrom">
+                AND "shinsakaiIinCode" <![CDATA[>=]]> #{審査会委員コードFrom}
+            </if>
+            <if  test="uses審査会委員コードTo">
+                AND "shinsakaiIinCode"  <![CDATA[<=]]> #{審査会委員コードTo}
+            </if> 
+            <if test="uses審査会委員資格">
+                AND "shinsakaiIinShikakuCode" = #{審査会委員資格}
+            </if>
+            <if test="uses審査員氏名">
+               <if test="uses審査員氏名前方一致">
+                     AND "shinsakaiIinShimei" LIKE #{審査員氏名} || '%'
+                </if>
+                <if test="uses審査員氏名後方一致">
+                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名}
+                </if>
+                <if test="uses審査員氏名完全一致">
+                     AND "shinsakaiIinShimei" = #{審査員氏名}
+                </if>
+                <if test="uses審査員氏名部分一致">
+                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名} || '%'
+                </if>  
+            </if>     
+            <if test="uses審査員カナ名称">
+               <if test="uses審査員カナ名称前方一致">
+                     AND "shinsakaiIinKanaShimei" LIKE #{審査員カナ名称} || '%'
+                </if>
+                <if test="uses審査員カナ名称後方一致">
+                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称}
+                </if>
+                <if test="uses審査員カナ名称完全一致">
+                     AND "shinsakaiIinKanaShimei" = #{審査員カナ名称}
+                </if>
+                <if test="uses審査員カナ名称部分一致">
+                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称} || '%'
+                </if>  
+            </if>   
+        </where>
+        ORDER BY "dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
+        ) AS dbT5594ShinsakaiIinJoho
+        LEFT JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
+        FROM
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
+        )AS dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho
+        ON
+        dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"=dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho."dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shinsakaiIinCode"
+    </select>
+
     <select resultOrdered="true" id="get所属機関一覧情報"
             resultMap="resultMap_ShozokuKikanIchiranEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
