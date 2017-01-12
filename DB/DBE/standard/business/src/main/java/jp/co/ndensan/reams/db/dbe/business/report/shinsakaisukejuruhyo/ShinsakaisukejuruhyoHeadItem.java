@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,5 @@ public class ShinsakaisukejuruhyoHeadItem {
 
     private RString 年度;
     private RString 広域連合;
-    private RString 作成年月日;
+    private RDate 作成年月日;
 }

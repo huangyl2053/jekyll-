@@ -28,6 +28,8 @@ public class DBE514001_ShinsakaiSchedule extends BatchFlowBase<DBE514001_Shinsak
     private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("DBE514002_ShinsakaiScheduleKagami");
     private final RString 帳票出力区分1 = new RString("1");
     private final RString 帳票出力区分2 = new RString("2");
+    private final RString 帳票出力区分3 = new RString("3");
+    private final RString 帳票出力区分4 = new RString("4");
 
     @Override
     protected void defineFlow() {
@@ -43,13 +45,18 @@ public class DBE514001_ShinsakaiSchedule extends BatchFlowBase<DBE514001_Shinsak
                 executeStep(CALL_KAGAMIFLOW);
                 executeStep(NENKAN);
             }
-        } else {
-            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分1)) {
+            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分3)) {
                 executeStep(SHINSAKAISCHEDULEHYO);
             }
+            if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分4)) {
+                executeStep(CALL_KAGAMIFLOW);
+            }
+        } else {
             if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分2)) {
                 executeStep(SHINSAKAISCHEDULEHYO);
                 executeStep(NENKAN);
+            } else {
+                executeStep(SHINSAKAISCHEDULEHYO);
             }
         }
     }

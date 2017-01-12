@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaisukejuruhyo.ShinsakaisukejuruhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -37,7 +38,7 @@ class ShinsakaisukejuruhyoHeaderEditor implements IShinsakaisukejuruhyoEditor {
         RStringBuilder title = new RStringBuilder();
         source.title = title.append(item.get年度()).append(タイトル後).toRString();
         source.hokenshaName = item.get広域連合();
-        source.printTimeStamp = item.get作成年月日();
+        source.printTimeStamp = item.get作成年月日().wareki().eraType(EraType.KANJI).toDateString();
         return source;
     }
 }
