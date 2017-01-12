@@ -15,18 +15,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJo
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tabShinseishaJoho のクラスファイル 
@@ -92,18 +82,103 @@ public class tabShinseishaJohoDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public ServiceDelDiv getServiceDel() {
+        return this.getTplShinseijoho().getServiceDel();
+    }
+
+    @JsonIgnore
+    public void  setServiceDel(ServiceDelDiv ServiceDel) {
+        this.getTplShinseijoho().setServiceDel(ServiceDel);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnServiceDelTeikeibunGuide() {
+        return this.getTplShinseijoho().getServiceDel().getBtnServiceDelTeikeibunGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnServiceDelTeikeibunGuide(ButtonDialog btnServiceDelTeikeibunGuide) {
+        this.getTplShinseijoho().getServiceDel().setBtnServiceDelTeikeibunGuide(btnServiceDelTeikeibunGuide);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtServiceDeleteRiyu() {
+        return this.getTplShinseijoho().getServiceDel().getTxtServiceDeleteRiyu();
+    }
+
+    @JsonIgnore
+    public void  setTxtServiceDeleteRiyu(TextBoxMultiLine txtServiceDeleteRiyu) {
+        this.getTplShinseijoho().getServiceDel().setTxtServiceDeleteRiyu(txtServiceDeleteRiyu);
+    }
+
+    @JsonIgnore
+    public SinseiTorisageDiv getSinseiTorisage() {
+        return this.getTplShinseijoho().getSinseiTorisage();
+    }
+
+    @JsonIgnore
+    public void  setSinseiTorisage(SinseiTorisageDiv SinseiTorisage) {
+        this.getTplShinseijoho().setSinseiTorisage(SinseiTorisage);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlTorisageJiyu() {
+        return this.getTplShinseijoho().getSinseiTorisage().getDdlTorisageJiyu();
+    }
+
+    @JsonIgnore
+    public void  setDdlTorisageJiyu(DropDownList ddlTorisageJiyu) {
+        this.getTplShinseijoho().getSinseiTorisage().setDdlTorisageJiyu(ddlTorisageJiyu);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtTorisageDate() {
+        return this.getTplShinseijoho().getSinseiTorisage().getTxtTorisageDate();
+    }
+
+    @JsonIgnore
+    public void  setTxtTorisageDate(TextBoxDate txtTorisageDate) {
+        this.getTplShinseijoho().getSinseiTorisage().setTxtTorisageDate(txtTorisageDate);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTorisageJiyu() {
+        return this.getTplShinseijoho().getSinseiTorisage().getTxtTorisageJiyu();
+    }
+
+    @JsonIgnore
+    public void  setTxtTorisageJiyu(TextBox txtTorisageJiyu) {
+        this.getTplShinseijoho().getSinseiTorisage().setTxtTorisageJiyu(txtTorisageJiyu);
+    }
+
+    @JsonIgnore
     public ShujiiAndShujiiIryoKikanDiv getShujiiAndShujiiIryoKikan() {
         return this.getTplShinseijoho().getShujiiAndShujiiIryoKikan();
     }
 
     @JsonIgnore
-    public void setShujiiAndShujiiIryoKikan(ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan) {
+    public void  setShujiiAndShujiiIryoKikan(ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan) {
         this.getTplShinseijoho().setShujiiAndShujiiIryoKikan(ShujiiAndShujiiIryoKikan);
     }
 
     @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getTplShinseijoho().getShujiiAndShujiiIryoKikan().getCcdShujiiIryokikanAndShujiiInput();
+    }
+
+    @JsonIgnore
+    public ChosainAndChosainInputDiv getChosainAndChosainInput() {
+        return this.getTplShinseijoho().getChosainAndChosainInput();
+    }
+
+    @JsonIgnore
+    public void  setChosainAndChosainInput(ChosainAndChosainInputDiv ChosainAndChosainInput) {
+        this.getTplShinseijoho().setChosainAndChosainInput(ChosainAndChosainInput);
+    }
+
+    @JsonIgnore
+    public IChosaItakusakiAndChosainInputDiv getCcdChodsItakusakiAndChosainInput() {
+        return this.getTplShinseijoho().getChosainAndChosainInput().getCcdChodsItakusakiAndChosainInput();
     }
 
     @JsonIgnore
@@ -157,21 +232,6 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public ChosainAndChosainInputDiv getChosainAndChosainInput() {
-        return this.getTplShinseijoho().getChosainAndChosainInput();
-    }
-
-    @JsonIgnore
-    public void  setChosainAndChosainInput(ChosainAndChosainInputDiv ChosainAndChosainInput) {
-        this.getTplShinseijoho().setChosainAndChosainInput(ChosainAndChosainInput);
-    }
-
-    @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdChodsItakusakiAndChosainInput() {
-        return this.getTplShinseijoho().getChosainAndChosainInput().getCcdChodsItakusakiAndChosainInput();
-    }
-
-    @JsonIgnore
     public ShisetsuJohoDiv getShisetsuJoho() {
         return this.getTplShinseijoho().getShisetsuJoho();
     }
@@ -207,13 +267,13 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
     }
 
     @JsonIgnore

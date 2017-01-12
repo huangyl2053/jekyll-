@@ -19,12 +19,15 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNint
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplShinseijoho のクラスファイル 
@@ -40,18 +43,24 @@ public class tplShinseijohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ServiceDel")
+    private ServiceDelDiv ServiceDel;
+    @JsonProperty("SinseiTorisage")
+    private SinseiTorisageDiv SinseiTorisage;
     @JsonProperty("ShujiiAndShujiiIryoKikan")
     private ShujiiAndShujiiIryoKikanDiv ShujiiAndShujiiIryoKikan;
-    @JsonProperty("HomonSaki")
-    private HomonSakiDiv HomonSaki;
     @JsonProperty("ChosainAndChosainInput")
     private ChosainAndChosainInputDiv ChosainAndChosainInput;
+    @JsonProperty("HomonSaki")
+    private HomonSakiDiv HomonSaki;
     @JsonProperty("ShisetsuJoho")
     private ShisetsuJohoDiv ShisetsuJoho;
     @JsonProperty("chkNinteiTsuchishoDoi")
     private CheckBoxList chkNinteiTsuchishoDoi;
     @JsonProperty("chkJohoTeikyoDoi")
     private CheckBoxList chkJohoTeikyoDoi;
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
     @JsonProperty("ccdKaigoNinteiShinseiKihon")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdNinteiInput")
@@ -60,8 +69,6 @@ public class tplShinseijohoDiv extends TabPanel {
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdShinseiTodokedesha")
     private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -69,6 +76,42 @@ public class tplShinseijohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getServiceDel
+     * @return ServiceDel
+     */
+    @JsonProperty("ServiceDel")
+    public ServiceDelDiv getServiceDel() {
+        return ServiceDel;
+    }
+
+    /*
+     * setServiceDel
+     * @param ServiceDel ServiceDel
+     */
+    @JsonProperty("ServiceDel")
+    public void setServiceDel(ServiceDelDiv ServiceDel) {
+        this.ServiceDel = ServiceDel;
+    }
+
+    /*
+     * getSinseiTorisage
+     * @return SinseiTorisage
+     */
+    @JsonProperty("SinseiTorisage")
+    public SinseiTorisageDiv getSinseiTorisage() {
+        return SinseiTorisage;
+    }
+
+    /*
+     * setSinseiTorisage
+     * @param SinseiTorisage SinseiTorisage
+     */
+    @JsonProperty("SinseiTorisage")
+    public void setSinseiTorisage(SinseiTorisageDiv SinseiTorisage) {
+        this.SinseiTorisage = SinseiTorisage;
+    }
+
     /*
      * getShujiiAndShujiiIryoKikan
      * @return ShujiiAndShujiiIryoKikan
@@ -88,24 +131,6 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getHomonSaki
-     * @return HomonSaki
-     */
-    @JsonProperty("HomonSaki")
-    public HomonSakiDiv getHomonSaki() {
-        return HomonSaki;
-    }
-
-    /*
-     * setHomonSaki
-     * @param HomonSaki HomonSaki
-     */
-    @JsonProperty("HomonSaki")
-    public void setHomonSaki(HomonSakiDiv HomonSaki) {
-        this.HomonSaki = HomonSaki;
-    }
-
-    /*
      * getChosainAndChosainInput
      * @return ChosainAndChosainInput
      */
@@ -121,6 +146,24 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ChosainAndChosainInput")
     public void setChosainAndChosainInput(ChosainAndChosainInputDiv ChosainAndChosainInput) {
         this.ChosainAndChosainInput = ChosainAndChosainInput;
+    }
+
+    /*
+     * getHomonSaki
+     * @return HomonSaki
+     */
+    @JsonProperty("HomonSaki")
+    public HomonSakiDiv getHomonSaki() {
+        return HomonSaki;
+    }
+
+    /*
+     * setHomonSaki
+     * @param HomonSaki HomonSaki
+     */
+    @JsonProperty("HomonSaki")
+    public void setHomonSaki(HomonSakiDiv HomonSaki) {
+        this.HomonSaki = HomonSaki;
     }
 
     /*
@@ -178,21 +221,21 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdKaigoNinteiShinseiKihon
-     * @return ccdKaigoNinteiShinseiKihon
-     */
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return ccdKaigoNinteiShinseiKihon;
-    }
-
-    /*
      * getccdZenkaiNinteiKekkaJoho
      * @return ccdZenkaiNinteiKekkaJoho
      */
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
         return ccdZenkaiNinteiKekkaJoho;
+    }
+
+    /*
+     * getccdKaigoNinteiShinseiKihon
+     * @return ccdKaigoNinteiShinseiKihon
+     */
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return ccdKaigoNinteiShinseiKihon;
     }
 
     /*
@@ -226,8 +269,63 @@ public class tplShinseijohoDiv extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public ButtonDialog getBtnServiceDelTeikeibunGuide() {
+        return this.getServiceDel().getBtnServiceDelTeikeibunGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnServiceDelTeikeibunGuide(ButtonDialog btnServiceDelTeikeibunGuide) {
+        this.getServiceDel().setBtnServiceDelTeikeibunGuide(btnServiceDelTeikeibunGuide);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtServiceDeleteRiyu() {
+        return this.getServiceDel().getTxtServiceDeleteRiyu();
+    }
+
+    @JsonIgnore
+    public void  setTxtServiceDeleteRiyu(TextBoxMultiLine txtServiceDeleteRiyu) {
+        this.getServiceDel().setTxtServiceDeleteRiyu(txtServiceDeleteRiyu);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlTorisageJiyu() {
+        return this.getSinseiTorisage().getDdlTorisageJiyu();
+    }
+
+    @JsonIgnore
+    public void  setDdlTorisageJiyu(DropDownList ddlTorisageJiyu) {
+        this.getSinseiTorisage().setDdlTorisageJiyu(ddlTorisageJiyu);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtTorisageDate() {
+        return this.getSinseiTorisage().getTxtTorisageDate();
+    }
+
+    @JsonIgnore
+    public void  setTxtTorisageDate(TextBoxDate txtTorisageDate) {
+        this.getSinseiTorisage().setTxtTorisageDate(txtTorisageDate);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTorisageJiyu() {
+        return this.getSinseiTorisage().getTxtTorisageJiyu();
+    }
+
+    @JsonIgnore
+    public void  setTxtTorisageJiyu(TextBox txtTorisageJiyu) {
+        this.getSinseiTorisage().setTxtTorisageJiyu(txtTorisageJiyu);
+    }
+
+    @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getShujiiAndShujiiIryoKikan().getCcdShujiiIryokikanAndShujiiInput();
+    }
+
+    @JsonIgnore
+    public IChosaItakusakiAndChosainInputDiv getCcdChodsItakusakiAndChosainInput() {
+        return this.getChosainAndChosainInput().getCcdChodsItakusakiAndChosainInput();
     }
 
     @JsonIgnore
@@ -268,11 +366,6 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.getHomonSaki().setTxtTelNo(txtTelNo);
-    }
-
-    @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdChodsItakusakiAndChosainInput() {
-        return this.getChosainAndChosainInput().getCcdChodsItakusakiAndChosainInput();
     }
 
     @JsonIgnore

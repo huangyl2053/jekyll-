@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShi
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -485,4 +486,79 @@ public class NinteiShinseiTorokuResult {
     public int get延期通知発行回数() {
         return entity.get延期通知発行回数();
     }
+
+    /**
+     * 被保険者氏名カナを取得します。
+     *
+     * @return 被保険者氏名カナ
+     */
+    public AtenaKanaMeisho get被保険者氏名カナ() {
+        return entity.get被保険者氏名カナ();
+    }
+
+    /**
+     * 被保険者氏名を取得します。
+     *
+     * @return 被保険者氏名
+     */
+    public AtenaMeisho get被保険者氏名() {
+        return entity.get被保険者氏名();
+    }
+
+    /**
+     * 郵便番号を取得します。
+     *
+     * @return 郵便番号
+     */
+    public YubinNo get郵便番号() {
+        return entity.get郵便番号();
+    }
+
+    /**
+     * 住所を取得します。
+     *
+     * @return 住所
+     */
+    public AtenaJusho get住所() {
+        return entity.get住所();
+    }
+
+    /**
+     * 電話番号を取得します。
+     *
+     * @return 電話番号
+     */
+    public TelNo get電話番号() {
+        return entity.get電話番号();
+    }
+
+    /**
+     * 年齢を取得します。
+     *
+     * @return 年齢
+     */
+    public int get年齢() {
+        return entity.get年齢();
+    }
+
+    /**
+     * 生年月日を取得します。
+     *
+     * @return 生年月日
+     */
+    public FlexibleDate get生年月日() {
+        return entity.get生年月日();
+    }
+
+    /**
+     * 性別を取得します。
+     *
+     * @return 性別
+     */
+    public Code get性別() {
+        return entity.get性別();
+    }
+    
 }
+
+

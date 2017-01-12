@@ -250,6 +250,14 @@
          <!--<result column = "ninteiYukoKikanKaishiYMD" property="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>-->
          <!--<result column = "ninteiYukoKikanShuryoYMD" property="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>-->
          <!--<result column = "ninteiYMD" property="認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>-->
+         <result column = "hihokenshaName" property="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+         <result column = "hihokenshaKana" property="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+         <result column = "yubinNo" property="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+         <result column = "jusho" property="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+         <result column = "telNo" property="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+         <result column = "seinengappiYMD" property="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+         <result column = "age" property="年齢"/>
+         <result column = "seibetsu" property="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     
     <select id="getShuseiJohoForLoad" resultMap="resultMap_NinteiShinseiTorokuRelateEntity"
@@ -257,6 +265,14 @@
              fetchSize="500" resultOrdered="true">
     SELECT
         T5101."shinseishoKanriNo"
+        , T5101."hihokenshaKana"
+        , T5101."hihokenshaName"
+        , T5101."yubinNo"
+        , T5101."jusho"
+        , T5101."telNo"
+        , T5101."seinengappiYMD"
+        , T5101."age"
+        , T5101."seibetsu"
         , T5101."shienShinseiKubun"
         , T5101."ninteiShinseiYMD"
         , T5101."ninteiShinseiHoreiKubunCode"

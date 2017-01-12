@@ -30,6 +30,8 @@ public class AtenaInfoTorokuDiv extends Panel {
     private TextBox Nenrei;
     @JsonProperty("Seibetsu")
     private TextBox Seibetsu;
+    @JsonProperty("txtKanaMeisho")
+    private TextBoxAtenaKanaMeisho txtKanaMeisho;
     @JsonProperty("YubinNo")
     private TextBoxYubinNo YubinNo;
     @JsonProperty("Jusho")
@@ -113,6 +115,24 @@ public class AtenaInfoTorokuDiv extends Panel {
     @JsonProperty("Seibetsu")
     public void setSeibetsu(TextBox Seibetsu) {
         this.Seibetsu = Seibetsu;
+    }
+
+    /*
+     * gettxtKanaMeisho
+     * @return txtKanaMeisho
+     */
+    @JsonProperty("txtKanaMeisho")
+    public TextBoxAtenaKanaMeisho getTxtKanaMeisho() {
+        return txtKanaMeisho;
+    }
+
+    /*
+     * settxtKanaMeisho
+     * @param txtKanaMeisho txtKanaMeisho
+     */
+    @JsonProperty("txtKanaMeisho")
+    public void setTxtKanaMeisho(TextBoxAtenaKanaMeisho txtKanaMeisho) {
+        this.txtKanaMeisho = txtKanaMeisho;
     }
 
     /*

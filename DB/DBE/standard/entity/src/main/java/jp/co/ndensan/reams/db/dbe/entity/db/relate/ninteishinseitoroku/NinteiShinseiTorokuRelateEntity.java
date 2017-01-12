@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -98,4 +99,12 @@ public class NinteiShinseiTorokuRelateEntity {
     private int 延期通知発行回数;
     private FlexibleDate  延期見込期間開始年月日;
     private FlexibleDate  延期見込期間終了年月日;
+    private AtenaMeisho 被保険者氏名;
+    private AtenaKanaMeisho 被保険者氏名カナ;
+    private YubinNo 郵便番号;
+    private AtenaJusho 住所;
+    private TelNo 電話番号;
+    private FlexibleDate 生年月日;
+    private int 年齢;
+    private Code 性別;
 }
