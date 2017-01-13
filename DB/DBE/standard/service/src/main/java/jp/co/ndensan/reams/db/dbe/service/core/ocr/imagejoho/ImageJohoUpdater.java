@@ -119,7 +119,7 @@ public final class ImageJohoUpdater {
     private static void _deleteBackupFileIfExistsIn(java.io.File tmpDirectory, final OcrImageClassification matcher,
             ReadOnlySharedFileEntryDescriptor ro_sfd) {
         for (String fileName : tmpDirectory.list()) {
-            if (matcher.matchesBackupFileName(fileName)) {
+            if (matcher.fileNameMatcher(fileName).find()) {
                 SharedFile.deleteFileInEntry(ro_sfd, fileName);
             }
         }

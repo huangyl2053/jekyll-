@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * OCRで取り込むイメージの分類です。
@@ -15,32 +15,32 @@ public enum OcrImageClassification {
 
     調査票_概況調査 {
                 @Override
-                boolean matchesBackupFileName(CharSequence fileName) {
-                    return fileName.toString().contains(new RString("C0007_BAK"));
+                Matcher fileNameMatcher(CharSequence fileName) {
+                    return Pattern.compile("C0.+\\.(png|PNG)").matcher(fileName);
                 }
             },
     調査票_特記事項 {
                 @Override
-                boolean matchesBackupFileName(CharSequence fileName) {
-                    return Pattern.compile("C(3|4).+_BAK\\.(png|PNG)").matcher(fileName).find();
+                Matcher fileNameMatcher(CharSequence fileName) {
+                    return Pattern.compile("C(3|4).+\\.(png|PNG)").matcher(fileName);
                 }
             },
     意見書_規定外_規定外ID {
                 @Override
-                boolean matchesBackupFileName(CharSequence fileName) {
-                    return Pattern.compile("E.+_BAK\\.(png|PNG)").matcher(fileName).find();
+                Matcher fileNameMatcher(CharSequence fileName) {
+                    return Pattern.compile("E.+\\.(png|PNG)").matcher(fileName);
                 }
             },
     意見書_OCR {
                 @Override
-                boolean matchesBackupFileName(CharSequence fileName) {
-                    return Pattern.compile("D.+_BAK\\.(png|PNG)").matcher(fileName).find();
+                Matcher fileNameMatcher(CharSequence fileName) {
+                    return Pattern.compile("D.+\\.(png|PNG)").matcher(fileName);
                 }
             },
     その他資料 {
                 @Override
-                boolean matchesBackupFileName(CharSequence fileName) {
-                    return Pattern.compile("F.+_BAK\\.(png|PNG)").matcher(fileName).find();
+                Matcher fileNameMatcher(CharSequence fileName) {
+                    return Pattern.compile("F.+\\.(png|PNG)").matcher(fileName);
                 }
             };
 
@@ -48,7 +48,5 @@ public enum OcrImageClassification {
      * @param fileName ファイルパス
      * @return 指定のファイルパスがバックアップファイルの物であるとき、{@code true}
      */
-    boolean matchesBackupFileName(CharSequence fileName) {
-        return false;
-    }
+    abstract Matcher fileNameMatcher(CharSequence fileName);
 }
