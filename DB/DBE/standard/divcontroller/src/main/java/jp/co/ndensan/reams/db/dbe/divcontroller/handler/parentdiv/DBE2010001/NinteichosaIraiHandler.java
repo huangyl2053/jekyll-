@@ -228,6 +228,7 @@ public class NinteichosaIraiHandler {
 
     private dgNinteiTaskList_Row createNinteiTaskList_Row(CyoSaiRaiBusiness business) {
         dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+        row.setHokenshaCode(business.get保険者コード() == null ? RString.EMPTY : business.get保険者コード());
         row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
         row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
         row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());

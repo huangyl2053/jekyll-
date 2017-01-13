@@ -127,6 +127,15 @@ public class CyoSaiRaiBusiness implements Serializable {
     }
 
     /**
+     * 保険者コードを文字列で返します。
+     *
+     * @return 保険者コード
+     */
+    public RString get保険者コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * 保険者名を返します。
      *
      * @return 保険者名

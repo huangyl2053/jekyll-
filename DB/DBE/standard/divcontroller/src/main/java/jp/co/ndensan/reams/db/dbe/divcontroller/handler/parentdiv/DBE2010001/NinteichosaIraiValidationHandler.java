@@ -48,6 +48,29 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnDataOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
+        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
+        } else {
+            List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
+            for (dgNinteiTaskList_Row row : selected) {
+                if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty()) {
+                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
+                    break;
+                }
+            }
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 「モバイル用データを出力する」ボタンを押下する場合、入力チェックを実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 入力チェック_btnChosainDataOutput() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
@@ -56,6 +79,7 @@ public class NinteichosaIraiValidationHandler {
         } else {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             RString chosaItakusaki = selected.get(0).getKonkaiChosaItakusaki();
+            RString hokenshaCode = selected.get(0).getHokenshaCode();
 
             for (dgNinteiTaskList_Row row : selected) {
                 if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty()) {
@@ -65,6 +89,9 @@ public class NinteichosaIraiValidationHandler {
 
                 if (row.getKonkaiChosaItakusaki() == null || row.getKonkaiChosaItakusaki().isEmpty()) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先未設定));
+                    break;
+                } else if (!hokenshaCode.equals(row.getHokenshaCode())) {
+                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.保険者が同一ではない));
                     break;
                 } else if (!chosaItakusaki.equals(row.getKonkaiChosaItakusaki())) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先が同一ではない));
@@ -227,7 +254,8 @@ public class NinteichosaIraiValidationHandler {
         理由付き完了不可_調査票等出力年月日(DbzErrorMessages.理由付き完了不可, "調査票等出力年月日が未設定"),
         認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
         委託先未設定(DbeErrorMessages.委託先未設定),
-        委託先が同一ではない(DbeErrorMessages.委託先が同一ではない),
+        保険者が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "保険者"),
+        委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先"),
         委託先入力必須(UrErrorMessages.必須, "委託先");
 
         private final Message message;

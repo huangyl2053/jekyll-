@@ -221,7 +221,7 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onBefore_btnChosadataOutput(NinteichosaIraiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChosainDataOutput();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
@@ -246,8 +246,10 @@ public class NinteichosaIrai {
         param.setShinseishoKanriNoList(申請書管理番号リスト);
         param.setHihokenshaNoList(被保険者番号リスト);
         param.setNinteiChosainCode(RString.EMPTY);
-        param.setNinteichosaItakusakiCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems().get(0).getKonkaiChosaItakusakiCode());
-        param.setShichosonCode(requestDiv.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
+        param.setNinteichosaItakusakiCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList()
+                .getSelectedItems().get(0).getKonkaiChosaItakusakiCode());
+        param.setShichosonCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList()
+                .getSelectedItems().get(0).getHokenshaCode());
 
         FlowParameters fp = FlowParameters.of(new RString("key"), "Batch");
         FlowParameterAccessor.merge(fp);

@@ -40,6 +40,7 @@ public class CyoSaiRaiRelateEntity implements Serializable {
     private AtenaJusho jusho;
     private JigyoshaNo nyushoShisetsuCode;
     private Code shoriJotaiKubun;
+    private RString shichosonCode;
     private RString shichosonMeisho;
     private RString shoKisaiHokenshaNo;
     private AtenaMeisho jigyoshaName;
