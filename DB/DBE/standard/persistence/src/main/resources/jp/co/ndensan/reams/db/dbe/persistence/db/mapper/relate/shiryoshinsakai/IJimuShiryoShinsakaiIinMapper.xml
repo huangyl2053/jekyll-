@@ -106,7 +106,8 @@
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="age" column="age" />
-        <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="konkaiIfShikibetsuCode" column="konkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="zenkaiIfShikibetsuCode" column="zenkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiNinteiYukoKikan" column="nijiHanteiNinteiYukoKikan" />
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -255,7 +256,8 @@
         , dbt5101."hihokenshaName"
         , dbt5101."seibetsu"
         , dbt5101."age"
-        , zenkaiJoho."koroshoIfShikibetsuCode"
+        , dbt5101."koroshoIfShikibetsuCode" AS "konkaiIfShikibetsuCode"
+        , zenkaiJoho."koroshoIfShikibetsuCode" AS "zenkaiIfShikibetsuCode"
         , zenkaiJoho."nijiHanteiYokaigoJotaiKubunCode"
         , zenkaiJoho."nijiHanteiNinteiYukoKikan"
         , zenkaiJoho."nijiHanteiNinteiYukoKaishiYMD"
@@ -309,7 +311,8 @@
         , dbt5101."hihokenshaName"
         , dbt5101."seibetsu"
         , dbt5101."age"
-        , zenkaiJoho."koroshoIfShikibetsuCode"
+        , dbt5101."koroshoIfShikibetsuCode" AS "konkaiIfShikibetsuCode"
+        , zenkaiJoho."koroshoIfShikibetsuCode" AS "zenkaiIfShikibetsuCode"
         , zenkaiJoho."nijiHanteiYokaigoJotaiKubunCode"
         , zenkaiJoho."nijiHanteiNinteiYukoKikan"
         , zenkaiJoho."nijiHanteiNinteiYukoKaishiYMD"
@@ -1137,7 +1140,7 @@
         , dbt5911."iryoKikanMeisho"
         , dbt5502."shinsakaiOrder"
         , dbt5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
-        , dbt5101."hihokenshaNo" AS hihokenshaNo        
+        , dbt5101."hihokenshaNo" AS hihokenshaNo
         FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
