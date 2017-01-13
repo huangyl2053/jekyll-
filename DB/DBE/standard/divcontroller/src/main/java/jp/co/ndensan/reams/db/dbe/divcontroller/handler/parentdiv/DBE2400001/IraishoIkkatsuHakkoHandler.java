@@ -37,6 +37,10 @@ public class IraishoIkkatsuHakkoHandler {
     private static final RString SHUTSU_CHECKED = new RString("key2");
     private static final RString SHINSEI_KASAN = new RString("2");
     private static final RString OCR = new RString("1");
+
+    private static final RString SELECTED_NINTEI_CHOSA = new RString("key0");
+    private static final RString SELECTED_SHUJII_IKENSHO = new RString("key1");
+
     private final IraishoIkkatsuHakkoDiv div;
 
     /**
@@ -189,7 +193,15 @@ public class IraishoIkkatsuHakkoHandler {
     public void setTxtKyotsuHizuke() {
         boolean is共通日付 = SHUTSU_CHECKED.equals(div.getRadTeishutsuKigen().getSelectedKey());
         if (is共通日付) {
-            div.getTxtKyotsuHizuke().setValue(RDate.getNowDate());
+            RDate systemDate = RDate.getNowDate();
+            RString 加算日数 = new RString("0");
+            if (SELECTED_NINTEI_CHOSA.equals(div.getRadTaishoSentaku().getSelectedKey())) {
+                加算日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            } else if (SELECTED_SHUJII_IKENSHO.equals(div.getRadTaishoSentaku().getSelectedKey())) {
+                加算日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            }
+            systemDate = systemDate.plusDay(Integer.parseInt(加算日数.toString()));
+            div.getTxtKyotsuHizuke().setValue(systemDate);
         } else {
             div.getTxtKyotsuHizuke().clearValue();
         }
@@ -336,6 +348,8 @@ public class IraishoIkkatsuHakkoHandler {
         if (SHINSEI_KASAN.equals(ninteiShinsei)) {
             div.getRadTeishutsuKigen().setDisabled(true);
         }
+
+        div.getRadTeishutsuKigen().setSelectedKey(COMMON_SELECTED);
         div.getTxtKyotsuHizuke().clearValue();
         div.getTxtKyotsuHizuke().setReadOnly(true);
     }
