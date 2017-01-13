@@ -14,7 +14,6 @@
     </parent>
 
     <modules>
-        <module>DBD/standard</module>
         <module>DBE/standard</module>
         <module>DBZ/standard</module>
         <module>DBX/standard</module>
