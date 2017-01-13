@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoh
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaikekka.ShinsakaiKaisaiKekkaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -200,7 +200,10 @@ public class ShinsakaiKaisaiKekka {
     public ResponseData onClick_btnUpdate(ShinsakaiKaisaiKekkaDiv div) {
         ShinsakaiKaisaiValidationHandler validationHandler = getValidationHandler(div);
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
-        ShinsakaiKaisaiYoteiJoho2 結果情報 = getKekkaJoho(div, 開催番号);
+        ShinsakaiKaisaiYoteiJoho2 結果情報 = null;
+        if (div.getModel().equals(更新モード文言)) {
+            結果情報 = getKekkaJoho(div, 開催番号);
+        }
         ValidationMessageControlPairs validationMessages = validationHandler.validate(結果情報);
         if (!ResponseHolder.isReRequest()) {
             if (validationMessages.iterator().hasNext()) {
@@ -256,7 +259,7 @@ public class ShinsakaiKaisaiKekka {
         shinsakaiKaisaiKekkaJoho = set介護認定審査会開催結果情報(div, kaisaiKekkaJohoBuilder);
         shinsakaiKaisaiYoteiJoho = set介護認定審査会割当委員情報(div, 開催番号, shinsakaiKaisaiYoteiJoho);
         ShinsakaiKaisaiYoteiJoho2Builder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
-        kaisaiYoteiJohoBuilder.set介護認定審査会進捗状況(new Code("3"));
+        kaisaiYoteiJohoBuilder.set介護認定審査会進捗状況(new Code(ShinsakaiShinchokuJokyo.完了.getコード()));
         kaisaiYoteiJohoBuilder.setShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJoho);
         shinsakaiKaisaiYoteiJoho = kaisaiYoteiJohoBuilder.build();
         return shinsakaiKaisaiYoteiJoho.modifiedModel();
