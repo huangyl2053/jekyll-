@@ -64,6 +64,15 @@ public enum OCRID {
     }
 
     /**
+     * 値を返します。
+     *
+     * @return 値
+     */
+    public RString value() {
+        return this.theValue;
+    }
+
+    /**
      * 指定の文字列と同じ値の{@link OCRID}が存在する場合は、その要素を返します。
      * 存在しない場合は{@link OCRID#EMPTY}を返します。
      *

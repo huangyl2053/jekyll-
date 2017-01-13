@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputSonotaProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
@@ -48,15 +49,31 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
                 continue;
             }
             processParameter = new OcrImageReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
-            executeStep(OCRイメージの読み込み_PROCESS);
+            switch (type) {
+                case 意見書:
+                    executeStep(主治医意見書イメージの読み込み);
+                    continue;
+                case その他資料:
+                    executeStep(その他資料の読み込み);
+                default:
+            }
         }
     }
 
-    private static final String OCRイメージの読み込み_PROCESS = "OCRイメージの読み込み_PROCESS";
+    private static final String 主治医意見書イメージの読み込み = "主治医意見書イメージの読み込み";
 
-    @Step(OCRイメージの読み込み_PROCESS)
+    @Step(主治医意見書イメージの読み込み)
     IBatchFlowCommand executeOCRイメージの読み込み() {
         return loopBatch(ImageInputProcess.class)
+                .arguments(processParameter)
+                .define();
+    }
+
+    private static final String その他資料の読み込み = "その他資料の読み込み";
+
+    @Step(その他資料の読み込み)
+    IBatchFlowCommand executeOCRその他イメージの読み込み() {
+        return loopBatch(ImageInputSonotaProcess.class)
                 .arguments(processParameter)
                 .define();
     }

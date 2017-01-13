@@ -341,7 +341,20 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     @Override
     protected void afterExecute() {
         super.afterExecute();
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                .append("/* イメージ取り込み処理開始")
+                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
+                .append(" 被保険者番号：").append(key.get被保険者番号())
+                .append(" 認定申請日：").append(key.get認定申請日())
+                .append(" 処理対象レコード数：").append(this.cache.size())
+                .append("*/")
+                .toString());
         keyBreakProcess(this.key, this.cache);
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                .append("/* 認定調査票取り込み処理終了")
+                .append(" 証記載保険者番号：").append(key.get証記載保険者番号()).append(" 被保険者番号：").append(key.get被保険者番号())
+                .append(" 認定申請日：").append(key.get認定申請日()).append("*/")
+                .toString());
     }
 
     private boolean copyImageFilesToDirectory_ID501(RString targetDirectoryPath, List<OcrChosa> ocrChosas) {

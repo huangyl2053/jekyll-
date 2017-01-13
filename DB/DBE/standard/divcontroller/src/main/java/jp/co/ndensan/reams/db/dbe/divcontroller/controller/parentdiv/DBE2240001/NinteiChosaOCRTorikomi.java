@@ -437,7 +437,7 @@ public class NinteiChosaOCRTorikomi {
                 data.set証記載保険者番号(関連データ.get証記載保険者番号());
                 data.set保険者(関連データ.get保険者());
                 data.set申請区分(関連データ.get申請区分());
-                data.set厚労省IF識別コード(関連データ.get厚労省IF識別コード());
+                data.set厚労省IF識別コード(関連データ.get厚労省IF識別コード().getコード());
                 data.set申請書管理番号(関連データ.get申請書管理番号());
                 data.set認定調査依頼履歴番号(関連データ.get認定調査依頼履歴番号());
                 data.setイメージ共有ファイルID(関連データ.getイメージ共有ファイルID());

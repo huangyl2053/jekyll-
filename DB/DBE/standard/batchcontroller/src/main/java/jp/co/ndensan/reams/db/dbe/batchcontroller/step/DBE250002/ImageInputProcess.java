@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
 import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
- *
+ * 主治医意見書の読み込み処理です。
  */
 //TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
 //TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。

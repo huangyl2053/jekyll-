@@ -31,7 +31,11 @@ public enum Models {
     /**
      * ID778
      */
-    ID778;
+    ID778,
+    /**
+     * ID801
+     */
+    ID801;
 
     private final RString nameAsRString;
 
