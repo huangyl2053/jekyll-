@@ -401,10 +401,18 @@ public class IraishoIkkatsuHakkoBusiness {
         dbT5301Entity.setIkenshoIraiRirekiNo(entity.get最大依頼履歴番号());
         dbT5301Entity.setLogicalDeletedFlag(false);
         RString hakkobi = processParamter.getHakkobi();
+
         if (!RString.isNullOrEmpty(hakkobi)) {
-            dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
-            dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(hakkobi));
+            if (processParamter.isShujiiIkenshoSakuseiIraisho()) {
+                dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
+            }
+            if (processParamter.isIkenshoKinyuu()
+                    || processParamter.isIkenshoKinyuuOCR()
+                    || processParamter.isIkenshoKinyuuDesign()) {
+                dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(hakkobi));
+            }
         }
+
         RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援);
         if (文字列1.equals(主治医意見書作成期限設定方法)) {
             switch (processParamter.getTeishutsuKigen().toString()) {

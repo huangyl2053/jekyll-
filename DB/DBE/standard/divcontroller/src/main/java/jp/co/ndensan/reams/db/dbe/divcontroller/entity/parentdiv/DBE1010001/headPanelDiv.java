@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.KaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -26,8 +24,6 @@ public class headPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdAtenaInfo")
-    private KaigoNinteiAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("AtenaInfoToroku")
     private AtenaInfoTorokuDiv AtenaInfoToroku;
     @JsonProperty("ccdShikakuInfo")
@@ -39,15 +35,6 @@ public class headPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdAtenaInfo
-     * @return ccdAtenaInfo
-     */
-    @JsonProperty("ccdAtenaInfo")
-    public IKaigoNinteiAtenaInfoDiv getCcdAtenaInfo() {
-        return ccdAtenaInfo;
-    }
-
     /*
      * getAtenaInfoToroku
      * @return AtenaInfoToroku

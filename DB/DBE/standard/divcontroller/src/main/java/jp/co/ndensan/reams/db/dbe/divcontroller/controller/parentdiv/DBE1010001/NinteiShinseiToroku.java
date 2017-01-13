@@ -52,7 +52,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
@@ -60,6 +59,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitaku
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -101,6 +102,9 @@ public class NinteiShinseiToroku {
     private static final int ZERO_5 = 5;
     private static final RString ZERO_6 = new RString("000000");
     private static final RString 歳 = new RString("歳");
+    private static final RString 管外 = new RString("管外");
+    private static final RString サービス削除の旨 = new RString("1010");
+    private boolean ninteiTandokuDounyuFlag;
 
     /**
      * コンストラクタです。
@@ -109,6 +113,17 @@ public class NinteiShinseiToroku {
     public NinteiShinseiToroku() {
         this.manager = NinteiShinseiTorokuManager.createInstance();
         this.dbt7050Manager = KaigoHokenshaManager.createInstance();
+        ninteiTandokuDounyuFlag = Boolean.FALSE;
+        ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        if (security.get導入形態コード().equals(new Code("111"))) {
+            ninteiTandokuDounyuFlag = Boolean.TRUE;
+            
+        } else {
+            security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            if (security.get導入形態コード().equals(new Code("211"))) {
+                ninteiTandokuDounyuFlag = Boolean.TRUE;
+            }
+        }
     }
 
     /**
@@ -140,6 +155,7 @@ public class NinteiShinseiToroku {
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
+                getHandler(div).loadPnl(result);
             }
             ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
             getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
@@ -157,12 +173,9 @@ public class NinteiShinseiToroku {
             setIconName(div, 管理番号);
             div.setHdnShinseishoKanriNo(管理番号.value());
 
-            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnKojinMemo().setDisabled(Boolean.TRUE);
-            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnSetaiMemo().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
-            div.getAtenaInfoToroku().setDisplayNone(true);
             setCcdShinseiTodokedesha(div);
             return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
         }
@@ -181,15 +194,13 @@ public class NinteiShinseiToroku {
                 set連絡先(business.get前回申請書管理番号(), div, true);
                 div.setHdnJogaiMode(new RString("入力"));
                 div.setHdnShinseishoKanriNo(RString.EMPTY);
+                getHandler(div).loadPnl(result);
             }
-            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnKojinMemo().setDisabled(Boolean.TRUE);
-            ((KaigoNinteiAtenaInfoDiv) div.getCcdAtenaInfo()).getBtnSetaiMemo().setDisabled(Boolean.TRUE);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToIchiran"), false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setReadOnly(Boolean.TRUE);
-            div.getCcdAtenaInfo().setDisplayNone(true);
             setCcdShinseiTodokedesha(div);
             setMinasiCcd(div);
             if (result == null) {
@@ -204,6 +215,7 @@ public class NinteiShinseiToroku {
                 ((ZenkaiNinteiKekkaJohoDiv) div.getCcdZenkaiNinteiKekkaJoho()).getBtnZenkaiShosai().setDisabled(true);
                 ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnZenkaiFukusha().setDisabled(true);
                 ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnZenkaiFukusha().setDisabled(true);
+                div.getCcdNinteiInput().setDisplayNone(true);
             }
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
@@ -215,18 +227,15 @@ public class NinteiShinseiToroku {
     }
 
     private void setCcdShinseiTodokedesha(NinteiShinseiTorokuDiv div) {
-        ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (security.get導入形態コード().equals(new Code("111"))) {
-            ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnSetaiIchiran().setDisabled(true);
-            ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnAtenaKensaku().setDisabled(true);
-            div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
-        } else {
-            security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-            if (security.get導入形態コード().equals(new Code("211"))) {
-                ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnSetaiIchiran().setDisabled(true);
-                ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnAtenaKensaku().setDisabled(true);
-                div.getBtnTainoJokyo().setDisplayNone(Boolean.TRUE);
-            }
+        if (ninteiTandokuDounyuFlag) {
+            ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnSetaiIchiran().setDisabled(ninteiTandokuDounyuFlag);
+            ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnAtenaKensaku().setDisabled(ninteiTandokuDounyuFlag);
+            div.getCcdShinseiTodokedesha().getRadKannaiKangai().setSelectedValue(管外);
+            div.getCcdShinseiTodokedesha().getRadKannaiKangai().setDisplayNone(ninteiTandokuDounyuFlag);
+            ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(ninteiTandokuDounyuFlag);
+            ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(ninteiTandokuDounyuFlag);
+            ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtJusho().setReadOnly(!ninteiTandokuDounyuFlag);
+            div.getBtnTainoJokyo().setDisplayNone(ninteiTandokuDounyuFlag);
         }
     }
 
@@ -352,6 +361,39 @@ public class NinteiShinseiToroku {
         }
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * ダイアログ用引数を設定します。
+     *
+     * @param div 介護認定申請基本情報の入力用DIV
+     * @return ResponseData
+     */
+    public ResponseData onBeforeOpenDialog_btnServiceDelTeikeibunGuide(NinteiShinseiTorokuDiv div) {
+        ResponseData<NinteiShinseiTorokuDiv> response = new ResponseData<>();
+        div.setHdnSubGyomuCd(ControlDataHolder.getGyomuCD().value());
+        div.setHdnGroupCode(サービス削除の旨);
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * ダイアログ上で選択したサービス削除の旨定型文情報を取得します。
+     *
+     * @param div 介護認定申請基本情報の入力用DIV
+     * @return ResponseData
+     */
+    public ResponseData onOkClose_btnServiceDelTeikeibunGuide(NinteiShinseiTorokuDiv div) {
+        ResponseData<NinteiShinseiTorokuDiv> response = new ResponseData<>();
+
+        RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtServiceDeleteRiyu().getValue() == null
+                ? RString.EMPTY : div.getTxtServiceDeleteRiyu().getValue());
+        serviceSakujo.append(div.getHdnTeikeibun());
+        div.getTxtServiceDeleteRiyu().setValue(serviceSakujo.toRString());
+
+        response.data = div;
+        return response;
+    }
+    
 
     /**
      * 一覧画面に遷移する。
@@ -608,8 +650,8 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set認定申請年月日(rDateTOFlexDate(kihonJohoInputDiv
                 .getTxtShinseiYMD().getValue()));
         shinseiJohoBuilder.set被保険者区分コード(kihonJohoInputDiv.getDdlHihokenshaKubun().getSelectedKey());
-        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get年齢())) {
-            shinseiJohoBuilder.set年齢(Integer.parseInt(div.getCcdAtenaInfo().get年齢().replace(歳, RString.EMPTY).toString()));
+        if (div.getAtenaInfoToroku().getNenrei() != null && !div.getAtenaInfoToroku().getNenrei().getValue().isEmpty()) {
+            shinseiJohoBuilder.set年齢(Integer.parseInt(div.getAtenaInfoToroku().getNenrei().getValue().replace(歳, RString.EMPTY).toString()));
         }
         shinseiJohoBuilder.set認定申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().getValue());

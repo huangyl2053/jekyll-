@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SoNoTaKikanGuideHandler {
 
-    private static final RString 含まない = new RString("key0");
+    private static final RString 廃止_含まない = new RString("key0");
     private final SonotaKikanGuideDiv div;
 
     /**
@@ -69,7 +69,7 @@ public class SoNoTaKikanGuideHandler {
         }
 
         div.getTxtSonotaKikanName().clearValue();
-        div.getRadHaisi().setSelectedKey(含まない);
+        div.getRadHaisi().setSelectedKey(廃止_含まない);
         set調査委託先区();
         div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));

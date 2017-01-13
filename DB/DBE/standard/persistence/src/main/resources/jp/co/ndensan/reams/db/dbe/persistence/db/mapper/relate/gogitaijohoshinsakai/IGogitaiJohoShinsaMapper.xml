@@ -38,7 +38,7 @@
         WHERE
         DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{基準日}
         AND
-        DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[<=]]> #{基準日}
+        #{基準日} <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
         ORDER BY
         "gogitaiNo"
     </select>

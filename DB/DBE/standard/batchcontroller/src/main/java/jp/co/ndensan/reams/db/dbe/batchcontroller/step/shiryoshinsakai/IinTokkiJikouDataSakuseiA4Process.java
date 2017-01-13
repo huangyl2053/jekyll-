@@ -80,7 +80,7 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
+        batchWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517231.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiJikoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new TokkiJikoReportLayoutBreaker()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);

@@ -148,6 +148,8 @@ public class ShinsakaiIinJohoToroku {
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報, 介護認定審査会委員情報);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報);
         div.getDgShinsaInJohoIchiran().setDataSource(createHandOf(div).setShinsaInJohoIchiranDiv(審査会委員一覧情報));
+        div.getDgShinsaInJohoIchiran().getGridSetting().setLimitRowCount(div.getTxtDispMax().getValue().intValue());
+        div.getDgShinsaInJohoIchiran().getGridSetting().setSelectedRowCount(manager.get審査会委員一覧件数(parameter));
         return ResponseData.of(div).respond();
     }
 
@@ -650,9 +652,9 @@ public class ShinsakaiIinJohoToroku {
 
         getValidationHandler(div).validateForUpdate();
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             審査会委員情報更新();
             div.getCcdKanryoMessage().setSuccessMessage(

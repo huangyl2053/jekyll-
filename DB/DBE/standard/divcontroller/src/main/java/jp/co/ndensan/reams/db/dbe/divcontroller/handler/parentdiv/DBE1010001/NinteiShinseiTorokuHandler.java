@@ -10,23 +10,20 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
-import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun99A;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -70,11 +67,18 @@ public class NinteiShinseiTorokuHandler {
      */
     public void loadUpdate(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号,
             RString 被保険者番号, RString 介護導入形態) {
-        div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
-        div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(管理番号, ShikibetsuCode.EMPTY);
-        div.getCcdAtenaInfo().setShoriType(new RString("2"));
-        div.getCcdAtenaInfo().initialize();
+//        div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
+//        div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(管理番号, ShikibetsuCode.EMPTY);
+//        div.getCcdAtenaInfo().setShoriType(new RString("2"));
+//        div.getCcdAtenaInfo().initialize();
         div.getCcdKaigoNinteiShinseiKihon().initialize();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.新規申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
+        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.更新申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
+        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.区分変更申請.getコード(), NinteiShinseiShinseijiKubunCode.区分変更申請.get名称()));
+        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.職権.getコード(), NinteiShinseiShinseijiKubunCode.職権.get名称()));
+        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.転入申請.getコード(), NinteiShinseiShinseijiKubunCode.転入申請.get名称()));
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().setDataSource(dataSource);
         div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
         div.getCcdShinseiSonotaJohoInput().initialize();
         
@@ -83,6 +87,20 @@ public class NinteiShinseiTorokuHandler {
                 div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
             }
             setCommonDiv(result, 管理番号);
+            if (result.get被保険者氏名カナ() != null) {
+                div.setHdnShimeiKana(result.get被保険者氏名カナ().value());
+                div.getAtenaInfoToroku().getTxtKanaMeisho().setDomain(result.get被保険者氏名カナ());
+            }
+            div.getAtenaInfoToroku().getMeisho().setDomain(result.get被保険者氏名());
+            if (result.get生年月日() != null && !result.get生年月日().isEmpty()) {
+                div.getAtenaInfoToroku().getSeinengabi().setValue(result.get生年月日().toRDate());
+            }
+            if (result.get性別() != null && !result.get性別().isEmpty()) {
+                div.getAtenaInfoToroku().getSeibetsu().setValue(Seibetsu.toValue(result.get性別().getColumnValue()).get名称());
+            }
+            div.getAtenaInfoToroku().getYubinNo().setValue(result.get郵便番号());
+            div.getAtenaInfoToroku().getJusho().setDomain(result.get住所());
+            div.getAtenaInfoToroku().getTelNo().setDomain(result.get電話番号());
         } else {
             div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY,
                 管理番号, SubGyomuCode.DBE認定支援,
@@ -117,6 +135,7 @@ public class NinteiShinseiTorokuHandler {
 
         if (business.getカナ氏名() != null) {
             div.setHdnShimeiKana(business.getカナ氏名().value());
+            div.getAtenaInfoToroku().getTxtKanaMeisho().setDomain(business.getカナ氏名());
         }
         div.getAtenaInfoToroku().getMeisho().setDomain(business.get氏名());
         if (business.get生年月日() != null) {
@@ -134,12 +153,6 @@ public class NinteiShinseiTorokuHandler {
         div.getAtenaInfoToroku().getTelNo().setDomain(business.get電話番号());
         div.setHdnShishoCode(business.get支所コード());
 
-//        if (business.get識別コード() != null) {
-//            div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
-//            div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, business.get識別コード());
-//            div.getCcdAtenaInfo().setShoriType(new RString("2"));
-//            div.getCcdAtenaInfo().initialize();
-//        }
         if (市町村コード.isEmpty()) {
             div.getCcdShikakuInfo().initialize(ZERO_6, business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         } else {
@@ -172,7 +185,31 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdShinseiSonotaJohoInput().initialize();
         div.getCcdShisetsuJoho().initialize();
     }
-
+    
+    /**
+     * サービス削除と申請取下の初期化です
+     *  
+     * @param result 申請情報
+     */
+    public void loadPnl(NinteiShinseiTorokuResult result) {
+        div.getTxtServiceDeleteRiyu().setValue(result.get申請サービス削除の理由());
+        
+        if (result.get取下年月日() != null && !result.get取下年月日().isEmpty()) {
+            div.getTxtTorisageDate().setValue(new RDate(result.get取下年月日().toString()));
+        }
+        div.getTxtTorisageJiyu().setValue(result.get取下理由());
+        try {
+            List<KeyValueDataSource> dataSource = new ArrayList<>();
+            for (TorisageKubunCode torisageKubunCode : TorisageKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(torisageKubunCode.getコード(), torisageKubunCode.get名称()));
+        }
+            div.getDdlTorisageJiyu().setDataSource(dataSource);
+            div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
+        } catch (IllegalArgumentException e) {
+            div.getDdlTorisageJiyu().setSelectedKey(TorisageKubunCode.認定申請有効.getコード());
+        }
+    }
+    
     /**
      * 届出情報の氏名・カナ氏名・続柄・郵便番号・住所・電話番号を設定します
      *
@@ -180,19 +217,22 @@ public class NinteiShinseiTorokuHandler {
      */
     public NinteiShinseiTodokedeshaDataPassModel set届出情報() {
         NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
-        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get被保険者氏名カナ())) {
-            datapass.setカナ氏名(div.getCcdAtenaInfo().get被保険者氏名カナ());
+        
+        if (div.getAtenaInfoToroku().getTxtKanaMeisho() != null && div.getAtenaInfoToroku().getTxtKanaMeisho().getDomain() != null) {
+            datapass.setカナ氏名(div.getAtenaInfoToroku().getTxtKanaMeisho().getDomain().getColumnValue());
         }
-        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get被保険者氏名())) {
-            datapass.set氏名(div.getCcdAtenaInfo().get被保険者氏名());
+        if (div.getAtenaInfoToroku().getMeisho() != null && div.getAtenaInfoToroku().getMeisho().getDomain() != null) {
+            datapass.set氏名(div.getAtenaInfoToroku().getMeisho().getDomain().getColumnValue());
         }
-        if (div.getCcdAtenaInfo().get郵便番号() != null && !div.getCcdAtenaInfo().get郵便番号().isEmpty()) {
-            datapass.set郵便番号(div.getCcdAtenaInfo().get郵便番号().value());
+        if (div.getAtenaInfoToroku().getYubinNo() != null && !div.getAtenaInfoToroku().getYubinNo().getValue().isEmpty()) {
+            datapass.set郵便番号(div.getAtenaInfoToroku().getYubinNo().getValue().getYubinNo());
         }
-        if (!RString.isNullOrEmpty(div.getCcdAtenaInfo().get電話番号())) {
-            datapass.set電話番号(div.getCcdAtenaInfo().get電話番号());
+        if (div.getAtenaInfoToroku().getTelNo() != null && div.getAtenaInfoToroku().getTelNo().getDomain() != null) {
+            datapass.set電話番号(div.getAtenaInfoToroku().getTelNo().getDomain().getColumnValue());
         }
-        datapass.set住所(div.getCcdAtenaInfo().get住所());
+        if (div.getAtenaInfoToroku().getJusho() != null && div.getAtenaInfoToroku().getJusho().getDomain() != null) {
+            datapass.set住所(div.getAtenaInfoToroku().getJusho().getDomain().getColumnValue());
+        }
         datapass.set続柄(new RString("本人"));
         return datapass;
     }

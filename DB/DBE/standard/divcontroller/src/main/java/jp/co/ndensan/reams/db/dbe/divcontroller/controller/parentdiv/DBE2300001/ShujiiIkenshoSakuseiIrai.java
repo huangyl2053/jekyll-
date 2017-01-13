@@ -170,6 +170,7 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return 
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onOkClose_printDialog(ShujiiIkenshoSakuseiIraiDiv div) {
+        onClick_btnSearch(div);
         return ResponseData.of(div).respond();
     }
 

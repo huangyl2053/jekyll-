@@ -92,7 +92,7 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiS
 
     @Override
     protected void createWriter() {
-        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517005.getReportId().value())
+        batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517205.getReportId().value())
                 .addBreak(new BreakerCatalog<ShujiiikenshoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .create();
         reportSourceWriterA3 = new ReportSourceWriter<>(batchWriteA3);

@@ -67,7 +67,7 @@ public class IinShinsakaiIinJohoDataSakuseiA4Process extends BatchProcessBase<Sh
 
     @Override
     protected void createWriter() {
-        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517011.getReportId().value()).create();
+        batchWriteA4 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517211.getReportId().value()).create();
         reportSourceWriterA4 = new ReportSourceWriter<>(batchWriteA4);
     }
 

@@ -35,7 +35,7 @@ public class SeikatsuhogoTorokuHandler {
      */
     public SeikatsuhogoTorokuHandler(SeikatsuhogoTorokuDiv div) {
         this.div = div;
-
+        
     }
 
     /**
