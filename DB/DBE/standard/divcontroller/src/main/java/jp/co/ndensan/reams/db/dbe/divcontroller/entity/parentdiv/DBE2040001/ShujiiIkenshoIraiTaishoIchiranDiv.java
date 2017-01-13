@@ -28,7 +28,7 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("ikenshoiraitaishoichiran")
-    private IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
+    private ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
     @JsonProperty("KanryoMsg")
     private KanryoMsgDiv KanryoMsg;
     @JsonProperty("hiddenIuputModel")
