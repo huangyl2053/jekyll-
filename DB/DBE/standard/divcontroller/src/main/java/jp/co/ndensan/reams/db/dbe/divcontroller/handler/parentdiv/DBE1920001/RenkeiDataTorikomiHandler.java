@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -250,9 +251,8 @@ public class RenkeiDataTorikomiHandler {
                         rowData.setHihokubun(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
                         rowData.setShimei(entity.get氏名());
                         rowData.getSeinengappi().setValue(new RDate(entity.get生年月日().toString()));
-                        if (!RString.isNullOrEmpty(entity.get年齢())) {
-                            rowData.getNenrei().setValue(new Decimal(entity.get年齢().toString()));
-                        }
+                        int 年齢 = get年齢(getFlexibleDate(entity.get認定申請日()), getFlexibleDate(entity.get生年月日()));
+                        rowData.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         rowData.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
                         list.add(rowData);
                         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
@@ -289,9 +289,8 @@ public class RenkeiDataTorikomiHandler {
                         rowData.setHihokubun(HihokenshaKubunCode.toValue(csvEntity.get被保険者区分コード()).get名称());
                         rowData.setShimei(csvEntity.get氏名());
                         rowData.getSeinengappi().setValue(new RDate(csvEntity.get生年月日().toString()));
-                        if (!RString.isNullOrEmpty(csvEntity.get年齢())) {
-                            rowData.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
-                        }
+                        int 年齢 = get年齢(getFlexibleDate(csvEntity.get認定申請日()), getFlexibleDate(csvEntity.get生年月日()));
+                        rowData.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         rowData.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(rowData);
                         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
@@ -325,9 +324,8 @@ public class RenkeiDataTorikomiHandler {
                         row.setHihokubun(HihokenshaKubunCode.toValue(csvEntity.get被保険者区分コード()).get名称());
                         row.setShimei(csvEntity.get氏名());
                         row.getSeinengappi().setValue(new RDate(csvEntity.get生年月日().toString()));
-                        if (!RString.isNullOrEmpty(csvEntity.get年齢())) {
-                            row.getNenrei().setValue(new Decimal(csvEntity.get年齢().toString()));
-                        }
+                        int 年齢 = get年齢(getFlexibleDate(csvEntity.get認定申請日()), getFlexibleDate(csvEntity.get生年月日()));
+                        row.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         row.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(row);
                         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
@@ -385,5 +383,31 @@ public class RenkeiDataTorikomiHandler {
             コード = Encode.UTF_8;
         }
         return コード;
+    }
+
+    private int get年齢(FlexibleDate 基準日, FlexibleDate 生年月日) {
+        int 基準日_年 = 基準日.getYearValue();
+        int 基準日_月 = 基準日.getMonthValue();
+        int 基準日_日 = 基準日.getDayValue();
+        int 生年月日_年 = 生年月日.getYearValue();
+        int 生年月日_月 = 生年月日.getMonthValue();
+        int 生年月日_日 = 生年月日.getDayValue();
+        int 年齢 = 基準日_年 - 生年月日_年;
+        if (基準日_月 < 生年月日_月) {
+            年齢 = 年齢 - 1;
+        } else if (基準日_月 == 生年月日_月) {
+            if (基準日_日 < 生年月日_日) {
+                年齢 = 年齢 - 1;
+            }
+        }
+        return 年齢;
+    }
+
+    private FlexibleDate getFlexibleDate(RString value) {
+        FlexibleDate flexibleDate = FlexibleDate.EMPTY;
+        if (!RString.isNullOrEmpty(value)) {
+            flexibleDate = new FlexibleDate(value);
+        }
+        return flexibleDate;
     }
 }

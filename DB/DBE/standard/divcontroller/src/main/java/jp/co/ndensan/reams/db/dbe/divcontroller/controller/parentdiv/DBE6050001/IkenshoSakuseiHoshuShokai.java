@@ -164,17 +164,6 @@ public class IkenshoSakuseiHoshuShokai {
         return ResponseData.of(parameter).respond();
     }
 
-    /**
-     * 一覧グリッドのソートイベント処理メソッドです。
-     *
-     * @param div 画面情報
-     * @return ResponseData&lt;IkenshoSakuseiHoshuShokaiDiv&gt;
-     */
-    public ResponseData<IkenshoSakuseiHoshuShokaiDiv> onSort_dgIkenshoSakuseiHoshu(IkenshoSakuseiHoshuShokaiDiv div) {
-        getHandler(div).resetシーケンス番号();
-        return ResponseData.of(div).respond();
-    }
-
     private IkenshoSakuseiHoshuShokaiHandler getHandler(IkenshoSakuseiHoshuShokaiDiv div) {
         return new IkenshoSakuseiHoshuShokaiHandler(div);
     }

@@ -219,13 +219,19 @@
         AND DbT5105."centerSoshinYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{tsujou},#{ennki})
         AND DbT5101."logicalDeletedFlag" = FALSE
-        AND DbT5105."shinseishoKanriNo" NOT IN(
+        AND NOT EXISTS(
         SELECT
-        DbT5502."shinseishoKanriNo"
+        *
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
         WHERE
-        DbT5502."shinsakaiKaisaiNo" = #{kaisaiNo}
+        (
+        DbT5502."hanteiKekkaCode" = '01'
+        OR DbT5502."hanteiKekkaCode" IS NULL
+        OR DbT5502."hanteiKekkaCode" = ''
+        )
+        AND
+        DbT5105."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
         )
         <if test="isItijiHannteiAto">
             AND DbT5105."maskingKanryoYMD" IS NOT NULL
