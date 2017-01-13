@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1540-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinteiOcrResult {
+public class NinteiOcrRelate {
 
     private final NinteiChosaKekkaTorikomiOcrRelateEntity entity;
 
@@ -25,7 +26,7 @@ public class NinteiOcrResult {
      *
      * @param entity イメージ取込み関連データRelateEntity
      */
-    public NinteiOcrResult(NinteiChosaKekkaTorikomiOcrRelateEntity entity) {
+    public NinteiOcrRelate(NinteiChosaKekkaTorikomiOcrRelateEntity entity) {
         this.entity = entity;
     }
 
@@ -70,8 +71,8 @@ public class NinteiOcrResult {
      *
      * @return 厚労省IF識別コード
      */
-    public RString get厚労省IF識別コード() {
-        return entity.get厚労省IF識別コード();
+    public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
+        return KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード());
     }
 
     /**
@@ -103,6 +104,15 @@ public class NinteiOcrResult {
         } else {
             return RDateTime.MIN;
         }
+    }
+
+    /**
+     * イメージ情報が存在する場合{@code true}、しない場合{@code false}を返します。
+     *
+     * @return イメージ情報が存在する場合{@code true}、しない場合{@code false}.
+     */
+    public boolean hasイメージ情報() {
+        return entity.getイメージ共有ファイルID() != null;
     }
 
     /**

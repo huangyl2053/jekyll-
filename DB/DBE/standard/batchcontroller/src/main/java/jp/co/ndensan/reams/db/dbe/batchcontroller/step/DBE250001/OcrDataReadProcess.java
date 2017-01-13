@@ -3,23 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ocrdataread;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrResult;
+import java.util.Map;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionTheories;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbe.business.core.ocrdataread.OcrDataReadResult;
-import jp.co.ndensan.reams.db.dbe.business.core.ocrdataread.OcrFileReadResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrChosa;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.TokkijikoFileNameConvertionTheory;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.csv.jizenshinsakekka.OcrJohoOcrDataRecordEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoGaikyoChosa09BManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoGaikyoChosa09AManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoGaikyoChosa06AManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteichosakekkatorikomiocr.NinteiOcrFindler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5202NinteichosahyoGaikyoChosa06AEntity;
@@ -36,6 +45,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoChosaItemMana
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoServiceJokyoFlagManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoServiceJokyoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoShisetsuRiyoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosakekkatorikomiocr.NinteiOcrFindler;
+import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
+import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.OcrImageClassification;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
@@ -44,19 +57,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * OCR情報受入＿バッチプロセスクラスです。
@@ -65,10 +73,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
  */
 public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
-    private OcrDataReadProcessParameter processParameter;
-    private long 読取中行番号;
-    private OcrDataReadResult ocrデータ解析結果 = new OcrDataReadResult();
-    private static OcrFileReadResult ca3解析結果 = new OcrFileReadResult();
     private static final RString 厚労省IF識別コード_06A = new RString("06A");
     private static final RString 厚労省IF識別コード_09A = new RString("09A");
     private static final RString 厚労省IF識別コード_09B = new RString("09B");
@@ -194,14 +198,25 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     @BatchWriter
     private BatchPermanentTableWriter<DbT5115ImageEntity> writerImage;
 
+    /**
+     * このバッチプロセスのパラメータです。
+     */
+    private OcrDataReadProcessParameter processParameter;
+    private List<OcrChosa> cache;
+    private ShinseiKey key;
+    private Catalog catalog;
+
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(processParameter.getファイルPath(), Encode.SJIS);
+        return new BatchSimpleReader(processParameter.getファイルPath().findCsvFilePath(), Encode.SJIS);
     }
 
     @Override
-    protected void initialize() {
-        ca3解析結果 = new OcrFileReadResult();
+    protected void beforeExecute() {
+        super.beforeExecute();
+        this.cache = new ArrayList<>();
+        this.key = ShinseiKey.EMPTY;
+        this.catalog = new Catalog(this.processParameter.getファイルPath().findCa3FilePath());
     }
 
     @Override
@@ -221,186 +236,321 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void process(RString line) {
-
-        if (!processParameter.getファイルPath().contains(".png")) {
-            ocrデータ解析結果.clear();
-            読取中行番号++;
-            ocrデータ解析結果.parse(line, 読取中行番号);
-
-            ocrデータ解析結果 = this.チェック処理(ocrデータ解析結果);
-            if (processParameter.getファイルPath().contains(".ca3")) {
-                ca3解析結果.clear();
-                ca3解析結果.parse(line, 読取中行番号);
-                processParameter.setファイルList(ca3解析結果.getイメージファイル());
+        final OcrChosa ocrChosa = OcrChosa.parsed(line);
+        if (hasBreak(this.key, ocrChosa.getKey())) {
+            if (!Objects.equals(ShinseiKey.EMPTY, key)) {
+                _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                        .append("/* 認定調査票取り込み処理開始")
+                        .append(" 証記載保険者番号：").append(key.get証記載保険者番号()).append(" 被保険者番号：").append(key.get被保険者番号())
+                        .append(" 認定申請日：").append(key.get認定申請日()).append(" 処理対象レコード数：").append(this.cache.size()).append("*/")
+                        .toString());
+                /* ブレイク処理 */
+                keyBreakProcess(this.key, this.cache);
+                _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                        .append("/* 認定調査票取り込み処理終了")
+                        .append(" 証記載保険者番号：").append(key.get証記載保険者番号()).append(" 被保険者番号：").append(key.get被保険者番号())
+                        .append(" 認定申請日：").append(key.get認定申請日()).append("*/")
+                        .toString());
             }
-
-            NinteiOcrMapperParamter paramter = NinteiOcrMapperParamter.createParamter(ocrデータ解析結果.get保険者番号(),
-                    ocrデータ解析結果.get被保険者番号(),
-                    ocrデータ解析結果.get申請日());
-
-            List<NinteiOcrResult> 関連データList = NinteiOcrFindler.createInstance().get関連データ(paramter).records();
-            for (int i = 0; i < 関連データList.size(); i++) {
-                NinteiOcrResult result = 関連データList.get(i);
-
-                if (result.getイメージ共有ファイルID().compareTo(RDateTime.MIN) == 0) {
-
-                    if (ocrデータ解析結果.get調査区分().equals(概況調査区分)) {
-                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
-
-                            dbT5202Entity09BInsert(ocrデータ解析結果, result);
-                            dbT5207EntityInsert(ocrデータ解析結果, result);
-                            dbT5208EntityInsert(ocrデータ解析結果, result);
-                            dbT5210EntityInsert(ocrデータ解析結果, result);
-
-                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
-                            dbT5202Entity09AInsert(ocrデータ解析結果, result);
-                            dbT5207EntityInsert(ocrデータ解析結果, result);
-                            dbT5208EntityInsert(ocrデータ解析結果, result);
-                            dbT5210EntityInsert(ocrデータ解析結果, result);
-
-                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
-                            dbT5202Entity06AInsert(ocrデータ解析結果, result);
-                            dbT5207EntityInsert(ocrデータ解析結果, result);
-                            dbT5208EntityInsert(ocrデータ解析結果, result);
-                            dbT5210EntityInsert(ocrデータ解析結果, result);
-
-                        }
-                    } else if (ocrデータ解析結果.get調査区分().equals(基本調査区分)) {
-                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
-
-                            DbT5203NinteichosahyoKihonChosa09BEntity entityKihon = new DbT5203NinteichosahyoKihonChosa09BEntity();
-
-                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-                            entityKihon.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード_09B));
-                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
-                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
-                            writerKihon09b.insert(entityKihon);
-
-                            dbT5211EntityInsert(ocrデータ解析結果, result);
-
-                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
-
-                            DbT5203NinteichosahyoKihonChosa09AEntity entityKihon = new DbT5203NinteichosahyoKihonChosa09AEntity();
-                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-                            entityKihon.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード_09A));
-                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
-                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
-                            writerKihon09a.insert(entityKihon);
-
-                            dbT5211EntityInsert(ocrデータ解析結果, result);
-
-                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
-
-                            DbT5203NinteichosahyoKihonChosa06AEntity entityKihon = new DbT5203NinteichosahyoKihonChosa06AEntity();
-
-                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-                            entityKihon.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード_06A));
-                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
-                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));;
-                            writerKihon06a.insert(entityKihon);
-
-                            dbT5211EntityInsert(ocrデータ解析結果, result);
-
-                        }
-                    }
-                } else {
-                    if (ocrデータ解析結果.get調査区分().equals(概況調査区分)) {
-                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
-
-                            dbT5202Entity09BUpdate(ocrデータ解析結果, result);
-                            dbT5207EntityUpdate(ocrデータ解析結果, result);
-                            dbT5208EntityUpdate(ocrデータ解析結果, result);
-                            dbT5210EntityUpdate(ocrデータ解析結果, result);
-                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
-
-                            dbT5202Entity09AUpdate(ocrデータ解析結果, result);
-                            dbT5207EntityUpdate(ocrデータ解析結果, result);
-                            dbT5208EntityUpdate(ocrデータ解析結果, result);
-                            dbT5210EntityUpdate(ocrデータ解析結果, result);
-                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
-
-                            dbT5202Entity06AUpdate(ocrデータ解析結果, result);
-                            dbT5207EntityUpdate(ocrデータ解析結果, result);
-                            dbT5208EntityUpdate(ocrデータ解析結果, result);
-                            dbT5210EntityUpdate(ocrデータ解析結果, result);
-                        }
-                    } else if (ocrデータ解析結果.get調査区分().equals(基本調査区分)) {
-                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
-                            managerKihon09b = new NinteichosahyoKihonChosa09BManager();
-                            DbT5203NinteichosahyoKihonChosa09BEntity entityKihon = managerKihon09b.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
-                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
-                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
-                            writerKihon09b.update(entityKihon);
-                            dbT5211EntityUpdate(ocrデータ解析結果, result);
-
-                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
-                            managerKihon09a = new NinteichosahyoKihonChosa09AManager();
-                            DbT5203NinteichosahyoKihonChosa09AEntity entityKihon = managerKihon09a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
-                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
-                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
-                            writerKihon09a.update(entityKihon);
-                            dbT5211EntityUpdate(ocrデータ解析結果, result);
-                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
-                            managerKihon06a = new NinteichosahyoKihonChosa06AManager();
-                            DbT5203NinteichosahyoKihonChosa06AEntity entityKihon = managerKihon06a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
-                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
-                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
-                            writerKihon06a.update(entityKihon);
-                            dbT5211EntityUpdate(ocrデータ解析結果, result);
-                        }
-                    }
-                }
-                List<RString> imageList = new ArrayList<>();
-
-                if (result.getイメージ共有ファイルID().compareTo(RDateTime.MIN) == 0) {
-                    SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName
-                            .fromString(ocrデータ解析結果.get保険者番号().concat(ocrデータ解析結果.get被保険者番号())));
-                    sfd = SharedFile.defineSharedFile(sfd);
-                    CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-                    SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, new FilesystemPath(processParameter.getファイルPath()), opts);
-                    DbT5115ImageEntity entityImage = new DbT5115ImageEntity();
-                    entityImage.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
-                    entityImage.setImageSharedFileId(entity.getSharedFileId());
-                    writerImage.insert(entityImage);
-                } else {
-                    imageList = processParameter.getファイルList();
-                    if (imageList != null) {
-                        for (int j = 0; j < imageList.size(); j++) {
-                            ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
-                                    .fromString(ocrデータ解析結果.get保険者番号().concat(ocrデータ解析結果.get被保険者番号())), result.getイメージ共有ファイルID());
-                            SharedFile.appendNewFile(or_sfd, new FilesystemPath(processParameter.getファイルPathList().get(j)), imageList.get(j).toString());
-                        }
-                    }
-                }
-            }
+            /* キャッシュのクリアとキーの更新 */
+            this.cache = new ArrayList<>();
+            this.key = ocrChosa.getKey();
         }
+        /* キャッシュへの追加 */
+        this.cache.add(ocrChosa);
     }
 
-    private OcrDataReadResult チェック処理(OcrDataReadResult ocrデータ解析結果) {
-        OcrJohoOcrDataRecordEntity ocrDataデータ行 = (OcrJohoOcrDataRecordEntity) ocrデータ解析結果.getOcrDataデータ行Entity();
-        if (ocrDataデータ行 != null) {
-            if (ocrDataデータ行.get調査区分() != null) {
-                if (ocrDataデータ行.get調査区分().equals(概況調査区分)) {
-                    set概況調査(ocrデータ解析結果, ocrDataデータ行);
-                } else if (ocrDataデータ行.get調査区分().equals(基本調査区分)) {
-                    set基本調査(ocrデータ解析結果, ocrDataデータ行);
-                }
-            } else {
-                ocrデータ解析結果.setイメージファイル(ocrDataデータ行.getファイルList());
-            }
-        }
-        return ocrデータ解析結果;
+    private static boolean hasBreak(ShinseiKey before, ShinseiKey current) {
+        return !Objects.equals(before, current);
     }
 
+    private void keyBreakProcess(ShinseiKey key, List<OcrChosa> ocrChosas) {
+        NinteiOcrMapperParamter paramter = NinteiOcrMapperParamter.createParamter(key.get証記載保険者番号(),
+                key.get被保険者番号(),
+                key.get認定申請日());
+
+        List<NinteiOcrRelate> 関連データ = NinteiOcrFindler.createInstance().get関連データ(paramter).records();
+        if (関連データ.isEmpty()) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("関連データの取得に失敗しました。")
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
+            return; //TODO 不正のため、エラーリスト出力対象。
+        }
+        NinteiOcrRelate nr = 関連データ.get(0);
+        if (!validate厚労省IF識別コード(nr.get厚労省IF識別コード())) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
+                    .append("過去の制度です。処理をskipします。")
+                    .append(" 厚労省IF識別コード：").append(nr.get厚労省IF識別コード().getコード())
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
+            return; //TODO 不正のため、エラーリスト出力対象。
+        }
+        RString tempDirectoryPath = Directory.createTmpDirectory();
+        List<OcrImageClassification> imageTypes = new ArrayList<>();
+        for (Map.Entry<OCRID, List<OcrChosa>> entry : groupingByOCRID(ocrChosas).entrySet()) {
+            switch (entry.getKey()) {
+                case _501:
+                    if (copyImageFilesToDirectory_ID501(tempDirectoryPath, entry.getValue())) {
+                        imageTypes.add(OcrImageClassification.調査票_概況調査);
+                    }
+                    continue;
+                case _502:  //イメージなしのため後回し（データ更新の実装はする）
+                    continue;
+                case _550:
+                    if (copyImageFilesToDirectory_ID550(tempDirectoryPath, entry.getValue())) {
+                        imageTypes.add(OcrImageClassification.調査票_特記事項);
+                    }
+                case _570: //TODO 必要なユーザには実装する。
+                default:
+            }
+        }
+
+        boolean saveSucceeds = ImageJohoUpdater.create(new FilesystemPath(tempDirectoryPath),
+                new ShinseishoKanriNo(nr.get申請書管理番号()),
+                nr.get証記載保険者番号(),
+                nr.get被保険者番号(),
+                nr.hasイメージ情報() ? nr.getイメージ共有ファイルID() : null,
+                imageTypes
+        ).updateBy(this.writerImage);
+        if (saveSucceeds) {
+            return;
+        }
+        //TODO 不正のため、エラーリスト出力対象。
+        /*----------------------------------------------------------------------------------*/
+        _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                .append("イメージ情報の保存に失敗しました。")
+                .toString());
+        /*----------------------------------------------------------------------------------*/
+    }
+
+    private static Map<OCRID, List<OcrChosa>> groupingByOCRID(List<OcrChosa> list) {
+        Map<OCRID, List<OcrChosa>> map = new HashMap<>();
+        for (OcrChosa v : list) {
+            OCRID ocrID = v.getOcrID();
+            if (!map.containsKey(ocrID)) {
+                map.put(ocrID, new ArrayList<OcrChosa>());
+            }
+            map.get(ocrID).add(v);
+        }
+        return map;
+    }
+
+    @Override
+    protected void afterExecute() {
+        super.afterExecute();
+        keyBreakProcess(this.key, this.cache);
+    }
+
+    private boolean copyImageFilesToDirectory_ID501(RString targetDirectoryPath, List<OcrChosa> ocrChosas) {
+        if (ocrChosas.size() != 1) {
+            return false;
+        }
+        OcrChosa ocrChosa = ocrChosas.get(0);
+        CatalogLine ca3 = this.catalog.find(Models.ID501, ocrChosa.getSheetID()).orElse(null);
+        if (ca3 == null) {
+            /*----------------------------------------------------------------------------------*/
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("カタログデータの取得に失敗しました。 ")
+                    .append(" SheetID下8桁：").append(ocrChosa.getSheetID().get帳票一連ID下8桁())
+                    .toString());
+            /*----------------------------------------------------------------------------------*/
+            return false; //TODO 不正のため、エラーリスト出力対象。
+        }
+        return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3.getImageFileNames(),
+                this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID501);
+    }
+
+    private boolean copyImageFilesToDirectory_ID550(RString targetDirectoryPath, List<OcrChosa> ocrChosas) {
+        List<RString> imageFileNames = new ArrayList<>();
+        List<OcrChosa> valuesExistsCa3 = new ArrayList<>();
+        for (OcrChosa ocrChosa : ocrChosas) {
+            CatalogLine cl = this.catalog.find(Models.ID550, ocrChosa.getSheetID()).orElse(null);
+            if (cl == null) {
+                continue;
+            }
+            imageFileNames.addAll(cl.getImageFileNames());
+            valuesExistsCa3.add(ocrChosa);
+        }
+        return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, imageFileNames,
+                this.processParameter.getImageFilePaths(), new TokkijikoFileNameConvertionTheory(valuesExistsCa3));
+    }
+
+//--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
+    /**
+     * 有効な厚労省IF識別コードである場合、{@code true}を返します。
+     */
+    private static boolean validate厚労省IF識別コード(KoroshoIfShikibetsuCode 厚労省IF識別コード) {
+        return 厚労省IF識別コード == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
+    }
+
+//    @Override
+//    protected void process(RString line) {
+//
+//        if (!processParameter.getファイルPath().contains(".png")) {
+//            ocrデータ解析結果.clear();
+//            読取中行番号++;
+//            ocrデータ解析結果.parse(line, 読取中行番号);
+//
+//            ocrデータ解析結果 = this.チェック処理(ocrデータ解析結果);
+//            if (processParameter.getファイルPath().contains(".ca3")) {
+//                ca3解析結果.clear();
+//                ca3解析結果.parse(line, 読取中行番号);
+//                processParameter.setファイルList(ca3解析結果.getイメージファイル());
+//            }
+//
+//            NinteiOcrMapperParamter paramter = NinteiOcrMapperParamter.createParamter(ocrデータ解析結果.get保険者番号(),
+//                    ocrデータ解析結果.get被保険者番号(),
+//                    ocrデータ解析結果.get申請日());
+//
+//            List<NinteiOcrResult> 関連データList = NinteiOcrFindler.createInstance().get関連データ(paramter).records();
+//            for (int i = 0; i < 関連データList.size(); i++) {
+//                NinteiOcrResult result = 関連データList.get(i);
+//
+//                if (result.getイメージ共有ファイルID().compareTo(RDateTime.MIN) == 0) {
+//
+//                    if (ocrデータ解析結果.get調査区分().equals(概況調査区分)) {
+//                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
+//
+//                            dbT5202Entity09BInsert(ocrデータ解析結果, result);
+//                            dbT5207EntityInsert(ocrデータ解析結果, result);
+//                            dbT5208EntityInsert(ocrデータ解析結果, result);
+//                            dbT5210EntityInsert(ocrデータ解析結果, result);
+//
+//                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
+//                            dbT5202Entity09AInsert(ocrデータ解析結果, result);
+//                            dbT5207EntityInsert(ocrデータ解析結果, result);
+//                            dbT5208EntityInsert(ocrデータ解析結果, result);
+//                            dbT5210EntityInsert(ocrデータ解析結果, result);
+//
+//                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
+//                            dbT5202Entity06AInsert(ocrデータ解析結果, result);
+//                            dbT5207EntityInsert(ocrデータ解析結果, result);
+//                            dbT5208EntityInsert(ocrデータ解析結果, result);
+//                            dbT5210EntityInsert(ocrデータ解析結果, result);
+//
+//                        }
+//                    } else if (ocrデータ解析結果.get調査区分().equals(基本調査区分)) {
+//                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
+//
+//                            DbT5203NinteichosahyoKihonChosa09BEntity entityKihon = new DbT5203NinteichosahyoKihonChosa09BEntity();
+//
+//                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+//                            entityKihon.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード_09B));
+//                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
+//                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
+//                            writerKihon09b.insert(entityKihon);
+//
+//                            dbT5211EntityInsert(ocrデータ解析結果, result);
+//
+//                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
+//
+//                            DbT5203NinteichosahyoKihonChosa09AEntity entityKihon = new DbT5203NinteichosahyoKihonChosa09AEntity();
+//                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+//                            entityKihon.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード_09A));
+//                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
+//                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
+//                            writerKihon09a.insert(entityKihon);
+//
+//                            dbT5211EntityInsert(ocrデータ解析結果, result);
+//
+//                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
+//
+//                            DbT5203NinteichosahyoKihonChosa06AEntity entityKihon = new DbT5203NinteichosahyoKihonChosa06AEntity();
+//
+//                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+//                            entityKihon.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード_06A));
+//                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
+//                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));;
+//                            writerKihon06a.insert(entityKihon);
+//
+//                            dbT5211EntityInsert(ocrデータ解析結果, result);
+//
+//                        }
+//                    }
+//                } else {
+//                    if (ocrデータ解析結果.get調査区分().equals(概況調査区分)) {
+//                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
+//
+//                            dbT5202Entity09BUpdate(ocrデータ解析結果, result);
+//                            dbT5207EntityUpdate(ocrデータ解析結果, result);
+//                            dbT5208EntityUpdate(ocrデータ解析結果, result);
+//                            dbT5210EntityUpdate(ocrデータ解析結果, result);
+//                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
+//
+//                            dbT5202Entity09AUpdate(ocrデータ解析結果, result);
+//                            dbT5207EntityUpdate(ocrデータ解析結果, result);
+//                            dbT5208EntityUpdate(ocrデータ解析結果, result);
+//                            dbT5210EntityUpdate(ocrデータ解析結果, result);
+//                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
+//
+//                            dbT5202Entity06AUpdate(ocrデータ解析結果, result);
+//                            dbT5207EntityUpdate(ocrデータ解析結果, result);
+//                            dbT5208EntityUpdate(ocrデータ解析結果, result);
+//                            dbT5210EntityUpdate(ocrデータ解析結果, result);
+//                        }
+//                    } else if (ocrデータ解析結果.get調査区分().equals(基本調査区分)) {
+//                        if (厚労省IF識別コード_09B.equals(result.get厚労省IF識別コード())) {
+//                            managerKihon09b = new NinteichosahyoKihonChosa09BManager();
+//                            DbT5203NinteichosahyoKihonChosa09BEntity entityKihon = managerKihon09b.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
+//                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+//                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
+//                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
+//                            writerKihon09b.update(entityKihon);
+//                            dbT5211EntityUpdate(ocrデータ解析結果, result);
+//
+//                        } else if (厚労省IF識別コード_09A.equals(result.get厚労省IF識別コード())) {
+//                            managerKihon09a = new NinteichosahyoKihonChosa09AManager();
+//                            DbT5203NinteichosahyoKihonChosa09AEntity entityKihon = managerKihon09a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
+//                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+//                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
+//                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
+//                            writerKihon09a.update(entityKihon);
+//                            dbT5211EntityUpdate(ocrデータ解析結果, result);
+//                        } else if (厚労省IF識別コード_06A.equals(result.get厚労省IF識別コード())) {
+//                            managerKihon06a = new NinteichosahyoKihonChosa06AManager();
+//                            DbT5203NinteichosahyoKihonChosa06AEntity entityKihon = managerKihon06a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号());
+//                            entityKihon.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                            entityKihon.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
+//                            entityKihon.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get障害高齢者の日常生活自立度()));
+//                            entityKihon.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(ocrデータ解析結果.get認知症高齢者の日常生活自立度()));
+//                            writerKihon06a.update(entityKihon);
+//                            dbT5211EntityUpdate(ocrデータ解析結果, result);
+//                        }
+//                    }
+//                }
+//                List<RString> imageList = new ArrayList<>();
+//
+//                if (result.getイメージ共有ファイルID().compareTo(RDateTime.MIN) == 0) {
+//                    SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName
+//                            .fromString(ocrデータ解析結果.get保険者番号().concat(ocrデータ解析結果.get被保険者番号())));
+//                    sfd = SharedFile.defineSharedFile(sfd);
+//                    CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+//                    SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, new FilesystemPath(processParameter.getファイルPath()), opts);
+//                    DbT5115ImageEntity entityImage = new DbT5115ImageEntity();
+//                    entityImage.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
+//                    entityImage.setImageSharedFileId(entity.getSharedFileId());
+//                    writerImage.insert(entityImage);
+//                } else {
+//                    imageList = processParameter.getファイルList();
+//                    if (imageList != null) {
+//                        for (int j = 0; j < imageList.size(); j++) {
+//                            ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
+//                                    .fromString(ocrデータ解析結果.get保険者番号().concat(ocrデータ解析結果.get被保険者番号())), result.getイメージ共有ファイルID());
+//                            SharedFile.appendNewFile(or_sfd, new FilesystemPath(processParameter.getファイルPathList().get(j)), imageList.get(j).toString());
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     private RString get実施場所名称(RString code) {
         if (実施場所コード１.equals(code)) {
             return 実施場所名称＿在宅;
@@ -422,110 +572,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         return Boolean.FALSE;
     }
 
-    private void set概況調査(OcrDataReadResult ocrデータ解析結果, OcrJohoOcrDataRecordEntity ocrDataデータ行) {
-
-        ocrデータ解析結果.set調査区分(概況調査区分);
-        ocrデータ解析結果.set保険者番号(ocrDataデータ行.get保険者番号());
-        ocrデータ解析結果.set申請日(ocrDataデータ行.get申請日());
-        ocrデータ解析結果.set被保険者番号(ocrDataデータ行.get被保険者番号());
-        ocrデータ解析結果.set実施日時(ocrDataデータ行.get行項目_6());
-        ocrデータ解析結果.set実施場所(ocrDataデータ行.get行項目_7());
-        ocrデータ解析結果.set記入者(ocrDataデータ行.get行項目_8());
-        ocrデータ解析結果.set所属機関(ocrDataデータ行.get行項目_9());
-        ocrデータ解析結果.setサービス区分コード(ocrDataデータ行.get行項目_10());
-        ocrデータ解析結果.set訪問介護の回数(ocrDataデータ行.get行項目_11());
-        ocrデータ解析結果.set訪問入浴介護の回数(ocrDataデータ行.get行項目_12());
-        ocrデータ解析結果.set訪問看護の回数(ocrDataデータ行.get行項目_13());
-        ocrデータ解析結果.set訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数(ocrDataデータ行.get行項目_14());
-        ocrデータ解析結果.set居宅療養管理指導の回数(ocrDataデータ行.get行項目_15());
-        ocrデータ解析結果.set通所看護の回数(ocrDataデータ行.get行項目_16());
-        ocrデータ解析結果.set通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数(ocrDataデータ行.get行項目_17());
-        ocrデータ解析結果.set短期入所生活介護の日数(ocrDataデータ行.get行項目_18());
-        ocrデータ解析結果.set短期入所療養介護の日数(ocrDataデータ行.get行項目_19());
-        ocrデータ解析結果.set特定施設入所者生活介護の日数(ocrDataデータ行.get行項目_20());
-        ocrデータ解析結果.set福祉用具貸与の品目(ocrDataデータ行.get行項目_21());
-        ocrデータ解析結果.set福祉用具購入の品目(ocrDataデータ行.get行項目_22());
-        ocrデータ解析結果.set住宅改修(ocrDataデータ行.get行項目_23());
-        ocrデータ解析結果.set夜間対応型訪問介護の日数(ocrDataデータ行.get行項目_24());
-        ocrデータ解析結果.set認知症対応型通所介護の日数(ocrDataデータ行.get行項目_25());
-        ocrデータ解析結果.set小規模多機能型居宅介護の日数(ocrDataデータ行.get行項目_26());
-        ocrデータ解析結果.set認知症対応型共同生活介護の日数(ocrDataデータ行.get行項目_27());
-        ocrデータ解析結果.set地域密着型特定施設入居者生活介護の日数(ocrDataデータ行.get行項目_28());
-        ocrデータ解析結果.set地域密着型介護老人福祉施設入居者生活介護の日数(ocrDataデータ行.get行項目_29());
-        ocrデータ解析結果.set看護小規模多機能型居宅介護(ocrDataデータ行.get行項目_30());
-        ocrデータ解析結果.set随時対応型訪問介護看護(ocrDataデータ行.get行項目_31());
-        ocrデータ解析結果.set施設利用の有無(ocrDataデータ行.get行項目_32());
-
-    }
-
-    private void set基本調査(OcrDataReadResult ocrデータ解析結果, OcrJohoOcrDataRecordEntity ocrDataデータ行) {
-
-        ocrデータ解析結果.set調査区分(基本調査区分);
-        ocrデータ解析結果.set保険者番号(ocrDataデータ行.get保険者番号());
-        ocrデータ解析結果.set申請日(ocrDataデータ行.get申請日());
-        ocrデータ解析結果.set被保険者番号(ocrDataデータ行.get被保険者番号());
-        ocrデータ解析結果.set麻痺(ocrDataデータ行.get行項目_6());
-        ocrデータ解析結果.set拘縮(ocrDataデータ行.get行項目_7());
-        ocrデータ解析結果.set寝返り(ocrDataデータ行.get行項目_8());
-        ocrデータ解析結果.set起き上がり(ocrDataデータ行.get行項目_9());
-        ocrデータ解析結果.set座位保持(ocrDataデータ行.get行項目_10());
-        ocrデータ解析結果.set両足での立位(ocrDataデータ行.get行項目_11());
-        ocrデータ解析結果.set歩行(ocrDataデータ行.get行項目_12());
-        ocrデータ解析結果.set立ち上がり(ocrDataデータ行.get行項目_13());
-        ocrデータ解析結果.set片足での立位(ocrDataデータ行.get行項目_14());
-        ocrデータ解析結果.set洗身(ocrDataデータ行.get行項目_15());
-        ocrデータ解析結果.setつめ切り(ocrDataデータ行.get行項目_16());
-        ocrデータ解析結果.set視力(ocrDataデータ行.get行項目_17());
-        ocrデータ解析結果.set聴力(ocrDataデータ行.get行項目_18());
-        ocrデータ解析結果.set移乗(ocrDataデータ行.get行項目_19());
-        ocrデータ解析結果.set移動(ocrDataデータ行.get行項目_20());
-        ocrデータ解析結果.setえん下(ocrDataデータ行.get行項目_21());
-        ocrデータ解析結果.set食事摂取(ocrDataデータ行.get行項目_22());
-        ocrデータ解析結果.set排尿(ocrDataデータ行.get行項目_23());
-        ocrデータ解析結果.set排便(ocrDataデータ行.get行項目_24());
-        ocrデータ解析結果.set口腔清潔(ocrDataデータ行.get行項目_25());
-        ocrデータ解析結果.set洗顔(ocrDataデータ行.get行項目_26());
-        ocrデータ解析結果.set整髪(ocrDataデータ行.get行項目_27());
-        ocrデータ解析結果.set上衣の着脱(ocrDataデータ行.get行項目_28());
-        ocrデータ解析結果.setズボン等の着脱(ocrDataデータ行.get行項目_29());
-        ocrデータ解析結果.set外出頻度(ocrDataデータ行.get行項目_30());
-        ocrデータ解析結果.set意思の疎通(ocrDataデータ行.get行項目_31());
-        ocrデータ解析結果.set毎日の日課を理解(ocrDataデータ行.get行項目_32());
-        ocrデータ解析結果.set生年月日をいう(ocrDataデータ行.get行項目_33());
-        ocrデータ解析結果.set短期記憶(ocrDataデータ行.get行項目_34());
-        ocrデータ解析結果.set自分の名前をいう(ocrDataデータ行.get行項目_35());
-        ocrデータ解析結果.set今の季節を理解(ocrDataデータ行.get行項目_36());
-        ocrデータ解析結果.set場所の理解(ocrDataデータ行.get行項目_37());
-        ocrデータ解析結果.set徘徊(ocrDataデータ行.get行項目_38());
-        ocrデータ解析結果.set外出して戻れない(ocrDataデータ行.get行項目_39());
-        ocrデータ解析結果.set被害的(ocrDataデータ行.get行項目_40());
-        ocrデータ解析結果.set作話(ocrDataデータ行.get行項目_41());
-        ocrデータ解析結果.set感情が不安定(ocrDataデータ行.get行項目_42());
-        ocrデータ解析結果.set昼夜逆転(ocrDataデータ行.get行項目_43());
-        ocrデータ解析結果.set同じ話をする(ocrDataデータ行.get行項目_44());
-        ocrデータ解析結果.set大声を出す(ocrDataデータ行.get行項目_45());
-        ocrデータ解析結果.set介護に抵抗(ocrDataデータ行.get行項目_46());
-        ocrデータ解析結果.set落ち着きなし(ocrDataデータ行.get行項目_47());
-        ocrデータ解析結果.set一人で出たがる(ocrDataデータ行.get行項目_48());
-        ocrデータ解析結果.set収集癖(ocrDataデータ行.get行項目_49());
-        ocrデータ解析結果.set物や衣類を壊す(ocrDataデータ行.get行項目_50());
-        ocrデータ解析結果.setひどい物忘れ(ocrDataデータ行.get行項目_51());
-        ocrデータ解析結果.set独り言(ocrDataデータ行.get行項目_52());
-        ocrデータ解析結果.set自分勝手に行動する(ocrDataデータ行.get行項目_53());
-        ocrデータ解析結果.set話がまとまらない(ocrDataデータ行.get行項目_54());
-        ocrデータ解析結果.set薬の内服(ocrDataデータ行.get行項目_55());
-        ocrデータ解析結果.set金銭の管理(ocrDataデータ行.get行項目_56());
-        ocrデータ解析結果.set日常の意思決定(ocrDataデータ行.get行項目_57());
-        ocrデータ解析結果.set集団への不適応(ocrDataデータ行.get行項目_58());
-        ocrデータ解析結果.set買い物(ocrDataデータ行.get行項目_59());
-        ocrデータ解析結果.set簡単な調理(ocrDataデータ行.get行項目_60());
-        ocrデータ解析結果.set過去14日間に受けた治療(ocrDataデータ行.get行項目_61());
-        ocrデータ解析結果.set障害高齢者の日常生活自立度(ocrDataデータ行.get障害高齢者の日常生活自立度());
-        ocrデータ解析結果.set認知症高齢者の日常生活自立度(ocrDataデータ行.get認知症高齢者の日常生活自立度());
-
-    }
-
-    private void dbT5202Entity06AInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5202Entity06AInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         DbT5202NinteichosahyoGaikyoChosa06AEntity entity = new DbT5202NinteichosahyoGaikyoChosa06AEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
         entity.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
@@ -551,7 +598,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         writer06a.insert(entity);
     }
 
-    private void dbT5202Entity09AInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5202Entity09AInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         DbT5202NinteichosahyoGaikyoChosa09AEntity entity = new DbT5202NinteichosahyoGaikyoChosa09AEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
         entity.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
@@ -577,7 +624,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         writer09a.insert(entity);
     }
 
-    private void dbT5202Entity09BInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5202Entity09BInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         DbT5202NinteichosahyoGaikyoChosa09BEntity entity = new DbT5202NinteichosahyoGaikyoChosa09BEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
         entity.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
@@ -604,7 +651,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     }
 
-    private void dbT5202Entity06AUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5202Entity06AUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
 
         manager06a = new NinteichosahyoGaikyoChosa06AManager();
         DbT5202NinteichosahyoGaikyoChosa06AEntity entity = manager06a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), イメージ区分);
@@ -619,7 +666,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     }
 
-    private void dbT5202Entity09AUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5202Entity09AUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
 
         manager09a = new NinteichosahyoGaikyoChosa09AManager();
         DbT5202NinteichosahyoGaikyoChosa09AEntity entity = manager09a.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), イメージ区分);
@@ -634,7 +681,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     }
 
-    private void dbT5202Entity09BUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5202Entity09BUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
 
         manager09b = new NinteichosahyoGaikyoChosa09BManager();
         DbT5202NinteichosahyoGaikyoChosa09BEntity entity = manager09b.select認定調査票(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), イメージ区分);
@@ -649,7 +696,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     }
 
-    private void dbT5207EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5207EntityInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         for (int i = 1; i <= 20; i++) {
             DbT5207NinteichosahyoServiceJokyoEntity entityService = new DbT5207NinteichosahyoServiceJokyoEntity();
             RString 回数;
@@ -797,42 +844,42 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
             }
             entityService.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
             entityService.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-            entityService.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+            entityService.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード().getコード()));
             entityService.setRemban(i);
             writerService.insert(entityService);
         }
     }
 
-    private void dbT5208EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5208EntityInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         DbT5208NinteichosahyoServiceJokyoFlagEntity serviceFlag = new DbT5208NinteichosahyoServiceJokyoFlagEntity();
         serviceFlag.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
         serviceFlag.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-        serviceFlag.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+        serviceFlag.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード().getコード()));
         serviceFlag.setRemban(連番1);
         serviceFlag.setServiceJokyoFlag(住宅改修チェック(ocrデータ解析結果.get住宅改修()));
 
         writerServiceFlag.insert(serviceFlag);
     }
 
-    private void dbT5210EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5210EntityInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
 
         for (int i = 1; i <= 9; i++) {
             DbT5210NinteichosahyoShisetsuRiyoEntity entityShisetsu = new DbT5210NinteichosahyoShisetsuRiyoEntity();
             entityShisetsu.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
             entityShisetsu.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-            entityShisetsu.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+            entityShisetsu.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード().getコード()));
             entityShisetsu.setRemban(i);
             entityShisetsu.setShisetsuRiyoFlag(施設利用チェック(entityShisetsu.getRemban()));
             writerShisetsu.insert(entityShisetsu);
         }
     }
 
-    private void dbT5211EntityInsert(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5211EntityInsert(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         for (int i = 1; i <= 62; i++) {
             DbT5211NinteichosahyoChosaItemEntity entityItem = new DbT5211NinteichosahyoChosaItemEntity();
             entityItem.setShinseishoKanriNo(new ShinseishoKanriNo(result.get申請書管理番号()));
             entityItem.setNinteichosaRirekiNo(result.get認定調査依頼履歴番号());
-            entityItem.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード()));
+            entityItem.setKoroshoIfShikibetsuCode(new Code(result.get厚労省IF識別コード().getコード()));
             entityItem.setRemban(i);
             switch (i) {
                 case 連番1:
@@ -1063,7 +1110,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         }
     }
 
-    private void dbT5207EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5207EntityUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
 
         serviceManager = new NinteichosahyoServiceJokyoManager();
         for (int i = 1; i <= 20; i++) {
@@ -1139,7 +1186,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         }
     }
 
-    private void dbT5208EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5208EntityUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
 
         serviceFlagManager = new NinteichosahyoServiceJokyoFlagManager();
 
@@ -1153,7 +1200,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         }
     }
 
-    private void dbT5210EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5210EntityUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         shisetsuManager = new NinteichosahyoShisetsuRiyoManager();
 
         for (int i = 1; i <= 9; i++) {
@@ -1168,7 +1215,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         }
     }
 
-    private void dbT5211EntityUpdate(OcrDataReadResult ocrデータ解析結果, NinteiOcrResult result) {
+    private void dbT5211EntityUpdate(OcrChosa ocrデータ解析結果, NinteiOcrRelate result) {
         itemManager = new NinteichosahyoChosaItemManager();
         for (int i = 1; i <= 62; i++) {
             DbT5211NinteichosahyoChosaItemEntity entityItem = itemManager.select調査項目(new ShinseishoKanriNo(result.get申請書管理番号()), result.get認定調査依頼履歴番号(), i);
@@ -1411,5 +1458,5 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         }
         return Boolean.FALSE;
     }
-                         
+
 }

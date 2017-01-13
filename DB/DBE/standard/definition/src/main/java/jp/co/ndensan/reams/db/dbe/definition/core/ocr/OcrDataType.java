@@ -67,11 +67,11 @@ public enum OcrDataType {
         this.theCa3FileName = RString.EMPTY;
     }
 
-    RString csvFileName() {
+    private RString csvFileName() {
         return this.theCsvFileName;
     }
 
-    RString ca3FileName() {
+    private RString ca3FileName() {
         return this.theCa3FileName;
     }
 
@@ -84,7 +84,11 @@ public enum OcrDataType {
                 || filePathLC.endsWith(ca3FileName().toLowerCase());
     }
 
-    static OcrDataType toValueFromFilePath(RString filePath) {
+    /**
+     * @param filePath ファイルパス
+     * @return 指定のファイルパスに該当する{@link OcrDataType}.
+     */
+    public static OcrDataType toValueFromFilePath(RString filePath) {
         List<OcrDataType> without非該当 = new ArrayList<>(Arrays.asList(values()));
         without非該当.removeAll(Arrays.asList(非該当));
         for (OcrDataType value : without非該当) {

@@ -6,10 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ocrdataread.OcrDataReadProcess;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.OcrDataReadProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -28,30 +34,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_NinteiChosaKekkaTorikomiParameter> {
 
-    private int fileIndex = 0;
-    private List<RString> filePathList;
-    private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み_PROCESS";
     private OcrDataReadProcessParameter processParameter;
-    private List<RString> filePathListPng;
 
     @Override
     protected void defineFlow() {
-        readAllOcrDataFile();
-        filePathListPng = new ArrayList<>();
-        while (fileIndex < filePathList.size()) {
-            if (filePathList.get(fileIndex).contains(".png")) {
-                filePathListPng.add(filePathList.get(fileIndex));
+        final RDate PROCESSING_DATE = RDate.getNowDate();
+        final List<RString> FILE_PATHS = readAllOcrDataFileTo(Directory.createTmpDirectory());
+        Map<OcrDataType, OcrFiles> map = OcrTorikomiUtil.groupingByType(FILE_PATHS);
+        final OcrFiles IMAGE_FILE_PATHS = map.get(OcrDataType.イメージファイル);
+        for (OcrDataType type : Arrays.asList(OcrDataType.調査票)) {
+            OcrFiles files = map.get(type);
+            if (files.isEmpty()) {
+                continue;
             }
-            if (processParameter == null) {
-                processParameter = new OcrDataReadProcessParameter(RDate.getNowDate(), filePathList.get(fileIndex), filePathListPng);
-            } else {
-                processParameter.setファイルPath(filePathList.get(fileIndex));
-                processParameter.setファイルPathList(filePathListPng);
-            }
+            processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
             executeStep(OCRデータの読み込み_PROCESS);
-            fileIndex++;
         }
     }
+
+    private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み_PROCESS";
 
     @Step(OCRデータの読み込み_PROCESS)
     IBatchFlowCommand executeOCRデータの読み込み() {
@@ -61,25 +62,29 @@ public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_
     }
 
     /**
-     * バッチパラメータの共有ファイルIDから共有ファイルのOCRデータを読み込む
+     * バッチパラメータの共有ファイルIDから共有ファイルのOCRデータを読み込みます。
      */
-    private void readAllOcrDataFile() {
-        RString tempDirPath = Directory.createTmpDirectory();
+    private List<RString> readAllOcrDataFileTo(RString tempDirPath) {
         File tempDir = new File(tempDirPath.toString());
         ReadOnlySharedFileEntryDescriptor entry
                 = ReadOnlySharedFileEntryDescriptor.fromString(getParameter().get共有ファイルエントリ情報文字列().toString());
         SharedFile.copyToLocal(entry, new FilesystemPath(tempDirPath));
-        filePathList = new ArrayList<>();
-        setFilePath(tempDir);
+        return setFilePath(tempDir);
     }
 
-    private void setFilePath(File directory) {
+    private List<RString> setFilePath(File directory) {
+        List<RString> list = new ArrayList<>();
         for (File file : directory.listFiles()) {
             if (file.isFile()) {
-                filePathList.add(new RString(file.getAbsolutePath()));
+                try {
+                    list.add(new RString(file.getCanonicalPath()));
+                } catch (IOException ex) {
+                    //TODO 例外処理。エラーリスト出力等が必要か…。
+                }
             } else {
-                setFilePath(file);
+                list.addAll(setFilePath(file));
             }
         }
+        return list;
     }
 }

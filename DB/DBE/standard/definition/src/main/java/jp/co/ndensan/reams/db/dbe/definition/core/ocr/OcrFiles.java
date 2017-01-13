@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.core.ocr;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ public final class OcrFiles implements Iterable<RString> {
     private final List<RString> elements;
     private final Map<RString, RString> namePathMap;
 
-    OcrFiles(List<RString> filePaths) {
+    public OcrFiles(Collection<? extends RString> filePaths) {
         this.elements = new ArrayList<>(filePaths);
         this.namePathMap = toMap(filePaths);
     }
@@ -38,7 +39,7 @@ public final class OcrFiles implements Iterable<RString> {
         this.namePathMap = new HashMap<>();
     }
 
-    private static Map<RString, RString> toMap(List<RString> filePaths) {
+    private static Map<RString, RString> toMap(Collection<? extends RString> filePaths) {
         Map<RString, RString> map = new HashMap<>();
         for (RString path : filePaths) {
             RString key = path.substringEmptyOnError(path.lastIndexOf(PATH_SEPARATOR) + 1);
@@ -54,7 +55,7 @@ public final class OcrFiles implements Iterable<RString> {
      */
     public RString findCsvFilePath() {
         for (RString element : elements) {
-            if (OcrTorikomiUtil.isCsvFile(element)) {
+            if (isCsvFile(element)) {
                 return element;
             }
         }
@@ -68,7 +69,7 @@ public final class OcrFiles implements Iterable<RString> {
      */
     public RString findCa3FilePath() {
         for (RString element : elements) {
-            if (OcrTorikomiUtil.isCa3File(element)) {
+            if (isCa3File(element)) {
                 return element;
             }
         }
@@ -98,5 +99,41 @@ public final class OcrFiles implements Iterable<RString> {
      */
     public boolean isEmpty() {
         return this.elements.isEmpty();
+    }
+
+    private enum FileExtentions {
+
+        CSV(".csv"),
+        CA3(".ca3");
+
+        private final RString lowerCase;
+
+        private FileExtentions(String lowerCase) {
+            this.lowerCase = new RString(lowerCase);
+        }
+
+        private RString asLowerCase() {
+            return this.lowerCase;
+        }
+    }
+
+    /**
+     * 指定のファイル名もしくはファイルパスがcsvファイルの物であれば{@code true}、そうでなければ{@code false}を返します。
+     *
+     * @param fileName ファイル名もしくはファイルパス
+     * @return fileNameがcsvファイルの物であれば{@code true}、 そうでなければ{@code false}.
+     */
+    private static boolean isCsvFile(RString fileName) {
+        return fileName.toLowerCase().endsWith(FileExtentions.CSV.asLowerCase());
+    }
+
+    /**
+     * 指定のファイル名もしくはファイルパスがca3ファイルの物であれば{@code true}、そうでなければ{@code false}を返します。
+     *
+     * @param fileName ファイル名もしくはファイルパス
+     * @return fileNameがca3ファイルの物であれば{@code true}、 そうでなければ{@code false}.
+     */
+    private static boolean isCa3File(RString fileName) {
+        return fileName.toLowerCase().endsWith(FileExtentions.CA3.asLowerCase());
     }
 }

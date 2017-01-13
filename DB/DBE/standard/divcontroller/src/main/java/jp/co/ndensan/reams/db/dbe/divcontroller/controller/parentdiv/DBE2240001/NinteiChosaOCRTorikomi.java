@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosa;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrRelate;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
@@ -430,8 +430,8 @@ public class NinteiChosaOCRTorikomi {
             NinteiOcrMapperParamter paramter = NinteiOcrMapperParamter.createParamter(csvData.get保険者番号(),
                     csvData.get被保険者番号(),
                     csvData.get申請日());
-            List<NinteiOcrResult> 関連データList = NinteiOcrFindler.createInstance().get関連データ(paramter).records();
-            for (NinteiOcrResult 関連データ : 関連データList) {
+            List<NinteiOcrRelate> 関連データList = NinteiOcrFindler.createInstance().get関連データ(paramter).records();
+            for (NinteiOcrRelate 関連データ : 関連データList) {
                 AccessLogger.log(AccessLogType.照会, toPersonalData(関連データ.get被保険者番号()));
                 NinteiTorokuData data = getHandler(div).setDB更新用データ(csvData);
                 data.set証記載保険者番号(関連データ.get証記載保険者番号());

@@ -178,10 +178,10 @@ public final class OcrIken {
     /**
      * 行を解析した結果より、インスタンスを生成します。
      *
-     * 存在しない項目の値は、{@link RString#EMPTY}や空のListで初期化されます。
+     * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
      *
      * @param line 行
-     * @return 行データタイプ
+     * @return {@link OcrIken}
      */
     public static OcrIken parsed(RString line) {
         return parseデータ行(line);
@@ -192,7 +192,7 @@ public final class OcrIken {
         result.clear();
         result.setデータ行_文字列(line);
         List<RString> columns = Collections.unmodifiableList(line.split(","));
-        if (columns == null) {
+        if (columns == null || columns.isEmpty()) {
             return result;
         }
         RString ocrID = columns.get(0);
