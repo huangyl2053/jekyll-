@@ -64,7 +64,7 @@ public class ShinsakaiTorokuHandler {
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString 未処理 = new RString("未");
-    private static final RString 完了可能 = new RString("完");
+    private static final RString 完了可能 = new RString("可");
     private static final String 状態 = "jotai";
 
     private static final RString 保存するボタン = new RString("btnSave");
@@ -117,7 +117,7 @@ public class ShinsakaiTorokuHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
         }
 
-        if (div.getTxtTaishoshaMaxHyojiKensu() == null 
+        if (div.getTxtTaishoshaMaxHyojiKensu() == null
                 || !(div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue() <= div.getTxtTaishoshaMaxHyojiKensu().getMaxValue().intValue()
                 && 1 <= div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue())) {
             div.getTxtTaishoshaMaxHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
@@ -178,8 +178,8 @@ public class ShinsakaiTorokuHandler {
      */
     public void onClick_btnSearch(List<ShinsakaiKaisai> 審査会一覧) {
         List<dgShinsakaiList_Row> list = new ArrayList<>();
-        List<ShinsakaiKaisai> newRowList = new ArrayList<>(); 
-        if (審査会一覧.size() > div.getTxtShinsakaiMaxHyojiKensu().getValue().intValue()) {     
+        List<ShinsakaiKaisai> newRowList = new ArrayList<>();
+        if (審査会一覧.size() > div.getTxtShinsakaiMaxHyojiKensu().getValue().intValue()) {
             for (int count = 0; count < div.getTxtShinsakaiMaxHyojiKensu().getValue().intValue(); count++) {
                 newRowList.add(審査会一覧.get(count));
             }
@@ -222,10 +222,10 @@ public class ShinsakaiTorokuHandler {
 
     private void 審査会登録モード(List<ShinsakaiTorokuBusiness> 審査会登録List) {
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
-        List<ShinsakaiTorokuBusiness> newRowList = new ArrayList<>(); 
+        List<ShinsakaiTorokuBusiness> newRowList = new ArrayList<>();
         int completeCount = 0;
         int notCount = 0;
-        if (審査会登録List.size() > div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue()) {         
+        if (審査会登録List.size() > div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue()) {
             for (int count = 0; count < div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue(); count++) {
                 newRowList.add(審査会登録List.get(count));
             }
@@ -249,7 +249,7 @@ public class ShinsakaiTorokuHandler {
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-            row.setYusenWaritsukesha((business.get介護認定審査会優先振分区分コード() == null 
+            row.setYusenWaritsukesha((business.get介護認定審査会優先振分区分コード() == null
                     || (business.get介護認定審査会割当年月日() == null || business.get介護認定審査会割当年月日().isEmpty())) ? RString.EMPTY
                     : ShinsakaiYusenWaritsukeKubunCode.toValue(business.get介護認定審査会優先振分区分コード().getKey()).get名称());
             row.setKaisaiNumber(business.get介護認定審査会開催番号() == null ? RString.EMPTY : business.get介護認定審査会開催番号());
@@ -284,7 +284,7 @@ public class ShinsakaiTorokuHandler {
         if (business.getマスキング完了年月日() != null && !business.getマスキング完了年月日().isEmpty()) {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
-        if (business.get介護認定審査会割当年月日()!= null && !business.get介護認定審査会割当年月日().isEmpty()) {
+        if (business.get介護認定審査会割当年月日() != null && !business.get介護認定審査会割当年月日().isEmpty()) {
             row.getShinsakaiwaritukeDay().setValue(new RDate(business.get介護認定審査会割当年月日().toString()));
         }
         if (business.get介護認定審査会開催予定年月日() != null && !business.get介護認定審査会開催予定年月日().isEmpty()) {
