@@ -11,16 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionTheories;
+import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
+import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.OcrImageClassification;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAccessor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
@@ -40,17 +43,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
@@ -60,12 +56,8 @@ import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
  *
  */
 //TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
+//TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
 public class ImageInputProcess extends BatchProcessBase<RString> {
-
-    private static final RString PATH_SEPARATOR = new RString(File.separator);
-
-    private static final RString 主治医意見書_表_BAK = new RString("E0001_BAK.png");
-    private static final RString 主治医意見書_裏_BAK = new RString("E0002_BAK.png");
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5302ShujiiIkenshoJohoEntity> writer_DbT5302;
@@ -77,7 +69,6 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     /**
      * このバッチプロセスのパラメータです。
      */
-    //TODO ca3ファイルのパスが必要。
     private OcrImageReadProcessParameter processParameter;
     private List<OcrIken> cache;
     private ShinseiKey key;
@@ -226,7 +217,13 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             return; //TODO 不正のため、エラーリスト出力対象。
         }
 
-        boolean saveSucceeds = saveImageJoho(this.writer_DbT5115, new FilesystemPath(tempDirectoryPath), ir);
+        boolean saveSucceeds = ImageJohoUpdater.create(new FilesystemPath(tempDirectoryPath),
+                ir.get申請書管理番号(),
+                ir.getT5101_証記載保険者番号(),
+                ir.getT5101_被保険者番号(),
+                ir.hasイメージ情報() ? ir.getT5115_イメージ共有ファイルID() : null,
+                OcrImageClassification.意見書_規定外_規定外ID
+        ).updateBy(this.writer_DbT5115);
         if (saveSucceeds) {
             return;
         }
@@ -262,7 +259,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         FileNameConvertionTheories converter = (value.getOcrID() == OCRID._777)
                 ? FileNameConvertionTheories.ID777
                 : FileNameConvertionTheories.ID777_reversed;
-        return copyImageFilesToDirectory(targetDirectoryPath, ca3.getImageFileNames(),
+        return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3.getImageFileNames(),
                 this.processParameter.getImageFilePaths(), converter);
     }
 
@@ -313,7 +310,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     .append("表面は OCRID = 777 から、裏面は OCRID = 778 から画像を取得します。")
                     .toString());
             /*----------------------------------------------------------------------------------*/
-            boolean copyRimenSucceeds = copyImageFilesToDirectory(targetDirectoryPath, ca3_778.getImageFileNames().subList(0, 1),
+            boolean copyRimenSucceeds = OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3_778.getImageFileNames().subList(0, 1),
                     this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
             if (!copyRimenSucceeds) {
                 /*----------------------------------------------------------------------------------*/
@@ -323,7 +320,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 /*----------------------------------------------------------------------------------*/
                 return false; //TODO 不正のため、エラーリスト出力対象。
             }
-            return copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames().subList(0, 1),
+            return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames().subList(0, 1),
                     this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
         }
         /*----------------------------------------------------------------------------------*/
@@ -335,7 +332,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 = new RString("1").equals(csv_777.get全体イメージ表側インデックス())
                         ? FileNameConvertionTheories.ID777
                         : FileNameConvertionTheories.ID777_reversed;
-        return copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames(),
+        return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames(),
                 this.processParameter.getImageFilePaths(), theory);
     }
 
@@ -345,75 +342,6 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
      */
     private static boolean validate厚労省IF識別コード(KoroshoIfShikibetsuCode 厚労省IF識別コード) {
         return 厚労省IF識別コード == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
-    }
-
-    /**
-     * 指定のフォルダに指定のファイルをコピーします。
-     * ファイル名のフルパスは{@link OcrImageReadProcessParameter}より取得します。
-     * ファイル名の変換ルールは{@link FileNameConvertionTheories}にて指定します。
-     */
-    private static boolean copyImageFilesToDirectory(RString directoryPath, List<RString> imageFileNames,
-            OcrFiles imageFiles, FileNameConvertionTheories converter) {
-        if (imageFileNames == null || imageFileNames.isEmpty()) {
-            return false;
-        }
-        for (RString imageFileName : imageFileNames) {
-            RString path = imageFiles.findFilePathFromName(imageFileName);
-            if (RString.isNullOrEmpty(path)) {
-                //TODO ca3ファイルから読み取ったファイル名に該当するイメージがアップロードファイル中に見つからない場合、ここに制御が移る。
-                //入力ファイル不正の可能性あり。適切な処理の検討が必要。
-                continue;
-            }
-            RString newFilePath = new RStringBuilder(directoryPath).append(PATH_SEPARATOR).append(converter.convert(imageFileName)).toRString();
-            File.copy(path, newFilePath);
-        }
-        return true;
-    }
-
-    /**
-     * イメージ情報の新規登録と、共有ファイルエントリの作成・追加を行います。
-     */
-    private static boolean saveImageJoho(BatchPermanentTableWriter<DbT5115ImageEntity> dbWriter, FilesystemPath targetDirectory, ImageinputRelate ir) {
-        if (targetDirectory == null) {
-            return false;
-        }
-        if (!ir.hasイメージ情報()) {
-            SharedFileDescriptor sfd = SharedFile.defineSharedFile(FilesystemName
-                    .fromString(ir.getT5101_証記載保険者番号().concat(ir.getT5101_被保険者番号())));
-            RDateTime sharedFileID = SharedFile.copyToSharedFile(targetDirectory, sfd.getSharedFileName());
-            /* イメージ情報の更新 */
-            DbT5115ImageEntity entityImage = new DbT5115ImageEntity();
-            entityImage.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
-            entityImage.setImageSharedFileId(sharedFileID);
-            dbWriter.insert(entityImage);
-            return true;
-        } else {
-            ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
-                    .fromString(ir.getT5101_証記載保険者番号().concat(ir.getT5101_被保険者番号())), ir.getT5115_イメージ共有ファイルID());
-            deleteIfExists(ro_sfd, 主治医意見書_表_BAK, 主治医意見書_裏_BAK);
-            SharedAppendOption option = new SharedAppendOption();
-            option.overWrite(true);
-            return SharedFile.appendNewFile(ro_sfd, targetDirectory, RString.EMPTY.toString(), option);
-        }
-    }
-
-    private static void deleteIfExists(ReadOnlySharedFileEntryDescriptor ro_sfd, final RString... targes) {
-        RString tmpDirectoryPath = Directory.createTmpDirectory();
-        SharedFile.copyToLocal(ro_sfd, new FilesystemPath(tmpDirectoryPath));
-        java.io.File tmpDirectory = new java.io.File(tmpDirectoryPath.toString());
-        for (final RString target : targes) {
-            _deleteIfExistsIn(tmpDirectory, target, ro_sfd);
-        }
-        tmpDirectory.delete();
-    }
-
-    private static void _deleteIfExistsIn(java.io.File tmpDirectory, final RString target, ReadOnlySharedFileEntryDescriptor ro_sfd) {
-        for (String fileName : tmpDirectory.list()) {
-            if (!fileName.contains(target)) {
-                continue;
-            }
-            SharedFile.deleteFileInEntry(ro_sfd, target.toString());
-        }
     }
 
     private static DbT5302ShujiiIkenshoJohoEntity createOrEdit主治医意見書情報(ImageinputRelate ir, OcrIken ocrIken) {

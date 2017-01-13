@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputProce
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrTorikomiUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

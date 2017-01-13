@@ -13,6 +13,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum Models {
 
     /**
+     * ID501
+     */
+    ID501,
+    /**
+     * ID502
+     */
+    ID502,
+    /**
+     * ID550
+     */
+    ID550,
+    /**
      * ID777
      */
     ID777,
