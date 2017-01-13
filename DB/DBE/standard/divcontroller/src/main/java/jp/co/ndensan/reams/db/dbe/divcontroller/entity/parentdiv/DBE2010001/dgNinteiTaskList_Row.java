@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 11 06:20:00 JST 2017 
+ * Thu Jan 12 09:34:13 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
 
     private RString jotai;
     private RString hokensha;
@@ -35,9 +35,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     private TextBoxDate chousahyoOutput;
     private TextBoxDate chosaIraiDataShutsuryokuDay;
     private TextBoxDate chosaIraiKigen;
+    private RString chosaIraiKubunCode;
     private RString chosaIraiKubun;
     private RString konkaiChosaItakusakiCode;
     private RString konkaiChosaItakusaki;
+    private RString konkaiChosainCode;
     private RString konkaiChosain;
     private TextBoxNum konkaiChosaCount;
     private RString zenkaiChosaItakusaki;
@@ -56,6 +58,7 @@ public class dgNinteiTaskList_Row extends DataRow {
     private RString shinseishoKanriNo;
     private RString koroshoIfShikibetsuCode;
     private RString getShoKisaiHokenshaNo;
+    private TextBoxDate ninteichosaIraiYmd;
 
     public dgNinteiTaskList_Row() {
         super();
@@ -71,9 +74,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.chousahyoOutput = new TextBoxDate();
         this.chosaIraiDataShutsuryokuDay = new TextBoxDate();
         this.chosaIraiKigen = new TextBoxDate();
+        this.chosaIraiKubunCode = RString.EMPTY;
         this.chosaIraiKubun = RString.EMPTY;
         this.konkaiChosaItakusakiCode = RString.EMPTY;
         this.konkaiChosaItakusaki = RString.EMPTY;
+        this.konkaiChosainCode = RString.EMPTY;
         this.konkaiChosain = RString.EMPTY;
         this.konkaiChosaCount = new TextBoxNum();
         this.zenkaiChosaItakusaki = RString.EMPTY;
@@ -92,6 +97,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.shinseishoKanriNo = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
         this.getShoKisaiHokenshaNo = RString.EMPTY;
+        this.ninteichosaIraiYmd = new TextBoxDate();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
@@ -104,9 +110,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("chousahyoOutput", chousahyoOutput);
         this.setOriginalData("chosaIraiDataShutsuryokuDay", chosaIraiDataShutsuryokuDay);
         this.setOriginalData("chosaIraiKigen", chosaIraiKigen);
+        this.setOriginalData("chosaIraiKubunCode", chosaIraiKubunCode);
         this.setOriginalData("chosaIraiKubun", chosaIraiKubun);
         this.setOriginalData("konkaiChosaItakusakiCode", konkaiChosaItakusakiCode);
         this.setOriginalData("konkaiChosaItakusaki", konkaiChosaItakusaki);
+        this.setOriginalData("konkaiChosainCode", konkaiChosainCode);
         this.setOriginalData("konkaiChosain", konkaiChosain);
         this.setOriginalData("konkaiChosaCount", konkaiChosaCount);
         this.setOriginalData("zenkaiChosaItakusaki", zenkaiChosaItakusaki);
@@ -125,9 +133,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.setOriginalData("getShoKisaiHokenshaNo", getShoKisaiHokenshaNo);
+        this.setOriginalData("ninteichosaIraiYmd", ninteichosaIraiYmd);
     }
 
-    public dgNinteiTaskList_Row(RString jotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate chosaIraiKanryoDay, TextBoxNum chosaIraiSaichosaCount, TextBoxDate chosaIraishoHakkoDay, TextBoxDate chousahyoOutput, TextBoxDate chosaIraiDataShutsuryokuDay, TextBoxDate chosaIraiKigen, RString chosaIraiKubun, RString konkaiChosaItakusakiCode, RString konkaiChosaItakusaki, RString konkaiChosain, TextBoxNum konkaiChosaCount, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString zenzenkaiChosaItakusaki, RString zenzenkaiChosain, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, RString chosaTokusokuChiku, RString ninteichosaIraiRirekiNo, RString chikuCode, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString getShoKisaiHokenshaNo) {
+    public dgNinteiTaskList_Row(RString jotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate chosaIraiKanryoDay, TextBoxNum chosaIraiSaichosaCount, TextBoxDate chosaIraishoHakkoDay, TextBoxDate chousahyoOutput, TextBoxDate chosaIraiDataShutsuryokuDay, TextBoxDate chosaIraiKigen, RString chosaIraiKubunCode, RString chosaIraiKubun, RString konkaiChosaItakusakiCode, RString konkaiChosaItakusaki, RString konkaiChosainCode, RString konkaiChosain, TextBoxNum konkaiChosaCount, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString zenzenkaiChosaItakusaki, RString zenzenkaiChosain, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate chosaTokusokuHakkoDay, RString chosaTokusokuHoho, TextBoxNum chosaTokusokuCount, RString chosaTokusokuChiku, RString ninteichosaIraiRirekiNo, RString chikuCode, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString getShoKisaiHokenshaNo, TextBoxDate ninteichosaIraiYmd) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokensha", hokensha);
@@ -141,9 +150,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("chousahyoOutput", chousahyoOutput);
         this.setOriginalData("chosaIraiDataShutsuryokuDay", chosaIraiDataShutsuryokuDay);
         this.setOriginalData("chosaIraiKigen", chosaIraiKigen);
+        this.setOriginalData("chosaIraiKubunCode", chosaIraiKubunCode);
         this.setOriginalData("chosaIraiKubun", chosaIraiKubun);
         this.setOriginalData("konkaiChosaItakusakiCode", konkaiChosaItakusakiCode);
         this.setOriginalData("konkaiChosaItakusaki", konkaiChosaItakusaki);
+        this.setOriginalData("konkaiChosainCode", konkaiChosainCode);
         this.setOriginalData("konkaiChosain", konkaiChosain);
         this.setOriginalData("konkaiChosaCount", konkaiChosaCount);
         this.setOriginalData("zenkaiChosaItakusaki", zenkaiChosaItakusaki);
@@ -162,6 +173,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("koroshoIfShikibetsuCode", koroshoIfShikibetsuCode);
         this.setOriginalData("getShoKisaiHokenshaNo", getShoKisaiHokenshaNo);
+        this.setOriginalData("ninteichosaIraiYmd", ninteichosaIraiYmd);
         this.jotai = jotai;
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
@@ -174,9 +186,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.chousahyoOutput = chousahyoOutput;
         this.chosaIraiDataShutsuryokuDay = chosaIraiDataShutsuryokuDay;
         this.chosaIraiKigen = chosaIraiKigen;
+        this.chosaIraiKubunCode = chosaIraiKubunCode;
         this.chosaIraiKubun = chosaIraiKubun;
         this.konkaiChosaItakusakiCode = konkaiChosaItakusakiCode;
         this.konkaiChosaItakusaki = konkaiChosaItakusaki;
+        this.konkaiChosainCode = konkaiChosainCode;
         this.konkaiChosain = konkaiChosain;
         this.konkaiChosaCount = konkaiChosaCount;
         this.zenkaiChosaItakusaki = zenkaiChosaItakusaki;
@@ -195,6 +209,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.koroshoIfShikibetsuCode = koroshoIfShikibetsuCode;
         this.getShoKisaiHokenshaNo = getShoKisaiHokenshaNo;
+        this.ninteichosaIraiYmd = ninteichosaIraiYmd;
     }
 
     public RString getJotai() {
@@ -245,6 +260,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         return chosaIraiKigen;
     }
 
+    public RString getChosaIraiKubunCode() {
+        return chosaIraiKubunCode;
+    }
+
     public RString getChosaIraiKubun() {
         return chosaIraiKubun;
     }
@@ -255,6 +274,10 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getKonkaiChosaItakusaki() {
         return konkaiChosaItakusaki;
+    }
+
+    public RString getKonkaiChosainCode() {
+        return konkaiChosainCode;
     }
 
     public RString getKonkaiChosain() {
@@ -329,6 +352,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         return getShoKisaiHokenshaNo;
     }
 
+    public TextBoxDate getNinteichosaIraiYmd() {
+        return ninteichosaIraiYmd;
+    }
+
     public void setJotai(RString jotai) {
         this.setOriginalData("jotai", jotai);
         this.jotai = jotai;
@@ -389,6 +416,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.chosaIraiKigen = chosaIraiKigen;
     }
 
+    public void setChosaIraiKubunCode(RString chosaIraiKubunCode) {
+        this.setOriginalData("chosaIraiKubunCode", chosaIraiKubunCode);
+        this.chosaIraiKubunCode = chosaIraiKubunCode;
+    }
+
     public void setChosaIraiKubun(RString chosaIraiKubun) {
         this.setOriginalData("chosaIraiKubun", chosaIraiKubun);
         this.chosaIraiKubun = chosaIraiKubun;
@@ -402,6 +434,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setKonkaiChosaItakusaki(RString konkaiChosaItakusaki) {
         this.setOriginalData("konkaiChosaItakusaki", konkaiChosaItakusaki);
         this.konkaiChosaItakusaki = konkaiChosaItakusaki;
+    }
+
+    public void setKonkaiChosainCode(RString konkaiChosainCode) {
+        this.setOriginalData("konkaiChosainCode", konkaiChosainCode);
+        this.konkaiChosainCode = konkaiChosainCode;
     }
 
     public void setKonkaiChosain(RString konkaiChosain) {
@@ -492,6 +529,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setGetShoKisaiHokenshaNo(RString getShoKisaiHokenshaNo) {
         this.setOriginalData("getShoKisaiHokenshaNo", getShoKisaiHokenshaNo);
         this.getShoKisaiHokenshaNo = getShoKisaiHokenshaNo;
+    }
+
+    public void setNinteichosaIraiYmd(TextBoxDate ninteichosaIraiYmd) {
+        this.setOriginalData("ninteichosaIraiYmd", ninteichosaIraiYmd);
+        this.ninteichosaIraiYmd = ninteichosaIraiYmd;
     }
 
     // </editor-fold>

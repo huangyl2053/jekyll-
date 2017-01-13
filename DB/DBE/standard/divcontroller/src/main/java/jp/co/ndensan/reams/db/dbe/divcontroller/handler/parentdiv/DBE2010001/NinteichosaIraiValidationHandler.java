@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -112,9 +114,9 @@ public class NinteichosaIraiValidationHandler {
             if (is異なった保険者(div.getDgNinteiTaskList().getSelectedItems())) {
                 validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_保険者));
             }
-            if (div.getDgNinteiTaskList().getSelectedItems().size() > 1) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_認定調査票入手一覧));
-            }
+        }
+        if (RString.isNullOrEmpty(div.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue())) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先入力必須));
         }
         return validationMessages;
     }
@@ -145,6 +147,25 @@ public class NinteichosaIraiValidationHandler {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可_調査票等出力年月日));
                 }
             }
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 「調査依頼を保存する」ボタンを押下する場合、入力チェックを実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 入力チェック_btnUpdate() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        List<dgNinteiTaskList_Row> changedRowList = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+            if (row.getRowState().equals(RowState.Modified)) {
+                changedRowList.add(row);
+            }
+        }
+        if (changedRowList.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         }
         return validationMessages;
     }
@@ -206,7 +227,8 @@ public class NinteichosaIraiValidationHandler {
         理由付き完了不可_調査票等出力年月日(DbzErrorMessages.理由付き完了不可, "調査票等出力年月日が未設定"),
         認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
         委託先未設定(DbeErrorMessages.委託先未設定),
-        委託先が同一ではない(DbeErrorMessages.委託先が同一ではない);
+        委託先が同一ではない(DbeErrorMessages.委託先が同一ではない),
+        委託先入力必須(UrErrorMessages.必須, "委託先");
 
         private final Message message;
 

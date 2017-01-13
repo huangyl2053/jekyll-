@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity;
@@ -20,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-3000-160 houtianpeng
  */
-public class CyoSaiRaiBusiness {
+public class CyoSaiRaiBusiness implements Serializable {
+
+    private static final long serialVersionUID = -1712799008244823640L;
 
     private final CyoSaiRaiRelateEntity entity;
 

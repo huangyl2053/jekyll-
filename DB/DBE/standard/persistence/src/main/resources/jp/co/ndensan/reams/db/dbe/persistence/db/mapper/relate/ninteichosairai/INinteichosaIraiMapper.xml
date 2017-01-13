@@ -136,6 +136,41 @@
         ORDER BY
         DbT5913ChosainJoho."ninteiChosaItakusakiCode", DbT5913ChosainJoho."ninteiChosainCode"
     </select>
+    <select resultOrdered="true" id="select認定調査委託先And調査員情報"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
+            resultMap="resultMap_認定調査委託先And調査員情報" fetchSize="500">
+        SELECT
+        DbT5910NinteichosaItakusakiJoho.*,
+        DbT5913ChosainJoho.*
+        FROM
+        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+        ON  DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
+        INNER JOIN
+        rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+        ON  DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        AND
+        DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+        <if test="地区コード.toString() == ''.toString() || 地区コード == NULL">
+            AND
+            (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
+        </if>
+        <if test="地区コード.toString() != ''.toString() and 地区コード != NULL">
+            AND
+            DbT5913ChosainJoho."chikuCode" = #{地区コード}
+        </if>
+        AND
+        DbT5913ChosainJoho."jokyoFlag" = TRUE
+        WHERE
+        DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
+        AND
+        DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
+        AND
+        DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+        ORDER BY
+        DbT5913ChosainJoho."ninteiChosaItakusakiCode", DbT5913ChosainJoho."ninteiChosainCode"
+    </select>
     <select resultOrdered="true" id="selectMax認定調査依頼履歴番号"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
             resultType="RStringTypeHandler" fetchSize="500">
@@ -581,6 +616,12 @@
         <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosaKanoNinzuPerMonth" column="chosaKanoNinzuPerMonth"/>
+    </resultMap>
+    <resultMap id="resultMap_認定調査委託先And調査員情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity" autoMapping="true">
+        <id property="認定調査委託先情報Entity.shichosonCode" column="dbT5910NinteichosaItakusakiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="認定調査委託先情報Entity.ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="認定調査委託先情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
+        <collection property="調査員情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
     </resultMap>
     <resultMap id="resultMap_調査結果入力用データ" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>

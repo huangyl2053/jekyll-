@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,8 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  * @author 自動生成
  */
 public class NinteichosaIraiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,8 +32,8 @@ public class NinteichosaIraiDiv extends Panel {
      */
     @JsonProperty("NinteichosaIraiList")
     private NinteichosaIraiListDiv NinteichosaIraiList;
-    @JsonProperty("KanryoMsg")
-    private KanryoMsgDiv KanryoMsg;
+    @JsonProperty("ccdKanryoMsg")
+    private KanryoMessageDiv ccdKanryoMsg;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
 
@@ -63,21 +62,12 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     /*
-     * getKanryoMsg
-     * @return KanryoMsg
+     * getccdKanryoMsg
+     * @return ccdKanryoMsg
      */
-    @JsonProperty("KanryoMsg")
-    public KanryoMsgDiv getKanryoMsg() {
-        return KanryoMsg;
-    }
-
-    /*
-     * setKanryoMsg
-     * @param KanryoMsg KanryoMsg
-     */
-    @JsonProperty("KanryoMsg")
-    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
-        this.KanryoMsg = KanryoMsg;
+    @JsonProperty("ccdKanryoMsg")
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return ccdKanryoMsg;
     }
 
     /*
@@ -107,7 +97,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChosairaitaishoshaichiran(chosairaitaishoshaichiranDiv chosairaitaishoshaichiran) {
+    public void  setChosairaitaishoshaichiran(chosairaitaishoshaichiranDiv chosairaitaishoshaichiran) {
         this.getNinteichosaIraiList().setChosairaitaishoshaichiran(chosairaitaishoshaichiran);
     }
 
@@ -117,7 +107,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShoriJyotai(RadioButton radShoriJyotai) {
+    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
@@ -127,7 +117,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtTotalCount(txtTotalCount);
     }
 
@@ -137,7 +127,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
@@ -147,7 +137,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtNoUpdate(txtNoUpdate);
     }
 
@@ -157,7 +147,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
+    public void  setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setBatchParamPanel(BatchParamPanel);
     }
 
@@ -167,7 +157,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().getBatchParamPanel().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
@@ -177,7 +167,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
+    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getNinteichosaIraiList().getChosairaitaishoshaichiran().setTxtMaxCount(txtMaxCount);
     }
 
@@ -192,7 +182,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtndataoutput(ButtonDownLoad btndataoutput) {
+    public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
         this.getNinteichosaIraiList().setBtndataoutput(btndataoutput);
     }
 
@@ -202,7 +192,7 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtniraiauto(Button btniraiauto) {
+    public void  setBtniraiauto(Button btniraiauto) {
         this.getNinteichosaIraiList().setBtniraiauto(btniraiauto);
     }
 
@@ -212,13 +202,53 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnTaOutput(ButtonDialog btnTaOutput) {
+    public void  setBtnTaOutput(ButtonDialog btnTaOutput) {
         this.getNinteichosaIraiList().setBtnTaOutput(btnTaOutput);
     }
 
     @JsonIgnore
-    public IKanryoMessageDiv getCcdKanryoMsg() {
-        return this.getKanryoMsg().getCcdKanryoMsg();
+    public NinteichosaIraiTorokuDiv getNinteichosaIraiToroku() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku();
+    }
+
+    @JsonIgnore
+    public void  setNinteichosaIraiToroku(NinteichosaIraiTorokuDiv NinteichosaIraiToroku) {
+        this.getNinteichosaIraiList().setNinteichosaIraiToroku(NinteichosaIraiToroku);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIraiKubun() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getDdlIraiKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlIraiKubun(DropDownList ddlIraiKubun) {
+        this.getNinteichosaIraiList().getNinteichosaIraiToroku().setDdlIraiKubun(ddlIraiKubun);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtChosaIraiYmd() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getTxtChosaIraiYmd();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaIraiYmd(TextBoxDate txtChosaIraiYmd) {
+        this.getNinteichosaIraiList().getNinteichosaIraiToroku().setTxtChosaIraiYmd(txtChosaIraiYmd);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsukeru() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getBtnWaritsukeru();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsukeru(Button btnWaritsukeru) {
+        this.getNinteichosaIraiList().getNinteichosaIraiToroku().setBtnWaritsukeru(btnWaritsukeru);
+    }
+
+    @JsonIgnore
+    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getCcdItakusakiAndChosainInput();
     }
 
     // </editor-fold>
