@@ -47,7 +47,8 @@ public class NinnteiChousairaiShudouFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinnteiChousairaiShudouFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinnteiChousairaiShudouFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinnteiChousairaiShudouFinder}のインスタンス
      */
     public static NinnteiChousairaiShudouFinder createInstance() {
         return InstanceProvider.create(NinnteiChousairaiShudouFinder.class);
@@ -75,19 +76,17 @@ public class NinnteiChousairaiShudouFinder {
      * 更新用認定調査依頼情報を取得します。
      *
      * @param parameter 認定調査依頼情報パラメータ
-     * @return SearchResult<NinteiShinseiJoho> 認定調査依頼情報
+     * @return NinteiShinseiJoho
      */
     @Transaction
-    public SearchResult<NinteiShinseiJoho> get更新用認定調査依頼情報(NinnteiChousairaiShudouParameter parameter) {
+    public NinteiShinseiJoho get更新用認定調査依頼情報(NinnteiChousairaiShudouParameter parameter) {
         INinnteiChousairaiShudouMapper mapper = mapperProvider.create(INinnteiChousairaiShudouMapper.class);
         NinteiShinseiJohoRelateEntity entity = mapper.select更新用認定調査依頼情報(parameter);
         if (entity == null) {
-            return SearchResult.of(Collections.<NinnteiChousairaiShudouBusiness>emptyList(), 0, false);
+            return null;
         }
-        List<NinteiShinseiJoho> 認定調査依頼List = new ArrayList<>();
         entity.initializeMd5ToEntities();
-        認定調査依頼List.add(new NinteiShinseiJoho(entity));
-        return SearchResult.of(認定調査依頼List, 0, false);
+        return new NinteiShinseiJoho(entity);
     }
 
     /**

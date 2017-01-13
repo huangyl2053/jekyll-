@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileChosainRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,6 +52,14 @@ public interface INinteichosaIraiMapper {
      * @return 調査員情報
      */
     List<DbT5913ChosainJohoEntity> select委託先調査員情報(NinteichosaIraiParameter parameter);
+
+    /**
+     * 画面選択した保険者番号より、認定調査委託先と調査員を取得します。
+     *
+     * @param parameter 検索パラメータ
+     * @return 調査員情報
+     */
+    List<NinteichosaItakusakiJohoRelateEntity> select認定調査委託先And調査員情報(NinteichosaIraiParameter parameter);
 
     /**
      * 画面選択した申請書管理番号より、最大の認定調査依頼履歴番号を取得します。

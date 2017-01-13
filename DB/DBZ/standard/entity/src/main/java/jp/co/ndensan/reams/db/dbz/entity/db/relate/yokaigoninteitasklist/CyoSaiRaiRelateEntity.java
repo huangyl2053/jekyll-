@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -25,7 +26,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class CyoSaiRaiRelateEntity {
+public class CyoSaiRaiRelateEntity implements Serializable {
+
+    private static final long serialVersionUID = 218315186601471803L;
 
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;

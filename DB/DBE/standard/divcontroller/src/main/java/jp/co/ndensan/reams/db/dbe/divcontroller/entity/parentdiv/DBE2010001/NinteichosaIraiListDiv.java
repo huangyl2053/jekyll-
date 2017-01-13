@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteichosaIraiList のクラスファイル 
- * 
+ * NinteichosaIraiList のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteichosaIraiListDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class NinteichosaIraiListDiv extends Panel {
     private Button btniraiauto;
     @JsonProperty("btnTaOutput")
     private ButtonDialog btnTaOutput;
+    @JsonProperty("NinteichosaIraiToroku")
+    private NinteichosaIraiTorokuDiv NinteichosaIraiToroku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -113,6 +115,24 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     /*
+     * getNinteichosaIraiToroku
+     * @return NinteichosaIraiToroku
+     */
+    @JsonProperty("NinteichosaIraiToroku")
+    public NinteichosaIraiTorokuDiv getNinteichosaIraiToroku() {
+        return NinteichosaIraiToroku;
+    }
+
+    /*
+     * setNinteichosaIraiToroku
+     * @param NinteichosaIraiToroku NinteichosaIraiToroku
+     */
+    @JsonProperty("NinteichosaIraiToroku")
+    public void setNinteichosaIraiToroku(NinteichosaIraiTorokuDiv NinteichosaIraiToroku) {
+        this.NinteichosaIraiToroku = NinteichosaIraiToroku;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -188,6 +208,41 @@ public class NinteichosaIraiListDiv extends Panel {
     @JsonIgnore
     public IHokenshaListDiv getCcdHokenshaList() {
         return this.getChosairaitaishoshaichiran().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIraiKubun() {
+        return this.getNinteichosaIraiToroku().getDdlIraiKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlIraiKubun(DropDownList ddlIraiKubun) {
+        this.getNinteichosaIraiToroku().setDdlIraiKubun(ddlIraiKubun);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtChosaIraiYmd() {
+        return this.getNinteichosaIraiToroku().getTxtChosaIraiYmd();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaIraiYmd(TextBoxDate txtChosaIraiYmd) {
+        this.getNinteichosaIraiToroku().setTxtChosaIraiYmd(txtChosaIraiYmd);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsukeru() {
+        return this.getNinteichosaIraiToroku().getBtnWaritsukeru();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsukeru(Button btnWaritsukeru) {
+        this.getNinteichosaIraiToroku().setBtnWaritsukeru(btnWaritsukeru);
+    }
+
+    @JsonIgnore
+    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
+        return this.getNinteichosaIraiToroku().getCcdItakusakiAndChosainInput();
     }
 
     // </editor-fold>
