@@ -228,7 +228,7 @@ public class NinteiShinseiTorokuManager {
      * @return 医療保険履歴
      */
     public IryohokenKanyuJokyo get医療保険履歴(ShikibetsuCode 識別コード) {
-        if (識別コード == null ){
+        if (識別コード == null) {
             return null;
         }
         DbT1008IryohokenKanyuJokyoEntity entity = dbt1008Dac.select医療保険加入状況ByShikibetsuCode(識別コード);

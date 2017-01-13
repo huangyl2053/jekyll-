@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1010001;
 
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -89,10 +90,49 @@ public class NinteiShinseiTorokuValidationHandler {
         return validationMessages;
     }
 
+    /**
+     * 二次判定年月日チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 二次判定年月日チェック() {
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.二次判定年月日存在));
+        return validationMessages;
+    }
+
+    /**
+     * 申請取下時は取下日理由必須チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 取下日理由必須チェック() {
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須));
+        return validationMessages;
+    }
+
+    /**
+     * 申請サービス削除と取下理由は同時存在チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 申請サービス削除と取下理由存在チェック() {
+
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請サービス削除と取下理由は同時存在));
+        return validationMessages;
+    }
+
     private static enum NinteiShinseiTorokuMessages implements IValidationMessage {
 
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
         項目に対する制約(UrErrorMessages.項目に対する制約, "みなし２号審査受付場合、被保険者区分", "\"8\" (生活保護)"),
+        二次判定年月日存在(DbeErrorMessages.二次判定が既に行われている要介護認定申請情報です),
+        申請取下時は取下日理由必須(DbeErrorMessages.申請取下時は取下日理由を入力してください),
+        申請サービス削除と取下理由は同時存在(DbeErrorMessages.申請サービス削除と取下理由は同時に入力できません),
         終了日が開始日以前(UrErrorMessages.終了日が開始日以前);     
 
         private final Message message;

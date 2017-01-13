@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -46,6 +47,7 @@ public class NinteiShinseiTorokuHandler {
     private final NinteiShinseiTorokuDiv div;
     private static final int ZERO_10 = 10;
     private static final RString ZERO_6 = new RString("000000");
+    private static final RString 歳 = new RString("歳");
 
     /**
      * コンストラクタです。
@@ -74,7 +76,7 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.新規申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.更新申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
+        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.更新申請.getコード(), NinteiShinseiShinseijiKubunCode.更新申請.get名称()));
         dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.区分変更申請.getコード(), NinteiShinseiShinseijiKubunCode.区分変更申請.get名称()));
         dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.職権.getコード(), NinteiShinseiShinseijiKubunCode.職権.get名称()));
         dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.転入申請.getコード(), NinteiShinseiShinseijiKubunCode.転入申請.get名称()));
@@ -98,6 +100,7 @@ public class NinteiShinseiTorokuHandler {
             if (result.get性別() != null && !result.get性別().isEmpty()) {
                 div.getAtenaInfoToroku().getSeibetsu().setValue(Seibetsu.toValue(result.get性別().getColumnValue()).get名称());
             }
+            div.getAtenaInfoToroku().getNenrei().setValue(new RString(result.get年齢()).concat(歳));
             div.getAtenaInfoToroku().getYubinNo().setValue(result.get郵便番号());
             div.getAtenaInfoToroku().getJusho().setDomain(result.get住所());
             div.getAtenaInfoToroku().getTelNo().setDomain(result.get電話番号());
@@ -198,16 +201,12 @@ public class NinteiShinseiTorokuHandler {
             div.getTxtTorisageDate().setValue(new RDate(result.get取下年月日().toString()));
         }
         div.getTxtTorisageJiyu().setValue(result.get取下理由());
-        try {
-            List<KeyValueDataSource> dataSource = new ArrayList<>();
-            for (TorisageKubunCode torisageKubunCode : TorisageKubunCode.values()) {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (TorisageKubunCode torisageKubunCode : TorisageKubunCode.values()) {
             dataSource.add(new KeyValueDataSource(torisageKubunCode.getコード(), torisageKubunCode.get名称()));
         }
-            div.getDdlTorisageJiyu().setDataSource(dataSource);
-            div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
-        } catch (IllegalArgumentException e) {
-            div.getDdlTorisageJiyu().setSelectedKey(TorisageKubunCode.認定申請有効.getコード());
-        }
+        div.getDdlTorisageJiyu().setDataSource(dataSource);
+        div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
     }
     
     /**
@@ -269,7 +268,11 @@ public class NinteiShinseiTorokuHandler {
             div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                     result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
         }
-        div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
+        if (!ShienShinseiKubun.不明.getコード().equals(result.get申請書区分())) {
+            div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
+        } else {
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().clearSelectedItem();
+        }
         if (result.get認定申請区分申請時コード() != null) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分申請時コード().value()));
         }
