@@ -45,7 +45,7 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * @return ikenshoiraitaishoichiran
      */
     @JsonProperty("ikenshoiraitaishoichiran")
-    public IkenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
+    public ikenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
         return ikenshoiraitaishoichiran;
     }
 
@@ -54,7 +54,7 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * @param ikenshoiraitaishoichiran ikenshoiraitaishoichiran
      */
     @JsonProperty("ikenshoiraitaishoichiran")
-    public void setIkenshoiraitaishoichiran(IkenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
+    public void setIkenshoiraitaishoichiran(ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
         this.ikenshoiraitaishoichiran = ikenshoiraitaishoichiran;
     }
 
