@@ -110,6 +110,7 @@ public class ShujiiIryokikanAndShujiiInput {
         
         if (!list.isEmpty()) {
             createHandler(div).setShujiiName(list.get(0).get主治医氏名());
+            createHandler(div).setChkShiteii(new LasdecCode(div.getHdnShichosonCode()), list.get(0).get医療機関コード(), list.get(0).get主治医コード());
         }
         ValidationMessageControlPairs validationResult = createValidationHandler(div).validate主治医コード();
         if (validationResult.iterator().hasNext()) {
@@ -188,6 +189,7 @@ public class ShujiiIryokikanAndShujiiInput {
         div.getTxtShujiiName().setValue(modle.get主治医氏名());
         div.getTxtIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtIryoKikanName().setValue(modle.get主治医医療機関名称());
+        createHandler(div).setChkShiteii(new LasdecCode(modle.get市町村コード()), modle.get主治医医療機関コード(), modle.get主治医コード());
         return ResponseData.of(div).respond();
     }
 

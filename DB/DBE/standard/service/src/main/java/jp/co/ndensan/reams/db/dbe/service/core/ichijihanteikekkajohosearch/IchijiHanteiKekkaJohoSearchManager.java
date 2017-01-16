@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkajohosearch.I
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity;
@@ -145,6 +146,84 @@ public class IchijiHanteiKekkaJohoSearchManager {
             builder.append(str);
         }
         return builder.toRString();
+    }
+
+    /**
+     * 一次判定処理に必要な、引数の作成を行います。このメソッドは仮一次判定時に、画面から入力した基本調査項目を元に引数を作成します。
+     *
+     * @param 申請書管理番号 ShinseishokanriNo
+     * @param 第1群 List KihonChosaInput
+     * @param 第2群 List KihonChosaInput
+     * @param 第3群 List KihonChosaInput
+     * @param 第4群 List KihonChosaInput
+     * @param 第5群 List KihonChosaInput
+     * @param 特別な医療List List KihonChosaInput
+     * @param 自立度List List KihonChosaInput
+     * @return 一次判定DLLに渡す引数。もしくはEMPTY
+     */
+    @Transaction
+    public RString get一次判定引数(ShinseishoKanriNo 申請書管理番号, List<KihonChosaInput> 第1群, List<KihonChosaInput> 第2群,
+            List<KihonChosaInput> 第3群, List<KihonChosaInput> 第4群, List<KihonChosaInput> 第5群,
+            List<KihonChosaInput> 特別な医療List, List<KihonChosaInput> 自立度List) {
+
+        if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
+            return RString.EMPTY;
+        }
+        Code 厚労省IF識別コード = get厚労省IF識別コード(申請書管理番号);
+        if (!KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
+                && !KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+            return RString.EMPTY;
+        }
+
+        List<RString> 基本調査項目List = new ArrayList<>();
+        基本調査項目List.addAll(getKihonChosaInputData(第1群));
+        基本調査項目List.addAll(getKihonChosaInputData(第2群));
+        基本調査項目List.addAll(getKihonChosaInputData(第3群));
+        基本調査項目List.addAll(getKihonChosaInputData(第4群));
+        基本調査項目List.addAll(getKihonChosaInputData(第5群));
+        基本調査項目List.addAll(getKihonChosaInputData(特別な医療List));
+
+        List<RString> 主治医意見書項目List = get主治医意見書項目(申請書管理番号);
+
+        RString 基本調査項目 = join(基本調査項目List);
+        RString 主治医意見書項目 = join(主治医意見書項目List);
+
+        RString 障害高齢者自立度 = RString.EMPTY;
+        RString 認知症高齢者自立度 = RString.EMPTY;
+        if (自立度List != null && !自立度List.isEmpty()) {
+            Code 障害高齢者自立度コード = 自立度List.get(0).get障害高齢者自立度();
+            Code 認知症高齢者自立度コード = 自立度List.get(1).get認知症高齢者自立度();
+            障害高齢者自立度 = 障害高齢者自立度コード == null ? RString.EMPTY : 障害高齢者自立度コード.getColumnValue();
+            認知症高齢者自立度 = 障害高齢者自立度コード == null ? RString.EMPTY : 認知症高齢者自立度コード.getColumnValue();
+        }
+        RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
+
+        if (基本調査項目.length() != 74
+                || 障害高齢者自立度.length() != 1
+                || 認知症高齢者自立度.length() != 1) {
+            return RString.EMPTY;
+        }
+
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(基本調査項目);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(主治医意見書項目);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(障害高齢者自立度);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(認知症高齢者自立度);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(認知症高齢者自立度_主治医意見書);
+
+        return builder.toRString();
+    }
+
+    private List<RString> getKihonChosaInputData(List<KihonChosaInput> inputDataList) {
+        List<RString> retList = new ArrayList<>();
+        for (KihonChosaInput input : inputDataList) {
+            retList.add(input.get調査項目());
+        }
+        return retList;
     }
 
     //TODO n8178 不要か判断した後削除する。（一次判定は行えない以上不要と思われるが、別処理でも利用されているようなので現状は残している）

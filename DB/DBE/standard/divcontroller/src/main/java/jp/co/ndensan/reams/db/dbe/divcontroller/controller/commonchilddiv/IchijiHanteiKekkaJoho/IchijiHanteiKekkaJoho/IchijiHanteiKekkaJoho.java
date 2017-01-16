@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJoho.IchijiHanteiKekkaJohoHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
@@ -67,7 +68,7 @@ public class IchijiHanteiKekkaJoho {
         }
 
         if (ModeType.ADD_MODE.equals(modeType)) {
-            if (!handler.create一次判定引数(shinseishoKanriNo)) {
+            if (RString.isNullOrEmpty(div.getHanteiArgument()) && !handler.create一次判定引数(shinseishoKanriNo)) {
                 handler.setStateOfIchijiHanteiKekka(ModeType.SHOKAI_MODE);
                 return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定実行不可_申請日.getMessage()).respond();
             }
