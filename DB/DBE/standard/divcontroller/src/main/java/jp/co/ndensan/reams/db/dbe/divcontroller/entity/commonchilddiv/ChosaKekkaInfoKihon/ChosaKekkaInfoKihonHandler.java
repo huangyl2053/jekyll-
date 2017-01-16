@@ -537,6 +537,10 @@ public class ChosaKekkaInfoKihonHandler {
     }
 
     private RString get回答(TokiJikouBusiness chosaItem, RString 回答パターン) {
+        if (chosaItem == null || RString.isNullOrEmpty(chosaItem.get調査項目())) {
+            return RString.EMPTY;
+        }
+
         if (AnswerPattern.回答パターン1.getコード().equals(回答パターン)) {
             return ChosaAnser01.toValue(chosaItem.get調査項目()).get名称();
         }

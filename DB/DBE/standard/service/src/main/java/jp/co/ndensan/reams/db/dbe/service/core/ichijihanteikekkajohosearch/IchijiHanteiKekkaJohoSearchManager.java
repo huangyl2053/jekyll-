@@ -42,6 +42,10 @@ public class IchijiHanteiKekkaJohoSearchManager {
     private static final RString DATA_SPLIT_STR = new RString(",");
     private static final RString SHUJII_IKENSHO_KINYU_NASHI = new RString("9");
 
+    private static final int KIHON_CHOSA_KOMOKU_LENGTH = 74;
+    private static final int SHOGAI_KOREISHA_JIRITSUDO_LENGTH = 1;
+    private static final int NINCHISHO_KOREISHA_JIRITSUDO_LENGTH = 1;
+
     /**
      * コンストラクタです。
      */
@@ -198,9 +202,9 @@ public class IchijiHanteiKekkaJohoSearchManager {
         }
         RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
 
-        if (基本調査項目.length() != 74
-                || 障害高齢者自立度.length() != 1
-                || 認知症高齢者自立度.length() != 1) {
+        if (基本調査項目.length() != KIHON_CHOSA_KOMOKU_LENGTH
+                || 障害高齢者自立度.length() != SHOGAI_KOREISHA_JIRITSUDO_LENGTH
+                || 認知症高齢者自立度.length() != NINCHISHO_KOREISHA_JIRITSUDO_LENGTH) {
             return RString.EMPTY;
         }
 
