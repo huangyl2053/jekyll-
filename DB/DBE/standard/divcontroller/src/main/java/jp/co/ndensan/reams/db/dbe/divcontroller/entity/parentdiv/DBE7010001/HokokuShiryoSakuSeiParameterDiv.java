@@ -201,13 +201,13 @@ public class HokokuShiryoSakuSeiParameterDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkShukeiTani() {
-        return this.getShukeiTani().getChkShukeiTani();
+    public RadioButton getRadShukeiTani() {
+        return this.getShukeiTani().getRadShukeiTani();
     }
 
     @JsonIgnore
-    public void  setChkShukeiTani(CheckBoxList chkShukeiTani) {
-        this.getShukeiTani().setChkShukeiTani(chkShukeiTani);
+    public void  setRadShukeiTani(RadioButton radShukeiTani) {
+        this.getShukeiTani().setRadShukeiTani(radShukeiTani);
     }
 
     // </editor-fold>

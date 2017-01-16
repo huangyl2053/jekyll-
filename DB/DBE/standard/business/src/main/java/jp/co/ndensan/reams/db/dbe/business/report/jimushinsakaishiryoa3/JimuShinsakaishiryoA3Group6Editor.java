@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -32,7 +33,6 @@ public class JimuShinsakaishiryoA3Group6Editor implements IJimuShinsakaishiryoA3
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
     private static final int INT_12 = 12;
-    private static final int INT_20 = 20;
     private static final char CHAR_0 = '0';
 
     /**
@@ -77,7 +77,7 @@ public class JimuShinsakaishiryoA3Group6Editor implements IJimuShinsakaishiryoA3
             source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                     business.get申請書管理番号());
         }
-        source.layout = INT_20;
+        source.layout = JimuShinsakaiShiryoA3Layouts.事務局用追加資料.index();
         return source;
     }
 

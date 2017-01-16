@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -24,7 +25,6 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
     private final JimuSonotashiryoBusiness business;
     private final int index;
     private static final int INT_4 = 4;
-    private static final int INT_19 = 19;
 
     /**
      * コンストラクタです。
@@ -69,7 +69,7 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
             source.imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
             source.imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
         }
-        source.layout = INT_19;
+        source.layout = JimuShinsakaiShiryoA3Layouts.事務局用その他資料.index();;
         return source;
     }
 

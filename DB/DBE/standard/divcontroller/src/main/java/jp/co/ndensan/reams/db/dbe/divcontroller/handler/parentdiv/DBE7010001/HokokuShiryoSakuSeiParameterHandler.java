@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE7010001;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE7010001.HokokuShiryoSakuSeiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -28,7 +27,7 @@ public class HokokuShiryoSakuSeiParameterHandler {
     private static final RString KEY_介護認定審査会集計表_申請区分別 = new RString("5");
     private static final RString KEY_介護認定審査会集計表_現在の状況別 = new RString("6");
     private static final RString KEY_CSV出力 = new RString("0");
-    private static final List<RString> KEYS_集計単位_申請時のみ = Arrays.asList(new RString("key0"));
+    private static final RString KEY_集計単位_申請時のみ = new RString("key0");
 
     private final HokokuShiryoSakuSeiParameterDiv div;
 
@@ -51,7 +50,7 @@ public class HokokuShiryoSakuSeiParameterHandler {
         div.getTxtKijyunYMD().setValue(RDate.getNowDate());
         div.getTxtTaishoGappi().clearFromValue();
         div.getTxtTaishoGappi().clearToValue();
-        div.getChkShukeiTani().setSelectedItemsByKey(CHECKなし);
+        div.getRadShukeiTani().clearSelectedItem();
         セット抽出条件();
     }
 
@@ -67,9 +66,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getChkHihokenshaKubun().setSelectedItemsByKey(CHECKなし);
             div.getDdlGogitaiBango().setDisabled(true);
             div.getDdlGogitaiBango().setSelectedIndex(0);
-            div.getChkShukeiTani().setDisabled(true);
-            div.getChkShukeiTani().setSelectedItemsByKey(CHECKなし);
-            div.getChkShukeiTani().setRequired(false);
+            div.getRadShukeiTani().setDisabled(true);
+            div.getRadShukeiTani().clearSelectedItem();
+            div.getRadShukeiTani().setRequired(false);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         } else if (KEY_実施状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
@@ -79,9 +78,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(true);
             div.getDdlGogitaiBango().setSelectedIndex(0);
-            div.getChkShukeiTani().setDisabled(false);
-            div.getChkShukeiTani().setSelectedItemsByKey(KEYS_集計単位_申請時のみ);
-            div.getChkShukeiTani().setRequired(true);
+            div.getRadShukeiTani().setDisabled(false);
+            div.getRadShukeiTani().setSelectedKey(KEY_集計単位_申請時のみ);
+            div.getRadShukeiTani().setRequired(true);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         } else if (KEY_審査判定状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
@@ -90,9 +89,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getTxtTaishoGappi().setDisabled(false);
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(false);
-            div.getChkShukeiTani().setDisabled(true);
-            div.getChkShukeiTani().setSelectedItemsByKey(CHECKなし);
-            div.getChkShukeiTani().setRequired(false);
+            div.getRadShukeiTani().setDisabled(true);
+            div.getRadShukeiTani().clearSelectedItem();
+            div.getRadShukeiTani().setRequired(false);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         } else if (KEY_審査判定の変更状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
@@ -101,9 +100,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getTxtTaishoGappi().setDisabled(false);
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(false);
-            div.getChkShukeiTani().setDisabled(false);
-            div.getChkShukeiTani().setSelectedItemsByKey(KEYS_集計単位_申請時のみ);
-            div.getChkShukeiTani().setRequired(true);
+            div.getRadShukeiTani().setDisabled(false);
+            div.getRadShukeiTani().setSelectedKey(KEY_集計単位_申請時のみ);
+            div.getRadShukeiTani().setRequired(true);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         } else if (KEY_介護認定審査会集計表_判定別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
@@ -113,9 +112,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(true);
             div.getDdlGogitaiBango().setSelectedIndex(0);
-            div.getChkShukeiTani().setDisabled(true);
-            div.getChkShukeiTani().setSelectedItemsByKey(CHECKなし);
-            div.getChkShukeiTani().setRequired(false);
+            div.getRadShukeiTani().setDisabled(true);
+            div.getRadShukeiTani().clearSelectedItem();
+            div.getRadShukeiTani().setRequired(false);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         } else if (KEY_介護認定審査会集計表_申請区分別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
@@ -125,9 +124,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(true);
             div.getDdlGogitaiBango().setSelectedIndex(0);
-            div.getChkShukeiTani().setDisabled(false);
-            div.getChkShukeiTani().setSelectedItemsByKey(KEYS_集計単位_申請時のみ);
-            div.getChkShukeiTani().setRequired(true);
+            div.getRadShukeiTani().setDisabled(false);
+            div.getRadShukeiTani().setSelectedKey(KEY_集計単位_申請時のみ);
+            div.getRadShukeiTani().setRequired(true);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         } else if (KEY_介護認定審査会集計表_現在の状況別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
@@ -140,9 +139,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getChkHihokenshaKubun().setSelectedItemsByKey(CHECKなし);
             div.getDdlGogitaiBango().setDisabled(true);
             div.getDdlGogitaiBango().setSelectedIndex(0);
-            div.getChkShukeiTani().setDisabled(false);
-            div.getChkShukeiTani().setSelectedItemsByKey(KEYS_集計単位_申請時のみ);
-            div.getChkShukeiTani().setRequired(true);
+            div.getRadShukeiTani().setDisabled(false);
+            div.getRadShukeiTani().setSelectedKey(KEY_集計単位_申請時のみ);
+            div.getRadShukeiTani().setRequired(true);
             div.getRadCsvShutsuryoku().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(true);
         }
@@ -155,9 +154,9 @@ public class HokokuShiryoSakuSeiParameterHandler {
             div.getTxtTaishoGappi().setDisabled(false);
             div.getChkHihokenshaKubun().setDisabled(false);
             div.getDdlGogitaiBango().setDisabled(false);
-            div.getChkShukeiTani().setDisabled(true);
-            div.getChkShukeiTani().setSelectedItemsByKey(CHECKなし);
-            div.getChkShukeiTani().setRequired(false);
+            div.getRadShukeiTani().setDisabled(true);
+            div.getRadShukeiTani().clearSelectedItem();
+            div.getRadShukeiTani().setRequired(false);
             div.getRadhutsuryokuChohyo().clearSelectedItem();
             div.getTxtShuturyokuSaki().setDisabled(false);
             div.getTxtShuturyokuSaki().setValue(

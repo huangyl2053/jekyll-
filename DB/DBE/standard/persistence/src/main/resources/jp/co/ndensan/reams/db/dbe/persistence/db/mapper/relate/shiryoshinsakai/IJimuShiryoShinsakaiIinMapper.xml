@@ -357,29 +357,12 @@
 
     <select id="get事務局委員氏名" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
-        SELECT
-        dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
-        FROM
-        rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594,
-        (
-        SELECT
-        dbt5593."shinsakaiIinCode" AS dbt5593_shinsakaiIinCode
-        FROM
-        rgdb."DbT5593GogitaiWariateIinJoho" AS dbt5593
-        WHERE
-        dbt5593."gogitaiNo" = #{gogitaiNo}
-        AND dbt5593."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{shinsakaiKaisaiYoteiYMD}
-        AND #{shinsakaiKaisaiYoteiYMD} <![CDATA[<=]]> dbt5593."gogitaiYukoKikanShuryoYMD"
-        ) AS IinCodeJoho
-        WHERE
-        dbt5594."shinsakaiIinCode" = IinCodeJoho.dbt5593_shinsakaiIinCode
-        AND (
-        dbt5594."haishiFlag" = #{isHaishiFlag_False}
-        OR
-        (
-        dbt5594."haishiFlag" = #{isHaishiFlag_True}
-        AND #{sisutemuYMD} <![CDATA[<]]> dbt5594."haishiYMD"
-        )
+        SELECT dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
+        FROM rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
+        WHERE dbt5594."shinsakaiIinCode" IN (
+          SELECT dbt5503."shinsakaiIinCode"
+          FROM rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
+          WHERE dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         )
         ORDER BY
         dbt5594."shinsakaiIinCode"

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.IinShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -34,7 +35,6 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
     private static final RString 特記事項テキスト_イメージ区分2 = new RString("2");
     private static final RString 特記パターン1 = new RString("1");
     private static final RString 特記パターン2 = new RString("2");
-    private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
@@ -177,48 +177,48 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
     private void setLayout1(IinShinsakaishiryoA3ReportSource source) {
         if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_6;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_予防給付_テキスト.index();
         } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_7;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_予防給付_短冊テキスト.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_8;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_予防給付_全イメージ.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_9;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_予防給付_短冊イメージ.index();
         }
     }
 
     private void setLayout2(IinShinsakaishiryoA3ReportSource source) {
         if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_10;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_介護給付_テキスト.index();
         } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_11;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_介護給付_短冊テキスト.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_12;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_介護給付_全イメージ.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_13;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_介護給付_短冊イメージ.index();
         }
     }
 
     private void setLayout3(IinShinsakaishiryoA3ReportSource source) {
         if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_2;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_テキスト.index();
         } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_3;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_短冊テキスト.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_4;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_全イメージ.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_5;
+            source.layout = IinShinsakaiShiryoA3Layouts.委員用一次判定結果票_短冊イメージ.index();
         }
     }
 

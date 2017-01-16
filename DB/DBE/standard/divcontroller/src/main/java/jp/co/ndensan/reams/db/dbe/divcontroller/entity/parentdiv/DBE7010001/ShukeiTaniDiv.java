@@ -21,8 +21,8 @@ public class ShukeiTaniDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkShukeiTani")
-    private CheckBoxList chkShukeiTani;
+    @JsonProperty("radShukeiTani")
+    private RadioButton radShukeiTani;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class ShukeiTaniDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkShukeiTani
-     * @return chkShukeiTani
+     * getradShukeiTani
+     * @return radShukeiTani
      */
-    @JsonProperty("chkShukeiTani")
-    public CheckBoxList getChkShukeiTani() {
-        return chkShukeiTani;
+    @JsonProperty("radShukeiTani")
+    public RadioButton getRadShukeiTani() {
+        return radShukeiTani;
     }
 
     /*
-     * setchkShukeiTani
-     * @param chkShukeiTani chkShukeiTani
+     * setradShukeiTani
+     * @param radShukeiTani radShukeiTani
      */
-    @JsonProperty("chkShukeiTani")
-    public void setChkShukeiTani(CheckBoxList chkShukeiTani) {
-        this.chkShukeiTani = chkShukeiTani;
+    @JsonProperty("radShukeiTani")
+    public void setRadShukeiTani(RadioButton radShukeiTani) {
+        this.radShukeiTani = radShukeiTani;
     }
 
     // </editor-fold>

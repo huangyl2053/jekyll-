@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3Editor {
 
-    private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_4 = 4;
     private static final int INT_25 = 25;
@@ -100,7 +100,7 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
             source.listZenkaiｙukokikan2_1 = shinsakaishiryoList.get(index + INT_25).get前回期間_下();
             source.listYukokikan2_1 = RString.EMPTY;
         }
-        source.layout = INT_1;
+        source.layout = JimuShinsakaiShiryoA3Layouts.事務局用介護認定審査会資料.index();
         return source;
     }
 

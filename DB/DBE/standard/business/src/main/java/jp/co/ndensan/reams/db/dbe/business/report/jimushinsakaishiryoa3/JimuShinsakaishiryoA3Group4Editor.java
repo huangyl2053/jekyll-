@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -21,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3Editor {
 
-    private static final int INT_14 = 14;
     private static final int INT_4 = 4;
     private final JimuShinsakaiWariateJohoBusiness business;
     private final RString reportId;
@@ -64,7 +64,7 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
         source.shinsaDD = get日(business.get今回認定審査年月日());
         source.imgIkensho1 = business.get左の主治医意見書イメージ();
         source.imgIkensho2 = business.get右の主治医意見書イメージ();
-        source.layout = INT_14;
+        source.layout = JimuShinsakaiShiryoA3Layouts.事務局用主治医意見書.index();
         return source;
     }
 
