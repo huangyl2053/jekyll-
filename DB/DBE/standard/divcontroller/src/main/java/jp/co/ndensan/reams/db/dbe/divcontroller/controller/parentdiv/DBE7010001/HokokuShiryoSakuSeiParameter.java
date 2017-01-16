@@ -53,12 +53,12 @@ public class HokokuShiryoSakuSeiParameter {
         getHandler(div).inint_Clear();
         return ResponseData.of(div).respond();
     }
-    
+
     public ResponseData<HokokuShiryoSakuSeiParameterDiv> onChange_radShutsuryokuChohyo(HokokuShiryoSakuSeiParameterDiv div) {
         getHandler(div).セット抽出条件();
         return ResponseData.of(div).respond();
     }
-    
+
     public ResponseData<HokokuShiryoSakuSeiParameterDiv> onChange_radCsvShutsuryoku(HokokuShiryoSakuSeiParameterDiv div) {
         getHandler(div).セット抽出条件_CSV();
         return ResponseData.of(div).respond();
@@ -114,11 +114,11 @@ public class HokokuShiryoSakuSeiParameter {
         if (KEY_事業状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey())) {
             flag_対象年月 = true;
             flag_対象年月日 = false;
-        } else if (KEY_実施状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
-                || KEY_審査判定状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
-                || KEY_審査判定の変更状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
-                || KEY_介護認定審査会集計表_判定別.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
-                || KEY_介護認定審査会集計表_申請区分別.equals(div.getRadhutsuryokuChohyo().getSelectedKey()) 
+        } else if (KEY_実施状況報告.equals(div.getRadhutsuryokuChohyo().getSelectedKey())
+                || KEY_審査判定状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey())
+                || KEY_審査判定の変更状況.equals(div.getRadhutsuryokuChohyo().getSelectedKey())
+                || KEY_介護認定審査会集計表_判定別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())
+                || KEY_介護認定審査会集計表_申請区分別.equals(div.getRadhutsuryokuChohyo().getSelectedKey())
                 || KEY_CSV出力.equals(div.getRadCsvShutsuryoku().getSelectedKey())) {
             flag_対象年月 = false;
             flag_対象年月日 = true;
@@ -166,8 +166,8 @@ public class HokokuShiryoSakuSeiParameter {
                 flag_対象年月日,
                 div.getTxtTaishoGappi().getFromValue() == null ? RString.EMPTY : div.getTxtTaishoGappi().getFromValue().toDateString(),
                 div.getTxtTaishoGappi().getToValue() == null ? RString.EMPTY : div.getTxtTaishoGappi().getToValue().toDateString(),
-                div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY0),
-                div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY1)
+                div.getRadShukeiTani().getSelectedKey().equals(SELECTKEY_KEY0),
+                div.getRadShukeiTani().getSelectedKey().equals(SELECTKEY_KEY1)
         );
     }
 
