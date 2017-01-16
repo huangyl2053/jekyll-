@@ -87,6 +87,9 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 }
             }
         }
+        if (両面.equals(this.printHou) && reportSourceWriter.pageCount().isOdd()) {
+            set余白ページ(reportSourceWriter);
+        }
         List<TokkiJikou> 短冊情報リスト = new ArrayList<>();
         List<RString> 短冊リスト = new ArrayList<>();
         if (ichijihanteikekkahyoA3Entity != null) {
@@ -98,11 +101,11 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 reportSourceWriter.writeLine(builder);
             }
         }
-        if (shinsakaiWariateJoho != null) {
-            IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);
-            IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
-            reportSourceWriter.writeLine(builder1);
-        }
+//        if (shinsakaiWariateJoho != null) {
+//            IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);
+//            IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
+//            reportSourceWriter.writeLine(builder1);
+//        }
         RString 印刷有無フラグ = DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (両面.equals(this.printHou)) {
             if (印字.equals(印刷有無フラグ)) {

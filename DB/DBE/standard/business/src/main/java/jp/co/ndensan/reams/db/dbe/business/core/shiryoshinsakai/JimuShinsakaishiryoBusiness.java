@@ -257,9 +257,6 @@ public class JimuShinsakaishiryoBusiness {
      * @return 年齢
      */
     public RString get年齢() {
-        if (johoEntity.getAge() == 0) {
-            return RString.EMPTY;
-        }
         return new RString(johoEntity.getAge());
     }
 
