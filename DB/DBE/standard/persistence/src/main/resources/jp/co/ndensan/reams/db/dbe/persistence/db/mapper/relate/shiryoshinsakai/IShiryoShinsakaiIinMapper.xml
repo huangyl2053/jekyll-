@@ -748,7 +748,7 @@
 
     <select id="getShinsakaiIinJoho" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
-        SELECT dbt5594."shinsakaiIinShimei"
+        SELECT dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
         FROM rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
         WHERE dbt5594."shinsakaiIinCode" IN (
           SELECT dbt5503."shinsakaiIinCode"
@@ -863,7 +863,7 @@
     </resultMap>
 
     <resultMap id="Result_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity" autoMapping="true">
-        <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="shinsakaiIinShimei" column="dbt5594_shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
     </resultMap>
 
     <resultMap id="Result_ShinsakaiYoteiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiYoteiJohoEntity" autoMapping="true">
