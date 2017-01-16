@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * 
  */
 public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -208,16 +208,6 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     }
 
     @JsonIgnore
-    public RadioButton getRadTankiKioku() {
-        return this.getNichijoJiritsudo().getRadTankiKioku();
-    }
-
-    @JsonIgnore
-    public void  setRadTankiKioku(RadioButton radTankiKioku) {
-        this.getNichijoJiritsudo().setRadTankiKioku(radTankiKioku);
-    }
-
-    @JsonIgnore
     public RadioButton getRadNinchishoKoreishaJiritsu() {
         return this.getNichijoJiritsudo().getRadNinchishoKoreishaJiritsu();
     }
@@ -225,6 +215,16 @@ public class ShinshinIkenDiv extends Panel implements IShinshinIkenDiv {
     @JsonIgnore
     public void  setRadNinchishoKoreishaJiritsu(RadioButton radNinchishoKoreishaJiritsu) {
         this.getNichijoJiritsudo().setRadNinchishoKoreishaJiritsu(radNinchishoKoreishaJiritsu);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadTankiKioku() {
+        return this.getNinchishoChukakuShojo().getRadTankiKioku();
+    }
+
+    @JsonIgnore
+    public void  setRadTankiKioku(RadioButton radTankiKioku) {
+        this.getNinchishoChukakuShojo().setRadTankiKioku(radTankiKioku);
     }
 
     @JsonIgnore
