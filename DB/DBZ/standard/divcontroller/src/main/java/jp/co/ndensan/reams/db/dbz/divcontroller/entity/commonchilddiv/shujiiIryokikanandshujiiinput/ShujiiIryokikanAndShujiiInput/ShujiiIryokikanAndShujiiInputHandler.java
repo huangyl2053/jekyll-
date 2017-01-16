@@ -74,18 +74,7 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.getTxtIryoKikanName().setValue(iryoKikanMeisho);
         div.getTxtShujiiCode().setValue(shujiiCode);
         div.getTxtShujiiName().setValue(shujiiName);
-        ShujiiIryokikanAndShujiiInputFinder finder = ShujiiIryokikanAndShujiiInputFinder.createInstance();
-        boolean 指定医フラグ = false;
-        if(!(shichosonCode == null || shichosonCode.isEmpty()) &&
-           !(shujiiIryokikanCode == null || shujiiIryokikanCode.isEmpty()) &&
-           !(shujiiCode == null || shujiiCode.isEmpty())){
-            指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
-        }
-        List<RString> shiteiiList = new ArrayList();
-        if (指定医フラグ) {
-            shiteiiList.add(KEY0);
-        }
-        div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
+        setChkShiteii(shichosonCode, shujiiIryokikanCode, shujiiCode);
         div.setHdnShichosonCode(shichosonCode.value());
         div.setHdnShinseishoKanriNo(shinseishoKanriNo.value());
         div.setHdnSubGyomuModel(gyomuCode.value());
@@ -140,5 +129,30 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.getTxtShujiiCode().clearValue();
         div.getTxtShujiiName().clearValue();
         div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
+    }
+    
+    /**
+     * 指定医フラグをセットします。
+     * 
+     * @param shichosonCode 市町村コード
+     * @param shujiiIryokikanCode 主治医医療機関コード
+     * @param shujiiCode 主治医コード
+     */
+    public void setChkShiteii(LasdecCode shichosonCode, RString shujiiIryokikanCode, RString shujiiCode) {
+        ShujiiIryokikanAndShujiiInputFinder finder = ShujiiIryokikanAndShujiiInputFinder.createInstance();
+        boolean 指定医フラグ = false;
+        if(!(shichosonCode == null || shichosonCode.isEmpty()) &&
+           !(shujiiIryokikanCode == null || shujiiIryokikanCode.isEmpty()) &&
+           !(shujiiCode == null || shujiiCode.isEmpty())){
+            指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
+        }
+        List<RString> shiteiiList = new ArrayList();
+        if (指定医フラグ) {
+            shiteiiList.add(KEY0);
+            div.getChkShiteii().setDisabled(false);
+        } else {
+            div.getChkShiteii().setDisabled(true);
+        }
+        div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
     }
 }
