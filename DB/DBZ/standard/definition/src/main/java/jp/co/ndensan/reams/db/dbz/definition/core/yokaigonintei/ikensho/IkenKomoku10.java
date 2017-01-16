@@ -28,9 +28,9 @@ public enum IkenKomoku10 {
      */
     重("3", "重"),
     /**
-     * コード:4 名称:記載なし 略称:定義なし
+     * コード:9 名称:記載なし 略称:定義なし
      */
-    記載なし("4", "記載なし");
+    記載なし("9", "記載なし");
 
     private final RString code;
     private final RString fullName;

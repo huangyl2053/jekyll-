@@ -19,11 +19,11 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
      * 認知症周辺症状詳細チェックです。
      */
     認知症周辺症状詳細チェック {
-
+      
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
                     return !(div.getNinchishoShuhenShojo().getRadNinchishoShuhenShojoUmu()
-                    .getSelectedKey().contains(KEY_1)
+                    .getSelectedKey().contains(KEY_2)
                     && div.getNinchishoShuhenShojo().getChkNinchishoShuhenShojo()
                     .getSelectedKeys().isEmpty()
                     && div.getNinchishoShuhenShojo().getChkNinchishoShuhenShojoSonota()
@@ -48,7 +48,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getSonotaShojo().getRadSonotaShojo().getSelectedKey().contains(KEY_1)
+                    return !(div.getSonotaShojo().getRadSonotaShojo().getSelectedKey().contains(KEY_2)
                     && div.getSonotaShojo().getTxtShojomei().getValue().isEmpty());
                 }
             },
@@ -59,7 +59,7 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
                 @Override
                 public boolean apply(ShinshinIkenDiv div) {
-                    return !(div.getSonotaShojo().getRadSenmonJushin().getSelectedKey().contains(KEY_1)
+                    return !(div.getSonotaShojo().getRadSenmonJushin().getSelectedKey().contains(KEY_2)
                     && div.getSonotaShojo().getTxtShosaiTokkiJiko().getValue().isEmpty());
                 }
             },
@@ -281,4 +281,5 @@ public enum ShinshinIkenSpec implements IPredicate<ShinshinIkenDiv> {
 
     private static final RString KEY_0 = new RString("key0");
     private static final RString KEY_1 = new RString("key1");
+    private static final RString KEY_2 = new RString("key2");
 }

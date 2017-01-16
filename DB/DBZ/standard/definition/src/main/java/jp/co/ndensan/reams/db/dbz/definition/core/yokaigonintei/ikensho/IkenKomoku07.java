@@ -26,7 +26,7 @@ public enum IkenKomoku07 {
     /**
      * コード:9 名称:記載なし 略称:定義なし
      */
-    記載なし("9", "記載なし無");
+    記載なし("9", "記載なし");
 
     private final RString code;
     private final RString fullName;
