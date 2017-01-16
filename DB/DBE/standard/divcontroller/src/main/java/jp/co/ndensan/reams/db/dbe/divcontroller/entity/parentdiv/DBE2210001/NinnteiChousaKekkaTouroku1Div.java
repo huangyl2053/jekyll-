@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinnteiChousaKekkaTouroku1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -63,6 +63,8 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     private RString hiddenKihonChosaInput7Flag;
     @JsonProperty("ichijiHanteiKekkaJoho")
     private RString ichijiHanteiKekkaJoho;
+    @JsonProperty("hanteiArgument")
+    private RString hanteiArgument;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -332,6 +334,24 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     /*
+     * gethanteiArgument
+     * @return hanteiArgument
+     */
+    @JsonProperty("hanteiArgument")
+    public RString getHanteiArgument() {
+        return hanteiArgument;
+    }
+
+    /*
+     * sethanteiArgument
+     * @param hanteiArgument hanteiArgument
+     */
+    @JsonProperty("hanteiArgument")
+    public void setHanteiArgument(RString hanteiArgument) {
+        this.hanteiArgument = hanteiArgument;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -345,13 +365,13 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
