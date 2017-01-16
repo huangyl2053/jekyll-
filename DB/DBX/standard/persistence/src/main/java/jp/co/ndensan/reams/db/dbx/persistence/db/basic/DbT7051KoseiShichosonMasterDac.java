@@ -151,6 +151,7 @@ public class DbT7051KoseiShichosonMasterDac {
                 where(
                         eq(gappeiKyuShichosonKubun, '0') //TODO enumを使用する。
                 ).
+                order(by(DbT7051KoseiShichosonMaster.shichosonCode, Order.ASC)).
                 toList(DbT7051KoseiShichosonMasterEntity.class);
     }
 
