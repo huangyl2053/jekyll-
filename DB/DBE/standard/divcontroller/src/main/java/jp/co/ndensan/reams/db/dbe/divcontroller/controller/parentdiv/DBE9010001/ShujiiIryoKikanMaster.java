@@ -65,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokinShubetsu;
 
 /**
  * 主治医医療機関情報処理のクラスです。
@@ -348,6 +349,10 @@ public class ShujiiIryoKikanMaster {
     }
 
     private KoseiShujiiIryoKikanMasterCsvEntity getCsvData(dgShujiiIchiran_Row row) {
+        RString 預金種別名称 = RString.EMPTY;
+        if (!(row.getYokinShubetsu() == null) && !row.getYokinShubetsu().isEmpty()) {
+            預金種別名称 = get種別(row.getYokinShubetsu());
+        }
         KoseiShujiiIryoKikanMasterCsvEntity data = new KoseiShujiiIryoKikanMasterCsvEntity(
                 row.getShichosonCode(),
                 row.getShichoson(),
@@ -364,11 +369,32 @@ public class ShujiiIryoKikanMaster {
                 row.getJokyoFlag(),
                 row.getKinyuKikanCode(),
                 row.getKinyuKikanShitenCode(),
-                row.getYokinShubetsu(),
+                預金種別名称,
                 row.getKozaNo(),
-                row.getShujiiIryoKikankana(),
+                row.getKozaMeigininKana(),
                 row.getKozaMeiginin());
         return data;
+    }
+
+    /**
+     * 預金種別名称を返します。
+     *
+     * @param date YokinShubetsuPattern
+     * @return RString　預金種別名称
+     */
+    private RString get種別(RString yokinShubetsu) {
+        if (YokinShubetsu.普通預金.get預金種別().equals(yokinShubetsu)) {
+            return YokinShubetsu.普通預金.get預金種別名称();
+        } else if (YokinShubetsu.当座預金.get預金種別().equals(yokinShubetsu)) {
+            return YokinShubetsu.当座預金.get預金種別名称();
+        } else if (YokinShubetsu.納税準備預金.get預金種別().equals(yokinShubetsu)) {
+            return YokinShubetsu.納税準備預金.get預金種別名称();
+        } else if (YokinShubetsu.貯蓄預金.get預金種別().equals(yokinShubetsu)) {
+            return YokinShubetsu.貯蓄預金.get預金種別名称();
+        } else if (YokinShubetsu.その他.get預金種別().equals(yokinShubetsu)) {
+            return YokinShubetsu.その他.get預金種別名称();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -501,7 +527,7 @@ public class ShujiiIryoKikanMaster {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
         }
-        
+
         RString イベント状態 = div.getShujiiJohoInput().getState();
         boolean 状態 = ViewStateHolder.get(ViewStateKeys.状態, boolean.class);
         if (状態) {
@@ -560,6 +586,7 @@ public class ShujiiIryoKikanMaster {
         return ResponseData.of(div)
                 .setState(DBE9010001StateName.医療機関一覧);
     }
+
     private enum validationErrorMessage implements IValidationMessage {
 
         預金種別(UrErrorMessages.必須項目),
@@ -731,6 +758,7 @@ public class ShujiiIryoKikanMaster {
         }
         return ResponseData.of(div).respond();
     }
+
     /**
      * 主治医を登録ボタンボタン押下で、主治医マスタに戻ります。
      *
@@ -770,7 +798,8 @@ public class ShujiiIryoKikanMaster {
     private KoseiShujiiIryoKikanMasterValidationHandler getValidationHandler(ShujiiIryoKikanMasterDiv div) {
         return new KoseiShujiiIryoKikanMasterValidationHandler(div);
     }
-        /**
+
+    /**
      * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶを出力します。
      *
      * @param div NinteichosaItakusakiMainDiv
@@ -797,11 +826,12 @@ public class ShujiiIryoKikanMaster {
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, OUTPUT_CSV_FILE_NAME), response);
     }
+
     private ShujiiIryoKikanMasterKozaMitorokuCsvEntity getCsvDataSonota(dgShujiiIchiran_Row row) {
         ShujiiIryoKikanMasterKozaMitorokuCsvEntity data = new ShujiiIryoKikanMasterKozaMitorokuCsvEntity(
                 row.getShichosonCode(),
                 row.getShichoson(),
-                new RString(row.getShujiiIryoKikanCode().toString()),
+                row.getShujiiIryoKikanCode().getValue(),
                 row.getIryoKikanCode(),
                 row.getShujiiIryoKikan(),
                 row.getShujiiIryoKikankana(),
