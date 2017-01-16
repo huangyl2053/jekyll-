@@ -99,12 +99,17 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
             reportSourceWriter.writeLine(builder1);
         }
         RString 印刷有無フラグ = DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        if (両面.equals(this.printHou) && 印字.equals(印刷有無フラグ)) {
-            set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
-            set主治医意見書(reportSourceWriter);
+        if (両面.equals(this.printHou)) {
+            if (印字.equals(印刷有無フラグ)) {
+                set主治医意見書(reportSourceWriter, true);
+                set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
+            } else {
+                set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
+                set主治医意見書(reportSourceWriter, true);
+            }
         } else {
-            set主治医意見書(reportSourceWriter);
             set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
+            set主治医意見書(reportSourceWriter, false);
         }
         if (sonotashiryoBusiness != null) {
             List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
@@ -128,12 +133,21 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
         }
     }
 
-    private void set主治医意見書(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter) {
+    private void set主治医意見書(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter, boolean is両面印刷) {
+        if (is両面印刷 && !reportSourceWriter.pageCount().isOdd()) {
+            set余白ページ(reportSourceWriter);
+        }
         if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
             IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
             IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
             reportSourceWriter.writeLine(builder1);
         }
+    }
+    
+    private void set余白ページ(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter) {
+        IJimuShinsakaishiryoA3Editor editor1 = new BlankPageEditor();
+        JimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
+        reportSourceWriter.writeLine(builder1);
     }
 
     private void set特記事項2枚目(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter,

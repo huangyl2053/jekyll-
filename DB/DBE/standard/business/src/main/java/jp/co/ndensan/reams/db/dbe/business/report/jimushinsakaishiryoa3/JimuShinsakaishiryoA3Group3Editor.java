@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -137,16 +138,16 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
         }
         if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_15;
+            source.layout = JimuShinsakaiShiryoA3Layouts.事務局用特記事項_テキスト.index();
         } else if (特記事項テキスト_イメージ区分1.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_16;
+            source.layout = JimuShinsakaiShiryoA3Layouts.事務局用特記事項_短冊テキスト.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン1.equals(item.get特記パターン())) {
-            source.layout = INT_17;
+            source.layout = JimuShinsakaiShiryoA3Layouts.事務局用特記事項_全イメージ.index();
         } else if (特記事項テキスト_イメージ区分2.equals(item.get特記事項テキスト_イメージ区分())
                 && 特記パターン2.equals(item.get特記パターン())) {
-            source.layout = INT_18;
+            source.layout = JimuShinsakaiShiryoA3Layouts.事務局用特記事項_短冊イメージ.index();
         }
         return source;
     }
