@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 /**
  * その他資料の読み込み処理です。
  */
+//TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
+//TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
 public class ImageInputSonotaProcess extends BatchProcessBase<RString> {
 
     @BatchWriter
@@ -76,7 +78,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<RString> {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 /* ブレイク処理 */
                 _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                        .append("/* イメージ取り込み処理開始")
+                        .append("/* その他資料取込開始")
                         .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
                         .append(" 被保険者番号：").append(key.get被保険者番号())
                         .append(" 認定申請日：").append(key.get認定申請日())
@@ -85,7 +87,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<RString> {
                         .toString());
                 keyBreakProcess(this.key, this.cache);
                 _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                        .append("/* 認定調査票取り込み処理終了")
+                        .append("/* その他資料取込終了")
                         .append(" 証記載保険者番号：").append(key.get証記載保険者番号()).append(" 被保険者番号：").append(key.get被保険者番号())
                         .append(" 認定申請日：").append(key.get認定申請日()).append("*/")
                         .toString());
@@ -106,7 +108,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<RString> {
     protected void afterExecute() {
         super.afterExecute();
         _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* イメージ取り込み処理開始")
+                .append("/* その他資料取込開始")
                 .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
                 .append(" 被保険者番号：").append(key.get被保険者番号())
                 .append(" 認定申請日：").append(key.get認定申請日())
@@ -115,7 +117,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<RString> {
                 .toString());
         keyBreakProcess(this.key, this.cache);
         _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* 認定調査票取り込み処理終了")
+                .append("/* その他資料取込終了")
                 .append(" 証記載保険者番号：").append(key.get証記載保険者番号()).append(" 被保険者番号：").append(key.get被保険者番号())
                 .append(" 認定申請日：").append(key.get認定申請日()).append("*/")
                 .toString());

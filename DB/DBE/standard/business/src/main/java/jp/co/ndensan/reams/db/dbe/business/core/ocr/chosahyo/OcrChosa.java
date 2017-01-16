@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +15,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import lombok.AccessLevel;
 
 /**
  * OCR情報受入＿バッチ ファイル読み取り結果 クラスです。
@@ -24,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  * @author n8429
  */
 @lombok.Getter
-@lombok.Setter
+@lombok.Setter(AccessLevel.PRIVATE)
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class OcrChosa {
 
@@ -122,8 +125,8 @@ public class OcrChosa {
     private RString 買い物;
     private RString 簡単な調理;
     private RString 過去14日間に受けた治療;
-    private RString 認知症高齢者の日常生活自立度;
-    private RString 障害高齢者の日常生活自立度;
+    private Code 認知症高齢者の日常生活自立度;
+    private Code 障害高齢者の日常生活自立度;
 
     private Map<RString, KomokuNo> 特記事項ImageFileName_調査項目_Map;
 
@@ -186,6 +189,7 @@ public class OcrChosa {
             result.set施設利用の有無(columns.get(31));
 
         } else if (result.getOcrID() == OCRID._502) {
+            result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(to西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
@@ -246,11 +250,15 @@ public class OcrChosa {
             result.set買い物(columns.get(58));
             result.set簡単な調理(columns.get(59));
             result.set過去14日間に受けた治療(columns.get(60));
-            result.set認知症高齢者の日常生活自立度(columns.get(61));
-            result.set障害高齢者の日常生活自立度(columns.get(62));
+            result.set認知症高齢者の日常生活自立度(new Code(columns.get(61)));
+            result.set障害高齢者の日常生活自立度(new Code(columns.get(62)));
         } else if (result.getOcrID() == OCRID._550) {
             RString sheetIdValue = columns.get(1);
             result.setSheetID(new SheetID(sheetIdValue));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(to西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
             Map<RString, KomokuNo> map = new HashMap<>();
             map.put(new RStringBuilder().append(sheetIdValue).append("w01i030.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 5));
             map.put(new RStringBuilder().append(sheetIdValue).append("w01i031.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 6));
@@ -293,6 +301,19 @@ public class OcrChosa {
      */
     public Map<RString, KomokuNo> get特記事項ImageFileName_調査項目_Map() {
         return Collections.unmodifiableMap(特記事項ImageFileName_調査項目_Map);
+    }
+
+    /**
+     * @return 項目番号が空であるファイル名をすべて返します。
+     */
+    public List<RString> get特記事項ImageFileName_KomokuNoIsNotPresent() {
+        List<RString> list = new ArrayList<>();
+        for (Map.Entry<RString, KomokuNo> entry : get特記事項ImageFileName_調査項目_Map().entrySet()) {
+            if (entry.getValue().isEmpty()) {
+                list.add(entry.getKey());
+            }
+        }
+        return list;
     }
 
     private static RString to西暦_年(RString 和暦_日付) {
@@ -400,8 +421,8 @@ public class OcrChosa {
         this.買い物 = RString.EMPTY;
         this.簡単な調理 = RString.EMPTY;
         this.過去14日間に受けた治療 = RString.EMPTY;
-        this.認知症高齢者の日常生活自立度 = RString.EMPTY;
-        this.障害高齢者の日常生活自立度 = RString.EMPTY;
+        this.認知症高齢者の日常生活自立度 = Code.EMPTY;
+        this.障害高齢者の日常生活自立度 = Code.EMPTY;
 
         this.特記事項ImageFileName_調査項目_Map = new HashMap<>();
     }

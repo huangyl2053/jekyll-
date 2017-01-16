@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
@@ -182,27 +183,9 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
             return; //TODO 不正のため、エラーリスト出力対象。
         }
 
-        OcrIken ocrIken = getAnyID777優先(sameKeyValues);
-        DbT5302ShujiiIkenshoJohoEntity dbT5302 = createOrEdit主治医意見書情報(ir, ocrIken);
-        switch (dbT5302.getState()) {
-            case Added:
-                writer_DbT5302.insert(dbT5302);
-                break;
-            case Modified:
-                writer_DbT5302.update(dbT5302);
-                break;
-            default:
-        }
-        for (DbT5304ShujiiIkenshoIkenItemEntity dbT5304 : createOrEdit主治医意見書意見項目s(ir, ocrIken)) {
-            switch (dbT5304.getState()) {
-                case Added:
-                    writer_DbT5304.insert(dbT5304);
-                    continue;
-                case Modified:
-                    writer_DbT5304.update(dbT5304);
-                default:
-            }
-        }
+        OcrIken ocrIken = getAny_ID777優先(sameKeyValues);
+        insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
+        insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
 
         RString tempDirectoryPath = Directory.createTmpDirectory();
         boolean copySucceeds = (sameKeyValues.size() == 1)
@@ -235,7 +218,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         /*----------------------------------------------------------------------------------*/
     }
 
-    OcrIken getAnyID777優先(List<OcrIken> sameKeyValues) {
+    private OcrIken getAny_ID777優先(List<OcrIken> sameKeyValues) {
         for (OcrIken csv : sameKeyValues) {
             if (csv.getOcrID() == OCRID._777) {
                 return csv;
@@ -344,28 +327,18 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         return 厚労省IF識別コード == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
     }
 
-    private static DbT5302ShujiiIkenshoJohoEntity createOrEdit主治医意見書情報(ImageinputRelate ir, OcrIken ocrIken) {
-        DbT5302ShujiiIkenshoJohoEntity entity = ir.getT5302_主治医意見書情報().isEmpty()
-                ? newDbT5302ShujiiIkenshoJohoEntity(ir, ocrIken)
-                : ir.getT5302_主治医意見書情報().get(0);
-        entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
-        OcrShujiiIkenshoJohoEditor.edit(entity, ocrIken);
-        return entity;
-    }
-
-    private static DbT5302ShujiiIkenshoJohoEntity newDbT5302ShujiiIkenshoJohoEntity(ImageinputRelate ir, OcrIken ocrIken) {
-        DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
-        entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
-        entity.setKoroshoIfShikibetsuCode(ir.getT5101_厚労省IF識別コード());
-        entity.setIkenshoIraiKubun(ir.getT5301_主治医意見書依頼区分());
-        entity.setShujiiIryoKikanCode(ir.getT5301_主治医医療機関コード());
-        entity.setShujiiCode(ir.getT5301_主治医コード());
-        entity.setSonotaJushinKaMei(RString.EMPTY);
-        entity.setShindamMei1(RString.EMPTY);
-        entity.setShindamMei2(RString.EMPTY);
-        entity.setShindamMei3(RString.EMPTY);
-        return entity;
+    private static void insertOrUpdate主治医意見書項目By(IBatchTableWriter<? super DbT5304ShujiiIkenshoIkenItemEntity> dbWriter,
+            ImageinputRelate ir, OcrIken ocrIken) {
+        for (DbT5304ShujiiIkenshoIkenItemEntity dbT5304 : createOrEdit主治医意見書意見項目s(ir, ocrIken)) {
+            switch (dbT5304.getState()) {
+                case Added:
+                    dbWriter.insert(dbT5304);
+                    continue;
+                case Modified:
+                    dbWriter.update(dbT5304);
+                default:
+            }
+        }
     }
 
     private static List<DbT5304ShujiiIkenshoIkenItemEntity> createOrEdit主治医意見書意見項目s(ImageinputRelate ir, OcrIken ocrIken) {
@@ -409,4 +382,43 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         entity.setRemban(連番);
         return entity;
     }
+
+    private static void insertOrUpdate主治医意見書情報By(IBatchTableWriter<? super DbT5302ShujiiIkenshoJohoEntity> dbWriter,
+            ImageinputRelate ir, OcrIken ocrIken) {
+        DbT5302ShujiiIkenshoJohoEntity dbT5302 = createOrEdit主治医意見書情報(ir, ocrIken);
+        switch (dbT5302.getState()) {
+            case Added:
+                dbWriter.insert(dbT5302);
+                break;
+            case Modified:
+                dbWriter.update(dbT5302);
+                break;
+            default:
+        }
+    }
+
+    private static DbT5302ShujiiIkenshoJohoEntity createOrEdit主治医意見書情報(ImageinputRelate ir, OcrIken ocrIken) {
+        DbT5302ShujiiIkenshoJohoEntity entity = ir.getT5302_主治医意見書情報().isEmpty()
+                ? newDbT5302ShujiiIkenshoJohoEntity(ir, ocrIken)
+                : ir.getT5302_主治医意見書情報().get(0);
+        entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
+        OcrShujiiIkenshoJohoEditor.edit(entity, ocrIken);
+        return entity;
+    }
+
+    private static DbT5302ShujiiIkenshoJohoEntity newDbT5302ShujiiIkenshoJohoEntity(ImageinputRelate ir, OcrIken ocrIken) {
+        DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
+        entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
+        entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
+        entity.setKoroshoIfShikibetsuCode(ir.getT5101_厚労省IF識別コード());
+        entity.setIkenshoIraiKubun(ir.getT5301_主治医意見書依頼区分());
+        entity.setShujiiIryoKikanCode(ir.getT5301_主治医医療機関コード());
+        entity.setShujiiCode(ir.getT5301_主治医コード());
+        entity.setSonotaJushinKaMei(RString.EMPTY);
+        entity.setShindamMei1(RString.EMPTY);
+        entity.setShindamMei2(RString.EMPTY);
+        entity.setShindamMei3(RString.EMPTY);
+        return entity;
+    }
+
 }

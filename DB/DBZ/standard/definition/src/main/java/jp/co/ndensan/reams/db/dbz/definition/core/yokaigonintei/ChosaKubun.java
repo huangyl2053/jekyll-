@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,10 +26,12 @@ public enum ChosaKubun {
     再調査("1", "再調査");
 
     private final RString code;
+    private final Code theCode;
     private final RString fullName;
 
     private ChosaKubun(String code, String fullname) {
         this.code = new RString(code);
+        this.theCode = new Code(code);
         this.fullName = new RString(fullname);
     }
 
@@ -39,6 +42,15 @@ public enum ChosaKubun {
      */
     public RString getコード() {
         return code;
+    }
+
+    /**
+     * コードを{@link Code}型で返します。
+     *
+     * @return コード({@link Code}型)
+     */
+    public Code asCode() {
+        return theCode;
     }
 
     /**

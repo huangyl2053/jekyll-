@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -14,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-9999-023
  */
-public enum CKGaikyoChosahyouServiceJyouk09B {
+public enum CKGaikyoChosahyouServiceJyouk09B implements IGaikyoChosahyoServiceJokyo {
 
     /**
      * データベース内連番:1 単位1:回 単位2:/月 給付区分:介護予防 帳票上の文言:訪問介護(ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ)
@@ -102,6 +101,7 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
     private final RString tani2;
     private final RString kyuufuKubun;
     private final RString fullName;
+    private final int remban;
 
     private CKGaikyoChosahyouServiceJyouk09B(String code, String tani1, String tani2, String kyuufuKubun, String fullname) {
         this.code = new RString(code);
@@ -109,6 +109,7 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
         this.tani2 = new RString(tani2);
         this.kyuufuKubun = new RString(kyuufuKubun);
         this.fullName = new RString(fullname);
+        this.remban = Integer.valueOf(code);
     }
 
     /**
@@ -116,8 +117,14 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
      *
      * @return 概況調査票サービスの状況09Bの連番
      */
+    @Override
     public RString get連番() {
         return code;
+    }
+
+    @Override
+    public int get連番AsInt() {
+        return remban;
     }
 
     /**
@@ -125,6 +132,7 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
      *
      * @return 概況調査票サービスの状況09Bの単位1
      */
+    @Override
     public RString get単位1() {
         return tani1;
     }
@@ -134,6 +142,7 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
      *
      * @return 概況調査票サービスの状況09Bの単位2
      */
+    @Override
     public RString get単位2() {
         return tani2;
     }
@@ -143,6 +152,7 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
      *
      * @return 概況調査票サービスの状況09Bの給付区分2
      */
+    @Override
     public RString get給付区分() {
         return kyuufuKubun;
     }
@@ -152,6 +162,7 @@ public enum CKGaikyoChosahyouServiceJyouk09B {
      *
      * @return 概況調査票サービスの状況09Bの帳票上の文言
      */
+    @Override
     public RString get名称() {
         return fullName;
     }

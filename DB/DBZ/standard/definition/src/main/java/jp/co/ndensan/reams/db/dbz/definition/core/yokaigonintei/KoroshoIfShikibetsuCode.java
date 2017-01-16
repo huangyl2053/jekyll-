@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -38,10 +39,12 @@ public enum KoroshoIfShikibetsuCode {
     認定ｿﾌﾄ2009_SP3("09B", "認定ｿﾌﾄ2009（SP3）");
 
     private final RString code;
+    private final Code theCode;
     private final RString fullName;
 
     private KoroshoIfShikibetsuCode(String code, String fullname) {
         this.code = new RString(code);
+        this.theCode = new Code(code);
         this.fullName = new RString(fullname);
     }
 
@@ -52,6 +55,15 @@ public enum KoroshoIfShikibetsuCode {
      */
     public RString getコード() {
         return code;
+    }
+
+    /**
+     * コードを{@link Code}型で返します。
+     *
+     * @return コード({@link Code}型)
+     */
+    public Code asCode() {
+        return this.theCode;
     }
 
     /**

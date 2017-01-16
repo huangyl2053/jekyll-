@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -82,6 +83,15 @@ public class NinteiOcrRelate {
      */
     public RString get申請書管理番号() {
         return entity.get申請書管理番号();
+    }
+
+    /**
+     * 申請書翰林番号を{@link ShinseishoKanriNo}型で返します。
+     *
+     * @return 申請書翰林番号({@link ShinseishoKanriNo}型)
+     */
+    public ShinseishoKanriNo getShinseishoKanriNo() {
+        return new ShinseishoKanriNo(get申請書管理番号());
     }
 
     /**

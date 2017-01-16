@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-9999-023 wangchao
  */
-public enum GaikyoChosahyouNiteichosahyouSisetuRiy99A {
+public enum GaikyoChosahyouNiteichosahyouSisetuRiy99A implements IGaikyoChosahyoShisetuRiyo {
 
     /**
      * データベース内連番:1 帳票上の文言:居宅
@@ -38,10 +38,12 @@ public enum GaikyoChosahyouNiteichosahyouSisetuRiy99A {
 
     private final RString code;
     private final RString fullName;
+    private final int remban;
 
     private GaikyoChosahyouNiteichosahyouSisetuRiy99A(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.remban = Integer.valueOf(code);
     }
 
     /**
@@ -49,8 +51,14 @@ public enum GaikyoChosahyouNiteichosahyouSisetuRiy99A {
      *
      * @return 概況調査票認定調査票施設利用99Aの連番
      */
+    @Override
     public RString get連番() {
         return code;
+    }
+
+    @Override
+    public int get連番AsInt() {
+        return remban;
     }
 
     /**
@@ -58,6 +66,7 @@ public enum GaikyoChosahyouNiteichosahyouSisetuRiy99A {
      *
      * @return 概況調査票認定調査票施設利用99Aの帳票上の文言
      */
+    @Override
     public RString get名称() {
         return fullName;
     }

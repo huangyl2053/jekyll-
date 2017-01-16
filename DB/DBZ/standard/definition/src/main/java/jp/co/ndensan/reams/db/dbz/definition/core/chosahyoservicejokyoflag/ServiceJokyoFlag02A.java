@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 厚生労働省IFコード　02Aに対応した列挙体
  */
-public enum ServiceJokyoFlag02A {
+public enum ServiceJokyoFlag02A implements IServiceJokyoFlag {
 
     /**
      * 厚生労働省IFコードが 02A のときの 住宅改修 の各設定値
@@ -30,6 +30,7 @@ public enum ServiceJokyoFlag02A {
      *
      * @return Enum内での連番
      */
+    @Override
     public int get連番() {
         return this.連番;
     }
@@ -39,6 +40,7 @@ public enum ServiceJokyoFlag02A {
      *
      * @return 帳票上のラベル名
      */
+    @Override
     public RString get名称() {
         return this.名称;
     }

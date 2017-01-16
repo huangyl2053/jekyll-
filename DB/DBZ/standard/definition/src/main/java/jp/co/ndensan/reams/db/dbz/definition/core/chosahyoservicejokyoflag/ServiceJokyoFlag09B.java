@@ -5,12 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  ** 厚生労働省IFコード　09B　に対応した列挙体
  */
-public enum ServiceJokyoFlag09B {
+public enum ServiceJokyoFlag09B implements IServiceJokyoFlag {
 
     /**
      * 厚生労働省IFコードが 09B のときの 住宅改修 の各設定値
@@ -30,6 +31,7 @@ public enum ServiceJokyoFlag09B {
      *
      * @return Enum内での連番
      */
+    @Override
     public int get連番() {
         return this.連番;
     }
@@ -39,7 +41,24 @@ public enum ServiceJokyoFlag09B {
      *
      * @return 帳票上のラベル名
      */
+    @Override
     public RString get名称() {
         return this.名称;
+    }
+
+    /**
+     * @param 連番 連番
+     * @return 指定の連番に該当する要素を返します。
+     * @throws IllegalArgumentException 指定の連番に該当する要素が存在しない場合
+     */
+    public static ServiceJokyoFlag09B toValue(int 連番) {
+        for (ServiceJokyoFlag09B v : values()) {
+            if (Objects.equals(v.get名称(), 連番)) {
+                return v;
+            }
+        }
+        throw new IllegalArgumentException(
+                new StringBuilder().append("指定の連番に該当する要素が見つかりません。 指定された連番:").append(連番).toString()
+        );
     }
 }

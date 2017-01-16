@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 wangchao
  */
-public enum NinteichosaKomokuMapping06A {
+public enum NinteichosaKomokuMapping06A implements INinteichosaKomokuMapping {
 
     /**
      * コード:1 名称:麻痺等の有無（左上肢） 表示番号:1-1-1 パターンNo:1 特記事項番号:101 略称:定義なし
@@ -344,6 +344,7 @@ public enum NinteichosaKomokuMapping06A {
     private final RString 表示番号;
     private final RString パターンNo;
     private final RString 特記事項番号;
+    private final int 連番;
 
     private NinteichosaKomokuMapping06A(String code, String fullname, String 表示番号, String パターンNo, String 特記事項番号) {
         this.code = new RString(code);
@@ -351,6 +352,7 @@ public enum NinteichosaKomokuMapping06A {
         this.表示番号 = new RString(表示番号);
         this.パターンNo = new RString(パターンNo);
         this.特記事項番号 = new RString(特記事項番号);
+        this.連番 = Integer.valueOf(code);
     }
 
     /**
@@ -358,6 +360,7 @@ public enum NinteichosaKomokuMapping06A {
      *
      * @return 認定調査票06Aのコード
      */
+    @Override
     public RString getコード() {
         return code;
     }
@@ -367,6 +370,7 @@ public enum NinteichosaKomokuMapping06A {
      *
      * @return 認定調査票06Aの表示番号
      */
+    @Override
     public RString get表示番号() {
         return 表示番号;
     }
@@ -376,6 +380,7 @@ public enum NinteichosaKomokuMapping06A {
      *
      * @return 認定調査票06AのパターンNo
      */
+    @Override
     public RString getパターンNo() {
         return パターンNo;
     }
@@ -385,19 +390,26 @@ public enum NinteichosaKomokuMapping06A {
      *
      * @return 認定調査票06Aの名称
      */
+    @Override
     public RString get名称() {
         return fullName;
     }
-    
+
     /**
      * 認定調査票06Aの特記事項番号を返します。
      *
      * @return 認定調査票06Aの特記事項番号
      */
+    @Override
     public RString get特記事項番号() {
         return 特記事項番号;
     }
-    
+
+    @Override
+    public int get連番() {
+        return 連番;
+    }
+
     /**
      * 認定調査票06Aのコードと一致する内容を探します。
      *

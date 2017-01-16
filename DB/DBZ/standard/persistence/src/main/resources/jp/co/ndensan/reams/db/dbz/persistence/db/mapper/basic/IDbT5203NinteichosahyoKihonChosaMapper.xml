@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5203NinteichosahyoKihonChosa">
         SELECT
@@ -29,7 +29,10 @@
         "DbT5203NinteichosahyoKihonChosa"."lastUpdateReamsLoginId" as "dbT5203NinteichosahyoKihonChosa_lastUpdateReamsLoginId",
         "DbT5203NinteichosahyoKihonChosa"."koroshoIfShikibetsuCode" as "dbT5203NinteichosahyoKihonChosa_koroshoIfShikibetsuCode",
         "DbT5203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode",
-        "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode"
+        "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode",
+        <!-- 上2行のエイリアスが長すぎて、ResultMapによるマッピングができないため、以下の2行を定義する。 -->
+        "DbT5203NinteichosahyoKihonChosa"."ninchishoNichijoSeikatsuJiritsudoCode" as "dbT5203XXX_ninchishoNichijoSeikatsuJiritsudoCode",
+        "DbT5203NinteichosahyoKihonChosa"."shogaiNichijoSeikatsuJiritsudoCode" as "dbT5203XXX_shogaiNichijoSeikatsuJiritsudoCode"
     </sql>
 
 
@@ -46,8 +49,8 @@
         <result property="lastUpdateTimestamp" column="dbT5203NinteichosahyoKihonChosa_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5203NinteichosahyoKihonChosa_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT5203NinteichosahyoKihonChosa_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="dbT5203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="dbT5203XXX_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shogaiNichijoSeikatsuJiritsudoCode" column="dbT5203XXX_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5203NinteichosahyoKihonChosaEntity">
         <!--SELECT

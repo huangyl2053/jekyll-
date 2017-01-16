@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrRelate;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekkatorikomiocr.INinteiOcrMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -66,5 +67,14 @@ public class NinteiOcrFindler {
             imageinputList.add(new NinteiOcrRelate(entity));
         }
         return SearchResult.of(imageinputList, 0, false);
+    }
+
+    /**
+     * @param paramter 検索用のパラメータ
+     * @return 認定調査票
+     */
+    public List<NinteiChosahyoEntity> get認定調査票(NinteiOcrMapperParamter paramter) {
+        INinteiOcrMapper mapper = mapperProvider.create(INinteiOcrMapper.class);
+        return mapper.get認定調査票(paramter);
     }
 }

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 wangchao
  */
-public enum NinteichosaKomokuMapping09B {
+public enum NinteichosaKomokuMapping09B implements INinteichosaKomokuMapping {
 
     /**
      * コード:1 名称:麻痺等の有無（左上肢） 表示番号:1-1-1 USB_表示番号:1-1-1 パターンNo:1 特記事項番号:101
@@ -324,6 +324,7 @@ public enum NinteichosaKomokuMapping09B {
     private final RString usb_表示番号;
     private final RString パターンNo;
     private final RString 特記事項番号;
+    private final int 連番;
 
     private NinteichosaKomokuMapping09B(String code, String fullname, String 表示番号, String usb_表示番号, String パターンNo, String 特記事項番号) {
         this.code = new RString(code);
@@ -332,6 +333,7 @@ public enum NinteichosaKomokuMapping09B {
         this.usb_表示番号 = new RString(usb_表示番号);
         this.パターンNo = new RString(パターンNo);
         this.特記事項番号 = new RString(特記事項番号);
+        this.連番 = Integer.valueOf(code);
     }
 
     /**
@@ -339,6 +341,7 @@ public enum NinteichosaKomokuMapping09B {
      *
      * @return 認定調査票09Bのコード
      */
+    @Override
     public RString getコード() {
         return code;
     }
@@ -348,6 +351,7 @@ public enum NinteichosaKomokuMapping09B {
      *
      * @return 認定調査票09Bの表示番号
      */
+    @Override
     public RString get表示番号() {
         return 表示番号;
     }
@@ -366,6 +370,7 @@ public enum NinteichosaKomokuMapping09B {
      *
      * @return 認定調査票09BのパターンNo
      */
+    @Override
     public RString getパターンNo() {
         return パターンNo;
     }
@@ -375,6 +380,7 @@ public enum NinteichosaKomokuMapping09B {
      *
      * @return 認定調査票09Bの名称
      */
+    @Override
     public RString get名称() {
         return fullName;
     }
@@ -384,8 +390,14 @@ public enum NinteichosaKomokuMapping09B {
      *
      * @return 認定調査票09Bの特記事項番号
      */
+    @Override
     public RString get特記事項番号() {
         return 特記事項番号;
+    }
+
+    @Override
+    public int get連番() {
+        return 連番;
     }
 
     /**
@@ -402,4 +414,5 @@ public enum NinteichosaKomokuMapping09B {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(" 認定調査票09B"));
     }
+
 }

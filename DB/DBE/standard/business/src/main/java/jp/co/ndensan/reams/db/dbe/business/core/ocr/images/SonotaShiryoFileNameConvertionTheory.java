@@ -22,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertionTheory {
 
-    private static final List<RString> FILE_NAMES;
+    private static final List<RString> REAMS_FILE_NAME;
 
     static {
-        FILE_NAMES = Arrays.asList(
+        REAMS_FILE_NAME = Arrays.asList(
                 new RString("F1401A00.png"), new RString("F1401B01.png"),
                 new RString("F1401C03.png"), new RString("F1401D04.png"),
                 new RString("F1401F05.png"), new RString("F1401E06.png")
@@ -37,14 +37,14 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
 
     public SonotaShiryoFileNameConvertionTheory(Collection<? extends OcrSonota> ocrSonotas) {
         Map<RString, RString> map = new HashMap<>();
-        Iterator<RString> fileNames = FILE_NAMES.iterator();
+        Iterator<RString> reamsFileNames = REAMS_FILE_NAME.iterator();
         boolean exceedsLimit = false;
         for (OcrSonota ocrSonota : new ArrayList<>(ocrSonotas)) {
-            if (!fileNames.hasNext()) {
+            if (!reamsFileNames.hasNext()) {
                 exceedsLimit = true;
                 break;
             }
-            map.put(ocrSonota.getImageFileName(), fileNames.next());
+            map.put(ocrSonota.getImageFileName(), reamsFileNames.next());
         }
         this.table = Collections.unmodifiableMap(map);
         this.exceedsLimitFlag = exceedsLimit;

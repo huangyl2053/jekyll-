@@ -15,38 +15,303 @@
           , T5201."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
           , T5115."imageSharedFileId" AS イメージ共有ファイルID
           , T5201."ninteichosaItakusakiCode" AS 認定調査委託先コード
-          , T5201."ninteiChosainCode" AS 認定調査員コード 
+          , T5201."ninteiChosainCode" AS 認定調査員コード
           , T5201."ninteichosaIraiKubunCode" AS 認定調査依頼区分コード
           , T5201."ninteichosaIraiKaisu" AS 認定調査回数
         FROM
-          rgdb."DbT5101NinteiShinseiJoho" AS T5101 
-          INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
-            ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
-            AND T5201."logicalDeletedFlag" = FALSE 
-            AND NOT EXISTS ( 
+          rgdb."DbT5101NinteiShinseiJoho" AS T5101
+          INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
+            ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+            AND T5201."logicalDeletedFlag" = FALSE
+            AND NOT EXISTS (
               SELECT
-                'X' 
+                'X'
               FROM
-                rgdb."DbT5201NinteichosaIraiJoho" AS B1 
+                rgdb."DbT5201NinteichosaIraiJoho" AS B1
               WHERE
-                T5201."shinseishoKanriNo" = B1."shinseishoKanriNo" 
-                AND B1."logicalDeletedFlag" = False 
+                T5201."shinseishoKanriNo" = B1."shinseishoKanriNo"
+                AND B1."logicalDeletedFlag" = False
                 AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
-            ) 
-          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
-            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
-          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105 
-            ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
-            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
-            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
-            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
-            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
-            AND T5105."centerSoshinYMD" IS NULL 
-          LEFT JOIN rgdb."DbT5115Image" AS T5115 
+            )
+          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
+            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
+            ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
+            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL
+            AND T5105."centerSoshinYMD" IS NULL
+          LEFT JOIN rgdb."DbT5115Image" AS T5115
             ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
-          WHERE 
+          WHERE
             T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
-            AND T5101."hihokenshaNo" = #{被保険者番号} 
+            AND T5101."hihokenshaNo" = #{被保険者番号}
             AND T5101."ninteiShinseiYMD" = #{認定申請日}
     </select>
+
+    <select id="get認定調査票" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter"
+            resultMap="ResultMap_get認定調査票" fetchSize="500">
+        WITH target AS(
+            SELECT
+                dbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
+                dbT5201."ninteichosaIraiRirekiNo" AS "ninteichosaRirekiNo"
+            FROM (
+                SELECT
+                    "shinseishoKanriNo"
+                FROM
+                    rgdb."DbT5101NinteiShinseiJoho" dbT5101
+                WHERE
+                    dbT5101."shoKisaiHokenshaNo"     = #{証記載保険者番号}
+                    AND dbT5101."hihokenshaNo"       = #{被保険者番号}
+                    AND dbT5101."ninteiShinseiYMD"   = #{認定申請日}
+                    AND dbT5101."logicalDeletedFlag" = FALSE
+                ) dbT5101
+            INNER JOIN
+                rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
+             ON  dbT5101."shinseishoKanriNo"  = dbT5201."shinseishoKanriNo"
+             AND dbT5201."logicalDeletedFlag" = FALSE
+             AND NOT EXISTS (
+                SELECT *
+                FROM
+                    rgdb."DbT5201NinteichosaIraiJoho" AS B1
+                WHERE
+                    dbT5201."shinseishoKanriNo"           = B1."shinseishoKanriNo"
+                    AND dbT5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+                    AND B1."logicalDeletedFlag"           = False
+                )
+            )
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.allColumns_DbT5202NinteichosahyoGaikyoChosa"/>,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.allColumns_DbT5203NinteichosahyoKihonChosa"/>,
+            "DbT5203NinteichosahyoKihonChosa"."調査項目" AS "調査項目",
+            dbT5206.json_agg_dbT5206 AS "概況特記",
+            dbT5205.json_agg_dbT5205 AS "特記情報",
+            dbT5207.json_agg_dbT5207 AS "サービスの状況",
+            dbT5208.json_agg_dbT5208 AS "サービスの状況フラグ",
+            dbT5209.json_agg_dbT5209 AS "記入項目",
+            dbT5210.json_agg_dbT5210 AS "施設利用"
+        FROM
+            target target
+        INNER JOIN
+            rgdb."DbT5202NinteichosahyoGaikyoChosa" AS "DbT5202NinteichosahyoGaikyoChosa"
+             ON  target."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND target."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                dbT5203.*,
+                dbT5211_json.json_agg_dbT5211 AS "調査項目"
+            FROM
+                target target
+            INNER JOIN
+                rgdb."DbT5203NinteichosahyoKihonChosa" dbT5203
+                 ON  target."shinseishoKanriNo"   = dbT5203."shinseishoKanriNo"
+                 AND target."ninteichosaRirekiNo" = dbT5203."ninteichosaRirekiNo"
+            LEFT JOIN (
+                SELECT
+                    C."shinseishoKanriNo",
+                    C."ninteichosaRirekiNo",
+                    json_agg(C) AS json_agg_dbT5211
+                FROM (
+                        SELECT
+                            A."shinseishoKanriNo",
+                            A."ninteichosaRirekiNo",
+                            A."remban",
+                            A."koroshoIfShikibetsuCode",
+                            A."researchItem"
+                        FROM
+                            rgdb."DbT5211NinteichosahyoChosaItem" A
+                        INNER JOIN
+                            target T
+                         ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                        AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+                ) C
+                GROUP BY
+                    C."shinseishoKanriNo",
+                    C."ninteichosaRirekiNo"
+                ) dbT5211_json
+              ON dbT5211_json."shinseishoKanriNo"   = dbT5203."shinseishoKanriNo"
+             AND dbT5211_json."ninteichosaRirekiNo" = dbT5203."ninteichosaRirekiNo"
+            ) "DbT5203NinteichosahyoKihonChosa"
+             ON  "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo",
+                json_agg(C) AS json_agg_dbT5206
+            FROM (
+                    SELECT
+                        A."shinseishoKanriNo",
+                        A."ninteichosaRirekiNo",
+                        A."gaikyoTokkiTextImageKubun",
+                        A."genponMaskKubun",
+                        A."jutakuKaishu",
+                        A."tokubetsuKyufuService",
+                        A."zaitakuService",
+                        A."shuso",
+                        A."kazokuJokyo",
+                        A."kyojuKankyo",
+                        A."kikaiKiki"
+                    FROM
+                        rgdb."DbT5206GaikyoTokki" A
+                    INNER JOIN
+                        target T
+                     ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                    AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+            ) C
+            GROUP BY
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo"
+            ) dbT5206
+             ON  dbT5206."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND dbT5206."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo",
+                json_agg(C) AS json_agg_dbT5205
+            FROM (
+                    SELECT
+                        A."shinseishoKanriNo",
+                        A."ninteichosaRirekiNo",
+                        A."ninteichosaTokkijikoNo",
+                        A."ninteichosaTokkijikoRemban",
+                        A."tokkijikoTextImageKubun",
+                        A."genponMaskKubun",
+                        A."tokkiJiko"
+                    FROM
+                        rgdb."DbT5205NinteichosahyoTokkijiko" A
+                    INNER JOIN
+                        target T
+                     ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                    AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+                ) C
+            GROUP BY
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo"
+            )
+            dbT5205
+             ON  dbT5205."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND dbT5205."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo",
+                json_agg(C) AS json_agg_dbT5207
+            FROM
+                (
+                    SELECT
+                        A."shinseishoKanriNo",
+                        A."ninteichosaRirekiNo",
+                        A."remban",
+                        A."koroshoIfShikibetsuCode",
+                        A."serviceJokyo"
+                    FROM
+                        rgdb."DbT5207NinteichosahyoServiceJokyo" A
+                    INNER JOIN
+                        target T
+                     ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                    AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+                ) C
+            GROUP BY
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo"
+            )
+            dbT5207
+             ON  dbT5207."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND dbT5207."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo",
+                json_agg(C) AS json_agg_dbT5208
+            FROM (
+                    SELECT
+                        A."shinseishoKanriNo",
+                        A."ninteichosaRirekiNo",
+                        A."remban",
+                        A."koroshoIfShikibetsuCode",
+                        A."serviceJokyoFlag"
+                    FROM
+                        rgdb."DbT5208NinteichosahyoServiceJokyoFlag" A
+                    INNER JOIN
+                        target T
+                     ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                    AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+            ) C
+            GROUP BY
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo"
+            )
+            dbT5208
+             ON  dbT5208."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND dbT5208."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo",
+                json_agg(C) AS json_agg_dbT5209
+            FROM (
+                    SELECT
+                        A."shinseishoKanriNo",
+                        A."ninteichosaRirekiNo",
+                        A."remban",
+                        A."koroshoIfShikibetsuCode",
+                        A."serviceJokyoKinyu"
+                    FROM
+                        rgdb."DbT5209NinteichosahyoKinyuItem" A
+                    INNER JOIN
+                        target T
+                     ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                    AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+            ) C
+            GROUP BY
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo"
+            ) dbT5209
+             ON  dbT5209."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND dbT5209."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+        LEFT JOIN (
+            SELECT
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo",
+                json_agg(C) AS json_agg_dbT5210
+            FROM (
+                    SELECT
+                        A."shinseishoKanriNo",
+                        A."ninteichosaRirekiNo",
+                        A."remban",
+                        A."koroshoIfShikibetsuCode",
+                        A."shisetsuRiyoFlag"
+                    FROM
+                        rgdb."DbT5210NinteichosahyoShisetsuRiyo" A
+                    INNER JOIN
+                        target T
+                     ON T."shinseishoKanriNo"   = A."shinseishoKanriNo"
+                    AND T."ninteichosaRirekiNo" = A."ninteichosaRirekiNo"
+            ) C
+            GROUP BY
+                C."shinseishoKanriNo",
+                C."ninteichosaRirekiNo"
+            )
+            dbT5210
+             ON  dbT5210."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+             AND dbT5210."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+    </select>
+
+    <resultMap id="ResultMap_get認定調査票" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" />
+        <id property="gaikyoChosaTextImageKubun" column="dbT5202NinteichosahyoGaikyoChosa_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査項目" column="調査項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="概況特記" column="概況特記" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記情報" column="特記情報" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスの状況" column="サービスの状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="サービスの状況フラグ" column="サービスの状況フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="記入項目" column="記入項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設利用" column="施設利用" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <collection property="dbT5203" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.ResultMap_DbT5203NinteichosahyoKihonChosaEntity"/>
+        <collection property="dbT5202" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity"/>
+    </resultMap>
 </mapper>
