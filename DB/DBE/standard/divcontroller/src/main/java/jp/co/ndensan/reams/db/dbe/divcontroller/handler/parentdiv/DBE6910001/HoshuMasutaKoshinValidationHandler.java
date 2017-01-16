@@ -246,7 +246,7 @@ public class HoshuMasutaKoshinValidationHandler {
     }
 
     private ValidationMessageControlPairs check開始年月が必須(TextBoxFlexibleYearMonth 開始年月) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (開始年月 == null || 開始年月.getDomain() == null || 開始年月.getDomain().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.開始年月が必須));
         }

@@ -116,7 +116,7 @@ public class HoshuMasutaKoshinHandler {
         set審査員報酬DDL();
         set審査員報酬単価マスタ明細内容(選択行の審査委員報酬単価情報);
         div.getHoshuMasutaTab().getTxtChoKaishiYM().setDisabled(true);
-        div.getHoshuMasutaTab().getTxtChoShuryoYM().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtChoShuryoYM().setDisabled(false);
         div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().setDisabled(true);
         div.setChosainhoshuTankaState(更新モード);
     }
@@ -324,7 +324,7 @@ public class HoshuMasutaKoshinHandler {
         set訪問調査報酬DDL();
         set訪問調査報酬単価マスタ明細内容(選択行の訪問調査報酬単価情報);
         div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM().setDisabled(true);
-        div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM().setDisabled(true);
+        div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM().setDisabled(false);
         div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlChosaKubun().setDisabled(true);
         div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlHomonShubetsu().setDisabled(true);
         div.setHomonChosahoshuTankaState(更新モード);
@@ -435,7 +435,7 @@ public class HoshuMasutaKoshinHandler {
         set審査会委員別単価マスタ明細状態_活性();
         set審査会委員別単価マスタ明細内容(選択行の審査会委員別単価情報);
         div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDisabled(true);
-        div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDisabled(true);
+        div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDisabled(false);
         div.getHoshuMasutaTab().getTxtShinsaIinKodo().setDisabled(true);
         div.setShinsakaiIinBetuTankaState(更新モード);
     }

@@ -111,16 +111,16 @@ var DBE;
                 return new UZA.RadioButton(this.convFiledName("radShogaiKoreishaNichijoSeikatsuJiritsudo"));
             };
 
+            Controls.prototype.radTankiKioku = function () {
+                return new UZA.RadioButton(this.convFiledName("radTankiKioku"));
+            };
+
             Controls.prototype.radNinchishoKoreishaJiritsu = function () {
                 return new UZA.RadioButton(this.convFiledName("radNinchishoKoreishaJiritsu"));
             };
 
             Controls.prototype.NinchishoChukakuShojo = function () {
                 return new UZA.Panel(this.convFiledName("NinchishoChukakuShojo"));
-            };
-
-            Controls.prototype.radTankiKioku = function () {
-                return new UZA.RadioButton(this.convFiledName("radTankiKioku"));
             };
 
             Controls.prototype.radNichijoNinchiNoryoku = function () {
