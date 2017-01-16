@@ -78,6 +78,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.TextKind;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -145,6 +146,11 @@ public class NinteiShinseiToroku {
         if (shichosonSecurity.get導入形態コード().value().equals(new RString("220"))) {
             介護導入形態 = new RString("1");
         }
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (TorisageKubunCode torisageKubunCode : TorisageKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(torisageKubunCode.getコード(), torisageKubunCode.get名称()));
+        }
+        div.getDdlTorisageJiyu().setDataSource(dataSource);
         if (MENUID_DBEMN31001.equals(menuID)) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
@@ -241,6 +247,7 @@ public class NinteiShinseiToroku {
             div.getCcdShinseiTodokedesha().getRadKannaiKangai().setSelectedKey(KEY1);
             div.getCcdShinseiTodokedesha().getRadKannaiKangai().setDisplayNone(ninteiTandokuDounyuFlag);
             ((ChoikiInputDiv) div.getCcdShinseiTodokedesha().getCcdChoikiInput()).setDisplayNone(ninteiTandokuDounyuFlag);
+            div.getCcdShinseiTodokedesha().set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管外.toString()));
             ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(ninteiTandokuDounyuFlag);
             ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(ninteiTandokuDounyuFlag);
             ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtJusho().setReadOnly(!ninteiTandokuDounyuFlag);
@@ -434,7 +441,7 @@ public class NinteiShinseiToroku {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         NinteiChosaJokyoDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkai(), NinteiChosaJokyoDataPass.class);
         NinteiChosaJokyoDataPass konkai = DataPassingConverter.deserialize(div.getHdnKonkai(), NinteiChosaJokyoDataPass.class);
-        if (zenkai.get二次判定年月日() != null || konkai.get二次判定年月日() != null) {
+        if ((zenkai != null && zenkai.get二次判定年月日() != null) || (konkai != null && konkai.get二次判定年月日() != null)) {
             validationMessages.add(getValidationHandler(div).二次判定年月日チェック());
         }
         if (!div.getDdlTorisageJiyu().getSelectedValue().equals(認定申請有効) &&

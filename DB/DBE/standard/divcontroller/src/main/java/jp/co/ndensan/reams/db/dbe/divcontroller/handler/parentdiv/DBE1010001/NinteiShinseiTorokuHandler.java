@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -157,7 +157,8 @@ public class NinteiShinseiTorokuHandler {
         div.setHdnShishoCode(business.get支所コード());
 
         if (市町村コード.isEmpty()) {
-            div.getCcdShikakuInfo().initialize(ZERO_6, business.get被保険者番号().value().padZeroToLeft(ZERO_10));
+            市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
+            div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         } else {
             div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         }
@@ -201,11 +202,6 @@ public class NinteiShinseiTorokuHandler {
             div.getTxtTorisageDate().setValue(new RDate(result.get取下年月日().toString()));
         }
         div.getTxtTorisageJiyu().setValue(result.get取下理由());
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (TorisageKubunCode torisageKubunCode : TorisageKubunCode.values()) {
-            dataSource.add(new KeyValueDataSource(torisageKubunCode.getコード(), torisageKubunCode.get名称()));
-        }
-        div.getDdlTorisageJiyu().setDataSource(dataSource);
         div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
     }
     

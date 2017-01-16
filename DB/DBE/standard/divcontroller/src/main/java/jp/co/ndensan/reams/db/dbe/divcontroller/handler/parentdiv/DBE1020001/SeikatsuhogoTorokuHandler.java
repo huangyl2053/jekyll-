@@ -11,8 +11,15 @@ import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisa
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.SeikatsuhogoTorokuResult;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.SeikatsuhogoTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -88,7 +95,15 @@ public class SeikatsuhogoTorokuHandler {
      */
     public Minashi2shisaiJoho setBusiness(ShinseishoKanriNo 前回申請書管理番号) {
         Minashi2shisaiJoho business = new Minashi2shisaiJoho();
-        business.set保険者(div.getCcdHokenshaList().getSelectedItem());
+        ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (security.get導入形態コード().equals(new Code("211"))) {
+            Association association = AssociationFinderFactory.createInstance().getAssociation();
+            HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護認定);
+            business.set保険者(hokenshaList.get(association.get地方公共団体コード()));
+        } else {
+            business.set保険者(div.getCcdHokenshaList().getSelectedItem());
+        }
         business.set被保険者番号(div.getTxtHihokenshaNo().getValue());
         business.set氏名(div.getTxtShimei().getValue());
         business.setカナ氏名(div.getTxtKanaShimei().getValue());
