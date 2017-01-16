@@ -186,7 +186,7 @@ public class ShinshinIkenHandler {
      * 認知症周辺症状ラジオボタンのChange処理です。
      */
     public void changeRadNinchishoShuhenShojoUmu() {
-        if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_1)) {
+        if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_2)) {
             div.getChkNinchishoShuhenShojo().setReadOnly(false);
             div.getChkNinchishoShuhenShojoSonota().setReadOnly(false);
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
@@ -194,7 +194,7 @@ public class ShinshinIkenHandler {
             set幻視幻聴(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
             setその他(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
             setその他記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
-        } else if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_0)) {
+        } else if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_1)) {
             div.getChkNinchishoShuhenShojo().setReadOnly(true);
             div.getChkNinchishoShuhenShojoSonota().setReadOnly(true);
             div.getTxtSonotaKinyu().setReadOnly(true);
@@ -223,7 +223,7 @@ public class ShinshinIkenHandler {
      * その他の精神神経症状チェックボックスのChange処理です。
      */
     public void changeRadSonotaShojo() {
-        if (div.getRadSonotaShojo().getSelectedKey().equals(KEY_1)) {
+        if (div.getRadSonotaShojo().getSelectedKey().equals(KEY_2)) {
             div.getTxtShojomei().setReadOnly(false);
             div.getRadSenmonJushin().setReadOnly(false);
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
@@ -231,7 +231,7 @@ public class ShinshinIkenHandler {
             setその他の精神神経症状記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
             set専門医受診の有無(要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList());
             set専門医受診の有無記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
-        } else if (div.getRadSonotaShojo().getSelectedKey().equals(KEY_0)) {
+        } else if (div.getRadSonotaShojo().getSelectedKey().equals(KEY_1)) {
             div.getTxtShojomei().setReadOnly(true);
             div.getRadSenmonJushin().setReadOnly(true);
             div.getTxtShosaiTokkiJiko().setReadOnly(true);
@@ -245,12 +245,12 @@ public class ShinshinIkenHandler {
      * 専門医受診の有無ラジオボタンのChange処理です。
      */
     public void changeRadSenmonJushin() {
-        if (div.getRadSenmonJushin().getSelectedKey().equals(KEY_1)) {
+        if (div.getRadSenmonJushin().getSelectedKey().equals(KEY_2)) {
             div.getTxtShosaiTokkiJiko().setReadOnly(false);
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
                     getSeishinTechoNini(要介護認定主治医意見書情報Key);
             set専門医受診の有無記入項目(要介護認定主治医意見書情報.getShujiiIkenshoKinyuItemList());
-        } else if (div.getRadSenmonJushin().getSelectedKey().equals(KEY_0)) {
+        } else if (div.getRadSenmonJushin().getSelectedKey().equals(KEY_1)) {
             div.getTxtShosaiTokkiJiko().setReadOnly(true);
             div.getTxtShosaiTokkiJiko().clearValue();
         }
@@ -635,7 +635,7 @@ public class ShinshinIkenHandler {
 
     private void set障害高齢者の日常生活自立度(List<ShujiiIkenshoIkenItem> 意見項目List) {
         boolean flag = false;
-        RString selectKey = KEY_9;
+        RString selectKey = KEY_0;
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (寝たきり度 == item.get連番()) {
                 flag = true;
@@ -652,7 +652,7 @@ public class ShinshinIkenHandler {
 
     private void set認知症高齢者の日常生活自立度(List<ShujiiIkenshoIkenItem> 意見項目List) {
         boolean flag = false;
-        RString selectKey = KEY_8;
+        RString selectKey = KEY_9;
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (認知症高齢者の日常生活自立度 == item.get連番()) {
                 flag = true;
@@ -677,7 +677,7 @@ public class ShinshinIkenHandler {
             }
         }
         if (!flag) {
-            div.getRadTankiKioku().setSelectedKey(KEY_2);
+            div.getRadTankiKioku().setSelectedKey(KEY_9);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
                     Integer.valueOf(履歴番号.toString()), 短期記憶).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
@@ -693,7 +693,7 @@ public class ShinshinIkenHandler {
             }
         }
         if (!flag) {
-            div.getRadNichijoNinchiNoryoku().setSelectedKey(KEY_4);
+            div.getRadNichijoNinchiNoryoku().setSelectedKey(KEY_9);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
                     Integer.valueOf(履歴番号.toString()), 認知能力).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
@@ -709,7 +709,7 @@ public class ShinshinIkenHandler {
             }
         }
         if (!flag) {
-            div.getRadIshiDentatsuNoryoku().setSelectedKey(KEY_4);
+            div.getRadIshiDentatsuNoryoku().setSelectedKey(KEY_9);
             意見項目List.add(new ShujiiIkenshoIkenItem(new ShinseishoKanriNo(管理番号),
                     Integer.valueOf(履歴番号.toString()), 伝達能力).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
@@ -717,12 +717,12 @@ public class ShinshinIkenHandler {
 
     private void set認知症の周辺症状(List<ShujiiIkenshoIkenItem> 意見項目List) {
         boolean flag = false;
-        RString selectKey = KEY_0;
+        RString selectKey = KEY_1;
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (認知症の周辺症状 == item.get連番()) {
                 flag = true;
                 if (IkenKomoku07.有.getコード().equals(item.get意見項目())) {
-                    selectKey = KEY_1;
+                    selectKey = KEY_2;
                 }
                 モード判断_意見項目(item);
             }
@@ -732,9 +732,11 @@ public class ShinshinIkenHandler {
                     Integer.valueOf(履歴番号.toString()), 認知症の周辺症状).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getRadNinchishoShuhenShojoUmu().setSelectedKey(selectKey);
-        if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_1)) {
+        if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_2)) {
             div.getChkNinchishoShuhenShojo().setReadOnly(false);
             div.getChkNinchishoShuhenShojoSonota().setReadOnly(false);
+        }else{
+            div.getChkNinchishoShuhenShojoSonota().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -935,12 +937,12 @@ public class ShinshinIkenHandler {
 
     private void setその他の精神神経症状(List<ShujiiIkenshoIkenItem> 意見項目List) {
         boolean flag = false;
-        RString selectKey = KEY_0;
+        RString selectKey = KEY_1;
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (その他の精神神経症状 == item.get連番()) {
                 flag = true;
                 if (IkenKomoku07.有.getコード().equals(item.get意見項目())) {
-                    selectKey = KEY_1;
+                    selectKey = KEY_2;
                 }
                 モード判断_意見項目(item);
             }
@@ -951,7 +953,7 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getRadSonotaShojo().setSelectedKey(selectKey);
-        if (div.getRadSonotaShojo().getSelectedKey().equals(KEY_1)) {
+        if (div.getRadSonotaShojo().getSelectedKey().equals(KEY_2)) {
             div.getTxtShojomei().setReadOnly(false);
             div.getRadSenmonJushin().setReadOnly(false);
         }
@@ -975,12 +977,12 @@ public class ShinshinIkenHandler {
 
     private void set専門医受診の有無(List<ShujiiIkenshoIkenItem> 意見項目List) {
         boolean flag = false;
-        RString selectKey = KEY_0;
+        RString selectKey = KEY_1;
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (専門医受診の有無 == item.get連番()) {
                 flag = true;
                 if (IkenKomoku07.有.getコード().equals(item.get意見項目())) {
-                    selectKey = KEY_1;
+                    selectKey = KEY_2;
                 }
                 モード判断_意見項目(item);
             }
@@ -991,7 +993,7 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         div.getRadSenmonJushin().setSelectedKey(selectKey);
-        if (div.getRadSenmonJushin().getSelectedKey().equals(KEY_1)) {
+        if (div.getRadSenmonJushin().getSelectedKey().equals(KEY_2)) {
             div.getTxtShosaiTokkiJiko().setReadOnly(false);
         }
     }
@@ -1102,6 +1104,8 @@ public class ShinshinIkenHandler {
         div.getChkShishiKesson().setSelectedItemsByKey(selectKey);
         if (div.getChkShishiKesson().getSelectedKeys().contains(KEY_0)) {
             div.getTxtShishiKessonBui().setReadOnly(false);
+        }else{
+            div.getChkShishiKesson().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1143,6 +1147,8 @@ public class ShinshinIkenHandler {
             div.getChkMigiKashiMahi().setReadOnly(false);
             div.getChkHidariKashiMahi().setReadOnly(false);
             div.getChkSonotaMahi().setReadOnly(false);
+        }else{
+            div.getChkMahi().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1183,7 +1189,9 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadMigiJoshiMahiTeido().setSelectedKey(selectKey);
+            if(!KEY_9.equals(selectKey)){
+                div.getRadMigiJoshiMahiTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1224,7 +1232,9 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadHidariJoshiMahiTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadHidariJoshiMahiTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1265,7 +1275,9 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadMigiKashiMahiTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadMigiKashiMahiTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1306,7 +1318,9 @@ public class ShinshinIkenHandler {
                                     KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadHidariKashiMahiTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadHidariKashiMahiTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1364,7 +1378,9 @@ public class ShinshinIkenHandler {
                                     KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadSonotaMahiTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadSonotaMahiTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1387,6 +1403,8 @@ public class ShinshinIkenHandler {
         if (div.getChkKinryokuTeika().getSelectedKeys().contains(KEY_0)) {
             div.getTxtKinryokuTeikaBui().setReadOnly(false);
             div.getRadKinryokuTeikaTeido().setReadOnly(false);
+        }else{
+            div.getChkKinryokuTeika().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1422,7 +1440,9 @@ public class ShinshinIkenHandler {
                                     KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadKinryokuTeikaTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadKinryokuTeikaTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1445,6 +1465,8 @@ public class ShinshinIkenHandler {
         if (div.getChkKansetsuKoshuku().getSelectedKeys().contains(KEY_0)) {
             div.getTxtKansetsuKoshukuBui().setReadOnly(false);
             div.getRadKansetsuKoshukuTeido().setReadOnly(false);
+        }else{
+            div.getChkKansetsuKoshuku().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1480,7 +1502,9 @@ public class ShinshinIkenHandler {
                                     KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadKansetsuKoshukuTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadKansetsuKoshukuTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1503,6 +1527,8 @@ public class ShinshinIkenHandler {
         if (div.getChkKansetsuItami().getSelectedKeys().contains(KEY_0)) {
             div.getTxtKansetsuItamiBui().setReadOnly(false);
             div.getRadKansetsuItamiTeido().setReadOnly(false);
+        }else{
+            div.getChkKansetsuItami().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1538,7 +1564,9 @@ public class ShinshinIkenHandler {
                                     KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadKansetsuItamiTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadKansetsuItamiTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1562,6 +1590,8 @@ public class ShinshinIkenHandler {
             div.getChkFuzuiiJoshi().setReadOnly(false);
             div.getChkFuzuiiKashi().setReadOnly(false);
             div.getChkTaikan().setReadOnly(false);
+        }else{
+            div.getChkShicchoFuzuii().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1687,6 +1717,8 @@ public class ShinshinIkenHandler {
         if (div.getChkJokuso().getSelectedKeys().contains(KEY_0)) {
             div.getTxtJokusoBui().setReadOnly(false);
             div.getRadJokusoTeido().setReadOnly(false);
+        }else{
+            div.getChkJokuso().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1722,7 +1754,9 @@ public class ShinshinIkenHandler {
                                     KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadJokusoTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadJokusoTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1745,6 +1779,8 @@ public class ShinshinIkenHandler {
         if (div.getChkSonotaHifuShikkan().getSelectedKeys().contains(KEY_0)) {
             div.getTxtSonotaHifuShikkanBui().setReadOnly(false);
             div.getRadSonotaHifuShikkanTeido().setReadOnly(false);
+        }else{
+            div.getChkSonotaHifuShikkan().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
 
@@ -1779,7 +1815,9 @@ public class ShinshinIkenHandler {
                     Integer.valueOf(履歴番号.toString()), その他の皮膚疾患_程度).createBuilderForEdit().set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            div.getRadSonotaHifuShikkanTeido().setSelectedKey(selectKey);
+            if (!KEY_9.equals(selectKey)) {
+                div.getRadSonotaHifuShikkanTeido().setSelectedKey(selectKey);
+            }
         }
     }
 
@@ -1789,110 +1827,106 @@ public class ShinshinIkenHandler {
 
     private RString set認知症高齢者の日常生活自立度Key(ShujiiIkenshoIkenItem item) {
         if (IkenKomoku03.自立.getコード().equals(item.get意見項目())) {
-            return KEY_0;
-        } else if (IkenKomoku03.Ⅰ.getコード().equals(item.get意見項目())) {
             return KEY_1;
-        } else if (IkenKomoku03.Ⅱa.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku03.Ⅰ.getコード().equals(item.get意見項目())) {
             return KEY_2;
         } else if (IkenKomoku03.Ⅱa.getコード().equals(item.get意見項目())) {
             return KEY_3;
-        } else if (IkenKomoku03.Ⅲa.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku03.Ⅱb.getコード().equals(item.get意見項目())) {
             return KEY_4;
-        } else if (IkenKomoku03.Ⅲb.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku03.Ⅲa.getコード().equals(item.get意見項目())) {
             return KEY_5;
-        } else if (IkenKomoku03.Ⅳ.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku03.Ⅲb.getコード().equals(item.get意見項目())) {
             return KEY_6;
-        } else if (IkenKomoku03.M.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku03.Ⅳ.getコード().equals(item.get意見項目())) {
             return KEY_7;
-        } else {
+        } else if (IkenKomoku03.M.getコード().equals(item.get意見項目())) {
             return KEY_8;
-        }
-    }
-
-    private List<RString> setCheckBoxNasiAri(ShujiiIkenshoIkenItem item) {
-        List<RString> selectKey = new ArrayList<>();
-        if (IkenKomoku07.有.getコード().equals(item.get意見項目())) {
-            selectKey.add(KEY_1);
         } else {
-            selectKey.add(KEY_0);
+            return KEY_9;
         }
-        return selectKey;
     }
 
     private RString setCheck短期記憶(ShujiiIkenshoIkenItem item) {
-        RString selectKey = RString.EMPTY;
+        RString selectKey;
         if (IkenKomoku04.問題なし.getコード().equals(item.get意見項目())) {
-            selectKey = KEY_0;
-        } else if (IkenKomoku04.問題あり.getコード().equals(item.get意見項目())) {
             selectKey = KEY_1;
-        } else {
+        } else if (IkenKomoku04.問題あり.getコード().equals(item.get意見項目())) {
             selectKey = KEY_2;
+        } else {
+            selectKey = KEY_9;
         }
         return selectKey;
     }
 
     private RString setCheck認知能(ShujiiIkenshoIkenItem item) {
-        RString selectKey = RString.EMPTY;
+        RString selectKey;
         if (IkenKomoku05.自立.getコード().equals(item.get意見項目())) {
-            selectKey = KEY_0;
-        } else if (IkenKomoku05.いくらか困難.getコード().equals(item.get意見項目())) {
             selectKey = KEY_1;
-        } else if (IkenKomoku05.見守りが必要.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku05.いくらか困難.getコード().equals(item.get意見項目())) {
             selectKey = KEY_2;
-        } else if (IkenKomoku05.判断できない.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku05.見守りが必要.getコード().equals(item.get意見項目())) {
             selectKey = KEY_3;
-        } else {
+        } else if (IkenKomoku05.判断できない.getコード().equals(item.get意見項目())) {
             selectKey = KEY_4;
+        } else {
+            selectKey = KEY_9;
         }
         return selectKey;
     }
 
     private RString setCheck伝達能力(ShujiiIkenshoIkenItem item) {
-        RString selectKey = RString.EMPTY;
+        RString selectKey;
         if (IkenKomoku06.伝えられる.getコード().equals(item.get意見項目())) {
-            selectKey = KEY_0;
-        } else if (IkenKomoku06.いくらか困難.getコード().equals(item.get意見項目())) {
             selectKey = KEY_1;
-        } else if (IkenKomoku06.具体的要求に限られる.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku06.いくらか困難.getコード().equals(item.get意見項目())) {
             selectKey = KEY_2;
-        } else if (IkenKomoku06.伝えられない.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku06.具体的要求に限られる.getコード().equals(item.get意見項目())) {
             selectKey = KEY_3;
-        } else {
+        } else if (IkenKomoku06.伝えられない.getコード().equals(item.get意見項目())) {
             selectKey = KEY_4;
+        } else {
+            selectKey = KEY_9;
         }
         return selectKey;
     }
 
     private RString setCheckBox体重の変化(ShujiiIkenshoIkenItem item) {
-        RString selectKey = RString.EMPTY;
+        RString selectKey;
         if (IkenKomoku09.増加.getコード().equals(item.get意見項目())) {
-            selectKey = KEY_0;
-        } else if (IkenKomoku09.減少.getコード().equals(item.get意見項目())) {
             selectKey = KEY_1;
         } else if (IkenKomoku09.維持.getコード().equals(item.get意見項目())) {
             selectKey = KEY_2;
+        } else if (IkenKomoku09.減少.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_3;
+        } else{
+            selectKey = KEY_9;
         }
         return selectKey;
     }
 
     private RString setCheck右左(ShujiiIkenshoIkenItem item) {
-        RString selectKey = RString.EMPTY;
+        RString selectKey;
         if (IkenKomoku08.右.getコード().equals(item.get意見項目())) {
-            selectKey = KEY_0;
-        } else if (IkenKomoku08.左.getコード().equals(item.get意見項目())) {
             selectKey = KEY_1;
+        } else if (IkenKomoku08.左.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_2;
+        } else{
+            selectKey = KEY_9;
         }
         return selectKey;
     }
 
     private RString set程度(ShujiiIkenshoIkenItem item) {
-        RString selectKey = RString.EMPTY;
+        RString selectKey;
         if (IkenKomoku10.軽.getコード().equals(item.get意見項目())) {
-            selectKey = KEY_0;
-        } else if (IkenKomoku10.中.getコード().equals(item.get意見項目())) {
             selectKey = KEY_1;
-        } else if (IkenKomoku10.重.getコード().equals(item.get意見項目())) {
+        } else if (IkenKomoku10.中.getコード().equals(item.get意見項目())) {
             selectKey = KEY_2;
+        } else if (IkenKomoku10.重.getコード().equals(item.get意見項目())) {
+            selectKey = KEY_3;
+        } else{
+            selectKey = KEY_9;
         }
         return selectKey;
     }
@@ -1925,25 +1959,25 @@ public class ShinshinIkenHandler {
 
     private RString itemToKey(RString item) {
         if (IkenKomoku02.自立.getコード().equals(item)) {
-            return KEY_0;
-        } else if (IkenKomoku02.J1.getコード().equals(item)) {
             return KEY_1;
-        } else if (IkenKomoku02.J2.getコード().equals(item)) {
+        } else if (IkenKomoku02.J1.getコード().equals(item)) {
             return KEY_2;
-        } else if (IkenKomoku02.A1.getコード().equals(item)) {
+        } else if (IkenKomoku02.J2.getコード().equals(item)) {
             return KEY_3;
-        } else if (IkenKomoku02.A2.getコード().equals(item)) {
+        } else if (IkenKomoku02.A1.getコード().equals(item)) {
             return KEY_4;
-        } else if (IkenKomoku02.B1.getコード().equals(item)) {
+        } else if (IkenKomoku02.A2.getコード().equals(item)) {
             return KEY_5;
-        } else if (IkenKomoku02.B2.getコード().equals(item)) {
+        } else if (IkenKomoku02.B1.getコード().equals(item)) {
             return KEY_6;
-        } else if (IkenKomoku02.C1.getコード().equals(item)) {
+        } else if (IkenKomoku02.B2.getコード().equals(item)) {
             return KEY_7;
-        } else if (IkenKomoku02.C2.getコード().equals(item)) {
+        } else if (IkenKomoku02.C1.getコード().equals(item)) {
             return KEY_8;
-        } else {
+        } else if (IkenKomoku02.C2.getコード().equals(item)) {
             return KEY_9;
+        } else {
+            return KEY_0;
         }
     }
 }
