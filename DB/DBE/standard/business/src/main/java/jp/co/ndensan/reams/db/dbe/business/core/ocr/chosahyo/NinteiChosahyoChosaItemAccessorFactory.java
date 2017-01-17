@@ -66,23 +66,23 @@ public final class NinteiChosahyoChosaItemAccessorFactory {
         public RString valueOf(int 連番) {
             switch (NinteichosaKomokuMapping09B.toValue(new RString(連番))) {
                 case 麻痺等_左上肢:
-                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(1, 1));
+                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(1, 2));
                 case 麻痺等_右上肢:
-                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(2, 1));
+                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(2, 3));
                 case 麻痺等_左下肢:
-                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(3, 1));
+                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(3, 4));
                 case 麻痺等_右下肢:
-                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(4, 1));
+                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(4, 5));
                 case 麻痺等_その他:
-                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(5, 1));
+                    return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(5, 6));
                 case 拘縮_肩関節:
-                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(1, 1));
+                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(1, 2));
                 case 拘縮_股関節:
-                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(2, 1));
+                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(2, 3));
                 case 拘縮_膝関節:
-                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(3, 1));
+                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(3, 4));
                 case 拘縮_その他:
-                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(4, 1));
+                    return toChosaAnser01(ocrChosa.get拘縮().substringEmptyOnError(4, 5));
                 case 寝返り:
                     return ocrChosa.get寝返り();
                 case 起き上がり:
@@ -192,27 +192,27 @@ public final class NinteiChosahyoChosaItemAccessorFactory {
                 case 点滴の管理:
                     return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(0, 1));
                 case 中心静脈栄養:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(1, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(1, 2));
                 case 透析:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(2, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(2, 3));
                 case ストーマの処置:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(3, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(3, 4));
                 case 酸素療法:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(4, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(4, 5));
                 case レスピレーター:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(5, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(5, 6));
                 case 気管切開の処置:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(6, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(6, 7));
                 case 疼痛の看護:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(7, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(7, 8));
                 case 経管栄養:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(8, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(8, 9));
                 case モニター測定:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(9, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(9, 10));
                 case じょくそうの処置:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(10, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(10, 11));
                 case カテーテル:
-                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(11, 1));
+                    return toChosaAnser01(ocrChosa.get過去14日間に受けた治療().substringEmptyOnError(11, 12));
                 default:
             }
             return RString.EMPTY;

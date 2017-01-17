@@ -139,6 +139,7 @@
             SELECT
                 C."shinseishoKanriNo",
                 C."ninteichosaRirekiNo",
+                C."gaikyoTokkiTextImageKubun",
                 json_agg(C) AS json_agg_dbT5206
             FROM (
                     SELECT
@@ -162,10 +163,12 @@
             ) C
             GROUP BY
                 C."shinseishoKanriNo",
-                C."ninteichosaRirekiNo"
+                C."ninteichosaRirekiNo",
+                C."gaikyoTokkiTextImageKubun"
             ) dbT5206
              ON  dbT5206."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
              AND dbT5206."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             AND dbT5206."gaikyoTokkiTextImageKubun" = "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun"
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
