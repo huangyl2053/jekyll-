@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -99,28 +99,36 @@ public final class ImageJohoUpdater {
         } else {
             ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
                     .fromString(this.証記載保険者番号.concat(this.被保険者番号)), this.共有ファイルID);
-            deleteBackupFileIfExists(ro_sfd, this.取込イメージ分類s);
+            deletePastFiles(ro_sfd, this.取込イメージ分類s);
             SharedAppendOption option = new SharedAppendOption();
             option.overWrite(true);
             return SharedFile.appendNewFile(ro_sfd, this.targetDirectoryPath, RString.EMPTY.toString(), option);
         }
     }
 
-    private static void deleteBackupFileIfExists(ReadOnlySharedFileEntryDescriptor ro_sfd, List<OcrImageClassification> targets) {
-        RString tmpDirectoryPath = Directory.createTmpDirectory();
-        SharedFile.copyToLocal(ro_sfd, new FilesystemPath(tmpDirectoryPath));
-        java.io.File tmpDirectory = new java.io.File(tmpDirectoryPath.toString());
+    private static void deletePastFiles(ReadOnlySharedFileEntryDescriptor ro_sfd, List<OcrImageClassification> targets) {
+        List<RString> filePaths = listFilePathsInEntry(ro_sfd);
         for (final OcrImageClassification target : targets) {
-            _deleteBackupFileIfExistsIn(tmpDirectory, target, ro_sfd);
+            deletePastFilesInEntryPer(target, filePaths, ro_sfd);
         }
-        tmpDirectory.delete();
     }
 
-    private static void _deleteBackupFileIfExistsIn(java.io.File tmpDirectory, final OcrImageClassification matcher,
+    private static List<RString> listFilePathsInEntry(ReadOnlySharedFileEntryDescriptor ro_sfd) {
+        List<RString> list = new ArrayList<>();
+        for (SharedFileEntryInfoEntity entity : SharedFile.getEntryInfo(ro_sfd)) {
+            if (entity.getFilesEntity() == null) {
+                continue;
+            }
+            list.add(entity.getFilesEntity().getPathname());
+        }
+        return list;
+    }
+
+    private static void deletePastFilesInEntryPer(OcrImageClassification matcher, List<RString> filePaths,
             ReadOnlySharedFileEntryDescriptor ro_sfd) {
-        for (String fileName : tmpDirectory.list()) {
-            if (matcher.fileNameMatcher(fileName).find()) {
-                SharedFile.deleteFileInEntry(ro_sfd, fileName);
+        for (RString filePath : filePaths) {
+            if (matcher.fileNameMatcher(filePath).find()) {
+                SharedFile.deleteFileInEntry(ro_sfd, filePath.toString());
             }
         }
     }

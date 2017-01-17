@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadP
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
-import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteichosahyoShisetsuRiyoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosakekkatorikomiocr.NinteiOcrFindler;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.OcrImageClassification;
@@ -143,7 +142,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     private void _keyBreakProcess() {
         _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* イメージ取り込み処理開始")
+                .append("/* 認定調査票取り込み処理開始")
                 .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
                 .append(" 被保険者番号：").append(key.get被保険者番号())
                 .append(" 認定申請日：").append(key.get認定申請日())
@@ -359,105 +358,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="基本調査">
-    private static void insertOrUpdate基本調査By(IBatchTableWriter<? super DbT5203NinteichosahyoKihonChosaEntity> dbWriter,
-            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
-        if (ocrChosas.size() != 1) {
-            return;
-        }
-        OcrChosa ocrChosa = ocrChosas.get(0);
-        DbT5203NinteichosahyoKihonChosaEntity entity = createOrEdit基本調査(ninteiChosaEntity, nr, ocrChosa);
-        switch (entity.getState()) {
-            case Added:
-                dbWriter.insert(entity);
-                break;
-            case Modified:
-                dbWriter.update(entity);
-                break;
-            default:
-        }
-    }
-
-    private static DbT5203NinteichosahyoKihonChosaEntity createOrEdit基本調査(NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosa ocrChosa) {
-        DbT5203NinteichosahyoKihonChosaEntity entity = ninteiChosaEntity.get基本調査().isEmpty()
-                ? newDbT5203NinteichosahyoKihonChosaEntity(nr, ocrChosa)
-                : ninteiChosaEntity.get基本調査().get(0);
-        edit基本調査(ocrChosa, entity);
-        return entity;
-    }
-
-    private static DbT5203NinteichosahyoKihonChosaEntity newDbT5203NinteichosahyoKihonChosaEntity(NinteiOcrRelate nr, OcrChosa ocrChosa) {
-        DbT5203NinteichosahyoKihonChosaEntity entity = new DbT5203NinteichosahyoKihonChosaEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
-        entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
-        entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
-        return entity;
-    }
-
-    private static void edit基本調査(OcrChosa ocrChosa, DbT5203NinteichosahyoKihonChosaEntity entity) {
-        if (!isNullOrEmpty(ocrChosa.get認知症高齢者の日常生活自立度())) {
-            entity.setNinchishoNichijoSeikatsuJiritsudoCode(ocrChosa.get認知症高齢者の日常生活自立度());
-        }
-        if (!isNullOrEmpty(ocrChosa.get障害高齢者の日常生活自立度())) {
-            entity.setNinchishoNichijoSeikatsuJiritsudoCode(ocrChosa.get障害高齢者の日常生活自立度());
-        }
-    }
-
-    private static boolean isNullOrEmpty(Code code) {
-        return code == null || Objects.equals(Code.EMPTY, code);
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="認定調査票 調査項目">
-    private static void insertOrUpdate調査項目By(IBatchTableWriter<? super DbT5211NinteichosahyoChosaItemEntity> dbWriter,
-            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
-        if (ocrChosas.size() != 1) {
-            return;
-        }
-        for (DbT5211NinteichosahyoChosaItemEntity entity : crateOrEdit認定調査票調査項目s(ninteiChosaEntity, nr, ocrChosas.get(0))) {
-            switch (entity.getState()) {
-                case Added:
-                    dbWriter.insert(entity);
-                    continue;
-                case Modified:
-                    dbWriter.update(entity);
-                default:
-            }
-        }
-    }
-
-    private static List<DbT5211NinteichosahyoChosaItemEntity> crateOrEdit認定調査票調査項目s(NinteiChosahyoEntity ninteiChosaEntity,
-            NinteiOcrRelate nr, OcrChosa ocrChosa) {
-        final Map<Integer, DbT5211NinteichosahyoChosaItemEntity> map = ninteiChosaEntity.get調査項目s();
-        final RString 厚労省IF識別コード = nr.get厚労省IF識別コード().getコード();
-        final INinteiChosahyoChosaItemAccessor accessor = NinteiChosahyoChosaItemAccessorFactory.createInstance(ocrChosa, 厚労省IF識別コード);
-        final List<DbT5211NinteichosahyoChosaItemEntity> entities = new ArrayList<>();
-        for (INinteichosaKomokuMapping komoku : NinteichosaKomokuMappings.valuesOf(厚労省IF識別コード)) {
-            final int 連番 = komoku.get連番();
-            final RString value = accessor.valueOf(連番);
-            if (RString.isNullOrEmpty(value)) {
-                continue;
-            }
-            DbT5211NinteichosahyoChosaItemEntity entity = map.containsKey(連番)
-                    ? map.get(連番)
-                    : newDbT5211NinteichosahyoChosaItemEntity(nr, 連番);
-            entity.setResearchItem(value);
-            entities.add(entity);
-        }
-        return entities;
-    }
-
-    private static DbT5211NinteichosahyoChosaItemEntity newDbT5211NinteichosahyoChosaItemEntity(NinteiOcrRelate nr, int 連番) {
-        DbT5211NinteichosahyoChosaItemEntity entity = new DbT5211NinteichosahyoChosaItemEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
-        entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
-        entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
-        entity.setRemban(連番);
-        return entity;
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="サービスの状況フラグ">
+    //<editor-fold defaultstate="collapsed" desc="概況調査 サービスの状況フラグ">
     private static void insertOrUpdateサービスの状況フラグBy(IBatchTableWriter<? super DbT5208NinteichosahyoServiceJokyoFlagEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
         if (ocrChosas.size() != 1) {
@@ -508,7 +409,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="サービスの状況">
+    //<editor-fold defaultstate="collapsed" desc="概況調査 サービスの状況">
     private static void insertOrUpdateサービスの状況By(IBatchTableWriter<? super DbT5207NinteichosahyoServiceJokyoEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
         if (ocrChosas.size() != 1) {
@@ -559,7 +460,7 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="施設利用">
+    //<editor-fold defaultstate="collapsed" desc="概況調査 施設利用">
     private static void insertOrUpdate施設利用By(IBatchTableWriter<? super DbT5210NinteichosahyoShisetsuRiyoEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
         if (ocrChosas.size() != 1) {
@@ -608,6 +509,103 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         entity.setRemban(連番);
         return entity;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="基本調査">
+    private static void insertOrUpdate基本調査By(IBatchTableWriter<? super DbT5203NinteichosahyoKihonChosaEntity> dbWriter,
+            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
+        if (ocrChosas.size() != 1) {
+            return;
+        }
+        OcrChosa ocrChosa = ocrChosas.get(0);
+        DbT5203NinteichosahyoKihonChosaEntity entity = createOrEdit基本調査(ninteiChosaEntity, nr, ocrChosa);
+        switch (entity.getState()) {
+            case Added:
+                dbWriter.insert(entity);
+                break;
+            case Modified:
+                dbWriter.update(entity);
+                break;
+            default:
+        }
+    }
+
+    private static DbT5203NinteichosahyoKihonChosaEntity createOrEdit基本調査(NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosa ocrChosa) {
+        DbT5203NinteichosahyoKihonChosaEntity entity = ninteiChosaEntity.get基本調査().isEmpty()
+                ? newDbT5203NinteichosahyoKihonChosaEntity(nr, ocrChosa)
+                : ninteiChosaEntity.get基本調査().get(0);
+        edit基本調査(ocrChosa, entity);
+        return entity;
+    }
+
+    private static DbT5203NinteichosahyoKihonChosaEntity newDbT5203NinteichosahyoKihonChosaEntity(NinteiOcrRelate nr, OcrChosa ocrChosa) {
+        DbT5203NinteichosahyoKihonChosaEntity entity = new DbT5203NinteichosahyoKihonChosaEntity();
+        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
+        entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
+        return entity;
+    }
+
+    private static void edit基本調査(OcrChosa ocrChosa, DbT5203NinteichosahyoKihonChosaEntity entity) {
+        if (!isNullOrEmpty(ocrChosa.get認知症高齢者の日常生活自立度())) {
+            entity.setNinchishoNichijoSeikatsuJiritsudoCode(ocrChosa.get認知症高齢者の日常生活自立度());
+        }
+        if (!isNullOrEmpty(ocrChosa.get障害高齢者の日常生活自立度())) {
+            entity.setNinchishoNichijoSeikatsuJiritsudoCode(ocrChosa.get障害高齢者の日常生活自立度());
+        }
+    }
+
+    private static boolean isNullOrEmpty(Code code) {
+        return code == null || Objects.equals(Code.EMPTY, code);
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="基本調査 調査項目">
+    private static void insertOrUpdate調査項目By(IBatchTableWriter<? super DbT5211NinteichosahyoChosaItemEntity> dbWriter,
+            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
+        if (ocrChosas.size() != 1) {
+            return;
+        }
+        for (DbT5211NinteichosahyoChosaItemEntity entity : crateOrEdit認定調査票調査項目s(ninteiChosaEntity, nr, ocrChosas.get(0))) {
+            switch (entity.getState()) {
+                case Added:
+                    dbWriter.insert(entity);
+                    continue;
+                case Modified:
+                    dbWriter.update(entity);
+                default:
+            }
+        }
+    }
+
+    private static List<DbT5211NinteichosahyoChosaItemEntity> crateOrEdit認定調査票調査項目s(NinteiChosahyoEntity ninteiChosaEntity,
+            NinteiOcrRelate nr, OcrChosa ocrChosa) {
+        final Map<Integer, DbT5211NinteichosahyoChosaItemEntity> map = ninteiChosaEntity.get調査項目s();
+        final RString 厚労省IF識別コード = nr.get厚労省IF識別コード().getコード();
+        final INinteiChosahyoChosaItemAccessor accessor = NinteiChosahyoChosaItemAccessorFactory.createInstance(ocrChosa, 厚労省IF識別コード);
+        final List<DbT5211NinteichosahyoChosaItemEntity> entities = new ArrayList<>();
+        for (INinteichosaKomokuMapping komoku : NinteichosaKomokuMappings.valuesOf(厚労省IF識別コード)) {
+            final int 連番 = komoku.get連番();
+            final RString value = accessor.valueOf(連番);
+            if (RString.isNullOrEmpty(value)) {
+                continue;
+            }
+            DbT5211NinteichosahyoChosaItemEntity entity = map.containsKey(連番)
+                    ? map.get(連番)
+                    : newDbT5211NinteichosahyoChosaItemEntity(nr, 連番);
+            entity.setResearchItem(value);
+            entities.add(entity);
+        }
+        return entities;
+    }
+
+    private static DbT5211NinteichosahyoChosaItemEntity newDbT5211NinteichosahyoChosaItemEntity(NinteiOcrRelate nr, int 連番) {
+        DbT5211NinteichosahyoChosaItemEntity entity = new DbT5211NinteichosahyoChosaItemEntity();
+        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
+        entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
+        entity.setRemban(連番);
+        return entity;
+    }
     //</editor-fold>
 }
