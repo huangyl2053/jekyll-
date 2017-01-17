@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -45,7 +47,6 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate."
             + "shinsaiinjissekiichiran.IShinsaiinJissekiIchiranMapper.get介護認定審査会委員報酬集計表");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE601003"));
-    private static final RString CSV_NAME = new RString("審査実績一覧.csv");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private ShinsaiinJissekiIchiranProcessParamter paramter;
@@ -53,6 +54,7 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
     private RString eucFilePath;
     private RString 導入団体コード;
     private RString 市町村名;
+    private RString CSV_NAME;
 
     @BatchWriter
     private EucCsvWriter<IShinsaiinJissekiIchiranCsvEucEntity> eucCsvWriterJunitoJugo;
@@ -72,6 +74,7 @@ public class ShinsaiinJissekiIchiranCsvProcess extends BatchProcessBase<Shinsaii
 
     @Override
     protected void createWriter() {
+        CSV_NAME = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString());
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
