@@ -89,21 +89,6 @@ public class NinteiShinseiTorokuHandler {
                 div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
             }
             setCommonDiv(result, 管理番号);
-            if (result.get被保険者氏名カナ() != null) {
-                div.setHdnShimeiKana(result.get被保険者氏名カナ().value());
-                div.getAtenaInfoToroku().getTxtKanaMeisho().setDomain(result.get被保険者氏名カナ());
-            }
-            div.getAtenaInfoToroku().getMeisho().setDomain(result.get被保険者氏名());
-            if (result.get生年月日() != null && !result.get生年月日().isEmpty()) {
-                div.getAtenaInfoToroku().getSeinengabi().setValue(result.get生年月日().toRDate());
-            }
-            if (result.get性別() != null && !result.get性別().isEmpty()) {
-                div.getAtenaInfoToroku().getSeibetsu().setValue(Seibetsu.toValue(result.get性別().getColumnValue()).get名称());
-            }
-            div.getAtenaInfoToroku().getNenrei().setValue(new RString(result.get年齢()).concat(歳));
-            div.getAtenaInfoToroku().getYubinNo().setValue(result.get郵便番号());
-            div.getAtenaInfoToroku().getJusho().setDomain(result.get住所());
-            div.getAtenaInfoToroku().getTelNo().setDomain(result.get電話番号());
         } else {
             div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY,
                 管理番号, SubGyomuCode.DBE認定支援,
@@ -115,6 +100,9 @@ public class NinteiShinseiTorokuHandler {
             ninteiInput.set申請書管理番号(管理番号);
             div.getCcdShisetsuJoho().initialize();
             div.getCcdNinteiInput().initialize(ninteiInput);
+            NinteiShinseiTodokedeshaDataPassModel dataPass = set届出情報();
+            dataPass.set申請書管理番号(管理番号.value());
+            div.getCcdShinseiTodokedesha().initialize(dataPass);
         }
     }
 
@@ -335,7 +323,42 @@ public class NinteiShinseiTorokuHandler {
         div.getTxtEnkiRiyu().setValue(result.get延期理由());
         div.getTxtEnkiTsuchishoHakkoCount().setValue(new Decimal(result.get延期通知発行回数()));
         
-    }
+        if (result.get被保険者氏名カナ() != null) {
+                div.setHdnShimeiKana(result.get被保険者氏名カナ().value());
+                div.getAtenaInfoToroku().getTxtKanaMeisho().setDomain(result.get被保険者氏名カナ());
+        }
+        div.getAtenaInfoToroku().getMeisho().setDomain(result.get被保険者氏名());
+        if (result.get生年月日() != null && !result.get生年月日().isEmpty()) {
+            div.getAtenaInfoToroku().getSeinengabi().setValue(result.get生年月日().toRDate());
+        }
+        if (result.get性別() != null && !result.get性別().isEmpty()) {
+            div.getAtenaInfoToroku().getSeibetsu().setValue(Seibetsu.toValue(result.get性別().getColumnValue()).get名称());
+        }
+        div.getAtenaInfoToroku().getNenrei().setValue(new RString(result.get年齢()).concat(歳));
+        div.getAtenaInfoToroku().getYubinNo().setValue(result.get郵便番号());
+        div.getAtenaInfoToroku().getJusho().setDomain(result.get住所());
+        div.getAtenaInfoToroku().getTelNo().setDomain(result.get電話番号());
+        
+        NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
+        datapass.setカナ氏名(result.get申請届出者氏名カナ());
+        datapass.set事業者区分(result.get事業者区分());
+        datapass.set住所(result.get申請届出者住所());
+        datapass.set氏名(result.get申請届出者氏名());
+        if (result.get申請届出代行事業者番号() != null) {
+            datapass.set申請届出代行事業者番号(result.get申請届出代行事業者番号().value());
+        }
+        if (result.get申請届出代行区分コード() != null) {
+            datapass.set申請届出代行区分コード(result.get申請届出代行区分コード().value());
+        }
+        datapass.set続柄(result.get申請届出者続柄());
+        //datapass.set識別コード(result.get識別コード().value());
+        if (result.get申請届出者郵便番号() != null) {
+            datapass.set郵便番号(result.get申請届出者郵便番号().getEditedYubinNo());
+        }
+        datapass.set電話番号(result.get申請届出者電話番号().value());
+        datapass.set申請書管理番号(管理番号.value());
+        div.getCcdShinseiTodokedesha().initialize(datapass);
+     }
     
     private RDate flexibleDateToRDate(FlexibleDate date) {
         if (date == null || FlexibleDate.EMPTY.equals(date)) {
