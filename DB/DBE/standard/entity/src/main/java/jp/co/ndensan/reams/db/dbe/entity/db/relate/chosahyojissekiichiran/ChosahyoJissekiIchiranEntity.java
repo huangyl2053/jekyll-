@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -91,5 +95,29 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査入手日 = 調査入手日;
         this.調査区分 = 調査区分;
         this.訪問の種類 = 訪問の種類;
+    }
+
+    public ChosahyoJissekiIchiranEntity(ChosahyoJissekiIchiranRelateEntity relateEntity) {
+        this.保険者番号 = relateEntity.get証記載保険者番号();
+        this.保険者名称 = relateEntity.get市町村名称();
+        this.調査機関コード = relateEntity.get調査委託先コード();
+        this.調査機関名称 = relateEntity.get事業者名称();
+        this.調査員コード = relateEntity.get調査員コード();
+        this.調査員氏名 = relateEntity.get調査員氏名();
+        this.被保険者番号 = relateEntity.get被保険者番号();
+        this.被保険者氏名 = relateEntity.get被保険者氏名();
+        this.調査依頼日 = dateFormat(relateEntity.get認定調査依頼年月日());
+        this.調査実施日 = dateFormat(relateEntity.get認定調査実施年月日());
+        this.調査入手日 = dateFormat(relateEntity.get認定調査受領年月日());
+        this.調査区分 = ChosaKubun.toValue(relateEntity.get認定調査区分コード()).get名称();
+        this.訪問の種類 = NinteiChousaIraiKubunCode.toValue(relateEntity.get認定調査依頼区分コード()).get名称();
+    }
+    
+    private static RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RDate date_tem = new RDate(date.toString());
+        return date_tem.seireki().separator(Separator.SLASH).toDateString();
     }
 }
