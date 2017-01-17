@@ -142,7 +142,7 @@
         rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
         WHERE
         dbt5503."shinsakaiIinCode" = #{shinsakaiIinCode}
-        AND #{shinsakaiKaisaiNo} <![CDATA[<]]> dbt5503."shinsakaiKaisaiNo"
+        AND #{shinsakaiKaisaiYoteiYMD} <![CDATA[<]]> dbt5503."shinsakaiKaisaiYMD"
         ORDER BY
         dbt5503."shinsakaiKaisaiYMD"
         LIMIT 5

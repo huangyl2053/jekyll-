@@ -66,6 +66,6 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
      * @return IinTuutishoMyBatisParameter
      */
     public IinTuutishoMyBatisParameter toIinTuutishoMyBatisParameter() {
-        return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo, bunshoKanriNo);
+        return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo, shinsakaiKaisaiYoteiYMD, bunshoKanriNo);
     }
 }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTuutishoMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
 
     private RString shinsakaiKaisaiNo;
+    private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shuturyokuSutairu;
     private RString printHou;
     private RString bunshoKanriNo;
@@ -29,16 +31,19 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定日
      * @param shuturyokuSutairu 出力スタイル
      * @param printHou 印刷方法
      * @param bunshoKanriNo 文書管理番号
      */
     public IinTuikaSiryoProcessParameter(
             RString shinsakaiKaisaiNo,
+            FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shuturyokuSutairu,
             RString printHou,
             RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shuturyokuSutairu = shuturyokuSutairu;
         this.printHou = printHou;
         this.bunshoKanriNo = bunshoKanriNo;
@@ -50,7 +55,7 @@ public class IinTuikaSiryoProcessParameter implements IBatchProcessParameter {
      * @return IinTuutishoMyBatisParameter
      */
     public IinTuutishoMyBatisParameter toIinTuutishoMyBatisParameter() {
-        return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo, bunshoKanriNo);
+        return new IinTuutishoMyBatisParameter(shinsakaiKaisaiNo, shinsakaiKaisaiYoteiYMD, bunshoKanriNo);
     }
 
     /**

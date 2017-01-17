@@ -283,6 +283,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      */
     public IinTuikaSiryoProcessParameter toIinTuikaSiryoProcessParameter() {
         return new IinTuikaSiryoProcessParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiYoteiYMD,
                 shuturyokuSutairu,
                 printHou,
                 bunshoKanriNo);

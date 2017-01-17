@@ -450,11 +450,7 @@ public class JimuShinsakaishiryoBusiness {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
         List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
         審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
-                .append(new RString("年 "))
-                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getMonthValue()).padLeft(" ", 2))
-                .append(new RString("月 "))
-                .append(new RString(paramter.getShinsakaiKaisaiYoteiYMD().getDayValue()).padLeft(" ", 2))
-                .append(new RString("日 "))
+                .append(convert和暦(paramter.getShinsakaiKaisaiYoteiYMD()))
                 .append(時分.get(0).padZeroToLeft(2))
                 .append(new RString("時 "))
                 .append(時分.get(1).padZeroToLeft(2))
@@ -462,6 +458,14 @@ public class JimuShinsakaishiryoBusiness {
         return 審査会開催年月日.toRString();
     }
 
+    private RString convert和暦(FlexibleDate 予定年月日) {
+        if (予定年月日 != null) {
+            return 予定年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+    
     private RString パターン13(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return 年月日.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
