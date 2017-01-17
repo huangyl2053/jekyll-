@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -216,6 +217,7 @@ public class NinteiShinseiTorokuHandler {
         if (div.getAtenaInfoToroku().getJusho() != null && div.getAtenaInfoToroku().getJusho().getDomain() != null) {
             datapass.set住所(div.getAtenaInfoToroku().getJusho().getDomain().getColumnValue());
         }
+        datapass.set申請届出代行区分コード(ShinseiTodokedeDaikoKubunCode.本人.getCode());
         datapass.set続柄(new RString("本人"));
         return datapass;
     }
@@ -341,13 +343,18 @@ public class NinteiShinseiTorokuHandler {
         
         NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
         datapass.setカナ氏名(result.get申請届出者氏名カナ());
-        datapass.set事業者区分(result.get事業者区分());
+        if (!RString.isNullOrEmpty(result.get事業者区分()) 
+                && !result.get事業者区分().trim().isEmpty()) {
+            datapass.set事業者区分(result.get事業者区分());
+        }
         datapass.set住所(result.get申請届出者住所());
         datapass.set氏名(result.get申請届出者氏名());
-        if (result.get申請届出代行事業者番号() != null) {
+        if (result.get申請届出代行事業者番号() != null 
+                && !RString.isNullOrEmpty(result.get申請届出代行事業者番号().value())) {
             datapass.set申請届出代行事業者番号(result.get申請届出代行事業者番号().value());
         }
-        if (result.get申請届出代行区分コード() != null) {
+        if (result.get申請届出代行区分コード() != null 
+                && !RString.isNullOrEmpty(result.get申請届出代行区分コード().value())) {
             datapass.set申請届出代行区分コード(result.get申請届出代行区分コード().value());
         }
         datapass.set続柄(result.get申請届出者続柄());
@@ -355,7 +362,10 @@ public class NinteiShinseiTorokuHandler {
         if (result.get申請届出者郵便番号() != null) {
             datapass.set郵便番号(result.get申請届出者郵便番号().getEditedYubinNo());
         }
-        datapass.set電話番号(result.get申請届出者電話番号().value());
+        if (result.get申請届出者電話番号() != null 
+                && !RString.isNullOrEmpty(result.get申請届出者電話番号().value())) {
+            datapass.set電話番号(result.get申請届出者電話番号().value());
+        }
         datapass.set申請書管理番号(管理番号.value());
         div.getCcdShinseiTodokedesha().initialize(datapass);
      }

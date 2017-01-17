@@ -194,7 +194,6 @@ public class NinteiShinseiToroku {
             if (管理番号 != null) {
                 result = manager.getDataForLoad(new ShinseishoKanriNo(管理番号));
             }
-            div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
             if (business != null) {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 getHandler(div).loadInsert(business, business.get保険者().get市町村コード(), 介護導入形態);
@@ -212,6 +211,7 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().setDisabled(Boolean.TRUE);
+            div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
             setCcdShinseiTodokedesha(div);
             if (result == null) {
                 div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.初回申請);
