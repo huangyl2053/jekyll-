@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IinTuutishoMyBatisParameter implements IMyBatisParameter {
 
     private RString shinsakaiKaisaiNo;
+    private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiIinCode;
     private RString shujiiIryokikanCode;
     private RString shujiiCode;
@@ -33,10 +35,12 @@ public class IinTuutishoMyBatisParameter implements IMyBatisParameter {
      * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param shinsakaiKaisaiYoteiYMD 審査会開催予定日
      * @param bunshoKanriNo 文書管理番号
      */
-    public IinTuutishoMyBatisParameter(RString shinsakaiKaisaiNo, RString bunshoKanriNo) {
+    public IinTuutishoMyBatisParameter(RString shinsakaiKaisaiNo, FlexibleDate shinsakaiKaisaiYoteiYMD, RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.bunshoKanriNo = bunshoKanriNo;
     }
 }

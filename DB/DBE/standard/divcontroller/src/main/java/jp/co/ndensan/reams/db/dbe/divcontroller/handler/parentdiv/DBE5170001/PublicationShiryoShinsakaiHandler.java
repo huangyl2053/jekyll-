@@ -484,7 +484,9 @@ public class PublicationShiryoShinsakaiHandler {
                 事務局_概況特記.add(印刷帳票_予備判定記入票);
             }
             if (is事務局項目を選択(概況特記一覧)) {
-                事務局_概況特記.add(印刷帳票_概況特記一覧);
+                if (ShutsuryokuStyle.A4縦.getコード().equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+                    事務局_概況特記.add(印刷帳票_概況特記一覧);
+                }
             }
             事務局用の審査会資料設定(事務局_印刷帳票, 印刷帳票_事務局審査会資料);
         } else {
@@ -492,8 +494,9 @@ public class PublicationShiryoShinsakaiHandler {
             事務局_印刷帳票.add(印刷帳票_審査会資料);
 
             事務局_概況特記.add(印刷帳票_予備判定記入票);
-            事務局_概況特記.add(印刷帳票_概況特記一覧);
-
+            if (ShutsuryokuStyle.A4縦.getコード().equals(div.getDdlShutsuryokuStyleZenken().getSelectedKey())) {
+                事務局_概況特記.add(印刷帳票_概況特記一覧);
+            }
             set審査会資料By出力スタイル(印刷帳票_事務局審査会資料);
         }
         div.getChkPrintChoyoJimu().setSelectedItemsByKey(事務局_印刷帳票);

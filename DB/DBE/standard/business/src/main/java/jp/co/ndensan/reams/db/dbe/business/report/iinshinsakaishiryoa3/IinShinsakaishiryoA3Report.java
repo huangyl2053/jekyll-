@@ -87,7 +87,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 }
             }
         }
-        if (両面.equals(this.printHou) && reportSourceWriter.pageCount().isOdd()) {
+        if (両面.equals(this.printHou) && !reportSourceWriter.pageCount().isOdd()) {
             set余白ページ(reportSourceWriter);
         }
         List<TokkiJikou> 短冊情報リスト = new ArrayList<>();
@@ -141,7 +141,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
     }
 
     private void set主治医意見書(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter, boolean is両面印刷) {
-        if (is両面印刷 && !reportSourceWriter.pageCount().isOdd()) {
+        if (is両面印刷 && reportSourceWriter.pageCount().isOdd()) {
             set余白ページ(reportSourceWriter);
         }
         IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);

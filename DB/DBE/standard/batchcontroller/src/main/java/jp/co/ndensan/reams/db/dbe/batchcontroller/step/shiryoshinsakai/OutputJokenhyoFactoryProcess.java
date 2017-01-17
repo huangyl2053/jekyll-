@@ -101,9 +101,9 @@ public class OutputJokenhyoFactoryProcess extends SimpleBatchProcessBase {
 
     private RString 印刷方法(RString key) {
         if (key.equals(new RString("1"))) {
-            return new RString("両面");
-        } else if (key.equals(new RString("2"))) {
             return new RString("片面");
+        } else if (key.equals(new RString("2"))) {
+            return new RString("両面");
         }
         return RString.EMPTY;
     }

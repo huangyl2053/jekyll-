@@ -82,7 +82,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
         if (!is審査会対象一覧印刷済み) {
             write審査対象者一覧(reportSourceWriter);
         }
-        if (両面.equals(this.printHou) && reportSourceWriter.pageCount().isOdd()) {
+        if (両面.equals(this.printHou) && !reportSourceWriter.pageCount().isOdd()) {
             set余白ページ(reportSourceWriter);
         }
         List<TokkiJikou> 短冊情報リスト = new ArrayList<>();
@@ -137,7 +137,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
     }
 
     private void set主治医意見書(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter, boolean is両面印刷) {
-        if (is両面印刷 && !reportSourceWriter.pageCount().isOdd()) {
+        if (is両面印刷 && reportSourceWriter.pageCount().isOdd()) {
             set余白ページ(reportSourceWriter);
         }
         if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
