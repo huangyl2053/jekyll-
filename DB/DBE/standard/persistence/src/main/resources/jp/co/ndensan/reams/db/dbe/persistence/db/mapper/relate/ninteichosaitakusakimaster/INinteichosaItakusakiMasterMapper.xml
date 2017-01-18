@@ -148,4 +148,75 @@
             limit #{limit}
         </if>
     </select>
+    
+      <select resultOrdered="true" id="ninteichosaItakusakiSearchKensu" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter" resultType="int" fetchSize="500">
+      SELECT
+      COUNT(0)
+      FROM
+      rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
+      INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
+      ON dbt7051."shichosonCode" = dbt5910."shichosonCode"
+      WHERE
+      1 = 1
+        <if test="jokyoFlag == true">
+            AND dbt5910."jokyoFlag" = true
+        </if>
+        <if test="jokyoFlag == false">
+            AND dbt5910."jokyoFlag" = false
+        </if>
+        <if test="shichosonCode != null">
+            AND dbt7051."shichosonCode" = #{shichosonCode}
+        </if>
+        <if test="searchChosaItakusakiCodeFrom!=null">
+            AND #{searchChosaItakusakiCodeFrom} &lt;= dbt5910."ninteichosaItakusakiCode"
+        </if>
+        <if test="searchChosaItakusakiCodeTo!=null">
+            AND dbt5910."ninteichosaItakusakiCode" &lt;= #{searchChosaItakusakiCodeTo}
+        </if>
+        <if test="jigyoshaMeisho!=null">
+            <if test = "ddlItakusakiMeishoKey==0">
+                AND dbt5910."jigyoshaMeisho" LIKE #{jigyoshaMeisho}||'%'
+            </if>
+            <if test = "ddlItakusakiMeishoKey==1">
+                AND dbt5910."jigyoshaMeisho" LIKE '%'||#{jigyoshaMeisho}
+            </if>
+            <if test = "ddlItakusakiMeishoKey==2">
+                AND dbt5910."jigyoshaMeisho" = #{jigyoshaMeisho}
+            </if>
+            <if test = "ddlItakusakiMeishoKey==3">
+                AND dbt5910."jigyoshaMeisho" LIKE '%'||#{jigyoshaMeisho}||'%'
+            </if>
+        </if>
+        <if test="jigyoshaMeishoKana!=null">
+            <if test = "ddlItakusakiKanaMeishoKey==0">
+                AND dbt5910."jigyoshaMeishoKana" LIKE #{jigyoshaMeishoKana}||'%'
+            </if>
+            <if test = "ddlItakusakiKanaMeishoKey==1">
+                AND dbt5910."jigyoshaMeishoKana" LIKE '%'||#{jigyoshaMeishoKana}
+            </if>
+            <if test = "ddlItakusakiKanaMeishoKey==2">
+                AND dbt5910."jigyoshaMeishoKana" = #{jigyoshaMeishoKana}
+            </if>
+            <if test = "ddlItakusakiKanaMeishoKey==3">
+                AND dbt5910."jigyoshaMeishoKana" LIKE '%'||#{jigyoshaMeishoKana}||'%'
+            </if>
+        </if>
+        <if test="chosaItakuKubun!=null">
+            AND dbt5910."chosaItakuKubun" = #{chosaItakuKubun}
+        </if>
+        <if test="kikanKubun!=null">
+            AND dbt5910."kikanKubun" = #{kikanKubun}
+        </if>
+        <if test="市町村識別ID利用Flag">
+            AND dbt7051."shichosonShokibetsuID" NOT IN (
+                    SELECT "shichosonShokibetsuID"
+                    FROM rgdb."DbT7051KoseiShichosonMaster"
+                    WHERE  "shichosonCode"=(
+                                            SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
+                                            WHERE "shichosonShokibetsuID" = #{市町村識別ID}
+                                            )
+                    AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
+                    )
+        </if>
+    </select>
 </mapper>

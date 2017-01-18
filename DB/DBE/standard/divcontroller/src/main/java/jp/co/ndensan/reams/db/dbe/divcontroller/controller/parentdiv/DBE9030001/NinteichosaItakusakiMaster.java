@@ -500,35 +500,34 @@ public class NinteichosaItakusakiMaster {
         }
     }
 
-    /**
-     * 入力明細エリアの入力内容を破棄し、調査委託先一覧エリアへ戻る
-     *
-     * @param div 画面情報
-     * @return ResponseData<NinteichosaItakusakiMasterDiv>
-     */
-    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnTorikeshi(NinteichosaItakusakiMasterDiv div) {
-        if (!ResponseHolder.isReRequest()
-                && (div.get状態().equals(追加状態コード) || div.get状態().equals(修正状態コード))) {
-            if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            }
-            getHandler(div).clear();
-            ViewStateHolder.put(ViewStateKeys.状態, true);
-            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
-        }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            getHandler(div).clear();
-            ViewStateHolder.put(ViewStateKeys.状態, true);
-            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
-        }
-        if (div.get状態().equals(その他状態コード) || div.get状態().equals(削除状態)) {
-            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
-        }
-        return ResponseData.of(div).respond();
-    }
-
+//    /**
+//     * 入力明細エリアの入力内容を破棄し、調査委託先一覧エリアへ戻る
+//     *
+//     * @param div 画面情報
+//     * @return ResponseData<NinteichosaItakusakiMasterDiv>
+//     */
+//    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnTorikeshi(NinteichosaItakusakiMasterDiv div) {
+//        if (!ResponseHolder.isReRequest()
+//                && (div.get状態().equals(追加状態コード) || div.get状態().equals(修正状態コード))) {
+//            if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
+//                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+//            }
+//            getHandler(div).clear();
+//            ViewStateHolder.put(ViewStateKeys.状態, true);
+//            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+//        }
+//        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+//                .equals(ResponseHolder.getMessageCode())
+//                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+//            getHandler(div).clear();
+//            ViewStateHolder.put(ViewStateKeys.状態, true);
+//            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+//        }
+//        if (div.get状態().equals(その他状態コード) || div.get状態().equals(削除状態)) {
+//            return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+//        }
+//        return ResponseData.of(div).respond();
+//    }
     /**
      * 入力明細エリアの入力内容を調査委託先一覧に反映させる。
      *
@@ -543,8 +542,8 @@ public class NinteichosaItakusakiMaster {
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 口座情報チェックREPLACE.toString());
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
                 = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
-        DBE9030001ErrorMessage 入力値が不正_事業者番号存在チェック
-                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 事業者番号存在チェックREPLACE.toString());
+    //    DBE9030001ErrorMessage 入力値が不正_事業者番号存在チェック
+        //            = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 事業者番号存在チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
                 UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
                 ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
@@ -556,11 +555,11 @@ public class NinteichosaItakusakiMaster {
                 .thenAdd(入力値が不正_追加メッセージあり).messages());
         messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.調査委託先コードの重複チェック)
                 .thenAdd(既に登録済).messages());
-        messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.事業者番号存在チェック)
-                .thenAdd(入力値が不正_事業者番号存在チェック).messages());
+     //   messages.add(ValidateChain.validateStart(div).ifNot(NinteichosaItakusakiMasterDivSpec.事業者番号存在チェック)
+        //           .thenAdd(入力値が不正_事業者番号存在チェック).messages());
 
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                入力値が不正_事業者番号存在チェック, div.getChosaitakusakiJohoInput().getTxtjigyoshano()).build().check(messages));
+     //   pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+        //           入力値が不正_事業者番号存在チェック, div.getChosaitakusakiJohoInput().getTxtjigyoshano()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 編集なしで更新不可, div.getChosaitakusakiJohoInput()).build().check(messages));
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
