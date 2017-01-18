@@ -124,6 +124,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+                     
                     IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
@@ -257,10 +258,12 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                 } else {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
                 }
-                その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-                その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
-                存在ファイルindex = その他資料.get存在ファイルIndex();
-                shinsakaiOrder = entity.getShinsakaiOrder();
+                if (イメージファイルリスト != null && !イメージファイルリスト.isEmpty()) {
+                    その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
+                    その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
+                    存在ファイルindex = その他資料.get存在ファイルIndex();
+                    shinsakaiOrder = entity.getShinsakaiOrder();
+                }
             }
         }
         return その他資料;

@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWar
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
@@ -96,11 +95,7 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
                 reportSourceWriter.writeLine(builder);
             }
         }
-//        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517902.getReportId().value().equals(reportId)) {
-//            IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
-//            IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
-//            reportSourceWriter.writeLine(builder1);
-//        }
+        
         RString 印刷有無フラグ = DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (両面.equals(this.printHou)) {
             if (印字.equals(印刷有無フラグ)) {
@@ -140,13 +135,11 @@ public class JimuShinsakaishiryoA3Report extends Report<JimuShinsakaishiryoA3Rep
         if (is両面印刷 && reportSourceWriter.pageCount().isOdd()) {
             set余白ページ(reportSourceWriter);
         }
-        if (shinsakaiWariateJoho != null && ReportIdDBE.DBE517903.getReportId().value().equals(reportId)) {
-            IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
-            IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
-            reportSourceWriter.writeLine(builder1);
-        }
+        IJimuShinsakaishiryoA3Editor editor1 = new JimuShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, reportId);
+        IJimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);
+        reportSourceWriter.writeLine(builder1);
     }
-    
+
     private void set余白ページ(ReportSourceWriter<JimuShinsakaishiryoA3ReportSource> reportSourceWriter) {
         IJimuShinsakaishiryoA3Editor editor1 = new BlankPageEditor();
         JimuShinsakaishiryoA3Builder builder1 = new JimuShinsakaishiryoA3Builder(editor1);

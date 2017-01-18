@@ -449,8 +449,7 @@ public class JimuShinsakaishiryoBusiness {
     private RString get開催年月日() {
         RStringBuilder 審査会開催年月日 = new RStringBuilder();
         List<RString> 時分 = paramter.getShinsakaiKaishiYoteiTime().padZeroToLeft(SIZE_5).split(":");
-        審査会開催年月日.append(paramter.getShinsakaiKaisaiYoteiYMD().getYear())
-                .append(convert和暦(paramter.getShinsakaiKaisaiYoteiYMD()))
+        審査会開催年月日.append(convert和暦(paramter.getShinsakaiKaisaiYoteiYMD()))
                 .append(時分.get(0).padZeroToLeft(2))
                 .append(new RString("時 "))
                 .append(時分.get(1).padZeroToLeft(2))
