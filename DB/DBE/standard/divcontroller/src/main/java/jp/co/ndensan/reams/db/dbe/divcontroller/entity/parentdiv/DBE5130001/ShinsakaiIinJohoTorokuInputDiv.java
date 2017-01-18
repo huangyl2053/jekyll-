@@ -238,6 +238,11 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     }
 
     @JsonIgnore
+    public ICodeInputDiv getCcdshinsakaiChikuCode() {
+        return this.getShinsakaiIinJoho().getCcdshinsakaiChikuCode();
+    }
+
+    @JsonIgnore
     public TextBox getTxtBiko() {
         return this.getShinsakaiIinJoho().getTxtBiko();
     }
@@ -245,11 +250,6 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     @JsonIgnore
     public void  setTxtBiko(TextBox txtBiko) {
         this.getShinsakaiIinJoho().setTxtBiko(txtBiko);
-    }
-
-    @JsonIgnore
-    public ICodeInputDiv getCcdshinsakaiChikuCode() {
-        return this.getShinsakaiIinJoho().getCcdshinsakaiChikuCode();
     }
 
     @JsonIgnore
