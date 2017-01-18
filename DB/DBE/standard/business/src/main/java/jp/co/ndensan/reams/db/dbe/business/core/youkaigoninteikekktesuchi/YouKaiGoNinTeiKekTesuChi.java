@@ -9,7 +9,11 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -198,6 +202,17 @@ public class YouKaiGoNinTeiKekTesuChi implements Serializable {
      * @return 二次判定結果
      */
     public RString get二次判定結果() {
+        RString 厚労省IF識別コード = entity.getKoroshoIfShikibetsuCode();
+        KoroshoIfShikibetsuCode code = KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード);
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.equals(code)) {
+            return YokaigoJotaiKubun99.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.equals(code)) {
+            return YokaigoJotaiKubun02.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.equals(code)) {
+            return YokaigoJotaiKubun06.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.equals(code)) {
+            return YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
+        }
         return YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
     }
 

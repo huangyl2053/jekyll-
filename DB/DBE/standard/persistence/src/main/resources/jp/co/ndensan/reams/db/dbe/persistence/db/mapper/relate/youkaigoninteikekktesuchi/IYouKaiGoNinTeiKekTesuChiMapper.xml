@@ -21,6 +21,7 @@
         <result property="ninteiShinseiYMD" column="dbT5101NinteiShinseiJoho_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiShinseiShinseijiKubunCod" column="dbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiShinseiHoreiKubunCode" column="dbT5101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT5101NinteiShinseiJoho_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiYokaigoJotaiKubunCod" column="dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiNinteiYukoKikan" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -52,7 +53,7 @@
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         INNER JOIN  rgdb."DbT7051KoseiShichosonMaster"
         ON  rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
-        <if test= "useSyuRyoKuTaiSyou and 市町村コード.toString()!=''.toString()">    
+        <if test= "市町村コード.toString()!=''.toString()">
             AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
         </if>
         INNER JOIN  rgdb."DbT5911ShujiiIryoKikanJoho"
@@ -73,6 +74,9 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         <if test="useSyuRyoKuTaiSyou">
             AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
+        </if>
+        <if test="useMaDaNyuRyouKu">
+            AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
         </if>
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
         WHERE
@@ -121,6 +125,7 @@
         rgdb."DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" AS dbT5101NinteiShinseiJoho_ninteiShinseiYMD,
         rgdb."DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" AS dbT5101NinteiShinseiJoho_ninteiShinseiShinseijiKubunCode,
         rgdb."DbT5101NinteiShinseiJoho"."ninteiShinseiHoreiKubunCode" AS dbT5101NinteiShinseiJoho_ninteiShinseiHoreiKubunCode,
+        rgdb."DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode" AS dbT5101NinteiShinseiJoho_koroshoIfShikibetsuCode,
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYokaigoJotaiKubunCode" AS dbT5102NinteiKekkaJoho_nijiHanteiYokaigoJotaiKubunCode,
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoKikan" AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKikan,
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoKaishiYMD" AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD,
@@ -132,6 +137,11 @@
         rgdb."DbT5101NinteiShinseiJoho"
         INNER JOIN  rgdb."DbT5102NinteiKekkaJoho"
         ON  rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        INNER JOIN  rgdb."DbT7051KoseiShichosonMaster"
+        ON  rgdb."DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        <if test= "市町村コード.toString()!=''.toString()">
+            AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
+        </if>
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" =
@@ -142,6 +152,12 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         <if test="useSyuRyoKuTaiSyou">
             AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
+        </if>
+        <if test="useMaDaNyuRyouKu">
+            AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
+        </if>
+        <if test= "市町村コード.toString()!=''.toString()">
+            AND rgdb."DbT7051KoseiShichosonMaster"."shichosonCode" = #{市町村コード}
         </if>
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
         WHERE
@@ -194,7 +210,7 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"
         WHERE
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
-        AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE
+        AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE<!--ここは引数で条件分岐するべき-->
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
         <where>
             <if test="useShoKisaiHokenshaNo">
@@ -222,7 +238,8 @@
             </if>
             <if test="use申請書管理番号">
                 AND
-                rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = #{申請書管理番号}
+                rgdb."DbT5102NinteiKekkaJoho"."shinseishoKanriNo" IN
+                <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
             </if>
             <if test="use主治医情報">
                 AND
@@ -237,12 +254,12 @@
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
     </select>
 
-    <select resultOrdered="true" id="get主治医意見書作成依頼情報ByKey" fetchSize="500" 
+    <select resultOrdered="true" id="get主治医意見書作成依頼情報ByKey" fetchSize="500"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" >
-        SELECT 
-        * 
-        FROM 
+        SELECT
+        *
+        FROM
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         WHERE
         DbT5301."shinseishoKanriNo" = #{param1}

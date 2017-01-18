@@ -72,7 +72,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     public void load() {
         div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+        div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         List<KeyValueDataSource> shikakuDataSource = new ArrayList<>();
         for (Sikaku sikaku : Sikaku.values()) {

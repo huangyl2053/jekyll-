@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe090001.YouKaiGoNinTeiKekTesuChiProcessParemeter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -43,7 +44,7 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
     @BatchParameter(key = SHUJIIJYOUHOU, name = "主治医情報")
     private RString shuJiiJyouHou;
     @BatchParameter(key = SHINSEISHOKANRINO, name = "申請書管理番号")
-    private RString shinseishoKanriNo;
+    private List<RString> shinseishoKanriNoList;
     @BatchParameter(key = SHOKISAIHOKENSHANO, name = "証記載保険者番号")
     private RString shoKisaiHokenshaNo;
     @BatchParameter(key = USESHOKISAIHOKENSHANO, name = "証記載保険者番号使用フラグ")
@@ -65,7 +66,7 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
                 nijiHanteiYMDTo,
                 maDaNyuRyoKu,
                 shuJiiJyouHou,
-                shinseishoKanriNo,
+                shinseishoKanriNoList,
                 shoKisaiHokenshaNo,
                 shishoCode,
                 ninteiJohoTeikyoYMD,

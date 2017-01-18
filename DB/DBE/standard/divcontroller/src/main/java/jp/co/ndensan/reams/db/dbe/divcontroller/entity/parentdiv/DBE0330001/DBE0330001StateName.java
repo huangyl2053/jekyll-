@@ -16,8 +16,8 @@ public enum DBE0330001StateName implements IStateEnumerations {
 
     NoChange(""),
     照会("照会"),
-    一覧("一覧"),
-    主治医選択一覧("主治医選択一覧");
+    主治医選択一覧("主治医選択一覧"),
+    一覧("一覧");
 
     private final RString name;
 

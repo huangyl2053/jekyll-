@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +28,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
     private final RString 二次判定期間To;
     private final RString 未出力フラグ;
     private final RString 主治医情報;
-    private final RString 申請書管理番号;
+    private final List<RString> 申請書管理番号List;
     private final RString 証記載保険者番号;
     private final RString 支所コード;
     private final RString 認定状況提供日;
@@ -64,7 +65,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
             RString 二次判定期間To,
             RString 未出力フラグ,
             RString 主治医情報,
-            RString 申請書管理番号,
+            List<RString> 申請書管理番号List,
             RString 証記載保険者番号,
             RString 支所コード,
             RString 認定状況提供日,
@@ -79,7 +80,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
         this.二次判定期間To = 二次判定期間To;
         this.未出力フラグ = 未出力フラグ;
         this.主治医情報 = 主治医情報;
-        this.申請書管理番号 = 申請書管理番号;
+        this.申請書管理番号List = 申請書管理番号List;
         this.証記載保険者番号 = 証記載保険者番号;
         this.支所コード = 支所コード;
         this.認定状況提供日 = 認定状況提供日;
@@ -100,7 +101,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
      * @param 二次判定期間To 二次判定期間To
      * @param 未出力フラグ １：未出力のみ(画面出力条件「未出力のみ」選択した場合)、２：条件なし
      * @param 主治医情報 主治医医療機関コード+主治医コード
-     * @param 申請書管理番号 申請書管理番号
+     * @param 申請書管理番号List 申請書管理番号List
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @param 認定状況提供日 認定状況提供日
@@ -113,7 +114,7 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
             RString 二次判定期間To,
             RString 未出力フラグ,
             RString 主治医情報,
-            RString 申請書管理番号,
+            List<RString> 申請書管理番号List,
             RString 証記載保険者番号,
             RString 支所コード,
             RString 認定状況提供日,
@@ -136,14 +137,14 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
         if (RString.isNullOrEmpty(二次判定期間To)) {
             useTemp二次判定期間To = false;
         }
-        if (RString.isNullOrEmpty(申請書管理番号)) {
+        if (申請書管理番号List == null || 申請書管理番号List.isEmpty()) {
             useTemp申請書管理番号 = false;
         }
         if (RString.isNullOrEmpty(主治医情報)) {
             useTemp主治医情報 = false;
         }
         return new YouKaiGoNinTeiKekTesuChiMybitisParamter(二次判定期間From, 二次判定期間To, 未出力フラグ,
-                主治医情報, 申請書管理番号, 証記載保険者番号, 支所コード, 認定状況提供日,
+                主治医情報, 申請書管理番号List, 証記載保険者番号, 支所コード, 認定状況提供日,
                 useTemp未出力フラグ, useTemp支所コード, useTemp二次判定期間From, useTemp二次判定期間To, useTemp申請書管理番号, useTemp主治医情報,
                 useShoKisaiHokenshaNo);
     }

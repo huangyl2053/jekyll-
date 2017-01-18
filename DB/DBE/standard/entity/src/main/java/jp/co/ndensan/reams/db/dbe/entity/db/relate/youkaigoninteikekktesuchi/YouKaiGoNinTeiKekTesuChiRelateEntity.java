@@ -34,6 +34,7 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString ninteiShinseiYMD;
     private RString ninteiShinseiShinseijiKubunCod;
     private RString ninteiShinseiHoreiKubunCode;
+    private RString koroshoIfShikibetsuCode;
     private RString nijiHanteiYokaigoJotaiKubunCod;
     private RString nijiHanteiNinteiYukoKikan;
     private RString nijiHanteiNinteiYukoKaishiYMD;
