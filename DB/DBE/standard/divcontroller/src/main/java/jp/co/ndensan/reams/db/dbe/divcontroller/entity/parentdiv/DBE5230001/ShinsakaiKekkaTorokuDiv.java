@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKekkaTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -494,6 +494,16 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtTokuteiShippei() {
+        return this.getKobetsuHyojiArea().getTxtTokuteiShippei();
+    }
+
+    @JsonIgnore
+    public void  setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
+        this.getKobetsuHyojiArea().setTxtTokuteiShippei(txtTokuteiShippei);
+    }
+
+    @JsonIgnore
     public TextBox getTxtIchijiHantei() {
         return this.getKobetsuHyojiArea().getTxtIchijiHantei();
     }
@@ -511,16 +521,6 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     @JsonIgnore
     public void  setTxtNijiHanteiDay(TextBoxDate txtNijiHanteiDay) {
         this.getKobetsuHyojiArea().setTxtNijiHanteiDay(txtNijiHanteiDay);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTokuteiShippei() {
-        return this.getKobetsuHyojiArea().getTxtTokuteiShippei();
-    }
-
-    @JsonIgnore
-    public void  setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
-        this.getKobetsuHyojiArea().setTxtTokuteiShippei(txtTokuteiShippei);
     }
 
     @JsonIgnore
