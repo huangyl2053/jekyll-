@@ -355,7 +355,7 @@ public class HomonChosaIraishoBusiness {
                 get認定調査依頼書名称付与(),
                 getカスタマーバーコード(entity),
                 entity.get被保険者番号(),
-                ConfigNameDBE.認定調査依頼書.get名称(),
+                通知文Map.get(0),
                 通知文Map.get(1),
                 getCode(被保険者番号リスト, 0),
                 getCode(被保険者番号リスト, 1),

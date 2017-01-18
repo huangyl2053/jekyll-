@@ -85,7 +85,6 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
                 new FlexibleDate(processParamter.getHakkobi()),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                 ichiranhyoReportSourceWriter);
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
     }
 
     @Override
@@ -101,6 +100,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
 
     @Override
     protected void usualProcess(HomonChosaIraishoRelateEntity entity) {
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, Integer.parseInt(entity.get証記載保険者番号().toString()));
         ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
                 createFrom(business.setBodyItem(entity, 連番, ninshoshaSource, 通知文Map));
         report.writeBy(ichiranhyoReportSourceWriter);

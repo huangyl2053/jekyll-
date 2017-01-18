@@ -914,10 +914,10 @@
         , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
         FROM "HomonChosaIraishoTmp"  "DbT5201NinteichosaIraiJoho"
         ORDER BY
-        "証記載保険者番号",
-        "認定調査委託先コード",
         "認定調査員コード",
-        "申請書管理番号"
+        "認定申請年月日",
+        "被保険者氏名カナ",
+        "被保険者番号"
     </select>
  
      <resultMap id="resultMap_getHomonChosaIraishoTmp" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity" autoMapping="true">

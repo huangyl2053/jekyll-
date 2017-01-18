@@ -516,7 +516,7 @@ public class IraishoIkkatsuHakkoBusiness {
         builder.append("#");
         item.setAtenaRenban(builder.toRString());
         item.setRemban(new RString(String.valueOf(連番++)));
-        item.setTitle(ReportIdDBE.DBE230001.getReportName());
+        item.setTitle(通知文Map.get(0));
         item.setTsuchibun1(通知文Map.get(1));
         item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分申請時コード()).get名称());
         RString hihokenshaNo = entity.get被保険者番号();
