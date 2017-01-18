@@ -145,10 +145,11 @@ public abstract class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaH
         }
         
         if (一覧表を発行する.equals(帳票出力区分)) {
-            RStringBuilder 出席日 = new RStringBuilder();
-            出席日.append(年月RString.substring(FOUR));
-            出席日.append(月);
-            return 出席日.toRString();
+//            RStringBuilder 出席日 = new RStringBuilder();
+//            出席日.append(年月RString.substring(FOUR));
+//            出席日.append(月);
+//            return 出席日.toRString();
+            return getFormatted年月(年月RString);
         }
         
         return RString.EMPTY;
