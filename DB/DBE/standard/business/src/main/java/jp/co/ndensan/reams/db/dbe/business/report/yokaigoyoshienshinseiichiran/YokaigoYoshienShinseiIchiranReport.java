@@ -79,6 +79,7 @@ public class YokaigoYoshienShinseiIchiranReport extends Report<YokaigoYoshienShi
         RString time = RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(date);
+        printTimeStamp.append(RString.HALF_SPACE);
         printTimeStamp.append(time);
         for (YokaigoYoshienShinseiIchiranItem item : itemList) {
             item.setTitle(ReportIdDBE.DBE011001.getReportName());

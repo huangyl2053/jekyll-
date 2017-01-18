@@ -138,10 +138,6 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlShujiIkubun().setDataSource(ddlShujiIkubun);
         div.getShosaiJoken().setIsOpen(false);
-        List<RString> selectedItem = new ArrayList();
-        selectedItem.add(KEY0);
-        selectedItem.add(KEY1);
-        div.getChkSeibetsu().setSelectedItemsByKey(selectedItem);
         init二次判定結果DDL();
         initKihonJoho();
         initNinteiChosa();
