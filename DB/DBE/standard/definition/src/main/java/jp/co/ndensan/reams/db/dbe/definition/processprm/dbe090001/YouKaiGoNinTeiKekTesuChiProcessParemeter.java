@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm.dbe090001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,7 +26,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
     private RString nijiHanteiYMDTo;
     private RString maDaNyuRyoKu;
     private RString shuJiiJyouHou;
-    private RString shinseishoKanriNo;
+    private List<RString> shinseishoKanriNoList;
     private RString shoKisaiHokenshaNo;
     private RString shishoCode;
     private RString ninteiJohoTeikyoYMD;
@@ -39,7 +40,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
      * @param nijiHanteiYMDTo 二次判定終了年月日
      * @param maDaNyuRyoKu 未だ入力
      * @param shuJiiJyouHou 主治医情報
-     * @param shinseishoKanriNo 申請書管理番号
+     * @param shinseishoKanriNoList 申請書管理番号
      * @param shoKisaiHokenshaNo 初期再保険者番号
      * @param shishoCode 支所コード
      * @param ninteiJohoTeikyoYMD 認定情報提供年月日
@@ -50,7 +51,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
             RString nijiHanteiYMDTo,
             RString maDaNyuRyoKu,
             RString shuJiiJyouHou,
-            RString shinseishoKanriNo,
+            List<RString> shinseishoKanriNoList,
             RString shoKisaiHokenshaNo,
             RString shishoCode,
             RString ninteiJohoTeikyoYMD,
@@ -60,7 +61,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
         this.nijiHanteiYMDTo = nijiHanteiYMDTo;
         this.maDaNyuRyoKu = maDaNyuRyoKu;
         this.shuJiiJyouHou = shuJiiJyouHou;
-        this.shinseishoKanriNo = shinseishoKanriNo;
+        this.shinseishoKanriNoList = shinseishoKanriNoList;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.shishoCode = shishoCode;
         this.ninteiJohoTeikyoYMD = ninteiJohoTeikyoYMD;
@@ -78,7 +79,7 @@ public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchPro
                 nijiHanteiYMDTo,
                 maDaNyuRyoKu,
                 shuJiiJyouHou,
-                shinseishoKanriNo,
+                shinseishoKanriNoList,
                 shoKisaiHokenshaNo,
                 shishoCode,
                 ninteiJohoTeikyoYMD,

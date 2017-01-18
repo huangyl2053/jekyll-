@@ -50,7 +50,7 @@ public class MainPanelHandler {
             dgDoctorSelection_Row row = new dgDoctorSelection_Row(
                     youKaiGoNinTeiKekTesuChi.get主治医医療機関コード(),
                     youKaiGoNinTeiKekTesuChi.get医療機関名称(),
-                    (new YubinNo(youKaiGoNinTeiKekTesuChi.get郵便番号())).getEditedYubinNo() ,
+                    (new YubinNo(youKaiGoNinTeiKekTesuChi.get郵便番号())).getEditedYubinNo(),
                     youKaiGoNinTeiKekTesuChi.get電話番号(),
                     youKaiGoNinTeiKekTesuChi.get住所(),
                     youKaiGoNinTeiKekTesuChi.get主治医コード(),
@@ -123,16 +123,17 @@ public class MainPanelHandler {
                 row.setSelected(認定状況提供日フラグ);
             }
             rsb.append(String.valueOf(認定状況提供日フラグ));
-            認定状況提供日フラグ = false;
             rowList.add(row);
         }
+
         RString tempYMD = RString.EMPTY;
-        if (div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().getValue() != null) {
-            tempYMD = div.getPrintPanel().getTxtNinteiJokyoTeikyoYMD().getValue().toDateString();
+        div.getResultListPanel().getTxtNinteiJokyoTeikyoYMD().setValue(RDate.getNowDate());
+        if (div.getResultListPanel().getTxtNinteiJokyoTeikyoYMD().getValue() != null) {
+            tempYMD = div.getResultListPanel().getTxtNinteiJokyoTeikyoYMD().getValue().toDateString();
         }
-        rsb.append(tempYMD)
-                .append(div.getPrintPanel().getRadPrintCondition().getSelectedKey());
-        div.getPrintPanel().setHiddenitem(rsb.toRString());
+
+        rsb.append(tempYMD).append(div.getSearchConditionPanel().getRadPrintCondition().getSelectedKey());
+        div.setHiddenItem(rsb.toRString());
         div.getDgResultList().setDataSource(rowList);
     }
 
