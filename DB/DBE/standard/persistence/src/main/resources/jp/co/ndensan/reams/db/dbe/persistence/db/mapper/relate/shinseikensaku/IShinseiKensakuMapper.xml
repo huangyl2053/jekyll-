@@ -404,7 +404,9 @@
             <if test="useShishoCode">
                  AND DbT5101NinteiShinseiJoho."shishoCode" = #{shishoCode}
             </if>
-            AND DbT5101NinteiShinseiJoho."minashiNigoEtcTaishoFlag" = #{minashiNigoEtcTaishoFlag}
+            <if test="minashiNigoEtcTaishoFlag">
+                AND DbT5101NinteiShinseiJoho."minashiNigoEtcTaishoFlag" = #{minashiNigoEtcTaishoFlag}
+            </if>
             <if test="useNinteiShinseiYMDFrom">
                   AND DbT5101NinteiShinseiJoho."ninteiShinseiYMD"  <![CDATA[>=]]> #{ninteiShinseiYMDFrom}
             </if>
