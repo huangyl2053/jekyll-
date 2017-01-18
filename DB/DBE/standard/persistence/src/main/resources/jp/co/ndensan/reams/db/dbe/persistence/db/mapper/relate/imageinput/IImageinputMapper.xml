@@ -36,7 +36,9 @@
           , T5101."shisetsuNyushoFlag" AS t5101_施設入所の有無
           , T5101."hihokenshaNo" AS t5101_被保険者番号
           , T5101."hihokenshaName" AS t5101_被保険者氏名
+          , T5101."hihokenshaKana" AS t5101_被保険者カナ
           , T5101."ninteiShinseiYMD" AS t5101_認定申請年月日
+          , T5101."logicalDeletedFlag" AS t5101_論理削除フラグ
           , T7051."shichosonMeisho" AS t7051_市町村名称
           , T5101."shinseishoKanriNo" AS t5101_申請書管理番号
           , T5115."imageSharedFileId" AS t5115_イメージ共有ファイルID
@@ -51,9 +53,10 @@
           , T5301."shujiiCode" AS t5301_主治医コード
           , T5301."ikenshoIraiRirekiNo" AS t5301_主治医意見書作成依頼履歴番号
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho"/>
+          , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
-          INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
+          LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
             ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
             AND T5301."logicalDeletedFlag" = FALSE
             AND NOT EXISTS (
@@ -71,7 +74,7 @@
             AND "DbT5302ShujiiIkenshoJoho"."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
             ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
-          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
+          LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
             ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
             AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -92,7 +95,8 @@
         WHERE
           T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
           AND T5101."hihokenshaNo" = #{被保険者番号}
-          AND T5101."ninteiShinseiYMD" = #{認定申請日}
+        ORDER BY matches指定申請日 DESC, t5101_論理削除フラグ, t5101_認定申請年月日 DESC
+        LIMIT 1
     </select>
 
     <resultMap id="ResultMap_get関連データ" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity" autoMapping="true">
@@ -100,9 +104,11 @@
         <id property="t5101_被保険者番号" column="t5101_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="t5101_認定申請年月日" column="t5101_認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5101_被保険者氏名" column="t5101_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="t5101_被保険者カナ" column="t5101_被保険者カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5101_施設入所の有無" column="t5101_施設入所の有無"/>
         <result property="t7051_市町村名称" column="t7051_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5101_申請書管理番号" column="t5101_申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="t5101_論理削除フラグ" column="t5101_論理削除フラグ"/>
         <result property="t5115_イメージ共有ファイルID" column="t5115_イメージ共有ファイルID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="t5912_主治医コード" column="t5912_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5912_主治医氏名" column="t5912_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -114,6 +120,7 @@
         <result property="t5301_主治医医療機関コード" column="t5301_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5301_主治医コード" column="t5301_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5301_主治医意見書作成依頼履歴番号" column="t5301_主治医意見書作成依頼履歴番号"/>
+        <result property="matches指定申請日" column="matches指定申請日"/>
         <collection property="主治医意見書情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
     </resultMap>
 </mapper>

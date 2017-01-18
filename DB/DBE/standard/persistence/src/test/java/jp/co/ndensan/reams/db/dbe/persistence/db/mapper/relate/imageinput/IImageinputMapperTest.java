@@ -35,5 +35,8 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println(entities.isEmpty());
         ImageinputRelateEntity entity = entities.get(0);
         System.out.println(entity.get主治医意見書情報().isEmpty());
+        System.out.println(entity.getT5101_被保険者カナ());
+        System.out.println(entity.isT5101_論理削除フラグ());
+        System.out.println(entity.isMatches指定申請日());
     }
 }

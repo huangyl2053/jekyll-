@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  * <p/>
  * {@link #fromValue(jp.co.ndensan.reams.uz.uza.lang.RString)}により、値を指定することで、拡張情報を生成します。
  */
-public enum ExpandedInfomations {
+public enum ExpandedInformations {
 
     /**
      * コード：0001　名称：申請書管理番号
@@ -31,7 +31,7 @@ public enum ExpandedInfomations {
     private final Code aCode;
     private final RString aName;
 
-    private ExpandedInfomations(String aCode, String aName) {
+    private ExpandedInformations(String aCode, String aName) {
         this.aCode = new Code(aCode);
         this.aName = new RString(aName);
     }

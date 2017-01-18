@@ -22,7 +22,7 @@ public class SheetID {
         EMPTY = new SheetID(RString.EMPTY);
     }
 
-    public final RString theValue;
+    private final RString theValue;
 
     /**
      * @param value シートIDの値

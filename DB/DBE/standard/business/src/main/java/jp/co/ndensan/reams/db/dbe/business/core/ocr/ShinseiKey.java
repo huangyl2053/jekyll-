@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -56,6 +57,13 @@ public final class ShinseiKey {
      */
     public RString get認定申請日() {
         return 認定申請日;
+    }
+
+    /**
+     * @return 認定申請日
+     */
+    public FlexibleDate get認定申請日AsFlexibleDate() {
+        return RString.isNullOrEmpty(get認定申請日()) ? FlexibleDate.EMPTY : new FlexibleDate(get認定申請日());
     }
 
     @Override

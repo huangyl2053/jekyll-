@@ -23,10 +23,12 @@ public class ImageinputRelateEntity {
     private RString t5101_証記載保険者番号;
     private RString t5101_被保険者番号;
     private RString t5101_被保険者氏名;
+    private RString t5101_被保険者カナ;
     private RString t5101_認定申請年月日;
     private boolean t5101_施設入所の有無;
     private RString t7051_市町村名称;
     private RString t5101_申請書管理番号;
+    private boolean t5101_論理削除フラグ;
     private RDateTime t5115_イメージ共有ファイルID;
     private RString t5912_主治医コード;
     private RString t5912_主治医氏名;
@@ -39,5 +41,6 @@ public class ImageinputRelateEntity {
     private RString t5301_主治医コード;
     private int t5301_主治医意見書作成依頼履歴番号;
     private List<DbT5302ShujiiIkenshoJohoEntity> 主治医意見書情報;
+    private boolean matches指定申請日;
 
 }
