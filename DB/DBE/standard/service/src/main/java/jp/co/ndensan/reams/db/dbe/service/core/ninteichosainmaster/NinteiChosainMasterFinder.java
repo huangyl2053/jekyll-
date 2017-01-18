@@ -59,7 +59,8 @@ public class NinteiChosainMasterFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiChosainMasterFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteiChosainMasterFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteiChosainMasterFinder}のインスタンス
      */
     public static NinteiChosainMasterFinder createInstance() {
         return InstanceProvider.create(NinteiChosainMasterFinder.class);
@@ -85,6 +86,19 @@ public class NinteiChosainMasterFinder {
             調査員情報List.add(new NinteiChosainMaster(relateEntity));
         }
         return SearchResult.of(調査員情報List, 0, false);
+    }
+
+    /**
+     * 検索条件に従い、調査員情報を検索します。
+     *
+     * @param 調査員情報検索条件 調査員情報検索条件
+     * @return int 調査員情報の件数
+     */
+    @Transaction
+    public int getChosainJohoIchiranListKensu(NinteiChosainMasterMapperParameter 調査員情報検索条件) {
+        requireNonNull(調査員情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報検索条件"));
+        INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
+        return mapper.selectChosainJohoIchiranListKensu(調査員情報検索条件);
     }
 
     /**

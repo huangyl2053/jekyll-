@@ -242,6 +242,8 @@ public class NinteiChosainMaster {
         getHandler(div).setChosainIchiran(調査員情報List);
         List<ChosainJoho> 認定調査員マスタList = ninteiChosainMasterFinder.getChosainJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.認定調査員マスタ検索結果, Models.create(認定調査員マスタList));
+        div.getChosainIchiran().getDgChosainIchiran().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
+        div.getChosainIchiran().getDgChosainIchiran().getGridSetting().setSelectedRowCount(ninteiChosainMasterFinder.getChosainJohoIchiranListKensu(parameter));
     }
 
     /**
@@ -438,7 +440,7 @@ public class NinteiChosainMaster {
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             return ResponseData.of(div).setState(DBE9040001StateName.詳細_認定調査委託先マスタから遷移);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9040001StateName.詳細);
     }
 
     /**

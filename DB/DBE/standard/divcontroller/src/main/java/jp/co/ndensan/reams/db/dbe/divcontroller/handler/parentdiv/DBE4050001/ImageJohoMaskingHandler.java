@@ -218,9 +218,8 @@ public class ImageJohoMaskingHandler {
 
         dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         RString outputImagePath = Directory.createTmpDirectory();
-        RString imagePath = outputImagePath;
+        RString imagePath = RString.EMPTY;
 //        RString imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
-        ViewStateHolder.put(ViewStateKeys.イメージ情報, imagePath);
 
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()));
         RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
@@ -234,7 +233,8 @@ public class ImageJohoMaskingHandler {
 
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), 共有ファイルID);
         try {
-            SharedFile.copyToLocal(descriptor, new FilesystemPath(outputImagePath));
+            imagePath = new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(outputImagePath)).getCanonicalPath());
+            ViewStateHolder.put(ViewStateKeys.イメージ情報, imagePath);
         } catch (Exception ex) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }

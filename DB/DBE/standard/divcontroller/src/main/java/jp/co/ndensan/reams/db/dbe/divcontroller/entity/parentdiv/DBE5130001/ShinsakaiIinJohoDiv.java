@@ -39,10 +39,10 @@ public class ShinsakaiIinJohoDiv extends Panel {
     private TextBoxDate txtBirthYMD;
     @JsonProperty("ddlShikakuCode")
     private DropDownList ddlShikakuCode;
-    @JsonProperty("txtBiko")
-    private TextBox txtBiko;
     @JsonProperty("ccdshinsakaiChikuCode")
     private CodeInputDiv ccdshinsakaiChikuCode;
+    @JsonProperty("txtBiko")
+    private TextBox txtBiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -195,6 +195,15 @@ public class ShinsakaiIinJohoDiv extends Panel {
     }
 
     /*
+     * getccdshinsakaiChikuCode
+     * @return ccdshinsakaiChikuCode
+     */
+    @JsonProperty("ccdshinsakaiChikuCode")
+    public ICodeInputDiv getCcdshinsakaiChikuCode() {
+        return ccdshinsakaiChikuCode;
+    }
+
+    /*
      * gettxtBiko
      * @return txtBiko
      */
@@ -210,15 +219,6 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("txtBiko")
     public void setTxtBiko(TextBox txtBiko) {
         this.txtBiko = txtBiko;
-    }
-
-    /*
-     * getccdshinsakaiChikuCode
-     * @return ccdshinsakaiChikuCode
-     */
-    @JsonProperty("ccdshinsakaiChikuCode")
-    public ICodeInputDiv getCcdshinsakaiChikuCode() {
-        return ccdshinsakaiChikuCode;
     }
 
     // </editor-fold>

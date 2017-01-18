@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.IkenshoShukeiKijunbiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojissekiichiran.IkenshoJissekiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranCsvEucEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.ikenshojissekiichiran.IkenshoJissekiIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -112,7 +113,8 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     protected void process(IkenshoJissekiIchiranRelateEntity relateEntity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
-            csvWriter.writeLine(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
+            IIkenshoJissekiIchiranCsvEucEntity entity = new IkenshoJissekiIchiranEntity(relateEntity);
+            csvWriter.writeLine(entity);
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
             IkenshoJissekiIchiranReport report = new IkenshoJissekiIchiranReport(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
             report.writeBy(reportSourceWriter);

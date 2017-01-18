@@ -31,7 +31,8 @@ public class NinteichosaItakusakiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンス
      */
     public static NinteichosaItakusakiManager createInstance() {
         return InstanceProvider.create(NinteichosaItakusakiManager.class);
@@ -52,5 +53,16 @@ public class NinteichosaItakusakiManager {
             list.add(new KoseiShichosonMaster(relateEntity));
         }
         return list;
+    }
+
+    /**
+     * 認定調査委託先マスタ検索の件数を取得します。
+     *
+     * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
+     * @return int 件数
+     */
+    public int ninteichosaItakusakiSearchKensu(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件) {
+        INinteichosaItakusakiMasterMapper mapper = mapperProvider.create(INinteichosaItakusakiMasterMapper.class);
+        return mapper.ninteichosaItakusakiSearchKensu(構成市町村マスタ検索条件);
     }
 }

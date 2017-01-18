@@ -99,8 +99,8 @@ public class NinteiChosahyoServiceJokyoAccessorFactory {
     }
 
     private static Optional<Integer> toInteger(RString value) {
-        if (!RString.isNullOrEmpty(value)) {
-            return Optional.empty();
+        if (RString.isNullOrEmpty(value)) {
+            return Optional.of(0);
         }
         return Optional.of(Integer.valueOf(value.toString()));
     }

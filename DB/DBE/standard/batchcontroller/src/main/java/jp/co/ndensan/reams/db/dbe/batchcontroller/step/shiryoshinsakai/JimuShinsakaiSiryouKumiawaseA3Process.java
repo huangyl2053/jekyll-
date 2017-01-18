@@ -44,10 +44,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -125,6 +121,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
 
+                     
                     JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
@@ -271,10 +268,12 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 } else {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
                 }
-                business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
-                business.set事務局概況特記イメージ(共有ファイルを引き出す(batchReportWriter.getImageFolderPath(), ファイル名_G0001));
-                存在ファイルindex = business.get存在ファイルIndex();
-                shinsakaiOrder = entity.getShinsakaiOrder();
+                if (イメージファイルリスト != null && !イメージファイルリスト.isEmpty()) {
+                    business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
+                    business.set事務局概況特記イメージ(共有ファイルを引き出す(batchReportWriter.getImageFolderPath(), ファイル名_G0001));
+                    存在ファイルindex = business.get存在ファイルIndex();
+                    shinsakaiOrder = entity.getShinsakaiOrder();
+                }
             }
         }
         return business;

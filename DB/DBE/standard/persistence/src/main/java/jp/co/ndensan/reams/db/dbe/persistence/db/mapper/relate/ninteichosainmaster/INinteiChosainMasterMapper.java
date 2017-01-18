@@ -27,6 +27,14 @@ public interface INinteiChosainMasterMapper {
     List<NinteiChosainMasterRelateEntity> selectChosainJohoIchiranList(NinteiChosainMasterMapperParameter 検索条件);
 
     /**
+     * 検索条件より、適当な条件を連結して、調査員情報の件数を取得する。
+     *
+     * @param 検索条件 調査員情報検索条件
+     * @return int 件数
+     */
+    int selectChosainJohoIchiranListKensu(NinteiChosainMasterMapperParameter 検索条件);
+
+    /**
      * 調査員情報の重複チェック。
      *
      * @param 検索条件 調査員情報検索条件

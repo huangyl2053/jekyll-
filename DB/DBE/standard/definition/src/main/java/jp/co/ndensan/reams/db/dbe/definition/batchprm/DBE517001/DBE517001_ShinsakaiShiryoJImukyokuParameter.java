@@ -237,6 +237,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
      */
     public IinTuikaSiryoProcessParameter toIinTuikaSiryoProcessParameter() {
         return new IinTuikaSiryoProcessParameter(shinsakaiKaisaiNo,
+                shinsakaiKaisaiYoteiYMD,
                 shuturyokuSutairu,
                 printHou,
                 bunshoKanriNo);

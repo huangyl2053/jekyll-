@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoI
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -28,6 +29,7 @@ public final class IkenHoshuIchiranChange {
     private static final int ONE = 1;
     private static final RString IRAIKUBUN_SHO = new RString("初");
     private static final RString IRAIKUBUN_SAI = new RString("再");
+    private static final RString CSVを出力する = new RString("1");
 
     private IkenHoshuIchiranChange() {
     }
@@ -47,31 +49,59 @@ public final class IkenHoshuIchiranChange {
         } else {
             意見 = IRAIKUBUN_SAI;
         }
-        IkenHoshuIchiranEntity data = new IkenHoshuIchiranEntity(
-                entity.get主治医医療機関コード(),
-                entity.get医療機関名称(),
-                entity.get主治医コード(),
-                entity.get主治医氏名(),
-                getWarekiDateString(entity.get主治医意見書作成依頼年月日()),
-                getWarekiDateString(entity.get主治医意見書記入年月日()),
-                getWarekiDateString(entity.get主治医意見書受領年月日()),
-                意見,
-                entity.get証記載保険者番号(),
-                entity.get被保険者番号(),
-                entity.get被保険者氏名(),
-                entity.get在宅_新(),
-                entity.get在宅_継(),
-                entity.get施設_新(),
-                entity.get施設_継(),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書作成料()), 0),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書別途診療費()), 0),
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書報酬()), 0));
-        RStringBuilder 抽出期間 = new RStringBuilder();
-        抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間開始()));
-        抽出期間.append("～");
-        抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間終了()));
-        data.set抽出期間(抽出期間.toRString().equals(new RString("～")) ? RString.EMPTY : 抽出期間.toRString());
-        return data;
+        if (CSVを出力する.equals(parameter.get帳票出力区分())) {
+            IkenHoshuIchiranEntity data = new IkenHoshuIchiranEntity(
+                    entity.get主治医医療機関コード(),
+                    entity.get医療機関名称(),
+                    entity.get主治医コード(),
+                    entity.get主治医氏名(),
+                    getSeirekiDateString(entity.get主治医意見書作成依頼年月日()),
+                    getSeirekiDateString(entity.get主治医意見書記入年月日()),
+                    getSeirekiDateString(entity.get主治医意見書受領年月日()),
+                    意見,
+                    entity.get証記載保険者番号(),
+                    entity.get被保険者番号(),
+                    entity.get被保険者氏名(),
+                    entity.get在宅_新(),
+                    entity.get在宅_継(),
+                    entity.get施設_新(),
+                    entity.get施設_継(),
+                    new RString(entity.get主治医意見書作成料()),
+                    new RString(entity.get主治医意見書別途診療費()),
+                    new RString(entity.get主治医意見書報酬()));
+            RStringBuilder 抽出期間 = new RStringBuilder();
+            抽出期間.append(getSeirekiDateString(parameter.get作成依頼日期間開始()));
+            抽出期間.append("～");
+            抽出期間.append(getSeirekiDateString(parameter.get作成依頼日期間終了()));
+            data.set抽出期間(抽出期間.toRString().equals(new RString("～")) ? RString.EMPTY : 抽出期間.toRString());
+            return data;
+        } else {
+            IkenHoshuIchiranEntity data = new IkenHoshuIchiranEntity(
+                    entity.get主治医医療機関コード(),
+                    entity.get医療機関名称(),
+                    entity.get主治医コード(),
+                    entity.get主治医氏名(),
+                    getWarekiDateString(entity.get主治医意見書作成依頼年月日()),
+                    getWarekiDateString(entity.get主治医意見書記入年月日()),
+                    getWarekiDateString(entity.get主治医意見書受領年月日()),
+                    意見,
+                    entity.get証記載保険者番号(),
+                    entity.get被保険者番号(),
+                    entity.get被保険者氏名(),
+                    entity.get在宅_新(),
+                    entity.get在宅_継(),
+                    entity.get施設_新(),
+                    entity.get施設_継(),
+                    DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書作成料()), 0),
+                    DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書別途診療費()), 0),
+                    DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get主治医意見書報酬()), 0));
+            RStringBuilder 抽出期間 = new RStringBuilder();
+            抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間開始()));
+            抽出期間.append("～");
+            抽出期間.append(getWarekiDateString(parameter.get作成依頼日期間終了()));
+            data.set抽出期間(抽出期間.toRString().equals(new RString("～")) ? RString.EMPTY : 抽出期間.toRString());
+            return data;
+        }
     }
 
     /**
@@ -111,5 +141,14 @@ public final class IkenHoshuIchiranChange {
         }
         
         return date.wareki().toDateString();
+    }
+
+    private static RString getSeirekiDateString(FlexibleDate date) {
+        if ((date == null)
+                || (date.isEmpty())) {
+            return RString.EMPTY;
+        }
+
+        return date.seireki().separator(Separator.SLASH).toDateString();
     }
 }

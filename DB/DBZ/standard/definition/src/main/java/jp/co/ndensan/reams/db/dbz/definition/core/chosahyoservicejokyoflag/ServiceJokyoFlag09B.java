@@ -53,7 +53,7 @@ public enum ServiceJokyoFlag09B implements IServiceJokyoFlag {
      */
     public static ServiceJokyoFlag09B toValue(int 連番) {
         for (ServiceJokyoFlag09B v : values()) {
-            if (Objects.equals(v.get名称(), 連番)) {
+            if (Objects.equals(v.get連番(), 連番)) {
                 return v;
             }
         }

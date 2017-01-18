@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -78,6 +79,6 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
             return RString.EMPTY;
         }
         RDate date_tem = new RDate(date.toString());
-        return date_tem.wareki().toDateString();
+        return date_tem.seireki().separator(Separator.SLASH).toDateString();
     }
 }

@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJoky
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJohoBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
@@ -168,9 +167,6 @@ public class NinteiShinseiToroku {
             }
             ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
             getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
-            NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報();
-            dataPass.set申請書管理番号(管理番号.value());
-            div.getCcdShinseiTodokedesha().initialize(dataPass);
             set連絡先(管理番号, div, false);
             RirekiJohoResult comResult = manager.get共有子データ(被保険者番号);
             div.setHdnKonkai(DataPassingConverter.serialize(comResult.get今回履歴情報()));
@@ -188,6 +184,7 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
             setCcdShinseiTodokedesha(div);
+            div.getCcdNinteiInput().setDisabled(true);
             return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
@@ -197,7 +194,6 @@ public class NinteiShinseiToroku {
             if (管理番号 != null) {
                 result = manager.getDataForLoad(new ShinseishoKanriNo(管理番号));
             }
-            div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
             if (business != null) {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 getHandler(div).loadInsert(business, business.get保険者().get市町村コード(), 介護導入形態);
@@ -215,6 +211,7 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().setDisabled(Boolean.TRUE);
+            div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
             setCcdShinseiTodokedesha(div);
             if (result == null) {
                 div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.初回申請);
@@ -227,10 +224,10 @@ public class NinteiShinseiToroku {
                 ((ChosaItakusakiAndChosainInputDiv) div.getCcdChodsItakusakiAndChosainInput()).getBtnZenkaiFukusha().setDisabled(true);
                 ((ZenkaiNinteiKekkaJohoDiv) div.getCcdZenkaiNinteiKekkaJoho()).getBtnZenkaiShosai().setDisabled(true);
                 ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnZenkaiFukusha().setDisabled(true);
-                div.getCcdNinteiInput().setDisplayNone(true);
             } else {
                 getHandler(div).loadPnl(result);
             }
+            div.getCcdNinteiInput().setDisplayNone(true);
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
 

@@ -5,8 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +57,8 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 入手パターン_施継;
     @CsvField(order = 16, name = "医師区分")
     private final RString 医師区分;
+    
+    private static final RString MARU = new RString("○");
 
     /**
      * コンストラクタです。
@@ -105,5 +112,54 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.入手パターン_施新 = 入手パターン_施新;
         this.入手パターン_施継 = 入手パターン_施継;
         this.医師区分 = 医師区分;
+    }
+
+    public IkenshoJissekiIchiranEntity(IkenshoJissekiIchiranRelateEntity relateEntity) {
+        RString 在宅_新 = RString.EMPTY;
+        RString 在宅_継 = RString.EMPTY;
+        RString 施設_新 = RString.EMPTY;
+        RString 施設_継 = RString.EMPTY;
+        if (ZaitakuShisetsuKubun.在宅.getコード().equals(relateEntity.get在宅_施設区分())) {
+            if (IkenshoIraiKubun.初回依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+                在宅_新 = MARU;
+            }
+            if (IkenshoIraiKubun.再依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())
+                    || IkenshoIraiKubun.再意見書.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+                在宅_継 = MARU;
+            }
+        }
+        if (ZaitakuShisetsuKubun.施設.getコード().equals(relateEntity.get在宅_施設区分())) {
+            if (IkenshoIraiKubun.初回依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+                施設_新 = MARU;
+            }
+            if (IkenshoIraiKubun.再依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())
+                    || IkenshoIraiKubun.再意見書.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+                施設_継 = MARU;
+            }
+        }
+        this.保険者番号 = relateEntity.get証記載保険者番号();
+        this.保険者名称 = relateEntity.get市町村名称();
+        this.医療機関コード = relateEntity.get医療機関コード();
+        this.医療機関名称 = relateEntity.get医療機関名称();
+        this.主治医コード = relateEntity.get主治医コード();
+        this.主治医氏名 = relateEntity.get主治医氏名();
+        this.被保険者番号 = relateEntity.get被保険者番号();
+        this.被保険者氏名 = relateEntity.get申請者氏名();
+        this.依頼日 = dateFormat(relateEntity.get依頼日());
+        this.記入日 = dateFormat(relateEntity. get記入日());
+        this.入手日 = dateFormat(relateEntity.get入手日());
+        this.入手パターン_在新 = 在宅_新;
+        this.入手パターン_在継 = 在宅_継;
+        this.入手パターン_施新 = 施設_新;
+        this.入手パターン_施継 = 施設_継;
+        this.医師区分 = IshiKubunCode.toValue(relateEntity.get医師区分コード()).get名称();
+    }
+
+    private static RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RDate date_tem = new RDate(date.toString());
+        return date_tem.seireki().separator(Separator.SLASH).toDateString();
     }
 }

@@ -181,7 +181,8 @@ public class NinteichosaItakusakiMasterHandler {
                 四マスタ優先表示市町村識別ID,
                 構成市町村マスタ市町村コード重複種別
         );
-
+        div.getChosaitakusakichiran().getDgChosainIchiran().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
+        div.getChosaitakusakichiran().getDgChosainIchiran().getGridSetting().setSelectedRowCount(NinteichosaItakusakiManager.createInstance().ninteichosaItakusakiSearchKensu(構成市町村マスタ検索条件));
         return NinteichosaItakusakiManager.createInstance().ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
     }
 

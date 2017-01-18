@@ -82,8 +82,11 @@ public class IkenshosakuseiHoshuReportProcess extends IkenshosakuseiHoshuProcess
         作成依頼日From.append(dateFormat(paramter.get作成依頼日期間開始()));
         RStringBuilder 作成依頼日To = new RStringBuilder("【作成依頼日（To）】");
         作成依頼日To.append(dateFormat(paramter.get作成依頼日期間終了()));
+        RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
+        保険者_SB.append(paramter.get保険者());
         出力条件.add(作成依頼日From.toRString());
         出力条件.add(作成依頼日To.toRString());
+        出力条件.add(保険者_SB.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 REPORT_ID.value(),
                 導入団体コード,

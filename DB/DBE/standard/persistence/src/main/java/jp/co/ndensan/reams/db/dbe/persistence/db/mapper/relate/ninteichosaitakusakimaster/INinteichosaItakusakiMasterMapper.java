@@ -20,4 +20,12 @@ public interface INinteichosaItakusakiMasterMapper {
      * @return List<KoseiShichosonMasterRelateEntity>
      */
     List<KoseiShichosonMasterRelateEntity> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter parm);
+
+    /**
+     * 検索条件に従い、調査委託先情報の件数を取得する。
+     *
+     * @param parm 画面情報
+     * @return int 件数
+     */
+    int ninteichosaItakusakiSearchKensu(NinteichosaItakusakiKensakuParameter parm);
 }

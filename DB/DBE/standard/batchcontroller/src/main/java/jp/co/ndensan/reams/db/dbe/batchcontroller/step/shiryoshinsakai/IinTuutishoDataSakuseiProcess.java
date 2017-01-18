@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaikaisaioshirasets
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
@@ -158,7 +159,8 @@ public class IinTuutishoDataSakuseiProcess extends BatchKeyBreakBase<ShinsakaiIi
         if (entity.getShinsakaiIinShimei() != null && !entity.getShinsakaiIinShimei().isEmpty()) {
             item.set宛名氏名(entity.getShinsakaiIinShimei().getColumnValue());
         }
-        item.set宛名名称付与(DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 発行日, SubGyomuCode.DBE認定支援));
+        item.set宛名名称付与(ChohyoAtesakiKeisho.toValue(
+                DbBusinessConfig.get(ConfigNameDBE.介護認定審査会開催のお知らせ_宛先敬称, 発行日, SubGyomuCode.DBE認定支援)).get名称());
         item.set発行日(発行日);
         item.set通知文1(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号).get(パターン番号));
         item.set通知文2(ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE515001.getReportId(), KamokuCode.EMPTY, パターン番号).get(2));
