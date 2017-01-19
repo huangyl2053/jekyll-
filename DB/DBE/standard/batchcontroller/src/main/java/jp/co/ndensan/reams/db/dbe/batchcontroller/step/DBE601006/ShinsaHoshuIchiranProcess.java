@@ -154,4 +154,6 @@ public abstract class ShinsaHoshuIchiranProcess extends BatchProcessBase<ShinsaH
         
         return RString.EMPTY;
     }
+    
+    private static
 }

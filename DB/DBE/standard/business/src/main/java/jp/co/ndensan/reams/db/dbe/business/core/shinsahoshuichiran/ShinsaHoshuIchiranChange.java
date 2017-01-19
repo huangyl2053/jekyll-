@@ -91,10 +91,10 @@ public class ShinsaHoshuIchiranChange {
                     審査会委員.get出席状況_28日(), 審査会委員.get出席状況_29日(),
                     審査会委員.get出席状況_30日(), 審査会委員.get出席状況_31日(),
                     new RString(entity.get出席回数()),
-                    DecimalFormatter.toコンマ区切りRString(entity.get報酬総額(), ZERO),
-                    DecimalFormatter.toコンマ区切りRString(entity.getその他費用(), ZERO),
-                    DecimalFormatter.toコンマ区切りRString(entity.get税額控除(), ZERO),
-                    DecimalFormatter.toコンマ区切りRString(entity.get報酬合計(), ZERO),
+                    new RString(entity.get報酬総額().toString()),
+                    new RString(entity.getその他費用().toString()),
+                    new RString(entity.get税額控除().toString()),
+                    new RString(entity.get報酬合計().toString()),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else {
             委員報酬一覧表 = new ShinsaHoshuIchiranEntity(
