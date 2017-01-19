@@ -202,7 +202,7 @@ public class NinteiShinsakaiIinGuideHandler {
             row.setCode(result.getコード());
             row.setShinsakaiIinName(result.get審査会委員名称().value());
             row.setShinsakaiIinKanaName(result.get審査会委員名カナ().value());
-            row.setSeibetsu(Seibetsu.toValue(result.get性別()).get名称());
+            row.setSeibetsu(result.get性別() == null ? RString.EMPTY : Seibetsu.toValue(result.get性別()).get名称());
             row.setShinsakaiIinShikaku(Sikaku.toValue(result.get審査会委員資格().value()).get名称());
             検索一覧データ.add(row);
         }
