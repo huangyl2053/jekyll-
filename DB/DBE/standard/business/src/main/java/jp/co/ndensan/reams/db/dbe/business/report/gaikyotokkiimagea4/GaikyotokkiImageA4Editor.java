@@ -46,7 +46,7 @@ public class GaikyotokkiImageA4Editor implements IGaikyotokkiImageA4Editor {
      */
     @Override
     public GaikyotokkiImageA4ReportSource edit(GaikyotokkiImageA4ReportSource source) {
-
+        source.shinsakaiOrder = item.get審査順();
         source.hokenshaNo = item.get保険者番号();
         source.hihokenshaNo = item.get被保険者番号();
         source.hihokenshaName = item.get名前();

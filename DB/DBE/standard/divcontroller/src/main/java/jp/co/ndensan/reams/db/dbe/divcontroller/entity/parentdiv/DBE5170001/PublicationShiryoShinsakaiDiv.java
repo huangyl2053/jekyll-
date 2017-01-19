@@ -297,11 +297,6 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IBunshoBangoInputDiv getCcdBunshoNoInput() {
-        return this.getPublishingCondition().getCcdBunshoNoInput();
-    }
-
-    @JsonIgnore
     public PublishingConditionForJimukyokuDiv getPublishingConditionForJimukyoku() {
         return this.getPublishingCondition().getPublishingConditionForJimukyoku();
     }
@@ -419,6 +414,11 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     @JsonIgnore
     public void  setChkPrintChohyoIin2(CheckBoxList chkPrintChohyoIin2) {
         this.getPublishingCondition().getPublishingConditionForShinsakaiIin().setChkPrintChohyoIin2(chkPrintChohyoIin2);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdBunshoNoInput() {
+        return this.getPublishingCondition().getCcdBunshoNoInput();
     }
 
     // </editor-fold>

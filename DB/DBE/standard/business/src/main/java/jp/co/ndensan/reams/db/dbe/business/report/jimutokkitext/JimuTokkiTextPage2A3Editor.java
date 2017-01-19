@@ -90,6 +90,7 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
     }
 
     private JimuTokkiTextA3ReportSource editSource(JimuTokkiTextA3ReportSource source) {
+        source.shinsakaiOrder = item.get審査人数();
         source.hokenshaNo = item.get特記事項保険者番号();
         source.hihokenshaNo = item.get特記事項被保険者番号();
         source.hihokenshaName = item.get名前();

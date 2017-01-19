@@ -172,4 +172,13 @@ public class JimuSonotashiryoBusiness {
     public int get存在ファイルIndex() {
         return 存在ファイルindex;
     }
+    
+    /**
+     * 審査順を取得します。
+     *
+     * @return shinsakaiOrder
+     */
+    public RString get審査順() {
+        return new RString(entity.getShinsakaiOrder());
+    }
 }

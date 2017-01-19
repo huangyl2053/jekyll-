@@ -173,4 +173,13 @@ public class JimuShinsakaiWariateJohoBusiness {
     public void setイメージファイル_BAK(RString fileName_BAK) {
         this.fileName_BAK = fileName_BAK;
     }
+
+    /**
+     * 審査順を取得します。
+     *
+     * @return 審査順
+     */
+    public RString get審査順() {
+        return new RString(entity.getShinsakaiOrder());
+    }
 }

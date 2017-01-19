@@ -50,6 +50,7 @@ public class IchijihanteikekkahyoA4Editor implements IIchijihanteikekkahyoA4Edit
         source.title = new RString("認定情報（事務局用）");
         source.gogitaiNo = item.get合議体番号();
         source.shinseiCount = item.get審査順();
+        source.shinsakaiOrder = item.get審査順();
         source.hihokenshaKubun = item.get被保険者区分();
         source.shinseiKubun = item.get申請区分();
         source.age = get年齢(item.get年齢());

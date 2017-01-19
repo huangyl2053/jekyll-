@@ -47,6 +47,7 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
      */
     @Override
     public SonotashiryoA3ReportSource edit(SonotashiryoA3ReportSource source) {
+        source.shinsakaiOrder = business.get審査順();
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();

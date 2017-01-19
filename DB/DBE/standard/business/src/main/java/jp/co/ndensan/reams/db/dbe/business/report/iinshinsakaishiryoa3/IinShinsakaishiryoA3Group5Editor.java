@@ -24,6 +24,7 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
 
     private final JimuSonotashiryoBusiness business;
     private final int index;
+    private final RString shinsakaiOrder;
     private static final int INT_4 = 4;
 
     /**
@@ -31,10 +32,12 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
      *
      * @param business {@link JimuSonotashiryoBusiness}
      * @param index index
+     * @param shinsakaiOrder RString
      */
-    protected IinShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business, int index) {
+    protected IinShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business, int index, RString shinsakaiOrder) {
         this.business = business;
         this.index = index;
+        this.shinsakaiOrder = shinsakaiOrder;
     }
 
     /**
@@ -45,6 +48,7 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
      */
     @Override
     public IinShinsakaishiryoA3ReportSource edit(IinShinsakaishiryoA3ReportSource source) {
+        source.shinsakaiOrder = shinsakaiOrder;
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();

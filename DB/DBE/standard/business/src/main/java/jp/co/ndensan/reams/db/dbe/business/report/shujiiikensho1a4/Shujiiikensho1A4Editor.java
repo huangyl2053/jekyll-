@@ -73,6 +73,7 @@ public class Shujiiikensho1A4Editor implements IShujiiikensho1A4Editor {
             source.hihokenshaNo = RString.EMPTY;
             source.hihokenshaName = RString.EMPTY;
         }
+        source.shinsakaiOrder = business.get審査順();
         source.layout = Layouts.鑑;
         return source;
     }

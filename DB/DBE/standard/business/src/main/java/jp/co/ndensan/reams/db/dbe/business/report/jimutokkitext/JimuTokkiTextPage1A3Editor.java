@@ -67,9 +67,10 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
     }
 
     private JimuTokkiTextA3ReportSource editSource(JimuTokkiTextA3ReportSource source) {
-        source.shinseiCount = item.get審査人数();
+        source.shinseiCount = new RString(item.get審査番号());
         source.shinseiCountGokei = item.get審査人数合計();
         source.gogitaiNo = item.get合議体番号();
+        source.shinsakaiOrder = item.get審査人数();
         source.hihokenshaKubun = item.get被保険者区分();
         source.shinseiKubun = item.get申請区分();
         source.age = get年齢(item.get年齢());

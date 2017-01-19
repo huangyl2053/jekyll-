@@ -24,17 +24,17 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
 
     private static final int INT_4 = 4;
     private final JimuShinsakaiWariateJohoBusiness business;
-    private final RString reportId;
+    private final RString shinsakaiOrder;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
-     * @param reportId 帳票ＩＤ
+     * @param shinsakaiOrder shinsakaiOrder
      */
-    protected JimuShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business, RString reportId) {
+    protected JimuShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business, RString shinsakaiOrder) {
         this.business = business;
-        this.reportId = reportId;
+        this.shinsakaiOrder = shinsakaiOrder;
     }
 
     @Override
@@ -43,6 +43,7 @@ public class JimuShinsakaishiryoA3Group4Editor implements IJimuShinsakaishiryoA3
     }
 
     private JimuShinsakaishiryoA3ReportSource editSource(JimuShinsakaishiryoA3ReportSource source) {
+        source.shinsakaiOrder = shinsakaiOrder;
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();

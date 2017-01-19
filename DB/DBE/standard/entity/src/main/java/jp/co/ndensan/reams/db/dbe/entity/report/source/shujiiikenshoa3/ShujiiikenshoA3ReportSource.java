@@ -34,29 +34,31 @@ public class ShujiiikenshoA3ReportSource implements IReportSource {
     public RString chosaDD;
     @ReportItem(name = "hokenshaNo", length = 6, order = 9)
     public RString hokenshaNo;
-    @ReportItem(name = "hihokenshaNo", length = 10, order = 10)
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 10)
+    public RString shinsakaiOrder;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 11)
     public RString hihokenshaNo;
-    @ReportItem(name = "hihokenshaName", length = 30, order = 11)
+    @ReportItem(name = "hihokenshaName", length = 30, order = 12)
     public RString hihokenshaName;
-    @ReportItem(name = "shinseiGengo", length = 2, order = 12)
+    @ReportItem(name = "shinseiGengo", length = 2, order = 13)
     public RString shinseiGengo;
-    @ReportItem(name = "shinseiYY", length = 2, order = 13)
+    @ReportItem(name = "shinseiYY", length = 2, order = 14)
     public RString shinseiYY;
-    @ReportItem(name = "shinseiMM", length = 2, order = 14)
+    @ReportItem(name = "shinseiMM", length = 2, order = 15)
     public RString shinseiMM;
-    @ReportItem(name = "shinseiDD", length = 2, order = 15)
+    @ReportItem(name = "shinseiDD", length = 2, order = 16)
     public RString shinseiDD;
-    @ReportItem(name = "shinsaGengo", length = 2, order = 16)
+    @ReportItem(name = "shinsaGengo", length = 2, order = 17)
     public RString shinsaGengo;
-    @ReportItem(name = "shinsaYY", length = 2, order = 17)
+    @ReportItem(name = "shinsaYY", length = 2, order = 18)
     public RString shinsaYY;
-    @ReportItem(name = "shinsaMM", length = 2, order = 18)
+    @ReportItem(name = "shinsaMM", length = 2, order = 19)
     public RString shinsaMM;
-    @ReportItem(name = "shinsaDD", length = 2, order = 19)
+    @ReportItem(name = "shinsaDD", length = 2, order = 20)
     public RString shinsaDD;
-    @ReportItem(name = "imgIkensho1", order = 20)
+    @ReportItem(name = "imgIkensho1", order = 21)
     public RString imgIkensho1;
-    @ReportItem(name = "imgIkensho2", order = 21)
+    @ReportItem(name = "imgIkensho2", order = 22)
     public RString imgIkensho2;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

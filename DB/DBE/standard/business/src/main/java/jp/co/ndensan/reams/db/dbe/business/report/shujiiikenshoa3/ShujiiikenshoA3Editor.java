@@ -42,6 +42,7 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
     }
 
     private ShujiiikenshoA3ReportSource editSource(ShujiiikenshoA3ReportSource source) {
+        source.shinsakaiOrder = business.get審査順();
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();

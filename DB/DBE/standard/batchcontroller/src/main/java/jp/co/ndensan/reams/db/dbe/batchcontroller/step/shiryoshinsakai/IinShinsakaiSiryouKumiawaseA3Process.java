@@ -125,6 +125,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
                      
+                     
                     IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
@@ -152,6 +153,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                 申請書管理番号List.add(entity.getShinseishoKanriNo());
             }
         }
+        int 審査番号 = 1;
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
             for (ShinsakaiSiryoKyotsuEntity entity : 共通情報) {
                 if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
@@ -167,9 +169,11 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                     get審査会追加資料情報(shinseishoKanriNo),
                     is審査会対象一覧印刷済み,
                     paramter.getSakuseiJoken(),
-                    paramter.getPrintHou());
+                    paramter.getPrintHou(),
+                    審査番号);
             report.writeBy(reportSourceWriter);
             is審査会対象一覧印刷済み = true;
+            審査番号++;
         }
         batchReportWriter.close();
     }

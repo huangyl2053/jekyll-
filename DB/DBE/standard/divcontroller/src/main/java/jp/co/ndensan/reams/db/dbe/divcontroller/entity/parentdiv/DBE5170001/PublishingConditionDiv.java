@@ -36,12 +36,12 @@ public class PublishingConditionDiv extends Panel {
     private TextBoxNum txtShiryoNoStart;
     @JsonProperty("txtSiryoNoEnd")
     private TextBoxNum txtSiryoNoEnd;
-    @JsonProperty("ccdBunshoNoInput")
-    private BunshoBangoInputDiv ccdBunshoNoInput;
     @JsonProperty("PublishingConditionForJimukyoku")
     private PublishingConditionForJimukyokuDiv PublishingConditionForJimukyoku;
     @JsonProperty("PublishingConditionForShinsakaiIin")
     private PublishingConditionForShinsakaiIinDiv PublishingConditionForShinsakaiIin;
+    @JsonProperty("ccdBunshoNoInput")
+    private BunshoBangoInputDiv ccdBunshoNoInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -158,15 +158,6 @@ public class PublishingConditionDiv extends Panel {
     }
 
     /*
-     * getccdBunshoNoInput
-     * @return ccdBunshoNoInput
-     */
-    @JsonProperty("ccdBunshoNoInput")
-    public IBunshoBangoInputDiv getCcdBunshoNoInput() {
-        return ccdBunshoNoInput;
-    }
-
-    /*
      * getPublishingConditionForJimukyoku
      * @return PublishingConditionForJimukyoku
      */
@@ -200,6 +191,15 @@ public class PublishingConditionDiv extends Panel {
     @JsonProperty("PublishingConditionForShinsakaiIin")
     public void setPublishingConditionForShinsakaiIin(PublishingConditionForShinsakaiIinDiv PublishingConditionForShinsakaiIin) {
         this.PublishingConditionForShinsakaiIin = PublishingConditionForShinsakaiIin;
+    }
+
+    /*
+     * getccdBunshoNoInput
+     * @return ccdBunshoNoInput
+     */
+    @JsonProperty("ccdBunshoNoInput")
+    public IBunshoBangoInputDiv getCcdBunshoNoInput() {
+        return ccdBunshoNoInput;
     }
 
     /*

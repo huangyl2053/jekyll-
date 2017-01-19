@@ -497,7 +497,7 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
     public RString shinsaMM;
     @ReportItem(name = "shinsaDD", length = 2, order = 293)
     public RString shinsaDD;
-    @ReportItem(name = "shinsakaiOrder", order = 296)
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 296)
     public RString shinsakaiOrder;
     //なし
 // </editor-fold>
