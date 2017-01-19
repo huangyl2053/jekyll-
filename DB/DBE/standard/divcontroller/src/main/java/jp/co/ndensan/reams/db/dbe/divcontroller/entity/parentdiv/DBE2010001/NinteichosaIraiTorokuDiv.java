@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
@@ -17,8 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaIraiTorokuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,10 +27,12 @@ public class NinteichosaIraiTorokuDiv extends Panel {
     private DropDownList ddlIraiKubun;
     @JsonProperty("txtChosaIraiYmd")
     private TextBoxDate txtChosaIraiYmd;
-    @JsonProperty("btnWaritsukeru")
-    private Button btnWaritsukeru;
     @JsonProperty("ccdItakusakiAndChosainInput")
     private ChosaItakusakiAndChosainInputDiv ccdItakusakiAndChosainInput;
+    @JsonProperty("btnWaritsukeKakutei")
+    private Button btnWaritsukeKakutei;
+    @JsonProperty("btnWaritukenaideModoru")
+    private Button btnWaritukenaideModoru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,30 +77,48 @@ public class NinteichosaIraiTorokuDiv extends Panel {
     }
 
     /*
-     * getbtnWaritsukeru
-     * @return btnWaritsukeru
-     */
-    @JsonProperty("btnWaritsukeru")
-    public Button getBtnWaritsukeru() {
-        return btnWaritsukeru;
-    }
-
-    /*
-     * setbtnWaritsukeru
-     * @param btnWaritsukeru btnWaritsukeru
-     */
-    @JsonProperty("btnWaritsukeru")
-    public void setBtnWaritsukeru(Button btnWaritsukeru) {
-        this.btnWaritsukeru = btnWaritsukeru;
-    }
-
-    /*
      * getccdItakusakiAndChosainInput
      * @return ccdItakusakiAndChosainInput
      */
     @JsonProperty("ccdItakusakiAndChosainInput")
     public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
         return ccdItakusakiAndChosainInput;
+    }
+
+    /*
+     * getbtnWaritsukeKakutei
+     * @return btnWaritsukeKakutei
+     */
+    @JsonProperty("btnWaritsukeKakutei")
+    public Button getBtnWaritsukeKakutei() {
+        return btnWaritsukeKakutei;
+    }
+
+    /*
+     * setbtnWaritsukeKakutei
+     * @param btnWaritsukeKakutei btnWaritsukeKakutei
+     */
+    @JsonProperty("btnWaritsukeKakutei")
+    public void setBtnWaritsukeKakutei(Button btnWaritsukeKakutei) {
+        this.btnWaritsukeKakutei = btnWaritsukeKakutei;
+    }
+
+    /*
+     * getbtnWaritukenaideModoru
+     * @return btnWaritukenaideModoru
+     */
+    @JsonProperty("btnWaritukenaideModoru")
+    public Button getBtnWaritukenaideModoru() {
+        return btnWaritukenaideModoru;
+    }
+
+    /*
+     * setbtnWaritukenaideModoru
+     * @param btnWaritukenaideModoru btnWaritukenaideModoru
+     */
+    @JsonProperty("btnWaritukenaideModoru")
+    public void setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
+        this.btnWaritukenaideModoru = btnWaritukenaideModoru;
     }
 
     // </editor-fold>

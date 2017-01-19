@@ -327,4 +327,13 @@ public class CyoSaiRaiBusiness implements Serializable {
     public Code get厚労省IF識別コード() {
         return entity.getKoroshoIfShikibetsuCode();
     }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
 }

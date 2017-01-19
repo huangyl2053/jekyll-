@@ -13,14 +13,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosai
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiItiranCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001.NinteichosaIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001.NinteichosaIraiValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairaishudou.NinnteiChousairaiShudouFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairai.NinteichosaIraiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairailist.NinteichosaIraiListManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoManager;
@@ -187,8 +186,8 @@ public class NinteichosaIrai {
      * @param requestDiv 完了処理・認定調査依頼Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnIraiAuto(NinteichosaIraiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnIraiAuto();
+    public ResponseData onClick_btnJidoWaritsuke(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnJidoWaritsuke();
         ValidationMessageControlPair 自動割付可能チェック = 自動割付可能チェック(requestDiv);
         if (自動割付可能チェック != null) {
             vallidation.add(自動割付可能チェック);
@@ -212,6 +211,23 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).respond();
         }
         return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
+     * 「調査機関を割付ける（手動）」ボタンクリックイベントです。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnShudoWaritsuke(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnShudoWaritsuke();
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
+        }
+        NinteichosaIraiHandler handler = getHandler(requestDiv);
+        handler.set認定調査依頼完了対象者一覧パネル使用可否(true);
+        handler.init認定調査依頼登録パネル();
+        return ResponseData.of(requestDiv).setState(DBE2010001StateName.手動割付内容入力);
     }
 
     /**
@@ -258,18 +274,31 @@ public class NinteichosaIrai {
     }
 
     /**
-     * 「調査機関を割付ける」ボタンクリックイベントです。
+     * 「割付けを確定する」ボタンクリックイベントです。
      *
      * @param requestDiv NinteichosaIraiDiv
      * @return ResponseData
      */
-    public ResponseData onClick_btnWaritsukeru(NinteichosaIraiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritukeShudo();
+    public ResponseData onClick_btnWaritsukeKakutei(NinteichosaIraiDiv requestDiv) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritsukeKakutei();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
-        getHandler(requestDiv).set認定調査依頼情報();
-        return ResponseData.of(requestDiv).respond();
+        NinteichosaIraiHandler handler = getHandler(requestDiv);
+        handler.set認定調査依頼情報();
+        handler.set認定調査依頼完了対象者一覧パネル使用可否(false);
+        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+    }
+
+    /**
+     * 「割付けせずに戻る」ボタンクリックイベントです。
+     *
+     * @param requestDiv NinteichosaIraiDiv
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnWaritukenaideModoru(NinteichosaIraiDiv requestDiv) {
+        getHandler(requestDiv).set認定調査依頼完了対象者一覧パネル使用可否(false);
+        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
     /**
@@ -363,7 +392,7 @@ public class NinteichosaIrai {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             NinteichosaIraiHandler handler = getHandler(requestDiv);
-            NinnteiChousairaiShudouFinder finder = NinnteiChousairaiShudouFinder.createInstance();
+            NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
             NinteiShinseiJohoManager ninteiShinseiJohoManager = NinteiShinseiJohoManager.createInstance();
             NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
             for (dgNinteiTaskList_Row row : handler.getChangedRow()) {
@@ -386,8 +415,8 @@ public class NinteichosaIrai {
                     認定調査期限年月日 = new FlexibleDate(row.getChosaIraiKigen().getValue().toDateString());
                 }
 
-                NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value());
-                NinteiShinseiJoho 認定調査依頼情報 = finder.get更新用認定調査依頼情報(parameter);
+                NinteichosaIraiParameter parameter = NinteichosaIraiParameter.createParameterBy申請書管理番号(申請書管理番号.value());
+                NinteiShinseiJoho 認定調査依頼情報 = manager.get更新用認定調査依頼情報(parameter);
                 認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
                         .set調査区分(調査区分コード)
                         .set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード.value()))

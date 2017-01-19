@@ -107,7 +107,7 @@ public class NinteichosaIraiValidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力チェック_btnIraiAuto() {
+    public ValidationMessageControlPairs 入力チェック_btnJidoWaritsuke() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgNinteiTaskList_Row> 選択されたデータ = div.getDgNinteiTaskList().getSelectedItems();
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
@@ -126,11 +126,11 @@ public class NinteichosaIraiValidationHandler {
     }
 
     /**
-     * 「調査機関を割付ける(手動)」ボタンを押下する場合、入力チェックを実行します。
+     * 「調査機関を割付ける（手動）」ボタンを押下する場合、入力チェックを実行します。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力チェック_btnWaritukeShudo() {
+    public ValidationMessageControlPairs 入力チェック_btnShudoWaritsuke() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
@@ -142,6 +142,17 @@ public class NinteichosaIraiValidationHandler {
                 validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_保険者));
             }
         }
+        return validationMessages;
+    }
+
+    /**
+     * 「割付けを確定する」ボタンを押下する場合、入力チェックを実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 入力チェック_btnWaritsukeKakutei() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+
         if (RString.isNullOrEmpty(div.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先入力必須));
         }
