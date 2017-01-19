@@ -250,11 +250,11 @@ public class NinteiShinseiTorokuHandler {
 
     private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
         
-        if (result.get申請日() != null) {
+        if (result.get申請日() != null && !result.get申請日().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
                     result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
         }
-        if (!ShienShinseiKubun.不明.getコード().equals(result.get申請書区分())) {
+        if (result.get申請書区分() != null && !ShienShinseiKubun.不明.getコード().equals(result.get申請書区分())) {
             div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
         } else {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().clearSelectedItem();
@@ -265,17 +265,9 @@ public class NinteiShinseiTorokuHandler {
         if (result.get認定申請区分法令コード() != null && !result.get認定申請区分法令コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(result.get認定申請区分法令コード().value()));
         }
-//        if (result.is旧措置者フラグ()) {
-//            List<RString> keyList = new ArrayList<>();
-//            keyList.add(new RString("key0"));
-//            div.getCcdKaigoNinteiShinseiKihon().setKyuSochisha(keyList);
-//        }
-        div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.toValue(result.get被保険者区分コード()));
-//        if (result.is資格取得前申請フラグ()) {
-//            List<RString> keyList = new ArrayList<>();
-//            keyList.add(new RString("key0"));
-//            div.getCcdKaigoNinteiShinseiKihon().setChkShikakuShutokuMae(keyList);
-//        }
+        if (result.get被保険者区分コード() != null && result.get被保険者区分コード().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.toValue(result.get被保険者区分コード()));
+        } 
         if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
         }
