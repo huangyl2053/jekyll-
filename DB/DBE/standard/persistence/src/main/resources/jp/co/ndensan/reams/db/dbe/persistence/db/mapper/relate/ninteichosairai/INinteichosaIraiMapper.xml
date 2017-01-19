@@ -612,6 +612,38 @@
         DbT5910NinteichosaItakusakiJoho."shichosonCode",
         DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
     </select>
+
+    <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="resultMap_NinteiKekkaJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter" fetchSize="500">
+        SELECT
+            T5101.*,
+            T5201.*
+        FROM
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />)  AS T5101
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster"  T7051
+                ON T7051."shoKisaiHokenshaNo" = T5101."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo"
+            LEFT JOIN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" />) AS T5201
+                ON T5101."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = T5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo"
+                   AND T5201."dbT5201NinteichosaIraiJoho_logicalDeletedFlag" = FALSE
+                   AND NOT EXISTS (SELECT 'X'
+                                   FROM   rgdb."DbT5201NinteichosaIraiJoho" AS B1
+                                   WHERE  T5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo" =B1."shinseishoKanriNo"
+                                          AND B1."logicalDeletedFlag" = False
+                                          AND T5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" <![CDATA[<]]>  B1."ninteichosaIraiRirekiNo"
+                                  )
+            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" T5910
+                ON T5910."shichosonCode" = T7051."shichosonCode"
+                   AND T5910."ninteichosaItakusakiCode" = T5201."dbT5201NinteichosaIraiJoho_ninteichosaItakusakiCode"
+                   AND T5910."jokyoFlag" = True
+            LEFT JOIN rgdb."DbT5913ChosainJoho" T5913
+                ON T5913."shichosonCode" = T7051."shichosonCode"
+                   AND T5913."ninteiChosaItakusakiCode" = T5201."dbT5201NinteichosaIraiJoho_ninteichosaItakusakiCode"
+                   AND T5913."ninteiChosainCode" = T5201."dbT5201NinteichosaIraiJoho_ninteiChosainCode"
+                   AND T5913."jokyoFlag" = True
+        WHERE T5101."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = #{申請書管理番号}
+              AND T5101."dbT5101NinteiShinseiJoho_logicalDeletedFlag" = False
+    </select>
+
     <resultMap id="resultMap_委託先調査員情報" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
         <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -811,5 +843,10 @@
         <result property="chosainFaxNo" column="chosainFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="shozokuKikanName" column="shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-
+    <resultMap id="resultMap_NinteiKekkaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity" autoMapping="true">
+        <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
+        <collection  property="認定調査依頼情報Entity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity"
+                     resultMap="ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
+    </resultMap>
 </mapper>

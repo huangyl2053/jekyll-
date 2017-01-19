@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileChosainRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
@@ -92,4 +93,11 @@ public interface INinteichosaIraiMapper {
      */
     List<ChosaKekkaNyuryokuMobileChosainRelateEntity> select調査結果入力用調査員データ();
 
+    /**
+     * 更新用認定調査依頼情報を検索します。
+     *
+     * @param parameter NinteichosaIraiParameter
+     * @return NinteiShinseiJohoRelateEntity
+     */
+    NinteiShinseiJohoRelateEntity select更新用認定調査依頼情報(NinteichosaIraiParameter parameter);
 }

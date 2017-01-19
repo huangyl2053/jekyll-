@@ -11,9 +11,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.kanryouninteichosairai.NinteichosaIraiChosainBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileChosainRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairai.ChosaKekkaNyuryokuMobileRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosairai.INinteichosaIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -83,7 +85,7 @@ public class NinteichosaIraiManager {
     @Transaction
     public int select認定調査委託先情報(RString 保険者番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        return mapper.select認定調査委託先情報(new NinteichosaIraiParameter(
+        return mapper.select認定調査委託先情報(NinteichosaIraiParameter.createParameter(
                 保険者番号, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
@@ -97,7 +99,7 @@ public class NinteichosaIraiManager {
     @Transaction
     public int select調査可能人数(RString 保険者番号, RString 地区コード) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        return mapper.select調査可能人数(new NinteichosaIraiParameter(
+        return mapper.select調査可能人数(NinteichosaIraiParameter.createParameter(
                 保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
@@ -111,7 +113,7 @@ public class NinteichosaIraiManager {
     @Transaction
     public int select割付済人数(RString 保険者番号, RString 地区コード) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        return mapper.select割付済人数(new NinteichosaIraiParameter(
+        return mapper.select割付済人数(NinteichosaIraiParameter.createParameter(
                 保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
     }
 
@@ -126,7 +128,7 @@ public class NinteichosaIraiManager {
     public List<NinteichosaItakusakiJohoRelate> get認定調査委託先And調査員情報リスト(RString 保険者番号, RString 地区コード) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         List<NinteichosaItakusakiJohoRelateEntity> entityList = mapper.select認定調査委託先And調査員情報(
-                new NinteichosaIraiParameter(保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+                NinteichosaIraiParameter.createParameter(保険者番号, 地区コード, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         List<NinteichosaItakusakiJohoRelate> 認定調査委託先And調査員情報リスト = new ArrayList<>();
         for (NinteichosaItakusakiJohoRelateEntity entity : entityList) {
             認定調査委託先And調査員情報リスト.add(new NinteichosaItakusakiJohoRelate(entity));
@@ -143,7 +145,7 @@ public class NinteichosaIraiManager {
     @Transaction
     public int getMax認定調査依頼履歴番号(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        RString result = mapper.selectMax認定調査依頼履歴番号(new NinteichosaIraiParameter(
+        RString result = mapper.selectMax認定調査依頼履歴番号(NinteichosaIraiParameter.createParameter(
                 RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         return result == null ? 0 : Integer.parseInt(result.toString());
     }
@@ -159,9 +161,9 @@ public class NinteichosaIraiManager {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(
                 ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        List<ChosaKekkaNyuryokuMobileRelateEntity> relateEntityList = mapper.select調査結果入力用データ(new NinteichosaIraiParameter(
-                RString.EMPTY, RString.EMPTY, 申請書管理番号,
-                概況調査テキストイメージ区分, ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+        List<ChosaKekkaNyuryokuMobileRelateEntity> relateEntityList = mapper.select調査結果入力用データ(
+                NinteichosaIraiParameter.createParameter(RString.EMPTY, RString.EMPTY, 申請書管理番号,
+                        概況調査テキストイメージ区分, ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<NinteichosaIraiBusiness>emptyList(), 0, false);
         }
@@ -192,6 +194,23 @@ public class NinteichosaIraiManager {
     }
 
     /**
+     * 更新用認定調査依頼情報を取得します。
+     *
+     * @param parameter 認定調査依頼情報パラメータ
+     * @return NinteiShinseiJoho
+     */
+    @Transaction
+    public NinteiShinseiJoho get更新用認定調査依頼情報(NinteichosaIraiParameter parameter) {
+        INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
+        NinteiShinseiJohoRelateEntity entity = mapper.select更新用認定調査依頼情報(parameter);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5ToEntities();
+        return new NinteiShinseiJoho(entity);
+    }
+
+    /**
      * 認定調査依頼情報のモバイルデータ出力済フラグをシステム日付で更新します。
      *
      * @param 申請書管理番号 申請書管理番号
@@ -199,7 +218,7 @@ public class NinteichosaIraiManager {
     @Transaction
     public void update認定調査依頼情報(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        DbT5201NinteichosaIraiJohoEntity entity = mapper.select最新認定調査依頼情報(new NinteichosaIraiParameter(
+        DbT5201NinteichosaIraiJohoEntity entity = mapper.select最新認定調査依頼情報(NinteichosaIraiParameter.createParameter(
                 RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
         if (entity != null) {
             entity.setMobileDataShutsuryokuZumiFlag(MobileDataShutsuryokuFlag.出力済.isモバイルデータ出力());

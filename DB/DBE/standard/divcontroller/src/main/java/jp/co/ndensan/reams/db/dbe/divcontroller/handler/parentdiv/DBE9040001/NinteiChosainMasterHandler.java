@@ -228,8 +228,11 @@ public class NinteiChosainMasterHandler {
                 (RString.isNullOrEmpty(row.getShozokuKikanName()) ? RString.EMPTY : row.getShozokuKikanName()));
         div.getChosainJohoInput().getRadChosainJokyo().setSelectedKey(
                 表示値_有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
-        div.getChosainJohoInput().getRadSeibetsu().setSelectedKey(
-                表示値_男.equals(row.getSeibetsu()) ? MAN : WOMAN);
+        if (表示値_男.equals(row.getSeibetsu())) {
+            div.getChosainJohoInput().getRadSeibetsu().setSelectedKey(MAN);
+        } else if (表示値_女.equals(row.getSeibetsu())) {
+            div.getChosainJohoInput().getRadSeibetsu().setSelectedKey(WOMAN);
+        }
     }
 
     /**
@@ -413,7 +416,7 @@ public class NinteiChosainMasterHandler {
         div.getChosainJohoInput().getTxtChosainCode().clearValue();
         div.getChosainJohoInput().getTxtChosainShimei().clearValue();
         div.getChosainJohoInput().getTxtChosainKanaShimei().clearValue();
-        div.getChosainJohoInput().getRadSeibetsu().setSelectedIndex(0);
+        div.getChosainJohoInput().getRadSeibetsu().clearSelectedItem();
         div.getChosainJohoInput().getCcdChiku().clearDisplayedValues();
         setDdlChosainShikaku();
         div.getChosainJohoInput().getDdlChosainShikaku().setSelectedIndex(0);

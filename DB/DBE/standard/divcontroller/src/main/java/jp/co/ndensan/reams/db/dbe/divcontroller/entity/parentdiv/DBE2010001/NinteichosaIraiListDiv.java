@@ -18,8 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaIraiListDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,8 +29,10 @@ public class NinteichosaIraiListDiv extends Panel {
     private chosairaitaishoshaichiranDiv chosairaitaishoshaichiran;
     @JsonProperty("btndataoutput")
     private ButtonDownLoad btndataoutput;
-    @JsonProperty("btniraiauto")
-    private Button btniraiauto;
+    @JsonProperty("btnJidoWaritsuke")
+    private Button btnJidoWaritsuke;
+    @JsonProperty("btnShudoWaritsuke")
+    private Button btnShudoWaritsuke;
     @JsonProperty("btnTaOutput")
     private ButtonDialog btnTaOutput;
     @JsonProperty("NinteichosaIraiToroku")
@@ -80,21 +81,39 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     /*
-     * getbtniraiauto
-     * @return btniraiauto
+     * getbtnJidoWaritsuke
+     * @return btnJidoWaritsuke
      */
-    @JsonProperty("btniraiauto")
-    public Button getBtniraiauto() {
-        return btniraiauto;
+    @JsonProperty("btnJidoWaritsuke")
+    public Button getBtnJidoWaritsuke() {
+        return btnJidoWaritsuke;
     }
 
     /*
-     * setbtniraiauto
-     * @param btniraiauto btniraiauto
+     * setbtnJidoWaritsuke
+     * @param btnJidoWaritsuke btnJidoWaritsuke
      */
-    @JsonProperty("btniraiauto")
-    public void setBtniraiauto(Button btniraiauto) {
-        this.btniraiauto = btniraiauto;
+    @JsonProperty("btnJidoWaritsuke")
+    public void setBtnJidoWaritsuke(Button btnJidoWaritsuke) {
+        this.btnJidoWaritsuke = btnJidoWaritsuke;
+    }
+
+    /*
+     * getbtnShudoWaritsuke
+     * @return btnShudoWaritsuke
+     */
+    @JsonProperty("btnShudoWaritsuke")
+    public Button getBtnShudoWaritsuke() {
+        return btnShudoWaritsuke;
+    }
+
+    /*
+     * setbtnShudoWaritsuke
+     * @param btnShudoWaritsuke btnShudoWaritsuke
+     */
+    @JsonProperty("btnShudoWaritsuke")
+    public void setBtnShudoWaritsuke(Button btnShudoWaritsuke) {
+        this.btnShudoWaritsuke = btnShudoWaritsuke;
     }
 
     /*
@@ -142,7 +161,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadShoriJyotai(RadioButton radShoriJyotai) {
+    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
         this.getChosairaitaishoshaichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
@@ -152,7 +171,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.getChosairaitaishoshaichiran().setTxtTotalCount(txtTotalCount);
     }
 
@@ -162,7 +181,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getChosairaitaishoshaichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
@@ -172,7 +191,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
         this.getChosairaitaishoshaichiran().setTxtNoUpdate(txtNoUpdate);
     }
 
@@ -182,7 +201,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
+    public void  setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
         this.getChosairaitaishoshaichiran().setBatchParamPanel(BatchParamPanel);
     }
 
@@ -192,7 +211,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getChosairaitaishoshaichiran().getBatchParamPanel().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
@@ -202,7 +221,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
+    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getChosairaitaishoshaichiran().setTxtMaxCount(txtMaxCount);
     }
 
@@ -217,7 +236,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlIraiKubun(DropDownList ddlIraiKubun) {
+    public void  setDdlIraiKubun(DropDownList ddlIraiKubun) {
         this.getNinteichosaIraiToroku().setDdlIraiKubun(ddlIraiKubun);
     }
 
@@ -227,23 +246,33 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaIraiYmd(TextBoxDate txtChosaIraiYmd) {
+    public void  setTxtChosaIraiYmd(TextBoxDate txtChosaIraiYmd) {
         this.getNinteichosaIraiToroku().setTxtChosaIraiYmd(txtChosaIraiYmd);
-    }
-
-    @JsonIgnore
-    public Button getBtnWaritsukeru() {
-        return this.getNinteichosaIraiToroku().getBtnWaritsukeru();
-    }
-
-    @JsonIgnore
-    public void setBtnWaritsukeru(Button btnWaritsukeru) {
-        this.getNinteichosaIraiToroku().setBtnWaritsukeru(btnWaritsukeru);
     }
 
     @JsonIgnore
     public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
         return this.getNinteichosaIraiToroku().getCcdItakusakiAndChosainInput();
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsukeKakutei() {
+        return this.getNinteichosaIraiToroku().getBtnWaritsukeKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsukeKakutei(Button btnWaritsukeKakutei) {
+        this.getNinteichosaIraiToroku().setBtnWaritsukeKakutei(btnWaritsukeKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritukenaideModoru() {
+        return this.getNinteichosaIraiToroku().getBtnWaritukenaideModoru();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
+        this.getNinteichosaIraiToroku().setBtnWaritukenaideModoru(btnWaritukenaideModoru);
     }
 
     // </editor-fold>

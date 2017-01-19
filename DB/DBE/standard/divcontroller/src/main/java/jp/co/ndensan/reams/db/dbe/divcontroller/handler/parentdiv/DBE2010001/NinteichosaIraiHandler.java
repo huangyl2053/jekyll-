@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
@@ -85,9 +84,9 @@ public class NinteichosaIraiHandler {
         initDataGrid();
         RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
         if (使用する.equals(認定調査自動割付)) {
-            div.getBtniraiauto().setDisabled(false);
+            div.getBtnJidoWaritsuke().setDisabled(false);
         } else {
-            div.getBtniraiauto().setDisabled(true);
+            div.getBtnJidoWaritsuke().setDisabled(true);
         }
         RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
         if (使用する.equals(モバイル調査使用有無)) {
@@ -106,8 +105,7 @@ public class NinteichosaIraiHandler {
     private void set依頼区分ドロップダウンリスト() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (NinteiChousaIraiKubunCode 認定調査依頼区分 : NinteiChousaIraiKubunCode.values()) {
-            RString value = new RStringBuilder().append(認定調査依頼区分.getコード()).append(":").append(認定調査依頼区分.get名称()).toRString();
-            dataSource.add(new KeyValueDataSource(認定調査依頼区分.getコード(), value));
+            dataSource.add(new KeyValueDataSource(認定調査依頼区分.getコード(), 認定調査依頼区分.get名称()));
         }
         div.getDdlIraiKubun().setDataSource(dataSource);
     }
@@ -137,6 +135,29 @@ public class NinteichosaIraiHandler {
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
 
         set件数表示(状態);
+    }
+
+    /**
+     * 認定調査依頼登録パネルの初期化処理です。
+     */
+    public void init認定調査依頼登録パネル() {
+        div.getCcdItakusakiAndChosainInput().clear();
+        div.getCcdItakusakiAndChosainInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
+        div.getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.初回.getコード());
+        div.getTxtChosaIraiYmd().clearValue();
+    }
+
+    /**
+     * 認定調査依頼完了対象者一覧パネル使用可否を設定します。
+     *
+     * @param is使用不可 認定調査依頼登録パネルを使用不可にするかどうか
+     */
+    public void set認定調査依頼完了対象者一覧パネル使用可否(boolean is使用不可) {
+        div.getChosairaitaishoshaichiran().setReadOnly(is使用不可);
+        div.getBtndataoutput().setDisplayNone(is使用不可);
+        div.getBtnJidoWaritsuke().setDisplayNone(is使用不可);
+        div.getBtnShudoWaritsuke().setDisplayNone(is使用不可);
+        div.getBtnTaOutput().setDisplayNone(is使用不可);
     }
 
     /**
@@ -263,6 +284,7 @@ public class NinteichosaIraiHandler {
         row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
         row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
         row.setGetShoKisaiHokenshaNo(business.get証記載保険番号() == null ? RString.EMPTY : business.get証記載保険番号());
+        row.setShichosonCode(business.get市町村コード());
         調査依頼モードの日付設定(row, business);
         if ((RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain()))
                 || row.getChosaIraiKigen().getValue() == null

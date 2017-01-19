@@ -303,6 +303,7 @@ public final class OcrIken {
             result.set食事行為(columns.get(12));
             result.set主治医への結果連絡(columns.get(13));
             result.set全体イメージ表側インデックス(columns.get(14));
+            result.set同意の有無(columns.get(15));
 
         } else if (意見書_ID778.equals(ocrID)) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 7 LINES

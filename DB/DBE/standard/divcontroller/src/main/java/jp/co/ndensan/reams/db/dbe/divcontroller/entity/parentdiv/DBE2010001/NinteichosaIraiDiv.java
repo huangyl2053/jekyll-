@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  */
 public class NinteichosaIraiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -188,13 +188,23 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtniraiauto() {
-        return this.getNinteichosaIraiList().getBtniraiauto();
+    public Button getBtnJidoWaritsuke() {
+        return this.getNinteichosaIraiList().getBtnJidoWaritsuke();
     }
 
     @JsonIgnore
-    public void setBtniraiauto(Button btniraiauto) {
-        this.getNinteichosaIraiList().setBtniraiauto(btniraiauto);
+    public void setBtnJidoWaritsuke(Button btnJidoWaritsuke) {
+        this.getNinteichosaIraiList().setBtnJidoWaritsuke(btnJidoWaritsuke);
+    }
+
+    @JsonIgnore
+    public Button getBtnShudoWaritsuke() {
+        return this.getNinteichosaIraiList().getBtnShudoWaritsuke();
+    }
+
+    @JsonIgnore
+    public void setBtnShudoWaritsuke(Button btnShudoWaritsuke) {
+        this.getNinteichosaIraiList().setBtnShudoWaritsuke(btnShudoWaritsuke);
     }
 
     @JsonIgnore
@@ -238,18 +248,28 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnWaritsukeru() {
-        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getBtnWaritsukeru();
-    }
-
-    @JsonIgnore
-    public void setBtnWaritsukeru(Button btnWaritsukeru) {
-        this.getNinteichosaIraiList().getNinteichosaIraiToroku().setBtnWaritsukeru(btnWaritsukeru);
-    }
-
-    @JsonIgnore
     public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
         return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getCcdItakusakiAndChosainInput();
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsukeKakutei() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getBtnWaritsukeKakutei();
+    }
+
+    @JsonIgnore
+    public void setBtnWaritsukeKakutei(Button btnWaritsukeKakutei) {
+        this.getNinteichosaIraiList().getNinteichosaIraiToroku().setBtnWaritsukeKakutei(btnWaritsukeKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritukenaideModoru() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getBtnWaritukenaideModoru();
+    }
+
+    @JsonIgnore
+    public void setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
+        this.getNinteichosaIraiList().getNinteichosaIraiToroku().setBtnWaritukenaideModoru(btnWaritukenaideModoru);
     }
 
     // </editor-fold>

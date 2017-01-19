@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterS
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 主治医マスタ処理のクラスです。。
@@ -406,6 +407,11 @@ public class ShujiiMaster {
                         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
                         div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
         getValidationHandler(div).validateForKakutei(イベント状態, shujiiJohoCount);
+        ValidationMessageControlPairs validationMessages
+                = getValidationHandler(div).validateForRadioButton(イベント状態);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         Models<ShujiiJohoIdentifier, ShujiiJoho> models = ViewStateHolder.get(ViewStateKeys.主治医マスタ検索結果, Models.class);
 
         if (状態_追加.equals(イベント状態)) {

@@ -115,7 +115,10 @@ public class ShujiiMasterHandler {
                     shujiiMaster.get住所(),
                     shujiiMaster.get電話番号(),
                     shujiiMaster.getFAX番号(),
-                    shujiiMaster.get性別()));
+                    shujiiMaster.get性別() != null
+                    ? shujiiMaster.get性別()
+                    : RString.EMPTY
+            ));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
     }
@@ -162,6 +165,8 @@ public class ShujiiMasterHandler {
             row.setSeibetsu(表示値_男);
         } else if (CODE_W.equals(seibetsu)) {
             row.setSeibetsu(表示値_女);
+        } else {
+            row.setSeibetsu(seibetsu);
         }
         return row;
     }
@@ -180,12 +185,20 @@ public class ShujiiMasterHandler {
         div.getShujiiJohoInput().getTxtShujiiCode().setValue(nullToEmpty(row.getShujiiCode().getValue()));
         div.getShujiiJohoInput().getTxtShujiiShimei().setValue(nullToEmpty(row.getShujiiShimei()));
         div.getShujiiJohoInput().getTxtShujiiKanaShimei().setValue(nullToEmpty(row.getShujiiKanaShimei()));
-        div.getShujiiJohoInput().getRadSeibetsu().setSelectedKey(
-                表示値_男.equals(row.getSeibetsu()) ? CODE_MAN : CODE_WOMAN);
-        div.getShujiiJohoInput().getRadShiteiiFlag().setSelectedKey(
-                表示値_可能.equals(row.getShiteii()) ? 指定医_可能 : 指定医_不可);
+        RString seibetsu = row.getSeibetsu();
+        if (表示値_男.equals(seibetsu)) {
+            div.getShujiiJohoInput().getRadSeibetsu().setSelectedKey(CODE_MAN);
+        } else if (表示値_女.equals(seibetsu)) {
+            div.getShujiiJohoInput().getRadSeibetsu().setSelectedKey(CODE_WOMAN);
+        }
+        RString shiteiiFlag = row.getShiteii();
+        if (表示値_可能.equals(shiteiiFlag)) {
+            div.getShujiiJohoInput().getRadShiteiiFlag().setSelectedKey(指定医_可能);
+        } else if (表示値_不可.equals(shiteiiFlag)) {
+            div.getShujiiJohoInput().getRadShiteiiFlag().setSelectedKey(指定医_不可);
+        }
         div.getShujiiJohoInput().getTxtShinryokaMei().setValue(nullToEmpty(row.getShinryoka()));
-        
+
         div.getShujiiJohoInput().getTxtYubinNo().setValue(new YubinNo(editYubinNo(row.getYubinNo())));
         div.getShujiiJohoInput().getTxtJusho().setDomain(new AtenaJusho(row.getJusho()));
         div.getShujiiJohoInput().getTxtTelNo().setDomain(new TelNo(row.getTelNo()));
@@ -225,7 +238,13 @@ public class ShujiiMasterHandler {
             row.setSeibetsu(表示値_女);
         }
         RString shiteiiFlag = div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey();
-        row.setShiteii(指定医_可能.equals(shiteiiFlag) ? 表示値_可能 : 表示値_不可);
+        if (指定医_可能.equals(shiteiiFlag)) {
+            row.setShiteii(表示値_可能);
+        } else if (指定医_不可.equals(shiteiiFlag)) {
+            row.setShiteii(表示値_不可);
+        } else {
+            row.setShiteii(RString.EMPTY);
+        }
         RString jokyoFlag = div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey();
         row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 表示値_有効 : 表示値_無効);
         row.setShinryoka(div.getShujiiJohoInput().getTxtShinryokaMei().getValue());
@@ -263,7 +282,7 @@ public class ShujiiMasterHandler {
         RStringBuilder yubinNoSb = new RStringBuilder();
         if (yubinNo.length() == INDEX_4) {
             yubinNo = yubinNo.remove(INDEX_3);
-        } 
+        }
         if (yubinNo.contains(ハイフン)) {
             yubinNoSb.append(yubinNo.substring(0, INDEX_4));
             yubinNoSb.append(yubinNo.substring(INDEX_4));
@@ -304,8 +323,8 @@ public class ShujiiMasterHandler {
         div.getShujiiJohoInput().getTxtShujiiCode().clearValue();
         div.getShujiiJohoInput().getTxtShujiiShimei().clearValue();
         div.getShujiiJohoInput().getTxtShujiiKanaShimei().clearValue();
-        div.getShujiiJohoInput().getRadSeibetsu().setSelectedIndex(0);
-        div.getShujiiJohoInput().getRadShiteiiFlag().setSelectedIndex(0);
+        div.getShujiiJohoInput().getRadSeibetsu().clearSelectedItem();
+        div.getShujiiJohoInput().getRadShiteiiFlag().clearSelectedItem();
         div.getShujiiJohoInput().getTxtShinryokaMei().clearValue();
         div.getShujiiJohoInput().getTxtYubinNo().clearValue();
         div.getShujiiJohoInput().getTxtJusho().clearDomain();

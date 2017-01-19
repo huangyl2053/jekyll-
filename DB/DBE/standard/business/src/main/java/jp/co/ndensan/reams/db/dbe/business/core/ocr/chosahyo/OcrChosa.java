@@ -250,8 +250,8 @@ public class OcrChosa {
             result.set買い物(columns.get(58));
             result.set簡単な調理(columns.get(59));
             result.set過去14日間に受けた治療(columns.get(60));
-            result.set認知症高齢者の日常生活自立度(new Code(columns.get(61)));
-            result.set障害高齢者の日常生活自立度(new Code(columns.get(62)));
+            result.set障害高齢者の日常生活自立度(new Code(columns.get(61)));
+            result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
         } else if (result.getOcrID() == OCRID._550) {
             RString sheetIdValue = columns.get(1);
             result.setSheetID(new SheetID(sheetIdValue));
