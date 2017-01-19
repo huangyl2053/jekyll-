@@ -17,8 +17,12 @@ public enum Seibetsu {
     /**
      * コード:2 名称:女 略称:定義なし
      */
-    女("2", "女");
-
+    女("2", "女"),
+     /**
+     * コード:EMPTY 名称:EMPTY 略称:定義なし
+     */
+    空白("", "");   
+    
     private final RString code;
     private final RString fullName;
 
