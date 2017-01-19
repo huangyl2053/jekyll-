@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 11 10:42:53 JST 2017 
+ * Wed Jan 18 18:29:41 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgChosaItakusakiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
 
     private TextBoxCode chosaItakusakiCode;
     private RString chosaItakusakiMeisho;
@@ -33,6 +33,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
     private RString chosaItakusakiKubun;
     private RString hokenshaCode;
     private RString hokenshaName;
+    private TextBoxNum iraiJissekiKensu;
     private RString shoKisaiHokenshaNo;
 
     public dgChosaItakusakiIchiran_Row() {
@@ -47,6 +48,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.chosaItakusakiKubun = RString.EMPTY;
         this.hokenshaCode = RString.EMPTY;
         this.hokenshaName = RString.EMPTY;
+        this.iraiJissekiKensu = new TextBoxNum();
         this.shoKisaiHokenshaNo = RString.EMPTY;
         this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
         this.setOriginalData("chosaItakusakiMeisho", chosaItakusakiMeisho);
@@ -58,10 +60,11 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.setOriginalData("chosaItakusakiKubun", chosaItakusakiKubun);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("iraiJissekiKensu", iraiJissekiKensu);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
     }
 
-    public dgChosaItakusakiIchiran_Row(TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString chosaChiku, TextBoxNum waritsukeTeiin, TextBoxNum waritsukeZumi, RString chosaItakusakiJusho, RString chosaItakusakiTelNo, RString chosaItakusakiKubun, RString hokenshaCode, RString hokenshaName, RString shoKisaiHokenshaNo) {
+    public dgChosaItakusakiIchiran_Row(TextBoxCode chosaItakusakiCode, RString chosaItakusakiMeisho, RString chosaChiku, TextBoxNum waritsukeTeiin, TextBoxNum waritsukeZumi, RString chosaItakusakiJusho, RString chosaItakusakiTelNo, RString chosaItakusakiKubun, RString hokenshaCode, RString hokenshaName, TextBoxNum iraiJissekiKensu, RString shoKisaiHokenshaNo) {
         super();
         this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
         this.setOriginalData("chosaItakusakiMeisho", chosaItakusakiMeisho);
@@ -73,6 +76,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.setOriginalData("chosaItakusakiKubun", chosaItakusakiKubun);
         this.setOriginalData("hokenshaCode", hokenshaCode);
         this.setOriginalData("hokenshaName", hokenshaName);
+        this.setOriginalData("iraiJissekiKensu", iraiJissekiKensu);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.chosaItakusakiCode = chosaItakusakiCode;
         this.chosaItakusakiMeisho = chosaItakusakiMeisho;
@@ -84,6 +88,7 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
         this.chosaItakusakiKubun = chosaItakusakiKubun;
         this.hokenshaCode = hokenshaCode;
         this.hokenshaName = hokenshaName;
+        this.iraiJissekiKensu = iraiJissekiKensu;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -125,6 +130,10 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
 
     public RString getHokenshaName() {
         return hokenshaName;
+    }
+
+    public TextBoxNum getIraiJissekiKensu() {
+        return iraiJissekiKensu;
     }
 
     public RString getShoKisaiHokenshaNo() {
@@ -179,6 +188,11 @@ public class dgChosaItakusakiIchiran_Row extends DataRow {
     public void setHokenshaName(RString hokenshaName) {
         this.setOriginalData("hokenshaName", hokenshaName);
         this.hokenshaName = hokenshaName;
+    }
+
+    public void setIraiJissekiKensu(TextBoxNum iraiJissekiKensu) {
+        this.setOriginalData("iraiJissekiKensu", iraiJissekiKensu);
+        this.iraiJissekiKensu = iraiJissekiKensu;
     }
 
     public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {

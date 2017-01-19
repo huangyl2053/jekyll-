@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -77,14 +78,15 @@ public class NinnteiChousairaiFinder {
      * @return List<NinnteiChousairaiBusiness> 認定調査委託先情報
      */
     @Transaction
-    public List<NinnteiChousairaiBusiness> get認定調査委託先(NinnteiChousairaiParameter parametere) {
+    public SearchResult<NinnteiChousairaiBusiness> get認定調査委託先(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
+        int 該当件数 = mapper.select認定調査委託先件数(parametere);
         List<NinnteiChousairaiEntity> entityList = mapper.select認定調査委託先情報(parametere);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = new ArrayList<>();
         for (NinnteiChousairaiEntity entity : entityList) {
             認定調査委託先List.add(new NinnteiChousairaiBusiness(entity));
         }
-        return 認定調査委託先List;
+        return SearchResult.of(認定調査委託先List, 該当件数, 該当件数 > 認定調査委託先List.size());
     }
 
     /**
@@ -122,32 +124,15 @@ public class NinnteiChousairaiFinder {
     }
 
     /**
-     * 未割付申請者一覧（新規依頼）を取得します。
+     * 未割付申請者一覧を取得します。
      *
      * @param parametere 要介護認定結果情報パラメータ
-     * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧（新規依頼）
+     * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧
      */
     @Transaction
-    public List<WaritsukeBusiness> get新規依頼未割付申請者(NinnteiChousairaiParameter parametere) {
+    public List<WaritsukeBusiness> get未割付申請者(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<WaritsukeEntity> entityList = mapper.select新規依頼未割付申請者(parametere);
-        List<WaritsukeBusiness> 未割付申請者List = new ArrayList<>();
-        for (WaritsukeEntity entity : entityList) {
-            未割付申請者List.add(new WaritsukeBusiness(entity));
-        }
-        return 未割付申請者List;
-    }
-
-    /**
-     * 未割付申請者一覧（再依頼）を取得します。
-     *
-     * @param parametere 要介護認定結果情報パラメータ
-     * @return SearchResult<WaritsukeBusiness> 未割付申請者一覧（再依頼）
-     */
-    @Transaction
-    public List<WaritsukeBusiness> get再依頼未割付申請者(NinnteiChousairaiParameter parametere) {
-        INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        List<WaritsukeEntity> entityList = mapper.select再依頼未割付申請者(parametere);
+        List<WaritsukeEntity> entityList = mapper.select未割付申請者(parametere);
         List<WaritsukeBusiness> 未割付申請者List = new ArrayList<>();
         for (WaritsukeEntity entity : entityList) {
             未割付申請者List.add(new WaritsukeBusiness(entity));

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 11 10:42:53 JST 2017 
+ * Wed Jan 18 18:29:41 JST 2017 
  */
 
 
@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -21,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
 
     private RString no;
     private ButtonDialog shokai;
@@ -44,7 +45,7 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
     private RString chosaIraiDay;
     private TextBoxDate iraishoShutsuryokuDay;
     private TextBoxDate chosahyoNadoShutsuryookuDay;
-    private RString ninteichosaKanryoYMD;
+    private TextBoxFlexibleDate ninteichosaKanryoYMD;
     private RString shinseishoKanriNo;
     private RString ninteichosaIraiRirekiNo;
     private RString koroshoIfShikibetsuCode;
@@ -88,7 +89,7 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.chosaIraiDay = RString.EMPTY;
         this.iraishoShutsuryokuDay = new TextBoxDate();
         this.chosahyoNadoShutsuryookuDay = new TextBoxDate();
-        this.ninteichosaKanryoYMD = RString.EMPTY;
+        this.ninteichosaKanryoYMD = new TextBoxFlexibleDate();
         this.shinseishoKanriNo = RString.EMPTY;
         this.ninteichosaIraiRirekiNo = RString.EMPTY;
         this.koroshoIfShikibetsuCode = RString.EMPTY;
@@ -151,7 +152,7 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
     }
 
-    public dgMiwaritsukeShinseishaIchiran_Row(RString no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiNinteiChosainShimei, RString hokensha, RString chosaKubun, RString jusho, RString shujiiIryoKikan, RString shujii, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, RString chosaIraiDay, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, RString ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode, RString waritsukeTeiin, RString chosaKanoNinzuPerMonth, RString ninteichosaKigenYMD, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString homonChosasakiYubinNo, RString homonChosasakiJusho, RString homonChosasakiName, RString homonChosasakiTelNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age, RString ninteiChosainCode) {
+    public dgMiwaritsukeShinseishaIchiran_Row(RString no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiNinteiChosainShimei, RString hokensha, RString chosaKubun, RString jusho, RString shujiiIryoKikan, RString shujii, RString zenkaiShujiiIryoKikan, RString zenkaiShujii, RString chosaIraiDay, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, TextBoxFlexibleDate ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode, RString waritsukeTeiin, RString chosaKanoNinzuPerMonth, RString ninteichosaKigenYMD, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString homonChosasakiYubinNo, RString homonChosasakiJusho, RString homonChosasakiName, RString homonChosasakiTelNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age, RString ninteiChosainCode) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
@@ -321,7 +322,7 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         return chosahyoNadoShutsuryookuDay;
     }
 
-    public RString getNinteichosaKanryoYMD() {
+    public TextBoxFlexibleDate getNinteichosaKanryoYMD() {
         return ninteichosaKanryoYMD;
     }
 
@@ -506,7 +507,7 @@ public class dgMiwaritsukeShinseishaIchiran_Row extends DataRow {
         this.chosahyoNadoShutsuryookuDay = chosahyoNadoShutsuryookuDay;
     }
 
-    public void setNinteichosaKanryoYMD(RString ninteichosaKanryoYMD) {
+    public void setNinteichosaKanryoYMD(TextBoxFlexibleDate ninteichosaKanryoYMD) {
         this.setOriginalData("ninteichosaKanryoYMD", ninteichosaKanryoYMD);
         this.ninteichosaKanryoYMD = ninteichosaKanryoYMD;
     }
