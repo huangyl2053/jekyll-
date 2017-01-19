@@ -469,7 +469,7 @@ public class ShinseiKensakuHandler {
         }
         List<KeyValueDataSource> みなし２号申請 = finderDiv.getChkMinashiFlag().getSelectedItems();
         if (みなし２号申請.isEmpty()) {
-            parameter.setMinashiNigoEtcTaishoFlag(false);
+            //parameter.setMinashiNigoEtcTaishoFlag(false);
         } else {
             parameter.setMinashiNigoEtcTaishoFlag(true);
         }
