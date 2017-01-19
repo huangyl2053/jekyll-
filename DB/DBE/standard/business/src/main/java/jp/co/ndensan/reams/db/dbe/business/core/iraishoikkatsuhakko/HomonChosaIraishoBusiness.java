@@ -288,19 +288,20 @@ public class HomonChosaIraishoBusiness {
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {
         RString 提出期限 = RString.EMPTY;
-        if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
-            if (文字列0.equals(processParamter.getTeishutsuKigen())) {
-                int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        基準日, SubGyomuCode.DBE認定支援).toString());
+        if (文字列0.equals(processParamter.getTeishutsuKigen())) {
+            int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
+                    基準日, SubGyomuCode.DBE認定支援).toString());
+            if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
                 提出期限 = entity.get認定調査依頼年月日() != null && !entity.get認定調査依頼年月日().isEmpty()
                         ? new RString(entity.get認定調査依頼年月日().plusDay(期限日数).toString()) : RString.EMPTY;
-            } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = RString.EMPTY;
-            } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = processParamter.getKyotsuHizuke();
+            } else {
+                提出期限 = entity.get認定申請年月日() != null && !entity.get認定申請年月日().isEmpty()
+                        ? new RString(new FlexibleDate(entity.get認定申請年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
             }
-        } else {
-            提出期限 = entity.get認定調査期限年月日();
+        } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
+            提出期限 = RString.EMPTY;
+        } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
+            提出期限 = processParamter.getKyotsuHizuke();
         }
         return 提出期限;
     }

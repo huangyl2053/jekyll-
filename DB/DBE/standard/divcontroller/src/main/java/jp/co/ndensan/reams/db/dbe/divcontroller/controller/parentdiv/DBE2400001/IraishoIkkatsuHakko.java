@@ -45,8 +45,8 @@ public class IraishoIkkatsuHakko {
     private static final RString PRINT = new RString("2");
     private static final RString PRINT_AND_NOPRINT = new RString("3");
     private static final RString COMMON_DATE = new RString("2");
-    private static final RString COMMON_PRINT = new RString("1");
-    private static final RString COMMON_NO_PRINT = new RString("0");
+    private static final RString COMMON_PRINT = new RString("0");
+    private static final RString COMMON_NO_PRINT = new RString("1");
     private final IraishoIkkatsuHakkoFinder service;
 
     /**
@@ -212,9 +212,9 @@ public class IraishoIkkatsuHakko {
         param.setHakkobi(div.getTxtHakkobi().getValue() == null
                 ? RString.EMPTY : div.getTxtHakkobi().getValue().toDateString());
         if (SELECTED_KEY0.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(COMMON_NO_PRINT);
-        } else if (SELECTED_KEY1.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
             param.setTeishutsuKigen(COMMON_PRINT);
+        } else if (SELECTED_KEY1.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
+            param.setTeishutsuKigen(COMMON_NO_PRINT);
         } else if (SELECTED_KEY2.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
             param.setTeishutsuKigen(COMMON_DATE);
         } else {

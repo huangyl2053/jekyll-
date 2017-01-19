@@ -37,6 +37,12 @@ public class IraishoIkkatsuHakkoHandler {
     private static final RString SHUTSU_CHECKED = new RString("key2");
     private static final RString SHINSEI_KASAN = new RString("2");
     private static final RString OCR = new RString("1");
+    private static final RString 依頼書期限設定_自動 = new RString("1");
+    private static final RString 依頼書期限設定_空欄 = new RString("2");
+    private static final RString 依頼書期限設定_共通 = new RString("3");
+    private static final RString 依頼書期限ラジオボタン_自動 = new RString("key0");
+    private static final RString 依頼書期限ラジオボタン_空欄 = new RString("key1");
+    private static final RString 依頼書期限ラジオボタン_共通 = new RString("key2");
 
     private static final RString SELECTED_NINTEI_CHOSA = new RString("key0");
     private static final RString SELECTED_SHUJII_IKENSHO = new RString("key1");
@@ -345,12 +351,17 @@ public class IraishoIkkatsuHakkoHandler {
 
     private void setHakkobiAndTeishutsuKigen(RString ninteiShinsei) {
         div.getTxtHakkobi().setValue(RDate.getNowDate());
-        if (SHINSEI_KASAN.equals(ninteiShinsei)) {
-            div.getRadTeishutsuKigen().setDisabled(true);
+        RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (依頼書期限設定.equals(依頼書期限設定_自動)) {
+            div.getRadTeishutsuKigen().setSelectedKey(依頼書期限ラジオボタン_自動);
+        } else if (依頼書期限設定.equals(依頼書期限設定_空欄)) {
+            div.getRadTeishutsuKigen().setSelectedKey(依頼書期限ラジオボタン_空欄);
+        } else if (依頼書期限設定.equals(依頼書期限設定_共通)) {
+            div.getRadTeishutsuKigen().setSelectedKey(依頼書期限ラジオボタン_共通);
+        } else {
+            div.getRadTeishutsuKigen().setSelectedKey(COMMON_SELECTED);
         }
-
-        div.getRadTeishutsuKigen().setSelectedKey(COMMON_SELECTED);
-        div.getTxtKyotsuHizuke().clearValue();
-        div.getTxtKyotsuHizuke().setReadOnly(true);
+        div.getRadTeishutsuKigen().setDisabled(true);
+        setTxtKyotsuHizuke();
     }
 }

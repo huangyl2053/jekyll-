@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.GaikyoChosaTokkiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.IkenshoImageJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -236,7 +235,6 @@ public class ImageJohoMaskingHandler {
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), 共有ファイルID);
         try {
             imagePath = new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(outputImagePath)).getCanonicalPath());
-            _Console.log(imagePath.toString());
             ViewStateHolder.put(ViewStateKeys.イメージ情報, imagePath);
         } catch (Exception ex) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
@@ -257,7 +255,6 @@ public class ImageJohoMaskingHandler {
 
         RString imagePath = ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class);
         for (String imageFile : files) {
-            _Console.log(imageFile);
             dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
             row.setImageName(new RString(imageFile));
             row.setImagePath(Path.combinePath(imagePath, new RString(imageFile)));
