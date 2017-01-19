@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -74,6 +73,7 @@ public class NinteichosaItakusakiMainHandler {
     private static final RString その他 = new RString("その他");
     private static final RString 非調査機関 = new RString("非調査機関");
     private static final RString 調査機関 = new RString("調査機関");
+    private static final RString 前方一致KEY = new RString("0");
 
     private final NinteichosaItakusakiMainDiv div;
 
@@ -147,6 +147,8 @@ public class NinteichosaItakusakiMainHandler {
         div.getCcdhokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getDdlKikanMeisho().setSelectedKey(前方一致KEY);
+        div.getDdlKikanKanaMeisho().setSelectedKey(前方一致KEY);
     }
 
     /**
@@ -161,7 +163,7 @@ public class NinteichosaItakusakiMainHandler {
             RString hokensya = RString.EMPTY;
             if (!list.isEmpty()) {
                 hokensya = list.get(0).getShichosonMeisho();
-            }  
+            }
             dataGridList.add(createDgSonotaKikanichiranRow(
                     RString.EMPTY,
                     hokensya,

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ChosaitakusakiJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,10 +42,10 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private TextBoxKana txtChosaitakusakiKananame;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
-    @JsonProperty("txtTelNo")
-    private TextBoxTelNo txtTelNo;
     @JsonProperty("txtJusho")
     private TextBox txtJusho;
+    @JsonProperty("txtTelNo")
+    private TextBoxTelNo txtTelNo;
     @JsonProperty("txtFaxNo")
     private TextBoxTelNo txtFaxNo;
     @JsonProperty("txtdaihyoshaname")
@@ -68,8 +68,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private KozaJohoDiv KozaJoho;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
-    @JsonProperty("btnTorikeshi")
-    private Button btnTorikeshi;
     @JsonProperty("btnchosaininsert")
     private Button btnchosaininsert;
     @JsonProperty("ccdChiku")
@@ -244,24 +242,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * gettxtTelNo
-     * @return txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public TextBoxTelNo getTxtTelNo() {
-        return txtTelNo;
-    }
-
-    /*
-     * settxtTelNo
-     * @param txtTelNo txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.txtTelNo = txtTelNo;
-    }
-
-    /*
      * gettxtJusho
      * @return txtJusho
      */
@@ -277,6 +257,24 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBox txtJusho) {
         this.txtJusho = txtJusho;
+    }
+
+    /*
+     * gettxtTelNo
+     * @return txtTelNo
+     */
+    @JsonProperty("txtTelNo")
+    public TextBoxTelNo getTxtTelNo() {
+        return txtTelNo;
+    }
+
+    /*
+     * settxtTelNo
+     * @param txtTelNo txtTelNo
+     */
+    @JsonProperty("txtTelNo")
+    public void setTxtTelNo(TextBoxTelNo txtTelNo) {
+        this.txtTelNo = txtTelNo;
     }
 
     /*
@@ -475,24 +473,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("btnKakutei")
     public void setBtnKakutei(Button btnKakutei) {
         this.btnKakutei = btnKakutei;
-    }
-
-    /*
-     * getbtnTorikeshi
-     * @return btnTorikeshi
-     */
-    @JsonProperty("btnTorikeshi")
-    public Button getBtnTorikeshi() {
-        return btnTorikeshi;
-    }
-
-    /*
-     * setbtnTorikeshi
-     * @param btnTorikeshi btnTorikeshi
-     */
-    @JsonProperty("btnTorikeshi")
-    public void setBtnTorikeshi(Button btnTorikeshi) {
-        this.btnTorikeshi = btnTorikeshi;
     }
 
     /*

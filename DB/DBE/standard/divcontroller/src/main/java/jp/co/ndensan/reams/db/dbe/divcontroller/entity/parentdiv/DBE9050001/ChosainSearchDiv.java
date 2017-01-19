@@ -31,8 +31,12 @@ public class ChosainSearchDiv extends Panel {
     private TextBoxCode txtSearchSonotaKikanCodeTo;
     @JsonProperty("txtSearchSonotaKikanMeisho")
     private TextBox txtSearchSonotaKikanMeisho;
+    @JsonProperty("ddlKikanMeisho")
+    private DropDownList ddlKikanMeisho;
     @JsonProperty("txtSearchSonotaKikanKanaMeisho")
     private TextBoxKana txtSearchSonotaKikanKanaMeisho;
+    @JsonProperty("ddlKikanKanaMeisho")
+    private DropDownList ddlKikanKanaMeisho;
     @JsonProperty("ddlkikankubun")
     private DropDownList ddlkikankubun;
     @JsonProperty("ddlitakukubun")
@@ -125,6 +129,24 @@ public class ChosainSearchDiv extends Panel {
     }
 
     /*
+     * getddlKikanMeisho
+     * @return ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public DropDownList getDdlKikanMeisho() {
+        return ddlKikanMeisho;
+    }
+
+    /*
+     * setddlKikanMeisho
+     * @param ddlKikanMeisho ddlKikanMeisho
+     */
+    @JsonProperty("ddlKikanMeisho")
+    public void setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.ddlKikanMeisho = ddlKikanMeisho;
+    }
+
+    /*
      * gettxtSearchSonotaKikanKanaMeisho
      * @return txtSearchSonotaKikanKanaMeisho
      */
@@ -140,6 +162,24 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("txtSearchSonotaKikanKanaMeisho")
     public void setTxtSearchSonotaKikanKanaMeisho(TextBoxKana txtSearchSonotaKikanKanaMeisho) {
         this.txtSearchSonotaKikanKanaMeisho = txtSearchSonotaKikanKanaMeisho;
+    }
+
+    /*
+     * getddlKikanKanaMeisho
+     * @return ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public DropDownList getDdlKikanKanaMeisho() {
+        return ddlKikanKanaMeisho;
+    }
+
+    /*
+     * setddlKikanKanaMeisho
+     * @param ddlKikanKanaMeisho ddlKikanKanaMeisho
+     */
+    @JsonProperty("ddlKikanKanaMeisho")
+    public void setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.ddlKikanKanaMeisho = ddlKikanKanaMeisho;
     }
 
     /*
