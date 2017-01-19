@@ -41,6 +41,7 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString nijiHanteiNinteiYukoShuryoYMD;
     private RString nijiHanteiYMD;
     private RString ninteiJohoTeikyoYMD;
+    private boolean ninteiJohoTeikyoKiboFlag;
     private RString shinseishoKanriNo;
     private RString shichosonMeisho;
     private RString shinsakaiIken;

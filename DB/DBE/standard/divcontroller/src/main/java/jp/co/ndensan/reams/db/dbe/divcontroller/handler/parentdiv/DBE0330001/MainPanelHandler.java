@@ -76,12 +76,16 @@ public class MainPanelHandler {
         RStringBuilder rsb = new RStringBuilder();
         for (YouKaiGoNinTeiKekTesuChi youKaiGoNinTeiKekTesuChi : businessList) {
             TextBoxDate 認定状況提供日 = new TextBoxDate();
+
             boolean 認定状況提供日フラグ = false;
             if (youKaiGoNinTeiKekTesuChi.get認定状況提供日() == null || youKaiGoNinTeiKekTesuChi.get認定状況提供日().isEmpty()) {
                 認定状況提供日フラグ = true;
+                認定状況提供日.setValue(null);
             } else {
                 認定状況提供日.setValue(new RDate(youKaiGoNinTeiKekTesuChi.get認定状況提供日().toString()));
             }
+            boolean 希望フラグ = youKaiGoNinTeiKekTesuChi.is提供希望();
+
             TextBoxDate 生年月日 = new TextBoxDate();
             TextBoxDate 申請日 = new TextBoxDate();
             TextBoxDate 有効期間開始 = new TextBoxDate();
@@ -119,9 +123,8 @@ public class MainPanelHandler {
                     有効期間終了,
                     認定状況提供日,
                     youKaiGoNinTeiKekTesuChi.get申請書管理番号());
-            if (認定状況提供日フラグ) {
-                row.setSelected(認定状況提供日フラグ);
-            }
+
+            row.setSelected(認定状況提供日フラグ && 希望フラグ);
             rsb.append(String.valueOf(認定状況提供日フラグ));
             rowList.add(row);
         }
@@ -209,5 +212,21 @@ public class MainPanelHandler {
         boolean is全市町村 = HokenshaSummary.EMPTY.equals(div.getCcdHokensha().getSelectedItem());
         div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(is全市町村);
         div.getCcdShujiiIryokikanAndShujiiInput().clear();
+    }
+
+    /**
+     * 出力済データが選択されているか判定します。
+     *
+     * @return 選択済ならtrue
+     */
+    public boolean isSelected出力済データ() {
+        List<dgResultList_Row> selectedList = div.getDgResultList().getSelectedItems();
+        for (dgResultList_Row row : selectedList) {
+            if (row.getNinteiJokyoTeikyoYMD().getValue() == null) {
+                continue;
+            }
+            return true;
+        }
+        return false;
     }
 }

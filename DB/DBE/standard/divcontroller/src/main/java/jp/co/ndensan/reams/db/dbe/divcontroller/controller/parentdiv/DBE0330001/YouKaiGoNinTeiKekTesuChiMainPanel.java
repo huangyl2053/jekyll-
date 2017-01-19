@@ -194,25 +194,8 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSaiKenSaku(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-
-        if (!ResponseHolder.isReRequest()) {
-            if (ResponseHolder.getState().equals(DBE0330001StateName.主治医選択一覧.getName())) {
-                return ResponseData.of(div).setState(DBE0330001StateName.照会);
-            }
-            if (hasChange(div)) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getResultListPanel().getTxtNinteiJokyoTeikyoYMD().clearValue();
-            return ResponseData.of(div).setState(DBE0330001StateName.照会);
-        }
-        return ResponseData.of(div).respond();
+        div.getResultListPanel().getTxtNinteiJokyoTeikyoYMD().clearValue();
+        return ResponseData.of(div).setState(DBE0330001StateName.照会);
     }
 
     /**
@@ -222,6 +205,16 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnBatchRegisterCheck(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
+
+        if (ResponseHolder.isReRequest()) {
+            if (new RString(DbeWarningMessages.既に印刷済_複数選択時.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
+                onClick_btnBatchRegister(div);
+            }
+            return ResponseData.of(div).respond();
+        }
+
         if (div.getResultListPanel().getTxtNinteiJokyoTeikyoYMD().getValue() == null) {
             ValidationMessageControlPairs validPairs = getHandler(div).getメッセジー_入力データなし();
             if (validPairs.iterator().hasNext()) {
@@ -241,13 +234,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             }
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(DbeWarningMessages.既に印刷済.getMessage()).respond();
-        }
-        if (new RString(DbeWarningMessages.既に印刷済.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            onClick_btnBatchRegister(div);
+        if (getHandler(div).isSelected出力済データ()) {
+            return ResponseData.of(div).addMessage(DbeWarningMessages.既に印刷済_複数選択時.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -313,15 +302,6 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
                 SubGyomuCode.DBE認定支援
         );
         return ResponseData.of(div).respond();
-    }
-
-    private boolean hasChange(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        List<dgResultList_Row> rowList = div.getDgResultList().getDataSource();
-        RStringBuilder rsb = new RStringBuilder();
-        for (dgResultList_Row row : rowList) {
-            rsb.append(String.valueOf(row.getSelected()));
-        }
-        return !div.getHiddenItem().equals(rsb.toRString());
     }
 
     private MainPanelHandler getHandler(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {

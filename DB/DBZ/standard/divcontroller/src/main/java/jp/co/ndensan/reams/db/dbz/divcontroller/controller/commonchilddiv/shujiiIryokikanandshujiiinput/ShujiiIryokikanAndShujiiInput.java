@@ -55,13 +55,21 @@ public class ShujiiIryokikanAndShujiiInput {
     public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBlur_txtIryoKikanCode(ShujiiIryokikanAndShujiiInputDiv div) {
 //        RString 主治医医療機関名称 = servie.getIryoKikanMeisho(new LasdecCode(div.getHdnShichosonCode()),
 //                div.getTxtIryoKikanCode().getValue());
-        
+
+        createHandler(div).setIryoKikanName(RString.EMPTY);
+
+        if (RString.isNullOrEmpty(div.getTxtIryoKikanCode().getValue())) {
+            div.getTxtShujiiCode().setValue(RString.EMPTY);
+            createHandler(div).setShujiiName(RString.EMPTY);
+            return ResponseData.of(div).respond();
+        }
+
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
                         div.getHdnShichosonCode(),
                         true,
                         div.getTxtIryoKikanCode().getValue(),
-                        RString.EMPTY,
+                        div.getTxtIryoKikanCode().getValue(),
                         true,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -88,26 +96,34 @@ public class ShujiiIryokikanAndShujiiInput {
      * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBlur_txtShujiiCode(ShujiiIryokikanAndShujiiInputDiv div) {
-        RString 主治医氏名 = servie.getShujiiName(new LasdecCode(div.getHdnShichosonCode()),
-                div.getTxtIryoKikanCode().getValue(),
-                div.getTxtShujiiCode().getValue());
-        
+        //TODO n8178 城間 修正していく中で不要になったコード？ 詳細不明だが未使用＋onBlur_txtIryoKikanCodeの同様のコードにならってコメントアウト
+//        RString 主治医氏名 = servie.getShujiiName(new LasdecCode(div.getHdnShichosonCode()),
+//                div.getTxtIryoKikanCode().getValue(),
+//                div.getTxtShujiiCode().getValue());
+
+        createHandler(div).setShujiiName(RString.EMPTY);
+
+        if (RString.isNullOrEmpty(div.getTxtIryoKikanCode().getValue())
+                || RString.isNullOrEmpty(div.getTxtShujiiCode().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
                         div.getHdnShichosonCode(),
                         true,
                         div.getTxtIryoKikanCode().getValue(),
-                        RString.EMPTY,
+                        div.getTxtIryoKikanCode().getValue(),
                         true,
                         RString.EMPTY,
                         RString.EMPTY,
                         div.getTxtShujiiCode().getValue(),
-                        RString.EMPTY,
+                        div.getTxtShujiiCode().getValue(),
                         true,
                         RString.EMPTY,
                         RString.EMPTY,
                         1)).records();
-        
+
         if (!list.isEmpty()) {
             createHandler(div).setShujiiName(list.get(0).get主治医氏名());
             createHandler(div).setChkShiteii(new LasdecCode(div.getHdnShichosonCode()), list.get(0).get医療機関コード(), list.get(0).get主治医コード());

@@ -262,6 +262,15 @@ public class YouKaiGoNinTeiKekTesuChi implements Serializable {
     }
 
     /**
+     * 提供を希望しているかを返します。
+     *
+     * @return 提供を希望している場合true
+     */
+    public boolean is提供希望() {
+        return entity.isNinteiJohoTeikyoKiboFlag();
+    }
+
+    /**
      * 申請書管理番号を返します。
      *
      * @return 申請書管理番号

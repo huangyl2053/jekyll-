@@ -29,6 +29,7 @@
         <result property="nijiHanteiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiJohoTeikyoYMD" column="dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiJohoTeikyoKiboFlag" column="dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoKiboFlag" javaType="boolean"/>
         <result property="shichosonMeisho" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiIken" column="dbT5102NinteiKekkaJoho_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -132,6 +133,7 @@
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoShuryoYMD" AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoShuryoYMD,
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" AS dbT5102NinteiKekkaJoho_nijiHanteiYMD,
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" AS dbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoYMD,
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" AS DbT5301ShujiiIkenshoIraiJoho_ninteiJohoTeikyoKiboFlag,
         rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo" AS dbT5101NinteiShinseiJoho_shinseishoKanriNo
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
@@ -210,7 +212,6 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"
         WHERE
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
-        AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoKiboFlag" = TRUE<!--ここは引数で条件分岐するべき-->
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag" = FALSE
         <where>
             <if test="useShoKisaiHokenshaNo">
