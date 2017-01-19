@@ -61,6 +61,13 @@ public class ImageinputRelate {
     }
 
     /**
+     * @return 被保険者カナ
+     */
+    public RString getT5101_被保険者カナ() {
+        return entity.getT5101_被保険者カナ();
+    }
+
+    /**
      * T5101_認定申請年月日を取得します。
      *
      * @return T5101_認定申請年月日
@@ -70,12 +77,26 @@ public class ImageinputRelate {
     }
 
     /**
+     * @return 検索時に指定した認定申請日と一致する場合、{@code true}
+     */
+    public boolean matches指定申請日() {
+        return entity.isMatches指定申請日();
+    }
+
+    /**
      * getT5101_施設入所の有無を取得します。
      *
      * @return getT5101_施設入所の有無
      */
     public boolean isT5101_施設入所の有無() {
         return entity.isT5101_施設入所の有無();
+    }
+
+    /**
+     * @return T5101 論理削除フラグ
+     */
+    public boolean is論理削除() {
+        return entity.isT5101_論理削除フラグ();
     }
 
     /**

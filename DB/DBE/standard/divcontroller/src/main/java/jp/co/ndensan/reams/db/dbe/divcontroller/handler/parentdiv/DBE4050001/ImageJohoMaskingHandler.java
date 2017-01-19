@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -256,7 +257,7 @@ public class ImageJohoMaskingHandler {
         for (String imageFile : files) {
             dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
             row.setImageName(new RString(imageFile));
-            row.setImagePath(imagePath.concat(new RString("\\")).concat(new RString(imageFile)));
+            row.setImagePath(Path.combinePath(imagePath, new RString(imageFile)));
             rowList.add(row);
         }
 

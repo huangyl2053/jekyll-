@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KobetsuHyojiAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,12 +34,12 @@ public class KobetsuHyojiAreaDiv extends Panel {
     private TextBox txtShinseiKubunLaw;
     @JsonProperty("txtTorisageKubun")
     private TextBox txtTorisageKubun;
+    @JsonProperty("txtTokuteiShippei")
+    private TextBox txtTokuteiShippei;
     @JsonProperty("txtIchijiHantei")
     private TextBox txtIchijiHantei;
     @JsonProperty("txtNijiHanteiDay")
     private TextBoxDate txtNijiHanteiDay;
-    @JsonProperty("txtTokuteiShippei")
-    private TextBox txtTokuteiShippei;
     @JsonProperty("ddlJotaiZo")
     private DropDownList ddlJotaiZo;
     @JsonProperty("ddlHanteiKekka")
@@ -204,6 +204,24 @@ public class KobetsuHyojiAreaDiv extends Panel {
     }
 
     /*
+     * gettxtTokuteiShippei
+     * @return txtTokuteiShippei
+     */
+    @JsonProperty("txtTokuteiShippei")
+    public TextBox getTxtTokuteiShippei() {
+        return txtTokuteiShippei;
+    }
+
+    /*
+     * settxtTokuteiShippei
+     * @param txtTokuteiShippei txtTokuteiShippei
+     */
+    @JsonProperty("txtTokuteiShippei")
+    public void setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
+        this.txtTokuteiShippei = txtTokuteiShippei;
+    }
+
+    /*
      * gettxtIchijiHantei
      * @return txtIchijiHantei
      */
@@ -237,24 +255,6 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("txtNijiHanteiDay")
     public void setTxtNijiHanteiDay(TextBoxDate txtNijiHanteiDay) {
         this.txtNijiHanteiDay = txtNijiHanteiDay;
-    }
-
-    /*
-     * gettxtTokuteiShippei
-     * @return txtTokuteiShippei
-     */
-    @JsonProperty("txtTokuteiShippei")
-    public TextBox getTxtTokuteiShippei() {
-        return txtTokuteiShippei;
-    }
-
-    /*
-     * settxtTokuteiShippei
-     * @param txtTokuteiShippei txtTokuteiShippei
-     */
-    @JsonProperty("txtTokuteiShippei")
-    public void setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
-        this.txtTokuteiShippei = txtTokuteiShippei;
     }
 
     /*

@@ -114,10 +114,10 @@
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."isDeleted" = FALSE
         
         ORDER BY
-        pickout."shoKisaiHokenshaNo",
-        pickout."shujiiIryokikanCode",
         pickout."shujiiCode",
-        pickout."shinseishoKanriNo" 
+        pickout."ninteiShinseiYMD",
+        pickout."hihokenshaKana",
+        pickout."hihokenshaNo" 
     </select>
     
     <sql id="ShujiiIkenshoHakko">

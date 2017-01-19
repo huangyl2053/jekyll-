@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  *
  */
 public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinseishaKihonInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,10 +41,10 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     private TextBox txtHokenshaName;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
-    @JsonProperty("txtSeinenYmd")
-    private TextBoxDate txtSeinenYmd;
     @JsonProperty("txtHihokenshaKana")
     private TextBox txtHihokenshaKana;
+    @JsonProperty("txtSeinenYmd")
+    private TextBoxDate txtSeinenYmd;
     @JsonProperty("txtNenrei")
     private TextBoxNum txtNenrei;
     @JsonProperty("txtSeibetsu")
@@ -159,24 +159,6 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     }
 
     /*
-     * gettxtSeinenYmd
-     * @return txtSeinenYmd
-     */
-    @JsonProperty("txtSeinenYmd")
-    public TextBoxDate getTxtSeinenYmd() {
-        return txtSeinenYmd;
-    }
-
-    /*
-     * settxtSeinenYmd
-     * @param txtSeinenYmd txtSeinenYmd
-     */
-    @JsonProperty("txtSeinenYmd")
-    public void setTxtSeinenYmd(TextBoxDate txtSeinenYmd) {
-        this.txtSeinenYmd = txtSeinenYmd;
-    }
-
-    /*
      * gettxtHihokenshaKana
      * @return txtHihokenshaKana
      */
@@ -192,6 +174,24 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @JsonProperty("txtHihokenshaKana")
     public void setTxtHihokenshaKana(TextBox txtHihokenshaKana) {
         this.txtHihokenshaKana = txtHihokenshaKana;
+    }
+
+    /*
+     * gettxtSeinenYmd
+     * @return txtSeinenYmd
+     */
+    @JsonProperty("txtSeinenYmd")
+    public TextBoxDate getTxtSeinenYmd() {
+        return txtSeinenYmd;
+    }
+
+    /*
+     * settxtSeinenYmd
+     * @param txtSeinenYmd txtSeinenYmd
+     */
+    @JsonProperty("txtSeinenYmd")
+    public void setTxtSeinenYmd(TextBoxDate txtSeinenYmd) {
+        this.txtSeinenYmd = txtSeinenYmd;
     }
 
     /*

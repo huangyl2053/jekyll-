@@ -116,11 +116,11 @@ public class ShujiiIryokikanAndShujiiGuide {
         );
         RString 市町村コード = new RString("");
         if (dataPassModel != null) {
-            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+//            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
-            } else {
-                市町村コード = dataPassModel.get市町村コード();
-            }
+//            } else {
+//                市町村コード = dataPassModel.get市町村コード();
+//            }
             if (!RString.isNullOrEmpty(dataPassModel.get主治医医療機関コード())
                     && new RString(TaishoMode.ShujiiMode.toString()).equals(dataPassModel.get対象モード())) {
                 div.getTxtIryoKikanCodeFrom().setValue(dataPassModel.get主治医医療機関コード());

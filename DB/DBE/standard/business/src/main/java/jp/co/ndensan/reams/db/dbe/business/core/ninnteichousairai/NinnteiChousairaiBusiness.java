@@ -93,12 +93,12 @@ public class NinnteiChousairaiBusiness {
     }
 
     /**
-     * 機関の区分を返します。
+     * 調査委託区分を返します。
      *
-     * @return 機関の区分
+     * @return 調査委託区分
      */
-    public RString getKikanKubun() {
-        return entity.getKikanKubun();
+    public RString getChosaItakuKubun() {
+        return entity.getChosaItakuKubun();
     }
 
     /**
@@ -108,6 +108,15 @@ public class NinnteiChousairaiBusiness {
      */
     public int getWaritsukesumiKensu() {
         return entity.getWaritsukesumiKensu();
+    }
+
+    /**
+     * 依頼件数を返します。
+     *
+     * @return 依頼件数
+     */
+    public int getIraiKensu() {
+        return entity.getIraiKensu();
     }
 
     /**

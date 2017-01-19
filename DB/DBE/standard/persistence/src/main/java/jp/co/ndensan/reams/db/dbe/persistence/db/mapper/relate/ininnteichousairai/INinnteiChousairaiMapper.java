@@ -23,6 +23,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface INinnteiChousairaiMapper {
 
     /**
+     * 検索条件に該当する認定調査委託先の件数を取得します。
+     *
+     * @param parametere 認定調査委託先の件数取得するためのMyBatis用パラメータクラスです。
+     * @return 検索条件に該当する認定調査委託先の件数
+     */
+    int select認定調査委託先件数(NinnteiChousairaiParameter parametere);
+
+    /**
      * 認定調査委託先情報を取得します。
      *
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
@@ -55,20 +63,12 @@ public interface INinnteiChousairaiMapper {
     NinteichosaIraiJohoRelateEntity getNinteichosaIraiJohoList(NinnteiChousairaiParameter parametere);
 
     /**
-     * 未割付申請者一覧（新規依頼）を取得します。
+     * 未割付申請者一覧を取得します。
      *
      * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
      * @return WaritsukeEntity 割付済み申請者一覧Entityクラスです。
      */
-    List<WaritsukeEntity> select新規依頼未割付申請者(NinnteiChousairaiParameter parametere);
-
-    /**
-     * 未割付申請者一覧（再依頼）を取得します。
-     *
-     * @param parametere 要介護認定結果情報を特定するためのMyBatis用パラメータクラスです。
-     * @return WaritsukeEntity 割付済み申請者一覧Entityクラスです。
-     */
-    List<WaritsukeEntity> select再依頼未割付申請者(NinnteiChousairaiParameter parametere);
+    List<WaritsukeEntity> select未割付申請者(NinnteiChousairaiParameter parametere);
 
     /**
      * 認定調査依頼情報を取得します。

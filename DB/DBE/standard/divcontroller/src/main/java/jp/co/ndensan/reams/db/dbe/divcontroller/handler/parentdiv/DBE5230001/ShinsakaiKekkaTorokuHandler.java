@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -397,6 +398,9 @@ public class ShinsakaiKekkaTorokuHandler {
         }
         if (!div.getHdnHasChanged().equals(getInputItem())) {
             更新対象row.setUpDateFlag(更新_FLAG);
+            更新対象row.setRowState(RowState.Modified);
+        } else {
+            更新対象row.setRowState(RowState.Unchanged);
         }
     }
 
@@ -546,20 +550,23 @@ public class ShinsakaiKekkaTorokuHandler {
     /**
      * 「判定結果」ドロップダウンリストの選択変更の場合、対応項目の表示制御を設定します。
      *
-     * @param hyojiSeigyoFlag 表示制御Flag
      */
     public void set個別入力制御変更from判定結果() {
         boolean is入力可 = (get判定結果() == HanteiKekkaCode.認定);
         set個別入力制御変更from判定結果(is入力可);
-        if (is入力可 == false || is判定結果変更前入力可() == true) {
+        if (!is入力可 || is判定結果変更前入力不可()) {
             clear個別表示欄今回入力内容判定結果以外();
         }
-        if (is入力可 == true || is判定結果変更前入力可() == false) {
+        if (is入力可 || !is判定結果変更前入力不可()) {
             set個別内容(get更新対象row());
+        }
+        if (is入力可) {
+            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(HanteiKekkaCode.認定.getコード());
+            set個別入力制御変更from判定結果(is入力可);
         }
     }
 
-    private boolean is判定結果変更前入力可() {
+    private boolean is判定結果変更前入力不可() {
         return div.getKobetsuHyojiArea().getTxtNijiHanteiDay().isReadOnly();
     }
 

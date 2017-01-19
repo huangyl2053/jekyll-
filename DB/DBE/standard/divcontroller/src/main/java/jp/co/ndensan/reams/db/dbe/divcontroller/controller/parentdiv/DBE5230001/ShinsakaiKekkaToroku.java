@@ -412,7 +412,7 @@ public class ShinsakaiKekkaToroku {
         NinteiKanryoJoho ninteiKanryo = ninteiKanryoJoho.get(identifier);
         if (HASDATA.equals(row.getUpDateFlag())) {
             NinteiKanryoJohoBuilder ninteiKanryoBuilder = ninteiKanryo.createBuilderForEdit();
-            ninteiKanryoBuilder.set認定審査会割当完了年月日(FlexibleDate.EMPTY);
+            ninteiKanryoBuilder.set認定審査会割当完了年月日(null);
             ninteiKanryo = ninteiKanryoBuilder.build();
             manager.upd要介護認定完了情報(ninteiKanryo);
         }

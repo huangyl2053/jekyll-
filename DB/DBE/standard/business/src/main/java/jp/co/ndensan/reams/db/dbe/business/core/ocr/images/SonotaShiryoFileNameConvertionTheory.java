@@ -26,7 +26,7 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
 
     static {
         REAMS_FILE_NAME = Arrays.asList(
-                new RString("F1401A00.png"), new RString("F1401B01.png"),
+                new RString("F1401A01.png"), new RString("F1401B02.png"),
                 new RString("F1401C03.png"), new RString("F1401D04.png"),
                 new RString("F1401F05.png"), new RString("F1401E06.png")
         );

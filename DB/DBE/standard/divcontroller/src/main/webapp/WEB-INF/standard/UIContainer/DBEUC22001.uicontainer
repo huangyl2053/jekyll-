@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2200001",
      "toLayoutTitle": "認定調査依頼",
-     "toState": "初期表示"
+     "toState": "調査委託先選択"
     },
     {
      "id": "2",

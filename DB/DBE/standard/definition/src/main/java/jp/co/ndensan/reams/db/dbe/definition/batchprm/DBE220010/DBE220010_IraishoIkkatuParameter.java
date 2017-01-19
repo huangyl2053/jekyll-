@@ -69,7 +69,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString ninteiChosahyo;
     @BatchParameter(key = NINTEICHOSAIRAILIST, name = "認定調査依頼リスト")
     private transient List<GridParameter> ninteiChosaIraiList;
-    
+
     @BatchParameter(key = NINTEI_CHOSA_IRAI_CHOHYO, name = "認定調査依頼一覧表出力区分")
     private boolean ninteiChosaIraiChohyo;
     @BatchParameter(key = IS_NINTEI_CHOSA_IRAISHO, name = "認定調査依頼書")
@@ -126,7 +126,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString shujiiikenshoSakuseiIrai;
     @BatchParameter(key = SHUJIIIKENSHO, name = "意見書印刷区分")
     private RString shujiiIkensho;
-    
+
     @BatchParameter(key = SHUJIIIKENSHOSAKUSEIIRAILIST, name = "主治医意見書作成依頼リスト")
     private transient List<GridParameter> shujiiIkenshoSakuseiIraiList;
     @BatchParameter(key = IKENSHO_SAKUSEIIRAI, name = "主治医意見書作成依頼一覧表出力区分")
@@ -151,7 +151,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private boolean is主治医意見書依頼履歴一覧;
 //    @BatchParameter(key = IKENSHOIRAIRIREKIICHIRANKUBUN, name = "主治医意見書作成依頼履歴一覧出力区分")
 //    private boolean ikenshoirairirekiIchiranKubun;
-    
+
     @BatchParameter(key = IRAIFROMYMD, name = "依頼開始日")
     private RString iraiFromYMD;
     @BatchParameter(key = IRAITOYMD, name = "依頼終了日")
@@ -175,7 +175,6 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String IS_TOKKI_INPUT_TYPE = "isTokkiInputType";
     private static final String IS_GAIKYOU_TOKKI = "isGaikyouTokki";
     private static final String IS_ZENKAI_NINTEI_CHOSAHYO = "isZenkaiNinteiChosahyo";
-
 
     /**
      * 主治医意見書作成依頼発行一覧表ですためのprocessのパラメータを生成します。

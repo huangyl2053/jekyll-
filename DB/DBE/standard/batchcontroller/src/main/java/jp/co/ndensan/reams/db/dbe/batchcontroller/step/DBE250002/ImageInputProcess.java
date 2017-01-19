@@ -23,6 +23,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAccessor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.OcrTorikomiKekka;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.OcrTorikomiKekkaListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.ShinkiKoshinKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
@@ -45,13 +48,17 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
 import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 主治医意見書の読み込み処理です。
@@ -66,6 +73,8 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     private BatchPermanentTableWriter<DbT5304ShujiiIkenshoIkenItemEntity> writer_DbT5304;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5115ImageEntity> writer_DbT5115;
+
+    private OcrTorikomiKekkaListEditor kekkaListEditor;
 
     /**
      * このバッチプロセスのパラメータです。
@@ -82,9 +91,14 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void createWriter() {
-        writer_DbT5302 = new BatchPermanentTableWriter<>(DbT5302ShujiiIkenshoJohoEntity.class);
-        writer_DbT5304 = new BatchPermanentTableWriter<>(DbT5304ShujiiIkenshoIkenItemEntity.class);
-        writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
+        this.writer_DbT5302 = new BatchPermanentTableWriter<>(DbT5302ShujiiIkenshoJohoEntity.class);
+        this.writer_DbT5304 = new BatchPermanentTableWriter<>(DbT5304ShujiiIkenshoIkenItemEntity.class);
+        this.writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
+        this.kekkaListEditor = OcrTorikomiKekkaListEditor.spoolBy(new FileSpoolManager(
+                UzUDE0835SpoolOutputType.EucOther,
+                new RString(""), //TODO OtherEucEntityID
+                UzUDE0831EucAccesslogFileType.Csv)
+        );
     }
 
     @Override
@@ -119,9 +133,11 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     protected void afterExecute() {
         super.afterExecute();
         keyBreakProcess(this.key, this.cache);
+//        this.kekkaListEditor.close();
     }
 
     private void keyBreakProcess(ShinseiKey key, List<OcrIken> sameKeyValues) {
+        //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理開始">
         _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
                 .append("/* イメージ取り込み処理開始")
                 .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
@@ -130,10 +146,12 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 .append(" 処理対象レコード数：").append(this.cache.size())
                 .append("*/")
                 .toString());
+        //</editor-fold>
         //TODO 現在、ID=777, ID=778 限定の処理となっている。ID=701等を取り込む場合には検討が必要。
         if (isID777orID778()) {
-            processID777or778(key, sameKeyValues);
+            this.kekkaListEditor.writeLine(processID777or778(key, sameKeyValues));
         }
+        //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理終了">
         _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
                 .append("/* イメージ取り込み処理終了")
                 .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
@@ -141,6 +159,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 .append(" 認定申請日：").append(key.get認定申請日())
                 .append("*/")
                 .toString());
+//</editor-fold>
     }
 
     private static boolean isID777orID778() {
@@ -148,39 +167,36 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     }
 
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
-    private void processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
-        if (sameKeyValues.isEmpty() || 3 <= sameKeyValues.size()) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("処理対象データsize不正です。")
-                    .append(" size：").append(sameKeyValues.size())
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return; //TODO 不正のため、エラーリスト出力対象。
-        }
+    private OcrTorikomiKekka processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
+        OcrTorikomiKekka.Builder builder = new OcrTorikomiKekka.Builder(
+                this.processParameter.get処理日(), OCRID._777, SheetID.EMPTY, key);
         ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(
-                key.get証記載保険者番号(),
-                key.get被保険者番号(),
-                key.get認定申請日()
+                key.get証記載保険者番号(), key.get被保険者番号(), key.get認定申請日()
         );
         List<ImageinputRelate> 関連データ = ImageinputFinder.createInstance().get関連データ(param).records();
         if (関連データ.isEmpty()) {
-            /*----------------------------------------------------------------------------------*/
+            //<editor-fold defaultstate="collapsed" desc="Error: 関連データの取得に失敗しました。">
             _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("関連データの取得に失敗しました。")
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return; //TODO 不正のため、エラーリスト出力対象。
+                    .append("関連データの取得に失敗しました。").toString());
+            //</editor-fold>
+
+            return builder.error(RString.EMPTY);
+        }
+        if (sameKeyValues.isEmpty() || 3 <= sameKeyValues.size()) {
+            //<editor-fold defaultstate="collapsed" desc="Error: 処理対象データsize不正です。">
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
+                    .append("処理対象データsize不正です。").append(" size：").append(sameKeyValues.size()).toString());
+            //</editor-fold>
+            return builder.error(RString.EMPTY);
         }
         ImageinputRelate ir = 関連データ.get(0);
         if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
             /*----------------------------------------------------------------------------------*/
             _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                    .append("過去の制度です。処理をskipします。")
-                    .append(" 厚労省IF識別コード：").append(ir.get厚労省IF識別コード().getコード())
+                    .append("過去の制度です。処理をskipします。").append(" 厚労省IF識別コード：").append(ir.get厚労省IF識別コード().getコード())
                     .toString());
             /*----------------------------------------------------------------------------------*/
-            return; //TODO 不正のため、エラーリスト出力対象。
+            return builder.error(RString.EMPTY); //TODO 不正のため、エラーリスト出力対象。
         }
 
         OcrIken ocrIken = getAny_ID777優先(sameKeyValues);
@@ -197,7 +213,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                     .append("イメージのコピーに失敗しました。")
                     .toString());
             /*----------------------------------------------------------------------------------*/
-            return; //TODO 不正のため、エラーリスト出力対象。
+            return builder.error(RString.EMPTY); //TODO 不正のため、エラーリスト出力対象。
         }
 
         boolean saveSucceeds = ImageJohoUpdater.create(new FilesystemPath(tempDirectoryPath),
@@ -208,7 +224,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 OcrImageClassification.意見書_規定外_規定外ID
         ).updateBy(this.writer_DbT5115);
         if (saveSucceeds) {
-            return;
+            return builder.success(100);
         }
         //TODO 不正のため、エラーリスト出力対象。
         /*----------------------------------------------------------------------------------*/
@@ -216,6 +232,7 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
                 .append("イメージ情報の保存に失敗しました。")
                 .toString());
         /*----------------------------------------------------------------------------------*/
+        return builder.error(RString.EMPTY);
     }
 
     private OcrIken getAny_ID777優先(List<OcrIken> sameKeyValues) {

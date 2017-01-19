@@ -27,6 +27,7 @@ public class NinteichosaMainValidationHandler {
     private final NinteichosaItakusakiMainDiv div;
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -42,15 +43,27 @@ public class NinteichosaMainValidationHandler {
      *
      * @param その他機関コードFrom その他機関コードFrom
      * @param その他機関コードTo その他機関コードTo
+     * @param kikanKubun 機関の区分
+     * @param itakuKubun 調査委託区分
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForSearchShujii(RString その他機関コードFrom, RString その他機関コードTo) {
+    public ValidationMessageControlPairs validateForSearchShujii(RString その他機関コードFrom, RString その他機関コードTo, RString kikanKubun, RString itakuKubun) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString sonotaKikanCode = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
         if (その他機関コードTo.compareTo(その他機関コードFrom) < 0) {
             validPairs.add(new ValidationMessageControlPair(new NinteichosaMainValidationHandler.IdocheckMessages(
                     UrErrorMessages.大小関係が不正, String.valueOf(sonotaKikanCode)),
                     div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom()));
+        }
+        if (kikanKubun.equals(SELECTKEY_空白)) {
+            validPairs.add(new ValidationMessageControlPair(new NinteichosaMainValidationHandler.IdocheckMessages(
+                    UrErrorMessages.必須項目_追加メッセージあり, "機関の区分"),
+                    div.getChosainSearch().getDdlkikankubun()));
+        }
+        if (itakuKubun.equals(SELECTKEY_空白)) {
+            validPairs.add(new ValidationMessageControlPair(new NinteichosaMainValidationHandler.IdocheckMessages(
+                    UrErrorMessages.必須項目_追加メッセージあり, "調査委託区分"),
+                    div.getChosainSearch().getDdlitakukubun()));
         }
         return validPairs;
     }

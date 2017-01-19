@@ -38,6 +38,9 @@ public final class NinteichosaMasterMapperParameter {
     private final boolean user機関の区分;
     private final boolean user最大表示件数;
 
+    private final Integer ddlKikanMeishoKey;
+    private final Integer ddlKikanKanaMeishoKey;
+
     private NinteichosaMasterMapperParameter(
             boolean 廃止フラグ,
             ShoKisaiHokenshaNo 保険者,
@@ -55,7 +58,9 @@ public final class NinteichosaMasterMapperParameter {
             boolean user機関カナ名称,
             boolean user調査委託区分,
             boolean user機関の区分,
-            boolean user最大表示件数
+            boolean user最大表示件数,
+            RString ddlKikanMeishoKey,
+            RString ddlKikanKanaMeishoKey
     ) {
         this.廃止フラグ = 廃止フラグ;
         this.保険者 = 保険者;
@@ -74,6 +79,8 @@ public final class NinteichosaMasterMapperParameter {
         this.user調査委託区分 = user調査委託区分;
         this.user機関の区分 = user機関の区分;
         this.user最大表示件数 = user最大表示件数;
+        this.ddlKikanMeishoKey = Integer.parseInt(ddlKikanMeishoKey.toString());
+        this.ddlKikanKanaMeishoKey = Integer.parseInt(ddlKikanKanaMeishoKey.toString());
     }
 
     /**
@@ -88,6 +95,8 @@ public final class NinteichosaMasterMapperParameter {
      * @param 調査委託区分 調査委託区分
      * @param 機関の区分 機関の区分
      * @param 最大表示件数 最大表示件数
+     * @param ddlKikanMeishoKey 画面で入力した機関名称検索条件
+     * @param ddlKikanKanaMeishoKey 画面で入力した機関カナ名称検索条件
      * @return 主治医マスタ検索パラメータ
      */
     public static NinteichosaMasterMapperParameter createSelectByKeyParam(
@@ -99,7 +108,9 @@ public final class NinteichosaMasterMapperParameter {
             RString 機関カナ名称,
             RString 調査委託区分,
             RString 機関の区分,
-            Decimal 最大表示件数
+            Decimal 最大表示件数,
+            RString ddlKikanMeishoKey,
+            RString ddlKikanKanaMeishoKey
     ) {
         return new NinteichosaMasterMapperParameter(廃止フラグ,
                 保険者,
@@ -117,7 +128,9 @@ public final class NinteichosaMasterMapperParameter {
                 機関カナ名称 != null && !機関カナ名称.isEmpty(),
                 調査委託区分 != null && !調査委託区分.isEmpty(),
                 機関の区分 != null && !機関の区分.isEmpty(),
-                最大表示件数 != null
+                最大表示件数 != null,
+                ddlKikanMeishoKey,
+                ddlKikanKanaMeishoKey
         );
     }
 }

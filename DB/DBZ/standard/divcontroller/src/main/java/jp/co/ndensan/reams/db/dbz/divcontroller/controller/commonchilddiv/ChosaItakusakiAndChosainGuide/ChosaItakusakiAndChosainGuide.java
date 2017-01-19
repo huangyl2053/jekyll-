@@ -155,10 +155,10 @@ public class ChosaItakusakiAndChosainGuide {
             調査員コードFrom = div.getTxtChosainCodeFrom().getText();
             調査員コードTo = div.getTxtChosainCodeTo().getText();
         }
-        市町村コード = dataPassModel.get市町村コード();
-        if (RString.isNullOrEmpty(市町村コード)) {
+//        市町村コード = dataPassModel.get市町村コード();
+//        if (RString.isNullOrEmpty(市町村コード)) {
             市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
-        }
+//        }
         return ChosaItakusakiAndChosainGuideParameter.createParam(
                 調査委託先コードFrom,
                 調査委託先コードTo,

@@ -78,12 +78,12 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 new FlexibleDate(processParamter.getHakkobi()),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                 iraishoReportSourceWriter);
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
         文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, 帳票ID, FlexibleDate.getNowDate());
     }
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, Integer.parseInt(entity.get証記載保険者番号().toString()));
         ChosaIraishoReport report = ChosaIraishoReport.createFrom(business.setChosaIraishoHeadItem(entity, 通知文Map, ninshoshaSource, 文書番号));
         report.writeBy(iraishoReportSourceWriter);
     }

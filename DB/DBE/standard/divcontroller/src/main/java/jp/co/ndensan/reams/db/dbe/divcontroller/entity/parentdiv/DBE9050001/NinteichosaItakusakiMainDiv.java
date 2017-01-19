@@ -27,12 +27,12 @@ public class NinteichosaItakusakiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ChosainSearch")
-    private ChosainSearchDiv ChosainSearch;
     @JsonProperty("SonotaKikanichiran")
     private SonotaKikanichiranDiv SonotaKikanichiran;
     @JsonProperty("ChosaitakusakiJohoInput")
     private ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput;
+    @JsonProperty("ChosainSearch")
+    private ChosainSearchDiv ChosainSearch;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("hdnTxtSubGyomuCode")
@@ -50,24 +50,6 @@ public class NinteichosaItakusakiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getChosainSearch
-     * @return ChosainSearch
-     */
-    @JsonProperty("ChosainSearch")
-    public ChosainSearchDiv getChosainSearch() {
-        return ChosainSearch;
-    }
-
-    /*
-     * setChosainSearch
-     * @param ChosainSearch ChosainSearch
-     */
-    @JsonProperty("ChosainSearch")
-    public void setChosainSearch(ChosainSearchDiv ChosainSearch) {
-        this.ChosainSearch = ChosainSearch;
-    }
-
     /*
      * getSonotaKikanichiran
      * @return SonotaKikanichiran
@@ -102,6 +84,24 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     @JsonProperty("ChosaitakusakiJohoInput")
     public void setChosaitakusakiJohoInput(ChosaitakusakiJohoInputDiv ChosaitakusakiJohoInput) {
         this.ChosaitakusakiJohoInput = ChosaitakusakiJohoInput;
+    }
+
+    /*
+     * getChosainSearch
+     * @return ChosainSearch
+     */
+    @JsonProperty("ChosainSearch")
+    public ChosainSearchDiv getChosainSearch() {
+        return ChosainSearch;
+    }
+
+    /*
+     * setChosainSearch
+     * @param ChosainSearch ChosainSearch
+     */
+    @JsonProperty("ChosainSearch")
+    public void setChosainSearch(ChosainSearchDiv ChosainSearch) {
+        this.ChosainSearch = ChosainSearch;
     }
 
     /*
@@ -229,6 +229,16 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlKikanMeisho() {
+        return this.getChosainSearch().getDdlKikanMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKikanMeisho(DropDownList ddlKikanMeisho) {
+        this.getChosainSearch().setDdlKikanMeisho(ddlKikanMeisho);
+    }
+
+    @JsonIgnore
     public TextBoxKana getTxtSearchSonotaKikanKanaMeisho() {
         return this.getChosainSearch().getTxtSearchSonotaKikanKanaMeisho();
     }
@@ -236,6 +246,16 @@ public class NinteichosaItakusakiMainDiv extends Panel {
     @JsonIgnore
     public void  setTxtSearchSonotaKikanKanaMeisho(TextBoxKana txtSearchSonotaKikanKanaMeisho) {
         this.getChosainSearch().setTxtSearchSonotaKikanKanaMeisho(txtSearchSonotaKikanKanaMeisho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKikanKanaMeisho() {
+        return this.getChosainSearch().getDdlKikanKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
+        this.getChosainSearch().setDdlKikanKanaMeisho(ddlKikanKanaMeisho);
     }
 
     @JsonIgnore

@@ -11,12 +11,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -27,63 +26,33 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteiChosaIraiValidationHandler {
 
-    private static final RString MIWARITSUKE = new RString("未割付");
-    private static final RString 提出期限_2 = new RString("2");
+    private static final RString 未割付 = new RString("未割付");
+    private final NinteiChosaIraiDiv div;
 
     /**
-     * 割付済申請者が未指定かを検査します。
+     * コンストラクタです。
      *
-     * @param pairs 割付済申請者が未指定である場合、このクラスにバリデーションメッセージが付与される。
      * @param div 認定調査依頼Div
-     * @return 引数で受け取ったpairs
      */
-    public ValidationMessageControlPairs validate割付済申請者未指定(ValidationMessageControlPairs pairs, NinteiChosaIraiDiv div) {
-
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChosaIraiSpec.割付済申請者指定チェック)
-                .thenAdd(NinteiChosaIraiValidationMessage.割付済申請者未指定).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NinteiChosaIraiValidationMessage.割付済申請者未指定,
-                div.getDgWaritsukeZumiShinseishaIchiran())
-                .build().check(messages));
-        return pairs;
+    public NinteiChosaIraiValidationHandler(NinteiChosaIraiDiv div) {
+        this.div = div;
     }
 
     /**
-     * 割り付けた申請者が認定調査依頼未割付かを検査します。
+     * 依頼書等を印刷するボタンクリック時のバリデーションチェックです。
      *
-     * @param pairs 割り付けた申請者が認定調査依頼未割付である場合、このクラスにバリデーションメッセージが付与される。
-     * @param div 認定調査依頼Div
-     * @return 引数で受け取ったpairs
+     * @return バリデーションチェック結果
      */
-    public ValidationMessageControlPairs validate認定調査依頼未割付(ValidationMessageControlPairs pairs, NinteiChosaIraiDiv div) {
-
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChosaIraiSpec.認定調査依頼割付済チェック)
-                .thenAdd(NinteiChosaIraiValidationMessage.認定調査依頼未割付).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NinteiChosaIraiValidationMessage.認定調査依頼未割付,
-                div.getDgWaritsukeZumiShinseishaIchiran())
-                .build().check(messages));
-        return pairs;
-    }
-
-    /**
-     * 提出期限を共通日付を設定にした場合に発行日≧提出期限になっていないかを検査します。
-     *
-     * @param pairs 提出期限を共通日付を設定にした時に発行日≧提出期限になっている場合、このクラスにバリデーションメッセージが付与される。
-     * @param div 認定調査依頼Div
-     * @return 引数で受け取ったpairs
-     */
-    public ValidationMessageControlPairs validate提出期限が発行日より後(ValidationMessageControlPairs pairs, NinteiChosaIraiDiv div) {
-
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChosaIraiSpec.提出期限が発行日より後チェック)
-                .thenAdd(NinteiChosaIraiValidationMessage.提出期限が発行日以前).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                NinteiChosaIraiValidationMessage.提出期限が発行日以前,
-                div.getTxtkigenymd())
-                .build().check(messages));
+    public ValidationMessageControlPairs validate依頼書等を印刷するボタンクリック() {
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder()
+                .add(NinteiChosaIraiValidationMessage.割付済申請者未指定, div.getDgWaritsukeZumiShinseishaIchiran())
+                .add(NinteiChosaIraiValidationMessage.認定調査依頼未割付, div.getDgWaritsukeZumiShinseishaIchiran())
+                .build();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(dictionary.check(ValidateChain.validateStart(div).ifNot(NinnteiChosaIraiSpec.割付済申請者指定チェック)
+                .thenAdd(NinteiChosaIraiValidationMessage.割付済申請者未指定).messages()));
+        pairs.add(dictionary.check(ValidateChain.validateStart(div).ifNot(NinnteiChosaIraiSpec.認定調査依頼割付済チェック)
+                .thenAdd(NinteiChosaIraiValidationMessage.認定調査依頼未割付).messages()));
         return pairs;
     }
 
@@ -91,10 +60,10 @@ public class NinteiChosaIraiValidationHandler {
 
         割付済申請者指定チェック {
                     /**
-                     * 調査実施日の非空チェックです。
+                     * 割付済申請者が指定されているかのチェックです。
                      *
-                     * @param div SaiketukekaTorokuPanelDiv
-                     * @return true:調査実施日が非空です、false:調査実施日が空です。
+                     * @param div NinteiChosaIraiDiv
+                     * @return true:割付済申請者が指定されている場合　false:割付済申請者が指定されていない場合
                      */
                     @Override
                     public boolean apply(NinteiChosaIraiDiv div) {
@@ -104,42 +73,28 @@ public class NinteiChosaIraiValidationHandler {
                 },
         認定調査依頼割付済チェック {
                     /**
-                     * 調査実施日の妥当性チェックです。
+                     * 未割付の申請者が選択されていないかのチェックです。
                      *
-                     * @param div SaiketukekaTorokuPanelDiv
-                     * @return true:調査実施日が妥当です、false:調査実施日が妥当でないです。
+                     * @param div NinteiChosaIraiDiv
+                     * @return true:未割付の申請者が選択されていない場合　false:未割付の申請者が選択されている場合
                      */
                     @Override
                     public boolean apply(NinteiChosaIraiDiv div) {
                         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
                         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-                            if (MIWARITSUKE.equals(row.getJotai())) {
+                            if (未割付.equals(row.getJotai())) {
                                 return false;
                             }
                         }
                         return true;
                     }
-                },
-        提出期限が発行日より後チェック {
-                    /**
-                     * 提出期限を共通日付を設定にした場合に提出期限が発行日より後になっているかのチェックです。
-                     *
-                     * @param div NinteiChosaIraiDiv
-                     * @return true:提出期限が発行日より後になっている、false:提出期限が発行日以前になっている。
-                     */
-                    @Override
-                    public boolean apply(NinteiChosaIraiDiv div) {
-                        return !div.getRadkigen().getSelectedKey().equals(提出期限_2)
-                        || div.getTxthokkoymd().getValue().isBefore(div.getTxtkigenymd().getValue());
-                    }
-                }
+                };
     }
 
     private static enum NinteiChosaIraiValidationMessage implements IValidationMessage {
 
         割付済申請者未指定(DbeErrorMessages.割付済申請者未指定),
-        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
-        提出期限が発行日以前(DbeErrorMessages.提出期限が発行日以前);
+        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付);
         private final Message message;
 
         private NinteiChosaIraiValidationMessage(IMessageGettable message) {

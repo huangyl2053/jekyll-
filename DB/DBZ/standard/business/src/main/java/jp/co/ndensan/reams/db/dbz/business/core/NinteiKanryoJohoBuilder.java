@@ -125,7 +125,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set認定審査会割当完了年月日(FlexibleDate 認定審査会割当完了年月日) {
-        requireNonNull(認定審査会割当完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定審査会割当完了年月日"));
         entity.setNinteiShinsakaiWariateKanryoYMD(認定審査会割当完了年月日);
         return this;
     }

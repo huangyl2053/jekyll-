@@ -293,7 +293,7 @@
                 </if>
                 <if test="isIkenshoIraiKanryo and !isIkenshoIraiMiKanryo">
                     AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-                    OR (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+                    OR DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
                 </if>
                 <if test="!isIkenshoIraiKanryo and isIkenshoIraiMiKanryo">
                     AND (DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NULL
@@ -404,7 +404,9 @@
             <if test="useShishoCode">
                  AND DbT5101NinteiShinseiJoho."shishoCode" = #{shishoCode}
             </if>
-            AND DbT5101NinteiShinseiJoho."minashiNigoEtcTaishoFlag" = #{minashiNigoEtcTaishoFlag}
+            <if test="minashiNigoEtcTaishoFlag">
+                AND DbT5101NinteiShinseiJoho."minashiNigoEtcTaishoFlag" = #{minashiNigoEtcTaishoFlag}
+            </if>
             <if test="useNinteiShinseiYMDFrom">
                   AND DbT5101NinteiShinseiJoho."ninteiShinseiYMD"  <![CDATA[>=]]> #{ninteiShinseiYMDFrom}
             </if>

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaTaishoWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,12 +24,10 @@ public class ChosaTaishoWaritsukeDiv extends Panel {
      */
     @JsonProperty("WaritsukeZumiTaishosha")
     private WaritsukeZumiTaishoshaDiv WaritsukeZumiTaishosha;
-    @JsonProperty("txtChosaIraiDay")
-    private TextBoxDate txtChosaIraiDay;
-    @JsonProperty("btnWaritsuke")
-    private Button btnWaritsuke;
-    @JsonProperty("btnKaijo")
-    private Button btnKaijo;
+    @JsonProperty("btnIraishotoPrint")
+    private ButtonDialog btnIraishotoPrint;
+    @JsonProperty("ShinseishaWaritsukeKaijo")
+    private ShinseishaWaritsukeKaijoDiv ShinseishaWaritsukeKaijo;
     @JsonProperty("MiwaritsukeShinseisha")
     private MiwaritsukeShinseishaDiv MiwaritsukeShinseisha;
 
@@ -58,57 +56,39 @@ public class ChosaTaishoWaritsukeDiv extends Panel {
     }
 
     /*
-     * gettxtChosaIraiDay
-     * @return txtChosaIraiDay
+     * getbtnIraishotoPrint
+     * @return btnIraishotoPrint
      */
-    @JsonProperty("txtChosaIraiDay")
-    public TextBoxDate getTxtChosaIraiDay() {
-        return txtChosaIraiDay;
+    @JsonProperty("btnIraishotoPrint")
+    public ButtonDialog getBtnIraishotoPrint() {
+        return btnIraishotoPrint;
     }
 
     /*
-     * settxtChosaIraiDay
-     * @param txtChosaIraiDay txtChosaIraiDay
+     * setbtnIraishotoPrint
+     * @param btnIraishotoPrint btnIraishotoPrint
      */
-    @JsonProperty("txtChosaIraiDay")
-    public void setTxtChosaIraiDay(TextBoxDate txtChosaIraiDay) {
-        this.txtChosaIraiDay = txtChosaIraiDay;
+    @JsonProperty("btnIraishotoPrint")
+    public void setBtnIraishotoPrint(ButtonDialog btnIraishotoPrint) {
+        this.btnIraishotoPrint = btnIraishotoPrint;
     }
 
     /*
-     * getbtnWaritsuke
-     * @return btnWaritsuke
+     * getShinseishaWaritsukeKaijo
+     * @return ShinseishaWaritsukeKaijo
      */
-    @JsonProperty("btnWaritsuke")
-    public Button getBtnWaritsuke() {
-        return btnWaritsuke;
+    @JsonProperty("ShinseishaWaritsukeKaijo")
+    public ShinseishaWaritsukeKaijoDiv getShinseishaWaritsukeKaijo() {
+        return ShinseishaWaritsukeKaijo;
     }
 
     /*
-     * setbtnWaritsuke
-     * @param btnWaritsuke btnWaritsuke
+     * setShinseishaWaritsukeKaijo
+     * @param ShinseishaWaritsukeKaijo ShinseishaWaritsukeKaijo
      */
-    @JsonProperty("btnWaritsuke")
-    public void setBtnWaritsuke(Button btnWaritsuke) {
-        this.btnWaritsuke = btnWaritsuke;
-    }
-
-    /*
-     * getbtnKaijo
-     * @return btnKaijo
-     */
-    @JsonProperty("btnKaijo")
-    public Button getBtnKaijo() {
-        return btnKaijo;
-    }
-
-    /*
-     * setbtnKaijo
-     * @param btnKaijo btnKaijo
-     */
-    @JsonProperty("btnKaijo")
-    public void setBtnKaijo(Button btnKaijo) {
-        this.btnKaijo = btnKaijo;
+    @JsonProperty("ShinseishaWaritsukeKaijo")
+    public void setShinseishaWaritsukeKaijo(ShinseishaWaritsukeKaijoDiv ShinseishaWaritsukeKaijo) {
+        this.ShinseishaWaritsukeKaijo = ShinseishaWaritsukeKaijo;
     }
 
     /*
@@ -140,6 +120,36 @@ public class ChosaTaishoWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setDgWaritsukeZumiShinseishaIchiran(DataGrid<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran) {
         this.getWaritsukeZumiTaishosha().setDgWaritsukeZumiShinseishaIchiran(dgWaritsukeZumiShinseishaIchiran);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtChosaIraiDay() {
+        return this.getShinseishaWaritsukeKaijo().getTxtChosaIraiDay();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaIraiDay(TextBoxDate txtChosaIraiDay) {
+        this.getShinseishaWaritsukeKaijo().setTxtChosaIraiDay(txtChosaIraiDay);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsuke() {
+        return this.getShinseishaWaritsukeKaijo().getBtnWaritsuke();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsuke(Button btnWaritsuke) {
+        this.getShinseishaWaritsukeKaijo().setBtnWaritsuke(btnWaritsuke);
+    }
+
+    @JsonIgnore
+    public Button getBtnKaijo() {
+        return this.getShinseishaWaritsukeKaijo().getBtnKaijo();
+    }
+
+    @JsonIgnore
+    public void  setBtnKaijo(Button btnKaijo) {
+        this.getShinseishaWaritsukeKaijo().setBtnKaijo(btnKaijo);
     }
 
     @JsonIgnore

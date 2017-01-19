@@ -29,8 +29,9 @@ public class NinnteiChousairaiEntity {
     private RString jusho;
     private TelNo telNo;
     private LasdecCode shichosonCode;
-    private RString kikanKubun;
+    private RString chosaItakuKubun;
     private int waritsukesumiKensu;
+    private int iraiKensu;
     private RString ninteiChosainNo;
     private RString chosainShimei;
     private RString chosainKanaShimei;

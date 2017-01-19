@@ -94,19 +94,21 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
-        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setEncode(Encode.UTF_8withBOM)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
-
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+        if (CSVを出力する.equals(paramter.get帳票出力区分())) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = manager.getEucOutputDirectry();
+            eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
+            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setNewLine(NewLine.CRLF)
+                    .hasHeader(true)
+                    .build();
+        } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
+            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+        }
     }
 
     @Override
