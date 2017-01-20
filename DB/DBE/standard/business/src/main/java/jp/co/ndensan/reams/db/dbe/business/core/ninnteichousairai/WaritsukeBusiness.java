@@ -374,9 +374,7 @@ public class WaritsukeBusiness {
      * @return 調査員コード
      */
     public RString getNinteiChosainCode() {
-        return (entity.get認定調査依頼情報Entity() != null)
-                ? entity.get認定調査依頼情報Entity().getNinteiChosainCode()
-                : RString.EMPTY;
+        return entity.getNinteiChosainCode();
     }
 
     /**

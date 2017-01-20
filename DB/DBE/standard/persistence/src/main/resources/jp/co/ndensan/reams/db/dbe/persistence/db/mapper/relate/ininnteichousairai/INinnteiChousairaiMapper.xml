@@ -259,8 +259,8 @@
             dbT5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
             dbT5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiKubunCode",
             dbT5101."chikuCode" AS "chikuCode",
-            CASE WHEN dbT5101."chosaKubun" IS NOT NULL
-                THEN dbT5101."chosaKubun"
+            CASE WHEN "DbT5201NinteichosaIraiJoho"."ninteichosaIraiKubunCode" IS NOT NULL
+                THEN "DbT5201NinteichosaIraiJoho"."ninteichosaIraiKubunCode"
                 ELSE '0'
             END AS "chosaKubun",
             dbT5101."jusho" AS "jusho",
@@ -284,6 +284,7 @@
             dbT5913Zenkai."chosainShimei" AS "Temp_chosainShimei",
             dbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
             dbT5201Waritukezumi."ninteichosaIraiRirekiNo" AS "ninteichosaIraiRirekiNo",
+            "DbT5201NinteichosaIraiJoho"."ninteiChosainCode" AS "ninteiChosainCode",
             dbT5101."shoKisaiHokenshaNo" AS "hokenshaNo",
             dbT5913."shichosonCode" AS "shichosonCode",
             G."renrakusakiShimei" AS "renrakusakiShimei",
@@ -395,9 +396,9 @@
                 ON dbT5910Zenkai."shichosonCode" = dbT7051Zenkai."shichosonCode"
                    AND dbT5910Zenkai."ninteichosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
                    AND dbT5910Zenkai."jokyoFlag" = TRUE
-            LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
-                ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
-                   AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
+            LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS "DbT5201NinteichosaIraiJoho"
+                ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
+                   AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = FALSE
             LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Zenkai
                 ON dbT5911Zenkai."shujiiIryokikanCode" = dbT5101Zenkai."shujiiIryokikanCode"
                    <if test= "証記載保険者番号!=null and !証記載保険者番号.isEmpty()">
@@ -425,8 +426,8 @@
                    </if>
                    AND dbT5912Zenkai."shujiiCode" = dbT5101Zenkai."shujiiCode"
                    AND dbT5912Zenkai."jokyoFlag" = TRUE
-            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
-                ON dbT5101."shinseishoKanriNo" = DbT5105NinteiKanryoJoho."shinseishoKanriNo"
+            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS "DbT5105NinteiKanryoJoho"
+                ON dbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
             LEFT JOIN rgdb."DbT5150RenrakusakiJoho" AS G
                 ON dbT5101."shinseishoKanriNo" =  G."shinseishoKanriNo"
                    AND NOT EXISTS (
@@ -437,11 +438,11 @@
                    )
         WHERE
             dbT5913."jokyoFlag" = 'true'
-            OR (DbT5201NinteichosaIraiJoho."ninteiChosainCode" IS NULL OR DbT5201NinteichosaIraiJoho."ninteiChosainCode"  = '')
+            OR ("DbT5201NinteichosaIraiJoho"."ninteiChosainCode" IS NULL OR "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"  = '')
         ORDER BY
             dbT5101."ninteiChosaItakusakiCode",
             dbT5101."ninteiChosainCode",
-            DbT5201NinteichosaIraiJoho."iraishoShutsuryokuYMD"
+            "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD"
     </select>
 
     <resultMap id="result_WaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity">

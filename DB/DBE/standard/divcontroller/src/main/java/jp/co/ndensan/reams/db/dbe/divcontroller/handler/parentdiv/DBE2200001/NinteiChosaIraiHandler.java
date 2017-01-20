@@ -23,9 +23,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -227,7 +227,7 @@ public class NinteiChosaIraiHandler {
             row.setZenkaiChosaItakusaki(nullToEmpty(未割付申請者.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(未割付申請者.getTemp_chosainShimei()));
             row.setHokensha(nullToEmpty(hokenshaName));
-            row.setChosaKubun(ChosaKubun.toValue(未割付申請者.getChosaKubun().value()).get名称());
+            row.setChosaKubun(NinteiChousaIraiKubunCode.toValue(未割付申請者.getChosaKubun().value()).get名称());
             if (未割付申請者.getJusho() != null) {
                 row.setJusho(未割付申請者.getJusho().value());
             }
@@ -369,7 +369,7 @@ public class NinteiChosaIraiHandler {
             if (割付済み申請者.getNinteichosaIraiYMD() != null && !割付済み申請者.getNinteichosaIraiYMD().isEmpty()) {
                 row.setChosaIraiDay(割付済み申請者.getNinteichosaIraiYMD().wareki().toDateString());
             }
-            row.setChosaKubun(ChosaKubun.toValue(割付済み申請者.getChosaKubun().value()).get名称());
+            row.setChosaKubun(NinteiChousaIraiKubunCode.toValue(割付済み申請者.getChosaKubun().value()).get名称());
             row.setHokensha(nullToEmpty(hokenshaName));
             if (割付済み申請者.getJusho() != null) {
                 row.setJusho(割付済み申請者.getJusho().value());

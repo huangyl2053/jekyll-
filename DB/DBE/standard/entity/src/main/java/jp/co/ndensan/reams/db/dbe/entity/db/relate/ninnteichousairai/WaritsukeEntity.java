@@ -60,6 +60,7 @@ public class WaritsukeEntity {
     private RString temp_chosainShimei;
     private RString shinseishoKanriNo;
     private int ninteichosaIraiRirekiNo;
+    private RString ninteiChosainCode;
     private RString hokenshaNo;
     private RString shichosonCode;
     private RString renrakusakiTuzukigara;
