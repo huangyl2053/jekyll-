@@ -8,14 +8,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 要介護認定外部データ出力履歴テーブルのエンティティクラスです。
  */
 public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity extends DbTableEntityBase<DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7204YokaigoNinteiGaibuDataOutputHistory");
 
@@ -29,8 +31,8 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity extends DbTableEnt
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private Code dataKubun;
-    private YMDHM dataOutputKaishiYMDHM;
-    private YMDHM dataOutputShuryoYMDHM;
+    private YMDHMS dataOutputKaishiYMDHMS;
+    private YMDHMS dataOutputShuryoYMDHMS;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -79,68 +81,70 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity extends DbTableEnt
     }
 
     /**
-     * データ区分のgetメソッドです。
+     * 外部出力データ区分のgetメソッドです。
      * <br/>
-     * <br/>1:申請情報、2:４マスタ、3:資格喪失(死亡)情報
+     * <br/>Enum（DBE：外部出力データ区分）1:申請情報、2:４マスタ、3:資格喪失(死亡)情報
      * 
-     * @return データ区分
+     * @return 外部出力データ区分
      */
     public Code getDataKubun() {
         return dataKubun;
     }
 
     /**
-     * データ区分のsetメソッドです。
+     * 外部出力データ区分のsetメソッドです。
      * <br/>
-     * <br/>1:申請情報、2:４マスタ、3:資格喪失(死亡)情報
+     * <br/>Enum（DBE：外部出力データ区分）1:申請情報、2:４マスタ、3:資格喪失(死亡)情報
      * 
-     * @param dataKubun データ区分
+     * @param dataKubun 外部出力データ区分
      */
-    public void setDataKubun(Code dataKubun) {
+    public void setDataKubun(@Nonnull Code dataKubun) {
         this.dataKubun = dataKubun;
     }
 
     /**
-     * データ出力開始年月日時分のgetメソッドです。
+     * データ出力開始年月日時分秒のgetメソッドです。
      * 
-     * @return データ出力開始年月日時分
+     * @return データ出力開始年月日時分秒
      */
-    public YMDHM getDataOutputKaishiYMDHM() {
-        return dataOutputKaishiYMDHM;
+    @CheckForNull
+    public YMDHMS getDataOutputKaishiYMDHMS() {
+        return dataOutputKaishiYMDHMS;
     }
 
     /**
-     * データ出力開始年月日時分のsetメソッドです。
+     * データ出力開始年月日時分秒のsetメソッドです。
      * 
-     * @param dataOutputKaishiYMDHM データ出力開始年月日時分
+     * @param dataOutputKaishiYMDHMS データ出力開始年月日時分秒
      */
-    public void setDataOutputKaishiYMDHM(YMDHM dataOutputKaishiYMDHM) {
-        this.dataOutputKaishiYMDHM = dataOutputKaishiYMDHM;
+    public void setDataOutputKaishiYMDHMS(YMDHMS dataOutputKaishiYMDHMS) {
+        this.dataOutputKaishiYMDHMS = dataOutputKaishiYMDHMS;
     }
 
     /**
-     * データ出力終了年月日時分のgetメソッドです。
+     * データ出力終了年月日時分秒のgetメソッドです。
      * 
-     * @return データ出力終了年月日時分
+     * @return データ出力終了年月日時分秒
      */
-    public YMDHM getDataOutputShuryoYMDHM() {
-        return dataOutputShuryoYMDHM;
+    @CheckForNull
+    public YMDHMS getDataOutputShuryoYMDHMS() {
+        return dataOutputShuryoYMDHMS;
     }
 
     /**
-     * データ出力終了年月日時分のsetメソッドです。
+     * データ出力終了年月日時分秒のsetメソッドです。
      * 
-     * @param dataOutputShuryoYMDHM データ出力終了年月日時分
+     * @param dataOutputShuryoYMDHMS データ出力終了年月日時分秒
      */
-    public void setDataOutputShuryoYMDHM(YMDHM dataOutputShuryoYMDHM) {
-        this.dataOutputShuryoYMDHM = dataOutputShuryoYMDHM;
+    public void setDataOutputShuryoYMDHMS(YMDHMS dataOutputShuryoYMDHMS) {
+        this.dataOutputShuryoYMDHMS = dataOutputShuryoYMDHMS;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -160,8 +164,8 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity extends DbTableEnt
     @Override
     public void shallowCopy(DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity entity) {
         this.dataKubun = entity.dataKubun;
-        this.dataOutputKaishiYMDHM = entity.dataOutputKaishiYMDHM;
-        this.dataOutputShuryoYMDHM = entity.dataOutputShuryoYMDHM;
+        this.dataOutputKaishiYMDHMS = entity.dataOutputKaishiYMDHMS;
+        this.dataOutputShuryoYMDHMS = entity.dataOutputShuryoYMDHMS;
     }
 
     /**
@@ -170,8 +174,9 @@ public class DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity extends DbTableEnt
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(dataKubun, dataOutputKaishiYMDHM, dataOutputShuryoYMDHM);
+        return super.toMd5(dataKubun, dataOutputKaishiYMDHMS, dataOutputShuryoYMDHMS);
     }
 
 // </editor-fold>
+
 }

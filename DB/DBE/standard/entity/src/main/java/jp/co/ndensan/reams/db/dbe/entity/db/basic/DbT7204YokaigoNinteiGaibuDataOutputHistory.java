@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定外部データ出力履歴テーブルの項目定義クラスです。
  */
 public enum DbT7204YokaigoNinteiGaibuDataOutputHistory implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -40,18 +40,18 @@ public enum DbT7204YokaigoNinteiGaibuDataOutputHistory implements IColumnDefinit
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * データ区分
-     * <br/>1:申請情報、2:４マスタ、3:資格喪失(死亡)情報
+     * 外部出力データ区分
+     * <br/>Enum（DBE：外部出力データ区分）1:申請情報、2:４マスタ、3:資格喪失(死亡)情報
      */
     dataKubun(2147483647, 0),
     /**
-     * データ出力開始年月日時分
+     * データ出力開始年月日時分秒
      */
-    dataOutputKaishiYMDHM(2147483647, 0),
+    dataOutputKaishiYMDHMS(2147483647, 0),
     /**
-     * データ出力終了年月日時分
+     * データ出力終了年月日時分秒
      */
-    dataOutputShuryoYMDHM(2147483647, 0);
+    dataOutputShuryoYMDHMS(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
