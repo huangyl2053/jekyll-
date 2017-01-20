@@ -72,9 +72,9 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     private RString 導入団体コード;
     private RString 市町村名;
 
-    @BatchWriter
-    private BatchReportWriter<IkenshoJissekiIchiranReportSource> batchWrite;
-    private ReportSourceWriter<IkenshoJissekiIchiranReportSource> reportSourceWriter;
+//    @BatchWriter
+//    private BatchReportWriter<IkenshoJissekiIchiranReportSource> batchWrite;
+//    private ReportSourceWriter<IkenshoJissekiIchiranReportSource> reportSourceWriter;
 
     @BatchWriter
     private CsvWriter<IIkenshoJissekiIchiranCsvEucEntity> csvWriter;
@@ -106,8 +106,8 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
                     .hasHeader(true)
                     .build();
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
-            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
-            reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+//            batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+//            reportSourceWriter = new ReportSourceWriter<>(batchWrite);
         }
     }
 
@@ -118,8 +118,8 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
             IIkenshoJissekiIchiranCsvEucEntity entity = new IkenshoJissekiIchiranEntity(relateEntity);
             csvWriter.writeLine(entity);
         } else if (集計表を発行する.equals(paramter.get帳票出力区分())) {
-            IkenshoJissekiIchiranReport report = new IkenshoJissekiIchiranReport(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
-            report.writeBy(reportSourceWriter);
+//            IkenshoJissekiIchiranReport report = new IkenshoJissekiIchiranReport(IkenshoJissekiIchiranChange.createSyohyoData(relateEntity));
+//            report.writeBy(reportSourceWriter);
         }
     }
 
@@ -135,19 +135,19 @@ public class IkenshoJissekiIchiranProcess extends BatchProcessBase<IkenshoJissek
     }
 
     private void 帳票バッチ出力条件リストの出力() {
-        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
-        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
-        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE601001.getReportName();
-        RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
-        RString csv出力有無 = なし;
-        RString csvファイル名 = なし;
-        List<RString> 出力条件 = get出力条件();
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE601001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
-                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
-        printer.print();
+//        RStringBuilder ジョブ番号_Tmp = new RStringBuilder();
+//        ジョブ番号_Tmp.append(JobContextHolder.getJobId());
+//        RString ジョブ番号 = ジョブ番号_Tmp.toRString();
+//        RString 帳票名 = ReportIdDBE.DBE601001.getReportName();
+//        RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
+//        RString csv出力有無 = なし;
+//        RString csvファイル名 = なし;
+//        List<RString> 出力条件 = get出力条件();
+//        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
+//                ReportIdDBE.DBE601001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+//                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
+//        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
+//        printer.print();
     }
 
     private void バッチ出力条件リストの出力() {
