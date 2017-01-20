@@ -95,6 +95,8 @@ public class NinteichosaHoshuCsvProcess extends BatchProcessBase<NinteiChosaHosh
         調査依頼日To.append(toWareki(parameter.get調査依頼日終了()));
         RStringBuilder 保険者_SB = new RStringBuilder(new RString("【保険者】"));
         保険者_SB.append(parameter.get保険者());
+        保険者_SB.append(new RString(" "));
+        保険者_SB.append(parameter.get保険者名());
         出力条件.add(調査依頼日FROM.toRString());
         出力条件.add(調査依頼日To.toRString());
         出力条件.add(保険者_SB.toRString());

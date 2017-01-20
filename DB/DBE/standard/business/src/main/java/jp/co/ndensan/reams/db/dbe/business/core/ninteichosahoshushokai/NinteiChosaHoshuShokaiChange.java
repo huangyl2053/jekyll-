@@ -151,7 +151,7 @@ public final class NinteiChosaHoshuShokaiChange {
                 entity.get被保険者番号(),
                 entity.get被保険者氏名().getColumnValue(),
                 在宅_新, 在宅_継, 施設_新, 施設_継,
-                DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get認定調査委託料()), 0).concat("円"));
+                new RString(entity.get認定調査委託料()));
         return data;
     }
 }

@@ -29,6 +29,7 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
     private static final String KEY_ENTITY = "キー情報Entityリスト";
     private static final long serialVersionUID = 1L;
     private static final String HOKENSYA = "hokensya";
+    private static final String HOKENSYANAME = "hokensyaName";
     private static final String ISKOIKI = "isKoiki";
     private static final String KOIKI_SHICHOSONNAME = "広域_市町村名";
 
@@ -42,6 +43,8 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
     private RString 調査依頼日終了;
     @BatchParameter(key = HOKENSYA, name = "保険者")
     private RString hokensya;
+    @BatchParameter(key = HOKENSYANAME,name = "保険者名")
+    private RString hokenshaName;
     @BatchParameter(key = ISKOIKI, name = "isKoiki")
     private boolean isKoiki;
     @BatchParameter(key = KOIKI_SHICHOSONNAME, name = "広域_市町村名")
@@ -61,16 +64,18 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
      * @param 調査依頼日開始 調査依頼日開始
      * @param 調査依頼日終了 調査依頼日終了
      * @param 保険者 保険者
+     * @param 保険者名 保険者名
      * @param is広域 広域フラグ
      * @param 広域_市町村名 広域_市町村名
      */
     public DBE601005_NinteichosaHoshuParameter(RString 帳票出力区分, List<NinteiChosaHoshuShokaiFlowBusiness> 情報リスト,
-            RString 調査依頼日開始, RString 調査依頼日終了, RString 保険者, boolean is広域, RString 広域_市町村名) {
+            RString 調査依頼日開始, RString 調査依頼日終了, RString 保険者, RString 保険者名, boolean is広域, RString 広域_市町村名) {
         this.帳票出力区分 = 帳票出力区分;
         this.情報リスト = 情報リスト;
         this.調査依頼日開始 = 調査依頼日開始;
         this.調査依頼日終了 = 調査依頼日終了;
         this.hokensya = 保険者;
+        this.hokenshaName = 保険者名;
         this.isKoiki = is広域;
         this.広域_市町村名 = 広域_市町村名;
     }
@@ -81,6 +86,6 @@ public final class DBE601005_NinteichosaHoshuParameter extends BatchParameterBas
      * @return 認定調査報酬照会のProcessParameter
      */
     public NinteiChosaHoshuShokaiProcessParameter toProcessParamter() {
-        return new NinteiChosaHoshuShokaiProcessParameter(帳票出力区分, 調査依頼日開始, 調査依頼日終了, 情報リスト, hokensya, isKoiki, 広域_市町村名);
+        return new NinteiChosaHoshuShokaiProcessParameter(帳票出力区分, 調査依頼日開始, 調査依頼日終了, 情報リスト, hokensya, hokenshaName, isKoiki, 広域_市町村名);
     }
 }
