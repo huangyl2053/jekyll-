@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
@@ -446,7 +447,7 @@ public class NinteiChosaIrai {
                 } else {
                     認定調査期限年月日 = 認定申請日.plusDay(Integer.parseInt(認定調査期限日数.toString()));
                 }
-                if (ChosaKubun.新規調査.get名称().equals(row.getChosaKubun())) {
+                if (NinteiChousaIraiKubunCode.初回.get名称().equals(row.getChosaKubun())) {
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
                     ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
@@ -461,7 +462,7 @@ public class NinteiChosaIrai {
                             .build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                     update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード, row, ChosaKubun.新規調査);
-                } else if (ChosaKubun.再調査.get名称().equals(row.getChosaKubun())) {
+                } else {
                     認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()) + 1;
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
                     ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
