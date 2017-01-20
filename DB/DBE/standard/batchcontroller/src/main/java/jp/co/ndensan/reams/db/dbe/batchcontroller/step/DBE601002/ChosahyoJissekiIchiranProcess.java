@@ -73,9 +73,9 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
     private RString 導入団体コード;
     private RString 市町村名;
 
-    @BatchWriter
-    private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
-    private ReportSourceWriter<ChosahyoJissekiIchiranReportSource> reportSourceWriter;
+//    @BatchWriter
+//    private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
+//    private ReportSourceWriter<ChosahyoJissekiIchiranReportSource> reportSourceWriter;
 
     @BatchWriter
     private CsvWriter<IChosahyoJissekiIchiranCsvEucEntity> csvWriter;
@@ -95,8 +95,8 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         if (CSVを出力する.equals(paramter.get帳票出力区分())) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = manager.getEucOutputDirectry();
             eucFilePath = Path.combinePath(spoolWorkPath, CSV_NAME);
             csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
