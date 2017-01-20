@@ -44,7 +44,8 @@ public class NinteichosaIraiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteichosaIraiJohoManager}のインスタンス
      */
     public static NinteichosaIraiJohoManager createInstance() {
         return InstanceProvider.create(NinteichosaIraiJohoManager.class);
@@ -104,5 +105,21 @@ public class NinteichosaIraiJohoManager {
             return false;
         }
         return 1 == dac.save(認定調査依頼情報.toEntity());
+    }
+
+    /**
+     * 認定調査依頼情報{@link NinteichosaIraiJoho}を保存します。<br/>
+     * 削除の場合は物理削除します。
+     *
+     * @param 認定調査依頼情報 {@link NinteichosaIraiJoho}
+     * @return 更新したかどうか
+     */
+    @Transaction
+    public boolean saveOrDeletePhysical(NinteichosaIraiJoho 認定調査依頼情報) {
+        requireNonNull(認定調査依頼情報, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼情報"));
+        if (!認定調査依頼情報.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDeletePhysical(認定調査依頼情報.toEntity());
     }
 }
