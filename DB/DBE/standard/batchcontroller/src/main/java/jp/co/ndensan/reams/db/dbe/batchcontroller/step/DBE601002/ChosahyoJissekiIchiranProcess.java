@@ -73,9 +73,9 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
     private RString 導入団体コード;
     private RString 市町村名;
 
-//    @BatchWriter
-//    private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
-//    private ReportSourceWriter<ChosahyoJissekiIchiranReportSource> reportSourceWriter;
+    @BatchWriter
+    private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
+    private ReportSourceWriter<ChosahyoJissekiIchiranReportSource> reportSourceWriter;
 
     @BatchWriter
     private CsvWriter<IChosahyoJissekiIchiranCsvEucEntity> csvWriter;
