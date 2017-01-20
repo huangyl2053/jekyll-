@@ -8,6 +8,9 @@ jutakuKaishuJigyoshaMeisho,UDD042AtenaMeisho,AtenaMeisho,,,,,介護住宅改修�
 riyushoSakuseiKensu,numeric,Decimal,,,,,介護住宅改修理由書作成件数,A
 riyushoSakuseiTanka,numeric,Decimal,,,,,介護住宅改修理由書作成単価,A
 riyushoSakuseiSeikyuKingaku,numeric,Decimal,,,,,介護住宅改修理由書作成請求金額,A
+seikyuJohoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,請求情報作成年月日,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,申請年月日,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
 shikibetsuNo,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
 shiharaiHohoKubun,varchar,RString,,,,,介護支払方法区分,A
 kinyuKikanCode,text,RString,,,,,金融機関コード,A
@@ -16,3 +19,4 @@ kozaShubetsu,bpchar,RString,,,,,口座種別,A
 kozaNo,bpchar,RString,,,,,口座番号,A
 kozaMeiginin,text,RString,,,,,口座名義人,A
 kozaMeigininKana,text,RString,,,,,口座名義人カナ,A
+kozaID,int8,long,,,,,口座ID,A

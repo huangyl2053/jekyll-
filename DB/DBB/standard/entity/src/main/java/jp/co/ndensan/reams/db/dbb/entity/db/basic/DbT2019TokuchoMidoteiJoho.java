@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> バッチの通知書一括発行のリアル発行された通知書を除外する考慮のため、リアル発行の履歴を通知書番号単位で管理する。
  */
 public enum DbT2019TokuchoMidoteiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */

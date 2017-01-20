@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
  * <br/> バッチの通知書一括発行のリアル発行された通知書を除外する考慮のため、リアル発行の履歴を通知書番号単位で管理する。
  */
 public class DbT2019TokuchoMidoteiJohoEntity extends DbTableEntityBase<DbT2019TokuchoMidoteiJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2019TokuchoMidoteiJoho");
 
@@ -38,7 +38,6 @@ public class DbT2019TokuchoMidoteiJohoEntity extends DbTableEntityBase<DbT2019To
     private RString nenkinCode;
     @PrimaryKey
     private RString hosokuM;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     private RString kaishiM;
     private RString fuichiRiyuCode;
@@ -167,6 +166,7 @@ public class DbT2019TokuchoMidoteiJohoEntity extends DbTableEntityBase<DbT2019To
      * 
      * @return 識別コード
      */
+    @CheckForNull
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
@@ -176,7 +176,7 @@ public class DbT2019TokuchoMidoteiJohoEntity extends DbTableEntityBase<DbT2019To
      * 
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
@@ -265,9 +265,6 @@ public class DbT2019TokuchoMidoteiJohoEntity extends DbTableEntityBase<DbT2019To
         if (!Objects.equals(this.hosokuM, other.hosokuM)) {
             return false;
         }
-        if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
-            return false;
-        }
         return true;
     }
 
@@ -296,5 +293,7 @@ public class DbT2019TokuchoMidoteiJohoEntity extends DbTableEntityBase<DbT2019To
     }
 
 // </editor-fold>
+
+
 
 }

@@ -1,18 +1,18 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**
  * 住宅改修理由書作成手数料請求決定テーブルのエンティティクラスです。
@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntityBase<DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3094JutakuKaishuRiyushoTesuryoKettei");
 
@@ -34,7 +33,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private JigyoshaNo riyushoSakuseiJigyoshaNo;
     @PrimaryKey
@@ -47,12 +46,10 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     private FlexibleDate tesuryoShiharaiYoteiYMD;
     private FlexibleDate ketteiTsuchiSakuseiYMD;
     private FlexibleDate furikomiTsuchiSakuseiYMD;
-//    private FlexibleYearMonth uketoriYM;
-//    private long kozaID;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -61,7 +58,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -70,7 +67,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -79,16 +76,17 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -96,8 +94,26 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     }
 
     /**
+     * 証記載保険者番号のgetメソッドです。
+     * 
+     * @return 証記載保険者番号
+     */
+    public HokenshaNo getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
+    }
+
+    /**
+     * 証記載保険者番号のsetメソッドです。
+     * 
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     */
+    public void setShoKisaiHokenshaNo(@Nonnull HokenshaNo shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    }
+
+    /**
      * 介護住宅改修理由書作成事業者番号のgetメソッドです。
-     *
+     * 
      * @return 介護住宅改修理由書作成事業者番号
      */
     public JigyoshaNo getRiyushoSakuseiJigyoshaNo() {
@@ -106,7 +122,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 介護住宅改修理由書作成事業者番号のsetメソッドです。
-     *
+     * 
      * @param riyushoSakuseiJigyoshaNo 介護住宅改修理由書作成事業者番号
      */
     public void setRiyushoSakuseiJigyoshaNo(@Nonnull JigyoshaNo riyushoSakuseiJigyoshaNo) {
@@ -114,26 +130,28 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     }
 
     /**
-     * 証記載保険者番号のgetメソッドです。
-     *
-     * @return 証記載保険者番号
+     * 集計関連付け番号のgetメソッドです。
+     * 
+     * @return 集計関連付け番号
      */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
+    public RString getShukeiNo() {
+        return shukeiNo;
     }
 
     /**
-     * 証記載保険者番号のsetメソッドです。
-     *
-     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * 集計関連付け番号のsetメソッドです。
+     * 
+     * @param shukeiNo 集計関連付け番号
      */
-    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    public void setShukeiNo(@Nonnull RString shukeiNo) {
+        this.shukeiNo = shukeiNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * <br/>
+     * <br/>処理の仕組み上、常に1
+     * 
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -142,7 +160,9 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * <br/>
+     * <br/>処理の仕組み上、常に1
+     * 
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -151,7 +171,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 支給・不支給決定年月日のgetメソッドです。
-     *
+     * 
      * @return 支給・不支給決定年月日
      */
     @CheckForNull
@@ -161,7 +181,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 支給・不支給決定年月日のsetメソッドです。
-     *
+     * 
      * @param shikyu_FushikyuKetteiYMD 支給・不支給決定年月日
      */
     public void setShikyu_FushikyuKetteiYMD(FlexibleDate shikyu_FushikyuKetteiYMD) {
@@ -170,7 +190,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 支給・不支給区分のgetメソッドです。
-     *
+     * 
      * @return 支給・不支給区分
      */
     @CheckForNull
@@ -180,7 +200,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 支給・不支給区分のsetメソッドです。
-     *
+     * 
      * @param shikyu_FushikyuKubun 支給・不支給区分
      */
     public void setShikyu_FushikyuKubun(RString shikyu_FushikyuKubun) {
@@ -189,7 +209,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 償還不支給理由等のgetメソッドです。
-     *
+     * 
      * @return 償還不支給理由等
      */
     @CheckForNull
@@ -199,7 +219,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 償還不支給理由等のsetメソッドです。
-     *
+     * 
      * @param fushikyuRiyu 償還不支給理由等
      */
     public void setFushikyuRiyu(RString fushikyuRiyu) {
@@ -208,7 +228,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 住宅改修理由書作成手数料支払予定日のgetメソッドです。
-     *
+     * 
      * @return 住宅改修理由書作成手数料支払予定日
      */
     @CheckForNull
@@ -218,7 +238,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 住宅改修理由書作成手数料支払予定日のsetメソッドです。
-     *
+     * 
      * @param tesuryoShiharaiYoteiYMD 住宅改修理由書作成手数料支払予定日
      */
     public void setTesuryoShiharaiYoteiYMD(FlexibleDate tesuryoShiharaiYoteiYMD) {
@@ -226,31 +246,8 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     }
 
     /**
-     * 集計関連付け番号のgetメソッドです。
-     * <br/>
-     * <br/>連番
-     *
-     * @return 集計関連付け番号
-     */
-    @CheckForNull
-    public RString getShukeiNo() {
-        return shukeiNo;
-    }
-
-    /**
-     * 集計関連付け番号のsetメソッドです。
-     * <br/>
-     * <br/>連番
-     *
-     * @param shukeiNo 集計関連付け番号
-     */
-    public void setShukeiNo(RString shukeiNo) {
-        this.shukeiNo = shukeiNo;
-    }
-
-    /**
      * 決定通知書作成年月日のgetメソッドです。
-     *
+     * 
      * @return 決定通知書作成年月日
      */
     @CheckForNull
@@ -260,7 +257,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 決定通知書作成年月日のsetメソッドです。
-     *
+     * 
      * @param ketteiTsuchiSakuseiYMD 決定通知書作成年月日
      */
     public void setKetteiTsuchiSakuseiYMD(FlexibleDate ketteiTsuchiSakuseiYMD) {
@@ -269,7 +266,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 振込通知書作成年月日のgetメソッドです。
-     *
+     * 
      * @return 振込通知書作成年月日
      */
     @CheckForNull
@@ -279,7 +276,7 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
 
     /**
      * 振込通知書作成年月日のsetメソッドです。
-     *
+     * 
      * @param furikomiTsuchiSakuseiYMD 振込通知書作成年月日
      */
     public void setFurikomiTsuchiSakuseiYMD(FlexibleDate furikomiTsuchiSakuseiYMD) {
@@ -287,60 +284,27 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
     }
 
     /**
-     * 受取年月のgetメソッドです。
-     *
-     * @return 受取年月
-     */
-//    @CheckForNull
-//    public FlexibleYearMonth getUketoriYM() {
-//        return uketoriYM;
-//    }
-    /**
-     * 受取年月のsetメソッドです。
-     *
-     * @param uketoriYM 受取年月
-     */
-//    public void setUketoriYM(FlexibleYearMonth uketoriYM) {
-//        this.uketoriYM = uketoriYM;
-//    }
-    /**
-     * 口座IDのgetメソッドです。
-     *
-     * @return 口座ID
-     */
-//    @CheckForNull
-//    public long getKozaID() {
-//        return kozaID;
-//    }
-    /**
-     * 口座IDのsetメソッドです。
-     *
-     * @param kozaID 口座ID
-     */
-//    public void setKozaID(long kozaID) {
-//        this.kozaID = kozaID;
-//    }
-    /**
      * このエンティティの主キーが他の{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity other) {
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.riyushoSakuseiJigyoshaNo, other.riyushoSakuseiJigyoshaNo)) {
-            return false;
-        }
         if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
             return false;
         }
-        if (this.rirekiNo != other.rirekiNo) {
+        if (!Objects.equals(this.riyushoSakuseiJigyoshaNo, other.riyushoSakuseiJigyoshaNo)) {
             return false;
         }
-        if (this.shukeiNo != other.shukeiNo) {
+        if (!Objects.equals(this.shukeiNo, other.shukeiNo)) {
+            return false;
+        }
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -351,29 +315,28 @@ public class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity extends DbTableEntity
      */
     @Override
     public void shallowCopy(DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity entity) {
-        this.riyushoSakuseiJigyoshaNo = entity.riyushoSakuseiJigyoshaNo;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
+        this.riyushoSakuseiJigyoshaNo = entity.riyushoSakuseiJigyoshaNo;
+        this.shukeiNo = entity.shukeiNo;
         this.rirekiNo = entity.rirekiNo;
         this.shikyu_FushikyuKetteiYMD = entity.shikyu_FushikyuKetteiYMD;
         this.shikyu_FushikyuKubun = entity.shikyu_FushikyuKubun;
         this.fushikyuRiyu = entity.fushikyuRiyu;
         this.tesuryoShiharaiYoteiYMD = entity.tesuryoShiharaiYoteiYMD;
-        this.shukeiNo = entity.shukeiNo;
         this.ketteiTsuchiSakuseiYMD = entity.ketteiTsuchiSakuseiYMD;
         this.furikomiTsuchiSakuseiYMD = entity.furikomiTsuchiSakuseiYMD;
-//        this.uketoriYM = entity.uketoriYM;
-//        this.kozaID = entity.kozaID;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(riyushoSakuseiJigyoshaNo, shoKisaiHokenshaNo, rirekiNo, shikyu_FushikyuKetteiYMD, shikyu_FushikyuKubun, fushikyuRiyu, tesuryoShiharaiYoteiYMD, shukeiNo, ketteiTsuchiSakuseiYMD, furikomiTsuchiSakuseiYMD);
+        return super.toMd5(shoKisaiHokenshaNo, riyushoSakuseiJigyoshaNo, shukeiNo, rirekiNo, shikyu_FushikyuKetteiYMD, shikyu_FushikyuKubun, fushikyuRiyu, tesuryoShiharaiYoteiYMD, ketteiTsuchiSakuseiYMD, furikomiTsuchiSakuseiYMD);
     }
 
 // </editor-fold>
+
+
 }

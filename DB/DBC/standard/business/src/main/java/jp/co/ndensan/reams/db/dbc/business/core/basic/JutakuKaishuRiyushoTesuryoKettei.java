@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -40,7 +40,7 @@ public class JutakuKaishuRiyushoTesuryoKettei
      * @param 履歴番号 履歴番号
      */
     public JutakuKaishuRiyushoTesuryoKettei(
-            ShoKisaiHokenshaNo 証記載保険者番号,
+            HokenshaNo 証記載保険者番号,
             JigyoshaNo 介護住宅改修理由書作成事業者番号,
             RString 集計関連付け番号,
             Decimal 履歴番号) {

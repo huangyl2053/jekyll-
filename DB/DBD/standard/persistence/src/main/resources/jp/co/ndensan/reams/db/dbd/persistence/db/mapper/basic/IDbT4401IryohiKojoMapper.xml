@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4401IryohiKojoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4401IryohiKojoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4401IryohiKojo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4401IryohiKojoMapper.allColumns_DbT4401IryohiKojo" />
+     FROM
+         rgdb."DbT4401IryohiKojo"
+     WHERE
+         rgdb."DbT4401IryohiKojo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4401IryohiKojo">
+         "DbT4401IryohiKojo"."hihokenshaNo" as "dbT4401IryohiKojo_hihokenshaNo",
+         "DbT4401IryohiKojo"."kojoTaishoNen" as "dbT4401IryohiKojo_kojoTaishoNen",
+         "DbT4401IryohiKojo"."dataKubun" as "dbT4401IryohiKojo_dataKubun",
+         "DbT4401IryohiKojo"."insertDantaiCd" as "dbT4401IryohiKojo_insertDantaiCd",
+         "DbT4401IryohiKojo"."insertTimestamp" as "dbT4401IryohiKojo_insertTimestamp",
+         "DbT4401IryohiKojo"."insertReamsLoginId" as "dbT4401IryohiKojo_insertReamsLoginId",
+         "DbT4401IryohiKojo"."insertContextId" as "dbT4401IryohiKojo_insertContextId",
+         "DbT4401IryohiKojo"."isDeleted" as "dbT4401IryohiKojo_isDeleted",
+         "DbT4401IryohiKojo"."updateCount" as "dbT4401IryohiKojo_updateCount",
+         "DbT4401IryohiKojo"."lastUpdateTimestamp" as "dbT4401IryohiKojo_lastUpdateTimestamp",
+         "DbT4401IryohiKojo"."lastUpdateReamsLoginId" as "dbT4401IryohiKojo_lastUpdateReamsLoginId",
+         "DbT4401IryohiKojo"."torokuYMD" as "dbT4401IryohiKojo_torokuYMD",
+         "DbT4401IryohiKojo"."shinseiYMD" as "dbT4401IryohiKojo_shinseiYMD",
+         "DbT4401IryohiKojo"."ninteiYukoKikanKaishiYMD" as "dbT4401IryohiKojo_ninteiYukoKikanKaishiYMD",
+         "DbT4401IryohiKojo"."ninteiYukoKikanShuryoYMD" as "dbT4401IryohiKojo_ninteiYukoKikanShuryoYMD",
+         "DbT4401IryohiKojo"."shujiiIkenshoJuryoYMD" as "dbT4401IryohiKojo_shujiiIkenshoJuryoYMD",
+         "DbT4401IryohiKojo"."nichijoSeikatsuJiritsudo" as "dbT4401IryohiKojo_nichijoSeikatsuJiritsudo",
+         "DbT4401IryohiKojo"."nyoshikkinHassei" as "dbT4401IryohiKojo_nyoshikkinHassei",
+         "DbT4401IryohiKojo"."hakkoYMD" as "dbT4401IryohiKojo_hakkoYMD",
+         "DbT4401IryohiKojo"."logicalDeletedFlag" as "dbT4401IryohiKojo_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbT4401IryohiKojoの項目をDbT4401IryohiKojoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4401IryohiKojoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4401IryohiKojoEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT4401IryohiKojo_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="kojoTaishoNen" column="dbT4401IryohiKojo_kojoTaishoNen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="dataKubun" column="dbT4401IryohiKojo_dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4401IryohiKojo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4401IryohiKojo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4401IryohiKojo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4401IryohiKojo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4401IryohiKojo_isDeleted" />
+        <result property="updateCount" column="dbT4401IryohiKojo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4401IryohiKojo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4401IryohiKojo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokuYMD" column="dbT4401IryohiKojo_torokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shinseiYMD" column="dbT4401IryohiKojo_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="dbT4401IryohiKojo_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="dbT4401IryohiKojo_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shujiiIkenshoJuryoYMD" column="dbT4401IryohiKojo_shujiiIkenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nichijoSeikatsuJiritsudo" column="dbT4401IryohiKojo_nichijoSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nyoshikkinHassei" column="dbT4401IryohiKojo_nyoshikkinHassei" />
+        <result property="hakkoYMD" column="dbT4401IryohiKojo_hakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT4401IryohiKojo_logicalDeletedFlag" />
+    </resultMap>
+
+</mapper>

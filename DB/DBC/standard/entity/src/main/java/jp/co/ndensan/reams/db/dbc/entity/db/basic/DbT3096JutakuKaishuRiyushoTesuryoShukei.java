@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
-
     /**
      * insertDantaiCd
      */
@@ -50,11 +49,12 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
     riyushoSakuseiJigyoshaNo(2147483647, 0),
     /**
      * 集計関連付け番号
-     * <br/>連番
+     * <br/>連番（申請書作成対象の証記載保険者番号＞事業者番号ごとに付番）
      */
     shukeiNo(6, 0),
     /**
      * 履歴番号
+     * <br/>処理の仕組み上、常に1
      */
     rirekiNo(5, 0),
     /**
@@ -81,6 +81,20 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
      * 介護住宅改修理由書作成請求金額
      */
     riyushoSakuseiSeikyuKingaku(9, 0),
+    /**
+     * 請求情報作成年月日
+     */
+    seikyuJohoSakuseiYMD(2147483647, 0),
+    /**
+     * 申請年月日
+     * <br/>住宅改修理由書作成手数料請求書兼申請書の申請日
+     */
+    shinseiYMD(2147483647, 0),
+    /**
+     * 受付年月日
+     * <br/>住宅改修理由書作成手数料請求書兼申請書の受付日
+     */
+    uketsukeYMD(2147483647, 0),
     /**
      * 識別コード
      * <br/>住宅改修理由書作成事業者の法人口座取得用
@@ -111,21 +125,13 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
      */
     kozaMeiginin(2147483647, 0),
     /**
-     * 請求情報作成日
-     */
-    seikyuJohoSakuseiYMD(2147483647, 0),
-    /**
-     * 受付年月日
-     */
-    uketsukeYMD(2147483647, 0),
-    /**
-     * 申請年月日
-     */
-    shinseiYMD(2147483647, 0),
-    /**
      * 口座名義人カナ
      */
-    kozaMeigininKana(2147483647, 0);
+    kozaMeigininKana(2147483647, 0),
+    /**
+     * 口座ID
+     */
+    kozaID(19, 0);
 
     private final int maxLength;
     private final int scale;
@@ -137,7 +143,7 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -146,7 +152,7 @@ public enum DbT3096JutakuKaishuRiyushoTesuryoShukei implements IColumnDefinition
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

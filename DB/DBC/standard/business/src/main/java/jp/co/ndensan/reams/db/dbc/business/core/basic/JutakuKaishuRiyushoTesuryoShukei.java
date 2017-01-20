@@ -251,7 +251,7 @@ public class JutakuKaishuRiyushoTesuryoShukei
      *
      * @return 口座ID
      */
-    public Decimal get口座ID() {
+    public long get口座ID() {
         return entity.getKozaID();
     }
 

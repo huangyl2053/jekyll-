@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT3094JutakuKaishuRiyushoTesuryoKetteiEntityGenerator {
 
     public static final JigyoshaNo DEFAULT_介護住宅改修理由書作成事業者番号 = new JigyoshaNo("1");
-    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("19900101");
+    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("900101");
     public static final int DEFAULT_履歴番号 = 0;
     public static final FlexibleDate DEFAULT_支給_不支給決定年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_支給_不支給区分 = new RString("Data");

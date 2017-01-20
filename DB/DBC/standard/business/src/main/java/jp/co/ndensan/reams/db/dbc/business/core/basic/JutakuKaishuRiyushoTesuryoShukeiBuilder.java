@@ -276,7 +276,7 @@ public class JutakuKaishuRiyushoTesuryoShukeiBuilder {
      * @param 口座ID 口座ID
      * @return {@link JutakuKaishuRiyushoTesuryoShukeiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoShukeiBuilder set口座ID(Decimal 口座ID) {
+    public JutakuKaishuRiyushoTesuryoShukeiBuilder set口座ID(long 口座ID) {
         requireNonNull(口座ID, UrSystemErrorMessages.値がnull.getReplacedMessage("口座ID"));
         entity.setKozaID(口座ID);
         return this;
