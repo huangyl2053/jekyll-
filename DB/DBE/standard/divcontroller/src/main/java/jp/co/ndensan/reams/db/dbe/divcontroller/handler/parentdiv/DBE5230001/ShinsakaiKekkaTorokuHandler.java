@@ -767,7 +767,7 @@ public class ShinsakaiKekkaTorokuHandler {
      */
     public HanteiKekkaCode get判定結果() {
         RString key = div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey();
-        return HanteiKekkaCode.toValue(key);
+        return RString.isNullOrEmpty(key) ? null : HanteiKekkaCode.toValue(key);
     }
 
     /**
