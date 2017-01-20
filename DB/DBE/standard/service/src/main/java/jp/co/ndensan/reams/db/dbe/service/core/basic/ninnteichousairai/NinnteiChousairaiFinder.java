@@ -8,14 +8,12 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.SaiChekkuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.SaiChekkuhyoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinnteiChousairaiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinteichosaIraiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.SaiChekkuhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ininnteichousairai.INinnteiChousairaiMapper;
@@ -23,9 +21,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -118,6 +114,7 @@ public class NinnteiChousairaiFinder {
         List<WaritsukeEntity> entityList = mapper.select割付済み申請者(parametere);
         List<WaritsukeBusiness> 割付済み申請者List = new ArrayList<>();
         for (WaritsukeEntity entity : entityList) {
+            entity.initializeMd5();
             割付済み申請者List.add(new WaritsukeBusiness(entity));
         }
         return 割付済み申請者List;
@@ -138,35 +135,6 @@ public class NinnteiChousairaiFinder {
             未割付申請者List.add(new WaritsukeBusiness(entity));
         }
         return 未割付申請者List;
-    }
-
-    /**
-     * 割付済み一覧を取得します。
-     *
-     * @param parametere 要介護認定結果情報パラメータ
-     * @return SearchResult<NinteichosaIraiJohoRelateBusiness> 割付済み一覧
-     */
-    @Transaction
-    public List<NinteichosaIraiJohoRelateBusiness> getNinteichosaIraiJohoList(NinnteiChousairaiParameter parametere) {
-        INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        NinteichosaIraiJohoRelateEntity entity = mapper.getNinteichosaIraiJohoList(parametere);
-        List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = new ArrayList<>();
-        if (entity == null) {
-            return 割付済み一覧;
-        }
-        List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
-        for (DbT5105NinteiKanryoJohoEntity ninteiKanryoJohoEntity : entity.getNinteiKanryoJohoEntity()) {
-            ninteiKanryoJohoEntity.initializeMd5();
-            ninteiKanryoJohoList.add(new NinteiKanryoJoho(ninteiKanryoJohoEntity));
-        }
-
-        List<NinteichosaIraiJoho> ninteichosaIraiJohoList = new ArrayList<>();
-        for (DbT5201NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity : entity.getNinteichosaIraiJohoEntity()) {
-            ninteichosaIraiJohoEntity.initializeMd5();
-            ninteichosaIraiJohoList.add(new NinteichosaIraiJoho(ninteichosaIraiJohoEntity));
-        }
-        割付済み一覧.add(new NinteichosaIraiJohoRelateBusiness(ninteichosaIraiJohoList, ninteiKanryoJohoList));
-        return 割付済み一覧;
     }
 
     /**

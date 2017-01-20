@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -193,7 +195,9 @@ public class WaritsukeBusiness {
      * @return 認定調査依頼年月日
      */
     public FlexibleDate getNinteichosaIraiYMD() {
-        return entity.getNinteichosaIraiYMD();
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? entity.get認定調査依頼情報Entity().getNinteichosaIraiYMD()
+                : FlexibleDate.EMPTY;
     }
 
     /**
@@ -202,7 +206,9 @@ public class WaritsukeBusiness {
      * @return 認定調査期限年月日
      */
     public FlexibleDate getNinteichosaKigenYMD() {
-        return entity.getNinteichosaKigenYMD();
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? entity.get認定調査依頼情報Entity().getNinteichosaKigenYMD()
+                : FlexibleDate.EMPTY;
     }
 
     /**
@@ -211,7 +217,9 @@ public class WaritsukeBusiness {
      * @return 依頼書出力年月日
      */
     public FlexibleDate getIraishoShutsuryokuYMD() {
-        return entity.getIraishoShutsuryokuYMD();
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? entity.get認定調査依頼情報Entity().getIraishoShutsuryokuYMD()
+                : FlexibleDate.EMPTY;
     }
 
     /**
@@ -220,7 +228,9 @@ public class WaritsukeBusiness {
      * @return 調査票等出力年月日
      */
     public FlexibleDate getChosahyoTouShutsuryokuYMD() {
-        return entity.getChosahyoTouShutsuryokuYMD();
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? entity.get認定調査依頼情報Entity().getChosahyoTouShutsuryokuYMD()
+                : FlexibleDate.EMPTY;
     }
 
     /**
@@ -337,7 +347,7 @@ public class WaritsukeBusiness {
      * @return 認定調査完了年月日
      */
     public FlexibleDate getNinteichosaKanryoYMD() {
-        return entity.getNinteichosaKanryoYMD();
+        return entity.get認定完了情報Entity().getNinteichosaKanryoYMD();
     }
 
     /**
@@ -364,7 +374,9 @@ public class WaritsukeBusiness {
      * @return 調査員コード
      */
     public RString getNinteiChosainCode() {
-        return entity.getNinteiChosainCode();
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? entity.get認定調査依頼情報Entity().getNinteiChosainCode()
+                : RString.EMPTY;
     }
 
     /**
@@ -382,7 +394,9 @@ public class WaritsukeBusiness {
      * @return 認定調査委託先コード
      */
     public RString getNinteiChosaItakusakiCode() {
-        return entity.getNinteiChosaItakusakiCode();
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? entity.get認定調査依頼情報Entity().getNinteichosaItakusakiCode().value()
+                : RString.EMPTY;
     }
 
     /**
@@ -446,5 +460,25 @@ public class WaritsukeBusiness {
      */
     public AtenaJusho getRenrakusakiJusho() {
         return entity.getRenrakusakiJusho();
+    }
+
+    /**
+     * 認定完了情報を返します。
+     *
+     * @return NinteiKanryoJoho
+     */
+    public NinteiKanryoJoho get認定完了情報() {
+        return new NinteiKanryoJoho(entity.get認定完了情報Entity());
+    }
+
+    /**
+     * 認定調査依頼情報を返します。
+     *
+     * @return NinteichosaIraiJoho
+     */
+    public NinteichosaIraiJoho get認定調査依頼情報() {
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? new NinteichosaIraiJoho(entity.get認定調査依頼情報Entity())
+                : null;
     }
 }
