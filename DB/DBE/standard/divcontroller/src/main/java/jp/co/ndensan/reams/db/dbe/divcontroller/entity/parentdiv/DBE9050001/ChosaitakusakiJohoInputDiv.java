@@ -45,8 +45,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddlItakusakikubun;
     @JsonProperty("txtteiin")
     private TextBoxNum txtteiin;
-    @JsonProperty("ccdChiku")
-    private CodeInputDiv ccdChiku;
     @JsonProperty("ddlKikankubun")
     private DropDownList ddlKikankubun;
     @JsonProperty("radHaishiFlag")
@@ -59,6 +57,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private Button btnTorikeshi;
     @JsonProperty("ccdHokenshaJoho")
     private HokenshaJohoDiv ccdHokenshaJoho;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -233,15 +233,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getccdChiku
-     * @return ccdChiku
-     */
-    @JsonProperty("ccdChiku")
-    public ICodeInputDiv getCcdChiku() {
-        return ccdChiku;
-    }
-
-    /*
      * getddlKikankubun
      * @return ddlKikankubun
      */
@@ -338,6 +329,15 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("ccdHokenshaJoho")
     public IHokenshaJohoDiv getCcdHokenshaJoho() {
         return ccdHokenshaJoho;
+    }
+
+    /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
     }
 
     /*

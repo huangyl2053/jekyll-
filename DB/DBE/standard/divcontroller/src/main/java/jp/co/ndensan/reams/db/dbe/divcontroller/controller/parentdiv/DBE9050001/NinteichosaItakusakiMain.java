@@ -275,7 +275,7 @@ public class NinteichosaItakusakiMain {
 
     private NinteichosaItakusakiCsvEntity getCsvData(dgSonotaKikanIchiran_Row row) {
         RString waritsukeTeiin = RString.EMPTY;
-        if (row.getWaritsukeTeiin() != null) {
+        if (row.getWaritsukeTeiin().getValue() != null) {
             waritsukeTeiin = new RString(row.getWaritsukeTeiin().getValue().toString());
         }
         NinteichosaItakusakiCsvEntity data = new NinteichosaItakusakiCsvEntity(
@@ -516,10 +516,11 @@ public class NinteichosaItakusakiMain {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).load();
                 return ResponseData.of(div).setState(DBE9050001StateName.検索);
             }
         } else {
-//            getHandler(div).load();
+            getHandler(div).load();
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
 //        getHandler(div).load();
