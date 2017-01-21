@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_NinteiChosaKekkaTorikomiParameter> {
 
     private OcrDataReadProcessParameter processParameter;
-    private static final RString TEMP_TABLE_NAME = new RString("DbTempOcrCsv");
 
     @Override
     protected void defineFlow() {
@@ -49,7 +48,7 @@ public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_
             if (files.isEmpty()) {
                 continue;
             }
-            this.processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, TEMP_TABLE_NAME);
+            this.processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
             executeStep(OCRデータの一時テーブルへの格納_PROCESS);
             executeStep(OCRデータの読み込み_PROCESS);
         }

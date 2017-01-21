@@ -48,7 +48,7 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
             if (files.isEmpty()) {
                 continue;
             }
-            processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, RString.EMPTY);
+            processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
             switch (type) {
                 case 意見書:
                     executeStep(主治医意見書イメージの読み込み);
@@ -96,7 +96,6 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
                 try {
                     list.add(new RString(file.getCanonicalPath()));
                 } catch (IOException ex) {
-                    //TODO 例外処理。エラーリスト出力等が必要か…。
                 }
             } else {
                 list.addAll(setFilePath(file));

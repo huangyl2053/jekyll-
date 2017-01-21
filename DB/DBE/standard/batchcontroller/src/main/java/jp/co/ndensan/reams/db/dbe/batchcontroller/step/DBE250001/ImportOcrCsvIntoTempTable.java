@@ -6,11 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ImportOcrCsvIntoTempTable extends BatchProcessBase<RString> {
 
-    private BatchEntityCreatedTempTableWriter<OcrCsvEntity> writer;
+    @BatchWriter
+    private BatchEntityCreatedTempTableWriter<TempOcrCsvEntity> writer;
     private OcrDataReadProcessParameter processParameter;
 
     @Override
@@ -31,14 +33,14 @@ public class ImportOcrCsvIntoTempTable extends BatchProcessBase<RString> {
     @Override
     protected void createWriter() {
         super.createWriter();
-        this.writer = BatchWriters.batchEntityCreatedTempTableWriter(OcrCsvEntity.class)
-                .tempTableName(processParameter.getTempTableName())
+        this.writer = BatchWriters.batchEntityCreatedTempTableWriter(TempOcrCsvEntity.class)
+                .tempTableName(new RString("TempOcrCsv"))
                 .build();
     }
 
     @Override
     protected void process(RString t) {
-        OcrCsvEntity entity = new OcrCsvEntity(t);
+        TempOcrCsvEntity entity = new TempOcrCsvEntity(t);
         this.writer.insert(entity);
     }
 }

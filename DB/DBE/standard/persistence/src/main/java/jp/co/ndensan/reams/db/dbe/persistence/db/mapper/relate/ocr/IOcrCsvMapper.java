@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ocr.OcrCsvMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 
 /**
  * OCRCSVデータを格納した一時テーブルを参照します。
@@ -15,8 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrCsvEntity;
 public interface IOcrCsvMapper {
 
     /**
-     * @param parameter {@link OcrCsvMapperParameter}
-     * @return {@link OcrCsvEntity}
+     * @return {@link TempOcrCsvEntity}
      */
-    List<OcrCsvEntity> getCsvData(OcrCsvMapperParameter parameter);
+    List<TempOcrCsvEntity> getCsvDataOrderByKey();
 }

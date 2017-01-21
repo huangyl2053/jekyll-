@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.ocr;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ocr.OcrCsvMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * OCR情報受入＿バッチ ファイルの読み取り Processパラメタです。
@@ -25,31 +23,19 @@ public class OcrDataReadProcessParameter implements IBatchProcessParameter {
     private final OcrFiles ファイルPath;
     @lombok.Getter
     private final OcrFiles imageFilePaths;
-    @lombok.Getter
-    private final RString tempTableName;
 
     /**
      * @param 処理日 処理日
      * @param ファイルPath ファイルPath
      * @param imageFilePaths 全イメージファイルのPath
-     * @param tempTableName 一時テーブル名
      */
     public OcrDataReadProcessParameter(
             RDate 処理日,
             OcrFiles ファイルPath,
-            OcrFiles imageFilePaths,
-            RString tempTableName
+            OcrFiles imageFilePaths
     ) {
         this.処理日 = 処理日;
         this.ファイルPath = ファイルPath;
         this.imageFilePaths = imageFilePaths;
-        this.tempTableName = tempTableName;
-    }
-
-    /**
-     * @return {@link OcrCsvMapperParameter}へ変換した結果
-     */
-    public OcrCsvMapperParameter toOcrCsvMapperParameter() {
-        return new OcrCsvMapperParameter(this.tempTableName);
     }
 }

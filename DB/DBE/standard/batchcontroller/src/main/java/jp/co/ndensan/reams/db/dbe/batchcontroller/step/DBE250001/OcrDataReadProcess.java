@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
@@ -80,7 +80,7 @@ import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
  *
  * @author n8429
  */
-public class OcrDataReadProcess extends BatchProcessBase<OcrCsvEntity> {
+public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5202NinteichosahyoGaikyoChosaEntity> writerGaikyo;
@@ -108,8 +108,8 @@ public class OcrDataReadProcess extends BatchProcessBase<OcrCsvEntity> {
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(
-                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".getCsvData").toRString(),
-                this.processParameter.toOcrCsvMapperParameter());
+                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".getCsvDataOrderByKey").toRString()
+        );
     }
 
     @Override
@@ -132,7 +132,7 @@ public class OcrDataReadProcess extends BatchProcessBase<OcrCsvEntity> {
     }
 
     @Override
-    protected void process(OcrCsvEntity entity) {
+    protected void process(TempOcrCsvEntity entity) {
         final OcrChosa ocrChosa = OcrChosa.parsed(entity.getCsvData());
         if (hasBreak(this.key, ocrChosa.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {

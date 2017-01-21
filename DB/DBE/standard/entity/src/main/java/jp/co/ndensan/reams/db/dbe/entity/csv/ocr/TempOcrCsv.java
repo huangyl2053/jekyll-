@@ -10,7 +10,7 @@ package jp.co.ndensan.reams.db.dbe.entity.csv.ocr;
  *
  * 一時テーブルにCSVデータをインポートした際に、その値を参照するのに用います。
  */
-enum OcrCsv {
+enum TempOcrCsv {
 
     /**
      * OCR帳票を識別するためのID
@@ -37,7 +37,7 @@ enum OcrCsv {
 
     private final int theIndex;
 
-    private OcrCsv(int index) {
+    private TempOcrCsv(int index) {
         this.theIndex = index;
     }
 
