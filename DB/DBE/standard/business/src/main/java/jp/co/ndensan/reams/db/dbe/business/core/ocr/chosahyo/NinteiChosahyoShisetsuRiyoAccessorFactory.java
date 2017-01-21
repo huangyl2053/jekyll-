@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * {@link INinteiChosahyoShisetsuRiyoAccessor}を生成します。
  */
-public class NinteiChosahyoShisetsuRiyoAccessorFactory {
+public final class NinteiChosahyoShisetsuRiyoAccessorFactory {
 
     private NinteiChosahyoShisetsuRiyoAccessorFactory() {
     }
@@ -31,7 +31,7 @@ public class NinteiChosahyoShisetsuRiyoAccessorFactory {
         Objects.requireNonNull(ocrChosa);
         switch (KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード)) {
             case 認定ｿﾌﾄ2009_SP3:
-                return new NinteiChosahyoShisetsuRiyoAccessorFactory._09B(ocrChosa);
+                return new NinteiChosahyoShisetsuRiyoAccessorFactory._IFCode09B(ocrChosa);
             default:
                 throw new IllegalArgumentException(new RStringBuilder()
                         .append("指定の厚労省IF識別コードは不正です。：'")
@@ -41,15 +41,16 @@ public class NinteiChosahyoShisetsuRiyoAccessorFactory {
         }
     }
 
-    private static class _09B implements INinteiChosahyoShisetsuRiyoAccessor {
+    private static class _IFCode09B implements INinteiChosahyoShisetsuRiyoAccessor {
 
         private final OcrChosa ocrChosa;
 
-        public _09B(OcrChosa ocrChosa) {
+        public _IFCode09B(OcrChosa ocrChosa) {
             this.ocrChosa = ocrChosa;
         }
 
         @Override
+        @SuppressWarnings("checkstyle:CyclomaticComplexity")
         public Optional<Boolean> valueOf(int 連番) {
             if (RString.isNullOrEmpty(ocrChosa.get施設利用の有無())) {
                 return Optional.empty();

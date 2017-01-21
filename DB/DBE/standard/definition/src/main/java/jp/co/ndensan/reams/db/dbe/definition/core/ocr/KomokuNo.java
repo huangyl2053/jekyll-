@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class KomokuNo {
 
+    /**
+     * 空を表す値です。
+     */
     public static final KomokuNo EMPTY;
 
     static {
@@ -22,10 +25,12 @@ public final class KomokuNo {
 
     private final RString chosaKomokuNo;
     private final RString remban;
+    private final int rembanValue;
 
     private KomokuNo() {
         this.chosaKomokuNo = RString.EMPTY;
         this.remban = RString.EMPTY;
+        this.rembanValue = 0;
     }
 
     /**
@@ -36,20 +41,37 @@ public final class KomokuNo {
         if (trimed.isEmpty()) {
             this.chosaKomokuNo = RString.EMPTY;
             this.remban = RString.EMPTY;
+            this.rembanValue = 0;
             return;
         }
         this.chosaKomokuNo = trimed.substringEmptyOnError(0, REMBAN_INDEX);
-        this.remban = formatRemban(value);
+        this.rembanValue = findRemban(value);
+        this.remban = new RString(String.format("%02d", rembanValue));
     }
 
-    private static RString formatRemban(RString rawValue) {
+    private KomokuNo(RString chosaKomokuNo, int remban) {
+        this.chosaKomokuNo = chosaKomokuNo;
+        this.rembanValue = remban;
+        this.remban = new RString(String.format("%02d", rembanValue));
+    }
+
+    /**
+     * 指定の値で連番を置き換えた新しいインスタンスを返します。
+     *
+     * @param remban 新しい連番
+     * @return 指定の値で連番を置き換えた新しいインスタンス
+     */
+    public KomokuNo renumbered(int remban) {
+        return new KomokuNo(this.chosaKomokuNo, remban);
+    }
+
+    private static int findRemban(RString rawValue) {
         RString rembanPart = rawValue.substringEmptyOnError(REMBAN_INDEX);
-        int rembanValue = 0;
         try {
-            rembanValue = rembanPart.isEmpty() ? 0 : Integer.valueOf(rembanPart.toString());
+            return rembanPart.isEmpty() ? 0 : Integer.valueOf(rembanPart.toString());
         } catch (NumberFormatException e) {
+            return 0;
         }
-        return new RString(String.format("%02d", rembanValue));
     }
 
     /**
@@ -60,10 +82,17 @@ public final class KomokuNo {
     }
 
     /**
-     * @return 連番（00～99の値、もしくは、空）
+     * @return 連番（00～99 の形へ編集された文字列、もしくは、空）
      */
     public RString getRemban() {
         return this.remban;
+    }
+
+    /**
+     * @return 連番（数値）
+     */
+    public int getRembanAsInt() {
+        return this.rembanValue;
     }
 
     /**

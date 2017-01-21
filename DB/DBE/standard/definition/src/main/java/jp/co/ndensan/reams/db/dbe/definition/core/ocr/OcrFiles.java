@@ -29,6 +29,9 @@ public final class OcrFiles implements Iterable<RString> {
     private final List<RString> elements;
     private final Map<RString, RString> namePathMap;
 
+    /**
+     * @param filePaths 複数のファイルパス
+     */
     public OcrFiles(Collection<? extends RString> filePaths) {
         this.elements = new ArrayList<>(filePaths);
         this.namePathMap = toMap(filePaths);

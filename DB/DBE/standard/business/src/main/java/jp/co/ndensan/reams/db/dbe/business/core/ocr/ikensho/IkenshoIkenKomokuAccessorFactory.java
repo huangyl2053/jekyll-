@@ -48,6 +48,7 @@ public final class IkenshoIkenKomokuAccessorFactory {
         }
 
         @Override
+        @SuppressWarnings("checkstyle:cyclomaticcomplexity")
         public RString valueOf(int 連番) {
             switch (IkenshoKomokuMapping09B.toValue(new RString(連番))) {
                 case 点滴の管理:

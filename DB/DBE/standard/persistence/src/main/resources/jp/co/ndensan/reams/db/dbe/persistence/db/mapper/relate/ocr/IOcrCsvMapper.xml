@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 一時テーブルに格納したOCR CSVデータを参照します。 -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper">
+    <select resultOrdered="true" id="getCsvData" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ocr.OcrCsvMapperParameter"
+            resultMap="resultMap_OcrCsvEntity" fetchSize="500">
+        SELECT
+            A.ocrID AS "ocrID",
+            A.sheetID AS "sheetID",
+            A.hokenshaNo AS "hokenshaNo",
+            A.shinseiYMD AS "shinseiYMD",
+            A.hihokenshaNo AS "hihokenshaNo",
+            A.csvData AS "csvData"
+        FROM
+            #{tempTableName} AS A
+        ORDER BY A.ocrID, A.sheetID, A.hokenshaNo, A.shinseiYMD, A.hihokenshaNo
+    </select>
+
+    <resultMap id="resultMap_OcrCsvEntity" type="jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrCsvEntity" autoMapping="true">
+        <id property="ocrID" column="ocrID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="sheetID" column="sheetID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="csvData" column="csvData" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>

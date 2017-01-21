@@ -31,7 +31,7 @@ public final class NinteiChosahyoServiceJokyoFlagAccessorFactory {
         Objects.requireNonNull(ocrChosa);
         switch (KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード)) {
             case 認定ｿﾌﾄ2009_SP3:
-                return new NinteiChosahyoServiceJokyoFlagAccessorFactory._09B(ocrChosa);
+                return new NinteiChosahyoServiceJokyoFlagAccessorFactory._IFCode09B(ocrChosa);
             default:
                 throw new IllegalArgumentException(new RStringBuilder()
                         .append("指定の厚労省IF識別コードは不正です。：'")
@@ -41,11 +41,11 @@ public final class NinteiChosahyoServiceJokyoFlagAccessorFactory {
         }
     }
 
-    private static class _09B implements INinteiChosahyoServiceJokyoFlagAccessor {
+    private static class _IFCode09B implements INinteiChosahyoServiceJokyoFlagAccessor {
 
         private final OcrChosa ocrChosa;
 
-        public _09B(OcrChosa ocrChosa) {
+        public _IFCode09B(OcrChosa ocrChosa) {
             this.ocrChosa = ocrChosa;
         }
 
@@ -60,7 +60,9 @@ public final class NinteiChosahyoServiceJokyoFlagAccessorFactory {
         }
     }
 
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
     private static final String OCR_有 = "1";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
     private static final String OCR_無 = "2";
 
     private static Optional<Boolean> toBoolean(RString value) {

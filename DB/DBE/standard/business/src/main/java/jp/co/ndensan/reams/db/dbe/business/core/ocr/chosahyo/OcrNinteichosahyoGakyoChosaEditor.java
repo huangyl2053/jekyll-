@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * {@link DbT5302ShujiiIkenshoJohoEntity}を編集します。
+ * {@link DbT5202NinteichosahyoGaikyoChosaEntity}を編集します。
  */
 public final class OcrNinteichosahyoGakyoChosaEditor {
 

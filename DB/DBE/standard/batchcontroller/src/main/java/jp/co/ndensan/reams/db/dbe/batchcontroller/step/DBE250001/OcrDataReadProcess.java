@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrChosa;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrChosas;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrNinteichosahyoGakyoChosaEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.TokkiImageFileNames;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.TokkijikoFileNameConvertionTheory;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.GaikyoChosahyoServiceJokyos;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.IGaikyoChosahyoServiceJokyo;
@@ -37,10 +39,12 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosakekkatorikomiocr.NinteiOcrFindler;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.OcrImageClassification;
@@ -54,18 +58,18 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
@@ -76,7 +80,7 @@ import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
  *
  * @author n8429
  */
-public class OcrDataReadProcess extends BatchProcessBase<RString> {
+public class OcrDataReadProcess extends BatchProcessBase<OcrCsvEntity> {
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5202NinteichosahyoGaikyoChosaEntity> writerGaikyo;
@@ -103,7 +107,9 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(processParameter.getファイルPath().findCsvFilePath(), Encode.SJIS);
+        return new BatchDbReader(
+                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".getCsvData").toRString(),
+                this.processParameter.toOcrCsvMapperParameter());
     }
 
     @Override
@@ -126,8 +132,8 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
     }
 
     @Override
-    protected void process(RString line) {
-        final OcrChosa ocrChosa = OcrChosa.parsed(line);
+    protected void process(OcrCsvEntity entity) {
+        final OcrChosa ocrChosa = OcrChosa.parsed(entity.getCsvData());
         if (hasBreak(this.key, ocrChosa.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 _keyBreakProcess();
@@ -223,7 +229,8 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                 case _550:
                     /* イメージコピー */
                     List<OcrChosa> _550 = entry.getValue();
-                    if (copyImageFilesToDirectory_ID550(tempDirectoryPath, _550)) {
+                    TokkiImageFileNames imageFileNames = new OcrChosas(_550).editedFileNames連番重複再付番();
+                    if (copyImageFilesToDirectory_ID550(tempDirectoryPath, _550, imageFileNames)) {
                         imageTypes.add(OcrImageClassification.調査票_特記事項);
                     }
                 case _570: //TODO 必要なユーザには実装する。
@@ -299,21 +306,22 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
                 this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID501);
     }
 
-    private boolean copyImageFilesToDirectory_ID550(RString targetDirectoryPath, List<OcrChosa> ocrChosas) {
+    private boolean copyImageFilesToDirectory_ID550(RString targetDirectoryPath, List<OcrChosa> ocrChosas, TokkiImageFileNames tokkiImageFiles) {
         List<RString> imageFileNames = new ArrayList<>();
-        List<OcrChosa> valuesExistsCa3 = new ArrayList<>();
         for (OcrChosa ocrChosa : ocrChosas) {
             CatalogLine cl = this.catalog.find(Models.ID550, ocrChosa.getSheetID()).orElse(null);
             if (cl == null) {
                 continue;
             }
             List<RString> imageNames = cl.getImageFileNames();
-            imageNames.removeAll(ocrChosa.get特記事項ImageFileName_KomokuNoIsNotPresent());
+            imageNames.removeAll(ocrChosa.getTokkiImageFileNames().onlyEmptyKomokuNo().toList());
             imageFileNames.addAll(imageNames);
-            valuesExistsCa3.add(ocrChosa);
+        }
+        if (imageFileNames.size() != tokkiImageFiles.removedEmptyKomokuNo().size()) {
+            return false;
         }
         return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, imageFileNames,
-                this.processParameter.getImageFilePaths(), new TokkijikoFileNameConvertionTheory(valuesExistsCa3));
+                this.processParameter.getImageFilePaths(), new TokkijikoFileNameConvertionTheory(tokkiImageFiles));
     }
 
 //--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
@@ -615,4 +623,59 @@ public class OcrDataReadProcess extends BatchProcessBase<RString> {
         return entity;
     }
     //</editor-fold>
+
+    private static void insertOrUpdate特記情報By(IBatchTableWriter<? super DbT5205NinteichosahyoTokkijikoEntity> dbWriter,
+            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
+        if (ocrChosas.size() != 1) {
+            return;
+        }
+        ninteiChosaEntity.get特記情報();
+        OcrChosa ocrChosa = ocrChosas.get(0);
+        for (DbT5205NinteichosahyoTokkijikoEntity entity : createOrEdit特記情報(ninteiChosaEntity, nr, ocrChosa)) {
+            switch (entity.getState()) {
+                case Added:
+                    dbWriter.insert(entity);
+                    break;
+                case Modified:
+                    dbWriter.update(entity);
+                    break;
+                default:
+            }
+        }
+    }
+
+    private static Iterable<DbT5205NinteichosahyoTokkijikoEntity> createOrEdit特記情報(NinteiChosahyoEntity ninteiChosaEntity,
+            NinteiOcrRelate nr, OcrChosa ocrChosa) {
+        //テキスト⇒そのまま
+        //イメージ⇒マスクは削除、原本は更新、ただし取り込んだ
+//        Map<RString, Map<Integer, KomokuNo>> map = new HashMap<>();
+//        for (KomokuNo komokuNo : ocrChosa.get特記事項ImageFileName_調査項目_Map().values()) {
+//            RString chosaKomokuNo = komokuNo.getChosaKomokuNo();
+//            if (map.containsKey(chosaKomokuNo)) {
+//                map.put(chosaKomokuNo, new HashMap<Integer, KomokuNo>());
+//            }
+//            map.get(chosaKomokuNo).put(komokuNo.getRembanValue(), komokuNo);
+//        }
+//
+        List<DbT5205NinteichosahyoTokkijikoEntity> list = new ArrayList<>();
+//        for (DbT5205NinteichosahyoTokkijikoEntity entity : ninteiChosaEntity.get特記情報()) {
+//            if (TokkijikoTextImageKubun.テキスト.getコード()
+//                    .equals(entity.getTokkijikoTextImageKubun())) {
+//                continue;
+//            }
+//            if (map.containsKey(entity.getNinteichosaTokkijikoNo())) {
+//                entity.setState(EntityDataState.Deleted);
+//                list.add(entity);
+//                continue;
+//            }
+//            if (GenponMaskKubun.マスク.getコード()
+//                    .equals(entity.getGenponMaskKubun())) {
+//                entity.setState(EntityDataState.Deleted);
+//                list.add(entity);
+//                continue;
+//            }
+//        }
+        return list;
+    }
+
 }

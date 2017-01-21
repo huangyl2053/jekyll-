@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageT
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageTorikomiParameter> {
 
-    OcrImageReadProcessParameter processParameter;
+    OcrDataReadProcessParameter processParameter;
 
     @Override
     protected void defineFlow() {
@@ -48,7 +48,7 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
             if (files.isEmpty()) {
                 continue;
             }
-            processParameter = new OcrImageReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
+            processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, RString.EMPTY);
             switch (type) {
                 case 意見書:
                     executeStep(主治医意見書イメージの読み込み);

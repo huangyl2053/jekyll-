@@ -286,7 +286,7 @@ public final class OcrIken {
             result.set主治医への結果連絡(columns.get(48));
 
         } else if (意見書_ID777.equals(ocrID)) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 16 LINES
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 17 LINES
             result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));

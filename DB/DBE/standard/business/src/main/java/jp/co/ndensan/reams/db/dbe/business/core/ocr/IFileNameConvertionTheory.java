@@ -16,5 +16,5 @@ public interface IFileNameConvertionTheory {
      * @param fileName ファイル名
      * @return Reamsで管理するファイル名
      */
-    abstract RString convert(RString fileName);
+    RString convert(RString fileName);
 }

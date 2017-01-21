@@ -9,7 +9,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.IFileNameConvertionTheory;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrChosa;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.TokkiImageFileName;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.TokkiImageFileNames;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -98,25 +99,20 @@ public class TokkijikoFileNameConvertionTheory implements IFileNameConvertionThe
     private final Map<RString, RString> table;
 
     /**
-     * @param ocrChosas 同一申請に対する{@link OcrChosa}すべて
+     * @param imageFileNames 同一申請に対するすべてのイメージファイル名
      */
-    public TokkijikoFileNameConvertionTheory(Iterable<? extends OcrChosa> ocrChosas) {
-        Map<RString, KomokuNo> files = new HashMap<>();
-        for (OcrChosa ocrChosa : ocrChosas) {
-            files.putAll(ocrChosa.get特記事項ImageFileName_調査項目_Map());
-        }
+    public TokkijikoFileNameConvertionTheory(TokkiImageFileNames imageFileNames) {
         Map<RString, RString> map = new HashMap<>();
-        for (Map.Entry<RString, KomokuNo> entry : files.entrySet()) {
-            KomokuNo komokuNo = entry.getValue();
+        for (TokkiImageFileName fileName : imageFileNames) {
+            KomokuNo komokuNo = fileName.komokuNo();
             if (komokuNo.isEmpty()) {
                 continue;
             }
-            RString value = KOMOKUNO_TO_FILENAME_TABLE.get(komokuNo.getChosaKomokuNo());
-            if (value == null) {
-                System.out.println("null :" + komokuNo.getChosaKomokuNo());
+            RString baseFileName = KOMOKUNO_TO_FILENAME_TABLE.get(komokuNo.getChosaKomokuNo());
+            if (baseFileName == null) {
                 continue;
             }
-            map.put(entry.getKey(), value.replace(REPLACEMENT, komokuNo.getRemban()));
+            map.put(fileName.value(), baseFileName.replace(REPLACEMENT, komokuNo.getRemban()));
         }
         this.table = Collections.unmodifiableMap(map);
     }

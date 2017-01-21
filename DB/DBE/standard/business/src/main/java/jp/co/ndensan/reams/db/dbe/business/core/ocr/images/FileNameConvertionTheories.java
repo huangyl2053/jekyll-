@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum FileNameConvertionTheories implements IFileNameConvertionTheory {
 
+    /**
+     * ID501
+     */
     ID501 {
                 @Override
                 public RString convert(RString fileName) {
@@ -27,6 +30,9 @@ public enum FileNameConvertionTheories implements IFileNameConvertionTheory {
                     return RString.EMPTY;
                 }
             },
+    /**
+     * ID777 通常読取時
+     */
     ID777 {
                 @Override
                 public RString convert(RString t) {
@@ -39,6 +45,9 @@ public enum FileNameConvertionTheories implements IFileNameConvertionTheory {
                     return RString.EMPTY;
                 }
             },
+    /**
+     * ID777 表裏逆転読取時
+     */
     ID777_reversed {
                 @Override
                 public RString convert(RString t) {

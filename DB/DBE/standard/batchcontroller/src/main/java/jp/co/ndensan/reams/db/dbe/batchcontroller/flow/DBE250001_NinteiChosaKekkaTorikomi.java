@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.ImportOcrCsvIntoTempTable;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.OcrDataReadProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocrdataread.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -35,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_NinteiChosaKekkaTorikomiParameter> {
 
     private OcrDataReadProcessParameter processParameter;
+    private static final RString TEMP_TABLE_NAME = new RString("DbTempOcrCsv");
 
     @Override
     protected void defineFlow() {
@@ -47,12 +49,22 @@ public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_
             if (files.isEmpty()) {
                 continue;
             }
-            processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
+            this.processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, TEMP_TABLE_NAME);
+            executeStep(OCRデータの一時テーブルへの格納_PROCESS);
             executeStep(OCRデータの読み込み_PROCESS);
         }
     }
 
-    private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み_PROCESS";
+    private static final String OCRデータの一時テーブルへの格納_PROCESS = "OCRデータの一時テーブルへの格納";
+
+    @Step(OCRデータの一時テーブルへの格納_PROCESS)
+    IBatchFlowCommand importCsvToTempTable() {
+        return loopBatch(ImportOcrCsvIntoTempTable.class)
+                .arguments(processParameter)
+                .define();
+    }
+
+    private static final String OCRデータの読み込み_PROCESS = "OCRデータの読み込み";
 
     @Step(OCRデータの読み込み_PROCESS)
     IBatchFlowCommand executeOCRデータの読み込み() {
@@ -79,7 +91,6 @@ public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_
                 try {
                     list.add(new RString(file.getCanonicalPath()));
                 } catch (IOException ex) {
-                    //TODO 例外処理。エラーリスト出力等が必要か…。
                 }
             } else {
                 list.addAll(setFilePath(file));

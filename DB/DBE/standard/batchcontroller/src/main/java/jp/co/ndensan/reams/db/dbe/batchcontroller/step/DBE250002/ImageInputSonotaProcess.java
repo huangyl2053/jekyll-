@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.SonotaShiryoFileNameC
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
@@ -48,7 +48,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<RString> {
     /**
      * このバッチプロセスのパラメータです。
      */
-    private OcrImageReadProcessParameter processParameter;
+    private OcrDataReadProcessParameter processParameter;
     private List<OcrSonota> cache;
     private ShinseiKey key;
     private Catalog catalog;

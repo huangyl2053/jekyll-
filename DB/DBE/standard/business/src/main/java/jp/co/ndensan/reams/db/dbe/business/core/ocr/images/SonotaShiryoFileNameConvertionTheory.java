@@ -35,6 +35,9 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
     private final Map<RString, RString> table;
     private final boolean exceedsLimitFlag;
 
+    /**
+     * @param ocrSonotas 関連する{@link OcrSonota}すべて
+     */
     public SonotaShiryoFileNameConvertionTheory(Collection<? extends OcrSonota> ocrSonotas) {
         Map<RString, RString> map = new HashMap<>();
         Iterator<RString> reamsFileNames = REAMS_FILE_NAME.iterator();

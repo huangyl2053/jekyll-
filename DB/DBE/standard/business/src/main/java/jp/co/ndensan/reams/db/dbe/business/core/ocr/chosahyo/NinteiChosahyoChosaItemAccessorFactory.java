@@ -30,7 +30,7 @@ public final class NinteiChosahyoChosaItemAccessorFactory {
         Objects.requireNonNull(ocrChosa);
         switch (KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード)) {
             case 認定ｿﾌﾄ2009_SP3:
-                return new NinteiChosahyoChosaItemAccessorFactory._09B(ocrChosa);
+                return new NinteiChosahyoChosaItemAccessorFactory._IFCode09B(ocrChosa);
             default:
                 throw new IllegalArgumentException(new RStringBuilder()
                         .append("指定の厚労省IF識別コードは不正です。：'")
@@ -40,15 +40,17 @@ public final class NinteiChosahyoChosaItemAccessorFactory {
         }
     }
 
-    private static class _09B implements INinteiChosahyoChosaItemAccessor {
+    private static class _IFCode09B implements INinteiChosahyoChosaItemAccessor {
 
         private final OcrChosa ocrChosa;
 
-        public _09B(OcrChosa ocrChosa) {
+        public _IFCode09B(OcrChosa ocrChosa) {
             this.ocrChosa = ocrChosa;
         }
 
+        //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
         private static final String OCR_チェックあり = "1";
+        //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
         private static final String OCR_チェックなし = "0";
 
         private static RString toChosaAnser01(RString value) {
@@ -63,7 +65,9 @@ public final class NinteiChosahyoChosaItemAccessorFactory {
         }
 
         @Override
+        @SuppressWarnings("checkstyle:cyclomaticcomplexity")
         public RString valueOf(int 連番) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 152 LINES
             switch (NinteichosaKomokuMapping09B.toValue(new RString(連番))) {
                 case 麻痺等_左上肢:
                     return toChosaAnser01(ocrChosa.get麻痺().substringEmptyOnError(1, 2));
