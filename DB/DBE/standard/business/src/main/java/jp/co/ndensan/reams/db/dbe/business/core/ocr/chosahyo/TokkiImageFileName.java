@@ -58,4 +58,9 @@ public final class TokkiImageFileName {
         }
         return Objects.equals(this.theKomokuNo, other.theKomokuNo);
     }
+
+    @Override
+    public String toString() {
+        return "TokkiImageFileName{" + "theValue=" + theValue + ", theKomokuNo=" + theKomokuNo + '}';
+    }
 }

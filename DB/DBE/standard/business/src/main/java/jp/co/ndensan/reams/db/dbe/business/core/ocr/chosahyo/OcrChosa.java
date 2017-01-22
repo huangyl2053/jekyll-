@@ -301,9 +301,9 @@ public final class OcrChosa {
     }
 
     /**
-     * @return 存在するイメージファイル名をすべて返します。
+     * @return 存在するイメージファイル名
      */
-    public TokkiImageFileNames getTokkiImageFileNames() {
+    public TokkiImageFileNames collectTokkiImageFileNames() {
         List<TokkiImageFileName> list = new ArrayList<>();
         for (Map.Entry<RString, KomokuNo> entry : this.特記事項ImageFileName_調査項目_Map.entrySet()) {
             list.add(new TokkiImageFileName(entry.getKey(), entry.getValue()));

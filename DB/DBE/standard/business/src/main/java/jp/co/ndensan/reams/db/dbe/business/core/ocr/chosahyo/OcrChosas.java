@@ -63,7 +63,7 @@ public final class OcrChosas {
     private static List<TokkiImageFileName> imageFileNames(Collection<? extends OcrChosa> records) {
         List<TokkiImageFileName> files = new ArrayList<>();
         for (OcrChosa record : records) {
-            files.addAll(record.getTokkiImageFileNames().removedEmptyKomokuNo().toList());
+            files.addAll(record.collectTokkiImageFileNames().removedEmptyKomokuNo().toList());
         }
         return files;
     }
