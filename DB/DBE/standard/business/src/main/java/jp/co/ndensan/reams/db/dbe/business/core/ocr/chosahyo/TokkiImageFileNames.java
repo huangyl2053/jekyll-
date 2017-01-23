@@ -46,6 +46,9 @@ public class TokkiImageFileNames implements Iterable<TokkiImageFileName> {
         return map;
     }
 
+    /**
+     * @return 調査項目連番ごとに分類された{@link TokkiImageFileNames}
+     */
     public Map<Integer, TokkiImageFileNames> groupedByRemban() {
         Map<Integer, TokkiImageFileNames> map = new HashMap<>();
         for (TokkiImageFileName file : elements) {

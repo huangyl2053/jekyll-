@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -104,7 +105,7 @@ public final class ImageJohoUpdater {
 
     private static SharedFileEntryDescriptor defineAndCopyToSharedFile(FilesystemPath targetDirectoryPath, FilesystemName sharedFileName) {
         SharedFileDescriptor sfd = SharedFile.defineSharedFile(sharedFileName);
-        CopyToSharedFileOpts option = new CopyToSharedFileOpts().dateToDelete(null);
+        CopyToSharedFileOpts option = new CopyToSharedFileOpts().dateToDelete(RDate.MAX);
         SharedFileEntryDescriptor sfed = SharedFile.copyToSharedFile(sfd, targetDirectoryPath, option);
         return sfed;
     }
