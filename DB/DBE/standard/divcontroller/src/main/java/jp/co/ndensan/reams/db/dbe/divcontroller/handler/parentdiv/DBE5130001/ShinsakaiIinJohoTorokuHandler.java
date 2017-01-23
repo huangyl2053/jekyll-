@@ -121,7 +121,11 @@ public class ShinsakaiIinJohoTorokuHandler {
             }
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
-            row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
+            if (!RString.isNullOrEmpty(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称())) {
+                row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
+            } else {
+                row.setSeibetsu(RString.EMPTY);
+            }
             if (shinsakaiIinJoho.get生年月日() != null && !shinsakaiIinJoho.get生年月日().isEmpty()) {
                 row.getBarthYMD().setValue(new RDate(shinsakaiIinJoho.get生年月日().toString()));
             }
@@ -220,7 +224,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         if (div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue() != null) {
             div.getTxtBirthYMD().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue());
         }
-        div.getRadSeibetsu().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu());
+        if (!RString.isNullOrEmpty(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu())) {
+            div.getRadSeibetsu().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu());
+        }
         div.getDdlShikakuCode().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShikakuCode());
         div.getCcdshinsakaiChikuCode().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
                 new Code(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsakaiChikuCode()));
@@ -357,7 +363,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtShimei().clearValue();
         div.getTxtKanaShimei().clearValue();
         div.getTxtBirthYMD().clearValue();
-        div.getRadSeibetsu().setSelectedKey(new RString("1"));
+        div.getRadSeibetsu().clearSelectedItem();
         div.getDdlShikakuCode().setSelectedIndex(0);
         div.getCcdshinsakaiChikuCode().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
                 Code.EMPTY);
@@ -515,7 +521,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.getShinsakaiIinShuryoYMD().setValue(div.getTxtShinsaIinYMDTo().getValue());
         row.setShimei(div.getTxtShimei().getValue());
         row.setKanaShimei(div.getTxtKanaShimei().getValue());
-        row.setSeibetsu(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称());
+        if (!RString.isNullOrEmpty(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称())) {
+            row.setSeibetsu(Seibetsu.toValue(div.getRadSeibetsu().getSelectedKey()).get名称());
+        }
         if (div.getTxtBirthYMD().getValue() != null && !div.getTxtBirthYMD().getValue().toDateString().isEmpty()) {
             row.getBarthYMD().setValue(new RDate(div.getTxtBirthYMD().getValue().toString()));
         }
@@ -621,7 +629,11 @@ public class ShinsakaiIinJohoTorokuHandler {
         builder.append(clickRow.getShinsakaiIinShuryoYMD().getValue());
         builder.append(clickRow.getShimei());
         builder.append(clickRow.getKanaShimei());
-        builder.append(clickRow.getSeibetsu());
+        if (!RString.isNullOrEmpty(clickRow.getSeibetsu())) {
+            builder.append(clickRow.getSeibetsu());
+        } else {
+            builder.append(RString.EMPTY);
+        }
         if (clickRow.getBarthYMD().getValue() != null) {
             builder.append(clickRow.getBarthYMD().getValue().wareki().toDateString());
         }

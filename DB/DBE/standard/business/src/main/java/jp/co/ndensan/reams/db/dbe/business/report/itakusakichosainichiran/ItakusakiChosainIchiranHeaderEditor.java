@@ -161,7 +161,7 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         RString 郵便番号 = item.getYubinNo();
         source.listIchiranhyoUpper_4 = RString.EMPTY;
         if (!RString.isNullOrEmpty(郵便番号)) {
-            source.listIchiranhyoUpper_4 = 郵便番号.substring(0, 3).concat("-").concat(郵便番号.substring(3, 7));
+            source.listIchiranhyoUpper_4 = 郵便番号.substring(0, 3).concat("-").concat(郵便番号.substring(3));
         }
         source.listIchiranhyoUpper_5 = item.getTelNo();
         if (item.isJokyoFlag()) {
@@ -188,7 +188,7 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.listIchiranhyoLower1_2 = item.getDaihyoshaName();
         source.listIchiranhyoLower1_3 = item.getJusho();
         source.listIchiranhyoLower2_1 = item.getShujiiName();
-        if (!item.getSeibetsu().trim().isEmpty()) {
+        if (!RString.isNullOrEmpty(item.getSeibetsu())) {
             source.listIchiranhyoLower2_2 = Seibetsu.toValue(item.getSeibetsu()).get名称();
         }
         source.listIchiranhyoLower2_3 = item.getShinryokaName();
