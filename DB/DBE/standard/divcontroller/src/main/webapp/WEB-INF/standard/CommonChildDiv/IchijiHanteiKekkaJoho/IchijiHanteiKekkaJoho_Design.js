@@ -351,12 +351,20 @@ var DBE;
                 return new UZA.DropDownList(this.convFiledName("ddlJiritsudoChosa"));
             };
 
+            Controls.prototype.ddlChosahyoJiritsudoCode = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlChosahyoJiritsudoCode"));
+            };
+
             Controls.prototype.ddlJyotaiAnteisei = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlJyotaiAnteisei"));
             };
 
             Controls.prototype.ddlJiritsudoIkensho = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlJiritsudoIkensho"));
+            };
+
+            Controls.prototype.ddlIkenshoJiritsudoCode = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIkenshoJiritsudoCode"));
             };
 
             Controls.prototype.ddlKyufuKbn = function () {

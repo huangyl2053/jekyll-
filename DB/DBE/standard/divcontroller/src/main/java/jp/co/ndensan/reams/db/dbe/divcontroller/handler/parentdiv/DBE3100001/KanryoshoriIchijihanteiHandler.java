@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteike
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001.KanryoshoriIchijihanteiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001.dgHanteiTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -292,7 +294,15 @@ public class KanryoshoriIchijihanteiHandler {
             row.setIchijiHanteiKekkaNinchishoKasan(RString.EMPTY);
         }
 
-        row.setKeikokuCode(business.get要介護認定一次判定警告コード());
+        if (business.get要介護認定一次判定警告コード() != null) {
+            if (is警告コードAllZERO(business.get要介護認定一次判定警告コード())) {
+                row.setKeikokuCode(RString.EMPTY);
+            } else {
+                row.setKeikokuCode(business.get要介護認定一次判定警告コード());
+            }
+            row.setHiddenKeikokuCode(business.get要介護認定一次判定警告コード());
+        }
+
         row.getChosaJissibi().setValue(business.get認定調査実施年月日());
         row.getIkenshoJuryobi().setValue(business.get主治医意見書受領年月日());
 
@@ -312,6 +322,10 @@ public class KanryoshoriIchijihanteiHandler {
         row.getChukanHyokaKomoku4gun().setValue(divideValue(business.get中間評価項目得点第4群()));
         row.getChukanHyokaKomoku5gun().setValue(divideValue(business.get中間評価項目得点第5群()));
 
+        if (!RString.isNullOrEmpty(row.getIchijiHanteiKekkaCode())) {
+            set認知症自立度(business.get申請書管理番号(), row);
+        }
+
         if (business.get要介護認定状態の安定性コード() != null && !business.get要介護認定状態の安定性コード().isEmpty()) {
             row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(business.get要介護認定状態の安定性コード().value()).get名称());
         } else {
@@ -320,8 +334,10 @@ public class KanryoshoriIchijihanteiHandler {
 
         if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
             row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(business.get認知症自立度Ⅱ以上の蓋然性());
-        } else {
-            row.getNinchishoJiritsudoIIijoNoGaizensei().clearValue();
+            if (business.get認知症自立度Ⅱ以上の蓋然性().compareTo(Decimal.ZERO) < 0) {
+                row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(null);
+            }
+            row.getHiddenNinchishoJiritsudoIIijoNoGaizensei().setValue(business.get認知症自立度Ⅱ以上の蓋然性());
         }
 
         if (business.get推定される給付区分コード() != null && !business.get推定される給付区分コード().isEmpty()) {
@@ -538,9 +554,16 @@ public class KanryoshoriIchijihanteiHandler {
             row.setIchijiHanteiKekkaNinchishoKasan(IchijiHanteiKekkaCode09.
                     toValue(ichijiHantei.get要介護認定一次判定結果コード_認知症加算().value()).get名称());
         }
+
         if (ichijiHantei.get要介護認定一次判定警告コード() != null) {
-            row.setKeikokuCode(ichijiHantei.get要介護認定一次判定警告コード());
+            if (is警告コードAllZERO(ichijiHantei.get要介護認定一次判定警告コード())) {
+                row.setKeikokuCode(RString.EMPTY);
+            } else {
+                row.setKeikokuCode(ichijiHantei.get要介護認定一次判定警告コード());
+            }
+            row.setHiddenKeikokuCode(ichijiHantei.get要介護認定一次判定警告コード());
         }
+
         row.getKijunJikan().setValue(divideValue(ichijiHantei.get要介護認定等基準時間()));
         row.getKijunJikanShokuji().setValue(divideValue(ichijiHantei.get要介護認定等基準時間_食事()));
         row.getKijunJikanHaisetsu().setValue(divideValue(ichijiHantei.get要介護認定等基準時間_排泄()));
@@ -556,12 +579,23 @@ public class KanryoshoriIchijihanteiHandler {
         row.getChukanHyokaKomoku3gun().setValue(divideValue(ichijiHantei.get中間評価項目得点第3群()));
         row.getChukanHyokaKomoku4gun().setValue(divideValue(ichijiHantei.get中間評価項目得点第4群()));
         row.getChukanHyokaKomoku5gun().setValue(divideValue(ichijiHantei.get中間評価項目得点第5群()));
+
+        if (!RString.isNullOrEmpty(row.getIchijiHanteiKekkaCode())) {
+            set認知症自立度(new ShinseishoKanriNo(row.getShinseishoKanriNo()), row);
+        }
+
         if (!isNullOrEmpty(ichijiHantei.get要介護認定状態の安定性コード())) {
             row.setJotaiAnteiseiCode(JotaiAnteiseiCode.toValue(ichijiHantei.get要介護認定状態の安定性コード().value()).get名称());
         }
+
         if (ichijiHantei.get認知症自立度Ⅱ以上の蓋然性() != null) {
             row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(ichijiHantei.get認知症自立度Ⅱ以上の蓋然性());
+            if (ichijiHantei.get認知症自立度Ⅱ以上の蓋然性().compareTo(Decimal.ZERO) < 0) {
+                row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(null);
+            }
+            row.getHiddenNinchishoJiritsudoIIijoNoGaizensei().setValue(ichijiHantei.get認知症自立度Ⅱ以上の蓋然性());
         }
+
         if (!isNullOrEmpty(ichijiHantei.get認知機能及び状態安定性から推定される給付区分コード())) {
             row.setSuiteiKyufuKubunCode(SuiteiKyufuKubunCode.toValue(ichijiHantei.get認知機能及び状態安定性から推定される給付区分コード().value()).get名称());
         }
@@ -608,7 +642,7 @@ public class KanryoshoriIchijihanteiHandler {
             return true;
         }
         if (business.get要介護認定一次判定警告コード() != null
-                && !row.getKeikokuCode().equals(business.get要介護認定一次判定警告コード())) {
+                && !row.getHiddenKeikokuCode().equals(business.get要介護認定一次判定警告コード())) {
             return true;
         }
 
@@ -624,7 +658,7 @@ public class KanryoshoriIchijihanteiHandler {
             return true;
         }
         if (business.get認知症自立度Ⅱ以上の蓋然性() != null
-                && !row.getNinchishoJiritsudoIIijoNoGaizensei().getValue().equals(business.get認知症自立度Ⅱ以上の蓋然性())) {
+                && !row.getHiddenNinchishoJiritsudoIIijoNoGaizensei().getValue().equals(business.get認知症自立度Ⅱ以上の蓋然性())) {
             return true;
         }
         if (business.get認知機能及び状態安定性から推定される給付区分コード() != null
@@ -813,7 +847,7 @@ public class KanryoshoriIchijihanteiHandler {
                 row.getIchijiHanteiKekkaCode(),
                 row.getIchijiHanteiKekkaNinchishoKasan(),
                 row.getIchijiHanteiKekkaNinchishoKasanCode(),
-                row.getKeikokuCode(),
+                row.getHiddenKeikokuCode(),
                 new RString(row.getChosaJissibi().getValue().toString()),
                 new RString(row.getIkenshoJuryobi().getValue().toString()),
                 new RString(row.getKijunJikan().getValue().roundHalfUpTo(ROUND_UP).toString()),
@@ -831,10 +865,40 @@ public class KanryoshoriIchijihanteiHandler {
                 new RString(row.getChukanHyokaKomoku3gun().getValue().roundHalfUpTo(ROUND_UP).toString()),
                 new RString(row.getChukanHyokaKomoku4gun().getValue().roundHalfUpTo(ROUND_UP).toString()),
                 new RString(row.getChukanHyokaKomoku5gun().getValue().roundHalfUpTo(ROUND_UP).toString()),
+                row.getNinteiChosaTorikomiUmu(),
+                row.getNinteiChosaNinchishodo(),
+                row.getIkenshoTorikomiUmu(),
+                row.getIkenshoNinchishodo(),
+                row.getNinchishoJiritsudoIIijoNoGaizensei().getValue() == null ? RString.EMPTY
+                : new RString(row.getNinchishoJiritsudoIIijoNoGaizensei().getValue().roundHalfUpTo(ROUND_UP).toString()),
                 row.getJotaiAnteiseiCode(),
-                new RString(row.getNinchishoJiritsudoIIijoNoGaizensei().getValue().toString()),
                 row.getSuiteiKyufuKubunCode(),
                 row.getKoroshoIfShikibetsuCode()
         );
+    }
+
+    private void set認知症自立度(ShinseishoKanriNo shinseishoKanriNo, dgHanteiTaishosha_Row row) {
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+        List<RString> jiritsudoCode = manager.get認知症高齢者自立度コード(shinseishoKanriNo);
+        if (!jiritsudoCode.isEmpty()) {
+            if (jiritsudoCode.get(0).isEmpty()) {
+                row.setNinteiChosaTorikomiUmu(RString.EMPTY);
+                row.setNinteiChosaNinchishodo(RString.EMPTY);
+            } else {
+                row.setNinteiChosaTorikomiUmu(new RString("済"));
+                row.setNinteiChosaNinchishodo(NinchishoNichijoSeikatsuJiritsudoCode.toValue(jiritsudoCode.get(0)).get名称());
+            }
+            if (jiritsudoCode.get(1).isEmpty()) {
+                row.setIkenshoTorikomiUmu(RString.EMPTY);
+                row.setIkenshoNinchishodo(RString.EMPTY);
+            } else {
+                row.setIkenshoTorikomiUmu(new RString("済"));
+                row.setIkenshoNinchishodo(NinchishoNichijoSeikatsuJiritsudoCode.toValue(jiritsudoCode.get(1)).get名称());
+            }
+        }
+    }
+
+    private boolean is警告コードAllZERO(RString 警告コード) {
+        return 警告コード.toString().matches("^0+$");
     }
 }

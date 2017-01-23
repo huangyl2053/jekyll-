@@ -77,10 +77,18 @@ public class KanryoshoriCsvEntity {
     private final RString 中間評価項目特定第４群;
     @CsvField(order = 290, name = "中間評価項目特定第５群")
     private final RString 中間評価項目特定第５群;
-    @CsvField(order = 300, name = "安定性")
-    private final RString 安定性;
-    @CsvField(order = 310, name = "認知症自立度２以上の蓋然性")
+    @CsvField(order = 291, name = "認定調査結果取込有無")
+    private final RString 認定調査結果取込有無;
+    @CsvField(order = 292, name = "認定調査結果認知症度")
+    private final RString 認定調査結果認知症度;
+    @CsvField(order = 293, name = "主治医意見書取込有無")
+    private final RString 主治医意見書取込有無;
+    @CsvField(order = 294, name = "主治医意見書認知症度")
+    private final RString 主治医意見書認知症度;
+    @CsvField(order = 300, name = "認知症自立度２以上の蓋然性")
     private final RString 認知症自立度２以上の蓋然性;
+    @CsvField(order = 310, name = "安定性")
+    private final RString 安定性;
     @CsvField(order = 320, name = "推定される給付区分")
     private final RString 推定される給付区分;
     @CsvField(order = 330, name = "厚労省IF識別コード")
@@ -89,6 +97,7 @@ public class KanryoshoriCsvEntity {
     /**
      * コンストラクタです。
      *
+     * @param 状態 状態
      * @param 申請書管理番号 申請書管理番号
      * @param 証記載保険者 証記載保険者
      * @param 被保険者番号 被保険者番号
@@ -118,8 +127,12 @@ public class KanryoshoriCsvEntity {
      * @param 中間評価項目特定第３群 中間評価項目特定第３群
      * @param 中間評価項目特定第４群 中間評価項目特定第４群
      * @param 中間評価項目特定第５群 中間評価項目特定第５群
-     * @param 安定性 安定性
+     * @param 認定調査結果取込有無 認定調査結果取込有無
+     * @param 認定調査結果認知症度 認定調査結果認知症度
+     * @param 主治医意見書取込有無 主治医意見書取込有無
+     * @param 主治医意見書認知症度 主治医意見書認知症度
      * @param 認知症自立度２以上の蓋然性 認知症自立度２以上の蓋然性
+     * @param 安定性 安定性
      * @param 推定される給付区分 推定される給付区分
      * @param 厚労省IF識別コード 厚労省IF識別コード
      */
@@ -131,8 +144,9 @@ public class KanryoshoriCsvEntity {
             RString 基準時間_移動, RString 基準時間_清潔保持, RString 基準時間_間接ケア, RString 基準時間_BPSD,
             RString 基準時間_機能訓練, RString 基準時間_医療関連, RString 基準時間_認知症加算,
             RString 中間評価項目特定第１群, RString 中間評価項目特定第２群, RString 中間評価項目特定第３群,
-            RString 中間評価項目特定第４群, RString 中間評価項目特定第５群, RString 安定性,
-            RString 認知症自立度２以上の蓋然性, RString 推定される給付区分, RString 厚労省IF識別コード) {
+            RString 中間評価項目特定第４群, RString 中間評価項目特定第５群,
+            RString 認定調査結果取込有無, RString 認定調査結果認知症度, RString 主治医意見書取込有無, RString 主治医意見書認知症度,
+            RString 認知症自立度２以上の蓋然性, RString 安定性, RString 推定される給付区分, RString 厚労省IF識別コード) {
         this.状態 = 状態;
         this.申請書管理番号 = 申請書管理番号;
         this.証記載保険者 = 証記載保険者;
@@ -163,8 +177,12 @@ public class KanryoshoriCsvEntity {
         this.中間評価項目特定第３群 = 中間評価項目特定第３群;
         this.中間評価項目特定第４群 = 中間評価項目特定第４群;
         this.中間評価項目特定第５群 = 中間評価項目特定第５群;
-        this.安定性 = 安定性;
+        this.認定調査結果取込有無 = 認定調査結果取込有無;
+        this.認定調査結果認知症度 = 認定調査結果認知症度;
+        this.主治医意見書取込有無 = 主治医意見書取込有無;
+        this.主治医意見書認知症度 = 主治医意見書認知症度;
         this.認知症自立度２以上の蓋然性 = 認知症自立度２以上の蓋然性;
+        this.安定性 = 安定性;
         this.推定される給付区分 = 推定される給付区分;
         this.厚労省IF識別コード = 厚労省IF識別コード;
     }

@@ -16,15 +16,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("radStatus")
     private RadioButton radStatus;
     @JsonProperty("txtSum")
@@ -43,6 +41,8 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
     private Button btnIchijiHanteiValidate;
     @JsonProperty("btnHanteishoriAto")
     private Button btnHanteishoriAto;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,15 +50,6 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
-     */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
-    }
-
     /*
      * getradStatus
      * @return radStatus
@@ -219,6 +210,15 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
     @JsonProperty("btnHanteishoriAto")
     public void setBtnHanteishoriAto(Button btnHanteishoriAto) {
         this.btnHanteishoriAto = btnHanteishoriAto;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>

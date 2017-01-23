@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
@@ -122,7 +123,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
             Code 障害高齢者自立度コード = 認定調査票_基本調査.getShogaiNichijoSeikatsuJiritsudoCode();
             Code 認知症高齢者自立度コード = 認定調査票_基本調査.getNinchishoNichijoSeikatsuJiritsudoCode();
             障害高齢者自立度 = 障害高齢者自立度コード == null ? RString.EMPTY : 障害高齢者自立度コード.getColumnValue();
-            認知症高齢者自立度 = 障害高齢者自立度コード == null ? RString.EMPTY : 認知症高齢者自立度コード.getColumnValue();
+            認知症高齢者自立度 = 認知症高齢者自立度コード == null ? RString.EMPTY : 認知症高齢者自立度コード.getColumnValue();
         }
         RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
 
@@ -150,6 +151,38 @@ public class IchijiHanteiKekkaJohoSearchManager {
             builder.append(str);
         }
         return builder.toRString();
+    }
+
+    /**
+     * 認知症高齢者自立度コードを返します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return Listの1件目に認定調査票の認知症自立度コード、2件目に意見書の認知症自立度コードが設定されている。
+     * 正しい値が取得できない場合は空のListが返却される。
+     */
+    @Transaction
+    public List<RString> get認知症高齢者自立度コード(ShinseishoKanriNo 申請書管理番号) {
+        if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
+            return Collections.<RString>emptyList();
+        }
+        Code 厚労省IF識別コード = get厚労省IF識別コード(申請書管理番号);
+        if (!KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
+                && !KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+            return Collections.<RString>emptyList();
+        }
+
+        DbT4203NinteichosahyoKihonChosaEntity 認定調査票_基本調査 = get認定調査票_基本調査(申請書管理番号);
+        RString 認知症高齢者自立度 = RString.EMPTY;
+        if (認定調査票_基本調査 != null) {
+            Code 認知症高齢者自立度コード = 認定調査票_基本調査.getNinchishoNichijoSeikatsuJiritsudoCode();
+            認知症高齢者自立度 = 認知症高齢者自立度コード == null ? RString.EMPTY : 認知症高齢者自立度コード.getColumnValue();
+        }
+        RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
+
+        List<RString> 自立度コードs = new ArrayList<>();
+        自立度コードs.add(認知症高齢者自立度);
+        自立度コードs.add(認知症高齢者自立度_主治医意見書);
+        return 自立度コードs;
     }
 
     /**

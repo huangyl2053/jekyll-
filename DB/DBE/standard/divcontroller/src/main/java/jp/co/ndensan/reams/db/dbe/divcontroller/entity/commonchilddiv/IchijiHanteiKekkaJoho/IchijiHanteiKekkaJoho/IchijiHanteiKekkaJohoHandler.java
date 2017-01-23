@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
@@ -137,6 +139,20 @@ public class IchijiHanteiKekkaJohoHandler {
         div.getDdlJiritsudoIkensho().setDataSource(miSumiSource);
         div.getDdlJiritsudoIkensho().setSelectedIndex(0);
 
+        List<KeyValueDataSource> chosahyoJiritsudoSource = new ArrayList<>();
+        for (NinchishoNichijoSeikatsuJiritsudoCode code : NinchishoNichijoSeikatsuJiritsudoCode.values()) {
+            chosahyoJiritsudoSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        div.getDdlChosahyoJiritsudoCode().setDataSource(chosahyoJiritsudoSource);
+        div.getDdlChosahyoJiritsudoCode().setSelectedIndex(0);
+
+        List<KeyValueDataSource> ikenshoJiritsudoSource = new ArrayList<>();
+        for (ShogaiNichijoSeikatsuJiritsudoCode code : ShogaiNichijoSeikatsuJiritsudoCode.values()) {
+            ikenshoJiritsudoSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        div.getDdlIkenshoJiritsudoCode().setDataSource(ikenshoJiritsudoSource);
+        div.getDdlIkenshoJiritsudoCode().setSelectedIndex(0);
+
         List<KeyValueDataSource> anteiseiSource = new ArrayList<>();
         for (JotaiAnteiseiCode code : JotaiAnteiseiCode.values()) {
             anteiseiSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
@@ -243,11 +259,27 @@ public class IchijiHanteiKekkaJohoHandler {
         MiSumiKubun shujiiIkenshoMisumiKubun = hasNot主治医意見書(shinseishoKanriNo) ? MiSumiKubun.未 : MiSumiKubun.済;
         div.getDdlJiritsudoIkensho().setSelectedKey(shujiiIkenshoMisumiKubun.getKey());
 
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+        List<RString> jiritsudoCode = manager.get認知症高齢者自立度コード(shinseishoKanriNo);
+        if (!jiritsudoCode.isEmpty()) {
+            if (jiritsudoCode.get(0).isEmpty()) {
+                div.getDdlChosahyoJiritsudoCode().setSelectedIndex(0);
+            } else {
+                div.getDdlChosahyoJiritsudoCode().setSelectedKey(jiritsudoCode.get(0));
+            }
+            if (jiritsudoCode.get(1).isEmpty()) {
+                div.getDdlIkenshoJiritsudoCode().setSelectedIndex(0);
+            } else {
+                div.getDdlIkenshoJiritsudoCode().setSelectedKey(jiritsudoCode.get(1));
+            }
+        }
+
         if (hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().equals(new Decimal(-1))) {
             div.getTxtGaizensei().clearValue();
         } else {
             div.getTxtGaizensei().setValue(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性());
         }
+        div.setHiddenGaizensei(new RString(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2).toString()));
 
         Code jotaiAnteiseiCode = hanteiKekka.get要介護認定状態の安定性コード();
         RString jotaiAnteiseiCodeValue = jotaiAnteiseiCode == null ? RString.EMPTY : jotaiAnteiseiCode.value();
@@ -381,7 +413,7 @@ public class IchijiHanteiKekkaJohoHandler {
         builder.set中間評価項目得点第7群(0);
 
         builder.set要介護認定状態の安定性コード(new Code(getValueOrEmpty(div.getDdlJyotaiAnteisei().getSelectedKey())));
-        builder.set認知症自立度Ⅱ以上の蓋然性(div.getTxtGaizensei().getValue() == null ? Decimal.ZERO : div.getTxtGaizensei().getValue());
+        builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(div.getHiddenGaizensei().toString()));
         builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(getValueOrEmpty(div.getDdlKyufuKbn().getSelectedKey())));
 
         builder.set運動能力の低下していない認知症高齢者の指標コード(Code.EMPTY);

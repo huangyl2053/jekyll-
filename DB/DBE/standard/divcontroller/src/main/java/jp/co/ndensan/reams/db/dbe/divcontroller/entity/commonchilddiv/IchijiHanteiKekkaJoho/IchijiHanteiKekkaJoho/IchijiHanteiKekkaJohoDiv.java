@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekkaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -60,10 +60,14 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private TextBoxNum txtGaizensei;
     @JsonProperty("ddlJiritsudoChosa")
     private DropDownList ddlJiritsudoChosa;
+    @JsonProperty("ddlChosahyoJiritsudoCode")
+    private DropDownList ddlChosahyoJiritsudoCode;
     @JsonProperty("ddlJyotaiAnteisei")
     private DropDownList ddlJyotaiAnteisei;
     @JsonProperty("ddlJiritsudoIkensho")
     private DropDownList ddlJiritsudoIkensho;
+    @JsonProperty("ddlIkenshoJiritsudoCode")
+    private DropDownList ddlIkenshoJiritsudoCode;
     @JsonProperty("ddlKyufuKbn")
     private DropDownList ddlKyufuKbn;
     @JsonProperty("lblIchijiHanteiKeikokuCode")
@@ -84,6 +88,8 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private RString modeType;
     @JsonProperty("ichijiHanteiKekka")
     private RString ichijiHanteiKekka;
+    @JsonProperty("hiddenGaizensei")
+    private RString hiddenGaizensei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -326,6 +332,24 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
+     * getddlChosahyoJiritsudoCode
+     * @return ddlChosahyoJiritsudoCode
+     */
+    @JsonProperty("ddlChosahyoJiritsudoCode")
+    public DropDownList getDdlChosahyoJiritsudoCode() {
+        return ddlChosahyoJiritsudoCode;
+    }
+
+    /*
+     * setddlChosahyoJiritsudoCode
+     * @param ddlChosahyoJiritsudoCode ddlChosahyoJiritsudoCode
+     */
+    @JsonProperty("ddlChosahyoJiritsudoCode")
+    public void setDdlChosahyoJiritsudoCode(DropDownList ddlChosahyoJiritsudoCode) {
+        this.ddlChosahyoJiritsudoCode = ddlChosahyoJiritsudoCode;
+    }
+
+    /*
      * getddlJyotaiAnteisei
      * @return ddlJyotaiAnteisei
      */
@@ -359,6 +383,24 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     @JsonProperty("ddlJiritsudoIkensho")
     public void setDdlJiritsudoIkensho(DropDownList ddlJiritsudoIkensho) {
         this.ddlJiritsudoIkensho = ddlJiritsudoIkensho;
+    }
+
+    /*
+     * getddlIkenshoJiritsudoCode
+     * @return ddlIkenshoJiritsudoCode
+     */
+    @JsonProperty("ddlIkenshoJiritsudoCode")
+    public DropDownList getDdlIkenshoJiritsudoCode() {
+        return ddlIkenshoJiritsudoCode;
+    }
+
+    /*
+     * setddlIkenshoJiritsudoCode
+     * @param ddlIkenshoJiritsudoCode ddlIkenshoJiritsudoCode
+     */
+    @JsonProperty("ddlIkenshoJiritsudoCode")
+    public void setDdlIkenshoJiritsudoCode(DropDownList ddlIkenshoJiritsudoCode) {
+        this.ddlIkenshoJiritsudoCode = ddlIkenshoJiritsudoCode;
     }
 
     /*
@@ -539,6 +581,24 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     @JsonProperty("ichijiHanteiKekka")
     public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
         this.ichijiHanteiKekka = ichijiHanteiKekka;
+    }
+
+    /*
+     * gethiddenGaizensei
+     * @return hiddenGaizensei
+     */
+    @JsonProperty("hiddenGaizensei")
+    public RString getHiddenGaizensei() {
+        return hiddenGaizensei;
+    }
+
+    /*
+     * sethiddenGaizensei
+     * @param hiddenGaizensei hiddenGaizensei
+     */
+    @JsonProperty("hiddenGaizensei")
+    public void setHiddenGaizensei(RString hiddenGaizensei) {
+        this.hiddenGaizensei = hiddenGaizensei;
     }
 
     /*

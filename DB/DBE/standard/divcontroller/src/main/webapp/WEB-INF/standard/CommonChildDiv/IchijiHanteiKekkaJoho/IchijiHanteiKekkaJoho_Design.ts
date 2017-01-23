@@ -357,12 +357,20 @@ module DBE {
                 return new UZA.DropDownList(this.convFiledName("ddlJiritsudoChosa"));
             }
 
+            public ddlChosahyoJiritsudoCode(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlChosahyoJiritsudoCode"));
+            }
+
             public ddlJyotaiAnteisei(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlJyotaiAnteisei"));
             }
 
             public ddlJiritsudoIkensho(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlJiritsudoIkensho"));
+            }
+
+            public ddlIkenshoJiritsudoCode(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlIkenshoJiritsudoCode"));
             }
 
             public ddlKyufuKbn(): UZA.DropDownList {
