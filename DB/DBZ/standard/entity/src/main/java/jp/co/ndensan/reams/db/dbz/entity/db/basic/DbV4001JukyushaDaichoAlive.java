@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 /**
  * 受給者台帳Aliveテーブルの項目定義クラスです。
  */
-public enum DbV4001JukyushaDaicho implements IColumnDefinition {
+public enum DbV4001JukyushaDaichoAlive implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
@@ -119,6 +119,10 @@ public enum DbV4001JukyushaDaicho implements IColumnDefinition {
      * ninteiYMD
      */
     ninteiYMD(2147483647, 0),
+    /**
+     * minashiCode
+     */
+    minashiCode(2147483647, 0),
     /**
      * shiteiServiceShurui01
      */
@@ -358,16 +362,12 @@ public enum DbV4001JukyushaDaicho implements IColumnDefinition {
     /**
      * logicalDeletedFlag
      */
-    logicalDeletedFlag(1, 0),
-    /**
-     * minashiCode
-     */
-    minashiCode(2147483647, 0);
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbV4001JukyushaDaicho(int maxLength, int scale) {
+    private DbV4001JukyushaDaichoAlive(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

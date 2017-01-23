@@ -29,6 +29,7 @@
          "DbT7014KaigoSetai"."updateCount" as "dbT7014KaigoSetai_updateCount",
          "DbT7014KaigoSetai"."lastUpdateTimestamp" as "dbT7014KaigoSetai_lastUpdateTimestamp",
          "DbT7014KaigoSetai"."lastUpdateReamsLoginId" as "dbT7014KaigoSetai_lastUpdateReamsLoginId",
+         "DbT7014KaigoSetai"."setaiCode" as "dbT7014KaigoSetai_setaiCode",
          "DbT7014KaigoSetai"."setaiInshikibetsuCode" as "dbT7014KaigoSetai_setaiInshikibetsuCode",
          "DbT7014KaigoSetai"."honninKubun" as "dbT7014KaigoSetai_honninKubun"
     </sql>
@@ -48,13 +49,9 @@
         <result property="updateCount" column="dbT7014KaigoSetai_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT7014KaigoSetai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7014KaigoSetai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="dbT7014KaigoSetai_setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
         <result property="setaiInshikibetsuCode" column="dbT7014KaigoSetai_setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="honninKubun" column="dbT7014KaigoSetai_honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7014KaigoSetaiEntity">
-    SELECT
-    <include refid="allColumns_DbT7014KaigoSetai" />
-    FROM
-    rgdb."DbT7014KaigoSetai"
-</select>
+
 </mapper>

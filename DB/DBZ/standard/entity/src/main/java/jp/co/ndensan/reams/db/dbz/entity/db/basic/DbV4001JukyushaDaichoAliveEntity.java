@@ -19,10 +19,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 /**
  * 受給者台帳Aliveテーブルのエンティティクラスです。
  */
-public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001JukyushaDaichoEntity> implements IDbAccessable {
+public class DbV4001JukyushaDaichoAliveEntity extends DbTableEntityBase<DbV4001JukyushaDaichoAliveEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
-    public static final RString TABLE_NAME = new RString("DbV4001JukyushaDaicho");
+    public static final RString TABLE_NAME = new RString("DbV4001JukyushaDaichoAlive");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -52,6 +52,7 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     private FlexibleDate ninteiYukoKikanShuryoYMD;
     private FlexibleDate ninteiYMD;
+    private Code minashiCode;
     private ServiceShuruiCode shiteiServiceShurui01;
     private ServiceShuruiCode shiteiServiceShurui02;
     private ServiceShuruiCode shiteiServiceShurui03;
@@ -112,7 +113,6 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
     private boolean shikakuShutokuMaeShinseiFlag;
     private boolean kyuSochishaFlag;
     private boolean logicalDeletedFlag;
-    private Code minashiCode;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -538,6 +538,25 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
      */
     public void setNinteiYMD(FlexibleDate ninteiYMD) {
         this.ninteiYMD = ninteiYMD;
+    }
+
+    /**
+     * minashiCodeのgetメソッドです。
+     * 
+     * @return minashiCode
+     */
+    @CheckForNull
+    public Code getMinashiCode() {
+        return minashiCode;
+    }
+
+    /**
+     * minashiCodeのsetメソッドです。
+     * 
+     * @param minashiCode minashiCode
+     */
+    public void setMinashiCode(Code minashiCode) {
+        this.minashiCode = minashiCode;
     }
 
     /**
@@ -1681,33 +1700,14 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
     }
 
     /**
-     * minashiCodeのgetメソッドです。
-     * 
-     * @return minashiCode
-     */
-    @CheckForNull
-    public Code getMinashiCode() {
-        return minashiCode;
-    }
-
-    /**
-     * minashiCodeのsetメソッドです。
-     * 
-     * @param minashiCode minashiCode
-     */
-    public void setMinashiCode(Code minashiCode) {
-        this.minashiCode = minashiCode;
-    }
-
-    /**
-     * このエンティティの主キーが他の{@literal DbV4001JukyushaDaichoEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbV4001JukyushaDaichoAliveEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
      * @return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbV4001JukyushaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbV4001JukyushaDaichoAliveEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbV4001JukyushaDaichoEntity other) {
+    public boolean equalsPrimaryKeys(DbV4001JukyushaDaichoAliveEntity other) {
         if (other == null) {
             return false;
         }
@@ -1718,7 +1718,7 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbV4001JukyushaDaichoEntity entity) {
+    public void shallowCopy(DbV4001JukyushaDaichoAliveEntity entity) {
         this.shichosonCode = entity.shichosonCode;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.rirekiNo = entity.rirekiNo;
@@ -1739,6 +1739,7 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
         this.ninteiYukoKikanKaishiYMD = entity.ninteiYukoKikanKaishiYMD;
         this.ninteiYukoKikanShuryoYMD = entity.ninteiYukoKikanShuryoYMD;
         this.ninteiYMD = entity.ninteiYMD;
+        this.minashiCode = entity.minashiCode;
         this.shiteiServiceShurui01 = entity.shiteiServiceShurui01;
         this.shiteiServiceShurui02 = entity.shiteiServiceShurui02;
         this.shiteiServiceShurui03 = entity.shiteiServiceShurui03;
@@ -1799,7 +1800,6 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
         this.shikakuShutokuMaeShinseiFlag = entity.shikakuShutokuMaeShinseiFlag;
         this.kyuSochishaFlag = entity.kyuSochishaFlag;
         this.logicalDeletedFlag = entity.logicalDeletedFlag;
-        this.minashiCode = entity.minashiCode;
     }
 
     /**
@@ -1808,9 +1808,8 @@ public class DbV4001JukyushaDaichoEntity extends DbTableEntityBase<DbV4001Jukyus
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, hihokenshaNo, rirekiNo, edaban, shinseishoKanriNo, shinseiJokyoKubun, shishoCode, chokkinFlag, shikibetsuCode, jukyuShinseiJiyu, shinseiRiyu, shinseishaKankeiCode, homninKankei, jukyuShinseiYMD, nigoTokuteiShippeiCode, shinsakaiIraiYMD, yokaigoJotaiKubunCode, ninteiYukoKikanKaishiYMD, ninteiYukoKikanShuryoYMD, ninteiYMD, shiteiServiceShurui01, shiteiServiceShurui02, shiteiServiceShurui03, shiteiServiceShurui04, shiteiServiceShurui05, shiteiServiceShurui06, shiteiServiceShurui07, shiteiServiceShurui08, shiteiServiceShurui09, shiteiServiceShurui10, shiteiServiceShurui11, shiteiServiceShurui12, shiteiServiceShurui13, shiteiServiceShurui14, shiteiServiceShurui15, shiteiServiceShurui16, shiteiServiceShurui17, shiteiServiceShurui18, shiteiServiceShurui19, shiteiServiceShurui20, shiteiServiceShurui21, shiteiServiceShurui22, shiteiServiceShurui23, shiteiServiceShurui24, shiteiServiceShurui25, shiteiServiceShurui26, shiteiServiceShurui27, shiteiServiceShurui28, shiteiServiceShurui29, shiteiServiceShurui30, soshitsuYMD, chokkinIdoYMD, chokkinIdoJiyuCode, yukoMukoKubun, dataKubun, remban, idoRiyu, shinseishoKubun, sakujoJiyuCode, yoshienshaNinteiShinseiFlag, shikyuGendoTanisu, shikyuGendoKaishiYMD, shikyuGendoShuryoYMD, tankiSikyuGendoNissu, tankiShikyuGendoKaishiYMD, tankiShikyuGendoShuryoYMD, toshoNinteiYukoKaishiYMD, toshoNinteiYukoShuryoYMD, jukyuShikakuShomeishoHakkoYMD1, jukyuShikakuShomeishoHakkoYMD2, shindanMeireishoHakkoYMD, nigoShinseiJuriTsuchishoHakkoYMD, ninteiKekkaTsuchishoHakkoYMD, kubunHenkoTsuchishoHakkoYMD, serviceHenkoTsuchishoHakkoYMD, ninteiKyakkaTsuchishoHakkoYMD, ninteiTorikeshiTsuchishoHakkoYMD, shikakuShutokuMaeShinseiFlag, kyuSochishaFlag, logicalDeletedFlag, minashiCode);
+        return super.toMd5(shichosonCode, hihokenshaNo, rirekiNo, edaban, shinseishoKanriNo, shinseiJokyoKubun, shishoCode, chokkinFlag, shikibetsuCode, jukyuShinseiJiyu, shinseiRiyu, shinseishaKankeiCode, homninKankei, jukyuShinseiYMD, nigoTokuteiShippeiCode, shinsakaiIraiYMD, yokaigoJotaiKubunCode, ninteiYukoKikanKaishiYMD, ninteiYukoKikanShuryoYMD, ninteiYMD, minashiCode, shiteiServiceShurui01, shiteiServiceShurui02, shiteiServiceShurui03, shiteiServiceShurui04, shiteiServiceShurui05, shiteiServiceShurui06, shiteiServiceShurui07, shiteiServiceShurui08, shiteiServiceShurui09, shiteiServiceShurui10, shiteiServiceShurui11, shiteiServiceShurui12, shiteiServiceShurui13, shiteiServiceShurui14, shiteiServiceShurui15, shiteiServiceShurui16, shiteiServiceShurui17, shiteiServiceShurui18, shiteiServiceShurui19, shiteiServiceShurui20, shiteiServiceShurui21, shiteiServiceShurui22, shiteiServiceShurui23, shiteiServiceShurui24, shiteiServiceShurui25, shiteiServiceShurui26, shiteiServiceShurui27, shiteiServiceShurui28, shiteiServiceShurui29, shiteiServiceShurui30, soshitsuYMD, chokkinIdoYMD, chokkinIdoJiyuCode, yukoMukoKubun, dataKubun, remban, idoRiyu, shinseishoKubun, sakujoJiyuCode, yoshienshaNinteiShinseiFlag, shikyuGendoTanisu, shikyuGendoKaishiYMD, shikyuGendoShuryoYMD, tankiSikyuGendoNissu, tankiShikyuGendoKaishiYMD, tankiShikyuGendoShuryoYMD, toshoNinteiYukoKaishiYMD, toshoNinteiYukoShuryoYMD, jukyuShikakuShomeishoHakkoYMD1, jukyuShikakuShomeishoHakkoYMD2, shindanMeireishoHakkoYMD, nigoShinseiJuriTsuchishoHakkoYMD, ninteiKekkaTsuchishoHakkoYMD, kubunHenkoTsuchishoHakkoYMD, serviceHenkoTsuchishoHakkoYMD, ninteiKyakkaTsuchishoHakkoYMD, ninteiTorikeshiTsuchishoHakkoYMD, shikakuShutokuMaeShinseiFlag, kyuSochishaFlag, logicalDeletedFlag);
     }
 
 // </editor-fold>
-
 }

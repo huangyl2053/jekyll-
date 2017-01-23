@@ -3,10 +3,9 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT7014KaigoSetaiの項目定義クラスです
- *
+ * 介護共有ファイルエントリ情報テーブルの項目定義クラスです。
  */
-public enum DbT7014KaigoSetai implements IColumnDefinition {
+public enum DbT7212KaigoSharedFileEntryJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
@@ -41,40 +40,22 @@ public enum DbT7014KaigoSetai implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
-     * 被保険者番号
+     * ファイル名
      */
-    hihokenshaNo(2147483647, 0),
+    fileName(64, 0),
     /**
-     * 管理識別区分
-     * <br/>1：賦課、2：高額介護、3：負担限度額、4：社福軽減
+     * エントリ情報
      */
-    kanriShikibetsuKubun(1, 0),
+    entryJoho(128, 0),
     /**
-     * 世帯把握基準年月日
+     * 共有ファイルID
      */
-    setaiHaakuKijunYMD(2147483647, 0),
-    /**
-     * 世帯員管理連番
-     */
-    setaiInkanriRenban(10, 0),
-    /**
-     * 世帯コード
-     */
-    setaiCode(2147483647, 0),
-    /**
-     * 世帯員識別コード
-     */
-    setaiInshikibetsuCode(2147483647, 0),
-    /**
-     * 本人区分
-     * <br/>1：本人、2：世帯構成員
-     */
-    honninKubun(1, 0);
+    sharedFileId(29, 0);
 
     private final int maxLength;
     private final int scale;
 
-    private DbT7014KaigoSetai(int maxLength, int scale) {
+    private DbT7212KaigoSharedFileEntryJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

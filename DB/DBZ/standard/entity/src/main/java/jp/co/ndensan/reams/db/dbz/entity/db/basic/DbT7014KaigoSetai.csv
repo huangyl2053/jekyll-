@@ -2,5 +2,6 @@
 kanriShikibetsuKubun,varchar,RString,,,,,管理識別区分,A
 setaiHaakuKijunYMD,UDD015YMD,FlexibleDate,,,,,世帯把握基準年月日,A
 setaiInkanriRenban,int4,int,,,,,世帯員管理連番,A
+setaiCode,UDD051SetaiCode,SetaiCode,,,,,世帯コード,A
 setaiInshikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,世帯員識別コード,A
 honninKubun,varchar,RString,,,,,本人区分,A

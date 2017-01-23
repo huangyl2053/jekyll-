@@ -18,6 +18,7 @@ yokaigoJotaiKubunCode,UDD035Code,Code,,,,,yokaigoJotaiKubunCode,A
 ninteiYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,ninteiYukoKikanKaishiYMD,A
 ninteiYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,ninteiYukoKikanShuryoYMD,A
 ninteiYMD,UDD015YMD,FlexibleDate,,,,,ninteiYMD,A
+minashiCode,UDD035Code,Code,,,,,minashiCode,A
 shiteiServiceShurui01,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,shiteiServiceShurui01,A
 shiteiServiceShurui02,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,shiteiServiceShurui02,A
 shiteiServiceShurui03,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,shiteiServiceShurui03,A
@@ -78,4 +79,3 @@ ninteiTorikeshiTsuchishoHakkoYMD,UDD015YMD,FlexibleDate,,,,,ninteiTorikeshiTsuch
 shikakuShutokuMaeShinseiFlag,bool,boolean,,,,,shikakuShutokuMaeShinseiFlag,A
 kyuSochishaFlag,bool,boolean,,,,,kyuSochishaFlag,A
 logicalDeletedFlag,bool,boolean,,,,,logicalDeletedFlag,A
-minashiCode,UDD035Code,Code,,,,,minashiCode,A
