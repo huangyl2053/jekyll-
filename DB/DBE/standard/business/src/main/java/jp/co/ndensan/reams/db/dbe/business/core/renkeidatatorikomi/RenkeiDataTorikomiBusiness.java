@@ -61,6 +61,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoh
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -618,10 +621,10 @@ public class RenkeiDataTorikomiBusiness {
         }
         return dbt5123Entity;
     }
-    
+
     /**
      * DbT5105NinteiKanryoJohoEntityの設定メソッドです。
-     * 
+     *
      * @param entity DbT5101RelateEntity
      * @return DbT5105NinteiKanryoJohoEntity
      */
@@ -641,10 +644,10 @@ public class RenkeiDataTorikomiBusiness {
         dbt5105Entity.setNinteiShinsakaiKanryoYMD(申請日);
         return dbt5105Entity;
     }
-    
+
     /**
      * DbT5121ShinseiRirekiJohoEntityの設定メソッドです。
-     * 
+     *
      * @param entity DbT5101RelateEntity
      * @return DbT5121ShinseiRirekiJohoEntity
      */
@@ -659,10 +662,10 @@ public class RenkeiDataTorikomiBusiness {
         }
         return dbt5121Entity;
     }
-    
+
     /**
      * DbT5129TennyuShiboEntityの設定メソッドです。
-     * 
+     *
      * @param entity DbT5101RelateEntity
      * @return DbT5129TennyuShiboEntity
      */
@@ -691,10 +694,10 @@ public class RenkeiDataTorikomiBusiness {
         dbt5129Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
         return dbt5129Entity;
     }
-    
+
     /**
      * DbT5130ShiboEntityの設定メソッドです。
-     * 
+     *
      * @param entity DbT5101RelateEntity
      * @return DbT5130ShiboEntity
      */
@@ -771,7 +774,9 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setTorisageKubunCode(getCode(dbt5101tempEntity.get取下区分コード()));
         dbt5101Entity.setHihokenshaKubunCode(dbt5101tempEntity.get被保険者区分コード());
         dbt5101Entity.setSeinengappiYMD(getFlexibleDate(dbt5101tempEntity.get生年月日()));
-        int 年齢 = get年齢(getFlexibleDate(dbt5101tempEntity.get認定申請日()), getFlexibleDate(dbt5101tempEntity.get生年月日()));
+        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(getFlexibleDate(dbt5101tempEntity.get生年月日())),
+                JuminJotai.住民, FlexibleDate.EMPTY, getFlexibleDate(dbt5101tempEntity.get認定申請日()));
+        int 年齢 = ageCalculator.get年齢().toInt();
         dbt5101Entity.setAge(年齢);
         dbt5101Entity.setSeibetsu(getCode(dbt5101tempEntity.get性別()));
         dbt5101Entity.setHihokenshaKana(getKanaMeisho(dbt5101tempEntity.get氏名_カナ()));
@@ -823,7 +828,9 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setTorisageKubunCode(getCode(dbt5101tempEntity.get取下区分コード()));
         dbt5101Entity.setHihokenshaKubunCode(dbt5101tempEntity.get被保険者区分コード());
         dbt5101Entity.setSeinengappiYMD(getFlexibleDate(dbt5101tempEntity.get生年月日()));
-        int 年齢 = get年齢(getFlexibleDate(dbt5101tempEntity.get認定申請日()), getFlexibleDate(dbt5101tempEntity.get生年月日()));
+        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(getFlexibleDate(dbt5101tempEntity.get生年月日())),
+                JuminJotai.住民, FlexibleDate.EMPTY, getFlexibleDate(dbt5101tempEntity.get認定申請日()));
+        int 年齢 = ageCalculator.get年齢().toInt();
         dbt5101Entity.setAge(年齢);
         dbt5101Entity.setSeibetsu(getCode(dbt5101tempEntity.get性別()));
         dbt5101Entity.setHihokenshaKana(getKanaMeisho(dbt5101tempEntity.get氏名_カナ()));
@@ -992,23 +999,5 @@ public class RenkeiDataTorikomiBusiness {
     private PersonalData toPersonalData(RString 申請書管理番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
-    }
-    
-    private int get年齢(FlexibleDate 基準日, FlexibleDate 生年月日) {
-        int 基準日_年 = 基準日.getYearValue();
-        int 基準日_月 = 基準日.getMonthValue();
-        int 基準日_日 = 基準日.getDayValue();
-        int 生年月日_年 = 生年月日.getYearValue();
-        int 生年月日_月 = 生年月日.getMonthValue();
-        int 生年月日_日 = 生年月日.getDayValue();
-        int 年齢 = 基準日_年 - 生年月日_年;
-        if (基準日_月 < 生年月日_月) {
-            年齢 = 年齢 - 1;
-        } else if (基準日_月 == 生年月日_月) {
-            if (基準日_日 < 生年月日_日) {
-                年齢 = 年齢 - 1;
-            }
-        }
-        return 年齢;
     }
 }
