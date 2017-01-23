@@ -149,7 +149,8 @@ public class ShinsakaiIinJohoToroku {
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報);
         div.getDgShinsaInJohoIchiran().setDataSource(createHandOf(div).setShinsaInJohoIchiranDiv(審査会委員一覧情報));
         div.getDgShinsaInJohoIchiran().getGridSetting().setLimitRowCount(div.getTxtDispMax().getValue().intValue());
-        div.getDgShinsaInJohoIchiran().getGridSetting().setSelectedRowCount(manager.get審査会委員一覧件数(parameter));
+        List<ShinsakaiIinJoho> 審査会委員一覧情報件数 = manager.get審査会委員一覧件数(parameter).records();
+        div.getDgShinsaInJohoIchiran().getGridSetting().setSelectedRowCount(審査会委員一覧情報件数.size());
         return ResponseData.of(div).respond();
     }
 

@@ -106,10 +106,11 @@
     </select>
 
     <select resultOrdered="true" id="get審査会委員情報By表示条件件数"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
-            resultType="int" fetchSize="500">
+                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
+                 resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
         SELECT
-        count(0)
+        dbT5594ShinsakaiIinJoho.*,
+        dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.*
         FROM
         (
         SELECT
