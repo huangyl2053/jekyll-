@@ -100,4 +100,17 @@ public class DbT5301ShujiiIkenshoIraiJohoDac implements ISaveable<DbT5301ShujiiI
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT5301ShujiiIkenshoIraiJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。<br/>
+     * deleteの場合は物理削除します。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysical(DbT5301ShujiiIkenshoIraiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼情報エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

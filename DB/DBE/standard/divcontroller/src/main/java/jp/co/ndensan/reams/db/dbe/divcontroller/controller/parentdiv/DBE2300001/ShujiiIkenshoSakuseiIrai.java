@@ -7,44 +7,55 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2300001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2Builder;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.DBE2300001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgShinseishaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgMiwaritsukeShinseishaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -54,20 +65,38 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ShujiiIkenshoSakuseiIrai {
 
-    private static final RString 削除 = new RString("削除");
-    private static final RString 新規 = new RString("新規");
-    private static final RString 修正 = new RString("修正");
-    private static final int 数字_1 = 1;
-    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+    private static final RString 未割付 = new RString("未割付");
+    private static final RString 割付解除 = new RString("割付解除");
+    private static final RString 意見書作成依頼日より加算する = new RString("1");
 
     /**
      * 主治医意見書作成依頼の初期化です。
      *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
         createHandler(div).load();
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険者リスト変更
+     *
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onChange_ddlHokenshaList(ShujiiIkenshoSakuseiIraiDiv div) {
+        div.getCcdShujiiIryoKikanAndShujiiInput().clear();
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
+                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         return ResponseData.of(div).respond();
     }
 
@@ -82,112 +111,131 @@ public class ShujiiIkenshoSakuseiIrai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 対象者選択ボタン押下 。
+     *
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnNextToTaishoshaSentaku(ShujiiIkenshoSakuseiIraiDiv div) {
+        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
+        ValidationMessageControlPairs validationMessages = validationHandler.validate対象者検索ボタンクリック();
+        if (validationMessages.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        set意見書作成対象者情報(div);
+        return ResponseData.of(div).setState(DBE2300001StateName.対象者選択);
+    }
 
     /**
-     * 主治医意見書作成依頼の検索を処理します。
+     * 割付済み対象者照会ボタン押下
      *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
      */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnSearch(ShujiiIkenshoSakuseiIraiDiv div) {
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_WaritsukeZumiShokai(ShujiiIkenshoSakuseiIraiDiv div) {
+        dgWaritsukeZumiShinseishaIchiran_Row row = div.getDgWaritsukeZumiShinseishaIchiran().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
+        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
+        return ResponseData.of(div).respond();
+    }
 
-        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
-        if (pairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+    /**
+     * 未割付対象者照会ボタン押下
+     *
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_MiwaritsukeShokai(ShujiiIkenshoSakuseiIraiDiv div) {
+        dgMiwaritsukeShinseishaIchiran_Row row = div.getDgMiwaritsukeShinseishaIchiran().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
+        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「↑申請者を割付ける」ボタンのclick処理です。
+     *
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnWaritsuke(ShujiiIkenshoSakuseiIraiDiv div) {
+        List<dgMiwaritsukeShinseishaIchiran_Row> selectedItems = div.getDgMiwaritsukeShinseishaIchiran().getSelectedItems();
+        if (selectedItems.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("未割付申請者"));
+        }
+        if (div.getTxtIkenshoSakuseiIraiDay().getValue() == null) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("意見書作成依頼日"));
+        }
+        for (dgMiwaritsukeShinseishaIchiran_Row row : selectedItems) {
+            createHandler(div).set割付済み申請者一覧(row);
+            div.getDgMiwaritsukeShinseishaIchiran().getDataSource().remove(row);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「↓割付けを解除する」ボタンのclick処理です。
+     *
+     * @param div ShujiiIkenshoSakuseiIraiDiv
+     * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnKaijo(ShujiiIkenshoSakuseiIraiDiv div) {
+        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
+        if (selectedItems.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("割付済み申請者"));
         }
 
-        div.setHdnClickedButton(new RString(ClickedButton.検索する.name()));
-        RString hihokenshaNo = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue();
-        return searchCore(div, hihokenshaNo);
-    }
-
-    /**
-     * 最近処理者の「表示する」を押下した時の処理です。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSaikinshorishaClick(ShujiiIkenshoSakuseiIraiDiv div) {
-        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().validate();
-        if (pairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        boolean exist調査完了申請者 = false;
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
+            if (row.getJotai().isEmpty()
+                    && (row.getShujiiIkenshoTorokuKanryoYMD().getValue() != null && !row.getShujiiIkenshoTorokuKanryoYMD().getValue().isEmpty())) {
+                exist調査完了申請者 = true;
+                break;
+            }
         }
-
-        div.setHdnClickedButton(new RString(ClickedButton.表示する.name()));
-        RString hihokenshaNo = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
-        return searchCore(div, hihokenshaNo);
+        if (exist調査完了申請者) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.主治医意見書登録完了申請者ですが割付解除.getMessage().getCode(),
+                        DbeQuestionMessages.主治医意見書登録完了申請者ですが割付解除.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbeQuestionMessages.主治医意見書登録完了申請者ですが割付解除.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
+            createHandler(div).set未割付申請者一覧(row);
+            div.getDgWaritsukeZumiShinseishaIchiran().getDataSource().remove(row);
+        }
+        return ResponseData.of(div).respond();
     }
 
-    private ResponseData<ShujiiIkenshoSakuseiIraiDiv> searchCore(ShujiiIkenshoSakuseiIraiDiv div, RString hihokenshaNo) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(div));
-        ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-        ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameter(hihokenshaNo);
-        createHandler(div).init(manager.get申請者情報(param));
-        return ResponseData.of(div).setState(DBE2300001StateName.主治医意見書作成);
-    }
-
-    /**
-     * 主治医意見書作成依頼の検索画面へ戻ります。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnReSearch(ShujiiIkenshoSakuseiIraiDiv div) {
-        return ResponseData.of(div).setState(DBE2300001StateName.検索);
-    }
-    
     /**
      * 「依頼書等を印刷する」ボタンを押下した時の処理です。
+     *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onBeforeOpen_printDialog(ShujiiIkenshoSakuseiIraiDiv div) {
         ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = validationHandler.発行チェック();
-        if (validationMessages.iterator().hasNext()) {
+        ValidationMessageControlPairs validationMessages = validationHandler.validate依頼書等を印刷するボタンクリック();
+        if (validationMessages.existsError()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
         List<ShinseishoKanriNo> list = new ArrayList<>();
-        List<dgShinseishaIchiran_Row> rowList = div.getDgShinseishaIchiran().getSelectedItems();
-        for (dgShinseishaIchiran_Row row : rowList) {
-            if (!RString.isNullOrEmpty(row.getShiseishoKanriNo())) {
-                list.add(new ShinseishoKanriNo(row.getShiseishoKanriNo()));
+        List<dgWaritsukeZumiShinseishaIchiran_Row> rowList = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : rowList) {
+            if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             }
         }
         model.set申請書管理番号リスト(list);
-        model.set市町村コード(div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv()
-                .getDdlHokenshaNumber().getSelectedItem().get市町村コード());
+        model.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
-        RealInitialLocker.release(排他キー);
-        return ResponseData.of(div).respond();
-    }
-    
-    /**
-     * 依頼書/認定調査票（OCR用紙）/主治医意見書印刷画面閉じる前の処理です。
-     * @param div
-     * @return 
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onOkClose_printDialog(ShujiiIkenshoSakuseiIraiDiv div) {
-        onClick_btnSearch(div);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「依頼する」ボタン押下、指定値をセットします。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnIrai(ShujiiIkenshoSakuseiIraiDiv div) {
-
-        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = validationHandler.依頼チェック();
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
-        createHandler(div).set主治医();
         return ResponseData.of(div).respond();
     }
 
@@ -198,79 +246,208 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHozon(ShujiiIkenshoSakuseiIraiDiv div) {
-        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = validationHandler.保存チェック();
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        if (!ResponseHolder.isReRequest() && !createHandler(div).exist変更()) {
+            throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).
-                equals(ResponseHolder.getMessageCode()) && (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-            toHozon(div);
-            List<dgShinseishaIchiran_Row> oldList = div.getDgShinseishaIchiran().getSelectedItems();
-            onClick_btnSearch(div);
-            for (dgShinseishaIchiran_Row oldRow: oldList) {
-                setDgShinseishaIchiran(oldRow, div.getDgShinseishaIchiran());
-            }
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) 
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            insert主治医意見書作成依頼情報(div);
+            update主治医意見書作成依頼情報(div);
+            set割付済み申請者一覧(div);
+            div.getKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE2300001StateName.保存完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医選択画面へ戻ります。(対象者選択画面から)
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnBackToShujiiSentakuFromTaishoshaSentaku(ShujiiIkenshoSakuseiIraiDiv div) {
+        if (createHandler(div).exist変更()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        createHandler(div).load();
+        return ResponseData.of(div).setState(DBE2300001StateName.初期表示);
+    }
+
+    /**
+     * 主治医選択画面へ戻ります。(完了画面から)
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnBackToShujiiSentakuFromKanryo(ShujiiIkenshoSakuseiIraiDiv div) {
+        createHandler(div).load();
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
+        return ResponseData.of(div).setState(DBE2300001StateName.初期表示);
     }
     
-    private void setDgShinseishaIchiran(dgShinseishaIchiran_Row oldRow, DataGrid<dgShinseishaIchiran_Row> grid) {
-        for (dgShinseishaIchiran_Row newRow : grid.getDataSource()) {
-            if (oldRow.getShiseishoKanriNo().equals(newRow.getShiseishoKanriNo())) {
-                newRow.setSelected(true);
+    /**
+     * 
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 保険者名称 保険者名称
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @param 主治医コード 主治医コード
+     */
+    private void set意見書作成対象者情報(ShujiiIkenshoSakuseiIraiDiv div) {
+        set割付済み申請者一覧(div);
+        set未割付申請者一覧(div);
+    }
+    
+    private void set割付済み申請者一覧(ShujiiIkenshoSakuseiIraiDiv div) {
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+        ShujiiIryokikanCode 主治医医療機関コード = new ShujiiIryokikanCode(div.getCcdShujiiIryoKikanAndShujiiInput().getIryoKikanCode());
+        ShujiiCode 主治医コード = new ShujiiCode(div.getCcdShujiiIryoKikanAndShujiiInput().getShujiiCode());
+        RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
+        
+        ShujiiIkenshoSakuseiIraiParameter parameter
+                = ShujiiIkenshoSakuseiIraiParameter.createParamfor割付済み申請者一覧(証記載保険者番号, 支所コード, 主治医医療機関コード, 主治医コード);
+        List<WaritsukeBusiness> 割付済み申請者一覧 = ShujiiIkenshoSakuseiIraiManager.createInstance().get割付済み申請者情報(parameter);
+        createHandler(div).set割付済み申請者一覧(割付済み申請者一覧, 保険者名称);
+        
+        List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
+        List<ShujiiIkenshoIraiJoho> shujiiIkenshoIraiJohoList = new ArrayList<>();
+        for (WaritsukeBusiness 割付済み申請者 : 割付済み申請者一覧) {
+            ninteiKanryoJohoList.add(割付済み申請者.getNinteiKanryoJohoEntity());
+            if (割付済み申請者.getShujiiIkenshoIraiJoho() != null) {
+                shujiiIkenshoIraiJohoList.add(割付済み申請者.getShujiiIkenshoIraiJoho());
             }
         }
+        ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, Models.create(ninteiKanryoJohoList));
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, Models.create(shujiiIkenshoIraiJohoList));
+    }
+    
+    private void set未割付申請者一覧(ShujiiIkenshoSakuseiIraiDiv div) {
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+        RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
+        
+        ShujiiIkenshoSakuseiIraiParameter parameter = ShujiiIkenshoSakuseiIraiParameter.createParam主治医医療機関Or未割付申請者(証記載保険者番号, 支所コード);
+        List<WaritsukeBusiness> 未割付申請者一覧 = ShujiiIkenshoSakuseiIraiManager.createInstance().get未割付申請者情報(parameter);
+        createHandler(div).set未割付申請者一覧(未割付申請者一覧, 保険者名称);
     }
 
-    /**
-     * 被保険者変更処理を行います。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onChange_ddlHokensha(ShujiiIkenshoSakuseiIraiDiv div) {
-        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(
-                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード(),
-                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * レコードをクリックの場合、主治医意見書作成依頼情報が「主治医医療機関/主治医エリア」に正しく書き込みします。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onSelect_dgShinseishaIchiran(ShujiiIkenshoSakuseiIraiDiv div) {
-        dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        if (!RString.isNullOrEmpty(row.getIraiKubun())) {
-            div.getCcdShujiiIryoKikanAndShujiiInput().initialize(new LasdecCode(row.getShichosonCode()),
-                    new ShinseishoKanriNo(row.getShiseishoKanriNo()), SubGyomuCode.DBE認定支援,
-                    row.getShujiiIryoKikanCode(), row.getShujiiIryoKikan(), row.getShujiiCode(), row.getShujii());
-            div.getCcdShujiiIryoKikanAndShujiiInput().setShiteii(row.getShiteiiFlag());
-        } else {
-            div.getCcdShujiiIryoKikanAndShujiiInput().clear();
+    private void insert主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiDiv div) {
+        List<dgWaritsukeZumiShinseishaIchiran_Row> 割付済み申請者List = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        ShujiiIkenshoIraiJohoManager shujiiIkenshoIraiJohoManager = ShujiiIkenshoIraiJohoManager.createInstance();
+        RDate nowDate = RDate.getNowDate();
+        RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, nowDate, SubGyomuCode.DBE認定支援);
+        RString 主治医意見書作成期限日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, nowDate, SubGyomuCode.DBE認定支援);
+        FlexibleDate 主治医意見書作成依頼年月日 = new FlexibleDate(div.getTxtIkenshoSakuseiIraiDay().getValue().toDateString());
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : 割付済み申請者List) {
+            if (未割付.equals(row.getJotai())) {
+                ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
+                int 主治医意見書作成依頼履歴番号 = Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()) + 1;
+                RString 主治医医療機関コード = div.getCcdShujiiIryoKikanAndShujiiInput().getIryoKikanCode();
+                RString 主治医コード = div.getCcdShujiiIryoKikanAndShujiiInput().getShujiiCode();
+                FlexibleDate 認定申請日 = new FlexibleDate(row.getNinteiShinseiDay().getValue().toDateString());
+                FlexibleDate 主治医意見書作成期限年月日;
+                if (意見書作成依頼日より加算する.equals(主治医意見書作成期限設定方法)) {
+                    主治医意見書作成期限年月日 = 主治医意見書作成依頼年月日.plusDay(Integer.parseInt(主治医意見書作成期限日数.toString()));
+                } else {
+                    主治医意見書作成期限年月日 = 認定申請日.plusDay(Integer.parseInt(主治医意見書作成期限日数.toString()));
+                }
+                Code 医師区分コード;
+                if (div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii()) {
+                    医師区分コード = new Code(IshiKubunCode.指定医.getコード());
+                } else {
+                    医師区分コード = new Code(IshiKubunCode.主治医.getコード());
+                }
+                if (IkenshoIraiKubun.初回依頼.get名称().equals(row.getIkenshoIraiKubun())) {
+                    ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
+                    shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit()
+                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
+                            .set主治医医療機関コード(主治医医療機関コード)
+                            .set主治医コード(主治医コード)
+                            .set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.初回.getCode())
+                            .set主治医意見書作成回数(1)
+                            .set医師区分コード(医師区分コード)
+                            .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
+                            .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
+                            .set論理削除フラグ(false)
+                            .build();
+                    shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
+                    update要介護認定申請情報(申請書管理番号, 主治医コード, 主治医医療機関コード, row, div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii());
+                } else {
+                    ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
+                    shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit()
+                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
+                            .set主治医医療機関コード(主治医医療機関コード)
+                            .set主治医コード(主治医コード)
+                            .set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.再依頼.getCode())
+                            .set主治医意見書作成回数(1)
+                            .set医師区分コード(医師区分コード)
+                            .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
+                            .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
+                            .set論理削除フラグ(false)
+                            .build();
+                    shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
+                    update要介護認定申請情報(申請書管理番号, 主治医コード, 主治医医療機関コード, row, div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii());
+                }
+            }
         }
-        return ResponseData.of(div).respond();
+        div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(割付済み申請者List);
     }
 
-    /**
-     * dgShinseishaIchiranで照会ボタンを押下。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onBeforeOpenDialog_dgShinseishaIchiran(ShujiiIkenshoSakuseiIraiDiv div) {
-        dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        if (!RString.isNullOrEmpty(row.getShiseishoKanriNo())) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShiseishoKanriNo());
+    private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 主治医コード,
+            RString 主治医医療機関コード, dgWaritsukeZumiShinseishaIchiran_Row row, boolean 指定医フラグ) {
+        NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
+        NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(申請書管理番号);
+        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit()
+                .set主治医医療機関コード(主治医医療機関コード)
+                .set主治医コード(主治医コード)
+                .set指定医フラグ(指定医フラグ)
+                .build();
+        manager.save要介護認定申請情報(ninteiShinseiJoho.modifiedModel());
+    }
+
+    private void update主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiDiv div) {
+        List<dgMiwaritsukeShinseishaIchiran_Row> miwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
+        Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJohoList = ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, Models.class);
+        Models<ShujiiIkenshoIraiJohoIdentifier, ShujiiIkenshoIraiJoho> shujiiIkenshoIraiJohoList = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼情報, Models.class);
+        NinteiKanryoJohoManager ninteiKanryoJohoManager = NinteiKanryoJohoManager.createInstance();
+        ShujiiIkenshoIraiJohoManager shujiiIkenshoIraiJohoManager = ShujiiIkenshoIraiJohoManager.createInstance();
+        for (dgMiwaritsukeShinseishaIchiran_Row row : miwaritsukeShinseishaIchiran) {
+            if (割付解除.equals(row.getJotai())) {
+                ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
+                int 意見書依頼履歴番号 = Integer.parseInt(row.getIkenshoIraiRirekiNo().toString());
+                ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiJohoIdentifier = new ShujiiIkenshoIraiJohoIdentifier(申請書管理番号, 意見書依頼履歴番号);
+                ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = shujiiIkenshoIraiJohoList.get(shujiiIkenshoIraiJohoIdentifier);
+                if (shujiiIkenshoIraiJoho != null) {
+                    shujiiIkenshoIraiJohoManager.saveOrDeletePhysical(shujiiIkenshoIraiJoho.deleted());
+                }
+                
+                NinteiKanryoJohoIdentifier ninteiKanryoJohoIdentifier = new NinteiKanryoJohoIdentifier(申請書管理番号);
+                NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoJohoList.get(ninteiKanryoJohoIdentifier)
+                        .createBuilderForEdit()
+                        .set主治医意見書作成依頼完了年月日(FlexibleDate.EMPTY)
+                        .set主治医意見書登録完了年月日(FlexibleDate.EMPTY)
+                        .build();
+                ninteiKanryoJohoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
+            }
         }
-        return ResponseData.of(div).respond();
     }
 
     private ShujiiIkenshoSakuseiIraiHandler createHandler(ShujiiIkenshoSakuseiIraiDiv div) {
@@ -279,107 +456,5 @@ public class ShujiiIkenshoSakuseiIrai {
 
     private ShujiiIkenshoSakuseiIraiValidationHandler createValidationHandler(ShujiiIkenshoSakuseiIraiDiv div) {
         return new ShujiiIkenshoSakuseiIraiValidationHandler(div);
-    }
-
-    private void toHozon(ShujiiIkenshoSakuseiIraiDiv div) {
-        ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
-        for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
-            if (新規.equals(row.getStatus())) {
-                int rirekiNo = 数字_1;
-                if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
-                    rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 数字_1;
-                }
-                manager.save主治医意見書作成依頼情報(create主治医意見書作成依頼情報(div, row, rirekiNo), EntityDataState.Added);
-                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
-                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
-                NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param);
-
-                NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
-                shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
-                shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
-                shinseiJohoBuilder.set指定医フラグ(row.getShiteiiFlag());
-                shinseiJoho = shinseiJohoBuilder.build();
-                manager.save要介護認定申請情報(shinseiJoho, EntityDataState.Modified);
-            } else if (修正.equals(row.getStatus())) {
-                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
-                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                        row.getRirekiNo().toInt(), getHihokenshaNo(div));
-                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
-                ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
-                builder.set論理削除フラグ(true);
-                ikenshoIraiJoho = builder.build();
-                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
-                manager.save主治医意見書作成依頼情報(
-                        create主治医意見書作成依頼情報(div, row, Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
-
-                ShujiiIkenshoSakuseiIraiParameter param2 = createHandler(div).createParameterNinteiShinseiJoho2(shiseishoKanriNo, getHihokenshaNo(div));
-                NinteiShinseiJoho2 shinseiJoho = manager.get要介護認定申請情報(param2);
-                NinteiShinseiJoho2Builder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
-                shinseiJohoBuilder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
-                shinseiJohoBuilder.set主治医コード(row.getShujiiCode());
-                shinseiJohoBuilder.set指定医フラグ(row.getShiteiiFlag());
-                shinseiJoho = shinseiJohoBuilder.build();
-                manager.save要介護認定申請情報(shinseiJoho, EntityDataState.Modified);
-            } else if (削除.equals(row.getStatus())) {
-                RString shiseishoKanriNo = new RString(row.getShiseishoKanriNo().toString());
-                ShujiiIkenshoSakuseiIraiParameter param = createHandler(div).createParameterShujiiIkenshoIraiJoho(shiseishoKanriNo,
-                        row.getRirekiNo().toInt(), getHihokenshaNo(div));
-                ShujiiIkenshoIraiJoho ikenshoIraiJoho = manager.get主治医意見書作成依頼情報(param);
-                ShujiiIkenshoIraiJohoBuilder builder = ikenshoIraiJoho.createBuilderForEdit();
-                builder.set論理削除フラグ(true);
-                ikenshoIraiJoho = builder.build();
-                manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
-            }
-        }
-    }
-
-    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row, int rirekiNo) {
-        ShujiiIkenshoIraiJohoBuilder builder = create主治医意見書作成依頼情報Builder(div, row, rirekiNo);
-        if (RString.isNullOrEmpty(row.getIraiKubun())) {
-            builder.set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.初回.getCode());
-        } else if (!row.getSakujoKbn()) {
-            builder.set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.再依頼.getCode());
-        }
-        return builder.build();
-    }
-
-    private ShujiiIkenshoIraiJohoBuilder create主治医意見書作成依頼情報Builder(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row,
-            int rirekiNo) {
-        ShujiiIkenshoIraiJoho iraiJoho = new ShujiiIkenshoIraiJoho(new ShinseishoKanriNo(row.getShiseishoKanriNo()),
-                rirekiNo);
-        ShujiiIkenshoIraiJohoBuilder builder = iraiJoho.createBuilderForEdit();
-        builder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
-        builder.set主治医コード(row.getShujiiCode());
-        builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
-        builder.set主治医意見書作成回数(数字_1);
-        builder.set医師区分コード(new Code(row.getIshiKbnCode()));
-        if (row.getShujiiIkenshoSakuseiIraiDay().getValue() != null) {
-            builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getShujiiIkenshoSakuseiIraiDay().getValue().toDateString()));
-        } else {
-            builder.set主治医意見書作成依頼年月日(new FlexibleDate(div.getTxtShujiiIkensahoSakuseiIraiDay().getValue().toDateString()));
-        }
-        builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
-        builder.set論理削除フラグ(false);
-        return builder;
-    }
-
-    private PersonalData toPersonalData(ShujiiIkenshoSakuseiIraiDiv div) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
-    }
-
-    private static RString getHihokenshaNo(ShujiiIkenshoSakuseiIraiDiv div) {
-        if (div.getHdnClickedButton().toString().equals(ClickedButton.表示する.name())) {
-            return div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
-        } else {
-            return div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue();
-        }
-    }
-
-    private enum ClickedButton {
-
-        表示する,
-        検索する
     }
 }

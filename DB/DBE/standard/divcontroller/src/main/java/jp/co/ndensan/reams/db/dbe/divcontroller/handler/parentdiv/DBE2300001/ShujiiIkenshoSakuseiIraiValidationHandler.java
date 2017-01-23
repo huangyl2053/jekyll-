@@ -5,14 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2300001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.ShujiiIkenshoSakuseiIraiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgShinseishaIchiran_Row;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgWaritsukeZumiShinseishaIchiran_Row;
+import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -23,11 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShujiiIkenshoSakuseiIraiValidationHandler {
 
     private final ShujiiIkenshoSakuseiIraiDiv div;
-    private static final RString 主治医医療機関 = new RString("主治医医療機関");
-    private static final RString 主治医 = new RString("主治医");
-    private static final RString 主治医意見書作成依頼日 = new RString("主治医意見書作成依頼日");
-    private static final RString 依頼情報未指定 = new RString("依頼情報未指定ため、依頼書の印刷");
-    private static final RString 依頼情報未指定保存不可 = new RString("依頼情報未指定ため、依頼書の保存");
+    private static final RString 未割付 = new RString("未割付");
     
     /**
      * コンストラクタです。
@@ -37,138 +37,107 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
     public ShujiiIkenshoSakuseiIraiValidationHandler(ShujiiIkenshoSakuseiIraiDiv div) {
         this.div = div;
     }
-
-    /**
-     * 依頼のチェックを処理します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 依頼チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(申請者一覧未選択チェック());
-        validationMessages.add(主治医医療機関チェック());
-        validationMessages.add(主治医チェック());
-        validationMessages.add(主治医意見書作成依頼日チェック());
-        return validationMessages;
-    }
-
-     /**
-     * 発行のチェックを処理します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 発行チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(申請者一覧未選択チェック());
-        validationMessages.add(選択された申請者チェック());
-        return validationMessages;
-    }
-
-     /**
-     * 保存のチェックを処理します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 保存チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(選択された保存チェック());
-        return validationMessages;
-    }
     
-    private ValidationMessageControlPairs 主治医医療機関チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdShujiiIryoKikanAndShujiiInput().getIryoKikanCode())) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, 主治医医療機関.toString())));
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 主治医チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdShujiiIryoKikanAndShujiiInput().getShujiiCode())) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, 主治医.toString())));
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 主治医意見書作成依頼日チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getTxtShujiiIkensahoSakuseiIraiDay().getValue() == null) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.必須項目_追加メッセージあり, 主治医意見書作成依頼日.toString()), div.getTxtShujiiIkensahoSakuseiIraiDay()));
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 申請者一覧未選択チェック() {
-        boolean isSelected = false;
-        for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
-            if (row.getSelected()) {
-                isSelected = true;
-                break;
-            }
-        }
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!isSelected) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.対象行を選択), div.getDgShinseishaIchiran()));
-        }
-        return validationMessages;
-    }
-
-    private ValidationMessageControlPairs 選択された申請者チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
-            if (row.getSelected() && (RString.isNullOrEmpty(row.getShujiiIryoKikan())
-                    || RString.isNullOrEmpty(row.getShujii()) || row.getShujiiIkenshoSakuseiIraiDay().getValue() == null)) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.実行不可, 依頼情報未指定.toString()), div.getBtnIrai()));
-                return validationMessages;
-            }
-        }
-        return validationMessages;
-    }
-    
-    private ValidationMessageControlPairs 選択された保存チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
-            if (row.getSelected() && (RString.isNullOrEmpty(row.getShujiiIryoKikan())
-                    || RString.isNullOrEmpty(row.getShujii()) || row.getShujiiIkenshoSakuseiIraiDay().getValue() == null)) {
-                validationMessages.add(new ValidationMessageControlPair(
-                        new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.実行不可, 依頼情報未指定保存不可.toString())));
-                return validationMessages;
-            }
-        }
-        return validationMessages;
+    public ValidationMessageControlPairs validate対象者検索ボタンクリック() {
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder()
+                .add(ShujiiIkenshoSakuseiIraiValidationMessage.主治医医療機関未指定, div.getDgWaritsukeZumiShinseishaIchiran())
+                .add(ShujiiIkenshoSakuseiIraiValidationMessage.主治医未指定, div.getDgWaritsukeZumiShinseishaIchiran())
+                .build();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(dictionary.check(ValidateChain.validateStart(div).ifNot(ShujiiIkenshoSakuseiIraiSpec.主治医医療機関未入力チェック)
+                .thenAdd(ShujiiIkenshoSakuseiIraiValidationMessage.主治医医療機関未指定).messages()));
+        pairs.add(dictionary.check(ValidateChain.validateStart(div).ifNot(ShujiiIkenshoSakuseiIraiSpec.主治医未入力チェック)
+                .thenAdd(ShujiiIkenshoSakuseiIraiValidationMessage.主治医未指定).messages()));
+        return pairs;
     }
 
     /**
-     * 排他のチェックを処理します。
+     * 依頼書等を印刷するボタンクリック時のバリデーションチェックです。
      *
-     * @return ValidationMessageControlPairs
+     * @return バリデーションチェック結果
      */
-    public ValidationMessageControlPairs 排他チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(
-                new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                        UrErrorMessages.排他_バッチ実行中で更新不可)));
-        return validationMessages;
+    public ValidationMessageControlPairs validate依頼書等を印刷するボタンクリック() {
+        ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionaryBuilder()
+                .add(ShujiiIkenshoSakuseiIraiValidationMessage.割付済申請者未指定, div.getDgWaritsukeZumiShinseishaIchiran())
+                .add(ShujiiIkenshoSakuseiIraiValidationMessage.認定調査依頼未割付, div.getDgWaritsukeZumiShinseishaIchiran())
+                .build();
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(dictionary.check(ValidateChain.validateStart(div).ifNot(ShujiiIkenshoSakuseiIraiSpec.割付済申請者指定チェック)
+                .thenAdd(ShujiiIkenshoSakuseiIraiValidationMessage.割付済申請者未指定).messages()));
+        pairs.add(dictionary.check(ValidateChain.validateStart(div).ifNot(ShujiiIkenshoSakuseiIraiSpec.認定調査依頼割付済チェック)
+                .thenAdd(ShujiiIkenshoSakuseiIraiValidationMessage.認定調査依頼未割付).messages()));
+        return pairs;
     }
 
-    private static final class ShujiiIkenshoSakuseiIraiMessages implements IValidationMessage {
+    private enum ShujiiIkenshoSakuseiIraiSpec implements IPredicate<ShujiiIkenshoSakuseiIraiDiv> {
 
+        割付済申請者指定チェック {
+                    /**
+                     * 割付済申請者が指定されているかのチェックです。
+                     *
+                     * @param div ShujiiIkenshoSakuseiIraiDiv
+                     * @return true:割付済申請者が指定されている場合　false:割付済申請者が指定されていない場合
+                     */
+                    @Override
+                    public boolean apply(ShujiiIkenshoSakuseiIraiDiv div) {
+                        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
+                        return !selectedItems.isEmpty();
+                    }
+                },
+        認定調査依頼割付済チェック {
+                    /**
+                     * 未割付の申請者が選択されていないかのチェックです。
+                     *
+                     * @param div ShujiiIkenshoSakuseiIraiDiv
+                     * @return true:未割付の申請者が選択されていない場合　false:未割付の申請者が選択されている場合
+                     */
+                    @Override
+                    public boolean apply(ShujiiIkenshoSakuseiIraiDiv div) {
+                        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
+                        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
+                            if (未割付.equals(row.getJotai())) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                },
+        主治医医療機関未入力チェック {
+                    /**
+                     * 主治医医療機関未入力でないかのチェックです。
+                     *
+                     * @param div ShujiiIkenshoSakuseiIraiDiv
+                     * @return true:主治医医療機関が入力済みの場合　false:主治医医療機関が未入力の場合
+                     */
+                    @Override
+                    public boolean apply(ShujiiIkenshoSakuseiIraiDiv div) {
+                        return !RString.isNullOrEmpty(div.getCcdShujiiIryoKikanAndShujiiInput().getIryoKikanCode());
+                    }
+                },
+        主治医未入力チェック {
+                    /**
+                     * 主治医未入力でないかのチェックです。
+                     *
+                     * @param div ShujiiIkenshoSakuseiIraiDiv
+                     * @return true:主治医が入力済みの場合　false:主治医が未入力の場合
+                     */
+                    @Override
+                    public boolean apply(ShujiiIkenshoSakuseiIraiDiv div) {
+                        return !RString.isNullOrEmpty(div.getCcdShujiiIryoKikanAndShujiiInput().getShujiiCode());
+                    }
+                };
+    }
+
+    private static enum ShujiiIkenshoSakuseiIraiValidationMessage implements IValidationMessage {
+
+        割付済申請者未指定(DbeErrorMessages.割付済申請者未指定),
+        認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
+        主治医医療機関未指定(DbeErrorMessages.主治医医療機関未入力),
+        主治医未指定(DbeErrorMessages.主治医未入力);
         private final Message message;
 
-        private ShujiiIkenshoSakuseiIraiMessages(IMessageGettable message, String... replaceParam) {
-            this.message = message.getMessage().replace(replaceParam);
+        private ShujiiIkenshoSakuseiIraiValidationMessage(IMessageGettable message) {
+            this.message = message.getMessage();
         }
 
         @Override
