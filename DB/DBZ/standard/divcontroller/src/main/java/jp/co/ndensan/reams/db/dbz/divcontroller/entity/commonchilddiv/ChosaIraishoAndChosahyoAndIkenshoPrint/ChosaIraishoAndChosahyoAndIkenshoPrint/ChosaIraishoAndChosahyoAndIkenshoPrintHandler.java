@@ -714,7 +714,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         RString.EMPTY,
                         文書番号,
                         RString.isNullOrEmpty(business.get調査委託先郵便番号())
-                                ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
+                        ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
                         business.get調査委託先住所(),
                         business.get事業者名称(),
                         business.get調査員氏名(),
@@ -742,11 +742,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         性別男,
                         性別女,
                         RString.isNullOrEmpty(business.get郵便番号())
-                                ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
+                        ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
                         business.get住所(),
                         business.get電話番号(),
                         RString.isNullOrEmpty(business.get訪問調査先郵便番号())
-                                ? RString.EMPTY : new YubinNo(business.get訪問調査先郵便番号()).getEditedYubinNo(),
+                        ? RString.EMPTY : new YubinNo(business.get訪問調査先郵便番号()).getEditedYubinNo(),
                         business.get訪問調査先住所(),
                         business.get訪問調査先名称(),
                         business.get訪問調査先電話番号(),
@@ -798,7 +798,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.isNullOrEmpty(business.get調査委託先郵便番号())
-                            ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
+                    ? RString.EMPTY : new YubinNo(business.get調査委託先郵便番号()).getEditedYubinNo(),
                     business.get調査委託先住所(),
                     business.get事業者名称(),
                     business.get調査員氏名(),
@@ -923,7 +923,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get連絡先携帯番号(),
                         business.get連絡先氏名(),
                         !RString.isNullOrEmpty(business.get連絡先続柄())
-                                ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
+                        ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
                         RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
@@ -1982,20 +1982,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         RString key = div.getRadTeishutsuKigen().getSelectedKey();
         int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-        if (文字列1.equals(調査期限設定方法)) {
-            if (KEY0.equals(key)) {
+        if (KEY0.equals(key)) {
+            if (文字列1.equals(調査期限設定方法)) {
                 提出期限 = !RString.isNullOrEmpty(business.get主治医意見書作成依頼年月日())
                         ? new RString(new FlexibleDate(business.get主治医意見書作成依頼年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
-            } else if (KEY1.equals(key)) {
-                提出期限 = RString.EMPTY;
-            } else if (KEY2.equals(key)) {
-                RDate 共通日 = div.getTxtKyotsuDay().getValue();
-
-                提出期限 = (共通日 != null ? new RString(共通日.toString()) : RString.EMPTY);
+            } else {
+                提出期限 = !RString.isNullOrEmpty(business.get認定申請年月日())
+                        ? new RString(new FlexibleDate(business.get認定申請年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
             }
-        } else {
-            提出期限 = !RString.isNullOrEmpty(business.get認定申請年月日())
-                    ? new RString(new FlexibleDate(business.get認定申請年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
+        } else if (KEY1.equals(key)) {
+            提出期限 = RString.EMPTY;
+        } else if (KEY2.equals(key)) {
+            RDate 共通日 = div.getTxtKyotsuDay().getValue();
+
+            提出期限 = (共通日 != null ? new RString(共通日.toString()) : RString.EMPTY);
         }
         return 提出期限;
     }
@@ -2008,20 +2008,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         RString key = div.getRadTeishutsuKigen().getSelectedKey();
         int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-        if (文字列1.equals(認定調査期限設定方法)) {
-            if (KEY0.equals(key)) {
+        if (KEY0.equals(key)) {
+            if (文字列1.equals(認定調査期限設定方法)) {
                 提出期限 = !RString.isNullOrEmpty(business.get認定調査依頼年月日())
                         ? new RString(new FlexibleDate(business.get認定調査依頼年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
-            } else if (KEY1.equals(key)) {
-                提出期限 = RString.EMPTY;
-            } else if (KEY2.equals(key)) {
-                RDate 共通日 = div.getTxtKyotsuDay().getValue();
-
-                提出期限 = (共通日 != null ? new RString(共通日.plusDay(期限日数).toString()) : RString.EMPTY);
+            } else {
+                提出期限 = !RString.isNullOrEmpty(business.get認定申請年月日())
+                        ? new RString(new FlexibleDate(business.get認定申請年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
             }
-        } else {
-            提出期限 = !RString.isNullOrEmpty(business.get認定申請年月日())
-                    ? new RString(new FlexibleDate(business.get認定申請年月日()).plusDay(期限日数).toString()) : RString.EMPTY;
+        } else if (KEY1.equals(key)) {
+            提出期限 = RString.EMPTY;
+        } else if (KEY2.equals(key)) {
+            RDate 共通日 = div.getTxtKyotsuDay().getValue();
+
+            提出期限 = (共通日 != null ? new RString(共通日.plusDay(期限日数).toString()) : RString.EMPTY);
         }
         return 提出期限;
     }

@@ -88,6 +88,7 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
     }
 
     private IinTokkiTextA3ReportSource editSource(IinTokkiTextA3ReportSource source) {
+        source.shinsakaiOrder = item.get審査人数();
         source.hokenshaNo = RString.EMPTY;
         source.hihokenshaNo = RString.EMPTY;
         source.hihokenshaName = RString.EMPTY;

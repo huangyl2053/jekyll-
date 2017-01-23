@@ -60,8 +60,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
 
     private static final RString 認定調査主治結果 = new RString("未");
     private static final RString 印字する = new RString("1");
-    private static final RString ファイルの名 = new RString("C0007_BAK.png");
-    private static final RString SEPARATOR = new RString("/");
+    private static final RString IMAGEFILENAME_概況調査特記 = new RString("C0007");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -128,11 +127,15 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         }
         if (共通情報 != null) {
             RString 共有ファイル名 = 共通情報.getShoKisaiHokenshaNo().concat(共通情報.getHihokenshaNo());
-            RString path = getFilePath(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
+            RString path = copySharedFilesBatch(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
             IchijihanteiekkahyoTokkijiko tokkijiko = new IchijihanteiekkahyoTokkijiko(特記情報, 共通情報, ファイルパス);
             項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());
             項目.set概況特記のテキスト(共通情報.getTokki());
-            項目.set概況特記のイメージ(共有ファイルを引き出す(path, ファイルの名));
+            if (共通情報.isJimukyoku()) {
+                項目.set概況特記のイメージ(DBEImageUtil.getOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
+            } else {
+                項目.set概況特記のイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
+            }
             項目.set特記事項テキスト_イメージ区分(tokkijiko.get特記事項テキスト_イメージ区分());
             項目.set特記パターン(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             項目.set特記事項_listChosa1(tokkijiko.get短冊情報リスト());
@@ -1672,22 +1675,14 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         return RString.EMPTY;
     }
 
-    private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        RString fileFullPath = getFilePath(path, fileName);
-        if (!RString.isNullOrEmpty(fileFullPath)) {
-            return fileFullPath;
-        }
-        return RString.EMPTY;
-    }
-
     private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
+            return Path.combinePath(出力イメージフォルダパス, ファイル名);
         }
         return RString.EMPTY;
     }
 
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString path) {
+    private RString copySharedFilesBatch(RDateTime sharedFileId, RString sharedFileName, RString path) {
         if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
             return RString.EMPTY;
         }

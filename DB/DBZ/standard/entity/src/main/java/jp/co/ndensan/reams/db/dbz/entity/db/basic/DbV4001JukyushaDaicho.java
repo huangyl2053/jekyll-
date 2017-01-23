@@ -6,7 +6,39 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 受給者台帳Aliveテーブルの項目定義クラスです。
  */
 public enum DbV4001JukyushaDaicho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+    /**
+     * insertDantaiCd
+     */
+    insertDantaiCd(2147483647, 0),
+    /**
+     * insertTimestamp
+     */
+    insertTimestamp(29, 0),
+    /**
+     * insertReamsLoginId
+     */
+    insertReamsLoginId(2147483647, 0),
+    /**
+     * insertContextId
+     */
+    insertContextId(2147483647, 0),
+    /**
+     * isDeleted
+     */
+    isDeleted(1, 0),
+    /**
+     * updateCount
+     */
+    updateCount(10, 0),
+    /**
+     * lastUpdateTimestamp
+     */
+    lastUpdateTimestamp(29, 0),
+    /**
+     * lastUpdateReamsLoginId
+     */
+    lastUpdateReamsLoginId(2147483647, 0),
     /**
      * shichosonCode
      */
@@ -326,7 +358,11 @@ public enum DbV4001JukyushaDaicho implements IColumnDefinition {
     /**
      * logicalDeletedFlag
      */
-    logicalDeletedFlag(1, 0);
+    logicalDeletedFlag(1, 0),
+    /**
+     * minashiCode
+     */
+    minashiCode(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

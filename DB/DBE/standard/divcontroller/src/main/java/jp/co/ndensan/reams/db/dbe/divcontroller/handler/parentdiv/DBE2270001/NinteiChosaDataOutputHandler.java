@@ -155,7 +155,7 @@ public class NinteiChosaDataOutputHandler {
             row.setShichosonMeisho(master.get保険者());
             row.setHihokenshaNo(master.get被保険者番号());
             row.setHihokenshaName(master.get氏名());
-            row.setSeibetsu(Seibetsu.toValue(master.get性別()).get名称());
+            row.setSeibetsu(master.get性別() == null ? RString.EMPTY : Seibetsu.toValue(master.get性別()).get名称());
             row.getNinteiShinseiYMD().setValue(master.get認定申請年月日());
             row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.toValue(master.get認定申請区分_申請時_コード()).get名称());
             row.setShinseishoKanriNo(master.get申請書管理番号());

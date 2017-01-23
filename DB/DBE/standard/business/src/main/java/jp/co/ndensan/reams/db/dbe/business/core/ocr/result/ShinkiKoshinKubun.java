@@ -8,12 +8,21 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.result;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * 新規、更新の区分です。
  */
 public enum ShinkiKoshinKubun {
 
+    /**
+     * 新規
+     */
     新規,
+    /**
+     * 更新
+     */
     更新,
+    /**
+     * データなし
+     */
     対象データなし;
 
     private final RString theName;

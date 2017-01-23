@@ -60,6 +60,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
     private int データ件数 = 0;
+    private int 審査番号;
     @BatchWriter
     private BatchReportWriter<JimuTokkiTextA3ReportSource> batchWriteA3;
     private ReportSourceWriter<JimuTokkiTextA3ReportSource> reportSourceWriterA3;
@@ -73,6 +74,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         データ件数 = mapper.get事務局一次判定件数(myBatisParameter);
         共通情報 = mapper.get共通情報(myBatisParameter);
+        審査番号 = 1;
     }
 
     @Override
@@ -119,8 +121,10 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
                 get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()),
                 特記情報, batchWriteA3.getImageFolderPath());
         item.setServiceKubunCode(entity.getServiceKubunCode());
+        item.set審査番号(審査番号);
         JimuTokkiTextA3Report report = new JimuTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
+        審査番号++;
     }
 
     @Override

@@ -72,7 +72,11 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
         eucCsvEntity.set生年月日(entity.get生年月日());
         eucCsvEntity.set年齢(entity.get年齢());
-        eucCsvEntity.set性別(entity.get性別());
+        if(RString.isNullOrEmpty(entity.get性別())){
+            eucCsvEntity.set性別(RString.EMPTY);
+        }else{
+            eucCsvEntity.set性別(entity.get性別());
+        }
         eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
         eucCsvEntity.set住所(entity.get住所());
         eucCsvEntity.set電話番号(entity.get電話番号());

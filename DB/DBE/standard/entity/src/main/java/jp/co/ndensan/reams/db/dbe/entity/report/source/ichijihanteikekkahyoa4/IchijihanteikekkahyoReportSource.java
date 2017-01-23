@@ -333,6 +333,8 @@ public class IchijihanteikekkahyoReportSource implements IReportSource {
     public RString listTokubetsunaIryo2_1;
     @ReportItem(name = "listTokubetsunaIryo2_2", length = 1, order = 158)
     public RString listTokubetsunaIryo2_2;
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 159)
+    public RString shinsakaiOrder;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

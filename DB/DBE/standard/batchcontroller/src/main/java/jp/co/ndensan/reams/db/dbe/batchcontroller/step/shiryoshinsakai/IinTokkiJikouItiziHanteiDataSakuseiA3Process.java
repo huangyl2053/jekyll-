@@ -59,6 +59,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
     private IchijihanteikekkahyoA3Entity item;
     private int データ件数;
+    private int 審査番号;
 
     @BatchWriter
     private BatchReportWriter<IinTokkiTextA3ReportSource> batchWriteA3;
@@ -75,6 +76,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
         共通情報 = mapper.getShinsakaiSiryoKyotsu(myBatisParameter);
         データ件数 = mapper.getTokkiJikouItiziHanteiCount(myBatisParameter);
+        審査番号 = 1;
     }
 
     @Override
@@ -142,8 +144,10 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
                 get共通情報(共通情報, entity.getShinseishoKanriNo()), 主治医意見書, new RString(paramter.getGogitaiNo()),
                 特記情報, batchWriteA3.getImageFolderPath());
         item.setServiceKubunCode(entity.getServiceKubunCode());
+        item.set審査番号(審査番号);
         IinTokkiTextA3Report report = new IinTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
+        審査番号++;
     }
 
     @Override

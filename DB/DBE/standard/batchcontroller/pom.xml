@@ -59,6 +59,10 @@
             <artifactId>DbxService</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBatchController</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-core</artifactId>
             <version>1.6.1</version>

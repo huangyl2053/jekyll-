@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,10 +27,12 @@ public enum GenponMaskKubun {
 
     private final RString code;
     private final RString fullName;
+    private final Code theCode;
 
     private GenponMaskKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.theCode = new Code(code);
     }
 
     /**
@@ -39,6 +42,15 @@ public enum GenponMaskKubun {
      */
     public RString getコード() {
         return code;
+    }
+
+    /**
+     * 原本マスク区分のコードを返します。
+     *
+     * @return 原本マスク区分のコード
+     */
+    public Code getCode() {
+        return theCode;
     }
 
     /**

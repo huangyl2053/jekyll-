@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2200001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
@@ -41,6 +40,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
@@ -436,7 +436,7 @@ public class NinteiChosaIrai {
         for (dgWaritsukeZumiShinseishaIchiran_Row row : 割付済み申請者List) {
             if (未割付.equals(row.getJotai())) {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
-                int 認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString());
+                int 認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()) + 1;
                 RString 調査員コード = div.getTxtChosainCode().getValue();
                 RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
 
@@ -447,7 +447,7 @@ public class NinteiChosaIrai {
                 } else {
                     認定調査期限年月日 = 認定申請日.plusDay(Integer.parseInt(認定調査期限日数.toString()));
                 }
-                if (ChosaKubun.新規調査.get名称().equals(row.getChosaKubun())) {
+                if (NinteiChousaIraiKubunCode.初回.get名称().equals(row.getChosaKubun())) {
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
                     ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
@@ -458,12 +458,10 @@ public class NinteiChosaIrai {
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
                             .set論理削除フラグ(false)
-                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1)
                             .build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                     update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード, row, ChosaKubun.新規調査);
-                } else if (ChosaKubun.再調査.get名称().equals(row.getChosaKubun())) {
-                    認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString()) + 1;
+                } else {
                     NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
                     ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
@@ -474,7 +472,6 @@ public class NinteiChosaIrai {
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
                             .set論理削除フラグ(false)
-                            .set認定調査依頼履歴番号(認定調査依頼履歴番号 + 1)
                             .build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
                     update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード, row, ChosaKubun.再調査);
@@ -508,15 +505,17 @@ public class NinteiChosaIrai {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 int 認定調査依頼履歴番号 = Integer.parseInt(row.getNinteichosaIraiRirekiNo().toString());
                 NinteichosaIraiJohoIdentifier ninteichosaIraiJohoIdentifier = new NinteichosaIraiJohoIdentifier(申請書管理番号, 認定調査依頼履歴番号);
-                NinteichosaIraiJoho ninteichosaIraiJoho = ninteichosaIraiJohoList.get(ninteichosaIraiJohoIdentifier)
-                        .createBuilderForEdit()
-                        .set論理削除フラグ(true)
-                        .build();
-                ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho.modifiedModel());
+                NinteichosaIraiJoho ninteichosaIraiJoho = ninteichosaIraiJohoList.get(ninteichosaIraiJohoIdentifier);
+                if (ninteichosaIraiJoho != null) {
+                    ninteichosaIraiJohoManager.saveOrDeletePhysical(ninteichosaIraiJoho.deleted());
+                }
 
                 NinteiKanryoJohoIdentifier ninteiKanryoJohoIdentifier = new NinteiKanryoJohoIdentifier(申請書管理番号);
-                NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoJohoList.get(ninteiKanryoJohoIdentifier).createBuilderForEdit().set認定調査依頼完了年月日(FlexibleDate.EMPTY)
-                        .set認定調査完了年月日(FlexibleDate.EMPTY).build();
+                NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoJohoList.get(ninteiKanryoJohoIdentifier)
+                        .createBuilderForEdit()
+                        .set認定調査依頼完了年月日(FlexibleDate.EMPTY)
+                        .set認定調査完了年月日(FlexibleDate.EMPTY)
+                        .build();
                 ninteiKanryoJohoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
             }
         }
@@ -524,20 +523,22 @@ public class NinteiChosaIrai {
 
     private void set割付済み申請者一覧(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード, ChosaItakusakiCode 認定調査委託先コード,
             ChosainCode 調査員コード, RString 保険者名称, NinteiChosaIraiHandler handler) {
+        NinnteiChousairaiFinder finder = NinnteiChousairaiFinder.createInstance();
         NinnteiChousairaiParameter parameter
                 = NinnteiChousairaiParameter.createParamfor割付済み申請者一覧(証記載保険者番号, 支所コード, 認定調査委託先コード, 調査員コード);
-        List<WaritsukeBusiness> 割付済み申請者一覧 = NinnteiChousairaiFinder.createInstance().get割付済み申請者(parameter);
+        List<WaritsukeBusiness> 割付済み申請者一覧 = finder.get割付済み申請者(parameter);
         handler.set割付済み申請者一覧(割付済み申請者一覧, 保険者名称);
 
-        List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = NinnteiChousairaiFinder.createInstance().getNinteichosaIraiJohoList(parameter);
         List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList<>();
         List<NinteichosaIraiJoho> ninteichosaIraiJohoList = new ArrayList<>();
-        if (!割付済み一覧.isEmpty()) {
-            ninteiKanryoJohoList = 割付済み一覧.get(0).getNinteiKanryoJohoList();
-            ninteichosaIraiJohoList = 割付済み一覧.get(0).getNinteichosaIraiJohoList();
+        for (WaritsukeBusiness 割付済み申請者 : 割付済み申請者一覧) {
+            ninteiKanryoJohoList.add(割付済み申請者.get認定完了情報());
+            if (割付済み申請者.get認定調査依頼情報() != null) {
+                ninteichosaIraiJohoList.add(割付済み申請者.get認定調査依頼情報());
+            }
         }
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(ninteichosaIraiJohoList));
         ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, Models.create(ninteiKanryoJohoList));
+        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(ninteichosaIraiJohoList));
     }
 
     private void set未割付申請者一覧(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード, RString 保険者名称, NinteiChosaIraiHandler handler) {

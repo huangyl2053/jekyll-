@@ -149,7 +149,8 @@ public class ShinsakaiIinJohoToroku {
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報);
         div.getDgShinsaInJohoIchiran().setDataSource(createHandOf(div).setShinsaInJohoIchiranDiv(審査会委員一覧情報));
         div.getDgShinsaInJohoIchiran().getGridSetting().setLimitRowCount(div.getTxtDispMax().getValue().intValue());
-        div.getDgShinsaInJohoIchiran().getGridSetting().setSelectedRowCount(manager.get審査会委員一覧件数(parameter));
+        List<ShinsakaiIinJoho> 審査会委員一覧情報件数 = manager.get審査会委員一覧件数(parameter).records();
+        div.getDgShinsaInJohoIchiran().getGridSetting().setSelectedRowCount(審査会委員一覧情報件数.size());
         return ResponseData.of(div).respond();
     }
 
@@ -179,6 +180,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onDoubleClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
+        div.getBtnToroku().setDisabled(true);
         return onClick_btnModifyShinsaInJohoIchiran(div);
     }
 
@@ -491,6 +493,7 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData<ShinsakaiIinJohoTorokuDiv> onClick_btnBackIchiran(ShinsakaiIinJohoTorokuDiv div) {
         div.getShinsakaiIinJohoIchiran().setDisabled(false);
+        div.getBtnToroku().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return responseWithSettingState(div);
     }

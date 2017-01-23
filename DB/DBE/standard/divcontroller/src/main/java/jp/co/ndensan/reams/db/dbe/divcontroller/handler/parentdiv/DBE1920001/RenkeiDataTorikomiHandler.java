@@ -21,6 +21,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -251,7 +254,9 @@ public class RenkeiDataTorikomiHandler {
                         rowData.setHihokubun(HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get名称());
                         rowData.setShimei(entity.get氏名());
                         rowData.getSeinengappi().setValue(new RDate(entity.get生年月日().toString()));
-                        int 年齢 = get年齢(getFlexibleDate(entity.get認定申請日()), getFlexibleDate(entity.get生年月日()));
+                        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(getFlexibleDate(entity.get生年月日())), 
+                                JuminJotai.住民, FlexibleDate.EMPTY, getFlexibleDate(entity.get認定申請日()));
+                        int 年齢 = ageCalculator.get年齢().toInt();
                         rowData.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         rowData.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
                         list.add(rowData);
@@ -289,7 +294,9 @@ public class RenkeiDataTorikomiHandler {
                         rowData.setHihokubun(HihokenshaKubunCode.toValue(csvEntity.get被保険者区分コード()).get名称());
                         rowData.setShimei(csvEntity.get氏名());
                         rowData.getSeinengappi().setValue(new RDate(csvEntity.get生年月日().toString()));
-                        int 年齢 = get年齢(getFlexibleDate(csvEntity.get認定申請日()), getFlexibleDate(csvEntity.get生年月日()));
+                        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(getFlexibleDate(csvEntity.get生年月日())), 
+                                JuminJotai.住民, FlexibleDate.EMPTY, getFlexibleDate(csvEntity.get認定申請日()));
+                        int 年齢 = ageCalculator.get年齢().toInt();
                         rowData.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         rowData.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(rowData);
@@ -324,7 +331,9 @@ public class RenkeiDataTorikomiHandler {
                         row.setHihokubun(HihokenshaKubunCode.toValue(csvEntity.get被保険者区分コード()).get名称());
                         row.setShimei(csvEntity.get氏名());
                         row.getSeinengappi().setValue(new RDate(csvEntity.get生年月日().toString()));
-                        int 年齢 = get年齢(getFlexibleDate(csvEntity.get認定申請日()), getFlexibleDate(csvEntity.get生年月日()));
+                        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(getFlexibleDate(csvEntity.get生年月日())),
+                                JuminJotai.住民, FlexibleDate.EMPTY, getFlexibleDate(csvEntity.get認定申請日()));
+                        int 年齢 = ageCalculator.get年齢().toInt();
                         row.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         row.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(row);
@@ -383,24 +392,6 @@ public class RenkeiDataTorikomiHandler {
             コード = Encode.UTF_8;
         }
         return コード;
-    }
-
-    private int get年齢(FlexibleDate 基準日, FlexibleDate 生年月日) {
-        int 基準日_年 = 基準日.getYearValue();
-        int 基準日_月 = 基準日.getMonthValue();
-        int 基準日_日 = 基準日.getDayValue();
-        int 生年月日_年 = 生年月日.getYearValue();
-        int 生年月日_月 = 生年月日.getMonthValue();
-        int 生年月日_日 = 生年月日.getDayValue();
-        int 年齢 = 基準日_年 - 生年月日_年;
-        if (基準日_月 < 生年月日_月) {
-            年齢 = 年齢 - 1;
-        } else if (基準日_月 == 生年月日_月) {
-            if (基準日_日 < 生年月日_日) {
-                年齢 = 年齢 - 1;
-            }
-        }
-        return 年齢;
     }
 
     private FlexibleDate getFlexibleDate(RString value) {

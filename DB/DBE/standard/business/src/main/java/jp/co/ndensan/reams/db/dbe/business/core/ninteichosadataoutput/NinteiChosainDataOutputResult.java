@@ -40,7 +40,11 @@ public class NinteiChosainDataOutputResult {
         eucCsvEntity.set調査員カナ氏名(entityParam.get調査員カナ氏名());
         eucCsvEntity.set調査委託先コード(entityParam.get調査委託先コード());
         eucCsvEntity.set調査委託先名称(entityParam.get事業者名称());
-        eucCsvEntity.set性別(Seibetsu.toValue(entityParam.get性別()).get名称());
+        if (RString.isNullOrEmpty(entityParam.get性別())){
+            eucCsvEntity.set性別(RString.EMPTY);
+        }else{
+            eucCsvEntity.set性別(Seibetsu.toValue(entityParam.get性別()).get名称());
+        }
         eucCsvEntity.set地区コード(entityParam.get地区コード());
         RString 地区名称 = RString.EMPTY;
         if (!RString.isNullOrEmpty(entityParam.get地区コード())) {

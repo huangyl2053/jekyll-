@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
@@ -42,9 +45,7 @@ public class IchijihanteiekkahyoTokkijiko {
 
     private static final RString テキスト全面イメージ = new RString("1");
     private static final RString ハイフン = new RString("-");
-    private static final RString ファイルID_C4101 = new RString("C4101.png");
-    private static final RString ファイルID_C4101BAK = new RString("C4101_BAK.png");
-    private static final RString SEPARATOR = new RString("/");
+    private static final RString ファイルID_C4101 = new RString("C4101");
     private static final int 最大連番 = 10;
     private static final int 最大ページ = 6;
     private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
@@ -151,10 +152,15 @@ public class IchijihanteiekkahyoTokkijiko {
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(get特記事項テキスト_イメージ区分())) {
                     短冊情報.setテキストとイメージ(entity.getTokkiJiko());
                 } else {
-                    RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-                    RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
-                    短冊情報.setテキストとイメージ(共有ファイルを引き出す(filePath,
-                            getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
+                    RString filePath = copySharedFilesBatch(kyotsuEntity.getImageSharedFileId(),
+                            kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo()));
+                    if (kyotsuEntity.isJimukyoku()) {
+                        短冊情報.setテキストとイメージ(DBEImageUtil.getOriginalImageFilePath(filePath,
+                                getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
+                    } else {
+                        短冊情報.setテキストとイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(filePath,
+                                getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
+                    }
                 }
                 短冊情報リスト.add(短冊情報);
             }
@@ -170,13 +176,14 @@ public class IchijihanteiekkahyoTokkijiko {
     public List<RString> getTokkiImg() {
         List<RString> filePathList = new ArrayList<>();
         RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-        RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
-        for (int i = 1; i <= 最大ページ; i++) {
+        RString filePath = copySharedFilesBatch(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
+        List<RString> 特記事項全面イメージファイルリスト = get特記事項全面イメージファイルリスト();
+        for (RString 特記事項全面イメージファイル : 特記事項全面イメージファイルリスト) {
             RString tokkiImgPath;
             if (kyotsuEntity.isJimukyoku()) {
-                tokkiImgPath = 共有ファイルを引き出す(filePath, ファイルID_C4101BAK);
+                tokkiImgPath = DBEImageUtil.getOriginalImageFilePath(filePath, 特記事項全面イメージファイル);
             } else {
-                tokkiImgPath = 共有ファイルを引き出す(filePath, ファイルID_C4101);
+                tokkiImgPath = DBEImageUtil.getMaskOrOriginalImageFilePath(filePath, 特記事項全面イメージファイル);
             }
             if (!RString.isNullOrEmpty(tokkiImgPath)) {
                 filePathList.add(tokkiImgPath);
@@ -254,46 +261,32 @@ public class IchijihanteiekkahyoTokkijiko {
 
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {
         RStringBuilder イメージファイル = new RStringBuilder();
-        RString ファイル名 = getファイル名By特記番号(特記事項番号);
+        RString ファイル名;
+        try {
+            ファイル名 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(特記事項番号).getイメージファイル();
+        } catch (Exception e) {
+            ファイル名 = RString.EMPTY;
+        }
         if (!RString.isNullOrEmpty(ファイル名)) {
             イメージファイル.append(ファイル名);
             for (int i = 0; i <= 最大連番; i++) {
                 if (i == 特記事項連番) {
-                    イメージファイル.append(new RString(特記事項連番).padZeroToLeft(2));
+                    イメージファイル.replace(new RString("xx"), new RString(特記事項連番).padZeroToLeft(2));
+                    イメージファイル.replace(".png", "");
                     break;
                 }
             }
-            if (kyotsuEntity.isJimukyoku()) {
-                イメージファイル.append("_BAK");
-            }
-            return イメージファイル.append(".png").toRString();
+            return イメージファイル.toRString();
         }
         return RString.EMPTY;
     }
 
-    private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        RString fileFullPath = getFilePath(path, fileName);
-        if (!RString.isNullOrEmpty(fileFullPath)) {
-            return fileFullPath;
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString filename) {
+    private RString copySharedFilesBatch(RDateTime sharedFileId, RString filename) {
         if (sharedFileId == null || RString.isNullOrEmpty(filename)) {
             return RString.EMPTY;
         }
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(filename), sharedFileId);
         try {
-            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(path)).getCanonicalPath());
+            return DBEImageUtil.copySharedFilesBatch(sharedFileId, filename, path);
         } catch (Exception e) {
             return RString.EMPTY;
         }
@@ -388,171 +381,14 @@ public class IchijihanteiekkahyoTokkijiko {
         return 項目番号.toRString();
     }
 
-    private RString getファイル名By特記番号(RString 特記番号) {
-        if (特記番号.equals(new RString("101"))) {
-            return new RString("C3001-");
-        } else if (特記番号.equals(new RString("102"))) {
-            return new RString("C3006-");
-        } else if (特記番号.equals(new RString("103"))) {
-            return new RString("C3010-");
-        } else if (特記番号.equals(new RString("104"))) {
-            return new RString("C3011-");
-        } else if (特記番号.equals(new RString("105"))) {
-            return new RString("C3012-");
-        } else if (特記番号.equals(new RString("106"))) {
-            return new RString("C3013-");
-        } else if (特記番号.equals(new RString("107"))) {
-            return new RString("C3014-");
-        } else if (特記番号.equals(new RString("108"))) {
-            return new RString("C3015-");
-        } else if (特記番号.equals(new RString("109"))) {
-            return new RString("C3016-");
-        } else if (特記番号.equals(new RString("110"))) {
-            return new RString("C3017-");
-        } else if (特記番号.equals(new RString("111"))) {
-            return new RString("C3018-");
-        } else if (特記番号.equals(new RString("112"))) {
-            return new RString("C3019-");
-        } else if (特記番号.equals(new RString("113"))) {
-            return new RString("C3020-");
-        }
-        return getファイル名By特記番号2(特記番号);
-    }
-
-    private RString getファイル名By特記番号2(RString 特記番号) {
-        if (特記番号.equals(new RString("201"))) {
-            return new RString("C3021-");
-        } else if (特記番号.equals(new RString("202"))) {
-            return new RString("C3022-");
-        } else if (特記番号.equals(new RString("203"))) {
-            return new RString("C3023-");
-        } else if (特記番号.equals(new RString("204"))) {
-            return new RString("C3024-");
-        } else if (特記番号.equals(new RString("205"))) {
-            return new RString("C3025-");
-        } else if (特記番号.equals(new RString("206"))) {
-            return new RString("C3026-");
-        } else if (特記番号.equals(new RString("207"))) {
-            return new RString("C3027-");
-        } else if (特記番号.equals(new RString("208"))) {
-            return new RString("C3028-");
-        } else if (特記番号.equals(new RString("209"))) {
-            return new RString("C3029-");
-        } else if (特記番号.equals(new RString("210"))) {
-            return new RString("C3030-");
-        } else if (特記番号.equals(new RString("211"))) {
-            return new RString("C3031-");
-        } else if (特記番号.equals(new RString("212"))) {
-            return new RString("C3032-");
-        }
-        return getファイル名By特記番号3(特記番号);
-    }
-
-    private RString getファイル名By特記番号3(RString 特記番号) {
-        if (特記番号.equals(new RString("301"))) {
-            return new RString("C3033-");
-        } else if (特記番号.equals(new RString("302"))) {
-            return new RString("C3034-");
-        } else if (特記番号.equals(new RString("303"))) {
-            return new RString("C3035-");
-        } else if (特記番号.equals(new RString("304"))) {
-            return new RString("C3036-");
-        } else if (特記番号.equals(new RString("305"))) {
-            return new RString("C3037-");
-        } else if (特記番号.equals(new RString("306"))) {
-            return new RString("C3038-");
-        } else if (特記番号.equals(new RString("307"))) {
-            return new RString("C3039-");
-        } else if (特記番号.equals(new RString("308"))) {
-            return new RString("C3040-");
-        } else if (特記番号.equals(new RString("309"))) {
-            return new RString("C3041-");
-        }
-        return getファイル名By特記番号4(特記番号);
-    }
-
-    private RString getファイル名By特記番号4(RString 特記番号) {
-        if (特記番号.equals(new RString("401"))) {
-            return new RString("C3042-");
-        } else if (特記番号.equals(new RString("402"))) {
-            return new RString("C3043-");
-        } else if (特記番号.equals(new RString("403"))) {
-            return new RString("C3044-");
-        } else if (特記番号.equals(new RString("404"))) {
-            return new RString("C3045-");
-        } else if (特記番号.equals(new RString("405"))) {
-            return new RString("C3046-");
-        } else if (特記番号.equals(new RString("406"))) {
-            return new RString("C3047-");
-        } else if (特記番号.equals(new RString("407"))) {
-            return new RString("C3048-");
-        } else if (特記番号.equals(new RString("408"))) {
-            return new RString("C3049-");
-        } else if (特記番号.equals(new RString("409"))) {
-            return new RString("C3050-");
-        } else if (特記番号.equals(new RString("410"))) {
-            return new RString("C3051-");
-        } else if (特記番号.equals(new RString("411"))) {
-            return new RString("C3052-");
-        } else if (特記番号.equals(new RString("412"))) {
-            return new RString("C3053-");
-        } else if (特記番号.equals(new RString("413"))) {
-            return new RString("C3054-");
-        } else if (特記番号.equals(new RString("414"))) {
-            return new RString("C3055-");
-        } else if (特記番号.equals(new RString("415"))) {
-            return new RString("C3056-");
-        }
-        return getファイル名By特記番号5(特記番号);
-    }
-
-    private RString getファイル名By特記番号5(RString 特記番号) {
-        if (特記番号.equals(new RString("501"))) {
-            return new RString("C3057-");
-        } else if (特記番号.equals(new RString("502"))) {
-            return new RString("C3058-");
-        } else if (特記番号.equals(new RString("503"))) {
-            return new RString("C3059-");
-        } else if (特記番号.equals(new RString("504"))) {
-            return new RString("C3060-");
-        } else if (特記番号.equals(new RString("505"))) {
-            return new RString("C3061-");
-        } else if (特記番号.equals(new RString("506"))) {
-            return new RString("C3062-");
-        }
-        return getファイル名By特記番号6(特記番号);
-    }
-
-    private RString getファイル名By特記番号6(RString 特記番号) {
-        if (特記番号.equals(new RString("601"))) {
-            return new RString("C3063-");
-        } else if (特記番号.equals(new RString("602"))) {
-            return new RString("C3064-");
-        } else if (特記番号.equals(new RString("603"))) {
-            return new RString("C3065-");
-        } else if (特記番号.equals(new RString("604"))) {
-            return new RString("C3066-");
-        } else if (特記番号.equals(new RString("605"))) {
-            return new RString("C3067-");
-        } else if (特記番号.equals(new RString("606"))) {
-            return new RString("C3068-");
-        } else if (特記番号.equals(new RString("607"))) {
-            return new RString("C3069-");
-        } else if (特記番号.equals(new RString("608"))) {
-            return new RString("C3070-");
-        } else if (特記番号.equals(new RString("609"))) {
-            return new RString("C3071-");
-        } else if (特記番号.equals(new RString("610"))) {
-            return new RString("C3072-");
-        } else if (特記番号.equals(new RString("611"))) {
-            return new RString("C3073-");
-        } else if (特記番号.equals(new RString("612"))) {
-            return new RString("C3074-");
-        } else if (特記番号.equals(new RString("701"))) {
-            return new RString("C3075-");
-        } else if (特記番号.equals(new RString("702"))) {
-            return new RString("C3076-");
-        }
-        return RString.EMPTY;
+    private List<RString> get特記事項全面イメージファイルリスト() {
+        List<RString> 特記事項全面イメージファイルリスト = new ArrayList<>();
+        特記事項全面イメージファイルリスト.add(new RString("C4101"));
+        特記事項全面イメージファイルリスト.add(new RString("C4102"));
+        特記事項全面イメージファイルリスト.add(new RString("C4103"));
+        特記事項全面イメージファイルリスト.add(new RString("C4104"));
+        特記事項全面イメージファイルリスト.add(new RString("C4105"));
+        特記事項全面イメージファイルリスト.add(new RString("C4106"));
+        return 特記事項全面イメージファイルリスト;
     }
 }

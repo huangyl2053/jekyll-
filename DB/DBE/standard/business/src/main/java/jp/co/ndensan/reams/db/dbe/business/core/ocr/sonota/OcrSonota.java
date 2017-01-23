@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,12 +37,13 @@ public final class OcrSonota {
      * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
      *
      * @param line 行
-     * @return {@link OcrIken}
+     * @return {@link OcrSonota}
      */
     public static OcrSonota parsed(RString line) {
         return parseデータ行(line);
     }
 
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 18 LINES
     private static OcrSonota parseデータ行(RString line) {
         OcrSonota result = new OcrSonota();
         result.データ行_文字列 = line;

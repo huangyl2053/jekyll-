@@ -172,6 +172,7 @@ public class NinteiChosaHoshuShokaiHandler {
         tempData.set調査依頼日開始(依頼日開始);
         tempData.set調査依頼日終了(依頼日終了);
         tempData.setHokensya(div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村コード().value());
+        tempData.setHokenshaName(div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村名称());
         return tempData;
     }
 

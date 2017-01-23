@@ -40,6 +40,9 @@ public enum OcrDataType {
                     return (filePath == null ? RString.EMPTY : filePath).toLowerCase().endsWith(".png");
                 }
             },
+    /**
+     * 非該当（無関係のファイル）
+     */
     非該当 {
                 @Override
                 boolean matches(RString filePath) {

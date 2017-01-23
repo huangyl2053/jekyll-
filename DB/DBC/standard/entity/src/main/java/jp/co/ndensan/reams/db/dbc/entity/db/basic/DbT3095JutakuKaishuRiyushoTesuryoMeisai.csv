@@ -1,7 +1,6 @@
 ﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
 hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
-shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
 serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,サービスコード,A
 jutakuKaishuJigyoshaMeisho,UDD042AtenaMeisho,AtenaMeisho,,,,,介護住宅改修事業者名称,A
 jutakuKaishuChakkoYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修着工年月日,A
@@ -16,4 +15,3 @@ riyushoSakuseiShinseiYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書�
 riyushoSakuseiUketsukeYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書作成受付年月日,A
 shukeiNo,varchar,RString,,,,,集計関連付け番号,A
 TaishogaiFlag,bool,boolean,,,,,対象外フラグ,A
-shukeiFlag,bool,boolean,,,,,集計フラグ,A

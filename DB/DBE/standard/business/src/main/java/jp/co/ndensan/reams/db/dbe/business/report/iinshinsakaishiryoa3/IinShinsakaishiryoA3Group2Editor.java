@@ -50,6 +50,7 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
     private final IchijihanteikekkahyoA3Entity item;
     private final List<RString> 特記事項List;
     private final int index;
+    private final int 審査番号;
 
     /**
      * インスタンスを生成します。
@@ -57,11 +58,13 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
      * @param item {@link IchijihanteikekkahyoA3Entity}
      * @param 特記事項List List<RString>
      * @param index int
+     * @param 審査番号 int
      */
-    protected IinShinsakaishiryoA3Group2Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index) {
+    protected IinShinsakaishiryoA3Group2Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index, int 審査番号) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;
+        this.審査番号 = 審査番号;
     }
 
     @Override
@@ -70,8 +73,9 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
-        source.shinseiCount = item.get審査人数();
+        source.shinseiCount = new RString(審査番号);
         source.shinseiCountGokei = item.get審査人数合計();
+        source.shinsakaiOrder = item.get審査人数();
         source.gogitaiNo = item.get合議体番号();
         source.kanriNo = item.get管理番号();
         source.hihokenshaKubun = item.get被保険者区分();

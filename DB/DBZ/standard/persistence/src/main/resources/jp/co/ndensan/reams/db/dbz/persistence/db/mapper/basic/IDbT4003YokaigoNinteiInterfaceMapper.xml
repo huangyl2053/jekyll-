@@ -17,6 +17,7 @@
     </sql>
 
     <sql id="allColumns_DbT4003YokaigoNinteiInterface">
+         "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo" as "dbT4003YokaigoNinteiInterface_shinseishoKanriNo",
          "DbT4003YokaigoNinteiInterface"."insertDantaiCd" as "dbT4003YokaigoNinteiInterface_insertDantaiCd",
          "DbT4003YokaigoNinteiInterface"."insertTimestamp" as "dbT4003YokaigoNinteiInterface_insertTimestamp",
          "DbT4003YokaigoNinteiInterface"."insertReamsLoginId" as "dbT4003YokaigoNinteiInterface_insertReamsLoginId",
@@ -25,7 +26,6 @@
          "DbT4003YokaigoNinteiInterface"."updateCount" as "dbT4003YokaigoNinteiInterface_updateCount",
          "DbT4003YokaigoNinteiInterface"."lastUpdateTimestamp" as "dbT4003YokaigoNinteiInterface_lastUpdateTimestamp",
          "DbT4003YokaigoNinteiInterface"."lastUpdateReamsLoginId" as "dbT4003YokaigoNinteiInterface_lastUpdateReamsLoginId",
-         "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo" as "dbT4003YokaigoNinteiInterface_shinseishoKanriNo",
          "DbT4003YokaigoNinteiInterface"."hihokenshaNo" as "dbT4003YokaigoNinteiInterface_hihokenshaNo",
          "DbT4003YokaigoNinteiInterface"."rirekiNo" as "dbT4003YokaigoNinteiInterface_rirekiNo",
          "DbT4003YokaigoNinteiInterface"."torikomiTimestamp" as "dbT4003YokaigoNinteiInterface_torikomiTimestamp",
@@ -78,6 +78,7 @@
 
     <!--テーブルDbT4003YokaigoNinteiInterfaceの項目をDbT4003YokaigoNinteiInterfaceEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4003YokaigoNinteiInterfaceEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity" autoMapping="true">
+        <id property="shinseishoKanriNo" column="dbT4003YokaigoNinteiInterface_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4003YokaigoNinteiInterface_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4003YokaigoNinteiInterface_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4003YokaigoNinteiInterface_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -86,7 +87,6 @@
         <result property="updateCount" column="dbT4003YokaigoNinteiInterface_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4003YokaigoNinteiInterface_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4003YokaigoNinteiInterface_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseishoKanriNo" column="dbT4003YokaigoNinteiInterface_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="hihokenshaNo" column="dbT4003YokaigoNinteiInterface_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="rirekiNo" column="dbT4003YokaigoNinteiInterface_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="torikomiTimestamp" column="dbT4003YokaigoNinteiInterface_torikomiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>

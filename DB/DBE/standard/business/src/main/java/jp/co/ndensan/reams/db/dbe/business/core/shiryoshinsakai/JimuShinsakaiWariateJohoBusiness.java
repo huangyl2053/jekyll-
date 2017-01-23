@@ -18,8 +18,8 @@ public class JimuShinsakaiWariateJohoBusiness {
 
     private static final int INDEX_5 = 5;
     private final ShinsakaiSiryoKyotsuEntity entity;
-    private RString fileName;
-    private RString fileName_BAK;
+    private RString fileName1;
+    private RString fileName2;
 
     /**
      * コンストラクタです。
@@ -121,30 +121,12 @@ public class JimuShinsakaiWariateJohoBusiness {
     }
 
     /**
-     * 左の主治医意見書イメージを取得します。
-     *
-     * @return 左の主治医意見書イメージ
-     */
-    public RString get左の主治医意見書イメージ() {
-        return fileName;
-    }
-
-    /**
-     * 右の主治医意見書イメージを取得します。
-     *
-     * @return 右の主治医意見書イメージ
-     */
-    public RString get右の主治医意見書イメージ() {
-        return fileName_BAK;
-    }
-
-    /**
      * 主治医意見書イメージ１を取得します。
      *
      * @return 主治医意見書イメージ１
      */
     public RString get主治医意見書イメージ１() {
-        return fileName;
+        return fileName1;
     }
 
     /**
@@ -153,24 +135,33 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 主治医意見書イメージ２
      */
     public RString get主治医意見書イメージ２() {
-        return fileName_BAK;
+        return fileName2;
     }
 
     /**
-     * イメージファイルE0001を設定します。
+     * 主治医意見書イメージ１(E0001)を設定します。
      *
      * @param fileName イメージファイル名
      */
-    public void setイメージファイル(RString fileName) {
-        this.fileName = fileName;
+    public void set主治医意見書イメージ１(RString fileName) {
+        this.fileName1 = fileName;
     }
 
     /**
-     * イメージファイルE0002を設定します。
+     * 主治医意見書イメージ２(E0002)を設定します。
      *
-     * @param fileName_BAK イメージファイル名
+     * @param fileName イメージファイル名
      */
-    public void setイメージファイル_BAK(RString fileName_BAK) {
-        this.fileName_BAK = fileName_BAK;
+    public void set主治医意見書イメージ２(RString fileName) {
+        this.fileName2 = fileName;
+    }
+
+    /**
+     * 審査順を取得します。
+     *
+     * @return 審査順
+     */
+    public RString get審査順() {
+        return new RString(entity.getShinsakaiOrder());
     }
 }

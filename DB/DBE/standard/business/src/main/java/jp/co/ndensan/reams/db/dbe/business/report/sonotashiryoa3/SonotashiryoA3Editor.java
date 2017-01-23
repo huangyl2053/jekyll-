@@ -47,6 +47,7 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
      */
     @Override
     public SonotashiryoA3ReportSource edit(SonotashiryoA3ReportSource source) {
+        source.shinsakaiOrder = business.get審査順();
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();
@@ -68,8 +69,8 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
         source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
         if (index != 0) {
-            source.imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
-            source.imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);
+            source.imgSonotashiryo2 = business.getその他資料イメージパス(2 * index - 1);
         }
 
         source.shikibetuCode = new ShikibetsuCode(business.get識別コード());

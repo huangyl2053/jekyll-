@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.INinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,21 +23,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KensakuOption")
-    private KensakuOptionDiv KensakuOption;
-    @JsonProperty("ShinseishaIchiran")
-    private ShinseishaIchiranDiv ShinseishaIchiran;
-    @JsonProperty("ShujiiIkenshoIraiJohoInput")
-    private ShujiiIkenshoIraiJohoInputDiv ShujiiIkenshoIraiJohoInput;
-    @JsonProperty("hdnClickedButton")
-    private RString hdnClickedButton;
+    @JsonProperty("Search")
+    private SearchDiv Search;
+    @JsonProperty("IkenshoSakuseiTaishoWaritsuke")
+    private IkenshoSakuseiTaishoWaritsukeDiv IkenshoSakuseiTaishoWaritsuke;
+    @JsonProperty("KanryoMessage")
+    private KaigoKanryoMessageDiv KanryoMessage;
+    @JsonProperty("shinseishaKanriNo")
+    private RString shinseishaKanriNo;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
 
@@ -46,75 +48,66 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getKensakuOption
-     * @return KensakuOption
+     * getSearch
+     * @return Search
      */
-    @JsonProperty("KensakuOption")
-    public KensakuOptionDiv getKensakuOption() {
-        return KensakuOption;
+    @JsonProperty("Search")
+    public SearchDiv getSearch() {
+        return Search;
     }
 
     /*
-     * setKensakuOption
-     * @param KensakuOption KensakuOption
+     * setSearch
+     * @param Search Search
      */
-    @JsonProperty("KensakuOption")
-    public void setKensakuOption(KensakuOptionDiv KensakuOption) {
-        this.KensakuOption = KensakuOption;
+    @JsonProperty("Search")
+    public void setSearch(SearchDiv Search) {
+        this.Search = Search;
     }
 
     /*
-     * getShinseishaIchiran
-     * @return ShinseishaIchiran
+     * getIkenshoSakuseiTaishoWaritsuke
+     * @return IkenshoSakuseiTaishoWaritsuke
      */
-    @JsonProperty("ShinseishaIchiran")
-    public ShinseishaIchiranDiv getShinseishaIchiran() {
-        return ShinseishaIchiran;
+    @JsonProperty("IkenshoSakuseiTaishoWaritsuke")
+    public IkenshoSakuseiTaishoWaritsukeDiv getIkenshoSakuseiTaishoWaritsuke() {
+        return IkenshoSakuseiTaishoWaritsuke;
     }
 
     /*
-     * setShinseishaIchiran
-     * @param ShinseishaIchiran ShinseishaIchiran
+     * setIkenshoSakuseiTaishoWaritsuke
+     * @param IkenshoSakuseiTaishoWaritsuke IkenshoSakuseiTaishoWaritsuke
      */
-    @JsonProperty("ShinseishaIchiran")
-    public void setShinseishaIchiran(ShinseishaIchiranDiv ShinseishaIchiran) {
-        this.ShinseishaIchiran = ShinseishaIchiran;
+    @JsonProperty("IkenshoSakuseiTaishoWaritsuke")
+    public void setIkenshoSakuseiTaishoWaritsuke(IkenshoSakuseiTaishoWaritsukeDiv IkenshoSakuseiTaishoWaritsuke) {
+        this.IkenshoSakuseiTaishoWaritsuke = IkenshoSakuseiTaishoWaritsuke;
     }
 
     /*
-     * getShujiiIkenshoIraiJohoInput
-     * @return ShujiiIkenshoIraiJohoInput
+     * getKanryoMessage
+     * @return KanryoMessage
      */
-    @JsonProperty("ShujiiIkenshoIraiJohoInput")
-    public ShujiiIkenshoIraiJohoInputDiv getShujiiIkenshoIraiJohoInput() {
-        return ShujiiIkenshoIraiJohoInput;
+    @JsonProperty("KanryoMessage")
+    public IKaigoKanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
     }
 
     /*
-     * setShujiiIkenshoIraiJohoInput
-     * @param ShujiiIkenshoIraiJohoInput ShujiiIkenshoIraiJohoInput
+     * getshinseishaKanriNo
+     * @return shinseishaKanriNo
      */
-    @JsonProperty("ShujiiIkenshoIraiJohoInput")
-    public void setShujiiIkenshoIraiJohoInput(ShujiiIkenshoIraiJohoInputDiv ShujiiIkenshoIraiJohoInput) {
-        this.ShujiiIkenshoIraiJohoInput = ShujiiIkenshoIraiJohoInput;
+    @JsonProperty("shinseishaKanriNo")
+    public RString getShinseishaKanriNo() {
+        return shinseishaKanriNo;
     }
 
     /*
-     * gethdnClickedButton
-     * @return hdnClickedButton
+     * setshinseishaKanriNo
+     * @param shinseishaKanriNo shinseishaKanriNo
      */
-    @JsonProperty("hdnClickedButton")
-    public RString getHdnClickedButton() {
-        return hdnClickedButton;
-    }
-
-    /*
-     * sethdnClickedButton
-     * @param hdnClickedButton hdnClickedButton
-     */
-    @JsonProperty("hdnClickedButton")
-    public void setHdnClickedButton(RString hdnClickedButton) {
-        this.hdnClickedButton = hdnClickedButton;
+    @JsonProperty("shinseishaKanriNo")
+    public void setShinseishaKanriNo(RString shinseishaKanriNo) {
+        this.shinseishaKanriNo = shinseishaKanriNo;
     }
 
     /*
@@ -139,93 +132,113 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnClear() {
-        return this.getKensakuOption().getBtnClear();
+    public Button getBtnClearKensakuJoken() {
+        return this.getSearch().getBtnClearKensakuJoken();
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
-        this.getKensakuOption().setBtnClear(btnClear);
+    public void  setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
+        this.getSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtMaxDisp() {
-        return this.getKensakuOption().getTxtMaxDisp();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaxDisp(TextBoxNum txtMaxDisp) {
-        this.getKensakuOption().setTxtMaxDisp(txtMaxDisp);
-    }
-
-    @JsonIgnore
-    public INinteiShinseishaFinderDiv getCcdNinteishinseishaFinder() {
-        return this.getKensakuOption().getCcdNinteishinseishaFinder();
-    }
-
-    @JsonIgnore
-    public DataGrid<dgShinseishaIchiran_Row> getDgShinseishaIchiran() {
-        return this.getShinseishaIchiran().getDgShinseishaIchiran();
-    }
-
-    @JsonIgnore
-    public void  setDgShinseishaIchiran(DataGrid<dgShinseishaIchiran_Row> dgShinseishaIchiran) {
-        this.getShinseishaIchiran().setDgShinseishaIchiran(dgShinseishaIchiran);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnPrint() {
-        return this.getShinseishaIchiran().getBtnPrint();
-    }
-
-    @JsonIgnore
-    public void  setBtnPrint(ButtonDialog btnPrint) {
-        this.getShinseishaIchiran().setBtnPrint(btnPrint);
-    }
-
-    @JsonIgnore
-    public ShujiiIryoKikanNyuryokuDiv getShujiiIryoKikanNyuryoku() {
-        return this.getShujiiIkenshoIraiJohoInput().getShujiiIryoKikanNyuryoku();
-    }
-
-    @JsonIgnore
-    public void  setShujiiIryoKikanNyuryoku(ShujiiIryoKikanNyuryokuDiv ShujiiIryoKikanNyuryoku) {
-        this.getShujiiIkenshoIraiJohoInput().setShujiiIryoKikanNyuryoku(ShujiiIryoKikanNyuryoku);
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getSearch().getCcdHokenshaList();
     }
 
     @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryoKikanAndShujiiInput() {
-        return this.getShujiiIkenshoIraiJohoInput().getShujiiIryoKikanNyuryoku().getCcdShujiiIryoKikanAndShujiiInput();
+        return this.getSearch().getCcdShujiiIryoKikanAndShujiiInput();
     }
 
     @JsonIgnore
-    public HorizontalLine getLin1() {
-        return this.getShujiiIkenshoIraiJohoInput().getLin1();
+    public WaritsukeZumiTaishoshaDiv getWaritsukeZumiTaishosha() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getWaritsukeZumiTaishosha();
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
-        this.getShujiiIkenshoIraiJohoInput().setLin1(lin1);
+    public void  setWaritsukeZumiTaishosha(WaritsukeZumiTaishoshaDiv WaritsukeZumiTaishosha) {
+        this.getIkenshoSakuseiTaishoWaritsuke().setWaritsukeZumiTaishosha(WaritsukeZumiTaishosha);
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShujiiIkensahoSakuseiIraiDay() {
-        return this.getShujiiIkenshoIraiJohoInput().getTxtShujiiIkensahoSakuseiIraiDay();
+    public DataGrid<dgWaritsukeZumiShinseishaIchiran_Row> getDgWaritsukeZumiShinseishaIchiran() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getWaritsukeZumiTaishosha().getDgWaritsukeZumiShinseishaIchiran();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIkensahoSakuseiIraiDay(TextBoxDate txtShujiiIkensahoSakuseiIraiDay) {
-        this.getShujiiIkenshoIraiJohoInput().setTxtShujiiIkensahoSakuseiIraiDay(txtShujiiIkensahoSakuseiIraiDay);
+    public void  setDgWaritsukeZumiShinseishaIchiran(DataGrid<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran) {
+        this.getIkenshoSakuseiTaishoWaritsuke().getWaritsukeZumiTaishosha().setDgWaritsukeZumiShinseishaIchiran(dgWaritsukeZumiShinseishaIchiran);
     }
 
     @JsonIgnore
-    public Button getBtnIrai() {
-        return this.getShujiiIkenshoIraiJohoInput().getBtnIrai();
+    public ShinseishaWaritsukeKaijoDiv getShinseishaWaritsukeKaijo() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo();
     }
 
     @JsonIgnore
-    public void  setBtnIrai(Button btnIrai) {
-        this.getShujiiIkenshoIraiJohoInput().setBtnIrai(btnIrai);
+    public void  setShinseishaWaritsukeKaijo(ShinseishaWaritsukeKaijoDiv ShinseishaWaritsukeKaijo) {
+        this.getIkenshoSakuseiTaishoWaritsuke().setShinseishaWaritsukeKaijo(ShinseishaWaritsukeKaijo);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtIkenshoSakuseiIraiDay() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo().getTxtIkenshoSakuseiIraiDay();
+    }
+
+    @JsonIgnore
+    public void  setTxtIkenshoSakuseiIraiDay(TextBoxDate txtIkenshoSakuseiIraiDay) {
+        this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo().setTxtIkenshoSakuseiIraiDay(txtIkenshoSakuseiIraiDay);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsuke() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo().getBtnWaritsuke();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsuke(Button btnWaritsuke) {
+        this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo().setBtnWaritsuke(btnWaritsuke);
+    }
+
+    @JsonIgnore
+    public Button getBtnKaijo() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo().getBtnKaijo();
+    }
+
+    @JsonIgnore
+    public void  setBtnKaijo(Button btnKaijo) {
+        this.getIkenshoSakuseiTaishoWaritsuke().getShinseishaWaritsukeKaijo().setBtnKaijo(btnKaijo);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnPrint() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getBtnPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnPrint(ButtonDialog btnPrint) {
+        this.getIkenshoSakuseiTaishoWaritsuke().setBtnPrint(btnPrint);
+    }
+
+    @JsonIgnore
+    public MiwaritsukeShinseishaDiv getMiwaritsukeShinseisha() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getMiwaritsukeShinseisha();
+    }
+
+    @JsonIgnore
+    public void  setMiwaritsukeShinseisha(MiwaritsukeShinseishaDiv MiwaritsukeShinseisha) {
+        this.getIkenshoSakuseiTaishoWaritsuke().setMiwaritsukeShinseisha(MiwaritsukeShinseisha);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgMiwaritsukeShinseishaIchiran_Row> getDgMiwaritsukeShinseishaIchiran() {
+        return this.getIkenshoSakuseiTaishoWaritsuke().getMiwaritsukeShinseisha().getDgMiwaritsukeShinseishaIchiran();
+    }
+
+    @JsonIgnore
+    public void  setDgMiwaritsukeShinseishaIchiran(DataGrid<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran) {
+        this.getIkenshoSakuseiTaishoWaritsuke().getMiwaritsukeShinseisha().setDgMiwaritsukeShinseishaIchiran(dgMiwaritsukeShinseishaIchiran);
     }
 
     // </editor-fold>

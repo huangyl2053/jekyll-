@@ -30,7 +30,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
     private final JizenShinsakaiShiryoPublicationDiv div;
     private static final RString すべて選択_印刷一次判定_A4_両面_1 = new RString("1");
     private static final RString 個別設定_印刷特記事項_A3_片面_2 = new RString("2");
-    private static final RString 印刷帳票_審査会開催通知書 = new RString("key0");
+    private static final RString 印刷帳票_審査会開催のお知らせ = new RString("key0");
     private static final RString 印刷帳票_審査会資料 = new RString("key1");
     private static final RString 印刷帳票_予備判定記入表 = new RString("key2");
     private static final RString 印刷帳票_特記事項_0 = new RString("0");
@@ -93,7 +93,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
             RString 主治医意見書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_主治医意見書, 日期, SubGyomuCode.DBE認定支援);
             RString 予備判定記入票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_予備判定記入表, 日期, SubGyomuCode.DBE認定支援);
             if (個別設定_印刷特記事項_A3_片面_2.equals(審査会開催通知書)) {
-                印刷帳票chk.add(印刷帳票_審査会開催通知書);
+                印刷帳票chk.add(印刷帳票_審査会開催のお知らせ);
             }
             if (個別設定_印刷特記事項_A3_片面_2.equals(審査会資料)) {
                 印刷帳票chk.add(印刷帳票_審査会資料);
@@ -115,7 +115,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
             }
         }
         if (すべて選択_印刷一次判定_A4_両面_1.equals(印刷帳票)) {
-            印刷帳票chk.add(印刷帳票_審査会開催通知書);
+            印刷帳票chk.add(印刷帳票_審査会開催のお知らせ);
             印刷帳票chk.add(印刷帳票_審査会資料);
             印刷審査会資料chk.add(印刷帳票_特記事項_0);
             印刷審査会資料chk.add(すべて選択_印刷一次判定_A4_両面_1);
@@ -144,7 +144,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
             div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().setDisabled(true);
         }
         if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys()
-                .contains(印刷帳票_審査会開催通知書)) {
+                .contains(印刷帳票_審査会開催のお知らせ)) {
             div.getPublishingCondition().getCcdBunshoNoInput().setDisabled(false);
         } else {
             div.getPublishingCondition().getCcdBunshoNoInput().setDisabled(true);
@@ -251,7 +251,7 @@ public class JizenShinsakaiShiryoPublicationHandler {
         List<RString> 印刷帳票 = div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().getSelectedKeys();
         List<RString> 印刷審査会資料 = div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
                 .getSelectedKeys();
-        if (印刷帳票.contains(印刷帳票_審査会開催通知書)) {
+        if (印刷帳票.contains(印刷帳票_審査会開催のお知らせ)) {
             batchParameter.setTuutiFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
             batchParameter.setTuutiFlag(印刷帳票_特記事項_0);

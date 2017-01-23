@@ -286,6 +286,8 @@ public class IchijihanteikekkahyoA4ReportSource implements IReportSource {
     public RString sabisuName21;
     @ReportItem(name = "sabisuKaisu21", length = 11, order = 135)
     public RString sabisuKaisu21;
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 136)
+    public RString shinsakaiOrder;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

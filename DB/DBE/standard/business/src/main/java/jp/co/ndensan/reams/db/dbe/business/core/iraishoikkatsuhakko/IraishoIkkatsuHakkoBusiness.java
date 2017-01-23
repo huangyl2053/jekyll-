@@ -653,24 +653,21 @@ public class IraishoIkkatsuHakkoBusiness {
 
     private RString get提出期限(boolean 年号フラグ) {
         RString 提出期限 = RString.EMPTY;
-        if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
-            if (文字列0.equals(processParamter.getTeishutsuKigen())) {
-                int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        基準日, SubGyomuCode.DBE認定支援).toString());
-                if (entity.get主治医意見書作成期限年月日() != null && !entity.get主治医意見書作成期限年月日().isEmpty()) {
-                    提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()), 年号フラグ);
-                }
-            } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = RString.EMPTY;
-            } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
-                提出期限 = !RString.isNullOrEmpty(processParamter.getKyotsuHizuke())
-                        ? get和暦(processParamter.getKyotsuHizuke(), 年号フラグ) : RString.EMPTY;
+        if (文字列0.equals(processParamter.getTeishutsuKigen())) {
+            int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
+                    基準日, SubGyomuCode.DBE認定支援).toString());
+            if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
+                提出期限 = entity.get主治医意見書作成依頼年月日() != null && !entity.get主治医意見書作成依頼年月日().isEmpty()
+                        ? get和暦(new RString(entity.get主治医意見書作成依頼年月日().plusDay(期限日数).toString()), 年号フラグ) : RString.EMPTY;
+            } else {
+                提出期限 = RString.isNullOrEmpty(entity.get認定申請年月日())
+                        ? get和暦(new RString(new FlexibleDate(entity.get認定申請年月日()).plusDay(期限日数).toString()), 年号フラグ) : RString.EMPTY;
             }
-        } else {
-            FlexibleDate 主治医意見書作成期限日 = entity.get主治医意見書作成期限年月日();
-            if (主治医意見書作成期限日 != null && !主治医意見書作成期限日.isEmpty()) {
-                提出期限 = get和暦(new RString(主治医意見書作成期限日.toString()), 年号フラグ);
-            }
+        } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {
+            提出期限 = RString.EMPTY;
+        } else if (文字列2.equals(processParamter.getTeishutsuKigen())) {
+            提出期限 = !RString.isNullOrEmpty(processParamter.getKyotsuHizuke())
+                    ? get和暦(processParamter.getKyotsuHizuke(), 年号フラグ) : RString.EMPTY;
         }
         return 提出期限;
     }

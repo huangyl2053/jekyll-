@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
  * <br/> 申請書の発行対象として画面で選択された被保険者の被保番号を保持する。
  */
 public class DbT4033ShinseishoHakkoTaishoshasEntity extends DbTableEntityBase<DbT4033ShinseishoHakkoTaishoshasEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4033ShinseishoHakkoTaishoshas");
 
@@ -30,6 +30,7 @@ public class DbT4033ShinseishoHakkoTaishoshasEntity extends DbTableEntityBase<Db
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private UUID hakkoShoriID;
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
 
     /**
@@ -129,6 +130,9 @@ public class DbT4033ShinseishoHakkoTaishoshasEntity extends DbTableEntityBase<Db
         if (!Objects.equals(this.hakkoShoriID, other.hakkoShoriID)) {
             return false;
         }
+        if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
+            return false;
+        }
         return true;
     }
 
@@ -151,4 +155,5 @@ public class DbT4033ShinseishoHakkoTaishoshasEntity extends DbTableEntityBase<Db
     }
 
 // </editor-fold>
+
 }

@@ -1,12 +1,10 @@
-﻿riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,介護住宅改修理由書作成事業者番号,A
-ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
+﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,介護住宅改修理由書作成事業者番号,A
+shukeiNo,varchar,RString,,,,,集計関連付け番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 shikyu_FushikyuKetteiYMD,UDD015YMD,FlexibleDate,,,,,支給・不支給決定年月日,A
 shikyu_FushikyuKubun,varchar,RString,,,,,支給・不支給区分,A
 fushikyuRiyu,varchar,RString,,,,,償還不支給理由等,A
 tesuryoShiharaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,住宅改修理由書作成手数料支払予定日,A
-shukeiNo,varchar,RString,,,,,集計関連付け番号,A
 ketteiTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,決定通知書作成年月日,A
 furikomiTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,振込通知書作成年月日,A
-uketoriYM,UDD014YM,FlexibleYearMonth,,,,,受取年月,A
-kozaID,int8,long,,,,,口座ID,A

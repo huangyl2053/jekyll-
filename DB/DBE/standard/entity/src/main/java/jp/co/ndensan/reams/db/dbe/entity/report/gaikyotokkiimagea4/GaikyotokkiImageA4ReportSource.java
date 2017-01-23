@@ -86,6 +86,8 @@ public class GaikyotokkiImageA4ReportSource implements IReportSource {
     public RString gaikyotokkiImg6;
     @ReportItem(name = "gaikyotokkiImg7", order = 33)
     public RString gaikyotokkiImg7;
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 34)
+    public RString shinsakaiOrder;
 
     @ReportItem(name = "imgSonotashiryo", order = 100)
     public RString imgSonotashiryo;

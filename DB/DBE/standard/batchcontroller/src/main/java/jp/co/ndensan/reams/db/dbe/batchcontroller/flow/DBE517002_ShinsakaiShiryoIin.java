@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_ShinsakaiShiryoIinParameter> {
 
-    private static final String 委員_審査会開催通知書 = "iinTuutisho";
+    private static final String 委員_審査会開催のお知らせ = "iinTuutisho";
     private static final String 委員_特記事項 = "iinTokkiJikou";
     private static final String 委員_一次判定結果 = "iinItiziHantei";
     private static final String 委員_主治医意見書_1枚目 = "iinIkensho_1";
@@ -55,7 +55,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
     protected void defineFlow() {
         出力帳票一覧 = getParameter().get帳票一覧Map();
         if (選択.equals(getParameter().getChohyoIin_tuutishoFalg())) {
-            executeStep(委員_審査会開催通知書);
+            executeStep(委員_審査会開催のお知らせ);
         }
         if (選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_予備判定一覧);
@@ -113,7 +113,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
      *
      * @return バッチコマンド
      */
-    @Step(委員_審査会開催通知書)
+    @Step(委員_審査会開催のお知らせ)
     protected IBatchFlowCommand createIinTuutishoData() {
         出力帳票一覧.put(ReportIdDBE.DBE515001.getReportId().getColumnValue(), ReportIdDBE.DBE515001.getReportName());
         return loopBatch(IinTuutishoDataSakuseiProcess.class)

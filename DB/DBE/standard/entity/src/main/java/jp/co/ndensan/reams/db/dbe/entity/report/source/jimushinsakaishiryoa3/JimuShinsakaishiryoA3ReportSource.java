@@ -335,6 +335,8 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString shisetsuTelTxit;
     @ReportItem(name = "imgShisetsuTel", order = 155)
     public RString imgShisetsuTel;
+    @ReportItem(name = "shinsakaiOrder", order = 192)
+    public RString shinsakaiOrder;
 
     //DBE517041
     @ReportItem(name = "gaikyotokkiImg", order = 156)
@@ -537,8 +539,6 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString shinsaMM;
     @ReportItem(name = "shinsaDD", length = 2, order = 293)
     public RString shinsaDD;
-    @ReportItem(name = "shinsakaiOrder", order = 296)
-    public RString shinsakaiOrder;
 
     //DBE517005
     @ReportItem(name = "imgIkensho1", order = 320)

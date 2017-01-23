@@ -24,13 +24,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAccessor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.OcrTorikomiKekka;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.OcrTorikomiKekkaListEditor;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.ShinkiKoshinKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe250002.OcrImageReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemNewManager;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -40,32 +40,27 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkensho
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
 import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 主治医意見書の読み込み処理です。
  */
 //TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
 //TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
-public class ImageInputProcess extends BatchProcessBase<RString> {
+public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5302ShujiiIkenshoJohoEntity> writer_DbT5302;
@@ -73,20 +68,23 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     private BatchPermanentTableWriter<DbT5304ShujiiIkenshoIkenItemEntity> writer_DbT5304;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5115ImageEntity> writer_DbT5115;
-
-    private OcrTorikomiKekkaListEditor kekkaListEditor;
+//    TODO 実装途中
+//    private OcrTorikomiKekkaListEditor kekkaListEditor;
 
     /**
      * このバッチプロセスのパラメータです。
      */
-    private OcrImageReadProcessParameter processParameter;
+    private OcrDataReadProcessParameter processParameter;
     private List<OcrIken> cache;
     private ShinseiKey key;
     private Catalog catalog;
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(processParameter.getファイルPath().findCsvFilePath(), Encode.SJIS);
+        return new BatchDbReader(
+                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".findCsvDataOrderByKey").toRString(),
+                this.processParameter.toOcrCsvMapperParameter()
+        );
     }
 
     @Override
@@ -94,11 +92,11 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         this.writer_DbT5302 = new BatchPermanentTableWriter<>(DbT5302ShujiiIkenshoJohoEntity.class);
         this.writer_DbT5304 = new BatchPermanentTableWriter<>(DbT5304ShujiiIkenshoIkenItemEntity.class);
         this.writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
-        this.kekkaListEditor = OcrTorikomiKekkaListEditor.spoolBy(new FileSpoolManager(
-                UzUDE0835SpoolOutputType.EucOther,
-                new RString(""), //TODO OtherEucEntityID
-                UzUDE0831EucAccesslogFileType.Csv)
-        );
+//        this.kekkaListEditor = OcrTorikomiKekkaListEditor.spoolBy(new FileSpoolManager(
+//                UzUDE0835SpoolOutputType.EucOther,
+//                new RString(""), //TODO OtherEucEntityID
+//                UzUDE0831EucAccesslogFileType.Csv)
+//        );
     }
 
     @Override
@@ -110,8 +108,8 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     }
 
     @Override
-    protected void process(RString line) {
-        final OcrIken ocrIken = OcrIken.parsed(line);
+    protected void process(TempOcrCsvEntity entity) {
+        final OcrIken ocrIken = OcrIken.parsed(entity.getCsvData());
         if (hasBreak(this.key, ocrIken.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 /* ブレイク処理 */
@@ -149,7 +147,8 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
         //</editor-fold>
         //TODO 現在、ID=777, ID=778 限定の処理となっている。ID=701等を取り込む場合には検討が必要。
         if (isID777orID778()) {
-            this.kekkaListEditor.writeLine(processID777or778(key, sameKeyValues));
+            //this.kekkaListEditor.writeLine(processID777or778(key, sameKeyValues));
+            processID777or778(key, sameKeyValues);
         }
         //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理終了">
         _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()

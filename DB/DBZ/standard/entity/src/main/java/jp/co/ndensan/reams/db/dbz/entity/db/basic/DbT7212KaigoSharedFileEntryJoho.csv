@@ -1,0 +1,3 @@
+﻿fileName,varchar,RString,,,,,ファイル名,A
+entryJoho,varchar,RString,,,,,エントリ情報,A
+sharedFileId,timestamp,RDateTime,,,,,共有ファイルID,A

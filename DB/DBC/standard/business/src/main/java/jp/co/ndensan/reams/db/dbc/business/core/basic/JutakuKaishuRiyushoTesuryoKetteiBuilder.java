@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3094JutakuKaishuRiyushoTesuryoKetteiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -60,7 +60,7 @@ public class JutakuKaishuRiyushoTesuryoKetteiBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link JutakuKaishuRiyushoTesuryoKetteiBuilder}
      */
-    public JutakuKaishuRiyushoTesuryoKetteiBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public JutakuKaishuRiyushoTesuryoKetteiBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;

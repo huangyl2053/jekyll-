@@ -193,4 +193,13 @@ public class JimuGaikyouBusiness {
     public void setイメージファイル(RString fileName) {
         this.fileName = fileName;
     }
+
+    /**
+     * 審査順を取得します。
+     *
+     * @return 審査順
+     */
+    public RString get審査順() {
+        return new RString(entity.getShinsakaiOrder());
+    }
 }

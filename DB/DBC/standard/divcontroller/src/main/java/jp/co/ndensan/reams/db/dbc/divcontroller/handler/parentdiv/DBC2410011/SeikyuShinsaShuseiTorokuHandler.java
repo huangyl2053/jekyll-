@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2410011.SeikyuShinsaShuseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2410011.dgSeikyuMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2410011.dgSeikyu_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
@@ -449,11 +449,11 @@ public class SeikyuShinsaShuseiTorokuHandler {
             }
             SeikyuShinsaShuseiTorokuBusiness 事業者情報明細 = ViewStateHolder.get(ViewStateKeys.住宅改修理由書事業者情報明細,
                     SeikyuShinsaShuseiTorokuCollect.class).get事業者情報List().get(index);
-            ShoKisaiHokenshaNo 証記載保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+            HokenshaNo 証記載保険者番号 = HokenshaNo.EMPTY;
             JigyoshaNo 事業者番号 = JigyoshaNo.EMPTY;
             RString 集計関連付け番号 = RString.EMPTY;
             if (!事業者情報明細.getDbT3096().get証記載保険者番号().isEmpty() && 事業者情報明細.getDbT3096().get証記載保険者番号() != null) {
-                証記載保険者番号 = new ShoKisaiHokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().value().toString());
+                証記載保険者番号 = new HokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().value().toString());
             }
             if (!事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号().isEmpty() && 事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号() != null) {
                 事業者番号 = new JigyoshaNo(事業者情報明細.getDbT3096().get介護住宅改修理由書作成事業者番号().value().toString());
@@ -501,7 +501,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
         if (div.getTxtKozaNameKana().getValue() != null) {
             出力集計 = 出力集計.createBuilderForEdit().set口座名義人カナ(div.getTxtKozaNameKana().getValue()).build();
         }
-        出力集計 = 出力集計.createBuilderForEdit().set口座ID(Decimal.ZERO).build();
+        出力集計 = 出力集計.createBuilderForEdit().set口座ID(0).build();
         return 出力集計;
     }
 
@@ -524,7 +524,7 @@ public class SeikyuShinsaShuseiTorokuHandler {
     }
 
     private JutakuKaishuRiyushoTesuryoKettei 決定追加(JutakuKaishuRiyushoTesuryoKettei 出力決定, SeikyuShinsaShuseiTorokuBusiness 事業者情報明細) {
-        出力決定.createBuilderForEdit().set証記載保険者番号(new ShoKisaiHokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().value().toString())).build();
+        出力決定.createBuilderForEdit().set証記載保険者番号(new HokenshaNo(事業者情報明細.getDbT3096().get証記載保険者番号().value().toString())).build();
         if (div.getTxtJigyoshaNo().getValue() != null) {
             出力決定 = 出力決定.createBuilderForEdit().set介護住宅改修理由書作成事業者番号(new JigyoshaNo(div.getTxtJigyoshaNo().getValue().
                     toString())).build();

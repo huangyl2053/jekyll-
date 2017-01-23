@@ -52,6 +52,21 @@ public class NinteichosaIraiValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 「依頼書等を印刷する」ボタンを押下する場合、入力チェックを実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 入力チェック_btnTaOutput() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
+        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : selected) {
@@ -146,7 +161,7 @@ public class NinteichosaIraiValidationHandler {
     }
 
     /**
-     * 「割付けを確定する」ボタンを押下する場合、入力チェックを実行します。
+     * 「割付ける」ボタンを押下する場合、入力チェックを実行します。
      *
      * @return ValidationMessageControlPairs
      */

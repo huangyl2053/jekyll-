@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT7014KaigoSetai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -57,6 +57,10 @@ public enum DbT7014KaigoSetai implements IColumnDefinition {
      * 世帯員管理連番
      */
     setaiInkanriRenban(10, 0),
+    /**
+     * 世帯コード
+     */
+    setaiCode(2147483647, 0),
     /**
      * 世帯員識別コード
      */

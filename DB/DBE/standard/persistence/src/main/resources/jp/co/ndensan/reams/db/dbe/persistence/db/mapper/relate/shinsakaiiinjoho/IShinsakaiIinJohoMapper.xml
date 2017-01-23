@@ -106,10 +106,11 @@
     </select>
 
     <select resultOrdered="true" id="get審査会委員情報By表示条件件数"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
-            resultType="int" fetchSize="500">
+                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
+                 resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
         SELECT
-        count(0)
+        dbT5594ShinsakaiIinJoho.*,
+        dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.*
         FROM
         (
         SELECT
@@ -172,6 +173,8 @@
         )AS dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho
         ON
         dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"=dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho."dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shinsakaiIinCode"
+        ORDER BY
+        dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
     </select>
 
     <select resultOrdered="true" id="get所属機関一覧情報"

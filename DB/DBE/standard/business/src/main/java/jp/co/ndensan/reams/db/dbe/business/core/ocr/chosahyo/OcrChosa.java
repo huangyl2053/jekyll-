@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -29,7 +28,7 @@ import lombok.AccessLevel;
 @lombok.Getter
 @lombok.Setter(AccessLevel.PRIVATE)
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class OcrChosa {
+public final class OcrChosa {
 
     @lombok.Setter(lombok.AccessLevel.PRIVATE)
     private ShinseiKey key = ShinseiKey.EMPTY;
@@ -139,7 +138,7 @@ public class OcrChosa {
      * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
      *
      * @param line 行
-     * @return {@link OcrIken}
+     * @return {@link OcrChosa}
      */
     public static OcrChosa parsed(RString line) {
         return parseデータ行(line);
@@ -155,6 +154,7 @@ public class OcrChosa {
         }
         result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
         if (result.getOcrID() == OCRID._501) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(to西暦_年(columns.get(3)));
@@ -189,6 +189,7 @@ public class OcrChosa {
             result.set施設利用の有無(columns.get(31));
 
         } else if (result.getOcrID() == OCRID._502) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 62 LINES
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(to西暦_年(columns.get(3)));
@@ -252,7 +253,9 @@ public class OcrChosa {
             result.set過去14日間に受けた治療(columns.get(60));
             result.set障害高齢者の日常生活自立度(new Code(columns.get(61)));
             result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
+
         } else if (result.getOcrID() == OCRID._550) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
             RString sheetIdValue = columns.get(1);
             result.setSheetID(new SheetID(sheetIdValue));
             result.set保険者番号(columns.get(2));
@@ -285,6 +288,7 @@ public class OcrChosa {
             map.put(new RStringBuilder().append(sheetIdValue).append("w02i035.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 27));
             map.put(new RStringBuilder().append(sheetIdValue).append("w02i036.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 28));
             result.set特記事項ImageFileName_調査項目_Map(map);
+
         }
         return result;
     }
@@ -297,23 +301,14 @@ public class OcrChosa {
     }
 
     /**
-     * @return 特記事項のイメージフィールド名と調査項目の対応のMapを返します。
+     * @return 存在するイメージファイル名
      */
-    public Map<RString, KomokuNo> get特記事項ImageFileName_調査項目_Map() {
-        return Collections.unmodifiableMap(特記事項ImageFileName_調査項目_Map);
-    }
-
-    /**
-     * @return 項目番号が空であるファイル名をすべて返します。
-     */
-    public List<RString> get特記事項ImageFileName_KomokuNoIsNotPresent() {
-        List<RString> list = new ArrayList<>();
-        for (Map.Entry<RString, KomokuNo> entry : get特記事項ImageFileName_調査項目_Map().entrySet()) {
-            if (entry.getValue().isEmpty()) {
-                list.add(entry.getKey());
-            }
+    public TokkiImageFileNames collectTokkiImageFileNames() {
+        List<TokkiImageFileName> list = new ArrayList<>();
+        for (Map.Entry<RString, KomokuNo> entry : this.特記事項ImageFileName_調査項目_Map.entrySet()) {
+            list.add(new TokkiImageFileName(entry.getKey(), entry.getValue()));
         }
-        return list;
+        return new TokkiImageFileNames(list);
     }
 
     private static RString to西暦_年(RString 和暦_日付) {

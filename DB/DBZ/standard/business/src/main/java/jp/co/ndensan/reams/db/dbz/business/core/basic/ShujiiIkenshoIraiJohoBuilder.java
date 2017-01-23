@@ -350,6 +350,18 @@ public class ShujiiIkenshoIraiJohoBuilder {
     }
 
     /**
+     * 認定調査依頼履歴番号を設定します。
+     *
+     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
+     * @return {@link NinteichosaIraiJohoBuilder}
+     */
+    public ShujiiIkenshoIraiJohoBuilder set主治医意見書作成依頼履歴番号(int 主治医意見書作成依頼履歴番号) {
+        requireNonNull(主治医意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼履歴番号"));
+        entity.setIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
+        return this;
+    }
+
+    /**
      * {@link ShujiiIkenshoIraiJoho}のインスタンスを生成します。
      *
      * @return {@link ShujiiIkenshoIraiJoho}のインスタンス

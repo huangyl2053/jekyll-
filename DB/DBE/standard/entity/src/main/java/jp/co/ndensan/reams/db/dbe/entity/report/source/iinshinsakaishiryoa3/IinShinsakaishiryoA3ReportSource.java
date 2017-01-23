@@ -103,6 +103,8 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listYukokikan2_1;
 
     //DBE517085
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 101)
+    public RString shinsakaiOrder;
     @ReportItem(name = "zenZenkaiHanteikekka", length = 8, order = 102)
     public RString zenZenkaiHanteikekka;
     @ReportItem(name = "zenzenkaiYukokikan", length = 4, order = 103)

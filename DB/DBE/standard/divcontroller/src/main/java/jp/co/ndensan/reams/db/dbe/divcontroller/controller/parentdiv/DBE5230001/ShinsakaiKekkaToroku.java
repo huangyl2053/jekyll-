@@ -159,7 +159,7 @@ public class ShinsakaiKekkaToroku {
     }
 
     /**
-     * 登録ボタンを押下しました。。
+     * 確定ボタンを押下しました。。
      *
      * @param div 介護認定審査会審査結果登録Div
      * @return responseData

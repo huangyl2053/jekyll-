@@ -52,10 +52,6 @@ public enum DbT3095JutakuKaishuRiyushoTesuryoMeisai implements IColumnDefinition
      */
     rirekiNo(5, 0),
     /**
-     * 識別コード
-     */
-    shikibetsuCode(2147483647, 0),
-    /**
      * サービスコード
      * <br/>償還払請求住宅改修TBL.サービスコード
      */
@@ -124,12 +120,7 @@ public enum DbT3095JutakuKaishuRiyushoTesuryoMeisai implements IColumnDefinition
      * 対象外フラグ
      * <br/>True：対象外、False：対象
      */
-    TaishogaiFlag(1, 0),
-    /**
-     * 集計フラグ
-     * <br/>True：集計済み、False：集計未
-     */
-    shukeiFlag(1, 0);
+    TaishogaiFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

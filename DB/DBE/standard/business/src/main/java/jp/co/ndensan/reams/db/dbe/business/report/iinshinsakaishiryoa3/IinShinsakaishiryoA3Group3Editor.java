@@ -93,6 +93,7 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
+        source.shinsakaiOrder = item.get審査人数();
         source.hokenshaNo = RString.EMPTY;
         source.hihokenshaNo = RString.EMPTY;
         source.hihokenshaName = RString.EMPTY;

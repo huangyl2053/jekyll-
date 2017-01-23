@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
- *
+ * OCRの取込結果です。
  */
 public final class OcrTorikomiKekka {
 
@@ -94,13 +94,27 @@ public final class OcrTorikomiKekka {
         private int 取込イメージ件数 = 0;
         private RString エラー内容 = RString.EMPTY;
 
-        public Builder(RDate 取込日, OCRID OCRID, SheetID sheetID, ShinseiKey key) {
+        /**
+         * {@link Builder}を生成します。
+         *
+         * @param 取込日 取込日
+         * @param ocrID OCRID
+         * @param sheetID SheetID
+         * @param key {@link ShinseiKey 申請のキー}
+         */
+        public Builder(RDate 取込日, OCRID ocrID, SheetID sheetID, ShinseiKey key) {
             this.取込日 = 取込日;
-            this.ocrid = OCRID;
+            this.ocrid = ocrID;
             this.sheetID = sheetID;
             this.key = key;
         }
 
+        /**
+         * @param 氏名 氏名
+         * @param 氏名カナ 氏名カナ
+         * @param 新規更新区分 新規更新区分
+         * @return {@link Builder}
+         */
         public Builder set関連データ(RString 氏名, RString 氏名カナ, ShinkiKoshinKubun 新規更新区分) {
             this.氏名 = 氏名;
             this.氏名カナ = 氏名カナ;
@@ -108,12 +122,20 @@ public final class OcrTorikomiKekka {
             return this;
         }
 
+        /**
+         * @param 取込イメージ件数 イメージの数
+         * @return {@link OcrTorikomiKekka}
+         */
         public OcrTorikomiKekka success(int 取込イメージ件数) {
             this.succeeds = true;
             this.取込イメージ件数 = 取込イメージ件数;
             return new OcrTorikomiKekka(this);
         }
 
+        /**
+         * @param エラー内容 エラー内容
+         * @return {@link OcrTorikomiKekka}
+         */
         public OcrTorikomiKekka error(RString エラー内容) {
             this.succeeds = false;
             this.エラー内容 = エラー内容;

@@ -21,7 +21,6 @@
          "DbT2019TokuchoMidoteiJoho"."kisoNenkinNo" as "dbT2019TokuchoMidoteiJoho_kisoNenkinNo",
          "DbT2019TokuchoMidoteiJoho"."nenkinCode" as "dbT2019TokuchoMidoteiJoho_nenkinCode",
          "DbT2019TokuchoMidoteiJoho"."hosokuM" as "dbT2019TokuchoMidoteiJoho_hosokuM",
-         "DbT2019TokuchoMidoteiJoho"."shikibetsuCode" as "dbT2019TokuchoMidoteiJoho_shikibetsuCode",
          "DbT2019TokuchoMidoteiJoho"."insertDantaiCd" as "dbT2019TokuchoMidoteiJoho_insertDantaiCd",
          "DbT2019TokuchoMidoteiJoho"."insertTimestamp" as "dbT2019TokuchoMidoteiJoho_insertTimestamp",
          "DbT2019TokuchoMidoteiJoho"."insertReamsLoginId" as "dbT2019TokuchoMidoteiJoho_insertReamsLoginId",
@@ -30,6 +29,7 @@
          "DbT2019TokuchoMidoteiJoho"."updateCount" as "dbT2019TokuchoMidoteiJoho_updateCount",
          "DbT2019TokuchoMidoteiJoho"."lastUpdateTimestamp" as "dbT2019TokuchoMidoteiJoho_lastUpdateTimestamp",
          "DbT2019TokuchoMidoteiJoho"."lastUpdateReamsLoginId" as "dbT2019TokuchoMidoteiJoho_lastUpdateReamsLoginId",
+         "DbT2019TokuchoMidoteiJoho"."shikibetsuCode" as "dbT2019TokuchoMidoteiJoho_shikibetsuCode",
          "DbT2019TokuchoMidoteiJoho"."kaishiM" as "dbT2019TokuchoMidoteiJoho_kaishiM",
          "DbT2019TokuchoMidoteiJoho"."fuichiRiyuCode" as "dbT2019TokuchoMidoteiJoho_fuichiRiyuCode",
          "DbT2019TokuchoMidoteiJoho"."kakuninJokyoKbn" as "dbT2019TokuchoMidoteiJoho_kakuninJokyoKbn"
@@ -42,7 +42,6 @@
         <id property="kisoNenkinNo" column="dbT2019TokuchoMidoteiJoho_kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="nenkinCode" column="dbT2019TokuchoMidoteiJoho_nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="hosokuM" column="dbT2019TokuchoMidoteiJoho_hosokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="shikibetsuCode" column="dbT2019TokuchoMidoteiJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="insertDantaiCd" column="dbT2019TokuchoMidoteiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2019TokuchoMidoteiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT2019TokuchoMidoteiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -51,6 +50,7 @@
         <result property="updateCount" column="dbT2019TokuchoMidoteiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT2019TokuchoMidoteiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT2019TokuchoMidoteiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT2019TokuchoMidoteiJoho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kaishiM" column="dbT2019TokuchoMidoteiJoho_kaishiM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="fuichiRiyuCode" column="dbT2019TokuchoMidoteiJoho_fuichiRiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kakuninJokyoKbn" column="dbT2019TokuchoMidoteiJoho_kakuninJokyoKbn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

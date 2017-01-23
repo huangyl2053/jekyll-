@@ -25,10 +25,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -50,8 +46,6 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness business;
-    private int shinsakaiOrder;
-    private int 存在ファイルindex;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001_BAK.png");
     private static final RString SEPARATOR = new RString("/");
@@ -62,8 +56,6 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
 
     @Override
     protected void initialize() {
-        shinsakaiOrder = -1;
-        存在ファイルindex = 0;
         myBatisParameter = paramter.toJimuShinsakaiIinJohoMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
         myBatisParameter.setShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
@@ -78,9 +70,6 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         entity.setJimukyoku(true);
-        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
-            存在ファイルindex = 0;
-        }
         List<RString> イメージファイルリスト;
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
         RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
@@ -89,12 +78,10 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
         } else {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名(), path);
         }
-        business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
+        business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト);
         business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
         SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
-        存在ファイルindex = business.get存在ファイルIndex();
-        shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
     @Override

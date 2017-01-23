@@ -70,7 +70,6 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
-    private final RString reportId;
 
     /**
      * インスタンスを生成します。
@@ -79,14 +78,15 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
      * @param 特記事項List List<RString>
      * @param index int
      * @param page int
-     * @param reportId 帳票ＩＤ
      */
-    protected JimuShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index, int page, RString reportId) {
+    protected JimuShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item,
+            List<RString> 特記事項List,
+            int index,
+            int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;
         this.page = page;
-        this.reportId = reportId;
     }
 
     @Override
@@ -95,6 +95,7 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
     }
 
     private JimuShinsakaishiryoA3ReportSource editSource(JimuShinsakaishiryoA3ReportSource source) {
+        source.shinsakaiOrder = item.get審査人数();
         source.hokenshaNo = item.get特記事項保険者番号();
         source.hihokenshaNo = item.get特記事項被保険者番号();
         source.hihokenshaName = item.get名前();

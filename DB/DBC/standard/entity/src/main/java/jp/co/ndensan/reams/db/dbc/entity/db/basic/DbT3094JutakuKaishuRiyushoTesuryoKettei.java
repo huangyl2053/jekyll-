@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
-
     /**
      * insertDantaiCd
      */
@@ -43,15 +42,20 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * 証記載保険者番号
+     */
+    shoKisaiHokenshaNo(2147483647, 0),
+    /**
      * 介護住宅改修理由書作成事業者番号
      */
     riyushoSakuseiJigyoshaNo(2147483647, 0),
     /**
-     * 決定年月日
+     * 集計関連付け番号
      */
-    ketteiYMD(2147483647, 0),
+    shukeiNo(6, 0),
     /**
      * 履歴番号
+     * <br/>処理の仕組み上、常に1
      */
     rirekiNo(5, 0),
     /**
@@ -71,30 +75,13 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
      */
     tesuryoShiharaiYoteiYMD(2147483647, 0),
     /**
-     * 集計関連付け番号
-     * <br/>連番
-     */
-    shukeiNo(6, 0),
-    /**
      * 決定通知書作成年月日
      */
     ketteiTsuchiSakuseiYMD(2147483647, 0),
     /**
      * 振込通知書作成年月日
      */
-    furikomiTsuchiSakuseiYMD(2147483647, 0),
-    /**
-     * 証記載保険者番号
-     */
-    shoKisaiHokenshaNo(2147483647, 0),
-    /**
-     * 受取年月
-     */
-    uketoriYM(2147483647, 0),
-    /**
-     * 口座ID
-     */
-    kozaID(19, 0);
+    furikomiTsuchiSakuseiYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -106,7 +93,7 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -115,7 +102,7 @@ public enum DbT3094JutakuKaishuRiyushoTesuryoKettei implements IColumnDefinition
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

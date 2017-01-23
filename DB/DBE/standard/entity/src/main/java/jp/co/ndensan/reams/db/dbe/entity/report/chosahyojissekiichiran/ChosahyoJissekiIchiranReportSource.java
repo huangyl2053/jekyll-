@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBE-1691-030 dangjingjing
  */
+
 public class ChosahyoJissekiIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -28,10 +29,14 @@ public class ChosahyoJissekiIchiranReportSource implements IReportSource {
     public RString listChosaJissekiIchiran_6;
     @ReportItem(name = "listChosaJissekiIchiran_7", length = 11, order = 8)
     public RString listChosaJissekiIchiran_7;
-    @ReportItem(name = "listChosaJissekiIchiran_8", length = 4, order = 9)
+    @ReportItem(name = "listChosaJissekiIchiran_8", length = 11, order = 9)
     public RString listChosaJissekiIchiran_8;
-    @ReportItem(name = "listChosaJissekiIchiran_9", length = 4, order = 10)
+    @ReportItem(name = "listChosaJissekiIchiran_9", length = 11, order = 10)
     public RString listChosaJissekiIchiran_9;
+    @ReportItem(name = "listChosaJissekiIchiran_10", length = 4, order = 11)
+    public RString listChosaJissekiIchiran_10;
+    @ReportItem(name = "listChosaJissekiIchiran_11", length = 4, order = 12)
+    public RString listChosaJissekiIchiran_11;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -1,8 +1,8 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,shichosonCode,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,hihokenshaNo,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,hihokenshaNo,A
 rirekiNo,bpchar,RString,,,,,rirekiNo,A
 edaban,bpchar,RString,,,,,edaban,A
-shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,shinseishoKanriNo,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,shinseishoKanriNo,A
 shinseiJokyoKubun,bpchar,RString,,,,,shinseiJokyoKubun,A
 shishoCode,varchar,RString,,,,,shishoCode,A
 chokkinFlag,bool,boolean,,,,,chokkinFlag,A
@@ -78,3 +78,4 @@ ninteiTorikeshiTsuchishoHakkoYMD,UDD015YMD,FlexibleDate,,,,,ninteiTorikeshiTsuch
 shikakuShutokuMaeShinseiFlag,bool,boolean,,,,,shikakuShutokuMaeShinseiFlag,A
 kyuSochishaFlag,bool,boolean,,,,,kyuSochishaFlag,A
 logicalDeletedFlag,bool,boolean,,,,,logicalDeletedFlag,A
+minashiCode,UDD035Code,Code,,,,,minashiCode,A

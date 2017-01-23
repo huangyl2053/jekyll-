@@ -104,4 +104,20 @@ public class ShujiiIkenshoIraiJohoManager {
         }
         return 1 == dac.save(主治医意見書作成依頼情報.toEntity());
     }
+
+    /**
+     * 主治医意見書作成依頼情報{@link ShujiiIkenshoIraiJoho}を保存します。<br/>
+     * 削除の場合は物理削除します。
+     *
+     * @param 主治医意見書作成依頼情報 {@link ShujiiIkenshoIraiJoho}
+     * @return 更新したかどうか
+     */
+    @Transaction
+    public boolean saveOrDeletePhysical(ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報) {
+        requireNonNull(主治医意見書作成依頼情報, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼情報"));
+        if (!主治医意見書作成依頼情報.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDeletePhysical(主治医意見書作成依頼情報.toEntity());
+    }
 }

@@ -64,6 +64,7 @@ public class NinteichosaItakusakiMainHandler {
     private static final RString 調査委託区分_6 = new RString("6");
     private static final RString 調査委託区分_9 = new RString("9");
     private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
     private static final RString 保険者_市町村等 = new RString("保険者（市町村等）");
     private static final RString 指定市町村事務受託法人 = new RString("指定市町村事務受託法人");
     private static final RString 指定居宅介護支援事業者 = new RString("指定居宅介護支援事業者");

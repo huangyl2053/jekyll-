@@ -20,10 +20,10 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 public class Shujiiikensho1A4ReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportItem(name = "hihokenshaName", length = 30, order = 1)
-    public RString hihokenshaName;
-    @ReportItem(name = "hokenshaNo", length = 6, order = 2)
+    @ReportItem(name = "hokenshaNo", length = 6, order = 1)
     public RString hokenshaNo;
+    @ReportItem(name = "shinsakaiOrder", length = 2, order = 2)
+    public RString shinsakaiOrder;
     @ReportItem(name = "shinseiGengo", length = 2, order = 3)
     public RString shinseiGengo;
     @ReportItem(name = "shinseiYY", length = 2, order = 4)
@@ -40,25 +40,27 @@ public class Shujiiikensho1A4ReportSource implements IReportSource {
     public RString sakuseiMM;
     @ReportItem(name = "sakuseiDD", length = 2, order = 10)
     public RString sakuseiDD;
-    @ReportItem(name = "hihokenshaNo", length = 10, order = 11)
+    @ReportItem(name = "hihokenshaName", length = 30, order = 11)
+    public RString hihokenshaName;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 12)
     public RString hihokenshaNo;
-    @ReportItem(name = "chosaGengo", length = 2, order = 12)
+    @ReportItem(name = "chosaGengo", length = 2, order = 13)
     public RString chosaGengo;
-    @ReportItem(name = "chosaYY", length = 2, order = 13)
+    @ReportItem(name = "chosaYY", length = 2, order = 14)
     public RString chosaYY;
-    @ReportItem(name = "chosaMM", length = 2, order = 14)
+    @ReportItem(name = "chosaMM", length = 2, order = 15)
     public RString chosaMM;
-    @ReportItem(name = "chosaDD", length = 2, order = 15)
+    @ReportItem(name = "chosaDD", length = 2, order = 16)
     public RString chosaDD;
-    @ReportItem(name = "shinsaGengo", length = 2, order = 16)
+    @ReportItem(name = "shinsaGengo", length = 2, order = 17)
     public RString shinsaGengo;
-    @ReportItem(name = "shinsaYY", length = 2, order = 17)
+    @ReportItem(name = "shinsaYY", length = 2, order = 18)
     public RString shinsaYY;
-    @ReportItem(name = "shinsaMM", length = 2, order = 18)
+    @ReportItem(name = "shinsaMM", length = 2, order = 19)
     public RString shinsaMM;
-    @ReportItem(name = "shinsaDD", length = 2, order = 19)
+    @ReportItem(name = "shinsaDD", length = 2, order = 20)
     public RString shinsaDD;
-    @ReportItem(name = "imgIkensho1", order = 20)
+    @ReportItem(name = "imgIkensho1", order = 21)
     public RString imgIkensho1;
     @ReportItem(name = "imgIkensho2", order = 40)
     public RString imgIkensho2;

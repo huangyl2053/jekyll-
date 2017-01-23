@@ -36,10 +36,10 @@ public interface IShinsakaiIinJohoMapper {
     /**
      * 介護認定審査会委員情報を廃止フラグ検索で件数を取得します。
      *
-     * @param 介護認定審査会委員情報検索条件件数 介護認定審査会委員情報検索条件
-     * @return int 審査会委員情報By表示条件件数
+     * @param 介護認定審査会委員情報検索条件 介護認定審査会委員情報検索条件
+     * @return List<ShinsakaiIinJohoEntity>
      */
-    int get審査会委員情報By表示条件件数(ShinsakaiIinJohoTorokuMapperParameter 介護認定審査会委員情報検索条件);
+    List<ShinsakaiIinJohoEntity> get審査会委員情報By表示条件件数(ShinsakaiIinJohoTorokuMapperParameter 介護認定審査会委員情報検索条件);
 
     /**
      * 選択行の審査会委員コードで所属機関一覧情報List取得します。

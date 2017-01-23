@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * {@link INinteiChosahyoServiceJokyoAccessor}を生成します。
  */
-public class NinteiChosahyoServiceJokyoAccessorFactory {
+public final class NinteiChosahyoServiceJokyoAccessorFactory {
 
     private NinteiChosahyoServiceJokyoAccessorFactory() {
     }
@@ -31,7 +31,7 @@ public class NinteiChosahyoServiceJokyoAccessorFactory {
         Objects.requireNonNull(ocrChosa);
         switch (KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード)) {
             case 認定ｿﾌﾄ2009_SP3:
-                return new NinteiChosahyoServiceJokyoAccessorFactory._09B(ocrChosa);
+                return new NinteiChosahyoServiceJokyoAccessorFactory._IFCode09B(ocrChosa);
             default:
                 throw new IllegalArgumentException(new RStringBuilder()
                         .append("指定の厚労省IF識別コードは不正です。：'")
@@ -41,15 +41,16 @@ public class NinteiChosahyoServiceJokyoAccessorFactory {
         }
     }
 
-    private static class _09B implements INinteiChosahyoServiceJokyoAccessor {
+    private static class _IFCode09B implements INinteiChosahyoServiceJokyoAccessor {
 
         private final OcrChosa ocrChosa;
 
-        public _09B(OcrChosa ocrChosa) {
+        public _IFCode09B(OcrChosa ocrChosa) {
             this.ocrChosa = ocrChosa;
         }
 
         @Override
+        @SuppressWarnings("checkstyle:cyclomaticcomplexity")
         public Optional<Integer> valueOf(int 連番) {
             switch (CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(連番))) {
                 case 訪問介護:

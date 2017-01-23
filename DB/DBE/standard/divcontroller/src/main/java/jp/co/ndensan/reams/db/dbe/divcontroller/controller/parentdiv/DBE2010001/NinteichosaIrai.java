@@ -274,7 +274,7 @@ public class NinteichosaIrai {
     }
 
     /**
-     * 「割付けを確定する」ボタンクリックイベントです。
+     * 「割付ける」ボタンクリックイベントです。
      *
      * @param requestDiv NinteichosaIraiDiv
      * @return ResponseData
@@ -308,7 +308,7 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onBefore_btnTaOutput(NinteichosaIraiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnDataOutput();
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnTaOutput();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }

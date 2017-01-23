@@ -4,10 +4,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,17 +23,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ikenshoiraitaishoichiran")
-    private ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
-    @JsonProperty("KanryoMsg")
-    private KanryoMsgDiv KanryoMsg;
+    @JsonProperty("IkenshoIraiList")
+    private IkenshoIraiListDiv IkenshoIraiList;
+    @JsonProperty("ccdKanryoMsg")
+    private KanryoMessageDiv ccdKanryoMsg;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
 
@@ -41,39 +44,30 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getikenshoiraitaishoichiran
-     * @return ikenshoiraitaishoichiran
+     * getIkenshoIraiList
+     * @return IkenshoIraiList
      */
-    @JsonProperty("ikenshoiraitaishoichiran")
-    public ikenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
-        return ikenshoiraitaishoichiran;
+    @JsonProperty("IkenshoIraiList")
+    public IkenshoIraiListDiv getIkenshoIraiList() {
+        return IkenshoIraiList;
     }
 
     /*
-     * setikenshoiraitaishoichiran
-     * @param ikenshoiraitaishoichiran ikenshoiraitaishoichiran
+     * setIkenshoIraiList
+     * @param IkenshoIraiList IkenshoIraiList
      */
-    @JsonProperty("ikenshoiraitaishoichiran")
-    public void setIkenshoiraitaishoichiran(ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
-        this.ikenshoiraitaishoichiran = ikenshoiraitaishoichiran;
+    @JsonProperty("IkenshoIraiList")
+    public void setIkenshoIraiList(IkenshoIraiListDiv IkenshoIraiList) {
+        this.IkenshoIraiList = IkenshoIraiList;
     }
 
     /*
-     * getKanryoMsg
-     * @return KanryoMsg
+     * getccdKanryoMsg
+     * @return ccdKanryoMsg
      */
-    @JsonProperty("KanryoMsg")
-    public KanryoMsgDiv getKanryoMsg() {
-        return KanryoMsg;
-    }
-
-    /*
-     * setKanryoMsg
-     * @param KanryoMsg KanryoMsg
-     */
-    @JsonProperty("KanryoMsg")
-    public void setKanryoMsg(KanryoMsgDiv KanryoMsg) {
-        this.KanryoMsg = KanryoMsg;
+    @JsonProperty("ccdKanryoMsg")
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return ccdKanryoMsg;
     }
 
     /*
@@ -98,93 +92,163 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getIkenshoiraitaishoichiran().getCcdHokenshaList();
+    public ikenshoiraitaishoichiranDiv getIkenshoiraitaishoichiran() {
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran();
+    }
+
+    @JsonIgnore
+    public void  setIkenshoiraitaishoichiran(ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran) {
+        this.getIkenshoIraiList().setIkenshoiraitaishoichiran(ikenshoiraitaishoichiran);
     }
 
     @JsonIgnore
     public RadioButton getRadShoriJyotai() {
-        return this.getIkenshoiraitaishoichiran().getRadShoriJyotai();
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getRadShoriJyotai();
     }
 
     @JsonIgnore
     public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
-        this.getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
+        this.getIkenshoIraiList().getIkenshoiraitaishoichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
     @JsonIgnore
-    public TextBox getTxtTotalCount() {
-        return this.getIkenshoiraitaishoichiran().getTxtTotalCount();
+    public TextBoxNum getTxtTotalCount() {
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getTxtTotalCount();
     }
 
     @JsonIgnore
-    public void  setTxtTotalCount(TextBox txtTotalCount) {
-        this.getIkenshoiraitaishoichiran().setTxtTotalCount(txtTotalCount);
+    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+        this.getIkenshoIraiList().getIkenshoiraitaishoichiran().setTxtTotalCount(txtTotalCount);
     }
 
     @JsonIgnore
-    public TextBox getTxtCompleteCount() {
-        return this.getIkenshoiraitaishoichiran().getTxtCompleteCount();
+    public TextBoxNum getTxtCompleteCount() {
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getTxtCompleteCount();
     }
 
     @JsonIgnore
-    public void  setTxtCompleteCount(TextBox txtCompleteCount) {
-        this.getIkenshoiraitaishoichiran().setTxtCompleteCount(txtCompleteCount);
+    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+        this.getIkenshoIraiList().getIkenshoiraitaishoichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
     @JsonIgnore
-    public TextBox getTxtNoUpdate() {
-        return this.getIkenshoiraitaishoichiran().getTxtNoUpdate();
+    public TextBoxNum getTxtNoUpdate() {
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getTxtNoUpdate();
     }
 
     @JsonIgnore
-    public void  setTxtNoUpdate(TextBox txtNoUpdate) {
-        this.getIkenshoiraitaishoichiran().setTxtNoUpdate(txtNoUpdate);
+    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+        this.getIkenshoIraiList().getIkenshoiraitaishoichiran().setTxtNoUpdate(txtNoUpdate);
     }
 
     @JsonIgnore
     public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
-        return this.getIkenshoiraitaishoichiran().getDgNinteiTaskList();
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getDgNinteiTaskList();
     }
 
     @JsonIgnore
     public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
-        this.getIkenshoiraitaishoichiran().setDgNinteiTaskList(dgNinteiTaskList);
-    }
-
-    @JsonIgnore
-    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
-        return this.getIkenshoiraitaishoichiran().getBtnikenshoiraitaishooutput();
-    }
-
-    @JsonIgnore
-    public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
-        this.getIkenshoiraitaishoichiran().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnIraishoToOutputDialog() {
-        return this.getIkenshoiraitaishoichiran().getBtnIraishoToOutputDialog();
-    }
-
-    @JsonIgnore
-    public void  setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
-        this.getIkenshoiraitaishoichiran().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
+        this.getIkenshoIraiList().getIkenshoiraitaishoichiran().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return this.getIkenshoiraitaishoichiran().getTxtSaidaiHyojiKensu();
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getTxtSaidaiHyojiKensu();
     }
 
     @JsonIgnore
     public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.getIkenshoiraitaishoichiran().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
+        this.getIkenshoIraiList().getIkenshoiraitaishoichiran().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
     @JsonIgnore
-    public IKanryoMessageDiv getCcdKanryoMsg() {
-        return this.getKanryoMsg().getCcdKanryoMsg();
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getIkenshoIraiList().getIkenshoiraitaishoichiran().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
+    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
+        return this.getIkenshoIraiList().getBtnikenshoiraitaishooutput();
+    }
+
+    @JsonIgnore
+    public void  setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
+        this.getIkenshoIraiList().setBtnikenshoiraitaishooutput(btnikenshoiraitaishooutput);
+    }
+
+    @JsonIgnore
+    public Button getBtnIraisuru() {
+        return this.getIkenshoIraiList().getBtnIraisuru();
+    }
+
+    @JsonIgnore
+    public void  setBtnIraisuru(Button btnIraisuru) {
+        this.getIkenshoIraiList().setBtnIraisuru(btnIraisuru);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIraishoToOutputDialog() {
+        return this.getIkenshoIraiList().getBtnIraishoToOutputDialog();
+    }
+
+    @JsonIgnore
+    public void  setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
+        this.getIkenshoIraiList().setBtnIraishoToOutputDialog(btnIraishoToOutputDialog);
+    }
+
+    @JsonIgnore
+    public IkenshoIraiTorokuPanelDiv getIkenshoIraiTorokuPanel() {
+        return this.getIkenshoIraiList().getIkenshoIraiTorokuPanel();
+    }
+
+    @JsonIgnore
+    public void  setIkenshoIraiTorokuPanel(IkenshoIraiTorokuPanelDiv IkenshoIraiTorokuPanel) {
+        this.getIkenshoIraiList().setIkenshoIraiTorokuPanel(IkenshoIraiTorokuPanel);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIraiKubun() {
+        return this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().getDdlIraiKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlIraiKubun(DropDownList ddlIraiKubun) {
+        this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().setDdlIraiKubun(ddlIraiKubun);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtSakuseiIraiYmd() {
+        return this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().getTxtSakuseiIraiYmd();
+    }
+
+    @JsonIgnore
+    public void  setTxtSakuseiIraiYmd(TextBoxDate txtSakuseiIraiYmd) {
+        this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().setTxtSakuseiIraiYmd(txtSakuseiIraiYmd);
+    }
+
+    @JsonIgnore
+    public Button getBtnIraiKakutei() {
+        return this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().getBtnIraiKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnIraiKakutei(Button btnIraiKakutei) {
+        this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().setBtnIraiKakutei(btnIraiKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnIraisezuModoru() {
+        return this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().getBtnIraisezuModoru();
+    }
+
+    @JsonIgnore
+    public void  setBtnIraisezuModoru(Button btnIraisezuModoru) {
+        this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().setBtnIraisezuModoru(btnIraisezuModoru);
+    }
+
+    @JsonIgnore
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiInput() {
+        return this.getIkenshoIraiList().getIkenshoIraiTorokuPanel().getCcdShujiiInput();
     }
 
     // </editor-fold>

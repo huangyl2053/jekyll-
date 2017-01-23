@@ -36,7 +36,7 @@ public final class OcrTorikomiKekkaListEditor implements AutoCloseable {
      * @param spoolManager 作成したCSVファイルをスプールする際に用いる{@link FileSpoolManager}
      * @return {@link OcrTorikomiKekkaListEditor}
      */
-    public static final OcrTorikomiKekkaListEditor spoolBy(FileSpoolManager spoolManager) {
+    public static OcrTorikomiKekkaListEditor spoolBy(FileSpoolManager spoolManager) {
         return new OcrTorikomiKekkaListEditor(spoolManager);
     }
 

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai;
 
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -48,10 +50,6 @@ public class WaritsukeEntity {
     private FlexibleDate zenkaiNinteiYMD;
     private Code zenYokaigoKubunCode;
     private int age;
-    private FlexibleDate ninteichosaIraiYMD;
-    private FlexibleDate ninteichosaKigenYMD;
-    private FlexibleDate iraishoShutsuryokuYMD;
-    private FlexibleDate chosahyoTouShutsuryokuYMD;
     private int waritsukeTeiin;
     private RString iryoKikanMeisho;
     private AtenaMeisho shujiiName;
@@ -60,12 +58,10 @@ public class WaritsukeEntity {
     private RString temp_iryoKikanMeisho;
     private AtenaMeisho temp_shujiiName;
     private RString temp_chosainShimei;
-    private FlexibleDate ninteichosaKanryoYMD;
     private RString shinseishoKanriNo;
     private int ninteichosaIraiRirekiNo;
     private RString ninteiChosainCode;
     private RString hokenshaNo;
-    private RString ninteiChosaItakusakiCode;
     private RString shichosonCode;
     private RString renrakusakiTuzukigara;
     private YubinNo renrakusakiYubinNo;
@@ -73,4 +69,14 @@ public class WaritsukeEntity {
     private TelNo renrakusakiTelNo;
     private TelNo renrakusakiKeitaiTelNo;
     private AtenaMeisho renrakusakiShimei;
+    private DbT5105NinteiKanryoJohoEntity 認定完了情報Entity;
+    private DbT5201NinteichosaIraiJohoEntity 認定調査依頼情報Entity;
+
+    /**
+     * MD5値を計算し、設定します。
+     */
+    public void initializeMd5() {
+        認定完了情報Entity.initializeMd5();
+        認定調査依頼情報Entity.initializeMd5();
+    }
 }

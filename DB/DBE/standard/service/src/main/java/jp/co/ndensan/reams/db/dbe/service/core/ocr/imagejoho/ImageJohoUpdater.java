@@ -16,10 +16,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -87,23 +90,35 @@ public final class ImageJohoUpdater {
             return false;
         }
         if (this.共有ファイルID == null) {
-            SharedFileDescriptor sfd = SharedFile.defineSharedFile(FilesystemName
-                    .fromString(this.証記載保険者番号.concat(this.被保険者番号)));
-            RDateTime newSharedFileID = SharedFile.copyToSharedFile(this.targetDirectoryPath, sfd.getSharedFileName());
-            /* イメージ情報の更新 */
-            DbT5115ImageEntity entityImage = new DbT5115ImageEntity();
-            entityImage.setShinseishoKanriNo(this.申請書管理番号);
-            entityImage.setImageSharedFileId(newSharedFileID);
-            dbWriter.insert(entityImage);
+            SharedFileEntryDescriptor sfed = defineAndCopyToSharedFile(this.targetDirectoryPath,
+                    compose共有ファイル名(this.証記載保険者番号, this.被保険者番号));
+            insertIntoImageJohoBy(dbWriter, this.申請書管理番号, sfed);
             return true;
         } else {
-            ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
-                    .fromString(this.証記載保険者番号.concat(this.被保険者番号)), this.共有ファイルID);
+            ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
+                    compose共有ファイル名(this.証記載保険者番号, this.被保険者番号), this.共有ファイルID);
             deletePastFiles(ro_sfd, this.取込イメージ分類s);
-            SharedAppendOption option = new SharedAppendOption();
-            option.overWrite(true);
-            return SharedFile.appendNewFile(ro_sfd, this.targetDirectoryPath, RString.EMPTY.toString(), option);
+            return SharedFile.appendNewFile(ro_sfd, this.targetDirectoryPath, RString.EMPTY.toString(),
+                    new SharedAppendOption().overWrite(true));
         }
+    }
+
+    private static SharedFileEntryDescriptor defineAndCopyToSharedFile(FilesystemPath targetDirectoryPath, FilesystemName sharedFileName) {
+        SharedFileDescriptor sfd = SharedFile.defineSharedFile(sharedFileName);
+        CopyToSharedFileOpts option = new CopyToSharedFileOpts().dateToDelete(RDate.MAX);
+        SharedFileEntryDescriptor sfed = SharedFile.copyToSharedFile(sfd, targetDirectoryPath, option);
+        return sfed;
+    }
+
+    private static FilesystemName compose共有ファイル名(RString 証記載保険者番号1, RString 被保険者番号1) {
+        return FilesystemName.fromString(証記載保険者番号1.concat(被保険者番号1));
+    }
+
+    private static void insertIntoImageJohoBy(IBatchTableWriter<? super DbT5115ImageEntity> dbWriter, ShinseishoKanriNo 申請書管理番号, SharedFileEntryDescriptor sfed) {
+        DbT5115ImageEntity entityImage = new DbT5115ImageEntity();
+        entityImage.setShinseishoKanriNo(申請書管理番号);
+        entityImage.setImageSharedFileId(sfed.getSharedFileId());
+        dbWriter.insert(entityImage);
     }
 
     private static void deletePastFiles(ReadOnlySharedFileEntryDescriptor ro_sfd, List<OcrImageClassification> targets) {

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SheetID {
 
+    private static final int CA3_SHEET_ID_LENGTH = 8;
+
     /**
      * 空の値です。
      */
@@ -43,7 +45,7 @@ public class SheetID {
      */
     public RString get帳票一連ID下8桁() {
         int length = value().length();
-        int beginIndex = length - 8;
+        int beginIndex = length - CA3_SHEET_ID_LENGTH;
         return this.value().substringEmptyOnError(beginIndex < 0 ? 0 : beginIndex, length);
     }
 
