@@ -16,31 +16,27 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ikenshoiraitaishoichiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("radShoriJyotai")
     private RadioButton radShoriJyotai;
     @JsonProperty("txtTotalCount")
-    private TextBox txtTotalCount;
+    private TextBoxNum txtTotalCount;
     @JsonProperty("txtCompleteCount")
-    private TextBox txtCompleteCount;
+    private TextBoxNum txtCompleteCount;
     @JsonProperty("txtNoUpdate")
-    private TextBox txtNoUpdate;
+    private TextBoxNum txtNoUpdate;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
-    @JsonProperty("btnikenshoiraitaishooutput")
-    private ButtonDownLoad btnikenshoiraitaishooutput;
-    @JsonProperty("btnIraishoToOutputDialog")
-    private ButtonDialog btnIraishoToOutputDialog;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,15 +44,6 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
-     */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
-    }
-
     /*
      * getradShoriJyotai
      * @return radShoriJyotai
@@ -80,7 +67,7 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * @return txtTotalCount
      */
     @JsonProperty("txtTotalCount")
-    public TextBox getTxtTotalCount() {
+    public TextBoxNum getTxtTotalCount() {
         return txtTotalCount;
     }
 
@@ -89,7 +76,7 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * @param txtTotalCount txtTotalCount
      */
     @JsonProperty("txtTotalCount")
-    public void setTxtTotalCount(TextBox txtTotalCount) {
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.txtTotalCount = txtTotalCount;
     }
 
@@ -98,7 +85,7 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * @return txtCompleteCount
      */
     @JsonProperty("txtCompleteCount")
-    public TextBox getTxtCompleteCount() {
+    public TextBoxNum getTxtCompleteCount() {
         return txtCompleteCount;
     }
 
@@ -107,7 +94,7 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * @param txtCompleteCount txtCompleteCount
      */
     @JsonProperty("txtCompleteCount")
-    public void setTxtCompleteCount(TextBox txtCompleteCount) {
+    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.txtCompleteCount = txtCompleteCount;
     }
 
@@ -116,7 +103,7 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * @return txtNoUpdate
      */
     @JsonProperty("txtNoUpdate")
-    public TextBox getTxtNoUpdate() {
+    public TextBoxNum getTxtNoUpdate() {
         return txtNoUpdate;
     }
 
@@ -125,7 +112,7 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
      * @param txtNoUpdate txtNoUpdate
      */
     @JsonProperty("txtNoUpdate")
-    public void setTxtNoUpdate(TextBox txtNoUpdate) {
+    public void setTxtNoUpdate(TextBoxNum txtNoUpdate) {
         this.txtNoUpdate = txtNoUpdate;
     }
 
@@ -148,42 +135,6 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
     }
 
     /*
-     * getbtnikenshoiraitaishooutput
-     * @return btnikenshoiraitaishooutput
-     */
-    @JsonProperty("btnikenshoiraitaishooutput")
-    public ButtonDownLoad getBtnikenshoiraitaishooutput() {
-        return btnikenshoiraitaishooutput;
-    }
-
-    /*
-     * setbtnikenshoiraitaishooutput
-     * @param btnikenshoiraitaishooutput btnikenshoiraitaishooutput
-     */
-    @JsonProperty("btnikenshoiraitaishooutput")
-    public void setBtnikenshoiraitaishooutput(ButtonDownLoad btnikenshoiraitaishooutput) {
-        this.btnikenshoiraitaishooutput = btnikenshoiraitaishooutput;
-    }
-
-    /*
-     * getbtnIraishoToOutputDialog
-     * @return btnIraishoToOutputDialog
-     */
-    @JsonProperty("btnIraishoToOutputDialog")
-    public ButtonDialog getBtnIraishoToOutputDialog() {
-        return btnIraishoToOutputDialog;
-    }
-
-    /*
-     * setbtnIraishoToOutputDialog
-     * @param btnIraishoToOutputDialog btnIraishoToOutputDialog
-     */
-    @JsonProperty("btnIraishoToOutputDialog")
-    public void setBtnIraishoToOutputDialog(ButtonDialog btnIraishoToOutputDialog) {
-        this.btnIraishoToOutputDialog = btnIraishoToOutputDialog;
-    }
-
-    /*
      * gettxtSaidaiHyojiKensu
      * @return txtSaidaiHyojiKensu
      */
@@ -199,6 +150,15 @@ public class ikenshoiraitaishoichiranDiv extends Panel {
     @JsonProperty("txtSaidaiHyojiKensu")
     public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>

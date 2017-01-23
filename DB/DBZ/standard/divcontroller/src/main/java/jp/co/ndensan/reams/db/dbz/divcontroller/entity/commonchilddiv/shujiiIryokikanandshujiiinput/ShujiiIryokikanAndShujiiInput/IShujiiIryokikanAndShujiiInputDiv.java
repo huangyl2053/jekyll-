@@ -175,7 +175,7 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * @param ButtonDialog btnIryokikanGuide
      */
     void setBtnIryokikanGuide(ButtonDialog btnIryokikanGuide);
-    
+
     /*
      * getBtnShujiiGuide
      * @return ButtonDialog
@@ -188,4 +188,11 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      */
     public void setBtnShujiiGuide(ButtonDialog btnShujiiGuide);
 
+
+    /**
+     * setHdnShichosonCode
+     *
+     * @param HdnShichosonCode 市町村コード
+     */
+    void setHdnShichosonCode(RString HdnShichosonCode);
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-3000-160 houtianpeng
  */
-public class IKnSyoiRaiBusiness {
+public class IKnSyoiRaiBusiness implements Serializable {
 
     private final IKnSyoiRaiRelateEntity entity;
 
@@ -142,12 +143,30 @@ public class IKnSyoiRaiBusiness {
     }
 
     /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * 保険者名を返します。
      *
      * @return 保険者名
      */
     public RString get保険者名() {
         return entity.getShichosonMeisho();
+    }
+
+    /**
+     * 主治医意見書作成依頼履歴番号を返します。
+     *
+     * @return 主治医意見書作成依頼履歴番号
+     */
+    public int get主治医意見書作成依頼履歴番号() {
+        return entity.getIkenshoIraiRirekiNo();
     }
 
     /**

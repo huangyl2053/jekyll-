@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 14 18:35:05 JST 2016 
+ * Mon Jan 23 14:57:04 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-10_12-10-23">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
 
     private RString jyotai;
     private RString hokensha;
@@ -35,8 +35,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     private TextBoxDate ikenshoIraiIkenshoShutsuryokuDay;
     private TextBoxDate ikenshoIraiKigen;
     private RString ikenshoIraiShokai;
+    private RString konkaiShujiiIryokikanCode;
     private RString konkaiShujiiIryokikan;
+    private RString konkaiShujiiCode;
     private RString konkaiShujii;
+    private Boolean shiteiiFlag;
     private RString zenkaiIryokikan;
     private RString zenkaiShujii;
     private RString yubinNumber;
@@ -50,6 +53,10 @@ public class dgNinteiTaskList_Row extends DataRow {
     private TextBoxDate ikenshoIraiKanryoDay;
     private RString shinseishoKanriNo;
     private RString nyushoShisetsuCode;
+    private RString shichosonCode;
+    private RString ikenshoIraiRirekiNo;
+    private RString ikenshoIraiKubun;
+    private TextBoxDate ikenshoSakuseiIraiYMD;
 
     public dgNinteiTaskList_Row() {
         super();
@@ -65,8 +72,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ikenshoIraiIkenshoShutsuryokuDay = new TextBoxDate();
         this.ikenshoIraiKigen = new TextBoxDate();
         this.ikenshoIraiShokai = RString.EMPTY;
+        this.konkaiShujiiIryokikanCode = RString.EMPTY;
         this.konkaiShujiiIryokikan = RString.EMPTY;
+        this.konkaiShujiiCode = RString.EMPTY;
         this.konkaiShujii = RString.EMPTY;
+        this.shiteiiFlag = false;
         this.zenkaiIryokikan = RString.EMPTY;
         this.zenkaiShujii = RString.EMPTY;
         this.yubinNumber = RString.EMPTY;
@@ -80,6 +90,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ikenshoIraiKanryoDay = new TextBoxDate();
         this.shinseishoKanriNo = RString.EMPTY;
         this.nyushoShisetsuCode = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
+        this.ikenshoIraiRirekiNo = RString.EMPTY;
+        this.ikenshoIraiKubun = RString.EMPTY;
+        this.ikenshoSakuseiIraiYMD = new TextBoxDate();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
@@ -92,8 +106,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ikenshoIraiIkenshoShutsuryokuDay", ikenshoIraiIkenshoShutsuryokuDay);
         this.setOriginalData("ikenshoIraiKigen", ikenshoIraiKigen);
         this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
+        this.setOriginalData("konkaiShujiiIryokikanCode", konkaiShujiiIryokikanCode);
         this.setOriginalData("konkaiShujiiIryokikan", konkaiShujiiIryokikan);
+        this.setOriginalData("konkaiShujiiCode", konkaiShujiiCode);
         this.setOriginalData("konkaiShujii", konkaiShujii);
+        this.setOriginalData("shiteiiFlag", shiteiiFlag);
         this.setOriginalData("zenkaiIryokikan", zenkaiIryokikan);
         this.setOriginalData("zenkaiShujii", zenkaiShujii);
         this.setOriginalData("yubinNumber", yubinNumber);
@@ -107,9 +124,13 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ikenshoIraiKanryoDay", ikenshoIraiKanryoDay);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("ikenshoIraiKubun", ikenshoIraiKubun);
+        this.setOriginalData("ikenshoSakuseiIraiYMD", ikenshoSakuseiIraiYMD);
     }
 
-    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, RString ikenshoIraiShokai, RString konkaiShujiiIryokikan, RString konkaiShujii, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxNum keikaNissu, TextBoxDate ikenshoIraiKanryoDay, RString shinseishoKanriNo, RString nyushoShisetsuCode) {
+    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, RString ikenshoIraiShokai, RString konkaiShujiiIryokikanCode, RString konkaiShujiiIryokikan, RString konkaiShujiiCode, RString konkaiShujii, Boolean shiteiiFlag, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxNum keikaNissu, TextBoxDate ikenshoIraiKanryoDay, RString shinseishoKanriNo, RString nyushoShisetsuCode, RString shichosonCode, RString ikenshoIraiRirekiNo, RString ikenshoIraiKubun, TextBoxDate ikenshoSakuseiIraiYMD) {
         super();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("hokensha", hokensha);
@@ -123,8 +144,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ikenshoIraiIkenshoShutsuryokuDay", ikenshoIraiIkenshoShutsuryokuDay);
         this.setOriginalData("ikenshoIraiKigen", ikenshoIraiKigen);
         this.setOriginalData("ikenshoIraiShokai", ikenshoIraiShokai);
+        this.setOriginalData("konkaiShujiiIryokikanCode", konkaiShujiiIryokikanCode);
         this.setOriginalData("konkaiShujiiIryokikan", konkaiShujiiIryokikan);
+        this.setOriginalData("konkaiShujiiCode", konkaiShujiiCode);
         this.setOriginalData("konkaiShujii", konkaiShujii);
+        this.setOriginalData("shiteiiFlag", shiteiiFlag);
         this.setOriginalData("zenkaiIryokikan", zenkaiIryokikan);
         this.setOriginalData("zenkaiShujii", zenkaiShujii);
         this.setOriginalData("yubinNumber", yubinNumber);
@@ -138,6 +162,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ikenshoIraiKanryoDay", ikenshoIraiKanryoDay);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("ikenshoIraiKubun", ikenshoIraiKubun);
+        this.setOriginalData("ikenshoSakuseiIraiYMD", ikenshoSakuseiIraiYMD);
         this.jyotai = jyotai;
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
@@ -150,8 +178,11 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ikenshoIraiIkenshoShutsuryokuDay = ikenshoIraiIkenshoShutsuryokuDay;
         this.ikenshoIraiKigen = ikenshoIraiKigen;
         this.ikenshoIraiShokai = ikenshoIraiShokai;
+        this.konkaiShujiiIryokikanCode = konkaiShujiiIryokikanCode;
         this.konkaiShujiiIryokikan = konkaiShujiiIryokikan;
+        this.konkaiShujiiCode = konkaiShujiiCode;
         this.konkaiShujii = konkaiShujii;
+        this.shiteiiFlag = shiteiiFlag;
         this.zenkaiIryokikan = zenkaiIryokikan;
         this.zenkaiShujii = zenkaiShujii;
         this.yubinNumber = yubinNumber;
@@ -165,6 +196,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ikenshoIraiKanryoDay = ikenshoIraiKanryoDay;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.nyushoShisetsuCode = nyushoShisetsuCode;
+        this.shichosonCode = shichosonCode;
+        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+        this.ikenshoIraiKubun = ikenshoIraiKubun;
+        this.ikenshoSakuseiIraiYMD = ikenshoSakuseiIraiYMD;
     }
 
     public RString getJyotai() {
@@ -215,12 +250,24 @@ public class dgNinteiTaskList_Row extends DataRow {
         return ikenshoIraiShokai;
     }
 
+    public RString getKonkaiShujiiIryokikanCode() {
+        return konkaiShujiiIryokikanCode;
+    }
+
     public RString getKonkaiShujiiIryokikan() {
         return konkaiShujiiIryokikan;
     }
 
+    public RString getKonkaiShujiiCode() {
+        return konkaiShujiiCode;
+    }
+
     public RString getKonkaiShujii() {
         return konkaiShujii;
+    }
+
+    public Boolean getShiteiiFlag() {
+        return shiteiiFlag;
     }
 
     public RString getZenkaiIryokikan() {
@@ -273,6 +320,22 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
+    public RString getIkenshoIraiRirekiNo() {
+        return ikenshoIraiRirekiNo;
+    }
+
+    public RString getIkenshoIraiKubun() {
+        return ikenshoIraiKubun;
+    }
+
+    public TextBoxDate getIkenshoSakuseiIraiYMD() {
+        return ikenshoSakuseiIraiYMD;
     }
 
     public void setJyotai(RString jyotai) {
@@ -335,14 +398,29 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ikenshoIraiShokai = ikenshoIraiShokai;
     }
 
+    public void setKonkaiShujiiIryokikanCode(RString konkaiShujiiIryokikanCode) {
+        this.setOriginalData("konkaiShujiiIryokikanCode", konkaiShujiiIryokikanCode);
+        this.konkaiShujiiIryokikanCode = konkaiShujiiIryokikanCode;
+    }
+
     public void setKonkaiShujiiIryokikan(RString konkaiShujiiIryokikan) {
         this.setOriginalData("konkaiShujiiIryokikan", konkaiShujiiIryokikan);
         this.konkaiShujiiIryokikan = konkaiShujiiIryokikan;
     }
 
+    public void setKonkaiShujiiCode(RString konkaiShujiiCode) {
+        this.setOriginalData("konkaiShujiiCode", konkaiShujiiCode);
+        this.konkaiShujiiCode = konkaiShujiiCode;
+    }
+
     public void setKonkaiShujii(RString konkaiShujii) {
         this.setOriginalData("konkaiShujii", konkaiShujii);
         this.konkaiShujii = konkaiShujii;
+    }
+
+    public void setShiteiiFlag(Boolean shiteiiFlag) {
+        this.setOriginalData("shiteiiFlag", shiteiiFlag);
+        this.shiteiiFlag = shiteiiFlag;
     }
 
     public void setZenkaiIryokikan(RString zenkaiIryokikan) {
@@ -408,6 +486,26 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
         this.setOriginalData("nyushoShisetsuCode", nyushoShisetsuCode);
         this.nyushoShisetsuCode = nyushoShisetsuCode;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
+    }
+
+    public void setIkenshoIraiRirekiNo(RString ikenshoIraiRirekiNo) {
+        this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+    }
+
+    public void setIkenshoIraiKubun(RString ikenshoIraiKubun) {
+        this.setOriginalData("ikenshoIraiKubun", ikenshoIraiKubun);
+        this.ikenshoIraiKubun = ikenshoIraiKubun;
+    }
+
+    public void setIkenshoSakuseiIraiYMD(TextBoxDate ikenshoSakuseiIraiYMD) {
+        this.setOriginalData("ikenshoSakuseiIraiYMD", ikenshoSakuseiIraiYMD);
+        this.ikenshoSakuseiIraiYMD = ikenshoSakuseiIraiYMD;
     }
 
     // </editor-fold>

@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIry
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
@@ -325,6 +324,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
      * @param hdnShichosonCode hdnShichosonCode
      */
     @JsonProperty("hdnShichosonCode")
+    @Override
     public void setHdnShichosonCode(RString hdnShichosonCode) {
         this.hdnShichosonCode = hdnShichosonCode;
     }
@@ -391,7 +391,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }

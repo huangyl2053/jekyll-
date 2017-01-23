@@ -120,20 +120,19 @@ public class NinteichosaIraiHandler {
         YokaigoNinteiTaskListParameter parameter = YokaigoNinteiTaskListParameter.
                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大件数, 市町村コード);
         SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().get調査依頼モード(parameter);
-        int all = searchResult.totalCount();
+        int totalCount = searchResult.totalCount();
         List<CyoSaiRaiBusiness> 調査依頼List = searchResult.records();
         ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, (ArrayList) 調査依頼List);
         put要介護認定完了情報(調査依頼List);
-        List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
+        List<dgNinteiTaskList_Row> dataSource = new ArrayList<>();
         completeCount = 0;
         notUpdateCount = 0;
         for (CyoSaiRaiBusiness business : 調査依頼List) {
-            rowList.add(createNinteiTaskList_Row(business));
+            dataSource.add(createNinteiTaskList_Row(business));
         }
-        div.getDgNinteiTaskList().setDataSource(rowList);
-        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(all);
+        div.getDgNinteiTaskList().setDataSource(dataSource);
+        div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(totalCount);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
-
         set件数表示(状態);
     }
 
@@ -150,7 +149,7 @@ public class NinteichosaIraiHandler {
     /**
      * 認定調査依頼完了対象者一覧パネル使用可否を設定します。
      *
-     * @param is使用不可 認定調査依頼登録パネルを使用不可にするかどうか
+     * @param is使用不可 認定調査依頼完了対象者一覧パネルを使用不可にするかどうか
      */
     public void set認定調査依頼完了対象者一覧パネル使用可否(boolean is使用不可) {
         div.getChosairaitaishoshaichiran().setReadOnly(is使用不可);

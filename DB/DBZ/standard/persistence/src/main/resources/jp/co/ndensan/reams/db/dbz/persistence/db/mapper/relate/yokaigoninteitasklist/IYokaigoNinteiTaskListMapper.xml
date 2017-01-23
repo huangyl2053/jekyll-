@@ -83,7 +83,9 @@
         <result property="saiSakuseiIraiKaisu"  column="saiSakuseiIraiKaisu" />
         <result property="ikenshoSakuseiIraiKanryoYMD"  column="ikenshoSakuseiIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jigyoshaName"  column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonMeisho"  column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoIraiRirekiNo"  column="ikenshoIraiRirekiNo" />
         <result property="ikenshoSakuseiTokusokuYMD"  column="ikenshoSakuseiTokusokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoSakuseiTokusokuHoho"  column="ikenshoSakuseiTokusokuHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoTokusokuKaisu"  column="ikenshoTokusokuKaisu" />
@@ -767,7 +769,9 @@
         DbT5101."saiSakuseiIraiKaisu",
         DbT5105."ikenshoSakuseiIraiKanryoYMD",
         DbT7060."jigyoshaName",
+        DbT7051."shichosonCode",
         DbT7051."shichosonMeisho",
+        DbT5301."ikenshoIraiRirekiNo",
         DbT5301."ikenshoSakuseiTokusokuYMD",
         DbT5301."ikenshoSakuseiTokusokuHoho",
         DbT5301."ikenshoTokusokuKaisu",
