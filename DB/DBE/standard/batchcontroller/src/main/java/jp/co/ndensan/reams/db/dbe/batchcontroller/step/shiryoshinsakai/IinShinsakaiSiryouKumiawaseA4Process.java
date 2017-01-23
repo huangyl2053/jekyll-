@@ -82,8 +82,6 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
     private List<ShinsakaiSiryoKyotsuEntity> shinsakaiSiryoKyotsuList;
     private int no;
     private int count;
-    private int shinsakaiOrder;
-    private int 存在ファイルindex;
     private RString path;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
@@ -99,8 +97,6 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
 
     @Override
     protected void beforeExecute() {
-        shinsakaiOrder = -1;
-        存在ファイルindex = 0;
         shinsakaiIinJohoList = new ArrayList<>();
         shinsakaiTaiyosyaJohoList = new ArrayList<>();
         jimuShinsakaishiryoList = new ArrayList<>();
@@ -233,8 +229,8 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                 entity.setJimukyoku(false);
                 JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
-                business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
-                business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+                business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+                business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002BAK));
                 return business;
             }
         }
@@ -245,9 +241,6 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         JimuSonotashiryoBusiness business = null;
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiSiryoKyotsuList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
-                if (shinsakaiOrder != entity.getShinsakaiOrder()) {
-                    存在ファイルindex = 0;
-                }
                 List<RString> イメージファイルリスト;
                 if (!entity.isJimukyoku()) {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名());
@@ -256,10 +249,8 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
                 }
                 RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
                 if (!共有ファイル名.isEmpty()) {
-                    business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
+                    business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト);
                     business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
-                    存在ファイルindex = business.get存在ファイルIndex();
-                    shinsakaiOrder = entity.getShinsakaiOrder();
                 }
             }
         }

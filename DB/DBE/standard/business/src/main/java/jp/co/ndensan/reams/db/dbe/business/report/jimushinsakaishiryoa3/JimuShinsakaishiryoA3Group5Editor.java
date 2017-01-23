@@ -24,7 +24,6 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
 
     private final JimuSonotashiryoBusiness business;
     private final int index;
-    private final RString shinsakaiOrder;
     private static final int INT_4 = 4;
 
     /**
@@ -32,12 +31,10 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
      *
      * @param business {@link JimuSonotashiryoBusiness}
      * @param index index
-     * @param shinsakaiOrder RString
      */
-    protected JimuShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business, int index, RString shinsakaiOrder) {
+    protected JimuShinsakaishiryoA3Group5Editor(JimuSonotashiryoBusiness business, int index) {
         this.business = business;
         this.index = index;
-        this.shinsakaiOrder = shinsakaiOrder;
     }
 
     /**
@@ -48,7 +45,7 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
      */
     @Override
     public JimuShinsakaishiryoA3ReportSource edit(JimuShinsakaishiryoA3ReportSource source) {
-        source.shinsakaiOrder = shinsakaiOrder;
+        source.shinsakaiOrder = business.get審査順();
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();
@@ -70,8 +67,10 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
         source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
         if (index != 0) {
-            source.imgSonotashiryo1 = business.get左のその他資料イメージ(2 * index - 2);
-            source.imgSonotashiryo2 = business.get右のその他資料イメージ(2 * index - 1);
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);
+            source.imgSonotashiryo2 = business.getその他資料イメージパス(2 * index - 1);
+        } else {
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);            
         }
         source.layout = JimuShinsakaiShiryoA3Layouts.事務局用その他資料.index();;
         return source;

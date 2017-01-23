@@ -64,8 +64,8 @@ public class JimuShinsakaishiryoA4Group7Editor implements IJimuShinsakaishiryoA4
         source.shinsaYY = get年(business.get介護認定審査会開催年月日());
         source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
         source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
-        if (index < business.getその他資料().size()) {
-            source.imgSonotashiryo = business.getその他資料().get(index);
+        if (index < business.getその他資料イメージパスリスト().size()) {
+            source.imgSonotashiryo = business.getその他資料イメージパスリスト().get(index);
         }
         source.layout = 15;
         return source;

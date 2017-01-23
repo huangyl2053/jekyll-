@@ -62,8 +62,8 @@ public class ShujiiikenshoA3Editor implements IShujiiikenshoA3Editor {
         source.shinsaYY = get年(business.get今回認定審査年月日());
         source.shinsaMM = get月(business.get今回認定審査年月日());
         source.shinsaDD = get日(business.get今回認定審査年月日());
-        source.imgIkensho1 = business.get左の主治医意見書イメージ();
-        source.imgIkensho2 = business.get右の主治医意見書イメージ();
+        source.imgIkensho1 = business.get主治医意見書イメージ１();
+        source.imgIkensho2 = business.get主治医意見書イメージ２();
         if (business.is事務局()) {
             source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
             if (!RString.isNullOrEmpty(business.get申請書管理番号())) {

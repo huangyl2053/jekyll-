@@ -24,16 +24,14 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
 
     private static final int INT_4 = 4;
     private final JimuShinsakaiWariateJohoBusiness business;
-    private final RString shinsakaiOrder;
 
     /**
      * インスタンスを生成します。
      *
      * @param business {@link JimuShinsakaiWariateJohoBusiness}
      */
-    protected IinShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business, RString shinsakaiOrder) {
+    protected IinShinsakaishiryoA3Group4Editor(JimuShinsakaiWariateJohoBusiness business) {
         this.business = business;
-        this.shinsakaiOrder = shinsakaiOrder;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
-        source.shinsakaiOrder = shinsakaiOrder;
+        source.shinsakaiOrder = business.get審査順();
         source.hokenshaNo = business.get保険者番号();
         source.hihokenshaNo = business.get被保険者番号();
         source.hihokenshaName = business.get名前();
@@ -62,8 +60,8 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
         source.shinsaYY = get年(business.get今回認定審査年月日());
         source.shinsaMM = get月(business.get今回認定審査年月日());
         source.shinsaDD = get日(business.get今回認定審査年月日());
-        source.imgIkensho1 = business.get左の主治医意見書イメージ();
-        source.imgIkensho2 = business.get右の主治医意見書イメージ();
+        source.imgIkensho1 = business.get主治医意見書イメージ１();
+        source.imgIkensho2 = business.get主治医意見書イメージ２();
         source.layout = IinShinsakaiShiryoA3Layouts.委員用主治医意見書.index();;
         return source;
     }

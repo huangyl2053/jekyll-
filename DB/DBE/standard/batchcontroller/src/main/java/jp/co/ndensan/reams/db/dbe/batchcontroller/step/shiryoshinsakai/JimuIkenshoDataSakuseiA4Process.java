@@ -80,11 +80,11 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
         RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         if (entity.isJimukyoku()) {
-            business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
-            business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+            business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+            business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002BAK));
         } else {
-            business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001));
-            business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002));
+            business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001));
+            business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002));
         }
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(business);
         reportA4.writeBy(reportSourceWriterA4);

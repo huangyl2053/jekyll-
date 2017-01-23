@@ -80,9 +80,7 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     private List<ShinsakaiSiryoKyotsuEntity> shinsakaiSiryoKyotsuEntityList;
     private int no;
     private int count;
-    private int shinsakaiOrder;
     private RString path;
-    private int 存在ファイルindex;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
     private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
@@ -102,8 +100,6 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
     @Override
     protected void beforeExecute() {
 
-        shinsakaiOrder = -1;
-        存在ファイルindex = 0;
         shinsakaiIinJohoList = new ArrayList<>();
         shinsakaiTaiyosyaJohoList = new ArrayList<>();
         jimuShinsakaishiryoList = new ArrayList<>();
@@ -243,8 +239,8 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         for (ShinsakaiSiryoKyotsuEntity kyotsuEntity : shinsakaiSiryoKyotsuEntityList) {
             if (shinseishoKanriNo.equals(kyotsuEntity.getShinseishoKanriNo())) {
                 JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(kyotsuEntity);
-                business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001BAK));
-                business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002BAK));
+                business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001BAK));
+                business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002BAK));
                 return business;
             }
         }
@@ -256,19 +252,14 @@ public class JimuShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBas
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiSiryoKyotsuEntityList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                 entity.setJimukyoku(true);
-                if (shinsakaiOrder != entity.getShinsakaiOrder()) {
-                    存在ファイルindex = 0;
-                }
                 List<RString> イメージファイルリスト;
                 if (!entity.isJimukyoku()) {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名());
                 } else {
                     イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名());
                 }
-                business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
+                business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト);
                 business.set事務局概況特記イメージ(共有ファイルを引き出す(path, ファイル名_G0001));
-                存在ファイルindex = business.get存在ファイルIndex();
-                shinsakaiOrder = entity.getShinsakaiOrder();
             }
         }
         return business;

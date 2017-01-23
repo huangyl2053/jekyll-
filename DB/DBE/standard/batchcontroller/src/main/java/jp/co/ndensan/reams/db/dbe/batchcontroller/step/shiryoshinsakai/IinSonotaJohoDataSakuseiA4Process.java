@@ -51,8 +51,6 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private JimuSonotashiryoBusiness その他資料;
-    private int shinsakaiOrder;
-    private int 存在ファイルindex;
     private static final int INDEX_5 = 5;
     private static final RString ファイル名_G0001 = new RString("G0001.png");
     private static final RString SEPARATOR = new RString("/");
@@ -63,8 +61,6 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void initialize() {
-        shinsakaiOrder = -1;
-        存在ファイルindex = 0;
         myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         List<RString> shoriJotaiKubunList = new ArrayList<>();
         shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
@@ -99,21 +95,16 @@ public class IinSonotaJohoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
         entity.setShoKisaiHokenshaNo(RString.EMPTY);
         entity.setHihokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
-        if (shinsakaiOrder != entity.getShinsakaiOrder()) {
-            存在ファイルindex = 0;
-        }
         List<RString> イメージファイルリスト;
         if (!entity.isJimukyoku()) {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名(), path);
         } else {
             イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名(), path);
         }
-        その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト, 存在ファイルindex);
+        その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト);
         その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(path));
         SonotashiryoA4Report reportA4 = new SonotashiryoA4Report(その他資料);
         reportA4.writeBy(reportSourceWriterA4);
-        存在ファイルindex = その他資料.get存在ファイルIndex();
-        shinsakaiOrder = entity.getShinsakaiOrder();
     }
 
     @Override

@@ -84,8 +84,8 @@ public class IinIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<ShinsakaiS
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
         RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
-        business.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001));
-        business.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002));
+        business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001));
+        business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002));
         ShujiiikenshoA3Report reportA3 = new ShujiiikenshoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
     }

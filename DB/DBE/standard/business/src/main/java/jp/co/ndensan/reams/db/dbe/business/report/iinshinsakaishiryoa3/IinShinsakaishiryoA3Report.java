@@ -98,7 +98,6 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
         }
         List<TokkiJikou> 短冊情報リスト = new ArrayList<>();
         List<RString> 短冊リスト = new ArrayList<>();
-        RString shinsakaiOrder = RString.EMPTY;
         if (ichijihanteikekkahyoA3Entity != null) {
             短冊情報リスト = ichijihanteikekkahyoA3Entity.get特記事項_listChosa1();
             短冊リスト = get短冊リスト(短冊情報リスト);
@@ -107,32 +106,31 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
                 IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                 reportSourceWriter.writeLine(builder);
             }
-            shinsakaiOrder = ichijihanteikekkahyoA3Entity.get審査人数();
         }
         
         RString 印刷有無フラグ = DbBusinessConfig.get(ConfigNameDBE.特記と意見書の見開き印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (両面.equals(this.printHou)) {
             if (印字.equals(印刷有無フラグ)) {
-                set主治医意見書(reportSourceWriter, shinsakaiOrder, true);
-                set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト, shinsakaiOrder);
+                set主治医意見書(reportSourceWriter, true);
+                set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
             } else {
-                set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト, shinsakaiOrder);
-                set主治医意見書(reportSourceWriter, shinsakaiOrder, true);
+                set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
+                set主治医意見書(reportSourceWriter, true);
             }
         } else {
-            set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト, shinsakaiOrder);
-            set主治医意見書(reportSourceWriter, shinsakaiOrder, false);
+            set特記事項2枚目(reportSourceWriter, 短冊リスト, 短冊情報リスト);
+            set主治医意見書(reportSourceWriter, false);
         }
         if (sonotashiryoBusiness != null) {
-            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
-            if (ファイルPathList != null && 0 < ファイルPathList.size()) {
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料イメージパスリスト();
+            if (1 < ファイルPathList.size()) {
                 for (int i = 0; i < (int) Math.ceil((double) ファイルPathList.size() / 2); i++) {
-                    IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, i + 1, shinsakaiOrder);
+                    IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, i + 1);
                     IIinShinsakaishiryoA3Builder builder2 = new IinShinsakaishiryoA3Builder(editor2);
                     reportSourceWriter.writeLine(builder2);
                 }
             } else {
-                IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, 0, shinsakaiOrder);
+                IIinShinsakaishiryoA3Editor editor2 = new IinShinsakaishiryoA3Group5Editor(sonotashiryoBusiness, 0);
                 IIinShinsakaishiryoA3Builder builder2 = new IinShinsakaishiryoA3Builder(editor2);
                 reportSourceWriter.writeLine(builder2);
             }
@@ -144,12 +142,11 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
         }
     }
 
-    private void set主治医意見書(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter,
-            RString shinsakaiOrder, boolean is両面印刷) {
+    private void set主治医意見書(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter, boolean is両面印刷) {
         if (is両面印刷 && reportSourceWriter.pageCount().isOdd()) {
             set余白ページ(reportSourceWriter);
         }
-        IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho, shinsakaiOrder);
+        IIinShinsakaishiryoA3Editor editor1 = new IinShinsakaishiryoA3Group4Editor(shinsakaiWariateJoho);
         IIinShinsakaishiryoA3Builder builder1 = new IinShinsakaishiryoA3Builder(editor1);
         reportSourceWriter.writeLine(builder1);
     }
@@ -161,14 +158,14 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
     }
 
     private void set特記事項2枚目(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter,
-            List<RString> 短冊リスト, List<TokkiJikou> 短冊情報リスト, RString shinsakaiOrder) {
+            List<RString> 短冊リスト, List<TokkiJikou> 短冊情報リスト) {
         if (ichijihanteikekkahyoA3Entity != null) {
             List<RString> テキスト全面List = ichijihanteikekkahyoA3Entity.get特記事項_tokkiText();
             List<RString> イメージ全面List = ichijihanteikekkahyoA3Entity.get特記事項_tokkiImg();
             if (テキスト全面イメージ.equals(ichijihanteikekkahyoA3Entity.get特記パターン())) {
-                全面Editor(reportSourceWriter, 短冊リスト, テキスト全面List, イメージ全面List, shinsakaiOrder);
+                全面Editor(reportSourceWriter, 短冊リスト, テキスト全面List, イメージ全面List);
             } else if (MAXCOUNT < 短冊リスト.size()) {
-                短冊Editor(reportSourceWriter, 短冊リスト, 短冊情報リスト, shinsakaiOrder);
+                短冊Editor(reportSourceWriter, 短冊リスト, 短冊情報リスト);
             }
         }
     }
@@ -185,13 +182,13 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
     }
 
     private void 全面Editor(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter,
-            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List, RString shinsakaiOrder) {
+            List<RString> 短冊リスト, List<RString> テキスト全面List, List<RString> イメージ全面List) {
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(ichijihanteikekkahyoA3Entity.get特記事項テキスト_イメージ区分())) {
             int totalPages = (int) Math.ceil((double) (テキスト全面List.size() - 1) / 2) + 1;
             for (int i = 0; i < テキスト全面List.size(); i++) {
                 if ((i + 2) <= totalPages) {
                     IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(
-                            ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2, shinsakaiOrder);
+                            ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2);
                     IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                     reportSourceWriter.writeLine(builder);
                 }
@@ -201,7 +198,7 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
             for (int i = 0; i < イメージ全面List.size(); i++) {
                 if ((i + 2) <= totalPages) {
                     IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(
-                            ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2, shinsakaiOrder);
+                            ichijihanteikekkahyoA3Entity, 短冊リスト, i + 2, i + 2);
                     IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                     reportSourceWriter.writeLine(builder);
                 }
@@ -210,13 +207,13 @@ public class IinShinsakaishiryoA3Report extends Report<IinShinsakaishiryoA3Repor
     }
 
     private void 短冊Editor(ReportSourceWriter<IinShinsakaishiryoA3ReportSource> reportSourceWriter,
-            List<RString> 短冊リスト, List<TokkiJikou> 短冊情報リスト, RString shinsakaiOrder) {
+            List<RString> 短冊リスト, List<TokkiJikou> 短冊情報リスト) {
         int totalPages = (int) Math.ceil((double) (短冊情報リスト.size() - PAGECOUN) / PAGETWO_MAXCOUNT) + 1;
         for (int i = 0; i < 短冊リスト.size(); i++) {
             int page = (i + PAGETWO_MAXCOUNT) / PAGETWO_MAXCOUNT + 1;
             if (page <= totalPages) {
                 IIinShinsakaishiryoA3Editor editor = new IinShinsakaishiryoA3Group3Editor(
-                        ichijihanteikekkahyoA3Entity, 短冊リスト, i, page, shinsakaiOrder);
+                        ichijihanteikekkahyoA3Entity, 短冊リスト, i, page);
                 IIinShinsakaishiryoA3Builder builder = new IinShinsakaishiryoA3Builder(editor);
                 reportSourceWriter.writeLine(builder);
             }

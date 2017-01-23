@@ -34,7 +34,7 @@ public class SonotashiryoA4Report extends Report<SonotashiryoA4ReportSource> {
     public void writeBy(ReportSourceWriter<SonotashiryoA4ReportSource> reportSourceWriter) {
 
         if (data != null) {
-            List<RString> ファイルPathList = data.getその他資料();
+            List<RString> ファイルPathList = data.getその他資料イメージパスリスト();
             if (ファイルPathList != null && 0 < ファイルPathList.size()) {
                 for (int i = 0; i < ファイルPathList.size(); i++) {
                     ISonotashiryoA4Editor editor = new SonotashiryoA4Editor(data, i);
