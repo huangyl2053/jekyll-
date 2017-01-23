@@ -34,7 +34,7 @@ public class ImportOcrCsvIntoTempTable extends BatchProcessBase<RString> {
     protected void createWriter() {
         super.createWriter();
         this.writer = BatchWriters.batchEntityCreatedTempTableWriter(TempOcrCsvEntity.class)
-                .tempTableName(new RString("TempOcrCsv"))
+                .tempTableName(processParameter.getTempTableName())
                 .build();
     }
 

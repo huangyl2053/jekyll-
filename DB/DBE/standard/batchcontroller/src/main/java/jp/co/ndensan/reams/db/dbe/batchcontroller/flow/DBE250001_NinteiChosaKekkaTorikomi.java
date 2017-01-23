@@ -48,7 +48,7 @@ public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_
             if (files.isEmpty()) {
                 continue;
             }
-            this.processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
+            this.processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, new RString("TempOcrChosa"));
             executeStep(OCRデータの一時テーブルへの格納_PROCESS);
             executeStep(OCRデータの読み込み_PROCESS);
         }

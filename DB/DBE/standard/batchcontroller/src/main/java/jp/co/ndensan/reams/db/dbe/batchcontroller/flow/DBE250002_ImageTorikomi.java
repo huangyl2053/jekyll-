@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.ImportOcrCsvIntoTempTable;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002.ImageInputSonotaProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
@@ -48,16 +49,27 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
             if (files.isEmpty()) {
                 continue;
             }
-            processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS);
             switch (type) {
                 case 意見書:
+                    processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, new RString("TempOcrIkensho"));
+                    executeStep(OCRデータの一時テーブルへの格納);
                     executeStep(主治医意見書イメージの読み込み);
                     continue;
                 case その他資料:
+                    processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, new RString("TempOcrSonota"));
+                    executeStep(OCRデータの一時テーブルへの格納);
                     executeStep(その他資料の読み込み);
                 default:
             }
         }
+    }
+    private static final String OCRデータの一時テーブルへの格納 = "OCRデータの一時テーブルへの格納";
+
+    @Step(OCRデータの一時テーブルへの格納)
+    IBatchFlowCommand importCsvToTempTable() {
+        return loopBatch(ImportOcrCsvIntoTempTable.class)
+                .arguments(processParameter)
+                .define();
     }
 
     private static final String 主治医意見書イメージの読み込み = "主治医意見書イメージの読み込み";

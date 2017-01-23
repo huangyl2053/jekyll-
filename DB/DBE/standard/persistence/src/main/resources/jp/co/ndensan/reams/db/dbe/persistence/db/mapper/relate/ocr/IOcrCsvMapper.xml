@@ -2,7 +2,8 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 一時テーブルに格納したOCR CSVデータを参照します。 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper">
-    <select resultOrdered="true" id="getCsvDataOrderByKey" resultMap="resultMap_OcrCsvEntity" fetchSize="500">
+    <select resultOrdered="true" id="findCsvDataOrderByKey" resultMap="resultMap_OcrCsvEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ocr.OcrCsvMapperParameter" fetchSize="500">
         SELECT
             A."ocrID" AS "ocrID",
             A."sheetID" AS "sheetID",
@@ -11,7 +12,7 @@
             A."hihokenshaNo" AS "hihokenshaNo",
             A."csvData" AS "csvData"
         FROM
-            "TempOcrCsv" AS A
+            &quot;${tempTableName}&quot; AS A
         ORDER BY
             A."hokenshaNo",
             A."shinseiYMD",
