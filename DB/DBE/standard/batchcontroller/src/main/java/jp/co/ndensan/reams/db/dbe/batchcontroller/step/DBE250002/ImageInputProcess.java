@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemNewManager;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -38,16 +40,15 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkensho
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -59,7 +60,7 @@ import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
  */
 //TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
 //TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
-public class ImageInputProcess extends BatchProcessBase<RString> {
+public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5302ShujiiIkenshoJohoEntity> writer_DbT5302;
@@ -80,7 +81,10 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(processParameter.getファイルPath().findCsvFilePath(), Encode.SJIS);
+        return new BatchDbReader(
+                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".findCsvDataOrderByKey").toRString(),
+                this.processParameter.toOcrCsvMapperParameter()
+        );
     }
 
     @Override
@@ -104,8 +108,8 @@ public class ImageInputProcess extends BatchProcessBase<RString> {
     }
 
     @Override
-    protected void process(RString line) {
-        final OcrIken ocrIken = OcrIken.parsed(line);
+    protected void process(TempOcrCsvEntity entity) {
+        final OcrIken ocrIken = OcrIken.parsed(entity.getCsvData());
         if (hasBreak(this.key, ocrIken.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 /* ブレイク処理 */

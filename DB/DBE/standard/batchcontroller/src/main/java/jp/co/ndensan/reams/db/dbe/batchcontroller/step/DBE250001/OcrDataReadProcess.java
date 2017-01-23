@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -116,7 +117,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(
-                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".getCsvDataOrderByKey").toRString()
+                new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".findCsvDataOrderByKey").toRString(),
+                this.processParameter.toOcrCsvMapperParameter()
         );
     }
 
@@ -239,6 +241,15 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                         imageTypes.add(OcrImageClassification.調査票_概況調査);
                         continue;
                     }
+                    //<editor-fold defaultstate="collapsed" desc="ID501と紐付くイメージ情報のコピーに失敗しました。">
+                    //TODO 不正のため、エラーリスト出力対象。
+                     /*----------------------------------------------------------------------------------*/
+                    _Logger.gyomuLog(_GyomuLogData.LogType.Error,
+                            new RStringBuilder()
+                            .append("ID501と紐付くイメージ情報のコピーに失敗しました。")
+                            .toString());
+                    /*----------------------------------------------------------------------------------*/
+                    //</editor-fold>
                     return false;
                 case _550:
                     List<OcrChosa> _550 = entry.getValue();
@@ -247,6 +258,15 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                         imageTypes.add(OcrImageClassification.調査票_特記事項);
                         continue;
                     }
+                    //<editor-fold defaultstate="collapsed" desc="ID550と紐付くイメージ情報のコピーに失敗しました。">
+                    //TODO 不正のため、エラーリスト出力対象。
+                    /*----------------------------------------------------------------------------------*/
+                    _Logger.gyomuLog(_GyomuLogData.LogType.Error,
+                            new RStringBuilder()
+                            .append("ID550と紐付くイメージ情報のコピーに失敗しました。")
+                            .toString());
+                    /*----------------------------------------------------------------------------------*/
+                    //</editor-fold>
                     return false;
                 case _570: //TODO 必要なユーザには実装する。
                 default:
@@ -259,6 +279,17 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 nr.hasイメージ情報() ? nr.getイメージ共有ファイルID() : null,
                 imageTypes
         ).updateBy(this.writerImage);
+        //<editor-fold defaultstate="collapsed" desc="イメージ情報の保存処理中に失敗しました。">
+        //TODO 不正のため、エラーリスト出力対象。
+        /*----------------------------------------------------------------------------------*/
+        if (!saveSucceeds) {
+            _Logger.gyomuLog(_GyomuLogData.LogType.Error,
+                    new RStringBuilder()
+                    .append("イメージ情報の保存処理中に失敗しました。")
+                    .toString());
+        }
+        /*----------------------------------------------------------------------------------*/
+        //</editor-fold>
         return saveSucceeds;
     }
 
@@ -690,7 +721,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         if (ocrChosas.isEmpty()) {
             return;
         }
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : createOrEdit特記情報(ninteiChosaEntity, nr, ocrChosas)) {
+        Map<RString, TokkiImageFileNames> imageFileNames = new OcrChosas(ocrChosas).editedFileNames連番重複再付番().groupedByChosaKomokuNo();
+        for (DbT5205NinteichosahyoTokkijikoEntity entity : createOrEdit特記情報(ninteiChosaEntity, nr, imageFileNames)) {
             switch (entity.getState()) {
                 case Added:
                     dbWriter.insert(entity);
@@ -698,15 +730,17 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 case Modified:
                     dbWriter.update(entity);
                     break;
+                case Deleted:
+                    dbWriter.delete(entity);
                 default:
             }
         }
     }
 
     private static Iterable<DbT5205NinteichosahyoTokkijikoEntity> createOrEdit特記情報(NinteiChosahyoEntity ninteiChosaEntity,
-            NinteiOcrRelate nr, List<OcrChosa> ocrChosas) {
+            NinteiOcrRelate nr, Map<RString, TokkiImageFileNames> imageFileNames) {
         TokkiJikoEntityMap map = classifyEntityUnderKomokuNoRemovingText(ninteiChosaEntity);
-        return createTokkiJohoEntitiesForUpdate(ocrChosas, map, nr);
+        return createTokkiJohoEntitiesForUpdate(imageFileNames, map, nr);
     }
 
     private static TokkiJikoEntityMap classifyEntityUnderKomokuNoRemovingText(NinteiChosahyoEntity ninteiChosaEntity) {
@@ -744,8 +778,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private static Iterable<DbT5205NinteichosahyoTokkijikoEntity> createTokkiJohoEntitiesForUpdate(
-            List<OcrChosa> ocrChosas, TokkiJikoEntityMap map, NinteiOcrRelate nr) {
-        Map<RString, TokkiImageFileNames> imageFiles = new OcrChosas(ocrChosas).editedFileNames連番重複再付番().groupedByChosaKomokuNo();
+            Map<RString, TokkiImageFileNames> imageFileNames, TokkiJikoEntityMap map, NinteiOcrRelate nr) {
         List<DbT5205NinteichosahyoTokkijikoEntity> list = new ArrayList<>();
         Set<RString> processed = new HashSet<>();
         for (Map.Entry<RString, Map<Integer, DbT5205NinteichosahyoTokkijikoEntity>> entry
@@ -753,12 +786,14 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             RString chosaKomokuNo = entry.getKey();
             list.addAll(createTokkiJohoEntitiesEachKomokuNo(
                     entry.getValue(),
-                    imageFiles.get(chosaKomokuNo).groupedByRemban(),
+                    imageFileNames.containsKey(chosaKomokuNo)
+                            ? imageFileNames.get(chosaKomokuNo).groupedByRemban()
+                            : Collections.<Integer, TokkiImageFileNames>emptyMap(),
                     nr)
             );
             processed.add(chosaKomokuNo);
         }
-        list.addAll(newAdditions(imageFiles, processed, nr));
+        list.addAll(newAdditions(imageFileNames, processed, nr));
         return list;
     }
 
@@ -807,6 +842,9 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             Map<Integer, DbT5205NinteichosahyoTokkijikoEntity> sameKomokuBefore,
             Map<Integer, TokkiImageFileNames> sameKomokuFresh) {
         List<DbT5205NinteichosahyoTokkijikoEntity> list = new ArrayList<>();
+        if (sameKomokuFresh.isEmpty()) {
+            return list;
+        }
         for (DbT5205NinteichosahyoTokkijikoEntity before : sameKomokuBefore.values()) {
             if (!sameKomokuFresh.containsKey(before.getNinteichosaTokkijikoRemban())) {
                 before.setState(EntityDataState.Deleted);
