@@ -180,6 +180,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onDoubleClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
+        div.getBtnToroku().setDisabled(true);
         return onClick_btnModifyShinsaInJohoIchiran(div);
     }
 
@@ -492,6 +493,7 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData<ShinsakaiIinJohoTorokuDiv> onClick_btnBackIchiran(ShinsakaiIinJohoTorokuDiv div) {
         div.getShinsakaiIinJohoIchiran().setDisabled(false);
+        div.getBtnToroku().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return responseWithSettingState(div);
     }

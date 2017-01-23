@@ -77,8 +77,8 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
         RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
         RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
         主治医意見書 = new JimuShinsakaiWariateJohoBusiness(entity);
-        主治医意見書.setイメージファイル(共有ファイルを引き出す(path, ファイルID_E0001));
-        主治医意見書.setイメージファイル_BAK(共有ファイルを引き出す(path, ファイルID_E0002));
+        主治医意見書.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001));
+        主治医意見書.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002));
         Shujiiikensho1A4Report reportA4 = new Shujiiikensho1A4Report(主治医意見書);
         reportA4.writeBy(reportSourceWriterA4);
     }

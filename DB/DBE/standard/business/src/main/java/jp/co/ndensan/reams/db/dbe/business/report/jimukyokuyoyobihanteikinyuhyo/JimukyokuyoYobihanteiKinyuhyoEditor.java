@@ -56,10 +56,7 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
     public JimukyokuyoYobihanteiKinyuhyoReportSource edit(JimukyokuyoYobihanteiKinyuhyoReportSource source) {
         RStringBuilder systemDateTime = new RStringBuilder();
         RDateTime datetime = RDate.getNowDateTime();
-        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+        systemDateTime.append(getパターン33(new FlexibleDate(datetime.getDate().toDateString()), FillType.ZERO));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(String.format("%02d", datetime.getHour()));
         systemDateTime.append(new RString("時"));
@@ -117,7 +114,7 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.shinsakaiKaisaiNo = business.get審査会開催番号().length() <= INT_LENGTH ? new RString(business.get審査会開催番号().toInt())
                 : new RString(new Decimal(business.get審査会開催番号().toString().substring(business.get審査会開催番号().length() - INT_LENGTH)).toString());
         if (business.get開催年月日() != null && !business.get開催年月日().isEmpty()) {
-            source.kaisaiYMD = getパターン33(business.get開催年月日());
+            source.kaisaiYMD = getパターン33(business.get開催年月日(), FillType.BLANK);
         }
         source.kaisaiHH = business.get開催時().padZeroToLeft(INT_NUM);
         source.kaisaiMM = business.get開催分().padZeroToLeft(INT_NUM);
@@ -131,9 +128,13 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         return source;
     }
 
-    private RString getパターン33(FlexibleDate 開催年月日) {
+    private RString getパターン33(FlexibleDate 開催年月日, FillType fillType) {
         if (開催年月日 != null) {
-            return 開催年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+            return 開催年月日.wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE)
+                    .fillType(fillType)
+                    .toDateString();
         }
         return RString.EMPTY;
     }

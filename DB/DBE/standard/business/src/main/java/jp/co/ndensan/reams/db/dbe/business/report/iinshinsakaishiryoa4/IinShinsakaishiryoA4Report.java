@@ -121,7 +121,7 @@ public class IinShinsakaishiryoA4Report extends Report<IinShinsakaishiryoA4Repor
             set主治医意見書(reportSourceWriter);
         }
         if (sonotashiryoBusiness != null) {
-            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料イメージパスリスト();
             if (ファイルPathList != null && 0 < ファイルPathList.size()) {
                 for (int i = 0; i < ファイルPathList.size(); i++) {
                     IIinShinsakaishiryoA4Editor editor2 = new IinShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, i);

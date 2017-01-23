@@ -119,8 +119,8 @@ public class JimuShinsakaishiryoA4Report extends Report<JimuShinsakaishiryoA4Rep
             set特記事項(reportSourceWriter, 短冊情報リスト, 短冊リスト, テキスト全面List, イメージ全面List);
             set主治医意見書(reportSourceWriter);
         }
-        if (sonotashiryoBusiness != null && !sonotashiryoBusiness.getその他資料().isEmpty()) {
-            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料();
+        if (sonotashiryoBusiness != null && !sonotashiryoBusiness.getその他資料イメージパスリスト().isEmpty()) {
+            List<RString> ファイルPathList = sonotashiryoBusiness.getその他資料イメージパスリスト();
             if (ファイルPathList != null && 0 < ファイルPathList.size()) {
                 for (int i = 0; i < ファイルPathList.size(); i++) {
                     IJimuShinsakaishiryoA4Editor editor2 = new JimuShinsakaishiryoA4Group7Editor(sonotashiryoBusiness, i);

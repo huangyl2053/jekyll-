@@ -20,20 +20,17 @@ public class JimuSonotashiryoBusiness {
     private static final int INDEX_5 = 5;
     private final ShinsakaiSiryoKyotsuEntity entity;
     private final List<RString> ファイル名List;
-    private final int 存在ファイルindex;
     private RString 事務局概況特記イメージパス;
 
     /**
      * コンストラクタです。
      *
      * @param entity ShinsakaiSiryoKyotsuEntity
-     * @param ファイル名List 存在ファイルindex
-     * @param 存在ファイルindex int
+     * @param ファイル名List イメージファイルパスリスト
      */
-    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, List<RString> ファイル名List, int 存在ファイルindex) {
+    public JimuSonotashiryoBusiness(ShinsakaiSiryoKyotsuEntity entity, List<RString> ファイル名List) {
         this.entity = entity;
         this.ファイル名List = ファイル名List;
-        this.存在ファイルindex = 存在ファイルindex;
     }
 
     /**
@@ -112,25 +109,12 @@ public class JimuSonotashiryoBusiness {
     }
 
     /**
-     * 左のその他資料イメージを取得します。
+     * その他資料イメージパスを取得します。
      *
      * @param index index
-     * @return 左のその他資料イメージ
+     * @return その他資料イメージパス
      */
-    public RString get左のその他資料イメージ(int index) {
-        if (ファイル名List != null && index < ファイル名List.size()) {
-            return ファイル名List.get(index);
-        }
-        return RString.EMPTY;
-    }
-
-    /**
-     * 右のその他資料イメージを取得します。
-     *
-     * @param index index
-     * @return 右のその他資料イメージ
-     */
-    public RString get右のその他資料イメージ(int index) {
+    public RString getその他資料イメージパス(int index) {
         if (ファイル名List != null && index < ファイル名List.size()) {
             return ファイル名List.get(index);
         }
@@ -156,21 +140,12 @@ public class JimuSonotashiryoBusiness {
     }
 
     /**
-     * その他資料イメージリストを取得します。
+     * その他資料イメージパスリストを取得します。
      *
-     * @return その他資料イメージ
+     * @return その他資料イメージパスリスト
      */
-    public List<RString> getその他資料() {
+    public List<RString> getその他資料イメージパスリスト() {
         return ファイル名List;
-    }
-
-    /**
-     * その他資料を取得します。
-     *
-     * @return その他資料
-     */
-    public int get存在ファイルIndex() {
-        return 存在ファイルindex;
     }
     
     /**

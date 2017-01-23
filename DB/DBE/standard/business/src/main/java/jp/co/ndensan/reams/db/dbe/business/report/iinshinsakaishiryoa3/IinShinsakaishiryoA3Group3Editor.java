@@ -70,7 +70,6 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
-    private final RString shinsakaiOrder;
 
     /**
      * インスタンスを生成します。
@@ -79,15 +78,13 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
      * @param 特記事項List List<RString>
      * @param index int
      * @param page int
-     * @param shinsakaiOrder RString
      */
     protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item,
-            List<RString> 特記事項List, int index, int page, RString shinsakaiOrder) {
+            List<RString> 特記事項List, int index, int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;
         this.page = page;
-        this.shinsakaiOrder = shinsakaiOrder;
     }
 
     @Override
@@ -96,7 +93,7 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     }
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
-        source.shinsakaiOrder = shinsakaiOrder;
+        source.shinsakaiOrder = item.get審査人数();
         source.hokenshaNo = RString.EMPTY;
         source.hihokenshaNo = RString.EMPTY;
         source.hihokenshaName = RString.EMPTY;

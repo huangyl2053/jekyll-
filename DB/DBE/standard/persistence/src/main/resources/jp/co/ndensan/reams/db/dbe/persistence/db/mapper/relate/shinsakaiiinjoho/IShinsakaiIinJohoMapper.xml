@@ -173,6 +173,8 @@
         )AS dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho
         ON
         dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"=dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho."dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shinsakaiIinCode"
+        ORDER BY
+        dbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
     </select>
 
     <select resultOrdered="true" id="get所属機関一覧情報"
