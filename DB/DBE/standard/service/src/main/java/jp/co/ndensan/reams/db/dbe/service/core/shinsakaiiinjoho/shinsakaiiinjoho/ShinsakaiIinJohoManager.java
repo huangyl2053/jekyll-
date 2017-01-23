@@ -142,13 +142,22 @@ public class ShinsakaiIinJohoManager {
      * 審査会委員一覧情報は表示条件で検索を取得する。
      *
      * @param 認定審査会委員登録検索条件 ShinsakaiIinJohoTorokuMapperParameter
-     * @return int 認定審査会委員登録件数
+     * @return List<ShinsakaiIinJoho>
      */
     @Transaction
-    public int get審査会委員一覧件数(ShinsakaiIinJohoTorokuMapperParameter 認定審査会委員登録検索条件) {
+    public SearchResult<ShinsakaiIinJoho> get審査会委員一覧件数(ShinsakaiIinJohoTorokuMapperParameter 認定審査会委員登録検索条件) {
         requireNonNull(認定審査会委員登録検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("認定審査会委員登録検索条件"));
+        List<ShinsakaiIinJoho> 審査会委員一覧件数 = new ArrayList<>();
         IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
-        return mapper.get審査会委員情報By表示条件件数(認定審査会委員登録検索条件);
+        List<ShinsakaiIinJohoEntity> 審査会委員情報 = mapper.get審査会委員情報By表示条件件数(認定審査会委員登録検索条件);
+        if (審査会委員情報 == null || 審査会委員情報.isEmpty()) {
+            return SearchResult.of(審査会委員一覧件数, 0, false);
+        }
+        for (ShinsakaiIinJohoEntity entity : 審査会委員情報) {
+            entity.initializeMd5ToEntities();
+            審査会委員一覧件数.add(new ShinsakaiIinJoho(entity));
+        }
+        return SearchResult.of(審査会委員一覧件数, 0, false);
     }
 
     /**

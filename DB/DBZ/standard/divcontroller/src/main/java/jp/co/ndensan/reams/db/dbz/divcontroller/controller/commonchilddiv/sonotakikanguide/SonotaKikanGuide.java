@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SonotaKikanGuide {
 
-    private static final RString 廃止_含まない = new RString("key0");
+    private static final RString 含まない = new RString("key0");
     private final SoNoTaKikanGuideFinder service;
 
     /**
@@ -58,14 +58,14 @@ public class SonotaKikanGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        boolean 廃止Flag_含まない = false;
-        if (廃止_含まない.equals(div.getRadHaisi().getSelectedKey())) {
-            廃止Flag_含まない = true;
+        boolean 含まないFlag = false;
+        if (含まない.equals(div.getRadHaisi().getSelectedKey())) {
+            含まないFlag = true;
         }
         List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
                 .createその他機関情報の取得キー作成(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
                         div.getTxtSonotaKikanCodefrom().getValue(),
-                        div.getTxtSonotaKikanCodeto().getValue(), 廃止Flag_含まない,
+                        div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
                         div.getTxtSonotaKikanName().getValue(),
                         div.getDdlChosaItakusakiKubun().getSelectedKey(),
                         div.getTxtMaxDisp().getValue().toBigInteger().intValue())).records();
