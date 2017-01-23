@@ -214,7 +214,6 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         認定調査依頼履歴番号リスト.add(entity.getNinteichosaRirekiNo());
-        一次判定myBatisParameter.setGenponMaskKubun(GenponMaskKubun.原本.getコード());
         一次判定myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
         一次判定myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.getTokkiIranJoho(一次判定myBatisParameter);

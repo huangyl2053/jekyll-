@@ -60,7 +60,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
 
     private static final RString 認定調査主治結果 = new RString("未");
     private static final RString 印字する = new RString("1");
-    private static final RString 概況調査特記マスク = new RString("C0007_BAK.png");
+    private static final RString IMAGEFILENAME_概況調査特記 = new RString("C0007");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -131,7 +131,11 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             IchijihanteiekkahyoTokkijiko tokkijiko = new IchijihanteiekkahyoTokkijiko(特記情報, 共通情報, ファイルパス);
             項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());
             項目.set概況特記のテキスト(共通情報.getTokki());
-            項目.set概況特記のイメージ(getFilePath(path, 概況調査特記マスク));
+            if (共通情報.isJimukyoku()) {
+                項目.set概況特記のイメージ(DBEImageUtil.getOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
+            } else {
+                項目.set概況特記のイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
+            }
             項目.set特記事項テキスト_イメージ区分(tokkijiko.get特記事項テキスト_イメージ区分());
             項目.set特記パターン(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
             項目.set特記事項_listChosa1(tokkijiko.get短冊情報リスト());
