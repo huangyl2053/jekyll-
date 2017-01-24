@@ -62,7 +62,6 @@ public class KumiawaseCommonBusiness {
     public void setImageFilePath(ShinseishoKanriNo shinseishoKanriNo) {
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiShiryoCommonEntityList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
-                Directory.createDirectories(imageFilePath);
                 imageFilePath = copySharedFiles(entity.getImageSharedFileId(),
                         entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo()));
                 break;
