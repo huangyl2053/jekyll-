@@ -55,8 +55,7 @@ public class DBEImageUtil {
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(
-                Path.combinePath(batchImageFolderPath, new RString(sharedFileId.toString())))).getCanonicalPath());
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchImageFolderPath)).getCanonicalPath());
     }
 
     /**
