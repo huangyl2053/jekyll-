@@ -275,7 +275,7 @@ public class NinteichosaIraiHandler {
         row.setGetShoKisaiHokenshaNo(business.get証記載保険番号() == null ? RString.EMPTY : business.get証記載保険番号());
         row.setShichosonCode(business.get市町村コード());
         調査依頼モードの日付設定(row, business);
-        if ((RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain()))
+        if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())
                 || row.getChosaIraiKigen().getValue() == null
                 || row.getChosaIraishoHakkoDay().getValue() == null
                 || row.getChosaIraiDataShutsuryokuDay().getValue() == null) {

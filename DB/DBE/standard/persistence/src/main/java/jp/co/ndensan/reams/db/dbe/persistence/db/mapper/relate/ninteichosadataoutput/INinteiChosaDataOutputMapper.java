@@ -19,6 +19,14 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity
 public interface INinteiChosaDataOutputMapper {
 
     /**
+     * 認定調査一覧の総件数を取得します。
+     *
+     * @param param 認定調査データ出力（モバイル）のパラメータ
+     * @return List<NinteiChosaDataOutputRelateEntity>
+     */
+    int get認定調査一覧総件数(NinteiChosaDataOutputMybitisParameter param);
+
+    /**
      * 認定調査一覧データを取得します。
      *
      * @param param 認定調査データ出力（モバイル）のパラメータ

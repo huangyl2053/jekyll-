@@ -294,6 +294,53 @@
     </if>
     </select>
 
+    <select resultOrdered="true" id="get認定調査一覧総件数" resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputMybitisParameter" fetchSize="500">
+      SELECT
+          COUNT(*)
+      FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+          ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+          ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+          ON DbT5910."ninteichosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
+          AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
+        INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
+          ON DbT5913."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
+          AND DbT5913."ninteiChosainCode" = DbT5201."ninteiChosainCode"
+          AND DbT5913."shichosonCode" = DbT7051."shichosonCode"
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+          ON DbT5201."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+      WHERE
+        DbT5201."ninteichosaIraiRirekiNo" = (
+          SELECT
+            MAX("ninteichosaIraiRirekiNo")
+          FROM
+            rgdb."DbT5201NinteichosaIraiJoho"
+          WHERE
+            "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        )
+        AND DbT5201."logicalDeletedFlag" = false
+        AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
+        AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != '')
+        AND (DbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5201."iraishoShutsuryokuYMD" != '')
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105."ninteichosaKanryoYMD" IS NULL
+        AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
+        AND DbT5101."logicalDeletedFlag" = false
+        <if test= "isNinteichosaItakusakiCode">
+            AND DbT5201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+        </if>
+         <if test= "isNinteiChosainCode">
+            AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
+        </if>
+        <if test= "!isShichoson">
+            AND DbT7051."shichosonCode" = #{shichosonCode}
+        </if>
+    </select>
+
     <select resultOrdered="true" id="get認定調査一覧" resultMap="resultMap_getNinteiChosaIchiran"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputMybitisParameter" fetchSize="500">
        SELECT
@@ -334,11 +381,11 @@
             "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         )
         AND DbT5201."logicalDeletedFlag" = false
+        AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
+        AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != '')
+        AND (DbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5201."iraishoShutsuryokuYMD" != '')
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
+        AND DbT5105."ninteichosaKanryoYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = false
         <if test= "isNinteichosaItakusakiCode">

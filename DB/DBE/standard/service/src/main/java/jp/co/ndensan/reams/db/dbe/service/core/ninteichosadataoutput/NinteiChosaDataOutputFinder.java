@@ -48,7 +48,8 @@ public class NinteiChosaDataOutputFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiChosaDataOutputFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteiChosaDataOutputFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteiChosaDataOutputFinder}のインスタンス
      */
     public static NinteiChosaDataOutputFinder createInstance() {
         return InstanceProvider.create(NinteiChosaDataOutputFinder.class);
@@ -63,14 +64,16 @@ public class NinteiChosaDataOutputFinder {
     @Transaction
     public SearchResult<NinteiChosaDataOutputBusiness> getChosaChikuList(NinteiChosaDataOutputMybitisParameter param) {
         List<NinteiChosaDataOutputBusiness> resultList = new ArrayList<>();
-        List<NinteiChosaDataOutputRelateEntity> 認定調査一覧List = mapperProvider.create(INinteiChosaDataOutputMapper.class).get認定調査一覧(param);
-        if (認定調査一覧List == null || 認定調査一覧List.isEmpty()) {
+        INinteiChosaDataOutputMapper mapper = mapperProvider.create(INinteiChosaDataOutputMapper.class);
+        int totalCount = mapper.get認定調査一覧総件数(param);
+        if (totalCount == 0) {
             return SearchResult.of(Collections.<NinteiChosaDataOutputBusiness>emptyList(), 0, false);
         }
+        List<NinteiChosaDataOutputRelateEntity> 認定調査一覧List = mapper.get認定調査一覧(param);
         for (NinteiChosaDataOutputRelateEntity entity : 認定調査一覧List) {
             resultList.add(new NinteiChosaDataOutputBusiness(entity));
         }
-        return SearchResult.of(resultList, 0, false);
+        return SearchResult.of(resultList, totalCount, totalCount > resultList.size());
     }
 
     /**

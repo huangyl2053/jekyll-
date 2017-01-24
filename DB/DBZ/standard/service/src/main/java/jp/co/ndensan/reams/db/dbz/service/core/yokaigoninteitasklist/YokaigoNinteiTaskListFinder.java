@@ -75,7 +75,8 @@ public class YokaigoNinteiTaskListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
      */
     public static YokaigoNinteiTaskListFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiTaskListFinder.class);
@@ -123,13 +124,13 @@ public class YokaigoNinteiTaskListFinder {
      */
     @Transaction
     public SearchResult<CyoSaiRaiBusiness> get調査依頼モード(YokaigoNinteiTaskListParameter parameter) {
-        List<CyoSaiRaiBusiness> 調査依頼List = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
         ChosairaiRelateWithCountEntity searchResult = mapper.get調査依頼(parameter);
         if (searchResult == null || searchResult.getTaishoshaList().isEmpty()) {
             return SearchResult.of(Collections.<CyoSaiRaiBusiness>emptyList(), 0, false);
         }
         int totalcount = searchResult.getTotalCount().intValue();
+        List<CyoSaiRaiBusiness> 調査依頼List = new ArrayList<>();
         for (CyoSaiRaiRelateEntity entity : searchResult.getTaishoshaList()) {
             調査依頼List.add(new CyoSaiRaiBusiness(entity));
         }
