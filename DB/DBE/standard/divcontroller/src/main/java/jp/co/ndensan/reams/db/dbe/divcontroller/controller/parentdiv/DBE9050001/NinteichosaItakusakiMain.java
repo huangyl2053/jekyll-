@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.SonotaKikanJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaster.NinteichosaMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
@@ -52,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -279,6 +276,7 @@ public class NinteichosaItakusakiMain {
             waritsukeTeiin = new RString(row.getWaritsukeTeiin().getValue().toString());
         }
         NinteichosaItakusakiCsvEntity data = new NinteichosaItakusakiCsvEntity(
+                row.getHokenshaCode(),
                 row.getHokensha(),
                 row.getSonotaKikanCode(),
                 row.getKikanMeisho(),
@@ -576,16 +574,25 @@ public class NinteichosaItakusakiMain {
     }
 
     private SonotaKikanJohoCSVEntity getCsvDataSonota(dgSonotaKikanIchiran_Row row) {
+        RString waritsukeTeiin = RString.EMPTY;
+        if (row.getWaritsukeTeiin().getValue() != null) {
+            waritsukeTeiin = new RString(row.getWaritsukeTeiin().getValue().toString());
+        }
         SonotaKikanJohoCSVEntity data = new SonotaKikanJohoCSVEntity(
+                row.getHokenshaCode(),
                 row.getHokensha(),
                 row.getSonotaKikanCode(),
                 row.getKikanMeisho(),
                 row.getKikanKana(),
                 row.getYubinNo(),
                 row.getJusho(),
+                row.getJushoKana(),
                 row.getTelNo(),
-                set調査委託区分(row.getChosaItakuKubun()),
-                set機関の区分(row.getKikanKubun()));
+                row.getChosaItakuKubun(),
+                waritsukeTeiin,
+                row.getChiku(),
+                row.getKikanKubun(),
+                row.getJokyoFlag());
         return data;
     }
 
@@ -670,30 +677,28 @@ public class NinteichosaItakusakiMain {
 //                .append(entity.getKikanKubun())
 //                .toRString();
 //    }
-    private RString set調査委託区分(RString row調査委託区分) {
-        RStringBuilder 調査委託区分編集 = new RStringBuilder();
-        return row調査委託区分.isEmpty()
-                ? RString.EMPTY
-                : 調査委託区分編集
-                .append("(")
-                .append(ChosaItakuKubunCode.toValueFrom名称(row調査委託区分).getコード())
-                .append(")")
-                .append(row調査委託区分)
-                .toRString();
-    }
-
-    private RString set機関の区分(RString row機関の区分) {
-        RStringBuilder 機関区分編集 = new RStringBuilder();
-        return row機関の区分.isEmpty()
-                ? RString.EMPTY
-                : 機関区分編集
-                .append("(")
-                .append(ChosaKikanKubun.valueOf(row機関の区分.toString()).getコード())
-                .append(")")
-                .append(row機関の区分)
-                .toRString();
-    }
-
+//    private RString set調査委託区分(RString row調査委託区分) {
+//        RStringBuilder 調査委託区分編集 = new RStringBuilder();
+//        return row調査委託区分.isEmpty()
+//                ? RString.EMPTY
+//                : 調査委託区分編集
+//                .append("(")
+//                .append(ChosaItakuKubunCode.toValueFrom名称(row調査委託区分).getコード())
+//                .append(")")
+//                .append(row調査委託区分)
+//                .toRString();
+//    }
+//    private RString set機関の区分(RString row機関の区分) {
+//        RStringBuilder 機関区分編集 = new RStringBuilder();
+//        return row機関の区分.isEmpty()
+//                ? RString.EMPTY
+//                : 機関区分編集
+//                .append("(")
+//                .append(ChosaKikanKubun.valueOf(row機関の区分.toString()).getコード())
+//                .append(")")
+//                .append(row機関の区分)
+//                .toRString();
+//    }
     private RString set預金種別(RString 預金種別コード) {
         if (!預金種別コード.isEmpty()) {
             switch (預金種別コード.toInt()) {

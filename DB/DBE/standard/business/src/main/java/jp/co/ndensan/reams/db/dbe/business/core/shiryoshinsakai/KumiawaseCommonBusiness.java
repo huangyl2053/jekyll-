@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
+import com.sun.xml.ws.security.opt.api.reference.DirectReference;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
@@ -16,6 +17,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiry
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -55,14 +58,29 @@ public class KumiawaseCommonBusiness {
      * 当クラスにて使用するイメージファイルパスを設定します。
      * 
      * @param shinseishoKanriNo 申請書管理番号
-     * @param imageFolderPath イメージフォルダパス
      */
-    public void setImageFilePath(ShinseishoKanriNo shinseishoKanriNo, RString imageFolderPath) {
+    public void setImageFilePath(ShinseishoKanriNo shinseishoKanriNo) {
+        for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiShiryoCommonEntityList) {
+            if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                imageFilePath = copySharedFiles(entity.getImageSharedFileId(),
+                        entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo()));
+                break;
+            }
+        }
+    }
+    
+    /**
+     * 当クラスにて使用するイメージファイルパスを設定します。
+     * 
+     * @param shinseishoKanriNo 申請書管理番号
+     * @param batchImageFolderPath イメージ格納用パス
+     */
+    public void setImageFilePath2(ShinseishoKanriNo shinseishoKanriNo, RString batchImageFolderPath) {
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiShiryoCommonEntityList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                 imageFilePath = copySharedFilesBatch(entity.getImageSharedFileId(),
                         entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo()),
-                        imageFolderPath);
+                        batchImageFolderPath);
                 break;
             }
         }
@@ -125,7 +143,7 @@ public class KumiawaseCommonBusiness {
      * @param 通知文 通知文(ReportIdDBE.DBE517009)
      * @return JimuTuikaSiryoBusiness
      */
-    public JimuTuikaSiryoBusiness getAdditionalResourceInfo(ShinseishoKanriNo shinseishoKanriNo,
+    public JimuTuikaSiryoBusiness getAdditionalFileInfo(ShinseishoKanriNo shinseishoKanriNo,
             IinShinsakaiIinJohoProcessParameter paramter,
             RString 通知文) {
         JimuTuikaSiryoBusiness 審査会追加資料 = null;
@@ -213,12 +231,24 @@ public class KumiawaseCommonBusiness {
         return ファイルPathList;
     }
 
-    private RString copySharedFilesBatch(RDateTime sharedFileId, RString sharedFileName, RString imageFolderPath) {
+    private RString copySharedFiles(RDateTime sharedFileId, RString sharedFileName) {
         if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, imageFolderPath);
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName);
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+    }
+    
+    private RString copySharedFilesBatch(RDateTime sharedFileId, RString sharedFileName, RString batchImageFolderPath) {
+        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
+            return RString.EMPTY;
+        }
+        try {
+            RString localCopyPath = Directory.createDirectories(Path.combinePath(batchImageFolderPath, sharedFileName));
+            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, localCopyPath);
         } catch (Exception e) {
             return RString.EMPTY;
         }

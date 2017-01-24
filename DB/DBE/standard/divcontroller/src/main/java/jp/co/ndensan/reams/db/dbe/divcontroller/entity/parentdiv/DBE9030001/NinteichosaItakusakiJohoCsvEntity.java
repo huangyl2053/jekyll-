@@ -60,7 +60,7 @@ public class NinteichosaItakusakiJohoCsvEntity {
     @CsvField(order = 13, name = "調査委託区分")
     private RString 調査委託区分;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 14, name = "特定調査員表示の表示")
+    @CsvField(order = 14, name = "特定調査員の表示")
     private RString 特定調査員表示フラグ;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
     @CsvField(order = 15, name = "割付定員")

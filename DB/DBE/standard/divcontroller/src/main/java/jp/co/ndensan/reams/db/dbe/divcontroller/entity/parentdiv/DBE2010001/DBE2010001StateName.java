@@ -17,7 +17,8 @@ public enum DBE2010001StateName implements IStateEnumerations {
     NoChange(""),
     登録("登録"),
     完了("完了"),
-    手動割付内容入力("手動割付内容入力");
+    手動割付内容入力("手動割付内容入力"),
+    完了のみ登録("完了のみ登録");
 
     private final RString name;
 

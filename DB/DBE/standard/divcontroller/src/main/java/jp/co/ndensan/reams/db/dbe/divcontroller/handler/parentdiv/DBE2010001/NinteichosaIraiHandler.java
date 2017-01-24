@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairai.NinteichosaIraiManager;
@@ -71,8 +72,10 @@ public class NinteichosaIraiHandler {
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
+     *
+     * @param stateName 状態名
      */
-    public void onLoad() {
+    public void onLoad(RString stateName) {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
@@ -80,26 +83,45 @@ public class NinteichosaIraiHandler {
         div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.setMaxCount(div.getTxtMaxCount().getValue());
-        setRad();
+        setRad(stateName);
         initDataGrid();
-        RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
-        if (使用する.equals(認定調査自動割付)) {
-            div.getBtnJidoWaritsuke().setDisabled(false);
-        } else {
-            div.getBtnJidoWaritsuke().setDisabled(true);
-        }
-        RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
-        if (使用する.equals(モバイル調査使用有無)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, false);
-        } else {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, true);
-        }
+        setButton(stateName);
         set依頼区分ドロップダウンリスト();
     }
 
-    private void setRad() {
-        RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        div.getRadShoriJyotai().setSelectedKey(config);
+    private void setRad(RString stateName) {
+        if (DBE2010001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getRadShoriJyotai().setSelectedKey(KEY_可);
+            div.getRadShoriJyotai().setDisabled(true);
+        } else {
+            RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            div.getRadShoriJyotai().setSelectedKey(config);
+        }
+    }
+
+    private void setButton(RString stateName) {
+        if (DBE2010001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getBtnJidoWaritsuke().setDisplayNone(true);
+            div.getBtnShudoWaritsuke().setDisplayNone(true);
+        } else {
+            RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
+            if (使用する.equals(認定調査自動割付)) {
+                div.getBtnJidoWaritsuke().setDisabled(false);
+            } else {
+                div.getBtnJidoWaritsuke().setDisabled(true);
+            }
+            RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
+            if (使用する.equals(モバイル調査使用有無)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, true);
+            }
+            if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_未)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, true);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
+            }
+        }
     }
 
     private void set依頼区分ドロップダウンリスト() {
@@ -319,7 +341,6 @@ public class NinteichosaIraiHandler {
             div.getTxtNoUpdate().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(true);
             div.getTxtTotalCount().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, true);
         } else if (状態.equals(KEY_可)) {
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
             div.getTxtNoUpdate().clearValue();
@@ -327,7 +348,6 @@ public class NinteichosaIraiHandler {
             div.getTxtNoUpdate().setDisplayNone(true);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
         } else {
             div.getTxtTotalCount().setValue(new Decimal(notUpdateCount + completeCount));
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
@@ -335,7 +355,6 @@ public class NinteichosaIraiHandler {
             div.getTxtNoUpdate().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
         }
     }
 

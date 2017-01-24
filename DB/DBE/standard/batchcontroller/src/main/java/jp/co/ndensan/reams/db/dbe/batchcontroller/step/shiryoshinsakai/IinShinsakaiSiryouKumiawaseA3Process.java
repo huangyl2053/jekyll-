@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -133,12 +134,12 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         
         int 審査番号 = 1;
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
-            kumiawaseCommonBusiness.setImageFilePath(shinseishoKanriNo, batchReportWriter.getImageFolderPath());
+            kumiawaseCommonBusiness.setImageFilePath(shinseishoKanriNo);
             IinShinsakaishiryoA3Report report = new IinShinsakaishiryoA3Report(jimuShinsakaishiryoList,
                     get特記事項と一次判定結果票情報(shinseishoKanriNo),
                     kumiawaseCommonBusiness.getOpinionFileInfo(shinseishoKanriNo, false),
                     kumiawaseCommonBusiness.getOtherFileInfo(shinseishoKanriNo, false),
-                    kumiawaseCommonBusiness.getAdditionalResourceInfo(shinseishoKanriNo, paramter.toIinShinsakaiIinJohoProcessParameter(),
+                    kumiawaseCommonBusiness.getAdditionalFileInfo(shinseishoKanriNo, paramter.toIinShinsakaiIinJohoProcessParameter(),
                             ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
                                 KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())),
                     is審査会対象一覧印刷済み,
