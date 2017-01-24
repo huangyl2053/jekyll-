@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.INinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -16,25 +16,27 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtNijihanteDateRange")
-    private TextBoxDateRange txtNijihanteDateRange;
+    @JsonProperty("radTeishutsuKigen")
+    private RadioButton radTeishutsuKigen;
+    @JsonProperty("txtTeishutsuKigenDateRange")
+    private TextBoxDateRange txtTeishutsuKigenDateRange;
+    @JsonProperty("labelHihokenshaNo")
+    private Label labelHihokenshaNo;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBoxCode txtHihokenshaNo;
     @JsonProperty("radDataShutsuryokuUmu")
     private RadioButton radDataShutsuryokuUmu;
     @JsonProperty("txtHyojiDataLimit")
     private TextBoxNum txtHyojiDataLimit;
-    @JsonProperty("btnHyoji")
-    private Button btnHyoji;
-    @JsonProperty("btnClear")
-    private Button btnClear;
-    @JsonProperty("ccdShinseishaFinder")
-    private NinteiShinseishaFinderDiv ccdShinseishaFinder;
+    @JsonProperty("ccdHokensha")
+    private HokenshaListDiv ccdHokensha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,21 +45,75 @@ public class KensakuJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtNijihanteDateRange
-     * @return txtNijihanteDateRange
+     * getradTeishutsuKigen
+     * @return radTeishutsuKigen
      */
-    @JsonProperty("txtNijihanteDateRange")
-    public TextBoxDateRange getTxtNijihanteDateRange() {
-        return txtNijihanteDateRange;
+    @JsonProperty("radTeishutsuKigen")
+    public RadioButton getRadTeishutsuKigen() {
+        return radTeishutsuKigen;
     }
 
     /*
-     * settxtNijihanteDateRange
-     * @param txtNijihanteDateRange txtNijihanteDateRange
+     * setradTeishutsuKigen
+     * @param radTeishutsuKigen radTeishutsuKigen
      */
-    @JsonProperty("txtNijihanteDateRange")
-    public void setTxtNijihanteDateRange(TextBoxDateRange txtNijihanteDateRange) {
-        this.txtNijihanteDateRange = txtNijihanteDateRange;
+    @JsonProperty("radTeishutsuKigen")
+    public void setRadTeishutsuKigen(RadioButton radTeishutsuKigen) {
+        this.radTeishutsuKigen = radTeishutsuKigen;
+    }
+
+    /*
+     * gettxtTeishutsuKigenDateRange
+     * @return txtTeishutsuKigenDateRange
+     */
+    @JsonProperty("txtTeishutsuKigenDateRange")
+    public TextBoxDateRange getTxtTeishutsuKigenDateRange() {
+        return txtTeishutsuKigenDateRange;
+    }
+
+    /*
+     * settxtTeishutsuKigenDateRange
+     * @param txtTeishutsuKigenDateRange txtTeishutsuKigenDateRange
+     */
+    @JsonProperty("txtTeishutsuKigenDateRange")
+    public void setTxtTeishutsuKigenDateRange(TextBoxDateRange txtTeishutsuKigenDateRange) {
+        this.txtTeishutsuKigenDateRange = txtTeishutsuKigenDateRange;
+    }
+
+    /*
+     * getlabelHihokenshaNo
+     * @return labelHihokenshaNo
+     */
+    @JsonProperty("labelHihokenshaNo")
+    public Label getLabelHihokenshaNo() {
+        return labelHihokenshaNo;
+    }
+
+    /*
+     * setlabelHihokenshaNo
+     * @param labelHihokenshaNo labelHihokenshaNo
+     */
+    @JsonProperty("labelHihokenshaNo")
+    public void setLabelHihokenshaNo(Label labelHihokenshaNo) {
+        this.labelHihokenshaNo = labelHihokenshaNo;
+    }
+
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBoxCode getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     /*
@@ -97,48 +153,12 @@ public class KensakuJokenDiv extends Panel {
     }
 
     /*
-     * getbtnHyoji
-     * @return btnHyoji
+     * getccdHokensha
+     * @return ccdHokensha
      */
-    @JsonProperty("btnHyoji")
-    public Button getBtnHyoji() {
-        return btnHyoji;
-    }
-
-    /*
-     * setbtnHyoji
-     * @param btnHyoji btnHyoji
-     */
-    @JsonProperty("btnHyoji")
-    public void setBtnHyoji(Button btnHyoji) {
-        this.btnHyoji = btnHyoji;
-    }
-
-    /*
-     * getbtnClear
-     * @return btnClear
-     */
-    @JsonProperty("btnClear")
-    public Button getBtnClear() {
-        return btnClear;
-    }
-
-    /*
-     * setbtnClear
-     * @param btnClear btnClear
-     */
-    @JsonProperty("btnClear")
-    public void setBtnClear(Button btnClear) {
-        this.btnClear = btnClear;
-    }
-
-    /*
-     * getccdShinseishaFinder
-     * @return ccdShinseishaFinder
-     */
-    @JsonProperty("ccdShinseishaFinder")
-    public INinteiShinseishaFinderDiv getCcdShinseishaFinder() {
-        return ccdShinseishaFinder;
+    @JsonProperty("ccdHokensha")
+    public IHokenshaListDiv getCcdHokensha() {
+        return ccdHokensha;
     }
 
     // </editor-fold>
