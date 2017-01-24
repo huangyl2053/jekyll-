@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -55,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -83,6 +80,11 @@ public class ShinsakaiIinJohoToroku {
     private final ShozokuKikanIchiranFinder finder;
     private final KoikiShichosonJohoFinder shichosonJohoFinder;
     private static final RString KEY_1 = new RString("key1");
+    private static final RString 普通 = new RString("普通");
+    private static final RString 当座 = new RString("当座");
+    private static final RString 納税準備 = new RString("納税準備");
+    private static final RString 貯蓄 = new RString("貯蓄");
+    private static final RString その他 = new RString("その他");
 
     /**
      * コンストラクタです。
@@ -543,27 +545,35 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private ShinsakaiIinTorokuCsvEntity getCsvData(dgShinsaInJohoIchiran_Row row) {
-        RString 担当地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                DBECodeShubetsu.審査会地区コード.getコード(),
-                new Code(row.getShinsakaiChikuCode()));
+        RString BirthYMD = RString.EMPTY;
+        RString 審査会委員開始日 = RString.EMPTY;
+        RString 審査会委員終了日 = RString.EMPTY;
+        if (!(row.getBarthYMD().getValue() == null) && !row.getBarthYMD().getValue().toDateString().isEmpty()) {
+            BirthYMD = row.getBarthYMD().getValue().wareki().toDateString();
+        }
+        if (!(row.getShinsakaiIinKaishiYMD().getValue() == null) && !row.getShinsakaiIinKaishiYMD().getValue().toDateString().isEmpty()) {
+            審査会委員開始日 = editCsv日付(row.getShinsakaiIinKaishiYMD().getValue());
+        }
+        if (!(row.getShinsakaiIinShuryoYMD().getValue() == null) && !row.getShinsakaiIinShuryoYMD().getValue().toDateString().isEmpty()) {
+            審査会委員終了日 = editCsv日付(row.getShinsakaiIinShuryoYMD().getValue());
+        }
         ShinsakaiIinTorokuCsvEntity data = new ShinsakaiIinTorokuCsvEntity(
                 row.getShinsainCode(),
+                審査会委員開始日,
+                審査会委員終了日,
                 row.getShimei(),
                 row.getKanaShimei(),
-                editコード名称(row.getShikakuCodeCode(), row.getShikakuCode()),
-                editコード名称(row.getShinsakaiChikuCode(), 担当地区名称),
-                editCsv日付(row.getShinsakaiIinKaishiYMD().getValue()),
-                editCsv日付(row.getShinsakaiIinShuryoYMD().getValue()),
-                Edit郵便番号(row.getYubinNo()),
-                row.getJusho(),
-                row.getTelNo1(),
-                row.getFaxNo(),
-                editCsv日付(row.getHaishiYMD().getValue()),
+                row.getSeibetsu(),
+                BirthYMD,
+                row.getShikakuCodeCode(),
+                row.getShikakuCode(),
+                row.getJokyo(),
+                row.getBiko(),
                 row.getKinyuKikanCode(),
                 row.getKinyuKikanShitenCode(),
-                row.getYokinShubetsu(),
+                set預金種別(row.getYokinShubetsu()),
                 row.getKozaNo(),
-                row.getKanaShimei(),
+                row.getKozaMeigininKana(),
                 row.getKozaMeiginin()
         );
         return data;
@@ -607,22 +617,30 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private KozaMitorokuShinsakaiIinCsvEntity getKozaMitorokuCsvData(dgShinsaInJohoIchiran_Row row) {
-        RString 担当地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                DBECodeShubetsu.審査会地区コード.getコード(),
-                new Code(row.getShinsakaiChikuCode()));
+        RString BirthYMD = RString.EMPTY;
+        RString 審査会委員開始日 = RString.EMPTY;
+        RString 審査会委員終了日 = RString.EMPTY;
+        if (!(row.getBarthYMD().getValue() == null) && !row.getBarthYMD().getValue().toDateString().isEmpty()) {
+            BirthYMD = row.getBarthYMD().getValue().wareki().toDateString();
+        }
+        if (!(row.getShinsakaiIinKaishiYMD().getValue() == null) && !row.getShinsakaiIinKaishiYMD().getValue().toDateString().isEmpty()) {
+            審査会委員開始日 = editCsv日付(row.getShinsakaiIinKaishiYMD().getValue());
+        }
+        if (!(row.getShinsakaiIinShuryoYMD().getValue() == null) && !row.getShinsakaiIinShuryoYMD().getValue().toDateString().isEmpty()) {
+            審査会委員終了日 = editCsv日付(row.getShinsakaiIinShuryoYMD().getValue());
+        }
         KozaMitorokuShinsakaiIinCsvEntity data = new KozaMitorokuShinsakaiIinCsvEntity(
                 row.getShinsainCode(),
+                審査会委員開始日,
+                審査会委員終了日,
                 row.getShimei(),
                 row.getKanaShimei(),
-                editコード名称(row.getShikakuCodeCode(), row.getShikakuCode()),
-                editコード名称(row.getShinsakaiChikuCode(), 担当地区名称),
-                editCsv日付(row.getShinsakaiIinKaishiYMD().getValue()),
-                editCsv日付(row.getShinsakaiIinShuryoYMD().getValue()),
-                Edit郵便番号(row.getYubinNo()),
-                row.getJusho(),
-                row.getTelNo1(),
-                row.getFaxNo(),
-                editCsv日付(row.getHaishiYMD().getValue()));
+                row.getSeibetsu(),
+                BirthYMD,
+                row.getShikakuCodeCode(),
+                row.getShikakuCode(),
+                row.getJokyo(),
+                row.getBiko());
         return data;
     }
 
@@ -740,6 +758,24 @@ public class ShinsakaiIinJohoToroku {
         div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("ninteiItakusakiCode")).getCellDetails().setDisabled(true);
         div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("shujiiIryoKikanCode")).getCellDetails().setDisabled(true);
         div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("sonotaKikanCode")).getCellDetails().setDisabled(true);
+    }
+
+    private RString set預金種別(RString 預金種別コード) {
+        if (!預金種別コード.isEmpty()) {
+            switch (預金種別コード.toInt()) {
+                case 1:
+                    return 普通;
+                case 2:
+                    return 当座;
+                case 3:
+                    return 納税準備;
+                case 4:
+                    return 貯蓄;
+                case 9:
+                    return その他;
+            }
+        }
+        return RString.EMPTY;
     }
 
     /**

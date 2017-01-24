@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteichosaItakusakiKozaMitorokuJohoCsvEntity {
-    
+
     @CsvField(order = 1, name = "市町村コード")
     private RString 市町村コード;
     @CsvField(order = 2, name = "市町村")
@@ -47,7 +46,7 @@ public class NinteichosaItakusakiKozaMitorokuJohoCsvEntity {
     private RString 機関代表者カナ氏名;
     @CsvField(order = 13, name = "調査委託区分")
     private RString 調査委託区分;
-    @CsvField(order = 14, name = "特定調査員表示の表示")
+    @CsvField(order = 14, name = "特定調査員の表示")
     private RString 特定調査員表示フラグ;
     @CsvField(order = 15, name = "割付定員")
     private RString 割付定員;
