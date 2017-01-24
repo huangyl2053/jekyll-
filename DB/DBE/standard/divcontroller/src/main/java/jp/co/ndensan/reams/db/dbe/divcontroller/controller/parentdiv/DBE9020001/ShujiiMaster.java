@@ -341,14 +341,14 @@ public class ShujiiMaster {
                 row.getShujiiKanaShimei(),
                 row.getShujiiIryoKikanCode().getValue(),
                 row.getShujiiIryoKikan(),
+                row.getSeibetsu(),
                 row.getShinryoka(),
                 row.getShiteii(),
                 row.getJokyoFlag(),
                 row.getYubinNo(),
                 row.getJusho(),
                 row.getTelNo(),
-                row.getFaxNo(),
-                row.getSeibetsu());
+                row.getFaxNo());
         return data;
     }
 

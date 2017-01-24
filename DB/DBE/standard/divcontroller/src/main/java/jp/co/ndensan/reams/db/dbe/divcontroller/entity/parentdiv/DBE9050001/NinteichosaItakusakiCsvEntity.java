@@ -18,47 +18,50 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteichosaItakusakiCsvEntity {
 
     @CsvField(order = 10, name = "証記載保険者番号")
+    private final RString hokenshaNo;
+    @CsvField(order = 20, name = "証記載保険者")
     private final RString hokensha;
-    @CsvField(order = 20, name = "その他機関コード")
+    @CsvField(order = 30, name = "その他機関コード")
     private final RString sonotaKikanCode;
-    @CsvField(order = 30, name = "機関名称")
+    @CsvField(order = 40, name = "機関名称")
     private final RString kikanMeisho;
-    @CsvField(order = 40, name = "機関名称カナ")
+    @CsvField(order = 50, name = "機関名称カナ")
     private final RString kikanMeishoKana;
-    @CsvField(order = 50, name = "郵便番号")
+    @CsvField(order = 60, name = "郵便番号")
     private final RString yubinNo;
-    @CsvField(order = 60, name = "住所")
+    @CsvField(order = 70, name = "住所")
     private final RString jusho;
-    @CsvField(order = 70, name = "住所カナ")
+    @CsvField(order = 80, name = "住所カナ")
     private final RString jushoKana;
-    @CsvField(order = 80, name = "電話番号")
+    @CsvField(order = 90, name = "電話番号")
     private final RString telNo;
-    @CsvField(order = 90, name = "調査委託区分")
+    @CsvField(order = 100, name = "調査委託区分")
     private final RString chosaItakuKubun;
-    @CsvField(order = 100, name = "割付定員")
+    @CsvField(order = 110, name = "割付定員")
     private final RString waritsukeTeiin;
-    @CsvField(order = 110, name = "割付地区")
+    @CsvField(order = 120, name = "割付地区")
     private final RString waritsukeChiku;
-    @CsvField(order = 120, name = "機関の区分")
+    @CsvField(order = 130, name = "機関の区分")
     private final RString kikanKubun;
-    @CsvField(order = 130, name = "その他機関の状況")
+    @CsvField(order = 140, name = "その他機関の状況")
     private final RString haishiFlag;
-    @CsvField(order = 140, name = "金融機関コード")
+    @CsvField(order = 150, name = "金融機関コード")
     private final RString kinyuKikan;
-    @CsvField(order = 150, name = "支店コード")
+    @CsvField(order = 160, name = "支店コード")
     private final RString kinyuKikanShiten;
-    @CsvField(order = 160, name = "預金種別")
+    @CsvField(order = 170, name = "預金種別")
     private final RString yokinShubetsu;
-    @CsvField(order = 170, name = "口座番号")
+    @CsvField(order = 180, name = "口座番号")
     private final RString kozaNo;
-    @CsvField(order = 180, name = "口座名義人")
+    @CsvField(order = 190, name = "口座名義人")
     private final RString kozaMeiginin;
-    @CsvField(order = 190, name = "漢字名義人")
+    @CsvField(order = 200, name = "漢字名義人")
     private final RString kanjiMeiginin;
 
     /**
      * コンストラクタです。
      *
+     * @param hokenshaNo
      * @param hokensha
      * @param sonotaKikanCode
      * @param kikanMeisho
@@ -80,6 +83,7 @@ public class NinteichosaItakusakiCsvEntity {
      * @param kanjiMeiginin
      */
     public NinteichosaItakusakiCsvEntity(
+            RString hokenshaNo,
             RString hokensha,
             RString sonotaKikanCode,
             RString kikanMeisho,
@@ -99,6 +103,7 @@ public class NinteichosaItakusakiCsvEntity {
             RString kozaNo,
             RString kozaMeiginin,
             RString kanjiMeiginin) {
+        this.hokenshaNo = hokenshaNo;
         this.hokensha = hokensha;
         this.sonotaKikanCode = sonotaKikanCode;
         this.kikanMeisho = kikanMeisho;

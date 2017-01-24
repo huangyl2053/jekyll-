@@ -17,70 +17,65 @@ public class KozaMitorokuShinsakaiIinCsvEntity {
 
     @CsvField(order = 10, name = "介護認定審査会委員コード")
     private final RString shinsakaiIinCode;
-    @CsvField(order = 20, name = "介護認定審査会委員氏名")
-    private final RString shisakaiIinShimei;
-    @CsvField(order = 30, name = "介護認定審査会委員氏名カナ")
-    private final RString shinsakaiIinShimeiKana;
-    @CsvField(order = 40, name = "介護認定審査員資格コード")
-    private final RString shinsainShikakuCode;
-    @CsvField(order = 50, name = "担当地区コード")
-    private final RString tantoChikuCode;
-    @CsvField(order = 60, name = "介護認定審査会委員開始年月日")
+    @CsvField(order = 20, name = "介護認定審査会委員開始年月日")
     private final RString shinsakaiIinStYMD;
-    @CsvField(order = 70, name = "介護認定審査会委員終了年月日")
+    @CsvField(order = 30, name = "介護認定審査会委員終了年月日")
     private final RString shinsakaiIinEdYMD;
-    @CsvField(order = 80, name = "郵便番号")
-    private final RString yubinNo;
-    @CsvField(order = 90, name = "住所")
-    private final RString jusho;
-    @CsvField(order = 100, name = "電話番号")
-    private final RString telNo;
-    @CsvField(order = 110, name = "ＦＡＸ番号")
-    private final RString faxNo;
-    @CsvField(order = 120, name = "廃止年月日")
-    private final RString haishiYMD;
+    @CsvField(order = 40, name = "介護認定審査会委員氏名")
+    private final RString shisakaiIinShimei;
+    @CsvField(order = 50, name = "介護認定審査会委員氏名カナ")
+    private final RString shinsakaiIinShimeiKana;
+    @CsvField(order = 60, name = "性別")
+    private final RString seibetsu;
+    @CsvField(order = 70, name = "生年月日")
+    private final RString BarthYMD;
+    @CsvField(order = 80, name = "介護認定審査員資格コード")
+    private final RString shinsainShikakuCode;
+    @CsvField(order = 90, name = "介護認定審査員資格")
+    private final RString shinsainShikaku;
+    @CsvField(order = 100, name = "状況")
+    private final RString jokyo;
+    @CsvField(order = 110, name = "備考")
+    private final RString biko;
 
     /**
      * コンストラクタです。
      *
      * @param shinsakaiIinCode 介護認定審査会委員コード
-     * @param shisakaiIinShimei 介護認定審査会委員氏名
-     * @param shinsakaiIinShimeiKana 介護認定審査会委員氏名カナ
-     * @param shinsainShikakuCode 介護認定審査員資格コード
-     * @param tantoChikuCode 担当地区コード
      * @param shinsakaiIinStYMD 介護認定審査会委員開始年月日
      * @param shinsakaiIinEdYMD 介護認定審査会委員終了年月日
-     * @param yubinNo 郵便番号
-     * @param jusho 住所
-     * @param telNo 電話番号
-     * @param faxNo ＦＡＸ番号
-     * @param haishiYMD 廃止年月日
+     * @param shisakaiIinShimei 介護認定審査会委員氏名
+     * @param shinsakaiIinShimeiKana 介護認定審査会委員氏名カナ
+     * @param seibetsu 性別
+     * @param BarthYMD 生年月日
+     * @param shinsainShikakuCode 介護認定審査員資格コード
+     * @param shinsainShikaku 介護認定審査員資格
+     * @param jokyo 状況
+     * @param biko 備考
      */
     public KozaMitorokuShinsakaiIinCsvEntity(
             RString shinsakaiIinCode,
-            RString shisakaiIinShimei,
-            RString shinsakaiIinShimeiKana,
-            RString shinsainShikakuCode,
-            RString tantoChikuCode,
             RString shinsakaiIinStYMD,
             RString shinsakaiIinEdYMD,
-            RString yubinNo,
-            RString jusho,
-            RString telNo,
-            RString faxNo,
-            RString haishiYMD) {
+            RString shisakaiIinShimei,
+            RString shinsakaiIinShimeiKana,
+            RString seibetsu,
+            RString BarthYMD,
+            RString shinsainShikakuCode,
+            RString shinsainShikaku,
+            RString jokyo,
+            RString biko) {
         this.shinsakaiIinCode = shinsakaiIinCode;
-        this.shisakaiIinShimei = shisakaiIinShimei;
-        this.shinsakaiIinShimeiKana = shinsakaiIinShimeiKana;
-        this.shinsainShikakuCode = shinsainShikakuCode;
-        this.tantoChikuCode = tantoChikuCode;
         this.shinsakaiIinStYMD = shinsakaiIinStYMD;
         this.shinsakaiIinEdYMD = shinsakaiIinEdYMD;
-        this.yubinNo = yubinNo;
-        this.jusho = jusho;
-        this.telNo = telNo;
-        this.faxNo = faxNo;
-        this.haishiYMD = haishiYMD;
+        this.shisakaiIinShimei = shisakaiIinShimei;
+        this.shinsakaiIinShimeiKana = shinsakaiIinShimeiKana;
+        this.seibetsu = seibetsu;
+        this.BarthYMD = BarthYMD;
+        this.shinsainShikakuCode = shinsainShikakuCode;
+        this.shinsainShikaku = shinsainShikaku;
+        this.jokyo = jokyo;
+        this.biko = biko;
     }
 
 }
