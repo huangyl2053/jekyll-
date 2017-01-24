@@ -32,7 +32,7 @@
         DbT4910."shichosonCode" as "DbT4910_shichosonCode",
         DbT4910."yubinNo" as "DbT4910_yubinNo",
         DbT4910.jusho as "DbT4910_jusho" ,
-        DbT4910."telNo" as "DbT4910_telNo"         
+        DbT4910."telNo" as "DbT4910_telNo"
         FROM
         rgdb."DbT4910NinteichosaItakusakiJoho" as DbT4910
         LEFT JOIN
@@ -43,7 +43,7 @@
         DbT4910."shichosonCode" = DbT4913."shichosonCode"
         <where>
             <if test="市町村コードフラグ">
-                AND DbT4913."shichosonCode" =#{市町村コード} 
+                AND DbT4913."shichosonCode" =#{市町村コード}
             </if>
             <if test="認定調査委託先コードFROMフラグ">
                 AND
@@ -108,7 +108,7 @@
             <if test="調査員カナフラグ">
                 AND
                 DbT4913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
-            </if>   
+            </if>
         </where>
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
@@ -129,7 +129,7 @@
         DbT5910."shichosonCode" as "DbT4910_shichosonCode",
         DbT5910."yubinNo" as "DbT4910_yubinNo",
         DbT5910.jusho as "DbT4910_jusho" ,
-        DbT5910."telNo" as "DbT4910_telNo"     
+        DbT5910."telNo" as "DbT4910_telNo"
         FROM
         rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
         LEFT JOIN
@@ -173,7 +173,7 @@
             <if test="地区コードフラグ">
                 AND
                 DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
-            </if>  
+            </if>
             <if test="認定調査員コードFROMフラグ">
                 AND
                 DbT5913."ninteiChosainCode" <![CDATA[>=]]> #{認定調査員コードFROM}
@@ -197,8 +197,12 @@
             <if test="調査員カナフラグ">
                 AND
                 DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
-            </if>   
+            </if>
         </where>
+        ORDER BY
+            DbT5910."shichosonCode" ASC,
+            DbT5910."ninteichosaItakusakiCode" ASC,
+            DbT5913."ninteiChosainCode" ASC
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
@@ -249,11 +253,13 @@
             <if test="地区コードフラグ">
                 AND
                 DbT5910."waritsukeChiku"  LIKE '%'||#{地区コード}||'%'
-            </if>    
+            </if>
         </where>
+        ORDER BY
+            DbT5910."shichosonCode" ASC,
+            DbT5910."ninteichosaItakusakiCode" ASC
         <if test="usesSaidaiHyojiKensu" >
             LIMIT #{saidaiHyojiKensu}
         </if>
     </select>
 </mapper>
-

@@ -89,47 +89,15 @@ public class NinteichosaIraiHandler {
         set依頼区分ドロップダウンリスト();
     }
 
-    private void setRad(RString stateName) {
-        if (DBE2010001StateName.完了のみ登録.getName().equals(stateName)) {
-            div.getRadShoriJyotai().setSelectedKey(KEY_可);
-            div.getRadShoriJyotai().setDisabled(true);
+    /**
+     * 調査依頼完了ボタンの使用可否を設定します。
+     */
+    public void set調査依頼完了ボタン使用可否() {
+        if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_未)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, true);
         } else {
-            RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            div.getRadShoriJyotai().setSelectedKey(config);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
         }
-    }
-
-    private void setButton(RString stateName) {
-        if (DBE2010001StateName.完了のみ登録.getName().equals(stateName)) {
-            div.getBtnJidoWaritsuke().setDisplayNone(true);
-            div.getBtnShudoWaritsuke().setDisplayNone(true);
-        } else {
-            RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
-            if (使用する.equals(認定調査自動割付)) {
-                div.getBtnJidoWaritsuke().setDisabled(false);
-            } else {
-                div.getBtnJidoWaritsuke().setDisabled(true);
-            }
-            RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
-            if (使用する.equals(モバイル調査使用有無)) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, false);
-            } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, true);
-            }
-            if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_未)) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, true);
-            } else {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼完了ボタン, false);
-            }
-        }
-    }
-
-    private void set依頼区分ドロップダウンリスト() {
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (NinteiChousaIraiKubunCode 認定調査依頼区分 : NinteiChousaIraiKubunCode.values()) {
-            dataSource.add(new KeyValueDataSource(認定調査依頼区分.getコード(), 認定調査依頼区分.get名称()));
-        }
-        div.getDdlIraiKubun().setDataSource(dataSource);
     }
 
     /**
@@ -331,6 +299,45 @@ public class NinteichosaIraiHandler {
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
+    }
+
+    private void setRad(RString stateName) {
+        if (DBE2010001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getRadShoriJyotai().setSelectedKey(KEY_可);
+            div.getRadShoriJyotai().setDisabled(true);
+        } else {
+            RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            div.getRadShoriJyotai().setSelectedKey(config);
+        }
+    }
+
+    private void setButton(RString stateName) {
+        if (DBE2010001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getBtnJidoWaritsuke().setDisplayNone(true);
+            div.getBtnShudoWaritsuke().setDisplayNone(true);
+        } else {
+            RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
+            if (使用する.equals(認定調査自動割付)) {
+                div.getBtnJidoWaritsuke().setDisabled(false);
+            } else {
+                div.getBtnJidoWaritsuke().setDisabled(true);
+            }
+            RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
+            if (使用する.equals(モバイル調査使用有無)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, true);
+            }
+            set調査依頼完了ボタン使用可否();
+        }
+    }
+
+    private void set依頼区分ドロップダウンリスト() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (NinteiChousaIraiKubunCode 認定調査依頼区分 : NinteiChousaIraiKubunCode.values()) {
+            dataSource.add(new KeyValueDataSource(認定調査依頼区分.getコード(), 認定調査依頼区分.get名称()));
+        }
+        div.getDdlIraiKubun().setDataSource(dataSource);
     }
 
     private void set件数表示(RString 状態) {
