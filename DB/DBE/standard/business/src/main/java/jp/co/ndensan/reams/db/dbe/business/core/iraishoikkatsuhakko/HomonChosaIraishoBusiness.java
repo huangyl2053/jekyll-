@@ -283,7 +283,9 @@ public class HomonChosaIraishoBusiness {
                 entity.get生年月日(),
                 entity.get住所(),
                 entity.get電話番号(),
-                set提出期限(entity));
+                set提出期限(entity),
+                entity.get証記載保険者番号(),
+                entity.get認定調査委託先コード());
     }
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {
