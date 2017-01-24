@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jan 06 21:16:46 JST 2017 
+ * Tue Jan 24 17:50:38 JST 2017 
  */
 
 
