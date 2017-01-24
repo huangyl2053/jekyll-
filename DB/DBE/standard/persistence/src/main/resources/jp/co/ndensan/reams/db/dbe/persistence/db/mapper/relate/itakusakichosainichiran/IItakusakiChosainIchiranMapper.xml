@@ -76,28 +76,29 @@
                 AND DbT5910."jokyoFlag" = false 
                 AND DbT5913."jokyoFlag" = false
             </if>
+            order by DbT5910."shichosonCode"
             <if test="narabiJunItakusakiCodeFlag">
-                order by DbT5910."ninteichosaItakusakiCode",
+                , DbT5910."ninteichosaItakusakiCode",
                 DbT5913."ninteiChosainCode"
             </if>
             <if test="narabiJunItakusakiCodeName">
-                order by DbT5910."ninteichosaItakusakiCode",
+                , DbT5910."ninteichosaItakusakiCode",
                 DbT5913."chosainShimei"
             </if>
             <if test="narabiJunItakusakiCodeKanaName">
-                order by DbT5910."ninteichosaItakusakiCode",
+                , DbT5910."ninteichosaItakusakiCode",
                 DbT5913."chosainKanaShimei"
             </if>
             <if test="narabiJunChosainCodeFlag">
-                order by DbT5910."jigyoshaMeisho",
+                , DbT5910."jigyoshaMeisho",
                 DbT5913."ninteiChosainCode"
             </if>
             <if test="narabiJunChosainCodeName">
-                order by DbT5910."jigyoshaMeisho",
+                , DbT5910."jigyoshaMeisho",
                 DbT5913."chosainShimei"
             </if>
             <if test="narabiJunChosainCodeKanaName">
-                order by DbT5910."jigyoshaMeisho",
+                , DbT5910."jigyoshaMeisho",
                 DbT5913."chosainKanaShimei"
             </if>
     </select>

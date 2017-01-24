@@ -51,6 +51,8 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
     private static final ReportId REPORT_ID = ReportIdDBE.DBE592001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
             .unmodifiableList(Arrays.asList(new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.listIchiranhyoUpper_1.name())));
+    private static final List<RString> PAGE_BREAK_KEYS_City = Collections
+            .unmodifiableList(Arrays.asList(new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.cityCode.name())));
     private ItakusakiChosainIchiranQueryProcessParemeter paramter;
     @BatchWriter
     private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
@@ -80,6 +82,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
         } else {
             batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
                     .addBreak(new BreakerCatalog<ItakusakiChosainIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                    .addBreak(new BreakerCatalog<ItakusakiChosainIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_City))
                     .create();
         }
         retortWrite = new ReportSourceWriter<>(batchWrite);
@@ -134,7 +137,8 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
     }
 
     private boolean hasBrek(ItakusakiChosainIchiranRelateEntity before, ItakusakiChosainIchiranRelateEntity current) {
-        return !before.getDbT5910_NinteichosaItakusakiCode().equals(current.getDbT5910_NinteichosaItakusakiCode());
+        return (!before.getDbT5910_NinteichosaItakusakiCode().equals(current.getDbT5910_NinteichosaItakusakiCode())
+                || !before.getDbT7051_ShichosonCode().equals(current.getDbT7051_ShichosonCode()));
     }
 
     @Override

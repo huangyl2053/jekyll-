@@ -95,6 +95,7 @@ public class ItakusakiChosainIchiranReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
-        listIchiranhyoUpper_1;
+        listIchiranhyoUpper_1,
+        cityCode;
     }
 }
