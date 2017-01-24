@@ -52,7 +52,10 @@ public class NijihanteiKekkaOutputHandler {
     private final RString 連携ボタン２ = new RString("btnCheck2");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
-    private static final RString 未出力のみ = new RString("key0");
+    private static final RString 未出力のみ = new RString("未出力のみ");
+    private static final RString 出力済みを含む = new RString("出力済みを含む");
+    private static final RString 二次判定日 = new RString("二次判定日");
+    private static final RString 認定申請日 = new RString("認定申請日");
 
     /**
      * コンストラクタです。
@@ -193,7 +196,7 @@ public class NijihanteiKekkaOutputHandler {
         }
 
         RString データ出力有無 = nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey();
-        if (未出力のみ.equals(データ出力有無)) {
+        if (KEY0.equals(データ出力有無)) {
             parameter.setUseMisyutsuryokuNomi(true);
         }
         if (!RString.isNullOrEmpty(被保険者番号)) {
@@ -241,6 +244,22 @@ public class NijihanteiKekkaOutputHandler {
                 = new DBE491001_NichijiShinchokuParameter();
         shinchokuParameter.setShinseishoKanriNoList(shinseishoKanriNo);
         shinchokuParameter.setFayirukuben(new RString("1"));
+        shinchokuParameter.setHokensha(nijidiv.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
+        shinchokuParameter.setHokenshaName(nijidiv.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村名称());
+        if (KEY0.equals(nijidiv.getKensakuJoken().getRadTeishutsuKigen().getSelectedKey())) {
+            shinchokuParameter.setChushutsuHoho(二次判定日);
+        } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadTeishutsuKigen().getSelectedKey())) {
+            shinchokuParameter.setChushutsuHoho(認定申請日);
+        }
+        shinchokuParameter.setChushutsuFromDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getFromValue().toDateString());
+        shinchokuParameter.setChushutsuToDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getToValue().toDateString());
+        shinchokuParameter.setHihokenshaNo(nijidiv.getKensakuJoken().getTxtHihokenshaNo().getValue());
+         if (KEY0.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
+            shinchokuParameter.setDataShutsuryokuUmu(未出力のみ);
+        } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
+            shinchokuParameter.setDataShutsuryokuUmu(出力済みを含む);
+        }
+        shinchokuParameter.setDataShutsuryokuUmu(判定結果ボタン);
         return shinchokuParameter;
     }
 

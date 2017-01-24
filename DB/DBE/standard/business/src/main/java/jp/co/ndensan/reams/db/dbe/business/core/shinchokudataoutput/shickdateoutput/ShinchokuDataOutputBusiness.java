@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShujiiIkensh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ZenKaiChosaItemJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ZenKaiNinteichosaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -457,14 +458,28 @@ public class ShinchokuDataOutputBusiness {
         }
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("抽出期間："));
-        jokenBuilder.append(paramter.getChushutsuFromDate());
-        jokenBuilder.append(new RString("　～　"));
-        jokenBuilder.append(paramter.getChushutsuToDate());
-        出力条件List.add(jokenBuilder.toRString());
-        jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("保険者："));
         jokenBuilder.append(paramter.getHokensha());
+        jokenBuilder.append(new RString(" "));
+        jokenBuilder.append(paramter.getHokenshaName());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("抽出方法："));
+        jokenBuilder.append(paramter.getChushutsuHoho());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("抽出期間："));
+        jokenBuilder.append(dateFormat(paramter.getChushutsuFromDate()));
+        jokenBuilder.append(new RString("　～　"));
+        jokenBuilder.append(dateFormat(paramter.getChushutsuToDate()));
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("被保険者番号："));
+        jokenBuilder.append(paramter.getHihokenshaNo());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("データ出力有無："));
+        jokenBuilder.append(paramter.getDataShutsuryokuUmu());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【被保険者番号リスト】"));
@@ -1796,5 +1811,13 @@ public class ShinchokuDataOutputBusiness {
             return RString.EMPTY;
         }
         return obj;
+    }
+
+    private RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RDate date_tem = new RDate(date.toString());
+        return date_tem.wareki().toDateString();
     }
 }
