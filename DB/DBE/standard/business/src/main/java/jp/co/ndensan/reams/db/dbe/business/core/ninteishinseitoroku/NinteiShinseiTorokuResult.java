@@ -558,7 +558,51 @@ public class NinteiShinseiTorokuResult {
     public Code get性別() {
         return entity.get性別();
     }
+
+    /**
+     * 自動割当除外者区分を取得します。
+     *
+     * @return 自動割当除外者区分
+     */
+    public Code get自動割当除外者区分() {
+        return entity.get自動割当除外者区分();
+    }
+
+    /**
+     * 介護認定審査会優先振分区分コードを取得します。
+     *
+     * @return 介護認定審査会優先振分区分コード
+     */
+    public Code get介護認定審査会優先振分区分コード() {
+        return entity.get介護認定審査会優先振分区分コード();
+    }
+
+    /**
+     * みなし２号等対象フラグを取得します。
+     *
+     * @return みなし２号等対象フラグ
+     */
+    public boolean isみなし２号等対象フラグ() {
+        return entity.isみなし２号等対象フラグ();
+    }
+    
+    /**
+     * ＩＦ送付年月日を取得します。
+     *
+     * @return ＩＦ送付年月日
+     */
+    public FlexibleDate getIF送付年月日() {
+        return entity.getIF送付年月日();
+    }    
+    
+    /**
+     * センター送信年月日を取得します。
+     *
+     * @return センター送信年月日
+     */
+    public FlexibleDate getセンター送信年月日() {
+        return entity.getセンター送信年月日();
+    }    
+    
     
 }
-
-

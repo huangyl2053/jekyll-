@@ -292,6 +292,26 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public DropDownList getDdlShinsakaiYusenKubun() {
+        return this.getTplShinseijoho().getDdlShinsakaiYusenKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlShinsakaiYusenKubun(DropDownList ddlShinsakaiYusenKubun) {
+        this.getTplShinseijoho().setDdlShinsakaiYusenKubun(ddlShinsakaiYusenKubun);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlWariateKubun() {
+        return this.getTplShinseijoho().getDdlWariateKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlWariateKubun(DropDownList ddlWariateKubun) {
+        this.getTplShinseijoho().setDdlWariateKubun(ddlWariateKubun);
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtEnkiKetteiYMD() {
         return this.getTplEnki().getTxtEnkiKetteiYMD();
     }

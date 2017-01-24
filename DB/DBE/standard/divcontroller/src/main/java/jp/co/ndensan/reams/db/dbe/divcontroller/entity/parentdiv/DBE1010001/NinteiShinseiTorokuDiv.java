@@ -940,6 +940,26 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public DropDownList getDdlShinsakaiYusenKubun() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getDdlShinsakaiYusenKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlShinsakaiYusenKubun(DropDownList ddlShinsakaiYusenKubun) {
+        this.getTabShinseishaJoho().getTplShinseijoho().setDdlShinsakaiYusenKubun(ddlShinsakaiYusenKubun);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlWariateKubun() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getDdlWariateKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlWariateKubun(DropDownList ddlWariateKubun) {
+        this.getTabShinseishaJoho().getTplShinseijoho().setDdlWariateKubun(ddlWariateKubun);
+    }
+
+    @JsonIgnore
     public tplEnkiDiv getTplEnki() {
         return this.getTabShinseishaJoho().getTplEnki();
     }

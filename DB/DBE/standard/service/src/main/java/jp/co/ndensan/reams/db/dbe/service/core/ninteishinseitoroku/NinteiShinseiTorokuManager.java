@@ -123,6 +123,51 @@ public class NinteiShinseiTorokuManager {
         }
         return new NinteiShinseiTorokuResult(entity);
     }
+    
+    
+//    @Transaction
+//    public void deleteAllBy申請書管理番号(RString 申請書管理番号) {
+//        INinteiShinseiTorokuMapper mapper = mapperProvider.create(INinteiShinseiTorokuMapper.class);
+//        mapper.deleteDbT5202PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5115PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5116PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5120PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5121PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5122PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5123PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5129PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5130PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5131PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5150PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5190PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5191PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5201PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5203PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5204PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5205PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5206PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5207PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5208PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5209PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5210PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5211PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5212PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5213PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5300PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5301PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5302PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5303PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5304PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5305PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5510PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5590PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5601PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5602PhysicalByShinseishoKanriNo(申請書管理番号);        
+//        mapper.deleteDbT5105PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5102PhysicalByShinseishoKanriNo(申請書管理番号);
+//        mapper.deleteDbT5101PhysicalByShinseishoKanriNo(申請書管理番号);
+//
+//    }
 
     /**
      * 各共有子Divのデータを取得します。
@@ -383,4 +428,4 @@ public class NinteiShinseiTorokuManager {
                 証記載保険者番号, 被保険者番号, 認定申請年月日, 認定申請区分_申請時_コード);
         return null != retList && !retList.isEmpty();
     }
-}
+        }

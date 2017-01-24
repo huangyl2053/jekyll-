@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -49,6 +50,7 @@ public class NinteiShinseiTorokuHandler {
     private static final int ZERO_10 = 10;
     private static final RString ZERO_6 = new RString("000000");
     private static final RString 歳 = new RString("歳");
+    private static final RString みなし２号等対象 = new RString("みなし２号");
 
     /**
      * コンストラクタです。
@@ -70,18 +72,7 @@ public class NinteiShinseiTorokuHandler {
      */
     public void loadUpdate(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号,
             RString 被保険者番号, RString 介護導入形態) {
-//        div.getCcdAtenaInfo().setKaigoDonyuKeitai(介護導入形態);
-//        div.getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(管理番号, ShikibetsuCode.EMPTY);
-//        div.getCcdAtenaInfo().setShoriType(new RString("2"));
-//        div.getCcdAtenaInfo().initialize();
         div.getCcdKaigoNinteiShinseiKihon().initialize();
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.新規申請.getコード(), NinteiShinseiShinseijiKubunCode.新規申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.更新申請.getコード(), NinteiShinseiShinseijiKubunCode.更新申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.区分変更申請.getコード(), NinteiShinseiShinseijiKubunCode.区分変更申請.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.職権.getコード(), NinteiShinseiShinseijiKubunCode.職権.get名称()));
-        dataSource.add(new KeyValueDataSource(NinteiShinseiShinseijiKubunCode.転入申請.getコード(), NinteiShinseiShinseijiKubunCode.転入申請.get名称()));
-        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().setDataSource(dataSource);
         div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
         div.getCcdShinseiSonotaJohoInput().initialize();
         
@@ -157,7 +148,7 @@ public class NinteiShinseiTorokuHandler {
             dataSource.add(new KeyValueDataSource(hihokenshaKubun.getコード(), hihokenshaKubun.get名称()));
         }
         dataSource.remove(new KeyValueDataSource(HihokenshaKubunCode.生活保護.getコード(), HihokenshaKubunCode.生活保護.get名称()));
-        ((KaigoNinteiShinseiKihonJohoInputDiv)div.getCcdKaigoNinteiShinseiKihon()).getDdlHihokenshaKubun().setDataSource(dataSource);
+        ((KaigoNinteiShinseiKihonJohoInputDiv) div.getCcdKaigoNinteiShinseiKihon()).getDdlHihokenshaKubun().setDataSource(dataSource);
         if (!RString.isNullOrEmpty(business.get支所コード())) {
             div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(business.get支所コード()));
         }
@@ -180,7 +171,7 @@ public class NinteiShinseiTorokuHandler {
     }
     
     /**
-     * サービス削除と申請取下の初期化です
+     * パネルの初期化です
      *  
      * @param result 申請情報
      */
@@ -192,6 +183,20 @@ public class NinteiShinseiTorokuHandler {
         }
         div.getTxtTorisageJiyu().setValue(result.get取下理由());
         div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
+        if (result.get認定申請理由() == null || result.get認定申請理由().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().setIsOpen(false);
+        }
+        if (result.get申請サービス削除の理由() == null || result.get申請サービス削除の理由().isEmpty()) {
+            div.getServiceDel().setIsOpen(false);
+        }
+        if (!TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
+            div.getSinseiTorisage().setIsOpen(false);
+        }
+        if (result.isみなし２号等対象フラグ()) {
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setVisible(true);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setValue(みなし２号等対象);
+        }
+        
     }
     
     /**
@@ -249,30 +254,19 @@ public class NinteiShinseiTorokuHandler {
     }
 
     private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
+//        if (result.is旧措置者フラグ()) {
+//            List<RString> keyList = new ArrayList<>();
+//            keyList.add(new RString("key0"));
+//            div.getCcdKaigoNinteiShinseiKihon().setKyuSochisha(keyList);
+//        }
         
-        if (result.get申請日() != null && !result.get申請日().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
-                    result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
-        }
-        if (result.get申請書区分() != null && !ShienShinseiKubun.不明.getコード().equals(result.get申請書区分())) {
-            div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
-        } else {
-            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().clearSelectedItem();
-        }
-        if (result.get認定申請区分申請時コード() != null) {
-            div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分申請時コード().value()));
-        }
-        if (result.get認定申請区分法令コード() != null && !result.get認定申請区分法令コード().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(result.get認定申請区分法令コード().value()));
-        }
-        if (result.get被保険者区分コード() != null && result.get被保険者区分コード().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.toValue(result.get被保険者区分コード()));
-        } 
-        if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
-            div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
-        }
-        div.getCcdKaigoNinteiShinseiKihon().setServiceSakujoTeikeibun(result.get申請サービス削除の理由());
-        div.getCcdKaigoNinteiShinseiKihon().setNinteiShinseRiyuTeikeibun(result.get認定申請理由());
+//        if (result.is資格取得前申請フラグ()) {
+//            List<RString> keyList = new ArrayList<>();
+//            keyList.add(new RString("key0"));
+//            div.getCcdKaigoNinteiShinseiKihon().setChkShikakuShutokuMae(keyList);
+//        }
+        
+        setCcdKaigoNinteiShinseiKihon(result);
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(result.get市町村コード(),
                 管理番号, SubGyomuCode.DBE認定支援,
                 result.get主治医医療機関コード(), result.get医療機関名称(), result.get主治医コード(), result.get主治医氏名());
@@ -333,6 +327,44 @@ public class NinteiShinseiTorokuHandler {
         div.getAtenaInfoToroku().getJusho().setDomain(result.get住所());
         div.getAtenaInfoToroku().getTelNo().setDomain(result.get電話番号());
         
+        setCcdShinseiTodokedesha(result, 管理番号);
+        if (result.get介護認定審査会優先振分区分コード() != null && !result.get介護認定審査会優先振分区分コード().value().isEmpty()) {
+            div.getDdlShinsakaiYusenKubun().setSelectedKey(result.get介護認定審査会優先振分区分コード().value());
+        }
+        if (result.get自動割当除外者区分() != null && !result.get自動割当除外者区分().value().isEmpty()) {
+            div.getDdlWariateKubun().setSelectedKey(result.get自動割当除外者区分().value());        
+        }
+     }
+    
+    
+    
+    private void setCcdKaigoNinteiShinseiKihon(NinteiShinseiTorokuResult result) {
+        if (result.get申請日() != null && !result.get申請日().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().setTxtShinseiYMD(new RDate(result.get申請日().getYearValue(),
+                    result.get申請日().getMonthValue(), result.get申請日().getDayValue()));
+        }
+        if (result.get申請書区分() != null && !ShienShinseiKubun.不明.getコード().equals(result.get申請書区分())) {
+            div.getCcdKaigoNinteiShinseiKihon().setRadShinseishoKubun(result.get申請書区分());
+        } else {
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().clearSelectedItem();
+        }
+        if (result.get認定申請区分申請時コード() != null) {
+            div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(result.get認定申請区分申請時コード().value()));
+        }
+        if (result.get認定申請区分法令コード() != null && !result.get認定申請区分法令コード().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(result.get認定申請区分法令コード().value()));
+        }
+        if (result.get被保険者区分コード() != null && result.get被保険者区分コード().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.toValue(result.get被保険者区分コード()));
+        } 
+        if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
+            div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
+        }
+        div.getCcdKaigoNinteiShinseiKihon().setServiceSakujoTeikeibun(result.get申請サービス削除の理由());
+        div.getCcdKaigoNinteiShinseiKihon().setNinteiShinseRiyuTeikeibun(result.get認定申請理由());
+    }
+    
+    private void setCcdShinseiTodokedesha(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
         NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
         datapass.setカナ氏名(result.get申請届出者氏名カナ());
         if (!RString.isNullOrEmpty(result.get事業者区分()) 
@@ -360,7 +392,7 @@ public class NinteiShinseiTorokuHandler {
         }
         datapass.set申請書管理番号(管理番号.value());
         div.getCcdShinseiTodokedesha().initialize(datapass);
-     }
+    }
     
     private RDate flexibleDateToRDate(FlexibleDate date) {
         if (date == null || FlexibleDate.EMPTY.equals(date)) {
