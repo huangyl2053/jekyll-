@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2410001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinirainaiyoukoshin.KojinIraiNaiyouBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2410001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2410001TransitionEventName;
@@ -13,9 +15,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410001.Koj
 import jp.co.ndensan.reams.db.dbe.service.core.kojinirainaiyoukoshin.KojinIraiNaiyouKoshinFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 個人依頼内容更新(認定調査票・主治医意見書編集)のコントローラです。
@@ -59,5 +65,39 @@ public class KojinIraiNaiyouKoshin {
      */
     public ResponseData<KojinIraiNaiyouKoshinDiv> btn_Back(KojinIraiNaiyouKoshinDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE2410001TransitionEventName.検索へ戻る).respond();
+    }
+    
+    /**
+     * 調査の「依頼書等を印刷する」ボタン押下時
+     * 
+     * @param div KojinIraiNaiyouKoshinDiv
+     * @return ResponseData<KojinIraiNaiyouKoshinDiv>
+     */
+    public ResponseData<KojinIraiNaiyouKoshinDiv> onBeforeOpen_btnChosaPrint(KojinIraiNaiyouKoshinDiv div) {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        申請書管理番号リスト.add(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        model.set申請書管理番号リスト(申請書管理番号リスト);
+        model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
+        model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 意見書の「依頼書等を印刷する」ボタン押下時
+     * 
+     * @param div KojinIraiNaiyouKoshinDiv
+     * @return ResponseData<KojinIraiNaiyouKoshinDiv>
+     */
+    public ResponseData<KojinIraiNaiyouKoshinDiv> onBeforeOpen_btnIkenshoPrint(KojinIraiNaiyouKoshinDiv div) {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        申請書管理番号リスト.add(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        model.set申請書管理番号リスト(申請書管理番号リスト);
+        model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
+        model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
+        return ResponseData.of(div).respond();
     }
 }

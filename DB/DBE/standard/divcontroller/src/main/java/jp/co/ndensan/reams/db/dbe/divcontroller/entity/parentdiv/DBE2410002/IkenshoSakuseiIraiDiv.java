@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
@@ -20,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshoSakuseiIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,10 +31,16 @@ public class IkenshoSakuseiIraiDiv extends Panel {
      */
     @JsonProperty("IkenshoIraiTorokuPanel")
     private IkenshoIraiTorokuPanelDiv IkenshoIraiTorokuPanel;
+    @JsonProperty("IkenshoIraiPrint")
+    private IkenshoIraiPrintDiv IkenshoIraiPrint;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
+    @JsonProperty("KanryoMessage")
+    private KaigoKanryoMessageDiv KanryoMessage;
     @JsonProperty("ikenshoIraiRirekiNo")
     private RString ikenshoIraiRirekiNo;
+    @JsonProperty("hiddenIuputModel")
+    private RString hiddenIuputModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,12 +67,39 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     }
 
     /*
+     * getIkenshoIraiPrint
+     * @return IkenshoIraiPrint
+     */
+    @JsonProperty("IkenshoIraiPrint")
+    public IkenshoIraiPrintDiv getIkenshoIraiPrint() {
+        return IkenshoIraiPrint;
+    }
+
+    /*
+     * setIkenshoIraiPrint
+     * @param IkenshoIraiPrint IkenshoIraiPrint
+     */
+    @JsonProperty("IkenshoIraiPrint")
+    public void setIkenshoIraiPrint(IkenshoIraiPrintDiv IkenshoIraiPrint) {
+        this.IkenshoIraiPrint = IkenshoIraiPrint;
+    }
+
+    /*
      * getccdNinteiShinseishaKihonInfo
      * @return ccdNinteiShinseishaKihonInfo
      */
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return ccdNinteiShinseishaKihonInfo;
+    }
+
+    /*
+     * getKanryoMessage
+     * @return KanryoMessage
+     */
+    @JsonProperty("KanryoMessage")
+    public IKaigoKanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
     }
 
     /*
@@ -83,6 +118,24 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     @JsonProperty("ikenshoIraiRirekiNo")
     public void setIkenshoIraiRirekiNo(RString ikenshoIraiRirekiNo) {
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+    }
+
+    /*
+     * gethiddenIuputModel
+     * @return hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public RString getHiddenIuputModel() {
+        return hiddenIuputModel;
+    }
+
+    /*
+     * sethiddenIuputModel
+     * @param hiddenIuputModel hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public void setHiddenIuputModel(RString hiddenIuputModel) {
+        this.hiddenIuputModel = hiddenIuputModel;
     }
 
     /*
@@ -111,6 +164,16 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiInput() {
         return this.getIkenshoIraiTorokuPanel().getCcdShujiiInput();
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnPrint() {
+        return this.getIkenshoIraiPrint().getBtnPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnPrint(ButtonDialog btnPrint) {
+        this.getIkenshoIraiPrint().setBtnPrint(btnPrint);
     }
 
     // </editor-fold>

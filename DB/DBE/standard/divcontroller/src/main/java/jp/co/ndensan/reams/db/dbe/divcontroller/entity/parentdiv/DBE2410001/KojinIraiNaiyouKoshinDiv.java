@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class KojinIraiNaiyouKoshinDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +31,8 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     private tabKojinIraiNaiyouKoshinDiv tabKojinIraiNaiyouKoshin;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
+    @JsonProperty("hiddenIuputModel")
+    private RString hiddenIuputModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +65,24 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return ccdNinteiShinseishaKihonInfo;
+    }
+
+    /*
+     * gethiddenIuputModel
+     * @return hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public RString getHiddenIuputModel() {
+        return hiddenIuputModel;
+    }
+
+    /*
+     * sethiddenIuputModel
+     * @param hiddenIuputModel hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public void setHiddenIuputModel(RString hiddenIuputModel) {
+        this.hiddenIuputModel = hiddenIuputModel;
     }
 
     /*
@@ -638,6 +659,16 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnChosaPrint() {
+        return this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().getBtnChosaPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaPrint(ButtonDialog btnChosaPrint) {
+        this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().setBtnChosaPrint(btnChosaPrint);
+    }
+
+    @JsonIgnore
     public tblIkenshoDiv getTblIkensho() {
         return this.getTabKojinIraiNaiyouKoshin().getTblIkensho();
     }
@@ -985,6 +1016,16 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     @JsonIgnore
     public void  setTxtIryoKikanDaihyoshaShimeiZen(TextBox txtIryoKikanDaihyoshaShimeiZen) {
         this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getZenkaiShujiiIraiJoho().setTxtIryoKikanDaihyoshaShimeiZen(txtIryoKikanDaihyoshaShimeiZen);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIkenshoPrint() {
+        return this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getBtnIkenshoPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
+        this.getTabKojinIraiNaiyouKoshin().getTblIkensho().setBtnIkenshoPrint(btnIkenshoPrint);
     }
 
     // </editor-fold>

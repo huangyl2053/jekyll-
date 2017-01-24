@@ -16,7 +16,8 @@ public enum DBE2410002StateName implements IStateEnumerations {
 
     NoChange(""),
     主治医意見書作成依頼("主治医意見書作成依頼"),
-    ReadOnly("ReadOnly");
+    ReadOnly("ReadOnly"),
+    Kanryo("Kanryo");
 
     private final RString name;
 

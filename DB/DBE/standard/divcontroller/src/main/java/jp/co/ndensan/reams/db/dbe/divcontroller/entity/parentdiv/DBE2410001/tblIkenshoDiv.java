@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tblIkenshoDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class tblIkenshoDiv extends TabPanel {
     private KonkaiShujiiIraiJohoDiv KonkaiShujiiIraiJoho;
     @JsonProperty("ZenkaiShujiiIraiJoho")
     private ZenkaiShujiiIraiJohoDiv ZenkaiShujiiIraiJoho;
+    @JsonProperty("btnIkenshoPrint")
+    private ButtonDialog btnIkenshoPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,6 +70,24 @@ public class tblIkenshoDiv extends TabPanel {
     @JsonProperty("ZenkaiShujiiIraiJoho")
     public void setZenkaiShujiiIraiJoho(ZenkaiShujiiIraiJohoDiv ZenkaiShujiiIraiJoho) {
         this.ZenkaiShujiiIraiJoho = ZenkaiShujiiIraiJoho;
+    }
+
+    /*
+     * getbtnIkenshoPrint
+     * @return btnIkenshoPrint
+     */
+    @JsonProperty("btnIkenshoPrint")
+    public ButtonDialog getBtnIkenshoPrint() {
+        return btnIkenshoPrint;
+    }
+
+    /*
+     * setbtnIkenshoPrint
+     * @param btnIkenshoPrint btnIkenshoPrint
+     */
+    @JsonProperty("btnIkenshoPrint")
+    public void setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
+        this.btnIkenshoPrint = btnIkenshoPrint;
     }
 
     /*

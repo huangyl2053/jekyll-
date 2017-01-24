@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TokkiJokoSelect のクラスファイル 
+ * IkenshoIraiPrint のクラスファイル 
  * 
  * @author 自動生成
  */
-public class TokkiJokoSelectDiv extends Panel {
+public class IkenshoIraiPrintDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
@@ -21,10 +21,8 @@ public class TokkiJokoSelectDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkTokkiJko")
-    private CheckBoxList chkTokkiJko;
-    @JsonProperty("chkTenyuryoku")
-    private CheckBoxList chkTenyuryoku;
+    @JsonProperty("btnPrint")
+    private ButtonDialog btnPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +31,21 @@ public class TokkiJokoSelectDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkTokkiJko
-     * @return chkTokkiJko
+     * getbtnPrint
+     * @return btnPrint
      */
-    @JsonProperty("chkTokkiJko")
-    public CheckBoxList getChkTokkiJko() {
-        return chkTokkiJko;
+    @JsonProperty("btnPrint")
+    public ButtonDialog getBtnPrint() {
+        return btnPrint;
     }
 
     /*
-     * setchkTokkiJko
-     * @param chkTokkiJko chkTokkiJko
+     * setbtnPrint
+     * @param btnPrint btnPrint
      */
-    @JsonProperty("chkTokkiJko")
-    public void setChkTokkiJko(CheckBoxList chkTokkiJko) {
-        this.chkTokkiJko = chkTokkiJko;
-    }
-
-    /*
-     * getchkTenyuryoku
-     * @return chkTenyuryoku
-     */
-    @JsonProperty("chkTenyuryoku")
-    public CheckBoxList getChkTenyuryoku() {
-        return chkTenyuryoku;
-    }
-
-    /*
-     * setchkTenyuryoku
-     * @param chkTenyuryoku chkTenyuryoku
-     */
-    @JsonProperty("chkTenyuryoku")
-    public void setChkTenyuryoku(CheckBoxList chkTenyuryoku) {
-        this.chkTenyuryoku = chkTenyuryoku;
+    @JsonProperty("btnPrint")
+    public void setBtnPrint(ButtonDialog btnPrint) {
+        this.btnPrint = btnPrint;
     }
 
     // </editor-fold>

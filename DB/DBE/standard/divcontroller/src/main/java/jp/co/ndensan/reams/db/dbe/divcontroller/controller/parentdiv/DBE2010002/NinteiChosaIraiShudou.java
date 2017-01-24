@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2010002;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairaishudou.NinnteiChousairaiShudouBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinse
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002StateName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.NinteiChosaIraiShudouDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouValidationHandler;
@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -52,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査依頼(手動)のコントローラです。
@@ -162,9 +166,13 @@ public class NinteiChosaIraiShudou {
             NinteiShinseiJoho 更新用認定調査依頼情報 = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
                     NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value()));
             ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, 更新用認定調査依頼情報);
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            div.getNinteichosaIraiByHand().setDisabled(true);
+            div.getIraiprintPanel().setDisabled(true);
+            div.getKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE2010002StateName.Kanryo);
         }
-        return ResponseData.of(div).forwardWithEventName(DBE2010002TransitionEventName.個人依頼内容更新に戻る).respond();
+        return ResponseData.of(div).respond();
     }
 
     private void saveData(NinteiChosaIraiShudouDiv div) {
@@ -572,6 +580,23 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnBack(NinteiChosaIraiShudouDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「依頼書等を印刷する」ボタン押下時
+     * 
+     * @param div NinteiChosaIraiShudouDiv
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<NinteiChosaIraiShudouDiv> onBeforeOpen_btnPrint(NinteiChosaIraiShudouDiv div) {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        申請書管理番号リスト.add(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        model.set申請書管理番号リスト(申請書管理番号リスト);
+        model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
+        model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 

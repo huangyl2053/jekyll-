@@ -16,7 +16,8 @@ public enum DBE2010002StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    ReadOnly("ReadOnly");
+    ReadOnly("ReadOnly"),
+    Kanryo("Kanryo");
 
     private final RString name;
 
