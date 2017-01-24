@@ -61,7 +61,8 @@ public class HanteiKekkaJohoShutsuryokuProcessTest extends DbeTestDacBase {
     private static HanteiKekkaJohoShutsuryokuProcessParamter creataKaigoKekkaTaishouIchiranHeadItem() {
         ArrayList<RString> list = new ArrayList<>();
         list.add(new RString("15226400000001981"));
-        return new HanteiKekkaJohoShutsuryokuProcessParamter(list, new RString("20151104"), new RString("20161117"));
+        return new HanteiKekkaJohoShutsuryokuProcessParamter(list, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY
+            ,RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     private static DBE491001_NichijiShinchokuParameter ShinchokuDataOutputProcess() {

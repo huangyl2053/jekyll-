@@ -224,7 +224,23 @@ public class NijihanteiKekkaOutputHandler {
         }
         DBE525002_HanteiKekkaHokenshaParameter hanteibatchParameter
                 = new DBE525002_HanteiKekkaHokenshaParameter();
-        hanteibatchParameter.setShinseishoKanriNo(shinseishoKanriNo);
+        hanteibatchParameter.setShinseishoKanriNoList(shinseishoKanriNo);
+        hanteibatchParameter.setFayirukuben(new RString("1"));
+        hanteibatchParameter.setHokensha(nijidiv.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
+        hanteibatchParameter.setHokenshaName(nijidiv.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村名称());
+        if (KEY0.equals(nijidiv.getKensakuJoken().getRadTeishutsuKigen().getSelectedKey())) {
+            hanteibatchParameter.setChushutsuHoho(二次判定日);
+        } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadTeishutsuKigen().getSelectedKey())) {
+            hanteibatchParameter.setChushutsuHoho(認定申請日);
+        }
+        hanteibatchParameter.setChushutsuFromDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getFromValue().toDateString());
+        hanteibatchParameter.setChushutsuToDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getToValue().toDateString());
+        hanteibatchParameter.setHihokenshaNo(nijidiv.getKensakuJoken().getTxtHihokenshaNo().getValue());
+         if (KEY0.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
+            hanteibatchParameter.setDataShutsuryokuUmu(未出力のみ);
+        } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
+            hanteibatchParameter.setDataShutsuryokuUmu(出力済みを含む);
+        }
         return hanteibatchParameter;
     }
 
@@ -259,7 +275,6 @@ public class NijihanteiKekkaOutputHandler {
         } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
             shinchokuParameter.setDataShutsuryokuUmu(出力済みを含む);
         }
-        shinchokuParameter.setDataShutsuryokuUmu(判定結果ボタン);
         return shinchokuParameter;
     }
 

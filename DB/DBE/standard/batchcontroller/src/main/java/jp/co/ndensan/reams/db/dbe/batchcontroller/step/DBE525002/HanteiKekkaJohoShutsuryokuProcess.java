@@ -51,6 +51,11 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
     private static final ReportId REPORT_ID = ReportIdDBE.DBE525005.getReportId();
     private static final RString 改ページ = new RString("shichosonName");
     private static final RString なし = new RString("なし");
+    private static final RString 検索条件_進捗情報コード = new RString("0");
+    private static final RString 検索条件_結果情報コード = new RString("1");
+    private static final RString 検索条件_進捗情報 = new RString("進捗情報");
+    private static final RString 検索条件_結果情報 = new RString("結果情報");
+    private static final int 被保険者番号_改行個数 = 16;
     private List<RString> page_break_keys;
     private KaigoKekkaTaishouIchiranHeadItem headItem;
     private KaigoKekkaTaishouIchiranBodyItem bodyItem;
@@ -96,8 +101,9 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
 
         headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
                 entity.getShichosonMeisho(),
-                processPrm.getNijiHanteiYMDFrom(),
-                processPrm.getNijiHanteiYMDTo(),
+                processPrm.getChushutsuHoho(),
+                processPrm.getChushutsuFromDate(),
+                processPrm.getChushutsuToDate(),
                 RDate.getNowDate().toDateString(),
                 index);
         KaigoKekkaTaishouIchiranReport report = KaigoKekkaTaishouIchiranReport.createFrom(headItem, bodyItem);
@@ -148,8 +154,65 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
     }
 
     private List<RString> get出力条件() {
-        List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(processPrm.getNijiHanteiYMDFrom());
-        return 出力条件;
+        RStringBuilder jokenBuilder;
+        List<RString> 出力条件List = new ArrayList<>();
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("ファイル区分："));
+        if (processPrm.getFayirukuben().equals(検索条件_進捗情報コード)) {
+            jokenBuilder.append(検索条件_進捗情報);
+        } else if (processPrm.getFayirukuben().equals(検索条件_結果情報コード)) {
+            jokenBuilder.append(検索条件_結果情報);
+        }
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("保険者："));
+        jokenBuilder.append(processPrm.getHokensha());
+        jokenBuilder.append(new RString(" "));
+        jokenBuilder.append(processPrm.getHokenshaName());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("抽出方法："));
+        jokenBuilder.append(processPrm.getChushutsuHoho());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("抽出期間："));
+        jokenBuilder.append(dateFormat(processPrm.getChushutsuFromDate()));
+        jokenBuilder.append(new RString("　～　"));
+        jokenBuilder.append(dateFormat(processPrm.getChushutsuToDate()));
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("被保険者番号："));
+        jokenBuilder.append(processPrm.getHihokenshaNo());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("データ出力有無："));
+        jokenBuilder.append(processPrm.getDataShutsuryokuUmu());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("【被保険者番号リスト】"));
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        int count = 0;
+        for (RString hihokenshaNo : processPrm.getShinseishoKanriNoList()) {
+            jokenBuilder.append(hihokenshaNo);
+            jokenBuilder.append(new RString(","));
+            count++;
+            if (被保険者番号_改行個数 == count) {
+                出力条件List.add(jokenBuilder.toRString());
+                jokenBuilder = new RStringBuilder();
+                count = 0;
+            }
+        }
+        jokenBuilder.delete(jokenBuilder.length() - 1, jokenBuilder.length());
+        出力条件List.add(jokenBuilder.toRString());
+        return 出力条件List;
+    }
+    
+    private RString dateFormat(RString date) {
+        if (RString.isNullOrEmpty(date)) {
+            return RString.EMPTY;
+        }
+        RDate date_tem = new RDate(date.toString());
+        return date_tem.wareki().toDateString();
     }
 }

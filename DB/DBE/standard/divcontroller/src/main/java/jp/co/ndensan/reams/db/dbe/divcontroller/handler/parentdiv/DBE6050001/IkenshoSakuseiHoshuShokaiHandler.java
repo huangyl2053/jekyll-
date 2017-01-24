@@ -151,7 +151,8 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
         RString 保険者 = div.getCcdHokensya().getSelectedItem().get市町村コード().value();
-        return new DBE601004_IkenshosakuseiHoshuParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, 保険者, keyJohoList);
+        RString 保険者名称 = div.getCcdHokensya().getSelectedItem().get市町村名称();
+        return new DBE601004_IkenshosakuseiHoshuParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, 保険者, 保険者名称, keyJohoList);
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {

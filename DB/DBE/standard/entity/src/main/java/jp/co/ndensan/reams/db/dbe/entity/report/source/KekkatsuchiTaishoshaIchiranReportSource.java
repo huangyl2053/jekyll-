@@ -25,35 +25,37 @@ public class KekkatsuchiTaishoshaIchiranReportSource implements IReportSource {
     public RString title;
     @ReportItem(name = "shichosonName", length = 20, order = 2)
     public RString shichosonName;
-    @ReportItem(name = "chushutsuKikan", length = 19, order = 3)
+    @ReportItem(name = "chushutsuHoho", length = 6, order = 3)
+    public RString chushutsuHoho;
+    @ReportItem(name = "chushutsuKikan", length = 19, order = 4)
     public RString chushutsuKikan;
-    @ReportItem(name = "printTimeStamp", length = 34, order = 4)
+    @ReportItem(name = "printTimeStamp", length = 34, order = 5)
     public RString printTimeStamp;
-    @ReportItem(name = "listKekkatsuchi_1", length = 3, order = 5)
+    @ReportItem(name = "listKekkatsuchi_1", length = 3, order = 6)
     public RString listKekkatsuchi_1;
-    @ReportItem(name = "listKekkatsuchi_2", length = 5, order = 6)
+    @ReportItem(name = "listKekkatsuchi_2", length = 10, order = 7)
     public RString listKekkatsuchi_2;
-    @ReportItem(name = "listKekkatsuchi_3", length = 9, order = 7)
+    @ReportItem(name = "listKekkatsuchi_3", length = 9, order = 8)
     public RString listKekkatsuchi_3;
-    @ReportItem(name = "listKekkatsuchi_4", length = 9, order = 8)
+    @ReportItem(name = "listKekkatsuchi_4", length = 9, order = 9)
     public RString listKekkatsuchi_4;
-    @ReportItem(name = "listKekkatsuchi_5", length = 10, order = 9)
+    @ReportItem(name = "listKekkatsuchi_5", length = 10, order = 10)
     public RString listKekkatsuchi_5;
-    @ReportItem(name = "listKekkatsuchi_6", length = 30, order = 10)
+    @ReportItem(name = "listKekkatsuchi_6", length = 30, order = 11)
     public RString listKekkatsuchi_6;
-    @ReportItem(name = "listKekkatsuchi_7", length = 30, order = 11)
+    @ReportItem(name = "listKekkatsuchi_7", length = 30, order = 12)
     public RString listKekkatsuchi_7;
-    @ReportItem(name = "listKekkatsuchi_8", length = 9, order = 12)
+    @ReportItem(name = "listKekkatsuchi_8", length = 9, order = 13)
     public RString listKekkatsuchi_8;
-    @ReportItem(name = "listKekkatsuchi_9", length = 1, order = 13)
+    @ReportItem(name = "listKekkatsuchi_9", length = 1, order = 14)
     public RString listKekkatsuchi_9;
-    @ReportItem(name = "listKekkatsuchi_10", length = 4, order = 14)
+    @ReportItem(name = "listKekkatsuchi_10", length = 4, order = 15)
     public RString listKekkatsuchi_10;
-    @ReportItem(name = "gokeiLabel", length = 3, order = 15)
+    @ReportItem(name = "gokeiLabel", length = 3, order = 16)
     public RString gokeiLabel;
-    @ReportItem(name = "gokei", length = 3, order = 16)
+    @ReportItem(name = "gokei", length = 3, order = 17)
     public RString gokei;
-    @ReportItem(name = "kenLabel", length = 1, order = 17)
+    @ReportItem(name = "kenLabel", length = 1, order = 18)
     public RString kenLabel;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

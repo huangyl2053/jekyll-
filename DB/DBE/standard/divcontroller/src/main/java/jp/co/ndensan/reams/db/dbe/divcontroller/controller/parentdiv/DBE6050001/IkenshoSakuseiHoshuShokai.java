@@ -94,7 +94,8 @@ public class IkenshoSakuseiHoshuShokai {
         IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createParameterForGetCount(
                 作成依頼日開始, 
                 作成依頼日終了, 
-                div.getCcdHokensya().getSelectedItem().get市町村コード().value());
+                div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
+                div.getCcdHokensya().getSelectedItem().get市町村名称());
         IkenshoHoshuShokaiFinder finder = IkenshoHoshuShokaiFinder.createInstance();
         int 総件数 = finder.getCount(paramter);
         
@@ -109,6 +110,7 @@ public class IkenshoSakuseiHoshuShokai {
                 作成依頼日開始, 
                 作成依頼日終了, 
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
+                div.getCcdHokensya().getSelectedItem().get市町村名称(),
                 最大表示件数);
         getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records(), 総件数);
         

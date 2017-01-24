@@ -25,6 +25,7 @@ class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranE
     private final KaigoKekkaTaishouIchiranHeadItem item;
 
     private static final RString KARA = new RString("～");
+    private static final RString コロン = new RString(":");
 
     /**
      * インスタンスを生成します。
@@ -60,6 +61,10 @@ class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranE
         source.printTimeStamp = systemDateTime.toRString();
 
         source.title = new RString("要介護認定結果通知書対象者一覧表");
+        RStringBuilder chushutsuHohoBuilder = new RStringBuilder();
+        chushutsuHohoBuilder.append(item.getChushutsuHoho());
+        chushutsuHohoBuilder.append(コロン);
+        source.chushutsuHoho = chushutsuHohoBuilder.toRString();
         RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
         if (!RString.isNullOrEmpty(item.getChushutsuKikanFrom())) {
             iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanFrom().toString()).wareki().toDateString());
