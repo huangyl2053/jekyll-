@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
@@ -145,12 +144,7 @@ public class IchijiHanteiKekkaJohoHandler {
         }
         div.getDdlChosahyoJiritsudoCode().setDataSource(chosahyoJiritsudoSource);
         div.getDdlChosahyoJiritsudoCode().setSelectedIndex(0);
-
-        List<KeyValueDataSource> ikenshoJiritsudoSource = new ArrayList<>();
-        for (ShogaiNichijoSeikatsuJiritsudoCode code : ShogaiNichijoSeikatsuJiritsudoCode.values()) {
-            ikenshoJiritsudoSource.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-        }
-        div.getDdlIkenshoJiritsudoCode().setDataSource(ikenshoJiritsudoSource);
+        div.getDdlIkenshoJiritsudoCode().setDataSource(chosahyoJiritsudoSource);
         div.getDdlIkenshoJiritsudoCode().setSelectedIndex(0);
 
         List<KeyValueDataSource> anteiseiSource = new ArrayList<>();
@@ -287,7 +281,7 @@ public class IchijiHanteiKekkaJohoHandler {
             div.getDdlJyotaiAnteisei().setSelectedKey(JotaiAnteiseiCode.toValue(jotaiAnteiseiCodeValue).getコード());
         }
 
-        Code suiteiKyufuKubunCode = hanteiKekka.get要介護認定状態の安定性コード();
+        Code suiteiKyufuKubunCode = hanteiKekka.get認知機能及び状態安定性から推定される給付区分コード();
         RString suiteiKyufuKubunCodeValue = suiteiKyufuKubunCode == null ? RString.EMPTY : suiteiKyufuKubunCode.value();
         if (!suiteiKyufuKubunCodeValue.isEmpty()) {
             div.getDdlKyufuKbn().setSelectedKey(SuiteiKyufuKubunCode.toValue(suiteiKyufuKubunCodeValue).getコード());
