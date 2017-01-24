@@ -1189,8 +1189,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         前回連番Map.get(NinteichosaKomokuMapping09B.モニター測定.getコード()),
                         前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
                         前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
-                        NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称(),
-                        ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称()
+                        ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
+                        NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
                 ));
             }
         }

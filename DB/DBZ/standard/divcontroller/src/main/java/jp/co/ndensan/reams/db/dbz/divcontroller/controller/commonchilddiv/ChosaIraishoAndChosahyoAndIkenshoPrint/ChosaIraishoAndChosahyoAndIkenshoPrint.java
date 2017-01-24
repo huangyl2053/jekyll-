@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoBuild
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrintDiv;
@@ -30,7 +31,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -151,8 +152,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnModoru(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
-            RealInitialLocker.release(new LockingKey(排他キー));
-            return ResponseData.of(div).dialogOKClose();
+        RealInitialLocker.release(new LockingKey(排他キー));
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**
@@ -182,15 +183,24 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @param div ChosaIraishoAndChosahyoAndIkenshoPrintDiv
      * @return ResponseData<SourceDataCollection>
      */
-    public ResponseData<SourceDataCollection> onClick_btnPrint(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+    public ResponseData onClick_btnPrint(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         try (ReportManager reportManager = new ReportManager()) {
             printData(div, reportManager);
             response.data = reportManager.publish();
         }
-        updateData(div);
-        RealInitialLocker.release(new LockingKey(排他キー));
-        return response;
+        if (response.data.iterator().hasNext()) {
+            updateData(div);
+            RealInitialLocker.release(new LockingKey(排他キー));
+
+            ViewStateHolder.put(ViewStateKeys.帳票制御共通, new RString("成功"));
+            return response;
+        } else {
+            RealInitialLocker.release(new LockingKey(排他キー));
+
+            ViewStateHolder.put(ViewStateKeys.帳票制御共通, new RString("失敗"));
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -200,6 +210,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return レスポンスデータ
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnPrintKanryo(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
+        if (!ResponseHolder.isReRequest() && new RString("失敗").equals(ViewStateHolder.get(ViewStateKeys.帳票制御共通, RString.class))) {
+            return ResponseData.of(div).addMessage(new InformationMessage(DbzErrorMessages.実行不可.getMessage().replace("ページ数が０の", "印刷").getCode(),
+                    DbzErrorMessages.実行不可.getMessage().replace("ページ数が０の", "印刷").evaluate())).respond();
+        }
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (model != null) {
             RString 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
@@ -278,8 +292,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             if (KEY0.equals(radJyushinKikan)) {
                 shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信期間区分(new Code(KEY1));
                 shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信日(new FlexibleDate(div.getShindanMeirei().getTxtJyushinymd().getValue().toDateString()));
-                RString 受信時分 = new RString(String.format("%02d",div.getShindanMeirei().getTxtJushinTime().getValue().getHour())
-                    + String.format("%02d",div.getShindanMeirei().getTxtJushinTime().getValue().getMinute()));
+                RString 受信時分 = new RString(String.format("%02d", div.getShindanMeirei().getTxtJushinTime().getValue().getHour())
+                        + String.format("%02d", div.getShindanMeirei().getTxtJushinTime().getValue().getMinute()));
                 shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信時分(受信時分);
             } else {
                 shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set受信期間区分(new Code(KEY2));
