@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -85,6 +86,7 @@ public class NinteichosaIrai {
 
     private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString UIコンテナID_DBEUC22001 = new RString("DBEUC22001");
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
@@ -93,7 +95,7 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onLoad(NinteichosaIraiDiv requestDiv) {
-        getHandler(requestDiv).onLoad();
+        getHandler(requestDiv).onLoad(ResponseHolder.getState());
         ViewStateHolder.put(ViewStateKeys.状態, requestDiv.getRadShoriJyotai().getSelectedKey());
         return ResponseData.of(requestDiv).respond();
     }
@@ -522,8 +524,14 @@ public class NinteichosaIrai {
      * @return ResponseData
      */
     public ResponseData onClick_btnContinue(NinteichosaIraiDiv requestDiv) {
-        getHandler(requestDiv).onLoad();
-        return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        DBE2010001StateName stateName;
+        if (UIコンテナID_DBEUC22001.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
+            stateName = DBE2010001StateName.完了のみ登録;
+        } else {
+            stateName = DBE2010001StateName.登録;
+        }
+        getHandler(requestDiv).onLoad(stateName.getName());
+        return ResponseData.of(requestDiv).setState(stateName);
     }
 
     /**
@@ -665,10 +673,5 @@ public class NinteichosaIrai {
 
     private NinteichosaIraiValidationHandler getValidationHandler(NinteichosaIraiDiv div) {
         return new NinteichosaIraiValidationHandler(div);
-    }
-
-    private enum viewstateKeys {
-
-        選択値;
     }
 }

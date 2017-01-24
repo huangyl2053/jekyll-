@@ -25,6 +25,30 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2200001",
+     "layoutTitle": "認定調査依頼",
+     "eventName": "基本運用へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2010001",
+     "toLayoutTitle": "基本運用・認定調査依頼",
+     "toState": "完了のみ登録"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2010001",
+     "layoutTitle": "基本運用・認定調査依頼",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }
