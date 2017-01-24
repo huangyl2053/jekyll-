@@ -334,9 +334,18 @@ public class NinteiShinseiTorokuHandler {
         if (result.get自動割当除外者区分() != null && !result.get自動割当除外者区分().value().isEmpty()) {
             div.getDdlWariateKubun().setSelectedKey(result.get自動割当除外者区分().value());        
         }
+        
+        if (result.is情報提供フラグ()) {
+            List<RString> keys = new ArrayList<>();
+            keys.add(new RString("key0"));
+            div.getChkJohoTeikyoDoi().setSelectedItemsByKey(keys);
+        }
+        if (result.is認定延期通知発行しないことに対する同意有無フラグ()) {
+            List<RString> keys = new ArrayList<>();
+            keys.add(new RString("key0"));
+            div.getChkNinteiTsuchishoDoi().setSelectedItemsByKey(keys);
+        }
      }
-    
-    
     
     private void setCcdKaigoNinteiShinseiKihon(NinteiShinseiTorokuResult result) {
         if (result.get申請日() != null && !result.get申請日().isEmpty()) {
@@ -354,7 +363,7 @@ public class NinteiShinseiTorokuHandler {
         if (result.get認定申請区分法令コード() != null && !result.get認定申請区分法令コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(result.get認定申請区分法令コード().value()));
         }
-        if (result.get被保険者区分コード() != null && result.get被保険者区分コード().isEmpty()) {
+        if (result.get被保険者区分コード() != null && !result.get被保険者区分コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.toValue(result.get被保険者区分コード()));
         } 
         if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {

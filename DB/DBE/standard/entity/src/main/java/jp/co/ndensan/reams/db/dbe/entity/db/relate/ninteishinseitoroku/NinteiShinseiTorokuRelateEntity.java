@@ -109,6 +109,8 @@ public class NinteiShinseiTorokuRelateEntity {
     private Code 介護認定審査会優先振分区分コード;
     private Code 自動割当除外者区分;
     private boolean みなし２号等対象フラグ;
+    private boolean 情報提供フラグ;
+    private boolean 認定延期通知発行しないことに対する同意有無フラグ;
     private FlexibleDate  IF送付年月日;
     private FlexibleDate  センター送信年月日;
 }

@@ -8,17 +8,20 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteishinseitoroku;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinJogaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.RirekiJohoResult;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5123NinteiKeikakuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5590ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinseitoroku.INinteiShinseiTorokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJoho;
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
@@ -68,6 +72,8 @@ public class NinteiShinseiTorokuManager {
     private final DbT5121ShinseiRirekiJohoDac dbt5121Dac;
     private final DbT1008IryohokenKanyuJokyoDac dbt1008Dac;
     private final DbT5120ShinseitodokedeJohoDac dbt5120Dac;
+    private final DbT5123NinteiKeikakuJohoDac dbt5123Dac;
+    private final DbT5102NinteiKekkaJohoDac dbt5102Dac;
 
     /**
      * コンストラクタです。
@@ -80,6 +86,8 @@ public class NinteiShinseiTorokuManager {
         this.dbt5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
         this.dbt1008Dac = InstanceProvider.create(DbT1008IryohokenKanyuJokyoDac.class);
         this.dbt5120Dac = InstanceProvider.create(DbT5120ShinseitodokedeJohoDac.class);
+        this.dbt5123Dac = InstanceProvider.create(DbT5123NinteiKeikakuJohoDac.class);
+        this.dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
     }
 
     /**
@@ -90,7 +98,8 @@ public class NinteiShinseiTorokuManager {
     NinteiShinseiTorokuManager(MapperProvider mapperProvider, DbT5150RenrakusakiJohoDac dbt5150Dac,
             DbT5590ShinsakaiIinJogaiJohoDac dbt5590Dac, DbT5101NinteiShinseiJohoDac dbt5101Dac,
             DbT5121ShinseiRirekiJohoDac dbt5121Dac, DbT1008IryohokenKanyuJokyoDac dbt1008Dac,
-            DbT5120ShinseitodokedeJohoDac dbt5120Dac) {
+            DbT5120ShinseitodokedeJohoDac dbt5120Dac, DbT5102NinteiKekkaJohoDac dbt5102Dac,
+            DbT5123NinteiKeikakuJohoDac dbt5123Dac) {
         this.mapperProvider = mapperProvider;
         this.dbt5150Dac = dbt5150Dac;
         this.dbt5590Dac = dbt5590Dac;
@@ -98,6 +107,8 @@ public class NinteiShinseiTorokuManager {
         this.dbt5121Dac = dbt5121Dac;
         this.dbt1008Dac = dbt1008Dac;
         this.dbt5120Dac = dbt5120Dac;
+        this.dbt5123Dac = dbt5123Dac;
+        this.dbt5102Dac = dbt5102Dac;
     }
 
     /**
@@ -372,6 +383,28 @@ public class NinteiShinseiTorokuManager {
             return false;
         }
         return 1 == dbt5121Dac.save(申請履歴情報.toEntity());
+    }
+
+    /**
+     * 認定結果情報{@link NinteiKekkaJoho}を保存します。
+     *
+     * @param 認定結果情報 {@link NinteiKekkaJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save認定結果情報(NinteiKekkaJoho 認定結果情報) {
+        return 1 == dbt5102Dac.save(認定結果情報.toEntity());
+    }
+    
+    /**
+     * 申請計画情報{@link NinteiKeikakuJoho}を保存します。
+     *
+     * @param 申請計画情報 {@link NinteiKeikakuJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save申請計画情報(NinteiKeikakuJoho 申請計画情報) {
+        return 1 == dbt5123Dac.save(申請計画情報.toEntity());
     }
 
     /**

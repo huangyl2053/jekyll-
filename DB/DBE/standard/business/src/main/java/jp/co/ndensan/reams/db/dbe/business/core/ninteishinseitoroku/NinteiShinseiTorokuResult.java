@@ -604,5 +604,23 @@ public class NinteiShinseiTorokuResult {
         return entity.getセンター送信年月日();
     }    
     
+    /**
+     * 認定延期通知発行しないことに対する同意有無を取得します。
+     *
+     * @return 認定延期通知発行しないことに対する同意有無フラグ
+     */
+    public boolean is認定延期通知発行しないことに対する同意有無フラグ() {
+        return entity.is認定延期通知発行しないことに対する同意有無フラグ();
+    }    
+    
+    /**
+     * セ情報提供フラグを取得します。
+     *
+     * @return 情報提供フラグ
+     */
+    public boolean is情報提供フラグ() {
+        return entity.is情報提供フラグ();
+    }    
+    
     
 }
