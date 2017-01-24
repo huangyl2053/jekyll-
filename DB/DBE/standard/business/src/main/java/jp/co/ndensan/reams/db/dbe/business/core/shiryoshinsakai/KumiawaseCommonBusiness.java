@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
+import com.sun.xml.ws.security.opt.api.reference.DirectReference;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
@@ -16,6 +17,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiry
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -59,6 +62,7 @@ public class KumiawaseCommonBusiness {
     public void setImageFilePath(ShinseishoKanriNo shinseishoKanriNo) {
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiShiryoCommonEntityList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
+                Directory.createDirectories(imageFilePath);
                 imageFilePath = copySharedFiles(entity.getImageSharedFileId(),
                         entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo()));
                 break;
@@ -244,7 +248,8 @@ public class KumiawaseCommonBusiness {
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchImageFolderPath);
+            RString localCopyPath = Directory.createDirectories(Path.combinePath(batchImageFolderPath, sharedFileName));
+            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, localCopyPath);
         } catch (Exception e) {
             return RString.EMPTY;
         }
