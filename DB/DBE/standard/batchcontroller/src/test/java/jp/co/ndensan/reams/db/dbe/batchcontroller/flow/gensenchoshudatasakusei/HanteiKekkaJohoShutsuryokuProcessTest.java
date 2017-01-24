@@ -68,7 +68,8 @@ public class HanteiKekkaJohoShutsuryokuProcessTest extends DbeTestDacBase {
         ArrayList<RString> list = new ArrayList<>();
         list.add(new RString("15226400000001981"));
 
-        return new DBE491001_NichijiShinchokuParameter(list, new RString("1"), RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        return new DBE491001_NichijiShinchokuParameter(list, new RString("1"), RString.EMPTY, RString.EMPTY, RString.EMPTY,RString.EMPTY,
+            RString.EMPTY,RString.EMPTY,RString.EMPTY);
     }
 
 }
