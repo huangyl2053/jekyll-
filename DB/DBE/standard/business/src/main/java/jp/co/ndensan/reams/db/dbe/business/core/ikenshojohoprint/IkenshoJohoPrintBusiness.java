@@ -27,8 +27,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoJohoPrintBusiness {
 
-    private int indexTmp;
-    private int index;
     private ShijiiIkenshoIraiHenko shijiiIkenshoIraiHenko;
 
     /**
@@ -62,46 +60,28 @@ public class IkenshoJohoPrintBusiness {
      *
      * @param before IkenshoJohoPrintRelateEntity
      * @param entity IkenshoJohoPrintRelateEntity
-     * @param count 件数
+     * @param 変更回数 変更回数
      * @return ShijiiIkenshoIraiHenko
      */
-    public ShijiiIkenshoIraiHenko toShijiiIkenshoIraiHenko(IkenshoJohoPrintRelateEntity before, IkenshoJohoPrintRelateEntity entity, int count) {
-        if (before == null) {
-            return null;
-        }
-        index++;
-        if (before.getShinseishoKanriNo().equals(entity.getShinseishoKanriNo())) {
-            if (entity.getIkenshoIraiRirekiNo() > 1) {
-                indexTmp++;
-                shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
-                shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
-                shijiiIkenshoIraiHenko.set保険者名(entity.getShichosonMeisho());
-                shijiiIkenshoIraiHenko.set氏名(entity.getHihokenshaName());
-                shijiiIkenshoIraiHenko.set被保険者番号(entity.getHihokenshaNo());
-                shijiiIkenshoIraiHenko.set生年月日(entity.getSeinengappiYMD());
-                shijiiIkenshoIraiHenko.set性別(entity.getSeibetsu().getColumnValue());
-                shijiiIkenshoIraiHenko.set認定申請年月日(entity.getNinteiShinseiYMD());
-                Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
-                shijiiIkenshoIraiHenko.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.getColumnValue());
-                int 変更回数 = indexTmp - 1 <= 0 ? 0 : indexTmp - 1;
-                shijiiIkenshoIraiHenko.set変更回数(new RString(変更回数));
-                shijiiIkenshoIraiHenko.set変更前医療機関(before.getIryoKikanMeisho());
-                shijiiIkenshoIraiHenko.set変更前主治医(before.getShujiiName());
-                shijiiIkenshoIraiHenko.set変更後医療機関(entity.getIryoKikanMeisho());
-                shijiiIkenshoIraiHenko.set変更後主治医(entity.getShujiiName());
-                shijiiIkenshoIraiHenko.set変更日(entity.getIkenshoSakuseiIraiYMD());
-            }
-            if (index == count && indexTmp > 0) {
-                indexTmp = 0;
-                return shijiiIkenshoIraiHenko;
-            }
-        } else {
-            if (indexTmp > 0) {
-                indexTmp = 0;
-                return shijiiIkenshoIraiHenko;
-            }
-        }
-        return null;
+    public ShijiiIkenshoIraiHenko toShijiiIkenshoIraiHenko(IkenshoJohoPrintRelateEntity before,
+            IkenshoJohoPrintRelateEntity entity, int 変更回数) {
+        shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
+        shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
+        shijiiIkenshoIraiHenko.set保険者名(entity.getShichosonMeisho());
+        shijiiIkenshoIraiHenko.set氏名(entity.getHihokenshaName());
+        shijiiIkenshoIraiHenko.set被保険者番号(entity.getHihokenshaNo());
+        shijiiIkenshoIraiHenko.set生年月日(entity.getSeinengappiYMD());
+        shijiiIkenshoIraiHenko.set性別(entity.getSeibetsu().getColumnValue());
+        shijiiIkenshoIraiHenko.set認定申請年月日(entity.getNinteiShinseiYMD());
+        Code 認定申請区分 = entity.getNinteiShinseiShinseijiKubunCode();
+        shijiiIkenshoIraiHenko.set認定申請区分申請時コード(認定申請区分 == null ? RString.EMPTY : 認定申請区分.value());
+        shijiiIkenshoIraiHenko.set変更回数(new RString(変更回数));
+        shijiiIkenshoIraiHenko.set変更前医療機関(before.getIryoKikanMeisho());
+        shijiiIkenshoIraiHenko.set変更前主治医(before.getShujiiName());
+        shijiiIkenshoIraiHenko.set変更後医療機関(entity.getIryoKikanMeisho());
+        shijiiIkenshoIraiHenko.set変更後主治医(entity.getShujiiName());
+        shijiiIkenshoIraiHenko.set変更日(entity.getIkenshoSakuseiIraiYMD());
+        return shijiiIkenshoIraiHenko;
     }
 
     /**
