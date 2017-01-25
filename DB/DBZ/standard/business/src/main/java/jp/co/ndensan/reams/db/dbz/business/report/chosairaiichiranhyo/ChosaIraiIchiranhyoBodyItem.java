@@ -145,8 +145,8 @@ public class ChosaIraiIchiranhyoBodyItem {
         this.listIchiranhyo_10 = listIchiranhyo_10;
         this.listIchiranhyo_11 = listIchiranhyo_11;
         this.listIchiranhyo_12 = listIchiranhyo_12;
-        this.shichosonCode = null;
-        this.chosaItakusakiCode = null;
+        this.shichosonCode = RString.EMPTY;
+        this.chosaItakusakiCode = RString.EMPTY;
     }
 
     /**

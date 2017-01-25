@@ -78,7 +78,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                 new FlexibleDate(processParamter.getHakkobi()),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                 iraishoReportSourceWriter);
-        文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, 帳票ID, FlexibleDate.getNowDate());
+        文書番号 = processParamter.get文書番号();
     }
 
     @Override
