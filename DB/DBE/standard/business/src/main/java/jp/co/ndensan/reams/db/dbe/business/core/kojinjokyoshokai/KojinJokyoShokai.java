@@ -143,8 +143,17 @@ public class KojinJokyoShokai {
      *
      * @return 主治医意見書作成依頼履歴番号
      */
-    public RString get主治医意見書作成依頼履歴番号() {
+    public int get主治医意見書作成依頼履歴番号() {
         return entity.getIkenshoIraiRirekiNo();
+    }
+    
+    /**
+     * 主治医意見書作成依頼年月日を返します。
+     *
+     * @return 主治医意見書作成依頼年月日
+     */
+    public FlexibleDate get主治医意見書作成依頼年月日() {
+        return entity.getIkenshoSakuseiIraiYMD();
     }
 
     /**
@@ -154,6 +163,15 @@ public class KojinJokyoShokai {
      */
     public int get認定調査依頼履歴番号() {
         return entity.getNinteichosaIraiRirekiNo();
+    }
+
+    /**
+     * 認定調査依頼年月日を返します。
+     *
+     * @return 認定調査依頼年月日
+     */
+    public FlexibleDate get認定調査依頼年月日() {
+        return entity.getNinteichosaIraiYMD();
     }
 
     /**
@@ -1443,5 +1461,32 @@ public class KojinJokyoShokai {
      */
     public RString get一次判定警告コード() {
         return entity.getIchijiHnateiKeikokuCode();
+    }
+    
+    /**
+     * 取下区分コードを返します。
+     *
+     * @return 取下区分コード
+     */
+    public Code get取下区分コード() {
+        return entity.getTorisageKubunCode();
+    }
+    
+    /**
+     * 取下年月日を返します。
+     *
+     * @return 取下年月日
+     */
+    public FlexibleDate get取下年月日() {
+        return entity.getTorisageYMD();
+    }
+    
+    /**
+     * 取下事由を返します。
+     *
+     * @return 取下事由
+     */
+    public RString get取下事由() {
+        return entity.getTorisageRiyu();
     }
 }

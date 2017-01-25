@@ -30,8 +30,10 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
     private DataGrid<dgIkenshoIraiIchiran_Row> dgIkenshoIraiIchiran;
     @JsonProperty("btnReturn")
     private Button btnReturn;
-    @JsonProperty("hihokenshano")
-    private RString hihokenshano;
+    @JsonProperty("hdnHihokenshaNo")
+    private RString hdnHihokenshaNo;
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    private RString hdnShokisaiHokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,21 +78,39 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
     }
 
     /*
-     * gethihokenshano
-     * @return hihokenshano
+     * gethdnHihokenshaNo
+     * @return hdnHihokenshaNo
      */
-    @JsonProperty("hihokenshano")
-    public RString getHihokenshano() {
-        return hihokenshano;
+    @JsonProperty("hdnHihokenshaNo")
+    public RString getHdnHihokenshaNo() {
+        return hdnHihokenshaNo;
     }
 
     /*
-     * sethihokenshano
-     * @param hihokenshano hihokenshano
+     * sethdnHihokenshaNo
+     * @param hdnHihokenshaNo hdnHihokenshaNo
      */
-    @JsonProperty("hihokenshano")
-    public void setHihokenshano(RString hihokenshano) {
-        this.hihokenshano = hihokenshano;
+    @JsonProperty("hdnHihokenshaNo")
+    public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
+        this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * gethdnShokisaiHokenshaNo
+     * @return hdnShokisaiHokenshaNo
+     */
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    public RString getHdnShokisaiHokenshaNo() {
+        return hdnShokisaiHokenshaNo;
+    }
+
+    /*
+     * sethdnShokisaiHokenshaNo
+     * @param hdnShokisaiHokenshaNo hdnShokisaiHokenshaNo
+     */
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    public void setHdnShokisaiHokenshaNo(RString hdnShokisaiHokenshaNo) {
+        this.hdnShokisaiHokenshaNo = hdnShokisaiHokenshaNo;
     }
 
     // </editor-fold>

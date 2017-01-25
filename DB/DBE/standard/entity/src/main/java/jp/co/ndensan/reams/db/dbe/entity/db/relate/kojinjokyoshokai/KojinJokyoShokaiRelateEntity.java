@@ -42,6 +42,9 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
     private Code ninteiShinseiHoreiKubunCode;
+    private Code torisageKubunCode;
+    private FlexibleDate torisageYMD;
+    private RString torisageRiyu;
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private FlexibleDate nijiHanteiYMD;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
@@ -171,8 +174,10 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate konnkai_22;
     private FlexibleDate zennkai_22;
     private FlexibleDate zennnoma_22;
-    private RString ikenshoIraiRirekiNo;
+    private int ikenshoIraiRirekiNo;
+    private FlexibleDate ikenshoSakuseiIraiYMD;
     private int ninteichosaIraiRirekiNo;
+    private FlexibleDate ninteichosaIraiYMD;
     private RString ichijiHnateiKeikokuCode;
 
 }

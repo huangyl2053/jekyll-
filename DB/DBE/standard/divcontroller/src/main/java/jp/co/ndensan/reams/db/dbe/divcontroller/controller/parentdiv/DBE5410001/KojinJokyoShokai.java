@@ -143,8 +143,8 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnChosaKekkaInfoKihon(KojinJokyoShokaiDiv div) {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString 認定調査依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHihokenshano());
-        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getShoKisaiHokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHdnHihokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
         return ResponseData.of(div).respond();
@@ -159,8 +159,8 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnChosaKekkaInfoGaikyo(KojinJokyoShokaiDiv div) {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString 認定調査依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class));
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHihokenshano());
-        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getShoKisaiHokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHdnHihokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
         return ResponseData.of(div).respond();
@@ -174,9 +174,9 @@ public class KojinJokyoShokai {
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShujiiIkenshoShokai(KojinJokyoShokaiDiv div) {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RString 主治医意見書作成依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHihokenshano());
-        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getShoKisaiHokenshaNo());
+        RString 主治医意見書作成依頼履歴番号 = new RString(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getHdnHihokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
         return ResponseData.of(div).respond();
@@ -228,7 +228,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnToShinchokuJyokyo(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.保険者番号, div.getShoKisaiHokenshaNo());
+        ViewStateHolder.put(ViewStateKeys.保険者番号, div.getHdnShokisaiHokenshaNo());
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.進捗状況照会に遷移する).respond();
     }
 
