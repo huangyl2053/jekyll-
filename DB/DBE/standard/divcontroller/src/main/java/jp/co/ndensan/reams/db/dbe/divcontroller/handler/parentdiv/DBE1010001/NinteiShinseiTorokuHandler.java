@@ -50,7 +50,7 @@ public class NinteiShinseiTorokuHandler {
     private static final int ZERO_10 = 10;
     private static final RString ZERO_6 = new RString("000000");
     private static final RString 歳 = new RString("歳");
-    private static final RString みなし２号等対象 = new RString("みなし２号");
+    private static final RString みなし２号対象 = new RString("みなし２号");
 
     /**
      * コンストラクタです。
@@ -194,9 +194,8 @@ public class NinteiShinseiTorokuHandler {
         }
         if (result.isみなし２号等対象フラグ()) {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setVisible(true);
-            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setValue(みなし２号等対象);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setValue(みなし２号対象);
         }
-        
     }
     
     /**

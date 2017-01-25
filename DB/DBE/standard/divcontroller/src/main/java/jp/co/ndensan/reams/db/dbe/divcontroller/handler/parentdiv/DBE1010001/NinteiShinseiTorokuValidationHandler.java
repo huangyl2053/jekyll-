@@ -169,7 +169,7 @@ public class NinteiShinseiTorokuValidationHandler {
         項目に対する制約(UrErrorMessages.項目に対する制約, "みなし２号審査受付場合、被保険者区分", "\"8\" (生活保護)"),
         特定疾病入力必須(UrErrorMessages.未入力, "第２号被保険者の場合、特定疾病"),
         申請取下時は取下日理由必須(UrErrorMessages.未入力, "申請取下時は、取下日・理由"),
-        申請サービス削除と取下理由は同時存在(UrErrorMessages.両方の指定は不可, "申請サービス削除と取下理由"),
+        申請サービス削除と取下理由は同時存在(UrErrorMessages.両方の指定は不可, "申請サービス削除", "取下理由"),
         区分変更申請時取下日理由入力不可(UrErrorMessages.設定不可, "取下日、理由は申請区分（申請時）が区分変更申請の"),
         センタ送信データ出力完了更新不可(UrErrorMessages.更新不可, "センタ送信データ出力が完了している"),
         認定審査会割当完了更新不可(UrErrorMessages.更新不可, "認定審査会割当が完了している"),
