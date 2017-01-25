@@ -27,10 +27,10 @@ public class IkenshoIraiTorokuPanelDiv extends Panel {
     private DropDownList ddlIraiKubun;
     @JsonProperty("txtSakuseiIraiYmd")
     private TextBoxDate txtSakuseiIraiYmd;
-    @JsonProperty("btnIraiKakutei")
-    private Button btnIraiKakutei;
-    @JsonProperty("btnIraisezuModoru")
-    private Button btnIraisezuModoru;
+    @JsonProperty("btnSettei")
+    private Button btnSettei;
+    @JsonProperty("btnSetteisezuModoru")
+    private Button btnSetteisezuModoru;
     @JsonProperty("ccdShujiiInput")
     private ShujiiIryokikanAndShujiiInputDiv ccdShujiiInput;
 
@@ -77,39 +77,39 @@ public class IkenshoIraiTorokuPanelDiv extends Panel {
     }
 
     /*
-     * getbtnIraiKakutei
-     * @return btnIraiKakutei
+     * getbtnSettei
+     * @return btnSettei
      */
-    @JsonProperty("btnIraiKakutei")
-    public Button getBtnIraiKakutei() {
-        return btnIraiKakutei;
+    @JsonProperty("btnSettei")
+    public Button getBtnSettei() {
+        return btnSettei;
     }
 
     /*
-     * setbtnIraiKakutei
-     * @param btnIraiKakutei btnIraiKakutei
+     * setbtnSettei
+     * @param btnSettei btnSettei
      */
-    @JsonProperty("btnIraiKakutei")
-    public void setBtnIraiKakutei(Button btnIraiKakutei) {
-        this.btnIraiKakutei = btnIraiKakutei;
+    @JsonProperty("btnSettei")
+    public void setBtnSettei(Button btnSettei) {
+        this.btnSettei = btnSettei;
     }
 
     /*
-     * getbtnIraisezuModoru
-     * @return btnIraisezuModoru
+     * getbtnSetteisezuModoru
+     * @return btnSetteisezuModoru
      */
-    @JsonProperty("btnIraisezuModoru")
-    public Button getBtnIraisezuModoru() {
-        return btnIraisezuModoru;
+    @JsonProperty("btnSetteisezuModoru")
+    public Button getBtnSetteisezuModoru() {
+        return btnSetteisezuModoru;
     }
 
     /*
-     * setbtnIraisezuModoru
-     * @param btnIraisezuModoru btnIraisezuModoru
+     * setbtnSetteisezuModoru
+     * @param btnSetteisezuModoru btnSetteisezuModoru
      */
-    @JsonProperty("btnIraisezuModoru")
-    public void setBtnIraisezuModoru(Button btnIraisezuModoru) {
-        this.btnIraisezuModoru = btnIraisezuModoru;
+    @JsonProperty("btnSetteisezuModoru")
+    public void setBtnSetteisezuModoru(Button btnSetteisezuModoru) {
+        this.btnSetteisezuModoru = btnSetteisezuModoru;
     }
 
     /*

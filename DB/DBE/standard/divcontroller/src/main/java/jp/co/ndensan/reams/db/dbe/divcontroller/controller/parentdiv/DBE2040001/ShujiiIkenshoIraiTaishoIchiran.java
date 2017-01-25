@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -71,6 +70,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private static final RString NOTREATED = new RString("未");
     private static final RString 未処理 = new RString("未処理");
     private static final RString 完了可能 = new RString("完了可能");
+    private static final RString UIコンテナID_DBEUC23001 = new RString("DBEUC23001");
 
     /**
      * 完了処理・主治医意見書依頼の初期化処理です。
@@ -80,8 +80,8 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onLoad(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
-        handler.initialize();
-        handler.set主治医意見書依頼完了対象者一覧データグリッド();
+        handler.initialize(ResponseHolder.getState());
+        ViewStateHolder.put(ViewStateKeys.状態, div.getRadShoriJyotai().getSelectedKey());
         if (ViewStateHolder.containsKey(ViewStateKeys.申請書管理番号.name())) {
             ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
@@ -92,11 +92,6 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 }
             }
         }
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (IkenshoIraiKubun 主治医意見書依頼区分 : IkenshoIraiKubun.values()) {
-            dataSource.add(new KeyValueDataSource(主治医意見書依頼区分.getコード(), 主治医意見書依頼区分.get名称()));
-        }
-        div.getDdlIraiKubun().setDataSource(dataSource);
         return ResponseData.of(div).respond();
     }
 
@@ -108,7 +103,22 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onChange_radShoriJyotai(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).set主治医意見書依頼完了対象者一覧データグリッド();
+        ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
+        if (!handler.getChangedRow().isEmpty()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                div.getRadShoriJyotai().setSelectedKey(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
+                return ResponseData.of(div).respond();
+            }
+        }
+        ViewStateHolder.put(ViewStateKeys.状態, div.getRadShoriJyotai().getSelectedKey());
+        handler.set主治医意見書依頼完了対象者一覧データグリッド();
+        handler.set意見書依頼完了ボタン使用可否();
         return ResponseData.of(div).respond();
     }
 
@@ -178,13 +188,13 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     /**
-     * 「意見書作成を依頼する」ボタンクリックイベントです。
+     * 「主治医を設定する」ボタンクリックイベントです。
      *
      * @param div ShujiiIkenshoIraiTaishoIchiranDiv
      * @return ResponseData
      */
-    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnIraisuru(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnIraisuruClick();
+    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnShujiiSettei(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnShujiiSetteiClick();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
@@ -195,13 +205,13 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     /**
-     * 「依頼する」ボタンクリックイベントです。
+     * 「設定する」ボタンクリックイベントです。
      *
      * @param div ShujiiIkenshoIraiTaishoIchiranDiv
      * @return ResponseData
      */
-    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnIraiKakutei(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnIraiKakuteiClick();
+    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnSettei(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnSetteiClick();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
@@ -212,12 +222,12 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     /**
-     * 「依頼せずに戻る」ボタンクリックイベントです。
+     * 「設定せずに戻る」ボタンクリックイベントです。
      *
      * @param div ShujiiIkenshoIraiTaishoIchiranDiv
      * @return ResponseData
      */
-    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnIraisezuModoru(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnSetteisezuModoru(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         getHandler(div).set主治医意見書依頼完了対象者一覧パネル使用可否(false);
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
@@ -350,8 +360,14 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnModoruShujiiIkenshoIraiTaishoIchiran(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).set主治医意見書依頼完了対象者一覧データグリッド();
-        return ResponseData.of(div).setState(DBE2040001StateName.登録);
+        DBE2040001StateName stateName;
+        if (UIコンテナID_DBEUC23001.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
+            stateName = DBE2040001StateName.完了のみ登録;
+        } else {
+            stateName = DBE2040001StateName.登録;
+        }
+        getHandler(div).initialize(stateName.getName());
+        return ResponseData.of(div).setState(stateName);
     }
 
     private ShujiiIkenshoIraiCsvEntity getCsvData(dgNinteiTaskList_Row row) {
@@ -425,5 +441,4 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private ShujiiIkenshoIraiTaishoIchiranValidationHandler getValidationHandler(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         return new ShujiiIkenshoIraiTaishoIchiranValidationHandler(div);
     }
-
 }

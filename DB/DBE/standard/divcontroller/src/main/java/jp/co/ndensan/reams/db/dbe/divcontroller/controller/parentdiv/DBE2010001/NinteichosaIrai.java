@@ -134,9 +134,7 @@ public class NinteichosaIrai {
         }
         ViewStateHolder.put(ViewStateKeys.状態, requestDiv.getRadShoriJyotai().getSelectedKey());
         handler.initDataGrid();
-        if (DBE2010001StateName.登録.getName().equals(ResponseHolder.getState())) {
-            handler.set調査依頼完了ボタン使用可否();
-        }
+        handler.set調査依頼完了ボタン使用可否();
         return ResponseData.of(requestDiv).respond();
     }
 

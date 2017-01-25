@@ -77,11 +77,11 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
     }
 
     /**
-     * 「意見書作成を依頼する」ボタンクリック時のバリデーションチェックです。
+     * 「主治医を設定する」ボタンクリック時のバリデーションチェックです。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateBtnIraisuruClick() {
+    public ValidationMessageControlPairs validateBtnShujiiSetteiClick() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(ValidationMessages.該当データなし));
@@ -96,11 +96,11 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
     }
 
     /**
-     * 「依頼する」ボタンクリック時のバリデーションチェックです。
+     * 「設定する」ボタンクリック時のバリデーションチェックです。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateBtnIraiKakuteiClick() {
+    public ValidationMessageControlPairs validateBtnSetteiClick() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (RString.isNullOrEmpty(div.getCcdShujiiInput().getTxtShujiiCode().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(ValidationMessages.主治医入力必須));

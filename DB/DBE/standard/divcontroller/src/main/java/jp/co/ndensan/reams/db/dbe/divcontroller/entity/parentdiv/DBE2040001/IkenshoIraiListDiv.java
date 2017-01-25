@@ -30,8 +30,8 @@ public class IkenshoIraiListDiv extends Panel {
     private ikenshoiraitaishoichiranDiv ikenshoiraitaishoichiran;
     @JsonProperty("btnikenshoiraitaishooutput")
     private ButtonDownLoad btnikenshoiraitaishooutput;
-    @JsonProperty("btnIraisuru")
-    private Button btnIraisuru;
+    @JsonProperty("btnShujiiSettei")
+    private Button btnShujiiSettei;
     @JsonProperty("btnIraishoToOutputDialog")
     private ButtonDialog btnIraishoToOutputDialog;
     @JsonProperty("IkenshoIraiTorokuPanel")
@@ -80,21 +80,21 @@ public class IkenshoIraiListDiv extends Panel {
     }
 
     /*
-     * getbtnIraisuru
-     * @return btnIraisuru
+     * getbtnShujiiSettei
+     * @return btnShujiiSettei
      */
-    @JsonProperty("btnIraisuru")
-    public Button getBtnIraisuru() {
-        return btnIraisuru;
+    @JsonProperty("btnShujiiSettei")
+    public Button getBtnShujiiSettei() {
+        return btnShujiiSettei;
     }
 
     /*
-     * setbtnIraisuru
-     * @param btnIraisuru btnIraisuru
+     * setbtnShujiiSettei
+     * @param btnShujiiSettei btnShujiiSettei
      */
-    @JsonProperty("btnIraisuru")
-    public void setBtnIraisuru(Button btnIraisuru) {
-        this.btnIraisuru = btnIraisuru;
+    @JsonProperty("btnShujiiSettei")
+    public void setBtnShujiiSettei(Button btnShujiiSettei) {
+        this.btnShujiiSettei = btnShujiiSettei;
     }
 
     /*
@@ -222,23 +222,23 @@ public class IkenshoIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnIraiKakutei() {
-        return this.getIkenshoIraiTorokuPanel().getBtnIraiKakutei();
+    public Button getBtnSettei() {
+        return this.getIkenshoIraiTorokuPanel().getBtnSettei();
     }
 
     @JsonIgnore
-    public void  setBtnIraiKakutei(Button btnIraiKakutei) {
-        this.getIkenshoIraiTorokuPanel().setBtnIraiKakutei(btnIraiKakutei);
+    public void  setBtnSettei(Button btnSettei) {
+        this.getIkenshoIraiTorokuPanel().setBtnSettei(btnSettei);
     }
 
     @JsonIgnore
-    public Button getBtnIraisezuModoru() {
-        return this.getIkenshoIraiTorokuPanel().getBtnIraisezuModoru();
+    public Button getBtnSetteisezuModoru() {
+        return this.getIkenshoIraiTorokuPanel().getBtnSetteisezuModoru();
     }
 
     @JsonIgnore
-    public void  setBtnIraisezuModoru(Button btnIraisezuModoru) {
-        this.getIkenshoIraiTorokuPanel().setBtnIraisezuModoru(btnIraisezuModoru);
+    public void  setBtnSetteisezuModoru(Button btnSetteisezuModoru) {
+        this.getIkenshoIraiTorokuPanel().setBtnSetteisezuModoru(btnSetteisezuModoru);
     }
 
     @JsonIgnore
