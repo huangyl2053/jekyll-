@@ -208,7 +208,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
         return 出力条件List;
     }
     
-    private RString dateFormat(RString date) {
+    private static RString dateFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
