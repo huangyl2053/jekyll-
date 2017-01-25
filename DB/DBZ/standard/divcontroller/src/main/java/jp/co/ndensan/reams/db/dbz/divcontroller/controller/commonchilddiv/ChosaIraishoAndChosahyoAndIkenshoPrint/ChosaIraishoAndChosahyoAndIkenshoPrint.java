@@ -34,9 +34,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosa
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,7 +86,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR");
     private static final RString DBE231001_RYOMEN_MONO = new RString("DBE231001_ikenshokinyuyoshi_Ryomen_Mono");
     private static final RString DBE231001_KATAMEN_MONO = new RString("DBE231001_ikenshokinyuyoshi_Katamen_Mono");
-    private static final RString 排他キー = new RString("ShinseishoKanriNo");
 
     /**
      * 共通子DIVを初期化します。
@@ -98,10 +94,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onLoad(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
-        if (!RealInitialLocker.tryGetLock(new LockingKey(排他キー))) {
-            throw new PessimisticLockingException();
-        }
-
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
         if (model != null) {
             getHandler(div).initialize(model.get申請書管理番号リスト(), model.get市町村コード(), model.get遷移元画面区分());
@@ -152,7 +144,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      * @return ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv>
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onClick_btnModoru(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
-        RealInitialLocker.release(new LockingKey(排他キー));
         return ResponseData.of(div).dialogOKClose();
     }
 
@@ -191,13 +182,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         }
         if (response.data.iterator().hasNext()) {
             updateData(div);
-            RealInitialLocker.release(new LockingKey(排他キー));
-
             ViewStateHolder.put(ViewStateKeys.帳票制御共通, new RString("成功"));
             return response;
         } else {
-            RealInitialLocker.release(new LockingKey(排他キー));
-
             ViewStateHolder.put(ViewStateKeys.帳票制御共通, new RString("失敗"));
             return ResponseData.of(div).respond();
         }
