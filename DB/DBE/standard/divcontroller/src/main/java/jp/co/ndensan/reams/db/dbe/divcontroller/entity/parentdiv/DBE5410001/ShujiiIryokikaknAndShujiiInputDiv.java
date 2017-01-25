@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIryokikaknAndShujiiInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +31,10 @@ public class ShujiiIryokikaknAndShujiiInputDiv extends Panel {
     private TextBox txtShujiiName;
     @JsonProperty("chkShiteii")
     private CheckBoxList chkShiteii;
+    @JsonProperty("txtIkenshoIraiDate")
+    private TextBoxFlexibleDate txtIkenshoIraiDate;
+    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
+    private ButtonDialog btnShujiiIkenshoSakuseiIraiShokai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -126,6 +130,42 @@ public class ShujiiIryokikaknAndShujiiInputDiv extends Panel {
     @JsonProperty("chkShiteii")
     public void setChkShiteii(CheckBoxList chkShiteii) {
         this.chkShiteii = chkShiteii;
+    }
+
+    /*
+     * gettxtIkenshoIraiDate
+     * @return txtIkenshoIraiDate
+     */
+    @JsonProperty("txtIkenshoIraiDate")
+    public TextBoxFlexibleDate getTxtIkenshoIraiDate() {
+        return txtIkenshoIraiDate;
+    }
+
+    /*
+     * settxtIkenshoIraiDate
+     * @param txtIkenshoIraiDate txtIkenshoIraiDate
+     */
+    @JsonProperty("txtIkenshoIraiDate")
+    public void setTxtIkenshoIraiDate(TextBoxFlexibleDate txtIkenshoIraiDate) {
+        this.txtIkenshoIraiDate = txtIkenshoIraiDate;
+    }
+
+    /*
+     * getbtnShujiiIkenshoSakuseiIraiShokai
+     * @return btnShujiiIkenshoSakuseiIraiShokai
+     */
+    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
+    public ButtonDialog getBtnShujiiIkenshoSakuseiIraiShokai() {
+        return btnShujiiIkenshoSakuseiIraiShokai;
+    }
+
+    /*
+     * setbtnShujiiIkenshoSakuseiIraiShokai
+     * @param btnShujiiIkenshoSakuseiIraiShokai btnShujiiIkenshoSakuseiIraiShokai
+     */
+    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
+    public void setBtnShujiiIkenshoSakuseiIraiShokai(ButtonDialog btnShujiiIkenshoSakuseiIraiShokai) {
+        this.btnShujiiIkenshoSakuseiIraiShokai = btnShujiiIkenshoSakuseiIraiShokai;
     }
 
     // </editor-fold>

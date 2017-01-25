@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinShinchokuShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,8 @@ public class KojinShinchokuShosaiDiv extends Panel {
     private TextBoxDate txtIchijiHanteiYMD;
     @JsonProperty("txtIchijiHanteiKeikokuCode")
     private TextBoxCode txtIchijiHanteiKeikokuCode;
+    @JsonProperty("btnIchijiHanteiShokai")
+    private ButtonDialog btnIchijiHanteiShokai;
     @JsonProperty("txtNinteiKekka")
     private TextBox txtNinteiKekka;
     @JsonProperty("txtNijiHanteiYMD")
@@ -182,6 +184,24 @@ public class KojinShinchokuShosaiDiv extends Panel {
     @JsonProperty("txtIchijiHanteiKeikokuCode")
     public void setTxtIchijiHanteiKeikokuCode(TextBoxCode txtIchijiHanteiKeikokuCode) {
         this.txtIchijiHanteiKeikokuCode = txtIchijiHanteiKeikokuCode;
+    }
+
+    /*
+     * getbtnIchijiHanteiShokai
+     * @return btnIchijiHanteiShokai
+     */
+    @JsonProperty("btnIchijiHanteiShokai")
+    public ButtonDialog getBtnIchijiHanteiShokai() {
+        return btnIchijiHanteiShokai;
+    }
+
+    /*
+     * setbtnIchijiHanteiShokai
+     * @param btnIchijiHanteiShokai btnIchijiHanteiShokai
+     */
+    @JsonProperty("btnIchijiHanteiShokai")
+    public void setBtnIchijiHanteiShokai(ButtonDialog btnIchijiHanteiShokai) {
+        this.btnIchijiHanteiShokai = btnIchijiHanteiShokai;
     }
 
     /*

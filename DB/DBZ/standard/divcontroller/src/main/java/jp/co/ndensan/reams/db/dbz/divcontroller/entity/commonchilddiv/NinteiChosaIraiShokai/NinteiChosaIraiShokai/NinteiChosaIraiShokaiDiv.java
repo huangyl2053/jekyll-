@@ -30,6 +30,8 @@ public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiS
     private Button btnClose;
     @JsonProperty("hdnHihokenshaNo")
     private RString hdnHihokenshaNo;
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    private RString hdnShokisaiHokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,6 +91,24 @@ public class NinteiChosaIraiShokaiDiv extends Panel implements INinteiChosaIraiS
     @JsonProperty("hdnHihokenshaNo")
     public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
         this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * gethdnShokisaiHokenshaNo
+     * @return hdnShokisaiHokenshaNo
+     */
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    public RString getHdnShokisaiHokenshaNo() {
+        return hdnShokisaiHokenshaNo;
+    }
+
+    /*
+     * sethdnShokisaiHokenshaNo
+     * @param hdnShokisaiHokenshaNo hdnShokisaiHokenshaNo
+     */
+    @JsonProperty("hdnShokisaiHokenshaNo")
+    public void setHdnShokisaiHokenshaNo(RString hdnShokisaiHokenshaNo) {
+        this.hdnShokisaiHokenshaNo = hdnShokisaiHokenshaNo;
     }
 
     // </editor-fold>

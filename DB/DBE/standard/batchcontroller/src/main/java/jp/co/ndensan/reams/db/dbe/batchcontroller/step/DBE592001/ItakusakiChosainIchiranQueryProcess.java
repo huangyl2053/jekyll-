@@ -50,9 +50,7 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
                     + "IItakusakiChosainIchiranMapper.getNinteiChoSain");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE592001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.listIchiranhyoUpper_1.name())));
-    private static final List<RString> PAGE_BREAK_KEYS_City = Collections
-            .unmodifiableList(Arrays.asList(new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.cityCode.name())));
+            .unmodifiableList(Arrays.asList(new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.listIchiranhyoUpper_1.name()), new RString(ItakusakiChosainIchiranReportSource.ReportSourceFields.cityCode.name())));
     private ItakusakiChosainIchiranQueryProcessParemeter paramter;
     @BatchWriter
     private BatchReportWriter<ItakusakiChosainIchiranReportSource> batchWrite;
@@ -82,7 +80,6 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
         } else {
             batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
                     .addBreak(new BreakerCatalog<ItakusakiChosainIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                    .addBreak(new BreakerCatalog<ItakusakiChosainIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_City))
                     .create();
         }
         retortWrite = new ReportSourceWriter<>(batchWrite);
