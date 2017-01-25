@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -290,32 +289,6 @@ public class NinteiChosaIrai {
         model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
         model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 割付済みの「照会」ボタンのclick処理です。
-     *
-     * @param div NinteiChosaIraiDiv
-     * @return ResponseData<NinteiChosaIraiDiv>
-     */
-    public ResponseData<NinteiChosaIraiDiv> onClick_WaritsukeZumiShokai(NinteiChosaIraiDiv div) {
-        dgWaritsukeZumiShinseishaIchiran_Row row = div.getDgWaritsukeZumiShinseishaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
-        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 未割付の「照会」ボタンのclick処理です。
-     *
-     * @param div NinteiChosaIraiDiv
-     * @return ResponseData<NinteiChosaIraiDiv>
-     */
-    public ResponseData<NinteiChosaIraiDiv> onClick_MiwaritsukeShokai(NinteiChosaIraiDiv div) {
-        dgMiwaritsukeShinseishaIchiran_Row row = div.getDgMiwaritsukeShinseishaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
-        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
 

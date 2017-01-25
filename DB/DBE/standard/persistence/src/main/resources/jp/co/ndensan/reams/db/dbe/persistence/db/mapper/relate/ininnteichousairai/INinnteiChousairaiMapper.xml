@@ -512,7 +512,8 @@
             dbt5913zenkai."chosainShimei" AS chosainshimei,
             dbt5101."shinseishoKanriNo" AS "shinseishoKanriNo",
             dbt5201."ninteichosaIraiRirekiNo" AS "ninteichosaIraiRirekiNo",
-            dbt5101."ninteiChosainCode" AS "ninteiChosainCode"
+            dbt5101."ninteiChosainCode" AS "ninteiChosainCode",
+            dbT5101."shoKisaiHokenshaNo" AS "hokenshaNo"
         FROM
             (SELECT *
              FROM rgdb."DbT5101NinteiShinseiJoho" dbt5101a
@@ -592,6 +593,7 @@
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
+        <result property="hokenshaNo" column="hokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="select認定調査依頼情報"

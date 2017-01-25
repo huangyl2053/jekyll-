@@ -40,8 +40,6 @@ public class NinteiChosaIraiDiv extends Panel {
     private ChosaTaishoWaritsukeDiv ChosaTaishoWaritsuke;
     @JsonProperty("KanryoMessage")
     private KaigoKanryoMessageDiv KanryoMessage;
-    @JsonProperty("shinseishaKanriNo")
-    private RString shinseishaKanriNo;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
 
@@ -148,24 +146,6 @@ public class NinteiChosaIraiDiv extends Panel {
     @JsonProperty("KanryoMessage")
     public IKaigoKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
-    }
-
-    /*
-     * getshinseishaKanriNo
-     * @return shinseishaKanriNo
-     */
-    @JsonProperty("shinseishaKanriNo")
-    public RString getShinseishaKanriNo() {
-        return shinseishaKanriNo;
-    }
-
-    /*
-     * setshinseishaKanriNo
-     * @param shinseishaKanriNo shinseishaKanriNo
-     */
-    @JsonProperty("shinseishaKanriNo")
-    public void setShinseishaKanriNo(RString shinseishaKanriNo) {
-        this.shinseishaKanriNo = shinseishaKanriNo;
     }
 
     /*
