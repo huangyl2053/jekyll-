@@ -33,24 +33,6 @@ public class NinteiChosaIraiShokaiMaster {
     }
 
     /**
-     * 申請書管理番号を取得します。
-     *
-     * @return 申請書管理番号
-     */
-    public RString getShinseishoKanriNo() {
-        return entity.getShinseishoKanriNo().value();
-    }
-    
-    /**
-     * 証記載保険者番号を取得します。
-     *
-     * @return 証記載保険者番号
-     */
-    public RString getShoKisaiHokenshaNo() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-    
-    /**
      * 厚労省IF識別コードを取得します。
      *
      * @return 厚労省IF識別コード

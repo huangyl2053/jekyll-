@@ -57,11 +57,13 @@ public class NinteiChosaIraiShokaiFinder {
      * 認定調査情報を取得の処理です。
      *
      * @param 被保険者番号 被保険者番号
+     * @param 証記載保険者番号 証記載保険者番号
      * @return SearchResult<NinteiChosaIraiShokaiMaster> 認定調査情報
      */
-    public SearchResult<NinteiChosaIraiShokaiMaster> getNinteiChousaJouhou(RString 被保険者番号) {
+    public SearchResult<NinteiChosaIraiShokaiMaster> getNinteiChousaJouhou(RString 被保険者番号, RString 証記載保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        NinteiChosaIraiShokaiParameter parameter = NinteiChosaIraiShokaiParameter.createParam(被保険者番号);
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        NinteiChosaIraiShokaiParameter parameter = NinteiChosaIraiShokaiParameter.createParam(被保険者番号, 証記載保険者番号);
         INinteiChosaIraiShokaiMapper mapper = mapperProvider.create(INinteiChosaIraiShokaiMapper.class);
         List<NinteiChosaIraiShokaiRelateEntity> entityList = mapper.get認定調査情報(parameter);
         List<NinteiChosaIraiShokaiMaster> shokaiMaster = new ArrayList<>();
