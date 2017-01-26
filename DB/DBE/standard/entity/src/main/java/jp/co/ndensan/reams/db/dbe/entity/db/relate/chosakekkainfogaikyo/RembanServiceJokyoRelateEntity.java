@@ -24,5 +24,6 @@ public class RembanServiceJokyoRelateEntity {
     private RString number;
     private int serviceJokyoFlag;
     private Code koroshoIfShikibetsuCode;
+    private Code serviceKubunCode;
 
 }

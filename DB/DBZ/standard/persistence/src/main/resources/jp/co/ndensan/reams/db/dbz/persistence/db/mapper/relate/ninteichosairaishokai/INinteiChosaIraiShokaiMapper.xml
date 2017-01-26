@@ -39,7 +39,7 @@
            dbT5201."ninteichosaIraiYMD" AS "ninteichosaIraiYMD"
       FROM
            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
-           INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+           LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
            ON dbT5102."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
            INNER JOIN
            (

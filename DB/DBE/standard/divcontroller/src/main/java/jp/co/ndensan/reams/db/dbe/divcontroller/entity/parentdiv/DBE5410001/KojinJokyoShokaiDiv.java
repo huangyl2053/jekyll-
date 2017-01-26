@@ -83,6 +83,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnHanteiArgument;
     @JsonProperty("hdnIchijiHanteiKekka")
     private RString hdnIchijiHanteiKekka;
+    @JsonProperty("hdnImageLocalCopyPath")
+    private RString hdnImageLocalCopyPath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -601,6 +603,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("hdnIchijiHanteiKekka")
     public void setHdnIchijiHanteiKekka(RString hdnIchijiHanteiKekka) {
         this.hdnIchijiHanteiKekka = hdnIchijiHanteiKekka;
+    }
+
+    /*
+     * gethdnImageLocalCopyPath
+     * @return hdnImageLocalCopyPath
+     */
+    @JsonProperty("hdnImageLocalCopyPath")
+    public RString getHdnImageLocalCopyPath() {
+        return hdnImageLocalCopyPath;
+    }
+
+    /*
+     * sethdnImageLocalCopyPath
+     * @param hdnImageLocalCopyPath hdnImageLocalCopyPath
+     */
+    @JsonProperty("hdnImageLocalCopyPath")
+    public void setHdnImageLocalCopyPath(RString hdnImageLocalCopyPath) {
+        this.hdnImageLocalCopyPath = hdnImageLocalCopyPath;
     }
 
     /*

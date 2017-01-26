@@ -92,9 +92,9 @@ public enum CKGaikyoChosahyouServiceJyouk09B implements IGaikyoChosahyoServiceJo
      */
     定期巡回_随時対応型訪問介護看護("19", get単位_回(), get単位_月(), get給付区分_介護(), "定期巡回・随時対応型訪問介護看護"),
     /**
-     * データベース内連番:20 単位1:日 単位2:/月 給付区分:介護予防 帳票上の文言:複合型サービス
+     * データベース内連番:20 単位1:日 単位2:/月 給付区分:介護予防 帳票上の文言:看護小規模多機能型居宅介護
      */
-    看護小規模多機能型居宅介護("20", get単位_日(), get単位_月(), get給付区分_介護(), "複合型サービス");
+    看護小規模多機能型居宅介護("20", get単位_日(), get単位_月(), get給付区分_介護(), "看護小規模多機能型居宅介護");
 
     private final RString code;
     private final RString tani1;

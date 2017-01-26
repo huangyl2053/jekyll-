@@ -57,14 +57,16 @@ public class ShujiiIkenshoIraiShokaiFinder {
     /**
      * 認定調査情報を返します。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param 被保険者番号 RString
+     * @param 証記載保険者番号 RString
      * @return SearchResult<ShujiiIkenshoIraiBusiness> 認定調査情報
      */
     @Transaction
-    public SearchResult<ShujiiIkenshoIraiBusiness> getNinnteiChousa(RString 申請書管理番号) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+    public SearchResult<ShujiiIkenshoIraiBusiness> getShujiiIkenshoIraiJoho(RString 被保険者番号, RString 証記載保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         IShujiiIkenshoIraiMapper mapper = mapperProvider.create(IShujiiIkenshoIraiMapper.class);
-        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(ShujiiIkenshoMapperParameter.createParam(申請書管理番号));
+        List<ShujiiIkenshoIraiEntity> relateEntityList = mapper.selectNinnteiChousa(ShujiiIkenshoMapperParameter.createParam(被保険者番号, 証記載保険者番号));
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<ShujiiIkenshoIraiBusiness>emptyList(), 0, false);
         }

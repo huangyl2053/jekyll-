@@ -13,10 +13,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk09A;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk09B;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk99A;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyoukSgJg;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.IGaikyoChosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku09A;
@@ -62,6 +65,8 @@ public class ChosaKekkaInfoGaikyoHandler {
     private static final RString 未実施 = new RString("1");
     private static final RString 出力する = new RString("1");
     private static final RString 実施済 = new RString("2");
+    private static final RString Enum区分_サービス = new RString("1");
+    private static final RString Enum区分_サービスフラグ = new RString("2");
     private static final RString 予防給付サービス = new RString("介護予防");
     private static final RString 介護給付サービス = new RString("介護");
     private static final RString IMAGEFILENAME_認定調査実施場所 = new RString("C0001.png");
@@ -125,13 +130,26 @@ public class ChosaKekkaInfoGaikyoHandler {
         gaikyoDiv.getShisetsuRiyoPanel().getTxtRiyoShisetsuJusho().setDisplayNone(true);
         gaikyoDiv.getTokubetsuKyufuPanel().getTxtTokubetsuKyufu().setDisplayNone(true);
         gaikyoDiv.getZaitakuServicePanel().getTxtZaitakuService().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblJutakuKaishu().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtJutakuKaishu().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblGaikyoTokkiTokubetsuKyufu().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtGaikyoTokkiTokubetsuKyufu().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblZaitakuService().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtGaikyoTokkiZaitakuService().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblShuso().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtShuso().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblKazokuJokyo().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtKazokuJokyo().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblKyojuKankyo().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtKyojuKankyo().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLblKikaiKiki().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getTxtKikaiKiki().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLine1().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLine2().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLine3().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLine4().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLine5().setDisplayNone(true);
+        gaikyoDiv.getGaikyoTokkiPanel().getLine6().setDisplayNone(true);
     }
 
     private void setDisplayNoneイメージコントロール() {
@@ -179,188 +197,163 @@ public class ChosaKekkaInfoGaikyoHandler {
      * 概況調査_サービス状況を取得します。
      */
     private List<dgServiceJokyo_Row> setサービス状況(List<RembanServiceJokyoBusiness> serviceJokyos) {
-        List<dgServiceJokyo_Row> grdSinsaSeiList = new ArrayList<>();
-        RString 厚労省IF識別コード = RString.EMPTY;
-        int count = 0;
-        if (serviceJokyos != null && !serviceJokyos.isEmpty()) {
-            厚労省IF識別コード = serviceJokyos.get(0).get厚労省IF識別コード().value();
-        }
-        if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
-            count = GaikyoChosahyouServiceJyouk99A.values().length;
-        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
-            count = GaikyoChosahyouServiceJyouk02A.values().length;
-        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
-            if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = CKGaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(予防給付サービス);
-            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = CKGaikyoChosahyouServiceJyouk06A.get給付サービスRecordSize(介護給付サービス);
-            }
-        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
-            if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = CKGaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(予防給付サービス);
-            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = CKGaikyoChosahyouServiceJyouk09A.get給付サービスRecordSize(介護給付サービス);
-            }
-        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
-            if (ServiceKubunCode.予防給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = CKGaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(予防給付サービス);
-            } else if (ServiceKubunCode.介護給付サービス.getコード().equals(getkubun(0, serviceJokyos))) {
-                count = CKGaikyoChosahyouServiceJyouk09B.get給付サービスRecordSize(介護給付サービス);
+        List<dgServiceJokyo_Row> dgServiceJokyo_Row = new ArrayList<>();
+        boolean isOdd = false;
+        dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
+        for (RembanServiceJokyoBusiness serviceJokyo : serviceJokyos) {
+            if (Enum区分_サービス.equals(serviceJokyo.getEnum区分())) {
+                if (!isOdd) {
+                    dgJigyoshaItiran = new dgServiceJokyo_Row();
+                    setDataGridJigyoshaItiran(dgJigyoshaItiran, serviceJokyo, isOdd);
+                    if (RString.isNullOrEmpty(dgJigyoshaItiran.getServiceName1())) {
+                        continue;
+                    }
+                    isOdd = true;
+                    continue;
+                }
+                setDataGridJigyoshaItiran(dgJigyoshaItiran, serviceJokyo, isOdd);
+                if (RString.isNullOrEmpty(dgJigyoshaItiran.getServiceName2())) {
+                    continue;
+                }
+                isOdd = false;
+                dgServiceJokyo_Row.add(dgJigyoshaItiran);
             }
         }
-
-        for (int i = 0; i < count; i++) {
-            dgServiceJokyo_Row dgJigyoshaItiran = new dgServiceJokyo_Row();
-            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
-                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                i = i + 1;
-                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
-                grdSinsaSeiList.add(dgJigyoshaItiran);
-            }
-            if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
-                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                i = i + 1;
-                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
-                grdSinsaSeiList.add(dgJigyoshaItiran);
-            }
-            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
-                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                i = i + 1;
-                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
-                grdSinsaSeiList.add(dgJigyoshaItiran);
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
-                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                i = i + 1;
-                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
-                grdSinsaSeiList.add(dgJigyoshaItiran);
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
-                dgJigyoshaItiran.setServiceName1(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu1(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo1(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai1(getTan1(i, serviceJokyos));
-                i = i + 1;
-                dgJigyoshaItiran.setServiceName2(getName(i, serviceJokyos));
-                dgJigyoshaItiran.setTatsu2(getTan2(i, serviceJokyos));
-                dgJigyoshaItiran.setServiceJokyo2(getFlag(i, serviceJokyos));
-                dgJigyoshaItiran.setKai2(getTan1(i, serviceJokyos));
-                grdSinsaSeiList.add(dgJigyoshaItiran);
-            }
+        if (isOdd && !RString.isNullOrEmpty(dgJigyoshaItiran.getServiceName1())) {
+            dgServiceJokyo_Row.add(dgJigyoshaItiran);
         }
-        gaikyoDiv.getServiceJokyoPanel().getDgServiceJokyo().setDataSource(grdSinsaSeiList);
-        return grdSinsaSeiList;
+        gaikyoDiv.getServiceJokyoPanel().getDgServiceJokyo().setDataSource(dgServiceJokyo_Row);
+        return dgServiceJokyo_Row;
     }
 
-    private RString getName(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
-        if (連番 < serviceJokyos.size()) {
-            if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+    private void setDataGridJigyoshaItiran(dgServiceJokyo_Row dgJigyoshaItiran,
+            RembanServiceJokyoBusiness serviceJokyo,
+            boolean isOdd) {
+        IGaikyoChosahyoServiceJokyo 概況調査サービス状況;
+        if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            try {
+                概況調査サービス状況 = CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyo.get連番()));
+            } catch (Exception e) {
+                概況調査サービス状況 = null;
             }
-            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            setDataGridJigyoshaItiran_AfterV06A(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+        } else if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyo.get厚労省IF識別コード().value())) {
+            try {
+                概況調査サービス状況 = CKGaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyo.get連番()));
+            } catch (Exception e) {
+                概況調査サービス状況 = null;
             }
-            if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            setDataGridJigyoshaItiran_BeforeV06A(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+        } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(serviceJokyo.get厚労省IF識別コード().value())) {
+            try {
+                概況調査サービス状況 = CKGaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyo.get連番()));
+            } catch (Exception e) {
+                概況調査サービス状況 = null;
             }
-            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            setDataGridJigyoshaItiran_BeforeV06A(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+        } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyo.get厚労省IF識別コード().value())) {
+            try {
+                概況調査サービス状況 = CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyo.get連番()));
+            } catch (Exception e) {
+                概況調査サービス状況 = null;
             }
-            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            setDataGridJigyoshaItiran_AfterV06A(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyo.get厚労省IF識別コード().value())) {
+            try {
+                概況調査サービス状況 = CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyo.get連番()));
+            } catch (Exception e) {
+                概況調査サービス状況 = null;
             }
-            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())
-                    && (未実施).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get名称();
+            setDataGridJigyoshaItiran_AfterV06A(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+        } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyo.get厚労省IF識別コード().value())) {
+            try {
+                概況調査サービス状況 = CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyo.get連番()));
+            } catch (Exception e) {
+                概況調査サービス状況 = null;
             }
+            setDataGridJigyoshaItiran_AfterV06A(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
         }
-        return RString.EMPTY;
     }
 
-    private RString getkubun(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
-        if (連番 < serviceJokyos.size()) {
-            return serviceJokyos.get(連番).getEnum区分();
+    private void setDataGridJigyoshaItiran_BeforeV06A(dgServiceJokyo_Row dgJigyoshaItiran,
+            RembanServiceJokyoBusiness serviceJokyo,
+            IGaikyoChosahyoServiceJokyo 概況調査サービス状況,
+            boolean isOdd) {
+        if (概況調査サービス状況 != null) {
+            setDataGridJigyoshaItiranPlacement(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+        } else {
+            setDataGridJigyoshaItiran_Empty(dgJigyoshaItiran, isOdd);
         }
-        return RString.EMPTY;
     }
 
-    private RString getTan1(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
-        if (連番 < serviceJokyos.size()) {
-            if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
+    private void setDataGridJigyoshaItiran_AfterV06A(dgServiceJokyo_Row dgJigyoshaItiran,
+            RembanServiceJokyoBusiness serviceJokyo,
+            IGaikyoChosahyoServiceJokyo 概況調査サービス状況,
+            boolean isOdd) {
+        if (概況調査サービス状況 != null) {
+            if (概況調査サービス状況.get給付区分().equals(get給付区分(serviceJokyo.getサービス区分コード()))) {
+                setDataGridJigyoshaItiranPlacement(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+            } else if (介護給付サービス.equals(get給付区分(serviceJokyo.getサービス区分コード()))) {
+                setDataGridJigyoshaItiranPlacement(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況, isOdd);
+            } else {
+                setDataGridJigyoshaItiran_Empty(dgJigyoshaItiran, isOdd);
             }
-            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位1();
-            }
+        } else {
+            setDataGridJigyoshaItiran_Empty(dgJigyoshaItiran, isOdd);
         }
-        return RString.EMPTY;
     }
 
-    private RString getTan2(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
-        if (連番 < serviceJokyos.size()) {
-            if ((実施済).equals(DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                return CKGaikyoChosahyouServiceJyoukSgJg.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk99A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return GaikyoChosahyouServiceJyouk02A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk06A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk09A.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(serviceJokyos.get(連番).get厚労省IF識別コード().value())) {
-                return CKGaikyoChosahyouServiceJyouk09B.toValue(new RString(serviceJokyos.get(連番).get連番())).get単位2();
-            }
+    private void setDataGridJigyoshaItiran_Empty(dgServiceJokyo_Row dgJigyoshaItiran, boolean isOdd) {
+        if (isOdd) {
+            dgJigyoshaItiran.setServiceName2(RString.EMPTY);
+            dgJigyoshaItiran.setTatsu2(RString.EMPTY);
+            dgJigyoshaItiran.setServiceJokyo2(RString.EMPTY);
+            dgJigyoshaItiran.setKai2(RString.EMPTY);
+        } else {
+            dgJigyoshaItiran.setServiceName1(RString.EMPTY);
+            dgJigyoshaItiran.setTatsu1(RString.EMPTY);
+            dgJigyoshaItiran.setServiceJokyo1(RString.EMPTY);
+            dgJigyoshaItiran.setKai1(RString.EMPTY);
         }
-        return RString.EMPTY;
     }
 
-    private RString getFlag(int 連番, List<RembanServiceJokyoBusiness> serviceJokyos) {
-        if (連番 < serviceJokyos.size()) {
-            return new RString(serviceJokyos.get(連番).getサービスの状況フラグ());
+    private void setDataGridJigyoshaItiranPlacement(dgServiceJokyo_Row dgJigyoshaItiran,
+            RembanServiceJokyoBusiness serviceJokyo,
+            IGaikyoChosahyoServiceJokyo 概況調査サービス状況,
+            boolean isOdd) {
+        if (isOdd) {
+            setDataGridJigyoshaItiranDetail_Right(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況);
+        } else {
+            setDataGridJigyoshaItiranDetail_Left(dgJigyoshaItiran, serviceJokyo, 概況調査サービス状況);
         }
-        return RString.EMPTY;
+    }
+
+    private void setDataGridJigyoshaItiranDetail_Left(dgServiceJokyo_Row dgJigyoshaItiran,
+            RembanServiceJokyoBusiness serviceJokyo,
+            IGaikyoChosahyoServiceJokyo 概況調査サービス状況) {
+        dgJigyoshaItiran.setServiceName1(概況調査サービス状況.get名称());
+        dgJigyoshaItiran.setKai1(概況調査サービス状況.get単位1());
+        dgJigyoshaItiran.setServiceJokyo1(new RString(serviceJokyo.getサービスの状況フラグ()));
+        dgJigyoshaItiran.setTatsu1(概況調査サービス状況.get単位2());
+    }
+
+    private void setDataGridJigyoshaItiranDetail_Right(dgServiceJokyo_Row dgJigyoshaItiran,
+            RembanServiceJokyoBusiness serviceJokyo,
+            IGaikyoChosahyoServiceJokyo 概況調査サービス状況) {
+        dgJigyoshaItiran.setServiceName2(概況調査サービス状況.get名称());
+        dgJigyoshaItiran.setKai2(概況調査サービス状況.get単位1());
+        dgJigyoshaItiran.setServiceJokyo2(new RString(serviceJokyo.getサービスの状況フラグ()));
+        dgJigyoshaItiran.setTatsu2(概況調査サービス状況.get単位2());
+    }
+
+    private RString get給付区分(RString サービス区分) {
+        if (ServiceKubunCode.予防給付サービス.getコード().equals(サービス区分)) {
+            return 予防給付サービス;
+        } else if (ServiceKubunCode.介護給付サービス.getコード().equals(サービス区分)) {
+            return 介護給付サービス;
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private void set概況調査(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList,
@@ -423,11 +416,13 @@ public class ChosaKekkaInfoGaikyoHandler {
      */
     private void set住宅改修(List<RembanServiceJokyoBusiness> serviceJokyos) {
         for (RembanServiceJokyoBusiness jokyoBusiness : serviceJokyos) {
-            if (jokyoBusiness.get連番() == 1) {
-                if (jokyoBusiness.getサービスの状況フラグ() == 1) {
-                    gaikyoDiv.getRdoJutakuKaishu().setSelectedKey(new RString("key0"));
-                } else {
-                    gaikyoDiv.getRdoJutakuKaishu().setSelectedKey(new RString("key1"));
+            if (Enum区分_サービスフラグ.equals(jokyoBusiness.getEnum区分())) {
+                if (jokyoBusiness.get連番() == 1) {
+                    if (jokyoBusiness.getサービスの状況フラグ() == 1) {
+                        gaikyoDiv.getRdoJutakuKaishu().setSelectedKey(new RString("key0"));
+                    } else {
+                        gaikyoDiv.getRdoJutakuKaishu().setSelectedKey(new RString("key1"));
+                    }
                 }
             }
         }
@@ -519,7 +514,6 @@ public class ChosaKekkaInfoGaikyoHandler {
 
     private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-//            if (gaikyoBusiness.get記入項目連番() == 1) {
             RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_市町村特別給付);
             if (RString.isNullOrEmpty(市町村特別給付ImagePath)) {
                 gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);
@@ -527,7 +521,6 @@ public class ChosaKekkaInfoGaikyoHandler {
             } else {
                 gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(sanitizePath(市町村特別給付ImagePath));
             }
-//            } else {
             RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_在宅サービス);
             if (RString.isNullOrEmpty(在宅サービスImagePath)) {
                 gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setDisplayNone(true);
@@ -535,7 +528,9 @@ public class ChosaKekkaInfoGaikyoHandler {
             } else {
                 gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(sanitizePath(在宅サービスImagePath));
             }
-//            }
+        } else {
+            gaikyoDiv.getTokubetsuKyufuPanel().setDisplayNone(true);
+            gaikyoDiv.getZaitakuServicePanel().setDisplayNone(true);
         }
     }
 

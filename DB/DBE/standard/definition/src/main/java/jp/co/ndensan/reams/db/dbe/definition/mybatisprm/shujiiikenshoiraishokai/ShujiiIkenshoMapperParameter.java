@@ -17,21 +17,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShujiiIkenshoMapperParameter {
 
-    private final RString shinseishoKanriNo;
+    private final RString hihokenshaNo;
+    private final RString shokisaiHokenshaNo;
     private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 延期 = ShoriJotaiKubun.延期.getコード();
 
-    private ShujiiIkenshoMapperParameter(RString shinseishoKanriNo) {
-        this.shinseishoKanriNo = shinseishoKanriNo;
+    private ShujiiIkenshoMapperParameter(RString hihokenshaNo, RString shokisaiHokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+        this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shinseishoKanriNo 申請書管理番号
+     * @param hihokenshaNo 被保険者番号
+     * @param shokisaiHokenshaNo 証記載保険者番号
      * @return 主治医意見書作成依頼情報パラメータ
      */
-    public static ShujiiIkenshoMapperParameter createParam(RString shinseishoKanriNo) {
-        return new ShujiiIkenshoMapperParameter(shinseishoKanriNo);
+    public static ShujiiIkenshoMapperParameter createParam(RString hihokenshaNo, RString shokisaiHokenshaNo) {
+        return new ShujiiIkenshoMapperParameter(hihokenshaNo, shokisaiHokenshaNo);
     }
 }

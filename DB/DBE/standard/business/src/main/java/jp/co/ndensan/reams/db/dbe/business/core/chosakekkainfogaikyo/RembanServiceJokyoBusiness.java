@@ -27,6 +27,15 @@ public class RembanServiceJokyoBusiness {
     public RembanServiceJokyoBusiness(RembanServiceJokyoRelateEntity jokyoRelateEntity) {
         this.jokyoRelateEntity = jokyoRelateEntity;
     }
+    
+    /**
+     * Enum区分を返します。
+     *
+     * @return Enum区分
+     */
+    public RString getEnum区分() {
+        return jokyoRelateEntity.getNumber();
+    }
 
     /**
      * 記入項目連番を返します。
@@ -54,13 +63,13 @@ public class RembanServiceJokyoBusiness {
     public Code get厚労省IF識別コード() {
         return jokyoRelateEntity.getKoroshoIfShikibetsuCode();
     }
-
+    
     /**
-     * Enum区分を返します。
+     * サービス区分コードを返します。
      *
-     * @return Enum区分
+     * @return 厚労省IF識別コード
      */
-    public RString getEnum区分() {
-        return jokyoRelateEntity.getNumber();
+    public RString getサービス区分コード() {
+        return jokyoRelateEntity.getServiceKubunCode().value();
     }
 }
