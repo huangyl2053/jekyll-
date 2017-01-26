@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteichosaIraiValidationHandler {
 
-    private static final RString 未 = new RString("未");
     private final NinteichosaIraiDiv div;
 
     /**
@@ -161,20 +160,6 @@ public class NinteichosaIraiValidationHandler {
     }
 
     /**
-     * 「割付ける」ボタンを押下する場合、入力チェックを実行します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 入力チェック_btnWaritsukeKakutei() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-
-        if (RString.isNullOrEmpty(div.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.委託先入力必須));
-        }
-        return validationMessages;
-    }
-
-    /**
      * 「調査依頼を完了する」ボタンを押下する場合、入力チェックを実行します。
      *
      * @return ValidationMessageControlPairs
@@ -281,8 +266,7 @@ public class NinteichosaIraiValidationHandler {
         認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
         委託先未設定(DbeErrorMessages.委託先未設定),
         保険者が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "保険者"),
-        委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先"),
-        委託先入力必須(UrErrorMessages.必須, "委託先");
+        委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先");
 
         private final Message message;
 

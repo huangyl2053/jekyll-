@@ -125,8 +125,16 @@ module DBZ
 
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                editTypes.addEditType("ChosaItakusakiCode_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            }
+            
+            public getChosaItakusakiCode_required() {
+                return this.controls.txtChosaItakusakiCode().required;
+            }
+
+            public setChosaItakusakiCode_required(value) {
+                return this.controls.txtChosaItakusakiCode().required = value;
             }
         }
     }

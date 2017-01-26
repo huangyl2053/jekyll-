@@ -278,10 +278,6 @@ public class NinteichosaIrai {
      * @return ResponseData
      */
     public ResponseData onClick_btnWaritsukeKakutei(NinteichosaIraiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnWaritsukeKakutei();
-        if (vallidation.iterator().hasNext()) {
-            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        }
         NinteichosaIraiHandler handler = getHandler(requestDiv);
         handler.set認定調査依頼情報();
         handler.set認定調査依頼完了対象者一覧パネル使用可否(false);
