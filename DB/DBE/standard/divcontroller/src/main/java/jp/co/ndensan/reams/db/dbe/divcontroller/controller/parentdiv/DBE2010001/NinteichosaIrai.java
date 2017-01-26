@@ -199,19 +199,14 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            int 要割付人数 = 調査機関自動割付処理(requestDiv);
-            if (要割付人数 > 0) {
+            if (is自動割付可能(requestDiv)) {
+                調査機関自動割付処理(requestDiv);
+                return ResponseData.of(requestDiv).respond();
+            } else {
                 return ResponseData.of(requestDiv).addMessage(new InformationMessage(
                         DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode(),
                         DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().evaluate())).respond();
-            } else {
-                return ResponseData.of(requestDiv).respond();
             }
-        }
-        if (new RString(DbeInformationMessages.割付申請者人数が最大割付可能人数を超過.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(requestDiv).initDataGrid();
-            return ResponseData.of(requestDiv).respond();
         }
         return ResponseData.of(requestDiv).respond();
     }
@@ -623,40 +618,56 @@ public class NinteichosaIrai {
         return null;
     }
 
-    private int 調査機関自動割付処理(NinteichosaIraiDiv requestDiv) {
+    private boolean is自動割付可能(NinteichosaIraiDiv requestDiv) {
+        List<dgNinteiTaskList_Row> selectedItems = requestDiv.getDgNinteiTaskList().getSelectedItems();
+        List<NinteichosaItakusakiJohoRelate> 認定調査委託先And調査員情報リスト = NinteichosaIraiManager.createInstance()
+                .get認定調査委託先And調査員情報リスト(selectedItems.get(0).getGetShoKisaiHokenshaNo(), selectedItems.get(0).getChikuCode());
+        int 調査員情報Index = 0;
+        NinteichosaItakusakiJohoRelate 認定調査委託先And調査員情報 = 認定調査委託先And調査員情報リスト.get(調査員情報Index);
+        int 調査可能人数_月 = 認定調査委託先And調査員情報.getChosainJoho().get調査可能人数_月();
+        for (int 要割付人数 = selectedItems.size(); 要割付人数 > 0; 要割付人数--) {
+            if (調査可能人数_月 == 0) {
+                for (int index = 調査員情報Index + 1; index < 認定調査委託先And調査員情報リスト.size(); index++) {
+                    調査員情報Index = index;
+                    if (認定調査委託先And調査員情報リスト.get(index).getChosainJoho().get調査可能人数_月() > 0) {
+                        認定調査委託先And調査員情報 = 認定調査委託先And調査員情報リスト.get(index);
+                        調査可能人数_月 = 認定調査委託先And調査員情報.getChosainJoho().get調査可能人数_月();
+                        break;
+                    }
+                }
+                if (調査員情報Index >= 認定調査委託先And調査員情報リスト.size()) {
+                    return false;
+                }
+            }
+            調査可能人数_月 = 調査可能人数_月 - 1;
+        }
+        return true;
+    }
+
+    private void 調査機関自動割付処理(NinteichosaIraiDiv requestDiv) {
         NinteichosaIraiHandler handler = getHandler(requestDiv);
         List<dgNinteiTaskList_Row> selectedItems = requestDiv.getDgNinteiTaskList().getSelectedItems();
         NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
         List<NinteichosaItakusakiJohoRelate> 認定調査委託先And調査員情報リスト
                 = manager.get認定調査委託先And調査員情報リスト(selectedItems.get(0).getGetShoKisaiHokenshaNo(), selectedItems.get(0).getChikuCode());
-        int 要割付人数 = selectedItems.size();
         int 調査員情報Index = 0;
         NinteichosaItakusakiJohoRelate 認定調査委託先And調査員情報 = 認定調査委託先And調査員情報リスト.get(調査員情報Index);
         int 調査可能人数_月 = 認定調査委託先And調査員情報.getChosainJoho().get調査可能人数_月();
         for (dgNinteiTaskList_Row row : selectedItems) {
-            if (要割付人数 == 0) {
-                return 要割付人数;
-            } else {
-                if (調査可能人数_月 == 0) {
-                    for (int index = 調査員情報Index + 1; index < 認定調査委託先And調査員情報リスト.size(); index++) {
-                        調査員情報Index = index;
-                        if (認定調査委託先And調査員情報リスト.get(index).getChosainJoho().get調査可能人数_月() > 0) {
-                            認定調査委託先And調査員情報 = 認定調査委託先And調査員情報リスト.get(index);
-                            調査可能人数_月 = 認定調査委託先And調査員情報.getChosainJoho().get調査可能人数_月();
-                            break;
-                        }
-                    }
-                    if (調査員情報Index >= 認定調査委託先And調査員情報リスト.size()) {
-                        return 要割付人数;
+            if (調査可能人数_月 == 0) {
+                for (int index = 調査員情報Index + 1; index < 認定調査委託先And調査員情報リスト.size(); index++) {
+                    調査員情報Index = index;
+                    if (認定調査委託先And調査員情報リスト.get(index).getChosainJoho().get調査可能人数_月() > 0) {
+                        認定調査委託先And調査員情報 = 認定調査委託先And調査員情報リスト.get(index);
+                        調査可能人数_月 = 認定調査委託先And調査員情報.getChosainJoho().get調査可能人数_月();
+                        break;
                     }
                 }
-                int 認定調査依頼履歴番号 = manager.getMax認定調査依頼履歴番号(row.getShinseishoKanriNo());
-                handler.set認定調査依頼情報(row, 認定調査委託先And調査員情報, 認定調査依頼履歴番号 + 1);
-                調査可能人数_月 = 調査可能人数_月 - 1;
-                要割付人数 = 要割付人数 - 1;
             }
+            int 認定調査依頼履歴番号 = manager.getMax認定調査依頼履歴番号(row.getShinseishoKanriNo());
+            handler.set認定調査依頼情報(row, 認定調査委託先And調査員情報, 認定調査依頼履歴番号 + 1);
+            調査可能人数_月 = 調査可能人数_月 - 1;
         }
-        return 要割付人数;
     }
 
     private RString get申請区分_申請時_コード(RString 名称) {

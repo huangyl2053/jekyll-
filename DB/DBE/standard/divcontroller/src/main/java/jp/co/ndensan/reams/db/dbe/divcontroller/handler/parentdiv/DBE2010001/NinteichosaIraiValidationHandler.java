@@ -70,7 +70,7 @@ public class NinteichosaIraiValidationHandler {
         } else {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : selected) {
-                if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty()) {
+                if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty() || row.getRowState().equals(RowState.Modified)) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
                     break;
                 }
@@ -133,8 +133,8 @@ public class NinteichosaIraiValidationHandler {
             if (is異なった保険者(選択されたデータ)) {
                 validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_保険者));
             }
-            if (is委托先非空(選択されたデータ)) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.選択必須));
+            if (is割付済申請者選択(選択されたデータ)) {
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.割付済申請者選択不可));
             }
         }
         return validationMessages;
@@ -269,7 +269,7 @@ public class NinteichosaIraiValidationHandler {
         該当データなし(UrErrorMessages.該当データなし),
         対象行を選択(UrErrorMessages.対象行を選択),
         複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
-        選択必須(DbeErrorMessages.選択必須, "未割付のデータ"),
+        割付済申請者選択不可(DbeErrorMessages.割付済申請者選択不可),
         選択割付必須(DbeErrorMessages.選択必須, "割付のデータ"),
         存在しない(UrErrorMessages.存在しない, "割付可能な調査委託先"),
         割付可能人数は0です_割付不可(DbeErrorMessages.割付可能人数は0です_割付不可),
@@ -322,13 +322,12 @@ public class NinteichosaIraiValidationHandler {
         return false;
     }
 
-    private boolean is委托先非空(List<dgNinteiTaskList_Row> 選択されたデータ) {
+    private boolean is割付済申請者選択(List<dgNinteiTaskList_Row> 選択されたデータ) {
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())) {
-                return false;
+            if (!RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
-
 }

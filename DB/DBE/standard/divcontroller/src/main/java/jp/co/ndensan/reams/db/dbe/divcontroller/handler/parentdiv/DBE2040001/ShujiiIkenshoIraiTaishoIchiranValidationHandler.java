@@ -67,7 +67,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         } else {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : selected) {
-                if (row.getIkenshoIraiDay().getValue() == null) {
+                if (row.getIkenshoIraiDay().getValue() == null || row.getRowState().equals(RowState.Modified)) {
                     validationMessages.add(new ValidationMessageControlPair(ValidationMessages.医療機関_主治医未割付));
                     break;
                 }

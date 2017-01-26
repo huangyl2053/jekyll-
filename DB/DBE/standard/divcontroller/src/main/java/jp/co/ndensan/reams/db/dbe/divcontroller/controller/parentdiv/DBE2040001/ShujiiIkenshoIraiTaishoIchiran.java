@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -65,7 +67,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ShujiiIkenshoIraiTaishoIchiran {
 
-    private static final RString CSVファイル名 = new RString("主治医意見書依頼一覧.csv");
+    private static final RString CSVファイルID_主治医意見書依頼一覧 = new RString("DBE204001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString NOTREATED = new RString("未");
     private static final RString 未処理 = new RString("未処理");
@@ -166,7 +168,8 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(ShujiiIkenshoIraiTaishoIchiranDiv div, IDownLoadServletResponse response) {
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_主治医意見書依頼一覧);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
@@ -179,12 +182,12 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             }
             csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         AccessLogger.log(AccessLogType.照会, personalData);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
