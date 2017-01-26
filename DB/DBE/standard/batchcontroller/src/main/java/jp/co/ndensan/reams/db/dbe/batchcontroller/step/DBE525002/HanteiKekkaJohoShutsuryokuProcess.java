@@ -176,9 +176,9 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("抽出期間："));
-        jokenBuilder.append(dateFormat(processPrm.getChushutsuFromDate()));
+        jokenBuilder.append(processPrm.getChushutsuFromDate());
         jokenBuilder.append(new RString("　～　"));
-        jokenBuilder.append(dateFormat(processPrm.getChushutsuToDate()));
+        jokenBuilder.append(processPrm.getChushutsuToDate());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("被保険者番号："));
@@ -205,10 +205,38 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
         }
         jokenBuilder.delete(jokenBuilder.length() - 1, jokenBuilder.length());
         出力条件List.add(jokenBuilder.toRString());
+        
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("getChushutsuFromDate："));
+        jokenBuilder.append(processPrm.getChushutsuFromDate());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder = new RStringBuilder();
+        jokenBuilder.append(new RString("getChushutsuHoho："));
+        jokenBuilder.append(processPrm.getChushutsuHoho());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder.append(new RString("getChushutsuToDate："));
+        jokenBuilder.append(processPrm.getChushutsuToDate());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder.append(new RString("getDataShutsuryokuUmu："));
+        jokenBuilder.append(processPrm.getDataShutsuryokuUmu());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder.append(new RString("getFayirukuben："));
+        jokenBuilder.append(processPrm.getFayirukuben());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder.append(new RString("getHihokenshaNo："));
+        jokenBuilder.append(processPrm.getHihokenshaNo());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder.append(new RString("getHokensha："));
+        jokenBuilder.append(processPrm.getHokensha());
+        出力条件List.add(jokenBuilder.toRString());
+        jokenBuilder.append(new RString("getHokenshaName："));
+        jokenBuilder.append(processPrm.getHokenshaName());
+        出力条件List.add(jokenBuilder.toRString());
+        
         return 出力条件List;
     }
     
-    private static RString dateFormat(RString date) {
+    private RString dateFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;
         }
