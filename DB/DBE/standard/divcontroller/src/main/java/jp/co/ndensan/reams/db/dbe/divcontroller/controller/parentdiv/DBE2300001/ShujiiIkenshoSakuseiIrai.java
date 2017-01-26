@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2300001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.WaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.DBE2300001StateName;
@@ -354,7 +353,7 @@ public class ShujiiIkenshoSakuseiIrai {
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set主治医医療機関コード(主治医医療機関コード)
                             .set主治医コード(主治医コード)
-                            .set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.初回.getCode())
+                            .set主治医意見書依頼区分(IkenshoIraiKubun.初回依頼.getコード())
                             .set主治医意見書作成回数(1)
                             .set医師区分コード(医師区分コード)
                             .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
@@ -369,7 +368,7 @@ public class ShujiiIkenshoSakuseiIrai {
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set主治医医療機関コード(主治医医療機関コード)
                             .set主治医コード(主治医コード)
-                            .set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.再依頼.getCode())
+                            .set主治医意見書依頼区分(IkenshoIraiKubun.再依頼.getコード())
                             .set主治医意見書作成回数(1)
                             .set医師区分コード(医師区分コード)
                             .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
