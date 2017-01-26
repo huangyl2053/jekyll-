@@ -114,9 +114,9 @@ public class IkenshoSakuseiIraiHandler {
 
     private void set依頼区分() {
         List<KeyValueDataSource> 依頼区分 = new ArrayList<>();
-        依頼区分.add(new KeyValueDataSource(IkenshoIraiKubun.初回依頼.getコード(), IkenshoIraiKubun.初回依頼.get名称()));
-        依頼区分.add(new KeyValueDataSource(IkenshoIraiKubun.再依頼.getコード(), IkenshoIraiKubun.再依頼.get名称()));
-        依頼区分.add(new KeyValueDataSource(IkenshoIraiKubun.再意見書.getコード(), IkenshoIraiKubun.再意見書.get名称()));
+        for (IkenshoIraiKubun ikenshoIraiKubun : IkenshoIraiKubun.values()) {
+            依頼区分.add(new KeyValueDataSource(ikenshoIraiKubun.getコード(), ikenshoIraiKubun.get名称()));
+        }
         div.getDdlIraiKubun().setDataSource(依頼区分);
     }
 }

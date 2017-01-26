@@ -33,10 +33,10 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     private IkenshoIraiTorokuPanelDiv IkenshoIraiTorokuPanel;
     @JsonProperty("IkenshoIraiPrint")
     private IkenshoIraiPrintDiv IkenshoIraiPrint;
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("KanryoMessage")
     private KaigoKanryoMessageDiv KanryoMessage;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("ikenshoIraiRirekiNo")
     private RString ikenshoIraiRirekiNo;
     @JsonProperty("hiddenIuputModel")
@@ -85,21 +85,21 @@ public class IkenshoSakuseiIraiDiv extends Panel {
     }
 
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * getKanryoMessage
      * @return KanryoMessage
      */
     @JsonProperty("KanryoMessage")
     public IKaigoKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
+    }
+
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     /*
