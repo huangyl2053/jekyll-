@@ -114,8 +114,16 @@ var DBZ;
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                editTypes.addEditType("ChosaItakusakiCode_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            };
+
+            PublicProperties.prototype.getChosaItakusakiCode_required = function () {
+                return this.controls.txtChosaItakusakiCode().required;
+            };
+
+            PublicProperties.prototype.setChosaItakusakiCode_required = function (value) {
+                return this.controls.txtChosaItakusakiCode().required = value;
             };
             return PublicProperties;
         })();
