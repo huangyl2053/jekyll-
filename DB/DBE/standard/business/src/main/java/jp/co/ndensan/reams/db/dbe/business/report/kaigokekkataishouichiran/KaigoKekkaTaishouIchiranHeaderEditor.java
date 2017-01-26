@@ -67,11 +67,11 @@ class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranE
         source.chushutsuHoho = chushutsuHohoBuilder.toRString();
         RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
         if (!RString.isNullOrEmpty(item.getChushutsuKikanFrom())) {
-            iryoKikanCodeBulider.append(item.getChushutsuKikanFrom().toString());
+            iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanFrom().toString()).wareki().toDateString());
         }
         iryoKikanCodeBulider.append(KARA);
         if (!RString.isNullOrEmpty(item.getChushutsuKikanTo())) {
-            iryoKikanCodeBulider.append(item.getChushutsuKikanTo().toString());
+            iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanTo().toString()).wareki().toDateString());
         }
         source.chushutsuKikan = iryoKikanCodeBulider.toRString();
 

@@ -98,7 +98,7 @@ public class DBE525002_HanteiKekkaHokenshaParameter extends BatchParameterBase {
      * @return ItakusakiChosainIchiranMybitisParamter
      */
     public HanteiKekkaJohoShutsuryokuProcessParamter toHanteiKekkaJohoShutsuryokuProcessParamter() {
-        return new HanteiKekkaJohoShutsuryokuProcessParamter(shinseishoKanriNoList, fayirukuben, chushutsuFromDate, chushutsuToDate, hokensha
-            ,hokenshaName,chushutsuHoho,hihokenshaNo,dataShutsuryokuUmu);
+        return new HanteiKekkaJohoShutsuryokuProcessParamter(shinseishoKanriNoList, fayirukuben, hokensha, hokenshaName
+            , chushutsuHoho, chushutsuFromDate, chushutsuToDate, hihokenshaNo, dataShutsuryokuUmu);
     }
 }
