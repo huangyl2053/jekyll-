@@ -68,6 +68,7 @@ public class Ikenshoget {
     private static final RString CSVファイル名 = new RString("主治医意見書入手一覧.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
+    private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
 
     /**
      * 完了処理・主治医意見書入手の初期化。(オンロード)<br/>
@@ -80,6 +81,9 @@ public class Ikenshoget {
             throw new PessimisticLockingException();
         }
         getHandler(div).initialize();
+        if (UIContainer_DBEUC23101.equals(ResponseHolder.getUIContainerId())) {
+            return ResponseData.of(div).setState(DBE2070001StateName.登録_完了可能);
+        }
         return ResponseData.of(div).setState(DBE2070001StateName.登録);
     }
 
@@ -115,7 +119,7 @@ public class Ikenshoget {
         getHandler(div).意見書入手List();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *

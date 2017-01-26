@@ -16,7 +16,8 @@ public enum DBE2310001TransitionEventName implements IContainerEvents {
 
     申請者検索に戻る("申請者検索に戻る"),
     申請者検索結果一覧に戻る("申請者検索結果一覧に戻る"),
-    処理完了("処理完了");
+    処理完了("処理完了"),
+    基本運用に進む("基本運用に進む");
 
     private final RString name;
 

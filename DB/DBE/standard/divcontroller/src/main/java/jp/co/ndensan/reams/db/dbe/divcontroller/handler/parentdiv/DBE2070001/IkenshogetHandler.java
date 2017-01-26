@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -49,6 +50,7 @@ public class IkenshogetHandler {
     private static final RString SELECTED_KEY1 = new RString("2");
     private static final RString SELECTED_KEY2 = new RString("3");
     private static final RString 主治医意見書入手を完了するボタン = new RString("btnIkenshoNyushuKanryo");
+    private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
 
     /**
      * コンストラクタです。
@@ -67,6 +69,12 @@ public class IkenshogetHandler {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         RDate システム日付 = RDate.getNowDate();
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
+        if (UIContainer_DBEUC23101.equals(ResponseHolder.getUIContainerId())) {
+            状態区分 = SELECTED_KEY1;
+            div.getRadJyotaiKubun().setDisabled(true);
+        } else {
+            div.getRadJyotaiKubun().setDisabled(false);
+        }
         RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
 
