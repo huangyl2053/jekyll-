@@ -153,8 +153,22 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getCcdShujiiInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
         div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
         div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(false);
-        div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
-        div.getTxtSakuseiIraiYmd().clearValue();
+        if (div.getDgNinteiTaskList().getSelectedItems().size() == 1) {
+            dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
+            div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
+            div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
+            div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
+            div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
+            div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
+            div.getDdlIraiKubun().setSelectedKey(
+                    (!row.getIkenshoIraiKubun().isEmpty())
+                    ? row.getIkenshoIraiKubun()
+                    : IkenshoIraiKubun.初回依頼.getコード());
+            div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
+        } else {
+            div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
+            div.getTxtSakuseiIraiYmd().clearValue();
+        }
     }
 
     /**
@@ -180,7 +194,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setKonkaiShujiiIryokikan(div.getCcdShujiiInput().getIryoKikanName());
             row.setKonkaiShujiiCode(div.getCcdShujiiInput().getShujiiCode());
             row.setKonkaiShujii(div.getCcdShujiiInput().getShujiiName());
-            row.setShiteiiFlag(div.getCcdShujiiInput().hasShiteii());
+            row.setIshiKubunCode((div.getCcdShujiiInput().hasShiteii()) ? IshiKubun.指定医.getCode() : IshiKubun.主治医.getCode());
             row.setIkenshoIraiKubun(div.getDdlIraiKubun().getSelectedKey());
             row.getIkenshoSakuseiIraiYMD().setValue(div.getTxtSakuseiIraiYmd().getValue());
             row.setRowState(RowState.Modified);
@@ -220,11 +234,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         builder.set主治医コード(row.getKonkaiShujiiCode());
         builder.set主治医意見書依頼区分(row.getIkenshoIraiKubun());
         builder.set主治医意見書作成回数(初期作成回数);
-        if (row.getShiteiiFlag()) {
-            builder.set医師区分コード(new Code(IshiKubun.指定医.getCode()));
-        } else {
-            builder.set医師区分コード(new Code(IshiKubun.主治医.getCode()));
-        }
+        builder.set医師区分コード(new Code(row.getIshiKubunCode()));
         builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getIkenshoSakuseiIraiYMD().getValue().toDateString()));
         builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
         builder.set論理削除フラグ(false);
@@ -294,8 +304,11 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
         row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
                 ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
+        row.setKonkaiShujiiIryokikanCode(business.get今回医療機関コード() == null ? RString.EMPTY : business.get今回医療機関コード());
         row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());
+        row.setKonkaiShujiiCode(business.get今回主治医コード() == null ? RString.EMPTY : business.get今回主治医コード());
         row.setKonkaiShujii(business.get今回主治医() == null ? RString.EMPTY : business.get今回主治医());
+        row.setIshiKubunCode(business.get医師区分コード() == null ? RString.EMPTY : business.get医師区分コード().value());
         row.setZenkaiIryokikan(business.get前回医療機関() == null ? RString.EMPTY : business.get前回医療機関());
         row.setZenkaiShujii(business.get前回主治医() == null ? RString.EMPTY : business.get前回主治医());
         row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().getEditedYubinNo());
@@ -309,6 +322,10 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
         row.setShichosonCode(business.get市町村コード());
         row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
+        row.setIkenshoIraiKubun(business.get主治医意見書依頼区分() == null ? RString.EMPTY : business.get主治医意見書依頼区分());
+        row.getIkenshoSakuseiIraiYMD().setValue(
+                business.get主治医意見書作成依頼年月日() == null || business.get主治医意見書作成依頼年月日().isEmpty()
+                ? null : new RDate(business.get主治医意見書作成依頼年月日().toString()));
         意見書依頼モードの日付設定(row, business);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()

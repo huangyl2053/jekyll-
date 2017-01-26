@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter;
@@ -426,7 +425,7 @@ public class NinteiChosaIrai {
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                             .set認定調査員コード(調査員コード)
-                            .set認定調査依頼区分コード(new Code(NinteichosaIraiKubun.初回.getCode()))
+                            .set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.初回.getコード()))
                             .set認定調査回数(0)
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
@@ -440,7 +439,7 @@ public class NinteiChosaIrai {
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                             .set認定調査員コード(調査員コード)
-                            .set認定調査依頼区分コード(new Code(NinteichosaIraiKubun.再調査.getCode()))
+                            .set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.再調査.getコード()))
                             .set認定調査回数(1)
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)

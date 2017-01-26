@@ -170,6 +170,15 @@ public class IKnSyoiRaiBusiness implements Serializable {
     }
 
     /**
+     * 主治医意見書依頼区分を返します。
+     *
+     * @return 主治医意見書依頼区分
+     */
+    public RString get主治医意見書依頼区分() {
+        return entity.getIkenshoIraiKubun();
+    }
+
+    /**
      * 主治医意見書作成督促年月日を返します。
      *
      * @return 主治医意見書作成督促年月日
@@ -233,6 +242,15 @@ public class IKnSyoiRaiBusiness implements Serializable {
     }
 
     /**
+     * 医師区分コードを返します。
+     *
+     * @return 医師区分コード
+     */
+    public Code get医師区分コード() {
+        return entity.getIshiKubunCode();
+    }
+
+    /**
      * 意見書作成回数区分を返します。
      *
      * @return 意見書作成回数区分
@@ -242,12 +260,30 @@ public class IKnSyoiRaiBusiness implements Serializable {
     }
 
     /**
+     * 今回医療機関コードを返します。
+     *
+     * @return 今回医療機関コード
+     */
+    public RString get今回医療機関コード() {
+        return entity.getShujiiIryokikanCode();
+    }
+
+    /**
      * 今回医療機関を返します。
      *
      * @return 今回医療機関
      */
     public RString get今回医療機関() {
         return entity.getIryoKikanMeisho();
+    }
+
+    /**
+     * 今回主治医コードを返します。
+     *
+     * @return 今回主治医コード
+     */
+    public RString get今回主治医コード() {
+        return entity.getShujiiCode();
     }
 
     /**
