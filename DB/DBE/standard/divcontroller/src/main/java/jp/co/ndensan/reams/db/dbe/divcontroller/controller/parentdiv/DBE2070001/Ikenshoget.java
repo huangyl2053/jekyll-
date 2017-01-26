@@ -33,9 +33,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -67,7 +64,6 @@ public class Ikenshoget {
 
     private static final RString CSVファイル名 = new RString("主治医意見書入手一覧.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
 
     /**
@@ -77,9 +73,6 @@ public class Ikenshoget {
      * @return レスポンスデータ
      */
     public ResponseData<IkenshogetDiv> onLoad(IkenshogetDiv div) {
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            throw new PessimisticLockingException();
-        }
         getHandler(div).initialize();
         if (UIContainer_DBEUC23101.equals(ResponseHolder.getUIContainerId())) {
             return ResponseData.of(div).setState(DBE2070001StateName.登録_完了可能);
@@ -182,7 +175,6 @@ public class Ikenshoget {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.イメージ取込み_規定_規定外_画面へ遷移).respond();
         }
         return ResponseData.of(div).respond();
@@ -217,7 +209,6 @@ public class Ikenshoget {
             }
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo());
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getIkenshoIraiRirekiNo());
-            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.主治医意見書入手へ遷移する).respond();
         }
         return ResponseData.of(div).respond();
@@ -286,7 +277,6 @@ public class Ikenshoget {
                     getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                 }
             }
-            RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("基本運用・主治医意見書入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Kanryo")));
