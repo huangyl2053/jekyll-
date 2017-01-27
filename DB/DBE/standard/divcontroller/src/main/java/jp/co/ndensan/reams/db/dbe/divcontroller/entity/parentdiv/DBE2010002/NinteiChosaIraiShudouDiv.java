@@ -7,20 +7,22 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiChosaIraiShudou のクラスファイル
- *
+ * NinteiChosaIraiShudou のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiChosaIraiShudouDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-04_20-07-38">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +33,14 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     private NinteichosaIraiByHandDiv NinteichosaIraiByHand;
     @JsonProperty("IraiprintPanel")
     private IraiprintPanelDiv IraiprintPanel;
+    @JsonProperty("NinteiChosaPrint")
+    private NinteiChosaPrintDiv NinteiChosaPrint;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
+    @JsonProperty("KanryoMessage")
+    private KaigoKanryoMessageDiv KanryoMessage;
+    @JsonProperty("hiddenIuputModel")
+    private RString hiddenIuputModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,12 +85,57 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     /*
+     * getNinteiChosaPrint
+     * @return NinteiChosaPrint
+     */
+    @JsonProperty("NinteiChosaPrint")
+    public NinteiChosaPrintDiv getNinteiChosaPrint() {
+        return NinteiChosaPrint;
+    }
+
+    /*
+     * setNinteiChosaPrint
+     * @param NinteiChosaPrint NinteiChosaPrint
+     */
+    @JsonProperty("NinteiChosaPrint")
+    public void setNinteiChosaPrint(NinteiChosaPrintDiv NinteiChosaPrint) {
+        this.NinteiChosaPrint = NinteiChosaPrint;
+    }
+
+    /*
      * getccdNinteiShinseishaKihonInfo
      * @return ccdNinteiShinseishaKihonInfo
      */
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return ccdNinteiShinseishaKihonInfo;
+    }
+
+    /*
+     * getKanryoMessage
+     * @return KanryoMessage
+     */
+    @JsonProperty("KanryoMessage")
+    public IKaigoKanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
+    }
+
+    /*
+     * gethiddenIuputModel
+     * @return hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public RString getHiddenIuputModel() {
+        return hiddenIuputModel;
+    }
+
+    /*
+     * sethiddenIuputModel
+     * @param hiddenIuputModel hiddenIuputModel
+     */
+    @JsonProperty("hiddenIuputModel")
+    public void setHiddenIuputModel(RString hiddenIuputModel) {
+        this.hiddenIuputModel = hiddenIuputModel;
     }
 
     /*
@@ -94,7 +147,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlIraiKubun(DropDownList ddlIraiKubun) {
+    public void  setDdlIraiKubun(DropDownList ddlIraiKubun) {
         this.getNinteichosaIraiByHand().setDdlIraiKubun(ddlIraiKubun);
     }
 
@@ -104,7 +157,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaIraiD(TextBoxDate txtChosaIraiD) {
+    public void  setTxtChosaIraiD(TextBoxDate txtChosaIraiD) {
         this.getNinteichosaIraiByHand().setTxtChosaIraiD(txtChosaIraiD);
     }
 
@@ -119,38 +172,8 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkIrai(CheckBoxList chkIrai) {
+    public void  setChkIrai(CheckBoxList chkIrai) {
         this.getIraiprintPanel().setChkIrai(chkIrai);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtHokkoymd() {
-        return this.getIraiprintPanel().getTxtHokkoymd();
-    }
-
-    @JsonIgnore
-    public void setTxtHokkoymd(TextBoxDate txtHokkoymd) {
-        this.getIraiprintPanel().setTxtHokkoymd(txtHokkoymd);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadKigen() {
-        return this.getIraiprintPanel().getRadKigen();
-    }
-
-    @JsonIgnore
-    public void setRadKigen(RadioButton radKigen) {
-        this.getIraiprintPanel().setRadKigen(radKigen);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtKigenymd() {
-        return this.getIraiprintPanel().getTxtKigenymd();
-    }
-
-    @JsonIgnore
-    public void setTxtKigenymd(TextBoxDate txtKigenymd) {
-        this.getIraiprintPanel().setTxtKigenymd(txtKigenymd);
     }
 
     @JsonIgnore
@@ -159,7 +182,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setNiteiChosaSelect(NiteiChosaSelectDiv NiteiChosaSelect) {
+    public void  setNiteiChosaSelect(NiteiChosaSelectDiv NiteiChosaSelect) {
         this.getIraiprintPanel().setNiteiChosaSelect(NiteiChosaSelect);
     }
 
@@ -169,7 +192,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkNinteichosaDesign(CheckBoxList chkNinteichosaDesign) {
+    public void  setChkNinteichosaDesign(CheckBoxList chkNinteichosaDesign) {
         this.getIraiprintPanel().getNiteiChosaSelect().setChkNinteichosaDesign(chkNinteichosaDesign);
     }
 
@@ -179,7 +202,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkNinteichosaOcr(CheckBoxList chkNinteichosaOcr) {
+    public void  setChkNinteichosaOcr(CheckBoxList chkNinteichosaOcr) {
         this.getIraiprintPanel().getNiteiChosaSelect().setChkNinteichosaOcr(chkNinteichosaOcr);
     }
 
@@ -189,7 +212,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkSaiCheck(CheckBoxList chkSaiCheck) {
+    public void  setChkSaiCheck(CheckBoxList chkSaiCheck) {
         this.getIraiprintPanel().getNiteiChosaSelect().setChkSaiCheck(chkSaiCheck);
     }
 
@@ -199,7 +222,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTokkiJokoSelect(TokkiJokoSelectDiv TokkiJokoSelect) {
+    public void  setTokkiJokoSelect(TokkiJokoSelectDiv TokkiJokoSelect) {
         this.getIraiprintPanel().setTokkiJokoSelect(TokkiJokoSelect);
     }
 
@@ -209,7 +232,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkTokkiJko(CheckBoxList chkTokkiJko) {
+    public void  setChkTokkiJko(CheckBoxList chkTokkiJko) {
         this.getIraiprintPanel().getTokkiJokoSelect().setChkTokkiJko(chkTokkiJko);
     }
 
@@ -219,8 +242,48 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkTenyuryoku(CheckBoxList chkTenyuryoku) {
+    public void  setChkTenyuryoku(CheckBoxList chkTenyuryoku) {
         this.getIraiprintPanel().getTokkiJokoSelect().setChkTenyuryoku(chkTenyuryoku);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtHokkoymd() {
+        return this.getIraiprintPanel().getTxtHokkoymd();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokkoymd(TextBoxDate txtHokkoymd) {
+        this.getIraiprintPanel().setTxtHokkoymd(txtHokkoymd);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKigen() {
+        return this.getIraiprintPanel().getRadKigen();
+    }
+
+    @JsonIgnore
+    public void  setRadKigen(RadioButton radKigen) {
+        this.getIraiprintPanel().setRadKigen(radKigen);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtKigenymd() {
+        return this.getIraiprintPanel().getTxtKigenymd();
+    }
+
+    @JsonIgnore
+    public void  setTxtKigenymd(TextBoxDate txtKigenymd) {
+        this.getIraiprintPanel().setTxtKigenymd(txtKigenymd);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnPrint() {
+        return this.getNinteiChosaPrint().getBtnPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnPrint(ButtonDialog btnPrint) {
+        this.getNinteiChosaPrint().setBtnPrint(btnPrint);
     }
 
     // </editor-fold>

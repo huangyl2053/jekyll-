@@ -225,6 +225,7 @@ public class IraishoIkkatsuHakko {
         } else {
             param.setKyotsuHizuke(RString.EMPTY);
         }
+        param.setBunshoNo(div.getCcdBunshoNo().get文書番号());
         return ResponseData.of(param).respond();
     }
 

@@ -192,17 +192,17 @@ public class NinteiShinseishaFinder {
         if (RString.isNullOrEmpty(nowPhase)) {
             //div.getChkShoriJotai().setDisabled(true);
             div.getChkKoshinTaishoChushutsu().setDisabled(true);
-            div.getChkIchijiHantei().setDisabled(true);
-            div.getChkShinseiUketsuke().setDisabled(true);
-            div.getChkMasking().setDisabled(true);
-            div.getChkChosaIrai().setDisabled(true);
-            div.getChkShinsakaiToroku().setDisabled(true);
-            div.getChkIkenshoIrai().setDisabled(true);
-            div.getChkNijiHantei().setDisabled(true);
-            div.getChkChosaNyushu().setDisabled(true);
+            div.getChkIchijiHantei().setDisabled(false);
+            div.getChkShinseiUketsuke().setDisabled(false);
+            div.getChkMasking().setDisabled(false);
+            div.getChkChosaIrai().setDisabled(false);
+            div.getChkShinsakaiToroku().setDisabled(false);
+            div.getChkIkenshoIrai().setDisabled(false);
+            div.getChkNijiHantei().setDisabled(false);
+            div.getChkChosaNyushu().setDisabled(false);
             div.getChkTsuchiShori().setDisabled(true);
-            div.getChkIkenshoNyushu().setDisabled(true);
-            div.getChkGetsureiShori().setDisabled(true);
+            div.getChkIkenshoNyushu().setDisabled(false);
+            div.getChkGetsureiShori().setDisabled(false);
         } else {
             //div.getChkShoriJotai().setDisabled(false);
 
@@ -282,6 +282,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkShinseiUketsuke(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理状態完了 = new RString("key0");
         RString 処理状態未完了 = new RString("key1");
         List<RString> selectedkeyMikann = new ArrayList();
@@ -314,6 +317,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkChosaIrai(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         // ②フェーズDDLが調査依頼の場合
         if (KanryoInfoPhase.調査依頼.getコード().equals(nowPhase)) {
             RString 処理状態完了 = new RString("key0");
@@ -346,6 +352,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkIkenshoIrai(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         // ③フェーズDDLが意見書依頼の場合
         if (KanryoInfoPhase.意見書依頼.getコード().equals(nowPhase)) {
             RString 処理状態完了 = new RString("key0");
@@ -378,6 +387,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkChosaNyushu(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         // ④フェーズDDLが調査入手の場合
         if (KanryoInfoPhase.調査入手.getコード().equals(nowPhase)) {
             RString 処理状態完了 = new RString("key0");
@@ -411,6 +423,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkIkenshoNyushu(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         // ⑤フェーズDDLが意見書入手の場合
         if (KanryoInfoPhase.意見書入手.getコード().equals(nowPhase)) {
             RString 処理状態完了 = new RString("key0");
@@ -444,6 +459,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkIchijiHantei(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理状態完了 = new RString("key0");
         RString 処理状態未完了 = new RString("key1");
         List<RString> selectedkeyMikann = new ArrayList();
@@ -485,6 +503,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkMasking(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理状態完了 = new RString("key0");
         RString 処理状態未完了 = new RString("key1");
         List<RString> selectedkeyMikann = new ArrayList();
@@ -524,6 +545,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkShinsakaiToroku(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理状態完了 = new RString("key0");
         RString 処理状態未完了 = new RString("key1");
         List<RString> selectedkeyMikann = new ArrayList();
@@ -564,6 +588,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkNijiHantei(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理状態完了 = new RString("key0");
         RString 処理状態未完了 = new RString("key1");
         List<RString> selectedkeyMikann = new ArrayList();
@@ -605,6 +632,9 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_chkGetsureiShori(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+        if (RString.isNullOrEmpty(nowPhase)) {
+            return ResponseData.of(div).respond();
+        }
         RString 処理状態完了 = new RString("key0");
         RString 処理状態未完了 = new RString("key1");
         List<RString> selectedkeyMikann = new ArrayList();

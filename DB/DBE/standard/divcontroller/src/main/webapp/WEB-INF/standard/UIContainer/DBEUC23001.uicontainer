@@ -13,15 +13,39 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2300001",
-     "toLayoutTitle": "主治医意見書作成依頼",
-     "toState": "検索"
+     "toLayoutTitle": "主治医意見書作成一覧",
+     "toState": "初期表示"
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2300001",
-     "layoutTitle": "主治医意見書作成依頼",
+     "layoutTitle": "主治医意見書作成一覧",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2300001",
+     "layoutTitle": "主治医意見書作成一覧",
+     "eventName": "基本運用へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2040001",
+     "toLayoutTitle": "基本運用・主治医意見書依頼",
+     "toState": "完了のみ登録"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2040001",
+     "layoutTitle": "基本運用・主治医意見書依頼",
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""

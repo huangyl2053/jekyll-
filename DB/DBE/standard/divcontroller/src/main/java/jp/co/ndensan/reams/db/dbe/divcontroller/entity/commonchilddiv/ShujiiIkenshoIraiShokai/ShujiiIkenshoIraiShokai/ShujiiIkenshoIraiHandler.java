@@ -45,16 +45,23 @@ public class ShujiiIkenshoIraiHandler {
      *
      */
     public void initialize() {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 被保険者番号 = div.getHdnHihokenshaNo();
+        if (RString.isNullOrEmpty(被保険者番号)) {
+            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        }
+        RString 証記載保険者番号 = div.getHdnShokisaiHokenshaNo();
+        if (RString.isNullOrEmpty(証記載保険者番号)) {
+            証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
+        }
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
-        List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(申請書管理番号).records();
-        init(認定調査情報);
+        List<ShujiiIkenshoIraiBusiness> 主治医意見書依頼情報 = finder.getShujiiIkenshoIraiJoho(被保険者番号, 証記載保険者番号).records();
+        init(主治医意見書依頼情報);
     }
 
-    private void init(List<ShujiiIkenshoIraiBusiness> 認定調査情報) {
+    private void init(List<ShujiiIkenshoIraiBusiness> 主治医意見書依頼情報) {
         List<dgIkenshoIraiIchiran_Row> dataRowList = new ArrayList<>();
         Integer index = 1;
-        for (ShujiiIkenshoIraiBusiness shujiiikenshoirai : 認定調査情報) {
+        for (ShujiiIkenshoIraiBusiness shujiiikenshoirai : 主治医意見書依頼情報) {
             dgIkenshoIraiIchiran_Row row = new dgIkenshoIraiIchiran_Row();
             row.setNumber(new RString(index.toString()));
             if (shujiiikenshoirai.getNinteiShinseiYMD() != null) {

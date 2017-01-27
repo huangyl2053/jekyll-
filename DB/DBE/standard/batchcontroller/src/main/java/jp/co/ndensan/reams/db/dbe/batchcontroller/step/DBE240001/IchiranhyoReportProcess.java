@@ -51,7 +51,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書tmp");
     private static final ReportId 帳票ID = ReportIdDBZ.DBE220002.getReportId();
     private int 連番 = 1;
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("jigyoshaNo")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shichosoncode"), new RString("chosaitakusakicode")));
     private HomonChosaIraishoBusiness business;
     private NinshoshaSource ninshoshaSource;
     private Map<Integer, RString> 通知文Map;
@@ -95,7 +95,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     }
 
     private boolean hasBrek(HomonChosaIraishoRelateEntity before, HomonChosaIraishoRelateEntity current) {
-        return !before.get事業者番号().equals(current.get事業者番号());
+        return !before.get証記載保険者番号().equals(current.get証記載保険者番号()) || !before.get認定調査委託先コード().equals(current.get認定調査委託先コード());
     }
 
     @Override

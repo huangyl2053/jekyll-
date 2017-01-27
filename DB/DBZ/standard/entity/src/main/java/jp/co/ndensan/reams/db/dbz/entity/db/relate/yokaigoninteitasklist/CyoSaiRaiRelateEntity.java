@@ -47,6 +47,7 @@ public class CyoSaiRaiRelateEntity implements Serializable {
     private FlexibleDate ninteichosaIraiKanryoYMD;
     private FlexibleDate iraishoShutsuryokuYMD;
     private FlexibleDate chosahyoTouShutsuryokuYMD;
+    private FlexibleDate ninteichosaIraiYMD;
     private FlexibleDate ninteichosaKigenYMD;
     private Code ninteichosaIraiKubunCode;
     private FlexibleDate ninteichosaTokusokuYMD;
@@ -55,6 +56,7 @@ public class CyoSaiRaiRelateEntity implements Serializable {
     private int ninteichosaIraiKaisu;
     private RString ninteichosaItakusakiCode;
     private RString jigyoshaMeisho;
+    private RString ninteiChosainCode;
     private RString chosainShimei;
     private RString before_jigyoshaMeisho;
     private RString before_chosainShimei;

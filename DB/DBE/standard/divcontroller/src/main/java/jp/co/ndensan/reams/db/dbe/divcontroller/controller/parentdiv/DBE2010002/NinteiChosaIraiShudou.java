@@ -5,16 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2010002;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairaishudou.NinnteiChousairaiShudouBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002StateName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2010002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.NinteiChosaIraiShudouDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouValidationHandler;
@@ -27,6 +27,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
@@ -35,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -52,6 +55,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査依頼(手動)のコントローラです。
@@ -78,6 +83,7 @@ public class NinteiChosaIraiShudou {
     private static final RString CHKNAME_差異チェック票 = new RString("認定調査差異チェック票");
     private static final RString CHKNAME_概況特記 = new RString("概況特記");
     private static final RString CHKNAME_認定調査依頼該当者履歴一覧 = new RString("認定調査依頼該当者履歴一覧");
+    private static final int 履歴番号インクリメント = 1;
 
     /**
      * 画面初期化処理です。
@@ -162,9 +168,13 @@ public class NinteiChosaIraiShudou {
             NinteiShinseiJoho 更新用認定調査依頼情報 = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
                     NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value()));
             ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, 更新用認定調査依頼情報);
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            div.getNinteichosaIraiByHand().setDisabled(true);
+            div.getIraiprintPanel().setDisabled(true);
+            div.getKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE2010002StateName.Kanryo);
         }
-        return ResponseData.of(div).forwardWithEventName(DBE2010002TransitionEventName.個人依頼内容更新に戻る).respond();
+        return ResponseData.of(div).respond();
     }
 
     private void saveData(NinteiChosaIraiShudouDiv div) {
@@ -186,7 +196,6 @@ public class NinteiChosaIraiShudou {
         if (div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null) {
             認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
         }
-        NinteiShinseiJohoIdentifier ninteiShinseiJohoIdentifier = new NinteiShinseiJohoIdentifier(申請書管理番号);
 
         認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
                 .set調査区分(調査区分コード)
@@ -203,42 +212,34 @@ public class NinteiChosaIraiShudou {
                     .set認定調査依頼区分コード(認定調査依頼区分コード)
                     .set認定調査回数(1)
                     .set認定調査依頼年月日(認定調査依頼年月日)
-                    .set認定調査期限年月日(get認定調査期限年月日(div, 認定調査依頼年月日)).set論理削除フラグ(false)
-                    .set認定調査督促年月日(FlexibleDate.EMPTY).set認定調査督促メモ(RString.EMPTY).build();
+                    .set認定調査期限年月日(get認定調査期限年月日(div, 認定調査依頼年月日))
+                    .set論理削除フラグ(false)
+                    .set認定調査督促年月日(FlexibleDate.EMPTY)
+                    .set認定調査督促メモ(RString.EMPTY).build();
             NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(更新用認定調査依頼情報);
         } else if (修正モード.equals(モード)) {
-            NinteichosaIraiJohoIdentifier ninteichosaIraiJohoIdentifier = new NinteichosaIraiJohoIdentifier(申請書管理番号,
+            NinteichosaIraiJohoIdentifier updataNinteichosaIraiJohoIdentifier = new NinteichosaIraiJohoIdentifier(申請書管理番号,
                     Integer.parseInt(認定調査依頼履歴番号.toString()));
-            NinteichosaIraiJoho ninteichosaIraiJoho = 認定調査依頼情報.getNinteichosaIraiJoho(ninteichosaIraiJohoIdentifier);
-
+            NinteichosaIraiJoho updateNinteichosaIraiJoho = 認定調査依頼情報.getNinteichosaIraiJoho(updataNinteichosaIraiJohoIdentifier);
+            NinteichosaIraiJohoBuilder updateBuilder = updateNinteichosaIraiJoho.createBuilderForEdit();
+            updateBuilder.set論理削除フラグ(true);
+            updateBuilder.build().toEntity().setState(EntityDataState.Modified);
+            updateNinteichosaIraiJoho = updateBuilder.build();
+            NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(updateNinteichosaIraiJoho.modifiedModel());
+            
+            NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 
+                    Integer.parseInt(認定調査依頼履歴番号.toString()) + 履歴番号インクリメント);
             ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード))
                     .set認定調査委託先コード(認定調査委託先コード)
                     .set認定調査員コード(認定調査員コード)
+                    .set認定調査依頼区分コード(認定調査依頼区分コード)
+                    .set認定調査回数(1)
                     .set認定調査依頼年月日(認定調査依頼年月日)
                     .set認定調査期限年月日(get認定調査期限年月日(div, 認定調査依頼年月日))
-                    .set論理削除フラグ(false).build();
-            if (RString.isNullOrEmpty(ninteichosaIraiJoho.get認定調査督促メモ())) {
-                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set認定調査督促メモ(RString.EMPTY).build();
-            }
-            if (ninteichosaIraiJoho.get認定調査督促年月日() == null) {
-                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set認定調査督促年月日(FlexibleDate.EMPTY).build();
-            }
-            if (ninteichosaIraiJoho.get認定調査回数() == 0) {
-                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set認定調査回数(認定調査依頼履歴番号.toInt()).build();
-            }
-            RString 依頼書出力年月日_更新区分 = ViewStateHolder.get(ViewStateKeys.依頼書出力年月日_更新区分, RString.class);
-            RString 調査票等出力年月日_更新区分 = ViewStateHolder.get(ViewStateKeys.調査票等出力年月日_更新区分, RString.class);
-            FlexibleDate 発行日 = FlexibleDate.EMPTY;
-            if (div.getTxtHokkoymd().getValue() != null) {
-                発行日 = new FlexibleDate(div.getTxtHokkoymd().getValue().toDateString());
-            }
-            if (!RString.isNullOrEmpty(依頼書出力年月日_更新区分)) {
-                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set依頼書出力年月日(発行日).build();
-            }
-            if (!RString.isNullOrEmpty(調査票等出力年月日_更新区分)) {
-                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set調査票等出力年月日(発行日).build();
-            }
-            NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho.modifiedModel());
+                    .set論理削除フラグ(false)
+                    .set認定調査督促年月日(FlexibleDate.EMPTY)
+                    .set認定調査督促メモ(RString.EMPTY).build();
+            NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho);
         }
     }
 
@@ -572,6 +573,23 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnBack(NinteiChosaIraiShudouDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「依頼書等を印刷する」ボタン押下時
+     * 
+     * @param div NinteiChosaIraiShudouDiv
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<NinteiChosaIraiShudouDiv> onBeforeOpen_btnPrint(NinteiChosaIraiShudouDiv div) {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        申請書管理番号リスト.add(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        model.set申請書管理番号リスト(申請書管理番号リスト);
+        model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
+        model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 

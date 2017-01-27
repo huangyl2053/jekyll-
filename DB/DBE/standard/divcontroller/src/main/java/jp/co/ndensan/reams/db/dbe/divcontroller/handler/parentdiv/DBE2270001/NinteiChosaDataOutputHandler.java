@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 認定調査データ出力（モバイル）のHandlerクラスです。
@@ -139,12 +140,12 @@ public class NinteiChosaDataOutputHandler {
     /**
      * 認定調査一覧Gridの設定です。
      *
-     * @param masterList masterList
+     * @param searchResult SearchResult
      */
-    public void get認定調査一覧(List<NinteiChosaDataOutputBusiness> masterList) {
+    public void get認定調査一覧(SearchResult<NinteiChosaDataOutputBusiness> searchResult) {
         List<dgNinteiChosaData_Row> rowList = new ArrayList<>();
         boolean 共通ボタン活性フラグ = false;
-        for (NinteiChosaDataOutputBusiness master : masterList) {
+        for (NinteiChosaDataOutputBusiness master : searchResult.records()) {
             共通ボタン活性フラグ = true;
             dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
             row.setNinteiChosaItakusakiCode(master.get認定調査委託先コード());
@@ -165,7 +166,9 @@ public class NinteiChosaDataOutputHandler {
         if (共通ボタン活性フラグ) {
             //CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }
-        div.getNinteiIchiran().getDgNinteiChosaData().setDataSource(rowList);
+        div.getDgNinteiChosaData().setDataSource(rowList);
+        div.getDgNinteiChosaData().getGridSetting().setLimitRowCount(div.getTxtMaxCount().getValue().intValue());
+        div.getDgNinteiChosaData().getGridSetting().setSelectedRowCount(searchResult.totalCount());
     }
 
     /**

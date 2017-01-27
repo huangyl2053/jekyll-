@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tabKojinIraiNaiyouKoshinDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -635,6 +635,16 @@ public class tabKojinIraiNaiyouKoshinDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnChosaPrint() {
+        return this.getTblNinteichosa().getBtnChosaPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaPrint(ButtonDialog btnChosaPrint) {
+        this.getTblNinteichosa().setBtnChosaPrint(btnChosaPrint);
+    }
+
+    @JsonIgnore
     public KonkaiShujiiIraiJohoDiv getKonkaiShujiiIraiJoho() {
         return this.getTblIkensho().getKonkaiShujiiIraiJoho();
     }
@@ -972,6 +982,16 @@ public class tabKojinIraiNaiyouKoshinDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtIryoKikanDaihyoshaShimeiZen(TextBox txtIryoKikanDaihyoshaShimeiZen) {
         this.getTblIkensho().getZenkaiShujiiIraiJoho().setTxtIryoKikanDaihyoshaShimeiZen(txtIryoKikanDaihyoshaShimeiZen);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIkenshoPrint() {
+        return this.getTblIkensho().getBtnIkenshoPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
+        this.getTblIkensho().setBtnIkenshoPrint(btnIkenshoPrint);
     }
 
     // </editor-fold>

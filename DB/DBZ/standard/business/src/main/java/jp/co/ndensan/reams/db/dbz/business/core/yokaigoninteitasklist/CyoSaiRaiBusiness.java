@@ -190,6 +190,15 @@ public class CyoSaiRaiBusiness implements Serializable {
     }
 
     /**
+     * 認定調査依頼年月日を返します。
+     *
+     * @return 認定調査依頼年月日
+     */
+    public FlexibleDate get認定調査依頼年月日() {
+        return entity.getNinteichosaIraiYMD();
+    }
+
+    /**
      * 認定調査期限年月日を返します。
      *
      * @return 認定調査期限年月日
@@ -243,6 +252,11 @@ public class CyoSaiRaiBusiness implements Serializable {
         return entity.getNinteichosaIraiKaisu();
     }
 
+    /**
+     * 今回調査委託先コードを返します。
+     *
+     * @return 今回調査委託先コード
+     */
     public RString get今回調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
@@ -254,6 +268,15 @@ public class CyoSaiRaiBusiness implements Serializable {
      */
     public RString get今回調査委託先() {
         return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 今回調査員コードを返します。
+     *
+     * @return 今回調査員コード
+     */
+    public RString get今回調査員コード() {
+        return entity.getNinteiChosainCode();
     }
 
     /**

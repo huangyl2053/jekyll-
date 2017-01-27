@@ -27,6 +27,10 @@ public class ShinchokuDataOutputProcessParamter implements IBatchProcessParamete
     private final RString chushutsuFromDate;
     private final RString chushutsuToDate;
     private final RString hokensha;
+    private final RString hokenshaName;
+    private final RString chushutsuHoho;
+    private final RString hihokenshaNo;
+    private final RString dataShutsuryokuUmu;
     private RString 概況調査テキス;
 
     /**
@@ -37,18 +41,30 @@ public class ShinchokuDataOutputProcessParamter implements IBatchProcessParamete
      * @param 抽出期間From RString
      * @param 抽出期間To RString
      * @param 保険者 RString
+     * @param 保険者名称 RString;
+     * @param 抽出方法 RString
+     * @param 被保険者番号
+     * @param データ出力有無
      */
     public ShinchokuDataOutputProcessParamter(
             List<RString> 申請書管理番号リスト,
             RString ファイル区分,
             RString 抽出期間From,
             RString 抽出期間To,
-            RString 保険者) {
+            RString 保険者,
+            RString 保険者名称,
+            RString 抽出方法,
+            RString 被保険者番号,
+            RString データ出力有無) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.fayirukuben = ファイル区分;
         this.chushutsuFromDate = 抽出期間From;
         this.chushutsuToDate = 抽出期間To;
         this.hokensha = 保険者;
+        this.hokenshaName = 保険者名称;
+        this.chushutsuHoho = 抽出方法;
+        this.hihokenshaNo = 被保険者番号;
+        this.dataShutsuryokuUmu = データ出力有無;
     }
 
     /**

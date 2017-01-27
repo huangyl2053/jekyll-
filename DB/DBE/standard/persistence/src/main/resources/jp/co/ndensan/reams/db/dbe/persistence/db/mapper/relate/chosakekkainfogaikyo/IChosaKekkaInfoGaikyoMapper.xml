@@ -76,6 +76,7 @@
         <result property="remban" column="Gaikyo_remban"  />
         <result property="serviceJokyoFlag" column="Gaikyo_serviceJokyoFlag" />
         <result property="koroshoIfShikibetsuCode" column="Gaikyo_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"  />
+        <result property="serviceKubunCode" column="Gaikyo_serviceKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"  />
     </resultMap>
     <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList2"
                 resultMap="resultMap_RembanServiceJokyoRelateEntity" 
@@ -85,6 +86,7 @@
         ,DbT5207."remban" as "Gaikyo_remban"
         ,DbT5207."serviceJokyo" as "Gaikyo_serviceJokyoFlag"
         ,DbT5207."koroshoIfShikibetsuCode" as "Gaikyo_koroshoIfShikibetsuCode"
+        ,DbT5202."serviceKubunCode" as "Gaikyo_serviceKubunCode"
         FROM
         rgdb."DbT5207NinteichosahyoServiceJokyo" as DbT5207
         INNER JOIN 
@@ -110,6 +112,7 @@
         ELSE               
         0 END AS "Gaikyo_serviceJokyoFlag"
         ,DbT5208."koroshoIfShikibetsuCode" as "Gaikyo_koroshoIfShikibetsuCode"
+        ,DbT5202."serviceKubunCode" as "Gaikyo_serviceKubunCode"
         FROM
         rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as DbT5208
         INNER JOIN 
@@ -124,7 +127,10 @@
             AND 
             DbT5202."ninteichosaRirekiNo" = #{ninteichosaRirekiNo} 
             AND 
-            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
+            DbT5202."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun}
+        ORDER BY
+        "Gaikyo_1",
+        "Gaikyo_remban"
     </select>
     
     <resultMap id="resultMap_DbT5210NinteichosahyoShisetsuRiyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity" autoMapping="true">

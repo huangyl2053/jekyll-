@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 23 14:57:04 JST 2017 
+ * Thu Jan 26 10:42:55 JST 2017 
  */
 
 
@@ -39,7 +39,7 @@ public class dgNinteiTaskList_Row extends DataRow {
     private RString konkaiShujiiIryokikan;
     private RString konkaiShujiiCode;
     private RString konkaiShujii;
-    private Boolean shiteiiFlag;
+    private RString ishiKubunCode;
     private RString zenkaiIryokikan;
     private RString zenkaiShujii;
     private RString yubinNumber;
@@ -76,7 +76,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.konkaiShujiiIryokikan = RString.EMPTY;
         this.konkaiShujiiCode = RString.EMPTY;
         this.konkaiShujii = RString.EMPTY;
-        this.shiteiiFlag = false;
+        this.ishiKubunCode = RString.EMPTY;
         this.zenkaiIryokikan = RString.EMPTY;
         this.zenkaiShujii = RString.EMPTY;
         this.yubinNumber = RString.EMPTY;
@@ -110,7 +110,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("konkaiShujiiIryokikan", konkaiShujiiIryokikan);
         this.setOriginalData("konkaiShujiiCode", konkaiShujiiCode);
         this.setOriginalData("konkaiShujii", konkaiShujii);
-        this.setOriginalData("shiteiiFlag", shiteiiFlag);
+        this.setOriginalData("ishiKubunCode", ishiKubunCode);
         this.setOriginalData("zenkaiIryokikan", zenkaiIryokikan);
         this.setOriginalData("zenkaiShujii", zenkaiShujii);
         this.setOriginalData("yubinNumber", yubinNumber);
@@ -130,7 +130,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ikenshoSakuseiIraiYMD", ikenshoSakuseiIraiYMD);
     }
 
-    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, RString ikenshoIraiShokai, RString konkaiShujiiIryokikanCode, RString konkaiShujiiIryokikan, RString konkaiShujiiCode, RString konkaiShujii, Boolean shiteiiFlag, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxNum keikaNissu, TextBoxDate ikenshoIraiKanryoDay, RString shinseishoKanriNo, RString nyushoShisetsuCode, RString shichosonCode, RString ikenshoIraiRirekiNo, RString ikenshoIraiKubun, TextBoxDate ikenshoSakuseiIraiYMD) {
+    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxNum ikenshoIraiIkenCount, TextBoxDate ikenshoIraiDay, TextBoxDate ikenshoIraiIraishoHakkoDay, TextBoxDate ikenshoIraiIkenshoShutsuryokuDay, TextBoxDate ikenshoIraiKigen, RString ikenshoIraiShokai, RString konkaiShujiiIryokikanCode, RString konkaiShujiiIryokikan, RString konkaiShujiiCode, RString konkaiShujii, RString ishiKubunCode, RString zenkaiIryokikan, RString zenkaiShujii, RString yubinNumber, RString jusho, RString nyushoShisetsu, TextBoxDate ikenshoTokusokuHakkoDay, RString ikenshoTokusokuHoho, TextBoxNum ikenshoTokusokuCount, TextBoxDate ikenshoTokusokuLimit, TextBoxNum keikaNissu, TextBoxDate ikenshoIraiKanryoDay, RString shinseishoKanriNo, RString nyushoShisetsuCode, RString shichosonCode, RString ikenshoIraiRirekiNo, RString ikenshoIraiKubun, TextBoxDate ikenshoSakuseiIraiYMD) {
         super();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("hokensha", hokensha);
@@ -148,7 +148,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("konkaiShujiiIryokikan", konkaiShujiiIryokikan);
         this.setOriginalData("konkaiShujiiCode", konkaiShujiiCode);
         this.setOriginalData("konkaiShujii", konkaiShujii);
-        this.setOriginalData("shiteiiFlag", shiteiiFlag);
+        this.setOriginalData("ishiKubunCode", ishiKubunCode);
         this.setOriginalData("zenkaiIryokikan", zenkaiIryokikan);
         this.setOriginalData("zenkaiShujii", zenkaiShujii);
         this.setOriginalData("yubinNumber", yubinNumber);
@@ -182,7 +182,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.konkaiShujiiIryokikan = konkaiShujiiIryokikan;
         this.konkaiShujiiCode = konkaiShujiiCode;
         this.konkaiShujii = konkaiShujii;
-        this.shiteiiFlag = shiteiiFlag;
+        this.ishiKubunCode = ishiKubunCode;
         this.zenkaiIryokikan = zenkaiIryokikan;
         this.zenkaiShujii = zenkaiShujii;
         this.yubinNumber = yubinNumber;
@@ -266,8 +266,8 @@ public class dgNinteiTaskList_Row extends DataRow {
         return konkaiShujii;
     }
 
-    public Boolean getShiteiiFlag() {
-        return shiteiiFlag;
+    public RString getIshiKubunCode() {
+        return ishiKubunCode;
     }
 
     public RString getZenkaiIryokikan() {
@@ -418,9 +418,9 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.konkaiShujii = konkaiShujii;
     }
 
-    public void setShiteiiFlag(Boolean shiteiiFlag) {
-        this.setOriginalData("shiteiiFlag", shiteiiFlag);
-        this.shiteiiFlag = shiteiiFlag;
+    public void setIshiKubunCode(RString ishiKubunCode) {
+        this.setOriginalData("ishiKubunCode", ishiKubunCode);
+        this.ishiKubunCode = ishiKubunCode;
     }
 
     public void setZenkaiIryokikan(RString zenkaiIryokikan) {

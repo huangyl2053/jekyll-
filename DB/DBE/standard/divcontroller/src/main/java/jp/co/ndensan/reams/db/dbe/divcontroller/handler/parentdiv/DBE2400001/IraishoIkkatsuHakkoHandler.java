@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -89,6 +90,7 @@ public class IraishoIkkatsuHakkoHandler {
         div.getTxtChosaDispMax().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getChkchosairaiRireki().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE220001.getReportId());
     }
 
     /**
@@ -120,6 +122,7 @@ public class IraishoIkkatsuHakkoHandler {
         div.getTxtIkenshoDispMax().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getChkikenshiiraiRireki().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE230001.getReportId());
     }
 
     /**

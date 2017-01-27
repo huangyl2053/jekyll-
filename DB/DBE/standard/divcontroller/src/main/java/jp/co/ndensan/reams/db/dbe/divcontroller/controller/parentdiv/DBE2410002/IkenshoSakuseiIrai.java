@@ -5,21 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2410002;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudou;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.DBE2410002StateName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.DBE2410002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshosakuseiirai.IkenshoSakuseiIraiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -31,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 主治医意見書作成依頼(手動)のクラスです。
@@ -105,12 +110,28 @@ public class IkenshoSakuseiIrai {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             保存処理(div);
             onLoad(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            div.getIkenshoIraiTorokuPanel().setDisabled(true);
+            div.getKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
+            return ResponseData.of(div).setState(DBE2410002StateName.Kanryo);
         }
-        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) 
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBE2410002TransitionEventName.個人依頼内容更新に戻る).respond();
-        }
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「依頼書等を印刷する」ボタン押下時
+     * 
+     * @param div IkenshoSakuseiIraiDiv
+     * @return ResponseData<IkenshoSakuseiIraiDiv>
+     */
+    public ResponseData<IkenshoSakuseiIraiDiv> onBeforeOpen_btnPrint(IkenshoSakuseiIraiDiv div) {
+        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        申請書管理番号リスト.add(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
+        IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
+        model.set申請書管理番号リスト(申請書管理番号リスト);
+        model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
+        model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
+        div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 

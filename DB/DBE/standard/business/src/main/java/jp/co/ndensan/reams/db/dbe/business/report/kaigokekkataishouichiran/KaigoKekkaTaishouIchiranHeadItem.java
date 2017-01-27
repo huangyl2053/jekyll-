@@ -18,6 +18,7 @@ import lombok.Getter;
 public final class KaigoKekkaTaishouIchiranHeadItem {
 
     private final RString shichosonName;
+    private final RString chushutsuHoho;
     private final RString chushutsuKikanFrom;
     private final RString chushutsuKikanTo;
     private final RString printTimeStamp;
@@ -27,18 +28,21 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
      * インスタンスを生成します。
      *
      * @param shichosonName 広域連合
+     * @param chushutsuHoho 抽出方法
      * @param chushutsuKikanFrom 抽出期間From
      * @param chushutsuKikanTo 抽出期間To
      * @param printTimeStamp 作成年月日
      */
     private KaigoKekkaTaishouIchiranHeadItem(
             RString shichosonName,
+            RString chushutsuHoho,
             RString chushutsuKikanFrom,
             RString chushutsuKikanTo,
             RString printTimeStamp,
             int index) {
 
         this.shichosonName = shichosonName;
+        this.chushutsuHoho = chushutsuHoho;
         this.chushutsuKikanFrom = chushutsuKikanFrom;
         this.chushutsuKikanTo = chushutsuKikanTo;
         this.printTimeStamp = printTimeStamp;
@@ -49,6 +53,7 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
      * インスタンスを生成します。
      *
      * @param shichosonName 広域連合
+     * @param chushutsuHoho 抽出方法
      * @param chushutsuKikanFrom 抽出期間From
      * @param chushutsuKikanTo 抽出期間To
      * @param printTimeStamp 作成年月日
@@ -57,12 +62,13 @@ public final class KaigoKekkaTaishouIchiranHeadItem {
      */
     public static KaigoKekkaTaishouIchiranHeadItem creataKaigoKekkaTaishouIchiranHeadItem(
             RString shichosonName,
+            RString chushutsuHoho,
             RString chushutsuKikanFrom,
             RString chushutsuKikanTo,
             RString printTimeStamp,
             int index) {
 
-        return new KaigoKekkaTaishouIchiranHeadItem(shichosonName, chushutsuKikanFrom, chushutsuKikanTo, printTimeStamp, index);
+        return new KaigoKekkaTaishouIchiranHeadItem(shichosonName, chushutsuHoho, chushutsuKikanFrom, chushutsuKikanTo, printTimeStamp, index);
 
     }
 }

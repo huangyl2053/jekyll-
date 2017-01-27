@@ -24,6 +24,9 @@
         <result property="ninteiShinseiYMD" column="DbT5101Nintei_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column="DbT5101Nintei_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ninteiShinseiHoreiKubunCode" column="DbT5101Nintei_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="torisageKubunCode" column="DbT5101Nintei_torisageKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="torisageYMD" column="DbT5101Nintei_torisageYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="torisageRiyu" column="DbT5101Nintei_torisageRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nijiHanteiYokaigoJotaiKubunCode" column="DbT5102Nintei_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiYMD" column="DbT5102Nintei_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="DbT5102Nintei_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -155,8 +158,10 @@
         <result property="konnkai_12" column="DbT5302Shujii_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="zennkai_12" column="ShujiiIkenshoJoho1_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="zennnoma_12" column="ShujiiIkenshoJoho2_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="ikenshoIraiRirekiNo" column="DbT5301Shujii_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenshoIraiRirekiNo" column="DbT5301Shujii_ikenshoIraiRirekiNo" />
+        <result property="ikenshoSakuseiIraiYMD" column="DbT5301Shujii_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaIraiRirekiNo" column="DbT5201Nintei_ninteichosaIraiRirekiNo" />
+        <result property="ninteichosaIraiYMD" column="DbT5201Nintei_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
 
     <select resultOrdered="true" id="selectKojinJokyoShokai"
@@ -183,6 +188,9 @@
             DbT5101Nintei."ninteiShinseiYMD" AS "DbT5101Nintei_ninteiShinseiYMD",
             DbT5101Nintei."ninteiShinseiShinseijiKubunCode" AS "DbT5101Nintei_ninteiShinseiShinseijiKubunCode",
             DbT5101Nintei."ninteiShinseiHoreiKubunCode" AS "DbT5101Nintei_ninteiShinseiHoreiKubunCode",
+            DbT5101Nintei."torisageKubunCode" AS "DbT5101Nintei_torisageKubunCode",
+            DbT5101Nintei."torisageYMD" AS "DbT5101Nintei_torisageYMD",
+            DbT5101Nintei."torisageRiyu" AS "DbT5101Nintei_torisageRiyu",
             DbT5102Nintei."nijiHanteiYokaigoJotaiKubunCode" AS "DbT5102Nintei_nijiHanteiYokaigoJotaiKubunCode",
             DbT5102Nintei."nijiHanteiYMD" AS "DbT5102Nintei_nijiHanteiYMD",
             DbT5102Nintei."nijiHanteiNinteiYukoKaishiYMD" AS "DbT5102Nintei_nijiHanteiNinteiYukoKaishiYMD",
@@ -208,7 +216,9 @@
             DbT5913."chosainShimei" AS "DbT5913_chosainShimei",
             DbT5101Nintei."shichosonRenrakuJiko" AS "DbT5101Nintei_shichosonRenrakuJiko",
             DbT5301Shujii."ikenshoIraiRirekiNo" AS "DbT5301Shujii_ikenshoIraiRirekiNo",
-            DbT5201Nintei."ninteichosaIraiRirekiNo" AS "DbT5201Nintei_ninteichosaIraiRirekiNo"
+            DbT5301Shujii."ikenshoSakuseiIraiYMD" AS "DbT5301Shujii_ikenshoSakuseiIraiYMD",
+            DbT5201Nintei."ninteichosaIraiRirekiNo" AS "DbT5201Nintei_ninteichosaIraiRirekiNo",
+            DbT5201Nintei."ninteichosaIraiYMD" AS "DbT5201Nintei_ninteichosaIraiYMD"
         FROM
             rgdb."DbT5123NinteiKeikakuJoho" AS DbT5123Nintei
             INNER JOIN

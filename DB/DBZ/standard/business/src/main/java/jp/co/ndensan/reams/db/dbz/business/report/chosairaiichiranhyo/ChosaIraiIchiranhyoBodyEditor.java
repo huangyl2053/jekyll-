@@ -102,6 +102,8 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         } else {
             source.listIchiranhyo_12 = to元号略称表記(new RDate(item.getListIchiranhyo_12().toString()));
         }
+        source.shichosoncode = item.getShichosonCode();
+        source.chosaitakusakicode = item.getChosaItakusakiCode();
         return source;
     }
 

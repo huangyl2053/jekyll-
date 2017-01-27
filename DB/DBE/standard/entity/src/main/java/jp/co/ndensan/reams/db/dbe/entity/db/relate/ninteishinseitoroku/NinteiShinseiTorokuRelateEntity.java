@@ -72,7 +72,6 @@ public class NinteiShinseiTorokuRelateEntity {
 //    private RString 台帳種別;
 //    private RString 入所施設種類;
     private JigyoshaNo 入所施設コード;
-//    private Code 要介護認定状態区分コード;
 //    private FlexibleDate 認定有効期間開始年月日;
 //    private FlexibleDate 認定有効期間終了年月日;
 //    private FlexibleDate 認定年月日;
@@ -107,4 +106,11 @@ public class NinteiShinseiTorokuRelateEntity {
     private FlexibleDate 生年月日;
     private int 年齢;
     private Code 性別;
+    private Code 介護認定審査会優先振分区分コード;
+    private Code 自動割当除外者区分;
+    private boolean みなし２号等対象フラグ;
+    private boolean 情報提供フラグ;
+    private boolean 認定延期通知発行しないことに対する同意有無フラグ;
+    private FlexibleDate  IF送付年月日;
+    private FlexibleDate  センター送信年月日;
 }

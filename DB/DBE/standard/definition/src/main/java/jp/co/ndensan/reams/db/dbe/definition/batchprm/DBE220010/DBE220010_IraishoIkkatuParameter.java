@@ -36,17 +36,6 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String TEISHUTSU_KIGEN = "teishutsuKigen";
     private static final String KYOTSU_HIZUKE = "kyotsuHizuke";
     private static final String NINTEI_CHOSA_IRAI_CHOHYO = "ninteiChosaIraiChohyo";
-//    private static final String NINTEI_CHOSA_IRAISHO = "ninteiChosaIraisyo";
-//    private static final String NINTEI_CHOSAHYO_KIHON = "ninteiChosahyoKihon";
-//    private static final String NINTEI_CHOSAHYO_TOKKI = "ninteiChosahyoTokki";
-//    private static final String NINTEI_CHOSAHYO_GAIKYOU = "ninteiChosahyoGaikyou";
-//    private static final String NINTEI_CHOSAHYO_OCR_KIHON = "ninteiChosahyoOCRKihon";
-//    private static final String NINTEI_CHOSAHYO_OCR_TOKKI = "ninteiChosahyoOCRTokki";
-//    private static final String NINTEI_CHOSAHYO_OCR_GAIKYOU = "ninteiChosahyoOCRGaikyou";
-//    private static final String NINTEI_CHOSA_CHECK_HYO = "ninteiChosaCheckHyo";
-//    private static final String GAIKYOCHOSA = "gaikyoChosa";
-//    private static final String GAIKYOCHOSAOCR = "gaikyoChosaOCR";
-//    private static final String ZENKO_NINTEI_CHOSAHYO = "zenkoNinteiChosahyo";
     private static final String NINTEI_CHOSAIRAI_HAKKOU = "ninteiChosairaiHakkou";
     private static final String IKENSHO_SAKUSEIIRAI = "ikenshoSakuseiirai";
     private static final String IKENSHO_SAKUSEI_SEIKYUU = "ikenshoSakuseiSeikyuu";
@@ -61,7 +50,19 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String SHUJIIIKENSHOSAKUSEIIRAILIST = "shujiiIkenshoSakuseiIraiList";
     private static final String 認定調査依頼履歴一覧 = "認定調査依頼履歴一覧";
     private static final String 主治医意見書作成依頼履歴一覧 = "主治医意見書作成依頼履歴一覧";
-//    private static final String IKENSHOIRAIRIREKIICHIRANKUBUN = "IkenshoirairirekiIchiranKubun";
+    private static final String 文書番号 = "文書番号";
+    private static final String IS_NINTEI_CHOSA_IRAISHO = "isNinteiChosaIraisho";
+    private static final String IS_NINTEI_CHOSAHYO_YOSHI = "isNinteiChosahyoYoshi";
+    private static final String IS_NINTEI_CHOSAHYO_OCR = "isNinteiChosahyoOcr";
+    private static final String IS_NINTEI_CHOSA_CHECK_HYO = "isNinteiChosaCheckHyo";
+    private static final String IS_TOKKI_YOSHI = "isTokkiYoshi";
+    private static final String IS_TOKKI_OCR = "isTokkiOcr";
+    private static final String IS_TOKKI_HAS_KOMOKU = "isTokkiHasKomoku";
+    private static final String IS_TOKKI_NO_KOMOKU = "isTokkiNoKomoku";
+    private static final String IS_TOKKI_FREE_TYPE = "isTokkiFreeType";
+    private static final String IS_TOKKI_INPUT_TYPE = "isTokkiInputType";
+    private static final String IS_GAIKYOU_TOKKI = "isGaikyouTokki";
+    private static final String IS_ZENKAI_NINTEI_CHOSAHYO = "isZenkaiNinteiChosahyo";
 
     @BatchParameter(key = NINTEIO_CHOSA_IRAISHO, name = "認定調査依頼書印刷区分")
     private RString ninteioChosaIraisho;
@@ -100,28 +101,6 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private boolean ninteiChosairaiHakkou;
     @BatchParameter(key = 認定調査依頼履歴一覧, name = "認定調査依頼履歴一覧")
     private boolean is認定調査依頼履歴一覧;
-//    @BatchParameter(key = NINTEI_CHOSA_IRAISHO, name = "認定調査依頼書出力区分")
-//    private boolean ninteiChosaIraisyo;
-//    @BatchParameter(key = NINTEI_CHOSAHYO_KIHON, name = "認定調査票(基本調査)出力区分")
-//    private boolean ninteiChosahyoKihon;
-//    @BatchParameter(key = NINTEI_CHOSAHYO_TOKKI, name = "認定調査票(特記事項)出力区分")
-//    private boolean ninteiChosahyoTokki;
-//    @BatchParameter(key = NINTEI_CHOSAHYO_GAIKYOU, name = "認定調査票(概況調査)出力区分")
-//    private boolean ninteiChosahyoGaikyou;
-//    @BatchParameter(key = NINTEI_CHOSAHYO_OCR_KIHON, name = "認定調査票OCR(基本調査)出力区分")
-//    private boolean ninteiChosahyoOCRKihon;
-//    @BatchParameter(key = NINTEI_CHOSAHYO_OCR_TOKKI, name = "認定調査票OCR(特記事項)出力区分")
-//    private boolean ninteiChosahyoOCRTokki;
-//    @BatchParameter(key = NINTEI_CHOSAHYO_OCR_GAIKYOU, name = "認定調査票OCR(概況調査)出力区分")
-//    private boolean ninteiChosahyoOCRGaikyou;
-//    @BatchParameter(key = GAIKYOCHOSA, name = "認定調査票(概況特記)出力区分")
-//    private boolean gaikyoChosa;
-//    @BatchParameter(key = GAIKYOCHOSAOCR, name = "認定調査票OCR(概況特記)出力区分")
-//    private boolean gaikyoChosaOCR;
-//    @BatchParameter(key = NINTEI_CHOSA_CHECK_HYO, name = "認定調査差異チェック表出力区分")
-//    private boolean ninteiChosaCheckHyo;
-//    @BatchParameter(key = ZENKO_NINTEI_CHOSAHYO, name = "前回認定調査結果との比較表出力区分")
-//    private boolean zenkoNinteiChosahyo;
     @BatchParameter(key = SHUJIIIKENSHO_SAKUSEI_IRAI, name = "主治医意見書作成依頼印刷区分")
     private RString shujiiikenshoSakuseiIrai;
     @BatchParameter(key = SHUJIIIKENSHO, name = "意見書印刷区分")
@@ -149,8 +128,6 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private boolean ikenshoSakuseiIraiHakkou;
     @BatchParameter(key = 主治医意見書作成依頼履歴一覧, name = "主治医意見書作成依頼履歴一覧")
     private boolean is主治医意見書依頼履歴一覧;
-//    @BatchParameter(key = IKENSHOIRAIRIREKIICHIRANKUBUN, name = "主治医意見書作成依頼履歴一覧出力区分")
-//    private boolean ikenshoirairirekiIchiranKubun;
 
     @BatchParameter(key = IRAIFROMYMD, name = "依頼開始日")
     private RString iraiFromYMD;
@@ -162,19 +139,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString teishutsuKigen;
     @BatchParameter(key = KYOTSU_HIZUKE, name = "共通日付")
     private RString kyotsuHizuke;
-
-    private static final String IS_NINTEI_CHOSA_IRAISHO = "isNinteiChosaIraisho";
-    private static final String IS_NINTEI_CHOSAHYO_YOSHI = "isNinteiChosahyoYoshi";
-    private static final String IS_NINTEI_CHOSAHYO_OCR = "isNinteiChosahyoOcr";
-    private static final String IS_NINTEI_CHOSA_CHECK_HYO = "isNinteiChosaCheckHyo";
-    private static final String IS_TOKKI_YOSHI = "isTokkiYoshi";
-    private static final String IS_TOKKI_OCR = "isTokkiOcr";
-    private static final String IS_TOKKI_HAS_KOMOKU = "isTokkiHasKomoku";
-    private static final String IS_TOKKI_NO_KOMOKU = "isTokkiNoKomoku";
-    private static final String IS_TOKKI_FREE_TYPE = "isTokkiFreeType";
-    private static final String IS_TOKKI_INPUT_TYPE = "isTokkiInputType";
-    private static final String IS_GAIKYOU_TOKKI = "isGaikyouTokki";
-    private static final String IS_ZENKAI_NINTEI_CHOSAHYO = "isZenkaiNinteiChosahyo";
+    @BatchParameter(key = 文書番号, name = "文書番号")
+    private RString bunshoNo;
 
     /**
      * 主治医意見書作成依頼発行一覧表ですためのprocessのパラメータを生成します。
@@ -230,7 +196,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 hakkobi,
                 teishutsuKigen,
                 kyotsuHizuke,
-                is認定調査依頼履歴一覧);
+                is認定調査依頼履歴一覧,
+                bunshoNo);
     }
 
     /**
@@ -254,6 +221,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 iraiToYMD,
                 hakkobi,
                 teishutsuKigen,
-                kyotsuHizuke);
+                kyotsuHizuke,
+                bunshoNo);
     }
 }

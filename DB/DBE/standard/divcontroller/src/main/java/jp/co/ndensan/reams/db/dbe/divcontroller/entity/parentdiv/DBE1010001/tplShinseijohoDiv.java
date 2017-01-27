@@ -69,6 +69,10 @@ public class tplShinseijohoDiv extends TabPanel {
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdShinseiTodokedesha")
     private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
+    @JsonProperty("ddlShinsakaiYusenKubun")
+    private DropDownList ddlShinsakaiYusenKubun;
+    @JsonProperty("ddlWariateKubun")
+    private DropDownList ddlWariateKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -263,6 +267,42 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ccdShinseiTodokedesha")
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return ccdShinseiTodokedesha;
+    }
+
+    /*
+     * getddlShinsakaiYusenKubun
+     * @return ddlShinsakaiYusenKubun
+     */
+    @JsonProperty("ddlShinsakaiYusenKubun")
+    public DropDownList getDdlShinsakaiYusenKubun() {
+        return ddlShinsakaiYusenKubun;
+    }
+
+    /*
+     * setddlShinsakaiYusenKubun
+     * @param ddlShinsakaiYusenKubun ddlShinsakaiYusenKubun
+     */
+    @JsonProperty("ddlShinsakaiYusenKubun")
+    public void setDdlShinsakaiYusenKubun(DropDownList ddlShinsakaiYusenKubun) {
+        this.ddlShinsakaiYusenKubun = ddlShinsakaiYusenKubun;
+    }
+
+    /*
+     * getddlWariateKubun
+     * @return ddlWariateKubun
+     */
+    @JsonProperty("ddlWariateKubun")
+    public DropDownList getDdlWariateKubun() {
+        return ddlWariateKubun;
+    }
+
+    /*
+     * setddlWariateKubun
+     * @param ddlWariateKubun ddlWariateKubun
+     */
+    @JsonProperty("ddlWariateKubun")
+    public void setDdlWariateKubun(DropDownList ddlWariateKubun) {
+        this.ddlWariateKubun = ddlWariateKubun;
     }
 
     /*

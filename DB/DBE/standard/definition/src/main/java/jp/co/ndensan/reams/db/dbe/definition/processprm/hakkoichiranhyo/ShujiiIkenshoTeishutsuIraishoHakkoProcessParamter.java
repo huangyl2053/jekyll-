@@ -37,6 +37,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
     private final RString hakkobi;
     private final RString teishutsuKigen;
     private final RString kyotsuHizuke;
+    private final RString bunshoNo;
 
     /**
      * コンストラクタです。
@@ -57,6 +58,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
      * @param hakkobi 発行日
      * @param teishutsuKigen 提出期限
      * @param kyotsuHizuke 共通日付
+     * @param bunshoNo 文書番号
      *
      */
     public ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter(RString shujiiikenshoSakuseiIrai,
@@ -74,7 +76,8 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
             RString iraiToYMD,
             RString hakkobi,
             RString teishutsuKigen,
-            RString kyotsuHizuke) {
+            RString kyotsuHizuke,
+            RString bunshoNo) {
         this.shujiiikenshoSakuseiIrai = shujiiikenshoSakuseiIrai;
         this.shujiiIkensho = shujiiIkensho;
         this.shujiiIkenshoSakuseiIraiList = shujiiIkenshoSakuseiIraiList;
@@ -91,6 +94,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
         this.hakkobi = hakkobi;
         this.teishutsuKigen = teishutsuKigen;
         this.kyotsuHizuke = kyotsuHizuke;
+        this.bunshoNo = bunshoNo;
     }
 
     /**

@@ -20,25 +20,49 @@ import lombok.Getter;
 @Getter
 public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessParameter {
 
-    private final List<RString> shinseishoKanriNo;
-    private final RString nijiHanteiYMDFrom;
-    private final RString nijiHanteiYMDTo;
+    private final List<RString> shinseishoKanriNoList;
+    private final RString fayirukuben;
+    private final RString hokensha;
+    private final RString hokenshaName;
+    private final RString chushutsuHoho;
+    private final RString chushutsuFromDate;
+    private final RString chushutsuToDate;
+    private final RString hihokenshaNo;
+    private final RString dataShutsuryokuUmu;
 
     /**
      * コンストラクタです。
      *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 二次判定日From 二次判定日From
-     * @param 二次判定日To 二次判定日To
+     * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param ファイル区分 ファイル区分
+     * @param 保険者 保険者
+     * @param 保険者名称 保険者名称
+     * @param 抽出方法
+     * @param 抽出期間From
+     * @param 抽出期間To
+     * @param 被保険者番号
+     * @param データ出力有無
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public HanteiKekkaJohoShutsuryokuProcessParamter(
-            List<RString> 申請書管理番号,
-            RString 二次判定日From,
-            RString 二次判定日To) {
-        this.shinseishoKanriNo = 申請書管理番号;
-        this.nijiHanteiYMDFrom = 二次判定日From;
-        this.nijiHanteiYMDTo = 二次判定日To;
+            List<RString> 申請書管理番号リスト,
+            RString ファイル区分,
+            RString 保険者,
+            RString 保険者名称,
+            RString 抽出方法,
+            RString 抽出期間From,
+            RString 抽出期間To,
+            RString 被保険者番号,
+            RString データ出力有無) {
+        this.shinseishoKanriNoList = 申請書管理番号リスト;
+        this.fayirukuben = ファイル区分;
+        this.hokensha = 保険者;
+        this.hokenshaName = 保険者名称;
+        this.chushutsuHoho = 抽出方法;
+        this.chushutsuFromDate = 抽出期間From;
+        this.chushutsuToDate = 抽出期間To;
+        this.hihokenshaNo = 被保険者番号;
+        this.dataShutsuryokuUmu = データ出力有無;
     }
 
     /**
@@ -47,7 +71,8 @@ public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessP
      * @return mybatisパラメータ
      */
     public HanteiKekkaJohoShutsuryokuMybitisParamter toHanteiKekkaJohoShutsuryokuMybitisParamter() {
-        return HanteiKekkaJohoShutsuryokuMybitisParamter.createParam(shinseishoKanriNo, nijiHanteiYMDFrom, nijiHanteiYMDTo);
+        return HanteiKekkaJohoShutsuryokuMybitisParamter.createParam(shinseishoKanriNoList, fayirukuben,
+                hokensha, hokenshaName, chushutsuHoho, chushutsuFromDate, chushutsuToDate, hihokenshaNo, dataShutsuryokuUmu);
     }
 
 }

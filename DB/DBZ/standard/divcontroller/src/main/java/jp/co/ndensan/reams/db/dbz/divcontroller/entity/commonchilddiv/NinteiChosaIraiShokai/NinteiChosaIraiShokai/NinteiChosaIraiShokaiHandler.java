@@ -15,12 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
@@ -48,7 +43,6 @@ public class NinteiChosaIraiShokaiHandler {
      * @param ninteiChosaList 認定調査情報
      */
     public void onLoad(List<NinteiChosaIraiShokaiMaster> ninteiChosaList) {
-//        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         List<dgNinteiChosaIrai_Row> rowList = new ArrayList<>();
         int no = 1;
         for (NinteiChosaIraiShokaiMaster entity : ninteiChosaList) {
@@ -77,14 +71,6 @@ public class NinteiChosaIraiShokaiHandler {
             rowList.add(row);
         }
         div.getDgNinteiChosaIrai().setDataSource(rowList);
-    }
-
-    private RString 日期フォマト(FlexibleDate 日期) {
-        if (日期 == null || 日期.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return 日期.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
     private RString get申請区分(RString 申請区分コード) {

@@ -175,7 +175,6 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         if (chosainShikaku != null) {
             chosainShikaku = chosainShikaku.replace(" ", "").trim();
         }
-        source.listIchiranhyoUpper_9 = chosainShikaku;
         if (chosainShikaku != null && !chosainShikaku.isNullOrEmpty()) {
             source.listIchiranhyoUpper_10 = Sikaku.toValue(chosainShikaku).get名称();
         }
@@ -189,7 +188,7 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.listIchiranhyoLower1_3 = item.getJusho();
         source.listIchiranhyoLower2_1 = item.getShujiiName();
         if (!RString.isNullOrEmpty(item.getSeibetsu())) {
-            source.listIchiranhyoLower2_2 = Seibetsu.toValue(item.getSeibetsu()).get名称();
+            source.listIchiranhyoUpper_9 = Seibetsu.toValue(item.getSeibetsu()).get名称();
         }
         source.listIchiranhyoLower2_3 = item.getShinryokaName();
         return source;

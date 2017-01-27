@@ -41,7 +41,7 @@ public class ShujiiIryoKikanMasterKozaMitorokuCsvEntity {
     private final RString daihyoshaName;
     @CsvField(order = 12, name = "代表者名カナ")
     private final RString daihyoshaNameKana;
-    @CsvField(order = 13, name = "状況フラグ")
+    @CsvField(order = 13, name = "機関の状況")
     private final RString jokyoFlag;
 
     /**

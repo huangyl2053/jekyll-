@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1010001;
 
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -91,17 +91,54 @@ public class NinteiShinseiTorokuValidationHandler {
     }
 
     /**
-     * 二次判定年月日チェック
+     * 区分変更申請時取下日理由入力チェック
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 二次判定年月日チェック() {
-
+    public ValidationMessageControlPairs 区分変更申請時取下日理由入力チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.二次判定年月日存在));
+        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可, 
+                div.getSinseiTorisage()));
         return validationMessages;
     }
 
+    /**
+     * センタ送信データ出力完了チェック
+     * @param センター送信年月日 FlexibleDate
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs センタ送信データ出力完了更新不可チェック(FlexibleDate センター送信年月日) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (センター送信年月日 != null && !センター送信年月日.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.センタ送信データ出力完了更新不可));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 認定審査会割当完了チェック
+     * @param 送付年月日 FlexibleDate
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 認定審査会割当完了更新不可チェック(FlexibleDate 送付年月日) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (送付年月日 != null && !送付年月日.isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.認定審査会割当完了更新不可));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 特定疾病入力必須チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 特定疾病入力必須チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.特定疾病入力必須, 
+                div.getSinseiTorisage()));
+        return validationMessages;
+    }
     /**
      * 申請取下時は取下日理由必須チェック
      *
@@ -130,9 +167,12 @@ public class NinteiShinseiTorokuValidationHandler {
 
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
         項目に対する制約(UrErrorMessages.項目に対する制約, "みなし２号審査受付場合、被保険者区分", "\"8\" (生活保護)"),
-        二次判定年月日存在(DbeErrorMessages.二次判定が既に行われている要介護認定申請情報です),
-        申請取下時は取下日理由必須(DbeErrorMessages.申請取下時は取下日理由を入力してください),
-        申請サービス削除と取下理由は同時存在(DbeErrorMessages.申請サービス削除と取下理由は同時に入力できません),
+        特定疾病入力必須(UrErrorMessages.未入力, "第２号被保険者の場合、特定疾病"),
+        申請取下時は取下日理由必須(UrErrorMessages.未入力, "申請取下時は、取下日・理由"),
+        申請サービス削除と取下理由は同時存在(UrErrorMessages.両方の指定は不可, "申請サービス削除", "取下理由"),
+        区分変更申請時取下日理由入力不可(UrErrorMessages.設定不可, "取下日、理由は申請区分（申請時）が区分変更申請の"),
+        センタ送信データ出力完了更新不可(UrErrorMessages.更新不可, "センタ送信データ出力が完了している"),
+        認定審査会割当完了更新不可(UrErrorMessages.更新不可, "認定審査会割当が完了している"),
         終了日が開始日以前(UrErrorMessages.終了日が開始日以前);     
 
         private final Message message;

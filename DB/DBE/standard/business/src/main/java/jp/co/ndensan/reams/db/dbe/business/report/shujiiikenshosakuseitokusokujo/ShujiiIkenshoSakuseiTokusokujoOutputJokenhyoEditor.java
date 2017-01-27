@@ -22,6 +22,7 @@ public class ShujiiIkenshoSakuseiTokusokujoOutputJokenhyoEditor {
     private static final int 督促方法コード_電話 = 2;
     private static final int 督促方法コード_その他 = 3;
     private static final int 督促メモ表示最大桁数 = 184;
+    private static final RString 空白 = new RString("            ");
     private final ShujiiIkenTokusokujoHakkoReportProcessParameter param;
 
     /**
@@ -42,17 +43,38 @@ public class ShujiiIkenshoSakuseiTokusokujoOutputJokenhyoEditor {
     public List<RString> edit() {
         List<RString> 出力条件List = new ArrayList<>();
         出力条件List.add(new RString("【保険者コード】").concat(edit保険者コード(param.getTemp_保険者コード())));
-        出力条件List.add(new RString("【督促基準日】").concat(param.getTemp_基準日().wareki().toDateString()));
+        出力条件List.add(new RString("【督促基準日】").concat(param.getTemp_基準日().plusDay(param.getTemp_主治医意見書督促期限日数().intValue()).wareki().toDateString()));
         出力条件List.add(new RString("【作成期限】").concat(edit作成期限(param.getTemp_主治医意見書督促期限日数())));
         出力条件List.add(new RString("【主治医医療機関コード】").concat(
                 param.getTemp_主治医医療機関コード() == null ? RString.EMPTY : param.getTemp_主治医医療機関コード()));
         出力条件List.add(new RString("【主治医コード】").concat(
                 param.getTemp_主治医コード() == null ? RString.EMPTY : param.getTemp_主治医コード()));
         出力条件List.add(new RString("【印刷済対象者】").concat(edit印刷済対象者条件(param.getTemp_印刷済対象者())));
-        出力条件List.add(new RString("【印刷済対象者】").concat(edit印刷済対象者条件(param.getTemp_印刷済対象者())));
         出力条件List.add(new RString("【督促方法】").concat(edit督促方法(param.getTemp_督促方法())));
-        出力条件List.add(new RString("【督促メモ】").concat(edit督促メモ(param.getTemp_督促メモ())));
         出力条件List.add(new RString("【督促日】").concat(param.getTemp_督促日().wareki().toDateString()));
+        List<RString> メモlist = param.getTemp_督促メモ().split("\n");
+        for (int i = 0; i < メモlist.size(); i++) {
+            if (i == 0) {
+                出力条件List.add(new RString("【督促メモ】").concat(メモlist.get(0).substringReturnAsPossible(0, 90)));
+                if (メモlist.get(0).length() > 90) {
+                    出力条件List.add(空白.concat(メモlist.get(0).substringReturnAsPossible(91, 180)));
+                }
+                if (メモlist.get(0).length() > 180) {
+                    出力条件List.add(空白.concat(メモlist.get(0).substringReturnAsPossible(181, メモlist.get(0).length())));
+                }
+            } else {
+                if (!param.getTemp_督促メモ().contains("\n")) {
+                    break;
+                }
+                出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(0, 90)));
+                if (メモlist.get(i).length() > 90) {
+                    出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(91, 180)));
+                }
+                if (メモlist.get(i).length() > 180) {
+                    出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(181, メモlist.get(0).length())));
+                }
+            }
+        }
         return 出力条件List;
     }
 

@@ -26,6 +26,7 @@ public final class IkenHoshuIchiranProcessParameter implements IBatchProcessPara
     private FlexibleDate 作成依頼日期間開始;
     private FlexibleDate 作成依頼日期間終了;
     private RString 保険者;
+    private RString 保険者名称;
     private List<IkenshoHoshuShokaiIchiranKey> keyJoho;
 
     /**
@@ -35,17 +36,20 @@ public final class IkenHoshuIchiranProcessParameter implements IBatchProcessPara
      * @param 作成依頼日期間開始 作成依頼日期間開始
      * @param 作成依頼日期間終了 作成依頼日期間終了
      * @param 保険者 保険者
+     * @param 保険者名称 保険者名称
      * @param keyJoho キー情報Entityリスト
      */
     public IkenHoshuIchiranProcessParameter(RString 帳票出力区分,
             FlexibleDate 作成依頼日期間開始,
             FlexibleDate 作成依頼日期間終了,
             RString 保険者,
+            RString 保険者名称,
             List<IkenshoHoshuShokaiIchiranKey> keyJoho) {
         this.帳票出力区分 = 帳票出力区分;
         this.作成依頼日期間開始 = 作成依頼日期間開始;
         this.作成依頼日期間終了 = 作成依頼日期間終了;
         this.保険者 = 保険者;
+        this.保険者名称 = 保険者名称;
         this.keyJoho = keyJoho;
     }
 
@@ -55,6 +59,6 @@ public final class IkenHoshuIchiranProcessParameter implements IBatchProcessPara
      * @return 意見書作成報酬のデータ取得パラメータ
      */
     public IkenshoHoshuShokaiMapperParameter toMybitisParamter() {
-        return IkenshoHoshuShokaiMapperParameter.createParamter(作成依頼日期間開始, 作成依頼日期間終了, 保険者, keyJoho);
+        return IkenshoHoshuShokaiMapperParameter.createParamter(作成依頼日期間開始, 作成依頼日期間終了, 保険者, 保険者名称, keyJoho);
     }
 }

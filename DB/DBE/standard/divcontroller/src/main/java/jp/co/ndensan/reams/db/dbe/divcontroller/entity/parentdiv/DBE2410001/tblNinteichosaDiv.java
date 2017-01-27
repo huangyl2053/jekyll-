@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tblNinteichosaDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class tblNinteichosaDiv extends TabPanel {
     private KonkaiHomonChosaIraiJohoDiv KonkaiHomonChosaIraiJoho;
     @JsonProperty("ZenkaiHomonChosaIraiJoho")
     private ZenkaiHomonChosaIraiJohoDiv ZenkaiHomonChosaIraiJoho;
+    @JsonProperty("btnChosaPrint")
+    private ButtonDialog btnChosaPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,6 +70,24 @@ public class tblNinteichosaDiv extends TabPanel {
     @JsonProperty("ZenkaiHomonChosaIraiJoho")
     public void setZenkaiHomonChosaIraiJoho(ZenkaiHomonChosaIraiJohoDiv ZenkaiHomonChosaIraiJoho) {
         this.ZenkaiHomonChosaIraiJoho = ZenkaiHomonChosaIraiJoho;
+    }
+
+    /*
+     * getbtnChosaPrint
+     * @return btnChosaPrint
+     */
+    @JsonProperty("btnChosaPrint")
+    public ButtonDialog getBtnChosaPrint() {
+        return btnChosaPrint;
+    }
+
+    /*
+     * setbtnChosaPrint
+     * @param btnChosaPrint btnChosaPrint
+     */
+    @JsonProperty("btnChosaPrint")
+    public void setBtnChosaPrint(ButtonDialog btnChosaPrint) {
+        this.btnChosaPrint = btnChosaPrint;
     }
 
     /*

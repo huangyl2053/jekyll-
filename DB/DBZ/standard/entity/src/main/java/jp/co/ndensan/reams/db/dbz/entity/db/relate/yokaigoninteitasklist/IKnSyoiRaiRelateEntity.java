@@ -43,6 +43,7 @@ public class IKnSyoiRaiRelateEntity implements Serializable {
     private RString shichosonCode;
     private RString shichosonMeisho;
     private int ikenshoIraiRirekiNo;
+    private RString ikenshoIraiKubun;
     private FlexibleDate ikenshoSakuseiTokusokuYMD;
     private RString ikenshoSakuseiTokusokuHoho;
     private int ikenshoTokusokuKaisu;
@@ -50,8 +51,11 @@ public class IKnSyoiRaiRelateEntity implements Serializable {
     private FlexibleDate ikenshoSakuseiIraiYMD;
     private FlexibleDate iraishoShutsuryokuYMD;
     private FlexibleDate ikenshoShutsuryokuYMD;
+    private Code ishiKubunCode;
     private Code ikenshoSakuseiKaisuKubun;
+    private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;
+    private RString shujiiCode;
     private RString shujiiName;
     private RString before_iryoKikanMeisho;
     private RString before_shujiiName;

@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
-import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -77,25 +77,7 @@ public class ShinseiKensaku {
     private static DBE0100001StateName findStateAt条件指定(ShinseiKensakuDiv div) {
         RString menuID = ResponseHolder.getMenuID();
         if (MENUID_DBEMN21001.equals(menuID)) {
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlNowPhase().setSelectedKey(KanryoInfoPhase.二次判定.getコード());
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setDisabled(false);
-            RString 処理状態完了 = new RString("key0");
-            RString 処理状態未完了 = new RString("key1");
-            List<RString> selectedkeyMikann = new ArrayList();
-            List<RString> selectedkeyKanryo = new ArrayList();
-            selectedkeyMikann.add(処理状態未完了);
-            selectedkeyKanryo.add(処理状態完了);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaNyushu().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoNyushu().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIchijiHantei().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkMasking().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinsakaiToroku().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
-            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            
+            setKanryoJoho(div);
             return DBE0100001StateName.申請検索;
         } else if (MENUID_DBEMN21003.equals(menuID)) {
             return DBE0100001StateName.個人照会;
@@ -118,6 +100,10 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onClick_btnClear(ShinseiKensakuDiv div) {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
+        RString menuID = ResponseHolder.getMenuID();
+        if (MENUID_DBEMN21001.equals(menuID)) {
+            setKanryoJoho(div);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -217,6 +203,7 @@ public class ShinseiKensaku {
         RString 被保険者番号 = row.getHihokenshaNo();
         RString 被保険者氏名 = row.getShimei();
         RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
+        LasdecCode 市町村コード = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード();
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
@@ -257,6 +244,7 @@ public class ShinseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
         } else if (MENUID_DBEMN43001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
             if (event == Events.検索結果1件) {
                 ViewStateHolder.put(ViewStateKeys.モード, new RString("1件"));
             } else {
@@ -399,5 +387,23 @@ public class ShinseiKensaku {
         public Message getMessage() {
             return message;
         }
+    }
+
+    private static void setKanryoJoho(ShinseiKensakuDiv div) {
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinseiUketsuke().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaIrai().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoIrai().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaNyushu().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoNyushu().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIchijiHantei().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkMasking().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinsakaiToroku().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setDisabled(false);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkGetsureiShori().setDisabled(false);
+
+        RString 処理状態未完了 = new RString("key1");
+        List<RString> selectedkeyMikann = new ArrayList();
+        selectedkeyMikann.add(処理状態未完了);
+        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
     }
 }

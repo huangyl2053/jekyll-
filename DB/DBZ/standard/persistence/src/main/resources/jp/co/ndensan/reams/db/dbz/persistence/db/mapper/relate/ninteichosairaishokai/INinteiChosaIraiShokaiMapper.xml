@@ -39,7 +39,7 @@
            dbT5201."ninteichosaIraiYMD" AS "ninteichosaIraiYMD"
       FROM
            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
-           INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+           LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
            ON dbT5102."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
            INNER JOIN
            (
@@ -67,7 +67,8 @@
                AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
                AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
       WHERE
-           dbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+           dbT5101."hihokenshaNo" = #{hihokenshaNo}
+           AND dbT5101."shoKisaiHokenshaNo" = #{shokisaiHokenshaNo}
            AND dbT5101."shoriJotaiKubun" IN (#{tujou}, #{enki})
            ORDER BY
                dbT5101."ninteiShinseiYMD" DESC

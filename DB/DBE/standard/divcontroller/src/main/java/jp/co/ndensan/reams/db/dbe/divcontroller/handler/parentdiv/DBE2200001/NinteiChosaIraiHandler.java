@@ -278,6 +278,7 @@ public class NinteiChosaIraiHandler {
         row.setZenYokaigoKubunCode(未割付申請者.getZenYokaigoKubunCode() == null ? RString.EMPTY : 未割付申請者.getZenYokaigoKubunCode().value());
         row.setAge(new RString(未割付申請者.getAge()));
         row.setNinteiChosainCode(nullToEmpty(未割付申請者.getNinteiChosainCode()));
+        row.setHokenshaNo(未割付申請者.getHokenshaNo());
     }
 
     /**

@@ -30,12 +30,16 @@ public class NinteiChosaIraiShokai {
      * @return 認定調査情報div
      */
     public ResponseData<NinteiChosaIraiShokaiDiv> onLoad(NinteiChosaIraiShokaiDiv div) {
-        RString 申請書管理番号 = div.getShinseishaKanriNo();
-        if (RString.isNullOrEmpty(申請書管理番号)) {
-            申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 被保険者番号 = div.getHdnHihokenshaNo();
+        if (RString.isNullOrEmpty(被保険者番号)) {
+            被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        }
+        RString 証記載保険者番号 = div.getHdnShokisaiHokenshaNo();
+        if (RString.isNullOrEmpty(証記載保険者番号)) {
+            証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
         }
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
-                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(申請書管理番号).records();
+                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号, 証記載保険者番号).records();
         getHandler(div).onLoad(ninteiChosaList);
         return ResponseData.of(div).respond();
     }
@@ -49,7 +53,7 @@ public class NinteiChosaIraiShokai {
     public ResponseData<NinteiChosaIraiShokaiDiv> onClick_btnClose(NinteiChosaIraiShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
-
+    
     private NinteiChosaIraiShokaiHandler getHandler(NinteiChosaIraiShokaiDiv div) {
         return new NinteiChosaIraiShokaiHandler(div);
     }

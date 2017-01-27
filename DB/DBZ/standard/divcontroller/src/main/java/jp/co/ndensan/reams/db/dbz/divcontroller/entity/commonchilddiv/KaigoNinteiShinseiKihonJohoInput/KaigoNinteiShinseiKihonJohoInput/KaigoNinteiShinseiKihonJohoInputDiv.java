@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
  * @reamsid_L DBZ-1300-070 wangxiaodong
  */
 public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigoNinteiShinseiKihonJohoInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-14_20-51-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,6 +47,8 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     private RadioButton radShinseishoKubun;
     @JsonProperty("txtShinseiJokyo")
     private TextBox txtShinseiJokyo;
+    @JsonProperty("txtMinasiFlag")
+    private TextBox txtMinasiFlag;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("ddlShinseiShubetsu")
@@ -120,6 +122,24 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     @JsonProperty("txtShinseiJokyo")
     public void setTxtShinseiJokyo(TextBox txtShinseiJokyo) {
         this.txtShinseiJokyo = txtShinseiJokyo;
+    }
+
+    /*
+     * gettxtMinasiFlag
+     * @return txtMinasiFlag
+     */
+    @JsonProperty("txtMinasiFlag")
+    public TextBox getTxtMinasiFlag() {
+        return txtMinasiFlag;
+    }
+
+    /*
+     * settxtMinasiFlag
+     * @param txtMinasiFlag txtMinasiFlag
+     */
+    @JsonProperty("txtMinasiFlag")
+    public void setTxtMinasiFlag(TextBox txtMinasiFlag) {
+        this.txtMinasiFlag = txtMinasiFlag;
     }
 
     /*

@@ -110,15 +110,15 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             if (割付済み申請者.getIraishoShutsuryokuYMD() != null && 割付済み申請者.getIraishoShutsuryokuYMD().isValid()) {
                 row.getIraishoShutsuryokuDay().setValue(new RDate(割付済み申請者.getIraishoShutsuryokuYMD().toString()));
             }
-            
+
             if (割付済み申請者.getIkenshoShutsuryokuYMD() != null && 割付済み申請者.getIkenshoShutsuryokuYMD().isValid()) {
                 row.getIkenshoShutsuryokuDay().setValue(new RDate(割付済み申請者.getIkenshoShutsuryokuYMD().toString()));
             }
-            
+
             if (割付済み申請者.getSeikyushoShutsuryokuYMD() != null && 割付済み申請者.getSeikyushoShutsuryokuYMD().isValid()) {
                 row.getSeikyushoShutsuryokuDay().setValue(new RDate(割付済み申請者.getSeikyushoShutsuryokuYMD().toString()));
             }
-            
+
             row.getShujiiIkenshoTorokuKanryoYMD().setValue(割付済み申請者.getShujiiIkenshoTorokuKanryoYMD());
             row.setShinseishoKanriNo(nullToEmpty(割付済み申請者.getShinseishoKanriNo()));
             row.setIkenshoIraiRirekiNo(new RString(割付済み申請者.getIkenshoIraiRirekiNo()));
@@ -356,5 +356,6 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         }
         row.setZenYokaigoKubunCode(未割付申請者.getZenYokaigoKubunCode() == null ? RString.EMPTY : 未割付申請者.getZenYokaigoKubunCode().value());
         row.setAge(new RString(未割付申請者.getAge()));
+        row.setHokenshaNo(未割付申請者.getHokenshaNo());
     }
 }

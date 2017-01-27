@@ -116,9 +116,6 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onStateChange(ShujiiIryoKikanMasterDiv div) {
         boolean changeFlag = Boolean.FALSE;
         for (dgShujiiIchiran_Row row : div.getShujiiIchiran().getDgShujiiIchiran().getDataSource()) {
-            if (医療機関コード_0000000000.equals(row.getIryoKikanCode())) {
-                row.setIryoKikanCode(RString.EMPTY);
-            }
             if (!row.getJotai().isEmpty() && !row.getJotai().isNull()) {
                 changeFlag = Boolean.TRUE;
             }

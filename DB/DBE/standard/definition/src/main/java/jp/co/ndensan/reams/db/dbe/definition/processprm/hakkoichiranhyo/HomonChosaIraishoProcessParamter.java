@@ -43,7 +43,8 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
     private final RString teishutsuKigen;
     private final RString kyotsuHizuke;
     private final boolean is認定調査依頼履歴一覧;
-    private final RString 保険者コード;
+//    private final RString 保険者コード;
+    private final RString 文書番号;
 
     /**
      * コンストラクタです。
@@ -117,7 +118,8 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
         this.teishutsuKigen = teishutsuKigen;
         this.kyotsuHizuke = kyotsuHizuke;
         this.is認定調査依頼履歴一覧 = is認定調査依頼履歴一覧;
-        this.保険者コード = null;
+//        this.保険者コード = null;
+        this.文書番号 = null;
     }
 
     /**
@@ -145,6 +147,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
      * @param teishutsuKigen 提出期限
      * @param kyotsuHizuke 共通日付
      * @param is認定調査依頼履歴一覧 認定調査依頼履歴一覧
+     * @param 文書番号
      *
      */
     public HomonChosaIraishoProcessParamter(
@@ -170,7 +173,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
             RString teishutsuKigen,
             RString kyotsuHizuke,
             boolean is認定調査依頼履歴一覧,
-            RString 保険者コード) {
+            RString 文書番号) {
         this.ninteioChosaIraisho = ninteioChosaIraisho;
         this.ninteiChosahyo = ninteiChosahyo;
         this.ninteiChosaIraiList = ninteiChosaIraiList;
@@ -193,7 +196,7 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
         this.teishutsuKigen = teishutsuKigen;
         this.kyotsuHizuke = kyotsuHizuke;
         this.is認定調査依頼履歴一覧 = is認定調査依頼履歴一覧;
-        this.保険者コード = 保険者コード;
+        this.文書番号 = 文書番号;
     }
 
     /**

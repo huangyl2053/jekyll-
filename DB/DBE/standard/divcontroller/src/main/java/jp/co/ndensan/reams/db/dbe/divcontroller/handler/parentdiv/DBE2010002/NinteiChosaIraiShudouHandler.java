@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
@@ -44,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 認定調査依頼(手動)のハンドラークラスです。
@@ -116,6 +118,11 @@ public class NinteiChosaIraiShudouHandler {
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShichosonCode(認定調査依頼.get市町村コード());
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShinseishoKanriNo(認定調査依頼.get申請書管理番号());
             div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(認定調査依頼.get申請書管理番号()));
+            List<KeyValueDataSource> dataSource = new ArrayList<>();
+            for (NinteiChousaIraiKubunCode ninteiChousaIraiKubunCode : NinteiChousaIraiKubunCode.values()) {
+                dataSource.add(new KeyValueDataSource(ninteiChousaIraiKubunCode.getコード(), ninteiChousaIraiKubunCode.get名称()));
+            }
+            div.getNinteichosaIraiByHand().getDdlIraiKubun().setDataSource(dataSource);
             if (認定調査依頼.get認定調査依頼区分コード() != null) {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(認定調査依頼.get認定調査依頼区分コード());
             }

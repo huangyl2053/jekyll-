@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
@@ -14,12 +16,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBus
 import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoirai.ShujiiIkenshoIraiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.ChosaKekkaInfoKihonParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kojinjokyoshokai.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfokihon.ChosaKekkaInfoKihonFinder;
@@ -49,10 +55,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -70,6 +79,7 @@ public class KojinJokyoShokaiHandler {
     private final Code 識別コード_09A = new Code("09A");
     private final Code 識別コード_09B = new Code("09B");
     private final RString 指定医 = new RString("指定医");
+    private final String regex = "[^0]";
     private final KojinJokyoShokaiDiv div;
 
     /**
@@ -89,16 +99,26 @@ public class KojinJokyoShokaiHandler {
      */
     public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, RString 申請書管理番号) {
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
-        div.setHihokenshano(kojinJokyoShokaiList.get(0).get被保番号());
-        div.setShoKisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
+        div.setHdnHihokenshaNo(kojinJokyoShokaiList.get(0).get被保番号());
+        div.setHdnShokisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
         div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanCode().setValue(kojinJokyoShokaiList.get(0).get主治医医療機関コード());
         div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanName().setValue(kojinJokyoShokaiList.get(0).get医療機関名称());
         div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiCode().setValue(kojinJokyoShokaiList.get(0).get主治医コード());
         div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiName().setValue(kojinJokyoShokaiList.get(0).get主治医氏名());
+        div.getShujiiIryokikaknAndShujiiInput().getTxtIkenshoIraiDate().setValue(kojinJokyoShokaiList.get(0).get主治医意見書作成依頼年月日());
         div.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiCode().setValue(kojinJokyoShokaiList.get(0).get認定調査委託先コード());
         div.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiName().setValue(kojinJokyoShokaiList.get(0).get事業者名称());
         div.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainCode().setValue(kojinJokyoShokaiList.get(0).get認定調査員コード());
         div.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainName().setValue(kojinJokyoShokaiList.get(0).get調査員氏名());
+        div.getChosaItakusakiAndChosainGuide().getTxtChosaIraiDate().setValue(kojinJokyoShokaiList.get(0).get認定調査依頼年月日());
+        if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue())) {
+            div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(
+                    TorisageKubunCode.toValue(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue()).get名称());
+        } else {
+            div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(RString.EMPTY);
+        }
+        div.getShinseiTorisage().getTxtTorisageDate().setValue(kojinJokyoShokaiList.get(0).get取下年月日());
+        div.getShinseiTorisage().getTxtTorisageJiyu().setValue(kojinJokyoShokaiList.get(0).get取下事由());
         getchkShiteii(kojinJokyoShokaiList);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
@@ -118,7 +138,9 @@ public class KojinJokyoShokaiHandler {
         div.getBtnChosaKekkaInfoKihon().setDisabled(true);
         div.getBtnShichosonRenrakuJiko().setDisabled(true);
         div.getBtnShujiiIkenshoSakuseiIraiShokai().setDisabled(true);
+        div.getBtnOtherFile().setDisabled(true);
         div.getBtnShinsakaiJoho().setDisabled(true);
+        div.getBtnIchijiHanteiShokai().setDisabled(true);
     }
 
     /**
@@ -127,10 +149,12 @@ public class KojinJokyoShokaiHandler {
      */
     public void ボタン非活性() {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RString 主治医意見書作成依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class);
+        int 主治医意見書作成依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, Integer.class);
         int 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        
+        RString 被保険者番号 = div.getHdnHihokenshaNo();
+        RString 証記載保険者番号 = div.getHdnShokisaiHokenshaNo();
+
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<RenrakusakiJoho> rakusakiJohoList = kojinJokyoShokaiFinder.getRenrakusakiJoho(parameter).records();
@@ -138,7 +162,8 @@ public class KojinJokyoShokaiHandler {
             div.getBtnRenrakusaki().setDisabled(true);
         }
 
-        List<NinteiChosaIraiShokaiMaster> ninteiChosaList = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(申請書管理番号).records();
+        List<NinteiChosaIraiShokaiMaster> ninteiChosaList = NinteiChosaIraiShokaiFinder.createInstance()
+                .getNinteiChousaJouhou(被保険者番号, 証記載保険者番号).records();
         if (ninteiChosaList.isEmpty()) {
             div.getBtnNinteiChosaIraiShokai().setDisabled(true);
         }
@@ -177,25 +202,40 @@ public class KojinJokyoShokaiHandler {
         }
 
         ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
-        List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(申請書管理番号).records();
-        if (認定調査情報.isEmpty()) {
+        List<ShujiiIkenshoIraiBusiness> 主治医意見書依頼情報 = finder.getShujiiIkenshoIraiJoho(被保険者番号, 証記載保険者番号).records();
+        if (主治医意見書依頼情報.isEmpty()) {
             div.getBtnShujiiIkenshoSakuseiIraiShokai().setDisabled(true);
         }
         List<ShujiiIkenshoIkenItemEntity> entityList = null;
-        if (主治医意見書作成依頼履歴番号 != null) {
-            entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(new ShinseishoKanriNo(申請書管理番号), Integer.parseInt(主治医意見書作成依頼履歴番号.toString()));
+        entityList = ShujiiIkenshoIkenItemManager.createInstance().select主治医意見書(new ShinseishoKanriNo(申請書管理番号), 主治医意見書作成依頼履歴番号);
+        if ((entityList == null || entityList.isEmpty())) {
+            div.getBtnShujiiIkenshoShokai().setDisabled(true);
         }
         ImageManager imageManager = InstanceProvider.create(ImageManager.class);
-        Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(申請書管理番号));
-        if ((entityList == null || entityList.isEmpty()) && イメージ情報 == null) {
-            div.getBtnShujiiIkenshoShokai().setDisabled(true);
+        Image imageJoho = imageManager.getイメージ情報(new ShinseishoKanriNo(申請書管理番号));
+        if (imageJoho != null) {
+            ImagekanriJohoEntity imageKanriJohoEntity = new ImagekanriJohoEntity();
+            imageKanriJohoEntity.setHihokenshaNo(被保険者番号);
+            imageKanriJohoEntity.setShoKisaiHokenshaNo(証記載保険者番号);
+            imageKanriJohoEntity.setImageSharedFileId(imageJoho.getイメージ共有ファイルID());
+            ImagekanriJoho イメージ管理情報 = new ImagekanriJoho(imageKanriJohoEntity);
+            ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
+            RString toCopyPath = DBEImageUtil.copySharedFiles(
+                    イメージ管理情報.getイメージ共有ファイルID(), div.getHdnShokisaiHokenshaNo().concat(div.getHdnHihokenshaNo()));
+            div.setHdnImageLocalCopyPath(toCopyPath);
+            List<RString> otherFileList = ImageFileItem.getOtherFileImageFileList_Mask();
+            for (RString otherFile : otherFileList) {
+                if (!RString.isNullOrEmpty(DBEImageUtil.getMaskOrOriginalImageFilePath(toCopyPath, otherFile))) {
+                    div.getBtnOtherFile().setDisabled(false);
+                    break;
+                }
+            }
         }
 
         KaisaiKekkaAndBashoJoho kaisai = new KaisaiKekkaAndBashoJoho(ShinsakaiJohoKojinFinder.createInstance().onLoad1(new ShinseishoKanriNo(申請書管理番号), 審査会開催番号));
         if (RString.isNullOrEmpty(kaisai.get介護認定審査会開催番号())) {
             div.getBtnShinsakaiJoho().setDisabled(true);
         }
-
     }
 
     private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {
@@ -307,8 +347,8 @@ public class KojinJokyoShokaiHandler {
             div.getTxtNinteiYukoKikanTo().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日().toString()));
         }
-        if(!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get二次判定結果名称())){
-          div.getTxtNinteiKikanMonth().setValue(new Decimal(kojinJokyoShokaiList.get(0).get二次判定認定有効期間()));   
+        if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get二次判定結果名称())) {
+            div.getTxtNinteiKikanMonth().setValue(new Decimal(kojinJokyoShokaiList.get(0).get二次判定認定有効期間()));
         }
         if (kojinJokyoShokaiList.get(0).get要支援申請の区分() != null) {
             div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
@@ -339,7 +379,14 @@ public class KojinJokyoShokaiHandler {
 //<<<<<<< HEAD
         div.getTxtIchijiHantei().setValue(kojinJokyoShokaiList.get(0).get一次判定結果名称());
         if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get一次判定警告コード())) {
-            div.getTxtIchijiHanteiKeikokuCode().setValue(kojinJokyoShokaiList.get(0).get一次判定警告コード());
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(kojinJokyoShokaiList.get(0).get一次判定警告コード());
+            if (matcher.find()) {
+                div.getTxtIchijiHanteiKeikokuCode().setValue(kojinJokyoShokaiList.get(0).get一次判定警告コード());
+            }
+        }
+        if (RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get一次判定結果名称())) {
+            div.getBtnIchijiHanteiShokai().setDisabled(true);
         }
 //=======
 //        RString 一次判定結果 = RString.EMPTY;

@@ -29,6 +29,7 @@ public class IkenshoJohoPrintRelateEntity implements Serializable {
     private FlexibleDate seinengappiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
+    private RString shichosonCode;
     private RString shichosonMeisho;
     private RString iryoKikanMeisho;
     private FlexibleDate ikenshoJuryoYMD;

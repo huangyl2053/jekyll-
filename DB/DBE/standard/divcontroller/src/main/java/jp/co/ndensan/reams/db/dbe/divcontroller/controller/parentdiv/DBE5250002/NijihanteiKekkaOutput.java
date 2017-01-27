@@ -41,7 +41,6 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onLoad(NijihanteiKekkaOutputDiv nijiDiv) {
-        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize_最近処理者非表示();
         createHandlerOf(nijiDiv).initialize();
         return createResponseData(nijiDiv);
     }
@@ -53,8 +52,11 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_BtnClear(NijihanteiKekkaOutputDiv nijiDiv) {
-        nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize_最近処理者非表示();
+        nijiDiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().clearFromValue();
+        nijiDiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().clearToValue();
         nijiDiv.getKensakuJoken().getRadDataShutsuryokuUmu().setSelectedIndex(0);
+        nijiDiv.getKensakuJoken().getTxtHihokenshaNo().clearValue();
+        nijiDiv.getKensakuJoken().getRadTeishutsuKigen().setSelectedIndex((0));
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
@@ -76,13 +78,7 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv div) {
-        ValidationMessageControlPairs pairs = div.getKensakuJoken().getCcdShinseishaFinder().validate();
-
-        if (pairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-
-        createHandlerOf(div).kennsaku(div.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
+        createHandlerOf(div).kennsaku(div.getKensakuJoken().getTxtHihokenshaNo().getValue());
         return createResponseData(div);
     }
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.core.IshiKubun;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2040001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
@@ -40,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -74,18 +76,29 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
 
     /**
      * 完了処理・主治医意見書入手の初期化です。
+     *
+     * @param stateName 状態名
      */
-    public void initialize() {
+    public void initialize(RString stateName) {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        RString 表示区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        if (表示区分 != null && !表示区分.isEmpty()) {
-            div.getRadShoriJyotai().setSelectedKey(表示区分);
+        setRad(stateName);
+        set主治医意見書依頼完了対象者一覧データグリッド();
+        setButton(stateName);
+        set依頼区分ドロップダウンリスト();
+    }
+
+    /**
+     * 意見書依頼完了ボタンの使用可否を設定します。
+     */
+    public void set意見書依頼完了ボタン使用可否() {
+        if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_未)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, true);
         } else {
-            div.getRadShoriJyotai().setSelectedKey(KEY_未);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
         }
     }
 
@@ -140,8 +153,22 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getCcdShujiiInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
         div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
         div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(false);
-        div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
-        div.getTxtSakuseiIraiYmd().clearValue();
+        if (div.getDgNinteiTaskList().getSelectedItems().size() == 1) {
+            dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
+            div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
+            div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
+            div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
+            div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
+            div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
+            div.getDdlIraiKubun().setSelectedKey(
+                    (!row.getIkenshoIraiKubun().isEmpty())
+                    ? row.getIkenshoIraiKubun()
+                    : IkenshoIraiKubun.初回依頼.getコード());
+            div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
+        } else {
+            div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
+            div.getTxtSakuseiIraiYmd().clearValue();
+        }
     }
 
     /**
@@ -152,7 +179,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     public void set主治医意見書依頼完了対象者一覧パネル使用可否(boolean is使用不可) {
         div.getIkenshoiraitaishoichiran().setReadOnly(is使用不可);
         div.getBtnikenshoiraitaishooutput().setDisplayNone(is使用不可);
-        div.getBtnIraisuru().setDisplayNone(is使用不可);
+        div.getBtnShujiiSettei().setDisplayNone(is使用不可);
         div.getBtnIraishoToOutputDialog().setDisplayNone(is使用不可);
     }
 
@@ -167,7 +194,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setKonkaiShujiiIryokikan(div.getCcdShujiiInput().getIryoKikanName());
             row.setKonkaiShujiiCode(div.getCcdShujiiInput().getShujiiCode());
             row.setKonkaiShujii(div.getCcdShujiiInput().getShujiiName());
-            row.setShiteiiFlag(div.getCcdShujiiInput().hasShiteii());
+            row.setIshiKubunCode((div.getCcdShujiiInput().hasShiteii()) ? IshiKubun.指定医.getCode() : IshiKubun.主治医.getCode());
             row.setIkenshoIraiKubun(div.getDdlIraiKubun().getSelectedKey());
             row.getIkenshoSakuseiIraiYMD().setValue(div.getTxtSakuseiIraiYmd().getValue());
             row.setRowState(RowState.Modified);
@@ -207,11 +234,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         builder.set主治医コード(row.getKonkaiShujiiCode());
         builder.set主治医意見書依頼区分(row.getIkenshoIraiKubun());
         builder.set主治医意見書作成回数(初期作成回数);
-        if (row.getShiteiiFlag()) {
-            builder.set医師区分コード(new Code(IshiKubun.指定医.getCode()));
-        } else {
-            builder.set医師区分コード(new Code(IshiKubun.主治医.getCode()));
-        }
+        builder.set医師区分コード(new Code(row.getIshiKubunCode()));
         builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getIkenshoSakuseiIraiYMD().getValue().toDateString()));
         builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
         builder.set論理削除フラグ(false);
@@ -281,8 +304,11 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
         row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
                 ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
+        row.setKonkaiShujiiIryokikanCode(business.get今回医療機関コード() == null ? RString.EMPTY : business.get今回医療機関コード());
         row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());
+        row.setKonkaiShujiiCode(business.get今回主治医コード() == null ? RString.EMPTY : business.get今回主治医コード());
         row.setKonkaiShujii(business.get今回主治医() == null ? RString.EMPTY : business.get今回主治医());
+        row.setIshiKubunCode(business.get医師区分コード() == null ? RString.EMPTY : business.get医師区分コード().value());
         row.setZenkaiIryokikan(business.get前回医療機関() == null ? RString.EMPTY : business.get前回医療機関());
         row.setZenkaiShujii(business.get前回主治医() == null ? RString.EMPTY : business.get前回主治医());
         row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().getEditedYubinNo());
@@ -296,6 +322,10 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
         row.setShichosonCode(business.get市町村コード());
         row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
+        row.setIkenshoIraiKubun(business.get主治医意見書依頼区分() == null ? RString.EMPTY : business.get主治医意見書依頼区分());
+        row.getIkenshoSakuseiIraiYMD().setValue(
+                business.get主治医意見書作成依頼年月日() == null || business.get主治医意見書作成依頼年月日().isEmpty()
+                ? null : new RDate(business.get主治医意見書作成依頼年月日().toString()));
         意見書依頼モードの日付設定(row, business);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
@@ -336,6 +366,32 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         }
     }
 
+    private void setRad(RString stateName) {
+        if (DBE2040001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getRadShoriJyotai().setSelectedKey(KEY_可);
+            div.getRadShoriJyotai().setDisabled(true);
+        } else {
+            RString config = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            div.getRadShoriJyotai().setSelectedKey(config);
+        }
+    }
+
+    private void setButton(RString stateName) {
+        if (DBE2040001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getBtnShujiiSettei().setDisplayNone(true);
+        } else {
+            set意見書依頼完了ボタン使用可否();
+        }
+    }
+
+    private void set依頼区分ドロップダウンリスト() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (IkenshoIraiKubun 主治医意見書依頼区分 : IkenshoIraiKubun.values()) {
+            dataSource.add(new KeyValueDataSource(主治医意見書依頼区分.getコード(), 主治医意見書依頼区分.get名称()));
+        }
+        div.getDdlIraiKubun().setDataSource(dataSource);
+    }
+
     private void set件数表示(RString 状態) {
         if (状態.equals(KEY_未)) {
             div.getTxtNoUpdate().setValue(new Decimal(notreatedCount));
@@ -344,7 +400,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getTxtNoUpdate().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(true);
             div.getTxtTotalCount().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, true);
         } else if (状態.equals(KEY_可)) {
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
             div.getTxtNoUpdate().clearValue();
@@ -352,7 +407,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getTxtNoUpdate().setDisplayNone(true);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
         } else {
             div.getTxtTotalCount().setValue(new Decimal(notreatedCount + completeCount));
             div.getTxtCompleteCount().setValue(new Decimal(completeCount));
@@ -360,7 +414,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getTxtNoUpdate().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
         }
     }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2270001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.DBE2270001StateName;
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2270001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosadataoutput.NinteiChosaDataOutputFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 認定調査データ出力（モバイル）のクラスです。
@@ -42,11 +42,11 @@ public class NinteiChosaDataOutput {
      */
     public ResponseData<NinteiChosaDataOutputDiv> onClick_btnKensaku(NinteiChosaDataOutputDiv div) {
 
-        List<NinteiChosaDataOutputBusiness> businessList
-                = NinteiChosaDataOutputFinder.createInstance().getChosaChikuList(getHandler(div).setParameter()).records();
+        SearchResult<NinteiChosaDataOutputBusiness> searchResult
+                = NinteiChosaDataOutputFinder.createInstance().getChosaChikuList(getHandler(div).setParameter());
         //getHandler(div).set共通ボタン();
-        getHandler(div).get認定調査一覧(businessList);
-        if (businessList.isEmpty()) {
+        getHandler(div).get認定調査一覧(searchResult);
+        if (searchResult.records().isEmpty()) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getValidationHandler().checkデータ存在());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();

@@ -61,6 +61,10 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShinseiJokyo"));
             }
 
+            public txtMinasiFlag(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtMinasiFlag"));
+            }
+
             public txtShinseiYMD(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtShinseiYMD"));
             }

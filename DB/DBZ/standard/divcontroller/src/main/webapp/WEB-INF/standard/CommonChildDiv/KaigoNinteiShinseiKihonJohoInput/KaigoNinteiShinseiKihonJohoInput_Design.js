@@ -55,6 +55,10 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtShinseiJokyo"));
             };
 
+            Controls.prototype.txtMinasiFlag = function () {
+                return new UZA.TextBox(this.convFiledName("txtMinasiFlag"));
+            };
+
             Controls.prototype.txtShinseiYMD = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtShinseiYMD"));
             };

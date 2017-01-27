@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaItakusakiAndChosainGuideDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +29,10 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel {
     private TextBoxCode txtNinteiChosainCode;
     @JsonProperty("txtNinteiChosainName")
     private TextBox txtNinteiChosainName;
+    @JsonProperty("txtChosaIraiDate")
+    private TextBoxFlexibleDate txtChosaIraiDate;
+    @JsonProperty("btnNinteiChosaIraiShokai")
+    private ButtonDialog btnNinteiChosaIraiShokai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -106,6 +110,42 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel {
     @JsonProperty("txtNinteiChosainName")
     public void setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
         this.txtNinteiChosainName = txtNinteiChosainName;
+    }
+
+    /*
+     * gettxtChosaIraiDate
+     * @return txtChosaIraiDate
+     */
+    @JsonProperty("txtChosaIraiDate")
+    public TextBoxFlexibleDate getTxtChosaIraiDate() {
+        return txtChosaIraiDate;
+    }
+
+    /*
+     * settxtChosaIraiDate
+     * @param txtChosaIraiDate txtChosaIraiDate
+     */
+    @JsonProperty("txtChosaIraiDate")
+    public void setTxtChosaIraiDate(TextBoxFlexibleDate txtChosaIraiDate) {
+        this.txtChosaIraiDate = txtChosaIraiDate;
+    }
+
+    /*
+     * getbtnNinteiChosaIraiShokai
+     * @return btnNinteiChosaIraiShokai
+     */
+    @JsonProperty("btnNinteiChosaIraiShokai")
+    public ButtonDialog getBtnNinteiChosaIraiShokai() {
+        return btnNinteiChosaIraiShokai;
+    }
+
+    /*
+     * setbtnNinteiChosaIraiShokai
+     * @param btnNinteiChosaIraiShokai btnNinteiChosaIraiShokai
+     */
+    @JsonProperty("btnNinteiChosaIraiShokai")
+    public void setBtnNinteiChosaIraiShokai(ButtonDialog btnNinteiChosaIraiShokai) {
+        this.btnNinteiChosaIraiShokai = btnNinteiChosaIraiShokai;
     }
 
     // </editor-fold>

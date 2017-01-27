@@ -119,6 +119,8 @@ public class IkenshoJissekiIchiranProcessCSV extends BatchProcessBase<IkenshoJis
         RString 基準日区分 = get基準日区分();
         RStringBuilder 保険者_SB = new RStringBuilder("【保険者】");
         保険者_SB.append(paramter.get証記載保険者());
+        保険者_SB.append(new RString(" "));
+        保険者_SB.append(paramter.get保険者名称());
         出力条件.add(get出力条件_基準日区分From(基準日区分));
         出力条件.add(get出力条件_基準日区分To(基準日区分));
         出力条件.add(保険者_SB.toRString());

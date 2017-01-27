@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -294,32 +292,6 @@ public class NinteiChosaIrai {
     }
 
     /**
-     * 割付済みの「照会」ボタンのclick処理です。
-     *
-     * @param div NinteiChosaIraiDiv
-     * @return ResponseData<NinteiChosaIraiDiv>
-     */
-    public ResponseData<NinteiChosaIraiDiv> onClick_WaritsukeZumiShokai(NinteiChosaIraiDiv div) {
-        dgWaritsukeZumiShinseishaIchiran_Row row = div.getDgWaritsukeZumiShinseishaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
-        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 未割付の「照会」ボタンのclick処理です。
-     *
-     * @param div NinteiChosaIraiDiv
-     * @return ResponseData<NinteiChosaIraiDiv>
-     */
-    public ResponseData<NinteiChosaIraiDiv> onClick_MiwaritsukeShokai(NinteiChosaIraiDiv div) {
-        dgMiwaritsukeShinseishaIchiran_Row row = div.getDgMiwaritsukeShinseishaIchiran().getClickedItem();
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo(row.getHihokenshaNo()));
-        div.setShinseishaKanriNo(row.getShinseishoKanriNo());
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「認定調査員選択へ戻る」ボタンのclick処理です。
      *
      * @param div NinteiChosaIraiDiv
@@ -453,7 +425,7 @@ public class NinteiChosaIrai {
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                             .set認定調査員コード(調査員コード)
-                            .set認定調査依頼区分コード(new Code(NinteichosaIraiKubun.初回.getCode()))
+                            .set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.初回.getコード()))
                             .set認定調査回数(0)
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)
@@ -467,7 +439,7 @@ public class NinteiChosaIrai {
                             .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                             .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                             .set認定調査員コード(調査員コード)
-                            .set認定調査依頼区分コード(new Code(NinteichosaIraiKubun.再調査.getCode()))
+                            .set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.再調査.getコード()))
                             .set認定調査回数(1)
                             .set認定調査依頼年月日(認定調査依頼年月日)
                             .set認定調査期限年月日(認定調査期限年月日)

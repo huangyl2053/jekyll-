@@ -51,7 +51,7 @@
         WHERE
         dbT5102."shinseishoKanriNo" IN
         <foreach
-            collection="shinseishoKanriNo"
+            collection="shinseishoKanriNoList"
             item="item"
             open="("
             separator=","
