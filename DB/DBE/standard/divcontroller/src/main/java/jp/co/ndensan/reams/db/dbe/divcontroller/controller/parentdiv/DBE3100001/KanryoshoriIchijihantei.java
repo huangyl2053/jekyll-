@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -38,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -61,7 +63,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class KanryoshoriIchijihantei {
 
-    private static final RString CSVファイル名 = new RString("IchijiHanteiIchiran.csv");
+    private static final RString CSVファイルID = new RString("DBE310001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString ROOTTITLE = new RString("一次判定結果を完了しました。");
 
@@ -185,6 +187,8 @@ public class KanryoshoriIchijihantei {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_Btndataoutput(KanryoshoriIchijihanteiDiv div, IDownLoadServletResponse response) {
+        RString CSVファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID);
+
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         KanryoshoriIchijihanteiHandler handler = getHandler(div);
 

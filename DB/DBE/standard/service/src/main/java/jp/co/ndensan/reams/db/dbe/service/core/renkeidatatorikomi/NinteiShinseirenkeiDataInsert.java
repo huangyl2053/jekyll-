@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ItakusakiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
@@ -165,7 +166,7 @@ public class NinteiShinseirenkeiDataInsert {
     private RString check医療機関一時テーブル電算(DbT5911RelateEntity entity) {
         RStringBuilder errorBuilder = new RStringBuilder();
         checkDbT5911同情報(entity, errorBuilder);
-        if (entity.getDbt5911TempEntity().get医療機関コード() == null 
+        if (entity.getDbt5911TempEntity().get医療機関コード() == null
                 || entity.getDbt5911TempEntity().get医療機関コード() == ShujiiIryokikanCode.EMPTY) {
             errorBuilder = errorBuilder.append(new RString("医療機関コードが未入力です；"));
         }
@@ -228,7 +229,7 @@ public class NinteiShinseirenkeiDataInsert {
             errorBuilder.append(new RString("調査機関コードが未入力です;"));
         }
         DbT5910NinteichosaItakusakiJohoDac dac = InstanceProvider.create(DbT5910NinteichosaItakusakiJohoDac.class);
-        if (dac.selectBy認定調査委託先コード(entity.getDbt5913TempEntity().get委託先コード()) == null 
+        if (dac.selectBy認定調査委託先コード(entity.getDbt5913TempEntity().get委託先コード()) == null
                 || dac.selectBy認定調査委託先コード(entity.getDbt5913TempEntity().get委託先コード()).isEmpty()) {
             errorBuilder.append(new RString("調査機関コードが不正です;"));
         }
@@ -256,7 +257,15 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set郵便番号(entity.getDbt5910TempEntity().get郵便番号());
             errorEntity.set住所(entity.getDbt5910TempEntity().get住所());
             errorEntity.set電話番号(entity.getDbt5910TempEntity().get電話番号());
-            errorEntity.set状況(entity.getDbt5910TempEntity().is状況());
+
+            RString jokyoFlag = entity.getDbt5910TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                ItakusakiJokyo jokyo = ItakusakiJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.is有効());
+            }
+
             errorEntity.set委託区分コード(entity.getDbt5910TempEntity().get委託区分コード());
             if (!RString.isNullOrEmpty(entity.getDbt5910TempEntity().get委託区分コード())) {
                 errorEntity.set委託区分名称(ChosaItakuKubunCode.toValue(entity.getDbt5910TempEntity().get委託区分コード()).get名称());
@@ -285,7 +294,15 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set郵便番号(entity.getDbt5910TempEntity().get郵便番号());
             errorEntity.set住所(entity.getDbt5910TempEntity().get住所());
             errorEntity.set電話番号(entity.getDbt5910TempEntity().get電話番号());
-            errorEntity.set状況(entity.getDbt5910TempEntity().is状況());
+
+            RString jokyoFlag = entity.getDbt5910TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                ItakusakiJokyo jokyo = ItakusakiJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.is有効());
+            }
+
             errorEntity.set委託区分コード(entity.getDbt5910TempEntity().get委託区分コード());
             if (!RString.isNullOrEmpty(entity.getDbt5910TempEntity().get委託区分コード())) {
                 errorEntity.set委託区分名称(ChosaItakuKubunCode.toValue(entity.getDbt5910TempEntity().get委託区分コード()).get名称());
@@ -374,8 +391,8 @@ public class NinteiShinseirenkeiDataInsert {
         check性別未入力(entity.getDbt5101TempEntity().get性別(), errorBuilder);
         check被保険者番号入力不正(entity.getDbt5101TempEntity().get被保険者番号(), errorBuilder);
         check性別入力不正(entity.getDbt5101TempEntity().get性別(), errorBuilder);
-        check有効期間(entity.getDbt5101TempEntity().get前回の認定有効開始期間(), 
-                entity.getDbt5101TempEntity().get前回の認定有効終了期間(), 
+        check有効期間(entity.getDbt5101TempEntity().get前回の認定有効開始期間(),
+                entity.getDbt5101TempEntity().get前回の認定有効終了期間(),
                 entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
         return errorBuilder.toRString();
     }
@@ -396,8 +413,8 @@ public class NinteiShinseirenkeiDataInsert {
         check性別未入力(entity.getDbt5101TempEntity().get性別(), errorBuilder);
         check被保険者番号入力不正(entity.getDbt5101TempEntity().get被保険者番号(), errorBuilder);
         check性別入力不正(entity.getDbt5101TempEntity().get性別(), errorBuilder);
-        check有効期間(entity.getDbt5101TempEntity().get前回の認定有効開始期間(), 
-                entity.getDbt5101TempEntity().get前回の認定有効終了期間(), 
+        check有効期間(entity.getDbt5101TempEntity().get前回の認定有効開始期間(),
+                entity.getDbt5101TempEntity().get前回の認定有効終了期間(),
                 entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
         return errorBuilder.toRString();
     }
@@ -515,38 +532,38 @@ public class NinteiShinseirenkeiDataInsert {
         }
         return errorBuilder;
     }
-    
+
     private RStringBuilder checkDbT5101同情報(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5101Entity() != null 
-                && (entity.getDbT5102Entity() == null 
-                || entity.getDbT5102Entity().getNijiHanteiYMD() == null 
+        if (entity.getDbT5101Entity() != null
+                && (entity.getDbT5102Entity() == null
+                || entity.getDbT5102Entity().getNijiHanteiYMD() == null
                 || entity.getDbT5102Entity().getNijiHanteiYMD().isEmpty())) {
             errorBuilder.append(new RString("既に登録されています;"));
         }
         return errorBuilder;
     }
-    
+
     private RStringBuilder checkDbT5910同情報(DbT5910RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5910Entity() != null) {
             errorBuilder.append(new RString("既に登録されています；"));
         }
         return errorBuilder;
     }
-    
+
     private RStringBuilder checkDbT5911同情報(DbT5911RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5911Entity() != null) {
             errorBuilder.append(new RString("既に登録されています；"));
         }
         return errorBuilder;
     }
-    
+
     private RStringBuilder checkDbT5912同情報(DbT5912RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5912Entity() != null) {
             errorBuilder.append(new RString("既に登録されています；"));
         }
         return errorBuilder;
     }
-    
+
     private RStringBuilder checkDbT5913同情報(DbT5913RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5913Entity() != null) {
             errorBuilder.append(new RString("既に登録されています；"));

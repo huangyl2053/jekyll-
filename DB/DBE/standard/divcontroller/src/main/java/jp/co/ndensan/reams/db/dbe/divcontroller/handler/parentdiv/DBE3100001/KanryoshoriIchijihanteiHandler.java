@@ -40,9 +40,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -110,6 +112,10 @@ public class KanryoshoriIchijihanteiHandler {
         if (一次判定処理.equals(menuId)) {
             div.getIchijiHanteiShoriTaishoshaIchiran().getRadStatus().setSelectedKey(radStatus_完了可能);
             div.setRadStatusBefore(radStatus_完了可能);
+
+            div.getIchijiHanteiShoriTaishoshaIchiran().getRadStatus().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdateHanteiKekka"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnIchijiHantei"), true);
         }
 
         div.setModeType(ModeType.SHOKAI_MODE.getValue());
@@ -851,16 +857,16 @@ public class KanryoshoriIchijihanteiHandler {
                 row.getHokensha(),
                 row.getHihokenNo(),
                 row.getHihokenshaName(),
-                new RString(row.getShinseibi().getValue().toString()),
+                toSeirekiDateString(row.getShinseibi().getValue()),
                 row.getShinseiKbnShin(),
-                new RString(row.getIchijiHanteibi().getValue().toString()),
+                toSeirekiDateString(row.getIchijiHanteibi().getValue()),
                 row.getIchijiHanteiKekka(),
                 row.getIchijiHanteiKekkaCode(),
                 row.getIchijiHanteiKekkaNinchishoKasan(),
                 row.getIchijiHanteiKekkaNinchishoKasanCode(),
                 row.getHiddenKeikokuCode(),
-                new RString(row.getChosaJissibi().getValue().toString()),
-                new RString(row.getIkenshoJuryobi().getValue().toString()),
+                toSeirekiDateString(row.getChosaJissibi().getValue()),
+                toSeirekiDateString(row.getIkenshoJuryobi().getValue()),
                 new RString(row.getKijunJikan().getValue().roundHalfUpTo(ROUND_UP).toString()),
                 new RString(row.getKijunJikanShokuji().getValue().roundHalfUpTo(ROUND_UP).toString()),
                 new RString(row.getKijunJikanHaisetsu().getValue().roundHalfUpTo(ROUND_UP).toString()),
@@ -886,6 +892,13 @@ public class KanryoshoriIchijihanteiHandler {
                 row.getSuiteiKyufuKubunCode(),
                 row.getKoroshoIfShikibetsuCode()
         );
+    }
+
+    private RString toSeirekiDateString(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private void set認知症自立度(ShinseishoKanriNo shinseishoKanriNo, dgHanteiTaishosha_Row row) {

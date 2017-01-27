@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiArgumentConverter;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
@@ -253,20 +254,7 @@ public class IchijiHanteiKekkaJohoHandler {
         MiSumiKubun shujiiIkenshoMisumiKubun = hasNot主治医意見書(shinseishoKanriNo) ? MiSumiKubun.未 : MiSumiKubun.済;
         div.getDdlJiritsudoIkensho().setSelectedKey(shujiiIkenshoMisumiKubun.getKey());
 
-        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
-        List<RString> jiritsudoCode = manager.get認知症高齢者自立度コード(shinseishoKanriNo);
-        if (!jiritsudoCode.isEmpty()) {
-            if (jiritsudoCode.get(0).isEmpty()) {
-                div.getDdlChosahyoJiritsudoCode().setSelectedIndex(0);
-            } else {
-                div.getDdlChosahyoJiritsudoCode().setSelectedKey(jiritsudoCode.get(0));
-            }
-            if (jiritsudoCode.get(1).isEmpty()) {
-                div.getDdlIkenshoJiritsudoCode().setSelectedIndex(0);
-            } else {
-                div.getDdlIkenshoJiritsudoCode().setSelectedKey(jiritsudoCode.get(1));
-            }
-        }
+        set認知症自立度(shinseishoKanriNo);
 
         if (hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().equals(new Decimal(-1))) {
             div.getTxtGaizensei().clearValue();
@@ -308,6 +296,33 @@ public class IchijiHanteiKekkaJohoHandler {
             rowList.add(row);
         }
         div.getDgIchijiHanteiKeikokuCode().setDataSource(rowList);
+    }
+
+    private void set認知症自立度(ShinseishoKanriNo shinseishoKanriNo) {
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+        List<RString> jiritsudoCode;
+
+        if (RString.isNullOrEmpty(div.getHanteiArgument())) {
+            jiritsudoCode = manager.get認知症高齢者自立度コード(shinseishoKanriNo);
+        } else {
+            IchijiHanteiArgumentConverter converter = new IchijiHanteiArgumentConverter(div.getHanteiArgument());
+            jiritsudoCode = new ArrayList<>();
+            jiritsudoCode.add(converter.get認知症高齢者自立度コード_認定調査());
+            jiritsudoCode.add(converter.get認知症高齢者自立度コード_主治医意見書());
+        }
+
+        if (!jiritsudoCode.isEmpty()) {
+            if (jiritsudoCode.get(0).isEmpty()) {
+                div.getDdlChosahyoJiritsudoCode().setSelectedIndex(0);
+            } else {
+                div.getDdlChosahyoJiritsudoCode().setSelectedKey(jiritsudoCode.get(0));
+            }
+            if (jiritsudoCode.get(1).isEmpty()) {
+                div.getDdlIkenshoJiritsudoCode().setSelectedIndex(0);
+            } else {
+                div.getDdlIkenshoJiritsudoCode().setSelectedKey(jiritsudoCode.get(1));
+            }
+        }
     }
 
     private boolean isNullOrEmpty(Code code) {

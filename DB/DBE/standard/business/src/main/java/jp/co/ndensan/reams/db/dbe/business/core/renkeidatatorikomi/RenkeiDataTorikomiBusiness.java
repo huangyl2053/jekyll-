@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ItakusakiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
@@ -396,7 +397,14 @@ public class RenkeiDataTorikomiBusiness {
             dbt5910Entity.setWaritsukeTeiin(Integer.parseInt(
                     DbBusinessConfig.get(ConfigNameDBE.認定調査委託先割付定員, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
         }
-        dbt5910Entity.setJokyoFlag(dbT5910TempEntity.is状況());
+
+        RString jokyoFlag = dbT5910TempEntity.get状況();
+        if (RString.isNullOrEmpty(jokyoFlag)) {
+            dbt5910Entity.setJokyoFlag(false);
+        } else {
+            ItakusakiJokyo jokyo = ItakusakiJokyo.toValue(jokyoFlag);
+            dbt5910Entity.setJokyoFlag(jokyo.is有効());
+        }
         return dbt5910Entity;
     }
 
