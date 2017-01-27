@@ -215,10 +215,21 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onBeforeOpenDialog_btnIchijiHanteiKekkaShokai(KojinJokyoShokaiDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        div.setHdnShinseishoKanriNo(申請書管理番号);
-        div.setHdnHanteiModeType(ModeType.SHOKAI_MODE.getValue());
+        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.モード, ModeType.SHOKAI_MODE);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一次判定結果照会OkorCancelクローズ処理です。
+     *
+     * @param div 要介護認定個人状況照会div
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+    public ResponseData<KojinJokyoShokaiDiv> onCloseDialog_btnIchijiHanteiKekkaShokai(KojinJokyoShokaiDiv div) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号.value());
         return ResponseData.of(div).respond();
     }
 

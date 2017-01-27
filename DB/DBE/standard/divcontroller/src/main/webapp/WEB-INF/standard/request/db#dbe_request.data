@@ -1157,7 +1157,7 @@ dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/btnPrint
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/btnPrintAfter
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/btnPrintCheck
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/btnReSearch
-dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/btnShokai
+dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/onClick_Select
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/onload
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/radHizukeHaniChange
 dbe/db/dbe/YokaigoNinteiShinchokuJohoShokai/radKensakuHohoChange

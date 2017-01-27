@@ -24,13 +24,13 @@ public final class KomokuNo {
     private static final int REMBAN_INDEX = 3;
 
     private final RString chosaKomokuNo;
-    private final RString remban;
-    private final int rembanValue;
+    private final RString imageRemban;
+    private final int remban;
 
     private KomokuNo() {
         this.chosaKomokuNo = RString.EMPTY;
-        this.remban = RString.EMPTY;
-        this.rembanValue = 0;
+        this.imageRemban = RString.EMPTY;
+        this.remban = 0;
     }
 
     /**
@@ -40,19 +40,32 @@ public final class KomokuNo {
         RString trimed = value.trim();
         if (trimed.isEmpty()) {
             this.chosaKomokuNo = RString.EMPTY;
-            this.remban = RString.EMPTY;
-            this.rembanValue = 0;
+            this.imageRemban = RString.EMPTY;
+            this.remban = 0;
             return;
         }
         this.chosaKomokuNo = trimed.substringEmptyOnError(0, REMBAN_INDEX);
-        this.rembanValue = findRemban(value);
-        this.remban = new RString(String.format("%02d", rembanValue));
+        this.remban = findRemban(value);
+        this.imageRemban = toImageRemban(this.remban);
+    }
+
+    private static int findRemban(RString rawValue) {
+        RString rembanPart = rawValue.substringEmptyOnError(REMBAN_INDEX);
+        try {
+            return rembanPart.isEmpty() ? 1 : Integer.valueOf(rembanPart.toString());
+        } catch (NumberFormatException e) {
+            return 1;
+        }
+    }
+
+    private RString toImageRemban(int remban) {
+        return new RString(String.format("%02d", remban - 1));
     }
 
     private KomokuNo(RString chosaKomokuNo, int remban) {
         this.chosaKomokuNo = chosaKomokuNo;
-        this.rembanValue = remban;
-        this.remban = new RString(String.format("%02d", rembanValue));
+        this.remban = remban;
+        this.imageRemban = toImageRemban(this.remban);
     }
 
     /**
@@ -65,15 +78,6 @@ public final class KomokuNo {
         return new KomokuNo(this.chosaKomokuNo, remban);
     }
 
-    private static int findRemban(RString rawValue) {
-        RString rembanPart = rawValue.substringEmptyOnError(REMBAN_INDEX);
-        try {
-            return rembanPart.isEmpty() ? 0 : Integer.valueOf(rembanPart.toString());
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
     /**
      * @return 特記事項と対応する調査項目の番号、もしくは、空
      */
@@ -82,17 +86,23 @@ public final class KomokuNo {
     }
 
     /**
-     * @return 連番（00～99 の形へ編集された文字列、もしくは、空）
+     * イメージの連番を返します。
+     * <p/>
+     * {@link #getRemban() getRemban()}の戻り値から1を減じた物を、2桁0埋めの形式で編集した値になります。
+     * <p/>
+     * 例) {@link #getRemban() getRemban()} が 1 を返す場合、"00"
+     *
+     * @return イメージの連番（2桁0埋め）
      */
-    public RString getRemban() {
-        return this.remban;
+    public RString getImageRemban() {
+        return this.imageRemban;
     }
 
     /**
      * @return 連番（数値）
      */
-    public int getRembanAsInt() {
-        return this.rembanValue;
+    public int getRemban() {
+        return this.remban;
     }
 
     /**
@@ -106,7 +116,7 @@ public final class KomokuNo {
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + Objects.hashCode(this.chosaKomokuNo);
-        hash = 97 * hash + Objects.hashCode(this.remban);
+        hash = 97 * hash + Objects.hashCode(this.imageRemban);
         return hash;
     }
 
@@ -122,7 +132,7 @@ public final class KomokuNo {
         if (!Objects.equals(this.chosaKomokuNo, other.chosaKomokuNo)) {
             return false;
         }
-        return Objects.equals(this.remban, other.remban);
+        return this.remban == other.remban;
     }
 
     @Override

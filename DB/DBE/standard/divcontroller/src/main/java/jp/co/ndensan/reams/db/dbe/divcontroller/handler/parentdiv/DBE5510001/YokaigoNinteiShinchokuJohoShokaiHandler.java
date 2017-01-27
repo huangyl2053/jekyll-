@@ -310,7 +310,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
-        row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体名())));
+        if(RString.isNullOrEmpty(joho.get合議体名())){
+            row.setKaigoNinteiShinsakaiGogitai(RString.EMPTY);
+        }else{
+            row.setKaigoNinteiShinsakaiGogitai(joho.get合議体名());
+        }
         row.setKaigoNinteiShinsakaiYokaigodo(joho.get二次判定結果名称());
         row.setHihokenshaYubinNo(new YubinNo(nullToEmpty(joho.get郵便番号())).getEditedYubinNo());
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));

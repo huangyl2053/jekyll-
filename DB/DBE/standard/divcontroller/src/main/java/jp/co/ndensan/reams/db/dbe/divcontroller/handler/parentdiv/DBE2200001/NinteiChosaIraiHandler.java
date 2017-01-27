@@ -332,6 +332,7 @@ public class NinteiChosaIraiHandler {
         row.setZenYokaigoKubunCode(waritsukeZumiShinseishaRow.getZenYokaigoKubunCode());
         row.setAge(waritsukeZumiShinseishaRow.getAge());
         row.setNinteiChosainCode(waritsukeZumiShinseishaRow.getNinteiChosainCode());
+        row.setHokenshaNo(waritsukeZumiShinseishaRow.getHokenshaNo());
         div.getDgMiwaritsukeShinseishaIchiran().getDataSource().add(row);
     }
 
@@ -507,6 +508,7 @@ public class NinteiChosaIraiHandler {
         row.setZenYokaigoKubunCode(miwaritsukeShinseishaRow.getZenYokaigoKubunCode());
         row.setAge(miwaritsukeShinseishaRow.getAge());
         row.setNinteiChosainCode(miwaritsukeShinseishaRow.getNinteiChosainCode());
+        row.setHokenshaNo(miwaritsukeShinseishaRow.getHokenshaNo());
         div.getDgWaritsukeZumiShinseishaIchiran().getDataSource().add(row);
     }
 

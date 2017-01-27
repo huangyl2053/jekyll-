@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk09A;
@@ -30,8 +28,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy99A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
-import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk99A;
+import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -43,13 +40,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJis
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,21 +52,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ChosaKekkaInfoGaikyoHandler {
 
     private final ChosaKekkaInfoGaikyoDiv gaikyoDiv;
-    private static final RString 未実施 = new RString("1");
     private static final RString 出力する = new RString("1");
     private static final RString 実施済 = new RString("2");
     private static final RString Enum区分_サービス = new RString("1");
     private static final RString Enum区分_サービスフラグ = new RString("2");
     private static final RString 予防給付サービス = new RString("介護予防");
     private static final RString 介護給付サービス = new RString("介護");
-    private static final RString IMAGEFILENAME_認定調査実施場所 = new RString("C0001.png");
-    private static final RString IMAGEFILENAME_市町村特別給付 = new RString("C0002.png");
-    private static final RString IMAGEFILENAME_在宅サービス = new RString("C0003.png");
-    private static final RString IMAGEFILENAME_利用施設名 = new RString("C0004.png");
-    private static final RString IMAGEFILENAME_利用施設住所 = new RString("C0005.png");
-    private static final RString IMAGEFILENAME_電話番号 = new RString("C0006.png");
-    private static final RString IMAGEFILENAME_概況調査特記 = new RString("C0007.png");
-    private static final RString IMAGEFILENAME_概況特記 = new RString("G0001.png");
 
     /**
      * コンストラクタです。
@@ -374,11 +355,11 @@ public class ChosaKekkaInfoGaikyoHandler {
                 RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
                 RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
                 RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
-                RString 出力イメージフォルダパス = copySharedFiles(image, 共有ファイル名);
+                RString 出力イメージフォルダパス = DBEImageUtil.copySharedFiles(image.getイメージ共有ファイルID(), 共有ファイル名);
 
                 setImage認定調査実施場所(出力イメージフォルダパス);
                 setImage概況調査特記(出力イメージフォルダパス);
-                setImageサービス(gaikyoBusiness, 出力イメージフォルダパス);
+                setImageサービス(出力イメージフォルダパス);
                 setImage利用施設情報(出力イメージフォルダパス);
                 setImage概況特記(出力イメージフォルダパス);
             }
@@ -491,42 +472,42 @@ public class ChosaKekkaInfoGaikyoHandler {
     }
 
     private void setImage認定調査実施場所(RString 出力イメージフォルダパス) {
-        RString 実施場所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_認定調査実施場所);
+        RString 実施場所ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.調査実施場所.getImageFileName());
         if (RString.isNullOrEmpty(実施場所ImagePath)) {
             gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setDisplayNone(true);
             gaikyoDiv.getJisshiBashoMeishoPanel().getLblNoImageJisshiBasho().setDisplayNone(false);
         } else {
-            gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(sanitizePath(実施場所ImagePath));
+            gaikyoDiv.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho().setSrc(DBEImageUtil.sanitizePath(実施場所ImagePath));
         }
     }
 
     private void setImage概況調査特記(RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 概況調査特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況調査特記);
+            RString 概況調査特記ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.概況調査特記.getImageFileName());
             if (RString.isNullOrEmpty(概況調査特記ImagePath)) {
                 gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setDisplayNone(true);
                 gaikyoDiv.getGaikyoChosaTokkiPanel().getLblNoImageGaikyoChosaTokki().setDisplayNone(false);
             } else {
-                gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(sanitizePath(概況調査特記ImagePath));
+                gaikyoDiv.getGaikyoChosaTokkiPanel().getImgGaikyoChosaTokki().setSrc(DBEImageUtil.sanitizePath(概況調査特記ImagePath));
             }
         }
     }
 
-    private void setImageサービス(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness, RString 出力イメージフォルダパス) {
+    private void setImageサービス(RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 市町村特別給付ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_市町村特別給付);
+            RString 市町村特別給付ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.市町村特別給付.getImageFileName());
             if (RString.isNullOrEmpty(市町村特別給付ImagePath)) {
                 gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);
                 gaikyoDiv.getTokubetsuKyufuPanel().getLblNoImageTokubetsuKyufu().setDisplayNone(false);
             } else {
-                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(sanitizePath(市町村特別給付ImagePath));
+                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(DBEImageUtil.sanitizePath(市町村特別給付ImagePath));
             }
-            RString 在宅サービスImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_在宅サービス);
+            RString 在宅サービスImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.介護保険給付外のサービス.getImageFileName());
             if (RString.isNullOrEmpty(在宅サービスImagePath)) {
                 gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setDisplayNone(true);
                 gaikyoDiv.getZaitakuServicePanel().getLblNoImageZaitakuService().setDisplayNone(false);
             } else {
-                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(sanitizePath(在宅サービスImagePath));
+                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(DBEImageUtil.sanitizePath(在宅サービスImagePath));
             }
         } else {
             gaikyoDiv.getTokubetsuKyufuPanel().setDisplayNone(true);
@@ -535,69 +516,40 @@ public class ChosaKekkaInfoGaikyoHandler {
     }
 
     private void setImage利用施設情報(RString 出力イメージフォルダパス) {
-        RString 施設名称ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設名);
+        RString 施設名称ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.施設名.getImageFileName());
         if (RString.isNullOrEmpty(施設名称ImagePath)) {
             gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getImgRiyoShisetsuMeisho().setDisplayNone(true);
             gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getLblNoImageRiyoShisetsuMeisho().setDisplayNone(false);
         } else {
-            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getImgRiyoShisetsuMeisho().setSrc(sanitizePath(施設名称ImagePath));
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().getImgRiyoShisetsuMeisho().setSrc(DBEImageUtil.sanitizePath(施設名称ImagePath));
         }
 
-        RString 施設住所ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_利用施設住所);
+        RString 施設住所ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.施設住所.getImageFileName());
         if (RString.isNullOrEmpty(施設住所ImagePath)) {
             gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getImgRiyoShisetsuJusho().setDisplayNone(true);
             gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getLblNoImageRiyoShisetsuJusho().setDisplayNone(false);
         } else {
-            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getImgRiyoShisetsuJusho().setSrc(sanitizePath(施設住所ImagePath));
+            gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().getImgRiyoShisetsuJusho().setSrc(DBEImageUtil.sanitizePath(施設住所ImagePath));
         }
 
-        RString 電話番号ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_電話番号);
+        RString 電話番号ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.施設電話番号.getImageFileName());
         if (RString.isNullOrEmpty(電話番号ImagePath)) {
             gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getImgTelNo().setDisplayNone(true);
             gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getLblNoImageTelNo().setDisplayNone(false);
         } else {
-            gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getImgTelNo().setSrc(sanitizePath(電話番号ImagePath));
+            gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().getImgTelNo().setSrc(DBEImageUtil.sanitizePath(電話番号ImagePath));
         }
     }
 
     private void setImage概況特記(RString 出力イメージフォルダパス) {
         if (出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            RString 概況特記ImagePath = getFilePath(出力イメージフォルダパス, IMAGEFILENAME_概況特記);
+            RString 概況特記ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.概況特記.getImageFileName());
             if (RString.isNullOrEmpty(概況特記ImagePath)) {
                 gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setDisplayNone(true);
                 gaikyoDiv.getGaikyoTokkiPanel().getLblNoImageGaikyoTokki().setDisplayNone(false);
             } else {
-                gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(sanitizePath(概況特記ImagePath));
+                gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(DBEImageUtil.sanitizePath(概況特記ImagePath));
             }
         }
-    }
-
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
-        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                        イメージ情報.getイメージ共有ファイルID());
-        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
-    }
-
-    private RString sanitizePath(RString imagePath) {
-        RString DATAURI_BMP = new RString("data:image/png;base64,");
-        return !imagePath.isEmpty() ? DATAURI_BMP.concat(base64encode(imagePath)) : RString.EMPTY;
-    }
-
-    private RString base64encode(RString イメージパス) {
-        RString imgBase64 = RString.EMPTY;
-        try {
-            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージパス.toString())));
-        } catch (IOException ex) {
-        }
-        return imgBase64;
     }
 }

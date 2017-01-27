@@ -207,7 +207,6 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onClick_btnWaritsuke(NinteiChosaIraiDiv div) {
-        NinteiChosaIraiHandler handler = getHandler(div);
         List<dgMiwaritsukeShinseishaIchiran_Row> selectedItems = div.getDgMiwaritsukeShinseishaIchiran().getSelectedItems();
         if (selectedItems.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("未割付申請者"));
@@ -227,7 +226,7 @@ public class NinteiChosaIrai {
         }
 
         for (dgMiwaritsukeShinseishaIchiran_Row row : selectedItems) {
-            handler.set割付済み申請者一覧(row);
+            getHandler(div).set割付済み申請者一覧(row);
             div.getDgMiwaritsukeShinseishaIchiran().getDataSource().remove(row);
         }
         return ResponseData.of(div).respond();
@@ -240,7 +239,6 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onClick_btnKaijo(NinteiChosaIraiDiv div) {
-        NinteiChosaIraiHandler handler = getHandler(div);
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         if (selectedItems.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("割付済み申請者"));
@@ -266,7 +264,7 @@ public class NinteiChosaIrai {
             }
         }
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            handler.set未割付申請者一覧(row);
+            getHandler(div).set未割付申請者一覧(row);
             div.getDgWaritsukeZumiShinseishaIchiran().getDataSource().remove(row);
         }
         return ResponseData.of(div).respond();

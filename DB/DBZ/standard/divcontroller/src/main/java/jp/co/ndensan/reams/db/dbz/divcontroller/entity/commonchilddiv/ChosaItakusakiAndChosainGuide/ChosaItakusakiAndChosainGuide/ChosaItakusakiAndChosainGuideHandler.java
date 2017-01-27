@@ -45,12 +45,6 @@ public class ChosaItakusakiAndChosainGuideHandler {
     public void intialize() {
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
-                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        if (dataPassModel != null) {
-            div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
-            div.getTxtChosainCodeFrom().setValue(dataPassModel.get調査員コード());
-        }
         List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
         ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {

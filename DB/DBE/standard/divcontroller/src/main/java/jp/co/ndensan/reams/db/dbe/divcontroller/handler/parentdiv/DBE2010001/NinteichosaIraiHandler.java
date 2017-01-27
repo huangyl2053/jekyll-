@@ -129,8 +129,16 @@ public class NinteichosaIraiHandler {
     /**
      * 認定調査依頼登録パネルの初期化処理です。
      */
-    public void init認定調査依頼登録パネル() {
+    public void clear認定調査依頼登録パネル() {
         div.getCcdItakusakiAndChosainInput().clear();
+        div.getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.初回.getコード());
+        div.getTxtChosaIraiYmd().clearValue();
+    }
+
+    /**
+     * 認定調査依頼登録パネルの各項目を設定します。
+     */
+    public void set認定調査依頼登録パネル() {
         div.getCcdItakusakiAndChosainInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
         if (div.getDgNinteiTaskList().getSelectedItems().size() == 1) {
             dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
@@ -143,23 +151,21 @@ public class NinteichosaIraiHandler {
                     ? row.getChosaIraiKubunCode()
                     : NinteiChousaIraiKubunCode.初回.getコード());
             div.getTxtChosaIraiYmd().setValue(row.getNinteichosaIraiYmd().getValue());
-        } else {
-            div.getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.初回.getコード());
-            div.getTxtChosaIraiYmd().clearValue();
         }
     }
 
     /**
-     * 認定調査依頼完了対象者一覧パネル使用可否を設定します。
+     * 手動割付時の各コントロールの使用可否を設定します。
      *
-     * @param is使用不可 認定調査依頼完了対象者一覧パネルを使用不可にするかどうか
+     * @param is手動割付入力 手動割付入力かどうか
      */
-    public void set認定調査依頼完了対象者一覧パネル使用可否(boolean is使用不可) {
-        div.getChosairaitaishoshaichiran().setReadOnly(is使用不可);
-        div.getBtndataoutput().setDisplayNone(is使用不可);
-        div.getBtnJidoWaritsuke().setDisplayNone(is使用不可);
-        div.getBtnShudoWaritsuke().setDisplayNone(is使用不可);
-        div.getBtnTaOutput().setDisplayNone(is使用不可);
+    public void set手動割付時使用可否(boolean is手動割付入力) {
+        div.getChosairaitaishoshaichiran().setReadOnly(is手動割付入力);
+        div.getBtndataoutput().setDisabled(is手動割付入力);
+        div.getBtnJidoWaritsuke().setDisabled(is手動割付入力);
+        div.getBtnShudoWaritsuke().setDisabled(is手動割付入力);
+        div.getBtnTaOutput().setDisabled(is手動割付入力);
+        div.getNinteichosaIraiToroku().setReadOnly(!is手動割付入力);
     }
 
     /**
@@ -355,6 +361,7 @@ public class NinteichosaIraiHandler {
             dataSource.add(new KeyValueDataSource(認定調査依頼区分.getコード(), 認定調査依頼区分.get名称()));
         }
         div.getDdlIraiKubun().setDataSource(dataSource);
+        div.getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.初回.getコード());
     }
 
     private void set件数表示(RString 状態) {

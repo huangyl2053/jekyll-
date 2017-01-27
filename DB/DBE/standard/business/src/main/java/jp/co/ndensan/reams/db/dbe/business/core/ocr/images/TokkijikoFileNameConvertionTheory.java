@@ -112,7 +112,7 @@ public class TokkijikoFileNameConvertionTheory implements IFileNameConvertionThe
             if (baseFileName == null) {
                 continue;
             }
-            map.put(fileName.value(), baseFileName.replace(REPLACEMENT, komokuNo.getRemban()));
+            map.put(fileName.value(), baseFileName.replace(REPLACEMENT, komokuNo.getImageRemban()));
         }
         this.table = Collections.unmodifiableMap(map);
     }

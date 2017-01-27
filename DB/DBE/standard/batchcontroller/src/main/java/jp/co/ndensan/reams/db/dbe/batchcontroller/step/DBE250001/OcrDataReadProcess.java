@@ -832,7 +832,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     = sameKomokuBefore.containsKey(freshRemban)
                             ? sameKomokuBefore.get(freshRemban)
                             : newDbT5205NinteichosahyoTokkijikoEntity(nr, komokuNo);
-            entity.setNinteichosaTokkijikoRemban(komokuNo.getRembanAsInt());
+            entity.setNinteichosaTokkijikoRemban(komokuNo.getRemban());
             list.add(entity);
         }
         return list;
@@ -859,7 +859,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setNinteichosaTokkijikoNo(komokuNo.getChosaKomokuNo());
-        entity.setNinteichosaTokkijikoRemban(komokuNo.getRembanAsInt());
+        entity.setNinteichosaTokkijikoRemban(komokuNo.getRemban());
         entity.setTokkijikoTextImageKubun(TokkijikoTextImageKubun.イメージ.getコード());
         entity.setGenponMaskKubun(GenponMaskKubun.原本.getCode());
         return entity;

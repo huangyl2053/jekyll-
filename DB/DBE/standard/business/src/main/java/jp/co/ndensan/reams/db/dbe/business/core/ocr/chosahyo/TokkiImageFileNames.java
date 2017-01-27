@@ -52,7 +52,7 @@ public class TokkiImageFileNames implements Iterable<TokkiImageFileName> {
     public Map<Integer, TokkiImageFileNames> groupedByRemban() {
         Map<Integer, TokkiImageFileNames> map = new HashMap<>();
         for (TokkiImageFileName file : elements) {
-            Integer key = file.komokuNo().getRembanAsInt();
+            Integer key = file.komokuNo().getRemban();
             if (!map.containsKey(key)) {
                 map.put(key, new TokkiImageFileNames());
             }

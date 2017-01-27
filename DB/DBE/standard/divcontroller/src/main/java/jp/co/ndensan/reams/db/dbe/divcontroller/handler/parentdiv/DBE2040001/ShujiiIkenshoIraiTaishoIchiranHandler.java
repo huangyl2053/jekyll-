@@ -89,6 +89,8 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         set主治医意見書依頼完了対象者一覧データグリッド();
         setButton(stateName);
         set依頼区分ドロップダウンリスト();
+        div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
+        div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(false);
     }
 
     /**
@@ -147,12 +149,19 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     /**
      * 認定調査依頼登録パネルの初期化処理です。
      */
-    public void init意見書依頼登録パネル() {
+    public void clear意見書依頼登録パネル() {
+        div.getCcdShujiiInput().clear();
+        div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
+        div.getTxtSakuseiIraiYmd().clearValue();
+    }
+
+    /**
+     * 認定調査依頼登録パネルの各項目を設定します。
+     */
+    public void set意見書依頼登録パネル() {
         div.getCcdShujiiInput().initialize(new LasdecCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode()),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getCcdShujiiInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
-        div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
-        div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(false);
         if (div.getDgNinteiTaskList().getSelectedItems().size() == 1) {
             dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
             div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
@@ -165,22 +174,20 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
                     ? row.getIkenshoIraiKubun()
                     : IkenshoIraiKubun.初回依頼.getコード());
             div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
-        } else {
-            div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
-            div.getTxtSakuseiIraiYmd().clearValue();
         }
     }
 
     /**
-     * 主治医意見書依頼完了対象者一覧パネル使用可否を設定します。
+     * 主治医入力時の各コントロールの使用可否を設定します。
      *
-     * @param is使用不可 主治医意見書依頼完了対象者一覧パネルを使用不可にするかどうか
+     * @param is主治医入力 主治医入力かどうか
      */
-    public void set主治医意見書依頼完了対象者一覧パネル使用可否(boolean is使用不可) {
-        div.getIkenshoiraitaishoichiran().setReadOnly(is使用不可);
-        div.getBtnikenshoiraitaishooutput().setDisplayNone(is使用不可);
-        div.getBtnShujiiSettei().setDisplayNone(is使用不可);
-        div.getBtnIraishoToOutputDialog().setDisplayNone(is使用不可);
+    public void set主治医入力時使用可否(boolean is主治医入力) {
+        div.getIkenshoiraitaishoichiran().setReadOnly(is主治医入力);
+        div.getBtnikenshoiraitaishooutput().setDisabled(is主治医入力);
+        div.getBtnShujiiSettei().setDisabled(is主治医入力);
+        div.getBtnIraishoToOutputDialog().setDisabled(is主治医入力);
+        div.getIkenshoIraiTorokuPanel().setReadOnly(!is主治医入力);
     }
 
     /**
@@ -390,6 +397,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             dataSource.add(new KeyValueDataSource(主治医意見書依頼区分.getコード(), 主治医意見書依頼区分.get名称()));
         }
         div.getDdlIraiKubun().setDataSource(dataSource);
+        div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
     }
 
     private void set件数表示(RString 状態) {
