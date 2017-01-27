@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0100001
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuInfoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranItem;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.DBE0100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.DBE0100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.ShinseiKensakuDiv;
@@ -368,6 +370,12 @@ public class ShinseiKensaku {
             item.setZenkaiKoroshoIfShikibetsuCode(row.get前回厚労省IF識別コード());
             items.add(item);
         }
+        Collections.sort(items, new Comparator<YokaigoYoshienShinseiIchiranItem>() {
+            @Override
+            public int compare(YokaigoYoshienShinseiIchiranItem entity1, YokaigoYoshienShinseiIchiranItem entity2) {
+                return entity1.getShoKisaiHokenshaNo().compareTo(entity2.getShoKisaiHokenshaNo());
+            }
+        });
         return ResponseData.of(new YokaigoYoshienShinseiIchiranPrintService().print(items)).respond();
     }
 
