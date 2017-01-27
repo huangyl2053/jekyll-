@@ -19,13 +19,13 @@ public class KomokuNoTest {
     }
 
     @Test
-    public void _1011_は_調査項目番号_101_連番_01_になる() {
+    public void _1011_は_調査項目番号_101_イメージの連番_00_になる() {
         KomokuNo sut = new KomokuNo(new RString("1011"));
 
         System.out.println("chosaKomokuNo:" + sut.getChosaKomokuNo());
-        System.out.println("remban:" + sut.getRemban());
+        System.out.println("remban:" + sut.getImageRemban());
         assertThat(sut.getChosaKomokuNo(), is(new RString("101")));
-        assertThat(sut.getRemban(), is(new RString("01")));
+        assertThat(sut.getImageRemban(), is(new RString("00")));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class KomokuNoTest {
         KomokuNo sut = new KomokuNo(new RString("    "));
 
         assertThat(sut.getChosaKomokuNo(), is(RString.EMPTY));
-        assertThat(sut.getRemban(), is(RString.EMPTY));
+        assertThat(sut.getImageRemban(), is(RString.EMPTY));
     }
 
     @Test

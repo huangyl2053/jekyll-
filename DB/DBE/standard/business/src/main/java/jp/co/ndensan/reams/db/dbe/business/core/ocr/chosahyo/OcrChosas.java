@@ -35,17 +35,25 @@ public final class OcrChosas {
      * @return 保持する{@link OcrChosa}が持つ、特記事項のファイル名と項目番号の全ペア.
      */
     public TokkiImageFileNames editedFileNames連番重複再付番() {
-        return create(this.records);
+        return editFileNames連番重複時再付番(this.records);
     }
 
     //<editor-fold defaultstate="collapsed" desc="create()">
-    private static TokkiImageFileNames create(Collection<? extends OcrChosa> records) {
+    private static TokkiImageFileNames editFileNames連番重複時再付番(Collection<? extends OcrChosa> records) {
         List<TokkiImageFileName> list = new ArrayList<>();
         for (List<TokkiImageFileName> fileNames
                 : groupingByChosaKomokuNo(imageFileNames(records)).values()) {
             list.addAll(renumberInterlappingRemban(fileNames));
         }
         return new TokkiImageFileNames(list);
+    }
+
+    private static List<TokkiImageFileName> imageFileNames(Collection<? extends OcrChosa> records) {
+        List<TokkiImageFileName> files = new ArrayList<>();
+        for (OcrChosa record : records) {
+            files.addAll(record.collectTokkiImageFileNames().removedEmptyKomokuNo().toList());
+        }
+        return files;
     }
 
     private static Map<RString, List<TokkiImageFileName>> groupingByChosaKomokuNo(Collection<? extends TokkiImageFileName> imageFileNames) {
@@ -60,20 +68,12 @@ public final class OcrChosas {
         return map;
     }
 
-    private static List<TokkiImageFileName> imageFileNames(Collection<? extends OcrChosa> records) {
-        List<TokkiImageFileName> files = new ArrayList<>();
-        for (OcrChosa record : records) {
-            files.addAll(record.collectTokkiImageFileNames().removedEmptyKomokuNo().toList());
-        }
-        return files;
-    }
-
     private static Collection<TokkiImageFileName> renumberInterlappingRemban(List<TokkiImageFileName> files) {
         Collections.sort(files, fileNameAsc());
         List<TokkiImageFileName> duplicates = new ArrayList<>();
         Map<Integer, TokkiImageFileName> result = new HashMap<>();
         for (TokkiImageFileName file : files) {
-            int remban = file.komokuNo().getRembanAsInt();
+            int remban = file.komokuNo().getRemban();
             if (result.containsKey(remban)) {
                 duplicates.add(file);
                 continue;
