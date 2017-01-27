@@ -267,31 +267,6 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
-    }
-
-    @JsonIgnore
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
-    }
-
-    @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getTplShinseijoho().getCcdNinteiInput();
-    }
-
-    @JsonIgnore
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
-    }
-
-    @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
-    }
-
-    @JsonIgnore
     public DropDownList getDdlShinsakaiYusenKubun() {
         return this.getTplShinseijoho().getDdlShinsakaiYusenKubun();
     }
@@ -309,6 +284,31 @@ public class tabShinseishaJohoDiv extends TabContainer {
     @JsonIgnore
     public void  setDdlWariateKubun(DropDownList ddlWariateKubun) {
         this.getTplShinseijoho().setDdlWariateKubun(ddlWariateKubun);
+    }
+
+    @JsonIgnore
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
+    }
+
+    @JsonIgnore
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
+    }
+
+    @JsonIgnore
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    }
+
+    @JsonIgnore
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
+    }
+
+    @JsonIgnore
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore

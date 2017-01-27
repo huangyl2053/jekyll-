@@ -343,7 +343,7 @@ public class NinteiChosaJokyoHandler {
         div.getTxtNinteiChosaJisshiYoteiDate().setValue(konkaiDataPass.get認定調査予定年月日());
         div.getTxtNinteiChosaJisshiDate().setValue(konkaiDataPass.get認定調査実施年月日());
         div.getDdlNinteiChosaItakusakiKubun().setIsBlankLine(true);
-        if (konkaiDataPass.get調査委託区分() != null && !konkaiDataPass.get調査委託区分().isEmpty()) {
+        if (konkaiDataPass.get調査委託区分() != null && !konkaiDataPass.get調査委託区分().trim().isEmpty()) {
             div.getDdlNinteiChosaItakusakiKubun().setSelectedKey(konkaiDataPass.get調査委託区分());
         }
         if (konkaiDataPass.get訪問調査先名称() != null && !konkaiDataPass.get訪問調査先名称().isEmpty()) {

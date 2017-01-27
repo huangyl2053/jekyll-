@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryo
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -43,6 +44,8 @@ public class tplShinseijohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radMode")
+    private RadioButton radMode;
     @JsonProperty("ServiceDel")
     private ServiceDelDiv ServiceDel;
     @JsonProperty("SinseiTorisage")
@@ -59,20 +62,20 @@ public class tplShinseijohoDiv extends TabPanel {
     private CheckBoxList chkNinteiTsuchishoDoi;
     @JsonProperty("chkJohoTeikyoDoi")
     private CheckBoxList chkJohoTeikyoDoi;
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
-    @JsonProperty("ccdNinteiInput")
-    private NinteiInputDiv ccdNinteiInput;
-    @JsonProperty("ccdShinseiSonotaJohoInput")
-    private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
-    @JsonProperty("ccdShinseiTodokedesha")
-    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
     @JsonProperty("ddlShinsakaiYusenKubun")
     private DropDownList ddlShinsakaiYusenKubun;
     @JsonProperty("ddlWariateKubun")
     private DropDownList ddlWariateKubun;
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
+    @JsonProperty("ccdShinseiSonotaJohoInput")
+    private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
+    @JsonProperty("ccdNinteiInput")
+    private NinteiInputDiv ccdNinteiInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -80,6 +83,24 @@ public class tplShinseijohoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradMode
+     * @return radMode
+     */
+    @JsonProperty("radMode")
+    public RadioButton getRadMode() {
+        return radMode;
+    }
+
+    /*
+     * setradMode
+     * @param radMode radMode
+     */
+    @JsonProperty("radMode")
+    public void setRadMode(RadioButton radMode) {
+        this.radMode = radMode;
+    }
+
     /*
      * getServiceDel
      * @return ServiceDel
@@ -225,51 +246,6 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdZenkaiNinteiKekkaJoho
-     * @return ccdZenkaiNinteiKekkaJoho
-     */
-    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return ccdZenkaiNinteiKekkaJoho;
-    }
-
-    /*
-     * getccdKaigoNinteiShinseiKihon
-     * @return ccdKaigoNinteiShinseiKihon
-     */
-    @JsonProperty("ccdKaigoNinteiShinseiKihon")
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return ccdKaigoNinteiShinseiKihon;
-    }
-
-    /*
-     * getccdNinteiInput
-     * @return ccdNinteiInput
-     */
-    @JsonProperty("ccdNinteiInput")
-    public INinteiInputDiv getCcdNinteiInput() {
-        return ccdNinteiInput;
-    }
-
-    /*
-     * getccdShinseiSonotaJohoInput
-     * @return ccdShinseiSonotaJohoInput
-     */
-    @JsonProperty("ccdShinseiSonotaJohoInput")
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return ccdShinseiSonotaJohoInput;
-    }
-
-    /*
-     * getccdShinseiTodokedesha
-     * @return ccdShinseiTodokedesha
-     */
-    @JsonProperty("ccdShinseiTodokedesha")
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return ccdShinseiTodokedesha;
-    }
-
-    /*
      * getddlShinsakaiYusenKubun
      * @return ddlShinsakaiYusenKubun
      */
@@ -303,6 +279,51 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ddlWariateKubun")
     public void setDdlWariateKubun(DropDownList ddlWariateKubun) {
         this.ddlWariateKubun = ddlWariateKubun;
+    }
+
+    /*
+     * getccdZenkaiNinteiKekkaJoho
+     * @return ccdZenkaiNinteiKekkaJoho
+     */
+    @JsonProperty("ccdZenkaiNinteiKekkaJoho")
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return ccdZenkaiNinteiKekkaJoho;
+    }
+
+    /*
+     * getccdKaigoNinteiShinseiKihon
+     * @return ccdKaigoNinteiShinseiKihon
+     */
+    @JsonProperty("ccdKaigoNinteiShinseiKihon")
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return ccdKaigoNinteiShinseiKihon;
+    }
+
+    /*
+     * getccdShinseiSonotaJohoInput
+     * @return ccdShinseiSonotaJohoInput
+     */
+    @JsonProperty("ccdShinseiSonotaJohoInput")
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return ccdShinseiSonotaJohoInput;
+    }
+
+    /*
+     * getccdShinseiTodokedesha
+     * @return ccdShinseiTodokedesha
+     */
+    @JsonProperty("ccdShinseiTodokedesha")
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return ccdShinseiTodokedesha;
+    }
+
+    /*
+     * getccdNinteiInput
+     * @return ccdNinteiInput
+     */
+    @JsonProperty("ccdNinteiInput")
+    public INinteiInputDiv getCcdNinteiInput() {
+        return ccdNinteiInput;
     }
 
     /*

@@ -113,4 +113,8 @@ public class NinteiShinseiTorokuRelateEntity {
     private boolean 認定延期通知発行しないことに対する同意有無フラグ;
     private FlexibleDate  IF送付年月日;
     private FlexibleDate  センター送信年月日;
+    private FlexibleDate  認定調査依頼完了年月日;
+    private FlexibleDate  主治医意見書作成依頼完了年月日;
+    private FlexibleDate  認定申請情報登録完了年月日;
+    private Code  判定結果コード;
 }

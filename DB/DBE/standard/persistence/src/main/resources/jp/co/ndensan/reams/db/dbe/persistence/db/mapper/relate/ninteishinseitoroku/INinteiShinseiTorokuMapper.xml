@@ -264,6 +264,10 @@
          <result column = "enkitsuchiNashiDoiFlag" property="認定延期通知発行しないことに対する同意有無フラグ"/>
          <result column = "ifSofuYMD" property="IF送付年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
          <result column = "centerSoshinYMD" property="センター送信年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+         <result column = "ninteichosaIraiKanryoYMD" property="認定調査依頼完了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+         <result column = "ikenshoSakuseiIraiKanryoYMD" property="主治医意見書作成依頼完了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+         <result column = "ninteiShinseiJohoTorokuKanryoYMD" property="認定申請情報登録完了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+         <result column = "hanteiKekkaCode" property="判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     
     <select id="getShuseiJohoForLoad" resultMap="resultMap_NinteiShinseiTorokuRelateEntity"
@@ -337,6 +341,10 @@
         , T5101."johoteikyoDoiFlag"
         , T5101."enkitsuchiNashiDoiFlag"
         , T5105."centerSoshinYMD"
+        , T5105."ninteichosaIraiKanryoYMD"
+        , T5105."ikenshoSakuseiIraiKanryoYMD"
+        , T5105."ninteiShinseiJohoTorokuKanryoYMD"
+        , T5502."hanteiKekkaCode"
     FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
@@ -365,6 +373,9 @@
           ON T5120."shinseishoKanriNo" = T5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" T5105
           ON T5105."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" T5502
+          ON T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+          AND T5502."shinsakaiKaisaiNo" = T5102."shinsakaiKaisaiNo"
     WHERE
         T5101."shinseishoKanriNo" = #{申請書管理番号}
     </select>

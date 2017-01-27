@@ -622,5 +622,39 @@ public class NinteiShinseiTorokuResult {
         return entity.is情報提供フラグ();
     }    
     
+    /**
+     * 認定調査依頼完了年月日を取得します。
+     *
+     * @return 認定調査依頼完了年月日
+     */
+    public FlexibleDate get認定調査依頼完了年月日() {
+        return entity.get認定調査依頼完了年月日();
+    }    
     
+    /**
+     * 主治医意見書作成依頼完了年月日を取得します。
+     *
+     * @return 主治医意見書作成依頼完了年月日
+     */
+    public FlexibleDate get主治医意見書作成依頼完了年月日() {
+        return entity.get主治医意見書作成依頼完了年月日();
+    } 
+    
+    /**
+     * 認定申請情報登録完了年月日を取得します。
+     *
+     * @return 認定申請情報登録完了年月日
+     */
+    public FlexibleDate get認定申請情報登録完了年月日() {
+        return entity.get認定申請情報登録完了年月日();
+    } 
+    
+    /**
+     * 判定結果コードを取得します。
+     *
+     * @return 判定結果コード
+     */
+    public Code get判定結果コード() {
+        return entity.get判定結果コード();
+    } 
 }

@@ -49,6 +49,7 @@ public class Minashi2shisaiJoho implements Serializable {
     private RDate 生年月日;
     private RString 性別コード;
     private RString 支所コード;
+    private RString 年齢;
     private ShinseishoKanriNo 前回申請書管理番号;
 
     /**
@@ -365,4 +366,22 @@ public class Minashi2shisaiJoho implements Serializable {
     public SubGyomuCode getサブ業務コード() {
         return サブ業務コード;
     }
+    
+    /**
+     * 年齢を取得します。
+     *
+     * @return 年齢
+     */
+    public RString get年齢() {
+        return 年齢;
+    }
+    
+    /**
+     * 年齢を設定します。
+     *
+     * @param 年齢 
+     */
+    public void set年齢(RString 年齢) {
+        this.年齢 = 年齢;
+    }    
 }

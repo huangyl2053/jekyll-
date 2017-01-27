@@ -16,12 +16,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -113,6 +118,11 @@ public class SeikatsuhogoTorokuHandler {
         business.set行政区名称(div.getHdnGyoseikuCode());
         business.set世帯コード(div.getTxtSetaiCode().getValue());
         business.set生年月日(div.getTxtBirthYMD().getValue());
+        if (div.getTxtBirthYMD().getValue() != null && !div.getTxtBirthYMD().getValue().toDateString().isEmpty()) {
+            IDateOfBirth dob = DateOfBirthFactory.createInstance(div.getTxtBirthYMD().getValue().toFlexibleDate());
+            AgeCalculator agecalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX);
+            business.set年齢(agecalculator.get年齢());
+        }
         business.set性別コード(div.getRadSeibetsu().getSelectedKey());
         business.set郵便番号(div.getTxtYubinNo().getValue());
         business.set住所コード(div.getCcdZenkokuJushoInput().get全国住所コード());

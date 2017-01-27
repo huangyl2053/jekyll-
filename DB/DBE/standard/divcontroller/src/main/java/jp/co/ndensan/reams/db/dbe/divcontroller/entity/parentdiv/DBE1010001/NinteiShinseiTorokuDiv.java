@@ -730,6 +730,16 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadMode() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getRadMode();
+    }
+
+    @JsonIgnore
+    public void  setRadMode(RadioButton radMode) {
+        this.getTabShinseishaJoho().getTplShinseijoho().setRadMode(radMode);
+    }
+
+    @JsonIgnore
     public ServiceDelDiv getServiceDel() {
         return this.getTabShinseishaJoho().getTplShinseijoho().getServiceDel();
     }
@@ -915,31 +925,6 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
-    }
-
-    @JsonIgnore
-    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
-    }
-
-    @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
-    }
-
-    @JsonIgnore
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiSonotaJohoInput();
-    }
-
-    @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
-    }
-
-    @JsonIgnore
     public DropDownList getDdlShinsakaiYusenKubun() {
         return this.getTabShinseishaJoho().getTplShinseijoho().getDdlShinsakaiYusenKubun();
     }
@@ -957,6 +942,31 @@ public class NinteiShinseiTorokuDiv extends Panel {
     @JsonIgnore
     public void  setDdlWariateKubun(DropDownList ddlWariateKubun) {
         this.getTabShinseishaJoho().getTplShinseijoho().setDdlWariateKubun(ddlWariateKubun);
+    }
+
+    @JsonIgnore
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
+    }
+
+    @JsonIgnore
+    public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
+    }
+
+    @JsonIgnore
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    }
+
+    @JsonIgnore
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
+    }
+
+    @JsonIgnore
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore

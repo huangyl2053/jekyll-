@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE1020001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.SeikatsuhogoTorokuResult;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.DBE1020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.SeikatsuhogoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.SeikatsuhogoTorokuHandler;
@@ -36,7 +38,10 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -223,8 +228,27 @@ public class SeikatsuhogoToroku {
         if (!RString.isNullOrEmpty(申請書管理番号)) {
             前回申請書管理番号 = finder.get前回申請書管理番号(new ShinseishoKanriNo(申請書管理番号));
         }
-        ViewStateHolder.put(ViewStateKeys.みなし2号登録情報, getHandler(div).setBusiness(前回申請書管理番号));
+        Minashi2shisaiJoho minashi2shisaiJoho = getHandler(div).setBusiness(前回申請書管理番号);
+        ViewStateHolder.put(ViewStateKeys.みなし2号登録情報, minashi2shisaiJoho);
+        
+        if (is年齢範囲外(minashi2shisaiJoho.get年齢())) {
+           if (!ResponseHolder.isReRequest()) {
+               return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
+           }
+           if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                   && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+               return ResponseData.of(div).respond();
+           }
+        }
         return ResponseData.of(div).forwardWithEventName(DBE1020001TransitionEventName.申請情報入力へ).respond();
+    }
+    
+    private boolean is年齢範囲外(RString 年齢) {
+        if (!RString.isNullOrEmpty(年齢)) {
+            int age = Integer.parseInt(年齢.toString());
+            return age < 40 || age >= 65;
+        }
+        return true;
     }
 
     /**

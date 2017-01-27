@@ -24,6 +24,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -121,10 +125,12 @@ public class NinteiShinseiTorokuHandler {
             div.getAtenaInfoToroku().getTxtKanaMeisho().setDomain(business.getカナ氏名());
         }
         div.getAtenaInfoToroku().getMeisho().setDomain(business.get氏名());
-        if (business.get生年月日() != null) {
+        if (business.get生年月日() != null && !business.get生年月日().toDateString().isEmpty()) {
             div.getAtenaInfoToroku().getSeinengabi().setValue(business.get生年月日());
-            int 年齢 = FlexibleDate.getNowDate().getBetweenYears(business.get生年月日().toFlexibleDate());
-            div.getAtenaInfoToroku().getNenrei().setValue(new RString(年齢).concat("歳"));
+            IDateOfBirth dob = DateOfBirthFactory.createInstance(business.get生年月日().toFlexibleDate());
+            AgeCalculator agecalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX);
+            RString 年齢 = agecalculator.get年齢();
+            div.getAtenaInfoToroku().getNenrei().setValue(年齢.concat("歳"));
         }
         
         
