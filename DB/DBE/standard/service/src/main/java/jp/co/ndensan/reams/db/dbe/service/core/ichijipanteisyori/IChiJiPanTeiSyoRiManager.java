@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteike
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori.IChiJiPanTeiSyoRiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijipanteisyori.IIChiJiPanTeiSyoRiMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5116IchijiHanteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -146,5 +147,15 @@ public class IChiJiPanTeiSyoRiManager {
             }
         }
         return saveNum;
+    }
+
+    @Transaction
+    public IchijiHanteiKekkaJoho get一次判定結果(ShinseishoKanriNo 申請書管理番号) {
+        DbT5116IchijiHanteiKekkaJohoEntity entity = dbT5116Dac.selectByKey(申請書管理番号);
+
+        if (entity == null) {
+            return null;
+        }
+        return new IchijiHanteiKekkaJoho(entity);
     }
 }

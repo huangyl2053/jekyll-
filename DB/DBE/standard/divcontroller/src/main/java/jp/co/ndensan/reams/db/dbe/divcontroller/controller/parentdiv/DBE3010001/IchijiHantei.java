@@ -80,6 +80,8 @@ public class IchijiHantei {
     public ResponseData<IchijiHanteiDiv> onLoad(IchijiHanteiDiv div) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
+
+        //TODO n8178 城間 過去、完了処理からの遷移を想定して用意されたもの？ 不要と判断出来たらこれを使用する処理ごと削除する。
         ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
 
         IchijiHanteiMenuId menuIdObj = IchijiHanteiMenuId.toValue(menuID);
@@ -93,10 +95,11 @@ public class IchijiHantei {
                 div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
                 if (shinseishoKanriNoList == null) {
                     getHandler(div).initializtion();
+                    getHandler(div).setIsShowSelectButtonColumn(true);
                     response = ResponseData.of(div).setState(DBE3010001StateName.初期表示);
                     break;
                 }
-                validation = 一次判定対象者一覧(div, menuID, shinseishoKanriNoList);
+                validation = 一次判定対象者一覧(div, menuID, RString.EMPTY, shinseishoKanriNoList);
                 if (validation.iterator().hasNext()) {
                     response = ResponseData.of(div).addValidationMessages(validation).respond();
                     break;
@@ -106,10 +109,11 @@ public class IchijiHantei {
             case 一次判定インターフェース作成:
                 div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
                 getHandler(div).initializtion();
+                getHandler(div).setMultiSelectable(true);
                 response = ResponseData.of(div).setState(DBE3010001StateName.初期表示);
                 break;
             case 完了処理_一次判定:
-                validation = 一次判定対象者一覧(div, menuID, shinseishoKanriNoList);
+                validation = 一次判定対象者一覧(div, menuID, RString.EMPTY, shinseishoKanriNoList);
                 if (validation.iterator().hasNext()) {
                     response = ResponseData.of(div).addValidationMessages(validation).respond();
                     break;
@@ -145,8 +149,9 @@ public class IchijiHantei {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
+        RString hihokenshaNo = div.getIchijiHanteiKensakuJoken().getTxtHihokenshaNo().getValue();
         ShinseishoKanriNoList shinseishoKanriNoList = new ShinseishoKanriNoList();
-        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, shinseishoKanriNoList);
+        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, hihokenshaNo, shinseishoKanriNoList);
 
         if (一次判定対象者一覧List.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
@@ -167,6 +172,9 @@ public class IchijiHantei {
         IchijiHanteiMenuId menuId = IchijiHanteiMenuId.toValue(menuIdStr);
         switch (menuId) {
             case 一次判定処理:
+                if (一次判定対象者一覧List.size() == 1) {
+                    return go次画面(div, 一次判定対象者一覧List.get(0).get申請書管理番号().getColumnValue());
+                }
                 return ResponseData.of(div).setState(DBE3010001StateName.一次判定対象者一覧);
             case 一次判定インターフェース作成:
                 return ResponseData.of(div).setState(DBE3010001StateName.対象者一覧);
@@ -298,98 +306,8 @@ public class IchijiHantei {
         return ResponseData.of(getHandler(div).バッチパラメータの作成(new RString("2"))).respond();
     }
 
-    /**
-     * 一次判定を完了する処理。
-     *
-     * @param div IchijiHanteiDiv
-     * @return ResponseData
-     */
-    public ResponseData<IchijiHanteiDiv> btn_kanryo(IchijiHanteiDiv div) {
-
-        if (!ResponseHolder.isReRequest()) {
-
-            ValidationMessageControlPairs validation = getValidatisonHandler(div).対象者一覧データの行選択チェック();
-            if (validation.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validation).respond();
-            }
-            return ResponseData.of(div).addMessage(DbeQuestionMessages.選択した一次判定データ完了確認.getMessage()).respond();
-        }
-        if (new RString(DbeQuestionMessages.選択した一次判定データ完了確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            List<ShinseishoKanriNo> noList = getHandler(div).get申請書管理番号fromSelectedItemOfGrid();
-
-            NinteiKanryoJohoManager ninteiKanryoManager = NinteiKanryoJohoManager.createInstance();
-            List<NinteiKanryoJoho> ninteiKanryoJohoList = ninteiKanryoManager.get要介護認定完了情報List(noList);
-            List<NinteiKanryoJoho> outputNinteiKanryoJohoList = new ArrayList<>();
-
-            FlexibleDate nowDate = FlexibleDate.getNowDate();
-            for (NinteiKanryoJoho joho : ninteiKanryoJohoList) {
-                outputNinteiKanryoJohoList.add(joho.createBuilderForEdit().set要介護認定一次判定完了年月日(nowDate).build());
-            }
-            ninteiKanryoManager.save要介護認定完了情報List(outputNinteiKanryoJohoList);
-
-            div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定を完了しました。"));
-            return ResponseData.of(div).setState(DBE3010001StateName.完了処理後);
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 保存ボタンの処理。
-     *
-     * @param div IchijiHanteiDiv
-     * @return ResponseData
-     */
-    public ResponseData<IchijiHanteiDiv> btn_save(IchijiHanteiDiv div) {
-
-        Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models
-                = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
-
-        if (!ResponseHolder.isReRequest()) {
-
-            if (要介護認定一次判定結果情報Models == null || 要介護認定一次判定結果情報Models.values().isEmpty()
-                    || !要介護認定一次判定結果情報Models.hasAnyChanged()) {
-                return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
-            }
-            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
-        }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            List<IchijiHanteiKekkaJoho> torokuTaishoList = new ArrayList<>();
-            torokuTaishoList.addAll(要介護認定一次判定結果情報Models.values());
-
-            if (torokuTaishoList.isEmpty()) {
-                return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
-            }
-            IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
-            manager.save要介護認定一次判定結果情報List(torokuTaishoList);
-
-            DataGrid<dgIchijiHanteiTaishoshaIchiran_Row> dg = div.getIchijiHanteiShoriTaishoshaIchiran()
-                    .getDgIchijiHanteiTaishoshaIchiran();
-            for (dgIchijiHanteiTaishoshaIchiran_Row row : dg.getDataSource()) {
-                RealInitialLocker.release(new LockingKey(LOCKINGKEY.concat(row.getShinseishoKanriNo())));
-            }
-
-            IUrControlData controlData = UrControlDataFactory.createInstance();
-            RString menuID = controlData.getMenuID();
-            if (IchijiHanteiMenuId.一次判定処理.value().equals(menuID)) {
-                getHandler(div).initializtion();
-                getHandler(div).setMultiSelectable();
-                div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定結果を保存しました。"));
-                return ResponseData.of(div).setState(DBE3010001StateName.保存処理後);
-            } else if (IchijiHanteiMenuId.完了処理_一次判定.value().equals(menuID)) {
-                return ResponseData.of(div).forwardWithEventName(DBE3010001TransitionEventName.戻る).respond();
-            }
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    private ValidationMessageControlPairs 一次判定対象者一覧(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
-        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, shinseishoKanriNoList);
+    private ValidationMessageControlPairs 一次判定対象者一覧(IchijiHanteiDiv div, RString menuID, RString hihokenshaNo, ShinseishoKanriNoList shinseishoKanriNoList) {
+        List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, hihokenshaNo, shinseishoKanriNoList);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         getHandler(div).対象者一覧の編集(一次判定対象者一覧List, personalData);
         for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
@@ -401,9 +319,9 @@ public class IchijiHantei {
         return getValidatisonHandler(div).データ空のチェック();
     }
 
-    private List<IChiJiPanTeiSyoRiBusiness> kenSaKu(IchijiHanteiDiv div, RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+    private List<IChiJiPanTeiSyoRiBusiness> kenSaKu(IchijiHanteiDiv div, RString menuID, RString hihokenshaNo, ShinseishoKanriNoList shinseishoKanriNoList) {
 
-        IChiJiPanTeiSyoRiParameter parameter = getHandler(div).createParameter(menuID, shinseishoKanriNoList);
+        IChiJiPanTeiSyoRiParameter parameter = getHandler(div).createParameter(menuID, hihokenshaNo, shinseishoKanriNoList);
 
         IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
         List<IChiJiPanTeiSyoRiBusiness> businessList = manager.get対象者一覧(parameter).records();
@@ -450,5 +368,29 @@ public class IchijiHantei {
 
     private IchijiHanteiValidatisonHandler getValidatisonHandler(IchijiHanteiDiv div) {
         return new IchijiHanteiValidatisonHandler(div);
+    }
+
+    /**
+     * 一次判定処理時に、一覧から対象データを1件選択して次画面に遷移するための処理です。
+     *
+     * @param div IchijiHanteiDiv
+     * @return ResponseData
+     */
+    public ResponseData<IchijiHanteiDiv> onSelect_dgIchijiHanteiTaishosha(IchijiHanteiDiv div) {
+
+        dgIchijiHanteiTaishoshaIchiran_Row row = div.getIchijiHanteiShoriTaishoshaIchiran()
+                .getDgIchijiHanteiTaishoshaIchiran().getActiveRow();
+
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
+
+        //遷移イベントの起動
+        return go次画面(div, row.getShinseishoKanriNo());
+    }
+
+    private ResponseData<IchijiHanteiDiv> go次画面(IchijiHanteiDiv div, RString shinseishoKnariNo) {
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, shinseishoKnariNo);
+
+        //遷移イベントの起動
+        return ResponseData.of(div).forwardWithEventName(DBE3010001TransitionEventName.申請者選択).respond();
     }
 }

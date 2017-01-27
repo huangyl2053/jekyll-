@@ -441,6 +441,10 @@ public class IchijiHanteiKekkaJoho
         return entity.getJotaizo();
     }
 
+    public boolean get仮一次判定区分() {
+        return entity.getKariIchijiHanteiKubun();
+    }
+
     /**
      * {@link DbT5116IchijiHanteiKekkaJohoEntity}のクローンを返します。
      *

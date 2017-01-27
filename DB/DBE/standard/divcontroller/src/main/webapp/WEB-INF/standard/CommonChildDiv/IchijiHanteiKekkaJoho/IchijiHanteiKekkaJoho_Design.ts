@@ -16,14 +16,6 @@ module DBE {
                 return "onClick_btnAfterIchijiHantei";
             }
 
-            public static onClick_btnBack(): string {
-                return "onClick_btnBack";
-            }
-
-            public static onClick_btnKakutei(): string {
-                return "onClick_btnKakutei";
-            }
-
         }
 
         export class Controls {
@@ -383,14 +375,6 @@ module DBE {
 
             public dgIchijiHanteiKeikokuCode(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgIchijiHanteiKeikokuCode"));
-            }
-
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            }
-
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

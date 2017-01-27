@@ -353,7 +353,6 @@ public class IchijiHanteiKekkaJohoHandler {
         boolean isReadOnly = !ModeType.ADD_MODE.equals(modeType);
 
         div.getBtnIchijiHantei().setDisplayNone(isReadOnly);
-        div.getBtnKakutei().setDisplayNone(isReadOnly);
     }
 
     /**

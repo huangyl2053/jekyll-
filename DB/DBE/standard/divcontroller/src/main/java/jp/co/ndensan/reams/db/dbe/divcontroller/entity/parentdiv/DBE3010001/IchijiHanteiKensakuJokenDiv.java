@@ -31,6 +31,8 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBoxCode txtHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -99,6 +101,24 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
     @JsonProperty("ccdHokenshaList")
     public IHokenshaListDiv getCcdHokenshaList() {
         return ccdHokenshaList;
+    }
+
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBoxCode getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     // </editor-fold>
