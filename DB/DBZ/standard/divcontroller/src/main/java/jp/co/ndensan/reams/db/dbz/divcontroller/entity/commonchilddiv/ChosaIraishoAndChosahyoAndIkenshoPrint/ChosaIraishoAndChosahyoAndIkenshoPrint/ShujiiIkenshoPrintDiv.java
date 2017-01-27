@@ -14,17 +14,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoPrintDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkInsatsuIkensho")
-    private CheckBoxList chkInsatsuIkensho;
-    @JsonProperty("chkIkenshoSakuseiIchiran")
-    private CheckBoxList chkIkenshoSakuseiIchiran;
+    @JsonProperty("chkIkenshoIraisho")
+    private CheckBoxList chkIkenshoIraisho;
+    @JsonProperty("chkIkensho")
+    private CheckBoxList chkIkensho;
+    @JsonProperty("chkIkenshoSeikyusho")
+    private CheckBoxList chkIkenshoSeikyusho;
+    @JsonProperty("chkShindanMeireisho")
+    private CheckBoxList chkShindanMeireisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +37,75 @@ public class ShujiiIkenshoPrintDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getchkInsatsuIkensho
-     * @return chkInsatsuIkensho
+     * getchkIkenshoIraisho
+     * @return chkIkenshoIraisho
      */
-    @JsonProperty("chkInsatsuIkensho")
-    public CheckBoxList getChkInsatsuIkensho() {
-        return chkInsatsuIkensho;
+    @JsonProperty("chkIkenshoIraisho")
+    public CheckBoxList getChkIkenshoIraisho() {
+        return chkIkenshoIraisho;
     }
 
     /*
-     * setchkInsatsuIkensho
-     * @param chkInsatsuIkensho chkInsatsuIkensho
+     * setchkIkenshoIraisho
+     * @param chkIkenshoIraisho chkIkenshoIraisho
      */
-    @JsonProperty("chkInsatsuIkensho")
-    public void setChkInsatsuIkensho(CheckBoxList chkInsatsuIkensho) {
-        this.chkInsatsuIkensho = chkInsatsuIkensho;
+    @JsonProperty("chkIkenshoIraisho")
+    public void setChkIkenshoIraisho(CheckBoxList chkIkenshoIraisho) {
+        this.chkIkenshoIraisho = chkIkenshoIraisho;
     }
 
     /*
-     * getchkIkenshoSakuseiIchiran
-     * @return chkIkenshoSakuseiIchiran
+     * getchkIkensho
+     * @return chkIkensho
      */
-    @JsonProperty("chkIkenshoSakuseiIchiran")
-    public CheckBoxList getChkIkenshoSakuseiIchiran() {
-        return chkIkenshoSakuseiIchiran;
+    @JsonProperty("chkIkensho")
+    public CheckBoxList getChkIkensho() {
+        return chkIkensho;
     }
 
     /*
-     * setchkIkenshoSakuseiIchiran
-     * @param chkIkenshoSakuseiIchiran chkIkenshoSakuseiIchiran
+     * setchkIkensho
+     * @param chkIkensho chkIkensho
      */
-    @JsonProperty("chkIkenshoSakuseiIchiran")
-    public void setChkIkenshoSakuseiIchiran(CheckBoxList chkIkenshoSakuseiIchiran) {
-        this.chkIkenshoSakuseiIchiran = chkIkenshoSakuseiIchiran;
+    @JsonProperty("chkIkensho")
+    public void setChkIkensho(CheckBoxList chkIkensho) {
+        this.chkIkensho = chkIkensho;
+    }
+
+    /*
+     * getchkIkenshoSeikyusho
+     * @return chkIkenshoSeikyusho
+     */
+    @JsonProperty("chkIkenshoSeikyusho")
+    public CheckBoxList getChkIkenshoSeikyusho() {
+        return chkIkenshoSeikyusho;
+    }
+
+    /*
+     * setchkIkenshoSeikyusho
+     * @param chkIkenshoSeikyusho chkIkenshoSeikyusho
+     */
+    @JsonProperty("chkIkenshoSeikyusho")
+    public void setChkIkenshoSeikyusho(CheckBoxList chkIkenshoSeikyusho) {
+        this.chkIkenshoSeikyusho = chkIkenshoSeikyusho;
+    }
+
+    /*
+     * getchkShindanMeireisho
+     * @return chkShindanMeireisho
+     */
+    @JsonProperty("chkShindanMeireisho")
+    public CheckBoxList getChkShindanMeireisho() {
+        return chkShindanMeireisho;
+    }
+
+    /*
+     * setchkShindanMeireisho
+     * @param chkShindanMeireisho chkShindanMeireisho
+     */
+    @JsonProperty("chkShindanMeireisho")
+    public void setChkShindanMeireisho(CheckBoxList chkShindanMeireisho) {
+        this.chkShindanMeireisho = chkShindanMeireisho;
     }
 
     // </editor-fold>

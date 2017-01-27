@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa;
 
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -28,10 +29,24 @@ public class ChosahyoOcrRyomenProperty extends ReportPropertyBase<ChosahyoGaikyo
         super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221011.getReportId());
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param 帳票ID 帳票ID
+     */
+    public ChosahyoOcrRyomenProperty(RString 帳票ID) {
+        super(SubGyomuCode.DBE認定支援, new ReportId(帳票ID));
+    }
+
     @Override
     protected Breakers<ChosahyoGaikyochosaReportSource> defineBreakers(Breakers<ChosahyoGaikyochosaReportSource> breakers,
             BreakerCatalog<ChosahyoGaikyochosaReportSource> catalog) {
         return breakers.add(catalog.new SimpleLayoutBreaker(
+
+
+
+
+
 
             new RString("layoutIndex")) {
             @Override

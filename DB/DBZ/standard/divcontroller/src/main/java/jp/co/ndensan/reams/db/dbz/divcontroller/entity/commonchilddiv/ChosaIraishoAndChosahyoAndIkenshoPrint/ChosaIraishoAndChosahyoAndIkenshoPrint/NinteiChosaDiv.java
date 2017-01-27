@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -73,43 +73,63 @@ public class NinteiChosaDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public CheckBoxList getChk() {
-        return this.getNinteiChosaPrint().getChk();
+    public CheckBoxList getChkIraisho() {
+        return this.getNinteiChosaPrint().getChkIraisho();
     }
 
     @JsonIgnore
-    public void  setChk(CheckBoxList chk) {
-        this.getNinteiChosaPrint().setChk(chk);
+    public void  setChkIraisho(CheckBoxList chkIraisho) {
+        this.getNinteiChosaPrint().setChkIraisho(chkIraisho);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkChosahyo() {
-        return this.getNinteiChosaPrint().getChkChosahyo();
+    public CheckBoxList getChkChosahyoKatamen() {
+        return this.getNinteiChosaPrint().getChkChosahyoKatamen();
     }
 
     @JsonIgnore
-    public void  setChkChosahyo(CheckBoxList chkChosahyo) {
-        this.getNinteiChosaPrint().setChkChosahyo(chkChosahyo);
+    public void  setChkChosahyoKatamen(CheckBoxList chkChosahyoKatamen) {
+        this.getNinteiChosaPrint().setChkChosahyoKatamen(chkChosahyoKatamen);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkOcrChosahyo() {
-        return this.getNinteiChosaPrint().getChkOcrChosahyo();
+    public CheckBoxList getChkChosahyoRyomen() {
+        return this.getNinteiChosaPrint().getChkChosahyoRyomen();
     }
 
     @JsonIgnore
-    public void  setChkOcrChosahyo(CheckBoxList chkOcrChosahyo) {
-        this.getNinteiChosaPrint().setChkOcrChosahyo(chkOcrChosahyo);
+    public void  setChkChosahyoRyomen(CheckBoxList chkChosahyoRyomen) {
+        this.getNinteiChosaPrint().setChkChosahyoRyomen(chkChosahyoRyomen);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkChosahyo2() {
-        return this.getNinteiChosaPrint().getChkChosahyo2();
+    public CheckBoxList getChkChosahyoGaikyo() {
+        return this.getNinteiChosaPrint().getChkChosahyoGaikyo();
     }
 
     @JsonIgnore
-    public void  setChkChosahyo2(CheckBoxList chkChosahyo2) {
-        this.getNinteiChosaPrint().setChkChosahyo2(chkChosahyo2);
+    public void  setChkChosahyoGaikyo(CheckBoxList chkChosahyoGaikyo) {
+        this.getNinteiChosaPrint().setChkChosahyoGaikyo(chkChosahyoGaikyo);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkChosahyoSai() {
+        return this.getNinteiChosaPrint().getChkChosahyoSai();
+    }
+
+    @JsonIgnore
+    public void  setChkChosahyoSai(CheckBoxList chkChosahyoSai) {
+        this.getNinteiChosaPrint().setChkChosahyoSai(chkChosahyoSai);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkChosahyoTokki() {
+        return this.getNinteiChosaPrint().getChkChosahyoTokki();
+    }
+
+    @JsonIgnore
+    public void  setChkChosahyoTokki(CheckBoxList chkChosahyoTokki) {
+        this.getNinteiChosaPrint().setChkChosahyoTokki(chkChosahyoTokki);
     }
 
     // </editor-fold>

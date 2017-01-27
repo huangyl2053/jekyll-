@@ -223,24 +223,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
      * @param reportId 帳票ID定義Enum
      */
-    public void print認定調査票_概況調査(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, ReportIdDBZ reportId) {
+    public void print認定調査票_概況調査(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, ReportId reportId) {
         ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(認定調査票_概況調査List);
         ChosahyoGaikyochosaProperty property;
-        switch (reportId) {
-            // 要介護認定調査票（デザイン）両面
-            case DBE221001:
-                property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
-                break;
-            // 要介護認定調査票（デザイン）片面
-            case DBE221002:
-                property = ChosahyoGaikyochosaProperty.createPropertyFor片面デザイン用紙();
-                break;
-            // 要介護認定調査票（概況特記）
-            case DBE221051:
-                property = ChosahyoGaikyochosaProperty.createPropertyFor概況特記用紙();
-                break;
-            default:
-                return;
+        if (ReportIdDBZ.DBE221001.getReportId().equals(reportId)) {
+            property = ChosahyoGaikyochosaProperty.createPropertyFor両面デザイン用紙();
+        } else if (ReportIdDBZ.DBE221002.getReportId().equals(reportId)) {
+            property = ChosahyoGaikyochosaProperty.createPropertyFor片面デザイン用紙();
+        } else if (ReportIdDBZ.DBE221051.getReportId().equals(reportId)) {
+            property = ChosahyoGaikyochosaProperty.createPropertyFor概況特記用紙();
+        } else {
+            return;
         }
         try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -252,13 +245,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 要介護認定調査票（基本調査）を出力します。
      *
      * @param 認定調査票_基本調査List 認定調査票_概況調査List
+     * @param 帳票ID 帳票ID
      */
-    public void print認定調査票_基本調査(List<ChosahyoKihonchosaKatamenItem> 認定調査票_基本調査List) {
+    public void print認定調査票_基本調査(List<ChosahyoKihonchosaKatamenItem> 認定調査票_基本調査List, ReportId 帳票ID) {
         List<ChosahyoKihonchosaKatamenReport> list = new ArrayList<>();
         if (!認定調査票_基本調査List.isEmpty()) {
             list.add(ChosahyoKihonchosaKatamenReport.createFrom(認定調査票_基本調査List));
         }
-        ChosahyoKihonchosaKatamenProperty property = new ChosahyoKihonchosaKatamenProperty();
+        ChosahyoKihonchosaKatamenProperty property = new ChosahyoKihonchosaKatamenProperty(帳票ID);
         try (ReportAssembler<ChosahyoKihonchosaKatamenReportSource> assembler = createAssembler(property, reportManager)) {
             for (ChosahyoKihonchosaKatamenReport report : list) {
                 ReportSourceWriter<ChosahyoKihonchosaKatamenReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
@@ -271,11 +265,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 要介護認定調査票（概況調査＋基本調査　両面印刷のOCR）を出力します。
      *
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
+     * @param 帳票ID 帳票ID
      */
-    public void print認定調査票_OCR両面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
+    public void print認定調査票_両面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, RString 帳票ID) {
         if (!認定調査票_概況調査List.isEmpty()) {
             ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List);
-            ChosahyoOcrRyomenProperty property = new ChosahyoOcrRyomenProperty();
+            ChosahyoOcrRyomenProperty property = new ChosahyoOcrRyomenProperty(帳票ID);
             try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);

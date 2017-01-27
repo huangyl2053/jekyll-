@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -73,23 +73,43 @@ public class ShujiiIkenshoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public CheckBoxList getChkInsatsuIkensho() {
-        return this.getShujiiIkenshoPrint().getChkInsatsuIkensho();
+    public CheckBoxList getChkIkenshoIraisho() {
+        return this.getShujiiIkenshoPrint().getChkIkenshoIraisho();
     }
 
     @JsonIgnore
-    public void  setChkInsatsuIkensho(CheckBoxList chkInsatsuIkensho) {
-        this.getShujiiIkenshoPrint().setChkInsatsuIkensho(chkInsatsuIkensho);
+    public void  setChkIkenshoIraisho(CheckBoxList chkIkenshoIraisho) {
+        this.getShujiiIkenshoPrint().setChkIkenshoIraisho(chkIkenshoIraisho);
     }
 
     @JsonIgnore
-    public CheckBoxList getChkIkenshoSakuseiIchiran() {
-        return this.getShujiiIkenshoPrint().getChkIkenshoSakuseiIchiran();
+    public CheckBoxList getChkIkensho() {
+        return this.getShujiiIkenshoPrint().getChkIkensho();
     }
 
     @JsonIgnore
-    public void  setChkIkenshoSakuseiIchiran(CheckBoxList chkIkenshoSakuseiIchiran) {
-        this.getShujiiIkenshoPrint().setChkIkenshoSakuseiIchiran(chkIkenshoSakuseiIchiran);
+    public void  setChkIkensho(CheckBoxList chkIkensho) {
+        this.getShujiiIkenshoPrint().setChkIkensho(chkIkensho);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkIkenshoSeikyusho() {
+        return this.getShujiiIkenshoPrint().getChkIkenshoSeikyusho();
+    }
+
+    @JsonIgnore
+    public void  setChkIkenshoSeikyusho(CheckBoxList chkIkenshoSeikyusho) {
+        this.getShujiiIkenshoPrint().setChkIkenshoSeikyusho(chkIkenshoSeikyusho);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShindanMeireisho() {
+        return this.getShujiiIkenshoPrint().getChkShindanMeireisho();
+    }
+
+    @JsonIgnore
+    public void  setChkShindanMeireisho(CheckBoxList chkShindanMeireisho) {
+        this.getShujiiIkenshoPrint().setChkShindanMeireisho(chkShindanMeireisho);
     }
 
     // </editor-fold>

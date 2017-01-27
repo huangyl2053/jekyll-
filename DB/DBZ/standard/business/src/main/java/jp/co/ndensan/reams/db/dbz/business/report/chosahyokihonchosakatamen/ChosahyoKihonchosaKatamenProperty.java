@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen;
 
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -22,5 +23,14 @@ public class ChosahyoKihonchosaKatamenProperty extends ReportPropertyBase<Chosah
      */
     public ChosahyoKihonchosaKatamenProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221004.getReportId());
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 帳票ID 帳票ID
+     */
+    public ChosahyoKihonchosaKatamenProperty(ReportId 帳票ID) {
+        super(SubGyomuCode.DBE認定支援, 帳票ID);
     }
 }
