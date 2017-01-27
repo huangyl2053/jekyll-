@@ -25,14 +25,14 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("IchijiHanteiKensakuJoken")
-    private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
     private IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran;
     @JsonProperty("torikomiPanel")
     private torikomiPanelDiv torikomiPanel;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("IchijiHanteiKensakuJoken")
+    private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("インデックス")
     private RString インデックス;
     @JsonProperty("ファイルID")
@@ -48,24 +48,6 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getIchijiHanteiKensakuJoken
-     * @return IchijiHanteiKensakuJoken
-     */
-    @JsonProperty("IchijiHanteiKensakuJoken")
-    public IchijiHanteiKensakuJokenDiv getIchijiHanteiKensakuJoken() {
-        return IchijiHanteiKensakuJoken;
-    }
-
-    /*
-     * setIchijiHanteiKensakuJoken
-     * @param IchijiHanteiKensakuJoken IchijiHanteiKensakuJoken
-     */
-    @JsonProperty("IchijiHanteiKensakuJoken")
-    public void setIchijiHanteiKensakuJoken(IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken) {
-        this.IchijiHanteiKensakuJoken = IchijiHanteiKensakuJoken;
-    }
-
     /*
      * getIchijiHanteiShoriTaishoshaIchiran
      * @return IchijiHanteiShoriTaishoshaIchiran
@@ -109,6 +91,24 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
+    }
+
+    /*
+     * getIchijiHanteiKensakuJoken
+     * @return IchijiHanteiKensakuJoken
+     */
+    @JsonProperty("IchijiHanteiKensakuJoken")
+    public IchijiHanteiKensakuJokenDiv getIchijiHanteiKensakuJoken() {
+        return IchijiHanteiKensakuJoken;
+    }
+
+    /*
+     * setIchijiHanteiKensakuJoken
+     * @param IchijiHanteiKensakuJoken IchijiHanteiKensakuJoken
+     */
+    @JsonProperty("IchijiHanteiKensakuJoken")
+    public void setIchijiHanteiKensakuJoken(IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken) {
+        this.IchijiHanteiKensakuJoken = IchijiHanteiKensakuJoken;
     }
 
     /*

@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -70,6 +71,7 @@ public class KanryoshoriIchijihanteiHandler {
     private static final RString COMMONBUTTON_ICHIJI_HANTEI = new RString("btnIchijiHantei");
 
     private static final RString 完了処理_一次判定 = new RString("DBEMN11006");
+    private static final RString 一次判定処理 = new RString("DBEMN51001");
 
     private static final RString 状態区分_未処理 = new RString("1");
     private static final RString 状態区分_完了可能 = new RString("2");
@@ -80,6 +82,8 @@ public class KanryoshoriIchijihanteiHandler {
 
     private static final int DIVIDE_VALUE = 10;
     private static final int ROUND_UP = 2;
+
+    private static final RString radStatus_完了可能 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -102,11 +106,18 @@ public class KanryoshoriIchijihanteiHandler {
         div.getIchijiHanteiShoriTaishoshaIchiran().getRadStatus().setSelectedKey(状態区分);
         div.setRadStatusBefore(状態区分);
 
+        RString menuId = ResponseHolder.getMenuID();
+        if (一次判定処理.equals(menuId)) {
+            div.getIchijiHanteiShoriTaishoshaIchiran().getRadStatus().setSelectedKey(radStatus_完了可能);
+            div.setRadStatusBefore(radStatus_完了可能);
+        }
+
         div.setModeType(ModeType.SHOKAI_MODE.getValue());
 
         setSearchMaxValue();
         set対象者一覧();
         set対象者数();
+
     }
 
     /**

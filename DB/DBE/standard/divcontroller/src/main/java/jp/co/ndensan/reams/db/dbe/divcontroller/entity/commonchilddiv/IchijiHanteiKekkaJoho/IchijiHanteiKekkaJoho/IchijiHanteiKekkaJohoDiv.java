@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,13 +14,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * IchijiHanteiKekkaJoho のクラスファイル
@@ -27,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekkaJohoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
@@ -74,10 +82,6 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private Label lblIchijiHanteiKeikokuCode;
     @JsonProperty("dgIchijiHanteiKeikokuCode")
     private DataGrid<dgIchijiHanteiKeikokuCode_Row> dgIchijiHanteiKeikokuCode;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
     @JsonProperty("hanteiArgument")
     private RString hanteiArgument;
     @JsonProperty("hanteiResult")
@@ -458,42 +462,6 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     /*
-     * getbtnModoru
-     * @return btnModoru
-     */
-    @JsonProperty("btnModoru")
-    public Button getBtnModoru() {
-        return btnModoru;
-    }
-
-    /*
-     * setbtnModoru
-     * @param btnModoru btnModoru
-     */
-    @JsonProperty("btnModoru")
-    public void setBtnModoru(Button btnModoru) {
-        this.btnModoru = btnModoru;
-    }
-
-    /*
-     * getbtnKakutei
-     * @return btnKakutei
-     */
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
-    }
-
-    /*
-     * setbtnKakutei
-     * @param btnKakutei btnKakutei
-     */
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei = btnKakutei;
-    }
-
-    /*
      * gethanteiArgument
      * @return hanteiArgument
      */
@@ -622,7 +590,7 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -637,11 +605,11 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
 
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    public void setMode_State(State value) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
     }
 
     /*
@@ -809,5 +777,60 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize(ShinseishoKanriNo shinseishoKanriNo) {
+
+        IchijiHanteiKekkaJohoHandler handler = getHandler();
+
+        if (shinseishoKanriNo == null || shinseishoKanriNo.isEmpty()) {
+            handler.setStateOfIchijiHanteiKekka(ModeType.SHOKAI_MODE);
+            throw new ApplicationException(UrErrorMessages.設定不可.getMessage().replace("申請書管理番号が受け取れなかった"));
+        }
+
+        handler.initializeDdl();
+
+        setShinseishoKanriNo(shinseishoKanriNo.getColumnValue());
+        ModeType localModeType = ModeType.ADD_MODE;
+        setModeType(ModeType.ADD_MODE.getValue());
+
+        if (!RString.isNullOrEmpty(getIchijiHanteiKekka())) {
+            jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho hanteiKekka
+                    = DataPassingConverter.deserialize(getIchijiHanteiKekka(), IchijiHanteiKekkaJoho.class);
+            handler.initialize(hanteiKekka, localModeType);
+        } else {
+            handler.initialize(shinseishoKanriNo, localModeType);
+        }
+
+        if (ModeType.ADD_MODE.equals(localModeType)) {
+            if (RString.isNullOrEmpty(getHanteiArgument()) && !handler.create一次判定引数(shinseishoKanriNo)) {
+                handler.setStateOfIchijiHanteiKekka(ModeType.SHOKAI_MODE);
+                throw new ApplicationException(DbeErrorMessages.一次判定実行不可_申請日.getMessage());
+            }
+        }
+    }
+
+    private IchijiHanteiKekkaJohoHandler getHandler() {
+        return new IchijiHanteiKekkaJohoHandler(this);
+    }
+
+    @Override
+    public RString get一次判定結果文字列() {
+        return ichijiHanteiKekka;
+    }
+
+    @Override
+    public IchijiHanteiKekkaJoho get一次判定結果() {
+        if (RString.isNullOrEmpty(getIchijiHanteiKekka())) {
+            return null;
+        }
+
+        IchijiHanteiKekkaJoho hanteiKekka = DataPassingConverter.deserialize(getIchijiHanteiKekka(), IchijiHanteiKekkaJoho.class);
+        return getHandler().呼び出し元画面への戻り値(hanteiKekka);
+    }
+
+    @Override
+    public void clear一次判定結果() {
+        ichijiHanteiKekka = RString.EMPTY;
+    }
 
 }

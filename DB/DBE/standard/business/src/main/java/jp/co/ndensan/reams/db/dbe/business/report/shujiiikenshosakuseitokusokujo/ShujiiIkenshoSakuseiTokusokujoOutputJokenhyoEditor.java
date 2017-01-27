@@ -22,9 +22,11 @@ public class ShujiiIkenshoSakuseiTokusokujoOutputJokenhyoEditor {
     private static final int 督促方法コード_電話 = 2;
     private static final int 督促方法コード_その他 = 3;
     private static final int 督促メモ表示最大桁数 = 184;
+    private static final int 督促メモ表示1stLine = 80;
+    private static final int 督促メモ表示2ndLine = 160;
     private static final RString 空白 = new RString("            ");
     private final ShujiiIkenTokusokujoHakkoReportProcessParameter param;
-
+    
     /**
      * コンストラクタです。
      *
@@ -55,23 +57,23 @@ public class ShujiiIkenshoSakuseiTokusokujoOutputJokenhyoEditor {
         List<RString> メモlist = param.getTemp_督促メモ().split("\n");
         for (int i = 0; i < メモlist.size(); i++) {
             if (i == 0) {
-                出力条件List.add(new RString("【督促メモ】").concat(メモlist.get(0).substringReturnAsPossible(0, 90)));
-                if (メモlist.get(0).length() > 90) {
-                    出力条件List.add(空白.concat(メモlist.get(0).substringReturnAsPossible(91, 180)));
+                出力条件List.add(new RString("【督促メモ】").concat(メモlist.get(0).substringReturnAsPossible(0, 督促メモ表示1stLine)));
+                if (メモlist.get(0).length() > 督促メモ表示1stLine) {
+                    出力条件List.add(空白.concat(メモlist.get(0).substringReturnAsPossible(督促メモ表示1stLine, 督促メモ表示2ndLine)));
                 }
-                if (メモlist.get(0).length() > 180) {
-                    出力条件List.add(空白.concat(メモlist.get(0).substringReturnAsPossible(181, メモlist.get(0).length())));
+                if (メモlist.get(0).length() > 督促メモ表示2ndLine) {
+                    出力条件List.add(空白.concat(メモlist.get(0).substringReturnAsPossible(督促メモ表示2ndLine, メモlist.get(0).length())));
                 }
             } else {
                 if (!param.getTemp_督促メモ().contains("\n")) {
                     break;
                 }
-                出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(0, 90)));
-                if (メモlist.get(i).length() > 90) {
-                    出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(91, 180)));
+                出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(0, 督促メモ表示1stLine)));
+                if (メモlist.get(i).length() > 督促メモ表示1stLine) {
+                    出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(督促メモ表示1stLine, 督促メモ表示2ndLine)));
                 }
-                if (メモlist.get(i).length() > 180) {
-                    出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(181, メモlist.get(0).length())));
+                if (メモlist.get(i).length() > 督促メモ表示2ndLine) {
+                    出力条件List.add(空白.concat(メモlist.get(i).substringReturnAsPossible(督促メモ表示2ndLine, メモlist.get(0).length())));
                 }
             }
         }

@@ -398,11 +398,9 @@ public class IchijiHanteiHandler {
         IchijiHanteiMenuId menuId = IchijiHanteiMenuId.toValue(menuIdStr);
         switch (menuId) {
             case 一次判定処理:
-                dg.getGridSetting().getColumn("btnSentaku").setVisible(true);
                 dg.getGridSetting().getColumn("columnState").setVisible(true);
                 break;
             default:
-                dg.getGridSetting().getColumn("btnSentaku").setVisible(false);
                 dg.getGridSetting().getColumn("columnState").setVisible(false);
                 break;
         }
@@ -645,6 +643,18 @@ public class IchijiHanteiHandler {
      * @return パラメータクラス
      */
     public IChiJiPanTeiSyoRiParameter createParameter(RString menuID, ShinseishoKanriNoList shinseishoKanriNoList) {
+        return createParameter(menuID, RString.EMPTY, shinseishoKanriNoList);
+    }
+
+    /**
+     * 一次判定対象者を取得するためのパラメータを作成します。
+     *
+     * @param menuID メニューID
+     * @param hihokenshaNo 被保険者番号
+     * @param shinseishoKanriNoList 申請書管理番号List
+     * @return パラメータクラス
+     */
+    public IChiJiPanTeiSyoRiParameter createParameter(RString menuID, RString hihokenshaNo, ShinseishoKanriNoList shinseishoKanriNoList) {
         ShoKisaiHokenshaNo 証記載保険者No = div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
 
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
@@ -663,14 +673,27 @@ public class IchijiHanteiHandler {
                         認定申請年月日終了 == null ? FlexibleDate.EMPTY : new FlexibleDate(認定申請年月日終了.toDateString()),
                         検索件数,
                         menuID,
-                        shinseishoKanriNoList.getShinseishoKanriNoS());
+                        shinseishoKanriNoList.getShinseishoKanriNoS(),
+                        hihokenshaNo);
     }
 
     /**
      * グリッドを、複数選択可能な状態にします。
+     *
+     * @param is複数選択可
      */
-    public void setMultiSelectable() {
-        div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setMultiSelectable(true);
+    public void setMultiSelectable(boolean is複数選択可) {
+        div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting().setMultiSelectable(is複数選択可);
+    }
+
+    /**
+     * グリッドに選択ボタンを表示します。
+     *
+     * @param is選択ボタン表示
+     */
+    public void setIsShowSelectButtonColumn(boolean is選択ボタン表示) {
+        div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().getGridSetting()
+                .setIsShowSelectButtonColumn(is選択ボタン表示);
     }
 
     private boolean is警告コードAllZERO(RString 警告コード) {

@@ -165,11 +165,6 @@ public class IchijiHanteiKekkaJohoSearchManager {
         if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
             return Collections.<RString>emptyList();
         }
-        Code 厚労省IF識別コード = get厚労省IF識別コード(申請書管理番号);
-        if (!KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
-                && !KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-            return Collections.<RString>emptyList();
-        }
 
         DbT4203NinteichosahyoKihonChosaEntity 認定調査票_基本調査 = get認定調査票_基本調査(申請書管理番号);
         RString 認知症高齢者自立度 = RString.EMPTY;
@@ -206,11 +201,6 @@ public class IchijiHanteiKekkaJohoSearchManager {
         if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
             return RString.EMPTY;
         }
-        Code 厚労省IF識別コード = get厚労省IF識別コード(申請書管理番号);
-        if (!KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
-                && !KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-            return RString.EMPTY;
-        }
 
         List<RString> 基本調査項目List = new ArrayList<>();
         基本調査項目List.addAll(getKihonChosaInputData(第1群));
@@ -234,12 +224,6 @@ public class IchijiHanteiKekkaJohoSearchManager {
             認知症高齢者自立度 = 障害高齢者自立度コード == null ? RString.EMPTY : 認知症高齢者自立度コード.getColumnValue();
         }
         RString 認知症高齢者自立度_主治医意見書 = get認知症高齢者自立度_主治医意見書(申請書管理番号);
-
-        if (基本調査項目.length() != KIHON_CHOSA_KOMOKU_LENGTH
-                || 障害高齢者自立度.length() != SHOGAI_KOREISHA_JIRITSUDO_LENGTH
-                || 認知症高齢者自立度.length() != NINCHISHO_KOREISHA_JIRITSUDO_LENGTH) {
-            return RString.EMPTY;
-        }
 
         RStringBuilder builder = new RStringBuilder();
         builder.append(基本調査項目);

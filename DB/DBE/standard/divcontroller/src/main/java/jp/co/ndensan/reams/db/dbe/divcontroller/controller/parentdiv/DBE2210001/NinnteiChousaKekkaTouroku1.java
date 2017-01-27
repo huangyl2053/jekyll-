@@ -586,6 +586,18 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnIchiHanteiJisshi(NinnteiChousaKekkaTouroku1Div div) {
+
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor第1群の必須入力(pairs, div);
+        getValidationHandler().validateFor第2群の必須入力(pairs, div);
+        getValidationHandler().validateFor第3群の必須入力(pairs, div);
+        getValidationHandler().validateFor第4群の必須入力(pairs, div);
+        getValidationHandler().validateFor第5群の必須入力(pairs, div);
+        getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
         ViewStateHolder.put(ViewStateKeys.モード, ModeType.ADD_MODE);
 
         IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
@@ -602,7 +614,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 第4群List, 第5群List, 特別な医療List, 自立度List);
 
         if (RString.isNullOrEmpty(hanteiArgument)) {
-            throw new ApplicationException(DbeErrorMessages.一次判定実行不可_基本調査項目未入力.getMessage());
+            throw new ApplicationException(DbeErrorMessages.一次判定実行不可.getMessage());
         }
 
         div.setHanteiArgument(hanteiArgument);
@@ -1132,9 +1144,10 @@ public class NinnteiChousaKekkaTouroku1 {
         IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = new IchijiHanteiKekkaJohoManager();
         IchijiHanteiKekkaJoho result = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(shinseishoKanriNo);
 
+        div.setIchijiHanteiKekkaJoho(RString.EMPTY);
         if (result != null) {
             Code 厚労省IF識別コード = 厚労省IF識別コードStr == null ? Code.EMPTY : new Code(厚労省IF識別コードStr);
-            div.setIchijiHanteiKekkaJoho(result == null ? RString.EMPTY : DataPassingConverter.serialize(result));
+            div.setIchijiHanteiKekkaJoho(DataPassingConverter.serialize(result));
             RString meisho = result.get一次判定結果名称(厚労省IF識別コード);
             div.getTxtIchijiHanteiKekka().setValue(meisho);
         }

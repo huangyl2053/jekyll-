@@ -11,14 +11,6 @@ var DBE;
             Events.onClick_btnAfterIchijiHantei = function () {
                 return "onClick_btnAfterIchijiHantei";
             };
-
-            Events.onClick_btnBack = function () {
-                return "onClick_btnBack";
-            };
-
-            Events.onClick_btnKakutei = function () {
-                return "onClick_btnKakutei";
-            };
             return Events;
         })();
         IchijiHanteiKekkaJoho.Events = Events;
@@ -377,14 +369,6 @@ var DBE;
 
             Controls.prototype.dgIchijiHanteiKeikokuCode = function () {
                 return new UZA.DataGrid(this.convFiledName("dgIchijiHanteiKeikokuCode"));
-            };
-
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            };
-
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

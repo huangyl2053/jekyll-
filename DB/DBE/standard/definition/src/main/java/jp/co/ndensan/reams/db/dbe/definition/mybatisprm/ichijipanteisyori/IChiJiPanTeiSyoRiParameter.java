@@ -43,6 +43,11 @@ public final class IChiJiPanTeiSyoRiParameter {
      */
     private final RString 完了可能区分;
 
+    /**
+     * 被保険者番号を指定して検索する場合に使用する。空白やnullが設定されている場合は条件から除外される。
+     */
+    private final RString 被保険者番号;
+
     private IChiJiPanTeiSyoRiParameter(
             ShoKisaiHokenshaNo 証記載保険者No,
             RString 通常,
@@ -56,7 +61,8 @@ public final class IChiJiPanTeiSyoRiParameter {
             boolean メニュー_遷移,
             boolean 完了処理一次判定_遷移,
             List<RString> 申請書管理番号List,
-            RString 完了可能区分) {
+            RString 完了可能区分,
+            RString 被保険者番号) {
         this.証記載保険者No = 証記載保険者No;
         this.通常 = 通常;
         this.延期 = 延期;
@@ -70,10 +76,11 @@ public final class IChiJiPanTeiSyoRiParameter {
         this.完了処理一次判定_遷移 = 完了処理一次判定_遷移;
         this.申請書管理番号List = 申請書管理番号List;
         this.完了可能区分 = 完了可能区分;
+        this.被保険者番号 = 被保険者番号;
     }
 
     /**
-     * 検索処理取得パラメータ設定
+     * 検索処理取得パラメータ設定。メニュー411の一次判定画面（DBE3010001）で主に使用されます。
      *
      * @param 証記載保険者No ShoKisaiHokenshaNo
      * @param 通常 RString
@@ -84,6 +91,7 @@ public final class IChiJiPanTeiSyoRiParameter {
      * @param 最大表示件数 Decimal
      * @param メニュー RString
      * @param 申請書管理番号List List<RString>
+     * @param 被保険者番号 RString
      * @return NiTeiCyoSaiChiRanParameter
      */
     public static IChiJiPanTeiSyoRiParameter createParameter(
@@ -95,7 +103,9 @@ public final class IChiJiPanTeiSyoRiParameter {
             FlexibleDate 認定申請年月日終了,
             Decimal 最大表示件数,
             RString メニュー,
-            List<RString> 申請書管理番号List) {
+            List<RString> 申請書管理番号List,
+            RString 被保険者番号) {
+
         return new IChiJiPanTeiSyoRiParameter(
                 証記載保険者No,
                 通常,
@@ -109,7 +119,8 @@ public final class IChiJiPanTeiSyoRiParameter {
                 一次判定処理.equals(メニュー),
                 完了処理_一次判定.equals(メニュー),
                 申請書管理番号List,
-                完了可能区分_全て);
+                完了可能区分_全て,
+                被保険者番号);
     }
 
     /**
@@ -151,7 +162,8 @@ public final class IChiJiPanTeiSyoRiParameter {
                 true,
                 完了処理_一次判定.equals(メニュー),
                 申請書管理番号List,
-                完了可能区分);
+                完了可能区分,
+                RString.EMPTY);
     }
 
     /**
@@ -174,6 +186,7 @@ public final class IChiJiPanTeiSyoRiParameter {
                 false,
                 parameter.完了処理一次判定_遷移,
                 parameter.申請書管理番号List,
-                parameter.完了可能区分);
+                parameter.完了可能区分,
+                parameter.被保険者番号);
     }
 }
