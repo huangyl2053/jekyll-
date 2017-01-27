@@ -105,12 +105,12 @@ public class YokaigoNinteiShinchokuJohoShokai {
     }
 
     /**
-     * 「照会」ボタン押下します。
+     * 「選択」ボタン押下します。
      *
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
-    public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnShokai(YokaigoNinteiShinchokuJohoShokaiDiv div) {
+    public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> onClick_Select(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgShinseiJoho().
                 getClickedItem().getShinseishoKanriNo());
         ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, div.getDgShinseiJoho().
