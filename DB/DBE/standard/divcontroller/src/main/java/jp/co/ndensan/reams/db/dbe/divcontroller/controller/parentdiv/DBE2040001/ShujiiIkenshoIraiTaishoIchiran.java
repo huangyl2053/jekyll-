@@ -45,8 +45,10 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -202,8 +204,9 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
         ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
-        handler.set主治医意見書依頼完了対象者一覧パネル使用可否(true);
-        handler.init意見書依頼登録パネル();
+        handler.set主治医入力時使用可否(true);
+        handler.clear意見書依頼登録パネル();
+        handler.set意見書依頼登録パネル();
         return ResponseData.of(div).setState(DBE2040001StateName.依頼内容入力);
     }
 
@@ -220,7 +223,8 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         }
         ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
         handler.set主治医意見書依頼情報();
-        handler.set主治医意見書依頼完了対象者一覧パネル使用可否(false);
+        handler.set主治医入力時使用可否(false);
+        handler.clear意見書依頼登録パネル();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 
@@ -231,7 +235,9 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return ResponseData
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnSetteisezuModoru(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        getHandler(div).set主治医意見書依頼完了対象者一覧パネル使用可否(false);
+        ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
+        handler.set主治医入力時使用可否(false);
+        handler.clear意見書依頼登録パネル();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 
@@ -304,7 +310,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
             IkenshoSakuseiIraiManager manager = IkenshoSakuseiIraiManager.createInstance();
-            for (dgNinteiTaskList_Row row : handler.getChangedRow()) {
+            for (dgNinteiTaskList_Row row : handler.getSelectedItems()) {
                 NinteiShinseiJoho 要介護認定申請情報 = manager.get要介護認定申請情報(row.getShinseishoKanriNo());
                 NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit()
                         .set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode())
@@ -378,16 +384,16 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 row.getShinseishoKanriNo(),
                 処理区分変更(row.getJyotai()),
                 row.getHokensha(),
-                getパターン1(row.getNinteiShinseiDay().getValue()),
+                getパターン32(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 getコード(row.getShinseiKubunShinseiji(), 1),
                 row.getShinseiKubunShinseiji(),
                 row.getIkenshoIraiIkenCount().getValue(),
-                getパターン1(row.getIkenshoIraiDay().getValue()),
-                getパターン1(row.getIkenshoIraiIraishoHakkoDay().getValue()),
-                getパターン1(row.getIkenshoIraiIkenshoShutsuryokuDay().getValue()),
-                getパターン1(row.getIkenshoIraiKigen().getValue()),
+                getパターン32(row.getIkenshoIraiDay().getValue()),
+                getパターン32(row.getIkenshoIraiIraishoHakkoDay().getValue()),
+                getパターン32(row.getIkenshoIraiIkenshoShutsuryokuDay().getValue()),
+                getパターン32(row.getIkenshoIraiKigen().getValue()),
                 getコード(row.getIkenshoIraiShokai(), 2),
                 row.getIkenshoIraiShokai(),
                 row.getKonkaiShujiiIryokikan(),
@@ -398,10 +404,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 row.getJusho(),
                 row.getNyushoShisetsuCode(),
                 row.getNyushoShisetsu(),
-                getパターン1(row.getIkenshoTokusokuHakkoDay().getValue()),
+                getパターン32(row.getIkenshoTokusokuHakkoDay().getValue()),
                 row.getIkenshoTokusokuHoho(),
                 row.getIkenshoTokusokuCount().getValue(),
-                getパターン1(row.getIkenshoTokusokuLimit().getValue()),
+                getパターン32(row.getIkenshoTokusokuLimit().getValue()),
                 RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));
     }
 
@@ -430,11 +436,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         return IkenshoSakuseiKaisuKubun.valueOf(名称.toString()).getコード();
     }
 
-    private RString getパターン1(RDate date) {
+    private RString getパターン32(RDate date) {
         if (date == null) {
             return RString.EMPTY;
         }
-        return date.wareki().toDateString();
+        return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private ShujiiIkenshoIraiTaishoIchiranHandler getHandler(ShujiiIkenshoIraiTaishoIchiranDiv div) {

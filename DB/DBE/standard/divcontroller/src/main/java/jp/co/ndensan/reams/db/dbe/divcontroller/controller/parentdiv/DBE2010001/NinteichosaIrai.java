@@ -223,8 +223,9 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         NinteichosaIraiHandler handler = getHandler(requestDiv);
-        handler.set認定調査依頼完了対象者一覧パネル使用可否(true);
-        handler.init認定調査依頼登録パネル();
+        handler.set手動割付時使用可否(true);
+        handler.clear認定調査依頼登録パネル();
+        handler.set認定調査依頼登録パネル();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.手動割付内容入力);
     }
 
@@ -280,7 +281,8 @@ public class NinteichosaIrai {
     public ResponseData onClick_btnWaritsukeKakutei(NinteichosaIraiDiv requestDiv) {
         NinteichosaIraiHandler handler = getHandler(requestDiv);
         handler.set認定調査依頼情報();
-        handler.set認定調査依頼完了対象者一覧パネル使用可否(false);
+        handler.set手動割付時使用可否(false);
+        handler.clear認定調査依頼登録パネル();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
@@ -291,7 +293,9 @@ public class NinteichosaIrai {
      * @return ResponseData
      */
     public ResponseData onClick_btnWaritukenaideModoru(NinteichosaIraiDiv requestDiv) {
-        getHandler(requestDiv).set認定調査依頼完了対象者一覧パネル使用可否(false);
+        NinteichosaIraiHandler handler = getHandler(requestDiv);
+        handler.set手動割付時使用可否(false);
+        handler.clear認定調査依頼登録パネル();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
@@ -385,11 +389,10 @@ public class NinteichosaIrai {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            NinteichosaIraiHandler handler = getHandler(requestDiv);
             NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
             NinteiShinseiJohoManager ninteiShinseiJohoManager = NinteiShinseiJohoManager.createInstance();
             NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
-            for (dgNinteiTaskList_Row row : handler.getChangedRow()) {
+            for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
 
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 RString 認定調査依頼履歴番号 = row.getNinteichosaIraiRirekiNo();
