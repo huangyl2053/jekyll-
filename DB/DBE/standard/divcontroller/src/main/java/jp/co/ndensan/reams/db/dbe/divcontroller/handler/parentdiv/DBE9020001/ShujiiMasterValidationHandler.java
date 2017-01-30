@@ -31,8 +31,8 @@ public class ShujiiMasterValidationHandler {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString CODE_MAN = new RString("key0");
     private static final RString CODE_WOMAN = new RString("key1");
-    private static final RString 指定医_可 = new RString("key0");
-    private static final RString 指定医_不可 = new RString("key1");
+    private static final RString 指定医_可 = new RString("True");
+    private static final RString 指定医_不可 = new RString("False");
 
     /**
      * コンストラクタです。
@@ -101,7 +101,7 @@ public class ShujiiMasterValidationHandler {
                         div.getShujiiJohoInput().getRadSeibetsu()));
             }
             if (!div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey().equals(指定医_可)
-                    && !div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey().equals(指定医_不可)) {
+                    && !div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey().equals(指定医_不可)) {
                 validPairs.add(new ValidationMessageControlPair(new ShujiiMasterValidationHandler.IdocheckMessages(
                         UrErrorMessages.必須項目_追加メッセージあり, "指定医の指定"),
                         div.getShujiiJohoInput().getRadShiteiiFlag()));
