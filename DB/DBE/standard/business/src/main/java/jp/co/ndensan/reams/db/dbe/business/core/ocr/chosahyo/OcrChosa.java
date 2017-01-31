@@ -312,13 +312,9 @@ public final class OcrChosa {
     }
 
     private static RString to西暦_年(RString 和暦_日付) {
-        RString 年号 = RDate.getNowDate().wareki().getEra();
-        if (和暦_日付 != null) {
-            RString 和暦 = 年号.concat(和暦_日付.trim());
-            RDate result = new RDate(和暦.toString());
-            return result.toDateString();
-        }
-        return RString.EMPTY;
+        return RDate.canConvert(和暦_日付)
+                ? new RDate(和暦_日付.toString()).toDateString()
+                : RString.EMPTY;
     }
 
     /**

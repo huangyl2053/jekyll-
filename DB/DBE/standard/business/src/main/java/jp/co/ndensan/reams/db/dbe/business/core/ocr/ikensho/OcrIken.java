@@ -319,14 +319,9 @@ public final class OcrIken {
     }
 
     private static RString get西暦_年(RString 和暦_日付) {
-        if (和暦_日付 == null) {
-            return RString.EMPTY;
-        }
-        RString 年号 = RDate.getNowDate().wareki().getEra();
-        和暦_日付 = 和暦_日付.trim();
-        RString 和暦 = 年号.concat(和暦_日付);
-        RDate result = new RDate(和暦.toString());
-        return result.toDateString();
+        return RDate.canConvert(和暦_日付)
+                ? new RDate(和暦_日付.toString()).toDateString()
+                : RString.EMPTY;
     }
 
     private void set受診科(RString 記入のあった科) {

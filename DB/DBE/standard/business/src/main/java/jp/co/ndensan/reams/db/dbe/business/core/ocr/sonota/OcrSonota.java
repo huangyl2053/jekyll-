@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -58,10 +59,16 @@ public final class OcrSonota {
         result.ocrID = OCRID.toValueOrEMPTY(columns.get(0));
         result.sheetID = new SheetID(columns.get(1));
         result.保険者番号 = columns.get(2);
-        result.申請日 = columns.get(3);
+        result.申請日 = get西暦_年(columns.get(3));
         result.被保険者番号 = columns.get(4);
         result.key = new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日());
         result.imageFileName = new RStringBuilder().append(result.sheetID.value()).append("w01i000.png").toRString();
         return result;
+    }
+
+    private static RString get西暦_年(RString 和暦_日付) {
+        return RDate.canConvert(和暦_日付)
+                ? new RDate(和暦_日付.toString()).toDateString()
+                : RString.EMPTY;
     }
 }
