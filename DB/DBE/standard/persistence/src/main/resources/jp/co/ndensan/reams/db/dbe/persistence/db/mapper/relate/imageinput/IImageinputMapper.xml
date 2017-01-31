@@ -77,7 +77,7 @@
           LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
             ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
             AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+            AND T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
             AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND T5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND T5105."centerSoshinYMD" IS NULL
