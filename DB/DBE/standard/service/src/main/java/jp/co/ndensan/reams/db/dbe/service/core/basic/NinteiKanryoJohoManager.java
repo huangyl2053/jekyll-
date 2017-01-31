@@ -102,4 +102,11 @@ public class NinteiKanryoJohoManager {
         return kanryoJohoList;
 
     }
+    
+    @Transaction
+    public NinteiKanryoJoho get要介護認定完了情報(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        NinteiKanryoJoho entity = new NinteiKanryoJoho(dac.selectByKey(申請書管理番号));
+        return entity;
+    }
 }

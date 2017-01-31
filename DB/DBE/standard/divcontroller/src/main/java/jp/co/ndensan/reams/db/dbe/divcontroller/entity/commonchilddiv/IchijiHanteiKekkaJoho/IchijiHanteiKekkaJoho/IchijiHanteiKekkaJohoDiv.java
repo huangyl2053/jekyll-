@@ -832,5 +832,14 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     public void clear一次判定結果() {
         ichijiHanteiKekka = RString.EMPTY;
     }
-
+    
+    @Override
+    public void setDisabledBtnIchijiHantei(){
+        btnIchijiHantei.setDisabled(true);
+    }
+    
+    @Override
+    public void setAbledBtnIchijiHantei(){
+        btnIchijiHantei.setDisabled(false);
+    }
 }

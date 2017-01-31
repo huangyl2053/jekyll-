@@ -1180,3 +1180,10 @@ dbe/db/dbe/YouKaiGoNinTeiKekTesuChiMainPanel/onClick_btnSearch
 dbe/db/dbe/YouKaiGoNinTeiKekTesuChiMainPanel/onLoad
 dbe/db/dbe/YukoShinsakaiIinInputGuide/onLoad
 dbe/db/dbe/YukoShinsakaiIinInputGuide/onSelectBySelectButton_dgYukoShinsakaiIin
+dbe/db/dbe/IchijiHanteiExecuter/onLoad
+dbe/db/dbe/IchijiHanteiExecuter/onClick_backSearchResult
+dbe/db/dbe/IchijiHanteiExecuter/onClick_research
+dbe/db/dbe/IchijiHanteiExecuter/executeTransition
+dbe/db/dbe/IchijiHanteiExecuter/onClick_btnSave
+dbe/db/dbe/IchijiHanteiExecuter/onClick_btnKanryoShori
+dbe/db/dbe/IchijiHanteiExecuter/onChange_radShoriSelect

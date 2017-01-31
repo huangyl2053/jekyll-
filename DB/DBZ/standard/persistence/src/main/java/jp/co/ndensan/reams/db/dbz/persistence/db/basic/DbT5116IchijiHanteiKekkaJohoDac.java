@@ -73,4 +73,17 @@ public class DbT5116IchijiHanteiKekkaJohoDac implements ISaveable<DbT5116IchijiH
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定結果情報エンティティ"));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT5116IchijiHanteiKekkaJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。<br/>
+     * deleteの場合は物理削除します。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysical(DbT5116IchijiHanteiKekkaJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定結果情報エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

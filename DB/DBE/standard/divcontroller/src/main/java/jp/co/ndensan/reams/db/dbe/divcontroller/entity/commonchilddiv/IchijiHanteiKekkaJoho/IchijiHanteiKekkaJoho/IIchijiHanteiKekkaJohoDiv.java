@@ -36,4 +36,14 @@ public interface IIchijiHanteiKekkaJohoDiv extends ICommonChildDivBaseProperties
      * 一次判定結果をリセットします。
      */
     void clear一次判定結果();
+
+    /**
+     * 一次判定実行ボタンをDisabledにします。
+     */
+    void setDisabledBtnIchijiHantei();
+
+    /**
+     * 一次判定実行ボタンをabledにします。
+     */
+    void setAbledBtnIchijiHantei();
 }

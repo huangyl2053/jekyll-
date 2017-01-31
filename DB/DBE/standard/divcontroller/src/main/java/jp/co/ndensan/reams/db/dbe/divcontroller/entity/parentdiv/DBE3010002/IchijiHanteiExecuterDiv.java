@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanry
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,13 +22,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiExecuterDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("shoriSelectPanel")
+    private shoriSelectPanelDiv shoriSelectPanel;
     @JsonProperty("shinseishaInfo")
     private shinseishaInfoDiv shinseishaInfo;
     @JsonProperty("ccdKanryoMessage")
@@ -43,6 +46,24 @@ public class IchijiHanteiExecuterDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getshoriSelectPanel
+     * @return shoriSelectPanel
+     */
+    @JsonProperty("shoriSelectPanel")
+    public shoriSelectPanelDiv getShoriSelectPanel() {
+        return shoriSelectPanel;
+    }
+
+    /*
+     * setshoriSelectPanel
+     * @param shoriSelectPanel shoriSelectPanel
+     */
+    @JsonProperty("shoriSelectPanel")
+    public void setShoriSelectPanel(shoriSelectPanelDiv shoriSelectPanel) {
+        this.shoriSelectPanel = shoriSelectPanel;
+    }
+
     /*
      * getshinseishaInfo
      * @return shinseishaInfo
@@ -100,6 +121,16 @@ public class IchijiHanteiExecuterDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public RadioButton getRadShoriSelect() {
+        return this.getShoriSelectPanel().getRadShoriSelect();
+    }
+
+    @JsonIgnore
+    public void  setRadShoriSelect(RadioButton radShoriSelect) {
+        this.getShoriSelectPanel().setRadShoriSelect(radShoriSelect);
+    }
+
     @JsonIgnore
     public INinteiShinseishaKihonInfoDiv getCcdShinseishaInfo() {
         return this.getShinseishaInfo().getCcdShinseishaInfo();

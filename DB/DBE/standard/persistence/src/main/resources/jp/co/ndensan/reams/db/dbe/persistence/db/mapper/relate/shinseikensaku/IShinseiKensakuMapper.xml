@@ -271,7 +271,7 @@
             </if>
         </if>
         <if test="useNinteiKanryoJoho">
-            INNER JOIN
+            LEFT JOIN
                 rgdb."DbT5105NinteiKanryoJoho" DbT5105NinteiKanryoJoho
                 ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5105NinteiKanryoJoho."shinseishoKanriNo"
             <if test="isNowPhaseBlank">
