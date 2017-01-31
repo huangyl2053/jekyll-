@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.HomonChosaIraishoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
-import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyotokki.GaikyotokkiA4Report;
+import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
-import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -36,20 +35,20 @@ public class GaikyoTokki extends BatchProcessBase<HomonChosaIraishoRelateEntity>
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書tmp");
     private static final ReportIdDBZ 帳票 = ReportIdDBZ.DBE221051;
-    private HomonChosaIraishoProcessParamter processParamter;
-    private HomonChosaIraishoBusiness business;
+    private NinteiChosaProcessParamter processParamter;
+    private NinteiChosaBusiness business;
     @BatchWriter
-    private BatchReportWriter<GaikyotokkiA4ReportSource> batchReportWriter;
-    private ReportSourceWriter<GaikyotokkiA4ReportSource> reportSourceWriter;
+    private BatchReportWriter<ChosahyoGaikyochosaReportSource> batchReportWriter;
+    private ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
-        business = new HomonChosaIraishoBusiness(processParamter);
+        business = new NinteiChosaBusiness(processParamter);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHomonChosaIraishoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaMybitisParamter());
     }
 
     @Override
@@ -60,8 +59,7 @@ public class GaikyoTokki extends BatchProcessBase<HomonChosaIraishoRelateEntity>
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        GaikyotokkiA4Business 概況特記 = business.setDBE221051Item(entity);
-        GaikyotokkiA4Report report = new GaikyotokkiA4Report(概況特記);
+        ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity));
         report.writeBy(reportSourceWriter);
     }
 

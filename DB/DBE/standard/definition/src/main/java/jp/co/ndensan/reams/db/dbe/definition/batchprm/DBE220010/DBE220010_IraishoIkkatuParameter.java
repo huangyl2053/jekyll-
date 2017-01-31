@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaIraiProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoSakuseiProcessParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,34 +35,29 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String HAKKOBI = "hakkobi";
     private static final String TEISHUTSU_KIGEN = "teishutsuKigen";
     private static final String KYOTSU_HIZUKE = "kyotsuHizuke";
-    private static final String NINTEI_CHOSA_IRAI_CHOHYO = "ninteiChosaIraiChohyo";
-    private static final String NINTEI_CHOSAIRAI_HAKKOU = "ninteiChosairaiHakkou";
+    private static final String IS_NINTEI_CHOSA_IRAI_ICHIRAN = "isNinteiChosaIraiIchiran";
+    private static final String NINTEI_CHOSAIRAI_HAKKO = "ninteiChosairaiHakko";
     private static final String IKENSHO_SAKUSEIIRAI = "ikenshoSakuseiirai";
-    private static final String IKENSHO_SAKUSEI_SEIKYUU = "ikenshoSakuseiSeikyuu";
+    private static final String IKENSHO_SAKUSEI_SEIKYU = "ikenshoSakuseiSeikyuu";
     private static final String IKENSHO_SAKUSEI_IRAISHO = "shujiiIkenshoSakuseiIraisho";
-    private static final String IKENSHO_KINYUU = "ikenshoKinyuu";
-    private static final String IKENSHO_KINYUU_OCR = "ikenshoKinyuuOCR";
-    private static final String IKENSHO_KINYUU_DESIGN = "ikenshoKinyuuDesign";
-    private static final String IKENSHO_SAKUSEI_SEIKYUUSHO = "ikenshoSakuseiSeikyuusho";
-    private static final String IKENSHO_TEISHUTU = "ikenshoTeishutu";
-    private static final String IKENSHO_SAKUSEI_IRAI_HAKKOU = "ikenshoSakuseiIraiHakkou";
+    private static final String IKENSHO_KINYU = "ikenshoKinyuu";
+    private static final String IKENSHO_SAKUSEI_SEIKYUSHO = "ikenshoSakuseiSeikyuusho";
+    private static final String IKENSHO_SAKUSEI_IRAI_HAKKO = "ikenshoSakuseiIraiHakkou";
     private static final String NINTEICHOSAIRAILIST = "ninteiChosaIraiList";
     private static final String SHUJIIIKENSHOSAKUSEIIRAILIST = "shujiiIkenshoSakuseiIraiList";
     private static final String 認定調査依頼履歴一覧 = "認定調査依頼履歴一覧";
     private static final String 主治医意見書作成依頼履歴一覧 = "主治医意見書作成依頼履歴一覧";
     private static final String 文書番号 = "文書番号";
+    private static final String 市町村コード = "市町村コード";
     private static final String IS_NINTEI_CHOSA_IRAISHO = "isNinteiChosaIraisho";
-    private static final String IS_NINTEI_CHOSAHYO_YOSHI = "isNinteiChosahyoYoshi";
-    private static final String IS_NINTEI_CHOSAHYO_OCR = "isNinteiChosahyoOcr";
+    private static final String IS_NINTEI_CHOSAHYO_GAIKYO = "isNinteiChosahyoGaikyo";
+    private static final String IS_NINTEI_CHOSAHYO_KIHON = "isNinteiChosahyoKihon";
+    private static final String IS_NINTEI_CHOSAHYO_TOKKI = "isNinteiChosahyoTokki";
+    private static final String IS_NINTEI_CHOSAHYO_GAIKYOKIHON = "isNinteiChosahyoGaikyoKihon";
+    private static final String IS_NINTEI_CHOSAHYO_GAIKYOTOKKI = "isNinteiChosahyoGaikyoTokki";
     private static final String IS_NINTEI_CHOSA_CHECK_HYO = "isNinteiChosaCheckHyo";
-    private static final String IS_TOKKI_YOSHI = "isTokkiYoshi";
-    private static final String IS_TOKKI_OCR = "isTokkiOcr";
-    private static final String IS_TOKKI_HAS_KOMOKU = "isTokkiHasKomoku";
-    private static final String IS_TOKKI_NO_KOMOKU = "isTokkiNoKomoku";
+    private static final String IS_TOKKI_HAS_CHOSAGUN = "isTokkiHasChosagun";
     private static final String IS_TOKKI_FREE_TYPE = "isTokkiFreeType";
-    private static final String IS_TOKKI_INPUT_TYPE = "isTokkiInputType";
-    private static final String IS_GAIKYOU_TOKKI = "isGaikyouTokki";
-    private static final String IS_ZENKAI_NINTEI_CHOSAHYO = "isZenkaiNinteiChosahyo";
 
     @BatchParameter(key = NINTEIO_CHOSA_IRAISHO, name = "認定調査依頼書印刷区分")
     private RString ninteioChosaIraisho;
@@ -71,63 +66,52 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     @BatchParameter(key = NINTEICHOSAIRAILIST, name = "認定調査依頼リスト")
     private transient List<GridParameter> ninteiChosaIraiList;
 
-    @BatchParameter(key = NINTEI_CHOSA_IRAI_CHOHYO, name = "認定調査依頼一覧表出力区分")
-    private boolean ninteiChosaIraiChohyo;
     @BatchParameter(key = IS_NINTEI_CHOSA_IRAISHO, name = "認定調査依頼書")
     private boolean is認定調査依頼書;
-    @BatchParameter(key = IS_NINTEI_CHOSAHYO_YOSHI, name = "認定調査票(デザイン用紙)")
-    private boolean is認定調査票_デザイン用紙;
-    @BatchParameter(key = IS_TOKKI_YOSHI, name = "特記事項(デザイン用紙)")
-    private boolean is特記事項_デザイン用紙;
-    @BatchParameter(key = IS_NINTEI_CHOSAHYO_OCR, name = "認定調査票OCR")
-    private boolean is認定調査票OCR;
-    @BatchParameter(key = IS_TOKKI_OCR, name = "特記事項OCR")
-    private boolean is特記事項OCR;
+    @BatchParameter(key = IS_NINTEI_CHOSA_IRAI_ICHIRAN, name = "認定調査依頼一覧表出力区分")
+    private boolean is認定調査依頼一覧;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_GAIKYO, name = "認定調査票(概況調査)")
+    private boolean is認定調査票_概況調査;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_KIHON, name = "認定調査票(基本調査)")
+    private boolean is認定調査票_基本調査;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_TOKKI, name = "認定調査票(特記事項)")
+    private boolean is認定調査票_特記事項;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_GAIKYOKIHON, name = "認定調査票(概況基本)")
+    private boolean is認定調査票_概況基本;
+    @BatchParameter(key = IS_NINTEI_CHOSAHYO_GAIKYOTOKKI, name = "認定調査票(概況特記)")
+    private boolean is認定調査票_概況特記;
     @BatchParameter(key = IS_NINTEI_CHOSA_CHECK_HYO, name = "認定調査差異チェック票")
     private boolean is認定調査差異チェック票;
-    @BatchParameter(key = IS_GAIKYOU_TOKKI, name = "概況特記")
-    private boolean is概況特記;
-    @BatchParameter(key = IS_TOKKI_HAS_KOMOKU, name = "特記事項(項目あり)")
-    private boolean is特記事項_項目あり;
-    @BatchParameter(key = IS_TOKKI_NO_KOMOKU, name = "特記事項(項目無し)")
-    private boolean is特記事項_項目無し;
+    @BatchParameter(key = IS_TOKKI_HAS_CHOSAGUN, name = "特記事項(調査群記載あり)")
+    private boolean is特記事項_調査群;
     @BatchParameter(key = IS_TOKKI_FREE_TYPE, name = "特記事項(フリータイプ)")
     private boolean is特記事項_フリータイプ;
-    @BatchParameter(key = IS_TOKKI_INPUT_TYPE, name = "手入力タイプ")
-    private boolean is手入力タイプ;
-    @BatchParameter(key = IS_ZENKAI_NINTEI_CHOSAHYO, name = "前回認定調査結果との比較表")
-    private boolean is前回認定調査結果との比較表;
-    @BatchParameter(key = NINTEI_CHOSAIRAI_HAKKOU, name = "認定調査依頼発行一覧表出力区分")
-    private boolean ninteiChosairaiHakkou;
+    @BatchParameter(key = NINTEI_CHOSAIRAI_HAKKO, name = "認定調査依頼発行一覧表出力区分")
+    private boolean is認定調査依頼発行一覧;
     @BatchParameter(key = 認定調査依頼履歴一覧, name = "認定調査依頼履歴一覧")
     private boolean is認定調査依頼履歴一覧;
+
     @BatchParameter(key = SHUJIIIKENSHO_SAKUSEI_IRAI, name = "主治医意見書作成依頼印刷区分")
     private RString shujiiikenshoSakuseiIrai;
     @BatchParameter(key = SHUJIIIKENSHO, name = "意見書印刷区分")
     private RString shujiiIkensho;
-
     @BatchParameter(key = SHUJIIIKENSHOSAKUSEIIRAILIST, name = "主治医意見書作成依頼リスト")
     private transient List<GridParameter> shujiiIkenshoSakuseiIraiList;
+
     @BatchParameter(key = IKENSHO_SAKUSEIIRAI, name = "主治医意見書作成依頼一覧表出力区分")
-    private boolean ikenshoSakuseiirai;
-    @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUU, name = "主治医意見書作成料請求一覧表出力区分")
-    private boolean ikenshoSakuseiSeikyuu;
+    private boolean ikenshoSakuseiIraiIchiran;
     @BatchParameter(key = IKENSHO_SAKUSEI_IRAISHO, name = "主治医意見書作成依頼書出力区分")
     private boolean shujiiIkenshoSakuseiIraisho;
-    @BatchParameter(key = IKENSHO_KINYUU, name = "主治医意見書記入用紙出力区分")
-    private boolean ikenshoKinyuu;
-    @BatchParameter(key = IKENSHO_KINYUU_OCR, name = "主治医意見書記入用紙OCR出力区分")
-    private boolean ikenshoKinyuuOCR;
-    @BatchParameter(key = IKENSHO_KINYUU_DESIGN, name = "主治医意見書記入用紙(デザイン用紙)出力区分")
-    private boolean ikenshoKinyuuDesign;
-    @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUUSHO, name = "主治医意見書作成料請求書出力区分")
-    private boolean ikenshoSakuseiSeikyuusho;
-    @BatchParameter(key = IKENSHO_TEISHUTU, name = "介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分")
-    private boolean ikenshoTeishutu;
-    @BatchParameter(key = IKENSHO_SAKUSEI_IRAI_HAKKOU, name = "主治医意見書作成依頼発行一覧表出力区分")
-    private boolean ikenshoSakuseiIraiHakkou;
+    @BatchParameter(key = IKENSHO_KINYU, name = "主治医意見書記入用紙出力区分")
+    private boolean ikenshoKinyu;
+    @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUSHO, name = "主治医意見書作成料請求書出力区分")
+    private boolean ikenshoSakuseiSeikyusho;
+    @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYU, name = "主治医意見書作成料請求一覧表出力区分")
+    private boolean ikenshoSakuseiSeikyuIchiran;
+    @BatchParameter(key = IKENSHO_SAKUSEI_IRAI_HAKKO, name = "主治医意見書作成依頼発行一覧表出力区分")
+    private boolean ikenshoSakuseiHakkoIchiran;
     @BatchParameter(key = 主治医意見書作成依頼履歴一覧, name = "主治医意見書作成依頼履歴一覧")
-    private boolean is主治医意見書依頼履歴一覧;
+    private boolean ikenshoSakuseiRirekiIchiran;
 
     @BatchParameter(key = IRAIFROMYMD, name = "依頼開始日")
     private RString iraiFromYMD;
@@ -141,6 +125,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString kyotsuHizuke;
     @BatchParameter(key = 文書番号, name = "文書番号")
     private RString bunshoNo;
+    @BatchParameter(key = 市町村コード, name = "市町村コード")
+    private RString shichosonCode;
 
     /**
      * 主治医意見書作成依頼発行一覧表ですためのprocessのパラメータを生成します。
@@ -173,31 +159,30 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
      *
      * @return HomonChosaIraishoProcessParamter
      */
-    public HomonChosaIraishoProcessParamter toHomonChosaIraishoProcessParamter() {
-        return new HomonChosaIraishoProcessParamter(
+    public NinteiChosaProcessParamter toNinteiChosaProcessParamter() {
+        return new NinteiChosaProcessParamter(
                 ninteioChosaIraisho,
                 ninteiChosahyo,
                 ninteiChosaIraiList,
-                ninteiChosaIraiChohyo,
                 is認定調査依頼書,
-                is認定調査票_デザイン用紙,
-                is特記事項_デザイン用紙,
-                is認定調査票OCR,
-                is特記事項OCR,
+                is認定調査依頼一覧,
+                is認定調査票_概況調査,
+                is認定調査票_基本調査,
+                is認定調査票_特記事項,
+                is認定調査票_概況基本,
+                is認定調査票_概況特記,
                 is認定調査差異チェック票,
-                is概況特記,
-                is前回認定調査結果との比較表,
-                is特記事項_項目あり,
-                is特記事項_項目無し,
+                is特記事項_調査群,
                 is特記事項_フリータイプ,
-                is手入力タイプ,
+                is認定調査依頼発行一覧,
+                is認定調査依頼履歴一覧,
                 iraiFromYMD,
                 iraiToYMD,
                 hakkobi,
                 teishutsuKigen,
                 kyotsuHizuke,
-                is認定調査依頼履歴一覧,
-                bunshoNo);
+                bunshoNo,
+                shichosonCode);
     }
 
     /**
@@ -205,23 +190,23 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
      *
      * @return ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter
      */
-    public ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter() {
-        return new ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter(shujiiikenshoSakuseiIrai,
+    public ShujiiIkenshoProcessParamter toShujiiIkenshoProcessParamter() {
+        return new ShujiiIkenshoProcessParamter(shujiiikenshoSakuseiIrai,
                 shujiiIkensho,
                 shujiiIkenshoSakuseiIraiList,
-                ikenshoSakuseiirai,
-                ikenshoSakuseiSeikyuu,
                 shujiiIkenshoSakuseiIraisho,
-                ikenshoKinyuu,
-                ikenshoKinyuuOCR,
-                ikenshoKinyuuDesign,
-                ikenshoSakuseiSeikyuusho,
-                ikenshoTeishutu,
+                ikenshoSakuseiIraiIchiran,
+                ikenshoKinyu,
+                ikenshoSakuseiSeikyusho,
+                ikenshoSakuseiSeikyuIchiran,
+                ikenshoSakuseiHakkoIchiran,
+                ikenshoSakuseiRirekiIchiran,
                 iraiFromYMD,
                 iraiToYMD,
                 hakkobi,
                 teishutsuKigen,
                 kyotsuHizuke,
-                bunshoNo);
+                bunshoNo,
+                shichosonCode);
     }
 }

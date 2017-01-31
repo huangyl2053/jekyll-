@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.HomonChosaIraishoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairairirekiichiran.ChosairairirekiIchiranBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairairirekiichiran.ChosairairirekiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.chosairairirekiichiran.ChosairairirekiIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -39,8 +39,8 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査依頼履歴一覧");
     private static final ReportId 帳票ID = ReportIdDBE.DBE220004.getReportId();
-    private HomonChosaIraishoProcessParamter processParamter;
-    private HomonChosaIraishoBusiness business;
+    private NinteiChosaProcessParamter processParamter;
+    private NinteiChosaBusiness business;
 //    private IHomonChosaIraishoMapper mapper;
 //    private List<RString> 被保険者番号List;
 
@@ -50,7 +50,7 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
 
     @Override
     protected void initialize() {
-        business = new HomonChosaIraishoBusiness(processParamter);
+        business = new NinteiChosaBusiness(processParamter);
 //        mapper = getMapper(IHomonChosaIraishoMapper.class);
 //        被保険者番号List = new ArrayList<>();
 //        List<HomonChosaIraishoRelateEntity> 認定調査依頼情報
@@ -63,7 +63,7 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
     @Override
     protected IBatchReader createReader() {
 //        return new BatchDbReader(MYBATIS_SELECT_ID, ShujiiIkenshoMybatisParameter.createSelectByKeyParam(被保険者番号List));
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHomonChosaIraishoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaMybitisParamter());
     }
 
     @Override
@@ -105,7 +105,7 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
                 new RString(String.valueOf(reportSourceWriter.pageCount().value())),
                 new RString("無し"),
                 new RString("－"),
-                new HomonChosaIraishoBusiness(processParamter).set出力条件());
+                business.set出力条件());
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
     }

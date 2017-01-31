@@ -63,7 +63,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get訪問調査依頼書" resultMap="resultMap_getHomonChosaIraisho"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaMybitisParamter" fetchSize="500">
         SELECT
         DISTINCT
         pickout."shinseishoKanriNo" AS "shinseishoKanriNo"
@@ -831,7 +831,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="get認定調査依頼履歴一覧" resultMap="resultMap_getNinteiChosaIraiRirekiIchiran"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaMybitisParamter"
             fetchSize="500">
         WITH rireki AS(
         SELECT
@@ -907,7 +907,7 @@
     </select>
     
     <select resultOrdered="true" id="get訪問調査依頼書tmp" resultMap="resultMap_getHomonChosaIraishoTmp"
-                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter" fetchSize="500">
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaMybitisParamter" fetchSize="500">
         SELECT
         DISTINCT
         *

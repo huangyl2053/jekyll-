@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.ShujiiIkenshoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoirairirekiichiran.IkenshoirairirekiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshoirairirekiichiran.IkenshoirairirekiIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -35,8 +35,8 @@ public class ShujiiIkensho_DBE230004Process extends BatchProcessBase<ShujiiIkens
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書作成依頼履歴一覧");
     private static final ReportId 帳票ID = ReportIdDBE.DBE230004.getReportId();
-    private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
-    private IraishoIkkatsuHakkoBusiness business;
+    private ShujiiIkenshoProcessParamter processParamter;
+    private ShujiiIkenshoBusiness business;
 
     @BatchWriter
     private BatchReportWriter<IkenshoirairirekiIchiranReportSource> batchWriter;
@@ -48,7 +48,7 @@ public class ShujiiIkensho_DBE230004Process extends BatchProcessBase<ShujiiIkens
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenMybatisParameter());
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ShujiiIkensho_DBE230004Process extends BatchProcessBase<ShujiiIkens
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-        business = new IraishoIkkatsuHakkoBusiness(entity, processParamter);
+        business = new ShujiiIkenshoBusiness(entity, processParamter);
         IkenshoirairirekiIchiranReport report = IkenshoirairirekiIchiranReport.createFrom(
                 business.setDBE230004Item());
         report.writeBy(reportSourceWriter);

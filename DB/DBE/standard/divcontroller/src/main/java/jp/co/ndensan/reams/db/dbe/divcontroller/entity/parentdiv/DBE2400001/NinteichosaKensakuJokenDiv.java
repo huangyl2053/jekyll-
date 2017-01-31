@@ -25,8 +25,8 @@ public class NinteichosaKensakuJokenDiv extends Panel {
      */
     @JsonProperty("txtNinteiChosaIraibi")
     private TextBoxDateRange txtNinteiChosaIraibi;
-    @JsonProperty("chkNinteioChosaIraisho")
-    private CheckBoxList chkNinteioChosaIraisho;
+    @JsonProperty("chkNinteiChosaIraisho")
+    private CheckBoxList chkNinteiChosaIraisho;
     @JsonProperty("txtChosaDispMax")
     private TextBoxNum txtChosaDispMax;
     @JsonProperty("chkNinteiChosahyo")
@@ -61,21 +61,21 @@ public class NinteichosaKensakuJokenDiv extends Panel {
     }
 
     /*
-     * getchkNinteioChosaIraisho
-     * @return chkNinteioChosaIraisho
+     * getchkNinteiChosaIraisho
+     * @return chkNinteiChosaIraisho
      */
-    @JsonProperty("chkNinteioChosaIraisho")
-    public CheckBoxList getChkNinteioChosaIraisho() {
-        return chkNinteioChosaIraisho;
+    @JsonProperty("chkNinteiChosaIraisho")
+    public CheckBoxList getChkNinteiChosaIraisho() {
+        return chkNinteiChosaIraisho;
     }
 
     /*
-     * setchkNinteioChosaIraisho
-     * @param chkNinteioChosaIraisho chkNinteioChosaIraisho
+     * setchkNinteiChosaIraisho
+     * @param chkNinteiChosaIraisho chkNinteiChosaIraisho
      */
-    @JsonProperty("chkNinteioChosaIraisho")
-    public void setChkNinteioChosaIraisho(CheckBoxList chkNinteioChosaIraisho) {
-        this.chkNinteioChosaIraisho = chkNinteioChosaIraisho;
+    @JsonProperty("chkNinteiChosaIraisho")
+    public void setChkNinteiChosaIraisho(CheckBoxList chkNinteiChosaIraisho) {
+        this.chkNinteiChosaIraisho = chkNinteiChosaIraisho;
     }
 
     /*

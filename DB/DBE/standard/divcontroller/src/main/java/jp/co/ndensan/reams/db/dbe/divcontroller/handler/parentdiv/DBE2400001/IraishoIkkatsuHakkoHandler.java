@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2400001;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraisho.IraishoIkkatsuHakkoResult;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.DBE220010_IraishoIkkatuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.IraishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgNinteiChosaIraiTaishoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row;
@@ -21,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
@@ -32,18 +31,44 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class IraishoIkkatsuHakkoHandler {
 
-    private static final RString STATE_NINTEIO = new RString("1");
+    private static final RString STATE_NINTEI = new RString("1");
     private static final RString STATE_SHUJII = new RString("2");
     private static final RString COMMON_SELECTED = new RString("key0");
     private static final RString SHUTSU_CHECKED = new RString("key2");
+    private static final RString SELECTED_NOPRINT = new RString("key0");
+    private static final RString SELECTED_PRINT = new RString("key1");
     private static final RString SHINSEI_KASAN = new RString("2");
-    private static final RString OCR = new RString("1");
+    private static final RString NO_PRINT = new RString("1");
+    private static final RString PRINT = new RString("2");
+    private static final RString PRINT_AND_NOPRINT = new RString("3");
+    private static final RString 出力する = new RString("1");
+    private static final RString 選択 = new RString("1");
+    private static final RString 依頼書選択_単票 = new RString("1");
+    private static final RString 依頼書選択_一覧 = new RString("2");
+    private static final RString 片面印刷 = new RString("1");
+    private static final RString 依頼書チェックボックス_単票 = new RString("0");
+    private static final RString 依頼書チェックボックス_一覧 = new RString("1");
+    private static final RString 調査票チェックボックス_概況調査 = new RString("0");
+    private static final RString 調査票チェックボックス_基本調査 = new RString("1");
+    private static final RString 調査票チェックボックス_特記事項 = new RString("2");
+    private static final RString 調査票チェックボックス_概況特記 = new RString("0");
+    private static final RString 調査票チェックボックス_差異 = new RString("0");
+    private static final RString 調査票チェックボックス_特記事項_調査群 = new RString("0");
+    private static final RString 調査票チェックボックス_特記事項_フリー = new RString("1");
+    private static final RString 調査票チェックボックス_発行一覧 = new RString("0");
+    private static final RString 調査票チェックボックス_履歴一覧 = new RString("0");
+    private static final RString 意見書チェックボックス_記入用紙 = new RString("0");
+    private static final RString 意見書チェックボックス_請求書 = new RString("0");
+    private static final RString 意見書チェックボックス_請求一覧 = new RString("0");
+    private static final RString 意見書チェックボックス_発行一覧 = new RString("0");
+    private static final RString 意見書チェックボックス_履歴一覧 = new RString("0");
     private static final RString 依頼書期限設定_自動 = new RString("1");
     private static final RString 依頼書期限設定_空欄 = new RString("2");
     private static final RString 依頼書期限設定_共通 = new RString("3");
     private static final RString 依頼書期限ラジオボタン_自動 = new RString("key0");
     private static final RString 依頼書期限ラジオボタン_空欄 = new RString("key1");
     private static final RString 依頼書期限ラジオボタン_共通 = new RString("key2");
+    private static final RString CONFIGVALUE1 = new RString("1");
 
     private static final RString SELECTED_NINTEI_CHOSA = new RString("key0");
     private static final RString SELECTED_SHUJII_IKENSHO = new RString("key1");
@@ -62,66 +87,70 @@ public class IraishoIkkatsuHakkoHandler {
     /**
      *
      * 依頼書一括発行初期化の設定します。
-     *
-     * @param ninteiShinsei 認定調査期限設定方法
      */
-    public void load(RString ninteiShinsei) {
+    public void load() {
         div.getRadTaishoSentaku().setSelectedKey(COMMON_SELECTED);
-        div.getDgNinteiChosaIraiTaishoIchiran().init();
-        div.getTxtNinteiChosaIraibi().clearFromValue();
-        div.getTxtNinteiChosaIraibi().clearToValue();
-        div.getTxtChosaDispMax().clearValue();
-        div.getNinteiChosaIraiTaishoIchiran().getDgNinteiChosaIraiTaishoIchiran().getDataSource().clear();
-        List<RString> selectKeys = new ArrayList<>();
-        selectKeys.add(COMMON_SELECTED);
-        div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
-        div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
-        initializeShujiiChkShinseiTani();
-        initializeNinteiChkShinseiTani();
-        setNinteiChkShinseiTani(true);
-        div.getChkNinteiChosaIraiIchiran().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkNinteiChosaShinseiTani().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
-        setHakkobiAndTeishutsuKigen(ninteiShinsei);
-        div.setState(STATE_NINTEIO);
-        div.getTxtChosaDispMax().setValue(new Decimal(DbBusinessConfig
-                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtChosaDispMax().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getChkchosairaiRireki().setSelectedItemsByKey(Collections.<RString>emptyList());
+        div.getTxtIkenshoDispMax().setMaxValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+    }
+
+    /**
+     *
+     * 依頼書一括発行初期化の設定します。
+     */
+    public void loadNinteiChosa() {
+        div.getTxtNinteiChosaIraibi().clearFromValue();
+        div.getTxtNinteiChosaIraibi().clearToValue();
+        div.getTxtChosaDispMax().setValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getDgNinteiChosaIraiTaishoIchiran().getDataSource().clear();
+        List<RString> selectKeys = new ArrayList<>();
+        selectKeys.add(COMMON_SELECTED);
+        div.getChkNinteiChosaIraisho().setSelectedItemsByKey(selectKeys);
+        div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
+        div.setState(STATE_NINTEI);
+    }
+
+    /**
+     *
+     * 主治医意見書Divの設定します。
+     */
+    public void loadShuJiiIKensho() {
+        div.getTxtShujiiIkenshoSakuseiIraibi().clearFromValue();
+        div.getTxtShujiiIkenshoSakuseiIraibi().clearToValue();
+        div.getTxtIkenshoDispMax().setValue(new Decimal(DbBusinessConfig
+                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getDataSource().clear();
+        List<RString> selectKeys = new ArrayList<>();
+        selectKeys.add(COMMON_SELECTED);
+        div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
+        div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
+        div.setState(STATE_SHUJII);
+    }
+
+    /**
+     *
+     * 依頼書一括発行初期化の設定します。
+     */
+    public void setNinteiChosa() {
+        initializeNinteiChkShinseiTani();
+        setNinteiChkShinseiTani();
+        setHakkobiAndTeishutsuKigen();
         div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE220001.getReportId());
     }
 
     /**
      *
      * 主治医意見書Divの設定します。
-     *
-     * @param ninteiShinsei 認定調査期限設定方法
      */
-    public void shuziiiKenshoLoad(RString ninteiShinsei) {
-        div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().init();
-        div.getTxtShujiiIkenshoSakuseiIraibi().clearFromValue();
-        div.getTxtShujiiIkenshoSakuseiIraibi().clearToValue();
-        div.getTxtIkenshoDispMax().clearValue();
-        div.getShujiiIkenshoSakuseiIraiTaishoIchiran().getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getDataSource().clear();
-        List<RString> selectKeys = new ArrayList<>();
-        selectKeys.add(COMMON_SELECTED);
-        div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
-        div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
-        setShujiiChkShinseiTani(true);
-        div.getChkShujiiIkenshoSakuseiIrai().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkShujiiIkenshoSakuseiSeikyu().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkShujiiIkenshoShinseiTani().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
-        setHakkobiAndTeishutsuKigen(ninteiShinsei);
-        div.setState(STATE_SHUJII);
-        div.getTxtIkenshoDispMax().setValue(new Decimal(DbBusinessConfig
-                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtIkenshoDispMax().setMaxValue(new Decimal(DbBusinessConfig
-                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getChkikenshiiraiRireki().setSelectedItemsByKey(Collections.<RString>emptyList());
+    public void setShuJiiIKensho() {
+        initializeShujiiChkShinseiTani();
+        setShujiiChkShinseiTani();
+        setHakkobiAndTeishutsuKigen();
         div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE230001.getReportId());
     }
 
@@ -131,7 +160,7 @@ public class IraishoIkkatsuHakkoHandler {
      * @param resultList 対象調査員一覧データ
      */
     public void setDataGrid(List<IraishoIkkatsuHakkoResult> resultList) {
-        if (STATE_NINTEIO.equals(div.getState())) {
+        if (STATE_NINTEI.equals(div.getState())) {
             List<dgNinteiChosaIraiTaishoIchiran_Row> rowList = new ArrayList<>();
             div.getDgNinteiChosaIraiTaishoIchiran().getGridSetting().setSelectedRowCount(resultList.size());
             int count = 1;
@@ -176,31 +205,30 @@ public class IraishoIkkatsuHakkoHandler {
         }
     }
 
-    /**
-     * 申請単位チェックボックス選択の場合、ある他のチェックボックスを設定します。
-     */
-    public void setChkShinseiTani() {
-        if (STATE_NINTEIO.equals(div.getState())) {
-            if (!div.getChkNinteiChosaShinseiTani().getSelectedKeys().isEmpty()) {
-                setNinteiChkShinseiTani(false);
-            } else {
-                setNinteiChkShinseiTani(true);
-            }
-        }
-        if (STATE_SHUJII.equals(div.getState())) {
-            if (!div.getChkShujiiIkenshoShinseiTani().getSelectedKeys().isEmpty()) {
-                setShujiiChkShinseiTani(false);
-            } else {
-                setShujiiChkShinseiTani(true);
-            }
-        }
-    }
-
+//    /**
+//     * 申請単位チェックボックス選択の場合、ある他のチェックボックスを設定します。
+//     */
+//    public void setChkShinseiTani() {
+//        if (STATE_NINTEI.equals(div.getState())) {
+//            if (!div.getChkNinteiChosaShinseiTani().getSelectedKeys().isEmpty()) {
+//                setNinteiChkShinseiTani(false);
+//            } else {
+//                setNinteiChkShinseiTani(true);
+//            }
+//        }
+//        if (STATE_SHUJII.equals(div.getState())) {
+//            if (!div.getChkShujiiIkenshoShinseiTani().getSelectedKeys().isEmpty()) {
+//                setShujiiChkShinseiTani(false);
+//            } else {
+//                setShujiiChkShinseiTani(true);
+//            }
+//        }
+//    }
     /**
      * 共通日付txtの使用可否などを設定します。
      */
     public void setTxtKyotsuHizuke() {
-        boolean is共通日付 = SHUTSU_CHECKED.equals(div.getRadTeishutsuKigen().getSelectedKey());
+        boolean is共通日付 = 依頼書期限ラジオボタン_共通.equals(div.getRadTeishutsuKigen().getSelectedKey());
         if (is共通日付) {
             RDate systemDate = RDate.getNowDate();
             RString 加算日数 = new RString("0");
@@ -221,12 +249,12 @@ public class IraishoIkkatsuHakkoHandler {
      * 条件をクリアするボタンの押す処理です。
      */
     public void clearJoken() {
-        if (STATE_NINTEIO.equals(div.getState())) {
+        if (STATE_NINTEI.equals(div.getState())) {
             div.getTxtNinteiChosaIraibi().clearFromValue();
             div.getTxtNinteiChosaIraibi().clearToValue();
             List<RString> selectKeys = new ArrayList<>();
             selectKeys.add(COMMON_SELECTED);
-            div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
+            div.getChkNinteiChosaIraisho().setSelectedItemsByKey(selectKeys);
             div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
             div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
             div.getTxtChosaDispMax().clearValue();
@@ -248,113 +276,198 @@ public class IraishoIkkatsuHakkoHandler {
     }
 
     private void initializeShujiiChkShinseiTani() {
-        RDate 基準日 = RDate.getNowDate();
-        boolean is作成依頼書不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_意見書作成依頼書_出力有無, 基準日);
-        boolean is記入用紙不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_記入用紙_出力有無, 基準日);
-        boolean is記入用紙OCR不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_記入用紙OCR_出力有無, 基準日);
-        boolean is記入用紙デザイン不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_デザイン用紙_出力有無, 基準日);
-        boolean is作成料請求書不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_作成料請求書_出力有無, 基準日);
-        boolean is提出意見書不使用 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_提出意見書_出力有無, 基準日);
-        div.getChkShujiiIkenshoSakuseiIraisho().setDisplayNone(is作成依頼書不使用);
-        div.getChkShujiIkenshoyoshi().setDisplayNone(is記入用紙不使用);
-        div.getChkShujiiIkenshoyoshiOcr().setWrap(is記入用紙不使用);
-        div.getChkShujiiIkenshoyoshiOcr().setDisplayNone(is記入用紙OCR不使用);
-        div.getChkShujiiIkenshoyoshiDesign().setWrap(is記入用紙不使用 && is記入用紙OCR不使用);
-        div.getChkShujiiIkenshoyoshiDesign().setDisplayNone(is記入用紙デザイン不使用);
-        div.getChkShujiiIkenshoSakuseiryoSeikyusho().setWrap(is記入用紙不使用 && is記入用紙OCR不使用 && is記入用紙デザイン不使用);
-        div.getChkShujiiIkenshoSakuseiryoSeikyusho().setDisplayNone(is作成料請求書不使用);
-        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisplayNone(is提出意見書不使用);
-    }
+        boolean is意見書依頼書出力 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_一括_作成依頼書_出力有無);
+        boolean is記入用紙出力 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_一括_記入用紙_出力有無);
+        boolean is請求書出力 = is使用ByConfig(ConfigNameDBE.主治医意見書作成依頼_一括_請求書_出力有無);
+        boolean is連動印刷 = is使用ByConfig(ConfigNameDBE.主治医意見書作成請求書連動印刷);
 
-    private void setShujiiChkShinseiTani(boolean flag) {
-        RDate 基準日 = RDate.getNowDate();
-        div.getChkShujiiIkenshoSakuseiIraisho().setDisabled(flag);
-        div.getChkShujiIkenshoyoshi().setDisabled(flag);
-        div.getChkShujiiIkenshoyoshiOcr().setDisabled(flag);
-        div.getChkShujiiIkenshoyoshiDesign().setDisabled(flag);
-        div.getChkShujiiIkenshoSakuseiryoSeikyusho().setDisabled(flag);
-        div.getChkShindanMeireishoAndTeishutsuIraisho().setDisabled(flag);
-        setChkSelected(div.getChkShujiiIkenshoSakuseiIraisho(), ConfigNameDBE.主治医意見書作成依頼_手動_意見書作成依頼書, 基準日, flag);
-        setChkSelected(div.getChkShujiIkenshoyoshi(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙, 基準日, flag);
-        setChkSelected(div.getChkShujiiIkenshoyoshiOcr(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙OCR, 基準日, flag);
-        setChkSelected(div.getChkShujiiIkenshoyoshiDesign(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書記入用紙_デザイン用紙, 基準日, flag);
-        setChkSelected(div.getChkShujiiIkenshoSakuseiryoSeikyusho(), ConfigNameDBE.主治医意見書作成依頼_手動_主治医意見書作成料請求書, 基準日, flag);
-        setChkSelected(div.getChkShindanMeireishoAndTeishutsuIraisho(), ConfigNameDBE.主治医意見書作成依頼_手動_介護保険指定医依頼兼主治医意見書提出意見書, 基準日, flag);
-    }
-
-    private void initializeNinteiChkShinseiTani() {
-        RDate 基準日 = RDate.getNowDate();
-        boolean isデザイン用紙不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_デザイン用紙_出力有無, 基準日);
-        boolean is特記デザイン用紙不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_デザイン用紙_出力有無, 基準日);
-        boolean isOCR不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_OCR_出力有無, 基準日);
-        boolean is特記OCR不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_OCR_出力有無, 基準日);
-        boolean is差異チェック票不使用 = is使用ByConfig(ConfigNameDBE.認定調査差異チェック票_出力有無, 基準日);
-        boolean is概要特記不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_概況特記_出力有無, 基準日);
-        boolean is特記事項項目有不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_項目有り_出力有無, 基準日);
-        boolean is特記事項項目無不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_項目無し_出力有無, 基準日);
-        boolean is特記事項フリー不使用 = is使用ByConfig(ConfigNameDBE.認定調査票_特記事項_フリータイプ_出力有無, 基準日);
-        div.getChkChosaDesign().setDisplayNone(isデザイン用紙不使用);
-        div.getChkTokkiDesign().setDisplayNone(is特記デザイン用紙不使用);
-        div.getChkChosaOcr().setDisplayNone(isOCR不使用);
-        div.getChkTokkiOcr().setWrap(isOCR不使用);
-        div.getChkTokkiOcr().setDisplayNone(is特記OCR不使用);
-        div.getChkSaiCheck().setDisplayNone(is差異チェック票不使用);
-        div.getChkGaikyoTokki().setWrap(is差異チェック票不使用);
-        div.getChkGaikyoTokki().setDisplayNone(is概要特記不使用);
-        div.getChosahyoSelectItemsTwo().setDisplayNone(isデザイン用紙不使用 && is特記デザイン用紙不使用 && is差異チェック票不使用 && is概要特記不使用);
-        div.getChkTokkiKomokuAri().setDisplayNone(is特記事項項目有不使用);
-        div.getChkTokkiKomokuNashi().setDisplayNone(is特記事項項目無不使用);
-        div.getChkTokkiFree().setDisplayNone(is特記事項フリー不使用);
-        div.getTokkiChecks().setDisplayNone(is特記事項項目有不使用 && is特記事項項目無不使用 && is特記事項フリー不使用);
-    }
-
-    private void setNinteiChkShinseiTani(boolean flag) {
-        div.getChkChosaIrai().setDisabled(flag);
-        div.getChkNinteiChosahyoSonota().setDisabled(flag);
-        div.getChkChosaDesign().setDisabled(flag);
-        div.getChkTokkiDesign().setDisabled(flag);
-        div.getChkChosaOcr().setDisabled(flag);
-        div.getChkTokkiOcr().setDisabled(flag);
-        div.getChkSaiCheck().setDisabled(flag);
-        div.getChkGaikyoTokki().setDisabled(flag);
-        div.getChkTokkiKomokuAri().setDisabled(flag);
-        div.getChkTokkiKomokuNashi().setDisabled(flag);
-        div.getChkTokkiFree().setDisabled(flag);
-        div.getChkTokkijikoTenyuryoku().setDisabled(flag);
-        RDate 基準日 = RDate.getNowDate();
-        setChkSelected(div.getChkChosaIrai(), ConfigNameDBE.認定調査依頼_手動_認定調査依頼書, 基準日, flag);
-        setChkSelected(div.getChkChosaDesign(), ConfigNameDBE.認定調査依頼_手動_認定調査票, 基準日, flag);
-        setChkSelected(div.getChkTokkiDesign(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項, 基準日, flag);
-        setChkSelected(div.getChkChosaOcr(), ConfigNameDBE.認定調査依頼_手動_認定調査票OCR, 基準日, flag);
-        setChkSelected(div.getChkTokkiOcr(), ConfigNameDBE.認定調査依頼_手動_認定調査票OCR_特記事項, 基準日, flag);
-        setChkSelected(div.getChkSaiCheck(), ConfigNameDBE.認定調査依頼_手動_認定調査票差異チェック票, 基準日, flag);
-        setChkSelected(div.getChkGaikyoTokki(), ConfigNameDBE.認定調査依頼_手動_調査特記_概況特記, 基準日, flag);
-        setChkSelected(div.getChkTokkiKomokuAri(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目有り, 基準日, flag);
-        setChkSelected(div.getChkTokkiKomokuNashi(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_項目無し, 基準日, flag);
-        setChkSelected(div.getChkTokkiFree(), ConfigNameDBE.認定調査依頼_手動_認定調査票_特記事項_フリー様式, 基準日, flag);
-        if (flag) {
-            setChkSelected(div.getChkNinteiChosahyoSonota(), false);
-            setChkSelected(div.getChkTokkijikoTenyuryoku(), false);
+        div.getChkIkenshoIraisho().setDisplayNone(!is意見書依頼書出力);
+        div.getChkIkensho().setDisplayNone(!is記入用紙出力);
+        div.getChkIkenshoSeikyusho().setDisplayNone(!is意見書依頼書出力);
+        if (!is連動印刷) {
+            div.getChkIkenshoSeikyusho().setDisplayNone(!is請求書出力);
         }
     }
 
-    private boolean is使用ByConfig(ConfigNameDBE key, RDate 基準日) {
-        return !DbBusinessConfig.get(key, 基準日, SubGyomuCode.DBE認定支援).equals(OCR);
+    private void setShujiiChkShinseiTani() {
+
+        RDate 基準日 = RDate.getNowDate();
+        RString 保険者市町村コード = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value();
+
+        List<RString> 請求書選択selectedKeys = new ArrayList<>();
+        RString 連動印刷 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成請求書連動印刷, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (!div.getChkIkenshoIraisho().isDisplayNone()) {
+            List<RString> 意見書依頼書選択selectedKeys = new ArrayList<>();
+            RString 初期選択_作成依頼書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_作成依頼書, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (依頼書選択_単票.equals(初期選択_作成依頼書)) {
+                意見書依頼書選択selectedKeys.add(依頼書チェックボックス_単票);
+                if (選択.equals(連動印刷)) {
+                    請求書選択selectedKeys.add(意見書チェックボックス_請求書);
+                }
+            } else if (依頼書選択_一覧.equals(初期選択_作成依頼書)) {
+                意見書依頼書選択selectedKeys.add(依頼書チェックボックス_一覧);
+                if (選択.equals(連動印刷)) {
+                    請求書選択selectedKeys.add(意見書チェックボックス_請求書);
+                }
+            }
+            div.getChkIkenshoIraisho().setSelectedItemsByKey(意見書依頼書選択selectedKeys);
+        }
+
+        if (!div.getChkIkensho().isDisplayNone()) {
+            List<RString> 意見書選択selectedKeys = new ArrayList<>();
+            RString 初期選択_記入用紙 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_記入用紙, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (選択.equals(初期選択_記入用紙)) {
+                意見書選択selectedKeys.add(意見書チェックボックス_記入用紙);
+            }
+            div.getChkIkensho().setSelectedItemsByKey(意見書選択selectedKeys);
+        }
+
+        if (!div.getChkIkenshoSeikyusho().isDisplayNone()) {
+            RString 初期選択_請求書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_請求書, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (選択.equals(初期選択_請求書)) {
+                請求書選択selectedKeys.add(意見書チェックボックス_請求書);
+            }
+        }
+        div.getChkIkenshoSeikyusho().setSelectedItemsByKey(請求書選択selectedKeys);
+
+        List<RString> 請求一覧選択selectedKeys = new ArrayList<>();
+        RString 初期選択_請求一覧表 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_請求一覧表, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (選択.equals(初期選択_請求一覧表)) {
+            請求一覧選択selectedKeys.add(意見書チェックボックス_請求一覧);
+        }
+        div.getChkIkenshoSeikyuIchiran().setSelectedItemsByKey(請求一覧選択selectedKeys);
+
+        List<RString> 発行一覧選択selectedKeys = new ArrayList<>();
+        RString 初期選択_発行一覧表 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_発行一覧表, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (選択.equals(初期選択_発行一覧表)) {
+            発行一覧選択selectedKeys.add(意見書チェックボックス_発行一覧);
+        }
+        div.getChkIkenshoHakkoIchiran().setSelectedItemsByKey(発行一覧選択selectedKeys);
+
+        List<RString> 履歴一覧選択selectedKeys = new ArrayList<>();
+        RString 初期選択_履歴一覧表 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_履歴一覧表, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (選択.equals(初期選択_履歴一覧表)) {
+            履歴一覧選択selectedKeys.add(意見書チェックボックス_履歴一覧);
+        }
+        div.getChkIkenshoRirekiIchiran().setSelectedItemsByKey(履歴一覧選択selectedKeys);
     }
 
-    private void setChkSelected(CheckBoxList chk, ConfigNameDBE key, RDate 基準日, boolean is外す) {
-        boolean is手動 = !is外す && !is使用ByConfig(key, 基準日);
-        setChkSelected(chk, is手動);
+    private void initializeNinteiChkShinseiTani() {
+        boolean is依頼書出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_調査依頼書_出力有無);
+        boolean is概況基本出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_認定調査票_概況基本_出力有無);
+        boolean is特記事項出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_認定調査票_特記事項_出力有無);
+        boolean is差異チェック票出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_差異チェック票_出力有無);
+        boolean is委託等特記出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_特記事項_出力有無);
+        boolean is概要特記出力 = is使用ByConfig(ConfigNameDBE.認定調査票_概況特記_出力有無);
+        RString 保険者市町村コード = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value();
+        RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        div.getChkChosahyoIraisho().setDisplayNone(!is依頼書出力);
+        List<RString> disableList = new ArrayList<>();
+        if (片面印刷.equals(印刷タイプ)) {
+            if (!is概況基本出力) {
+                disableList.add(調査票チェックボックス_概況調査);
+                disableList.add(調査票チェックボックス_基本調査);
+            } else if (!is特記事項出力) {
+                disableList.add(調査票チェックボックス_特記事項);
+            }
+            div.getChkChosahyoKatamen().setDisabledItemsByKey(disableList);
+            div.getChkChosahyoRyomen().setDisplayNone(true);
+        } else {
+            if (!is概況基本出力) {
+                disableList.add(調査票チェックボックス_概況調査);
+            } else if (!is特記事項出力) {
+                disableList.add(調査票チェックボックス_特記事項);
+            }
+            div.getChkChosahyoKatamen().setDisplayNone(true);
+            div.getChkChosahyoRyomen().setDisabledItemsByKey(disableList);
+        }
+        div.getChkChosahyoSai().setDisplayNone(!is差異チェック票出力);
+        div.getChkChosahyoTokki().setDisplayNone(!is委託等特記出力);
+        div.getChkChosahyoGaikyo().setDisplayNone(!is概要特記出力);
     }
 
-    private void setChkSelected(CheckBoxList chk, boolean isSelected) {
-        List<KeyValueDataSource> source = isSelected ? chk.getDataSource() : Collections.EMPTY_LIST;
-        chk.setSelectedItems(source);
+    private void setNinteiChkShinseiTani() {
+        RDate 基準日 = RDate.getNowDate();
+        RString 保険者市町村コード = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value();
+
+        if (!div.getChkChosahyoIraisho().isDisplayNone()) {
+            List<RString> 依頼書選択selectedKeys = new ArrayList<>();
+            RString 初期選択_調査依頼書 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_調査依頼書, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (依頼書選択_単票.equals(初期選択_調査依頼書)) {
+                依頼書選択selectedKeys.add(依頼書チェックボックス_単票);
+            } else if (依頼書選択_一覧.equals(初期選択_調査依頼書)) {
+                依頼書選択selectedKeys.add(依頼書チェックボックス_一覧);
+            }
+            div.getChkChosahyoIraisho().setSelectedItemsByKey(依頼書選択selectedKeys);
+        }
+
+        List<RString> 調査票選択selectedKeys = new ArrayList<>();
+        boolean is概況基本出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_認定調査票_概況基本_出力有無);
+        boolean is特記事項出力 = is使用ByConfig(ConfigNameDBE.認定調査依頼_一括_認定調査票_特記事項_出力有無);
+        RString 初期選択_概況基本 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_認定調査票_概況基本, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        RString 初期選択_特記事項 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_認定調査票_特記事項, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (!div.getChkChosahyoKatamen().isDisplayNone()) {
+            if (is概況基本出力 && 選択.equals(初期選択_概況基本)) {
+                調査票選択selectedKeys.add(調査票チェックボックス_概況調査);
+                調査票選択selectedKeys.add(調査票チェックボックス_基本調査);
+            }
+            if (is特記事項出力 && 選択.equals(初期選択_特記事項)) {
+                調査票選択selectedKeys.add(調査票チェックボックス_特記事項);
+            }
+            div.getChkChosahyoKatamen().setSelectedItemsByKey(調査票選択selectedKeys);
+        } else if (!div.getChkChosahyoRyomen().isDisplayNone()) {
+            if (is概況基本出力 && 選択.equals(初期選択_概況基本)) {
+                調査票選択selectedKeys.add(調査票チェックボックス_概況調査);
+            }
+            if (is特記事項出力 && 選択.equals(初期選択_特記事項)) {
+                調査票選択selectedKeys.add(調査票チェックボックス_特記事項);
+            }
+            div.getChkChosahyoRyomen().setSelectedItemsByKey(調査票選択selectedKeys);
+        }
+
+        if (!div.getChkChosahyoGaikyo().isDisplayNone()) {
+            List<RString> 概況特記選択selectedKeys = new ArrayList<>();
+            RString 初期選択_概況特記 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_概況特記, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (選択.equals(初期選択_概況特記)) {
+                概況特記選択selectedKeys.add(調査票チェックボックス_概況特記);
+            }
+            div.getChkChosahyoGaikyo().setSelectedItemsByKey(概況特記選択selectedKeys);
+        }
+
+        if (!div.getChkChosahyoSai().isDisplayNone()) {
+            List<RString> 差異チェック票選択selectedKeys = new ArrayList<>();
+            RString 初期選択_差異チェック票 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_差異チェック票, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (選択.equals(初期選択_差異チェック票)) {
+                差異チェック票選択selectedKeys.add(調査票チェックボックス_差異);
+            }
+            div.getChkChosahyoSai().setSelectedItemsByKey(差異チェック票選択selectedKeys);
+        }
+
+        List<RString> 発行一覧選択selectedKeys = new ArrayList<>();
+        RString 初期選択_発行一覧 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_発行一覧表, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (選択.equals(初期選択_発行一覧)) {
+            発行一覧選択selectedKeys.add(調査票チェックボックス_発行一覧);
+        }
+        div.getChkChosaIraiHakko().setSelectedItemsByKey(発行一覧選択selectedKeys);
+
+        List<RString> 履歴一覧選択selectedKeys = new ArrayList<>();
+        RString 初期選択_履歴一覧 = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼_初期選択_履歴一覧表, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (選択.equals(初期選択_履歴一覧)) {
+            履歴一覧選択selectedKeys.add(調査票チェックボックス_履歴一覧);
+        }
+        div.getChkChosaIraiRireki().setSelectedItemsByKey(履歴一覧選択selectedKeys);
     }
 
-    private void setHakkobiAndTeishutsuKigen(RString ninteiShinsei) {
+    private boolean is使用ByConfig(ConfigNameDBE key) {
+        RDate 基準日 = RDate.getNowDate();
+        RString 保険者市町村コード = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value();
+        return DbBusinessConfig.get(key, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード).equals(出力する);
+    }
+
+    private void setHakkobiAndTeishutsuKigen() {
         div.getTxtHakkobi().setValue(RDate.getNowDate());
         RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (依頼書期限設定.equals(依頼書期限設定_自動)) {
             div.getRadTeishutsuKigen().setSelectedKey(依頼書期限ラジオボタン_自動);
         } else if (依頼書期限設定.equals(依頼書期限設定_空欄)) {
@@ -366,5 +479,192 @@ public class IraishoIkkatsuHakkoHandler {
         }
         div.getRadTeishutsuKigen().setDisabled(true);
         setTxtKyotsuHizuke();
+    }
+
+    public void setNinteParam(DBE220010_IraishoIkkatuParameter param) {
+
+        if (div.getChkNinteiChosaIraisho().getSelectedKeys().size() == 2) {
+            param.setNinteioChosaIraisho(PRINT_AND_NOPRINT);
+        } else {
+            if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_NOPRINT)) {
+                param.setNinteioChosaIraisho(NO_PRINT);
+            }
+            if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_PRINT)) {
+                param.setNinteioChosaIraisho(PRINT);
+            }
+        }
+
+        if (div.getChkNinteiChosahyo().getSelectedKeys().size() == 2) {
+            param.setNinteiChosahyo(PRINT_AND_NOPRINT);
+        } else {
+            if (div.getChkNinteiChosahyo().getSelectedKeys().contains(SELECTED_NOPRINT)) {
+                param.setNinteiChosahyo(NO_PRINT);
+            }
+            if (div.getChkNinteiChosahyo().getSelectedKeys().contains(SELECTED_PRINT)) {
+                param.setNinteiChosahyo(PRINT);
+            }
+        }
+
+        List<GridParameter> ninteiChosaIraiList = new ArrayList<>();
+        for (dgNinteiChosaIraiTaishoIchiran_Row row : div.getDgNinteiChosaIraiTaishoIchiran().getSelectedItems()) {
+            GridParameter gridParameter = new GridParameter();
+            gridParameter.setNinteichosaItakusakiCode(row.getNinteiChosaitakusaki());
+            gridParameter.setNinteiChosainCode(row.getNinteiChosainNo());
+            gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
+            ninteiChosaIraiList.add(gridParameter);
+        }
+        param.setNinteiChosaIraiList(ninteiChosaIraiList);
+
+        if (!div.getChkChosahyoIraisho().isDisplayNone()) {
+            List<RString> 依頼書選択selectedKeys = div.getChkChosahyoIraisho().getSelectedKeys();
+            param.set認定調査依頼書(依頼書選択selectedKeys.contains(依頼書チェックボックス_単票));
+            param.set認定調査依頼一覧(依頼書選択selectedKeys.contains(依頼書チェックボックス_一覧));
+        } else {
+            param.set認定調査依頼一覧(false);
+            param.set認定調査依頼書(false);
+        }
+
+        List<RString> 調査票選択selectedKeys;
+        if (!div.getChkChosahyoKatamen().isDisplayNone()) {
+            調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
+            param.set認定調査票_概況調査(調査票選択selectedKeys.contains(調査票チェックボックス_概況調査));
+            param.set認定調査票_基本調査(調査票選択selectedKeys.contains(調査票チェックボックス_基本調査));
+            param.set認定調査票_特記事項(調査票選択selectedKeys.contains(調査票チェックボックス_特記事項));
+            param.set認定調査票_概況基本(false);
+        } else if (!div.getChkChosahyoRyomen().isDisplayNone()) {
+            調査票選択selectedKeys = div.getChkChosahyoRyomen().getSelectedKeys();
+            param.set認定調査票_概況調査(false);
+            param.set認定調査票_基本調査(false);
+            param.set認定調査票_概況基本(調査票選択selectedKeys.contains(調査票チェックボックス_概況調査));
+            param.set認定調査票_特記事項(調査票選択selectedKeys.contains(調査票チェックボックス_特記事項));
+        } else {
+            param.set認定調査票_概況調査(false);
+            param.set認定調査票_基本調査(false);
+            param.set認定調査票_概況基本(false);
+            param.set認定調査票_特記事項(false);
+        }
+
+        if (!div.getChkChosahyoGaikyo().isDisplayNone()) {
+            List<RString> 概況特記選択selectedKeys = div.getChkChosahyoGaikyo().getSelectedKeys();
+            param.set認定調査票_概況特記(概況特記選択selectedKeys.contains(調査票チェックボックス_概況特記));
+        } else {
+            param.set認定調査票_概況特記(false);
+        }
+
+        if (!div.getChkChosahyoSai().isDisplayNone()) {
+            List<RString> 差異チェック票選択selectedKeys = div.getChkChosahyoSai().getSelectedKeys();
+            param.set認定調査差異チェック票(差異チェック票選択selectedKeys.contains(調査票チェックボックス_差異));
+        } else {
+            param.set認定調査差異チェック票(false);
+        }
+
+        if (!div.getChkChosahyoTokki().isDisplayNone()) {
+            List<RString> 委託特記事項選択selectedKeys = div.getChkChosahyoTokki().getSelectedKeys();
+            param.set特記事項_調査群(委託特記事項選択selectedKeys.contains(調査票チェックボックス_特記事項_調査群));
+            param.set特記事項_フリータイプ(委託特記事項選択selectedKeys.contains(調査票チェックボックス_特記事項_フリー));
+        } else {
+            param.set特記事項_調査群(false);
+            param.set特記事項_フリータイプ(false);
+        }
+
+        List<RString> 発行一覧選択selectedKeys = div.getChkChosaIraiHakko().getSelectedKeys();
+        param.set認定調査依頼発行一覧(発行一覧選択selectedKeys.contains(調査票チェックボックス_発行一覧));
+
+        List<RString> 履歴一覧選択selectedKeys = div.getChkChosaIraiRireki().getSelectedKeys();
+        param.set認定調査依頼履歴一覧(履歴一覧選択selectedKeys.contains(調査票チェックボックス_履歴一覧));
+    }
+
+    public void setShujiiParam(DBE220010_IraishoIkkatuParameter param) {
+
+        if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
+            param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
+        } else {
+            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_NOPRINT)) {
+                param.setShujiiikenshoSakuseiIrai(NO_PRINT);
+            }
+            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_PRINT)) {
+                param.setShujiiikenshoSakuseiIrai(PRINT);
+            }
+        }
+
+        if (div.getChkShujiiIkensho().getSelectedKeys().size() == 2) {
+            param.setShujiiIkensho(PRINT_AND_NOPRINT);
+        } else {
+            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_NOPRINT)) {
+                param.setShujiiIkensho(NO_PRINT);
+            }
+            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_PRINT)) {
+                param.setShujiiIkensho(PRINT);
+            }
+        }
+
+        List<GridParameter> shujiiIkenshoSakuseiIraiList = new ArrayList<>();
+        for (dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row : div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems()) {
+            GridParameter gridParameter = new GridParameter();
+            gridParameter.setShujiiIryoKikanCode(row.getShujiiIryoKikanCode());
+            gridParameter.setIshiNo(row.getIshiNo());
+            gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
+            shujiiIkenshoSakuseiIraiList.add(gridParameter);
+        }
+        param.setShujiiIkenshoSakuseiIraiList(shujiiIkenshoSakuseiIraiList);
+
+        if (!div.getChkIkenshoIraisho().isDisplayNone()) {
+            List<RString> 依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
+            param.setShujiiIkenshoSakuseiIraisho(依頼書選択selectedKeys.contains(依頼書チェックボックス_単票));
+            param.setIkenshoSakuseiIraiIchiran(依頼書選択selectedKeys.contains(依頼書チェックボックス_一覧));
+        } else {
+            param.set認定調査依頼一覧(false);
+            param.set認定調査依頼書(false);
+        }
+
+        if (!div.getChkIkensho().isDisplayNone()) {
+            List<RString> 意見書選択selectedKeys = div.getChkIkensho().getSelectedKeys();
+            param.setIkenshoKinyu(意見書選択selectedKeys.contains(意見書チェックボックス_記入用紙));
+        } else {
+            param.setIkenshoKinyu(false);
+        }
+
+        if (!div.getChkIkenshoSeikyusho().isDisplayNone()) {
+            List<RString> 請求書選択selectedKeys = div.getChkIkenshoSeikyusho().getSelectedKeys();
+            param.setIkenshoSakuseiSeikyusho(請求書選択selectedKeys.contains(意見書チェックボックス_請求書));
+        } else {
+            param.setIkenshoSakuseiSeikyusho(false);
+        }
+
+        List<RString> 請求一覧選択selectedKeys = div.getChkIkenshoSeikyuIchiran().getSelectedKeys();
+        param.setIkenshoSakuseiSeikyuIchiran(請求一覧選択selectedKeys.contains(意見書チェックボックス_請求一覧));
+
+        List<RString> 発行一覧選択selectedKeys = div.getChkIkenshoHakkoIchiran().getSelectedKeys();
+        param.setIkenshoSakuseiHakkoIchiran(発行一覧選択selectedKeys.contains(意見書チェックボックス_発行一覧));
+
+        List<RString> 履歴一覧選択selectedKeys = div.getChkIkenshoRirekiIchiran().getSelectedKeys();
+        param.setIkenshoSakuseiRirekiIchiran(履歴一覧選択selectedKeys.contains(意見書チェックボックス_履歴一覧));
+    }
+
+    /**
+     * 介護保険診断命令書 チェックボックスの表示制御処理です。
+     */
+    public void setChkIkenshoIraisho() {
+        RString 請求書連動印刷 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成請求書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value());
+        if (CONFIGVALUE1.equals(請求書連動印刷)) {
+            List<RString> 意見書依頼書選択selectedKeys = new ArrayList<>();
+            div.getChkIkenshoIraisho().setSelectedItemsByKey(意見書依頼書選択selectedKeys);
+        }
+    }
+
+    /**
+     * 介護保険診断命令書 チェックボックスの表示制御処理です。
+     */
+    public void setChkIkenshoSeikyusho() {
+        List<RString> 請求書選択selectedKeys = new ArrayList<>();
+        RString 請求書連動印刷 = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書作成請求書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value());
+        if (CONFIGVALUE1.equals(請求書連動印刷)) {
+            if (!div.getChkIkenshoIraisho().getSelectedKeys().isEmpty()) {
+                請求書選択selectedKeys.add(意見書チェックボックス_請求書);
+            }
+            div.getChkIkenshoSeikyusho().setSelectedItemsByKey(請求書選択selectedKeys);
+        }
     }
 }

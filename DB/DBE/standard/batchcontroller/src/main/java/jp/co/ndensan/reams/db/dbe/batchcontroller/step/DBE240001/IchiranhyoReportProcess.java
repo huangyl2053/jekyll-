@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.HomonChosaIraishoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -52,10 +52,10 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     private static final ReportId 帳票ID = ReportIdDBZ.DBE220002.getReportId();
     private int 連番 = 1;
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shichosoncode"), new RString("chosaitakusakicode")));
-    private HomonChosaIraishoBusiness business;
+    private NinteiChosaBusiness business;
     private NinshoshaSource ninshoshaSource;
     private Map<Integer, RString> 通知文Map;
-    private HomonChosaIraishoProcessParamter processParamter;
+    private NinteiChosaProcessParamter processParamter;
 
     @BatchWriter
     private BatchReportWriter<ChosaIraiIchiranhyoReportSource> ichiranhyoBatchReportWriter;
@@ -63,12 +63,12 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
 
     @Override
     protected void initialize() {
-        business = new HomonChosaIraishoBusiness(processParamter);
+        business = new NinteiChosaBusiness(processParamter);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHomonChosaIraishoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaMybitisParamter());
     }
 
     @Override

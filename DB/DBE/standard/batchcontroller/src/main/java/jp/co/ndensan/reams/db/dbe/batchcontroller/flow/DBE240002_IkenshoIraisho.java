@@ -7,16 +7,11 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.DbT5301InsertProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.IkenshoSakuseiIraiIchiranhyoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiKatamen;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiKatamenDesign;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiKatamenOCR;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiRyomen;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiRyomenDesign;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiRyomenOCR;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshi;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.KinyuYoshiUra;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSakuseiIraishoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSakuseiRyoSeikyushoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoSeikyuIchiranProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkenshoTeishutsuIraishoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002.ShujiiIkensho_DBE230004Process;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.DBE220010_IraishoIkkatuParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -37,108 +32,47 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkkatuParameter> {
 
     private final RDate 基準日 = RDate.getNowDate();
-    private static final String IKENSHOSAKUSEIIRAIICHIRANHYO = "IkenshoSakuseiIraiIchiranhyoProcess";
     private static final String SHUJIIIKENSHOSAKUSEIIRAISHO = "ShujiiIkenshoSakuseiIraishoProcess";
+    private static final String IKENSHOSAKUSEIIRAIICHIRANHYO = "IkenshoSakuseiIraiIchiranhyoProcess";
+    private static final String 主治医意見書記入用紙 = "KinyuYoshi";
+    private static final String 主治医意見書記入用紙_裏 = "KinyuYoshiUra";
     private static final String IKENSHOSAKUSEIRYOSEIKYUSHO = "ShujiiIkenshoSakuseiRyoSeikyushoProcess";
-    private static final String SHUJIIIKENSHOTEISHUTSUIRAISHO = "ShujiiIkenshoTeishutsuIraishoProcess";
     private static final String SHUJIIIKENSHOSEIKYUICHIRAN = "shujiiIkenshoSeikyuIchiranProcess";
-    private static final String SHUJIIIKENSHO_DBE231002PROCESS = "ShujiiIkensho_DBE231002Process";
-    private static final String SHUJIIIKENSHO_DBE231014PROCESS = "ShujiiIkensho_DBE231014Process";
-    private static final String SHUJIIIKENSHO_DBE231012PROCESS = "ShujiiIkensho_DBE231012Process";
     private static final String SHUJIIIKENSHO_DBE230004PROCESS = "ShujiiIkensho_DBE230004Process";
     private static final String DBT5301INSERTPROCESS = "DbT5301InsertProcess";
-    private static final RString CONFIGVALUE1 = new RString("1");
-    private static final RString CONFIGVALUE2 = new RString("2");
-    private static final RString CONFIGVALUE3 = new RString("3");
-    private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR.rse");
-    private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR.rse");
-    private static final RString DBE231002 = new RString("DBE231002_ikenshokinyuyoshi.rse");
-    private static final String 主治医意見書記入用紙_片面 = "KinyuYoshiKatamen";
-    private static final String 主治医意見書記入用紙_両面 = "KinyuYoshiRyomen";
-    private static final String 主治医意見書記入用紙_片面_OCR = "KinyuYoshiKatamenOCR";
-    private static final String 主治医意見書記入用紙_両面_OCR = "KinyuYoshiRyomenOCR";
-    private static final String 主治医意見書記入用紙_片面_デザイン = "KinyuYoshiKatamenDesign";
-    private static final String 主治医意見書記入用紙_両面_デザイン = "KinyuYoshiRyomenDesign";
-    
+
     @Override
     protected void defineFlow() {
-        if (getParameter().isIkenshoSakuseiirai()) {
-            executeStep(IKENSHOSAKUSEIIRAIICHIRANHYO);
-        }
-        if (getParameter().isIkenshoSakuseiSeikyuu()) {
-            executeStep(SHUJIIIKENSHOSEIKYUICHIRAN);
-        }
         if (getParameter().isShujiiIkenshoSakuseiIraisho()) {
             executeStep(SHUJIIIKENSHOSAKUSEIIRAISHO);
         }
-        if (getParameter().isIkenshoKinyuu()) {
+        if (getParameter().isIkenshoSakuseiIraiIchiran()) {
+            executeStep(IKENSHOSAKUSEIIRAIICHIRANHYO);
+        }
+        if (getParameter().isIkenshoKinyu()) {
             call主治医意見書記入用紙();
         }
-        if (getParameter().isIkenshoKinyuuOCR()) {
-            call主治医意見書記入用紙OCR();
-        }
-        if (getParameter().isIkenshoKinyuuDesign()) {
-            call主治医意見書記入用紙デザイン();
-        }
-        if (getParameter().isIkenshoSakuseiSeikyuusho()) {
+        if (getParameter().isIkenshoSakuseiSeikyusho()) {
             executeStep(IKENSHOSAKUSEIRYOSEIKYUSHO);
         }
-        if (getParameter().isIkenshoTeishutu()) {
-            executeStep(SHUJIIIKENSHOTEISHUTSUIRAISHO);
+        if (getParameter().isIkenshoSakuseiSeikyuIchiran()) {
+            executeStep(SHUJIIIKENSHOSEIKYUICHIRAN);
         }
-        if (getParameter().is主治医意見書依頼履歴一覧()) {
+        if (getParameter().isIkenshoSakuseiRirekiIchiran()) {
             executeStep(SHUJIIIKENSHO_DBE230004PROCESS);
         }
         executeStep(DBT5301INSERTPROCESS);
     }
 
     private void call主治医意見書記入用紙() {
-        RString 業務コンフィグ意見書印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
-        if (CONFIGVALUE1.equals(業務コンフィグ意見書印刷タイプ)) {
-            executeStep(主治医意見書記入用紙_片面);
-        } else if (CONFIGVALUE2.equals(業務コンフィグ意見書印刷タイプ)) {
-            executeStep(主治医意見書記入用紙_両面);
+        RString 表_帳票ID = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書_帳票ID_表, 基準日, SubGyomuCode.DBE認定支援, getParameter().getShichosonCode());
+        RString 裏_帳票ID = DbBusinessConfig.get(
+                ConfigNameDBE.主治医意見書_帳票ID_裏, 基準日, SubGyomuCode.DBE認定支援, getParameter().getShichosonCode());
+        executeStep(主治医意見書記入用紙);
+        if (!表_帳票ID.equals(裏_帳票ID)) {
+            executeStep(主治医意見書記入用紙_裏);
         }
-    }
-
-    private void call主治医意見書記入用紙OCR() {
-        RString 業務コンフィグ意見書印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
-        if (CONFIGVALUE1.equals(業務コンフィグ意見書印刷タイプ)) {
-            executeStep(主治医意見書記入用紙_片面_OCR);
-        } else if (CONFIGVALUE2.equals(業務コンフィグ意見書印刷タイプ)) {
-            executeStep(主治医意見書記入用紙_両面_OCR);
-        }
-    }
-
-    private void call主治医意見書記入用紙デザイン() {
-        RString 業務コンフィグ意見書印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.意見書印刷タイプ, 基準日, SubGyomuCode.DBE認定支援);
-        if (CONFIGVALUE1.equals(業務コンフィグ意見書印刷タイプ)) {
-            executeStep(主治医意見書記入用紙_片面_デザイン);
-        } else if (CONFIGVALUE2.equals(業務コンフィグ意見書印刷タイプ)) {
-            executeStep(主治医意見書記入用紙_両面_デザイン);
-        }
-    }
-
-    /**
-     * 帳票「DBE013006_主治医意見書作成料請求一覧表」を出力します。
-     *
-     * @return ShujiiIkenshoSeikyuIchiranProcess
-     */
-    @Step(SHUJIIIKENSHOSEIKYUICHIRAN)
-    protected IBatchFlowCommand callShujiiIkenshoSeikyuIchiranProcess() {
-        return loopBatch(ShujiiIkenshoSeikyuIchiranProcess.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
-
-    /**
-     * 帳票「DBE230002_主治医意見書作成依頼一覧表」を出力します。
-     *
-     * @return IkenshoSakuseiIraiIchiranhyoProcess
-     */
-    @Step(IKENSHOSAKUSEIIRAIICHIRANHYO)
-    protected IBatchFlowCommand ikenshoSakuseiIraiIchiranhyoProcess() {
-        return loopBatch(IkenshoSakuseiIraiIchiranhyoProcess.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
     }
 
     /**
@@ -149,7 +83,40 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     @Step(SHUJIIIKENSHOSAKUSEIIRAISHO)
     protected IBatchFlowCommand shujiiIkenshoSakuseiIraishoProcess() {
         return loopBatch(ShujiiIkenshoSakuseiIraishoProcess.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
+    }
+
+    /**
+     * 帳票「DBE230002_主治医意見書作成依頼一覧表」を出力します。
+     *
+     * @return IkenshoSakuseiIraiIchiranhyoProcess
+     */
+    @Step(IKENSHOSAKUSEIIRAIICHIRANHYO)
+    protected IBatchFlowCommand ikenshoSakuseiIraiIchiranhyoProcess() {
+        return loopBatch(IkenshoSakuseiIraiIchiranhyoProcess.class)
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
+    }
+
+    /**
+     * 主治医意見書記入用紙_片面を出力します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(主治医意見書記入用紙)
+    protected IBatchFlowCommand callKinyuYoshiKatamenProcess() {
+        return loopBatch(KinyuYoshi.class)
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
+    }
+
+    /**
+     * 主治医意見書記入用紙_両面を出力します。
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(主治医意見書記入用紙_裏)
+    protected IBatchFlowCommand callKinyuYoshiRyomenProcess() {
+        return loopBatch(KinyuYoshiUra.class)
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
     }
 
     /**
@@ -160,18 +127,18 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     @Step(IKENSHOSAKUSEIRYOSEIKYUSHO)
     protected IBatchFlowCommand shujiiIkenshoSakuseiRyoSeikyushoProcess() {
         return loopBatch(ShujiiIkenshoSakuseiRyoSeikyushoProcess.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
     }
 
     /**
-     * 帳票「DBE236001_介護保険指定医依頼兼主治医意見書提出依頼書」を出力します。
+     * 帳票「DBE013006_主治医意見書作成料請求一覧表」を出力します。
      *
-     * @return ShujiiIkenshoTeishutsuIraishoProcess
+     * @return ShujiiIkenshoSeikyuIchiranProcess
      */
-    @Step(SHUJIIIKENSHOTEISHUTSUIRAISHO)
-    protected IBatchFlowCommand shujiiIkenshoTeishutsuIraishoProcess() {
-        return loopBatch(ShujiiIkenshoTeishutsuIraishoProcess.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+    @Step(SHUJIIIKENSHOSEIKYUICHIRAN)
+    protected IBatchFlowCommand callShujiiIkenshoSeikyuIchiranProcess() {
+        return loopBatch(ShujiiIkenshoSeikyuIchiranProcess.class)
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
     }
 
     /**
@@ -182,7 +149,7 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     @Step(SHUJIIIKENSHO_DBE230004PROCESS)
     protected IBatchFlowCommand callShujiiIkensho_DBE230004Process() {
         return loopBatch(ShujiiIkensho_DBE230004Process.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
     }
 
     /**
@@ -193,67 +160,7 @@ public class DBE240002_IkenshoIraisho extends BatchFlowBase<DBE220010_IraishoIkk
     @Step(DBT5301INSERTPROCESS)
     protected IBatchFlowCommand callDbT5301InsertProcess() {
         return loopBatch(DbT5301InsertProcess.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+                .arguments(getParameter().toShujiiIkenshoProcessParamter()).define();
     }
 
-    /**
-     * 主治医意見書記入用紙_片面を出力します。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(主治医意見書記入用紙_片面)
-    protected IBatchFlowCommand callKinyuYoshiKatamenProcess() {
-        return loopBatch(KinyuYoshiKatamen.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
-    /**
-     * 主治医意見書記入用紙_両面を出力します。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(主治医意見書記入用紙_両面)
-    protected IBatchFlowCommand callKinyuYoshiRyomenProcess() {
-        return loopBatch(KinyuYoshiRyomen.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
-    /**
-     * 主治医意見書記入用紙_片面_OCRを出力します。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(主治医意見書記入用紙_片面_OCR)
-    protected IBatchFlowCommand callKinyuYoshiKatamenOCRProcess() {
-        return loopBatch(KinyuYoshiKatamenOCR.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
-    /**
-     * 主治医意見書記入用紙_両面_OCRを出力します。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(主治医意見書記入用紙_両面_OCR)
-    protected IBatchFlowCommand callKinyuYoshiRyomenOCRProcess() {
-        return loopBatch(KinyuYoshiRyomenOCR.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
-    /**
-     * 主治医意見書記入用紙_片面_デザインを出力します。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(主治医意見書記入用紙_片面_デザイン)
-    protected IBatchFlowCommand callKinyuYoshiKatamenDesignProcess() {
-        return loopBatch(KinyuYoshiKatamenDesign.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
-    /**
-     * 主治医意見書記入用紙_両面_デザインを出力します。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(主治医意見書記入用紙_両面_デザイン)
-    protected IBatchFlowCommand callKinyuYoshiRyomenDesignProcess() {
-        return loopBatch(KinyuYoshiRyomenDesign.class)
-                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-    }
 }

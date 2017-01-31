@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.HomonChosaIraishoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoTmpEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
@@ -29,8 +29,8 @@ public class DbT5201UpdateProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書");
-    private HomonChosaIraishoProcessParamter processParamter;
-    private HomonChosaIraishoBusiness business;
+    private NinteiChosaProcessParamter processParamter;
+    private NinteiChosaBusiness business;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5201NinteichosaIraiJohoEntity> dbT5201EntityWriter;
     @BatchWriter
@@ -40,12 +40,12 @@ public class DbT5201UpdateProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void initialize() {
-        business = new HomonChosaIraishoBusiness(processParamter);
+        business = new NinteiChosaBusiness(processParamter);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHomonChosaIraishoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaMybitisParamter());
     }
 
     @Override

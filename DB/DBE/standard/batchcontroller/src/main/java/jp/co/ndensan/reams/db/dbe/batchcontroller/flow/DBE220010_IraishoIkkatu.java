@@ -32,43 +32,37 @@ public class DBE220010_IraishoIkkatu extends BatchFlowBase<DBE220010_IraishoIkka
     protected void defineFlow() {
         call訪問調査依頼書発行バッチ();
         call主治医意見書提出依頼書発行バッチ();
-        if (getParameter().isNinteiChosairaiHakkou()) {
+        if (getParameter().is認定調査依頼発行一覧()) {
             executeStep(CALL_NINTEICHOSAIRAIFLOW);
         }
-        if (getParameter().isIkenshoSakuseiIraiHakkou()) {
+        if (getParameter().isIkenshoSakuseiHakkoIchiran()) {
             executeStep(CALL_SHUJIIIKENSHOSAKUSEIFLOW);
         }
     }
 
     private void call訪問調査依頼書発行バッチ() {
         if (getParameter().is認定調査依頼書()
-                || getParameter().isNinteiChosaIraiChohyo()
-                || getParameter().is認定調査票_デザイン用紙()
-                || getParameter().is特記事項_デザイン用紙()
-                || getParameter().is認定調査票OCR()
-                || getParameter().is特記事項OCR()
+                || getParameter().is認定調査依頼一覧()
+                || getParameter().is認定調査票_概況調査()
+                || getParameter().is認定調査票_基本調査()
+                || getParameter().is認定調査票_概況基本()
+                || getParameter().is認定調査票_特記事項()
+                || getParameter().is認定調査票_概況特記()
                 || getParameter().is認定調査差異チェック票()
-                || getParameter().is概況特記()
-                || getParameter().is前回認定調査結果との比較表()
-                || getParameter().is特記事項_項目あり()
-                || getParameter().is特記事項_項目無し()
+                || getParameter().is特記事項_調査群()
                 || getParameter().is特記事項_フリータイプ()
-                || getParameter().is手入力タイプ()
                 || getParameter().is認定調査依頼履歴一覧()) {
             executeStep(CALL_HOMONCHOSAIRAISHOFLOW);
         }
     }
 
     private void call主治医意見書提出依頼書発行バッチ() {
-        if (getParameter().isIkenshoSakuseiirai()
-                || getParameter().isIkenshoSakuseiSeikyuu()
-                || getParameter().isShujiiIkenshoSakuseiIraisho()
-                || getParameter().isIkenshoKinyuu()
-                || getParameter().isIkenshoKinyuuOCR()
-                || getParameter().isIkenshoKinyuuDesign()
-                || getParameter().isIkenshoSakuseiSeikyuusho()
-                || getParameter().isIkenshoTeishutu()
-                || getParameter().is主治医意見書依頼履歴一覧()) {
+        if (getParameter().isShujiiIkenshoSakuseiIraisho()
+                || getParameter().isIkenshoSakuseiIraiIchiran()
+                || getParameter().isIkenshoKinyu()
+                || getParameter().isIkenshoSakuseiSeikyusho()
+                || getParameter().isIkenshoSakuseiSeikyuIchiran()
+                || getParameter().isIkenshoSakuseiRirekiIchiran()) {
             executeStep(CALL_TEISHUTSUIRAISHOHAKKOFLOW);
         }
     }

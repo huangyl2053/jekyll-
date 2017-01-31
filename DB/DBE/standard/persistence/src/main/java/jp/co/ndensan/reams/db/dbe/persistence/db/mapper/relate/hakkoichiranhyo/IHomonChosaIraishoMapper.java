@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 
 /**
@@ -22,7 +23,7 @@ public interface IHomonChosaIraishoMapper {
      * @param param 訪問調査依頼書発行のパラメータ
      * @return List<HomonChosaIraishoRelateEntity>
      */
-    List<HomonChosaIraishoRelateEntity> get訪問調査依頼書(HomonChosaIraishoMybitisParamter param);
+    List<HomonChosaIraishoRelateEntity> get訪問調査依頼書(NinteiChosaMybitisParamter param);
 
     /**
      * 認定調査依頼情報を検索します。
@@ -38,7 +39,7 @@ public interface IHomonChosaIraishoMapper {
      * @param parameter 認定調査依頼履歴一覧のパラメータ
      * @return List<HomonChosaIraishoRelateEntity>
      */
-    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧(HomonChosaIraishoMybitisParamter parameter);
+    List<HomonChosaIraishoRelateEntity> get認定調査依頼履歴一覧(NinteiChosaMybitisParamter parameter);
 
     /**
      * 認定調査依頼発行一覧表を取得します。
@@ -46,5 +47,5 @@ public interface IHomonChosaIraishoMapper {
      * @param param 訪問調査依頼書発行のパラメータ
      * @return List<HomonChosaIraishoRelateEntity>
      */
-    List<HomonChosaIraishoRelateEntity> get訪問調査依頼書tmp(HomonChosaIraishoMybitisParamter param);
+    List<HomonChosaIraishoRelateEntity> get訪問調査依頼書tmp(NinteiChosaMybitisParamter param);
 }

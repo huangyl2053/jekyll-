@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.ShujiiIkenshoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -35,7 +35,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
     private static final ReportId 帳票ID = ReportIdDBE.DBE013006.getReportId();
-    private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
+    private ShujiiIkenshoProcessParamter processParamter;
     private int index;
     @BatchWriter
     private BatchReportWriter<ShujiiIkenshoSeikyuIchiranReportSource> batchWriter;
@@ -48,7 +48,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenMybatisParameter());
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-        ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(new IraishoIkkatsuHakkoBusiness(entity, processParamter)
+        ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(new ShujiiIkenshoBusiness(entity, processParamter)
                 .setDBE013006Entity(), index++);
         report.writeBy(reportSourceWriter);
     }
@@ -70,7 +70,7 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        OutputJokenhyoFactory.createInstance(new IraishoIkkatsuHakkoBusiness(null, processParamter).
+        OutputJokenhyoFactory.createInstance(new ShujiiIkenshoBusiness(null, processParamter).
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,

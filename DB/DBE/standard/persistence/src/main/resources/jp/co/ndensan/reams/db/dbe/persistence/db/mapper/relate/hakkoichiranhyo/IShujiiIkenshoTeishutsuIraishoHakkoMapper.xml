@@ -45,7 +45,7 @@
     </resultMap>
     
     <select resultOrdered="true" id="get主治医意見書提出依頼書発行" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenMybatisParameter" fetchSize="500">
         SELECT
         pickout."shinseishoKanriNo" AS "shinseishoKanriNo"
         , pickout."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
@@ -323,7 +323,7 @@
         AND "logicalDeletedFlag" = false
     </select>   
     <select resultOrdered="true" id="get主治医意見書作成依頼履歴一覧" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoMybatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenMybatisParameter"
             fetchSize="500">
         WITH rireki AS(
         SELECT

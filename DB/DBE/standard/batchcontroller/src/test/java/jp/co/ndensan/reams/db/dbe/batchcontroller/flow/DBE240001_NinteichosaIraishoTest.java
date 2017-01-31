@@ -77,21 +77,18 @@ public class DBE240001_NinteichosaIraishoTest {
         param.setIraiFromYMD(new RString("20160101"));
         param.setIraiToYMD(new RString("20161231"));
 
-        param.setNinteiChosaIraiChohyo(true);
+        param.set認定調査依頼一覧(true);
 
         param.set認定調査依頼書(true);
-        param.set認定調査票_デザイン用紙(true);
-        param.set特記事項_デザイン用紙(true);
-        param.set認定調査票OCR(true);
-        param.set特記事項OCR(true);
+        param.set認定調査票_概況調査(true);
+        param.set認定調査票_基本調査(true);
+        param.set認定調査票_概況基本(true);
+        param.set認定調査票_特記事項(true);
+        param.set認定調査票_概況特記(true);
         param.set認定調査差異チェック票(true);
-        param.set概況特記(true);
-        param.set特記事項_項目あり(true);
-        param.set特記事項_項目無し(true);
+        param.set特記事項_調査群(true);
         param.set特記事項_フリータイプ(true);
-        param.set手入力タイプ(true);
-        param.set前回認定調査結果との比較表(true);
-        param.setNinteiChosairaiHakkou(true);
+        param.set認定調査依頼発行一覧(true);
         param.set認定調査依頼履歴一覧(true);
 
         param.setTeishutsuKigen(new RString("1"));

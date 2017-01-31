@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
+import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.ShujiiIkenshoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
@@ -51,7 +51,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
             + "get主治医意見書提出依頼書発行");
     private static final ReportId 帳票ID = ReportIdDBZ.DBE230002.getReportId();
     private List<IkenshoSakuseiIraiIchiranhyoItem> bodyItemList;
-    private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
+    private ShujiiIkenshoProcessParamter processParamter;
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shujiiIryokikanCode")));
     @BatchWriter
     private BatchReportWriter<IkenshoSakuseiIraiIchiranhyoReportSource> batchWriter;
@@ -64,7 +64,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenMybatisParameter());
     }
 
     @Override
@@ -95,7 +95,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter);
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, Integer.parseInt(entity.get証記載保険者番号().toString()));
-        bodyItemList.add(new IraishoIkkatsuHakkoBusiness(entity, processParamter).setDBE230002BodyItem(ninshoshaSource, 通知文Map));
+        bodyItemList.add(new ShujiiIkenshoBusiness(entity, processParamter).setDBE230002BodyItem(ninshoshaSource, 通知文Map));
     }
 
     @Override
@@ -112,7 +112,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        OutputJokenhyoFactory.createInstance(new IraishoIkkatsuHakkoBusiness(null, processParamter).
+        OutputJokenhyoFactory.createInstance(new ShujiiIkenshoBusiness(null, processParamter).
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,
