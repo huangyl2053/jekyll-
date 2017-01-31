@@ -16,6 +16,17 @@
         <result property="調査員資格" column="T5913_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="電話番号" column="T5913_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     	<result property="番号" column="T5913_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="地区コード_サブ" column="T5913_SUB_chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="名称_サブ" column="UZT0007_SUB_codeMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査委託先コード_サブ" column="T5910_SUB_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    	<result property="事業者名称_サブ" column="T5910_SUB_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="調査委託区分_サブ" column="T5910_SUB_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="認定調査員コード_サブ" column="T5913_SUB_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="調査員氏名_サブ" column="T5913_SUB_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="調査員資格_サブ" column="T5913_SUB_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="電話番号_サブ" column="T5913_SUB_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    	<result property="番号_サブ" column="T5913_SUB_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="調査区分コード" column="T5101_chosaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="家庭訪問の有無" column="T5101_kateiHomonFlag" />
     </resultMap>
     
@@ -35,13 +46,24 @@
         , T5913."chosainShikaku" AS "T5913_chosainShikaku"
         , T5913."telNo" AS "T5913_telNo"
         , T5913."faxNo" AS "T5913_faxNo"
+        , T5913_SUB."chikuCode" AS "T5913_SUB_chikuCode"
+        , UZT0007_SUB."codeMeisho" AS "UZT0007_SUB_codeMeisho"
+        , T5910_SUB."ninteichosaItakusakiCode" AS "T5910_SUB_ninteichosaItakusakiCode"
+        , T5910_SUB."jigyoshaMeisho" AS "T5910_SUB_jigyoshaMeisho"
+        , T5910_SUB."chosaItakuKubun" AS "T5910_SUB_chosaItakuKubun"
+        , T5913_SUB."ninteiChosainCode" AS "T5913_SUB_ninteiChosainCode"
+        , T5913_SUB."chosainShimei" AS "T5913_SUB_chosainShimei"
+        , T5913_SUB."chosainShikaku" AS "T5913_SUB_chosainShikaku"
+        , T5913_SUB."telNo" AS "T5913_SUB_telNo"
+        , T5913_SUB."faxNo" AS "T5913_SUB_faxNo"
+        , T5101."chosaKubun" AS "T5101_chosaKubun"
         , T5101."kateiHomonFlag" AS "T5101_kateiHomonFlag" 
    FROM
         rgdb."DbT5101NinteiShinseiJoho" AS T5101 
-        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
+        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
           ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
           AND T5201."logicalDeletedFlag" = FALSE 
-        INNER JOIN ( 
+        LEFT JOIN ( 
           SELECT
             MAX(Dbt5201."ninteichosaIraiRirekiNo") AS 最大履歴番号
             , Dbt5201."shinseishoKanriNo" AS 申請書管理番号 
@@ -56,18 +78,30 @@
           AND 履歴書最大番号."最大履歴番号" = T5201."ninteichosaIraiRirekiNo" 
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
           ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
-        INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910 
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910 
           ON T5910."shichosonCode" = T7051."shichosonCode" 
           AND T5910."ninteichosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
-        INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913 
+        LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913 
           ON T5913."shichosonCode" = T7051."shichosonCode" 
           AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
           AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode" 
+       LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910_SUB 
+          ON T5910_SUB."shichosonCode" = T7051."shichosonCode" 
+          AND T5910_SUB."ninteichosaItakusakiCode" = T5101."ninteiChosaItakusakiCode" 
+       LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913_SUB 
+          ON T5913_SUB."shichosonCode" = T7051."shichosonCode" 
+          AND T5913_SUB."ninteiChosaItakusakiCode" = T5101."ninteiChosaItakusakiCode" 
+          AND T5913_SUB."ninteiChosainCode" = T5101."ninteiChosainCode" 
         LEFT JOIN rgdb."UzT0007Code" AS UzT0007 
           ON UzT0007."schemaName" = 'rgdb' 
           AND UzT0007."subGyomuCode" = 'DBE' 
           AND UzT0007."codeShubetsu" = '5002' 
           AND UzT0007."code" = T5913."chikuCode" 
+       LEFT JOIN rgdb."UzT0007Code" AS UzT0007_SUB 
+          ON UzT0007_SUB."schemaName" = 'rgdb' 
+          AND UzT0007_SUB."subGyomuCode" = 'DBE' 
+          AND UzT0007_SUB."codeShubetsu" = '5002' 
+          AND UzT0007_SUB."code" = T5913_SUB."chikuCode" 
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
           ON T5201."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
           AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
@@ -102,6 +136,15 @@
         <result property="電話番号" column="T5911_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     	<result property="番号" column="T5911_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="代表者名" column="T5911_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医コード_サブ" column="T5912_SUB_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    	<result property="主治医氏名_サブ" column="T5912_SUB_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医医療機関コード_サブ" column="T5911_SUB_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="医療機関名称_サブ" column="T5911_SUB_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号_サブ" column="T5911_SUB_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="住所_サブ" column="T5911_SUB_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="電話番号_サブ" column="T5911_SUB_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    	<result property="番号_サブ" column="T5911_SUB_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="代表者名_サブ" column="T5911_SUB_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
    <select resultOrdered="true" id="getSyujiIraiJouhou" resultMap="resultMap_SyujiIraiJouhou" 
@@ -124,12 +167,21 @@
         , T5911."telNo" AS "T5911_telNo"
         , T5911."faxNo" AS "T5911_faxNo"
         , T5911."daihyoshaName" AS "T5911_daihyoshaName" 
+        , T5912_SUB."shujiiCode" AS "T5912_SUB_shujiiCode"
+        , T5912_SUB."shujiiName" AS "T5912_SUB_shujiiName"
+        , T5911_SUB."shujiiIryokikanCode" AS "T5911_SUB_shujiiIryokikanCode"
+        , T5911_SUB."iryoKikanMeisho" AS "T5911_SUB_iryoKikanMeisho"
+        , T5911_SUB."yubinNo" AS "T5911_SUB_yubinNo"
+        , T5911_SUB."jusho" AS "T5911_SUB_jusho"
+        , T5911_SUB."telNo" AS "T5911_SUB_telNo"
+        , T5911_SUB."faxNo" AS "T5911_SUB_faxNo"
+        , T5911_SUB."daihyoshaName" AS "T5911_SUB_daihyoshaName" 
       FROM
         rgdb."DbT5101NinteiShinseiJoho" AS T5101 
-        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
           ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
           AND T5301."logicalDeletedFlag" = FALSE 
-        INNER JOIN ( 
+        LEFT JOIN ( 
           SELECT
             MAX(Dbt5301."ikenshoIraiRirekiNo") AS 最大履歴番号
             , Dbt5301."shinseishoKanriNo" AS 申請書管理番号 
@@ -142,18 +194,25 @@
         ) AS 履歴書最大番号 
           ON 履歴書最大番号."申請書管理番号" = T5301."shinseishoKanriNo" 
           AND 履歴書最大番号."最大履歴番号" = T5301."ikenshoIraiRirekiNo" 
-        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302 
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302 
           ON T5301."shinseishoKanriNo" = T5302."shinseishoKanriNo" 
           AND T5301."ikenshoIraiRirekiNo" = T5302."ikenshoIraiRirekiNo" 
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
           ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
-        INNER JOIN rgdb."DbT5912ShujiiJoho" AS T5912 
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912 
           ON T5912."shichosonCode" = T7051."shichosonCode" 
           AND T5912."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode" 
           AND T5912."shujiiCode" = T5302."shujiiCode" 
-        INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
           ON T5911."shichosonCode" = T7051."shichosonCode" 
           AND T5911."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode" 
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912_SUB 
+          ON T5912_SUB."shichosonCode" = T7051."shichosonCode" 
+          AND T5912_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode" 
+          AND T5912_SUB."shujiiCode" = T5101."shujiiCode" 
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911_SUB 
+          ON T5911_SUB."shichosonCode" = T7051."shichosonCode" 
+          AND T5911_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode" 
       WHERE
         T5101."shinseishoKanriNo" = #{申請書管理番号}
    </select>

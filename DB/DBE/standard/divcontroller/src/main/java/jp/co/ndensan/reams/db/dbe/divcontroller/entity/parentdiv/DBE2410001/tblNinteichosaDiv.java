@@ -27,8 +27,6 @@ public class tblNinteichosaDiv extends TabPanel {
     private KonkaiHomonChosaIraiJohoDiv KonkaiHomonChosaIraiJoho;
     @JsonProperty("ZenkaiHomonChosaIraiJoho")
     private ZenkaiHomonChosaIraiJohoDiv ZenkaiHomonChosaIraiJoho;
-    @JsonProperty("btnChosaPrint")
-    private ButtonDialog btnChosaPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -70,24 +68,6 @@ public class tblNinteichosaDiv extends TabPanel {
     @JsonProperty("ZenkaiHomonChosaIraiJoho")
     public void setZenkaiHomonChosaIraiJoho(ZenkaiHomonChosaIraiJohoDiv ZenkaiHomonChosaIraiJoho) {
         this.ZenkaiHomonChosaIraiJoho = ZenkaiHomonChosaIraiJoho;
-    }
-
-    /*
-     * getbtnChosaPrint
-     * @return btnChosaPrint
-     */
-    @JsonProperty("btnChosaPrint")
-    public ButtonDialog getBtnChosaPrint() {
-        return btnChosaPrint;
-    }
-
-    /*
-     * setbtnChosaPrint
-     * @param btnChosaPrint btnChosaPrint
-     */
-    @JsonProperty("btnChosaPrint")
-    public void setBtnChosaPrint(ButtonDialog btnChosaPrint) {
-        this.btnChosaPrint = btnChosaPrint;
     }
 
     /*
@@ -361,6 +341,16 @@ public class tblNinteichosaDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtHomonUmu(TextBox txtHomonUmu) {
         this.getKonkaiHomonChosaIraiJoho().setTxtHomonUmu(txtHomonUmu);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnChosaPrint() {
+        return this.getKonkaiHomonChosaIraiJoho().getBtnChosaPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaPrint(ButtonDialog btnChosaPrint) {
+        this.getKonkaiHomonChosaIraiJoho().setBtnChosaPrint(btnChosaPrint);
     }
 
     @JsonIgnore

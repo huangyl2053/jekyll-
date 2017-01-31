@@ -30,6 +30,15 @@ public class KojinIraiNaiyouBusiness {
     public KojinIraiNaiyouBusiness(KojinIraiNaiyouRelateEntity entity) {
         this.entity = entity;
     }
+    
+    /**
+     * KojinIraiNaiyouRelateEntityのgetメソッドです。
+     * 
+     * @return KojinIraiNaiyouRelateEntity
+     */
+    public KojinIraiNaiyouRelateEntity getEntity() {
+        return entity;
+    }
 
     /**
      * 認定調査依頼区分コードのgetメソッドです。
@@ -146,6 +155,105 @@ public class KojinIraiNaiyouBusiness {
      */
     public TelNo get番号() {
         return entity.get番号();
+    }
+
+    /**
+     * 地区コード_サブのgetメソッドです。
+     *
+     * @return 地区コード_サブ
+     */
+    public RString get地区コード_サブ() {
+        return entity.get地区コード_サブ();
+    }
+
+    /**
+     * 名称_サブのgetメソッドです。
+     *
+     * @return 名称_サブ
+     */
+    public RString get名称_サブ() {
+        return entity.get名称_サブ();
+    }
+
+    /**
+     * 認定調査委託先コード_サブのgetメソッドです。
+     *
+     * @return 認定調査委託先コード_サブ
+     */
+    public RString get認定調査委託先コード_サブ() {
+        return entity.get認定調査委託先コード_サブ();
+    }
+
+    /**
+     * 事業者名称_サブのgetメソッドです。
+     *
+     * @return 事業者名称_サブ
+     */
+    public RString get事業者名称_サブ() {
+        return entity.get事業者名称_サブ();
+    }
+
+    /**
+     * 調査委託区分_サブのgetメソッドです。
+     *
+     * @return 調査委託区分_サブ
+     */
+    public RString get調査委託区分_サブ() {
+        return entity.get調査委託区分_サブ();
+    }
+
+    /**
+     * 認定調査員コード_サブのgetメソッドです。
+     *
+     * @return 認定調査員コード_サブ
+     */
+    public RString get認定調査員コード_サブ() {
+        return entity.get認定調査員コード_サブ();
+    }
+
+    /**
+     * 調査員氏名_サブのgetメソッドです。
+     *
+     * @return 調査員氏名_サブ
+     */
+    public RString get調査員氏名_サブ() {
+        return entity.get調査員氏名_サブ();
+    }
+
+    /**
+     * 調査員資格_サブのgetメソッドです。
+     *
+     * @return 調査員資格_サブ
+     */
+    public RString get調査員資格_サブ() {
+        return entity.get調査員資格_サブ();
+    }
+
+    /**
+     * 電話番号_サブのgetメソッドです。
+     *
+     * @return 電話番号_サブ
+     */
+    public TelNo get電話番号_サブ() {
+        return entity.get電話番号_サブ();
+    }
+
+    /**
+     * 番号_サブのgetメソッドです。
+     *
+     * @return 番号_サブ
+     */
+    public TelNo get番号_サブ() {
+        return entity.get番号_サブ();
+    }
+
+    /**
+     * 調査区分コードのgetメソッドです。
+     *
+     * @return 調査区分コード
+     */
+    public Code get調査区分コード() {
+        return entity.get調査区分コード();
     }
 
     /**
@@ -290,5 +398,68 @@ public class KojinIraiNaiyouBusiness {
      */
     public RString get代表者名所() {
         return entity.get代表者名();
+    }
+
+    /**
+     * 主治医コード_サブのgetメソッドです。
+     *
+     * @return 主治医コード_サブ
+     */
+    public RString get主治医コード_サブ() {
+        return entity.get主治医コード_サブ();
+    }
+
+    /**
+     * 主治医氏名_サブのgetメソッドです。
+     *
+     * @return 主治医氏名_サブ
+     */
+    public RString get主治医氏名_サブ() {
+        return entity.get主治医氏名_サブ();
+    }
+
+    /**
+     * 主治医医療機関コード_サブのgetメソッドです。
+     *
+     * @return 主治医医療機関コード_サブ
+     */
+    public RString get主治医医療機関コード_サブ() {
+        return entity.get主治医医療機関コード_サブ();
+    }
+
+    /**
+     * 医療機関名称_サブのgetメソッドです。
+     *
+     * @return 医療機関名称_サブ
+     */
+    public RString get医療機関名称_サブ() {
+        return entity.get医療機関名称_サブ();
+    }
+
+    /**
+     * 郵便番号_サブのgetメソッドです。
+     *
+     * @return 郵便番号_サブ
+     */
+    public YubinNo get郵便番号_サブ() {
+        return entity.get郵便番号_サブ();
+    }
+
+    /**
+     * 住所_サブのgetメソッドです。
+     *
+     * @return 住所_サブ
+     */
+    public RString get住所_サブ() {
+        return entity.get住所_サブ();
+    }
+
+    /**
+     * 代表者名_サブのgetメソッドです。
+     *
+     * @return 代表者名_サブ
+     */
+    public RString get代表者名所_サブ() {
+        return entity.get代表者名_サブ();
     }
 }

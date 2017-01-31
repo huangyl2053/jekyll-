@@ -37,6 +37,17 @@ public class KojinIraiNaiyouRelateEntity {
     private RString 調査員資格;
     private TelNo 電話番号;
     private TelNo 番号;
+    private RString 地区コード_サブ;
+    private RString 名称_サブ;
+    private RString 認定調査委託先コード_サブ;
+    private RString 事業者名称_サブ;
+    private RString 調査委託区分_サブ;
+    private RString 認定調査員コード_サブ;
+    private RString 調査員氏名_サブ;
+    private RString 調査員資格_サブ;
+    private TelNo 電話番号_サブ;
+    private TelNo 番号_サブ;
+    private Code 調査区分コード;
     private boolean 家庭訪問の有無;
     private ShinseishoKanriNo 申請書管理番号;
     private int 主治医意見書作成依頼履歴番号;
@@ -53,4 +64,11 @@ public class KojinIraiNaiyouRelateEntity {
     private YubinNo 郵便番号;
     private RString 住所;
     private RString 代表者名;
+    private RString 主治医コード_サブ;
+    private RString 主治医氏名_サブ;
+    private RString 主治医医療機関コード_サブ;
+    private RString 医療機関名称_サブ;
+    private YubinNo 郵便番号_サブ;
+    private RString 住所_サブ;
+    private RString 代表者名_サブ;
 }

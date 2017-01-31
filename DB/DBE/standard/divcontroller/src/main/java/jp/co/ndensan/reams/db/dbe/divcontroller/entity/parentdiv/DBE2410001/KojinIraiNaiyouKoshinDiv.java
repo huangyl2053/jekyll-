@@ -379,6 +379,16 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnChosaPrint() {
+        return this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().getKonkaiHomonChosaIraiJoho().getBtnChosaPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaPrint(ButtonDialog btnChosaPrint) {
+        this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().getKonkaiHomonChosaIraiJoho().setBtnChosaPrint(btnChosaPrint);
+    }
+
+    @JsonIgnore
     public ZenkaiHomonChosaIraiJohoDiv getZenkaiHomonChosaIraiJoho() {
         return this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().getZenkaiHomonChosaIraiJoho();
     }
@@ -659,16 +669,6 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChosaPrint() {
-        return this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().getBtnChosaPrint();
-    }
-
-    @JsonIgnore
-    public void  setBtnChosaPrint(ButtonDialog btnChosaPrint) {
-        this.getTabKojinIraiNaiyouKoshin().getTblNinteichosa().setBtnChosaPrint(btnChosaPrint);
-    }
-
-    @JsonIgnore
     public tblIkenshoDiv getTblIkensho() {
         return this.getTabKojinIraiNaiyouKoshin().getTblIkensho();
     }
@@ -849,6 +849,16 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnIkenshoPrint() {
+        return this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getKonkaiShujiiIraiJoho().getBtnIkenshoPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
+        this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getKonkaiShujiiIraiJoho().setBtnIkenshoPrint(btnIkenshoPrint);
+    }
+
+    @JsonIgnore
     public ZenkaiShujiiIraiJohoDiv getZenkaiShujiiIraiJoho() {
         return this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getZenkaiShujiiIraiJoho();
     }
@@ -1016,16 +1026,6 @@ public class KojinIraiNaiyouKoshinDiv extends Panel {
     @JsonIgnore
     public void  setTxtIryoKikanDaihyoshaShimeiZen(TextBox txtIryoKikanDaihyoshaShimeiZen) {
         this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getZenkaiShujiiIraiJoho().setTxtIryoKikanDaihyoshaShimeiZen(txtIryoKikanDaihyoshaShimeiZen);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnIkenshoPrint() {
-        return this.getTabKojinIraiNaiyouKoshin().getTblIkensho().getBtnIkenshoPrint();
-    }
-
-    @JsonIgnore
-    public void  setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
-        this.getTabKojinIraiNaiyouKoshin().getTblIkensho().setBtnIkenshoPrint(btnIkenshoPrint);
     }
 
     // </editor-fold>

@@ -27,8 +27,6 @@ public class tblIkenshoDiv extends TabPanel {
     private KonkaiShujiiIraiJohoDiv KonkaiShujiiIraiJoho;
     @JsonProperty("ZenkaiShujiiIraiJoho")
     private ZenkaiShujiiIraiJohoDiv ZenkaiShujiiIraiJoho;
-    @JsonProperty("btnIkenshoPrint")
-    private ButtonDialog btnIkenshoPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -70,24 +68,6 @@ public class tblIkenshoDiv extends TabPanel {
     @JsonProperty("ZenkaiShujiiIraiJoho")
     public void setZenkaiShujiiIraiJoho(ZenkaiShujiiIraiJohoDiv ZenkaiShujiiIraiJoho) {
         this.ZenkaiShujiiIraiJoho = ZenkaiShujiiIraiJoho;
-    }
-
-    /*
-     * getbtnIkenshoPrint
-     * @return btnIkenshoPrint
-     */
-    @JsonProperty("btnIkenshoPrint")
-    public ButtonDialog getBtnIkenshoPrint() {
-        return btnIkenshoPrint;
-    }
-
-    /*
-     * setbtnIkenshoPrint
-     * @param btnIkenshoPrint btnIkenshoPrint
-     */
-    @JsonProperty("btnIkenshoPrint")
-    public void setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
-        this.btnIkenshoPrint = btnIkenshoPrint;
     }
 
     /*
@@ -251,6 +231,16 @@ public class tblIkenshoDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtIryoKikanDaihyoshaShimei(TextBox txtIryoKikanDaihyoshaShimei) {
         this.getKonkaiShujiiIraiJoho().setTxtIryoKikanDaihyoshaShimei(txtIryoKikanDaihyoshaShimei);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIkenshoPrint() {
+        return this.getKonkaiShujiiIraiJoho().getBtnIkenshoPrint();
+    }
+
+    @JsonIgnore
+    public void  setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
+        this.getKonkaiShujiiIraiJoho().setBtnIkenshoPrint(btnIkenshoPrint);
     }
 
     @JsonIgnore

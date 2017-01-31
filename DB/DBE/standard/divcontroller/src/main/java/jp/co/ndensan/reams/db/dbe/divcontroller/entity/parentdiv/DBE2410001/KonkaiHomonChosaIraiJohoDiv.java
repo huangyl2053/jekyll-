@@ -76,6 +76,8 @@ public class KonkaiHomonChosaIraiJohoDiv extends Panel {
     private TextBoxTelNo txtFaxSai;
     @JsonProperty("txtHomonUmu")
     private TextBox txtHomonUmu;
+    @JsonProperty("btnChosaPrint")
+    private ButtonDialog btnChosaPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -567,6 +569,24 @@ public class KonkaiHomonChosaIraiJohoDiv extends Panel {
     @JsonProperty("txtHomonUmu")
     public void setTxtHomonUmu(TextBox txtHomonUmu) {
         this.txtHomonUmu = txtHomonUmu;
+    }
+
+    /*
+     * getbtnChosaPrint
+     * @return btnChosaPrint
+     */
+    @JsonProperty("btnChosaPrint")
+    public ButtonDialog getBtnChosaPrint() {
+        return btnChosaPrint;
+    }
+
+    /*
+     * setbtnChosaPrint
+     * @param btnChosaPrint btnChosaPrint
+     */
+    @JsonProperty("btnChosaPrint")
+    public void setBtnChosaPrint(ButtonDialog btnChosaPrint) {
+        this.btnChosaPrint = btnChosaPrint;
     }
 
     // </editor-fold>

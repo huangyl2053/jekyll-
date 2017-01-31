@@ -54,6 +54,8 @@ public class KonkaiShujiiIraiJohoDiv extends Panel {
     private TextBoxTelNo txtFaxIkensho;
     @JsonProperty("txtIryoKikanDaihyoshaShimei")
     private TextBox txtIryoKikanDaihyoshaShimei;
+    @JsonProperty("btnIkenshoPrint")
+    private ButtonDialog btnIkenshoPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -347,6 +349,24 @@ public class KonkaiShujiiIraiJohoDiv extends Panel {
     @JsonProperty("txtIryoKikanDaihyoshaShimei")
     public void setTxtIryoKikanDaihyoshaShimei(TextBox txtIryoKikanDaihyoshaShimei) {
         this.txtIryoKikanDaihyoshaShimei = txtIryoKikanDaihyoshaShimei;
+    }
+
+    /*
+     * getbtnIkenshoPrint
+     * @return btnIkenshoPrint
+     */
+    @JsonProperty("btnIkenshoPrint")
+    public ButtonDialog getBtnIkenshoPrint() {
+        return btnIkenshoPrint;
+    }
+
+    /*
+     * setbtnIkenshoPrint
+     * @param btnIkenshoPrint btnIkenshoPrint
+     */
+    @JsonProperty("btnIkenshoPrint")
+    public void setBtnIkenshoPrint(ButtonDialog btnIkenshoPrint) {
+        this.btnIkenshoPrint = btnIkenshoPrint;
     }
 
     // </editor-fold>

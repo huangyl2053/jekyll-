@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinirainaiyoukoshin.KojinIraiNaiyouBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.KojinIraiNaiyouKoshinDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 個人依頼内容更新(認定調査票・主治医意見書編集)の抽象Handlerクラスです。
@@ -34,6 +36,8 @@ public class KojinIraiNaiyouKoshinHandler {
     private static final RString キー_1 = new RString("key1");
     private static final RString 半角スペース = new RString(" ");
     private static final RString 半角スペースx2 = new RString("  ");
+    private static final RString 調査依頼修正ボタン名 = new RString("btnChosaIraiNoToroku");
+    private static final RString 意見書依頼修正ボタン名 = new RString("btnIkenshoIraiNoToroku");
 
     /**
      * コンストラクタです。
@@ -57,6 +61,10 @@ public class KojinIraiNaiyouKoshinHandler {
             KojinIraiNaiyouBusiness 今回主治医情報, KojinIraiNaiyouBusiness 前回調査情報,
             KojinIraiNaiyouBusiness 前回主治医情報) {
         div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
+        div.getBtnChosaPrint().setDisabled(false);
+        div.getBtnIkenshoPrint().setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼修正ボタン名, false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼修正ボタン名, false);
         set今回調査依頼情報(今回調査情報);
         set前回調査依頼情報(前回調査情報);
         set今回主治医情報(今回主治医情報);
@@ -64,7 +72,10 @@ public class KojinIraiNaiyouKoshinHandler {
     }
 
     private void set前回調査依頼情報(KojinIraiNaiyouBusiness 前回調査情報) {
-        if (前回調査情報 != null && NinteiChousaIraiKubunCode.初回.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())) {
+        if (前回調査情報 != null 
+                && 前回調査情報.getEntity() != null 
+                && 前回調査情報.get認定調査依頼区分コード() != null 
+                && NinteiChousaIraiKubunCode.初回.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())) {
             div.getTxtChosaBashoKubunZen().setValue(前回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
                     : ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード().value()).get名称());
             if (前回調査情報.get認定調査実施年月日() != null
@@ -87,8 +98,10 @@ public class KojinIraiNaiyouKoshinHandler {
                     : Sikaku.toValue(前回調査情報.get調査員資格()).get名称());
             div.getTxtDenwaBangoZen().setDomain(前回調査情報.get電話番号());
             div.getTxtFaxZen().setDomain(前回調査情報.get番号());
-        }
-        if (前回調査情報 != null && (NinteiChousaIraiKubunCode.再依頼.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())
+        } else if (前回調査情報 != null 
+                && 前回調査情報.getEntity() != null 
+                && 前回調査情報.get認定調査依頼区分コード() != null 
+                && (NinteiChousaIraiKubunCode.再依頼.getコード().equals(前回調査情報.get認定調査依頼区分コード().value())
                 || NinteiChousaIraiKubunCode.再調査.getコード().equals(前回調査情報.get認定調査依頼区分コード().value()))) {
             div.getTxtChosaBashoKubunSaiZen().setValue(前回調査情報.get認定調査実施場所コード() == null
                     ? RString.EMPTY : ChosaJisshiBashoCode.toValue(前回調査情報.get認定調査実施場所コード().value()).get名称());                           
@@ -117,7 +130,10 @@ public class KojinIraiNaiyouKoshinHandler {
     }
 
     private void set今回調査依頼情報(KojinIraiNaiyouBusiness 今回調査情報) {
-        if (今回調査情報 != null && NinteiChousaIraiKubunCode.初回.getコード().equals(今回調査情報.get認定調査依頼区分コード().value())) {
+        if (今回調査情報 != null 
+                && 今回調査情報.getEntity() != null 
+                && 今回調査情報.get認定調査依頼区分コード() != null 
+                && NinteiChousaIraiKubunCode.初回.getコード().equals(今回調査情報.get認定調査依頼区分コード().value())) {
             div.getTxtChosaBashoKubun().setValue(今回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
                     : ChosaJisshiBashoCode.toValue(今回調査情報.get認定調査実施場所コード().value()).get名称());
             if (今回調査情報.get認定調査実施年月日() != null
@@ -140,8 +156,9 @@ public class KojinIraiNaiyouKoshinHandler {
                     : Sikaku.toValue(今回調査情報.get調査員資格()).get名称());
             div.getTxtDenwaBango().setDomain(今回調査情報.get電話番号());
             div.getTxtFax().setDomain(今回調査情報.get番号());
-        }
-        if (今回調査情報 != null && (NinteiChousaIraiKubunCode.再依頼.getコード().equals(今回調査情報.get認定調査依頼区分コード().value())
+        } else if (今回調査情報 != null 
+                && 今回調査情報.get認定調査依頼区分コード() != null 
+                && (NinteiChousaIraiKubunCode.再依頼.getコード().equals(今回調査情報.get認定調査依頼区分コード().value())
                 || NinteiChousaIraiKubunCode.再調査.getコード().equals(今回調査情報.get認定調査依頼区分コード().value()))) {
             div.getTxtChosaBashoKubunSai().setValue(今回調査情報.get認定調査実施場所コード() == null ? RString.EMPTY
                     : ChosaJisshiBashoCode.toValue(今回調査情報.get認定調査実施場所コード().value()).get名称());
@@ -166,11 +183,64 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtDenwaBangoSai().setDomain(今回調査情報.get電話番号());
             div.getTxtFaxSai().setDomain(今回調査情報.get番号());
             div.getTxtHomonUmu().setValue(KateiHomonUmu.toValue(今回調査情報.is家庭訪問の有無()).get名称());
+        } else if (今回調査情報 != null 
+                && 今回調査情報.getEntity() != null 
+                && 今回調査情報.get認定調査依頼区分コード() == null 
+                && (今回調査情報.get調査区分コード() == null 
+                || ChosaKubun.新規調査.getコード().equals(今回調査情報.get調査区分コード().value()))) {
+            div.getTxtChosaJIsshiChikuCode().setValue(今回調査情報.get地区コード_サブ());
+            div.getTxtChosaJIsshiChiku().setValue(今回調査情報.get名称_サブ());
+            div.getTxtChosaKikanCode().setValue(今回調査情報.get認定調査委託先コード_サブ());
+            div.getTxtChosaKikan().setValue(今回調査情報.get事業者名称_サブ());
+            div.getTxtChosaItakuKubun().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査委託区分_サブ())||
+                    今回調査情報.get調査委託区分_サブ().equals(半角スペース) ? RString.EMPTY
+                    : ChosaItakuKubunCode.toValue(今回調査情報.get調査委託区分_サブ()).get名称());
+            div.getTxtChosainCode().setValue(今回調査情報.get認定調査員コード_サブ());
+            div.getTxtChosain().setValue(今回調査情報.get調査員氏名_サブ());
+            div.getTxtChosainShikaku().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査員資格_サブ())||
+                    今回調査情報.get調査員資格_サブ().equals(半角スペースx2) ? RString.EMPTY
+                    : Sikaku.toValue(今回調査情報.get調査員資格_サブ()).get名称());
+            div.getTxtDenwaBango().setDomain(今回調査情報.get電話番号_サブ());
+            div.getTxtFax().setDomain(今回調査情報.get番号_サブ());
+            
+            div.getBtnChosaPrint().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼修正ボタン名, true);
+        } else if (今回調査情報 != null 
+                && 今回調査情報.getEntity() != null 
+                && 今回調査情報.get認定調査依頼区分コード() == null 
+                && ChosaKubun.再調査.getコード().equals(今回調査情報.get調査区分コード().value())) {
+            div.getTxtChosaJIsshiChikuCodeSai().setValue(今回調査情報.get地区コード_サブ());
+            div.getTxtChosaJIsshiChikuSai().setValue(今回調査情報.get名称_サブ());
+            div.getTxtChosaKikanCodeSai().setValue(今回調査情報.get認定調査委託先コード_サブ());
+            div.getTxtChosaKikanSai().setValue(今回調査情報.get事業者名称_サブ());
+            div.getTxtChosaItakuKubunSai().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査委託区分_サブ()) || 
+                    今回調査情報.get調査委託区分_サブ().equals(半角スペース) ? RString.EMPTY
+                    : ChosaItakuKubunCode.toValue(今回調査情報.get調査委託区分_サブ()).get名称());
+            div.getTxtChosainCodeSai().setValue(今回調査情報.get認定調査員コード_サブ());
+            div.getTxtChosainSai().setValue(今回調査情報.get調査員氏名_サブ());
+            div.getTxtChosainShikakuSai().setValue(
+                    RString.isNullOrEmpty(今回調査情報.get調査員資格_サブ()) ||
+                    今回調査情報.get調査員資格_サブ().equals(半角スペースx2) ? RString.EMPTY
+                    : Sikaku.toValue(今回調査情報.get調査員資格_サブ()).get名称());
+            div.getTxtDenwaBangoSai().setDomain(今回調査情報.get電話番号_サブ());
+            div.getTxtFaxSai().setDomain(今回調査情報.get番号_サブ());
+            div.getTxtHomonUmu().setValue(KateiHomonUmu.toValue(今回調査情報.is家庭訪問の有無()).get名称());
+            
+            div.getBtnChosaPrint().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼修正ボタン名, true);
+        } else {
+            div.getBtnChosaPrint().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼修正ボタン名, true);
         }
     }
     
    private void set今回主治医情報(KojinIraiNaiyouBusiness 今回主治医情報) {
-        if (今回主治医情報 != null) {
+        if (今回主治医情報 != null 
+                && 今回主治医情報.getEntity() != null 
+                && 今回主治医情報.get申請書管理番号() != null) {
             div.getTxtIkenshoSakuseiIraiRirekiBango().setValue(new RString(今回主治医情報.get主治医意見書作成依頼履歴番号()));
             div.getTxtIkenshoIraiKubun().setValue(IkenshoIraiKubun.toValue(今回主治医情報.get主治医意見書依頼区分()).get名称());
             div.getTxtIkenshoSakuseiKaisu().setValue(new Decimal(今回主治医情報.get主治医意見書作成回数()));
@@ -195,14 +265,38 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtIryoKikanCode().setValue(今回主治医情報.get主治医医療機関コード());
             div.getTxtIryoKikan().setValue(今回主治医情報.get医療機関名称());
             div.getTxtYubinGango().setValue(今回主治医情報.get郵便番号());
-            div.getTxtJusho().setDomain(new AtenaJusho(今回主治医情報.get住所()));
+            if (今回主治医情報.get住所() != null) {
+                div.getTxtJusho().setDomain(new AtenaJusho(今回主治医情報.get住所()));
+            }
             div.getTxtDenwaBangoIkensho().setDomain(今回主治医情報.get電話番号());
             div.getTxtFaxIkensho().setDomain(今回主治医情報.get番号());
             div.getTxtIryoKikanDaihyoshaShimei().setValue(今回主治医情報.get代表者名所());
+        } else if (今回主治医情報 != null 
+                && 今回主治医情報.getEntity() != null 
+                && 今回主治医情報.get申請書管理番号() == null) {
+            List<RString> key = new ArrayList();
+            div.getChkNinteiKekka().setSelectedItemsByKey(key);
+            div.getTxtShujiiCode().setValue(今回主治医情報.get主治医コード_サブ());
+            div.getTxtShujii().setValue(今回主治医情報.get主治医氏名_サブ());
+            div.getTxtIryoKikanCode().setValue(今回主治医情報.get主治医医療機関コード_サブ());
+            div.getTxtIryoKikan().setValue(今回主治医情報.get医療機関名称_サブ());
+            div.getTxtYubinGango().setValue(今回主治医情報.get郵便番号_サブ());
+            div.getTxtJusho().setDomain(new AtenaJusho(今回主治医情報.get住所_サブ()));
+            div.getTxtDenwaBangoIkensho().setDomain(今回主治医情報.get電話番号_サブ());
+            div.getTxtFaxIkensho().setDomain(今回主治医情報.get番号_サブ());
+            div.getTxtIryoKikanDaihyoshaShimei().setValue(今回主治医情報.get代表者名所_サブ());
+            
+            div.getBtnIkenshoPrint().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼修正ボタン名, true);
+        } else {
+            div.getBtnIkenshoPrint().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼修正ボタン名, true);
         }
    }
    private void set前回主治医情報(KojinIraiNaiyouBusiness 前回主治医情報) {
-        if (前回主治医情報 != null) {
+        if (前回主治医情報 != null 
+                && 前回主治医情報.getEntity() != null 
+                && 前回主治医情報.get申請書管理番号() != null) {
             div.getTxtIkenshoSakuseiIraiRirekiBangoZen().setValue(new RString(前回主治医情報.get主治医意見書作成依頼履歴番号()));
             div.getTxtIkenshoIraiKubunZen().setValue(IkenshoIraiKubun.toValue(前回主治医情報.get主治医意見書依頼区分()).get名称());
             div.getTxtIkenshoSakuseiKaisuZen().setValue(new Decimal(前回主治医情報.get主治医意見書作成回数()));
@@ -227,7 +321,9 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtIryoKikanCodeZen().setValue(前回主治医情報.get主治医医療機関コード());
             div.getTxtIryoKikanZen().setValue(前回主治医情報.get医療機関名称());
             div.getTxtYubinGangoZen().setValue(前回主治医情報.get郵便番号());
-            div.getTxtJushoZen().setDomain(new AtenaJusho(前回主治医情報.get住所()));
+            if (前回主治医情報.get住所() != null) {
+                div.getTxtJushoZen().setDomain(new AtenaJusho(前回主治医情報.get住所()));
+            }
             div.getTxtDenwaBangoIkenshoZen().setDomain(前回主治医情報.get電話番号());
             div.getTxtFaxIkenshoZen().setDomain(前回主治医情報.get番号());
             div.getTxtIryoKikanDaihyoshaShimeiZen().setValue(前回主治医情報.get代表者名所());
