@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 一次判定結果情報のハンドラークラスです。
@@ -190,6 +191,7 @@ public class IchijiHanteiKekkaJohoHandler {
      */
     public void initialize(IchijiHanteiKekkaJoho hanteiKekka, ModeType modeType) {
         setStateOfIchijiHanteiKekka(modeType);
+        div.setIchijiHanteiKekka(DataPassingConverter.serialize(hanteiKekka));
         setIchijiHanteiKekka(hanteiKekka);
     }
 

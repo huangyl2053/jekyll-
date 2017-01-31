@@ -10,10 +10,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010002.DBE3
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010002.DBE3010002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010002.IchijiHanteiExecuterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010002.IchijiHanteiExecuterHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -24,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  * @author n8178
  */
 public class IchijiHanteiExecuter {
+    
+    private static final RString KEY0 = new RString("key0");
+    private static final RString KEY1 = new RString("key1");
 
     /**
      * onLoad時に実行する処理を定義します。
@@ -85,8 +91,10 @@ public class IchijiHanteiExecuter {
     public ResponseData<IchijiHanteiExecuterDiv> onClick_btnSave(IchijiHanteiExecuterDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
-            if (!getHandler(div).hasChanged一次判定結果()) {
-                return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
+            if (KEY0.equals(div.getShoriSelectPanel().getRadShoriSelect().getSelectedKey())) {
+                if (!getHandler(div).hasChanged一次判定結果()) {
+                    return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
+                }
             }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -104,27 +112,24 @@ public class IchijiHanteiExecuter {
 
             IchijiHanteiKekkaJoho existingData = manager.get一次判定結果(torokuTaisho.identifier().get申請書管理番号());
             if (existingData != null) {
-                torokuTaisho = getHandler(div).updateHanteiKekka(existingData, torokuTaisho);
+                if (KEY0.equals(div.getShoriSelectPanel().getRadShoriSelect().getSelectedKey())) {
+                    torokuTaisho = getHandler(div).updateHanteiKekka(existingData, torokuTaisho);
+                    manager.save要介護認定一次判定結果情報(torokuTaisho);
+                } else if (KEY1.equals(div.getShoriSelectPanel().getRadShoriSelect().getSelectedKey())) {
+                    manager.saveOrDeletePhysical要介護認定一次判定結果情報(existingData.deleted());
+                    NinteiKanryoJohoManager ninteiKanryoManager = NinteiKanryoJohoManager.createInstance();
+                    NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoManager.get要介護認定完了情報(torokuTaisho.identifier().get申請書管理番号());
+                    ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set要介護認定一次判定完了年月日(FlexibleDate.EMPTY).build();
+                    ninteiKanryoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
+                }
+            }else{
+                manager.save要介護認定一次判定結果情報(torokuTaisho);
             }
-
-            manager.save要介護認定一次判定結果情報(torokuTaisho);
-
             div.getCcdHanteiKekka().clear一次判定結果();
             div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定結果を保存しました。"));
             return ResponseData.of(div).setState(DBE3010002StateName.complete);
         }
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 完了するボタンをクリックした場合の処理を定義します。 完了するボタンをクリックした場合、画面を終了しメニューに遷移します。
-     *
-     * @param div 一次判定実行Div
-     * @return ResponseData
-     */
-    public ResponseData<IchijiHanteiExecuterDiv> onClick_btnComplete(IchijiHanteiExecuterDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBE3010002TransitionEventName.完了する).respond();
     }
 
     /**
@@ -136,6 +141,22 @@ public class IchijiHanteiExecuter {
     public ResponseData<IchijiHanteiExecuterDiv> onClick_btnKanryoShori(IchijiHanteiExecuterDiv div) {
 
         return ResponseData.of(div).forwardWithEventName(DBE3010002TransitionEventName.完了処理へ遷移).respond();
+    }
+   
+    /**
+     * 処理選択ラジオボタンをチェンジしたときの処理を定義します。
+     *
+     * @param div 一次判定実行Divquals(div.getRadShoriSelect().getSelectedKey())) {
+            div.getCcdHanteiKekka().setAbledBtnIchijiHantei();
+     * @return ResponseData
+     */
+    public ResponseData<IchijiHanteiExecuterDiv> onChange_radShoriSelect(IchijiHanteiExecuterDiv div) {
+        if (KEY0.equals(div.getShoriSelectPanel().getRadShoriSelect().getSelectedKey())) {
+            div.getCcdHanteiKekka().setAbledBtnIchijiHantei();
+        } else if (KEY1.equals(div.getShoriSelectPanel().getRadShoriSelect().getSelectedKey())) {
+            div.getCcdHanteiKekka().setDisabledBtnIchijiHantei();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private IchijiHanteiExecuterHandler getHandler(IchijiHanteiExecuterDiv div) {
