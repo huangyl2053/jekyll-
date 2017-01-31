@@ -525,7 +525,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             ChosaIraishoAndChosahyoAndIkenshoPrintService printService, RString 保険者市町村コード) {
         RString 帳票ID = DbBusinessConfig.get(
                 ConfigNameDBE.認定調査票_概況基本_帳票ID_表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        printService.print認定調査票_両面(getHandler(div).create認定調査票_概況調査パラメータ(), 帳票ID);
+        if (ReportIdDBZ.DBE221001.getReportId().value().equals(帳票ID)) {
+            printService.print認定調査票_概況調査(getHandler(div).create認定調査票_概況調査パラメータ(), new ReportId(帳票ID));
+        } else if (ReportIdDBZ.DBE221011.getReportId().value().equals(帳票ID)) {
+            printService.print認定調査票_両面(getHandler(div).create認定調査票_概況調査パラメータ(), 帳票ID);
+        }
     }
 
     private void call認定調査票両面_特記事項(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div,
