@@ -119,7 +119,7 @@ public class IchijiHanteiExecuter {
                     manager.saveOrDeletePhysical要介護認定一次判定結果情報(existingData.deleted());
                     NinteiKanryoJohoManager ninteiKanryoManager = NinteiKanryoJohoManager.createInstance();
                     NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoManager.get要介護認定完了情報(torokuTaisho.identifier().get申請書管理番号());
-                    ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set要介護認定一次判定完了年月日(FlexibleDate.EMPTY).build();
+                    ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set要介護認定一次判定完了年月日(null).build();
                     ninteiKanryoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
                 }
             }else{

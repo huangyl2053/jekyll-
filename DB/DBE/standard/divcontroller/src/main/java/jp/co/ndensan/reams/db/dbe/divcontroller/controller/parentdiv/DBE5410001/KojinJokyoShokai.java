@@ -60,8 +60,9 @@ public class KojinJokyoShokai {
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
                 = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
+        getHandler(div).setKihonInfo(申請書管理番号);
         if (!kojinJokyoShokaiList.isEmpty()) {
-            getHandler(div).setKojinJokyoShokai(kojinJokyoShokaiList, 申請書管理番号);
+            getHandler(div).setKojinJokyoShokai(kojinJokyoShokaiList);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, kojinJokyoShokaiList.get(0).get主治医意見書作成依頼履歴番号());
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, kojinJokyoShokaiList.get(0).get認定調査依頼履歴番号());
             if (RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get市町村連絡事項())) {

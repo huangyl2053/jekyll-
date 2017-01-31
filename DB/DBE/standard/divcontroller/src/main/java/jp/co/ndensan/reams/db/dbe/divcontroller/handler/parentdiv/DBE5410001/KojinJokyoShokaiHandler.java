@@ -95,10 +95,8 @@ public class KojinJokyoShokaiHandler {
      * 要介護認定個人状況のデータを設定します。
      *
      * @param kojinJokyoShokaiList 要介護認定個人状況データ
-     * @param 申請書管理番号 申請書管理番号
      */
-    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, RString 申請書管理番号) {
-        div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
+    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         div.setHdnHihokenshaNo(kojinJokyoShokaiList.get(0).get被保番号());
         div.setHdnShokisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
         div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanCode().setValue(kojinJokyoShokaiList.get(0).get主治医医療機関コード());
@@ -122,6 +120,15 @@ public class KojinJokyoShokaiHandler {
         getchkShiteii(kojinJokyoShokaiList);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
+    }
+
+    /**
+     * CcdNinteiShinseishaKihonInfoを設定します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     */
+    public void setKihonInfo(RString 申請書管理番号) {
+        div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
     }
 
     /**

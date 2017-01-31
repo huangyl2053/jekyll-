@@ -41,7 +41,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set認定申請情報登録完了年月日(FlexibleDate 認定申請情報登録完了年月日) {
-        requireNonNull(認定申請情報登録完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請情報登録完了年月日"));
         entity.setNinteiShinseiJohoTorokuKanryoYMD(認定申請情報登録完了年月日);
         return this;
     }
@@ -53,7 +52,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set認定調査依頼完了年月日(FlexibleDate 認定調査依頼完了年月日) {
-        requireNonNull(認定調査依頼完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼完了年月日"));
         entity.setNinteichosaIraiKanryoYMD(認定調査依頼完了年月日);
         return this;
     }
@@ -65,7 +63,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set認定調査完了年月日(FlexibleDate 認定調査完了年月日) {
-        requireNonNull(認定調査完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査完了年月日"));
         entity.setNinteichosaKanryoYMD(認定調査完了年月日);
         return this;
     }
@@ -77,7 +74,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set主治医意見書作成依頼完了年月日(FlexibleDate 主治医意見書作成依頼完了年月日) {
-        requireNonNull(主治医意見書作成依頼完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼完了年月日"));
         entity.setIkenshoSakuseiIraiKanryoYMD(主治医意見書作成依頼完了年月日);
         return this;
     }
@@ -89,7 +85,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set主治医意見書登録完了年月日(FlexibleDate 主治医意見書登録完了年月日) {
-        requireNonNull(主治医意見書登録完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書登録完了年月日"));
         entity.setIkenshoTorokuKanryoYMD(主治医意見書登録完了年月日);
         return this;
     }
@@ -101,7 +96,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set要介護認定一次判定完了年月日(FlexibleDate 要介護認定一次判定完了年月日) {
-        requireNonNull(要介護認定一次判定完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定完了年月日"));
         entity.setIchijiHanteiKanryoYMD(要介護認定一次判定完了年月日);
         return this;
     }
@@ -113,7 +107,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder setマスキング完了年月日(FlexibleDate マスキング完了年月日) {
-        requireNonNull(マスキング完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("マスキング完了年月日"));
         entity.setMaskingKanryoYMD(マスキング完了年月日);
         return this;
     }
@@ -136,7 +129,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder set認定審査会完了年月日(FlexibleDate 認定審査会完了年月日) {
-        requireNonNull(認定審査会完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定審査会完了年月日"));
         entity.setNinteiShinsakaiKanryoYMD(認定審査会完了年月日);
         return this;
     }
@@ -148,7 +140,6 @@ public class NinteiKanryoJohoBuilder {
      * @return {@link NinteiKanryoJohoBuilder}
      */
     public NinteiKanryoJohoBuilder setセンター送信年月日(FlexibleDate センター送信年月日) {
-        requireNonNull(センター送信年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("センター送信年月日"));
         entity.setCenterSoshinYMD(センター送信年月日);
         return this;
     }
