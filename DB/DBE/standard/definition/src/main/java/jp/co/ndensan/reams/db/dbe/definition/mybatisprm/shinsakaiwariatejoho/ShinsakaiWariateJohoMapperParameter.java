@@ -38,6 +38,17 @@ public final class ShinsakaiWariateJohoMapperParameter {
     }
 
     /**
+     * コンストラクタです。
+     *
+     * @param shinseishoKanriNo ShinseishoKanriNo
+     * @throws NullPointerException 引数が{@code null}の場合
+     */
+    private ShinsakaiWariateJohoMapperParameter(ShinseishoKanriNo shinseishoKanriNo) {
+        this.shinsakaiKaisaiNo = null;
+        this.shinseishoKanriNo = requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+    }
+
+    /**
      * キー検索用のパラメータを生成します。
      *
      * @param kaisaiNo RString
@@ -48,5 +59,16 @@ public final class ShinsakaiWariateJohoMapperParameter {
             RString kaisaiNo,
             ShinseishoKanriNo kanriNo) {
         return new ShinsakaiWariateJohoMapperParameter(kaisaiNo, kanriNo);
+    }
+
+    /**
+     * キー検索用のパラメータを生成します。
+     *
+     * @param kanriNo ShinseishoKanriNo
+     * @return 身体手帳検索パラメータ
+     */
+    public static ShinsakaiWariateJohoMapperParameter createSelectByKeyParam(
+            ShinseishoKanriNo kanriNo) {
+        return new ShinsakaiWariateJohoMapperParameter(kanriNo);
     }
 }

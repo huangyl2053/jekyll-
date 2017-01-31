@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.ShinsakaiOrderKakuteiFlagMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
@@ -23,6 +24,14 @@ public interface IShinsakaiWariateJohoMapper {
      * @return ShinsakaiWariateJohoRelateEntity
      */
     ShinsakaiWariateJohoRelateEntity select介護認定審査会割当情報ByKey(ShinsakaiWariateJohoMapperParameter 介護認定審査会割当情報検索条件);
+
+    /**
+     * 介護認定審査会割当情報情報を取得します。
+     *
+     * @param 介護認定審査会割当情報検索条件 介護認定審査会割当情報検索条件
+     * @return ShinsakaiWariateJohoRelateEntity
+     */
+    List<ShinsakaiWariateJohoRelateEntity> select審査会割当データ(ShinsakaiWariateJohoMapperParameter 介護認定審査会割当情報検索条件);
 
     /**
      * 介護認定審査会割当情報情報をキー検索で１件取得します。

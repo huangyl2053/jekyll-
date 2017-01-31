@@ -9,6 +9,15 @@
     <select resultOrdered="true" id="select介護認定審査会割当情報ByKey" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
         <include refid="selectShinsakaiWariateJohoEntity" />
     </select>
+    
+    <select resultOrdered="true" id="select審査会割当データ" resultMap="resultMap_ShinsakaiWariateJohoEntity" fetchSize="500">
+       SELECT
+       DbT5502ShinsakaiWariateJoho.*
+       FROM
+       rgdb."DbT5502ShinsakaiWariateJoho" AS  DbT5502ShinsakaiWariateJoho
+       WHERE
+       DbT5502ShinsakaiWariateJoho."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
 
     <sql id="selectShinsakaiWariateJohoEntity">
         SELECT

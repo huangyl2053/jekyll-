@@ -15,10 +15,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoh
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho.IShinsakaiWariateJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 
 /**
  * 介護認定審査会割当情報を管理するクラスです。
@@ -60,7 +63,8 @@ public class ShinsakaiWariateJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiWariateJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiWariateJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiWariateJohoManager}のインスタンス
      */
     public static ShinsakaiWariateJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiWariateJohoManager.class);
@@ -83,6 +87,39 @@ public class ShinsakaiWariateJohoManager {
         }
         relateEntity.initializeMd5ToEntities();
         return new ShinsakaiWariateJoho2(relateEntity);
+    }
+
+    /**
+     * 条件に合致する審査会割当データが存在するか否かを返します。
+     *
+     * @param 管理番号 ShinseishoKanriNo 管理番号
+     * @return boolean
+     */
+    @Transaction
+    public boolean get審査会割当データ(ShinseishoKanriNo 管理番号) {
+        ShinsakaiWariateJohoMapperParameter 介護認定審査会割当情報検索条件 = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(管理番号);
+        requireNonNull(介護認定審査会割当情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当情報検索条件"));
+        IShinsakaiWariateJohoMapper mapper = mapperProvider.create(IShinsakaiWariateJohoMapper.class);
+
+        List<ShinsakaiWariateJohoRelateEntity> relateEntity = mapper.select審査会割当データ(介護認定審査会割当情報検索条件);
+        if (relateEntity == null) {
+            return false;
+        }
+        for (ShinsakaiWariateJohoRelateEntity entity : relateEntity) {
+            if ((entity.get介護認定審査会割当情報Entity().getHanteiKekkaCode() == null)
+                    && entity.get介護認定審査会割当情報Entity().getHanteiKekkaCode().getKey().isEmpty()) {
+                return true;
+            }
+        }
+
+        DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class).selectByKey(介護認定審査会割当情報検索条件.getShinseishoKanriNo());
+        if (要介護認定完了情報 == null) {
+            return false;
+        }
+        if (!(要介護認定完了情報.getNinteiShinsakaiWariateKanryoYMD() == null)) {
+            return true;
+        }
+        return false;
     }
 
     /**
