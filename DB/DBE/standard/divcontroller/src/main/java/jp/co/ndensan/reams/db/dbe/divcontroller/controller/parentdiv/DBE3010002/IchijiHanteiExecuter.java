@@ -12,14 +12,19 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010002.Ichi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010002.IchijiHanteiExecuterHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 
 /**
  * 一次判定を1対象者ずつ実行する画面の処理を定義します。
@@ -38,8 +43,17 @@ public class IchijiHanteiExecuter {
      * @return ResponseData
      */
     public ResponseData<IchijiHanteiExecuterDiv> onLoad(IchijiHanteiExecuterDiv div) {
-
-        getHandler(div).initialize();
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).initialize();
+            ShinsakaiWariateJohoManager manager = ShinsakaiWariateJohoManager.createInstance();
+            RString shinseishoKanriNoStr = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+            ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(shinseishoKanriNoStr);
+            if (Boolean.TRUE.equals(manager.get審査会割当データ(shinseishoKanriNo))) {
+                div.getShoriSelectPanel().getRadShoriSelect().clearSelectedItem();
+                div.setReadOnly(true);
+                return ResponseData.of(div).addMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage()).respond();
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
