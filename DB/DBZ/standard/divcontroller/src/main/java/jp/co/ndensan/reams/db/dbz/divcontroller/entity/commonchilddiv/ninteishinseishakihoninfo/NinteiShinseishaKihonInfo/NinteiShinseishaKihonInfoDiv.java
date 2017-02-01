@@ -5,12 +5,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishi
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoHandler;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  *
  */
 public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinseishaKihonInfoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-16_05-18-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -61,6 +61,14 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     private TextBox txtShinseiKubunShinseiji;
     @JsonProperty("txtShinseiKubunHoreiji")
     private TextBox txtShinseiKubunHoreiji;
+    @JsonProperty("IDMemo")
+    private ImageDialog IDMemo;
+    @JsonProperty("hdn業務コード")
+    private RString hdn業務コード;
+    @JsonProperty("hdn識別対象区分")
+    private RString hdn識別対象区分;
+    @JsonProperty("hdn識別対象コード")
+    private RString hdn識別対象コード;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -336,6 +344,78 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @JsonProperty("txtShinseiKubunHoreiji")
     public void setTxtShinseiKubunHoreiji(TextBox txtShinseiKubunHoreiji) {
         this.txtShinseiKubunHoreiji = txtShinseiKubunHoreiji;
+    }
+
+    /*
+     * getIDMemo
+     * @return IDMemo
+     */
+    @JsonProperty("IDMemo")
+    public ImageDialog getIDMemo() {
+        return IDMemo;
+    }
+
+    /*
+     * setIDMemo
+     * @param IDMemo IDMemo
+     */
+    @JsonProperty("IDMemo")
+    public void setIDMemo(ImageDialog IDMemo) {
+        this.IDMemo = IDMemo;
+    }
+
+    /*
+     * gethdn業務コード
+     * @return hdn業務コード
+     */
+    @JsonProperty("hdn業務コード")
+    public RString getHdn業務コード() {
+        return hdn業務コード;
+    }
+
+    /*
+     * sethdn業務コード
+     * @param hdn業務コード hdn業務コード
+     */
+    @JsonProperty("hdn業務コード")
+    public void setHdn業務コード(RString hdn業務コード) {
+        this.hdn業務コード = hdn業務コード;
+    }
+
+    /*
+     * gethdn識別対象区分
+     * @return hdn識別対象区分
+     */
+    @JsonProperty("hdn識別対象区分")
+    public RString getHdn識別対象区分() {
+        return hdn識別対象区分;
+    }
+
+    /*
+     * sethdn識別対象区分
+     * @param hdn識別対象区分 hdn識別対象区分
+     */
+    @JsonProperty("hdn識別対象区分")
+    public void setHdn識別対象区分(RString hdn識別対象区分) {
+        this.hdn識別対象区分 = hdn識別対象区分;
+    }
+
+    /*
+     * gethdn識別対象コード
+     * @return hdn識別対象コード
+     */
+    @JsonProperty("hdn識別対象コード")
+    public RString getHdn識別対象コード() {
+        return hdn識別対象コード;
+    }
+
+    /*
+     * sethdn識別対象コード
+     * @param hdn識別対象コード hdn識別対象コード
+     */
+    @JsonProperty("hdn識別対象コード")
+    public void setHdn識別対象コード(RString hdn識別対象コード) {
+        this.hdn識別対象コード = hdn識別対象コード;
     }
 
     // </editor-fold>

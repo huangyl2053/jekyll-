@@ -87,6 +87,10 @@ var DBZ;
             Controls.prototype.txtShinseiKubunHoreiji = function () {
                 return new UZA.TextBox(this.convFiledName("txtShinseiKubunHoreiji"));
             };
+
+            Controls.prototype.IDMemo = function () {
+                return new UZA.ImageDialog(this.convFiledName("IDMemo"));
+            };
             return Controls;
         })();
         NinteiShinseishaKihonInfo.Controls = Controls;

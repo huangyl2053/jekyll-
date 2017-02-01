@@ -93,6 +93,10 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShinseiKubunHoreiji"));
             }
 
+            public IDMemo(): UZA.ImageDialog {
+                return new UZA.ImageDialog(this.convFiledName("IDMemo"));
+            }
+
         }
 
      }

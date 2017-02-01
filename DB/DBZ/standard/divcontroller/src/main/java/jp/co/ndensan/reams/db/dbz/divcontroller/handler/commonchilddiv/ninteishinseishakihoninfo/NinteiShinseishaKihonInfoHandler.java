@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoManager;
+import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.divcontroller.controller.commonchilddiv.memo.MemoNyuryoku.MemoNyuryokuHandler;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -77,6 +80,11 @@ public class NinteiShinseishaKihonInfoHandler {
             div.getTxtShinseiKubunHoreiji().setValue(
                     business.get申請区分_法令時() == null || RString.isNullOrEmpty(business.get申請区分_法令時().getKey())
                     ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get申請区分_法令時().getKey()).get名称());
+            div.setHdn業務コード(GyomuCode.DB介護保険.value());
+            div.setHdn識別対象区分(MemoShikibetsuTaisho.識別コード.get識別対象());
+            div.setHdn識別対象コード(business.get証記載保険者番号().concat(business.get被保険者番号()));
+            MemoNyuryokuHandler.btnupdateImage(GyomuCode.DB介護保険, div.getIDMemo(), MemoShikibetsuTaisho.識別コード.get識別対象(), 
+                    business.get証記載保険者番号().concat(business.get被保険者番号()), RString.EMPTY, RString.EMPTY);
         }
 
     }
