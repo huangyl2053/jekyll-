@@ -11,16 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * OCR取込処理で用いるユーティリティです。
  */
 public final class OcrTorikomiUtil {
-
-    private static final RString PATH_SEPARATOR = new RString(File.separator);
 
     private OcrTorikomiUtil() {
     }
@@ -49,34 +45,5 @@ public final class OcrTorikomiUtil {
             output.put(entry.getKey(), new OcrFiles(entry.getValue()));
         }
         return output;
-    }
-
-    /**
-     * 指定のフォルダに指定のファイルをコピーします。
-     * ファイル名のフルパスは、指定の{@link OcrFiles imageFiles}より取得します。
-     * ファイル名の変換ルールは、{@link IFileNameConvertionTheory}にて指定します。
-     *
-     * @param directoryPath コピー先ディレクトリのパス
-     * @param imageFileNames コピー対象のファイル
-     * @param imageFiles 全イメージファイルのパス
-     * @param converter {@link IFileNameConvertionTheory}
-     * @return コピーに成功した場合、{@code true}.
-     */
-    public static boolean copyImageFilesToDirectory(RString directoryPath, List<RString> imageFileNames,
-            OcrFiles imageFiles, IFileNameConvertionTheory converter) {
-        if (imageFileNames == null || imageFileNames.isEmpty()) {
-            return false;
-        }
-        for (RString imageFileName : imageFileNames) {
-            RString path = imageFiles.findFilePathFromName(imageFileName);
-            if (RString.isNullOrEmpty(path)) {
-                //TODO ca3ファイルから読み取ったファイル名に該当するイメージがアップロードファイル中に見つからない場合、ここに制御が移る。
-                //入力ファイル不正の可能性あり。適切な処理の検討が必要。
-                continue;
-            }
-            RString newFilePath = new RStringBuilder(directoryPath).append(PATH_SEPARATOR).append(converter.convert(imageFileName)).toRString();
-            File.copy(path, newFilePath);
-        }
-        return true;
     }
 }

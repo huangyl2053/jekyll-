@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr;
 
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,6 +23,10 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
     private RString 証記載保険者番号;
     private RString 被保険者番号;
     private RString 保険者;
+    private RString 被保険者氏名;
+    private RString 被保険者カナ;
+    private FlexibleDate 認定申請日;
+    private boolean 論理削除フラグ;
     private RString 申請区分;
     private RString 厚労省IF識別コード;
     private RString 申請書管理番号;
@@ -31,4 +36,5 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
     private RString 認定調査員コード;
     private Code 認定調査依頼区分コード;
     private int 認定調査回数;
+    private boolean matches指定申請日;
 }

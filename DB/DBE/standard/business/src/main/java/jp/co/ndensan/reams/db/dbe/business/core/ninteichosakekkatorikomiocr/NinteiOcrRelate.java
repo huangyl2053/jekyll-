@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -47,6 +49,34 @@ public class NinteiOcrRelate {
      */
     public RString get被保険者番号() {
         return entity.get被保険者番号();
+    }
+
+    /**
+     * @return 被保険者氏名
+     */
+    public RString get被保険者氏名() {
+        return entity.get被保険者氏名();
+    }
+
+    /**
+     * @return 被保険者カナ
+     */
+    public RString get被保険者カナ() {
+        return entity.get被保険者カナ();
+    }
+
+    /**
+     * @return 論理削除済みの場合、{@code true}.
+     */
+    public boolean has論理削除() {
+        return entity.is論理削除フラグ();
+    }
+
+    /**
+     * @return 検索時に指定した申請日と合致する場合、{@code true}.それ以外の場合、{@code false}.
+     */
+    public boolean matches指定申請日() {
+        return entity.isMatches指定申請日();
     }
 
     /**
@@ -159,5 +189,18 @@ public class NinteiOcrRelate {
      */
     public int get認定調査回数() {
         return entity.get認定調査回数();
+    }
+
+    /**
+     * @return {@link IProcessingResult}
+     */
+    public IProcessingResult validate() {
+        if (has論理削除()) {
+            return ProcessingResultFactory.error(new RString("削除された申請です。"));
+        }
+        if (!matches指定申請日()) {
+            return ProcessingResultFactory.error(new RString("取込データの申請日に合致する申請は見つかりませんでした。"));
+        }
+        return ProcessingResultFactory.success();
     }
 }

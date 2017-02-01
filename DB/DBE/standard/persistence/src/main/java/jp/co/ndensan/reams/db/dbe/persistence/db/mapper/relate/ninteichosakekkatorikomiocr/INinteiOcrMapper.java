@@ -25,5 +25,9 @@ public interface INinteiOcrMapper {
      */
     List<NinteiChosaKekkaTorikomiOcrRelateEntity> get関連データ(NinteiOcrMapperParamter paramter);
 
+    /**
+     * @param paramter パラメータ
+     * @return 認定調査票データ
+     */
     List<NinteiChosahyoEntity> get認定調査票(NinteiOcrMapperParamter paramter);
 }

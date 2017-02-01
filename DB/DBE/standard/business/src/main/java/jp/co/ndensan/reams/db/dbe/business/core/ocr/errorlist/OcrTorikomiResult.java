@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ocr.result;
+package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 /**
  * OCRの取込結果です。
  */
-public final class OcrTorikomiKekka {
+public final class OcrTorikomiResult {
 
     private final RDate 取込日;
     private final OCRID ocrid;
@@ -31,11 +32,9 @@ public final class OcrTorikomiKekka {
     private final RString 氏名;
     private final RString 氏名カナ;
     private final ShinkiKoshinKubun 新規更新区分;
-    private final boolean succeeds;
-    private final int 取込イメージ件数;
-    private final RString エラー内容;
+    private final IProcessingResult 処理結果;
 
-    private OcrTorikomiKekka(Builder builder) {
+    private OcrTorikomiResult(Builder builder) {
         this.取込日 = builder.取込日;
         this.ocrid = builder.ocrid;
         this.sheetID = builder.sheetID;
@@ -43,9 +42,7 @@ public final class OcrTorikomiKekka {
         this.氏名 = builder.氏名;
         this.氏名カナ = builder.氏名カナ;
         this.新規更新区分 = builder.新規更新区分;
-        this.succeeds = builder.succeeds;
-        this.取込イメージ件数 = builder.取込イメージ件数;
-        this.エラー内容 = builder.エラー内容;
+        this.処理結果 = builder.処理結果;
     }
 
     OcrTorikomiKekkaCsvEntity toEntity() {
@@ -60,9 +57,8 @@ public final class OcrTorikomiKekka {
         entity.set氏名(this.氏名);
         entity.set氏名カナ(this.氏名カナ);
         entity.set新規更新区分(this.新規更新区分.toRString());
-        entity.set結果(this.succeeds ? new RString("正常終了") : new RString("エラー"));
-        entity.set取込イメージ件数(this.取込イメージ件数);
-        entity.setエラー内容(エラー内容);
+        entity.set結果(this.処理結果.type().getName());
+        entity.set備考(処理結果.note());
         return null;
     }
 
@@ -79,7 +75,7 @@ public final class OcrTorikomiKekka {
     }
 
     /**
-     * {@link OcrTorikomiKekka}を生成します。
+     * {@link OcrTorikomiResult}を生成します。
      */
     public static class Builder {
 
@@ -90,9 +86,7 @@ public final class OcrTorikomiKekka {
         private RString 氏名 = RString.EMPTY;
         private RString 氏名カナ = RString.EMPTY;
         private ShinkiKoshinKubun 新規更新区分 = ShinkiKoshinKubun.対象データなし;
-        private boolean succeeds;
-        private int 取込イメージ件数 = 0;
-        private RString エラー内容 = RString.EMPTY;
+        private IProcessingResult 処理結果;
 
         /**
          * {@link Builder}を生成します。
@@ -123,23 +117,19 @@ public final class OcrTorikomiKekka {
         }
 
         /**
-         * @param 取込イメージ件数 イメージの数
-         * @return {@link OcrTorikomiKekka}
+         * @param 処理結果 {@link IProcessingResult}
+         * @return {@link Builder}
          */
-        public OcrTorikomiKekka success(int 取込イメージ件数) {
-            this.succeeds = true;
-            this.取込イメージ件数 = 取込イメージ件数;
-            return new OcrTorikomiKekka(this);
+        public Builder set処理結果(IProcessingResult 処理結果) {
+            this.処理結果 = 処理結果;
+            return this;
         }
 
         /**
-         * @param エラー内容 エラー内容
-         * @return {@link OcrTorikomiKekka}
+         * @return {@link OcrTorikomiResult}
          */
-        public OcrTorikomiKekka error(RString エラー内容) {
-            this.succeeds = false;
-            this.エラー内容 = エラー内容;
-            return new OcrTorikomiKekka(this);
+        public OcrTorikomiResult build() {
+            return new OcrTorikomiResult(this);
         }
     }
 }

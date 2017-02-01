@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ocr.result;
+package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

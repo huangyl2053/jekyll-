@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ocr.result;
+package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrTorikomiKekkaCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 /**
  * OCR取込結果リストの編集を行います。
  */
-public final class OcrTorikomiKekkaListEditor implements AutoCloseable {
+public final class OcrTorikomiResultListEditor implements AutoCloseable {
 
     private static final RString FILE_NAME = new RString("ファイル名.csv"); //TODO ファイル名
     private static final RString DOUBLE_QUOTATION = new RString("\"");
@@ -27,17 +27,17 @@ public final class OcrTorikomiKekkaListEditor implements AutoCloseable {
     private RString filePath;
     private boolean closes;
 
-    private OcrTorikomiKekkaListEditor(FileSpoolManager spoolManager) {
+    private OcrTorikomiResultListEditor(FileSpoolManager spoolManager) {
         this.spoolManager = spoolManager;
         this.closes = false;
     }
 
     /**
      * @param spoolManager 作成したCSVファイルをスプールする際に用いる{@link FileSpoolManager}
-     * @return {@link OcrTorikomiKekkaListEditor}
+     * @return {@link OcrTorikomiResultListEditor}
      */
-    public static OcrTorikomiKekkaListEditor spoolBy(FileSpoolManager spoolManager) {
-        return new OcrTorikomiKekkaListEditor(spoolManager);
+    public static OcrTorikomiResultListEditor spoolBy(FileSpoolManager spoolManager) {
+        return new OcrTorikomiResultListEditor(spoolManager);
     }
 
     /**
@@ -46,9 +46,9 @@ public final class OcrTorikomiKekkaListEditor implements AutoCloseable {
      * インスタンスを生成してから、一度もこのメソッドを呼ばなかった場合、
      * 同一インスタンスの{@link #close()}を呼び出しても、CSVファイルは出力されません。
      *
-     * @param o {@link OcrTorikomiKekka 取込結果}
+     * @param o {@link OcrTorikomiResult 取込結果}
      */
-    public void writeLine(OcrTorikomiKekka o) {
+    public void writeLine(OcrTorikomiResult o) {
         if (closes) {
             throw new IllegalStateException("すでにcloseされたインスタンスです。 要修正：close()メソッドのコール後にwriteLine()が呼ばれている箇所");
         }

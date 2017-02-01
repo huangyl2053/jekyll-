@@ -36,9 +36,6 @@ public class OcrTorikomiKekkaCsvEntity {
     private RString 新規更新区分;
     @CsvField(order = 100, name = "結果")
     private RString 結果;
-    @CsvField(order = 100, name = "取込イメージ件数")
-    private int 取込イメージ件数;
-    @CsvField(order = 110, name = "エラー内容")
-    private RString エラー内容;
-
+    @CsvField(order = 110, name = "備考")
+    private RString 備考;
 }
