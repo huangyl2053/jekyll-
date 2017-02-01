@@ -33,7 +33,7 @@ public class DbT5912TempEntity extends DbTableEntityBase<DbT5912TempEntity> impl
     @TempTableColumnOrder(6)
     private RString 主治医名称;
     @TempTableColumnOrder(7)
-    private boolean 状況;
+    private RString 状況;
     @TempTableColumnOrder(8)
     private RString 主治医名称カナ;
 

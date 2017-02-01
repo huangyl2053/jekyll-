@@ -35,7 +35,7 @@ public class DbT5913TempEntity extends DbTableEntityBase<DbT5913TempEntity> impl
     @TempTableColumnOrder(7)
     private RString 資格コード;
     @TempTableColumnOrder(8)
-    private boolean 状況;
+    private RString 状況;
     @TempTableColumnOrder(9)
     private RString 調査員名称カナ;
 
