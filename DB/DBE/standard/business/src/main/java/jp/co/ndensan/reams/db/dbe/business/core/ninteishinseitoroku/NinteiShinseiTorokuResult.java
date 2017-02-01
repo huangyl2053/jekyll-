@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -25,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1310-010 chengsanyuan
  */
-public class NinteiShinseiTorokuResult implements Serializable{
+public class NinteiShinseiTorokuResult {
 
     private final NinteiShinseiTorokuRelateEntity entity;
 

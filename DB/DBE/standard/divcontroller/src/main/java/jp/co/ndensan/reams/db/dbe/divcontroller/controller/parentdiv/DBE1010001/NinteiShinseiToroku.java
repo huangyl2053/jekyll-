@@ -197,13 +197,10 @@ public class NinteiShinseiToroku {
             NinteiShinseiTorokuResult result = manager.getDataForLoad(管理番号);
             
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(getValidationHandler(div).審査会割付データ存在チェック(result));
-            validationMessages.add(getValidationHandler(div).依頼完了チェック(result));
-            
-
             
             if (result != null) {
-                
+                validationMessages.add(getValidationHandler(div).審査会割付データ存在チェック(result));
+                validationMessages.add(getValidationHandler(div).依頼完了チェック(result));
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
