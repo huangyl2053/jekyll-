@@ -38,7 +38,7 @@ public class DbT5911TempEntity extends DbTableEntityBase<DbT5911TempEntity> impl
     @TempTableColumnOrder(8)
     private RString 電話番号;
     @TempTableColumnOrder(9)
-    private boolean 状況;
+    private RString 状況;
     @TempTableColumnOrder(10)
     private RString 医療機関名称カナ;
 

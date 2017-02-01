@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ChosainJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ItakusakiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
@@ -128,7 +131,13 @@ public class RenkeiDataTorikomiBusiness {
         if (!processParamter.is厚労省フラグ()) {
             dbt5912Entity.setShujiiKana(getKanaMeisho(dbT5912TempEntity.get主治医名称カナ()));
         }
-        dbt5912Entity.setJokyoFlag(dbT5912TempEntity.is状況());
+        RString jokyoFlag = dbT5912TempEntity.get状況();
+        if (RString.isNullOrEmpty(jokyoFlag)) {
+            dbt5912Entity.setJokyoFlag(false);
+        } else {
+            ShujiiJokyo jokyo = ShujiiJokyo.toValue(jokyoFlag);
+            dbt5912Entity.setJokyoFlag(jokyo.is有効());
+        }
         return dbt5912Entity;
     }
 
@@ -197,7 +206,13 @@ public class RenkeiDataTorikomiBusiness {
         dbt5911Entity.setYubinNo(getYubinNo(dbT5911TempEntity.get郵便番号()));
         dbt5911Entity.setJusho(dbT5911TempEntity.get住所());
         dbt5911Entity.setTelNo(getTelNo(dbT5911TempEntity.get電話番号()));
-        dbt5911Entity.setJokyoFlag(dbT5911TempEntity.is状況());
+        RString jokyoFlag = dbT5911TempEntity.get状況();
+        if (RString.isNullOrEmpty(jokyoFlag)) {
+            dbt5911Entity.setJokyoFlag(false);
+        } else {
+            IryoKikanJokyo jokyo = IryoKikanJokyo.toValue(jokyoFlag);
+            dbt5911Entity.setJokyoFlag(jokyo.isコード());
+        }
         return dbt5911Entity;
     }
 
@@ -272,7 +287,13 @@ public class RenkeiDataTorikomiBusiness {
         dbt5913Entity.setChosainShikaku(dbT5913TempEntity.get資格コード());
         dbt5913Entity.setChosaKanoNinzuPerMonth(Integer.parseInt(
                 DbBusinessConfig.get(ConfigNameDBE.調査員調査可能人数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
-        dbt5913Entity.setJokyoFlag(dbT5913TempEntity.is状況());
+        RString jokyoFlag = dbT5913TempEntity.get状況();
+        if (RString.isNullOrEmpty(jokyoFlag)) {
+            dbt5913Entity.setJokyoFlag(false);
+        } else {
+            ChosainJokyo jokyo = ChosainJokyo.toValue(jokyoFlag);
+            dbt5913Entity.setJokyoFlag(jokyo.is有効());
+        }
         return dbt5913Entity;
     }
 
@@ -397,7 +418,6 @@ public class RenkeiDataTorikomiBusiness {
             dbt5910Entity.setWaritsukeTeiin(Integer.parseInt(
                     DbBusinessConfig.get(ConfigNameDBE.認定調査委託先割付定員, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
         }
-
         RString jokyoFlag = dbT5910TempEntity.get状況();
         if (RString.isNullOrEmpty(jokyoFlag)) {
             dbt5910Entity.setJokyoFlag(false);
