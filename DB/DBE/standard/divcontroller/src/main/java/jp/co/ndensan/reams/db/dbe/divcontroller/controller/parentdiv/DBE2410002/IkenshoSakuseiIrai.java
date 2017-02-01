@@ -110,6 +110,7 @@ public class IkenshoSakuseiIrai {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             保存処理(div);
             onLoad(div);
+            RealInitialLocker.release(get排他キー());
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             div.getKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
@@ -132,6 +133,16 @@ public class IkenshoSakuseiIrai {
         model.set市町村コード(ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
         model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 「戻る」ボタンを押す処理です。
+     * @param div IkenshoSakuseiIraiDiv
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<IkenshoSakuseiIraiDiv> onClick_btnBack(IkenshoSakuseiIraiDiv div) {
+        RealInitialLocker.release(get排他キー());
         return ResponseData.of(div).respond();
     }
 

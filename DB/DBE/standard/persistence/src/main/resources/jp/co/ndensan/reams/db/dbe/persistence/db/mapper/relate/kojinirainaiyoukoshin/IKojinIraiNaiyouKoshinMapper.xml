@@ -81,17 +81,21 @@
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910 
           ON T5910."shichosonCode" = T7051."shichosonCode" 
           AND T5910."ninteichosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
+          AND T5910."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913 
           ON T5913."shichosonCode" = T7051."shichosonCode" 
           AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
           AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode" 
+          AND T5913."jokyoFlag" = True 
        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910_SUB 
           ON T5910_SUB."shichosonCode" = T7051."shichosonCode" 
           AND T5910_SUB."ninteichosaItakusakiCode" = T5101."ninteiChosaItakusakiCode" 
+          AND T5910_SUB."jokyoFlag" = True 
        LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913_SUB 
           ON T5913_SUB."shichosonCode" = T7051."shichosonCode" 
           AND T5913_SUB."ninteiChosaItakusakiCode" = T5101."ninteiChosaItakusakiCode" 
           AND T5913_SUB."ninteiChosainCode" = T5101."ninteiChosainCode" 
+          AND T5913_SUB."jokyoFlag" = True 
         LEFT JOIN rgdb."UzT0007Code" AS UzT0007 
           ON UzT0007."schemaName" = 'rgdb' 
           AND UzT0007."subGyomuCode" = 'DBE' 
@@ -203,16 +207,20 @@
           ON T5912."shichosonCode" = T7051."shichosonCode" 
           AND T5912."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode" 
           AND T5912."shujiiCode" = T5302."shujiiCode" 
+          AND T5912."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
           ON T5911."shichosonCode" = T7051."shichosonCode" 
           AND T5911."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode" 
+          AND T5911."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912_SUB 
           ON T5912_SUB."shichosonCode" = T7051."shichosonCode" 
           AND T5912_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode" 
           AND T5912_SUB."shujiiCode" = T5101."shujiiCode" 
+          AND T5912_SUB."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911_SUB 
           ON T5911_SUB."shichosonCode" = T7051."shichosonCode" 
           AND T5911_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode" 
+          AND T5911_SUB."jokyoFlag" = True 
       WHERE
         T5101."shinseishoKanriNo" = #{申請書管理番号}
    </select>

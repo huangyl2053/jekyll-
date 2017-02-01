@@ -168,6 +168,7 @@ public class NinteiChosaIraiShudou {
             NinteiShinseiJoho 更新用認定調査依頼情報 = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
                     NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value()));
             ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, 更新用認定調査依頼情報);
+            RealInitialLocker.release(get排他キー());
             div.getNinteichosaIraiByHand().setDisabled(true);
             div.getIraiprintPanel().setDisabled(true);
             div.getKanryoMessage().setSuccessMessage(
@@ -573,6 +574,7 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnBack(NinteiChosaIraiShudouDiv div) {
+        RealInitialLocker.release(get排他キー());
         return ResponseData.of(div).respond();
     }
     
