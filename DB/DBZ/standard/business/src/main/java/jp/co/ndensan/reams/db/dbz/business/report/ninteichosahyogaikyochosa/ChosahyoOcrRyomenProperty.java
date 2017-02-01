@@ -43,11 +43,6 @@ public class ChosahyoOcrRyomenProperty extends ReportPropertyBase<ChosahyoGaikyo
             BreakerCatalog<ChosahyoGaikyochosaReportSource> catalog) {
         return breakers.add(catalog.new SimpleLayoutBreaker(
 
-
-
-
-
-
             new RString("layoutIndex")) {
             @Override
             public ReportLineRecord<ChosahyoGaikyochosaReportSource> occuredBreak(ReportLineRecord<ChosahyoGaikyochosaReportSource> currentRecord,

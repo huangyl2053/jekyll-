@@ -608,8 +608,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
                 }
                 ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
-                        div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString(),
+                        div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString(),
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -694,7 +694,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分).get名称();
             }
             ChosaIraiIchiranhyoBodyItem item = new ChosaIraiIchiranhyoBodyItem(
-                    RString.EMPTY,
+                    div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString(),
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
@@ -1121,6 +1122,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 ShujiiIkenshoSakuseiIraishoItem item = new ShujiiIkenshoSakuseiIraishoItem();
+                item.setHakkoYMD1(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 item.setBunshoNo(div.getCcdBunshoNo().get文書番号());
                 if (!RString.isNullOrEmpty(business.get医療機関郵便番号())) {
                     item.setYubinNo1(new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo());
@@ -1240,7 +1243,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             IkenshoSakuseiIraiIchiranhyoItem item = new IkenshoSakuseiIraiIchiranhyoItem(
-                    RString.EMPTY,
+                    div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString(),
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
@@ -1287,7 +1291,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (!businessList.isEmpty()) {
                 ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
                 ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
-                item.setGengo(RDate.getNowDate().toDateString());
+                item.setGengo(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 item.setAtesakiHokenshaName(business.get保険者名());
                 item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_11).get名称());
                 item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_12).get名称());
@@ -1537,10 +1542,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
                 }
                 Map<Integer, RString> 通知文
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 1);
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, Integer.parseInt(div.getCcdHokenshaList().getSelectedItem().get市町村コード().toString()));
                 KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
                         div.getCcdBunshoNo().get文書番号(),
-                        RString.EMPTY,
+                        div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString(),
                         RString.EMPTY,
                         RString.EMPTY,
                         RString.EMPTY,
@@ -1559,7 +1565,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get被保険者番号(),
                         business.get医療機関名称(),
                         business.get主治医氏名(),
-                        business.get医療機関郵便番号(),
+                        getEditedYubinNo(business.get医療機関郵便番号()),
                         business.get医療機関住所(),
                         business.get医療機関電話番号(),
                         get受診日時または期間(),
@@ -1583,6 +1589,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             RString hihokenshaNo = row.getHohokenshaBango().padRight(RString.HALF_SPACE, 数字_10);
+            item.setHakkoYMD1(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             item.setBunshoNo(div.getCcdBunshoNo().get文書番号());
             item.setTitle(ReportIdDBZ.DBE236001.getReportName());
             item.setHihokenshaNo1(hihokenshaNo.substring(数字_0, 数字_1));
@@ -1602,7 +1610,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             FlexibleDate birthYMD = row.getBirthYMD().getValue();
             if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
                 item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
-                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(数字_2));
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(数字_2));
                 if (new RString("明").equals(birthYMD.wareki().getEra())) {
                     item.setBirthGengoShowa(HOUSI);
                     item.setBirthGengoTaisho(HOUSI);
@@ -1666,8 +1674,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
 
             受診日時または期間.append(ymd.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-            受診日時または期間.append(文字列_まで);
+            受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分));
+//            受診日時または期間.append(文字列_まで);
         } else {
             RDate from = div.getShindanMeirei().getTxtJushinKikan().getFromValue();
             RDate to = div.getShindanMeirei().getTxtJushinKikan().getToValue();
@@ -1676,7 +1684,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             受診日時または期間.append(連結);
             受診日時または期間.append(to.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            受診日時または期間.append(文字列_まで);
+//            受診日時または期間.append(文字列_まで);
         }
         return 受診日時または期間.toRString();
     }
@@ -1883,7 +1891,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private RString set意見書作成提出期限(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
         RString 調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         RString 提出期限 = RString.EMPTY;
         RString key = div.getRadTeishutsuKigen().getSelectedKey();
         int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
@@ -1901,7 +1909,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         } else if (KEY2.equals(key)) {
             RDate 共通日 = div.getTxtKyotsuDay().getValue();
 
-            提出期限 = (共通日 != null ? new RString(共通日.toString()) : RString.EMPTY);
+            提出期限 = (共通日 != null ? 共通日.toDateString() : RString.EMPTY);
         }
         return 提出期限;
     }
@@ -1909,7 +1917,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private RString set認定調査提出期限(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business) {
         RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援,
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         RString 提出期限 = RString.EMPTY;
         RString key = div.getRadTeishutsuKigen().getSelectedKey();
         int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数,
@@ -1927,7 +1935,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         } else if (KEY2.equals(key)) {
             RDate 共通日 = div.getTxtKyotsuDay().getValue();
 
-            提出期限 = (共通日 != null ? new RString(共通日.plusDay(期限日数).toString()) : RString.EMPTY);
+            提出期限 = (共通日 != null ? 共通日.toDateString() : RString.EMPTY);
         }
         return 提出期限;
     }
@@ -2024,6 +2032,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     }
 
     private RString getConfigValue(ConfigNameDBE config) {
-        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        return DbBusinessConfig.get(config, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
     }
 }

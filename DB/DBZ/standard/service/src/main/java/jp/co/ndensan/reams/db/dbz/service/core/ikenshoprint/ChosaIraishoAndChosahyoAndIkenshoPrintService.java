@@ -181,7 +181,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             List<ChosaIraiIchiranhyoBodyItem> itemList = new ArrayList<>();
             for (ChosaIraiIchiranhyoBodyItem item : bodyItems) {
                 itemList.add(new ChosaIraiIchiranhyoBodyItem(
-                        ninshoshaSource.hakkoYMD,
+                        item.getHakkoYMD(),
                         ninshoshaSource.denshiKoin,
                         ninshoshaSource.ninshoshaYakushokuMei,
                         ninshoshaSource.ninshoshaYakushokuMei2,
@@ -415,7 +415,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             int i = 1;
             for (ShujiiIkenshoSakuseiIraishoItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setHakkoYMD1(ninshoshaSource.hakkoYMD);
+                item.setHakkoYMD1(item.getHakkoYMD1());
                 item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
                 item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
                 item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
@@ -445,7 +445,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (IkenshoSakuseiIraiIchiranhyoItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
-                item.setHakkoYMD(ninshoshaSource.hakkoYMD);
                 item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
                 item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
                 item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
@@ -539,7 +538,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
             item.setDenshiKoin(ninshosha.denshiKoin);
-            item.setHakkoYMD1(ninshosha.hakkoYMD);
             item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
             item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
             item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);

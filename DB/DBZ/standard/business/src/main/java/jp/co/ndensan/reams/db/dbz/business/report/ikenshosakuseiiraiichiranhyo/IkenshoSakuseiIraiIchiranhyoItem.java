@@ -70,6 +70,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
      * @param shimeiText 氏名
      * @param meishoFuyo 名称付与
      * @param printTimeStamp 印刷時点
+     * @param title
      * @param tsuchibun1 通知文
      * @param listIchiranhyo_2 担当医
      * @param listIchiranhyo_3 被保険者番号
