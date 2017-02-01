@@ -116,11 +116,6 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return ResponseData<ShujiiIkenshoSakuseiIraiDiv>
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnNextToTaishoshaSentaku(ShujiiIkenshoSakuseiIraiDiv div) {
-        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = validationHandler.validate対象者検索ボタンクリック();
-        if (validationMessages.existsError()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-        }
         set意見書作成対象者情報(div);
         return ResponseData.of(div).setState(DBE2300001StateName.対象者選択);
     }

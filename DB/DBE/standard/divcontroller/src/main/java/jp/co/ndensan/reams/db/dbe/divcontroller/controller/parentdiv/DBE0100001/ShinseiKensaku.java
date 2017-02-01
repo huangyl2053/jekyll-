@@ -38,7 +38,9 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -206,6 +208,19 @@ public class ShinseiKensaku {
         RString 被保険者氏名 = row.getShimei();
         RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
         LasdecCode 市町村コード = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード();
+        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(被保険者番号));
+        if (!searchResult.records().isEmpty()) {
+            int lastShinseiYmdIndex = findLastIndex(searchResult);
+
+            div.getCcdNinteishinseishaFinder().updateSaikinShorisha(被保険者番号, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
+            div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
+            getHandler(div).setShinseiJohoIchiran(searchResult);
+        }
+        
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);
+        NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会,shoKisaiHokenshaNo,被保険者番号);
+        ninteiAccessLogger.log();
+
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);

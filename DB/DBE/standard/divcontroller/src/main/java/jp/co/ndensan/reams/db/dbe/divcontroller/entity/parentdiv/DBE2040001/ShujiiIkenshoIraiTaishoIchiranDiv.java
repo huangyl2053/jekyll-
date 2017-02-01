@@ -187,6 +187,16 @@ public class ShujiiIkenshoIraiTaishoIchiranDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnSakuseiIraiYmdSettei() {
+        return this.getIkenshoIraiList().getBtnSakuseiIraiYmdSettei();
+    }
+
+    @JsonIgnore
+    public void  setBtnSakuseiIraiYmdSettei(Button btnSakuseiIraiYmdSettei) {
+        this.getIkenshoIraiList().setBtnSakuseiIraiYmdSettei(btnSakuseiIraiYmdSettei);
+    }
+
+    @JsonIgnore
     public ButtonDialog getBtnIraishoToOutputDialog() {
         return this.getIkenshoIraiList().getBtnIraishoToOutputDialog();
     }

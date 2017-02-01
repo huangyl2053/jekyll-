@@ -167,8 +167,16 @@ module DBZ {
 
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                editTypes.addEditType("ShujiiCode_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            }
+
+            public getShujiiCode_required() {
+                return this.controls.txtShujiiCode().required;
+            }
+
+            public setShujiiCode_required(value) {
+                return this.controls.txtShujiiCode().required = value;
             }
         }
     }

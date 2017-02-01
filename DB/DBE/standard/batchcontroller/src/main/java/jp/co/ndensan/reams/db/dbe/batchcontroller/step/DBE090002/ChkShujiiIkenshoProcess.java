@@ -175,10 +175,12 @@ public class ChkShujiiIkenshoProcess extends BatchProcessBase<YokaigoninteiEntit
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         RString 共有フォルダ名 = entity.get保険者番号().concat(entity.get被保険者番号());
         RDateTime イメージ共有ファイルID = mapper.getイメージ(processPrm.toYokaigoBatchMybitisParamter());
-        ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
-        RString path = getFilePath(descriptor);
-        shujiEntity.setイメージファイル1(get表面イメージファイルパス(descriptor, path));
-        shujiEntity.setイメージファイル2(get裏面イメージファイルパス(descriptor, path));
+        if (イメージ共有ファイルID != null) {
+            ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
+            RString path = getFilePath(descriptor);
+            shujiEntity.setイメージファイル1(get表面イメージファイルパス(descriptor, path));
+            shujiEntity.setイメージファイル2(get裏面イメージファイルパス(descriptor, path));
+        }
         return shujiEntity;
     }
 

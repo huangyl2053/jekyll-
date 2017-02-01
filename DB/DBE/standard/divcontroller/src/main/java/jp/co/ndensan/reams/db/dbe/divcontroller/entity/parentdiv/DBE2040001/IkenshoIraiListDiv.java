@@ -32,6 +32,8 @@ public class IkenshoIraiListDiv extends Panel {
     private ButtonDownLoad btnikenshoiraitaishooutput;
     @JsonProperty("btnShujiiSettei")
     private Button btnShujiiSettei;
+    @JsonProperty("btnSakuseiIraiYmdSettei")
+    private Button btnSakuseiIraiYmdSettei;
     @JsonProperty("btnIraishoToOutputDialog")
     private ButtonDialog btnIraishoToOutputDialog;
     @JsonProperty("IkenshoIraiTorokuPanel")
@@ -95,6 +97,24 @@ public class IkenshoIraiListDiv extends Panel {
     @JsonProperty("btnShujiiSettei")
     public void setBtnShujiiSettei(Button btnShujiiSettei) {
         this.btnShujiiSettei = btnShujiiSettei;
+    }
+
+    /*
+     * getbtnSakuseiIraiYmdSettei
+     * @return btnSakuseiIraiYmdSettei
+     */
+    @JsonProperty("btnSakuseiIraiYmdSettei")
+    public Button getBtnSakuseiIraiYmdSettei() {
+        return btnSakuseiIraiYmdSettei;
+    }
+
+    /*
+     * setbtnSakuseiIraiYmdSettei
+     * @param btnSakuseiIraiYmdSettei btnSakuseiIraiYmdSettei
+     */
+    @JsonProperty("btnSakuseiIraiYmdSettei")
+    public void setBtnSakuseiIraiYmdSettei(Button btnSakuseiIraiYmdSettei) {
+        this.btnSakuseiIraiYmdSettei = btnSakuseiIraiYmdSettei;
     }
 
     /*

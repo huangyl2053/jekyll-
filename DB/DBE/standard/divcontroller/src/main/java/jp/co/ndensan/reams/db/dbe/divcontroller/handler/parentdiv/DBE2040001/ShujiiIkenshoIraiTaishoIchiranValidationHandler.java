@@ -67,7 +67,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : selected) {
                 if (row.getIkenshoIraiDay().getValue() == null || row.getRowState().equals(RowState.Modified)) {
-                    validationMessages.add(new ValidationMessageControlPair(ValidationMessages.医療機関_主治医未割付のため印刷不可));
+                    validationMessages.add(new ValidationMessageControlPair(ValidationMessages.意見書依頼未保存のため印刷不可));
                     break;
                 }
             }
@@ -95,14 +95,16 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
     }
 
     /**
-     * 「設定する」ボタンクリック時のバリデーションチェックです。
+     * 「依頼日を設定する」ボタンクリック時のバリデーションチェックです。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateBtnSetteiClick() {
+    public ValidationMessageControlPairs validateBtnSakuseiIraiYmdSetteiClick() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdShujiiInput().getTxtShujiiCode().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.主治医入力必須));
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.該当データなし));
+        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.対象行を選択));
         }
         return validationMessages;
     }
@@ -175,7 +177,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
                 "意見書書発行日が未確定"),
         意見書出力年月日が未確定の完了必須チェック(DbzErrorMessages.理由付き完了不可,
                 "意見書出力年月日が未確定"),
-        医療機関_主治医未割付のため印刷不可(DbeErrorMessages.帳票印刷不可, "医療機関・主治医が未設定"),
+        意見書依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "意見書依頼"),
         複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
         主治医入力必須(UrErrorMessages.必須, "主治医"),
         医療機関_主治医未割付のため更新不可(UrErrorMessages.更新不可_汎用, "医療機関・主治医が未設定のデータが選択されている");

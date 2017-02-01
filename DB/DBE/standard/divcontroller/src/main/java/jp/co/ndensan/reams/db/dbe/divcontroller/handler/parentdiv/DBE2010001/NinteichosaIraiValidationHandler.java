@@ -69,7 +69,7 @@ public class NinteichosaIraiValidationHandler {
             List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : selected) {
                 if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty() || row.getRowState().equals(RowState.Modified)) {
-                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
+                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.調査依頼未保存のため印刷不可));
                     break;
                 }
             }
@@ -269,7 +269,8 @@ public class NinteichosaIraiValidationHandler {
         認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
         委託先未設定(DbeErrorMessages.委託先未設定),
         保険者が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "保険者"),
-        委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先");
+        委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先"),
+        調査依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "調査依頼");
 
         private final Message message;
 

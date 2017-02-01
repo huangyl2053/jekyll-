@@ -173,7 +173,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
                     (!row.getIkenshoIraiKubun().isEmpty())
                     ? row.getIkenshoIraiKubun()
                     : IkenshoIraiKubun.初回依頼.getコード());
-            div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoSakuseiIraiYMD().getValue());
+            div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoIraiDay().getValue());
         }
     }
 
@@ -186,12 +186,33 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getIkenshoiraitaishoichiran().setReadOnly(is主治医入力);
         div.getBtnikenshoiraitaishooutput().setDisabled(is主治医入力);
         div.getBtnShujiiSettei().setDisabled(is主治医入力);
+        div.getBtnSakuseiIraiYmdSettei().setDisabled(is主治医入力);
         div.getBtnIraishoToOutputDialog().setDisabled(is主治医入力);
-        div.getIkenshoIraiTorokuPanel().setReadOnly(!is主治医入力);
+        div.getCcdShujiiInput().setDisabled(!is主治医入力);
+        div.getDdlIraiKubun().setReadOnly(!is主治医入力);
+        div.getTxtSakuseiIraiYmd().setReadOnly(!is主治医入力);
+        div.getBtnSetteisezuModoru().setDisabled(!is主治医入力);
+        div.getBtnSettei().setDisabled(!is主治医入力);
     }
 
     /**
-     * 対象者一覧データグリッドで選択した対象者に主治医意見書依頼情報を登録します。
+     * 依頼日のみ入力時の各コントロールの使用可否を設定します。
+     *
+     * @param is依頼日のみ入力 依頼日のみ入力かどうか
+     */
+    public void set依頼日のみ入力時使用可否(boolean is依頼日のみ入力) {
+        div.getIkenshoiraitaishoichiran().setReadOnly(is依頼日のみ入力);
+        div.getBtnikenshoiraitaishooutput().setDisabled(is依頼日のみ入力);
+        div.getBtnShujiiSettei().setDisabled(is依頼日のみ入力);
+        div.getBtnSakuseiIraiYmdSettei().setDisabled(is依頼日のみ入力);
+        div.getBtnIraishoToOutputDialog().setDisabled(is依頼日のみ入力);
+        div.getTxtSakuseiIraiYmd().setReadOnly(!is依頼日のみ入力);
+        div.getBtnSetteisezuModoru().setDisabled(!is依頼日のみ入力);
+        div.getBtnSettei().setDisabled(!is依頼日のみ入力);
+    }
+
+    /**
+     * 対象者一覧データグリッドで選択した対象者に主治医意見書依頼情報を設定します。
      */
     public void set主治医意見書依頼情報() {
         List<dgNinteiTaskList_Row> dataSource = div.getDgNinteiTaskList().getDataSource();
@@ -203,7 +224,22 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setKonkaiShujii(div.getCcdShujiiInput().getShujiiName());
             row.setIshiKubunCode((div.getCcdShujiiInput().hasShiteii()) ? IshiKubun.指定医.getCode() : IshiKubun.主治医.getCode());
             row.setIkenshoIraiKubun(div.getDdlIraiKubun().getSelectedKey());
-            row.getIkenshoSakuseiIraiYMD().setValue(div.getTxtSakuseiIraiYmd().getValue());
+            row.getIkenshoIraiDay().setValue(div.getTxtSakuseiIraiYmd().getValue());
+            row.setRowState(RowState.Modified);
+            row.setCancelButtonState(DataGridButtonState.Enabled);
+            dataSource.set(index, row);
+        }
+        div.getDgNinteiTaskList().setDataSource(dataSource);
+    }
+
+    /**
+     * 対象者一覧データグリッドで選択した対象者に依頼日を設定します。
+     */
+    public void set依頼日() {
+        List<dgNinteiTaskList_Row> dataSource = div.getDgNinteiTaskList().getDataSource();
+        for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getSelectedItems()) {
+            int index = dataSource.indexOf(row);
+            row.getIkenshoIraiDay().setValue(div.getTxtSakuseiIraiYmd().getValue());
             row.setRowState(RowState.Modified);
             row.setCancelButtonState(DataGridButtonState.Enabled);
             dataSource.set(index, row);
@@ -242,7 +278,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         builder.set主治医意見書依頼区分(row.getIkenshoIraiKubun());
         builder.set主治医意見書作成回数(初期作成回数);
         builder.set医師区分コード(new Code(row.getIshiKubunCode()));
-        builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getIkenshoSakuseiIraiYMD().getValue().toDateString()));
+        builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getIkenshoIraiDay().getValue().toDateString()));
         builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
         builder.set論理削除フラグ(false);
         list.add(builder.build());
@@ -330,9 +366,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setShichosonCode(business.get市町村コード());
         row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
         row.setIkenshoIraiKubun(business.get主治医意見書依頼区分() == null ? RString.EMPTY : business.get主治医意見書依頼区分());
-        row.getIkenshoSakuseiIraiYMD().setValue(
-                business.get主治医意見書作成依頼年月日() == null || business.get主治医意見書作成依頼年月日().isEmpty()
-                ? null : new RDate(business.get主治医意見書作成依頼年月日().toString()));
         意見書依頼モードの日付設定(row, business);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
@@ -386,6 +419,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     private void setButton(RString stateName) {
         if (DBE2040001StateName.完了のみ登録.getName().equals(stateName)) {
             div.getBtnShujiiSettei().setDisplayNone(true);
+            div.getBtnSakuseiIraiYmdSettei().setDisplayNone(true);
         } else {
             set意見書依頼完了ボタン使用可否();
         }

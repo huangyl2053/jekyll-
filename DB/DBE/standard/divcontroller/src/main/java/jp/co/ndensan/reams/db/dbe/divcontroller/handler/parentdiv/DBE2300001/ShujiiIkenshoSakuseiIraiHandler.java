@@ -57,6 +57,8 @@ public class ShujiiIkenshoSakuseiIraiHandler {
     public void load() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getCcdShujiiIryoKikanAndShujiiInput().clear();
+        div.getCcdShujiiIryoKikanAndShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
+        div.getCcdShujiiIryoKikanAndShujiiInput().getBtnIryokikanGuide().setVisible(false);
     }
 
     /**

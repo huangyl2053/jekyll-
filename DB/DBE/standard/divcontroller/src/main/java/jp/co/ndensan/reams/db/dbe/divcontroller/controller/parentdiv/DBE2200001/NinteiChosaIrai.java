@@ -483,8 +483,8 @@ public class NinteiChosaIrai {
                 NinteiKanryoJohoIdentifier ninteiKanryoJohoIdentifier = new NinteiKanryoJohoIdentifier(申請書管理番号);
                 NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoJohoList.get(ninteiKanryoJohoIdentifier)
                         .createBuilderForEdit()
-                        .set認定調査依頼完了年月日(FlexibleDate.EMPTY)
-                        .set認定調査完了年月日(FlexibleDate.EMPTY)
+                        .set認定調査依頼完了年月日(null)
+                        .set認定調査完了年月日(null)
                         .build();
                 ninteiKanryoJohoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
             }

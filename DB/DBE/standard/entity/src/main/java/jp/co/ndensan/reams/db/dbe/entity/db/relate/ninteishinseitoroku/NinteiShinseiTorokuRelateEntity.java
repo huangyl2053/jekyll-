@@ -31,14 +31,10 @@ public class NinteiShinseiTorokuRelateEntity {
     private ShinseishoKanriNo 申請書管理番号;
 //    private Code 申請種別;
     private RString 申請書区分;
-//    private RString 申請状況;
     private FlexibleDate 申請日;
     private Code 認定申請区分法令コード;
     private Code 認定申請区分申請時コード;
-//    private RString 支所コード;
-//    private boolean 旧措置者フラグ;
     private RString 被保険者区分コード;
-//    private boolean 資格取得前申請フラグ;
     private Code 二号特定疾病コード;
     private RString 認定申請理由;
     private RString 申請サービス削除の理由;
@@ -60,21 +56,8 @@ public class NinteiShinseiTorokuRelateEntity {
     private FlexibleDate 前回認定年月日;
     private FlexibleDate 前回認定有効期間開始;
     private FlexibleDate 前回認定有効期間終了;
-//    private Code 異動事由;
-//    private Code 削除事由コード;
-//    private RString 理由;
-//    private FlexibleDate 喪失年月日;
     private FlexibleDate 取下年月日;
-//    private FlexibleDate 当初認定有効開始年月日;
-//    private FlexibleDate 当初認定有効終了年月日;
-//    private FlexibleDate 受給資格証明書発行年月日１;
-//    private FlexibleDate 受給資格証明書発行年月日２;
-//    private RString 台帳種別;
-//    private RString 入所施設種類;
     private JigyoshaNo 入所施設コード;
-//    private FlexibleDate 認定有効期間開始年月日;
-//    private FlexibleDate 認定有効期間終了年月日;
-//    private FlexibleDate 認定年月日;
 //    private RString 介護認定審査会意見;
     private RString 市町村連絡事項;
     private RString 主治医への連絡事項;
@@ -116,5 +99,7 @@ public class NinteiShinseiTorokuRelateEntity {
     private FlexibleDate  認定調査依頼完了年月日;
     private FlexibleDate  主治医意見書作成依頼完了年月日;
     private FlexibleDate  認定申請情報登録完了年月日;
+    private FlexibleDate  認定審査会割当完了年月日;
+    private FlexibleDate  介護認定審査会割当年月日;
     private Code  判定結果コード;
 }

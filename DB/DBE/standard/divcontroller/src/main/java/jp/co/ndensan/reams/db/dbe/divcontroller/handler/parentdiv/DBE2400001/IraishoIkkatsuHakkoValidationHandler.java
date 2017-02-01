@@ -134,26 +134,30 @@ public class IraishoIkkatsuHakkoValidationHandler {
 
     public ValidationMessageControlPairs validateTokkijiko() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        List<RString> 調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
-        List<RString> 調査票両面選択selectedKeys = div.getChkChosahyoRyomen().getSelectedKeys();
-        List<RString> 委託特記事項選択selectedKeys = div.getChkChosahyoTokki().getSelectedKeys();
-        if ((調査票選択selectedKeys.contains(KEY2) || 調査票両面選択selectedKeys.contains(KEY2)) && !委託特記事項選択selectedKeys.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new IraishoIkkatsuHakkoMessages(UrErrorMessages.未指定, "認定調査票(特記事項)は1種類のみ"),
-                    div.getChkChosahyoKatamen(), div.getChkChosahyoRyomen(), div.getChkChosahyoTokki()));
+        if (STATE_NINTEI.equals(div.getState())) {
+            List<RString> 調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
+            List<RString> 調査票両面選択selectedKeys = div.getChkChosahyoRyomen().getSelectedKeys();
+            List<RString> 委託特記事項選択selectedKeys = div.getChkChosahyoTokki().getSelectedKeys();
+            if ((調査票選択selectedKeys.contains(KEY2) || 調査票両面選択selectedKeys.contains(KEY2)) && !委託特記事項選択selectedKeys.isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(new IraishoIkkatsuHakkoMessages(UrErrorMessages.未指定, "認定調査票(特記事項)は1種類のみ"),
+                        div.getChkChosahyoKatamen(), div.getChkChosahyoRyomen(), div.getChkChosahyoTokki()));
+            }
         }
         return validPairs;
     }
 
     public ValidationMessageControlPairs validateIkenshoIraisho() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        RString 保険者市町村コード = div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value();
-        RString 請求書連動印刷 = DbBusinessConfig.get(
-                ConfigNameDBE.主治医意見書作成請求書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        if (CONFIGVALUE1.equals(請求書連動印刷)) {
-            List<RString> 意見書依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
-            if (意見書依頼書選択selectedKeys.isEmpty()) {
-                validPairs.add(new ValidationMessageControlPair(new IraishoIkkatsuHakkoMessages(UrErrorMessages.未指定, "主治医意見書作成依頼書を"),
-                        div.getChkIkenshoIraisho()));
+        if (STATE_SHUJII.equals(div.getState())) {
+            RString 保険者市町村コード = div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value();
+            RString 請求書連動印刷 = DbBusinessConfig.get(
+                    ConfigNameDBE.主治医意見書作成請求書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+            if (CONFIGVALUE1.equals(請求書連動印刷)) {
+                List<RString> 意見書依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
+                if (意見書依頼書選択selectedKeys.isEmpty()) {
+                    validPairs.add(new ValidationMessageControlPair(new IraishoIkkatsuHakkoMessages(UrErrorMessages.未指定, "主治医意見書作成依頼書を"),
+                            div.getChkIkenshoIraisho()));
+                }
             }
         }
         return validPairs;

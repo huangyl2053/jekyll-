@@ -107,7 +107,7 @@ public class ShinsakaiWariateJohoManager {
         }
         for (ShinsakaiWariateJohoRelateEntity entity : relateEntity) {
             if ((entity.get介護認定審査会割当情報Entity().getHanteiKekkaCode() == null)
-                    && entity.get介護認定審査会割当情報Entity().getHanteiKekkaCode().getKey().isEmpty()) {
+                    || entity.get介護認定審査会割当情報Entity().getHanteiKekkaCode().getKey().isEmpty()) {
                 return true;
             }
         }

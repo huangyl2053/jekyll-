@@ -81,6 +81,30 @@
      "toLayoutName": "DBE1020001",
      "toLayoutTitle": "みなし2号等登録",
      "toState": ""
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": "GoToKiHonUnyo",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2010001",
+     "toLayoutTitle": "基本運用・認定調査依頼",
+     "toState": "登録"
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2010001",
+     "layoutTitle": "基本運用・認定調査依頼",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

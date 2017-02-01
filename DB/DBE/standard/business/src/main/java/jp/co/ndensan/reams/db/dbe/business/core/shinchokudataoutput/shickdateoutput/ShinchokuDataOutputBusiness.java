@@ -650,7 +650,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set前回結果_現在の状況(nullToEmpty(entity.getPo2remban()));
         eucEntity.set前回識別コード(nullToEmpty(entity.get前回koroshoIfShikibetsuCode()));
         eucEntity.set認定審査会意見等(nullToEmpty(entity.get前回shinsakaiIken()));
-        eucEntity.setコメント等(nullToEmpty(entity.get前回shinsakaiMemo()));
+        eucEntity.setコメント等(RString.EMPTY);
         認定調査票時テーブル(entity, eucEntity);
         前回認定調査票時テーブル(entity, eucEntity);
         return eucEntity;
