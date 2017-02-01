@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ChosainJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ItakusakiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
@@ -64,7 +67,13 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set医療機関コード(entity.getDbt5912TempEntity().get医療機関コード());
             errorEntity.set主治医コード(entity.getDbt5912TempEntity().get主治医コード());
             errorEntity.set主治医名称(entity.getDbt5912TempEntity().get主治医名称());
-            errorEntity.set状況(entity.getDbt5912TempEntity().is状況());
+            RString jokyoFlag = entity.getDbt5912TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                ShujiiJokyo jokyo = ShujiiJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.is有効());
+            }
             errorEntity.setエラー内容(error);
             return errorEntity;
         }
@@ -87,7 +96,13 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set医療機関コード(entity.getDbt5912TempEntity().get医療機関コード());
             errorEntity.set主治医コード(entity.getDbt5912TempEntity().get主治医コード());
             errorEntity.set主治医名称(entity.getDbt5912TempEntity().get主治医名称());
-            errorEntity.set状況(entity.getDbt5912TempEntity().is状況());
+            RString jokyoFlag = entity.getDbt5912TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                ShujiiJokyo jokyo = ShujiiJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.is有効());
+            }
             errorEntity.set主治医名称カナ(entity.getDbt5912TempEntity().get主治医名称カナ());
             errorEntity.setエラー内容(error);
             return errorEntity;
@@ -130,7 +145,13 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set郵便番号(entity.getDbt5911TempEntity().get郵便番号());
             errorEntity.set住所(entity.getDbt5911TempEntity().get住所());
             errorEntity.set電話番号(entity.getDbt5911TempEntity().get電話番号());
-            errorEntity.set状況(entity.getDbt5911TempEntity().is状況());
+            RString jokyoFlag = entity.getDbt5911TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                IryoKikanJokyo jokyo = IryoKikanJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.isコード());
+            }
             errorEntity.setエラー内容(error);
             return errorEntity;
         }
@@ -155,7 +176,13 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set郵便番号(entity.getDbt5911TempEntity().get郵便番号());
             errorEntity.set住所(entity.getDbt5911TempEntity().get住所());
             errorEntity.set電話番号(entity.getDbt5911TempEntity().get電話番号());
-            errorEntity.set状況(entity.getDbt5911TempEntity().is状況());
+            RString jokyoFlag = entity.getDbt5911TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                IryoKikanJokyo jokyo = IryoKikanJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.isコード());
+            }
             errorEntity.set医療機関名称カナ(entity.getDbt5911TempEntity().get医療機関名称カナ());
             errorEntity.setエラー内容(error);
             return errorEntity;
@@ -190,7 +217,13 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set調査員コード(entity.getDbt5913TempEntity().get調査員コード());
             errorEntity.set調査員名称(entity.getDbt5913TempEntity().get調査員名称());
             errorEntity.set資格コード(entity.getDbt5913TempEntity().get資格コード());
-            errorEntity.set状況(entity.getDbt5913TempEntity().is状況());
+            RString jokyoFlag = entity.getDbt5913TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                ChosainJokyo jokyo = ChosainJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.is有効());
+            }
             errorEntity.setエラー内容(error);
             return errorEntity;
         }
@@ -214,7 +247,13 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set調査員コード(entity.getDbt5913TempEntity().get調査員コード());
             errorEntity.set調査員名称(entity.getDbt5913TempEntity().get調査員名称());
             errorEntity.set資格コード(entity.getDbt5913TempEntity().get資格コード());
-            errorEntity.set状況(entity.getDbt5913TempEntity().is状況());
+            RString jokyoFlag = entity.getDbt5913TempEntity().get状況();
+            if (RString.isNullOrEmpty(jokyoFlag)) {
+                errorEntity.set状況(false);
+            } else {
+                ChosainJokyo jokyo = ChosainJokyo.toValue(jokyoFlag);
+                errorEntity.set状況(jokyo.is有効());
+            }
             errorEntity.set調査員名称カナ(entity.getDbt5913TempEntity().get調査員名称カナ());
             errorEntity.setエラー内容(error);
             return errorEntity;
@@ -257,7 +296,6 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set郵便番号(entity.getDbt5910TempEntity().get郵便番号());
             errorEntity.set住所(entity.getDbt5910TempEntity().get住所());
             errorEntity.set電話番号(entity.getDbt5910TempEntity().get電話番号());
-
             RString jokyoFlag = entity.getDbt5910TempEntity().get状況();
             if (RString.isNullOrEmpty(jokyoFlag)) {
                 errorEntity.set状況(false);
@@ -265,7 +303,6 @@ public class NinteiShinseirenkeiDataInsert {
                 ItakusakiJokyo jokyo = ItakusakiJokyo.toValue(jokyoFlag);
                 errorEntity.set状況(jokyo.is有効());
             }
-
             errorEntity.set委託区分コード(entity.getDbt5910TempEntity().get委託区分コード());
             if (!RString.isNullOrEmpty(entity.getDbt5910TempEntity().get委託区分コード())) {
                 errorEntity.set委託区分名称(ChosaItakuKubunCode.toValue(entity.getDbt5910TempEntity().get委託区分コード()).get名称());
@@ -294,7 +331,6 @@ public class NinteiShinseirenkeiDataInsert {
             errorEntity.set郵便番号(entity.getDbt5910TempEntity().get郵便番号());
             errorEntity.set住所(entity.getDbt5910TempEntity().get住所());
             errorEntity.set電話番号(entity.getDbt5910TempEntity().get電話番号());
-
             RString jokyoFlag = entity.getDbt5910TempEntity().get状況();
             if (RString.isNullOrEmpty(jokyoFlag)) {
                 errorEntity.set状況(false);
@@ -302,7 +338,6 @@ public class NinteiShinseirenkeiDataInsert {
                 ItakusakiJokyo jokyo = ItakusakiJokyo.toValue(jokyoFlag);
                 errorEntity.set状況(jokyo.is有効());
             }
-
             errorEntity.set委託区分コード(entity.getDbt5910TempEntity().get委託区分コード());
             if (!RString.isNullOrEmpty(entity.getDbt5910TempEntity().get委託区分コード())) {
                 errorEntity.set委託区分名称(ChosaItakuKubunCode.toValue(entity.getDbt5910TempEntity().get委託区分コード()).get名称());
