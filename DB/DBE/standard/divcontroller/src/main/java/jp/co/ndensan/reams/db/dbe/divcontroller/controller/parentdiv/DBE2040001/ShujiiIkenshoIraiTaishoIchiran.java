@@ -211,19 +211,38 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     /**
+     * 「依頼日を設定する」ボタンクリックイベントです。
+     *
+     * @param div ShujiiIkenshoIraiTaishoIchiranDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnSakuseiIraiYmdSettei(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnSakuseiIraiYmdSetteiClick();
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(vallidation).respond();
+        }
+        ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
+        handler.set依頼日のみ入力時使用可否(true);
+        handler.clear意見書依頼登録パネル();
+        handler.set意見書依頼登録パネル();
+        return ResponseData.of(div).setState(DBE2040001StateName.依頼日のみ入力);
+    }
+
+    /**
      * 「設定する」ボタンクリックイベントです。
      *
      * @param div ShujiiIkenshoIraiTaishoIchiranDiv
      * @return ResponseData
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnSettei(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnSetteiClick();
-        if (vallidation.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(vallidation).respond();
-        }
         ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
-        handler.set主治医意見書依頼情報();
-        handler.set主治医入力時使用可否(false);
+        if (ResponseHolder.getState().equals(DBE2040001StateName.依頼日のみ入力.getName())) {
+            handler.set依頼日();
+            handler.set依頼日のみ入力時使用可否(false);
+        } else {
+            handler.set主治医意見書依頼情報();
+            handler.set主治医入力時使用可否(false);
+        }
         handler.clear意見書依頼登録パネル();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
@@ -236,7 +255,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnSetteisezuModoru(ShujiiIkenshoIraiTaishoIchiranDiv div) {
         ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
-        handler.set主治医入力時使用可否(false);
+        if (ResponseHolder.getState().equals(DBE2040001StateName.依頼日のみ入力.getName())) {
+            handler.set依頼日のみ入力時使用可否(false);
+        } else {
+            handler.set主治医入力時使用可否(false);
+        }
         handler.clear意見書依頼登録パネル();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }

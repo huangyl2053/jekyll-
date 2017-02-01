@@ -95,14 +95,16 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
     }
 
     /**
-     * 「設定する」ボタンクリック時のバリデーションチェックです。
+     * 「依頼日を設定する」ボタンクリック時のバリデーションチェックです。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateBtnSetteiClick() {
+    public ValidationMessageControlPairs validateBtnSakuseiIraiYmdSetteiClick() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getCcdShujiiInput().getTxtShujiiCode().getValue())) {
-            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.主治医入力必須));
+        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.該当データなし));
+        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.対象行を選択));
         }
         return validationMessages;
     }

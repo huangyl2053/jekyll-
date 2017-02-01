@@ -158,8 +158,16 @@ var DBZ;
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                editTypes.addEditType("ShujiiCode_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            };
+
+            PublicProperties.prototype.getShujiiCode_required = function () {
+                return this.controls.txtShujiiCode().required;
+            };
+
+            PublicProperties.prototype.setShujiiCode_required = function (value) {
+                return this.controls.txtShujiiCode().required = value;
             };
             return PublicProperties;
         })();

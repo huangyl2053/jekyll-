@@ -52,13 +52,15 @@ public class NinteiChosaIraiShokaiHandler {
             row.setShinseiKubun(get申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
             row.getShinseiTorikeshiDate().setValue(entity.getTorisageYMD());
             row.getNinteiDate().setValue(entity.getNijiHanteiYMD());
-            RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
-                    entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
-            if (new RString("なし").equals(要介護度)) {
-                row.setYokaigodo(RString.EMPTY);
+            if (entity.getNijiHanteiYokaigoJotaiKubunCode() != null) {
+                RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(), entity.getNijiHanteiYokaigoJotaiKubunCode().value());
+                if (new RString("なし").equals(要介護度)) {
+                    row.setYokaigodo(RString.EMPTY);
+                } else {
+                    row.setYokaigodo(要介護度);
+                }
             } else {
-                row.setYokaigodo(get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
-                        entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
+                row.setYokaigodo(RString.EMPTY);
             }
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
             row.getChosaIraiDate().setValue(entity.getNinteichosaIraiYMD());
