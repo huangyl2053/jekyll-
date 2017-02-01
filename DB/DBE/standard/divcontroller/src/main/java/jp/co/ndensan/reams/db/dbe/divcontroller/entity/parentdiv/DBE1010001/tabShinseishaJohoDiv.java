@@ -82,6 +82,16 @@ public class tabShinseishaJohoDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public RadioButton getRadMode() {
+        return this.getTplShinseijoho().getRadMode();
+    }
+
+    @JsonIgnore
+    public void  setRadMode(RadioButton radMode) {
+        this.getTplShinseijoho().setRadMode(radMode);
+    }
+
+    @JsonIgnore
     public ServiceDelDiv getServiceDel() {
         return this.getTplShinseijoho().getServiceDel();
     }
@@ -287,23 +297,23 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
-    }
-
-    @JsonIgnore
     public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
         return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
     }
 
     @JsonIgnore
-    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
-        return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
     }
 
     @JsonIgnore
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return this.getTplShinseijoho().getCcdShinseiTodokedesha();
+    }
+
+    @JsonIgnore
+    public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
+        return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
     }
 
     @JsonIgnore
