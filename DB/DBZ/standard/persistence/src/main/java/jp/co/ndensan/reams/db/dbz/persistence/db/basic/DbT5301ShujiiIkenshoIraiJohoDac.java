@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJoho.ikenshoIraiRirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJoho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -69,6 +70,27 @@ public class DbT5301ShujiiIkenshoIraiJohoDac implements ISaveable<DbT5301ShujiiI
         return accessor.select().
                 table(DbT5301ShujiiIkenshoIraiJoho.class).
                 where(eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5301ShujiiIkenshoIraiJohoEntity.class);
+    }
+
+    /**
+     * 申請書管理番号で主治医意見書作成依頼情報を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5301ShujiiIkenshoIraiJohoEntityの{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5301ShujiiIkenshoIraiJohoEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5301ShujiiIkenshoIraiJoho.class).
+                where(and(
+                        eq(shinseishoKanriNo, 申請書管理番号), 
+                        eq(logicalDeletedFlag, false))).
                 toList(DbT5301ShujiiIkenshoIraiJohoEntity.class);
     }
 

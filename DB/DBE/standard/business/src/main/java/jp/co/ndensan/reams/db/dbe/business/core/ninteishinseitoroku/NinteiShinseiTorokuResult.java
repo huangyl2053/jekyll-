@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1310-010 chengsanyuan
  */
-public class NinteiShinseiTorokuResult {
+public class NinteiShinseiTorokuResult implements Serializable{
 
     private final NinteiShinseiTorokuRelateEntity entity;
 
@@ -647,6 +648,24 @@ public class NinteiShinseiTorokuResult {
      */
     public FlexibleDate get認定申請情報登録完了年月日() {
         return entity.get認定申請情報登録完了年月日();
+    } 
+    
+    /**
+     * 認定審査会割当完了年月日を取得します。
+     *
+     * @return 認定審査会割当完了年月日
+     */
+    public FlexibleDate get認定審査会割当完了年月日() {
+        return entity.get認定審査会割当完了年月日();
+    } 
+    
+    /**
+     * 介護認定審査会割当年月日を取得します。
+     *
+     * @return 介護認定審査会割当年月日
+     */
+    public FlexibleDate get介護認定審査会割当年月日() {
+        return entity.get介護認定審査会割当年月日();
     } 
     
     /**

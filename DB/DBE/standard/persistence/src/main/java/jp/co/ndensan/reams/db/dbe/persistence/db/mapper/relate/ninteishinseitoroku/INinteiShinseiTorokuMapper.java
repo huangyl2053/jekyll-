@@ -33,270 +33,52 @@ public interface INinteiShinseiTorokuMapper {
      */
     List<RirekiJohoRelateEntity> getDataForCom(RString 被保険者番号);
             
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5202PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5101PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5102PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5105PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5115PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5116PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5120PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5121PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5122PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5123PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5129PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5130PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5131PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5150PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5190PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5191PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5201PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5203PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5204PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5205PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5206PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5207PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5208PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5209PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5210PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5211PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5212PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5213PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5300PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5301PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5302PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5303PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5304PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5305PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5510PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5590PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5601PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-//
-//    /**
-//     * を削除します。
-//     *
-//     * @param 申請書管理番号 RString
-//     */
-//    void deleteDbT5602PhysicalByShinseishoKanriNo(RString 申請書管理番号);
-    
+    /**
+     * DbT5101を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5101PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5102PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * DbT5120を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5120PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * DbT5121を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5121PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * DbT5123を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5123PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * DbT5150を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5150PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * DbT5590を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5590PhysicalByShinseishoKanriNo(RString 申請書管理番号);
 }

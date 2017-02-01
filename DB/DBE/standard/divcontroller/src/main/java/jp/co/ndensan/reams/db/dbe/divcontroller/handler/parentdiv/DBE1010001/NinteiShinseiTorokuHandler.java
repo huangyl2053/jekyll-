@@ -408,6 +408,33 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdShinseiTodokedesha().initialize(datapass);
     }
     
+    /**
+     * DivReadOnlyの設定
+     *
+     * @param flag boolean
+     */    
+    public void setDivReadOnly(boolean flag) {
+        div.getCcdChodsItakusakiAndChosainInput().setReadOnly(flag);
+        div.getCcdKaigoNinteiShinseiKihon().setReadOnly(flag);
+        div.getCcdNinteiInput().setReadOnly(flag);
+        div.getCcdShikakuInfo().setReadOnly(flag);
+        div.getCcdShinseiSonotaJohoInput().setReadOnly(flag);
+        div.getCcdShinseiTodokedesha().setReadOnly(flag);
+        div.getCcdShisetsuJoho().setReadOnly(flag);
+        div.getCcdShujiiIryokikanAndShujiiInput().setReadOnly(flag);
+        div.getCcdZenkaiNinteiKekkaJoho().setReadOnly(flag);
+        div.getServiceDel().setReadOnly(flag);
+        div.getSinseiTorisage().setReadOnly(flag);
+        div.getShujiiAndShujiiIryoKikan().setReadOnly(flag);
+        div.getChosainAndChosainInput().setReadOnly(flag);
+        div.getHomonSaki().setReadOnly(flag);
+        div.getShisetsuJoho().setReadOnly(flag);
+        div.getChkNinteiTsuchishoDoi().setReadOnly(flag);
+        div.getChkJohoTeikyoDoi().setReadOnly(flag);
+        div.getDdlShinsakaiYusenKubun().setReadOnly(flag);
+        div.getDdlWariateKubun().setReadOnly(flag);
+    }
+    
     private RDate flexibleDateToRDate(FlexibleDate date) {
         if (date == null || FlexibleDate.EMPTY.equals(date)) {
             return RDate.MIN;

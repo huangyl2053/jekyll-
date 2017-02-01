@@ -40,6 +40,15 @@ public class ShujiiIkenshoIraiJohoManager {
     ShujiiIkenshoIraiJohoManager(DbT5301ShujiiIkenshoIraiJohoDac dac) {
         this.dac = dac;
     }
+    
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoIraiJohoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIkenshoIraiJohoManager}のインスタンス
+     */
+    public static ShujiiIkenshoIraiJohoManager createInstance() {
+        return InstanceProvider.create(ShujiiIkenshoIraiJohoManager.class);
+    }
 
     /**
      * 主キーに合致する主治医意見書作成依頼情報を返します。
@@ -63,6 +72,24 @@ public class ShujiiIkenshoIraiJohoManager {
         }
         entity.initializeMd5();
         return new ShujiiIkenshoIraiJoho(entity);
+    }
+
+    /**
+     * 主キーに合致する主治医意見書作成依頼情報を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return ShujiiIkenshoIraiJoho
+     */
+    @Transaction
+    public List<ShujiiIkenshoIraiJoho> get主治医意見書作成依頼情報リストBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        List<ShujiiIkenshoIraiJoho> businessList = new ArrayList<>();
+        for (DbT5301ShujiiIkenshoIraiJohoEntity entity : dac.selectBy申請書管理番号(申請書管理番号)) {
+            entity.initializeMd5();
+            businessList.add(new ShujiiIkenshoIraiJoho(entity));
+        }
+
+        return businessList;
     }
 
     /**
