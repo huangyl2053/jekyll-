@@ -74,7 +74,7 @@
             AND "DbT5302ShujiiIkenshoJoho"."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
           INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
             ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
-          LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
+          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
             ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
             AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
