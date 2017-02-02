@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * OCR取込処理のために、指定の方法でイメージファイルをコピーします。
  */
-public class ImageFileCopier {
+public final class ImageFileCopier {
 
     private static final RString SEPARATOR = new RString(java.io.File.separator);
 
@@ -99,11 +99,11 @@ public class ImageFileCopier {
         ImageFileCopier theory(IFileNameConvertionTheory theory);
     }
 
-    private static class Builder implements IOcrFilesBuilder, ITheoryBuilder {
+    private static final class Builder implements IOcrFilesBuilder, ITheoryBuilder {
 
         private RString direcotryPath;
         private OcrFiles ocrFiles;
-        IFileNameConvertionTheory theory;
+        private IFileNameConvertionTheory theory;
 
         private Builder(RString direcotryPath) {
             this.direcotryPath = direcotryPath;

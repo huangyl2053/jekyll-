@@ -22,6 +22,7 @@ public class TempOcrCsvEntity implements IDbAccessable {
     private RString shinseiYMD;
     private RString hihokenshaNo;
     private RString csvData;
+    private int lineNum;
 
     public TempOcrCsvEntity() {
     }
@@ -33,7 +34,7 @@ public class TempOcrCsvEntity implements IDbAccessable {
      *
      * @param csvData CSV1レコード
      */
-    public TempOcrCsvEntity(RString csvData) {
+    public TempOcrCsvEntity(RString csvData, int lineNum) {
         List<RString> columns = csvData.split(",");
         this.setOcrID(getOrDefault(columns, TempOcrCsv.ocrID.index(), RString.EMPTY));
         this.setSheetID(getOrDefault(columns, TempOcrCsv.sheetID.index(), RString.EMPTY));
@@ -41,6 +42,7 @@ public class TempOcrCsvEntity implements IDbAccessable {
         this.setHihokenshaNo(getOrDefault(columns, TempOcrCsv.hihokenshaNo.index(), RString.EMPTY));
         this.setShinseiYMD(getOrDefault(columns, TempOcrCsv.shinseiYMD.index(), RString.EMPTY));
         this.setCsvData(csvData);
+        this.setLineNum(lineNum);
     }
 
     private static <T> T getOrDefault(List<T> list, int index, T defaultValue) {

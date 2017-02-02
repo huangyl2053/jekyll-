@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -147,6 +148,13 @@ public class NinteiOcrRelate {
     }
 
     /**
+     * @return イメージ共有ファイルID.もしくは{@code null}.
+     */
+    public RDateTime getImageSharedFileIDOrNull() {
+        return entity.getイメージ共有ファイルID();
+    }
+
+    /**
      * イメージ情報が存在する場合{@code true}、しない場合{@code false}を返します。
      *
      * @return イメージ情報が存在する場合{@code true}、しない場合{@code false}.
@@ -195,11 +203,21 @@ public class NinteiOcrRelate {
      * @return {@link IProcessingResult}
      */
     public IProcessingResult validate() {
-        if (has論理削除()) {
-            return ProcessingResultFactory.error(new RString("削除された申請です。"));
+        if (get厚労省IF識別コード() == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3) {
+            return ProcessingResultFactory.error(OcrTorikomiMessages.過去制度での申請);
         }
         if (!matches指定申請日()) {
-            return ProcessingResultFactory.error(new RString("取込データの申請日に合致する申請は見つかりませんでした。"));
+            if (has論理削除()) {
+                return ProcessingResultFactory.error(OcrTorikomiMessages.有効な要介護認定申請なし);
+            }
+            return ProcessingResultFactory.error(
+                    OcrTorikomiMessages.申請日一致なし_直近申請日提示.replaced(
+                            entity.get認定申請日().seireki().toDateString().toString()
+                    )
+            );
+        }
+        if (has論理削除()) {
+            return ProcessingResultFactory.error(OcrTorikomiMessages.削除された申請);
         }
         return ProcessingResultFactory.success();
     }

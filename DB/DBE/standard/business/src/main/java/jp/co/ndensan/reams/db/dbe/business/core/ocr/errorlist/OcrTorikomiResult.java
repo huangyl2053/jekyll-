@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -36,7 +38,7 @@ public final class OcrTorikomiResult {
 
     private OcrTorikomiResult(Builder builder) {
         this.取込日 = builder.取込日;
-        this.ocrid = builder.ocrid;
+        this.ocrid = builder.ocrID;
         this.sheetID = builder.sheetID;
         this.key = builder.key;
         this.氏名 = builder.氏名;
@@ -80,9 +82,9 @@ public final class OcrTorikomiResult {
     public static class Builder {
 
         private final RDate 取込日;
-        private final OCRID ocrid;
-        private final SheetID sheetID;
         private final ShinseiKey key;
+        private OCRID ocrID = OCRID.EMPTY;
+        private SheetID sheetID = SheetID.EMPTY;
         private RString 氏名 = RString.EMPTY;
         private RString 氏名カナ = RString.EMPTY;
         private ShinkiKoshinKubun 新規更新区分 = ShinkiKoshinKubun.対象データなし;
@@ -96,11 +98,41 @@ public final class OcrTorikomiResult {
          * @param sheetID SheetID
          * @param key {@link ShinseiKey 申請のキー}
          */
+        @Deprecated
         public Builder(RDate 取込日, OCRID ocrID, SheetID sheetID, ShinseiKey key) {
             this.取込日 = 取込日;
-            this.ocrid = ocrID;
+            this.ocrID = ocrID;
             this.sheetID = sheetID;
             this.key = key;
+        }
+
+        /**
+         * {@link Builder}を生成します。
+         *
+         * @param 取込日 取込日
+         * @param key {@link ShinseiKey 申請のキー}
+         */
+        public Builder(RDate 取込日, ShinseiKey key) {
+            this.取込日 = 取込日;
+            this.key = key;
+        }
+
+        /**
+         * @param ocrID OCRID
+         * @return {@link Builder}
+         */
+        public Builder setOcrID(OCRID ocrID) {
+            this.ocrID = ocrID;
+            return this;
+        }
+
+        /**
+         * @param sheetID シートID(帳票連番)
+         * @return {@link Builder}
+         */
+        public Builder setSheetID(SheetID sheetID) {
+            this.sheetID = sheetID;
+            return this;
         }
 
         /**
@@ -126,9 +158,21 @@ public final class OcrTorikomiResult {
         }
 
         /**
+         * @param messageToNote エラーの内容を表す{@link OcrTorikomiMessages}
+         * @return {@link Builder}
+         */
+        public Builder set処理結果AsError(OcrTorikomiMessages messageToNote) {
+            this.処理結果 = ProcessingResultFactory.error(messageToNote);
+            return this;
+        }
+
+        /**
          * @return {@link OcrTorikomiResult}
          */
         public OcrTorikomiResult build() {
+            if (処理結果 == null) {
+                throw new IllegalStateException("");
+            }
             return new OcrTorikomiResult(this);
         }
     }

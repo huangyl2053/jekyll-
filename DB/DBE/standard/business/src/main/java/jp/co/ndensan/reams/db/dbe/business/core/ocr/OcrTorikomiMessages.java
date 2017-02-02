@@ -13,13 +13,35 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum OcrTorikomiMessages {
 
     /**
-     *
+     * ※※仮実装用項目※※　今後、本格的な実装が必要な箇所に定義します。
      */
+    @Deprecated
     TODO(""),
     /**
      *
      */
-    関連データ_取得失敗("証記載保険者番号、被保険者番号、申請日に該当し、かつ、?がなされた要介護認定の申請は見つかりません。"),
+    @Deprecated
+    関連データ_取得失敗("当該被保険者には、要介護認定の申請が存在しません。"),
+    /**
+     *
+     */
+    有効な要介護認定申請なし("当該被保険者には、要介護認定の申請が存在しません。"),
+    /**
+     *
+     */
+    過去制度での申請("当該申請は過去の制度時の物であるため、処理を行いませんでした。"),
+    /**
+     *
+     */
+    削除された申請("当該申請は削除されています。"),
+    /**
+     *
+     */
+    申請日一致なし("この申請日での申請は見つかりませんでした。"),
+    /**
+     *
+     */
+    申請日一致なし_直近申請日提示("この申請日での申請は見つかりませんでした。 存在する直近の申請日：?"),
     /**
      *
      */
@@ -32,8 +54,7 @@ public enum OcrTorikomiMessages {
      *
      */
     カタログデータなし(
-            "CA3ファイル内に該当するデータが存在しないため保存できません。取込処理をやり直してください。\n"
-            + " ※注意点 … 取込処理では、OCR2000iにより作成されたファイルをもれなくすべて指定してください。"
+            "CA3ファイル内に該当するデータが存在しないため保存できません。"
     );
 
     //<editor-fold defaultstate="collapsed" desc="implements...">
@@ -43,11 +64,18 @@ public enum OcrTorikomiMessages {
         this.theOriginalMessage = new RString(message);
     }
 
-    RString originalMessage() {
+    /**
+     * @return 未編集のメッセージ
+     */
+    public RString originalMessage() {
         return this.theOriginalMessage;
     }
 
-    RString replaced(String... replaces) {
+    /**
+     * @param replaces 置き換え文字
+     * @return 指定された内容でリプレイス箇所を置き換えたメッセージ
+     */
+    public RString replaced(String... replaces) {
         //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
         String editMessage = theOriginalMessage.toString();
         //SUPPRESS CHECKSTYLE STRING-USE-CHECK//

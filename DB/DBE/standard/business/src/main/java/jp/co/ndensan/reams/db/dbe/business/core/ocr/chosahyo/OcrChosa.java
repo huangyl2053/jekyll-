@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -129,25 +130,136 @@ public final class OcrChosa {
 
     private Map<RString, KomokuNo> 特記事項ImageFileName_調査項目_Map;
 
-    private OcrChosa() {
+    private boolean isBroken;
+    private int lineNum;
+
+    private OcrChosa(RString line, int lineNum) {
+        init(line);
+        this.isBroken = false;
+        this.lineNum = lineNum;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="init()">
+    private void init(RString line) {
+        this.key = ShinseiKey.EMPTY;
+        this.データ行_文字列 = line;
+        this.ocrID = OCRID.EMPTY;
+        this.sheetID = SheetID.EMPTY;
+
+        this.保険者番号 = RString.EMPTY;
+        this.申請日 = RString.EMPTY;
+        this.被保険者番号 = RString.EMPTY;
+        this.実施日時 = RString.EMPTY;
+        this.実施場所 = RString.EMPTY;
+        this.記入者 = RString.EMPTY;
+        this.所属機関 = RString.EMPTY;
+        this.サービス区分コード = RString.EMPTY;
+        this.訪問介護の回数 = RString.EMPTY;
+        this.訪問入浴介護の回数 = RString.EMPTY;
+        this.訪問看護の回数 = RString.EMPTY;
+        this.訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数 = RString.EMPTY;
+        this.居宅療養管理指導の回数 = RString.EMPTY;
+        this.通所看護の回数 = RString.EMPTY;
+        this.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数 = RString.EMPTY;
+        this.短期入所生活介護の日数 = RString.EMPTY;
+        this.短期入所療養介護の日数 = RString.EMPTY;
+        this.特定施設入所者生活介護の日数 = RString.EMPTY;
+        this.福祉用具貸与の品目 = RString.EMPTY;
+        this.福祉用具購入の品目 = RString.EMPTY;
+        this.住宅改修 = RString.EMPTY;
+        this.夜間対応型訪問介護の日数 = RString.EMPTY;
+        this.認知症対応型通所介護の日数 = RString.EMPTY;
+        this.小規模多機能型居宅介護の日数 = RString.EMPTY;
+        this.認知症対応型共同生活介護の日数 = RString.EMPTY;
+        this.地域密着型特定施設入居者生活介護の日数 = RString.EMPTY;
+        this.地域密着型介護老人福祉施設入居者生活介護の日数 = RString.EMPTY;
+        this.看護小規模多機能型居宅介護 = RString.EMPTY;
+        this.随時対応型訪問介護看護 = RString.EMPTY;
+        this.施設利用の有無 = RString.EMPTY;
+        this.麻痺 = RString.EMPTY;
+        this.拘縮 = RString.EMPTY;
+        this.寝返り = RString.EMPTY;
+        this.起き上がり = RString.EMPTY;
+        this.座位保持 = RString.EMPTY;
+        this.両足での立位 = RString.EMPTY;
+        this.歩行 = RString.EMPTY;
+        this.立ち上がり = RString.EMPTY;
+        this.片足での立位 = RString.EMPTY;
+        this.洗身 = RString.EMPTY;
+        this.つめ切り = RString.EMPTY;
+        this.視力 = RString.EMPTY;
+        this.聴力 = RString.EMPTY;
+        this.移乗 = RString.EMPTY;
+        this.移動 = RString.EMPTY;
+        this.えん下 = RString.EMPTY;
+        this.食事摂取 = RString.EMPTY;
+        this.排尿 = RString.EMPTY;
+        this.排便 = RString.EMPTY;
+        this.口腔清潔 = RString.EMPTY;
+        this.洗顔 = RString.EMPTY;
+        this.整髪 = RString.EMPTY;
+        this.上衣の着脱 = RString.EMPTY;
+        this.ズボン等の着脱 = RString.EMPTY;
+        this.外出頻度 = RString.EMPTY;
+        this.意思の疎通 = RString.EMPTY;
+        this.毎日の日課を理解 = RString.EMPTY;
+        this.生年月日をいう = RString.EMPTY;
+        this.短期記憶 = RString.EMPTY;
+        this.自分の名前をいう = RString.EMPTY;
+        this.今の季節を理解 = RString.EMPTY;
+        this.場所の理解 = RString.EMPTY;
+        this.徘徊 = RString.EMPTY;
+        this.外出して戻れない = RString.EMPTY;
+        this.被害的 = RString.EMPTY;
+        this.作話 = RString.EMPTY;
+        this.感情が不安定 = RString.EMPTY;
+        this.昼夜逆転 = RString.EMPTY;
+        this.同じ話をする = RString.EMPTY;
+        this.大声を出す = RString.EMPTY;
+        this.介護に抵抗 = RString.EMPTY;
+        this.落ち着きなし = RString.EMPTY;
+        this.一人で出たがる = RString.EMPTY;
+        this.収集癖 = RString.EMPTY;
+        this.物や衣類を壊す = RString.EMPTY;
+        this.ひどい物忘れ = RString.EMPTY;
+        this.独り言 = RString.EMPTY;
+        this.自分勝手に行動する = RString.EMPTY;
+        this.話がまとまらない = RString.EMPTY;
+        this.薬の内服 = RString.EMPTY;
+        this.金銭の管理 = RString.EMPTY;
+        this.日常の意思決定 = RString.EMPTY;
+        this.集団への不適応 = RString.EMPTY;
+        this.買い物 = RString.EMPTY;
+        this.簡単な調理 = RString.EMPTY;
+        this.過去14日間に受けた治療 = RString.EMPTY;
+        this.認知症高齢者の日常生活自立度 = Code.EMPTY;
+        this.障害高齢者の日常生活自立度 = Code.EMPTY;
+
+        this.特記事項ImageFileName_調査項目_Map = new HashMap<>();
+    }
+
+    //</editor-fold>
     /**
      * 行を解析した結果より、インスタンスを生成します。
      *
      * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
      *
      * @param line 行
+     * @param lineNum 行番号
      * @return {@link OcrChosa}
      */
-    public static OcrChosa parsed(RString line) {
-        return parseデータ行(line);
+    public static OcrChosa parsed(RString line, int lineNum) {
+        try {
+            return parseデータ行(line, lineNum);
+        } catch (Exception e) {
+            OcrChosa ocrChosa = new OcrChosa(line, lineNum);
+            ocrChosa.isBroken = true;
+            return ocrChosa;
+        }
     }
 
-    private static OcrChosa parseデータ行(RString line) {
-        OcrChosa result = new OcrChosa();
-        result.clear();
-        result.setデータ行_文字列(line);
+    private static OcrChosa parseデータ行(RString line, int lineNum) {
+        OcrChosa result = new OcrChosa(line, lineNum);
         List<RString> columns = Collections.unmodifiableList(line.split(","));
         if (columns == null || columns.isEmpty()) {
             return result;
@@ -318,104 +430,23 @@ public final class OcrChosa {
     }
 
     /**
-     * メンバ変数のクリア
+     * {@link OcrChosa}の各メソッドを{@link IFunction}で表現します。
      */
-    private void clear() {
-        this.key = ShinseiKey.EMPTY;
-        this.データ行_文字列 = RString.EMPTY;
-        this.ocrID = OCRID.EMPTY;
-        this.sheetID = SheetID.EMPTY;
+    public static final class Fn {
 
-        this.保険者番号 = RString.EMPTY;
-        this.申請日 = RString.EMPTY;
-        this.被保険者番号 = RString.EMPTY;
-        this.実施日時 = RString.EMPTY;
-        this.実施場所 = RString.EMPTY;
-        this.記入者 = RString.EMPTY;
-        this.所属機関 = RString.EMPTY;
-        this.サービス区分コード = RString.EMPTY;
-        this.訪問介護の回数 = RString.EMPTY;
-        this.訪問入浴介護の回数 = RString.EMPTY;
-        this.訪問看護の回数 = RString.EMPTY;
-        this.訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数 = RString.EMPTY;
-        this.居宅療養管理指導の回数 = RString.EMPTY;
-        this.通所看護の回数 = RString.EMPTY;
-        this.通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数 = RString.EMPTY;
-        this.短期入所生活介護の日数 = RString.EMPTY;
-        this.短期入所療養介護の日数 = RString.EMPTY;
-        this.特定施設入所者生活介護の日数 = RString.EMPTY;
-        this.福祉用具貸与の品目 = RString.EMPTY;
-        this.福祉用具購入の品目 = RString.EMPTY;
-        this.住宅改修 = RString.EMPTY;
-        this.夜間対応型訪問介護の日数 = RString.EMPTY;
-        this.認知症対応型通所介護の日数 = RString.EMPTY;
-        this.小規模多機能型居宅介護の日数 = RString.EMPTY;
-        this.認知症対応型共同生活介護の日数 = RString.EMPTY;
-        this.地域密着型特定施設入居者生活介護の日数 = RString.EMPTY;
-        this.地域密着型介護老人福祉施設入居者生活介護の日数 = RString.EMPTY;
-        this.看護小規模多機能型居宅介護 = RString.EMPTY;
-        this.随時対応型訪問介護看護 = RString.EMPTY;
-        this.施設利用の有無 = RString.EMPTY;
-        this.麻痺 = RString.EMPTY;
-        this.拘縮 = RString.EMPTY;
-        this.寝返り = RString.EMPTY;
-        this.起き上がり = RString.EMPTY;
-        this.座位保持 = RString.EMPTY;
-        this.両足での立位 = RString.EMPTY;
-        this.歩行 = RString.EMPTY;
-        this.立ち上がり = RString.EMPTY;
-        this.片足での立位 = RString.EMPTY;
-        this.洗身 = RString.EMPTY;
-        this.つめ切り = RString.EMPTY;
-        this.視力 = RString.EMPTY;
-        this.聴力 = RString.EMPTY;
-        this.移乗 = RString.EMPTY;
-        this.移動 = RString.EMPTY;
-        this.えん下 = RString.EMPTY;
-        this.食事摂取 = RString.EMPTY;
-        this.排尿 = RString.EMPTY;
-        this.排便 = RString.EMPTY;
-        this.口腔清潔 = RString.EMPTY;
-        this.洗顔 = RString.EMPTY;
-        this.整髪 = RString.EMPTY;
-        this.上衣の着脱 = RString.EMPTY;
-        this.ズボン等の着脱 = RString.EMPTY;
-        this.外出頻度 = RString.EMPTY;
-        this.意思の疎通 = RString.EMPTY;
-        this.毎日の日課を理解 = RString.EMPTY;
-        this.生年月日をいう = RString.EMPTY;
-        this.短期記憶 = RString.EMPTY;
-        this.自分の名前をいう = RString.EMPTY;
-        this.今の季節を理解 = RString.EMPTY;
-        this.場所の理解 = RString.EMPTY;
-        this.徘徊 = RString.EMPTY;
-        this.外出して戻れない = RString.EMPTY;
-        this.被害的 = RString.EMPTY;
-        this.作話 = RString.EMPTY;
-        this.感情が不安定 = RString.EMPTY;
-        this.昼夜逆転 = RString.EMPTY;
-        this.同じ話をする = RString.EMPTY;
-        this.大声を出す = RString.EMPTY;
-        this.介護に抵抗 = RString.EMPTY;
-        this.落ち着きなし = RString.EMPTY;
-        this.一人で出たがる = RString.EMPTY;
-        this.収集癖 = RString.EMPTY;
-        this.物や衣類を壊す = RString.EMPTY;
-        this.ひどい物忘れ = RString.EMPTY;
-        this.独り言 = RString.EMPTY;
-        this.自分勝手に行動する = RString.EMPTY;
-        this.話がまとまらない = RString.EMPTY;
-        this.薬の内服 = RString.EMPTY;
-        this.金銭の管理 = RString.EMPTY;
-        this.日常の意思決定 = RString.EMPTY;
-        this.集団への不適応 = RString.EMPTY;
-        this.買い物 = RString.EMPTY;
-        this.簡単な調理 = RString.EMPTY;
-        this.過去14日間に受けた治療 = RString.EMPTY;
-        this.認知症高齢者の日常生活自立度 = Code.EMPTY;
-        this.障害高齢者の日常生活自立度 = Code.EMPTY;
+        private Fn() {
+        }
 
-        this.特記事項ImageFileName_調査項目_Map = new HashMap<>();
+        /**
+         * @return {@link OcrChosa#getSheetID()}に相当する{@link IFunction}
+         */
+        public static IFunction<OcrChosa, SheetID> getSheetID() {
+            return new IFunction<OcrChosa, SheetID>() {
+                @Override
+                public SheetID apply(OcrChosa t) {
+                    return t.getSheetID();
+                }
+            };
+        }
     }
-
 }
