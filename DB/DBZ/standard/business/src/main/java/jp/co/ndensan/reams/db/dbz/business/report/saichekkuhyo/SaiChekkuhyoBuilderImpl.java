@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo;
 
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -29,10 +29,10 @@ public class SaiChekkuhyoBuilderImpl implements ISaiChekkuhyoBuilder {
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link SaiChekkuhyoReportSource}
+     * @return {@link SaiChekkuhyoKatamenReportSource}
      */
     @Override
-    public SaiChekkuhyoReportSource build() {
-        return ReportEditorJoiner.from(new SaiChekkuhyoReportSource()).join(editor).buildSource();
+    public SaiChekkuhyoKatamenReportSource build() {
+        return ReportEditorJoiner.from(new SaiChekkuhyoKatamenReportSource()).join(editor).buildSource();
     }
 }

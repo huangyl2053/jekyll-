@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBE-0080-060 xuyannan
  */
-public class SaiChekkuhyoReport extends Report<SaiChekkuhyoReportSource> {
+public class SaiChekkuhyoReport extends Report<SaiChekkuhyoKatamenReportSource> {
 
     private static final int 第１群_COUNT = 20;
     private final List<SaiChekkuhyoItem> itemList;
@@ -58,7 +58,7 @@ public class SaiChekkuhyoReport extends Report<SaiChekkuhyoReportSource> {
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    public void writeBy(ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<SaiChekkuhyoKatamenReportSource> reportSourceWriter) {
         if (itemList != null) {
             for (SaiChekkuhyoItem saiChekkuhyoItem : itemList) {
                 for (int i = 1; i <= 第１群_COUNT; i++) {

@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoReport;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
@@ -29,7 +29,7 @@ public class SaiChekkuhyoPrintService {
      */
     public SourceDataCollection print(List<SaiChekkuhyoItem> itemList) {
         SaiChekkuhyoProperty property = new SaiChekkuhyoProperty();
-        return new Printer<SaiChekkuhyoReportSource>().spool(property, toReports(itemList));
+        return new Printer<SaiChekkuhyoKatamenReportSource>().spool(property, toReports(itemList));
     }
 
     private static List<SaiChekkuhyoReport> toReports(List<SaiChekkuhyoItem> itemList) {

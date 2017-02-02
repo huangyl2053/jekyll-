@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo;
 
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @reamsid_L DBE-0080-060 xuyannan
  */
-public interface ISaiChekkuhyoEditor extends IReportEditor<SaiChekkuhyoReportSource> {
+public interface ISaiChekkuhyoEditor extends IReportEditor<SaiChekkuhyoKatamenReportSource> {
 
 }

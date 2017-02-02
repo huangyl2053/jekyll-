@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo;
 
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * @reamsid_L DBE-0080-060 xuyannan
  */
-public class SaiChekkuhyoProperty extends ReportPropertyBase<SaiChekkuhyoReportSource> {
+public class SaiChekkuhyoProperty extends ReportPropertyBase<SaiChekkuhyoKatamenReportSource> {
 
     /**
      * インスタンスを生成します。

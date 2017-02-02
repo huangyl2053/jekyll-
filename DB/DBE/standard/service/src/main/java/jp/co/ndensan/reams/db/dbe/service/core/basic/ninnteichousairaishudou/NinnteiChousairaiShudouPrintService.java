@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.db.dbz.entity.report.chosairaisho.ChosaIraishoReportS
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyotokki.GaikyotokkiA4ReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -500,9 +501,9 @@ public class NinnteiChousairaiShudouPrintService {
             saiChekkuhyoReportList.add(SaiChekkuhyoReport.createFrom(チェック票List));
         }
         SaiChekkuhyoProperty property = new SaiChekkuhyoProperty();
-        try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(property, reportManager)) {
+        try (ReportAssembler<SaiChekkuhyoKatamenReportSource> assembler = createAssembler(property, reportManager)) {
             for (SaiChekkuhyoReport report : saiChekkuhyoReportList) {
-                ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                ReportSourceWriter<SaiChekkuhyoKatamenReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }
         }
