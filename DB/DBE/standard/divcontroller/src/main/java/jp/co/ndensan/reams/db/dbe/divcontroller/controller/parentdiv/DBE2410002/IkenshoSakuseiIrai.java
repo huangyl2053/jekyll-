@@ -14,9 +14,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002.IkenshoSakuseiIraiValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshosakuseiirai.IkenshoSakuseiIraiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -29,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -109,6 +113,9 @@ public class IkenshoSakuseiIrai {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             保存処理(div);
+            if (createHandler(div).結果データ有無()) {
+                完了データ更新();
+            }
             onLoad(div);
             RealInitialLocker.release(get排他キー());
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
@@ -155,6 +162,21 @@ public class IkenshoSakuseiIrai {
         builder.setShujiiIkenshoIraiJoho(createHandler(div)
                 .create主治医意見書作成依頼(要介護認定申請情報, ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value()));
         IkenshoSakuseiIraiManager.createInstance().saveList(builder.build().modifiedModel());
+    }
+    
+    private void 完了データ更新() {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
+        NinteiKanryoJoho ninteiKanryoJoho = manager.get要介護認定完了情報(申請書管理番号);
+        ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit()
+                .set主治医意見書作成依頼完了年月日(null)
+                .set主治医意見書登録完了年月日(null)
+                .set要介護認定一次判定完了年月日(null)
+                .setマスキング完了年月日(null)
+                .set認定審査会割当完了年月日(null)
+                .set認定審査会完了年月日(null)
+                .build();
+        IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
     }
 
     private IkenshoSakuseiIraiHandler createHandler(IkenshoSakuseiIraiDiv div) {

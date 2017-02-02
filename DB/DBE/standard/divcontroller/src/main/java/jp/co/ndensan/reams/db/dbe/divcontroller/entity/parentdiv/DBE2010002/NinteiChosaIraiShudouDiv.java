@@ -35,10 +35,10 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     private IraiprintPanelDiv IraiprintPanel;
     @JsonProperty("NinteiChosaPrint")
     private NinteiChosaPrintDiv NinteiChosaPrint;
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("KanryoMessage")
     private KaigoKanryoMessageDiv KanryoMessage;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
 
@@ -103,21 +103,21 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * getKanryoMessage
      * @return KanryoMessage
      */
     @JsonProperty("KanryoMessage")
     public IKaigoKanryoMessageDiv getKanryoMessage() {
         return KanryoMessage;
+    }
+
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     /*

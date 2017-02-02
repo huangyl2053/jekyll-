@@ -18,15 +18,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.NinteiChosaIraiShudouDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010002.NinteiChosaIraiShudouValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairaishudou.NinnteiChousairaiShudouFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairaishudou.NinnteiChousairaiShudouPrintService;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairailist.NinteichosaIraiListManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -101,7 +104,6 @@ public class NinteiChosaIraiShudou {
         NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value());
         List<NinnteiChousairaiShudouBusiness> 認定調査依頼List = finder.get認定調査依頼情報(parameter).records();
         NinteiShinseiJoho 更新用認定調査依頼情報 = finder.get更新用認定調査依頼情報(parameter);
-        getHandler(div).onLoad(認定調査依頼List);
         ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, 更新用認定調査依頼情報);
         if (!認定調査依頼List.isEmpty()) {
             NinnteiChousairaiShudouBusiness 認定調査依頼 = 認定調査依頼List.get(0);
@@ -115,6 +117,7 @@ public class NinteiChosaIraiShudou {
                 ViewStateHolder.put(ViewStateKeys.モード, 修正モード);
             }
         }
+        getHandler(div).onLoad(認定調査依頼List);
 
         div.getCcdItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
 
@@ -164,6 +167,9 @@ public class NinteiChosaIraiShudou {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             saveData(div);
+            if (getHandler(div).結果データ有無()) {
+                完了データ更新();
+            }
             ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             NinteiShinseiJoho 更新用認定調査依頼情報 = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
                     NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value()));
@@ -242,6 +248,21 @@ public class NinteiChosaIraiShudou {
                     .set認定調査督促メモ(RString.EMPTY).build();
             NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho);
         }
+    }
+    
+    private void 完了データ更新() {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
+        NinteiKanryoJoho ninteiKanryoJoho = manager.get要介護認定完了情報(申請書管理番号);
+        ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit()
+                .set認定調査依頼完了年月日(null)
+                .set認定調査完了年月日(null)
+                .set要介護認定一次判定完了年月日(null)
+                .setマスキング完了年月日(null)
+                .set認定審査会割当完了年月日(null)
+                .set認定審査会完了年月日(null)
+                .build();
+        NinteichosaIraiListManager.createInstance().save要介護認定完了情報(ninteiKanryoJoho.toEntity());
     }
 
     private FlexibleDate get認定調査期限年月日(NinteiChosaIraiShudouDiv div, FlexibleDate 認定調査依頼年月日) {

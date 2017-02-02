@@ -17,6 +17,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010002.Nint
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyogaikyotokki.GaikyotokkiA4Business;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
@@ -34,6 +37,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKihonChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -46,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査依頼(手動)のハンドラークラスです。
@@ -123,8 +129,10 @@ public class NinteiChosaIraiShudouHandler {
                 dataSource.add(new KeyValueDataSource(ninteiChousaIraiKubunCode.getコード(), ninteiChousaIraiKubunCode.get名称()));
             }
             div.getNinteichosaIraiByHand().getDdlIraiKubun().setDataSource(dataSource);
-            if (認定調査依頼.get認定調査依頼区分コード() != null) {
-                div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(認定調査依頼.get認定調査依頼区分コード());
+            if (結果データ有無()) {
+                div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.再調査.getコード());
+            } else {
+                div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.再依頼.getコード());
             }
             if (!RString.isNullOrEmpty(認定調査依頼.get認定調査依頼履歴番号())) {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(true);
@@ -237,6 +245,20 @@ public class NinteiChosaIraiShudouHandler {
             div.getTxtKigenymd().clearValue();
             div.getTxtKigenymd().setReadOnly(true);
         }
+    }
+    
+    /**
+     * 該当の申請書管理番号に対する結果データ存在有無を返す。
+     * @return True:結果データ有り False:結果データなし
+     */
+    public boolean 結果データ有無() {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
+        NinteichosahyoGaikyoChosaManager dbt5202Manager = new NinteichosahyoGaikyoChosaManager();
+        List<NinteichosahyoGaikyoChosa> ninteichosahyoGaikyoChosaList = dbt5202Manager.get認定調査票_概況調査_情報(申請書管理番号, 認定調査依頼履歴番号).records();
+        NinteichosahyoKihonChosaManager dbt5203Manager = new NinteichosahyoKihonChosaManager();
+        NinteichosahyoKihonChosa ninteichosahyoKihonChosa = dbt5203Manager.get認定調査票_基本調査(申請書管理番号, 認定調査依頼履歴番号);
+        return ninteichosahyoGaikyoChosaList != null && ninteichosahyoKihonChosa != null;
     }
 
     /**

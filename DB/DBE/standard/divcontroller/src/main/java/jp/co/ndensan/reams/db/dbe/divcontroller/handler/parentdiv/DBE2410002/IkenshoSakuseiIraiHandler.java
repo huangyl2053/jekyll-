@@ -15,12 +15,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.Ikensho
 import jp.co.ndensan.reams.db.dbe.definition.core.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -54,14 +58,18 @@ public class IkenshoSakuseiIraiHandler {
         if (主治医意見書作成依頼 == null) {
             return;
         }
+        div.setIkenshoIraiRirekiNo(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号());
         if (RString.isNullOrEmpty(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号())) {
             div.getDdlIraiKubun().setDisabled(false);
             div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
         } else {
             div.getDdlIraiKubun().setDisabled(true);
-            div.getDdlIraiKubun().setSelectedKey(主治医意見書作成依頼.get主治医意見書依頼区分());
+            if (結果データ有無()) {
+                div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.再意見書.getコード());
+            } else {
+                div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.再依頼.getコード());
+            }
         }
-        div.setIkenshoIraiRirekiNo(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号());
         if (主治医意見書作成依頼.get主治医意見書作成依頼年月日() != null && !主治医意見書作成依頼.get主治医意見書作成依頼年月日().isEmpty()) {
             div.getTxtSakuseiIraiD().setValue(new RDate(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString()));
         }
@@ -110,6 +118,18 @@ public class IkenshoSakuseiIraiHandler {
         builder.build().toEntity().setState(EntityDataState.Added);
         list.add(builder.build());
         return list;
+    }
+    
+    /**
+     * 該当の申請書管理番号に対する結果データ存在有無を返す。
+     * @return True:結果データ有り False:結果データなし
+     */
+    public boolean 結果データ有無() {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        int 意見書履歴番号 = Integer.parseInt(div.getIkenshoIraiRirekiNo().toString());
+        ShujiiIkenshoJohoManager dbt5302Manager = new ShujiiIkenshoJohoManager();
+        ShujiiIkenshoJoho shujiiIkenshoJoho = dbt5302Manager.get要介護認定主治医意見書情報(申請書管理番号, 意見書履歴番号);
+        return shujiiIkenshoJoho != null;
     }
 
     private void set依頼区分() {
