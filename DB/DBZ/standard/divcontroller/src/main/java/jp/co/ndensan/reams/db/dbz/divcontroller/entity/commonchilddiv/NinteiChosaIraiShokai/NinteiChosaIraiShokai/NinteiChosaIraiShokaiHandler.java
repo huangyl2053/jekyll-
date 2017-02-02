@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -52,7 +53,7 @@ public class NinteiChosaIraiShokaiHandler {
             row.setShinseiKubun(get申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
             row.getShinseiTorikeshiDate().setValue(entity.getTorisageYMD());
             row.getNinteiDate().setValue(entity.getNijiHanteiYMD());
-            if (entity.getNijiHanteiYokaigoJotaiKubunCode() != null) {
+            if (entity.getNijiHanteiYokaigoJotaiKubunCode() != null && !Code.EMPTY.equals(entity.getNijiHanteiYokaigoJotaiKubunCode())) {
                 RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(), entity.getNijiHanteiYokaigoJotaiKubunCode().value());
                 if (new RString("なし").equals(要介護度)) {
                     row.setYokaigodo(RString.EMPTY);
