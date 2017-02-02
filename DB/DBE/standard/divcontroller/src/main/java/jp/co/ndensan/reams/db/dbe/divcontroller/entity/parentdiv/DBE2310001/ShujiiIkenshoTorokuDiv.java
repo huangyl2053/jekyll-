@@ -19,13 +19,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radJotaiKubun")
+    private RadioButton radJotaiKubun;
+    @JsonProperty("shinseishaJoho")
+    private shinseishaJohoDiv shinseishaJoho;
     @JsonProperty("btnShobyoGuide")
     private ButtonDialog btnShobyoGuide;
     @JsonProperty("btnTokubetsuIryoGuide")
@@ -38,10 +42,10 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     private ButtonDialog btnTokkiJikoGuide;
     @JsonProperty("IkenshoKihonJoho")
     private IkenshoKihonJohoDiv IkenshoKihonJoho;
+    @JsonProperty("NijiHanteiKekka")
+    private NijiHanteiKekkaDiv NijiHanteiKekka;
     @JsonProperty("IkenshoMemo")
     private IkenshoMemoDiv IkenshoMemo;
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,6 +53,42 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradJotaiKubun
+     * @return radJotaiKubun
+     */
+    @JsonProperty("radJotaiKubun")
+    public RadioButton getRadJotaiKubun() {
+        return radJotaiKubun;
+    }
+
+    /*
+     * setradJotaiKubun
+     * @param radJotaiKubun radJotaiKubun
+     */
+    @JsonProperty("radJotaiKubun")
+    public void setRadJotaiKubun(RadioButton radJotaiKubun) {
+        this.radJotaiKubun = radJotaiKubun;
+    }
+
+    /*
+     * getshinseishaJoho
+     * @return shinseishaJoho
+     */
+    @JsonProperty("shinseishaJoho")
+    public shinseishaJohoDiv getShinseishaJoho() {
+        return shinseishaJoho;
+    }
+
+    /*
+     * setshinseishaJoho
+     * @param shinseishaJoho shinseishaJoho
+     */
+    @JsonProperty("shinseishaJoho")
+    public void setShinseishaJoho(shinseishaJohoDiv shinseishaJoho) {
+        this.shinseishaJoho = shinseishaJoho;
+    }
+
     /*
      * getbtnShobyoGuide
      * @return btnShobyoGuide
@@ -158,6 +198,24 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     }
 
     /*
+     * getNijiHanteiKekka
+     * @return NijiHanteiKekka
+     */
+    @JsonProperty("NijiHanteiKekka")
+    public NijiHanteiKekkaDiv getNijiHanteiKekka() {
+        return NijiHanteiKekka;
+    }
+
+    /*
+     * setNijiHanteiKekka
+     * @param NijiHanteiKekka NijiHanteiKekka
+     */
+    @JsonProperty("NijiHanteiKekka")
+    public void setNijiHanteiKekka(NijiHanteiKekkaDiv NijiHanteiKekka) {
+        this.NijiHanteiKekka = NijiHanteiKekka;
+    }
+
+    /*
      * getIkenshoMemo
      * @return IkenshoMemo
      */
@@ -176,17 +234,13 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     }
 
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getShinseishaJoho().getCcdNinteiShinseishaKihonInfo();
+    }
+
     @JsonIgnore
     public ShujiiJohoDiv getShujiiJoho() {
         return this.getIkenshoKihonJoho().getShujiiJoho();
@@ -335,6 +389,16 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     @JsonIgnore
     public void  setTxtSonotaNyuryoku(TextBox txtSonotaNyuryoku) {
         this.getIkenshoKihonJoho().getChosaTishoJoho().setTxtSonotaNyuryoku(txtSonotaNyuryoku);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadShujiiRenraku() {
+        return this.getNijiHanteiKekka().getRadShujiiRenraku();
+    }
+
+    @JsonIgnore
+    public void  setRadShujiiRenraku(RadioButton radShujiiRenraku) {
+        this.getNijiHanteiKekka().setRadShujiiRenraku(radShujiiRenraku);
     }
 
     @JsonIgnore

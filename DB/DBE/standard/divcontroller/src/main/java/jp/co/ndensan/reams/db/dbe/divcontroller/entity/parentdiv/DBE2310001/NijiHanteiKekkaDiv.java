@@ -5,16 +5,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoKanryoMsg のクラスファイル 
+ * NijiHanteiKekka のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KaigoKanryoMsgDiv extends Panel {
+public class NijiHanteiKekkaDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
@@ -22,8 +21,8 @@ public class KaigoKanryoMsgDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KanryoMessageDiv ccdKaigoKanryoMessage;
+    @JsonProperty("radShujiiRenraku")
+    private RadioButton radShujiiRenraku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +31,21 @@ public class KaigoKanryoMsgDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
+     * getradShujiiRenraku
+     * @return radShujiiRenraku
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
+    @JsonProperty("radShujiiRenraku")
+    public RadioButton getRadShujiiRenraku() {
+        return radShujiiRenraku;
+    }
+
+    /*
+     * setradShujiiRenraku
+     * @param radShujiiRenraku radShujiiRenraku
+     */
+    @JsonProperty("radShujiiRenraku")
+    public void setRadShujiiRenraku(RadioButton radShujiiRenraku) {
+        this.radShujiiRenraku = radShujiiRenraku;
     }
 
     // </editor-fold>

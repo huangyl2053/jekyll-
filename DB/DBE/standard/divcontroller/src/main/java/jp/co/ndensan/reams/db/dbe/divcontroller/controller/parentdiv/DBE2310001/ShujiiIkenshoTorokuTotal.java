@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2310001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
@@ -12,37 +13,52 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.Shujii
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku.ShujiiIkenshoTorokuResult;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.DBE2310001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.DBE2310001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001.ShujiiIkenshoTorokuHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001.ShujiiIkenshoTorokuValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteishinseijoho.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshotoroku.ShujiiIkenshoTorokuManager;
+import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 
 /**
  * 主治医意見書登録のコントローラです。
@@ -70,6 +86,14 @@ public class ShujiiIkenshoTorokuTotal {
     private final NinteiShinseiJohoManager ninteiManager;
     private static final RString COMMON_BUTTON_UPDATE = new RString("btnIkenshoSave");
     private static final RString UIContainerID_主治医意見書入手 = new RString("DBEUC20701");
+    private static final int 該当データなし = 0;
+    private static final RString 登録_修正 = new RString("key0");
+    private static final RString 削除 = new RString("key1");
+    private static final RString 連絡必要 = new RString("key1");
+    private RString 確認メッセージ出力区分;
+    private static final RString 確認メッセージ出力要 = new RString("1");
+    private static final RString イメージファイルが存在区分_存在しない = new RString("1");
+    private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -104,12 +128,10 @@ public class ShujiiIkenshoTorokuTotal {
                 return ResponseData.of(div).respond();
             }
         }
-
         履歴番号 = resultList.records().get(0).get主治医意見書作成依頼履歴番号();
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, new RString(履歴番号));
         Image image = imageManager.getイメージ情報(管理番号);
         NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.create主治医意見書登録Param(管理番号, 履歴番号));
-
         if (resultList.records().get(0).get主治医意見書記入年月日() == null) {
             div.setHdnHasChanged(RString.EMPTY);
             div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
@@ -127,7 +149,85 @@ public class ShujiiIkenshoTorokuTotal {
         getHandler(div).setChkTakaJushin(resultList.records().get(0));
         ViewStateHolder.put(ViewStateKeys.意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, image);
+
+        boolean 照会のみ = false;
+        if (!ResponseHolder.isReRequest()) {
+            if (ShinsakaiWariateJohoManager.createInstance().get審査会割当データ(管理番号)) {
+                return ResponseData.of(div).addMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage()).respond();
+            }
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            照会のみ = true;
+        }
+        int 一次判定データ = service.getIchijiHantei(param);
+        int 一値判定完了 = service.getIchijiHanteiKanryo(param);
+
+        if (!(一次判定データ == 該当データなし && 一値判定完了 == 該当データなし)
+                && !(new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage()).respond();
+        }
+
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            照会のみ = true;
+        }
+        if (照会のみ) {
+            setReadOnly(div);
+            div.getRadJotaiKubun().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+            return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
+        }
+        div.getRadJotaiKubun().setSelectedKey(登録_修正);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * チェック変更した際の選択項目により、画面項目の入力可否を設定します。
+     *
+     * @param div 主治医意見書登録Div
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onChange_jotaiKubun(ShujiiIkenshoTorokuTotalDiv div) {
+        if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
+            div.getTxtKinyuYMD().setReadOnly(false);
+            div.getTxtSaishuShinryoYMD().setReadOnly(false);
+            div.getRadIkenshoSakuseiKaisu().setReadOnly(false);
+            div.getRadTakaShinryo().setReadOnly(false);
+            div.getTxtShujiiMemo().setReadOnly(false);
+            div.getBtnShobyoGuide().setDisabled(false);
+            div.getBtnTokubetsuIryoGuide().setDisabled(false);
+            div.getBtnShinshinJotaiGuide().setDisabled(false);
+            div.getBtnSeikatsuKinoServiceGuide().setDisabled(false);
+            div.getBtnTokkiJikoGuide().setDisabled(false);
+            div.getRadDoi().setReadOnly(false);
+            div.getBtnMemoTeikeibunGuide().setDisabled(false);
+            div.getRadShujiiRenraku().setReadOnly(false);
+        } else {
+            setReadOnly(div);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 各項目を編集不可にする
+     *
+     * @param div 主治医意見書登録Div
+     */
+    private void setReadOnly(ShujiiIkenshoTorokuTotalDiv div) {
+        div.getTxtKinyuYMD().setReadOnly(true);
+        div.getTxtSaishuShinryoYMD().setReadOnly(true);
+        div.getRadIkenshoSakuseiKaisu().setReadOnly(true);
+        div.getRadTakaShinryo().setReadOnly(true);
+        div.getTxtShujiiMemo().setReadOnly(true);
+        div.getBtnShobyoGuide().setDisabled(true);
+        div.getBtnTokubetsuIryoGuide().setDisabled(true);
+        div.getBtnShinshinJotaiGuide().setDisabled(true);
+        div.getBtnSeikatsuKinoServiceGuide().setDisabled(true);
+        div.getBtnTokkiJikoGuide().setDisabled(true);
+        div.getRadDoi().setReadOnly(true);
+        div.getBtnMemoTeikeibunGuide().setDisabled(true);
+        div.getRadShujiiRenraku().setReadOnly(true);
     }
 
     /**
@@ -336,6 +436,26 @@ public class ShujiiIkenshoTorokuTotal {
     }
 
     /**
+     * 一次判定のし直しが必要か否かを返します。
+     *
+     * @param div 主治医意見書登録Div
+     * @return 一次判定し直しが必要か否か
+     */
+    private boolean isRequiredRejudgeOfIchiji(ShinseishoKanriNo 管理番号, int 履歴番号) {
+        LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
+        ShujiiIkenshoTorokuMapperParameter param
+                = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
+        int 一次判定データ = service.getIchijiHantei(param);
+        int 一値判定未完了 = service.getIchijiHanteiMikanryo(param);
+        if (!ResponseHolder.isReRequest()) {
+            if (!(一次判定データ == 該当データなし && 一値判定未完了 == 該当データなし)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 保存するボタンを押下の場合、主治医意見書入手へ遷移します。
      *
      * @param div 主治医意見書登録Div
@@ -347,23 +467,49 @@ public class ShujiiIkenshoTorokuTotal {
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         if (!ResponseHolder.isReRequest()) {
             RString beforeChange = getHandler(div).getDataRString();
-            if ((JYOTAI_CODE_ADD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))
-                    || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
+            if (beforeChange.equals(div.getHdnHasChanged())
+                    && div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+            }
+
+            if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正) && !beforeChange.equals(div.getHdnHasChanged())) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+            } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
             }
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
         }
+
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
             if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            } else if (!ResponseHolder.isReRequest() && isRequiredRejudgeOfIchiji(管理番号, 履歴番号)) {
+                getEndMessage(div);
+                return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
             } else {
-                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                        replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
+                getEndMessage(div);
                 return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
             }
         }
+
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
+            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.削除終了.getMessage().evaluate().toString()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
+        }
+
+        if (new RString(DbeInformationMessages.一次判定再処理.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            if (!(ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+                return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
+            } else {
+                return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
+            }
+        }
+
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
@@ -374,10 +520,6 @@ public class ShujiiIkenshoTorokuTotal {
             return ResponseData.of(div).forwardWithEventName(DBE2310001TransitionEventName.申請者検索結果一覧に戻る).respond();
         }
         return ResponseData.of(div).respond();
-    }
-
-    private ShujiiIkenshoTorokuHandler getHandler(ShujiiIkenshoTorokuTotalDiv div) {
-        return new ShujiiIkenshoTorokuHandler(div);
     }
 
     private void setShujiiIkenshoJoho(
@@ -415,7 +557,32 @@ public class ShujiiIkenshoTorokuTotal {
             shujiiIkenshoJoho = shujiiIkenshoJoho.modifiedModel();
         }
         shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build();
-        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho).build();
+
+        if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
+            ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho).build();
+        } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {
+            ImagekanriJoho イメージ管理情報 = YokaigoninteiimagekanriFinder.createInstance().getImageJoho(管理番号.value());
+            if (イメージ管理情報.get証記載保険者番号() == null
+                    || イメージ管理情報.get被保険者番号() == null
+                    || イメージ管理情報.getイメージ共有ファイルID() == null) {
+                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            }
+            ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(
+                    イメージ管理情報.get証記載保険者番号().concat(イメージ管理情報.get被保険者番号())),
+                    イメージ管理情報.getイメージ共有ファイルID());
+            List<RString> 存在したイメージファイル名 = YokaigoninteiimagesakujoManager.createInstance().get存在したイメージファイル名(descriptor);
+            ValidationMessageControlPairs イメージ削除チェック = イメージ削除チェック(div, 存在したイメージファイル名, イメージ管理情報);
+            if (イメージ削除チェック.iterator().hasNext()) {
+                getValidationMessages(div, イメージ削除チェック);
+            }
+            RString localCopyPath = DBEImageUtil.copySharedFiles(descriptor.getSharedFileId(), descriptor.getSharedFileName().toRString());
+            deleteImageFile(localCopyPath, 存在したイメージファイル名, div, descriptor);
+            service.updateOrDelete(イメージ管理情報);
+
+            ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho).build().deleted();
+            NinteiKanryoJoho ninteiKanryoJoho = NinteiKanryoJohoManager.createInstance().get要介護認定完了情報(管理番号);
+            getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
+        }
         ninteiManager.save(ninteiShinseiJoho);
     }
 
@@ -440,7 +607,56 @@ public class ShujiiIkenshoTorokuTotal {
         shujiiIkenshoBuilder.set歯科受診の有無(div.getChkTakaJushinSelect().getSelectedKeys().contains(SELECT_KEY11));
         shujiiIkenshoBuilder.setその他受診科の有無(div.getChkSonota().getSelectedKeys().contains(SELECT_KEY0));
         shujiiIkenshoBuilder.setその他受診科名(div.getTxtSonotaNyuryoku().getValue());
+        shujiiIkenshoBuilder.set認定審査会後の二次判定結果の連絡確認フラグ(div.getRadShujiiRenraku().getSelectedKey().equals(連絡必要));
         shujiiIkenshoBuilder.set意見書メモ(div.getTxtShujiiMemo().getValue());
+    }
+
+    private ValidationMessageControlPairs イメージ削除チェック(ShujiiIkenshoTorokuTotalDiv div, List<RString> 存在したイメージファイル名, ImagekanriJoho イメージ管理情報) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ValidationMessageControlPairs イメージファイル存在チェック = getValidationHandler(div).
+                イメージファイル存在チェック(存在したイメージファイル名);
+        if (イメージファイル存在チェック.iterator().hasNext()) {
+            return イメージファイル存在チェック;
+        }
+        ValidationMessageControlPairs controlPairs = 主治医意見書チェック(div, 存在したイメージファイル名,
+                イメージ管理情報.get主治医医療機関コード(), イメージ管理情報.get主治医コード(),
+                イメージ管理情報.get申請書管理番号().value(), イメージ管理情報.get主治医意見書作成依頼履歴番号());
+        if (controlPairs.iterator().hasNext()) {
+            return controlPairs;
+        }
+        return validationMessages;
+    }
+
+    private ValidationMessageControlPairs 主治医意見書チェック(ShujiiIkenshoTorokuTotalDiv div, List<RString> 存在したイメージファイル名,
+            RString 主治医医療機関コード, RString 主治医コード, RString 申請書管理番号, Integer 主治医意見書作成依頼履歴番号) {
+        RString イメージファイルが存在区分 = getHandler(div).get主治医意見書のイメージファイルが存在区分(存在したイメージファイル名, 確認メッセージ出力区分);
+        if (イメージファイルが存在区分_存在しない.equals(イメージファイルが存在区分)) {
+            確認メッセージ出力区分 = RString.EMPTY;
+            return getValidationHandler(div).主治医意見書イメージファイル存在チェック();
+        } else {
+            if (イメージファイルが存在区分_マスキング有.equals(イメージファイルが存在区分)) {
+                確認メッセージ出力区分 = 確認メッセージ出力要;
+            }
+            FlexibleDate 主治医意見書報酬支払年月日 = YokaigoninteiimagesakujoManager.createInstance().getHoshuShiharaiYMD(
+                    主治医医療機関コード, 主治医コード, new ShinseishoKanriNo(申請書管理番号), 主治医意見書作成依頼履歴番号);
+            if (主治医意見書報酬支払年月日 != null && !主治医意見書報酬支払年月日.isEmpty()) {
+                return getValidationHandler(div).主治医意見書報酬支払年月日チェック();
+            }
+        }
+        return new ValidationMessageControlPairs();
+    }
+
+    private void deleteImageFile(RString localCopyPath, List<RString> imageFileList, ShujiiIkenshoTorokuTotalDiv div, ReadOnlySharedFileEntryDescriptor descriptor) {
+        boolean isMaskOnly = false;
+        getHandler(div).deleteOpinionImageFile(descriptor, localCopyPath, imageFileList, isMaskOnly);
+    }
+
+    private ResponseData<ShujiiIkenshoTorokuTotalDiv> getValidationMessages(ShujiiIkenshoTorokuTotalDiv div, ValidationMessageControlPairs イメージ削除チェック) {
+        return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
+    }
+
+    private ShujiiIkenshoTorokuValidationHandler getValidationHandler(ShujiiIkenshoTorokuTotalDiv div) {
+        return new ShujiiIkenshoTorokuValidationHandler(div);
     }
 
     private FlexibleDate rdateToFlex(RDate fromDate) {
@@ -448,5 +664,14 @@ public class ShujiiIkenshoTorokuTotal {
             return FlexibleDate.EMPTY;
         }
         return new FlexibleDate(fromDate.getYearValue(), fromDate.getMonthValue(), fromDate.getDayValue());
+    }
+
+    private void getEndMessage(ShujiiIkenshoTorokuTotalDiv div) {
+        div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                replace("主治医意見書登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
+    }
+
+    private ShujiiIkenshoTorokuHandler getHandler(ShujiiIkenshoTorokuTotalDiv div) {
+        return new ShujiiIkenshoTorokuHandler(div);
     }
 }

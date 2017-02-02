@@ -102,7 +102,7 @@
               WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}
                 AND "iraiRirekiNo" = #{ikenshoIraiRirekiNo}
             <if test="hasMaskDataKubun">
-                AND "maskDataKubun" = #{maskDataKubun}
+                AND "genponMaskKubun" = #{maskDataKubun}
             </if>
     </delete>
     
