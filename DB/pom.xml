@@ -10,7 +10,7 @@
     <parent>
         <groupId>jp.co.ndensan.reams.commonpom</groupId>
         <artifactId>commonpom</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
