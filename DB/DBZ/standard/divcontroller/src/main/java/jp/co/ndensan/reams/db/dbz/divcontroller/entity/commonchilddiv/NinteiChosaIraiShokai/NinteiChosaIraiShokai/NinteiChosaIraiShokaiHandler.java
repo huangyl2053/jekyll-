@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -53,23 +52,29 @@ public class NinteiChosaIraiShokaiHandler {
             row.setShinseiKubun(get申請区分(entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
             row.getShinseiTorikeshiDate().setValue(entity.getTorisageYMD());
             row.getNinteiDate().setValue(entity.getNijiHanteiYMD());
-            if (entity.getNijiHanteiYokaigoJotaiKubunCode() != null && !Code.EMPTY.equals(entity.getNijiHanteiYokaigoJotaiKubunCode())) {
-                RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(), entity.getNijiHanteiYokaigoJotaiKubunCode().value());
+            if (entity.getNijiHanteiYokaigoJotaiKubunCode() != null && !entity.getNijiHanteiYokaigoJotaiKubunCode().isEmpty()) {
+                RString 要介護度 = get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
+                        entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue());
                 if (new RString("なし").equals(要介護度)) {
                     row.setYokaigodo(RString.EMPTY);
                 } else {
-                    row.setYokaigodo(要介護度);
+                    row.setYokaigodo(get要介護度(entity.getKoroshoIfShikibetsuCode().value(),
+                            entity.getNijiHanteiYokaigoJotaiKubunCode().getColumnValue()));
                 }
-            } else {
-                row.setYokaigodo(RString.EMPTY);
             }
             row.setYukoKikan(new RString(Integer.toString(entity.getNijiHanteiNinteiYukoKikan()) + "ヶ月"));
             row.getChosaIraiDate().setValue(entity.getNinteichosaIraiYMD());
-            row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
-            row.setNinteichosaItakusakiName(entity.getJigyoshaMeisho());
-            row.setNinteiChosainCode(entity.getNinteiChosainCode().getColumnValue());
-            row.setNinteiChosainName(entity.getChosainShimei());
-            row.setRirekiNo(get履歴区分(entity.getNinteichosaIraiKubunCode().getColumnValue()));
+            if (entity.getNinteiChosaItakusakiCode() != null) {
+                row.setNinteichosaItakusakiCode(entity.getNinteiChosaItakusakiCode().getColumnValue());
+                row.setNinteichosaItakusakiName(entity.getJigyoshaMeisho());
+            }
+            if (entity.getNinteiChosainCode() != null) {
+                row.setNinteiChosainCode(entity.getNinteiChosainCode().getColumnValue());
+                row.setNinteiChosainName(entity.getChosainShimei());
+            }
+            if (entity.getNinteichosaIraiKubunCode() != null) {
+                row.setRirekiNo(get履歴区分(entity.getNinteichosaIraiKubunCode().getColumnValue()));
+            }
             no = no + 1;
             rowList.add(row);
         }

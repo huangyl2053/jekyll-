@@ -9,6 +9,7 @@
     <resultMap id="resultMap_NinteiChosaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity" autoMapping="true">
         <result property="temp_厚労省IF識別コード" column="temp_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査依頼区分コード" column="temp_認定調査依頼区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_概況調査テキストイメージ区分" column="temp_概況調査テキストイメージ区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_現在の状況コード" column="temp_現在の状況コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_現在のサービス区分コード" column="temp_現在のサービス区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_利用施設名" column="temp_利用施設名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -57,6 +58,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter"
             fetchSize="500">
         SELECT
+        DbT5202NinteichosahyoGaikyoChosa."gaikyoChosaTextImageKubun" AS temp_概況調査テキストイメージ区分,
         CASE DbT5210NinteichosahyoShisetsuRiyo."shisetsuRiyoFlag"
         WHEN True THEN '在宅'
         ELSE '施設'  END AS temp_現在の状況コード,
@@ -80,7 +82,6 @@
         WHERE
         DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = #{temp_申請書管理番号}
         AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = #{temp_認定調査依頼履歴番号}
-        AND DbT5202NinteichosahyoGaikyoChosa."gaikyoChosaTextImageKubun" = #{概況調査テキストイメージ区分}
-        AND DbT5210NinteichosahyoShisetsuRiyo."remban" = '0001'
+        AND DbT5210NinteichosahyoShisetsuRiyo."remban" = 1
     </select>
 </mapper>

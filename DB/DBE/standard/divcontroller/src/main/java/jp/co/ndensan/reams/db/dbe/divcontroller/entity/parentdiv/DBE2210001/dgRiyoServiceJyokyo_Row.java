@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 16 13:21:01 JST 2017 
+ * Thu Feb 02 19:42:25 JST 2017 
  */
 
 
@@ -21,30 +21,35 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgRiyoServiceJyokyo_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     private TextBox serviceMeisho;
     private TextBoxNum serviceJokyo;
     private RString tani;
+    private TextBoxNum remban;
 
     public dgRiyoServiceJyokyo_Row() {
         super();
         this.serviceMeisho = new TextBox();
         this.serviceJokyo = new TextBoxNum();
         this.tani = RString.EMPTY;
+        this.remban = new TextBoxNum();
         this.setOriginalData("serviceMeisho", serviceMeisho);
         this.setOriginalData("serviceJokyo", serviceJokyo);
         this.setOriginalData("tani", tani);
+        this.setOriginalData("remban", remban);
     }
 
-    public dgRiyoServiceJyokyo_Row(TextBox serviceMeisho, TextBoxNum serviceJokyo, RString tani) {
+    public dgRiyoServiceJyokyo_Row(TextBox serviceMeisho, TextBoxNum serviceJokyo, RString tani, TextBoxNum remban) {
         super();
         this.setOriginalData("serviceMeisho", serviceMeisho);
         this.setOriginalData("serviceJokyo", serviceJokyo);
         this.setOriginalData("tani", tani);
+        this.setOriginalData("remban", remban);
         this.serviceMeisho = serviceMeisho;
         this.serviceJokyo = serviceJokyo;
         this.tani = tani;
+        this.remban = remban;
     }
 
     public TextBox getServiceMeisho() {
@@ -57,6 +62,10 @@ public class dgRiyoServiceJyokyo_Row extends DataRow {
 
     public RString getTani() {
         return tani;
+    }
+
+    public TextBoxNum getRemban() {
+        return remban;
     }
 
     public void setServiceMeisho(TextBox serviceMeisho) {
@@ -72,6 +81,11 @@ public class dgRiyoServiceJyokyo_Row extends DataRow {
     public void setTani(RString tani) {
         this.setOriginalData("tani", tani);
         this.tani = tani;
+    }
+
+    public void setRemban(TextBoxNum remban) {
+        this.setOriginalData("remban", remban);
+        this.remban = remban;
     }
 
     // </editor-fold>

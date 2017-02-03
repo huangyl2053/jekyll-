@@ -202,7 +202,7 @@ public class KihonChosaInputHandler7 {
         List<RString> 認知症高齢者の日常生活自立度Keys = new ArrayList<>();
         List<RString> 前回認知症高齢者の日常生活自立度Keys = new ArrayList<>();
         KihonChosaInput 障害高齢者認定調査基本情報 = 認定調査基本情報リスト.get(0);
-        KihonChosaInput 認知症高齢者認定調査基本情報 = 認定調査基本情報リスト.get(1);
+        KihonChosaInput 認知症高齢者認定調査基本情報 = 認定調査基本情報リスト.get(0);
         set障害高齢者の日常生活自立度_寝たきり度Keys(障害高齢者の日常生活自立度_寝たきり度Keys,
                 前回障害高齢者の日常生活自立度_寝たきり度Keys, 障害高齢者認定調査基本情報);
         set認知症高齢者の日常生活自立度Keys(認知症高齢者の日常生活自立度Keys,

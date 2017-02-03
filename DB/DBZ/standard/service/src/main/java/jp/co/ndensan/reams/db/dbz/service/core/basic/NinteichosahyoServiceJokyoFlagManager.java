@@ -68,6 +68,34 @@ public class NinteichosahyoServiceJokyoFlagManager {
     }
 
     /**
+     * 申請書管理番号および認定調査依頼履歴番号が合致する認定調査票_概況調査_サービスの状況フラグのリストを返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return NinteichosahyoServiceJokyoFlag
+     */
+    @Transaction
+    public List<NinteichosahyoServiceJokyoFlag> get認定調査票_概況調査_サービスの状況フラグList(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+
+        List<DbT5208NinteichosahyoServiceJokyoFlagEntity> entityList = dac.selectサービスの状況フラグ(
+                申請書管理番号,
+                認定調査依頼履歴番号);
+        
+        List<NinteichosahyoServiceJokyoFlag> businessList = new ArrayList<>();
+
+        for (DbT5208NinteichosahyoServiceJokyoFlagEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new NinteichosahyoServiceJokyoFlag(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * 認定調査票_概況調査_サービスの状況フラグを全件返します。
      *
      * @return NinteichosahyoServiceJokyoFlagの{@code list}

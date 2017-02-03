@@ -61,7 +61,7 @@ public class NinnteiChousaKekkaTouroku1Finder {
             ShinseishoKanriNo temp_申請書管理番号) {
         INinnteiChousaKekkaTouroku1RelateMapper mapper = mapperProvider.create(INinnteiChousaKekkaTouroku1RelateMapper.class);
         List<TempDataEntity> entityList = mapper.get認定調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, temp_認定調査委託先コード,
-                temp_申請書管理番号, RString.EMPTY));
+                temp_申請書管理番号));
 
         TempData data = new TempData();
         if (entityList != null && !entityList.isEmpty()) {
@@ -81,19 +81,17 @@ public class NinnteiChousaKekkaTouroku1Finder {
      * @param temp_申請書管理番号 申請書管理番号
      * @return TempData
      */
-    public TempData get既存概況調査情報(int temp_認定調査履歴番号,
-            ShinseishoKanriNo temp_申請書管理番号) {
-
+    public TempData get概況調査情報(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号) {
         INinnteiChousaKekkaTouroku1RelateMapper mapper = mapperProvider.create(INinnteiChousaKekkaTouroku1RelateMapper.class);
-        RString 概況調査テキストイメージ区分 = TokkijikoTextImageKubun.テキスト.getコード();
         TempDataEntity entity = mapper.get既存概況調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, RString.EMPTY,
-                temp_申請書管理番号, 概況調査テキストイメージ区分));
+                temp_申請書管理番号));
 
         if (entity == null) {
             return null;
         }
 
         TempData data = new TempData();
+        data.setTemp_概況調査テキストイメージ区分(entity.getTemp_概況調査テキストイメージ区分());
         data.setTemp_現在の状況コード(entity.getTemp_現在の状況コード());
         data.setTemp_現在のサービス区分コード(entity.getTemp_現在のサービス区分コード());
         data.setTemp_利用施設名(entity.getTemp_利用施設名());

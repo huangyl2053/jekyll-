@@ -73,4 +73,19 @@ public class IchijiHanteiKekkaJohoManager {
         }
         return 1 == dac.save(要介護認定一次判定結果情報.toEntity());
     }
+
+    /**
+     * 要介護認定一次判定結果情報{@link IchijiHanteiKekkaJoho}を保存します。
+     *
+     * @param 要介護認定一次判定結果情報 {@link IchijiHanteiKekkaJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDeletePhysical要介護認定一次判定結果情報(IchijiHanteiKekkaJoho 要介護認定一次判定結果情報) {
+        requireNonNull(要介護認定一次判定結果情報, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定結果情報"));
+        if (!要介護認定一次判定結果情報.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDeletePhysical(要介護認定一次判定結果情報.toEntity());
+    }
 }

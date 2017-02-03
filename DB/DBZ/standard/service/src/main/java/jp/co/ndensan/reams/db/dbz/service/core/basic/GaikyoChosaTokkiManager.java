@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.service.core.basic;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokki;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5213GaikyoChosaTokkiMaskEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5213GaikyoChosaTokkiMaskDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -46,6 +49,34 @@ public class GaikyoChosaTokkiManager {
         return InstanceProvider.create(GaikyoChosaTokkiManager.class);
     }
 
+    /**
+     * 主キーに合致する認定調査票_概況調査_子を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
+     * @return NinteichosahyoGaikyoChosa
+     */
+    @Transaction
+    public GaikyoChosaTokki get概況調査特記マスク(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            RString 概況調査テキストイメージ区分
+    ) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
+
+        DbT5213GaikyoChosaTokkiMaskEntity entity = dac.selectByKey(
+                申請書管理番号,
+                認定調査依頼履歴番号,
+                概況調査テキストイメージ区分);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new GaikyoChosaTokki(entity);
+    }
+    
     /**
      * 概況調査特記{@link GaikyoChosaTokki}を保存します。
      *
