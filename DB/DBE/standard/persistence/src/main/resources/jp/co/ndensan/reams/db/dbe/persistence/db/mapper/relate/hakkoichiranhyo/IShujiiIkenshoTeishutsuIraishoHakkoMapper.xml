@@ -36,7 +36,8 @@
         <result property="主治医意見書記入年月日" column="ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書読取年月日" column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医氏名" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書別途診療費" column="ikenshoBettoShinryohi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書報酬支払年月日" column="hoshuShiharaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="最大依頼履歴番号" column="ikenshoIraiRirekiNo"/> 
@@ -78,6 +79,7 @@
         , IkenshoJoho."ikenshoIraiKubun" AS "shinseishoKanriNo"
         , pickout."shujiiName" AS "shujiiName"
         , pickout."shichosonMeisho" AS "保険者名"
+        , pickout."shichosonCode" AS "市町村コード"
         , IkenshoJoho."ikenshoBettoShinryohi" AS "ikenshoBettoShinryohi"
         , IkenshoJoho."hoshuShiharaiYMD" AS "hoshuShiharaiYMD"
         , pickout."ikenshoIraiRirekiNo"  AS "ikenshoIraiRirekiNo"
@@ -148,6 +150,7 @@
         , DbT5101."ninteiShinseiShinseijiKubunCode"
         , DbT5912."shujiiName"
         , DbT7051."shichosonMeisho"
+        , DbT7051."shichosonCode"
         , DbT5301."ikenshoIraiRirekiNo"
         <!-- jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper.selectShuziiIkenshoIrai
         と同じ。//TODO 引数の関係でまとめていない。できたらまとめる START -->   
