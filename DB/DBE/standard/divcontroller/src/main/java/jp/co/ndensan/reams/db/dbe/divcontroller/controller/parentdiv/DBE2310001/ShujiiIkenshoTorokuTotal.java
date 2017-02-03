@@ -467,11 +467,6 @@ public class ShujiiIkenshoTorokuTotal {
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         if (!ResponseHolder.isReRequest()) {
             RString beforeChange = getHandler(div).getDataRString();
-            if (beforeChange.equals(div.getHdnHasChanged())
-                    && div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
-                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
-            }
-
             if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正) && !beforeChange.equals(div.getHdnHasChanged())) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {

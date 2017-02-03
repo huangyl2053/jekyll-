@@ -72,6 +72,26 @@ public class SeikatsuServiceIkenHandler {
     List<RString> chkSonotaIryoServicekeys = new ArrayList();
     List<RString> chkSonotaHitsuyoSeikeys = new ArrayList();
     private final SeikatsuServiceIkenDiv div;
+    private static final RString 訪問診療 = new RString("key0");
+    private static final RString 訪問診療_必要性 = new RString("key1");
+    private static final RString 訪問介護 = new RString("key2");
+    private static final RString 訪問介護_必要性 = new RString("key3");
+    private static final RString 介護職員_訪問 = new RString("key4");
+    private static final RString 介護職員_訪問_必要性 = new RString("key5");
+    private static final RString 訪問歯科 = new RString("key6");
+    private static final RString 訪問歯科_必要性 = new RString("key7");
+    private static final RString 訪問薬剤 = new RString("key8");
+    private static final RString 訪問薬剤_必要性 = new RString("key9");
+    private static final RString 訪問リハビリ = new RString("key10");
+    private static final RString 訪問リハビリ_必要性 = new RString("key11");
+    private static final RString 短期入所 = new RString("key12");
+    private static final RString 短期入所_必要性 = new RString("key13");
+    private static final RString 訪問歯科衛生 = new RString("key14");
+    private static final RString 訪問歯科衛生_必要性 = new RString("key15");
+    private static final RString 訪問栄養 = new RString("key16");
+    private static final RString 訪問栄養_必要性 = new RString("key17");
+    private static final RString 通所リハビリ = new RString("key18");
+    private static final RString 通所リハビリ_必要性 = new RString("key19");
 
     /**
      * コンストラクタです。
@@ -95,8 +115,8 @@ public class SeikatsuServiceIkenHandler {
 
         if (ninteiShinseiJohoBusiness != null) {
             ShujiiIkenshoIraiJohoIdentifier shujiiIkenshoIraiIdentifier = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
-            ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);  
-            ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);  
+            ShujiiIkenshoJohoIdentifier shujiiIkenshoJohoIdentifier = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
+            ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJohoBusiness.getShujiiIkenshoIraiJoho(shujiiIkenshoIraiIdentifier);
             if (shujiiIkenshoIraiJoho != null) {
                 if (shujiiIkenshoIraiJoho.getShujiiIkenshoJohoList().isEmpty()) {
                     shujiiIkenshoIraiJoho.createBuilderForEdit()
@@ -104,7 +124,7 @@ public class SeikatsuServiceIkenHandler {
                 }
             }
             ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(shujiiIkenshoJohoIdentifier);
-            
+
             if (shujiiIkenshoJoho != null) {
                 if (shujiiIkenshoJoho.getShujiiIkenshoIkenItemList().isEmpty()) {
                     shujiiIkenshoJoho = create意見項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
@@ -113,7 +133,7 @@ public class SeikatsuServiceIkenHandler {
                     shujiiIkenshoJoho = create記入項目(shujiiIkenshoJoho, 管理番号, 履歴番号);
                 }
             }
-            
+
             List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト = shujiiIkenshoJoho.getShujiiIkenshoIkenItemList();
             List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト = shujiiIkenshoJoho.getShujiiIkenshoKinyuItemList();
             要介護認定主治医意見書意見項目リスト = 意見項目初期化編集(要介護認定主治医意見書意見項目リスト, 管理番号, 履歴番号);
@@ -121,7 +141,7 @@ public class SeikatsuServiceIkenHandler {
             viewStateSave(ninteiShinseiJohoBusiness,
                     shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
                     要介護認定主治医意見書意見項目リスト, 要介護認定主治医意見書記入項目リスト);
-        }        
+        }
     }
 
     /**
@@ -166,6 +186,9 @@ public class SeikatsuServiceIkenHandler {
         if (KEY1.equals(div.getRadKansenshoUmu().getSelectedKey())) {
             div.getTxtKansenshoShosai().setReadOnly(false);
         }
+        if (div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
+            div.getChkSonotaIryoServiceHitsuyoSei().setReadOnly(true);
+        }
     }
 
     /**
@@ -200,6 +223,43 @@ public class SeikatsuServiceIkenHandler {
                     shujiiIkenshoIraiJoho, shujiiIkenshoJoho,
                     edit意見項目(要介護認定主治医意見書意見項目リスト), edit記入項目(要介護認定主治医意見書記入項目リスト));
         }
+    }
+
+    public void setChkeIgakutekiKanri() {
+        List<RString> items = div.getChkIgakutekiKanri().getSelectedKeys();
+        List<RString> disableItems = new ArrayList<>();
+        if (!items.contains(訪問診療)) {
+            disableItems.add(訪問診療_必要性);
+        }
+        if (!items.contains(訪問介護)) {
+            disableItems.add(訪問介護_必要性);
+        }
+        if (!items.contains(介護職員_訪問)) {
+            disableItems.add(介護職員_訪問_必要性);
+        }
+        if (!items.contains(訪問歯科)) {
+            disableItems.add(訪問歯科_必要性);
+        }
+        if (!items.contains(訪問薬剤)) {
+            disableItems.add(訪問薬剤_必要性);
+        }
+        if (!items.contains(訪問リハビリ)) {
+            disableItems.add(訪問リハビリ_必要性);
+        }
+        if (!items.contains(短期入所)) {
+            disableItems.add(短期入所_必要性);
+        }
+        if (!items.contains(訪問歯科衛生)) {
+            disableItems.add(訪問歯科衛生_必要性);
+        }
+        if (!items.contains(訪問栄養)) {
+            disableItems.add(訪問栄養_必要性);
+        }
+        if (!items.contains(通所リハビリ)) {
+            disableItems.add(通所リハビリ_必要性);
+        }
+        div.getChkIgakutekiKanri().setDisabledItemsByKey(disableItems);
+
     }
 
     private ShujiiIkenshoJoho create要介護認定主治医意見書情報(ShinseishoKanriNo 管理番号, int 履歴番号) {
@@ -802,68 +862,68 @@ public class SeikatsuServiceIkenHandler {
 
     private void 医学的管理の必要性エリアの意見項目初期化編集_1(ShujiiIkenshoIkenItem item) {
         if (86 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY0);
+            chkIgakutekiKanrikeys.add(訪問診療);
         }
         if (87 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY1);
+            chkIgakutekiKanrikeys.add(訪問診療_必要性);
         }
         if (88 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY2);
+            chkIgakutekiKanrikeys.add(訪問介護);
         }
         if (89 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY3);
+            chkIgakutekiKanrikeys.add(訪問介護_必要性);
         }
         if (90 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY4);
+            chkIgakutekiKanrikeys.add(介護職員_訪問);
         }
         if (91 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY5);
+            chkIgakutekiKanrikeys.add(介護職員_訪問_必要性);
         }
         if (92 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY6);
+            chkIgakutekiKanrikeys.add(訪問歯科);
         }
         if (93 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY7);
+            chkIgakutekiKanrikeys.add(訪問歯科_必要性);
         }
         if (94 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY8);
+            chkIgakutekiKanrikeys.add(訪問薬剤);
         }
         if (95 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY9);
+            chkIgakutekiKanrikeys.add(訪問薬剤_必要性);
         }
         if (96 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY10);
+            chkIgakutekiKanrikeys.add(訪問リハビリ);
         }
         if (97 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY11);
+            chkIgakutekiKanrikeys.add(訪問リハビリ_必要性);
         }
         if (98 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY12);
+            chkIgakutekiKanrikeys.add(短期入所);
         }
         医学的管理の必要性エリアの意見項目初期化編集_2(item);
     }
 
     private void 医学的管理の必要性エリアの意見項目初期化編集_2(ShujiiIkenshoIkenItem item) {
         if (99 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY13);
+            chkIgakutekiKanrikeys.add(短期入所_必要性);
         }
         if (100 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY14);
+            chkIgakutekiKanrikeys.add(訪問歯科衛生);
         }
         if (101 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY15);
+            chkIgakutekiKanrikeys.add(訪問歯科衛生_必要性);
         }
         if (102 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY16);
+            chkIgakutekiKanrikeys.add(訪問栄養);
         }
         if (103 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY17);
+            chkIgakutekiKanrikeys.add(訪問栄養_必要性);
         }
         if (104 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY18);
+            chkIgakutekiKanrikeys.add(通所リハビリ);
         }
         if (105 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkIgakutekiKanrikeys.add(KEY19);
+            chkIgakutekiKanrikeys.add(通所リハビリ_必要性);
         }
         div.getChkIgakutekiKanri().setSelectedItemsByKey(chkIgakutekiKanrikeys);
         if (106 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {

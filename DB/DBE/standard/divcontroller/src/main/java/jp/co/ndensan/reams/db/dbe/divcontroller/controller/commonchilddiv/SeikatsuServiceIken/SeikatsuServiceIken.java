@@ -56,6 +56,7 @@ public class SeikatsuServiceIken {
         getHandler(div).onLoad();
         getHandler(div).初期化状態定義();
         div.setHiddenData(getAllData(div));
+        getHandler(div).setChkeIgakutekiKanri();
         return ResponseData.of(div).respond();
     }
 
@@ -131,11 +132,15 @@ public class SeikatsuServiceIken {
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkSonotaIryoService(SeikatsuServiceIkenDiv div) {
         if (div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
+            List<RString> item = new ArrayList<>();
+            div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(item);
             div.getTxtShonotaIryoServiceShosai().setReadOnly(true);
+            div.getChkSonotaIryoServiceHitsuyoSei().setReadOnly(true);
             div.getTxtShonotaIryoServiceShosai().clearValue();
         } else {
             div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
             div.getTxtShonotaIryoServiceShosai().setValue(div.getHiddenTxtShonotaIryoServiceShosai());
+            div.getChkSonotaIryoServiceHitsuyoSei().setReadOnly(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -286,6 +291,17 @@ public class SeikatsuServiceIken {
         } else {
             return ResponseData.of(div).dialogOKClose();
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * チェック変更した際の選択項目により、項目のチェック可否を設定します。
+     *
+     * @param div SeikatsuServiceIkenDiv
+     * @return ResponseData<SeikatsuServiceIkenDiv>
+     */
+    public ResponseData<SeikatsuServiceIkenDiv> onChange_chkIgakutekiKanri(SeikatsuServiceIkenDiv div) {
+        getHandler(div).setChkeIgakutekiKanri();
         return ResponseData.of(div).respond();
     }
 
