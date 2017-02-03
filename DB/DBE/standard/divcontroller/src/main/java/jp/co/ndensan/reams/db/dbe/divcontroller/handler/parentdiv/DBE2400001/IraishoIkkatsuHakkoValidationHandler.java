@@ -154,9 +154,13 @@ public class IraishoIkkatsuHakkoValidationHandler {
                     ConfigNameDBE.主治医意見書作成請求書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
             if (CONFIGVALUE1.equals(請求書連動印刷)) {
                 List<RString> 意見書依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
-                if (意見書依頼書選択selectedKeys.isEmpty()) {
+                List<RString> 請求書選択selectedKeys = div.getChkIkenshoSeikyusho().getSelectedKeys();
+                if (意見書依頼書選択selectedKeys.isEmpty() && !請求書選択selectedKeys.isEmpty()) {
                     validPairs.add(new ValidationMessageControlPair(new IraishoIkkatsuHakkoMessages(UrErrorMessages.未指定, "主治医意見書作成依頼書を"),
                             div.getChkIkenshoIraisho()));
+                } else if (!意見書依頼書選択selectedKeys.isEmpty() && 請求書選択selectedKeys.isEmpty()) {
+                    validPairs.add(new ValidationMessageControlPair(new IraishoIkkatsuHakkoMessages(UrErrorMessages.未指定, "主治医意見書作成料請求書を"),
+                            div.getChkIkenshoSeikyusho()));
                 }
             }
         }

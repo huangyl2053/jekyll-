@@ -205,25 +205,6 @@ public class IraishoIkkatsuHakkoHandler {
         }
     }
 
-//    /**
-//     * 申請単位チェックボックス選択の場合、ある他のチェックボックスを設定します。
-//     */
-//    public void setChkShinseiTani() {
-//        if (STATE_NINTEI.equals(div.getState())) {
-//            if (!div.getChkNinteiChosaShinseiTani().getSelectedKeys().isEmpty()) {
-//                setNinteiChkShinseiTani(false);
-//            } else {
-//                setNinteiChkShinseiTani(true);
-//            }
-//        }
-//        if (STATE_SHUJII.equals(div.getState())) {
-//            if (!div.getChkShujiiIkenshoShinseiTani().getSelectedKeys().isEmpty()) {
-//                setShujiiChkShinseiTani(false);
-//            } else {
-//                setShujiiChkShinseiTani(true);
-//            }
-//        }
-//    }
     /**
      * 共通日付txtの使用可否などを設定します。
      */
@@ -286,6 +267,9 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkIkenshoSeikyusho().setDisplayNone(!is意見書依頼書出力);
         if (!is連動印刷) {
             div.getChkIkenshoSeikyusho().setDisplayNone(!is請求書出力);
+        }
+        if (div.getChkIkenshoSeikyusho().isDisplayNone()) {
+            div.getChkIkenshoSeikyuIchiran().setLabelLText(div.getChkIkenshoSeikyusho().getLabelLText());
         }
     }
 
@@ -361,29 +345,45 @@ public class IraishoIkkatsuHakkoHandler {
         boolean is概要特記出力 = is使用ByConfig(ConfigNameDBE.認定調査票_概況特記_出力有無);
         RString 保険者市町村コード = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value();
         RString 印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票_印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+
         div.getChkChosahyoIraisho().setDisplayNone(!is依頼書出力);
         List<RString> disableList = new ArrayList<>();
         if (片面印刷.equals(印刷タイプ)) {
             if (!is概況基本出力) {
                 disableList.add(調査票チェックボックス_概況調査);
                 disableList.add(調査票チェックボックス_基本調査);
-            } else if (!is特記事項出力) {
+            }
+            if (!is特記事項出力) {
                 disableList.add(調査票チェックボックス_特記事項);
             }
-            div.getChkChosahyoKatamen().setDisabledItemsByKey(disableList);
+            if (disableList.size() == 3) {
+                div.getChkChosahyoGaikyo().setLabelLText(div.getChkChosahyoKatamen().getLabelLText());
+                div.getChkChosahyoKatamen().setDisplayNone(true);
+            } else {
+                div.getChkChosahyoKatamen().setDisabledItemsByKey(disableList);
+            }
             div.getChkChosahyoRyomen().setDisplayNone(true);
         } else {
             if (!is概況基本出力) {
                 disableList.add(調査票チェックボックス_概況調査);
-            } else if (!is特記事項出力) {
+            }
+            if (!is特記事項出力) {
                 disableList.add(調査票チェックボックス_特記事項);
             }
             div.getChkChosahyoKatamen().setDisplayNone(true);
-            div.getChkChosahyoRyomen().setDisabledItemsByKey(disableList);
+            if (disableList.size() == 2) {
+                div.getChkChosahyoGaikyo().setLabelLText(div.getChkChosahyoRyomen().getLabelLText());
+                div.getChkChosahyoRyomen().setDisplayNone(true);
+            } else {
+                div.getChkChosahyoRyomen().setDisabledItemsByKey(disableList);
+            }
+        }
+        div.getChkChosahyoGaikyo().setDisplayNone(!is概要特記出力);
+        if (div.getChkChosahyoGaikyo().isDisplayNone()) {
+            div.getChkChosahyoSai().setLabelLText(div.getChkChosahyoGaikyo().getLabelLText());
         }
         div.getChkChosahyoSai().setDisplayNone(!is差異チェック票出力);
         div.getChkChosahyoTokki().setDisplayNone(!is委託等特記出力);
-        div.getChkChosahyoGaikyo().setDisplayNone(!is概要特記出力);
     }
 
     private void setNinteiChkShinseiTani() {
