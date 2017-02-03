@@ -47,7 +47,7 @@ module DBZ
                     this.controls.txtJisshiBashoMeisho().required = true;
                     this.controls.txtShozokuKikanCode().required = true;
                     this.controls.txtKinyushaCode().required = true;
-                    this.controls.btnChosaItakusakiGuide().disabled = false;
+                    this.controls.btnChosaItakusakiGuide().disabled = true;
                     this.controls.btnChosainGuide().disabled = false;
                 }
                 

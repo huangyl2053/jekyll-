@@ -232,7 +232,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         TempData 概況調査情報 = finder.get概況調査情報(申請書管理番号, 認定調査履歴番号);
         initialize概況基本調査情報(申請書管理番号, 認定調査履歴番号, 概況調査情報);
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
-        setChosaJisshishaJohoModel(model, 申請書管理番号, 概況調査情報);
+        setChosaJisshishaJohoModel(model, 申請書管理番号, 認定調査履歴番号, 概況調査情報);
         調査実施者情報子DIV初期化(model);
     }
 
@@ -298,8 +298,9 @@ public class NinnteiChousaKekkaTouroku1Handler {
                 .setDomain(new TelNo(概況調査情報.getTemp_利用施設電話番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設電話番号()));
     }
 
-    private void setChosaJisshishaJohoModel(ChosaJisshishaJohoModel model, ShinseishoKanriNo 申請書管理番号, TempData 概況調査情報) {
+    private void setChosaJisshishaJohoModel(ChosaJisshishaJohoModel model, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
         model.set申請書管理番号(申請書管理番号.getColumnValue());
+        model.set認定調査依頼履歴番号(認定調査履歴番号);
         if (概況調査情報 != null) {
             model.set調査実施日(概況調査情報.getTemp_調査実施年月日());
             model.set調査実施場所(ChosaJisshiBashoCode.toValue(概況調査情報.getTemp_調査実施場所コード()).get名称());
@@ -369,16 +370,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
     public void 調査実施者情報子DIV初期化(ChosaJisshishaJohoModel model) {
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Input);
         div.getCcdChosaJisshishaJoho().intialize(model);
-        div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setDisabled(false);
-        div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setReadOnly(false);
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey())) {
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setReadOnly(true);
-        } else {
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(false);
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setReadOnly(false);
-        }
-        div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setRequired(false);
     }
 
     private void 給付サービスの初期設定(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
