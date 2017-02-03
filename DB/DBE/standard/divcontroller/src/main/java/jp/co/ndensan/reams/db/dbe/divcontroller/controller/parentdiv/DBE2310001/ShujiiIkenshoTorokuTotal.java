@@ -94,6 +94,7 @@ public class ShujiiIkenshoTorokuTotal {
     private static final RString 確認メッセージ出力要 = new RString("1");
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
     private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
+    private static final RString 厚労省IF識別番号_09B = new RString("09B");
 
     /**
      * コンストラクタです。
@@ -128,6 +129,18 @@ public class ShujiiIkenshoTorokuTotal {
                 return ResponseData.of(div).respond();
             }
         }
+        if (!resultList.records().get(0).get厚労省IF識別コード().equals(厚労省IF識別番号_09B)
+                && !(new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.認定ソフトバージョンエラー.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            setReadOnly(div);
+            div.getRadJotaiKubun().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+            return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
+        }
+
         履歴番号 = resultList.records().get(0).get主治医意見書作成依頼履歴番号();
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, new RString(履歴番号));
         Image image = imageManager.getイメージ情報(管理番号);
