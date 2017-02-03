@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNe
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100203.SokyuuGaitouIchirannCsvEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -63,7 +62,6 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
     private List<PersonalData> personalDataList;
     private RString spoolWorkPath;
     private RString fileName;
-    private RString reamsLoginID;
     private boolean flag;
     private CsvWriter<SokyuuGaitouIchirannCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -87,7 +85,6 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
     @Override
     protected void initialize() {
         personalDataList = new ArrayList<>();
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         flag = true;
     }
 
@@ -108,7 +105,7 @@ public class SokyuuGaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenki
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900006, reamsLoginID, parameter.get出力順ID1());
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900006, parameter.get出力順ID1());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(SokyuuGaitouIchirannCsvProperty.DBD900006_ResultListEnum.class, order);

@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -58,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<ShakaiFukushiHoujinnKeigenNinnteiEntity> {
 
     private static final ReportIdDBD 帳票ID = ReportIdDBD.DBD100018;
-    private RString reamsLoginID;
     private boolean isInsert = false;
     private IOutputOrder outputOrder;
     private ShakaiFukushiHoujinnKeigenNinnteiProcessParameter processParamter;
@@ -82,8 +80,7 @@ public class ShakaiFukushiHoujinnKeigenNinnteiProcess extends BatchProcessBase<S
 
     @Override
     protected void beforeExecute() {
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(), reamsLoginID,
+        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, 帳票ID.getReportId(),
                 processParamter.get改頁出力順ID());
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(ShakfukusRiysFutKeigTaisKakuninshoOrderKey.class, outputOrder);

@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.authority.Authorit
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urc.service.core.noki.nokitsuki.NokitsukiManager;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.shunokamoku.ShunoKamokuManager;
+import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -87,7 +87,7 @@ public class NonyuTsuchiShoJohoFactory {
      * コンストラクタです。
      */
     public NonyuTsuchiShoJohoFactory() {
-        ShunoKamokuManager shunoKamokuManager = new ShunoKamokuManager(AuthorityKind.参照権限収納科目);
+        ShunoKamokuFinder shunoKamokuManager = ShunoKamokuFinder.createInstance(AuthorityKind.参照権限収納科目);
         this.収納科目 = shunoKamokuManager.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
         this.納期月コレクションマップ = new HashMap<>();
     }

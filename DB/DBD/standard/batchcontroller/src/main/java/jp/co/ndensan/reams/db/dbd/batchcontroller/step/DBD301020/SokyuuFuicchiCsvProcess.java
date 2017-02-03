@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNe
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100203.SokyuuFuicchiCsvEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -56,7 +55,6 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
     private FileSpoolManager manager;
     private RString spoolWorkPath;
     private RString fileName;
-    private RString reamsLoginID;
     private boolean flag;
     private CsvWriter<SokyuuFuicchiCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -85,7 +83,6 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
 
     @Override
     protected void initialize() {
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         flag = true;
     }
 
@@ -106,7 +103,7 @@ public class SokyuuFuicchiCsvProcess extends BatchProcessBase<HikazeNenkinTaisho
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900007, reamsLoginID, parameter.get出力順ID2());
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900007, parameter.get出力順ID2());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(SokyuuFuicchiCsvProperty.DBD900007_ResultListEnum.class, order);

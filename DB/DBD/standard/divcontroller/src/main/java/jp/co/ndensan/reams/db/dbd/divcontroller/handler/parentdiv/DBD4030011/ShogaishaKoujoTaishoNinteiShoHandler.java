@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.Shog
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
@@ -208,9 +207,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      * 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
     public RString get画面出力順() {
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-                ReportIdDBD.DBD100025.getReportId(), reamsLoginID,
+                ReportIdDBD.DBD100025.getReportId(),
                 div.getShogaishaKojoNinteishoOutput().getCcdChohyoShutsuryokujun().getSelected出力順().get出力順ID());
         return MyBatisOrderByClauseCreator.create(BreakerFieldsEnum.class, outputOrder);
 

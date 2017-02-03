@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -112,9 +111,8 @@ public class ShakaiFukushiHoujinnKeigenListProcess extends BatchProcessBase<Shak
     }
 
     private RString get出力順() {
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        order = finder.get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100018.getReportId(), reamsLoginID, parameter.get改頁出力順ID());
+        order = finder.get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100018.getReportId(), parameter.get改頁出力順ID());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(ShakfukusRiysFutKeigTaisKakuninshoOrderKey.class, order);
