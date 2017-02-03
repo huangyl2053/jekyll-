@@ -37,7 +37,7 @@
                 DbT5302ShujiiIkenshoJoho."existSonotaJushinkaFlag",
                 DbT5302ShujiiIkenshoJoho."sonotaJushinKaMei",
                 DbT5302ShujiiIkenshoJoho."ikenshoMemo",
-                DbT5302ShujiiIkenshoJoho."koroshoIfShikibetsuCode",
+                DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode",
                 DbT5302ShujiiIkenshoJoho."nijiHanteiKekkaRenrakuFlag"
           FROM
                 rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301ShujiiIkenshoIraiJoho
@@ -57,6 +57,10 @@
           ON 
                 DbT5301ShujiiIkenshoIraiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
                 AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
+         LEFT JOIN
+               rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+         ON
+                DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" =  DbT5101NinteiShinseiJoho."shinseishoKanriNo"
           <!--INNER JOIN
                 rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
           ON
