@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.Nin
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
@@ -33,10 +34,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -45,9 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
@@ -124,7 +122,7 @@ public class Ninteishinseibi {
         }
 
         List<dgNinteiChosaData_Row> rowList = div.getDgNinteiChosaData().getDataSource();
-        List<PersonalData> personalDataList = new ArrayList<>();
+        NinteiAccessLogger ninteiAccessLogger = null;
         Map<ShinseishoKanriNo, List<NinteichosahyoTokkijiko>> 特記事項Map = new HashMap<>();
         Map<ShinseishoKanriNo, GaikyoTokki> 概況特記事項Map = new HashMap<>();
         for (ChosaKekkaNyuryokuCsvEntity entity : csvEntityList_基本調査データ) {
@@ -137,11 +135,14 @@ public class Ninteishinseibi {
             dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
             getHandler(div).取込むの編集(row, entity, 特記事項List, 概況特記事項);
             rowList.add(row);
-            PersonalData personalData = PersonalData.of(
-                    ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
-            personalDataList.add(personalData);
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(entity.get証記載保険者番号());
+            ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, 
+                    shoKisaiHokenshaNo, entity.get被保険者番号());
         }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
+        if (null != ninteiAccessLogger) {
+            ninteiAccessLogger.log();
+        }
+
         div.getTxtNinzu().setValue(new RString(rowList.size()));
         div.getDgNinteiChosaData().setDataSource(rowList);
         div.set特記事項Map(DataPassingConverter.serialize((HashMap) 特記事項Map));

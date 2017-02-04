@@ -18,12 +18,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -312,7 +308,6 @@ public class MainPanelHandler {
      * @param models 認定調査スケジュール登録7_地区市町村情報
      */
     public void onClick_HozonnBtn(Models<ChikuShichosonIdentifier, ChikuShichoson> models) {
-        前排他制御処理();
         List<dgChosaChikuChichosonList_Row> rowList = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getDataSource();
         for (dgChosaChikuChichosonList_Row listRow : rowList) {
             if (状態_追加.equals(listRow.getJotai())) {
@@ -342,23 +337,9 @@ public class MainPanelHandler {
                         listRow.getCityCode()));
             }
         }
-        前排他解除処理();
         div.getChosaChikuPanel().setVisible(true);
         div.getChosaChikuShichosonPanel().setVisible(true);
         div.getChosaChikuShichosoInput().setVisible(true);
-    }
-
-    private void 前排他制御処理() {
-        LockingKey lockingKey = new LockingKey(new RString("ChikuShichosonCode"));
-        if (!RealInitialLocker.tryGetLock(lockingKey)) {
-            div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
-    }
-
-    private void 前排他解除処理() {
-        LockingKey lockingKey = new LockingKey(new RString("ChikuShichosonCode"));
-        RealInitialLocker.release(lockingKey);
     }
 
     /**

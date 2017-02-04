@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -30,16 +29,12 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -97,12 +92,6 @@ public class NinteiChosainJikanMaster {
     public ResponseData<NinteiChosainJikanMasterDiv> onLoad(NinteiChosainJikanMasterDiv div) {
 
         getHandler(div).onLoad(new FlexibleDate(RDate.getNowDate().toDateString()));
-        boolean gotLock = 前排他キーのセット();
-        if (!gotLock) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            throw new ApplicationException(message);
-        }
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -672,13 +661,6 @@ public class NinteiChosainJikanMaster {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            前排他キーの解除();
-            boolean gotLock = 前排他キーのセット();
-            if (!gotLock) {
-                ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                        UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-                throw new ApplicationException(message);
-            }
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                     = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール情報, Models.class);
             List<dgTimeScheduleList_Row> 画面データ = div.getDgTimeScheduleList().getDataSource();
@@ -695,7 +677,6 @@ public class NinteiChosainJikanMaster {
             }
             div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
-            前排他キーの解除();
             return ResponseData.of(div).setState(DBE2020006StateName.完了);
         }
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
@@ -1169,16 +1150,6 @@ public class NinteiChosainJikanMaster {
             default:
                 break;
         }
-    }
-
-    private boolean 前排他キーのセット() {
-        LockingKey 排他キー = new LockingKey(new RString("DBE2020006"));
-        return RealInitialLocker.tryGetLock(排他キー);
-    }
-
-    private void 前排他キーの解除() {
-        LockingKey 排他キー = new LockingKey(new RString("DBE2020006"));
-        RealInitialLocker.release(排他キー);
     }
 
     private List<KeyValueDataSource> get調査地区ドロップダウンリスト() {

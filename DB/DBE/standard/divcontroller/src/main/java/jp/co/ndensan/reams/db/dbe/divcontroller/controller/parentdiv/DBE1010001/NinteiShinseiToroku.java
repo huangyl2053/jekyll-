@@ -86,6 +86,9 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -157,6 +160,7 @@ public class NinteiShinseiToroku {
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
     public ResponseData<NinteiShinseiTorokuDiv> onLoad(NinteiShinseiTorokuDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString menuID = ResponseHolder.getMenuID();
         ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         RString 介護導入形態 = RString.EMPTY;
@@ -319,6 +323,10 @@ public class NinteiShinseiToroku {
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
         div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
+        RStringBuilder 前排他制御 = new RStringBuilder();
+        前排他制御.append("DBEShinseishoKanriNo");
+        前排他制御.append(申請書管理番号);
+        前排他ロックキー(前排他制御.toRString());
         return ResponseData.of(div).respond();
     }
 
@@ -329,7 +337,6 @@ public class NinteiShinseiToroku {
 //
 //        return ResponseData.of(div).respond();
 //    }
-
     private void setCcdShinseiTodokedesha(NinteiShinseiTorokuDiv div) {
         if (ninteiTandokuDounyuFlag) {
             ((NinteiShinseiTodokedeshaDiv) div.getCcdShinseiTodokedesha()).getBtnSetaiIchiran().setDisabled(ninteiTandokuDounyuFlag);
@@ -569,6 +576,10 @@ public class NinteiShinseiToroku {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
+        RStringBuilder 前排他制御 = new RStringBuilder();
+        前排他制御.append("DBEShinseishoKanriNo");
+        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        前排他キーの解除(前排他制御.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.一覧に戻る).respond();
     }
 
@@ -646,6 +657,11 @@ public class NinteiShinseiToroku {
                 add審査会委員除外情報(申請書管理番号, dataList);
                 manager.save認定結果情報(ninteiKekkaJoho);
                 manager.save申請計画情報(ninteiKeikakuJoho);
+
+                RStringBuilder 前排他制御 = new RStringBuilder();
+                前排他制御.append("DBEShinseishoKanriNo");
+                前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+                前排他キーの解除(前排他制御.toRString());
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("みなし２号審査受付")).respond();
             }
             return ResponseData.of(div).respond();
@@ -746,6 +762,11 @@ public class NinteiShinseiToroku {
             if (shinseitodokedeJoho != null) {
                 manager.save申請届出情報(shinseitodokedeJoho);
             }
+
+            RStringBuilder 前排他制御 = new RStringBuilder();
+            前排他制御.append("DBEShinseishoKanriNo");
+            前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+            前排他キーの解除(前排他制御.toRString());
             return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
         }
         return response.respond();
@@ -1207,4 +1228,17 @@ public class NinteiShinseiToroku {
         rsb.append(連番.padZeroToLeft(ZERO_5));
         return new ShinseishoKanriNo(rsb.toRString());
     }
+
+    private void 前排他ロックキー(RString 排他ロックキー) {
+        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            throw new PessimisticLockingException();
+        }
+    }
+
+    private void 前排他キーの解除(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        RealInitialLocker.release(排他キー);
+    }
+
 }

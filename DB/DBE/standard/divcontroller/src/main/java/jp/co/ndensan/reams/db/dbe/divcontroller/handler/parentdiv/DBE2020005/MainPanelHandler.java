@@ -23,8 +23,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -413,7 +411,6 @@ public class MainPanelHandler {
      * @param models models
      */
     public void btnUpdate(Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> models) {
-        前排他制御処理();
         List<dgNinteiChosainList_Row> rowList = div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource();
         for (dgNinteiChosainList_Row list : rowList) {
             if (追加.equals(list.getJotai())) {
@@ -444,20 +441,9 @@ public class MainPanelHandler {
                 ChosaChikuManager.createInstance().delete(models, key);
             }
         }
-        前排他解除処理();
         div.getChosaChikuPanel().setVisible(true);
         div.getNinteiChosainPanel().setVisible(true);
         div.getNinteiChosainInput().setVisible(true);
-    }
-
-    private void 前排他制御処理() {
-        LockingKey lockingKey = new LockingKey(new RString("ChikuNinteiChosainCode"));
-        RealInitialLocker.lock(lockingKey);
-    }
-
-    private void 前排他解除処理() {
-        LockingKey lockingKey = new LockingKey(new RString("ChikuNinteiChosainCode"));
-        RealInitialLocker.release(lockingKey);
     }
 
     private void 追加状態() {

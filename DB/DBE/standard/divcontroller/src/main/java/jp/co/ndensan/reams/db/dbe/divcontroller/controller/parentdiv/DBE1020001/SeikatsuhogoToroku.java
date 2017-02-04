@@ -35,10 +35,13 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -72,7 +75,7 @@ public class SeikatsuhogoToroku {
         ninteiTandokuDounyuFlag = Boolean.FALSE;
         if (security.get導入形態コード().equals(new Code("111"))) {
             ninteiTandokuDounyuFlag = Boolean.TRUE;
-            
+
         } else {
             security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
             if (security.get導入形態コード().equals(new Code("211"))) {
@@ -100,10 +103,14 @@ public class SeikatsuhogoToroku {
             div.getBtnSaiban().setDisabled(false);
         }
         getHandler(div).load(result, list, ninteiTandokuDounyuFlag);
+        RStringBuilder 前排他制御 = new RStringBuilder();
+        前排他制御.append("DBEShinseishoKanriNo");
+        前排他制御.append(申請書管理番号);
+        前排他ロックキー(前排他制御.toRString());
         return ResponseData.of(div).respond();
     }
-    
-        /**
+
+    /**
      * みなし2号登録onActive事件。
      *
      * @param div みなし2号登録Div
@@ -127,7 +134,7 @@ public class SeikatsuhogoToroku {
             if (ninteiShinseiJoho.get生年月日() != null && !ninteiShinseiJoho.get生年月日().isEmpty()) {
                 div.getTxtBirthYMD().setValue(ninteiShinseiJoho.get生年月日().toRDate());
             }
-            
+
             if (ninteiShinseiJoho.get性別() != null) {
                 div.getRadSeibetsu().setSelectedKey(ninteiShinseiJoho.get性別().getKey());
             }
@@ -139,9 +146,9 @@ public class SeikatsuhogoToroku {
             }
         }
         if (ninteiTandokuDounyuFlag) {
-          ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
-          ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
-          div.getBtnAtenaKensaku().setVisible(false);
+            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
+            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
+            div.getBtnAtenaKensaku().setVisible(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -162,7 +169,7 @@ public class SeikatsuhogoToroku {
         div.getDdlShisho().setDataSource(sourceList);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 選択されている住所に該当する郵便番号をセットします。
      *
@@ -175,7 +182,7 @@ public class SeikatsuhogoToroku {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * みなし２号被保険者番号を採番する　ボタン、自動採番を行う
      *
@@ -230,19 +237,23 @@ public class SeikatsuhogoToroku {
         }
         Minashi2shisaiJoho minashi2shisaiJoho = getHandler(div).setBusiness(前回申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.みなし2号登録情報, minashi2shisaiJoho);
-        
+
         if (is年齢範囲外(minashi2shisaiJoho.get年齢())) {
-           if (!ResponseHolder.isReRequest()) {
-               return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
-           }
-           if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                   && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-               return ResponseData.of(div).respond();
-           }
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
+            }
+            if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
+        RStringBuilder 前排他制御 = new RStringBuilder();
+        前排他制御.append("DBEShinseishoKanriNo");
+        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        前排他キーの解除(前排他制御.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE1020001TransitionEventName.申請情報入力へ).respond();
     }
-    
+
     private boolean is年齢範囲外(RString 年齢) {
         if (!RString.isNullOrEmpty(年齢)) {
             int age = Integer.parseInt(年齢.toString());
@@ -308,5 +319,17 @@ public class SeikatsuhogoToroku {
             }
         }
         return list;
+    }
+
+    private void 前排他ロックキー(RString 排他ロックキー) {
+        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            throw new PessimisticLockingException();
+        }
+    }
+
+    private void 前排他キーの解除(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        RealInitialLocker.release(排他キー);
     }
 }
