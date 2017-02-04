@@ -46,19 +46,23 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 
 /**
  * 主治医意見書登録のコントローラです。
@@ -191,6 +195,10 @@ public class ShujiiIkenshoTorokuTotal {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
             return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
         }
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(管理番号);
+        前排他ロックキー(前排他制御開催番号.toRString());
         div.getRadJotaiKubun().setSelectedKey(登録_修正);
         return ResponseData.of(div).respond();
     }
@@ -493,6 +501,10 @@ public class ShujiiIkenshoTorokuTotal {
 
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
             if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
+                RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+                前排他制御開催番号.append("DBEShinseishoKanriNo");
+                前排他制御開催番号.append(管理番号);
+                前排他キーの解除(前排他制御開催番号.toRString());
                 return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
             } else if (!ResponseHolder.isReRequest() && isRequiredRejudgeOfIchiji(管理番号, 履歴番号)) {
                 getEndMessage(div);
@@ -507,6 +519,10 @@ public class ShujiiIkenshoTorokuTotal {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
             div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.削除終了.getMessage().evaluate().toString()), RString.EMPTY, RString.EMPTY, true);
+            RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+            前排他制御開催番号.append("DBEShinseishoKanriNo");
+            前排他制御開催番号.append(管理番号);
+            前排他キーの解除(前排他制御開催番号.toRString());
             return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
         }
 
@@ -681,5 +697,17 @@ public class ShujiiIkenshoTorokuTotal {
 
     private ShujiiIkenshoTorokuHandler getHandler(ShujiiIkenshoTorokuTotalDiv div) {
         return new ShujiiIkenshoTorokuHandler(div);
+    }
+
+    private void 前排他ロックキー(RString 排他ロックキー) {
+        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            throw new PessimisticLockingException();
+        }
+    }
+
+    private void 前排他キーの解除(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        RealInitialLocker.release(排他キー);
     }
 }
