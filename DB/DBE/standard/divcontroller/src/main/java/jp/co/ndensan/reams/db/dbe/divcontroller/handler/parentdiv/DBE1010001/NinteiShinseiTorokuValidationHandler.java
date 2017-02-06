@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinse
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -30,6 +32,7 @@ public class NinteiShinseiTorokuValidationHandler {
     private final NinteiShinseiTorokuDiv div;
 
     private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
+    private static final RString 認定申請有効 = new RString("認定申請有効");
 
     /**
      * コンストラクタです。
@@ -99,13 +102,19 @@ public class NinteiShinseiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 区分変更申請時取下日理由入力チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可, 
-                div.getSinseiTorisage()));
+        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(
+                div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().getSelectedKey())
+                && (!TorisageKubunCode.認定申請有効.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())
+                || (div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || div.getTxtTorisageJiyu().getValue().isEmpty()))) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可,
+                    div.getSinseiTorisage()));
+        }
         return validationMessages;
     }
 
     /**
      * センタ送信データ出力完了チェック
+     *
      * @param センター送信年月日 FlexibleDate
      * @return ValidationMessageControlPairs
      */
@@ -119,6 +128,7 @@ public class NinteiShinseiTorokuValidationHandler {
 
     /**
      * 認定審査会割当完了チェック
+     *
      * @param 送付年月日 FlexibleDate
      * @return ValidationMessageControlPairs
      */
@@ -137,10 +147,14 @@ public class NinteiShinseiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 特定疾病入力必須チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.特定疾病入力必須, 
-                div.getSinseiTorisage()));
+        if (!div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().getValue().isEmpty()
+                && div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().getSelectedValue().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.特定疾病入力必須,
+                    div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei()));
+        }
         return validationMessages;
     }
+
     /**
      * 申請取下時は取下日理由必須チェック
      *
@@ -149,7 +163,10 @@ public class NinteiShinseiTorokuValidationHandler {
     public ValidationMessageControlPairs 取下日理由必須チェック() {
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須));
+        if (!div.getDdlTorisageJiyu().getSelectedValue().equals(認定申請有効) && !div.getDdlTorisageJiyu().getSelectedValue().isEmpty()
+                && (div.getTxtTorisageJiyu().getValue().isEmpty() || div.getTxtTorisageDate().getValue().toDateString().isEmpty())) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須));
+        }
         return validationMessages;
     }
 
@@ -160,10 +177,15 @@ public class NinteiShinseiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 申請サービス削除と取下理由存在チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請サービス削除と取下理由は同時存在));
+        if (!div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().getValue().isEmpty()
+                && (!div.getTxtTorisageJiyu().getValue().isNullOrEmpty()
+                || !div.getTxtTorisageDate().getValue().toDateString().isNullOrEmpty()
+                || !div.getDdlTorisageJiyu().getSelectedValue().isNullOrEmpty())) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請サービス削除と取下理由は同時存在));
+        }
         return validationMessages;
     }
- 
+
     /**
      * 審査会割付データ存在チェック
      *
@@ -172,13 +194,13 @@ public class NinteiShinseiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 審査会割付データ存在チェック(NinteiShinseiTorokuResult result) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if ((result.get判定結果コード() == null || result.get判定結果コード().isEmpty() || result.get認定審査会割当完了年月日() != null) 
+        if ((result.get判定結果コード() == null || result.get判定結果コード().isEmpty() || result.get認定審査会割当完了年月日() != null)
                 && result.get介護認定審査会割当年月日() != null) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.審査会割当済のため処理不可));
         }
         return validationMessages;
     }
- 
+
     /**
      * 依頼完了チェック
      *
@@ -200,8 +222,8 @@ public class NinteiShinseiTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.主治医意見書作成依頼済のため処理不可));
         }
         return validationMessages;
-    }    
-    
+    }
+
     private static enum NinteiShinseiTorokuMessages implements IValidationMessage {
 
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
@@ -214,9 +236,9 @@ public class NinteiShinseiTorokuValidationHandler {
         認定審査会割当完了更新不可(UrErrorMessages.更新不可, "認定審査会割当が完了している"),
         終了日が開始日以前(UrErrorMessages.終了日が開始日以前),
         審査会割当済のため処理不可(DbeErrorMessages.審査会割当済のため処理不可),
-        認定調査依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼"),     
-        主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "主治医意見書作成依頼"),     
-        認定調査と主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼・主治医意見書作成依頼");     
+        認定調査依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼"),
+        主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "主治医意見書作成依頼"),
+        認定調査と主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼・主治医意見書作成依頼");
 
         private final Message message;
 

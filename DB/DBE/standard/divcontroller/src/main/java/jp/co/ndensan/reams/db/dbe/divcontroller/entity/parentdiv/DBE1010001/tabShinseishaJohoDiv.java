@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinte
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.INinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.IShinseiSonotaJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
@@ -35,6 +34,8 @@ public class tabShinseishaJohoDiv extends TabContainer {
     private tplShinseijohoDiv tplShinseijoho;
     @JsonProperty("tplEnki")
     private tplEnkiDiv tplEnki;
+    @JsonProperty("tplShinseishaJoho")
+    private tplShinseishaJohoDiv tplShinseishaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +77,24 @@ public class tabShinseishaJohoDiv extends TabContainer {
     @JsonProperty("tplEnki")
     public void setTplEnki(tplEnkiDiv tplEnki) {
         this.tplEnki = tplEnki;
+    }
+
+    /*
+     * gettplShinseishaJoho
+     * @return tplShinseishaJoho
+     */
+    @JsonProperty("tplShinseishaJoho")
+    public tplShinseishaJohoDiv getTplShinseishaJoho() {
+        return tplShinseishaJoho;
+    }
+
+    /*
+     * settplShinseishaJoho
+     * @param tplShinseishaJoho tplShinseishaJoho
+     */
+    @JsonProperty("tplShinseishaJoho")
+    public void setTplShinseishaJoho(tplShinseishaJohoDiv tplShinseishaJoho) {
+        this.tplShinseishaJoho = tplShinseishaJoho;
     }
 
     /*
@@ -252,8 +271,13 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
-        return this.getTplShinseijoho().getShisetsuJoho().getCcdShisetsuJoho();
+    public TextBox getTxtNyushoShisetsu() {
+        return this.getTplShinseijoho().getShisetsuJoho().getTxtNyushoShisetsu();
+    }
+
+    @JsonIgnore
+    public void  setTxtNyushoShisetsu(TextBox txtNyushoShisetsu) {
+        this.getTplShinseijoho().getShisetsuJoho().setTxtNyushoShisetsu(txtNyushoShisetsu);
     }
 
     @JsonIgnore
@@ -307,8 +331,8 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore
@@ -317,8 +341,8 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getTplShinseijoho().getCcdNinteiInput();
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore
@@ -389,6 +413,86 @@ public class tabShinseishaJohoDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtEnkiTsuchishoHakkoCount(TextBoxNum txtEnkiTsuchishoHakkoCount) {
         this.getTplEnki().setTxtEnkiTsuchishoHakkoCount(txtEnkiTsuchishoHakkoCount);
+    }
+
+    @JsonIgnore
+    public TextBoxAtenaMeisho getTxtJohoAtenaMeisho() {
+        return this.getTplShinseishaJoho().getTxtJohoAtenaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoAtenaMeisho(TextBoxAtenaMeisho txtJohoAtenaMeisho) {
+        this.getTplShinseishaJoho().setTxtJohoAtenaMeisho(txtJohoAtenaMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxAtenaKanaMeisho getTxtJohoAtenaKanaMeisho() {
+        return this.getTplShinseishaJoho().getTxtJohoAtenaKanaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoAtenaKanaMeisho(TextBoxAtenaKanaMeisho txtJohoAtenaKanaMeisho) {
+        this.getTplShinseishaJoho().setTxtJohoAtenaKanaMeisho(txtJohoAtenaKanaMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtJohoBirthday() {
+        return this.getTplShinseishaJoho().getTxtJohoBirthday();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoBirthday(TextBoxDate txtJohoBirthday) {
+        this.getTplShinseishaJoho().setTxtJohoBirthday(txtJohoBirthday);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadJohoSeibetsu() {
+        return this.getTplShinseishaJoho().getRadJohoSeibetsu();
+    }
+
+    @JsonIgnore
+    public void  setRadJohoSeibetsu(RadioButton radJohoSeibetsu) {
+        this.getTplShinseishaJoho().setRadJohoSeibetsu(radJohoSeibetsu);
+    }
+
+    @JsonIgnore
+    public TextBoxYubinNo getTxtJohoYubinNo() {
+        return this.getTplShinseishaJoho().getTxtJohoYubinNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoYubinNo(TextBoxYubinNo txtJohoYubinNo) {
+        this.getTplShinseishaJoho().setTxtJohoYubinNo(txtJohoYubinNo);
+    }
+
+    @JsonIgnore
+    public TextBoxJusho getTxtJohoJusho() {
+        return this.getTplShinseishaJoho().getTxtJohoJusho();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoJusho(TextBoxJusho txtJohoJusho) {
+        this.getTplShinseishaJoho().setTxtJohoJusho(txtJohoJusho);
+    }
+
+    @JsonIgnore
+    public TextBoxTelNo getTxtJohoTelNo() {
+        return this.getTplShinseishaJoho().getTxtJohoTelNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoTelNo(TextBoxTelNo txtJohoTelNo) {
+        this.getTplShinseishaJoho().setTxtJohoTelNo(txtJohoTelNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJohoNenrei() {
+        return this.getTplShinseishaJoho().getTxtJohoNenrei();
+    }
+
+    @JsonIgnore
+    public void  setTxtJohoNenrei(TextBox txtJohoNenrei) {
+        this.getTplShinseishaJoho().setTxtJohoNenrei(txtJohoNenrei);
     }
 
     // </editor-fold>
