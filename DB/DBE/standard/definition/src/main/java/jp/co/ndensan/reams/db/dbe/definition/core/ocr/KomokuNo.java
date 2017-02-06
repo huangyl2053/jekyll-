@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbe.definition.core.ocr;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * OCRで認識した認定調査票 特記事項の項目番号を扱います。
  */
-public final class KomokuNo {
+public final class KomokuNo implements Comparable<KomokuNo> {
+
+    private static final RString HYPHEN = new RString("-");
 
     /**
      * 空を表す値です。
@@ -22,15 +25,30 @@ public final class KomokuNo {
         EMPTY = new KomokuNo();
     }
     private static final int REMBAN_INDEX = 3;
+    private static final int REMBAN_MIN = 1;
+    private static final int REMBAN_MAX = 9;
 
     private final RString chosaKomokuNo;
     private final RString imageRemban;
     private final int remban;
+    private final int beforeRemban;
 
     private KomokuNo() {
         this.chosaKomokuNo = RString.EMPTY;
         this.imageRemban = RString.EMPTY;
         this.remban = 0;
+        this.beforeRemban = 0;
+    }
+
+    /**
+     * @param chosaKomokuNo 特記事項と対応する調査項目の番号
+     * @param remban 連番
+     */
+    public KomokuNo(RString chosaKomokuNo, int remban) {
+        this.chosaKomokuNo = chosaKomokuNo;
+        this.remban = remban;
+        this.beforeRemban = remban;
+        this.imageRemban = toImageRemban(this.remban);
     }
 
     /**
@@ -42,10 +60,12 @@ public final class KomokuNo {
             this.chosaKomokuNo = RString.EMPTY;
             this.imageRemban = RString.EMPTY;
             this.remban = 0;
+            this.beforeRemban = 0;
             return;
         }
         this.chosaKomokuNo = trimed.substringEmptyOnError(0, REMBAN_INDEX);
         this.remban = findRemban(value);
+        this.beforeRemban = this.remban;
         this.imageRemban = toImageRemban(this.remban);
     }
 
@@ -62,9 +82,10 @@ public final class KomokuNo {
         return new RString(String.format("%02d", remban - 1));
     }
 
-    private KomokuNo(RString chosaKomokuNo, int remban) {
-        this.chosaKomokuNo = chosaKomokuNo;
-        this.remban = remban;
+    private KomokuNo(KomokuNo old, int newRemban) {
+        this.chosaKomokuNo = old.chosaKomokuNo;
+        this.remban = newRemban;
+        this.beforeRemban = old.remban;
         this.imageRemban = toImageRemban(this.remban);
     }
 
@@ -75,7 +96,7 @@ public final class KomokuNo {
      * @return 指定の値で連番を置き換えた新しいインスタンス
      */
     public KomokuNo renumbered(int remban) {
-        return new KomokuNo(this.chosaKomokuNo, remban);
+        return new KomokuNo(this, remban);
     }
 
     /**
@@ -103,6 +124,27 @@ public final class KomokuNo {
      */
     public int getRemban() {
         return this.remban;
+    }
+
+    /**
+     * @return 当初の連番
+     */
+    public int getBeforeRemban() {
+        return this.beforeRemban;
+    }
+
+    /**
+     * @return 連番変更前の文字列表現.
+     */
+    public RString beforeToRString() {
+        return new RStringBuilder().append(chosaKomokuNo).append(HYPHEN).append(beforeRemban).toRString();
+    }
+
+    /**
+     * @return 連番の再付番が行われている場合、{@code true}
+     */
+    public boolean hasRenumberd() {
+        return this.remban != this.beforeRemban;
     }
 
     /**
@@ -137,6 +179,22 @@ public final class KomokuNo {
 
     @Override
     public String toString() {
-        return "KomokuNo{" + "chosaKomokuNo=" + chosaKomokuNo + ", remban=" + remban + '}';
+        return new RStringBuilder().append(chosaKomokuNo).append(HYPHEN).append(remban).toString();
+    }
+
+    @Override
+    public int compareTo(KomokuNo o) {
+        int a = this.chosaKomokuNo.compareTo(o.chosaKomokuNo);
+        if (a != 0) {
+            return a;
+        }
+        return Integer.compare(this.remban, o.remban);
+    }
+
+    /**
+     * @return 有効な連番を持つ場合、{@code true}
+     */
+    public boolean hasValidRemban() {
+        return REMBAN_MIN <= this.remban && this.remban <= REMBAN_MAX;
     }
 }

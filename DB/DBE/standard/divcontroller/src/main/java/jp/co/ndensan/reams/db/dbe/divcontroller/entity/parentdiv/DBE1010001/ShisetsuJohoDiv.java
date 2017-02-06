@@ -5,9 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * ShisetsuJoho のクラスファイル 
@@ -22,8 +21,8 @@ public class ShisetsuJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdShisetsuJoho")
-    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJoho;
+    @JsonProperty("txtNyushoShisetsu")
+    private TextBox txtNyushoShisetsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +31,21 @@ public class ShisetsuJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdShisetsuJoho
-     * @return ccdShisetsuJoho
+     * gettxtNyushoShisetsu
+     * @return txtNyushoShisetsu
      */
-    @JsonProperty("ccdShisetsuJoho")
-    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
-        return ccdShisetsuJoho;
+    @JsonProperty("txtNyushoShisetsu")
+    public TextBox getTxtNyushoShisetsu() {
+        return txtNyushoShisetsu;
+    }
+
+    /*
+     * settxtNyushoShisetsu
+     * @param txtNyushoShisetsu txtNyushoShisetsu
+     */
+    @JsonProperty("txtNyushoShisetsu")
+    public void setTxtNyushoShisetsu(TextBox txtNyushoShisetsu) {
+        this.txtNyushoShisetsu = txtNyushoShisetsu;
     }
 
     // </editor-fold>

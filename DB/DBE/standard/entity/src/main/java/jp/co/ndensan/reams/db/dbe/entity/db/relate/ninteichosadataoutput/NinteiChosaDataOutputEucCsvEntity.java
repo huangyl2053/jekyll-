@@ -1297,5 +1297,6 @@ public class NinteiChosaDataOutputEucCsvEntity {
     private RString ステータス;
     @CsvField(order = 639, name = "被保険者区分")
     private RString 被保険者区分;
-
+    @CsvField(order = 640, name = "認定調査委託先市町村コード")
+    private RString 認定調査委託先市町村コード;
 }

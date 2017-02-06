@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tabHoshuMasutaKoshinDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -302,6 +302,16 @@ public class tabHoshuMasutaKoshinDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtShinsaIinKodo(TextBoxCode txtShinsaIinKodo) {
         this.getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setTxtShinsaIinKodo(txtShinsaIinKodo);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShinsakaiIinGuide() {
+        return this.getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+        this.getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setBtnShinsakaiIinGuide(btnShinsakaiIinGuide);
     }
 
     @JsonIgnore

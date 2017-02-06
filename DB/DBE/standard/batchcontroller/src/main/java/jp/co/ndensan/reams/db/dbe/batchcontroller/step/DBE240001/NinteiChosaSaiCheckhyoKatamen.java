@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiCh
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
+import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoReport;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -68,8 +69,11 @@ public class NinteiChosaSaiCheckhyoKatamen extends BatchProcessBase<HomonChosaIr
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
                 .get認定調査票差異チェック票(parameter).records();
         ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity, businessList);
-        SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(business.setDBE292001Item(checkEntity, entity.get厚労省IF識別コード()));
-        report.writeBy(reportSourceWriter);
+        SaiChekkuhyoItem item = business.setDBE292001Item(checkEntity, entity.get厚労省IF識別コード());
+        if (item != null) {
+            SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(item);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     @Override

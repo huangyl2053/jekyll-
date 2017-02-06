@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiChosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiChosainCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiShinseiHoreiKubunCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiShinseiShinseijiKubunCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.ninteiShinseiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.nyushoShisetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shienShinseiKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shoKisaiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJoho.shujiiCode;
@@ -127,6 +129,32 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(ninteiShinseiYMD, 認定申請年月日),
                                 eq(ninteiShinseiShinseijiKubunCode, 認定申請区分_申請時_コード))).
+                toList(DbT5101NinteiShinseiJohoEntity.class);
+    }
+
+    /**
+     * 「被保険者番号、認定申請年月日、申請書区分、認定申請区分_申請時_コード、認定申請区分_法令_コード」を指定し、要介護認定申請情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 認定申請年月日 認定申請年月日
+     * @param 申請書区分 申請書区分
+     * @param 認定申請区分_申請時_コード 認定申請区分_申請時_コード
+     * @param 認定申請区分_法令_コード 認定申請区分_法令_コード
+     * @return DbT5101NinteiShinseiJohoEntity
+     */
+    @Transaction
+    public List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報ForCheck(RString 被保険者番号,
+            FlexibleDate 認定申請年月日, Code 申請書区分, Code 認定申請区分_申請時_コード, Code 認定申請区分_法令_コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5101NinteiShinseiJoho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(ninteiShinseiYMD, 認定申請年月日),
+                                eq(shienShinseiKubun, 申請書区分),
+                                eq(ninteiShinseiShinseijiKubunCode, 認定申請区分_申請時_コード),
+                                eq(ninteiShinseiHoreiKubunCode, 認定申請区分_法令_コード))).
                 toList(DbT5101NinteiShinseiJohoEntity.class);
     }
     

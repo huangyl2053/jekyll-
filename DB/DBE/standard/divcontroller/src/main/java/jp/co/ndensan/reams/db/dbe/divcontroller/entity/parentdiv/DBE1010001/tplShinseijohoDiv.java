@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.IShinseiSonotaJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
@@ -70,12 +69,12 @@ public class tplShinseijohoDiv extends TabPanel {
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
-    @JsonProperty("ccdShinseiTodokedesha")
-    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
-    @JsonProperty("ccdShinseiSonotaJohoInput")
-    private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
     @JsonProperty("ccdNinteiInput")
     private NinteiInputDiv ccdNinteiInput;
+    @JsonProperty("ccdShinseiSonotaJohoInput")
+    private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -300,12 +299,12 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdShinseiTodokedesha
-     * @return ccdShinseiTodokedesha
+     * getccdNinteiInput
+     * @return ccdNinteiInput
      */
-    @JsonProperty("ccdShinseiTodokedesha")
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return ccdShinseiTodokedesha;
+    @JsonProperty("ccdNinteiInput")
+    public INinteiInputDiv getCcdNinteiInput() {
+        return ccdNinteiInput;
     }
 
     /*
@@ -318,12 +317,12 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdNinteiInput
-     * @return ccdNinteiInput
+     * getccdShinseiTodokedesha
+     * @return ccdShinseiTodokedesha
      */
-    @JsonProperty("ccdNinteiInput")
-    public INinteiInputDiv getCcdNinteiInput() {
-        return ccdNinteiInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return ccdShinseiTodokedesha;
     }
 
     /*
@@ -430,8 +429,13 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
-        return this.getShisetsuJoho().getCcdShisetsuJoho();
+    public TextBox getTxtNyushoShisetsu() {
+        return this.getShisetsuJoho().getTxtNyushoShisetsu();
+    }
+
+    @JsonIgnore
+    public void  setTxtNyushoShisetsu(TextBox txtNyushoShisetsu) {
+        this.getShisetsuJoho().setTxtNyushoShisetsu(txtNyushoShisetsu);
     }
 
     // </editor-fold>

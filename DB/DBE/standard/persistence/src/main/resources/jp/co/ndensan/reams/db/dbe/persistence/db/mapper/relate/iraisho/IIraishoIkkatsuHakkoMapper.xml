@@ -121,13 +121,14 @@
             AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode"							
             AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiCode"						
             AND "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"										
-            AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = 
-            (SELECT 
-            MAX("ikenshoIraiRirekiNo") 
-            FROM 
-            rgdb."DbT5301ShujiiIkenshoIraiJoho" 
-            WHERE 
-            "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" 
+            AND NOT EXISTS	(
+            SELECT
+            *
+            FROM
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
+            WHERE
+            "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+            AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" > "slv"."ikenshoIraiRirekiNo"
             )
             AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag"= false 
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" 

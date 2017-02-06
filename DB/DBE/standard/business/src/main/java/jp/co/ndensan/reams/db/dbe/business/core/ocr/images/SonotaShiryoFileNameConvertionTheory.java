@@ -13,9 +13,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.IFileNameConvertionTheory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * その他資料のイメージファイル名をReamsで管理するファイル名へ変換する方法の定義です。
@@ -33,31 +37,32 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
     }
 
     private final Map<RString, RString> table;
-    private final boolean exceedsLimitFlag;
+    private final IProcessingResults results;
 
     /**
      * @param ocrSonotas 関連する{@link OcrSonota}すべて
      */
     public SonotaShiryoFileNameConvertionTheory(Collection<? extends OcrSonota> ocrSonotas) {
+        results = new ProcessingResults();
+
         Map<RString, RString> map = new HashMap<>();
         Iterator<RString> reamsFileNames = REAMS_FILE_NAME.iterator();
-        boolean exceedsLimit = false;
         for (OcrSonota ocrSonota : new ArrayList<>(ocrSonotas)) {
             if (!reamsFileNames.hasNext()) {
-                exceedsLimit = true;
-                break;
+                results.add(ProcessingResultFactory.error(ocrSonota, OcrTorikomiMessages.その他資料_最大数超過));
+                continue;
             }
-            map.put(ocrSonota.getImageFileName(), reamsFileNames.next());
+            map.put(composeFileName(ocrSonota), reamsFileNames.next());
         }
         this.table = Collections.unmodifiableMap(map);
-        this.exceedsLimitFlag = exceedsLimit;
     }
 
-    /**
-     * @return 取り込むイメージ数が管理可能な最大数を超える場合、{@code true}.
-     */
-    public boolean exceedsLimit() {
-        return exceedsLimitFlag;
+    private static RString composeFileName(OcrSonota ocrSonota) {
+        return new RStringBuilder().append(ocrSonota.getSheetID().value()).append("w01i000.png").toRString();
+    }
+
+    public IProcessingResults getResults() {
+        return this.results;
     }
 
     @Override

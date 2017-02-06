@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResultSeed;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -47,6 +49,34 @@ public class NinteiOcrRelate {
      */
     public RString get被保険者番号() {
         return entity.get被保険者番号();
+    }
+
+    /**
+     * @return 被保険者氏名
+     */
+    public RString get被保険者氏名() {
+        return entity.get被保険者氏名();
+    }
+
+    /**
+     * @return 被保険者カナ
+     */
+    public RString get被保険者カナ() {
+        return entity.get被保険者カナ();
+    }
+
+    /**
+     * @return 論理削除済みの場合、{@code true}.
+     */
+    public boolean has論理削除() {
+        return entity.is論理削除フラグ();
+    }
+
+    /**
+     * @return 検索時に指定した申請日と合致する場合、{@code true}.それ以外の場合、{@code false}.
+     */
+    public boolean matches指定申請日() {
+        return entity.isMatches指定申請日();
     }
 
     /**
@@ -117,6 +147,13 @@ public class NinteiOcrRelate {
     }
 
     /**
+     * @return イメージ共有ファイルID.もしくは{@code null}.
+     */
+    public RDateTime getImageSharedFileIDOrNull() {
+        return entity.getイメージ共有ファイルID();
+    }
+
+    /**
      * イメージ情報が存在する場合{@code true}、しない場合{@code false}を返します。
      *
      * @return イメージ情報が存在する場合{@code true}、しない場合{@code false}.
@@ -159,5 +196,29 @@ public class NinteiOcrRelate {
      */
     public int get認定調査回数() {
         return entity.get認定調査回数();
+    }
+
+    /**
+     * @return {@link IProcessingResult}
+     */
+    public IProcessingResultSeed validate() {
+//        if (get厚労省IF識別コード() == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3) {
+//            return ProcessingResultFactory.error(OcrTorikomiMessages.過去制度での申請);
+//        }
+//        if (!matches指定申請日()) {
+//            if (has論理削除()) {
+//                return ProcessingResultFactory.error(OcrTorikomiMessages.有効な要介護認定申請なし);
+//            }
+//            return ProcessingResultFactory.error(
+//                    OcrTorikomiMessages.申請日一致なし_直近申請日提示.replaced(
+//                            entity.get認定申請日().seireki().toDateString().toString()
+//                    )
+//            );
+//        }
+//        if (has論理削除()) {
+//            return ProcessingResultFactory.error(OcrTorikomiMessages.削除された申請);
+//        }
+//        return ProcessingResultFactory.success();
+        return null;
     }
 }

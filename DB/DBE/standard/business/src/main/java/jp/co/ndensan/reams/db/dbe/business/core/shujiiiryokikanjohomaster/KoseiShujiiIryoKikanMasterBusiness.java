@@ -155,6 +155,15 @@ public class KoseiShujiiIryoKikanMasterBusiness {
     }
 
     /**
+     * 金融機関名称を返します。
+     *
+     * @return 金融機関名称
+     */
+    public RString get金融機関名称() {
+        return entity.getKinyuKikan();
+    }
+
+    /**
      * 金融機関支店コードを返します。
      *
      * @return 金融機関支店コード

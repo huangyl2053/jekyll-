@@ -17,7 +17,8 @@ public enum DBE2210001StateName implements IStateEnumerations {
     NoChange(""),
     調査結果登録("調査結果登録"),
     完了("完了"),
-    調査結果登録_概況特記非表示("調査結果登録_概況特記非表示");
+    調査結果登録_基本運用("調査結果登録_基本運用"),
+    完了_削除("完了_削除");
 
     private final RString name;
 

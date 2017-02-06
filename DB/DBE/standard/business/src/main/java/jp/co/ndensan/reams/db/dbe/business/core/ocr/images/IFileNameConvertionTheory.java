@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.ocr;
+package jp.co.ndensan.reams.db.dbe.business.core.ocr.images;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,4 +17,5 @@ public interface IFileNameConvertionTheory {
      * @return Reamsで管理するファイル名
      */
     RString convert(RString fileName);
+
 }

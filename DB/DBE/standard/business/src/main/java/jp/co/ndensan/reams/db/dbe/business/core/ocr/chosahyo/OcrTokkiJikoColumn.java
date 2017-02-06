@@ -7,26 +7,39 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 
 /**
  * 特記事項のイメージファイル名と対応する項目の番号のペアを持ちます。
  */
-public final class TokkiImageFileName {
+public final class OcrTokkiJikoColumn {
 
-    private final RString theValue;
+    private final SheetID sheetID;
+    private final int theColumnNo;
     private final KomokuNo theKomokuNo;
 
-    TokkiImageFileName(RString theValue, KomokuNo komokuNo) {
-        this.theValue = theValue;
+    OcrTokkiJikoColumn(SheetID sheetID, int theColumnNo, KomokuNo komokuNo) {
+        this.sheetID = sheetID;
+        this.theColumnNo = theColumnNo;
         this.theKomokuNo = komokuNo;
     }
 
+    OcrTokkiJikoColumn(OcrTokkiJikoColumn old, KomokuNo komokuNo) {
+        this(old.sheetID, old.theColumnNo, old.theKomokuNo);
+    }
+
     /**
-     * @return ファイル名の値
+     * @return シートID（帳票連番）
      */
-    public RString value() {
-        return this.theValue;
+    public SheetID sheetID() {
+        return this.sheetID;
+    }
+
+    /**
+     * @return カラム番号
+     */
+    public int colmunNo() {
+        return this.theColumnNo;
     }
 
     /**
@@ -39,7 +52,7 @@ public final class TokkiImageFileName {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.theValue);
+        hash = 79 * hash + Objects.hashCode(this.theColumnNo);
         hash = 79 * hash + Objects.hashCode(this.theKomokuNo);
         return hash;
     }
@@ -52,15 +65,11 @@ public final class TokkiImageFileName {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final TokkiImageFileName other = (TokkiImageFileName) obj;
-        if (!Objects.equals(this.theValue, other.theValue)) {
+        final OcrTokkiJikoColumn other = (OcrTokkiJikoColumn) obj;
+        if (!Objects.equals(this.theColumnNo, other.theColumnNo)) {
             return false;
         }
         return Objects.equals(this.theKomokuNo, other.theKomokuNo);
     }
 
-    @Override
-    public String toString() {
-        return "TokkiImageFileName{" + "theValue=" + theValue + ", theKomokuNo=" + theKomokuNo + '}';
-    }
 }

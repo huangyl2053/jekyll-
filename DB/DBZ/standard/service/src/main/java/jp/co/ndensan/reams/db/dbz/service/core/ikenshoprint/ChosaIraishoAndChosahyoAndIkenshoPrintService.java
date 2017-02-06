@@ -211,7 +211,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getListIchiranhyo_9(),
                         item.getListIchiranhyo_10(),
                         item.getListIchiranhyo_11(),
-                        item.getListIchiranhyo_12()));
+                        item.getListIchiranhyo_12(),
+                        item.getShichosonCode(),
+                        item.getChosaItakusakiCode()));
             }
             ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);

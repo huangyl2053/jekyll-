@@ -9,6 +9,10 @@
           T5101."shoKisaiHokenshaNo" AS 証記載保険者番号
           , T5101."hihokenshaNo" AS 被保険者番号
           , T7051."shichosonMeisho" AS 保険者
+          , T5101."hihokenshaName" AS 被保険者氏名
+          , T5101."hihokenshaKana" AS 被保険者カナ
+          , T5101."ninteiShinseiYMD" AS 認定申請日
+          , T5101."logicalDeletedFlag" AS 論理削除フラグ
           , T5101."ninteiShinseiShinseijiKubunCode" AS 申請区分
           , T5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード
           , T5101."shinseishoKanriNo" AS 申請書管理番号
@@ -18,6 +22,7 @@
           , T5201."ninteiChosainCode" AS 認定調査員コード
           , T5201."ninteichosaIraiKubunCode" AS 認定調査依頼区分コード
           , T5201."ninteichosaIraiKaisu" AS 認定調査回数
+          , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
           INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
@@ -47,7 +52,8 @@
           WHERE
             T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
             AND T5101."hihokenshaNo" = #{被保険者番号}
-            AND T5101."ninteiShinseiYMD" = #{認定申請日}
+          ORDER BY matches指定申請日 DESC, 論理削除フラグ, 認定申請日 DESC
+          LIMIT 1
     </select>
 
     <select id="get認定調査票" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter"

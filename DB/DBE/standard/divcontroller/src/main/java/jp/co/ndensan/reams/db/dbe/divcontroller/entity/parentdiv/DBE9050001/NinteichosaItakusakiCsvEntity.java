@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteichosaItakusakiCsvEntity {
 
-    @CsvField(order = 10, name = "証記載保険者番号")
+    @CsvField(order = 10, name = "保険者番号")
     private final RString hokenshaNo;
-    @CsvField(order = 20, name = "証記載保険者")
+    @CsvField(order = 20, name = "保険者")
     private final RString hokensha;
     @CsvField(order = 30, name = "その他機関コード")
     private final RString sonotaKikanCode;

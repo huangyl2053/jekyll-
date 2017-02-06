@@ -555,6 +555,7 @@ public class NinteichosaItakusakiMain {
     public IDownLoadServletResponse onClick_btnCsvKozaNashi(NinteichosaItakusakiMainDiv div, IDownLoadServletResponse response) {
 
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
+        boolean is該当データなし = true;
         try (CsvWriter<SonotaKikanJohoCSVEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
@@ -562,8 +563,13 @@ public class NinteichosaItakusakiMain {
             for (dgSonotaKikanIchiran_Row row : dataList) {
                 if (row.getKinyuKikanCode().isNull() || row.getKinyuKikanCode().isEmpty()) {
                     csvWriter.writeLine(getCsvDataSonota(row));
+                    is該当データなし = false;
                 }
             }
+            if (is該当データなし) {
+                csvWriter.writeLine(getCsvNonDataSonota());
+            }
+
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(OUTPUT_CSV_FILE_NAME));
@@ -593,6 +599,25 @@ public class NinteichosaItakusakiMain {
                 row.getChiku(),
                 row.getKikanKubun(),
                 row.getJokyoFlag());
+        return data;
+    }
+
+    private SonotaKikanJohoCSVEntity getCsvNonDataSonota() {
+        SonotaKikanJohoCSVEntity data = new SonotaKikanJohoCSVEntity(
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY);
         return data;
     }
 

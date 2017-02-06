@@ -116,6 +116,8 @@
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."isDeleted" = FALSE
         
         ORDER BY
+        pickout."shichosonCode",
+	pickout."shujiiIryokikanCode",
         pickout."shujiiCode",
         pickout."ninteiShinseiYMD",
         pickout."hihokenshaKana",

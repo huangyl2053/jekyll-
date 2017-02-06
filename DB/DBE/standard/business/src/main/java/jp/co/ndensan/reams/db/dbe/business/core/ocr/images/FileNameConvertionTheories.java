@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.images;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.IFileNameConvertionTheory;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

@@ -523,7 +523,8 @@
         DbT5202."tokkijikoUketsukeYMD",
         DbT5202."tokkijikoJuryoYMD",
         DbT5203."ninchishoNichijoSeikatsuJiritsudoCode",
-        DbT5203."shogaiNichijoSeikatsuJiritsudoCode"
+        DbT5203."shogaiNichijoSeikatsuJiritsudoCode",
+        DbT5910."shichosonCode"
     FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
     INNER JOIN
@@ -1014,6 +1015,7 @@
         <result property="調査項目73" column="調査項目73" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目連番74" column="調査項目連番74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目74" column="調査項目74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査委託先市町村コード" column="認定調査委託先市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
   </resultMap>
 
   <!--前回分のresultMap-->
@@ -1569,6 +1571,7 @@
       ,"CsvTempTable"."調査項目73"
       ,"CsvTempTable"."調査項目連番74"
       ,"CsvTempTable"."調査項目74"
+      ,"CsvTempTable"."認定調査委託先市町村コード"
     </sql>
 
     <sql id="selectItemZenkai">

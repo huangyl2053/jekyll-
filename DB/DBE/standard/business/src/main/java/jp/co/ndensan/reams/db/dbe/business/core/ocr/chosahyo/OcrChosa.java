@@ -7,17 +7,18 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import lombok.AccessLevel;
 
 /**
@@ -28,12 +29,11 @@ import lombok.AccessLevel;
 @lombok.Getter
 @lombok.Setter(AccessLevel.PRIVATE)
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class OcrChosa {
+public final class OcrChosa implements IOcrData {
 
-    @lombok.Setter(lombok.AccessLevel.PRIVATE)
     private ShinseiKey key = ShinseiKey.EMPTY;
     private RString データ行_文字列;
-    private OCRID ocrID = OCRID.EMPTY;
+    private OCRID oCRID = OCRID.EMPTY;
     private SheetID sheetID = SheetID.EMPTY;
 
     private RString 調査区分;
@@ -126,204 +126,25 @@ public final class OcrChosa {
     private RString 過去14日間に受けた治療;
     private Code 認知症高齢者の日常生活自立度;
     private Code 障害高齢者の日常生活自立度;
+    private OcrTokkiJikoColumns 特記事項Columns;
 
-    private Map<RString, KomokuNo> 特記事項ImageFileName_調査項目_Map;
+    private boolean isBroken;
+    private int lineNum;
+    @lombok.Getter(AccessLevel.PRIVATE)
+    private UUID uuid;
 
-    private OcrChosa() {
+    private OcrChosa(RString line, int lineNum) {
+        init(line);
+        this.isBroken = false;
+        this.lineNum = lineNum;
+        this.uuid = UUID.randomUUID();
     }
 
-    /**
-     * 行を解析した結果より、インスタンスを生成します。
-     *
-     * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
-     *
-     * @param line 行
-     * @return {@link OcrChosa}
-     */
-    public static OcrChosa parsed(RString line) {
-        return parseデータ行(line);
-    }
-
-    private static OcrChosa parseデータ行(RString line) {
-        OcrChosa result = new OcrChosa();
-        result.clear();
-        result.setデータ行_文字列(line);
-        List<RString> columns = Collections.unmodifiableList(line.split(","));
-        if (columns == null || columns.isEmpty()) {
-            return result;
-        }
-        result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
-        if (result.getOcrID() == OCRID._501) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
-            result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(to西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            result.set実施日時(to西暦_年(columns.get(5)));
-            result.set実施場所(columns.get(6));
-            result.set記入者(columns.get(7));
-            result.set所属機関(columns.get(8));
-            result.setサービス区分コード(columns.get(9));
-            result.set訪問介護の回数(columns.get(10));
-            result.set訪問入浴介護の回数(columns.get(11));
-            result.set訪問看護の回数(columns.get(12));
-            result.set訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数(columns.get(13));
-            result.set居宅療養管理指導の回数(columns.get(14));
-            result.set通所看護の回数(columns.get(15));
-            result.set通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数(columns.get(16));
-            result.set短期入所生活介護の日数(columns.get(17));
-            result.set短期入所療養介護の日数(columns.get(18));
-            result.set特定施設入所者生活介護の日数(columns.get(19));
-            result.set福祉用具貸与の品目(columns.get(20));
-            result.set福祉用具購入の品目(columns.get(21));
-            result.set住宅改修(columns.get(22));
-            result.set夜間対応型訪問介護の日数(columns.get(23));
-            result.set認知症対応型通所介護の日数(columns.get(24));
-            result.set小規模多機能型居宅介護の日数(columns.get(25));
-            result.set認知症対応型共同生活介護の日数(columns.get(26));
-            result.set地域密着型特定施設入居者生活介護の日数(columns.get(27));
-            result.set地域密着型介護老人福祉施設入居者生活介護の日数(columns.get(28));
-            result.set看護小規模多機能型居宅介護(columns.get(29));
-            result.set随時対応型訪問介護看護(columns.get(30));
-            result.set施設利用の有無(columns.get(31));
-
-        } else if (result.getOcrID() == OCRID._502) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 62 LINES
-            result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(to西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            result.set麻痺(columns.get(5));
-            result.set拘縮(columns.get(6));
-            result.set寝返り(columns.get(7));
-            result.set起き上がり(columns.get(8));
-            result.set座位保持(columns.get(9));
-            result.set両足での立位(columns.get(10));
-            result.set歩行(columns.get(11));
-            result.set立ち上がり(columns.get(12));
-            result.set片足での立位(columns.get(13));
-            result.set洗身(columns.get(14));
-            result.setつめ切り(columns.get(15));
-            result.set視力(columns.get(16));
-            result.set聴力(columns.get(17));
-            result.set移乗(columns.get(18));
-            result.set移動(columns.get(19));
-            result.setえん下(columns.get(20));
-            result.set食事摂取(columns.get(21));
-            result.set排尿(columns.get(22));
-            result.set排便(columns.get(23));
-            result.set口腔清潔(columns.get(24));
-            result.set洗顔(columns.get(25));
-            result.set整髪(columns.get(26));
-            result.set上衣の着脱(columns.get(27));
-            result.setズボン等の着脱(columns.get(28));
-            result.set外出頻度(columns.get(29));
-            result.set意思の疎通(columns.get(30));
-            result.set毎日の日課を理解(columns.get(31));
-            result.set生年月日をいう(columns.get(32));
-            result.set短期記憶(columns.get(33));
-            result.set自分の名前をいう(columns.get(34));
-            result.set今の季節を理解(columns.get(35));
-            result.set場所の理解(columns.get(36));
-            result.set徘徊(columns.get(37));
-            result.set外出して戻れない(columns.get(38));
-            result.set被害的(columns.get(39));
-            result.set作話(columns.get(40));
-            result.set感情が不安定(columns.get(41));
-            result.set昼夜逆転(columns.get(42));
-            result.set同じ話をする(columns.get(43));
-            result.set大声を出す(columns.get(44));
-            result.set介護に抵抗(columns.get(45));
-            result.set落ち着きなし(columns.get(46));
-            result.set一人で出たがる(columns.get(47));
-            result.set収集癖(columns.get(48));
-            result.set物や衣類を壊す(columns.get(49));
-            result.setひどい物忘れ(columns.get(50));
-            result.set独り言(columns.get(51));
-            result.set自分勝手に行動する(columns.get(52));
-            result.set話がまとまらない(columns.get(53));
-            result.set薬の内服(columns.get(54));
-            result.set金銭の管理(columns.get(55));
-            result.set日常の意思決定(columns.get(56));
-            result.set集団への不適応(columns.get(57));
-            result.set買い物(columns.get(58));
-            result.set簡単な調理(columns.get(59));
-            result.set過去14日間に受けた治療(columns.get(60));
-            result.set障害高齢者の日常生活自立度(new Code(columns.get(61)));
-            result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
-
-        } else if (result.getOcrID() == OCRID._550) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
-            RString sheetIdValue = columns.get(1);
-            result.setSheetID(new SheetID(sheetIdValue));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(to西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            Map<RString, KomokuNo> map = new HashMap<>();
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i030.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 5));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i031.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 6));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i032.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 7));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i033.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 8));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i034.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 9));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i035.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 10));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i036.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 11));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i037.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 12));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i038.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 13));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i039.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 14));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i040.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 15));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i041.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 16));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i025.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 17));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i026.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 18));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i027.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 19));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i028.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 20));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i029.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 21));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i030.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 22));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i031.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 23));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i032.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 24));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i033.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 25));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i034.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 26));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i035.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 27));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i036.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 28));
-            result.set特記事項ImageFileName_調査項目_Map(map);
-
-        }
-        return result;
-    }
-
-    private static KomokuNo getListConvertingKomokuNoOrEMPTY(List<RString> list, int index) {
-        if (list.size() <= index) {
-            return KomokuNo.EMPTY;
-        }
-        return new KomokuNo(list.get(index));
-    }
-
-    /**
-     * @return 存在するイメージファイル名
-     */
-    public TokkiImageFileNames collectTokkiImageFileNames() {
-        List<TokkiImageFileName> list = new ArrayList<>();
-        for (Map.Entry<RString, KomokuNo> entry : this.特記事項ImageFileName_調査項目_Map.entrySet()) {
-            list.add(new TokkiImageFileName(entry.getKey(), entry.getValue()));
-        }
-        return new TokkiImageFileNames(list);
-    }
-
-    private static RString to西暦_年(RString 和暦_日付) {
-        return RDate.canConvert(和暦_日付)
-                ? new RDate(和暦_日付.toString()).toDateString()
-                : RString.EMPTY;
-    }
-
-    /**
-     * メンバ変数のクリア
-     */
-    private void clear() {
+    private void init(RString line) {
+        //<editor-fold defaultstate="collapsed" desc="initialize menbers">
         this.key = ShinseiKey.EMPTY;
-        this.データ行_文字列 = RString.EMPTY;
-        this.ocrID = OCRID.EMPTY;
+        this.データ行_文字列 = line;
+        this.oCRID = OCRID.EMPTY;
         this.sheetID = SheetID.EMPTY;
 
         this.保険者番号 = RString.EMPTY;
@@ -415,7 +236,228 @@ public final class OcrChosa {
         this.認知症高齢者の日常生活自立度 = Code.EMPTY;
         this.障害高齢者の日常生活自立度 = Code.EMPTY;
 
-        this.特記事項ImageFileName_調査項目_Map = new HashMap<>();
+        this.特記事項Columns = new OcrTokkiJikoColumns(new ArrayList<OcrTokkiJikoColumn>());
+        //</editor-fold>
     }
 
+    /**
+     * 行を解析した結果より、インスタンスを生成します。
+     *
+     * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
+     *
+     * @param line 行
+     * @param lineNum 行番号
+     * @return {@link OcrChosa}
+     */
+    public static OcrChosa parsed(RString line, int lineNum) {
+        try {
+            return parseデータ行(line, lineNum);
+        } catch (Exception e) {
+            OcrChosa ocrChosa = new OcrChosa(line, lineNum);
+            ocrChosa.isBroken = true;
+            return ocrChosa;
+        }
+    }
+
+    private static OcrChosa parseデータ行(RString line, int lineNum) {
+        OcrChosa result = new OcrChosa(line, lineNum);
+        List<RString> columns = Collections.unmodifiableList(line.split(","));
+        if (columns == null || columns.isEmpty()) {
+            return result;
+        }
+        result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
+        if (result.getOCRID() == OCRID._501) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
+            result.setSheetID(new SheetID(columns.get(1)));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(to西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.set実施日時(to西暦_年(columns.get(5)));
+            result.set実施場所(columns.get(6));
+            result.set記入者(columns.get(7));
+            result.set所属機関(columns.get(8));
+            result.setサービス区分コード(columns.get(9));
+            result.set訪問介護の回数(columns.get(10));
+            result.set訪問入浴介護の回数(columns.get(11));
+            result.set訪問看護の回数(columns.get(12));
+            result.set訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数(columns.get(13));
+            result.set居宅療養管理指導の回数(columns.get(14));
+            result.set通所看護の回数(columns.get(15));
+            result.set通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝの回数(columns.get(16));
+            result.set短期入所生活介護の日数(columns.get(17));
+            result.set短期入所療養介護の日数(columns.get(18));
+            result.set特定施設入所者生活介護の日数(columns.get(19));
+            result.set福祉用具貸与の品目(columns.get(20));
+            result.set福祉用具購入の品目(columns.get(21));
+            result.set住宅改修(columns.get(22));
+            result.set夜間対応型訪問介護の日数(columns.get(23));
+            result.set認知症対応型通所介護の日数(columns.get(24));
+            result.set小規模多機能型居宅介護の日数(columns.get(25));
+            result.set認知症対応型共同生活介護の日数(columns.get(26));
+            result.set地域密着型特定施設入居者生活介護の日数(columns.get(27));
+            result.set地域密着型介護老人福祉施設入居者生活介護の日数(columns.get(28));
+            result.set看護小規模多機能型居宅介護(columns.get(29));
+            result.set随時対応型訪問介護看護(columns.get(30));
+            result.set施設利用の有無(columns.get(31));
+
+        } else if (result.getOCRID() == OCRID._502) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 62 LINES
+            result.setSheetID(new SheetID(columns.get(1)));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(to西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.set麻痺(columns.get(5));
+            result.set拘縮(columns.get(6));
+            result.set寝返り(columns.get(7));
+            result.set起き上がり(columns.get(8));
+            result.set座位保持(columns.get(9));
+            result.set両足での立位(columns.get(10));
+            result.set歩行(columns.get(11));
+            result.set立ち上がり(columns.get(12));
+            result.set片足での立位(columns.get(13));
+            result.set洗身(columns.get(14));
+            result.setつめ切り(columns.get(15));
+            result.set視力(columns.get(16));
+            result.set聴力(columns.get(17));
+            result.set移乗(columns.get(18));
+            result.set移動(columns.get(19));
+            result.setえん下(columns.get(20));
+            result.set食事摂取(columns.get(21));
+            result.set排尿(columns.get(22));
+            result.set排便(columns.get(23));
+            result.set口腔清潔(columns.get(24));
+            result.set洗顔(columns.get(25));
+            result.set整髪(columns.get(26));
+            result.set上衣の着脱(columns.get(27));
+            result.setズボン等の着脱(columns.get(28));
+            result.set外出頻度(columns.get(29));
+            result.set意思の疎通(columns.get(30));
+            result.set毎日の日課を理解(columns.get(31));
+            result.set生年月日をいう(columns.get(32));
+            result.set短期記憶(columns.get(33));
+            result.set自分の名前をいう(columns.get(34));
+            result.set今の季節を理解(columns.get(35));
+            result.set場所の理解(columns.get(36));
+            result.set徘徊(columns.get(37));
+            result.set外出して戻れない(columns.get(38));
+            result.set被害的(columns.get(39));
+            result.set作話(columns.get(40));
+            result.set感情が不安定(columns.get(41));
+            result.set昼夜逆転(columns.get(42));
+            result.set同じ話をする(columns.get(43));
+            result.set大声を出す(columns.get(44));
+            result.set介護に抵抗(columns.get(45));
+            result.set落ち着きなし(columns.get(46));
+            result.set一人で出たがる(columns.get(47));
+            result.set収集癖(columns.get(48));
+            result.set物や衣類を壊す(columns.get(49));
+            result.setひどい物忘れ(columns.get(50));
+            result.set独り言(columns.get(51));
+            result.set自分勝手に行動する(columns.get(52));
+            result.set話がまとまらない(columns.get(53));
+            result.set薬の内服(columns.get(54));
+            result.set金銭の管理(columns.get(55));
+            result.set日常の意思決定(columns.get(56));
+            result.set集団への不適応(columns.get(57));
+            result.set買い物(columns.get(58));
+            result.set簡単な調理(columns.get(59));
+            result.set過去14日間に受けた治療(columns.get(60));
+            result.set障害高齢者の日常生活自立度(new Code(columns.get(61)));
+            result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
+
+        } else if (result.getOCRID() == OCRID._550) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
+            RString sheetIdValue = columns.get(1);
+            result.setSheetID(new SheetID(sheetIdValue));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(to西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            List<OcrTokkiJikoColumn> list = new ArrayList();
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 0, getListConvertingKomokuNoOrEMPTY(columns, 5)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 1, getListConvertingKomokuNoOrEMPTY(columns, 6)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 2, getListConvertingKomokuNoOrEMPTY(columns, 7)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 3, getListConvertingKomokuNoOrEMPTY(columns, 8)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 4, getListConvertingKomokuNoOrEMPTY(columns, 9)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 5, getListConvertingKomokuNoOrEMPTY(columns, 10)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 6, getListConvertingKomokuNoOrEMPTY(columns, 11)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 7, getListConvertingKomokuNoOrEMPTY(columns, 12)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 8, getListConvertingKomokuNoOrEMPTY(columns, 13)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 9, getListConvertingKomokuNoOrEMPTY(columns, 14)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 10, getListConvertingKomokuNoOrEMPTY(columns, 15)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 11, getListConvertingKomokuNoOrEMPTY(columns, 16)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 12, getListConvertingKomokuNoOrEMPTY(columns, 17)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 13, getListConvertingKomokuNoOrEMPTY(columns, 18)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 14, getListConvertingKomokuNoOrEMPTY(columns, 19)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 15, getListConvertingKomokuNoOrEMPTY(columns, 20)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 16, getListConvertingKomokuNoOrEMPTY(columns, 21)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 17, getListConvertingKomokuNoOrEMPTY(columns, 22)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 18, getListConvertingKomokuNoOrEMPTY(columns, 23)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 19, getListConvertingKomokuNoOrEMPTY(columns, 24)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 20, getListConvertingKomokuNoOrEMPTY(columns, 25)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 21, getListConvertingKomokuNoOrEMPTY(columns, 26)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 22, getListConvertingKomokuNoOrEMPTY(columns, 27)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 23, getListConvertingKomokuNoOrEMPTY(columns, 28)));
+            result.set特記事項Columns(new OcrTokkiJikoColumns(list));
+        }
+        return result;
+    }
+
+    private static KomokuNo getListConvertingKomokuNoOrEMPTY(List<RString> list, int index) {
+        if (list.size() <= index) {
+            return KomokuNo.EMPTY;
+        }
+        return new KomokuNo(list.get(index));
+    }
+
+    private static RString to西暦_年(RString 和暦_日付) {
+        return RDate.canConvert(和暦_日付)
+                ? new RDate(和暦_日付.toString()).toDateString()
+                : RString.EMPTY;
+    }
+
+    /**
+     * {@link OcrChosa}の各メソッドを{@link IFunction}で表現します。
+     */
+    public static final class Fn {
+
+        private Fn() {
+        }
+
+        /**
+         * @return {@link OcrChosa#getSheetID()}に相当する{@link IFunction}
+         */
+        public static IFunction<OcrChosa, SheetID> getSheetID() {
+            return new IFunction<OcrChosa, SheetID>() {
+                @Override
+                public SheetID apply(OcrChosa t) {
+                    return t.getSheetID();
+                }
+            };
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.uuid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OcrChosa other = (OcrChosa) obj;
+        if (!Objects.equals(this.uuid, other.uuid)) {
+            return false;
+        }
+        return true;
+    }
 }

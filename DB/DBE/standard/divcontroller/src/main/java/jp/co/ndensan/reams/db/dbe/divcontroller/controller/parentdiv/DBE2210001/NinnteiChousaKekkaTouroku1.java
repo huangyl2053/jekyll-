@@ -8,9 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210001
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.Objects;
-import java.util.logging.ErrorManager;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
@@ -20,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Handler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1ValidationHandler;
@@ -35,7 +31,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -50,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -71,11 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class NinnteiChousaKekkaTouroku1 {
 
     private static final RString KEY_登録修正 = new RString("0");
-    private static final RString 予防給付サービス_選択 = new RString("key0");
-    private static final RString 介護給付サービス_選択 = new RString("key1");
     private static final RString 在宅 = new RString("在宅");
-    private static final RString 施設 = new RString("施設");
-    private static final RString カンマ = new RString(",");
     private static final RString KEY1 = new RString("第1群");
     private static final RString KEY2 = new RString("第2群");
     private static final RString KEY3 = new RString("第3群");
@@ -85,11 +75,6 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString KEY7 = new RString("自立度群");
     private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
     private static final RString 概況特記出力しない = new RString("2");
-    private static final int 夜間対応型訪問介護 = 13;
-    private static final int 地域密着型特定施設入居者生活介護 = 17;
-    private static final int 地域密着型介護老人福祉施設入所者生活介護 = 18;
-    private static final int 定期巡回_随時対応型訪問介護看護 = 19;
-    private static final int 看護小規模多機能型居宅介護 = 20;
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -105,10 +90,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 || new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setDisabledControl_Error(div);
-            if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_概況特記非表示);
-            }
-            return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録);
+            return ResponseData.of(div).respond();
         }
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         Integer 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
@@ -117,6 +99,9 @@ public class NinnteiChousaKekkaTouroku1 {
             throw new PessimisticLockingException();
         }
         getHandler(div).onLoad(申請書管理番号, 認定調査履歴番号);
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+        }
         if (!KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class))) {
             ErrorMessage message = new ErrorMessage(UrErrorMessages.不正.getMessage().getCode(),
                     UrErrorMessages.不正.getMessage().replace("認定ソフトのバージョン").evaluate());
@@ -140,10 +125,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_概況特記非表示);
-        }
-        return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -153,9 +135,10 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onActive(NinnteiChousaKekkaTouroku1Div div) {
-        前排他キーの解除();
-        getHandler(div).DataReset();
-        return onLoad(div);
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -527,22 +510,9 @@ public class NinnteiChousaKekkaTouroku1 {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-//        boolean 入力内容変更なし = Boolean.FALSE;
-//        if (!ResponseHolder.isReRequest()) {
-//            入力内容変更なし = is入力内容変更なし(div);
-//        }
-//        if (!入力内容変更なし && !ResponseHolder.isReRequest()) {
-//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
-//                    UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
-//        } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
-//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || 入力内容変更なし) {
         前排他キーの解除();
         set画面遷移パラメータ(div);
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.概況特記入力を表示).respond();
-//        }
-//
-//        return ResponseData.of(div).respond();
     }
 
     /**
@@ -562,23 +532,9 @@ public class NinnteiChousaKekkaTouroku1 {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-//        boolean 入力内容変更なし = Boolean.FALSE;
-//        if (!ResponseHolder.isReRequest()) {
-//            入力内容変更なし = is入力内容変更なし(div);
-//        }
-//
-//        if (!入力内容変更なし && !ResponseHolder.isReRequest()) {
-//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
-//                    UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
-//        }
-//        if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
-//                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes || 入力内容変更なし) {
         前排他キーの解除();
         set画面遷移パラメータ(div);
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.特記事項一覧を表示).respond();
-//        }
-//        return ResponseData.of(div).respond();
     }
 
     /**
@@ -614,6 +570,12 @@ public class NinnteiChousaKekkaTouroku1 {
         if (new RString(DbeInformationMessages.一次判定再処理.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
+        }
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(UrInformationMessages.削除終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に戻る).respond();
         }
 
         boolean isDelete = !KEY_登録修正.equals(div.getRadUpdateKind().getSelectedKey());
@@ -660,7 +622,13 @@ public class NinnteiChousaKekkaTouroku1 {
             div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
             if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
-                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+                } else if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
+                }
             }
             if (!isDelete) {
                 ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
@@ -669,12 +637,9 @@ public class NinnteiChousaKekkaTouroku1 {
                 if (一次判定結果情報 != null) {
                     return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
                 }
+                return ResponseData.of(div).setState(DBE2210001StateName.完了);
             }
-            return ResponseData.of(div).setState(DBE2210001StateName.完了);
-        }
-        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.検索結果一覧に戻る).respond();
+            return ResponseData.of(div).setState(DBE2210001StateName.完了_削除);
         }
         return ResponseData.of(div).respond();
     }
@@ -702,6 +667,17 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     /**
+     * 基本運用画面に遷移する.
+     *
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return ResponseData<NinnteiChousaKekkaTouroku1Div>
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnBackKihonUnyo(NinnteiChousaKekkaTouroku1Div div) {
+        前排他キーの解除();
+        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に戻る).respond();
+    }
+
+    /**
      * 「完了」ボタンを押下する処理です。
      *
      * @param div コントロールdiv
@@ -710,6 +686,17 @@ public class NinnteiChousaKekkaTouroku1 {
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onclick_btnComplete(NinnteiChousaKekkaTouroku1Div div) {
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.処理終了).respond();
+    }
+
+    /**
+     * 「完了」ボタンを押下する処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnKihonUnyo(NinnteiChousaKekkaTouroku1Div div) {
+        前排他キーの解除();
+        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に進む).respond();
     }
 
     private boolean 前排他キーのセット() {
@@ -725,103 +712,6 @@ public class NinnteiChousaKekkaTouroku1 {
                 .concat(temp_申請書管理番号.getColumnValue()));
         RealInitialLocker.release(排他キー);
     }
-//
-//    private RString get初期のサービス設定値(RString 現在の選択) {
-//        RString 変更前の設定値 = RString.EMPTY;
-//        if (予防給付サービス_選択.equals(現在の選択)) {
-//            変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の予防給付サービス, RString.class);
-//        } else if (介護給付サービス_選択.equals(現在の選択)) {
-//            変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の介護給付サービス, RString.class);
-//        }
-//        return 変更前の設定値;
-//    }
-//
-//    private Map<Integer, Decimal> get現在のサービス設定値(NinnteiChousaKekkaTouroku1Div div, RString 元の選択) {
-//        List<dgRiyoServiceJyokyo_Row> serviceJyokyo = div.getDgRiyoServiceJyokyo().getDataSource();
-//        if (serviceJyokyo == null) {
-//            return null;
-//        }
-//        Map<Integer, Decimal> map = new HashMap<>();
-//        Decimal 合計値 = new Decimal(0);
-//        int index = 1;
-//        Decimal 利用状況;
-//        if (予防給付サービス_選択.equals(元の選択)) {
-//            for (dgRiyoServiceJyokyo_Row secondRow : serviceJyokyo) {
-//                利用状況 = secondRow.getServiceJokyo().getValue();
-//                if (利用状況 == null || 利用状況.toString().isEmpty()) {
-//                    利用状況 = new Decimal(0);
-//                }
-//
-//                if (index == 夜間対応型訪問介護) {
-//                    map.put(index, new Decimal(0));
-//                    map.put(++index, 利用状況);
-//                } else {
-//                    map.put(index, 利用状況);
-//                }
-//                合計値 = 合計値.add(利用状況);
-//                index++;
-//            }
-//
-//            map.put(地域密着型特定施設入居者生活介護, new Decimal(0));
-//            map.put(地域密着型介護老人福祉施設入所者生活介護, new Decimal(0));
-//            map.put(定期巡回_随時対応型訪問介護看護, new Decimal(0));
-//            map.put(看護小規模多機能型居宅介護, new Decimal(0));
-//        } else if (介護給付サービス_選択.equals(元の選択)) {
-//            for (dgRiyoServiceJyokyo_Row secondRow : serviceJyokyo) {
-//                利用状況 = secondRow.getServiceJokyo().getValue();
-//                if (利用状況 == null || 利用状況.toString().isEmpty()) {
-//                    利用状況 = new Decimal(0);
-//                }
-//                map.put(index, 利用状況);
-//                index++;
-//                合計値 = 合計値.add(利用状況);
-//            }
-//        } else {
-//            return null;
-//        }
-//
-//        if (Objects.equals(合計値, Decimal.ZERO)) {
-//            return null;
-//        }
-//
-//        return map;
-//    }
-//
-//    private boolean is入力内容変更なし(NinnteiChousaKekkaTouroku1Div div) {
-//
-//        boolean is調査実施者等しい = getHandler(div).is調査実施者等しい(
-//                ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.所属機関コード, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.記入者コード, RString.class));
-//
-//        boolean is基本調査以外等しい = getHandler(div).is入力内容変更なし(
-//                ViewStateHolder.get(ViewStateKeys.市町村特別給付TXT, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.介護保険給付以外の在宅サービスTXT, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.特記, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期の概況調査場所, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.現在の概況調査場所, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期のサービス区分, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.現在のサービス区分, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期の予防給付サービス, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期の介護給付サービス, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期の施設利用, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期の施設連絡先, RString.class),
-//                ViewStateHolder.get(ViewStateKeys.初期の基本調査, RString.class));
-//
-//        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
-//        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
-//        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
-//        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
-//        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
-//        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
-//        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
-//
-//        boolean is基本調査等しい = getHandler(div).is基本調査等しい(ViewStateHolder.get(ViewStateKeys.初期の基本調査, RString.class),
-//                第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-//        return is調査実施者等しい && is基本調査以外等しい && is基本調査等しい;
-//    }
 
     private void set画面遷移パラメータ(NinnteiChousaKekkaTouroku1Div div) {
         ViewStateHolder.put(ViewStateKeys.申請日, div.getCcdChosaJisshishaJoho().getTxtNinteiShinseiDate().getText());
@@ -850,6 +740,14 @@ public class NinnteiChousaKekkaTouroku1 {
         div.setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnChosaKekkaUpdate"), true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnTokkiJikoIchiran"), true);
+        if (DBE2210001StateName.調査結果登録_基本運用.getName().equals(ResponseHolder.getState())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBackKihonUnyo"), true);
+        }
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+        }
     }
 
     private NinnteiChousaKekkaTouroku1Handler getHandler(NinnteiChousaKekkaTouroku1Div div) {

@@ -92,6 +92,7 @@
     
     <sql id="columns">
         T7051."shichosonCode",
+        T7051."shichosonMeisho",
         T5602."shujiiIryoKikanCode",
         T5911."iryoKikanMeisho",
         T5912."shujiiName",
@@ -116,6 +117,7 @@
     
     <resultMap id="resultMap_IkenshoHoshuShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenshoHoshuShokaiRelateEntity" autoMapping="true">
         <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="市町村名" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医医療機関コード" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="医療機関名称" column="iryoKikanMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="主治医氏名" column="shujiiName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

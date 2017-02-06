@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class OcrIken {
+public final class OcrIken implements IOcrData {
 
     private static final RString 意見書_表 = new RString("701");
     private static final RString 意見書_裏 = new RString("702");
@@ -47,7 +48,7 @@ public final class OcrIken {
     private RString データ行_文字列;
 
     //OCRID
-    private OCRID ocrID;
+    private OCRID oCRID;
 
     //sheetID
     private SheetID sheetID;
@@ -198,7 +199,7 @@ public final class OcrIken {
         RString ocrID = columns.get(0);
         if (意見書_表.equals(ocrID)) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 33 LINES
-            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
@@ -234,7 +235,7 @@ public final class OcrIken {
 
         } else if (意見書_裏.equals(ocrID)) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 50 LINES
-            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
@@ -287,7 +288,7 @@ public final class OcrIken {
 
         } else if (意見書_ID777.equals(ocrID)) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 17 LINES
-            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
@@ -307,7 +308,7 @@ public final class OcrIken {
 
         } else if (意見書_ID778.equals(ocrID)) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 7 LINES
-            result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
+            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(get西暦_年(columns.get(3)));
@@ -348,7 +349,7 @@ public final class OcrIken {
     private void clear() {
         this.データ行_文字列 = RString.EMPTY;
         this.key = ShinseiKey.EMPTY;
-        this.ocrID = OCRID.EMPTY;
+        this.oCRID = OCRID.EMPTY;
         this.sheetID = SheetID.EMPTY;
 
         this.保険者番号 = RString.EMPTY;

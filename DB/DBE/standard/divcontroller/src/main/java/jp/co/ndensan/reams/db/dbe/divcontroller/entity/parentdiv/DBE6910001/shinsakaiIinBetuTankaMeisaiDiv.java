@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +24,8 @@ public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
      */
     @JsonProperty("txtShinsaIinKodo")
     private TextBoxCode txtShinsaIinKodo;
+    @JsonProperty("btnShinsakaiIinGuide")
+    private ButtonDialog btnShinsakaiIinGuide;
     @JsonProperty("txtShinsaIinName")
     private TextBox txtShinsaIinName;
     @JsonProperty("txtBetuKaishiYM")
@@ -61,6 +63,24 @@ public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
     @JsonProperty("txtShinsaIinKodo")
     public void setTxtShinsaIinKodo(TextBoxCode txtShinsaIinKodo) {
         this.txtShinsaIinKodo = txtShinsaIinKodo;
+    }
+
+    /*
+     * getbtnShinsakaiIinGuide
+     * @return btnShinsakaiIinGuide
+     */
+    @JsonProperty("btnShinsakaiIinGuide")
+    public ButtonDialog getBtnShinsakaiIinGuide() {
+        return btnShinsakaiIinGuide;
+    }
+
+    /*
+     * setbtnShinsakaiIinGuide
+     * @param btnShinsakaiIinGuide btnShinsakaiIinGuide
+     */
+    @JsonProperty("btnShinsakaiIinGuide")
+    public void setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+        this.btnShinsakaiIinGuide = btnShinsakaiIinGuide;
     }
 
     /*

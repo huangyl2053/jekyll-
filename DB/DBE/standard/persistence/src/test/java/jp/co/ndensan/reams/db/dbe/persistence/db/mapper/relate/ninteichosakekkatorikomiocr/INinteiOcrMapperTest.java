@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekka
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +43,19 @@ public class INinteiOcrMapperTest extends DbeTestDacBase {
         }
 
         @Test
-        public void testGet関連データ() {
+        public void get関連データ() {
+            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(証記載保険者番号, 申請書管理番号, 認定申請日);
+            INinteiOcrMapper sut = sqlSession.getMapper(INinteiOcrMapper.class);
+
+            List<NinteiChosaKekkaTorikomiOcrRelateEntity> list = sut.get関連データ(param);
+            NinteiChosaKekkaTorikomiOcrRelateEntity entity = list.get(0);
+            System.out.println(entity.get被保険者氏名());
+            System.out.println(entity.is論理削除フラグ());
+            System.out.println(entity.isMatches指定申請日());
+        }
+
+        @Test
+        public void get認定調査票() {
             NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(証記載保険者番号, 申請書管理番号, 認定申請日);
             INinteiOcrMapper sut = sqlSession.getMapper(INinteiOcrMapper.class);
             List<NinteiChosahyoEntity> list = sut.get認定調査票(param);

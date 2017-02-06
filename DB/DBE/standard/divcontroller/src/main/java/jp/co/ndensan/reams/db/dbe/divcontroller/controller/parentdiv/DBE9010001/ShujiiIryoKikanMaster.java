@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9010001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness;
@@ -66,6 +67,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokinShubetsu;
+import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 
 /**
  * 主治医医療機関情報処理のクラスです。
@@ -192,7 +198,8 @@ public class ShujiiIryoKikanMaster {
                         div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
                         四マスタ優先表示市町村識別ID,
                         div.getTxtSaidaiHyojiKensu().getValue(),
-                        構成市町村マスタ市町村コード重複種別
+                        構成市町村マスタ市町村コード重複種別,
+                        new RString(RDateTime.now().getDate().toString())
                 );
         SearchResult<KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報一覧
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter);
@@ -333,8 +340,17 @@ public class ShujiiIryoKikanMaster {
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
+
+            KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+            List<KinyuKikan> 金融機関情報 = new ArrayList<>();
+            金融機関情報 = kinyuKikanManager.getValidKinyuKikansOn(FlexibleDate.getNowDate());
+
             for (dgShujiiIchiran_Row row : dataList) {
-                csvWriter.writeLine(getCsvData(row));
+                RString 支店名 = RString.EMPTY;
+                if (row.getKinyuKikanShitenCode() != null && !row.getKinyuKikanShitenCode().isEmpty()) {
+                    支店名 = getKinyuShiten(金融機関情報, row);
+                }
+                csvWriter.writeLine(getCsvData(row, 支店名));
             }
             csvWriter.close();
         }
@@ -345,7 +361,39 @@ public class ShujiiIryoKikanMaster {
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
-    private KoseiShujiiIryoKikanMasterCsvEntity getCsvData(dgShujiiIchiran_Row row) {
+    /**
+     * 金融機関支店を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param row dgChosainIchiran_Row
+     * @return 支店名　RString
+     */
+    private RString getKinyuShiten(List<KinyuKikan> 金融機関情報, dgShujiiIchiran_Row row) {
+        List<KinyuKikanShiten> 支店リスト = new ArrayList<>();
+        RString 支店名 = RString.EMPTY;
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if ((new RString(kinyuKikanJoho.get金融機関コード().toString())).equals(row.getKinyuKikanCode())) {
+                支店リスト = kinyuKikanJoho.get支店リスト();
+            }
+        }
+        if (支店リスト != null && !支店リスト.isEmpty()) {
+            支店名 = getShitenMeisho(支店リスト, row, 支店名);
+
+        }
+
+        return 支店名;
+    }
+
+    private RString getShitenMeisho(List<KinyuKikanShiten> 支店リスト, dgShujiiIchiran_Row row, RString 支店名) {
+        for (KinyuKikanShiten shiten : 支店リスト) {
+            if (new RString(shiten.get支店コード().toString()).equals(row.getKinyuKikanShitenCode())) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
+    }
+
+    private KoseiShujiiIryoKikanMasterCsvEntity getCsvData(dgShujiiIchiran_Row row, RString 支店名) {
         RString 預金種別名称 = RString.EMPTY;
         if (!(row.getYokinShubetsu() == null) && !row.getYokinShubetsu().isEmpty()) {
             預金種別名称 = get種別(row.getYokinShubetsu());
@@ -365,11 +413,14 @@ public class ShujiiIryoKikanMaster {
                 row.getDaihyoshakana(),
                 row.getJokyoFlag(),
                 row.getKinyuKikanCode(),
+                row.getKinyuKikan(),
                 row.getKinyuKikanShitenCode(),
+                支店名,
                 預金種別名称,
                 row.getKozaNo(),
                 row.getKozaMeigininKana(),
-                row.getKozaMeiginin());
+                row.getKozaMeiginin()
+        );
         return data;
     }
 

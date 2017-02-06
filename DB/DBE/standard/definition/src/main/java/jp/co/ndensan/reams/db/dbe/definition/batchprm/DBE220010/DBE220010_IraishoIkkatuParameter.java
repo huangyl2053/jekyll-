@@ -49,6 +49,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String 主治医意見書作成依頼履歴一覧 = "主治医意見書作成依頼履歴一覧";
     private static final String 文書番号 = "文書番号";
     private static final String 市町村コード = "市町村コード";
+    private static final String 証記載保険者番号 = "証記載保険者番号";
+    private static final String 保険者名称 = "保険者名称";
     private static final String IS_NINTEI_CHOSA_IRAISHO = "isNinteiChosaIraisho";
     private static final String IS_NINTEI_CHOSAHYO_GAIKYO = "isNinteiChosahyoGaikyo";
     private static final String IS_NINTEI_CHOSAHYO_KIHON = "isNinteiChosahyoKihon";
@@ -127,6 +129,10 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString bunshoNo;
     @BatchParameter(key = 市町村コード, name = "市町村コード")
     private RString shichosonCode;
+    @BatchParameter(key = 証記載保険者番号, name = "証記載保険者番号")
+    private RString shoKisaiHokenshaNo;
+    @BatchParameter(key = 保険者名称, name = "保険者名称")
+    private RString hokenshaName;
 
     /**
      * 主治医意見書作成依頼発行一覧表ですためのprocessのパラメータを生成します。
@@ -182,7 +188,9 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 teishutsuKigen,
                 kyotsuHizuke,
                 bunshoNo,
-                shichosonCode);
+                shichosonCode,
+                shoKisaiHokenshaNo,
+                hokenshaName);
     }
 
     /**
@@ -207,6 +215,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 teishutsuKigen,
                 kyotsuHizuke,
                 bunshoNo,
-                shichosonCode);
+                shichosonCode,
+                shoKisaiHokenshaNo,
+                hokenshaName);
     }
 }

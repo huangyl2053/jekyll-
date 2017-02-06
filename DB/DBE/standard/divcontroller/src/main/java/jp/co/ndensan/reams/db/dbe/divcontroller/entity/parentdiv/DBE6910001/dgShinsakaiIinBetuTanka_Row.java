@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 19 19:40:42 JST 2016 
+ * Mon Feb 06 17:28:45 JST 2017 
  */
 
 
@@ -21,13 +21,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgShinsakaiIinBetuTanka_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private RString columnState;
     private RString shinsakaiIinCode;
     private RString shinsakaiIinName;
     private TextBoxFlexibleDate kaishiYM;
     private TextBoxFlexibleDate shuryoYM;
+    private TextBoxFlexibleDate shuryoYMbak;
     private TextBoxNum tanka;
     private TextBoxNum sonotaTanka;
 
@@ -38,6 +39,7 @@ public class dgShinsakaiIinBetuTanka_Row extends DataRow {
         this.shinsakaiIinName = RString.EMPTY;
         this.kaishiYM = new TextBoxFlexibleDate();
         this.shuryoYM = new TextBoxFlexibleDate();
+        this.shuryoYMbak = new TextBoxFlexibleDate();
         this.tanka = new TextBoxNum();
         this.sonotaTanka = new TextBoxNum();
         this.setOriginalData("columnState", columnState);
@@ -45,17 +47,19 @@ public class dgShinsakaiIinBetuTanka_Row extends DataRow {
         this.setOriginalData("shinsakaiIinName", shinsakaiIinName);
         this.setOriginalData("kaishiYM", kaishiYM);
         this.setOriginalData("shuryoYM", shuryoYM);
+        this.setOriginalData("shuryoYMbak", shuryoYMbak);
         this.setOriginalData("tanka", tanka);
         this.setOriginalData("sonotaTanka", sonotaTanka);
     }
 
-    public dgShinsakaiIinBetuTanka_Row(RString columnState, RString shinsakaiIinCode, RString shinsakaiIinName, TextBoxFlexibleDate kaishiYM, TextBoxFlexibleDate shuryoYM, TextBoxNum tanka, TextBoxNum sonotaTanka) {
+    public dgShinsakaiIinBetuTanka_Row(RString columnState, RString shinsakaiIinCode, RString shinsakaiIinName, TextBoxFlexibleDate kaishiYM, TextBoxFlexibleDate shuryoYM, TextBoxFlexibleDate shuryoYMbak, TextBoxNum tanka, TextBoxNum sonotaTanka) {
         super();
         this.setOriginalData("columnState", columnState);
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shinsakaiIinName", shinsakaiIinName);
         this.setOriginalData("kaishiYM", kaishiYM);
         this.setOriginalData("shuryoYM", shuryoYM);
+        this.setOriginalData("shuryoYMbak", shuryoYMbak);
         this.setOriginalData("tanka", tanka);
         this.setOriginalData("sonotaTanka", sonotaTanka);
         this.columnState = columnState;
@@ -63,6 +67,7 @@ public class dgShinsakaiIinBetuTanka_Row extends DataRow {
         this.shinsakaiIinName = shinsakaiIinName;
         this.kaishiYM = kaishiYM;
         this.shuryoYM = shuryoYM;
+        this.shuryoYMbak = shuryoYMbak;
         this.tanka = tanka;
         this.sonotaTanka = sonotaTanka;
     }
@@ -85,6 +90,10 @@ public class dgShinsakaiIinBetuTanka_Row extends DataRow {
 
     public TextBoxFlexibleDate getShuryoYM() {
         return shuryoYM;
+    }
+
+    public TextBoxFlexibleDate getShuryoYMbak() {
+        return shuryoYMbak;
     }
 
     public TextBoxNum getTanka() {
@@ -118,6 +127,11 @@ public class dgShinsakaiIinBetuTanka_Row extends DataRow {
     public void setShuryoYM(TextBoxFlexibleDate shuryoYM) {
         this.setOriginalData("shuryoYM", shuryoYM);
         this.shuryoYM = shuryoYM;
+    }
+
+    public void setShuryoYMbak(TextBoxFlexibleDate shuryoYMbak) {
+        this.setOriginalData("shuryoYMbak", shuryoYMbak);
+        this.shuryoYMbak = shuryoYMbak;
     }
 
     public void setTanka(TextBoxNum tanka) {

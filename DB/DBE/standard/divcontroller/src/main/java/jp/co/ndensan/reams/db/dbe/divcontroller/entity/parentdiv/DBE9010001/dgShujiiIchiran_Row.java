@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 26 12:24:52 JST 2016 
+ * Fri Feb 03 13:41:14 JST 2017 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  */
 
 public class dgShujiiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
 
     private RString jotai;
     private RString shichoson;
@@ -42,6 +42,7 @@ public class dgShujiiIchiran_Row extends DataRow {
     private RString kozaNo;
     private RString kozaMeigininKana;
     private RString kozaMeiginin;
+    private RString kinyuKikan;
 
     public dgShujiiIchiran_Row() {
         super();
@@ -65,6 +66,7 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.kozaNo = RString.EMPTY;
         this.kozaMeigininKana = RString.EMPTY;
         this.kozaMeiginin = RString.EMPTY;
+        this.kinyuKikan = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
         this.setOriginalData("shujiiIryoKikanCode", shujiiIryoKikanCode);
@@ -85,9 +87,10 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.setOriginalData("kozaNo", kozaNo);
         this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.setOriginalData("kinyuKikan", kinyuKikan);
     }
 
-    public dgShujiiIchiran_Row(RString jotai, RString shichoson, TextBoxCode shujiiIryoKikanCode, RString iryoKikanCode, RString shujiiIryoKikan, RString shujiiIryoKikankana, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString daihyosha, RString daihyoshakana, RString jokyoFlag, RString shichosonCode, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin) {
+    public dgShujiiIchiran_Row(RString jotai, RString shichoson, TextBoxCode shujiiIryoKikanCode, RString iryoKikanCode, RString shujiiIryoKikan, RString shujiiIryoKikankana, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString daihyosha, RString daihyoshakana, RString jokyoFlag, RString shichosonCode, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin, RString kinyuKikan) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
@@ -109,6 +112,7 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.setOriginalData("kozaNo", kozaNo);
         this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
+        this.setOriginalData("kinyuKikan", kinyuKikan);
         this.jotai = jotai;
         this.shichoson = shichoson;
         this.shujiiIryoKikanCode = shujiiIryoKikanCode;
@@ -129,6 +133,7 @@ public class dgShujiiIchiran_Row extends DataRow {
         this.kozaNo = kozaNo;
         this.kozaMeigininKana = kozaMeigininKana;
         this.kozaMeiginin = kozaMeiginin;
+        this.kinyuKikan = kinyuKikan;
     }
 
     public RString getJotai() {
@@ -209,6 +214,10 @@ public class dgShujiiIchiran_Row extends DataRow {
 
     public RString getKozaMeiginin() {
         return kozaMeiginin;
+    }
+
+    public RString getKinyuKikan() {
+        return kinyuKikan;
     }
 
     public void setJotai(RString jotai) {
@@ -309,6 +318,11 @@ public class dgShujiiIchiran_Row extends DataRow {
     public void setKozaMeiginin(RString kozaMeiginin) {
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
         this.kozaMeiginin = kozaMeiginin;
+    }
+
+    public void setKinyuKikan(RString kinyuKikan) {
+        this.setOriginalData("kinyuKikan", kinyuKikan);
+        this.kinyuKikan = kinyuKikan;
     }
 
     // </editor-fold>

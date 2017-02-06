@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
@@ -313,9 +314,11 @@ public class NinteiChosainMaster {
                 row.getChosainKanaShimei(),
                 row.getChosaItakusakiCode().getValue(),
                 row.getChosaItakusakiMeisho(),
+                Seibetsu.男.get名称().equals(row.getSeibetsu()) ? Seibetsu.男.getコード() : Seibetsu.女.getコード(),
                 row.getSeibetsu(),
                 row.getChikuCode(),
                 row.getChiku(),
+                row.getChosainShikakuCode(),
                 row.getChosainShikaku(),
                 new RString(chosaKanoNinzu.toString()),
                 row.getYubinNo(),

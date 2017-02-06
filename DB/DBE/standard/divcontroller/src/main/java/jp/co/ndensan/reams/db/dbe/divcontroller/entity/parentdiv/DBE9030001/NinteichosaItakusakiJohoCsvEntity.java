@@ -57,46 +57,54 @@ public class NinteichosaItakusakiJohoCsvEntity {
     @CsvField(order = 12, name = "機関代表者カナ氏名")
     private RString 機関代表者カナ氏名;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 13, name = "調査委託区分")
+    @CsvField(order = 13, name = "調査委託区分コード")
+    private RString 調査委託区分コード;
+    @CsvField(order = 14, name = "調査委託区分")
     private RString 調査委託区分;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 14, name = "特定調査員の表示")
+    @CsvField(order = 15, name = "特定調査員の表示")
     private RString 特定調査員表示フラグ;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 15, name = "割付定員")
+    @CsvField(order = 16, name = "割付定員")
     private RString 割付定員;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 16, name = "割付地区コード")
+    @CsvField(order = 17, name = "割付地区コード")
     private RString 割付地区コード;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 17, name = "割付地区名称")
+    @CsvField(order = 18, name = "割付地区名称")
     private RString 割付地区名称;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 18, name = "自動割付可否")
+    @CsvField(order = 19, name = "自動割付可否")
     private RString 自動割付フラグ;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 19, name = "機関の区分")
+    @CsvField(order = 20, name = "機関の区分コード")
+    private RString 機関の区分コード;
+    @CsvField(order = 21, name = "機関の区分")
     private RString 機関の区分;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 20, name = "調査委託先の状況")
+    @CsvField(order = 22, name = "調査委託先の状況")
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
     private RString 状況フラグ;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 21, name = "金融機関コード")
+    @CsvField(order = 23, name = "金融機関コード")
     private RString 金融機関コード;
+    @CsvField(order = 24, name = "金融機関名称")
+    private RString 金融機関名称;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 22, name = "支店コード")
+    @CsvField(order = 25, name = "支店コード")
     private RString 支店コード;
+    @CsvField(order = 26, name = "支店")
+    private RString 支店;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 23, name = "預金種別")
+    @CsvField(order = 27, name = "預金種別")
     private RString 預金種別;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 24, name = "口座番号")
+    @CsvField(order = 28, name = "口座番号")
     private RString 口座番号;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 25, name = "口座名義人")
+    @CsvField(order = 29, name = "口座名義人")
     private RString 口座名義人;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 26, name = "漢字名義人")
+    @CsvField(order = 30, name = "漢字名義人")
     private RString 漢字名義人;
 }
