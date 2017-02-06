@@ -121,8 +121,6 @@ public class NinteichosaKekkaNyushuValidationHandler {
                     .thenAdd(NinteichosaKekkaNyushuValidationMessage.対象行を選択)
                     .ifNot(NinteichosaKekkaNyushuSpec.認定調査票入手一覧データの行選択チェック2)
                     .thenAdd(NinteichosaKekkaNyushuValidationMessage.複数選択不可)
-                    .ifNot(NinteichosaKekkaNyushuSpec.認定調査票入手一覧選択行の登録処理事前チェック)
-                    .thenAdd(NinteichosaKekkaNyushuValidationMessage.理由付き登録不可)
                     .messages());
             return messages;
         }
