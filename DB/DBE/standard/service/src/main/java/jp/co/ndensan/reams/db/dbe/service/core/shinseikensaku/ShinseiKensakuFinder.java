@@ -63,7 +63,12 @@ public class ShinseiKensakuFinder {
             ShinseiKensakuBusiness business = new ShinseiKensakuBusiness(entity);
             shinseiKensakuList.add(business);
         }
-        int totalcount = shinseiKensakuMapper.countShinseiJoho(parameter);
+        int totalcount;
+        if (list.isEmpty()) {
+            totalcount = 0;
+        } else {
+            totalcount = list.get(0).getTotalCount();
+        }
         return SearchResult.of(shinseiKensakuList, totalcount, parameter.getLimitCount() < totalcount);
     }
 }

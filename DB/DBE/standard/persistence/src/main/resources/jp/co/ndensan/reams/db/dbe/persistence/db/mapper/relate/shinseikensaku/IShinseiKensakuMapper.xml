@@ -48,15 +48,6 @@
         LIMIT #{limitCount}
     </select>
 
-    <select id="countShinseiJoho" resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
-            fetchSize="500">
-        SELECT
-            count(1)
-        FROM
-            <include refid="tablesWithParameter"/>
-    </select>
-
     <sql id="selectShinseiJoho">
     <!-- SELECT -->
         DbT5101NinteiShinseiJoho."shinseishoKanriNo",
@@ -84,7 +75,8 @@
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
         DbT5912ShujiiJoho."shujiiName",
         DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
-        DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+        DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
+        COUNT(*) OVER() as "totalCount"
     <!-- FROM -->
     </sql>
 
@@ -386,13 +378,17 @@
             AND DbT7051KoseiShichosonMaster."shichosonCode" = DbT5912ShujiiJoho."shichosonCode"
         LEFT JOIN
             rgdb."DbT5201NinteichosaIraiJoho" DbT5201NinteichosaIraiJoho
-            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo"
-            AND DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" =
-                (SELECT MAX(NinteichosaIraiJoho."ninteichosaIraiRirekiNo")
-                FROM rgdb."DbT5201NinteichosaIraiJoho" NinteichosaIraiJoho
-                WHERE NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-                AND NinteichosaIraiJoho."logicalDeletedFlag" = FALSE)
-                AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
+            ON  DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo"
+            AND NOT EXISTS (
+                    SELECT *
+                    FROM 
+                         rgdb."DbT5201NinteichosaIraiJoho" NinteichosaIraiJoho
+                    WHERE 
+                        NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                        AND NOT NinteichosaIraiJoho."logicalDeletedFlag"
+                        AND NinteichosaIraiJoho."ninteichosaIraiRirekiNo" <![CDATA[ > ]]> DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+            )
+            AND NOT DbT5201NinteichosaIraiJoho."logicalDeletedFlag"
         WHERE
             DbT5101NinteiShinseiJoho."logicalDeletedFlag" = false
             <if test="useHihokenshaNo">

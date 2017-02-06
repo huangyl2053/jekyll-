@@ -56,4 +56,5 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private int ikenshoIraiRirekiNo;
     private int ninteichosaIraiRirekiNo;
     private Code zenkaiKoroshoIfShikibetsuCode;
+    private int totalCount;
 }

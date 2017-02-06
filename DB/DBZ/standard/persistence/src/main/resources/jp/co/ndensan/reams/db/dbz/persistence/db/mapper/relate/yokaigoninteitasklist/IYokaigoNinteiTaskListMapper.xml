@@ -1078,7 +1078,7 @@
                                 rgdb."DbT5301ShujiiIkenshoIraiJoho"
                             WHERE
                                 "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
-                            AND "ikenshoIraiRirekiNo" > DbT5301_Tmp."ikenshoIraiRirekiNo"
+                            AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
                         )
                 ) DbT5301
             ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
@@ -1149,7 +1149,7 @@
                                 rgdb."DbT5301ShujiiIkenshoIraiJoho"
                             WHERE
                                 "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
-                            AND "ikenshoIraiRirekiNo" > DbT5301_Tmp."ikenshoIraiRirekiNo"
+                            AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
                         )
                 ) DbT5301
             ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
@@ -1218,7 +1218,7 @@
                                 rgdb."DbT5301ShujiiIkenshoIraiJoho"
                             WHERE
                                 "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
-                            AND "ikenshoIraiRirekiNo" > DbT5301_Tmp."ikenshoIraiRirekiNo"
+                            AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
                         )
                 ) DbT5301
             ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
