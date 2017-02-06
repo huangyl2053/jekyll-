@@ -25,11 +25,4 @@ public interface IYokaigoNinteiShinchokuJohoShokaiMapper {
      */
     List<YokaigoNinteiShinchokuJohoShokaiRelateEntity> get申請者一覧内容(YokaigoNinteiParamter paramter);
 
-    /**
-     * 指定のパラメータに該当する申請者の件数を返却します。
-     *
-     * @param paramter 申請者一覧内容検索のパラメータ
-     * @return 該当件数
-     */
-    int count申請者(YokaigoNinteiParamter paramter);
 }

@@ -66,8 +66,13 @@ public class YokaigoNinteiShinchokuJohoShokaiFinder {
         for (YokaigoNinteiShinchokuJohoShokaiRelateEntity entity : entityList) {
             yokaigoNinteiShinchokuJohoList.add(new YokaigoNinteiShinchokuJoho(entity));
         }
-        int totalCount = mapper.count申請者(parameter);
+        int totalCount;
+        if (entityList.isEmpty()) {
+            totalCount = 0;
+        } else {
+            totalCount = entityList.get(0).getTotalCount();
+        }
         boolean exceedsLimit = parameter.isMaximumDisplayNumberFlag() && parameter.getMaximumDisplayNumber() < totalCount;
-        return SearchResult.of(yokaigoNinteiShinchokuJohoList, mapper.count申請者(parameter), exceedsLimit);
+        return SearchResult.of(yokaigoNinteiShinchokuJohoList, totalCount, exceedsLimit);
     }
 }

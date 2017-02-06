@@ -61,16 +61,6 @@
         </if>
     </select>
 
-    <select id="count申請者" resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter"
-            fetchSize="500">
-        <include refid="mainTable"/>
-        SELECT
-        count(1)
-        FROM
-        <include refid="tablesWithParameter"/>
-    </select>
-
     <sql id="selectShinseiIchiran">
         <!-- SELECT -->
         DbT7051."shichosonMeisho",
@@ -111,7 +101,8 @@
         DbT5101."seinengappiYMD",
         DbT5101."age",
         DbT5101."shinseishoKanriNo",
-        DbT5201."ninteichosaIraiRirekiNo"
+        DbT5201."ninteichosaIraiRirekiNo",
+        COUNT(*) OVER() as "totalCount" --1クエリで全体の件数も取得する
     </sql>
 
     <sql id="mainTable">
