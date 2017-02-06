@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaKekkaNyushuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -76,11 +76,6 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getNinteichosakekkainput().getCcdHokenshaList();
-    }
-
     @JsonIgnore
     public RadioButton getRadJotaiKubun() {
         return this.getNinteichosakekkainput().getRadJotaiKubun();
@@ -149,6 +144,11 @@ public class NinteichosaKekkaNyushuDiv extends Panel {
     @JsonIgnore
     public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.getNinteichosakekkainput().setTxtMaxKensu(txtMaxKensu);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getNinteichosakekkainput().getCcdHokenshaList();
     }
 
     @JsonIgnore

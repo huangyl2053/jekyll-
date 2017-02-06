@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -87,7 +88,22 @@ public class GaikyoTokkiNyuroku {
      * @return レスポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onActive(GaikyoTokkiNyurokuDiv div) {
-        return onLoad(div);
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+
+        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
+        model.set申請書管理番号(申請書管理番号.getColumnValue());
+        model.set認定申請日(ViewStateHolder.get(ViewStateKeys.申請日, RString.class));
+        model.set調査実施日(ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class));
+        model.set調査実施場所(ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class));
+        model.set実施場所名称(ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class));
+        model.set所属機関コード(ViewStateHolder.get(ViewStateKeys.所属機関コード, RString.class));
+        model.set所属機関名称(ViewStateHolder.get(ViewStateKeys.所属機関名称, RString.class));
+        model.set記入者コード(ViewStateHolder.get(ViewStateKeys.記入者コード, RString.class));
+        model.set記入者名称(ViewStateHolder.get(ViewStateKeys.記入者名称, RString.class));
+        model.set調査区分(ViewStateHolder.get(ViewStateKeys.調査区分, RString.class));
+        div.getChosaJisshisha().getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
+        div.getChosaJisshisha().getCcdChosaJisshishaJoho().intialize(model);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -146,26 +162,6 @@ public class GaikyoTokkiNyuroku {
      * @return スポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onClick_btnBack(GaikyoTokkiNyurokuDiv div) {
-
-        if (!ResponseHolder.isReRequest() && (!div.getTxtJutakuKaishu().getValue().isEmpty()
-                || !div.getTxtChosaTaishoShuso().getValue().isEmpty()
-                || !div.getTxtChosaTishoKazokuJokyo().getValue().isEmpty()
-                || !div.getTxtChosaTaishoKyojuKankyo().getValue().isEmpty()
-                || !div.getTxtNichijoShiyoKikiUmu().getValue().isEmpty())) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
-                    UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            前排他キーの解除();
-            return ResponseData.of(div).forwardWithEventName(DBE2210002TransitionEventName.認定調査結果登録へ戻る).respond();
-        } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
-        }
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE2210002TransitionEventName.認定調査結果登録へ戻る).respond();
     }

@@ -18,7 +18,9 @@ public enum DBE2210001TransitionEventName implements IContainerEvents {
     特記事項一覧を表示("特記事項一覧を表示"),
     概況特記入力を表示("概況特記入力を表示"),
     処理終了("処理終了"),
-    検索に戻る("検索に戻る");
+    検索に戻る("検索に戻る"),
+    基本運用に進む("基本運用に進む"),
+    基本運用に戻る("基本運用に戻る");
 
     private final RString name;
 
