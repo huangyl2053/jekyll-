@@ -60,34 +60,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
-    private static final RString KEY3 = new RString("3");
-    private static final RString KEY4 = new RString("4");
-    private static final RString KEY5 = new RString("5");
     private static final RString CONFIGVALUE1 = new RString("1");
     private static final RString CONFIGVALUE2 = new RString("2");
     private static final RString CONFIGVALUE3 = new RString("3");
-    private static final RString CONFIGVALUE4 = new RString("4");
-
-    private static final RString DBE221001_KATAMEN = new RString("DBE221001_ChosahyoGaikyochosa_Katamen");
-    private static final RString DBE221001_RYOMEN = new RString("DBE221001_ChosahyoGaikyochosa_Ryomen_Color");
-    private static final RString DBE221001 = new RString("DBE221011_chosahyoGaikyochosa");
-    private static final RString DBE221002_KATAMEN = new RString("DBE221002_ChosahyoKihonchosaKatamen");
-    private static final RString DBE221012 = new RString("DBE221012_chosahyoKihonchosa");
-    private static final RString DBE221024_NASHI_COLOR = new RString("DBE221024_chosahyoTokkijiko_Nashi_Color");
-    private static final RString DBE221024_NASHI_MONO = new RString("DBE221024_chosahyoTokkijiko_Nashi_Mono");
-    private static final RString DBE221021_ARI_COLOR = new RString("DBE221021_chosahyoTokkijiko_Ari_Color");
-    private static final RString DBE221021_ARI_MONO = new RString("DBE221021_chosahyoTokkijiko_Ari_Mono");
-    private static final RString DBE221041 = new RString("DBE221041_tokkijikoOCR");
-    private static final RString DBE221042_RYOMEN = new RString("DBE221042_tokkijikoOCR_Ryomen");
-    private static final RString DBE221042_KATAMEN = new RString("DBE221042_tokkijikoOCR_Katamen");
-    private static final RString DBE221031_FREE_COLOR = new RString("DBE221031_chosahyoTokkijiko_Free_Color");
-    private static final RString DBE221031_FREE_MONO = new RString("DBE221031_chosahyoTokkijiko_Free_Mono");
-    private static final RString DBE231011_RYOMEN_COLOR = new RString("DBE231011_ikenshokinyuyoshiOCR_Ryomen_Color");
-    private static final RString DBE231011_KATAMEN_COLOR = new RString("DBE231011_ikenshokinyuyoshiOCR_Katamen_Color");
-    private static final RString DBE231012 = new RString("DBE231012_ikenshokinyuyoshiOCR");
-    private static final RString DBE231014 = new RString("DBE231014_ikenshokinyuyoshiOCR");
-    private static final RString DBE231001_RYOMEN_MONO = new RString("DBE231001_ikenshokinyuyoshi_Ryomen_Mono");
-    private static final RString DBE231001_KATAMEN_MONO = new RString("DBE231001_ikenshokinyuyoshi_Katamen_Mono");
 
     /**
      * 共通子DIVを初期化します。

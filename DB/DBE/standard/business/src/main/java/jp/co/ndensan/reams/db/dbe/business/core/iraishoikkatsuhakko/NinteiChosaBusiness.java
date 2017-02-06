@@ -89,6 +89,8 @@ public class NinteiChosaBusiness {
     private static final RString YOKAIGOJOTAIKUBUN24 = new RString("24");
     private static final RString YOKAIGOJOTAIKUBUN25 = new RString("25");
     private static final RString TITLE = new RString("調査票差異チェック票");
+    private static final RString SHOKISAIHOKENSHANO = new RString("【証記載保険者番号】");
+    private static final RString HOKENSHANAME = new RString("【保険者名称】");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
     private static final RString NINTEIOCHOSAIRAISHO = new RString("【認定調査依頼書印刷区分】");
@@ -483,6 +485,20 @@ public class NinteiChosaBusiness {
             shinseiDD1 = RString.EMPTY;
             shinseiDD2 = RString.EMPTY;
         }
+        RString ninteiYY;
+        RString ninteiMM;
+        RString ninteiDD;
+        RString zenkaiNinteiDay = entity.get前回認定年月日();
+        if (zenkaiNinteiDay != null && RDate.canConvert(zenkaiNinteiDay)) {
+            Wareki zenkaiNinteiYMDWareki = new RDate(zenkaiNinteiDay.toString()).wareki();
+            ninteiYY = zenkaiNinteiYMDWareki.getYear();
+            ninteiMM = zenkaiNinteiYMDWareki.getMonth();
+            ninteiDD = zenkaiNinteiYMDWareki.getDay();
+        } else {
+            ninteiYY = RString.EMPTY;
+            ninteiMM = RString.EMPTY;
+            ninteiDD = RString.EMPTY;
+        }
         RString 要支援 = RString.EMPTY;
         if (YOKAIGOJOTAIKUBUN12.equals(entity.get前回要介護状態区分コード())
                 || YOKAIGOJOTAIKUBUN13.equals(entity.get前回要介護状態区分コード())) {
@@ -565,9 +581,9 @@ public class NinteiChosaBusiness {
                 ? RensakusakiTsuzukigara.toValue(entity.get連絡先続柄()).get名称() : RString.EMPTY,
                 RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(0, INT4) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT4, INT6) : RString.EMPTY,
-                !RString.isNullOrEmpty(entity.get前回認定年月日()) ? entity.get前回認定年月日().substring(INT6, INT8) : RString.EMPTY,
+                ninteiYY,
+                ninteiMM,
+                ninteiDD,
                 YOKAIGOJOTAIKUBUN01.equals(entity.get前回要介護状態区分コード()) ? 記号 : RString.EMPTY,
                 要支援,
                 要支援詳細,
@@ -751,6 +767,14 @@ public class NinteiChosaBusiness {
     public List<RString> set出力条件() {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(SHOKISAIHOKENSHANO);
+        builder.append(ConvertDate(processParamter.getShoKisaiHokenshaNo()));
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(HOKENSHANAME);
+        builder.append(ConvertDate(processParamter.getHokenshaName()));
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(IRAIFROMYMD);
         builder.append(ConvertDate(processParamter.getIraiFromYMD()));
         出力条件.add(builder.toRString());

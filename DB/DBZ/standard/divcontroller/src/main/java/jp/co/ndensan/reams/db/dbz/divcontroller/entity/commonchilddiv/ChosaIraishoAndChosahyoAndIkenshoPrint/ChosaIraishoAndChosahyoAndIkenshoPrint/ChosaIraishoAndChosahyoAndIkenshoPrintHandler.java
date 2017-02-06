@@ -69,6 +69,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -728,7 +729,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get生年月日(),
                     business.get住所(),
                     business.get電話番号(),
-                    set認定調査提出期限(business)
+                    set認定調査提出期限(business),
+                    business.get市町村コード(),
+                    business.get認定調査委託先コード()
             );
             chosaIraishoHeadItemList.add(item);
         }
@@ -761,7 +764,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(business.get認定調査委託先コード());
                 RString 生年月日 = business.get生年月日();
                 RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+                RString ninteiYY;
+                RString ninteiMM;
+                RString ninteiDD;
                 RString 前回認定年月日 = business.get前回認定年月日();
+                if (前回認定年月日 != null && RDate.canConvert(前回認定年月日)) {
+                    Wareki zenkaiNinteiYMDWareki = new RDate(前回認定年月日.toString()).wareki();
+                    ninteiYY = zenkaiNinteiYMDWareki.getYear();
+                    ninteiMM = zenkaiNinteiYMDWareki.getMonth();
+                    ninteiDD = zenkaiNinteiYMDWareki.getDay();
+                } else {
+                    ninteiYY = RString.EMPTY;
+                    ninteiMM = RString.EMPTY;
+                    ninteiDD = RString.EMPTY;
+                }
                 RString 前回要介護状態区分コード = business.get前回要介護状態区分コード();
                 RString 要支援 = RString.EMPTY;
                 if (YOKAIGOJOTAIKUBUN12.equals(前回要介護状態区分コード)
@@ -836,9 +852,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
                         RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_6) : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_6, INDEX_8) : RString.EMPTY,
+                        ninteiYY,
+                        ninteiMM,
+                        ninteiDD,
                         YOKAIGOJOTAIKUBUN01.equals(前回要介護状態区分コード) ? 記号 : RString.EMPTY,
                         要支援,
                         get要支援詳細(前回要介護状態区分コード),
@@ -1350,7 +1366,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
-                    business.get医療機関郵便番号(),
+                    new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo(),
                     business.get医療機関住所(),
                     business.get医療機関名称(),
                     business.get代表者名(),

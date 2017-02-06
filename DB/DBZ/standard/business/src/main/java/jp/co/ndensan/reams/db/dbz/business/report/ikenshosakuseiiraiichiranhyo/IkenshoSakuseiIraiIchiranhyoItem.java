@@ -99,10 +99,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
         this.ninshoshaShimeiKakenai = ninshoshaShimeiKakenai;
         this.koinMojiretsu = koinMojiretsu;
         this.koinShoryaku = koinShoryaku;
-        RString 郵便番号 = yubinNo1;
-        if (!RString.isNullOrEmpty(郵便番号)) {
-            this.yubinNo1 = 郵便番号.substring(0, 3).concat("-").concat(郵便番号.substring(3, 7));
-        }
+        this.yubinNo1 = yubinNo1;
         this.jushoText = jushoText;
         this.kikanNameText = kikanNameText;
         this.shimeiText = shimeiText;
