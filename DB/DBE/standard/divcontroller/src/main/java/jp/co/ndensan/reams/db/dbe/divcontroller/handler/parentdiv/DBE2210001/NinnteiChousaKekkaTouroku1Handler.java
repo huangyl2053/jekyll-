@@ -841,216 +841,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         return 初期の基本調査;
     }
-//
-//    /**
-//     * 入力内容の変更が存在しないかを判断します。
-//     *
-//     * @param 元の市町村特別給付TXT 元の市町村特別給付TXT
-//     * @param 元の介護保険給付以外の在宅サービスTXT 元の介護保険給付以外の在宅サービスTXT
-//     * @param 元の特記 元の特記
-//     * @param 初期の概況調査場所 初期の概況調査場所
-//     * @param 現在の概況調査場所 現在の概況調査場所
-//     * @param 初期のサービス区分 初期のサービス区分
-//     * @param 現在のサービス区分 現在のサービス区分
-//     * @param 初期の予防給付サービス 初期の予防給付サービス
-//     * @param 初期の介護給付サービス 初期の介護給付サービス
-//     * @param 初期の施設利用 初期の施設利用
-//     * @param 初期の施設連絡先 初期の施設連絡先
-//     * @param 初期の基本調査 初期の基本調査
-//     * @return 判断結果(true:変更がない false:変更があり)
-//     */
-//    public boolean is入力内容変更なし(RString 元の市町村特別給付TXT, RString 元の介護保険給付以外の在宅サービスTXT,
-//            RString 元の特記, RString 初期の概況調査場所, RString 現在の概況調査場所,
-//            RString 初期のサービス区分, RString 現在のサービス区分,
-//            RString 初期の予防給付サービス, RString 初期の介護給付サービス,
-//            RString 初期の施設利用, RString 初期の施設連絡先, RString 初期の基本調査) {
-//
-//        boolean is在宅等しい = is在宅等しい(初期の予防給付サービス, 初期の介護給付サービス);
-//        boolean is市町村特別給付_等しい = is等しい(元の市町村特別給付TXT, div.getTxtShichosonTokubetsuKyufu().getValue());
-//        boolean is介護保険給付以外の在宅サービス_等しい = is等しい(元の介護保険給付以外の在宅サービスTXT, div.getTxtKyufuIgaiJutakuService().getValue());
-//        boolean is特記等しい = is等しい(元の特記,
-//                div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getValue());
-//        boolean is施設等しい = is施設等しい(初期の施設利用);
-//        boolean is施設連絡先 = is施設連絡先等しい(初期の施設連絡先);
-//
-//        boolean is状況コード等しい = is等しい(初期の概況調査場所, 現在の概況調査場所);
-//        boolean サービス区分等しい = is等しい(初期のサービス区分, 現在のサービス区分);
-//
-//        return is在宅等しい && is市町村特別給付_等しい && is介護保険給付以外の在宅サービス_等しい && is特記等しい
-//                && is施設等しい && is施設連絡先 && is状況コード等しい && サービス区分等しい;
-//
-//    }
-//
-//    /**
-//     * 共有子DIV調査実施者の変更が存在しないかを判断します。
-//     *
-//     * @param 調査実施日 調査実施日
-//     * @param 調査実施場所 調査実施場所
-//     * @param 実施場所名称 実施場所名称
-//     * @param 所属機関 所属機関
-//     * @param 記入者 記入者
-//     * @return 判断結果(true:変更がない false:変更があり)
-//     */
-//    public boolean is調査実施者等しい(RString 調査実施日, RString 調査実施場所, RString 実施場所名称, RString 所属機関, RString 記入者) {
-//
-//        boolean is調査実施日等しい = is等しい(調査実施日, div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getText());
-//        boolean is調査実施場所等しい = is等しい(調査実施場所, div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue());
-//        boolean is実施場所名称等しい = is等しい(実施場所名称, div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getText());
-//
-//        boolean is所属機関等しい = is等しい(所属機関, div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText());
-//        boolean is記入者等しい = is等しい(記入者, div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
-//
-//        return is調査実施日等しい && is調査実施場所等しい && is実施場所名称等しい && is所属機関等しい && is記入者等しい;
-//    }
-//
-//    private boolean is在宅等しい(RString 初期の予防給付サービス, RString 初期の介護給付サービス) {
-//        boolean is在宅等しい;
-//        RString 選択値 = div.getRadGenzaiservis().getSelectedKey();
-//        RString 現在の設定値 = RString.EMPTY;
-//        if (予防給付サービス_選択.toString().equalsIgnoreCase(選択値.toString())) {
-//            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
-//            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
-//                if (row.getServiceJokyo().getValue() != null) {
-//                    現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
-//                } else {
-//                    現在の設定値 = 現在の設定値.concat(カンマ);
-//                }
-//            }
-//            is在宅等しい = is等しい(初期の予防給付サービス, 現在の設定値);
-//        } else if (介護給付サービス_選択.toString().equalsIgnoreCase(選択値.toString())) {
-//            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
-//            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
-//                if (row.getServiceJokyo().getValue() != null) {
-//                    現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
-//                } else {
-//                    現在の設定値 = 現在の設定値.concat(カンマ);
-//                }
-//            }
-//            is在宅等しい = is等しい(初期の介護給付サービス, 現在の設定値);
-//        } else {
-//            is在宅等しい = true;
-//        }
-//        return is在宅等しい;
-//    }
-//
-//    private boolean is施設等しい(RString 初期の施設利用) {
-//
-//        List<dgRiyoShisetsu_Row> shisetsuList = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().getDataSource();
-//        RString 施設利用 = RString.EMPTY;
-//        for (dgRiyoShisetsu_Row row : shisetsuList) {
-//            施設利用 = 施設利用.concat(new RString(row.getShisetsuRiyoUmu().toString())).concat(カンマ);
-//        }
-//        return is等しい(初期の施設利用, 施設利用);
-//    }
-//
-//    private boolean is施設連絡先等しい(RString 初期の施設連絡先) {
-//
-//        RString 施設連絡先;
-//        RString 施設名称 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().getValue();
-//        RString 郵便 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo().getValue().getColumnValue();
-//        RString 住所 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho().getDomain().getColumnValue();
-//        RString 電話番号 = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().getDomain().getColumnValue();
-//
-//        if (施設名称.isEmpty() && 郵便.isEmpty() && 住所.isEmpty() && 電話番号.isEmpty()) {
-//            施設連絡先 = null;
-//        } else {
-//            施設連絡先 = 施設名称.concat(カンマ).concat(郵便).concat(カンマ).concat(住所).concat(カンマ)
-//                    .concat(電話番号);
-//        }
-//        return is等しい(初期の施設連絡先, 施設連絡先);
-//
-//    }
-//
-//    /**
-//     * 基本調査変更なしかを判断します。
-//     *
-//     * @param 初期の基本調査 初期の基本調査
-//     * @param 第1群List 第1群List
-//     * @param 第2群List 第2群List
-//     * @param 第3群List 第3群List
-//     * @param 第4群List 第4群List
-//     * @param 第5群List 第5群List
-//     * @param 特別な医療List 特別な医療List
-//     * @param 自立度List 自立度List
-//     * @return true:基本調査入力変更なし
-//     */
-//    public boolean is基本調査等しい(RString 初期の基本調査, ArrayList<KihonChosaInput> 第1群List, ArrayList<KihonChosaInput> 第2群List,
-//            ArrayList<KihonChosaInput> 第3群List, ArrayList<KihonChosaInput> 第4群List,
-//            ArrayList<KihonChosaInput> 第5群List, ArrayList<KihonChosaInput> 特別な医療List, ArrayList<KihonChosaInput> 自立度List) {
-//        RString 現在の基本調査 = get現在の基本調査(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-//        return is等しい(現在の基本調査, 初期の基本調査);
-//    }
-//
-//    private boolean is等しい(RString beforeVal, RString afterVal) {
-//        if ((beforeVal == null || beforeVal.isEmpty()) && (afterVal == null || afterVal.isEmpty())) {
-//            return true;
-//        } else if ((beforeVal == null || beforeVal.isEmpty()) && (afterVal != null && !afterVal.isEmpty())) {
-//            return false;
-//        }
-//
-//        if (beforeVal != null && afterVal != null) {
-//            return beforeVal.equals(afterVal);
-//        }
-//        return false;
-//    }
-//
-//    @SuppressWarnings("unchecked")
-//    private RString get現在の基本調査(ArrayList<KihonChosaInput> 第1群List, ArrayList<KihonChosaInput> 第2群List,
-//            ArrayList<KihonChosaInput> 第3群List, ArrayList<KihonChosaInput> 第4群List,
-//            ArrayList<KihonChosaInput> 第5群List, ArrayList<KihonChosaInput> 特別な医療List, ArrayList<KihonChosaInput> 自立度List) {
-//
-//        RString 第1群 = RString.EMPTY;
-//        RString 第2群 = RString.EMPTY;
-//        RString 第3群 = RString.EMPTY;
-//        RString 第4群 = RString.EMPTY;
-//        RString 第5群 = RString.EMPTY;
-//        RString 特別な医療 = RString.EMPTY;
-//        RString 自立度 = RString.EMPTY;
-//
-//        if (第1群List != null) {
-//            for (KihonChosaInput 基本情報 : 第1群List) {
-//                第1群 = 第1群.concat(基本情報.get調査項目());
-//            }
-//        }
-//        if (第2群List != null) {
-//            for (KihonChosaInput 基本情報 : 第2群List) {
-//                第2群 = 第2群.concat(基本情報.get調査項目());
-//            }
-//        }
-//        if (第3群List != null) {
-//            for (KihonChosaInput 基本情報 : 第3群List) {
-//                第3群 = 第3群.concat(基本情報.get調査項目());
-//            }
-//        }
-//        if (第4群List != null) {
-//            for (KihonChosaInput 基本情報 : 第4群List) {
-//                第4群 = 第4群.concat(基本情報.get調査項目());
-//            }
-//        }
-//        if (第5群List != null) {
-//            for (KihonChosaInput 基本情報 : 第5群List) {
-//                第5群 = 第5群.concat(基本情報.get調査項目());
-//            }
-//        }
-//        if (特別な医療List != null) {
-//            for (KihonChosaInput 基本情報 : 特別な医療List) {
-//                特別な医療 = 特別な医療.concat(String.valueOf(基本情報.get調査項目()));
-//            }
-//        }
-//        if (自立度List != null) {
-//            int i = 0;
-//            for (KihonChosaInput 基本情報 : 自立度List) {
-//                if (i == 0) {
-//                    自立度 = 自立度.concat(基本情報.get障害高齢者自立度().getKey());
-//                } else if (i == 1) {
-//                    自立度 = 自立度.concat(基本情報.get認知症高齢者自立度().getKey());
-//                }
-//                i++;
-//            }
-//        }
-//
-//        return 第1群.concat(第2群).concat(第3群).concat(第4群).concat(第5群).concat(特別な医療).concat(自立度);
-//    }
 
     /**
      * 基本調査の必須入力チェックを行います。
@@ -1397,17 +1187,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         dbt5201Manager.save認定調査依頼情報(dbt5201Bulid.build());
     }
 
-    private EntityDataState getDbT5201EntityDataState(NinteichosaIraiJoho dbt5201) {
-        if (ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
-            return EntityDataState.Modified;
-        }
-        if (dbt5201.get認定調査回数() == 1) {
-            return EntityDataState.Unchanged;
-        } else {
-            return EntityDataState.Modified;
-        }
-    }
-
     private void 概況調査の更新() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
@@ -1525,14 +1304,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
     }
 
-    private EntityDataState getDbT5208EntityDataState(NinteichosahyoServiceJokyoFlag dbt5208, RString 住宅改修) {
-        if (dbt5208.isサービスの状況フラグ() == is住宅改修あり(住宅改修)) {
-            return EntityDataState.Unchanged;
-        } else {
-            return EntityDataState.Modified;
-        }
-    }
-
     private void 記入項目の更新() {
         saveサービス状況記入項目(市町村特別給付_連番);
         saveサービス状況記入項目(介護保険給付外の在宅サービス_連番);
@@ -1576,14 +1347,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         dbt5209Manager.save認定調査票_概況調査_記入項目(dbt5209Builder.build());
     }
 
-    private EntityDataState getDbT5209EntityDataState(NinteichosahyoKinyuItem dbt5209, RString サービス状況) {
-        if (dbt5209.getサービスの状況記入().equals(サービス状況)) {
-            return EntityDataState.Unchanged;
-        } else {
-            return EntityDataState.Modified;
-        }
-    }
-
     private void 施設利用の更新() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
@@ -1617,14 +1380,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
             dbt5210 = dbt5210.deleted();
             NinteichosahyoShisetsuRiyoBuilder dbt5210Builder = dbt5210.createBuilderForEdit();
             dbt5210Manager.save認定調査票_概況調査_施設利用(dbt5210Builder.build());
-        }
-    }
-
-    private EntityDataState getDbT5210EntityDataState(NinteichosahyoShisetsuRiyo dbt5210, dgRiyoShisetsu_Row row) {
-        if (dbt5210.is施設利用フラグ() == row.getShisetsuRiyoUmu()) {
-            return EntityDataState.Unchanged;
-        } else {
-            return EntityDataState.Modified;
         }
     }
 
@@ -1679,14 +1434,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         dbt5211 = dbt5211.deleted();
         NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
         manager.save認定調査票_基本調査_調査項目(builder.build());
-    }
-
-    private EntityDataState getDbT5211EntityDataState(NinteichosahyoChosaItem dbt5211, RString 調査項目) {
-        if (dbt5211.get調査項目().equals(調査項目)) {
-            return EntityDataState.Unchanged;
-        } else {
-            return EntityDataState.Modified;
-        }
     }
 
     private void 基本調査第7群更新(ArrayList<KihonChosaInput> 基本調査群List, boolean isDelete) {
@@ -1808,14 +1555,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
             dbt5207 = dbt5207.deleted();
             NinteichosahyoServiceJokyoBuilder dbt5207Builder = dbt5207.createBuilderForEdit();
             dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
-        }
-    }
-
-    private EntityDataState getDbT5207EntityDataState(NinteichosahyoServiceJokyo dbt5207, int サービス利用状況) {
-        if (dbt5207.getサービスの状況() == サービス利用状況) {
-            return EntityDataState.Unchanged;
-        } else {
-            return EntityDataState.Modified;
         }
     }
 

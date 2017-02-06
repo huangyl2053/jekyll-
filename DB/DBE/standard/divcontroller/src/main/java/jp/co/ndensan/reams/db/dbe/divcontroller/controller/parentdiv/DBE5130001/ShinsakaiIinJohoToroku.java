@@ -549,7 +549,7 @@ public class ShinsakaiIinJohoToroku {
         RString 審査会委員開始日 = RString.EMPTY;
         RString 審査会委員終了日 = RString.EMPTY;
         if (!(row.getBarthYMD().getValue() == null) && !row.getBarthYMD().getValue().toDateString().isEmpty()) {
-            BirthYMD = row.getBarthYMD().getValue().wareki().toDateString();
+            BirthYMD = editCsv日付(row.getBarthYMD().getValue());
         }
         if (!(row.getShinsakaiIinKaishiYMD().getValue() == null) && !row.getShinsakaiIinKaishiYMD().getValue().toDateString().isEmpty()) {
             審査会委員開始日 = editCsv日付(row.getShinsakaiIinKaishiYMD().getValue());
@@ -621,7 +621,7 @@ public class ShinsakaiIinJohoToroku {
         RString 審査会委員開始日 = RString.EMPTY;
         RString 審査会委員終了日 = RString.EMPTY;
         if (!(row.getBarthYMD().getValue() == null) && !row.getBarthYMD().getValue().toDateString().isEmpty()) {
-            BirthYMD = row.getBarthYMD().getValue().wareki().toDateString();
+            BirthYMD = editCsv日付(row.getBarthYMD().getValue());
         }
         if (!(row.getShinsakaiIinKaishiYMD().getValue() == null) && !row.getShinsakaiIinKaishiYMD().getValue().toDateString().isEmpty()) {
             審査会委員開始日 = editCsv日付(row.getShinsakaiIinKaishiYMD().getValue());

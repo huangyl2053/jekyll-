@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,6 +26,8 @@ public class ShujiiIchiranDiv extends Panel {
     private Button btnInsert;
     @JsonProperty("btnOutputCsv")
     private ButtonDownLoad btnOutputCsv;
+    @JsonProperty("btnCsvKozaNashi")
+    private ButtonDownLoad btnCsvKozaNashi;
     @JsonProperty("PanelShujiiIchiranBatchParameter")
     private PanelShujiiIchiranBatchParameterDiv PanelShujiiIchiranBatchParameter;
 
@@ -69,6 +71,24 @@ public class ShujiiIchiranDiv extends Panel {
     @JsonProperty("btnOutputCsv")
     public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
         this.btnOutputCsv = btnOutputCsv;
+    }
+
+    /*
+     * getbtnCsvKozaNashi
+     * @return btnCsvKozaNashi
+     */
+    @JsonProperty("btnCsvKozaNashi")
+    public ButtonDownLoad getBtnCsvKozaNashi() {
+        return btnCsvKozaNashi;
+    }
+
+    /*
+     * setbtnCsvKozaNashi
+     * @param btnCsvKozaNashi btnCsvKozaNashi
+     */
+    @JsonProperty("btnCsvKozaNashi")
+    public void setBtnCsvKozaNashi(ButtonDownLoad btnCsvKozaNashi) {
+        this.btnCsvKozaNashi = btnCsvKozaNashi;
     }
 
     /*

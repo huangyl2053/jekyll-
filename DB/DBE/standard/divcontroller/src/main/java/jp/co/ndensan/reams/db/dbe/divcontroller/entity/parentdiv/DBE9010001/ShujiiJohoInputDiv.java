@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -57,8 +57,8 @@ public class ShujiiJohoInputDiv extends Panel {
     private KozaJohoDiv KozaJoho;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
-    @JsonProperty("btnTorikeshi")
-    private Button btnTorikeshi;
+    @JsonProperty("btnModoru")
+    private Button btnModoru;
     @JsonProperty("btnshujiiinsert")
     private Button btnshujiiinsert;
     @JsonProperty("hdnkey_KamokuCode")
@@ -381,21 +381,21 @@ public class ShujiiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnTorikeshi
-     * @return btnTorikeshi
+     * getbtnModoru
+     * @return btnModoru
      */
-    @JsonProperty("btnTorikeshi")
-    public Button getBtnTorikeshi() {
-        return btnTorikeshi;
+    @JsonProperty("btnModoru")
+    public Button getBtnModoru() {
+        return btnModoru;
     }
 
     /*
-     * setbtnTorikeshi
-     * @param btnTorikeshi btnTorikeshi
+     * setbtnModoru
+     * @param btnModoru btnModoru
      */
-    @JsonProperty("btnTorikeshi")
-    public void setBtnTorikeshi(Button btnTorikeshi) {
-        this.btnTorikeshi = btnTorikeshi;
+    @JsonProperty("btnModoru")
+    public void setBtnModoru(Button btnModoru) {
+        this.btnModoru = btnModoru;
     }
 
     /*

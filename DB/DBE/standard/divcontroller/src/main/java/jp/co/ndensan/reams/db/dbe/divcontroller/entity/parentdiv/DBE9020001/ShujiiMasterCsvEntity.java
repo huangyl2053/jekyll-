@@ -31,21 +31,23 @@ public class ShujiiMasterCsvEntity {
     private final RString shujiiIryoKikanCode;
     @CsvField(order = 70, name = "主治医医療機関名称")
     private final RString shujiiIryoKikan;
-    @CsvField(order = 80, name = "性別")
+    @CsvField(order = 80, name = "性別コード")
+    private final RString seibetsuCode;
+    @CsvField(order = 90, name = "性別")
     private final RString seibetsu;
-    @CsvField(order = 90, name = "診療科")
+    @CsvField(order = 100, name = "診療科")
     private final RString shinryoka;
-    @CsvField(order = 100, name = "指定医")
+    @CsvField(order = 110, name = "指定医")
     private final RString shiteii;
-    @CsvField(order = 110, name = "状況フラグ")
+    @CsvField(order = 120, name = "状況フラグ")
     private final RString jokyoFlag;
-    @CsvField(order = 120, name = "郵便番号")
+    @CsvField(order = 130, name = "郵便番号")
     private final RString yubinNo;
-    @CsvField(order = 130, name = "住所")
+    @CsvField(order = 140, name = "住所")
     private final RString jusho;
-    @CsvField(order = 140, name = "電話番号")
+    @CsvField(order = 150, name = "電話番号")
     private final RString telNo;
-    @CsvField(order = 150, name = "ＦＡＸ番号")
+    @CsvField(order = 160, name = "ＦＡＸ番号")
     private final RString faxNo;
 
     /**
@@ -58,6 +60,7 @@ public class ShujiiMasterCsvEntity {
      * @param shujiiKanaShimei 主治医カナ
      * @param shujiiIryoKikanCode 主治医医療機関コード
      * @param shujiiIryoKikan 主治医医療機関名称
+     * @param seibetsuCode 性別コード
      * @param seibetsu 性別
      * @param shinryoka 診療科
      * @param jokyoFlag 状況フラグ
@@ -75,6 +78,7 @@ public class ShujiiMasterCsvEntity {
             RString shujiiKanaShimei,
             RString shujiiIryoKikanCode,
             RString shujiiIryoKikan,
+            RString seibetsuCode,
             RString seibetsu,
             RString shinryoka,
             RString shiteii,
@@ -90,6 +94,7 @@ public class ShujiiMasterCsvEntity {
         this.shujiiKanaShimei = shujiiKanaShimei;
         this.shujiiIryoKikanCode = shujiiIryoKikanCode;
         this.shujiiIryoKikan = shujiiIryoKikan;
+        this.seibetsuCode = seibetsuCode;
         this.seibetsu = seibetsu;
         this.shinryoka = shinryoka;
         this.shiteii = shiteii;

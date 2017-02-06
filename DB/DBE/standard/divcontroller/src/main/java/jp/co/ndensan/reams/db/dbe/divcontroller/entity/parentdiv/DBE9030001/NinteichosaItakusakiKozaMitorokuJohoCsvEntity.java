@@ -44,20 +44,24 @@ public class NinteichosaItakusakiKozaMitorokuJohoCsvEntity {
     private RString 機関代表者氏名;
     @CsvField(order = 12, name = "機関代表者カナ氏名")
     private RString 機関代表者カナ氏名;
-    @CsvField(order = 13, name = "調査委託区分")
+    @CsvField(order = 13, name = "調査委託区分コード")
+    private RString 調査委託区分コード;
+    @CsvField(order = 14, name = "調査委託区分")
     private RString 調査委託区分;
-    @CsvField(order = 14, name = "特定調査員の表示")
+    @CsvField(order = 15, name = "特定調査員の表示")
     private RString 特定調査員表示フラグ;
-    @CsvField(order = 15, name = "割付定員")
+    @CsvField(order = 16, name = "割付定員")
     private RString 割付定員;
-    @CsvField(order = 16, name = "割付地区コード")
+    @CsvField(order = 17, name = "割付地区コード")
     private RString 割付地区コード;
-    @CsvField(order = 17, name = "割付地区名称")
+    @CsvField(order = 18, name = "割付地区名称")
     private RString 割付地区名称;
-    @CsvField(order = 18, name = "自動割付可否")
+    @CsvField(order = 19, name = "自動割付可否")
     private RString 自動割付フラグ;
-    @CsvField(order = 19, name = "機関の区分")
+    @CsvField(order = 20, name = "機関の区分コード")
+    private RString 機関の区分コード;
+    @CsvField(order = 21, name = "機関の区分")
     private RString 機関の区分;
-    @CsvField(order = 20, name = "調査委託先の状況")
+    @CsvField(order = 22, name = "調査委託先の状況")
     private RString 状況フラグ;
 }

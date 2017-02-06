@@ -1570,7 +1570,7 @@
       ,"CsvTempTable"."調査項目73"
       ,"CsvTempTable"."調査項目連番74"
       ,"CsvTempTable"."調査項目74"
-      ,""CsvTempTable"."認定調査委託先市町村コード"
+      ,"CsvTempTable"."認定調査委託先市町村コード"
     </sql>
 
     <sql id="selectItemZenkai">

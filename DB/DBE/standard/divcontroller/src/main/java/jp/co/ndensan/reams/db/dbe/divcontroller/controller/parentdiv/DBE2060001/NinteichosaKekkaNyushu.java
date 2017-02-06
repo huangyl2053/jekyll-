@@ -171,19 +171,11 @@ public class NinteichosaKekkaNyushu {
                 return ResponseData.of(requestDiv).addValidationMessages(valid).respond();
             }
         }
-
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("画面遷移しても")).respond();
-        }
-
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                    new ShinseishoKanriNo(requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
-            ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.valueOf(
-                    requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getNinteichosaIraiRirekiNo().toString()));
-            return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
-        }
-        return ResponseData.of(requestDiv).respond();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号,
+                new ShinseishoKanriNo(requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()));
+        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.valueOf(
+                requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems().get(0).getNinteichosaIraiRirekiNo().toString()));
+        return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.調査結果登録遷移).respond();
     }
 
     /**

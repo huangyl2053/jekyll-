@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9030001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
@@ -72,12 +73,16 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaIta
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 認定調査委託先マスタのクラスです
@@ -253,8 +258,22 @@ public class NinteichosaItakusakiMaster {
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             int rowIndex = 0;
+
+            KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+            List<KinyuKikan> 金融機関情報 = new ArrayList<>();
+            金融機関情報 = kinyuKikanManager.getValidKinyuKikansOn(FlexibleDate.getNowDate());
+
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
-                csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row, rowIndex));
+                RString 金融機関名称 = RString.EMPTY;
+                RString 支店名 = RString.EMPTY;
+                if (row.getKinyuKikanCode() != null && !row.getKinyuKikanCode().isEmpty()) {
+                    金融機関名称 = getKinyuKikan(金融機関情報, row);
+                }
+                if (row.getKinyuKikanShitenCode() != null && !row.getKinyuKikanShitenCode().isEmpty()) {
+                    支店名 = getKinyuShiten(金融機関情報, row);
+                }
+
+                csvWriter.writeLine(converterDataSourceFromToCsvEntity(div, row, rowIndex, 金融機関名称, 支店名));
                 rowIndex++;
             }
             csvWriter.close();
@@ -264,6 +283,55 @@ public class NinteichosaItakusakiMaster {
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+    }
+
+    /**
+     * 金融機関を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param row dgChosainIchiran_Row
+     * @return 金融機関_支店　List<RString>
+     */
+    private RString getKinyuKikan(List<KinyuKikan> 金融機関情報, dgChosainIchiran_Row row) {
+        RString 金融機関 = RString.EMPTY;
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if ((new RString(kinyuKikanJoho.get金融機関コード().toString())).equals(row.getKinyuKikanCode())) {
+                金融機関 = kinyuKikanJoho.get金融機関名称();
+            }
+        }
+        return 金融機関;
+    }
+
+    /**
+     * 金融機関支店を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param row dgChosainIchiran_Row
+     * @return 支店名　RString
+     */
+    private RString getKinyuShiten(List<KinyuKikan> 金融機関情報, dgChosainIchiran_Row row) {
+        List<KinyuKikanShiten> 支店リスト = new ArrayList<>();
+        RString 支店名 = RString.EMPTY;
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if ((new RString(kinyuKikanJoho.get金融機関コード().toString())).equals(row.getKinyuKikanCode())) {
+                支店リスト = kinyuKikanJoho.get支店リスト();
+            }
+        }
+        if (支店リスト != null && !支店リスト.isEmpty()) {
+            支店名 = getShitenMeisho(支店リスト, row, 支店名);
+
+        }
+
+        return 支店名;
+    }
+
+    private RString getShitenMeisho(List<KinyuKikanShiten> 支店リスト, dgChosainIchiran_Row row, RString 支店名) {
+        for (KinyuKikanShiten shiten : 支店リスト) {
+            if (new RString(shiten.get支店コード().toString()).equals(row.getKinyuKikanShitenCode())) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
     }
 
     /**
@@ -310,15 +378,47 @@ public class NinteichosaItakusakiMaster {
         csvEntity.setＦＡＸ番号(row.getFaxNo());
         csvEntity.set機関代表者氏名(row.getKikanDaihyoshaName());
         csvEntity.set機関代表者カナ氏名(row.getKikanDaihyoshaKanaName());
+        csvEntity.set調査委託区分コード(get調査委託区分コード(row.getChosaItakuKubun()));
         csvEntity.set調査委託区分(row.getChosaItakuKubun());
         csvEntity.set特定調査員表示フラグ(row.getTokuteiChosainDispFlag());
         csvEntity.set割付定員(new RString(row.getWaritsukeTeiin().getValue().toString()));
         csvEntity.set割付地区コード(row.getChikuCode());
         csvEntity.set割付地区名称(row.getChikuName());
         csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
+        csvEntity.set機関の区分コード(get機関の区分コード(row.getKikanKubun()));
         csvEntity.set機関の区分(row.getKikanKubun());
         csvEntity.set状況フラグ(row.getJokyoFlag());
         return csvEntity;
+    }
+
+    private RString get調査委託区分コード(RString 調査委託区分) {
+        RString 調査委託区分コード = RString.EMPTY;
+        if (調査委託区分.equals(ChosaItakuKubunCode.保険者_市町村等.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.保険者_市町村等.getコード();
+        } else if (調査委託区分.equals(ChosaItakuKubunCode.指定市町村事務受託法人.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.指定市町村事務受託法人.getコード();
+        } else if (調査委託区分.equals(ChosaItakuKubunCode.指定居宅介護支援事業者.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.指定居宅介護支援事業者.getコード();
+        } else if (調査委託区分.equals(ChosaItakuKubunCode.介護保険施設.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.介護保険施設.getコード();
+        } else if (調査委託区分.equals(ChosaItakuKubunCode.介護支援専門員.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.介護支援専門員.getコード();
+        } else if (調査委託区分.equals(ChosaItakuKubunCode.他市町村.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.他市町村.getコード();
+        } else if (調査委託区分.equals(ChosaItakuKubunCode.その他.get名称())) {
+            調査委託区分コード = ChosaItakuKubunCode.その他.getコード();
+        }
+        return 調査委託区分コード;
+    }
+
+    private RString get機関の区分コード(RString 機関の区分) {
+        RString 機関の区分コード = RString.EMPTY;
+        if (機関の区分.equals(ChosaKikanKubun.非調査機関.get名称())) {
+            機関の区分コード = ChosaKikanKubun.非調査機関.getコード();
+        } else if (機関の区分.equals(ChosaKikanKubun.調査機関.get名称())) {
+            機関の区分コード = ChosaKikanKubun.調査機関.getコード();
+        }
+        return 機関の区分コード;
     }
 
     /**
@@ -719,7 +819,7 @@ public class NinteichosaItakusakiMaster {
     }
 
     private NinteichosaItakusakiJohoCsvEntity converterDataSourceFromToCsvEntity(
-            NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex) {
+            NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex, RString 金融機関名称, RString 支店名) {
         NinteichosaItakusakiJohoCsvEntity csvEntity = new NinteichosaItakusakiJohoCsvEntity();
         csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
         csvEntity.set市町村(row.getShichoson());
@@ -733,21 +833,31 @@ public class NinteichosaItakusakiMaster {
         csvEntity.setＦＡＸ番号(row.getFaxNo());
         csvEntity.set機関代表者氏名(row.getKikanDaihyoshaName());
         csvEntity.set機関代表者カナ氏名(row.getKikanDaihyoshaKanaName());
-        csvEntity.set調査委託区分(row.getChosaItakuKubun());
+        csvEntity.set調査委託区分コード(get調査委託区分コード(row.getChosaItakuKubun()));
+        csvEntity.set調査委託区分(row.getKikanKubun());
         csvEntity.set特定調査員表示フラグ(row.getTokuteiChosainDispFlag());
         csvEntity.set割付定員(new RString(row.getWaritsukeTeiin().getValue().toString()));
         csvEntity.set割付地区コード(row.getChikuCode());
         csvEntity.set割付地区名称(row.getChikuName());
         csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
+        csvEntity.set機関の区分コード(get機関の区分コード(row.getKikanKubun()));
         csvEntity.set機関の区分(row.getKikanKubun());
         csvEntity.set状況フラグ(row.getJokyoFlag());
         csvEntity.set金融機関コード(row.getKinyuKikanCode());
+        csvEntity.set金融機関名称(金融機関名称);
         csvEntity.set支店コード(row.getKinyuKikanShitenCode());
+        csvEntity.set支店(支店名);
         csvEntity.set預金種別(set預金種別(row.getYokinShubetsu()));
         csvEntity.set口座番号(row.getKozaNo());
         csvEntity.set口座名義人(row.getKozaMeigininKana());
         csvEntity.set漢字名義人(row.getKozaMeiginin());
         return csvEntity;
+    }
+
+    private RString get金融機関名称() {
+        RString 金融機関名称 = RString.EMPTY;
+
+        return 金融機関名称;
     }
 
     private RString set預金種別(RString 預金種別コード) {

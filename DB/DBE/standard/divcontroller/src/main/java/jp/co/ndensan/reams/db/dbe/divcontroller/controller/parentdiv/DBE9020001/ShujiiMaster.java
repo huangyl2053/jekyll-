@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterS
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujiiIryoKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -341,6 +342,7 @@ public class ShujiiMaster {
                 row.getShujiiKanaShimei(),
                 row.getShujiiIryoKikanCode().getValue(),
                 row.getShujiiIryoKikan(),
+                Seibetsu.男.get名称().equals(row.getSeibetsu()) ? Seibetsu.男.getコード() : Seibetsu.女.getコード(),
                 row.getSeibetsu(),
                 row.getShinryoka(),
                 row.getShiteii(),
