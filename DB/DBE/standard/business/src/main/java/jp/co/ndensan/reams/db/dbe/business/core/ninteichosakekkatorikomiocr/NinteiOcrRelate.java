@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResultSeed;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -202,23 +201,24 @@ public class NinteiOcrRelate {
     /**
      * @return {@link IProcessingResult}
      */
-    public IProcessingResult validate() {
-        if (get厚労省IF識別コード() == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3) {
-            return ProcessingResultFactory.error(OcrTorikomiMessages.過去制度での申請);
-        }
-        if (!matches指定申請日()) {
-            if (has論理削除()) {
-                return ProcessingResultFactory.error(OcrTorikomiMessages.有効な要介護認定申請なし);
-            }
-            return ProcessingResultFactory.error(
-                    OcrTorikomiMessages.申請日一致なし_直近申請日提示.replaced(
-                            entity.get認定申請日().seireki().toDateString().toString()
-                    )
-            );
-        }
-        if (has論理削除()) {
-            return ProcessingResultFactory.error(OcrTorikomiMessages.削除された申請);
-        }
-        return ProcessingResultFactory.success();
+    public IProcessingResultSeed validate() {
+//        if (get厚労省IF識別コード() == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3) {
+//            return ProcessingResultFactory.error(OcrTorikomiMessages.過去制度での申請);
+//        }
+//        if (!matches指定申請日()) {
+//            if (has論理削除()) {
+//                return ProcessingResultFactory.error(OcrTorikomiMessages.有効な要介護認定申請なし);
+//            }
+//            return ProcessingResultFactory.error(
+//                    OcrTorikomiMessages.申請日一致なし_直近申請日提示.replaced(
+//                            entity.get認定申請日().seireki().toDateString().toString()
+//                    )
+//            );
+//        }
+//        if (has論理削除()) {
+//            return ProcessingResultFactory.error(OcrTorikomiMessages.削除された申請);
+//        }
+//        return ProcessingResultFactory.success();
+        return null;
     }
 }

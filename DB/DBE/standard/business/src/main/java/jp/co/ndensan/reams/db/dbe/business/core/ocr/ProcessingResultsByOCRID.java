@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
  */
 public class ProcessingResultsByOCRID {
 
-    private final Map<OCRID, ProcessingResults> elements;
+    private final Map<OCRID, IProcessingResults> elements;
 
     /**
      * 空のインスタンスを生成します。
@@ -25,35 +25,33 @@ public class ProcessingResultsByOCRID {
         this.elements = new HashMap<>();
     }
 
-    private ProcessingResultsByOCRID(Map<OCRID, ProcessingResults> map) {
+    private ProcessingResultsByOCRID(Map<OCRID, IProcessingResults> map) {
         this.elements = new HashMap<>(map);
+    }
+
+    /**
+     * @param ocrID OCRID
+     * @return 指定のOCRIDに該当する{@link IProcessingResults}
+     */
+    public IProcessingResults get(OCRID ocrID) {
+        if (this.elements.containsKey(ocrID)) {
+            return this.elements.get(ocrID);
+        }
+        return new ProcessingResults();
     }
 
     /**
      * @return エラーの要素
      */
     public ProcessingResultsByOCRID errors() {
-        Map<OCRID, ProcessingResults> map = new HashMap<>();
-        for (Map.Entry<OCRID, ProcessingResults> entry : this.elements.entrySet()) {
-            IProcessingResult pr = entry.getValue().get();
-            if (pr.type().isError()) {
-                map.put(entry.getKey(), entry.getValue());
+        Map<OCRID, IProcessingResults> map = new HashMap<>();
+        for (Map.Entry<OCRID, IProcessingResults> entry : this.elements.entrySet()) {
+            IProcessingResults prs = entry.getValue();
+            if (prs.hasError()) {
+                map.put(entry.getKey(), prs);
             }
         }
         return new ProcessingResultsByOCRID(map);
-    }
-
-    /**
-     * @param ocrID キーとなる{@link OCRID}
-     * @param defaultValue 指定のキーと対応する値が存在しない場合に返却する値
-     * @return 指定のキーと対応する{@link IProcessingResult}.
-     * 存在しない場合、{@code defaultValue}.
-     */
-    public IProcessingResult getResultOrDefault(OCRID ocrID, IProcessingResult defaultValue) {
-        if (this.elements.containsKey(ocrID)) {
-            return this.elements.get(ocrID).get();
-        }
-        return defaultValue;
     }
 
     /**
@@ -72,8 +70,8 @@ public class ProcessingResultsByOCRID {
      * @param key キーとなる{@link OCRID}
      * @param prs キーに紐付ける{@link ProcessingResults}
      */
-    public void add(OCRID key, ProcessingResults prs) {
-        for (IProcessingResult pr : prs.values()) {
+    public void add(OCRID key, IProcessingResults prs) {
+        for (IProcessingResult pr : prs) {
             add(key, pr);
         }
     }
@@ -82,7 +80,7 @@ public class ProcessingResultsByOCRID {
      * @param pr すべてのキーに紐付ける{@link IProcessingResult}
      */
     public void addToAll(IProcessingResult pr) {
-        for (Map.Entry<OCRID, ProcessingResults> entry : this.elements.entrySet()) {
+        for (Map.Entry<OCRID, IProcessingResults> entry : this.elements.entrySet()) {
             entry.getValue().add(pr);
         }
     }
@@ -93,7 +91,7 @@ public class ProcessingResultsByOCRID {
      * @param other 追加する{@link ProcessingResultsByOCRID}
      */
     public void addAll(ProcessingResultsByOCRID other) {
-        for (Map.Entry<OCRID, ProcessingResults> entry : other.elements.entrySet()) {
+        for (Map.Entry<OCRID, IProcessingResults> entry : other.elements.entrySet()) {
             this.add(entry.getKey(), entry.getValue());
         }
     }
@@ -110,7 +108,7 @@ public class ProcessingResultsByOCRID {
      */
     public Set<Entry> entrySet() {
         Set<Entry> set = new HashSet<>();
-        for (Map.Entry<OCRID, ProcessingResults> prs : this.elements.entrySet()) {
+        for (Map.Entry<OCRID, IProcessingResults> prs : this.elements.entrySet()) {
             set.add(new Entry(prs.getKey(), prs.getValue()));
         }
         return set;
@@ -122,11 +120,11 @@ public class ProcessingResultsByOCRID {
     public static final class Entry {
 
         private final OCRID ocrID;
-        private final IProcessingResult pr;
+        private final IProcessingResults prs;
 
-        private Entry(OCRID ocrID, ProcessingResults prs) {
+        private Entry(OCRID ocrID, IProcessingResults prs) {
             this.ocrID = ocrID;
-            this.pr = prs.get();
+            this.prs = prs;
         }
 
         /**
@@ -137,10 +135,10 @@ public class ProcessingResultsByOCRID {
         }
 
         /**
-         * @return キーと対応する{@link IProcessingResult}
+         * @return キーと対応する{@link IProcessingResults}
          */
-        public IProcessingResult getResult() {
-            return this.pr;
+        public IProcessingResults getResults() {
+            return this.prs;
         }
     }
 }

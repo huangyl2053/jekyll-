@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImportOcrCsvIntoTempTableParamter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -23,11 +23,17 @@ public class ImportOcrCsvIntoTempTable extends BatchProcessBase<RString> {
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<TempOcrCsvEntity> writer;
-    private OcrDataReadProcessParameter processParameter;
+    private ImportOcrCsvIntoTempTableParamter processParameter;
+    private int lineNum;
+
+    @Override
+    protected void initialize() {
+        lineNum = 0;
+    }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(processParameter.getファイルPath().findCsvFilePath(), Encode.SJIS);
+        return new BatchSimpleReader(processParameter.getCsvFilePath(), Encode.SJIS);
     }
 
     @Override
@@ -40,7 +46,7 @@ public class ImportOcrCsvIntoTempTable extends BatchProcessBase<RString> {
 
     @Override
     protected void process(RString t) {
-        TempOcrCsvEntity entity = new TempOcrCsvEntity(t);
+        TempOcrCsvEntity entity = new TempOcrCsvEntity(t, ++lineNum);
         this.writer.insert(entity);
     }
 }

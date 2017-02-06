@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageT
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImportOcrCsvIntoTempTableParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -36,27 +36,33 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageTorikomiParameter> {
 
-    OcrDataReadProcessParameter processParameter;
+    private static final RString TEMP_TABLE_NAME_IKENSHO = new RString("TempOcrIkensho");
+    private static final RString TEMP_TABLE_NAME_SONOTA = new RString("TempOcrSonota");
+    private final RDate PROCESSING_DATE = RDate.getNowDate();
+    private RString tempTableName;
+    private OcrFiles imageFileNames;
+    private RString csvFilePath;
+    private RString ca3FilePath;
 
     @Override
     protected void defineFlow() {
-        final RDate PROCESSING_DATE = RDate.getNowDate();
-        final List<RString> FILE_PATHS = readAllOcrDataFileTo(Directory.createTmpDirectory());
-        Map<OcrDataType, OcrFiles> map = OcrTorikomiUtil.groupingByType(FILE_PATHS);
-        final OcrFiles IMAGE_FILE_PATHS = map.get(OcrDataType.イメージファイル);
+        Map<OcrDataType, OcrFiles> map = OcrTorikomiUtil.groupingByType(readAllOcrDataFileTo(Directory.createTmpDirectory()));
+        imageFileNames = map.get(OcrDataType.イメージファイル);
         for (OcrDataType type : Arrays.asList(OcrDataType.意見書, OcrDataType.その他資料)) {
             OcrFiles files = map.get(type);
             if (files.isEmpty()) {
                 continue;
             }
+            this.csvFilePath = files.findCsvFilePath();
+            this.ca3FilePath = files.findCa3FilePath();
             switch (type) {
                 case 意見書:
-                    processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, new RString("TempOcrIkensho"));
+                    this.tempTableName = TEMP_TABLE_NAME_IKENSHO;
                     executeStep(OCRデータの一時テーブルへの格納);
                     executeStep(主治医意見書イメージの読み込み);
                     continue;
                 case その他資料:
-                    processParameter = new OcrDataReadProcessParameter(PROCESSING_DATE, files, IMAGE_FILE_PATHS, new RString("TempOcrSonota"));
+                    this.tempTableName = TEMP_TABLE_NAME_SONOTA;
                     executeStep(OCRデータの一時テーブルへの格納);
                     executeStep(その他資料の読み込み);
                 default:
@@ -68,7 +74,7 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
     @Step(OCRデータの一時テーブルへの格納)
     IBatchFlowCommand importCsvToTempTable() {
         return loopBatch(ImportOcrCsvIntoTempTable.class)
-                .arguments(processParameter)
+                .arguments(new ImportOcrCsvIntoTempTableParamter(this.csvFilePath, tempTableName))
                 .define();
     }
 
@@ -77,7 +83,7 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
     @Step(主治医意見書イメージの読み込み)
     IBatchFlowCommand executeOCRイメージの読み込み() {
         return loopBatch(ImageInputProcess.class)
-                .arguments(processParameter)
+                .arguments(getParameter().toImageInputProcessParameter(PROCESSING_DATE, ca3FilePath, imageFileNames, tempTableName))
                 .define();
     }
 
@@ -86,7 +92,7 @@ public class DBE250002_ImageTorikomi extends BatchFlowBase<DBE250002_ImageToriko
     @Step(その他資料の読み込み)
     IBatchFlowCommand executeOCRその他イメージの読み込み() {
         return loopBatch(ImageInputSonotaProcess.class)
-                .arguments(processParameter)
+                .arguments(getParameter().toImageInputProcessParameter(PROCESSING_DATE, ca3FilePath, imageFileNames, tempTableName))
                 .define();
     }
 

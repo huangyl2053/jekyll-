@@ -7,29 +7,34 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * OCRSONOTA.csvの取込結果1行を扱います。
  */
 @lombok.Getter
-public final class OcrSonota {
+public final class OcrSonota implements IOcrData {
 
-    private RString データ行_文字列 = RString.EMPTY;
-    private OCRID ocrID = OCRID.EMPTY;
+    private final RString データ行_文字列;
+    private final UUID uuid;
+    private OCRID oCRID = OCRID.EMPTY;
     private ShinseiKey key = ShinseiKey.EMPTY;
     private SheetID sheetID = SheetID.EMPTY;
     private RString 保険者番号 = RString.EMPTY;
     private RString 申請日 = RString.EMPTY;
     private RString 被保険者番号 = RString.EMPTY;
-    private RString imageFileName = RString.EMPTY;
 
-    private OcrSonota() {
+    private OcrSonota(RString line) {
+        this.uuid = UUID.randomUUID();
+        this.データ行_文字列 = line;
+        init(this.データ行_文字列);
     }
 
     /**
@@ -41,34 +46,52 @@ public final class OcrSonota {
      * @return {@link OcrSonota}
      */
     public static OcrSonota parsed(RString line) {
-        return parseデータ行(line);
+        return new OcrSonota(line);
     }
 
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 18 LINES
-    private static OcrSonota parseデータ行(RString line) {
-        OcrSonota result = new OcrSonota();
-        result.データ行_文字列 = line;
+    private void init(RString line) {
         List<RString> columns = Collections.unmodifiableList(line.split(","));
         if (columns == null || columns.isEmpty()) {
-            return result;
+            return;
         }
         RString ocrID = columns.get(0);
         if (!OCRID._801.value().equals(ocrID)) {
-            return result;
+            return;
         }
-        result.ocrID = OCRID.toValueOrEMPTY(columns.get(0));
-        result.sheetID = new SheetID(columns.get(1));
-        result.保険者番号 = columns.get(2);
-        result.申請日 = get西暦_年(columns.get(3));
-        result.被保険者番号 = columns.get(4);
-        result.key = new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日());
-        result.imageFileName = new RStringBuilder().append(result.sheetID.value()).append("w01i000.png").toRString();
-        return result;
+        this.oCRID = OCRID.toValueOrEMPTY(columns.get(0));
+        this.sheetID = new SheetID(columns.get(1));
+        this.保険者番号 = columns.get(2);
+        this.申請日 = get西暦_年(columns.get(3));
+        this.被保険者番号 = columns.get(4);
+        this.key = new ShinseiKey(this.get保険者番号(), this.get被保険者番号(), this.get申請日());
     }
 
     private static RString get西暦_年(RString 和暦_日付) {
         return RDate.canConvert(和暦_日付)
                 ? new RDate(和暦_日付.toString()).toDateString()
                 : RString.EMPTY;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.uuid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OcrSonota other = (OcrSonota) obj;
+        if (!Objects.equals(this.uuid, other.uuid)) {
+            return false;
+        }
+        return true;
     }
 }

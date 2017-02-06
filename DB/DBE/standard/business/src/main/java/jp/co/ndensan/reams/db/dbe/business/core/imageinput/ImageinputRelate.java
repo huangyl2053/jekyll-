@@ -137,6 +137,10 @@ public class ImageinputRelate {
         }
     }
 
+    public RDateTime getSharedFileIDOrNull() {
+        return this.entity.getT5115_イメージ共有ファイルID();
+    }
+
     /**
      * イメージ情報が存在する場合{@code true}、しない場合{@code false}を返します。
      *

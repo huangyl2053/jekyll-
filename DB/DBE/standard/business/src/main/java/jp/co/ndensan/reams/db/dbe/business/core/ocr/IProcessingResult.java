@@ -15,12 +15,17 @@ public interface IProcessingResult {
     /**
      * @return 処理結果の種類
      */
-    Type type();
+    IProcessingResult.Type type();
 
     /**
      * @return 備考
      */
     RString note();
+
+    /**
+     * @return 対象行
+     */
+    IOcrData ocrData();
 
     /**
      * 処理結果の種類を表す列挙です。

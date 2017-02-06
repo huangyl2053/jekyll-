@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
@@ -18,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import lombok.AccessLevel;
 
 /**
@@ -29,12 +29,11 @@ import lombok.AccessLevel;
 @lombok.Getter
 @lombok.Setter(AccessLevel.PRIVATE)
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class OcrChosa {
+public final class OcrChosa implements IOcrData {
 
-    @lombok.Setter(lombok.AccessLevel.PRIVATE)
     private ShinseiKey key = ShinseiKey.EMPTY;
     private RString データ行_文字列;
-    private OCRID ocrID = OCRID.EMPTY;
+    private OCRID oCRID = OCRID.EMPTY;
     private SheetID sheetID = SheetID.EMPTY;
 
     private RString 調査区分;
@@ -127,23 +126,25 @@ public final class OcrChosa {
     private RString 過去14日間に受けた治療;
     private Code 認知症高齢者の日常生活自立度;
     private Code 障害高齢者の日常生活自立度;
-
-    private Map<RString, KomokuNo> 特記事項ImageFileName_調査項目_Map;
+    private OcrTokkiJikoColumns 特記事項Columns;
 
     private boolean isBroken;
     private int lineNum;
+    @lombok.Getter(AccessLevel.PRIVATE)
+    private UUID uuid;
 
     private OcrChosa(RString line, int lineNum) {
         init(line);
         this.isBroken = false;
         this.lineNum = lineNum;
+        this.uuid = UUID.randomUUID();
     }
 
-    //<editor-fold defaultstate="collapsed" desc="init()">
     private void init(RString line) {
+        //<editor-fold defaultstate="collapsed" desc="initialize menbers">
         this.key = ShinseiKey.EMPTY;
         this.データ行_文字列 = line;
-        this.ocrID = OCRID.EMPTY;
+        this.oCRID = OCRID.EMPTY;
         this.sheetID = SheetID.EMPTY;
 
         this.保険者番号 = RString.EMPTY;
@@ -235,10 +236,10 @@ public final class OcrChosa {
         this.認知症高齢者の日常生活自立度 = Code.EMPTY;
         this.障害高齢者の日常生活自立度 = Code.EMPTY;
 
-        this.特記事項ImageFileName_調査項目_Map = new HashMap<>();
+        this.特記事項Columns = new OcrTokkiJikoColumns(new ArrayList<OcrTokkiJikoColumn>());
+        //</editor-fold>
     }
 
-    //</editor-fold>
     /**
      * 行を解析した結果より、インスタンスを生成します。
      *
@@ -264,8 +265,8 @@ public final class OcrChosa {
         if (columns == null || columns.isEmpty()) {
             return result;
         }
-        result.setOcrID(OCRID.toValueOrEMPTY(columns.get(0)));
-        if (result.getOcrID() == OCRID._501) {
+        result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
+        if (result.getOCRID() == OCRID._501) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
@@ -300,7 +301,7 @@ public final class OcrChosa {
             result.set随時対応型訪問介護看護(columns.get(30));
             result.set施設利用の有無(columns.get(31));
 
-        } else if (result.getOcrID() == OCRID._502) {
+        } else if (result.getOCRID() == OCRID._502) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 62 LINES
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
@@ -366,7 +367,7 @@ public final class OcrChosa {
             result.set障害高齢者の日常生活自立度(new Code(columns.get(61)));
             result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
 
-        } else if (result.getOcrID() == OCRID._550) {
+        } else if (result.getOCRID() == OCRID._550) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
             RString sheetIdValue = columns.get(1);
             result.setSheetID(new SheetID(sheetIdValue));
@@ -374,33 +375,32 @@ public final class OcrChosa {
             result.set申請日(to西暦_年(columns.get(3)));
             result.set被保険者番号(columns.get(4));
             result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            Map<RString, KomokuNo> map = new HashMap<>();
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i030.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 5));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i031.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 6));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i032.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 7));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i033.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 8));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i034.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 9));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i035.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 10));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i036.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 11));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i037.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 12));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i038.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 13));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i039.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 14));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i040.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 15));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w01i041.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 16));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i025.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 17));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i026.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 18));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i027.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 19));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i028.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 20));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i029.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 21));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i030.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 22));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i031.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 23));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i032.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 24));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i033.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 25));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i034.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 26));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i035.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 27));
-            map.put(new RStringBuilder().append(sheetIdValue).append("w02i036.png").toRString(), getListConvertingKomokuNoOrEMPTY(columns, 28));
-            result.set特記事項ImageFileName_調査項目_Map(map);
-
+            List<OcrTokkiJikoColumn> list = new ArrayList();
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 0, getListConvertingKomokuNoOrEMPTY(columns, 5)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 1, getListConvertingKomokuNoOrEMPTY(columns, 6)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 2, getListConvertingKomokuNoOrEMPTY(columns, 7)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 3, getListConvertingKomokuNoOrEMPTY(columns, 8)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 4, getListConvertingKomokuNoOrEMPTY(columns, 9)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 5, getListConvertingKomokuNoOrEMPTY(columns, 10)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 6, getListConvertingKomokuNoOrEMPTY(columns, 11)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 7, getListConvertingKomokuNoOrEMPTY(columns, 12)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 8, getListConvertingKomokuNoOrEMPTY(columns, 13)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 9, getListConvertingKomokuNoOrEMPTY(columns, 14)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 10, getListConvertingKomokuNoOrEMPTY(columns, 15)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 11, getListConvertingKomokuNoOrEMPTY(columns, 16)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 12, getListConvertingKomokuNoOrEMPTY(columns, 17)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 13, getListConvertingKomokuNoOrEMPTY(columns, 18)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 14, getListConvertingKomokuNoOrEMPTY(columns, 19)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 15, getListConvertingKomokuNoOrEMPTY(columns, 20)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 16, getListConvertingKomokuNoOrEMPTY(columns, 21)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 17, getListConvertingKomokuNoOrEMPTY(columns, 22)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 18, getListConvertingKomokuNoOrEMPTY(columns, 23)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 19, getListConvertingKomokuNoOrEMPTY(columns, 24)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 20, getListConvertingKomokuNoOrEMPTY(columns, 25)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 21, getListConvertingKomokuNoOrEMPTY(columns, 26)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 22, getListConvertingKomokuNoOrEMPTY(columns, 27)));
+            list.add(new OcrTokkiJikoColumn(result.getSheetID(), 23, getListConvertingKomokuNoOrEMPTY(columns, 28)));
+            result.set特記事項Columns(new OcrTokkiJikoColumns(list));
         }
         return result;
     }
@@ -410,17 +410,6 @@ public final class OcrChosa {
             return KomokuNo.EMPTY;
         }
         return new KomokuNo(list.get(index));
-    }
-
-    /**
-     * @return 存在するイメージファイル名
-     */
-    public TokkiImageFileNames collectTokkiImageFileNames() {
-        List<TokkiImageFileName> list = new ArrayList<>();
-        for (Map.Entry<RString, KomokuNo> entry : this.特記事項ImageFileName_調査項目_Map.entrySet()) {
-            list.add(new TokkiImageFileName(entry.getKey(), entry.getValue()));
-        }
-        return new TokkiImageFileNames(list);
     }
 
     private static RString to西暦_年(RString 和暦_日付) {
@@ -448,5 +437,27 @@ public final class OcrChosa {
                 }
             };
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.uuid);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OcrChosa other = (OcrChosa) obj;
+        if (!Objects.equals(this.uuid, other.uuid)) {
+            return false;
+        }
+        return true;
     }
 }

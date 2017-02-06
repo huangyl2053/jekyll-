@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * シートIDです。
  */
-public class SheetID {
+public class SheetID implements Comparable<SheetID> {
 
     private static final int CA3_SHEET_ID_LENGTH = 8;
 
@@ -66,5 +66,10 @@ public class SheetID {
         }
         final SheetID other = (SheetID) obj;
         return true;
+    }
+
+    @Override
+    public int compareTo(SheetID o) {
+        return this.theValue.compareTo(o.theValue);
     }
 }

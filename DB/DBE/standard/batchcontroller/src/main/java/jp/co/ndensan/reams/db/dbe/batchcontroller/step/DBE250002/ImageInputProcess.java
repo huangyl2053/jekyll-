@@ -11,19 +11,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.OcrTorikomiResultUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionTheories;
-import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
-import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.OcrImageClassification;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultsByOCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAccessor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.result.OcrTorikomiKekka;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
+//import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.ImageFileCopier;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
@@ -33,6 +38,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemNewManager;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -47,9 +53,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
@@ -104,7 +109,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         super.beforeExecute();
         this.cache = new ArrayList<>();
         this.key = ShinseiKey.EMPTY;
-        this.catalog = new Catalog(this.processParameter.getファイルPath().findCa3FilePath());
+        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
     }
 
     @Override
@@ -147,7 +152,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         //</editor-fold>
         //TODO 現在、ID=777, ID=778 限定の処理となっている。ID=701等を取り込む場合には検討が必要。
         if (isID777orID778()) {
-            //this.kekkaListEditor.writeLine(processID777or778(key, sameKeyValues));
+//            this.kekkaListEditor.writeLine(processID777or778(key, sameKeyValues));
             processID777or778(key, sameKeyValues);
         }
         //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理終了">
@@ -161,105 +166,81 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 //</editor-fold>
     }
 
+    //TODO 要修正
     private static boolean isID777orID778() {
         return true;
     }
 
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
-    private OcrTorikomiKekka processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
-        OcrTorikomiKekka.Builder builder = new OcrTorikomiKekka.Builder(
-                this.processParameter.get処理日(), OCRID._777, SheetID.EMPTY, key);
-        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(
-                key.get証記載保険者番号(), key.get被保険者番号(), key.get認定申請日()
-        );
-        List<ImageinputRelate> 関連データ = ImageinputFinder.createInstance().get関連データ(param).records();
-        if (関連データ.isEmpty()) {
-            //<editor-fold defaultstate="collapsed" desc="Error: 関連データの取得に失敗しました。">
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("関連データの取得に失敗しました。").toString());
-            //</editor-fold>
+    private List<OcrTorikomiResult> processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
+        ImageinputMapperParamter param = toParameterToSearchRelatedData(key);
+        List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(param).records();
+        if (relatedData.isEmpty()) {
+            return OcrTorikomiResultUtil.create(key, sameKeyValues,
+                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
+        }
+        //OCRID ごとに判定が必要。
+        if (3 <= sameKeyValues.size()) {
+            return OcrTorikomiResultUtil.create(key, sameKeyValues,
+                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在);
+        }
 
-            return builder.error(RString.EMPTY);
-        }
-        if (sameKeyValues.isEmpty() || 3 <= sameKeyValues.size()) {
-            //<editor-fold defaultstate="collapsed" desc="Error: 処理対象データsize不正です。">
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("処理対象データsize不正です。").append(" size：").append(sameKeyValues.size()).toString());
-            //</editor-fold>
-            return builder.error(RString.EMPTY);
-        }
-        ImageinputRelate ir = 関連データ.get(0);
+        ImageinputRelate ir = relatedData.get(0);
         if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                    .append("過去の制度です。処理をskipします。").append(" 厚労省IF識別コード：").append(ir.get厚労省IF識別コード().getコード())
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return builder.error(RString.EMPTY); //TODO 不正のため、エラーリスト出力対象。
+            return OcrTorikomiResultUtil.create(key, sameKeyValues,
+                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
         }
-
         OcrIken ocrIken = getAny_ID777優先(sameKeyValues);
         insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
         insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
 
-        RString tempDirectoryPath = Directory.createTmpDirectory();
-        boolean copySucceeds = (sameKeyValues.size() == 1)
-                ? copyImageFilesToDirectory_ID777or778_1line(tempDirectoryPath, sameKeyValues)
-                : copyImageFilesToDirectory_ID777or778_2lines(tempDirectoryPath, sameKeyValues);
-        if (!copySucceeds) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("イメージのコピーに失敗しました。")
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return builder.error(RString.EMPTY); //TODO 不正のため、エラーリスト出力対象。
-        }
-
-        boolean saveSucceeds = ImageJohoUpdater.create(new FilesystemPath(tempDirectoryPath),
-                ir.get申請書管理番号(),
-                ir.getT5101_証記載保険者番号(),
-                ir.getT5101_被保険者番号(),
-                ir.hasイメージ情報() ? ir.getT5115_イメージ共有ファイルID() : null,
-                OcrImageClassification.意見書_規定外_規定外ID
-        ).updateBy(this.writer_DbT5115);
-        if (saveSucceeds) {
-            return builder.success(100);
-        }
-        //TODO 不正のため、エラーリスト出力対象。
-        /*----------------------------------------------------------------------------------*/
-        _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                .append("イメージ情報の保存に失敗しました。")
-                .toString());
-        /*----------------------------------------------------------------------------------*/
-        return builder.error(RString.EMPTY);
+        CopyImageResult cir = (sameKeyValues.size() == 1)
+                ? copyImageFilesToDirectory_ID777or778_1line(sameKeyValues, ir)
+                : copyImageFilesToDirectory_ID777or778_2lines(sameKeyValues, ir);
+        return OcrTorikomiResultUtil.create(key, cir.getResults());
     }
 
     private OcrIken getAny_ID777優先(List<OcrIken> sameKeyValues) {
         for (OcrIken csv : sameKeyValues) {
-            if (csv.getOcrID() == OCRID._777) {
+            if (csv.getOCRID() == OCRID._777) {
                 return csv;
             }
         }
         return sameKeyValues.get(0);
     }
 
-    private boolean copyImageFilesToDirectory_ID777or778_1line(RString targetDirectoryPath, List<OcrIken> sameKeyValues) {
+    @lombok.Value
+    @lombok.AllArgsConstructor
+    private static class CopyImageResult {
+
+        private RDateTime sharedFileID;
+        private IProcessingResults results;
+
+        private CopyImageResult(ImageJohoUpdater.Result result) {
+            this(result.get共有ファイルID(), result.getResults());
+        }
+    }
+
+    private CopyImageResult copyImageFilesToDirectory_ID777or778_1line(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
         OcrIken value = sameKeyValues.get(0);
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("カタログデータの取得に失敗しました。 ")
-                    .append(" SheetID下8桁：").append(value.getSheetID().get帳票一連ID下8桁())
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return false; //TODO 不正のため、エラーリスト出力対象。
+            IProcessingResults results = new ProcessingResults();
+            results.add(ProcessingResultFactory.error(value, OcrTorikomiMessages.カタログデータなし));
+            return new CopyImageResult(ir.getSharedFileIDOrNull(), results);
         }
-        FileNameConvertionTheories converter = (value.getOcrID() == OCRID._777)
+        FileNameConvertionTheories converter = (value.getOCRID() == OCRID._777)
                 ? FileNameConvertionTheories.ID777
                 : FileNameConvertionTheories.ID777_reversed;
-        return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3.getImageFileNames(),
-                this.processParameter.getImageFilePaths(), converter);
+        return new CopyImageResult(
+                ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                .sharedFileID(ir.getSharedFileIDOrNull())
+                .imageFilePaths(this.processParameter.getImageFilePaths())
+                .fileNameTheory(converter)
+                .targetImageFileNames(ca3.getImageFileNames())
+                .ocrData(value)
+                .save(writer_DbT5115)
+        );
     }
 
     private static Optional<CatalogLine> findCatalogLine_ID777or778(Catalog catalog, SheetID id) {
@@ -270,11 +251,84 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return catalog.find(Models.ID778, id);
     }
 
-    private boolean copyImageFilesToDirectory_ID777or778_2lines(RString targetDirectoryPath, List<OcrIken> sameKeyValues) {
+    private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
+        IProcessingResults results = new ProcessingResults();
+        OcrIken777And778Pair pair = getPair(sameKeyValues);
+        if (pair.hasAnyNull()) {
+            OcrIken ocrIken = pair.findNonnullValue();
+            results.add(ProcessingResultFactory.error(ocrIken, OcrTorikomiMessages.同一申請複数存在));
+            return new CopyImageResult(ir.getSharedFileIDOrNull(), results);
+        }
+        CatalogLine ca3_777 = this.catalog.find(Models.ID777, pair.getCsv777().getSheetID()).orElse(null);
+        if (ca3_777 == null) {
+            results.add(ProcessingResultFactory.error(pair.getCsv777(), OcrTorikomiMessages.カタログデータなし));
+            results.add(ProcessingResultFactory.error(pair.getCsv778(), OcrTorikomiMessages.カタログデータなし));
+            return new CopyImageResult(ir.getSharedFileIDOrNull(), results);
+        }
+        CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, pair.getCsv778().getSheetID()).orElse(null);
+        if (ca3_778 != null) {
+            ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                    .sharedFileID(ir.getSharedFileIDOrNull())
+                    .imageFilePaths(this.processParameter.getImageFilePaths())
+                    .fileNameTheory(FileNameConvertionTheories.ID777_reversed)
+                    .targetImageFileNames(ca3_778.getImageFileNames().subList(0, 1))
+                    .ocrData(pair.getCsv778())
+                    .save(writer_DbT5115);
+            results.addAll(result1.getResults());
+            ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                    .sharedFileID(result1.get共有ファイルID())
+                    .imageFilePaths(this.processParameter.getImageFilePaths())
+                    .fileNameTheory(FileNameConvertionTheories.ID777)
+                    .targetImageFileNames(ca3_777.getImageFileNames().subList(0, 1))
+                    .ocrData(pair.getCsv777())
+                    .save(writer_DbT5115);
+            results.addAll(result2.getResults());
+            return new CopyImageResult(result2.get共有ファイルID(), results);
+        }
+
+        FileNameConvertionTheories theory
+                = new RString("1").equals(pair.getCsv777().get全体イメージ表側インデックス())
+                        ? FileNameConvertionTheories.ID777
+                        : FileNameConvertionTheories.ID777_reversed;
+
+        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                .sharedFileID(ir.getSharedFileIDOrNull())
+                .imageFilePaths(this.processParameter.getImageFilePaths())
+                .fileNameTheory(theory)
+                .targetImageFileNames(ca3_777.getImageFileNames())
+                .ocrData(pair.getCsv777())
+                .save(writer_DbT5115);
+        results.addAll(result.getResults());
+        return new CopyImageResult(result.get共有ファイルID(), results);
+    }
+
+    @lombok.Value
+    private static class OcrIken777And778Pair {
+
+        private OcrIken csv777;
+        private OcrIken csv778;
+
+        private OcrIken777And778Pair(OcrIken csv777, OcrIken csv778) {
+            this.csv777 = csv777;
+            this.csv778 = csv778;
+        }
+
+        boolean hasAnyNull() {
+            return csv777 == null || csv778 == null;
+        }
+
+        OcrIken findNonnullValue() {
+            return (csv777 != null) ? csv777
+                    : (csv778 != null) ? csv778
+                            : null;
+        }
+    }
+
+    private static OcrIken777And778Pair getPair(List<OcrIken> ocrIkens) {
         OcrIken csv_777 = null;
         OcrIken csv_778 = null;
-        for (OcrIken csv : sameKeyValues) {
-            switch (csv.getOcrID()) {
+        for (OcrIken csv : ocrIkens) {
+            switch (csv.getOCRID()) {
                 case _777:
                     csv_777 = csv;
                     continue;
@@ -283,59 +337,14 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 default:
             }
         }
-        if (csv_777 == null || csv_778 == null) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("OCRIKEN.csvから対象のレコードが取得できませんでした。 ")
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return false; //TODO 不正のため、エラーリスト出力対象。
-        }
-        CatalogLine ca3_777 = this.catalog.find(Models.ID777, csv_777.getSheetID()).orElse(null);
-        if (ca3_777 == null) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                    .append("カタログデータの取得に失敗しました。 ")
-                    .append(" モデル：").append(Models.ID777)
-                    .append(" SheetID下8桁：").append(csv_777.getSheetID().get帳票一連ID下8桁())
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            return false; //TODO 不正のため、エラーリスト出力対象。
-        }
-        CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, csv_778.getSheetID()).orElse(null);
-        if (ca3_778 != null) {
-            /*----------------------------------------------------------------------------------*/
-            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                    .append("表面は OCRID = 777 から、裏面は OCRID = 778 から画像を取得します。")
-                    .toString());
-            /*----------------------------------------------------------------------------------*/
-            boolean copyRimenSucceeds = OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3_778.getImageFileNames().subList(0, 1),
-                    this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
-            if (!copyRimenSucceeds) {
-                /*----------------------------------------------------------------------------------*/
-                _Logger.gyomuLog(_GyomuLogData.LogType.Error, new RStringBuilder()
-                        .append("裏面の取得に失敗しました。")
-                        .toString());
-                /*----------------------------------------------------------------------------------*/
-                return false; //TODO 不正のため、エラーリスト出力対象。
-            }
-            return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames().subList(0, 1),
-                    this.processParameter.getImageFilePaths(), FileNameConvertionTheories.ID777);
-        }
-        /*----------------------------------------------------------------------------------*/
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("表面・裏面とも、OCRID = 777 から画像を取得します。")
-                .toString());
-        /*----------------------------------------------------------------------------------*/
-        FileNameConvertionTheories theory
-                = new RString("1").equals(csv_777.get全体イメージ表側インデックス())
-                        ? FileNameConvertionTheories.ID777
-                        : FileNameConvertionTheories.ID777_reversed;
-        return OcrTorikomiUtil.copyImageFilesToDirectory(targetDirectoryPath, ca3_777.getImageFileNames(),
-                this.processParameter.getImageFilePaths(), theory);
+        return new OcrIken777And778Pair(csv_777, csv_778);
+    }
+//--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
+
+    private static ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {
+        return ImageinputMapperParamter.createParamter(key1.get証記載保険者番号(), key1.get被保険者番号(), key1.get認定申請日());
     }
 
-//--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
     /**
      * 有効な厚労省IF識別コードである場合、{@code true}を返します。
      */
@@ -343,6 +352,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return 厚労省IF識別コード == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="主治医意見書意見項目">
     private static void insertOrUpdate主治医意見書項目By(IBatchTableWriter<? super DbT5304ShujiiIkenshoIkenItemEntity> dbWriter,
             ImageinputRelate ir, OcrIken ocrIken) {
         for (DbT5304ShujiiIkenshoIkenItemEntity dbT5304 : createOrEdit主治医意見書意見項目s(ir, ocrIken)) {
@@ -398,7 +408,9 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setRemban(連番);
         return entity;
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="主治医意見書情報">
     private static void insertOrUpdate主治医意見書情報By(IBatchTableWriter<? super DbT5302ShujiiIkenshoJohoEntity> dbWriter,
             ImageinputRelate ir, OcrIken ocrIken) {
         DbT5302ShujiiIkenshoJohoEntity dbT5302 = createOrEdit主治医意見書情報(ir, ocrIken);
@@ -436,5 +448,5 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setShindamMei3(RString.EMPTY);
         return entity;
     }
-
+    //</editor-fold>
 }

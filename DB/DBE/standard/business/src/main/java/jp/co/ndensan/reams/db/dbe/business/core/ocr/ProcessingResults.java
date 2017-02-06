@@ -6,86 +6,93 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
 
 /**
  * 複数の{@link IProcessingResult}を保持します。
  */
-public final class ProcessingResults {
+public final class ProcessingResults implements IProcessingResults {
 
-    private final List<IProcessingResult> list;
-    private boolean hasErrorFlag;
+    private final Map<Type, List<IProcessingResult>> elements;
 
     /**
      * インスタンスを生成します。
      */
     public ProcessingResults() {
-        list = new ArrayList<>();
-        hasErrorFlag = false;
+        elements = new HashMap<>();
+        elements.put(Type.ERROR, new ArrayList<IProcessingResult>());
+        elements.put(Type.WARNING, new ArrayList<IProcessingResult>());
+        elements.put(Type.SUCCESS, new ArrayList<IProcessingResult>());
     }
 
     /**
      * @param pr 追加する{@link IProcessingResult}
-     * @return 追加した{@link IProcessingResult}
      */
-    public boolean add(IProcessingResult pr) {
-        this.list.add(pr);
-        this.hasErrorFlag |= pr.type().isError();
-        return true;
+    @Override
+    public void add(IProcessingResult pr) {
+        this.elements.get(pr.type()).add(pr);
     }
 
-    /**
-     * @return
-     * 保持する要素に{@link IProcessingResult.Type#ERROR ERROR}を含む場合、{@code true}.
-     */
+    @Override
+    public void addAll(IProcessingResults prs) {
+        for (IProcessingResult pr : prs) {
+            this.add(pr);
+        }
+    }
+
+    @Override
     public boolean hasError() {
-        return this.hasErrorFlag;
+        return !this.elements.get(Type.ERROR).isEmpty();
     }
 
     /**
      * @return 保持する全要素
      */
     public List<IProcessingResult> values() {
-        return new ArrayList<>(this.list);
+        List<IProcessingResult> list = new ArrayList<>();
+        for (List<IProcessingResult> e : this.elements.values()) {
+            list.addAll(list);
+        }
+        return list;
     }
 
-    /**
-     * 保持する{@link IProcessingResult}を結合して返します。
-     * <p/>
-     * {@link IProcessingResult.Type#ERROR ERROR}を含む場合、その{@link IProcessingResult}を返します。
-     * {@link IProcessingResult.Type#ERROR ERROR}以外は、全要素の備考を結合し、新たな{@link IProcessingResult}を返します。
-     * その際{@link IProcessingResult.Type#WARNING WARNING}を含めば、結果は{@link IProcessingResult.Type#WARNING WARNING}になります。
-     * 含まなければ、結果は{@link IProcessingResult.Type#SUCCESS SUCCESS}となります。
-     *
-     * @return 保持する{@link IProcessingResult}を結合した結果
-     */
-    public IProcessingResult get() {
-        if (hasError()) {
-            IProcessingResult error = findErrorFrom(this.list);
-            if (error != null) {
-                return error;
-            }
-        }
-        RStringBuilder builder = new RStringBuilder();
-        boolean hasWarning = false;
-        for (IProcessingResult pr : this.list) {
-            hasWarning |= pr.type().isWarning();
-            if (builder.length() != 0) {
-                builder.append(";");
-            }
-            builder.append(pr.note());
-        }
-        return hasWarning ? ProcessingResultFactory.warning(builder.toRString())
-                : ProcessingResultFactory.success(builder.toRString());
+    @Override
+    public Iterator<IProcessingResult> iterator() {
+        return this.values().iterator();
     }
 
-    private static IProcessingResult findErrorFrom(List<IProcessingResult> list) {
-        for (IProcessingResult pr : list) {
-            if (pr.type().isError()) {
-                return pr;
+    @Override
+    public boolean isEmpty() {
+        for (List<IProcessingResult> list : elements.values()) {
+            if (list.isEmpty()) {
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public Set<IOcrData> allOcrDataInError() {
+        Set<IOcrData> set = new HashSet<>();
+        for (IProcessingResult pr : this.elements.get(Type.ERROR)) {
+            set.add(pr.ocrData());
+        }
+        return set;
+    }
+
+    @Override
+    public Set<IOcrData> allOcrDataNotError() {
+        Set<IOcrData> set = new HashSet<>();
+        for (IProcessingResult pr : values()) {
+            set.add(pr.ocrData());
+        }
+        set.removeAll(allOcrDataInError());
+        return set;
     }
 }

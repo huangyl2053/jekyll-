@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Setter
 public class OcrTorikomiKekkaCsvEntity {
 
-    @CsvField(order = 10, name = "取込日")
-    private RString 取込日西暦;
     @CsvField(order = 20, name = "ID")
     private RString ocrID;
     @CsvField(order = 30, name = "帳票連番")

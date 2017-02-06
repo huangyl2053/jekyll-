@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.Comparators;
 
 /**
  * 複数の{@link OcrChosa}を扱います。
@@ -58,69 +59,72 @@ public final class OcrChosas implements Iterable<OcrChosa> {
      *
      * @return 保持する{@link OcrChosa}が持つ、特記事項のファイル名と項目番号の全ペア.
      */
-    public TokkiImageFileNames editedFileNames連番重複再付番() {
+    public OcrTokkiJikoColumns editedFileNames連番再付番() {
         return editFileNames連番重複時再付番(this.records);
     }
 
     //<editor-fold defaultstate="collapsed" desc="editFileNames連番重複時再付番()">
-    private static TokkiImageFileNames editFileNames連番重複時再付番(Collection<? extends OcrChosa> records) {
-        List<TokkiImageFileName> list = new ArrayList<>();
-        for (List<TokkiImageFileName> fileNames
+    private static OcrTokkiJikoColumns editFileNames連番重複時再付番(Collection<? extends OcrChosa> records) {
+        List<OcrTokkiJikoColumn> list = new ArrayList<>();
+        for (List<OcrTokkiJikoColumn> sameChosaKomokus
                 : groupingByChosaKomokuNo(imageFileNames(records)).values()) {
-            list.addAll(renumberInterlappingRemban(fileNames));
+            list.addAll(renumberDuplicateRembanIn(sameChosaKomokus));
         }
-        return new TokkiImageFileNames(list);
+        return new OcrTokkiJikoColumns(list);
     }
 
-    private static List<TokkiImageFileName> imageFileNames(Collection<? extends OcrChosa> records) {
-        List<TokkiImageFileName> files = new ArrayList<>();
+    private static List<OcrTokkiJikoColumn> imageFileNames(Collection<? extends OcrChosa> records) {
+        List<OcrTokkiJikoColumn> columns = new ArrayList<>();
         for (OcrChosa record : records) {
-            files.addAll(record.collectTokkiImageFileNames().removedEmptyKomokuNo().toList());
+            columns.addAll(record.get特記事項Columns().removedEmptyKomokuNo().toList());
         }
-        return files;
+        return columns;
     }
 
-    private static Map<RString, List<TokkiImageFileName>> groupingByChosaKomokuNo(Collection<? extends TokkiImageFileName> imageFileNames) {
-        Map<RString, List<TokkiImageFileName>> map = new HashMap<>();
-        for (TokkiImageFileName file : imageFileNames) {
-            RString chosaKomokuNo = file.komokuNo().getChosaKomokuNo();
-            if (!map.containsKey(chosaKomokuNo)) {
-                map.put(chosaKomokuNo, new ArrayList<TokkiImageFileName>());
+    private static Map<RString, List<OcrTokkiJikoColumn>> groupingByChosaKomokuNo(Collection<? extends OcrTokkiJikoColumn> imageFileNames) {
+        Map<RString, List<OcrTokkiJikoColumn>> map = new HashMap<>();
+        for (OcrTokkiJikoColumn column : imageFileNames) {
+            RString chosaKomokuNo = column.komokuNo().getChosaKomokuNo();
+            if (chosaKomokuNo.isEmpty()) {
+                continue;
             }
-            map.get(chosaKomokuNo).add(file);
+            if (!map.containsKey(chosaKomokuNo)) {
+                map.put(chosaKomokuNo, new ArrayList<OcrTokkiJikoColumn>());
+            }
+            map.get(chosaKomokuNo).add(column);
         }
         return map;
     }
 
-    private static Collection<TokkiImageFileName> renumberInterlappingRemban(List<TokkiImageFileName> files) {
-        Collections.sort(files, fileNameAsc());
-        List<TokkiImageFileName> duplicates = new ArrayList<>();
-        Map<Integer, TokkiImageFileName> result = new HashMap<>();
-        for (TokkiImageFileName file : files) {
-            int remban = file.komokuNo().getRemban();
-            if (result.containsKey(remban)) {
-                duplicates.add(file);
-                continue;
-            }
-            result.put(remban, file);
-        }
-        for (TokkiImageFileName file : duplicates) {
-            int newRemban = 1;
+    private static Collection<OcrTokkiJikoColumn> renumberDuplicateRembanIn(List<OcrTokkiJikoColumn> sameChosaKomokus) {
+        Collections.sort(sameChosaKomokus, new Comparators.MultiComparator<>(komokuNoAsc(), sheetIDAsc()));
+        Map<Integer, OcrTokkiJikoColumn> result = new HashMap<>();
+        for (OcrTokkiJikoColumn column : sameChosaKomokus) {
+            int newRemban = column.komokuNo().getRemban();
             while (result.containsKey(newRemban)) {
                 newRemban++;
             }
             result.put(newRemban,
-                    new TokkiImageFileName(file.value(), file.komokuNo().renumbered(newRemban))
+                    new OcrTokkiJikoColumn(column, column.komokuNo().renumbered(newRemban))
             );
         }
         return result.values();
     }
 
-    private static Comparator<TokkiImageFileName> fileNameAsc() {
-        return new Comparator<TokkiImageFileName>() {
+    private static Comparator<OcrTokkiJikoColumn> komokuNoAsc() {
+        return new Comparator<OcrTokkiJikoColumn>() {
             @Override
-            public int compare(TokkiImageFileName o1, TokkiImageFileName o2) {
-                return o1.value().compareTo(o2.value());
+            public int compare(OcrTokkiJikoColumn o1, OcrTokkiJikoColumn o2) {
+                return o1.komokuNo().compareTo(o2.komokuNo());
+            }
+        };
+    }
+
+    private static Comparator<OcrTokkiJikoColumn> sheetIDAsc() {
+        return new Comparator<OcrTokkiJikoColumn>() {
+            @Override
+            public int compare(OcrTokkiJikoColumn o1, OcrTokkiJikoColumn o2) {
+                return o1.sheetID().compareTo(o2.sheetID());
             }
         };
     }
@@ -132,7 +136,7 @@ public final class OcrChosas implements Iterable<OcrChosa> {
     public OcrChosasByOCRID groupingByOCRID() {
         Map<OCRID, OcrChosas> map = new HashMap<>();
         for (OcrChosa v : this) {
-            OCRID ocrID = v.getOcrID();
+            OCRID ocrID = v.getOCRID();
             if (!map.containsKey(ocrID)) {
                 map.put(ocrID, new OcrChosas());
             }

@@ -5,9 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -27,19 +30,13 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
  */
 public final class OcrTorikomiResult {
 
-    private final RDate 取込日;
-    private final OCRID ocrid;
-    private final SheetID sheetID;
     private final ShinseiKey key;
     private final RString 氏名;
     private final RString 氏名カナ;
     private final ShinkiKoshinKubun 新規更新区分;
-    private final IProcessingResult 処理結果;
+    private final IProcessingResults 処理結果;
 
     private OcrTorikomiResult(Builder builder) {
-        this.取込日 = builder.取込日;
-        this.ocrid = builder.ocrID;
-        this.sheetID = builder.sheetID;
         this.key = builder.key;
         this.氏名 = builder.氏名;
         this.氏名カナ = builder.氏名カナ;
@@ -47,11 +44,9 @@ public final class OcrTorikomiResult {
         this.処理結果 = builder.処理結果;
     }
 
+    //TODO
     OcrTorikomiKekkaCsvEntity toEntity() {
         OcrTorikomiKekkaCsvEntity entity = new OcrTorikomiKekkaCsvEntity();
-        entity.set取込日西暦(toSlashSeparated(this.取込日.seireki()));
-        entity.setOcrID(this.ocrid.value());
-        entity.set帳票連番(this.sheetID.value());
         entity.set証記載保険者番号(this.key.get証記載保険者番号());
         FlexibleDate shinseiYmd = this.key.get認定申請日AsFlexibleDate();
         entity.set申請日西暦(shinseiYmd.isValid() ? toSlashSeparated(shinseiYmd.seireki()) : RString.EMPTY);
@@ -59,8 +54,8 @@ public final class OcrTorikomiResult {
         entity.set氏名(this.氏名);
         entity.set氏名カナ(this.氏名カナ);
         entity.set新規更新区分(this.新規更新区分.toRString());
-        entity.set結果(this.処理結果.type().getName());
-        entity.set備考(処理結果.note());
+//        entity.set結果(this.処理結果.type().getName());
+//        entity.set備考(処理結果.note());
         return null;
     }
 
@@ -81,30 +76,11 @@ public final class OcrTorikomiResult {
      */
     public static class Builder {
 
-        private final RDate 取込日;
         private final ShinseiKey key;
-        private OCRID ocrID = OCRID.EMPTY;
-        private SheetID sheetID = SheetID.EMPTY;
         private RString 氏名 = RString.EMPTY;
         private RString 氏名カナ = RString.EMPTY;
         private ShinkiKoshinKubun 新規更新区分 = ShinkiKoshinKubun.対象データなし;
-        private IProcessingResult 処理結果;
-
-        /**
-         * {@link Builder}を生成します。
-         *
-         * @param 取込日 取込日
-         * @param ocrID OCRID
-         * @param sheetID SheetID
-         * @param key {@link ShinseiKey 申請のキー}
-         */
-        @Deprecated
-        public Builder(RDate 取込日, OCRID ocrID, SheetID sheetID, ShinseiKey key) {
-            this.取込日 = 取込日;
-            this.ocrID = ocrID;
-            this.sheetID = sheetID;
-            this.key = key;
-        }
+        private IProcessingResults 処理結果;
 
         /**
          * {@link Builder}を生成します。
@@ -112,27 +88,8 @@ public final class OcrTorikomiResult {
          * @param 取込日 取込日
          * @param key {@link ShinseiKey 申請のキー}
          */
-        public Builder(RDate 取込日, ShinseiKey key) {
-            this.取込日 = 取込日;
+        public Builder(ShinseiKey key) {
             this.key = key;
-        }
-
-        /**
-         * @param ocrID OCRID
-         * @return {@link Builder}
-         */
-        public Builder setOcrID(OCRID ocrID) {
-            this.ocrID = ocrID;
-            return this;
-        }
-
-        /**
-         * @param sheetID シートID(帳票連番)
-         * @return {@link Builder}
-         */
-        public Builder setSheetID(SheetID sheetID) {
-            this.sheetID = sheetID;
-            return this;
         }
 
         /**
@@ -153,16 +110,28 @@ public final class OcrTorikomiResult {
          * @return {@link Builder}
          */
         public Builder set処理結果(IProcessingResult 処理結果) {
-            this.処理結果 = 処理結果;
+            this.処理結果.add(処理結果);
             return this;
         }
 
         /**
+         * @param ocrData {@link IOcrData}
          * @param messageToNote エラーの内容を表す{@link OcrTorikomiMessages}
          * @return {@link Builder}
          */
-        public Builder set処理結果AsError(OcrTorikomiMessages messageToNote) {
-            this.処理結果 = ProcessingResultFactory.error(messageToNote);
+        public Builder set処理結果AsError(IOcrData ocrData, OcrTorikomiMessages messageToNote) {
+            ProcessingResults results = new ProcessingResults();
+            results.add(ProcessingResultFactory.error(ocrData, messageToNote));
+            this.処理結果 = results;
+            return this;
+        }
+
+        /**
+         * @param 処理結果s {@link IProcessingResults}
+         * @return {@link Builder}
+         */
+        public Builder set処理結果s(IProcessingResults 処理結果s) {
+            this.処理結果.addAll(処理結果s);
             return this;
         }
 
@@ -170,7 +139,7 @@ public final class OcrTorikomiResult {
          * @return {@link OcrTorikomiResult}
          */
         public OcrTorikomiResult build() {
-            if (処理結果 == null) {
+            if (処理結果.isEmpty()) {
                 throw new IllegalStateException("");
             }
             return new OcrTorikomiResult(this);
