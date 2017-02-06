@@ -55,16 +55,6 @@ public class NinteichosaMainValidationHandler {
                     UrErrorMessages.大小関係が不正, String.valueOf(sonotaKikanCode)),
                     div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom()));
         }
-        if (kikanKubun.equals(SELECTKEY_空白)) {
-            validPairs.add(new ValidationMessageControlPair(new NinteichosaMainValidationHandler.IdocheckMessages(
-                    UrErrorMessages.必須項目_追加メッセージあり, "機関の区分"),
-                    div.getChosainSearch().getDdlkikankubun()));
-        }
-        if (itakuKubun.equals(SELECTKEY_空白)) {
-            validPairs.add(new ValidationMessageControlPair(new NinteichosaMainValidationHandler.IdocheckMessages(
-                    UrErrorMessages.必須項目_追加メッセージあり, "調査委託区分"),
-                    div.getChosainSearch().getDdlitakukubun()));
-        }
         return validPairs;
     }
 
