@@ -36,7 +36,11 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
         this.elements = new ArrayList<>();
     }
 
-    public List<RString> lightJoinByColumnNo(List<RString> imageFileNames) {
+    /**
+     * @param imageFileNames
+     * @return
+     */
+    public List<RString> filterImageFileNamesByColumnNo(List<RString> imageFileNames) {
         List<RString> list = new ArrayList<>();
         for (OcrTokkiJikoColumn column : this) {
             int index = column.colmunNo();
@@ -49,9 +53,8 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
     }
 
     /**
-     *
-     * @param sheetID
-     * @return
+     * @param sheetID {@link SheetID}
+     * @return 指定の{@link SheetID}と合致する値を持つ要素すべて
      */
     public OcrTokkiJikoColumns filteredBySheetID(SheetID sheetID) {
         List<OcrTokkiJikoColumn> list = new ArrayList<>();
@@ -63,6 +66,10 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
         return new OcrTokkiJikoColumns(list);
     }
 
+    /**
+     * @param sheetIDs {@link SheetID}の{@link Collection}
+     * @return 指定の{@link SheetID}と合致する値を持つ要素すべて
+     */
     public OcrTokkiJikoColumns filteredBySheetIDs(Collection<? extends SheetID> sheetIDs) {
         List<OcrTokkiJikoColumn> list = new ArrayList<>();
         for (OcrTokkiJikoColumn column : this) {
@@ -73,8 +80,12 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
         return new OcrTokkiJikoColumns(list);
     }
 
-    public OcrTokkiJikoColumns filterdByAnyOcrData(Iterable<? extends IOcrData> anyOcrData) {
-        return filteredBySheetIDs(toSheetIDs(anyOcrData));
+    /**
+     * @param ocrData {@link IOcrData}
+     * @return 指定の{@link IOcrData}が持つ{@link SheetID}と合致する値を持つ要素すべて
+     */
+    public OcrTokkiJikoColumns filterdByOcrData(Iterable<? extends IOcrData> ocrData) {
+        return filteredBySheetIDs(toSheetIDs(ocrData));
     }
 
     private static Set<SheetID> toSheetIDs(Iterable<? extends IOcrData> anyOcrData) {
@@ -83,6 +94,20 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
             set.add(ocrData.getSheetID());
         }
         return set;
+    }
+
+    /**
+     * @param komokuNos 絞り込みたい{@link KomokuNo}
+     * @return 指定の{@link KomokuNO}と合致する要素のみに絞り込んだ{@link OcrTokkiJikoColumns}
+     */
+    public OcrTokkiJikoColumns filterdByKomokuNo(Collection<? extends KomokuNo> komokuNos) {
+        List<OcrTokkiJikoColumn> list = new ArrayList<>();
+        for (OcrTokkiJikoColumn a : this) {
+            if (komokuNos.contains(a.komokuNo())) {
+                list.add(a);
+            }
+        }
+        return new OcrTokkiJikoColumns(list);
     }
 
     /**
@@ -141,6 +166,9 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
         return new OcrTokkiJikoColumns(list);
     }
 
+    /**
+     * @return 連番を再付番した要素すべて
+     */
     public OcrTokkiJikoColumns findRembanRenumberd() {
         List<OcrTokkiJikoColumn> list = new ArrayList<>();
         for (OcrTokkiJikoColumn a : this.elements) {
@@ -183,10 +211,12 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
     }
 
     /**
-     * @param komokuNos 取り除きたい{@link KomokuNo}の{@link Collection}
-     * @return 指定の{@link KomokuNo}をすべて取り除いた新しい{@link OcrTokkiJikoColumns}
+     * @param other 取り除きたい{@link KomokuNo}をもつ{@link OcrTokkiJikoColumns}
+     * @return
+     * 指定の{@link OcrTokkiJikoColumns}と同じ{@link KomokuNo}を持つ要素をすべて取り除いた新しい{@link OcrTokkiJikoColumns}
      */
-    public OcrTokkiJikoColumns removed(Collection<? extends KomokuNo> komokuNos) {
+    public OcrTokkiJikoColumns removedSameKomokuNo(OcrTokkiJikoColumns other) {
+        List<KomokuNo> komokuNos = other.asKomokuNos();
         List<OcrTokkiJikoColumn> list = new ArrayList<>();
         for (OcrTokkiJikoColumn a : this) {
             if (komokuNos.contains(a.komokuNo())) {

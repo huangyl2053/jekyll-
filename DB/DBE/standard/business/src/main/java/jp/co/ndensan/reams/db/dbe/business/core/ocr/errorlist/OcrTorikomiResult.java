@@ -5,21 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrTorikomiKekkaCsvEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -33,30 +34,35 @@ public final class OcrTorikomiResult {
     private final ShinseiKey key;
     private final RString 氏名;
     private final RString 氏名カナ;
-    private final ShinkiKoshinKubun 新規更新区分;
     private final IProcessingResults 処理結果;
 
     private OcrTorikomiResult(Builder builder) {
         this.key = builder.key;
         this.氏名 = builder.氏名;
         this.氏名カナ = builder.氏名カナ;
-        this.新規更新区分 = builder.新規更新区分;
         this.処理結果 = builder.処理結果;
     }
 
-    //TODO
-    OcrTorikomiKekkaCsvEntity toEntity() {
-        OcrTorikomiKekkaCsvEntity entity = new OcrTorikomiKekkaCsvEntity();
-        entity.set証記載保険者番号(this.key.get証記載保険者番号());
-        FlexibleDate shinseiYmd = this.key.get認定申請日AsFlexibleDate();
-        entity.set申請日西暦(shinseiYmd.isValid() ? toSlashSeparated(shinseiYmd.seireki()) : RString.EMPTY);
-        entity.set被保険者番号(this.key.get被保険者番号());
-        entity.set氏名(this.氏名);
-        entity.set氏名カナ(this.氏名カナ);
-        entity.set新規更新区分(this.新規更新区分.toRString());
-//        entity.set結果(this.処理結果.type().getName());
-//        entity.set備考(処理結果.note());
-        return null;
+    Collection<OcrTorikomiKekkaCsvEntity> toEntities() {
+        List<IProcessingResult> results = new ArrayList<>(this.処理結果.values());
+
+        Set<OcrTorikomiKekkaCsvEntity> entities = new HashSet<>();
+        for (IProcessingResult pr : results) {
+            OcrTorikomiKekkaCsvEntity entity = new OcrTorikomiKekkaCsvEntity();
+            entity.setOCRID(pr.ocrData().getOCRID().value());
+            entity.setSheetID(pr.ocrData().getSheetID().value());
+            entity.set証記載保険者番号(this.key.get証記載保険者番号());
+            FlexibleDate shinseiYmd = this.key.get認定申請日AsFlexibleDate();
+            entity.set申請日西暦(shinseiYmd.isValid() ? toSlashSeparated(shinseiYmd.seireki()) : RString.EMPTY);
+            entity.set被保険者番号(this.key.get被保険者番号());
+            entity.set氏名(this.氏名);
+            entity.set氏名カナ(this.氏名カナ);
+            entity.set結果(pr.type().getName());
+            entity.setKekkaCode(pr.type().code());
+            entity.set備考(pr.note());
+            entities.add(entity);
+        }
+        return entities;
     }
 
     private static RString toSlashSeparated(Seireki seireki) {
@@ -85,7 +91,6 @@ public final class OcrTorikomiResult {
         /**
          * {@link Builder}を生成します。
          *
-         * @param 取込日 取込日
          * @param key {@link ShinseiKey 申請のキー}
          */
         public Builder(ShinseiKey key) {
@@ -111,18 +116,6 @@ public final class OcrTorikomiResult {
          */
         public Builder set処理結果(IProcessingResult 処理結果) {
             this.処理結果.add(処理結果);
-            return this;
-        }
-
-        /**
-         * @param ocrData {@link IOcrData}
-         * @param messageToNote エラーの内容を表す{@link OcrTorikomiMessages}
-         * @return {@link Builder}
-         */
-        public Builder set処理結果AsError(IOcrData ocrData, OcrTorikomiMessages messageToNote) {
-            ProcessingResults results = new ProcessingResults();
-            results.add(ProcessingResultFactory.error(ocrData, messageToNote));
-            this.処理結果 = results;
             return this;
         }
 

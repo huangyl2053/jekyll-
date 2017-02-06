@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -51,10 +52,8 @@ public final class ProcessingResults implements IProcessingResults {
         return !this.elements.get(Type.ERROR).isEmpty();
     }
 
-    /**
-     * @return 保持する全要素
-     */
-    public List<IProcessingResult> values() {
+    @Override
+    public Collection<IProcessingResult> values() {
         List<IProcessingResult> list = new ArrayList<>();
         for (List<IProcessingResult> e : this.elements.values()) {
             list.addAll(list);

@@ -35,22 +35,24 @@ public interface IProcessingResult {
         /**
          * 成功
          */
-        SUCCESS("正常終了"),
+        SUCCESS("正常終了", 3),
         /**
          * エラー
          */
-        ERROR("エラー"),
+        ERROR("エラー", 1),
         /**
          * 警告
          * <p/>
          * 「警告」は、処理を継続するという点で、エラーと異なる。
          */
-        WARNING("警告");
+        WARNING("警告", 2);
 
         private final RString theName;
+        private final int theCode;
 
-        private Type(String name) {
+        private Type(String name, int code) {
             this.theName = new RString(name);
+            this.theCode = code;
         }
 
         /**
@@ -65,6 +67,13 @@ public interface IProcessingResult {
          */
         public boolean isSuccess() {
             return this == Type.SUCCESS;
+        }
+
+        /**
+         * @return コード
+         */
+        public int code() {
+            return this.theCode;
         }
 
         /**

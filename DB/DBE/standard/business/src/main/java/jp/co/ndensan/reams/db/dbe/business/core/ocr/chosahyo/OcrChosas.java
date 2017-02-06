@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Comparators;
@@ -182,5 +184,14 @@ public final class OcrChosas implements Iterable<OcrChosa> {
         return this.records.isEmpty()
                 ? Optional.<OcrChosa>empty()
                 : Optional.ofNullable(this.records.get(0));
+    }
+
+    public Optional<OcrChosa> findBySheetID(SheetID sheetID) {
+        for (OcrChosa ocrChosa : this) {
+            if (Objects.equals(sheetID, ocrChosa.getSheetID())) {
+                return Optional.of(ocrChosa);
+            }
+        }
+        return Optional.empty();
     }
 }

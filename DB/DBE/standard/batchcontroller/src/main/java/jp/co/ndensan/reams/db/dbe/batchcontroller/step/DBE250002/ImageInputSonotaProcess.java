@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.SonotaShiryoFileNameConvertionTheory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
@@ -39,8 +40,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * その他資料の読み込み処理です。
@@ -51,6 +56,8 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
 
     @BatchWriter
     private BatchPermanentTableWriter<DbT5115ImageEntity> writer_DbT5115;
+    private OcrTorikomiResultListEditor kekkaListEditor;
+
     /**
      * このバッチプロセスのパラメータです。
      */
@@ -69,7 +76,9 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
 
     @Override
     protected void createWriter() {
-        writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
+        this.writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
+        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        this.kekkaListEditor.close();
     }
 
     @Override
@@ -85,7 +94,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
         final OcrSonota ocrSonota = OcrSonota.parsed(entity.getCsvData());
         if (hasBreak(this.key, ocrSonota.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
-                keyBreakProcess(this.key, this.cache);
+                _keyBreakProcess(this.key, this.cache);
             }
             /* キャッシュのクリアとキーの更新 */
             this.cache = new ArrayList<>();
@@ -102,7 +111,11 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     @Override
     protected void afterExecute() {
         super.afterExecute();
-        keyBreakProcess(this.key, this.cache);
+        _keyBreakProcess(this.key, this.cache);
+    }
+
+    private void _keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
+        this.kekkaListEditor.writeMultiLine(keyBreakProcess(key, ocrSonotas));
     }
 
     private List<OcrTorikomiResult> keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
@@ -154,7 +167,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                     .fileNameTheory(theory)
                     .targetImageFileNames(entry.getValue().getImageFileNames())
                     .ocrData(entry.getKey())
-                    .save(writer_DbT5115);
+                    .save(this.writer_DbT5115);
 
             sharedFileID = r.get共有ファイルID();
             results.addAll(r.getResults());

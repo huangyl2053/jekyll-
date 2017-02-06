@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -37,7 +38,18 @@ public interface IProcessingResults extends Iterable<IProcessingResult> {
      */
     boolean isEmpty();
 
+    /**
+     * @return
+     */
     Set<IOcrData> allOcrDataNotError();
 
+    /**
+     * @return
+     */
     Set<IOcrData> allOcrDataInError();
+
+    /**
+     * @return
+     */
+    Collection<IProcessingResult> values();
 }
