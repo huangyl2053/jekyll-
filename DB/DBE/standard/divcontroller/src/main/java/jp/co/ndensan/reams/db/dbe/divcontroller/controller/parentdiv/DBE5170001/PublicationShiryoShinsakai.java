@@ -47,7 +47,6 @@ public class PublicationShiryoShinsakai {
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))
                 .append(審査会一覧_開催番号);
-        前排他キーのセット(builder.toRString());
         getHandler(div).onLoad(開催予定情報);
         if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)) {
             div.setHdnChkSubeteJimuFlag(new RString(Boolean.TRUE.toString()));
@@ -149,22 +148,7 @@ public class PublicationShiryoShinsakai {
         RStringBuilder builder = new RStringBuilder();
         builder.append(new RString("DBEShinsakaiNo"))
                 .append(審査会一覧_開催番号);
-        前排他キーの解除(builder.toRString());
         return ResponseData.of(getHandler(div).onClick_btnKogakuParamSave()).respond();
-    }
-
-    private void 前排他キーのセット(RString 排他) {
-        LockingKey 排他キー = new LockingKey(排他);
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            throw new ApplicationException(message);
-        }
-    }
-
-    private void 前排他キーの解除(RString 排他) {
-        LockingKey 排他キー = new LockingKey(排他);
-        RealInitialLocker.release(排他キー);
     }
 
     private PublicationShiryoShinsakaiHandler getHandler(PublicationShiryoShinsakaiDiv div) {

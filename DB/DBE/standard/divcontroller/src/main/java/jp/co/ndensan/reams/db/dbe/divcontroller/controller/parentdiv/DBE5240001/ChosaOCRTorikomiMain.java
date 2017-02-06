@@ -27,14 +27,15 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajoh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
+import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -50,9 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -151,7 +149,9 @@ public class ChosaOCRTorikomiMain {
                 List<ChosaOCRTorikomiBusiness> 関連データList
                         = ChosaOCRTorikomiFinder.createInstance().getChosahyoTorikomiKekka(param).records();
                 for (ChosaOCRTorikomiBusiness 関連データ : 関連データList) {
-                    AccessLogger.log(AccessLogType.照会, toPersonalData(関連データ.get申請書管理番号()));
+                     ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(関連データ.get証記載保険者番号());
+                     NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, 関連データ.get被保険者番号());
+                     ninteiAccessLogger.log();
                     if (関連データ.get証記載保険者番号().equals(csvData.get保険者番号()) && 関連データ.get被保険者番号().equals(csvData.get被保険者番号())) {
                         TorikomiData data = getHandler(div).setDB更新用データ(csvData);
                         data.setNo(関連データ.getNo());
@@ -179,14 +179,6 @@ public class ChosaOCRTorikomiMain {
         return dB更新用;
     }
 
-    private PersonalData toPersonalData(ShinseishoKanriNo 申請書管理番号) {
-        RString 番号 = RString.EMPTY;
-        if (申請書管理番号 != null) {
-            番号 = 申請書管理番号.value();
-        }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
-    }
 
     private void setDB処理用(List<TorikomiEntity> dB更新用, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
         getHandler(div).set画面一覧(dB更新用, 審査会開催番号);

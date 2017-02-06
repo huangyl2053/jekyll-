@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoChosaTokkiBuilder;
@@ -29,13 +30,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikoBui
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.GaikyoChosaTokkiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.IkenshoImageJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -50,9 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -193,7 +191,9 @@ public class ImageJohoMaskingHandler {
             if (result.getイメージ共有ファイルID() != null) {
                 row.set共有ファイルID(new RString(result.getイメージ共有ファイルID().toString()));
             }
-            setアクセスログ(result.get申請書管理番号().value());
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(result.get証記載保険者番号());
+            NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, result.get被保険者番号());
+            ninteiAccessLogger.log();
             rowList.add(row);
         }
         div.getDgImageMaskShoriTaishosha().setDataSource(rowList);
@@ -445,12 +445,6 @@ public class ImageJohoMaskingHandler {
         div.getBtnTorikeshi().setDisabled(true);
     }
 
-    private void setアクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY,
-                new ExpandedInformation(new Code("0001"),
-                        new RString("申請書管理番号"), 申請書管理番号)));
-
-    }
 
     private enum マスク有りイメージ一覧 {
 
