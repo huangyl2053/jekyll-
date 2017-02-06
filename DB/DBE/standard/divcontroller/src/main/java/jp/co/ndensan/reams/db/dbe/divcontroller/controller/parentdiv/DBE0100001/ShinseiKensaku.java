@@ -214,7 +214,6 @@ public class ShinseiKensaku {
 
             div.getCcdNinteishinseishaFinder().updateSaikinShorisha(被保険者番号, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
-            getHandler(div).setShinseiJohoIchiran(searchResult);
         }
         
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);

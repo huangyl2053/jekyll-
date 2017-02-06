@@ -33,6 +33,10 @@ public class HoshuMasutaKoshinDiv extends Panel {
     private RString homonChosahoshuTankaState;
     @JsonProperty("shinsakaiIinBetuTankaState")
     private RString shinsakaiIinBetuTankaState;
+    @JsonProperty("hdnShinsakaiIinCode")
+    private RString hdnShinsakaiIinCode;
+    @JsonProperty("hdnShinsakaiIinName")
+    private RString hdnShinsakaiIinName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -146,6 +150,42 @@ public class HoshuMasutaKoshinDiv extends Panel {
     @JsonProperty("shinsakaiIinBetuTankaState")
     public void setShinsakaiIinBetuTankaState(RString shinsakaiIinBetuTankaState) {
         this.shinsakaiIinBetuTankaState = shinsakaiIinBetuTankaState;
+    }
+
+    /*
+     * gethdnShinsakaiIinCode
+     * @return hdnShinsakaiIinCode
+     */
+    @JsonProperty("hdnShinsakaiIinCode")
+    public RString getHdnShinsakaiIinCode() {
+        return hdnShinsakaiIinCode;
+    }
+
+    /*
+     * sethdnShinsakaiIinCode
+     * @param hdnShinsakaiIinCode hdnShinsakaiIinCode
+     */
+    @JsonProperty("hdnShinsakaiIinCode")
+    public void setHdnShinsakaiIinCode(RString hdnShinsakaiIinCode) {
+        this.hdnShinsakaiIinCode = hdnShinsakaiIinCode;
+    }
+
+    /*
+     * gethdnShinsakaiIinName
+     * @return hdnShinsakaiIinName
+     */
+    @JsonProperty("hdnShinsakaiIinName")
+    public RString getHdnShinsakaiIinName() {
+        return hdnShinsakaiIinName;
+    }
+
+    /*
+     * sethdnShinsakaiIinName
+     * @param hdnShinsakaiIinName hdnShinsakaiIinName
+     */
+    @JsonProperty("hdnShinsakaiIinName")
+    public void setHdnShinsakaiIinName(RString hdnShinsakaiIinName) {
+        this.hdnShinsakaiIinName = hdnShinsakaiIinName;
     }
 
     // </editor-fold>

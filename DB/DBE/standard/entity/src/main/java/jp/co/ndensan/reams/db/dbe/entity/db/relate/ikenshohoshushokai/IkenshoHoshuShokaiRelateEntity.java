@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IkenshoHoshuShokaiRelateEntity {
 
     private RString 市町村コード;
+    private RString 市町村名;
     private RString 主治医医療機関コード;
     private RString 医療機関名称;
     private RString 主治医氏名;

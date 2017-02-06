@@ -326,6 +326,26 @@ public class HoshuMasutaKoshinValidationHandler {
                 || 新規作成終了年月.isBeforeOrEquals(既に存在終了年月) && 既に存在開始年月.isBeforeOrEquals(新規作成終了年月);
     }
 
+    /**
+     * 認定審査会委員チェックを実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs check認定審査会委員() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().isNull()
+                || div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue().isEmpty()) {
+            return validationMessages;
+        }
+        ShinsakaiIinJohoMapperParameter param = ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue());
+        ShinsakaiIinJoho 審査会委員情報 = ShinsakaiIinJohoManager.createInstance().get介護認定審査会委員情報(param);
+        if (null == 審査会委員情報) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.審査委員コードエラー,
+                    div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinKodo()));
+        }
+        return validationMessages;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         開始年月が必須(UrErrorMessages.必須, "開始年月"),

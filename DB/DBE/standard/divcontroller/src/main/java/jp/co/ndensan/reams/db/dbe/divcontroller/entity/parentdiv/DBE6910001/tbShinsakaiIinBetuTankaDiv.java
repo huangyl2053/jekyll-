@@ -104,6 +104,16 @@ public class tbShinsakaiIinBetuTankaDiv extends TabPanel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnShinsakaiIinGuide() {
+        return this.getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+        this.getShinsakaiIinBetuTankaMeisai().setBtnShinsakaiIinGuide(btnShinsakaiIinGuide);
+    }
+
+    @JsonIgnore
     public TextBox getTxtShinsaIinName() {
         return this.getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinName();
     }
