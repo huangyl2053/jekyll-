@@ -31,27 +31,31 @@ public class NinteiChosainMasterCsvEntity {
     private final RString ninteichosaItakusakiCode;
     @CsvField(order = 70, name = "調査委託先名称")
     private final RString jigyoshaMeisho;
-    @CsvField(order = 80, name = "性別")
+    @CsvField(order = 80, name = "性別コード")
+    private final RString seibetsuCode;
+    @CsvField(order = 90, name = "性別")
     private final RString seibetsu;
-    @CsvField(order = 90, name = "地区コード")
+    @CsvField(order = 100, name = "地区コード")
     private final RString chikuCode;
-    @CsvField(order = 100, name = "地区名称")
+    @CsvField(order = 110, name = "地区名称")
     private final RString chikuMeisho;
-    @CsvField(order = 110, name = "調査員資格")
+    @CsvField(order = 120, name = "調査員資格コード")
+    private final RString chosainShikakuCode;
+    @CsvField(order = 130, name = "調査員資格")
     private final RString chosainShikaku;
-    @CsvField(order = 120, name = "調査可能人数")
+    @CsvField(order = 140, name = "調査可能人数")
     private final RString chosaKanoNinzuPerMonth;
-    @CsvField(order = 130, name = "郵便番号")
+    @CsvField(order = 150, name = "郵便番号")
     private final RString yubinNo;
-    @CsvField(order = 140, name = "住所")
+    @CsvField(order = 160, name = "住所")
     private final RString jusho;
-    @CsvField(order = 150, name = "電話番号")
+    @CsvField(order = 170, name = "電話番号")
     private final RString telNo;
-    @CsvField(order = 160, name = "ＦＡＸ番号")
+    @CsvField(order = 180, name = "ＦＡＸ番号")
     private final RString faxNo;
-    @CsvField(order = 170, name = "調査員の状況")
+    @CsvField(order = 190, name = "調査員の状況")
     private final RString jokyoFlag;
-    @CsvField(order = 180, name = "所属機関名称")
+    @CsvField(order = 200, name = "所属機関名称")
     private final RString shozokuKikanName;
 
     /**
@@ -64,9 +68,11 @@ public class NinteiChosainMasterCsvEntity {
      * @param chosainKanaShimei 調査員カナ氏名
      * @param ninteichosaItakusakiCode 調査委託先コード
      * @param jigyoshaMeisho 調査委託先名称
+     * @param seibetsuCode 性別コード
      * @param seibetsu 性別
      * @param chikuCode 地区コード
      * @param chikuMeisho 地区名称
+     * @param chosainShikakuCode 調査員資格コード
      * @param chosainShikaku 調査員資格
      * @param chosaKanoNinzuPerMonth 調査可能人数
      * @param jokyoFlag 状況フラグ
@@ -84,11 +90,13 @@ public class NinteiChosainMasterCsvEntity {
             RString chosainKanaShimei,
             RString ninteichosaItakusakiCode,
             RString jigyoshaMeisho,
+            RString seibetsuCode,
             RString seibetsu,
             RString chikuCode,
             RString chikuMeisho,
+            RString chosainShikakuCode,
             RString chosainShikaku,
-            RString chosaKanoNinzuPerMonth,           
+            RString chosaKanoNinzuPerMonth,
             RString yubinNo,
             RString jusho,
             RString telNo,
@@ -102,9 +110,11 @@ public class NinteiChosainMasterCsvEntity {
         this.chosainKanaShimei = chosainKanaShimei;
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
         this.jigyoshaMeisho = jigyoshaMeisho;
+        this.seibetsuCode = seibetsuCode;
         this.seibetsu = seibetsu;
         this.chikuCode = chikuCode;
         this.chikuMeisho = chikuMeisho;
+        this.chosainShikakuCode = chosainShikakuCode;
         this.chosainShikaku = chosainShikaku;
         this.chosaKanoNinzuPerMonth = chosaKanoNinzuPerMonth;
         this.yubinNo = yubinNo;

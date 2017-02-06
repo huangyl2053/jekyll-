@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class SonotaKikanJohoCSVEntity {
 
     @CsvField(order = 1)
-    private RString 証記載保険者番号;
+    private RString 保険者番号;
     @CsvField(order = 2)
-    private RString 証記載保険者;
+    private RString 保険者;
     @CsvField(order = 3)
     private RString その他機関コード;
     @CsvField(order = 4)
@@ -32,26 +32,26 @@ public class SonotaKikanJohoCSVEntity {
     private RString 郵便番号;
     @CsvField(order = 7)
     private RString 住所;
-    @CsvField(order = 7)
-    private RString 住所カナ;
     @CsvField(order = 8)
-    private RString 電話番号;
+    private RString 住所カナ;
     @CsvField(order = 9)
-    private RString 調査委託区分;
+    private RString 電話番号;
     @CsvField(order = 10)
-    private RString 割付定員;
+    private RString 調査委託区分;
     @CsvField(order = 11)
-    private RString 割付地区;
+    private RString 割付定員;
     @CsvField(order = 12)
-    private RString 機関の区分;
+    private RString 割付地区;
     @CsvField(order = 13)
+    private RString 機関の区分;
+    @CsvField(order = 14)
     private RString その他機関の状況;
 
     /**
      * コンストラクタです。
      *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 証記載保険者 証記載保険者
+     * @param 保険者番号 保険者番号
+     * @param 保険者 保険者
      * @param その他機関コード その他機関コード
      * @param 機関名称 機関名称
      * @param 機関名称カナ 機関名称カナ
@@ -66,8 +66,8 @@ public class SonotaKikanJohoCSVEntity {
      * @param その他機関の状況 その他機関の状況
      */
     public SonotaKikanJohoCSVEntity(
-            RString 証記載保険者番号,
-            RString 証記載保険者,
+            RString 保険者番号,
+            RString 保険者,
             RString その他機関コード,
             RString 機関名称,
             RString 機関名称カナ,
@@ -80,8 +80,8 @@ public class SonotaKikanJohoCSVEntity {
             RString 割付地区,
             RString 機関の区分,
             RString その他機関の状況) {
-        this.証記載保険者番号 = 証記載保険者番号;
-        this.証記載保険者 = 証記載保険者;
+        this.保険者番号 = 保険者番号;
+        this.保険者 = 保険者;
         this.その他機関コード = その他機関コード;
         this.機関名称 = 機関名称;
         this.機関名称カナ = 機関名称カナ;

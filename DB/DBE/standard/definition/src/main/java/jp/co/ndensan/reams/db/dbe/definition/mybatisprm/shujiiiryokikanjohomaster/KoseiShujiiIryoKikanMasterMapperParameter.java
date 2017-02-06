@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 主治医医療機関情報を特定するためのMyBatis用パラメータクラスです。
+ *
  * @reamsid_L DBE-0240-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -45,6 +46,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
     private final boolean 医療機関カナ名称完全一致Flag;
     private final boolean 医療機関カナ名称部分一致Flag;
     private final boolean 市町村識別ID利用Flag;
+    private final RString 開始YMD;
 
     private KoseiShujiiIryoKikanMasterMapperParameter(
             boolean 状況フラグ,
@@ -69,7 +71,8 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
             boolean 医療機関カナ名称後方一致Flag,
             boolean 医療機関カナ名称完全一致Flag,
             boolean 医療機関カナ名称部分一致Flag,
-            boolean 市町村識別ID利用Flag) {
+            boolean 市町村識別ID利用Flag,
+            RString 開始YMD) {
         this.状況フラグ = 状況フラグ;
         this.市町村コード = 市町村コード;
         this.主治医医療機関コードFrom = 主治医医療機関コードFrom;
@@ -93,6 +96,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
         this.医療機関カナ名称完全一致Flag = 医療機関カナ名称完全一致Flag;
         this.医療機関カナ名称部分一致Flag = 医療機関カナ名称部分一致Flag;
         this.市町村識別ID利用Flag = 市町村識別ID利用Flag;
+        this.開始YMD = 開始YMD;
     }
 
     /**
@@ -109,6 +113,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
      * @param 市町村識別ID 市町村識別ID
      * @param 最大表示件数 最大表示件数
      * @param 構成市町村マスタ市町村コード重複種別 構成市町村マスタ市町村コード重複種別
+     * @param 開始YMD 開始YMD
      *
      * @return 主治医医療機関情報パラメータ
      */
@@ -123,7 +128,8 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
             RString 医療機関カナ名称,
             RString 市町村識別ID,
             Decimal 最大表示件数,
-            RString 構成市町村マスタ市町村コード重複種別) {
+            RString 構成市町村マスタ市町村コード重複種別,
+            RString 開始YMD) {
         return new KoseiShujiiIryoKikanMasterMapperParameter(
                 状況フラグ,
                 市町村コード,
@@ -147,6 +153,7 @@ public final class KoseiShujiiIryoKikanMasterMapperParameter {
                 後方一致KEY.equals(医療機関カナ名称検索条件),
                 完全一致KEY.equals(医療機関カナ名称検索条件),
                 部分一致KEY.equals(医療機関カナ名称検索条件),
-                構成市町村マスタ市町村コード重複.equals(構成市町村マスタ市町村コード重複種別));
+                構成市町村マスタ市町村コード重複.equals(構成市町村マスタ市町村コード重複種別),
+                開始YMD);
     }
 }

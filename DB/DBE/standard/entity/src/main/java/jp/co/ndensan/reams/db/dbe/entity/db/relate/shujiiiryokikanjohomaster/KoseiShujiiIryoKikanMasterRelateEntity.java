@@ -39,6 +39,7 @@ public class KoseiShujiiIryoKikanMasterRelateEntity {
     private RString daihyoshaNameKana;
     private boolean jokyoFlag;
     private KinyuKikanCode kinyuKikanCode;
+    private RString kinyuKikan;
     private KinyuKikanShitenCode kinyuKikanShitenCode;
     private RString yokinShubetsu;
     private RString kozaNo;

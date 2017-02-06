@@ -58,6 +58,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddltokuteichosain;
     @JsonProperty("txtTeiin")
     private TextBoxNum txtTeiin;
+    @JsonProperty("ccdChiku")
+    private CodeInputDiv ccdChiku;
     @JsonProperty("radautowatitsuke")
     private RadioButton radautowatitsuke;
     @JsonProperty("ddlKikankubun")
@@ -70,8 +72,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private Button btnKakutei;
     @JsonProperty("btnchosaininsert")
     private Button btnchosaininsert;
-    @JsonProperty("ccdChiku")
-    private CodeInputDiv ccdChiku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -386,6 +386,15 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
+     * getccdChiku
+     * @return ccdChiku
+     */
+    @JsonProperty("ccdChiku")
+    public ICodeInputDiv getCcdChiku() {
+        return ccdChiku;
+    }
+
+    /*
      * getradautowatitsuke
      * @return radautowatitsuke
      */
@@ -491,15 +500,6 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     @JsonProperty("btnchosaininsert")
     public void setBtnchosaininsert(Button btnchosaininsert) {
         this.btnchosaininsert = btnchosaininsert;
-    }
-
-    /*
-     * getccdChiku
-     * @return ccdChiku
-     */
-    @JsonProperty("ccdChiku")
-    public ICodeInputDiv getCcdChiku() {
-        return ccdChiku;
     }
 
     // </editor-fold>

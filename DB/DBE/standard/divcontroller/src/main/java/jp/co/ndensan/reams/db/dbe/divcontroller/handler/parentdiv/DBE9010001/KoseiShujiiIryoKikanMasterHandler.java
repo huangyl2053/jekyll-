@@ -107,7 +107,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
                     koseiShujiiIryoKikanMaster.get預金種別(),
                     koseiShujiiIryoKikanMaster.get口座番号(),
                     koseiShujiiIryoKikanMaster.get口座名義人カナ(),
-                    koseiShujiiIryoKikanMaster.get口座名義人()));
+                    koseiShujiiIryoKikanMaster.get口座名義人(),
+                    koseiShujiiIryoKikanMaster.get金融機関名称()));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
         if (主治医医療機関情報一覧.exceedsLimit()) {
@@ -139,7 +140,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
             RString yokinShubetsu,
             RString kozaNo,
             AtenaKanaMeisho kozaMeigininKana,
-            AtenaMeisho kozaMeiginin
+            AtenaMeisho kozaMeiginin,
+            RString kinyuKikan
     ) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
         row.setJotai(jotai);
@@ -165,6 +167,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
         row.setKozaNo(kozaNo != null ? kozaNo : RString.EMPTY);
         row.setKozaMeigininKana(kozaMeigininKana != null ? kozaMeigininKana.value() : RString.EMPTY);
         row.setKozaMeiginin(kozaMeiginin != null ? kozaMeiginin.value() : RString.EMPTY);
+        row.setKinyuKikan(kinyuKikan);
         return row;
     }
 

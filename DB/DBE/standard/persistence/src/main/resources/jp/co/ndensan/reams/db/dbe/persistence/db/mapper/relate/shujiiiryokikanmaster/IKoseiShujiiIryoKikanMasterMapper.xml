@@ -54,13 +54,19 @@
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kozaNo" AS "dbT5911ShujiiIryoKikanJoho_kozaNo",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kozaMeigininKana" AS "dbT5911ShujiiIryoKikanJoho_kozaMeigininKana",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kozaMeiginin" AS "dbT5911ShujiiIryoKikanJoho_kozaMeiginin",
-        DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho" AS "dbT7051KoseiShichosonMaster_shichosonMeisho"
+        DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho" AS "dbT7051KoseiShichosonMaster_shichosonMeisho",
+        UaT0302KinyuKikan.name AS "kinyuKikan"
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.noDeleted_DbT5911ShujiiIryoKikanJoho" />) AS DbT5911ShujiiIryoKikanJoho
         INNER JOIN
         (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShichosonMaster
         ON
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode"  =  DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode"
+        LEFT JOIN
+        rgua."UaT0302KinyuKikan" AS UaT0302KinyuKikan
+        ON
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_kinyuKikanCode" = UaT0302KinyuKikan."kinyuKikanCode"
+        AND UaT0302KinyuKikan."kaishiYMD" <![CDATA[<=]]> #{開始YMD}
         <where>
             1 = 1
             <if test="状況フラグ">
@@ -186,8 +192,8 @@
         ORDER BY
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode",
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode"
-        <if test="usesSaidaiHyojiKensu">
-            LIMIT #{saidaiHyojiKensu}
+        <if test="usesSaidaiHyojiKensu">            
+        LIMIT #{saidaiHyojiKensu}
         </if>
     </select>
 
