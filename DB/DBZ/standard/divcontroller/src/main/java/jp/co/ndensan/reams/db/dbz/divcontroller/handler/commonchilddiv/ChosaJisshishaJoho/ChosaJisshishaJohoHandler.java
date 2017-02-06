@@ -8,17 +8,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ChosaJis
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoValidationHandler;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho.ChosaJisshishaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -96,19 +99,13 @@ public class ChosaJisshishaJohoHandler {
         div.getDdlChosaJisshiBasho().setDataSource(chosaJisshiBasho);
         if (key.get調査実施場所() != null && !key.get調査実施場所().isEmpty()) {
             div.getDdlChosaJisshiBasho().setSelectedValue(key.get調査実施場所());
+        } else {
+            div.getDdlChosaJisshiBasho().setSelectedValue(ChosaJisshiBashoCode.自宅内.get名称());
         }
         div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
-
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())
-                || ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
-            div.getTxtJisshiBashoMeisho().setDisabled(true);
-        } else {
-            div.getTxtJisshiBashoMeisho().setDisabled(false);
-        }
-
         if (key.get所属機関コード() != null && !key.get所属機関コード().isEmpty()) {
             div.getTxtShozokuKikanCode().setValue(key.get所属機関コード());
-            this.onBlurTxtShozokuKikanCode();
+            getShozokuKikanName();
         } else {
             List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(key.get申請書管理番号()).records();
             if (ninteichosaItakusakiJohoList != null && !ninteichosaItakusakiJohoList.isEmpty()) {
@@ -119,7 +116,7 @@ public class ChosaJisshishaJohoHandler {
 
         if (key.get記入者コード() != null && !key.get記入者コード().isEmpty()) {
             div.getTxtKinyushaCode().setValue(key.get記入者コード());
-            this.onBlurTxtKinyushaCode();
+            getKinyushaName();
         } else {
             List<ChosainJoho> chosainJohoList = service.getKinyusha(key.get申請書管理番号()).records();
             if (chosainJohoList != null && !chosainJohoList.isEmpty()) {
@@ -128,20 +125,11 @@ public class ChosaJisshishaJohoHandler {
             }
         }
 
-        List<NinteiShinseiJoho> ninteiShinseiJoho = service.get調査区分(key.
-                get申請書管理番号()).records();
-        if (!ninteiShinseiJoho.isEmpty()) {
-            if (ninteiShinseiJoho.get(0).get調査区分() == null) {
-                div.getTxtChosaKubun().setValue(RString.EMPTY);
-            } else if (ChosaKubun.新規調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
-                div.getTxtChosaKubun().setValue(ChosaKubun.新規調査.get名称());
-                div.getDdlChosaJisshiBasho().setSelectedValue(ChosaJisshiBashoCode.自宅内.get名称());
-                div.getDdlChosaJisshiBasho().setReadOnly(true);
-            } else if (ChosaKubun.再調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
-                div.getTxtChosaKubun().setValue(ChosaKubun.再調査.get名称());
-            } else {
-                div.getTxtChosaKubun().setValue(RString.EMPTY);
-            }
+        NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
+        NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(new ShinseishoKanriNo(key.get申請書管理番号()), key.get認定調査依頼履歴番号());
+        if (認定調査依頼情報 != null) {
+            NinteiChousaIraiKubunCode 認定調査依頼区分 = NinteiChousaIraiKubunCode.toValue(認定調査依頼情報.get認定調査依頼区分コード().getColumnValue());
+            div.getTxtChosaKubun().setValue(認定調査依頼区分.get名称());
         }
     }
 
@@ -165,10 +153,7 @@ public class ChosaJisshishaJohoHandler {
         div.getTxtChosaKubun().setValue(key.get調査区分());
     }
 
-    /**
-     * (所属機関コード）引数から受け取った認定調査委託先情報を取得します。
-     */
-    public void onBlurTxtShozokuKikanCode() {
+    private void getShozokuKikanName() {
         ChosaJisshishaJohoFinder finder = ChosaJisshishaJohoFinder.createInstance();
         NinteichosaItakusakiJoho ninteichosaItakusakiJoho
                 = finder.onBlurTxtShozokuKikanCode(new LasdecCode(div.getHdnShichosonCode()), div.getTxtShozokuKikanCode().getText());
@@ -177,36 +162,26 @@ public class ChosaJisshishaJohoHandler {
                 : ninteichosaItakusakiJoho.get事業者名称());
     }
 
-    /**
-     * (記入者コード）引数から受け取った調査員情報を取得します。
-     */
-    public void onBlurTxtKinyushaCode() {
+    private void getKinyushaName() {
         ChosaJisshishaJohoFinder finder = ChosaJisshishaJohoFinder.createInstance();
         ShinsakaiChosainJoho shinsakaiChosainJoho
                 = finder.onBlurTxtKinyushaCode(
                         new LasdecCode(div.getHdnShichosonCode()),
                         new ChosaItakusakiCode(div.getTxtShozokuKikanCode().getText()),
                         new ChosainCode(div.getTxtKinyushaCode().getText()));
-        div.getTxtKinyushaName().setValue(shinsakaiChosainJoho == null ? RString.EMPTY
-                : shinsakaiChosainJoho.get調査員氏名() == null ? RString.EMPTY
-                : shinsakaiChosainJoho.get調査員氏名());
-    }
-
-    /**
-     * 調査実施場所ddl変更時のイベントメソッド
-     */
-    public void onChange_ddlChosaJisshiBasho() {
-        if (ChosaJisshiBashoCode.自宅内.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
-            div.getTxtJisshiBashoMeisho().clearValue();
-            div.getTxtJisshiBashoMeisho().setDisabled(true);
-        } else if (ChosaJisshiBashoCode.自宅外.getコード().equals(div.getDdlChosaJisshiBasho().getSelectedKey())) {
-            div.getTxtJisshiBashoMeisho().clearValue();
-            div.getTxtJisshiBashoMeisho().setDisabled(false);
-            div.getTxtJisshiBashoMeisho().setReadOnly(false);
+        if (shinsakaiChosainJoho == null) {
+            div.getTxtShozokuKikanName().setValue(RString.EMPTY);
+            div.getTxtKinyushaName().setValue(RString.EMPTY);
         } else {
-            div.getTxtJisshiBashoMeisho().clearValue();
-            div.getTxtJisshiBashoMeisho().setDisabled(false);
-            div.getTxtJisshiBashoMeisho().setReadOnly(false);
+            if (shinsakaiChosainJoho.get調査員氏名() != null) {
+                NinteichosaItakusakiJoho ninteichosaItakusakiJoho
+                        = finder.onBlurTxtShozokuKikanCode(new LasdecCode(div.getHdnShichosonCode()), shinsakaiChosainJoho.get認定調査委託先コード());
+                div.getTxtShozokuKikanName().setValue(ninteichosaItakusakiJoho.get事業者名称());
+                div.getTxtKinyushaName().setValue(shinsakaiChosainJoho.get調査員氏名());
+            } else {
+                div.getTxtShozokuKikanName().setValue(RString.EMPTY);
+                div.getTxtKinyushaName().setValue(RString.EMPTY);
+            }
         }
     }
 }

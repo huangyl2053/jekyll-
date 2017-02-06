@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.Jyuk
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -127,10 +126,9 @@ public class JyukyushaDaichoHandler {
      * @return 受給者台帳リスト出力順です。
      */
     public RString get画面出力順() {
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         Long 出力順ID = div.getShutsuryokuSort().getSelected出力順().get出力順ID();
         IOutputOrder chohyoShuturyokujun = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-                ReportIdDBD.DBD100026.getReportId(), reamsLoginID, 出力順ID);
+                ReportIdDBD.DBD100026.getReportId(), 出力順ID);
         if (chohyoShuturyokujun != null) {
             出力順 = MyBatisOrderByClauseCreator.create(JyukyushaDaichoOrderKey.class, chohyoShuturyokujun);
         }

@@ -107,8 +107,7 @@ public class DbT5208NinteichosahyoServiceJokyoFlagDac implements ISaveable<DbT52
     @Override
     public int save(DbT5208NinteichosahyoServiceJokyoFlagEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票_概況調査_サービスの状況フラグエンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+//        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

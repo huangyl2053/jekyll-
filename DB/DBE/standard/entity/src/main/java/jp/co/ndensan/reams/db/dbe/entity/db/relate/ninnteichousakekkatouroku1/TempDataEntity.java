@@ -21,6 +21,7 @@ public class TempDataEntity {
 
     private RString temp_厚労省IF識別コード;
     private RString temp_認定調査依頼区分コード;
+    private RString temp_概況調査テキストイメージ区分;
     private RString temp_現在の状況コード;
     private RString temp_現在のサービス区分コード;
     private RString temp_利用施設名;

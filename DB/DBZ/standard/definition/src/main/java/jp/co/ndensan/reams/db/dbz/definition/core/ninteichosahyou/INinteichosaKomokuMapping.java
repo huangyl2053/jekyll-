@@ -48,6 +48,13 @@ public interface INinteichosaKomokuMapping {
     RString get特記事項番号();
 
     /**
+     * 群番号を返します。
+     *
+     * @return 群番号
+     */
+    RString get群番号();
+
+    /**
      * 連番を返します。
      *
      * @return 連番

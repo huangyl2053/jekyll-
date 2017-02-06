@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuTotalDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -159,6 +159,31 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public RadioButton getRadJotaiKubun() {
+        return this.getShujiiIkenshoToroku().getRadJotaiKubun();
+    }
+
+    @JsonIgnore
+    public void  setRadJotaiKubun(RadioButton radJotaiKubun) {
+        this.getShujiiIkenshoToroku().setRadJotaiKubun(radJotaiKubun);
+    }
+
+    @JsonIgnore
+    public shinseishaJohoDiv getShinseishaJoho() {
+        return this.getShujiiIkenshoToroku().getShinseishaJoho();
+    }
+
+    @JsonIgnore
+    public void  setShinseishaJoho(shinseishaJohoDiv shinseishaJoho) {
+        this.getShujiiIkenshoToroku().setShinseishaJoho(shinseishaJoho);
+    }
+
+    @JsonIgnore
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getShujiiIkenshoToroku().getShinseishaJoho().getCcdNinteiShinseishaKihonInfo();
+    }
+
     @JsonIgnore
     public ButtonDialog getBtnShobyoGuide() {
         return this.getShujiiIkenshoToroku().getBtnShobyoGuide();
@@ -370,6 +395,26 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
+    public NijiHanteiKekkaDiv getNijiHanteiKekka() {
+        return this.getShujiiIkenshoToroku().getNijiHanteiKekka();
+    }
+
+    @JsonIgnore
+    public void  setNijiHanteiKekka(NijiHanteiKekkaDiv NijiHanteiKekka) {
+        this.getShujiiIkenshoToroku().setNijiHanteiKekka(NijiHanteiKekka);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadShujiiRenraku() {
+        return this.getShujiiIkenshoToroku().getNijiHanteiKekka().getRadShujiiRenraku();
+    }
+
+    @JsonIgnore
+    public void  setRadShujiiRenraku(RadioButton radShujiiRenraku) {
+        this.getShujiiIkenshoToroku().getNijiHanteiKekka().setRadShujiiRenraku(radShujiiRenraku);
+    }
+
+    @JsonIgnore
     public IkenshoMemoDiv getIkenshoMemo() {
         return this.getShujiiIkenshoToroku().getIkenshoMemo();
     }
@@ -397,11 +442,6 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     @JsonIgnore
     public void  setTxtShujiiMemo(TextBoxMultiLine txtShujiiMemo) {
         this.getShujiiIkenshoToroku().getIkenshoMemo().setTxtShujiiMemo(txtShujiiMemo);
-    }
-
-    @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getShujiiIkenshoToroku().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore

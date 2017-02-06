@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240002;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.ShujiiIkenshoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -35,6 +39,8 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
     private static final ReportId 帳票ID = ReportIdDBE.DBE013006.getReportId();
+    private static final List<RString> PAGE_BREAK_KEYS = Collections
+            .unmodifiableList(Arrays.asList(new RString(ShujiiIkenshoSeikyuIchiranReportSource.ReportSourceFields.shichosonName.name())));
     private ShujiiIkenshoProcessParamter processParamter;
     private int index;
     @BatchWriter
@@ -53,7 +59,9 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected void createWriter() {
-        batchWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        batchWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value())
+                .addBreak(new BreakerCatalog<ShujiiIkenshoSeikyuIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWriter);
     }
 

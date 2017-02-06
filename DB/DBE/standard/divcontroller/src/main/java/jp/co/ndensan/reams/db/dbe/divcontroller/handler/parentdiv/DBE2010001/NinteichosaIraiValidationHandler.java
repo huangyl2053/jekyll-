@@ -171,7 +171,7 @@ public class NinteichosaIraiValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
             for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getSelectedItems()) {
-                if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki()) || RString.isNullOrEmpty(row.getKonkaiChosain())) {
+                if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可));
                 }
                 if (row.getChosaIraiKigen().getValue() == null) {

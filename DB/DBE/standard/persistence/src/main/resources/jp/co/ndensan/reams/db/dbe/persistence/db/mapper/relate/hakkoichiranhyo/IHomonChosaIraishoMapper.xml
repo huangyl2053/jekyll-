@@ -845,6 +845,7 @@
         , T5913."chosainShimei"
         , T5201."ninteichosaIraiYMD"
         , T5101."ninteiShinseiShinseijiKubunCode"
+        , mod(row_number()over(ORDER BY T5101."hihokenshaNo" ASC,T5101."ninteiShinseiYMD" DESC),25)
         FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101
         LEFT JOIN (
@@ -859,7 +860,7 @@
         ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
         ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
-        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
+        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
         ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
         AND T5201."logicalDeletedFlag" = False
         AND NOT EXISTS (
@@ -886,6 +887,7 @@
         <include refid="HomonChosaIraisho" />
         ) AS pickout
         ON pickout."hihokenshaNo" = T5101."hihokenshaNo"
+        AND pickout."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         WHERE
         T5101."logicalDeletedFlag" = FALSE
         ORDER BY
@@ -895,10 +897,10 @@
 
         SELECT
         CASE WHEN "chokkin" THEN '直近' ELSE '' END AS "直近区分"
-        ,CASE WHEN "chokkin" THEN "hihokenshaNo" ELSE '' END AS "hihokenshaNo"
-        ,CASE WHEN "chokkin" THEN "hihokenshaKana" ELSE '' END AS "hihokenshaKana"
-        ,CASE WHEN "chokkin" THEN "hihokenshaName" ELSE '' END AS "hihokenshaName"
-        ,CASE WHEN "chokkin" THEN "jusho" ELSE '' END AS "jusho"
+        ,CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaNo" ELSE '' END AS "hihokenshaNo"
+        ,CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaKana" ELSE '' END AS "hihokenshaKana"
+        ,CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaName" ELSE '' END AS "hihokenshaName"
+        ,CASE WHEN "chokkin" OR mod = '1' THEN "jusho" ELSE '' END AS "jusho"
         , "jigyoshaMeisho" AS "jigyoshaMeisho"
         , "chosainShimei" AS "chosainShimei"
         , "ninteichosaIraiYMD" AS "ninteichosaIraiYMD"
@@ -907,7 +909,7 @@
     </select>
     
     <select resultOrdered="true" id="get訪問調査依頼書tmp" resultMap="resultMap_getHomonChosaIraishoTmp"
-                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaMybitisParamter" fetchSize="500">
         SELECT
         DISTINCT
         *
@@ -920,7 +922,7 @@
         "被保険者番号"
     </select>
  
-     <resultMap id="resultMap_getHomonChosaIraishoTmp" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_getHomonChosaIraishoTmp" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity" autoMapping="true">
         <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者氏名カナ" column="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class ChosaIraiIchiranhyoProperty extends ReportPropertyBase<ChosaIraiIchiranhyoReportSource> {
 
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("jigyoshaNo")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shichosoncode"), new RString("chosaitakusakicode")));
 
     /**
      * インスタンスを生成します。
@@ -40,6 +40,7 @@ public class ChosaIraiIchiranhyoProperty extends ReportPropertyBase<ChosaIraiIch
             Breakers<ChosaIraiIchiranhyoReportSource> breakers,
             BreakerCatalog<ChosaIraiIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             PAGE_BREAK_KEYS) {
             @Override

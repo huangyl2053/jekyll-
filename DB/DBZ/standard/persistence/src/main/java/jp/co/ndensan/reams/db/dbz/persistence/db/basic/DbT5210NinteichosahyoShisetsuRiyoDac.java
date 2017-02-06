@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuR
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -112,9 +114,8 @@ public class DbT5210NinteichosahyoShisetsuRiyoDac implements ISaveable<DbT5210Ni
     @Override
     public int save(DbT5210NinteichosahyoShisetsuRiyoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票_概況調査_施設利用エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+//        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
     /**
@@ -137,6 +138,7 @@ public class DbT5210NinteichosahyoShisetsuRiyoDac implements ISaveable<DbT5210Ni
                 where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ninteichosaRirekiNo, 認定調査依頼履歴番号))).
+                order(by(remban, Order.ASC)).
                 toList(DbT5210NinteichosahyoShisetsuRiyoEntity.class);
     }
 }

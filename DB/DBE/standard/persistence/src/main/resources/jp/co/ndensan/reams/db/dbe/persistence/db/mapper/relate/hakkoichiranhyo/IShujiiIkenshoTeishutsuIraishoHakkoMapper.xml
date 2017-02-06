@@ -36,7 +36,8 @@
         <result property="主治医意見書記入年月日" column="ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書読取年月日" column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医氏名" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書別途診療費" column="ikenshoBettoShinryohi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="主治医意見書報酬支払年月日" column="hoshuShiharaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
         <result property="最大依頼履歴番号" column="ikenshoIraiRirekiNo"/> 
@@ -78,6 +79,7 @@
         , IkenshoJoho."ikenshoIraiKubun" AS "shinseishoKanriNo"
         , pickout."shujiiName" AS "shujiiName"
         , pickout."shichosonMeisho" AS "保険者名"
+        , pickout."shichosonCode" AS "市町村コード"
         , IkenshoJoho."ikenshoBettoShinryohi" AS "ikenshoBettoShinryohi"
         , IkenshoJoho."hoshuShiharaiYMD" AS "hoshuShiharaiYMD"
         , pickout."ikenshoIraiRirekiNo"  AS "ikenshoIraiRirekiNo"
@@ -114,6 +116,8 @@
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."isDeleted" = FALSE
         
         ORDER BY
+        pickout."shichosonCode",
+	pickout."shujiiIryokikanCode",
         pickout."shujiiCode",
         pickout."ninteiShinseiYMD",
         pickout."hihokenshaKana",
@@ -148,6 +152,7 @@
         , DbT5101."ninteiShinseiShinseijiKubunCode"
         , DbT5912."shujiiName"
         , DbT7051."shichosonMeisho"
+        , DbT7051."shichosonCode"
         , DbT5301."ikenshoIraiRirekiNo"
         <!-- jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper.selectShuziiIkenshoIrai
         と同じ。//TODO 引数の関係でまとめていない。できたらまとめる START -->   
@@ -338,6 +343,7 @@
         , T5301."ikenshoSakuseiIraiYMD"
         , T5101."ninteiShinseiShinseijiKubunCode"
         , T5302."ikenshoSakuseiKaisuKubun"
+        , mod(row_number()over(ORDER BY T5101."hihokenshaNo" ASC,T5101."ninteiShinseiYMD" DESC),25)
         FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101 
         LEFT JOIN ( 
@@ -352,7 +358,7 @@
         ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo" 
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
         ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo" 
-        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
+        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
         ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
         AND T5301."logicalDeletedFlag" = False 
         AND NOT EXISTS ( 
@@ -379,7 +385,8 @@
         AND T5912."jokyoFlag" = True 
         INNER JOIN
         (<include refid="ShujiiIkenshoHakko" />) AS pickout 
-        ON pickout."hihokenshaNo" = T5101."hihokenshaNo" 
+        ON pickout."hihokenshaNo" = T5101."hihokenshaNo"
+        AND pickout."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         WHERE
         T5101."logicalDeletedFlag" = FALSE
       
@@ -390,10 +397,10 @@
         
         SELECT 
         CASE WHEN "chokkin" THEN '直近' ELSE '' END AS "直近区分"
-        , CASE WHEN "chokkin" THEN "hihokenshaNo" ELSE '' END AS "hihokenshaNo"
-        , CASE WHEN "chokkin" THEN "hihokenshaKana" ELSE '' END AS "hihokenshaKana"
-        , CASE WHEN "chokkin" THEN "hihokenshaName" ELSE '' END AS "hihokenshaName"
-        , CASE WHEN "chokkin" THEN "jusho" ELSE '' END AS "jusho"
+        , CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaNo" ELSE '' END AS "hihokenshaNo"
+        , CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaKana" ELSE '' END AS "hihokenshaKana"
+        , CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaName" ELSE '' END AS "hihokenshaName"
+        , CASE WHEN "chokkin" OR mod = '1' THEN "jusho" ELSE '' END AS "jusho"
         , "iryoKikanMeisho" AS "iryoKikanMeisho"
         , "shujiiName" AS "shujiiName"
         , "ikenshoSakuseiIraiYMD" AS "ikenshoSakuseiIraiYMD"

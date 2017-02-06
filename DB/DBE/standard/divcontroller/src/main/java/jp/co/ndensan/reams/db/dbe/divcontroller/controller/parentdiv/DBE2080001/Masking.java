@@ -66,7 +66,6 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class Masking {
 
-//    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString CSVファイル名 = new RString("DBE2080001_MaskingIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -77,9 +76,7 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onLoad(MaskingDiv div) {
-//        if (!RealInitialLocker.tryGetLock(排他キー)) {
-//            throw new PessimisticLockingException();
-//        }
+
         div.getRadTaishoDataKubun().setSelectedKey(DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援));
         div.getTxtSaidaiHyojiKensu().setMaxValue(
@@ -212,7 +209,6 @@ public class Masking {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
-//            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
         }
         return ResponseData.of(div).respond();
@@ -263,7 +259,6 @@ public class Masking {
                             new RString("申請書管理番号"), row.getShinseishoKanriNo())));
                 }
             }
-//            RealInitialLocker.release(排他キー);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキングの保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2080001StateName.完了);

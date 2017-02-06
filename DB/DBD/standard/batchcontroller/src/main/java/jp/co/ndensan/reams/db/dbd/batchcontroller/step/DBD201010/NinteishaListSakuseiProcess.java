@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -84,7 +83,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private NinteishaListSakuseiProcessParameter parameter;
     private IOutputOrder outputOrder;
     private RString 出力順;
-    private RString reamsLoginID;
     private Association 導入団体;
     private RString 帳票ID;
     private RString 帳票タイトル;
@@ -126,13 +124,11 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     @Override
     protected void initialize() {
         personalDataList = new ArrayList<>();
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         帳票作成日時 = RDate.getNowDate();
         帳票日時 = new FlexibleDate(帳票作成日時.toDateString());
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBD200002.getReportId(),
-                reamsLoginID,
                 parameter.get改頁出力順ID());
         if (outputOrder != null) {
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(DBD200002_ResultListEnum.class, outputOrder), NUM5);

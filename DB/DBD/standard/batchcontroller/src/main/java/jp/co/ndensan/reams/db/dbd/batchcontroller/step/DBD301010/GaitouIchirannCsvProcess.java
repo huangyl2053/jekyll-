@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.GaitouIchirannCsvE
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100202.temptable.HikazeNenkinTaishoshaDouteiResultJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.ue.uex.definition.core.UEXCodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -62,7 +61,6 @@ public class GaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaish
     private List<PersonalData> personalDataList;
     private RString spoolWorkPath;
     private RString fileName;
-    private RString reamsLoginID;
     private CsvWriter<GaitouIchirannCsvEntity> csvWriterJunitoJugo;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -85,7 +83,6 @@ public class GaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaish
     @Override
     protected void initialize() {
         personalDataList = new ArrayList<>();
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
     }
 
     @Override
@@ -105,7 +102,7 @@ public class GaitouIchirannCsvProcess extends BatchProcessBase<HikazeNenkinTaish
 
     private RString get出力順() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900002, reamsLoginID, parameter.get出力順ID1());
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD900002, parameter.get出力順ID1());
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(ResultListCSVProperty.DBD900002_ResultListEnum.class, order);

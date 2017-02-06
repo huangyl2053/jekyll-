@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
@@ -440,10 +439,8 @@ public final class ReportUtil {
             ReportId reportId) {
         if (shutsuryokujunId != null) {
             IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
             return chohyoShutsuryokujunFinder.get出力順(subGyomuCode,
                     reportId,
-                    reamsLoginID,
                     Long.valueOf(shutsuryokujunId.toString()));
         }
         return null;

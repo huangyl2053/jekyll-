@@ -112,7 +112,9 @@ public class NinteichosaIraiHandler {
         SearchResult<CyoSaiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().get調査依頼モード(parameter);
         int totalCount = searchResult.totalCount();
         List<CyoSaiRaiBusiness> 調査依頼List = searchResult.records();
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, (ArrayList) 調査依頼List);
+        if (!調査依頼List.isEmpty()) {
+            ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, (ArrayList) 調査依頼List);
+        }
         put要介護認定完了情報(調査依頼List);
         List<dgNinteiTaskList_Row> dataSource = new ArrayList<>();
         completeCount = 0;

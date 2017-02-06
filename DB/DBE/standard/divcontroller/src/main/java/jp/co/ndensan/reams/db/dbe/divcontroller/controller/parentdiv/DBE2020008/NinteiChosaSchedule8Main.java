@@ -20,15 +20,11 @@ import jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup.ChosaChikuGroupFi
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.chosachikugroup.ChosaChikuGroupManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputHandler;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -415,10 +411,6 @@ public class NinteiChosaSchedule8Main {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (!RealInitialLocker.tryGetLock(new LockingKey("ChosaChikuCode"))) {
-                div.setReadOnly(true);
-                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-            }
             validPairs = validateForDelete(div);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -430,8 +422,6 @@ public class NinteiChosaSchedule8Main {
                 chosaChikuGroupManager.saveOrDelete調査地区グループマスタ(chosaChikuGroup);
             }
             div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            LockingKey 排他キー = new LockingKey(new RString("ChosaChikuCode"));
-            RealInitialLocker.release(排他キー);
             return ResponseData.of(div).setState(DBE2020008StateName.完了);
         }
         return ResponseData.of(div).respond();

@@ -80,7 +80,7 @@ public enum ShujiiJokyo {
      */
     public static ShujiiJokyo toValue(RString code) {
         for (ShujiiJokyo shujiiJokyo : ShujiiJokyo.values()) {
-            if (shujiiJokyo.code == code) {
+            if (shujiiJokyo.getCode().equals(code)) {
                 return shujiiJokyo;
             }
         }

@@ -8,14 +8,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku.ShujiiIkenshoTorokuResult;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuTotalDiv;
+import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.File;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 
 /**
  * 主治医意見書登録の抽象Handlerクラスです。
@@ -39,6 +49,13 @@ public class ShujiiIkenshoTorokuHandler {
     private static final RString SELECT_REHABIRITATIONKA = new RString("key10");
     private static final RString SELECT_SHIKA = new RString("key11");
     private final ShujiiIkenshoTorokuTotalDiv div;
+    private static final RString 連絡不要 = new RString("key0");
+    private static final RString 連絡必要 = new RString("key1");
+    private static final RString 確認メッセージ出力要 = new RString("1");
+    private static final RString イメージファイルが存在区分_存在しない = new RString("1");
+    private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
+    private static final RString イメージファイル原本名 = new RString("_BAK");
+    private static final RString イメージファイル拡張子 = new RString(".png");
 
     /**
      * コンストラクタです。
@@ -77,6 +94,11 @@ public class ShujiiIkenshoTorokuHandler {
         div.getChkSonota().setSelectedItemsByKey(selKeysList);
         div.getTxtSonotaNyuryoku().setValue(isEmptyOrNull(result.getその他受診科名()));
         div.getTxtShujiiMemo().setValue(isEmptyOrNull(result.getメモ()));
+        if (result.is連絡確認の有無()) {
+            div.getRadShujiiRenraku().setSelectedKey(連絡必要);
+        } else {
+            div.getRadShujiiRenraku().setSelectedKey(連絡不要);
+        }
         setShujiiJohoDisable(true);
         setChosaTishoJohoDisable(!result.is他科受診の有無());
         setSonotaDisable(!result.isその他受診科の有無());
@@ -103,6 +125,7 @@ public class ShujiiIkenshoTorokuHandler {
         rsb.append(div.getTxtSonotaNyuryoku().getValue());
         rsb.append(div.getTxtKinyuYMD().getValue());
         rsb.append(div.getTxtShujiiMemo().getValue());
+        rsb.append(div.getRadShujiiRenraku().getSelectedKey());
         return rsb.toRString();
     }
 
@@ -196,4 +219,154 @@ public class ShujiiIkenshoTorokuHandler {
         }
         return new RDate(fromDate.getYearValue(), fromDate.getMonthValue(), fromDate.getDayValue());
     }
+
+    /**
+     * 要介護認定完了情報更新の処理です。
+     *
+     * @param ninteiKanryoJoho NinteiKanryoJoho
+     */
+    public void 要介護認定完了情報更新(NinteiKanryoJoho ninteiKanryoJoho) {
+        ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set主治医意見書登録完了年月日(null).build();
+        ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().setマスキング完了年月日(null).build();
+        IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
+    }
+
+    /**
+     * 「削除」ボタンを押下する場合、主治医意見書のイメージファイル存在チェックを実行します。
+     *
+     * @param 存在したイメージファイル名 存在したイメージファイル名
+     * @param 確認メッセージ出力区分 確認メッセージ出力区分
+     * @return イメージファイルが存在区分
+     */
+    public RString get主治医意見書のイメージファイルが存在区分(List<RString> 存在したイメージファイル名,
+            RString 確認メッセージ出力区分) {
+        boolean isNotExistsImageFile = !isExistsImageFileList(ImageFileItem.getOpinionTeikeigaiImageFileList_ALL(), 存在したイメージファイル名);
+        if (isNotExistsImageFile) {
+            isNotExistsImageFile = !isExistsImageFileList(ImageFileItem.getOpinionTeikeiImageFileList_ALL(), 存在したイメージファイル名);
+        }
+        if (isNotExistsImageFile) {
+            return イメージファイルが存在区分_存在しない;
+        }
+        if (確認メッセージ出力要.equals(確認メッセージ出力区分)) {
+            return イメージファイルが存在区分_マスキング有;
+        }
+        if (isExistsMaskImageFileList(ImageFileItem.getOpinionImageFileList_Mask(), 存在したイメージファイル名)) {
+            return イメージファイルが存在区分_マスキング有;
+        }
+        return RString.EMPTY;
+    }
+
+    public void deleteOpinionImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath,
+            List<RString> deleteImageFileList, boolean isMaskOnly) {
+        if (isMaskOnly) {
+            List<RString> opinionMaskImageFileList = ImageFileItem.getOpinionImageFileList_Mask();
+            deleteMaskSharedFileInEntry(descriptor, localCopyPath, opinionMaskImageFileList, deleteImageFileList);
+        } else {
+            List<RString> teikeigaiOpinionImageFileList = ImageFileItem.getOpinionTeikeigaiImageFileList_ALL();
+            deleteAllSharedFileInEntry(descriptor, teikeigaiOpinionImageFileList, deleteImageFileList);
+
+            List<RString> teikeiOpinionImageFileList = ImageFileItem.getOpinionTeikeiImageFileList_ALL();
+            deleteAllSharedFileInEntry(descriptor, teikeiOpinionImageFileList, deleteImageFileList);
+        }
+    }
+
+    public void deleteGaikyoChosaImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath,
+            List<RString> deleteImageFileList, boolean isMaskOnly) {
+        if (isMaskOnly) {
+            List<RString> gaikyoChosaMaskImageFileList = ImageFileItem.getGaikyoChosaImageFileList_Mask();
+            deleteMaskSharedFileInEntry(descriptor, localCopyPath, gaikyoChosaMaskImageFileList, deleteImageFileList);
+
+            List<RString> tokkiJikoMaskImageList = ImageFileItem.getChosahyoTokkiImageFileList_Mask();
+            deleteMaskSharedFileInEntry(descriptor, localCopyPath, tokkiJikoMaskImageList, deleteImageFileList);
+        } else {
+            List<RString> gaikyoChosaImageList = ImageFileItem.getGaikyoChosaImageFileList_ALL();
+            deleteAllSharedFileInEntry(descriptor, gaikyoChosaImageList, deleteImageFileList);
+
+            List<RString> tokkiJikoImageList = ImageFileItem.getChosahyoTokkiImageFileList_ALL();
+            deleteAllSharedFileInEntry(descriptor, tokkiJikoImageList, deleteImageFileList);
+        }
+    }
+
+    public void deleteGaikyoTokkiImageFile(ReadOnlySharedFileEntryDescriptor descriptor, List<RString> deleteImageFileList,
+            boolean isMaskOnly) {
+        if (!isMaskOnly) {
+            List<RString> gaikyoTokkiImageList = ImageFileItem.getGaikyoTokkiImageFileList_ALL();
+            deleteAllSharedFileInEntry(descriptor, gaikyoTokkiImageList, deleteImageFileList);
+        }
+    }
+
+    private void deleteAllSharedFileInEntry(ReadOnlySharedFileEntryDescriptor descriptor, List<RString> deleteTargetImageFileList,
+            List<RString> deleteImageFileList) {
+        for (RString deleteTargetImageFile : deleteTargetImageFileList) {
+            if (isExistsImageFile(deleteTargetImageFile, deleteImageFileList)) {
+                SharedFile.deleteFileInEntry(descriptor, deleteTargetImageFile.concat(イメージファイル拡張子).toString());
+            }
+        }
+    }
+
+    private void deleteMaskSharedFileInEntry(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath,
+            List<RString> deleteTargetImageFileList, List<RString> deleteImageFileList) {
+        for (RString deleteTargetImageFile : deleteTargetImageFileList) {
+            if (isExistsMaskImageFile(deleteTargetImageFile, deleteImageFileList)) {
+                appendNewImageFile(descriptor, localCopyPath,
+                        deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子));
+                SharedFile.deleteFileInEntry(descriptor,
+                        deleteTargetImageFile.concat(イメージファイル原本名).concat(イメージファイル拡張子).toString());
+            }
+        }
+    }
+
+    private void appendNewImageFile(ReadOnlySharedFileEntryDescriptor descriptor, RString localCopyPath, RString targetImageFile) {
+        if (Directory.exists(Path.combinePath(localCopyPath, targetImageFile))) {
+            boolean options = true;
+            RString afterReNameImageFile = reName(targetImageFile);
+            File.move(Path.combinePath(localCopyPath, targetImageFile), Path.combinePath(localCopyPath, afterReNameImageFile), options);
+            SharedAppendOption option = new SharedAppendOption();
+            option.overWrite(true);
+            SharedFile.appendNewFile(descriptor, new FilesystemPath(Path.combinePath(localCopyPath, afterReNameImageFile)),
+                    "", option);
+        }
+    }
+
+    private RString reName(RString targetName) {
+        RString reNameTargetName = targetName.replace("_BAK", "");
+        return reNameTargetName;
+    }
+
+    private boolean isExistsMaskImageFileList(List<RString> ファイル名リスト, List<RString> 存在したイメージファイル名) {
+        for (RString ファイル名 : ファイル名リスト) {
+            if (isExistsMaskImageFile(ファイル名, 存在したイメージファイル名)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isExistsImageFileList(List<RString> ファイル名リスト, List<RString> 存在したイメージファイル名) {
+        for (RString ファイル名 : ファイル名リスト) {
+            if (isExistsImageFile(ファイル名, 存在したイメージファイル名)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isExistsImageFile(RString ファイル名, List<RString> 存在したイメージファイル名) {
+        for (RString existImageFile : 存在したイメージファイル名) {
+            if (existImageFile.contains(ファイル名)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isExistsMaskImageFile(RString ファイル名, List<RString> 存在したイメージファイル名) {
+        for (RString existImageFile : 存在したイメージファイル名) {
+            if (existImageFile.contains(ファイル名.concat(イメージファイル原本名))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -80,7 +80,7 @@ public enum IryoKikanJokyo {
      */
     public static IryoKikanJokyo toValue(RString code) {
         for (IryoKikanJokyo iryoKikanJokyo : IryoKikanJokyo.values()) {
-            if (iryoKikanJokyo.code == code) {
+            if (iryoKikanJokyo.getCode().equals(code)) {
                 return iryoKikanJokyo;
             }
         }

@@ -8,24 +8,8 @@ module DBZ {
 
         export class Events {
 
-            public static onBlur_txtShozokuKikanCode(): string {
-                return "onBlur_txtShozokuKikanCode";
-            }
-
-            public static onOkClose_btnChosaItakusakiGuide(): string {
-                return "onOkClose_btnChosaItakusakiGuide";
-            }
-
-            public static onClick_btnChosaItakusakiGuide(): string {
-                return "onClick_btnChosaItakusakiGuide";
-            }
-
             public static onChange_ddlChosaJisshiBasho(): string {
                 return "onChange_ddlChosaJisshiBasho";
-            }
-
-            public static onBlur_txtKinyushaCode(): string {
-                return "onBlur_txtKinyushaCode";
             }
 
             public static onOkClose_btnChosainGuide(): string {

@@ -5,13 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoReport;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
-import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamenReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -38,8 +42,8 @@ public class NinteiChosaSaiCheckhyoKatamen extends BatchProcessBase<HomonChosaIr
     private NinteiChosaProcessParamter processParamter;
     private NinteiChosaBusiness business;
     @BatchWriter
-    private BatchReportWriter<SaiChekkuhyoReportSource> batchReportWriter;
-    private ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter;
+    private BatchReportWriter<SaiChekkuhyoKatamenReportSource> batchReportWriter;
+    private ReportSourceWriter<SaiChekkuhyoKatamenReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
@@ -59,8 +63,12 @@ public class NinteiChosaSaiCheckhyoKatamen extends BatchProcessBase<HomonChosaIr
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity);
-        SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(business.setDBE292001Item(checkEntity));
+        ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(entity.get申請書管理番号());
+        List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                .get認定調査票差異チェック票(parameter).records();
+        ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity, businessList);
+        SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(business.setDBE292001Item(checkEntity, entity.get厚労省IF識別コード()));
         report.writeBy(reportSourceWriter);
     }
 

@@ -66,6 +66,34 @@ public class NinteichosahyoKinyuItemManager {
         entity.initializeMd5();
         return new NinteichosahyoKinyuItem(entity);
     }
+    
+    /**
+     * 申請書管理番号および認定調査依頼履歴番号が合致する認定調査票_概況調査_記入項目のリストを返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return NinteichosahyoKinyuItem
+     */
+    @Transaction
+    public List<NinteichosahyoKinyuItem> get認定調査票_概況調査_記入項目List(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+
+        List<DbT5209NinteichosahyoKinyuItemEntity> entityList = dac.select記入項目(
+                申請書管理番号,
+                認定調査依頼履歴番号);
+        
+        List<NinteichosahyoKinyuItem> businessList = new ArrayList<>();
+
+        for (DbT5209NinteichosahyoKinyuItemEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new NinteichosahyoKinyuItem(entity));
+        }
+
+        return businessList;
+    }
 
     /**
      * 認定調査票_概況調査_記入項目を全件返します。

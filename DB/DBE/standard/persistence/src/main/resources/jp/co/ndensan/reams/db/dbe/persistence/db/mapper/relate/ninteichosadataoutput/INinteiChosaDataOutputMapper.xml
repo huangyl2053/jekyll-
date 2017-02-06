@@ -523,7 +523,8 @@
         DbT5202."tokkijikoUketsukeYMD",
         DbT5202."tokkijikoJuryoYMD",
         DbT5203."ninchishoNichijoSeikatsuJiritsudoCode",
-        DbT5203."shogaiNichijoSeikatsuJiritsudoCode"
+        DbT5203."shogaiNichijoSeikatsuJiritsudoCode",
+        DbT5910."shichosonCode"
     FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
     INNER JOIN
@@ -1569,6 +1570,7 @@
       ,"CsvTempTable"."調査項目73"
       ,"CsvTempTable"."調査項目連番74"
       ,"CsvTempTable"."調査項目74"
+      ,""CsvTempTable"."認定調査委託先市町村コード"
     </sql>
 
     <sql id="selectItemZenkai">

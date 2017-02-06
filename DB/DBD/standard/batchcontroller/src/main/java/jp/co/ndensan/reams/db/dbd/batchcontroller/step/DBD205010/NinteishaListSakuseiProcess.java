@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -80,7 +79,6 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
     private static final EucEntityId EUC_ENTITY_ID_認定者 = new EucEntityId("DBD205011");
     private static final EucEntityId EUC_ENTITY_ID_該当者 = new EucEntityId("DBD205010");
     private static final ReportId REPORTID = new ReportId("DBD200001_FutanGendogakuNinteiGaitoshaIchiran");
-    private static final RString REAMSLOGINID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
     private static final RString 対象期間指定 = new RString("【対象期間指定】");
     private static final RString 対象年度 = new RString("【対象年度】");
     private static final RString 課税判定等基準日 = new RString("【課税判定等基準日】");
@@ -139,7 +137,7 @@ public class NinteishaListSakuseiProcess extends BatchKeyBreakBase<NinteishaList
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
 
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBD介護受給, REPORTID, REAMSLOGINID, parameter.get改頁出力順ID());
+                .get出力順(SubGyomuCode.DBD介護受給, REPORTID, parameter.get改頁出力順ID());
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator
                     .create(NinteishaListSakuseiProcessProperty.DBD200001_FutanGendogakuNinteiGaitoshaIchiran.class, outputOrder);

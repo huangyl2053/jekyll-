@@ -23,19 +23,23 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radUpdateKind")
+    private RadioButton radUpdateKind;
     @JsonProperty("ChosaTaisho")
     private ChosaTaishoDiv ChosaTaisho;
     @JsonProperty("ChosaJisshisha")
     private ChosaJisshishaDiv ChosaJisshisha;
     @JsonProperty("tabChosaShurui")
     private tabChosaShuruiDiv tabChosaShurui;
+    @JsonProperty("btnClear")
+    private Button btnClear;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,6 +47,24 @@ public class NinteiChosaNyuryokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradUpdateKind
+     * @return radUpdateKind
+     */
+    @JsonProperty("radUpdateKind")
+    public RadioButton getRadUpdateKind() {
+        return radUpdateKind;
+    }
+
+    /*
+     * setradUpdateKind
+     * @param radUpdateKind radUpdateKind
+     */
+    @JsonProperty("radUpdateKind")
+    public void setRadUpdateKind(RadioButton radUpdateKind) {
+        this.radUpdateKind = radUpdateKind;
+    }
+
     /*
      * getChosaTaisho
      * @return ChosaTaisho
@@ -95,6 +117,24 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     @JsonProperty("tabChosaShurui")
     public void setTabChosaShurui(tabChosaShuruiDiv tabChosaShurui) {
         this.tabChosaShurui = tabChosaShurui;
+    }
+
+    /*
+     * getbtnClear
+     * @return btnClear
+     */
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    /*
+     * setbtnClear
+     * @param btnClear btnClear
+     */
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
     }
 
     /*

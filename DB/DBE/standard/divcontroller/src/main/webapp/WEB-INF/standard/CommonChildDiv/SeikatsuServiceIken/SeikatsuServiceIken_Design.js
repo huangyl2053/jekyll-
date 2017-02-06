@@ -16,6 +16,10 @@ var DBE;
                 return "onChange_chkJotaiSonota";
             };
 
+            Events.onChange_chkIgakutekiKanri = function () {
+                return "onChange_chkIgakutekiKanri";
+            };
+
             Events.onChange_chkSonotaIryoService = function () {
                 return "onChange_chkSonotaIryoService";
             };

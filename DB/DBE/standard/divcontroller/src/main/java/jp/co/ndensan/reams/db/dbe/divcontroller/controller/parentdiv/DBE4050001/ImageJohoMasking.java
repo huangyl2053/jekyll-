@@ -18,8 +18,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -49,6 +53,10 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onLoad(ImageJohoMaskingDiv div) {
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
         getHandler(div).initialize();
         ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
         if (shinseishoKanriNoList != null) {
@@ -57,8 +65,10 @@ public class ImageJohoMasking {
                 return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
             getHandler(div).setDataGrid(resultList);
+            前排他ロックキー(前排他制御開催番号.toRString());
             return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         }
+        前排他ロックキー(前排他制御開催番号.toRString());
         return ResponseData.of(div).respond();
     }
 
@@ -107,6 +117,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTorikeshi(ImageJohoMaskingDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         getHandler(div).deleteEditedData();
         getHandler(div).setDisabledStateToButton();
         return ResponseData.of(div).respond();
@@ -119,6 +134,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnUpdate(ImageJohoMaskingDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         if (!ResponseHolder.isReRequest()) {
             boolean has変更ファイル = false;
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -176,6 +196,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onOkClose(ImageJohoMaskingDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         RString newImagePath = div.getHiddenImagePath();
         getHandler(div).updateRow(newImagePath);
         getHandler(div).setDisabledStateToButton();
@@ -201,6 +226,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnContinue(ImageJohoMaskingDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
             ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
             getHandler(div).get対象者forリスト(shinseishoKanriNoList);
@@ -218,6 +248,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnComplete(ImageJohoMaskingDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
             return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
         } else {
@@ -232,6 +267,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnBackKihonunyo(ImageJohoMaskingDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(申請書管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
     }
 
@@ -241,6 +281,18 @@ public class ImageJohoMasking {
 
     private ImageJohoMaskingValidationHandler getValidationHandler() {
         return new ImageJohoMaskingValidationHandler();
+    }
+    
+    private void 前排他ロックキー(RString 排他ロックキー) {
+        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            throw new PessimisticLockingException();
+        }
+    }
+    
+    private void 前排他キーの解除(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        RealInitialLocker.release(排他キー);
     }
 
 }

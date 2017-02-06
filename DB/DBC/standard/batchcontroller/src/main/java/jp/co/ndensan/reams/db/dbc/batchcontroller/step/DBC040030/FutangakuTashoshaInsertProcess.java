@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040030.KogakugassanJi
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.FutangakuTashoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040030.KogakugassanJikofutangakuInfoHoseiTempEntity;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -61,7 +60,7 @@ public class FutangakuTashoshaInsertProcess extends BatchProcessBase<Kogakugassa
         if (!RString.isNullOrEmpty(processParameter.get改頁出力順ID()) && !ZERO.equals(processParameter.get改頁出力順ID())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-                    高額合算自己負担額補正結果一覧表帳票ID, UrControlDataFactory.createInstance().getLoginInfo().getUserId(),
+                    高額合算自己負担額補正結果一覧表帳票ID,
                     Long.valueOf(processParameter.get改頁出力順ID().toString()));
             if (出力順 != null) {
                 processParameter.set改頁出力順ID(MyBatisOrderByClauseCreator.create(

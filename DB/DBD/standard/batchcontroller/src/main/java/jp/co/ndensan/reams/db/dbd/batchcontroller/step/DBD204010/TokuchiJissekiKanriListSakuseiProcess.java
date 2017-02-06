@@ -102,7 +102,7 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給,
-                parameter.get帳票ID(), reamsLoginID, parameter.get改頁出力順ID());
+                parameter.get帳票ID(), parameter.get改頁出力順ID());
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(TokuchiJissekiKanriListSakuseiOrderKey.class, outputOrder);
         }

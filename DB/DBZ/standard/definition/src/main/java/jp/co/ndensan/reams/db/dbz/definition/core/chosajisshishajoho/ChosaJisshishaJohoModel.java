@@ -29,5 +29,6 @@ public class ChosaJisshishaJohoModel {
     private RString 記入者名称;
     private RString 調査区分;
     private RString 申請書管理番号;
+    private int 認定調査依頼履歴番号;
 
 }

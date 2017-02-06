@@ -287,4 +287,22 @@ public class ShujiiIkenshoTorokuResult {
     public int get主治医意見書作成依頼履歴番号() {
         return entity.getDbt5301Entity().getIkenshoIraiRirekiNo();
     }
+
+    /**
+     * 意見書依頼区分を取得します。
+     *
+     * @return 意見書依頼区分
+     */
+    public RString get意見書依頼区分() {
+        return entity.getDbt5301Entity().getIkenshoIraiKubun();
+    }
+
+    /**
+     * 認定審査会後の二次判定結果の連絡確認の必要有無を取得します。
+     *
+     * @return 連絡確認の有無
+     */
+    public boolean is連絡確認の有無() {
+        return entity.getDbt5302Entity().getNijiHanteiKekkaRenrakuFlag();
+    }
 }

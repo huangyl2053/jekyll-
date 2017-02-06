@@ -20,6 +20,10 @@ module DBE {
                 return "onChange_chkJotaiSonota";
             }
 
+            public static onChange_chkIgakutekiKanri(): string {
+                return "onChange_chkIgakutekiKanri";
+            }
+
             public static onChange_chkSonotaIryoService(): string {
                 return "onChange_chkSonotaIryoService";
             }

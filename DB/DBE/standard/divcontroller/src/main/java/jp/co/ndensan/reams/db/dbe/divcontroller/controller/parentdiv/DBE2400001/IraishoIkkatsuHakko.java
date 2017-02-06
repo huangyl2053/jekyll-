@@ -212,6 +212,8 @@ public class IraishoIkkatsuHakko {
         }
         param.setBunshoNo(div.getCcdBunshoNo().get文書番号());
         param.setShichosonCode(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
+        param.setShoKisaiHokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
+        param.setHokenshaName(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村名称());
         return ResponseData.of(param).respond();
     }
 

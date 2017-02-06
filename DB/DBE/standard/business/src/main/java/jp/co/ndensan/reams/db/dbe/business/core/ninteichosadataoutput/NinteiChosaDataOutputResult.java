@@ -156,6 +156,7 @@ public class NinteiChosaDataOutputResult {
         set調査項目_今回(eucCsvEntity, entity);
         eucCsvEntity.setステータス(ステータス設定値);
         eucCsvEntity.set被保険者区分(entity.get被保険者区分コード());
+        eucCsvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
     }
 
     private void set前回分Entity(NinteiChosaBasicDataRelateEntity entityParam, NinteiChosaDataOutputEucCsvEntity eucCsvEntity) {

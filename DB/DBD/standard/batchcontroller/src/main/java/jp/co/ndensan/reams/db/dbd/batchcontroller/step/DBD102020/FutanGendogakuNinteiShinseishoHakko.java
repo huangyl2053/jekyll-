@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -81,7 +80,6 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     private ShinseishoHakkoProcessParameter processParamter;
     private RString 導入団体コード;
     private RString 市町村名;
-    private RString reamsLoginID;
     @BatchWriter
     private BatchReportWriter<FutangendogakuNinteiShinseishoReportSource> batchReportWrite;
     private ReportSourceWriter<FutangendogakuNinteiShinseishoReportSource> reportSourceWriter;
@@ -102,7 +100,6 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         ninshosha = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険, 種別コード);
         導入団体コード = association.getLasdecCode_().value();
         市町村名 = association.get市町村名();
-        reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
         通知書定型文 = new ArrayList();
         hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
@@ -128,10 +125,10 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     @Override
     protected IBatchReader createReader() {
         if (processParamter.get帳票ID().value().equals(ID.value())) {
-            order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, ID, reamsLoginID,
+            order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, ID,
                     processParamter.get改頁出力順ID());
         } else {
-            order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, REPORTID, reamsLoginID,
+            order = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, REPORTID,
                     processParamter.get改頁出力順ID());
         }
         if (order != null) {

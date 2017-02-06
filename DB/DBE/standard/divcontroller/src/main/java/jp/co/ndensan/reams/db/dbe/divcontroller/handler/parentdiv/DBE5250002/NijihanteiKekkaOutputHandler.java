@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTa
 import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 
 /**
  * 判定結果情報出力(保険者)の取得するクラスです。
@@ -236,7 +236,7 @@ public class NijihanteiKekkaOutputHandler {
         hanteibatchParameter.setChushutsuFromDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getFromValue().toDateString());
         hanteibatchParameter.setChushutsuToDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getToValue().toDateString());
         hanteibatchParameter.setHihokenshaNo(nijidiv.getKensakuJoken().getTxtHihokenshaNo().getValue());
-         if (KEY0.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
+        if (KEY0.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
             hanteibatchParameter.setDataShutsuryokuUmu(未出力のみ);
         } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
             hanteibatchParameter.setDataShutsuryokuUmu(出力済みを含む);
@@ -270,7 +270,7 @@ public class NijihanteiKekkaOutputHandler {
         shinchokuParameter.setChushutsuFromDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getFromValue().toDateString());
         shinchokuParameter.setChushutsuToDate(nijidiv.getKensakuJoken().getTxtTeishutsuKigenDateRange().getToValue().toDateString());
         shinchokuParameter.setHihokenshaNo(nijidiv.getKensakuJoken().getTxtHihokenshaNo().getValue());
-         if (KEY0.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
+        if (KEY0.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
             shinchokuParameter.setDataShutsuryokuUmu(未出力のみ);
         } else if (KEY1.equals(nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey())) {
             shinchokuParameter.setDataShutsuryokuUmu(出力済みを含む);

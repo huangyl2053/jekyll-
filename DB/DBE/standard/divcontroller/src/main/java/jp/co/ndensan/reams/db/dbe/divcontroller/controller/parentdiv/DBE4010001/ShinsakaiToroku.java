@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -38,13 +37,10 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -53,7 +49,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -85,7 +80,6 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onLoad(ShinsakaiTorokuDiv div) {
-        前排他キーのセット();
         getHandler(div).set対象者最大表示件数();
         getHandler(div).onLoad();
         getHandler(div).審査会一覧データグリッド初期化();       
@@ -162,7 +156,6 @@ public class ShinsakaiToroku {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
             申請書管理番号リスト(div.getDgNinteiTaskList().getSelectedItems());
-            前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4010001TransitionEventName.審査会対象者個別割付へ遷移する)
                     .parameter(new RString("申請書管理番号リスト"));
         }
@@ -199,7 +192,6 @@ public class ShinsakaiToroku {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(div).要介護認定完了更新(models);
-            前排他キーの解除();
             div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                     replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
@@ -346,7 +338,6 @@ public class ShinsakaiToroku {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).onClick_btnSave(修正リスト);
-            前排他キーの解除();
             div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                     replace(介護認定審査会割当.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
@@ -376,20 +367,6 @@ public class ShinsakaiToroku {
             }
         }
         return 修正リスト;
-    }
-
-    private void 前排他キーのセット() {
-        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            throw new ApplicationException(message);
-        }
-    }
-
-    private void 前排他キーの解除() {
-        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        RealInitialLocker.release(排他キー);
     }
 
     private ShinsakaiTorokuCsvEntity getCsvData(dgNinteiTaskList_Row row) {

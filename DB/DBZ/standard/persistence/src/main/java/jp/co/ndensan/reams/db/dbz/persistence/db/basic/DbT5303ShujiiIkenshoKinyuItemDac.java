@@ -105,8 +105,8 @@ public class DbT5303ShujiiIkenshoKinyuItemDac implements ISaveable<DbT5303Shujii
     @Override
     public int save(DbT5303ShujiiIkenshoKinyuItemEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定主治医意見書記入項目エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        //TODO 物理削除であるかは業務ごとに検討してください。
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+        //return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

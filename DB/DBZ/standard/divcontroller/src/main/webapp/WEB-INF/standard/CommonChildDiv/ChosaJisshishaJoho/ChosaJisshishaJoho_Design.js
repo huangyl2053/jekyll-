@@ -4,24 +4,8 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlur_txtShozokuKikanCode = function () {
-                return "onBlur_txtShozokuKikanCode";
-            };
-
-            Events.onOkClose_btnChosaItakusakiGuide = function () {
-                return "onOkClose_btnChosaItakusakiGuide";
-            };
-
-            Events.onClick_btnChosaItakusakiGuide = function () {
-                return "onClick_btnChosaItakusakiGuide";
-            };
-
             Events.onChange_ddlChosaJisshiBasho = function () {
                 return "onChange_ddlChosaJisshiBasho";
-            };
-
-            Events.onBlur_txtKinyushaCode = function () {
-                return "onBlur_txtKinyushaCode";
             };
 
             Events.onOkClose_btnChosainGuide = function () {

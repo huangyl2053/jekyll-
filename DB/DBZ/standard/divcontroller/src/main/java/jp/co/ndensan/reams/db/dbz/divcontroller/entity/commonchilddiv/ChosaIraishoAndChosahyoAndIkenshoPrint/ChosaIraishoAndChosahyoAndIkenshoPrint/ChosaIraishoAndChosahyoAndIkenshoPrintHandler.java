@@ -31,11 +31,14 @@ import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.Chos
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.AnswerPattern;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
@@ -66,6 +69,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -725,7 +729,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get生年月日(),
                     business.get住所(),
                     business.get電話番号(),
-                    set認定調査提出期限(business)
+                    set認定調査提出期限(business),
+                    business.get市町村コード(),
+                    business.get認定調査委託先コード()
             );
             chosaIraishoHeadItemList.add(item);
         }
@@ -758,7 +764,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(business.get認定調査委託先コード());
                 RString 生年月日 = business.get生年月日();
                 RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
+                RString ninteiYY;
+                RString ninteiMM;
+                RString ninteiDD;
                 RString 前回認定年月日 = business.get前回認定年月日();
+                if (前回認定年月日 != null && RDate.canConvert(前回認定年月日)) {
+                    Wareki zenkaiNinteiYMDWareki = new RDate(前回認定年月日.toString()).wareki();
+                    ninteiYY = zenkaiNinteiYMDWareki.getYear();
+                    ninteiMM = zenkaiNinteiYMDWareki.getMonth();
+                    ninteiDD = zenkaiNinteiYMDWareki.getDay();
+                } else {
+                    ninteiYY = RString.EMPTY;
+                    ninteiMM = RString.EMPTY;
+                    ninteiDD = RString.EMPTY;
+                }
                 RString 前回要介護状態区分コード = business.get前回要介護状態区分コード();
                 RString 要支援 = RString.EMPTY;
                 if (YOKAIGOJOTAIKUBUN12.equals(前回要介護状態区分コード)
@@ -833,9 +852,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         ? RensakusakiTsuzukigara.toValue(business.get連絡先続柄()).get名称() : RString.EMPTY,
                         RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                         !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_6) : RString.EMPTY,
-                        !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_6, INDEX_8) : RString.EMPTY,
+                        ninteiYY,
+                        ninteiMM,
+                        ninteiDD,
                         YOKAIGOJOTAIKUBUN01.equals(前回要介護状態区分コード) ? 記号 : RString.EMPTY,
                         要支援,
                         get要支援詳細(前回要介護状態区分コード),
@@ -1009,96 +1028,190 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
 
             List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
                     .get認定調査票差異チェック票(parameter).records();
-            for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
-                前回連番Map.put(business.get連番(), business.get調査項目());
-            }
             if (!businessList.isEmpty()) {
-                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
-                itemList.add(new SaiChekkuhyoItem(
-                        get判定結果(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()),
-                        business.get被保険者番号(),
-                        business.get被保険者氏名(),
-                        business.get年齢(),
-                        get判定結果(business.get厚労省IF識別コード(), business.get二次判定要介護状態区分コード()),
-                        business.get二次判定年月日(),
-                        business.get生年月日(),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右下肢.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_その他.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_肩関節.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_股関節.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_膝関節.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_その他.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.寝返り.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.起き上がり.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.座位保持.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.両足での立位.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.歩行.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.立ち上がり.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.片足での立位.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.洗身.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.つめ切り.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.視力.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.口腔清潔.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.洗顔.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.整髪.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.上衣の着脱.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.ズボン等の着脱.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.外出頻度.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.意思の伝達.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.毎日の日課を理解.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.生年月日をいう.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.短期記憶.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.自分の名前をいう.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.今の季節を理解.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.場所の理解.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.常時の徘徊.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.外出して戻れない.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.被害的.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.作話.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.感情が不安定.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.昼夜逆転.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.同じ話をする.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.大声を出す.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.介護に抵抗.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.落ち着きなし.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.一人で出たがる.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.収集癖.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.物や衣類を壊す.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.ひどい物忘れ.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.独り言_独り笑い.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.自分勝手に行動する.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.話がまとまらない.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.薬の内服.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.金銭の管理.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.日常の意思決定.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.集団への不適応.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.買い物.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.簡単な調理.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.点滴の管理.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.中心静脈栄養.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.透析.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.ストーマの処置.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.酸素療法.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.レスピレーター.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.気管切開の処置.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.疼痛の看護.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.経管栄養.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.モニター測定.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
-                        前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
-                        ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
-                        NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
-                ));
+                if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(businessList.get(数字_0).get厚労省IF識別コード())) {
+                    for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
+                        前回連番Map.put(business.get連番(),
+                                AnswerPattern.toValue(NinteichosaKomokuMapping09A.toValue(business.get連番()).getパターンNo()).get回答(business.get調査項目()));
+                    }
+                    ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(数字_0);
+                    itemList.add(new SaiChekkuhyoItem(
+                            get判定結果(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()),
+                            business.get被保険者番号(),
+                            business.get被保険者氏名(),
+                            business.get年齢(),
+                            get判定結果(business.get厚労省IF識別コード(), business.get二次判定要介護状態区分コード()),
+                            business.get二次判定年月日(),
+                            business.get生年月日(),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.麻痺等_左上肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.麻痺等_右上肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.麻痺等_左下肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.麻痺等_右下肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.麻痺等_その他.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.拘縮_肩関節.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.拘縮_股関節.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.拘縮_膝関節.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.拘縮_その他.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.寝返り.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.起き上がり.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.座位保持.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.両足での立位.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.歩行.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.立ち上がり.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.片足での立位.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.洗身.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.つめ切り.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.視力.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.聴力.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.移乗.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.移動.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.えん下.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.食事摂取.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.排尿.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.排便.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.口腔清潔.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.洗顔.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.整髪.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.上衣の着脱.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.ズボン等の着脱.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.外出頻度.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.意思の伝達.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.毎日の日課を理解.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.生年月日をいう.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.短期記憶.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.自分の名前をいう.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.今の季節を理解.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.場所の理解.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.常時の徘徊.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.外出して戻れない.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.被害的.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.作話.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.感情が不安定.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.昼夜逆転.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.同じ話をする.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.大声を出す.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.介護に抵抗.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.落ち着きなし.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.一人で出たがる.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.収集癖.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.物や衣類を壊す.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.ひどい物忘れ.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.独り言_独り笑い.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.自分勝手に行動する.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.話がまとまらない.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.薬の内服.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.金銭の管理.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.日常の意思決定.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.集団への不適応.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.買い物.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.簡単な調理.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.点滴の管理.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.中心静脈栄養.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.透析.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.ストーマの処置.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.酸素療法.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.レスピレーター.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.気管切開の処置.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.疼痛の看護.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.経管栄養.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.モニター測定.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.じょくそうの処置.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09A.カテーテル.getコード()),
+                            ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
+                            NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
+                    ));
+                } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(businessList.get(数字_0).get厚労省IF識別コード())) {
+                    for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
+                        前回連番Map.put(business.get連番(),
+                                AnswerPattern.toValue(NinteichosaKomokuMapping09B.toValue(business.get連番()).getパターンNo()).get回答(business.get調査項目()));
+                    }
+                    ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                    itemList.add(new SaiChekkuhyoItem(
+                            get判定結果(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()),
+                            business.get被保険者番号(),
+                            business.get被保険者氏名(),
+                            business.get年齢(),
+                            get判定結果(business.get厚労省IF識別コード(), business.get二次判定要介護状態区分コード()),
+                            business.get二次判定年月日(),
+                            business.get生年月日(),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右下肢.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_その他.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_肩関節.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_股関節.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_膝関節.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.拘縮_その他.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.寝返り.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.起き上がり.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.座位保持.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.両足での立位.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.歩行.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.立ち上がり.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.片足での立位.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.洗身.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.つめ切り.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.視力.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.口腔清潔.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.洗顔.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.整髪.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.上衣の着脱.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.ズボン等の着脱.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.外出頻度.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.意思の伝達.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.毎日の日課を理解.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.生年月日をいう.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.短期記憶.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.自分の名前をいう.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.今の季節を理解.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.場所の理解.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.常時の徘徊.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.外出して戻れない.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.被害的.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.作話.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.感情が不安定.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.昼夜逆転.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.同じ話をする.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.大声を出す.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.介護に抵抗.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.落ち着きなし.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.一人で出たがる.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.収集癖.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.物や衣類を壊す.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.ひどい物忘れ.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.独り言_独り笑い.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.自分勝手に行動する.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.話がまとまらない.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.薬の内服.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.金銭の管理.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.日常の意思決定.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.集団への不適応.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.買い物.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.簡単な調理.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.点滴の管理.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.中心静脈栄養.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.透析.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.ストーマの処置.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.酸素療法.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.レスピレーター.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.気管切開の処置.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.疼痛の看護.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.経管栄養.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.モニター測定.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
+                            前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
+                            ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
+                            NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
+                    ));
+                }
             }
         }
         return itemList;
@@ -1253,7 +1366,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
-                    business.get医療機関郵便番号(),
+                    new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo(),
                     business.get医療機関住所(),
                     business.get医療機関名称(),
                     business.get代表者名(),

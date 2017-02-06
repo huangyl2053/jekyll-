@@ -82,6 +82,8 @@ public class ShujiiIkenshoBusiness {
     private static final int INT8 = 8;
     private static final int INT9 = 9;
     private static final int INT10 = 10;
+    private static final RString SHOKISAIHOKENSHANO = new RString("【証記載保険者番号】");
+    private static final RString HOKENSHANAME = new RString("【保険者名称】");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
     private static final RString SHUJIIIKENSHOSAKUSEIIRAI = new RString("【主治医意見書作成依頼印刷区分】");
@@ -742,6 +744,14 @@ public class ShujiiIkenshoBusiness {
         RString ジョブ番号 = new RString(JobContextHolder.getJobId());
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
+        builder.append(SHOKISAIHOKENSHANO);
+        builder.append(ConvertDate(processParamter.getShoKisaiHokenshaNo()));
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(HOKENSHANAME);
+        builder.append(ConvertDate(processParamter.getHokenshaName()));
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
         builder.append(IRAIFROMYMD);
         builder.append(ConvertDate(processParamter.getIraiFromYMD()));
         出力条件.add(builder.toRString());

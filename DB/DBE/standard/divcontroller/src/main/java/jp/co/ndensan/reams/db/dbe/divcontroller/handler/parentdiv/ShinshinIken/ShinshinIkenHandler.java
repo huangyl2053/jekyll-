@@ -735,7 +735,7 @@ public class ShinshinIkenHandler {
         if (div.getRadNinchishoShuhenShojoUmu().getSelectedKey().equals(KEY_2)) {
             div.getChkNinchishoShuhenShojo().setReadOnly(false);
             div.getChkNinchishoShuhenShojoSonota().setReadOnly(false);
-        }else{
+        } else {
             div.getChkNinchishoShuhenShojoSonota().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1029,7 +1029,7 @@ public class ShinshinIkenHandler {
                     Integer.valueOf(履歴番号.toString()), 利き腕).createBuilderForEdit().set厚労省IF識別コード(
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
-        if (!RString.isNullOrEmpty(selectKey)) {
+        if (!RString.isNullOrEmpty(selectKey) && !selectKey.equals(KEY_9)) {
             div.getRadKikiude().setSelectedKey(selectKey);
         }
     }
@@ -1081,7 +1081,7 @@ public class ShinshinIkenHandler {
                     Integer.valueOf(履歴番号.toString()), 過去6カ月の体重の変化).createBuilderForEdit().set厚労省IF識別コード(
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
-        if (!RString.isNullOrEmpty(selectKey)) {
+        if (!RString.isNullOrEmpty(selectKey) && !selectKey.equals(KEY_9)) {
             div.getRadKakoTaijuHenka().setSelectedKey(selectKey);
         }
     }
@@ -1104,7 +1104,7 @@ public class ShinshinIkenHandler {
         div.getChkShishiKesson().setSelectedItemsByKey(selectKey);
         if (div.getChkShishiKesson().getSelectedKeys().contains(KEY_0)) {
             div.getTxtShishiKessonBui().setReadOnly(false);
-        }else{
+        } else {
             div.getChkShishiKesson().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1147,7 +1147,7 @@ public class ShinshinIkenHandler {
             div.getChkMigiKashiMahi().setReadOnly(false);
             div.getChkHidariKashiMahi().setReadOnly(false);
             div.getChkSonotaMahi().setReadOnly(false);
-        }else{
+        } else {
             div.getChkMahi().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1189,7 +1189,7 @@ public class ShinshinIkenHandler {
                             new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build());
         }
         if (!RString.isNullOrEmpty(selectKey)) {
-            if(!KEY_9.equals(selectKey)){
+            if (!KEY_9.equals(selectKey)) {
                 div.getRadMigiJoshiMahiTeido().setSelectedKey(selectKey);
             }
         }
@@ -1403,7 +1403,7 @@ public class ShinshinIkenHandler {
         if (div.getChkKinryokuTeika().getSelectedKeys().contains(KEY_0)) {
             div.getTxtKinryokuTeikaBui().setReadOnly(false);
             div.getRadKinryokuTeikaTeido().setReadOnly(false);
-        }else{
+        } else {
             div.getChkKinryokuTeika().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1465,7 +1465,7 @@ public class ShinshinIkenHandler {
         if (div.getChkKansetsuKoshuku().getSelectedKeys().contains(KEY_0)) {
             div.getTxtKansetsuKoshukuBui().setReadOnly(false);
             div.getRadKansetsuKoshukuTeido().setReadOnly(false);
-        }else{
+        } else {
             div.getChkKansetsuKoshuku().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1527,7 +1527,7 @@ public class ShinshinIkenHandler {
         if (div.getChkKansetsuItami().getSelectedKeys().contains(KEY_0)) {
             div.getTxtKansetsuItamiBui().setReadOnly(false);
             div.getRadKansetsuItamiTeido().setReadOnly(false);
-        }else{
+        } else {
             div.getChkKansetsuItami().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1590,7 +1590,7 @@ public class ShinshinIkenHandler {
             div.getChkFuzuiiJoshi().setReadOnly(false);
             div.getChkFuzuiiKashi().setReadOnly(false);
             div.getChkTaikan().setReadOnly(false);
-        }else{
+        } else {
             div.getChkShicchoFuzuii().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1717,7 +1717,7 @@ public class ShinshinIkenHandler {
         if (div.getChkJokuso().getSelectedKeys().contains(KEY_0)) {
             div.getTxtJokusoBui().setReadOnly(false);
             div.getRadJokusoTeido().setReadOnly(false);
-        }else{
+        } else {
             div.getChkJokuso().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1779,7 +1779,7 @@ public class ShinshinIkenHandler {
         if (div.getChkSonotaHifuShikkan().getSelectedKeys().contains(KEY_0)) {
             div.getTxtSonotaHifuShikkanBui().setReadOnly(false);
             div.getRadSonotaHifuShikkanTeido().setReadOnly(false);
-        }else{
+        } else {
             div.getChkSonotaHifuShikkan().setSelectedItemsByKey(チェックボックス_SELECT);
         }
     }
@@ -1899,7 +1899,7 @@ public class ShinshinIkenHandler {
             selectKey = KEY_2;
         } else if (IkenKomoku09.減少.getコード().equals(item.get意見項目())) {
             selectKey = KEY_3;
-        } else{
+        } else {
             selectKey = KEY_9;
         }
         return selectKey;
@@ -1911,7 +1911,7 @@ public class ShinshinIkenHandler {
             selectKey = KEY_1;
         } else if (IkenKomoku08.左.getコード().equals(item.get意見項目())) {
             selectKey = KEY_2;
-        } else{
+        } else {
             selectKey = KEY_9;
         }
         return selectKey;
@@ -1925,7 +1925,7 @@ public class ShinshinIkenHandler {
             selectKey = KEY_2;
         } else if (IkenKomoku10.重.getコード().equals(item.get意見項目())) {
             selectKey = KEY_3;
-        } else{
+        } else {
             selectKey = KEY_9;
         }
         return selectKey;

@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoInIchiRanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoInKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -308,7 +307,7 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
 
     private void setParameter() {
         IOutputOrder outputOrder = shutsuryokujunFinder.get出力順(
-                SubGyomuCode.DBC介護給付, 帳票ID, UrControlDataFactory.createInstance().getLoginInfo().getUserId(), 出力順ID.getValue());
+                SubGyomuCode.DBC介護給付, 帳票ID, 出力順ID.getValue());
         if (outputOrder == null) {
             return;
         }

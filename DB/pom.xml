@@ -10,7 +10,7 @@
     <parent>
         <groupId>jp.co.ndensan.reams.commonpom</groupId>
         <artifactId>commonpom</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <modules>
@@ -39,9 +39,9 @@
     </repositories>
     <properties>
         <!--  自業務公開系 DBXのバージョンと一致させること -->
-        <jp.co.ndensan.reams.dbxVersion>1.12.0</jp.co.ndensan.reams.dbxVersion>
+        <jp.co.ndensan.reams.dbxVersion>1.13.0</jp.co.ndensan.reams.dbxVersion>
         <!-- UZ -->
-        <jp.co.ndensan.reams.uzVersion>1.15.1</jp.co.ndensan.reams.uzVersion>
+        <jp.co.ndensan.reams.uzVersion>1.17.2-SNAPSHOT</jp.co.ndensan.reams.uzVersion>
         <!-- 公開系 -->
         <jp.co.ndensan.reams.urVersion>1.15.0</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uaxVersion>1.14.1</jp.co.ndensan.reams.uaxVersion>

@@ -11,6 +11,7 @@
           SELECT
                 DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo",
                 DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
+                DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiKubun",
                 DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag",
                 DbT5912ShujiiJoho."shujiiName",
                 DbT5302ShujiiIkenshoJoho."ikenshoKinyuYMD",
@@ -36,7 +37,8 @@
                 DbT5302ShujiiIkenshoJoho."existSonotaJushinkaFlag",
                 DbT5302ShujiiIkenshoJoho."sonotaJushinKaMei",
                 DbT5302ShujiiIkenshoJoho."ikenshoMemo",
-                DbT5302ShujiiIkenshoJoho."koroshoIfShikibetsuCode"
+                DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode",
+                DbT5302ShujiiIkenshoJoho."nijiHanteiKekkaRenrakuFlag"
           FROM
                 rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301ShujiiIkenshoIraiJoho
           LEFT JOIN
@@ -55,6 +57,10 @@
           ON 
                 DbT5301ShujiiIkenshoIraiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
                 AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
+         LEFT JOIN
+               rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+         ON
+                DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" =  DbT5101NinteiShinseiJoho."shinseishoKanriNo"
           <!--INNER JOIN
                 rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
           ON
@@ -72,6 +78,53 @@
                 <!--AND DbT5301ShujiiIkenshoIraiJoho"ikenshoIraiRirekiNo" = #{履歴番号}-->
     </select>
     
+    <select resultOrdered="true" id="getShujiiIkenshoKensu"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
+            resultType="int" fetchSize="500">
+        SELECT
+        count(0)
+        FROM
+        rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302ShujiiIkenshoJoho
+        WHERE
+          DbT5302ShujiiIkenshoJoho."shinseishoKanriNo" = #{管理番号}
+          AND  DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo" = #{履歴番号}
+    </select>
+    
+    <select resultOrdered="true" id="getIchijiHantei"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
+            resultType="int" fetchSize="500">
+        SELECT
+        count(0)
+        FROM
+        rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116IchijiHanteiKekkaJoho
+        WHERE
+        DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo" = #{管理番号}
+    </select>
+    
+    <select resultOrdered="true" id="getIchijiHanteiKanryo"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
+            resultType="int" fetchSize="500">
+        SELECT
+        count(0)
+        FROM
+        rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
+        WHERE
+        DbT5105NinteiKanryoJoho."shinseishoKanriNo" = #{管理番号}
+        AND NOT("ichijiHanteiKanryoYMD" is NUll OR "ichijiHanteiKanryoYMD" = '')
+    </select>
+    
+    <select resultOrdered="true" id="getIchijiHanteiMikanryo"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
+            resultType="int" fetchSize="500">
+        SELECT
+        count(0)
+        FROM
+        rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
+        WHERE
+        DbT5105NinteiKanryoJoho."shinseishoKanriNo" = #{管理番号}
+        AND ("ichijiHanteiKanryoYMD" is NUll OR "ichijiHanteiKanryoYMD" = '')
+    </select>
+
     <resultMap id="resultMap_ShujiiIkenshoTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku.ShujiiIkenshoTorokuRelateEntity" autoMapping="true">
         <id column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id column="ikenshoIraiRirekiNo" />

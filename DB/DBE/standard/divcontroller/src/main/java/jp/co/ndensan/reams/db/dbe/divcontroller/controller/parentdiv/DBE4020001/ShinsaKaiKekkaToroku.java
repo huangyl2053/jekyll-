@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,21 +40,17 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -89,7 +84,6 @@ public class ShinsaKaiKekkaToroku {
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onLoad(ShinsaKaiKekkaTorokuDiv div) {
         ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
-        前排他キーのセット();
         handler.onLoad();
         handler.setDisplayOCR結果登録ボタン(getConfig審査会結果登録OCR使用可否());
         handler.setDisabled登録ボタンfrom選択状態();
@@ -211,7 +205,6 @@ public class ShinsaKaiKekkaToroku {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
             set遷移先引数(div.getDgNinteiTaskList().getSelectedItems().get(0));
-            前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
         }
     }
@@ -244,7 +237,6 @@ public class ShinsaKaiKekkaToroku {
             RString ファイルの名称 = DbBusinessConfig.get(ConfigNameDBE.審査結果取込用データ_モバイル, 日期, SubGyomuCode.DBE認定支援);
             List<ShinsaKaiKekkaInputCsvEntity> ファイルデータ = insertCsvDate(ファイルの場所, ファイルの名称);
             getHandler(div).onClick_btnCyosakekkaInput(ファイルデータ);
-            前排他キーの解除();
             onLoad(div);
         }
         return ResponseData.of(div).respond();
@@ -266,7 +258,6 @@ public class ShinsaKaiKekkaToroku {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
             ViewStateHolder.put(ViewStateKeys.開催番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getNijihanteiKaisaiNumber());
-            前排他キーの解除();
             return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.介護認定審査会審査結果登録_OCR_へ遷移する).respond();
         }
     }
@@ -306,7 +297,6 @@ public class ShinsaKaiKekkaToroku {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(div).要介護認定完了更新(models);
-            前排他キーの解除();
             div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                     replace(審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakaikanryooutput().setDisplayNone(true);
@@ -360,20 +350,6 @@ public class ShinsaKaiKekkaToroku {
             return 日期.wareki().toDateString();
         }
         return RString.EMPTY;
-    }
-
-    private void 前排他キーのセット() {
-        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        if (!RealInitialLocker.tryGetLock(排他キー)) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            throw new ApplicationException(message);
-        }
-    }
-
-    private void 前排他キーの解除() {
-        LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
-        RealInitialLocker.release(排他キー);
     }
 
     private RString 二次判定結果の名称(RString 厚労省IF識別コード, RString 二次判定結果コード) {

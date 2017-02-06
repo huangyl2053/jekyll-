@@ -42,8 +42,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -75,7 +73,6 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
  */
 public class GetsureiShori {
 
-    private static final LockingKey 排他キー = new LockingKey(new RString("ShinseishoKanriNo"));
     private static final RString UICONTAINERID_DBEUC56101 = new RString("DBEUC56101");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_ENTITY_ID = new RString("DBE202001");
@@ -220,7 +217,6 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData<GetsureiShoriDiv> onClick_BtnCenterSoshin(GetsureiShoriDiv div) {
-        RealInitialLocker.release(排他キー);
         return ResponseData.of(div).forwardWithEventName(DBE0220001TransitionEventName.センター送信).respond();
     }
 
@@ -275,7 +271,7 @@ public class GetsureiShori {
                         row.getHihoNumber()));
                 AccessLogger.log(AccessLogType.更新, personalData);
             }
-            RealInitialLocker.release(排他キー);
+
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             RString uiContainerID = ResponseHolder.getUIContainerId();

@@ -5,13 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ChosahyoSaiCheckhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo.SaiChekkuhyoRyoumenReport;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -60,6 +64,8 @@ public class NinteiChosaSaiCheckhyoRyomenLeft extends BatchProcessBase<HomonChos
                 .addBreak(new BreakerCatalog<SaiChekkuhyoReportSource>().new SimpleLayoutBreaker(
 
 
+
+
                     SaiChekkuhyoReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<SaiChekkuhyoReportSource> occuredBreak(ReportLineRecord<SaiChekkuhyoReportSource> currentRecord,
@@ -79,8 +85,12 @@ public class NinteiChosaSaiCheckhyoRyomenLeft extends BatchProcessBase<HomonChos
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity);
-        SaiChekkuhyoRyoumenReport report = SaiChekkuhyoRyoumenReport.createFrom(business.setDBE292003Item(checkEntity));
+        ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(entity.get申請書管理番号());
+        List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                .get認定調査票差異チェック票(parameter).records();
+        ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity, businessList);
+        SaiChekkuhyoRyoumenReport report = SaiChekkuhyoRyoumenReport.createFrom(business.setDBE292001Item(checkEntity, entity.get厚労省IF識別コード()));
         report.writeBy(reportSourceWriter);
     }
 

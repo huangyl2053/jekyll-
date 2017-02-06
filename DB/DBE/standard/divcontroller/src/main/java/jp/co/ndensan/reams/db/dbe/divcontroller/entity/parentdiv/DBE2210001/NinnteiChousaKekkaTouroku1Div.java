@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinnteiChousaKekkaTouroku1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -354,6 +354,16 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public RadioButton getRadUpdateKind() {
+        return this.getNinteiChosaNyuryoku().getRadUpdateKind();
+    }
+
+    @JsonIgnore
+    public void  setRadUpdateKind(RadioButton radUpdateKind) {
+        this.getNinteiChosaNyuryoku().setRadUpdateKind(radUpdateKind);
+    }
+
     @JsonIgnore
     public ChosaTaishoDiv getChosaTaisho() {
         return this.getNinteiChosaNyuryoku().getChosaTaisho();
@@ -737,6 +747,16 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
         this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa7(btnKihonchosa7);
+    }
+
+    @JsonIgnore
+    public Button getBtnClear() {
+        return this.getNinteiChosaNyuryoku().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getNinteiChosaNyuryoku().setBtnClear(btnClear);
     }
 
     // </editor-fold>

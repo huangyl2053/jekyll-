@@ -44,6 +44,15 @@ public class TempData {
     }
 
     /**
+     * 概況調査テキストイメージ区分を取得します。
+     *
+     * @return 概況調査テキストイメージ区分
+     */
+    public RString getTemp_概況調査テキストイメージ区分() {
+        return entity.getTemp_概況調査テキストイメージ区分();
+    }
+
+    /**
      * 現在の状況コードを取得します。
      *
      * @return 現在の状況コード
@@ -194,6 +203,15 @@ public class TempData {
      */
     public void setTemp_現在の状況コード(RString temp_現在の状況コード) {
         entity.setTemp_現在の状況コード(temp_現在の状況コード);
+    }
+    
+    /**
+     * temp_概況調査テキストイメージ区分を設定します。
+     *
+     * @param temp_概況調査テキストイメージ区分 temp_概況調査テキストイメージ区分
+     */
+    public void setTemp_概況調査テキストイメージ区分(RString temp_概況調査テキストイメージ区分) {
+        entity.setTemp_概況調査テキストイメージ区分(temp_概況調査テキストイメージ区分);
     }
 
     /**
