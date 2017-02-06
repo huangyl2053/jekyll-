@@ -81,8 +81,9 @@ public class NinteiChosaJissekiShokaiHandler {
 
     private void setRecords(List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList) {
         List<dgNinteiChosaJisseki_Row> rowList = new ArrayList<>();
+
+        List<PersonalData> personalData = new ArrayList<>();
         for (ChosahyoJissekiIchiran data : chosahyoJissekiIchiransList) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(data.get申請書管理番号()));
             dgNinteiChosaJisseki_Row row = new dgNinteiChosaJisseki_Row(
                     get保険者(data),
                     data.get調査委託先コード(),
@@ -100,7 +101,10 @@ public class NinteiChosaJissekiShokaiHandler {
                     data.get認定調査依頼履歴番号()
             );
             rowList.add(row);
+            personalData.add(toPersonalData(data.get申請書管理番号()));
         }
+        AccessLogger.log(AccessLogType.照会, personalData);
+
         div.getDgNinteiChosaJisseki().setDataSource(rowList);
     }
 

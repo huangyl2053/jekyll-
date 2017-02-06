@@ -26,17 +26,9 @@
         , T5202."ninteichousaIraiKubunCode" AS 認定調査依頼区分コード
         , T5601."shinseishoKanriNo" AS 申請書管理番号
         , T5601."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
+        , COUNT(*) OVER() as "totalCount"
         <include refid="core" />
         <include refid="order" />
-    </select>
-
-
-    <select id="getTotalCount"
-            resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true" >
-        SELECT
-        COUNT(*)
-        <include refid="core" />
     </select>
 
     <sql id="core">

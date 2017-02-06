@@ -59,7 +59,12 @@ public class NinteiChosaJissekiShokaiFindler {
         for (ChosahyoJissekiIchiranRelateEntity entity : relateEntity) {
             list.add(new ChosahyoJissekiIchiran(entity));
         }
-        int 件数 = mapper.getTotalCount(param);
+        int 件数;
+        if (relateEntity.isEmpty()) {
+            件数 = 0;
+        } else {
+            件数 = relateEntity.get(0).getTotalCount();
+        }
         if (件数 <= param.get件数()) {
             return SearchResult.of(list, 件数, false);
         }
