@@ -301,4 +301,5 @@ public class NinteiChosaDataOutputBatchRelateEntity implements IDbAccessable {
     private RString 調査項目73;
     private RString 調査項目連番74;
     private RString 調査項目74;
+    private RString 認定調査委託先市町村コード;
 }

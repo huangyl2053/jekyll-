@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 19 19:40:42 JST 2016 
+ * Fri Feb 03 09:10:24 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
 
     private RString columnState;
     private RString chosaKubun;
@@ -30,6 +30,7 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
     private RString homonShubetsuCode;
     private TextBoxFlexibleDate kaishiYM;
     private TextBoxFlexibleDate shuryoYM;
+    private TextBoxFlexibleDate shuryoYMbak;
     private TextBoxNum tanka;
 
     public dgHomonChosahoshuTankaIchiran_Row() {
@@ -41,6 +42,7 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
         this.homonShubetsuCode = RString.EMPTY;
         this.kaishiYM = new TextBoxFlexibleDate();
         this.shuryoYM = new TextBoxFlexibleDate();
+        this.shuryoYMbak = new TextBoxFlexibleDate();
         this.tanka = new TextBoxNum();
         this.setOriginalData("columnState", columnState);
         this.setOriginalData("chosaKubun", chosaKubun);
@@ -49,10 +51,11 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
         this.setOriginalData("homonShubetsuCode", homonShubetsuCode);
         this.setOriginalData("kaishiYM", kaishiYM);
         this.setOriginalData("shuryoYM", shuryoYM);
+        this.setOriginalData("shuryoYMbak", shuryoYMbak);
         this.setOriginalData("tanka", tanka);
     }
 
-    public dgHomonChosahoshuTankaIchiran_Row(RString columnState, RString chosaKubun, RString chosaKubunCode, RString homonShubetsu, RString homonShubetsuCode, TextBoxFlexibleDate kaishiYM, TextBoxFlexibleDate shuryoYM, TextBoxNum tanka) {
+    public dgHomonChosahoshuTankaIchiran_Row(RString columnState, RString chosaKubun, RString chosaKubunCode, RString homonShubetsu, RString homonShubetsuCode, TextBoxFlexibleDate kaishiYM, TextBoxFlexibleDate shuryoYM, TextBoxFlexibleDate shuryoYMbak, TextBoxNum tanka) {
         super();
         this.setOriginalData("columnState", columnState);
         this.setOriginalData("chosaKubun", chosaKubun);
@@ -61,6 +64,7 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
         this.setOriginalData("homonShubetsuCode", homonShubetsuCode);
         this.setOriginalData("kaishiYM", kaishiYM);
         this.setOriginalData("shuryoYM", shuryoYM);
+        this.setOriginalData("shuryoYMbak", shuryoYMbak);
         this.setOriginalData("tanka", tanka);
         this.columnState = columnState;
         this.chosaKubun = chosaKubun;
@@ -69,6 +73,7 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
         this.homonShubetsuCode = homonShubetsuCode;
         this.kaishiYM = kaishiYM;
         this.shuryoYM = shuryoYM;
+        this.shuryoYMbak = shuryoYMbak;
         this.tanka = tanka;
     }
 
@@ -98,6 +103,10 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
 
     public TextBoxFlexibleDate getShuryoYM() {
         return shuryoYM;
+    }
+
+    public TextBoxFlexibleDate getShuryoYMbak() {
+        return shuryoYMbak;
     }
 
     public TextBoxNum getTanka() {
@@ -137,6 +146,11 @@ public class dgHomonChosahoshuTankaIchiran_Row extends DataRow {
     public void setShuryoYM(TextBoxFlexibleDate shuryoYM) {
         this.setOriginalData("shuryoYM", shuryoYM);
         this.shuryoYM = shuryoYM;
+    }
+
+    public void setShuryoYMbak(TextBoxFlexibleDate shuryoYMbak) {
+        this.setOriginalData("shuryoYMbak", shuryoYMbak);
+        this.shuryoYMbak = shuryoYMbak;
     }
 
     public void setTanka(TextBoxNum tanka) {

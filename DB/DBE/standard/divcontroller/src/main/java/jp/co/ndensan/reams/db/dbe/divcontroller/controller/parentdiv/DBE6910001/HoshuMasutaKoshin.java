@@ -61,6 +61,10 @@ public class HoshuMasutaKoshin {
      */
     public ResponseData<HoshuMasutaKoshinDiv> onLoad(HoshuMasutaKoshinDiv div) {
         set審査員報酬単価マスタ情報(div);
+        set意見書報酬単価マスタ情報(div);
+        set訪問調査報酬単価マスタ情報(div);
+        set審査会委員別単価マスタ情報(div);
+        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabChosainhoshuTanka());
         return ResponseData.of(div).respond();
     }
 
@@ -104,13 +108,13 @@ public class HoshuMasutaKoshin {
             }
         }
         if (タブ名_審査員報酬単価マスタ.equals(選択したタブ名)) {
-            set審査員報酬単価マスタ情報(div);
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabChosainhoshuTanka());
         } else if (タブ名_意見書報酬単価マスタ.equals(選択したタブ名)) {
-            set意見書報酬単価マスタ情報(div);
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTblIkenShohoshuTanka());
         } else if (タブ名_訪問調査報酬単価マスタ.equals(選択したタブ名)) {
-            set訪問調査報酬単価マスタ情報(div);
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHomonChosahoshuTanka());
         } else if (タブ名_審査会委員別単価マスタ.equals(選択したタブ名)) {
-            set審査会委員別単価マスタ情報(div);
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTbShinsakaiIinBetuTanka());
         }
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
@@ -240,9 +244,9 @@ public class HoshuMasutaKoshin {
         }
         List<dgChosainhoshuTankaIchiran_Row> 審査員報酬単価一覧情報 = div.getHoshuMasutaTab().getDgChosainhoshuTankaIchiran().getDataSource();
         for (dgChosainhoshuTankaIchiran_Row row : 審査員報酬単価一覧情報) {
-            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())){
+            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())) {
                 ViewStateHolder.remove(ViewStateKeys.審査員報酬単価マスタ情報);
-                ViewStateHolder.put(ViewStateKeys.審査員報酬単価マスタ情報,ViewStateHolder.get(ViewStateKeys.審査員報酬単価マスタ情報Bak, Models.class));
+                ViewStateHolder.put(ViewStateKeys.審査員報酬単価マスタ情報, ViewStateHolder.get(ViewStateKeys.審査員報酬単価マスタ情報Bak, Models.class));
             }
         }
         getHandler(div).onClick_btnChoKousin();
@@ -375,9 +379,9 @@ public class HoshuMasutaKoshin {
         }
         List<dgIkenShohoshuTankaIchiran_Row> 意見書報酬単価一覧情報 = div.getHoshuMasutaTab().getDgIkenShohoshuTankaIchiran().getDataSource();
         for (dgIkenShohoshuTankaIchiran_Row row : 意見書報酬単価一覧情報) {
-            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())){
+            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())) {
                 ViewStateHolder.remove(ViewStateKeys.意見書報酬単価マスタ情報);
-                ViewStateHolder.put(ViewStateKeys.意見書報酬単価マスタ情報,ViewStateHolder.get(ViewStateKeys.意見書報酬単価マスタ情報Bak, Models.class));
+                ViewStateHolder.put(ViewStateKeys.意見書報酬単価マスタ情報, ViewStateHolder.get(ViewStateKeys.意見書報酬単価マスタ情報Bak, Models.class));
             }
         }
         getHandler(div).onClick_btnIkenKousin();
@@ -511,9 +515,9 @@ public class HoshuMasutaKoshin {
         List<dgHomonChosahoshuTankaIchiran_Row> 訪問調査報酬単価一覧情報 = div.getHoshuMasutaTab().
                 getDgHomonChosahoshuTankaIchiran().getDataSource();
         for (dgHomonChosahoshuTankaIchiran_Row row : 訪問調査報酬単価一覧情報) {
-            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())){
+            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())) {
                 ViewStateHolder.remove(ViewStateKeys.訪問調査報酬単価マスタ情報);
-                ViewStateHolder.put(ViewStateKeys.訪問調査報酬単価マスタ情報,ViewStateHolder.get(ViewStateKeys.訪問調査報酬単価マスタ情報Bak, Models.class));
+                ViewStateHolder.put(ViewStateKeys.訪問調査報酬単価マスタ情報, ViewStateHolder.get(ViewStateKeys.訪問調査報酬単価マスタ情報Bak, Models.class));
             }
         }
         getHandler(div).onClick_btnHomKousin();
@@ -658,9 +662,9 @@ public class HoshuMasutaKoshin {
         List<dgShinsakaiIinBetuTanka_Row> 審査会委員別単価一覧情報 = div.getHoshuMasutaTab().
                 getDgShinsakaiIinBetuTanka().getDataSource();
         for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
-            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())){
-               ViewStateHolder.remove(ViewStateKeys.審査会委員別単価マスタ情報);
-               ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報,ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報Bak, Models.class));
+            if (追加モード.equals(row.getColumnState()) || 更新モード.equals(row.getColumnState()) || 削除モード.equals(row.getColumnState())) {
+                ViewStateHolder.remove(ViewStateKeys.審査会委員別単価マスタ情報);
+                ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報, ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報Bak, Models.class));
             }
         }
         getHandler(div).onClick_btnBetuKousin();
@@ -798,22 +802,33 @@ public class HoshuMasutaKoshin {
                 審査員報酬単価情報Model.add(新規情報);
             } else if (更新モード.equals(row.getColumnState())) {
                 ShinsakaiIinHoshuTankaIdentifier 識別子 = new ShinsakaiIinHoshuTankaIdentifier(
-                        new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
-                ShinsakaiIinHoshuTanka 更新情報 = 審査員報酬単価情報Model.get(識別子).createBuilderForEdit().
-                        set単価(row.getTanka().getValue()).build().modifiedModel();
-                審査員報酬単価情報Model.add(更新情報);
+                    new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
+                    row.getKaishiYM().getValue().getYearMonth(),
+                    row.getShuryoYMbak().getValue().getYearMonth());
+                if (row.getShuryoYMbak().getValue().getYearMonth().compareTo(row.getShuryoYM().getValue().getYearMonth()) == 0) {
+                    ShinsakaiIinHoshuTanka 更新情報 = 審査員報酬単価情報Model.get(識別子).createBuilderForEdit().
+                            set単価(row.getTanka().getValue()).build().modifiedModel();
+                    審査員報酬単価情報Model.add(更新情報);
+                } else {
+                    ShinsakaiIinHoshuTanka 削除情報 = 審査員報酬単価情報Model.get(識別子).deleted();
+                    審査員報酬単価情報Model.add(削除情報);
+                    ShinsakaiIinHoshuTanka 新規情報 = new ShinsakaiIinHoshuTanka(
+                            new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
+                            row.getKaishiYM().getValue().getYearMonth(),
+                            row.getShuryoYM().getValue().getYearMonth(),
+                            row.getTanka().getValue());
+                    審査員報酬単価情報Model.add(新規情報);
+                }
             } else if (削除モード.equals(row.getColumnState())) {
                 ShinsakaiIinHoshuTankaIdentifier 識別子 = new ShinsakaiIinHoshuTankaIdentifier(
-                        new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
+                    new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
+                    row.getKaishiYM().getValue().getYearMonth(),
+                    row.getShuryoYMbak().getValue().getYearMonth());
                 ShinsakaiIinHoshuTanka 削除情報 = 審査員報酬単価情報Model.get(識別子).deleted();
                 審査員報酬単価情報Model.add(削除情報);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.審査員報酬単価マスタ情報Bak,ViewStateHolder.get(ViewStateKeys.審査員報酬単価マスタ情報, Models.class));
+        ViewStateHolder.put(ViewStateKeys.審査員報酬単価マスタ情報Bak, ViewStateHolder.get(ViewStateKeys.審査員報酬単価マスタ情報, Models.class));
         ViewStateHolder.put(ViewStateKeys.審査員報酬単価マスタ情報, 審査員報酬単価情報Model);
         審査員報酬単価マスタ更新情報 = new ArrayList<>(審査員報酬単価情報Model.values());
         return 審査員報酬単価マスタ更新情報;
@@ -854,7 +869,7 @@ public class HoshuMasutaKoshin {
                 意見書報酬単価情報Model.add(削除情報);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.審査員報酬単価マスタ情報Bak,ViewStateHolder.get(ViewStateKeys.意見書報酬単価マスタ情報, Models.class));
+        ViewStateHolder.put(ViewStateKeys.意見書報酬単価マスタ情報Bak, ViewStateHolder.get(ViewStateKeys.意見書報酬単価マスタ情報, Models.class));
         ViewStateHolder.put(ViewStateKeys.意見書報酬単価マスタ情報, 意見書報酬単価情報Model);
         意見書報酬単価マスタ更新情報 = new ArrayList<>(意見書報酬単価情報Model.values());
         return 意見書報酬単価マスタ更新情報;
@@ -879,25 +894,40 @@ public class HoshuMasutaKoshin {
                 訪問調査報酬単価情報Model.add(新規情報);
             } else if (更新モード.equals(row.getColumnState())) {
                 NinteiChosaHoshuTankaIdentifier 識別子 = new NinteiChosaHoshuTankaIdentifier(
-                        new Code(row.getChosaKubunCode()),
-                        new Code(row.getHomonShubetsuCode()),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
-                NinteiChosaHoshuTanka 更新情報 = 訪問調査報酬単価情報Model.get(識別子).createBuilderForEdit().
-                        set単価(row.getTanka().getValue()).
-                        build().modifiedModel();
-                訪問調査報酬単価情報Model.add(更新情報);
+                    new Code(row.getChosaKubunCode()),
+                    new Code(row.getHomonShubetsuCode()),
+                    row.getKaishiYM().getValue().getYearMonth(),
+                    row.getShuryoYMbak().getValue().getYearMonth());
+                NinteiChosaHoshuTanka 既存情報 = 訪問調査報酬単価情報Model.get(識別子);
+                if (既存情報.get終了年月().compareTo(row.getShuryoYM().getValue().getYearMonth()) == 0) {
+                    NinteiChosaHoshuTanka 更新情報 = 訪問調査報酬単価情報Model.get(識別子).createBuilderForEdit().
+                            set単価(row.getTanka().getValue()).
+                            build().modifiedModel();
+                    訪問調査報酬単価情報Model.add(更新情報);
+                }else {
+                    NinteiChosaHoshuTanka 削除情報 = 訪問調査報酬単価情報Model.get(識別子).deleted();
+                    訪問調査報酬単価情報Model.add(削除情報);
+                    NinteiChosaHoshuTanka 新規情報 = new NinteiChosaHoshuTanka(
+                            new Code(row.getChosaKubunCode()),
+                            new Code(row.getHomonShubetsuCode()),
+                            row.getKaishiYM().getValue().getYearMonth(),
+                            row.getShuryoYM().getValue().getYearMonth());
+                    新規情報 = 新規情報.createBuilderForEdit().
+                            set単価(row.getTanka().getValue()).
+                            build();
+                    訪問調査報酬単価情報Model.add(新規情報);
+                }
             } else if (削除モード.equals(row.getColumnState())) {
                 NinteiChosaHoshuTankaIdentifier 識別子 = new NinteiChosaHoshuTankaIdentifier(
-                        new Code(row.getChosaKubunCode()),
-                        new Code(row.getHomonShubetsuCode()),
-                        row.getKaishiYM().getValue().getYearMonth(),
-                        row.getShuryoYM().getValue().getYearMonth());
+                    new Code(row.getChosaKubunCode()),
+                    new Code(row.getHomonShubetsuCode()),
+                    row.getKaishiYM().getValue().getYearMonth(),
+                    row.getShuryoYMbak().getValue().getYearMonth());
                 NinteiChosaHoshuTanka 削除情報 = 訪問調査報酬単価情報Model.get(識別子).deleted();
                 訪問調査報酬単価情報Model.add(削除情報);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.訪問調査報酬単価マスタ情報Bak,ViewStateHolder.get(ViewStateKeys.訪問調査報酬単価マスタ情報, Models.class));
+        ViewStateHolder.put(ViewStateKeys.訪問調査報酬単価マスタ情報Bak, ViewStateHolder.get(ViewStateKeys.訪問調査報酬単価マスタ情報, Models.class));
         ViewStateHolder.put(ViewStateKeys.訪問調査報酬単価マスタ情報, 訪問調査報酬単価情報Model);
         訪問調査報酬単価マスタ更新情報 = new ArrayList<>(訪問調査報酬単価情報Model.values());
         return 訪問調査報酬単価マスタ更新情報;
@@ -911,7 +941,7 @@ public class HoshuMasutaKoshin {
                 = ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class);
         for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
             FlexibleYearMonth 開始年月 = !row.getKaishiYM().getValue().isEmpty() ? row.getKaishiYM().getValue().getYearMonth() : FlexibleYearMonth.MIN;
-            FlexibleYearMonth 終了年月 = !row.getShuryoYM().getValue().isEmpty() ? row.getShuryoYM().getValue().getYearMonth() : FlexibleYearMonth.MAX;
+            FlexibleYearMonth 終了年月 = !row.getShuryoYM().getValue().isEmpty() ? row.getShuryoYMbak().getValue().getYearMonth() : FlexibleYearMonth.MAX;
             RString 氏名 = null != row.getShinsakaiIinName() ? row.getShinsakaiIinName() : RString.EMPTY;
             if (追加モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTanka 新規情報 = new ShinsakaiIinBetsuTanka(
@@ -926,25 +956,41 @@ public class HoshuMasutaKoshin {
                 審査会委員別単価情報Model.add(新規情報);
             } else if (更新モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
-                        row.getShinsakaiIinCode(),
-                        開始年月,
-                        終了年月);
-                ShinsakaiIinBetsuTanka 更新情報 = 審査会委員別単価情報Model.get(識別子).createBuilderForEdit().
-                        set単価(row.getTanka().getValue()).
-                        setその他単価(row.getSonotaTanka().getValue()).
-                        set氏名(氏名).
-                        build().modifiedModel();
-                審査会委員別単価情報Model.add(更新情報);
+                    row.getShinsakaiIinCode(),
+                    開始年月,
+                    終了年月);
+                ShinsakaiIinBetsuTanka 既存情報 = 審査会委員別単価情報Model.get(識別子);
+                if (既存情報.get終了年月().compareTo(終了年月) == 0) {
+                    ShinsakaiIinBetsuTanka 更新情報 = 審査会委員別単価情報Model.get(識別子).createBuilderForEdit().
+                            set単価(row.getTanka().getValue()).
+                            setその他単価(row.getSonotaTanka().getValue()).
+                            set氏名(氏名).
+                            build().modifiedModel();
+                    審査会委員別単価情報Model.add(更新情報);
+                } else {
+                    ShinsakaiIinBetsuTanka 削除情報 = 審査会委員別単価情報Model.get(識別子).deleted();
+                    審査会委員別単価情報Model.add(削除情報);
+                    ShinsakaiIinBetsuTanka 新規情報 = new ShinsakaiIinBetsuTanka(
+                            row.getShinsakaiIinCode(),
+                            開始年月,
+                            終了年月,
+                            氏名);
+                    新規情報 = 新規情報.createBuilderForEdit().
+                            set単価(row.getTanka().getValue()).
+                            setその他単価(row.getSonotaTanka().getValue()).
+                            build();
+                    審査会委員別単価情報Model.add(新規情報);
+                }
             } else if (削除モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
-                        row.getShinsakaiIinCode(),
-                        開始年月,
-                        終了年月);
+                    row.getShinsakaiIinCode(),
+                    開始年月,
+                    終了年月);
                 ShinsakaiIinBetsuTanka 削除情報 = 審査会委員別単価情報Model.get(識別子).deleted();
                 審査会委員別単価情報Model.add(削除情報);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報Bak,ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class));
+        ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報Bak, ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class));
         ViewStateHolder.put(ViewStateKeys.審査会委員別単価マスタ情報, 審査会委員別単価情報Model);
         審査会委員別単価マスタ更新情報 = new ArrayList<>(審査会委員別単価情報Model.values());
         return 審査会委員別単価マスタ更新情報;

@@ -59,7 +59,6 @@ public class HoshuMasutaKoshinHandler {
      */
     public void set審査員報酬単価マスタタブ(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
         set審査員報酬単価一覧情報(審査員報酬単価マスタ情報);
-        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabChosainhoshuTanka());
     }
 
     /**
@@ -69,7 +68,6 @@ public class HoshuMasutaKoshinHandler {
      */
     public void set意見書報酬単価マスタタブ(List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ情報) {
         set意見書報酬単価一覧情報(意見書報酬単価マスタ情報);
-        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTblIkenShohoshuTanka());
     }
 
     /**
@@ -79,7 +77,6 @@ public class HoshuMasutaKoshinHandler {
      */
     public void set訪問調査報酬単価マスタタブ(List<NinteiChosaHoshuTanka> 訪問調査報酬単価マスタ情報) {
         set訪問調査報酬単価一覧情報(訪問調査報酬単価マスタ情報);
-        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabHomonChosahoshuTanka());
     }
 
     /**
@@ -89,7 +86,6 @@ public class HoshuMasutaKoshinHandler {
      */
     public void set審査会委員別単価マスタタブ(List<ShinsakaiIinBetsuTanka> 審査会委員別単価マスタ情報) {
         set審査会委員別単価一覧情報(審査会委員別単価マスタ情報);
-        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTbShinsakaiIinBetuTanka());
     }
 
     /**
@@ -522,7 +518,7 @@ public class HoshuMasutaKoshinHandler {
             }
         }
     }
-
+    
     private void set審査員報酬単価一覧情報(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
         List<dgChosainhoshuTankaIchiran_Row> 審査員報酬単価一覧情報 = new ArrayList<>();
         for (ShinsakaiIinHoshuTanka 審査員報酬単価 : 審査員報酬単価マスタ情報) {
@@ -538,6 +534,7 @@ public class HoshuMasutaKoshinHandler {
             }
             row.getKaishiYM().setValue(new FlexibleDate(審査員報酬単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(審査員報酬単価.get終了年月().toDateString()));
+            row.getShuryoYMbak().setValue(new FlexibleDate(審査員報酬単価.get終了年月().toDateString()));
             row.setKaigoNinteiShinsaIinShubetsu(ShinsakaiIinShubetsu.toValue(審査員報酬単価.get介護認定審査委員種別().value()).get名称());
             row.setKaigoNinteiShinsaIinShubetsuCode(審査員報酬単価.get介護認定審査委員種別().value());
             row.getTanka().setValue(審査員報酬単価.get単価());
@@ -618,6 +615,7 @@ public class HoshuMasutaKoshinHandler {
             }
             row.getKaishiYM().setValue(new FlexibleDate(訪問調査報酬単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(訪問調査報酬単価.get終了年月().toDateString()));
+            row.getShuryoYMbak().setValue(new FlexibleDate(訪問調査報酬単価.get終了年月().toDateString()));
             row.setChosaKubun(ChosaKubun.toValue(訪問調査報酬単価.get調査区分().value()).get名称());
             row.setChosaKubunCode(訪問調査報酬単価.get調査区分().value());
             row.setHomonShubetsu(HomonShubetsu.toValue(訪問調査報酬単価.get訪問種別().value()).get名称());
@@ -664,6 +662,7 @@ public class HoshuMasutaKoshinHandler {
             }
             row.getKaishiYM().setValue(new FlexibleDate(審査会委員別単価.get開始年月().toDateString()));
             row.getShuryoYM().setValue(new FlexibleDate(審査会委員別単価.get終了年月().toDateString()));
+            row.getShuryoYMbak().setValue(new FlexibleDate(審査会委員別単価.get終了年月().toDateString()));
             row.setShinsakaiIinCode(審査会委員別単価.get介護認定審査会委員コード());
             row.setShinsakaiIinName(審査会委員別単価.get氏名());
             row.getTanka().setValue(審査会委員別単価.get単価());

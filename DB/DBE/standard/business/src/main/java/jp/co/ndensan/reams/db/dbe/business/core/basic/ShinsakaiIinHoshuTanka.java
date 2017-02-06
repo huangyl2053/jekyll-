@@ -150,7 +150,7 @@ public class ShinsakaiIinHoshuTanka extends ModelBase<ShinsakaiIinHoshuTankaIden
     @Override
     public ShinsakaiIinHoshuTanka deleted() {
         DbT5033ShinsakaiIinHoshuTankaEntity deletedEntity = this.toEntity();
-        if (!deletedEntity.getState().equals(EntityDataState.Added)) {
+        if (!deletedEntity.getState().equals(EntityDataState.Deleted)) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
             //TODO メッセージの検討
@@ -173,7 +173,7 @@ public class ShinsakaiIinHoshuTanka extends ModelBase<ShinsakaiIinHoshuTankaIden
      */
     public ShinsakaiIinHoshuTanka modifiedModel() {
         DbT5033ShinsakaiIinHoshuTankaEntity modifiedEntity = entity.clone();
-        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+        if (!modifiedEntity.getState().equals(EntityDataState.Modified)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new ShinsakaiIinHoshuTanka(
