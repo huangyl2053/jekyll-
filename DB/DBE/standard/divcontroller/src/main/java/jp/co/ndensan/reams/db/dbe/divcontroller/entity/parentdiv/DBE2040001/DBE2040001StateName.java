@@ -19,7 +19,8 @@ public enum DBE2040001StateName implements IStateEnumerations {
     完了("完了"),
     依頼内容入力("依頼内容入力"),
     完了のみ登録("完了のみ登録"),
-    依頼日のみ入力("依頼日のみ入力");
+    依頼日のみ入力("依頼日のみ入力"),
+    処理継続("処理継続");
 
     private final RString name;
 

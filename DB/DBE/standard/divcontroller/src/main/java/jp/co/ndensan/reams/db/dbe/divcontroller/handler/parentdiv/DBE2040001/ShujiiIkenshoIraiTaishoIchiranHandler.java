@@ -62,6 +62,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     private static final RString KEY_可 = new RString("2");
     private static final int 初期作成回数 = 1;
     private static final RString 意見書依頼を完了するボタン = new RString("btnChousaIraiKanryo");
+    private static final RString 意見書依頼を登録するボタン = new RString("btnUpdate");
     int completeCount = 0;
     int notreatedCount = 0;
 
@@ -97,10 +98,14 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      * 意見書依頼完了ボタンの使用可否を設定します。
      */
     public void set意見書依頼完了ボタン使用可否() {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を登録するボタン, false);
         if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_未)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, true);
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
+            if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_可)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を登録するボタン, true);
+            }
         }
     }
 

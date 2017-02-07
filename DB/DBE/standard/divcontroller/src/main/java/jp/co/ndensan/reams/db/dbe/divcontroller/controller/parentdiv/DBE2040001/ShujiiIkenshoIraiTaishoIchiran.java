@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2040001StateName;
@@ -75,6 +76,8 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private static final RString 未処理 = new RString("未処理");
     private static final RString 完了可能 = new RString("完了可能");
     private static final RString UIコンテナID_DBEUC23001 = new RString("DBEUC23001");
+    private static final RString 意見書依頼を完了するボタン = new RString("btnChousaIraiKanryo");
+    private static final RString 意見書依頼を登録するボタン = new RString("btnUpdate");
 
     /**
      * 完了処理・主治医意見書依頼の初期化処理です。
@@ -324,7 +327,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
@@ -362,11 +365,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace("意見書依頼").evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             for (dgNinteiTaskList_Row row : getHandler(div).getSelectedItems()) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
@@ -396,7 +399,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (UIコンテナID_DBEUC23001.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
             stateName = DBE2040001StateName.完了のみ登録;
         } else {
-            stateName = DBE2040001StateName.登録;
+            stateName = DBE2040001StateName.処理継続;
         }
         getHandler(div).initialize(stateName.getName());
         return ResponseData.of(div).setState(stateName);
