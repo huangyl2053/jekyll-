@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.Mask
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.dgYokaigoNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.MaSuKinGuBusiness;
@@ -123,7 +122,14 @@ public class MaskingHandler {
             }
         }
         div.getDgYokaigoNinteiTaskList().setDataSource(rowList);
-        その他項目編集(completeCount, mishoriCount);
+        int totalCount;
+        if (マスキングList.isEmpty()) {
+            totalCount = 0;
+        } else {
+            totalCount = マスキングList.get(0).getTotalCount();
+        }
+
+        その他項目編集(completeCount, mishoriCount, totalCount);
 
     }
 
@@ -133,17 +139,14 @@ public class MaskingHandler {
                 || (div.getRadTaishoDataKubun().getSelectedKey().equals(TaishoDataKubun.すべて.getCode())));
     }
 
-    private void その他項目編集(int 完了可能件数, int 未処理件数) {
+    private void その他項目編集(int 完了可能件数, int 未処理件数, int マスキングモード件数) {
         if (null == div.getTxtSaidaiHyojiKensu().getValue() || div.getTxtSaidaiHyojiKensu().getValue().toString().isEmpty()
                 || div.getTxtSaidaiHyojiKensu().getValue().compareTo(Decimal.ZERO) == 0) {
             div.getTxtSaidaiHyojiKensu().setValue(
                     new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         }
         div.getDgYokaigoNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
-        div.getDgYokaigoNinteiTaskList().getGridSetting().setSelectedRowCount(
-                YokaigoNinteiTaskListFinder.createInstance().getマスキングモード件数(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), RString.EMPTY,
-                                div.getTxtSaidaiHyojiKensu().getValue())));
+        div.getDgYokaigoNinteiTaskList().getGridSetting().setSelectedRowCount(マスキングモード件数);
         div.getTxtMishoriCount().setValue(new Decimal(未処理件数));
         div.getTxtCompleteCount().setValue(new Decimal(完了可能件数));
         div.getTxtTotalCount().setValue(new Decimal(未処理件数 + 完了可能件数));

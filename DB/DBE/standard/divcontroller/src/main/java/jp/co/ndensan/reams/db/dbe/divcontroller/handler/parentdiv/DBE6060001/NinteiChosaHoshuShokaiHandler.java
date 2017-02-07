@@ -64,6 +64,7 @@ public class NinteiChosaHoshuShokaiHandler {
         int 施設_初 = 0;
         int 施設_再 = 0;
         Decimal 委託料 = Decimal.ZERO;
+        List<PersonalData> personalData = new ArrayList<>();
         for (NinteichosahoshushokaiBusiness 調査一覧 : 調査情報) {
             dgNinteiChosaHoshu_Row row = new dgNinteiChosaHoshu_Row();
             row.setHokensha(get保険者(調査一覧));
@@ -119,18 +120,15 @@ public class NinteiChosaHoshuShokaiHandler {
                 委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
             }
             listRow.add(row);
-            アクセスログ(調査一覧.get申請書管理番号().getColumnValue());
+            personalData.add(toPersonalData(調査一覧.get申請書管理番号().getColumnValue()));
         }
+        AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgNinteiChosaHoshu().setDataSource(listRow);
         div.getTxtZaitakuSaichosa().setValue(new Decimal(在宅_再));
         div.getTxtZaitakuShokai().setValue(new Decimal(在宅_初));
         div.getTxtShisetsuShokai().setValue(new Decimal(施設_初));
         div.getTxtShisetsuSaichosa().setValue(new Decimal(施設_再));
         div.getTxtItakuryoGokei().setValue(委託料);
-    }
-
-    private void アクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {

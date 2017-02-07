@@ -659,8 +659,10 @@ dbe/db/dbe/NinteiShinseiToroku/onBefore_btnEnkiRiyuTeikeibun
 dbe/db/dbe/NinteiShinseiToroku/onBefore_btnIryohokenGuide
 dbe/db/dbe/NinteiShinseiToroku/onBefore_btnNyuinAndShisetsuNyusho
 dbe/db/dbe/NinteiShinseiToroku/onBefore_btnShichosonRenrakuJiko
+dbe/db/dbe/NinteiShinseiToroku/onBlur_txtJohoBirthday
 dbe/db/dbe/NinteiShinseiToroku/onChange_ddlHihokenshaKubun
 dbe/db/dbe/NinteiShinseiToroku/onChange_ddlTodokedeDaikoKubun
+dbe/db/dbe/NinteiShinseiToroku/onChange_ddlTorisageJiyu
 dbe/db/dbe/NinteiShinseiToroku/onChange_radMode
 dbe/db/dbe/NinteiShinseiToroku/onClick_btnBackToIchiran
 dbe/db/dbe/NinteiShinseiToroku/onClick_btnGotoKihonUnyo
