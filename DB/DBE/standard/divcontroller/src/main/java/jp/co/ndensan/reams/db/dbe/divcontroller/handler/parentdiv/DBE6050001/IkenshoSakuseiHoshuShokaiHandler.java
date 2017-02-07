@@ -63,8 +63,9 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         Decimal 診療費_合計 = Decimal.ZERO;
         Decimal 報酬_合計 = Decimal.ZERO;
         List<dgIkenshoSakuseiHoshu_Row> row_list = new ArrayList<>();
+        List<PersonalData> personalData = new ArrayList<>();
         for (IkenshoHoshuShokaiBusiness date : ikenshoHoshuShokaiBusinessList) {
-            AccessLogger.log(AccessLogType.照会, this.toPersonalData(date.get申請書管理番号()));
+            personalData.add(toPersonalData(date.get申請書管理番号()));
             dgIkenshoSakuseiHoshu_Row row = new dgIkenshoSakuseiHoshu_Row();
             row.setIryoKikanCode(date.get主治医医療機関コード());
             row.setIryoKikanMei(date.get医療機関名称());
@@ -113,6 +114,8 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             row.setIkenshoIraiRirekiNo(new RString(date.get主治医意見書作成依頼履歴番号()));
             row_list.add(row);
         }
+        AccessLogger.log(AccessLogType.照会, personalData);
+
         div.getTxtZaitakuShinki().setValue(在宅新規_合計);
         div.getTxtZaitakuKeizoku().setValue(在宅継続_合計);
         div.getTxtShisetsuShinki().setValue(施設新規_合計);

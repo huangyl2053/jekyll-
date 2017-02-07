@@ -34,15 +34,6 @@
                 </if>									
     </select>
     
-    <select id="getCount" 
-            resultType = "int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter" 
-            fetchSize="500" 
-            resultOrdered="true">
-        SELECT COUNT(*)
-        <include refid="tables" />
-    </select>
-    
     <sql id="tables">
           FROM		rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS  T5602													
           INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101													
@@ -112,7 +103,8 @@
         COALESCE(T5602."ikenshoBettoShinryohi", 0) AS "ikenshoBettoShinryohi",
         COALESCE(T5602."ikenshoHoshu", 0) AS "ikenshoHoshu",
         T5602."shinseishoKanriNo",
-        T5602."ikenshoIraiRirekiNo"
+        T5602."ikenshoIraiRirekiNo",
+        COUNT(*) OVER() as "totalCount"
     </sql>
     
     <resultMap id="resultMap_IkenshoHoshuShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenshoHoshuShokaiRelateEntity" autoMapping="true">
