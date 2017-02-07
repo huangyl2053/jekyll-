@@ -65,6 +65,14 @@ module DBE {
                 return new UZA.TextBoxNum(this.convFiledName("txtKijunJikan"));
             }
 
+            public txtKasan(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKasan"));
+            }
+
+            public txtGoukeiJikan(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtGoukeiJikan"));
+            }
+
             public lblChukanHyokaKomokuTokuten(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblChukanHyokaKomokuTokuten"));
             }

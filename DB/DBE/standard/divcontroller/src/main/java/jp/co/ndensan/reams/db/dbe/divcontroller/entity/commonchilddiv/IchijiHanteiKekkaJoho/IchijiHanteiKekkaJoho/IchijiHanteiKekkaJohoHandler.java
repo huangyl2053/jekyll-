@@ -216,6 +216,16 @@ public class IchijiHanteiKekkaJohoHandler {
         }
 
         div.getTxtKijunJikan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間()).divide(DOUBLE_10));
+        if (hanteiKekka.get要介護認定等基準時間_認知症加算() == 0){
+            div.getTxtKasan().setDisplayNone(true);
+            div.getTxtGoukeiJikan().setDisplayNone(true);
+        }else {
+            div.getTxtKasan().setDisplayNone(false);
+            div.getTxtGoukeiJikan().setDisplayNone(false);
+            div.getTxtKasan().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_認知症加算()).divide(DOUBLE_10));
+            div.getTxtGoukeiJikan().setValue((new Decimal(hanteiKekka.get要介護認定等基準時間()).divide(DOUBLE_10)).
+                    add(new Decimal(hanteiKekka.get要介護認定等基準時間_認知症加算()).divide(DOUBLE_10)));
+        }
         div.getTxtShokuji().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_食事()).divide(DOUBLE_10));
         div.getTxtHaisetsu().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_排泄()).divide(DOUBLE_10));
         div.getTxtIdo().setValue(new Decimal(hanteiKekka.get要介護認定等基準時間_移動()).divide(DOUBLE_10));

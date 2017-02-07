@@ -59,6 +59,14 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtKijunJikan"));
             };
 
+            Controls.prototype.txtKasan = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKasan"));
+            };
+
+            Controls.prototype.txtGoukeiJikan = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtGoukeiJikan"));
+            };
+
             Controls.prototype.lblChukanHyokaKomokuTokuten = function () {
                 return new UZA.Label(this.convFiledName("lblChukanHyokaKomokuTokuten"));
             };
