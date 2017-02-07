@@ -282,7 +282,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }

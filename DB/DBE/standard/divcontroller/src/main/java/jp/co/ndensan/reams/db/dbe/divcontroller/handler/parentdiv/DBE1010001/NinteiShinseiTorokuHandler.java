@@ -485,6 +485,10 @@ public class NinteiShinseiTorokuHandler {
         div.getChkJohoTeikyoDoi().setReadOnly(flag);
         div.getDdlShinsakaiYusenKubun().setReadOnly(flag);
         div.getDdlWariateKubun().setReadOnly(flag);
+        div.getTxtEnkiKetteiYMD().setReadOnly(flag);
+        div.getTxtEnkiMikomiKikan().setReadOnly(flag);
+        div.getBtnEnkiRiyuTeikeibun().setDisabled(flag);
+        div.getTxtEnkiRiyu().setReadOnly(flag);
         div.getTplShinseishaJoho().setDisabled(true);
     }
     
