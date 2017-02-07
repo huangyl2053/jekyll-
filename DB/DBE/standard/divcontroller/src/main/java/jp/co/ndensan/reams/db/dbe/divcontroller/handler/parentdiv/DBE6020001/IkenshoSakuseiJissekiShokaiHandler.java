@@ -88,8 +88,9 @@ public class IkenshoSakuseiJissekiShokaiHandler {
 
     private void setRecords(List<IkenshoJissekiIchiran> ikenshoJissekiIchiranList) {
         List<dgIkenshoSakuseiJisseki_Row> rowList = new ArrayList<>();
+        List<PersonalData> personalData = new ArrayList<>();
         for (IkenshoJissekiIchiran data : ikenshoJissekiIchiranList) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(data.get申請書管理番号()));
+            personalData.add(toPersonalData(data.get申請書管理番号()));
             RString 在宅_新 = RString.EMPTY;
             RString 在宅_継 = RString.EMPTY;
             RString 施設_新 = RString.EMPTY;
@@ -133,6 +134,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             );
             rowList.add(row);
         }
+        AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgIkenshoSakuseiJisseki().setDataSource(rowList);
     }
 

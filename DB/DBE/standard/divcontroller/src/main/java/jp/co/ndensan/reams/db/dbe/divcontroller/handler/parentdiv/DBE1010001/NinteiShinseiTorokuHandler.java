@@ -212,7 +212,7 @@ public class NinteiShinseiTorokuHandler {
             if (RString.isNullOrEmpty(result.get認定調査委託先コード()) && RString.isNullOrEmpty(result.get認定調査員コード())) {
                 div.getChosainAndChosainInput().setIsOpen(false);
             }
-            if (RString.isNullOrEmpty(result.get訪問調査先名称().getColumnValue())) {
+            if (result.get訪問調査先名称() == null || RString.isNullOrEmpty(result.get訪問調査先名称().getColumnValue())) {
                 div.getHomonSaki().setIsOpen(false);
             }
 //            if (RString.isNullOrEmpty(result.get.getColumnValue())) {
@@ -487,13 +487,13 @@ public class NinteiShinseiTorokuHandler {
         div.getDdlWariateKubun().setReadOnly(flag);
         div.getTplShinseishaJoho().setDisabled(true);
     }
-    
+
     /**
      * 申請届出者の設定
      *
      * @param div 審査依頼受付／みなし２号審査受付Div
      * @param ninteiTandokuDounyuFlag boolean
-     * 
+     *
      */
     public void setCcdShinseiTodokedesha(NinteiShinseiTorokuDiv div, boolean ninteiTandokuDounyuFlag) {
         if (ninteiTandokuDounyuFlag) {
