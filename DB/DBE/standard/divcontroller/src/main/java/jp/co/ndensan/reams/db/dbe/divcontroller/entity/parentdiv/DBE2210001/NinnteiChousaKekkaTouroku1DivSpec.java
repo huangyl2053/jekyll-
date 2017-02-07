@@ -54,7 +54,7 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                  */
                 @Override
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
-                    return !div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey().isNullOrEmpty();
+                    return !RString.isNullOrEmpty(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey());
                 }
             },
     所属機関の非空チェック {
