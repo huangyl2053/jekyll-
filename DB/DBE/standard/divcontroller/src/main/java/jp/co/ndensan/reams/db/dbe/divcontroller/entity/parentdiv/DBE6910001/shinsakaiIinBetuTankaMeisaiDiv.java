@@ -24,6 +24,8 @@ public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
      */
     @JsonProperty("txtShinsaIinKodo")
     private TextBoxCode txtShinsaIinKodo;
+    @JsonProperty("btnShinsakaiIinGuide")
+    private ButtonDialog btnShinsakaiIinGuide;
     @JsonProperty("txtShinsaIinName")
     private TextBox txtShinsaIinName;
     @JsonProperty("txtBetuKaishiYM")
@@ -61,6 +63,24 @@ public class shinsakaiIinBetuTankaMeisaiDiv extends Panel {
     @JsonProperty("txtShinsaIinKodo")
     public void setTxtShinsaIinKodo(TextBoxCode txtShinsaIinKodo) {
         this.txtShinsaIinKodo = txtShinsaIinKodo;
+    }
+
+    /*
+     * getbtnShinsakaiIinGuide
+     * @return btnShinsakaiIinGuide
+     */
+    @JsonProperty("btnShinsakaiIinGuide")
+    public ButtonDialog getBtnShinsakaiIinGuide() {
+        return btnShinsakaiIinGuide;
+    }
+
+    /*
+     * setbtnShinsakaiIinGuide
+     * @param btnShinsakaiIinGuide btnShinsakaiIinGuide
+     */
+    @JsonProperty("btnShinsakaiIinGuide")
+    public void setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+        this.btnShinsakaiIinGuide = btnShinsakaiIinGuide;
     }
 
     /*

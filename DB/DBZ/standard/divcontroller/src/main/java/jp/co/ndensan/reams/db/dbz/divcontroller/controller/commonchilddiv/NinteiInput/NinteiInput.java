@@ -5,14 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.NinteiInput;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigodoGuide.YokaigodoGuide.dgYokaigodoGuide_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -93,9 +90,14 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS6).getYearMonth();
-        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
-        return ResponseData.of(div).respond();
+        RDate date = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS6);
+        if (date.isAfter(date.getFirstDateOfTheMonth())) {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.getYearMonth()));
+            return ResponseData.of(div).respond();
+        } else {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.minusMonth(INT1).getYearMonth()));
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -109,9 +111,14 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS12).getYearMonth();
-        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
-        return ResponseData.of(div).respond();
+        RDate date = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS12);
+        if (date.isAfter(date.getFirstDateOfTheMonth())) {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.getYearMonth()));
+            return ResponseData.of(div).respond();
+        } else {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.minusMonth(INT1).getYearMonth()));
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -125,9 +132,14 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS18).getYearMonth();
-        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
-        return ResponseData.of(div).respond();
+        RDate date = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS18);
+        if (date.isAfter(date.getFirstDateOfTheMonth())) {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.getYearMonth()));
+            return ResponseData.of(div).respond();
+        } else {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.minusMonth(INT1).getYearMonth()));
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -141,9 +153,14 @@ public class NinteiInput {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RYearMonth yearMonth = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS24).getYearMonth();
-        div.getTxtYukoShuryoYMD().setValue(get当月末日(yearMonth));
-        return ResponseData.of(div).respond();
+        RDate date = div.getTxtYukoKaishiYMD().getValue().plusMonth(MONTHPLUS24);
+        if (date.isAfter(date.getFirstDateOfTheMonth())) {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.getYearMonth()));
+            return ResponseData.of(div).respond();
+        } else {
+            div.getTxtYukoShuryoYMD().setValue(get当月末日(date.minusMonth(INT1).getYearMonth()));
+            return ResponseData.of(div).respond();
+        }
     }
 
     private RDate get当月末日(RYearMonth 基準年月) {
@@ -184,14 +201,14 @@ public class NinteiInput {
      * @return NinteiInputDiv
      */
     public ResponseData<NinteiInputDiv> onBlur_yokaigodo(NinteiInputDiv div) {
-         if (RString.isNullOrEmpty(div.getHdnNinteiYmd()) || !(new FlexibleDate(div.getHdnNinteiYmd()).isValid())) {
+        if (RString.isNullOrEmpty(div.getHdnNinteiYmd()) || !(new FlexibleDate(div.getHdnNinteiYmd()).isValid())) {
             div.setHdnNinteiYmd(new RString(FlexibleDate.getNowDate().toString()));
         }
         FlexibleYearMonth kijunbi = new FlexibleDate(div.getHdnNinteiYmd()).getYearMonth();
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         try {
             if (new FlexibleYearMonth("200004").isBefore(kijunbi)
-                && kijunbi.isBefore(new FlexibleYearMonth("200203"))) {
+                    && kijunbi.isBefore(new FlexibleYearMonth("200203"))) {
                 div.getTxtYokaigodoName().setValue(YokaigoJotaiKubun99.toValue(div.getTxtYokaigodoCode().getValue()).get名称());
             }
             if (new FlexibleYearMonth("200204").isBefore(kijunbi)

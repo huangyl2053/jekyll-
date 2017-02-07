@@ -285,6 +285,16 @@ public class HoshuMasutaTabDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnShinsakaiIinGuide() {
+        return this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+        this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setBtnShinsakaiIinGuide(btnShinsakaiIinGuide);
+    }
+
+    @JsonIgnore
     public TextBox getTxtShinsaIinName() {
         return this.getTabHoshuMasutaKoshin().getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinName();
     }

@@ -571,6 +571,12 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
         }
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(UrInformationMessages.削除終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に戻る).respond();
+        }
 
         boolean isDelete = !KEY_登録修正.equals(div.getRadUpdateKind().getSelectedKey());
         if (isDelete) {
@@ -616,7 +622,13 @@ public class NinnteiChousaKekkaTouroku1 {
             div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
             if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
-                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+                if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+                } else if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
+                }
             }
             if (!isDelete) {
                 ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
@@ -625,12 +637,9 @@ public class NinnteiChousaKekkaTouroku1 {
                 if (一次判定結果情報 != null) {
                     return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
                 }
+                return ResponseData.of(div).setState(DBE2210001StateName.完了);
             }
-            return ResponseData.of(div).setState(DBE2210001StateName.完了);
-        }
-        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.検索結果一覧に戻る).respond();
+            return ResponseData.of(div).setState(DBE2210001StateName.完了_削除);
         }
         return ResponseData.of(div).respond();
     }
@@ -733,6 +742,11 @@ public class NinnteiChousaKekkaTouroku1 {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnTokkiJikoIchiran"), true);
         if (DBE2210001StateName.調査結果登録_基本運用.getName().equals(ResponseHolder.getState())) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBackKihonUnyo"), true);
+        }
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         }
     }
 

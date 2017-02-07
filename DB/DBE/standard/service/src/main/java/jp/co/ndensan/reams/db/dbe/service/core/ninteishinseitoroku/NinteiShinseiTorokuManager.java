@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
@@ -74,6 +75,7 @@ public class NinteiShinseiTorokuManager {
     private final DbT5120ShinseitodokedeJohoDac dbt5120Dac;
     private final DbT5123NinteiKeikakuJohoDac dbt5123Dac;
     private final DbT5102NinteiKekkaJohoDac dbt5102Dac;
+    private final DbT5105NinteiKanryoJohoDac dbt5105Dac;
 
     /**
      * コンストラクタです。
@@ -88,6 +90,7 @@ public class NinteiShinseiTorokuManager {
         this.dbt5120Dac = InstanceProvider.create(DbT5120ShinseitodokedeJohoDac.class);
         this.dbt5123Dac = InstanceProvider.create(DbT5123NinteiKeikakuJohoDac.class);
         this.dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
+        this.dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
     }
 
     /**
@@ -99,7 +102,7 @@ public class NinteiShinseiTorokuManager {
             DbT5590ShinsakaiIinJogaiJohoDac dbt5590Dac, DbT5101NinteiShinseiJohoDac dbt5101Dac,
             DbT5121ShinseiRirekiJohoDac dbt5121Dac, DbT1008IryohokenKanyuJokyoDac dbt1008Dac,
             DbT5120ShinseitodokedeJohoDac dbt5120Dac, DbT5102NinteiKekkaJohoDac dbt5102Dac,
-            DbT5123NinteiKeikakuJohoDac dbt5123Dac) {
+            DbT5123NinteiKeikakuJohoDac dbt5123Dac, DbT5105NinteiKanryoJohoDac dbt5105Dac) {
         this.mapperProvider = mapperProvider;
         this.dbt5150Dac = dbt5150Dac;
         this.dbt5590Dac = dbt5590Dac;
@@ -109,6 +112,7 @@ public class NinteiShinseiTorokuManager {
         this.dbt5120Dac = dbt5120Dac;
         this.dbt5123Dac = dbt5123Dac;
         this.dbt5102Dac = dbt5102Dac;
+        this.dbt5105Dac = dbt5105Dac;
     }
 
     /**
@@ -427,6 +431,23 @@ public class NinteiShinseiTorokuManager {
             FlexibleDate 認定申請年月日, Code 認定申請区分_申請時_コード) {
         List<DbT5101NinteiShinseiJohoEntity> retList = dbt5101Dac.get要介護認定申請情報ForCheck(
                 証記載保険者番号, 被保険者番号, 認定申請年月日, 認定申請区分_申請時_コード);
+        return null != retList && !retList.isEmpty();
+    }
+
+    /**
+     * データ重複チェック
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 認定申請年月日 認定申請年月日
+     * @param 申請書区分 申請書区分
+     * @param 認定申請区分_申請時_コード 認定申請区分_申請時_コード
+     * @param 認定申請区分_法令_コード 認定申請区分_法令_コード
+     * @return TRUE:有り FALSE:なし
+     */
+    public boolean has要介護認定申請情報(RString 被保険者番号,
+            FlexibleDate 認定申請年月日, Code 申請書区分, Code 認定申請区分_申請時_コード, Code 認定申請区分_法令_コード) {
+        List<DbT5101NinteiShinseiJohoEntity> retList = dbt5101Dac.get要介護認定申請情報ForCheck(
+                被保険者番号, 認定申請年月日, 申請書区分, 認定申請区分_申請時_コード, 認定申請区分_法令_コード);
         return null != retList && !retList.isEmpty();
     }
         }

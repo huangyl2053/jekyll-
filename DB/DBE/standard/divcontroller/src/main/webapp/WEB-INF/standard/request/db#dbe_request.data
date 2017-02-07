@@ -33,6 +33,7 @@ dbe/db/dbe/GaikyoTokkiNyuroku/onOkClose_btnSelectChosaTaishoKyojuKankyo
 dbe/db/dbe/GaikyoTokkiNyuroku/onOkClose_btnSelectChosaTishoShuso
 dbe/db/dbe/GaikyoTokkiNyuroku/onOkClose_btnSelectJutakuKaishu
 dbe/db/dbe/GaikyoTokkiNyuroku/onOkClose_btnSelectNichijoShiyoKikiUmu
+dbe/db/dbe/GaikyoTokkiYichiranNyuroku/onActive
 dbe/db/dbe/GaikyoTokkiYichiranNyuroku/onBeforeOpenDialog_btnFifthImageMasking
 dbe/db/dbe/GaikyoTokkiYichiranNyuroku/onBeforeOpenDialog_btnFirstImageMasking
 dbe/db/dbe/GaikyoTokkiYichiranNyuroku/onBeforeOpenDialog_btnFourthImageMasking
@@ -150,6 +151,7 @@ dbe/db/dbe/HomonChosaItakuNyuryoku/onClick_btnSentaku
 dbe/db/dbe/HomonChosaItakuNyuryoku/onClick_btnToroku
 dbe/db/dbe/HomonChosaItakuNyuryoku/onClick_searchClear
 dbe/db/dbe/HomonChosaItakuNyuryoku/onLoad
+dbe/db/dbe/HoshuMasutaKoshin/onBefore_ShinsakaiIinGuide
 dbe/db/dbe/HoshuMasutaKoshin/onBlur_txtShinsaIinKodo
 dbe/db/dbe/HoshuMasutaKoshin/onChange_tabHoshuMasutaKoshin
 dbe/db/dbe/HoshuMasutaKoshin/onClick_btnBetuKousin
@@ -166,6 +168,7 @@ dbe/db/dbe/HoshuMasutaKoshin/onClick_btnIkenKousin
 dbe/db/dbe/HoshuMasutaKoshin/onClick_btnIkenTorikesu
 dbe/db/dbe/HoshuMasutaKoshin/onClick_btnIkenTsuika
 dbe/db/dbe/HoshuMasutaKoshin/onLoad
+dbe/db/dbe/HoshuMasutaKoshin/onOKClose_ShinsakaiIinGuide
 dbe/db/dbe/HoshuMasutaKoshin/onSelect_btnChosainDelete
 dbe/db/dbe/HoshuMasutaKoshin/onSelect_btnChosainModify
 dbe/db/dbe/HoshuMasutaKoshin/onSelect_btnHomonChosaDelete
@@ -389,8 +392,10 @@ dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_ddlChosaJisshiBasho
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_radGenzaiService
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_radUpdateKind
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onChange_tabChosaBasho
+dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnBackKihonUnyo
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnClear
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnGaikyoTokkiInput
+dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnKihonUnyo
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnKiteichiSettei
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnReSearch
 dbe/db/dbe/NinnteiChousaKekkaTouroku1/onClick_btnSearchResult

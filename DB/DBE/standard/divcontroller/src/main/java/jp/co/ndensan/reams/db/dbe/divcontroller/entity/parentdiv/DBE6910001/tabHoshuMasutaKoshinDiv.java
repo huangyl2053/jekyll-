@@ -305,6 +305,16 @@ public class tabHoshuMasutaKoshinDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnShinsakaiIinGuide() {
+        return this.getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+        this.getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().setBtnShinsakaiIinGuide(btnShinsakaiIinGuide);
+    }
+
+    @JsonIgnore
     public TextBox getTxtShinsaIinName() {
         return this.getTbShinsakaiIinBetuTanka().getShinsakaiIinBetuTankaMeisai().getTxtShinsaIinName();
     }

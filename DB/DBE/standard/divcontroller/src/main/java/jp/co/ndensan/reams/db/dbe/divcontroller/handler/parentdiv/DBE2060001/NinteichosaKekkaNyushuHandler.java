@@ -137,21 +137,16 @@ public class NinteichosaKekkaNyushuHandler {
             div.getNinteichosakekkainput().getTxtMishori().setDisplayNone(false);
             div.getNinteichosakekkainput().getTxtKanryoKano().setDisplayNone(true);
             div.getNinteichosakekkainput().getTxtGokei().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査結果を登録するボタン, false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(調査票入手を完了するボタン, true);
         } else if (KanryoShoriStatus.完了可能.getコード().equals(div.getNinteichosakekkainput().getRadJotaiKubun().getSelectedKey())) {
             div.getNinteichosakekkainput().getTxtMishori().setDisplayNone(true);
             div.getNinteichosakekkainput().getTxtKanryoKano().setDisplayNone(false);
             div.getNinteichosakekkainput().getTxtGokei().setDisplayNone(true);
-            if (!UIContainer_DBEUC22101.equals(ResponseHolder.getUIContainerId())) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(調査結果を登録するボタン, true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(調査票入手を完了するボタン, false);
-            }
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査票入手を完了するボタン, false);
         } else {
             div.getNinteichosakekkainput().getTxtMishori().setDisplayNone(false);
             div.getNinteichosakekkainput().getTxtKanryoKano().setDisplayNone(false);
             div.getNinteichosakekkainput().getTxtGokei().setDisplayNone(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(調査結果を登録するボタン, false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(調査票入手を完了するボタン, false);
         }
     }

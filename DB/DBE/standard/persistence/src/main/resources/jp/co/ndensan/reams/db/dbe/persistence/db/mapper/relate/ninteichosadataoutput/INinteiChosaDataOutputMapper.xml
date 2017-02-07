@@ -1015,6 +1015,7 @@
         <result property="調査項目73" column="調査項目73" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目連番74" column="調査項目連番74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目74" column="調査項目74" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査委託先市町村コード" column="認定調査委託先市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
   </resultMap>
 
   <!--前回分のresultMap-->
