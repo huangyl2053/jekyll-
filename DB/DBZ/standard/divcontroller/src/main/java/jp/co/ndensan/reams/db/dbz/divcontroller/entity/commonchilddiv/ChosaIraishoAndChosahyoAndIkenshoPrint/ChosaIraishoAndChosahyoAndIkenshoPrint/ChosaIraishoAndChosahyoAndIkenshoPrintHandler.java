@@ -1633,8 +1633,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoTeishutsuIraishoItem> create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ() {
         List<ShujiiIkenshoTeishutsuIraishoItem> itemList = new ArrayList<>();
-        ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
+            ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
             RString hihokenshaNo = row.getHohokenshaBango().padRight(RString.HALF_SPACE, 数字_10);
             item.setHakkoYMD1(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
