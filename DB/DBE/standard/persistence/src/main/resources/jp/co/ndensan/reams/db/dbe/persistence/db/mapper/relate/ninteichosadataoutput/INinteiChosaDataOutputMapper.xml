@@ -473,6 +473,7 @@
         <result property="障害日常生活自立度コード" column="shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目連番" column="調査項目連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査項目" column="researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査委託先市町村コード" column="認定調査委託先市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
   <select resultOrdered="true" id="get認定調査データ出力" resultMap="resultMap_getNinteiChosaData"

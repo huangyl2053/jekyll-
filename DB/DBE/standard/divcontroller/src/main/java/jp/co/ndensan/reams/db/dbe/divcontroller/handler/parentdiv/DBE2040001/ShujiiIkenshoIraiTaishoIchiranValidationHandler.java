@@ -147,7 +147,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(ValidationMessages.対象行を選択));
         } else {
             for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getSelectedItems()) {
-                if (RString.isNullOrEmpty(row.getKonkaiShujiiIryokikan()) || RString.isNullOrEmpty(row.getKonkaiShujii())) {
+                if (RString.isNullOrEmpty(row.getKonkaiShujiiIryokikan())) {
                     validationMessages.add(new ValidationMessageControlPair(ValidationMessages.主治医意見書作成依頼一覧選択行の完了処理事前チェック));
                 }
                 if (row.getIkenshoIraiDay().getValue() == null) {

@@ -13,15 +13,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  *
@@ -37,14 +36,16 @@ public class NinteiChosaTokkiDataOutputProcess extends BatchProcessBase<NinteiCh
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private NinteiChosaDataOutputProcessParamter processParamter;
-    private FileSpoolManager manager;
+//    private FileSpoolManager manager;
     private RString eucFilePath;
     @BatchWriter
     private CsvWriter<NinteiChosaTokkiOutputEucCsvEntity> eucCsvWriter;
+
     @Override
     protected void initialize() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("特記情報データ.csv"));
+//        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+//        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
+        eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
     }
 
     @Override
@@ -66,12 +67,12 @@ public class NinteiChosaTokkiDataOutputProcess extends BatchProcessBase<NinteiCh
     @Override
     protected void process(NinteiChosaTokkiDataRelateEntity entity) {
         eucCsvWriter.writeLine(new NinteiChosaTokkiOutputResult().setEucCsvEntity(entity));
-        
+
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
+//        manager.spool(eucFilePath);
     }
 }

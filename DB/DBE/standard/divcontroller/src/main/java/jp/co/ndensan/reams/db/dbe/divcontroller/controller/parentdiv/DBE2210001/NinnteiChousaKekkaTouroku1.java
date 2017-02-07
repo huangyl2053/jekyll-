@@ -199,19 +199,6 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     /**
-     * 実施場所selectのonChange処理です。<br />
-     * 選択された値をViewStateへのputのみを実施しています。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<NinnteiChousaKekkaTouroku1Div> onChange_ddlChosaJisshiBasho(NinnteiChousaKekkaTouroku1Div div) {
-        RString 現在の実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey();
-        ViewStateHolder.put(ViewStateKeys.調査実施場所コード, 現在の実施場所);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * ボタン「一次判定を実施する」を押下する処理です。
      *
      * @param div コントロールdiv

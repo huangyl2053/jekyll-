@@ -44,7 +44,7 @@ module DBZ
                     this.controls.txtChosaKubun().readOnly = true;
                     this.controls.txtChosaJisshiDate().required = true;
                     this.controls.ddlChosaJisshiBasho().required = true;
-                    this.controls.txtJisshiBashoMeisho().required = true;
+                    this.controls.txtJisshiBashoMeisho().required = false;
                     this.controls.txtShozokuKikanCode().required = true;
                     this.controls.txtKinyushaCode().required = true;
                     this.controls.btnChosaItakusakiGuide().disabled = true;
