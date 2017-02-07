@@ -550,6 +550,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnBetuTsuika();
+        div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide().setDisabled(false);
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
 
@@ -634,6 +635,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnBetuTorikesu();
+        div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide().setDisabled(true);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -673,6 +675,7 @@ public class HoshuMasutaKoshin {
         }
         getHandler(div).onClick_btnBetuKousin();
         update審査会委員別単価マスタ情報(div);
+        div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide().setDisabled(true);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
