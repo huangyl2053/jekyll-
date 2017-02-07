@@ -26,6 +26,7 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
     private final List<ShiseiDataParameter> 申請情報データリスト;
     private final boolean 厚労省フラグ;
     private final boolean 東芝版フラグ;
+    private final boolean 法改正後フラグ;
 
     /**
      * コンストラクタです。
@@ -46,6 +47,31 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
         this.申請情報データリスト = 申請情報データリスト;
         this.厚労省フラグ = 厚労省フラグ;
         this.東芝版フラグ = 東芝版フラグ;
+        this.法改正後フラグ = false;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 取込み対象ファイルリスト 取込み対象ファイルリスト
+     * @param 申請情報データリスト 申請情報データリスト
+     * @param 厚労省フラグ 厚労省フラグ
+     * @param 東芝版フラグ 東芝版フラグ
+     * @param 法改正後フラグ 法改正後フラグ
+     */
+    public RenkeiDataTorikomiProcessParamter(RString 市町村コード,
+            List<RString> 取込み対象ファイルリスト,
+            List<ShiseiDataParameter> 申請情報データリスト,
+            boolean 厚労省フラグ,
+            boolean 東芝版フラグ,
+            boolean 法改正後フラグ) {
+        this.市町村コード = 市町村コード;
+        this.取込み対象ファイルリスト = 取込み対象ファイルリスト;
+        this.申請情報データリスト = 申請情報データリスト;
+        this.厚労省フラグ = 厚労省フラグ;
+        this.東芝版フラグ = 東芝版フラグ;
+        this.法改正後フラグ = 法改正後フラグ;
     }
 
     /**

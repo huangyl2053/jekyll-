@@ -27,6 +27,7 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
     private static final String SHINSEIJOHODATALIST = "shinseiJohoDataList";
     private static final String PATH = "path";
     private static final String FILEID = "fileId";
+    private static final String HOKAISEIGOFLAG = "hokaiseiGoFlag";
 
     private boolean 厚労省フラグ;
     private boolean 東芝版フラグ;
@@ -41,6 +42,8 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
     private RString 格納パス;
     @BatchParameter(key = FILEID, name = "共有ファイルID")
     private List<RDateTime> 共有ファイルIDList;
+    @BatchParameter(key = HOKAISEIGOFLAG, name = "法改正後フラグ")
+    private boolean 法改正後フラグ;
 
     /**
      * mybatisのパラメータを生成します。
@@ -52,6 +55,7 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
                 取込み対象ファイルリスト,
                 申請情報データリスト,
                 厚労省フラグ,
-                東芝版フラグ);
+                東芝版フラグ,
+                法改正後フラグ);
     }
 }

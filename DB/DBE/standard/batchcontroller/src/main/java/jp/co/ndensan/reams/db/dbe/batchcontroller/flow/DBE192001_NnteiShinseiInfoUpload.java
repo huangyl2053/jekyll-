@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5913DensanIn
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5913KoroshoErrorCheckProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001.DbT5913KoroshoErrorTempOutputProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.DBE192001_NnteiShinseiInfoUploadParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempKoroshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5910TempEntity;
@@ -109,11 +110,20 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
             RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
             RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, 基準日, SubGyomuCode.DBE認定支援);
-            認定申請ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-            主治医情報ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-            医療機関ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-            認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-            調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            RenkeiDataTorikomiProcessParamter processParamter = getParameter().toRenkeiDataTorikomiProcessParamter();
+            if (!processParamter.is法改正後フラグ()) {
+                認定申請ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+                主治医情報ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+                医療機関ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+                認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+                調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+            } else {
+                認定申請ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+                主治医情報ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+                医療機関ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+                認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+                調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+            }
             主治医情報ファイル = Path.combinePath(path, 主治医情報ファイル名);
             医療機関ファイル = Path.combinePath(path, 医療機関ファイル名);
             認定調査員ファイル = Path.combinePath(path, 認定調査員ファイル名);
