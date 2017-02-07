@@ -25,6 +25,8 @@ public class NinteiChosaDataCsvProcessParamter implements IBatchProcessParameter
     private final List<RString> shinseishoKanriNoList;
     private final RString shichosonCode;
     private final List<RString> hihokenshaNoList;
+    private final RString addedFileName;
+    private final RString tempFilePath;
 
     /**
      * コンストラクタです。
@@ -53,6 +55,43 @@ public class NinteiChosaDataCsvProcessParamter implements IBatchProcessParameter
         this.shinseishoKanriNoList = shinseishoKanriNoList;
         this.shichosonCode = shichosonCode;
         this.hihokenshaNoList = hihokenshaNoList;
+        this.addedFileName = RString.EMPTY;
+        this.tempFilePath = RString.EMPTY;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param csvTempTableName CSV一時テーブル名
+     * @param csvTempTableNameZenkai CSV一時テーブル名（前回）
+     * @param ninteichosaItakusakiCode 認定調査委託先コード
+     * @param ninteiChosainCode 認定調査員コード
+     * @param shinseishoKanriNoList 申請書管理番号リスト
+     * @param shichosonCode 市町村コード
+     * @param hihokenshaNoList 被保険者番号リスト
+     * @param addedFileName
+     * @param tempFilePath
+     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     */
+    public NinteiChosaDataCsvProcessParamter(
+            RString csvTempTableName,
+            RString csvTempTableNameZenkai,
+            RString ninteichosaItakusakiCode,
+            RString ninteiChosainCode,
+            List<RString> shinseishoKanriNoList,
+            RString shichosonCode,
+            List<RString> hihokenshaNoList,
+            RString addedFileName,
+            RString tempFilePath) {
+        this.csvTempTableName = csvTempTableName;
+        this.csvTempTableNameZenkai = csvTempTableNameZenkai;
+        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
+        this.ninteiChosainCode = ninteiChosainCode;
+        this.shinseishoKanriNoList = shinseishoKanriNoList;
+        this.shichosonCode = shichosonCode;
+        this.hihokenshaNoList = hihokenshaNoList;
+        this.addedFileName = addedFileName;
+        this.tempFilePath = tempFilePath;
     }
 
     /**
