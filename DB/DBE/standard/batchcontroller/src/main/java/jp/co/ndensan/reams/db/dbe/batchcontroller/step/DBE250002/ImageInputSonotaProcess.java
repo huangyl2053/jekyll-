@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.SonotaShiryoFileNameC
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
@@ -58,8 +58,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * その他資料の読み込み処理です。
  */
-//TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
-//TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
+//TODO パラメータによる処理分岐
+//TODO 取込データ不正時の処理
 public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
@@ -69,7 +69,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     /**
      * このバッチプロセスのパラメータです。
      */
-    private OcrDataReadProcessParameter processParameter;
+    private ImageInputProcessParameter processParameter;
     private List<OcrSonota> cache;
     private ShinseiKey key;
     private Catalog catalog;

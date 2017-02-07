@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenChosainFuicchi;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenTokkiRembanChofuku;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
@@ -73,10 +76,12 @@ public class DBE250001_NinteiChosaKekkaTorikomiTest {
     }
 
     private static DBE250001_NinteiChosaKekkaTorikomiParameter createParameter() {
-        DBE250001_NinteiChosaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChosaKekkaTorikomiParameter();
-        RString path = new RString("DB|イメージ取込み|2016-12-28T19:01:41.475310");
-        batchFlowParameter.set共有ファイルエントリ情報文字列(path);
-
+        DBE250001_NinteiChosaKekkaTorikomiParameter batchFlowParameter = new DBE250001_NinteiChosaKekkaTorikomiParameter(
+                new RString("DB|イメージ取込み|2016-12-28T19:01:41.475310"),
+                TreatmentWhenIchijiHanteiZumi.エラーとする,
+                TreatmentWhenChosainFuicchi.エラーとする,
+                TreatmentWhenTokkiRembanChofuku.上書きする
+        );
         return batchFlowParameter;
     }
 

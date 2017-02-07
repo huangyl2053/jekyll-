@@ -46,6 +46,7 @@ public class Imageinput {
      */
     public ResponseData<ImageinputDiv> onLoad(ImageinputDiv div) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(バッチ実行ボタン名, true);
+        getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
 
@@ -92,7 +93,7 @@ public class Imageinput {
             FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
             FlowParameterAccessor.merge(fp);
         }
-        DBE250002_ImageTorikomiParameter parameter = getHandler(div).setバッチパラメータ();
+        DBE250002_ImageTorikomiParameter parameter = getHandler(div).createBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 

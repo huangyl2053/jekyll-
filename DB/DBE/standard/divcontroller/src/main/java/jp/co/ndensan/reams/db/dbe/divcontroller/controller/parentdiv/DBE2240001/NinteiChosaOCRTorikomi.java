@@ -90,7 +90,7 @@ public class NinteiChosaOCRTorikomi {
             FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
             FlowParameterAccessor.merge(fp);
         }
-        DBE250001_NinteiChosaKekkaTorikomiParameter parameter = getHandler(div).setバッチパラメータ();
+        DBE250001_NinteiChosaKekkaTorikomiParameter parameter = getHandler(div).createBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 
