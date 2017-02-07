@@ -225,7 +225,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set追加の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban(),
+        TextBoxNum num = new TextBoxNum(); 
+        num.setValue(div.getTxtRenban().getValue());
+        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
                 nullTOEmpty(div.getTxtShimei().getValue()),
                 nullTOEmpty(RString.EMPTY),
                 nullTOEmpty(div.getTxtJusho().getValue()),
@@ -268,7 +270,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     public List<RenrakusakiJoho> setBusiness(List<RenrakusakiJoho> dbdBusiness) {
         for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
             if (RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, Integer.parseInt(row.getRenban().toString()));
+                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, Integer.parseInt(row.getRenban().getValue().toString()));
                 business = business.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
                 business = business.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
                 business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();

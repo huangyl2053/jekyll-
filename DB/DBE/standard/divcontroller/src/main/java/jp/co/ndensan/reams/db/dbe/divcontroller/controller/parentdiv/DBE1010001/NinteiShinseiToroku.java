@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiran;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiranData;
+import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinRelateJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJohoBuilder;
@@ -58,6 +59,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JidoWariateJyogaishaKubun;
@@ -74,6 +76,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShinseiRirekiJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.jogaishinsainjoho.JogaiShinsainJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -122,6 +126,7 @@ public class NinteiShinseiToroku {
     private final NinteiShinseiTorokuManager manager;
     private final KaigoHokenshaManager dbt7050Manager;
     private final NinteiKanryoJohoManager dbt5105Manager;
+    private final ShinseiRirekiJohoManager dbt5121Manager;
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
@@ -138,6 +143,7 @@ public class NinteiShinseiToroku {
     private static final RString 更新 = new RString("表示の要介護認定申請情報を更新します。");
     private static final RString 完了param = new RString("GoToKiHonUnyo");
     private static final String 重複質問MSG = "同一被保険者番号、申請書区分、申請区分(申請時)、申請区分(法令)のデータが既に登録されています。データの追加";
+    private static final RString 所属機関_TMP = new RString("・");
     private boolean ninteiTandokuDounyuFlag;
 
     /**
@@ -148,6 +154,7 @@ public class NinteiShinseiToroku {
         this.manager = NinteiShinseiTorokuManager.createInstance();
         this.dbt7050Manager = KaigoHokenshaManager.createInstance();
         this.dbt5105Manager = NinteiKanryoJohoManager.createInstance();
+        this.dbt5121Manager = new ShinseiRirekiJohoManager();
         ninteiTandokuDounyuFlag = Boolean.FALSE;
         ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (security.get導入形態コード().equals(new Code("111"))) {
@@ -229,6 +236,21 @@ public class NinteiShinseiToroku {
             div.setHdnJogaiMode(new RString("入力"));
             setIconName(div, 管理番号);
             div.setHdnShinseishoKanriNo(管理番号.value());
+            ShinsakaiIinItiranData shinsakaiIinItiranData = new ShinsakaiIinItiranData();
+            List<ShinsakaiIinItiran> list = new ArrayList();
+            for (ShinsakaiIinRelateJoho joho : getService().get審査会委員一覧検索して審査会委員情報(管理番号.value()).records()) {
+                RStringBuilder 所属機関 = new RStringBuilder();
+                所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
+                所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
+                所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
+                ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
+                shinsakaiIinItiran.setShimei(joho.get介護認定審査会委員氏名().getColumnValue());
+                shinsakaiIinItiran.setShinsakaiIinCode(joho.get介護認定審査会委員コード());
+                shinsakaiIinItiran.setShozokuKikan(所属機関.toRString());
+                list.add(shinsakaiIinItiran);
+            }
+            shinsakaiIinItiranData.setShinsakaiIinItiranList(list);
+            div.setHdnJogaiShinsainJoho(DataPassingConverter.serialize(shinsakaiIinItiranData));
 
             if (comResult.get前回履歴情報() != null && comResult.get前回履歴情報().get二次判定認定有効開始年月日() != null
                     && !comResult.get前回履歴情報().get二次判定認定有効開始年月日().isEmpty()) {
@@ -494,6 +516,8 @@ public class NinteiShinseiToroku {
         NinteiShinseiBusinessCollection data = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(), NinteiShinseiBusinessCollection.class);
         if (data != null && data.getDbdBusiness() != null && !data.getDbdBusiness().isEmpty()) {
             div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
+        } else {
+            div.getBtnRenrakusaki().setIconNameEnum(IconName.NONE);
         }
         return ResponseData.of(div).respond();
     }
@@ -539,6 +563,8 @@ public class NinteiShinseiToroku {
         if (data != null && !RString.isNullOrEmpty(data.get連絡事項())) {
             div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
             div.setHdnShichosonRenrakuJiko(data.get連絡事項());
+        } else {
+            div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.NONE );
         }
         return ResponseData.of(div).respond();
     }
@@ -553,6 +579,8 @@ public class NinteiShinseiToroku {
         ShinsakaiIinItiranData data = DataPassingConverter.deserialize(div.getHdnJogaiShinsainJoho(), ShinsakaiIinItiranData.class);
         if (data != null && data.getShinsakaiIinItiranList() != null && !data.getShinsakaiIinItiranList().isEmpty()) {
             div.getBtnJogaiShinsakaiIinGuide().setIconNameEnum(IconName.Complete);
+        } else {
+            div.getBtnJogaiShinsakaiIinGuide().setIconNameEnum(IconName.NONE);
         }
         return ResponseData.of(div).respond();
     }
@@ -604,7 +632,7 @@ public class NinteiShinseiToroku {
         }
         RStringBuilder 前排他制御 = new RStringBuilder();
         前排他制御.append("DBEShinseishoKanriNo");
-        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
         前排他キーの解除(前排他制御.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.一覧に戻る).respond();
     }
@@ -1262,6 +1290,22 @@ public class NinteiShinseiToroku {
         rsb.append(RDate.getNowDate().getYearMonth().toDateString());
         rsb.append(連番.padZeroToLeft(ZERO_5));
         return new ShinseishoKanriNo(rsb.toRString());
+    }
+    
+    private RStringBuilder nullToEmpty(RStringBuilder 所属機関, RString 名称) {
+        if (!RString.isNullOrEmpty(名称)) {
+            if (RString.isNullOrEmpty(所属機関.toRString())) {
+                所属機関.append(名称);
+            } else {
+                所属機関.append(所属機関_TMP);
+                所属機関.append(名称);
+            }
+        }
+        return 所属機関;
+    }
+    
+    private JogaiShinsainJohoFinder getService() {
+        return JogaiShinsainJohoFinder.createInstance();
     }
 
     private void 前排他ロックキー(RString 排他ロックキー) {

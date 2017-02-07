@@ -24,14 +24,16 @@ public class ImageInputProcessParameter implements IBatchProcessParameter {
     private final RString catalogFilePath;
     private final OcrFiles imageFilePaths;
     private final RString tempTableName;
-    private TreatmentWhenShujiiFuicchi 主治医不一致時処理方法;
-    private TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
+    private final TreatmentWhenShujiiFuicchi 主治医不一致時処理方法;
+    private final TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
 
     /**
      * @param 処理日 処理日
      * @param catalogFilePath catalogFilePath
      * @param imageFilePaths 全イメージファイルのPath
      * @param tempTableName 一時テーブル名
+     * @param 主治医不一致時処理方法 依頼と取込結果の主治医が異なる場合の処理方法
+     * @param 一次判定済み時処理方法 一次判定済データを取り込んだ際の処理方法
      */
     public ImageInputProcessParameter(
             RDate 処理日,

@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultL
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
@@ -52,21 +52,18 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
 import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 主治医意見書の読み込み処理です。
  */
-//TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
-//TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
+//TODO パラメータによる処理分岐
+//TODO 取込データ不正時の処理
 public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
@@ -80,7 +77,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     /**
      * このバッチプロセスのパラメータです。
      */
-    private OcrDataReadProcessParameter processParameter;
+    private ImageInputProcessParameter processParameter;
     private List<OcrIken> cache;
     private ShinseiKey key;
     private Catalog catalog;

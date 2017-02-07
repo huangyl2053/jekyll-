@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -134,6 +135,8 @@ public class NinteiChosaDataOutputHandler {
         batchParamter.setShinseishoKanriNoList(shinseishoKanriNoList);
         batchParamter.setShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
         batchParamter.setHihokenshaNoList(hihokenshaNoList);
+        batchParamter.setAddedFileName(getモバイルデータ出力ファイル付加名称(rowList));
+        batchParamter.setTempFilePath(Directory.createTmpDirectory());
         return batchParamter;
     }
 
@@ -194,5 +197,15 @@ public class NinteiChosaDataOutputHandler {
             モバイルデータ出力済 = new RString("済");
         }
         return モバイルデータ出力済;
+    }
+
+    private RString getモバイルデータ出力ファイル付加名称(List<dgNinteiChosaData_Row> rowList) {
+        RString ファイル付加名称 = rowList.get(0).getNinteiChosainCode();
+        for (dgNinteiChosaData_Row row : rowList) {
+            if (row.getNinteiChosainCode().isEmpty() || !ファイル付加名称.equals(row.getNinteiChosainCode())) {
+                return row.getNinteiChosaItakusakiCode();
+            }
+        }
+        return ファイル付加名称;
     }
 }

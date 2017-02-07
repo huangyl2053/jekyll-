@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -160,13 +161,13 @@ public class NinteichosaIrai {
     public IDownLoadServletResponse onClick_btnDataOutput(NinteichosaIraiDiv requestDiv, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_認定調査依頼一覧);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
-      
+
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
-              
+
                 csvWriter.writeLine(getCsvData(row));
 
                 ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getGetShoKisaiHokenshaNo());
@@ -254,7 +255,8 @@ public class NinteichosaIrai {
         DBE224001_NinteichosaDataOutputParameter param = new DBE224001_NinteichosaDataOutputParameter();
         List<RString> 申請書管理番号リスト = new ArrayList<>();
         List<RString> 被保険者番号リスト = new ArrayList<>();
-        for (dgNinteiTaskList_Row row : requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems()) {
+        List<dgNinteiTaskList_Row> rowList = requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems();
+        for (dgNinteiTaskList_Row row : rowList) {
             申請書管理番号リスト.add(row.getShinseishoKanriNo());
             被保険者番号リスト.add(row.getHihoNumber());
         }
@@ -265,6 +267,8 @@ public class NinteichosaIrai {
                 .getSelectedItems().get(0).getKonkaiChosaItakusakiCode());
         param.setShichosonCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList()
                 .getSelectedItems().get(0).getHokenshaCode());
+        param.setAddedFileName(getモバイルデータ出力ファイル付加名称(rowList));
+        param.setTempFilePath(Directory.createTmpDirectory());
 
         FlowParameters fp = FlowParameters.of(new RString("key"), "Batch");
         FlowParameterAccessor.merge(fp);
@@ -676,6 +680,16 @@ public class NinteichosaIrai {
             }
         }
         return RString.EMPTY;
+    }
+
+    private RString getモバイルデータ出力ファイル付加名称(List<dgNinteiTaskList_Row> rowList) {
+        RString ファイル付加名称 = rowList.get(0).getKonkaiChosainCode();
+        for (dgNinteiTaskList_Row row : rowList) {
+            if (row.getKonkaiChosainCode().isEmpty() || !ファイル付加名称.equals(row.getKonkaiChosainCode())) {
+                return row.getKonkaiChosaItakusakiCode();
+            }
+        }
+        return ファイル付加名称;
     }
 
     private NinteichosaIraiHandler getHandler(NinteichosaIraiDiv div) {

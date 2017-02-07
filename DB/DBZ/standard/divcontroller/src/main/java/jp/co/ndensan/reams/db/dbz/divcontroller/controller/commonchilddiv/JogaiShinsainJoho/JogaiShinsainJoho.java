@@ -61,6 +61,7 @@ public class JogaiShinsainJoho {
         div.getTxtShinsakaiIinCode().setDisabled(false);
         div.getBtnShinsakaiIinGuide().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
+        div.getBtnKakutei().setDisabled(true);
         getHandler(div).画面項目にセットされている値をクリア();
         return ResponseData.of(div).respond();
     }
@@ -130,6 +131,7 @@ public class JogaiShinsainJoho {
             return ResponseData.of(div).addValidationMessages(controlPairs).respond();
         }
         getHandler(div).onClick_btnToroku();
+        div.getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 

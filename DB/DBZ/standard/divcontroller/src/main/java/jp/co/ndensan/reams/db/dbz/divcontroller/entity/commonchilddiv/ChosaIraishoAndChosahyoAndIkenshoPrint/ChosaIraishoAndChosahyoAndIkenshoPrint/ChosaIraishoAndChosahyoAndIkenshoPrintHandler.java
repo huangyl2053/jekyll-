@@ -70,7 +70,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Wareki;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -89,13 +88,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
     private static final RString KEY2 = new RString("2");
-    private static final RString KEY3 = new RString("3");
-    private static final RString KEY4 = new RString("4");
-    private static final RString KEY5 = new RString("5");
     private static final RString 元号_明治 = new RString("明治");
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
-    private static final RString 文字列_まで = new RString("まで");
     private static final RString 連結 = new RString("～");
     private static final RString 記号 = new RString("✔");
     private static final RString HOUSI = new RString("＊");
@@ -143,7 +138,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
     private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
     private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
-    private static final KeyValueDataSource DATA_SOURCE_概況特記 = new KeyValueDataSource(new RString("3"), new RString("認定調査票(概況特記)"));
     private final ChosaIraishoAndChosahyoAndIkenshoPrintDiv div;
 
     /**
@@ -267,21 +261,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             set主治医意見書作成依頼印刷帳票初期選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         }
-//        div.setHiddenData(getInputData());
     }
 
-//    /**
-//     * 画面編集処理判断処理です。
-//     *
-//     * @return 判断結果(true:編集あり,false:編集なし)
-//     */
-//    public boolean isUpdate() {
-//        if (div.getHiddenData().equals(getInputData())) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
     /**
      * 介護保険診断命令書 チェックボックスの表示制御処理です。
      */
@@ -498,55 +479,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         div.getChkShindanMeireisho().setSelectedItemsByKey(診断命令書選択selectedKeys);
     }
 
-//    private RString getInputData() {
-//        RStringBuilder inputData = new RStringBuilder();
-//        inputData.append(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
-//        List<dgNinteiChosa_Row> dgNinteiChosaRowList = div.getDgNinteiChosa().getSelectedItems();
-//        for (dgNinteiChosa_Row row : dgNinteiChosaRowList) {
-//            inputData.append(row.getNo());
-//        }
-//        List<dgShujiiIkensho_Row> dgShujiiIkenshoList = div.getDgShujiiIkensho().getSelectedItems();
-//        for (dgShujiiIkensho_Row row : dgShujiiIkenshoList) {
-//            inputData.append(row.getNo());
-//        }
-//        for (RString key : div.getChk().getSelectedKeys()) {
-//            inputData.append(key);
-//        }
-//        for (RString key : div.getChkChosahyo().getSelectedKeys()) {
-//            inputData.append(key);
-//        }
-//        for (RString key : div.getChkOcrChosahyo().getSelectedKeys()) {
-//            inputData.append(key);
-//        }
-//        for (RString key : div.getChkChosahyo2().getSelectedKeys()) {
-//            inputData.append(key);
-//        }
-//        for (RString key : div.getChkInsatsuIkensho().getSelectedKeys()) {
-//            inputData.append(key);
-//        }
-//        for (RString key : div.getChkIkenshoSakuseiIchiran().getSelectedKeys()) {
-//            inputData.append(key);
-//        }
-//        inputData.append(div.getRadJyushinKikan().getSelectedKey());
-//        if (div.getTxtJyushinymd().getValue() != null) {
-//            inputData.append(div.getTxtJyushinymd().getValue().toDateString());
-//        }
-//        if (div.getTxtJushinTime().getValue() != null) {
-//            inputData.append(div.getTxtJushinTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm));
-//        }
-//        if (div.getTxtJushinKikan().getFromValue() != null) {
-//            inputData.append(div.getTxtJushinKikan().getFromValue().toDateString());
-//        }
-//        if (div.getTxtJushinKikan().getToValue() != null) {
-//            inputData.append(div.getTxtJushinKikan().getToValue().toDateString());
-//        }
-//        inputData.append(div.getTxtJushinBasho().getValue());
-//        inputData.append(div.getRadTeishutsuKigen().getSelectedKey());
-//        if (div.getTxtKyotsuDay().getValue() != null) {
-//            inputData.append(div.getTxtKyotsuDay().getValue().toDateString());
-//        }
-//        return inputData.toRString();
-//    }
     private RString nullToEmpty(RString obj) {
         if (obj == null) {
             return RString.EMPTY;
@@ -1654,8 +1586,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 if (!RString.isNullOrEmpty(business.get医療機関郵便番号()) && !RString.isNullOrEmpty(business.get医療機関住所())) {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get医療機関郵便番号(), business.get医療機関住所());
                 }
+                RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+                int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
                 Map<Integer, RString> 通知文
-                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, Integer.parseInt(div.getCcdHokenshaList().getSelectedItem().get市町村コード().toString()));
+                        = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
                 KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
                         div.getCcdBunshoNo().get文書番号(),
                         div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
@@ -1699,8 +1633,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoTeishutsuIraishoItem> create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ() {
         List<ShujiiIkenshoTeishutsuIraishoItem> itemList = new ArrayList<>();
-        ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
+            ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
             RString hihokenshaNo = row.getHohokenshaBango().padRight(RString.HALF_SPACE, 数字_10);
             item.setHakkoYMD1(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -1746,8 +1680,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     item.setSeibetsuMan(HOUSI);
                 }
             }
+            RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
             Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
-                    ReportIdDBZ.DBE236001.getReportId(), KamokuCode.EMPTY, 数字_1);
+                    ReportIdDBZ.DBE236001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
             item.setTsuchibun1(通知文.get(数字_1));
             item.setTsuchibun2(通知文.get(数字_2));
             item.setYubinNo1(getEditedYubinNo(row.getIryoKikanYubinNo()));

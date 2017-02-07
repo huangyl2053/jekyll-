@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n8429
  */
 @lombok.Getter
-@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE250001_NinteiChosaKekkaTorikomiParameter extends BatchParameterBase {
 
@@ -29,9 +28,11 @@ public class DBE250001_NinteiChosaKekkaTorikomiParameter extends BatchParameterB
 
     @BatchParameter(key = KYOYU_FILE_ENTRY, name = "共有ファイルエントリ情報文字列")
     private RString 共有ファイルエントリ情報文字列;
-
-    private TreatmentWhenChosainFuicchi 調査員不一致時処理方法;
+    @BatchParameter(key = "2", name = "イチジハンテイズミの申請者")
     private TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
+    @BatchParameter(key = "3", name = "依頼時と実施時での調査員の不一致")
+    private TreatmentWhenChosainFuicchi 調査員不一致時処理方法;
+    @BatchParameter(key = "4", name = "以前の取込結果との連番の重複")
     private TreatmentWhenTokkiRembanChofuku 特記連番重複時処理方法;
 
     public DBE250001_NinteiChosaKekkaTorikomiParameter() {
@@ -41,12 +42,20 @@ public class DBE250001_NinteiChosaKekkaTorikomiParameter extends BatchParameterB
      * 認定調査結果取込み（OCR）バッチパラメータクラスのコンストラクタです。
      *
      * @param 共有ファイルエントリ情報文字列 アップロードされた共有ファイルのエントリ情報
+     * @param 一次判定済み時処理方法 一次判定済み時処理方法
+     * @param 調査員不一致時処理方法 調査員不一致時処理方法
+     * @param 特記連番重複時処理方法 特記連番重複時処理方法
      */
-    public DBE250001_NinteiChosaKekkaTorikomiParameter(RString 共有ファイルエントリ情報文字列) {
+    public DBE250001_NinteiChosaKekkaTorikomiParameter(
+            RString 共有ファイルエントリ情報文字列,
+            TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法,
+            TreatmentWhenChosainFuicchi 調査員不一致時処理方法,
+            TreatmentWhenTokkiRembanChofuku 特記連番重複時処理方法
+    ) {
         this.共有ファイルエントリ情報文字列 = 共有ファイルエントリ情報文字列;
-        this.調査員不一致時処理方法 = TreatmentWhenChosainFuicchi.処理を継続する;
-        this.一次判定済み時処理方法 = TreatmentWhenIchijiHanteiZumi.エラーとする;
-        this.特記連番重複時処理方法 = TreatmentWhenTokkiRembanChofuku.上書きしない;
+        this.調査員不一致時処理方法 = 調査員不一致時処理方法;
+        this.一次判定済み時処理方法 = 一次判定済み時処理方法;
+        this.特記連番重複時処理方法 = 特記連番重複時処理方法;
     }
 
     /**

@@ -41,15 +41,16 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
 
     /**
      * @param ocrSonotas 関連する{@link OcrSonota}すべて
+     * @param fileNamesHaveUsed 現在使用されているファイル名
      */
-    public SonotaShiryoFileNameConvertionTheory(Collection<? extends OcrSonota> ocrSonotas) {
-        results = new ProcessingResults();
+    public SonotaShiryoFileNameConvertionTheory(Collection<? extends OcrSonota> ocrSonotas, List<RString> fileNamesHaveUsed) {
+        this.results = new ProcessingResults();
 
+        Iterator<RString> reamsFileNames = fileNamesHaveNotUsed(fileNamesHaveUsed).iterator();
         Map<RString, RString> map = new HashMap<>();
-        Iterator<RString> reamsFileNames = REAMS_FILE_NAME.iterator();
-        for (OcrSonota ocrSonota : new ArrayList<>(ocrSonotas)) {
+        for (OcrSonota ocrSonota : ocrSonotas) {
             if (!reamsFileNames.hasNext()) {
-                results.add(ProcessingResultFactory.error(ocrSonota, OcrTorikomiMessages.その他資料_最大数超過));
+                this.results.add(ProcessingResultFactory.error(ocrSonota, OcrTorikomiMessages.その他資料_最大数超過));
                 continue;
             }
             map.put(composeFileName(ocrSonota), reamsFileNames.next());
@@ -61,6 +62,28 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
         return new RStringBuilder().append(ocrSonota.getSheetID().value()).append("w01i000.png").toRString();
     }
 
+    private static List<RString> fileNamesHaveNotUsed(List<RString> fileNamesHaveUsed) {
+        List<RString> haveUsedLowerCase = toLowerCaseAll(fileNamesHaveUsed);
+        List<RString> list = new ArrayList<>();
+        for (RString a : REAMS_FILE_NAME) {
+            if (!haveUsedLowerCase.contains(a.toLowerCase())) {
+                list.add(a);
+            }
+        }
+        return list;
+    }
+
+    private static List<RString> toLowerCaseAll(List<RString> list) {
+        List<RString> newlist = new ArrayList<>();
+        for (RString a : list) {
+            list.add(a.toLowerCase());
+        }
+        return newlist;
+    }
+
+    /**
+     * @return 保存可能ファイル数超過などを判定した結果の{@link IProcessingResults}
+     */
     public IProcessingResults getResults() {
         return this.results;
     }

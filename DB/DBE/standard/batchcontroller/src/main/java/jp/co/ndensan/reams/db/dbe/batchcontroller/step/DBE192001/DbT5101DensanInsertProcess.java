@@ -85,9 +85,9 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
             dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
             dbT5121Writer.insert(business.getDbT5121Entity(entity));
             if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.職権.getコード())) {
-                dbT5105Writer.insert(business.getDbT5105Entity(entity));
+                dbT5105Writer.insert(business.getDbT5105Entity(entity, processParamter));
             } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
-                dbT5105Writer.insert(business.getDbT5105Entity(entity));
+                dbT5105Writer.insert(business.getDbT5105Entity(entity, processParamter));
                 dbT5129Writer.insert(business.getDbT5129Entity(entity));
             } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
                 dbT5130Writer.insert(business.getDbT5130Entity(entity));

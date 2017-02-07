@@ -806,7 +806,7 @@ public class NinteiShinseiJoho
      */
     public NinteiShinseiJoho modifiedModel() {
         DbT5101NinteiShinseiJohoEntity modifiedEntity = entity.clone();
-        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+        if (!modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new NinteiShinseiJoho(

@@ -117,10 +117,13 @@
             AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>
         AND A."logicalDeletedFlag" = FALSE
-        ORDER BY A."shinseishoKanriNo"
+        ORDER BY B."ninteiChosainCode"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaName"
+        ,A."hihokenshaNo"
     </select>
     <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
         FROM
@@ -234,7 +237,7 @@
         ORDER BY A."shinseishoKanriNo"
     </select>
     <select resultOrdered="true" id="select更新用主治医意見書依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
         FROM
@@ -288,7 +291,7 @@
         AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = temp."ikenshoIraiRirekiNo"
     </select>
     <select resultOrdered="true" id="select認定調査依頼書" resultMap="resultMap_select認定調査依頼情報"
-             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
         SELECT
         DISTINCT
         A."hihokenshaNo"
@@ -407,7 +410,7 @@
         ,A."shinseishoKanriNo"
     </select>
     <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
         A."shinseishoKanriNo"
@@ -481,7 +484,7 @@
     </select>
 
     <select resultOrdered="true" id="select認定調査票差異チェック票" resultMap="resultMap_select認定調査依頼情報"
-               parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
         A."hihokenshaNo"
@@ -541,7 +544,7 @@
     </select>
 
     <select resultOrdered="true" id="select意見書作成依頼書" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
         A."shoKisaiHokenshaNo"
@@ -598,7 +601,7 @@
     </select>
 
     <select resultOrdered="true" id="select意見書作成依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
-                 parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         A."hihokenshaNo"
         ,A."hihokenshaKana"
@@ -655,7 +658,7 @@
     </select>
 
     <select resultOrdered="true" id="select主治医意見書記入用紙" resultMap="resultMap_select認定調査依頼情報"
-                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
         A."shinseishoKanriNo"
@@ -700,7 +703,7 @@
     </select>
 
     <select resultOrdered="true" id="select主治医意見書作成料請求書" resultMap="resultMap_select認定調査依頼情報"
-                    parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
         A."shinseishoKanriNo"
@@ -750,7 +753,7 @@
     </select>
 
     <select resultOrdered="true" id="select介護保険診断命令書" resultMap="resultMap_select認定調査依頼情報"
-                  parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
         A."hihokenshaNo"

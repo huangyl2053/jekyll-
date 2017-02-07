@@ -74,17 +74,17 @@
      "destroy": false,
      "condition": "GoToKiHonUnyo",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2010001",
-     "toLayoutTitle": "基本運用・認定調査依頼",
+     "toLayoutName": "DBE1030001",
+     "toLayoutTitle": "基本運用・審査受付",
      "toState": "登録"
     },
     {
      "id": "7",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2010001",
-     "layoutTitle": "基本運用・認定調査依頼",
-     "eventName": "処理完了",
+     "layoutName": "DBE1030001",
+     "layoutTitle": "基本運用・審査受付",
+     "eventName": "完了状態",
      "destroy": false,
      "condition": ""
     }

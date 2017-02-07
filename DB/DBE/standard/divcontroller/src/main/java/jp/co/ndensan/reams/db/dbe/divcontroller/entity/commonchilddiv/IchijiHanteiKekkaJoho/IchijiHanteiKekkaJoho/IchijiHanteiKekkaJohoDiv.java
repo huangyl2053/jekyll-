@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.IchijiHan
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,8 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekkaJohoDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -54,6 +52,10 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     private DropDownList ddlIchijiHanteiKekkaNinchishoKasan;
     @JsonProperty("txtKijunJikan")
     private TextBoxNum txtKijunJikan;
+    @JsonProperty("txtKasan")
+    private TextBoxNum txtKasan;
+    @JsonProperty("txtGoukeiJikan")
+    private TextBoxNum txtGoukeiJikan;
     @JsonProperty("lblChukanHyokaKomokuTokuten")
     private Label lblChukanHyokaKomokuTokuten;
     @JsonProperty("tblKijunJikan")
@@ -207,6 +209,42 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     @JsonProperty("txtKijunJikan")
     public void setTxtKijunJikan(TextBoxNum txtKijunJikan) {
         this.txtKijunJikan = txtKijunJikan;
+    }
+
+    /*
+     * gettxtKasan
+     * @return txtKasan
+     */
+    @JsonProperty("txtKasan")
+    public TextBoxNum getTxtKasan() {
+        return txtKasan;
+    }
+
+    /*
+     * settxtKasan
+     * @param txtKasan txtKasan
+     */
+    @JsonProperty("txtKasan")
+    public void setTxtKasan(TextBoxNum txtKasan) {
+        this.txtKasan = txtKasan;
+    }
+
+    /*
+     * gettxtGoukeiJikan
+     * @return txtGoukeiJikan
+     */
+    @JsonProperty("txtGoukeiJikan")
+    public TextBoxNum getTxtGoukeiJikan() {
+        return txtGoukeiJikan;
+    }
+
+    /*
+     * settxtGoukeiJikan
+     * @param txtGoukeiJikan txtGoukeiJikan
+     */
+    @JsonProperty("txtGoukeiJikan")
+    public void setTxtGoukeiJikan(TextBoxNum txtGoukeiJikan) {
+        this.txtGoukeiJikan = txtGoukeiJikan;
     }
 
     /*
@@ -590,7 +628,7 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -605,11 +643,11 @@ public class IchijiHanteiKekkaJohoDiv extends Panel implements IIchijiHanteiKekk
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
     }
 
-    public void setMode_State(State value) {
-        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     /*

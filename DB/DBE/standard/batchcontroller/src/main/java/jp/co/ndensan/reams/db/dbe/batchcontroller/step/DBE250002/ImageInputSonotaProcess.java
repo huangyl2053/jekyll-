@@ -6,11 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.OcrTorikomiResultUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
@@ -28,30 +31,35 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.SonotaShiryoFileNameC
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0887SharedFileEntryFilesEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * その他資料の読み込み処理です。
  */
-//TODO デバッグ用に_Loggerのログを組み込んであるが、製品版にする直前には削除する。Errorのログは、エラーリストの出力へ変更（週つ力内容はユーザ向きに検討する。）
-//TODO 個人情報を含むイメージを取り込む場合、その他Eucに登録が必要。
+//TODO パラメータによる処理分岐
+//TODO 取込データ不正時の処理
 public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
@@ -61,7 +69,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     /**
      * このバッチプロセスのパラメータです。
      */
-    private OcrDataReadProcessParameter processParameter;
+    private ImageInputProcessParameter processParameter;
     private List<OcrSonota> cache;
     private ShinseiKey key;
     private Catalog catalog;
@@ -119,7 +127,8 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     }
 
     private List<OcrTorikomiResult> keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
-        List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(toParameterToSearchRelatedData(key)).records();
+        List<ImageinputRelate> relatedData = ImageinputFinder.createInstance()
+                .get関連データ(toParameterToSearchRelatedData(key)).records();
         if (relatedData.isEmpty()) {
             return OcrTorikomiResultUtil.create(key, ocrSonotas,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
@@ -129,53 +138,98 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
             return OcrTorikomiResultUtil.create(key, ocrSonotas,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
         }
-        IProcessingResults copySucceeds = copyFileImages(ocrSonotas, ir);
-        return OcrTorikomiResultUtil.create(key, copySucceeds);
+        return OcrTorikomiResultUtil.create(key, copyImageFiles(ocrSonotas, ir));
     }
 
     private ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {
         return ImageinputMapperParamter.createParamter(key1.get証記載保険者番号(), key1.get被保険者番号(), key1.get認定申請日());
     }
 
-    private IProcessingResults copyFileImages(List<OcrSonota> ocrSonotas, ImageinputRelate ir) {
+    private IProcessingResults copyImageFiles(List<OcrSonota> ocrSonotas, ImageinputRelate ir) {
         IProcessingResults results = new ProcessingResults();
-
-        Map<OcrSonota, CatalogLine> map = new HashMap<>();
-
+        Map<OcrSonota, CatalogLine> haveCatalogLines = new HashMap<>();
         for (OcrSonota ocrSonota : ocrSonotas) {
             CatalogLine cl = this.catalog.find(Models.ID801, ocrSonota.getSheetID()).orElse(null);
             if (cl == null) {
                 results.add(ProcessingResultFactory.error(ocrSonota, OcrTorikomiMessages.カタログデータなし));
                 continue;
             }
-            map.put(ocrSonota, cl);
+            haveCatalogLines.put(ocrSonota, cl);
         }
 
-        SonotaShiryoFileNameConvertionTheory theory = new SonotaShiryoFileNameConvertionTheory(map.keySet());
+        SonotaShiryoFileNameConvertionTheory theory = new SonotaShiryoFileNameConvertionTheory(
+                haveCatalogLines.keySet(),
+                allReadySavedImageFileNames(ir)
+        );
         results.addAll(theory.getResults());
 
         Set<IOcrData> inError = results.allOcrDataInError();
+        Set<OcrSonota> targets = new HashSet<>(haveCatalogLines.keySet());
+        targets.removeAll(inError);
         RDateTime sharedFileID = ir.getSharedFileIDOrNull();
-        for (Map.Entry<OcrSonota, CatalogLine> entry : map.entrySet()) {
-            if (inError.contains(entry.getKey())) {
-                continue;
-            }
+        for (OcrSonota ocrSonota : targets) {
             ImageJohoUpdater.Result r
                     = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
                     .sharedFileID(sharedFileID)
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(theory)
-                    .targetImageFileNames(entry.getValue().getImageFileNames())
-                    .ocrData(entry.getKey())
+                    .targetImageFileNames(haveCatalogLines.get(ocrSonota).getImageFileNames())
+                    .ocrData(ocrSonota)
                     .save(this.writer_DbT5115);
-
             sharedFileID = r.get共有ファイルID();
             results.addAll(r.getResults());
         }
         return results;
     }
 
-    //--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
+    private static List<RString> allReadySavedImageFileNames(ImageinputRelate ir) {
+        RDateTime sharedFileID = ir.getSharedFileIDOrNull();
+        if (sharedFileID == null) {
+            return Collections.emptyList();
+        }
+        ReadOnlySharedFileEntryDescriptor rsfd = new ReadOnlySharedFileEntryDescriptor(
+                compose共有ファイル名(ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号()), sharedFileID);
+        return ItemList.of(SharedFile.getEntryInfo(rsfd))
+                .map(toFilesNames())
+                .filter(sonotaShiryoFile())
+                .toList();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="toFilesNames()">
+    private static final IFunction<SharedFileEntryInfoEntity, RString> TO_FILE_NAME
+            = new IFunction<SharedFileEntryInfoEntity, RString>() {
+                @Override
+                public RString apply(SharedFileEntryInfoEntity t) {
+                    UzT0887SharedFileEntryFilesEntity entity = t.getFilesEntity();
+                    return entity == null ? RString.EMPTY : entity.getPathname();
+                }
+            };
+
+    private static IFunction<SharedFileEntryInfoEntity, RString> toFilesNames() {
+        return TO_FILE_NAME;
+
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="sonotaShiryoFile()">
+    private static final Pattern SONOTA_SHIRYO_PATTERN = Pattern.compile("F.+\\.(png|PNG)");
+    private static final IPredicate<RString> SONOTA_SHIRYO = new IPredicate<RString>() {
+        @Override
+        public boolean evaluate(RString t
+        ) {
+            return SONOTA_SHIRYO_PATTERN.matcher(t).matches();
+        }
+    };
+
+    private static IPredicate<RString> sonotaShiryoFile() {
+        return SONOTA_SHIRYO;
+    }
+    //</editor-fold>
+
+    private static FilesystemName compose共有ファイル名(RString 証記載保険者番号1, RString 被保険者番号1) {
+        return FilesystemName.fromString(証記載保険者番号1.concat(被保険者番号1));
+    }
+
     /**
      * 有効な厚労省IF識別コードである場合、{@code true}を返します。
      */

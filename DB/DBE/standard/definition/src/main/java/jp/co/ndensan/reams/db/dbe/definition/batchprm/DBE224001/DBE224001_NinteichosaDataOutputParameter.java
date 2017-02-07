@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaFileOutputProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +30,8 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
     private static final String SHINSEISHOKANRINOLIST = "shinseishoKanriNoList";
     private static final String SHICHOSONCODE = "shichosonCode";
     private static final String HIHOKENSHANOLIST = "hihokenshaNoList";
+    private static final String ADDEDFILENAME = "addedFileName";
+    private static final String TEMPFILEPATH = "tempFilePath";
     @BatchParameter(key = NINTEICHOSAITAKUSAKICODE, name = "認定調査委託先コード")
     private RString ninteichosaItakusakiCode;
     @BatchParameter(key = NINTEICHOSAINCODE, name = "認定調査員コード")
@@ -39,6 +42,10 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
     private RString shichosonCode;
     @BatchParameter(key = HIHOKENSHANOLIST, name = "被保険者番号")
     private List<RString> hihokenshaNoList;
+    @BatchParameter(key = ADDEDFILENAME, name = "ファイル付加名称")
+    private RString addedFileName;
+    @BatchParameter(key = TEMPFILEPATH, name = "一時ファイルパス")
+    private RString tempFilePath;
 
     /**
      * コンストラクタです。
@@ -54,6 +61,8 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
      * @param 申請書管理番号リスト 申請書管理番号リスト
      * @param 市町村コード 市町村コード
      * @param 被保険者番号リスト 被保険者番号リスト
+     * @param ファイル付加名称
+     * @param ファイルパス
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public DBE224001_NinteichosaDataOutputParameter(
@@ -61,12 +70,16 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
             RString 認定調査員コード,
             List<RString> 申請書管理番号リスト,
             RString 市町村コード,
-            List<RString> 被保険者番号リスト) {
+            List<RString> 被保険者番号リスト,
+            RString ファイル付加名称,
+            RString ファイルパス) {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
         this.ninteiChosainCode = 認定調査員コード;
         this.shinseishoKanriNoList = 申請書管理番号リスト;
         this.shichosonCode = 市町村コード;
         this.hihokenshaNoList = 被保険者番号リスト;
+        this.addedFileName = ファイル付加名称;
+        this.tempFilePath = ファイルパス;
     }
 
     /**
@@ -81,7 +94,9 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
                 ninteiChosainCode,
                 shinseishoKanriNoList,
                 shichosonCode,
-                csvTempTableName);
+                csvTempTableName,
+                addedFileName,
+                tempFilePath);
     }
 
     /**
@@ -98,7 +113,9 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
                 ninteiChosainCode,
                 shinseishoKanriNoList,
                 shichosonCode,
-                csvTempTableName);
+                csvTempTableName,
+                addedFileName,
+                tempFilePath);
     }
 
     /**
@@ -112,7 +129,12 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
             RString csvTempTableName, RString csvTempTableNameZenkai) {
         return new NinteiChosaDataCsvProcessParamter(
                 csvTempTableName, csvTempTableNameZenkai,
-                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode, this.hihokenshaNoList);
+                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode, this.hihokenshaNoList,
+                this.addedFileName, this.tempFilePath);
+    }
+
+    public NinteiChosaFileOutputProcessParamter toNinteiChosaFileOutputProcessParamter() {
+        return new NinteiChosaFileOutputProcessParamter(this.shichosonCode, this.addedFileName, this.tempFilePath);
     }
 
 }

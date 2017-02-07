@@ -15,9 +15,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgTorikomiTaisho_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgtorikomidataichiran_Row;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -54,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 要介護認定申請連携データ取込のHandlerクラスです。
@@ -67,7 +71,6 @@ public class RenkeiDataTorikomiHandler {
     private static final int 電算標準版_197 = 197;
     private static final int 厚労省_174 = 174;
     private static final int 東芝版_197 = 197;
-    private static final RString 要介護認定申請連携データ取込みファイル名 = new RString("Z8NCI201.CSV");
     private static final RString フォーマット_要介護認定申請 = new RString("NCI201");
     private static final RString フォーマット_認定調査委託先 = new RString("NCI101");
     private static final RString フォーマット_認定調査員 = new RString("NCI111");
@@ -79,6 +82,11 @@ public class RenkeiDataTorikomiHandler {
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString 共有ファイル名 = new RString("要介護認定申請連携データ取込");
     private static final int 無 = 0;
+    private static RString 要介護認定申請連携データ取込みファイル名;
+    private static RString 認定調査委託先データ取込みファイル名;
+    private static RString 認定調査員データ取込みファイル名;
+    private static RString 主治医医療機関データ取込みファイル名;
+    private static RString 主治医データ取込みファイル名;
     private final RenkeiDataTorikomiDiv div;
     private final RDate 基準日;
 
@@ -100,35 +108,53 @@ public class RenkeiDataTorikomiHandler {
      */
     public void onLoad(boolean 法改正前Flag, RString path) {
         div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().loadHokenshaList(GyomuBunrui.介護認定);
+        RString 市町村コード = RString.EMPTY;
+        ShichosonSecurityJohoFinder finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (市町村セキュリティ情報 != null) {
+            if (!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new ShichosonShikibetsuID("00"))) {
+                市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+            }
+        }
         if (法改正前Flag) {
             div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正前);
+            要介護認定申請連携データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            認定調査委託先データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            認定調査員データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            主治医医療機関データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            主治医データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         } else {
             div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正後);
+            要介護認定申請連携データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            認定調査委託先データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            認定調査員データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            主治医医療機関データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
+            主治医データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         }
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
         div.getUploadArea().getBtnDataTorikomi().setDisabled(true);
         div.getDgTorikomiTaisho().setReadOnly(true);
-        RString 要介護認定申請 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-        RString 認定調査委託先 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-        RString 認定調査員 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-        RString 主治医医療機関 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
-        RString 主治医 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援);
+        RString 要介護認定申請_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI201ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
+        RString 認定調査委託先_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI101ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
+        RString 認定調査員_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI111ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
+        RString 主治医医療機関_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI121ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
+        RString 主治医_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI131ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
         List<dgTorikomiTaisho_Row> list = new ArrayList<>();
         list.add(setRowFile(path, フォーマット_要介護認定申請,
-                DbBusinessConfig.get(ConfigNameDBE.NCI201ファイル名称, 基準日, SubGyomuCode.DBE認定支援),
-                要介護認定申請));
+                要介護認定申請_名称,
+                要介護認定申請連携データ取込みファイル名));
         list.add(setRowFile(path, フォーマット_認定調査委託先,
-                DbBusinessConfig.get(ConfigNameDBE.NCI101ファイル名称, 基準日, SubGyomuCode.DBE認定支援),
-                認定調査委託先));
+                認定調査委託先_名称,
+                認定調査委託先データ取込みファイル名));
         list.add(setRowFile(path, フォーマット_認定調査員,
-                DbBusinessConfig.get(ConfigNameDBE.NCI111ファイル名称, 基準日, SubGyomuCode.DBE認定支援),
-                認定調査員));
+                認定調査員_名称,
+                認定調査員データ取込みファイル名));
         list.add(setRowFile(path, フォーマット_主治医医療機関,
-                DbBusinessConfig.get(ConfigNameDBE.NCI121ファイル名称, 基準日, SubGyomuCode.DBE認定支援),
-                主治医医療機関));
+                主治医医療機関_名称,
+                主治医医療機関データ取込みファイル名));
         list.add(setRowFile(path, フォーマット_主治医,
-                DbBusinessConfig.get(ConfigNameDBE.NCI131ファイル名称, 基準日, SubGyomuCode.DBE認定支援),
-                主治医));
+                主治医_名称,
+                主治医データ取込みファイル名));
         div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().addAll(list);
     }
 
@@ -219,6 +245,11 @@ public class RenkeiDataTorikomiHandler {
             }
         }
         batchParameter.set共有ファイルIDList(共有ファイルIDList);
+        if (div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().getSelectedKey().equals(法改正前)) {
+            batchParameter.set法改正後フラグ(false);
+        } else {
+            batchParameter.set法改正後フラグ(true);
+        }
         return batchParameter;
     }
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.DbT
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.DbT5211GetProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.DbT5301UpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaDataOutputProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaFileOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaGaikyoTokkiDataOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaMainDataGetProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaTokkiDataOutputProcess;
@@ -47,6 +48,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
     private static final String NINTEICHOSATOKKIDATAOUTPUT = "ninteichosatokkidataoutput";
     private static final String NINTEICHOSAGAIKYOTOKKIOUTPUT = "ninteichosagaikyotokkioutput";
     private static final String NINTEICHOSAINDATAOUTPUT = "ninteichosaindataoutput";
+    private static final String NINTEICHOSAFILEOUTPUT = "ninteichosafileoutput";
     private static final String DBUPDATEPROCESS = "dbT5301UpdateProcess";
     private RString ninteiChosaCsvTempTableName;
     private List<RString> shinseishoKanriNoList;
@@ -77,6 +79,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
         executeStep(NINTEICHOSATOKKIDATAOUTPUT);
         executeStep(NINTEICHOSAGAIKYOTOKKIOUTPUT);
         executeStep(NINTEICHOSAINDATAOUTPUT);
+        executeStep(NINTEICHOSAFILEOUTPUT);
         //DB更新
         executeStep(DBUPDATEPROCESS);
     }
@@ -208,6 +211,17 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
     protected IBatchFlowCommand callNinteiChosainDataOutput() {
         return loopBatch(NinteiChosainDataOutputProcess.class)
                 .arguments(getParameter().toNinteiChosaDataOutputProcessParamter(認定調査CSV一時テーブル名)).define();
+    }
+
+    /**
+     * 認定調査データ出力（モバイル）のファイル出力Processです。
+     *
+     * @return 認定調査データ出力（モバイル）
+     */
+    @Step(NINTEICHOSAFILEOUTPUT)
+    protected IBatchFlowCommand callNinteiChosaFileOutput() {
+        return simpleBatch(NinteiChosaFileOutputProcess.class)
+                .arguments(getParameter().toNinteiChosaFileOutputProcessParamter()).define();
     }
 
     /**

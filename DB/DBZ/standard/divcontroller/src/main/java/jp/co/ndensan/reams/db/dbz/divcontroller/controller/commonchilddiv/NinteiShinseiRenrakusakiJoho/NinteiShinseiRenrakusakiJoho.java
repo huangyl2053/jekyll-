@@ -65,6 +65,7 @@ public class NinteiShinseiRenrakusakiJoho {
         div.getBtnShinkiTsuika().setDisabled(true);
         div.getDgRenrakusakiIchiran().setReadOnly(true);
         div.getBtnFukushaTsuika().setDisabled(false);
+        div.getBtnKakutei().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -156,7 +157,7 @@ public class NinteiShinseiRenrakusakiJoho {
                 RenrakusakiJoho joho = johoList.get(i);
                 dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
                 if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
-                        && row.getRenban().equals(new RString(joho.get連番()))) {
+                        && row.getRenban().getText().equals(new RString(joho.get連番()))) {
                     johoList.set(i, joho.deleted());
                 }
             }
@@ -186,6 +187,8 @@ public class NinteiShinseiRenrakusakiJoho {
         }
         getHandler(div).setDataSourceを一覧();
         getHandler(div).setClear();
+        getHandler(div).set画面ReadOnly();
+        div.getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
