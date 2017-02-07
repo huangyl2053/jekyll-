@@ -31,6 +31,7 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
 
     private boolean 厚労省フラグ;
     private boolean 東芝版フラグ;
+    private boolean センター送信運用有無フラグ;
 
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
     private RString 市町村コード;
@@ -56,6 +57,7 @@ public class DBE192001_NnteiShinseiInfoUploadParameter extends BatchParameterBas
                 申請情報データリスト,
                 厚労省フラグ,
                 東芝版フラグ,
-                法改正後フラグ);
+                法改正後フラグ,
+                センター送信運用有無フラグ);
     }
 }

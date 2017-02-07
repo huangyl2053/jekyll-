@@ -654,9 +654,10 @@ public class RenkeiDataTorikomiBusiness {
      * DbT5105NinteiKanryoJohoEntityの設定メソッドです。
      *
      * @param entity DbT5101RelateEntity
+     * @param processParamter RenkeiDataTorikomiProcessParamter
      * @return DbT5105NinteiKanryoJohoEntity
      */
-    public DbT5105NinteiKanryoJohoEntity getDbT5105Entity(DbT5101RelateEntity entity) {
+    public DbT5105NinteiKanryoJohoEntity getDbT5105Entity(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         DbT5105NinteiKanryoJohoEntity dbt5105Entity = new DbT5105NinteiKanryoJohoEntity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         FlexibleDate 申請日 = new FlexibleDate(dbt5101tempEntity.get認定申請日());
@@ -670,6 +671,9 @@ public class RenkeiDataTorikomiBusiness {
         dbt5105Entity.setMaskingKanryoYMD(申請日);
         dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(申請日);
         dbt5105Entity.setNinteiShinsakaiKanryoYMD(申請日);
+        if (!processParamter.isセンター送信運用有無フラグ()) {
+            dbt5105Entity.setCenterSoshinYMD(申請日);
+        }
         return dbt5105Entity;
     }
 

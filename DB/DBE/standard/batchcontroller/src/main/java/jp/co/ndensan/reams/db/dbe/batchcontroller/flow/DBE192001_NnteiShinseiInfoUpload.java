@@ -82,6 +82,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     private static final RString 共有ファイル名 = new RString("要介護認定申請連携データ取込");
     private static final RString SJIS = new RString("1");
     private static final RString UTF8 = new RString("2");
+    private static final RString センター送信運用有 = new RString("1");
     private RString path;
     private RString 認定申請ファイル;
     private RString 主治医情報ファイル;
@@ -123,6 +124,11 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
                 医療機関ファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
                 認定調査員ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査員データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
                 調査委託先ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援);
+            }
+            if (センター送信運用有.equals(DbBusinessConfig.get(ConfigNameDBE.センター送信_運用有無, 基準日, SubGyomuCode.DBE認定支援))) {
+                getParameter().setセンター送信運用有無フラグ(true);
+            } else {
+                getParameter().setセンター送信運用有無フラグ(false);
             }
             主治医情報ファイル = Path.combinePath(path, 主治医情報ファイル名);
             医療機関ファイル = Path.combinePath(path, 医療機関ファイル名);
