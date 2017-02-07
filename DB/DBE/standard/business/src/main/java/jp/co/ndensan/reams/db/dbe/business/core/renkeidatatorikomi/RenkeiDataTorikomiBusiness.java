@@ -740,6 +740,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5130Entity.setNijiHanteiYMD(new FlexibleDate(dbt5101tempEntity.get認定申請日()));
         dbt5130Entity.setShinsakaiKaisaiNo(new RString("0"));
         dbt5130Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
+        dbt5130Entity.setNijiHanteiYokaigoJotaiKubunCode(Code.EMPTY);
         return dbt5130Entity;
     }
 
