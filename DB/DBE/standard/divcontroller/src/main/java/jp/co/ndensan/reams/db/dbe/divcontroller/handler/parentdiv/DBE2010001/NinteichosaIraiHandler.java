@@ -138,6 +138,16 @@ public class NinteichosaIraiHandler {
     }
 
     /**
+     * データグリッドのチェックを外します。
+     */
+    public void clearチェック() {
+        List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
+        for (dgNinteiTaskList_Row row : rowList) {
+            row.setSelected(false);
+        }
+    }
+
+    /**
      * 認定調査依頼登録パネルの各項目を設定します。
      */
     public void set認定調査依頼登録パネル() {
@@ -341,12 +351,7 @@ public class NinteichosaIraiHandler {
             div.getBtnJidoWaritsuke().setDisplayNone(true);
             div.getBtnShudoWaritsuke().setDisplayNone(true);
         } else {
-            RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
-            if (使用する.equals(認定調査自動割付)) {
-                div.getBtnJidoWaritsuke().setDisabled(false);
-            } else {
-                div.getBtnJidoWaritsuke().setDisabled(true);
-            }
+            set認定調査自動割付ボタン();
             RString モバイル調査使用有無 = DbBusinessConfig.get(ConfigNameDBE.モバイル調査使用有無, RDate.getNowDate());
             if (使用する.equals(モバイル調査使用有無)) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, false);
@@ -354,6 +359,15 @@ public class NinteichosaIraiHandler {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(モバイル出力ボタン, true);
             }
             set調査依頼完了ボタン使用可否();
+        }
+    }
+
+    public void set認定調査自動割付ボタン() {
+        RString 認定調査自動割付 = DbBusinessConfig.get(ConfigNameDBE.認定調査自動割付, RDate.getNowDate());
+        if (使用する.equals(認定調査自動割付)) {
+            div.getBtnJidoWaritsuke().setDisabled(false);
+        } else {
+            div.getBtnJidoWaritsuke().setDisabled(true);
         }
     }
 
@@ -402,7 +416,9 @@ public class NinteichosaIraiHandler {
         }
         if (business.get調査票等出力年月日() != null && !business.get調査票等出力年月日().isEmpty()) {
             row.getChousahyoOutput().setValue(new RDate(business.get調査票等出力年月日().toString()));
-            row.getChosaIraiDataShutsuryokuDay().setValue(new RDate(business.get調査票等出力年月日().toString()));
+            if (business.getモバイルデータ出力済フラグ()) {
+                row.getChosaIraiDataShutsuryokuDay().setValue(new RDate(business.get調査票等出力年月日().toString()));
+            }
         }
         if (business.get認定調査期限年月日() != null && !business.get認定調査期限年月日().isEmpty()) {
             row.getChosaIraiKigen().setValue(new RDate(business.get認定調査期限年月日().toString()));

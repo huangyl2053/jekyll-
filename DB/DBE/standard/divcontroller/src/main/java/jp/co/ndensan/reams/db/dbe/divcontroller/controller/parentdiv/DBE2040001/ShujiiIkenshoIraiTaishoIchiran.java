@@ -247,6 +247,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             handler.set主治医入力時使用可否(false);
         }
         handler.clear意見書依頼登録パネル();
+        handler.clearチェック();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 
@@ -264,6 +265,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             handler.set主治医入力時使用可否(false);
         }
         handler.clear意見書依頼登録パネル();
+        handler.clearチェック();
         return ResponseData.of(div).setState(DBE2040001StateName.登録);
     }
 

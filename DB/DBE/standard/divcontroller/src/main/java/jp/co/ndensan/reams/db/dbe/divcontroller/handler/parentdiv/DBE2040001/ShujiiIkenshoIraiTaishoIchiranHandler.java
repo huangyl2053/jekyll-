@@ -161,6 +161,16 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     }
 
     /**
+     * データグリッドのチェックを外します。
+     */
+    public void clearチェック() {
+        List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
+        for (dgNinteiTaskList_Row row : rowList) {
+            row.setSelected(false);
+        }
+    }
+
+    /**
      * 認定調査依頼登録パネルの各項目を設定します。
      */
     public void set意見書依頼登録パネル() {

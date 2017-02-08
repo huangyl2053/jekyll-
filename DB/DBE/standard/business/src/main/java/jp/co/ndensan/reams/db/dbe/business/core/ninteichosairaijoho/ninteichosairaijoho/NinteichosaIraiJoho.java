@@ -88,6 +88,15 @@ public class NinteichosaIraiJoho
     }
 
     /**
+     * 認定調査履歴番号を返します。
+     *
+     * @return 認定調査履歴番号
+     */
+    public int get履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
+
+    /**
      * 認定調査依頼履歴番号を返します。
      *
      * @return 認定調査依頼履歴番号
@@ -270,6 +279,21 @@ public class NinteichosaIraiJoho
         DbT5201NinteichosaIraiJohoEntity modifiedEntity = entity.clone();
         if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new NinteichosaIraiJoho(
+                modifiedEntity, id);
+    }
+
+    /**
+     * 認定調査依頼情報のみを変更対象とします。<br/>
+     * {@link DbT5201NinteichosaIraiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link NinteichosaIraiJoho}
+     */
+    public NinteichosaIraiJoho add() {
+        DbT5201NinteichosaIraiJohoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Added);
         }
         return new NinteichosaIraiJoho(
                 modifiedEntity, id);

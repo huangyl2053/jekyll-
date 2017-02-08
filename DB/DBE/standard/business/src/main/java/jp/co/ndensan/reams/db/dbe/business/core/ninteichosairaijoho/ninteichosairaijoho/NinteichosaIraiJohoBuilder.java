@@ -40,6 +40,18 @@ public class NinteichosaIraiJohoBuilder {
     }
 
     /**
+     * 認定調査履歴番号を設定します。
+     *
+     * @param 履歴番号 認定調査履歴番号
+     * @return {@link NinteichosaIraiJohoBuilder}
+     */
+    public NinteichosaIraiJohoBuilder set認定調査履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査履歴番号"));
+        entity.setNinteichosaIraiRirekiNo(履歴番号);
+        return this;
+    }
+
+    /**
      * 厚労省IF識別コードを設定します。
      *
      * @param 厚労省IF識別コード 厚労省IF識別コード
