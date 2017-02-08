@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
@@ -29,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
 public class BunshoBangoInputHandler {
 
     private final BunshoBangoInputDiv div;
+    private final static RString regexExp = new RString("_[0-9]{6}");
+    private final static int 帳票末尾確認用文字数 = 7;
 
     /**
      * コンストラクタです。
@@ -51,6 +54,7 @@ public class BunshoBangoInputHandler {
         div.getTxtBunshoHeader().clearValue();
         div.getTxtBunshoNo().clearValue();
         div.getTxtBunshoFooter().clearValue();
+        div.setHdnChihoKokyoDantaiCode(RString.EMPTY);
 
         if (null == 帳票ID || 帳票ID.isEmpty()) {
             return;
@@ -77,6 +81,12 @@ public class BunshoBangoInputHandler {
             div.getTxtBunshoNo().setMaxLength(bunshoNo.get文書番号有効文字数());
         } else {
             div.setMode_DisplayType(BunshoBangoInputDiv.DisplayType.JidoSaiban);
+            if (帳票ID.value().length() > 帳票末尾確認用文字数) {
+                RString 作業用地方公共団体コード = 帳票ID.value().substring(帳票ID.value().length() - 帳票末尾確認用文字数);
+                if (RStringUtil.matchesRegex(作業用地方公共団体コード, regexExp)) {
+                    div.setHdnChihoKokyoDantaiCode(作業用地方公共団体コード.substring(1));
+                }
+            }
         }
         div.getTxtBunshoNo().setPaddingZero(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前ゼロ編集);
         div.setHdnPadSpaceFlag(new RString(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前スペース編集));
@@ -95,9 +105,13 @@ public class BunshoBangoInputHandler {
      * @return RString
      */
     public RString get自動採番文書番号() {
-
         SubGyomuCode サブ業務コード = ControlDataHolder.getSubGyomuCD();
-        CountedItem countedItem = Saiban.get(サブ業務コード, SaibanHanyokeyName.文書番号.get名称(), FlexibleDate.getNowDate().getNendo());
+        CountedItem countedItem;
+        if (div.getHdnChihoKokyoDantaiCode() != null && !div.getHdnChihoKokyoDantaiCode().isEmpty()) {
+            countedItem = Saiban.get(サブ業務コード, SaibanHanyokeyName.文書番号.get名称().concat(div.getHdnChihoKokyoDantaiCode()), FlexibleDate.getNowDate().getNendo());
+        } else {
+            countedItem = Saiban.get(サブ業務コード, SaibanHanyokeyName.文書番号.get名称(), FlexibleDate.getNowDate().getNendo());
+        }
         return new RString(String.valueOf(countedItem.next()));
     }
 
