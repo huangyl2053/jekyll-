@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -319,6 +319,7 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
         List<dgIchijiHanteiZumi_Row> dgChosainList = new ArrayList<>();
         IchijiHanteizumiDataShutsuryoku shutsuryoku = new IchijiHanteizumiDataShutsuryoku();
         boolean ボタン制御フラグ = true;
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (IchijiHanteizumiDataShutsuryokuBusiness business : list) {
             dgIchijiHanteiZumi_Row row = new dgIchijiHanteiZumi_Row();
             row.setHokenshaMei(nullOrEmpty(business.get市町村名称()));
@@ -344,14 +345,14 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             row.setKeikokuCode(nullOrEmpty(business.get要介護認定一次判定警告コード()));
             row.setShinseishoKanriNo(business.get申請書管理番号());
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号());
-            
+
             ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(business.get証記載保険者番号());
-            NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, business.get被保険者番号());
-            ninteiAccessLogger.log();
-            
+            accessLog.store(shoKisaiHokenshaNo, business.get被保険者番号());
+
             dgChosainList.add(row);
             ボタン制御フラグ = false;
         }
+        accessLog.flushBy(AccessLogType.照会);
         div.getShoriOptions().setDisplayNone(ボタン制御フラグ);
         div.getDgIchijiHanteiZumi().setDataSource(dgChosainList);
     }

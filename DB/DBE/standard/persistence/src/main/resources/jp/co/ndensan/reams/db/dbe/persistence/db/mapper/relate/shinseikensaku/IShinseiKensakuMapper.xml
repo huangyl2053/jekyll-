@@ -76,7 +76,7 @@
         DbT5912ShujiiJoho."shujiiName",
         DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
         DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
-        COUNT(*) OVER() as "totalCount"
+        COUNT(DbT5101NinteiShinseiJoho."shinseishoKanriNo") OVER() as "totalCount"
     <!-- FROM -->
     </sql>
 
@@ -122,12 +122,17 @@
         LEFT JOIN
             rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301ShujiiIkenshoIraiJoho
             ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
-            AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" =
-                (SELECT MAX(ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo")
-                FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
-                WHERE ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-                AND ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE)
-                AND DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE
+            AND NOT DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag"
+            AND NOT EXISTS(
+                    SELECT
+                        *
+                    FROM
+                        rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
+                    WHERE
+                        ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
+                    AND NOT ShujiiIkenshoIraiJoho."logicalDeletedFlag"
+                    AND ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
+                )
        <if test="useShujiiIkenshoJoho">
         INNER JOIN
             rgdb."DbT5302ShujiiIkenshoJoho" DbT5302ShujiiIkenshoJoho
