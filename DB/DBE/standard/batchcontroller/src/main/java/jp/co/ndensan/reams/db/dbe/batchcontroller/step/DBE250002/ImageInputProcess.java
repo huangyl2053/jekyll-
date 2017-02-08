@@ -169,9 +169,11 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         ProcessingResults r = new ProcessingResults();
         r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
         r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
+        list.addAll(OcrTorikomiResultUtil.create(key, r));
+
         OcrIkens safetyInCurrent = ocrIkens.removed(r.allOcrDataInError());
         if (safetyInCurrent.isEmpty()) {
-            return OcrTorikomiResultUtil.create(key, r);
+            return list;
         }
 
         OcrIken ocrIken = safetyInCurrent.findByOCRIDPrioritizing(OCRID._777, OCRID._778).orElse(null); // このメソッド中でnullはありえない。
@@ -185,7 +187,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         for (OcrIken o : safetyInCurrent) {
             results.addSuccessIfNotContains(o);
         }
-        return OcrTorikomiResultUtil.create(key, results);
+        list.addAll(OcrTorikomiResultUtil.create(key, results));
+        return list;
     }
 
     private static IProcessingResults checkTooManyFilsToOperate(OcrIkens ocrIkens, int maxNum) {
