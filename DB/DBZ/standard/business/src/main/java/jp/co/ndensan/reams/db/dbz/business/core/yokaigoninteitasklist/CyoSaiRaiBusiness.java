@@ -359,4 +359,13 @@ public class CyoSaiRaiBusiness implements Serializable {
     public RString get市町村コード() {
         return entity.getShichosonCode();
     }
+
+    /**
+     * getモバイルデータ出力済フラグを返します。
+     *
+     * @return getモバイルデータ出力済フラグ
+     */
+    public boolean getモバイルデータ出力済フラグ() {
+        return entity.isMobileDataShutsuryokuZumiFlag();
+    }
 }

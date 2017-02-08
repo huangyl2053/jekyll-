@@ -268,6 +268,11 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
      */
     nyushoShisetsuCode(2147483647, 0),
     /**
+     * 入所施設名称
+     * <br/>介護事業者の名称または、医療機関の名称
+     */
+    nyushoShisetsuMeisho(2147483647, 0),
+    /**
      * 家庭訪問の有無
      * <br/>Enum（DBE：家庭訪問の有無）
      */
@@ -376,7 +381,11 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
      * 論理削除フラグ
      * <br/>True：論理削除　False：論理未削除
      */
-    logicalDeletedFlag(1, 0);
+    logicalDeletedFlag(1, 0),
+    /**
+     * 市町村コード
+     */
+    shichosonCode(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

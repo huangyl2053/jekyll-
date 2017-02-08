@@ -65,4 +65,5 @@ public class CyoSaiRaiRelateEntity implements Serializable {
     private RString chikuCode;
     private int ninteichosaIraiRirekiNo;
     private Code koroshoIfShikibetsuCode;
+    private boolean mobileDataShutsuryokuZumiFlag;
 }

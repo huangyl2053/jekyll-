@@ -214,7 +214,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
     }
 
     /**
-     * 認定調査データ出力（モバイル）のDB更新Processです。
+     * 認定調査データ出力（モバイル）のファイル出力Processです。
      *
      * @return 認定調査データ出力（モバイル）
      */

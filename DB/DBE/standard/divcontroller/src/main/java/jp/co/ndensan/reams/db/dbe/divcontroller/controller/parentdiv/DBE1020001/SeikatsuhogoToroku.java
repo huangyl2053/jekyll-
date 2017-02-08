@@ -194,6 +194,7 @@ public class SeikatsuhogoToroku {
         div.getTxtHihokenshaNo().setValue(被保険者番号);
         return ResponseData.of(div).respond();
     }
+
     /**
      * クリアする　ボタン、入力内容をEmpty設定
      *
@@ -228,21 +229,21 @@ public class SeikatsuhogoToroku {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         ShinseishoKanriNo 前回申請書管理番号 = ShinseishoKanriNo.EMPTY;
         if (!RString.isNullOrEmpty(申請書管理番号)) {
-            前回申請書管理番号 = finder.get前回申請書管理番号(new ShinseishoKanriNo(申請書管理番号));
+            前回申請書管理番号 = new ShinseishoKanriNo(申請書管理番号);
         }
         Minashi2shisaiJoho minashi2shisaiJoho = getHandler(div).setBusiness(前回申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.みなし2号登録情報, minashi2shisaiJoho);
 
         if (is年齢範囲外(minashi2shisaiJoho.get年齢())) {
-           if (!ResponseHolder.isReRequest()) {
-               return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
-           }
-           if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                   && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-               return ResponseData.of(div).respond();
-           }
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
+            }
+            if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
         }
-        
+
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(getValidationHandler(div).allCheck());
         if (validationMessages.iterator().hasNext()) {

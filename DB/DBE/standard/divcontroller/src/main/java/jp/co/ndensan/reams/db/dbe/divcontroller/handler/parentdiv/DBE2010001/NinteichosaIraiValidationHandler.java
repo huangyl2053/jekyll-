@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class NinteichosaIraiValidationHandler {
 
     private final NinteichosaIraiDiv div;
+    private static final RString 修正 = new RString("Modified");
 
     /**
      * コンストラクタです。
@@ -194,14 +196,19 @@ public class NinteichosaIraiValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 入力チェック_btnUpdate() {
+        List<dgNinteiTaskList_Row> ModifyList = new ArrayList<>();
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
-        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
-            List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
-            for (dgNinteiTaskList_Row row : selected) {
+
+            for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+                RString 状態 = new RString(row.getRowState().toString());
+                if (状態.equals(修正)) {
+                    ModifyList.add(row);
+                }
+            }
+            for (dgNinteiTaskList_Row row : ModifyList) {
                 if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty()) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査依頼未割付));
                     break;

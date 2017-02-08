@@ -94,7 +94,9 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
                 ninteiChosainCode,
                 shinseishoKanriNoList,
                 shichosonCode,
-                csvTempTableName);
+                csvTempTableName,
+                addedFileName,
+                tempFilePath);
     }
 
     /**
@@ -111,7 +113,9 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
                 ninteiChosainCode,
                 shinseishoKanriNoList,
                 shichosonCode,
-                csvTempTableName);
+                csvTempTableName,
+                addedFileName,
+                tempFilePath);
     }
 
     /**
@@ -125,7 +129,8 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
             RString csvTempTableName, RString csvTempTableNameZenkai) {
         return new NinteiChosaDataCsvProcessParamter(
                 csvTempTableName, csvTempTableNameZenkai,
-                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode, this.hihokenshaNoList);
+                this.ninteichosaItakusakiCode, this.ninteiChosainCode, this.shinseishoKanriNoList, this.shichosonCode, this.hihokenshaNoList,
+                this.addedFileName, this.tempFilePath);
     }
 
     public NinteiChosaFileOutputProcessParamter toNinteiChosaFileOutputProcessParamter() {
