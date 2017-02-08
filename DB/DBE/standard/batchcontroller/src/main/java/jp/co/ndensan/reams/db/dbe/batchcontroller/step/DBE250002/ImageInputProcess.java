@@ -64,8 +64,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * 主治医意見書の読み込み処理です。
  */
-//TODO パラメータによる処理分岐
-//TODO 取込データ不正時の処理
 public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
@@ -226,7 +224,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 ? FileNameConvertionTheories.ID777
                 : FileNameConvertionTheories.ID777_reversed;
         return new CopyImageResult(
-                ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(ir.getSharedFileIDOrNull())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(converter)
@@ -260,7 +258,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, pair.getCsv778().getSheetID()).orElse(null);
         if (ca3_778 != null) {
-            ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+            ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                     .sharedFileID(ir.getSharedFileIDOrNull())
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(FileNameConvertionTheories.ID777_reversed)
@@ -268,7 +266,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     .ocrData(pair.getCsv778())
                     .save(writer_DbT5115);
             results.addAll(result1.getResults());
-            ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+            ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                     .sharedFileID(result1.get共有ファイルID())
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(FileNameConvertionTheories.ID777)
@@ -284,7 +282,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                         ? FileNameConvertionTheories.ID777
                         : FileNameConvertionTheories.ID777_reversed;
 
-        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(ir.getSharedFileIDOrNull())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(theory)
@@ -362,7 +360,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static List<DbT5304ShujiiIkenshoIkenItemEntity> createOrEdit主治医意見書意見項目s(ImageinputRelate ir, OcrIken ocrIken) {
         final Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> map = find意見書意見項目(ir);
-        final RString 厚労省IF識別コード = ir.getT5101_厚労省IF識別コード();
+        final RString 厚労省IF識別コード = ir.get厚労省IF識別コード().getコード();
         final IIkenshoIkenKomokuAccessor accessor = IkenshoIkenKomokuAccessorFactory.createInstance(ocrIken, 厚労省IF識別コード);
         final List<DbT5304ShujiiIkenshoIkenItemEntity> entities = new ArrayList<>();
         for (IIkenshoKomokuMapping komoku : IkenshoKomokuMappings.valuesOf(厚労省IF識別コード)) {
@@ -383,8 +381,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private static Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> find意見書意見項目(ImageinputRelate ir) {
         ShujiiIkenshoIkenItemNewManager manager = new ShujiiIkenshoIkenItemNewManager();
         List<DbT5304ShujiiIkenshoIkenItemEntity> list = manager.select主治医意見書意見項目(
-                new ShinseishoKanriNo(ir.getT5101_申請書管理番号()),
-                ir.getT5301_主治医意見書作成依頼履歴番号()
+                ir.get申請書管理番号(),
+                ir.get主治医意見書作成依頼履歴番号()
         );
         Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> map = new HashMap<>();
         for (DbT5304ShujiiIkenshoIkenItemEntity entity : list) {
@@ -395,8 +393,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5304ShujiiIkenshoIkenItemEntity newDbT5304ShujiiIkenshoIkenItemEntity(ImageinputRelate ir, RString 厚労省IF識別コード, int 連番) {
         DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
-        entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
+        entity.setShinseishoKanriNo(ir.get申請書管理番号());
+        entity.setIkenshoIraiRirekiNo(ir.get主治医意見書作成依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード));
         entity.setRemban(連番);
         return entity;
@@ -419,9 +417,9 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private static DbT5302ShujiiIkenshoJohoEntity createOrEdit主治医意見書情報(ImageinputRelate ir, OcrIken ocrIken) {
-        DbT5302ShujiiIkenshoJohoEntity entity = ir.getT5302_主治医意見書情報().isEmpty()
+        DbT5302ShujiiIkenshoJohoEntity entity = ir.get主治医意見書情報().isEmpty()
                 ? newDbT5302ShujiiIkenshoJohoEntity(ir, ocrIken)
-                : ir.getT5302_主治医意見書情報().get(0);
+                : ir.get主治医意見書情報().get(0);
         entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
         OcrShujiiIkenshoJohoEditor.edit(entity, ocrIken);
         return entity;
@@ -429,12 +427,12 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5302ShujiiIkenshoJohoEntity newDbT5302ShujiiIkenshoJohoEntity(ImageinputRelate ir, OcrIken ocrIken) {
         DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
-        entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
-        entity.setKoroshoIfShikibetsuCode(ir.getT5101_厚労省IF識別コード());
-        entity.setIkenshoIraiKubun(ir.getT5301_主治医意見書依頼区分());
-        entity.setShujiiIryoKikanCode(ir.getT5301_主治医医療機関コード());
-        entity.setShujiiCode(ir.getT5301_主治医コード());
+        entity.setShinseishoKanriNo(ir.get申請書管理番号());
+        entity.setIkenshoIraiRirekiNo(ir.get主治医意見書作成依頼履歴番号());
+        entity.setKoroshoIfShikibetsuCode(ir.get厚労省IF識別コード().getコード());
+        entity.setIkenshoIraiKubun(ir.get主治医意見書依頼区分());
+        entity.setShujiiIryoKikanCode(ir.get主治医医療機関コード());
+        entity.setShujiiCode(ir.get主治医コード());
         entity.setSonotaJushinKaMei(RString.EMPTY);
         entity.setShindamMei1(RString.EMPTY);
         entity.setShindamMei2(RString.EMPTY);

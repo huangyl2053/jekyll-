@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IRelatedData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrTorikomiKekkaCsvEntity;
@@ -96,13 +97,12 @@ public final class OcrTorikomiResult {
         }
 
         /**
-         * @param 氏名 氏名
-         * @param 氏名カナ 氏名カナ
+         * @param 関連データ
          * @return {@link Builder}
          */
-        public Builder set関連データ(RString 氏名, RString 氏名カナ) {
-            this.氏名 = 氏名;
-            this.氏名カナ = 氏名カナ;
+        public Builder set関連データ(IRelatedData 関連データ) {
+            this.氏名 = 関連データ.get被保険者氏名();
+            this.氏名カナ = 関連データ.get被保険者カナ();
             return this;
         }
 

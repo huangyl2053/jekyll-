@@ -200,7 +200,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 this.processParameter.get一次判定済み時処理方法());
         IProcessingResults nrValidated = nr.validate(context);
         if (nrValidated.hasError()) {
-            return makeErrorsInRelatedData(key, nrValidated);
+            return makeErrorsInRelatedData(key, nrValidated, nr);
         }
         ProcessingResults results = new ProcessingResults();
         NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
@@ -208,7 +208,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         for (OcrChosa o : ocrChosas.values()) {
             results.addSuccessIfNotContains(o);
         }
-        return OcrTorikomiResultUtil.create(key, results);
+        return OcrTorikomiResultUtil.create(key, results, nr);
     }
 
     //<editor-fold defaultstate="collapsed" desc="イメージファイルの保存">
@@ -418,8 +418,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在.replaced("OCRCHOSA.CSV"));
     }
 
-    private static List<OcrTorikomiResult> makeErrorsInRelatedData(ShinseiKey key, IProcessingResults nrValidated) {
-        return OcrTorikomiResultUtil.create(key, nrValidated);
+    private static List<OcrTorikomiResult> makeErrorsInRelatedData(ShinseiKey key, IProcessingResults nrValidated, NinteiOcrRelate nr) {
+        return OcrTorikomiResultUtil.create(key, nrValidated, nr);
     }
 
     private static List<OcrTorikomiResult> makeErrorsForRelatedDataNotFound(OcrChosasByOCRID ocrChosas, ShinseiKey key) {

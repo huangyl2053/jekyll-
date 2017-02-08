@@ -14,8 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
- * @author N3327 三浦 凌
+ * {@link IImageinputMapper}のテストです。
  */
 public class IImageinputMapperTest extends DbeTestDacBase {
 
@@ -38,5 +37,6 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println(entity.getT5101_被保険者カナ());
         System.out.println(entity.isT5101_論理削除フラグ());
         System.out.println(entity.isMatches指定申請日());
+        System.out.println(entity.getT5105_一次判定完了日());
     }
 }

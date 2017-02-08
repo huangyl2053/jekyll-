@@ -49,9 +49,8 @@
           , T5101."koroshoIfShikibetsuCode" AS t5101_厚労省IF識別コード
           , T5301."ikenshoSakuseiIraiYMD" AS t5301_主治医意見書作成依頼年月日
           , T5301."ikenshoIraiKubun" AS t5301_主治医意見書依頼区分
-          , T5301."shujiiIryokikanCode" AS t5301_主治医医療機関コード
-          , T5301."shujiiCode" AS t5301_主治医コード
           , T5301."ikenshoIraiRirekiNo" AS t5301_主治医意見書作成依頼履歴番号
+          , T5105."ichijiHanteiKanryoYMD" AS t5105_一次判定完了日
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho"/>
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
@@ -102,7 +101,7 @@
     <resultMap id="ResultMap_get関連データ" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity" autoMapping="true">
         <id property="t5101_証記載保険者番号" column="t5101_証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="t5101_被保険者番号" column="t5101_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="t5101_認定申請年月日" column="t5101_認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="t5101_認定申請年月日" column="t5101_認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="t5101_被保険者氏名" column="t5101_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5101_被保険者カナ" column="t5101_被保険者カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5101_施設入所の有無" column="t5101_施設入所の有無"/>
@@ -117,9 +116,8 @@
         <result property="t5101_厚労省IF識別コード" column="t5101_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5301_主治医意見書作成依頼年月日" column="t5301_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5301_主治医意見書依頼区分" column="t5301_主治医意見書依頼区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="t5301_主治医医療機関コード" column="t5301_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="t5301_主治医コード" column="t5301_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5301_主治医意見書作成依頼履歴番号" column="t5301_主治医意見書作成依頼履歴番号"/>
+        <result property="t5105_一次判定完了日" column="t5105_一次判定完了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="matches指定申請日" column="matches指定申請日"/>
         <collection property="主治医意見書情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
     </resultMap>

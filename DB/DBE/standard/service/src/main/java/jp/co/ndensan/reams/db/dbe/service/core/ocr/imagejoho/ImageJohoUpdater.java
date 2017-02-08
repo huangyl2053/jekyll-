@@ -72,8 +72,10 @@ public class ImageJohoUpdater {
         RString targetDirectoryPath = Directory.createTmpDirectory();
         CopyImageResult copyImageResult = copyImageFilesToDirectory(targetImageFileNames, targetDirectoryPath,
                 imageFilePaths, fileNameTheory);
-        if (!copyImageResult.getImagesNotFound().isEmpty()) {
-            result.add(ProcessingResultFactory.warning(ocrData, OcrTorikomiMessages.TODO));
+        List<RString> imagesNotFound = copyImageResult.getImagesNotFound();
+        if (!imagesNotFound.isEmpty()) {
+            result.add(ProcessingResultFactory.warning(ocrData, OcrTorikomiMessages.存在しないイメージあり
+                    .replaced(composeImageFileNames(imagesNotFound).toString())));
         }
         if (this.共有ファイルID == null) {
             SharedFileEntryDescriptor sfed = defineAndCopyToSharedFile(new FilesystemPath(targetDirectoryPath),
@@ -88,6 +90,14 @@ public class ImageJohoUpdater {
                     new SharedAppendOption().overWrite(true));
             return new Result(this.共有ファイルID, result);
         }
+    }
+
+    private static RString composeImageFileNames(List<RString> list) {
+        RStringBuilder builder = new RStringBuilder();
+        for (RString imageFileName : list) {
+            builder.append(imageFileName).append(RString.HALF_SPACE);
+        }
+        return builder.toRString();
     }
 
     //<editor-fold defaultstate="collapsed" desc="comment">

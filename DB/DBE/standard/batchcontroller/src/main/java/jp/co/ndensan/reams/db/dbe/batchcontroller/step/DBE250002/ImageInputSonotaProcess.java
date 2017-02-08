@@ -187,7 +187,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
         RDateTime sharedFileID = ir.getSharedFileIDOrNull();
         for (OcrSonota ocrSonota : targets) {
             ImageJohoUpdater.Result r
-                    = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                    = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                     .sharedFileID(sharedFileID)
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(theory)
@@ -209,7 +209,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
             return Collections.emptyList();
         }
         ReadOnlySharedFileEntryDescriptor rsfd = new ReadOnlySharedFileEntryDescriptor(
-                compose共有ファイル名(ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号()), sharedFileID);
+                compose共有ファイル名(ir.get証記載保険者番号(), ir.get被保険者番号()), sharedFileID);
         return ItemList.of(SharedFile.getEntryInfo(rsfd))
                 .map(toFilesNames())
                 .filter(sonotaShiryoFile())

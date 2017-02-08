@@ -11,6 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IRelatedData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
@@ -39,6 +40,13 @@ public final class OcrTorikomiResultUtil {
                     .build());
         }
         return results;
+    }
+
+    public static List<OcrTorikomiResult> create(ShinseiKey key, IProcessingResults results, IRelatedData 関連データ) {
+        return Arrays.asList(new OcrTorikomiResult.Builder(key)
+                .set関連データ(関連データ)
+                .set処理結果s(results)
+                .build());
     }
 
     public static List<OcrTorikomiResult> create(ShinseiKey key, IProcessingResults results) {
