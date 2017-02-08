@@ -182,21 +182,21 @@ public class ShinseiKensakuBusiness implements Serializable {
     }
 
     /**
-     * 二次判定要介護状態区分コードを返します。
+     * 前回二次判定要介護状態区分コードを返します。
      *
-     * @return 二次判定要介護状態区分コード
+     * @return 前回二次判定要介護状態区分コード
      */
-    public Code get二次判定要介護状態区分コード() {
-        return entity.getNijiHanteiYokaigoJotaiKubun();
+    public Code get前回二次判定要介護状態区分コード() {
+        return entity.getZenkaiNijiHanteiYokaigoJotaiKubun();
     }
 
     /**
-     * 二次判定認定有効期間を返します。
+     * 前回二次判定認定有効期間を返します。
      *
-     * @return 二次判定認定有効期間
+     * @return 前回二次判定認定有効期間
      */
-    public int get二次判定認定有効期間() {
-        return entity.getNijiHanteiNinteiYukoKikan();
+    public int get前回二次判定認定有効期間() {
+        return entity.getZenkaiNijiHanteiNinteiYukoKikan();
     }
 
     /**
@@ -252,7 +252,8 @@ public class ShinseiKensakuBusiness implements Serializable {
     public int get主治医意見書作成依頼履歴番号() {
         return entity.getIkenshoIraiRirekiNo();
     }
-     /**
+
+    /**
      * 認定調査依頼履歴番号のgetメソッドです。
      *
      * @return 認定調査依頼履歴番号
@@ -260,13 +261,76 @@ public class ShinseiKensakuBusiness implements Serializable {
     public int get認定調査依頼履歴番号() {
         return entity.getNinteichosaIraiRirekiNo();
     }
-    
-     /**
+
+    /**
      * 前回厚労省IF識別コードを返します。
      *
      * @return 厚労省IF識別コード
      */
     public Code get前回厚労省IF識別コード() {
         return entity.getZenkaiKoroshoIfShikibetsuCode();
+    }
+
+    /**
+     * 要介護認定一次判定結果コードを返します。
+     *
+     * @return 要介護認定一次判定結果コード
+     */
+    public Code get要介護認定一次判定結果コード() {
+        return entity.getIchijiHanteiKekkaCode();
+    }
+
+    /**
+     * 要介護認定一次判定年月日を返します。
+     *
+     * @return 要介護認定一次判定年月日
+     */
+    public FlexibleDate get要介護認定一次判定年月日() {
+        return entity.getIchijiHanteiYMD();
+    }
+
+    /**
+     * 二次判定要介護状態区分コードを返します。
+     *
+     * @return 二次判定要介護状態区分コード
+     */
+    public Code get二次判定要介護状態区分コード() {
+        return entity.getNijiHanteiYokaigoJotaiKubunCode();
+    }
+
+    /**
+     * 二次判定年月日を返します。
+     *
+     * @return 二次判定年月日
+     */
+    public FlexibleDate get二次判定年月日() {
+        return entity.getNijiHanteiYMD();
+    }
+
+    /**
+     * 二次判定認定有効期間を返します。
+     *
+     * @return 二次判定認定有効期間
+     */
+    public int get二次判定認定有効期間() {
+        return entity.getNijiHanteiNinteiYukoKikan();
+    }
+
+    /**
+     * 二次判定認定有効開始年月日を返します。
+     *
+     * @return 二次判定認定有効開始年月日
+     */
+    public FlexibleDate get二次判定認定有効開始年月日() {
+        return entity.getNijiHanteiNinteiYukoKaishiYMD();
+    }
+
+    /**
+     * 二次判定認定有効終了年月日を返します。
+     *
+     * @return 二次判定認定有効終了年月日
+     */
+    public FlexibleDate get二次判定認定有効終了年月日() {
+        return entity.getNijiHanteiNinteiYukoShuryoYMD();
     }
 }
