@@ -170,7 +170,7 @@ public class YokaigoNinteiJohoTeikyo {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        ViewStateHolder.put(ViewStateKeys.状態, ResponseHolder.getButtonType().getKey());
+        ViewStateHolder.put(ViewStateKeys.状態, ResponseHolder.getButtonType() != null ? ResponseHolder.getButtonType().getKey() : null);
         return ResponseData.of(div).respond();
     }
 

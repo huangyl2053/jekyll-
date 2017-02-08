@@ -24,7 +24,7 @@ public class UpdateDataProcess extends BatchProcessBase<DbT5101NinteiShinseiJoho
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteijohoteikyo."
-            + "IYokaigoNinteiJohoTeikyoMapper.get要介護認定申請者");
+            + "IYokaigoNinteiJohoTeikyoMapper.get要介護認定申請情報");
     private YokaigoBatchProcessParamter processPrm;
     @BatchWriter
     private BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101Writer;
