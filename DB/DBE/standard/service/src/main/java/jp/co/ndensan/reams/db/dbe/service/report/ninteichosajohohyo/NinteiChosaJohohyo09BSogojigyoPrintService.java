@@ -52,7 +52,6 @@ public class NinteiChosaJohohyo09BSogojigyoPrintService implements INinteiChosaJ
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
             RString 認定調査票マスキング区分,
-            RString 特記事項マスキング区分,
             RString 主治医意見書マスキング区分) {
         try (ReportAssembler<NinteiChosaJohohyo02ReportSource> assembler
                 = createAssembler(new NinteiChosaJohohyo09BSogojigyoProperty(), reportManager)) {

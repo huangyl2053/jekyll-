@@ -191,7 +191,7 @@ public class NinteiChosaJohohyo52EntityEditor {
      * @param イメージID RDateTime
      * @param 認定調査票マスキング区分
      * @param 主治医意見書マスキング区分
-     * @return
+     * @return NinteiChosaJohohyoEntity
      */
     public static NinteiChosaJohohyoEntity edit(YokaigoNinteiJohoTeikyoEntity yokaigoNinteiJohoTeikyoEntity,
             List<NinteichosahyoServiceJokyo> 認定調査票サービス状況List,

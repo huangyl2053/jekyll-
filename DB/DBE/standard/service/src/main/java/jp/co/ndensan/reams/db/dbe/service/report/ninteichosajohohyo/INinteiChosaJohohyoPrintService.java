@@ -31,7 +31,6 @@ public interface INinteiChosaJohohyoPrintService {
      * @param 認定調査票調査項目List NinteichosahyoChosaItemのリスト
      * @param 認定調査票記入項目List NinteichosahyoKinyuItemのリスト
      * @param 認定調査票マスキング区分 認定調査票マスキング区分
-     * @param 特記事項マスキング区分 特記事項マスキング区分
      * @param 主治医意見書マスキング区分 主治医意見書マスキング区分
      */
     void print(YokaigoNinteiJohoTeikyoBusiness business,
@@ -41,6 +40,5 @@ public interface INinteiChosaJohohyoPrintService {
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
             RString 認定調査票マスキング区分,
-            RString 特記事項マスキング区分,
             RString 主治医意見書マスキング区分);
 }
