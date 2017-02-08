@@ -58,8 +58,6 @@ public class YokaigoNinteiJohoTeikyoHandler {
      * @param business 認定申請ビジネスクラス
      */
     public void onLoad(RString 申請書管理番号, NinnteiRiriBusiness business) {
-        div.getNinteiKekkaShosai().setIsOpen(false);
-        div.getHakkoChohyo().setIsOpen(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(検索へ戻るボタン名, false);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(申請書管理番号);
         if (被保険者情報 != null) {
