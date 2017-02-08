@@ -67,9 +67,8 @@
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         LEFT JOIN
             rgdb."DbT5913ChosainJoho" DbT5913
-            <!-- ON DbT5913."shichosonCode" = DbT5101."shichosonCode" -->
-            <!-- AND DbT5913."ninteiChosaItakusakiCode" = #{調査委託先コード} -->
-            ON DbT5913."ninteiChosaItakusakiCode" = #{調査委託先コード}
+            ON DbT5913."shichosonCode" = DbT5101."shichosonCode"
+            AND DbT5913."ninteiChosaItakusakiCode" = #{調査委託先コード}
         WHERE
             DbT5101."shinseishoKanriNo" = #{申請書管理番号}
         ORDER BY "exists調査員区分" DESC

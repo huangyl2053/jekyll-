@@ -130,14 +130,11 @@ public final class OcrChosa implements IOcrData {
 
     private boolean isBroken;
     private int lineNum;
-    @lombok.Getter(AccessLevel.PRIVATE)
-    private UUID uuid;
 
     private OcrChosa(RString line, int lineNum) {
         init(line);
         this.isBroken = false;
         this.lineNum = lineNum;
-        this.uuid = UUID.randomUUID();
     }
 
     private void init(RString line) {
@@ -442,7 +439,8 @@ public final class OcrChosa implements IOcrData {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.uuid);
+        hash = 19 * hash + Objects.hashCode(this.oCRID);
+        hash = 19 * hash + Objects.hashCode(this.sheetID);
         return hash;
     }
 
@@ -455,9 +453,9 @@ public final class OcrChosa implements IOcrData {
             return false;
         }
         final OcrChosa other = (OcrChosa) obj;
-        if (!Objects.equals(this.uuid, other.uuid)) {
+        if (this.oCRID != other.oCRID) {
             return false;
         }
-        return true;
+        return Objects.equals(this.sheetID, other.sheetID);
     }
 }

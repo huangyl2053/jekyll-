@@ -179,6 +179,9 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
             sharedFileID = r.get共有ファイルID();
             results.addAll(r.getResults());
         }
+        for (OcrSonota o : ocrSonotas) {
+            results.addSuccessIfNotContains(o);
+        }
         return results;
     }
 

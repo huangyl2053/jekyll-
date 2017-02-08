@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -443,5 +444,28 @@ public final class OcrIken implements IOcrData {
         this.主治医への結果連絡 = RString.EMPTY;
 
         this.全体イメージ表側インデックス = RString.EMPTY;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.oCRID);
+        hash = 61 * hash + Objects.hashCode(this.sheetID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OcrIken other = (OcrIken) obj;
+        if (this.oCRID != other.oCRID) {
+            return false;
+        }
+        return Objects.equals(this.sheetID, other.sheetID);
     }
 }

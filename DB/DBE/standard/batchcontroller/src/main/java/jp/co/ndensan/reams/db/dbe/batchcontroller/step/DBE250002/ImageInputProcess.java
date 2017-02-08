@@ -192,7 +192,11 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         CopyImageResult cir = (sameKeyValues.size() == 1)
                 ? copyImageFilesToDirectory_ID777or778_1line(sameKeyValues, ir)
                 : copyImageFilesToDirectory_ID777or778_2lines(sameKeyValues, ir);
-        return OcrTorikomiResultUtil.create(key, cir.getResults());
+        ProcessingResults results = new ProcessingResults(cir.getResults());
+        for (OcrIken o : sameKeyValues) {
+            results.addSuccessIfNotContains(o);
+        }
+        return OcrTorikomiResultUtil.create(key, results);
     }
 
     private OcrIken getAny_ID777優先(List<OcrIken> sameKeyValues) {
