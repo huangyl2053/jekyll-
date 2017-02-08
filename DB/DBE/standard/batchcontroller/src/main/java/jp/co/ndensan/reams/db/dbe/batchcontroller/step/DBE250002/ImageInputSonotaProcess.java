@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -99,7 +100,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
 
     @Override
     protected void process(TempOcrCsvEntity entity) {
-        final OcrSonota ocrSonota = OcrSonota.parsed(entity.getCsvData());
+        final OcrSonota ocrSonota = OcrSonota.parsed(entity.getCsvData(), entity.getLineNum());
         if (hasBreak(this.key, ocrSonota.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 _keyBreakProcess(this.key, this.cache);
@@ -123,7 +124,24 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     }
 
     private void _keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
-        this.kekkaListEditor.writeMultiLine(keyBreakProcess(key, ocrSonotas));
+        List<OcrSonota> normals = new ArrayList<>();
+        List<OcrSonota> brokens = new ArrayList<>();
+        for (OcrSonota ocrSonota : ocrSonotas) {
+            if (ocrSonota.isBroken()) {
+                brokens.add(ocrSonota);
+            } else {
+                normals.add(ocrSonota);
+            }
+        }
+        List<OcrTorikomiResult> list = new ArrayList<>();
+        list.addAll(makeErrorsForFileBroken(brokens, key));
+        list.addAll(keyBreakProcess(key, normals));
+        this.kekkaListEditor.writeMultiLine(list);
+    }
+
+    private static Collection<OcrTorikomiResult> makeErrorsForFileBroken(List<OcrSonota> brokens, ShinseiKey key) {
+        return OcrTorikomiResultUtil.create(key, brokens,
+                IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
     }
 
     private List<OcrTorikomiResult> keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {

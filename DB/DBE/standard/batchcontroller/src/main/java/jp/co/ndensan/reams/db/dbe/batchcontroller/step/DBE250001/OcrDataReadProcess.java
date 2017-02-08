@@ -203,11 +203,6 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             return makeErrorsInRelatedData(key, nrValidated);
         }
         ProcessingResults results = new ProcessingResults();
-        /* ID501のみ 調査員コード不一致チェック*/
-        //TODO
-        //関連データ取得時に依頼データを取得する。
-        //→ 依頼時の調査員コードを検査する → 警告 or エラー （パラメータ次第    ）
-
         NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
         results.addAll(saveImageFiles(ocrChosas, chosaKekka, nr));
         for (OcrChosa o : ocrChosas.values()) {
@@ -536,8 +531,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         return ProcessingResults.EMPTY;
     }
-
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="概況調査 サービスの状況フラグ">
     private static void insertOrUpdateサービスの状況フラグBy(IBatchTableWriter<? super DbT5208NinteichosahyoServiceJokyoFlagEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosas ocrChosas) {

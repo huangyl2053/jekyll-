@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
@@ -259,12 +258,11 @@ public final class OcrChosa implements IOcrData {
     private static OcrChosa parseデータ行(RString line, int lineNum) {
         OcrChosa result = new OcrChosa(line, lineNum);
         List<RString> columns = Collections.unmodifiableList(line.split(","));
-        if (columns == null || columns.isEmpty()) {
-            return result;
-        }
-        result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
-        if (result.getOCRID() == OCRID._501) {
+        OCRID ocrID = OCRID.toValueOrEMPTY(columns.get(0));
+
+        if (ocrID == OCRID._501) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
+            result.setOCRID(ocrID);
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(to西暦_年(columns.get(3)));
@@ -298,8 +296,9 @@ public final class OcrChosa implements IOcrData {
             result.set随時対応型訪問介護看護(columns.get(30));
             result.set施設利用の有無(columns.get(31));
 
-        } else if (result.getOCRID() == OCRID._502) {
+        } else if (ocrID == OCRID._502) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 62 LINES
+            result.setOCRID(ocrID);
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
             result.set申請日(to西暦_年(columns.get(3)));
@@ -364,8 +363,9 @@ public final class OcrChosa implements IOcrData {
             result.set障害高齢者の日常生活自立度(new Code(columns.get(61)));
             result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
 
-        } else if (result.getOCRID() == OCRID._550) {
+        } else if (ocrID == OCRID._550) {
             //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
+            result.setOCRID(ocrID);
             RString sheetIdValue = columns.get(1);
             result.setSheetID(new SheetID(sheetIdValue));
             result.set保険者番号(columns.get(2));
@@ -398,6 +398,8 @@ public final class OcrChosa implements IOcrData {
             list.add(new OcrTokkiJikoColumn(result.getSheetID(), 22, getListConvertingKomokuNoOrEMPTY(columns, 27)));
             list.add(new OcrTokkiJikoColumn(result.getSheetID(), 23, getListConvertingKomokuNoOrEMPTY(columns, 28)));
             result.set特記事項Columns(new OcrTokkiJikoColumns(list));
+        } else {
+            result.setBroken(true);
         }
         return result;
     }

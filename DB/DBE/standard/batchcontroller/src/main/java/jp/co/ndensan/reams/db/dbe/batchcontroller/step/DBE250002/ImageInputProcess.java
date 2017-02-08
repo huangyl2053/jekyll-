@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJohoEditor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionThe
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
@@ -28,6 +30,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAc
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIkens;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
@@ -56,8 +60,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * 主治医意見書の読み込み処理です。
@@ -108,7 +110,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @Override
     protected void process(TempOcrCsvEntity entity) {
-        final OcrIken ocrIken = OcrIken.parsed(entity.getCsvData());
+        final OcrIken ocrIken = OcrIken.parsed(entity.getCsvData(), entity.getLineNum());
         if (hasBreak(this.key, ocrIken.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 /* ブレイク処理 */
@@ -134,78 +136,67 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private void keyBreakProcess(ShinseiKey key, List<OcrIken> sameKeyValues) {
-        //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理開始">
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* イメージ取り込み処理開始")
-                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
-                .append(" 被保険者番号：").append(key.get被保険者番号())
-                .append(" 認定申請日：").append(key.get認定申請日())
-                .append(" 処理対象レコード数：").append(this.cache.size())
-                .append("*/")
-                .toString());
-        //</editor-fold>
-        //TOOD ファイルが壊れていないか判定
-
+        List<OcrTorikomiResult> list = new ArrayList<>();
+        OcrIkens ocrIkens = new OcrIkens(sameKeyValues);
+        Filterd<OcrIkens> filterdNormal = ocrIkens.filterdNormal();
+        list.addAll(makeErrorsForFileBroken(filterdNormal.rejected(), key));
         //TODO 現在、ID=777, ID=778 限定の処理となっている。ID=701等を取り込む場合には検討が必要。
-        if (isID777orID778()) {
-            this.kekkaListEditor.writeMultiLine(processID777or778(key, sameKeyValues));
-        }
-        //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理終了">
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* イメージ取り込み処理終了")
-                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
-                .append(" 被保険者番号：").append(key.get被保険者番号())
-                .append(" 認定申請日：").append(key.get認定申請日())
-                .append("*/")
-                .toString());
-//</editor-fold>
+        OcrIkens normals = filterdNormal.passed();
+        list.addAll(processID777or778(normals.filterdByOCRIDs(OCRID._777, OCRID._778), key));
+        this.kekkaListEditor.writeMultiLine(list);
     }
 
-    //TODO 要修正
-    private static boolean isID777orID778() {
-        return true;
+    private static Collection<OcrTorikomiResult> makeErrorsForFileBroken(OcrIkens brokens, ShinseiKey key) {
+        return OcrTorikomiResultUtil.create(key, brokens,
+                IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
     }
 
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
-    private List<OcrTorikomiResult> processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
+    private List<OcrTorikomiResult> processID777or778(OcrIkens ocrIkens, ShinseiKey key) {
         ImageinputMapperParamter param = toParameterToSearchRelatedData(key);
         List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(param).records();
         if (relatedData.isEmpty()) {
-            return OcrTorikomiResultUtil.create(key, sameKeyValues,
+            return OcrTorikomiResultUtil.create(key, ocrIkens,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
-        //OCRID ごとに判定が必要。
-        if (3 <= sameKeyValues.size()) {
-            return OcrTorikomiResultUtil.create(key, sameKeyValues,
-                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在);
-        }
-
         ImageinputRelate ir = relatedData.get(0);
         if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
-            return OcrTorikomiResultUtil.create(key, sameKeyValues,
+            return OcrTorikomiResultUtil.create(key, ocrIkens,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
         }
-        OcrIken ocrIken = getAny_ID777優先(sameKeyValues);
+
+        List<OcrTorikomiResult> list = new ArrayList<>();
+        ProcessingResults r = new ProcessingResults();
+        r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
+        r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
+        OcrIkens safetyInCurrent = ocrIkens.removed(r.allOcrDataInError());
+        if (safetyInCurrent.isEmpty()) {
+            return OcrTorikomiResultUtil.create(key, r);
+        }
+
+        OcrIken ocrIken = safetyInCurrent.findByOCRIDPrioritizing(OCRID._777, OCRID._778).orElse(null); // このメソッド中でnullはありえない。
         insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
         insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
 
-        CopyImageResult cir = (sameKeyValues.size() == 1)
-                ? copyImageFilesToDirectory_ID777or778_1line(sameKeyValues, ir)
-                : copyImageFilesToDirectory_ID777or778_2lines(sameKeyValues, ir);
+        CopyImageResult cir = (safetyInCurrent.size() == 1)
+                ? copyImageFilesToDirectory_ID777or778_1line(safetyInCurrent, ir)
+                : copyImageFilesToDirectory_ID777or778_2lines(safetyInCurrent, ir);
         ProcessingResults results = new ProcessingResults(cir.getResults());
-        for (OcrIken o : sameKeyValues) {
+        for (OcrIken o : safetyInCurrent) {
             results.addSuccessIfNotContains(o);
         }
         return OcrTorikomiResultUtil.create(key, results);
     }
 
-    private OcrIken getAny_ID777優先(List<OcrIken> sameKeyValues) {
-        for (OcrIken csv : sameKeyValues) {
-            if (csv.getOCRID() == OCRID._777) {
-                return csv;
-            }
+    private static IProcessingResults checkTooManyFilsToOperate(OcrIkens ocrIkens, int maxNum) {
+        if (ocrIkens.size() <= maxNum) {
+            return ProcessingResults.EMPTY;
         }
-        return sameKeyValues.get(0);
+        ProcessingResults prs = new ProcessingResults();
+        for (OcrIken o : ocrIkens) {
+            prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在));
+        }
+        return prs;
     }
 
     @lombok.Value
@@ -220,8 +211,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
     }
 
-    private CopyImageResult copyImageFilesToDirectory_ID777or778_1line(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
-        OcrIken value = sameKeyValues.get(0);
+    private CopyImageResult copyImageFilesToDirectory_ID777or778_1line(OcrIkens sameKeyValues, ImageinputRelate ir) {
+        OcrIken value = sameKeyValues.asList().get(0);
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
             ProcessingResults results = new ProcessingResults();
@@ -250,7 +241,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return catalog.find(Models.ID778, id);
     }
 
-    private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
+    private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(OcrIkens sameKeyValues, ImageinputRelate ir) {
         ProcessingResults results = new ProcessingResults();
         OcrIken777And778Pair pair = getPair(sameKeyValues);
         if (pair.hasAnyNull()) {
@@ -323,7 +314,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
     }
 
-    private static OcrIken777And778Pair getPair(List<OcrIken> ocrIkens) {
+    private static OcrIken777And778Pair getPair(OcrIkens ocrIkens) {
         OcrIken csv_777 = null;
         OcrIken csv_778 = null;
         for (OcrIken csv : ocrIkens) {
