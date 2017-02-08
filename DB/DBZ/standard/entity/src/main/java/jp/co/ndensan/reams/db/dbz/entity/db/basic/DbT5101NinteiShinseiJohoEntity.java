@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
@@ -95,6 +96,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private boolean enkitsuchiNashiDoiFlag;
     private boolean shisetsuNyushoFlag;
     private JigyoshaNo nyushoShisetsuCode;
+    private AtenaMeisho nyushoShisetsuMeisho;
     private boolean kateiHomonFlag;
     private YubinNo homonChosasakiYubinNo;
     private AtenaJusho homonChosasakiJusho;
@@ -121,6 +123,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private int saiSakuseiIraiKaisu;
     private FlexibleDate ifSofuYMD;
     private boolean logicalDeletedFlag;
+    private LasdecCode shichosonCode;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -1215,6 +1218,29 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     }
 
     /**
+     * 入所施設名称のgetメソッドです。
+     * <br/>
+     * <br/>介護事業者の名称または、医療機関の名称
+     * 
+     * @return 入所施設名称
+     */
+    @CheckForNull
+    public AtenaMeisho getNyushoShisetsuMeisho() {
+        return nyushoShisetsuMeisho;
+    }
+
+    /**
+     * 入所施設名称のsetメソッドです。
+     * <br/>
+     * <br/>介護事業者の名称または、医療機関の名称
+     * 
+     * @param nyushoShisetsuMeisho 入所施設名称
+     */
+    public void setNyushoShisetsuMeisho(AtenaMeisho nyushoShisetsuMeisho) {
+        this.nyushoShisetsuMeisho = nyushoShisetsuMeisho;
+    }
+
+    /**
      * 家庭訪問の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：家庭訪問の有無）
@@ -1733,6 +1759,25 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     }
 
     /**
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
+     */
+    @CheckForNull
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT5101NinteiShinseiJohoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -1805,6 +1850,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.enkitsuchiNashiDoiFlag = entity.enkitsuchiNashiDoiFlag;
         this.shisetsuNyushoFlag = entity.shisetsuNyushoFlag;
         this.nyushoShisetsuCode = entity.nyushoShisetsuCode;
+        this.nyushoShisetsuMeisho = entity.nyushoShisetsuMeisho;
         this.kateiHomonFlag = entity.kateiHomonFlag;
         this.homonChosasakiYubinNo = entity.homonChosasakiYubinNo;
         this.homonChosasakiJusho = entity.homonChosasakiJusho;
@@ -1831,6 +1877,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.saiSakuseiIraiKaisu = entity.saiSakuseiIraiKaisu;
         this.ifSofuYMD = entity.ifSofuYMD;
         this.logicalDeletedFlag = entity.logicalDeletedFlag;
+        this.shichosonCode = entity.shichosonCode;
     }
 
     /**
@@ -1839,7 +1886,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteiChosaItakusakiCode, ninteiChosainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, shichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkiTsuchiHakkoYMD, enkiTsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, koshinTsuchiHakkoYMD, koshinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
+        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteiChosaItakusakiCode, ninteiChosainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, nyushoShisetsuMeisho, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, shichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkiTsuchiHakkoYMD, enkiTsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, koshinTsuchiHakkoYMD, koshinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag, shichosonCode);
     }
 
 // </editor-fold>
