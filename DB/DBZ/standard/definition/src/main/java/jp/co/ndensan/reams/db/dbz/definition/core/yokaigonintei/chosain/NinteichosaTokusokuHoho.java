@@ -18,23 +18,25 @@ public enum NinteichosaTokusokuHoho {
     /**
      * 督促状郵送。
      */
-    督促状郵送(new RString("0")),
+    督促状郵送("0", "督促状郵送"),
     /**
      * 督促状ＦＡＸ。
      */
-    督促状ＦＡＸ(new RString("1")),
+    督促状ＦＡＸ("1", "督促状ＦＡＸ"),
     /**
      * 電話。
      */
-    電話(new RString("2")),
+    電話("2", "電話"),
     /**
      * その他。
      */
-    その他(new RString("3"));
+    その他("3", "その他");
     private final RString 督促方法コード;
+    private final RString fullName;
 
-    private NinteichosaTokusokuHoho(RString 督促方法コード) {
-        this.督促方法コード = 督促方法コード;
+    private NinteichosaTokusokuHoho(String 督促方法コード, String fullname) {
+        this.督促方法コード = new RString(督促方法コード);
+        this.fullName = new RString(fullname);
     }
 
     /**
@@ -44,6 +46,15 @@ public enum NinteichosaTokusokuHoho {
      */
     public RString getCode() {
         return 督促方法コード;
+    }
+
+    /**
+     * 認定調査督促方法を現すコードの名称を返します。
+     *
+     * @return 認定調査督促方法コードの名称
+     */
+    public RString get名称() {
+        return fullName;
     }
 
     /**

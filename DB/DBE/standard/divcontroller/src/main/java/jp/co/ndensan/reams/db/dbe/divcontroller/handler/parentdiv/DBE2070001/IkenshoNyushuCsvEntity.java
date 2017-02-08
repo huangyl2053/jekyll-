@@ -46,13 +46,15 @@ public class IkenshoNyushuCsvEntity {
     private final RString ikenshoKinyuYMD;
     @CsvField(order = 140, name = "督促発行日")
     private final RString ikenshoSakuseiTokusokuYMD;
-    @CsvField(order = 150, name = "方法")
+    @CsvField(order = 150, name = "方法区分")
+    private final RString ikenshoSakuseiTokusokuHohoKubun;
+    @CsvField(order = 160, name = "方法")
     private final RString ikenshoSakuseiTokusokuHoho;
-    @CsvField(order = 160, name = "回数")
+    @CsvField(order = 170, name = "回数")
     private final Decimal ikenshoTokusokuKaisu;
-    @CsvField(order = 170, name = "期限")
+    @CsvField(order = 180, name = "期限")
     private final RString ikenshoSakuseiKigenYMD;
-    @CsvField(order = 180, name = "経過日数")
+    @CsvField(order = 190, name = "経過日数")
     private final int datesu;
 
     /**
@@ -72,6 +74,7 @@ public class IkenshoNyushuCsvEntity {
      * @param ikenshoReadYMD 意見書_定型_定形外
      * @param ikenshoKinyuYMD 意見書読取日
      * @param ikenshoSakuseiTokusokuYMD 督促発行日
+     * @param ikenshoSakuseiTokusokuHohoKubun 方法区分
      * @param ikenshoSakuseiTokusokuHoho 方法
      * @param ikenshoTokusokuKaisu 回数
      * @param ikenshoSakuseiKigenYMD 期限
@@ -92,6 +95,7 @@ public class IkenshoNyushuCsvEntity {
             RString ikenshoReadYMD,
             RString ikenshoKinyuYMD,
             RString ikenshoSakuseiTokusokuYMD,
+            RString ikenshoSakuseiTokusokuHohoKubun,
             RString ikenshoSakuseiTokusokuHoho,
             Decimal ikenshoTokusokuKaisu,
             RString ikenshoSakuseiKigenYMD,
@@ -110,6 +114,7 @@ public class IkenshoNyushuCsvEntity {
         this.ikenshoReadYMD = ikenshoReadYMD;
         this.ikenshoKinyuYMD = ikenshoKinyuYMD;
         this.ikenshoSakuseiTokusokuYMD = ikenshoSakuseiTokusokuYMD;
+        this.ikenshoSakuseiTokusokuHohoKubun = ikenshoSakuseiTokusokuHohoKubun;
         this.ikenshoSakuseiTokusokuHoho = ikenshoSakuseiTokusokuHoho;
         this.ikenshoTokusokuKaisu = ikenshoTokusokuKaisu;
         this.ikenshoSakuseiKigenYMD = ikenshoSakuseiKigenYMD;
