@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n8429
  */
 @lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE250001_NinteiChosaKekkaTorikomiParameter extends BatchParameterBase {
 
@@ -28,13 +29,16 @@ public class DBE250001_NinteiChosaKekkaTorikomiParameter extends BatchParameterB
 
     @BatchParameter(key = KYOYU_FILE_ENTRY, name = "共有ファイルエントリ情報文字列")
     private RString 共有ファイルエントリ情報文字列;
-    @BatchParameter(key = "2", name = "イチジハンテイズミの申請者")
+    @BatchParameter(name = "一次判定済みの申請者")
     private TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
-    @BatchParameter(key = "3", name = "依頼時と実施時での調査員の不一致")
+    @BatchParameter(name = "依頼時と実施時での調査員の不一致")
     private TreatmentWhenChosainFuicchi 調査員不一致時処理方法;
-    @BatchParameter(key = "4", name = "以前の取込結果との連番の重複")
+    @BatchParameter(name = "以前の取込結果との連番の重複")
     private TreatmentWhenTokkiRembanChofuku 特記連番重複時処理方法;
 
+    /**
+     * バッチ基盤でパラメータを作成する際に用いられるコンストラクタです。
+     */
     public DBE250001_NinteiChosaKekkaTorikomiParameter() {
     }
 

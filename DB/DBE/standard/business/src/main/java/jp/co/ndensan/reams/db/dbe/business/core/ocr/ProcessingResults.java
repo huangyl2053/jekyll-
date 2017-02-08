@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,6 +20,45 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
  * 複数の{@link IProcessingResult}を保持します。
  */
 public final class ProcessingResults implements IProcessingResults {
+
+    /**
+     * 空のインスタンスです。
+     */
+    public static final IProcessingResults EMPTY;
+
+    static {
+        EMPTY = new IProcessingResults() {
+            @Override
+            public boolean hasError() {
+                return false;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return true;
+            }
+
+            @Override
+            public Set<IOcrData> allOcrDataNotError() {
+                return Collections.emptySet();
+            }
+
+            @Override
+            public Set<IOcrData> allOcrDataInError() {
+                return Collections.emptySet();
+            }
+
+            @Override
+            public Collection<IProcessingResult> values() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public Iterator<IProcessingResult> iterator() {
+                return Collections.emptyIterator();
+            }
+        };
+    }
 
     private final Map<Type, List<IProcessingResult>> elements;
 
@@ -33,14 +73,37 @@ public final class ProcessingResults implements IProcessingResults {
     }
 
     /**
+     * 指定の{@link IProcessingResults}を保持するインスタンスを生成します。
+     *
+     * @param results 最初に保持する{@link IProcessingResults}
+     */
+    public ProcessingResults(IProcessingResults results) {
+        this();
+        addAll(results);
+    }
+
+    /**
+     * 指定の{@link IProcessingResult}を保持するインスタンスを生成します。
+     *
+     * @param result 最初に保持する{@link IProcessingResults}
+     */
+    public ProcessingResults(IProcessingResult result) {
+        this();
+        add(result);
+    }
+
+    /**
      * @param pr 追加する{@link IProcessingResult}
      */
-    @Override
     public void add(IProcessingResult pr) {
         this.elements.get(pr.type()).add(pr);
     }
 
-    @Override
+    /**
+     * 指定の{@link IProcessingResults}が保持する{@link IProcessingResult}をすべて追加します。
+     *
+     * @param prs 追加する{@link IProcessingResults}
+     */
     public void addAll(IProcessingResults prs) {
         for (IProcessingResult pr : prs) {
             this.add(pr);

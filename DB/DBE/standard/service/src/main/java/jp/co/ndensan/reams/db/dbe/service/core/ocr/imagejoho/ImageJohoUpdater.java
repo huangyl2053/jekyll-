@@ -67,7 +67,7 @@ public class ImageJohoUpdater {
     }
 
     public Result save(IBatchTableWriter<? super DbT5115ImageEntity> dbWriter) {
-        IProcessingResults result = new ProcessingResults();
+        ProcessingResults result = new ProcessingResults();
 
         RString targetDirectoryPath = Directory.createTmpDirectory();
         CopyImageResult copyImageResult = copyImageFilesToDirectory(targetImageFileNames, targetDirectoryPath,

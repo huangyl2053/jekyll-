@@ -146,7 +146,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     }
 
     private IProcessingResults copyImageFiles(List<OcrSonota> ocrSonotas, ImageinputRelate ir) {
-        IProcessingResults results = new ProcessingResults();
+        ProcessingResults results = new ProcessingResults();
         Map<OcrSonota, CatalogLine> haveCatalogLines = new HashMap<>();
         for (OcrSonota ocrSonota : ocrSonotas) {
             CatalogLine cl = this.catalog.find(Models.ID801, ocrSonota.getSheetID()).orElse(null);

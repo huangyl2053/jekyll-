@@ -5,12 +5,23 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResultSeed;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -199,26 +210,85 @@ public class NinteiOcrRelate {
     }
 
     /**
-     * @return {@link IProcessingResult}
+     * @return 認定調査の依頼日
      */
-    public IProcessingResultSeed validate() {
-//        if (get厚労省IF識別コード() == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3) {
-//            return ProcessingResultFactory.error(OcrTorikomiMessages.過去制度での申請);
-//        }
-//        if (!matches指定申請日()) {
-//            if (has論理削除()) {
-//                return ProcessingResultFactory.error(OcrTorikomiMessages.有効な要介護認定申請なし);
-//            }
-//            return ProcessingResultFactory.error(
-//                    OcrTorikomiMessages.申請日一致なし_直近申請日提示.replaced(
-//                            entity.get認定申請日().seireki().toDateString().toString()
-//                    )
-//            );
-//        }
-//        if (has論理削除()) {
-//            return ProcessingResultFactory.error(OcrTorikomiMessages.削除された申請);
-//        }
-//        return ProcessingResultFactory.success();
-        return null;
+    public FlexibleDate get調査依頼日() {
+        return entity.get認定調査依頼日();
+    }
+
+    /**
+     * @return 一次判定実施済みの場合、{@code true}.
+     */
+    public boolean has一次判定() {
+        return entity.get一次判定完了日() != null && !entity.get一次判定完了日().isEmpty();
+    }
+
+    /**
+     * {@link NinteiOcrRelate}生成時の処理状況を持ちます。
+     */
+    @lombok.Getter
+    public static class Context {
+
+        private final List<IOcrData> ocrData;
+        private final TreatmentWhenIchijiHanteiZumi 一次判定済時処理;
+
+        /**
+         * @param ocrData 対応する{@link IOcrData}すべて
+         * @param 一次判定済時処理 {@link TreatmentWhenIchijiHanteiZumi}
+         */
+        public Context(Collection<? extends IOcrData> ocrData, TreatmentWhenIchijiHanteiZumi 一次判定済時処理) {
+            this.ocrData = Collections.unmodifiableList(new ArrayList<>(ocrData));
+            this.一次判定済時処理 = 一次判定済時処理;
+        }
+    }
+
+    /**
+     * @param context {@link Context}
+     * @return {@link IProcessingResults}
+     */
+    public IProcessingResults validate(Context context) {
+        if (OLD_KOROSHO_IF_CODES.contains(get厚労省IF識別コード())) {
+            return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.過去制度での申請);
+        }
+        if (!matches指定申請日()) {
+            if (has論理削除()) {
+                return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
+            }
+            return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.申請日一致なし_直近申請日提示
+                    .replaced(entity.get認定申請日().seireki().toDateString().toString()));
+        }
+        if (has論理削除()) {
+            return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.削除された申請);
+        }
+        if (has一次判定()) {
+            switch (context.get一次判定済時処理()) {
+                case エラーとする:
+                    return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.一次判定済みの申請_エラー);
+                default:
+                    return createResults(context.getOcrData(), Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告);
+            }
+        }
+        return ProcessingResults.EMPTY;
+    }
+
+    private static final List<KoroshoIfShikibetsuCode> OLD_KOROSHO_IF_CODES;
+
+    static {
+        OLD_KOROSHO_IF_CODES = Collections.unmodifiableList(
+                Arrays.asList(KoroshoIfShikibetsuCode.認定ｿﾌﾄ99, KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002,
+                        KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用, KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009)
+        );
+    }
+
+    private IProcessingResults createResults(Collection<? extends IOcrData> ocrData, Type type, OcrTorikomiMessages messageToNote) {
+        return createResults(ocrData, type, messageToNote.originalMessage());
+    }
+
+    private IProcessingResults createResults(Collection<? extends IOcrData> ocrData, Type type, RString messageToNote) {
+        ProcessingResults results = new ProcessingResults();
+        for (IOcrData o : ocrData) {
+            results.add(ProcessingResultFactory.create(type, o, messageToNote));
+        }
+        return results;
     }
 }

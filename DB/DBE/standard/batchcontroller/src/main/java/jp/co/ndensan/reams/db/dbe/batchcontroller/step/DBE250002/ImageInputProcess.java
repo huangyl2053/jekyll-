@@ -220,7 +220,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         OcrIken value = sameKeyValues.get(0);
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
-            IProcessingResults results = new ProcessingResults();
+            ProcessingResults results = new ProcessingResults();
             results.add(ProcessingResultFactory.error(value, OcrTorikomiMessages.カタログデータなし));
             return new CopyImageResult(ir.getSharedFileIDOrNull(), results);
         }
@@ -247,7 +247,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
-        IProcessingResults results = new ProcessingResults();
+        ProcessingResults results = new ProcessingResults();
         OcrIken777And778Pair pair = getPair(sameKeyValues);
         if (pair.hasAnyNull()) {
             OcrIken ocrIken = pair.findNonnullValue();
