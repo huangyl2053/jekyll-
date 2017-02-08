@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosai
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -244,7 +246,39 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
+
+        boolean 未保存データ有 = false;
+        if (!(new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
+                .equals(ResponseHolder.getMessageCode())) {
+            未保存データ有 = has未保存データ(requestDiv, 未保存データ有);
+        }
+        if (未保存データ有) {
+            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.変更未保存の確認.getMessage().getCode(),
+                    DbzQuestionMessages.変更未保存の確認.getMessage().evaluate());
+            return ResponseData.of(requestDiv).addMessage(message).respond();
+        }
+        if ((new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(requestDiv).respond();
+        } else if ((new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        }
+
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private boolean has未保存データ(NinteichosaIraiDiv requestDiv, boolean 未保存データ有) {
+        for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
+            RString 状態 = new RString(row.getRowState().toString());
+            if (状態.equals(修正)) {
+                未保存データ有 = true;
+                break;
+            }
+        }
+        return 未保存データ有;
     }
 
     /**
@@ -393,11 +427,11 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
@@ -547,16 +581,16 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace("認定調査依頼").evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護認定完了情報更新(requestDiv.getDgNinteiTaskList().getSelectedItems());
             requestDiv.getCcdKanryoMsg().setMessage(
-                    new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
+                    new RString("基本運用・認定調査依頼の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             FlowParameters fp = FlowParameters.of(new RString("key"), "Kanryo");
             FlowParameterAccessor.merge(fp);
