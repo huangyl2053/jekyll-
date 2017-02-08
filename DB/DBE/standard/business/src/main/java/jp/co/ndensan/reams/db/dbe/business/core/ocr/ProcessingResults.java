@@ -61,15 +61,17 @@ public final class ProcessingResults implements IProcessingResults {
     }
 
     private final Map<Type, List<IProcessingResult>> elements;
+    private final Set<IOcrData> keySet;
 
     /**
      * インスタンスを生成します。
      */
     public ProcessingResults() {
-        elements = new HashMap<>();
-        elements.put(Type.ERROR, new ArrayList<IProcessingResult>());
-        elements.put(Type.WARNING, new ArrayList<IProcessingResult>());
-        elements.put(Type.SUCCESS, new ArrayList<IProcessingResult>());
+        this.elements = new HashMap<>();
+        this.elements.put(Type.ERROR, new ArrayList<IProcessingResult>());
+        this.elements.put(Type.WARNING, new ArrayList<IProcessingResult>());
+        this.elements.put(Type.SUCCESS, new ArrayList<IProcessingResult>());
+        this.keySet = new HashSet<>();
     }
 
     /**
@@ -79,7 +81,7 @@ public final class ProcessingResults implements IProcessingResults {
      */
     public ProcessingResults(IProcessingResults results) {
         this();
-        addAll(results);
+        this.addAll(results);
     }
 
     /**
@@ -89,7 +91,16 @@ public final class ProcessingResults implements IProcessingResults {
      */
     public ProcessingResults(IProcessingResult result) {
         this();
-        add(result);
+        this.add(result);
+    }
+
+    /**
+     * @param ocrData
+     */
+    public void addSuccessIfNotContains(IOcrData ocrData) {
+        if (!this.keySet.contains(ocrData)) {
+            this.add(ProcessingResultFactory.success(ocrData));
+        }
     }
 
     /**
@@ -97,6 +108,7 @@ public final class ProcessingResults implements IProcessingResults {
      */
     public void add(IProcessingResult pr) {
         this.elements.get(pr.type()).add(pr);
+        this.keySet.add(pr.ocrData());
     }
 
     /**
@@ -119,7 +131,7 @@ public final class ProcessingResults implements IProcessingResults {
     public Collection<IProcessingResult> values() {
         List<IProcessingResult> list = new ArrayList<>();
         for (List<IProcessingResult> e : this.elements.values()) {
-            list.addAll(list);
+            list.addAll(e);
         }
         return list;
     }
@@ -150,10 +162,7 @@ public final class ProcessingResults implements IProcessingResults {
 
     @Override
     public Set<IOcrData> allOcrDataNotError() {
-        Set<IOcrData> set = new HashSet<>();
-        for (IProcessingResult pr : values()) {
-            set.add(pr.ocrData());
-        }
+        Set<IOcrData> set = new HashSet<>(this.keySet);
         set.removeAll(allOcrDataInError());
         return set;
     }

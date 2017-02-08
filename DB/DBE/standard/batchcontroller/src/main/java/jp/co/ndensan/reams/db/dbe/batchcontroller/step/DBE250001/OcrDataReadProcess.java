@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomi
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5115ImageEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaContextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekkatorikomiocr.INinteiOcrMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
@@ -209,6 +210,9 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
         NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
         results.addAll(saveImageFiles(ocrChosas, chosaKekka, nr));
+        for (OcrChosa o : ocrChosas.values()) {
+            results.addSuccessIfNotContains(o);
+        }
         return OcrTorikomiResultUtil.create(key, results);
     }
 
@@ -224,12 +228,13 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     CopyImageResult501 saveImageResult = copyImageFilesToDirectory_ID501(
                             entry.getOcrChosas(), nr, sharedFileID);
                     sharedFileID = saveImageResult.getSharedFileID();
-                    IProcessingResults prs = saveImageResult.getResults();
+                    ProcessingResults prs = new ProcessingResults(saveImageResult.getResults());
                     results.addAll(prs);
                     if (prs.hasError()) {
                         continue;
                     }
-                    insertOrUpdate概況調査By(writerGaikyo, entity, nr, _501, getMapper(INinteiOcrMapper.class), this.processParameter);
+                    prs.addAll(insertOrUpdate概況調査By(writerGaikyo, entity, nr, _501,
+                            getMapper(INinteiOcrMapper.class), this.processParameter));
                     insertOrUpdateサービスの状況By(writerService, entity, nr, _501);
                     insertOrUpdateサービスの状況フラグBy(writerServiceFlag, entity, nr, _501);
                     insertOrUpdate施設利用By(writerShisetsu, entity, nr, _501);
@@ -430,14 +435,18 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
 //--  DBの更新  -----------------------------------------------------------------
     //<editor-fold defaultstate="collapsed" desc="概況調査">
-    private static void insertOrUpdate概況調査By(IBatchTableWriter<? super DbT5202NinteichosahyoGaikyoChosaEntity> dbWriter,
+    private static IProcessingResults insertOrUpdate概況調査By(IBatchTableWriter<? super DbT5202NinteichosahyoGaikyoChosaEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosas ocrChosas, INinteiOcrMapper mapper,
             OcrDataReadProcessParameter batchParam) {
         if (ocrChosas.size() != 1) {
-            return;
+            return ProcessingResults.EMPTY;
         }
         OcrChosa ocrChosa = ocrChosas.findFirst().get();
-        DbT5202NinteichosahyoGaikyoChosaEntity entity = createOrEdit概況調査(ninteiChosaEntity, nr, ocrChosa, mapper, batchParam);
+        DbT5202NinteichosahyoGaikyoChosaEntity entity = createOrEdit概況調査(ninteiChosaEntity, nr, ocrChosa);
+        IProcessingResults results = validateDbT5202(entity, nr, ocrChosa, mapper, batchParam);
+        if (results.hasError()) {
+            return results;
+        }
         switch (entity.getState()) {
             case Added:
                 dbWriter.insert(entity);
@@ -447,22 +456,19 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 break;
             default:
         }
+        return ProcessingResults.EMPTY;
     }
 
     private static DbT5202NinteichosahyoGaikyoChosaEntity createOrEdit概況調査(
-            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosa ocrChosa, INinteiOcrMapper mapper, OcrDataReadProcessParameter batchParam) {
+            NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosa ocrChosa) {
         DbT5202NinteichosahyoGaikyoChosaEntity entity = ninteiChosaEntity.get概況調査().isEmpty()
-                ? newDbT5202NinteichosahyoGaikyoChosaEntity(nr, ocrChosa)
+                ? newDbT5202NinteichosahyoGaikyoChosaEntity(nr)
                 : ninteiChosaEntity.get概況調査().get(0);
-        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(
-                nr.get申請書管理番号(), ocrChosa.get所属機関(), ocrChosa.get記入者());
-        OcrNinteichosahyoGakyoChosaEditor.Context context
-                = new OcrNinteichosahyoGakyoChosaEditor.Context(ocrChosa, mapper.getNinteiChosaContext(param), nr, batchParam);
-        OcrNinteichosahyoGakyoChosaEditor.edit(entity, context);
+        OcrNinteichosahyoGakyoChosaEditor.edit(entity, ocrChosa);
         return entity;
     }
 
-    private static DbT5202NinteichosahyoGaikyoChosaEntity newDbT5202NinteichosahyoGaikyoChosaEntity(NinteiOcrRelate nr, OcrChosa ocrChosa) {
+    private static DbT5202NinteichosahyoGaikyoChosaEntity newDbT5202NinteichosahyoGaikyoChosaEntity(NinteiOcrRelate nr) {
         DbT5202NinteichosahyoGaikyoChosaEntity entity = new DbT5202NinteichosahyoGaikyoChosaEntity();
         entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
@@ -474,8 +480,64 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setNinteiChosaKubunCode(ChosaKubun.新規調査.asCode());
         return entity;
     }
-    //</editor-fold>
 
+    private static IProcessingResults validateDbT5202(DbT5202NinteichosahyoGaikyoChosaEntity entity,
+            NinteiOcrRelate nr, OcrChosa ocrChosa, INinteiOcrMapper mapper, OcrDataReadProcessParameter batchParam) {
+        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(
+                nr.get申請書管理番号(), ocrChosa.get所属機関(), ocrChosa.get記入者());
+        NinteiChosaContextEntity context = mapper.getNinteiChosaContext(param);
+
+        ProcessingResults results = new ProcessingResults();
+        if (!nr.get調査依頼日().isBeforeOrEquals(entity.getNinteichosaJisshiYMD())) {
+            results.add(
+                    ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.TODO)
+            );
+            return results;
+        }
+        RString newChosaItakusakiCode = entity.getChosaItakusakiCode().value();
+        if (context.getExists調査員区分() == null) {
+            results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.委託先_不存在
+                    .replaced(newChosaItakusakiCode.toString()))
+            );
+            return results;
+        }
+        if (!context.getExists調査員区分()) {
+            boolean matches所属機関 = newChosaItakusakiCode.equals(nr.get認定調査委託先コード());
+            switch (batchParam.get調査員不一致時処理方法()) {
+                case エラーとする:
+                    results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査員_不存在
+                            .replaced(newChosaItakusakiCode.toString(), entity.getChosainCode().toString())));
+                    return results;
+                case 所属機関が一致すればエラーとしない:
+                    if (!matches所属機関) {
+                        results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
+                                replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
+                                        nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
+                                )
+                        ));
+                        return results;
+                    }
+                default:
+            }
+            if (matches所属機関) {
+                results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる調査員.
+                        replaced(newChosaItakusakiCode.toString(),
+                                nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
+                        )
+                ));
+            } else {
+                results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
+                        replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
+                                nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
+                        )
+                ));
+            }
+            return results;
+        }
+        return ProcessingResults.EMPTY;
+    }
+
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="概況調査 サービスの状況フラグ">
     private static void insertOrUpdateサービスの状況フラグBy(IBatchTableWriter<? super DbT5208NinteichosahyoServiceJokyoFlagEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosas ocrChosas) {

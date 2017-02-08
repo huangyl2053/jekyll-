@@ -30,71 +30,19 @@ public final class OcrNinteichosahyoGakyoChosaEditor {
     private OcrNinteichosahyoGakyoChosaEditor() {
     }
 
-    @lombok.AllArgsConstructor
-    public static final class Context {
-
-        @lombok.Getter
-        private final OcrChosa ocrChosa;
-        private final NinteiChosaContextEntity entity;
-        private final NinteiOcrRelate relatedData;
-        private final OcrDataReadProcessParameter batchParam;
-
-        boolean exsits調査委託先() {
-            return entity.getExists調査員区分() != null;
-        }
-
-        boolean exisits調査員() {
-            if (!exsits調査委託先()) {
-                return false;
-            }
-            return entity.getExists調査員区分();
-        }
-
-        TreatmentWhenChosainFuicchi get調査員不一致時処理() {
-            return this.batchParam.get調査員不一致時処理方法();
-        }
-
-        FlexibleDate get調査依頼日() {
-            return this.relatedData.get調査依頼日();
-        }
-
-        RString get依頼調査委託先コード() {
-            return this.relatedData.get認定調査委託先コード();
-        }
-    }
-
-    @lombok.Getter
-    @lombok.AllArgsConstructor(access = AccessLevel.PRIVATE)
-    public static final class Result {
-
-        private final DbT5202NinteichosahyoGaikyoChosaEntity entity;
-        private final IProcessingResults results;
-    }
-
     /**
      * @param entity {@link DbT5202NinteichosahyoGaikyoChosaEntity}
-     * @param context {@link Context}
+     * @param ocrChosa {@link OcrChosa}
      * @return
      * 指定の{@link DbT5202NinteichosahyoGaikyoChosaEntity}を{@link OcrChosa}の内容で編集したインスタンス
      */
-    public static DbT5202NinteichosahyoGaikyoChosaEntity edit(DbT5202NinteichosahyoGaikyoChosaEntity entity, Context context) {
-        ProcessingResults resutls = new ProcessingResults();
+    public static DbT5202NinteichosahyoGaikyoChosaEntity edit(DbT5202NinteichosahyoGaikyoChosaEntity entity, OcrChosa ocrChosa) {
         for (Editor editor : Editor.values()) {
-            RString value = editor.getValueFrom(context.getOcrChosa());
+            RString value = editor.getValueFrom(ocrChosa);
             if (RString.isNullOrEmpty(value)) {
                 continue;
             }
             editor.set(value, entity);
-        }
-
-        if (!context.exsits調査委託先()) {
-            resutls.add(ProcessingResultFactory.error(context.getOcrChosa(), OcrTorikomiMessages.TODO));
-        }
-        if (!context.exisits調査員()) {
-            resutls.add(ProcessingResultFactory.error(context.getOcrChosa(), OcrTorikomiMessages.TODO));
-        }
-        if (!entity.getChosaItakusakiCode().value().equals(context.get依頼調査委託先コード())) {
-            resutls.add(ProcessingResultFactory.error(context.getOcrChosa(), OcrTorikomiMessages.TODO));
         }
         return entity;
     }
@@ -110,17 +58,6 @@ public final class OcrNinteichosahyoGakyoChosaEditor {
                     @Override
                     void set(RString value, DbT5202NinteichosahyoGaikyoChosaEntity entity) {
                         entity.setNinteichosaJisshiYMD(new FlexibleDate(value));
-                    }
-
-                    @Override
-                    IProcessingResults validate(RString value, Context context) {
-                        FlexibleDate date = new FlexibleDate(value);
-                        if (!context.get調査依頼日().isBeforeOrEquals(date)) {
-                            return new ProcessingResults(
-                                    ProcessingResultFactory.error(context.getOcrChosa(), OcrTorikomiMessages.TODO)
-                            );
-                        }
-                        return ProcessingResults.EMPTY;
                     }
                 },
         調査員コード {
@@ -179,10 +116,6 @@ public final class OcrNinteichosahyoGakyoChosaEditor {
         abstract RString getValueFrom(OcrChosa ocrChosa);
 
         abstract void set(RString value, DbT5202NinteichosahyoGaikyoChosaEntity entity);
-
-        IProcessingResults validate(RString value, Context context) {
-            return ProcessingResults.EMPTY;
-        }
 
         private static final RString TRUE = new RString("1");
 

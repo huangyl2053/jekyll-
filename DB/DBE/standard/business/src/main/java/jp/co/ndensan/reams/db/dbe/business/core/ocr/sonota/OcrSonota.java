@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class OcrSonota implements IOcrData {
 
     private final RString データ行_文字列;
-    private final UUID uuid;
     private OCRID oCRID = OCRID.EMPTY;
     private ShinseiKey key = ShinseiKey.EMPTY;
     private SheetID sheetID = SheetID.EMPTY;
@@ -32,7 +31,6 @@ public final class OcrSonota implements IOcrData {
     private RString 被保険者番号 = RString.EMPTY;
 
     private OcrSonota(RString line) {
-        this.uuid = UUID.randomUUID();
         this.データ行_文字列 = line;
         init(this.データ行_文字列);
     }
@@ -76,7 +74,8 @@ public final class OcrSonota implements IOcrData {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.uuid);
+        hash = 47 * hash + Objects.hashCode(this.oCRID);
+        hash = 47 * hash + Objects.hashCode(this.sheetID);
         return hash;
     }
 
@@ -89,9 +88,9 @@ public final class OcrSonota implements IOcrData {
             return false;
         }
         final OcrSonota other = (OcrSonota) obj;
-        if (!Objects.equals(this.uuid, other.uuid)) {
+        if (this.oCRID != other.oCRID) {
             return false;
         }
-        return true;
+        return Objects.equals(this.sheetID, other.sheetID);
     }
 }

@@ -18,9 +18,13 @@ public enum TreatmentWhenChosainFuicchi {
      */
     エラーとする("1"),
     /**
+     *
+     */
+    所属機関が一致すればエラーとしない("2"),
+    /**
      * エラーとしない
      */
-    エラーとしない("2");
+    エラーとしない("3");
 
     private final RString theCode;
 
