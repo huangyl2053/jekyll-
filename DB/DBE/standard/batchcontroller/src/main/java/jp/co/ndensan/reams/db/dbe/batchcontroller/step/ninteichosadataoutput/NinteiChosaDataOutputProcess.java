@@ -47,6 +47,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE224001");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString csv拡張子 = new RString(".csv");
     private NinteiChosaDataCsvProcessParamter processParamter;
 //    private FileSpoolManager manager;
     private RString eucFilePath;
@@ -58,7 +59,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     protected void initialize() {
 //        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
 //        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
-        eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
+        eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()).concat(csv拡張子));
     }
 
     @Override
