@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,7 +25,7 @@ public class ImageinputRelateEntity {
     private RString t5101_被保険者番号;
     private RString t5101_被保険者氏名;
     private RString t5101_被保険者カナ;
-    private RString t5101_認定申請年月日;
+    private FlexibleDate t5101_認定申請年月日;
     private boolean t5101_施設入所の有無;
     private RString t7051_市町村名称;
     private RString t5101_申請書管理番号;
@@ -37,10 +38,9 @@ public class ImageinputRelateEntity {
     private RString t5101_厚労省IF識別コード;
     private RString t5301_主治医意見書作成依頼年月日;
     private RString t5301_主治医意見書依頼区分;
-    private RString t5301_主治医医療機関コード;
-    private RString t5301_主治医コード;
     private int t5301_主治医意見書作成依頼履歴番号;
     private List<DbT5302ShujiiIkenshoJohoEntity> 主治医意見書情報;
+    private FlexibleDate t5105_一次判定完了日;
     private boolean matches指定申請日;
 
 }

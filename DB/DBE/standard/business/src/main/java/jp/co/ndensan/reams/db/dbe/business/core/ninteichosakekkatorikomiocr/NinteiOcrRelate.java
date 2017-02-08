@@ -6,16 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -31,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1540-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinteiOcrRelate {
+public class NinteiOcrRelate extends RelatedDataBase {
 
     private final NinteiChosaKekkaTorikomiOcrRelateEntity entity;
 
@@ -63,34 +59,6 @@ public class NinteiOcrRelate {
     }
 
     /**
-     * @return 被保険者氏名
-     */
-    public RString get被保険者氏名() {
-        return entity.get被保険者氏名();
-    }
-
-    /**
-     * @return 被保険者カナ
-     */
-    public RString get被保険者カナ() {
-        return entity.get被保険者カナ();
-    }
-
-    /**
-     * @return 論理削除済みの場合、{@code true}.
-     */
-    public boolean has論理削除() {
-        return entity.is論理削除フラグ();
-    }
-
-    /**
-     * @return 検索時に指定した申請日と合致する場合、{@code true}.それ以外の場合、{@code false}.
-     */
-    public boolean matches指定申請日() {
-        return entity.isMatches指定申請日();
-    }
-
-    /**
      * 保険者を取得します。
      *
      * @return 保険者
@@ -106,15 +74,6 @@ public class NinteiOcrRelate {
      */
     public RString get申請区分() {
         return entity.get申請区分();
-    }
-
-    /**
-     * 厚労省IF識別コードを取得します。
-     *
-     * @return 厚労省IF識別コード
-     */
-    public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
-        return KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード());
     }
 
     /**
@@ -216,9 +175,37 @@ public class NinteiOcrRelate {
         return entity.get認定調査依頼日();
     }
 
-    /**
-     * @return 一次判定実施済みの場合、{@code true}.
-     */
+    @Override
+    public RString get被保険者氏名() {
+        return entity.get被保険者氏名();
+    }
+
+    @Override
+    public RString get被保険者カナ() {
+        return entity.get被保険者カナ();
+    }
+
+    @Override
+    protected FlexibleDate get認定申請日() {
+        return entity.get認定申請日();
+    }
+
+    @Override
+    public boolean matches指定申請日() {
+        return entity.isMatches指定申請日();
+    }
+
+    @Override
+    public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
+        return KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード());
+    }
+
+    @Override
+    public boolean has論理削除() {
+        return entity.is論理削除フラグ();
+    }
+
+    @Override
     public boolean has一次判定() {
         return entity.get一次判定完了日() != null && !entity.get一次判定完了日().isEmpty();
     }
@@ -227,7 +214,7 @@ public class NinteiOcrRelate {
      * {@link NinteiOcrRelate}生成時の処理状況を持ちます。
      */
     @lombok.Getter
-    public static class Context {
+    public static class Context implements RelatedDataBase.IContext {
 
         private final List<IOcrData> ocrData;
         private final TreatmentWhenIchijiHanteiZumi 一次判定済時処理;
@@ -247,48 +234,6 @@ public class NinteiOcrRelate {
      * @return {@link IProcessingResults}
      */
     public IProcessingResults validate(Context context) {
-        if (OLD_KOROSHO_IF_CODES.contains(get厚労省IF識別コード())) {
-            return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.過去制度での申請);
-        }
-        if (!matches指定申請日()) {
-            if (has論理削除()) {
-                return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
-            }
-            return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.申請日一致なし_直近申請日提示
-                    .replaced(entity.get認定申請日().seireki().toDateString().toString()));
-        }
-        if (has論理削除()) {
-            return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.削除された申請);
-        }
-        if (has一次判定()) {
-            switch (context.get一次判定済時処理()) {
-                case エラーとする:
-                    return createResults(context.getOcrData(), Type.ERROR, OcrTorikomiMessages.一次判定済みの申請_エラー);
-                default:
-                    return createResults(context.getOcrData(), Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告);
-            }
-        }
-        return ProcessingResults.EMPTY;
-    }
-
-    private static final List<KoroshoIfShikibetsuCode> OLD_KOROSHO_IF_CODES;
-
-    static {
-        OLD_KOROSHO_IF_CODES = Collections.unmodifiableList(
-                Arrays.asList(KoroshoIfShikibetsuCode.認定ｿﾌﾄ99, KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002,
-                        KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用, KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009)
-        );
-    }
-
-    private IProcessingResults createResults(Collection<? extends IOcrData> ocrData, Type type, OcrTorikomiMessages messageToNote) {
-        return createResults(ocrData, type, messageToNote.originalMessage());
-    }
-
-    private IProcessingResults createResults(Collection<? extends IOcrData> ocrData, Type type, RString messageToNote) {
-        ProcessingResults results = new ProcessingResults();
-        for (IOcrData o : ocrData) {
-            results.add(ProcessingResultFactory.create(type, o, messageToNote));
-        }
-        return results;
+        return super.validate(context);
     }
 }
