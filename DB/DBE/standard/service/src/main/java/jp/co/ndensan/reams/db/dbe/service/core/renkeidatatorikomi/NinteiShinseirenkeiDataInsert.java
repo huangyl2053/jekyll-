@@ -580,7 +580,7 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RStringBuilder checkDbT5101同情報(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
-            if (entity.getDbT5101Entity() != null) {
+            if (entity.getDbT5101Entity() == null) {
                 errorBuilder.append(new RString("申請データが存在しません；"));
             }
             return errorBuilder;

@@ -823,7 +823,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setZenkaiYukoKikanEnd(getFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間()));
         dbt5101Entity.setShujiiIryokikanCode(getShujiiIryokikanCode(dbt5101tempEntity.get主治医医療機関コード()));
         dbt5101Entity.setShujiiCode(getShujiiCode(dbt5101tempEntity.get主治医番号()));
-        dbt5101Entity.setShichosonCode(LasdecCode.EMPTY);
+        dbt5101Entity.setShichosonCode(entity.getDbT7051Entity().getShichosonCode());
         return dbt5101Entity;
     }
 
@@ -883,7 +883,7 @@ public class RenkeiDataTorikomiBusiness {
         if (!RString.isNullOrEmpty(dbt5101tempEntity.get入所事業所コード())) {
             dbt5101Entity.setShisetsuNyushoFlag(true);
         }
-        dbt5101Entity.setShichosonCode(LasdecCode.EMPTY);
+        dbt5101Entity.setShichosonCode(entity.getDbT7051Entity().getShichosonCode());
         return dbt5101Entity;
     }
 
