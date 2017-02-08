@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -54,9 +56,11 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraish
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -164,7 +168,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 証記載保険者番号);
         ChosaIraishoAndChosahyoAndIkenshoPrintFinder printFinder = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance();
         if (GamenSeniKbn.認定調査依頼.equals(遷移元画面区分)) {
-            div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE220001.getReportId());
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            ReportId 帳票ID = ReportIdDBZ.DBE220001.getReportId();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
+                        && div.getCcdHokenshaList().getSelectedItem().get市町村コード() != null
+                        && !div.getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                    RStringBuilder 帳票IDBuilder = new RStringBuilder();
+                    帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).
+                            append(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+                    帳票ID = new ReportId(帳票IDBuilder.toRString());
+                }
+            }
+            div.getCcdBunshoNo().initialize(帳票ID);
             div.getNinteiChosa().setDisplayNone(false);
             div.getShujiiIkensho().setDisplayNone(true);
             List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> list = printFinder.get認定調査依頼情報(parameter).records();
@@ -208,7 +225,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
             setChk認定調査印刷帳票選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         } else {
-            div.getCcdBunshoNo().initialize(ReportIdDBZ.DBE230001.getReportId());
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            ReportId 帳票ID = ReportIdDBZ.DBE230001.getReportId();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
+                        && div.getCcdHokenshaList().getSelectedItem().get市町村コード() != null
+                        && !div.getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                    RStringBuilder 帳票IDBuilder = new RStringBuilder();
+                    帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).
+                            append(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+                    帳票ID = new ReportId(帳票IDBuilder.toRString());
+                }
+            }
+            div.getCcdBunshoNo().initialize(帳票ID);
             div.getCcdHokenshaList().setDisplayNone(true);
             div.getNinteiChosa().setDisplayNone(true);
             div.getShujiiIkensho().setDisplayNone(false);
