@@ -194,7 +194,7 @@ public class NinteiShinseiTorokuHandler {
                 div.getTxtTorisageDate().setValue(new RDate(result.get取下年月日().toString()));
             }
             div.getTxtTorisageJiyu().setValue(result.get取下理由());
-            if (!TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
+            if (result.get取下区分コード() != null && !TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
                 div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
             }
             if (result.get認定申請理由() == null || result.get認定申請理由().isEmpty()) {
@@ -203,7 +203,7 @@ public class NinteiShinseiTorokuHandler {
             if (result.get申請サービス削除の理由() == null || result.get申請サービス削除の理由().isEmpty()) {
                 div.getServiceDel().setIsOpen(false);
             }
-            if (TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
+            if (result.get取下区分コード() == null || TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
                 div.getSinseiTorisage().setIsOpen(false);
             }
             if (RString.isNullOrEmpty(result.get主治医医療機関コード()) && RString.isNullOrEmpty(result.get主治医コード())) {
@@ -212,7 +212,7 @@ public class NinteiShinseiTorokuHandler {
             if (RString.isNullOrEmpty(result.get認定調査委託先コード()) && RString.isNullOrEmpty(result.get認定調査員コード())) {
                 div.getChosainAndChosainInput().setIsOpen(false);
             }
-            if (RString.isNullOrEmpty(result.get訪問調査先名称().getColumnValue())) {
+            if (result.get訪問調査先名称() == null || RString.isNullOrEmpty(result.get訪問調査先名称().getColumnValue())) {
                 div.getHomonSaki().setIsOpen(false);
             }
 //            if (RString.isNullOrEmpty(result.get.getColumnValue())) {
@@ -236,6 +236,10 @@ public class NinteiShinseiTorokuHandler {
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(ninteiTandokuDounyuFlag);
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtJusho().setReadOnly(!ninteiTandokuDounyuFlag);
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getServiceSakujo().setDisplayNone(true);
+        if (div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getDataSource().isEmpty()
+                || div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getDataSource().size() < 2) {
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(Boolean.TRUE);
+        }
         div.getBtnTainoJokyo().setDisplayNone(ninteiTandokuDounyuFlag);
         div.getCcdNinteiInput().setDisplayNone(true);
         div.getCcdShinseiSonotaJohoInput().setDisplayNone(true);

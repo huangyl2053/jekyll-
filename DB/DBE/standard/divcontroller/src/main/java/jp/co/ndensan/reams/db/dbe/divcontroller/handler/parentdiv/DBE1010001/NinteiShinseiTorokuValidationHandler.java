@@ -163,8 +163,11 @@ public class NinteiShinseiTorokuValidationHandler {
     public ValidationMessageControlPairs 取下日理由必須チェック() {
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!div.getDdlTorisageJiyu().getSelectedValue().equals(認定申請有効) && !div.getDdlTorisageJiyu().getSelectedValue().isEmpty()
-                && (div.getTxtTorisageJiyu().getValue().isEmpty() || div.getTxtTorisageDate().getValue().toDateString().isEmpty())) {
+        if (!TorisageKubunCode.認定申請有効.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())
+                && !div.getDdlTorisageJiyu().getSelectedValue().isEmpty()
+                && (div.getTxtTorisageJiyu().getValue().isEmpty()
+                || div.getTxtTorisageDate().getValue() == null
+                || div.getTxtTorisageDate().getValue().toDateString().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須));
         }
         return validationMessages;
