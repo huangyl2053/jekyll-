@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -78,6 +79,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     private static final RString UIコンテナID_DBEUC23001 = new RString("DBEUC23001");
     private static final RString 意見書依頼を完了するボタン = new RString("btnChousaIraiKanryo");
     private static final RString 意見書依頼を登録するボタン = new RString("btnUpdate");
+    private static final RString 修正 = new RString("Modified");
 
     /**
      * 完了処理・主治医意見書依頼の初期化処理です。
@@ -324,12 +326,13 @@ public class ShujiiIkenshoIraiTaishoIchiran {
      * @return ShujiiIkenshoIraiTaishoIchiranDiv
      */
     public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnUpdate(ShujiiIkenshoIraiTaishoIchiranDiv div) {
+        List<dgNinteiTaskList_Row> ModifyList = new ArrayList<>();
         ValidationMessageControlPairs vallidation = getValidationHandler(div).validateBtnUpdateClick();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
@@ -338,7 +341,17 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ShujiiIkenshoIraiTaishoIchiranHandler handler = getHandler(div);
             IkenshoSakuseiIraiManager manager = IkenshoSakuseiIraiManager.createInstance();
-            for (dgNinteiTaskList_Row row : handler.getSelectedItems()) {
+
+            for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+                RString 状態 = new RString(row.getRowState().toString());
+                if (状態.equals(修正)) {
+                    ModifyList.add(row);
+                }
+            }
+
+            for (dgNinteiTaskList_Row row : ModifyList) {
+                RString 意見書依頼区分 = div.getDdlIraiKubun().getSelectedKey();
+
                 NinteiShinseiJoho 要介護認定申請情報 = manager.get要介護認定申請情報(row.getShinseishoKanriNo());
                 NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit()
                         .set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode())
@@ -347,10 +360,30 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                         .setShujiiIkenshoIraiJoho(handler.create主治医意見書作成依頼(要介護認定申請情報, row));
                 manager.saveList(builder.build().modifiedModel());
             }
-            div.getCcdKanryoMsg().setMessage(
-                    new RString("主治医意見書依頼の保存処理が完了しました。"),
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBE2040001StateName.完了);
+
+            if (!(new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode()))) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            }
+
+        }
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            List<dgNinteiTaskList_Row> dataSource = new ArrayList<>();
+            div.getDgNinteiTaskList().setDataSource(dataSource);
+            getHandler(div).initialize(ResponseHolder.getState());
+            ViewStateHolder.put(ViewStateKeys.状態, div.getRadShoriJyotai().getSelectedKey());
+            if (ViewStateHolder.containsKey(ViewStateKeys.申請書管理番号.name())) {
+                ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+                for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+                    if (row.getShinseishoKanriNo().equals(申請書管理番号.value())) {
+                        row.setSelected(true);
+                        ViewStateHolder.remove(ViewStateKeys.申請書管理番号);
+                        break;
+                    }
+                }
+            }
+            return ResponseData.of(div).setState(DBE2040001StateName.登録);
         }
         return ResponseData.of(div).respond();
     }
