@@ -245,7 +245,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set修正の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(div.getTxtRenban(),
+        TextBoxNum num = new TextBoxNum(); 
+        num.setValue(div.getTxtRenban().getValue());
+        dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
                 nullTOEmpty(div.getTxtShimei().getValue()),
                 nullTOEmpty(RString.EMPTY),
                 nullTOEmpty(div.getTxtJusho().getValue()),

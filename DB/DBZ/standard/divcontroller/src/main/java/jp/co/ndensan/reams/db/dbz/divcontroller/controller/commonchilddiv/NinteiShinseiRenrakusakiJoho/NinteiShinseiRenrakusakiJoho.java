@@ -157,7 +157,10 @@ public class NinteiShinseiRenrakusakiJoho {
                 RenrakusakiJoho joho = johoList.get(i);
                 dgRenrakusakiIchiran_Row row = div.getDgRenrakusakiIchiran().getActiveRow();
                 if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
-                        && row.getRenban().getText().equals(new RString(joho.get連番()))) {
+                        && row.getRenban().getText().equals(new RString(joho.get連番()))
+                        && row.getShimei().equals(joho.get連絡先氏名().getColumnValue())
+                        && row.getTelNo().equals(joho.get連絡先電話番号().getColumnValue())
+                        && row.getMobileNo().equals(joho.get連絡先携帯番号().getColumnValue())) {
                     johoList.set(i, joho.deleted());
                 }
             }
