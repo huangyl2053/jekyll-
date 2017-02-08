@@ -128,9 +128,6 @@ public final class OcrTorikomiResult {
          * @return {@link OcrTorikomiResult}
          */
         public OcrTorikomiResult build() {
-            if (this.処理結果.isEmpty()) {
-                throw new IllegalStateException();
-            }
             return new OcrTorikomiResult(this);
         }
     }
