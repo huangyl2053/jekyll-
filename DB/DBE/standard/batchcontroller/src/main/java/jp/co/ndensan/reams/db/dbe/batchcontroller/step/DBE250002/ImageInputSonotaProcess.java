@@ -152,11 +152,13 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
         ImageinputRelate ir = relatedData.get(0);
-        if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
-            return OcrTorikomiResultUtil.create(key, ocrSonotas,
-                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
+        ImageinputRelate.Context context = new ImageinputRelate.Context(ocrSonotas,
+                this.processParameter.get一次判定済み時処理方法());
+        IProcessingResults nrValidated = ir.validate(context);
+        if (nrValidated.hasError()) {
+            return OcrTorikomiResultUtil.create(key, nrValidated, ir);
         }
-        return OcrTorikomiResultUtil.create(key, copyImageFiles(ocrSonotas, ir));
+        return OcrTorikomiResultUtil.create(key, copyImageFiles(ocrSonotas, ir), ir);
     }
 
     private ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {

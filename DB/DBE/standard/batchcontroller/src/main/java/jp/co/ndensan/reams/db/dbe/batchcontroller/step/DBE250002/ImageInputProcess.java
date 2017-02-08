@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIkens;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
@@ -158,16 +159,18 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
         ImageinputRelate ir = relatedData.get(0);
-        if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
-            return OcrTorikomiResultUtil.create(key, ocrIkens,
-                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
+        ImageinputRelate.Context context = new ImageinputRelate.Context(ocrIkens.asList(),
+                this.processParameter.get一次判定済み時処理方法());
+        IProcessingResults nrValidated = ir.validate(context);
+        if (nrValidated.hasError()) {
+            return OcrTorikomiResultUtil.create(key, nrValidated, ir);
         }
 
         List<OcrTorikomiResult> list = new ArrayList<>();
         ProcessingResults r = new ProcessingResults();
         r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
         r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
-        list.addAll(OcrTorikomiResultUtil.create(key, r));
+        list.addAll(OcrTorikomiResultUtil.create(key, r, ir));
 
         OcrIkens safetyInCurrent = ocrIkens.removed(r.allOcrDataInError());
         if (safetyInCurrent.isEmpty()) {
@@ -185,7 +188,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         for (OcrIken o : safetyInCurrent) {
             results.addSuccessIfNotContains(o);
         }
-        list.addAll(OcrTorikomiResultUtil.create(key, results));
+        list.addAll(OcrTorikomiResultUtil.create(key, results, ir));
         return list;
     }
 
