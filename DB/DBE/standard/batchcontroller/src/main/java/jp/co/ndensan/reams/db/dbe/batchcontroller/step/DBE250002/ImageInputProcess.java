@@ -165,8 +165,9 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         if (nrValidated.hasError()) {
             return OcrTorikomiResultUtil.create(key, nrValidated, ir);
         }
-
         List<OcrTorikomiResult> list = new ArrayList<>();
+        list.addAll(OcrTorikomiResultUtil.create(key, nrValidated, ir));
+
         ProcessingResults r = new ProcessingResults();
         r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
         r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
