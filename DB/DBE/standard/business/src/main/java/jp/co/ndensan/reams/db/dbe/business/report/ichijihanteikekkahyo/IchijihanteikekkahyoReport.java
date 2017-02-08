@@ -38,10 +38,8 @@ public class IchijihanteikekkahyoReport extends Report<IchijihanteikekkahyoRepor
     @Override
     public void writeBy(ReportSourceWriter<IchijihanteikekkahyoReportSource> reportSourceWriter) {
         for (int i = ZERO; i < MAXCOUNT; i++) {
-            IIchijihanteikekkahyoEditor editor = new IchijihanteikekkahyoEditor(entity, i);
-            IIchijihanteikekkahyoBuilder builder = new IchijihanteikekkahyoBuilder(editor);
+            IIchijihanteikekkahyoBuilder builder = new IchijihanteikekkahyoBuilder(entity, i);
             reportSourceWriter.writeLine(builder);
         }
-
     }
 }

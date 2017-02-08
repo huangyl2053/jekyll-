@@ -30,8 +30,7 @@ public class SonoTashiryoReport extends Report<SonoTashiryoReportSource> {
 
     @Override
     public void writeBy(ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter) {
-        ISonoTashiryoBodyEditor editor = new SonoTashiryoBodyEditor(data);
-        ISonoTashiryoBuilder builder = new SonoTashiryoBuilder(editor);
+        ISonoTashiryoBuilder builder = new SonoTashiryoBuilder(data);
         reportSourceWriter.writeLine(builder);
     }
 }

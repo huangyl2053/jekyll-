@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.HihokenshaJyuhouRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinnteiRiriRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteichosaRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoninteiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
@@ -38,14 +38,6 @@ public interface IYokaigoNinteiJohoTeikyoMapper {
     HihokenshaJyuhouRelateEntity get被保険者情報(YokaigoNinteiJohoTeiParameter param);
 
     /**
-     * 検索条件より、認定履歴一覧情報を検索する。
-     *
-     * @param param 認定履歴一覧情報検索条件
-     * @return NinnteiRiriRelateEntityの{@code list}
-     */
-    List<NinnteiRiriRelateEntity> get認定履歴一覧(YokaigoNinteiJohoTeiParameter param);
-
-    /**
      * 申請書管理番号を指定して、認定履歴の情報を1件取得する。
      *
      * @param shinseishoKanriNo 申請書管理番号
@@ -57,9 +49,9 @@ public interface IYokaigoNinteiJohoTeikyoMapper {
      * 検索条件より、要介護認定申請者情報を検索する。
      *
      * @param param 要介護認定申請者情報検索条件
-     * @return YokaigoninteiEntityの{@code list}
+     * @return YokaigoNinteiJohoTeikyoEntityの{@code list}
      */
-    List<YokaigoninteiEntity> get要介護認定申請者(YokaigoBatchMybitisParamter param);
+    List<YokaigoNinteiJohoTeikyoEntity> get要介護認定申請者(YokaigoBatchMybitisParamter param);
 
     /**
      * 検索条件より、認定調査票（概況調査）サービスの状況情報を検索する。
@@ -121,9 +113,9 @@ public interface IYokaigoNinteiJohoTeikyoMapper {
      * 要介護認定申請情報の更新する。
      *
      * @param param 要介護認定申請情報検索条件
-     * @return DbT5101NinteiShinseiJohoEntity
+     * @return DbT5101NinteiShinseiJohoEntityのリスト
      */
-    DbT5101NinteiShinseiJohoEntity get要介護認定申請情報(YokaigoBatchMybitisParamter param);
+    List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報(YokaigoBatchMybitisParamter param);
 
     /**
      * イメージ共有ファイルIDを検索する。

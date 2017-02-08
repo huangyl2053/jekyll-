@@ -16,7 +16,8 @@ public enum DBE5410001StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    進捗から遷移("進捗から遷移");
+    進捗から遷移("進捗から遷移"),
+    要介護認定情報提供一括発行から遷移("要介護認定情報提供一括発行から遷移");
 
     private final RString name;
 

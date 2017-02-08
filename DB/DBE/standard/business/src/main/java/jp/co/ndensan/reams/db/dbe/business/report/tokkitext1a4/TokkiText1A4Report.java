@@ -67,8 +67,7 @@ public class TokkiText1A4Report extends Report<TokkiText1ReportSource> {
             count = entity.get特記事項全イメージリスト().size();
         }
         for (int index = 0; index < count; index++) {
-            ITokkiText1A4Editor editor = new TokkiText1A4Editor(entity, list, index);
-            ITokkiText1A4Builder buildera = new TokkiText1A4Builder(editor);
+            ITokkiText1A4Builder buildera = new TokkiText1A4Builder(entity, list, index);
             reportSourceWriter.writeLine(buildera);
         }
     }

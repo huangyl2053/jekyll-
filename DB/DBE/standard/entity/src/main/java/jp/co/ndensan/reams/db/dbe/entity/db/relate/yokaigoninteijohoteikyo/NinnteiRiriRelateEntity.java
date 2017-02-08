@@ -48,6 +48,7 @@ public class NinnteiRiriRelateEntity implements Serializable {
     private RString shujiiName;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private FlexibleDate shinsakaiKaisaiYMD;
+    private FlexibleDate ichijiHanteiKanryoYMD;
     private FlexibleDate ninteiShinsakaiKanryoYMD;
     private boolean johoteikyoDoiFlag;
     private boolean ikenshoDoiFlag;

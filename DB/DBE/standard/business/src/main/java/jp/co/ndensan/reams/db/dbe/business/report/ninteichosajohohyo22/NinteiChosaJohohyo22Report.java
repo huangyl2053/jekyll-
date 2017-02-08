@@ -37,8 +37,7 @@ public class NinteiChosaJohohyo22Report extends Report<NinteiChosaJohohyo22Repor
     public void writeBy(ReportSourceWriter<NinteiChosaJohohyo22ReportSource> reportSourceWriter) {
         int maxCount = entity.getサービス区分リスト_22().size();
         for (int i = 0; i < maxCount; i++) {
-            INinteiChosaJohohyo22Editor editor = new NinteiChosaJohohyo22Editor(entity, i);
-            INinteiChosaJohohyo22Builder builder = new NinteiChosaJohohyo22Builder(editor);
+            INinteiChosaJohohyo22Builder builder = new NinteiChosaJohohyo22Builder(entity, i);
             reportSourceWriter.writeLine(builder);
         }
     }
