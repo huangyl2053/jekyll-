@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -429,6 +430,7 @@ public class NinteiShinseirenkeiDataInsert {
         check有効期間(entity.getDbt5101TempEntity().get前回の認定有効開始期間(),
                 entity.getDbt5101TempEntity().get前回の認定有効終了期間(),
                 entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
+        check市町村コード(entity, errorBuilder);
         return errorBuilder.toRString();
     }
 
@@ -451,6 +453,7 @@ public class NinteiShinseirenkeiDataInsert {
         check有効期間(entity.getDbt5101TempEntity().get前回の認定有効開始期間(),
                 entity.getDbt5101TempEntity().get前回の認定有効終了期間(),
                 entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
+        check市町村コード(entity, errorBuilder);
         return errorBuilder.toRString();
     }
 
@@ -550,6 +553,13 @@ public class NinteiShinseirenkeiDataInsert {
         return errorBuilder;
     }
 
+    private RStringBuilder check市町村コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
+        if (entity.getDbT7051Entity() == null || entity.getDbT7051Entity().getShichosonCode() == null || entity.getDbT7051Entity().getShichosonCode().isEmpty()) {
+            errorBuilder.append(new RString("保険者番号が不正です;"));
+        }
+        return errorBuilder;
+    }
+
     private RStringBuilder nullCheck申請区分(RString value, RStringBuilder errorBuilder) {
         if (RString.isNullOrEmpty(value)) {
             errorBuilder.append(new RString("申請区分の入力がありません;"));
@@ -569,11 +579,17 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder checkDbT5101同情報(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
+        if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
+            if (entity.getDbT5101Entity() != null) {
+                errorBuilder.append(new RString("申請データが存在しません；"));
+            }
+            return errorBuilder;
+        }
         if (entity.getDbT5101Entity() != null
                 && (entity.getDbT5102Entity() == null
                 || entity.getDbT5102Entity().getNijiHanteiYMD() == null
                 || entity.getDbT5102Entity().getNijiHanteiYMD().isEmpty())) {
-            errorBuilder.append(new RString("既に登録されています;"));
+            errorBuilder.append(new RString("二次判定結果の出ていない申請が存在します；"));
         }
         return errorBuilder;
     }

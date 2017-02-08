@@ -12,7 +12,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuInfoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranItem;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.DBE0100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.DBE0100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.ShinseiKensakuDiv;
@@ -215,7 +214,7 @@ public class ShinseiKensaku {
             div.getCcdNinteishinseishaFinder().updateSaikinShorisha(被保険者番号, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
         }
-        
+
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);
         NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会,shoKisaiHokenshaNo,被保険者番号);
         ninteiAccessLogger.log();
@@ -367,9 +366,9 @@ public class ShinseiKensaku {
             item.setSeinengappiYMD(row.get生年月日());
             item.setSeibetsu(row.get性別());
             item.setKoroshoIfShikibetsuCode(row.get厚労省IF識別コード());
-            item.setNijiHanteiYokaigoJotaiKubun(row.get二次判定要介護状態区分コード());
-            if (row.get二次判定認定有効期間() != 0) {
-                item.setNijiHanteiNinteiYukoKikan(new RString(row.get二次判定認定有効期間()));
+            item.setNijiHanteiYokaigoJotaiKubun(row.get前回二次判定要介護状態区分コード());
+            if (row.get前回二次判定認定有効期間() != 0) {
+                item.setNijiHanteiNinteiYukoKikan(new RString(row.get前回二次判定認定有効期間()));
             } else {
                 item.setNijiHanteiNinteiYukoKikan(RString.EMPTY);
             }

@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoEntity;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
@@ -75,32 +76,32 @@ public final class ShujiiikenshoEntityEditor {
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         shujiEntity.set調査日_元号(yokaigoNinteiJohoTeikyoEntity.get実施年月日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get実施年月日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         shujiEntity.set調査日_年(yokaigoNinteiJohoTeikyoEntity.get実施年月日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get実施年月日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
         shujiEntity.set調査日_月(yokaigoNinteiJohoTeikyoEntity.get実施年月日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get実施年月日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         shujiEntity.set調査日_日(yokaigoNinteiJohoTeikyoEntity.get実施年月日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get実施年月日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         shujiEntity.set審査日_元号(yokaigoNinteiJohoTeikyoEntity.get審査会開催日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get審査会開催日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         shujiEntity.set審査日_年(yokaigoNinteiJohoTeikyoEntity.get審査会開催日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get審査会開催日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear());
         shujiEntity.set審査日_月(yokaigoNinteiJohoTeikyoEntity.get審査会開催日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get審査会開催日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getMonth());
         shujiEntity.set審査日_日(yokaigoNinteiJohoTeikyoEntity.get審査会開催日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get審査会開催日().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         RString 共有フォルダ名 = yokaigoNinteiJohoTeikyoEntity.get保険者番号().concat(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
         if (イメージ共有ファイルID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
-            RString path = Directory.createTmpDirectory();
+            RString path = copySharedFiles(descriptor);
             shujiEntity.setイメージファイル1(get表面イメージファイルパス(descriptor, path, 主治医意見書マスキング区分));
             shujiEntity.setイメージファイル2(get裏面イメージファイルパス(descriptor, path, 主治医意見書マスキング区分));
         }
@@ -144,6 +145,11 @@ public final class ShujiiikenshoEntityEditor {
 
     private static ReadOnlySharedFileEntryDescriptor get共有ファイルエントリ情報(RString 共有フォルダ名, RDateTime イメージ共有ファイルID) {
         return new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有フォルダ名), イメージ共有ファイルID);
+    }
+
+    private static RString copySharedFiles(ReadOnlySharedFileEntryDescriptor descriptor) {
+        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
     private static RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {

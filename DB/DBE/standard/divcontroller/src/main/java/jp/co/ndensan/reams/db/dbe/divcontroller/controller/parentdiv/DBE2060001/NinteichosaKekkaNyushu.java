@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,6 +53,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 
 /**
  * 完了処理・認定調査結果入手のクラスです。
@@ -185,14 +186,7 @@ public class NinteichosaKekkaNyushu {
      * @return レスポンス
      */
     public ResponseData onClick_btnOCRTorikomi(NinteichosaKekkaNyushuDiv requestDiv) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("画面遷移しても")).respond();
-        }
-
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.取込み_OCR_遷移).respond();
-        }
-        return ResponseData.of(requestDiv).respond();
+        return ResponseData.of(requestDiv).forwardWithEventName(DBE2060001TransitionEventName.取込み_OCR_遷移).respond();
     }
 
     /**
@@ -210,7 +204,9 @@ public class NinteichosaKekkaNyushu {
         }
 
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(requestDiv).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace("認定調査結果入手").evaluate());
+            return ResponseData.of(requestDiv).addMessage(message).respond();
         }
 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -218,7 +214,7 @@ public class NinteichosaKekkaNyushu {
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(requestDiv).onClick_btnChousaResultKanryo(要介護認定完了情報Model);
             requestDiv.getCcdKanryoMsg().setMessage(
-                    new RString("完了処理・認定調査結果入手の保存処理が完了しました。"),
+                    new RString("基本運用・認定調査結果入手の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Kanryo")));
             return ResponseData.of(requestDiv).setState(DBE2060001StateName.完了);

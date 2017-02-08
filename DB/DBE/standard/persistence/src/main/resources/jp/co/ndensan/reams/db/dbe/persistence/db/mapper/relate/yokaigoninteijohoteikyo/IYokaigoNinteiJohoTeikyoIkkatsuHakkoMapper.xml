@@ -38,16 +38,16 @@
         WHERE
             <include refid="WHERE句" />
         ORDER BY
+            DbT5101."hihokenshaKana",
+            DbT7051."shichosonCode",
             DbT5101."hihokenshaNo",
-            DbT5101."ninteiShinseiYMD"
+            DbT5101."ninteiShinseiYMD" DESC
         LIMIT
             #{最大表示件数}
     </select>
 
     <sql id="FROM句">
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
-            INNER JOIN rgdb."DbT5102NinteiKekkaJoho" as DbT5102
-                ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER JOIN rgdb."DbT5105NinteiKanryoJoho" as DbT5105
                 ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
                    AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
@@ -56,25 +56,24 @@
                    AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
                    AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
                    AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
-                   AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-                   AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
             INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
                 ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" as DbT5502
-                ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                   AND DbT5502."hanteiKekkaCode" = '01'
-            INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as DbT5501
-                ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-            INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" as DbT5511
-                ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
                 ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" as DbT5102
+                ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" as DbT5502
+                ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                   AND DbT5502."hanteiKekkaCode" = '01'
+            LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as DbT5501
+                ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+            LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" as DbT5511
+                ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
     </sql>
 
     <sql id="WHERE句">
             DbT5101."shoriJotaiKubun"  IN (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = False
-            AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             <if test="!保険者番号.isEmpty()">
             AND DbT5101."shoKisaiHokenshaNo" = #{保険者番号}
             </if>

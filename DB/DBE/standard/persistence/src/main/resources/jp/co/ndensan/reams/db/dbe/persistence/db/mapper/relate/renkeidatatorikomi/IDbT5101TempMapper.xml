@@ -681,10 +681,12 @@
     <resultMap id="ResultMap_DbT5101NinteiShinseiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity" autoMapping="true">
         <id column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id column="シーケンシャル番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT7051KoseiShichosonMaster_kokuhorenKoikiShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="dbt5101TempEntity" resultMap="ResultMap_DbT5101TempEntity"/>
         <association property="dbT5101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
         <association property="dbT5123Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.ResultMap_DbT5123NinteiKeikakuJohoEntity"/>
         <association property="dbT5102Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.ResultMap_DbT5102NinteiKekkaJohoEntity"/>
+        <association property="dbT7051Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
     </resultMap>
 
     <select resultOrdered="true" id="get更新対象情報_電算東芝版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
@@ -692,7 +694,8 @@
             <include refid="allColumns_DbT5101Temp" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
             <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho" />,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
         FROM
             "DbT5101Temp" AS temp
             LEFT JOIN (SELECT *
@@ -711,6 +714,8 @@
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
             LEFT JOIN rgdb."DbT5102NinteiKekkaJoho"
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
+                ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = temp."保険者番号"
     </select>
 
     <select resultOrdered="true" id="get更新対象情報_厚労省" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
@@ -718,7 +723,8 @@
             <include refid="allColumns_DbT5101KoroshoTemp" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
             <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.allColumns_DbT5123NinteiKeikakuJoho" />,
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho" />
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.allColumns_DbT5102NinteiKekkaJoho" />,
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
         FROM
             "DbT5101Temp" AS temp
             LEFT JOIN (SELECT *
@@ -737,6 +743,8 @@
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5123NinteiKeikakuJoho"."shinseishoKanriNo"
             LEFT JOIN rgdb."DbT5102NinteiKekkaJoho"
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
+                ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = temp."保険者番号"
     </select>
 
 </mapper>
