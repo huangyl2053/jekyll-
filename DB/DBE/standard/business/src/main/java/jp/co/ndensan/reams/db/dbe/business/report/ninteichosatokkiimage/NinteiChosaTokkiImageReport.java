@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 特記事項ののReportです。
+ * 特記事項のReportです。
  *
  * @reamsid_L DBE-0230-080 lizhuoxuan
  */
@@ -39,8 +39,7 @@ public class NinteiChosaTokkiImageReport extends Report<NinteiChosaTokkiImageRep
     public void writeBy(ReportSourceWriter<NinteiChosaTokkiImageReportSource> reportSourceWriter) {
         for (int indexPage = 1; indexPage <= Integer.parseInt(entity.get総ページ数().toString()); indexPage++) {
             for (int i = ZERO; i < MAXCOUNT; i++) {
-                INinteiChosaTokkiImageEditor editor = new NinteiChosaTokkiImageEditor(entity, i, indexPage);
-                INinteiChosaTokkiImageBuilder builder = new NinteiChosaTokkiImageBuilder(editor);
+                INinteiChosaTokkiImageBuilder builder = new NinteiChosaTokkiImageBuilder(entity, i, indexPage);
                 reportSourceWriter.writeLine(builder);
             }
         }

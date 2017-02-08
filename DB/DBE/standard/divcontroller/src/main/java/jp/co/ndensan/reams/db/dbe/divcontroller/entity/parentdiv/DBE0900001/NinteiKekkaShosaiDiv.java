@@ -4,15 +4,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * NinteiKekkaShosai のクラスファイル
@@ -20,8 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @author 自動生成
  */
 public class NinteiKekkaShosaiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -164,7 +160,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseibi(TextBoxDate txtShinseibi) {
+    public void  setTxtShinseibi(TextBoxDate txtShinseibi) {
         this.getShinsei().setTxtShinseibi(txtShinseibi);
     }
 
@@ -174,7 +170,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseiKubunShin(TextBox txtShinseiKubunShin) {
+    public void  setTxtShinseiKubunShin(TextBox txtShinseiKubunShin) {
         this.getShinsei().setTxtShinseiKubunShin(txtShinseiKubunShin);
     }
 
@@ -184,7 +180,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinseiKubun(TextBox txtShinseiKubun) {
+    public void  setTxtShinseiKubun(TextBox txtShinseiKubun) {
         this.getShinsei().setTxtShinseiKubun(txtShinseiKubun);
     }
 
@@ -194,7 +190,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaIraibi(TextBoxDate txtNinteiChosaIraibi) {
+    public void  setTxtNinteiChosaIraibi(TextBoxDate txtNinteiChosaIraibi) {
         this.getNinteiChosa().setTxtNinteiChosaIraibi(txtNinteiChosaIraibi);
     }
 
@@ -204,7 +200,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaJisshibi(TextBoxDate txtNinteiChosaJisshibi) {
+    public void  setTxtNinteiChosaJisshibi(TextBoxDate txtNinteiChosaJisshibi) {
         this.getNinteiChosa().setTxtNinteiChosaJisshibi(txtNinteiChosaJisshibi);
     }
 
@@ -214,7 +210,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNinteiChosaJuryobi(TextBoxDate txtNinteiChosaJuryobi) {
+    public void  setTxtNinteiChosaJuryobi(TextBoxDate txtNinteiChosaJuryobi) {
         this.getNinteiChosa().setTxtNinteiChosaJuryobi(txtNinteiChosaJuryobi);
     }
 
@@ -229,7 +225,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtIkenshoIraibi(TextBoxDate txtIkenshoIraibi) {
+    public void  setTxtIkenshoIraibi(TextBoxDate txtIkenshoIraibi) {
         this.getIkensho().setTxtIkenshoIraibi(txtIkenshoIraibi);
     }
 
@@ -239,7 +235,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtIkenshoJuryobi(TextBoxDate txtIkenshoJuryobi) {
+    public void  setTxtIkenshoJuryobi(TextBoxDate txtIkenshoJuryobi) {
         this.getIkensho().setTxtIkenshoJuryobi(txtIkenshoJuryobi);
     }
 
@@ -254,7 +250,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiKaisaibi(TextBoxDate txtShinsakaiKaisaibi) {
+    public void  setTxtShinsakaiKaisaibi(TextBoxDate txtShinsakaiKaisaibi) {
         this.getShinsakai().setTxtShinsakaiKaisaibi(txtShinsakaiKaisaibi);
     }
 
@@ -264,7 +260,7 @@ public class NinteiKekkaShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
+    public void  setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
         this.getShinsakai().setTxtShinsakaiYoteibi(txtShinsakaiYoteibi);
     }
 

@@ -310,14 +310,9 @@ public class NinteiShinseiToroku {
             }
             CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToIchiran"), false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisabled(Boolean.TRUE);
-            if (div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getDataSource().isEmpty() ||
-                    div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getDataSource().size() < 2) {
-                div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisplayNone(Boolean.TRUE);
-            }
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiShubetsu().setReadOnly(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().setReadOnly(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().setReadOnly(false);
-            
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().setDisabled(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkShikakuShutokuMae().setDisabled(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiJokyo().setValue(ShinseiJokyoKubun.申請中.get名称());
@@ -514,7 +509,13 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onOkClose_btnRenrakusaki(NinteiShinseiTorokuDiv div) {
         NinteiShinseiBusinessCollection data = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(), NinteiShinseiBusinessCollection.class);
-        if (data != null && data.getDbdBusiness() != null && !data.getDbdBusiness().isEmpty()) {
+        int delCount = 0;
+        for (RenrakusakiJoho joho : data.getDbdBusiness()) {
+            if (EntityDataState.Deleted.equals(joho.toEntity().getState())) {
+                delCount++;
+            }
+        }
+        if (data.getDbdBusiness() != null && (!data.getDbdBusiness().isEmpty() || delCount != data.getDbdBusiness().size())) {
             div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
         } else {
             div.getBtnRenrakusaki().setIconNameEnum(IconName.NONE);
@@ -562,10 +563,10 @@ public class NinteiShinseiToroku {
         NinteiShinseiCodeModel data = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
         if (data != null && !RString.isNullOrEmpty(data.get連絡事項())) {
             div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
-            div.setHdnShichosonRenrakuJiko(data.get連絡事項());
         } else {
             div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.NONE );
         }
+        div.setHdnShichosonRenrakuJiko(data != null ? data.get連絡事項() : RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 

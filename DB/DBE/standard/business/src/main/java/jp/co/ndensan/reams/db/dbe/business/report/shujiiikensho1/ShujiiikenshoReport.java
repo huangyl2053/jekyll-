@@ -35,11 +35,9 @@ public class ShujiiikenshoReport extends Report<ShujiiikenshoReportSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<ShujiiikenshoReportSource> reportSourceWriter) {
-        IShujiiikenshoEditor editor = new ShujiiikenshoEditor(entity, 1);
-        IShujiiikenshoBuilder builder = new ShujiiikenshoBuilder(editor);
+        IShujiiikenshoBuilder builder = new ShujiiikenshoBuilder(entity, 1);
         reportSourceWriter.writeLine(builder);
-        IShujiiikenshoEditor editor2 = new ShujiiikenshoEditor(entity, 2);
-        IShujiiikenshoBuilder builder2 = new ShujiiikenshoBuilder(editor2);
+        IShujiiikenshoBuilder builder2 = new ShujiiikenshoBuilder(entity, 2);
         reportSourceWriter.writeLine(builder2);
     }
 }

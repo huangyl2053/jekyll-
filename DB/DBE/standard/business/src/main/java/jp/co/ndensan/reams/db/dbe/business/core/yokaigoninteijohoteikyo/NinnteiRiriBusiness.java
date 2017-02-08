@@ -264,6 +264,15 @@ public class NinnteiRiriBusiness implements Serializable {
     }
 
     /**
+     * 要介護認定一次判定完了年月日のgetメソッドです。
+     *
+     * @return 要介護認定一次判定完了年月日
+     */
+    public FlexibleDate get要介護認定一次判定完了年月日() {
+        return entity.getIchijiHanteiKanryoYMD();
+    }
+
+    /**
      * 申請書管理番号のgetメソッドです。
      *
      * @return 申請書管理番号

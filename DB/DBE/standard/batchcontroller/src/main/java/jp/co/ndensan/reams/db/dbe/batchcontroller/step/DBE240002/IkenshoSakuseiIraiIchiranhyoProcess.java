@@ -94,7 +94,8 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
                 new FlexibleDate(processParamter.getHakkobi()),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter);
-        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, Integer.parseInt(entity.get市町村コード().toString()));
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
+        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
         bodyItemList.add(new ShujiiIkenshoBusiness(entity, processParamter).setDBE230002BodyItem(ninshoshaSource, 通知文Map));
     }
 

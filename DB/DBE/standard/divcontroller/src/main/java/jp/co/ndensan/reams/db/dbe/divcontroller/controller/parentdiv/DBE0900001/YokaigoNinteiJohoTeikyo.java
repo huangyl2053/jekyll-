@@ -5,43 +5,61 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0900001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyochosaitem.NinteichosahyoChosaItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokinyuitem.NinteichosahyoKinyuItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoservicejokyo.NinteichosahyoServiceJokyo;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoservicejokyoflag.NinteichosahyoServiceJokyoFlag;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinnteiRiriBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090002.DBE090002_NinteikekkaJohoteikyoParameter;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinteichosaRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.DBE0900001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoFinder;
+import jp.co.ndensan.reams.db.dbe.service.report.ichijihanteikekkahyo.IchijihanteikekkahyoPrintService;
+import jp.co.ndensan.reams.db.dbe.service.report.ninteichosajohohyo.INinteiChosaJohohyoPrintService;
+import jp.co.ndensan.reams.db.dbe.service.report.ninteichosajohohyo.NinteiChosaJohohyoPrintServiceFactory;
+import jp.co.ndensan.reams.db.dbe.service.report.shujiiikensho.ShujiiIkenshoPrintService;
+import jp.co.ndensan.reams.db.dbe.service.report.sonotashiryo.SonotashiryoPrintService;
+import jp.co.ndensan.reams.db.dbe.service.report.tokkijiko.ITokkiJikoPrintService;
+import jp.co.ndensan.reams.db.dbe.service.report.tokkijiko.TokkiJikoPrintServiceFactory;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
-import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
- * 要介護認定情報提供Divを制御クラスです。
+ * 要介護認定情報提供Divの制御クラスです。
  *
  * @reamsid_L DBE-0230-010 zhangzhiming
  */
 public class YokaigoNinteiJohoTeikyo {
 
-    private final RString キー = new RString("key0");
-    private final RString キー1 = new RString("key1");
-    private final RString する = new RString("1");
-    private final RString ない = new RString("0");
-    private final RString 調査員名 = new RString("2");
-    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
-
     /**
-     * 要介護認定情報提供の初期処理を表示します。
+     * ページロードイベントです。
      *
      * @param div YokaigoNinteiJohoTeikyoDiv
      * @return ResponseData
@@ -50,24 +68,11 @@ public class YokaigoNinteiJohoTeikyo {
         RString 申請書管理番号Str = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         ShinseishoKanriNo 申請書管理番号 = RString.isNullOrEmpty(申請書管理番号Str)
                 ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(申請書管理番号Str);
-
         NinnteiRiriBusiness business = YokaigoNinteiJohoTeikyoFinder.createInstance().select認定履歴(申請書管理番号);
-        //ViewStateHolder.put(ViewStateKeys.認定申請情報, business);
-
         //TODO n8178 本来なら受け取れなかった場合のチェック処理くらいは必要だけど、急ぎのため今は無視。
         getHandler(div).onLoad(申請書管理番号Str, business);
-        return ResponseData.of(div).setState(DBE0900001StateName.一覧選択);
-    }
-
-    /**
-     * 「選択」ボタン押下します。
-     *
-     * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_Select(YokaigoNinteiJohoTeikyoDiv div) {
-        getHandler(div).btn_Select();
-        return ResponseData.of(div).setState(DBE0900001StateName.一覧選択);
+        ViewStateHolder.put(ViewStateKeys.認定申請情報, business);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -126,131 +131,194 @@ public class YokaigoNinteiJohoTeikyo {
     }
 
     /**
-     * 「一覧へ戻る」ボタン押下します。 TODO n8178 城間 画面を破棄しながら検索画面に戻るように仕様を修正したため、この処理は削除される予定。
+     * 「発行する」ボタンクリック時のバリデーションです。
      *
      * @param div YokaigoNinteiJohoTeikyoDiv
      * @return ResponseData
      */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_BackSearchResult(YokaigoNinteiJohoTeikyoDiv div) {
-//        onLoad(div);
-//        getHandler(div).btn_BackSearchResult();
-        return ResponseData.of(div).setState(DBE0900001StateName.初期表示);
-    }
-
-    /**
-     * 帳票発行処理を実行します。
-     *
-     * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btnBatch_ReportPublish(YokaigoNinteiJohoTeikyoDiv div) {
-        ValidationMessageControlPairs validationMessageControlPairs = getHandler(div).validateCheck();
-        if (validationMessageControlPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
-        }
+    public ResponseData<YokaigoNinteiJohoTeikyoDiv> validate_btnPrint(YokaigoNinteiJohoTeikyoDiv div) {
+        NinnteiRiriBusiness 認定申請情報 = ViewStateHolder.get(ViewStateKeys.認定申請情報, NinnteiRiriBusiness.class);
         if (!ResponseHolder.isReRequest()) {
-            //dgNinteiKekkaIchiran_Row row = div.getNInteiRirekiInfo().getDgNinteiKekkaIchiran().getSelectedItems().get(0);
-            //NinnteiRiriBusiness business = ViewStateHolder.get(ViewStateKeys.認定申請情報, NinnteiRiriBusiness.class);
-            RString 申請書管理番号Str = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-            ShinseishoKanriNo 申請書管理番号 = RString.isNullOrEmpty(申請書管理番号Str)
-                    ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(申請書管理番号Str);
-            NinnteiRiriBusiness business = YokaigoNinteiJohoTeikyoFinder.createInstance().select認定履歴(申請書管理番号);
+            if (認定申請情報.get要介護認定一次判定完了年月日() == null
+                    || 認定申請情報.get要介護認定一次判定完了年月日().isEmpty()) {
+                throw new ApplicationException(DbeErrorMessages.一次判定未実施のため発行不可.getMessage());
+            }
 
-            if (business.get認定審査会完了年月日() == null || business.get認定審査会完了年月日().isEmpty()) {
+            ValidationMessageControlPairs validationMessageControlPairs = getValidationHandler(div).validateCheck();
+            if (validationMessageControlPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
+            }
+
+            if (認定申請情報.get認定審査会完了年月日() == null || 認定申請情報.get認定審査会完了年月日().isEmpty()) {
                 QuestionMessage message = new QuestionMessage(DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().getCode(),
                         DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-            if (business.get出力年月日() != null || business.get出力年月日().isEmpty()) {
+
+            if (認定申請情報.get出力年月日() != null && !認定申請情報.get出力年月日().isEmpty()) {
                 WarningMessage message = new WarningMessage(DbeWarningMessages.既に印刷済.getMessage().getCode(),
                         DbeWarningMessages.既に印刷済.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(DbeWarningMessages.既に印刷済.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-
         }
-        FlowParameters fp = FlowParameters.of(new RString("key"), WORKFLOW_KEY_BATCH);
-        FlowParameterAccessor.merge(fp);
-        div.setWfParameter(WORKFLOW_KEY_BATCH);
+
+        if (new RString(DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            } else {
+                if (認定申請情報.get出力年月日() != null && !認定申請情報.get出力年月日().isEmpty()) {
+                    WarningMessage message = new WarningMessage(DbeWarningMessages.既に印刷済.getMessage().getCode(),
+                            DbeWarningMessages.既に印刷済.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            }
+        }
+
+        if (new RString(DbeWarningMessages.既に印刷済.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * バッチパラメータの設定します。
+     * 「発行する」ボタンクリックイベントです。
      *
      * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData<YokaigoNinteiJohoTeikyoDiv>
+     * @return ResponseData
      */
-    public ResponseData<DBE090002_NinteikekkaJohoteikyoParameter> getParameter(YokaigoNinteiJohoTeikyoDiv div) {
-        DBE090002_NinteikekkaJohoteikyoParameter parm = new DBE090002_NinteikekkaJohoteikyoParameter();
-        RString 申請書管理番号Str = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        parm.setShinseishoKanriNo(申請書管理番号Str);
-        if (div.getHakkoChohyo().getChkNinteiChosahyo().isAllSelected()) {
-            parm.setChkNinteiChosahyo(する);
-        } else {
-            parm.setChkNinteiChosahyo(ない);
+    public ResponseData<SourceDataCollection> onClick_btnPrint(YokaigoNinteiJohoTeikyoDiv div) {
+        ResponseData<SourceDataCollection> response = new ResponseData<>();
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return response;
         }
-        if (div.getHakkoChohyo().getChkTokkiJiko().isAllSelected()) {
-            parm.setChkTokkiJiko(する);
-        } else {
-            parm.setChkTokkiJiko(ない);
+
+        ShinseishoKanriNo 申請書管理番号 = (!RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class)))
+                ? new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class))
+                : ShinseishoKanriNo.EMPTY;
+        YokaigoNinteiJohoTeikyoFinder finder = YokaigoNinteiJohoTeikyoFinder.createInstance();
+        YokaigoNinteiJohoTeikyoBusiness business = finder.get要介護認定情報提供(申請書管理番号);
+        RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
+        List<NinteichosahyoServiceJokyo> 認定調査票サービス状況List = finder.get認定調査票サービス状況(申請書管理番号);
+        List<NinteichosahyoServiceJokyoFlag> 認定調査票サービス状況フラグList = finder.get認定調査票サービス状況フラグ(申請書管理番号);
+        List<NinteichosahyoChosaItem> 認定調査票調査項目List = finder.get認定調査票調査項目List(申請書管理番号);
+        RString 認定調査票マスキング区分 = div.getRadNinteiChosaMasking().getSelectedKey();
+        RString 特記事項マスキング区分 = div.getRadTokkiJikoMasking().getSelectedKey();
+        RString 主治医意見書マスキング区分 = div.getRadShujii().getSelectedKey();
+        RString その他資料マスキング区分 = div.getRadSohotaShiryoMasking().getSelectedKey();
+        RString 一次判定結果マスキング区分 = div.getRadIchijiHanteiMasking().getSelectedKey();
+
+        try (ReportManager reportManager = new ReportManager()) {
+            if (div.getChkNinteiChosahyo().isAllSelected()) {
+                List<NinteichosahyoKinyuItem> 認定調査票記入項目List = finder.get認定調査票記入項目List(申請書管理番号);
+                print認定調査票(business, イメージ共有ファイルID, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
+                        認定調査票調査項目List, 認定調査票記入項目List, 認定調査票マスキング区分, 特記事項マスキング区分,
+                        主治医意見書マスキング区分, reportManager);
+            }
+
+            if (div.getChkTokkiJiko().isAllSelected()) {
+                List<RString> 特記事項区分List = finder.get特記事項区分(申請書管理番号, 特記事項マスキング区分);
+                List<NinteichosaRelate> 特記事項List = finder.get特記事項List(申請書管理番号, 特記事項マスキング区分);
+                print特記事項(business, 特記事項区分List, 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID, reportManager);
+            }
+
+            if (div.getChkShujiiIkensho().isAllSelected()) {
+                print主治医意見書(business, イメージ共有ファイルID, 主治医意見書マスキング区分, reportManager);
+            }
+
+            if (div.getChkSonotaShiryo().isAllSelected()) {
+                printその他資料(business, イメージ共有ファイルID, その他資料マスキング区分, reportManager);
+            }
+
+            if (div.getChkIchijiHanteiKekka().isAllSelected()) {
+                List<RString> 認定調査特記事項番号List = finder.get認定調査特記事項番号(申請書管理番号);
+                List<NinteichosahyoChosaItem> 前回認定調査票調査項目List = finder.get前回認定調査票調査項目List(申請書管理番号);
+                List<ShujiiIkenshoIkenItem> 主治医意見書意見項目List = finder.get主治医意見書意見項目List(申請書管理番号);
+                List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目List = finder.get前回主治医意見書意見項目List(申請書管理番号);
+                print一次判定結果(business, 認定調査特記事項番号List, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
+                        認定調査票調査項目List, 前回認定調査票調査項目List, 主治医意見書意見項目List, 前回主治医意見書意見項目List,
+                        一次判定結果マスキング区分, reportManager);
+            }
+
+            response.data = reportManager.publish();
+            update要介護認定申請情報(finder.get要介護認定申請情報(申請書管理番号));
         }
-        if (div.getHakkoChohyo().getChkShujiiIkensho().isAllSelected()) {
-            parm.setChkShujiiIkensho(する);
-        } else {
-            parm.setChkShujiiIkensho(ない);
+        return response;
+    }
+
+    private void print認定調査票(YokaigoNinteiJohoTeikyoBusiness business,
+            RDateTime イメージ共有ファイルID,
+            List<NinteichosahyoServiceJokyo> 認定調査票サービス状況List,
+            List<NinteichosahyoServiceJokyoFlag> 認定調査票サービス状況フラグList,
+            List<NinteichosahyoChosaItem> 認定調査票調査項目List,
+            List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
+            RString 認定調査票マスキング区分,
+            RString 特記事項マスキング区分,
+            RString 主治医意見書マスキング区分,
+            ReportManager reportManager) {
+        RString 総合事業開始区分 = DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        INinteiChosaJohohyoPrintService printService
+                = NinteiChosaJohohyoPrintServiceFactory.create(business.get厚労省IF識別コード(), 総合事業開始区分, reportManager);
+        if (printService != null) {
+            printService.print(business, イメージ共有ファイルID, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
+                    認定調査票調査項目List, 認定調査票記入項目List, 認定調査票マスキング区分, 特記事項マスキング区分, 主治医意見書マスキング区分);
         }
-        if (div.getHakkoChohyo().getChkSonotaShiryo().isAllSelected()) {
-            parm.setChkSonotaShiryo(する);
-        } else {
-            parm.setChkSonotaShiryo(ない);
+    }
+
+    private void print特記事項(YokaigoNinteiJohoTeikyoBusiness business,
+            List<RString> 特記事項区分List,
+            List<NinteichosaRelate> 特記事項List,
+            RString 特記事項マスキング区分,
+            RDateTime イメージ共有ファイルID,
+            ReportManager reportManager) {
+        ITokkiJikoPrintService printService = TokkiJikoPrintServiceFactory.create(business.toEntity(), 特記事項区分List, reportManager);
+        if (printService != null) {
+            printService.print(business, 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID);
         }
-        if (div.getHakkoChohyo().getChkIchijiHanteiKekka().isAllSelected()) {
-            parm.setChkIchijiHanteiKekka(する);
-        } else {
-            parm.setChkIchijiHanteiKekka(ない);
+    }
+
+    private void print主治医意見書(YokaigoNinteiJohoTeikyoBusiness business,
+            RDateTime イメージ共有ファイルID,
+            RString 主治医意見書マスキング区分,
+            ReportManager reportManager) {
+        new ShujiiIkenshoPrintService(reportManager).print(business, イメージ共有ファイルID, 主治医意見書マスキング区分);
+    }
+
+    private void printその他資料(YokaigoNinteiJohoTeikyoBusiness business,
+            RDateTime イメージ共有ファイルID,
+            RString その他資料マスキング区分,
+            ReportManager reportManager) {
+        new SonotashiryoPrintService(reportManager).print(business, イメージ共有ファイルID, その他資料マスキング区分);
+    }
+
+    private void print一次判定結果(YokaigoNinteiJohoTeikyoBusiness business,
+            List<RString> 認定調査特記事項番号List,
+            List<NinteichosahyoServiceJokyo> 認定調査票サービス状況List,
+            List<NinteichosahyoServiceJokyoFlag> 認定調査票サービス状況フラグList,
+            List<NinteichosahyoChosaItem> 認定調査票調査項目List,
+            List<NinteichosahyoChosaItem> 前回認定調査票調査項目List,
+            List<ShujiiIkenshoIkenItem> 主治医意見書意見項目List,
+            List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目List,
+            RString 一次判定結果マスキング区分,
+            ReportManager reportManager) {
+        new IchijihanteikekkahyoPrintService(reportManager).print(business, 認定調査特記事項番号List, 認定調査票サービス状況List,
+                認定調査票サービス状況フラグList, 認定調査票調査項目List, 前回認定調査票調査項目List, 主治医意見書意見項目List,
+                前回主治医意見書意見項目List, 一次判定結果マスキング区分);
+    }
+
+    private void update要介護認定申請情報(NinteiShinseiJoho 要介護認定申請情報) {
+        if (要介護認定申請情報 != null) {
+            NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit();
+            builder.set情報提供資料出力年月日(FlexibleDate.getNowDate());
+            NinteiShinseiJohoManager.createInstance().save要介護認定申請情報(builder.build().modifiedModel());
         }
-        if (キー.equals(div.getHakkoChohyo().getRadTokkiJikoMasking().getSelectedKey())) {
-            parm.setRadTokkiJikoMasking(する);
-        } else {
-            parm.setRadTokkiJikoMasking(ない);
-        }
-        if (キー.equals(div.getHakkoChohyo().getRadNinteiChosaMasking().getSelectedKey())) {
-            parm.setRadNinteiChosaMasking(する);
-        } else if (キー1.equals(div.getHakkoChohyo().getRadNinteiChosaMasking().getSelectedKey())) {
-            parm.setRadNinteiChosaMasking(調査員名);
-        } else {
-            parm.setRadNinteiChosaMasking(ない);
-        }
-        if (キー.equals(div.getHakkoChohyo().getRadShujii().getSelectedKey())) {
-            parm.setRadShujii(する);
-        } else {
-            parm.setRadShujii(ない);
-        }
-        if (キー.equals(div.getHakkoChohyo().getRadSohotaShiryoMasking().getSelectedKey())) {
-            parm.setRadSohotaShiryoMasking(する);
-        } else {
-            parm.setRadSohotaShiryoMasking(ない);
-        }
-        if (キー.equals(div.getHakkoChohyo().getRadIchijiHanteiMasking().getSelectedKey())) {
-            parm.setRadIchijiHanteiMasking(する);
-        } else if (キー1.equals(div.getHakkoChohyo().getRadIchijiHanteiMasking().getSelectedKey())) {
-            parm.setRadIchijiHanteiMasking(調査員名);
-        } else {
-            parm.setRadIchijiHanteiMasking(ない);
-        }
-        return ResponseData.of(parm).respond();
     }
 
     private YokaigoNinteiJohoTeikyoHandler getHandler(YokaigoNinteiJohoTeikyoDiv div) {
         return new YokaigoNinteiJohoTeikyoHandler(div);
     }
 
+    private YokaigoNinteiJohoTeikyoValidationHandler getValidationHandler(YokaigoNinteiJohoTeikyoDiv div) {
+        return new YokaigoNinteiJohoTeikyoValidationHandler(div);
+    }
 }

@@ -77,7 +77,8 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
                 new FlexibleDate(processParamter.getHakkobi()),
                 NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter);
-        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, Integer.parseInt(entity.get市町村コード().toString()));
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
+        Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
         RString 文書番号 = processParamter.getBunshoNo();
         itemList.add(new ShujiiIkenshoBusiness(entity, processParamter).setDBE230001Item(ninshoshaSource, 文書番号, 通知文Map));
     }
