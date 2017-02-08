@@ -42,16 +42,6 @@ public final class OcrTorikomiResultUtil {
         return results;
     }
 
-    public static List<OcrTorikomiResult> create(ShinseiKey key, Iterable<? extends IOcrData> ocrData, IProcessingResultSeed seed) {
-        List<OcrTorikomiResult> results = new ArrayList<>();
-        for (IOcrData o : ocrData) {
-            results.add(new OcrTorikomiResult.Builder(key)
-                    .set処理結果(seed.toProcessingResult(o))
-                    .build());
-        }
-        return results;
-    }
-
     public static List<OcrTorikomiResult> create(ShinseiKey key, IProcessingResults results) {
         return Arrays.asList(new OcrTorikomiResult.Builder(key)
                 .set処理結果s(results)

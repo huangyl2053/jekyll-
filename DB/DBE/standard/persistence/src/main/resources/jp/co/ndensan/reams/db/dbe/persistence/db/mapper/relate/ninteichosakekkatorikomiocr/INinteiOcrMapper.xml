@@ -22,6 +22,8 @@
           , T5201."ninteiChosainCode" AS 認定調査員コード
           , T5201."ninteichosaIraiKubunCode" AS 認定調査依頼区分コード
           , T5201."ninteichosaIraiKaisu" AS 認定調査回数
+          , T5201."ninteichosaIraiYMD" AS 認定調査依頼日
+          , T5105."ichijiHanteiKanryoYMD" AS 一次判定完了日
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
@@ -55,6 +57,29 @@
           ORDER BY matches指定申請日 DESC, 論理削除フラグ, 認定申請日 DESC
           LIMIT 1
     </select>
+
+    <select id="getNinteiChosaContext" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.ChosahyoOcrContextParameter"
+            resultMap="ResultMap_getNinteiChosaContext"  fetchSize="500">
+        SELECT
+            DbT5101."shinseishoKanriNo" AS "申請書管理番号",
+            (DbT5913."ninteiChosainCode" = #{調査員コード}) AS "exists調査員区分"
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN
+            rgdb."DbT5913ChosainJoho" DbT5913
+            <!-- ON DbT5913."shichosonCode" = DbT5101."shichosonCode" -->
+            <!-- AND DbT5913."ninteiChosaItakusakiCode" = #{調査委託先コード} -->
+            ON DbT5913."ninteiChosaItakusakiCode" = #{調査委託先コード}
+        WHERE
+            DbT5101."shinseishoKanriNo" = #{申請書管理番号}
+        ORDER BY "exists調査員区分" DESC
+        LIMIT 1
+    </select>
+
+    <resultMap id="ResultMap_getNinteiChosaContext" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaContextEntity" autoMapping="false">
+        <id property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="exists調査員区分" column="exists調査員区分"/>
+    </resultMap>
 
     <select id="get認定調査票" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter"
             resultMap="ResultMap_get認定調査票" fetchSize="500">

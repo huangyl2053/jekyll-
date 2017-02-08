@@ -21,14 +21,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBE-1540-010 dongyabin
  */
-public class NinteiOcrFindler {
+public class NinteiOcrFinder {
 
     private final MapperProvider mapperProvider;
 
     /**
      * コンストラクタです。
      */
-    NinteiOcrFindler() {
+    NinteiOcrFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -39,18 +39,18 @@ public class NinteiOcrFindler {
      * @param IkenshoImageJohoManager {@link dbt5305}
      * @param NinteichosahyoTokkijikoManager {@link dbt5205}
      */
-    NinteiOcrFindler(MapperProvider mapperProvider) {
+    NinteiOcrFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link NinteiOcrFindler}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link NinteiOcrFinder}のインスタンスを返します。
      *
      * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteiOcrFindler}のインスタンス
+     * {@link InstanceProvider#create}にて生成した{@link NinteiOcrFinder}のインスタンス
      */
-    public static NinteiOcrFindler createInstance() {
-        return InstanceProvider.create(NinteiOcrFindler.class);
+    public static NinteiOcrFinder createInstance() {
+        return InstanceProvider.create(NinteiOcrFinder.class);
     }
 
     /**

@@ -37,7 +37,7 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
     }
 
     private final Map<RString, RString> table;
-    private final IProcessingResults results;
+    private final ProcessingResults results;
 
     /**
      * @param ocrSonotas 関連する{@link OcrSonota}すべて

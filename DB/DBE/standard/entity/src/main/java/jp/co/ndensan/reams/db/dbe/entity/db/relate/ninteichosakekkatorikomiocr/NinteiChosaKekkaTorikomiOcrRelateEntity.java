@@ -36,5 +36,7 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
     private RString 認定調査員コード;
     private Code 認定調査依頼区分コード;
     private int 認定調査回数;
+    private FlexibleDate 認定調査依頼日;
+    private FlexibleDate 一次判定完了日;
     private boolean matches指定申請日;
 }
