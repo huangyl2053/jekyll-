@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -89,9 +90,9 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
             row.setSeibetsu(Gender.toValue(申請.get性別()).getCommonName());
             row.getNinteiShinseibi().setValue(申請.get認定申請年月日());
             row.setShinseikubun(NinteiShinseiShinseijiKubunCode.toValue(申請.get申請区分()).get名称());
-            row.setNijiHanteiKekka(YokaigoJotaiKubun.toValue(申請.get二次判定結果()).get名称());
-            row.getKaisaiYoteibi().setValue(申請.get開催予定日());
-            row.getKaisaibi().setValue(申請.get開催日());
+            row.setNijiHanteiKekka((申請.get二次判定結果() != null) ? YokaigoJotaiKubun.toValue(申請.get二次判定結果()).get名称() : RString.EMPTY);
+            row.getKaisaiYoteibi().setValue((申請.get開催予定日() != null) ? 申請.get開催予定日() : FlexibleDate.EMPTY);
+            row.getKaisaibi().setValue((申請.get開催日() != null) ? 申請.get開催日() : FlexibleDate.EMPTY);
             row.setHihokenshaDoi(申請.get被保険者の同意());
             row.setShujiiDoi(申請.get主治医の同意());
             row.setShinseishoKanriNo(申請.get申請書管理番号());
