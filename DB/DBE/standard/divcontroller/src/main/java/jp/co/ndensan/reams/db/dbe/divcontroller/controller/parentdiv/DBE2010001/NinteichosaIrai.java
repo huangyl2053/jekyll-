@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteichosai
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
@@ -37,8 +38,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -86,6 +89,8 @@ public class NinteichosaIrai {
     private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString UIコンテナID_DBEUC22001 = new RString("DBEUC22001");
+    private static final RString 修正 = new RString("Modified");
+    private static final RString FW_VALUE_BATCH = new RString("Batch");
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
@@ -241,7 +246,39 @@ public class NinteichosaIrai {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
+
+        boolean 未保存データ有 = false;
+        if (!(new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
+                .equals(ResponseHolder.getMessageCode())) {
+            未保存データ有 = has未保存データ(requestDiv, 未保存データ有);
+        }
+        if (未保存データ有) {
+            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.変更未保存の確認.getMessage().getCode(),
+                    DbzQuestionMessages.変更未保存の確認.getMessage().evaluate());
+            return ResponseData.of(requestDiv).addMessage(message).respond();
+        }
+        if ((new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(requestDiv).respond();
+        } else if ((new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        }
+
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private boolean has未保存データ(NinteichosaIraiDiv requestDiv, boolean 未保存データ有) {
+        for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
+            RString 状態 = new RString(row.getRowState().toString());
+            if (状態.equals(修正)) {
+                未保存データ有 = true;
+                break;
+            }
+        }
+        return 未保存データ有;
     }
 
     /**
@@ -287,6 +324,8 @@ public class NinteichosaIrai {
         handler.set認定調査依頼情報();
         handler.set手動割付時使用可否(false);
         handler.clear認定調査依頼登録パネル();
+        handler.clearチェック();
+        handler.set認定調査自動割付ボタン();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
@@ -300,6 +339,8 @@ public class NinteichosaIrai {
         NinteichosaIraiHandler handler = getHandler(requestDiv);
         handler.set手動割付時使用可否(false);
         handler.clear認定調査依頼登録パネル();
+        handler.clearチェック();
+        handler.set認定調査自動割付ボタン();
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
     }
 
@@ -380,23 +421,32 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onClick_btnUpdate(NinteichosaIraiDiv requestDiv) {
+        List<dgNinteiTaskList_Row> ModifyList = new ArrayList<>();
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnUpdate();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
             NinteiShinseiJohoManager ninteiShinseiJohoManager = NinteiShinseiJohoManager.createInstance();
             NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
-            for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getSelectedItems()) {
+
+            for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getDataSource()) {
+                RString 状態 = new RString(row.getRowState().toString());
+                if (状態.equals(修正)) {
+                    ModifyList.add(row);
+                }
+            }
+
+            for (dgNinteiTaskList_Row row : ModifyList) {
 
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 RString 認定調査依頼履歴番号 = row.getNinteichosaIraiRirekiNo();
@@ -422,8 +472,8 @@ public class NinteichosaIrai {
                         .set調査区分(調査区分コード)
                         .set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード.value()))
                         .set認定調査員コード(new ChosainCode(認定調査員コード))
-                        .build();
-                ninteiShinseiJohoManager.save(認定調査依頼情報.modifiedModel());
+                        .build().modifiedModel();
+                ninteiShinseiJohoManager.save(認定調査依頼情報);
 
                 if (RString.isNullOrEmpty(認定調査依頼履歴番号) || 認定調査依頼情報.getNinteichosaIraiJohoList().isEmpty()) {
                     NinteichosaIraiJoho 更新用認定調査依頼情報 = new NinteichosaIraiJoho(申請書管理番号, 1);
@@ -443,36 +493,80 @@ public class NinteichosaIrai {
                 } else {
                     NinteichosaIraiJohoIdentifier ninteichosaIraiJohoIdentifier
                             = new NinteichosaIraiJohoIdentifier(申請書管理番号, Integer.parseInt(認定調査依頼履歴番号.toString()));
-                    NinteichosaIraiJoho 更新用認定調査依頼情報 = 認定調査依頼情報.getNinteichosaIraiJoho(ninteichosaIraiJohoIdentifier);
+                    NinteichosaIraiJoho 処理用認定調査依頼情報 = 認定調査依頼情報.getNinteichosaIraiJoho(ninteichosaIraiJohoIdentifier);
 
-                    更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit()
-                            .set厚労省IF識別コード(厚労省IF識別コード)
-                            .set認定調査委託先コード(認定調査委託先コード)
-                            .set認定調査員コード(認定調査員コード)
-                            .set認定調査依頼区分コード(new Code(認定調査依頼区分コード))
-                            .set認定調査依頼年月日(認定調査依頼年月日)
-                            .set認定調査期限年月日(認定調査期限年月日)
-                            .set論理削除フラグ(false)
-                            .build();
-                    if (RString.isNullOrEmpty(更新用認定調査依頼情報.get認定調査督促メモ())) {
-                        更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit().set認定調査督促メモ(RString.EMPTY).build();
-                    }
-                    if (更新用認定調査依頼情報.get認定調査督促年月日() == null) {
-                        更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit().set認定調査督促年月日(FlexibleDate.EMPTY).build();
-                    }
-                    if (更新用認定調査依頼情報.get認定調査回数() == 0) {
-                        更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit()
-                                .set認定調査回数(Integer.parseInt(認定調査依頼履歴番号.toString()) + 1).build();
-                    }
-                    ninteichosaIraiJohoManager.save認定調査依頼情報(更新用認定調査依頼情報.modifiedModel());
+                    update認定調査依頼情報(処理用認定調査依頼情報,
+                            ninteichosaIraiJohoManager);
+
+                    insert認定調査依頼情報(申請書管理番号,
+                            厚労省IF識別コード,
+                            認定調査委託先コード,
+                            認定調査員コード,
+                            認定調査依頼区分コード,
+                            認定調査依頼年月日,
+                            認定調査期限年月日,
+                            認定調査依頼履歴番号,
+                            ninteichosaIraiJohoManager);
                 }
             }
-            requestDiv.getCcdKanryoMsg().setMessage(
-                    new RString("認定調査依頼の保存処理が完了しました。"),
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(requestDiv).setState(DBE2010001StateName.完了);
+
+            if (!(new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode()))) {
+                return ResponseData.of(requestDiv).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            }
+
+        }
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            List<dgNinteiTaskList_Row> dataSource = new ArrayList<>();
+            requestDiv.getDgNinteiTaskList().setDataSource(dataSource);
+            getHandler(requestDiv).initDataGrid();
+            ViewStateHolder.put(ViewStateKeys.状態, requestDiv.getRadShoriJyotai().getSelectedKey());
+            return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
         }
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private void insert認定調査依頼情報(ShinseishoKanriNo 申請書管理番号,
+            Code 厚労省IF識別コード,
+            JigyoshaNo 認定調査委託先コード,
+            RString 認定調査員コード,
+            RString 認定調査依頼区分コード,
+            FlexibleDate 認定調査依頼年月日,
+            FlexibleDate 認定調査期限年月日,
+            RString 認定調査依頼履歴番号,
+            NinteichosaIraiJohoManager ninteichosaIraiJohoManager
+    ) throws NumberFormatException, NullPointerException, IllegalArgumentException {
+        NinteichosaIraiJoho 更新用認定調査依頼情報 = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号.toInt() + 1);
+        更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit()
+                .set厚労省IF識別コード(厚労省IF識別コード)
+                .set認定調査委託先コード(認定調査委託先コード)
+                .set認定調査員コード(認定調査員コード)
+                .set認定調査依頼区分コード(new Code(認定調査依頼区分コード))
+                .set認定調査回数(1)
+                .set認定調査依頼年月日(認定調査依頼年月日)
+                .set認定調査期限年月日(認定調査期限年月日)
+                .set論理削除フラグ(false)
+                .build();
+
+        if (RString.isNullOrEmpty(更新用認定調査依頼情報.get認定調査督促メモ())) {
+            更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit().set認定調査督促メモ(RString.EMPTY).build();
+        }
+        if (更新用認定調査依頼情報.get認定調査督促年月日() == null) {
+            更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit().set認定調査督促年月日(FlexibleDate.EMPTY).build();
+        }
+        if (更新用認定調査依頼情報.get認定調査回数() == 0) {
+            更新用認定調査依頼情報 = 更新用認定調査依頼情報.createBuilderForEdit()
+                    .set認定調査回数(Integer.parseInt(認定調査依頼履歴番号.toString()) + 1).build();
+        }
+        ninteichosaIraiJohoManager.save認定調査依頼情報(更新用認定調査依頼情報);
+    }
+
+    private void update認定調査依頼情報(NinteichosaIraiJoho 処理用認定調査依頼情報, NinteichosaIraiJohoManager ninteichosaIraiJohoManager) {
+        NinteichosaIraiJoho 更新用認定調査依頼情報 = 処理用認定調査依頼情報.createBuilderForEdit()
+                .set論理削除フラグ(true)
+                .build();
+        ninteichosaIraiJohoManager.save認定調査依頼情報(更新用認定調査依頼情報.modifiedModel());
     }
 
     /**
@@ -487,16 +581,16 @@ public class NinteichosaIrai {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace("認定調査依頼").evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             要介護認定完了情報更新(requestDiv.getDgNinteiTaskList().getSelectedItems());
             requestDiv.getCcdKanryoMsg().setMessage(
-                    new RString("完了処理・認定調査依頼の保存処理が完了しました。"),
+                    new RString("基本運用・認定調査依頼の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             FlowParameters fp = FlowParameters.of(new RString("key"), "Kanryo");
             FlowParameterAccessor.merge(fp);

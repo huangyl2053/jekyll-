@@ -56,7 +56,8 @@ public class NinteiShinseiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
      */
     public static NinteiShinseiJohoManager createInstance() {
         return InstanceProvider.create(NinteiShinseiJohoManager.class);
@@ -93,7 +94,7 @@ public class NinteiShinseiJohoManager {
         if (!要介護認定申請情報.hasChanged()) {
             return false;
         }
-        要介護認定申請情報 = 要介護認定申請情報.modifiedModel();
+        // 要介護認定申請情報 = 要介護認定申請情報.modifiedModel();
         save認定調査依頼情報リスト(要介護認定申請情報.getNinteichosaIraiJohoList());
         return 1 == 要介護認定申請情報Dac.save(要介護認定申請情報.toEntity());
     }

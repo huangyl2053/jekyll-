@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.IkenSyoNyuSyuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -113,7 +114,7 @@ public class IkenshogetHandler {
         List<dgNinteiTaskList_Row> rowListNotreated = new ArrayList<>();
         int completeCount = 0;
         int notCount = 0;
-
+        RString 督促方法 = RString.EMPTY;
         for (IkenSyoNyuSyuBusiness business : 意見書入手List.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
@@ -129,7 +130,12 @@ public class IkenshogetHandler {
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().value().equals(RString.EMPTY)
                     || business.get意見書作成回数区分().value().equals(RString.HALF_SPACE)
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
-            row.setChosaTokusokuHoho(business.get主治医意見書作成督促方法() == null ? RString.EMPTY : business.get主治医意見書作成督促方法());
+            if (business.get主治医意見書作成督促方法() == null || business.get主治医意見書作成督促方法().isEmpty()) {
+                督促方法 = RString.EMPTY;
+            } else {
+                督促方法 = get督促方法(business.get主治医意見書作成督促方法());
+            }
+            row.setChosaTokusokuHoho(督促方法);
             row.getChosaTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             意見書入手モードの日付設定(row, business);
             if (business.get主治医意見書読取年月日() == null) {
@@ -170,6 +176,20 @@ public class IkenshogetHandler {
             div.getTxtKanryouKano().setDisplayNone(false);
             div.getTxtMisyori().setDisplayNone(false);
         }
+    }
+
+    public RString get督促方法(RString 督促方法区分) {
+        RString 督促方法 = RString.EMPTY;
+        if (NinteichosaTokusokuHoho.督促状郵送.getCode().equals(督促方法区分)) {
+            督促方法 = NinteichosaTokusokuHoho.督促状郵送.get名称();
+        } else if (NinteichosaTokusokuHoho.督促状ＦＡＸ.getCode().equals(督促方法区分)) {
+            督促方法 = NinteichosaTokusokuHoho.督促状ＦＡＸ.get名称();
+        } else if (NinteichosaTokusokuHoho.電話.getCode().equals(督促方法区分)) {
+            督促方法 = NinteichosaTokusokuHoho.電話.get名称();
+        } else if (NinteichosaTokusokuHoho.その他.getCode().equals(督促方法区分)) {
+            督促方法 = NinteichosaTokusokuHoho.その他.get名称();
+        }
+        return 督促方法;
     }
 
     private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {

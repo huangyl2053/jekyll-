@@ -5,16 +5,27 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosakekkatorikomiocr.NinteiOcrRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenChosainFuicchi;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.OcrDataReadProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaContextEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.AccessLevel;
 
 /**
  * {@link DbT5202NinteichosahyoGaikyoChosaEntity}を編集します。
  */
 public final class OcrNinteichosahyoGakyoChosaEditor {
+
+    private static final RString KINYUSHA_MINYURYOKU = new RString("99999999");
 
     private OcrNinteichosahyoGakyoChosaEditor() {
     }
@@ -57,7 +68,11 @@ public final class OcrNinteichosahyoGakyoChosaEditor {
 
                     @Override
                     void set(RString value, DbT5202NinteichosahyoGaikyoChosaEntity entity) {
-                        entity.setChosainCode(value);
+                        if (KINYUSHA_MINYURYOKU.equals(value)) {
+                            entity.setChosainCode(RString.EMPTY);
+                        } else {
+                            entity.setChosainCode(value);
+                        }
                     }
                 },
         調査委託先コード {

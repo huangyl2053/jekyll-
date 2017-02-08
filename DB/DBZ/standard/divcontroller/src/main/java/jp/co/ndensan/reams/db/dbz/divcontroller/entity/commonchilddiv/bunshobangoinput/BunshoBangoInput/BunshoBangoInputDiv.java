@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * @author 自動生成
  */
 public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-02_08-19-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,6 +42,8 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
     private Button btnGetBunshoNo;
     @JsonProperty("hdnPadSpaceFlag")
     private RString hdnPadSpaceFlag;
+    @JsonProperty("hdnChihoKokyoDantaiCode")
+    private RString hdnChihoKokyoDantaiCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -155,6 +157,24 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
     @JsonProperty("hdnPadSpaceFlag")
     public void setHdnPadSpaceFlag(RString hdnPadSpaceFlag) {
         this.hdnPadSpaceFlag = hdnPadSpaceFlag;
+    }
+
+    /*
+     * gethdnChihoKokyoDantaiCode
+     * @return hdnChihoKokyoDantaiCode
+     */
+    @JsonProperty("hdnChihoKokyoDantaiCode")
+    public RString getHdnChihoKokyoDantaiCode() {
+        return hdnChihoKokyoDantaiCode;
+    }
+
+    /*
+     * sethdnChihoKokyoDantaiCode
+     * @param hdnChihoKokyoDantaiCode hdnChihoKokyoDantaiCode
+     */
+    @JsonProperty("hdnChihoKokyoDantaiCode")
+    public void setHdnChihoKokyoDantaiCode(RString hdnChihoKokyoDantaiCode) {
+        this.hdnChihoKokyoDantaiCode = hdnChihoKokyoDantaiCode;
     }
 
     /*

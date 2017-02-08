@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
 
     private final ShujiiIkenshoIraiTaishoIchiranDiv div;
+    private static final RString 修正 = new RString("Modified");
 
     /**
      * コンストラクタです。
@@ -118,11 +120,10 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(ValidationMessages.該当データなし));
-        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.対象行を選択));
         } else {
-            List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
-            for (dgNinteiTaskList_Row row : selected) {
+            List<dgNinteiTaskList_Row> ModifyList = getModifyList();
+
+            for (dgNinteiTaskList_Row row : ModifyList) {
                 if (row.getIkenshoIraiDay().getValue() == null
                         || RString.isNullOrEmpty(row.getKonkaiShujiiIryokikanCode())
                         || RString.isNullOrEmpty(row.getKonkaiShujiiCode())) {
@@ -132,6 +133,17 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
             }
         }
         return validationMessages;
+    }
+
+    private List<dgNinteiTaskList_Row> getModifyList() {
+        List<dgNinteiTaskList_Row> ModifyList = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
+            RString 状態 = new RString(row.getRowState().toString());
+            if (状態.equals(修正)) {
+                ModifyList.add(row);
+            }
+        }
+        return ModifyList;
     }
 
     /**
@@ -180,7 +192,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         意見書依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "意見書依頼"),
         複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
         主治医入力必須(UrErrorMessages.必須, "主治医"),
-        医療機関_主治医未割付のため更新不可(UrErrorMessages.更新不可_汎用, "医療機関・主治医が未設定のデータが選択されている");
+        医療機関_主治医未割付のため更新不可(UrErrorMessages.更新不可_汎用, "意見書依頼が未設定のデータが選択されている");
 
         private final Message message;
 

@@ -1,0 +1,70 @@
+﻿{
+ "uiContainerName": "DBEUC09002",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定情報提供一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0900002",
+     "toLayoutTitle": "要介護認定情報提供一括発行",
+     "toState": "帳票発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0900002",
+     "layoutTitle": "要介護認定情報提供一括発行",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0900002",
+     "layoutTitle": "要介護認定情報提供一括発行",
+     "eventName": "個人状況照会へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5410001",
+     "toLayoutTitle": "要介護認定個人状況照会",
+     "toState": "要介護認定情報提供一括発行から遷移"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0900002",
+     "toLayoutTitle": "要介護認定情報提供一括発行",
+     "toState": "帳票発行"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

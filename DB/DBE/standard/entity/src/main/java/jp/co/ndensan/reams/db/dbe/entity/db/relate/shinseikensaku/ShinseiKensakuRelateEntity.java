@@ -46,8 +46,8 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private Code koroshoIfShikibetsuCode;
     private FlexibleDate zenkaiYukoKikanStart;
     private FlexibleDate zenkaiYukoKikanEnd;
-    private Code nijiHanteiYokaigoJotaiKubun;
-    private int nijiHanteiNinteiYukoKikan;
+    private Code zenkaiNijiHanteiYokaigoJotaiKubun;
+    private int zenkaiNijiHanteiNinteiYukoKikan;
     private RString shichosonMeisho;
     private RString jigyoshaMeisho;
     private RString chosainShimei;
@@ -56,5 +56,12 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private int ikenshoIraiRirekiNo;
     private int ninteichosaIraiRirekiNo;
     private Code zenkaiKoroshoIfShikibetsuCode;
+    private Code ichijiHanteiKekkaCode;
+    private FlexibleDate ichijiHanteiYMD;
+    private Code nijiHanteiYokaigoJotaiKubunCode;
+    private FlexibleDate nijiHanteiYMD;
+    private int nijiHanteiNinteiYukoKikan;
+    private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
+    private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
     private int totalCount;
 }

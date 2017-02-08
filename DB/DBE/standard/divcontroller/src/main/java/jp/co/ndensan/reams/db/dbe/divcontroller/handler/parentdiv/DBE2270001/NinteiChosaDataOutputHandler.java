@@ -76,6 +76,7 @@ public class NinteiChosaDataOutputHandler {
             div.getTxtMaxCount().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                     RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         }
+        div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().setRequired(true);
     }
 
     private RString get市町村コード() {

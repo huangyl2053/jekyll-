@@ -19,17 +19,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n2818
  */
 @lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE250002_ImageTorikomiParameter extends BatchParameterBase {
 
     private static final String KYOYU_FILE_ENTRY = "KyoyuFileEntry";
 
     @BatchParameter(key = KYOYU_FILE_ENTRY, name = "共有ファイルエントリ情報文字列")
-    private final RString 共有ファイルエントリ情報文字列;
-    @BatchParameter(key = "2", name = "一次判定済みの申請者")
-    private final TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
-    @BatchParameter(key = "3", name = "依頼時と実施時での医師の不一致")
-    private final TreatmentWhenShujiiFuicchi 主治医不一致時処理方法;
+    private RString 共有ファイルエントリ情報文字列;
+    @BatchParameter(name = "一次判定済みの申請者")
+    private TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
+    @BatchParameter(name = "依頼時と実施時での医師の不一致")
+    private TreatmentWhenShujiiFuicchi 主治医不一致時処理方法;
+
+    /**
+     * バッチ基盤でパラメータを作成する際に用いられるコンストラクタです。
+     */
+    public DBE250002_ImageTorikomiParameter() {
+    }
 
     /**
      * イメージ取込（規定・規定外）バッチパラメータクラスのコンストラクタです。

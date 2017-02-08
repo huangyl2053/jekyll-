@@ -7,15 +7,14 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IRelatedData;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrTorikomiKekkaCsvEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -83,10 +82,9 @@ public final class OcrTorikomiResult {
     public static class Builder {
 
         private final ShinseiKey key;
+        private final ProcessingResults 処理結果;
         private RString 氏名 = RString.EMPTY;
         private RString 氏名カナ = RString.EMPTY;
-        private ShinkiKoshinKubun 新規更新区分 = ShinkiKoshinKubun.対象データなし;
-        private IProcessingResults 処理結果;
 
         /**
          * {@link Builder}を生成します。
@@ -95,18 +93,16 @@ public final class OcrTorikomiResult {
          */
         public Builder(ShinseiKey key) {
             this.key = key;
+            this.処理結果 = new ProcessingResults();
         }
 
         /**
-         * @param 氏名 氏名
-         * @param 氏名カナ 氏名カナ
-         * @param 新規更新区分 新規更新区分
+         * @param 関連データ
          * @return {@link Builder}
          */
-        public Builder set関連データ(RString 氏名, RString 氏名カナ, ShinkiKoshinKubun 新規更新区分) {
-            this.氏名 = 氏名;
-            this.氏名カナ = 氏名カナ;
-            this.新規更新区分 = 新規更新区分;
+        public Builder set関連データ(IRelatedData 関連データ) {
+            this.氏名 = 関連データ.get被保険者氏名();
+            this.氏名カナ = 関連データ.get被保険者カナ();
             return this;
         }
 
@@ -132,9 +128,6 @@ public final class OcrTorikomiResult {
          * @return {@link OcrTorikomiResult}
          */
         public OcrTorikomiResult build() {
-            if (処理結果.isEmpty()) {
-                throw new IllegalStateException("");
-            }
             return new OcrTorikomiResult(this);
         }
     }

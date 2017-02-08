@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 
@@ -18,5 +19,6 @@ public class DbT5101RelateEntity {
     private DbT5101NinteiShinseiJohoEntity dbT5101Entity;
     private DbT5123NinteiKeikakuJohoEntity dbT5123Entity;
     private DbT5102NinteiKekkaJohoEntity dbT5102Entity;
+    private DbT7051KoseiShichosonMasterEntity dbT7051Entity;
 
 }

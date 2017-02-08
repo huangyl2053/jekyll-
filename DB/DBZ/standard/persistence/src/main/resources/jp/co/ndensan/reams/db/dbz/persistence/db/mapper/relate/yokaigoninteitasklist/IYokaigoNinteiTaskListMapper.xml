@@ -512,7 +512,8 @@
             DbT5910_temp1_1."jigyoshaMeisho"  AS   before_before_jigyoshaMeisho,
             DbT5913_temp_1_1."chosainShimei"  AS  before_before_chosainShimei,
             DbT5201."ninteichosaIraiRirekiNo",
-            DbT5101."koroshoIfShikibetsuCode"
+            DbT5101."koroshoIfShikibetsuCode",
+            DbT5201."mobileDataShutsuryokuZumiFlag"
         FROM
             (SELECT
                 DbT5105_temp.*
@@ -544,7 +545,7 @@
                             SELECT 'A'
                             FROM rgdb."DbT5201NinteichosaIraiJoho" as "slv"
                             WHERE "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-                                  AND "mst"."ninteichosaIraiRirekiNo" <![CDATA[>]]> "slv"."ninteichosaIraiRirekiNo"
+                                  AND "mst"."ninteichosaIraiRirekiNo" <![CDATA[<]]> "slv"."ninteichosaIraiRirekiNo"
                             )
                        AND "mst"."logicalDeletedFlag" = FALSE
                 ) AS DbT5201

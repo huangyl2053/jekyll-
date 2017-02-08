@@ -48,6 +48,7 @@ renrakuJikoToShujii,text,RString,,,,,主治医への連絡事項,A
 enkitsuchiNashiDoiFlag,bool,boolean,,,,,認定延期通知発行しないことに対する同意有無,A
 shisetsuNyushoFlag,bool,boolean,,,,,施設入所の有無,A
 nyushoShisetsuCode,DbUDD004JigyoshaNo,JigyoshaNo,,,,,入所施設コード,A
+nyushoShisetsuMeisho,UDD042AtenaMeisho,AtenaMeisho,,,,,入所施設名称,A
 kateiHomonFlag,bool,boolean,,,,,家庭訪問の有無,A
 homonChosasakiYubinNo,UDD003YubinNo,YubinNo,,,,,訪問調査先郵便番号,A
 homonChosasakiJusho,UDD046AtenaJusho,AtenaJusho,,,,,訪問調査先住所,A
@@ -74,3 +75,4 @@ saiChosaIraiKaisu,int2,int,,,,,再調査依頼回数,A
 saiSakuseiIraiKaisu,int2,int,,,,,再作成依頼回数,A
 ifSofuYMD,UDD015YMD,FlexibleDate,,,,,ＩＦ送付年月日,A
 logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A

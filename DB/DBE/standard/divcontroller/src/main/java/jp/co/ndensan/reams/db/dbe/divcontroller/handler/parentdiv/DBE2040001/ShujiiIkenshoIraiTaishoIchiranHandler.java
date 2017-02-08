@@ -91,7 +91,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         setButton(stateName);
         set依頼区分ドロップダウンリスト();
         div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
-        div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(false);
+        div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(true);
     }
 
     /**
@@ -161,6 +161,16 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     }
 
     /**
+     * データグリッドのチェックを外します。
+     */
+    public void clearチェック() {
+        List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
+        for (dgNinteiTaskList_Row row : rowList) {
+            row.setSelected(false);
+        }
+    }
+
+    /**
      * 認定調査依頼登録パネルの各項目を設定します。
      */
     public void set意見書依頼登録パネル() {
@@ -173,9 +183,12 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
             div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
             div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
-            div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
+            if (row.getIshiKubunCode() != null) {
+                div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
+            }
+
             div.getDdlIraiKubun().setSelectedKey(
-                    (!row.getIkenshoIraiKubun().isEmpty())
+                    (row.getIkenshoIraiKubun() != null && !row.getIkenshoIraiKubun().isEmpty())
                     ? row.getIkenshoIraiKubun()
                     : IkenshoIraiKubun.初回依頼.getコード());
             div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoIraiDay().getValue());

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -22,10 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class OcrIken implements IOcrData {
 
-    private static final RString 意見書_表 = new RString("701");
-    private static final RString 意見書_裏 = new RString("702");
-    private static final RString 意見書_ID777 = new RString("777");
-    private static final RString 意見書_ID778 = new RString("778");
     private static final int 切り出し桁数 = 1;
     private static final int 桁数固定値_内科 = 0;
     private static final int 桁数固定値_皮膚科 = 1;
@@ -173,181 +170,17 @@ public final class OcrIken implements IOcrData {
     // 全体イメージ（帳票一面のイメージ）中で、表側の画像を示すインデックス（規定外、規定外IDで利用する）
     private RString 全体イメージ表側インデックス;
 
-    private OcrIken() {
+    private boolean isBroken;
+    private int lineNum;
+
+    private OcrIken(RString line, int lineNum) {
+        init(line);
+        this.isBroken = false;
+        this.lineNum = lineNum;
     }
 
-    /**
-     * 行を解析した結果より、インスタンスを生成します。
-     *
-     * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
-     *
-     * @param line 行
-     * @return {@link OcrIken}
-     */
-    public static OcrIken parsed(RString line) {
-        return parseデータ行(line);
-    }
-
-    private static OcrIken parseデータ行(RString line) {
-        OcrIken result = new OcrIken();
-        result.clear();
-        result.setデータ行_文字列(line);
-        List<RString> columns = Collections.unmodifiableList(line.split(","));
-        if (columns == null || columns.isEmpty()) {
-            return result;
-        }
-        RString ocrID = columns.get(0);
-        if (意見書_表.equals(ocrID)) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 33 LINES
-            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(get西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            result.set同意の有無(columns.get(5));
-            result.set最終診察日(get西暦_年(columns.get(6)));
-            result.set記入日(get西暦_年(columns.get(7)));
-            result.set受領日(get西暦_年(columns.get(8)));
-            result.set意見書作成回数(columns.get(9));
-            result.set他科受診の有無(columns.get(10));
-            result.set記入のあった科(columns.get(11));
-            result.set受診科(columns.get(11));
-            result.set発症年月日１和暦(columns.get(12));
-            result.set発症年月日１(get西暦_年(columns.get(13)));
-            result.set発症年月日２和暦(columns.get(14));
-            result.set発症年月日２(get西暦_年(columns.get(15)));
-            result.set発症年月日３和暦(columns.get(16));
-            result.set発症年月日３(get西暦_年(columns.get(17)));
-            result.set症状の安定性(columns.get(18));
-            result.set処置内容(columns.get(19));
-            result.set特別な対応(columns.get(20));
-            result.setカテーテル(columns.get(21));
-            result.set障害高齢者の自立度(columns.get(22));
-            result.set認知症高齢者の自立度(columns.get(23));
-            result.set短期記憶(columns.get(24));
-            result.set認知能力(columns.get(25));
-            result.set伝達能力(columns.get(26));
-            result.set問題行動の有無(columns.get(27));
-            result.set問題行動(columns.get(28));
-            result.set精神神経症状(columns.get(29));
-            result.set専門科医受診(columns.get(30));
-
-        } else if (意見書_裏.equals(ocrID)) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 50 LINES
-            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(get西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            result.set利き腕(columns.get(5));
-            result.set過去6ヶ月間の体重の変化(columns.get(6));
-            result.set四肢欠損(columns.get(7));
-            result.set麻痺(columns.get(8));
-            result.set麻痺右上肢(columns.get(9));
-            result.set麻痺右上肢程度(columns.get(10));
-            result.set麻痺右下肢(columns.get(11));
-            result.set麻痺右下肢程度(columns.get(12));
-            result.set麻痺左上肢(columns.get(13));
-            result.set麻痺左上肢程度(columns.get(14));
-            result.set麻痺左下肢(columns.get(15));
-            result.set麻痺左下肢程度(columns.get(16));
-            result.set麻痺その他(columns.get(17));
-            result.set麻痺その他程度(columns.get(18));
-            result.set筋力低下(columns.get(19));
-            result.set筋力低下程度(columns.get(20));
-            result.set間接の拘縮(columns.get(21));
-            result.set間接の拘縮程度(columns.get(22));
-            result.set間接の痛み(columns.get(23));
-            result.set間接の痛み程度(columns.get(24));
-            result.set失調不随意運動(columns.get(25));
-            result.set失調不随意上肢(columns.get(26));
-            result.set失調不随意下肢(columns.get(27));
-            result.set失調不随意体幹(columns.get(28));
-            result.set褥痩(columns.get(29));
-            result.set褥痩程度(columns.get(30));
-            result.setその他皮膚疾患(columns.get(31));
-            result.setその他皮膚疾患程度(columns.get(32));
-            result.set屋外歩行(columns.get(33));
-            result.set車いすの使用(columns.get(34));
-            result.set歩行補助具装具の使用(columns.get(35));
-            result.set食事行為(columns.get(36));
-            result.set現在の栄養状況(columns.get(37));
-            result.set現在または今後発生の可能性の高い状態(columns.get(38));
-            result.set予後の見通し(columns.get(39));
-            result.set医学的管理の必要性チェック(columns.get(40));
-            result.set医学的管理の必要性下線(columns.get(41));
-            result.set血圧(columns.get(42));
-            result.set移動(columns.get(43));
-            result.set摂食(columns.get(44));
-            result.set運動(columns.get(45));
-            result.set嚥下(columns.get(46));
-            result.set感染症(columns.get(47));
-            result.set主治医への結果連絡(columns.get(48));
-
-        } else if (意見書_ID777.equals(ocrID)) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 17 LINES
-            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(get西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-            result.set記入日(get西暦_年(columns.get(5)));
-            result.set受領日(get西暦_年(columns.get(6)));
-            result.set障害高齢者の自立度(columns.get(7));
-            result.set認知症高齢者の自立度(columns.get(8));
-            result.set短期記憶(columns.get(9));
-            result.set認知能力(columns.get(10));
-            result.set伝達能力(columns.get(11));
-            result.set食事行為(columns.get(12));
-            result.set主治医への結果連絡(columns.get(13));
-            result.set全体イメージ表側インデックス(columns.get(14));
-            result.set同意の有無(columns.get(15));
-
-        } else if (意見書_ID778.equals(ocrID)) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 7 LINES
-            result.setOCRID(OCRID.toValueOrEMPTY(columns.get(0)));
-            result.setSheetID(new SheetID(columns.get(1)));
-            result.set保険者番号(columns.get(2));
-            result.set申請日(get西暦_年(columns.get(3)));
-            result.set被保険者番号(columns.get(4));
-            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
-
-        }
-        return result;
-    }
-
-    private static RString get西暦_年(RString 和暦_日付) {
-        return RDate.canConvert(和暦_日付)
-                ? new RDate(和暦_日付.toString()).toDateString()
-                : RString.EMPTY;
-    }
-
-    private void set受診科(RString 記入のあった科) {
-        this.set内科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_内科, 桁数固定値_内科 + 切り出し桁数));
-        this.set精神科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_精神科, 桁数固定値_精神科 + 切り出し桁数));
-        this.set外科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_外科, 桁数固定値_外科 + 切り出し桁数));
-        this.set整形外科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_整形外科, 桁数固定値_整形外科 + 切り出し桁数));
-        this.set脳神経外科の有無(記入のあった科.substringEmptyOnError(桁数固定値_脳神経外科, 桁数固定値_脳神経外科 + 切り出し桁数));
-        this.set皮膚科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_皮膚科, 桁数固定値_皮膚科 + 切り出し桁数));
-        this.set泌尿器科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_泌尿器科, 桁数固定値_泌尿器科 + 切り出し桁数));
-        this.set婦人科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_婦人科, 桁数固定値_婦人科 + 切り出し桁数));
-        this.set耳鼻咽喉科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_耳鼻咽喉科, 桁数固定値_耳鼻咽喉科 + 切り出し桁数));
-        this.setリハビリテーション科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_リハビリテーション科, 桁数固定値_リハビリテーション科 + 切り出し桁数));
-        this.set歯科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_歯科, 桁数固定値_歯科 + 切り出し桁数));
-        this.set眼科の有無(記入のあった科.substringEmptyOnError(桁数固定値_眼科, 桁数固定値_眼科 + 切り出し桁数));
-        this.setその他受診科の有無(記入のあった科.substringEmptyOnError(桁数固定値_その他受診科, 桁数固定値_その他受診科 + 切り出し桁数));
-    }
-
-    /**
-     * 各要素を初期化します。
-     *
-     * 文字列項目の値は{@link RString#EMPTY}、{@code Collection}の場合は空のインスタンスで初期化します。
-     */
-    private void clear() {
-        this.データ行_文字列 = RString.EMPTY;
+    private void init(RString line) {
+        this.データ行_文字列 = line;
         this.key = ShinseiKey.EMPTY;
         this.oCRID = OCRID.EMPTY;
         this.sheetID = SheetID.EMPTY;
@@ -443,5 +276,196 @@ public final class OcrIken implements IOcrData {
         this.主治医への結果連絡 = RString.EMPTY;
 
         this.全体イメージ表側インデックス = RString.EMPTY;
+    }
+
+    /**
+     * 行を解析した結果より、インスタンスを生成します。
+     *
+     * 存在しない項目の値は、{@link RString#EMPTY}など、null以外の値で初期化されます。
+     *
+     * @param line 行
+     * @param lineNum 行番号
+     * @return {@link OcrIken}
+     */
+    public static OcrIken parsed(RString line, int lineNum) {
+        try {
+            return parseデータ行(line, lineNum);
+        } catch (Exception e) {
+            OcrIken ocrIken = new OcrIken(line, lineNum);
+            ocrIken.isBroken = true;
+            return ocrIken;
+        }
+    }
+
+    private static OcrIken parseデータ行(RString line, int lineNum) {
+        OcrIken result = new OcrIken(line, lineNum);
+        List<RString> columns = Collections.unmodifiableList(line.split(","));
+        OCRID ocrID = OCRID.toValueOrEMPTY(columns.get(0));
+        if (ocrID == OCRID._701) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 33 LINES
+            result.setOCRID(ocrID);
+            result.setSheetID(new SheetID(columns.get(1)));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(get西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.set同意の有無(columns.get(5));
+            result.set最終診察日(get西暦_年(columns.get(6)));
+            result.set記入日(get西暦_年(columns.get(7)));
+            result.set受領日(get西暦_年(columns.get(8)));
+            result.set意見書作成回数(columns.get(9));
+            result.set他科受診の有無(columns.get(10));
+            result.set記入のあった科(columns.get(11));
+            result.set受診科(columns.get(11));
+            result.set発症年月日１和暦(columns.get(12));
+            result.set発症年月日１(get西暦_年(columns.get(13)));
+            result.set発症年月日２和暦(columns.get(14));
+            result.set発症年月日２(get西暦_年(columns.get(15)));
+            result.set発症年月日３和暦(columns.get(16));
+            result.set発症年月日３(get西暦_年(columns.get(17)));
+            result.set症状の安定性(columns.get(18));
+            result.set処置内容(columns.get(19));
+            result.set特別な対応(columns.get(20));
+            result.setカテーテル(columns.get(21));
+            result.set障害高齢者の自立度(columns.get(22));
+            result.set認知症高齢者の自立度(columns.get(23));
+            result.set短期記憶(columns.get(24));
+            result.set認知能力(columns.get(25));
+            result.set伝達能力(columns.get(26));
+            result.set問題行動の有無(columns.get(27));
+            result.set問題行動(columns.get(28));
+            result.set精神神経症状(columns.get(29));
+            result.set専門科医受診(columns.get(30));
+
+        } else if (ocrID == OCRID._702) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 50 LINES
+            result.setOCRID(ocrID);
+            result.setSheetID(new SheetID(columns.get(1)));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(get西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.set利き腕(columns.get(5));
+            result.set過去6ヶ月間の体重の変化(columns.get(6));
+            result.set四肢欠損(columns.get(7));
+            result.set麻痺(columns.get(8));
+            result.set麻痺右上肢(columns.get(9));
+            result.set麻痺右上肢程度(columns.get(10));
+            result.set麻痺右下肢(columns.get(11));
+            result.set麻痺右下肢程度(columns.get(12));
+            result.set麻痺左上肢(columns.get(13));
+            result.set麻痺左上肢程度(columns.get(14));
+            result.set麻痺左下肢(columns.get(15));
+            result.set麻痺左下肢程度(columns.get(16));
+            result.set麻痺その他(columns.get(17));
+            result.set麻痺その他程度(columns.get(18));
+            result.set筋力低下(columns.get(19));
+            result.set筋力低下程度(columns.get(20));
+            result.set間接の拘縮(columns.get(21));
+            result.set間接の拘縮程度(columns.get(22));
+            result.set間接の痛み(columns.get(23));
+            result.set間接の痛み程度(columns.get(24));
+            result.set失調不随意運動(columns.get(25));
+            result.set失調不随意上肢(columns.get(26));
+            result.set失調不随意下肢(columns.get(27));
+            result.set失調不随意体幹(columns.get(28));
+            result.set褥痩(columns.get(29));
+            result.set褥痩程度(columns.get(30));
+            result.setその他皮膚疾患(columns.get(31));
+            result.setその他皮膚疾患程度(columns.get(32));
+            result.set屋外歩行(columns.get(33));
+            result.set車いすの使用(columns.get(34));
+            result.set歩行補助具装具の使用(columns.get(35));
+            result.set食事行為(columns.get(36));
+            result.set現在の栄養状況(columns.get(37));
+            result.set現在または今後発生の可能性の高い状態(columns.get(38));
+            result.set予後の見通し(columns.get(39));
+            result.set医学的管理の必要性チェック(columns.get(40));
+            result.set医学的管理の必要性下線(columns.get(41));
+            result.set血圧(columns.get(42));
+            result.set移動(columns.get(43));
+            result.set摂食(columns.get(44));
+            result.set運動(columns.get(45));
+            result.set嚥下(columns.get(46));
+            result.set感染症(columns.get(47));
+            result.set主治医への結果連絡(columns.get(48));
+
+        } else if (ocrID == OCRID._777) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 17 LINES
+            result.setOCRID(ocrID);
+            result.setSheetID(new SheetID(columns.get(1)));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(get西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+            result.set記入日(get西暦_年(columns.get(5)));
+            result.set受領日(get西暦_年(columns.get(6)));
+            result.set障害高齢者の自立度(columns.get(7));
+            result.set認知症高齢者の自立度(columns.get(8));
+            result.set短期記憶(columns.get(9));
+            result.set認知能力(columns.get(10));
+            result.set伝達能力(columns.get(11));
+            result.set食事行為(columns.get(12));
+            result.set主治医への結果連絡(columns.get(13));
+            result.set全体イメージ表側インデックス(columns.get(14));
+            result.set同意の有無(columns.get(15));
+
+        } else if (ocrID == OCRID._778) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 7 LINES
+            result.setOCRID(ocrID);
+            result.setSheetID(new SheetID(columns.get(1)));
+            result.set保険者番号(columns.get(2));
+            result.set申請日(get西暦_年(columns.get(3)));
+            result.set被保険者番号(columns.get(4));
+            result.setKey(new ShinseiKey(result.get保険者番号(), result.get被保険者番号(), result.get申請日()));
+        } else {
+            result.setBroken(true);
+        }
+        return result;
+    }
+
+    private static RString get西暦_年(RString 和暦_日付) {
+        return RDate.canConvert(和暦_日付)
+                ? new RDate(和暦_日付.toString()).toDateString()
+                : RString.EMPTY;
+    }
+
+    private void set受診科(RString 記入のあった科) {
+        this.set内科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_内科, 桁数固定値_内科 + 切り出し桁数));
+        this.set精神科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_精神科, 桁数固定値_精神科 + 切り出し桁数));
+        this.set外科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_外科, 桁数固定値_外科 + 切り出し桁数));
+        this.set整形外科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_整形外科, 桁数固定値_整形外科 + 切り出し桁数));
+        this.set脳神経外科の有無(記入のあった科.substringEmptyOnError(桁数固定値_脳神経外科, 桁数固定値_脳神経外科 + 切り出し桁数));
+        this.set皮膚科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_皮膚科, 桁数固定値_皮膚科 + 切り出し桁数));
+        this.set泌尿器科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_泌尿器科, 桁数固定値_泌尿器科 + 切り出し桁数));
+        this.set婦人科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_婦人科, 桁数固定値_婦人科 + 切り出し桁数));
+        this.set耳鼻咽喉科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_耳鼻咽喉科, 桁数固定値_耳鼻咽喉科 + 切り出し桁数));
+        this.setリハビリテーション科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_リハビリテーション科, 桁数固定値_リハビリテーション科 + 切り出し桁数));
+        this.set歯科受診の有無(記入のあった科.substringEmptyOnError(桁数固定値_歯科, 桁数固定値_歯科 + 切り出し桁数));
+        this.set眼科の有無(記入のあった科.substringEmptyOnError(桁数固定値_眼科, 桁数固定値_眼科 + 切り出し桁数));
+        this.setその他受診科の有無(記入のあった科.substringEmptyOnError(桁数固定値_その他受診科, 桁数固定値_その他受診科 + 切り出し桁数));
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.oCRID);
+        hash = 61 * hash + Objects.hashCode(this.sheetID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OcrIken other = (OcrIken) obj;
+        if (this.oCRID != other.oCRID) {
+            return false;
+        }
+        return Objects.equals(this.sheetID, other.sheetID);
     }
 }

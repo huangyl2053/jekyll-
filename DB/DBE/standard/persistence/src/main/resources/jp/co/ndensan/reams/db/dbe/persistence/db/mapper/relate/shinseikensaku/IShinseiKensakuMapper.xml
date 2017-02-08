@@ -21,8 +21,8 @@
         <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="zenkaiYukoKikanStart" column="zenkaiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="zenkaiYukoKikanEnd" column="zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="nijiHanteiYokaigoJotaiKubun" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="nijiHanteiNinteiYukoKikan" column="nijiHanteiNinteiYukoKikan" />
+        <result property="zenkaiNijiHanteiYokaigoJotaiKubun" column="zenkai_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="zenkaiNijiHanteiNinteiYukoKikan" column="zenkai_nijiHanteiNinteiYukoKikan" />
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -31,6 +31,13 @@
         <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" />
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
         <result property="zenkaiKoroshoIfShikibetsuCode" column="zenkaiKoroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ichijiHanteiYMD" column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="nijiHanteiYMD" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoKikan" column="nijiHanteiNinteiYukoKikan" />
+        <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiNinteiYukoShuryoYMD" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="selectShinseiJoho" resultMap="ResultMap_ShinseiKensakuRelateEntity"
@@ -66,8 +73,8 @@
         DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode",
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart",
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd",
-        zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode",
-        zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan",
+        zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode" AS "zenkai_nijiHanteiYokaigoJotaiKubunCode",
+        zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan" AS "zenkai_nijiHanteiNinteiYukoKikan",
         zenkaiNinteiShinseiJoho."zenkaiKoroshoIfShikibetsuCode",
         DbT7051KoseiShichosonMaster."shichosonMeisho",
         DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho",
@@ -76,6 +83,13 @@
         DbT5912ShujiiJoho."shujiiName",
         DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
         DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
+        DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode",
+        DbT5116IchijiHanteiKekkaJoho."ichijiHanteiYMD",
+        DbT5102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode",
+        DbT5102NinteiKekkaJoho."nijiHanteiYMD",
+        DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoKikan",
+        DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoKaishiYMD",
+        DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD",
         COUNT(DbT5101NinteiShinseiJoho."shinseishoKanriNo") OVER() as "totalCount"
     <!-- FROM -->
     </sql>
@@ -185,6 +199,11 @@
                  AND DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode" = #{ichijiHanteiKekkaCode}
             </if>
         </if>
+        <if test="!useIchijiHanteiKekkaJoho">
+         LEFT JOIN
+            rgdb."DbT5116IchijiHanteiKekkaJoho" DbT5116IchijiHanteiKekkaJoho
+            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo"
+        </if>
         <if test="useIchiGojiHanteiKekkaJoho">
          INNER JOIN
             rgdb."DbT5510IchiGojiHanteiKekkaJoho" DbT5510IchiGojiHanteiKekkaJoho
@@ -231,6 +250,10 @@
             <if test="useNijiHanteiYMDTo">
                  AND DbT5102NinteiKekkaJoho."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiYMDTo}
             </if>
+        </if>
+        <if test="!useNinteiKekkaJoho">
+            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102NinteiKekkaJoho
+                ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5102NinteiKekkaJoho."shinseishoKanriNo"
         </if>
         <if test="useShinsakaiKaisaiKekkaJoho">
          INNER JOIN

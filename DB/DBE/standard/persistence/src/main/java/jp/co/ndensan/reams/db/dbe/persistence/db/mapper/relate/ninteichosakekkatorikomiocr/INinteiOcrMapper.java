@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekkatorikomiocr;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.ChosahyoOcrContextParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.NinteiOcrMapperParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaContextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
 
@@ -20,14 +22,21 @@ public interface INinteiOcrMapper {
     /**
      * 当該被保険者の申請データを取得します。
      *
-     * @param paramter パラメータ
+     * @param parameter パラメータ
      * @return 申請データ
      */
-    List<NinteiChosaKekkaTorikomiOcrRelateEntity> get関連データ(NinteiOcrMapperParamter paramter);
+    List<NinteiChosaKekkaTorikomiOcrRelateEntity> get関連データ(NinteiOcrMapperParamter parameter);
 
     /**
-     * @param paramter パラメータ
+     * @param parameter パラメータ
      * @return 認定調査票データ
      */
-    List<NinteiChosahyoEntity> get認定調査票(NinteiOcrMapperParamter paramter);
+    List<NinteiChosahyoEntity> get認定調査票(NinteiOcrMapperParamter parameter);
+
+    /**
+     *
+     * @param parameter
+     * @return
+     */
+    NinteiChosaContextEntity getNinteiChosaContext(ChosahyoOcrContextParameter parameter);
 }

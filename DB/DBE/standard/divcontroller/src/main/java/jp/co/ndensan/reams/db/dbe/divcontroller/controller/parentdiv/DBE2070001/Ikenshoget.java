@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2070001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
@@ -147,7 +148,7 @@ public class Ikenshoget {
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
-                csvWriter.writeLine(getCsvData(row));
+                csvWriter.writeLine(getCsvData(row, div));
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
                         row.getShinseishoKanriNo()));
             }
@@ -168,16 +169,7 @@ public class Ikenshoget {
      * @return レスポンスデータ
      */
     public ResponseData<IkenshogetDiv> onClick_BtnIkenshoTorikomi(IkenshogetDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.イメージ取込み_規定_規定外_画面へ遷移).respond();
-        }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.イメージ取込み_規定_規定外_画面へ遷移).respond();
     }
 
     /**
@@ -192,26 +184,17 @@ public class Ikenshoget {
             主治医意見書入手一覧データの行選択チェック(validationMessages);
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
+            主治医意見書入手一覧データの存在チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (0 == div.getDgNinteiTaskList().getDataSource().size()) {
-                主治医意見書入手一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (div.getDgNinteiTaskList().getSelectedItems().size() > 1) {
-                主治医意見書入手一覧データの複数行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo());
-            ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getIkenshoIraiRirekiNo());
-            return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.主治医意見書入手へ遷移する).respond();
+        if (div.getDgNinteiTaskList().getSelectedItems().size() > 1) {
+            主治医意見書入手一覧データの複数行選択チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        return ResponseData.of(div).respond();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo());
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, div.getDgNinteiTaskList().getSelectedItems().get(0).getIkenshoIraiRirekiNo());
+        return ResponseData.of(div).forwardWithEventName(DBE2070001TransitionEventName.主治医意見書入手へ遷移する).respond();
     }
 
     /**
@@ -260,11 +243,11 @@ public class Ikenshoget {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace("主治医意見書入手").evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
@@ -290,12 +273,18 @@ public class Ikenshoget {
         return 入手日 == null || !IkenshogetManager.createInstance().完了処理事前チェック(row.getShinseishoKanriNo());
     }
 
-    private IkenshoNyushuCsvEntity getCsvData(dgNinteiTaskList_Row row) {
+    private IkenshoNyushuCsvEntity getCsvData(dgNinteiTaskList_Row row, IkenshogetDiv div) {
         RString jyotaiKubun = null;
+        RString 督促方法 = RString.EMPTY;
         if (row.getJyotai().equals(new RString("未"))) {
             jyotaiKubun = new RString("未処理");
         } else if (row.getJyotai().equals(new RString("可"))) {
             jyotaiKubun = new RString("完了可能");
+        }
+        if (row.getChosaTokusokuHoho() == null || row.getChosaTokusokuHoho().isEmpty()) {
+            督促方法 = RString.EMPTY;
+        } else {
+            督促方法 = getHandler(div).get督促方法(row.getChosaTokusokuHoho());
         }
         return new IkenshoNyushuCsvEntity(
                 row.getShinseishoKanriNo(),
@@ -313,6 +302,7 @@ public class Ikenshoget {
                 getパターン1(row.getNyusyubi().getValue()),
                 getパターン1(row.getChosaTokusokuHakkoDay().getValue()),
                 row.getChosaTokusokuHoho(),
+                督促方法,
                 row.getChosaTokusokuCount().getValue(),
                 getパターン1(row.getChosaTokusokuLiit().getValue()),
                 RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));

@@ -244,7 +244,10 @@ public class KojinIraiNaiyouKoshinHandler {
             div.getTxtIkenshoSakuseiIraiRirekiBango().setValue(new RString(今回主治医情報.get主治医意見書作成依頼履歴番号()));
             div.getTxtIkenshoIraiKubun().setValue(IkenshoIraiKubun.toValue(今回主治医情報.get主治医意見書依頼区分()).get名称());
             div.getTxtIkenshoSakuseiKaisu().setValue(new Decimal(今回主治医情報.get主治医意見書作成回数()));
-            div.getTxtShujiiShiteiiKubun().setValue(IshiKubunCode.toValue(今回主治医情報.get医師区分コード().value()).get名称());
+            if (今回主治医情報.get医師区分コード() != null 
+                    && !今回主治医情報.get医師区分コード().value().isEmpty()) {
+                div.getTxtShujiiShiteiiKubun().setValue(IshiKubunCode.toValue(今回主治医情報.get医師区分コード().value()).get名称());
+            }
             if (今回主治医情報.get主治医意見書作成依頼年月日() != null
                 && !今回主治医情報.get主治医意見書作成依頼年月日().toString().equals("")) {
                 div.getTxtIkenshoIraibi().setValue(new RDate(今回主治医情報.get主治医意見書作成依頼年月日().toString()));

@@ -823,6 +823,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setZenkaiYukoKikanEnd(getFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間()));
         dbt5101Entity.setShujiiIryokikanCode(getShujiiIryokikanCode(dbt5101tempEntity.get主治医医療機関コード()));
         dbt5101Entity.setShujiiCode(getShujiiCode(dbt5101tempEntity.get主治医番号()));
+        dbt5101Entity.setShichosonCode(entity.getDbT7051Entity().getShichosonCode());
         return dbt5101Entity;
     }
 
@@ -871,6 +872,10 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setYubinNo(getYubinNo(dbt5101tempEntity.get郵便番号()));
         dbt5101Entity.setJusho(getAtenaJusho(dbt5101tempEntity.get住所()));
         dbt5101Entity.setTelNo(getTelNo(dbt5101tempEntity.get本人連絡先1()));
+        dbt5101Entity.setZenYokaigoKubunCode(getCode(dbt5101tempEntity.get前回の審査会結果()));
+        dbt5101Entity.setZenkaiNinteiYMD(getFlexibleDate(dbt5101tempEntity.get二次判定日()));
+        dbt5101Entity.setZenkaiYukoKikanStart(getFlexibleDate(dbt5101tempEntity.get前回の認定有効開始期間()));
+        dbt5101Entity.setZenkaiYukoKikanEnd(getFlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間()));
         dbt5101Entity.setNigoTokuteiShippeiCode(getCode(dbt5101tempEntity.get特定疾病コード()));
         dbt5101Entity.setNinteiChosaItakusakiCode(getChosaItakusakiCode(dbt5101tempEntity.get調査委託先コード()));
         dbt5101Entity.setShujiiIryokikanCode(getShujiiIryokikanCode(dbt5101tempEntity.get主治医医療機関コード()));
@@ -878,12 +883,13 @@ public class RenkeiDataTorikomiBusiness {
         if (!RString.isNullOrEmpty(dbt5101tempEntity.get入所事業所コード())) {
             dbt5101Entity.setShisetsuNyushoFlag(true);
         }
+        dbt5101Entity.setShichosonCode(entity.getDbT7051Entity().getShichosonCode());
         return dbt5101Entity;
     }
 
     private ShujiiCode getShujiiCode(RString value) {
         ShujiiCode 主治医番号 = ShujiiCode.EMPTY;
-        if (RString.isNullOrEmpty(value)) {
+        if (!RString.isNullOrEmpty(value)) {
             主治医番号 = new ShujiiCode(value);
         }
         return 主治医番号;
@@ -891,7 +897,7 @@ public class RenkeiDataTorikomiBusiness {
 
     private ShujiiIryokikanCode getShujiiIryokikanCode(RString value) {
         ShujiiIryokikanCode 主治医医療機関コード = ShujiiIryokikanCode.EMPTY;
-        if (RString.isNullOrEmpty(value)) {
+        if (!RString.isNullOrEmpty(value)) {
             主治医医療機関コード = new ShujiiIryokikanCode(value);
         }
         return 主治医医療機関コード;

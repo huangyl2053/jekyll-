@@ -102,7 +102,7 @@ public class ShinsakaiWariateJohoManager {
         IShinsakaiWariateJohoMapper mapper = mapperProvider.create(IShinsakaiWariateJohoMapper.class);
 
         List<ShinsakaiWariateJohoRelateEntity> relateEntity = mapper.select審査会割当データ(介護認定審査会割当情報検索条件);
-        if (relateEntity == null) {
+        if (relateEntity == null || relateEntity.isEmpty()) {
             return false;
         }
         for (ShinsakaiWariateJohoRelateEntity entity : relateEntity) {

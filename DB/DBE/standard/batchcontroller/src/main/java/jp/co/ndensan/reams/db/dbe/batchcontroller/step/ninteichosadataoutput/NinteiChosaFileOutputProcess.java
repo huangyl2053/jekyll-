@@ -36,6 +36,7 @@ public class NinteiChosaFileOutputProcess extends SimpleBatchProcessBase {
     private RString eucFilePath;
     private static final RString underscore = new RString("_");
     private static final RString ZIP拡張子 = new RString(".zip");
+    private static final RString csv拡張子 = new RString(".csv");
 
     @Override
     protected void beforeExecute() {
@@ -49,10 +50,10 @@ public class NinteiChosaFileOutputProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         List<RString> filePathes = new ArrayList<>();
-        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_DATA.toRString())));
-        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_TOKKI.toRString())));
-        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_GAIKYO.toRString())));
-        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_CHOSAIN.toRString())));
+        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_DATA.toRString()).concat(csv拡張子)));
+        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_TOKKI.toRString()).concat(csv拡張子)));
+        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_GAIKYO.toRString()).concat(csv拡張子)));
+        filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_CHOSAIN.toRString()).concat(csv拡張子)));
 
         ZipUtil.createFromFiles(eucFilePath, filePathes);
     }

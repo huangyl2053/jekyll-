@@ -5,12 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.imageinput;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1580-010 dongyabin
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ImageinputRelate {
+public class ImageinputRelate extends RelatedDataBase {
 
     private final ImageinputRelateEntity entity;
 
@@ -33,87 +40,58 @@ public class ImageinputRelate {
         this.entity = entity;
     }
 
-    /**
-     * T5101_証記載保険者番号を取得します。
-     *
-     * @return T5101_証記載保険者番号
-     */
-    public RString getT5101_証記載保険者番号() {
-        return entity.getT5101_証記載保険者番号();
-    }
-
-    /**
-     * T5101_被保険者番号を取得します。
-     *
-     * @return T5101_被保険者番号
-     */
-    public RString getT5101_被保険者番号() {
-        return entity.getT5101_被保険者番号();
-    }
-
-    /**
-     * T5101_被保険者氏名を取得します。
-     *
-     * @return T5101_被保険者氏名
-     */
-    public RString getT5101_被保険者氏名() {
+    @Override
+    public RString get被保険者氏名() {
         return entity.getT5101_被保険者氏名();
     }
 
-    /**
-     * @return 被保険者カナ
-     */
-    public RString getT5101_被保険者カナ() {
+    @Override
+    public RString get被保険者カナ() {
         return entity.getT5101_被保険者カナ();
     }
 
     /**
-     * T5101_認定申請年月日を取得します。
+     * 証記載保険者番号を返します。
      *
-     * @return T5101_認定申請年月日
+     * @return 証記載保険者番号
      */
-    public RString getT5101_認定申請年月日() {
-        return entity.getT5101_認定申請年月日();
+    public RString get証記載保険者番号() {
+        return entity.getT5101_証記載保険者番号();
     }
 
     /**
-     * @return 検索時に指定した認定申請日と一致する場合、{@code true}
+     * 被保険者番号を返します。
+     *
+     * @return 被保険者番号
      */
-    public boolean matches指定申請日() {
-        return entity.isMatches指定申請日();
+    public RString get被保険者番号() {
+        return entity.getT5101_被保険者番号();
     }
 
     /**
-     * getT5101_施設入所の有無を取得します。
+     * 施設入所の有無を返します。
      *
-     * @return getT5101_施設入所の有無
+     * @return 施設入所の有無
      */
-    public boolean isT5101_施設入所の有無() {
+    public boolean has施設入所() {
         return entity.isT5101_施設入所の有無();
     }
 
     /**
-     * @return T5101 論理削除フラグ
-     */
-    public boolean is論理削除() {
-        return entity.isT5101_論理削除フラグ();
-    }
-
-    /**
-     * T7051_市町村名称を取得します。
+     * 市町村名称を返します。
      *
-     * @return T7051_市町村名称
+     * @return 市町村名称
      */
-    public RString getT7051_市町村名称() {
+    public RString get市町村名称() {
         return entity.getT7051_市町村名称();
     }
 
     /**
-     * T5101_申請書管理番号を取得します。
+     * 申請書管理番号を返します。
      *
-     * @return T5101_申請書管理番号
+     * @return 申請書管理番号
      */
-    public RString getT5101_申請書管理番号() {
+    public RString get申請書管理番号Value() {
         return entity.getT5101_申請書管理番号();
     }
 
@@ -121,138 +99,137 @@ public class ImageinputRelate {
      * @return 申請書管理番号
      */
     public ShinseishoKanriNo get申請書管理番号() {
-        return new ShinseishoKanriNo(getT5101_申請書管理番号());
+        return new ShinseishoKanriNo(get申請書管理番号Value());
     }
 
     /**
-     * T5115_イメージ共有ファイルIDを取得します。
-     *
-     * @return T5115_イメージ共有ファイルID
+     * @return 申請に紐付く九共有ファイルID. もしくは、{@code null}.
      */
-    public RDateTime getT5115_イメージ共有ファイルID() {
-        if (entity.getT5115_イメージ共有ファイルID() != null) {
-            return entity.getT5115_イメージ共有ファイルID();
-        } else {
-            return RDateTime.MIN;
-        }
-    }
-
     public RDateTime getSharedFileIDOrNull() {
         return this.entity.getT5115_イメージ共有ファイルID();
     }
 
     /**
-     * イメージ情報が存在する場合{@code true}、しない場合{@code false}を返します。
+     * 主治医コードを返します。
      *
-     * @return イメージ情報が存在する場合{@code true}、しない場合{@code false}.
+     * @return 主治医コード
      */
-    public boolean hasイメージ情報() {
-        return entity.getT5115_イメージ共有ファイルID() != null;
-    }
-
-    /**
-     * T5912_主治医コードを取得します。
-     *
-     * @return T5912_主治医コード
-     */
-    public RString getT5912_主治医コード() {
+    public RString get主治医コード() {
         return entity.getT5912_主治医コード();
     }
 
     /**
-     * T5912_主治医氏名を取得します。
+     * 主治医氏名を返します。
      *
-     * @return T5912_主治医氏名
+     * @return 主治医氏名
      */
-    public RString getT5912_主治医氏名() {
+    public RString get主治医氏名() {
         return entity.getT5912_主治医氏名();
     }
 
     /**
-     * T5911_主治医医療機関コードを取得します。
+     * 主治医医療機関コードを返します。
      *
-     * @return T5911_主治医医療機関コード
+     * @return 主治医医療機関コード
      */
-    public RString getT5911_主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getT5911_主治医医療機関コード();
     }
 
     /**
-     * T5911_医療機関名称を取得します。
+     * 医療機関名称を返します。
      *
-     * @return T5911_医療機関名称
+     * @return 医療機関名称
      */
-    public RString getT5911_医療機関名称() {
+    public RString get医療機関名称() {
         return entity.getT5911_医療機関名称();
     }
 
     /**
-     * T5101_厚労省IF識別コードを取得します。
+     * 主治医意見書作成依頼年月日を返します。
      *
-     * @return T5101_厚労省IF識別コード
+     * @return 主治医意見書作成依頼年月日
      */
-    public RString getT5101_厚労省IF識別コード() {
-        return entity.getT5101_厚労省IF識別コード();
-    }
-
-    /**
-     * @return 厚労省IF識別コード
-     */
-    public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
-        return KoroshoIfShikibetsuCode.toValue(getT5101_厚労省IF識別コード());
-    }
-
-    /**
-     * T5301_主治医意見書作成依頼年月日を取得します。
-     *
-     * @return T5301_主治医意見書作成依頼年月日
-     */
-    public RString getT5301_主治医意見書作成依頼年月日() {
+    public RString get主治医意見書作成依頼年月日() {
         return entity.getT5301_主治医意見書作成依頼年月日();
     }
 
     /**
-     * T5301_主治医意見書依頼区分を取得します。
+     * 主治医意見書依頼区分を返します。
      *
-     * @return T5301_主治医意見書依頼区分
+     * @return 主治医意見書依頼区分
      */
-    public RString getT5301_主治医意見書依頼区分() {
+    public RString get主治医意見書依頼区分() {
         return entity.getT5301_主治医意見書依頼区分();
     }
 
     /**
-     * T5301_主治医医療機関コードを取得します。
+     * 主治医意見書作成依頼履歴番号を返します。
      *
-     * @return T5301_主治医医療機関コード
+     * @return 主治医意見書作成依頼履歴番号
      */
-    public RString getT5301_主治医医療機関コード() {
-        return entity.getT5301_主治医医療機関コード();
-    }
-
-    /**
-     * T5301_主治医コードを取得します。
-     *
-     * @return T5301_主治医コード
-     */
-    public RString getT5301_主治医コード() {
-        return entity.getT5301_主治医コード();
-    }
-
-    /**
-     * T5301_主治医意見書作成依頼履歴番号を取得します。
-     *
-     * @return T5301_主治医意見書作成依頼履歴番号
-     */
-    public int getT5301_主治医意見書作成依頼履歴番号() {
+    public int get主治医意見書作成依頼履歴番号() {
         return entity.getT5301_主治医意見書作成依頼履歴番号();
     }
 
     /**
-     * T5302_主治医意見書情報を取得します。
+     * 主治医意見書情報を返します。
      *
-     * @return T5302_主治医意見書情報
+     * @return 主治医意見書情報
      */
-    public List<DbT5302ShujiiIkenshoJohoEntity> getT5302_主治医意見書情報() {
+    public List<DbT5302ShujiiIkenshoJohoEntity> get主治医意見書情報() {
         return new ArrayList<>(entity.get主治医意見書情報());
+    }
+
+    @Override
+    public FlexibleDate get認定申請日() {
+        return entity.getT5101_認定申請年月日();
+    }
+
+    @Override
+    public boolean matches指定申請日() {
+        return entity.isMatches指定申請日();
+    }
+
+    @Override
+    public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
+        return KoroshoIfShikibetsuCode.toValue(entity.getT5101_厚労省IF識別コード());
+    }
+
+    @Override
+    public boolean has論理削除() {
+        return entity.isT5101_論理削除フラグ();
+    }
+
+    @Override
+    public boolean has一次判定() {
+        return entity.getT5105_一次判定完了日() != null && !entity.getT5105_一次判定完了日().isEmpty();
+    }
+
+    /**
+     * {@link ImageinputRelate}生成時の処理状況を持ちます。
+     */
+    @lombok.Getter
+    public static class Context implements RelatedDataBase.IContext {
+
+        private final List<IOcrData> ocrData;
+        private final TreatmentWhenIchijiHanteiZumi 一次判定済時処理;
+
+        /**
+         * @param ocrData 対応する{@link IOcrData}すべて
+         * @param 一次判定済時処理 {@link TreatmentWhenIchijiHanteiZumi}
+         */
+        public Context(Collection<? extends IOcrData> ocrData, TreatmentWhenIchijiHanteiZumi 一次判定済時処理) {
+            this.ocrData = Collections.unmodifiableList(new ArrayList<>(ocrData));
+            this.一次判定済時処理 = 一次判定済時処理;
+        }
+    }
+
+    /**
+     * @param context {@link Context}
+     * @return {@link IProcessingResults}
+     */
+    public IProcessingResults validate(Context context) {
+        return super.validate(context);
     }
 }

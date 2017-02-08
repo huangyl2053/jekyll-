@@ -227,12 +227,12 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT515
     @Override
     public RenrakusakiJoho deleted() {
         DbT5150RenrakusakiJohoEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
+//        if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
-        } else {
+//        } else {
             //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+//            throw new IllegalStateException(UrErrorMessages.不正.toString());
+//        }
         return new RenrakusakiJoho(deletedEntity, id);
     }
 

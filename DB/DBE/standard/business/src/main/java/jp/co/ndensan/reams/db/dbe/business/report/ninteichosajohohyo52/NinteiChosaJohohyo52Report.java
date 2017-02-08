@@ -37,8 +37,7 @@ public class NinteiChosaJohohyo52Report extends Report<NinteiChosaJohohyo52Repor
     public void writeBy(ReportSourceWriter<NinteiChosaJohohyo52ReportSource> reportSourceWriter) {
         int maxCount = entity.get問題行動リスト_52().size();
         for (int i = 0; i < maxCount; i++) {
-            INinteiChosaJohohyo52Editor editor = new NinteiChosaJohohyo52Editor(entity, i);
-            INinteiChosaJohohyo52Builder builder = new NinteiChosaJohohyo52Builder(editor);
+            INinteiChosaJohohyo52Builder builder = new NinteiChosaJohohyo52Builder(entity, i);
             reportSourceWriter.writeLine(builder);
         }
     }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJohoEditor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionThe
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
@@ -28,8 +30,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAc
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIkens;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
@@ -56,14 +61,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * 主治医意見書の読み込み処理です。
  */
-//TODO パラメータによる処理分岐
-//TODO 取込データ不正時の処理
 public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
@@ -108,7 +109,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @Override
     protected void process(TempOcrCsvEntity entity) {
-        final OcrIken ocrIken = OcrIken.parsed(entity.getCsvData());
+        final OcrIken ocrIken = OcrIken.parsed(entity.getCsvData(), entity.getLineNum());
         if (hasBreak(this.key, ocrIken.getKey())) {
             if (!Objects.equals(ShinseiKey.EMPTY, key)) {
                 /* ブレイク処理 */
@@ -134,74 +135,73 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private void keyBreakProcess(ShinseiKey key, List<OcrIken> sameKeyValues) {
-        //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理開始">
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* イメージ取り込み処理開始")
-                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
-                .append(" 被保険者番号：").append(key.get被保険者番号())
-                .append(" 認定申請日：").append(key.get認定申請日())
-                .append(" 処理対象レコード数：").append(this.cache.size())
-                .append("*/")
-                .toString());
-        //</editor-fold>
-        //TOOD ファイルが壊れていないか判定
-
+        List<OcrTorikomiResult> list = new ArrayList<>();
+        OcrIkens ocrIkens = new OcrIkens(sameKeyValues);
+        Filterd<OcrIkens> filterdNormal = ocrIkens.filterdNormal();
+        list.addAll(makeErrorsForFileBroken(filterdNormal.rejected(), key));
         //TODO 現在、ID=777, ID=778 限定の処理となっている。ID=701等を取り込む場合には検討が必要。
-        if (isID777orID778()) {
-            this.kekkaListEditor.writeMultiLine(processID777or778(key, sameKeyValues));
-        }
-        //<editor-fold defaultstate="collapsed" desc="イメージ取り込み処理終了">
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new RStringBuilder()
-                .append("/* イメージ取り込み処理終了")
-                .append(" 証記載保険者番号：").append(key.get証記載保険者番号())
-                .append(" 被保険者番号：").append(key.get被保険者番号())
-                .append(" 認定申請日：").append(key.get認定申請日())
-                .append("*/")
-                .toString());
-//</editor-fold>
+        OcrIkens normals = filterdNormal.passed();
+        list.addAll(processID777or778(normals.filterdByOCRIDs(OCRID._777, OCRID._778), key));
+        this.kekkaListEditor.writeMultiLine(list);
     }
 
-    //TODO 要修正
-    private static boolean isID777orID778() {
-        return true;
+    private static Collection<OcrTorikomiResult> makeErrorsForFileBroken(OcrIkens brokens, ShinseiKey key) {
+        return OcrTorikomiResultUtil.create(key, brokens,
+                IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
     }
 
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
-    private List<OcrTorikomiResult> processID777or778(ShinseiKey key, List<OcrIken> sameKeyValues) {
+    private List<OcrTorikomiResult> processID777or778(OcrIkens ocrIkens, ShinseiKey key) {
         ImageinputMapperParamter param = toParameterToSearchRelatedData(key);
         List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(param).records();
         if (relatedData.isEmpty()) {
-            return OcrTorikomiResultUtil.create(key, sameKeyValues,
+            return OcrTorikomiResultUtil.create(key, ocrIkens,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
-        //OCRID ごとに判定が必要。
-        if (3 <= sameKeyValues.size()) {
-            return OcrTorikomiResultUtil.create(key, sameKeyValues,
-                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在);
+        ImageinputRelate ir = relatedData.get(0);
+        ImageinputRelate.Context context = new ImageinputRelate.Context(ocrIkens.asList(),
+                this.processParameter.get一次判定済み時処理方法());
+        IProcessingResults nrValidated = ir.validate(context);
+        if (nrValidated.hasError()) {
+            return OcrTorikomiResultUtil.create(key, nrValidated, ir);
+        }
+        List<OcrTorikomiResult> list = new ArrayList<>();
+        list.addAll(OcrTorikomiResultUtil.create(key, nrValidated, ir));
+
+        ProcessingResults r = new ProcessingResults();
+        r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
+        r.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
+        list.addAll(OcrTorikomiResultUtil.create(key, r, ir));
+
+        OcrIkens safetyInCurrent = ocrIkens.removed(r.allOcrDataInError());
+        if (safetyInCurrent.isEmpty()) {
+            return list;
         }
 
-        ImageinputRelate ir = relatedData.get(0);
-        if (!validate厚労省IF識別コード(ir.get厚労省IF識別コード())) {
-            return OcrTorikomiResultUtil.create(key, sameKeyValues,
-                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
-        }
-        OcrIken ocrIken = getAny_ID777優先(sameKeyValues);
+        OcrIken ocrIken = safetyInCurrent.findByOCRIDPrioritizing(OCRID._777, OCRID._778).orElse(null); // このメソッド中でnullはありえない。
         insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
         insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
 
-        CopyImageResult cir = (sameKeyValues.size() == 1)
-                ? copyImageFilesToDirectory_ID777or778_1line(sameKeyValues, ir)
-                : copyImageFilesToDirectory_ID777or778_2lines(sameKeyValues, ir);
-        return OcrTorikomiResultUtil.create(key, cir.getResults());
+        CopyImageResult cir = (safetyInCurrent.size() == 1)
+                ? copyImageFilesToDirectory_ID777or778_1line(safetyInCurrent, ir)
+                : copyImageFilesToDirectory_ID777or778_2lines(safetyInCurrent, ir);
+        ProcessingResults results = new ProcessingResults(cir.getResults());
+        for (OcrIken o : safetyInCurrent) {
+            results.addSuccessIfNotContains(o);
+        }
+        list.addAll(OcrTorikomiResultUtil.create(key, results, ir));
+        return list;
     }
 
-    private OcrIken getAny_ID777優先(List<OcrIken> sameKeyValues) {
-        for (OcrIken csv : sameKeyValues) {
-            if (csv.getOCRID() == OCRID._777) {
-                return csv;
-            }
+    private static IProcessingResults checkTooManyFilsToOperate(OcrIkens ocrIkens, int maxNum) {
+        if (ocrIkens.size() <= maxNum) {
+            return ProcessingResults.EMPTY;
         }
-        return sameKeyValues.get(0);
+        ProcessingResults prs = new ProcessingResults();
+        for (OcrIken o : ocrIkens) {
+            prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在));
+        }
+        return prs;
     }
 
     @lombok.Value
@@ -216,11 +216,11 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
     }
 
-    private CopyImageResult copyImageFilesToDirectory_ID777or778_1line(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
-        OcrIken value = sameKeyValues.get(0);
+    private CopyImageResult copyImageFilesToDirectory_ID777or778_1line(OcrIkens sameKeyValues, ImageinputRelate ir) {
+        OcrIken value = sameKeyValues.asList().get(0);
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
-            IProcessingResults results = new ProcessingResults();
+            ProcessingResults results = new ProcessingResults();
             results.add(ProcessingResultFactory.error(value, OcrTorikomiMessages.カタログデータなし));
             return new CopyImageResult(ir.getSharedFileIDOrNull(), results);
         }
@@ -228,7 +228,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 ? FileNameConvertionTheories.ID777
                 : FileNameConvertionTheories.ID777_reversed;
         return new CopyImageResult(
-                ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+                ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(ir.getSharedFileIDOrNull())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(converter)
@@ -246,8 +246,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return catalog.find(Models.ID778, id);
     }
 
-    private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(List<OcrIken> sameKeyValues, ImageinputRelate ir) {
-        IProcessingResults results = new ProcessingResults();
+    private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(OcrIkens sameKeyValues, ImageinputRelate ir) {
+        ProcessingResults results = new ProcessingResults();
         OcrIken777And778Pair pair = getPair(sameKeyValues);
         if (pair.hasAnyNull()) {
             OcrIken ocrIken = pair.findNonnullValue();
@@ -262,7 +262,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, pair.getCsv778().getSheetID()).orElse(null);
         if (ca3_778 != null) {
-            ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+            ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                     .sharedFileID(ir.getSharedFileIDOrNull())
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(FileNameConvertionTheories.ID777_reversed)
@@ -270,7 +270,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     .ocrData(pair.getCsv778())
                     .save(writer_DbT5115);
             results.addAll(result1.getResults());
-            ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+            ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                     .sharedFileID(result1.get共有ファイルID())
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(FileNameConvertionTheories.ID777)
@@ -286,7 +286,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                         ? FileNameConvertionTheories.ID777
                         : FileNameConvertionTheories.ID777_reversed;
 
-        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.getT5101_証記載保険者番号(), ir.getT5101_被保険者番号())
+        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(ir.getSharedFileIDOrNull())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(theory)
@@ -319,7 +319,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
     }
 
-    private static OcrIken777And778Pair getPair(List<OcrIken> ocrIkens) {
+    private static OcrIken777And778Pair getPair(OcrIkens ocrIkens) {
         OcrIken csv_777 = null;
         OcrIken csv_778 = null;
         for (OcrIken csv : ocrIkens) {
@@ -364,7 +364,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static List<DbT5304ShujiiIkenshoIkenItemEntity> createOrEdit主治医意見書意見項目s(ImageinputRelate ir, OcrIken ocrIken) {
         final Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> map = find意見書意見項目(ir);
-        final RString 厚労省IF識別コード = ir.getT5101_厚労省IF識別コード();
+        final RString 厚労省IF識別コード = ir.get厚労省IF識別コード().getコード();
         final IIkenshoIkenKomokuAccessor accessor = IkenshoIkenKomokuAccessorFactory.createInstance(ocrIken, 厚労省IF識別コード);
         final List<DbT5304ShujiiIkenshoIkenItemEntity> entities = new ArrayList<>();
         for (IIkenshoKomokuMapping komoku : IkenshoKomokuMappings.valuesOf(厚労省IF識別コード)) {
@@ -385,8 +385,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private static Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> find意見書意見項目(ImageinputRelate ir) {
         ShujiiIkenshoIkenItemNewManager manager = new ShujiiIkenshoIkenItemNewManager();
         List<DbT5304ShujiiIkenshoIkenItemEntity> list = manager.select主治医意見書意見項目(
-                new ShinseishoKanriNo(ir.getT5101_申請書管理番号()),
-                ir.getT5301_主治医意見書作成依頼履歴番号()
+                ir.get申請書管理番号(),
+                ir.get主治医意見書作成依頼履歴番号()
         );
         Map<Integer, DbT5304ShujiiIkenshoIkenItemEntity> map = new HashMap<>();
         for (DbT5304ShujiiIkenshoIkenItemEntity entity : list) {
@@ -397,8 +397,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5304ShujiiIkenshoIkenItemEntity newDbT5304ShujiiIkenshoIkenItemEntity(ImageinputRelate ir, RString 厚労省IF識別コード, int 連番) {
         DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
-        entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
+        entity.setShinseishoKanriNo(ir.get申請書管理番号());
+        entity.setIkenshoIraiRirekiNo(ir.get主治医意見書作成依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(new Code(厚労省IF識別コード));
         entity.setRemban(連番);
         return entity;
@@ -421,9 +421,9 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private static DbT5302ShujiiIkenshoJohoEntity createOrEdit主治医意見書情報(ImageinputRelate ir, OcrIken ocrIken) {
-        DbT5302ShujiiIkenshoJohoEntity entity = ir.getT5302_主治医意見書情報().isEmpty()
+        DbT5302ShujiiIkenshoJohoEntity entity = ir.get主治医意見書情報().isEmpty()
                 ? newDbT5302ShujiiIkenshoJohoEntity(ir, ocrIken)
-                : ir.getT5302_主治医意見書情報().get(0);
+                : ir.get主治医意見書情報().get(0);
         entity.setIkenshoReadYMD(FlexibleDate.getNowDate());
         OcrShujiiIkenshoJohoEditor.edit(entity, ocrIken);
         return entity;
@@ -431,12 +431,12 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5302ShujiiIkenshoJohoEntity newDbT5302ShujiiIkenshoJohoEntity(ImageinputRelate ir, OcrIken ocrIken) {
         DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(ir.getT5101_申請書管理番号()));
-        entity.setIkenshoIraiRirekiNo(ir.getT5301_主治医意見書作成依頼履歴番号());
-        entity.setKoroshoIfShikibetsuCode(ir.getT5101_厚労省IF識別コード());
-        entity.setIkenshoIraiKubun(ir.getT5301_主治医意見書依頼区分());
-        entity.setShujiiIryoKikanCode(ir.getT5301_主治医医療機関コード());
-        entity.setShujiiCode(ir.getT5301_主治医コード());
+        entity.setShinseishoKanriNo(ir.get申請書管理番号());
+        entity.setIkenshoIraiRirekiNo(ir.get主治医意見書作成依頼履歴番号());
+        entity.setKoroshoIfShikibetsuCode(ir.get厚労省IF識別コード().getコード());
+        entity.setIkenshoIraiKubun(ir.get主治医意見書依頼区分());
+        entity.setShujiiIryoKikanCode(ir.get主治医医療機関コード());
+        entity.setShujiiCode(ir.get主治医コード());
         entity.setSonotaJushinKaMei(RString.EMPTY);
         entity.setShindamMei1(RString.EMPTY);
         entity.setShindamMei2(RString.EMPTY);
