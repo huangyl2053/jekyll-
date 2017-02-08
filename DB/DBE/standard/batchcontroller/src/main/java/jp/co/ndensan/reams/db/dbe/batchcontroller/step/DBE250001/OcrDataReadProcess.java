@@ -203,6 +203,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             return makeErrorsInRelatedData(key, nrValidated, nr);
         }
         ProcessingResults results = new ProcessingResults();
+        results.addAll(nrValidated); //警告があれば追加される。
         NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
         results.addAll(saveImageFiles(ocrChosas, chosaKekka, nr));
         for (OcrChosa o : ocrChosas.values()) {
@@ -451,7 +452,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 break;
             default:
         }
-        return ProcessingResults.EMPTY;
+        return results;
     }
 
     private static DbT5202NinteichosahyoGaikyoChosaEntity createOrEdit概況調査(
@@ -485,8 +486,11 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         ProcessingResults results = new ProcessingResults();
         if (!nr.get調査依頼日().isBeforeOrEquals(entity.getNinteichosaJisshiYMD())) {
             results.add(
-                    ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.TODO)
-            );
+                    ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査実施日が依頼日より前.
+                            replaced(nr.get調査依頼日().wareki().toDateString().toString(),
+                                    entity.getNinteichosaJisshiYMD().wareki().toDateString().toString()
+                            )
+                    ));
             return results;
         }
         RString newChosaItakusakiCode = entity.getChosaItakusakiCode().value();

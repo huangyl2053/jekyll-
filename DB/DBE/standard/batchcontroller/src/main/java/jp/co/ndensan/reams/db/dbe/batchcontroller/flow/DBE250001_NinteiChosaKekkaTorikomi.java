@@ -71,7 +71,8 @@ public class DBE250001_NinteiChosaKekkaTorikomi extends BatchFlowBase<DBE250001_
     @Step(OCRデータの読み込み_PROCESS)
     IBatchFlowCommand executeOCRデータの読み込み() {
         return loopBatch(OcrDataReadProcess.class)
-                .arguments(getParameter().toOcrDataReadProcessParameter(PROCESSING_DATE, this.ca3FilePath, imageFileNames, TEMP_TABLE_NAME))
+                .arguments(getParameter().toOcrDataReadProcessParameter(PROCESSING_DATE,
+                                this.ca3FilePath, imageFileNames, TEMP_TABLE_NAME))
                 .define();
     }
 

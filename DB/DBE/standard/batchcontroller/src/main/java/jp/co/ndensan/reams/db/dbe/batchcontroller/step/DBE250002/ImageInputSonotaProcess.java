@@ -158,7 +158,10 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
         if (nrValidated.hasError()) {
             return OcrTorikomiResultUtil.create(key, nrValidated, ir);
         }
-        return OcrTorikomiResultUtil.create(key, copyImageFiles(ocrSonotas, ir), ir);
+        ProcessingResults prs = new ProcessingResults();
+        prs.addAll(nrValidated);
+        prs.addAll(copyImageFiles(ocrSonotas, ir));
+        return OcrTorikomiResultUtil.create(key, prs, ir);
     }
 
     private ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {
