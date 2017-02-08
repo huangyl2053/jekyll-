@@ -162,22 +162,15 @@ public class YokaigoNinteiJohoTeikyo {
             }
         }
 
-        if (new RString(DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            } else {
-                if (認定申請情報.get出力年月日() != null && !認定申請情報.get出力年月日().isEmpty()) {
-                    WarningMessage message = new WarningMessage(DbeWarningMessages.既に印刷済.getMessage().getCode(),
-                            DbeWarningMessages.既に印刷済.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
+        if (new RString(DbeQuestionMessages.二次判定結果が決定していませんが印刷.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            if (認定申請情報.get出力年月日() != null && !認定申請情報.get出力年月日().isEmpty()) {
+                WarningMessage message = new WarningMessage(DbeWarningMessages.既に印刷済.getMessage().getCode(),
+                        DbeWarningMessages.既に印刷済.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
         }
-
-        if (new RString(DbeWarningMessages.既に印刷済.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
-        }
+        ViewStateHolder.put(ViewStateKeys.状態, ResponseHolder.getButtonType().getKey());
         return ResponseData.of(div).respond();
     }
 
@@ -189,7 +182,8 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<SourceDataCollection> onClick_btnPrint(YokaigoNinteiJohoTeikyoDiv div) {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+        if (ViewStateHolder.get(ViewStateKeys.状態, RString.class) != null
+                && MessageDialogSelectedResult.No.getKey().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             return response;
         }
 
