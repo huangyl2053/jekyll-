@@ -57,8 +57,6 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN43001 = new RString("DBEMN43001");
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
     private static final RString MENUID_DBEMN71003 = new RString("DBEMN71003");
-    private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
-    private static final RString 完了メッセージ = new RString("要介護認定・要支援認定等申請者一覧表の発行処理が完了しました。");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
 
     /**
@@ -80,7 +78,6 @@ public class ShinseiKensaku {
     private static DBE0100001StateName findStateAt条件指定(ShinseiKensakuDiv div) {
         RString menuID = ResponseHolder.getMenuID();
         if (MENUID_DBEMN21001.equals(menuID)) {
-            setKanryoJoho(div);
             return DBE0100001StateName.申請検索;
         } else if (MENUID_DBEMN21003.equals(menuID)) {
             return DBE0100001StateName.個人照会;
@@ -103,10 +100,6 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onClick_btnClear(ShinseiKensakuDiv div) {
         div.getCcdNinteishinseishaFinder().initialize();
         getHandler(div).load();
-        RString menuID = ResponseHolder.getMenuID();
-        if (MENUID_DBEMN21001.equals(menuID)) {
-            setKanryoJoho(div);
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -216,7 +209,7 @@ public class ShinseiKensaku {
         }
 
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);
-        NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会,shoKisaiHokenshaNo,被保険者番号);
+        NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, 被保険者番号);
         ninteiAccessLogger.log();
 
         if (MENUID_DBEMN21001.equals(menuID)) {
@@ -408,23 +401,5 @@ public class ShinseiKensaku {
         public Message getMessage() {
             return message;
         }
-    }
-
-    private static void setKanryoJoho(ShinseiKensakuDiv div) {
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinseiUketsuke().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaIrai().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoIrai().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkChosaNyushu().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIkenshoNyushu().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkIchijiHantei().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkMasking().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkShinsakaiToroku().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setDisabled(false);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkGetsureiShori().setDisabled(false);
-
-        RString 処理状態未完了 = new RString("key1");
-        List<RString> selectedkeyMikann = new ArrayList();
-        selectedkeyMikann.add(処理状態未完了);
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
     }
 }

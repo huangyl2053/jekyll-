@@ -31,7 +31,6 @@ public interface INinteiChosaJohohyoPrintService {
      * @param 認定調査票調査項目List NinteichosahyoChosaItemのリスト
      * @param 認定調査票記入項目List NinteichosahyoKinyuItemのリスト
      * @param 認定調査票マスキング区分 認定調査票マスキング区分
-     * @param 主治医意見書マスキング区分 主治医意見書マスキング区分
      */
     void print(YokaigoNinteiJohoTeikyoBusiness business,
             RDateTime イメージ共有ファイルID,
@@ -39,6 +38,5 @@ public interface INinteiChosaJohohyoPrintService {
             List<NinteichosahyoServiceJokyoFlag> 認定調査票サービス状況フラグList,
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
-            RString 認定調査票マスキング区分,
-            RString 主治医意見書マスキング区分);
+            RString 認定調査票マスキング区分);
 }

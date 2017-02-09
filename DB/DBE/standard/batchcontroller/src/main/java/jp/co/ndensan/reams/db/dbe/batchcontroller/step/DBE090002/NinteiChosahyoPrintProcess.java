@@ -147,8 +147,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             認定調査票調査項目List,
                             認定調査票記入項目List,
                             イメージ共有ファイルID,
-                            processPrm.get認定調査票マスキング区分(),
-                            processPrm.get主治医意見書マスキング区分());
+                            processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo02Report report = new NinteiChosaJohohyo02Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter02);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
@@ -161,8 +160,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             認定調査票調査項目List,
                             認定調査票記入項目List,
                             イメージ共有ファイルID,
-                            processPrm.get認定調査票マスキング区分(),
-                            processPrm.get主治医意見書マスキング区分());
+                            processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo12Report report = new NinteiChosaJohohyo12Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter12);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード())) {
@@ -174,8 +172,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             認定調査票調査項目List,
                             認定調査票記入項目List,
                             イメージ共有ファイルID,
-                            processPrm.get認定調査票マスキング区分(),
-                            processPrm.get主治医意見書マスキング区分());
+                            processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo22Report report = new NinteiChosaJohohyo22Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter22);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード())) {
@@ -187,8 +184,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             認定調査票調査項目List,
                             認定調査票記入項目List,
                             イメージ共有ファイルID,
-                            processPrm.get認定調査票マスキング区分(),
-                            processPrm.get主治医意見書マスキング区分());
+                            processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo32Report report = new NinteiChosaJohohyo32Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter32);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード())) {
@@ -200,8 +196,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             認定調査票調査項目List,
                             認定調査票記入項目List,
                             イメージ共有ファイルID,
-                            processPrm.get認定調査票マスキング区分(),
-                            processPrm.get主治医意見書マスキング区分());
+                            processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo42Report report = new NinteiChosaJohohyo42Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter42);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード())) {
@@ -213,8 +208,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             認定調査票調査項目List,
                             認定調査票記入項目List,
                             イメージ共有ファイルID,
-                            processPrm.get認定調査票マスキング区分(),
-                            processPrm.get主治医意見書マスキング区分());
+                            processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo52Report report = new NinteiChosaJohohyo52Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter52);
         }

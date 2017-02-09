@@ -1,15 +1,55 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
-/// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
-/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
+// <reference path="./../hokenshalist/HokenshaList.ts" />
+// <reference path="./../saikinshorisha/SaikinShorisha.ts" />
+// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
      export module NinteiShinseishaFinder {
 
         export class Events {
+
+            public static onClick_KanryoJoho(): string {
+                return "onClick_KanryoJoho";
+            }
+
+            public static onChange_ddlNowPhase(): string {
+                return "onChange_ddlNowPhase";
+            }
+
+            public static onChange_chkIchijiHantei(): string {
+                return "onChange_chkIchijiHantei";
+            }
+
+            public static onChange_chkShinseiUketsuke(): string {
+                return "onChange_chkShinseiUketsuke";
+            }
+
+            public static onChange_chkMasking(): string {
+                return "onChange_chkMasking";
+            }
+
+            public static onChange_chkChosaIrai(): string {
+                return "onChange_chkChosaIrai";
+            }
+
+            public static onChange_chkShinsakaiToroku(): string {
+                return "onChange_chkShinsakaiToroku";
+            }
+
+            public static onChange_chkIkenshoIrai(): string {
+                return "onChange_chkIkenshoIrai";
+            }
+
+            public static onChange_chkNijiHantei(): string {
+                return "onChange_chkNijiHantei";
+            }
+
+            public static onChange_chkChosaNyushu(): string {
+                return "onChange_chkChosaNyushu";
+            }
 
             public static onClick_ShosaiJoken(): string {
                 return "onClick_ShosaiJoken";
@@ -119,58 +159,6 @@ module DBZ {
                 return "onClick_SonotaJoho";
             }
 
-            public static onClick_KanryoJoho(): string {
-                return "onClick_KanryoJoho";
-            }
-
-            public static onChange_ddlNowPhase(): string {
-                return "onChange_ddlNowPhase";
-            }
-
-            public static onChange_chkShoriJotai(): string {
-                return "onChange_chkShoriJotai";
-            }
-
-            public static onChange_chkIchijiHantei(): string {
-                return "onChange_chkIchijiHantei";
-            }
-
-            public static onChange_chkShinseiUketsuke(): string {
-                return "onChange_chkShinseiUketsuke";
-            }
-
-            public static onChange_chkMasking(): string {
-                return "onChange_chkMasking";
-            }
-
-            public static onChange_chkChosaIrai(): string {
-                return "onChange_chkChosaIrai";
-            }
-
-            public static onChange_chkShinsakaiToroku(): string {
-                return "onChange_chkShinsakaiToroku";
-            }
-
-            public static onChange_chkIkenshoIrai(): string {
-                return "onChange_chkIkenshoIrai";
-            }
-
-            public static onChange_chkNijiHantei(): string {
-                return "onChange_chkNijiHantei";
-            }
-
-            public static onChange_chkChosaNyushu(): string {
-                return "onChange_chkChosaNyushu";
-            }
-
-            public static onChange_chkIkenshoNyushu(): string {
-                return "onChange_chkIkenshoNyushu";
-            }
-
-            public static onChange_chkGetsureiShori(): string {
-                return "onChange_chkGetsureiShori";
-            }
-
         }
 
         export class Controls {
@@ -200,9 +188,9 @@ module DBZ {
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            }
+            //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
+            //}
 
             public ddlShichosonCode(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
@@ -228,6 +216,14 @@ module DBZ {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiShinseiDateRange"));
             }
 
+            public ddlShinseijiShinseiKubun(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
+            }
+
+            public chkTennyu(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkTennyu"));
+            }
+
             public txtBirthDateRange(): UZA.TextBoxDateRange {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtBirthDateRange"));
             }
@@ -236,16 +232,116 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("pnlForDesign"));
             }
 
-            public ddlShinseijiShinseiKubun(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
-            }
-
             public chkSeibetsu(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             }
 
-            public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
-                return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            //public ccdSaikinShorisha(): DBZ.SaikinShorisha.ModeController {
+            //    return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            //}
+
+            public KanryoJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KanryoJoho"));
+            }
+
+            public ddlNowPhase(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlNowPhase"));
+            }
+
+            public lblKoshinTaishoChushutsu(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblKoshinTaishoChushutsu"));
+            }
+
+            public chkKoshinTaishoChushutsu(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKoshinTaishoChushutsu"));
+            }
+
+            public lblIchijiHantei(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblIchijiHantei"));
+            }
+
+            public chkIchijiHantei(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkIchijiHantei"));
+            }
+
+            public lblShinseiUketsuke(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblShinseiUketsuke"));
+            }
+
+            public chkShinseiUketsuke(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkShinseiUketsuke"));
+            }
+
+            public lblMasking(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMasking"));
+            }
+
+            public chkMasking(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkMasking"));
+            }
+
+            public lblChosaIrai(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblChosaIrai"));
+            }
+
+            public chkChosaIrai(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkChosaIrai"));
+            }
+
+            public lblShinsakaiToroku(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblShinsakaiToroku"));
+            }
+
+            public chkShinsakaiToroku(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkShinsakaiToroku"));
+            }
+
+            public lblIkenshoIrai(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblIkenshoIrai"));
+            }
+
+            public chkIkenshoIrai(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoIrai"));
+            }
+
+            public lblNijiHantei(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblNijiHantei"));
+            }
+
+            public chkNijiHantei(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkNijiHantei"));
+            }
+
+            public lblChosaNyushu(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblChosaNyushu"));
+            }
+
+            public chkChosaNyushu(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkChosaNyushu"));
+            }
+
+            public lblTsuchiShori(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTsuchiShori"));
+            }
+
+            public chkTsuchiShori(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkTsuchiShori"));
+            }
+
+            public lblIkenshoNyushu(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblIkenshoNyushu"));
+            }
+
+            public chkIkenshoNyushu(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoNyushu"));
+            }
+
+            public lblGetsureiShori(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblGetsureiShori"));
+            }
+
+            public chkGetsureiShori(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkGetsureiShori"));
             }
 
             public ShosaiJoken(): UZA.Panel {
@@ -496,120 +592,12 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            public ccdGeninShikkan(): URZ.CodeInput.ModeController {
-                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
-            }
+            //public ccdGeninShikkan(): URZ.CodeInput.ModeController {
+            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
+            //}
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));
-            }
-
-            public KanryoJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("KanryoJoho"));
-            }
-
-            public ddlNowPhase(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlNowPhase"));
-            }
-
-            public chkShoriJotai(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShoriJotai"));
-            }
-
-            public lblKoshinTaishoChushutsu(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblKoshinTaishoChushutsu"));
-            }
-
-            public chkKoshinTaishoChushutsu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKoshinTaishoChushutsu"));
-            }
-
-            public lblIchijiHantei(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblIchijiHantei"));
-            }
-
-            public chkIchijiHantei(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkIchijiHantei"));
-            }
-
-            public lblShinseiUketsuke(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShinseiUketsuke"));
-            }
-
-            public chkShinseiUketsuke(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShinseiUketsuke"));
-            }
-
-            public lblMasking(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblMasking"));
-            }
-
-            public chkMasking(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkMasking"));
-            }
-
-            public lblChosaIrai(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblChosaIrai"));
-            }
-
-            public chkChosaIrai(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkChosaIrai"));
-            }
-
-            public lblShinsakaiToroku(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShinsakaiToroku"));
-            }
-
-            public chkShinsakaiToroku(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShinsakaiToroku"));
-            }
-
-            public lblIkenshoIrai(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblIkenshoIrai"));
-            }
-
-            public chkIkenshoIrai(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoIrai"));
-            }
-
-            public lblNijiHantei(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblNijiHantei"));
-            }
-
-            public chkNijiHantei(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkNijiHantei"));
-            }
-
-            public lblChosaNyushu(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblChosaNyushu"));
-            }
-
-            public chkChosaNyushu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkChosaNyushu"));
-            }
-
-            public lblTsuchiShori(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTsuchiShori"));
-            }
-
-            public chkTsuchiShori(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkTsuchiShori"));
-            }
-
-            public lblIkenshoNyushu(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblIkenshoNyushu"));
-            }
-
-            public chkIkenshoNyushu(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoNyushu"));
-            }
-
-            public lblGetsureiShori(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblGetsureiShori"));
-            }
-
-            public chkGetsureiShori(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkGetsureiShori"));
             }
 
         }
