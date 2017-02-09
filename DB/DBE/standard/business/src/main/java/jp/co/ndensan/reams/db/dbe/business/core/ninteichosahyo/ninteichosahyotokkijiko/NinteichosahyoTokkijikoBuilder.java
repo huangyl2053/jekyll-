@@ -92,7 +92,6 @@ public class NinteichosahyoTokkijikoBuilder {
      * @return {@link NinteichosahyoTokkijikoBuilder}
      */
     public NinteichosahyoTokkijikoBuilder set特記事項(RString 特記事項) {
-        requireNonNull(特記事項, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項"));
         entity.setTokkiJiko(特記事項);
         return this;
     }

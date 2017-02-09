@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210003;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.textmasking.TextMaskingDataModel;
@@ -15,8 +17,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210003.ValidationHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
@@ -58,8 +57,7 @@ public class GaikyoTokkiYichiranNyuroku {
     private static final RString KEY3 = new RString("3");
     private static final RString KEY4 = new RString("4");
     private static final RString KEY5 = new RString("5");
-    private static final RString 概況特記登録ボタン_表示 = new RString("1");
-    private static final RString 概況特記登録ボタン_非表示 = new RString("2");
+    private static final RString DELETE = new RString("DELETE");
 
     private enum DBE2210003Keys {
 
@@ -124,194 +122,524 @@ public class GaikyoTokkiYichiranNyuroku {
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
         div.getChosaJisshisha().getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
         div.getChosaJisshisha().getCcdChosaJisshishaJoho().intialize(model);
+        div.getRenrakusakiKihon().setIsOpen(false);
+        div.getChosaJisshisha().setIsOpen(false);
 
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「前へ」ボタンの操作処理を行う。
+     * 特記事項番号1 のonChange処理です。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onClick_btnBeforeTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        getHandler(div).onClick_btnBeforeTokkiJiko(temp_申請書管理番号);
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「次へ」ボタンの操作処理を行う。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onClick_btnAfterTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        getHandler(div).onClick_btnAfterTokkiJiko(temp_申請書管理番号);
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 特記事項番号1 lostfocus。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo1(GaikyoTokkiYichiranNyurokuDiv div) {
-
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_ChosaKomokuNo1(GaikyoTokkiYichiranNyurokuDiv div) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         RString key = getKey(div, KEY1);
 
         div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().setValue(
                 getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo()));
 
-        if ((gaikyoTokkiNyurokuMap.get(key) != null)
-                && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
-                .equals(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue())) {
+        if (!getHandler(div).isChange特記事項番号(key, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange特記事項番号(key,
+                    div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().getValue());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(UrErrorMessages.設定不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().setValue(getHandler(div).get変更前特記事項番号(key));
             return ResponseData.of(div).respond();
         }
 
         ValidationMessageControlPairs validationMessages
-                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
+                = onChange_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
 
         if (validationMessages.iterator().hasNext()) {
             this.値回復(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
-        getHandler(div).onBlur_ChosaKomokuNo1();
+        getHandler(div).onChange_ChosaKomokuNo1();
 
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 特記事項番号2 lostfocus。
+     * 特記事項番号2 のonChange処理です。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo2(GaikyoTokkiYichiranNyurokuDiv div) {
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_ChosaKomokuNo2(GaikyoTokkiYichiranNyurokuDiv div) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         RString key = getKey(div, KEY2);
 
         div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setValue(
                 getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo()));
 
-        if ((gaikyoTokkiNyurokuMap.get(key) != null)
-                && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
-                .equals(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue())) {
+        if (!getHandler(div).isChange特記事項番号(key, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange特記事項番号(key,
+                    div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().getValue());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(UrErrorMessages.設定不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().setValue(getHandler(div).get変更前特記事項番号(key));
             return ResponseData.of(div).respond();
         }
 
         ValidationMessageControlPairs validationMessages
-                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
+                = onChange_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
 
         if (validationMessages.iterator().hasNext()) {
             this.値回復(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
-        getHandler(div).onBlur_ChosaKomokuNo2();
+        getHandler(div).onChange_ChosaKomokuNo2();
 
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 特記事項番号3 lostfocus。
+     * 特記事項番号3 のonChange処理です。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo3(GaikyoTokkiYichiranNyurokuDiv div) {
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_ChosaKomokuNo3(GaikyoTokkiYichiranNyurokuDiv div) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         RString key = getKey(div, KEY3);
 
         div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setValue(
                 getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo()));
 
-        if ((gaikyoTokkiNyurokuMap.get(key) != null)
-                && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
-                .equals(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue())) {
+        if (!getHandler(div).isChange特記事項番号(key, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange特記事項番号(key,
+                    div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().getValue());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(UrErrorMessages.設定不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().setValue(getHandler(div).get変更前特記事項番号(key));
             return ResponseData.of(div).respond();
         }
 
         ValidationMessageControlPairs validationMessages
-                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
+                = onChange_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
 
         if (validationMessages.iterator().hasNext()) {
             this.値回復(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
-        getHandler(div).onBlur_ChosaKomokuNo3();
+        getHandler(div).onChange_ChosaKomokuNo3();
 
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 特記事項番号4 lostfocus。
+     * 特記事項番号4 のonChange処理です。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo4(GaikyoTokkiYichiranNyurokuDiv div) {
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_ChosaKomokuNo4(GaikyoTokkiYichiranNyurokuDiv div) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         RString key = getKey(div, KEY4);
 
         div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setValue(
                 getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo()));
 
-        if ((gaikyoTokkiNyurokuMap.get(key) != null)
-                && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
-                .equals(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue())) {
+        if (!getHandler(div).isChange特記事項番号(key, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange特記事項番号(key,
+                    div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().getValue());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(UrErrorMessages.設定不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().setValue(getHandler(div).get変更前特記事項番号(key));
             return ResponseData.of(div).respond();
         }
 
         ValidationMessageControlPairs validationMessages
-                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
+                = onChange_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
 
         if (validationMessages.iterator().hasNext()) {
             this.値回復(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
-        getHandler(div).onBlur_ChosaKomokuNo4();
+        getHandler(div).onChange_ChosaKomokuNo4();
 
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 特記事項番号5 lostfocus。
+     * 特記事項番号5 のonChange処理です。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBlur_ChosaKomokuNo5(GaikyoTokkiYichiranNyurokuDiv div) {
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_ChosaKomokuNo5(GaikyoTokkiYichiranNyurokuDiv div) {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         RString key = getKey(div, KEY5);
 
         div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setValue(
                 getHandler(div).to認定調査特記事項番号_表示Form(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo()));
 
-        if ((gaikyoTokkiNyurokuMap.get(key) != null)
-                && gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号()
-                .equals(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue())) {
+        if (!getHandler(div).isChange特記事項番号(key, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange特記事項番号(key,
+                    div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().getValue());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(UrErrorMessages.設定不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().setValue(getHandler(div).get変更前特記事項番号(key));
             return ResponseData.of(div).respond();
         }
 
         ValidationMessageControlPairs validationMessages
-                = onBlur_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
+                = onChange_ChosaKomokuNoCheck(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
 
         if (validationMessages.iterator().hasNext()) {
             this.値回復(gaikyoTokkiNyurokuMap, key, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
 
-        getHandler(div).onBlur_ChosaKomokuNo5();
+        getHandler(div).onChange_ChosaKomokuNo5();
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項１が変更した処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFirstTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().getValue().isEmpty()) {
+            div.getTokkiNyuryoku().setHiddenFirstTokkiJiko(RString.EMPTY);
+            div.getTokkiNyuryoku().getBtnFirstMasking().setDisabled(true);
+        } else {
+            div.getTokkiNyuryoku().getBtnFirstMasking().setDisabled(false);
+        }
+        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY1), div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().getValue());
+
+        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete().setDisabled(false);
+        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().setDisabled(false);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項２が変更した処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtSecondTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue().isEmpty()) {
+            div.getTokkiNyuryoku().setHiddenSecondTokkiJiko(RString.EMPTY);
+            div.getTokkiNyuryoku().getBtnSecondMasking().setDisabled(true);
+        } else {
+            div.getTokkiNyuryoku().getBtnSecondMasking().setDisabled(false);
+        }
+        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY2), div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().getValue());
+
+        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().setDisabled(false);
+        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().setDisabled(false);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項３が変更した処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtThirdTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue().isEmpty()) {
+            div.getTokkiNyuryoku().setHiddenThirdTokkiJiko(RString.EMPTY);
+            div.getTokkiNyuryoku().getBtnThirdMasking().setDisabled(true);
+        } else {
+            div.getTokkiNyuryoku().getBtnThirdMasking().setDisabled(false);
+        }
+        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY3), div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().getValue());
+
+        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().setDisabled(false);
+        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().setDisabled(false);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項４が変更した処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFourthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue().isEmpty()) {
+            div.getTokkiNyuryoku().setHiddenFourthTokkiJiko(RString.EMPTY);
+            div.getTokkiNyuryoku().getBtnFourthMasking().setDisabled(true);
+        } else {
+            div.getTokkiNyuryoku().getBtnFourthMasking().setDisabled(false);
+        }
+        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY4), div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().getValue());
+
+        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().setDisabled(false);
+        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().setDisabled(false);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項５が変更した処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFifthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().isEmpty()) {
+            return ResponseData.of(div).respond();
+        }
+
+        if (div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue().isEmpty()) {
+            div.getTokkiNyuryoku().setHiddenFifthTokkiJiko(RString.EMPTY);
+            div.getTokkiNyuryoku().getBtnFifthMasking().setDisabled(true);
+        } else {
+            div.getTokkiNyuryoku().getBtnFifthMasking().setDisabled(false);
+        }
+        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY5), div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().getValue());
+
+        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().setDisabled(false);
+        div.getTokkiNyuryoku().getBtnAfterTokkiJiko().setDisabled(false);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項１の削除チェックボックスの値が変更した際の処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_chkFirstChosaDelete(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange削除(getKey(div, KEY1),
+                    !div.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete().getSelectedItems().isEmpty());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<RString> arrayList = new ArrayList<>();
+            if (div.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete().getSelectedItems().isEmpty()) {
+                arrayList.add(new RString("0"));
+            }
+            div.getTokkiNyuryoku().getChkFirstChosaDelete().setSelectedItemsByKey(arrayList);
+            return ResponseData.of(div).respond();
+        }
+        if (div.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete().getSelectedItems().isEmpty()) {
+            getHandler(div).setDeleteFlag(getKey(div, KEY1), false);
+            getHandler(div).setDisabledTokkiNyuryoku_First(false);
+        } else {
+            getHandler(div).setDeleteFlag(getKey(div, KEY1), true);
+            getHandler(div).setDisabledTokkiNyuryoku_First(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項２の削除チェックボックスの値が変更した際の処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_chkSecondChosaDelete(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange削除(getKey(div, KEY2),
+                    !div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().getSelectedItems().isEmpty());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<RString> arrayList = new ArrayList<>();
+            if (div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().getSelectedItems().isEmpty()) {
+                arrayList.add(new RString("0"));
+            }
+            div.getTokkiNyuryoku().getChkSecondChosaDelete().setSelectedItemsByKey(arrayList);
+            return ResponseData.of(div).respond();
+        }
+        if (div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().getSelectedItems().isEmpty()) {
+            getHandler(div).setDeleteFlag(getKey(div, KEY2), false);
+            getHandler(div).setDisabledTokkiNyuryoku_Second(false);
+        } else {
+            getHandler(div).setDeleteFlag(getKey(div, KEY2), true);
+            getHandler(div).setDisabledTokkiNyuryoku_Second(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項３の削除チェックボックスの値が変更した際の処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_chkThirdChosaDelete(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange削除(getKey(div, KEY3),
+                    !div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().getSelectedItems().isEmpty());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<RString> arrayList = new ArrayList<>();
+            if (div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().getSelectedItems().isEmpty()) {
+                arrayList.add(new RString("0"));
+            }
+            div.getTokkiNyuryoku().getChkThirdChosaDelete().setSelectedItemsByKey(arrayList);
+            return ResponseData.of(div).respond();
+        }
+        if (div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().getSelectedItems().isEmpty()) {
+            getHandler(div).setDeleteFlag(getKey(div, KEY3), false);
+            getHandler(div).setDisabledTokkiNyuryoku_Third(false);
+        } else {
+            getHandler(div).setDeleteFlag(getKey(div, KEY3), true);
+            getHandler(div).setDisabledTokkiNyuryoku_Third(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項４の削除チェックボックスの値が変更した際の処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_chkFourthChosaDelete(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange削除(getKey(div, KEY4),
+                    !div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().getSelectedItems().isEmpty());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<RString> arrayList = new ArrayList<>();
+            if (div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().getSelectedItems().isEmpty()) {
+                arrayList.add(new RString("0"));
+            }
+            div.getTokkiNyuryoku().getChkFourthChosaDelete().setSelectedItemsByKey(arrayList);
+            return ResponseData.of(div).respond();
+        }
+        if (div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().getSelectedItems().isEmpty()) {
+            getHandler(div).setDeleteFlag(getKey(div, KEY4), false);
+            getHandler(div).setDisabledTokkiNyuryoku_Fourth(false);
+        } else {
+            getHandler(div).setDeleteFlag(getKey(div, KEY4), true);
+            getHandler(div).setDisabledTokkiNyuryoku_Fourth(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記事項５の削除チェックボックスの値が変更した際の処理。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_chkFifthChosaDelete(GaikyoTokkiYichiranNyurokuDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            ErrorMessage message = getHandler(div).checkChange削除(getKey(div, KEY5),
+                    !div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().getSelectedItems().isEmpty());
+            if (message.evaluate() != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            List<RString> arrayList = new ArrayList<>();
+            if (div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().getSelectedItems().isEmpty()) {
+                arrayList.add(new RString("0"));
+            }
+            div.getTokkiNyuryoku().getChkFifthChosaDelete().setSelectedItemsByKey(arrayList);
+            return ResponseData.of(div).respond();
+        }
+        if (div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().getSelectedItems().isEmpty()) {
+            getHandler(div).setDeleteFlag(getKey(div, KEY5), false);
+            getHandler(div).setDisabledTokkiNyuryoku_Fifth(false);
+        } else {
+            getHandler(div).setDeleteFlag(getKey(div, KEY5), true);
+            getHandler(div).setDisabledTokkiNyuryoku_Fifth(true);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -398,35 +726,27 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div コントロールdiv
      * @return スポンスデータ
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnFirstImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        Map<RString, RString> map = new HashMap<>();
-        map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
-        map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFirstTokkiJiko());
-
-        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnFirstMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        Map<RString, RString> mapTokki = new HashMap<>();
+        mapTokki.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
+        mapTokki.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFirstTokkiJiko());
+        Map<RString, Boolean> mapDelete = new HashMap<>();
+        mapDelete.put(GenponMaskKubun.原本.getコード(), !div.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete().getSelectedItems().isEmpty());
+        mapDelete.put(GenponMaskKubun.マスク.getコード(), !RString.isNullOrEmpty(div.getTokkiNyuryoku().getHiddenIsDeleteFirstTokki()));
 
         TextMaskingDataModel model = new TextMaskingDataModel();
-        model.set調査項目番号(調査項目番号);
-        model.set調査項目名称(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
-        model.set特記連番(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().intValue());
-        model.set特記事項テキスト_イメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
-        model.set特記事項_マッピング(map);
+        setTextMaskingDataModel(
+                div,
+                model,
+                getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo()),
+                div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue(),
+                div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().intValue(),
+                TokkijikoTextImageKubun.テキスト.getコード(),
+                mapTokki,
+                mapDelete,
+                KEY1
+        );
         div.getTokkiNyuryoku().setHdnTextMasking(DataPassingConverter.serialize(model));
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFirstImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
-        if (!div.getTokkiNyuryoku().getHiddenFirstTokkiJiko().equals(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()))) {
-            getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY1), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
-        }
-        div.getTokkiNyuryoku().setHiddenFirstTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
         return ResponseData.of(div).respond();
     }
 
@@ -436,35 +756,27 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div コントロールdiv
      * @return スポンスデータ
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnSecondImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        Map<RString, RString> map = new HashMap<>();
-        map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
-        map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenSecondTokkiJiko());
-
-        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnSecondMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        Map<RString, RString> mapTokki = new HashMap<>();
+        mapTokki.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
+        mapTokki.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenSecondTokkiJiko());
+        Map<RString, Boolean> mapDelete = new HashMap<>();
+        mapDelete.put(GenponMaskKubun.原本.getコード(), !div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().getSelectedItems().isEmpty());
+        mapDelete.put(GenponMaskKubun.マスク.getコード(), !RString.isNullOrEmpty(div.getTokkiNyuryoku().getHiddenIsDeleteSecondTokki()));
 
         TextMaskingDataModel model = new TextMaskingDataModel();
-        model.set調査項目番号(調査項目番号);
-        model.set調査項目名称(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
-        model.set特記連番(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().intValue());
-        model.set特記事項テキスト_イメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
-        model.set特記事項_マッピング(map);
+        setTextMaskingDataModel(
+                div,
+                model,
+                getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo()),
+                div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue(),
+                div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().intValue(),
+                TokkijikoTextImageKubun.テキスト.getコード(),
+                mapTokki,
+                mapDelete,
+                KEY2
+        );
         div.getTokkiNyuryoku().setHdnTextMasking(DataPassingConverter.serialize(model));
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnSecondImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
-        if (!div.getTokkiNyuryoku().getHiddenSecondTokkiJiko().equals(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()))) {
-            getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY2), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
-        }
-        div.getTokkiNyuryoku().setHiddenSecondTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
         return ResponseData.of(div).respond();
     }
 
@@ -474,35 +786,27 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div コントロールdiv
      * @return スポンスデータ
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnThirdImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        Map<RString, RString> map = new HashMap<>();
-        map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
-        map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenThirdTokkiJiko());
-
-        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnThirdMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        Map<RString, RString> mapTokki = new HashMap<>();
+        mapTokki.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
+        mapTokki.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenThirdTokkiJiko());
+        Map<RString, Boolean> mapDelete = new HashMap<>();
+        mapDelete.put(GenponMaskKubun.原本.getコード(), !div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().getSelectedItems().isEmpty());
+        mapDelete.put(GenponMaskKubun.マスク.getコード(), !RString.isNullOrEmpty(div.getTokkiNyuryoku().getHiddenIsDeleteThirdTokki()));
 
         TextMaskingDataModel model = new TextMaskingDataModel();
-        model.set調査項目番号(調査項目番号);
-        model.set調査項目名称(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
-        model.set特記連番(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().intValue());
-        model.set特記事項テキスト_イメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
-        model.set特記事項_マッピング(map);
+        setTextMaskingDataModel(
+                div,
+                model,
+                getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo()),
+                div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue(),
+                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().intValue(),
+                TokkijikoTextImageKubun.テキスト.getコード(),
+                mapTokki,
+                mapDelete,
+                KEY3
+        );
         div.getTokkiNyuryoku().setHdnTextMasking(DataPassingConverter.serialize(model));
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnThirdImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
-        if (!div.getTokkiNyuryoku().getHiddenThirdTokkiJiko().equals(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()))) {
-            getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY3), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
-        }
-        div.getTokkiNyuryoku().setHiddenThirdTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
         return ResponseData.of(div).respond();
     }
 
@@ -512,35 +816,27 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div コントロールdiv
      * @return スポンスデータ
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnFourthImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        Map<RString, RString> map = new HashMap<>();
-        map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
-        map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFourthTokkiJiko());
-
-        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnFourthMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        Map<RString, RString> mapTokki = new HashMap<>();
+        mapTokki.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
+        mapTokki.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFourthTokkiJiko());
+        Map<RString, Boolean> mapDelete = new HashMap<>();
+        mapDelete.put(GenponMaskKubun.原本.getコード(), !div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().getSelectedItems().isEmpty());
+        mapDelete.put(GenponMaskKubun.マスク.getコード(), !RString.isNullOrEmpty(div.getTokkiNyuryoku().getHiddenIsDeleteFourthTokki()));
 
         TextMaskingDataModel model = new TextMaskingDataModel();
-        model.set調査項目番号(調査項目番号);
-        model.set調査項目名称(div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getValue());
-        model.set特記連番(div.getTokkiNyuryoku().getTxtFourthTokkiRenban().getValue().intValue());
-        model.set特記事項テキスト_イメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
-        model.set特記事項_マッピング(map);
+        setTextMaskingDataModel(
+                div,
+                model,
+                getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo()),
+                div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getValue(),
+                div.getTokkiNyuryoku().getTxtFourthTokkiRenban().getValue().intValue(),
+                TokkijikoTextImageKubun.テキスト.getコード(),
+                mapTokki,
+                mapDelete,
+                KEY4
+        );
         div.getTokkiNyuryoku().setHdnTextMasking(DataPassingConverter.serialize(model));
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFourthImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
-        if (!div.getTokkiNyuryoku().getHiddenFourthTokkiJiko().equals(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()))) {
-            getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY4), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
-        }
-        div.getTokkiNyuryoku().setHiddenFourthTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
         return ResponseData.of(div).respond();
     }
 
@@ -550,19 +846,26 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div コントロールdiv
      * @return スポンスデータ
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnFifthImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
-        Map<RString, RString> map = new HashMap<>();
-        map.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
-        map.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFifthTokkiJiko());
-
-        RString 調査項目番号 = getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_btnFifthMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        Map<RString, RString> mapTokki = new HashMap<>();
+        mapTokki.put(GenponMaskKubun.原本.getコード(), div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
+        mapTokki.put(GenponMaskKubun.マスク.getコード(), div.getTokkiNyuryoku().getHiddenFifthTokkiJiko());
+        Map<RString, Boolean> mapDelete = new HashMap<>();
+        mapDelete.put(GenponMaskKubun.原本.getコード(), !div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().getSelectedItems().isEmpty());
+        mapDelete.put(GenponMaskKubun.マスク.getコード(), !RString.isNullOrEmpty(div.getTokkiNyuryoku().getHiddenIsDeleteFifthTokki()));
 
         TextMaskingDataModel model = new TextMaskingDataModel();
-        model.set調査項目番号(調査項目番号);
-        model.set調査項目名称(div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getValue());
-        model.set特記連番(div.getTokkiNyuryoku().getTxtFifthTokkiRenban().getValue().intValue());
-        model.set特記事項テキスト_イメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
-        model.set特記事項_マッピング(map);
+        setTextMaskingDataModel(
+                div,
+                model,
+                getHandler(div).to認定調査特記事項番号_マスキングForm(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo()),
+                div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getValue(),
+                div.getTokkiNyuryoku().getTxtFifthTokkiRenban().getValue().intValue(),
+                TokkijikoTextImageKubun.テキスト.getコード(),
+                mapTokki,
+                mapDelete,
+                KEY5
+        );
         div.getTokkiNyuryoku().setHdnTextMasking(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
@@ -573,187 +876,129 @@ public class GaikyoTokkiYichiranNyuroku {
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFifthImageMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFirstMasking(GaikyoTokkiYichiranNyurokuDiv div) {
         TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
-        if (!div.getTokkiNyuryoku().getHiddenFifthTokkiJiko().equals(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()))) {
-            getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY5), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY1), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()),
+                model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getLblFirstMaskExist().setDisplayNone(false);
+        div.getTokkiNyuryoku().setHiddenFirstTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        if (model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード())) {
+            div.getTokkiNyuryoku().setHiddenIsDeleteFirstTokki(DELETE);
+        } else {
+            div.getTokkiNyuryoku().setHiddenIsDeleteFirstTokki(RString.EMPTY);
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnSecondMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
+        getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY2), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()),
+                model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getLblSecondMaskExist().setDisplayNone(false);
+        div.getTokkiNyuryoku().setHiddenSecondTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        if (model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード())) {
+            div.getTokkiNyuryoku().setHiddenIsDeleteSecondTokki(DELETE);
+        } else {
+            div.getTokkiNyuryoku().setHiddenIsDeleteSecondTokki(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnThirdMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
+        getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY3), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()),
+                model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getLblThirdMaskExist().setDisplayNone(false);
+        div.getTokkiNyuryoku().setHiddenThirdTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        if (model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード())) {
+            div.getTokkiNyuryoku().setHiddenIsDeleteThirdTokki(DELETE);
+        } else {
+            div.getTokkiNyuryoku().setHiddenIsDeleteThirdTokki(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFourthMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
+        getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY4), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()),
+                model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getLblFourthMaskExist().setDisplayNone(false);
+        div.getTokkiNyuryoku().setHiddenFourthTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        if (model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード())) {
+            div.getTokkiNyuryoku().setHiddenIsDeleteFourthTokki(DELETE);
+        } else {
+            div.getTokkiNyuryoku().setHiddenIsDeleteFourthTokki(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * テキストマスキングDivにて保存ボタンを押下した際に動作するメソッドです。
+     *
+     * @param div GaikyoTokkiYichiranNyurokuDiv
+     * @return ResponseData<GaikyoTokkiNyurokuDiv>
+     */
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFifthMasking(GaikyoTokkiYichiranNyurokuDiv div) {
+        TextMaskingDataModel model = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHdnTextMasking(), TextMaskingDataModel.class);
+        getHandler(div).changeHiddenTokkiJiko(getKey(div, KEY5), model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()),
+                model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getLblFifthMaskExist().setDisplayNone(false);
         div.getTokkiNyuryoku().setHiddenFifthTokkiJiko(model.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード()));
+        if (model.get削除_マッピング().get(GenponMaskKubun.マスク.getコード())) {
+            div.getTokkiNyuryoku().setHiddenIsDeleteFifthTokki(DELETE);
+        } else {
+            div.getTokkiNyuryoku().setHiddenIsDeleteFifthTokki(RString.EMPTY);
+        }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 特記事項１が変更した処理。
+     * 「前へ」ボタンの操作処理を行う。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFirstTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().isEmpty()) {
-            return ResponseData.of(div).respond();
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onClick_btnBeforeTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ValidationMessageControlPairs pairs = getValidationMessageControl(div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-
-        if (!ResponseHolder.isReRequest()) {
-            ErrorMessage message = getHandler(div).checkChange特記事項(
-                    getKey(div, KEY1), div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
-            if (message.evaluate() != null) {
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setValue(getHandler(div).get変更前特記事項(getKey(div, KEY1)));
-            return ResponseData.of(div).respond();
-        }
-
-        if (div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue().isEmpty()) {
-            div.getTokkiNyuryoku().setHiddenFirstTokkiJiko(RString.EMPTY);
-            div.getTokkiNyuryoku().getBtnFirstImageMasking().setDisabled(true);
-        } else {
-            div.getTokkiNyuryoku().getBtnFirstImageMasking().setDisabled(false);
-        }
-        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY1), div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
-
+        getHandler(div).onClick_btnBeforeTokkiJiko(temp_申請書管理番号);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 特記事項２が変更した処理。
+     * 「次へ」ボタンの操作処理を行う。
      *
      * @param div GaikyoTokkiYichiranNyurokuDiv
      * @return ResponseData<GaikyoTokkiNyurokuDiv>
      */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtSecondTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().isEmpty()) {
-            return ResponseData.of(div).respond();
+    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onClick_btnAfterTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ValidationMessageControlPairs pairs = getValidationMessageControl(div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-
-        if (!ResponseHolder.isReRequest()) {
-            ErrorMessage message = getHandler(div).checkChange特記事項(
-                    getKey(div, KEY2), div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
-            if (message.evaluate() != null) {
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().setValue(getHandler(div).get変更前特記事項(getKey(div, KEY2)));
-            return ResponseData.of(div).respond();
-        }
-
-        if (div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue().isEmpty()) {
-            div.getTokkiNyuryoku().setHiddenSecondTokkiJiko(RString.EMPTY);
-            div.getTokkiNyuryoku().getBtnSecondImageMasking().setDisabled(true);
-        } else {
-            div.getTokkiNyuryoku().getBtnSecondImageMasking().setDisabled(false);
-        }
-        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY2), div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 特記事項３が変更した処理。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtThirdTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().isEmpty()) {
-            return ResponseData.of(div).respond();
-        }
-
-        if (!ResponseHolder.isReRequest()) {
-            ErrorMessage message = getHandler(div).checkChange特記事項(
-                    getKey(div, KEY3), div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
-            if (message.evaluate() != null) {
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().setValue(getHandler(div).get変更前特記事項(getKey(div, KEY3)));
-            return ResponseData.of(div).respond();
-        }
-
-        if (div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue().isEmpty()) {
-            div.getTokkiNyuryoku().setHiddenThirdTokkiJiko(RString.EMPTY);
-            div.getTokkiNyuryoku().getBtnThirdImageMasking().setDisabled(true);
-        } else {
-            div.getTokkiNyuryoku().getBtnThirdImageMasking().setDisabled(false);
-        }
-        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY3), div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 特記事項４が変更した処理。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFourthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().isEmpty()) {
-            return ResponseData.of(div).respond();
-        }
-
-        if (!ResponseHolder.isReRequest()) {
-            ErrorMessage message = getHandler(div).checkChange特記事項(
-                    getKey(div, KEY4), div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
-            if (message.evaluate() != null) {
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().setValue(getHandler(div).get変更前特記事項(getKey(div, KEY4)));
-            return ResponseData.of(div).respond();
-        }
-
-        if (div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue().isEmpty()) {
-            div.getTokkiNyuryoku().setHiddenFourthTokkiJiko(RString.EMPTY);
-            div.getTokkiNyuryoku().getBtnFourthImageMasking().setDisabled(true);
-        } else {
-            div.getTokkiNyuryoku().getBtnFourthImageMasking().setDisabled(false);
-        }
-        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY4), div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
-
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 特記事項５が変更した処理。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFifthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
-        if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().isEmpty()) {
-            return ResponseData.of(div).respond();
-        }
-
-        if (!ResponseHolder.isReRequest()) {
-            ErrorMessage message = getHandler(div).checkChange特記事項(
-                    getKey(div, KEY5), div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
-            if (message.evaluate() != null) {
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-        }
-        if (new RString(DbeErrorMessages.特記事項追加削除不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().setValue(getHandler(div).get変更前特記事項(getKey(div, KEY5)));
-            return ResponseData.of(div).respond();
-        }
-
-        if (div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue().isEmpty()) {
-            div.getTokkiNyuryoku().setHiddenFifthTokkiJiko(RString.EMPTY);
-            div.getTokkiNyuryoku().getBtnFifthImageMasking().setDisabled(true);
-        } else {
-            div.getTokkiNyuryoku().getBtnFifthImageMasking().setDisabled(false);
-        }
-        getHandler(div).tokkiJikoHasChanged(getKey(div, KEY5), div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
-
+        getHandler(div).onClick_btnAfterTokkiJiko(temp_申請書管理番号);
         return ResponseData.of(div).respond();
     }
 
@@ -765,6 +1010,14 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onClick_btnBack(GaikyoTokkiYichiranNyurokuDiv div) {
         前排他キーの解除();
+        ValidationMessageControlPairs pairs = getValidationMessageControl(div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        ViewStateHolder.put(ViewStateKeys.特記事項一覧, 
+                DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class));
+        ViewStateHolder.put(ViewStateKeys.特記事項マスク一覧, 
+                DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap_MASK(), HashMap.class));
         return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
     }
 
@@ -790,34 +1043,55 @@ public class GaikyoTokkiYichiranNyuroku {
         return ResponseData.of(div).respond();
     }
 
-    /**
-     * 「特記事項を保存する」ボタンの操作処理を行う。
-     *
-     * @param div GaikyoTokkiYichiranNyurokuDiv
-     * @return ResponseData<GaikyoTokkiNyurokuDiv>
-     */
-    public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onClick_Save(GaikyoTokkiYichiranNyurokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                    UrQuestionMessages.保存の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+    private void setTextMaskingDataModel(GaikyoTokkiYichiranNyurokuDiv div,
+            TextMaskingDataModel model,
+            RString 調査項目番号,
+            RString 調査項目名称,
+            int 特記事項連番,
+            RString 特記事項テキストイメージ区分,
+            Map<RString, RString> map特記事項,
+            Map<RString, Boolean> map削除,
+            RString key) {
+        model.set調査項目番号(調査項目番号);
+        model.set調査項目名称(調査項目名称);
+        model.set特記連番(特記事項連番);
+        model.set特記事項テキスト_イメージ区分(特記事項テキストイメージ区分);
+        model.set特記事項_マッピング(map特記事項);
+        model.set削除_マッピング(map削除);
+        model.setExistData(getHandler(div).isExistMaskData(getKey(div, key)));
+    }
 
-            ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-            int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-            getHandler(div).onClick_Save(temp_申請書管理番号, temp_認定調査履歴番号);
-            前排他キーの解除();
-            InformationMessage message = new InformationMessage(UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace("保存").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+    private ValidationMessageControlPairs getValidationMessageControl(GaikyoTokkiYichiranNyurokuDiv div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if ((!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete().getSelectedItems().isEmpty())
+                || (!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().getSelectedItems().isEmpty())) {
+            getValidationHandler().validateFor特記事項1の必須入力(pairs, div);
         }
-        if (new RString(UrInformationMessages.正常終了.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            this.onLoad(div);
+        if ((!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete().getSelectedItems().isEmpty())
+                || (!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().getSelectedItems().isEmpty())) {
+            getValidationHandler().validateFor特記事項2の必須入力(pairs, div);
         }
-        return ResponseData.of(div).respond();
+        if ((!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete().getSelectedItems().isEmpty())
+                || (!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().getSelectedItems().isEmpty())) {
+            getValidationHandler().validateFor特記事項3の必須入力(pairs, div);
+        }
+        if ((!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete().getSelectedItems().isEmpty())
+                || (!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().getSelectedItems().isEmpty())) {
+            getValidationHandler().validateFor特記事項4の必須入力(pairs, div);
+        }
+        if ((!RString.isNullOrEmpty(div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().getValue())
+                && div.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete().getSelectedItems().isEmpty())) {
+            getValidationHandler().validateFor特記事項5の必須入力(pairs, div);
+        }
+        return pairs;
     }
 
     private boolean 前排他キーのセット() {
@@ -834,7 +1108,7 @@ public class GaikyoTokkiYichiranNyuroku {
         RealInitialLocker.release(排他キー);
     }
 
-    private ValidationMessageControlPairs onBlur_ChosaKomokuNoCheck(
+    private ValidationMessageControlPairs onChange_ChosaKomokuNoCheck(
             HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> map,
             RString key,
             TextBox texBox) {
@@ -861,6 +1135,10 @@ public class GaikyoTokkiYichiranNyuroku {
 
     private GaikyoTokkiYichiranNyurokuHandler getHandler(GaikyoTokkiYichiranNyurokuDiv div) {
         return new GaikyoTokkiYichiranNyurokuHandler(div);
+    }
+
+    private ValidationHandler getValidationHandler() {
+        return new ValidationHandler();
     }
 
     private RString getKey(GaikyoTokkiYichiranNyurokuDiv div, RString key) {

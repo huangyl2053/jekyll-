@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblFourthTokkiJikoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -62,6 +62,21 @@ public class tblFourthTokkiJikoDiv extends TablePanel {
     @JsonIgnore
     public TextBox getTxtFourthTokkiJikoMeisho() {
         return this.celTableCell29.getTxtFourthTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFourthSpace() {
+        return this.celTableCell29.getFourthSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFourthChosaDelete() {
+        return this.celTableCell29.getChkFourthChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFourthMaskExist() {
+        return this.celTableCell29.getLblFourthMaskExist();
     }
 
     @JsonIgnore
@@ -232,7 +247,7 @@ public class tblFourthTokkiJikoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell25AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFourthChosaKomokuNo")
     private TextBox txtFourthChosaKomokuNo;
 
@@ -262,7 +277,7 @@ class celTableCell25AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell27AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("lblFourthHyphen")
     private Label lblFourthHyphen;
 
@@ -292,7 +307,7 @@ class celTableCell27AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell28AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFourthTokkiRenban")
     private TextBoxNum txtFourthTokkiRenban;
 
@@ -322,9 +337,15 @@ class celTableCell28AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell29AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFourthTokkiJikoMeisho")
     private TextBox txtFourthTokkiJikoMeisho;
+    @JsonProperty("FourthSpace")
+    private Space FourthSpace;
+    @JsonProperty("chkFourthChosaDelete")
+    private CheckBoxList chkFourthChosaDelete;
+    @JsonProperty("lblFourthMaskExist")
+    private Label lblFourthMaskExist;
 
     /*
      * gettxtFourthTokkiJikoMeisho
@@ -344,6 +365,60 @@ class celTableCell29AttblFourthTokkiJiko extends TableCell {
         this.txtFourthTokkiJikoMeisho = txtFourthTokkiJikoMeisho;
     }
 
+    /*
+     * getFourthSpace
+     * @return FourthSpace
+     */
+    @JsonProperty("FourthSpace")
+    public Space getFourthSpace() {
+        return FourthSpace;
+    }
+
+    /*
+     * setFourthSpace
+     * @param FourthSpace FourthSpace
+     */
+    @JsonProperty("FourthSpace")
+    public void setFourthSpace(Space FourthSpace) {
+        this.FourthSpace = FourthSpace;
+    }
+
+    /*
+     * getchkFourthChosaDelete
+     * @return chkFourthChosaDelete
+     */
+    @JsonProperty("chkFourthChosaDelete")
+    public CheckBoxList getChkFourthChosaDelete() {
+        return chkFourthChosaDelete;
+    }
+
+    /*
+     * setchkFourthChosaDelete
+     * @param chkFourthChosaDelete chkFourthChosaDelete
+     */
+    @JsonProperty("chkFourthChosaDelete")
+    public void setChkFourthChosaDelete(CheckBoxList chkFourthChosaDelete) {
+        this.chkFourthChosaDelete = chkFourthChosaDelete;
+    }
+
+    /*
+     * getlblFourthMaskExist
+     * @return lblFourthMaskExist
+     */
+    @JsonProperty("lblFourthMaskExist")
+    public Label getLblFourthMaskExist() {
+        return lblFourthMaskExist;
+    }
+
+    /*
+     * setlblFourthMaskExist
+     * @param lblFourthMaskExist lblFourthMaskExist
+     */
+    @JsonProperty("lblFourthMaskExist")
+    public void setLblFourthMaskExist(Label lblFourthMaskExist) {
+        this.lblFourthMaskExist = lblFourthMaskExist;
+    }
+
     // </editor-fold>
 }
 /**
@@ -352,7 +427,7 @@ class celTableCell29AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell30AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -362,7 +437,7 @@ class celTableCell30AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell31AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFourthTokkiJiko")
     private TextBoxMultiLine txtFourthTokkiJiko;
 
@@ -392,7 +467,7 @@ class celTableCell31AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell32AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -402,7 +477,7 @@ class celTableCell32AttblFourthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell33AttblFourthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("imgFourthTokkiJiko")
     private StaticImage imgFourthTokkiJiko;
 

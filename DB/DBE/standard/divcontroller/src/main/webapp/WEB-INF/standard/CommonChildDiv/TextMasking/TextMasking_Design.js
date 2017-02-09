@@ -4,6 +4,10 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_chkDelete = function () {
+                return "onChange_chkDelete";
+            };
+
             Events.onClick_btnModoru = function () {
                 return "onClick_btnModoru";
             };
@@ -69,6 +73,14 @@ var DBE;
 
             Controls.prototype.txtChosaKomokuMeisho = function () {
                 return new UZA.TextBox(this.convFiledName("txtChosaKomokuMeisho"));
+            };
+
+            Controls.prototype.spcTokkiMask = function () {
+                return new UZA.Space(this.convFiledName("spcTokkiMask"));
+            };
+
+            Controls.prototype.chkDelete = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkDelete"));
             };
 
             Controls.prototype.celTableCell4 = function () {

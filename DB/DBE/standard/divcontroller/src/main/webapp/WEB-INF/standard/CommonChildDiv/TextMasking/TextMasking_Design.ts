@@ -8,6 +8,10 @@ module DBE {
 
         export class Events {
 
+            public static onChange_chkDelete(): string {
+                return "onChange_chkDelete";
+            }
+
             public static onClick_btnModoru(): string {
                 return "onClick_btnModoru";
             }
@@ -75,6 +79,14 @@ module DBE {
 
             public txtChosaKomokuMeisho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtChosaKomokuMeisho"));
+            }
+
+            public spcTokkiMask(): UZA.Space {
+                return new UZA.Space(this.convFiledName("spcTokkiMask"));
+            }
+
+            public chkDelete(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkDelete"));
             }
 
             public celTableCell4(): UZA.TableCell {

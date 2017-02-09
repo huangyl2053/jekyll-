@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblThirdTokkiJikoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -62,6 +62,21 @@ public class tblThirdTokkiJikoDiv extends TablePanel {
     @JsonIgnore
     public TextBox getTxtThirdTokkiJikoMeisho() {
         return this.celTableCell21.getTxtThirdTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getThirdSpace() {
+        return this.celTableCell21.getThirdSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkThirdChosaDelete() {
+        return this.celTableCell21.getChkThirdChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblThirdMaskExist() {
+        return this.celTableCell21.getLblThirdMaskExist();
     }
 
     @JsonIgnore
@@ -232,7 +247,7 @@ public class tblThirdTokkiJikoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell18AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtThirdChosaKomokuNo")
     private TextBox txtThirdChosaKomokuNo;
 
@@ -262,7 +277,7 @@ class celTableCell18AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell19AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("lblThirdHyphen")
     private Label lblThirdHyphen;
 
@@ -292,7 +307,7 @@ class celTableCell19AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell20AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtThirdTokkiRenban")
     private TextBoxNum txtThirdTokkiRenban;
 
@@ -322,9 +337,15 @@ class celTableCell20AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell21AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtThirdTokkiJikoMeisho")
     private TextBox txtThirdTokkiJikoMeisho;
+    @JsonProperty("ThirdSpace")
+    private Space ThirdSpace;
+    @JsonProperty("chkThirdChosaDelete")
+    private CheckBoxList chkThirdChosaDelete;
+    @JsonProperty("lblThirdMaskExist")
+    private Label lblThirdMaskExist;
 
     /*
      * gettxtThirdTokkiJikoMeisho
@@ -344,6 +365,60 @@ class celTableCell21AttblThirdTokkiJiko extends TableCell {
         this.txtThirdTokkiJikoMeisho = txtThirdTokkiJikoMeisho;
     }
 
+    /*
+     * getThirdSpace
+     * @return ThirdSpace
+     */
+    @JsonProperty("ThirdSpace")
+    public Space getThirdSpace() {
+        return ThirdSpace;
+    }
+
+    /*
+     * setThirdSpace
+     * @param ThirdSpace ThirdSpace
+     */
+    @JsonProperty("ThirdSpace")
+    public void setThirdSpace(Space ThirdSpace) {
+        this.ThirdSpace = ThirdSpace;
+    }
+
+    /*
+     * getchkThirdChosaDelete
+     * @return chkThirdChosaDelete
+     */
+    @JsonProperty("chkThirdChosaDelete")
+    public CheckBoxList getChkThirdChosaDelete() {
+        return chkThirdChosaDelete;
+    }
+
+    /*
+     * setchkThirdChosaDelete
+     * @param chkThirdChosaDelete chkThirdChosaDelete
+     */
+    @JsonProperty("chkThirdChosaDelete")
+    public void setChkThirdChosaDelete(CheckBoxList chkThirdChosaDelete) {
+        this.chkThirdChosaDelete = chkThirdChosaDelete;
+    }
+
+    /*
+     * getlblThirdMaskExist
+     * @return lblThirdMaskExist
+     */
+    @JsonProperty("lblThirdMaskExist")
+    public Label getLblThirdMaskExist() {
+        return lblThirdMaskExist;
+    }
+
+    /*
+     * setlblThirdMaskExist
+     * @param lblThirdMaskExist lblThirdMaskExist
+     */
+    @JsonProperty("lblThirdMaskExist")
+    public void setLblThirdMaskExist(Label lblThirdMaskExist) {
+        this.lblThirdMaskExist = lblThirdMaskExist;
+    }
+
     // </editor-fold>
 }
 /**
@@ -352,7 +427,7 @@ class celTableCell21AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell22AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -362,7 +437,7 @@ class celTableCell22AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell23AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtThirdTokkiJiko")
     private TextBoxMultiLine txtThirdTokkiJiko;
 
@@ -392,7 +467,7 @@ class celTableCell23AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell24AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -402,7 +477,7 @@ class celTableCell24AttblThirdTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell26AttblThirdTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("imgThirdTokkiJiko")
     private StaticImage imgThirdTokkiJiko;
 
