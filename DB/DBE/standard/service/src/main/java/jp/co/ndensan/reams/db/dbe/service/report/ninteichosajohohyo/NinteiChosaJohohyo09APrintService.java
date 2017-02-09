@@ -51,13 +51,12 @@ public class NinteiChosaJohohyo09APrintService implements INinteiChosaJohohyoPri
             List<NinteichosahyoServiceJokyoFlag> 認定調査票サービス状況フラグList,
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
-            RString 認定調査票マスキング区分,
-            RString 主治医意見書マスキング区分) {
+            RString 認定調査票マスキング区分) {
         try (ReportAssembler<NinteiChosaJohohyo22ReportSource> assembler = createAssembler(new NinteiChosaJohohyo09AProperty(), reportManager)) {
             ReportSourceWriter<NinteiChosaJohohyo22ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinteiChosaJohohyo22Report report = new NinteiChosaJohohyo22Report(NinteiChosaJohohyo22EntityEditor.edit(business.toEntity(),
-                    認定調査票サービス状況List, 認定調査票サービス状況フラグList, 認定調査票調査項目List, 認定調査票記入項目List,
-                    イメージ共有ファイルID, 認定調査票マスキング区分, 主治医意見書マスキング区分));
+            NinteiChosaJohohyo22Report report = new NinteiChosaJohohyo22Report(
+                    NinteiChosaJohohyo22EntityEditor.edit(business.toEntity(), 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
+                            認定調査票調査項目List, 認定調査票記入項目List, イメージ共有ファイルID, 認定調査票マスキング区分));
             report.writeBy(reportSourceWriter);
         }
     }

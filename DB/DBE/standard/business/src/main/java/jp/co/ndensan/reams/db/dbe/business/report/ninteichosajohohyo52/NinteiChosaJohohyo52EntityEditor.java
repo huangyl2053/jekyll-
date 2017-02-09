@@ -79,7 +79,6 @@ public class NinteiChosaJohohyo52EntityEditor {
     private static final RString 判定結果コード06 = new RString("06");
     private static final RString 判定結果コード02 = new RString("02");
     private static final RString 判定結果コード99 = new RString("99");
-    private static final RString マスキング_なし = new RString("0");
     private static final RString マスキング_あり = new RString("1");
     private static final RString マスキング_調査員名 = new RString("2");
     private static final RString テキスト = new RString("1");
@@ -190,7 +189,6 @@ public class NinteiChosaJohohyo52EntityEditor {
      * @param 認定調査票記入項目List NinteichosahyoKinyuItemのリスト
      * @param イメージID RDateTime
      * @param 認定調査票マスキング区分
-     * @param 主治医意見書マスキング区分
      * @return NinteiChosaJohohyoEntity
      */
     public static NinteiChosaJohohyoEntity edit(YokaigoNinteiJohoTeikyoEntity yokaigoNinteiJohoTeikyoEntity,
@@ -199,11 +197,9 @@ public class NinteiChosaJohohyo52EntityEditor {
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
             RDateTime イメージID,
-            RString 認定調査票マスキング区分,
-            RString 主治医意見書マスキング区分) {
+            RString 認定調査票マスキング区分) {
         NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity = new NinteiChosaJohohyoEntity();
-        setBodyItem(ninteiChosaJohohyoEntity, yokaigoNinteiJohoTeikyoEntity,
-                認定調査票記入項目List, イメージID, 認定調査票マスキング区分, 主治医意見書マスキング区分);
+        setBodyItem(ninteiChosaJohohyoEntity, yokaigoNinteiJohoTeikyoEntity, 認定調査票記入項目List, イメージID, 認定調査票マスキング区分);
         ninteiChosaJohohyoEntity.setサービス区分リスト_52(getサービス状況02(認定調査票サービス状況List,
                 認定調査票サービス状況フラグList, yokaigoNinteiJohoTeikyoEntity.getサービス区分コード()));
         ninteiChosaJohohyoEntity.set麻痺拘縮1_リスト_52(get麻痺拘縮1_リスト(認定調査票調査項目List));
@@ -404,8 +400,7 @@ public class NinteiChosaJohohyo52EntityEditor {
             YokaigoNinteiJohoTeikyoEntity entity,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
             RDateTime イメージID,
-            RString 認定調査票マスキング区分,
-            RString 主治医意見書マスキング区分) {
+            RString 認定調査票マスキング区分) {
         setマスキング情報(ninteiChosaJohohyoEntity, entity, 認定調査票マスキング区分);
         ninteiChosaJohohyoEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
@@ -442,7 +437,7 @@ public class NinteiChosaJohohyo52EntityEditor {
         ninteiChosaJohohyoEntity.setタイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査情報票, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         ninteiChosaJohohyoEntity.set年齢(new RStringBuilder().append(entity.get年齢()).append(new RString(" 歳")).toRString());
         ninteiChosaJohohyoEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
-        setBodyItem01(ninteiChosaJohohyoEntity, entity, 認定調査票記入項目List, イメージID, 主治医意見書マスキング区分);
+        setBodyItem01(ninteiChosaJohohyoEntity, entity, 認定調査票記入項目List, イメージID, 認定調査票マスキング区分);
     }
 
     private static void setマスキング情報(NinteiChosaJohohyoEntity ninteiEntity,
@@ -486,7 +481,7 @@ public class NinteiChosaJohohyo52EntityEditor {
     }
 
     private static void setBodyItem01(NinteiChosaJohohyoEntity ninteiEntity, YokaigoNinteiJohoTeikyoEntity entity,
-            List<NinteichosahyoKinyuItem> 認定調査票記入項目List, RDateTime イメージID, RString 主治医意見書マスキング区分) {
+            List<NinteichosahyoKinyuItem> 認定調査票記入項目List, RDateTime イメージID, RString 認定調査票マスキング区分) {
         setBodyItem02(ninteiEntity, entity);
         ninteiEntity.set家族連絡先関係(RString.isNullOrEmpty(entity.get関係()) ? RString.EMPTY
                 : RensakusakiTsuzukigara.toValue(entity.get関係()).get名称());
@@ -536,12 +531,12 @@ public class NinteiChosaJohohyo52EntityEditor {
         if (イメージ.equals(entity.getテキスト_イメージ区分())) {
             RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
             RString path = copySharedFiles(イメージID, 共有ファイル名);
-            ninteiEntity.set実施場所イメージ(getイメージファイル名(path, イメージID01, 主治医意見書マスキング区分));
-            ninteiEntity.set市町村特別給付イメージ(getイメージファイル名(path, イメージID02, 主治医意見書マスキング区分));
-            ninteiEntity.set介護保険給付外の在宅イメージ(getイメージファイル名(path, イメージID03, 主治医意見書マスキング区分));
-            ninteiEntity.set施設名イメージ(getイメージファイル名(path, イメージID04, 主治医意見書マスキング区分));
-            ninteiEntity.set施設住所イメージ(getイメージファイル名(path, イメージID05, 主治医意見書マスキング区分));
-            ninteiEntity.set施設電話イメージ(getイメージファイル名(path, イメージID06, 主治医意見書マスキング区分));
+            ninteiEntity.set実施場所イメージ(getイメージファイル名(path, イメージID01, 認定調査票マスキング区分));
+            ninteiEntity.set市町村特別給付イメージ(getイメージファイル名(path, イメージID02, 認定調査票マスキング区分));
+            ninteiEntity.set介護保険給付外の在宅イメージ(getイメージファイル名(path, イメージID03, 認定調査票マスキング区分));
+            ninteiEntity.set施設名イメージ(getイメージファイル名(path, イメージID04, 認定調査票マスキング区分));
+            ninteiEntity.set施設住所イメージ(getイメージファイル名(path, イメージID05, 認定調査票マスキング区分));
+            ninteiEntity.set施設電話イメージ(getイメージファイル名(path, イメージID06, 認定調査票マスキング区分));
         }
         ninteiEntity.set施設利用(RString.isNullOrEmpty(entity.get施設利用()) ? RString.EMPTY
                 : GenzainoJokyoCode.toValue(entity.get施設利用()).get名称());
@@ -567,8 +562,8 @@ public class NinteiChosaJohohyo52EntityEditor {
         return RString.EMPTY;
     }
 
-    private static RString getイメージファイル名(RString path, RString fileName, RString 主治医意見書マスキング区分) {
-        RString file = マスキング_なし.equals(主治医意見書マスキング区分) ? fileName : fileName.replace(拡張子_PNG.toString(), "_BAK.png");
+    private static RString getイメージファイル名(RString path, RString fileName, RString 認定調査票マスキング区分) {
+        RString file = マスキング_あり.equals(認定調査票マスキング区分) ? fileName.replace(拡張子_PNG.toString(), "_BAK.png") : fileName;
         RString fileFullPath = getFilePath(path, file);
         if (!RString.isNullOrEmpty(fileFullPath)) {
             return fileFullPath;

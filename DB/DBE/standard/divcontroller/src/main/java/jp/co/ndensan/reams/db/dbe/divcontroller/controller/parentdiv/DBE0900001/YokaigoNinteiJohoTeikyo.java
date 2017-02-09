@@ -196,31 +196,27 @@ public class YokaigoNinteiJohoTeikyo {
         List<NinteichosahyoServiceJokyo> 認定調査票サービス状況List = finder.get認定調査票サービス状況(申請書管理番号);
         List<NinteichosahyoServiceJokyoFlag> 認定調査票サービス状況フラグList = finder.get認定調査票サービス状況フラグ(申請書管理番号);
         List<NinteichosahyoChosaItem> 認定調査票調査項目List = finder.get認定調査票調査項目List(申請書管理番号);
-        RString 認定調査票マスキング区分 = div.getRadNinteiChosaMasking().getSelectedKey();
-        RString 特記事項マスキング区分 = div.getRadTokkiJikoMasking().getSelectedKey();
-        RString 主治医意見書マスキング区分 = div.getRadShujii().getSelectedKey();
-        RString その他資料マスキング区分 = div.getRadSohotaShiryoMasking().getSelectedKey();
-        RString 一次判定結果マスキング区分 = div.getRadIchijiHanteiMasking().getSelectedKey();
 
         try (ReportManager reportManager = new ReportManager()) {
             if (div.getChkNinteiChosahyo().isAllSelected()) {
                 List<NinteichosahyoKinyuItem> 認定調査票記入項目List = finder.get認定調査票記入項目List(申請書管理番号);
                 print認定調査票(business, イメージ共有ファイルID, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
-                        認定調査票調査項目List, 認定調査票記入項目List, 認定調査票マスキング区分, 主治医意見書マスキング区分, reportManager);
+                        認定調査票調査項目List, 認定調査票記入項目List, div.getRadNinteiChosaMasking().getSelectedKey(), reportManager);
             }
 
             if (div.getChkTokkiJiko().isAllSelected()) {
+                RString 特記事項マスキング区分 = div.getRadTokkiJikoMasking().getSelectedKey();
                 List<RString> 特記事項区分List = finder.get特記事項区分(申請書管理番号, 特記事項マスキング区分);
                 List<NinteichosaRelate> 特記事項List = finder.get特記事項List(申請書管理番号, 特記事項マスキング区分);
                 print特記事項(business, 特記事項区分List, 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID, reportManager);
             }
 
             if (div.getChkShujiiIkensho().isAllSelected()) {
-                print主治医意見書(business, イメージ共有ファイルID, 主治医意見書マスキング区分, reportManager);
+                print主治医意見書(business, イメージ共有ファイルID, div.getRadShujii().getSelectedKey(), reportManager);
             }
 
             if (div.getChkSonotaShiryo().isAllSelected()) {
-                printその他資料(business, イメージ共有ファイルID, その他資料マスキング区分, reportManager);
+                printその他資料(business, イメージ共有ファイルID, div.getRadSohotaShiryoMasking().getSelectedKey(), reportManager);
             }
 
             if (div.getChkIchijiHanteiKekka().isAllSelected()) {
@@ -230,7 +226,7 @@ public class YokaigoNinteiJohoTeikyo {
                 List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目List = finder.get前回主治医意見書意見項目List(申請書管理番号);
                 print一次判定結果(business, 認定調査特記事項番号List, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
                         認定調査票調査項目List, 前回認定調査票調査項目List, 主治医意見書意見項目List, 前回主治医意見書意見項目List,
-                        一次判定結果マスキング区分, reportManager);
+                        div.getRadIchijiHanteiMasking().getSelectedKey(), reportManager);
             }
 
             response.data = reportManager.publish();
@@ -246,14 +242,13 @@ public class YokaigoNinteiJohoTeikyo {
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
             RString 認定調査票マスキング区分,
-            RString 主治医意見書マスキング区分,
             ReportManager reportManager) {
         RString 総合事業開始区分 = DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         INinteiChosaJohohyoPrintService printService
                 = NinteiChosaJohohyoPrintServiceFactory.create(business.get厚労省IF識別コード(), 総合事業開始区分, reportManager);
         if (printService != null) {
             printService.print(business, イメージ共有ファイルID, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
-                    認定調査票調査項目List, 認定調査票記入項目List, 認定調査票マスキング区分, 主治医意見書マスキング区分);
+                    認定調査票調査項目List, 認定調査票記入項目List, 認定調査票マスキング区分);
         }
     }
 
