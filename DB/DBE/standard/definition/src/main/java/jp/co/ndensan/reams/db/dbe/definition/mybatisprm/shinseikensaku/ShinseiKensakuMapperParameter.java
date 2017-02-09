@@ -208,6 +208,7 @@ public class ShinseiKensakuMapperParameter {
     private boolean useSeinengappiYMDFrom;
     private boolean useSeinengappiYMDTo;
     private boolean useNinteiShinseiShinseijiKubun;
+    private boolean useChkTennyu;
     private boolean isMan;
     private boolean isWoman;
     private boolean useHihokenshaKubunCode;

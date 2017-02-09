@@ -113,38 +113,38 @@ public class ShinseiKensakuHandler {
         }
         RDate 認定有効開始日FROM = finderDiv.getTxtNinteiYukoKaishiDateRange().getFromValue();
         if (認定有効開始日FROM != null) {
-            parameter.setNinteiYukoKaishiYMDFrom(認定有効開始日FROM.toFlexibleDate());
+            parameter.setNinteiYukoKaishiYMDFrom(new FlexibleDate(認定有効開始日FROM.toDateString()));
             parameter.setUseNinteiYukoKaishiYMDFrom(true);
             useNinteiKekkaJoho = true;
         }
         RDate 認定有効開始日To = finderDiv.getTxtNinteiYukoKaishiDateRange().getToValue();
         if (認定有効開始日To != null) {
-            parameter.setNinteiYukoKaishiYMDTo(認定有効開始日To.toFlexibleDate());
+            parameter.setNinteiYukoKaishiYMDTo(new FlexibleDate(認定有効開始日To.toDateString()));
             parameter.setUseNinteiYukoKaishiYMDTo(true);
             useNinteiKekkaJoho = true;
         }
 
         RDate 認定有効終了日FROM = finderDiv.getTxtNinteiYukoShuryoDateRange().getFromValue();
         if (認定有効終了日FROM != null) {
-            parameter.setNinteiYukoShuryoYMDFrom(認定有効終了日FROM.toFlexibleDate());
+            parameter.setNinteiYukoShuryoYMDFrom(new FlexibleDate(認定有効終了日FROM.toDateString()));
             parameter.setUseNinteiYukoShuryoYMDFrom(true);
             useNinteiKekkaJoho = true;
         }
         RDate 認定有効終了日To = finderDiv.getTxtNinteiYukoShuryoDateRange().getToValue();
         if (認定有効終了日To != null) {
-            parameter.setNinteiYukoShuryoYMDTo(認定有効終了日To.toFlexibleDate());
+            parameter.setNinteiYukoShuryoYMDTo(new FlexibleDate(認定有効終了日To.toDateString()));
             parameter.setUseNinteiYukoShuryoYMDTo(true);
             useNinteiKekkaJoho = true;
         }
         RDate 二次判定日FROM = finderDiv.getTxtNijiHanteiDateRange().getFromValue();
         if (二次判定日FROM != null) {
-            parameter.setNijiHanteiYMDFrom(二次判定日FROM.toFlexibleDate());
+            parameter.setNijiHanteiYMDFrom(new FlexibleDate(二次判定日FROM.toDateString()));
             parameter.setUseNijiHanteiYMDFrom(true);
             useNinteiKekkaJoho = true;
         }
         RDate 二次判定日To = finderDiv.getTxtNijiHanteiDateRange().getToValue();
         if (二次判定日To != null) {
-            parameter.setNijiHanteiYMDTo(二次判定日To.toFlexibleDate());
+            parameter.setNijiHanteiYMDTo(new FlexibleDate(二次判定日To.toDateString()));
             parameter.setUseNijiHanteiYMDTo(true);
             useNinteiKekkaJoho = true;
         }
@@ -169,13 +169,13 @@ public class ShinseiKensakuHandler {
         boolean useShinsakaiKaisaiKekkaJoho = false;
         RDate 開催日FROM = finderDiv.getTxtKaisaiDateRange().getFromValue();
         if (開催日FROM != null) {
-            parameter.setShinsakaiKaisaiYMDFrom(開催日FROM.toFlexibleDate());
+            parameter.setShinsakaiKaisaiYMDFrom(new FlexibleDate(開催日FROM.toDateString()));
             parameter.setUseShinsakaiKaisaiYMDFrom(true);
             useShinsakaiKaisaiKekkaJoho = true;
         }
         RDate 開催日To = finderDiv.getTxtKaisaiDateRange().getToValue();
         if (開催日To != null) {
-            parameter.setShinsakaiKaisaiYMDTo(開催日To.toFlexibleDate());
+            parameter.setShinsakaiKaisaiYMDTo(new FlexibleDate(開催日To.toDateString()));
             parameter.setUseShinsakaiKaisaiYMDTo(true);
             useShinsakaiKaisaiKekkaJoho = true;
         }
@@ -208,12 +208,12 @@ public class ShinseiKensakuHandler {
 
         RDate 設定有効開始日FROM = finderDiv.getTxtZenkaiYukoKaishiDateRange().getFromValue();
         if (設定有効開始日FROM != null) {
-            parameter.setZenkaiYukoKikanStartFrom(設定有効開始日FROM.toFlexibleDate());
+            parameter.setZenkaiYukoKikanStartFrom(new FlexibleDate(設定有効開始日FROM.toDateString()));
             parameter.setUseZenkaiYukoKikanStartFrom(true);
         }
         RDate 設定有効開始日To = finderDiv.getTxtZenkaiYukoKaishiDateRange().getToValue();
         if (設定有効開始日To != null) {
-            parameter.setZenkaiYukoKikanStartTo(設定有効開始日To.toFlexibleDate());
+            parameter.setZenkaiYukoKikanStartTo(new FlexibleDate(設定有効開始日To.toDateString()));
             parameter.setUseZenkaiYukoKikanStartTo(true);
         }
 // <<<<<<< HEAD
@@ -264,13 +264,13 @@ public class ShinseiKensakuHandler {
         boolean useShujiiIkenshoJoho = false;
         RDate 意見書受領日FROM = finderDiv.getTxtIkenshoKinyuDateRange().getFromValue();
         if (意見書受領日FROM != null) {
-            parameter.setIkenshoJuryoYMDFrom(意見書受領日FROM.toFlexibleDate());
+            parameter.setIkenshoJuryoYMDFrom(new FlexibleDate(意見書受領日FROM.toDateString()));
             parameter.setUseIkenshoJuryoYMDFrom(true);
             useShujiiIkenshoJoho = true;
         }
         RDate 意見書受領日To = finderDiv.getTxtIkenshoKinyuDateRange().getToValue();
         if (意見書受領日To != null) {
-            parameter.setIkenshoJuryoYMDTo(意見書受領日To.toFlexibleDate());
+            parameter.setIkenshoJuryoYMDTo(new FlexibleDate(意見書受領日To.toDateString()));
             useShujiiIkenshoJoho = true;
         }
         parameter.setUseShujiiIkenshoJoho(useShujiiIkenshoJoho);
@@ -291,13 +291,13 @@ public class ShinseiKensakuHandler {
         boolean useIchijiHanteiKekkaJoho = false;
         RDate 一次判定日FROM = finderDiv.getTxtIchijiHanteiDateRange().getFromValue();
         if (一次判定日FROM != null) {
-            parameter.setIchijiHanteiYMDFrom(一次判定日FROM.toFlexibleDate());
+            parameter.setIchijiHanteiYMDFrom(new FlexibleDate(一次判定日FROM.toDateString()));
             parameter.setUseIchijiHanteiYMDFrom(true);
             useIchijiHanteiKekkaJoho = true;
         }
         RDate 一次判定日To = finderDiv.getTxtIchijiHanteiDateRange().getToValue();
         if (一次判定日To != null) {
-            parameter.setIchijiHanteiYMDTo(一次判定日To.toFlexibleDate());
+            parameter.setIchijiHanteiYMDTo(new FlexibleDate(一次判定日To.toDateString()));
             parameter.setUseIchijiHanteiYMDTo(true);
             useIchijiHanteiKekkaJoho = true;
         }
@@ -315,13 +315,13 @@ public class ShinseiKensakuHandler {
         boolean useIchiGojiHanteiKekkaJoho = false;
         RDate ichiGoHanteiDateFrom = finderDiv.getTxtIchiGoHanteiDateRange().getFromValue();
         if (ichiGoHanteiDateFrom != null) {
-            parameter.setIchiGojiHanteiYMDFrom(ichiGoHanteiDateFrom.toFlexibleDate());
+            parameter.setIchiGojiHanteiYMDFrom(new FlexibleDate(ichiGoHanteiDateFrom.toDateString()));
             parameter.setUseIchiGojiHanteiYMDFrom(true);
             useIchiGojiHanteiKekkaJoho = true;
         }
         RDate ichiGoHanteiDateTo = finderDiv.getTxtIchiGoHanteiDateRange().getToValue();
         if (ichiGoHanteiDateTo != null) {
-            parameter.setIchiGojiHanteiYMDTo(ichiGoHanteiDateTo.toFlexibleDate());
+            parameter.setIchiGojiHanteiYMDTo(new FlexibleDate(ichiGoHanteiDateTo.toDateString()));
             parameter.setUseIchiGojiHanteiYMDTo(true);
             useIchiGojiHanteiKekkaJoho = true;
         }
@@ -409,13 +409,13 @@ public class ShinseiKensakuHandler {
         }
         RDate 調査実施日FROM = finderDiv.getTxtChosaJisshiDateRange().getFromValue();
         if (調査実施日FROM != null) {
-            parameter.setNinteichosaJisshiYMDFrom(調査実施日FROM.toFlexibleDate());
+            parameter.setNinteichosaJisshiYMDFrom(new FlexibleDate(調査実施日FROM.toDateString()));
             parameter.setUseNinteichosaJisshiYMDFrom(true);
             useNinteichosahyoGaikyoChosa = true;
         }
         RDate 調査実施日TO = finderDiv.getTxtChosaJisshiDateRange().getToValue();
         if (調査実施日TO != null) {
-            parameter.setNinteichosaJisshiYMDTo(調査実施日TO.toFlexibleDate());
+            parameter.setNinteichosaJisshiYMDTo(new FlexibleDate(調査実施日TO.toDateString()));
             parameter.setUseNinteichosaJisshiYMDTo(true);
             useNinteichosahyoGaikyoChosa = true;
         }
@@ -475,29 +475,32 @@ public class ShinseiKensakuHandler {
         }
         RDate 認定申請日FROM = finderDiv.getTxtNinteiShinseiDateRange().getFromValue();
         if (認定申請日FROM != null) {
-            parameter.setNinteiShinseiYMDFrom(認定申請日FROM.toFlexibleDate());
+            parameter.setNinteiShinseiYMDFrom(new FlexibleDate(認定申請日FROM.toDateString()));
             parameter.setUseNinteiShinseiYMDFrom(true);
         }
 
         RDate 認定申請日To = finderDiv.getTxtNinteiShinseiDateRange().getToValue();
         if (認定申請日To != null) {
-            parameter.setNinteiShinseiYMDTo(認定申請日To.toFlexibleDate());
+            parameter.setNinteiShinseiYMDTo(new FlexibleDate(認定申請日To.toDateString()));
             parameter.setUseNinteiShinseiYMDTo(true);
         }
         RDate 生年月日From = finderDiv.getTxtBirthDateRange().getFromValue();
         if (生年月日From != null) {
-            parameter.setSeinengappiYMDFrom(生年月日From.toFlexibleDate());
+            parameter.setSeinengappiYMDFrom(new FlexibleDate(生年月日From.toDateString()));
             parameter.setUseSeinengappiYMDFrom(true);
         }
         RDate 生年月日To = finderDiv.getTxtBirthDateRange().getToValue();
         if (生年月日To != null) {
-            parameter.setSeinengappiYMDTo(生年月日To.toFlexibleDate());
+            parameter.setSeinengappiYMDTo(new FlexibleDate(生年月日To.toDateString()));
             parameter.setUseSeinengappiYMDTo(true);
         }
         RString 認定申請区分申請時コード = finderDiv.getDdlShinseijiShinseiKubun().getSelectedKey();
         if (!RString.isNullOrEmpty(認定申請区分申請時コード)) {
             parameter.setNinteiShinseiShinseijiKubun(認定申請区分申請時コード);
             parameter.setUseNinteiShinseiShinseijiKubun(true);
+        }
+        if (finderDiv.getChkTennyu().getSelectedKeys().contains(KEY0)) {
+            parameter.setUseChkTennyu(true);
         }
         edit性別ForParameter(finderDiv, parameter);
     }

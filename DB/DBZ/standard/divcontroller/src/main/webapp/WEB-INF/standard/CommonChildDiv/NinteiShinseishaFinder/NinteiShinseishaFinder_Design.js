@@ -4,6 +4,46 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_KanryoJoho = function () {
+                return "onClick_KanryoJoho";
+            };
+
+            Events.onChange_ddlNowPhase = function () {
+                return "onChange_ddlNowPhase";
+            };
+
+            Events.onChange_chkIchijiHantei = function () {
+                return "onChange_chkIchijiHantei";
+            };
+
+            Events.onChange_chkShinseiUketsuke = function () {
+                return "onChange_chkShinseiUketsuke";
+            };
+
+            Events.onChange_chkMasking = function () {
+                return "onChange_chkMasking";
+            };
+
+            Events.onChange_chkChosaIrai = function () {
+                return "onChange_chkChosaIrai";
+            };
+
+            Events.onChange_chkShinsakaiToroku = function () {
+                return "onChange_chkShinsakaiToroku";
+            };
+
+            Events.onChange_chkIkenshoIrai = function () {
+                return "onChange_chkIkenshoIrai";
+            };
+
+            Events.onChange_chkNijiHantei = function () {
+                return "onChange_chkNijiHantei";
+            };
+
+            Events.onChange_chkChosaNyushu = function () {
+                return "onChange_chkChosaNyushu";
+            };
+
             Events.onClick_ShosaiJoken = function () {
                 return "onClick_ShosaiJoken";
             };
@@ -111,58 +151,6 @@ var DBZ;
             Events.onClick_SonotaJoho = function () {
                 return "onClick_SonotaJoho";
             };
-
-            Events.onClick_KanryoJoho = function () {
-                return "onClick_KanryoJoho";
-            };
-
-            Events.onChange_ddlNowPhase = function () {
-                return "onChange_ddlNowPhase";
-            };
-
-            Events.onChange_chkShoriJotai = function () {
-                return "onChange_chkShoriJotai";
-            };
-
-            Events.onChange_chkIchijiHantei = function () {
-                return "onChange_chkIchijiHantei";
-            };
-
-            Events.onChange_chkShinseiUketsuke = function () {
-                return "onChange_chkShinseiUketsuke";
-            };
-
-            Events.onChange_chkMasking = function () {
-                return "onChange_chkMasking";
-            };
-
-            Events.onChange_chkChosaIrai = function () {
-                return "onChange_chkChosaIrai";
-            };
-
-            Events.onChange_chkShinsakaiToroku = function () {
-                return "onChange_chkShinsakaiToroku";
-            };
-
-            Events.onChange_chkIkenshoIrai = function () {
-                return "onChange_chkIkenshoIrai";
-            };
-
-            Events.onChange_chkNijiHantei = function () {
-                return "onChange_chkNijiHantei";
-            };
-
-            Events.onChange_chkChosaNyushu = function () {
-                return "onChange_chkChosaNyushu";
-            };
-
-            Events.onChange_chkIkenshoNyushu = function () {
-                return "onChange_chkIkenshoNyushu";
-            };
-
-            Events.onChange_chkGetsureiShori = function () {
-                return "onChange_chkGetsureiShori";
-            };
             return Events;
         })();
         NinteiShinseishaFinder.Events = Events;
@@ -191,10 +179,6 @@ var DBZ;
                 return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             };
 
-            Controls.prototype.ddlHokenshaNumber = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
-            };
-
             Controls.prototype.ddlShichosonCode = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
             };
@@ -219,6 +203,14 @@ var DBZ;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiShinseiDateRange"));
             };
 
+            Controls.prototype.ddlShinseijiShinseiKubun = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
+            };
+
+            Controls.prototype.chkTennyu = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkTennyu"));
+            };
+
             Controls.prototype.txtBirthDateRange = function () {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtBirthDateRange"));
             };
@@ -227,16 +219,112 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("pnlForDesign"));
             };
 
-            Controls.prototype.ddlShinseijiShinseiKubun = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlShinseijiShinseiKubun"));
-            };
-
             Controls.prototype.chkSeibetsu = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             };
 
-            Controls.prototype.ccdSaikinShorisha = function () {
-                return new DBZ.SaikinShorisha.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            Controls.prototype.KanryoJoho = function () {
+                return new UZA.Panel(this.convFiledName("KanryoJoho"));
+            };
+
+            Controls.prototype.ddlNowPhase = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlNowPhase"));
+            };
+
+            Controls.prototype.lblKoshinTaishoChushutsu = function () {
+                return new UZA.Label(this.convFiledName("lblKoshinTaishoChushutsu"));
+            };
+
+            Controls.prototype.chkKoshinTaishoChushutsu = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkKoshinTaishoChushutsu"));
+            };
+
+            Controls.prototype.lblIchijiHantei = function () {
+                return new UZA.Label(this.convFiledName("lblIchijiHantei"));
+            };
+
+            Controls.prototype.chkIchijiHantei = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkIchijiHantei"));
+            };
+
+            Controls.prototype.lblShinseiUketsuke = function () {
+                return new UZA.Label(this.convFiledName("lblShinseiUketsuke"));
+            };
+
+            Controls.prototype.chkShinseiUketsuke = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShinseiUketsuke"));
+            };
+
+            Controls.prototype.lblMasking = function () {
+                return new UZA.Label(this.convFiledName("lblMasking"));
+            };
+
+            Controls.prototype.chkMasking = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkMasking"));
+            };
+
+            Controls.prototype.lblChosaIrai = function () {
+                return new UZA.Label(this.convFiledName("lblChosaIrai"));
+            };
+
+            Controls.prototype.chkChosaIrai = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkChosaIrai"));
+            };
+
+            Controls.prototype.lblShinsakaiToroku = function () {
+                return new UZA.Label(this.convFiledName("lblShinsakaiToroku"));
+            };
+
+            Controls.prototype.chkShinsakaiToroku = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShinsakaiToroku"));
+            };
+
+            Controls.prototype.lblIkenshoIrai = function () {
+                return new UZA.Label(this.convFiledName("lblIkenshoIrai"));
+            };
+
+            Controls.prototype.chkIkenshoIrai = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoIrai"));
+            };
+
+            Controls.prototype.lblNijiHantei = function () {
+                return new UZA.Label(this.convFiledName("lblNijiHantei"));
+            };
+
+            Controls.prototype.chkNijiHantei = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkNijiHantei"));
+            };
+
+            Controls.prototype.lblChosaNyushu = function () {
+                return new UZA.Label(this.convFiledName("lblChosaNyushu"));
+            };
+
+            Controls.prototype.chkChosaNyushu = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkChosaNyushu"));
+            };
+
+            Controls.prototype.lblTsuchiShori = function () {
+                return new UZA.Label(this.convFiledName("lblTsuchiShori"));
+            };
+
+            Controls.prototype.chkTsuchiShori = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkTsuchiShori"));
+            };
+
+            Controls.prototype.lblIkenshoNyushu = function () {
+                return new UZA.Label(this.convFiledName("lblIkenshoNyushu"));
+            };
+
+            Controls.prototype.chkIkenshoNyushu = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoNyushu"));
+            };
+
+            Controls.prototype.lblGetsureiShori = function () {
+                return new UZA.Label(this.convFiledName("lblGetsureiShori"));
+            };
+
+            Controls.prototype.chkGetsureiShori = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkGetsureiShori"));
             };
 
             Controls.prototype.ShosaiJoken = function () {
@@ -487,120 +575,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             };
 
-            Controls.prototype.ccdGeninShikkan = function () {
-                return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
-            };
-
             Controls.prototype.txtShinseiKeikaNissu = function () {
                 return new UZA.TextBoxNumRange(this.convFiledName("txtShinseiKeikaNissu"));
-            };
-
-            Controls.prototype.KanryoJoho = function () {
-                return new UZA.Panel(this.convFiledName("KanryoJoho"));
-            };
-
-            Controls.prototype.ddlNowPhase = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlNowPhase"));
-            };
-
-            Controls.prototype.chkShoriJotai = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkShoriJotai"));
-            };
-
-            Controls.prototype.lblKoshinTaishoChushutsu = function () {
-                return new UZA.Label(this.convFiledName("lblKoshinTaishoChushutsu"));
-            };
-
-            Controls.prototype.chkKoshinTaishoChushutsu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKoshinTaishoChushutsu"));
-            };
-
-            Controls.prototype.lblIchijiHantei = function () {
-                return new UZA.Label(this.convFiledName("lblIchijiHantei"));
-            };
-
-            Controls.prototype.chkIchijiHantei = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkIchijiHantei"));
-            };
-
-            Controls.prototype.lblShinseiUketsuke = function () {
-                return new UZA.Label(this.convFiledName("lblShinseiUketsuke"));
-            };
-
-            Controls.prototype.chkShinseiUketsuke = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkShinseiUketsuke"));
-            };
-
-            Controls.prototype.lblMasking = function () {
-                return new UZA.Label(this.convFiledName("lblMasking"));
-            };
-
-            Controls.prototype.chkMasking = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkMasking"));
-            };
-
-            Controls.prototype.lblChosaIrai = function () {
-                return new UZA.Label(this.convFiledName("lblChosaIrai"));
-            };
-
-            Controls.prototype.chkChosaIrai = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkChosaIrai"));
-            };
-
-            Controls.prototype.lblShinsakaiToroku = function () {
-                return new UZA.Label(this.convFiledName("lblShinsakaiToroku"));
-            };
-
-            Controls.prototype.chkShinsakaiToroku = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkShinsakaiToroku"));
-            };
-
-            Controls.prototype.lblIkenshoIrai = function () {
-                return new UZA.Label(this.convFiledName("lblIkenshoIrai"));
-            };
-
-            Controls.prototype.chkIkenshoIrai = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoIrai"));
-            };
-
-            Controls.prototype.lblNijiHantei = function () {
-                return new UZA.Label(this.convFiledName("lblNijiHantei"));
-            };
-
-            Controls.prototype.chkNijiHantei = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkNijiHantei"));
-            };
-
-            Controls.prototype.lblChosaNyushu = function () {
-                return new UZA.Label(this.convFiledName("lblChosaNyushu"));
-            };
-
-            Controls.prototype.chkChosaNyushu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkChosaNyushu"));
-            };
-
-            Controls.prototype.lblTsuchiShori = function () {
-                return new UZA.Label(this.convFiledName("lblTsuchiShori"));
-            };
-
-            Controls.prototype.chkTsuchiShori = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkTsuchiShori"));
-            };
-
-            Controls.prototype.lblIkenshoNyushu = function () {
-                return new UZA.Label(this.convFiledName("lblIkenshoNyushu"));
-            };
-
-            Controls.prototype.chkIkenshoNyushu = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkIkenshoNyushu"));
-            };
-
-            Controls.prototype.lblGetsureiShori = function () {
-                return new UZA.Label(this.convFiledName("lblGetsureiShori"));
-            };
-
-            Controls.prototype.chkGetsureiShori = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkGetsureiShori"));
             };
             return Controls;
         })();
