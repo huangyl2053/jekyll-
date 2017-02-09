@@ -330,9 +330,6 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private static OcrTokkiJikoColumns findDuplicateKomokuNos(Iterable<? extends DbT5205NinteichosahyoTokkijikoEntity> tokkiJikos, OcrTokkiJikoColumns imageFileNames) {
         List<KomokuNo> komokuNos = new ArrayList<>();
         for (DbT5205NinteichosahyoTokkijikoEntity entity : tokkiJikos) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                continue;
-            }
             komokuNos.add(new KomokuNo(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
         }
         return imageFileNames.filterdByKomokuNo(komokuNos);
@@ -411,16 +408,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         if (entities.isEmpty()) {
             return new NinteiChosahyoEntity();
         }
-        for (NinteiChosahyoEntity entity : entities) {
-            if (Objects.equals(entity.getGaikyoChosaTextImageKubun(), TokkijikoTextImageKubun.イメージ.getコード())) {
-                return entity;
-            }
-        }
-        /* TokkijikoTextImageKubun.テキスト のレコードしか存在しない場合 */
-        NinteiChosahyoEntity newEntity = entities.get(0).copied(); // 「テキスト」のレコードを取得
-        newEntity.clear概況調査(); //「イメージ」のレコードを追加するためクリア
-        newEntity.clear概況特記(); //「イメージ」のレコードを追加するためクリア
-        return newEntity;
+        return entities.get(0);
     }
 
     private static NinteiOcrMapperParamter toParameterToSearchRelatedData(ShinseiKey key) {
@@ -830,20 +818,16 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static Iterable<DbT5205NinteichosahyoTokkijikoEntity> createOrEdit特記情報(NinteiChosahyoEntity ninteiChosaEntity,
             NinteiOcrRelate nr, OcrTokkiJikoColumns updatingTokkiJikos) {
-        TokkiJikoEntityMap map = classifyEntityUnderKomokuNoRemovingText(ninteiChosaEntity);
+        TokkiJikoEntityMap map = toTokkiJikoEntityMap(ninteiChosaEntity);
         return createTokkiJohoEntitiesForUpdate(updatingTokkiJikos.groupedByChosaKomokuNo(), map, nr);
     }
 
-    private static TokkiJikoEntityMap classifyEntityUnderKomokuNoRemovingText(NinteiChosahyoEntity ninteiChosaEntity) {
+    private static TokkiJikoEntityMap toTokkiJikoEntityMap(NinteiChosahyoEntity ninteiChosaEntity) {
         TokkiJikoEntityMap map = new TokkiJikoEntityMap();
         for (DbT5205NinteichosahyoTokkijikoEntity entity : ninteiChosaEntity.get特記情報()) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                continue;
-            }
             map.put(entity);
         }
         return map;
-
     }
 
     private static final class TokkiJikoEntityMap extends HashMap<RString, Map<Integer, DbT5205NinteichosahyoTokkijikoEntity>> {
