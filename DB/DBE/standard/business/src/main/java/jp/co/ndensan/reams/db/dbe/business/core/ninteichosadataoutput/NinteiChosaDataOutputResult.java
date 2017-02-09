@@ -72,9 +72,9 @@ public class NinteiChosaDataOutputResult {
         eucCsvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
         eucCsvEntity.set生年月日(entity.get生年月日());
         eucCsvEntity.set年齢(entity.get年齢());
-        if(RString.isNullOrEmpty(entity.get性別())){
+        if (RString.isNullOrEmpty(entity.get性別())) {
             eucCsvEntity.set性別(RString.EMPTY);
-        }else{
+        } else {
             eucCsvEntity.set性別(entity.get性別());
         }
         eucCsvEntity.set郵便番号(setYobuinNoFormat(entity.get郵便番号()));
@@ -840,20 +840,32 @@ public class NinteiChosaDataOutputResult {
      * 出力条件を作成するメッソドです。
      *
      * @param processParamter processParamter
+     * @param 認定調査委託先
+     * @param 認定調査員
+     * @param 市町村
      * @return List<RString> 出力条件List
      */
-    public List<RString> get出力条件(NinteiChosaDataCsvProcessParamter processParamter) {
+    public List<RString> get出力条件(NinteiChosaDataCsvProcessParamter processParamter, RString 認定調査委託先, RString 認定調査員, RString 市町村) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
-        jokenBuilder.append(new RString("【認定調査委託先コード】"));
+        jokenBuilder.append(new RString("【認定調査委託先】"));
         jokenBuilder.append(processParamter.getNinteichosaItakusakiCode());
+        jokenBuilder.append(new RString(" "));
+        jokenBuilder.append(認定調査委託先);
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("【認定調査員コード】"));
-        jokenBuilder.append(processParamter.getNinteiChosainCode());
+        jokenBuilder.append(new RString("【認定調査員】"));
+        if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()) {
+            jokenBuilder.append(processParamter.getNinteiChosainCode());
+            jokenBuilder.append(new RString(" "));
+            jokenBuilder.append(認定調査員);
+        }
+        出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("【市町村コード】"));
+        jokenBuilder.append(new RString("【市町村】"));
         jokenBuilder.append(processParamter.getShichosonCode());
+        jokenBuilder.append(new RString(" "));
+        jokenBuilder.append(市町村);
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【被保険者番号リスト】"));
@@ -863,7 +875,7 @@ public class NinteiChosaDataOutputResult {
         List<RString> hihokenshaNoList = processParamter.getHihokenshaNoList();
         RStringBuilder rsbHihokensha = new RStringBuilder();
         for (RString hihokenshaNo : hihokenshaNoList) {
-            if(rsbHihokensha.length() > 0){
+            if (rsbHihokensha.length() > 0) {
                 rsbHihokensha.append(",");
             }
             rsbHihokensha.append(hihokenshaNo);

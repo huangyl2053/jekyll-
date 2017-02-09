@@ -28,5 +28,6 @@ public class ShujiiIryokikanandshujiiDataPassModel implements Serializable {
     private RString 郵便番号;
     private RString 住所;
     private RString 電話番号;
+    private RString FAX番号;
 
 }

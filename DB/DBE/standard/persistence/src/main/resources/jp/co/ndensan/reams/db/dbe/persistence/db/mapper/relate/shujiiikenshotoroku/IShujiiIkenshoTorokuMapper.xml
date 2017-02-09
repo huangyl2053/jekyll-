@@ -12,13 +12,43 @@
                 DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo",
                 DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
                 DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiKubun",
-                DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag",
-                DbT5912ShujiiJoho."shujiiName",
+                DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag",        
+                (case DbT5912ShujiiJoho_Ikensho."shujiiCode"
+                    WHEN null THEN DbT5912ShujiiJoho."shujiiCode"
+                    WHEN '' THEN DbT5912ShujiiJoho."shujiiCode"
+                    ELSE DbT5912ShujiiJoho_Ikensho."shujiiCode"
+                END) AS "shujiiCode",
+                (case DbT5912ShujiiJoho_Ikensho."shujiiName"
+                    WHEN null THEN DbT5912ShujiiJoho."shujiiName"
+                    WHEN '' THEN DbT5912ShujiiJoho."shujiiName"
+                    ELSE DbT5912ShujiiJoho_Ikensho."shujiiName"
+                END) AS"shujiiName",
                 DbT5302ShujiiIkenshoJoho."ikenshoKinyuYMD",
-                DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
-                DbT5911ShujiiIryoKikanJoho."telNo",
-                DbT5911ShujiiIryoKikanJoho."jusho",
-                DbT5911ShujiiIryoKikanJoho."faxNo",
+                (case DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" 
+                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" 
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" 
+                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" 
+                END) AS "shujiiIryokikanCode",
+                (case DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho"
+                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" 
+                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho"
+                END) AS "iryoKikanMeisho",
+                (case DbT5911ShujiiIryoKikanJoho_Ikensho."telNo"
+                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."telNo"
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."telNo" 
+                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."telNo"
+                END) AS "telNo",
+               (case DbT5911ShujiiIryoKikanJoho_Ikensho."jusho"
+                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."jusho"
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."jusho"
+                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."jusho"
+                END) AS "jusho",
+                (case DbT5911ShujiiIryoKikanJoho_Ikensho."faxNo"
+                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."faxNo"
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."faxNo"
+                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."faxNo"
+                END) AS "faxNo",
                 DbT5302ShujiiIkenshoJoho."saishuShinryoYMD",
                 DbT5302ShujiiIkenshoJoho."ikenshoSakuseiKaisuKubun",
                 DbT5302ShujiiIkenshoJoho."existTakaJushinFlag",
@@ -53,9 +83,20 @@
                 AND DbT5301ShujiiIkenshoIraiJoho."shujiiCode" = DbT5912ShujiiJoho."shujiiCode"
                 AND DbT5912ShujiiJoho."shichosonCode" = #{市町村コード}
           LEFT JOIN 
+                rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho_Ikensho
+          ON 
+                DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5912ShujiiJoho_Ikensho."shujiiIryokikanCode"
+                AND DbT5302ShujiiIkenshoJoho."shujiiCode" = DbT5912ShujiiJoho_Ikensho."shujiiCode"
+                AND DbT5912ShujiiJoho_Ikensho."shichosonCode" = #{市町村コード}
+          LEFT JOIN 
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho
           ON 
                 DbT5301ShujiiIkenshoIraiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
+         LEFT JOIN 
+                rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho_Ikensho
+          ON 
+                DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
                 AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
          LEFT JOIN
                rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
