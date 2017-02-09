@@ -45,7 +45,7 @@ module DBZ {
                     this.controls.KaigoNinteiShinsakaiJoho().isOpen = false;
                     this.controls.ZenkaiJoho().isOpen = false;
                     this.controls.SonotaJoho().isOpen = false;
-                    this.controls.KanryoJoho().isOpen = false;
+                    this.controls.KanryoJoho().isOpen = true;
                 }
                 public PhaseMode(): void {
                     this.controls.ShosaiJoken().isOpen = false;

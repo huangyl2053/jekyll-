@@ -146,11 +146,11 @@ public class ImageinputRelate extends RelatedDataBase {
     }
 
     /**
-     * 主治医意見書作成依頼年月日を返します。
+     * 意見書作成依頼日を返します。
      *
-     * @return 主治医意見書作成依頼年月日
+     * @return 意見書作成依頼日
      */
-    public RString get主治医意見書作成依頼年月日() {
+    public FlexibleDate get意見書作成依頼日() {
         return entity.getT5301_主治医意見書作成依頼年月日();
     }
 

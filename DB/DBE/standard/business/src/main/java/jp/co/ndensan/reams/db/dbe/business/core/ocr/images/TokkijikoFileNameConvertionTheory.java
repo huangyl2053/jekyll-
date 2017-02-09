@@ -100,30 +100,30 @@ public class TokkijikoFileNameConvertionTheory implements IFileNameConvertionThe
         }
         {
             Map<Integer, RString> map = new HashMap<>();
-            map.put(1, new RString("w01i030.png"));
-            map.put(2, new RString("w01i031.png"));
-            map.put(3, new RString("w01i032.png"));
-            map.put(4, new RString("w01i033.png"));
-            map.put(5, new RString("w01i034.png"));
-            map.put(6, new RString("w01i035.png"));
-            map.put(7, new RString("w01i036.png"));
-            map.put(8, new RString("w01i037.png"));
-            map.put(9, new RString("w01i038.png"));
-            map.put(10, new RString("w01i039.png"));
-            map.put(11, new RString("w01i040.png"));
-            map.put(12, new RString("w01i041.png"));
-            map.put(13, new RString("w02i025.png"));
-            map.put(14, new RString("w02i026.png"));
-            map.put(15, new RString("w02i027.png"));
-            map.put(16, new RString("w02i028.png"));
-            map.put(17, new RString("w02i029.png"));
-            map.put(18, new RString("w02i030.png"));
-            map.put(19, new RString("w02i031.png"));
-            map.put(20, new RString("w02i032.png"));
-            map.put(21, new RString("w02i033.png"));
-            map.put(22, new RString("w02i034.png"));
-            map.put(23, new RString("w02i035.png"));
-            map.put(24, new RString("w02i036.png"));
+            map.put(0, new RString("w01i030.png"));
+            map.put(1, new RString("w01i031.png"));
+            map.put(2, new RString("w01i032.png"));
+            map.put(3, new RString("w01i033.png"));
+            map.put(4, new RString("w01i034.png"));
+            map.put(5, new RString("w01i035.png"));
+            map.put(6, new RString("w01i036.png"));
+            map.put(7, new RString("w01i037.png"));
+            map.put(8, new RString("w01i038.png"));
+            map.put(9, new RString("w01i039.png"));
+            map.put(10, new RString("w01i040.png"));
+            map.put(11, new RString("w01i041.png"));
+            map.put(12, new RString("w02i025.png"));
+            map.put(13, new RString("w02i026.png"));
+            map.put(14, new RString("w02i027.png"));
+            map.put(15, new RString("w02i028.png"));
+            map.put(16, new RString("w02i029.png"));
+            map.put(17, new RString("w02i030.png"));
+            map.put(18, new RString("w02i031.png"));
+            map.put(19, new RString("w02i032.png"));
+            map.put(20, new RString("w02i033.png"));
+            map.put(21, new RString("w02i034.png"));
+            map.put(22, new RString("w02i035.png"));
+            map.put(23, new RString("w02i036.png"));
             OCR_FILENAME_TABLE = Collections.unmodifiableMap(map);
         }
     }

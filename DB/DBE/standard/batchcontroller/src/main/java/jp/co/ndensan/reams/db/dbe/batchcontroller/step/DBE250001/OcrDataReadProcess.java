@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import static jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages.toSlashSeparatedSeireki;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
@@ -50,7 +52,6 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.IGaikyoChosahyoShisetuRiyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenTokkiRembanChofuku;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.ChosahyoOcrContextParameter;
@@ -205,88 +206,83 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         ProcessingResults results = new ProcessingResults();
         results.addAll(nrValidated); //警告があれば追加される。
         NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
-        results.addAll(saveImageFiles(ocrChosas, chosaKekka, nr));
+        results.addAll(saveImageFilesAndUpdateTables(ocrChosas, chosaKekka, nr));
         for (OcrChosa o : ocrChosas.values()) {
             results.addSuccessIfNotContains(o);
         }
         return OcrTorikomiResultUtil.create(key, results, nr);
     }
 
-    //<editor-fold defaultstate="collapsed" desc="イメージファイルの保存">
-    private IProcessingResults saveImageFiles(OcrChosasByOCRID ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr) {
+    @lombok.Getter
+    @lombok.AllArgsConstructor
+    private static class SaveImageFilesResult {
+
+        private final RDateTime sharedFileID;
+        private final IProcessingResults processingResults;
+
+    }
+
+    private IProcessingResults saveImageFilesAndUpdateTables(OcrChosasByOCRID ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr) {
         ProcessingResults results = new ProcessingResults();
         RDateTime sharedFileID = nr.getImageSharedFileIDOrNull();
         for (OcrChosasByOCRID.Entry entry : ocrChosas.entrySet()) {
-            OCRID ocrID = entry.getOCRID();
-            switch (ocrID) {
+            switch (entry.getOCRID()) {
                 case _501: {
-                    OcrChosas _501 = entry.getOcrChosas();
-                    CopyImageResult501 saveImageResult = copyImageFilesToDirectory_ID501(
-                            entry.getOcrChosas(), nr, sharedFileID);
-                    sharedFileID = saveImageResult.getSharedFileID();
-                    ProcessingResults prs = new ProcessingResults(saveImageResult.getResults());
-                    results.addAll(prs);
-                    if (prs.hasError()) {
-                        continue;
-                    }
-                    prs.addAll(insertOrUpdate概況調査By(writerGaikyo, entity, nr, _501,
-                            getMapper(INinteiOcrMapper.class), this.processParameter));
-                    insertOrUpdateサービスの状況By(writerService, entity, nr, _501);
-                    insertOrUpdateサービスの状況フラグBy(writerServiceFlag, entity, nr, _501);
-                    insertOrUpdate施設利用By(writerShisetsu, entity, nr, _501);
-                    continue;
+                    SaveImageFilesResult result_501 = saveImageFiles501(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    sharedFileID = result_501.getSharedFileID();
+                    results.addAll(result_501.getProcessingResults());
                 }
+                continue;
                 case _502: {
-                    OcrChosas _502 = entry.getOcrChosas();
-                    insertOrUpdate基本調査By(writerKihon, entity, nr, _502);
-                    insertOrUpdate調査項目By(writerItem, entity, nr, _502);
-                    continue;
+                    SaveImageFilesResult result_502 = saveImageFiles502(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    sharedFileID = result_502.getSharedFileID();
+                    results.addAll(result_502.getProcessingResults());
                 }
+                continue;
                 case _550: {
-                    OcrChosas _550 = entry.getOcrChosas();
-                    OcrTokkiJikoColumns newTokkiJikos = _550.editedFileNames連番再付番();
-                    OcrTokkiJikoColumns duplicates = findDuplicateKomokuNos(entity.get特記情報(), newTokkiJikos);
-                    TreatmentWhenTokkiRembanChofuku treatment = this.processParameter.get特記連番重複時処理方法();
-                    results.addAll(rembanChofuku(duplicates, treatment, _550));
-                    OcrTokkiJikoColumns updatingTokkiJikos = (treatment == TreatmentWhenTokkiRembanChofuku.上書きする)
-                            ? newTokkiJikos
-                            : newTokkiJikos.removedSameKomokuNo(duplicates);
-
-                    CopyImageResult550 saveImageResult = copyImageFilesToDirectory_ID550(_550, nr, sharedFileID, updatingTokkiJikos);
-                    sharedFileID = saveImageResult.getSharedFileID();
-                    IProcessingResults prs = saveImageResult.getResults();
-                    results.addAll(prs);
-                    if (prs.hasError()) {
-                        continue;
-                    }
-                    insertOrUpdate特記情報By(this.writerTokki, entity, nr, updatingTokkiJikos.filterdByOcrData(prs.allOcrDataNotError()));
+                    SaveImageFilesResult result_550 = saveImageFiles550(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    results.addAll(result_550.getProcessingResults());
                 }
-                case _570: //TODO 必要なユーザには実装する。
+                continue;
+                case _570: {
+                    //TODO ID570を利用するユーザに導入する直前には実装が必要。
+                }
                 default:
             }
         }
         return results;
     }
 
-    @lombok.Value
-    @lombok.AllArgsConstructor
-    private static class CopyImageResult501 {
-
-        private RDateTime sharedFileID;
-        private IProcessingResults results;
-
-        private CopyImageResult501(ImageJohoUpdater.Result result) {
-            this(result.get共有ファイルID(), result.getResults());
+    //<editor-fold defaultstate="collapsed" desc="ID501">
+    private SaveImageFilesResult saveImageFiles501(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
+        if (ocrChosas.isEmpty()) {
+            return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
         }
+
+        SaveImageFilesResult copyImageResult = copyImageFilesToDirectory_ID501(ocrChosas, nr, sharedFileID);
+        ProcessingResults prs = new ProcessingResults(copyImageResult.getProcessingResults());
+        if (prs.hasError()) {
+            return new SaveImageFilesResult(copyImageResult.getSharedFileID(), prs);
+        }
+
+        prs.addAll(insertOrUpdate概況調査By(writerGaikyo, entity, nr, ocrChosas,
+                getMapper(INinteiOcrMapper.class
+                ), this.processParameter));
+        if (!prs.hasError()) {
+            insertOrUpdateサービスの状況By(writerService, entity, nr, ocrChosas);
+            insertOrUpdateサービスの状況フラグBy(writerServiceFlag, entity, nr, ocrChosas);
+            insertOrUpdate施設利用By(writerShisetsu, entity, nr, ocrChosas);
+        }
+        return new SaveImageFilesResult(copyImageResult.getSharedFileID(), prs);
     }
 
-    private CopyImageResult501 copyImageFilesToDirectory_ID501(OcrChosas ocrChosas, NinteiOcrRelate nr, RDateTime sharedFileID) {
+    private SaveImageFilesResult copyImageFilesToDirectory_ID501(OcrChosas ocrChosas, NinteiOcrRelate nr, RDateTime sharedFileID) {
         OcrChosa ocrChosa = ocrChosas.toList().get(0);
         CatalogLine ca3 = this.catalog.find(Models.ID501, ocrChosa.getSheetID()).orElse(null);
         if (ca3 == null) {
             ProcessingResults results = new ProcessingResults();
             results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.カタログデータなし));
-            return new CopyImageResult501(sharedFileID, results);
+            return new SaveImageFilesResult(sharedFileID, results);
         }
         ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(nr.getShinseishoKanriNo(), nr.get証記載保険者番号(), nr.get被保険者番号())
                 .sharedFileID(sharedFileID)
@@ -295,16 +291,45 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 .targetImageFileNames(ca3.getImageFileNames())
                 .ocrData(ocrChosa)
                 .save(this.writerImage);
-        return new CopyImageResult501(result);
+        return new SaveImageFilesResult(result.getSharedFileID(), result.getProcessingResults());
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="ID502">
+    private SaveImageFilesResult saveImageFiles502(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
+        if (ocrChosas.isEmpty()) {
+            return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
+        }
+        insertOrUpdate基本調査By(writerKihon, entity, nr, ocrChosas);
+        insertOrUpdate調査項目By(writerItem, entity, nr, ocrChosas);
+        return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
+    }
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ID550">
+    private SaveImageFilesResult saveImageFiles550(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
+        if (ocrChosas.isEmpty()) {
+            return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
+        }
+        ProcessingResults results = new ProcessingResults();
+        OcrTokkiJikoColumns newTokkiJikos = ocrChosas.editedFileNames連番再付番();
+        OcrTokkiJikoColumns duplicates = findDuplicateKomokuNos(entity.get特記情報(), newTokkiJikos);
+        TreatmentWhenTokkiRembanChofuku treatment = this.processParameter.get特記連番重複時処理方法();
+        results.addAll(rembanChofuku(duplicates, treatment, ocrChosas));
+        OcrTokkiJikoColumns updatingTokkiJikos = (treatment == TreatmentWhenTokkiRembanChofuku.上書きする)
+                ? newTokkiJikos
+                : newTokkiJikos.removedSameKomokuNo(duplicates);
+
+        SaveImageFilesResult saveImageResult = copyImageFilesToDirectory_ID550(ocrChosas, nr, sharedFileID, updatingTokkiJikos);
+        IProcessingResults prs = saveImageResult.getProcessingResults();
+        results.addAll(prs);
+        insertOrUpdate特記情報By(this.writerTokki, entity, nr, updatingTokkiJikos.removed(prs.allOcrDataInError()));
+        return new SaveImageFilesResult(saveImageResult.getSharedFileID(), results);
+    }
+
     private static OcrTokkiJikoColumns findDuplicateKomokuNos(Iterable<? extends DbT5205NinteichosahyoTokkijikoEntity> tokkiJikos, OcrTokkiJikoColumns imageFileNames) {
         List<KomokuNo> komokuNos = new ArrayList<>();
         for (DbT5205NinteichosahyoTokkijikoEntity entity : tokkiJikos) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                continue;
-            }
             komokuNos.add(new KomokuNo(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
         }
         return imageFileNames.filterdByKomokuNo(komokuNos);
@@ -316,12 +341,19 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             return prs;
         }
         Map<SheetID, RStringBuilder> map = new HashMap<>();
-        for (OcrTokkiJikoColumn komokuNo : duplicates) {
-            SheetID sheetID = komokuNo.sheetID();
+        List<OcrTokkiJikoColumn> columns = duplicates.toList();
+        Collections.sort(columns, new Comparator<OcrTokkiJikoColumn>() {
+            @Override
+            public int compare(OcrTokkiJikoColumn o1, OcrTokkiJikoColumn o2) {
+                return o1.komokuNo().compareTo(o2.komokuNo());
+            }
+        });
+        for (OcrTokkiJikoColumn column : columns) {
+            SheetID sheetID = column.sheetID();
             if (!map.containsKey(sheetID)) {
                 map.put(sheetID, new RStringBuilder());
             }
-            map.get(sheetID).append(komokuNo.toString()).append(RString.HALF_SPACE);
+            map.get(sheetID).append(column.komokuNo()).append(RString.HALF_SPACE);
         }
         for (Map.Entry<SheetID, RStringBuilder> entry : map.entrySet()) {
             OcrChosa ocrChosa = _550.findBySheetID(entry.getKey()).orElse(null);
@@ -341,17 +373,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         return prs;
     }
-    //</editor-fold>
 
-    @lombok.Value
-    @lombok.AllArgsConstructor
-    private static class CopyImageResult550 {
-
-        private RDateTime sharedFileID;
-        private IProcessingResults results;
-    }
-
-    private CopyImageResult550 copyImageFilesToDirectory_ID550(OcrChosas ocrChosas, NinteiOcrRelate nr, RDateTime sharedFileID, OcrTokkiJikoColumns tokkiImageFiles) {
+    private SaveImageFilesResult copyImageFilesToDirectory_ID550(OcrChosas ocrChosas, NinteiOcrRelate nr, RDateTime sharedFileID, OcrTokkiJikoColumns tokkiImageFiles) {
         final ProcessingResults results = new ProcessingResults();
         final TokkijikoFileNameConvertionTheory theory = new TokkijikoFileNameConvertionTheory(tokkiImageFiles);
         RDateTime 共有ファイルID = sharedFileID;
@@ -379,29 +402,20 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     .targetImageFileNames(imageNames)
                     .ocrData(ocrChosa)
                     .save(this.writerImage);
-            共有ファイルID = result.get共有ファイルID();
-            results.addAll(result.getResults());
+            共有ファイルID = result.getSharedFileID();
+            results.addAll(result.getProcessingResults());
         }
-        return new CopyImageResult550(共有ファイルID, results);
+        return new SaveImageFilesResult(共有ファイルID, results);
     }
-
     //</editor-fold>
+
 //--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
     private static NinteiChosahyoEntity search認定調査結果By(NinteiOcrFinder finder, NinteiOcrMapperParamter parameter) {
         List<NinteiChosahyoEntity> entities = finder.get認定調査票(parameter);
         if (entities.isEmpty()) {
             return new NinteiChosahyoEntity();
         }
-        for (NinteiChosahyoEntity entity : entities) {
-            if (Objects.equals(entity.getGaikyoChosaTextImageKubun(), TokkijikoTextImageKubun.イメージ.getコード())) {
-                return entity;
-            }
-        }
-        /* TokkijikoTextImageKubun.テキスト のレコードしか存在しない場合 */
-        NinteiChosahyoEntity newEntity = entities.get(0).copied(); // 「テキスト」のレコードを取得
-        newEntity.clear概況調査(); //「イメージ」のレコードを追加するためクリア
-        newEntity.clear概況特記(); //「イメージ」のレコードを追加するためクリア
-        return newEntity;
+        return entities.get(0);
     }
 
     private static NinteiOcrMapperParamter toParameterToSearchRelatedData(ShinseiKey key) {
@@ -410,8 +424,14 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     //<editor-fold defaultstate="collapsed" desc="処理結果の作成">
     private static List<OcrTorikomiResult> makeErrorsForFileBroken(OcrChosas ocrChosas, ShinseiKey key) {
-        return OcrTorikomiResultUtil.create(key, ocrChosas,
-                IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
+        ProcessingResults results = new ProcessingResults();
+        for (OcrChosa o : ocrChosas) {
+            results.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.フォーマット不正.replaced(
+                    Integer.toString(o.getLineNum()),
+                    OcrTorikomiMessages.cutToLength(20, o.getデータ行_文字列(), OcrTorikomiMessages.RYAKU).toString()
+            )));
+        }
+        return OcrTorikomiResultUtil.create(key, results);
     }
 
     private static List<OcrTorikomiResult> havingTooManyLinesToOperate(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
@@ -479,61 +499,64 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static IProcessingResults validateDbT5202(DbT5202NinteichosahyoGaikyoChosaEntity entity,
             NinteiOcrRelate nr, OcrChosa ocrChosa, INinteiOcrMapper mapper, OcrDataReadProcessParameter batchParam) {
-        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(
-                nr.get申請書管理番号(), ocrChosa.get所属機関(), ocrChosa.get記入者());
+
+        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(nr.get申請書管理番号(),
+                ocrChosa.get所属機関(), ocrChosa.get記入者());
         NinteiChosaContextEntity context = mapper.getNinteiChosaContext(param);
 
-        ProcessingResults results = new ProcessingResults();
         if (!nr.get調査依頼日().isBeforeOrEquals(entity.getNinteichosaJisshiYMD())) {
-            results.add(
+            return new ProcessingResults(
                     ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査実施日が依頼日より前.
-                            replaced(nr.get調査依頼日().wareki().toDateString().toString(),
-                                    entity.getNinteichosaJisshiYMD().wareki().toDateString().toString()
+                            replaced(toSlashSeparatedSeireki(nr.get調査依頼日()),
+                                    toSlashSeparatedSeireki(entity.getNinteichosaJisshiYMD())
                             )
                     ));
-            return results;
         }
+
         RString newChosaItakusakiCode = entity.getChosaItakusakiCode().value();
         if (context.getExists調査員区分() == null) {
-            results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.委託先_不存在
-                    .replaced(newChosaItakusakiCode.toString()))
-            );
-            return results;
+            return new ProcessingResults(
+                    ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.委託先_不存在
+                            .replaced(newChosaItakusakiCode.toString())
+                    ));
         }
+        RString newChosainCode = entity.getChosainCode();
         if (!context.getExists調査員区分()) {
-            boolean matches所属機関 = newChosaItakusakiCode.equals(nr.get認定調査委託先コード());
-            switch (batchParam.get調査員不一致時処理方法()) {
-                case エラーとする:
-                    results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査員_不存在
-                            .replaced(newChosaItakusakiCode.toString(), entity.getChosainCode().toString())));
-                    return results;
-                case 所属機関が一致すればエラーとしない:
-                    if (!matches所属機関) {
-                        results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
-                                replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
-                                        nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
-                                )
-                        ));
-                        return results;
-                    }
-                default:
-            }
-            if (matches所属機関) {
-                results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる調査員.
-                        replaced(newChosaItakusakiCode.toString(),
-                                nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
-                        )
-                ));
-            } else {
-                results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
-                        replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
-                                nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
-                        )
-                ));
-            }
-            return results;
+            return new ProcessingResults(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査員_不存在
+                    .replaced(newChosaItakusakiCode.toString(), newChosainCode.toString()))
+            );
         }
-        return ProcessingResults.EMPTY;
+
+        boolean matches所属機関 = newChosaItakusakiCode.equals(nr.get認定調査委託先コード());
+        boolean matches調査員 = newChosainCode.equals(nr.get認定調査員コード());
+        if (matches所属機関 && matches調査員) {
+            return ProcessingResults.EMPTY;
+        }
+        IProcessingResult.Type type = IProcessingResult.Type.WARNING;
+        switch (batchParam.get調査員不一致時処理方法()) {
+            case エラーとする:
+                type = IProcessingResult.Type.ERROR;
+                break;
+            case 所属機関が一致すればエラーとしない:
+                if (!matches所属機関) {
+                    type = IProcessingResult.Type.ERROR;
+                }
+                break;
+            default:
+        }
+        if (matches所属機関) {
+            RString message = OcrTorikomiMessages.依頼時と異なる調査員.replaced(
+                    nr.get認定調査委託先コード().toString(), nr.get認定調査員コード().toString(),
+                    newChosaItakusakiCode.toString(), newChosainCode.toString()
+            );
+            return new ProcessingResults(ProcessingResultFactory.create(type, ocrChosa, message));
+        } else {
+            RString message = OcrTorikomiMessages.依頼時と異なる委託先_調査員.replaced(
+                    nr.get認定調査委託先コード().toString(), nr.get認定調査員コード().toString(),
+                    newChosaItakusakiCode.toString(), newChosainCode.toString()
+            );
+            return new ProcessingResults(ProcessingResultFactory.create(type, ocrChosa, message));
+        }
     }
     //</editor-fold>
 
@@ -811,19 +834,17 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static Iterable<DbT5205NinteichosahyoTokkijikoEntity> createOrEdit特記情報(NinteiChosahyoEntity ninteiChosaEntity,
             NinteiOcrRelate nr, OcrTokkiJikoColumns updatingTokkiJikos) {
-        TokkiJikoEntityMap map = classifyEntityUnderKomokuNoRemovingText(ninteiChosaEntity);
+        TokkiJikoEntityMap map = toTokkiJikoEntityMap(ninteiChosaEntity);
         return createTokkiJohoEntitiesForUpdate(updatingTokkiJikos.groupedByChosaKomokuNo(), map, nr);
     }
 
-    private static TokkiJikoEntityMap classifyEntityUnderKomokuNoRemovingText(NinteiChosahyoEntity ninteiChosaEntity) {
+    private static TokkiJikoEntityMap toTokkiJikoEntityMap(NinteiChosahyoEntity ninteiChosaEntity) {
         TokkiJikoEntityMap map = new TokkiJikoEntityMap();
         for (DbT5205NinteichosahyoTokkijikoEntity entity : ninteiChosaEntity.get特記情報()) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                continue;
-            }
             map.put(entity);
         }
         return map;
+
     }
 
     private static final class TokkiJikoEntityMap extends HashMap<RString, Map<Integer, DbT5205NinteichosahyoTokkijikoEntity>> {

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TextMasking.TextMasking;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.textmasking.TextMaskingDataModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class TextMaskingHandler {
 
     private final TextMaskingDiv div;
-    private final RString 原本マスク区分 = new RString("1");
-    private final RString マスク区分 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -43,9 +43,37 @@ public class TextMaskingHandler {
         div.getTxtBeforeMasking().setValue(特記事項);
         RString 特記事項再び = 特記事項情報.get特記事項_マッピング().get(GenponMaskKubun.マスク.getコード());
         if (RString.isNullOrEmpty(特記事項再び)) {
-            div.getTxtAfterMasking().setValue(特記事項);
+            if (特記事項情報.isExistData()) {
+                div.getTxtAfterMasking().setValue(特記事項再び);
+            } else {
+                div.getTxtAfterMasking().setValue(特記事項);
+            }
         } else {
             div.getTxtAfterMasking().setValue(特記事項再び);
+        }
+        if (特記事項情報.get削除_マッピング().get(GenponMaskKubun.原本.getコード())) {
+            div.getTxtAfterMasking().setDisabled(true);
+            List<RString> chkDeleteList = new ArrayList<>();
+            chkDeleteList.add(new RString("0"));
+            div.getChkDelete().setSelectedItemsByKey(chkDeleteList);
+            div.getChkDelete().setDisabled(true);
+            div.getBtnHozon().setDisabled(true);
+        } else if (特記事項情報.get削除_マッピング().get(GenponMaskKubun.マスク.getコード())) {
+            div.getTxtAfterMasking().setDisabled(true);
+            List<RString> chkDeleteList = new ArrayList<>();
+            chkDeleteList.add(new RString("0"));
+            div.getChkDelete().setSelectedItemsByKey(chkDeleteList);
+        }
+    }
+
+    /**
+     * 削除チェックボックスの変更処理です。
+     */
+    public void onChange_chkDelete() {
+        if (div.getChkDelete().getSelectedItems().isEmpty()) {
+            div.getTxtAfterMasking().setDisabled(false);
+        } else {
+            div.getTxtAfterMasking().setDisabled(true);
         }
     }
 
@@ -54,9 +82,8 @@ public class TextMaskingHandler {
      */
     public void onClick_btnHozon() {
         TextMaskingDataModel 特記事項情報 = DataPassingConverter.deserialize(div.getHdnTextMasking(), TextMaskingDataModel.class);
-        RString 特記事項 = 特記事項情報.get特記事項_マッピング().get(GenponMaskKubun.原本.getコード());
-        特記事項情報.get特記事項_マッピング().put(原本マスク区分, 特記事項);
-        特記事項情報.get特記事項_マッピング().put(マスク区分, div.getTxtAfterMasking().getValue());
+        特記事項情報.get特記事項_マッピング().put(GenponMaskKubun.マスク.getコード(), div.getTxtAfterMasking().getValue());
+        特記事項情報.get削除_マッピング().put(GenponMaskKubun.マスク.getコード(), !div.getChkDelete().getSelectedItems().isEmpty());
         div.setHdnTextMasking(DataPassingConverter.serialize(特記事項情報));
     }
 }

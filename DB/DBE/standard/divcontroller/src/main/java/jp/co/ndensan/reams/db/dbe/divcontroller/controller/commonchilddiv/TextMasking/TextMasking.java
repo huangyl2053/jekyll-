@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.TextM
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TextMasking.TextMasking.TextMaskingDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TextMasking.TextMasking.TextMaskingHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 共有子Div 「TextMasking」のイベントを定義したDivControllerです。
@@ -24,9 +25,20 @@ public class TextMasking {
      */
     public ResponseData<TextMaskingDiv> onLoad(TextMaskingDiv div) {
         getHandler(div).onLoad();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).focusId(div.getTxtAfterMasking().getSelectControlID()).respond();
     }
 
+    /**
+     * 画面で編集するマスキング後の情報を保存します。
+     *
+     * @param div TextMaskingDiv
+     * @return ResponseData<TextMaskingDiv>
+     */
+    public ResponseData<TextMaskingDiv> onChange_chkDelete(TextMaskingDiv div) {
+        getHandler(div).onChange_chkDelete();
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 画面で編集するマスキング後の情報を保存します。
      *

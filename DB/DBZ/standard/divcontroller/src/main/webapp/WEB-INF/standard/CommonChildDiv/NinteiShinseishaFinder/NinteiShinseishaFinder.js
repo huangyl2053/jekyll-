@@ -40,7 +40,7 @@ var DBZ;
                     this.controls.KaigoNinteiShinsakaiJoho().isOpen = false;
                     this.controls.ZenkaiJoho().isOpen = false;
                     this.controls.SonotaJoho().isOpen = false;
-                    this.controls.KanryoJoho().isOpen = false;
+                    this.controls.KanryoJoho().isOpen = true;
                 };
                 DisplayType.prototype.PhaseMode = function () {
                     this.controls.ShosaiJoken().isOpen = false;

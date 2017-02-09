@@ -24,14 +24,22 @@ public class ShujiiJohoDiv extends Panel {
      */
     @JsonProperty("radDoi")
     private RadioButton radDoi;
-    @JsonProperty("txtShujiiShimei")
-    private TextBox txtShujiiShimei;
+    @JsonProperty("txtShujiiCode")
+    private TextBoxCode txtShujiiCode;
+    @JsonProperty("btnShujiiGuide")
+    private ButtonDialog btnShujiiGuide;
+    @JsonProperty("txtSujiiName")
+    private TextBox txtSujiiName;
     @JsonProperty("txtKinyuYMD")
     private TextBoxDate txtKinyuYMD;
-    @JsonProperty("txtIryoKikanMeisho")
-    private TextBox txtIryoKikanMeisho;
     @JsonProperty("txtShujiiIryoKikanTelNumber")
     private TextBoxTelNo txtShujiiIryoKikanTelNumber;
+    @JsonProperty("txtShujiiIryoKikanCode")
+    private TextBoxCode txtShujiiIryoKikanCode;
+    @JsonProperty("btnToSearchIryoKikan")
+    private ButtonDialog btnToSearchIryoKikan;
+    @JsonProperty("txtShujiiIryoKikanMei")
+    private TextBox txtShujiiIryoKikanMei;
     @JsonProperty("txtShujiiIryoKikanShozaichi")
     private TextBoxJusho txtShujiiIryoKikanShozaichi;
     @JsonProperty("txtShujiiIryoKikanFaxNumber")
@@ -62,21 +70,57 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtShujiiShimei
-     * @return txtShujiiShimei
+     * gettxtShujiiCode
+     * @return txtShujiiCode
      */
-    @JsonProperty("txtShujiiShimei")
-    public TextBox getTxtShujiiShimei() {
-        return txtShujiiShimei;
+    @JsonProperty("txtShujiiCode")
+    public TextBoxCode getTxtShujiiCode() {
+        return txtShujiiCode;
     }
 
     /*
-     * settxtShujiiShimei
-     * @param txtShujiiShimei txtShujiiShimei
+     * settxtShujiiCode
+     * @param txtShujiiCode txtShujiiCode
      */
-    @JsonProperty("txtShujiiShimei")
-    public void setTxtShujiiShimei(TextBox txtShujiiShimei) {
-        this.txtShujiiShimei = txtShujiiShimei;
+    @JsonProperty("txtShujiiCode")
+    public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
+        this.txtShujiiCode = txtShujiiCode;
+    }
+
+    /*
+     * getbtnShujiiGuide
+     * @return btnShujiiGuide
+     */
+    @JsonProperty("btnShujiiGuide")
+    public ButtonDialog getBtnShujiiGuide() {
+        return btnShujiiGuide;
+    }
+
+    /*
+     * setbtnShujiiGuide
+     * @param btnShujiiGuide btnShujiiGuide
+     */
+    @JsonProperty("btnShujiiGuide")
+    public void setBtnShujiiGuide(ButtonDialog btnShujiiGuide) {
+        this.btnShujiiGuide = btnShujiiGuide;
+    }
+
+    /*
+     * gettxtSujiiName
+     * @return txtSujiiName
+     */
+    @JsonProperty("txtSujiiName")
+    public TextBox getTxtSujiiName() {
+        return txtSujiiName;
+    }
+
+    /*
+     * settxtSujiiName
+     * @param txtSujiiName txtSujiiName
+     */
+    @JsonProperty("txtSujiiName")
+    public void setTxtSujiiName(TextBox txtSujiiName) {
+        this.txtSujiiName = txtSujiiName;
     }
 
     /*
@@ -98,24 +142,6 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtIryoKikanMeisho
-     * @return txtIryoKikanMeisho
-     */
-    @JsonProperty("txtIryoKikanMeisho")
-    public TextBox getTxtIryoKikanMeisho() {
-        return txtIryoKikanMeisho;
-    }
-
-    /*
-     * settxtIryoKikanMeisho
-     * @param txtIryoKikanMeisho txtIryoKikanMeisho
-     */
-    @JsonProperty("txtIryoKikanMeisho")
-    public void setTxtIryoKikanMeisho(TextBox txtIryoKikanMeisho) {
-        this.txtIryoKikanMeisho = txtIryoKikanMeisho;
-    }
-
-    /*
      * gettxtShujiiIryoKikanTelNumber
      * @return txtShujiiIryoKikanTelNumber
      */
@@ -131,6 +157,60 @@ public class ShujiiJohoDiv extends Panel {
     @JsonProperty("txtShujiiIryoKikanTelNumber")
     public void setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
         this.txtShujiiIryoKikanTelNumber = txtShujiiIryoKikanTelNumber;
+    }
+
+    /*
+     * gettxtShujiiIryoKikanCode
+     * @return txtShujiiIryoKikanCode
+     */
+    @JsonProperty("txtShujiiIryoKikanCode")
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return txtShujiiIryoKikanCode;
+    }
+
+    /*
+     * settxtShujiiIryoKikanCode
+     * @param txtShujiiIryoKikanCode txtShujiiIryoKikanCode
+     */
+    @JsonProperty("txtShujiiIryoKikanCode")
+    public void setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.txtShujiiIryoKikanCode = txtShujiiIryoKikanCode;
+    }
+
+    /*
+     * getbtnToSearchIryoKikan
+     * @return btnToSearchIryoKikan
+     */
+    @JsonProperty("btnToSearchIryoKikan")
+    public ButtonDialog getBtnToSearchIryoKikan() {
+        return btnToSearchIryoKikan;
+    }
+
+    /*
+     * setbtnToSearchIryoKikan
+     * @param btnToSearchIryoKikan btnToSearchIryoKikan
+     */
+    @JsonProperty("btnToSearchIryoKikan")
+    public void setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
+        this.btnToSearchIryoKikan = btnToSearchIryoKikan;
+    }
+
+    /*
+     * gettxtShujiiIryoKikanMei
+     * @return txtShujiiIryoKikanMei
+     */
+    @JsonProperty("txtShujiiIryoKikanMei")
+    public TextBox getTxtShujiiIryoKikanMei() {
+        return txtShujiiIryoKikanMei;
+    }
+
+    /*
+     * settxtShujiiIryoKikanMei
+     * @param txtShujiiIryoKikanMei txtShujiiIryoKikanMei
+     */
+    @JsonProperty("txtShujiiIryoKikanMei")
+    public void setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
+        this.txtShujiiIryoKikanMei = txtShujiiIryoKikanMei;
     }
 
     /*

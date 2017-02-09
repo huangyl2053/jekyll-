@@ -675,4 +675,13 @@ public class NinteiShinseiTorokuResult {
     public Code get判定結果コード() {
         return entity.get判定結果コード();
     } 
+    
+    /**
+     * 入所施設名称を取得します。
+     *
+     * @return 入所施設名称
+     */
+    public AtenaMeisho get入所施設名称() {
+        return entity.get入所施設名称();
+    } 
 }

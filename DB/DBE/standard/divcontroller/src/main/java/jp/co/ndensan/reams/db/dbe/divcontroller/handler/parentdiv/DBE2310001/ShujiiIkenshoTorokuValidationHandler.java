@@ -69,11 +69,18 @@ public class ShujiiIkenshoTorokuValidationHandler {
         return validationMessages;
     }
 
+    public ValidationMessageControlPairs validate対象データ() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象データなし));
+        return validationMessages;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         存在しない(UrErrorMessages.存在しない, "イメージファイル"),
         主治医意見書存在しない(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),
-        主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払われた");
+        主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払われた"),
+        対象データなし(UrErrorMessages.対象データなし);
 
         private final Message message;
 

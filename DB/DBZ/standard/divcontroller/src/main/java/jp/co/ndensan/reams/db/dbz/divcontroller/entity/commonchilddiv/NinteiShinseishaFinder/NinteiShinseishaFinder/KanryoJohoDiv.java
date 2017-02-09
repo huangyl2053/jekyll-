@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class KanryoJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,6 @@ public class KanryoJohoDiv extends Panel {
      */
     @JsonProperty("ddlNowPhase")
     private DropDownList ddlNowPhase;
-    @JsonProperty("chkShoriJotai")
-    private CheckBoxList chkShoriJotai;
     @JsonProperty("lblKoshinTaishoChushutsu")
     private Label lblKoshinTaishoChushutsu;
     @JsonProperty("chkKoshinTaishoChushutsu")
@@ -96,24 +94,6 @@ public class KanryoJohoDiv extends Panel {
     @JsonProperty("ddlNowPhase")
     public void setDdlNowPhase(DropDownList ddlNowPhase) {
         this.ddlNowPhase = ddlNowPhase;
-    }
-
-    /*
-     * getchkShoriJotai
-     * @return chkShoriJotai
-     */
-    @JsonProperty("chkShoriJotai")
-    public CheckBoxList getChkShoriJotai() {
-        return chkShoriJotai;
-    }
-
-    /*
-     * setchkShoriJotai
-     * @param chkShoriJotai chkShoriJotai
-     */
-    @JsonProperty("chkShoriJotai")
-    public void setChkShoriJotai(CheckBoxList chkShoriJotai) {
-        this.chkShoriJotai = chkShoriJotai;
     }
 
     /*

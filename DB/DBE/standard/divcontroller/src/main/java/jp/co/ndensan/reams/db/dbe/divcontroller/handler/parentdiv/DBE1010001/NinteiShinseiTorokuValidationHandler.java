@@ -180,7 +180,7 @@ public class NinteiShinseiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 申請サービス削除と取下理由存在チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().getValue().isEmpty()
+        if (!div.getServiceDel().getTxtServiceDeleteRiyu().getValue().isEmpty()
                 && (!div.getTxtTorisageJiyu().getValue().isNullOrEmpty()
                 || !div.getTxtTorisageDate().getValue().toDateString().isNullOrEmpty()
                 || !div.getDdlTorisageJiyu().getSelectedValue().isNullOrEmpty())) {

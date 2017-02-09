@@ -33,6 +33,7 @@ public class TempOcrCsvEntity implements IDbAccessable {
      * 全フォーマットに共通の項目を各フィールドに設定します。
      *
      * @param csvData CSV1レコード
+     * @param lineNum 行番号
      */
     public TempOcrCsvEntity(RString csvData, int lineNum) {
         List<RString> columns = csvData.split(",");

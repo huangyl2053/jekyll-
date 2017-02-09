@@ -477,10 +477,13 @@
                   AND DbT5101NinteiShinseiJoho."seinengappiYMD"  <![CDATA[<=]]> #{seinengappiYMDTo}
             </if>
             <if test="useNinteiShinseiShinseijiKubun">
-                 AND DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode" = #{ninteiShinseiShinseijiKubun}
+                AND DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode" = #{ninteiShinseiShinseijiKubun}
+            </if>
+            <if test="useChkTennyu">
+                AND DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> '5'
             </if>
             <if test="isMan and !isWoman">
-                  AND DbT5101NinteiShinseiJoho."seibetsu" = '1'
+                AND DbT5101NinteiShinseiJoho."seibetsu" = '1'
             </if>
             <if test="!isMan and isWoman">
                   AND DbT5101NinteiShinseiJoho."seibetsu" = '2'

@@ -184,8 +184,8 @@ public class ImageJohoUpdater {
     @lombok.Value
     public static class Result {
 
-        private RDateTime 共有ファイルID;
-        private IProcessingResults results;
+        private RDateTime sharedFileID;
+        private IProcessingResults processingResults;
     }
 
     public interface IShareFileIDBuilder {

@@ -84,13 +84,33 @@ public class IkenshoKihonJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShujiiShimei() {
-        return this.getShujiiJoho().getTxtShujiiShimei();
+    public TextBoxCode getTxtShujiiCode() {
+        return this.getShujiiJoho().getTxtShujiiCode();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiShimei(TextBox txtShujiiShimei) {
-        this.getShujiiJoho().setTxtShujiiShimei(txtShujiiShimei);
+    public void  setTxtShujiiCode(TextBoxCode txtShujiiCode) {
+        this.getShujiiJoho().setTxtShujiiCode(txtShujiiCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShujiiGuide() {
+        return this.getShujiiJoho().getBtnShujiiGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShujiiGuide(ButtonDialog btnShujiiGuide) {
+        this.getShujiiJoho().setBtnShujiiGuide(btnShujiiGuide);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSujiiName() {
+        return this.getShujiiJoho().getTxtSujiiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtSujiiName(TextBox txtSujiiName) {
+        this.getShujiiJoho().setTxtSujiiName(txtSujiiName);
     }
 
     @JsonIgnore
@@ -104,16 +124,6 @@ public class IkenshoKihonJohoDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtIryoKikanMeisho() {
-        return this.getShujiiJoho().getTxtIryoKikanMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtIryoKikanMeisho(TextBox txtIryoKikanMeisho) {
-        this.getShujiiJoho().setTxtIryoKikanMeisho(txtIryoKikanMeisho);
-    }
-
-    @JsonIgnore
     public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
         return this.getShujiiJoho().getTxtShujiiIryoKikanTelNumber();
     }
@@ -121,6 +131,36 @@ public class IkenshoKihonJohoDiv extends Panel {
     @JsonIgnore
     public void  setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
         this.getShujiiJoho().setTxtShujiiIryoKikanTelNumber(txtShujiiIryoKikanTelNumber);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return this.getShujiiJoho().getTxtShujiiIryoKikanCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.getShujiiJoho().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnToSearchIryoKikan() {
+        return this.getShujiiJoho().getBtnToSearchIryoKikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
+        this.getShujiiJoho().setBtnToSearchIryoKikan(btnToSearchIryoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiIryoKikanMei() {
+        return this.getShujiiJoho().getTxtShujiiIryoKikanMei();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
+        this.getShujiiJoho().setTxtShujiiIryoKikanMei(txtShujiiIryoKikanMei);
     }
 
     @JsonIgnore

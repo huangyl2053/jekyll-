@@ -152,7 +152,7 @@ public class ZenkaiNinteiKekkaJohoHandler {
 
     private RString set要介護度(RString 厚労省IF識別コード, Code 前回要介護状態区分コード) {
         RString 要介護度 = RString.EMPTY;
-        if (前回要介護状態区分コード != null) {
+        if (前回要介護状態区分コード != null && !前回要介護状態区分コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
                 要介護度 = YokaigoJotaiKubun99.toValue(前回要介護状態区分コード.getColumnValue()).get名称();
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {

@@ -41,6 +41,14 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     private RString hdnSubGyomuCd;
     @JsonProperty("hdnGroupCd")
     private RString hdnGroupCd;
+    @JsonProperty("hdnTxtIryoKikanCode")
+    private RString hdnTxtIryoKikanCode;
+    @JsonProperty("hdnTxtIryoKikanName")
+    private RString hdnTxtIryoKikanName;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
+    @JsonProperty("hdnShichosonCode")
+    private RString hdnShichosonCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -157,6 +165,78 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     /*
+     * gethdnTxtIryoKikanCode
+     * @return hdnTxtIryoKikanCode
+     */
+    @JsonProperty("hdnTxtIryoKikanCode")
+    public RString getHdnTxtIryoKikanCode() {
+        return hdnTxtIryoKikanCode;
+    }
+
+    /*
+     * sethdnTxtIryoKikanCode
+     * @param hdnTxtIryoKikanCode hdnTxtIryoKikanCode
+     */
+    @JsonProperty("hdnTxtIryoKikanCode")
+    public void setHdnTxtIryoKikanCode(RString hdnTxtIryoKikanCode) {
+        this.hdnTxtIryoKikanCode = hdnTxtIryoKikanCode;
+    }
+
+    /*
+     * gethdnTxtIryoKikanName
+     * @return hdnTxtIryoKikanName
+     */
+    @JsonProperty("hdnTxtIryoKikanName")
+    public RString getHdnTxtIryoKikanName() {
+        return hdnTxtIryoKikanName;
+    }
+
+    /*
+     * sethdnTxtIryoKikanName
+     * @param hdnTxtIryoKikanName hdnTxtIryoKikanName
+     */
+    @JsonProperty("hdnTxtIryoKikanName")
+    public void setHdnTxtIryoKikanName(RString hdnTxtIryoKikanName) {
+        this.hdnTxtIryoKikanName = hdnTxtIryoKikanName;
+    }
+
+    /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
+     * gethdnShichosonCode
+     * @return hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public RString getHdnShichosonCode() {
+        return hdnShichosonCode;
+    }
+
+    /*
+     * sethdnShichosonCode
+     * @param hdnShichosonCode hdnShichosonCode
+     */
+    @JsonProperty("hdnShichosonCode")
+    public void setHdnShichosonCode(RString hdnShichosonCode) {
+        this.hdnShichosonCode = hdnShichosonCode;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -265,13 +345,33 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShujiiShimei() {
-        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiShimei();
+    public TextBoxCode getTxtShujiiCode() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiCode();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiShimei(TextBox txtShujiiShimei) {
-        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiShimei(txtShujiiShimei);
+    public void  setTxtShujiiCode(TextBoxCode txtShujiiCode) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiCode(txtShujiiCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShujiiGuide() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getBtnShujiiGuide();
+    }
+
+    @JsonIgnore
+    public void  setBtnShujiiGuide(ButtonDialog btnShujiiGuide) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setBtnShujiiGuide(btnShujiiGuide);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSujiiName() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtSujiiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtSujiiName(TextBox txtSujiiName) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtSujiiName(txtSujiiName);
     }
 
     @JsonIgnore
@@ -285,16 +385,6 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtIryoKikanMeisho() {
-        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtIryoKikanMeisho();
-    }
-
-    @JsonIgnore
-    public void  setTxtIryoKikanMeisho(TextBox txtIryoKikanMeisho) {
-        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtIryoKikanMeisho(txtIryoKikanMeisho);
-    }
-
-    @JsonIgnore
     public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
         return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanTelNumber();
     }
@@ -302,6 +392,36 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     @JsonIgnore
     public void  setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
         this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanTelNumber(txtShujiiIryoKikanTelNumber);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnToSearchIryoKikan() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getBtnToSearchIryoKikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setBtnToSearchIryoKikan(btnToSearchIryoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiIryoKikanMei() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanMei();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanMei(txtShujiiIryoKikanMei);
     }
 
     @JsonIgnore

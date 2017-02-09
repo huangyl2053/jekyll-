@@ -36,7 +36,7 @@ public class ImageinputRelateEntity {
     private RString t5911_主治医医療機関コード;
     private RString t5911_医療機関名称;
     private RString t5101_厚労省IF識別コード;
-    private RString t5301_主治医意見書作成依頼年月日;
+    private FlexibleDate t5301_主治医意見書作成依頼年月日;
     private RString t5301_主治医意見書依頼区分;
     private int t5301_主治医意見書作成依頼履歴番号;
     private List<DbT5302ShujiiIkenshoJohoEntity> 主治医意見書情報;

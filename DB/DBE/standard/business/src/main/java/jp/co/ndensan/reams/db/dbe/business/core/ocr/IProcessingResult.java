@@ -35,7 +35,7 @@ public interface IProcessingResult {
         /**
          * 成功
          */
-        SUCCESS("正常終了", 3),
+        SUCCESS("成功", 3),
         /**
          * エラー
          */

@@ -56,7 +56,6 @@ public final class OcrTorikomiResult {
             entity.set被保険者番号(this.key.get被保険者番号());
             entity.set氏名(this.氏名);
             entity.set氏名カナ(this.氏名カナ);
-            entity.set結果(pr.type().getName());
             entity.setKekkaCode(pr.type().code());
             entity.set備考(pr.note());
             entities.add(entity);

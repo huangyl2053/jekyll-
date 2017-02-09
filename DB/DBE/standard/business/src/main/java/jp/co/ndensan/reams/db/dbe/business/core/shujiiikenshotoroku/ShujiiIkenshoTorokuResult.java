@@ -48,6 +48,19 @@ public class ShujiiIkenshoTorokuResult {
     }
 
     /**
+     * 事業者コードを取得します。
+     *
+     * @return 主治医コード
+     */
+    public RString get主治医コード() {
+        if (entity.getDbt5912Entity() == null) {
+            return RString.EMPTY;
+        } else {
+            return entity.getDbt5912Entity().getShujiiCode();
+        }
+    }
+
+    /**
      * 認定調査員コードを取得します。
      *
      * @return 主治医意見書記入年月日
@@ -66,6 +79,22 @@ public class ShujiiIkenshoTorokuResult {
             return RString.EMPTY;
         } else {
             return entity.getDbt5911Entity().getIryoKikanMeisho();
+        }
+    }
+
+    /**
+     * 調査員コードを取得します。
+     *
+     * @return 医療機関コード
+     */
+    public RString get医療機関コード() {
+        if (entity.getDbt5911Entity() == null) {
+            return RString.EMPTY;
+        } else {
+            if (entity.getDbt5911Entity().getShujiiIryokikanCode() != null) {
+                return entity.getDbt5911Entity().getShujiiIryokikanCode().value();
+            }
+            return RString.EMPTY;
         }
     }
 

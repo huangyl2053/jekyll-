@@ -73,9 +73,11 @@ public class ShujiiIkenshoTorokuHandler {
      */
     public void load(ShujiiIkenshoTorokuResult result) {
         div.getRadDoi().setSelectedKey(result.is意見書同意フラグ() ? SELECT_KEY0 : SELECT_KEY1);
-        div.getTxtShujiiShimei().setValue(isEmptyOrNull(result.get主治医氏名()));
+        div.getIkenshoKihonJoho().getTxtShujiiCode().setValue(isEmptyOrNull(result.get主治医コード()));
+        div.getIkenshoKihonJoho().getTxtSujiiName().setValue(isEmptyOrNull(result.get主治医氏名()));
         div.getTxtKinyuYMD().setValue(flexToRdate(result.get主治医意見書記入年月日()));
-        div.getTxtIryoKikanMeisho().setValue(isEmptyOrNull(result.get医療機関名称()));
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setValue(isEmptyOrNull(result.get医療機関コード()));
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(isEmptyOrNull(result.get医療機関名称()));
         div.getTxtShujiiIryoKikanShozaichi().setDomain(new AtenaJusho(isEmptyOrNull(result.get住所())));
         div.getTxtShujiiIryoKikanTelNumber().setDomain(result.get電話番号() == null ? TelNo.EMPTY : result.get電話番号());
         div.getTxtShujiiIryoKikanFaxNumber().setDomain(result.getFAX番号() == null ? TelNo.EMPTY : result.getFAX番号());
@@ -126,6 +128,8 @@ public class ShujiiIkenshoTorokuHandler {
         rsb.append(div.getTxtKinyuYMD().getValue());
         rsb.append(div.getTxtShujiiMemo().getValue());
         rsb.append(div.getRadShujiiRenraku().getSelectedKey());
+        rsb.append(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().getValue());
+        rsb.append(div.getIkenshoKihonJoho().getTxtSujiiName().getValue());
         return rsb.toRString();
     }
 
@@ -159,7 +163,7 @@ public class ShujiiIkenshoTorokuHandler {
     }
 
     private void setShujiiJohoDisable(boolean flag) {
-        div.getTxtIryoKikanMeisho().setDisabled(flag);
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setDisabled(flag);
         div.getTxtShujiiIryoKikanShozaichi().setDisabled(flag);
         div.getTxtShujiiIryoKikanTelNumber().setDisabled(flag);
         div.getTxtShujiiIryoKikanFaxNumber().setDisabled(flag);

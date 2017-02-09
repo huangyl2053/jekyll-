@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblFirstTokkiJikoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -62,6 +62,21 @@ public class tblFirstTokkiJikoDiv extends TablePanel {
     @JsonIgnore
     public TextBox getTxtFirstChosaKomokuMeisho() {
         return this.celTableCell5.getTxtFirstChosaKomokuMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFirstSpace() {
+        return this.celTableCell5.getFirstSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFirstChosaDelete() {
+        return this.celTableCell5.getChkFirstChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFirstMaskExist() {
+        return this.celTableCell5.getLblFirstMaskExist();
     }
 
     @JsonIgnore
@@ -232,7 +247,7 @@ public class tblFirstTokkiJikoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell1AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFirstChosaKomokuNo")
     private TextBox txtFirstChosaKomokuNo;
 
@@ -262,7 +277,7 @@ class celTableCell1AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell2AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("lblFirstHyphen")
     private Label lblFirstHyphen;
 
@@ -292,7 +307,7 @@ class celTableCell2AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell3AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFirstTokkiRenban")
     private TextBoxNum txtFirstTokkiRenban;
 
@@ -322,9 +337,15 @@ class celTableCell3AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell5AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFirstChosaKomokuMeisho")
     private TextBox txtFirstChosaKomokuMeisho;
+    @JsonProperty("FirstSpace")
+    private Space FirstSpace;
+    @JsonProperty("chkFirstChosaDelete")
+    private CheckBoxList chkFirstChosaDelete;
+    @JsonProperty("lblFirstMaskExist")
+    private Label lblFirstMaskExist;
 
     /*
      * gettxtFirstChosaKomokuMeisho
@@ -344,6 +365,60 @@ class celTableCell5AttblFirstTokkiJiko extends TableCell {
         this.txtFirstChosaKomokuMeisho = txtFirstChosaKomokuMeisho;
     }
 
+    /*
+     * getFirstSpace
+     * @return FirstSpace
+     */
+    @JsonProperty("FirstSpace")
+    public Space getFirstSpace() {
+        return FirstSpace;
+    }
+
+    /*
+     * setFirstSpace
+     * @param FirstSpace FirstSpace
+     */
+    @JsonProperty("FirstSpace")
+    public void setFirstSpace(Space FirstSpace) {
+        this.FirstSpace = FirstSpace;
+    }
+
+    /*
+     * getchkFirstChosaDelete
+     * @return chkFirstChosaDelete
+     */
+    @JsonProperty("chkFirstChosaDelete")
+    public CheckBoxList getChkFirstChosaDelete() {
+        return chkFirstChosaDelete;
+    }
+
+    /*
+     * setchkFirstChosaDelete
+     * @param chkFirstChosaDelete chkFirstChosaDelete
+     */
+    @JsonProperty("chkFirstChosaDelete")
+    public void setChkFirstChosaDelete(CheckBoxList chkFirstChosaDelete) {
+        this.chkFirstChosaDelete = chkFirstChosaDelete;
+    }
+
+    /*
+     * getlblFirstMaskExist
+     * @return lblFirstMaskExist
+     */
+    @JsonProperty("lblFirstMaskExist")
+    public Label getLblFirstMaskExist() {
+        return lblFirstMaskExist;
+    }
+
+    /*
+     * setlblFirstMaskExist
+     * @param lblFirstMaskExist lblFirstMaskExist
+     */
+    @JsonProperty("lblFirstMaskExist")
+    public void setLblFirstMaskExist(Label lblFirstMaskExist) {
+        this.lblFirstMaskExist = lblFirstMaskExist;
+    }
+
     // </editor-fold>
 }
 /**
@@ -352,7 +427,7 @@ class celTableCell5AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell4AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -362,7 +437,7 @@ class celTableCell4AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell8AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFirstTokkiJiko")
     private TextBoxMultiLine txtFirstTokkiJiko;
 
@@ -392,7 +467,7 @@ class celTableCell8AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell7AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -402,7 +477,7 @@ class celTableCell7AttblFirstTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell9AttblFirstTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("imgFirstTokkiJiko")
     private StaticImage imgFirstTokkiJiko;
 

@@ -70,10 +70,10 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
      * @param sheetIDs {@link SheetID}の{@link Collection}
      * @return 指定の{@link SheetID}と合致する値を持つ要素すべて
      */
-    public OcrTokkiJikoColumns filteredBySheetIDs(Collection<? extends SheetID> sheetIDs) {
+    public OcrTokkiJikoColumns removed(Collection<? extends SheetID> sheetIDs) {
         List<OcrTokkiJikoColumn> list = new ArrayList<>();
         for (OcrTokkiJikoColumn column : this) {
-            if (sheetIDs.contains(column.sheetID())) {
+            if (!sheetIDs.contains(column.sheetID())) {
                 list.add(column);
             }
         }
@@ -84,8 +84,8 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
      * @param ocrData {@link IOcrData}
      * @return 指定の{@link IOcrData}が持つ{@link SheetID}と合致する値を持つ要素すべて
      */
-    public OcrTokkiJikoColumns filterdByOcrData(Iterable<? extends IOcrData> ocrData) {
-        return filteredBySheetIDs(toSheetIDs(ocrData));
+    public OcrTokkiJikoColumns removed(Iterable<? extends IOcrData> ocrData) {
+        return removed(toSheetIDs(ocrData));
     }
 
     private static Set<SheetID> toSheetIDs(Iterable<? extends IOcrData> anyOcrData) {

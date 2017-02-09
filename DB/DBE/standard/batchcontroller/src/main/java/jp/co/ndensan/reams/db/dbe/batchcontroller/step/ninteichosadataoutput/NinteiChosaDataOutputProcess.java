@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChos
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -27,7 +29,9 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -47,9 +51,12 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE224001");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString csv拡張子 = new RString(".csv");
+    private static final RString ZIP拡張子 = new RString(".zip");
+    private static final RString underscore = new RString("_");
     private NinteiChosaDataCsvProcessParamter processParamter;
-//    private FileSpoolManager manager;
+    private RString 認定調査委託先名称 = RString.EMPTY;
+    private RString 認定調査員氏名 = RString.EMPTY;
+    private RString 市町村名称 = RString.EMPTY;
     private RString eucFilePath;
     @BatchWriter
     private CsvWriter<NinteiChosaDataOutputEucCsvEntity> eucCsvWriter;
@@ -57,9 +64,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
 
     @Override
     protected void initialize() {
-//        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-//        eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
-        eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()).concat(csv拡張子));
+        eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
     }
 
     @Override
@@ -80,6 +85,16 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
 
     @Override
     protected void process(NinteiChosaBasicDataRelateEntity entity) {
+        if (認定調査委託先名称 == null || 認定調査委託先名称.isEmpty()) {
+            認定調査委託先名称 = entity.get今回分Entity().get市町村名称();
+        }
+        if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()
+                && (認定調査員氏名 == null || 認定調査員氏名.isEmpty())) {
+            認定調査員氏名 = entity.get今回分Entity().get調査員氏名();
+        }
+        if (市町村名称 == null || 市町村名称.isEmpty()) {
+            市町村名称 = entity.get今回分Entity().get市町村名称();
+        }
         eucCsvWriter.writeLine(new NinteiChosaDataOutputResult().setEucCsvEntity(entity));
         PersonalData personalData = new NinteiChosaDataOutputResult().getPersonalData(entity.get今回分Entity().get申請書管理番号());
         personalDataList.add(personalData);
@@ -89,23 +104,24 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-//        AccessLogUUID accessLogUUID =
         AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-//        manager.spool(eucFilePath, accessLogUUID);
         outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
+        RStringBuilder EUCファイル名称 = new RStringBuilder();
+        EUCファイル名称.append(DbBusinessConfig.get(ConfigNameDBE.認定調査結果入力用データZIPファイル名, RDate.getNowDate(), processParamter.getShichosonCode()))
+                .append(underscore).append(processParamter.getAddedFileName()).append(ZIP拡張子);
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("認定調査データ出力（モバイル）"),
                 association.getLasdecCode_().value(),
                 association.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                new RString("認定調査データ出力（モバイル）.csv"),
-                new RString("ChosaKekkaNyuryokuMobile.csv"),
+                EUCファイル名称.toRString(),
+                new RString("DBE224005"),
                 new NinteiChosaDataOutputResult().get出力件数(new Decimal(eucCsvWriter.getCount())),
-                new NinteiChosaDataOutputResult().get出力条件(processParamter));
+                new NinteiChosaDataOutputResult().get出力条件(processParamter, 認定調査委託先名称, 認定調査員氏名, 市町村名称));
         OutputJokenhyoFactory.createInstance(item).print();
     }
 

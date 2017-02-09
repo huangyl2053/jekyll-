@@ -78,7 +78,8 @@
         ,DbT5101."shinseishoKanriNo"
         ,DbT5101."koroshoIfShikibetsuCode"
         FROM
-        <include refid="検索条件_対象者一覧" />
+        <include refid="検索条件" />
+        <include refid="ソート条件_対象者一覧" />
     </select>
 
     <select id="get対象者件数" resultType="int"
@@ -119,6 +120,7 @@
         ,DbT5101."koroshoIfShikibetsuCode"
         FROM
         <include refid="検索条件" />
+        <include refid="ソート条件" />
         ) AS "countData"
     </select>
 
@@ -129,6 +131,7 @@
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
         FROM
         <include refid="検索条件" />
+        <include refid="ソート条件" />
     </select>
 
     <sql id="検索条件">
@@ -197,6 +200,9 @@
                 OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NOT NULL)
             </if>
         </if>
+    </sql>
+    
+    <sql id="ソート条件">
         ORDER BY
         DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
@@ -205,73 +211,8 @@
             LIMIT #{最大表示件数}
         </if>
     </sql>
-
-    <sql id="検索条件_対象者一覧">
-        rgdb."DbT5101NinteiShinseiJoho" DbT5101
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" "DbT5116IchijiHanteiKekkaJoho"
-        ON "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202
-        ON DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5202."ninteichosaRirekiNo" = (SELECT
-        MAX(DbT5202N."ninteichosaRirekiNo")
-        FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202N
-        WHERE
-        DbT5202N."shinseishoKanriNo" = DbT5202."shinseishoKanriNo")
-        AND DbT5101."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
-        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
-        ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5302."ikenshoIraiRirekiNo" = (SELECT
-        MAX(DbT5302S."ikenshoIraiRirekiNo")
-        FROM  rgdb."DbT5302ShujiiIkenshoJoho" as DbT5302S
-        WHERE
-        DbT5302S."shinseishoKanriNo" = DbT5302."shinseishoKanriNo")
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" DbT5105
-        ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        WHERE
-        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105."centerSoshinYMD" IS NULL
-        AND DbT5101."shoriJotaiKubun"  IN (#{通常},#{延期})
-        AND DbT5101."logicalDeletedFlag" = FALSE
-        <!-- TODO FW提供の削除フラグについて条件に記載されていないため、DbAccessorで論理削除されたデータも取得できてしまう。
-        それが問題である場合、下記のコメントアウトを排除して条件を有効にすること -->
-        <!-- AND DbT5101."isDeleted" = FALSE -->
-        <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
-            AND DbT5101."hihokenshaNo" = #{被保険者番号}
-        </if>
-        <if test="証記載保険者No != null and 証記載保険者No.value().toString() != ''">
-            AND DbT7051."shoKisaiHokenshaNo" = #{証記載保険者No}
-        </if>
-        <if test = "認定申請年月日開始From">
-            AND
-            #{認定申請年月日開始} <![CDATA[<=]]> DbT5101."ninteiShinseiYMD"
-        </if>
-        <if test = "認定申請年月日開始To">
-            AND
-            DbT5101."ninteiShinseiYMD"  <![CDATA[<=]]>  #{認定申請年月日終了}
-        </if>
-        <if test = "完了処理一次判定_遷移">
-            AND DbT5105."ichijiHanteiKanryoYMD" IS NULL
-            <if test = "申請書管理番号List != null and !申請書管理番号List.isEmpty()">
-                AND DbT5101."shinseishoKanriNo" IN
-                <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
-            </if>
-            <if test = "完了可能区分.toString().equals(&quot;1&quot;)">
-                AND ("DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" = ''
-                OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NULL)
-            </if>
-            <if test = "完了可能区分.toString().equals(&quot;2&quot;)">
-                AND ("DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" != ''
-                OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NOT NULL)
-            </if>
-        </if>
+    
+    <sql id="ソート条件_対象者一覧">
         ORDER BY
         DbT5101."ninteiShinseiYMD"
         <if test = "メニュー_遷移">

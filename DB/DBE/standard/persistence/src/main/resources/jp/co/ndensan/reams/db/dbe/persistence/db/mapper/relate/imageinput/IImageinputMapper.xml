@@ -55,7 +55,7 @@
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
-          LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
+          INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
             ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
             AND T5301."logicalDeletedFlag" = FALSE
             AND NOT EXISTS (
@@ -114,7 +114,7 @@
         <result property="t5911_主治医医療機関コード" column="t5911_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5911_医療機関名称" column="t5911_医療機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5101_厚労省IF識別コード" column="t5101_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="t5301_主治医意見書作成依頼年月日" column="t5301_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="t5301_主治医意見書作成依頼年月日" column="t5301_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="t5301_主治医意見書依頼区分" column="t5301_主治医意見書依頼区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="t5301_主治医意見書作成依頼履歴番号" column="t5301_主治医意見書作成依頼履歴番号"/>
         <result property="t5105_一次判定完了日" column="t5105_一次判定完了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

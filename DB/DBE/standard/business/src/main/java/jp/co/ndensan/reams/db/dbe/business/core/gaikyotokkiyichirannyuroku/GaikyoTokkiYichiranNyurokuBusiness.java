@@ -33,8 +33,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY);
+                Boolean.FALSE);
     }
 
     /**
@@ -48,8 +47,6 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
      * @param temp_特記事項 temp_特記事項
      * @param temp_特記事項イメージ共有ファイルID temp_特記事項イメージ共有ファイルID
      * @param temp_特記事項名称 temp_特記事項名称
-     * @param temp_新規区分 temp_新規区分
-     * @param temp_編集区分 temp_編集区分
      */
     public GaikyoTokkiYichiranNyurokuBusiness(
             RString temp_レコードNO,
@@ -59,9 +56,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
             RString temp_原本マスク区分,
             RString temp_特記事項,
             RString temp_特記事項イメージ共有ファイルID,
-            RString temp_特記事項名称,
-            RString temp_新規区分,
-            RString temp_編集区分) {
+            RString temp_特記事項名称) {
         this.relateEntity = new GaikyoTokkiYichiranNyurokuRelateEntity(
                 temp_レコードNO,
                 temp_認定調査特記事項番号,
@@ -71,8 +66,7 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
                 temp_特記事項,
                 temp_特記事項イメージ共有ファイルID,
                 temp_特記事項名称,
-                temp_新規区分,
-                temp_編集区分);
+                Boolean.FALSE);
     }
 
     /**
@@ -157,20 +151,11 @@ public class GaikyoTokkiYichiranNyurokuBusiness implements Serializable {
     }
 
     /**
-     * temp_新規区分を返します。
+     * 削除フラグを返します。
      *
-     * @return temp_新規区分
+     * @return isDelete
      */
-    public RString getTemp_新規区分() {
-        return relateEntity.getTemp_新規区分();
-    }
-
-    /**
-     * temp_編集区分を返します。
-     *
-     * @return temp_編集区分
-     */
-    public RString getTemp_編集区分() {
-        return relateEntity.getTemp_編集区分();
+    public Boolean isDelete() {
+        return relateEntity.isDelete();
     }
 }

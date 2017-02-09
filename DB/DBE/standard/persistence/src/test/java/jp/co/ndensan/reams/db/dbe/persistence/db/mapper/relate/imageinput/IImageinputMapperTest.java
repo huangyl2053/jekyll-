@@ -27,7 +27,7 @@ public class IImageinputMapperTest extends DbeTestDacBase {
     }
 
     @Test
-    public void testGet関連データ() {
+    public void get関連データ() {
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
         ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
         List<ImageinputRelateEntity> entities = sut.get関連データ(param);
@@ -38,5 +38,6 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println(entity.isT5101_論理削除フラグ());
         System.out.println(entity.isMatches指定申請日());
         System.out.println(entity.getT5105_一次判定完了日());
+        System.out.println(entity.getT5301_主治医意見書作成依頼年月日());
     }
 }

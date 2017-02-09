@@ -45,7 +45,7 @@ public class RenrakusakiNyuryokuDiv extends Panel {
     @JsonProperty("txtMobileNo")
     private TextBoxTelNo txtMobileNo;
     @JsonProperty("txtYusenJuni")
-    private TextBoxCode txtYusenJuni;
+    private TextBoxNum txtYusenJuni;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -256,7 +256,7 @@ public class RenrakusakiNyuryokuDiv extends Panel {
      * @return txtYusenJuni
      */
     @JsonProperty("txtYusenJuni")
-    public TextBoxCode getTxtYusenJuni() {
+    public TextBoxNum getTxtYusenJuni() {
         return txtYusenJuni;
     }
 
@@ -265,7 +265,7 @@ public class RenrakusakiNyuryokuDiv extends Panel {
      * @param txtYusenJuni txtYusenJuni
      */
     @JsonProperty("txtYusenJuni")
-    public void setTxtYusenJuni(TextBoxCode txtYusenJuni) {
+    public void setTxtYusenJuni(TextBoxNum txtYusenJuni) {
         this.txtYusenJuni = txtYusenJuni;
     }
 

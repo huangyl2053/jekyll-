@@ -139,6 +139,16 @@ public class TextMaskingDiv extends Panel implements ITextMaskingDiv {
     }
 
     @JsonIgnore
+    public Space getSpcTokkiMask() {
+        return this.getTblTextMasking().getSpcTokkiMask();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkDelete() {
+        return this.getTblTextMasking().getChkDelete();
+    }
+
+    @JsonIgnore
     public Label getLblBeforeMasking() {
         return this.getTblTextMasking().getLblBeforeMasking();
     }
