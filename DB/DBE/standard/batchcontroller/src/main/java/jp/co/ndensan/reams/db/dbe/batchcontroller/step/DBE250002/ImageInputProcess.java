@@ -31,10 +31,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAcc
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIkens;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
@@ -43,9 +41,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemNewManager;
 import jp.co.ndensan.reams.db.dbe.service.core.imageinput.ImageinputFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkenshoKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
@@ -212,7 +208,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         private IProcessingResults results;
 
         private CopyImageResult(ImageJohoUpdater.Result result) {
-            this(result.get共有ファイルID(), result.getResults());
+            this(result.getSharedFileID(), result.getProcessingResults());
         }
     }
 
@@ -269,16 +265,16 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     .targetImageFileNames(ca3_778.getImageFileNames().subList(0, 1))
                     .ocrData(pair.getCsv778())
                     .save(writer_DbT5115);
-            results.addAll(result1.getResults());
+            results.addAll(result1.getProcessingResults());
             ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
-                    .sharedFileID(result1.get共有ファイルID())
+                    .sharedFileID(result1.getSharedFileID())
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(FileNameConvertionTheories.ID777)
                     .targetImageFileNames(ca3_777.getImageFileNames().subList(0, 1))
                     .ocrData(pair.getCsv777())
                     .save(writer_DbT5115);
-            results.addAll(result2.getResults());
-            return new CopyImageResult(result2.get共有ファイルID(), results);
+            results.addAll(result2.getProcessingResults());
+            return new CopyImageResult(result2.getSharedFileID(), results);
         }
 
         FileNameConvertionTheories theory
@@ -293,8 +289,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 .targetImageFileNames(ca3_777.getImageFileNames())
                 .ocrData(pair.getCsv777())
                 .save(writer_DbT5115);
-        results.addAll(result.getResults());
-        return new CopyImageResult(result.get共有ファイルID(), results);
+        results.addAll(result.getProcessingResults());
+        return new CopyImageResult(result.getSharedFileID(), results);
     }
 
     @lombok.Value
@@ -338,13 +334,6 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {
         return ImageinputMapperParamter.createParamter(key1.get証記載保険者番号(), key1.get被保険者番号(), key1.get認定申請日());
-    }
-
-    /**
-     * 有効な厚労省IF識別コードである場合、{@code true}を返します。
-     */
-    private static boolean validate厚労省IF識別コード(KoroshoIfShikibetsuCode 厚労省IF識別コード) {
-        return 厚労省IF識別コード == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
     }
 
     //<editor-fold defaultstate="collapsed" desc="主治医意見書意見項目">

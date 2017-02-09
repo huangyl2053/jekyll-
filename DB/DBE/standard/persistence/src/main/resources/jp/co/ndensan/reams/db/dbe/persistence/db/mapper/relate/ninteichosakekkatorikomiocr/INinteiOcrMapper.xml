@@ -123,10 +123,11 @@
             dbT5210.json_agg_dbT5210 AS "施設利用"
         FROM
             target target
-        INNER JOIN
+        LEFT JOIN
             rgdb."DbT5202NinteichosahyoGaikyoChosa" AS "DbT5202NinteichosahyoGaikyoChosa"
-             ON  target."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND target."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" = target."shinseishoKanriNo"
+             AND "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
+             AND "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun" = '2'
         LEFT JOIN (
             SELECT
                 dbT5203.*,
@@ -163,8 +164,8 @@
               ON dbT5211_json."shinseishoKanriNo"   = dbT5203."shinseishoKanriNo"
              AND dbT5211_json."ninteichosaRirekiNo" = dbT5203."ninteichosaRirekiNo"
             ) "DbT5203NinteichosahyoKihonChosa"
-             ON  "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND "DbT5203NinteichosahyoKihonChosa"."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
@@ -196,13 +197,14 @@
                 C."ninteichosaRirekiNo",
                 C."gaikyoTokkiTextImageKubun"
             ) dbT5206
-             ON  dbT5206."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND dbT5206."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
-             AND dbT5206."gaikyoTokkiTextImageKubun" = "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun"
+             ON  dbT5206."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND dbT5206."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
+             AND dbT5206."gaikyoTokkiTextImageKubun" = '2'
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
                 C."ninteichosaRirekiNo",
+                C."tokkijikoTextImageKubun",
                 json_agg(C) AS json_agg_dbT5205
             FROM (
                     SELECT
@@ -222,11 +224,13 @@
                 ) C
             GROUP BY
                 C."shinseishoKanriNo",
-                C."ninteichosaRirekiNo"
+                C."ninteichosaRirekiNo",
+                C."tokkijikoTextImageKubun"
             )
             dbT5205
-             ON  dbT5205."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND dbT5205."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  dbT5205."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND dbT5205."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
+             AND dbT5205."tokkijikoTextImageKubun" = '2'
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
@@ -252,8 +256,8 @@
                 C."ninteichosaRirekiNo"
             )
             dbT5207
-             ON  dbT5207."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND dbT5207."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  dbT5207."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND dbT5207."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
@@ -278,8 +282,8 @@
                 C."ninteichosaRirekiNo"
             )
             dbT5208
-             ON  dbT5208."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND dbT5208."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  dbT5208."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND dbT5208."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
@@ -303,8 +307,8 @@
                 C."shinseishoKanriNo",
                 C."ninteichosaRirekiNo"
             ) dbT5209
-             ON  dbT5209."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND dbT5209."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  dbT5209."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND dbT5209."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
         LEFT JOIN (
             SELECT
                 C."shinseishoKanriNo",
@@ -329,8 +333,8 @@
                 C."ninteichosaRirekiNo"
             )
             dbT5210
-             ON  dbT5210."shinseishoKanriNo"   = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
-             AND dbT5210."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+             ON  dbT5210."shinseishoKanriNo"   = target."shinseishoKanriNo"
+             AND dbT5210."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
     </select>
 
     <resultMap id="ResultMap_get認定調査票" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity" autoMapping="true">

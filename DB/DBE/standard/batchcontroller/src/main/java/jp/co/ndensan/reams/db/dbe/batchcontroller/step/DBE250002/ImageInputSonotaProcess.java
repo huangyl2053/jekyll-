@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -59,8 +58,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 /**
  * その他資料の読み込み処理です。
  */
-//TODO パラメータによる処理分岐
-//TODO 取込データ不正時の処理
 public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     @BatchWriter
@@ -135,7 +132,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
         }
         List<OcrTorikomiResult> list = new ArrayList<>();
         list.addAll(makeErrorsForFileBroken(brokens, key));
-        list.addAll(keyBreakProcess(key, normals));
+        list.addAll(mainProcess(key, normals));
         this.kekkaListEditor.writeMultiLine(list);
     }
 
@@ -144,7 +141,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                 IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
     }
 
-    private List<OcrTorikomiResult> keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
+    private List<OcrTorikomiResult> mainProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
         List<ImageinputRelate> relatedData = ImageinputFinder.createInstance()
                 .get関連データ(toParameterToSearchRelatedData(key)).records();
         if (relatedData.isEmpty()) {
@@ -199,8 +196,8 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                     .targetImageFileNames(haveCatalogLines.get(ocrSonota).getImageFileNames())
                     .ocrData(ocrSonota)
                     .save(this.writer_DbT5115);
-            sharedFileID = r.get共有ファイルID();
-            results.addAll(r.getResults());
+            sharedFileID = r.getSharedFileID();
+            results.addAll(r.getProcessingResults());
         }
         for (OcrSonota o : ocrSonotas) {
             results.addSuccessIfNotContains(o);
@@ -254,12 +251,5 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
 
     private static FilesystemName compose共有ファイル名(RString 証記載保険者番号1, RString 被保険者番号1) {
         return FilesystemName.fromString(証記載保険者番号1.concat(被保険者番号1));
-    }
-
-    /**
-     * 有効な厚労省IF識別コードである場合、{@code true}を返します。
-     */
-    private static boolean validate厚労省IF識別コード(KoroshoIfShikibetsuCode 厚労省IF識別コード) {
-        return 厚労省IF識別コード == KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
     }
 }

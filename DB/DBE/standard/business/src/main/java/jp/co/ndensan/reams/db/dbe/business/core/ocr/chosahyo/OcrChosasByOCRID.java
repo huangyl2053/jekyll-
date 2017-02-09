@@ -26,6 +26,15 @@ public class OcrChosasByOCRID {
     }
 
     /**
+     * @param ocrID {@link OCRID}
+     * @return {@link OcrChosas}
+     */
+    public OcrChosas get(OCRID ocrID) {
+        OcrChosas o = this.map.get(ocrID);
+        return o == null ? new OcrChosas(new ArrayList<OcrChosa>()) : o;
+    }
+
+    /**
      * @param size 閾値となる要素数
      * @return 指定のsizeと要素の数が一致する{@link OcrChosas}とそうでない{@link OcrChosas}に分割した結果
      */
