@@ -10,7 +10,7 @@
             A."hokenshaNo" AS "hokenshaNo",
             A."shinseiYMD" AS "shinseiYMD",
             A."hihokenshaNo" AS "hihokenshaNo",
-            A."csvData" AS "csvData"
+            A."csvData" AS "csvData",
             A."lineNum" AS "lineNum"
         FROM
             &quot;${tempTableName}&quot; AS A

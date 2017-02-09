@@ -55,7 +55,7 @@
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
-          LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
+          INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
             ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
             AND T5301."logicalDeletedFlag" = FALSE
             AND NOT EXISTS (

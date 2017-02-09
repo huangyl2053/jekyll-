@@ -150,7 +150,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
             Map<Integer, List<OcrTorikomiKekkaCsvEntity>> map = new HashMap<>();
             for (OcrTorikomiKekkaCsvEntity entity : list) {
                 int kekkaCode = entity.getKekkaCode();
-                if (map.containsKey(kekkaCode)) {
+                if (!map.containsKey(kekkaCode)) {
                     map.put(kekkaCode, new ArrayList<OcrTorikomiKekkaCsvEntity>());
                 }
                 map.get(kekkaCode).add(entity);
@@ -189,6 +189,9 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
         }
 
         private static List<OcrTorikomiKekkaCsvEntity> filteredBikoIsNotEmpty(List<OcrTorikomiKekkaCsvEntity> entities) {
+            if (entities == null) {
+                return Collections.emptyList();
+            }
             List<OcrTorikomiKekkaCsvEntity> list = new ArrayList<>();
             for (OcrTorikomiKekkaCsvEntity entity : entities) {
                 if (!RString.isNullOrEmpty(entity.get備考())) {
