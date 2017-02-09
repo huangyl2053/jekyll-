@@ -92,7 +92,7 @@ public abstract class RelatedDataBase implements IRelatedData {
                 return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
             }
             return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.申請日一致なし_直近申請日提示
-                    .replaced(get認定申請日().seireki().toDateString().toString()));
+                    .replaced(OcrTorikomiMessages.toSlashSeparatedSeireki(get認定申請日())));
         }
         if (has論理削除()) {
             return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.削除された申請);

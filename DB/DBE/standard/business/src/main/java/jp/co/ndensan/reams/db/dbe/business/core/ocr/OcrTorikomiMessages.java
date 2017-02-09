@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
@@ -20,11 +23,11 @@ public enum OcrTorikomiMessages {
     /**
      *
      */
-    フォーマット不正("フォーマットが不正です。取込可能なデータ形式と合致しません。OCR2000iから処理をやりなおしてください。"),
+    フォーマット不正("取込可能なデータ形式と合致しません。OCR2000iから処理をやりなおしてください。 行番号：?　内容：?"),
     /**
      *
      */
-    有効な要介護認定申請なし("当該被保険者には、要介護認定の申請が存在しません。"),
+    有効な要介護認定申請なし("当該被保険者には、当該処理の対象となる要介護認定の申請が存在しません。"),
     /**
      *
      */
@@ -32,11 +35,11 @@ public enum OcrTorikomiMessages {
     /**
      *
      */
-    過去制度での申請("当該申請は過去の制度時の物であるため、処理を行いませんでした。"),
+    過去制度での申請("当該申請は過去の制度時の物です。そのため、処理を行いませんでした。"),
     /**
      *
      */
-    一次判定済みの申請_エラー("当該申請は一次判定が完了しているため、処理を行いませんでした。"),
+    一次判定済みの申請_エラー("当該申請は一次判定が完了しています。そのため、処理を行いませんでした。"),
     /**
      *
      */
@@ -44,15 +47,15 @@ public enum OcrTorikomiMessages {
     /**
      *
      */
-    削除された申請("当該申請は削除されています。"),
+    削除された申請("当該申請は削除されています。そのため、処理を行いませんでした。"),
     /**
      *
      */
-    申請日一致なし("この申請日での申請は見つかりませんでした。"),
+    申請日一致なし("この申請日では、当該処理の対象となる申請は見つかりませんでした。"),
     /**
      *
      */
-    申請日一致なし_直近申請日提示("この申請日での申請は見つかりませんでした。 存在する直近の申請日：?"),
+    申請日一致なし_直近申請日提示("この申請日では、当該処理の対象となる申請は見つかりませんでした。 存在する直近の申請日：?"),
     /**
      *
      */
@@ -125,5 +128,15 @@ public enum OcrTorikomiMessages {
         }
         return new RString(editMessage);
     }
-        //</editor-fold>
+    //</editor-fold>
+
+    public static String toSlashSeparatedSeireki(FlexibleDate fDate) {
+        return fDate.seireki().separator(Separator.SLASH).fillType(FillType.NONE).toDateString().toString();
+    }
+
+    public static RString cutToLength(int max, RString rstr, RString stringIfConcatAtCut) {
+        return rstr.length() < max ? rstr : rstr.substringReturnAsPossible(0, max).concat(stringIfConcatAtCut);
+    }
+
+    public static final RString RYAKU = new RString("…(略)");
 }

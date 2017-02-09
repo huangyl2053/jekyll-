@@ -137,8 +137,14 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     }
 
     private static Collection<OcrTorikomiResult> makeErrorsForFileBroken(List<OcrSonota> brokens, ShinseiKey key) {
-        return OcrTorikomiResultUtil.create(key, brokens,
-                IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
+        ProcessingResults results = new ProcessingResults();
+        for (OcrSonota o : brokens) {
+            results.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.フォーマット不正.replaced(
+                    Integer.toString(o.getLineNum()),
+                    OcrTorikomiMessages.cutToLength(20, o.getデータ行_文字列(), OcrTorikomiMessages.RYAKU).toString()
+            )));
+        }
+        return OcrTorikomiResultUtil.create(key, results);
     }
 
     private List<OcrTorikomiResult> mainProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {

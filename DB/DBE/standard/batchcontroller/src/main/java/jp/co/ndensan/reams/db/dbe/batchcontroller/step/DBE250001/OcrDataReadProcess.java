@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
+import static jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages.toSlashSeparatedSeireki;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResultFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
@@ -204,7 +205,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         ProcessingResults results = new ProcessingResults();
         results.addAll(nrValidated); //警告があれば追加される。
         NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
-        results.addAll(saveImageFilesAndUpdateTalbes(ocrChosas, chosaKekka, nr));
+        results.addAll(saveImageFilesAndUpdateTables(ocrChosas, chosaKekka, nr));
         for (OcrChosa o : ocrChosas.values()) {
             results.addSuccessIfNotContains(o);
         }
@@ -220,7 +221,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     }
 
-    private IProcessingResults saveImageFilesAndUpdateTalbes(OcrChosasByOCRID ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr) {
+    private IProcessingResults saveImageFilesAndUpdateTables(OcrChosasByOCRID ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr) {
         ProcessingResults results = new ProcessingResults();
         RDateTime sharedFileID = nr.getImageSharedFileIDOrNull();
         for (OcrChosasByOCRID.Entry entry : ocrChosas.entrySet()) {
@@ -417,8 +418,14 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     //<editor-fold defaultstate="collapsed" desc="処理結果の作成">
     private static List<OcrTorikomiResult> makeErrorsForFileBroken(OcrChosas ocrChosas, ShinseiKey key) {
-        return OcrTorikomiResultUtil.create(key, ocrChosas,
-                IProcessingResult.Type.ERROR, OcrTorikomiMessages.フォーマット不正);
+        ProcessingResults results = new ProcessingResults();
+        for (OcrChosa o : ocrChosas) {
+            results.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.フォーマット不正.replaced(
+                    Integer.toString(o.getLineNum()),
+                    OcrTorikomiMessages.cutToLength(20, o.getデータ行_文字列(), OcrTorikomiMessages.RYAKU).toString()
+            )));
+        }
+        return OcrTorikomiResultUtil.create(key, results);
     }
 
     private static List<OcrTorikomiResult> havingTooManyLinesToOperate(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
@@ -494,8 +501,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         if (!nr.get調査依頼日().isBeforeOrEquals(entity.getNinteichosaJisshiYMD())) {
             results.add(
                     ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査実施日が依頼日より前.
-                            replaced(nr.get調査依頼日().wareki().toDateString().toString(),
-                                    entity.getNinteichosaJisshiYMD().wareki().toDateString().toString()
+                            replaced(toSlashSeparatedSeireki(nr.get調査依頼日()),
+                                    toSlashSeparatedSeireki(entity.getNinteichosaJisshiYMD())
                             )
                     ));
             return results;
@@ -542,8 +549,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         return ProcessingResults.EMPTY;
     }
-    //</editor-fold>
 
+    //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="概況調査 サービスの状況フラグ">
     private static void insertOrUpdateサービスの状況フラグBy(IBatchTableWriter<? super DbT5208NinteichosahyoServiceJokyoFlagEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosas ocrChosas) {
