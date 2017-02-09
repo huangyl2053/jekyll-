@@ -40,6 +40,7 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println(entity.isT5101_論理削除フラグ());
         System.out.println(entity.isMatches指定申請日());
         System.out.println(entity.getT5105_一次判定完了日());
+        System.out.println(entity.getT5301_主治医意見書作成依頼年月日());
     }
 
     @Test
