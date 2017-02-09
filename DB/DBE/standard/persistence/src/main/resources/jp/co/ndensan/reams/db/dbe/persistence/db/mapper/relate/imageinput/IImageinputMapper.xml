@@ -29,6 +29,28 @@
           AND A."ninteiShinseiYMD" = #{認定申請日}
     </select>
 
+       <select id="getIkenshoContext" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.IkenshoOcrContextParameter"
+            resultMap="ResultMap_getIkenshoContext"  fetchSize="500">
+        SELECT
+            DbT5101."shinseishoKanriNo" AS "申請書管理番号",
+            (DbT5912."shujiiCode" = #{主治医コード}) AS "exists主治医区分"
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN
+            rgdb."DbT5912ShujiiJoho" DbT5912
+            ON DbT5912."shichosonCode" = DbT5101."shichosonCode"
+            AND DbT5912."shujiiIryokikanCode" = #{主治医医療機関コード}
+        WHERE
+            DbT5101."shinseishoKanriNo" = #{申請書管理番号}
+        ORDER BY "exists主治医区分" DESC
+        LIMIT 1
+    </select>
+
+    <resultMap id="ResultMap_getIkenshoContext" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.IkenshoContextEntity" autoMapping="false">
+        <id property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="exists主治医区分" column="exists主治医区分"/>
+    </resultMap>
+
     <select resultOrdered="true" id="get関連データ" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter"
             resultMap="ResultMap_get関連データ" fetchSize="500">
         SELECT

@@ -84,7 +84,6 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     protected void createWriter() {
         this.writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
         this.kekkaListEditor = new OcrTorikomiResultListEditor();
-        this.kekkaListEditor.close();
     }
 
     @Override
@@ -118,6 +117,7 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     protected void afterExecute() {
         super.afterExecute();
         _keyBreakProcess(this.key, this.cache);
+        this.kekkaListEditor.close();
     }
 
     private void _keyBreakProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {

@@ -438,5 +438,10 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setShindamMei3(RString.EMPTY);
         return entity;
     }
+
+    private static IProcessingResults validateDbT5302(DbT5302ShujiiIkenshoJohoEntity entity) {
+
+        return null;
+    }
     //</editor-fold>
 }

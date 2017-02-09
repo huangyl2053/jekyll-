@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,10 +46,16 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
      */
     public SonotaShiryoFileNameConvertionTheory(Collection<? extends OcrSonota> ocrSonotas, List<RString> fileNamesHaveUsed) {
         this.results = new ProcessingResults();
-
+        List<OcrSonota> sorted = new ArrayList<>(ocrSonotas);
+        Collections.sort(sorted, new Comparator<OcrSonota>() {
+            @Override
+            public int compare(OcrSonota o1, OcrSonota o2) {
+                return o1.getSheetID().compareTo(o2.getSheetID());
+            }
+        });
         Iterator<RString> reamsFileNames = fileNamesHaveNotUsed(fileNamesHaveUsed).iterator();
         Map<RString, RString> map = new HashMap<>();
-        for (OcrSonota ocrSonota : ocrSonotas) {
+        for (OcrSonota ocrSonota : sorted) {
             if (!reamsFileNames.hasNext()) {
                 this.results.add(ProcessingResultFactory.error(ocrSonota, OcrTorikomiMessages.その他資料_最大数超過));
                 continue;
@@ -76,7 +83,7 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
     private static List<RString> toLowerCaseAll(List<RString> list) {
         List<RString> newlist = new ArrayList<>();
         for (RString a : list) {
-            list.add(a.toLowerCase());
+            newlist.add(a.toLowerCase());
         }
         return newlist;
     }
