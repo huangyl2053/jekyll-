@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.IkenshoOcrContextParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.IkenshoContextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,14 +39,5 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println(entity.isMatches指定申請日());
         System.out.println(entity.getT5105_一次判定完了日());
         System.out.println(entity.getT5301_主治医意見書作成依頼年月日());
-    }
-
-    @Test
-    public void getIkenshoContext() {
-        IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
-        IkenshoOcrContextParameter param = new IkenshoOcrContextParameter(new RString("20602920160400289"), new RString("0000000029"), new RString("00000012"));
-        IkenshoContextEntity entity = sut.getIkenshoContext(param);
-        System.out.println(entity.get申請書管理番号());
-        System.out.println(entity.getExists主治医区分());
     }
 }

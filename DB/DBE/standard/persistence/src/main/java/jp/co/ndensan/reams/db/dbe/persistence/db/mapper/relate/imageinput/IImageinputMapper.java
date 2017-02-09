@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.IkenshoOcrContextParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.IkenshoContextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 
 /**
@@ -25,10 +23,4 @@ public interface IImageinputMapper {
      * @return 申請データ
      */
     List<ImageinputRelateEntity> get関連データ(ImageinputMapperParamter paramter);
-
-    /**
-     * @param parameter {@link IkenshoOcrContextParameter}
-     * @return {@link IkenshoContextEntity}
-     */
-    IkenshoContextEntity getIkenshoContext(IkenshoOcrContextParameter parameter);
 }
