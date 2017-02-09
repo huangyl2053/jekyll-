@@ -128,6 +128,8 @@ public class ShujiiIkenshoTorokuHandler {
         rsb.append(div.getTxtKinyuYMD().getValue());
         rsb.append(div.getTxtShujiiMemo().getValue());
         rsb.append(div.getRadShujiiRenraku().getSelectedKey());
+        rsb.append(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().getValue());
+        rsb.append(div.getIkenshoKihonJoho().getTxtSujiiName().getValue());
         return rsb.toRString();
     }
 
