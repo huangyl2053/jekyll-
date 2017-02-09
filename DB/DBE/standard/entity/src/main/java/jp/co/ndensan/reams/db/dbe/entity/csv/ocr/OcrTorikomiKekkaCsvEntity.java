@@ -31,7 +31,7 @@ public class OcrTorikomiKekkaCsvEntity {
     private RString 氏名;
     @CsvField(order = 70, name = "氏名カナ")
     private RString 氏名カナ;
-    @CsvField(order = 80, name = "結果")
+    @CsvField(order = 80, name = "区分")
     private RString 結果;
     private int kekkaCode;
     @CsvField(order = 90, name = "備考")
@@ -91,4 +91,21 @@ public class OcrTorikomiKekkaCsvEntity {
         return true;
     }
 
+    /**
+     * 指定のインスタンスが持つ値を、このインスタンスへコピーします。
+     *
+     * @param other コピー元
+     */
+    public void shallowCopy(OcrTorikomiKekkaCsvEntity other) {
+        this.oCRID = other.oCRID;
+        this.sheetID = other.sheetID;
+        this.証記載保険者番号 = other.証記載保険者番号;
+        this.申請日西暦 = other.申請日西暦;
+        this.被保険者番号 = other.被保険者番号;
+        this.氏名 = other.氏名;
+        this.氏名カナ = other.氏名カナ;
+        this.結果 = other.結果;
+        this.kekkaCode = other.kekkaCode;
+        this.備考 = other.備考;
+    }
 }

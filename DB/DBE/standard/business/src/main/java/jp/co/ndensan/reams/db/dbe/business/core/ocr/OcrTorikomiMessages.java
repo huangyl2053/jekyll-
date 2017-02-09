@@ -79,7 +79,7 @@ public enum OcrTorikomiMessages {
     /**
      *
      */
-    存在しないイメージあり("次のファイルがアップロードされていなかったため、登録しませんでした。 ファイル名：?"),
+    存在しないイメージあり("次のファイルがアップロードされていなかったため、登録できませんでした。 ファイル名：?"),
     /**
      *
      */
@@ -99,7 +99,11 @@ public enum OcrTorikomiMessages {
     /**
      *
      */
-    その他資料_最大数超過("同一申請に対して登録可能な最大数を超えたため、破棄しました。");
+    その他資料_最大数超過("同一申請に対して登録可能な最大数を超えたため、破棄しました。"),
+    /**
+     *
+     */
+    警告あり("警告が?件あります。");
 
     //<editor-fold defaultstate="collapsed" desc="implements...">
     private final RString theOriginalMessage;
