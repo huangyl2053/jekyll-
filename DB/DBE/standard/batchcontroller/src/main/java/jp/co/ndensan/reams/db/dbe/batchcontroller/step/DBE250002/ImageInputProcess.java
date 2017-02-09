@@ -201,7 +201,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         ProcessingResults prs = new ProcessingResults();
         for (OcrIken o : ocrIkens) {
-            prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在));
+            prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在.replaced("OCRIKEN.CSV")));
         }
         return prs;
     }
