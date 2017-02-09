@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -323,7 +324,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         IProcessingResults prs = saveImageResult.getProcessingResults();
         results.addAll(prs);
         insertOrUpdate特記情報By(this.writerTokki, entity, nr, updatingTokkiJikos.removed(prs.allOcrDataInError()));
-        return new SaveImageFilesResult(saveImageResult.getSharedFileID(), saveImageResult.getProcessingResults());
+        return new SaveImageFilesResult(saveImageResult.getSharedFileID(), results);
     }
 
     private static OcrTokkiJikoColumns findDuplicateKomokuNos(Iterable<? extends DbT5205NinteichosahyoTokkijikoEntity> tokkiJikos, OcrTokkiJikoColumns imageFileNames) {
@@ -340,12 +341,19 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             return prs;
         }
         Map<SheetID, RStringBuilder> map = new HashMap<>();
-        for (OcrTokkiJikoColumn komokuNo : duplicates) {
-            SheetID sheetID = komokuNo.sheetID();
+        List<OcrTokkiJikoColumn> columns = duplicates.toList();
+        Collections.sort(columns, new Comparator<OcrTokkiJikoColumn>() {
+            @Override
+            public int compare(OcrTokkiJikoColumn o1, OcrTokkiJikoColumn o2) {
+                return o1.komokuNo().compareTo(o2.komokuNo());
+            }
+        });
+        for (OcrTokkiJikoColumn column : columns) {
+            SheetID sheetID = column.sheetID();
             if (!map.containsKey(sheetID)) {
                 map.put(sheetID, new RStringBuilder());
             }
-            map.get(sheetID).append(komokuNo.toString()).append(RString.HALF_SPACE);
+            map.get(sheetID).append(column.komokuNo()).append(RString.HALF_SPACE);
         }
         for (Map.Entry<SheetID, RStringBuilder> entry : map.entrySet()) {
             OcrChosa ocrChosa = _550.findBySheetID(entry.getKey()).orElse(null);
