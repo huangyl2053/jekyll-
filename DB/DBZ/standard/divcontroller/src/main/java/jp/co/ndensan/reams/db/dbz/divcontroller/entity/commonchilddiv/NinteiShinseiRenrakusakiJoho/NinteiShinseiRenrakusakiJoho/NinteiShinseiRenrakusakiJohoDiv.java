@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
@@ -421,12 +419,12 @@ public class NinteiShinseiRenrakusakiJohoDiv extends Panel implements INinteiShi
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtYusenJuni() {
+    public TextBoxNum getTxtYusenJuni() {
         return this.getRenrakusakiNyuryoku().getTxtYusenJuni();
     }
 
     @JsonIgnore
-    public void  setTxtYusenJuni(TextBoxCode txtYusenJuni) {
+    public void  setTxtYusenJuni(TextBoxNum txtYusenJuni) {
         this.getRenrakusakiNyuryoku().setTxtYusenJuni(txtYusenJuni);
     }
 

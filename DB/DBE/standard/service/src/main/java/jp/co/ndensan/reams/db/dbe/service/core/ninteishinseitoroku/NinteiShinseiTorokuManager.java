@@ -161,7 +161,7 @@ public class NinteiShinseiTorokuManager {
     public RirekiJohoResult get共有子データ(RString 被保険者番号) {
         List<RirekiJohoRelateEntity> entityList
                 = mapperProvider.create(INinteiShinseiTorokuMapper.class).getDataForCom(被保険者番号);
-        if (entityList == null) {
+        if (entityList == null || entityList.isEmpty()) {
             return null;
         }
         return new RirekiJohoResult(entityList);
@@ -208,6 +208,22 @@ public class NinteiShinseiTorokuManager {
     public void del除外審査会委員情報(ShinseishoKanriNo 申請書管理番号, RString 審査会委員コード) {
         List<DbT5590ShinsakaiIinJogaiJohoEntity> entityList
                 = dbt5590Dac.selectJohoBy申請書管理番号And委員コード(申請書管理番号, 審査会委員コード);
+        if (entityList == null) {
+            return;
+        }
+        for (DbT5590ShinsakaiIinJogaiJohoEntity entity : entityList) {
+            dbt5590Dac.deletePhysical(entity);
+        }
+    }
+
+    /**
+     * 申請書管理番号により、除外審査会委員情報を削除
+     *
+     * @param 申請書管理番号 申請書管理番号
+     */
+    public void delAll除外審査会委員情報(ShinseishoKanriNo 申請書管理番号) {
+        List<DbT5590ShinsakaiIinJogaiJohoEntity> entityList
+                = dbt5590Dac.selectShinsakaiIinJogaiJohoBy申請書管理番号(申請書管理番号);
         if (entityList == null) {
             return;
         }

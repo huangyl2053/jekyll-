@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -939,6 +940,18 @@ public class NinteiShinseiJohoBuilder {
     public NinteiShinseiJohoBuilder setＩＦ送付年月日(FlexibleDate ＩＦ送付年月日) {
         requireNonNull(ＩＦ送付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("ＩＦ送付年月日"));
         entity.setIfSofuYMD(ＩＦ送付年月日);
+        return this;
+    }
+
+    /**
+     * 入所施設名称を設定します。
+     *
+     * @param 入所施設名称 入所施設名称
+     * @return {@link NinteiShinseiJohoBuilder}
+     */
+    public NinteiShinseiJohoBuilder set入所施設名称(AtenaMeisho 入所施設名称) {
+        requireNonNull(入所施設名称, UrSystemErrorMessages.値がnull.getReplacedMessage("入所施設名称"));
+        entity.setNyushoShisetsuMeisho(入所施設名称);
         return this;
     }
 

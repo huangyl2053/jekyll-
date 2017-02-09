@@ -81,6 +81,8 @@ public class NinteiShinseiTorokuHandler {
      */
     public void loadUpdate(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号,
             RString 被保険者番号, RString 介護導入形態) {
+        div.getBtnIryohokenGuide().setDisabled(true);
+        div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
         div.getCcdShinseiSonotaJohoInput().initialize();
@@ -169,8 +171,9 @@ public class NinteiShinseiTorokuHandler {
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         div.getCcdChodsItakusakiAndChosainInput().setHdnShinseishoKanriNo(RString.EMPTY);
         div.getCcdChodsItakusakiAndChosainInput().setHdnShichosonCode(市町村コード.value());
+        //2 set今回情報
         if (business.get前回申請書管理番号() != null) {
-            div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, business.get前回申請書管理番号(), new RString("2"));
+            div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, business.get前回申請書管理番号(), new RString("1"));
         }
         NinteiInputDataPassModel ninteiInput = new NinteiInputDataPassModel();
         ninteiInput.setSubGyomuCode(SubGyomuCode.DBE認定支援.value());
@@ -203,7 +206,9 @@ public class NinteiShinseiTorokuHandler {
             if (result.get申請サービス削除の理由() == null || result.get申請サービス削除の理由().isEmpty()) {
                 div.getServiceDel().setIsOpen(false);
             }
-            if (result.get取下区分コード() == null || TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
+            if (result.get取下区分コード() == null 
+                    || TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value()) 
+                    || result.get取下区分コード().isEmpty()) {
                 div.getSinseiTorisage().setIsOpen(false);
             }
             if (RString.isNullOrEmpty(result.get主治医医療機関コード()) && RString.isNullOrEmpty(result.get主治医コード())) {
@@ -215,22 +220,17 @@ public class NinteiShinseiTorokuHandler {
             if (result.get訪問調査先名称() == null || RString.isNullOrEmpty(result.get訪問調査先名称().getColumnValue())) {
                 div.getHomonSaki().setIsOpen(false);
             }
-//            if (RString.isNullOrEmpty(result.get.getColumnValue())) {
-//                div.getShisetsuJoho().setIsOpen(false);
-//            }
+            if (result.get入所施設名称() == null ||
+                    RString.isNullOrEmpty(result.get入所施設名称().getColumnValue())) {
+                div.getShisetsuJoho().setIsOpen(false);
+            }
 
             if (result.isみなし２号等対象フラグ()) {
                 div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setVisible(true);
                 div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtMinasiFlag().setValue(みなし２号対象);
             }
         } else {
-            div.getSinseiTorisage().setIsOpen(false);
-            div.getShujiiAndShujiiIryoKikan().setIsOpen(false);
-            div.getChosainAndChosainInput().setIsOpen(false);
-            div.getHomonSaki().setIsOpen(false);
-            div.getShisetsuJoho().setIsOpen(false);
-            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().setIsOpen(false);
-            div.getServiceDel().setIsOpen(false);
+            closePanle();
         }
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(ninteiTandokuDounyuFlag);
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(ninteiTandokuDounyuFlag);
@@ -244,7 +244,21 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdNinteiInput().setDisplayNone(true);
         div.getCcdShinseiSonotaJohoInput().setDisplayNone(true);
     }
-
+    
+    /**
+     * パネルを閉じる
+     *
+     */
+    public void closePanle() {
+        div.getSinseiTorisage().setIsOpen(false);
+        div.getShujiiAndShujiiIryoKikan().setIsOpen(false);
+        div.getChosainAndChosainInput().setIsOpen(false);
+        div.getHomonSaki().setIsOpen(false);
+        div.getShisetsuJoho().setIsOpen(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().setIsOpen(false);
+        div.getServiceDel().setIsOpen(false);
+    }
+    
     /**
      * 申請者情報パネルの初期化です
      *
@@ -299,9 +313,11 @@ public class NinteiShinseiTorokuHandler {
         if (iryohokenKanyuJokyo != null) {
             div.setHdnIryoHokenKigoNo(iryohokenKanyuJokyo.get医療保険記号番号());
             div.setHdnIryoHokenshaMeisho(iryohokenKanyuJokyo.get医療保険者名称());
+            div.getBtnIryohokenGuide().setDisabled(false);
         } else {
             div.setHdnIryoHokenKigoNo(RString.EMPTY);
             div.setHdnIryoHokenshaMeisho(RString.EMPTY);
+            div.getBtnIryohokenGuide().setDisabled(true);
         }
     }
 
@@ -405,6 +421,9 @@ public class NinteiShinseiTorokuHandler {
             List<RString> keys = new ArrayList<>();
             keys.add(new RString("key0"));
             div.getChkNinteiTsuchishoDoi().setSelectedItemsByKey(keys);
+        }
+        if (result.get入所施設名称() != null && !RString.isNullOrEmpty(result.get入所施設名称().getColumnValue())) {
+            div.getTxtNyushoShisetsu().setValue(result.get入所施設名称().getColumnValue());
         }
     }
 

@@ -131,6 +131,7 @@ public class JogaiShinsainJoho {
             return ResponseData.of(div).addValidationMessages(controlPairs).respond();
         }
         getHandler(div).onClick_btnToroku();
+        div.getBtnToroku().setDisabled(true);
         div.getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }

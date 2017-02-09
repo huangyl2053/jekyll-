@@ -138,8 +138,11 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     public void setRenrakusaki(List<RenrakusakiJoho> renrakusakiJohoList) {
         List<dgRenrakusakiIchiran_Row> dateSource = new ArrayList<>();
         TextBoxNum remban = new TextBoxNum();
+        TextBoxNum yusen = new TextBoxNum();
+        
         for (RenrakusakiJoho renrakusakiJoho : renrakusakiJohoList) {
             remban.setValue(Decimal.valueOf(renrakusakiJoho.get連番()));
+            yusen.setValue(Decimal.valueOf(renrakusakiJoho.get優先順位()));
             dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(remban,
                     renrakusakiJoho.get連絡先氏名() == null ? RString.EMPTY : renrakusakiJoho.
                     get連絡先氏名().getColumnValue(),
@@ -150,7 +153,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                     get連絡先電話番号().getColumnValue(),
                     renrakusakiJoho.get連絡先携帯番号() == null ? RString.EMPTY : renrakusakiJoho.
                     get連絡先携帯番号().getColumnValue(),
-                    new RString(String.valueOf(renrakusakiJoho.get優先順位())),
+                    yusen,
                     renrakusakiJoho.get連絡先区分番号(),
                     renrakusakiJoho.get支所コード() == null ? RString.EMPTY : renrakusakiJoho.get支所コード().getColumnValue(),
                     renrakusakiJoho.get連絡先氏名カナ() == null ? RString.EMPTY : renrakusakiJoho.get連絡先氏名カナ().getColumnValue(),
@@ -200,9 +203,10 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         div.getTxtJusho().setValue(row.getJusho());
         div.getTxtTelNo().setDomain(RString.isNullOrEmpty(row.getTelNo()) ? TelNo.EMPTY : new TelNo(row.getTelNo()));
         div.getTxtMobileNo().setDomain(RString.isNullOrEmpty(row.getMobileNo()) ? TelNo.EMPTY : new TelNo(row.getMobileNo()));
-        div.getTxtYusenJuni().setValue(row.getYusenJuni());
+        div.getTxtYusenJuni().setValue(row.getYusenJuni().getValue());
         div.getDdlRenrakusakiKubun().setSelectedKey(row.getRenrakusakiKuBun());
         div.getDdlShisho().setSelectedValue(row.getSisyo());
+        div.getDdlTsuzukigara().setSelectedValue(row.getTsuzukigara());
     }
 
     /**
@@ -226,14 +230,16 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     private void set追加の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
         TextBoxNum num = new TextBoxNum(); 
+        TextBoxNum yusen = new TextBoxNum(); 
         num.setValue(div.getTxtRenban().getValue());
+        yusen.setValue(div.getTxtYusenJuni().getValue());
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
                 nullTOEmpty(div.getTxtShimei().getValue()),
-                nullTOEmpty(RString.EMPTY),
+                nullTOEmpty(div.getDdlTsuzukigara().getSelectedValue()),
                 nullTOEmpty(div.getTxtJusho().getValue()),
                 nullTOEmpty(div.getTxtTelNo().getDomain().getColumnValue()),
                 nullTOEmpty(div.getTxtMobileNo().getDomain().getColumnValue()),
-                nullTOEmpty(div.getTxtYusenJuni().getValue()),
+                yusen,
                 div.getDdlRenrakusakiKubun().getSelectedKey(),
                 div.getDdlShisho().getSelectedValue(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
@@ -246,14 +252,16 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     private void set修正の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
         TextBoxNum num = new TextBoxNum(); 
+        TextBoxNum yusen = new TextBoxNum(); 
         num.setValue(div.getTxtRenban().getValue());
+        yusen.setValue(div.getTxtYusenJuni().getValue());
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
                 nullTOEmpty(div.getTxtShimei().getValue()),
-                nullTOEmpty(RString.EMPTY),
+                nullTOEmpty(div.getDdlTsuzukigara().getSelectedValue()),
                 nullTOEmpty(div.getTxtJusho().getValue()),
                 nullTOEmpty(div.getTxtTelNo().getDomain().getColumnValue()),
                 nullTOEmpty(div.getTxtMobileNo().getDomain().getColumnValue()),
-                nullTOEmpty(div.getTxtYusenJuni().getValue()),
+                yusen,
                 div.getDdlRenrakusakiKubun().getSelectedKey(),
                 div.getDdlShisho().getSelectedValue(),
                 nullTOEmpty(div.getTxtKanaShimei().getValue()),
@@ -278,7 +286,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
                 business = business.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
                 business = business.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
-                business = business.createBuilderForEdit().set優先順位(RString.isNullOrEmpty(row.getYusenJuni()) ? 0
+                business = business.createBuilderForEdit().set優先順位(row.getYusenJuni() == null ? 0
                         : Integer.parseInt(row.getYusenJuni().toString())).build();
                 business = business.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
                 business = business.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
@@ -289,13 +297,13 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 for (int i = 0; i < dbdBusiness.size(); i++) {
                     RenrakusakiJoho joho = dbdBusiness.get(i);
                     if (row.getShinseishoKanriNo().equals(joho.get申請書管理番号().value())
-                            && row.getRenban().equals(new RString(joho.get連番()))) {
+                            && row.getRenban().getText().toInt() == joho.get連番()) {
                         joho = joho.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
                         joho = joho.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
                         joho = joho.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
                         joho = joho.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
                         joho = joho.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
-                        joho = joho.createBuilderForEdit().set優先順位(RString.isNullOrEmpty(row.getYusenJuni()) ? 0
+                        joho = joho.createBuilderForEdit().set優先順位(row.getYusenJuni().getValue() == null ? 0
                                 : Integer.parseInt(row.getYusenJuni().toString())).build();
                         joho = joho.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
                         joho = joho.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();

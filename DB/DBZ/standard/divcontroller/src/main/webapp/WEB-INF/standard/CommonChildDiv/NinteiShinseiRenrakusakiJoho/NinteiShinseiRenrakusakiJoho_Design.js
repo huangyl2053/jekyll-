@@ -132,7 +132,7 @@ var DBZ;
             };
 
             Controls.prototype.txtYusenJuni = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtYusenJuni"));
+                return new UZA.TextBoxNum(this.convFiledName("txtYusenJuni"));
             };
 
             Controls.prototype.btnModoru = function () {
