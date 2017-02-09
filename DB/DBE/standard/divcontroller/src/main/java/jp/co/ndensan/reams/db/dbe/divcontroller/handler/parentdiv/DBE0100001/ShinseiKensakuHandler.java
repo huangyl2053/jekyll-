@@ -74,6 +74,14 @@ public class ShinseiKensakuHandler {
      * @return 検索条件 検索条件
      */
     public ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo) {
+        return createParameter(hihokenshaNo, null);
+    }
+
+    public ShinseiKensakuMapperParameter createParameter(List<ShinseishoKanriNo> shinseishoKanriNos) {
+        return createParameter(RString.EMPTY, shinseishoKanriNos);
+    }
+
+    private ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo, List<ShinseishoKanriNo> shinseishoKanriNos) {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
         parameter.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
@@ -84,6 +92,7 @@ public class ShinseiKensakuHandler {
         editZenkaiJohoForParameter(finderDiv, parameter);
         editNowPhaseForParameter(finderDiv, parameter);
         editChkForParameter(finderDiv, parameter);
+        parameter.setShinseishoKanriNos(shinseishoKanriNos);
         return parameter;
     }
 

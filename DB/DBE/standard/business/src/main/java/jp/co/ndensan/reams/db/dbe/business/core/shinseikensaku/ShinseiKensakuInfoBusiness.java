@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import lombok.Getter;
 
 /**
@@ -20,14 +21,14 @@ public class ShinseiKensakuInfoBusiness implements Serializable {
 
     private static final long serialVersionUID = 2060329856813237621L;
 
-    private final List<ShinseiKensakuBusiness> shinseiKensakuList;
+    private final List<ShinseishoKanriNo> shinseiKensakuList;
 
     /**
      * コンストラクタです。
      *
      * @param shinseiKensakuList List<ShinseiKensakuBusiness>
      */
-    public ShinseiKensakuInfoBusiness(List<ShinseiKensakuBusiness> shinseiKensakuList) {
+    public ShinseiKensakuInfoBusiness(List<ShinseishoKanriNo> shinseiKensakuList) {
         this.shinseiKensakuList = shinseiKensakuList;
     }
 }
