@@ -91,11 +91,21 @@ public class BunshoBangoInputHandler {
         div.getTxtBunshoNo().setPaddingZero(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前ゼロ編集);
         div.setHdnPadSpaceFlag(new RString(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前スペース編集));
 
-        div.getTxtBunshoKigo().setValue(bunshoNo.getEdit文書番号記号());
-        div.getTxtBunshoHeader().setValue(bunshoNo.getEditヘッダー文字());
-        div.getTxtBunshoFooter().setValue(bunshoNo.getEditフッター文字());
-        if (BunshoNoHatsubanHoho.toValue(bunshoNo.get文書番号発番方法()) == BunshoNoHatsubanHoho.固定) {
-            div.getTxtBunshoNo().setValue(bunshoNo.get文書番号固定文字());
+        if (bunshoNo.is文書番号出力()) {
+            if (bunshoNo.is文書番号記号付与()) {
+                div.getTxtBunshoKigo().setValue(bunshoNo.getEdit文書番号記号());
+            }
+            if (bunshoNo.isヘッダー付与()) {
+                div.getTxtBunshoHeader().setValue(bunshoNo.getEditヘッダー文字());
+            }
+            if (bunshoNo.isフッター付与()) {
+                div.getTxtBunshoFooter().setValue(bunshoNo.getEditフッター文字());
+            }
+            if (BunshoNoHatsubanHoho.toValue(bunshoNo.get文書番号発番方法()) == BunshoNoHatsubanHoho.固定) {
+                div.getTxtBunshoNo().setValue(bunshoNo.get文書番号固定文字());
+            }
+        } else {
+            div.setDisabled(true);
         }
     }
 
