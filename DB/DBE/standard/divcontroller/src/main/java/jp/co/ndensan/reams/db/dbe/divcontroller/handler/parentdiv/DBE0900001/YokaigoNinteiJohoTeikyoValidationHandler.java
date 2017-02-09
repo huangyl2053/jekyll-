@@ -43,8 +43,9 @@ public class YokaigoNinteiJohoTeikyoValidationHandler {
                 && !div.getHakkoChohyo().getChkShujiiIkensho().isAllSelected()
                 && !div.getHakkoChohyo().getChkSonotaShiryo().isAllSelected()
                 && !div.getHakkoChohyo().getChkIchijiHanteiKekka().isAllSelected()) {
-            validationMessages.add(new ValidationMessageControlPair(new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(
-                    UrErrorMessages.選択されていない, "帳票")));
+            validationMessages.add(new ValidationMessageControlPair(
+                    new YokaigoNinteiJohoTeikyoValidationHandler.RRVMessages(UrErrorMessages.選択されていない, "帳票"),
+                    div.getHakkoChohyo()));
         }
         return validationMessages;
     }

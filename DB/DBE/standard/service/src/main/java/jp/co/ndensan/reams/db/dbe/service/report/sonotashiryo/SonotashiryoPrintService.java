@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryo.SonoTashiryoRepor
 import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryo.SonotashiryoProperty;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryoReportSource;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
@@ -72,7 +73,7 @@ public class SonotashiryoPrintService {
         RString 共有フォルダ名 = business.get保険者番号().concat(business.get被保険者番号());
         if (イメージ共有ファイルID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
-            RString path = Directory.createTmpDirectory();
+            RString path = copySharedFiles(descriptor);
 
             RString イメージファイルパスA = getAイメージファイルパス(descriptor, path, その他資料マスキング区分);
             if (!イメージファイルパスA.isEmpty()) {
@@ -213,6 +214,11 @@ public class SonotashiryoPrintService {
 
     private ReadOnlySharedFileEntryDescriptor get共有ファイルエントリ情報(RString 共有フォルダ名, RDateTime イメージ共有ファイルID) {
         return new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有フォルダ名), イメージ共有ファイルID);
+    }
+
+    private static RString copySharedFiles(ReadOnlySharedFileEntryDescriptor descriptor) {
+        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
     private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {

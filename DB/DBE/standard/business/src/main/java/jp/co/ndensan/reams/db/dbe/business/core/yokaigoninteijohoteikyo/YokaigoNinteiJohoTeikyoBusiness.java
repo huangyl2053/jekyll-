@@ -865,6 +865,15 @@ public class YokaigoNinteiJohoTeikyoBusiness {
     }
 
     /**
+     * 意見書同意フラグを返します。
+     *
+     * @return 意見書同意フラグ
+     */
+    public boolean is意見書同意フラグ() {
+        return entity.is意見書同意フラグ();
+    }
+
+    /**
      * YokaigoNinteiJohoTeikyoEntityを返します。
      *
      * @return YokaigoNinteiJohoTeikyoEntity

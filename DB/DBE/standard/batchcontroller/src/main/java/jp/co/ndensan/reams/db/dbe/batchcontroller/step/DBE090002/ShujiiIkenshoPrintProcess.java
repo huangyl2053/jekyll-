@@ -55,7 +55,7 @@ public class ShujiiIkenshoPrintProcess extends BatchProcessBase<YokaigoNinteiJoh
     @BatchWriter
     private BatchReportWriter<ShujiiikenshoReportSource> batchWrite;
     private ReportSourceWriter<ShujiiikenshoReportSource> reportSourceWriter;
-    
+
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private static final RString 認定調査票チェックフラグ = new RString("【認定調査票】");
@@ -104,11 +104,13 @@ public class ShujiiIkenshoPrintProcess extends BatchProcessBase<YokaigoNinteiJoh
 
     @Override
     protected void process(YokaigoNinteiJohoTeikyoEntity entity) {
-        RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(new ShinseishoKanriNo(entity.get申請書管理番号()));
-        ShujiiikenshoEntity shujiiikenshoEntity
-                = ShujiiikenshoEntityEditor.edit(entity, イメージ共有ファイルID, processPrm.get主治医意見書マスキング区分());
-        ShujiiikenshoReport report = new ShujiiikenshoReport(shujiiikenshoEntity);
-        report.writeBy(reportSourceWriter);
+        if (entity.is意見書同意フラグ()) {
+            RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(new ShinseishoKanriNo(entity.get申請書管理番号()));
+            ShujiiikenshoEntity shujiiikenshoEntity
+                    = ShujiiikenshoEntityEditor.edit(entity, イメージ共有ファイルID, processPrm.get主治医意見書マスキング区分());
+            ShujiiikenshoReport report = new ShujiiikenshoReport(shujiiikenshoEntity);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     @Override

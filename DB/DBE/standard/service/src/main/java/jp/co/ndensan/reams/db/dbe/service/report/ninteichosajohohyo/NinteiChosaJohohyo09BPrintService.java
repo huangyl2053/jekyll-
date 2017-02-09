@@ -17,8 +17,14 @@ import jp.co.ndensan.reams.db.dbe.business.report.ninteichosajohohyo12.NinteiCho
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosajohohyo.NinteiChosaJohohyo12ReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 認定調査票情報_09BのPrinterクラスです。
@@ -46,12 +52,24 @@ public class NinteiChosaJohohyo09BPrintService implements INinteiChosaJohohyoPri
             List<NinteichosahyoChosaItem> 認定調査票調査項目List,
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List,
             RString 認定調査票マスキング区分,
-            RString 特記事項マスキング区分,
             RString 主治医意見書マスキング区分) {
-        NinteiChosaJohohyo09BProperty property = new NinteiChosaJohohyo09BProperty();
-        new Printer<NinteiChosaJohohyo12ReportSource>().spool(property,
-                new NinteiChosaJohohyo12Report(NinteiChosaJohohyo12EntityEditor.edit(business.toEntity(), 認定調査票サービス状況List,
-                                認定調査票サービス状況フラグList, 認定調査票調査項目List, 認定調査票記入項目List, イメージ共有ファイルID,
-                                認定調査票マスキング区分, 主治医意見書マスキング区分)));
+        try (ReportAssembler<NinteiChosaJohohyo12ReportSource> assembler = createAssembler(new NinteiChosaJohohyo09BProperty(), reportManager)) {
+            ReportSourceWriter<NinteiChosaJohohyo12ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            NinteiChosaJohohyo12Report report = new NinteiChosaJohohyo12Report(NinteiChosaJohohyo12EntityEditor.edit(business.toEntity(),
+                    認定調査票サービス状況List, 認定調査票サービス状況フラグList, 認定調査票調査項目List, 認定調査票記入項目List,
+                    イメージ共有ファイルID, 認定調査票マスキング区分, 主治医意見書マスキング区分));
+            report.writeBy(reportSourceWriter);
+        }
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
     }
 }

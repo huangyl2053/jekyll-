@@ -79,6 +79,7 @@
         ,DbT5101."koroshoIfShikibetsuCode"
         FROM
         <include refid="検索条件" />
+        <include refid="ソート条件_対象者一覧" />
     </select>
 
     <select id="get対象者件数" resultType="int"
@@ -119,6 +120,7 @@
         ,DbT5101."koroshoIfShikibetsuCode"
         FROM
         <include refid="検索条件" />
+        <include refid="ソート条件" />
         ) AS "countData"
     </select>
 
@@ -129,6 +131,7 @@
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
         FROM
         <include refid="検索条件" />
+        <include refid="ソート条件" />
     </select>
 
     <sql id="検索条件">
@@ -197,10 +200,21 @@
                 OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NOT NULL)
             </if>
         </if>
+    </sql>
+    
+    <sql id="ソート条件">
         ORDER BY
         DbT5101."hihokenshaKana",
         DbT5101."ninteiShinseiYMD",
         DbT5101."shoKisaiHokenshaNo"
+        <if test = "メニュー_遷移">
+            LIMIT #{最大表示件数}
+        </if>
+    </sql>
+    
+    <sql id="ソート条件_対象者一覧">
+        ORDER BY
+        DbT5101."ninteiShinseiYMD"
         <if test = "メニュー_遷移">
             LIMIT #{最大表示件数}
         </if>

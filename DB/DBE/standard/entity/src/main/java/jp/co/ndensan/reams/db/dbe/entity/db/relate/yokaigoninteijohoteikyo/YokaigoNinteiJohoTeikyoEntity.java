@@ -113,4 +113,5 @@ public class YokaigoNinteiJohoTeikyoEntity {
     private RString 施設利用;
     private RString 変更事由;
     private FlexibleDate 認定審査会完了年月日;
+    private boolean 意見書同意フラグ;
 }
