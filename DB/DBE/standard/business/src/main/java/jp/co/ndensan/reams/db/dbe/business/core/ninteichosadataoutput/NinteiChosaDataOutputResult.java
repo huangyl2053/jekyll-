@@ -156,7 +156,7 @@ public class NinteiChosaDataOutputResult {
         set調査項目_今回(eucCsvEntity, entity);
         eucCsvEntity.setステータス(ステータス設定値);
         eucCsvEntity.set被保険者区分(entity.get被保険者区分コード());
-        eucCsvEntity.set認定調査委託先コード(entity.get認定調査委託先コード());
+        eucCsvEntity.set認定調査委託先市町村コード(entity.get認定調査委託先市町村コード());
     }
 
     private void set前回分Entity(NinteiChosaBasicDataRelateEntity entityParam, NinteiChosaDataOutputEucCsvEntity eucCsvEntity) {
@@ -856,7 +856,7 @@ public class NinteiChosaDataOutputResult {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【認定調査員】"));
         if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()) {
-            jokenBuilder.append(processParamter.getNinteiChosainCode());
+        jokenBuilder.append(processParamter.getNinteiChosainCode());
             jokenBuilder.append(new RString(" "));
             jokenBuilder.append(認定調査員);
         }

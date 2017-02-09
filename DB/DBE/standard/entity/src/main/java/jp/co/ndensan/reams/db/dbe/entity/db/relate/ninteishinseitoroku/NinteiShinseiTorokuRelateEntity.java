@@ -101,5 +101,6 @@ public class NinteiShinseiTorokuRelateEntity {
     private FlexibleDate  認定申請情報登録完了年月日;
     private FlexibleDate  認定審査会割当完了年月日;
     private FlexibleDate  介護認定審査会割当年月日;
+    private AtenaMeisho 入所施設名称;
     private Code  判定結果コード;
 }

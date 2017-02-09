@@ -137,8 +137,8 @@ module DBZ {
                 return new UZA.TextBoxTelNo(this.convFiledName("txtMobileNo"));
             }
 
-            public txtYusenJuni(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtYusenJuni"));
+            public txtYusenJuni(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtYusenJuni"));
             }
 
             public btnModoru(): UZA.Button {

@@ -74,7 +74,6 @@ public class NinteiShinseishaFinderHandler {
         div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
         initialize共通処理();
         initTennyuNashi();
-        setKanryoJoho();
     }
 
     /**
@@ -151,8 +150,10 @@ public class NinteiShinseishaFinderHandler {
         initKaigoNinteiShinsakaiJoho();
         initZenkaiJoho();
         initDdlNowPhase();
-        init完了情報();
         initDdlShinseijiShinseiKubun();
+        clearKanryoJoho();
+        setAbledKanryoJoho();
+        init完了情報();
     }
     
     private void init二次判定結果DDL() {
@@ -305,7 +306,6 @@ public class NinteiShinseishaFinderHandler {
      * 詳細条件の完了情報パネルOPEN状態の処理です。
      */
     public void openKanryoJoho() {
-        div.getShosaiJoken().setIsOpen(true);
         div.getKanryoJoho().setIsOpen(true);
     }
 
@@ -570,7 +570,20 @@ public class NinteiShinseishaFinderHandler {
         div.getChkMinashiFlag().setSelectedItemsByKey(selectedItems);
     }
     
-    public void init完了情報(){
+    public void setDisabledKanryoJoho() {
+        div.getChkIchijiHantei().setDisabled(true);
+        div.getChkShinseiUketsuke().setDisabled(true);
+        div.getChkMasking().setDisabled(true);
+        div.getChkChosaIrai().setDisabled(true);
+        div.getChkShinsakaiToroku().setDisabled(true);
+        div.getChkIkenshoIrai().setDisabled(true);
+        div.getChkNijiHantei().setDisabled(true);
+        div.getChkChosaNyushu().setDisabled(true);
+        div.getChkIkenshoNyushu().setDisabled(true);
+        div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    public void setAbledKanryoJoho() {
         div.getChkKoshinTaishoChushutsu().setDisabled(true);
         div.getChkIchijiHantei().setDisabled(false);
         div.getChkShinseiUketsuke().setDisabled(false);
@@ -583,6 +596,10 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setDisabled(true);
         div.getChkIkenshoNyushu().setDisabled(false);
         div.getChkGetsureiShori().setDisabled(false);
+        
+    }
+
+    public void clearKanryoJoho() {
         List<RString> keys = new ArrayList<>();
         div.getChkKoshinTaishoChushutsu().setSelectedItemsByKey(keys);
         div.getChkIchijiHantei().setSelectedItemsByKey(keys);
@@ -596,21 +613,6 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setSelectedItemsByKey(keys);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(keys);
         div.getChkGetsureiShori().setSelectedItemsByKey(keys);
-    }
-
-    public void set完了情報未選択() {
-        div.getChkKoshinTaishoChushutsu().setDisabled(true);
-        div.getChkIchijiHantei().setDisabled(false);
-        div.getChkShinseiUketsuke().setDisabled(false);
-        div.getChkMasking().setDisabled(false);
-        div.getChkChosaIrai().setDisabled(false);
-        div.getChkShinsakaiToroku().setDisabled(false);
-        div.getChkIkenshoIrai().setDisabled(false);
-        div.getChkNijiHantei().setDisabled(false);
-        div.getChkChosaNyushu().setDisabled(false);
-        div.getChkTsuchiShori().setDisabled(true);
-        div.getChkIkenshoNyushu().setDisabled(false);
-        div.getChkGetsureiShori().setDisabled(false);
     }
 
     public void set申請受付完了情報() {
@@ -893,84 +895,136 @@ public class NinteiShinseishaFinderHandler {
     private void initTennyuNashi() {
         RString menuID = ResponseHolder.getMenuID();
         if (MENUID_DBEMN41005.equals(menuID)
-            ||MENUID_DBEMN42002.equals(menuID)
-            ||MENUID_DBEMN43001.equals(menuID)
-            ||MENUID_DBEMN72001.equals(menuID)) {
+                || MENUID_DBEMN42002.equals(menuID)
+                || MENUID_DBEMN43001.equals(menuID)
+                || MENUID_DBEMN72001.equals(menuID)) {
             setTennyuNashi();
         }
     }
 
-    public void setKanryoJoho() {
-        List<RString> selectedkeyMikann = new ArrayList<>();
-        List<RString> selectedkeyKanryo = new ArrayList<>();
-        List<RString> selectedkeySubete = new ArrayList<>();
-        selectedkeyMikann.add(処理状態未完了);
-        selectedkeyKanryo.add(処理状態完了);
-        selectedkeySubete.add(処理状態未完了);
-        selectedkeySubete.add(処理状態完了);
-        RString nowPhase = div.getDdlNowPhase().getSelectedKey();
+    public void init完了情報() {
         RString menuID = ResponseHolder.getMenuID();
         if (MENUID_DBEMN21001.equals(menuID)) {
-            if (!KanryoInfoPhase.二次判定.getコード().equals(nowPhase)) {
-                div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
-            }
+            setKanryoJoho_DBEMN21001();
         } else if (MENUID_DBEMN24001.equals(menuID)) {
-            div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkChosaNyushu().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkIkenshoNyushu().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkIchijiHantei().setSelectedItemsByKey(selectedkeyKanryo);
+            setKanryoJoho_DBEMN24001();
         } else if (MENUID_DBEMN31001.equals(menuID)) {
             div.getDdlNowPhase().setSelectedKey(KanryoInfoPhase.申請受付.getコード());
             set申請受付完了情報();
-            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkGetsureiShori().setDisabled(true);
+            setKanryoJoho_DBEMN31001();
         } else if (MENUID_DBEMN41005.equals(menuID)) {
             div.getDdlNowPhase().setSelectedKey(KanryoInfoPhase.調査入手.getコード());
             set調査入手完了情報();
-            div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkShinseiUketsuke().setDisabled(true);
-            div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkChosaIrai().setDisabled(true);
-            div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkNijiHantei().setDisabled(true);
-            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkGetsureiShori().setDisabled(true);
+            setKanryoJoho_DBEMN41005();
         } else if (MENUID_DBEMN42002.equals(menuID)) {
             div.getDdlNowPhase().setSelectedKey(KanryoInfoPhase.意見書入手.getコード());
             set意見書入手完了情報();
-            div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkShinseiUketsuke().setDisabled(true);
-            div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkIkenshoIrai().setDisabled(true);
-            div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkNijiHantei().setDisabled(true);
-            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkGetsureiShori().setDisabled(true);
+            setKanryoJoho_DBEMN42002();
         } else if (MENUID_DBEMN43001.equals(menuID)) {
-            div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkShinseiUketsuke().setDisabled(true);
-            div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkChosaIrai().setDisabled(true);
-            div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkIkenshoIrai().setDisabled(true);
+            List<RString> selectedkeyMikann = new ArrayList<>();
+            selectedkeyMikann.add(処理状態未完了);
             div.getChkShinsakaiToroku().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkNijiHantei().setDisabled(true);
-            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkGetsureiShori().setDisabled(true);
+            setKanryoJoho_DBEMN43001();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
-            div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkShinseiUketsuke().setDisabled(true);
-            div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkChosaIrai().setDisabled(true);
-            div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
-            div.getChkIkenshoIrai().setDisabled(true);
-            div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkNijiHantei().setDisabled(true);
-            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
-            div.getChkGetsureiShori().setDisabled(true);
+            setKanryoJoho_DBEMN72001();
         }
+    }
+
+    public void setKanryoJoho() {
+        RString menuID = ResponseHolder.getMenuID();
+        if (MENUID_DBEMN31001.equals(menuID)) {
+            setKanryoJoho_DBEMN31001();
+        } else if (MENUID_DBEMN41005.equals(menuID)) {
+            setKanryoJoho_DBEMN41005();
+        } else if (MENUID_DBEMN42002.equals(menuID)) {
+            setKanryoJoho_DBEMN42002();
+        } else if (MENUID_DBEMN43001.equals(menuID)) {
+            setKanryoJoho_DBEMN43001();
+        } else if (MENUID_DBEMN72001.equals(menuID)) {
+            setKanryoJoho_DBEMN72001();
+        }
+    }
+
+    private void setKanryoJoho_DBEMN21001() {
+        List<RString> selectedkeyMikann = new ArrayList<>();
+        selectedkeyMikann.add(処理状態未完了);
+        div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+    }
+
+    private void setKanryoJoho_DBEMN24001() {
+        List<RString> selectedkeyKanryo = new ArrayList<>();
+        selectedkeyKanryo.add(処理状態完了);
+        div.getChkIchijiHantei().setSelectedItemsByKey(selectedkeyKanryo);
+    }
+
+    private void setKanryoJoho_DBEMN31001() {
+        List<RString> selectedkeyMikann = new ArrayList<>();
+        selectedkeyMikann.add(処理状態未完了);
+        div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    private void setKanryoJoho_DBEMN41005() {
+        List<RString> selectedkeyMikann = new ArrayList<>();
+        List<RString> selectedkeyKanryo = new ArrayList<>();
+        selectedkeyMikann.add(処理状態未完了);
+        selectedkeyKanryo.add(処理状態完了);
+        div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkShinseiUketsuke().setDisabled(true);
+        div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkChosaIrai().setDisabled(true);
+        div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkNijiHantei().setDisabled(true);
+        div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    private void setKanryoJoho_DBEMN42002() {
+        List<RString> selectedkeyMikann = new ArrayList<>();
+        List<RString> selectedkeyKanryo = new ArrayList<>();
+        selectedkeyMikann.add(処理状態未完了);
+        selectedkeyKanryo.add(処理状態完了);
+        div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkShinseiUketsuke().setDisabled(true);
+        div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkIkenshoIrai().setDisabled(true);
+        div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkNijiHantei().setDisabled(true);
+        div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    private void setKanryoJoho_DBEMN43001() {
+        List<RString> selectedkeyMikann = new ArrayList<>();
+        List<RString> selectedkeyKanryo = new ArrayList<>();
+        selectedkeyMikann.add(処理状態未完了);
+        selectedkeyKanryo.add(処理状態完了);
+        div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkShinseiUketsuke().setDisabled(true);
+        div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkChosaIrai().setDisabled(true);
+        div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkIkenshoIrai().setDisabled(true);
+        div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkNijiHantei().setDisabled(true);
+        div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    private void setKanryoJoho_DBEMN72001() {
+        List<RString> selectedkeyMikann = new ArrayList<>();
+        List<RString> selectedkeyKanryo = new ArrayList<>();
+        selectedkeyMikann.add(処理状態未完了);
+        selectedkeyKanryo.add(処理状態完了);
+        div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkShinseiUketsuke().setDisabled(true);
+        div.getChkChosaIrai().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkChosaIrai().setDisabled(true);
+        div.getChkIkenshoIrai().setSelectedItemsByKey(selectedkeyKanryo);
+        div.getChkIkenshoIrai().setDisabled(true);
+        div.getChkNijiHantei().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkNijiHantei().setDisabled(true);
+        div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        div.getChkGetsureiShori().setDisabled(true);
     }
 }

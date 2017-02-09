@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jan 06 21:45:35 JST 2017 
+ * Thu Feb 09 18:16:40 JST 2017 
  */
 
 
@@ -28,7 +28,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
     private RString jusho;
     private RString telNo;
     private RString mobileNo;
-    private RString yusenJuni;
+    private TextBoxNum yusenJuni;
     private RString renrakusakiKuBun;
     private RString sisyo;
     private RString kanaShimei;
@@ -43,7 +43,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.jusho = RString.EMPTY;
         this.telNo = RString.EMPTY;
         this.mobileNo = RString.EMPTY;
-        this.yusenJuni = RString.EMPTY;
+        this.yusenJuni = new TextBoxNum();
         this.renrakusakiKuBun = RString.EMPTY;
         this.sisyo = RString.EMPTY;
         this.kanaShimei = RString.EMPTY;
@@ -63,7 +63,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgRenrakusakiIchiran_Row(TextBoxNum renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, RString yusenJuni, RString renrakusakiKuBun, RString sisyo, RString kanaShimei, RString yuubinBango, RString shinseishoKanriNo) {
+    public dgRenrakusakiIchiran_Row(TextBoxNum renban, RString shimei, RString tsuzukigara, RString jusho, RString telNo, RString mobileNo, TextBoxNum yusenJuni, RString renrakusakiKuBun, RString sisyo, RString kanaShimei, RString yuubinBango, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("renban", renban);
         this.setOriginalData("shimei", shimei);
@@ -115,7 +115,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         return mobileNo;
     }
 
-    public RString getYusenJuni() {
+    public TextBoxNum getYusenJuni() {
         return yusenJuni;
     }
 
@@ -169,7 +169,7 @@ public class dgRenrakusakiIchiran_Row extends DataRow {
         this.mobileNo = mobileNo;
     }
 
-    public void setYusenJuni(RString yusenJuni) {
+    public void setYusenJuni(TextBoxNum yusenJuni) {
         this.setOriginalData("yusenJuni", yusenJuni);
         this.yusenJuni = yusenJuni;
     }
