@@ -493,64 +493,73 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static IProcessingResults validateDbT5202(DbT5202NinteichosahyoGaikyoChosaEntity entity,
             NinteiOcrRelate nr, OcrChosa ocrChosa, INinteiOcrMapper mapper, OcrDataReadProcessParameter batchParam) {
-        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(
-                nr.get申請書管理番号(), ocrChosa.get所属機関(), ocrChosa.get記入者());
+
+        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(nr.get申請書管理番号(),
+                ocrChosa.get所属機関(), ocrChosa.get記入者());
         NinteiChosaContextEntity context = mapper.getNinteiChosaContext(param);
 
-        ProcessingResults results = new ProcessingResults();
         if (!nr.get調査依頼日().isBeforeOrEquals(entity.getNinteichosaJisshiYMD())) {
-            results.add(
+            return new ProcessingResults(
                     ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査実施日が依頼日より前.
                             replaced(toSlashSeparatedSeireki(nr.get調査依頼日()),
                                     toSlashSeparatedSeireki(entity.getNinteichosaJisshiYMD())
                             )
                     ));
-            return results;
         }
+
         RString newChosaItakusakiCode = entity.getChosaItakusakiCode().value();
         if (context.getExists調査員区分() == null) {
-            results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.委託先_不存在
-                    .replaced(newChosaItakusakiCode.toString()))
-            );
-            return results;
+            return new ProcessingResults(
+                    ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.委託先_不存在
+                            .replaced(newChosaItakusakiCode.toString())
+                    ));
         }
+        RString newChosainCode = entity.getChosainCode();
         if (!context.getExists調査員区分()) {
-            boolean matches所属機関 = newChosaItakusakiCode.equals(nr.get認定調査委託先コード());
-            switch (batchParam.get調査員不一致時処理方法()) {
-                case エラーとする:
-                    results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査員_不存在
-                            .replaced(newChosaItakusakiCode.toString(), entity.getChosainCode().toString())));
-                    return results;
-                case 所属機関が一致すればエラーとしない:
-                    if (!matches所属機関) {
-                        results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
-                                replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
-                                        nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
-                                )
-                        ));
-                        return results;
-                    }
-                default:
-            }
-            if (matches所属機関) {
-                results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる調査員.
-                        replaced(newChosaItakusakiCode.toString(),
-                                nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
-                        )
-                ));
-            } else {
-                results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
-                        replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
-                                nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
-                        )
-                ));
-            }
-            return results;
+            return new ProcessingResults(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査員_不存在
+                    .replaced(newChosaItakusakiCode.toString(), newChosainCode.toString()))
+            );
         }
-        return ProcessingResults.EMPTY;
-    }
 
+        if (newChosainCode.equals(nr.get認定調査員コード())) {
+            return ProcessingResults.EMPTY;
+        }
+
+        ProcessingResults results = new ProcessingResults();
+        boolean matches所属機関 = newChosaItakusakiCode.equals(nr.get認定調査委託先コード());
+        switch (batchParam.get調査員不一致時処理方法()) {
+            case エラーとする:
+                results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.調査員_不存在
+                        .replaced(newChosaItakusakiCode.toString(), entity.getChosainCode().toString())));
+                return results;
+            case 所属機関が一致すればエラーとしない:
+                if (!matches所属機関) {
+                    results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
+                            replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
+                                    nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
+                            )
+                    ));
+                    return results;
+                }
+            default:
+        }
+        if (matches所属機関) {
+            results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる調査員.
+                    replaced(newChosaItakusakiCode.toString(),
+                            nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
+                    )
+            ));
+        } else {
+            results.add(ProcessingResultFactory.warning(ocrChosa, OcrTorikomiMessages.依頼時と異なる委託先_調査員.
+                    replaced(nr.get認定調査委託先コード().toString(), newChosaItakusakiCode.toString(),
+                            nr.get認定調査員コード().toString(), entity.getChosaItakusakiCode().toString()
+                    )
+            ));
+        }
+        return results;
+    }
     //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="概況調査 サービスの状況フラグ">
     private static void insertOrUpdateサービスの状況フラグBy(IBatchTableWriter<? super DbT5208NinteichosahyoServiceJokyoFlagEntity> dbWriter,
             NinteiChosahyoEntity ninteiChosaEntity, NinteiOcrRelate nr, OcrChosas ocrChosas) {
