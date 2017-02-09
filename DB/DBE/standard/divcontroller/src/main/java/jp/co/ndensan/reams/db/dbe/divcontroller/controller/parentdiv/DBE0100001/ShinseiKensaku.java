@@ -236,6 +236,7 @@ public class ShinseiKensaku {
         if (MENUID_DBEMN42002.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, 主治医意見書作成依頼履歴番号);
+            ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.主治医意見書登録へ).respond();
         }
 

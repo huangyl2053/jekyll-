@@ -309,9 +309,9 @@ public class ShujiiIkenshoTorokuTotal {
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_IryoKikanOpen(ShujiiIkenshoTorokuTotalDiv div) {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
-        RString 市町村コード = new RString(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().toString());
+        LasdecCode 市町村コード = (ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
         dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
-        dataPassModel.set市町村コード(市町村コード);
+        dataPassModel.set市町村コード(市町村コード.value());
         dataPassModel.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
@@ -328,8 +328,12 @@ public class ShujiiIkenshoTorokuTotal {
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setValue(dataPassModel.get主治医医療機関コード());
         div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(dataPassModel.get主治医医療機関名称());
-        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanTelNumber().setDomain(new TelNo(dataPassModel.get電話番号()));
-        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanFaxNumber().setDomain(new TelNo(dataPassModel.getFAX番号()));
+        if (dataPassModel.get電話番号() != null) {
+            div.getIkenshoKihonJoho().getTxtShujiiIryoKikanTelNumber().setDomain(new TelNo(dataPassModel.get電話番号()));
+        }
+        if (dataPassModel.getFAX番号() != null) {
+            div.getIkenshoKihonJoho().getTxtShujiiIryoKikanFaxNumber().setDomain(new TelNo(dataPassModel.getFAX番号()));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -341,7 +345,7 @@ public class ShujiiIkenshoTorokuTotal {
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBlur_txtSearchShujiiIryokikanMeisho(ShujiiIkenshoTorokuTotalDiv div) {
         RString txtShujiiIryoKikanCode = div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue();
-        LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
+        LasdecCode 市町村コード = (ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
         if (!RString.isNullOrEmpty(txtShujiiIryoKikanCode)) {
             RString shujiiIryoKikanMei = ShujiiMasterFinder.createInstance().getShujiiIryoKikanJoho(
                     ShujiiMasterSearchParameter.createParamForSelectShujiiJoho(
@@ -383,7 +387,8 @@ public class ShujiiIkenshoTorokuTotal {
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnShujiiGuide(ShujiiIkenshoTorokuTotalDiv div) {
         ShujiiIryokikanandshujiiDataPassModel modle = new ShujiiIryokikanandshujiiDataPassModel();
-        modle.set市町村コード(div.getHdnShichosonCode());
+        LasdecCode 市町村コード = (ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
+        modle.set市町村コード(new RString(市町村コード.toString()));
         modle.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
         modle.set主治医医療機関コード(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue());
         modle.set主治医医療機関名称(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().getValue());
@@ -401,7 +406,7 @@ public class ShujiiIkenshoTorokuTotal {
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBlur_txtShujii(ShujiiIkenshoTorokuTotalDiv div) {
 
         div.getIkenshoKihonJoho().getTxtSujiiName().setValue(RString.EMPTY);
-
+        LasdecCode 市町村コード = (ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
         if (RString.isNullOrEmpty(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue())
                 || RString.isNullOrEmpty(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue())) {
             return ResponseData.of(div).respond();
@@ -409,7 +414,7 @@ public class ShujiiIkenshoTorokuTotal {
 
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
-                        div.getHdnShichosonCode(),
+                        new RString(市町村コード.toString()),
                         true,
                         div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue(),
                         div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue(),
@@ -425,11 +430,10 @@ public class ShujiiIkenshoTorokuTotal {
 
         if (!list.isEmpty()) {
             div.getIkenshoKihonJoho().getTxtSujiiName().setValue(list.get(0).get主治医氏名());
+        } else {
+            div.getIkenshoKihonJoho().getTxtSujiiName().setValue(RString.EMPTY);
         }
-        ValidationMessageControlPairs validationResult = getValidationHandler(div).validate主治医コード();
-        if (validationResult.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationResult).respond();
-        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -716,8 +720,8 @@ public class ShujiiIkenshoTorokuTotal {
         if (JYOTAI_CODE_ADD.equals(flag)) {
             shujiiIkenshoBuilder.set厚労省IF識別コード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
             shujiiIkenshoBuilder.set主治医意見書依頼区分(shujiiIkenshoIraiJoho.get主治医意見書依頼区分());
-            shujiiIkenshoBuilder.set主治医コード(shujiiIkenshoIraiJoho.get主治医コード());
-            shujiiIkenshoBuilder.set主治医医療機関コード(shujiiIkenshoIraiJoho.get主治医医療機関コード());
+            shujiiIkenshoBuilder.set主治医コード(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue());
+            shujiiIkenshoBuilder.set主治医医療機関コード(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue());
             shujiiIkenshoBuilder.set主治医意見書受領年月日(FlexibleDate.getNowDate());
             shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード()));
             if (ninteiShinseiJoho.is施設入所の有無()) {
@@ -728,6 +732,9 @@ public class ShujiiIkenshoTorokuTotal {
             shujiiIkenshoJoho = shujiiIkenshoBuilder.build();
         }
         if (JYOTAI_CODE_UPD.equals(flag)) {
+            shujiiIkenshoBuilder.set主治医コード(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue());
+            shujiiIkenshoBuilder.set主治医医療機関コード(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue());
+            shujiiIkenshoBuilder.set主治医意見書記入年月日(rdateToFlex(div.getTxtKinyuYMD().getValue()));
             setShujiiIkenshoJohoCommon(shujiiIkenshoBuilder, div);
             shujiiIkenshoJoho = shujiiIkenshoBuilder.build();
             shujiiIkenshoJoho = shujiiIkenshoJoho.modifiedModel();
