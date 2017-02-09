@@ -28,4 +28,5 @@ public class MapperProvider {
     public <T> T create(Class<T> clazz) {
         return this.session.getMapper(clazz);
     }
+
 }

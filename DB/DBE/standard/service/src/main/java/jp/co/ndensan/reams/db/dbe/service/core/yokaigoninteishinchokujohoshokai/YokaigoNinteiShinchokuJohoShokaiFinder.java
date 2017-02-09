@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai.IYokaigoNinteiShinchokuJohoShokaiMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.CursorMapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import org.apache.ibatis.session.ResultContext;
+import org.apache.ibatis.session.ResultHandler;
+import static java.util.Objects.requireNonNull;
 
 /**
  *
@@ -25,22 +27,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class YokaigoNinteiShinchokuJohoShokaiFinder {
 
-    private final MapperProvider mapperProvider;
-
     /**
      * コンストラクタです。
      */
     YokaigoNinteiShinchokuJohoShokaiFinder() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-    }
-
-    /**
-     * 単体テスト用のコンストラクタです。
-     *
-     * @param mapperProvider {@link MapperProvider}
-     */
-    YokaigoNinteiShinchokuJohoShokaiFinder(MapperProvider mapperProvider) {
-        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -58,11 +48,23 @@ public class YokaigoNinteiShinchokuJohoShokaiFinder {
      * @param parameter 申請者一覧内容検索のパラメータ
      * @return SearchResult<YokaigoNinteiShinchokuJoho>
      */
-    public SearchResult<YokaigoNinteiShinchokuJoho> selectItirannJoho(YokaigoNinteiParamter parameter) {
+    public SearchResult<YokaigoNinteiShinchokuJoho> selectItirannJoho(final YokaigoNinteiParamter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
         List<YokaigoNinteiShinchokuJoho> yokaigoNinteiShinchokuJohoList = new ArrayList<>();
-        IYokaigoNinteiShinchokuJohoShokaiMapper mapper = mapperProvider.create(IYokaigoNinteiShinchokuJohoShokaiMapper.class);
-        List<YokaigoNinteiShinchokuJohoShokaiRelateEntity> entityList = mapper.get申請者一覧内容(parameter);
+
+        final List<YokaigoNinteiShinchokuJohoShokaiRelateEntity> entityList = new ArrayList<>();
+        InstanceProvider.create(CursorMapperProvider.class).select(new RString("get申請者一覧内容"), parameter, new ResultHandler() {
+            @Override
+            public void handleResult(ResultContext rc) {
+                if (rc.getResultCount() > parameter.getMaximumDisplayNumber()) {
+                    rc.stop();
+                    return;
+                }
+
+                entityList.add((YokaigoNinteiShinchokuJohoShokaiRelateEntity) rc.getResultObject());
+            }
+        });
+
         for (YokaigoNinteiShinchokuJohoShokaiRelateEntity entity : entityList) {
             yokaigoNinteiShinchokuJohoList.add(new YokaigoNinteiShinchokuJoho(entity));
         }
