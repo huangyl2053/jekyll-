@@ -574,6 +574,7 @@
         <result property="変更事由"  column="変更事由"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="施設利用"  column="施設利用"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定審査会完了年月日"  column="認定審査会完了年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="意見書同意フラグ"  column="意見書同意フラグ" />
     </resultMap>
 
     <select resultOrdered="true" id="get要介護認定申請者" resultMap="resultMap_YokaigoNinteiJohoTeikyoEntity"
@@ -673,6 +674,7 @@
             ,DbT5116IchijiHanteiKekkaJoho."suiteiKyufuKubunCode" AS 給付区分
             ,DbT5210NinteichosahyoShisetsuRiyo."remban" AS 施設利用
             ,DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" AS 認定審査会完了年月日
+            ,DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag" AS 意見書同意フラグ
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
             LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102NinteiKekkaJoho
@@ -768,6 +770,16 @@
                                                                                   WHERE  DbT5210Nintei."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
             LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
                 ON DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301ShujiiIkenshoIraiJoho
+                ON DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                   AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = (SELECT MAX(DbT5301."ikenshoIraiRirekiNo")
+                                                                             FROM   rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
+                                                                             WHERE  DbT5301."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                                                                                    AND DbT5301."logicalDeletedFlag" = FALSE)
+                   AND DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE
+            LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302ShujiiIkenshoJoho
+                ON DbT5302ShujiiIkenshoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                   AND DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo" = DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
         WHERE
             DbT5101NinteiShinseiJoho."shinseishoKanriNo" IN
             <foreach collection="申請書管理番号List" item="申請書管理番号" open="(" separator="," close=")">
