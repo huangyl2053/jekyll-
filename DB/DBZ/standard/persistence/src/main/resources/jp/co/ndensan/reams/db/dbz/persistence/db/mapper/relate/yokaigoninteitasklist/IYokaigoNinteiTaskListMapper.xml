@@ -591,8 +591,8 @@
             AND DbT7051."shichosonCode" = #{市町村コード}
             </if>
         ORDER BY
-            DbT5101."hihokenshaKana",
             DbT5101."ninteiShinseiYMD",
+            DbT5101."hihokenshaKana",
             DbT5101."shoKisaiHokenshaNo"
         LIMIT
             #{件数}

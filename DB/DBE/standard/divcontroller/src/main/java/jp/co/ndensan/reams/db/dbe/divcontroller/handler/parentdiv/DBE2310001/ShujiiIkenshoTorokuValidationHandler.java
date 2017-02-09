@@ -7,10 +7,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuTotalDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputSpec;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputValidationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;
+import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -67,6 +74,24 @@ public class ShujiiIkenshoTorokuValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.存在しない));
         }
         return validationMessages;
+    }
+
+    public ValidationMessageControlPairs validate主治医コード() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(ShujiiIryokikanAndShujiiInputSpec.主治医コードに該当するデータが存在すること)
+                .thenAdd(ShujiiIryokikanAndShujiiInputValidationMessages.主治医コードに該当するデータなし)
+                .messages());
+        ValidationMessageControlPairs validResult = new ValidationMessageControlPairs();
+        validResult.add(createDictionary主治医コード().check(messages));
+        return validResult;
+    }
+
+    private ValidationDictionary createDictionary主治医コード() {
+        return new ValidationDictionaryBuilder()
+                .add(ShujiiIryokikanAndShujiiInputValidationMessages.主治医コードに該当するデータなし,
+                        div.getTxtShujiiCode())
+                .build();
     }
 
     private static enum RRVMessages implements IValidationMessage {

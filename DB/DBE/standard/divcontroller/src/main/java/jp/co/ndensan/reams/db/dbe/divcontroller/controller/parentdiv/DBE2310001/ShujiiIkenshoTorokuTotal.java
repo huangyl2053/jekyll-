@@ -19,12 +19,14 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.DBE2310001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.DBE2310001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.ShujiiIkenshoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001.ShujiiIkenshoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001.ShujiiIkenshoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshotoroku.ShujiiIkenshoTorokuManager;
@@ -34,10 +36,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
+import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideFinder;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -46,6 +53,8 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -63,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 主治医意見書登録のコントローラです。
@@ -99,6 +109,7 @@ public class ShujiiIkenshoTorokuTotal {
     private static final RString イメージファイルが存在区分_存在しない = new RString("1");
     private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
     private static final RString 厚労省IF識別番号_09B = new RString("09B");
+    private final ShujiiIryokikanAndShujiiGuideFinder finder;
 
     /**
      * コンストラクタです。
@@ -108,6 +119,7 @@ public class ShujiiIkenshoTorokuTotal {
         this.service = ShujiiIkenshoTorokuManager.createInstance();
         this.imageManager = new ImageManager();
         this.ninteiManager = NinteiShinseiJohoManager.createInstance();
+        this.finder = ShujiiIryokikanAndShujiiGuideFinder.createInstance();
     }
 
     /**
@@ -224,6 +236,10 @@ public class ShujiiIkenshoTorokuTotal {
             div.getRadDoi().setReadOnly(false);
             div.getBtnMemoTeikeibunGuide().setDisabled(false);
             div.getRadShujiiRenraku().setReadOnly(false);
+            div.getIkenshoKihonJoho().getTxtShujiiCode().setReadOnly(false);
+            div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setReadOnly(false);
+            div.getIkenshoKihonJoho().getBtnShujiiGuide().setDisabled(false);
+            div.getIkenshoKihonJoho().getBtnToSearchIryoKikan().setDisabled(false);
         } else {
             setReadOnly(div);
         }
@@ -249,6 +265,10 @@ public class ShujiiIkenshoTorokuTotal {
         div.getRadDoi().setReadOnly(true);
         div.getBtnMemoTeikeibunGuide().setDisabled(true);
         div.getRadShujiiRenraku().setReadOnly(true);
+        div.getIkenshoKihonJoho().getTxtShujiiCode().setReadOnly(true);
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setReadOnly(true);
+        div.getIkenshoKihonJoho().getBtnShujiiGuide().setDisabled(true);
+        div.getIkenshoKihonJoho().getBtnToSearchIryoKikan().setDisabled(true);
     }
 
     /**
@@ -277,6 +297,138 @@ public class ShujiiIkenshoTorokuTotal {
             getHandler(div).setSonotaDisable(false);
         } else {
             getHandler(div).setSonotaDisable(true);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医医療機関検索ボタンを押下します。
+     *
+     * @param div ShujiiIkenshoTorokuTotalDiv
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_IryoKikanOpen(ShujiiIkenshoTorokuTotalDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
+        RString 市町村コード = new RString(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード().toString());
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(市町村コード);
+        dataPassModel.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医医療機関検索ボタンを押下します。
+     *
+     * @param div ShujiiIkenshoTorokuTotalDiv
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnToSearchIryoKikan(ShujiiIkenshoTorokuTotalDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setValue(dataPassModel.get主治医医療機関コード());
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(dataPassModel.get主治医医療機関名称());
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanTelNumber().setDomain(new TelNo(dataPassModel.get電話番号()));
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanFaxNumber().setDomain(new TelNo(dataPassModel.getFAX番号()));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医医療機関名を取得します。
+     *
+     * @param div ShujiiIkenshoTorokuTotalDiv
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBlur_txtSearchShujiiIryokikanMeisho(ShujiiIkenshoTorokuTotalDiv div) {
+        RString txtShujiiIryoKikanCode = div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue();
+        LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
+        if (!RString.isNullOrEmpty(txtShujiiIryoKikanCode)) {
+            RString shujiiIryoKikanMei = ShujiiMasterFinder.createInstance().getShujiiIryoKikanJoho(
+                    ShujiiMasterSearchParameter.createParamForSelectShujiiJoho(
+                            市町村コード,
+                            div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue(),
+                            div.getIkenshoKihonJoho().getTxtShujiiCode().getValue()));
+
+            if (!RString.isNullOrEmpty(shujiiIryoKikanMei)) {
+                div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(shujiiIryoKikanMei);
+            } else {
+                div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(RString.EMPTY);
+            }
+        } else {
+            div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医医療機関ガイドのデータを設定します。
+     *
+     * @param div ShujiiIkenshoTorokuTotalDiv
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOKClose_btnShujiiGuide(ShujiiIkenshoTorokuTotalDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getIkenshoKihonJoho().getTxtShujiiCode().setValue(modle.get主治医コード());
+        div.getIkenshoKihonJoho().getTxtSujiiName().setValue(modle.get主治医氏名());
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setValue(modle.get主治医医療機関コード());
+        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(modle.get主治医医療機関名称());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医医療機関ガイドのデータを設定します。
+     *
+     * @param div ShujiiIkenshoTorokuTotalDiv
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnShujiiGuide(ShujiiIkenshoTorokuTotalDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel modle = new ShujiiIryokikanandshujiiDataPassModel();
+        modle.set市町村コード(div.getHdnShichosonCode());
+        modle.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        modle.set主治医医療機関コード(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue());
+        modle.set主治医医療機関名称(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().getValue());
+        modle.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(modle));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 主治医コードロストフォーカスの時、画面を設定します。
+     *
+     * @param div ShujiiIkenshoTorokuTotalDiv
+     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onBlur_txtShujii(ShujiiIkenshoTorokuTotalDiv div) {
+
+        div.getIkenshoKihonJoho().getTxtSujiiName().setValue(RString.EMPTY);
+
+        if (RString.isNullOrEmpty(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue())
+                || RString.isNullOrEmpty(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue())) {
+            return ResponseData.of(div).respond();
+        }
+
+        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
+                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
+                        div.getHdnShichosonCode(),
+                        true,
+                        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue(),
+                        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue(),
+                        true,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        div.getIkenshoKihonJoho().getTxtShujiiCode().getValue(),
+                        div.getIkenshoKihonJoho().getTxtShujiiCode().getValue(),
+                        true,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        1)).records();
+
+        if (!list.isEmpty()) {
+            div.getIkenshoKihonJoho().getTxtSujiiName().setValue(list.get(0).get主治医氏名());
+        }
+        ValidationMessageControlPairs validationResult = getValidationHandler(div).validate主治医コード();
+        if (validationResult.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationResult).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -710,4 +862,5 @@ public class ShujiiIkenshoTorokuTotal {
         LockingKey 排他キー = new LockingKey(排他);
         RealInitialLocker.release(排他キー);
     }
+
 }
