@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -165,6 +165,21 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Space getFirstSpace() {
+        return this.getTokkiNyuryoku().getTblFirstTokkiJiko().getFirstSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFirstChosaDelete() {
+        return this.getTokkiNyuryoku().getTblFirstTokkiJiko().getChkFirstChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFirstMaskExist() {
+        return this.getTokkiNyuryoku().getTblFirstTokkiJiko().getLblFirstMaskExist();
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtFirstTokkiJiko() {
         return this.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko();
     }
@@ -205,13 +220,13 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnFirstImageMasking() {
-        return this.getTokkiNyuryoku().getBtnFirstImageMasking();
+    public ButtonDialog getBtnFirstMasking() {
+        return this.getTokkiNyuryoku().getBtnFirstMasking();
     }
 
     @JsonIgnore
-    public void  setBtnFirstImageMasking(ButtonDialog btnFirstImageMasking) {
-        this.getTokkiNyuryoku().setBtnFirstImageMasking(btnFirstImageMasking);
+    public void  setBtnFirstMasking(ButtonDialog btnFirstMasking) {
+        this.getTokkiNyuryoku().setBtnFirstMasking(btnFirstMasking);
     }
 
     @JsonIgnore
@@ -242,6 +257,21 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtSecondTokkiJikoMeisho() {
         return this.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getSecondSpace() {
+        return this.getTokkiNyuryoku().getTblSecondTokkiJiko().getSecondSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSecondChosaDelete() {
+        return this.getTokkiNyuryoku().getTblSecondTokkiJiko().getChkSecondChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblSecondMaskExist() {
+        return this.getTokkiNyuryoku().getTblSecondTokkiJiko().getLblSecondMaskExist();
     }
 
     @JsonIgnore
@@ -285,13 +315,13 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnSecondImageMasking() {
-        return this.getTokkiNyuryoku().getBtnSecondImageMasking();
+    public ButtonDialog getBtnSecondMasking() {
+        return this.getTokkiNyuryoku().getBtnSecondMasking();
     }
 
     @JsonIgnore
-    public void  setBtnSecondImageMasking(ButtonDialog btnSecondImageMasking) {
-        this.getTokkiNyuryoku().setBtnSecondImageMasking(btnSecondImageMasking);
+    public void  setBtnSecondMasking(ButtonDialog btnSecondMasking) {
+        this.getTokkiNyuryoku().setBtnSecondMasking(btnSecondMasking);
     }
 
     @JsonIgnore
@@ -322,6 +352,21 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtThirdTokkiJikoMeisho() {
         return this.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getThirdSpace() {
+        return this.getTokkiNyuryoku().getTblThirdTokkiJiko().getThirdSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkThirdChosaDelete() {
+        return this.getTokkiNyuryoku().getTblThirdTokkiJiko().getChkThirdChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblThirdMaskExist() {
+        return this.getTokkiNyuryoku().getTblThirdTokkiJiko().getLblThirdMaskExist();
     }
 
     @JsonIgnore
@@ -365,13 +410,13 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnThirdImageMasking() {
-        return this.getTokkiNyuryoku().getBtnThirdImageMasking();
+    public ButtonDialog getBtnThirdMasking() {
+        return this.getTokkiNyuryoku().getBtnThirdMasking();
     }
 
     @JsonIgnore
-    public void  setBtnThirdImageMasking(ButtonDialog btnThirdImageMasking) {
-        this.getTokkiNyuryoku().setBtnThirdImageMasking(btnThirdImageMasking);
+    public void  setBtnThirdMasking(ButtonDialog btnThirdMasking) {
+        this.getTokkiNyuryoku().setBtnThirdMasking(btnThirdMasking);
     }
 
     @JsonIgnore
@@ -402,6 +447,21 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtFourthTokkiJikoMeisho() {
         return this.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFourthSpace() {
+        return this.getTokkiNyuryoku().getTblFourthTokkiJiko().getFourthSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFourthChosaDelete() {
+        return this.getTokkiNyuryoku().getTblFourthTokkiJiko().getChkFourthChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFourthMaskExist() {
+        return this.getTokkiNyuryoku().getTblFourthTokkiJiko().getLblFourthMaskExist();
     }
 
     @JsonIgnore
@@ -445,13 +505,13 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnFourthImageMasking() {
-        return this.getTokkiNyuryoku().getBtnFourthImageMasking();
+    public ButtonDialog getBtnFourthMasking() {
+        return this.getTokkiNyuryoku().getBtnFourthMasking();
     }
 
     @JsonIgnore
-    public void  setBtnFourthImageMasking(ButtonDialog btnFourthImageMasking) {
-        this.getTokkiNyuryoku().setBtnFourthImageMasking(btnFourthImageMasking);
+    public void  setBtnFourthMasking(ButtonDialog btnFourthMasking) {
+        this.getTokkiNyuryoku().setBtnFourthMasking(btnFourthMasking);
     }
 
     @JsonIgnore
@@ -482,6 +542,21 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtFifthTokkiJikoMeisho() {
         return this.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFifthSpace() {
+        return this.getTokkiNyuryoku().getTblFifthTokkiJiko().getFifthSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFifthChosaDelete() {
+        return this.getTokkiNyuryoku().getTblFifthTokkiJiko().getChkFifthChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFifthMaskExist() {
+        return this.getTokkiNyuryoku().getTblFifthTokkiJiko().getLblFifthMaskExist();
     }
 
     @JsonIgnore
@@ -525,13 +600,13 @@ public class GaikyoTokkiYichiranNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnFifthImageMasking() {
-        return this.getTokkiNyuryoku().getBtnFifthImageMasking();
+    public ButtonDialog getBtnFifthMasking() {
+        return this.getTokkiNyuryoku().getBtnFifthMasking();
     }
 
     @JsonIgnore
-    public void  setBtnFifthImageMasking(ButtonDialog btnFifthImageMasking) {
-        this.getTokkiNyuryoku().setBtnFifthImageMasking(btnFifthImageMasking);
+    public void  setBtnFifthMasking(ButtonDialog btnFifthMasking) {
+        this.getTokkiNyuryoku().setBtnFifthMasking(btnFifthMasking);
     }
 
     @JsonIgnore

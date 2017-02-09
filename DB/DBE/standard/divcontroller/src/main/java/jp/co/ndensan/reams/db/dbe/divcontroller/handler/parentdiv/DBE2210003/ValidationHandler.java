@@ -11,11 +11,17 @@ import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDivSpec;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -126,6 +132,101 @@ public class ValidationHandler {
             }
         }
 
+        return validPairs;
+    }
+    
+    /**
+     * 特記事項1の必須入力チェックを行います。
+     *
+     * @param validPairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor特記事項1の必須入力(ValidationMessageControlPairs validPairs, GaikyoTokkiYichiranNyurokuDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        RRVMessages message = new RRVMessages((UrErrorMessages.未入力), "特記事項");
+        messages.add(ValidateChain.validateStart(div).ifNot(GaikyoTokkiYichiranNyurokuDivSpec.特記事項1の非空チェック)
+                .thenAdd(message).messages());
+        validPairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                message,
+                div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko()).build().check(messages));
+        return validPairs;
+    }
+    
+    /**
+     * 特記事項2の必須入力チェックを行います。
+     *
+     * @param validPairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor特記事項2の必須入力(ValidationMessageControlPairs validPairs, GaikyoTokkiYichiranNyurokuDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        RRVMessages message = new RRVMessages((UrErrorMessages.未入力), "特記事項");
+        messages.add(ValidateChain.validateStart(div).ifNot(GaikyoTokkiYichiranNyurokuDivSpec.特記事項2の非空チェック)
+                .thenAdd(message).messages());
+        validPairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                message,
+                div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko()).build().check(messages));
+        return validPairs;
+    }
+    
+    /**
+     * 特記事項3の必須入力チェックを行います。
+     *
+     * @param validPairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor特記事項3の必須入力(ValidationMessageControlPairs validPairs, GaikyoTokkiYichiranNyurokuDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        RRVMessages message = new RRVMessages((UrErrorMessages.未入力), "特記事項");
+        messages.add(ValidateChain.validateStart(div).ifNot(GaikyoTokkiYichiranNyurokuDivSpec.特記事項3の非空チェック)
+                .thenAdd(message).messages());
+        validPairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                message,
+                div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko()).build().check(messages));
+        return validPairs;
+    }
+    
+    /**
+     * 特記事項4の必須入力チェックを行います。
+     *
+     * @param validPairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor特記事項4の必須入力(ValidationMessageControlPairs validPairs, GaikyoTokkiYichiranNyurokuDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        RRVMessages message = new RRVMessages((UrErrorMessages.未入力), "特記事項");
+        messages.add(ValidateChain.validateStart(div).ifNot(GaikyoTokkiYichiranNyurokuDivSpec.特記事項4の非空チェック)
+                .thenAdd(message).messages());
+        validPairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                message,
+                div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko()).build().check(messages));
+        return validPairs;
+    }
+    
+    /**
+     * 特記事項5の必須入力チェックを行います。
+     *
+     * @param validPairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor特記事項5の必須入力(ValidationMessageControlPairs validPairs, GaikyoTokkiYichiranNyurokuDiv div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        RRVMessages message = new RRVMessages((UrErrorMessages.未入力), "特記事項");
+        messages.add(ValidateChain.validateStart(div).ifNot(GaikyoTokkiYichiranNyurokuDivSpec.特記事項5の非空チェック)
+                .thenAdd(message).messages());
+        validPairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                message,
+                div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko()).build().check(messages));
         return validPairs;
     }
 

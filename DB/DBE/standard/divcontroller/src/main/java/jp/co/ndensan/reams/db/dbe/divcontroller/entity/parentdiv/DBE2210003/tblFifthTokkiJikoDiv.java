@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblFifthTokkiJikoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -62,6 +62,21 @@ public class tblFifthTokkiJikoDiv extends TablePanel {
     @JsonIgnore
     public TextBox getTxtFifthTokkiJikoMeisho() {
         return this.celTableCell37.getTxtFifthTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFifthSpace() {
+        return this.celTableCell37.getFifthSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFifthChosaDelete() {
+        return this.celTableCell37.getChkFifthChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFifthMaskExist() {
+        return this.celTableCell37.getLblFifthMaskExist();
     }
 
     @JsonIgnore
@@ -232,7 +247,7 @@ public class tblFifthTokkiJikoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell34AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFifthChosaKomokuNo")
     private TextBox txtFifthChosaKomokuNo;
 
@@ -262,7 +277,7 @@ class celTableCell34AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell35AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("lblFifthHyphen")
     private Label lblFifthHyphen;
 
@@ -292,7 +307,7 @@ class celTableCell35AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell36AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFifthTokkiRenban")
     private TextBoxNum txtFifthTokkiRenban;
 
@@ -322,9 +337,15 @@ class celTableCell36AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell37AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFifthTokkiJikoMeisho")
     private TextBox txtFifthTokkiJikoMeisho;
+    @JsonProperty("FifthSpace")
+    private Space FifthSpace;
+    @JsonProperty("chkFifthChosaDelete")
+    private CheckBoxList chkFifthChosaDelete;
+    @JsonProperty("lblFifthMaskExist")
+    private Label lblFifthMaskExist;
 
     /*
      * gettxtFifthTokkiJikoMeisho
@@ -344,6 +365,60 @@ class celTableCell37AttblFifthTokkiJiko extends TableCell {
         this.txtFifthTokkiJikoMeisho = txtFifthTokkiJikoMeisho;
     }
 
+    /*
+     * getFifthSpace
+     * @return FifthSpace
+     */
+    @JsonProperty("FifthSpace")
+    public Space getFifthSpace() {
+        return FifthSpace;
+    }
+
+    /*
+     * setFifthSpace
+     * @param FifthSpace FifthSpace
+     */
+    @JsonProperty("FifthSpace")
+    public void setFifthSpace(Space FifthSpace) {
+        this.FifthSpace = FifthSpace;
+    }
+
+    /*
+     * getchkFifthChosaDelete
+     * @return chkFifthChosaDelete
+     */
+    @JsonProperty("chkFifthChosaDelete")
+    public CheckBoxList getChkFifthChosaDelete() {
+        return chkFifthChosaDelete;
+    }
+
+    /*
+     * setchkFifthChosaDelete
+     * @param chkFifthChosaDelete chkFifthChosaDelete
+     */
+    @JsonProperty("chkFifthChosaDelete")
+    public void setChkFifthChosaDelete(CheckBoxList chkFifthChosaDelete) {
+        this.chkFifthChosaDelete = chkFifthChosaDelete;
+    }
+
+    /*
+     * getlblFifthMaskExist
+     * @return lblFifthMaskExist
+     */
+    @JsonProperty("lblFifthMaskExist")
+    public Label getLblFifthMaskExist() {
+        return lblFifthMaskExist;
+    }
+
+    /*
+     * setlblFifthMaskExist
+     * @param lblFifthMaskExist lblFifthMaskExist
+     */
+    @JsonProperty("lblFifthMaskExist")
+    public void setLblFifthMaskExist(Label lblFifthMaskExist) {
+        this.lblFifthMaskExist = lblFifthMaskExist;
+    }
+
     // </editor-fold>
 }
 /**
@@ -352,7 +427,7 @@ class celTableCell37AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell38AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -362,7 +437,7 @@ class celTableCell38AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell39AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("txtFifthTokkiJiko")
     private TextBoxMultiLine txtFifthTokkiJiko;
 
@@ -392,7 +467,7 @@ class celTableCell39AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell40AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
 
     // </editor-fold>
 }
@@ -402,7 +477,7 @@ class celTableCell40AttblFifthTokkiJiko extends TableCell {
  * @author 自動生成
  */
 class celTableCell41AttblFifthTokkiJiko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     @JsonProperty("imgFifthTokkiJiko")
     private StaticImage imgFifthTokkiJiko;
 

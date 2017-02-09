@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokkiNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +31,8 @@ public class TokkiNyuryokuDiv extends Panel {
     private ButtonDialog btnFirstTokkiJikoTeikeibun;
     @JsonProperty("spSpace11")
     private Space spSpace11;
-    @JsonProperty("btnFirstImageMasking")
-    private ButtonDialog btnFirstImageMasking;
+    @JsonProperty("btnFirstMasking")
+    private ButtonDialog btnFirstMasking;
     @JsonProperty("tblSecondTokkiJiko")
     private tblSecondTokkiJikoDiv tblSecondTokkiJiko;
     @JsonProperty("spSpace2")
@@ -41,8 +41,8 @@ public class TokkiNyuryokuDiv extends Panel {
     private ButtonDialog btnSecondTokkiJikoTeikeibun;
     @JsonProperty("spSpace21")
     private Space spSpace21;
-    @JsonProperty("btnSecondImageMasking")
-    private ButtonDialog btnSecondImageMasking;
+    @JsonProperty("btnSecondMasking")
+    private ButtonDialog btnSecondMasking;
     @JsonProperty("tblThirdTokkiJiko")
     private tblThirdTokkiJikoDiv tblThirdTokkiJiko;
     @JsonProperty("spSpace3")
@@ -51,8 +51,8 @@ public class TokkiNyuryokuDiv extends Panel {
     private ButtonDialog btnThirdTokkiJikoTeikeibun;
     @JsonProperty("spSpace31")
     private Space spSpace31;
-    @JsonProperty("btnThirdImageMasking")
-    private ButtonDialog btnThirdImageMasking;
+    @JsonProperty("btnThirdMasking")
+    private ButtonDialog btnThirdMasking;
     @JsonProperty("tblFourthTokkiJiko")
     private tblFourthTokkiJikoDiv tblFourthTokkiJiko;
     @JsonProperty("spSpace4")
@@ -61,8 +61,8 @@ public class TokkiNyuryokuDiv extends Panel {
     private ButtonDialog btnFourthTokkiJikoTeikeibun;
     @JsonProperty("spSpace41")
     private Space spSpace41;
-    @JsonProperty("btnFourthImageMasking")
-    private ButtonDialog btnFourthImageMasking;
+    @JsonProperty("btnFourthMasking")
+    private ButtonDialog btnFourthMasking;
     @JsonProperty("tblFifthTokkiJiko")
     private tblFifthTokkiJikoDiv tblFifthTokkiJiko;
     @JsonProperty("spSpace5")
@@ -71,8 +71,8 @@ public class TokkiNyuryokuDiv extends Panel {
     private ButtonDialog btnFifthTokkiJikoTeikeibun;
     @JsonProperty("spSpace51")
     private Space spSpace51;
-    @JsonProperty("btnFifthImageMasking")
-    private ButtonDialog btnFifthImageMasking;
+    @JsonProperty("btnFifthMasking")
+    private ButtonDialog btnFifthMasking;
     @JsonProperty("btnBeforeTokkiJiko")
     private Button btnBeforeTokkiJiko;
     @JsonProperty("lblTokkiJikoPage")
@@ -109,6 +109,16 @@ public class TokkiNyuryokuDiv extends Panel {
     private RString hiddenOriginalGaikyoTokkiNyurokuMap;
     @JsonProperty("hiddenOriginalGaikyoTokkiNyurokuMap_MASK")
     private RString hiddenOriginalGaikyoTokkiNyurokuMap_MASK;
+    @JsonProperty("hiddenIsDeleteFirstTokki")
+    private RString hiddenIsDeleteFirstTokki;
+    @JsonProperty("hiddenIsDeleteSecondTokki")
+    private RString hiddenIsDeleteSecondTokki;
+    @JsonProperty("hiddenIsDeleteThirdTokki")
+    private RString hiddenIsDeleteThirdTokki;
+    @JsonProperty("hiddenIsDeleteFourthTokki")
+    private RString hiddenIsDeleteFourthTokki;
+    @JsonProperty("hiddenIsDeleteFifthTokki")
+    private RString hiddenIsDeleteFifthTokki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -189,21 +199,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnFirstImageMasking
-     * @return btnFirstImageMasking
+     * getbtnFirstMasking
+     * @return btnFirstMasking
      */
-    @JsonProperty("btnFirstImageMasking")
-    public ButtonDialog getBtnFirstImageMasking() {
-        return btnFirstImageMasking;
+    @JsonProperty("btnFirstMasking")
+    public ButtonDialog getBtnFirstMasking() {
+        return btnFirstMasking;
     }
 
     /*
-     * setbtnFirstImageMasking
-     * @param btnFirstImageMasking btnFirstImageMasking
+     * setbtnFirstMasking
+     * @param btnFirstMasking btnFirstMasking
      */
-    @JsonProperty("btnFirstImageMasking")
-    public void setBtnFirstImageMasking(ButtonDialog btnFirstImageMasking) {
-        this.btnFirstImageMasking = btnFirstImageMasking;
+    @JsonProperty("btnFirstMasking")
+    public void setBtnFirstMasking(ButtonDialog btnFirstMasking) {
+        this.btnFirstMasking = btnFirstMasking;
     }
 
     /*
@@ -279,21 +289,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnSecondImageMasking
-     * @return btnSecondImageMasking
+     * getbtnSecondMasking
+     * @return btnSecondMasking
      */
-    @JsonProperty("btnSecondImageMasking")
-    public ButtonDialog getBtnSecondImageMasking() {
-        return btnSecondImageMasking;
+    @JsonProperty("btnSecondMasking")
+    public ButtonDialog getBtnSecondMasking() {
+        return btnSecondMasking;
     }
 
     /*
-     * setbtnSecondImageMasking
-     * @param btnSecondImageMasking btnSecondImageMasking
+     * setbtnSecondMasking
+     * @param btnSecondMasking btnSecondMasking
      */
-    @JsonProperty("btnSecondImageMasking")
-    public void setBtnSecondImageMasking(ButtonDialog btnSecondImageMasking) {
-        this.btnSecondImageMasking = btnSecondImageMasking;
+    @JsonProperty("btnSecondMasking")
+    public void setBtnSecondMasking(ButtonDialog btnSecondMasking) {
+        this.btnSecondMasking = btnSecondMasking;
     }
 
     /*
@@ -369,21 +379,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnThirdImageMasking
-     * @return btnThirdImageMasking
+     * getbtnThirdMasking
+     * @return btnThirdMasking
      */
-    @JsonProperty("btnThirdImageMasking")
-    public ButtonDialog getBtnThirdImageMasking() {
-        return btnThirdImageMasking;
+    @JsonProperty("btnThirdMasking")
+    public ButtonDialog getBtnThirdMasking() {
+        return btnThirdMasking;
     }
 
     /*
-     * setbtnThirdImageMasking
-     * @param btnThirdImageMasking btnThirdImageMasking
+     * setbtnThirdMasking
+     * @param btnThirdMasking btnThirdMasking
      */
-    @JsonProperty("btnThirdImageMasking")
-    public void setBtnThirdImageMasking(ButtonDialog btnThirdImageMasking) {
-        this.btnThirdImageMasking = btnThirdImageMasking;
+    @JsonProperty("btnThirdMasking")
+    public void setBtnThirdMasking(ButtonDialog btnThirdMasking) {
+        this.btnThirdMasking = btnThirdMasking;
     }
 
     /*
@@ -459,21 +469,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnFourthImageMasking
-     * @return btnFourthImageMasking
+     * getbtnFourthMasking
+     * @return btnFourthMasking
      */
-    @JsonProperty("btnFourthImageMasking")
-    public ButtonDialog getBtnFourthImageMasking() {
-        return btnFourthImageMasking;
+    @JsonProperty("btnFourthMasking")
+    public ButtonDialog getBtnFourthMasking() {
+        return btnFourthMasking;
     }
 
     /*
-     * setbtnFourthImageMasking
-     * @param btnFourthImageMasking btnFourthImageMasking
+     * setbtnFourthMasking
+     * @param btnFourthMasking btnFourthMasking
      */
-    @JsonProperty("btnFourthImageMasking")
-    public void setBtnFourthImageMasking(ButtonDialog btnFourthImageMasking) {
-        this.btnFourthImageMasking = btnFourthImageMasking;
+    @JsonProperty("btnFourthMasking")
+    public void setBtnFourthMasking(ButtonDialog btnFourthMasking) {
+        this.btnFourthMasking = btnFourthMasking;
     }
 
     /*
@@ -549,21 +559,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnFifthImageMasking
-     * @return btnFifthImageMasking
+     * getbtnFifthMasking
+     * @return btnFifthMasking
      */
-    @JsonProperty("btnFifthImageMasking")
-    public ButtonDialog getBtnFifthImageMasking() {
-        return btnFifthImageMasking;
+    @JsonProperty("btnFifthMasking")
+    public ButtonDialog getBtnFifthMasking() {
+        return btnFifthMasking;
     }
 
     /*
-     * setbtnFifthImageMasking
-     * @param btnFifthImageMasking btnFifthImageMasking
+     * setbtnFifthMasking
+     * @param btnFifthMasking btnFifthMasking
      */
-    @JsonProperty("btnFifthImageMasking")
-    public void setBtnFifthImageMasking(ButtonDialog btnFifthImageMasking) {
-        this.btnFifthImageMasking = btnFifthImageMasking;
+    @JsonProperty("btnFifthMasking")
+    public void setBtnFifthMasking(ButtonDialog btnFifthMasking) {
+        this.btnFifthMasking = btnFifthMasking;
     }
 
     /*
@@ -891,6 +901,96 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     /*
+     * gethiddenIsDeleteFirstTokki
+     * @return hiddenIsDeleteFirstTokki
+     */
+    @JsonProperty("hiddenIsDeleteFirstTokki")
+    public RString getHiddenIsDeleteFirstTokki() {
+        return hiddenIsDeleteFirstTokki;
+    }
+
+    /*
+     * sethiddenIsDeleteFirstTokki
+     * @param hiddenIsDeleteFirstTokki hiddenIsDeleteFirstTokki
+     */
+    @JsonProperty("hiddenIsDeleteFirstTokki")
+    public void setHiddenIsDeleteFirstTokki(RString hiddenIsDeleteFirstTokki) {
+        this.hiddenIsDeleteFirstTokki = hiddenIsDeleteFirstTokki;
+    }
+
+    /*
+     * gethiddenIsDeleteSecondTokki
+     * @return hiddenIsDeleteSecondTokki
+     */
+    @JsonProperty("hiddenIsDeleteSecondTokki")
+    public RString getHiddenIsDeleteSecondTokki() {
+        return hiddenIsDeleteSecondTokki;
+    }
+
+    /*
+     * sethiddenIsDeleteSecondTokki
+     * @param hiddenIsDeleteSecondTokki hiddenIsDeleteSecondTokki
+     */
+    @JsonProperty("hiddenIsDeleteSecondTokki")
+    public void setHiddenIsDeleteSecondTokki(RString hiddenIsDeleteSecondTokki) {
+        this.hiddenIsDeleteSecondTokki = hiddenIsDeleteSecondTokki;
+    }
+
+    /*
+     * gethiddenIsDeleteThirdTokki
+     * @return hiddenIsDeleteThirdTokki
+     */
+    @JsonProperty("hiddenIsDeleteThirdTokki")
+    public RString getHiddenIsDeleteThirdTokki() {
+        return hiddenIsDeleteThirdTokki;
+    }
+
+    /*
+     * sethiddenIsDeleteThirdTokki
+     * @param hiddenIsDeleteThirdTokki hiddenIsDeleteThirdTokki
+     */
+    @JsonProperty("hiddenIsDeleteThirdTokki")
+    public void setHiddenIsDeleteThirdTokki(RString hiddenIsDeleteThirdTokki) {
+        this.hiddenIsDeleteThirdTokki = hiddenIsDeleteThirdTokki;
+    }
+
+    /*
+     * gethiddenIsDeleteFourthTokki
+     * @return hiddenIsDeleteFourthTokki
+     */
+    @JsonProperty("hiddenIsDeleteFourthTokki")
+    public RString getHiddenIsDeleteFourthTokki() {
+        return hiddenIsDeleteFourthTokki;
+    }
+
+    /*
+     * sethiddenIsDeleteFourthTokki
+     * @param hiddenIsDeleteFourthTokki hiddenIsDeleteFourthTokki
+     */
+    @JsonProperty("hiddenIsDeleteFourthTokki")
+    public void setHiddenIsDeleteFourthTokki(RString hiddenIsDeleteFourthTokki) {
+        this.hiddenIsDeleteFourthTokki = hiddenIsDeleteFourthTokki;
+    }
+
+    /*
+     * gethiddenIsDeleteFifthTokki
+     * @return hiddenIsDeleteFifthTokki
+     */
+    @JsonProperty("hiddenIsDeleteFifthTokki")
+    public RString getHiddenIsDeleteFifthTokki() {
+        return hiddenIsDeleteFifthTokki;
+    }
+
+    /*
+     * sethiddenIsDeleteFifthTokki
+     * @param hiddenIsDeleteFifthTokki hiddenIsDeleteFifthTokki
+     */
+    @JsonProperty("hiddenIsDeleteFifthTokki")
+    public void setHiddenIsDeleteFifthTokki(RString hiddenIsDeleteFifthTokki) {
+        this.hiddenIsDeleteFifthTokki = hiddenIsDeleteFifthTokki;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -911,6 +1011,21 @@ public class TokkiNyuryokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtFirstChosaKomokuMeisho() {
         return this.getTblFirstTokkiJiko().getTxtFirstChosaKomokuMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFirstSpace() {
+        return this.getTblFirstTokkiJiko().getFirstSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFirstChosaDelete() {
+        return this.getTblFirstTokkiJiko().getChkFirstChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFirstMaskExist() {
+        return this.getTblFirstTokkiJiko().getLblFirstMaskExist();
     }
 
     @JsonIgnore
@@ -944,6 +1059,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Space getSecondSpace() {
+        return this.getTblSecondTokkiJiko().getSecondSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkSecondChosaDelete() {
+        return this.getTblSecondTokkiJiko().getChkSecondChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblSecondMaskExist() {
+        return this.getTblSecondTokkiJiko().getLblSecondMaskExist();
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtSecondTokkiJiko() {
         return this.getTblSecondTokkiJiko().getTxtSecondTokkiJiko();
     }
@@ -971,6 +1101,21 @@ public class TokkiNyuryokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtThirdTokkiJikoMeisho() {
         return this.getTblThirdTokkiJiko().getTxtThirdTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getThirdSpace() {
+        return this.getTblThirdTokkiJiko().getThirdSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkThirdChosaDelete() {
+        return this.getTblThirdTokkiJiko().getChkThirdChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblThirdMaskExist() {
+        return this.getTblThirdTokkiJiko().getLblThirdMaskExist();
     }
 
     @JsonIgnore
@@ -1004,6 +1149,21 @@ public class TokkiNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public Space getFourthSpace() {
+        return this.getTblFourthTokkiJiko().getFourthSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFourthChosaDelete() {
+        return this.getTblFourthTokkiJiko().getChkFourthChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFourthMaskExist() {
+        return this.getTblFourthTokkiJiko().getLblFourthMaskExist();
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtFourthTokkiJiko() {
         return this.getTblFourthTokkiJiko().getTxtFourthTokkiJiko();
     }
@@ -1031,6 +1191,21 @@ public class TokkiNyuryokuDiv extends Panel {
     @JsonIgnore
     public TextBox getTxtFifthTokkiJikoMeisho() {
         return this.getTblFifthTokkiJiko().getTxtFifthTokkiJikoMeisho();
+    }
+
+    @JsonIgnore
+    public Space getFifthSpace() {
+        return this.getTblFifthTokkiJiko().getFifthSpace();
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkFifthChosaDelete() {
+        return this.getTblFifthTokkiJiko().getChkFifthChosaDelete();
+    }
+
+    @JsonIgnore
+    public Label getLblFifthMaskExist() {
+        return this.getTblFifthTokkiJiko().getLblFifthMaskExist();
     }
 
     @JsonIgnore

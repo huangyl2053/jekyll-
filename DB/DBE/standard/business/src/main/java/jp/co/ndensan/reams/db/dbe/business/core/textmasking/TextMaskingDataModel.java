@@ -27,4 +27,6 @@ public class TextMaskingDataModel implements Serializable {
     private int 特記連番;
     private RString 調査項目名称;
     private Map<RString, RString> 特記事項_マッピング;
+    private Map<RString, Boolean> 削除_マッピング;
+    private boolean isExistData;
 }

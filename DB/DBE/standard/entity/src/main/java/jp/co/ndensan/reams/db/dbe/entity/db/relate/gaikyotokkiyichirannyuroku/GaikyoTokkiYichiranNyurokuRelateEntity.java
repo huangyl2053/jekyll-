@@ -28,8 +28,7 @@ public class GaikyoTokkiYichiranNyurokuRelateEntity implements Serializable {
     private RString temp_特記事項;
     private RString temp_特記事項イメージ共有ファイルID;
     private RString temp_特記事項名称;
-    private RString temp_新規区分;
-    private RString temp_編集区分;
+    private boolean isDelete;
 
     /**
      * コンストラクタです。
@@ -42,8 +41,7 @@ public class GaikyoTokkiYichiranNyurokuRelateEntity implements Serializable {
      * @param temp_特記事項 temp_特記事項
      * @param temp_特記事項イメージ共有ファイルID temp_特記事項イメージ共有ファイルID
      * @param temp_特記事項名称 temp_特記事項名称
-     * @param temp_新規区分 temp_新規区分
-     * @param temp_編集区分 temp_編集区分
+     * @param isDelete 削除フラグ
      */
     public GaikyoTokkiYichiranNyurokuRelateEntity(
             RString temp_レコードNO,
@@ -54,8 +52,7 @@ public class GaikyoTokkiYichiranNyurokuRelateEntity implements Serializable {
             RString temp_特記事項,
             RString temp_特記事項イメージ共有ファイルID,
             RString temp_特記事項名称,
-            RString temp_新規区分,
-            RString temp_編集区分) {
+            boolean isDelete) {
         this.temp_レコードNO = temp_レコードNO;
         this.temp_認定調査特記事項番号 = temp_認定調査特記事項番号;
         this.temp_認定調査特記事項連番 = temp_認定調査特記事項連番;
@@ -64,7 +61,6 @@ public class GaikyoTokkiYichiranNyurokuRelateEntity implements Serializable {
         this.temp_特記事項 = temp_特記事項;
         this.temp_特記事項イメージ共有ファイルID = temp_特記事項イメージ共有ファイルID;
         this.temp_特記事項名称 = temp_特記事項名称;
-        this.temp_新規区分 = temp_新規区分;
-        this.temp_編集区分 = temp_編集区分;
+        this.isDelete = isDelete;
     }
 }
