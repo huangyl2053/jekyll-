@@ -11,6 +11,7 @@
             A."shinseiYMD" AS "shinseiYMD",
             A."hihokenshaNo" AS "hihokenshaNo",
             A."csvData" AS "csvData"
+            A."lineNum" AS "lineNum"
         FROM
             &quot;${tempTableName}&quot; AS A
         ORDER BY
@@ -28,5 +29,6 @@
         <id property="shinseiYMD" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="csvData" column="csvData" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="lineNum" column="lineNum"/>
     </resultMap>
 </mapper>
