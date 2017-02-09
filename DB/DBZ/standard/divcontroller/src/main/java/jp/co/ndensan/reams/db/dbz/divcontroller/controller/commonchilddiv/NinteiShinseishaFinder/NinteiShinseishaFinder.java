@@ -185,21 +185,13 @@ public class NinteiShinseishaFinder {
      * @return ResponseData
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_ddlNowPhase(NinteiShinseishaFinderDiv div) {
-        getHandler(div).init完了情報();
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
         if (RString.isNullOrEmpty(nowPhase)) {
-            getHandler(div).set完了情報未選択();
+            getHandler(div).clearKanryoJoho();
+            getHandler(div).setAbledKanryoJoho();
         } else {
-            div.getChkIchijiHantei().setDisabled(true);
-            div.getChkShinseiUketsuke().setDisabled(true);
-            div.getChkMasking().setDisabled(true);
-            div.getChkChosaIrai().setDisabled(true);
-            div.getChkShinsakaiToroku().setDisabled(true);
-            div.getChkIkenshoIrai().setDisabled(true);
-            div.getChkNijiHantei().setDisabled(true);
-            div.getChkChosaNyushu().setDisabled(true);
-            div.getChkIkenshoNyushu().setDisabled(true);
-            div.getChkGetsureiShori().setDisabled(true);
+            getHandler(div).clearKanryoJoho();
+            getHandler(div).setDisabledKanryoJoho();
             if (KanryoInfoPhase.申請受付.getコード().equals(nowPhase)) {
                 getHandler(div).set申請受付完了情報();
             }

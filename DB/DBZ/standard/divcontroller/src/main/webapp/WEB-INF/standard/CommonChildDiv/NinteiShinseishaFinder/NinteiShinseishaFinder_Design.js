@@ -215,10 +215,6 @@ var DBZ;
                 return new UZA.TextBoxDateRange(this.convFiledName("txtBirthDateRange"));
             };
 
-            Controls.prototype.pnlForDesign = function () {
-                return new UZA.Panel(this.convFiledName("pnlForDesign"));
-            };
-
             Controls.prototype.chkSeibetsu = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             };

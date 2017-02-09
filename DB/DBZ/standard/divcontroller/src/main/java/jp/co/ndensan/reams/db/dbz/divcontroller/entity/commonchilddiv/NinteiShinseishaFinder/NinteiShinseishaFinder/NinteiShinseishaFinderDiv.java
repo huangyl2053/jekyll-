@@ -69,8 +69,8 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     private CheckBoxList chkTennyu;
     @JsonProperty("txtBirthDateRange")
     private TextBoxDateRange txtBirthDateRange;
-    @JsonProperty("pnlForDesign")
-    private pnlForDesignDiv pnlForDesign;
+    @JsonProperty("chkSeibetsu")
+    private CheckBoxList chkSeibetsu;
     @JsonProperty("ccdSaikinShorisha")
     private SaikinShorishaDiv ccdSaikinShorisha;
     @JsonProperty("KanryoJoho")
@@ -292,21 +292,21 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     /*
-     * getpnlForDesign
-     * @return pnlForDesign
+     * getchkSeibetsu
+     * @return chkSeibetsu
      */
-    @JsonProperty("pnlForDesign")
-    public pnlForDesignDiv getPnlForDesign() {
-        return pnlForDesign;
+    @JsonProperty("chkSeibetsu")
+    public CheckBoxList getChkSeibetsu() {
+        return chkSeibetsu;
     }
 
     /*
-     * setpnlForDesign
-     * @param pnlForDesign pnlForDesign
+     * setchkSeibetsu
+     * @param chkSeibetsu chkSeibetsu
      */
-    @JsonProperty("pnlForDesign")
-    public void setPnlForDesign(pnlForDesignDiv pnlForDesign) {
-        this.pnlForDesign = pnlForDesign;
+    @JsonProperty("chkSeibetsu")
+    public void setChkSeibetsu(CheckBoxList chkSeibetsu) {
+        this.chkSeibetsu = chkSeibetsu;
     }
 
     /*
@@ -639,16 +639,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public CheckBoxList getChkSeibetsu() {
-        return this.getPnlForDesign().getChkSeibetsu();
-    }
-
-    @JsonIgnore
-    public void  setChkSeibetsu(CheckBoxList chkSeibetsu) {
-        this.getPnlForDesign().setChkSeibetsu(chkSeibetsu);
-    }
-
     @JsonIgnore
     public DropDownList getDdlNowPhase() {
         return this.getKanryoJoho().getDdlNowPhase();

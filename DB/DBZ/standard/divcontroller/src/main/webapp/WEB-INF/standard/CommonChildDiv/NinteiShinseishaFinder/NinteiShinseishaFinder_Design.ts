@@ -228,10 +228,6 @@ module DBZ {
                 return new UZA.TextBoxDateRange(this.convFiledName("txtBirthDateRange"));
             }
 
-            public pnlForDesign(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("pnlForDesign"));
-            }
-
             public chkSeibetsu(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkSeibetsu"));
             }
