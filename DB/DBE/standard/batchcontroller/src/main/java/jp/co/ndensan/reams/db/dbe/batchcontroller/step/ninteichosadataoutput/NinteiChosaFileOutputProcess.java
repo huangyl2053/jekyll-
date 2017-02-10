@@ -44,7 +44,7 @@ public class NinteiChosaFileOutputProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Other);
         RStringBuilder EUCファイル名称 = new RStringBuilder();
-        EUCファイル名称.append(DbBusinessConfig.get(ConfigNameDBE.認定調査結果入力用データZIPファイル名, RDate.getNowDate(), processParamter.getShichosonCode()))
+        EUCファイル名称.append(DbBusinessConfig.get(ConfigNameDBE.認定調査結果入力用ZIPファイル名称, RDate.getNowDate(), processParamter.getShichosonCode()))
                 .append(underscore).append(processParamter.getAddedFileName()).append(ZIP拡張子);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), EUCファイル名称.toRString());
     }

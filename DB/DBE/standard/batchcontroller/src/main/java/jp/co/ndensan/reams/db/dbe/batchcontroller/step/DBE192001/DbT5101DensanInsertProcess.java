@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101Rel
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -49,6 +50,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     BatchPermanentTableWriter<DbT5129TennyuShiboEntity> dbT5129Writer;
     @BatchWriter
     BatchPermanentTableWriter<DbT5130ShiboEntity> dbT5130Writer;
+    @BatchWriter
+    BatchPermanentTableWriter<DbT5120ShinseitodokedeJohoEntity> dbT5120Writer;
 
     @Override
     protected void initialize() {
@@ -63,6 +66,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         dbT5121Writer = new BatchPermanentTableWriter(DbT5121ShinseiRirekiJohoEntity.class);
         dbT5129Writer = new BatchPermanentTableWriter(DbT5129TennyuShiboEntity.class);
         dbT5130Writer = new BatchPermanentTableWriter(DbT5130ShiboEntity.class);
+        dbT5120Writer = new BatchPermanentTableWriter(DbT5120ShinseitodokedeJohoEntity.class);
     }
 
     @Override
@@ -80,6 +84,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
         dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
         dbT5121Writer.insert(business.getDbT5121Entity(entity));
+        dbT5120Writer.insert(business.getDbT5120Entity(entity, processParamter));
         if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.職権.getコード())) {
             dbT5105Writer.insert(business.getDbT5105Entity(entity, processParamter));
         } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {

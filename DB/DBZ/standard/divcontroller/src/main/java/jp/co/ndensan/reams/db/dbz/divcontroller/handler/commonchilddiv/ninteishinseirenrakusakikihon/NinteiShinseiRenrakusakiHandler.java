@@ -47,8 +47,13 @@ public class NinteiShinseiRenrakusakiHandler {
         if (!kiKihonentityList.isEmpty()) {
             List<KeyValueDataSource> kinyusha = new ArrayList<>();
             for (NinteiShinseiRenrakusakiKihon renrakusakiKihon : kiKihonentityList) {
-                KeyValueDataSource data = new KeyValueDataSource(renrakusakiKihon.get連絡先続柄(),
+                KeyValueDataSource data;
+                if (RString.isNullOrEmpty(renrakusakiKihon.get連絡先続柄())) {
+                    data = new KeyValueDataSource(renrakusakiKihon.get連絡先続柄(), RString.EMPTY);
+                } else {
+                    data = new KeyValueDataSource(renrakusakiKihon.get連絡先続柄(),
                         RensakusakiTsuzukigara.toValue(renrakusakiKihon.get連絡先続柄()).get名称());
+                }
                 kinyusha.add(data);
             }
             div.getDdlTsuzukigara().setDataSource(kinyusha);

@@ -111,7 +111,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     private void outputJokenhyoFactory() {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         RStringBuilder EUCファイル名称 = new RStringBuilder();
-        EUCファイル名称.append(DbBusinessConfig.get(ConfigNameDBE.認定調査結果入力用データZIPファイル名, RDate.getNowDate(), processParamter.getShichosonCode()))
+        EUCファイル名称.append(DbBusinessConfig.get(ConfigNameDBE.認定調査結果入力用ZIPファイル名称, RDate.getNowDate(), processParamter.getShichosonCode()))
                 .append(underscore).append(processParamter.getAddedFileName()).append(ZIP拡張子);
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("認定調査データ出力（モバイル）"),

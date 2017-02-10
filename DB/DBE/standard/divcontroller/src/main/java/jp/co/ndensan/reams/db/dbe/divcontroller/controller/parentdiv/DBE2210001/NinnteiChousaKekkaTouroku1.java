@@ -83,7 +83,7 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onLoad(NinnteiChousaKekkaTouroku1Div div) {
-        if (new RString(UrErrorMessages.不正.getMessage().getCode())
+        if (new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
@@ -103,8 +103,8 @@ public class NinnteiChousaKekkaTouroku1 {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         }
         if (!KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class))) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.不正.getMessage().getCode(),
-                    UrErrorMessages.不正.getMessage().replace("認定ソフトのバージョン").evaluate());
+            ErrorMessage message = new ErrorMessage(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode(),
+                    DbeErrorMessages.認定ソフトバージョンエラー.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
