@@ -48,8 +48,7 @@
         FROM
             <include refid="tablesWithParameter"/>
         ORDER BY
-            DbT5101NinteiShinseiJoho."hihokenshaKana",
-            DbT7051KoseiShichosonMaster."shichosonCode",
+            DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
             DbT5101NinteiShinseiJoho."hihokenshaNo",
             DbT5101NinteiShinseiJoho."ninteiShinseiYMD" DESC
         LIMIT #{limitCount}
@@ -294,7 +293,7 @@
             </if>
         </if>
         <if test="useNinteiKanryoJoho">
-            LEFT JOIN
+            INNER JOIN
                 rgdb."DbT5105NinteiKanryoJoho" DbT5105NinteiKanryoJoho
                 ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5105NinteiKanryoJoho."shinseishoKanriNo"
             <if test="isNowPhaseBlank">
