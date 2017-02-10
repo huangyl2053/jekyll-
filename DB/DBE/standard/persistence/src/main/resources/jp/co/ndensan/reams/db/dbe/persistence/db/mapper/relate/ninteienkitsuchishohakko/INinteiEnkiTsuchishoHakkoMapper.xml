@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1410-010 wangjie2 -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteienkitsuchishohakko.INinteiEnkiTsuchishoHakkoMapper">
+
+    <resultMap id="resultMap_発行対象者一覧情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保番号" column="被保番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="申請区分_申請時_コード" column="申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="氏名カナ" column="氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="延期決定日" column="延期決定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="延期理由" column="延期理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="通知書発行日" column="通知書発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="延期回数" column="延期回数" />
+        <result property="延期見込み期間開始日" column="延期見込み期間開始日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="延期見込み期間終了日" column="延期見込み期間終了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="調査実施日" column="調査実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="意見書受領日" column="意見書受領日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="一次判定日" column="一次判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="審査会予定日" column="審査会予定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="get発行対象者一覧情報_広域"
+            resultMap = "resultMap_発行対象者一覧情報"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoParameter"
+            fetchSize="500">
+        SELECT 
+            T4003."shinseishoKanriNo" AS 申請書管理番号,
+            T4003."hihokenshaNo" AS 被保番号,
+            T4003."shinseiYMD" AS 認定申請年月日,
+            A."ninteiShinseiShinseijiKubunCode" AS 申請区分_申請時_コード,
+            A."hihokenshaName" AS 氏名,
+            A."hihokenshaKana" AS 氏名カナ,
+            A."enkiKetteiYMD" AS 延期決定日,
+            A."enkiRiyu" AS 延期理由,
+            A."enkiTsuchiHakkoYMD" AS 通知書発行日,
+            A."enkiTsuchiHakkoKaisu" AS 延期回数,
+            A."enkiMikomiKaishiYMD" AS 延期見込み期間開始日,
+            A."enkiMikomiShuryoYMD" AS 延期見込み期間終了日,
+            T4003."chosaShuryoYMD" AS 調査実施日,
+            T4003."ikenshoToriyoseYMD" AS 意見書受領日,
+            T4003."ichijiHanteiYMD" AS 一次判定日,
+            T4003."shinsakaiYoteiYMD" AS 審査会予定日,
+            T7051."shichosonMeisho" AS 保険者名
+        FROM 
+            rgdb."DbT4003YokaigoNinteiInterface" AS T4003
+        INNER JOIN rgdb."DbT4001JukyushaDaicho" T4001
+             ON T4001."hihokenshaNo" = T4003."hihokenshaNo"
+             AND T4001."shinseishoKanriNo" = T4003."shinseishoKanriNo"
+             AND T4001."rirekiNo" = T4003."rirekiNo"
+             AND T4001."logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT4101NinteiShinseiJoho" A
+             ON T4001."shinseishoKanriNo" = A."shinseishoKanriNo"
+                AND A."logicalDeletedFlag" = FALSE
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
+             ON A."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
+        WHERE
+            A."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請年月日}
+        <include refid="検索条件" />
+        ORDER BY
+            A."hihokenshaKana",A."ninteiShinseiYMD"
+    </select>
+
+    <select resultOrdered="true" id="get発行対象者一覧情報_単一"
+            resultMap = "resultMap_発行対象者一覧情報"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoParameter"
+            fetchSize="500">
+        SELECT 
+            A."shinseishoKanriNo" AS 申請書管理番号,
+            A."hihokenshaNo" AS 被保番号,
+            A."ninteiShinseiYMD" AS 認定申請年月日,
+            A."ninteiShinseiShinseijiKubunCode" AS 申請区分_申請時_コード,
+            A."hihokenshaName" AS 氏名,
+            A."hihokenshaKana" AS 氏名カナ,
+            A."enkiKetteiYMD" AS 延期決定日,
+            A."enkiRiyu" AS 延期理由,
+            A."enkiTsuchiHakkoYMD" AS 通知書発行日,
+            A."enkiTsuchiHakkoKaisu" AS 延期回数,
+            A."enkiMikomiKaishiYMD" AS 延期見込み期間開始日,
+            A."enkiMikomiShuryoYMD" AS 延期見込み期間終了日,
+            B."ninteichosaJisshiYMD" AS 調査実施日,
+            C."ikenshoJuryoYMD" AS 意見書受領日,
+            D."ichijiHanteiYMD" AS 一次判定日,
+            E."shinsakaiKaisaiYMD" AS 審査会予定日,
+            T7051."shichosonMeisho" AS 保険者名
+        FROM 
+            rgdb."DbT4101NinteiShinseiJoho" AS A
+        LEFT JOIN rgdb."DbT4202NinteichosahyoGaikyoChosa" B
+             ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+             AND B."ninteichosaRirekiNo" = (
+                                            SELECT MAX("ninteichosaRirekiNo")
+                                            FROM rgdb."DbT4202NinteichosahyoGaikyoChosa" B1
+                                            WHERE A."shinseishoKanriNo" = B1."shinseishoKanriNo"
+                                                  AND B1."isDeleted" = FALSE
+                                           )
+        LEFT JOIN rgdb."DbT4302ShujiiIkenshoJoho" C
+             ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                AND C."ikenshoIraiRirekiNo" = (
+                                               SELECT MAX("ikenshoIraiRirekiNo")
+                                               FROM rgdb."DbT4302ShujiiIkenshoJoho"
+                                               WHERE "shinseishoKanriNo" = A."shinseishoKanriNo"
+                                                     AND "isDeleted" = FALSE
+                                              )
+        LEFT JOIN rgdb."DbT4116IchijiHanteiKekkaJoho" D
+             ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" E
+             ON A."shinseishoKanriNo" = E."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" F
+             ON A."shinseishoKanriNo" = F."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
+             ON A."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
+        WHERE 
+            A."logicalDeletedFlag" = FALSE
+            AND F."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+            AND F."ninteiShinsakaiKanryoYMD" IS NULL
+            AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{認定申請年月日}
+            AND A."shinseishoKanriNo" NOT IN(
+                                              SELECT "shinseishoKanriNo" FROM rgdb."DbT4102NinteiKekkaJoho" 
+                                             )
+        <include refid="検索条件" />
+        ORDER BY
+            A."hihokenshaKana",A."ninteiShinseiYMD"
+    </select>
+    
+    <sql id="検索条件">
+        <if test="is申請区分_新規申請のみチェックON">
+            AND  A."ninteiShinseiShinseijiKubunCode" = #{申請区分_新規申請}
+        </if>
+        <if test="is申請区分_更新申請のみチェックON">
+            AND  A."ninteiShinseiShinseijiKubunCode" = #{申請区分_更新申請}
+        </if>
+        <if test="is申請区分_区分変更申請のみチェックON">
+            AND  A."ninteiShinseiShinseijiKubunCode" = #{申請区分_区分変更申請}
+        </if>
+        <if test="is申請区分_新規申請かつ更新申請チェックON">
+            AND  (A."ninteiShinseiShinseijiKubunCode" = #{申請区分_新規申請} OR A."ninteiShinseiShinseijiKubunCode" = #{申請区分_更新申請})
+        </if>
+        <if test="is申請区分_新規申請かつ区分変更申請チェックON">
+            AND  (A."ninteiShinseiShinseijiKubunCode" = #{申請区分_新規申請} OR A."ninteiShinseiShinseijiKubunCode" = #{申請区分_区分変更申請})
+        </if>
+        <if test="is申請区分_更新申請かつ区分変更申請チェックON">
+            AND  (A."ninteiShinseiShinseijiKubunCode" = #{申請区分_更新申請} OR A."ninteiShinseiShinseijiKubunCode" = #{申請区分_区分変更申請})
+        </if>
+        <if test="is発行有無_発行未チェックON">
+            AND  (A."enkiTsuchiHakkoYMD" IS NULL)
+        </if>
+        <if test="is発行有無_発行済チェックON">
+            AND  (A."enkiTsuchiHakkoYMD" IS NOT NULL)
+        </if>
+        AND A."minashiNigoEtcTaishoFlag" = #{みなし２号等対象フラグ}
+        <if test="is処理見込み日Fromが入力">
+            AND  A."enkiMikomiKaishiYMD" <![CDATA[>=]]> #{処理見込み日From}
+        </if>
+        <if test="is処理見込み日Toが入力">
+            AND  A."enkiMikomiShuryoYMD" <![CDATA[<=]]> #{処理見込み日To}
+        </if>
+        <if test="is延期の理由が選択">
+            AND  A."enkiRiyu" = #{延期の理由}
+        </if>
+        <if test="is保険者が選択">
+            AND  T7051."shichosonCode" = #{市町村コード}
+        </if>
+        <if test="is認定調査_調査未チェックON">
+            <if test="is単一">
+                AND  (F."ninteichosaKanryoYMD" IS NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."chosaShuryoYMD" IS NULL
+            </if>
+        </if>
+        <if test="is認定調査_調査済チェックON">
+            <if test="is単一">
+                AND  (F."ninteichosaKanryoYMD" IS NOT NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."chosaShuryoYMD" IS NOT NULL
+            </if>
+        </if>
+        <if test="is意見書受領_受領未チェックON">
+            <if test="is単一">
+                AND  (F."ikenshoTorokuKanryoYMD" IS NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."ikenshoToriyoseYMD" IS NULL
+            </if>
+        </if>
+        <if test="is意見書受領_受領済チェックON">
+            <if test="is単一">
+                AND  (F."ikenshoTorokuKanryoYMD" IS NOT NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."ikenshoToriyoseYMD" IS NOT NULL
+            </if>
+        </if>
+        <if test="is一次判定_判定未チェックON">
+            <if test="is単一">
+                AND  (F."ichijiHanteiKanryoYMD" IS NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."ichijiHanteiYMD" IS NULL
+            </if>
+        </if>
+        <if test="is一次判定_判定済チェックON">
+            <if test="is単一">
+                AND  (F."ichijiHanteiKanryoYMD" IS NOT NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."ichijiHanteiYMD" IS NOT NULL
+            </if>
+        </if>
+        <if test="is審査会割付_割付未チェックON">
+            <if test="is単一">
+                AND  (F."ninteiShinsakaiWariateKanryoYMD" IS NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."shinsakaiYoteiYMD" IS NULL
+            </if>
+        </if>
+        <if test="is審査会割付_割付済チェックON">
+            <if test="is単一">
+                AND  (F."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL)
+            </if>
+            <if test="!is単一">
+                AND  T4003."shinsakaiYoteiYMD" IS NOT NULL
+            </if>
+        </if>
+    </sql>
+
+
+</mapper>
