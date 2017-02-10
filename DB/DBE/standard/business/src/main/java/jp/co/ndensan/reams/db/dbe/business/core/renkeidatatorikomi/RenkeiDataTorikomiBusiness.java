@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
@@ -120,6 +121,7 @@ public class RenkeiDataTorikomiBusiness {
         DbT5912ShujiiJohoEntity dbt5912Entity;
         if (登録フラグ) {
             dbt5912Entity = new DbT5912ShujiiJohoEntity();
+            dbt5912Entity.setSeibetsu(null);
         } else {
             dbt5912Entity = entity.getDbT5912Entity();
         }
@@ -272,7 +274,7 @@ public class RenkeiDataTorikomiBusiness {
         DbT5913ChosainJohoEntity dbt5913Entity;
         if (登録フラグ) {
             dbt5913Entity = new DbT5913ChosainJohoEntity();
-            dbt5913Entity.setSeibetsu(new RString(""));
+            dbt5913Entity.setSeibetsu(null);
         } else {
             dbt5913Entity = entity.getDbT5913Entity();
         }
@@ -744,6 +746,41 @@ public class RenkeiDataTorikomiBusiness {
         return dbt5130Entity;
     }
 
+    /**
+     * DbT5120ShinseitodokedeJohoEntityの設定メソッドです。
+     *
+     * @param entity DbT5101RelateEntity
+     * @param processParamter RenkeiDataTorikomiProcessParamter
+     * @return DbT5120ShinseitodokedeJohoEntity
+     */
+    public DbT5120ShinseitodokedeJohoEntity getDbT5120Entity(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+        DbT5120ShinseitodokedeJohoEntity dbt5120Entity = new DbT5120ShinseitodokedeJohoEntity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        if (processParamter.is厚労省フラグ()) {
+            dbt5120Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+            dbt5120Entity.setShinseiTodokedeDaikoKubunCode(new Code(dbt5101tempEntity.get申請代行区分コード()));
+        } else {
+            dbt5120Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+            dbt5120Entity.setShinseiTodokedeDaikoKubunCode(new Code(dbt5101tempEntity.get申請代行区分コード()));
+            if (ShinseiTodokedeDaikoKubunCode.代行.getCode().equals(dbt5101tempEntity.get申請代行区分コード())) {
+                dbt5120Entity.setShinseiTodokedeshaShimei(dbt5101tempEntity.get申請代行事業者名());
+                dbt5120Entity.setShinseiTodokedeshaKanaShimei(dbt5101tempEntity.get申請代行事業者名カナ());
+            } else {
+                dbt5120Entity.setShinseiTodokedeshaShimei(dbt5101tempEntity.get申請者氏名());
+                dbt5120Entity.setShinseiTodokedeshaKanaShimei(dbt5101tempEntity.get申請者氏名カナ());
+            }
+            dbt5120Entity.setShinseiTodokedeshaTsuzukigara(dbt5101tempEntity.get申請者関係コード());
+            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者郵便番号())) {
+                dbt5120Entity.setShinseiTodokedeshaYubinNo(new YubinNo(dbt5101tempEntity.get申請者郵便番号()));
+            }
+            dbt5120Entity.setShinseiTodokedeshaJusho(dbt5101tempEntity.get申請者住所());
+            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者連絡先())) {
+                dbt5120Entity.setShinseiTodokedeshaTelNo(new TelNo(dbt5101tempEntity.get申請者連絡先()));
+            }
+        }
+        return dbt5120Entity;
+    }
+
     private FlexibleDate setFlexibleDate(RString value, RString config) {
         if (!RString.isNullOrEmpty(value)) {
             return new FlexibleDate(value).plusDay(Integer.parseInt(config.toString()));
@@ -816,7 +853,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setHihokenshaName(getMeisho(dbt5101tempEntity.get氏名()));
         dbt5101Entity.setYubinNo(getYubinNo(dbt5101tempEntity.get郵便番号()));
         dbt5101Entity.setJusho(getAtenaJusho(dbt5101tempEntity.get住所()));
-        dbt5101Entity.setTelNo(getTelNo(dbt5101tempEntity.get本人連絡先1()));
+        dbt5101Entity.setTelNo(getTelNo(dbt5101tempEntity.get本人連絡先2()));
         dbt5101Entity.setZenYokaigoKubunCode(getCode(dbt5101tempEntity.get前回の審査会結果()));
         dbt5101Entity.setZenkaiNinteiYMD(getFlexibleDate(dbt5101tempEntity.get二次判定日()));
         dbt5101Entity.setZenkaiYukoKikanStart(getFlexibleDate(dbt5101tempEntity.get前回の認定有効開始期間()));
@@ -871,7 +908,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5101Entity.setHihokenshaName(getMeisho(dbt5101tempEntity.get氏名()));
         dbt5101Entity.setYubinNo(getYubinNo(dbt5101tempEntity.get郵便番号()));
         dbt5101Entity.setJusho(getAtenaJusho(dbt5101tempEntity.get住所()));
-        dbt5101Entity.setTelNo(getTelNo(dbt5101tempEntity.get本人連絡先1()));
+        dbt5101Entity.setTelNo(getTelNo(dbt5101tempEntity.get本人連絡先2()));
         dbt5101Entity.setZenYokaigoKubunCode(getCode(dbt5101tempEntity.get前回の審査会結果()));
         dbt5101Entity.setZenkaiNinteiYMD(getFlexibleDate(dbt5101tempEntity.get二次判定日()));
         dbt5101Entity.setZenkaiYukoKikanStart(getFlexibleDate(dbt5101tempEntity.get前回の認定有効開始期間()));
