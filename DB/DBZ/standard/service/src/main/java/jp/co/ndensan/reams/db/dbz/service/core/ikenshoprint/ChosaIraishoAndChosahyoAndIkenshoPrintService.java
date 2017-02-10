@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
@@ -65,6 +69,7 @@ import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.SaiChekkuhyoKatamen
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -104,13 +109,28 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 要介護認定調査依頼書を出力します。
      *
      * @param 要介護認定調査依頼書List 要介護認定調査依頼書List
+     * @param 証記載保険者番号
      */
-    public void print要介護認定調査依頼書(List<ChosaIraishoHeadItem> 要介護認定調査依頼書List) {
+    public void print要介護認定調査依頼書(List<ChosaIraishoHeadItem> 要介護認定調査依頼書List, ShoKisaiHokenshaNo 証記載保険者番号) {
         ChosaIraishoProperty property = new ChosaIraishoProperty();
         try (ReportAssembler<ChosaIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate(),
+                        NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate(),
+                        NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            }
             List<ChosaIraishoHeadItem> 要介護認定調査依頼書 = new ArrayList<>();
             for (ChosaIraishoHeadItem item : 要介護認定調査依頼書List) {
                 item = new ChosaIraishoHeadItem(
@@ -172,13 +192,28 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 認定調査依頼一覧表を印刷します。
      *
      * @param bodyItems 認定調査依頼一覧表ボディのITEM
+     * @param 証記載保険者番号
      */
-    public void print認定調査依頼一覧表(List<ChosaIraiIchiranhyoBodyItem> bodyItems) {
+    public void print認定調査依頼一覧表(List<ChosaIraiIchiranhyoBodyItem> bodyItems, ShoKisaiHokenshaNo 証記載保険者番号) {
         ChosaIraiIchiranhyoProperty property = new ChosaIraiIchiranhyoProperty();
         try (ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220002.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220002.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220002.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            }
             List<ChosaIraiIchiranhyoBodyItem> itemList = new ArrayList<>();
             for (ChosaIraiIchiranhyoBodyItem item : bodyItems) {
                 itemList.add(new ChosaIraiIchiranhyoBodyItem(
@@ -408,13 +443,28 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 主治医意見書作成依頼書を印刷します。
      *
      * @param itemlist 主治医意見書作成依頼書のITEMリストです。
+     * @param 証記載保険者番号
      */
-    public void print意見書作成依頼書(List<ShujiiIkenshoSakuseiIraishoItem> itemlist) {
+    public void print意見書作成依頼書(List<ShujiiIkenshoSakuseiIraishoItem> itemlist, ShoKisaiHokenshaNo 証記載保険者番号) {
         ShujiiIkenshoSakuseiIraishoProperty property = new ShujiiIkenshoSakuseiIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoSakuseiIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShujiiIkenshoSakuseiIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            }
             int i = 1;
             for (ShujiiIkenshoSakuseiIraishoItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
@@ -439,13 +489,28 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 意見書作成依頼一覧表を印刷します。
      *
      * @param itemlist 意見書作成依頼一覧表のITEMリストです。
+     * @param 証記載保険者番号
      */
-    public void print意見書作成依頼一覧表(List<IkenshoSakuseiIraiIchiranhyoItem> itemlist) {
+    public void print意見書作成依頼一覧表(List<IkenshoSakuseiIraiIchiranhyoItem> itemlist, ShoKisaiHokenshaNo 証記載保険者番号) {
         IkenshoSakuseiIraiIchiranhyoProperty property = new IkenshoSakuseiIraiIchiranhyoProperty();
         try (ReportAssembler<IkenshoSakuseiIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            }
             for (IkenshoSakuseiIraiIchiranhyoItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
                 item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
@@ -494,13 +559,28 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 介護保険診断命令書を印刷します。
      *
      * @param itemlist 介護保険診断命令書のITEMリストです。
+     * @param 証記載保険者番号
      */
-    public void print介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> itemlist) {
+    public void print介護保険診断命令書(List<KaigohokenShindanMeireishoHeaderItem> itemlist, ShoKisaiHokenshaNo 証記載保険者番号) {
         KaigohokenShindanMeireishoProperty property = new KaigohokenShindanMeireishoProperty();
         try (ReportAssembler<KaigohokenShindanMeireishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            }
             for (KaigohokenShindanMeireishoHeaderItem item : itemlist) {
                 item.setDenshiKoin(ninshoshaSource.denshiKoin);
                 item.setHakkoYMD(item.getHakkoYMD());
@@ -521,16 +601,32 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 介護保険指定医依頼兼主治医意見書提出意見書を印刷します。
      *
      * @param 介護保険指定医依頼兼主治医意見書提出意見書ItemList 介護保険指定医依頼兼主治医意見書提出意見書ItemList
+     * @param 証記載保険者番号
      */
-    public void print介護保険指定医依頼兼主治医意見書提出意見書(List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList) {
+    public void print介護保険指定医依頼兼主治医意見書提出意見書(List<ShujiiIkenshoTeishutsuIraishoItem> 介護保険指定医依頼兼主治医意見書提出意見書ItemList,
+            ShoKisaiHokenshaNo 証記載保険者番号) {
         List<ShujiiIkenshoTeishutsuIraishoReport> list = new ArrayList<>();
         ShujiiIkenshoTeishutsuIraishoProperty property = new ShujiiIkenshoTeishutsuIraishoProperty();
         try (ReportAssembler<ShujiiIkenshoTeishutsuIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            NinshoshaSource ninshosha = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
-                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
+                        FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter, 証記載保険者番号);
+            }
             list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(介護保険指定医依頼兼主治医意見書提出意見書ItemList,
-                    ninshosha)));
+                    ninshoshaSource)));
             for (ShujiiIkenshoTeishutsuIraishoReport report : list) {
                 report.writeBy(reportSourceWriter);
             }

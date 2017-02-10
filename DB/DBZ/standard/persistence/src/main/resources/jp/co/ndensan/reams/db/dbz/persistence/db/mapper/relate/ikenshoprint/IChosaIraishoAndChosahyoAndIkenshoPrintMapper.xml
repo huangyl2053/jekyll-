@@ -63,8 +63,8 @@
         <result property="iryoKikanTelNo" column="iryoKikanTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanFaxNo" column="iryoKikanFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaName" column="hokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ikenshoSakuseiKaisuKubun" column="ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="zaitakuShisetsuKubun" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sakuseiryoSeikyuKubun" column="sakuseiryoSeikyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ishiKubunCode" column="ishiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
@@ -561,6 +561,7 @@
         ,B."ikenshoSakuseiIraiYMD"
         ,B."ikenshoSakuseiKigenYMD"
         ,B."ikenshoIraiKubun"
+        ,B."ishiKubunCode"
         ,C."yubinNo" AS "iryoKikanYubinNo"
         ,C."jusho" AS "iryoKikanJusho"
         ,C."iryoKikanMeisho"
@@ -713,8 +714,7 @@
         ,A."seinengappiYMD"
         ,A."seibetsu"
         ,C."shichosonMeisho" AS "hokenshaName"
-        ,D."ikenshoSakuseiKaisuKubun"
-        ,D."zaitakuShisetsuKubun"
+        ,D."sakuseiryoSeikyuKubun"
         ,E."iryoKikanMeisho"
         ,E."yubinNo" AS "iryoKikanYubinNo"
         ,E."jusho" AS "iryoKikanJusho"
@@ -733,14 +733,13 @@
         rgdb."DbT7051KoseiShichosonMaster" AS C
         ON A."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
         LEFT JOIN
-        rgdb."DbT5302ShujiiIkenshoJoho" AS D
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         AND NOT EXISTS (
         SELECT 'X' FROM
-        rgdb."DbT5302ShujiiIkenshoJoho" AS D1
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS D1
         WHERE D."shinseishoKanriNo" = D1."shinseishoKanriNo"
         AND D."ikenshoIraiRirekiNo" <![CDATA[<]]> D1."ikenshoIraiRirekiNo"
-
         )
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS E

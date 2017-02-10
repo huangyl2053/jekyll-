@@ -727,9 +727,6 @@ public class NinnteiChousaKekkaTouroku1 {
         div.setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnChosaKekkaUpdate"), true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnTokkiJikoIchiran"), true);
-        if (DBE2210001StateName.調査結果登録_基本運用.getName().equals(ResponseHolder.getState())) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBackKihonUnyo"), true);
-        }
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         } else {

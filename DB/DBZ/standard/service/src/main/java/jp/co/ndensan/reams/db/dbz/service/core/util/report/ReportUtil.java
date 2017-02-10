@@ -11,8 +11,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -53,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 帳票共通クラスです。
@@ -66,6 +70,7 @@ public final class ReportUtil {
 
     private static final RString 首長名印字位置 = new RString("1");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
+    private static final RString underscore = new RString("_");
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -109,6 +114,52 @@ public final class ReportUtil {
                 is公印に掛ける,
                 is公印を省略,
                 kenmeiFuyoKubunType).buildSource();
+    }
+
+    /**
+     * 雛形部品_認証者を取得します。
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     * @param kaisiYMD 開始年月日
+     * @param denshikoinshubetsuCode 認証者電子公印種別コード
+     * @param kenmeiFuyoKubunType 県郡名付与区分
+     * @param reportSourceWriter ReportSourceWriter
+     * @param shoKisaiHokenshaNo
+     * @return 認証者情報
+     */
+    public static NinshoshaSource get認証者情報(
+            SubGyomuCode subGyomuCode,
+            ReportId reportId,
+            FlexibleDate kaisiYMD,
+            RString denshikoinshubetsuCode,
+            KenmeiFuyoKubunType kenmeiFuyoKubunType,
+            ReportSourceWriter reportSourceWriter,
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
+        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
+        RString rs;
+        if (shoKisaiHokenshaNo != null && !shoKisaiHokenshaNo.isEmpty()) {
+            rs = denshikoinshubetsuCode.concat(underscore).concat(shoKisaiHokenshaNo.value());
+        } else {
+            rs = denshikoinshubetsuCode;
+        }
+        Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, rs, kaisiYMD);
+        KoseiShichosonMasterDac 構成市町村マスタ = InstanceProvider.create(KoseiShichosonMasterDac.class);
+        DbT7051KoseiShichosonMasterEntity 保険者情報 = 構成市町村マスタ.select保険者情報(shoKisaiHokenshaNo);
+        boolean is公印に掛ける = false;
+        boolean is公印を省略 = false;
+        if (chohyoSeigyoKyotsu != null) {
+            is公印に掛ける = 首長名印字位置.equals(chohyoSeigyoKyotsu.get首長名印字位置());
+            is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
+        }
+        return NinshoshaSourceBuilderFactory.createInstance(ninshosha,
+                保険者情報 != null ? 保険者情報.getShichosonMeisho() : RString.EMPTY,
+                reportSourceWriter.getImageFolderPath(),
+                new RDate(kaisiYMD.toString()),
+                is公印に掛ける,
+                is公印を省略).buildSource();
     }
 
     /**

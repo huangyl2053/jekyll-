@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.gappeiKyuShichosonKubun;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMaster.kanyuYMD;
@@ -107,6 +108,22 @@ public class KoseiShichosonMasterDac implements IReplaceable<DbT7051KoseiShichos
                 select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(and(eq(shichosonCode, 市町村コード), eq(gappeiKyuShichosonKubun, 最新の構成市町村))).limit(1).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
+    }
+
+    /**
+     * 保険者情報を検索します。
+     *
+     * @param 証記載保険者番号
+     * @return 保険者情報
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity select保険者情報(ShoKisaiHokenshaNo 証記載保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号), eq(gappeiKyuShichosonKubun, 最新の構成市町村))).limit(1).
                 toObject(DbT7051KoseiShichosonMasterEntity.class);
     }
 }
