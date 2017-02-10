@@ -365,7 +365,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
         }
         row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
-        row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
+        row.setSakuseiryoSeikyuKubun(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
                 ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
         row.setKonkaiShujiiIryokikanCode(business.get今回医療機関コード() == null ? RString.EMPTY : business.get今回医療機関コード());
         row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());

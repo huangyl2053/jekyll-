@@ -231,6 +231,9 @@ public class NinteichosaIraiHandler {
             row.getNinteichosaIraiYmd().setValue(div.getTxtChosaIraiYmd().getValue());
             row.setRowState(RowState.Modified);
             row.setCancelButtonState(DataGridButtonState.Enabled);
+            row.getChosaIraishoHakkoDay().setValue(null);
+            row.getChousahyoOutput().setValue(null);
+            row.getChosaIraiDataShutsuryokuDay().setValue(null);
             dataSource.set(index, row);
         }
         div.getDgNinteiTaskList().setDataSource(dataSource);
@@ -313,7 +316,7 @@ public class NinteichosaIraiHandler {
         if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())
                 || row.getChosaIraiKigen().getValue() == null
                 || row.getChosaIraishoHakkoDay().getValue() == null
-                || row.getChosaIraiDataShutsuryokuDay().getValue() == null) {
+                || row.getChousahyoOutput().getValue() == null) {
             notUpdateCount++;
             row.setJotai(未);
             row.setCellBgColor("jotai", DataGridCellBgColor.bgColorRed);

@@ -84,7 +84,7 @@ public class NinteichosaIraiValidationHandler {
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力チェック_btnChosainDataOutput() {
+    public ValidationMessageControlPairs 入力チェック_btnChosainDataOutput(boolean 未保存データ有) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
@@ -114,6 +114,10 @@ public class NinteichosaIraiValidationHandler {
                 }
             }
         }
+        if (未保存データ有) {
+            validationMessages.add(new ValidationMessageControlPair(RRVMessages.未保存データあり));
+        }
+
         return validationMessages;
     }
 
@@ -259,6 +263,15 @@ public class NinteichosaIraiValidationHandler {
         return pairs;
     }
 
+    /**
+     * 「モバイルデータの出力を実行する」ボタンを押下する場合、未保存データがあるかチェックします。
+     *
+     * @return ValidationMessageControlPair
+     */
+    public ValidationMessageControlPair check未保存データ() {
+        return new ValidationMessageControlPair(RRVMessages.未保存データあり);
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         該当データなし(UrErrorMessages.該当データなし),
@@ -277,7 +290,8 @@ public class NinteichosaIraiValidationHandler {
         委託先未設定(DbeErrorMessages.委託先未設定),
         保険者が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "保険者"),
         委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先"),
-        調査依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "調査依頼");
+        調査依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "調査依頼"),
+        未保存データあり(DbzErrorMessages.実行不可, "未保存データが存在する", "モバイルデータの出力が実行");
 
         private final Message message;
 

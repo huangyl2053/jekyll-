@@ -242,29 +242,14 @@ public class NinteichosaIrai {
      * @return レスポンス
      */
     public ResponseData onBefore_btnChosadataOutput(NinteichosaIraiDiv requestDiv) {
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChosainDataOutput();
-        if (vallidation.iterator().hasNext()) {
-            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        }
-
         boolean 未保存データ有 = false;
         if (!(new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
                 .equals(ResponseHolder.getMessageCode())) {
             未保存データ有 = has未保存データ(requestDiv, 未保存データ有);
         }
-        if (未保存データ有) {
-            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.変更未保存の確認.getMessage().getCode(),
-                    DbzQuestionMessages.変更未保存の確認.getMessage().evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
-        }
-        if ((new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(requestDiv).respond();
-        } else if ((new RString(DbzQuestionMessages.変更未保存の確認.getMessage().getCode()))
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(requestDiv).setState(DBE2010001StateName.登録);
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック_btnChosainDataOutput(未保存データ有);
+        if (vallidation.iterator().hasNext()) {
+            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         }
 
         return ResponseData.of(requestDiv).respond();
@@ -644,20 +629,20 @@ public class NinteichosaIrai {
                 row.getShinseishoKanriNo(),
                 row.getHokensha(),
                 row.getNinteiShinseiDay().getValue() != null
-                        ? row.getNinteiShinseiDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getNinteiShinseiDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
                 row.getShinseiKubunShinseiji(),
                 row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraishoHakkoDay().getValue() != null
-                        ? row.getChosaIraishoHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaIraishoHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChousahyoOutput().getValue() != null
-                        ? row.getChousahyoOutput().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChousahyoOutput().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiDataShutsuryokuDay().getValue() != null
-                        ? row.getChosaIraiDataShutsuryokuDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaIraiDataShutsuryokuDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
-                        ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiKubun(),
                 row.getKonkaiChosaItakusaki(),
                 row.getKonkaiChosain(),
@@ -670,11 +655,11 @@ public class NinteichosaIrai {
                 row.getJusho(),
                 row.getNyushoShisetsu(),
                 row.getChosaTokusokuHakkoDay().getValue() != null
-                        ? row.getChosaTokusokuHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaTokusokuHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaTokusokuHoho(),
                 row.getChosaTokusokuCount() != null ? new RString(row.getChosaTokusokuCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
-                        ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChikuCode(),
                 row.getChosaTokusokuChiku());
         return data;
