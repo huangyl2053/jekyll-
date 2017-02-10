@@ -196,6 +196,7 @@
         ,C."jusho" AS "iryoKikanJusho"
         ,B."shujiiCode"
         ,D."shujiiName"
+        ,B."ishiKubunCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
         INNER JOIN

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -7,21 +7,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIrai
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosaIraishoAndChosahyoAndIkenshoPrint のクラスファイル 
- * 
+ * ChosaIraishoAndChosahyoAndIkenshoPrint のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements IChosaIraishoAndChosahyoAndIkenshoPrintDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -189,7 +188,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setNinteiChosa(NinteiChosaDiv NinteiChosa) {
+    public void setNinteiChosa(NinteiChosaDiv NinteiChosa) {
         this.getInsatsuTaishoShitei().setNinteiChosa(NinteiChosa);
     }
 
@@ -199,7 +198,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setDgNinteiChosa(DataGrid<dgNinteiChosa_Row> dgNinteiChosa) {
+    public void setDgNinteiChosa(DataGrid<dgNinteiChosa_Row> dgNinteiChosa) {
         this.getInsatsuTaishoShitei().getNinteiChosa().setDgNinteiChosa(dgNinteiChosa);
     }
 
@@ -209,7 +208,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setNinteiChosaPrint(NinteiChosaPrintDiv NinteiChosaPrint) {
+    public void setNinteiChosaPrint(NinteiChosaPrintDiv NinteiChosaPrint) {
         this.getInsatsuTaishoShitei().getNinteiChosa().setNinteiChosaPrint(NinteiChosaPrint);
     }
 
@@ -219,7 +218,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkIraisho(CheckBoxList chkIraisho) {
+    public void setChkIraisho(CheckBoxList chkIraisho) {
         this.getInsatsuTaishoShitei().getNinteiChosa().getNinteiChosaPrint().setChkIraisho(chkIraisho);
     }
 
@@ -229,7 +228,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkChosahyoKatamen(CheckBoxList chkChosahyoKatamen) {
+    public void setChkChosahyoKatamen(CheckBoxList chkChosahyoKatamen) {
         this.getInsatsuTaishoShitei().getNinteiChosa().getNinteiChosaPrint().setChkChosahyoKatamen(chkChosahyoKatamen);
     }
 
@@ -239,7 +238,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkChosahyoRyomen(CheckBoxList chkChosahyoRyomen) {
+    public void setChkChosahyoRyomen(CheckBoxList chkChosahyoRyomen) {
         this.getInsatsuTaishoShitei().getNinteiChosa().getNinteiChosaPrint().setChkChosahyoRyomen(chkChosahyoRyomen);
     }
 
@@ -249,7 +248,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkChosahyoGaikyo(CheckBoxList chkChosahyoGaikyo) {
+    public void setChkChosahyoGaikyo(CheckBoxList chkChosahyoGaikyo) {
         this.getInsatsuTaishoShitei().getNinteiChosa().getNinteiChosaPrint().setChkChosahyoGaikyo(chkChosahyoGaikyo);
     }
 
@@ -259,7 +258,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkChosahyoSai(CheckBoxList chkChosahyoSai) {
+    public void setChkChosahyoSai(CheckBoxList chkChosahyoSai) {
         this.getInsatsuTaishoShitei().getNinteiChosa().getNinteiChosaPrint().setChkChosahyoSai(chkChosahyoSai);
     }
 
@@ -269,7 +268,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkChosahyoTokki(CheckBoxList chkChosahyoTokki) {
+    public void setChkChosahyoTokki(CheckBoxList chkChosahyoTokki) {
         this.getInsatsuTaishoShitei().getNinteiChosa().getNinteiChosaPrint().setChkChosahyoTokki(chkChosahyoTokki);
     }
 
@@ -279,7 +278,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setShujiiIkensho(ShujiiIkenshoDiv ShujiiIkensho) {
+    public void setShujiiIkensho(ShujiiIkenshoDiv ShujiiIkensho) {
         this.getInsatsuTaishoShitei().setShujiiIkensho(ShujiiIkensho);
     }
 
@@ -289,7 +288,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setDgShujiiIkensho(DataGrid<dgShujiiIkensho_Row> dgShujiiIkensho) {
+    public void setDgShujiiIkensho(DataGrid<dgShujiiIkensho_Row> dgShujiiIkensho) {
         this.getInsatsuTaishoShitei().getShujiiIkensho().setDgShujiiIkensho(dgShujiiIkensho);
     }
 
@@ -299,7 +298,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setShujiiIkenshoPrint(ShujiiIkenshoPrintDiv ShujiiIkenshoPrint) {
+    public void setShujiiIkenshoPrint(ShujiiIkenshoPrintDiv ShujiiIkenshoPrint) {
         this.getInsatsuTaishoShitei().getShujiiIkensho().setShujiiIkenshoPrint(ShujiiIkenshoPrint);
     }
 
@@ -309,7 +308,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkIkenshoIraisho(CheckBoxList chkIkenshoIraisho) {
+    public void setChkIkenshoIraisho(CheckBoxList chkIkenshoIraisho) {
         this.getInsatsuTaishoShitei().getShujiiIkensho().getShujiiIkenshoPrint().setChkIkenshoIraisho(chkIkenshoIraisho);
     }
 
@@ -319,7 +318,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkIkensho(CheckBoxList chkIkensho) {
+    public void setChkIkensho(CheckBoxList chkIkensho) {
         this.getInsatsuTaishoShitei().getShujiiIkensho().getShujiiIkenshoPrint().setChkIkensho(chkIkensho);
     }
 
@@ -329,7 +328,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkIkenshoSeikyusho(CheckBoxList chkIkenshoSeikyusho) {
+    public void setChkIkenshoSeikyusho(CheckBoxList chkIkenshoSeikyusho) {
         this.getInsatsuTaishoShitei().getShujiiIkensho().getShujiiIkenshoPrint().setChkIkenshoSeikyusho(chkIkenshoSeikyusho);
     }
 
@@ -339,7 +338,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setChkShindanMeireisho(CheckBoxList chkShindanMeireisho) {
+    public void setChkShindanMeireisho(CheckBoxList chkShindanMeireisho) {
         this.getInsatsuTaishoShitei().getShujiiIkensho().getShujiiIkenshoPrint().setChkShindanMeireisho(chkShindanMeireisho);
     }
 
@@ -349,7 +348,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setShindanMeirei(ShindanMeireiDiv ShindanMeirei) {
+    public void setShindanMeirei(ShindanMeireiDiv ShindanMeirei) {
         this.getInsatsuTaishoShitei().setShindanMeirei(ShindanMeirei);
     }
 
@@ -359,7 +358,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setRadJyushinKikan(RadioButton radJyushinKikan) {
+    public void setRadJyushinKikan(RadioButton radJyushinKikan) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setRadJyushinKikan(radJyushinKikan);
     }
 
@@ -369,7 +368,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setTxtJyushinymd(TextBoxDate txtJyushinymd) {
+    public void setTxtJyushinymd(TextBoxDate txtJyushinymd) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setTxtJyushinymd(txtJyushinymd);
     }
 
@@ -379,7 +378,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setTxtJushinTime(TextBoxTime txtJushinTime) {
+    public void setTxtJushinTime(TextBoxTime txtJushinTime) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setTxtJushinTime(txtJushinTime);
     }
 
@@ -389,7 +388,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setSpSpace1(Space spSpace1) {
+    public void setSpSpace1(Space spSpace1) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setSpSpace1(spSpace1);
     }
 
@@ -399,7 +398,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setTxtJushinKikan(TextBoxDateRange txtJushinKikan) {
+    public void setTxtJushinKikan(TextBoxDateRange txtJushinKikan) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setTxtJushinKikan(txtJushinKikan);
     }
 
@@ -409,7 +408,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setSpSpace3(Space spSpace3) {
+    public void setSpSpace3(Space spSpace3) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setSpSpace3(spSpace3);
     }
 
@@ -419,7 +418,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setTxtJushinBasho(TextBox txtJushinBasho) {
+    public void setTxtJushinBasho(TextBox txtJushinBasho) {
         this.getInsatsuTaishoShitei().getShindanMeirei().setTxtJushinBasho(txtJushinBasho);
     }
 
@@ -429,7 +428,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setTxtHakkoYMD(TextBoxDate txtHakkoYMD) {
+    public void setTxtHakkoYMD(TextBoxDate txtHakkoYMD) {
         this.getPrintJoken().setTxtHakkoYMD(txtHakkoYMD);
     }
 
@@ -444,7 +443,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setRadTeishutsuKigen(RadioButton radTeishutsuKigen) {
+    public void setRadTeishutsuKigen(RadioButton radTeishutsuKigen) {
         this.getTeishutsuKigen().setRadTeishutsuKigen(radTeishutsuKigen);
     }
 
@@ -454,7 +453,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setSpSpace2(Space spSpace2) {
+    public void setSpSpace2(Space spSpace2) {
         this.getTeishutsuKigen().setSpSpace2(spSpace2);
     }
 
@@ -464,11 +463,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintDiv extends Panel implements 
     }
 
     @JsonIgnore
-    public void  setTxtKyotsuDay(TextBoxDate txtKyotsuDay) {
+    public void setTxtKyotsuDay(TextBoxDate txtKyotsuDay) {
         this.getTeishutsuKigen().setTxtKyotsuDay(txtKyotsuDay);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

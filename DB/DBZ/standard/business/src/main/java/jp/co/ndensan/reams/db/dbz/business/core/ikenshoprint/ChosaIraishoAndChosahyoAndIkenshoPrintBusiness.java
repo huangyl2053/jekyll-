@@ -566,4 +566,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintBusiness {
     public RString get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
+
+    /**
+     * 医師区分を取得します。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString get医師区分() {
+        return entity.getIshiKubunCode();
+    }
 }

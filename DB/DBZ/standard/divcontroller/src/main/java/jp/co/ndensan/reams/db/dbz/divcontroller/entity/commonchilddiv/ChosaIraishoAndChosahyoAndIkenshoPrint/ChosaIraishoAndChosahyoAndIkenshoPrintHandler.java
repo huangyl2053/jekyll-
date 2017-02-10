@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
@@ -254,9 +255,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 if (!RString.isNullOrEmpty(認定申請年月日)) {
                     row.setNinteiShinseibi(new FlexibleDate(認定申請年月日).wareki().toDateString());
                 }
-
                 row.setShujiiIryokikanCode(nullToEmpty(business.get主治医医療機関コード()));
                 row.setShujiiIryoKikanMeisho(nullToEmpty(business.get医療機関名称()));
+                RString 医師区分コード = business.get医師区分();
+                if (!RString.isNullOrEmpty(医師区分コード)) {
+                    row.setIshiKubun(IshiKubunCode.toValue(医師区分コード).get名称());
+                }
                 row.setShujiiCode(nullToEmpty(business.get主治医コード()));
                 row.setShujiiShimei(nullToEmpty(business.get主治医氏名()));
                 row.setShinseishoKanriNo(nullToEmpty(business.get申請書管理番号()));
@@ -304,14 +308,31 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      * 介護保険診断命令書 チェックボックスの表示制御処理です。
      */
     public void setChkIkenshoSeikyusho() {
+        List<RString> 依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
         List<RString> 請求書選択selectedKeys = new ArrayList<>();
+        List<RString> 診断命令書選択selectedKeys = new ArrayList<>();
         RString 請求書連動印刷 = DbBusinessConfig.get(
                 ConfigNameDBE.主治医意見書作成請求書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+        RString 診断命令書連動印刷 = DbBusinessConfig.get(
+                ConfigNameDBE.介護保険診断命令書連動印刷, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         if (CONFIGVALUE1.equals(請求書連動印刷)) {
             if (!div.getChkIkenshoIraisho().getSelectedKeys().isEmpty()) {
                 請求書選択selectedKeys.add(KEY0);
             }
             div.getChkIkenshoSeikyusho().setSelectedItemsByKey(請求書選択selectedKeys);
+        }
+        if (CONFIGVALUE1.equals(診断命令書連動印刷)) {
+            boolean is兼用 = ViewStateHolder.get(ViewStateKeys.押下フラグ, boolean.class);
+            if ((is兼用 && !依頼書選択selectedKeys.contains(KEY2)) || (!is兼用 && 依頼書選択selectedKeys.contains(KEY2))) {
+                if (依頼書選択selectedKeys.contains(KEY2)) {
+                    ViewStateHolder.put(ViewStateKeys.押下フラグ, true);
+                    診断命令書選択selectedKeys.add(KEY0);
+                } else {
+                    ViewStateHolder.put(ViewStateKeys.押下フラグ, false);
+                }
+                div.getChkShindanMeireisho().setSelectedItemsByKey(診断命令書選択selectedKeys);
+                setChkShindanMeireisho();
+            }
         }
     }
 
@@ -477,6 +498,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             }
         }
         div.getChkIkenshoIraisho().setSelectedItemsByKey(意見書依頼書選択selectedKeys);
+        ViewStateHolder.put(ViewStateKeys.押下フラグ, false);
 
         List<RString> 意見書選択selectedKeys = new ArrayList<>();
         RString 初期選択_記入用紙 = DbBusinessConfig.get(
