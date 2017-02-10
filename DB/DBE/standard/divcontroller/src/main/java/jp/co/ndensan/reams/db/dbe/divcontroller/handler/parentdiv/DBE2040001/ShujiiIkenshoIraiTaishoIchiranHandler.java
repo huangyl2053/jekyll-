@@ -182,6 +182,8 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
             div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
             div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
+            div.getCcdShujiiInput().getTxtShujiiCode().setDisabled(true);
+            div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
             div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
             if (row.getIshiKubunCode() != null) {
                 div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));

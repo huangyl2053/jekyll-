@@ -67,7 +67,9 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
                     ? RString.EMPTY : Seibetsu.toValue(seibetsu.value()).get名称();
         }
         editListShinseiIchiran8(reportSource);
-        reportSource.listShinseiIchiran_9 = new RString(String.valueOf(item.getNijiHanteiNinteiYukoKikan()));
+        if(!item.getNijiHanteiNinteiYukoKikan().equals(new RString("0"))){
+            reportSource.listShinseiIchiran_9 = new RString(String.valueOf(item.getNijiHanteiNinteiYukoKikan()));
+        }
         FlexibleDate nijiHanteiNinteiYukoKaishiYMD = item.getNijiHanteiNinteiYukoKaishiYMD();
         if (nijiHanteiNinteiYukoKaishiYMD != null) {
             reportSource.listShinseiIchiran_10 = nijiHanteiNinteiYukoKaishiYMD.wareki()
