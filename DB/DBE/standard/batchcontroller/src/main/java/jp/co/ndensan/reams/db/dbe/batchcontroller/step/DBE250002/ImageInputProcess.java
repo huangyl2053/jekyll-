@@ -5,18 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJohoEditor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.OcrTorikomiResultUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionTheories;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
@@ -29,9 +26,12 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IIkenshoIkenKomokuAccessor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.IkenshoIkenKomokuAccessorFactory;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIken;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrIkens;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJohoEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
@@ -150,7 +150,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     OcrTorikomiMessages.cutToLength(20, o.getデータ行_文字列(), OcrTorikomiMessages.RYAKU).toString()
             )));
         }
-        return OcrTorikomiResultUtil.create(key, results);
+        return OcrTorikomiResultsFactory.create(key, results);
     }
 
 //--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         ImageinputMapperParamter param = toParameterToSearchRelatedData(key);
         List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(param).records();
         if (relatedData.isEmpty()) {
-            return OcrTorikomiResultUtil.create(key, ocrIkens,
+            return OcrTorikomiResultsFactory.create(key, ocrIkens,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
         ImageinputRelate ir = relatedData.get(0);
@@ -166,15 +166,15 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 this.processParameter.get一次判定済み時処理方法());
         IProcessingResults nrValidated = ir.validate(context);
         if (nrValidated.hasError()) {
-            return OcrTorikomiResultUtil.create(key, nrValidated, ir);
+            return OcrTorikomiResultsFactory.create(key, nrValidated, ir);
         }
         List<OcrTorikomiResult> list = new ArrayList<>();
-        list.addAll(OcrTorikomiResultUtil.create(key, nrValidated, ir));
+        list.addAll(OcrTorikomiResultsFactory.create(key, nrValidated, ir));
 
         ProcessingResults prs = new ProcessingResults();
         prs.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
         prs.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
-        list.addAll(OcrTorikomiResultUtil.create(key, prs, ir));
+        list.addAll(OcrTorikomiResultsFactory.create(key, prs, ir));
 
         OcrIkens safetyInCurrent = ocrIkens.removed(prs.allOcrDataInError());
         if (safetyInCurrent.isEmpty()) {
@@ -184,7 +184,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         OcrIken ocrIken = safetyInCurrent.findByOCRIDPrioritizing(OCRID._777, OCRID._778).orElse(null); // このメソッド中でnullはありえない。
         IProcessingResults saveIkenshoJoho = insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
         if (saveIkenshoJoho.hasError()) {
-            list.addAll(OcrTorikomiResultUtil.create(key, saveIkenshoJoho, ir));
+            list.addAll(OcrTorikomiResultsFactory.create(key, saveIkenshoJoho, ir));
             return list;
         }
         insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
@@ -196,7 +196,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         for (OcrIken o : safetyInCurrent) {
             results.addSuccessIfNotContains(o);
         }
-        list.addAll(OcrTorikomiResultUtil.create(key, results, ir));
+        list.addAll(OcrTorikomiResultsFactory.create(key, results, ir));
         return list;
     }
 

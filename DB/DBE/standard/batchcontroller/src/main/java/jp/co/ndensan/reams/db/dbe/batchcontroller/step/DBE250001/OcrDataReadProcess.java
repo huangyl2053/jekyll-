@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -39,12 +40,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrChosasByOCRID;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrNinteichosahyoGakyoChosaEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrTokkiJikoColumn;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo.OcrTokkiJikoColumns;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.TokkijikoFileNameConvertionTheory;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionTheories;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.GaikyoChosahyoServiceJokyos;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.IGaikyoChosahyoServiceJokyo;
@@ -52,6 +51,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.IGaikyoChosahyoShisetuRiyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenTokkiRembanChofuku;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.ChosahyoOcrContextParameter;
@@ -82,11 +82,14 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuR
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
@@ -180,11 +183,13 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         Filterd<OcrChosas> filterdFileNormal = new OcrChosas(ocrChosas).filterdNormal();
         list.addAll(makeErrorsForFileBroken(filterdFileNormal.rejected(), key));
 
-        Filterd<OcrChosasByOCRID> filteredSizeIsOne = filterdFileNormal.passed()
-                .groupingByOCRID()
-                .filteredSizeIs(1);
-        list.addAll(havingTooManyLinesToOperate(filteredSizeIsOne.rejected(), this.key));
-        list.addAll(otherOperation(filteredSizeIsOne.passed(), this.key));
+        OcrChosasByOCRID groupedByOCRID = filterdFileNormal.passed().groupingByOCRID();
+        OcrChosasByOCRID filteredSizeIsOne = groupedByOCRID.filterdSizeIs(1);
+        Set<OCRID> passed = new HashSet<>();
+        passed.add(OCRID._550);
+        passed.addAll(filteredSizeIsOne.keySet());
+        list.addAll(havingTooManyLinesToOperate(groupedByOCRID.removed(passed), this.key));
+        list.addAll(otherOperation(groupedByOCRID.getAll(passed), this.key));
         this.kekkaListEditor.writeMultiLine(list);
     }
 
@@ -210,7 +215,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         for (OcrChosa o : ocrChosas.values()) {
             results.addSuccessIfNotContains(o);
         }
-        return OcrTorikomiResultUtil.create(key, results, nr);
+        return OcrTorikomiResultsFactory.create(key, results, nr);
     }
 
     @lombok.Getter
@@ -431,20 +436,20 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     OcrTorikomiMessages.cutToLength(20, o.getデータ行_文字列(), OcrTorikomiMessages.RYAKU).toString()
             )));
         }
-        return OcrTorikomiResultUtil.create(key, results);
+        return OcrTorikomiResultsFactory.create(key, results);
     }
 
     private static List<OcrTorikomiResult> havingTooManyLinesToOperate(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
-        return OcrTorikomiResultUtil.create(key, ocrChosas.values(),
+        return OcrTorikomiResultsFactory.create(key, ocrChosas.values(),
                 IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在.replaced("OCRCHOSA.CSV"));
     }
 
     private static List<OcrTorikomiResult> makeErrorsInRelatedData(ShinseiKey key, IProcessingResults nrValidated, NinteiOcrRelate nr) {
-        return OcrTorikomiResultUtil.create(key, nrValidated, nr);
+        return OcrTorikomiResultsFactory.create(key, nrValidated, nr);
     }
 
     private static List<OcrTorikomiResult> makeErrorsForRelatedDataNotFound(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
-        return OcrTorikomiResultUtil.create(key, ocrChosas.values(),
+        return OcrTorikomiResultsFactory.create(key, ocrChosas.values(),
                 IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
     }
     //</editor-fold>

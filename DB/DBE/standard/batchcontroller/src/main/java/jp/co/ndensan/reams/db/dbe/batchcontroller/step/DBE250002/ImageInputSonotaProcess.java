@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001.OcrTorikomiResultUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult;
@@ -26,8 +25,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.Catalog;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog.CatalogLine;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResult;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.errorlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.SonotaShiryoFileNameConvertionTheory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
@@ -144,14 +144,14 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                     OcrTorikomiMessages.cutToLength(20, o.getデータ行_文字列(), OcrTorikomiMessages.RYAKU).toString()
             )));
         }
-        return OcrTorikomiResultUtil.create(key, results);
+        return OcrTorikomiResultsFactory.create(key, results);
     }
 
     private List<OcrTorikomiResult> mainProcess(ShinseiKey key, List<OcrSonota> ocrSonotas) {
         List<ImageinputRelate> relatedData = ImageinputFinder.createInstance()
                 .get関連データ(toParameterToSearchRelatedData(key)).records();
         if (relatedData.isEmpty()) {
-            return OcrTorikomiResultUtil.create(key, ocrSonotas,
+            return OcrTorikomiResultsFactory.create(key, ocrSonotas,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
         ImageinputRelate ir = relatedData.get(0);
@@ -159,12 +159,12 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                 this.processParameter.get一次判定済み時処理方法());
         IProcessingResults nrValidated = ir.validate(context);
         if (nrValidated.hasError()) {
-            return OcrTorikomiResultUtil.create(key, nrValidated, ir);
+            return OcrTorikomiResultsFactory.create(key, nrValidated, ir);
         }
         ProcessingResults prs = new ProcessingResults();
         prs.addAll(nrValidated);
         prs.addAll(copyImageFiles(ocrSonotas, ir));
-        return OcrTorikomiResultUtil.create(key, prs, ir);
+        return OcrTorikomiResultsFactory.create(key, prs, ir);
     }
 
     private ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {

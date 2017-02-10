@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jp.co.ndensan.reams.db.dbe.business.core.ocr.Filterd;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 
 /**
@@ -35,20 +35,31 @@ public class OcrChosasByOCRID {
     }
 
     /**
-     * @param size 閾値となる要素数
-     * @return 指定のsizeと要素の数が一致する{@link OcrChosas}とそうでない{@link OcrChosas}に分割した結果
+     * @param ocrIDs {@link OCRID}複数
+     * @return 指定のOCRIDのみの要素を保持した{@link OcrChosasByOCRID}
      */
-    public Filterd<OcrChosasByOCRID> filteredSizeIs(int size) {
-        Map<OCRID, OcrChosas> passed = new HashMap();
-        Map<OCRID, OcrChosas> rejected = new HashMap();
+    public OcrChosasByOCRID getAll(Iterable<? extends OCRID> ocrIDs) {
+        Map<OCRID, OcrChosas> passed = new HashMap<>();
+        for (OCRID ocrID : ocrIDs) {
+            if (this.map.containsKey(ocrID)) {
+                passed.put(ocrID, this.map.get(ocrID));
+            }
+        }
+        return new OcrChosasByOCRID(passed);
+    }
+
+    /**
+     * @param size 閾値となる要素数
+     * @return 指定のsizeと要素の数が一致する{@link OcrChosasByOCRID}
+     */
+    public OcrChosasByOCRID filterdSizeIs(int size) {
+        Map<OCRID, OcrChosas> passed = new HashMap<>();
         for (Entry entry : entrySet()) {
             if (entry.getOcrChosas().size() == size) {
                 passed.put(entry.getOCRID(), entry.getOcrChosas());
-            } else {
-                rejected.put(entry.getOCRID(), entry.getOcrChosas());
             }
         }
-        return new Filterd<>(new OcrChosasByOCRID(passed), new OcrChosasByOCRID(rejected));
+        return new OcrChosasByOCRID(passed);
     }
 
     /**
@@ -72,6 +83,13 @@ public class OcrChosasByOCRID {
             list.addAll(ocrChosas.toList());
         }
         return new OcrChosas(list);
+    }
+
+    /**
+     * @return すべてのキー
+     */
+    public Set<OCRID> keySet() {
+        return this.map.keySet();
     }
 
     /**
