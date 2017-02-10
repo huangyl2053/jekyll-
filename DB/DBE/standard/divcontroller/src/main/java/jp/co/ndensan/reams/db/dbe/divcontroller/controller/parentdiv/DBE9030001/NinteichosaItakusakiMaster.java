@@ -847,6 +847,7 @@ public class NinteichosaItakusakiMaster {
         csvEntity.set金融機関名称(金融機関名称);
         csvEntity.set支店コード(row.getKinyuKikanShitenCode());
         csvEntity.set支店(支店名);
+        csvEntity.set預金種別コード(row.getYokinShubetsu());
         csvEntity.set預金種別(set預金種別(row.getYokinShubetsu()));
         csvEntity.set口座番号(row.getKozaNo());
         csvEntity.set口座名義人(row.getKozaMeigininKana());

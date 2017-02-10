@@ -416,6 +416,7 @@ public class ShujiiIryoKikanMaster {
                 row.getKinyuKikan(),
                 row.getKinyuKikanShitenCode(),
                 支店名,
+                row.getYokinShubetsu(),
                 預金種別名称,
                 row.getKozaNo(),
                 row.getKozaMeigininKana(),

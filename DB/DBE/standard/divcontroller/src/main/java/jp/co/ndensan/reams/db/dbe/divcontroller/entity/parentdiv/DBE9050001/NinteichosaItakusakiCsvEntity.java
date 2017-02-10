@@ -47,15 +47,21 @@ public class NinteichosaItakusakiCsvEntity {
     private final RString haishiFlag;
     @CsvField(order = 150, name = "金融機関コード")
     private final RString kinyuKikan;
-    @CsvField(order = 160, name = "支店コード")
+    @CsvField(order = 160, name = "金融機関名称")
+    private final RString kinyuKikanName;
+    @CsvField(order = 170, name = "支店コード")
     private final RString kinyuKikanShiten;
-    @CsvField(order = 170, name = "預金種別")
+    @CsvField(order = 180, name = "支店名称")
+    private final RString kinyuKikanShitenName;
+    @CsvField(order = 190, name = "預金種別コード")
+    private final RString yokinShubetsuCode;
+    @CsvField(order = 200, name = "預金種別")
     private final RString yokinShubetsu;
-    @CsvField(order = 180, name = "口座番号")
+    @CsvField(order = 210, name = "口座番号")
     private final RString kozaNo;
-    @CsvField(order = 190, name = "口座名義人")
+    @CsvField(order = 220, name = "口座名義人")
     private final RString kozaMeiginin;
-    @CsvField(order = 200, name = "漢字名義人")
+    @CsvField(order = 230, name = "漢字名義人")
     private final RString kanjiMeiginin;
 
     /**
@@ -76,7 +82,10 @@ public class NinteichosaItakusakiCsvEntity {
      * @param kikanKubun
      * @param haishiFlag
      * @param kinyuKikan
+     * @param kinyuKikanName
      * @param kinyuKikanShiten
+     * @param kinyuKikanShitenName
+     * @param yokinShubetsuCode
      * @param yokinShubetsu
      * @param kozaNo
      * @param kozaMeiginin
@@ -98,7 +107,10 @@ public class NinteichosaItakusakiCsvEntity {
             RString kikanKubun,
             RString haishiFlag,
             RString kinyuKikan,
+            RString kinyuKikanName,
             RString kinyuKikanShiten,
+            RString kinyuKikanShitenName,
+            RString yokinShubetsuCode,
             RString yokinShubetsu,
             RString kozaNo,
             RString kozaMeiginin,
@@ -118,7 +130,10 @@ public class NinteichosaItakusakiCsvEntity {
         this.telNo = telNo;
         this.jushoKana = jushoKana;
         this.kinyuKikan = kinyuKikan;
+        this.kinyuKikanName = kinyuKikanName;
         this.kinyuKikanShiten = kinyuKikanShiten;
+        this.kinyuKikanShitenName = kinyuKikanShitenName;
+        this.yokinShubetsuCode = yokinShubetsuCode;
         this.yokinShubetsu = yokinShubetsu;
         this.kozaNo = kozaNo;
         this.kozaMeiginin = kozaMeiginin;

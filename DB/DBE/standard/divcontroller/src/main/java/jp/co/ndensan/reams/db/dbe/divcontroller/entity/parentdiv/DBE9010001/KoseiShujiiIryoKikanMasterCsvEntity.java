@@ -51,13 +51,15 @@ public class KoseiShujiiIryoKikanMasterCsvEntity {
     private final RString kinyuKikanShitenCode;
     @CsvField(order = 17, name = "支店")
     private final RString kinyuKikanShiten;
-    @CsvField(order = 18, name = "預金種別")
+    @CsvField(order = 18, name = "預金種別コード")
+    private final RString yokinShubetsuCode;
+    @CsvField(order = 19, name = "預金種別")
     private final RString yokinShubetsu;
-    @CsvField(order = 19, name = "口座番号")
+    @CsvField(order = 20, name = "口座番号")
     private final RString kozaNo;
-    @CsvField(order = 20, name = "口座名義人")
+    @CsvField(order = 21, name = "口座名義人")
     private final RString kozaMeigininKana;
-    @CsvField(order = 21, name = "漢字名義人")
+    @CsvField(order = 22, name = "漢字名義人")
     private final RString kozaMeiginin;
 
     /**
@@ -80,6 +82,7 @@ public class KoseiShujiiIryoKikanMasterCsvEntity {
      * @param kinyuKikan 金融機関名称
      * @param kinyuKikanShitenCode 支店コード
      * @param kinyuKikanShiten 支店
+     * @param yokinShubetsuCode 預金種別コード
      * @param yokinShubetsu 預金種別
      * @param kozaNo 口座番号
      * @param kozaMeigininKana 口座名義人
@@ -103,6 +106,7 @@ public class KoseiShujiiIryoKikanMasterCsvEntity {
             RString kinyuKikan,
             RString kinyuKikanShitenCode,
             RString kinyuKikanShiten,
+            RString yokinShubetsuCode,
             RString yokinShubetsu,
             RString kozaNo,
             RString kozaMeigininKana,
@@ -125,6 +129,7 @@ public class KoseiShujiiIryoKikanMasterCsvEntity {
         this.kinyuKikan = kinyuKikan;
         this.kinyuKikanShitenCode = kinyuKikanShitenCode;
         this.kinyuKikanShiten = kinyuKikanShiten;
+        this.yokinShubetsuCode = yokinShubetsuCode;
         this.yokinShubetsu = yokinShubetsu;
         this.kozaNo = kozaNo;
         this.kozaMeigininKana = kozaMeigininKana;

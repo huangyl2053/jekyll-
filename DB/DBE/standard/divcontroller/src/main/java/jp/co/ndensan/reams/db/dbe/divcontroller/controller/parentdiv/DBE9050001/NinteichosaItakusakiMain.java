@@ -24,10 +24,13 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.SonotaKikanJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaster.NinteichosaMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -49,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -258,8 +262,19 @@ public class NinteichosaItakusakiMain {
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
+            KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+            List<KinyuKikan> 金融機関情報 = new ArrayList<>();
+            金融機関情報 = kinyuKikanManager.getValidKinyuKikansOn(FlexibleDate.getNowDate());
             for (dgSonotaKikanIchiran_Row row : dataList) {
-                csvWriter.writeLine(getCsvData(row));
+                RString 金融機関名称 = RString.EMPTY;
+                RString 支店名 = RString.EMPTY;
+                if (row.getKinyuKikanCode() != null && !row.getKinyuKikanCode().isEmpty()) {
+                    金融機関名称 = getKinyuKikan(金融機関情報, row);
+                }
+                if (row.getKinyuKikanShitenCode() != null && !row.getKinyuKikanShitenCode().isEmpty()) {
+                    支店名 = getKinyuShiten(金融機関情報, row);
+                }
+                csvWriter.writeLine(getCsvData(row, 金融機関名称, 支店名));
             }
             csvWriter.close();
         }
@@ -270,7 +285,7 @@ public class NinteichosaItakusakiMain {
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
-    private NinteichosaItakusakiCsvEntity getCsvData(dgSonotaKikanIchiran_Row row) {
+    private NinteichosaItakusakiCsvEntity getCsvData(dgSonotaKikanIchiran_Row row, RString 金融機関名称, RString 支店名) {
         RString waritsukeTeiin = RString.EMPTY;
         if (row.getWaritsukeTeiin().getValue() != null) {
             waritsukeTeiin = new RString(row.getWaritsukeTeiin().getValue().toString());
@@ -293,8 +308,17 @@ public class NinteichosaItakusakiMain {
                 row.getKinyuKikanCode() != null
                 ? row.getKinyuKikanCode()
                 : RString.EMPTY,
+                金融機関名称 != null
+                ? row.getKinyuKikanMeisho()
+                : RString.EMPTY,
                 row.getKinyuKikanShitenCode() != null
                 ? row.getKinyuKikanShitenCode()
+                : RString.EMPTY,
+                支店名 != null
+                ? row.getShitenMeisho()
+                : RString.EMPTY,
+                row.getYokinShubetsu() != null
+                ? row.getYokinShubetsu()
                 : RString.EMPTY,
                 row.getYokinShubetsu() != null
                 ? set預金種別(row.getYokinShubetsu())
@@ -741,5 +765,54 @@ public class NinteichosaItakusakiMain {
         }
         return RString.EMPTY;
 
+    }
+
+    /**
+     * 金融機関を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param row dgSonotaKikanIchiran_Row
+     * @return 金融機関_支店　List<RString>
+     */
+    private RString getKinyuKikan(List<KinyuKikan> 金融機関情報, dgSonotaKikanIchiran_Row row) {
+        RString 金融機関 = RString.EMPTY;
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if ((new RString(kinyuKikanJoho.get金融機関コード().toString())).equals(row.getKinyuKikanCode())) {
+                金融機関 = kinyuKikanJoho.get金融機関名称();
+            }
+        }
+        return 金融機関;
+    }
+
+    /**
+     * 金融機関支店を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param row dgSonotaKikanIchiran_Row
+     * @return 支店名　RString
+     */
+    private RString getKinyuShiten(List<KinyuKikan> 金融機関情報, dgSonotaKikanIchiran_Row row) {
+        List<KinyuKikanShiten> 支店リスト = new ArrayList<>();
+        RString 支店名 = RString.EMPTY;
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if ((new RString(kinyuKikanJoho.get金融機関コード().toString())).equals(row.getKinyuKikanCode())) {
+                支店リスト = kinyuKikanJoho.get支店リスト();
+            }
+        }
+        if (支店リスト != null && !支店リスト.isEmpty()) {
+            支店名 = getShitenMeisho(支店リスト, row, 支店名);
+
+        }
+
+        return 支店名;
+    }
+
+    private RString getShitenMeisho(List<KinyuKikanShiten> 支店リスト, dgSonotaKikanIchiran_Row row, RString 支店名) {
+        for (KinyuKikanShiten shiten : 支店リスト) {
+            if (new RString(shiten.get支店コード().toString()).equals(row.getKinyuKikanShitenCode())) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
     }
 }

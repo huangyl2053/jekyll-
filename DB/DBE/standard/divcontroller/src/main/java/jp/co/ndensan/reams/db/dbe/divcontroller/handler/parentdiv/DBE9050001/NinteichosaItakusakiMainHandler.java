@@ -262,6 +262,8 @@ public class NinteichosaItakusakiMainHandler {
         row.setKozaNo(nullToEmpty(kozaNo));
         row.setKozaMeigininKana(kozaMeigininKana == null ? RString.EMPTY : kozaMeigininKana.value());
         row.setKozaMeiginin(kozaMeiginin == null ? RString.EMPTY : kozaMeiginin.value());
+        row.setKinyuKikanMeisho(null);
+        row.setShitenMeisho(null);
         return row;
     }
 
@@ -397,6 +399,8 @@ public class NinteichosaItakusakiMainHandler {
         row.setKozaNo(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue()));
         row.setKozaMeigininKana(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue()));
         row.setKozaMeiginin(nullToEmpty(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()));
+        row.setKinyuKikanMeisho(null);
+        row.setShitenMeisho(null);
 
         int index = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedRowId();
         if (状態_追加.equals(eventJotai)) {

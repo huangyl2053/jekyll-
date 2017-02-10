@@ -39,7 +39,7 @@ public class ShujiiMasterCsvEntity {
     private final RString shinryoka;
     @CsvField(order = 110, name = "指定医")
     private final RString shiteii;
-    @CsvField(order = 120, name = "状況フラグ")
+    @CsvField(order = 120, name = "主治医の状況")
     private final RString jokyoFlag;
     @CsvField(order = 130, name = "郵便番号")
     private final RString yubinNo;

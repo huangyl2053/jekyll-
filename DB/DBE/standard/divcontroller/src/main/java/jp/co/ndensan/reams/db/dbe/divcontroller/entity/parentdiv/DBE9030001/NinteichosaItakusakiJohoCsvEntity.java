@@ -96,15 +96,18 @@ public class NinteichosaItakusakiJohoCsvEntity {
     @CsvField(order = 26, name = "支店")
     private RString 支店;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 27, name = "預金種別")
+    @CsvField(order = 27, name = "預金種別コード")
+    private RString 預金種別コード;
+    //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
+    @CsvField(order = 28, name = "預金種別")
     private RString 預金種別;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 28, name = "口座番号")
+    @CsvField(order = 29, name = "口座番号")
     private RString 口座番号;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 29, name = "口座名義人")
+    @CsvField(order = 30, name = "口座名義人")
     private RString 口座名義人;
     //CHECKSTYLE IGNORE MagicNumber FOR NEXT 1 LINES
-    @CsvField(order = 30, name = "漢字名義人")
+    @CsvField(order = 31, name = "漢字名義人")
     private RString 漢字名義人;
 }
