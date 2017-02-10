@@ -12,10 +12,15 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.NinteiChosaBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -56,6 +61,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     private NinshoshaSource ninshoshaSource;
     private Map<Integer, RString> 通知文Map;
     private NinteiChosaProcessParamter processParamter;
+    private boolean is認定広域 = false;
 
     @BatchWriter
     private BatchReportWriter<ChosaIraiIchiranhyoReportSource> ichiranhyoBatchReportWriter;
@@ -64,6 +70,13 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     @Override
     protected void initialize() {
         business = new NinteiChosaBusiness(processParamter);
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                is認定広域 = true;
+            }
+        }
     }
 
     @Override
@@ -80,11 +93,19 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
 
     @Override
     protected void beforeExecute() {
-        ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                帳票ID,
-                new FlexibleDate(processParamter.getHakkobi()),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
-                ichiranhyoReportSourceWriter);
+        if (is認定広域) {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    帳票ID,
+                    new FlexibleDate(processParamter.getHakkobi()),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    ichiranhyoReportSourceWriter, new ShoKisaiHokenshaNo(processParamter.getShoKisaiHokenshaNo()));
+        } else {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    帳票ID,
+                    new FlexibleDate(processParamter.getHakkobi()),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    ichiranhyoReportSourceWriter);
+        }
     }
 
     @Override

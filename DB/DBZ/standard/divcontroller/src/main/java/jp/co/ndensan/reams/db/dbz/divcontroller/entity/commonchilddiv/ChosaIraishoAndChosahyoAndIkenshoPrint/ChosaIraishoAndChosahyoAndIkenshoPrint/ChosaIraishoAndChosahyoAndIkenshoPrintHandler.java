@@ -48,8 +48,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
@@ -173,11 +172,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             ReportId 帳票ID = ReportIdDBZ.DBE220001.getReportId();
             for (KaigoDonyuKeitai item : 介護導入形態) {
                 if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
-                        && div.getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                        && !div.getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                        && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                     RStringBuilder 帳票IDBuilder = new RStringBuilder();
-                    帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).
-                            append(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+                    帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
                     帳票ID = new ReportId(帳票IDBuilder.toRString());
                 }
             }
@@ -230,11 +227,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             ReportId 帳票ID = ReportIdDBZ.DBE230001.getReportId();
             for (KaigoDonyuKeitai item : 介護導入形態) {
                 if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
-                        && div.getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                        && !div.getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                        && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                     RStringBuilder 帳票IDBuilder = new RStringBuilder();
-                    帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).
-                            append(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+                    帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
                     帳票ID = new ReportId(帳票IDBuilder.toRString());
                 }
             }
@@ -1393,25 +1388,26 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 }
                 item.setBirthYMD(生年月日);
                 item.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
-                if (ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
+                if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(business.get作成料請求区分())) {
                     item.setShubetsuZaitaku(記号);
-                } else {
-                    item.setShubetsuZaitaku(RString.EMPTY);
-                }
-                if (ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
-                    item.setShubetsuShisetsu(記号);
-                } else {
                     item.setShubetsuShisetsu(RString.EMPTY);
-                }
-                if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(business.get意見書作成回数区分())) {
                     item.setShubetsuShinki(記号);
-                } else {
-                    item.setShubetsuShinki(RString.EMPTY);
-                }
-                if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(business.get意見書作成回数区分())) {
-                    item.setShubetsuKeizoku(記号);
-                } else {
                     item.setShubetsuKeizoku(RString.EMPTY);
+                } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(business.get作成料請求区分())) {
+                    item.setShubetsuZaitaku(RString.EMPTY);
+                    item.setShubetsuShisetsu(記号);
+                    item.setShubetsuShinki(記号);
+                    item.setShubetsuKeizoku(RString.EMPTY);
+                } else if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(business.get作成料請求区分())) {
+                    item.setShubetsuZaitaku(記号);
+                    item.setShubetsuShisetsu(RString.EMPTY);
+                    item.setShubetsuShinki(RString.EMPTY);
+                    item.setShubetsuKeizoku(記号);
+                } else if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(business.get作成料請求区分())) {
+                    item.setShubetsuZaitaku(RString.EMPTY);
+                    item.setShubetsuShisetsu(記号);
+                    item.setShubetsuShinki(RString.EMPTY);
+                    item.setShubetsuKeizoku(記号);
                 }
                 item.setSeikyuIryokikanName(business.get医療機関名称());
                 item.setSeikyuIryokikanDaihyoName(business.get代表者名());
@@ -1769,8 +1765,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     }
 
     private void set意見書作成料(ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
-                && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
+        if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(business.get作成料請求区分())) {
             RString shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiZaitakuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(shinkiZaitakuKingaku.substring(1, 2));
@@ -1781,8 +1776,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setSeikyugakuIkenshoSakuseiRyo3(shinkiZaitakuKingaku.substring(2, INDEX_3));
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiZaitakuKingaku.substring(INDEX_3, INDEX_4));
         }
-        if (IkenshoIraiKubun.初回依頼.getコード().equals(business.get意見書作成回数区分())
-                && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
+        if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(business.get作成料請求区分())) {
             RString shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiShisetsuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(shinkiShisetsuKingaku.substring(1, 2));
@@ -1794,8 +1788,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiShisetsuKingaku.substring(INDEX_3, INDEX_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
-                && ZaitakuShisetsuKubun.在宅.getコード().equals(business.get在宅施設区分())) {
+        if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(business.get作成料請求区分())) {
             RString keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuZaitakuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(keizokuZaitakuKingaku.substring(1, 2));
@@ -1807,8 +1800,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setSeikyugakuIkenshoSakuseiRyo4(keizokuZaitakuKingaku.substring(INDEX_3, INDEX_4));
 
         }
-        if (IkenshoIraiKubun.再依頼.getコード().equals(business.get意見書作成回数区分())
-                && ZaitakuShisetsuKubun.施設.getコード().equals(business.get在宅施設区分())) {
+        if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(business.get作成料請求区分())) {
             RString keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuShisetsuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(keizokuShisetsuKingaku.substring(1, 2));

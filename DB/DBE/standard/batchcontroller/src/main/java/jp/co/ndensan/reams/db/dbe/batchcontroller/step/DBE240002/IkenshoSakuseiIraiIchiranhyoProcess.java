@@ -13,11 +13,16 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.ShujiiIkenshoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -52,6 +57,8 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
     private static final ReportId 帳票ID = ReportIdDBZ.DBE230002.getReportId();
     private List<IkenshoSakuseiIraiIchiranhyoItem> bodyItemList;
     private ShujiiIkenshoProcessParamter processParamter;
+    private NinshoshaSource ninshoshaSource;
+    private boolean is認定広域 = false;
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shujiiIryokikanCode")));
     @BatchWriter
     private BatchReportWriter<IkenshoSakuseiIraiIchiranhyoReportSource> batchWriter;
@@ -60,6 +67,13 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
     @Override
     protected void initialize() {
         bodyItemList = new ArrayList<>();
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                is認定広域 = true;
+            }
+        }
     }
 
     @Override
@@ -88,12 +102,24 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
     }
 
     @Override
+    protected void beforeExecute() {
+        if (is認定広域) {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    帳票ID,
+                    new FlexibleDate(processParamter.getHakkobi()),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter, new ShoKisaiHokenshaNo(processParamter.getShoKisaiHokenshaNo()));
+        } else {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    帳票ID,
+                    new FlexibleDate(processParamter.getHakkobi()),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter);
+        }
+    }
+
+    @Override
     protected void usualProcess(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
-                帳票ID,
-                new FlexibleDate(processParamter.getHakkobi()),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
-                reportSourceWriter);
         int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
         bodyItemList.add(new ShujiiIkenshoBusiness(entity, processParamter).setDBE230002BodyItem(ninshoshaSource, 通知文Map));

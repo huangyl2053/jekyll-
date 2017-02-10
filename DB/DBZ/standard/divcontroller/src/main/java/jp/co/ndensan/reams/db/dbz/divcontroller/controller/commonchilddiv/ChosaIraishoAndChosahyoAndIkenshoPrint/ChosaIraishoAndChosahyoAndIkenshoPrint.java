@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
@@ -398,14 +399,15 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
     private void printData(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ReportManager reportManager) {
 
         RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         ChosaIraishoAndChosahyoAndIkenshoPrintService printService = new ChosaIraishoAndChosahyoAndIkenshoPrintService(reportManager);
 
         List<RString> 依頼書選択selectedKeys = div.getChkIraisho().getSelectedKeys();
         if (依頼書選択selectedKeys.contains(KEY0)) {
-            printService.print要介護認定調査依頼書(getHandler(div).create認定調査依頼書印刷用パラメータ());
+            printService.print要介護認定調査依頼書(getHandler(div).create認定調査依頼書印刷用パラメータ(), 証記載保険者番号);
         }
         if (依頼書選択selectedKeys.contains(KEY1)) {
-            printService.print認定調査依頼一覧表(getHandler(div).create認定調査依頼一覧表印刷用パラメータ());
+            printService.print認定調査依頼一覧表(getHandler(div).create認定調査依頼一覧表印刷用パラメータ(), 証記載保険者番号);
         }
 
         List<RString> 調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
@@ -447,13 +449,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         List<RString> 意見書依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
         if (意見書依頼書選択selectedKeys.contains(KEY0)) {
-            printService.print意見書作成依頼書(getHandler(div).create意見書作成依頼書_パラメータ());
+            printService.print意見書作成依頼書(getHandler(div).create意見書作成依頼書_パラメータ(), 証記載保険者番号);
         }
         if (意見書依頼書選択selectedKeys.contains(KEY1)) {
-            printService.print意見書作成依頼一覧表(getHandler(div).create意見書作成依頼一覧表_パラメータ());
+            printService.print意見書作成依頼一覧表(getHandler(div).create意見書作成依頼一覧表_パラメータ(), 証記載保険者番号);
         }
         if (意見書依頼書選択selectedKeys.contains(KEY2)) {
-            printService.print介護保険指定医依頼兼主治医意見書提出意見書(getHandler(div).create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ());
+            printService.print介護保険指定医依頼兼主治医意見書提出意見書(getHandler(div).create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ(), 証記載保険者番号);
         }
 
         List<RString> 意見書選択selectedKeys = div.getChkIkensho().getSelectedKeys();
@@ -468,7 +470,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         List<RString> 診断命令書選択selectedKeys = div.getChkShindanMeireisho().getSelectedKeys();
         if (診断命令書選択selectedKeys.contains(KEY0)) {
-            printService.print介護保険診断命令書(getHandler(div).create介護保険診断命令書_パラメータ());
+            printService.print介護保険診断命令書(getHandler(div).create介護保険診断命令書_パラメータ(), 証記載保険者番号);
         }
     }
 

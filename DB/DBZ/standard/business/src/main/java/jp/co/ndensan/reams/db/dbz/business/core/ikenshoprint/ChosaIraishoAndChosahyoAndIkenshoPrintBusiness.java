@@ -554,19 +554,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintBusiness {
      *
      * @return 意見書作成回数区分
      */
-    public RString get意見書作成回数区分() {
-        return entity.getIkenshoSakuseiKaisuKubun();
+    public RString get作成料請求区分() {
+        return entity.getSakuseiryoSeikyuKubun();
     }
 
     /**
-     * 在宅施設区分を取得します。
-     *
-     * @return 在宅施設区分
-     */
-    public RString get在宅施設区分() {
-        return entity.getZaitakuShisetsuKubun();
-    }
-     /**
      * 証記載保険者番号を取得します。
      *
      * @return 証記載保険者番号

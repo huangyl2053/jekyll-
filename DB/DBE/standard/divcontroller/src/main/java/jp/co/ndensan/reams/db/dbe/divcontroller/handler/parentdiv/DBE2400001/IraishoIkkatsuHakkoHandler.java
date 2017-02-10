@@ -145,16 +145,15 @@ public class IraishoIkkatsuHakkoHandler {
         initializeNinteiChkShinseiTani();
         setNinteiChkShinseiTani();
         setHakkobiAndTeishutsuKigen();
+        RString 証記載保険者番号 = div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value();
         KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
         List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
         ReportId 帳票ID = ReportIdDBZ.DBE220001.getReportId();
         for (KaigoDonyuKeitai item : 介護導入形態) {
             if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
-                    && div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード() != null
-                    && !div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().isEmpty()) {
+                    && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                 RStringBuilder 帳票IDBuilder = new RStringBuilder();
-                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).
-                        append(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
+                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
                 帳票ID = new ReportId(帳票IDBuilder.toRString());
             }
         }
@@ -169,16 +168,15 @@ public class IraishoIkkatsuHakkoHandler {
         initializeShujiiChkShinseiTani();
         setShujiiChkShinseiTani();
         setHakkobiAndTeishutsuKigen();
+        RString 証記載保険者番号 = div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value();
         KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
         List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
         ReportId 帳票ID = ReportIdDBZ.DBE230001.getReportId();
         for (KaigoDonyuKeitai item : 介護導入形態) {
             if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
-                    && div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード() != null
-                    && !div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().isEmpty()) {
+                    && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
                 RStringBuilder 帳票IDBuilder = new RStringBuilder();
-                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).
-                        append(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value());
+                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
                 帳票ID = new ReportId(帳票IDBuilder.toRString());
             }
         }

@@ -75,6 +75,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintEntity {
     private RString iryoKikanTelNo;
     private RString iryoKikanFaxNo;
     private RString hokenshaName;
-    private RString ikenshoSakuseiKaisuKubun;
-    private RString zaitakuShisetsuKubun;
+    private RString sakuseiryoSeikyuKubun;
+    private RString ishiKubunCode;
 }
