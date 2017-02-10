@@ -51,8 +51,8 @@ public class SheetID implements Comparable<SheetID> {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.theValue);
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 
@@ -65,6 +65,9 @@ public class SheetID implements Comparable<SheetID> {
             return false;
         }
         final SheetID other = (SheetID) obj;
+        if (!Objects.equals(this.theValue, other.theValue)) {
+            return false;
+        }
         return true;
     }
 

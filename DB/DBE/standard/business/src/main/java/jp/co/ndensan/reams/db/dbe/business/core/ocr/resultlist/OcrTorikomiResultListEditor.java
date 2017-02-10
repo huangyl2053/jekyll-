@@ -55,7 +55,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
         return new CsvWriter.InstanceBuilder(filePath)
                 .setEnclosure(DOUBLE_QUOTATION)
                 .setDelimiter(COMMA)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();

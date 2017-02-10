@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250002;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -181,14 +182,21 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
             return list;
         }
 
-        OcrIken ocrIken = safetyInCurrent.findByOCRIDPrioritizing(OCRID._777, OCRID._778).orElse(null); // このメソッド中でnullはありえない。
-        IProcessingResults saveIkenshoJoho = insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
-        if (saveIkenshoJoho.hasError()) {
-            list.addAll(OcrTorikomiResultsFactory.create(key, saveIkenshoJoho, ir));
+        OcrIken ocrIken = safetyInCurrent.findByOCRID(OCRID._777).orElse(null);
+        ProcessingResults results = new ProcessingResults();
+        if (ocrIken != null) {
+            IProcessingResults saveIkenshoJoho = insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
+            results.addAll(saveIkenshoJoho);
+            if (saveIkenshoJoho.hasError()) {
+                safetyInCurrent = safetyInCurrent.removed(Collections.singletonList(ocrIken));
+            } else {
+                insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
+            }
+        }
+        if (safetyInCurrent.isEmpty()) {
+            list.addAll(OcrTorikomiResultsFactory.create(key, results, ir));
             return list;
         }
-        insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
-        ProcessingResults results = new ProcessingResults(saveIkenshoJoho); //警告があれば追加
         CopyImageResult cir = (safetyInCurrent.size() == 1)
                 ? copyImageFilesToDirectory_ID777or778_1line(safetyInCurrent, ir)
                 : copyImageFilesToDirectory_ID777or778_2lines(safetyInCurrent, ir);
@@ -209,6 +217,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
             prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在.replaced("OCRIKEN.CSV")));
         }
         return prs;
+
     }
 
     @lombok.Value
@@ -302,6 +311,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 .save(writer_DbT5115);
         results.addAll(result.getProcessingResults());
         return new CopyImageResult(result.getSharedFileID(), results);
+
     }
 
     @lombok.Value

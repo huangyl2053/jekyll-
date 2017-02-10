@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE250001;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -318,6 +317,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         ProcessingResults results = new ProcessingResults();
         OcrTokkiJikoColumns newTokkiJikos = ocrChosas.editedFileNames連番再付番();
+        results.addAll(renumbered(newTokkiJikos, ocrChosas));
         OcrTokkiJikoColumns duplicates = findDuplicateKomokuNos(entity.get特記情報(), newTokkiJikos);
         TreatmentWhenTokkiRembanChofuku treatment = this.processParameter.get特記連番重複時処理方法();
         results.addAll(rembanChofuku(duplicates, treatment, ocrChosas));
@@ -332,12 +332,42 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return new SaveImageFilesResult(saveImageResult.getSharedFileID(), results);
     }
 
-    private static OcrTokkiJikoColumns findDuplicateKomokuNos(Iterable<? extends DbT5205NinteichosahyoTokkijikoEntity> tokkiJikos, OcrTokkiJikoColumns imageFileNames) {
+    private static OcrTokkiJikoColumns findDuplicateKomokuNos(Iterable<? extends DbT5205NinteichosahyoTokkijikoEntity> tokkiJikos, OcrTokkiJikoColumns newTokkiJikos) {
         List<KomokuNo> komokuNos = new ArrayList<>();
         for (DbT5205NinteichosahyoTokkijikoEntity entity : tokkiJikos) {
             komokuNos.add(new KomokuNo(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
         }
-        return imageFileNames.filterdByKomokuNo(komokuNos);
+        return newTokkiJikos.filterdByKomokuNo(komokuNos);
+    }
+
+    private static IProcessingResults renumbered(OcrTokkiJikoColumns columns, OcrChosas _550) {
+        ProcessingResults prs = new ProcessingResults();
+        if (columns.isEmpty()) {
+            return prs;
+        }
+        Map<SheetID, RStringBuilder> map = new HashMap<>();
+        List<OcrTokkiJikoColumn> sorted = columns.toList();
+        Collections.sort(sorted, OcrTokkiJikoColumn.Comparators.OrderByKomokuNo);
+        for (OcrTokkiJikoColumn column : sorted) {
+            KomokuNo komokuNo = column.komokuNo();
+            if (!komokuNo.hasRenumberd()) {
+                continue;
+            }
+            SheetID sheetID = column.sheetID();
+            if (!map.containsKey(sheetID)) {
+                map.put(sheetID, new RStringBuilder());
+            }
+            map.get(sheetID).append(komokuNo.beforeToRString()).append("→").append(komokuNo).append(RString.HALF_SPACE);
+        }
+        for (Map.Entry<SheetID, RStringBuilder> entry : map.entrySet()) {
+            OcrChosa ocrChosa = _550.findBySheetID(entry.getKey()).orElse(null);
+            if (ocrChosa == null) {
+                continue;
+            }
+            prs.add(ProcessingResultFactory.warning(ocrChosa,
+                    OcrTorikomiMessages.特記事項_連番再付番.replaced(entry.getValue().toString())));
+        }
+        return prs;
     }
 
     private static IProcessingResults rembanChofuku(OcrTokkiJikoColumns duplicates, TreatmentWhenTokkiRembanChofuku treatment, OcrChosas _550) {
@@ -347,12 +377,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         Map<SheetID, RStringBuilder> map = new HashMap<>();
         List<OcrTokkiJikoColumn> columns = duplicates.toList();
-        Collections.sort(columns, new Comparator<OcrTokkiJikoColumn>() {
-            @Override
-            public int compare(OcrTokkiJikoColumn o1, OcrTokkiJikoColumn o2) {
-                return o1.komokuNo().compareTo(o2.komokuNo());
-            }
-        });
+        Collections.sort(columns, OcrTokkiJikoColumn.Comparators.OrderByKomokuNo);
         for (OcrTokkiJikoColumn column : columns) {
             SheetID sheetID = column.sheetID();
             if (!map.containsKey(sheetID)) {

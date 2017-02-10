@@ -129,7 +129,7 @@ public class TokkijikoFileNameConvertionTheory implements IFileNameConvertionThe
     private final Map<RString, RString> table;
 
     /**
-     * @param columns
+     * @param columns 読取結果中で特記事項を登録する対象となる全カラム
      */
     public TokkijikoFileNameConvertionTheory(OcrTokkiJikoColumns columns) {
         Map<RString, RString> map = new HashMap<>();

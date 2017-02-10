@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
+import java.util.Comparator;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -25,7 +26,7 @@ public final class OcrTokkiJikoColumn {
     }
 
     OcrTokkiJikoColumn(OcrTokkiJikoColumn old, KomokuNo komokuNo) {
-        this(old.sheetID, old.theColumnNo, old.theKomokuNo);
+        this(old.sheetID, old.theColumnNo, komokuNo);
     }
 
     /**
@@ -72,4 +73,19 @@ public final class OcrTokkiJikoColumn {
         return Objects.equals(this.theKomokuNo, other.theKomokuNo);
     }
 
+    /**
+     * {@link OcrTokkiJikoColumn}の{@link Comparator}です。
+     */
+    public static enum Comparators implements Comparator<OcrTokkiJikoColumn> {
+
+        /**
+         * {@link KomokuNo}の順にソートする{@link Comparator}です。
+         */
+        OrderByKomokuNo {
+                    @Override
+                    public int compare(OcrTokkiJikoColumn o1, OcrTokkiJikoColumn o2) {
+                        return o1.komokuNo().compareTo(o2.komokuNo());
+                    }
+                };
+    }
 }
