@@ -1141,8 +1141,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         記入項目の更新();
         施設利用の更新();
         調査項目の更新(false);
-        
-        特記事項の削除();
         特記事項の更新();
     }
 
@@ -1162,16 +1160,21 @@ public class NinnteiChousaKekkaTouroku1Handler {
         完了情報の削除();
         イメージ情報の削除();
     }
-    
+
     private void 特記事項の更新() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, HashMap.class);
-        save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap.entrySet());
+        if (gaikyoTokkiNyurokuMap != null) {
+            特記事項の削除();
+            save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap.entrySet());
+        }
         HashMap gaikyoTokkiNyurokuMap_MASK = ViewStateHolder.get(ViewStateKeys.特記事項マスク一覧, HashMap.class);
-        save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap_MASK.entrySet());
+        if (gaikyoTokkiNyurokuMap_MASK != null) {
+            save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap_MASK.entrySet());
+        }
     }
-    
+
     private void save認定調査票_特記情報(ShinseishoKanriNo temp_申請書管理番号,
             int temp_認定調査履歴番号,
             Set<Map.Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set) {
