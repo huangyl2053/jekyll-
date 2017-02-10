@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Tokkijik
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -43,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -2607,7 +2607,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
             NinteiShinseiJoho 認定申請情報 = ninteiShinseiJohoManager.get要介護認定申請情報(申請書管理番号);
             boolean is短冊タイプ = false;
             if (認定申請情報.get認定申請年月日().isAfterOrEquals(
-                    new FlexibleDate(DbBusinessConfig.get(ConfigNameDBE.認定調査票特記事項_様式切替日, RDate.getNowDate())))) {
+                    new FlexibleDate(DbBusinessConfig.get(ConfigNameDBE.認定調査票特記事項_様式切替日, RDate.getNowDate(), SubGyomuCode.DBE認定支援)))) {
                 is短冊タイプ = true;
             }
             if (!is短冊タイプ) {
