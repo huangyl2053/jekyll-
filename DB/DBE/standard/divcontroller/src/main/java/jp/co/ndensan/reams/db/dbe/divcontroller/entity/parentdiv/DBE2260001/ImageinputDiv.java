@@ -25,8 +25,6 @@ public class ImageinputDiv extends Panel {
      */
     @JsonProperty("ImageinputJokenCommon")
     private ImageinputJokenCommonDiv ImageinputJokenCommon;
-    @JsonProperty("ImageinputJoken701")
-    private ImageinputJoken701Div ImageinputJoken701;
     @JsonProperty("ImageinputFile")
     private ImageinputFileDiv ImageinputFile;
     @JsonProperty("hdnSharedFileEntryInfo")
@@ -54,24 +52,6 @@ public class ImageinputDiv extends Panel {
     @JsonProperty("ImageinputJokenCommon")
     public void setImageinputJokenCommon(ImageinputJokenCommonDiv ImageinputJokenCommon) {
         this.ImageinputJokenCommon = ImageinputJokenCommon;
-    }
-
-    /*
-     * getImageinputJoken701
-     * @return ImageinputJoken701
-     */
-    @JsonProperty("ImageinputJoken701")
-    public ImageinputJoken701Div getImageinputJoken701() {
-        return ImageinputJoken701;
-    }
-
-    /*
-     * setImageinputJoken701
-     * @param ImageinputJoken701 ImageinputJoken701
-     */
-    @JsonProperty("ImageinputJoken701")
-    public void setImageinputJoken701(ImageinputJoken701Div ImageinputJoken701) {
-        this.ImageinputJoken701 = ImageinputJoken701;
     }
 
     /*
@@ -121,16 +101,6 @@ public class ImageinputDiv extends Panel {
     @JsonIgnore
     public void  setRadIchijiHanteiZumi(RadioButton radIchijiHanteiZumi) {
         this.getImageinputJokenCommon().setRadIchijiHanteiZumi(radIchijiHanteiZumi);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadYojitsuDoctorFuicchi() {
-        return this.getImageinputJoken701().getRadYojitsuDoctorFuicchi();
-    }
-
-    @JsonIgnore
-    public void  setRadYojitsuDoctorFuicchi(RadioButton radYojitsuDoctorFuicchi) {
-        this.getImageinputJoken701().setRadYojitsuDoctorFuicchi(radYojitsuDoctorFuicchi);
     }
 
     @JsonIgnore

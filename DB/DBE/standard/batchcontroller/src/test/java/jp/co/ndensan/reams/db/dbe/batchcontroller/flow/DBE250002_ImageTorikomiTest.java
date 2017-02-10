@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenShujiiFuicchi;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
@@ -76,8 +75,7 @@ public class DBE250002_ImageTorikomiTest {
     private static DBE250002_ImageTorikomiParameter createParameter() {
         DBE250002_ImageTorikomiParameter batchFlowParameter = new DBE250002_ImageTorikomiParameter(
                 new RString("DB|イメージ取込み|2016-12-28T15:00:06.887400"),
-                TreatmentWhenIchijiHanteiZumi.エラーとする,
-                TreatmentWhenShujiiFuicchi.エラーとする);
+                TreatmentWhenIchijiHanteiZumi.エラーとする);
         return batchFlowParameter;
     }
 

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenShujiiFuicchi;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.ImageinputDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,17 +35,11 @@ public class ImageinputHandler {
      */
     public void initialize() {
         div.getRadIchijiHanteiZumi().setSelectedKey(getInitialValueRadIchijiHanteiZumi());
-        div.getRadYojitsuDoctorFuicchi().setSelectedKey(getInitialValueRadYojitsuDoctorFuicchi());
     }
 
     private static RString getInitialValueRadIchijiHanteiZumi() {
         RString firstValue = BusinessConfig.get(ConfigNameDBE.イメージ取込_一次判定済みの申請者_処理方法);
         return firstValue == null ? TreatmentWhenIchijiHanteiZumi.エラーとする.code() : firstValue;
-    }
-
-    private static RString getInitialValueRadYojitsuDoctorFuicchi() {
-        RString firstValue = BusinessConfig.get(ConfigNameDBE.イメージ取込_依頼時と実施時での医師の不一致_処理方法);
-        return firstValue == null ? TreatmentWhenShujiiFuicchi.エラーとする.code() : firstValue;
     }
 
     /**
@@ -57,8 +50,7 @@ public class ImageinputHandler {
     public DBE250002_ImageTorikomiParameter createBatchParameter() {
         return new DBE250002_ImageTorikomiParameter(
                 div.getHdnSharedFileEntryInfo(),
-                TreatmentWhenIchijiHanteiZumi.toValue(div.getRadIchijiHanteiZumi().getSelectedKey()),
-                TreatmentWhenShujiiFuicchi.toValue(div.getRadYojitsuDoctorFuicchi().getSelectedKey())
+                TreatmentWhenIchijiHanteiZumi.toValue(div.getRadIchijiHanteiZumi().getSelectedKey())
         );
     }
 }

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenShujiiFuicchi;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -29,8 +28,6 @@ public class DBE250002_ImageTorikomiParameter extends BatchParameterBase {
     private RString 共有ファイルエントリ情報文字列;
     @BatchParameter(name = "一次判定済みの申請者")
     private TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法;
-    @BatchParameter(name = "依頼時と実施時での医師の不一致")
-    private TreatmentWhenShujiiFuicchi 主治医不一致時処理方法;
 
     /**
      * バッチ基盤でパラメータを作成する際に用いられるコンストラクタです。
@@ -43,16 +40,12 @@ public class DBE250002_ImageTorikomiParameter extends BatchParameterBase {
      *
      * @param 共有ファイルエントリ情報文字列 アップロードされた共有ファイルのエントリ情報
      * @param 一次判定済み時処理方法 一次判定済み時処理方法
-     * @param 主治医不一致時処理方法 主治医不一致時処理方法
-     *
      */
     public DBE250002_ImageTorikomiParameter(
             RString 共有ファイルエントリ情報文字列,
-            TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法,
-            TreatmentWhenShujiiFuicchi 主治医不一致時処理方法) {
+            TreatmentWhenIchijiHanteiZumi 一次判定済み時処理方法) {
         this.共有ファイルエントリ情報文字列 = 共有ファイルエントリ情報文字列;
         this.一次判定済み時処理方法 = 一次判定済み時処理方法;
-        this.主治医不一致時処理方法 = 主治医不一致時処理方法;
     }
 
     /**
@@ -67,6 +60,6 @@ public class DBE250002_ImageTorikomiParameter extends BatchParameterBase {
             OcrFiles imageFilePaths,
             RString tempTableName) {
         return new ImageInputProcessParameter(処理日, catalogFilePath, imageFilePaths, tempTableName,
-                主治医不一致時処理方法, 一次判定済み時処理方法);
+                一次判定済み時処理方法);
     }
 }

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenChosainFuicchi;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
-import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenShujiiFuicchi;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenTokkiRembanChofuku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -49,12 +48,12 @@ public class NinteiChosaKekkaTorikomiOcrHandler {
 
     private static RString getInitialValueRadYojitsuChosainFuicchi() {
         RString firstValue = BusinessConfig.get(ConfigNameDBE.認定調査取込_依頼時と実施時での調査員の不一致_処理方法);
-        return firstValue == null ? TreatmentWhenShujiiFuicchi.エラーとする.code() : firstValue;
+        return firstValue == null ? TreatmentWhenChosainFuicchi.エラーとする.code() : firstValue;
     }
 
     private static RString getInitialValueRadTokkiRembanChofuku() {
         RString firstValue = BusinessConfig.get(ConfigNameDBE.認定調査取込_特記事項連番_以前の取込結果との重複_処理方法);
-        return firstValue == null ? TreatmentWhenShujiiFuicchi.エラーとする.code() : firstValue;
+        return firstValue == null ? TreatmentWhenTokkiRembanChofuku.上書きする.code() : firstValue;
     }
 
     /**

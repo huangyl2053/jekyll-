@@ -77,7 +77,7 @@ public class ChosaKekkaInfoKihon {
         div.setNinteichosaTokkijikoNoList(DataPassingConverter.serialize(getHandler(div).getA4イメージ特記事項番号List()));
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 障害高齢者の特記事項ボタンを押下します。
      *
