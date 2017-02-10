@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.chosahyo;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;

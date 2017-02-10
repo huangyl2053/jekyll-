@@ -186,6 +186,10 @@ public final class OcrChosas implements Iterable<OcrChosa> {
                 : Optional.ofNullable(this.records.get(0));
     }
 
+    /**
+     * @param sheetID シートID（帳票連番）
+     * @return 指定のシートIDに該当する要素が存在する場合、その要素
+     */
     public Optional<OcrChosa> findBySheetID(SheetID sheetID) {
         for (OcrChosa ocrChosa : this) {
             if (Objects.equals(sheetID, ocrChosa.getSheetID())) {

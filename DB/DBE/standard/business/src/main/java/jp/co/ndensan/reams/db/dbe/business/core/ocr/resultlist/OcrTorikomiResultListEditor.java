@@ -83,7 +83,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
     }
 
     @lombok.Value
-    private static class Key implements Comparable<Key> {
+    private static final class Key implements Comparable<Key> {
 
         private final RString ocrID;
         private final RString sheetID;
@@ -116,7 +116,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
         }
     }
 
-    private static class Entities {
+    private static final class Entities {
 
         private final Set<OcrTorikomiKekkaCsvEntity> elements;
 

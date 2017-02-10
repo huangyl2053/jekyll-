@@ -261,7 +261,7 @@ public final class OcrChosa implements IOcrData {
         OCRID ocrID = OCRID.toValueOrEMPTY(columns.get(0));
 
         if (ocrID == OCRID._501) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 33 LINES
             result.setOCRID(ocrID);
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
@@ -297,7 +297,7 @@ public final class OcrChosa implements IOcrData {
             result.set施設利用の有無(columns.get(31));
 
         } else if (ocrID == OCRID._502) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 62 LINES
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 64 LINES
             result.setOCRID(ocrID);
             result.setSheetID(new SheetID(columns.get(1)));
             result.set保険者番号(columns.get(2));
@@ -364,7 +364,7 @@ public final class OcrChosa implements IOcrData {
             result.set認知症高齢者の日常生活自立度(new Code(columns.get(62)));
 
         } else if (ocrID == OCRID._550) {
-            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 31 LINES
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 33 LINES
             result.setOCRID(ocrID);
             RString sheetIdValue = columns.get(1);
             result.setSheetID(new SheetID(sheetIdValue));
@@ -398,6 +398,7 @@ public final class OcrChosa implements IOcrData {
             list.add(new OcrTokkiJikoColumn(result.getSheetID(), 22, getListConvertingKomokuNoOrEMPTY(columns, 27)));
             list.add(new OcrTokkiJikoColumn(result.getSheetID(), 23, getListConvertingKomokuNoOrEMPTY(columns, 28)));
             result.set特記事項Columns(new OcrTokkiJikoColumns(list));
+
         } else {
             result.setBroken(true);
         }

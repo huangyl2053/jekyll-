@@ -95,7 +95,9 @@ public final class ProcessingResults implements IProcessingResults {
     }
 
     /**
-     * @param ocrData
+     * 指定の{@link IOcrData}に関連する値を保持しない場合、成功として結果を追加します。
+     *
+     * @param ocrData {@link IOcrData}
      */
     public void addSuccessIfNotContains(IOcrData ocrData) {
         if (!this.keySet.contains(ocrData)) {

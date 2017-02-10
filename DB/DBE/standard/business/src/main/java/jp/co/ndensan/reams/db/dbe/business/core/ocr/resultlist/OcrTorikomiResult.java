@@ -96,7 +96,7 @@ public final class OcrTorikomiResult {
         }
 
         /**
-         * @param 関連データ
+         * @param 関連データ 関連データ
          * @return {@link Builder}
          */
         public Builder set関連データ(IRelatedData 関連データ) {

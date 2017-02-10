@@ -37,8 +37,8 @@ public class OcrTokkiJikoColumns implements Iterable<OcrTokkiJikoColumn> {
     }
 
     /**
-     * @param imageFileNames
-     * @return
+     * @param imageFileNames イメージファイル名
+     * @return 指定のイメージファイル名を保持する情報に合致するもののみに絞り込んだ結果
      */
     public List<RString> filterImageFileNamesByColumnNo(List<RString> imageFileNames) {
         List<RString> list = new ArrayList<>();

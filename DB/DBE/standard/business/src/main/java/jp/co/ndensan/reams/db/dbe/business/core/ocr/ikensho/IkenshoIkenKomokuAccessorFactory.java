@@ -50,6 +50,7 @@ public final class IkenshoIkenKomokuAccessorFactory {
         @Override
         @SuppressWarnings("checkstyle:cyclomaticcomplexity")
         public RString valueOf(int 連番) {
+            //CHECKSTYLE IGNORE MagicNumber FOR NEXT 230 LINES
             switch (IkenshoKomokuMapping09B.toValue(new RString(連番))) {
                 case 点滴の管理:
                     return oi.get処置内容().substringEmptyOnError(0, 1);

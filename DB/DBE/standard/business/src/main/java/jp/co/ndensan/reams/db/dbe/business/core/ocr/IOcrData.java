@@ -9,11 +9,17 @@ import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 
 /**
- *
+ * OCR取込結果のレコードであることを表します。
  */
 public interface IOcrData {
 
+    /**
+     * @return OCRID
+     */
     OCRID getOCRID();
 
+    /**
+     * @return シートID（帳票連番）
+     */
     SheetID getSheetID();
 }

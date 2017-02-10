@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- *
+ * 複数の{@link IProcessingResult}を扱うことを表します。
  */
 public interface IProcessingResults extends Iterable<IProcessingResult> {
 
@@ -25,17 +25,17 @@ public interface IProcessingResults extends Iterable<IProcessingResult> {
     boolean isEmpty();
 
     /**
-     * @return
+     * @return エラーのない{@link IOcrData}すべて
      */
     Set<IOcrData> allOcrDataNotError();
 
     /**
-     * @return
+     * @return エラーのある{@link IOcrData}すべて
      */
     Set<IOcrData> allOcrDataInError();
 
     /**
-     * @return
+     * @return 保持するすべての{@link IProcessingResult}
      */
     Collection<IProcessingResult> values();
 }

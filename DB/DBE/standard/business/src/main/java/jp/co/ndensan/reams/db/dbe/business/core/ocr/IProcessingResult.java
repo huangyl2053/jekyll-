@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * OCR取込での各処理の結果を保持することを表します。
+ * OCR取込での各処理の結果であることを表します。
  */
 public interface IProcessingResult {
 
