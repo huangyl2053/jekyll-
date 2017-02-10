@@ -17,6 +17,14 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseikensaku.ShinseiKensaku
 public interface IShinseiKensakuMapper {
 
     /**
+     * 認定申請情報の、リスト用の取得です。
+     *
+     * @param parameter
+     * @return
+     */
+    List<ShinseiKensakuRelateEntity> selectShinseiJohoForList(ShinseiKensakuMapperParameter parameter);
+
+    /**
      * 認定申請情報の取得処理です。
      *
      * @param parameter パラメータ
@@ -24,11 +32,4 @@ public interface IShinseiKensakuMapper {
      */
     List<ShinseiKensakuRelateEntity> selectShinseiJoho(ShinseiKensakuMapperParameter parameter);
 
-    /**
-     * 指定条件による認定申請情報の該当件数を返します。
-     *
-     * @param parameter パラメータ
-     * @return 認定申請情報の件数
-     */
-    int countShinseiJoho(ShinseiKensakuMapperParameter parameter);
 }

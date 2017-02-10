@@ -45,7 +45,8 @@ public interface IYokaigoNinteiTaskListMapper {
     List<ShiSeiKeTuKeRelateEntity> get申請受付(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆ 要介護認定申請情報＆要介護認定完了情報＆ 構成市町村マスタ＆認定調査依頼情報＆介護事業者＆認定調査委託先情報＆認定調査委託先情報＆調査員情報＆ 認定調査委託先情報を取得する。
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆ 要介護認定申請情報＆要介護認定完了情報＆ 構成市町村マスタ＆認定調査依頼情報＆介護事業者＆認定調査委託先情報＆認定調査委託先情報＆調査員情報＆
+     * 認定調査委託先情報を取得する。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return List<CyoSaiRaiRelateEntity>
@@ -53,7 +54,8 @@ public interface IYokaigoNinteiTaskListMapper {
     ChosairaiRelateWithCountEntity get調査依頼(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆ 要介護認定申請情報＆要介護認定完了情報＆ 構成市町村マスタ＆認定調査依頼情報＆介護事業者＆認定調査委託先情報＆認定調査委託先情報＆調査員情報＆ 認定調査委託先情報を取得する。
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆ 要介護認定申請情報＆要介護認定完了情報＆ 構成市町村マスタ＆認定調査依頼情報＆介護事業者＆認定調査委託先情報＆認定調査委託先情報＆調査員情報＆
+     * 認定調査委託先情報を取得する。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return List<ShinSaKaiToRoKuRelate>
@@ -61,7 +63,8 @@ public interface IYokaigoNinteiTaskListMapper {
     List<ShinSaKaiToRoKuRelate> get前調査依頼(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆介護事業者＆ 主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報＆主治医医療機関情報＆主治医情報を取得する。
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆介護事業者＆
+     * 主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報＆主治医医療機関情報＆主治医情報を取得する。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return List<IKnSyoiRaiRelateEntity>
@@ -69,7 +72,8 @@ public interface IYokaigoNinteiTaskListMapper {
     List<IKnSyoiRaiRelateEntity> get意見書依頼(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆介護事業者＆ 主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報＆主治医医療機関情報＆主治医情報を取得する。
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆介護事業者＆
+     * 主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報＆主治医医療機関情報＆主治医情報を取得する。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return int
@@ -77,7 +81,8 @@ public interface IYokaigoNinteiTaskListMapper {
     int get意見書依頼件数(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆介護事業者＆ 主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報＆主治医医療機関情報＆主治医情報を取得する。
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆申請履歴情報＆要介護認定申請情報＆要介護認定完了情報＆構成市町村マスタ＆介護事業者＆
+     * 主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報＆主治医医療機関情報＆主治医情報を取得する。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return List<ShinSaKaiToRoKuRelate>
@@ -107,16 +112,15 @@ public interface IYokaigoNinteiTaskListMapper {
      * @return List<IkenSyoNyuSyuRelateEntity>
      */
     List<IkenSyoNyuSyuRelateEntity> get意見書入手(YokaigoNinteiTaskListParameter parameter);
-    
+
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ
-     * ＆主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ ＆主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return int
      */
     int get意見書入手件数(YokaigoNinteiTaskListParameter parameter);
-    
+
     /**
      * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ ＆主治医意見書作成依頼情報＆要介護認定主治医意見書情報＆主治医医療機関情報＆主治医情報
      *
@@ -140,14 +144,6 @@ public interface IYokaigoNinteiTaskListMapper {
      * @return List<MaSuKinGuRelateEntity>
      */
     List<MaSuKinGuRelateEntity> getマスキング(YokaigoNinteiTaskListParameter parameter);
-
-    /**
-     * 要介護認定申請情報＆構成市町村マスタ＆要介護認定完了情報抽出対象件数
-     *
-     * @param parameter YokaigoNinteiTaskListParameter
-     * @return int
-     */
-    int getマスキング件数(YokaigoNinteiTaskListParameter parameter);
 
     /**
      * 要介護認定申請情報＆構成市町村マスタ＆要介護認定完了情報

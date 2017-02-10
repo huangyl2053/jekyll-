@@ -102,6 +102,7 @@ public class KanryoShoriShinsaUketsukeHandler {
         List<ShinSaKeTuKeBusiness> リスト = 審査受付.records();
         int totalCount = 審査受付.totalCount();
         put審査受付List(リスト);
+        List<PersonalData> personalData = new ArrayList<>();
         for (ShinSaKeTuKeBusiness value : リスト) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(value.get保険者() == null ? RString.EMPTY : value.get保険者());
@@ -113,9 +114,10 @@ public class KanryoShoriShinsaUketsukeHandler {
             row.setShinseiKubunShinseiji(value.get認定申請区分_申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(value.get認定申請区分_申請時コード().getKey()).get名称());
             row.setShinseishoKanriNo(value.get申請書管理番号() == null ? RString.EMPTY : value.get申請書管理番号().value());
-            setAccessLog(row.getShinseishoKanriNo());
+            personalData.add(createPersonalData(row.getShinseishoKanriNo()));
             rows.add(row);
         }
+        AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgNinteiTaskList().setDataSource(rows);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(totalCount);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtMaxCount().getValue().intValue());
@@ -148,9 +150,8 @@ public class KanryoShoriShinsaUketsukeHandler {
         }
     }
 
-    private void setAccessLog(RString 申請書管理番号) {
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+    private PersonalData createPersonalData(RString 申請書管理番号) {
+        return PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
                 new RString("申請書管理番号"), 申請書管理番号));
-        AccessLogger.log(AccessLogType.照会, personalData);
     }
 }

@@ -63,4 +63,5 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private int nijiHanteiNinteiYukoKikan;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
+    private int totalCount;
 }

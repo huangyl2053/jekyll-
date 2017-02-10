@@ -138,8 +138,9 @@ public class ShinseiKensaku {
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(hihokenshaNo));
-        ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(searchResult.records()));
+        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensakuForList(getHandler(div).createParameter(hihokenshaNo));
+        List<ShinseishoKanriNo> selected申請書管理番号 = extract申請書管理番号(searchResult);
+        ViewStateHolder.put(ViewStateKeys.認定申請情報, new ShinseiKensakuInfoBusiness(selected申請書管理番号));
         if (!searchResult.records().isEmpty()) {
             int lastShinseiYmdIndex = findLastIndex(searchResult);
 
@@ -160,6 +161,14 @@ public class ShinseiKensaku {
             return forwardNextOrStay(div, Events.検索結果1件);
         }
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
+    }
+
+    private List<ShinseishoKanriNo> extract申請書管理番号(SearchResult<ShinseiKensakuBusiness> searchResult) {
+        List<ShinseishoKanriNo> selectedShinseishoKanriNo = new ArrayList<>();
+        for (ShinseiKensakuBusiness rec : searchResult.records()) {
+            selectedShinseishoKanriNo.add(rec.get申請書管理番号());
+        }
+        return selectedShinseishoKanriNo;
     }
 
     private int findLastIndex(SearchResult<ShinseiKensakuBusiness> searchResult) {
@@ -188,7 +197,7 @@ public class ShinseiKensaku {
         RString menuID = ResponseHolder.getMenuID();
         dgShinseiJoho_Row row = (event == Events.検索結果1件) ? div.getDgShinseiJoho().getDataSource().get(0)
                 : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
-                : null;
+                        : null;
         if (row == null) {
             return ResponseData.of(div).respond();
         }
@@ -200,7 +209,7 @@ public class ShinseiKensaku {
         RString 被保険者氏名 = row.getShimei();
         RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
         LasdecCode 市町村コード = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード();
-        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(被保険者番号));
+        SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensakuForList(getHandler(div).createParameter(被保険者番号));
         if (!searchResult.records().isEmpty()) {
             int lastShinseiYmdIndex = findLastIndex(searchResult);
 
@@ -348,7 +357,10 @@ public class ShinseiKensaku {
         List<YokaigoYoshienShinseiIchiranItem> items = new ArrayList<>();
         ShinseiKensakuInfoBusiness infoBusiness = ViewStateHolder.get(ViewStateKeys.認定申請情報, ShinseiKensakuInfoBusiness.class);
         int renban = 1;
-        for (ShinseiKensakuBusiness row : infoBusiness.getShinseiKensakuList()) {
+        //申請書管理番号からデータ取得しなおす
+        SearchResult<ShinseiKensakuBusiness> searchResult
+                = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createParameter(infoBusiness.getShinseiKensakuList()));
+        for (ShinseiKensakuBusiness row : searchResult.records()) {
             YokaigoYoshienShinseiIchiranItem item = new YokaigoYoshienShinseiIchiranItem();
             item.setRenban(new RString(String.valueOf(renban++)));
             item.setShoKisaiHokenshaNo(row.get証記載保険者番号());

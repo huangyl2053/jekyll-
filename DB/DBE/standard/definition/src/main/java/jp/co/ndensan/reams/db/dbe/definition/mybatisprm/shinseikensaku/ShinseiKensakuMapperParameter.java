@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.util.RStrings;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -291,9 +293,11 @@ public class ShinseiKensakuMapperParameter {
     //主治医意見書作成依頼履歴番号
     private int rirekiNo;
 
+    //申請書管理番号指定取得用
+    private List<ShinseishoKanriNo> shinseishoKanriNos;
+
     /**
-     * 検索に用いる被保険者氏名を設定します。 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
-     * 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
+     * 検索に用いる被保険者氏名を設定します。 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
      *
      * @param hihokenshaName 検索に用いる被保険者氏名
      */

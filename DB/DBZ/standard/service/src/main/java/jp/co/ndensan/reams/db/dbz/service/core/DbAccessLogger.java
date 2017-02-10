@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.service.core;
+
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+
+/**
+ * 介護業務専用に作成したアクセスログ制御クラスです。<br>
+ * ※Dbは介護業務の業務コードです。
+ */
+public class DbAccessLogger {
+
+    private final List<PersonalData> personalData = new ArrayList<>();
+
+    private static final Code コード = new Code("0003");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
+
+    /**
+     * アクセスログを追加します。
+     *
+     * @param shoKisaiHokenshaNo
+     * @param hihokenshaNo
+     */
+    public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
+        store(shoKisaiHokenshaNo, hihokenshaNo, new ExpandedInformation(コード, 被保険者番号, hihokenshaNo));
+    }
+
+    /**
+     * アクセスログを追加します。
+     *
+     * @param shoKisaiHokenshaNo
+     * @param hihokenshaNo
+     * @param expandedInformation
+     */
+    public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation expandedInformation) {
+        personalData.add(PersonalData.of(new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo)), expandedInformation));
+    }
+
+    /**
+     * アクセスログを実際に書き出します。
+     *
+     * @param accessLogType
+     */
+    public void flushBy(AccessLogType accessLogType) {
+        jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.log(accessLogType, personalData);
+        personalData.clear();
+    }
+}

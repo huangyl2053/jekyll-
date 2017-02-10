@@ -514,13 +514,13 @@ public class NinteiShinseiTorokuHandler {
         div.getTxtEnkiRiyu().setReadOnly(flag);
         div.getTplShinseishaJoho().setDisabled(true);
     }
-    
+
     /**
      * 申請届出者の設定
      *
      * @param div 審査依頼受付／みなし２号審査受付Div
      * @param ninteiTandokuDounyuFlag boolean
-     * 
+     *
      */
     public void setCcdShinseiTodokedesha(NinteiShinseiTorokuDiv div, boolean ninteiTandokuDounyuFlag) {
         if (ninteiTandokuDounyuFlag) {

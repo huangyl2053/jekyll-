@@ -66,17 +66,8 @@ public class IkenshoHoshuShokaiFinder {
         for (IkenshoHoshuShokaiRelateEntity entity : entityList) {
             list.add(new IkenshoHoshuShokaiBusiness(entity));
         }
-        return SearchResult.of(list, 0, false);
+
+        return SearchResult.of(list, entityList.get(0).getTotalCount(), false);
     }
 
-    /**
-     * レコード数を取得します。
-     *
-     * @param param IkenshoHoshuShokaiMapperParameter
-     * @return 検索条件に満たすレコード数
-     */
-    public int getCount(IkenshoHoshuShokaiMapperParameter param) {
-        IIkenshoHoshuShokaiRelateMapper mapper = mapperProvider.create(IIkenshoHoshuShokaiRelateMapper.class);
-        return mapper.getCount(param);
-    }
 }

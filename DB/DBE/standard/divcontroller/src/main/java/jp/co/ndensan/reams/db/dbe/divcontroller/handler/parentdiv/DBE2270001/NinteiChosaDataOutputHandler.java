@@ -149,6 +149,7 @@ public class NinteiChosaDataOutputHandler {
     public void get認定調査一覧(SearchResult<NinteiChosaDataOutputBusiness> searchResult) {
         List<dgNinteiChosaData_Row> rowList = new ArrayList<>();
         boolean 共通ボタン活性フラグ = false;
+        List<PersonalData> personalData = new ArrayList<>();
         for (NinteiChosaDataOutputBusiness master : searchResult.records()) {
             共通ボタン活性フラグ = true;
             dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
@@ -165,8 +166,9 @@ public class NinteiChosaDataOutputHandler {
             row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.toValue(master.get認定申請区分_申請時_コード()).get名称());
             row.setShinseishoKanriNo(master.get申請書管理番号());
             rowList.add(row);
-            アクセスログ(master.get申請書管理番号());
+            personalData.add(toPersonalData(master.get申請書管理番号()));
         }
+        AccessLogger.log(AccessLogType.照会, personalData);
         if (共通ボタン活性フラグ) {
             //CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }
@@ -183,10 +185,6 @@ public class NinteiChosaDataOutputHandler {
         div.getNinteiIchiran().setDisplayNone(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, true);
-    }
-
-    private void アクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
     }
 
     private PersonalData toPersonalData(RString 申請書管理番号) {

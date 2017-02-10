@@ -75,8 +75,7 @@ public class YokaigoNinteiTaskListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
      */
     public static YokaigoNinteiTaskListFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiTaskListFinder.class);
@@ -284,18 +283,6 @@ public class YokaigoNinteiTaskListFinder {
             マスキングList.add(new MaSuKinGuBusiness(entity));
         }
         return SearchResult.of(マスキングList, 0, false);
-    }
-
-    /**
-     * マスキングモードの場合でデータ件数取得
-     *
-     * @param parameter YokaigoNinteiTaskListParameter
-     * @return int
-     */
-    @Transaction
-    public int getマスキングモード件数(YokaigoNinteiTaskListParameter parameter) {
-        IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        return mapper.getマスキング件数(parameter);
     }
 
     /**

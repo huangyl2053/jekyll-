@@ -35,5 +35,5 @@ public class ChosahyoJissekiIchiranRelateEntity {
     private RString 認定調査依頼区分コード;
     private RString 申請書管理番号;
     private RString 認定調査依頼履歴番号;
-
+    private int totalCount;
 }

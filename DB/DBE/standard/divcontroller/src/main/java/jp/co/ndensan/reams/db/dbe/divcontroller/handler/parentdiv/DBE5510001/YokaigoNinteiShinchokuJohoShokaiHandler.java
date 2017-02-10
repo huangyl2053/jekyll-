@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
@@ -87,6 +88,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
+        div.getChkKensakuOption().setSelectedItemsByKey(Arrays.asList(DATE_SOURCE_KEY0));
         set検索条件切替(false);
         init最大表示件数();
         setDisable();
@@ -103,7 +105,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             div.getTxtMaximumDisplayNumber().setValue(new Decimal(データ出力件数閾値.toString()));
         }
     }
-    
+
     public void set検索条件切替(boolean is検索結果表示) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnSearch"), !is検索結果表示);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, is検索結果表示);
@@ -310,9 +312,9 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
-        if(RString.isNullOrEmpty(joho.get合議体名())){
+        if (RString.isNullOrEmpty(joho.get合議体名())) {
             row.setKaigoNinteiShinsakaiGogitai(RString.EMPTY);
-        }else{
+        } else {
             row.setKaigoNinteiShinsakaiGogitai(joho.get合議体名());
         }
         row.setKaigoNinteiShinsakaiYokaigodo(joho.get二次判定結果名称());

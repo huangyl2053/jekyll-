@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6050001;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshushokai.IkenshoHoshuShokaiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601004.DBE601004_IkenshosakuseiHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.DBE6050001StateName;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 意見書作成報酬照会の処理詳細です。
@@ -72,7 +74,7 @@ public class IkenshoSakuseiHoshuShokai {
         if (fromCode.equals(IkenshoSakuseiHoshuShokaiMessages.データなし.getCode())) {
             return ResponseData.of(div).respond();
         }
-        
+
         // 作成依頼開始＞作成依頼終了の場合、エラーとする
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate開始日終了日();
         if (validPairs.iterator().hasNext()) {
@@ -87,33 +89,26 @@ public class IkenshoSakuseiHoshuShokai {
         if (div.getTxtSakuseiIraibi().getToValue() != null) {
             作成依頼日終了 = new FlexibleDate(div.getTxtSakuseiIraibi().getToValue().toDateString());
         }
-        
+
         // 検索条件に満たす最大件数を取得
-        
         Decimal 最大表示件数 = div.getTxtMaxKensu().getValue();
-        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createParameterForGetCount(
-                作成依頼日開始, 
-                作成依頼日終了, 
-                div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
-                div.getCcdHokensya().getSelectedItem().get市町村名称());
-        IkenshoHoshuShokaiFinder finder = IkenshoHoshuShokaiFinder.createInstance();
-        int 総件数 = finder.getCount(paramter);
-        
-        // 総件数が 0 件の場合はメッセージを表示
-        if (総件数 == 0) {
-            return ResponseData.of(div).addMessage(IkenshoSakuseiHoshuShokaiMessages.データなし.getMessage()).respond();
-        }
-        
+
         // データを取得
-        
-        paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
-                作成依頼日開始, 
-                作成依頼日終了, 
+        IkenshoHoshuShokaiMapperParameter paramter = IkenshoHoshuShokaiMapperParameter.createSelectBy情報(
+                作成依頼日開始,
+                作成依頼日終了,
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
                 div.getCcdHokensya().getSelectedItem().get市町村名称(),
                 最大表示件数);
-        getHandler(div).set一覧結果(IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter).records(), 総件数);
-        
+        SearchResult<IkenshoHoshuShokaiBusiness> result = IkenshoHoshuShokaiFinder.createInstance().select合計額リスト(paramter);
+
+        // 総件数が 0 件の場合はメッセージを表示
+        if (result.totalCount() == 0) {
+            return ResponseData.of(div).addMessage(IkenshoSakuseiHoshuShokaiMessages.データなし.getMessage()).respond();
+        }
+
+        getHandler(div).set一覧結果(result.records(), result.totalCount());
+
         if (div.getDgIkenshoSakuseiHoshu().getDataSource().isEmpty()) {
             return ResponseData.of(div).setState(DBE6050001StateName.検索結果表示結果無し);
         }

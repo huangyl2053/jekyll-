@@ -39,4 +39,5 @@ public class MaSuKinGuRelateEntity {
     private boolean hasTokkiMask;
     private boolean hasIkenshoMask;
     private boolean hasGaikyoMask;
+    private int totalCount;
 }

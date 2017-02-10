@@ -136,7 +136,7 @@ public class Ninteishinseibi {
             getHandler(div).取込むの編集(row, entity, 特記事項List, 概況特記事項);
             rowList.add(row);
             ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(entity.get証記載保険者番号());
-            ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, 
+            ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会,
                     shoKisaiHokenshaNo, entity.get被保険者番号());
         }
         if (null != ninteiAccessLogger) {

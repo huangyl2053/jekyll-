@@ -138,7 +138,7 @@ public class MaSuKinGuBusiness {
     public RDateTime getイメージ共有ファイルID() {
         return entity.getImageSharedFileId();
     }
-    
+
     /**
      * 特記マスクフラグを返します。
      *
@@ -147,7 +147,7 @@ public class MaSuKinGuBusiness {
     public boolean has特記マスク() {
         return entity.isHasTokkiMask();
     }
-    
+
     /**
      * 概況マスクフラグを返します。
      *
@@ -156,7 +156,7 @@ public class MaSuKinGuBusiness {
     public boolean has概況マスク() {
         return entity.isHasGaikyoMask();
     }
-        
+
     /**
      * 意見書マスクフラグを返します。
      *
@@ -164,5 +164,14 @@ public class MaSuKinGuBusiness {
      */
     public boolean has意見書マスク() {
         return entity.isHasIkenshoMask();
+    }
+
+    /**
+     * 総件数を取得します。
+     *
+     * @return
+     */
+    public int getTotalCount() {
+        return entity.getTotalCount();
     }
 }

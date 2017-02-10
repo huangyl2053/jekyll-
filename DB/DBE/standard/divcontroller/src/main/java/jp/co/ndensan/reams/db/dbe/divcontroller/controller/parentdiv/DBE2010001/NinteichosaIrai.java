@@ -644,20 +644,20 @@ public class NinteichosaIrai {
                 row.getShinseishoKanriNo(),
                 row.getHokensha(),
                 row.getNinteiShinseiDay().getValue() != null
-                ? row.getNinteiShinseiDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getNinteiShinseiDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getHihoNumber(),
                 row.getHihoShimei(),
                 get申請区分_申請時_コード(row.getShinseiKubunShinseiji()),
                 row.getShinseiKubunShinseiji(),
                 row.getChosaIraiSaichosaCount() != null ? new RString(row.getChosaIraiSaichosaCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraishoHakkoDay().getValue() != null
-                ? row.getChosaIraishoHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getChosaIraishoHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChousahyoOutput().getValue() != null
-                ? row.getChousahyoOutput().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getChousahyoOutput().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiDataShutsuryokuDay().getValue() != null
-                ? row.getChosaIraiDataShutsuryokuDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getChosaIraiDataShutsuryokuDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
-                ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaIraiKubun(),
                 row.getKonkaiChosaItakusaki(),
                 row.getKonkaiChosain(),
@@ -670,11 +670,11 @@ public class NinteichosaIrai {
                 row.getJusho(),
                 row.getNyushoShisetsu(),
                 row.getChosaTokusokuHakkoDay().getValue() != null
-                ? row.getChosaTokusokuHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getChosaTokusokuHakkoDay().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChosaTokusokuHoho(),
                 row.getChosaTokusokuCount() != null ? new RString(row.getChosaTokusokuCount().getValue().toString()) : RString.EMPTY,
                 row.getChosaIraiKigen().getValue() != null
-                ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
+                        ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChikuCode(),
                 row.getChosaTokusokuChiku());
         return data;

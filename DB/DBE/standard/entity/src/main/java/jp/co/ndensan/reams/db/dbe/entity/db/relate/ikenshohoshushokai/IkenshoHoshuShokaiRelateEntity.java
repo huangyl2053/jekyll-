@@ -48,4 +48,5 @@ public class IkenshoHoshuShokaiRelateEntity {
     private int 診断検査費用_合計;
     private int 合計;
     private int 件数;
+    private int totalCount;
 }

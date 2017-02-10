@@ -22,13 +22,4 @@ public interface IChosahyoJissekiIchiranMapper {
      * @return List<ChosahyoJissekiIchiranEntity>
      */
     List<ChosahyoJissekiIchiranRelateEntity> get帳票出力用認定調査実績集計表(ChosahyoJissekiIchiranMybitisParamter mapperParameter);
-
-    /**
-     * データの件数を取得します。
-     *
-     * @param mapperParameter 帳票出力用認定調査実績集計表のMyBatis用パラメータ
-     * @return 件数
-     */
-    int getTotalCount(ChosahyoJissekiIchiranMybitisParamter mapperParameter);
-
 }

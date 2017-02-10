@@ -55,6 +55,29 @@ public class ShinseiKensakuFinder {
      * @param parameter 検索条件
      * @return 要介護認定申請情報
      */
+    public SearchResult<ShinseiKensakuBusiness> getShinseiKensakuForList(ShinseiKensakuMapperParameter parameter) {
+        List<ShinseiKensakuBusiness> shinseiKensakuList = new ArrayList<>();
+        IShinseiKensakuMapper shinseiKensakuMapper = mapperProvider.create(IShinseiKensakuMapper.class);
+        List<ShinseiKensakuRelateEntity> list = shinseiKensakuMapper.selectShinseiJohoForList(parameter);
+        for (ShinseiKensakuRelateEntity entity : list) {
+            ShinseiKensakuBusiness business = new ShinseiKensakuBusiness(entity);
+            shinseiKensakuList.add(business);
+        }
+        int totalcount;
+        if (list.isEmpty()) {
+            totalcount = 0;
+        } else {
+            totalcount = list.get(0).getTotalCount();
+        }
+        return SearchResult.of(shinseiKensakuList, totalcount, parameter.getLimitCount() < totalcount);
+    }
+
+    /**
+     * 要介護認定申請検索処理です。
+     *
+     * @param parameter 検索条件
+     * @return 要介護認定申請情報
+     */
     public SearchResult<ShinseiKensakuBusiness> getShinseiKensaku(ShinseiKensakuMapperParameter parameter) {
         List<ShinseiKensakuBusiness> shinseiKensakuList = new ArrayList<>();
         IShinseiKensakuMapper shinseiKensakuMapper = mapperProvider.create(IShinseiKensakuMapper.class);
@@ -63,7 +86,12 @@ public class ShinseiKensakuFinder {
             ShinseiKensakuBusiness business = new ShinseiKensakuBusiness(entity);
             shinseiKensakuList.add(business);
         }
-        int totalcount = shinseiKensakuMapper.countShinseiJoho(parameter);
+        int totalcount;
+        if (list.isEmpty()) {
+            totalcount = 0;
+        } else {
+            totalcount = list.get(0).getTotalCount();
+        }
         return SearchResult.of(shinseiKensakuList, totalcount, parameter.getLimitCount() < totalcount);
     }
 }

@@ -3,15 +3,15 @@
 <!-- @reamsid_L DBE-0210-010 dongyabin -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai.IYokaigoNinteiShinchokuJohoShokaiMapper">
     <resultMap id="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity" autoMapping="true">
-        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="RStringTypeHandler" />
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
-        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="hihokenshaKubunCode" column="hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteiShinShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="tokki" column="tokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="RStringTypeHandler" />
+        <result property="hihokenshaKubunCode" column="hihokenshaKubunCode" typeHandler="RStringTypeHandler" />
+        <result property="ninteiShinShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="RStringTypeHandler" />
+        <result property="tokki" column="tokki" typeHandler="RStringTypeHandler" />
+        <result property="yubinNo" column="yubinNo" typeHandler="RStringTypeHandler" />
+        <result property="jusho" column="jusho" typeHandler="RStringTypeHandler" />
+        <result property="seibetsu" column="seibetsu" typeHandler="RStringTypeHandler" />
         <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="age" column="age" />
         <result property="ninteichosaIraiKanryoYMD" column="ninteichosaIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -24,29 +24,29 @@
         <result property="ninteiShinsakaiKanryoYMD" column="ninteiShinsakaiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaIraiYMD" column="ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaJuryoYMD" column="ninteichosaJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="RStringTypeHandler" />
+        <result property="chosainShimei" column="chosainShimei" typeHandler="RStringTypeHandler" />
         <result property="ikenshoSakuseiIraiYMD" column="ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ikenshoJuryoYMD" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="RStringTypeHandler" />
+        <result property="shujiiName" column="shujiiName" typeHandler="RStringTypeHandler" />
         <result property="ichijiHanteiYMD" column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="RStringTypeHandler" />
         <result property="shinsakaiKaisaiYoteiYMD" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shinsakaiShiryoSakuseiYMD" column="shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shinsakaiKaisaiYMD" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="RStringTypeHandler" />
         <result property="gogitaiNo" column="gogitaiNo" />
-        <result property="gogitaiMei" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="nijiHanYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="gogitaiMei" column="gogitaiMei" typeHandler="RStringTypeHandler" />
+        <result property="nijiHanYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="RStringTypeHandler" />
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="RStringTypeHandler" />
         <result property="ninteichosaIraiRirekiNo" column="ninteichosaIraiRirekiNo" />
     </resultMap>
 
     <select resultOrdered="true" id="get申請者一覧内容"
             resultMap="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter"
-            fetchSize="500">
+            fetchSize="100">
         <include refid="mainTable"/>
         SELECT
         <include refid="selectShinseiIchiran"/>
@@ -57,18 +57,10 @@
         DbT5101."hihokenshaNo",
         DbT5101."ninteiShinseiYMD"
         <if test="maximumDisplayNumberFlag">
+            <if test="!kensakuOptionKey0">
             LIMIT #{maximumDisplayNumber}
+            </if>
         </if>
-    </select>
-
-    <select id="count申請者" resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter"
-            fetchSize="500">
-        <include refid="mainTable"/>
-        SELECT
-        count(1)
-        FROM
-        <include refid="tablesWithParameter"/>
     </select>
 
     <sql id="selectShinseiIchiran">
@@ -111,7 +103,8 @@
         DbT5101."seinengappiYMD",
         DbT5101."age",
         DbT5101."shinseishoKanriNo",
-        DbT5201."ninteichosaIraiRirekiNo"
+        DbT5201."ninteichosaIraiRirekiNo",
+        COUNT(*) OVER() as "totalCount"
     </sql>
 
     <sql id="mainTable">
@@ -130,6 +123,13 @@
         DbT5591."gogitaiMei",
         DbT5102."nijiHanteiYokaigoJotaiKubunCode"
         FROM rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        <if test="kensakuOptionKey0">
+            INNER JOIN 
+                (SELECT *
+                 FROM rgdb."DbT5105NinteiKanryoJoho"
+                 WHERE "centerSoshinYMD" IS NULL) AS DbT5105
+            ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        </if>
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102 ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502 ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND (DbT5502."hanteiKekkaCode"='01' OR DbT5502."hanteiKekkaCode" IS NULL)
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511 ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
@@ -233,18 +233,11 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-        <if test="kensakuOptionKey0">
-            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102
-            ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        </if>
         <if test="kensakuOptionKey1">
             LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
             ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         </if>
         <where>
-            <if test="kensakuOptionKey0">
-                AND DbT5102."shinseishoKanriNo" IS NULL
-            </if>
             <if test="kensakuOptionKey1">
                 AND DbT5121."shinseishoKanriNo" IS NULL
             </if>
