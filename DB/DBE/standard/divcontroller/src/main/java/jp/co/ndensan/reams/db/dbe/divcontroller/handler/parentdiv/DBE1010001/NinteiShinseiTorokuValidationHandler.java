@@ -212,16 +212,17 @@ public class NinteiShinseiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 依頼完了チェック(NinteiShinseiTorokuResult result) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        boolean is転入申請 = NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(result.get認定申請区分申請時コード().value());
         boolean 認定調査依頼完了フラグ = result.get認定調査依頼完了年月日() != null && !result.get認定調査依頼完了年月日().isEmpty();
         boolean 主治医意見書作成依頼完了フラグ = result.get主治医意見書作成依頼完了年月日() != null && !result.get主治医意見書作成依頼完了年月日().isEmpty();
-        if (認定調査依頼完了フラグ && 主治医意見書作成依頼完了フラグ) {
+        if (!is転入申請 && 認定調査依頼完了フラグ && 主治医意見書作成依頼完了フラグ) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.認定調査と主治医意見書作成依頼済のため処理不可));
             return validationMessages;
         }
-        if (認定調査依頼完了フラグ) {
+        if (!is転入申請 && 認定調査依頼完了フラグ) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.認定調査依頼済のため処理不可));
         }
-        if (主治医意見書作成依頼完了フラグ) {
+        if (!is転入申請 && 主治医意見書作成依頼完了フラグ) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.主治医意見書作成依頼済のため処理不可));
         }
         return validationMessages;

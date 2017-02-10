@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.NinteiShinseiRenrakusakiJoho;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBZCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -40,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class NinteiShinseiRenrakusakiJohoHandler {
 
     private final NinteiShinseiRenrakusakiJohoDiv div;
+    private final int INT_0 = 0;
 
     /**
      * コンストラクタです。
@@ -137,10 +140,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void setRenrakusaki(List<RenrakusakiJoho> renrakusakiJohoList) {
         List<dgRenrakusakiIchiran_Row> dateSource = new ArrayList<>();
-        TextBoxNum remban = new TextBoxNum();
-        TextBoxNum yusen = new TextBoxNum();
-        
         for (RenrakusakiJoho renrakusakiJoho : renrakusakiJohoList) {
+            TextBoxNum remban = new TextBoxNum();
+            TextBoxNum yusen = new TextBoxNum();
             remban.setValue(Decimal.valueOf(renrakusakiJoho.get連番()));
             yusen.setValue(Decimal.valueOf(renrakusakiJoho.get優先順位()));
             dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(remban,
@@ -229,9 +231,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set追加の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        TextBoxNum num = new TextBoxNum(); 
+        TextBoxNum num = setRenban(dateSoruce); 
         TextBoxNum yusen = new TextBoxNum(); 
-        num.setValue(div.getTxtRenban().getValue());
         yusen.setValue(div.getTxtYusenJuni().getValue());
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
                 nullTOEmpty(div.getTxtShimei().getValue()),
@@ -251,9 +252,8 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set修正の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        TextBoxNum num = new TextBoxNum(); 
+        TextBoxNum num = setRenban(dateSoruce); 
         TextBoxNum yusen = new TextBoxNum(); 
-        num.setValue(div.getTxtRenban().getValue());
         yusen.setValue(div.getTxtYusenJuni().getValue());
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
                 nullTOEmpty(div.getTxtShimei().getValue()),
@@ -270,7 +270,24 @@ public class NinteiShinseiRenrakusakiJohoHandler {
         dateSoruce.set(div.getDgRenrakusakiIchiran().getClickedRowId(), row);
         div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
     }
+    
+    private TextBoxNum setRenban(List<dgRenrakusakiIchiran_Row> dateSoruce) {
+        TextBoxNum num = new TextBoxNum();
+        if (dateSoruce.isEmpty()) {
+            num.setValue(Decimal.ONE);
+        } else {
+            Collections.sort(dateSoruce, new Comparator<dgRenrakusakiIchiran_Row>() {
+                @Override
+                public int compare(dgRenrakusakiIchiran_Row o1, dgRenrakusakiIchiran_Row o2) {
+                    return o1.getRenban().getValue().compareTo(o2.getRenban().getValue());
+                }
+            });
+            num.setValue(dateSoruce.get(dateSoruce.size() - 1).getRenban().getValue().add(Decimal.ONE));
+        }
+        return num;
+    }
 
+    
     /**
      * 連絡先一覧のデータソースをビジネスへ変換します。
      *
@@ -280,14 +297,14 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     public List<RenrakusakiJoho> setBusiness(List<RenrakusakiJoho> dbdBusiness) {
         for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
             if (RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, Integer.parseInt(row.getRenban().getValue().toString()));
+                RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, row.getRenban().getValue().intValue());
                 business = business.createBuilderForEdit().set連絡先氏名(new AtenaMeisho(row.getShimei())).build();
                 business = business.createBuilderForEdit().set連絡先続柄(row.getTsuzukigara()).build();
                 business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
                 business = business.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
                 business = business.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
                 business = business.createBuilderForEdit().set優先順位(row.getYusenJuni() == null ? 0
-                        : Integer.parseInt(row.getYusenJuni().toString())).build();
+                        : row.getYusenJuni().getValue().intValue()).build();
                 business = business.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
                 business = business.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
                 business = business.createBuilderForEdit().set連絡先氏名カナ(new AtenaKanaMeisho(row.getKanaShimei())).build();
@@ -304,7 +321,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                         joho = joho.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
                         joho = joho.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
                         joho = joho.createBuilderForEdit().set優先順位(row.getYusenJuni().getValue() == null ? 0
-                                : Integer.parseInt(row.getYusenJuni().toString())).build();
+                                : row.getYusenJuni().getValue().intValue()).build();
                         joho = joho.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
                         joho = joho.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
                         joho = joho.createBuilderForEdit().set連絡先氏名カナ(new AtenaKanaMeisho(row.getKanaShimei())).build();

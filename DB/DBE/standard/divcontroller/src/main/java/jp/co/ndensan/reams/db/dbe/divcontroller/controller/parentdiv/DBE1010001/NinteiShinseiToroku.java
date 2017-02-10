@@ -220,9 +220,10 @@ public class NinteiShinseiToroku {
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
-                ViewStateHolder.put("送付年月日", result.getIF送付年月日());
-                ViewStateHolder.put("センター送信年月日", result.getセンター送信年月日());
-                ViewStateHolder.put("認定申請情報登録完了年月日", result.get認定申請情報登録完了年月日());
+                
+                ViewStateHolder.put(ViewStateKeys.処理日, result.getIF送付年月日());
+                ViewStateHolder.put(ViewStateKeys.認定申請年月日, result.get認定申請情報登録完了年月日());
+                ViewStateHolder.put(ViewStateKeys.報告年月, result.getセンター送信年月日());
             } 
             getHandler(div).loadPnl(result, ninteiTandokuDounyuFlag);
             ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
@@ -752,9 +753,9 @@ public class NinteiShinseiToroku {
             ValidationMessageControlPairs validationMessages, NinteiShinseiBusinessCollection zenkaiJoho, ShinsakaiIinItiranData dataList,
             NinteiShinseiJoho shinseiJoho) {
         KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
-        FlexibleDate IF送付年月日 = ViewStateHolder.get("送付年月日", FlexibleDate.class);
-        FlexibleDate センター送信年月日 = ViewStateHolder.get("センター送信年月日", FlexibleDate.class);
-        FlexibleDate 認定申請情報登録完了年月日 = ViewStateHolder.get("認定申請情報登録完了年月日", FlexibleDate.class);
+        FlexibleDate IF送付年月日 = ViewStateHolder.get(ViewStateKeys.処理日, FlexibleDate.class);
+        FlexibleDate センター送信年月日 = ViewStateHolder.get(ViewStateKeys.報告年月, FlexibleDate.class);
+        FlexibleDate 認定申請情報登録完了年月日 = ViewStateHolder.get(ViewStateKeys.認定申請年月日, FlexibleDate.class);
         if (認定申請情報登録完了年月日 != null && !認定申請情報登録完了年月日.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.処理モード, Boolean.FALSE);
         } else {
@@ -840,7 +841,7 @@ public class NinteiShinseiToroku {
             ValidationMessageControlPairs validationMessages, NinteiShinseiJoho shinseiJoho) {
         ViewStateHolder.put(ViewStateKeys.処理モード, Boolean.FALSE);
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        FlexibleDate 認定申請情報登録完了年月日 = ViewStateHolder.get("認定申請情報登録完了年月日", FlexibleDate.class);
+        FlexibleDate 認定申請情報登録完了年月日 = ViewStateHolder.get(ViewStateKeys.認定申請年月日, FlexibleDate.class);
 
         if (validationMessages.iterator().hasNext()) {
             return response.addValidationMessages(validationMessages).respond();
@@ -1078,6 +1079,7 @@ public class NinteiShinseiToroku {
         if (div.getServiceDel().getTxtServiceDeleteRiyu() == null || div.getServiceDel().getTxtServiceDeleteRiyu().getValue().isEmpty()) {
             shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey()));
         }
+        shinseiJohoBuilder.set認定申請区分_法令_コード(new Code(kihonJohoInputDiv.getDdlShinseiKubunHorei().getSelectedKey()));
         shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
         if (div.getTxtTorisageDate().getValue() != null && !div.getTxtTorisageDate().getValue().toDateString().isEmpty()) {
             shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue().toFlexibleDate());

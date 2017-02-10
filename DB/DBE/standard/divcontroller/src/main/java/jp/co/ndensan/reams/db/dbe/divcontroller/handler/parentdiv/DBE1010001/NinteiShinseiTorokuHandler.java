@@ -235,6 +235,7 @@ public class NinteiShinseiTorokuHandler {
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(ninteiTandokuDounyuFlag);
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(ninteiTandokuDounyuFlag);
         ((ZenkokuJushoInputDiv) div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput()).getTxtJusho().setReadOnly(!ninteiTandokuDounyuFlag);
+        div.getCcdShinseiTodokedesha().getTxtTelNo().setLabelLWidth(new RString("S"));
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getServiceSakujo().setDisplayNone(true);
         if (div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getDataSource().isEmpty()
                 || div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().getDataSource().size() < 2) {
