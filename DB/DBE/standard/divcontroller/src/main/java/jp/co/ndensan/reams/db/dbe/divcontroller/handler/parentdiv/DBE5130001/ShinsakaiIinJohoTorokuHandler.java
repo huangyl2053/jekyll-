@@ -121,7 +121,7 @@ public class ShinsakaiIinJohoTorokuHandler {
             }
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
-            if (!RString.isNullOrEmpty(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称())) {
+            if (!RString.isNullOrEmpty(Seibetsu.toValue(shinsakaiIinJoho.get性別().trim()).get名称())) {
                 row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
             } else {
                 row.setSeibetsu(RString.EMPTY);
@@ -224,7 +224,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         if (div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue() != null) {
             div.getTxtBirthYMD().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getBarthYMD().getValue());
         }
-        if (!RString.isNullOrEmpty(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu())) {
+        if (!RString.isNullOrEmpty(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu().trim())) {
             div.getRadSeibetsu().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getSeibetsu());
         }
         div.getDdlShikakuCode().setSelectedValue(div.getDgShinsaInJohoIchiran().getClickedItem().getShikakuCode());
