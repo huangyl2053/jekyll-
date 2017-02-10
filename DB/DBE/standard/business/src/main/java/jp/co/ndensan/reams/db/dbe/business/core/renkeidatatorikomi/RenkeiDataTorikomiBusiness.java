@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ItakusakiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101ErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
@@ -61,7 +62,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
@@ -703,8 +703,8 @@ public class RenkeiDataTorikomiBusiness {
      * @param entity DbT5101RelateEntity
      * @return DbT5129TennyuShiboEntity
      */
-    public DbT5129TennyuShiboEntity getDbT5129Entity(DbT5101RelateEntity entity) {
-        DbT5129TennyuShiboEntity dbt5129Entity = new DbT5129TennyuShiboEntity();
+    public DbT5129TennyuEntity getDbT5129Entity(DbT5101RelateEntity entity) {
+        DbT5129TennyuEntity dbt5129Entity = new DbT5129TennyuEntity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
         dbt5129Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
         dbt5129Entity.setNijiHanteiYMD(new FlexibleDate(dbt5101tempEntity.get認定申請日()));

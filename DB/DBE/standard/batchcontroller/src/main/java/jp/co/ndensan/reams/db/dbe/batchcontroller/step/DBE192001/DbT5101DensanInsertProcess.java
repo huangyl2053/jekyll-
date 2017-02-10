@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 import jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi.RenkeiDataTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -15,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5129TennyuShiboEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -47,7 +47,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     @BatchWriter
     BatchPermanentTableWriter<DbT5121ShinseiRirekiJohoEntity> dbT5121Writer;
     @BatchWriter
-    BatchPermanentTableWriter<DbT5129TennyuShiboEntity> dbT5129Writer;
+    BatchPermanentTableWriter<DbT5129TennyuEntity> dbT5129Writer;
     @BatchWriter
     BatchPermanentTableWriter<DbT5130ShiboEntity> dbT5130Writer;
     @BatchWriter
@@ -64,7 +64,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         dbT5123Writer = new BatchPermanentTableWriter(DbT5123NinteiKeikakuJohoEntity.class);
         dbT5105Writer = new BatchPermanentTableWriter(DbT5105NinteiKanryoJohoEntity.class);
         dbT5121Writer = new BatchPermanentTableWriter(DbT5121ShinseiRirekiJohoEntity.class);
-        dbT5129Writer = new BatchPermanentTableWriter(DbT5129TennyuShiboEntity.class);
+        dbT5129Writer = new BatchPermanentTableWriter(DbT5129TennyuEntity.class);
         dbT5130Writer = new BatchPermanentTableWriter(DbT5130ShiboEntity.class);
         dbT5120Writer = new BatchPermanentTableWriter(DbT5120ShinseitodokedeJohoEntity.class);
     }
