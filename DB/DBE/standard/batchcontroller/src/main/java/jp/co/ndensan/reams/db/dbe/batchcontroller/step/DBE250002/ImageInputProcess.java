@@ -65,6 +65,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
+    private static final RString 全体イメージ表側インデックス_表 = new RString("1");
+
     @BatchWriter
     private BatchPermanentTableWriter<DbT5302ShujiiIkenshoJohoEntity> writer_DbT5302;
     @BatchWriter
@@ -154,7 +156,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return OcrTorikomiResultsFactory.create(key, results);
     }
 
-//--  ID777,778  --------------------------------------------------------------------------------------------------------------------------
+    //<editor-fold defaultstate="collapsed" desc="ID777, 778">
     private List<OcrTorikomiResult> processID777or778(OcrIkens ocrIkens, ShinseiKey key) {
         ImageinputMapperParamter param = toParameterToSearchRelatedData(key);
         List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(param).records();
@@ -162,53 +164,54 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
             return OcrTorikomiResultsFactory.create(key, ocrIkens,
                     IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
         }
-        ImageinputRelate ir = relatedData.get(0);
+
+        final ImageinputRelate ir = relatedData.get(0);
         ImageinputRelate.Context context = new ImageinputRelate.Context(ocrIkens.asList(),
                 this.processParameter.get一次判定済み時処理方法());
-        IProcessingResults nrValidated = ir.validate(context);
-        if (nrValidated.hasError()) {
-            return OcrTorikomiResultsFactory.create(key, nrValidated, ir);
+        IProcessingResults irValidated = ir.validate(context);
+        if (irValidated.hasError()) {
+            return OcrTorikomiResultsFactory.create(key, irValidated, ir);
         }
-        List<OcrTorikomiResult> list = new ArrayList<>();
-        list.addAll(OcrTorikomiResultsFactory.create(key, nrValidated, ir));
 
-        ProcessingResults prs = new ProcessingResults();
-        prs.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
-        prs.addAll(checkTooManyFilsToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
-        list.addAll(OcrTorikomiResultsFactory.create(key, prs, ir));
+        final List<OcrTorikomiResult> list = new ArrayList<>();
+        list.addAll(OcrTorikomiResultsFactory.create(key, irValidated, ir));
 
-        OcrIkens safetyInCurrent = ocrIkens.removed(prs.allOcrDataInError());
-        if (safetyInCurrent.isEmpty()) {
+        ProcessingResults lineNumChecked = new ProcessingResults();
+        lineNumChecked.addAll(checkTooManyLinesToOperate(ocrIkens.filterdByOCRIDs(OCRID._777), 1));
+        lineNumChecked.addAll(checkTooManyLinesToOperate(ocrIkens.filterdByOCRIDs(OCRID._778), 2));
+        list.addAll(OcrTorikomiResultsFactory.create(key, lineNumChecked, ir));
+        OcrIkens safeties = ocrIkens.removed(lineNumChecked.allOcrDataInError());
+        if (safeties.isEmpty()) {
             return list;
         }
 
-        OcrIken ocrIken = safetyInCurrent.findByOCRID(OCRID._777).orElse(null);
-        ProcessingResults results = new ProcessingResults();
-        if (ocrIken != null) {
-            IProcessingResults saveIkenshoJoho = insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken);
-            results.addAll(saveIkenshoJoho);
+        OcrIken ocrIken777 = safeties.findByOCRID(OCRID._777).orElse(null);
+        ProcessingResults persistenceResults = new ProcessingResults();
+        if (ocrIken777 != null) {
+            IProcessingResults saveIkenshoJoho = insertOrUpdate主治医意見書情報By(this.writer_DbT5302, ir, ocrIken777);
+            persistenceResults.addAll(saveIkenshoJoho);
             if (saveIkenshoJoho.hasError()) {
-                safetyInCurrent = safetyInCurrent.removed(Collections.singletonList(ocrIken));
+                safeties = safeties.removed(Collections.singletonList(ocrIken777));
             } else {
-                insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken);
+                insertOrUpdate主治医意見書項目By(this.writer_DbT5304, ir, ocrIken777);
             }
         }
-        if (safetyInCurrent.isEmpty()) {
-            list.addAll(OcrTorikomiResultsFactory.create(key, results, ir));
+        if (safeties.isEmpty()) {
+            list.addAll(OcrTorikomiResultsFactory.create(key, persistenceResults, ir));
             return list;
         }
-        CopyImageResult cir = (safetyInCurrent.size() == 1)
-                ? copyImageFilesToDirectory_ID777or778_1line(safetyInCurrent, ir)
-                : copyImageFilesToDirectory_ID777or778_2lines(safetyInCurrent, ir);
-        results.addAll(cir.getResults());
-        for (OcrIken o : safetyInCurrent) {
-            results.addSuccessIfNotContains(o);
+        CopyImageResult cir = (safeties.size() == 1)
+                ? saveImageFiles_ID777or778_1line(safeties, ir)
+                : saveImageFiles_ID777or778_2lines(safeties, ir);
+        persistenceResults.addAll(cir.getResults());
+        for (OcrIken o : safeties) {
+            persistenceResults.addSuccessIfNotContains(o);
         }
-        list.addAll(OcrTorikomiResultsFactory.create(key, results, ir));
+        list.addAll(OcrTorikomiResultsFactory.create(key, persistenceResults, ir));
         return list;
     }
 
-    private static IProcessingResults checkTooManyFilsToOperate(OcrIkens ocrIkens, int maxNum) {
+    private static IProcessingResults checkTooManyLinesToOperate(OcrIkens ocrIkens, int maxNum) {
         if (ocrIkens.size() <= maxNum) {
             return ProcessingResults.EMPTY;
         }
@@ -232,7 +235,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
     }
 
-    private CopyImageResult copyImageFilesToDirectory_ID777or778_1line(OcrIkens sameKeyValues, ImageinputRelate ir) {
+    private CopyImageResult saveImageFiles_ID777or778_1line(OcrIkens sameKeyValues, ImageinputRelate ir) {
         OcrIken value = sameKeyValues.asList().get(0);
         CatalogLine ca3 = findCatalogLine_ID777or778(this.catalog, value.getSheetID()).orElse(null);
         if (ca3 == null) {
@@ -240,15 +243,19 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
             results.add(ProcessingResultFactory.error(value, OcrTorikomiMessages.カタログデータなし));
             return new CopyImageResult(ir.getSharedFileIDOrNull(), results);
         }
-        FileNameConvertionTheories converter = (value.getOCRID() == OCRID._777)
+        boolean isID777 = (value.getOCRID() == OCRID._777);
+        FileNameConvertionTheories converter = isID777
                 ? FileNameConvertionTheories.ID777
                 : FileNameConvertionTheories.ID777_reversed;
+        List<RString> iamgeFileNames = isID777
+                ? ca3.getImageFileNames().subList(0, 1)
+                : ca3.getImageFileNames().subList(1, 2);
         return new CopyImageResult(
                 ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(ir.getSharedFileIDOrNull())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(converter)
-                .targetImageFileNames(ca3.getImageFileNames())
+                .targetImageFileNames(iamgeFileNames)
                 .ocrData(value)
                 .save(writer_DbT5115)
         );
@@ -262,9 +269,9 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         return catalog.find(Models.ID778, id);
     }
 
-    private CopyImageResult copyImageFilesToDirectory_ID777or778_2lines(OcrIkens sameKeyValues, ImageinputRelate ir) {
+    private CopyImageResult saveImageFiles_ID777or778_2lines(OcrIkens sameKeyValues, ImageinputRelate ir) {
         ProcessingResults results = new ProcessingResults();
-        OcrIken777And778Pair pair = getPair(sameKeyValues);
+        OcrIken777And778Pair pair = OcrIken777And778Pair.of(sameKeyValues);
         if (pair.hasAnyNull()) {
             OcrIken ocrIken = pair.findNonnullValue();
             results.add(ProcessingResultFactory.error(ocrIken, OcrTorikomiMessages.同一申請複数存在));
@@ -278,27 +285,35 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         CatalogLine ca3_778 = findCatalogLine_ID777or778(this.catalog, pair.getCsv778().getSheetID()).orElse(null);
         if (ca3_778 != null) {
-            ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
-                    .sharedFileID(ir.getSharedFileIDOrNull())
-                    .imageFilePaths(this.processParameter.getImageFilePaths())
-                    .fileNameTheory(FileNameConvertionTheories.ID777_reversed)
-                    .targetImageFileNames(ca3_778.getImageFileNames().subList(0, 1))
-                    .ocrData(pair.getCsv778())
-                    .save(writer_DbT5115);
-            results.addAll(result1.getProcessingResults());
-            ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
-                    .sharedFileID(result1.getSharedFileID())
-                    .imageFilePaths(this.processParameter.getImageFilePaths())
-                    .fileNameTheory(FileNameConvertionTheories.ID777)
-                    .targetImageFileNames(ca3_777.getImageFileNames().subList(0, 1))
-                    .ocrData(pair.getCsv777())
-                    .save(writer_DbT5115);
-            results.addAll(result2.getProcessingResults());
-            return new CopyImageResult(result2.getSharedFileID(), results);
+            return saveImagesByTwoCatalogLines_ID777andID778(pair, ir, ca3_777, ca3_778, results);
         }
+        return saveImagesByOneCatalogLine_ID777(pair, ir, ca3_777, results);
+    }
 
+    private CopyImageResult saveImagesByTwoCatalogLines_ID777andID778(OcrIken777And778Pair pair,
+            ImageinputRelate ir, CatalogLine ca3_777, CatalogLine ca3_778, ProcessingResults results) {
+        ImageJohoUpdater.Result result1 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
+                .sharedFileID(ir.getSharedFileIDOrNull())
+                .imageFilePaths(this.processParameter.getImageFilePaths())
+                .fileNameTheory(FileNameConvertionTheories.ID777_reversed)
+                .targetImageFileNames(ca3_778.getImageFileNames().subList(0, 1))
+                .ocrData(pair.getCsv778())
+                .save(writer_DbT5115);
+        results.addAll(result1.getProcessingResults());
+        ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
+                .sharedFileID(result1.getSharedFileID())
+                .imageFilePaths(this.processParameter.getImageFilePaths())
+                .fileNameTheory(FileNameConvertionTheories.ID777)
+                .targetImageFileNames(ca3_777.getImageFileNames().subList(0, 1))
+                .ocrData(pair.getCsv777())
+                .save(writer_DbT5115);
+        results.addAll(result2.getProcessingResults());
+        return new CopyImageResult(result2.getSharedFileID(), results);
+    }
+
+    private CopyImageResult saveImagesByOneCatalogLine_ID777(OcrIken777And778Pair pair, ImageinputRelate ir, CatalogLine ca3_777, ProcessingResults results) {
         FileNameConvertionTheories theory
-                = new RString("1").equals(pair.getCsv777().get全体イメージ表側インデックス())
+                = 全体イメージ表側インデックス_表.equals(pair.getCsv777().get全体イメージ表側インデックス())
                         ? FileNameConvertionTheories.ID777
                         : FileNameConvertionTheories.ID777_reversed;
 
@@ -311,7 +326,6 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 .save(writer_DbT5115);
         results.addAll(result.getProcessingResults());
         return new CopyImageResult(result.getSharedFileID(), results);
-
     }
 
     @lombok.Value
@@ -325,6 +339,22 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
             this.csv778 = csv778;
         }
 
+        private static OcrIken777And778Pair of(OcrIkens ocrIkens) {
+            OcrIken csv_777 = null;
+            OcrIken csv_778 = null;
+            for (OcrIken csv : ocrIkens) {
+                switch (csv.getOCRID()) {
+                    case _777:
+                        csv_777 = csv;
+                        continue;
+                    case _778:
+                        csv_778 = csv;
+                    default:
+                }
+            }
+            return new OcrIken777And778Pair(csv_777, csv_778);
+        }
+
         boolean hasAnyNull() {
             return csv777 == null || csv778 == null;
         }
@@ -335,24 +365,10 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                             : null;
         }
     }
+    //</editor-fold>
 
-    private static OcrIken777And778Pair getPair(OcrIkens ocrIkens) {
-        OcrIken csv_777 = null;
-        OcrIken csv_778 = null;
-        for (OcrIken csv : ocrIkens) {
-            switch (csv.getOCRID()) {
-                case _777:
-                    csv_777 = csv;
-                    continue;
-                case _778:
-                    csv_778 = csv;
-                default:
-            }
-        }
-        return new OcrIken777And778Pair(csv_777, csv_778);
-    }
 //--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
-
+//
     private static ImageinputMapperParamter toParameterToSearchRelatedData(ShinseiKey key1) {
         return ImageinputMapperParamter.createParamter(key1.get証記載保険者番号(), key1.get被保険者番号(), key1.get認定申請日());
     }
