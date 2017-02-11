@@ -233,25 +233,22 @@
             LEFT JOIN
                 rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116Ichiji
             ON  DbT5116Ichiji."shinseishoKanriNo" = DbT5123Nintei."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei
-            ON  DbT7051Kosei."shoKisaiHokenshaNo" = DbT5101Nintei."shoKisaiHokenshaNo"
             LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
-            ON  DbT5911."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5911."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5911."shujiiIryokikanCode" = DbT5101Nintei."shujiiIryokikanCode"
             LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS DbT5912
-            ON  DbT5912."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5912."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5912."shujiiIryokikanCode" = DbT5101Nintei."shujiiIryokikanCode"
             AND DbT5912."shujiiCode" = DbT5101Nintei."shujiiCode"
             LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
-            ON  DbT5910."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5910."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5910."ninteichosaItakusakiCode" = DbT5101Nintei."ninteiChosaItakusakiCode"
             LEFT JOIN
                 rgdb."DbT5913ChosainJoho" AS DbT5913
-            ON  DbT5913."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5913."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5913."ninteiChosaItakusakiCode" = DbT5101Nintei."ninteiChosaItakusakiCode"
             AND DbT5913."ninteiChosainCode" = DbT5101Nintei."ninteiChosainCode"
             LEFT JOIN
@@ -462,37 +459,34 @@
                 )
 
             LEFT JOIN
-                rgdb."DbT7051KoseiShichosonMaster" AS DbT7051Kosei
-            ON  DbT7051Kosei."shoKisaiHokenshaNo" = DbT5101Nintei."shoKisaiHokenshaNo"
-            LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910Nintei
-            ON  DbT5910Nintei."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5910Nintei."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5910Nintei."ninteichosaItakusakiCode" = DbT5101Nintei."ninteiChosaItakusakiCode"
             LEFT JOIN
                 rgdb."DbT5913ChosainJoho" AS DbT5913Chosai
-            ON  DbT5913Chosai."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5913Chosai."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5913Chosai."ninteiChosaItakusakiCode" = DbT5101Nintei."ninteiChosaItakusakiCode"
             AND DbT5913Chosai."ninteiChosainCode" = DbT5101Nintei."ninteiChosainCode"
             LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911Shujii
-            ON  DbT5911Shujii."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5911Shujii."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5911Shujii."shujiiIryokikanCode" = DbT5101Nintei."shujiiIryokikanCode"
             LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS DbT5912Shujii
-            ON  DbT5912Shujii."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  DbT5912Shujii."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND DbT5912Shujii."shujiiIryokikanCode" = DbT5101Nintei."shujiiIryokikanCode"
             AND DbT5912Shujii."shujiiCode" = DbT5101Nintei."shujiiCode"
             LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho1
-            ON  NinteichosaItakusakiJoho1."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  NinteichosaItakusakiJoho1."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND NinteichosaItakusakiJoho1."ninteichosaItakusakiCode" = DbT5101Nintei."nyushoShisetsuCode"
             LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS ShujiiIryoKikanJoho1
-            ON  ShujiiIryoKikanJoho1."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ShujiiIryoKikanJoho1."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ShujiiIryoKikanJoho1."shujiiIryokikanCode" = DbT5101Nintei."nyushoShisetsuCode"
             LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho2
-            ON  NinteichosaItakusakiJoho2."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  NinteichosaItakusakiJoho2."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND NinteichosaItakusakiJoho2."ninteichosaItakusakiCode" = DbT5120Shinsei."shinseiTodokedeDaikoJigyoshaNo"
             LEFT JOIN
                 rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121Shinsei
@@ -564,20 +558,20 @@
             ON  NinteiShinseiJoho1."shinseishoKanriNo" = DbT5121Shinsei."zenkaiShinseishoKanriNo"
             LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho3
-            ON  NinteichosaItakusakiJoho3."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  NinteichosaItakusakiJoho3."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND NinteichosaItakusakiJoho3."ninteichosaItakusakiCode" = NinteiShinseiJoho1."ninteiChosaItakusakiCode"
             LEFT JOIN
                 rgdb."DbT5913ChosainJoho" AS ChosainJoho1
-            ON  ChosainJoho1."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ChosainJoho1."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ChosainJoho1."ninteiChosaItakusakiCode" = NinteiShinseiJoho1."ninteiChosaItakusakiCode"
             AND ChosainJoho1."ninteiChosainCode" = NinteiShinseiJoho1."ninteiChosainCode"
             LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS ShujiiIryoKikanJoho2
-            ON  ShujiiIryoKikanJoho2."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ShujiiIryoKikanJoho2."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ShujiiIryoKikanJoho2."shujiiIryokikanCode" = NinteiShinseiJoho1."shujiiIryokikanCode"
             LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS ShujiiJoho1
-            ON  ShujiiJoho1."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ShujiiJoho1."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ShujiiJoho1."shujiiIryokikanCode" = NinteiShinseiJoho1."shujiiIryokikanCode"
             AND ShujiiJoho1."shujiiCode" = NinteiShinseiJoho1."shujiiCode"
             LEFT JOIN
@@ -653,20 +647,20 @@
             ON  NinteiShinseiJoho2."shinseishoKanriNo" = ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
             LEFT JOIN
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho4
-            ON  NinteichosaItakusakiJoho4."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  NinteichosaItakusakiJoho4."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND NinteichosaItakusakiJoho4."ninteichosaItakusakiCode" = NinteiShinseiJoho2."ninteiChosaItakusakiCode"
             LEFT JOIN
                 rgdb."DbT5913ChosainJoho" AS ChosainJoho2
-            ON  ChosainJoho2."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ChosainJoho2."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ChosainJoho2."ninteiChosaItakusakiCode" = NinteiShinseiJoho2."ninteiChosaItakusakiCode"
             AND ChosainJoho2."ninteiChosainCode" = NinteiShinseiJoho2."ninteiChosainCode"
             LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS ShujiiIryoKikanJoho3
-            ON  ShujiiIryoKikanJoho3."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ShujiiIryoKikanJoho3."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ShujiiIryoKikanJoho3."shujiiIryokikanCode" = NinteiShinseiJoho2."shujiiIryokikanCode"
             LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS ShujiiJoho2
-            ON  ShujiiJoho2."shichosonCode" = DbT7051Kosei."shichosonCode"
+            ON  ShujiiJoho2."shichosonCode" = DbT5101Nintei."shichosonCode"
             AND ShujiiJoho2."shujiiIryokikanCode" = NinteiShinseiJoho2."shujiiIryokikanCode"
             AND ShujiiJoho2."shujiiCode" = NinteiShinseiJoho2."shujiiCode"
             LEFT JOIN
