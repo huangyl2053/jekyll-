@@ -25,7 +25,7 @@ public enum OcrTorikomiMessages {
      *
      * 引数1: 行の番号, 引数2: レコードの内容
      */
-    フォーマット不正("取込可能なデータ形式と合致しません。OCR2000iから処理をやりなおしてください。 行番号：?　内容：?"),
+    フォーマット不正("取込可能なデータ形式と合致しません。OCR2000iから処理をやりなおしてください。　行番号：?　内容：?"),
     /**
      * 取込結果の保険者番号、被保険者番号で、申請情報を検索しても見つからない場合のメッセージ
      */
@@ -61,7 +61,7 @@ public enum OcrTorikomiMessages {
      *
      * 引数1: 実在する申請日
      */
-    申請日一致なし_直近申請日提示("この申請日では、当該処理の対象となる申請は見つかりませんでした。 存在する直近の申請日：?"),
+    申請日一致なし_直近申請日提示("この申請日では、当該処理の対象となる申請は見つかりませんでした。　存在する直近の申請日：?"),
     /**
      * 取込結果の実施日が、認定調査の依頼日より前の場合のメッセージ
      *
@@ -103,7 +103,7 @@ public enum OcrTorikomiMessages {
      *
      * 引数1: 存在しないイメージファイル名
      */
-    存在しないイメージあり("次のファイルがアップロードされていなかったため、登録できませんでした。 ファイル名：?"),
+    存在しないイメージあり("次のファイルがアップロードされていなかったため、登録できませんでした。：?"),
     /**
      * 何らかの不具合でイメージの共有ファイルへの登録が失敗した場合のメッセージ
      */
@@ -111,13 +111,13 @@ public enum OcrTorikomiMessages {
     /**
      * カタログファイル内に情報が存在しない場合のメッセージ
      */
-    カタログデータなし("CA3ファイル内に該当するデータが存在しないため保存できません。"),
+    カタログデータなし("ca3ファイル内に該当するデータが存在しないため保存できません。"),
     /**
      * 以前の取込結果と重複する連番を取り込んだ際に「上書き」した場合のメッセージ
      *
      * 引数1: 更新しなかった特記事項番号と連番の列挙
      */
-    特記事項_連番重複_上書き("次の特記事項は上書きされました：?"),
+    特記事項_連番重複_上書き("次の特記事項を上書きしました。：?"),
     /**
      * 以前の取込結果と重複する連番を取り込んだ際に「上書き」しなかった場合のメッセージ
      *
@@ -133,7 +133,7 @@ public enum OcrTorikomiMessages {
     /**
      * その他資料の取込枚数が、対象の申請の累計で、最大値を超えた場合のメッセージ
      */
-    その他資料_最大数超過("同一申請に対して登録可能な最大数を超えたため、破棄しました。"),
+    その他資料_最大数超過("この申請に対して登録された資料の数が、保存可能な最大数(6)を超えています。そのため、次のファイルは保存せずに破棄しました。：?"),
     /**
      * 取込結果に警告がある場合のメッセージ
      *
@@ -181,15 +181,15 @@ public enum OcrTorikomiMessages {
     }
 
     /**
-     * 指定の長さで文字列をカットします。対象の文字列が指定文字数（{@code max）よりも長い場合は、{@code stringIfConcatAtCut}で指定する文字列を末尾に付与します。
+     * 指定の長さで文字列をカットします。対象の文字列が指定の最大長（{@code max}）よりも長い場合は、{@code appendTailIfCut}で指定する文字列を末尾に付与します。
      *
      * @param max 最大長
      * @param rstr 対象文字列
-     * @param stringIfConcatAtCut 最大長超過時、不可文字列
+     * @param appendTailIfCut 最大長超過時、末尾に付与する文字列
      * @return 編集結果の文字列
      */
-    public static RString cutToLength(int max, RString rstr, RString stringIfConcatAtCut) {
-        return rstr.length() < max ? rstr : rstr.substringReturnAsPossible(0, max).concat(stringIfConcatAtCut);
+    public static RString cutToLength(int max, RString rstr, RString appendTailIfCut) {
+        return rstr.length() < max ? rstr : rstr.substringReturnAsPossible(0, max).concat(appendTailIfCut);
     }
 
     /**

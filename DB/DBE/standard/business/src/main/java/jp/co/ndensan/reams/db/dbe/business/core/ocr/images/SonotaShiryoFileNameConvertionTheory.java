@@ -57,7 +57,8 @@ public class SonotaShiryoFileNameConvertionTheory implements IFileNameConvertion
         Map<RString, RString> map = new HashMap<>();
         for (OcrSonota ocrSonota : sorted) {
             if (!reamsFileNames.hasNext()) {
-                this.results.add(ProcessingResultFactory.error(ocrSonota, OcrTorikomiMessages.その他資料_最大数超過));
+                this.results.add(ProcessingResultFactory.error(ocrSonota,
+                        OcrTorikomiMessages.その他資料_最大数超過.replaced(composeFileName(ocrSonota).toString())));
                 continue;
             }
             map.put(composeFileName(ocrSonota), reamsFileNames.next());
