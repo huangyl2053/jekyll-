@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
@@ -98,7 +99,9 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         super.cancel();
         this.kekkaListEditor = new OcrTorikomiResultListEditor();
         OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
-                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし.replaced("OCRIKEN.ca3"))).build();
+                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし
+                                .replaced(OcrDataType.意見書.ca3FileName().toString())))
+                .build();
         this.kekkaListEditor.writeMultiLine(Collections.singletonList(r));
         this.kekkaListEditor.close();
     }
@@ -236,7 +239,8 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         ProcessingResults prs = new ProcessingResults();
         for (OcrIken o : ocrIkens) {
-            prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在.replaced("OCRIKEN.CSV")));
+            prs.add(ProcessingResultFactory.error(o, OcrTorikomiMessages.同一申請複数存在
+                    .replaced(OcrDataType.意見書.csvFileName().toString())));
         }
         return prs;
 

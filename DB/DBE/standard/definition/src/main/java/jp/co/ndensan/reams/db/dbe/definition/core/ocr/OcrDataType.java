@@ -70,11 +70,17 @@ public enum OcrDataType {
         this.theCa3FileName = RString.EMPTY;
     }
 
-    private RString csvFileName() {
+    /**
+     * @return cavファイル名
+     */
+    public RString csvFileName() {
         return this.theCsvFileName;
     }
 
-    private RString ca3FileName() {
+    /**
+     * @return ca3ファイル名
+     */
+    public RString ca3FileName() {
         return this.theCa3FileName;
     }
 

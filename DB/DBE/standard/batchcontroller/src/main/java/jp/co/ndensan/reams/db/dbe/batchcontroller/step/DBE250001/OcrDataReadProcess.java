@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.KomokuNo;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenTokkiRembanChofuku;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr.ChosahyoOcrContextParameter;
@@ -138,7 +139,9 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         super.cancel();
         this.kekkaListEditor = new OcrTorikomiResultListEditor();
         OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
-                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし.replaced("OCRCHOSA.ca3"))).build();
+                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし
+                                .replaced(OcrDataType.調査票.ca3FileName().toString())))
+                .build();
         this.kekkaListEditor.writeMultiLine(Collections.singletonList(r));
         this.kekkaListEditor.close();
     }
@@ -484,7 +487,9 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static List<OcrTorikomiResult> havingTooManyLinesToOperate(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
         return OcrTorikomiResultsFactory.create(key, ocrChosas.values(),
-                IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在.replaced("OCRCHOSA.CSV"));
+                IProcessingResult.Type.ERROR, OcrTorikomiMessages.同一申請複数存在
+                .replaced(OcrDataType.調査票.csvFileName().toString())
+        );
     }
 
     private static List<OcrTorikomiResult> makeErrorsInRelatedData(ShinseiKey key, IProcessingResults nrValidated, NinteiOcrRelate nr) {

@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.SonotaShiryoFileNameConvertionTheory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.sonota.OcrSonota;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ocr.ImageInputProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.TempOcrCsvEntity;
@@ -87,7 +88,9 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
         super.cancel();
         this.kekkaListEditor = new OcrTorikomiResultListEditor();
         OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
-                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし.replaced("OCRSONOTA.ca3"))).build();
+                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし
+                                .replaced(OcrDataType.その他資料.ca3FileName().toString())))
+                .build();
         this.kekkaListEditor.writeMultiLine(Collections.singletonList(r));
         this.kekkaListEditor.close();
     }
