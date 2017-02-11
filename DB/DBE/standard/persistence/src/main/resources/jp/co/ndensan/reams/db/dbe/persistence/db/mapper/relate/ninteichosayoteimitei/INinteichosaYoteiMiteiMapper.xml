@@ -69,27 +69,27 @@
         <!-- 今回調査事業所と調査員取得 -->
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-        AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
+        AND DbT5101."shichosonCode" = DbT5910."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-        AND DbT5913."shichosonCode" = DbT7051."shichosonCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
         <!-- 前回調査事業所と調査員取得 -->
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910Zenkai
         ON DbT5101Zenkai."ninteiChosaItakusakiCode" = DbT5910Zenkai."ninteichosaItakusakiCode"
-        AND DbT5910Zenkai."shichosonCode" = DbT7051."shichosonCode"
+        AND DbT5101Zenkai."shichosonCode" = DbT5910Zenkai."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913Zenkai
         ON DbT5913Zenkai."ninteiChosaItakusakiCode" = DbT5101Zenkai."ninteiChosaItakusakiCode"
         AND DbT5913Zenkai."ninteiChosainCode" = DbT5101Zenkai."ninteiChosainCode"
-        AND DbT5913Zenkai."shichosonCode" = DbT7051."shichosonCode"
+        AND DbT5913Zenkai."shichosonCode" = DbT5101Zenkai."shichosonCode"
         <!-- 前前回調査事業所と調査員取得 -->
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910ZenZenkai
         ON DbT5101ZenZenkai."ninteiChosaItakusakiCode" = DbT5910ZenZenkai."ninteichosaItakusakiCode"
-        AND DbT5910ZenZenkai."shichosonCode" = DbT7051."shichosonCode"
+        AND DbT5101ZenZenkai."shichosonCode" = DbT5910ZenZenkai."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913ZenZenkai
         ON DbT5913ZenZenkai."ninteiChosaItakusakiCode" = DbT5101ZenZenkai."ninteiChosaItakusakiCode"
         AND DbT5913ZenZenkai."ninteiChosainCode" = DbT5101ZenZenkai."ninteiChosainCode"
-        AND DbT5913ZenZenkai."shichosonCode" = DbT7051."shichosonCode"
+        AND DbT5913ZenZenkai."shichosonCode" = DbT5101ZenZenkai."shichosonCode"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NULL
@@ -143,11 +143,11 @@
         ON DbT5101."shinseishoKanriNo"=DbT5201."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5201."ninteichosaItakusakiCode"=DbT5910."ninteichosaItakusakiCode"
-        AND DbT5910."shichosonCode"=DbT7051."shichosonCode"
+        AND DbT5101."shichosonCode"=DbT5910."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
         AND DbT5913."ninteiChosainCode" = DbT5201."ninteiChosainCode"
-        AND DbT5913."shichosonCode"=DbT7051."shichosonCode"
+        AND DbT5913."shichosonCode"=DbT5101."shichosonCode"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -158,8 +158,8 @@
         AND DbT5101."ninteiShinseiYMD" <![CDATA[<=]]> #{認定調査依頼先変更者一覧表申請日To}
         AND
         exists (SELECT 'X' FROM rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
-                 WHERE DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND 
-                       DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" <![CDATA[>]]> 1)
+        WHERE DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND
+        DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" <![CDATA[>]]> 1)
         ORDER BY
         DbT5101."shoKisaiHokenshaNo" ASC,
         DbT5101."ninteiShinseiYMD" ASC,
@@ -177,17 +177,15 @@
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON DbT5101."shinseishoKanriNo"=DbT5105."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
-        ON DbT7051."shoKisaiHokenshaNo"=DbT5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         ON DbT5101."shinseishoKanriNo"=DbT5201."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5101."ninteiChosaItakusakiCode"=DbT5910."ninteichosaItakusakiCode"
-        AND DbT5910."shichosonCode"=DbT7051."shichosonCode"
+        AND DbT5101."shichosonCode"=DbT5910."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteiChosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode"=DbT5101."ninteiChosainCode"
-        AND DbT5913."shichosonCode"=DbT7051."shichosonCode"
+        AND DbT5913."shichosonCode"=DbT5101."shichosonCode"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -269,7 +267,7 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-        AND DbT5302."ikenshoReadYMD" IS NOT NULL        
+        AND DbT5302."ikenshoReadYMD" IS NOT NULL
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
@@ -338,9 +336,9 @@
         AND DbT5201."ninteichosaIraiRirekiNo" = (SELECT MAX(rgdb."DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho"
         WHERE DbT5101."shinseishoKanriNo" = "shinseishoKanriNo")
         INNER JOIN (SELECT * FROM rgdb."DbT5203NinteichosahyoKihonChosa"  AS mst WHERE EXISTS(SELECT 'X' FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" as slv
-                 WHERE mst."shinseishoKanriNo"=slv."shinseishoKanriNo"
-                 AND mst."ninteichosaRirekiNo"=slv."ninteichosaRirekiNo"
-                 AND slv."ninteichosaJisshiYMD" IS NOT NULL)) AS DbT5203
+        WHERE mst."shinseishoKanriNo"=slv."shinseishoKanriNo"
+        AND mst."ninteichosaRirekiNo"=slv."ninteichosaRirekiNo"
+        AND slv."ninteichosaJisshiYMD" IS NOT NULL)) AS DbT5203
         ON DbT5203."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
         AND DbT5203."ninteichosaRirekiNo"=DbT5201."ninteichosaIraiRirekiNo"
         INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301

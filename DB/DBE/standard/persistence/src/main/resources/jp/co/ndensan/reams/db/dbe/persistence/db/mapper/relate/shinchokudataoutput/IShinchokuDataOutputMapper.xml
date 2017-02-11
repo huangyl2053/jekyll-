@@ -875,8 +875,6 @@
         , N."shinsakaiMemo" AS "N_shinsakaiMemo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS A1
-        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT5120ShinseitodokedeJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS C
@@ -944,12 +942,12 @@
         AND H."gaikyoChosaTextImageKubun" = #{イメージ区分}
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I
         ON G."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode"
-        AND I."shichosonCode" = A1."shichosonCode"
+        AND I."shichosonCode" = A."shichosonCode"
         AND I."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS J
         ON G."ninteichosaItakusakiCode" = J."ninteiChosaItakusakiCode"
         AND G."ninteiChosainCode" = J."ninteiChosainCode"
-        AND J."shichosonCode" = A1."shichosonCode"
+        AND J."shichosonCode" = A."shichosonCode"
         AND J."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS K
         ON A."shinseishoKanriNo" = K."shinseishoKanriNo"
