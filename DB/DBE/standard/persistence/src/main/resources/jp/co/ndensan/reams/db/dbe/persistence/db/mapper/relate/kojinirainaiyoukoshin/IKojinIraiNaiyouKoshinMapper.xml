@@ -29,8 +29,8 @@
         <result property="調査区分コード" column="T5101_chosaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="家庭訪問の有無" column="T5101_kateiHomonFlag" />
     </resultMap>
-    
-   <select resultOrdered="true" id="getChousaIraiJouhou" resultMap="resultMap_ChousaIraiJouhou" 
+
+   <select resultOrdered="true" id="getChousaIraiJouhou" resultMap="resultMap_ChousaIraiJouhou"
             parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">
    SELECT
         T5201."ninteichosaIraiKubunCode" AS "T5201_ninteichosaIraiKubunCode"
@@ -57,63 +57,61 @@
         , T5913_SUB."telNo" AS "T5913_SUB_telNo"
         , T5913_SUB."faxNo" AS "T5913_SUB_faxNo"
         , T5101."chosaKubun" AS "T5101_chosaKubun"
-        , T5101."kateiHomonFlag" AS "T5101_kateiHomonFlag" 
+        , T5101."kateiHomonFlag" AS "T5101_kateiHomonFlag"
    FROM
-        rgdb."DbT5101NinteiShinseiJoho" AS T5101 
-        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201 
-          ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
-          AND T5201."logicalDeletedFlag" = FALSE 
+        rgdb."DbT5101NinteiShinseiJoho" AS T5101
+        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
+          ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+          AND T5201."logicalDeletedFlag" = FALSE
           AND NOT EXISTS (SELECT 'X'
           FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
           WHERE T5201."shinseishoKanriNo" = B1."shinseishoKanriNo"
           AND B1."logicalDeletedFlag" = False
           AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo" )
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
-          ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
-        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910 
-          ON T5910."shichosonCode" = T7051."shichosonCode" 
-          AND T5910."ninteichosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
-          AND T5910."jokyoFlag" = True 
-        LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913 
-          ON T5913."shichosonCode" = T7051."shichosonCode" 
-          AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode" 
-          AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode" 
-          AND T5913."jokyoFlag" = True 
-       LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910_SUB 
-          ON T5910_SUB."shichosonCode" = T7051."shichosonCode" 
-          AND T5910_SUB."ninteichosaItakusakiCode" = T5101."ninteiChosaItakusakiCode" 
-          AND T5910_SUB."jokyoFlag" = True 
-       LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913_SUB 
-          ON T5913_SUB."shichosonCode" = T7051."shichosonCode" 
-          AND T5913_SUB."ninteiChosaItakusakiCode" = T5101."ninteiChosaItakusakiCode" 
-          AND T5913_SUB."ninteiChosainCode" = T5101."ninteiChosainCode" 
-          AND T5913_SUB."jokyoFlag" = True 
-        LEFT JOIN rgdb."UzT0007Code" AS UzT0007 
-          ON UzT0007."schemaName" = 'rgdb' 
-          AND UzT0007."subGyomuCode" = 'DBE' 
-          AND UzT0007."codeShubetsu" = '5002' 
-          AND UzT0007."code" = T5913."chikuCode" 
-       LEFT JOIN rgdb."UzT0007Code" AS UzT0007_SUB 
-          ON UzT0007_SUB."schemaName" = 'rgdb' 
-          AND UzT0007_SUB."subGyomuCode" = 'DBE' 
-          AND UzT0007_SUB."codeShubetsu" = '5002' 
-          AND UzT0007_SUB."code" = T5913_SUB."chikuCode" 
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202 
-          ON T5201."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
-          AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
-          AND T5202."gaikyoChosaTextImageKubun" = ( 
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
+          ON T5910."shichosonCode" = T5101."shichosonCode"
+          AND T5910."ninteichosaItakusakiCode" = T5201."ninteichosaItakusakiCode"
+          AND T5910."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913
+          ON T5913."shichosonCode" = T5101."shichosonCode"
+          AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode"
+          AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode"
+          AND T5913."jokyoFlag" = True
+       LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910_SUB
+          ON T5910_SUB."shichosonCode" = T5101."shichosonCode"
+          AND T5910_SUB."ninteichosaItakusakiCode" = T5101."ninteiChosaItakusakiCode"
+          AND T5910_SUB."jokyoFlag" = True
+       LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913_SUB
+          ON T5913_SUB."shichosonCode" = T5101."shichosonCode"
+          AND T5913_SUB."ninteiChosaItakusakiCode" = T5101."ninteiChosaItakusakiCode"
+          AND T5913_SUB."ninteiChosainCode" = T5101."ninteiChosainCode"
+          AND T5913_SUB."jokyoFlag" = True
+        LEFT JOIN rgdb."UzT0007Code" AS UzT0007
+          ON UzT0007."schemaName" = 'rgdb'
+          AND UzT0007."subGyomuCode" = 'DBE'
+          AND UzT0007."codeShubetsu" = '5002'
+          AND UzT0007."code" = T5913."chikuCode"
+       LEFT JOIN rgdb."UzT0007Code" AS UzT0007_SUB
+          ON UzT0007_SUB."schemaName" = 'rgdb'
+          AND UzT0007_SUB."subGyomuCode" = 'DBE'
+          AND UzT0007_SUB."codeShubetsu" = '5002'
+          AND UzT0007_SUB."code" = T5913_SUB."chikuCode"
+        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
+          ON T5201."shinseishoKanriNo" = T5202."shinseishoKanriNo"
+          AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo"
+          AND T5202."gaikyoChosaTextImageKubun" = (
             SELECT
-              UzT0002CustomConfig."configValue" AS イメージ区分 
+              UzT0002CustomConfig."configValue" AS イメージ区分
             FROM
-              rgdb."UzT0002CustomConfig" AS UzT0002CustomConfig 
+              rgdb."UzT0002CustomConfig" AS UzT0002CustomConfig
             WHERE
-              UzT0002CustomConfig."schemaName" = 'rgdb' 
-              AND UzT0002CustomConfig."subGyomuCode" = 'DBE' 
+              UzT0002CustomConfig."schemaName" = 'rgdb'
+              AND UzT0002CustomConfig."subGyomuCode" = 'DBE'
               AND UzT0002CustomConfig."configName" = '概況調査テキストイメージ区分'
-          ) 
+          )
       WHERE T5101."shinseishoKanriNo" = #{申請書管理番号}
    </select>
-   
+
    <resultMap id="resultMap_SyujiIraiJouhou" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinirainaiyoukoshin.KojinIraiNaiyouRelateEntity" autoMapping="true">
 	<result property="申請書管理番号" column="T5301_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="主治医意見書作成依頼履歴番号" column="T5301_ikenshoIraiRirekiNo" />
@@ -142,8 +140,8 @@
     	<result property="番号_サブ" column="T5911_SUB_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="代表者名_サブ" column="T5911_SUB_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    
-   <select resultOrdered="true" id="getSyujiIraiJouhou" resultMap="resultMap_SyujiIraiJouhou" 
+
+   <select resultOrdered="true" id="getSyujiIraiJouhou" resultMap="resultMap_SyujiIraiJouhou"
             parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500">
     SELECT
         T5301."shinseishoKanriNo" AS "T5301_shinseishoKanriNo"
@@ -162,7 +160,7 @@
         , T5911."jusho" AS "T5911_jusho"
         , T5911."telNo" AS "T5911_telNo"
         , T5911."faxNo" AS "T5911_faxNo"
-        , T5911."daihyoshaName" AS "T5911_daihyoshaName" 
+        , T5911."daihyoshaName" AS "T5911_daihyoshaName"
         , T5912_SUB."shujiiCode" AS "T5912_SUB_shujiiCode"
         , T5912_SUB."shujiiName" AS "T5912_SUB_shujiiName"
         , T5911_SUB."shujiiIryokikanCode" AS "T5911_SUB_shujiiIryokikanCode"
@@ -171,40 +169,38 @@
         , T5911_SUB."jusho" AS "T5911_SUB_jusho"
         , T5911_SUB."telNo" AS "T5911_SUB_telNo"
         , T5911_SUB."faxNo" AS "T5911_SUB_faxNo"
-        , T5911_SUB."daihyoshaName" AS "T5911_SUB_daihyoshaName" 
+        , T5911_SUB."daihyoshaName" AS "T5911_SUB_daihyoshaName"
       FROM
-        rgdb."DbT5101NinteiShinseiJoho" AS T5101 
-        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301 
-          ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo" 
-          AND T5301."logicalDeletedFlag" = FALSE 
+        rgdb."DbT5101NinteiShinseiJoho" AS T5101
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
+          ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+          AND T5301."logicalDeletedFlag" = FALSE
           AND NOT EXISTS (SELECT 'X'
           FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
           WHERE T5301."shinseishoKanriNo" = B1."shinseishoKanriNo"
-          AND B1."logicalDeletedFlag" = False 
+          AND B1."logicalDeletedFlag" = False
           AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo")
-        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302 
-          ON T5301."shinseishoKanriNo" = T5302."shinseishoKanriNo" 
-          AND T5301."ikenshoIraiRirekiNo" = T5302."ikenshoIraiRirekiNo" 
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
-          ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
-        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912 
-          ON T5912."shichosonCode" = T7051."shichosonCode" 
-          AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode" 
-          AND T5912."shujiiCode" = T5301."shujiiCode" 
-          AND T5912."jokyoFlag" = True 
-        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
-          ON T5911."shichosonCode" = T7051."shichosonCode" 
-          AND T5911."shujiiIryokikanCode" = T5301."shujiiIryokikanCode" 
-          AND T5911."jokyoFlag" = True 
-        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912_SUB 
-          ON T5912_SUB."shichosonCode" = T7051."shichosonCode" 
-          AND T5912_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode" 
-          AND T5912_SUB."shujiiCode" = T5101."shujiiCode" 
-          AND T5912_SUB."jokyoFlag" = True 
-        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911_SUB 
-          ON T5911_SUB."shichosonCode" = T7051."shichosonCode" 
-          AND T5911_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode" 
-          AND T5911_SUB."jokyoFlag" = True 
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
+          ON T5301."shinseishoKanriNo" = T5302."shinseishoKanriNo"
+          AND T5301."ikenshoIraiRirekiNo" = T5302."ikenshoIraiRirekiNo"
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912
+          ON T5912."shichosonCode" = T5101."shichosonCode"
+          AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
+          AND T5912."shujiiCode" = T5301."shujiiCode"
+          AND T5912."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+          ON T5911."shichosonCode" = T5101."shichosonCode"
+          AND T5911."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
+          AND T5911."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912_SUB
+          ON T5912_SUB."shichosonCode" = T5101."shichosonCode"
+          AND T5912_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode"
+          AND T5912_SUB."shujiiCode" = T5101."shujiiCode"
+          AND T5912_SUB."jokyoFlag" = True
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911_SUB
+          ON T5911_SUB."shichosonCode" = T5101."shichosonCode"
+          AND T5911_SUB."shujiiIryokikanCode" = T5101."shujiiIryokikanCode"
+          AND T5911_SUB."jokyoFlag" = True
       WHERE
         T5101."shinseishoKanriNo" = #{申請書管理番号}
    </select>
