@@ -28,6 +28,7 @@ public class IChiJiPanTeiSyoRiRelateEntity implements Serializable {
     private AtenaMeisho hihokenshaName;
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
+    private boolean kariIchijiHanteiKubun;
     private FlexibleDate ichijiHanteiYMD;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;

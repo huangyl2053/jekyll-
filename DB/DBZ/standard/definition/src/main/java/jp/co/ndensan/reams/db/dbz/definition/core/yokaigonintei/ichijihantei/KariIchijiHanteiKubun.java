@@ -16,20 +16,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KariIchijiHanteiKubun {
 
     /**
-     * コード:True 名称:仮一次判定 略称:定義なし
+     * コード:True 名称:仮一次判定 略称:仮
      */
-    仮一次判定(true, "仮一次判定"),
+    仮一次判定(true, "仮一次判定", "仮"),
     /**
-     * コード:False 名称:本一次判定 略称:定義なし
+     * コード:False 名称:本一次判定 略称:本
      */
-    本一次判定(false, "本一次判定");
+    本一次判定(false, "本一次判定", "本");
 
     private final boolean code;
     private final RString fullName;
+    private final RString abbreviatedName;
 
-    private KariIchijiHanteiKubun(boolean code, String fullname) {
+    private KariIchijiHanteiKubun(boolean code, String fullname, String abbreviatedName) {
         this.code = code;
         this.fullName = new RString(fullname);
+        this.abbreviatedName = new RString(abbreviatedName);
     }
 
     /**
@@ -48,6 +50,15 @@ public enum KariIchijiHanteiKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 仮一次判定区分の略称を返します。
+     *
+     * @return 仮一次判定区分の略称
+     */
+    public RString get略称() {
+        return abbreviatedName;
     }
 
     /**

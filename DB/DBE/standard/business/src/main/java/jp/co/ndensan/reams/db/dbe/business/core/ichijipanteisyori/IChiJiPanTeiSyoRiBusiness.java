@@ -79,6 +79,15 @@ public class IChiJiPanTeiSyoRiBusiness implements Serializable {
     }
 
     /**
+     * 仮一次判定区分を取得します。
+     *
+     * @return true：仮一次判定　false：本一次判定
+     */
+    public boolean get仮一次判定区分() {
+        return entity.isKariIchijiHanteiKubun();
+    }
+
+    /**
      * 要介護認定一次判定年月日を取得します。
      *
      * @return 要介護認定一次判定年月日

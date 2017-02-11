@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class chosairaiSelectDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,10 @@ public class chosairaiSelectDiv extends Panel {
      */
     @JsonProperty("btndataoutput")
     private ButtonDownLoad btndataoutput;
+    @JsonProperty("btnIchijiHanteiValidate")
+    private Button btnIchijiHanteiValidate;
+    @JsonProperty("btnHanteishoriAto")
+    private Button btnHanteishoriAto;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +50,42 @@ public class chosairaiSelectDiv extends Panel {
     @JsonProperty("btndataoutput")
     public void setBtndataoutput(ButtonDownLoad btndataoutput) {
         this.btndataoutput = btndataoutput;
+    }
+
+    /*
+     * getbtnIchijiHanteiValidate
+     * @return btnIchijiHanteiValidate
+     */
+    @JsonProperty("btnIchijiHanteiValidate")
+    public Button getBtnIchijiHanteiValidate() {
+        return btnIchijiHanteiValidate;
+    }
+
+    /*
+     * setbtnIchijiHanteiValidate
+     * @param btnIchijiHanteiValidate btnIchijiHanteiValidate
+     */
+    @JsonProperty("btnIchijiHanteiValidate")
+    public void setBtnIchijiHanteiValidate(Button btnIchijiHanteiValidate) {
+        this.btnIchijiHanteiValidate = btnIchijiHanteiValidate;
+    }
+
+    /*
+     * getbtnHanteishoriAto
+     * @return btnHanteishoriAto
+     */
+    @JsonProperty("btnHanteishoriAto")
+    public Button getBtnHanteishoriAto() {
+        return btnHanteishoriAto;
+    }
+
+    /*
+     * setbtnHanteishoriAto
+     * @param btnHanteishoriAto btnHanteishoriAto
+     */
+    @JsonProperty("btnHanteishoriAto")
+    public void setBtnHanteishoriAto(Button btnHanteishoriAto) {
+        this.btnHanteishoriAto = btnHanteishoriAto;
     }
 
     // </editor-fold>

@@ -31,12 +31,16 @@ public class KanryoshoriCsvEntity {
     private final RString 申請日;
     @CsvField(order = 60, name = "申請区分_申請時")
     private final RString 申請区分_申請時;
+    @CsvField(order = 61, name = "意見書")
+    private final RString 意見書;
     @CsvField(order = 70, name = "一次判定日")
     private final RString 一次判定日;
     @CsvField(order = 80, name = "一次判定結果")
     private final RString 一次判定結果;
     @CsvField(order = 90, name = "一次判定結果コード")
     private final RString 一次判定結果コード;
+    @CsvField(order = 91, name = "一次判定区分")
+    private final RString 一次判定区分;
     @CsvField(order = 100, name = "一次判定結果_認知症加算")
     private final RString 一次判定結果_認知症加算;
     @CsvField(order = 110, name = "一次判定結果コード_認知症加算")
@@ -104,9 +108,11 @@ public class KanryoshoriCsvEntity {
      * @param 被保険者名 被保険者名
      * @param 申請日 申請日
      * @param 申請区分_申請時 申請区分_申請時
+     * @param 意見書 意見書
      * @param 一次判定日 一次判定日
      * @param 一次判定結果 一次判定結果
      * @param 一次判定結果コード 一次判定結果コード
+     * @param 一次判定区分 一次判定区分
      * @param 一次判定結果_認知症加算 一次判定結果_認知症加算
      * @param 一次判定結果コード_認知症加算 一次判定結果コード_認知症加算
      * @param 一次判定警告コード 一次判定警告コード
@@ -137,8 +143,8 @@ public class KanryoshoriCsvEntity {
      * @param 厚労省IF識別コード 厚労省IF識別コード
      */
     public KanryoshoriCsvEntity(RString 状態, RString 申請書管理番号, RString 証記載保険者, RString 被保険者番号,
-            RString 被保険者名, RString 申請日, RString 申請区分_申請時, RString 一次判定日,
-            RString 一次判定結果, RString 一次判定結果コード, RString 一次判定結果_認知症加算,
+            RString 被保険者名, RString 申請日, RString 申請区分_申請時, RString 意見書, RString 一次判定日,
+            RString 一次判定結果, RString 一次判定結果コード, RString 一次判定区分, RString 一次判定結果_認知症加算,
             RString 一次判定結果コード_認知症加算, RString 一次判定警告コード, RString 調査実地日,
             RString 意見書受領日, RString 基準時間, RString 基準時間_食事, RString 基準時間_排泄,
             RString 基準時間_移動, RString 基準時間_清潔保持, RString 基準時間_間接ケア, RString 基準時間_BPSD,
@@ -154,9 +160,11 @@ public class KanryoshoriCsvEntity {
         this.被保険者名 = 被保険者名;
         this.申請日 = 申請日;
         this.申請区分_申請時 = 申請区分_申請時;
+        this.意見書 = 意見書;
         this.一次判定日 = 一次判定日;
         this.一次判定結果 = 一次判定結果;
         this.一次判定結果コード = 一次判定結果コード;
+        this.一次判定区分 = 一次判定区分;
         this.一次判定結果_認知症加算 = 一次判定結果_認知症加算;
         this.一次判定結果コード_認知症加算 = 一次判定結果コード_認知症加算;
         this.一次判定警告コード = 一次判定警告コード;

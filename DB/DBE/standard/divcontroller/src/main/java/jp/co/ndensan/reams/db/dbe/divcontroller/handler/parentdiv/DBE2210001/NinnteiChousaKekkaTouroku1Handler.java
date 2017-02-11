@@ -224,15 +224,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         div.getCcdNinteiShinseiRenrakusakiKihon().initialize(申請書管理番号);
         div.getRadUpdateKind().setSelectedKey(KEY_登録修正);
 
-        NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = InstanceProvider.create(NinteichosaIraiJohoManager.class);
-        NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(申請書管理番号, 認定調査履歴番号);
-        RString 厚労省IF識別コード = 認定調査依頼情報.get厚労省IF識別コード().value();
-        ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 厚労省IF識別コード);
-        ViewStateHolder.put(ViewStateKeys.認定調査依頼区分コード, 認定調査依頼情報.get認定調査依頼区分コード().value());
-        if (!KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
-            return;
-        }
-
         NinnteiChousaKekkaTouroku1Finder finder = NinnteiChousaKekkaTouroku1Finder.createInstance();
         TempData 概況調査情報 = finder.get概況調査情報(申請書管理番号, 認定調査履歴番号);
         initialize概況基本調査情報(申請書管理番号, 認定調査履歴番号, 概況調査情報);
@@ -1165,12 +1156,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
         HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, HashMap.class);
-        if (gaikyoTokkiNyurokuMap != null) {
+        if (gaikyoTokkiNyurokuMap != null && !gaikyoTokkiNyurokuMap.isEmpty()) {
             特記事項の削除();
             save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap.entrySet());
         }
         HashMap gaikyoTokkiNyurokuMap_MASK = ViewStateHolder.get(ViewStateKeys.特記事項マスク一覧, HashMap.class);
-        if (gaikyoTokkiNyurokuMap_MASK != null) {
+        if (gaikyoTokkiNyurokuMap_MASK != null && !gaikyoTokkiNyurokuMap_MASK.isEmpty()) {
             save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap_MASK.entrySet());
         }
     }

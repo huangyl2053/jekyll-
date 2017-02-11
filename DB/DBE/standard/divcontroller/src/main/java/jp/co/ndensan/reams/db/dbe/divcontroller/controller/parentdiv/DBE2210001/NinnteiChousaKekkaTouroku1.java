@@ -29,9 +29,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -83,7 +85,9 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onLoad(NinnteiChousaKekkaTouroku1Div div) {
-        if (new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode())
+        if (new RString(UrErrorMessages.存在しない.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
@@ -98,14 +102,24 @@ public class NinnteiChousaKekkaTouroku1 {
         if (!gotLock) {
             throw new PessimisticLockingException();
         }
-        getHandler(div).onLoad(申請書管理番号, 認定調査履歴番号);
-        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+        NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = InstanceProvider.create(NinteichosaIraiJohoManager.class);
+        NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(申請書管理番号, 認定調査履歴番号);
+        if (認定調査依頼情報 == null) {
+            ErrorMessage message = new ErrorMessage(UrErrorMessages.存在しない.getMessage().getCode(),
+                    UrErrorMessages.存在しない.getMessage().replace("認定調査依頼").evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
+        RString 厚労省IF識別コード = 認定調査依頼情報.get厚労省IF識別コード().value();
+        ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 厚労省IF識別コード);
+        ViewStateHolder.put(ViewStateKeys.認定調査依頼区分コード, 認定調査依頼情報.get認定調査依頼区分コード().value());
         if (!KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class))) {
             ErrorMessage message = new ErrorMessage(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode(),
                     DbeErrorMessages.認定ソフトバージョンエラー.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
+        }
+        getHandler(div).onLoad(申請書管理番号, 認定調査履歴番号);
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         }
         ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
         boolean 審査会割当済 = shinsakaiWariateManager.get審査会割当データ(申請書管理番号);
@@ -621,7 +635,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
                 IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
                 IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(申請書管理番号);
-                if (一次判定結果情報 != null) {
+                if (一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
                     return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
                 }
                 return ResponseData.of(div).setState(DBE2210001StateName.完了);

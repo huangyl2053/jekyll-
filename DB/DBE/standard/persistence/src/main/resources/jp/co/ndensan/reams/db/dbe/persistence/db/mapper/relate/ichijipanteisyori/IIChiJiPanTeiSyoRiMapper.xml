@@ -13,6 +13,7 @@
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="kariIchijiHanteiKubun" column="kariIchijiHanteiKubun"/>
         <result property="ichijiHanteiYMD" column="ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ichijiHnateiKeikokuCode" column="ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -51,6 +52,7 @@
         ,DbT5101."hihokenshaName"
         ,DbT5101."ninteiShinseiYMD"
         ,DbT5101."ninteiShinseiShinseijiKubunCode"
+        ,"DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun"
         ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD"
         ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode"
         ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHnateiKeikokuCode"
@@ -148,7 +150,7 @@
         WHERE
         DbT5202N."shinseishoKanriNo" = DbT5202."shinseishoKanriNo")
         AND DbT5101."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
-        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = (SELECT
         MAX(DbT5302S."ikenshoIraiRirekiNo")
@@ -161,8 +163,6 @@
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
         AND DbT5105."centerSoshinYMD" IS NULL
@@ -192,12 +192,12 @@
                 <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
             </if>
             <if test = "完了可能区分.toString().equals(&quot;1&quot;)">
-                AND ("DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" = ''
+                AND (("DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" = ''
                 OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NULL)
+                OR "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" = TRUE)
             </if>
             <if test = "完了可能区分.toString().equals(&quot;2&quot;)">
-                AND ("DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" != ''
-                OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NOT NULL)
+                AND "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" = FALSE
             </if>
         </if>
     </sql>

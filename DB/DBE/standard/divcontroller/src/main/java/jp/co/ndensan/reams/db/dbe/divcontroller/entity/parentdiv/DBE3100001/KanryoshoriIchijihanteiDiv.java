@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KanryoshoriIchijihanteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class KanryoshoriIchijihanteiDiv extends Panel {
      */
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
     private IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran;
+    @JsonProperty("chosairaiSelect")
+    private chosairaiSelectDiv chosairaiSelect;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ichijiHanteiArgument")
@@ -62,6 +64,24 @@ public class KanryoshoriIchijihanteiDiv extends Panel {
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
     public void setIchijiHanteiShoriTaishoshaIchiran(IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran) {
         this.IchijiHanteiShoriTaishoshaIchiran = IchijiHanteiShoriTaishoshaIchiran;
+    }
+
+    /*
+     * getchosairaiSelect
+     * @return chosairaiSelect
+     */
+    @JsonProperty("chosairaiSelect")
+    public chosairaiSelectDiv getChosairaiSelect() {
+        return chosairaiSelect;
+    }
+
+    /*
+     * setchosairaiSelect
+     * @param chosairaiSelect chosairaiSelect
+     */
+    @JsonProperty("chosairaiSelect")
+    public void setChosairaiSelect(chosairaiSelectDiv chosairaiSelect) {
+        this.chosairaiSelect = chosairaiSelect;
     }
 
     /*

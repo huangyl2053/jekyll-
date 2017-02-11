@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteike
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001.DBE3100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001.KanryoshoriIchijihanteiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3100001.dgHanteiTaishosha_Row;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -137,7 +139,7 @@ public class KanryoshoriIchijihantei {
             getHandler(div).resetSearchCondition();
         }
 
-        getHandler(div).setCommonButtonDisplayNone();
+        getHandler(div).setCommonButtonDisabled();
         return ResponseData.of(div).respond();
     }
 
@@ -229,7 +231,10 @@ public class KanryoshoriIchijihantei {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoshoriIchijihanteiDiv> onClick_btnUpdateHanteiKekka(KanryoshoriIchijihanteiDiv div) {
-
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return onLoad(div);
+        }
         Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報Models
                 = ViewStateHolder.get(ViewStateKeys.要介護認定一次判定結果情報, Models.class);
 
@@ -251,8 +256,7 @@ public class KanryoshoriIchijihantei {
             IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
             manager.save要介護認定一次判定結果情報List(torokuTaishoList);
 
-            div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定結果を保存しました。"));
-            return ResponseData.of(div).setState(DBE3100001StateName.完了);
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -264,29 +268,28 @@ public class KanryoshoriIchijihantei {
      * @return レスポンスデータ
      */
     public ResponseData<KanryoshoriIchijihanteiDiv> onClick_BtnCompleteIchijiHantei(KanryoshoriIchijihanteiDiv div) {
+        if (new RString(DbeErrorMessages.一次判定未処理.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ResponseData.of(div).respond();
+        }
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         if (!ResponseHolder.isReRequest()) {
             validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧データの存在チェック());
             validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧データの行選択チェック());
-            if (validationMessages.existsError()) {
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            //TODOn8178 仮判定区分によるチェックも必要？
             validationMessages.add(getValidationHandler(div).一次判定完了対象者一覧選択行の完了処理チェック());
             if (validationMessages.existsError()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
+            
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace("一次判定").evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             List<ShinseishoKanriNo> noList = getHandler(div).getSelected申請書管理番号();
 

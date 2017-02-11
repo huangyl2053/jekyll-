@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,12 +35,6 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
     private DataGrid<dgHanteiTaishosha_Row> dgHanteiTaishosha;
     @JsonProperty("txtMaxCount")
     private TextBoxNum txtMaxCount;
-    @JsonProperty("chosairaiSelect")
-    private chosairaiSelectDiv chosairaiSelect;
-    @JsonProperty("btnIchijiHanteiValidate")
-    private Button btnIchijiHanteiValidate;
-    @JsonProperty("btnHanteishoriAto")
-    private Button btnHanteishoriAto;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
 
@@ -156,60 +150,6 @@ public class IchijiHanteiShoriTaishoshaIchiranDiv extends Panel {
     @JsonProperty("txtMaxCount")
     public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.txtMaxCount = txtMaxCount;
-    }
-
-    /*
-     * getchosairaiSelect
-     * @return chosairaiSelect
-     */
-    @JsonProperty("chosairaiSelect")
-    public chosairaiSelectDiv getChosairaiSelect() {
-        return chosairaiSelect;
-    }
-
-    /*
-     * setchosairaiSelect
-     * @param chosairaiSelect chosairaiSelect
-     */
-    @JsonProperty("chosairaiSelect")
-    public void setChosairaiSelect(chosairaiSelectDiv chosairaiSelect) {
-        this.chosairaiSelect = chosairaiSelect;
-    }
-
-    /*
-     * getbtnIchijiHanteiValidate
-     * @return btnIchijiHanteiValidate
-     */
-    @JsonProperty("btnIchijiHanteiValidate")
-    public Button getBtnIchijiHanteiValidate() {
-        return btnIchijiHanteiValidate;
-    }
-
-    /*
-     * setbtnIchijiHanteiValidate
-     * @param btnIchijiHanteiValidate btnIchijiHanteiValidate
-     */
-    @JsonProperty("btnIchijiHanteiValidate")
-    public void setBtnIchijiHanteiValidate(Button btnIchijiHanteiValidate) {
-        this.btnIchijiHanteiValidate = btnIchijiHanteiValidate;
-    }
-
-    /*
-     * getbtnHanteishoriAto
-     * @return btnHanteishoriAto
-     */
-    @JsonProperty("btnHanteishoriAto")
-    public Button getBtnHanteishoriAto() {
-        return btnHanteishoriAto;
-    }
-
-    /*
-     * setbtnHanteishoriAto
-     * @param btnHanteishoriAto btnHanteishoriAto
-     */
-    @JsonProperty("btnHanteishoriAto")
-    public void setBtnHanteishoriAto(Button btnHanteishoriAto) {
-        this.btnHanteishoriAto = btnHanteishoriAto;
     }
 
     /*

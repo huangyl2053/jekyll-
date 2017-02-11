@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -26,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KanryoshoriIchijihanteiValidationHandler {
 
+    private static final RString STATUS_KANRYO_MI = new RString("未");
     private final KanryoshoriIchijihanteiDiv div;
 
     /**
@@ -87,7 +87,7 @@ public class KanryoshoriIchijihanteiValidationHandler {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         List<dgHanteiTaishosha_Row> list = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getSelectedItems();
         for (dgHanteiTaishosha_Row row : list) {
-            if ((row.getIchijiHanteibi().getValue() == null || row.getIchijiHanteibi().getValue().isEmpty())) {
+            if (STATUS_KANRYO_MI.equals(row.getColumnState())) {
                 pairs.add(new ValidationMessageControlPair(KanryoshoriIchijihanteiMessages.一次判定完了対象者一覧選択行の完了処理チェック));
                 return pairs;
             }
@@ -99,7 +99,7 @@ public class KanryoshoriIchijihanteiValidationHandler {
 
         一次判定完了対象者一覧データの存在チェック(UrErrorMessages.該当データなし),
         一次判定完了対象者一覧データの行選択チェック(UrErrorMessages.対象行を選択),
-        一次判定完了対象者一覧選択行の完了処理チェック(DbzErrorMessages.理由付き完了不可, "一次判定未処理データ"),
+        一次判定完了対象者一覧選択行の完了処理チェック(DbzErrorMessages.理由付き完了不可, "一次判定未処理データが含まれている"),
         一次判定引数チェック(DbeErrorMessages.一次判定実行不可_申請日);
         private final Message message;
 
