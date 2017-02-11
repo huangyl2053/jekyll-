@@ -81,12 +81,12 @@
             AND T5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND T5105."centerSoshinYMD" IS NULL
           LEFT JOIN rgdb."DbT5912ShujiiJoho" AS T5912
-            ON T5912."shichosonCode" = T7051."shichosonCode"
+            ON T5912."shichosonCode" = T5101."shichosonCode"
             AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
             AND T5912."shujiiCode" = T5301."shujiiCode"
             AND T5912."jokyoFlag" = True
           LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-            ON T5911."shichosonCode" = T7051."shichosonCode"
+            ON T5911."shichosonCode" = T5101."shichosonCode"
             AND T5911."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
             AND T5911."jokyoFlag" = True
           LEFT JOIN rgdb."DbT5115Image" AS T5115
