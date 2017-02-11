@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 作成料請求区分取得マッピング用XMLです。 -->
+
+<!-- @reamsid_L DBZ-4520-010 zhangzhiming -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.sakuseiryoseikyuKubun.ISakuseiryoSeikyuKubunMapper">
+    <select id="get意見書データ" resultType="int"
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sakuseiryoSeikyuKubun.SakuseiryoSeikyuKubunParameter" fetchSize="500">
+        SELECT
+            count(*)
+        FROM
+            (SELECT *
+             FROM rgdb."DbT5101NinteiShinseiJoho" as mst
+             WHERE EXISTS
+                 (  SELECT 'x' 
+                    FROM rgdb."DbT5101NinteiShinseiJoho" as slv 
+                    WHERE slv."shinseishoKanriNo"    =#{申請書管理番号}
+                        AND mst."shoKisaiHokenshaNo" = slv."shoKisaiHokenshaNo"
+                        AND mst."hihokenshaNo"       = slv."hihokenshaNo"
+                        AND mst."shichosonCode"      = slv."shichosonCode" 
+                        AND mst."ninteiShinseiYMD"  <![CDATA[<]]> slv."ninteiShinseiYMD"
+                )
+            ) AS DbT5101
+        INNER JOIN
+            rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
+            ON DbT5101."shinseishoKanriNo" = DbT5302."shinseishoKanriNo"
+        WHERE DbT5302."shujiiIryoKikanCode" =#{主治医医療機関コード}
+        AND DbT5302."shujiiCode" =#{主治医コード}
+    </select>
+    
+    <select id="get施設入所有" resultType="int"
+                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sakuseiryoSeikyuKubun.SakuseiryoSeikyuKubunParameter" fetchSize="500">
+        SELECT
+            count(*)
+        FROM rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        WHERE DbT5101."shinseishoKanriNo"  =#{申請書管理番号}
+        AND DbT5101."shisetsuNyushoFlag" = true
+    </select>
+</mapper>

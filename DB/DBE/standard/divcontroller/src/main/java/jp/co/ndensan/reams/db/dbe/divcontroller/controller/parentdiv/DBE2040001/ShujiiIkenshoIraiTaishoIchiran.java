@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -455,7 +456,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 getパターン32(row.getIkenshoIraiIraishoHakkoDay().getValue()),
                 getパターン32(row.getIkenshoIraiIkenshoShutsuryokuDay().getValue()),
                 getパターン32(row.getIkenshoIraiKigen().getValue()),
-                getコード(row.getSakuseiryoSeikyuKubun(), 2),
+                get作成料請求区分コード(row.getSakuseiryoSeikyuKubun()),
                 row.getSakuseiryoSeikyuKubun(),
                 row.getKonkaiShujiiIryokikan(),
                 row.getKonkaiShujii(),
@@ -470,6 +471,29 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 row.getIkenshoTokusokuCount().getValue(),
                 getパターン32(row.getIkenshoTokusokuLimit().getValue()),
                 RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));
+    }
+
+    /**
+     * 作成料請求区分名称を取得します。
+     *
+     * @param 作成料請求区分名称 RString
+     * @return 作成料請求区分コード RString
+     */
+    private RString get作成料請求区分コード(RString 作成料請求区分名称) {
+        RString 作成料請求区分コード = RString.EMPTY;
+        if (RString.isNullOrEmpty(作成料請求区分名称)) {
+            return 作成料請求区分コード;
+        }
+        if (SakuseiryoSeikyuKubun.在宅新規.get名称().equals(作成料請求区分名称)) {
+            作成料請求区分コード = SakuseiryoSeikyuKubun.在宅新規.getコード();
+        } else if (SakuseiryoSeikyuKubun.施設新規.get名称().equals(作成料請求区分名称)) {
+            作成料請求区分コード = SakuseiryoSeikyuKubun.施設新規.getコード();
+        } else if (SakuseiryoSeikyuKubun.在宅継続.get名称().equals(作成料請求区分名称)) {
+            作成料請求区分コード = SakuseiryoSeikyuKubun.在宅継続.getコード();
+        } else if (SakuseiryoSeikyuKubun.施設継続.get名称().equals(作成料請求区分名称)) {
+            作成料請求区分コード = SakuseiryoSeikyuKubun.施設継続.getコード();
+        }
+        return 作成料請求区分コード;
     }
 
     private RString 郵便番号編集(RString 郵便番号) {
