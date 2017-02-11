@@ -152,7 +152,7 @@
         , DbT5101."ninteiShinseiShinseijiKubunCode"
         , DbT5912."shujiiName"
         , DbT7051."shichosonMeisho"
-        , DbT7051."shichosonCode"
+        , DbT5101."shichosonCode"
         , DbT5301."ikenshoIraiRirekiNo"
         <!-- jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper.selectShuziiIkenshoIrai
         と同じ。//TODO 引数の関係でまとめていない。できたらまとめる START -->   
@@ -164,9 +164,9 @@
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105,
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         <where> 
-            AND DbT5911."shichosonCode" = DbT7051."shichosonCode"
+            AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
             AND DbT5911."shujiiIryokikanCode" = DbT5301."shujiiIryokikanCode"
-            AND DbT5912."shichosonCode" = DbT7051."shichosonCode"
+            AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
             AND DbT5912."shujiiIryokikanCode" = DbT5301."shujiiIryokikanCode"							
             AND DbT5912."shujiiCode" = DbT5301."shujiiCode"						
             AND DbT5301."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"										
@@ -237,7 +237,7 @@
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
         ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
-        ON DbT5911."shichosonCode" = DbT7051."shichosonCode" 
+        ON DbT5911."shichosonCode" = DbT5101."shichosonCode" 
         AND DbT5911."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode" 
         AND DbT5911."jokyoFlag" = true 
         INNER JOIN ( 
@@ -376,12 +376,12 @@
         AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo" 
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" T5911 
         ON T5301."shujiiIryokikanCode" = T5911."shujiiIryokikanCode" 
-        AND T7051."shichosonCode" = T5911."shichosonCode" 
+        AND T5101."shichosonCode" = T5911."shichosonCode" 
         AND T5911."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5912ShujiiJoho" T5912 
         ON T5301."shujiiIryokikanCode" = T5912."shujiiIryokikanCode" 
         AND T5301."shujiiCode" = T5912."shujiiCode" 
-        AND T7051."shichosonCode" = T5912."shichosonCode" 
+        AND T5101."shichosonCode" = T5912."shichosonCode" 
         AND T5912."jokyoFlag" = True 
         INNER JOIN
         (<include refid="ShujiiIkenshoHakko" />) AS pickout 

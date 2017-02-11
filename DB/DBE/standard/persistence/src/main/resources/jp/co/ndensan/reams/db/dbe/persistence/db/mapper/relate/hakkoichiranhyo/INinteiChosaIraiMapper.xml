@@ -27,7 +27,7 @@
         SELECT
         dbT5201."iraishoShutsuryokuYMD",
         dbT5201."ninteichosaKigenYMD",
-        dbT7051."shichosonCode",
+        dbT5101."shichosonCode",
         dbT7051."shichosonMeisho",
         dbT5101."hihokenshaNo",
         dbT5101."hihokenshaName",
@@ -55,12 +55,12 @@
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
         ON
-        dbT5910."shichosonCode" = dbT7051."shichosonCode"
+        dbT5910."shichosonCode" = dbT5101."shichosonCode"
         AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
         INNER JOIN
         rgdb."DbT5913ChosainJoho" AS dbT5913
         ON
-        dbT5913."shichosonCode" = dbT7051."shichosonCode"
+        dbT5913."shichosonCode" = dbT5101."shichosonCode"
         AND dbT5913."ninteiChosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
         AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
         WHERE
@@ -120,7 +120,7 @@
         ORDER BY
         dbT5201."iraishoShutsuryokuYMD",
         dbT5201."ninteichosaKigenYMD",
-        dbT7051."shichosonCode",
+        dbT5101."shichosonCode",
         dbT5101."hihokenshaNo",
         dbT5201."ninteichosaIraiYMD",
         dbT5910."ninteichosaItakusakiCode",

@@ -299,15 +299,14 @@
         と同じ。//TODO 引数の関係でまとめていない。できたらまとめる START -->
         FROM
         rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
-        , rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
         , rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
         , rgdb."DbT5913ChosainJoho" AS dbT5913
         , rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
         , rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
         <where>
-            AND dbT5910."shichosonCode" = dbT7051."shichosonCode"
+            AND dbT5910."shichosonCode" = dbT5101."shichosonCode"
             AND dbT5910."ninteichosaItakusakiCode" = dbT5201."ninteichosaItakusakiCode"
-            AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
+            AND dbT5913."shichosonCode" = dbT5101."shichosonCode"
             AND dbT5913."ninteiChosaItakusakiCode" = dbT5201."ninteichosaItakusakiCode"
             AND dbT5913."ninteiChosainCode" = dbT5201."ninteiChosainCode"
             AND dbT5201."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
@@ -321,7 +320,6 @@
             )
             AND dbT5201."logicalDeletedFlag" = false
             AND dbT5101."shinseishoKanriNo" = dbT5105."shinseishoKanriNo"
-            AND dbT5101."shoKisaiHokenshaNo" = dbT7051."shoKisaiHokenshaNo"
             AND dbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
             AND dbT5101."logicalDeletedFlag" = false
             AND (dbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
@@ -397,20 +395,16 @@
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON
         DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        LEFT JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
-        ON
-        DbT7051."shoKisaiHokenshaNo"= DbT5101."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON
-        DbT5910."shichosonCode"= DbT7051."shichosonCode"
+        DbT5910."shichosonCode"= DbT5101."shichosonCode"
         AND DbT5910."ninteichosaItakusakiCode"= DbT5101."ninteiChosaItakusakiCode"
         AND DbT5910."jokyoFlag"= true
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS DbT5913
         ON
-        DbT5913."shichosonCode"= DbT7051."shichosonCode"
+        DbT5913."shichosonCode"= DbT5101."shichosonCode"
         AND DbT5913."ninteiChosaItakusakiCode"= DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode"= DbT5101."ninteiChosainCode"
         AND DbT5913."jokyoFlag"= true
@@ -617,20 +611,16 @@
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON
         DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        LEFT JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
-        ON
-        DbT7051."shoKisaiHokenshaNo"= DbT5101."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON
-        DbT5910."shichosonCode"= DbT7051."shichosonCode"
+        DbT5910."shichosonCode"= DbT5101."shichosonCode"
         AND DbT5910."ninteichosaItakusakiCode"= DbT5101."ninteiChosaItakusakiCode"
         AND DbT5910."jokyoFlag"= true
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS DbT5913
         ON
-        DbT5913."shichosonCode"= DbT7051."shichosonCode"
+        DbT5913."shichosonCode"= DbT5101."shichosonCode"
         AND DbT5913."ninteiChosaItakusakiCode"= DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode"= DbT5101."ninteiChosainCode"
         AND DbT5913."jokyoFlag"= true
@@ -858,8 +848,6 @@
         ON T5101_2."shinseishoKanriNo" = T5121."zenkaiShinseishoKanriNo"
         ) D
         ON D."zenkaiShinseishoKanriNo" = T5101."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
-        ON T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
         ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
         AND T5201."logicalDeletedFlag" = False
@@ -875,12 +863,12 @@
         )
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" T5910
         ON T5201."ninteichosaItakusakiCode" = T5910."ninteichosaItakusakiCode"
-        AND T7051."shichosonCode" = T5910."shichosonCode"
+        AND T5101."shichosonCode" = T5910."shichosonCode"
         AND T5910."jokyoFlag" = True
         LEFT JOIN rgdb."DbT5913ChosainJoho" T5913
         ON T5201."ninteichosaItakusakiCode" = T5913."ninteiChosaItakusakiCode"
         AND T5201."ninteiChosainCode" = T5913."ninteiChosainCode"
-        AND T7051."shichosonCode" = T5913."shichosonCode"
+        AND T5101."shichosonCode" = T5913."shichosonCode"
         AND T5913."jokyoFlag" = True
         INNER JOIN
         (
