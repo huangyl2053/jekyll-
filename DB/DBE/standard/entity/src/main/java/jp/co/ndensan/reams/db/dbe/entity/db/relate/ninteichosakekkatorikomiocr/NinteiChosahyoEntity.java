@@ -38,8 +38,6 @@ public class NinteiChosahyoEntity {
     private ShinseishoKanriNo shinseishoKanriNo;
     @lombok.Getter
     private int ninteichosaRirekiNo;
-    @lombok.Getter
-    private RString gaikyoChosaTextImageKubun;
     private List<DbT5202NinteichosahyoGaikyoChosaEntity> dbT5202;
     private List<DbT5203NinteichosahyoKihonChosaEntity> dbT5203;
     private RString 調査項目;
@@ -53,7 +51,6 @@ public class NinteiChosahyoEntity {
     public NinteiChosahyoEntity() {
         this.shinseishoKanriNo = ShinseishoKanriNo.EMPTY;
         this.ninteichosaRirekiNo = 0;
-        this.gaikyoChosaTextImageKubun = RString.EMPTY;
         this.dbT5202 = new ArrayList<>();
         this.dbT5203 = new ArrayList<>();
     }
@@ -115,7 +112,6 @@ public class NinteiChosahyoEntity {
                 .append("jsonのデシリアライズに失敗しました。")
                 .append(" 申請書管理番号:").append(shinseishoKanriNo)
                 .append(" 認定調査依頼履歴番号:").append(ninteichosaRirekiNo)
-                .append(" 概況調査イメージ区分:").append(gaikyoChosaTextImageKubun)
                 .toString(), e);
     }
 
@@ -266,37 +262,5 @@ public class NinteiChosahyoEntity {
                 .<List<DbT5210NinteichosahyoShisetsuRiyoEntity>>readValue(
                         施設利用.toString(), new TypeReference<List<DbT5210NinteichosahyoShisetsuRiyoEntity>>() {
                         });
-    }
-
-    /**
-     * @return 内容をコピーした新しいインスタンスを返します。
-     */
-    public NinteiChosahyoEntity copied() {
-        NinteiChosahyoEntity newEntity = new NinteiChosahyoEntity();
-        List<DbT5202NinteichosahyoGaikyoChosaEntity> newDbT5202 = new ArrayList<>();
-        for (DbT5202NinteichosahyoGaikyoChosaEntity e : dbT5202) {
-            DbT5202NinteichosahyoGaikyoChosaEntity c = new DbT5202NinteichosahyoGaikyoChosaEntity();
-            c.shallowCopy(e);
-            newDbT5202.add(c);
-        }
-        newEntity.setDbT5202(newDbT5202);
-        List<DbT5203NinteichosahyoKihonChosaEntity> newDbT5203 = new ArrayList<>();
-        for (DbT5203NinteichosahyoKihonChosaEntity entity : dbT5203) {
-            DbT5203NinteichosahyoKihonChosaEntity c = new DbT5203NinteichosahyoKihonChosaEntity();
-            c.shallowCopy(entity);
-            newDbT5203.add(c);
-        }
-        newEntity.setDbT5203(newDbT5203);
-        newEntity.setGaikyoChosaTextImageKubun(gaikyoChosaTextImageKubun);
-        newEntity.setNinteichosaRirekiNo(ninteichosaRirekiNo);
-        newEntity.setShinseishoKanriNo(shinseishoKanriNo);
-        newEntity.setサービスの状況(サービスの状況);
-        newEntity.setサービスの状況フラグ(サービスの状況フラグ);
-        newEntity.set施設利用(施設利用);
-        newEntity.set概況特記(概況特記);
-        newEntity.set特記情報(特記情報);
-        newEntity.set記入項目(記入項目);
-        newEntity.set調査項目(調査項目);
-        return newEntity;
     }
 }
