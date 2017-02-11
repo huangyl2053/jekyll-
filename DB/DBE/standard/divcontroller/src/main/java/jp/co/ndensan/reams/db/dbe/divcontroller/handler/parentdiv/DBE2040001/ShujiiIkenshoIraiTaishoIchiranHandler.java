@@ -247,6 +247,8 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.getIkenshoIraiDay().setValue(div.getTxtSakuseiIraiYmd().getValue());
             row.setRowState(RowState.Modified);
             row.setCancelButtonState(DataGridButtonState.Enabled);
+            row.getIkenshoIraiIraishoHakkoDay().setValue(null);
+            row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(null);
             dataSource.set(index, row);
         }
         div.getDgNinteiTaskList().setDataSource(dataSource);

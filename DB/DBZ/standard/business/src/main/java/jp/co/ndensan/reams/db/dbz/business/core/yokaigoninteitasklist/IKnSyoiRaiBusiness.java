@@ -330,4 +330,13 @@ public class IKnSyoiRaiBusiness implements Serializable {
     public RString get前前回主治医() {
         return entity.getBefore_before_shujiiName();
     }
+
+    /**
+     * 作成料請求区分を返します
+     *
+     * @return 作成料請求区分
+     */
+    public RString get作成料請求区分() {
+        return entity.getSakuseiryoSeikyuKubun();
+    }
 }

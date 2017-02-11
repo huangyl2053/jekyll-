@@ -61,4 +61,5 @@ public class IKnSyoiRaiRelateEntity implements Serializable {
     private RString before_shujiiName;
     private RString before_before_iryoKikanMeisho;
     private RString before_before_shujiiName;
+    private RString sakuseiryoSeikyuKubun;
 }

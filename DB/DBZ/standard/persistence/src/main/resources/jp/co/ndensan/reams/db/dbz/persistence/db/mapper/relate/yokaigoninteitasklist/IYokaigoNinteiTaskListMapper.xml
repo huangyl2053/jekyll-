@@ -786,6 +786,7 @@
             DbT5301."iraishoShutsuryokuYMD",
             DbT5301."ikenshoShutsuryokuYMD",
             DbT5301."ishiKubunCode",
+            DbT5301."sakuseiryoSeikyuKubun",
             DbT4302."ikenshoSakuseiKaisuKubun",
             CASE WHEN DbT5301."shujiiIryokikanCode" IS null AND DbT5101."shujiiIryokikanCode" IS NOT null
                 THEN DbT5101."shujiiIryokikanCode"
