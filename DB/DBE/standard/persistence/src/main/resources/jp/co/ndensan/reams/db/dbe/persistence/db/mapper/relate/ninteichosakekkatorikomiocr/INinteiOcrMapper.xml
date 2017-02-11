@@ -112,6 +112,8 @@
                 )
             )
         SELECT
+            target."shinseishoKanriNo" AS "shinseishoKanriNo",
+            target."ninteichosaRirekiNo" AS "ninteichosaRirekiNo",
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.allColumns_DbT5202NinteichosahyoGaikyoChosa"/>,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5203NinteichosahyoKihonChosaMapper.allColumns_DbT5203NinteichosahyoKihonChosa"/>,
             "DbT5203NinteichosahyoKihonChosa"."調査項目" AS "調査項目",
@@ -338,9 +340,8 @@
     </select>
 
     <resultMap id="ResultMap_get認定調査票" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity" autoMapping="true">
-        <id property="shinseishoKanriNo" column="dbT5202NinteichosahyoGaikyoChosa_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <id property="ninteichosaRirekiNo" column="dbT5202NinteichosahyoGaikyoChosa_ninteichosaRirekiNo" />
-        <id property="gaikyoChosaTextImageKubun" column="dbT5202NinteichosahyoGaikyoChosa_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id property="ninteichosaRirekiNo" column="ninteichosaRirekiNo" />
         <result property="調査項目" column="調査項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="概況特記" column="概況特記" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="特記情報" column="特記情報" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

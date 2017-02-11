@@ -247,15 +247,12 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         FileNameConvertionTheories converter = isID777
                 ? FileNameConvertionTheories.ID777
                 : FileNameConvertionTheories.ID777_reversed;
-        List<RString> iamgeFileNames = isID777
-                ? ca3.getImageFileNames().subList(0, 1)
-                : ca3.getImageFileNames().subList(1, 2);
         return new CopyImageResult(
                 ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(ir.getSharedFileIDOrNull())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(converter)
-                .targetImageFileNames(iamgeFileNames)
+                .targetImageFileNames(ca3.getImageFileNames().subList(0, 1))
                 .ocrData(value)
                 .save(writer_DbT5115)
         );
