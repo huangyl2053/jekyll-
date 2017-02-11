@@ -44,10 +44,10 @@ public class ShujiiIkenshoIraiCsvEntity {
     private final RString 意見書出力日;
     @CsvField(order = 130, name = "依頼期限")
     private final RString 依頼期限;
-    @CsvField(order = 140, name = "初回_2回目コード")
-    private final RString 初回_2回目コード;
-    @CsvField(order = 150, name = "初回_2回目")
-    private final RString 初回_2回目;
+    @CsvField(order = 140, name = "作成料請求区分コード")
+    private final RString 作成料請求区分コード;
+    @CsvField(order = 150, name = "作成料請求区分")
+    private final RString 作成料請求区分;
     @CsvField(order = 160, name = "医療機関")
     private final RString 医療機関;
     @CsvField(order = 170, name = "主治医")
@@ -77,6 +77,7 @@ public class ShujiiIkenshoIraiCsvEntity {
 
     /**
      * コンストラクタです。
+     *
      * @param 申請書管理番号 申請書管理番号
      * @param 状態 状態
      * @param 保険者 保険者
@@ -90,8 +91,8 @@ public class ShujiiIkenshoIraiCsvEntity {
      * @param 依頼書発行日 依頼書発行日
      * @param 意見書出力日 意見書出力日
      * @param 依頼期限 依頼期限
-     * @param 初回_2回目コード 初回_2回目コード
-     * @param 初回_2回目 初回_2回目
+     * @param 作成料請求区分コード 作成料請求区分コード
+     * @param 作成料請求区分 作成料請求区分
      * @param 医療機関 医療機関
      * @param 主治医 主治医
      * @param 前回主治医医療機関情報 前回主治医医療機関情報
@@ -101,7 +102,7 @@ public class ShujiiIkenshoIraiCsvEntity {
      * @param 入所施設コード 入所施設コード
      * @param 入所施設 入所施設
      * @param 意見書督促発行日 意見書督促発行日
-     * @param  意見書督促方法 意見書督促方法
+     * @param 意見書督促方法 意見書督促方法
      * @param 意見書督促回数 意見書督促回数
      * @param 意見書督促期限 意見書督促期限
      * @param 経過日数 経過日数
@@ -120,8 +121,8 @@ public class ShujiiIkenshoIraiCsvEntity {
             RString 依頼書発行日,
             RString 意見書出力日,
             RString 依頼期限,
-            RString 初回_2回目コード,
-            RString 初回_2回目,
+            RString 作成料請求区分コード,
+            RString 作成料請求区分,
             RString 医療機関,
             RString 主治医,
             RString 前回主治医医療機関情報,
@@ -148,8 +149,8 @@ public class ShujiiIkenshoIraiCsvEntity {
         this.依頼書発行日 = 依頼書発行日;
         this.意見書出力日 = 意見書出力日;
         this.依頼期限 = 依頼期限;
-        this.初回_2回目コード = 初回_2回目コード;
-        this.初回_2回目 = 初回_2回目;
+        this.作成料請求区分コード = 作成料請求区分コード;
+        this.作成料請求区分 = 作成料請求区分;
         this.医療機関 = 医療機関;
         this.主治医 = 主治医;
         this.前回主治医医療機関情報 = 前回主治医医療機関情報;

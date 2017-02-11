@@ -28,9 +28,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiB
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiTokusokuHoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.sakuseiryoSeikyuKubun.SakuseiryoSeikyuKubunFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -249,9 +251,35 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setCancelButtonState(DataGridButtonState.Enabled);
             row.getIkenshoIraiIraishoHakkoDay().setValue(null);
             row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(null);
+            RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
+                    .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
+            row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
             dataSource.set(index, row);
         }
         div.getDgNinteiTaskList().setDataSource(dataSource);
+    }
+
+    /**
+     * 作成料請求区分名称を取得します。
+     *
+     * @param 作成料請求区分コード RString
+     * @return 作成料請求区分名称 RString
+     */
+    public RString get作成料請求区分名称(RString 作成料請求区分コード) {
+        RString 作成料請求区分名称 = RString.EMPTY;
+        if (RString.isNullOrEmpty(作成料請求区分コード)) {
+            return 作成料請求区分名称;
+        }
+        if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(作成料請求区分コード)) {
+            作成料請求区分名称 = SakuseiryoSeikyuKubun.在宅新規.get名称();
+        } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(作成料請求区分コード)) {
+            作成料請求区分名称 = SakuseiryoSeikyuKubun.施設新規.get名称();
+        } else if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(作成料請求区分コード)) {
+            作成料請求区分名称 = SakuseiryoSeikyuKubun.在宅継続.get名称();
+        } else if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(作成料請求区分コード)) {
+            作成料請求区分名称 = SakuseiryoSeikyuKubun.施設継続.get名称();
+        }
+        return 作成料請求区分名称;
     }
 
     /**
@@ -388,6 +416,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setShichosonCode(business.get市町村コード());
         row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
         row.setIkenshoIraiKubun(business.get主治医意見書依頼区分() == null ? RString.EMPTY : business.get主治医意見書依頼区分());
+        row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(business.get作成料請求区分()));
         意見書依頼モードの日付設定(row, business);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
