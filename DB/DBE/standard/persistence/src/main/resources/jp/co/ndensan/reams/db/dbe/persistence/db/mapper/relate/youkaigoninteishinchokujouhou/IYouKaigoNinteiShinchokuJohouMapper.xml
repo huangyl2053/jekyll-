@@ -53,8 +53,6 @@
         L."shinsakaiKaisaiYMD" as "L_shinsakaiKaisaiYMD"  
         FROM  
         rgdb."DbT5101NinteiShinseiJoho" AS A
-        LEFT  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
-        ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo" 
         LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho"  AS C 
         ON A."shinseishoKanriNo" = C ."shinseishoKanriNo"  
         AND C ."logicalDeletedFlag" = False  
@@ -65,12 +63,12 @@
         AND  C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo")  
         LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
         ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
-        AND  D."shichosonCode" = A1."shichosonCode" 
+        AND  D."shichosonCode" = A."shichosonCode" 
         AND  D."jokyoFlag" = True 
         LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
         ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
         AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
-        AND  E."shichosonCode" =  A1."shichosonCode" 
+        AND  E."shichosonCode" =  A."shichosonCode" 
         AND  E."jokyoFlag" = True 
         LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
         ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
@@ -163,6 +161,7 @@
         SELECT
         "hihokenshaNo"
         , "hihokenshaName"
+        ,　"shichosonCode" 
         , seibetsu
         , "seinengappiYMD"
         , "ninteiShinseiYMD"
@@ -197,16 +196,14 @@
         AND C."logicalDeletedFlag" = False 
         AND C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
         ) 
-        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS A1 
-        ON B."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo" 
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
         ON C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
-        AND D."shichosonCode" = A1."shichosonCode" 
+        AND D."shichosonCode" = B."shichosonCode" 
         AND D."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS E 
         ON C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode" 
         AND C."ninteiChosainCode" = E."ninteiChosainCode" 
-        AND E."shichosonCode" = A1."shichosonCode" 
+        AND E."shichosonCode" = B."shichosonCode" 
         AND E."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F 
         ON A."shinseishoKanriNo" = F."shinseishoKanriNo" 

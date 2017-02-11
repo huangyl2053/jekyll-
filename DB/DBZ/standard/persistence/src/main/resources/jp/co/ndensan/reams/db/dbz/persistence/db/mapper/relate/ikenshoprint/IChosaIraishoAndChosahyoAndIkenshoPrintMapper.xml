@@ -100,13 +100,13 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS C
         ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS D
         ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
         AND B."ninteiChosainCode"  = D."ninteiChosainCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" IN
@@ -154,13 +154,13 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS C
         ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS D
         ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
         AND B."ninteiChosainCode"  = D."ninteiChosainCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" IN
@@ -218,13 +218,13 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
         ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" AS D
         ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
         AND B."shujiiCode"  = D."shujiiCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" IN
@@ -249,10 +249,7 @@
         A."shinseishoKanriNo"
         ,B."ikenshoIraiRirekiNo"
         FROM
-        rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS A1
-        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+        rgdb."DbT5101NinteiShinseiJoho" AS A      
         LEFT JOIN
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
@@ -269,13 +266,13 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
         ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" AS D
         ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
         AND B."shujiiCode"  = D."shujiiCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" IN
@@ -317,9 +314,6 @@
         ,D."chosainShimei"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS A1
-        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
         LEFT JOIN
         rgdb."DbT5201NinteichosaIraiJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
@@ -336,13 +330,13 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS C
         ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS D
         ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
         AND B."ninteiChosainCode"  = D."ninteiChosainCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" = #{申請書管理番号}
@@ -391,13 +385,13 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS C
         ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS D
         ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
         AND B."ninteiChosainCode"  = D."ninteiChosainCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" IN
@@ -406,7 +400,7 @@
         </foreach>
         AND A."logicalDeletedFlag" = FALSE
         ORDER BY
-        A1."shichosonCode"
+        A."shichosonCode"
         ,B."ninteichosaItakusakiCode"
         ,A."shinseishoKanriNo"
     </select>
@@ -440,9 +434,6 @@
         ,E."renrakusakiTuzukigara"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS A1
-        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
         LEFT JOIN
         rgdb."DbT5201NinteichosaIraiJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
@@ -459,13 +450,13 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho" AS C
         ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5913ChosainJoho" AS D
         ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
         AND B."ninteiChosainCode"  = D."ninteiChosainCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5150RenrakusakiJoho" AS E
@@ -569,9 +560,6 @@
         ,D."shujiiName"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS A1
-        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
         LEFT JOIN
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
@@ -588,13 +576,13 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
         ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" AS D
         ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
         AND B."shujiiCode"  = D."shujiiCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" = #{申請書管理番号}
@@ -641,13 +629,13 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
         ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" AS D
         ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
         AND B."shujiiCode"  = D."shujiiCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" IN
@@ -691,13 +679,13 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
         ON C."shujiiIryokikanCode" = A."shujiiIryokikanCode"
-        AND C."shichosonCode" = B."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" AS D
         ON A."shujiiIryokikanCode" = D."shujiiIryokikanCode"
         AND A."shujiiCode"  = D."shujiiCode"
-        AND D."shichosonCode" = B."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" = #{申請書管理番号}
@@ -745,7 +733,7 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS E
         ON E."shujiiIryokikanCode" = A."shujiiIryokikanCode"
-        AND E."shichosonCode" = C."shichosonCode"
+        AND E."shichosonCode" = A."shichosonCode"
         AND E."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" = #{申請書管理番号}
@@ -769,9 +757,6 @@
         ,D."shujiiName"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS A1
-        ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
         LEFT JOIN
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
@@ -788,13 +773,13 @@
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" AS C
         ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
-        AND C."shichosonCode" = A1."shichosonCode"
+        AND C."shichosonCode" = A."shichosonCode"
         AND C."jokyoFlag" = TRUE
         LEFT JOIN
         rgdb."DbT5912ShujiiJoho" AS D
         ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
         AND B."shujiiCode"  = D."shujiiCode"
-        AND D."shichosonCode" = A1."shichosonCode"
+        AND D."shichosonCode" = A."shichosonCode"
         AND D."jokyoFlag" = TRUE
         WHERE
         A."shinseishoKanriNo" = #{申請書管理番号}
