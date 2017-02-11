@@ -78,6 +78,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -124,6 +125,25 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private Catalog catalog;
 
     @Override
+    protected void initialize() {
+        super.initialize();
+        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
+        if (!this.catalog.exists()) {
+            throw new BatchInterruptedException("カタログファイルがアップロードされていません。");
+        }
+    }
+
+    @Override
+    public void cancel() {
+        super.cancel();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
+                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし.replaced("OCRCHOSA.ca3"))).build();
+        this.kekkaListEditor.writeMultiLine(Collections.singletonList(r));
+        this.kekkaListEditor.close();
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(
                 new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".findCsvDataOrderByKey").toRString(),
@@ -136,7 +156,6 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         super.beforeExecute();
         this.cache = new ArrayList<>();
         this.key = ShinseiKey.EMPTY;
-        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
     }
 
     @Override
@@ -231,19 +250,19 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         for (OcrChosasByOCRID.Entry entry : ocrChosas.entrySet()) {
             switch (entry.getOCRID()) {
                 case _501: {
-                    SaveImageFilesResult result_501 = saveImageFiles501(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    SaveImageFilesResult result_501 = saveImageFilesAndUpdateTables501(entry.getOcrChosas(), entity, nr, sharedFileID);
                     sharedFileID = result_501.getSharedFileID();
                     results.addAll(result_501.getProcessingResults());
                 }
                 continue;
                 case _502: {
-                    SaveImageFilesResult result_502 = saveImageFiles502(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    SaveImageFilesResult result_502 = saveImageFilesAndUpdateTables502(entry.getOcrChosas(), entity, nr, sharedFileID);
                     sharedFileID = result_502.getSharedFileID();
                     results.addAll(result_502.getProcessingResults());
                 }
                 continue;
                 case _550: {
-                    SaveImageFilesResult result_550 = saveImageFiles550(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    SaveImageFilesResult result_550 = saveImageFilesAndUpdateTables550(entry.getOcrChosas(), entity, nr, sharedFileID);
                     results.addAll(result_550.getProcessingResults());
                 }
                 continue;
@@ -257,7 +276,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     //<editor-fold defaultstate="collapsed" desc="ID501">
-    private SaveImageFilesResult saveImageFiles501(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
+    private SaveImageFilesResult saveImageFilesAndUpdateTables501(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
         if (ocrChosas.isEmpty()) {
             return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
         }
@@ -299,7 +318,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ID502">
-    private SaveImageFilesResult saveImageFiles502(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
+    private SaveImageFilesResult saveImageFilesAndUpdateTables502(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
         if (ocrChosas.isEmpty()) {
             return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
         }
@@ -310,7 +329,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ID550">
-    private SaveImageFilesResult saveImageFiles550(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
+    private SaveImageFilesResult saveImageFilesAndUpdateTables550(OcrChosas ocrChosas, NinteiChosahyoEntity entity, NinteiOcrRelate nr, RDateTime sharedFileID) {
         if (ocrChosas.isEmpty()) {
             return new SaveImageFilesResult(sharedFileID, ProcessingResults.EMPTY);
         }

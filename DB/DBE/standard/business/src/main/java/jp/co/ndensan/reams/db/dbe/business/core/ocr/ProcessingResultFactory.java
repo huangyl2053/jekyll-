@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OCRID;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -86,6 +88,29 @@ public final class ProcessingResultFactory {
      */
     public static IProcessingResult warning(IOcrData ocrData, OcrTorikomiMessages messageToNote) {
         return new SimpleProcessingResult(ocrData, IProcessingResult.Type.WARNING, messageToNote.originalMessage());
+    }
+
+    /**
+     * @param messageToNote 備考
+     * @return {@link IProcessingResult.Type#ERROR}のインスタンス
+     */
+    public static IProcessingResult error(RString messageToNote) {
+        return error(EmptyOcrData.INSTANCE, messageToNote);
+    }
+
+    private enum EmptyOcrData implements IOcrData {
+
+        INSTANCE;
+
+        @Override
+        public OCRID getOCRID() {
+            return OCRID.EMPTY;
+        }
+
+        @Override
+        public SheetID getSheetID() {
+            return SheetID.EMPTY;
+        }
     }
 
     private static final class SimpleProcessingResult implements IProcessingResult {

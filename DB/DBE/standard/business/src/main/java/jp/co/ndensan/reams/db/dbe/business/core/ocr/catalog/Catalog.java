@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr.catalog;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
@@ -21,16 +22,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class Catalog {
 
     private final Map<RString, Map<RString, CatalogLine>> map;
+    private final boolean fileExists;
 
     /**
      * @param filePath ファイルパス
      */
     public Catalog(RString filePath) {
-        this.map = readFile(filePath);
+        File file = new File(filePath.toString());
+        this.fileExists = file.exists();
+        if (this.fileExists) {
+            this.map = readFile(file);
+        } else {
+            this.map = Collections.emptyMap();
+        }
     }
 
-    private static Map<RString, Map<RString, CatalogLine>> readFile(RString filePath) {
-        File file = new File(filePath.toString());
+    private static Map<RString, Map<RString, CatalogLine>> readFile(File file) {
         try (FileReader reader = new FileReader(file.toPath(), Encode.SJIS)) {
             RString line = reader.readLine();
             Map<RString, Map<RString, CatalogLine>> modelMap = new HashMap<>();
@@ -49,6 +56,13 @@ public class Catalog {
             modelMap.put(model, new HashMap<RString, CatalogLine>());
         }
         modelMap.get(model).put(cfl.get帳票一連ID下8桁(), cfl);
+    }
+
+    /**
+     * @return カタログファイルが存在する場合、{@code true}.
+     */
+    public boolean exists() {
+        return this.fileExists;
     }
 
     /**

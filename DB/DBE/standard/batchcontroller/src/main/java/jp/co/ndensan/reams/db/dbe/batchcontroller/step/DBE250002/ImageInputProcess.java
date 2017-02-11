@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkensho
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -84,6 +85,25 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private Catalog catalog;
 
     @Override
+    protected void initialize() {
+        super.initialize();
+        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
+        if (!this.catalog.exists()) {
+            throw new BatchInterruptedException("カタログファイルがアップロードされていません。");
+        }
+    }
+
+    @Override
+    public void cancel() {
+        super.cancel();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
+                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし.replaced("OCRIKEN.ca3"))).build();
+        this.kekkaListEditor.writeMultiLine(Collections.singletonList(r));
+        this.kekkaListEditor.close();
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(
                 new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".findCsvDataOrderByKey").toRString(),
@@ -104,7 +124,6 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         super.beforeExecute();
         this.cache = new ArrayList<>();
         this.key = ShinseiKey.EMPTY;
-        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
     }
 
     @Override

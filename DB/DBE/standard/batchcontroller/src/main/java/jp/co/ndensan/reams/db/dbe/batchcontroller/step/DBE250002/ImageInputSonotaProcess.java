@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -73,6 +74,25 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
     private Catalog catalog;
 
     @Override
+    protected void initialize() {
+        super.initialize();
+        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
+        if (!this.catalog.exists()) {
+            throw new BatchInterruptedException("カタログファイルがアップロードされていません。");
+        }
+    }
+
+    @Override
+    public void cancel() {
+        super.cancel();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
+                .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし.replaced("OCRSONOTA.ca3"))).build();
+        this.kekkaListEditor.writeMultiLine(Collections.singletonList(r));
+        this.kekkaListEditor.close();
+    }
+
+    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(
                 new RStringBuilder().append(IOcrCsvMapper.class.getName()).append(".findCsvDataOrderByKey").toRString(),
@@ -91,7 +111,6 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
         super.beforeExecute();
         this.cache = new ArrayList<>();
         this.key = ShinseiKey.EMPTY;
-        this.catalog = new Catalog(this.processParameter.getCatalogFilePath());
     }
 
     @Override
