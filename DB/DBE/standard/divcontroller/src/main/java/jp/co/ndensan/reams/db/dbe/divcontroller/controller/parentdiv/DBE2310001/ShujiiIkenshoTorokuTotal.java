@@ -73,6 +73,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医意見書登録のコントローラです。
@@ -644,7 +647,7 @@ public class ShujiiIkenshoTorokuTotal {
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         if (!ResponseHolder.isReRequest()) {
             RString beforeChange = getHandler(div).getDataRString();
-            if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正) && !beforeChange.equals(div.getHdnHasChanged())) {
+            if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
@@ -655,6 +658,9 @@ public class ShujiiIkenshoTorokuTotal {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
+            IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
+            IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(管理番号);
+
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
             if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
                 RStringBuilder 前排他制御開催番号 = new RStringBuilder();
@@ -662,8 +668,7 @@ public class ShujiiIkenshoTorokuTotal {
                 前排他制御開催番号.append(管理番号);
                 前排他キーの解除(前排他制御開催番号.toRString());
                 return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-            } else if (!ResponseHolder.isReRequest() && isRequiredRejudgeOfIchiji(管理番号, 履歴番号)) {
-                getEndMessage(div);
+            } else if (!ResponseHolder.isReRequest() && 一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
                 return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
             } else {
                 getEndMessage(div);
