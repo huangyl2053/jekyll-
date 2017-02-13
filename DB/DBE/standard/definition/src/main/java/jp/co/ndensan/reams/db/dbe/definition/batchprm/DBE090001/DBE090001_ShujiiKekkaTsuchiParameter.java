@@ -33,6 +33,7 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
     private static final String SHISHOCODE = "shishoCode";
     private static final String NINTEIJOHOTEIKYOYMD = "ninteiJohoTeikyoYMD";
     private static final String SHICHOSON_CODE = "shichosonCode";
+    private static final String BUNSHONO = "bunshoNo";
     private static final long serialVersionUID = -5187631016597638486L;
 
     @BatchParameter(key = NIJIHANTEIYMDFROM, name = "二次判定期間From")
@@ -55,6 +56,8 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
     private RString ninteiJohoTeikyoYMD;
     @BatchParameter(key = SHICHOSON_CODE, name = "市町村コード")
     private RString shichosonCode;
+    @BatchParameter(key = BUNSHONO, name = "文書番号")
+    private RString bunshoNo;
 
     /**
      * 主治医への結果通知書のMybatisパラメータークラス作成
@@ -71,6 +74,7 @@ public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
                 shishoCode,
                 ninteiJohoTeikyoYMD,
                 shichosonCode,
-                useShoKisaiHokenshaNo);
+                useShoKisaiHokenshaNo,
+                bunshoNo);
     }
 }

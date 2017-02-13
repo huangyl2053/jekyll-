@@ -5,15 +5,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * DoctorSelectionPanel のクラスファイル 
+ * pnlBunshoNo のクラスファイル 
  * 
  * @author 自動生成
  */
-public class DoctorSelectionPanelDiv extends Panel {
+public class pnlBunshoNoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
@@ -21,8 +22,8 @@ public class DoctorSelectionPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgDoctorSelection")
-    private DataGrid<dgDoctorSelection_Row> dgDoctorSelection;
+    @JsonProperty("ccdBunshoNo")
+    private BunshoBangoInputDiv ccdBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class DoctorSelectionPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgDoctorSelection
-     * @return dgDoctorSelection
+     * getccdBunshoNo
+     * @return ccdBunshoNo
      */
-    @JsonProperty("dgDoctorSelection")
-    public DataGrid<dgDoctorSelection_Row> getDgDoctorSelection() {
-        return dgDoctorSelection;
-    }
-
-    /*
-     * setdgDoctorSelection
-     * @param dgDoctorSelection dgDoctorSelection
-     */
-    @JsonProperty("dgDoctorSelection")
-    public void setDgDoctorSelection(DataGrid<dgDoctorSelection_Row> dgDoctorSelection) {
-        this.dgDoctorSelection = dgDoctorSelection;
+    @JsonProperty("ccdBunshoNo")
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return ccdBunshoNo;
     }
 
     // </editor-fold>

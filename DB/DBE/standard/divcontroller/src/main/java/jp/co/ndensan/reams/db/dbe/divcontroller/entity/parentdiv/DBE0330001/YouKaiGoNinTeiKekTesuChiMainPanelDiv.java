@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
@@ -20,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +35,8 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     private DoctorSelectionPanelDiv DoctorSelectionPanel;
     @JsonProperty("ResultListPanel")
     private ResultListPanelDiv ResultListPanel;
+    @JsonProperty("pnlBunshoNo")
+    private pnlBunshoNoDiv pnlBunshoNo;
     @JsonProperty("hiddenItem")
     private RString hiddenItem;
 
@@ -97,6 +101,24 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     /*
+     * getpnlBunshoNo
+     * @return pnlBunshoNo
+     */
+    @JsonProperty("pnlBunshoNo")
+    public pnlBunshoNoDiv getPnlBunshoNo() {
+        return pnlBunshoNo;
+    }
+
+    /*
+     * setpnlBunshoNo
+     * @param pnlBunshoNo pnlBunshoNo
+     */
+    @JsonProperty("pnlBunshoNo")
+    public void setPnlBunshoNo(pnlBunshoNoDiv pnlBunshoNo) {
+        this.pnlBunshoNo = pnlBunshoNo;
+    }
+
+    /*
      * gethiddenItem
      * @return hiddenItem
      */
@@ -128,6 +150,26 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadKekkaTsuchiOutputTaisho() {
+        return this.getSearchConditionPanel().getRadKekkaTsuchiOutputTaisho();
+    }
+
+    @JsonIgnore
+    public void  setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
+        this.getSearchConditionPanel().setRadKekkaTsuchiOutputTaisho(radKekkaTsuchiOutputTaisho);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadPrintCondition() {
+        return this.getSearchConditionPanel().getRadPrintCondition();
+    }
+
+    @JsonIgnore
+    public void  setRadPrintCondition(RadioButton radPrintCondition) {
+        this.getSearchConditionPanel().setRadPrintCondition(radPrintCondition);
+    }
+
+    @JsonIgnore
     public TextBoxNum getTxtDispMax() {
         return this.getSearchConditionPanel().getTxtDispMax();
     }
@@ -148,33 +190,13 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensha() {
-        return this.getSearchConditionPanel().getCcdHokensha();
-    }
-
-    @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getSearchConditionPanel().getCcdShujiiIryokikanAndShujiiInput();
     }
 
     @JsonIgnore
-    public RadioButton getRadKekkaTsuchiOutputTaisho() {
-        return this.getSearchConditionPanel().getRadKekkaTsuchiOutputTaisho();
-    }
-
-    @JsonIgnore
-    public void  setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
-        this.getSearchConditionPanel().setRadKekkaTsuchiOutputTaisho(radKekkaTsuchiOutputTaisho);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadPrintCondition() {
-        return this.getSearchConditionPanel().getRadPrintCondition();
-    }
-
-    @JsonIgnore
-    public void  setRadPrintCondition(RadioButton radPrintCondition) {
-        this.getSearchConditionPanel().setRadPrintCondition(radPrintCondition);
+    public IHokenshaListDiv getCcdHokensha() {
+        return this.getSearchConditionPanel().getCcdHokensha();
     }
 
     @JsonIgnore
@@ -205,6 +227,11 @@ public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     @JsonIgnore
     public void  setDgResultList(DataGrid<dgResultList_Row> dgResultList) {
         this.getResultListPanel().setDgResultList(dgResultList);
+    }
+
+    @JsonIgnore
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return this.getPnlBunshoNo().getCcdBunshoNo();
     }
 
     // </editor-fold>
