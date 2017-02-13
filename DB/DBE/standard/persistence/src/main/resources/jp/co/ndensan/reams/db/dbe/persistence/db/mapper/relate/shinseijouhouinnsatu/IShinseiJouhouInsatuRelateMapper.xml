@@ -78,15 +78,15 @@
         AND dbT5101Nintei."shichosonCode" = dbT5910Nintei."shichosonCode"
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Shujii
         ON dbT5101Nintei."shujiiIryokikanCode"=dbT5911Shujii."shujiiIryokikanCode"
-        AND dbT5101Nintei."shichosonCode"=dbT5911Shujii."shichosonCode"
+        AND dbT5101Nintei."shichosonCode"= dbT5911Shujii."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913Chosai
         ON dbT5913Chosai."ninteiChosaItakusakiCode"=dbT5101Nintei."ninteiChosaItakusakiCode"
         AND dbT5913Chosai."ninteiChosainCode"=dbT5101Nintei."ninteiChosainCode"
-        AND dbT5913Chosai."shichosonCode"dbT5101Nintei."shichosonCode"
+        AND dbT5913Chosai."shichosonCode" = dbT5101Nintei."shichosonCode"
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Shujii
         ON dbT5912Shujii."shujiiIryokikanCode"=dbT5101Nintei."shujiiIryokikanCode"
         AND dbT5912Shujii."shujiiCode"=dbT5101Nintei."shujiiCode"
-        AND dbT5912Shujii."shichosonCode"dbT5101Nintei."shichosonCode"
+        AND dbT5912Shujii."shichosonCode" = dbT5101Nintei."shichosonCode"
         LEFT JOIN
         rgua.${psmShikibetsuTaisho} AS PSM
         ON
