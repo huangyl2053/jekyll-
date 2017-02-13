@@ -106,7 +106,7 @@ public class NinteiChosainMaster {
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().setValue(認定調査委託先コード);
             div.getChosainSearch().getHokenshaList().setSelectedShichosonIfExist(市町村コード);
-            onClick_btnSearchShujii(div);
+            searchChosainInfo(div);
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).setState(DBE9040001StateName.検索);
