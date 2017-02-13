@@ -134,7 +134,7 @@ public class ShujiiIkenshoTorokuTotal {
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onLoad(ShujiiIkenshoTorokuTotalDiv div) {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        LasdecCode 市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
+        LasdecCode 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
         ShujiiIkenshoTorokuMapperParameter param
                 = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
         SearchResult<ShujiiIkenshoTorokuResult> resultList = service.getDataForLoad(param);
