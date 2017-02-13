@@ -29,6 +29,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
 
     private final ShujiiIkenshoIraiTaishoIchiranDiv div;
     private static final RString 修正 = new RString("Modified");
+    private static final int 該当なし = 0;
 
     /**
      * コンストラクタです。
@@ -131,6 +132,9 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
                     break;
                 }
             }
+            if (ModifyList.size() == 該当なし) {
+                validationMessages.add(new ValidationMessageControlPair(ValidationMessages.未編集));
+            }
         }
         return validationMessages;
     }
@@ -192,7 +196,8 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         意見書依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "意見書依頼"),
         複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
         主治医入力必須(UrErrorMessages.必須, "主治医"),
-        医療機関_主治医未割付のため更新不可(UrErrorMessages.更新不可_汎用, "意見書依頼が未設定のデータが選択されている");
+        医療機関_主治医未割付のため更新不可(UrErrorMessages.更新不可_汎用, "意見書依頼が未設定のデータが選択されている"),
+        未編集(UrErrorMessages.編集なしで更新不可);
 
         private final Message message;
 
