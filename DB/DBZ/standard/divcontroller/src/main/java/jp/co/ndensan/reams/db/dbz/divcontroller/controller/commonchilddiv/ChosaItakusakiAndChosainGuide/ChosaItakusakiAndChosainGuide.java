@@ -57,6 +57,8 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
             div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(dataPassModel.get市町村コード()));
+            div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
+            div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
         }
         return ResponseData.of(div).respond();
     }
