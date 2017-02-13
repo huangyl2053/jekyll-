@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTeiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
@@ -40,9 +41,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 完了処理・審査会結果登録のコントローラです。
@@ -52,14 +55,15 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ShinsaKaiKekkaTorokuHandler {
 
     private final ShinsaKaiKekkaTorokuDiv div;
-    private final RString 使用 = new RString("1");
     private final String 状態 = "jotai";
+    private static final RString 運用する = new RString("1");
     private static final RString 未処理 = new RString("未");
     private static final RString 完了可能 = new RString("可");
     private static final RString KEY0 = new RString("0");
     private static final RString KEY1 = new RString("1");
-    private static final RString 審査会結果登録共通ボタンFieldName = new RString("btnKekkaToroku");
-    private static final RString OCR結果登録共通ボタンFieldName = new RString("btnOCRToroku");
+    private static final RString FIELD_NAME_審査会結果登録共通ボタン = new RString("btnKekkaToroku");
+    private static final RString FIELD_NAME_OCR結果登録共通ボタン = new RString("btnOCRToroku");
+    private static final RString FIELD_NAME_処理を進めるボタン = new RString("btnCompleteKekkaToroku");
 
     private static final Code 認定ｿﾌﾄ99 = new Code(new RString("99A"));
     private static final Code 認定ｿﾌﾄ2002 = new Code(new RString("02A"));
@@ -86,38 +90,7 @@ public class ShinsaKaiKekkaTorokuHandler {
         div.getTxtMaxKensu().setMaxLength(Integer.toString(div.getTxtMaxKensu().getMaxValue().intValue()).length());
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-//        RString key = div.getRadTaishosyaJotai().getSelectedKey();
-//        RString 状態区分 = new RString("");
-//
-//        if (KEY0.equals(key)) {
-//            状態区分 = new RString("1");
-//            div.getTxtMishoriCount().setDisplayNone(false);
-//            div.getTxtCompleteCount().setDisplayNone(true);
-//            div.getTxtTotalCount().setDisplayNone(true);
-//        } else if (KEY1.equals(key)) {
-//            状態区分 = new RString("2");
-//            div.getTxtMishoriCount().setDisplayNone(true);
-//            div.getTxtCompleteCount().setDisplayNone(false);
-//            div.getTxtTotalCount().setDisplayNone(true);
-//        } else {
-//            div.getTxtMishoriCount().setDisplayNone(false);
-//            div.getTxtCompleteCount().setDisplayNone(false);
-//            div.getTxtTotalCount().setDisplayNone(false);
-//        }
-
-//        List<NiJiHanTeiBusiness> 二次判定List = ShinsakaiKekkaTorokuFinder.createInstance().
-//                get二次判定モード(YokaigoNinteiTaskListParameter.
-//                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分)).records();
-//        if (!二次判定List.isEmpty()) {
-//            ShinSaKaiBusiness 前二次判定Model = ShinsakaiKekkaTorokuFinder.createInstance().
-//                    get前二次判定(YokaigoNinteiTaskListParameter.
-//                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分));
-//            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前二次判定Model.get要介護認定完了情報Lsit()));
-//        } else {
-//            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
-//        }
         二次判定モード();
-
     }
 
     /**
@@ -138,47 +111,64 @@ public class ShinsaKaiKekkaTorokuHandler {
         for (dgNinteiTaskList_Row データ : 選択データ) {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(データ.getShinseishoKanriNo());
             NinteiKanryoJohoIdentifier 要介護認定完了識別子 = new NinteiKanryoJohoIdentifier(申請書管理番号);
-            NinteiKanryoJoho 要介護認定完了
-                    = models.get(要介護認定完了識別子).createBuilderForEdit().set認定審査会完了年月日(割当完了年月日).build();
+            NinteiKanryoJohoBuilder builder = models.get(要介護認定完了識別子).createBuilderForEdit().set認定審査会完了年月日(割当完了年月日);
+            if (!operatesセンター送信()) {
+                builder.setセンター送信年月日(割当完了年月日);
+            }
+            NinteiKanryoJoho 要介護認定完了 = builder.build();
             ShinsakaiTorokuManager.createInstance().要介護認定完了更新(要介護認定完了.toEntity());
         }
+    }
+
+    private static boolean operatesセンター送信() {
+        return 運用する.equals(BusinessConfig.get(ConfigNameDBE.センター送信_運用有無, SubGyomuCode.DBE認定支援));
     }
 
     /**
      * CSVファイルのデータをDBへ更新する。
      *
-     * @param csvEntityList List<ShinsaKaiKekkaInputCsvEntity>
+     * @param csvEntityList List
      */
     public void onClick_btnCyosakekkaInput(List<ShinsaKaiKekkaInputCsvEntity> csvEntityList) {
         saveCsvDataInput(csvEntityList);
     }
 
     /**
-     * 与えられた引数よりOCR結果登録共通ボタンの表示を制御します。
+     * OCR結果登録共通ボタンの表示を制御します。
      */
     public void setDisabled登録ボタンfrom選択状態() {
-        int 選択行数 = get一覧選択行数();
-        boolean isDisabled登録ボタン = !(選択行数 == 1);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会結果登録共通ボタンFieldName, isDisabled登録ボタン);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(OCR結果登録共通ボタンFieldName, isDisabled登録ボタン);
+        boolean isDisabled登録ボタン = is未処理Selected(this.div) || !hasAnyData(this.div);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, isDisabled登録ボタン);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, isDisabled登録ボタン);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, isDisabled登録ボタン);
     }
 
-    private int get一覧選択行数() {
-        int result = 0;
-        for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getDataSource()) {
-            if (row.getSelected()) {
-                result++;
-            }
-        }
-        return result;
+    private static boolean is未処理Selected(ShinsaKaiKekkaTorokuDiv div) {
+        return KEY0.equals(div.getRadTaishosyaJotai().getSelectedKey());
+    }
+
+    private static boolean hasAnyData(ShinsaKaiKekkaTorokuDiv div) {
+        return !div.getDgNinteiTaskList().getDataSource().isEmpty();
     }
 
     /**
      * 与えられた引数よりOCR結果登録共通ボタンの表示を制御します。
+     *
+     * @param is審査会結果登録OCR使用可 審査会結果登録OCR を利用するかどうか
      */
     public void setDisplayOCR結果登録ボタン(boolean is審査会結果登録OCR使用可) {
         if (!is審査会結果登録OCR使用可) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(OCR結果登録共通ボタンFieldName, true);
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, true);
+        }
+    }
+
+    /**
+     * 次の処理へ進めるためのボタンのテキストを設定します。
+     */
+    public void initTextOf処理を進めるボタン() {
+        if (!operatesセンター送信()) {
+            CommonButtonHolder.setPrefixTextByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, "月例処理を");
+            CommonButtonHolder.setTextByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, "完了する");
         }
     }
 
@@ -350,5 +340,4 @@ public class ShinsaKaiKekkaTorokuHandler {
         }
         return RString.EMPTY;
     }
-
 }

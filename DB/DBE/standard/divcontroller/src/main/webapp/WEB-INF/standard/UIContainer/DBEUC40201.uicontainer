@@ -64,7 +64,7 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5240001",
      "layoutTitle": "介護認定審査会審査結果登録（OCR)",
-     "eventName": "審査会結果登録へ遷移する",
+     "eventName": "一覧に戻る",
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",

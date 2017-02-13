@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4020001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaInputCsvEntity;
@@ -68,7 +69,8 @@ public class ShinsaKaiKekkaToroku {
 
     private static final RString CSVファイルID_審査会結果登録一覧 = new RString("DBE402001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 審査会結果登録 = new RString("完了処理・審査会結果登録");
+    private static final RString 完了処理_審査会結果登録 = new RString("完了処理・審査会結果登録");
+    private static final RString 審査会結果登録 = new RString("審査会結果登録");
     private static final RString 認定ｿﾌﾄ99 = new RString("99A");
     private static final RString 認定ｿﾌﾄ2002 = new RString("02A");
     private static final RString 認定ｿﾌﾄ2006 = new RString("06A");
@@ -80,12 +82,13 @@ public class ShinsaKaiKekkaToroku {
      * 画面初期化処理です。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onLoad(ShinsaKaiKekkaTorokuDiv div) {
         ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
         handler.onLoad();
-        handler.setDisplayOCR結果登録ボタン(getConfig審査会結果登録OCR使用可否());
+        handler.initTextOf処理を進めるボタン();
+        handler.setDisplayOCR結果登録ボタン(uses審査会結果登録OCR());
         handler.setDisabled登録ボタンfrom選択状態();
         return ResponseData.of(div).respond();
     }
@@ -94,7 +97,7 @@ public class ShinsaKaiKekkaToroku {
      * onActiveイベントです。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onActive(ShinsaKaiKekkaTorokuDiv div) {
         ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
@@ -143,7 +146,7 @@ public class ShinsaKaiKekkaToroku {
      * 一覧を出力するボタンを押下前、チェックの処理する。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnRyooutputBoffer(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
@@ -162,7 +165,7 @@ public class ShinsaKaiKekkaToroku {
      *
      * @param div ShinsaKaiKekkaTorokuDiv
      * @param response IDownLoadServletResponse
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsaKaiKekkaTorokuDiv div, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会結果登録一覧);
@@ -192,7 +195,7 @@ public class ShinsaKaiKekkaToroku {
      * 審査結果を登録するボタンを押下する場合、審査会対象者個別結果登録(画面ID：DBE4021001)へ遷移する。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnCompleteKekkaToroku(ShinsaKaiKekkaTorokuDiv div) {
 
@@ -213,7 +216,7 @@ public class ShinsaKaiKekkaToroku {
      * モバイルより結果登録するボタンを押下する場合、データ更新する。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnMobileToroku(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
@@ -246,7 +249,7 @@ public class ShinsaKaiKekkaToroku {
      * OCRより結果登録するボタンを押下する場合、介護認定審査会審査結果登録（OCR)(画面ID：DBE5240001)へ遷移する。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnOCRToroku(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
@@ -271,7 +274,7 @@ public class ShinsaKaiKekkaToroku {
      * 結果登録を完了するボタンを押下する場合、審査会結果登録完了処理を行う。
      *
      * @param div ShinsaKaiKekkaTorokuDiv
-     * @return ResponseData<ShinsaKaiKekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_btnKekkaToroku(ShinsaKaiKekkaTorokuDiv div) {
         ValidationMessageControlPairs 存在チェック結果 = getValidationHandler(div).存在チェック();
@@ -287,18 +290,18 @@ public class ShinsaKaiKekkaToroku {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            return ResponseData.of(div)
+                    .addMessage(DbeQuestionMessages.完了日登録確認.getMessage().replace(審査会結果登録.toString()))
+                    .respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(div).要介護認定完了更新(models);
             div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace(審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+                    replace(完了処理_審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakaikanryooutput().setDisplayNone(true);
             return ResponseData.of(div).setState(DBE4020001StateName.完了);
         }
@@ -379,10 +382,9 @@ public class ShinsaKaiKekkaToroku {
         return new ShinsaKaiKekkaTorokuValidationHandler(div);
     }
 
-    private static boolean getConfig審査会結果登録OCR使用可否() {
+    private static boolean uses審査会結果登録OCR() {
         RString 審査会結果登録OCR使用可否
                 = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         return (審査会結果登録OCR使用可否.equals(審査会結果OCR使用));
     }
-
 }
