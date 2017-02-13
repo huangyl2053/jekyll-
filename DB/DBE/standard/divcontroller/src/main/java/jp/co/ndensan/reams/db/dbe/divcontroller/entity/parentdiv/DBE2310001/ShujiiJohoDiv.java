@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,22 +24,22 @@ public class ShujiiJohoDiv extends Panel {
      */
     @JsonProperty("radDoi")
     private RadioButton radDoi;
-    @JsonProperty("txtShujiiCode")
-    private TextBoxCode txtShujiiCode;
-    @JsonProperty("btnShujiiGuide")
-    private ButtonDialog btnShujiiGuide;
-    @JsonProperty("txtSujiiName")
-    private TextBox txtSujiiName;
-    @JsonProperty("txtKinyuYMD")
-    private TextBoxDate txtKinyuYMD;
-    @JsonProperty("txtShujiiIryoKikanTelNumber")
-    private TextBoxTelNo txtShujiiIryoKikanTelNumber;
     @JsonProperty("txtShujiiIryoKikanCode")
     private TextBoxCode txtShujiiIryoKikanCode;
     @JsonProperty("btnToSearchIryoKikan")
     private ButtonDialog btnToSearchIryoKikan;
     @JsonProperty("txtShujiiIryoKikanMei")
     private TextBox txtShujiiIryoKikanMei;
+    @JsonProperty("txtShujiiCode")
+    private TextBoxCode txtShujiiCode;
+    @JsonProperty("btnShujiiGuide")
+    private ButtonDialog btnShujiiGuide;
+    @JsonProperty("txtSujiiName")
+    private TextBox txtSujiiName;
+    @JsonProperty("txtShujiiIryoKikanTelNumber")
+    private TextBoxTelNo txtShujiiIryoKikanTelNumber;
+    @JsonProperty("txtKinyuYMD")
+    private TextBoxDate txtKinyuYMD;
     @JsonProperty("txtShujiiIryoKikanShozaichi")
     private TextBoxJusho txtShujiiIryoKikanShozaichi;
     @JsonProperty("txtShujiiIryoKikanFaxNumber")
@@ -67,6 +67,60 @@ public class ShujiiJohoDiv extends Panel {
     @JsonProperty("radDoi")
     public void setRadDoi(RadioButton radDoi) {
         this.radDoi = radDoi;
+    }
+
+    /*
+     * gettxtShujiiIryoKikanCode
+     * @return txtShujiiIryoKikanCode
+     */
+    @JsonProperty("txtShujiiIryoKikanCode")
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return txtShujiiIryoKikanCode;
+    }
+
+    /*
+     * settxtShujiiIryoKikanCode
+     * @param txtShujiiIryoKikanCode txtShujiiIryoKikanCode
+     */
+    @JsonProperty("txtShujiiIryoKikanCode")
+    public void setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.txtShujiiIryoKikanCode = txtShujiiIryoKikanCode;
+    }
+
+    /*
+     * getbtnToSearchIryoKikan
+     * @return btnToSearchIryoKikan
+     */
+    @JsonProperty("btnToSearchIryoKikan")
+    public ButtonDialog getBtnToSearchIryoKikan() {
+        return btnToSearchIryoKikan;
+    }
+
+    /*
+     * setbtnToSearchIryoKikan
+     * @param btnToSearchIryoKikan btnToSearchIryoKikan
+     */
+    @JsonProperty("btnToSearchIryoKikan")
+    public void setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
+        this.btnToSearchIryoKikan = btnToSearchIryoKikan;
+    }
+
+    /*
+     * gettxtShujiiIryoKikanMei
+     * @return txtShujiiIryoKikanMei
+     */
+    @JsonProperty("txtShujiiIryoKikanMei")
+    public TextBox getTxtShujiiIryoKikanMei() {
+        return txtShujiiIryoKikanMei;
+    }
+
+    /*
+     * settxtShujiiIryoKikanMei
+     * @param txtShujiiIryoKikanMei txtShujiiIryoKikanMei
+     */
+    @JsonProperty("txtShujiiIryoKikanMei")
+    public void setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
+        this.txtShujiiIryoKikanMei = txtShujiiIryoKikanMei;
     }
 
     /*
@@ -124,24 +178,6 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtKinyuYMD
-     * @return txtKinyuYMD
-     */
-    @JsonProperty("txtKinyuYMD")
-    public TextBoxDate getTxtKinyuYMD() {
-        return txtKinyuYMD;
-    }
-
-    /*
-     * settxtKinyuYMD
-     * @param txtKinyuYMD txtKinyuYMD
-     */
-    @JsonProperty("txtKinyuYMD")
-    public void setTxtKinyuYMD(TextBoxDate txtKinyuYMD) {
-        this.txtKinyuYMD = txtKinyuYMD;
-    }
-
-    /*
      * gettxtShujiiIryoKikanTelNumber
      * @return txtShujiiIryoKikanTelNumber
      */
@@ -160,57 +196,21 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtShujiiIryoKikanCode
-     * @return txtShujiiIryoKikanCode
+     * gettxtKinyuYMD
+     * @return txtKinyuYMD
      */
-    @JsonProperty("txtShujiiIryoKikanCode")
-    public TextBoxCode getTxtShujiiIryoKikanCode() {
-        return txtShujiiIryoKikanCode;
+    @JsonProperty("txtKinyuYMD")
+    public TextBoxDate getTxtKinyuYMD() {
+        return txtKinyuYMD;
     }
 
     /*
-     * settxtShujiiIryoKikanCode
-     * @param txtShujiiIryoKikanCode txtShujiiIryoKikanCode
+     * settxtKinyuYMD
+     * @param txtKinyuYMD txtKinyuYMD
      */
-    @JsonProperty("txtShujiiIryoKikanCode")
-    public void setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
-        this.txtShujiiIryoKikanCode = txtShujiiIryoKikanCode;
-    }
-
-    /*
-     * getbtnToSearchIryoKikan
-     * @return btnToSearchIryoKikan
-     */
-    @JsonProperty("btnToSearchIryoKikan")
-    public ButtonDialog getBtnToSearchIryoKikan() {
-        return btnToSearchIryoKikan;
-    }
-
-    /*
-     * setbtnToSearchIryoKikan
-     * @param btnToSearchIryoKikan btnToSearchIryoKikan
-     */
-    @JsonProperty("btnToSearchIryoKikan")
-    public void setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
-        this.btnToSearchIryoKikan = btnToSearchIryoKikan;
-    }
-
-    /*
-     * gettxtShujiiIryoKikanMei
-     * @return txtShujiiIryoKikanMei
-     */
-    @JsonProperty("txtShujiiIryoKikanMei")
-    public TextBox getTxtShujiiIryoKikanMei() {
-        return txtShujiiIryoKikanMei;
-    }
-
-    /*
-     * settxtShujiiIryoKikanMei
-     * @param txtShujiiIryoKikanMei txtShujiiIryoKikanMei
-     */
-    @JsonProperty("txtShujiiIryoKikanMei")
-    public void setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
-        this.txtShujiiIryoKikanMei = txtShujiiIryoKikanMei;
+    @JsonProperty("txtKinyuYMD")
+    public void setTxtKinyuYMD(TextBoxDate txtKinyuYMD) {
+        this.txtKinyuYMD = txtKinyuYMD;
     }
 
     /*
