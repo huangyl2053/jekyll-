@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBD5220001のイベント名定義クラスです</br>
+ * DBE5810001のイベント名定義クラスです</br>
  *
  * @author 自動生成
  */
