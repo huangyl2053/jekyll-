@@ -55,4 +55,6 @@ public class IChiJiPanTeiSyoRiRelateEntity implements Serializable {
     private FlexibleDate ikenshoJuryoYMD;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString koroshoIfShikibetsuCode;
+    private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
+    private FlexibleDate ikenshoTorokuKanryoYMD;
 }

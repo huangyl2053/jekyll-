@@ -278,7 +278,7 @@ public class KanryoshoriIchijihanteiHandler {
         row.setShinseiKbnShin(NinteiShinseiShinseijiKubunCode.
                 toValue(business.get認定申請区分_申請時コード().value()).get名称());
         row.getIchijiHanteibi().setValue(business.get要介護認定一次判定年月日());
-        if (business.get要介護認定一次判定年月日() != null) {
+        if (business.get要介護認定一次判定年月日() != null && business.get要介護認定一次判定年月日() != FlexibleDate.EMPTY) {
             row.setIchijiHanteiKubun(KariIchijiHanteiKubun.toValue(business.get仮一次判定区分()).get略称());
         } else {
             row.setIchijiHanteiKubun(RString.EMPTY);
@@ -363,7 +363,7 @@ public class KanryoshoriIchijihanteiHandler {
         row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
 
         row.setHanteiKekka(RString.EMPTY);
-        setStatusOfGridData(row);
+        setStatusOfGridData(row, business);
         return row;
     }
 
@@ -384,8 +384,10 @@ public class KanryoshoriIchijihanteiHandler {
         return RString.EMPTY;
     }
 
-    private void setStatusOfGridData(dgHanteiTaishosha_Row row) {
-        if (KariIchijiHanteiKubun.本一次判定.get略称().equals(row.getIchijiHanteiKubun())) {
+    private void setStatusOfGridData(dgHanteiTaishosha_Row row, IChiJiPanTeiSyoRiBusiness business) {
+        if (KariIchijiHanteiKubun.本一次判定.get略称().equals(row.getIchijiHanteiKubun())
+                && business.get主治医意見書作成依頼完了年月日() != null
+                && business.get主治医意見書登録完了年月日() != null) {
             row.setCellBgColor("columnState", DataGridCellBgColor.bgColorNormal);
             row.setColumnState(STATUS_KANRYO_KANOU);
         } else {
