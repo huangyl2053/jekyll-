@@ -92,6 +92,8 @@
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart",
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd",
         DbT7051KoseiShichosonMaster."shichosonMeisho",
+        DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
+        DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
         <if test="forList == false">
             zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode" AS "zenkai_nijiHanteiYokaigoJotaiKubunCode",
             zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan" AS "zenkai_nijiHanteiNinteiYukoKikan",
@@ -100,8 +102,6 @@
             DbT5913ChosainJoho."chosainShimei",
             DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
             DbT5912ShujiiJoho."shujiiName",
-            DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
-            DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
             DbT5116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode",
             DbT5116IchijiHanteiKekkaJoho."ichijiHanteiYMD",
             DbT5102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode",
@@ -153,22 +153,20 @@
                 AND DbT5203NinteichosahyoKihonChosa."shogaiNichijoSeikatsuJiritsudoCode" = #{nichijoSeikatsuJiritsudo}
             </if>
         </if>
-        <if test="forList == false">
-            LEFT JOIN
-            rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301ShujiiIkenshoIraiJoho
-            ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
-            AND NOT DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag"
-            AND NOT EXISTS(
-            SELECT
-            *
-            FROM
-            rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
-            WHERE
-            ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
-            AND NOT ShujiiIkenshoIraiJoho."logicalDeletedFlag"
-            AND ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
-            )
-        </if>
+        LEFT JOIN
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301ShujiiIkenshoIraiJoho
+        ON DbT5101NinteiShinseiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
+        AND NOT DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag"
+        AND NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
+        WHERE
+        ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
+        AND NOT ShujiiIkenshoIraiJoho."logicalDeletedFlag"
+        AND ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo"
+        )
         <if test="useShujiiIkenshoJoho">
             INNER JOIN
             rgdb."DbT5302ShujiiIkenshoJoho" DbT5302ShujiiIkenshoJoho

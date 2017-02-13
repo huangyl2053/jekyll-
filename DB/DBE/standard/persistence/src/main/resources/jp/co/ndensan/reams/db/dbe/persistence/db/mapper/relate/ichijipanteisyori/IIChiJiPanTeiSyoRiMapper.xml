@@ -40,6 +40,8 @@
         <result property="ikenshoJuryoYMD" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ikenshoSakuseiIraiKanryoYMD" column="ikenshoSakuseiIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ikenshoTorokuKanryoYMD" column="ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
 
     </resultMap>
 
@@ -79,6 +81,8 @@
         ,DbT5302."ikenshoJuryoYMD"
         ,DbT5101."shinseishoKanriNo"
         ,DbT5101."koroshoIfShikibetsuCode"
+        ,DbT5105."ikenshoSakuseiIraiKanryoYMD"
+        ,DbT5105."ikenshoTorokuKanryoYMD"
         FROM
         <include refid="検索条件" />
         <include refid="ソート条件_対象者一覧" />
@@ -120,6 +124,8 @@
         ,DbT5302."ikenshoJuryoYMD"
         ,DbT5101."shinseishoKanriNo"
         ,DbT5101."koroshoIfShikibetsuCode"
+        ,DbT5105."ikenshoSakuseiIraiKanryoYMD"
+        ,DbT5105."ikenshoTorokuKanryoYMD"
         FROM
         <include refid="検索条件" />
         <include refid="ソート条件" />
@@ -127,8 +133,8 @@
     </select>
 
     <select id="get要介護認定一次判定結果情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity"
-        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter"
-        resultOrdered="true" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter"
+            resultOrdered="true" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
         FROM
@@ -150,6 +156,13 @@
         WHERE
         DbT5202N."shinseishoKanriNo" = DbT5202."shinseishoKanriNo")
         AND DbT5101."koroshoIfShikibetsuCode" = DbT5202."koroshoIfShikibetsuCode"
+        AND NOT EXISTS(
+          SELECT *
+          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa"
+          WHERE "shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
+          AND "ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+          AND "gaikyoChosaTextImageKubun" > DbT5202."gaikyoChosaTextImageKubun"
+        )
         LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = (SELECT
@@ -192,11 +205,17 @@
                 <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
             </if>
             <if test = "完了可能区分.toString().equals(&quot;1&quot;)">
-                AND (("DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" = ''
-                OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NULL)
+                AND (DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NULL
+                OR DbT5105."ikenshoTorokuKanryoYMD" IS NULL
+                OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" = ''
+                OR "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NULL
                 OR "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" = TRUE)
             </if>
             <if test = "完了可能区分.toString().equals(&quot;2&quot;)">
+                AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+                AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+                AND "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" != ''
+                AND "DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD" IS NOT NULL
                 AND "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" = FALSE
             </if>
         </if>

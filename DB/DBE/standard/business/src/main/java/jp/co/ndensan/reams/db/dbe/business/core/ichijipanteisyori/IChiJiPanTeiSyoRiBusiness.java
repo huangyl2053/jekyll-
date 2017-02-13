@@ -320,4 +320,22 @@ public class IChiJiPanTeiSyoRiBusiness implements Serializable {
     public RString get厚労省IF識別コード() {
         return entity.getKoroshoIfShikibetsuCode();
     }
+    
+    /**
+     * 主治医意見書作成依頼完了年月日を取得します。
+     *
+     * @return 主治医意見書作成依頼完了年月日
+     */
+    public FlexibleDate get主治医意見書作成依頼完了年月日() {
+        return entity.getIkenshoSakuseiIraiKanryoYMD();
+    }
+    
+    /**
+     * 主治医意見書登録完了年月日を取得します。
+     *
+     * @return 主治医意見書登録完了年月日
+     */
+    public FlexibleDate get主治医意見書登録完了年月日() {
+        return entity.getIkenshoTorokuKanryoYMD();
+    }
 }

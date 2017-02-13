@@ -58,6 +58,8 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
     private FlexibleDate temp_印刷期間終了日;
     @BatchParameter(name = "文書番号")
     private RString temp_文書番号;
+    @BatchParameter(name = "temp_市町村コード")
+    private RString temp_市町村コード;
 
     /**
      * 画面からのパラメータを作成します。
@@ -81,6 +83,7 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
         this.temp_印刷期間開始日 = tempData.getTemp_印刷期間開始日();
         this.temp_印刷期間終了日 = tempData.getTemp_印刷期間終了日();
         this.temp_文書番号 = tempData.getTemp_文書番号();
+        this.temp_市町村コード = tempData.getTemp_市町村コード();
     }
 
     /**
@@ -100,6 +103,7 @@ public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBas
         param.setTemp_督促方法(new RString(this.temp_督促方法));
         param.setTemp_督促メモ(this.temp_督促メモ);
         param.setTemp_文書番号(temp_文書番号);
+        param.setTemp_市町村コード(temp_市町村コード);
         return param;
     }
 

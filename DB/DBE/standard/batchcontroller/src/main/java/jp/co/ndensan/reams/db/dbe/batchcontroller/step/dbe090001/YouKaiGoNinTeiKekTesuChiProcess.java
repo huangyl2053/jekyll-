@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090001;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.johoteikyoshiryo.JohoTeikyoShiryoChange;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiirai.ShujiiIraiAtenaJoho;
@@ -18,8 +19,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.You
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiManager;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -62,6 +68,10 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private IYouKaiGoNinTeiKekTesuChiMapper mapper;
     private YouKaiGoNinTeiKekTesuChiMybitisParamter mybatisPrm;
     private OutputParameter<JohoTeikyoShiryo> outDataList;
+    private boolean is認定広域 = false;
+    private Map<Integer, RString> 通知文;
+    private RString 文書番号;
+    private NinshoshaSource 認証者情報;
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
@@ -78,6 +88,13 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
         outDataList = new OutputParameter<>();
         mybatisPrm = paramter.toMybitisParameter();
         mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                is認定広域 = true;
+            }
+        }
         super.initialize();
     }
 
@@ -91,6 +108,29 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
         retortWrite = new ReportSourceWriter<>(batchWrite);
         dbT5301Temp = new BatchPermanentTableWriter<>(DbT5301ShujiiIkenshoIraiJohoEntity.class);
+    }
+
+    @Override
+    protected void beforeExecute() {
+        if (is認定広域) {
+            認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    REPORT_ID,
+                    FlexibleDate.getNowDate(),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
+                    KenmeiFuyoKubunType.付与なし,
+                    retortWrite,
+                    new ShoKisaiHokenshaNo(paramter.getShoKisaiHokenshaNo()));
+        } else {
+            認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    REPORT_ID,
+                    FlexibleDate.getNowDate(),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
+                    KenmeiFuyoKubunType.付与なし,
+                    retortWrite);
+        }
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(paramter.getShichosonCode()) ? 1 : Integer.parseInt(paramter.getShichosonCode().toString());
+        通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
+        文書番号 = paramter.getBunshoNo();
     }
 
     @Override
@@ -111,10 +151,6 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     private JohoTeikyoShiryo eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
-        NinshoshaSource 認証者情報 = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_ID, FlexibleDate.getNowDate(),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, retortWrite);
-        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知文1);
-        RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE090001.getReportId(), FlexibleDate.getNowDate());
         ShujiiIraiAtenaJoho 宛先情報 = get宛先();
         return JohoTeikyoShiryoChange.createBusiness(entity, 認証者情報, 通知文, 文書番号, 宛先情報, new RString(retortWrite.pageCount().value()));
     }

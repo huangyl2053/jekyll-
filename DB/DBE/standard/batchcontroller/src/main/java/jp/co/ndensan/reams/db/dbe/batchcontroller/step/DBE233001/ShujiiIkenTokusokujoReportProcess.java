@@ -16,12 +16,17 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001.IDbe233001RelateMapper;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -72,18 +77,42 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private static final RString 明 = new RString("明");
     private static final RString 大 = new RString("大");
     private static final RString 昭 = new RString("昭");
-    private final int パターン番号_1 = 1;
+    private boolean is認定広域 = false;
     private static final int 一桁 = 1;
+    private NinshoshaSource ninshoshaSource;
+    private Map<Integer, RString> 通知文;
     IDbe233001RelateMapper mapper;
 
     @Override
     protected void initialize() {
         super.initialize();
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                is認定広域 = true;
+            }
+        }
     }
 
     @Override
     protected void beforeExecute() {
         mapper = getMapper(IDbe233001RelateMapper.class);
+        if (is認定広域) {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    REPORT_DBE233001,
+                    processPrm.getTemp_督促日(),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter, new ShoKisaiHokenshaNo(processPrm.getTemp_保険者コード()));
+        } else {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    REPORT_DBE233001,
+                    processPrm.getTemp_督促日(),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter);
+        }
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processPrm.getTemp_市町村コード()) ? 1 : Integer.parseInt(processPrm.getTemp_市町村コード().toString());
+        通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE233001, KamokuCode.EMPTY, 通知書定型文パターン番号);
     }
 
     @Override
@@ -155,10 +184,6 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
             tempP_誕生日明治 = 星アイコン;
             tempP_誕生日大正 = 星アイコン;
         }
-        NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_督促日(),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE233001, KamokuCode.EMPTY, パターン番号_1);
-
         YubinNo yubinNo = entity.getTemp_事業者郵便番号();
         RString 宛名郵便番号 = RString.EMPTY;
         RString edited郵便番号 = RString.EMPTY;

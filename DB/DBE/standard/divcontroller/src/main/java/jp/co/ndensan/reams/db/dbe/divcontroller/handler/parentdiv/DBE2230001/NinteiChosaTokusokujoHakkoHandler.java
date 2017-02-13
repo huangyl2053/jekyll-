@@ -5,19 +5,25 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2230001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosa.DbeBusinessConfigKey;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoManager;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -78,6 +84,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
     public NinteiChosaTokusokujoHakkoTempData getTempData() {
         NinteiChosaTokusokujoHakkoTempData tempData = new NinteiChosaTokusokujoHakkoTempData();
         tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
+        tempData.setTemp_市町村コード(div.getCcdHokensha().getSelectedItem().get市町村コード().getColumnValue());
         tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get市町村名称());
         tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo()
                 .getCcdItakusakiAndChosain().getTxtChosaItakusakiCode().getValue());
@@ -135,7 +142,19 @@ public class NinteiChosaTokusokujoHakkoHandler {
         div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().setValue(RDate.getNowDate());
-        div.getCcdBunshoNo().initialize(ReportIdDBE.DBE223001_NinteiChosaTokusokujo.getReportId());
+        RString 証記載保険者番号 = div.getCcdHokensha().getSelectedItem().get証記載保険者番号().value();
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        ReportId 帳票ID = ReportIdDBE.DBE223001_NinteiChosaTokusokujo.getReportId();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
+                    && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+                RStringBuilder 帳票IDBuilder = new RStringBuilder();
+                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
+                帳票ID = new ReportId(帳票IDBuilder.toRString());
+            }
+        }
+        div.getCcdBunshoNo().initialize(帳票ID);
     }
 
     /**
@@ -147,5 +166,18 @@ public class NinteiChosaTokusokujoHakkoHandler {
         div.getCcdItakusakiAndChosain().clear();
         div.getCcdItakusakiAndChosain().setHdnShinseishoKanriNo(ShinseishoKanriNo.EMPTY.value());
         div.getCcdItakusakiAndChosain().setHdnShichosonCode(div.getCcdHokensha().getSelectedItem().get市町村コード().value());
+        RString 証記載保険者番号 = div.getCcdHokensha().getSelectedItem().get証記載保険者番号().value();
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        ReportId 帳票ID = ReportIdDBE.DBE223001_NinteiChosaTokusokujo.getReportId();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
+                    && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+                RStringBuilder 帳票IDBuilder = new RStringBuilder();
+                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
+                帳票ID = new ReportId(帳票IDBuilder.toRString());
+            }
+        }
+        div.getCcdBunshoNo().initialize(帳票ID);
     }
 }

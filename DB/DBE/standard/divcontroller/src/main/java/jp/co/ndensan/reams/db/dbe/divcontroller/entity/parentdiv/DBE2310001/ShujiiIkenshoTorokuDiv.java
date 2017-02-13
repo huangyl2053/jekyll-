@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -262,6 +262,36 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return this.getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnToSearchIryoKikan() {
+        return this.getIkenshoKihonJoho().getShujiiJoho().getBtnToSearchIryoKikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
+        this.getIkenshoKihonJoho().getShujiiJoho().setBtnToSearchIryoKikan(btnToSearchIryoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiIryoKikanMei() {
+        return this.getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanMei();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
+        this.getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanMei(txtShujiiIryoKikanMei);
+    }
+
+    @JsonIgnore
     public TextBoxCode getTxtShujiiCode() {
         return this.getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiCode();
     }
@@ -292,16 +322,6 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtKinyuYMD() {
-        return this.getIkenshoKihonJoho().getShujiiJoho().getTxtKinyuYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtKinyuYMD(TextBoxDate txtKinyuYMD) {
-        this.getIkenshoKihonJoho().getShujiiJoho().setTxtKinyuYMD(txtKinyuYMD);
-    }
-
-    @JsonIgnore
     public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
         return this.getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanTelNumber();
     }
@@ -312,33 +332,13 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtShujiiIryoKikanCode() {
-        return this.getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanCode();
+    public TextBoxDate getTxtKinyuYMD() {
+        return this.getIkenshoKihonJoho().getShujiiJoho().getTxtKinyuYMD();
     }
 
     @JsonIgnore
-    public void  setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
-        this.getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnToSearchIryoKikan() {
-        return this.getIkenshoKihonJoho().getShujiiJoho().getBtnToSearchIryoKikan();
-    }
-
-    @JsonIgnore
-    public void  setBtnToSearchIryoKikan(ButtonDialog btnToSearchIryoKikan) {
-        this.getIkenshoKihonJoho().getShujiiJoho().setBtnToSearchIryoKikan(btnToSearchIryoKikan);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShujiiIryoKikanMei() {
-        return this.getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanMei();
-    }
-
-    @JsonIgnore
-    public void  setTxtShujiiIryoKikanMei(TextBox txtShujiiIryoKikanMei) {
-        this.getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanMei(txtShujiiIryoKikanMei);
+    public void  setTxtKinyuYMD(TextBoxDate txtKinyuYMD) {
+        this.getIkenshoKihonJoho().getShujiiJoho().setTxtKinyuYMD(txtKinyuYMD);
     }
 
     @JsonIgnore

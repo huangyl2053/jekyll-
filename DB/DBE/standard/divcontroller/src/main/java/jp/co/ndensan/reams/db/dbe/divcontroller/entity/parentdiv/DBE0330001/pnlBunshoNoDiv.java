@@ -1,20 +1,20 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoKanryoMsg のクラスファイル 
+ * pnlBunshoNo のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KaigoKanryoMsgDiv extends Panel {
+public class pnlBunshoNoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
@@ -22,8 +22,8 @@ public class KaigoKanryoMsgDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    private KanryoMessageDiv ccdKaigoKanryoMessage;
+    @JsonProperty("ccdBunshoNo")
+    private BunshoBangoInputDiv ccdBunshoNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +32,12 @@ public class KaigoKanryoMsgDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoKanryoMessage
-     * @return ccdKaigoKanryoMessage
+     * getccdBunshoNo
+     * @return ccdBunshoNo
      */
-    @JsonProperty("ccdKaigoKanryoMessage")
-    public IKanryoMessageDiv getCcdKaigoKanryoMessage() {
-        return ccdKaigoKanryoMessage;
+    @JsonProperty("ccdBunshoNo")
+    public IBunshoBangoInputDiv getCcdBunshoNo() {
+        return ccdBunshoNo;
     }
 
     // </editor-fold>

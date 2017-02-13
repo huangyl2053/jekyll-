@@ -31,6 +31,7 @@ public class NinteichosaIraiValidationHandler {
 
     private final NinteichosaIraiDiv div;
     private static final RString 修正 = new RString("Modified");
+    private static final int 該当なし = 0;
 
     /**
      * コンストラクタです。
@@ -218,6 +219,9 @@ public class NinteichosaIraiValidationHandler {
                     break;
                 }
             }
+            if (ModifyList.size() == 該当なし) {
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.未編集));
+            }
         }
         return validationMessages;
     }
@@ -291,7 +295,8 @@ public class NinteichosaIraiValidationHandler {
         保険者が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "保険者"),
         委託先が同一ではない(DbeErrorMessages.委託先もしくは保険者が同一ではない, "認定調査委託先"),
         調査依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "調査依頼"),
-        未保存データあり(DbzErrorMessages.実行不可, "未保存データが存在する", "モバイルデータの出力が実行");
+        未保存データあり(DbzErrorMessages.実行不可, "未保存データが存在する", "モバイルデータの出力が実行"),
+        未編集(UrErrorMessages.編集なしで更新不可);
 
         private final Message message;
 

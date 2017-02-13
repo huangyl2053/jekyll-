@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SearchConditionPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,18 +27,18 @@ public class SearchConditionPanelDiv extends Panel {
      */
     @JsonProperty("txtNijiHanteiKikan")
     private TextBoxDateRange txtNijiHanteiKikan;
-    @JsonProperty("txtDispMax")
-    private TextBoxNum txtDispMax;
-    @JsonProperty("btnClear")
-    private Button btnClear;
-    @JsonProperty("ccdHokensha")
-    private HokenshaListDiv ccdHokensha;
-    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
-    private ShujiiIryokikanAndShujiiInputDiv ccdShujiiIryokikanAndShujiiInput;
     @JsonProperty("radKekkaTsuchiOutputTaisho")
     private RadioButton radKekkaTsuchiOutputTaisho;
     @JsonProperty("radPrintCondition")
     private RadioButton radPrintCondition;
+    @JsonProperty("txtDispMax")
+    private TextBoxNum txtDispMax;
+    @JsonProperty("btnClear")
+    private Button btnClear;
+    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
+    private ShujiiIryokikanAndShujiiInputDiv ccdShujiiIryokikanAndShujiiInput;
+    @JsonProperty("ccdHokensha")
+    private HokenshaListDiv ccdHokensha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +62,42 @@ public class SearchConditionPanelDiv extends Panel {
     @JsonProperty("txtNijiHanteiKikan")
     public void setTxtNijiHanteiKikan(TextBoxDateRange txtNijiHanteiKikan) {
         this.txtNijiHanteiKikan = txtNijiHanteiKikan;
+    }
+
+    /*
+     * getradKekkaTsuchiOutputTaisho
+     * @return radKekkaTsuchiOutputTaisho
+     */
+    @JsonProperty("radKekkaTsuchiOutputTaisho")
+    public RadioButton getRadKekkaTsuchiOutputTaisho() {
+        return radKekkaTsuchiOutputTaisho;
+    }
+
+    /*
+     * setradKekkaTsuchiOutputTaisho
+     * @param radKekkaTsuchiOutputTaisho radKekkaTsuchiOutputTaisho
+     */
+    @JsonProperty("radKekkaTsuchiOutputTaisho")
+    public void setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
+        this.radKekkaTsuchiOutputTaisho = radKekkaTsuchiOutputTaisho;
+    }
+
+    /*
+     * getradPrintCondition
+     * @return radPrintCondition
+     */
+    @JsonProperty("radPrintCondition")
+    public RadioButton getRadPrintCondition() {
+        return radPrintCondition;
+    }
+
+    /*
+     * setradPrintCondition
+     * @param radPrintCondition radPrintCondition
+     */
+    @JsonProperty("radPrintCondition")
+    public void setRadPrintCondition(RadioButton radPrintCondition) {
+        this.radPrintCondition = radPrintCondition;
     }
 
     /*
@@ -101,15 +137,6 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     /*
-     * getccdHokensha
-     * @return ccdHokensha
-     */
-    @JsonProperty("ccdHokensha")
-    public IHokenshaListDiv getCcdHokensha() {
-        return ccdHokensha;
-    }
-
-    /*
      * getccdShujiiIryokikanAndShujiiInput
      * @return ccdShujiiIryokikanAndShujiiInput
      */
@@ -119,39 +146,12 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     /*
-     * getradKekkaTsuchiOutputTaisho
-     * @return radKekkaTsuchiOutputTaisho
+     * getccdHokensha
+     * @return ccdHokensha
      */
-    @JsonProperty("radKekkaTsuchiOutputTaisho")
-    public RadioButton getRadKekkaTsuchiOutputTaisho() {
-        return radKekkaTsuchiOutputTaisho;
-    }
-
-    /*
-     * setradKekkaTsuchiOutputTaisho
-     * @param radKekkaTsuchiOutputTaisho radKekkaTsuchiOutputTaisho
-     */
-    @JsonProperty("radKekkaTsuchiOutputTaisho")
-    public void setRadKekkaTsuchiOutputTaisho(RadioButton radKekkaTsuchiOutputTaisho) {
-        this.radKekkaTsuchiOutputTaisho = radKekkaTsuchiOutputTaisho;
-    }
-
-    /*
-     * getradPrintCondition
-     * @return radPrintCondition
-     */
-    @JsonProperty("radPrintCondition")
-    public RadioButton getRadPrintCondition() {
-        return radPrintCondition;
-    }
-
-    /*
-     * setradPrintCondition
-     * @param radPrintCondition radPrintCondition
-     */
-    @JsonProperty("radPrintCondition")
-    public void setRadPrintCondition(RadioButton radPrintCondition) {
-        this.radPrintCondition = radPrintCondition;
+    @JsonProperty("ccdHokensha")
+    public IHokenshaListDiv getCcdHokensha() {
+        return ccdHokensha;
     }
 
     // </editor-fold>

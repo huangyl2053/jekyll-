@@ -75,7 +75,7 @@ public class ShujiiIkensho_DBE230004Process extends BatchProcessBase<ShujiiIkens
         RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
         RString 市町村名 = 導入団体クラス.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        OutputJokenhyoFactory.createInstance(business.
+        OutputJokenhyoFactory.createInstance(new ShujiiIkenshoBusiness(null, processParamter).
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,

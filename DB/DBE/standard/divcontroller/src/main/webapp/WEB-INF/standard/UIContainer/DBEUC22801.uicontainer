@@ -12,7 +12,7 @@
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBD5220001",
+     "toLayoutName": "DBE5810001",
      "toLayoutTitle": "認定延期通知発行",
      "toState": "検索"
     },
@@ -20,7 +20,7 @@
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBD5220001",
+     "layoutName": "DBE5810001",
      "layoutTitle": "認定延期通知発行",
      "eventName": "処理完了",
      "destroy": false,
