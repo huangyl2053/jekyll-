@@ -187,7 +187,7 @@ public class NinteichosaIraiValidationHandler {
                 if (row.getChosaIraishoHakkoDay().getValue() == null) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可_依頼書出力年月日));
                 }
-                if (row.getChosaIraiDataShutsuryokuDay().getValue() == null) {
+                if (row.getChousahyoOutput().getValue() == null) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可_調査票等出力年月日));
                 }
             }
