@@ -457,7 +457,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         } else {
             施設利用リスト = 利用施設の新規設定();
         }
-        div.getTabChosaShurui().getDgRiyoShisetsu().setDataSource(施設利用リスト);
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().setDataSource(施設利用リスト);
     }
 
     private dgRiyoShisetsu_Row get利用施設レコード(NinteichosahyoShisetsuRiyo 認定調査票施設利用情報,
@@ -1072,6 +1072,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             }
         }
         createKihonChosaList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 自立度List);
+        createKihonChosaList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 自立度List);
     }
 
     private void createKihonChosaItemList(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号,
@@ -1393,6 +1394,19 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         NinteichosahyoShisetsuRiyoManager dbt5210Manager = InstanceProvider.create(NinteichosahyoShisetsuRiyoManager.class);
         List<dgRiyoShisetsu_Row> shisetsuList = div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().getDataSource();
+        if (shisetsuList.isEmpty()) {
+            NinteichosahyoShisetsuRiyo dbt5210 = dbt5210Manager.get認定調査票_概況調査_施設利用(
+                    temp_申請書管理番号, temp_認定調査履歴番号, GaikyoChosahyouNiteichosahyouSisetuRiy09B.居宅.get連番AsInt());
+            if (dbt5210 == null) {
+                for (GaikyoChosahyouNiteichosahyouSisetuRiy09B 概況調査利用施設 : GaikyoChosahyouNiteichosahyouSisetuRiy09B.values()) {
+                    dbt5210 = new NinteichosahyoShisetsuRiyo(temp_申請書管理番号, temp_認定調査履歴番号, 概況調査利用施設.get連番AsInt());
+                    NinteichosahyoShisetsuRiyoBuilder dbt5210Builder = dbt5210.createBuilderForEdit();
+                    dbt5210Builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
+                    dbt5210Builder.set施設利用フラグ(false);
+                    dbt5210Manager.save認定調査票_概況調査_施設利用(dbt5210Builder.build());
+                }
+            }
+        }
         for (dgRiyoShisetsu_Row row : shisetsuList) {
             NinteichosahyoShisetsuRiyo dbt5210 = dbt5210Manager.get認定調査票_概況調査_施設利用(
                     temp_申請書管理番号, temp_認定調査履歴番号, row.getRemban().getValue().intValue());

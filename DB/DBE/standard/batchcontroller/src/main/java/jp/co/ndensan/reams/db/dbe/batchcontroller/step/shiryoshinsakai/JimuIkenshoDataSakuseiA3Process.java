@@ -130,7 +130,7 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriteA3.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA3.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

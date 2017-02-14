@@ -131,7 +131,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         
         int 審査番号 = 1;
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
-            kumiawaseCommonBusiness.setImageFilePath2(shinseishoKanriNo, batchReportWriter.getImageFolderPath());
+            kumiawaseCommonBusiness.setImageFilePath(shinseishoKanriNo, batchReportWriter.getImageFolderPath());
             JimuShinsakaishiryoA3Report report = new JimuShinsakaishiryoA3Report(businessList,
                     get一次判定結果票(shinseishoKanriNo),
                     kumiawaseCommonBusiness.getOpinionFileInfo(shinseishoKanriNo, true),

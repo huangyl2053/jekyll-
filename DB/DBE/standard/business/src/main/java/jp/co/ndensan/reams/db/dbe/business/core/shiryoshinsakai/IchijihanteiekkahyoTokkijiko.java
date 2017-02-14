@@ -286,7 +286,7 @@ public class IchijihanteiekkahyoTokkijiko {
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, filename, path);
+            return DBEImageUtil.copySharedFiles(sharedFileId, filename, path);
         } catch (Exception e) {
             return RString.EMPTY;
         }

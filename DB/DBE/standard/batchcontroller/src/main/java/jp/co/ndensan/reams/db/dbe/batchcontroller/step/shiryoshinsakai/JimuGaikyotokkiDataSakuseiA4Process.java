@@ -120,7 +120,7 @@ public class JimuGaikyotokkiDataSakuseiA4Process extends BatchProcessBase<Shinsa
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

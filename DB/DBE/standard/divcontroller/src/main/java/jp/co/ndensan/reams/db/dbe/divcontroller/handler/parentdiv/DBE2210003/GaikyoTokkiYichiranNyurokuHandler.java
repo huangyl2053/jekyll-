@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotok
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -29,11 +31,13 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -121,6 +125,19 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 .setHiddenOriginalGaikyoTokkiNyurokuMap_MASK(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap_MASK));
 
         return gaikyoTokkiNyurokuMap;
+    }
+
+    /**
+     * 特記事項の最大文字数を設定します。
+     * 特記事項の最大文字数はコンフィグで制御します。
+     */
+    public void set特記事項最大文字数() {
+        int 最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setMaxLength(最大文字数);
+        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().setMaxLength(最大文字数);
+        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().setMaxLength(最大文字数);
+        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().setMaxLength(最大文字数);
+        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().setMaxLength(最大文字数);
     }
 
     /**
@@ -949,6 +966,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         if (当前ページ数 != 1) {
             div.getTokkiNyuryoku().getBtnBeforeTokkiJiko().setDisabled(false);
         }
+        set特記事項最大文字数();
     }
 
     private RString 共有ファイルを引き出す(Image イメージ情報, ShinseishoKanriNo temp_申請書管理番号, RString 認定調査特記事項番号) {

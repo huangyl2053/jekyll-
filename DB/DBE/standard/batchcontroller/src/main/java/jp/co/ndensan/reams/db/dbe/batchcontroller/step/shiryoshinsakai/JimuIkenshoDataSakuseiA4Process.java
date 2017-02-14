@@ -146,7 +146,7 @@ public class JimuIkenshoDataSakuseiA4Process extends BatchKeyBreakBase<Shinsakai
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }
