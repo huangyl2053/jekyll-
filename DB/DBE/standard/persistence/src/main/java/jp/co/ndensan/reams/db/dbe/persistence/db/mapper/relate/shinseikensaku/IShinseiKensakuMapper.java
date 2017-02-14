@@ -32,4 +32,12 @@ public interface IShinseiKensakuMapper {
      */
     List<ShinseiKensakuRelateEntity> selectShinseiJoho(ShinseiKensakuMapperParameter parameter);
 
+    /**
+     * 認定申請情報の取得処理です。<br/>
+     * 最大表示件数に関係なく検索条件に該当するデータを全て取得します。
+     *
+     * @param parameter パラメータ
+     * @return 認定申請情報
+     */
+    List<ShinseiKensakuRelateEntity> selectShinseiJoho_noLimit(ShinseiKensakuMapperParameter parameter);
 }

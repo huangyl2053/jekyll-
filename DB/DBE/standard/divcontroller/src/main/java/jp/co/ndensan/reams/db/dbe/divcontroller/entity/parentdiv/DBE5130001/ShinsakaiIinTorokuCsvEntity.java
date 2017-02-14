@@ -39,15 +39,19 @@ public class ShinsakaiIinTorokuCsvEntity {
     private final RString biko;
     @CsvField(order = 120, name = "金融機関コード")
     private final RString kinyuKikanCode;
-    @CsvField(order = 130, name = "支店コード")
+    @CsvField(order = 130, name = "金融機関名")
+    private final RString kinyuKikanMeisho;
+    @CsvField(order = 140, name = "支店コード")
     private final RString kinyuKikanShitenCode;
-    @CsvField(order = 140, name = "預金種別")
+    @CsvField(order = 150, name = "支店名")
+    private final RString kinyuKikanShitenMeisho;
+    @CsvField(order = 160, name = "預金種別")
     private final RString yokinShubetsu;
-    @CsvField(order = 150, name = "口座番号")
+    @CsvField(order = 170, name = "口座番号")
     private final RString kozaNo;
-    @CsvField(order = 160, name = "口座名義人")
+    @CsvField(order = 180, name = "口座名義人")
     private final RString kozaMeigininKana;
-    @CsvField(order = 170, name = "漢字名義人")
+    @CsvField(order = 190, name = "漢字名義人")
     private final RString kozaMeiginin;
 
     /**
@@ -65,7 +69,9 @@ public class ShinsakaiIinTorokuCsvEntity {
      * @param jokyo 状況
      * @param biko 備考
      * @param kinyuKikanCode 金融機関コード
+     * @param kinyuKikanMeisho 金融機関名
      * @param kinyuKikanShitenCode 支店コード
+     * @param kinyuKikanShitenMeisho 支店名
      * @param yokinShubetsu 預金種別
      * @param kozaNo 口座番号
      * @param kozaMeigininKana 口座名義人
@@ -84,7 +90,9 @@ public class ShinsakaiIinTorokuCsvEntity {
             RString jokyo,
             RString biko,
             RString kinyuKikanCode,
+            RString kinyuKikanMeisho,
             RString kinyuKikanShitenCode,
+            RString kinyuKikanShitenMeisho,
             RString yokinShubetsu,
             RString kozaNo,
             RString kozaMeigininKana,
@@ -101,7 +109,9 @@ public class ShinsakaiIinTorokuCsvEntity {
         this.jokyo = jokyo;
         this.biko = biko;
         this.kinyuKikanCode = kinyuKikanCode;
+        this.kinyuKikanMeisho = kinyuKikanMeisho;
         this.kinyuKikanShitenCode = kinyuKikanShitenCode;
+        this.kinyuKikanShitenMeisho = kinyuKikanShitenMeisho;
         this.yokinShubetsu = yokinShubetsu;
         this.kozaNo = kozaNo;
         this.kozaMeigininKana = kozaMeigininKana;

@@ -43,7 +43,8 @@ public class ShinseiKensakuFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinseiKensakuFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinseiKensakuFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinseiKensakuFinder}のインスタンス
      */
     public static ShinseiKensakuFinder createInstance() {
         return InstanceProvider.create(ShinseiKensakuFinder.class);
@@ -82,6 +83,30 @@ public class ShinseiKensakuFinder {
         List<ShinseiKensakuBusiness> shinseiKensakuList = new ArrayList<>();
         IShinseiKensakuMapper shinseiKensakuMapper = mapperProvider.create(IShinseiKensakuMapper.class);
         List<ShinseiKensakuRelateEntity> list = shinseiKensakuMapper.selectShinseiJoho(parameter);
+        for (ShinseiKensakuRelateEntity entity : list) {
+            ShinseiKensakuBusiness business = new ShinseiKensakuBusiness(entity);
+            shinseiKensakuList.add(business);
+        }
+        int totalcount;
+        if (list.isEmpty()) {
+            totalcount = 0;
+        } else {
+            totalcount = list.get(0).getTotalCount();
+        }
+        return SearchResult.of(shinseiKensakuList, totalcount, parameter.getLimitCount() < totalcount);
+    }
+
+    /**
+     * 要介護認定申請検索処理です。<br/>
+     * 最大表示件数に関係なく検索条件に該当するデータを全て取得します。
+     *
+     * @param parameter 検索条件
+     * @return 要介護認定申請情報
+     */
+    public SearchResult<ShinseiKensakuBusiness> getShinseiKensaku_noLimit(ShinseiKensakuMapperParameter parameter) {
+        List<ShinseiKensakuBusiness> shinseiKensakuList = new ArrayList<>();
+        IShinseiKensakuMapper shinseiKensakuMapper = mapperProvider.create(IShinseiKensakuMapper.class);
+        List<ShinseiKensakuRelateEntity> list = shinseiKensakuMapper.selectShinseiJoho_noLimit(parameter);
         for (ShinseiKensakuRelateEntity entity : list) {
             ShinseiKensakuBusiness business = new ShinseiKensakuBusiness(entity);
             shinseiKensakuList.add(business);

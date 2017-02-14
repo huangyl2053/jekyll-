@@ -168,7 +168,7 @@ public class IraishoIkkatsuHakkoHandler {
         initializeShujiiChkShinseiTani();
         setShujiiChkShinseiTani();
         setHakkobiAndTeishutsuKigen();
-        RString 証記載保険者番号 = div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value();
+        RString 証記載保険者番号 = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value();
         KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
         List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
         ReportId 帳票ID = ReportIdDBZ.DBE230001.getReportId();

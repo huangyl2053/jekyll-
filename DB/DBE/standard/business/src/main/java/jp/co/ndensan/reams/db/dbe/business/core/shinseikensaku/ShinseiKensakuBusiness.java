@@ -200,6 +200,15 @@ public class ShinseiKensakuBusiness implements Serializable {
     }
 
     /**
+     * 市町村コードのgetメソッドです。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * 市町村名称のgetメソッドです。
      *
      * @return 市町村名称

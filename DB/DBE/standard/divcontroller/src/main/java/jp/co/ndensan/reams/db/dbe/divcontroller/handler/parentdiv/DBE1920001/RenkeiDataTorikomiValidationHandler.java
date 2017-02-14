@@ -137,7 +137,7 @@ public class RenkeiDataTorikomiValidationHandler {
                 }
             }
         }
-        div.setHiddenErrorFiles(rmessage);
+        div.setHiddenZeroError(rmessage);
     }
 
     /**
@@ -146,7 +146,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @return message
      */
     public Message getMessage() {
-        RString rmessage = div.getHiddenErrorFiles();
+        RString rmessage = div.getHiddenZeroError();
         if (!RString.isNullOrEmpty(rmessage)) {
             return InfoMessages.ゼロ件チェック.getMessage().replace(rmessage.toString());
         }
@@ -194,7 +194,7 @@ public class RenkeiDataTorikomiValidationHandler {
      * @return message
      */
     public Message get不正ファイル名() {
-        RString rmessage = div.getHiddenErrorFiles();
+        RString rmessage = div.getHiddenFileNameError();
         if (!RString.isNullOrEmpty(rmessage)) {
             return InfoMessages.ファイル名の不正.getMessage().replace(rmessage.toString());
         }
@@ -226,7 +226,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
                     flag = true;
                 }
-                if (電算標準版_197 < getSize(read)) {
+                if (電算標準版_197 != getSize(read)) {
                     flag = true;
                 }
             } else if (厚労省.equals(認定申請IF種類)) {
@@ -236,7 +236,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
                     flag = true;
                 }
-                if (厚労省_174 < getSize(read)) {
+                if (厚労省_174 != getSize(read)) {
                     flag = true;
                 }
             } else if (東芝版.equals(認定申請IF種類)) {
@@ -246,7 +246,7 @@ public class RenkeiDataTorikomiValidationHandler {
                         .setNewLine(NewLine.CRLF).build().readLine() == null) {
                     flag = true;
                 }
-                if (東芝版_197 < getSize(read)) {
+                if (東芝版_197 != getSize(read)) {
                     flag = true;
                 }
             }

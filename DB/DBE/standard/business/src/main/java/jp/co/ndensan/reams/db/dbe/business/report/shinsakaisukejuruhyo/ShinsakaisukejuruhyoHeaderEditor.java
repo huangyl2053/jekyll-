@@ -7,8 +7,13 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaisukejuruhyo.ShinsakaisukejuruhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 介護認定審査会スケジュール表ヘッダEditorです。
@@ -38,7 +43,23 @@ class ShinsakaisukejuruhyoHeaderEditor implements IShinsakaisukejuruhyoEditor {
         RStringBuilder title = new RStringBuilder();
         source.title = title.append(item.get年度()).append(タイトル後).toRString();
         source.hokenshaName = item.get広域連合();
-        source.printTimeStamp = item.get作成年月日().wareki().eraType(EraType.KANJI).toDateString();
+        RStringBuilder systemDateTime = new RStringBuilder();
+        RDateTime datetime = RDate.getNowDateTime();
+        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString());
+        systemDateTime.append(RString.HALF_SPACE);
+        systemDateTime.append(String.format("%02d", datetime.getHour()));
+        systemDateTime.append(new RString("時"));
+        systemDateTime.append(String.format("%02d", datetime.getMinute()));
+        systemDateTime.append(new RString("分"));
+        systemDateTime.append(String.format("%02d", datetime.getSecond()));
+        systemDateTime.append(new RString("秒"));
+        systemDateTime.append(RString.HALF_SPACE);
+        systemDateTime.append(new RString("作成"));
+        source.printTimeStamp = systemDateTime.toRString();
+
         return source;
     }
 }

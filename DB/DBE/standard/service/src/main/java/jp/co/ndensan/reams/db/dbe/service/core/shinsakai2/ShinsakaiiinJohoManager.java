@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJoho
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -33,6 +34,7 @@ public class ShinsakaiiinJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5503ShinsakaiWariateIinJohoDac dac;
+    private final RDate 基準日 = RDate.getNowDate();
 
     /**
      * コンストラクタです。
@@ -58,7 +60,8 @@ public class ShinsakaiiinJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiiinJohoManager}のインスタンス
      */
     public static ShinsakaiiinJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiiinJohoManager.class);
@@ -80,7 +83,8 @@ public class ShinsakaiiinJohoManager {
                         ShinsakaiIinWaritsukeParameter.createShinsakaiIinWaritsukeParameter(
                                 kaisaiNo,
                                 AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
-                                kaisaiYMD));
+                                kaisaiYMD,
+                                基準日));
         List<ShinsakaiiinJoho> businessList = new ArrayList();
         for (ShinsakaiiinJohoRelateEntity entity : shinsakaiiinJohoList) {
             businessList.add(new ShinsakaiiinJoho(entity));
@@ -103,7 +107,7 @@ public class ShinsakaiiinJohoManager {
                         ShinsakaiIinWaritsukeParameter.createShinsakaiIinWaritsukeParameter(
                                 RString.EMPTY,
                                 AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
-                                kaisaiYMD));
+                                kaisaiYMD, 基準日));
         List<ShinsakaiiinJoho> businessList = new ArrayList();
         for (ShinsakaiiinJohoRelateEntity entity : shinsakaiiinJohoList) {
             businessList.add(new ShinsakaiiinJoho(entity));

@@ -23,6 +23,7 @@
         <result property="zenkaiYukoKikanEnd" column="zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="zenkaiNijiHanteiYokaigoJotaiKubun" column="zenkai_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="zenkaiNijiHanteiNinteiYukoKikan" column="zenkai_nijiHanteiNinteiYukoKikan" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -73,6 +74,22 @@
         LIMIT #{limitCount}
     </select>
 
+    <select resultOrdered="true" id="selectShinseiJoho_noLimit" resultMap="ResultMap_ShinseiKensakuRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
+            fetchSize="500">
+        <bind name="forList" value="false" />
+
+        SELECT
+        <include refid="selectShinseiJoho"/>
+        FROM
+        <include refid="tablesWithParameter"/>
+        ORDER BY
+        DbT5101NinteiShinseiJoho."hihokenshaKana",
+        DbT7051KoseiShichosonMaster."shichosonCode",
+        DbT5101NinteiShinseiJoho."hihokenshaNo",
+        DbT5101NinteiShinseiJoho."ninteiShinseiYMD" DESC
+    </select>
+
     <sql id="selectShinseiJoho">
         <!-- SELECT -->
         DbT5101NinteiShinseiJoho."shinseishoKanriNo",
@@ -91,6 +108,7 @@
         DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode",
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanStart",
         DbT5101NinteiShinseiJoho."zenkaiYukoKikanEnd",
+        DbT5101NinteiShinseiJoho."shichosonCode" ,
         DbT7051KoseiShichosonMaster."shichosonMeisho",
         DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
         DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
