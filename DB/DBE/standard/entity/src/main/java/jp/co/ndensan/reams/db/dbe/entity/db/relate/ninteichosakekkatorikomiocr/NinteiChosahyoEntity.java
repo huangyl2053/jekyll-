@@ -66,7 +66,13 @@ public class NinteiChosahyoEntity {
      * @return {@link DbT5202NinteichosahyoGaikyoChosaEntity}
      */
     public List<DbT5202NinteichosahyoGaikyoChosaEntity> get概況調査() {
-        return initMd5All(dbT5202);
+        if (this.dbT5202.isEmpty()) {
+            return Collections.emptyList();
+        }
+        if (this.dbT5202.get(0).getKoroshoIfShikibetsuCode() == null) {
+            return Collections.emptyList();
+        }
+        return initMd5All(this.dbT5202);
     }
 
     /**
@@ -80,7 +86,13 @@ public class NinteiChosahyoEntity {
      * @return {@link DbT5203NinteichosahyoKihonChosaEntity}
      */
     public List<DbT5203NinteichosahyoKihonChosaEntity> get基本調査() {
-        return initMd5All(dbT5203);
+        if (this.dbT5203.isEmpty()) {
+            return Collections.emptyList();
+        }
+        if (this.dbT5203.get(0).getKoroshoIfShikibetsuCode() == null) {
+            return Collections.emptyList();
+        }
+        return initMd5All(this.dbT5203);
     }
 
     /**

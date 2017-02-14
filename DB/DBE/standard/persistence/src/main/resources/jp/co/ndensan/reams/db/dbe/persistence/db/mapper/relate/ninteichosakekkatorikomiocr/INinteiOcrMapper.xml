@@ -339,7 +339,7 @@
              AND dbT5210."ninteichosaRirekiNo" = target."ninteichosaRirekiNo"
     </select>
 
-    <resultMap id="ResultMap_get認定調査票" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity" autoMapping="true">
+    <resultMap id="ResultMap_get認定調査票" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity" autoMapping="false">
         <id property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="ninteichosaRirekiNo" />
         <result property="調査項目" column="調査項目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
