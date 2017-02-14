@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,6 +21,7 @@ public final class ShinsakaiIinWaritsukeParameter {
     private final RString kaisaiNo;
     private final LasdecCode shichousonCode;
     private final RString kaisaiYMD;
+    private final RDate kijunYMD;
 
     /**
      * コンストラクタです。
@@ -32,10 +34,12 @@ public final class ShinsakaiIinWaritsukeParameter {
     private ShinsakaiIinWaritsukeParameter(
             RString kaisaiNo,
             LasdecCode shichousonCode,
-            RString kaisaiYMD) {
+            RString kaisaiYMD,
+            RDate kijunYMD) {
         this.kaisaiNo = kaisaiNo;
         this.shichousonCode = shichousonCode;
         this.kaisaiYMD = kaisaiYMD;
+        this.kijunYMD = kijunYMD;
     }
 
     /**
@@ -44,13 +48,15 @@ public final class ShinsakaiIinWaritsukeParameter {
      * @param kaisaiNo 開催番号
      * @param shichousonCode 市町村コード
      * @param kaisaiYMD 開催年月日
+     * @param kijunYMD 基準日
      * @return 審査会内容検索パラメータークラス
      */
     public static ShinsakaiIinWaritsukeParameter createShinsakaiIinWaritsukeParameter(
             RString kaisaiNo,
             LasdecCode shichousonCode,
-            RString kaisaiYMD) {
+            RString kaisaiYMD,
+            RDate kijunYMD) {
 
-        return new ShinsakaiIinWaritsukeParameter(kaisaiNo, shichousonCode, kaisaiYMD);
+        return new ShinsakaiIinWaritsukeParameter(kaisaiNo, shichousonCode, kaisaiYMD, kijunYMD);
     }
 }

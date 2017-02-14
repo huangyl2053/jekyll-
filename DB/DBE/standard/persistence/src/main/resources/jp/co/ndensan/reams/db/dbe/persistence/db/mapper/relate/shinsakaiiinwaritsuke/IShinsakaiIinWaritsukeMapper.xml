@@ -147,8 +147,9 @@
                                                 FROM rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
                                                 WHERE dbT5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
                                                 )
-        AND dbT5594."haishiFlag" = false
-        AND "shinsakaiIinShuryoYMD" >= #{kaisaiYMD}
+        AND dbT5594."haishiFlag" = true
+        AND "shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{kaisaiYMD}
+        AND NOT(dbT5594."haishiYMD" <![CDATA[<=]]> #{kijunYMD})
         ORDER BY "shinsakaiIinCode"
     </select>
 </mapper>
