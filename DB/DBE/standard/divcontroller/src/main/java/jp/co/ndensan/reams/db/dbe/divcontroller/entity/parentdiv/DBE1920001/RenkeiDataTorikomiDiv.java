@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RenkeiDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +37,10 @@ public class RenkeiDataTorikomiDiv extends Panel {
     private RString hiddenFileId;
     @JsonProperty("hiddenErrorFiles")
     private RString hiddenErrorFiles;
+    @JsonProperty("hiddenZeroError")
+    private RString hiddenZeroError;
+    @JsonProperty("hiddenFileNameError")
+    private RString hiddenFileNameError;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -149,6 +154,42 @@ public class RenkeiDataTorikomiDiv extends Panel {
     @JsonProperty("hiddenErrorFiles")
     public void setHiddenErrorFiles(RString hiddenErrorFiles) {
         this.hiddenErrorFiles = hiddenErrorFiles;
+    }
+
+    /*
+     * gethiddenZeroError
+     * @return hiddenZeroError
+     */
+    @JsonProperty("hiddenZeroError")
+    public RString getHiddenZeroError() {
+        return hiddenZeroError;
+    }
+
+    /*
+     * sethiddenZeroError
+     * @param hiddenZeroError hiddenZeroError
+     */
+    @JsonProperty("hiddenZeroError")
+    public void setHiddenZeroError(RString hiddenZeroError) {
+        this.hiddenZeroError = hiddenZeroError;
+    }
+
+    /*
+     * gethiddenFileNameError
+     * @return hiddenFileNameError
+     */
+    @JsonProperty("hiddenFileNameError")
+    public RString getHiddenFileNameError() {
+        return hiddenFileNameError;
+    }
+
+    /*
+     * sethiddenFileNameError
+     * @param hiddenFileNameError hiddenFileNameError
+     */
+    @JsonProperty("hiddenFileNameError")
+    public void setHiddenFileNameError(RString hiddenFileNameError) {
+        this.hiddenFileNameError = hiddenFileNameError;
     }
 
     /*

@@ -50,6 +50,7 @@ public class RenkeiDataTorikomi {
     private static RString 認定調査員データ取込みファイル名;
     private static RString 主治医医療機関データ取込みファイル名;
     private static RString 主治医データ取込みファイル名;
+    private static RString path;
     private static boolean 前回認定申請情報ファイルチェックフラグ;
     private static final int なし = 0;
 
@@ -60,14 +61,11 @@ public class RenkeiDataTorikomi {
      * @return ResponseData<RenkeiDataTorikomiDiv>
      */
     public ResponseData<RenkeiDataTorikomiDiv> onLoad(RenkeiDataTorikomiDiv div) {
-        RString path = RString.EMPTY;
         try {
             path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         } catch (SystemException e) {
             throw new ApplicationException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(ConfigNameDBE.認定申請連携データ出力先.name()));
         }
-
-        getHandler(div).onLoad(RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate()), path);
         RDate 基準日 = RDate.getNowDate();
         RString 市町村コード = RString.EMPTY;
         ShichosonSecurityJohoFinder finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
@@ -90,25 +88,15 @@ public class RenkeiDataTorikomi {
             主治医医療機関データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
             主治医データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         }
-        RString error = RString.EMPTY;
+        getHandler(div).onLoad(RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate()),
+                path,
+                要介護認定申請連携データ取込みファイル名,
+                認定調査委託先データ取込みファイル名,
+                認定調査員データ取込みファイル名,
+                主治医医療機関データ取込みファイル名,
+                主治医データ取込みファイル名);
         for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource()) {
-            if (Integer.parseInt(row.getTotal().toString()) > なし) {
-                if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName())) {
-                    error = getValidationHandler(div).check認定申請情報ファイル(error, path, false);
-                } else if (認定調査委託先データ取込みファイル名.equals(row.getFileName())) {
-                    error = getValidationHandler(div).check認定調査委託先情報ファイル(error, path, false);
-                } else if (認定調査員データ取込みファイル名.equals(row.getFileName())) {
-                    error = getValidationHandler(div).check認定調査員情報ファイル(error, path, false);
-                } else if (主治医医療機関データ取込みファイル名.equals(row.getFileName())) {
-                    error = getValidationHandler(div).check主治医医療機関情報ファイル(error, path, false);
-                } else if (主治医データ取込みファイル名.equals(row.getFileName())) {
-                    error = getValidationHandler(div).check主治医情報ファイル(error, path, false);
-                }
-            }
             row.setSelectable(Boolean.FALSE);
-        }
-        if (!RString.isNullOrEmpty(error)) {
-            return ResponseData.of(div).addMessage(getValidationHandler(div).get初期Error(error)).respond();
         }
         return ResponseData.of(div).setState(DBE1920001StateName.初期表示);
     }
@@ -140,8 +128,10 @@ public class RenkeiDataTorikomi {
             }
         }
         RStringBuilder buider = new RStringBuilder();
-        for (FileData file : files) {
-            getHandler(div).upLoadFile(file, buider);
+        if (RString.isNullOrEmpty(error) && !RString.isNullOrEmpty(不正ファイル名)) {
+            for (FileData file : files) {
+                getHandler(div).upLoadFile(file, buider);
+            }
         }
         boolean flag = false;
         if (div.getDgTorikomiTaisho().getSelectedItems() != null && !div.getDgTorikomiTaisho().getSelectedItems().isEmpty()) {
@@ -152,10 +142,10 @@ public class RenkeiDataTorikomi {
         }
         if (RString.isNullOrEmpty(不正ファイル名) && RString.isNullOrEmpty(error)) {
             getValidationHandler(div).checkゼロ件ファイル(files);
-        } else if (RString.isNullOrEmpty(不正ファイル名)){
+        } else if (!RString.isNullOrEmpty(error)) {
             div.setHiddenErrorFiles(error);
         } else if (!RString.isNullOrEmpty(不正ファイル名)) {
-            div.setHiddenErrorFiles(不正ファイル名);
+            div.setHiddenFileNameError(不正ファイル名);
         }
         dgTorikomiTaisho_Row ninteiShinseiJohoRow = 認定申請情報行取得(div);
         if (ninteiShinseiJohoRow.getSelected()) {
@@ -200,7 +190,7 @@ public class RenkeiDataTorikomi {
     public ResponseData<DBE192001_NnteiShinseiInfoUploadParameter> onClick_JikkouBtn(RenkeiDataTorikomiDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
-    
+
     /**
      * 「実行する」ボタン表示制御。
      *
@@ -221,7 +211,7 @@ public class RenkeiDataTorikomi {
         前回認定申請情報ファイルチェックフラグ = ninteiShinseiJohoRow.getSelected();
         if (div.getDgTorikomiTaisho().getSelectedItems().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnExcute"), true);
-            
+
         } else if (認定申請情報行取得(div).getSelected() && div.getDgtorikomidataichiran().getSelectedItems().isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnExcute"), true);
             List<dgTorikomiTaisho_Row> dataSource = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource();
@@ -234,7 +224,7 @@ public class RenkeiDataTorikomi {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnExcute"), false);
         }
-         
+
         return ResponseData.of(div).respond();
     }
 
@@ -261,10 +251,10 @@ public class RenkeiDataTorikomi {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 法改正ラジオボタンの変更時制御
-     * 
+     *
      * @param div RenkeiDataTorikomiDiv
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
@@ -320,7 +310,7 @@ public class RenkeiDataTorikomi {
     private RenkeiDataTorikomiValidationHandler getValidationHandler(RenkeiDataTorikomiDiv div) {
         return new RenkeiDataTorikomiValidationHandler(div);
     }
-    
+
     private dgTorikomiTaisho_Row 認定申請情報行取得(RenkeiDataTorikomiDiv div) {
         dgTorikomiTaisho_Row ninteiShinseiJohoRow = new dgTorikomiTaisho_Row();
         List<dgTorikomiTaisho_Row> dataSource = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource();
