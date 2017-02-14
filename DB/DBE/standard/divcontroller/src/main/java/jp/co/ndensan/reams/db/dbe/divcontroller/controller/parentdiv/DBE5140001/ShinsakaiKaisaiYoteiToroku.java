@@ -633,7 +633,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.getBtnToroku().setDisabled(false)
+            div.getBtnToroku().setDisabled(false);
             boolean is保存処理 = true;
             set番号(div, is保存処理);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
