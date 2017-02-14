@@ -124,6 +124,7 @@ public class GaikyoTokkiYichiranNyuroku {
         div.getChosaJisshisha().getCcdChosaJisshishaJoho().intialize(model);
         div.getRenrakusakiKihon().setIsOpen(false);
         div.getChosaJisshisha().setIsOpen(false);
+        getHandler(div).set特記事項最大文字数();
 
         return ResponseData.of(div).respond();
     }

@@ -64,7 +64,7 @@ public class KihonJohoEntity {
     private TelNo shinseiTodokedeshaTelNo;
     private RString shinseiTodokedeshaTsuzukigara;
     private RString jigyoshaKubun;
-    private RString JigyoshaNo;
+    private RString shinseiTodokedeDaikoJigyoshaNo;
     private FlexibleDate ninteiShinseiJohoTorokuKanryoYMD;
     private FlexibleDate ninteichosaIraiKanryoYMD;
     private FlexibleDate ninteichosaKanryoYMD;
@@ -93,8 +93,6 @@ public class KihonJohoEntity {
     private FlexibleDate saishuShinryoYMD;
     private boolean ikenshoDoiFlag;
     private Code ikenshoSakuseiKaisuKubun;
-    private RString ikenshoNetakirido;
-    private RString ikenshoNinchido;
     private FlexibleDate ichijiHanteiYMD;
     private Code ichijiHanteiKekkaCode;
     private Code ichijiHanteiKekkaNinchishoKasanCode;

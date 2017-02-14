@@ -36,7 +36,7 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE4050001",
      "layoutTitle": "イメージ情報マスキング",
-     "eventName": "完了処理に戻る",
+     "eventName": "基本運用へ遷移",
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
@@ -51,6 +51,16 @@
      "layoutName": "DBE2080001",
      "layoutTitle": "完了処理・マスキング",
      "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4050001",
+     "layoutTitle": "イメージ情報マスキング",
+     "eventName": "終了する",
      "destroy": false,
      "condition": ""
     }

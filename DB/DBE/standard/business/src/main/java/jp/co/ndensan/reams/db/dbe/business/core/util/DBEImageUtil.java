@@ -48,14 +48,15 @@ public class DBEImageUtil {
      *
      * @param sharedFileId 共有ファイルID
      * @param sharedFileName 共有ファイル名
-     * @param batchImageFolderPath コピー先フォルダパス
+     * @param assignmentFolderPath 指定ローカルフォルダ
      * @return ローカルコピー先フォルダパス
      */
-    public static RString copySharedFilesBatch(RDateTime sharedFileId, RString sharedFileName, RString batchImageFolderPath) {
+    public static RString copySharedFiles(RDateTime sharedFileId, RString sharedFileName, RString assignmentFolderPath) {
+        RString localCopyPath = Directory.createDirectories(Path.combinePath(assignmentFolderPath, sharedFileName));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(batchImageFolderPath)).getCanonicalPath());
+        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(localCopyPath)).getCanonicalPath());
     }
 
     /**

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.Imag
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.dgImageMaskShoriTaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.dgImageMaskingTaisho_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.imagejohomasking.ImageJohoMaskingFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -43,6 +44,9 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -69,6 +73,7 @@ public class ImageJohoMaskingHandler {
     private static final int 特記事項連番終了位置 = 8;
     private static final int 意見書_表ページ = 1;
     private static final int 意見書_裏ページ = 2;
+    private static final RString 前排他用文字列 = new RString("DBEShinseishoKanriNo");
     private static final RString 状態_削除作業用 = new RString("削除");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
@@ -113,6 +118,7 @@ public class ImageJohoMaskingHandler {
         } else {
             toYMD = FlexibleDate.EMPTY;
         }
+        RString マスキングタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         ImageJohoMaskingParameter param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
                 div.getCcdHokensya().getSelectedItem().get市町村コード(),
                 fromYMD,
@@ -120,7 +126,8 @@ public class ImageJohoMaskingHandler {
                 div.getDdlKensakuTaisho().getSelectedKey(),
                 null,
                 div.getTxtHihokenshaNumber().getValue(),
-                div.getTxtMaxDisp().getValue());
+                div.getTxtMaxDisp().getValue(),
+                new RString("1").equals(マスキングタイミング));
         return ImageJohoMaskingFinder.createInstance().getDataForLoad(param).records();
     }
 
@@ -131,6 +138,7 @@ public class ImageJohoMaskingHandler {
      * @return マスキング対象者のリスト
      */
     public List<ImageJohoMaskingResult> get対象者forリスト(ShinseishoKanriNoList shinseishoKanriNoList) {
+        RString マスキングタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         ImageJohoMaskingParameter param = ImageJohoMaskingParameter.createImageJohoMaskingParameter(
                 LasdecCode.EMPTY,
                 FlexibleDate.MAX,
@@ -138,7 +146,8 @@ public class ImageJohoMaskingHandler {
                 RString.EMPTY,
                 shinseishoKanriNoList.getShinseishoKanriNoS(),
                 RString.EMPTY,
-                div.getTxtMaxDisp().getValue());
+                div.getTxtMaxDisp().getValue(),
+                new RString("1").equals(マスキングタイミング));
         return ImageJohoMaskingFinder.createInstance().getDataForLoad(param).records();
     }
 
@@ -191,6 +200,11 @@ public class ImageJohoMaskingHandler {
             if (result.getイメージ共有ファイルID() != null) {
                 row.set共有ファイルID(new RString(result.getイメージ共有ファイルID().toString()));
             }
+            if (result.isマスキング完了済()) {
+                row.setマスキング完了済(new RString("○"));
+            } else {
+                row.setマスキング完了済(RString.EMPTY);
+            }
             ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(result.get証記載保険者番号());
             NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, result.get被保険者番号());
             ninteiAccessLogger.log();
@@ -225,12 +239,14 @@ public class ImageJohoMaskingHandler {
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()));
         RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
         RDateTime 共有ファイルID = RDateTime.parse(taishoshaRow.get共有ファイルID().toString());
+
         ViewStateHolder.put(ViewStateKeys.共有ファイル名, ファイル名);
         ViewStateHolder.put(ViewStateKeys.イメージ共有ファイルID, 共有ファイルID);
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, taishoshaRow.get申請書管理番号());
         ViewStateHolder.put(ViewStateKeys.認定調査依頼履歴番号, taishoshaRow.get認定調査依頼履歴番号());
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, taishoshaRow.get主治医意見書作成依頼履歴番号());
         ViewStateHolder.put(ViewStateKeys.帳票分類ID, taishoshaRow.get帳票ID());
+        ViewStateHolder.put(ViewStateKeys.保存フラグ, !taishoshaRow.getマスキング完了済().isEmpty());
 
         ReadOnlySharedFileEntryDescriptor descriptor = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(ファイル名), 共有ファイルID);
         try {
@@ -239,6 +255,8 @@ public class ImageJohoMaskingHandler {
         } catch (Exception ex) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
+
+        前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
 
         File file = new File(imagePath.toString());
         if (file.exists()) {
@@ -339,6 +357,8 @@ public class ImageJohoMaskingHandler {
                 saveSharedFile(row);
             }
         }
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        前排他キーの解除(前排他用文字列.concat(申請書管理番号));
     }
 
     private void saveSharedFile(dgImageMaskingTaisho_Row row) {
@@ -422,6 +442,14 @@ public class ImageJohoMaskingHandler {
     }
 
     /**
+     * 一覧画面に戻るときは前排他を解除します
+     */
+    public void backIchiran() {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        前排他キーの解除(前排他用文字列.concat(申請書管理番号));
+    }
+
+    /**
      * 選択された列に応じてボタンの制御を変更します
      */
     public void changeButtonState() {
@@ -445,6 +473,17 @@ public class ImageJohoMaskingHandler {
         div.getBtnTorikeshi().setDisabled(true);
     }
 
+    private void 前排他ロックキー(RString 排他ロックキー) {
+        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
+        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            throw new PessimisticLockingException();
+        }
+    }
+
+    private void 前排他キーの解除(RString 排他) {
+        LockingKey 排他キー = new LockingKey(排他);
+        RealInitialLocker.release(排他キー);
+    }
 
     private enum マスク有りイメージ一覧 {
 

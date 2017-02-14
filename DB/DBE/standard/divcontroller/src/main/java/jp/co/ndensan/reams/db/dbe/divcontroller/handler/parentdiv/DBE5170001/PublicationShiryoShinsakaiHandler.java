@@ -13,9 +13,15 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_Shinsa
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.ShutsuryokuStyle;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -45,6 +51,7 @@ public class PublicationShiryoShinsakaiHandler {
     private final RString 印刷帳票_審査会開催のお知らせ = new RString("2");
     private final RString 印刷帳票_予備判定記入票 = new RString("3");
     private final RString 印刷帳票_概況特記一覧 = new RString("4");
+    private final RString 概況特記出力しない = new RString("2");
     private final PublicationShiryoShinsakaiDiv div;
     private static final int INT_4 = 4;
     private static final int INT_0 = 0;
@@ -386,14 +393,14 @@ public class PublicationShiryoShinsakaiHandler {
             RString 審査会開催通知書 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_開催通知書, 日期, SubGyomuCode.DBE認定支援);
             RString 予備判定記入票 = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料印刷帳票_委員_予備判定記入表, 日期, SubGyomuCode.DBE認定支援);
             if (is事務局項目を選択(審査会開催通知書)) {
-                委員_概況特記.add(印刷帳票_概況特記);
+                委員_概況特記.add(印刷帳票_審査会開催のお知らせ);
             }
             if (is事務局項目を選択(予備判定記入票)) {
                 委員_概況特記.add(印刷帳票_予備判定記入票);
             }
             委員の審査会資料設定(印刷帳票_委員審査会資料);
         } else {
-            委員_概況特記.add(印刷帳票_概況特記);
+            委員_概況特記.add(印刷帳票_審査会開催のお知らせ);
             委員_概況特記.add(印刷帳票_予備判定記入票);
 
             set審査会資料ALLBy出力スタイル(印刷帳票_委員審査会資料);
@@ -401,7 +408,18 @@ public class PublicationShiryoShinsakaiHandler {
         div.getChkPrintChohyoIin().setSelectedItemsByKey(委員_印刷帳票);
         div.getChkPrintChohyoShinsakaiIin().setSelectedItemsByKey(印刷帳票_委員審査会資料);
         div.getChkPrintChohyoIin2().setSelectedItemsByKey(委員_概況特記);
-        div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+        ShichosonSecurityJohoFinder 市町村セキュリティFinder = ShichosonSecurityJohoFinder.createInstance();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = 市町村セキュリティFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
+            if (DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getCode())) {
+                div.getCcdBunshoNoInput().initialize(new ReportId(ReportIdDBE.DBE515001.getReportId().value().concat("_")
+                        .concat(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))));
+            } else {
+                div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+            }
+        } else {
+            div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+        }
     }
 
     private void set審査会資料ALLBy出力スタイル(List<RString> 審査会資料リスト) {
@@ -429,6 +447,9 @@ public class PublicationShiryoShinsakaiHandler {
         div.getChkPrintChoyoJimu2().setSelectedItemsByKey(事務);
         事務.clear();
         事務.add(印刷帳票_予備判定記入票);
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            事務.add(印刷帳票_概況特記);
+        }
         div.getChkPrintChoyoJimu2().setDisabledItemsByKey(事務);
 
         List 委員 = div.getChkPrintChohyoIin2().getSelectedKeys();

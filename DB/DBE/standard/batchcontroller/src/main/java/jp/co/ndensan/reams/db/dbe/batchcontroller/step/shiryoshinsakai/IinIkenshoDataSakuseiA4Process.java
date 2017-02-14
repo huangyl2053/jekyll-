@@ -128,7 +128,7 @@ public class IinIkenshoDataSakuseiA4Process extends BatchProcessBase<ShinsakaiSi
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

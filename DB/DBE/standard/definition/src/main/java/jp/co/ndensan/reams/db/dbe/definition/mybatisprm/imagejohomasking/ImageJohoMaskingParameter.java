@@ -49,6 +49,7 @@ public final class ImageJohoMaskingParameter {
     private final boolean is日付範囲開始;
     private final boolean is日付範囲終了;
     private final boolean is被保険者番号;
+    private final boolean is一次判定後マスキング;
 
     /**
      * コンストラクタです。
@@ -77,7 +78,8 @@ public final class ImageJohoMaskingParameter {
             boolean is主治医意見書受領日,
             boolean is認定調査結果受領日,
             boolean is申請日,
-            boolean is被保険者番号) {
+            boolean is被保険者番号,
+            boolean is一次判定後マスキング) {
         this.日付範囲開始 = 日付範囲開始;
         this.市町村コード = 市町村コード;
         this.日付範囲終了 = 日付範囲終了;
@@ -100,6 +102,7 @@ public final class ImageJohoMaskingParameter {
         this.is申請日 = is申請日;
         this.is認定調査結果受領日 = is認定調査結果受領日;
         this.is被保険者番号 = is被保険者番号;
+        this.is一次判定後マスキング = is一次判定後マスキング;
     }
 
     /**
@@ -118,7 +121,7 @@ public final class ImageJohoMaskingParameter {
             LasdecCode 市町村コード, FlexibleDate 日付範囲開始,
             FlexibleDate 日付範囲終了, RString 検索対象,
             List<RString> 申請書管理番号リスト, RString 被保険者番号,
-            Decimal 最大表示件数) {
+            Decimal 最大表示件数, boolean is一次判定後マスキング) {
         boolean is画面 = false;
         boolean isメニュー = true;
         boolean is用紙タイプ = false;
@@ -171,6 +174,6 @@ public final class ImageJohoMaskingParameter {
                 TokkijikoTextImageKubun.イメージ.getコード(), new RString("001"),
                 申請書管理番号リスト, 被保険者番号, 最大表示件数,
                 is用紙タイプ, is画面, isメニュー, is保険者, is審査会開催予定日, is日付範囲開始, is日付範囲終了,
-                is一次判定日, is主治医意見書受領日, is認定調査結果受領日, is申請日, is被保険者番号);
+                is一次判定日, is主治医意見書受領日, is認定調査結果受領日, is申請日, is被保険者番号, is一次判定後マスキング);
     }
 }

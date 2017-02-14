@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteikekka
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInputComparator;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4304ShujiiIkenshoIkenItemEntity;
@@ -236,6 +237,7 @@ public class IchijiHanteiKekkaJohoSearchManager {
     }
 
     private List<RString> getKihonChosaInputData(List<KihonChosaInput> inputDataList) {
+        Collections.sort(inputDataList, new KihonChosaInputComparator());
         List<RString> retList = new ArrayList<>();
         for (KihonChosaInput input : inputDataList) {
             retList.add(input.get調査項目());

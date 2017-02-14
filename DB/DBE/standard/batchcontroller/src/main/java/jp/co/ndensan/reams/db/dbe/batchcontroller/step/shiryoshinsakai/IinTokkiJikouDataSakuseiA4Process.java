@@ -111,7 +111,7 @@ public class IinTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsak
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriter.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriter.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

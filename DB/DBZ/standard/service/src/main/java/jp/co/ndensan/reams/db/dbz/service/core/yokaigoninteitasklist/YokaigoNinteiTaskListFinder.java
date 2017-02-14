@@ -75,7 +75,8 @@ public class YokaigoNinteiTaskListFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiTaskListFinder}のインスタンス
      */
     public static YokaigoNinteiTaskListFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiTaskListFinder.class);
@@ -272,13 +273,19 @@ public class YokaigoNinteiTaskListFinder {
      * マスキングモードの場合でデータを検索します。
      *
      * @param parameter YokaigoNinteiTaskListParameter
+     * @param is一次判定後
      * @return SearchResult<IChiJiHanTeiBusiness>
      */
     @Transaction
-    public SearchResult<MaSuKinGuBusiness> getマスキングモード(YokaigoNinteiTaskListParameter parameter) {
+    public SearchResult<MaSuKinGuBusiness> getマスキングモード(YokaigoNinteiTaskListParameter parameter, boolean is一次判定後) {
         List<MaSuKinGuBusiness> マスキングList = new ArrayList<>();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<MaSuKinGuRelateEntity> entityList = mapper.getマスキング(parameter);
+        List<MaSuKinGuRelateEntity> entityList;
+        if (is一次判定後) {
+            entityList = mapper.getマスキング一次判定後(parameter);
+        } else {
+            entityList = mapper.getマスキング審査会割当後(parameter);
+        }
         for (MaSuKinGuRelateEntity entity : entityList) {
             マスキングList.add(new MaSuKinGuBusiness(entity));
         }

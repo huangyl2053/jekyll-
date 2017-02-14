@@ -99,7 +99,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriter.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriter.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

@@ -92,7 +92,7 @@ public class JimuGaikyouTokkiIranDataSakuseiImgA4Process extends BatchProcessBas
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA4.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

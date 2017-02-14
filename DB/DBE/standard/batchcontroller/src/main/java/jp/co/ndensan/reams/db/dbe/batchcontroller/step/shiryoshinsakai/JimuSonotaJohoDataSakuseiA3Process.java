@@ -237,7 +237,7 @@ public class JimuSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
             return RString.EMPTY;
         }
         try {
-            return DBEImageUtil.copySharedFilesBatch(sharedFileId, sharedFileName, batchWriteA3.getImageFolderPath());
+            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA3.getImageFolderPath());
         } catch (Exception e) {
             return RString.EMPTY;
         }

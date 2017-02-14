@@ -41,7 +41,7 @@ public class NinteiChosainDataOutputResult {
         eucCsvEntity.set調査委託先コード(entityParam.get調査委託先コード());
         eucCsvEntity.set調査委託先名称(entityParam.get事業者名称());
         RString 性別 = entityParam.get性別();
-        if(!性別.isNull()){
+        if(性別 != null){
             性別 = 性別.trim();
         }
         if (RString.isNullOrEmpty(性別)){

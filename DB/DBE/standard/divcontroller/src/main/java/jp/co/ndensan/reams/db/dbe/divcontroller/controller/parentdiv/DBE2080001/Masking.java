@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KihonunyoShoriJotai;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -53,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -68,6 +68,11 @@ public class Masking {
 
     private static final RString CSVファイル名 = new RString("DBE2080001_MaskingIchiran.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
+    private static final RString 完了可能 = new RString("2");
+    private static final RString 一次判定後 = new RString("1");
+    private static final RString 審査会割当後 = new RString("2");
+    private static final RString 完了ボタン = new RString("btnCompleteMasking");
 
     /**
      * 完了処理・センター送信の初期化。(オンロード)<br/>
@@ -76,21 +81,31 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onLoad(MaskingDiv div) {
-
-        div.getRadTaishoDataKubun().setSelectedKey(DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(),
-                SubGyomuCode.DBE認定支援));
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            div.getRadTaishoDataKubun().setSelectedKey(DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, RDate.getNowDate(),
+                    SubGyomuCode.DBE認定支援));
+        } else {
+            div.getRadTaishoDataKubun().setSelectedKey(完了可能);
+            div.getRadTaishoDataKubun().setDisabled(true);
+        }
+        RString マスキングタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (一次判定後.equals(マスキングタイミング)) {
+            CommonButtonHolder.setPrefixTextByCommonButtonFieldName(完了ボタン, new RString("申請を審査会登録に").toString());
+        } else if (審査会割当後.equals(マスキングタイミング)) {
+            CommonButtonHolder.setPrefixTextByCommonButtonFieldName(完了ボタン, new RString("申請を結果登録に").toString());
+        }
         div.getTxtSaidaiHyojiKensu().setMaxValue(
                 new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtSaidaiHyojiKensu().setValue(
                 new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).initialize();
 //        List<dgYokaigoNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
 //        for (dgYokaigoNinteiTaskList_Row row : dgYokaigoNinteiTaskList_Row) {
 //            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
 //                    new RString("申請書管理番号"), row.getShinseishoKanriNo())));
 //        }
-        return ResponseData.of(div).setState(DBE2080001StateName.登録);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -203,9 +218,9 @@ public class Masking {
                 getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.画面遷移確認.getMessage().getCode(),
-                    DbzQuestionMessages.画面遷移確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+//            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.画面遷移確認.getMessage().getCode(),
+//                    DbzQuestionMessages.画面遷移確認.getMessage().evaluate());
+//            return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
@@ -237,8 +252,8 @@ public class Masking {
                     return ResponseData.of(div).addValidationMessages(validationMessages).respond();
                 }
             }
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().getCode(),
+                    UrQuestionMessages.確認_汎用.getMessage().replace("マスキングの完了日を登録します。").evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
