@@ -558,7 +558,8 @@ public class ShinsakaiKaisaiYoteiToroku {
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_BtnKaisaiBangoFuban(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
-        set番号();
+        boolean is保存処理 = false;
+        set番号(div, is保存処理);
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
         FlexibleYearMonth 週コピー翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
         if (ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新有無, Boolean.class)
@@ -632,7 +633,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            set番号();
+            div.getBtnToroku().setDisabled(false)
+            boolean is保存処理 = true;
+            set番号(div, is保存処理);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
             for (ShinsakaiKaisaiYoteiJohoParameter parameter : yoteiJohoEntityList2) {
@@ -720,7 +723,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getDgKaisaiYoteiNyuryokuran().setDataSource(rowList);
     }
 
-    private void set番号() {
+    private void set番号(ShinsakaiKaisaiYoteiTorokuDiv div, boolean is保存処理) {
         List<ShinsakaiKaisaiYoteiJohoParameter> shinkiList = new ArrayList<>();
         for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
             if (!entity.is存在() && 審査会名称.equals(entity.get審査会名称())) {
@@ -728,6 +731,9 @@ public class ShinsakaiKaisaiYoteiToroku {
             }
         }
         if (!shinkiList.isEmpty()) {
+            if (!is保存処理) {
+                div.getBtnToroku().setDisabled(true);
+            }
             yoteiJohoEntityList2.removeAll(shinkiList);
             Collections.sort(shinkiList, new Comparator<ShinsakaiKaisaiYoteiJohoParameter>() {
                 @Override
