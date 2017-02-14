@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4050001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.imagejohomasking.ImageJohoMaskingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.DBE4050001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.DBE4050001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.ImageJohoMaskingDiv;
@@ -18,13 +19,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -53,10 +51,6 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onLoad(ImageJohoMaskingDiv div) {
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
         getHandler(div).initialize();
         ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
         if (shinseishoKanriNoList != null) {
@@ -65,10 +59,8 @@ public class ImageJohoMasking {
                 return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
             getHandler(div).setDataGrid(resultList);
-            前排他ロックキー(前排他制御開催番号.toRString());
             return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         }
-        前排他ロックキー(前排他制御開催番号.toRString());
         return ResponseData.of(div).respond();
     }
 
@@ -117,14 +109,18 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTorikeshi(ImageJohoMaskingDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
-        前排他キーの解除(前排他制御開催番号.toRString());
         getHandler(div).deleteEditedData();
         getHandler(div).setDisabledStateToButton();
         return ResponseData.of(div).respond();
+    }
+
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnBackIchiran(ImageJohoMaskingDiv div) {
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
+        } else {
+            return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
+        }
     }
 
     /**
@@ -134,11 +130,6 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnUpdate(ImageJohoMaskingDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
-        前排他キーの解除(前排他制御開催番号.toRString());
         if (!ResponseHolder.isReRequest()) {
             boolean has変更ファイル = false;
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -157,7 +148,12 @@ public class ImageJohoMasking {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).update();
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
-            return ResponseData.of(div).setState(DBE4050001StateName.完了表示);
+            boolean マスキング完了済 = ViewStateHolder.get(ViewStateKeys.保存フラグ, boolean.class);
+            if (マスキング完了済) {
+                return ResponseData.of(div).setState(DBE4050001StateName.完了表示基本運用遷移無);
+            } else {
+                return ResponseData.of(div).setState(DBE4050001StateName.完了表示基本運用遷移有);
+            }
         } else {
             return ResponseData.of(div).respond();
         }
@@ -170,7 +166,19 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onBefore_onClickbtnMaskingGenpon(ImageJohoMaskingDiv div) {
-        div.setHiddenImagePath(div.getDgImageMaskingTaisho().getActiveRow().getImagePath());
+        dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
+        if (!ResponseHolder.isReRequest()) {
+            if (!row.getMaskImagePath().isEmpty() && !row.getEditImagePath().isEmpty()) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.データ有確認.getMessage().getCode(),
+                        DbeQuestionMessages.データ有確認.getMessage().replace("マスキングイメージ", "再度マスキングを").evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeQuestionMessages.データ有確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.setHiddenImagePath(row.getImagePath());
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -196,11 +204,6 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onOkClose(ImageJohoMaskingDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
-        前排他キーの解除(前排他制御開催番号.toRString());
         RString newImagePath = div.getHiddenImagePath();
         getHandler(div).updateRow(newImagePath);
         getHandler(div).setDisabledStateToButton();
@@ -226,17 +229,15 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnContinue(ImageJohoMaskingDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
-        前排他キーの解除(前排他制御開催番号.toRString());
+        List<ImageJohoMaskingResult> resultList;
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
             ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
-            getHandler(div).get対象者forリスト(shinseishoKanriNoList);
+            resultList = getHandler(div).get対象者forリスト(shinseishoKanriNoList);
+            getHandler(div).setDataGrid(resultList);
             return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         } else {
-            getHandler(div).get対象者for画面();
+            resultList = getHandler(div).get対象者for画面();
+            getHandler(div).setDataGrid(resultList);
             return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
         }
     }
@@ -248,16 +249,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnComplete(ImageJohoMaskingDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
-        前排他キーの解除(前排他制御開催番号.toRString());
-        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
-            return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.終了する).respond();
-        }
+        return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.終了する).respond();
     }
 
     /**
@@ -267,12 +259,16 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnBackKihonunyo(ImageJohoMaskingDiv div) {
-        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(申請書管理番号);
-        前排他キーの解除(前排他制御開催番号.toRString());
-        return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.完了処理に戻る).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.基本運用へ遷移).respond();
+    }
+
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnKihonUnyou(ImageJohoMaskingDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.基本運用へ遷移).respond();
     }
 
     private ImageJohoMaskingHandler getHandler(ImageJohoMaskingDiv div) {
@@ -281,18 +277,6 @@ public class ImageJohoMasking {
 
     private ImageJohoMaskingValidationHandler getValidationHandler() {
         return new ImageJohoMaskingValidationHandler();
-    }
-    
-    private void 前排他ロックキー(RString 排他ロックキー) {
-        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        }
-    }
-    
-    private void 前排他キーの解除(RString 排他) {
-        LockingKey 排他キー = new LockingKey(排他);
-        RealInitialLocker.release(排他キー);
     }
 
 }

@@ -25,6 +25,30 @@
      "eventName": "終了する",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4050001",
+     "layoutTitle": "イメージ情報マスキング",
+     "eventName": "基本運用へ遷移",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2080001",
+     "toLayoutTitle": "基本運用・マスキング",
+     "toState": "登録fromサブメニュー"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2080001",
+     "layoutTitle": "基本運用・マスキング",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

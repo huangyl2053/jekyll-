@@ -16,7 +16,8 @@ public enum DBE2080001StateName implements IStateEnumerations {
 
     NoChange(""),
     登録("登録"),
-    完了("完了");
+    完了("完了"),
+    登録fromサブメニュー("登録fromサブメニュー");
 
     private final RString name;
 

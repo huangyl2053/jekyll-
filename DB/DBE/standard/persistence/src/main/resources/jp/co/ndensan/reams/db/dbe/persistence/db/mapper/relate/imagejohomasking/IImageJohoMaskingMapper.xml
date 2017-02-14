@@ -36,7 +36,11 @@
         CASE
         WHEN T5213."shinseishoKanriNo" is not null AND T5213."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
         ELSE false
-        END "hasGaikyoMask"
+        END "hasGaikyoMask",
+        CASE
+        WHEN T5105."maskingKanryoYMD" is not null AND T5105."maskingKanryoYMD" <![CDATA[<>]]> '' THEN true
+        ELSE false
+        END "isMaskingKanryo"
         FROM
         (SELECT
         *
@@ -92,14 +96,25 @@
         ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo" 
         AND T5101."logicalDeletedFlag" = False 
         AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
+        AND T5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> ''
         AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL 
+        AND T5105."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> ''
         AND T5105."ninteichosaKanryoYMD" IS NOT NULL 
+        AND T5105."ninteichosaKanryoYMD" <![CDATA[<>]]> ''
         AND T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL 
+        AND T5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> ''
         AND T5105."ikenshoTorokuKanryoYMD" IS NOT NULL 
+        AND T5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> ''
         AND T5105."ichijiHanteiKanryoYMD" IS NOT NULL 
-        AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
-        AND T5105."ninteiShinsakaiKanryoYMD" IS NULL 
-        AND T5105."centerSoshinYMD" IS NULL 
+        AND T5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]> ''
+        <if test="is一次判定後マスキング">
+            AND ( T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
+            OR T5105."ninteiShinsakaiWariateKanryoYMD" = '' )
+        </if>
+        AND ( T5105."ninteiShinsakaiKanryoYMD" IS NULL 
+        OR T5105."ninteiShinsakaiKanryoYMD" = '' )
+        AND ( T5105."centerSoshinYMD" IS NULL 
+        OR T5105."centerSoshinYMD" = '' )
         LEFT JOIN
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205
         on T5205."tokkijikoTextImageKubun" = #{イメージ区分}
@@ -197,7 +212,7 @@
                 </if>
             </if>                                                                          
         </if>                                                                                
-        ORDER BY C."shinseishoKanriNo"  
+        ORDER BY C."ninteiShinseiYMD"  
         LIMIT #{最大表示件数}
     </sql>    
     <select resultOrdered="true" id="getDataForLoad" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.ImageJohoMaskingParameter" resultMap="resultMap_ImageJohoMaskingRelateEntity" fetchSize="500">
@@ -223,5 +238,6 @@
         <result property="特記マスク有無" column="hasTokkiMask"/>
         <result property="意見書マスク有無" column="hasIkenshoMask"/>
         <result property="概況マスク有無" column="hasGaikyoMask"/>
+        <result property="ISマスキング完了済" column="isMaskingKanryo"/>
     </resultMap>
 </mapper>

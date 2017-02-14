@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jan 05 14:41:55 JST 2017 
+ * Tue Feb 14 14:04:20 JST 2017 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgImageMaskShoriTaishosha_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
 
     private RString 状態;
     private RString 保険者名称;
@@ -41,6 +41,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
     private RString 主治医意見書作成依頼履歴番号;
     private RString 帳票ID;
     private RString 共有ファイルID;
+    private RString マスキング完了済;
 
     public dgImageMaskShoriTaishosha_Row() {
         super();
@@ -63,6 +64,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.主治医意見書作成依頼履歴番号 = RString.EMPTY;
         this.帳票ID = RString.EMPTY;
         this.共有ファイルID = RString.EMPTY;
+        this.マスキング完了済 = RString.EMPTY;
         this.setOriginalData("状態", 状態);
         this.setOriginalData("保険者名称", 保険者名称);
         this.setOriginalData("保険者", 保険者);
@@ -82,9 +84,10 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.setOriginalData("主治医意見書作成依頼履歴番号", 主治医意見書作成依頼履歴番号);
         this.setOriginalData("帳票ID", 帳票ID);
         this.setOriginalData("共有ファイルID", 共有ファイルID);
+        this.setOriginalData("マスキング完了済", マスキング完了済);
     }
 
-    public dgImageMaskShoriTaishosha_Row(RString 状態, RString 保険者名称, RString 保険者, RString 被保番号, RString 氏名, TextBoxFlexibleDate 申請日, RString 申請区分, TextBoxFlexibleDate 審査予定日, RString マスク区分, RString 調査票, RString 調査票特記, RString 主治医意見, TextBoxFlexibleDate 意見書受領日, TextBoxFlexibleDate 調査票受領日, RString 申請書管理番号, RString 認定調査依頼履歴番号, RString 主治医意見書作成依頼履歴番号, RString 帳票ID, RString 共有ファイルID) {
+    public dgImageMaskShoriTaishosha_Row(RString 状態, RString 保険者名称, RString 保険者, RString 被保番号, RString 氏名, TextBoxFlexibleDate 申請日, RString 申請区分, TextBoxFlexibleDate 審査予定日, RString マスク区分, RString 調査票, RString 調査票特記, RString 主治医意見, TextBoxFlexibleDate 意見書受領日, TextBoxFlexibleDate 調査票受領日, RString 申請書管理番号, RString 認定調査依頼履歴番号, RString 主治医意見書作成依頼履歴番号, RString 帳票ID, RString 共有ファイルID, RString マスキング完了済) {
         super();
         this.setOriginalData("状態", 状態);
         this.setOriginalData("保険者名称", 保険者名称);
@@ -105,6 +108,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.setOriginalData("主治医意見書作成依頼履歴番号", 主治医意見書作成依頼履歴番号);
         this.setOriginalData("帳票ID", 帳票ID);
         this.setOriginalData("共有ファイルID", 共有ファイルID);
+        this.setOriginalData("マスキング完了済", マスキング完了済);
         this.状態 = 状態;
         this.保険者名称 = 保険者名称;
         this.保険者 = 保険者;
@@ -124,6 +128,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.主治医意見書作成依頼履歴番号 = 主治医意見書作成依頼履歴番号;
         this.帳票ID = 帳票ID;
         this.共有ファイルID = 共有ファイルID;
+        this.マスキング完了済 = マスキング完了済;
     }
 
     public RString get状態() {
@@ -200,6 +205,10 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
 
     public RString get共有ファイルID() {
         return 共有ファイルID;
+    }
+
+    public RString getマスキング完了済() {
+        return マスキング完了済;
     }
 
     public void set状態(RString 状態) {
@@ -295,6 +304,11 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
     public void set共有ファイルID(RString 共有ファイルID) {
         this.setOriginalData("共有ファイルID", 共有ファイルID);
         this.共有ファイルID = 共有ファイルID;
+    }
+
+    public void setマスキング完了済(RString マスキング完了済) {
+        this.setOriginalData("マスキング完了済", マスキング完了済);
+        this.マスキング完了済 = マスキング完了済;
     }
 
     // </editor-fold>

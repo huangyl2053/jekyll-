@@ -42,4 +42,5 @@ public class ImageJohoMaskingRelateEntity {
     private boolean 特記マスク有無;
     private boolean 意見書マスク有無;
     private boolean 概況マスク有無;
+    private boolean ISマスキング完了済;
 }

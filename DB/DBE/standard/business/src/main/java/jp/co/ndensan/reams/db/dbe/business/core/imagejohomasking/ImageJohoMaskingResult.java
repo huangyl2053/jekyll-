@@ -197,4 +197,13 @@ public class ImageJohoMaskingResult {
     public boolean has概況マスク() {
         return entity.is概況マスク有無();
     }
+
+    /**
+     * マスキング完了済の完了済有無を取得します。
+     *
+     * @return 概況マスク有無
+     */
+    public boolean isマスキング完了済() {
+        return entity.isISマスキング完了済();
+    }
 }
