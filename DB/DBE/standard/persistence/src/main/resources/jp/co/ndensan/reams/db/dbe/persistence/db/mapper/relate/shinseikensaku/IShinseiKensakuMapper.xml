@@ -74,6 +74,22 @@
         LIMIT #{limitCount}
     </select>
 
+    <select resultOrdered="true" id="selectShinseiJoho_noLimit" resultMap="ResultMap_ShinseiKensakuRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
+            fetchSize="500">
+        <bind name="forList" value="false" />
+
+        SELECT
+        <include refid="selectShinseiJoho"/>
+        FROM
+        <include refid="tablesWithParameter"/>
+        ORDER BY
+        DbT5101NinteiShinseiJoho."hihokenshaKana",
+        DbT7051KoseiShichosonMaster."shichosonCode",
+        DbT5101NinteiShinseiJoho."hihokenshaNo",
+        DbT5101NinteiShinseiJoho."ninteiShinseiYMD" DESC
+    </select>
+
     <sql id="selectShinseiJoho">
         <!-- SELECT -->
         DbT5101NinteiShinseiJoho."shinseishoKanriNo",
