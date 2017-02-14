@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.Sh
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -44,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -55,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 
 /**
  * 介護認定審査会委員情報登録のコントローラです。
@@ -557,6 +561,8 @@ public class ShinsakaiIinJohoToroku {
         if (!(row.getShinsakaiIinShuryoYMD().getValue() == null) && !row.getShinsakaiIinShuryoYMD().getValue().toDateString().isEmpty()) {
             審査会委員終了日 = editCsv日付(row.getShinsakaiIinShuryoYMD().getValue());
         }
+        KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+        List<KinyuKikan> 金融機関情報 = kinyuKikanManager.getValidKinyuKikansOn(FlexibleDate.getNowDate());
         ShinsakaiIinTorokuCsvEntity data = new ShinsakaiIinTorokuCsvEntity(
                 row.getShinsainCode(),
                 審査会委員開始日,
@@ -570,7 +576,9 @@ public class ShinsakaiIinJohoToroku {
                 row.getJokyo(),
                 row.getBiko(),
                 row.getKinyuKikanCode(),
+                getKinyuKikanMeisho(金融機関情報, row.getKinyuKikanCode()),
                 row.getKinyuKikanShitenCode(),
+                getShitenMeisho(金融機関情報, row.getKinyuKikanCode(), row.getKinyuKikanShitenCode()),
                 set預金種別(row.getYokinShubetsu()),
                 row.getKozaNo(),
                 row.getKozaMeigininKana(),
@@ -796,6 +804,55 @@ public class ShinsakaiIinJohoToroku {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 金融機関名を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param kinyuKikanCode RString
+     *
+     * @return 支店名　RString
+     */
+    private RString getKinyuKikanMeisho(List<KinyuKikan> 金融機関情報, RString kinyuKikanCode) {
+        RString 金融機関名 = RString.EMPTY;
+        if (金融機関情報 == null) {
+            return 金融機関名;
+        }
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if (new RString(kinyuKikanJoho.get金融機関コード().toString()).equals(kinyuKikanCode)) {
+                金融機関名 = kinyuKikanJoho.get金融機関名称();
+            }
+        }
+        return 金融機関名;
+    }
+
+    /**
+     * 金融機関支店名を取得します。
+     *
+     * @param 金融機関情報 List<List<KinyuKikan>
+     * @param kinyuKikanCode RString
+     * @param kinyuKikanShitenCode RString
+     *
+     * @return 支店名　RString
+     */
+    private RString getShitenMeisho(List<KinyuKikan> 金融機関情報, RString kinyuKikanCode, RString kinyuKikanShitenCode) {
+        List<KinyuKikanShiten> 支店リスト = new ArrayList<>();
+        RString 支店名 = RString.EMPTY;
+        if (金融機関情報 == null) {
+            return 支店名;
+        }
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if (new RString(kinyuKikanJoho.get金融機関コード().toString()).equals(kinyuKikanCode)) {
+                支店リスト = kinyuKikanJoho.get支店リスト();
+            }
+        }
+        for (KinyuKikanShiten shiten : 支店リスト) {
+            if (new RString(shiten.get支店コード().toString()).equals(kinyuKikanShitenCode)) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
+    }
+
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {
         return new ShinsakaiIinJohoTorokuHandler(div);
     }
@@ -803,5 +860,5 @@ public class ShinsakaiIinJohoToroku {
     private ShinsakaiIinJohoTorokuValidationHandler getValidationHandler(ShinsakaiIinJohoTorokuDiv div) {
         return new ShinsakaiIinJohoTorokuValidationHandler(div);
     }
-
+    
 }

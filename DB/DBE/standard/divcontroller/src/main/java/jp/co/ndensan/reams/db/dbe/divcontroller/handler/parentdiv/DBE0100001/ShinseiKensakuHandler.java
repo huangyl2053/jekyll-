@@ -661,6 +661,7 @@ public class ShinseiKensakuHandler {
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
         for (ShinseiKensakuBusiness business : searchResult.records()) {
             dgShinseiJoho_Row row = new dgShinseiJoho_Row();
+            row.setShichosonCode(nullToEmpty(business.get市町村コード()));
             row.setHokensha(nullToEmpty(business.get市町村名称()));
             row.setHihokenshaNo(nullToEmpty(business.get被保険者番号()));
             AtenaMeisho 被保険者氏名 = business.get被保険者氏名();

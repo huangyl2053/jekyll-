@@ -208,7 +208,7 @@ public class ShinseiKensaku {
         RString 被保険者番号 = row.getHihokenshaNo();
         RString 被保険者氏名 = row.getShimei();
         RString 証記載保険者番号 = row.getShoKisaiHokenshaNo();
-        LasdecCode 市町村コード = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get市町村コード();
+        LasdecCode 市町村コード = new LasdecCode(row.getShichosonCode());
         SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance().getShinseiKensakuForList(getHandler(div).createParameter(被保険者番号));
         if (!searchResult.records().isEmpty()) {
             int lastShinseiYmdIndex = findLastIndex(searchResult);

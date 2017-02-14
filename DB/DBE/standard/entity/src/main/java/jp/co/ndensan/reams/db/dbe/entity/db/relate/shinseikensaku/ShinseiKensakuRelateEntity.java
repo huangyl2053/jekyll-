@@ -48,6 +48,7 @@ public class ShinseiKensakuRelateEntity implements Serializable {
     private FlexibleDate zenkaiYukoKikanEnd;
     private Code zenkaiNijiHanteiYokaigoJotaiKubun;
     private int zenkaiNijiHanteiNinteiYukoKikan;
+    private RString shichosonCode;
     private RString shichosonMeisho;
     private RString jigyoshaMeisho;
     private RString chosainShimei;
