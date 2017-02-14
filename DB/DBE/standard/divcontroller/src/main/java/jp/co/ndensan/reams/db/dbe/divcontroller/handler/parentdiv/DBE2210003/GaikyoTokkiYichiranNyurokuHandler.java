@@ -132,7 +132,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 特記事項の最大文字数はコンフィグで制御します。
      */
     public void set特記事項最大文字数() {
-        int 最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+        int 最大文字数 = Integer.parseInt(DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票特記事項最大入力文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setMaxLength(最大文字数);
         div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().setMaxLength(最大文字数);
         div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().setMaxLength(最大文字数);
