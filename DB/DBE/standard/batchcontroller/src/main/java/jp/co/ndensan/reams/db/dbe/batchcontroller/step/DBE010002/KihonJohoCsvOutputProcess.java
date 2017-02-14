@@ -5,10 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010001.KihonJohoEucEntityEditor;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout.ShinseishaDataOutProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.KihonJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010001_KihonJohoEucEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseishadataout.IShinseishaDataOutMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -22,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 申請者基本情報CSV出力プロセスです。
@@ -43,10 +49,12 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
     private FileSpoolManager fileSpoolManager;
     private RString filePath;
     private ShinseishaDataOutProcessParameter processParameter;
+    private IShinseishaDataOutMapper mapper;
 
     @Override
     protected void initialize() {
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        mapper = InstanceProvider.create(MapperProvider.class).create(IShinseishaDataOutMapper.class);
     }
 
     @Override
@@ -68,7 +76,9 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
 
     @Override
     protected void process(KihonJohoEntity entity) {
-        csvWriter.writeLine(KihonJohoEucEntityEditor.edit(entity));
+        ShinseishaDataOutMybatisParameter parameter = new ShinseishaDataOutMybatisParameter(entity.getShinseishoKanriNo());
+        List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List = mapper.select要介護認定主治医意見書意見項目(parameter);
+        csvWriter.writeLine(KihonJohoEucEntityEditor.edit(entity, 意見項目List));
     }
 
     @Override

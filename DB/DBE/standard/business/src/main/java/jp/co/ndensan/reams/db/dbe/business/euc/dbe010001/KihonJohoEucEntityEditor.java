@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.euc.dbe010001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.Renban;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.KihonJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010001_KihonJohoEucEntity;
@@ -40,6 +42,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Rensakus
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -67,9 +70,11 @@ public final class KihonJohoEucEntityEditor {
      * DBE010001_KihonJohoEucEntityを編集して返します。
      *
      * @param entity KihonJohoEntity
+     * @param 意見項目List DbT5304ShujiiIkenshoIkenItemEntityのリスト
      * @return DBE010001_KihonJohoEucEntity
      */
-    public static DBE010001_KihonJohoEucEntity edit(KihonJohoEntity entity) {
+    public static DBE010001_KihonJohoEucEntity edit(KihonJohoEntity entity,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List) {
         DBE010001_KihonJohoEucEntity eucEntity = new DBE010001_KihonJohoEucEntity();
         eucEntity.set申請書管理番号(entity.getShinseishoKanriNo());
         eucEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
@@ -120,7 +125,7 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set届出者続柄(entity.getShinseiTodokedeshaTsuzukigara());
         eucEntity.set事業者区分コード(entity.getJigyoshaKubun());
         eucEntity.set事業者区分(JigyoshaKubun.toValue(entity.getJigyoshaKubun()).get名称());
-        eucEntity.set事業者番号(entity.getJigyoshaNo());
+        eucEntity.set事業者番号(entity.getShinseiTodokedeDaikoJigyoshaNo());
         eucEntity.set現在の段階(get現在の段階(entity));
         eucEntity.set申請登録完了日(format日付(entity.getNinteiShinseiJohoTorokuKanryoYMD()));
         eucEntity.set調査依頼完了日(format日付(entity.getNinteichosaIraiKanryoYMD()));
@@ -157,10 +162,6 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set意見書同意(IsIkenshoDoiUmu.toValue(entity.isIkenshoDoiFlag()).get名称());
         eucEntity.set意見書作成回数区分コード(entity.getIkenshoSakuseiKaisuKubun().value());
         eucEntity.set意見書作成回数区分(IkenshoSakuseiKaisuKubun.toValue(entity.getIkenshoSakuseiKaisuKubun().value()).get名称());
-        eucEntity.set意見_障害高齢者の日常生活自立度コード(entity.getIkenshoNetakirido());
-        eucEntity.set意見_障害高齢者の日常生活自立度(IkenKomoku02.toValue(entity.getIkenshoNetakirido()).get名称());
-        eucEntity.set意見_認知症高齢者の日常生活自立度コード(entity.getIkenshoNinchido());
-        eucEntity.set意見_認知症高齢者の日常生活自立度(IkenKomoku03.toValue(entity.getIkenshoNinchido()).get名称());
         eucEntity.set一次判定日(format日付(entity.getIchijiHanteiYMD()));
         eucEntity.set一次判定結果コード(entity.getIchijiHanteiKekkaCode().value());
         eucEntity.set一次判定結果コード_認知症加算(entity.getIchijiHanteiKekkaNinchishoKasanCode().value());
@@ -207,13 +208,13 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.setセンター送信情報抽出日(format日付(entity.getCenterSoshinChushutsuYMD()));
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.asCode().equals(entity.getKoroshoIfShikibetsuCode())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
-            set判定結果_09(eucEntity, entity);
+            set判定結果_09(eucEntity, entity, 意見項目List);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
-            set判定結果_06(eucEntity, entity);
+            set判定結果_06(eucEntity, entity, 意見項目List);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
-            set判定結果_02(eucEntity, entity);
+            set判定結果_02(eucEntity, entity, 意見項目List);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
-            set判定結果_99(eucEntity, entity);
+            set判定結果_99(eucEntity, entity, 意見項目List);
         }
         return eucEntity;
     }
@@ -243,7 +244,14 @@ public final class KihonJohoEucEntityEditor {
         return new RString("完了");
     }
 
-    private static void set判定結果_09(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity) {
+    private static void set判定結果_09(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List) {
+        RString 意見_障害高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._13.getValue());
+        eucEntity.set意見_障害高齢者の日常生活自立度コード(意見_障害高齢者の日常生活自立度コード);
+        eucEntity.set意見_障害高齢者の日常生活自立度(get意見項目02名称(意見_障害高齢者の日常生活自立度コード));
+        RString 意見_認知症高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._14.getValue());
+        eucEntity.set意見_認知症高齢者の日常生活自立度コード(意見_認知症高齢者の日常生活自立度コード);
+        eucEntity.set意見_認知症高齢者の日常生活自立度(get意見項目03名称(意見_認知症高齢者の日常生活自立度コード));
         eucEntity.set一次判定結果(IchijiHanteiKekkaCode09.toValue(
                 entity.getIchijiHanteiKekkaCode().value()).get名称());
         eucEntity.set一次判定結果_認知症加算(IchijiHanteiKekkaCode09.toValue(
@@ -266,7 +274,14 @@ public final class KihonJohoEucEntityEditor {
                 entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode().value()).get名称());
     }
 
-    private static void set判定結果_06(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity) {
+    private static void set判定結果_06(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List) {
+        RString 意見_障害高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._13.getValue());
+        eucEntity.set意見_障害高齢者の日常生活自立度コード(意見_障害高齢者の日常生活自立度コード);
+        eucEntity.set意見_障害高齢者の日常生活自立度(get意見項目02名称(意見_障害高齢者の日常生活自立度コード));
+        RString 意見_認知症高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._14.getValue());
+        eucEntity.set意見_認知症高齢者の日常生活自立度コード(意見_認知症高齢者の日常生活自立度コード);
+        eucEntity.set意見_認知症高齢者の日常生活自立度(get意見項目03名称(意見_認知症高齢者の日常生活自立度コード));
         eucEntity.set一次判定結果(IchijiHanteiKekkaCode06.toValue(
                 entity.getIchijiHanteiKekkaCode().value()).get名称());
         eucEntity.set一次判定結果_認知症加算(IchijiHanteiKekkaCode06.toValue(
@@ -289,7 +304,14 @@ public final class KihonJohoEucEntityEditor {
                 entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode().value()).get名称());
     }
 
-    private static void set判定結果_02(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity) {
+    private static void set判定結果_02(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List) {
+        RString 意見_障害高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._14.getValue());
+        eucEntity.set意見_障害高齢者の日常生活自立度コード(意見_障害高齢者の日常生活自立度コード);
+        eucEntity.set意見_障害高齢者の日常生活自立度(get意見項目02名称(意見_障害高齢者の日常生活自立度コード));
+        RString 意見_認知症高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._15.getValue());
+        eucEntity.set意見_認知症高齢者の日常生活自立度コード(意見_認知症高齢者の日常生活自立度コード);
+        eucEntity.set意見_認知症高齢者の日常生活自立度(get意見項目03名称(意見_認知症高齢者の日常生活自立度コード));
         eucEntity.set一次判定結果(IchijiHanteiKekkaCode02.toValue(
                 entity.getIchijiHanteiKekkaCode().value()).get名称());
         eucEntity.set一次判定結果_認知症加算(IchijiHanteiKekkaCode02.toValue(
@@ -312,7 +334,14 @@ public final class KihonJohoEucEntityEditor {
                 entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode().value()).get名称());
     }
 
-    private static void set判定結果_99(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity) {
+    private static void set判定結果_99(DBE010001_KihonJohoEucEntity eucEntity, KihonJohoEntity entity,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List) {
+        RString 意見_障害高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._14.getValue());
+        eucEntity.set意見_障害高齢者の日常生活自立度コード(意見_障害高齢者の日常生活自立度コード);
+        eucEntity.set意見_障害高齢者の日常生活自立度(get意見項目02名称(意見_障害高齢者の日常生活自立度コード));
+        RString 意見_認知症高齢者の日常生活自立度コード = get意見項目(意見項目List, Renban._15.getValue());
+        eucEntity.set意見_認知症高齢者の日常生活自立度コード(意見_認知症高齢者の日常生活自立度コード);
+        eucEntity.set意見_認知症高齢者の日常生活自立度(get意見項目03名称(意見_認知症高齢者の日常生活自立度コード));
         eucEntity.set一次判定結果(IchijiHanteiKekkaCode99.toValue(
                 entity.getIchijiHanteiKekkaCode().value()).get名称());
         eucEntity.set一次判定結果_認知症加算(IchijiHanteiKekkaCode99.toValue(
@@ -333,6 +362,23 @@ public final class KihonJohoEucEntityEditor {
                 entity.getZenkaiIchiGojiHanteiKekkaNinchishoKasanCode().value()).get名称());
         eucEntity.set前回_二次判定結果(YokaigoJotaiKubun99.toValue(
                 entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode().value()).get名称());
+    }
+
+    private static RString get意見項目(List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List, int 連番) {
+        for (DbT5304ShujiiIkenshoIkenItemEntity 意見項目 : 意見項目List) {
+            if (意見項目.getRemban() == 連番) {
+                return 意見項目.getIkenItem();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private static RString get意見項目02名称(RString code) {
+        return (!code.isEmpty()) ? IkenKomoku02.toValue(code).get名称() : RString.EMPTY;
+    }
+
+    private static RString get意見項目03名称(RString code) {
+        return (!code.isEmpty()) ? IkenKomoku03.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString format日付(FlexibleDate value) {
