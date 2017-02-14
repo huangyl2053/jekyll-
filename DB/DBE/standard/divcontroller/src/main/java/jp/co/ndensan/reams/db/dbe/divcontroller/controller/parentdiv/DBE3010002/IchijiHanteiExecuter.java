@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 
 /**
  * 一次判定を1対象者ずつ実行する画面の処理を定義します。
@@ -32,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
  * @author n8178
  */
 public class IchijiHanteiExecuter {
-    
+
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
 
@@ -110,11 +109,17 @@ public class IchijiHanteiExecuter {
                     return ResponseData.of(div).addMessage(UrErrorMessages.保存データなし.getMessage()).respond();
                 }
             }
+            if (KEY0.equals(div.getRadShoriSelect().getSelectedKey())) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
+            } else if (KEY1.equals(div.getRadShoriSelect().getSelectedKey())) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
 
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
+        if ((new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) || new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             IchijiHanteiKekkaJoho torokuTaisho = div.getCcdHanteiKekka().get一次判定結果();
