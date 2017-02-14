@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -66,6 +67,8 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final RString 未割付 = new RString("未割付");
     private static final RString 割付解除 = new RString("割付解除");
     private static final RString 意見書作成依頼日より加算する = new RString("1");
+    private static final RString 主治医選択タイトル = new RString("主治医選択");
+    private static final RString 意見書対象者選択に進むボタン名 = new RString("btnNextTaishoshaSentaku");
 
     /**
      * 主治医意見書作成依頼の初期化です。
@@ -117,6 +120,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnNextToTaishoshaSentaku(ShujiiIkenshoSakuseiIraiDiv div) {
         set意見書作成対象者情報(div);
+        setPnlShujiiSentaku(div, true);
         return ResponseData.of(div).setState(DBE2300001StateName.対象者選択);
     }
 
@@ -252,6 +256,7 @@ public class ShujiiIkenshoSakuseiIrai {
             }
         }
         createHandler(div).load();
+        setPnlShujiiSentaku(div, false);
         return ResponseData.of(div).setState(DBE2300001StateName.初期表示);
     }
 
@@ -268,6 +273,19 @@ public class ShujiiIkenshoSakuseiIrai {
         ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         return ResponseData.of(div).setState(DBE2300001StateName.初期表示);
+    }
+    
+    /**
+     * 主治医入力ダイアログがOkCloseで操作時
+     * 
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onOKClose_btnShujiiGuide(ShujiiIkenshoSakuseiIraiDiv div) {
+        if (!RString.isNullOrEmpty(div.getSearch().getCcdShujiiIryoKikanAndShujiiInput().getTxtShujiiCode().getValue())) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書対象者選択に進むボタン名, false);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -423,5 +441,15 @@ public class ShujiiIkenshoSakuseiIrai {
 
     private ShujiiIkenshoSakuseiIraiValidationHandler createValidationHandler(ShujiiIkenshoSakuseiIraiDiv div) {
         return new ShujiiIkenshoSakuseiIraiValidationHandler(div);
+    }
+
+    private void setPnlShujiiSentaku(ShujiiIkenshoSakuseiIraiDiv div, boolean readOnly) {
+        if (readOnly) {
+            div.getSearch().setTitle(RString.EMPTY);
+            div.getSearch().setReadOnly(true);
+        } else {
+            div.getSearch().setTitle(主治医選択タイトル);
+            div.getSearch().setReadOnly(false);
+        }
     }
 }
