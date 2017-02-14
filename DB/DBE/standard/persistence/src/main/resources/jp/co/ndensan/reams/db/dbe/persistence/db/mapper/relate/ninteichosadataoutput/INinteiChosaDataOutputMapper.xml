@@ -65,11 +65,11 @@
         ON DbT5913."shichosonCode" = DbT7051."shichosonCode"
         AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
         <where>
-            <if test= "!isShichoson">
+            <if test="!isShichoson">
                 AND DbT7051."shichosonCode" = #{shichosonCode}
             </if>
             <if test="isNinteichosaItakusakiCode">
-                AND  DbT5913."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
+                AND DbT5913."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
             </if>
         </where>
         ORDER BY "調査員コード"
