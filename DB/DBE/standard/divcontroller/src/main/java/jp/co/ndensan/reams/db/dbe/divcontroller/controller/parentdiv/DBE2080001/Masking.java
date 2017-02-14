@@ -100,11 +100,6 @@ public class Masking {
         div.getTxtSaidaiHyojiKensu().setValue(
                 new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         getHandler(div).initialize();
-//        List<dgYokaigoNinteiTaskList_Row> dgNinteiTaskList_RowList = div.getDgYokaigoNinteiTaskList().getDataSource();
-//        for (dgYokaigoNinteiTaskList_Row row : dgYokaigoNinteiTaskList_Row) {
-//            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-//                    new RString("申請書管理番号"), row.getShinseishoKanriNo())));
-//        }
         return ResponseData.of(div).respond();
     }
 
@@ -189,8 +184,6 @@ public class Masking {
                 if (row.getSelected()) {
                     csvWriter.writeLine(getCsvData(row));
                 }
-//                AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-//                        new RString("申請書管理番号"), row.getShinseishoKanriNo())));
             }
             csvWriter.close();
         }
@@ -208,25 +201,18 @@ public class Masking {
      * @return レスポンスデータ
      */
     public ResponseData<MaskingDiv> onClick_BtnMasking(MaskingDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
-                getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-            if (is選択なし(div.getDgYokaigoNinteiTaskList().getDataSource())) {
-                getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
-                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-            }
-//            QuestionMessage message = new QuestionMessage(DbzQuestionMessages.画面遷移確認.getMessage().getCode(),
-//                    DbzQuestionMessages.画面遷移確認.getMessage().evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getDgYokaigoNinteiTaskList().getDataSource().isEmpty()) {
+            getValidationHandler().マスキング完了対象者一覧データの存在チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
-            return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
+        if (is選択なし(div.getDgYokaigoNinteiTaskList().getDataSource())) {
+            getValidationHandler().マスキング完了対象者一覧データの行選択チェック(validationMessages);
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        return ResponseData.of(div).respond();
+        申請書管理番号リスト(div.getDgYokaigoNinteiTaskList().getDataSource());
+        return ResponseData.of(div).forwardWithEventName(DBE2080001TransitionEventName.マスキング).respond();
+
     }
 
     /**

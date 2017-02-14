@@ -362,257 +362,257 @@
     <select resultOrdered="true" id="get前調査依頼" resultMap="resultMap_CyoSaiRaiRelate"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            <include refid = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
+        <include refid = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            INNER JOIN
-                rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-            ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT JOIN
-                rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
-            ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
-            LEFT JOIN
-                rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
-            ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp2."shinseishoKanriNo"
-            LEFT JOIN
-                rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
-            ON  DbT5121_temp2."zenkaiShinseishoKanriNo" = DbT5101_temp1_1."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho"
-            ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
-                    WHERE
-                        NOT EXISTS(
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT5201NinteichosaIraiJoho"
-                            WHERE
-                                "shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo"
-                            AND "ninteichosaIraiRirekiNo" <![CDATA[ > ]]> DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
-                        )
-                ) DbT5201
-            ON  DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            AND DbT5201."logicalDeletedFlag" = FALSE
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT7060KaigoJigyosha" AS DbT7060KaigoJigyosha
-                    WHERE
-                        NOT EXISTS(
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT7060KaigoJigyosha"
-                            WHERE
-                                "jigyoshaNo" = DbT7060KaigoJigyosha."jigyoshaNo"
-                            AND "yukoKaishiYMD" <![CDATA[ > ]]> DbT7060KaigoJigyosha."yukoKaishiYMD"
-                        )
-                ) DbT7060
-            ON  DbT7060."jigyoshaNo" = DbT5101."nyushoShisetsuCode"
-            LEFT JOIN
-                rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
-            ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-            AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5913ChosainJoho" DbT5913
-            ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-            AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-            AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910_temp1
-            ON  DbT5101_temp1."ninteiChosaItakusakiCode" = DbT5910_temp1."ninteichosaItakusakiCode"
-            AND DbT5910_temp1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5913ChosainJoho" DbT5913_temp1
-            ON  DbT5913_temp1."ninteiChosaItakusakiCode" = DbT5101_temp1."ninteiChosaItakusakiCode"
-            AND DbT5913_temp1."ninteiChosainCode" = DbT5101_temp1."ninteiChosainCode"
-            AND DbT5913_temp1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910_temp1_1
-            ON  DbT5101_temp1_1."ninteiChosaItakusakiCode" = DbT5910_temp1_1."ninteichosaItakusakiCode"
-            AND DbT5910_temp1_1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5913ChosainJoho" DbT5913_temp_1_1
-            ON  DbT5913_temp_1_1."ninteiChosaItakusakiCode" = DbT5101_temp1_1."ninteiChosaItakusakiCode"
-            AND DbT5913_temp_1_1."ninteiChosainCode" = DbT5101_temp1_1."ninteiChosainCode"
-            AND DbT5913_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
+        ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
+        ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp2."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
+        ON  DbT5121_temp2."zenkaiShinseishoKanriNo" = DbT5101_temp1_1."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho"
+        ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
         WHERE
-            "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo"
+        AND "ninteichosaIraiRirekiNo" <![CDATA[ > ]]> DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+        )
+        ) DbT5201
+        ON  DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5201."logicalDeletedFlag" = FALSE
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT7060KaigoJigyosha" AS DbT7060KaigoJigyosha
+        WHERE
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT7060KaigoJigyosha"
+        WHERE
+        "jigyoshaNo" = DbT7060KaigoJigyosha."jigyoshaNo"
+        AND "yukoKaishiYMD" <![CDATA[ > ]]> DbT7060KaigoJigyosha."yukoKaishiYMD"
+        )
+        ) DbT7060
+        ON  DbT7060."jigyoshaNo" = DbT5101."nyushoShisetsuCode"
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+        ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+        AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" DbT5913
+        ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910_temp1
+        ON  DbT5101_temp1."ninteiChosaItakusakiCode" = DbT5910_temp1."ninteichosaItakusakiCode"
+        AND DbT5910_temp1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" DbT5913_temp1
+        ON  DbT5913_temp1."ninteiChosaItakusakiCode" = DbT5101_temp1."ninteiChosaItakusakiCode"
+        AND DbT5913_temp1."ninteiChosainCode" = DbT5101_temp1."ninteiChosainCode"
+        AND DbT5913_temp1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910_temp1_1
+        ON  DbT5101_temp1_1."ninteiChosaItakusakiCode" = DbT5910_temp1_1."ninteichosaItakusakiCode"
+        AND DbT5910_temp1_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" DbT5913_temp_1_1
+        ON  DbT5913_temp_1_1."ninteiChosaItakusakiCode" = DbT5101_temp1_1."ninteiChosaItakusakiCode"
+        AND DbT5913_temp_1_1."ninteiChosainCode" = DbT5101_temp1_1."ninteiChosainCode"
+        AND DbT5913_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
         AND "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" in(#{通常}, #{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY
-            DbT5101."hihokenshaKana",
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."hihokenshaKana",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="get調査依頼" resultMap="resultMap_CyoSaiRaiRelateWithCountEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            COUNT(*) OVER () AS "totalCount",
-            DbT5101."shinseishoKanriNo",
-            DbT5101."hihokenshaNo",
-            DbT5101."hihokenshaName",
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."ninteiShinseiShinseijiKubunCode",
-            DbT5101."saiChosaIraiKaisu",
-            DbT5101."yubinNo",
-            DbT5101."jusho",
-            DbT5101."nyushoShisetsuCode",
-            DbT5101."shoriJotaiKubun",
-            DbT5101."shichosonCode",
-            DbT7051."shichosonMeisho",
-            DbT7051."shoKisaiHokenshaNo",
-            DbT7060."jigyoshaName",
-            DbT5105."ninteichosaIraiKanryoYMD",
-            DbT5201."iraishoShutsuryokuYMD",
-            DbT5201."chosahyoTouShutsuryokuYMD",
-            DbT5201."ninteichosaIraiYMD",
-            DbT5201."ninteichosaKigenYMD",
-            DbT5201."ninteichosaIraiKubunCode",
-            DbT5201."ninteichosaTokusokuYMD",
-            DbT5201."ninteichosaTokusokuHoho",
-            DbT5201."ninteichosaTokusokuKaisu",
-            DbT5201."ninteichosaIraiKaisu",
-            CASE WHEN DbT5201."ninteichosaItakusakiCode" IS null AND DbT5101."ninteiChosaItakusakiCode" IS NOT null
-                THEN DbT5101."ninteiChosaItakusakiCode"
-                ELSE DbT5201."ninteichosaItakusakiCode"
-            END AS "ninteichosaItakusakiCode",
-            CASE WHEN DbT5201."ninteichosaItakusakiCode" IS null AND DbT5101."ninteiChosaItakusakiCode" IS NOT null
-                THEN DbT5910_2."jigyoshaMeisho"
-                ELSE DbT5910."jigyoshaMeisho"
-            END AS "jigyoshaMeisho",
-            CASE WHEN DbT5201."ninteiChosainCode" IS null AND DbT5101."ninteiChosainCode" IS NOT null
-                THEN DbT5101."ninteiChosainCode"
-                ELSE DbT5201."ninteiChosainCode"
-            END AS "ninteiChosainCode",
-            CASE WHEN DbT5201."ninteiChosainCode" IS null AND DbT5101."ninteiChosainCode" IS NOT null
-                THEN DbT5913_2."chosainShimei"
-                ELSE DbT5913."chosainShimei"
-            END AS "chosainShimei",
-            CASE WHEN DbT5201."ninteiChosainCode" IS null AND DbT5101."ninteiChosainCode" IS NOT null
-                THEN DbT5913_2."chikuCode"
-                ELSE DbT5913."chikuCode"
-            END AS "chikuCode",
-            DbT5910_temp1."jigyoshaMeisho"  AS   before_jigyoshaMeisho,
-            DbT5913_temp1."chosainShimei"  AS  before_chosainShimei,
-            DbT5910_temp1_1."jigyoshaMeisho"  AS   before_before_jigyoshaMeisho,
-            DbT5913_temp_1_1."chosainShimei"  AS  before_before_chosainShimei,
-            DbT5201."ninteichosaIraiRirekiNo",
-            DbT5101."koroshoIfShikibetsuCode",
-            DbT5201."mobileDataShutsuryokuZumiFlag"
+        COUNT(*) OVER () AS "totalCount",
+        DbT5101."shinseishoKanriNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."hihokenshaName",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."saiChosaIraiKaisu",
+        DbT5101."yubinNo",
+        DbT5101."jusho",
+        DbT5101."nyushoShisetsuCode",
+        DbT5101."shoriJotaiKubun",
+        DbT5101."shichosonCode",
+        DbT7051."shichosonMeisho",
+        DbT7051."shoKisaiHokenshaNo",
+        DbT7060."jigyoshaName",
+        DbT5105."ninteichosaIraiKanryoYMD",
+        DbT5201."iraishoShutsuryokuYMD",
+        DbT5201."chosahyoTouShutsuryokuYMD",
+        DbT5201."ninteichosaIraiYMD",
+        DbT5201."ninteichosaKigenYMD",
+        DbT5201."ninteichosaIraiKubunCode",
+        DbT5201."ninteichosaTokusokuYMD",
+        DbT5201."ninteichosaTokusokuHoho",
+        DbT5201."ninteichosaTokusokuKaisu",
+        DbT5201."ninteichosaIraiKaisu",
+        CASE WHEN DbT5201."ninteichosaItakusakiCode" IS null AND DbT5101."ninteiChosaItakusakiCode" IS NOT null
+        THEN DbT5101."ninteiChosaItakusakiCode"
+        ELSE DbT5201."ninteichosaItakusakiCode"
+        END AS "ninteichosaItakusakiCode",
+        CASE WHEN DbT5201."ninteichosaItakusakiCode" IS null AND DbT5101."ninteiChosaItakusakiCode" IS NOT null
+        THEN DbT5910_2."jigyoshaMeisho"
+        ELSE DbT5910."jigyoshaMeisho"
+        END AS "jigyoshaMeisho",
+        CASE WHEN DbT5201."ninteiChosainCode" IS null AND DbT5101."ninteiChosainCode" IS NOT null
+        THEN DbT5101."ninteiChosainCode"
+        ELSE DbT5201."ninteiChosainCode"
+        END AS "ninteiChosainCode",
+        CASE WHEN DbT5201."ninteiChosainCode" IS null AND DbT5101."ninteiChosainCode" IS NOT null
+        THEN DbT5913_2."chosainShimei"
+        ELSE DbT5913."chosainShimei"
+        END AS "chosainShimei",
+        CASE WHEN DbT5201."ninteiChosainCode" IS null AND DbT5101."ninteiChosainCode" IS NOT null
+        THEN DbT5913_2."chikuCode"
+        ELSE DbT5913."chikuCode"
+        END AS "chikuCode",
+        DbT5910_temp1."jigyoshaMeisho"  AS   before_jigyoshaMeisho,
+        DbT5913_temp1."chosainShimei"  AS  before_chosainShimei,
+        DbT5910_temp1_1."jigyoshaMeisho"  AS   before_before_jigyoshaMeisho,
+        DbT5913_temp_1_1."chosainShimei"  AS  before_before_chosainShimei,
+        DbT5201."ninteichosaIraiRirekiNo",
+        DbT5101."koroshoIfShikibetsuCode",
+        DbT5201."mobileDataShutsuryokuZumiFlag"
         FROM
-            (SELECT
-                DbT5105_temp.*
-             FROM
-                rgdb."DbT5105NinteiKanryoJoho" DbT5105_temp
-             WHERE
-                DbT5105_temp."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-                AND DbT5105_temp."ninteiShinsakaiWariateKanryoYMD" IS NULL
-                AND DbT5105_temp."ninteiShinsakaiKanryoYMD" IS NULL
-                AND DbT5105_temp."centerSoshinYMD" IS NULL
-                AND DbT5105_temp."ninteichosaIraiKanryoYMD" IS NULL
-            ) AS DbT5105
-            INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
-                ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
-            LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-                ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
-                ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
-            LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
-                ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp2."shinseishoKanriNo"
-            LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
-                ON  DbT5121_temp2."zenkaiShinseishoKanriNo" = DbT5101_temp1_1."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
-                ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            LEFT JOIN
-                (SELECT *
-                 FROM rgdb."DbT5201NinteichosaIraiJoho" as "mst"
-                 WHERE NOT EXISTS(
-                            SELECT 'A'
-                            FROM rgdb."DbT5201NinteichosaIraiJoho" as "slv"
-                            WHERE "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-                                  AND "mst"."ninteichosaIraiRirekiNo" <![CDATA[<]]> "slv"."ninteichosaIraiRirekiNo"
-                            )
-                       AND "mst"."logicalDeletedFlag" = FALSE
-                ) AS DbT5201
-                ON  DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT JOIN
-                (SELECT
-                    DbT7060KaigoJigyosha.*
-                 FROM
-                    rgdb."DbT7060KaigoJigyosha" as DbT7060KaigoJigyosha
-                    INNER JOIN
-                        (SELECT
-                            "jigyoshaNo",
-                            MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-                         FROM rgdb."DbT7060KaigoJigyosha"
-                         group by "jigyoshaNo") AS DbT7060_Temp
-                        ON DbT7060KaigoJigyosha."jigyoshaNo" = DbT7060_Temp."jigyoshaNo"
-                           AND DbT7060KaigoJigyosha."yukoKaishiYMD" = DbT7060_Temp."yukoKaishiYMD") AS DbT7060
-                ON  DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
-            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
-                ON DbT5201."ninteichosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-                   AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910_2
-                ON DbT5101."ninteiChosaItakusakiCode" = DbT5910_2."ninteichosaItakusakiCode"
-                   AND DbT5910_2."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913
-                ON DbT5913."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
-                   AND DbT5913."ninteiChosainCode" = DbT5201."ninteiChosainCode"
-                   AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913_2
-                ON DbT5913_2."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-                   AND DbT5913_2."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-                   AND DbT5913_2."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho"  DbT5910_temp1
-                ON DbT5101_temp1."ninteiChosaItakusakiCode" = DbT5910_temp1."ninteichosaItakusakiCode"
-                   AND DbT5910_temp1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5913ChosainJoho"  DbT5913_temp1
-                ON DbT5913_temp1."ninteiChosaItakusakiCode" = DbT5101_temp1."ninteiChosaItakusakiCode"
-                   AND DbT5913_temp1."ninteiChosainCode" = DbT5101_temp1."ninteiChosainCode"
-                   AND DbT5913_temp1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho"  DbT5910_temp1_1
-                ON DbT5101_temp1_1."ninteiChosaItakusakiCode" = DbT5910_temp1_1."ninteichosaItakusakiCode"
-                   AND DbT5910_temp1_1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5913ChosainJoho"  DbT5913_temp_1_1
-                ON DbT5913_temp_1_1."ninteiChosaItakusakiCode" = DbT5101_temp1_1."ninteiChosaItakusakiCode"
-                   AND DbT5913_temp_1_1."ninteiChosainCode" = DbT5101_temp1_1."ninteiChosainCode"
-                   AND DbT5913_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        (SELECT
+        DbT5105_temp.*
+        FROM
+        rgdb."DbT5105NinteiKanryoJoho" DbT5105_temp
         WHERE
-            DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
-            AND DbT5101."logicalDeletedFlag" = FALSE
-            <if test="状態区分 == 1">
+        DbT5105_temp."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105_temp."ninteiShinsakaiWariateKanryoYMD" IS NULL
+        AND DbT5105_temp."ninteiShinsakaiKanryoYMD" IS NULL
+        AND DbT5105_temp."centerSoshinYMD" IS NULL
+        AND DbT5105_temp."ninteichosaIraiKanryoYMD" IS NULL
+        ) AS DbT5105
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1
+        ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp1."shinseishoKanriNo"
+        LEFT  JOIN  rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp2
+        ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp2."shinseishoKanriNo"
+        LEFT  JOIN  rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp1_1
+        ON  DbT5121_temp2."zenkaiShinseishoKanriNo" = DbT5101_temp1_1."shinseishoKanriNo"
+        INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT5201NinteichosaIraiJoho" as "mst"
+        WHERE NOT EXISTS(
+        SELECT 'A'
+        FROM rgdb."DbT5201NinteichosaIraiJoho" as "slv"
+        WHERE "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+        AND "mst"."ninteichosaIraiRirekiNo" <![CDATA[<]]> "slv"."ninteichosaIraiRirekiNo"
+        )
+        AND "mst"."logicalDeletedFlag" = FALSE
+        ) AS DbT5201
+        ON  DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN
+        (SELECT
+        DbT7060KaigoJigyosha.*
+        FROM
+        rgdb."DbT7060KaigoJigyosha" as DbT7060KaigoJigyosha
+        INNER JOIN
+        (SELECT
+        "jigyoshaNo",
+        MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM rgdb."DbT7060KaigoJigyosha"
+        group by "jigyoshaNo") AS DbT7060_Temp
+        ON DbT7060KaigoJigyosha."jigyoshaNo" = DbT7060_Temp."jigyoshaNo"
+        AND DbT7060KaigoJigyosha."yukoKaishiYMD" = DbT7060_Temp."yukoKaishiYMD") AS DbT7060
+        ON  DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+        ON DbT5201."ninteichosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+        AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910_2
+        ON DbT5101."ninteiChosaItakusakiCode" = DbT5910_2."ninteichosaItakusakiCode"
+        AND DbT5910_2."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913
+        ON DbT5913."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5201."ninteiChosainCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913_2
+        ON DbT5913_2."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+        AND DbT5913_2."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+        AND DbT5913_2."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho"  DbT5910_temp1
+        ON DbT5101_temp1."ninteiChosaItakusakiCode" = DbT5910_temp1."ninteichosaItakusakiCode"
+        AND DbT5910_temp1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho"  DbT5913_temp1
+        ON DbT5913_temp1."ninteiChosaItakusakiCode" = DbT5101_temp1."ninteiChosaItakusakiCode"
+        AND DbT5913_temp1."ninteiChosainCode" = DbT5101_temp1."ninteiChosainCode"
+        AND DbT5913_temp1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho"  DbT5910_temp1_1
+        ON DbT5101_temp1_1."ninteiChosaItakusakiCode" = DbT5910_temp1_1."ninteichosaItakusakiCode"
+        AND DbT5910_temp1_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho"  DbT5913_temp_1_1
+        ON DbT5913_temp_1_1."ninteiChosaItakusakiCode" = DbT5101_temp1_1."ninteiChosaItakusakiCode"
+        AND DbT5913_temp_1_1."ninteiChosainCode" = DbT5101_temp1_1."ninteiChosainCode"
+        AND DbT5913_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+        AND DbT5101."logicalDeletedFlag" = FALSE
+        <if test="状態区分 == 1">
             AND((DbT5910."jigyoshaMeisho" IS NULL OR DbT5910."jigyoshaMeisho" = '')
             OR (DbT5201."ninteichosaKigenYMD" IS NULL OR DbT5201."ninteichosaKigenYMD" = '')
             OR (DbT5201."chosahyoTouShutsuryokuYMD" IS NULL OR DbT5201."chosahyoTouShutsuryokuYMD" = '')
             OR (DbT5201."iraishoShutsuryokuYMD" IS NULL OR DbT5201."iraishoShutsuryokuYMD" = ''))
-            </if>
-            <if test="状態区分 == 2">
+        </if>
+        <if test="状態区分 == 2">
             AND((DbT5910."jigyoshaMeisho" IS NOT NULL AND DbT5910."jigyoshaMeisho" != '')
             AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
             AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != '')
             AND (DbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5201."iraishoShutsuryokuYMD" != ''))
-            </if>
-            <if test="市町村コード.toString() != ''.toString()">
+        </if>
+        <if test="市町村コード.toString() != ''.toString()">
             AND DbT5101."shichosonCode" = #{市町村コード}
-            </if>
+        </if>
         ORDER BY
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."hihokenshaKana",
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana",
+        DbT5101."shoKisaiHokenshaNo"
         LIMIT
-            #{件数}
+        #{件数}
     </select>
     <resultMap id="resultMap_IKnSyoiRaiRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
         <association property="要介護認定完了情報EntityLsit" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
@@ -649,17 +649,17 @@
         ON  DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
         LEFT JOIN
         (
-	select *
-	from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "mst"
-	where not exists
+        select *
+        from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "mst"
+        where not exists
         (
         select *
         from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
         where
-	"mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-	and "mst"."ikenshoIraiRirekiNo" > "slv"."ikenshoIraiRirekiNo"
-	)
-	and "mst"."logicalDeletedFlag" = false
+        "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+        and "mst"."ikenshoIraiRirekiNo" > "slv"."ikenshoIraiRirekiNo"
+        )
+        and "mst"."logicalDeletedFlag" = false
         ) AS DbT5301
         ON
         DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
@@ -699,40 +699,40 @@
         DbT5101."shoKisaiHokenshaNo"
     </select>
     <select id="get意見書依頼件数" resultType="int"
-                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            count(1)
+        count(1)
         FROM
-            (SELECT
-                DbT5105_temp.*
-             FROM rgdb."DbT5105NinteiKanryoJoho" DbT5105_temp
-             WHERE DbT5105_temp."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-                   AND DbT5105_temp."ninteiShinsakaiWariateKanryoYMD" IS NULL
-                   AND DbT5105_temp."ninteiShinsakaiKanryoYMD" IS NULL
-                   AND DbT5105_temp."centerSoshinYMD" IS NULL
-                   AND DbT5105_temp."ikenshoSakuseiIraiKanryoYMD" IS NULL
-            ) AS DbT5105
-            INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
-                ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
-            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-                ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            LEFT JOIN
-                (select *
-                 from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "mst"
-                 where not exists(
-                            select *
-                            from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
-                            where
-                                "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-                                 and "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
-                            )
-                       and "mst"."logicalDeletedFlag" = false
-                ) AS DbT5301
-                ON DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        (SELECT
+        DbT5105_temp.*
+        FROM rgdb."DbT5105NinteiKanryoJoho" DbT5105_temp
+        WHERE DbT5105_temp."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105_temp."ninteiShinsakaiWariateKanryoYMD" IS NULL
+        AND DbT5105_temp."ninteiShinsakaiKanryoYMD" IS NULL
+        AND DbT5105_temp."centerSoshinYMD" IS NULL
+        AND DbT5105_temp."ikenshoSakuseiIraiKanryoYMD" IS NULL
+        ) AS DbT5105
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+        (select *
+        from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "mst"
+        where not exists(
+        select *
+        from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
+        where
+        "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+        and "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
+        )
+        and "mst"."logicalDeletedFlag" = false
+        ) AS DbT5301
+        ON DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
         WHERE
-            DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
-            AND DbT5101."logicalDeletedFlag" = FALSE
-            <if test="状態区分 == 1" >
+        DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+        AND DbT5101."logicalDeletedFlag" = FALSE
+        <if test="状態区分 == 1" >
             AND (
             DbT5301."ikenshoSakuseiIraiYMD" is NULL
             OR DbT5301."ikenshoSakuseiIraiYMD" = ''
@@ -741,152 +741,152 @@
             OR DbT5301."ikenshoShutsuryokuYMD" is NULL
             OR DbT5301."ikenshoShutsuryokuYMD" = ''
             )
-            </if>
-            <if test="状態区分 == 2" >
+        </if>
+        <if test="状態区分 == 2" >
             AND DbT5301."ikenshoSakuseiIraiYMD" is NOT NULL
             AND DbT5301."ikenshoSakuseiIraiYMD"  <![CDATA[<>]]> ''
             AND DbT5301."iraishoShutsuryokuYMD" is NOT NULL
             AND DbT5301."iraishoShutsuryokuYMD"  <![CDATA[<>]]> ''
             AND DbT5301."ikenshoShutsuryokuYMD" is NOT NULL
             AND DbT5301."ikenshoShutsuryokuYMD"  <![CDATA[<>]]> ''
-            </if>
-            <if test="市町村コード.toString() != ''.toString()">
+        </if>
+        <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
-            </if>
+        </if>
     </select>
     <select resultOrdered="true" id="get意見書依頼" resultMap="resultMap_IKnSyoiRaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            DbT5101."shinseishoKanriNo",
-            DbT5101."hihokenshaNo",
-            DbT5101."hihokenshaName",
-            DbT5101."yubinNo",
-            DbT5101."jusho",
-            DbT5101."nyushoShisetsuCode",
-            DbT5101."shoriJotaiKubun",
-            DbT5101."ninteiShinseiShinseijiKubunCode",
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."saiSakuseiIraiKaisu",
-            DbT5105."ikenshoSakuseiIraiKanryoYMD",
-            DbT7060."jigyoshaName",
-            DbT5101."shichosonCode",
-            DbT7051."shichosonMeisho",
-            DbT5301."ikenshoIraiRirekiNo",
-            DbT5301."ikenshoIraiKubun",
-            DbT5301."ikenshoSakuseiTokusokuYMD",
-            DbT5301."ikenshoSakuseiTokusokuHoho",
-            DbT5301."ikenshoTokusokuKaisu",
-            DbT5301."ikenshoSakuseiKigenYMD",
-            DbT5301."ikenshoSakuseiIraiYMD",
-            DbT5301."iraishoShutsuryokuYMD",
-            DbT5301."ikenshoShutsuryokuYMD",
-            DbT5301."ishiKubunCode",
-            DbT5301."sakuseiryoSeikyuKubun",
-            DbT4302."ikenshoSakuseiKaisuKubun",
-            CASE WHEN DbT5301."shujiiIryokikanCode" IS null AND DbT5101."shujiiIryokikanCode" IS NOT null
-                THEN DbT5101."shujiiIryokikanCode"
-                ELSE DbT5301."shujiiIryokikanCode"
-            END AS "shujiiIryokikanCode",
-            CASE WHEN DbT5301."shujiiIryokikanCode" IS null AND DbT5101."shujiiIryokikanCode" IS NOT null
-                THEN DbT5911_2."iryoKikanMeisho"
-                ELSE DbT5911."iryoKikanMeisho"
-            END AS "iryoKikanMeisho",
-            CASE WHEN DbT5301."shujiiCode" IS null AND DbT5101."shujiiCode" IS NOT null
-                THEN DbT5101."shujiiCode"
-                ELSE DbT5301."shujiiCode"
-            END AS "shujiiCode",
-            CASE WHEN DbT5301."shujiiCode" IS null AND DbT5101."shujiiCode" IS NOT null
-                THEN DbT5912_2."shujiiName"
-                ELSE DbT5912."shujiiName"
-            END AS "shujiiName",
-            DbT5911_temp_1."iryoKikanMeisho"  AS  before_iryoKikanMeisho,
-            DbT5912_temp_1."shujiiName"  AS  before_shujiiName,
-            DbT5911_temp_1_1."iryoKikanMeisho"  AS  before_before_iryoKikanMeisho,
-            DbT5912_temp_1_1."shujiiName"  AS  before_before_shujiiName
+        DbT5101."shinseishoKanriNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."hihokenshaName",
+        DbT5101."yubinNo",
+        DbT5101."jusho",
+        DbT5101."nyushoShisetsuCode",
+        DbT5101."shoriJotaiKubun",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."saiSakuseiIraiKaisu",
+        DbT5105."ikenshoSakuseiIraiKanryoYMD",
+        DbT7060."jigyoshaName",
+        DbT5101."shichosonCode",
+        DbT7051."shichosonMeisho",
+        DbT5301."ikenshoIraiRirekiNo",
+        DbT5301."ikenshoIraiKubun",
+        DbT5301."ikenshoSakuseiTokusokuYMD",
+        DbT5301."ikenshoSakuseiTokusokuHoho",
+        DbT5301."ikenshoTokusokuKaisu",
+        DbT5301."ikenshoSakuseiKigenYMD",
+        DbT5301."ikenshoSakuseiIraiYMD",
+        DbT5301."iraishoShutsuryokuYMD",
+        DbT5301."ikenshoShutsuryokuYMD",
+        DbT5301."ishiKubunCode",
+        DbT5301."sakuseiryoSeikyuKubun",
+        DbT4302."ikenshoSakuseiKaisuKubun",
+        CASE WHEN DbT5301."shujiiIryokikanCode" IS null AND DbT5101."shujiiIryokikanCode" IS NOT null
+        THEN DbT5101."shujiiIryokikanCode"
+        ELSE DbT5301."shujiiIryokikanCode"
+        END AS "shujiiIryokikanCode",
+        CASE WHEN DbT5301."shujiiIryokikanCode" IS null AND DbT5101."shujiiIryokikanCode" IS NOT null
+        THEN DbT5911_2."iryoKikanMeisho"
+        ELSE DbT5911."iryoKikanMeisho"
+        END AS "iryoKikanMeisho",
+        CASE WHEN DbT5301."shujiiCode" IS null AND DbT5101."shujiiCode" IS NOT null
+        THEN DbT5101."shujiiCode"
+        ELSE DbT5301."shujiiCode"
+        END AS "shujiiCode",
+        CASE WHEN DbT5301."shujiiCode" IS null AND DbT5101."shujiiCode" IS NOT null
+        THEN DbT5912_2."shujiiName"
+        ELSE DbT5912."shujiiName"
+        END AS "shujiiName",
+        DbT5911_temp_1."iryoKikanMeisho"  AS  before_iryoKikanMeisho,
+        DbT5912_temp_1."shujiiName"  AS  before_shujiiName,
+        DbT5911_temp_1_1."iryoKikanMeisho"  AS  before_before_iryoKikanMeisho,
+        DbT5912_temp_1_1."shujiiName"  AS  before_before_shujiiName
         FROM
-            (SELECT
-                DbT5105_temp.*
-             FROM rgdb."DbT5105NinteiKanryoJoho" DbT5105_temp
-             WHERE DbT5105_temp."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-                   AND DbT5105_temp."ninteiShinsakaiWariateKanryoYMD" IS NULL
-                   AND DbT5105_temp."ninteiShinsakaiKanryoYMD" IS NULL
-                   AND DbT5105_temp."centerSoshinYMD" IS NULL
-                   AND DbT5105_temp."ikenshoSakuseiIraiKanryoYMD" IS NULL
-            ) AS DbT5105
-            INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
-                ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
-            LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-                ON DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
-                ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp_1."shinseishoKanriNo"
-            LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp_1
-                ON DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp_1."shinseishoKanriNo"
-            LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temo_1_1
-                ON DbT5121_temp_1."zenkaiShinseishoKanriNo" = DbT5101_temo_1_1."shinseishoKanriNo"
-            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-                ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            LEFT JOIN
-                (SELECT
-                    DbT7060KaigoJigyosha.*
-                 FROM
-                    rgdb."DbT7060KaigoJigyosha" as DbT7060KaigoJigyosha
-                    INNER JOIN
-                        (SELECT
-                            "jigyoshaNo",
-                            MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
-                         FROM rgdb."DbT7060KaigoJigyosha"
-                         group by "jigyoshaNo") AS DbT7060_Temp
-                        ON DbT7060KaigoJigyosha."jigyoshaNo" = DbT7060_Temp."jigyoshaNo"
-                           AND DbT7060KaigoJigyosha."yukoKaishiYMD" = DbT7060_Temp."yukoKaishiYMD") AS DbT7060
-                ON DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
-            LEFT JOIN
-                (select *
-                 from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "mst"
-                 where not exists(
-                            select *
-                            from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
-                            where
-                                "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-                                 and "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
-                            )
-                       and "mst"."logicalDeletedFlag" = false
-                ) AS DbT5301
-                ON DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
-            LEFT JOIN rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
-                ON DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                   AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
-                ON DbT5301."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
-                   AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911_2
-                ON DbT5101."shujiiIryokikanCode" = DbT5911_2."shujiiIryokikanCode"
-                   AND DbT5911_2."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5912ShujiiJoho" DbT5912
-                ON DbT5912."shujiiIryokikanCode" = DbT5301."shujiiIryokikanCode"
-                   AND DbT5912."shujiiCode" = DbT5301."shujiiCode"
-                   AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5912ShujiiJoho" DbT5912_2
-                ON DbT5912_2."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
-                   AND DbT5912_2."shujiiCode" = DbT5101."shujiiCode"
-                   AND DbT5912_2."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911_temp_1
-                ON DbT5101_temp_1."shujiiIryokikanCode" = DbT5911_temp_1."shujiiIryokikanCode"
-                   AND DbT5911_temp_1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5912ShujiiJoho"  AS  DbT5912_temp_1
-                ON DbT5912_temp_1."shujiiIryokikanCode" = DbT5101_temp_1."shujiiIryokikanCode"
-                   AND DbT5912_temp_1."shujiiCode" = DbT5101_temp_1."shujiiCode"
-                   AND DbT5912_temp_1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911_temp_1_1
-                ON DbT5101_temo_1_1."shujiiIryokikanCode" = DbT5911_temp_1_1."shujiiIryokikanCode"
-                   AND DbT5911_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN rgdb."DbT5912ShujiiJoho"  AS  DbT5912_temp_1_1
-                ON DbT5912_temp_1_1."shujiiIryokikanCode" = DbT5101_temo_1_1."shujiiIryokikanCode"
-                   AND DbT5912_temp_1_1."shujiiCode" = DbT5101_temo_1_1."shujiiCode"
-                   AND DbT5912_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        (SELECT
+        DbT5105_temp.*
+        FROM rgdb."DbT5105NinteiKanryoJoho" DbT5105_temp
+        WHERE DbT5105_temp."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105_temp."ninteiShinsakaiWariateKanryoYMD" IS NULL
+        AND DbT5105_temp."ninteiShinsakaiKanryoYMD" IS NULL
+        AND DbT5105_temp."centerSoshinYMD" IS NULL
+        AND DbT5105_temp."ikenshoSakuseiIraiKanryoYMD" IS NULL
+        ) AS DbT5105
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        ON DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        ON DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temp_1
+        ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101_temp_1."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121_temp_1
+        ON DbT5121."zenkaiShinseishoKanriNo" = DbT5121_temp_1."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_temo_1_1
+        ON DbT5121_temp_1."zenkaiShinseishoKanriNo" = DbT5101_temo_1_1."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+        (SELECT
+        DbT7060KaigoJigyosha.*
+        FROM
+        rgdb."DbT7060KaigoJigyosha" as DbT7060KaigoJigyosha
+        INNER JOIN
+        (SELECT
+        "jigyoshaNo",
+        MAX("yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM rgdb."DbT7060KaigoJigyosha"
+        group by "jigyoshaNo") AS DbT7060_Temp
+        ON DbT7060KaigoJigyosha."jigyoshaNo" = DbT7060_Temp."jigyoshaNo"
+        AND DbT7060KaigoJigyosha."yukoKaishiYMD" = DbT7060_Temp."yukoKaishiYMD") AS DbT7060
+        ON DbT7060."jigyoshaNo"   =   DbT5101."nyushoShisetsuCode"
+        LEFT JOIN
+        (select *
+        from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "mst"
+        where not exists(
+        select *
+        from rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
+        where
+        "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+        and "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
+        )
+        and "mst"."logicalDeletedFlag" = false
+        ) AS DbT5301
+        ON DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+        ON DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
+        ON DbT5301."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
+        AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911_2
+        ON DbT5101."shujiiIryokikanCode" = DbT5911_2."shujiiIryokikanCode"
+        AND DbT5911_2."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" DbT5912
+        ON DbT5912."shujiiIryokikanCode" = DbT5301."shujiiIryokikanCode"
+        AND DbT5912."shujiiCode" = DbT5301."shujiiCode"
+        AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" DbT5912_2
+        ON DbT5912_2."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
+        AND DbT5912_2."shujiiCode" = DbT5101."shujiiCode"
+        AND DbT5912_2."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911_temp_1
+        ON DbT5101_temp_1."shujiiIryokikanCode" = DbT5911_temp_1."shujiiIryokikanCode"
+        AND DbT5911_temp_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5912ShujiiJoho"  AS  DbT5912_temp_1
+        ON DbT5912_temp_1."shujiiIryokikanCode" = DbT5101_temp_1."shujiiIryokikanCode"
+        AND DbT5912_temp_1."shujiiCode" = DbT5101_temp_1."shujiiCode"
+        AND DbT5912_temp_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911_temp_1_1
+        ON DbT5101_temo_1_1."shujiiIryokikanCode" = DbT5911_temp_1_1."shujiiIryokikanCode"
+        AND DbT5911_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5912ShujiiJoho"  AS  DbT5912_temp_1_1
+        ON DbT5912_temp_1_1."shujiiIryokikanCode" = DbT5101_temo_1_1."shujiiIryokikanCode"
+        AND DbT5912_temp_1_1."shujiiCode" = DbT5101_temo_1_1."shujiiCode"
+        AND DbT5912_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
         WHERE
-            DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
-            AND DbT5101."logicalDeletedFlag" = FALSE
-            <if test="状態区分 == 1" >
+        DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
+        AND DbT5101."logicalDeletedFlag" = FALSE
+        <if test="状態区分 == 1" >
             AND (
             DbT5301."ikenshoSakuseiIraiYMD" is NULL
             OR DbT5301."ikenshoSakuseiIraiYMD" = ''
@@ -895,93 +895,93 @@
             OR DbT5301."ikenshoShutsuryokuYMD" is NULL
             OR DbT5301."ikenshoShutsuryokuYMD" = ''
             )
-            </if>
-            <if test="状態区分 == 2" >
+        </if>
+        <if test="状態区分 == 2" >
             AND DbT5301."ikenshoSakuseiIraiYMD" is NOT NULL
             AND DbT5301."ikenshoSakuseiIraiYMD"  <![CDATA[<>]]> ''
             AND DbT5301."iraishoShutsuryokuYMD" is NOT NULL
             AND DbT5301."iraishoShutsuryokuYMD"  <![CDATA[<>]]> ''
             AND DbT5301."ikenshoShutsuryokuYMD" is NOT NULL
             AND DbT5301."ikenshoShutsuryokuYMD"  <![CDATA[<>]]> ''
-            </if>
-            <if test="市町村コード.toString() != ''.toString()">
+        </if>
+        <if test="市町村コード.toString() != ''.toString()">
             AND DbT5101."shichosonCode" = #{市町村コード}
-            </if>
+        </if>
         ORDER BY
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."hihokenshaKana",          
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana",          
+        DbT5101."shoKisaiHokenshaNo"
         LIMIT
-            #{件数}
+        #{件数}
     </select>
     <select resultOrdered="true" id="get調査入手" resultMap="resultMap_ChosaNyushuRelateWithCountEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            COUNT(*) OVER() AS "totalCount",
-            DbT5101."shinseishoKanriNo",
-            DbT5101."hihokenshaNo",
-            DbT5101."hihokenshaName",
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."ninteiShinseiShinseijiKubunCode",
-            DbT5101."saiChosaIraiKaisu",
-            DbT5101."shoriJotaiKubun",
-            DbT7051."shichosonMeisho",
-            DbT5105."ninteichosaIraiKanryoYMD",
-            DbT5105."ninteichosaKanryoYMD",
-            DbT5201."ninteichosaTokusokuYMD",
-            DbT5201."ninteichosaTokusokuHoho",
-            DbT5201."ninteichosaTokusokuKaisu",
-            DbT5201."ninteichosaKigenYMD",
-            DbT4202."ninteichosaJisshiYMD",
-            DbT5910."jigyoshaMeisho",
-            DbT5913."chosainShimei",
-            DbT5913."chikuCode",
-            DbT5201."ninteichosaIraiRirekiNo",
-            DbT5101."ninteiChosaItakusakiCode",
-            DbT5101."ninteiChosainCode"
+        COUNT(*) OVER() AS "totalCount",
+        DbT5101."shinseishoKanriNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."hihokenshaName",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."saiChosaIraiKaisu",
+        DbT5101."shoriJotaiKubun",
+        DbT7051."shichosonMeisho",
+        DbT5105."ninteichosaIraiKanryoYMD",
+        DbT5105."ninteichosaKanryoYMD",
+        DbT5201."ninteichosaTokusokuYMD",
+        DbT5201."ninteichosaTokusokuHoho",
+        DbT5201."ninteichosaTokusokuKaisu",
+        DbT5201."ninteichosaKigenYMD",
+        DbT4202."ninteichosaJisshiYMD",
+        DbT5910."jigyoshaMeisho",
+        DbT5913."chosainShimei",
+        DbT5913."chikuCode",
+        DbT5201."ninteichosaIraiRirekiNo",
+        DbT5101."ninteiChosaItakusakiCode",
+        DbT5101."ninteiChosainCode"
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho" DbT5105
-            ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT7051KoseiShichosonMaster" DbT7051
-            ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201_Tmp
-                    WHERE
-                        NOT EXISTS(
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT5201NinteichosaIraiJoho"
-                            WHERE
-                                "shinseishoKanriNo" = DbT5201_Tmp."shinseishoKanriNo"
-                            AND "ninteichosaIraiRirekiNo" > DbT5201_Tmp."ninteichosaIraiRirekiNo"
-                        )
-                ) DbT5201
-            ON  DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
-            AND DbT5201."logicalDeletedFlag" = FALSE
-            LEFT JOIN
-                rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
-            ON  DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            AND DbT5201."ninteichosaIraiRirekiNo" = DbT4202."ninteichosaRirekiNo"
-            AND DbT4202."gaikyoChosaTextImageKubun" in('1', '2')
-            LEFT JOIN
-                rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
-            ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-            AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5913ChosainJoho" DbT5913
-            ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-            AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-            AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho" DbT5105
+        ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201_Tmp
         WHERE
-            DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5201_Tmp."shinseishoKanriNo"
+        AND "ninteichosaIraiRirekiNo" > DbT5201_Tmp."ninteichosaIraiRirekiNo"
+        )
+        ) DbT5201
+        ON  DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+        AND DbT5201."logicalDeletedFlag" = FALSE
+        LEFT JOIN
+        rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
+        ON  DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5201."ninteichosaIraiRirekiNo" = DbT4202."ninteichosaRirekiNo"
+        AND DbT4202."gaikyoChosaTextImageKubun" in('1', '2')
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+        ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+        AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" DbT5913
+        ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
@@ -991,23 +991,23 @@
         AND DbT5105."ninteichosaKanryoYMD" IS NULL 
         <if test = "状態区分 == 1">
             AND (
-                    DbT4202."ninteichosaJisshiYMD" IS NULL
-                OR  DbT4202."ninteichosaJisshiYMD" = ''
-                ) 
+            DbT4202."ninteichosaJisshiYMD" IS NULL
+            OR  DbT4202."ninteichosaJisshiYMD" = ''
+            ) 
         </if> 
         <if test = "状態区分 == 2">
             AND (
-                    DbT4202."ninteichosaJisshiYMD" IS NOT NULL
-                AND DbT4202."ninteichosaJisshiYMD" != ''
-                ) 
+            DbT4202."ninteichosaJisshiYMD" IS NOT NULL
+            AND DbT4202."ninteichosaJisshiYMD" != ''
+            ) 
         </if> 
         <if test = "市町村コード.toString() != ''.toString()">
             AND DbT5101."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."hihokenshaKana",
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana",
+        DbT5101."shoKisaiHokenshaNo"
         LIMIT #{件数}
     </select>
     <resultMap id="resultMap_CyoSaNyuSyuRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
@@ -1017,50 +1017,50 @@
     <select resultOrdered="true" id="get前調査入手" resultMap="resultMap_CyoSaNyuSyuRelate"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            <include refid = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
+        <include refid = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            INNER JOIN
-                rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-            ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho"
-            ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201_Tmp
-                    WHERE
-                        NOT EXISTS(                                --Not Existsを使ったサブクエリにする
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT5201NinteichosaIraiJoho"
-                            WHERE
-                                "shinseishoKanriNo" = DbT5201_Tmp."shinseishoKanriNo"
-                            AND "ninteichosaIraiRirekiNo" > DbT5201_Tmp."ninteichosaIraiRirekiNo"
-                        )
-                ) DbT5201
-            ON  DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
-            AND NOT DbT5201."logicalDeletedFlag"
-            LEFT JOIN
-                rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
-            ON  DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            AND DbT5201."ninteichosaIraiRirekiNo" = DbT4202."ninteichosaRirekiNo"
-            AND DbT4202."gaikyoChosaTextImageKubun" in('1', '2')
-            LEFT JOIN
-                rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
-            ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
-            AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5913ChosainJoho" DbT5913
-            ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-            AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-            AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho"
+        ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201_Tmp
         WHERE
-            "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        NOT EXISTS(                                --Not Existsを使ったサブクエリにする
+        SELECT
+        *
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5201_Tmp."shinseishoKanriNo"
+        AND "ninteichosaIraiRirekiNo" > DbT5201_Tmp."ninteichosaIraiRirekiNo"
+        )
+        ) DbT5201
+        ON  DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+        AND NOT DbT5201."logicalDeletedFlag"
+        LEFT JOIN
+        rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202
+        ON  DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5201."ninteichosaIraiRirekiNo" = DbT4202."ninteichosaRirekiNo"
+        AND DbT4202."gaikyoChosaTextImageKubun" in('1', '2')
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+        ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+        AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" DbT5913
+        ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
@@ -1068,75 +1068,75 @@
         AND DbT5101."shoriJotaiKubun" in(#{通常}, #{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY
-            DbT5101."hihokenshaKana",
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."hihokenshaKana",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="get意見書入手" resultMap="resultMap_IkenSyoNyuSyuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            DbT5101."shinseishoKanriNo",
-            DbT5101."hihokenshaNo",
-            DbT5101."hihokenshaName",
-            DbT5101."shoriJotaiKubun",
-            DbT5101."ninteiShinseiShinseijiKubunCode",
-            DbT5101."ninteiShinseiYMD",
-            DbT5105."ikenshoSakuseiIraiKanryoYMD",
-            DbT5105."ikenshoTorokuKanryoYMD",
-            DbT7051."shichosonMeisho",
-            DbT5301."ikenshoSakuseiTokusokuYMD",
-            DbT5301."ikenshoSakuseiTokusokuHoho",
-            DbT5301."ikenshoTokusokuKaisu",
-            DbT5301."ikenshoSakuseiKigenYMD",
-            DbT5301."ikenshoSakuseiIraiYMD",
-            DbT5301."ikenshoIraiRirekiNo",
-            DbT4302."ikenshoSakuseiKaisuKubun",
-            DbT4302."ikenshoKinyuYMD",
-            DbT4302."ikenshoReadYMD",
-            DbT5911."iryoKikanMeisho",
-            DbT5912."shujiiName"
+        DbT5101."shinseishoKanriNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."hihokenshaName",
+        DbT5101."shoriJotaiKubun",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."ninteiShinseiYMD",
+        DbT5105."ikenshoSakuseiIraiKanryoYMD",
+        DbT5105."ikenshoTorokuKanryoYMD",
+        DbT7051."shichosonMeisho",
+        DbT5301."ikenshoSakuseiTokusokuYMD",
+        DbT5301."ikenshoSakuseiTokusokuHoho",
+        DbT5301."ikenshoTokusokuKaisu",
+        DbT5301."ikenshoSakuseiKigenYMD",
+        DbT5301."ikenshoSakuseiIraiYMD",
+        DbT5301."ikenshoIraiRirekiNo",
+        DbT4302."ikenshoSakuseiKaisuKubun",
+        DbT4302."ikenshoKinyuYMD",
+        DbT4302."ikenshoReadYMD",
+        DbT5911."iryoKikanMeisho",
+        DbT5912."shujiiName"
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho" DbT5105
-            ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT7051KoseiShichosonMaster" DbT7051
-            ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301_Tmp
-                    WHERE
-                        NOT EXISTS(
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT5301ShujiiIkenshoIraiJoho"
-                            WHERE
-                                "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
-                            AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
-                        )
-                ) DbT5301
-            ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
-            AND DbT5301."logicalDeletedFlag" = FALSE
-            LEFT JOIN
-                rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
-            ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-            LEFT JOIN
-                rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
-            ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
-            AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5912ShujiiJoho" DbT5912
-            ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
-            AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
-            AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho" DbT5105
+        ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301_Tmp
         WHERE
-            DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
+        AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
+        )
+        ) DbT5301
+        ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5301."logicalDeletedFlag" = FALSE
+        LEFT JOIN
+        rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+        ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        LEFT JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
+        ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
+        AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5912ShujiiJoho" DbT5912
+        ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
+        AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
+        AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
@@ -1148,63 +1148,63 @@
             AND DbT4302."ikenshoReadYMD" is NULL 
         </if> 
         <if test = "状態区分 == 2">
-                AND DbT4302."ikenshoReadYMD" is NOT NULL
+            AND DbT4302."ikenshoReadYMD" is NOT NULL
         </if> 
         <if test = "市町村コード.toString() != ''.toString()">
             AND DbT5101."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY   
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."hihokenshaKana",
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana",
+        DbT5101."shoKisaiHokenshaNo"
         LIMIT #{件数}
     </select>
     <select id="get意見書入手件数" resultType="int"
-                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            COUNT(0)
+        COUNT(0)
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            LEFT JOIN
-                rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-            ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho" DbT5105
-            ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301_Tmp
-                    WHERE
-                        NOT EXISTS(
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT5301ShujiiIkenshoIraiJoho"
-                            WHERE
-                                "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
-                            AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
-                        )
-                ) DbT5301
-            ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
-            AND DbT5301."logicalDeletedFlag" = FALSE
-            LEFT JOIN
-                rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
-            ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-            LEFT JOIN
-                rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
-            ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
-            AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5912ShujiiJoho" DbT5912
-            ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
-            AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
-            AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho" DbT5105
+        ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301_Tmp
         WHERE
-            DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
+        AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
+        )
+        ) DbT5301
+        ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5301."logicalDeletedFlag" = FALSE
+        LEFT JOIN
+        rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+        ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        LEFT JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
+        ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
+        AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5912ShujiiJoho" DbT5912
+        ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
+        AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
+        AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
@@ -1228,49 +1228,49 @@
     <select resultOrdered="true" id="get前意見書入手" resultMap="resultMap_IkenSyoNyuSyuRelate"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            <include refid = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
+        <include refid = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" DbT5101
-            INNER JOIN
-                rgdb."DbT5121ShinseiRirekiJoho" DbT5121
-            ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER JOIN
-                rgdb."DbT5105NinteiKanryoJoho"
-            ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            LEFT JOIN
-                (
-                    SELECT
-                        *
-                    FROM
-                        rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301_Tmp
-                    WHERE
-                        NOT EXISTS(
-                            SELECT
-                                *
-                            FROM
-                                rgdb."DbT5301ShujiiIkenshoIraiJoho"
-                            WHERE
-                                "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
-                            AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
-                        )
-                ) DbT5301
-            ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
-            AND DbT5301."logicalDeletedFlag" = FALSE
-            LEFT JOIN
-                rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
-            ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-            LEFT JOIN
-                rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
-            ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
-            AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
-            LEFT JOIN
-                rgdb."DbT5912ShujiiJoho" DbT5912
-            ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
-            AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
-            AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        INNER JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" DbT5121
+        ON  DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho"
+        ON  DbT5101."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" as DbT5301_Tmp
         WHERE
-            "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5301_Tmp."shinseishoKanriNo"
+        AND "ikenshoIraiRirekiNo" <![CDATA[ > ]]> DbT5301_Tmp."ikenshoIraiRirekiNo"
+        )
+        ) DbT5301
+        ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5301."logicalDeletedFlag" = FALSE
+        LEFT JOIN
+        rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
+        ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        LEFT JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
+        ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
+        AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5912ShujiiJoho" DbT5912
+        ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
+        AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
+        AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        WHERE
+        "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
@@ -1278,9 +1278,9 @@
         AND DbT5101."shoriJotaiKubun" in(#{通常}, #{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
         ORDER BY
-            DbT5101."hihokenshaKana",
-            DbT5101."ninteiShinseiYMD",
-            DbT5101."shoKisaiHokenshaNo"
+        DbT5101."hihokenshaKana",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="get一次判定" resultMap="resultMap_IChiJiHanTeiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
@@ -1323,285 +1323,289 @@
         DbT5101."shoKisaiHokenshaNo"
     </select>
     <select resultOrdered="true" id="getマスキング一次判定後" resultMap="resultMap_MaSuKinGuRelateEntity"
-                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            DISTINCT A.*,
-            COUNT(*) OVER() as "totalCount"
+        DISTINCT A.*,
+        COUNT(*) OVER() as "totalCount"
         FROM
-            (
-                SELECT
-                    DbT5101."shinseishoKanriNo",
-                    DbT5101."hihokenshaNo",
-                    DbT5101."hihokenshaName",
-                    DbT5101."ninteiShinseiShinseijiKubunCode",
-                    DbT5101."ninteiShinseiYMD",
-                    DbT7051."shichosonMeisho",
-                    DbT5105."ninteichosaIraiKanryoYMD",
-                    DbT5105."ikenshoSakuseiIraiKanryoYMD",
-                    DbT5105."ninteichosaKanryoYMD",
-                    DbT5105."ikenshoTorokuKanryoYMD",
-                    DbT5105."maskingKanryoYMD",
-                    CASE
-                        WHEN T5205."shinseishoKanriNo" is not null
-                    AND T5205."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
-                        ELSE false
-                    END "hasTokkiMask",
-                    CASE
-                        WHEN T5305."shinseishoKanriNo" is not null
-                    AND T5305."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
-                        ELSE false
-                    END "hasIkenshoMask",
-                    CASE
-                        WHEN T5213."shinseishoKanriNo" is not null
-                    AND T5213."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
-                        ELSE false
-                    END "hasGaikyoMask"
-                FROM
-                    (
-                        select
-                            *
-                        from
-                            rgdb."DbT5101NinteiShinseiJoho" DbT5101a
-                        where
-                            DbT5101a."shoriJotaiKubun" in(#{通常}, #{延期})
-                        AND DbT5101a."logicalDeletedFlag" = FALSE
-                    ) as DbT5101
-                    INNER JOIN
-                        rgdb."DbT7051KoseiShichosonMaster" DbT7051
-                    ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-                    INNER JOIN
-                        (
-                            select
-                                *
-                            from
-                                rgdb."DbT5105NinteiKanryoJoho" DbT5105a
-                            where
-                                DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ninteichosaIraiKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ninteichosaIraiKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ninteichosaKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ninteichosaKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ikenshoTorokuKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ikenshoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ichijiHanteiKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ichijiHanteiKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND (
-                                    DbT5105a."ninteiShinsakaiWariateKanryoYMD" IS NULL
-                                OR  DbT5105a."ninteiShinsakaiWariateKanryoYMD" = ''
-                                )
-                            AND (
-                                    DbT5105a."ninteiShinsakaiKanryoYMD" IS NULL
-                                OR  DbT5105a."ninteiShinsakaiKanryoYMD" = ''
-                                )
-                            AND (
-                                    DbT5105a."centerSoshinYMD" IS NULL
-                                OR  DbT5105a."centerSoshinYMD" = ''
-                                )
-                            AND (
-                                    DbT5105a."maskingKanryoYMD" IS NULL
-                                OR  DbT5105a."maskingKanryoYMD" = ''
-                                )
-                        ) as DbT5105
-                    ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                    LEFT JOIN
-                        rgdb."DbT5205NinteichosahyoTokkijiko" T5205
-                    on  T5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                    and T5205."tokkijikoTextImageKubun" = '2'
-                    AND T5205."genponMaskKubun" = '2'
-                    AND NOT EXISTS(
-                            SELECT
-                                'X'
-                            FROM
-                                rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
-                            WHERE
-                                T5205."tokkijikoTextImageKubun" = '2'
-                            AND T5205."genponMaskKubun" = '2'
-                            AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
-                        )
-                    LEFT JOIN
-                        rgdb."DbT5305IkenshoImageJoho" T5305
-                    ON  T5305."genponMaskKubun" = '2'
-                    AND T5305."remban" = '1'
-                    AND NOT EXISTS(
-                            SELECT
-                                'X'
-                            FROM
-                                rgdb."DbT5305IkenshoImageJoho" T5305b
-                            WHERE
-                                T5305."iraiRirekiNo" <![CDATA[ < ]]> T5305b."iraiRirekiNo"
-                        )
-                    AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
-                    LEFT JOIN
-                        rgdb."DbT5213GaikyoChosaTokkiMask" T5213
-                    ON  T5213."gaikyoChosaTextImageKubun" = '2'
-                    AND NOT EXISTS(
-                            SELECT
-                                'X'
-                            FROM
-                                rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
-                            WHERE
-                                T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
-                        )
-                    AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo" 
-                <if test = "市町村コード.toString() != ''.toString()">
-                    WHERE
-                        DbT7051."shichosonCode" = #{市町村コード} 
-                </if>
-                ORDER BY
-                    DbT5101."ninteiShinseiYMD",
-                    DbT5101."hihokenshaKana",
-                    DbT5101."shoKisaiHokenshaNo"
-            ) as A 
+        (
+        SELECT
+        DbT5101."shinseishoKanriNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."hihokenshaName",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."ninteiShinseiYMD",
+        DbT7051."shichosonMeisho",
+        DbT5105."ninteichosaIraiKanryoYMD",
+        DbT5105."ikenshoSakuseiIraiKanryoYMD",
+        DbT5105."ninteichosaKanryoYMD",
+        DbT5105."ikenshoTorokuKanryoYMD",
+        DbT5105."maskingKanryoYMD",
+        CASE
+        WHEN T5205."shinseishoKanriNo" is not null
+        AND T5205."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
+        ELSE false
+        END "hasTokkiMask",
+        CASE
+        WHEN T5305."shinseishoKanriNo" is not null
+        AND T5305."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
+        ELSE false
+        END "hasIkenshoMask",
+        CASE
+        WHEN T5213."shinseishoKanriNo" is not null
+        AND T5213."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
+        ELSE false
+        END "hasGaikyoMask"
+        FROM
+        (
+        select
+        *
+        from
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101a
+        where
+        DbT5101a."shoriJotaiKubun" in(#{通常}, #{延期})
+        AND DbT5101a."logicalDeletedFlag" = FALSE
+        ) as DbT5101
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER JOIN
+        (
+        select
+        *
+        from
+        rgdb."DbT5105NinteiKanryoJoho" DbT5105a
+        where
+        DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND DbT5105a."ninteichosaIraiKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ninteichosaKanryoYMD" IS NOT NULL
+        AND DbT5105a."ninteichosaKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105a."ikenshoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ichijiHanteiKanryoYMD" IS NOT NULL
+        AND DbT5105a."ichijiHanteiKanryoYMD" <![CDATA[ <> ]]> ''
+        AND (
+        DbT5105a."ninteiShinsakaiWariateKanryoYMD" IS NULL
+        OR  DbT5105a."ninteiShinsakaiWariateKanryoYMD" = ''
+        )
+        AND (
+        DbT5105a."ninteiShinsakaiKanryoYMD" IS NULL
+        OR  DbT5105a."ninteiShinsakaiKanryoYMD" = ''
+        )
+        AND (
+        DbT5105a."centerSoshinYMD" IS NULL
+        OR  DbT5105a."centerSoshinYMD" = ''
+        )
+        AND (
+        DbT5105a."maskingKanryoYMD" IS NULL
+        OR  DbT5105a."maskingKanryoYMD" = ''
+        )
+        ) as DbT5105
+        ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205
+        on  T5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        and T5205."tokkijikoTextImageKubun" = '2'
+        AND T5205."genponMaskKubun" = '2'
+        AND NOT EXISTS(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
+        WHERE
+        T5205."tokkijikoTextImageKubun" = '2'
+        AND T5205."genponMaskKubun" = '2'
+        AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
+        )
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" T5305
+        ON  T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
+        AND NOT EXISTS(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5305IkenshoImageJoho" T5305b
+        WHERE
+        T5305."iraiRirekiNo" <![CDATA[ < ]]> T5305b."iraiRirekiNo"
+        )
+        AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213
+        ON  T5213."gaikyoChosaTextImageKubun" = '2'
+        AND NOT EXISTS(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
+        WHERE
+        T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
+        )
+        AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo" 
+        <if test = "市町村コード.toString() != ''.toString()">
+            WHERE
+            DbT7051."shichosonCode" = #{市町村コード} 
+        </if>
+        ORDER BY
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana",
+        DbT5101."shoKisaiHokenshaNo"
+        ) as A 
         <if test = "状態区分 == 1">
             WHERE
-                A."hasIkenshoMask" = false 
+            A."hasIkenshoMask" = false 
         </if> 
         <if test = "状態区分 == 2">
             WHERE
-                A."hasIkenshoMask" = true 
+            A."hasIkenshoMask" = true 
         </if>
+        ORDER BY
+        A."ninteiShinseiYMD"
         LIMIT #{件数}
     </select>
     <select resultOrdered="true" id="getマスキング審査会割当後" resultMap="resultMap_MaSuKinGuRelateEntity"
-                parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-            DISTINCT A.*,
-            COUNT(*) OVER() as "totalCount"
+        DISTINCT A.*,
+        COUNT(*) OVER() as "totalCount"
         FROM
-            (
-                SELECT
-                    DbT5101."shinseishoKanriNo",
-                    DbT5101."hihokenshaNo",
-                    DbT5101."hihokenshaName",
-                    DbT5101."ninteiShinseiShinseijiKubunCode",
-                    DbT5101."ninteiShinseiYMD",
-                    DbT7051."shichosonMeisho",
-                    DbT5105."ninteichosaIraiKanryoYMD",
-                    DbT5105."ikenshoSakuseiIraiKanryoYMD",
-                    DbT5105."ninteichosaKanryoYMD",
-                    DbT5105."ikenshoTorokuKanryoYMD",
-                    DbT5105."maskingKanryoYMD",
-                    CASE
-                        WHEN T5205."shinseishoKanriNo" is not null
-                    AND T5205."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
-                        ELSE false
-                    END "hasTokkiMask",
-                    CASE
-                        WHEN T5305."shinseishoKanriNo" is not null
-                    AND T5305."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
-                        ELSE false
-                    END "hasIkenshoMask",
-                    CASE
-                        WHEN T5213."shinseishoKanriNo" is not null
-                    AND T5213."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
-                        ELSE false
-                    END "hasGaikyoMask"
-                FROM
-                    (
-                        select
-                            *
-                        from
-                            rgdb."DbT5101NinteiShinseiJoho" DbT5101a
-                        where
-                            DbT5101a."shoriJotaiKubun" in(#{通常}, #{延期})
-                        AND DbT5101a."logicalDeletedFlag" = FALSE
-                    ) as DbT5101
-                    INNER JOIN
-                        rgdb."DbT7051KoseiShichosonMaster" DbT7051
-                    ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-                    INNER JOIN
-                        (
-                            select
-                                *
-                            from
-                                rgdb."DbT5105NinteiKanryoJoho" DbT5105a
-                            where
-                                DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ninteichosaIraiKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ninteichosaIraiKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ninteichosaKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ninteichosaKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ikenshoTorokuKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ikenshoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND DbT5105a."ichijiHanteiKanryoYMD" IS NOT NULL
-                            AND DbT5105a."ichijiHanteiKanryoYMD" <![CDATA[ <> ]]> ''
-                            AND (
-                                    DbT5105a."ninteiShinsakaiKanryoYMD" IS NULL
-                                OR  DbT5105a."ninteiShinsakaiKanryoYMD" = ''
-                                )
-                            AND (
-                                    DbT5105a."centerSoshinYMD" IS NULL
-                                OR  DbT5105a."centerSoshinYMD" = ''
-                                )
-                            AND (
-                                    DbT5105a."maskingKanryoYMD" IS NULL
-                                OR  DbT5105a."maskingKanryoYMD" = ''
-                                )
-                        ) as DbT5105
-                    ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                    LEFT JOIN
-                        rgdb."DbT5205NinteichosahyoTokkijiko" T5205
-                    on  T5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-                    and T5205."tokkijikoTextImageKubun" = '2'
-                    AND T5205."genponMaskKubun" = '2'
-                    AND NOT EXISTS(
-                            SELECT
-                                'X'
-                            FROM
-                                rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
-                            WHERE
-                                T5205."tokkijikoTextImageKubun" = '2'
-                            AND T5205."genponMaskKubun" = '2'
-                            AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
-                        )
-                    LEFT JOIN
-                        rgdb."DbT5305IkenshoImageJoho" T5305
-                    ON  T5305."genponMaskKubun" = '2'
-                    AND T5305."remban" = '1'
-                    AND NOT EXISTS(
-                            SELECT
-                                'X'
-                            FROM
-                                rgdb."DbT5305IkenshoImageJoho" T5305b
-                            WHERE
-                                T5305."iraiRirekiNo" <![CDATA[ < ]]> T5305b."iraiRirekiNo"
-                        )
-                    AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
-                    LEFT JOIN
-                        rgdb."DbT5213GaikyoChosaTokkiMask" T5213
-                    ON  T5213."gaikyoChosaTextImageKubun" = '2'
-                    AND NOT EXISTS(
-                            SELECT
-                                'X'
-                            FROM
-                                rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
-                            WHERE
-                                T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
-                        )
-                    AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo" 
-                <if test = "市町村コード.toString() != ''.toString()">
-                    WHERE
-                        DbT7051."shichosonCode" = #{市町村コード} 
-                </if>
-                ORDER BY
-                    DbT5101."ninteiShinseiYMD",
-                    DbT5101."hihokenshaKana",
-                    DbT5101."shoKisaiHokenshaNo"
-            ) as A 
+        (
+        SELECT
+        DbT5101."shinseishoKanriNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."hihokenshaName",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."ninteiShinseiYMD",
+        DbT7051."shichosonMeisho",
+        DbT5105."ninteichosaIraiKanryoYMD",
+        DbT5105."ikenshoSakuseiIraiKanryoYMD",
+        DbT5105."ninteichosaKanryoYMD",
+        DbT5105."ikenshoTorokuKanryoYMD",
+        DbT5105."maskingKanryoYMD",
+        CASE
+        WHEN T5205."shinseishoKanriNo" is not null
+        AND T5205."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
+        ELSE false
+        END "hasTokkiMask",
+        CASE
+        WHEN T5305."shinseishoKanriNo" is not null
+        AND T5305."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
+        ELSE false
+        END "hasIkenshoMask",
+        CASE
+        WHEN T5213."shinseishoKanriNo" is not null
+        AND T5213."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
+        ELSE false
+        END "hasGaikyoMask"
+        FROM
+        (
+        select
+        *
+        from
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101a
+        where
+        DbT5101a."shoriJotaiKubun" in(#{通常}, #{延期})
+        AND DbT5101a."logicalDeletedFlag" = FALSE
+        ) as DbT5101
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        INNER JOIN
+        (
+        select
+        *
+        from
+        rgdb."DbT5105NinteiKanryoJoho" DbT5105a
+        where
+        DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105a."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND DbT5105a."ninteichosaIraiKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ninteichosaKanryoYMD" IS NOT NULL
+        AND DbT5105a."ninteichosaKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+        AND DbT5105a."ikenshoSakuseiIraiKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ikenshoTorokuKanryoYMD" IS NOT NULL
+        AND DbT5105a."ikenshoTorokuKanryoYMD" <![CDATA[ <> ]]> ''
+        AND DbT5105a."ichijiHanteiKanryoYMD" IS NOT NULL
+        AND DbT5105a."ichijiHanteiKanryoYMD" <![CDATA[ <> ]]> ''
+        AND (
+        DbT5105a."ninteiShinsakaiKanryoYMD" IS NULL
+        OR  DbT5105a."ninteiShinsakaiKanryoYMD" = ''
+        )
+        AND (
+        DbT5105a."centerSoshinYMD" IS NULL
+        OR  DbT5105a."centerSoshinYMD" = ''
+        )
+        AND (
+        DbT5105a."maskingKanryoYMD" IS NULL
+        OR  DbT5105a."maskingKanryoYMD" = ''
+        )
+        ) as DbT5105
+        ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205
+        on  T5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        and T5205."tokkijikoTextImageKubun" = '2'
+        AND T5205."genponMaskKubun" = '2'
+        AND NOT EXISTS(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
+        WHERE
+        T5205."tokkijikoTextImageKubun" = '2'
+        AND T5205."genponMaskKubun" = '2'
+        AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
+        )
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" T5305
+        ON  T5305."genponMaskKubun" = '2'
+        AND T5305."remban" = '1'
+        AND NOT EXISTS(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5305IkenshoImageJoho" T5305b
+        WHERE
+        T5305."iraiRirekiNo" <![CDATA[ < ]]> T5305b."iraiRirekiNo"
+        )
+        AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213
+        ON  T5213."gaikyoChosaTextImageKubun" = '2'
+        AND NOT EXISTS(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
+        WHERE
+        T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
+        )
+        AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo" 
+        <if test = "市町村コード.toString() != ''.toString()">
+            WHERE
+            DbT7051."shichosonCode" = #{市町村コード} 
+        </if>
+        ORDER BY
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."hihokenshaKana",
+        DbT5101."shoKisaiHokenshaNo"
+        ) as A 
         <if test = "状態区分 == 1">
             WHERE
-                A."hasIkenshoMask" = false 
+            A."hasIkenshoMask" = false 
         </if> 
         <if test = "状態区分 == 2">
             WHERE
-                A."hasIkenshoMask" = true 
+            A."hasIkenshoMask" = true 
         </if>
+        ORDER BY
+        A."ninteiShinseiYMD"
         LIMIT #{件数}
     </select>
     <resultMap id="resultMap_MaSuKinGuRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
@@ -2002,18 +2006,18 @@
             OR DbT5105."centerSoshinYMD" = ''
             )
             <if test="状態区分 == 1" >
-              AND NOT EXISTS (
+                AND NOT EXISTS (
                 SELECT
-                  'X'
+                'X'
                 FROM
-                  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
+                rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
                 WHERE
-                  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
-                  AND (
-                    DbT7211."centerSoshinChushutsuYMD" IS NOT NULL
-                    OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
-                  )
-              )
+                DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
+                AND (
+                DbT7211."centerSoshinChushutsuYMD" IS NOT NULL
+                OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+                )
+                )
             </if>
             <if test="状態区分 == 2" >
                 AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
@@ -2070,18 +2074,18 @@
             OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = ''
             )
             <if test="状態区分 == 1" >
-              AND NOT EXISTS (
+                AND NOT EXISTS (
                 SELECT
-                  'X'
+                'X'
                 FROM
-                  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
+                rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
                 WHERE
-                  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
-                  AND (
-                    DbT7211."centerSoshinChushutsuYMD" IS NOT NULL
-                    OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
-                  )
-              )
+                DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
+                AND (
+                DbT7211."centerSoshinChushutsuYMD" IS NOT NULL
+                OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+                )
+                )
             </if>
             <if test="状態区分 == 2" >
                 AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
