@@ -86,9 +86,13 @@
             FROM	
                 (<include refid="noDeleted_DbT5914SonotaKikanJoho" />) AS DbT5914SonotaKikanJoho
          <where>
-            <if test="is含まない">
+            <if test="状況フラグ">
                 AND
                 DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = true
+            </if>
+            <if test="!状況フラグ">
+                AND
+                DbT5914SonotaKikanJoho."dbT5914SonotaKikanJoho_haishiFlag" = false
             </if>
             <if test="is証記載保険者番号Flag">
                 AND
