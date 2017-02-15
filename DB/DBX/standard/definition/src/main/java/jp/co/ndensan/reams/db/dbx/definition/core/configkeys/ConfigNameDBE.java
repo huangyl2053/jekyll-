@@ -1649,8 +1649,12 @@ public enum ConfigNameDBE {
     /**
      * 認定調査票特記事項最大入力文字数
      */
-    認定調査票特記事項最大入力文字数("認定調査票特記事項最大入力文字数");
-
+    認定調査票特記事項最大入力文字数("認定調査票特記事項最大入力文字数"),
+     /**
+     * 審査員単価パターン
+     */
+    審査員単価パターン("審査員単価パターン");
+    
     private final RString fullName;
 
     private ConfigNameDBE(String fullname) {

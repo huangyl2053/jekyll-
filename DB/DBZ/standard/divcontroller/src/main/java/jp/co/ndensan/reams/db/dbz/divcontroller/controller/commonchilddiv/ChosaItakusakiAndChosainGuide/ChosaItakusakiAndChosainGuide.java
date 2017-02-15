@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItaku
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -35,6 +36,7 @@ public class ChosaItakusakiAndChosainGuide {
     private RString 調査委託先コードTo = RString.EMPTY;
     private RString 調査員コードFrom = RString.EMPTY;
     private RString 調査員コードTo = RString.EMPTY;
+    private static final RString 状況フラグ無効可 = new RString("状況フラグ無効可");
 
     /**
      * コンストラクタです。
@@ -59,6 +61,24 @@ public class ChosaItakusakiAndChosainGuide {
             div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(dataPassModel.get市町村コード()));
             div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
             div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
+        }
+        if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
+            if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
+                div.getRadItakusakiJokyo().setDisabled(false);
+                div.getRadChosainJokyo().setDisabled(false);
+            }
+        }
+
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxKensu();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
+        if (!list.isEmpty()) {
+            getHandler(div).setDataGrid(list);
+        } else {
+            div.getDgKensakuKekkaIchiran().clearSource();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }

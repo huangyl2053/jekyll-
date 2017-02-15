@@ -15,10 +15,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiiry
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -31,6 +33,7 @@ public class ShujiiIryokikanAndShujiiGuide {
 
     private static final RString 状況フラグ_有効 = new RString("有効");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
+    private static final RString 状況フラグ無効可 = new RString("状況フラグ無効可");
 
     /**
      * コンストラクタです。
@@ -46,6 +49,9 @@ public class ShujiiIryokikanAndShujiiGuide {
      * @return ResponseData<ShujiiIryokikanAndShujiiGuideDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiGuideDiv> onLoad(ShujiiIryokikanAndShujiiGuideDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).intialize();
 
@@ -66,6 +72,13 @@ public class ShujiiIryokikanAndShujiiGuide {
             }
         }
 
+        if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
+            if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
+                div.getRadIryoKikanJokyo().setDisabled(false);
+                div.getRadShujiiJokyo().setDisabled(false);
+            }
+        }
+
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
                         市町村コード,
@@ -81,11 +94,13 @@ public class ShujiiIryokikanAndShujiiGuide {
                         div.getTxtShujiiShimei().getValue(),
                         div.getTxtShujiiKanaShimei().getValue(),
                         div.getTxtMaxKensu().getValue().intValue())).records();
-
-        getHandler(div)
-                .setDataGrid(list);
-        return ResponseData.of(div)
-                .respond();
+        if (!list.isEmpty()) {
+            getHandler(div).setDataGrid(list);
+        } else {
+            div.getDgKensakuKekkaIchiran().clearSource();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -106,6 +121,9 @@ public class ShujiiIryokikanAndShujiiGuide {
      * @return ResponseData<ShujiiIryokikanAndShujiiGuideDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiGuideDiv> onClick_btnKensaku(ShujiiIryokikanAndShujiiGuideDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxKensu();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -137,11 +155,13 @@ public class ShujiiIryokikanAndShujiiGuide {
                         div.getTxtShujiiShimei().getValue(),
                         div.getTxtShujiiKanaShimei().getValue(),
                         div.getTxtMaxKensu().getValue().intValue())).records();
-
-        getHandler(div)
-                .setDataGrid(list);
-        return ResponseData.of(div)
-                .respond();
+        if (!list.isEmpty()) {
+            getHandler(div).setDataGrid(list);
+        } else {
+            div.getDgKensakuKekkaIchiran().clearSource();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**

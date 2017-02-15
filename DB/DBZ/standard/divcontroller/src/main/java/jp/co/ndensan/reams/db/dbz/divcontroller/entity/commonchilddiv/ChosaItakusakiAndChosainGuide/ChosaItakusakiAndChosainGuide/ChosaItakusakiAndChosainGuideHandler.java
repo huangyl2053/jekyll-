@@ -84,36 +84,28 @@ public class ChosaItakusakiAndChosainGuideHandler {
      */
     public void setDataGrid(List<KijuntsukiShichosonjoho> list) {
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
-        if (!list.isEmpty()) {
-            div.getKensakuKekkaIchiran().setVisible(true);
-            for (int i = 0; i < list.size(); i++) {
-                KijuntsukiShichosonjoho business = list.get(i);
-                dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
-                kensakuKekkaIchiran_Row.getItakusakicode().setValue(nullToEmpty(business.get認定調査委託先コード()));
-                kensakuKekkaIchiran_Row.setItakusakiMeisho(nullToEmpty(business.get事業者名称()));
-                kensakuKekkaIchiran_Row.setItakusakiKanaMeisho(nullToEmpty(business.get事業者名称カナ()));
-                kensakuKekkaIchiran_Row.setItakusakiKubun(nullToEmpty(business.get調査委託区分()));
-                kensakuKekkaIchiran_Row.setItakusakiJokyo(nullToEmpty(business.is状況フラグ()
-                        ? new RString("有効") : new RString("無効")));
-                kensakuKekkaIchiran_Row.setChosainCode(nullToEmpty(business.get認定調査員コード()));
-                kensakuKekkaIchiran_Row.setChosainShimei(nullToEmpty(business.get調査員氏名()));
-                kensakuKekkaIchiran_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
-                kensakuKekkaIchiran_Row.setChosainHJokyo(nullToEmpty(business.is調査員状況フラグ()
-                        ? new RString("有効") : new RString("無効")));
-                kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
-                if (!business.is状況フラグ() || !business.is調査員状況フラグ()) {
-                    kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
-                    div.getDgKensakuKekkaIchiran().setReadOnly(true);
-                }
-                kensakuKekkaIchiran_Row.setYubiBango(business.get郵便番号());
-                kensakuKekkaIchiran_Row.setJyuSho(business.get住所());
-                kensakuKekkaIchiran_Row.setTelCode(business.get電話番号());
-                kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
-            }
-            div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
-        } else {
-            div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
+        div.getKensakuKekkaIchiran().setVisible(true);
+        for (int i = 0; i < list.size(); i++) {
+            KijuntsukiShichosonjoho business = list.get(i);
+            dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
+            kensakuKekkaIchiran_Row.getItakusakicode().setValue(nullToEmpty(business.get認定調査委託先コード()));
+            kensakuKekkaIchiran_Row.setItakusakiMeisho(nullToEmpty(business.get事業者名称()));
+            kensakuKekkaIchiran_Row.setItakusakiKanaMeisho(nullToEmpty(business.get事業者名称カナ()));
+            kensakuKekkaIchiran_Row.setItakusakiKubun(nullToEmpty(business.get調査委託区分()));
+            kensakuKekkaIchiran_Row.setItakusakiJokyo(nullToEmpty(business.is状況フラグ()
+                    ? new RString("有効") : new RString("無効")));
+            kensakuKekkaIchiran_Row.setChosainCode(nullToEmpty(business.get認定調査員コード()));
+            kensakuKekkaIchiran_Row.setChosainShimei(nullToEmpty(business.get調査員氏名()));
+            kensakuKekkaIchiran_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
+            kensakuKekkaIchiran_Row.setChosainHJokyo(nullToEmpty(business.is調査員状況フラグ()
+                    ? new RString("有効") : new RString("無効")));
+            kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
+            kensakuKekkaIchiran_Row.setYubiBango(business.get郵便番号());
+            kensakuKekkaIchiran_Row.setJyuSho(business.get住所());
+            kensakuKekkaIchiran_Row.setTelCode(business.get電話番号());
+            kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
         }
+        div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
         div.getTxtChikuCode().setMaxLength(5);
         div.getTxtChikuCode().setPaddingZero(true);
     }
