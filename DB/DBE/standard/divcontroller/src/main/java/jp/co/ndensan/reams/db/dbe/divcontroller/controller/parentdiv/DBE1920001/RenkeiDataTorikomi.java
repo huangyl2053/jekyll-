@@ -128,7 +128,7 @@ public class RenkeiDataTorikomi {
             }
         }
         RStringBuilder buider = new RStringBuilder();
-        if (RString.isNullOrEmpty(error) && !RString.isNullOrEmpty(不正ファイル名)) {
+        if (RString.isNullOrEmpty(error) && RString.isNullOrEmpty(不正ファイル名)) {
             for (FileData file : files) {
                 getHandler(div).upLoadFile(file, buider);
             }
