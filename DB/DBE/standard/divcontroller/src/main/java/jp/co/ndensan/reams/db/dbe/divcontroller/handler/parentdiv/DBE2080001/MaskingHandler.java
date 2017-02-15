@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -73,6 +74,7 @@ public class MaskingHandler {
         }
         データグリッド部編集(マスキングList);
         setCountDisplay();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnCompleteMasking"), div.getRadTaishoDataKubun().getSelectedKey().equals(new RString("1")));
     }
 
     /**

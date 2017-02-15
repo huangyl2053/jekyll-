@@ -21,7 +21,7 @@ public class IkenshoImageJohoIdentifier implements Serializable {
     private final int 主治医意見書作成依頼履歴番号;
     private final Code 帳票ID;
     private final RString マスキングデータ区分;
-//    private final int 取込みページ番号;
+    private final int 連番;
 
     /**
      * コンストラクタです。
@@ -30,16 +30,17 @@ public class IkenshoImageJohoIdentifier implements Serializable {
      * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      * @param 帳票ID 帳票ID
      * @param マスキングデータ区分 マスキングデータ区分
-     * @param 取込みページ番号 取込みページ番号
+     * @param 連番 連番
      */
     public IkenshoImageJohoIdentifier(ShinseishoKanriNo 申請書管理番号,
             int 主治医意見書作成依頼履歴番号,
             Code 帳票ID,
-            RString マスキングデータ区分) {
+            RString マスキングデータ区分,
+            int 連番) {
         this.申請書管理番号 = 申請書管理番号;
         this.主治医意見書作成依頼履歴番号 = 主治医意見書作成依頼履歴番号;
         this.帳票ID = 帳票ID;
         this.マスキングデータ区分 = マスキングデータ区分;
-//        this.取込みページ番号 = 取込みページ番号;
+        this.連番 = 連番;
     }
 }
