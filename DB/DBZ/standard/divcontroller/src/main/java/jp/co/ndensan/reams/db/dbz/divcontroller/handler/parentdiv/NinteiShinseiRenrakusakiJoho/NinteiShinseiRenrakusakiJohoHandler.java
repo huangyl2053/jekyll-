@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定申請連絡先情報のHandlerクラスです。
@@ -161,7 +162,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                     renrakusakiJoho.get連絡先氏名カナ() == null ? RString.EMPTY : renrakusakiJoho.get連絡先氏名カナ().getColumnValue(),
                     renrakusakiJoho.get連絡先携帯番号() == null ? RString.EMPTY : renrakusakiJoho.get連絡先郵便番号().getColumnValue(),
                     renrakusakiJoho.get申請書管理番号().value());
-            dateSource.add(row);
+            if (!EntityDataState.Deleted.equals(renrakusakiJoho.toEntity().getState())) {
+                dateSource.add(row);
+            }
         }
         div.getDgRenrakusakiIchiran().setDataSource(dateSource);
     }
@@ -303,7 +306,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                 business = business.createBuilderForEdit().set連絡先住所(new AtenaJusho(row.getJusho())).build();
                 business = business.createBuilderForEdit().set連絡先電話番号(new TelNo(row.getTelNo())).build();
                 business = business.createBuilderForEdit().set連絡先携帯番号(new TelNo(row.getMobileNo())).build();
-                business = business.createBuilderForEdit().set優先順位(row.getYusenJuni() == null ? 0
+                business = business.createBuilderForEdit().set優先順位(row.getYusenJuni().getValue() == null ? 0
                         : row.getYusenJuni().getValue().intValue()).build();
                 business = business.createBuilderForEdit().set連絡先区分番号(row.getRenrakusakiKuBun()).build();
                 business = business.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();

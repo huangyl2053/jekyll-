@@ -90,7 +90,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -523,10 +522,10 @@ public class NinteiShinseiToroku {
                 delCount++;
             }
         }
-        if (data.getDbdBusiness() != null && (!data.getDbdBusiness().isEmpty() || delCount != data.getDbdBusiness().size())) {
-            div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
-        } else {
+        if (data.getDbdBusiness() == null  || delCount == data.getDbdBusiness().size()) {
             div.getBtnRenrakusaki().setIconNameEnum(IconName.NONE);
+        } else {
+            div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
         }
         return ResponseData.of(div).respond();
     }
@@ -808,7 +807,6 @@ public class NinteiShinseiToroku {
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
             } else if (div.getTxtTorisageDate().getValue() != null && !div.getTxtTorisageJiyu().getValue().isEmpty()) {
                 shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
-                shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
                 shinseiJohoBuilder.set審査継続区分(false);
                 shinseiJohoBuilder.set論理削除フラグ(false);
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
@@ -1051,9 +1049,9 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set主治医への連絡事項(div.getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko());
         shinseiJohoBuilder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         if (RString.isNullOrEmpty(div.getShisetsuJoho().getTxtNyushoShisetsu().getValue())) {
-            shinseiJohoBuilder.set施設入所の有無(true);
-        } else {
             shinseiJohoBuilder.set施設入所の有無(false);
+        } else {
+            shinseiJohoBuilder.set施設入所の有無(true);
         }
 //        if (!RString.isNullOrEmpty(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
 //            shinseiJohoBuilder.set入所施設コード(new JigyoshaNo(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo()));
@@ -1081,13 +1079,24 @@ public class NinteiShinseiToroku {
         }
         shinseiJohoBuilder.set認定申請区分_法令_コード(new Code(kihonJohoInputDiv.getDdlShinseiKubunHorei().getSelectedKey()));
         shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
-        if (div.getTxtTorisageDate().getValue() != null && !div.getTxtTorisageDate().getValue().toDateString().isEmpty()) {
-            shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue().toFlexibleDate());
-        }
-        shinseiJohoBuilder.set取下理由(div.getTxtTorisageJiyu().getValue());
         shinseiJohoBuilder.set入所施設名称(new AtenaMeisho(div.getTxtNyushoShisetsu().getValue()));
         //shinseiJohoBuilder.set市町村コード(LasdecCode.EMPTY)		
-
+        if (div.getTxtEnkiKetteiYMD().getValue() != null && !div.getTxtEnkiKetteiYMD().getValue().toDateString().trim().isEmpty()) {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.延期.getコード()));
+        } 
+        if (TorisageKubunCode.取り下げ.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())) {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.取下.getコード()));
+            shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
+            shinseiJohoBuilder.set取下理由(div.getTxtTorisageJiyu().getValue());
+            shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
+        }
+        if (TorisageKubunCode.却下.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())
+                || TorisageKubunCode.区分変更却下.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())) {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.却下.getコード()));
+            shinseiJohoBuilder.set却下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
+            shinseiJohoBuilder.set却下理由(div.getTxtTorisageJiyu().getValue());
+            shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
+        }
         shinseiJohoBuilder.set論理削除フラグ(false);
         return shinseiJohoBuilder;
     }
@@ -1229,9 +1238,9 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set情報提供への同意有無(div.getChkJohoTeikyoDoi().isAllSelected());
         shinseiJohoBuilder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         if (RString.isNullOrEmpty(div.getShisetsuJoho().getTxtNyushoShisetsu().getValue())) {
-            shinseiJohoBuilder.set施設入所の有無(true);
-        } else {
             shinseiJohoBuilder.set施設入所の有無(false);
+        } else {
+            shinseiJohoBuilder.set施設入所の有無(true);
         }
 //        if (!RString.isNullOrEmpty(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
 //            shinseiJohoBuilder.set入所施設コード(new JigyoshaNo(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo()));
