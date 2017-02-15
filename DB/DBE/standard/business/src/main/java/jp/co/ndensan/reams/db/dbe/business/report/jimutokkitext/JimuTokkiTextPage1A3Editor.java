@@ -180,6 +180,11 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         }
         source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
                 .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
+        if (!new RString("なし").equals(item.getSabisuKubun())) {
+            source.shisetsuName = new RString("施設名　：");
+            source.jusho = new RString("住所　〒");
+            source.telNo = new RString("TEL");
+        }
         return editSource1(source);
     }
 

@@ -180,6 +180,11 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         source.imgShisetsuName = item.get施設名イメージ();
         source.imgShisetsuAddress = item.get住所イメージ();
         source.imgShisetsuTel = item.get電話番号イメージ();
+        if (!new RString("なし").equals(item.getSabisuKubun())) {
+            source.shisetsuName = new RString("施設名　：");
+            source.jusho = new RString("住所　〒");
+            source.telNo = new RString("TEL");
+        }
         if (サービス区分コード1.equals(item.getSabisuKubun())) {
             setLayout1(source);
         } else if (サービス区分コード2.equals(item.getSabisuKubun())) {

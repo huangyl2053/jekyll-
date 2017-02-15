@@ -99,6 +99,11 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
         source.hokenshaNo = item.get特記事項保険者番号();
         source.hihokenshaNo = item.get特記事項被保険者番号();
         source.hihokenshaName = item.get名前();
+        if (!全面.equals(item.get特記パターン())) {
+            source.hokenshaNo1 = item.get特記事項保険者番号();
+            source.hihokenshaNo1 = item.get特記事項被保険者番号();
+            source.hihokenshaName1 = item.get名前();
+        }
         source.sakuseiGengo = get元号(item.get認定申請年月日());
         source.sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);

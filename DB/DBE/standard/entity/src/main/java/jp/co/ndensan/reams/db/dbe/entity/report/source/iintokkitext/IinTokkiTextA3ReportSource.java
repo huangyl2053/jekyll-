@@ -296,6 +296,12 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
     public RString shisetsuTelTxit;
     @ReportItem(name = "imgShisetsuTel", order = 138)
     public RString imgShisetsuTel;
+    @ReportItem(name = "shisetsuName", length = 7, order = 297)
+    public RString shisetsuName;
+    @ReportItem(name = "jusho", length = 7, order = 298)
+    public RString jusho;
+    @ReportItem(name = "telNo", length = 3, order = 299)
+    public RString telNo;
 
     @ReportItem(name = "gaikyotokkiImg", order = 139)
     public RString gaikyotokkiImg;

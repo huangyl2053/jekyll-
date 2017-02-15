@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
@@ -123,6 +125,7 @@ public class SabisuJyoukyoA3 {
     private static final int 基準時間算出用_10 = 10;
     private static final int 基準時間算出用_5 = 5;
     private static final int 基準時間算出用_12 = 12;
+    private final String regex = "[^0]";
 
     /**
      * サービスの状況を設定します。
@@ -1190,7 +1193,15 @@ public class SabisuJyoukyoA3 {
         項目.set要介護認定等基準時間_機能訓練(new RString(new Decimal(entity.getKijunJikanKinoKunren()).divide(基準時間算出用_10).toString()));
         項目.set要介護認定等基準時間_医療関連(new RString(new Decimal(entity.getKijunJikanIryoKanren()).divide(基準時間算出用_10).toString()));
         項目.set要介護認定等基準時間_認知症加算(new RString(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10).toString()));
-        項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+        if (!RString.isNullOrEmpty(entity.getIchijiHnateiKeikokuCode())) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(entity.getIchijiHnateiKeikokuCode());
+            if (matcher.find()) {
+                項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+            } else {
+                項目.set警告コード(RString.EMPTY);
+            }
+        }
         List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
         TyukanHyouka 中間評価項目 = new TyukanHyouka();
         中間評価項目.set第1群(new RString(new Decimal(entity.getChukanHyokaKomoku1gun()).divide(基準時間算出用_10).toString()));
@@ -1363,6 +1374,9 @@ public class SabisuJyoukyoA3 {
             } else if (A_09.equals(厚労省IF識別コード) || B_09.equals(厚労省IF識別コード)) {
                 一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
             }
+        }
+        if (一次判定結果.equals(一次判定結果_認知症加算)) {
+            return builder.append(一次判定結果).toRString();
         }
         return builder.append(一次判定結果)
                 .append("→")
