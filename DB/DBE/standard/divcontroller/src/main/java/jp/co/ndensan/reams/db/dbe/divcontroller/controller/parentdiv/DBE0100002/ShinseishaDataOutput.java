@@ -205,7 +205,6 @@ public class ShinseishaDataOutput {
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
         div.getTxtMaxDisp().setDisabled(true);
-        div.getBtnModoru().setDisabled(false);
         if (searchResult.records().size() == 1) {
             div.getBtnClear().setDisabled(false);
             div.getTxtMaxDisp().setDisabled(false);

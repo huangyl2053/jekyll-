@@ -67,7 +67,6 @@ public class ShinseishaDataOutputHandler {
         div.getTxtMaxDisp().setValue(new Decimal(検索制御_最大取得件数.toString()));
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
         div.getDgShinseiJoho().setDataSource(dataSource);
-        div.getBtnModoru().setDisabled(true);
     }
 
     /**
