@@ -11,49 +11,41 @@
         resultMap="ResultMap_EnkiTsuchishoHakkenichiranhyoJyohoEntity" 
         fetchSize="500" resultOrdered="true">
         SELECT
-            T4101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
-            T4003."hihokenshaNo" AS 被保番号,
-            T4101."hihokenshaName" AS  氏名,
-            T4101."hihokenshaKana" AS  氏名カナ,
-            T4101."jusho" AS 住所,
-            T4003."shinseiYMD" AS 申請日,
-            T4101."enkiKetteiYMD" AS 延期決定年月日, 
-            T4101."enkiRiyu" AS 延期理由, 
-            T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日, 
-            T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数, 
-            T4101."enkiMikomiKaishiYMD" AS 延期見込期間開始年月日, 
-            T4101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日, 
+            T5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
+            T5101."hihokenshaNo" AS 被保番号,
+            T5101."hihokenshaName" AS  氏名,
+            T5101."hihokenshaKana" AS  氏名カナ,
+            T5101."jusho" AS 住所,
+            T5101."ninteiShinseiYMD" AS 申請日,
+            T5101."enkiKetteiYMD" AS 延期決定年月日, 
+            T5101."enkiRiyu" AS 延期理由, 
+            T5101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日, 
+            T5101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数, 
+            T5101."enkiMikomiKaishiYMD" AS 延期見込期間開始年月日, 
+            T5101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日, 
             T7051."shichosonCode" AS 市町村コード,
             T7051."shichosonMeisho" AS 市町村名称
         FROM
-            rgdb."DbT4003YokaigoNinteiInterface" AS T4003
-        INNER JOIN  rgdb."DbT4001JukyushaDaicho" AS T4001
-            ON  T4001."hihokenshaNo" = T4003."hihokenshaNo"
-            AND T4001."shinseishoKanriNo" = T4003."shinseishoKanriNo"
-            AND T4001."rirekiNo" = T4003."rirekiNo"
-            AND T4001."logicalDeletedFlag" = FALSE
-        INNER JOIN  rgdb."DbT4101NinteiShinseiJoho" AS T4101
-            ON  T4001."shinseishoKanriNo" = T4101."shinseishoKanriNo"
-            AND T4101."logicalDeletedFlag" = FALSE
+            rgdb."DbT5101NinteiShinseiJoho" AS T5101
         LEFT JOIN   rgdb."DbT7051KoseiShichosonMaster" AS T7051
-            ON  T4101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
+            ON  T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
         WHERE
              <if test="tsuchishohakkonbi != null and !tsuchishohakkonbi.isEmpty()">
-                T4101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
+                T5101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
             </if>
             <if test="tsuchishohakkonbi == null or tsuchishohakkonbi.isEmpty()">
-                T4101."enkiTsuchiHakkoYMD" IS NULL
+                T5101."enkiTsuchiHakkoYMD" IS NULL
             </if>
             <if test="shorimikomibiFrom != null and !shorimikomibiFrom.isEmpty()">
-                AND #{shorimikomibiFrom} <![CDATA[<=]]>  T4101."enkiKetteiYMD"
+                AND #{shorimikomibiFrom} <![CDATA[<=]]>  T5101."enkiKetteiYMD"
             </if>
             <if test="shorimikomibiTo != null and !shorimikomibiTo.isEmpty()" >
-                AND T4101."enkiKetteiYMD" <![CDATA[<=]]> #{shorimikomibiTo}
+                AND T5101."enkiKetteiYMD" <![CDATA[<=]]> #{shorimikomibiTo}
             </if>
          ORDER BY
             T7051."shichosonCode",
-            T4101."hihokenshaKana",
-            T4101."ninteiShinseiYMD"    
+            T5101."hihokenshaKana",
+            T5101."ninteiShinseiYMD"    
     </select>
     
     <select id="get延期通知書発行一覧表情報" 
@@ -61,58 +53,54 @@
         resultMap="ResultMap_EnkiTsuchishoHakkenichiranhyoJyohoEntity" 
         fetchSize="500" resultOrdered="true">
         SELECT
-            T4101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
-            T4101."hihokenshaNo" AS 被保番号,
-            T4101."hihokenshaName" AS 氏名,
-            T4101."hihokenshaKana" AS 氏名カナ,
-            T4101."jusho" AS 住所,
-            T4101."ninteiShinseiYMD" AS 申請日,
-            T4101."enkiKetteiYMD" AS 延期決定年月日, 
-            T4101."enkiRiyu" AS 延期理由, 
-            T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日, 
-            T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数, 
-            T4101."enkiMikomiKaishiYMD" AS 延期見込期間開始年月日, 
-            T4101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日, 
+            T5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
+            T5101."hihokenshaNo" AS 被保番号,
+            T5101."hihokenshaName" AS 氏名,
+            T5101."hihokenshaKana" AS 氏名カナ,
+            T5101."jusho" AS 住所,
+            T5101."ninteiShinseiYMD" AS 申請日,
+            T5101."enkiKetteiYMD" AS 延期決定年月日, 
+            T5101."enkiRiyu" AS 延期理由, 
+            T5101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日, 
+            T5101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数, 
+            T5101."enkiMikomiKaishiYMD" AS 延期見込期間開始年月日, 
+            T5101."enkiMikomiShuryoYMD" AS 延期見込期間終了年月日, 
             T7051."shichosonCode" AS 市町村コード,
             T7051."shichosonMeisho" AS 市町村名称
         FROM
-            rgdb."DbT4101NinteiShinseiJoho" AS T4101
+            rgdb."DbT5101NinteiShinseiJoho" AS T5101
         LEFT JOIN   rgdb."DbT7051KoseiShichosonMaster" AS T7051
-            ON  T4101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
-        LEFT JOIN   rgdb."DbT4116IchijiHanteiKekkaJoho" AS T4116
-            ON  T4101."shinseishoKanriNo" = T4116."shinseishoKanriNo"
-        LEFT JOIN   rgdb."DbT5510IchiGojiHanteiKekkaJoho" AS T5510
-            ON  T4101."shinseishoKanriNo" = T5510."shinseishoKanriNo"
-        LEFT JOIN  rgdb."DbT5502ShinsakaiWariateJoho" AS T5502
-            ON  T4101."shinseishoKanriNo" = T5502."shinseishoKanriNo"
+            ON  T5101."shoKisaiHokenshaNo" = T7051."shoKisaiHokenshaNo"
         LEFT JOIN   rgdb."DbT5105NinteiKanryoJoho" AS T5105
-            ON  T5105."shinseishoKanriNo" = T4101."shinseishoKanriNo"
+            ON  T5105."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+            
         WHERE
             <if test="tsuchishohakkonbi != null and !tsuchishohakkonbi.isEmpty()">
-             T4101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
+             T5101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
             </if>
             <if test="tsuchishohakkonbi == null or tsuchishohakkonbi.isEmpty()">
-                T4101."enkiTsuchiHakkoYMD" IS NULL
+                T5101."enkiTsuchiHakkoYMD" IS NULL
             </if>
             <if test="shorimikomibiFrom != null and !shorimikomibiFrom.isEmpty()">
-                AND #{shorimikomibiFrom} <![CDATA[<=]]>  T4101."enkiKetteiYMD"
+                AND #{shorimikomibiFrom} <![CDATA[<=]]>  T5101."enkiKetteiYMD"
             </if>
             <if test="shorimikomibiTo != null and !shorimikomibiTo.isEmpty()" >
-                AND T4101."enkiKetteiYMD" <![CDATA[<=]]> #{shorimikomibiTo}
+                AND T5101."enkiKetteiYMD" <![CDATA[<=]]> #{shorimikomibiTo}
             </if>
-            AND T4101."shinseishoKanriNo" NOT IN(
+            AND not exists (
                 SELECT 
-                    rgdb."DbT4102NinteiKekkaJoho"."shinseishoKanriNo"
+                    a."shinseishoKanriNo"
                 FROM 
-                    rgdb."DbT4102NinteiKekkaJoho"
+                    rgdb."DbT5102NinteiKekkaJoho" a
+                WHERE a."shinseishoKanriNo" = T5101."shinseishoKanriNo"
             )
-            AND T4101."logicalDeletedFlag" = FALSE
+            AND T5101."logicalDeletedFlag" = FALSE
             AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND T5105."ninteiShinsakaiKanryoYMD" IS NULL
         ORDER BY
             T7051."shichosonCode",
-            T4101."hihokenshaKana",
-            T4101."ninteiShinseiYMD"        
+            T5101."hihokenshaKana",
+            T5101."ninteiShinseiYMD"
     </select>
     
     <resultMap id="ResultMap_EnkiTsuchishoHakkenichiranhyoJyohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.enkitsuchisho.EnkiTsuchishoEntity" autoMapping="true">
@@ -133,13 +121,13 @@
     </resultMap>
     
     <select id ="selectBy申請書管理番号リスト"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.enkitsuchisho.EnkiTsuchishoJyohoMybatisParameter"
             fetchSize="500" resultOrdered="true">
         SELECT
             A.*
         FROM
-            rgdb."DbT4101NinteiShinseiJoho" AS A
+            rgdb."DbT5101NinteiShinseiJoho" AS A
         WHERE
             A."shinseishoKanriNo" IN
             <foreach item="shinseishokanribangorisuto" index="index" collection="shinseishokanribangorisuto" open="(" separator="," close=")">
