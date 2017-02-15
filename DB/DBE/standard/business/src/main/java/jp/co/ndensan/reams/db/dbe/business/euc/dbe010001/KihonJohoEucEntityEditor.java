@@ -104,8 +104,10 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set住所(nullToEmpty(entity.getJusho()));
         eucEntity.set電話番号(nullToEmpty(entity.getTelNo()));
         eucEntity.set地区コード(nullToEmpty(entity.getChikuCode()));
-        eucEntity.set地区名(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                DBECodeShubetsu.調査地区コード.getコード(), new Code(entity.getChikuCode().value())));
+        eucEntity.set地区名((entity.getChikuCode() != null)
+                ? CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                        DBECodeShubetsu.調査地区コード.getコード(), new Code(entity.getChikuCode().value()))
+                : RString.EMPTY);
         eucEntity.set申請日(format日付(entity.getNinteiShinseiYMD()));
         eucEntity.set申請書区分コード(entity.getShienShinseiKubun());
         eucEntity.set申請書区分((!RString.isNullOrEmpty(entity.getShienShinseiKubun()))
