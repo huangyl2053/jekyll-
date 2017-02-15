@@ -126,21 +126,12 @@ public class IkenshoJissekiIchiran {
     }
 
     /**
-     * 主治医意見書依頼区分を取得します。
+     * 意見書作成回数区分を取得します。
      *
-     * @return 主治医意見書依頼区分
+     * @return 意見書作成回数区分
      */
-    public RString get主治医意見書依頼区分() {
-        return entity.get主治医意見書依頼区分();
-    }
-
-    /**
-     * 医師区分コードを取得します。
-     *
-     * @return 医師区分コード
-     */
-    public RString get医師区分コード() {
-        return entity.get医師区分コード();
+    public RString get意見書作成回数区分() {
+        return entity.get意見書作成回数区分();
     }
 
     /**
@@ -170,4 +161,12 @@ public class IkenshoJissekiIchiran {
         return entity.get主治医コード();
     }
 
+    /**
+     * 単価を取得します。
+     *
+     * @return 単価
+     */
+    public RString get単価() {
+        return entity.get単価();
+    }
 }

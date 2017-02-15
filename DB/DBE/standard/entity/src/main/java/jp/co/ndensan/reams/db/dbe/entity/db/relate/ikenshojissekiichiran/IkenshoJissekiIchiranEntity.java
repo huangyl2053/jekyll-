@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -55,8 +54,8 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 入手パターン_施新;
     @CsvField(order = 15, name = "施設_継")
     private final RString 入手パターン_施継;
-    @CsvField(order = 16, name = "医師区分")
-    private final RString 医師区分;
+    @CsvField(order = 16, name = "単価")
+    private final RString 単価;
     
     private static final RString MARU = new RString("○");
 
@@ -78,7 +77,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
      * @param 入手パターン_在継 入手パターン_在継
      * @param 入手パターン_施新 入手パターン_施新
      * @param 入手パターン_施継 入手パターン_施継
-     * @param 医師区分 医師区分
+     * @param 単価 単価
      */
     public IkenshoJissekiIchiranEntity(RString 保険者番号,
             RString 保険者名称,
@@ -95,7 +94,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
             RString 入手パターン_在継,
             RString 入手パターン_施新,
             RString 入手パターン_施継,
-            RString 医師区分) {
+            RString 単価) {
         this.保険者番号 = 保険者番号;
         this.保険者名称 = 保険者名称;
         this.医療機関コード = 医療機関コード;
@@ -111,7 +110,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.入手パターン_在継 = 入手パターン_在継;
         this.入手パターン_施新 = 入手パターン_施新;
         this.入手パターン_施継 = 入手パターン_施継;
-        this.医師区分 = 医師区分;
+        this.単価 = 単価;
     }
 
     public IkenshoJissekiIchiranEntity(IkenshoJissekiIchiranRelateEntity relateEntity) {
@@ -120,20 +119,18 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         RString 施設_新 = RString.EMPTY;
         RString 施設_継 = RString.EMPTY;
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(relateEntity.get在宅_施設区分())) {
-            if (IkenshoIraiKubun.初回依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(relateEntity.get意見書作成回数区分())) {
                 在宅_新 = MARU;
             }
-            if (IkenshoIraiKubun.再依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())
-                    || IkenshoIraiKubun.再意見書.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(relateEntity.get意見書作成回数区分())) {
                 在宅_継 = MARU;
             }
         }
         if (ZaitakuShisetsuKubun.施設.getコード().equals(relateEntity.get在宅_施設区分())) {
-            if (IkenshoIraiKubun.初回依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(relateEntity.get意見書作成回数区分())) {
                 施設_新 = MARU;
             }
-            if (IkenshoIraiKubun.再依頼.getコード().equals(relateEntity.get主治医意見書依頼区分())
-                    || IkenshoIraiKubun.再意見書.getコード().equals(relateEntity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(relateEntity.get意見書作成回数区分())) {
                 施設_継 = MARU;
             }
         }
@@ -152,7 +149,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.入手パターン_在継 = 在宅_継;
         this.入手パターン_施新 = 施設_新;
         this.入手パターン_施継 = 施設_継;
-        this.医師区分 = IshiKubunCode.toValue(relateEntity.get医師区分コード()).get名称();
+        this.単価 = relateEntity.get単価();
     }
 
     private static RString dateFormat(RString date) {

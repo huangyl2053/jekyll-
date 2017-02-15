@@ -7,8 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranRelateEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,20 +36,18 @@ public final class IkenshoJissekiIchiranChange {
         RString 施設_新 = RString.EMPTY;
         RString 施設_継 = RString.EMPTY;
         if (ZaitakuShisetsuKubun.在宅.getコード().equals(entity.get在宅_施設区分())) {
-            if (IkenshoIraiKubun.初回依頼.getコード().equals(entity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.get意見書作成回数区分())) {
                 在宅_新 = MARU;
             }
-            if (IkenshoIraiKubun.再依頼.getコード().equals(entity.get主治医意見書依頼区分())
-                    || IkenshoIraiKubun.再意見書.getコード().equals(entity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.get意見書作成回数区分())) {
                 在宅_継 = MARU;
             }
         }
         if (ZaitakuShisetsuKubun.施設.getコード().equals(entity.get在宅_施設区分())) {
-            if (IkenshoIraiKubun.初回依頼.getコード().equals(entity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(entity.get意見書作成回数区分())) {
                 施設_新 = MARU;
             }
-            if (IkenshoIraiKubun.再依頼.getコード().equals(entity.get主治医意見書依頼区分())
-                    || IkenshoIraiKubun.再意見書.getコード().equals(entity.get主治医意見書依頼区分())) {
+            if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(entity.get意見書作成回数区分())) {
                 施設_継 = MARU;
             }
         }
@@ -69,7 +66,7 @@ public final class IkenshoJissekiIchiranChange {
                 在宅_継,
                 施設_新,
                 施設_継,
-                IshiKubunCode.toValue(entity.get医師区分コード()).get名称());
+                entity.get単価());
         return data;
     }
 
