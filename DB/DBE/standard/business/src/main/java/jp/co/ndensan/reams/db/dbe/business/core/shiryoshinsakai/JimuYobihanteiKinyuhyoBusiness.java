@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JimuYobihanteiKinyuhyoBusiness {
 
     private static final int INDEX_5 = 5;
+    private final String regex = "[^0]";
     private final HanteiJohoEntity entity;
     private final IinTokkiJikouItiziHanteiProcessParameter paramter;
 
@@ -70,7 +73,16 @@ public class JimuYobihanteiKinyuhyoBusiness {
      * @return 一次判定警告コード
      */
     public RString get一次判定警告コード() {
-        return entity.getIchijiHnateiKeikokuCode();
+        if (!RString.isNullOrEmpty(entity.getIchijiHnateiKeikokuCode())) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(entity.getIchijiHnateiKeikokuCode());
+            if (matcher.find()) {
+                return entity.getIchijiHnateiKeikokuCode();
+            } else {
+                return RString.EMPTY;
+            }
+        }
+        return RString.EMPTY;
     }
 
     /**

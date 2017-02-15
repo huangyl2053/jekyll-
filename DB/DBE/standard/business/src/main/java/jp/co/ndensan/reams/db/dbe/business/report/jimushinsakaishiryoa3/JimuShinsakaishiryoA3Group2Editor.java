@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -180,7 +181,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         source.imgShisetsuName = item.get施設名イメージ();
         source.imgShisetsuAddress = item.get住所イメージ();
         source.imgShisetsuTel = item.get電話番号イメージ();
-        if (!new RString("なし").equals(item.getSabisuKubun())) {
+        if (!ServiceKubunCode.なし.get名称().equals(item.getSabisuKubun())) {
             source.shisetsuName = new RString("施設名　：");
             source.jusho = new RString("住所　〒");
             source.telNo = new RString("TEL");

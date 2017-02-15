@@ -16,32 +16,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum IkenKomoku05 {
 
     /**
-     * コード:1 名称:自立 略称:定義なし
+     * コード:1 名称:自立 略称:自立
      */
-    自立("1", "自立"),
+    自立("1", "自立", "自立"),
     /**
-     * コード:2 名称:いくらか困難 略称:定義なし
+     * コード:2 名称:いくらか困難 略称:いくらか困難
      */
-    いくらか困難("2", "いくらか困難"),
+    いくらか困難("2", "いくらか困難", "いくらか困難"),
     /**
-     * コード:3 名称:見守りが必要 略称:定義なし
+     * コード:3 名称:見守りが必要 略称:見守りが必要
      */
-    見守りが必要("3", "見守りが必要"),
+    見守りが必要("3", "見守りが必要", "見守りが必要"),
     /**
-     * コード:4 名称:判断できない 略称:定義なし
+     * コード:4 名称:判断できない 略称:判断できない
      */
-    判断できない("4", "判断できない"),
+    判断できない("4", "判断できない", "判断できない"),
     /**
-     * コード:9 名称:記載なし 略称:定義なし
+     * コード:9 名称:記載なし 略称:記載なし
      */
-    記載なし("9", "記載なし");
+    記載なし("9", "記載なし", "記載なし");
 
     private final RString code;
     private final RString fullName;
+    private final RString abbreviatedName;
 
-    private IkenKomoku05(String code, String fullname) {
+    private IkenKomoku05(String code, String fullname, String abbreviatedName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.abbreviatedName = new RString(abbreviatedName);
     }
 
     /**
@@ -60,6 +62,15 @@ public enum IkenKomoku05 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 意見書項目内容05の略称を返します。
+     *
+     * @return 意見書項目内容05の略称
+     */
+    public RString get略称() {
+        return abbreviatedName;
     }
 
     /**

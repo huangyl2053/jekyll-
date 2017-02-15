@@ -16,47 +16,50 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum IkenKomoku03 {
 
     /**
-     * コード:1 名称:自立 略称:定義なし
+     * コード:1 名称:自立 略称:自立
      */
-    自立("1", "自立"),
+    自立("1", "自立", "自立"),
     /**
-     * コード:2 名称:Ⅰ 略称:定義なし
+     * コード:2 名称:Ⅰ 略称:Ⅰ
      */
-    Ⅰ("2", "Ⅰ"),
+    Ⅰ("2", "Ⅰ", "Ⅰ"),
     /**
-     * コード:3 名称:Ⅱa 略称:定義なし
+     * コード:3 名称:Ⅱa 略称:Ⅱa
      */
-    Ⅱa("3", "Ⅱa"),
+    Ⅱa("3", "Ⅱa", "Ⅱa"),
     /**
-     * コード:4 名称:Ⅱb 略称:定義なし
+     * コード:4 名称:Ⅱb 略称:Ⅱb
      */
-    Ⅱb("4", "Ⅱb"),
+    Ⅱb("4", "Ⅱb", "Ⅱb"),
     /**
-     * コード:5 名称:Ⅲa 略称:定義なし
+     * コード:5 名称:Ⅲa 略称:Ⅲa
      */
-    Ⅲa("5", "Ⅲa"),
+    Ⅲa("5", "Ⅲa", "Ⅲa"),
     /**
-     * コード:6 名称:Ⅲb 略称:定義なし
+     * コード:6 名称:Ⅲb 略称:Ⅲb
      */
-    Ⅲb("6", "Ⅲb"),
+    Ⅲb("6", "Ⅲb", "Ⅲb"),
     /**
-     * コード:7 名称:Ⅳ 略称:定義なし
+     * コード:7 名称:Ⅳ 略称:Ⅳ
      */
-    Ⅳ("7", "Ⅳ"),
+    Ⅳ("7", "Ⅳ", "Ⅳ"),
     /**
-     * コード:8 名称:M 略称:定義なし
+     * コード:8 名称:M 略称:M
      */
-    M("8", "M"),
+    M("8", "M", "M"),
     /**
-     * コード:9 名称:記載なし 略称:定義なし
+     * コード:9 名称:記載なし 略称:記載なし
      */
-    記載なし("9", "記載なし");
+    記載なし("9", "記載なし", "記載なし");
+
     private final RString code;
     private final RString fullName;
+    private final RString abbreviatedName;
 
-    private IkenKomoku03(String code, String fullname) {
+    private IkenKomoku03(String code, String fullname, String abbreviatedName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.abbreviatedName = new RString(abbreviatedName);
     }
 
     /**
@@ -75,6 +78,15 @@ public enum IkenKomoku03 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 意見書項目内容03の略称を返します。
+     *
+     * @return 意見書項目内容03の略称
+     */
+    public RString get略称() {
+        return abbreviatedName;
     }
 
     /**
