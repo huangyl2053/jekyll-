@@ -80,7 +80,6 @@ public class ImageJohoMaskingHandler {
     private static final RString イメージファイル終端 = new RString(".png");
     private static final RString BAKファイル終端 = new RString("_BAK.png");
     private static final RString 編集後ファイル終端 = new RString("_NEW.png");
-//    private static final RString ローカルファイル名 = new RString("IMG");
 
     /**
      * コンストラクタです。
@@ -234,7 +233,6 @@ public class ImageJohoMaskingHandler {
         dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         RString outputImagePath = Directory.createTmpDirectory();
         RString imagePath = RString.EMPTY;
-//        RString imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
 
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()));
         RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
@@ -369,8 +367,6 @@ public class ImageJohoMaskingHandler {
         option.overWrite(true);
         SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), "", option);
         SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), "", option);
-//        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), ローカルファイル名.toString(), option);
-//        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), ローカルファイル名.toString(), option);
     }
 
     private void saveLocalFile(dgImageMaskingTaisho_Row row) {
