@@ -30,7 +30,7 @@
         ELSE false
         END "hasTokkiMask" ,
         CASE
-        WHEN T5305."shinseishoKanriNo" is not null or T5305."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
+        WHEN T5305a."shinseishoKanriNo" is not null or T5305a."shinseishoKanriNo" <![CDATA[<>]]> '' THEN true
         ELSE false
         END "hasIkenshoMask" ,
         CASE
@@ -130,7 +130,7 @@
         AND T5205."shinseishoKanriNo" = T5101."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
-        on T5305."genponMaskKubun" = #{イメージ区分}
+        on T5305."genponMaskKubun" <![CDATA[<>]]> #{イメージ区分}
         AND T5305."remban" = '1'
         AND NOT EXISTS	(
         SELECT
@@ -139,8 +139,16 @@
         rgdb."DbT5305IkenshoImageJoho" T5305b
         WHERE
         T5305."iraiRirekiNo" <![CDATA[<]]> T5305b."iraiRirekiNo"
+        AND T5305b."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         )
         AND T5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" T5305a
+        on T5305a."genponMaskKubun" = #{イメージ区分}
+        AND T5305a."remban" = T5305."remban"
+        AND T5305a."ChoyoID" = T5305."ChoyoID"
+        AND T5305a."iraiRirekiNo" = T5305."iraiRirekiNo"
+        AND T5305a."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213
         ON

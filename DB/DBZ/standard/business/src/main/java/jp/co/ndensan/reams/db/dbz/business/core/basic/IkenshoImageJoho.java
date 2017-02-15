@@ -36,29 +36,30 @@ public class IkenshoImageJoho extends
      * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      * @param 帳票ID 帳票ID
      * @param マスキングデータ区分 マスキングデータ区分
-     * @param 取込みページ番号 取込みページ番号
+     * @param 連番 連番
      */
     public IkenshoImageJoho(ShinseishoKanriNo 申請書管理番号,
             int 主治医意見書作成依頼履歴番号,
             Code 帳票ID,
             RString マスキングデータ区分,
-            int 取込みページ番号) {
+            int 連番) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(主治医意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼履歴番号"));
         requireNonNull(帳票ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票ID"));
         requireNonNull(マスキングデータ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("マスキングデータ区分"));
-        requireNonNull(取込みページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込みページ番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("取込みページ番号"));
         this.entity = new DbT5305IkenshoImageJohoEntity();
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setIraiRirekiNo(主治医意見書作成依頼履歴番号);
         this.entity.setChoyoID(帳票ID);
         this.entity.setGenponMaskKubun(マスキングデータ区分);
-//        this.entity.setTorikomiPageNo(取込みページ番号);
+        this.entity.setRemban(連番);
         this.id = new IkenshoImageJohoIdentifier(
                 申請書管理番号,
                 主治医意見書作成依頼履歴番号,
                 帳票ID,
-                マスキングデータ区分
+                マスキングデータ区分,
+                連番
         );
     }
 
@@ -74,7 +75,8 @@ public class IkenshoImageJoho extends
                 entity.getShinseishoKanriNo(),
                 entity.getIraiRirekiNo(),
                 entity.getChoyoID(),
-                entity.getGenponMaskKubun());
+                entity.getGenponMaskKubun(),
+                entity.getRemban());
     }
 
     /**
@@ -129,13 +131,13 @@ public class IkenshoImageJoho extends
     }
 
     /**
-     * 取込みページ番号を返します。
+     * 連番を返します。
      *
-     * @return 取込みページ番号
+     * @return 連番
      */
-//    public int get取込みページ番号() {
-//        return entity.getTorikomiPageNo();
-//    }
+    public int get連番() {
+        return entity.getRemban();
+    }
 
     /**
      * 認定申請年を返します。
@@ -145,7 +147,6 @@ public class IkenshoImageJoho extends
 //    public int get認定申請年() {
 //        return entity.getNinteiShinseiNen();
 //    }
-
     /**
      * 共有ファイルIDを返します。
      *
@@ -154,7 +155,6 @@ public class IkenshoImageJoho extends
 //    public RDateTime get共有ファイルID() {
 //        return entity.getSharedFileId();
 //    }
-
     /**
      * {@link DbT5305IkenshoImageJohoEntity}のクローンを返します。
      *
