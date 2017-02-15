@@ -251,6 +251,16 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnSakujo() {
+        return this.getImageMaskTaishoShiji().getBtnSakujo();
+    }
+
+    @JsonIgnore
+    public void  setBtnSakujo(Button btnSakujo) {
+        this.getImageMaskTaishoShiji().setBtnSakujo(btnSakujo);
+    }
+
+    @JsonIgnore
     public Button getBtnTorikeshi() {
         return this.getImageMaskTaishoShiji().getBtnTorikeshi();
     }

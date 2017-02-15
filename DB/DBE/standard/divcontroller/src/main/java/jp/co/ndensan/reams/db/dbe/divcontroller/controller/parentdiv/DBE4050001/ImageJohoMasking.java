@@ -114,6 +114,25 @@ public class ImageJohoMasking {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「マスキングデータを削除する」ボタンを選択する場合、既に保存されているマスキングイメージを破棄します。
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnSakujo(ImageJohoMaskingDiv div) {
+        getHandler(div).deleteMaskingData();
+        getHandler(div).setDisabledStateToButton();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「対象選択に戻る」ボタン押下時のイベントです
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnBackIchiran(ImageJohoMaskingDiv div) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
@@ -266,9 +285,10 @@ public class ImageJohoMasking {
     }
 
     /**
+     * 「基本運用へ進む」ボタン押下時のイベントです
      *
-     * @param div
-     * @return
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnKihonUnyou(ImageJohoMaskingDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.基本運用へ遷移).respond();

@@ -65,7 +65,7 @@ public class DbT5305IkenshoImageJohoDac implements ISaveable<DbT5305IkenshoImage
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(iraiRirekiNo, 主治医意見書作成依頼履歴番号),
                                 eq(ChoyoID, 帳票ID),
-                                eq(genponMaskKubun, マスキングデータ区分))).                                //                                eq(torikomiPageNo, 取込みページ番号))).
+                                eq(genponMaskKubun, マスキングデータ区分))). //                                eq(torikomiPageNo, 取込みページ番号))).
                 toObject(DbT5305IkenshoImageJohoEntity.class);
     }
 
@@ -94,7 +94,7 @@ public class DbT5305IkenshoImageJohoDac implements ISaveable<DbT5305IkenshoImage
     public int save(DbT5305IkenshoImageJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定意見書イメージ情報エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+//        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }
