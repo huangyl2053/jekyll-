@@ -74,6 +74,13 @@ public enum HanteiKekkaCode {
     }
 
     /**
+     * @return 再調査の場合、{@code true}.
+     */
+    public boolean is再調査() {
+        return this == 再調査_調査のみ || this == 再調査_意見書のみ || this == 再調査_調査_意見書;
+    }
+
+    /**
      * 判定結果コードのコードと一致する内容を探します。
      *
      * @param code 判定結果コードのコード

@@ -36,6 +36,8 @@ public class IShinsakaiKekkaTorokuMapperTest extends DbeTestDacBase {
             ShinsakaiKekkaTorokuParameter param = ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(new RString("20100001"));
             for (ShinsakaiKekkaTorokuDeletionCandidateEntity o : sut.get削除候補s(param)) {
                 System.out.println(o.getShinseishoKanriNo().value());
+                System.out.println(o.getShoKaisaiHokenshaNo());
+                System.out.println(o.getHihokenshaNo());
                 System.out.println(o.getSharedFileID());
                 if (o.getChosaIraiEntity() != null) {
                     System.out.print("　調査依頼：");

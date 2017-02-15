@@ -635,12 +635,17 @@
         )
         SELECT
             targets."shinseishoKanriNo" AS "shinseishoKanriNo",
+            DbT5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+            DbT5101."hihokenshaNo" AS "hihokenshaNo",
             DbT5115."imageSharedFileId" AS "sharedFileID",
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
         FROM
             targets AS targets
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+            ON DbT5101."shinseishoKanriNo" = targets."shinseishoKanriNo"
         INNER JOIN
             rgdb."DbT5201NinteichosaIraiJoho" AS "DbT5201NinteichosaIraiJoho"
             ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = targets."shinseishoKanriNo"
@@ -675,6 +680,8 @@
 
     <resultMap id="resultMap_get削除候補s" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidateEntity">
         <id property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="shoKaisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sharedFileID" column="sharedFileID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <collection property="chosaIrai" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
         <collection property="ikenshoIrai" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>

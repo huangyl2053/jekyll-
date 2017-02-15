@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku;
 
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidate;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -46,4 +47,11 @@ public interface IShinsakakKekksaTorokuManager {
      * @return 更新件数
      */
     int save要介護認定完了情報(NinteiKanryoJoho ninteiKanryo);
+
+    /**
+     * 削除候補の情報をデータの状態により更新します。
+     *
+     * @param deletionCadidate 削除候補情報
+     */
+    void delete削除候補(ShinsakaiKekkaTorokuDeletionCandidate deletionCadidate);
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.message;
 
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -32,9 +33,10 @@ public enum DbeQuestionMessages implements IMessageGettable {
     対象データが多いので処理時間が掛ります(13, "対象データが多いので処理時間が掛りますがよろしいですか？"),
     マージン確認(14, "指定プリンタで以前に設定したマージン、もしくは他端末で設定してある一般的なマージンを画面にセットします。よろしいですか？"),
     選択した一次判定データ完了確認(15, "選択した一次判定を完了します。よろしいですか？"),
-    主治医意見書登録完了申請者ですが割付解除(16, "主治医意見書登録完了申請者ですが割付解除を行いますか？"),
+    審査結果登録完了データ修正確認(16, "審査結果登録が完了していますが、修正しますか？"),
     完了日登録確認(17, "?の完了日を登録します。よろしいですか？"),
-    データ有確認(18, "?がありますが、?行いますか？");
+    データ有確認(18, "?がありますが、?行いますか？"),
+    主治医意見書登録完了申請者ですが割付解除(19, "主治医意見書登録完了申請者ですが割付解除を行いますか？");
 
     private final Message message;
 

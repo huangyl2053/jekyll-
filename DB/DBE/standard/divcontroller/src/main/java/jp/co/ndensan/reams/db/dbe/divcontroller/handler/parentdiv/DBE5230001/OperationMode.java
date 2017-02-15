@@ -12,4 +12,12 @@ public enum OperationMode {
 
     更新,
     削除;
+
+    public boolean is更新() {
+        return this == 更新;
+    }
+
+    public boolean is削除() {
+        return this == 削除;
+    }
 }

@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5230001;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidate;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
@@ -72,6 +77,11 @@ public class ShinsakaiKekkaToroku {
     private static final Code 二次判定結果入力方法_画面入力 = new Code("1");
     private static final RString 一_五次判定ダイアログ_照会モード = new RString("照会");
 
+    private enum _ViewStateKey {
+
+        削除候補;
+    }
+
     private final ShinsakaiKekkaTorokuService service;
 
     /**
@@ -111,6 +121,7 @@ public class ShinsakaiKekkaToroku {
         List<NinteiKanryoJoho> ninteiKanryoJohoList = service.get要介護認定完了情報(開催番号).records();
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho = Models.create(ninteiKanryoJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, ninteiKanryoJoho);
+        ViewStateHolder.put(_ViewStateKey.削除候補, new HashMap<>(service.get削除候補情報(開催番号)));
         return ResponseData.of(div).respond();
     }
 
@@ -174,15 +185,49 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onClick_KaKuTeiButton(ShinsakaiKekkaTorokuDiv div) {
+        OperationMode mode = ViewStateHolder.get(ViewStateKeys.処理モード, OperationMode.class);
+        ShinsakaiKekkaTorokuHandler handler = getHandler(div);
+        dgTaishoshaIchiran_Row row = handler.find更新中RowOrNull();
+        if (row == null) {
+            return ResponseData.of(div).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            RString shinseishoKanriNo = row.getShinseishoKanriNo();
+            if (mode.is更新() && had審査結果登録(shinseishoKanriNo)) {
+                return ResponseData.of(div)
+                        .addMessage(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage())
+                        .respond();
+            }
+            if (mode.is削除() && had審査結果登録(shinseishoKanriNo)) {
+                return ResponseData.of(div)
+                        .addMessage(DbeErrorMessages.審査結果登録済のため処理不可.getMessage())
+                        .respond();
+            }
+        }
+        if (ResponseHolder.getMessageCode().toString().equals(DbeErrorMessages.審査結果登録済のため処理不可.getMessage().getCode())) {
+            return ResponseData.of(div).respond();
+        }
+        if (ResponseHolder.getMessageCode().toString().equals(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage().getCode())) {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).validate個別();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        handler.set個別表示欄To更新中Row(ViewStateHolder.get(ViewStateKeys.処理モード, OperationMode.class));
+
+        handler.set個別表示欄To更新中Row(mode);
         handler.clear個別表示欄();
         handler.set個別表示欄入力不可();
         return ResponseData.of(div).respond();
+    }
+
+    private static boolean had審査結果登録(RString shinseishoKanriNo) {
+        NinteiKanryoJoho kanryoJoho = (NinteiKanryoJoho) ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, Models.class)
+                .get(new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(shinseishoKanriNo)));
+        return kanryoJoho.get認定審査会完了年月日() != null && kanryoJoho.get認定審査会完了年月日().isValid();
     }
 
     /**
@@ -380,16 +425,24 @@ public class ShinsakaiKekkaToroku {
             HanteiKekkaCode hanteiKekka = row.getHanteiKekka();
             update介護認定審査会割当情報(manager, row, 開催番号, hanteiKekka);
             update要介護認定完了情報(manager, row, hanteiKekka);
-            switch (hanteiKekka) {
-                case 再審査:
-                    return;
-                case 認定:
-                    save要介護認定結果情報(manager, row, 開催番号, true);
-                default:
+            if (hanteiKekka == HanteiKekkaCode.認定) {
+                update要介護認定申請情報(manager, row);
+                save要介護認定結果情報(manager, row, 開催番号);
+                return;
             }
+            if (hanteiKekka.is再調査()) {
+                delete削除候補情報(manager, row, hanteiKekka);
+            }
+            reset要介護認定申請情報(manager, row);
+            delete要介護認定結果情報(manager, row);
         }
 
         //<editor-fold defaultstate="collapsed" desc="methods for saveBy()">
+        private static void delete介護認定審査会割当情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row,
+                RString 開催番号) {
+            update介護認定審査会割当情報(manager, row, 開催番号, null);
+        }
+
         private static void update介護認定審査会割当情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row,
                 RString 開催番号, HanteiKekkaCode hanteiKekka) {
             Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiWariateJohoJoho
@@ -407,7 +460,6 @@ public class ShinsakaiKekkaToroku {
             if (HanteiKekkaCode.認定 == code || null == code) {
                 return;
             }
-
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho
                     = ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, Models.class);
             NinteiKanryoJohoIdentifier identifier = new NinteiKanryoJohoIdentifier(row.getShinseishoKanriNo());
@@ -419,9 +471,9 @@ public class ShinsakaiKekkaToroku {
             NinteiKanryoJohoBuilder builder = kanryo.createBuilderForEdit();
             if (HanteiKekkaCode.再審査 == code || HanteiKekkaCode.未審査 == code) {
                 builder.set認定審査会割当完了年月日(null);
+                builder.set認定審査会完了年月日(null);
                 return builder.build();
             }
-
             if (HanteiKekkaCode.再調査_意見書のみ == code || HanteiKekkaCode.再調査_調査_意見書 == code) {
                 builder.set主治医意見書作成依頼完了年月日(null);
                 builder.set主治医意見書登録完了年月日(null);
@@ -433,39 +485,46 @@ public class ShinsakaiKekkaToroku {
             builder.set要介護認定一次判定完了年月日(null);
             builder.setマスキング完了年月日(null);
             builder.set認定審査会割当完了年月日(null);
+            builder.set認定審査会完了年月日(null);
             return builder.build();
         }
 
-        private static void updateOrReset要介護認定申請情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row,
-                boolean updates) {
+        private static void update要介護認定申請情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row) {
             Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
                     = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
             NinteiShinseiJohoIdentifier identifier = new NinteiShinseiJohoIdentifier(row.getShinseishoKanriNo());
             NinteiShinseiJoho ninteiShinsei = ninteiShinseiJoho.get(identifier);
-            NinteiShinseiJohoBuilder ninteiShinseiBuilder = ninteiShinsei.createBuilderForEdit();
-            if (updates) {
-                ninteiShinseiBuilder.set認定申請区分_法令_コード(row.getHoreiKubunCode());
-                ninteiShinseiBuilder.set取下区分コード(row.getTorisageKubunCode());
-            } else {
-                ninteiShinseiBuilder.set認定申請区分_法令_コード(Code.EMPTY);
-                ninteiShinseiBuilder.set取下区分コード(Code.EMPTY);
-            }
-            ninteiShinsei = ninteiShinseiBuilder.build();
-            manager.save要介護認定申請情報(ninteiShinsei);
+            NinteiShinseiJohoBuilder builder = ninteiShinsei.createBuilderForEdit();
+            builder.set認定申請区分_法令_コード(row.getHoreiKubunCode());
+            builder.set取下区分コード(row.getTorisageKubunCode());
+            manager.save要介護認定申請情報(builder.build());
         }
 
-        private static void save要介護認定結果情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号,
-                boolean insertsOrUpdates) {
+        private static void delete削除候補情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, HanteiKekkaCode code) {
+            Map<ShinseishoKanriNo, ShinsakaiKekkaTorokuDeletionCandidate> map
+                    = ViewStateHolder.get(_ViewStateKey.削除候補, Map.class);
+            ShinsakaiKekkaTorokuDeletionCandidate o = map.get(row.getShinseishoKanriNo());
+            manager.delete削除候補(o.deletedBy(code));
+        }
+
+        private static void delete要介護認定結果情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row) {
             Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
                     = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
             NinteiKekkaJohoIdentifier identifier = new NinteiKekkaJohoIdentifier(row.getShinseishoKanriNo());
             NinteiKekkaJoho ninteiKekka = ninteiKekkaJoho.get(identifier);
-            if (!insertsOrUpdates) {
-                manager.save要介護認定結果情報(ninteiKekka.deleted());
+            if (ninteiKekka == null) {
                 return;
             }
+            manager.save要介護認定結果情報(ninteiKekka.deleted());
+        }
+
+        private static void save要介護認定結果情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号) {
+            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
+                    = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
+            NinteiKekkaJohoIdentifier identifier = new NinteiKekkaJohoIdentifier(row.getShinseishoKanriNo());
+            NinteiKekkaJoho ninteiKekka = ninteiKekkaJoho.get(identifier);
             if (ninteiKekka == null) {
-                ninteiKekka = new NinteiKekkaJoho(identifier.get申請書管理番号());
+                manager.save要介護認定結果情報(edited(new NinteiKekkaJoho(identifier.get申請書管理番号()), row, 開催番号));
             }
             manager.save要介護認定結果情報(edited(ninteiKekka, row, 開催番号));
         }
@@ -493,10 +552,30 @@ public class ShinsakaiKekkaToroku {
         //</editor-fold>
 
         private static void deleteBy(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号) {
-            updateOrReset要介護認定申請情報(manager, row, false);
-            save要介護認定結果情報(manager, row, 開催番号, false);
-            update介護認定審査会割当情報(manager, row, 開催番号, null);
+            reset要介護認定申請情報(manager, row);
+            delete要介護認定結果情報(manager, row);
+            delete介護認定審査会割当情報(manager, row, 開催番号);
         }
+
+        private static boolean isNullOrEmpty(Code code) {
+            return code == null || code.isEmpty();
+        }
+
+        private static void reset要介護認定申請情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row) {
+            Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
+                    = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
+            NinteiShinseiJohoIdentifier identifier = new NinteiShinseiJohoIdentifier(row.getShinseishoKanriNo());
+            NinteiShinseiJoho ninteiShinsei = ninteiShinseiJoho.get(identifier);
+            if (isNullOrEmpty(ninteiShinsei.get認定申請区分_法令_コード())
+                    && isNullOrEmpty(ninteiShinsei.get取下区分コード())) {
+                return;
+            }
+            NinteiShinseiJohoBuilder builder = ninteiShinsei.createBuilderForEdit();
+            builder.set認定申請区分_法令_コード(Code.EMPTY);
+            builder.set取下区分コード(Code.EMPTY);
+            manager.save要介護認定申請情報(builder.build());
+        }
+
     }
     //</editor-fold>
 
