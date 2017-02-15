@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class NinteiShinseishaFinder {
 
     private static final int SIZE = 10;
+    private static final RString 状況フラグ無効可 = new RString("状況フラグ無効可");
 
     /**
      * 条件検索画面の初期化処理ください。
@@ -239,6 +240,7 @@ public class NinteiShinseishaFinder {
         dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
         dataPassModel.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnCanJokyoMuko(状況フラグ無効可);
         return ResponseData.of(div).respond();
     }
 
@@ -281,6 +283,7 @@ public class NinteiShinseishaFinder {
         }
         dataPassModel.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnCanJokyoMuko(状況フラグ無効可);
         return ResponseData.of(div).respond();
     }
 
@@ -315,6 +318,7 @@ public class NinteiShinseishaFinder {
         dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
         dataPassModel.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnCanJokyoMuko(状況フラグ無効可);
         return ResponseData.of(div).respond();
     }
 
@@ -357,6 +361,7 @@ public class NinteiShinseishaFinder {
         }
         dataPassModel.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Chosain.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnCanJokyoMuko(状況フラグ無効可);
         return ResponseData.of(div).respond();
     }
 
@@ -391,6 +396,7 @@ public class NinteiShinseishaFinder {
         dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
         dataPassModel.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnCanJokyoMuko(状況フラグ無効可);
         return ResponseData.of(div).respond();
     }
 
@@ -421,6 +427,7 @@ public class NinteiShinseishaFinder {
         dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
         dataPassModel.set対象モード(new RString(ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnCanJokyoMuko(状況フラグ無効可);
         return ResponseData.of(div).respond();
     }
 

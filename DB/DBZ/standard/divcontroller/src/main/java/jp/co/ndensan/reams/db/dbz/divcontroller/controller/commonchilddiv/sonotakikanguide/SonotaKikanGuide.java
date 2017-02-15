@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sonotakikanguide.SoNoTaK
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakikanguide.SonotaKikanGuide.SoNoTaKikanGuideHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakikanguide.SonotaKikanGuide.SonotaKikanGuideDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide.SoNoTaKikanGuideFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -72,6 +73,11 @@ public class SonotaKikanGuide {
                         div.getTxtSonotaKikanName().getValue(),
                         div.getDdlChosaItakusakiKubun().getSelectedKey(),
                         div.getTxtMaxDisp().getValue().toBigInteger().intValue())).records();
+
+        if (businessList.isEmpty()) {
+            div.getDgSonotaKikanIchiran().clearSource();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         validPairs = getHandler(div).その他機関一覧データなしチェック(businessList);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();

@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -95,6 +95,8 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     private RString hdnChosaShichosonCode;
     @JsonProperty("hdnShujiiShichosonCode")
     private RString hdnShujiiShichosonCode;
+    @JsonProperty("hdnCanJokyoMuko")
+    private RString hdnCanJokyoMuko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -514,6 +516,24 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @JsonProperty("hdnShujiiShichosonCode")
     public void setHdnShujiiShichosonCode(RString hdnShujiiShichosonCode) {
         this.hdnShujiiShichosonCode = hdnShujiiShichosonCode;
+    }
+
+    /*
+     * gethdnCanJokyoMuko
+     * @return hdnCanJokyoMuko
+     */
+    @JsonProperty("hdnCanJokyoMuko")
+    public RString getHdnCanJokyoMuko() {
+        return hdnCanJokyoMuko;
+    }
+
+    /*
+     * sethdnCanJokyoMuko
+     * @param hdnCanJokyoMuko hdnCanJokyoMuko
+     */
+    @JsonProperty("hdnCanJokyoMuko")
+    public void setHdnCanJokyoMuko(RString hdnCanJokyoMuko) {
+        this.hdnCanJokyoMuko = hdnCanJokyoMuko;
     }
 
     /*

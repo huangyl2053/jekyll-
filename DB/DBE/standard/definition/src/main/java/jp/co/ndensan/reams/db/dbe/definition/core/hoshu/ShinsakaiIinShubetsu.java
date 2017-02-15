@@ -11,13 +11,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShinsakaiIinShubetsu {
 
     /**
-     * コード:0 名称:委員 略称:定義なし
+     * コード:11 名称:委員 略称:定義なし
      */
-    委員("0", "委員"),
+    委員("11", "委員"),
     /**
-     * コード:1 名称:委員長 略称:定義なし
+     * コード:12 名称:委員長 略称:定義なし
      */
-    委員長("1", "委員長");
+    委員長("12", "委員長"),
+    /**
+     * コード:21 名称:医師 略称:定義なし
+     */
+    医師("21", "医師"),
+    /**
+     * コード:22 名称:医師以外 略称:定義なし
+     */
+    医師以外("22", "医師以外");
 
     private final RString code;
     private final RString fullName;

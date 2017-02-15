@@ -130,10 +130,9 @@ public class ShinseiKensaku {
     }
 
     private ResponseData<ShinseiKensakuDiv> processKensaku(ShinseiKensakuDiv div, RString hihokenshaNo) {
-        if (!ResponseHolder.isReRequest()) {
-        } else {
+        if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
-        }
+        } 
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
