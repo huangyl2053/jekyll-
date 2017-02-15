@@ -75,7 +75,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private static final ReportId REPORT_DBE581001 = ReportIdDBE.DBE581001.getReportId();
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.enkitsuchisho."
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.enkitsuchisho."
                     + "IEnkiTsuchishoMapper.selectBy申請書管理番号リスト");
 
     @BatchWriter

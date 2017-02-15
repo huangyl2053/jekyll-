@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteienkitsuchishohakko.NinteiEn
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoDbT5101Child;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -55,7 +55,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
     private final RString 画面モード_2 = new RString("2");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString NAME_被保険者番号 = new RString("被保険者番号");
-    private static final RString 帳票分類ID = new RString("DBD522001_YokaigoNinteiEnkiTshuchisho");
+    private static final RString 帳票分類ID = new RString("DBE581001_YokaigoNinteiEnkiTshuchisho");
 
     private final NinteiEnkiTsuchishoHakkoDiv div;
 
@@ -237,7 +237,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      * @param 発行対象者一覧情報 発行対象者一覧情報
      * @return 要介護認定申請情報
      */
-    public List<NinteiShinseiJohoChild> get要介護認定申請情報(List<NinteiEnkiTsuchishoHakkoBusiness> 発行対象者一覧情報) {
+    public List<NinteiShinseiJohoDbT5101Child> get要介護認定申請情報(List<NinteiEnkiTsuchishoHakkoBusiness> 発行対象者一覧情報) {
 
         List<RString> 申請書管理番号List = new ArrayList<>();
         for (NinteiEnkiTsuchishoHakkoBusiness 発行対象者情報 : 発行対象者一覧情報) {
@@ -296,7 +296,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      *
      * @return 要介護認定申請情報
      */
-    public List<NinteiShinseiJohoChild> 発行対象者一覧に戻るを表示() {
+    public List<NinteiShinseiJohoDbT5101Child> 発行対象者一覧に戻るを表示() {
         List<RString> 申請書管理番号List = new ArrayList<>();
         List<dgHakkotaishosha_Row> selectedRowList = div.getDgHakkotaishosha().getSelectedItems();
         List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getDataSource();
@@ -442,7 +442,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
      *
      * @param 要介護認定申請情報List 要介護認定申請情報List
      */
-    public void 更新処理(List<NinteiShinseiJohoChild> 要介護認定申請情報List) {
+    public void 更新処理(List<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報List) {
         List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
         List<DgHakkotaishoshaRow> rowEntityList = new ArrayList<>();
         for (dgHakkotaishosha_Row row : rowList) {

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5810001.NinteiEnkiTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5810001.NinteiEnkiTsuchishoHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoDbT5101Child;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -87,8 +87,8 @@ public class NinteiEnkiTsuchishoHakko {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
         handler.通知書モード表示(発行対象者一覧情報);
-        List<NinteiShinseiJohoChild> 要介護認定申請情報 = handler.get要介護認定申請情報(発行対象者一覧情報);
-        ArrayList<NinteiShinseiJohoChild> 要介護認定申請情報ArrayList = new ArrayList<>(要介護認定申請情報);
+        List<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報 = handler.get要介護認定申請情報(発行対象者一覧情報);
+        ArrayList<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報ArrayList = new ArrayList<>(要介護認定申請情報);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報List, 要介護認定申請情報ArrayList);
         return ResponseData.of(div).setState(通知書);
     }
@@ -196,7 +196,7 @@ public class NinteiEnkiTsuchishoHakko {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            ArrayList<NinteiShinseiJohoChild> 要介護認定申請情報ArrayList
+            ArrayList<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報ArrayList
                     = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報List, ArrayList.class);
             getHandler(div).更新処理(要介護認定申請情報ArrayList);
             return ResponseData.of(div).setState(完了);
@@ -253,8 +253,8 @@ public class NinteiEnkiTsuchishoHakko {
      * @return ResponseData<NinteiEnkiTsuchishoHakkoDiv>
      */
     public ResponseData<NinteiEnkiTsuchishoHakkoDiv> onClick_btnBack2(NinteiEnkiTsuchishoHakkoDiv div) {
-        List<NinteiShinseiJohoChild> 要介護認定申請情報 = getHandler(div).発行対象者一覧に戻るを表示();
-        ArrayList<NinteiShinseiJohoChild> 要介護認定申請情報ArrayList = new ArrayList<>(要介護認定申請情報);
+        List<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報 = getHandler(div).発行対象者一覧に戻るを表示();
+        ArrayList<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報ArrayList = new ArrayList<>(要介護認定申請情報);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報List, 要介護認定申請情報ArrayList);
         return ResponseData.of(div).setState(通知書);
     }
