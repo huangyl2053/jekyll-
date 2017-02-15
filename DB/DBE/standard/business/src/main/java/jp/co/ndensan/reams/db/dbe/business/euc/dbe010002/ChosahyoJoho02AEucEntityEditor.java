@@ -64,7 +64,7 @@ public final class ChosahyoJoho02AEucEntityEditor {
 
     private static final RString 改行 = new RString("<br/>");
     private static final RString 下矢印 = new RString("↓");
-    private static final Decimal 百 = new Decimal("100");
+    private static final Decimal 十 = new Decimal("10");
 
     private ChosahyoJoho02AEucEntityEditor() {
     }
@@ -379,7 +379,7 @@ public final class ChosahyoJoho02AEucEntityEditor {
     }
 
     private static RString format得点(int value) {
-        return new RString(new Decimal(value).divide(百).toString("#,##"));
+        return new RString(new Decimal(value).divide(十).toString("##0.0"));
     }
 
     private static RString format日付(FlexibleDate value) {
