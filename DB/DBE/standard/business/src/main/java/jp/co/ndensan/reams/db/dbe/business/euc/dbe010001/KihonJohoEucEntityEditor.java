@@ -201,7 +201,8 @@ public final class KihonJohoEucEntityEditor {
                 ? YokaigoJotaizoReiCode.toValue(entity.getYokaigoJotaizoReiCode().value()).get名称() : RString.EMPTY);
         eucEntity.set一次判定結果変更理由(convert改行(entity.getIchijiHanteiKekkaHenkoRiyu()));
         eucEntity.set審査会意見種類コード(entity.getNinteishinsakaiIkenShurui());
-        eucEntity.set審査会意見種類((!RString.isNullOrEmpty(entity.getNinteishinsakaiIkenShurui()))
+        eucEntity.set審査会意見種類(
+                (entity.getNinteishinsakaiIkenShurui() != null && !entity.getNinteishinsakaiIkenShurui().trim().isEmpty())
                 ? NinteiShinsakaiIkenShurui.toValue(entity.getNinteishinsakaiIkenShurui()).get名称() : RString.EMPTY);
         eucEntity.set審査会意見(convert改行(entity.getShinsakaiIken()));
         eucEntity.set審査会メモ(convert改行(entity.getShinsakaiMemo()));
