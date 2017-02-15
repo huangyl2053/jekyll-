@@ -474,7 +474,7 @@ public class ShujiiIkenshoIraiTaishoIchiran {
     }
 
     /**
-     * 作成料請求区分名称を取得します。
+     * 作成料請求区分コードを取得します。
      *
      * @param 作成料請求区分名称 RString
      * @return 作成料請求区分コード RString
@@ -484,14 +484,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         if (RString.isNullOrEmpty(作成料請求区分名称)) {
             return 作成料請求区分コード;
         }
-        if (SakuseiryoSeikyuKubun.在宅新規.get名称().equals(作成料請求区分名称)) {
-            作成料請求区分コード = SakuseiryoSeikyuKubun.在宅新規.getコード();
-        } else if (SakuseiryoSeikyuKubun.施設新規.get名称().equals(作成料請求区分名称)) {
-            作成料請求区分コード = SakuseiryoSeikyuKubun.施設新規.getコード();
-        } else if (SakuseiryoSeikyuKubun.在宅継続.get名称().equals(作成料請求区分名称)) {
-            作成料請求区分コード = SakuseiryoSeikyuKubun.在宅継続.getコード();
-        } else if (SakuseiryoSeikyuKubun.施設継続.get名称().equals(作成料請求区分名称)) {
-            作成料請求区分コード = SakuseiryoSeikyuKubun.施設継続.getコード();
+        for (SakuseiryoSeikyuKubun sakuseiryoSeikyuKubun : SakuseiryoSeikyuKubun.values()) {
+            if (sakuseiryoSeikyuKubun.get名称().equals(作成料請求区分名称)) {
+                作成料請求区分コード = sakuseiryoSeikyuKubun.getコード();
+            }
         }
         return 作成料請求区分コード;
     }
