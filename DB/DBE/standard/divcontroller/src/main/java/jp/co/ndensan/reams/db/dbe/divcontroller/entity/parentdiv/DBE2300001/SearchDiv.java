@@ -27,10 +27,10 @@ public class SearchDiv extends Panel {
      */
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("ccdShujiiIryoKikanAndShujiiInput")
     private ShujiiIryokikanAndShujiiInputDiv ccdShujiiIryoKikanAndShujiiInput;
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -57,21 +57,21 @@ public class SearchDiv extends Panel {
     }
 
     /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
-     */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
-    }
-
-    /*
      * getccdShujiiIryoKikanAndShujiiInput
      * @return ccdShujiiIryoKikanAndShujiiInput
      */
     @JsonProperty("ccdShujiiIryoKikanAndShujiiInput")
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryoKikanAndShujiiInput() {
         return ccdShujiiIryoKikanAndShujiiInput;
+    }
+
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
     }
 
     // </editor-fold>

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 14 16:37:56 JST 2017 
+ * Wed Feb 15 10:33:32 JST 2017 
  */
 
 
@@ -36,6 +36,8 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
     private RString zenkaiChosain;
     private RString ikenshoSakuseiIraiDay;
     private RString ikenshoIraiKubun;
+    private RString sakuseiryoSeikyuKubunCode;
+    private RString sakuseiryoSeikyuKubun;
     private RString hokensha;
     private RString jusho;
     private RString shujiIryoKikan;
@@ -74,6 +76,8 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.zenkaiChosain = RString.EMPTY;
         this.ikenshoSakuseiIraiDay = RString.EMPTY;
         this.ikenshoIraiKubun = RString.EMPTY;
+        this.sakuseiryoSeikyuKubunCode = RString.EMPTY;
+        this.sakuseiryoSeikyuKubun = RString.EMPTY;
         this.hokensha = RString.EMPTY;
         this.jusho = RString.EMPTY;
         this.shujiIryoKikan = RString.EMPTY;
@@ -109,6 +113,8 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("zenkaiChosain", zenkaiChosain);
         this.setOriginalData("ikenshoSakuseiIraiDay", ikenshoSakuseiIraiDay);
         this.setOriginalData("ikenshoIraiKubun", ikenshoIraiKubun);
+        this.setOriginalData("sakuseiryoSeikyuKubunCode", sakuseiryoSeikyuKubunCode);
+        this.setOriginalData("sakuseiryoSeikyuKubun", sakuseiryoSeikyuKubun);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("shujiIryoKikan", shujiIryoKikan);
@@ -134,7 +140,7 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("shujiiIkenshoTorokuKanryoYMD", shujiiIkenshoTorokuKanryoYMD);
     }
 
-    public dgWaritsukeZumiShinseishaIchiran_Row(ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString ikenshoSakuseiIraiDay, RString ikenshoIraiKubun, RString hokensha, RString jusho, RString shujiIryoKikan, RString shujii, RString zenkaiShujiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate ikenshoShutsuryokuDay, TextBoxDate seikyushoShutsuryokuDay, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo, RString koroshoIfShikibetsuCode, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age, RString hokenshaNo, RString shichosonCode, TextBoxFlexibleDate shujiiIkenshoTorokuKanryoYMD) {
+    public dgWaritsukeZumiShinseishaIchiran_Row(ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString ikenshoSakuseiIraiDay, RString ikenshoIraiKubun, RString sakuseiryoSeikyuKubunCode, RString sakuseiryoSeikyuKubun, RString hokensha, RString jusho, RString shujiIryoKikan, RString shujii, RString zenkaiShujiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate ikenshoShutsuryokuDay, TextBoxDate seikyushoShutsuryokuDay, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo, RString koroshoIfShikibetsuCode, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age, RString hokenshaNo, RString shichosonCode, TextBoxFlexibleDate shujiiIkenshoTorokuKanryoYMD) {
         super();
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("jotai", jotai);
@@ -148,6 +154,8 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("zenkaiChosain", zenkaiChosain);
         this.setOriginalData("ikenshoSakuseiIraiDay", ikenshoSakuseiIraiDay);
         this.setOriginalData("ikenshoIraiKubun", ikenshoIraiKubun);
+        this.setOriginalData("sakuseiryoSeikyuKubunCode", sakuseiryoSeikyuKubunCode);
+        this.setOriginalData("sakuseiryoSeikyuKubun", sakuseiryoSeikyuKubun);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("shujiIryoKikan", shujiIryoKikan);
@@ -183,6 +191,8 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.zenkaiChosain = zenkaiChosain;
         this.ikenshoSakuseiIraiDay = ikenshoSakuseiIraiDay;
         this.ikenshoIraiKubun = ikenshoIraiKubun;
+        this.sakuseiryoSeikyuKubunCode = sakuseiryoSeikyuKubunCode;
+        this.sakuseiryoSeikyuKubun = sakuseiryoSeikyuKubun;
         this.hokensha = hokensha;
         this.jusho = jusho;
         this.shujiIryoKikan = shujiIryoKikan;
@@ -254,6 +264,14 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
 
     public RString getIkenshoIraiKubun() {
         return ikenshoIraiKubun;
+    }
+
+    public RString getSakuseiryoSeikyuKubunCode() {
+        return sakuseiryoSeikyuKubunCode;
+    }
+
+    public RString getSakuseiryoSeikyuKubun() {
+        return sakuseiryoSeikyuKubun;
     }
 
     public RString getHokensha() {
@@ -406,6 +424,16 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
     public void setIkenshoIraiKubun(RString ikenshoIraiKubun) {
         this.setOriginalData("ikenshoIraiKubun", ikenshoIraiKubun);
         this.ikenshoIraiKubun = ikenshoIraiKubun;
+    }
+
+    public void setSakuseiryoSeikyuKubunCode(RString sakuseiryoSeikyuKubunCode) {
+        this.setOriginalData("sakuseiryoSeikyuKubunCode", sakuseiryoSeikyuKubunCode);
+        this.sakuseiryoSeikyuKubunCode = sakuseiryoSeikyuKubunCode;
+    }
+
+    public void setSakuseiryoSeikyuKubun(RString sakuseiryoSeikyuKubun) {
+        this.setOriginalData("sakuseiryoSeikyuKubun", sakuseiryoSeikyuKubun);
+        this.sakuseiryoSeikyuKubun = sakuseiryoSeikyuKubun;
     }
 
     public void setHokensha(RString hokensha) {

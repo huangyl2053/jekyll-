@@ -121,6 +121,7 @@ public class ShujiiIkenshoSakuseiIrai {
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnNextToTaishoshaSentaku(ShujiiIkenshoSakuseiIraiDiv div) {
         set意見書作成対象者情報(div);
         setPnlShujiiSentaku(div, true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書対象者選択に進むボタン名, true);
         return ResponseData.of(div).setState(DBE2300001StateName.対象者選択);
     }
 
@@ -268,6 +269,7 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnBackToShujiiSentakuFromKanryo(ShujiiIkenshoSakuseiIraiDiv div) {
         createHandler(div).load();
+        setPnlShujiiSentaku(div, false);
         ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
         ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
@@ -360,6 +362,10 @@ public class ShujiiIkenshoSakuseiIrai {
                 } else {
                     医師区分コード = new Code(IshiKubunCode.主治医.getコード());
                 }
+                Code 作成料請求区分Code = new Code();
+                if (!RString.isNullOrEmpty(row.getSakuseiryoSeikyuKubunCode())) {
+                    作成料請求区分Code = new Code(row.getSakuseiryoSeikyuKubunCode());
+                }
                 if (IkenshoIraiKubun.初回依頼.get名称().equals(row.getIkenshoIraiKubun())) {
                     ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
                     shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit()
@@ -371,6 +377,7 @@ public class ShujiiIkenshoSakuseiIrai {
                             .set医師区分コード(医師区分コード)
                             .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
                             .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
+                            .set作成料請求区分(作成料請求区分Code)
                             .set論理削除フラグ(false)
                             .build();
                     shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
@@ -386,6 +393,7 @@ public class ShujiiIkenshoSakuseiIrai {
                             .set医師区分コード(医師区分コード)
                             .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
                             .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
+                            .set作成料請求区分(作成料請求区分Code)
                             .set論理削除フラグ(false)
                             .build();
                     shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);

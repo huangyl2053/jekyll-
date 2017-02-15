@@ -14,8 +14,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgWa
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.sakuseiryoSeikyuKubun.SakuseiryoSeikyuKubunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -86,6 +89,10 @@ public class ShujiiIkenshoSakuseiIraiHandler {
                 row.setIkenshoSakuseiIraiDay(割付済み申請者.getIkenshoSakuseiIraiYMD().wareki().toDateString());
             }
             row.setIkenshoIraiKubun(IkenshoIraiKubun.toValue(割付済み申請者.getIkenshoIraiKubun().value()).get名称());
+            if (割付済み申請者.getSakuseiryoSeikyuKubun() != null && !割付済み申請者.getSakuseiryoSeikyuKubun().isEmpty()) {
+                row.setSakuseiryoSeikyuKubunCode(割付済み申請者.getSakuseiryoSeikyuKubun().getColumnValue());
+                row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(割付済み申請者.getSakuseiryoSeikyuKubun().getColumnValue()));
+            }
             row.setHokensha(nullToEmpty(hokenshaName));
             if (割付済み申請者.getJusho() != null) {
                 row.setJusho(割付済み申請者.getJusho().value());
@@ -210,6 +217,12 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         row.setZenkaiChosain(miwaritsukeShinseishaRow.getZenkaiNinteiChosainShimei());
         row.setIkenshoSakuseiIraiDay(miwaritsukeShinseishaRow.getIkenshoSakuseiIraiDay());
         row.setIkenshoIraiKubun(miwaritsukeShinseishaRow.getIkenshoIraiKubun());
+        RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
+                .search作成料請求区分((new ShinseishoKanriNo(miwaritsukeShinseishaRow.getShinseishoKanriNo())),
+                        div.getSearch().getCcdShujiiIryoKikanAndShujiiInput().getTxtIryoKikanCode().getValue(),
+                        div.getSearch().getCcdShujiiIryoKikanAndShujiiInput().getTxtShujiiCode().getValue());
+        row.setSakuseiryoSeikyuKubunCode(作成料請求区分コード);
+        row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
         row.setHokensha(miwaritsukeShinseishaRow.getHokensha());
         row.setJusho(miwaritsukeShinseishaRow.getJusho());
         row.setShujiIryoKikan(miwaritsukeShinseishaRow.getShujiiIryoKikan());
@@ -352,5 +365,24 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         row.setZenYokaigoKubunCode(未割付申請者.getZenYokaigoKubunCode() == null ? RString.EMPTY : 未割付申請者.getZenYokaigoKubunCode().value());
         row.setAge(new RString(未割付申請者.getAge()));
         row.setHokenshaNo(未割付申請者.getHokenshaNo());
+    }
+
+    /**
+     * 作成料請求区分名称を取得します。
+     *
+     * @param 作成料請求区分コード RString
+     * @return 作成料請求区分名称 RString
+     */
+    private RString get作成料請求区分名称(RString 作成料請求区分コード) {
+        RString 作成料請求区分名称 = RString.EMPTY;
+        if (RString.isNullOrEmpty(作成料請求区分コード)) {
+            return 作成料請求区分名称;
+        }
+        for (SakuseiryoSeikyuKubun sakuseiryoSeikyuKubun : SakuseiryoSeikyuKubun.values()) {
+            if (sakuseiryoSeikyuKubun.getコード().equals(作成料請求区分コード)) {
+                作成料請求区分名称 = sakuseiryoSeikyuKubun.get名称();
+            }
+        }
+        return 作成料請求区分名称;
     }
 }

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.sakuseiryoSeikyuKubun.SakuseiryoSeikyuKubunFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -74,9 +75,10 @@ public class IkenshoSakuseiIraiHandler {
             div.getTxtSakuseiIraiD().setValue(new RDate(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString()));
         }
     }
-    
+
     /**
      * 主治医意見書作成依頼情報リスト(保存用)を作成します。
+     *
      * @param 要介護認定申請情報
      * @param 申請書管理番号
      * @return 主治医意見書作成依頼情報リスト
@@ -114,14 +116,24 @@ public class IkenshoSakuseiIraiHandler {
         }
         builder.set主治医意見書作成依頼年月日(new FlexibleDate(div.getTxtSakuseiIraiD().getValue().toDateString()));
         builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
+        RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
+                .search作成料請求区分((new ShinseishoKanriNo(申請書管理番号)),
+                        div.getCcdShujiiInput().getIryoKikanCode(),
+                        div.getCcdShujiiInput().getShujiiCode());
+        Code 作成料請求区分Code = new Code();
+        if (!RString.isNullOrEmpty(作成料請求区分コード)) {
+            作成料請求区分Code = new Code(作成料請求区分コード);
+        }
+        builder.set作成料請求区分(作成料請求区分Code);
         builder.set論理削除フラグ(false);
         builder.build().toEntity().setState(EntityDataState.Added);
         list.add(builder.build());
         return list;
     }
-    
+
     /**
      * 該当の申請書管理番号に対する結果データ存在有無を返す。
+     *
      * @return True:結果データ有り False:結果データなし
      */
     public boolean 結果データ有無() {

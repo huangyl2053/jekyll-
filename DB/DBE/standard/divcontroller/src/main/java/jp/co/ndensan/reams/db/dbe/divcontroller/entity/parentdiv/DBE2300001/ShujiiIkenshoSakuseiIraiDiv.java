@@ -142,13 +142,13 @@ public class ShujiiIkenshoSakuseiIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getSearch().getCcdHokenshaList();
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryoKikanAndShujiiInput() {
+        return this.getSearch().getCcdShujiiIryoKikanAndShujiiInput();
     }
 
     @JsonIgnore
-    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryoKikanAndShujiiInput() {
-        return this.getSearch().getCcdShujiiIryoKikanAndShujiiInput();
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getSearch().getCcdHokenshaList();
     }
 
     @JsonIgnore

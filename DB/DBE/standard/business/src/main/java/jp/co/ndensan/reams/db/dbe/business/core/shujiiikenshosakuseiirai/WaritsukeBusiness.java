@@ -352,4 +352,13 @@ public class WaritsukeBusiness {
                 ? new ShujiiIkenshoIraiJoho(entity.getShujiiIkenshoIraiJohoEntity())
                 : null;
     }
+    
+    /**
+     * 作成料請求区分コードを返します。
+     * 
+     * @return  Code
+     */
+    public Code getSakuseiryoSeikyuKubun() {
+        return entity.getSakuseiryoSeikyuKubun();
+    }
 }

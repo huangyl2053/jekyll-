@@ -51,6 +51,7 @@ public class WaritsukeEntity {
     private FlexibleDate iraishoShutsuryokuYMD;
     private FlexibleDate ikenshoShutsuryokuYMD;
     private FlexibleDate seikyushoShutsuryokuYMD;
+    private Code sakuseiryoSeikyuKubun;
     private RString iryoKikanMeisho;
     private AtenaMeisho shujiiName;
     private RString temp_iryoKikanMeisho;
