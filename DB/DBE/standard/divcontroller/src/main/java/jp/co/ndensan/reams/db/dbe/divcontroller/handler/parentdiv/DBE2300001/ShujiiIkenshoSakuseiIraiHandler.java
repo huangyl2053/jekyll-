@@ -30,14 +30,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class ShujiiIkenshoSakuseiIraiHandler {
 
-    private static final RString 新規 = new RString("新規");
-    private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
-    private static final RString KEY0 = new RString("key0");
-    private static final RString KEY1 = new RString("key1");
-    private static final RString KEY2 = new RString("key2");
-    private static final RString KEY3 = new RString("key3");
-    private static final RString 原因疾患 = new RString("原因疾患");
     private static final RString 未割付 = new RString("未割付");
     private static final RString 割付解除 = new RString("割付解除");
     private final ShujiiIkenshoSakuseiIraiDiv div;
@@ -57,8 +49,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
     public void load() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getCcdShujiiIryoKikanAndShujiiInput().clear();
-        div.getCcdShujiiIryoKikanAndShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
-        div.getCcdShujiiIryoKikanAndShujiiInput().getBtnIryokikanGuide().setVisible(false);
+        div.getSearch().getBtnClearKensakuJoken().setDisplayNone(true);
     }
 
     /**
@@ -208,6 +199,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         } else {
             row.setJotai(未割付);
         }
+        row.setHokenshaNo(miwaritsukeShinseishaRow.getHokenshaNo());
         row.setHihokenshaNo(miwaritsukeShinseishaRow.getHihokenshaNo());
         row.setHihokenshaShimei(miwaritsukeShinseishaRow.getHihokenshaShimei());
         row.setSeibetsu(miwaritsukeShinseishaRow.getSeibetsu());
@@ -255,6 +247,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         } else {
             row.setJotai(割付解除);
         }
+        row.setHokenshaNo(waritsukeZumiShinseishaRow.getHokenshaNo());
         row.setHihokenshaNo(waritsukeZumiShinseishaRow.getHihokenshaNo());
         row.setHihokenshaShimei(waritsukeZumiShinseishaRow.getHihokenshaShimei());
         row.setSeibetsu(waritsukeZumiShinseishaRow.getSeibetsu());

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class ShinseishaDataOutputDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -133,16 +133,6 @@ public class ShinseishaDataOutputDiv extends PanelBatchParameter {
     @JsonIgnore
     public void  setDgShinseiJoho(DataGrid<dgShinseiJoho_Row> dgShinseiJoho) {
         this.getShinseiJohoIchiran().setDgShinseiJoho(dgShinseiJoho);
-    }
-
-    @JsonIgnore
-    public Button getBtnModoru() {
-        return this.getShinseiJohoIchiran().getBtnModoru();
-    }
-
-    @JsonIgnore
-    public void  setBtnModoru(Button btnModoru) {
-        this.getShinseiJohoIchiran().setBtnModoru(btnModoru);
     }
 
     @JsonIgnore

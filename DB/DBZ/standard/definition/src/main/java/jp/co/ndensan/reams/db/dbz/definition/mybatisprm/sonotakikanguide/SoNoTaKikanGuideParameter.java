@@ -23,7 +23,7 @@ public final class SoNoTaKikanGuideParameter {
     private boolean isその他機関コードFromFlag;
     private final RString その他機関コードTo;
     private boolean isその他機関コードToFlag;
-    private boolean is含まない;
+    private boolean 状況フラグ;
     private final RString その他機関名称;
     private boolean isその他機関名称Flag;
     private final RString 調査委託先区分;
@@ -34,7 +34,7 @@ public final class SoNoTaKikanGuideParameter {
             RString 証記載保険者番号,
             RString その他機関コードFrom,
             RString その他機関コードTo,
-            boolean is含まない,
+            boolean 状況フラグ,
             RString その他機関名称,
             RString 調査委託先区分,
             int 最大表示件数) {
@@ -58,7 +58,7 @@ public final class SoNoTaKikanGuideParameter {
         this.証記載保険者番号 = 証記載保険者番号;
         this.その他機関コードFrom = その他機関コードFrom;
         this.その他機関コードTo = その他機関コードTo;
-        this.is含まない = is含まない;
+        this.状況フラグ = 状況フラグ;
         this.その他機関名称 = その他機関名称;
         this.調査委託先区分 = 調査委託先区分;
         this.最大表示件数 = 最大表示件数;
@@ -70,7 +70,7 @@ public final class SoNoTaKikanGuideParameter {
      * @param 証記載保険者番号 RString
      * @param その他機関コードFrom RString
      * @param その他機関コードTo RString
-     * @param is含まない RString
+     * @param 状況フラグ RString
      * @param その他機関名称 RString
      * @param 調査委託先区分 RString
      * @param 最大表示件数 int
@@ -80,7 +80,7 @@ public final class SoNoTaKikanGuideParameter {
             RString 証記載保険者番号,
             RString その他機関コードFrom,
             RString その他機関コードTo,
-            boolean is含まない,
+            boolean 状況フラグ,
             RString その他機関名称,
             RString 調査委託先区分,
             int 最大表示件数) {
@@ -88,7 +88,7 @@ public final class SoNoTaKikanGuideParameter {
                 証記載保険者番号,
                 その他機関コードFrom,
                 その他機関コードTo,
-                is含まない,
+                状況フラグ,
                 その他機関名称,
                 調査委託先区分,
                 最大表示件数);

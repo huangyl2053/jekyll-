@@ -153,6 +153,17 @@ public class ShinseishaDataOutput {
     }
 
     /**
+     * 申請一覧データグリッドの照会ボタンクリックイベントです。
+     *
+     * @param div ShinseishaDataOutputDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseishaDataOutputDiv> onClick_btnShokai(ShinseishaDataOutputDiv div) {
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgShinseiJoho().getClickedItem().getShinseishoKanriNo());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「検索条件に戻る」ボタンクリックイベントです。
      *
      * @param div ShinseishaDataOutputDiv
@@ -194,7 +205,6 @@ public class ShinseishaDataOutput {
         div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
         div.getBtnClear().setDisabled(true);
         div.getTxtMaxDisp().setDisabled(true);
-        div.getBtnModoru().setDisabled(false);
         if (searchResult.records().size() == 1) {
             div.getBtnClear().setDisabled(false);
             div.getTxtMaxDisp().setDisabled(false);

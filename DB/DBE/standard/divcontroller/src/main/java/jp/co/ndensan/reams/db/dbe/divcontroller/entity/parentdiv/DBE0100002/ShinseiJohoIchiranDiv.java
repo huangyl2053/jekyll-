@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinseiJohoIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,6 @@ public class ShinseiJohoIchiranDiv extends Panel {
      */
     @JsonProperty("dgShinseiJoho")
     private DataGrid<dgShinseiJoho_Row> dgShinseiJoho;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,24 +46,6 @@ public class ShinseiJohoIchiranDiv extends Panel {
     @JsonProperty("dgShinseiJoho")
     public void setDgShinseiJoho(DataGrid<dgShinseiJoho_Row> dgShinseiJoho) {
         this.dgShinseiJoho = dgShinseiJoho;
-    }
-
-    /*
-     * getbtnModoru
-     * @return btnModoru
-     */
-    @JsonProperty("btnModoru")
-    public Button getBtnModoru() {
-        return btnModoru;
-    }
-
-    /*
-     * setbtnModoru
-     * @param btnModoru btnModoru
-     */
-    @JsonProperty("btnModoru")
-    public void setBtnModoru(Button btnModoru) {
-        this.btnModoru = btnModoru;
     }
 
     // </editor-fold>

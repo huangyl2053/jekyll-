@@ -121,11 +121,6 @@ public class ShujiiIryokikanAndShujiiGuide {
 //            } else {
 //                市町村コード = dataPassModel.get市町村コード();
 //            }
-            if (!RString.isNullOrEmpty(dataPassModel.get主治医医療機関コード())
-                    && new RString(TaishoMode.ShujiiMode.toString()).equals(dataPassModel.get対象モード())) {
-                div.getTxtIryoKikanCodeFrom().setValue(dataPassModel.get主治医医療機関コード());
-                div.getTxtIryoKikanCodeTo().setValue(dataPassModel.get主治医医療機関コード());
-            }
         }
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
