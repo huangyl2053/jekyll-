@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbx.definition.core;
 import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定申請区分(法令)を表す列挙型です。
@@ -38,9 +39,27 @@ public enum NinteiShinseiKubunHorei {
      */
     職権(4);
     private final int コード;
+    private final RString aName;
 
     private NinteiShinseiKubunHorei(int コード) {
         this.コード = コード;
+        this.aName = new RString(name());
+    }
+
+    /**
+     * 認定申請区分(法令)コードを返します。
+     *
+     * @return コード
+     */
+    public int getコード() {
+        return コード;
+    }
+
+    /**
+     * @return 名称
+     */
+    public RString getName() {
+        return this.aName;
     }
 
     /**
@@ -58,14 +77,5 @@ public enum NinteiShinseiKubunHorei {
             }
         }
         throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する認定申請区分(法令)").evaluate());
-    }
-
-    /**
-     * 認定申請区分(法令)コードを返します。
-     *
-     * @return コード
-     */
-    public int getコード() {
-        return コード;
     }
 }

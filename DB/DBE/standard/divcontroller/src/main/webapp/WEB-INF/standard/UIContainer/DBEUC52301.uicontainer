@@ -53,6 +53,30 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5230001",
+     "layoutTitle": "介護認定審査会結果登録",
+     "eventName": "基本運用へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4020001",
+     "toLayoutTitle": "基本運用・審査会結果登録",
+     "toState": "完了のみの登録"
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4020001",
+     "layoutTitle": "基本運用・審査会結果登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

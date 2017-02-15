@@ -17,31 +17,31 @@ public enum YokaigoJotaiKubun09 {
     /**
      * コード:12 名称:要支援1 略称:支1
      */
-    要支援1("12", "要支援１", "支1"),
+    要支援1("12", "要支援１", "支1", false),
     /**
      * コード:13 名称:要支援2 略称:支2
      */
-    要支援2("13", "要支援２", "支2"),
+    要支援2("13", "要支援２", "支2", false),
     /**
      * コード:21 名称:要介護1 略称:介1
      */
-    要介護1("21", "要介護１", "介1"),
+    要介護1("21", "要介護１", "介1", true),
     /**
      * コード:22 名称:要介護2 略称:介2
      */
-    要介護2("22", "要介護２", "介2"),
+    要介護2("22", "要介護２", "介2", true),
     /**
      * コード:23 名称:要介護3 略称:介3
      */
-    要介護3("23", "要介護３", "介3"),
+    要介護3("23", "要介護３", "介3", true),
     /**
      * コード:24 名称:要介護4 略称:介4
      */
-    要介護4("24", "要介護４", "介4"),
+    要介護4("24", "要介護４", "介4", true),
     /**
      * コード:25 名称:要介護5 略称:介5
      */
-    要介護5("25", "要介護５", "介5"),
+    要介護5("25", "要介護５", "介5", true),
     /**
      * コード:31 名称:再調査 略称:再調
      */
@@ -58,11 +58,23 @@ public enum YokaigoJotaiKubun09 {
     private final RString code;
     private final RString fullName;
     private final RString shortName;
+    private final boolean isYokaogo;
+    private final boolean isYoshien;
 
     private YokaigoJotaiKubun09(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
         this.shortName = new RString(shortName);
+        this.isYokaogo = false;
+        this.isYoshien = false;
+    }
+
+    private YokaigoJotaiKubun09(String code, String fullname, String shortName, boolean is要介護) {
+        this.code = new RString(code);
+        this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
+        this.isYokaogo = is要介護;
+        this.isYoshien = !is要介護;
     }
 
     /**
@@ -90,6 +102,20 @@ public enum YokaigoJotaiKubun09 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * @return 要介護の場合、{@code true}.
+     */
+    public boolean is要介護() {
+        return this.isYokaogo;
+    }
+
+    /**
+     * @return 要支援の場合、{@code true}.
+     */
+    public boolean is要支援() {
+        return this.isYoshien;
     }
 
     /**

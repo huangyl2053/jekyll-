@@ -266,6 +266,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 continue;
                 case _550: {
                     SaveImageFilesResult result_550 = saveImageFilesAndUpdateTables550(entry.getOcrChosas(), entity, nr, sharedFileID);
+                    sharedFileID = result_550.getSharedFileID();
                     results.addAll(result_550.getProcessingResults());
                 }
                 continue;

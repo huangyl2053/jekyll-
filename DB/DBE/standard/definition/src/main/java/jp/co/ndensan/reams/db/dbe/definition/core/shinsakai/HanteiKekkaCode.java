@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.core.shinsakai;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -35,11 +36,13 @@ public enum HanteiKekkaCode {
      */
     再調査_意見書のみ("33", "再調査（意見書のみ）");
 
-    private final RString code;
+    private final RString codeValue;
+    private final Code aCode;
     private final RString fullName;
 
     private HanteiKekkaCode(String code, String fullname) {
-        this.code = new RString(code);
+        this.aCode = new Code(code);
+        this.codeValue = new RString(code);
         this.fullName = new RString(fullname);
     }
 
@@ -49,7 +52,16 @@ public enum HanteiKekkaCode {
      * @return 判定結果コードのコード
      */
     public RString getコード() {
-        return code;
+        return codeValue;
+    }
+
+    /**
+     * 判定結果コードのコードを{@link Code}型で返します。
+     *
+     * @return 判定結果コードのコード(Code型)
+     */
+    public Code getCode() {
+        return aCode;
     }
 
     /**
@@ -70,7 +82,7 @@ public enum HanteiKekkaCode {
     public static HanteiKekkaCode toValue(RString code) {
 
         for (HanteiKekkaCode hanteiKekkaCode : HanteiKekkaCode.values()) {
-            if (hanteiKekkaCode.code.equals(code)) {
+            if (hanteiKekkaCode.codeValue.equals(code)) {
                 return hanteiKekkaCode;
             }
         }
