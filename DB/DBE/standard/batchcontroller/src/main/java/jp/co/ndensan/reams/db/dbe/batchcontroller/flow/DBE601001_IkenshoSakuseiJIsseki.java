@@ -22,12 +22,10 @@ public class DBE601001_IkenshoSakuseiJIsseki extends BatchFlowBase<DBE601001_Ike
 
     @Override
     protected void defineFlow() {
-        if (!getParameter().getKeyJoho().isEmpty()) {
-            if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
-                executeStep(IKENSHO_JISSEKI_ICHIRAN_CSV);
-            } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
-                executeStep(IKENSHO_JISSEKI_ICHIRAN_REPORT);
-            }
+        if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
+            executeStep(IKENSHO_JISSEKI_ICHIRAN_CSV);
+        } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
+            executeStep(IKENSHO_JISSEKI_ICHIRAN_REPORT);
         }
     }
 

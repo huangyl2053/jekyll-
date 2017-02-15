@@ -86,6 +86,14 @@
         </if>
         <where>
             <choose>
+                <when test="基準日区分 == 1">
+                    <if test="基準日FROMFlag">
+                        AND #{基準日FROM} <![CDATA[<=]]> T5302."ikenshoReadYMD"
+                    </if>
+                    <if test="基準日TOFlag">
+                        AND T5302."ikenshoReadYMD" <![CDATA[<=]]> #{基準日TO}
+                    </if>
+                </when>
                 <when test="基準日区分 == 2">
                     <if test="基準日FROMFlag">
                         AND #{基準日FROM} <![CDATA[<=]]> T5302."ikenshoKinyuYMD"
