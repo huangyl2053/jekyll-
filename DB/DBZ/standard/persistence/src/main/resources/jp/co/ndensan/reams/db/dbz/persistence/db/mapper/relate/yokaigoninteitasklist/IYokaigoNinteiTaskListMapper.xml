@@ -2133,9 +2133,9 @@
         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
-        ORDER BY  DbT5101."hihokenshaKana",
-        DbT5101."ninteiShinseiYMD",
-        DbT5101."shoKisaiHokenshaNo"
+        ORDER BY  DbT5101."ninteiShinseiYMD" ASC,
+        DbT5101."shoKisaiHokenshaNo" ASC,
+        DbT5101."hihokenshaNo" ASC
         LIMIT #{件数}
     </select>
     <resultMap id="resultMap_ShinSaKeTuKeRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
