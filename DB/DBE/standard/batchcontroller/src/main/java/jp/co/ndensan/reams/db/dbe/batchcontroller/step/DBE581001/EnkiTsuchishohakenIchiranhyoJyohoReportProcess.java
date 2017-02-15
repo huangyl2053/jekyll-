@@ -41,10 +41,10 @@ public class EnkiTsuchishohakenIchiranhyoJyohoReportProcess extends BatchKeyBrea
 
     private static final ReportId REPORT_DBE581002 = ReportIdDBE.DBE581002.getReportId();
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.enkitsuchisho."
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.enkitsuchisho."
                     + "IEnkiTsuchishoMapper.get延期通知書発行一覧表情報");
     private static final RString MYBATIS_SELECT_ID_2
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.enkitsuchisho."
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.enkitsuchisho."
                     + "IEnkiTsuchishoMapper.get延期通知書発行一覧表情報広域");
     private int 連番 = 1;
     private static final RString 導入形態コード120 = new RString("120");

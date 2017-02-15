@@ -41,7 +41,7 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
     private boolean is発行有無_全て選択チェックON;
     private boolean is発行有無_発行未チェックON;
     private boolean is発行有無_発行済チェックON;
-    private boolean みなし２号等対象フラグ;
+    private boolean isみなし二号等対象フラグ;
     private RString 処理見込み日From;
     private boolean is処理見込み日Fromが入力;
     private RString 処理見込み日To;
@@ -101,7 +101,7 @@ public class NinteiEnkiTsuchishoHakkoParameter implements IMyBatisParameter {
             this.is発行有無_発行未チェックON = 発行有無KeyList.contains(KEY1) && !発行有無KeyList.contains(KEY2);
             this.is発行有無_発行済チェックON = 発行有無KeyList.contains(KEY2) && !発行有無KeyList.contains(KEY1);
         }
-        this.みなし２号等対象フラグ = KEY0.equals(みなし２号Key);
+        this.isみなし二号等対象フラグ = KEY0.equals(みなし２号Key);
         if (処理見込み日From != null) {
             this.is処理見込み日Fromが入力 = true;
             this.処理見込み日From = 処理見込み日From.toDateString();

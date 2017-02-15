@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -91,6 +92,25 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
     public int save(DbT5101NinteiShinseiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報エンティティ"));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 主キーで要介護認定申請情報を取得します。
+     *
+     * @param 申請書管理番号List 申請書管理番号List
+     * @return DbT4101NinteiShinseiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5101NinteiShinseiJohoEntity> selectByZenkaiShinseishoKanriNoList(List<RString> 申請書管理番号List) throws NullPointerException {
+        requireNonNull(申請書管理番号List, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5101NinteiShinseiJoho.class).
+                where(
+                        in(shinseishoKanriNo, 申請書管理番号List)).
+                toList(DbT5101NinteiShinseiJohoEntity.class);
     }
 
     /**
