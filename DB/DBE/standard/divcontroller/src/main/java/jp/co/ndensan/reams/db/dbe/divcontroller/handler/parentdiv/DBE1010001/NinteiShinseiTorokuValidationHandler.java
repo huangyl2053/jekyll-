@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -104,8 +103,7 @@ public class NinteiShinseiTorokuValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(
                 div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().getSelectedKey())
-                && (!TorisageKubunCode.認定申請有効.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())
-                || (div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || div.getTxtTorisageJiyu().getValue().isEmpty()))) {
+                && (div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || div.getTxtTorisageJiyu().getValue().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可,
                     div.getSinseiTorisage()));
         }
@@ -161,13 +159,10 @@ public class NinteiShinseiTorokuValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 取下日理由必須チェック() {
-
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (!TorisageKubunCode.認定申請有効.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())
-                && !div.getDdlTorisageJiyu().getSelectedValue().isEmpty()
-                && (div.getTxtTorisageJiyu().getValue().isEmpty()
-                || div.getTxtTorisageDate().getValue() == null
-                || div.getTxtTorisageDate().getValue().toDateString().isEmpty())) {
+        boolean isTorisageDateEmpty = div.getTxtTorisageDate().getValue() == null || div.getTxtTorisageDate().getValue().toDateString().isEmpty();
+        boolean isTxtTorisageJiyuEmpty = div.getTxtTorisageJiyu().getValue() == null || div.getTxtTorisageJiyu().getValue().isEmpty();
+        if (!div.getDdlTorisageJiyu().getSelectedValue().isEmpty() && (isTorisageDateEmpty || isTxtTorisageJiyuEmpty)) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須));
         }
         return validationMessages;
@@ -182,7 +177,7 @@ public class NinteiShinseiTorokuValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (!div.getServiceDel().getTxtServiceDeleteRiyu().getValue().isEmpty()
                 && (!div.getTxtTorisageJiyu().getValue().isNullOrEmpty()
-                || !div.getTxtTorisageDate().getValue().toDateString().isNullOrEmpty()
+                || !(div.getTxtTorisageDate().getValue() != null && div.getTxtTorisageDate().getValue().toDateString().isNullOrEmpty())
                 || !div.getDdlTorisageJiyu().getSelectedValue().isNullOrEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請サービス削除と取下理由は同時存在));
         }
@@ -200,6 +195,26 @@ public class NinteiShinseiTorokuValidationHandler {
         if ((result.get判定結果コード() == null || result.get判定結果コード().isEmpty() || result.get認定審査会割当完了年月日() != null)
                 && result.get介護認定審査会割当年月日() != null) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.審査会割当済のため処理不可));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 延期入力チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 延期入力チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        boolean isEnkiKetteiYMDEmpty = div.getTxtEnkiKetteiYMD().getValue() == null || div.getTxtEnkiKetteiYMD().getValue().toString().isEmpty();
+        boolean isEnkiMikomiFromEmpty = div.getTxtEnkiMikomiKikan().getFromValue() == null || div.getTxtEnkiMikomiKikan().getFromValue().toString().isEmpty();
+        boolean isEnkiMikomiToEmpty = div.getTxtEnkiMikomiKikan().getToValue() == null || div.getTxtEnkiMikomiKikan().getToValue().toString().isEmpty();
+        boolean isEnkiRiyuEmpty = div.getTxtEnkiRiyu().getValue() == null || div.getTxtEnkiRiyu().getValue().isEmpty();
+        if (!isEnkiKetteiYMDEmpty && (isEnkiRiyuEmpty || isEnkiMikomiFromEmpty || isEnkiMikomiToEmpty)) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.延期見込期間または延期理由必須));
+        }
+        if ((!isEnkiMikomiFromEmpty || !isEnkiMikomiToEmpty || !isEnkiRiyuEmpty) && isEnkiKetteiYMDEmpty) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.延期決定日必須));
         }
         return validationMessages;
     }
@@ -242,7 +257,9 @@ public class NinteiShinseiTorokuValidationHandler {
         審査会割当済のため処理不可(DbeErrorMessages.審査会割当済のため処理不可),
         認定調査依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼"),
         主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "主治医意見書作成依頼"),
-        認定調査と主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼・主治医意見書作成依頼");
+        認定調査と主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼・主治医意見書作成依頼"),
+        延期見込期間または延期理由必須(UrErrorMessages.未入力, "延期登録の場合、延期見込期間または延期理由"),
+        延期決定日必須(UrErrorMessages.未入力, "延期登録の場合、延期決定日");
 
         private final Message message;
 

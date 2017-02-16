@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai1;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjohogogitai.ShinsakaiIinJohoGoitaiBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoKaisaiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjohogogitai.ShinsakaiIinJohoGoitaiEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiiinJohoGogitaiMapper;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -52,12 +54,15 @@ public class ShinsakaiiinJohoManager {
     /**
      * 審査会委員情報の取得処理です。
      *
+     * @param 開催予定期間From RString
+     * @param 開催予定期間To RString
      * @return SearchResult<ShinsakaiIinJohoGoitaiBusiness>
      */
-    public SearchResult<ShinsakaiIinJohoGoitaiBusiness> search審査会委員情報() {
+    public SearchResult<ShinsakaiIinJohoGoitaiBusiness> search審査会委員情報(RString 開催予定期間From, RString 開催予定期間To) {
         List<ShinsakaiIinJohoGoitaiBusiness> 審査会委員情報 = new ArrayList<>();
+        ShinsakaiIinJohoKaisaiMapperParameter param = ShinsakaiIinJohoKaisaiMapperParameter.createParamByKaisaiYoteiKikan(開催予定期間From, 開催予定期間To);
         IShinsakaiiinJohoGogitaiMapper mapper = mapperProvider.create(IShinsakaiiinJohoGogitaiMapper.class);
-        List<ShinsakaiIinJohoGoitaiEntity> entityList = mapper.search審査会委員情報();
+        List<ShinsakaiIinJohoGoitaiEntity> entityList = mapper.search審査会委員情報(param);
         for (ShinsakaiIinJohoGoitaiEntity entity : entityList) {
             審査会委員情報.add(new ShinsakaiIinJohoGoitaiBusiness(entity));
         }

@@ -57,7 +57,7 @@ public class IkenshoJissekiIchiranEditor implements IIkenshoJissekiIchiranEditor
         source.listIkenshoJissekiIchiran_11 = item.get入手パターン_在継();
         source.listIkenshoJissekiIchiran_12 = item.get入手パターン_施新();
         source.listIkenshoJissekiIchiran_13 = item.get入手パターン_施継();
-        source.listIkenshoJissekiIchiran_14 = item.get医師区分();
+        source.listIkenshoJissekiIchiran_14 = item.get単価();
         return source;
     }
 

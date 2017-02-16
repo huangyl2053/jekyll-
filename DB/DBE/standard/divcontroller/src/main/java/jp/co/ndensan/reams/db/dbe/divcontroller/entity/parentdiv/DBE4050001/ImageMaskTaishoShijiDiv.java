@@ -27,6 +27,8 @@ public class ImageMaskTaishoShijiDiv extends Panel {
     private ButtonDialog btnMaskingGenpon;
     @JsonProperty("btnMaskingMask")
     private ButtonDialog btnMaskingMask;
+    @JsonProperty("btnSakujo")
+    private Button btnSakujo;
     @JsonProperty("btnTorikeshi")
     private Button btnTorikeshi;
 
@@ -88,6 +90,24 @@ public class ImageMaskTaishoShijiDiv extends Panel {
     @JsonProperty("btnMaskingMask")
     public void setBtnMaskingMask(ButtonDialog btnMaskingMask) {
         this.btnMaskingMask = btnMaskingMask;
+    }
+
+    /*
+     * getbtnSakujo
+     * @return btnSakujo
+     */
+    @JsonProperty("btnSakujo")
+    public Button getBtnSakujo() {
+        return btnSakujo;
+    }
+
+    /*
+     * setbtnSakujo
+     * @param btnSakujo btnSakujo
+     */
+    @JsonProperty("btnSakujo")
+    public void setBtnSakujo(Button btnSakujo) {
+        this.btnSakujo = btnSakujo;
     }
 
     /*

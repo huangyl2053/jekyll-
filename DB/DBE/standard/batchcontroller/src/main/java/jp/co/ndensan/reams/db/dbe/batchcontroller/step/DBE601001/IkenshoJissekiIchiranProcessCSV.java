@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -49,7 +51,7 @@ public class IkenshoJissekiIchiranProcessCSV extends BatchProcessBase<IkenshoJis
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranMapper.get主治医意見書作成実績集計表");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE602001"));
-    private static final RString CSV_NAME = new RString("主治医意見書作成実績集計.csv");
+    private static final RString CSV_NAME = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, new RString("DBE602001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private IkenshoJissekiIchiranProcessParameter paramter;

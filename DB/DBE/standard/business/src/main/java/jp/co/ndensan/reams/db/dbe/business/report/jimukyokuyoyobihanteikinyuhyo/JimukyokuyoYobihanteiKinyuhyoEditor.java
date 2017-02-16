@@ -67,6 +67,7 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
         source.printTimeStamp = systemDateTime.toRString();
+        source.title = new RString("予備判定記入表(事務局用)");
         source.listTaishoshaIchiran_1 = business.get被保険者番号();
         source.listTaishoshaIchiran_2 = business.get氏名();
         if (RString.isNullOrEmpty(business.get性別())) {

@@ -106,7 +106,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
             if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_可)) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を登録するボタン, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を登録するボタン, false);
             }
         }
     }
@@ -192,7 +192,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             }
 
             div.getDdlIraiKubun().setSelectedKey(
-                    (row.getIkenshoIraiKubun() != null && !row.getIkenshoIraiKubun().isEmpty())
+                    (row.getIkenshoIraiKubun() != null && !(row.getIkenshoIraiKubun().trim()).isEmpty())
                     ? row.getIkenshoIraiKubun()
                     : IkenshoIraiKubun.初回依頼.getコード());
             div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoIraiDay().getValue());
@@ -270,14 +270,10 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         if (RString.isNullOrEmpty(作成料請求区分コード)) {
             return 作成料請求区分名称;
         }
-        if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(作成料請求区分コード)) {
-            作成料請求区分名称 = SakuseiryoSeikyuKubun.在宅新規.get名称();
-        } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(作成料請求区分コード)) {
-            作成料請求区分名称 = SakuseiryoSeikyuKubun.施設新規.get名称();
-        } else if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(作成料請求区分コード)) {
-            作成料請求区分名称 = SakuseiryoSeikyuKubun.在宅継続.get名称();
-        } else if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(作成料請求区分コード)) {
-            作成料請求区分名称 = SakuseiryoSeikyuKubun.施設継続.get名称();
+        for (SakuseiryoSeikyuKubun sakuseiryoSeikyuKubun : SakuseiryoSeikyuKubun.values()) {
+            if (sakuseiryoSeikyuKubun.getコード().equals(作成料請求区分コード)) {
+                作成料請求区分名称 = sakuseiryoSeikyuKubun.get名称();
+            }
         }
         return 作成料請求区分名称;
     }
@@ -290,6 +286,10 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getSelectedItems()) {
             int index = dataSource.indexOf(row);
             row.getIkenshoIraiDay().setValue(div.getTxtSakuseiIraiYmd().getValue());
+            row.setIkenshoIraiKubun(div.getDdlIraiKubun().getSelectedKey());
+            RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
+                    .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
+            row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
             row.setRowState(RowState.Modified);
             row.setCancelButtonState(DataGridButtonState.Enabled);
             dataSource.set(index, row);

@@ -105,7 +105,8 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
                 IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoNashiColorBuilderImpl(editor);
                 reportSourceWriter.writeLine(builder);
             }
-        } else if (ReportIdDBZ.DBE221003.getReportId().equals(id)) {
+        } else if (ReportIdDBZ.DBE221003.getReportId().equals(id)
+                || ReportIdDBZ.DBE221032.getReportId().equals(id)) {
             if (business == null) {
                 for (ChosahyoTokkijikoBusiness chosahyoTokkijikoBusiness : businessList) {
                     IChosahyoTokkijikoEditor omoteEditor = new ChosahyoTokkijikoRyomenOmoteEditorImpl(chosahyoTokkijikoBusiness);
@@ -118,7 +119,6 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
                 reportSourceWriter.writeLine(omoteBuilder);
             }
         } else if (ReportIdDBZ.DBE221031.getReportId().equals(id)
-                || ReportIdDBZ.DBE221032.getReportId().equals(id)
                 || ReportIdDBZ.DBE221042_Ryomen.getReportId().equals(id)) {
             if (business == null) {
                 for (ChosahyoTokkijikoBusiness chosahyoTokkijikoBusiness : businessList) {

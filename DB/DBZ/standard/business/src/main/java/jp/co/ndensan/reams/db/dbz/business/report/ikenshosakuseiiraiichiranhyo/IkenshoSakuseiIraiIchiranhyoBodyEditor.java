@@ -17,16 +17,19 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
 
     private final IkenshoSakuseiIraiIchiranhyoItem item;
     private final int index;
+    private final int pageCount;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link IkenshoSakuseiIraiIchiranhyoHeadEditor}
      * @param index int
+     * @param pageCount
      */
-    protected IkenshoSakuseiIraiIchiranhyoBodyEditor(IkenshoSakuseiIraiIchiranhyoItem item, int index) {
+    protected IkenshoSakuseiIraiIchiranhyoBodyEditor(IkenshoSakuseiIraiIchiranhyoItem item, int index, int pageCount) {
         this.item = item;
         this.index = index;
+        this.pageCount = pageCount;
     }
 
     @Override
@@ -62,6 +65,7 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
         source.listIchiranhyo_8 = item.getListIchiranhyo_8();
         source.listIchiranhyo_9 = item.getListIchiranhyo_9();
         source.shujiiIryokikanCode = item.getShujiiIryokikanCode();
+        source.pageCountForIryokikan = new RString(String.valueOf(pageCount));
         return source;
     }
 }

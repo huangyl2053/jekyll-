@@ -56,6 +56,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJot
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -91,36 +93,45 @@ public class IkenshoJoho09BEucEntityEditor {
         eucEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         eucEntity.set保険者名(entity.getShichosonMeisho());
         eucEntity.set被保険者番号(entity.getHihokenshaNo());
-        eucEntity.set被保険者氏名(entity.getHihokenshaName().value());
-        eucEntity.set性別コード(entity.getSeibetsu().value());
-        eucEntity.set性別(Gender.toValue(entity.getSeibetsu().value()).getCommonName());
+        eucEntity.set被保険者氏名(nullToEmpty(entity.getHihokenshaName()));
+        eucEntity.set性別コード(nullToEmpty(entity.getSeibetsu()));
+        eucEntity.set性別((entity.getSeibetsu() != null && !entity.getSeibetsu().isEmpty())
+                ? Gender.toValue(entity.getSeibetsu().value()).getCommonName() : RString.EMPTY);
         eucEntity.set生年月日(format日付(entity.getSeinengappiYMD()));
         eucEntity.set年齢(new RString(entity.getAge()));
         eucEntity.set被保険者区分コード(entity.getHihokenshaKubunCode());
-        eucEntity.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+        eucEntity.set被保険者区分((!RString.isNullOrEmpty(entity.getHihokenshaKubunCode()))
+                ? HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称() : RString.EMPTY);
         eucEntity.set_２号特定疾病コード(entity.getNigoTokuteiShippeiCode());
-        eucEntity.set_２号特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode()).get名称());
+        eucEntity.set_２号特定疾病名((!RString.isNullOrEmpty(entity.getNigoTokuteiShippeiCode()))
+                ? TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode()).get名称() : RString.EMPTY);
         eucEntity.set申請日(format日付(entity.getNinteiShinseiYMD()));
         eucEntity.set申請書区分コード(entity.getShienShinseiKubun());
-        eucEntity.set申請書区分(ShienShinseiKubun.toValue(entity.getShienShinseiKubun()).get名称());
-        eucEntity.set申請区分_法令_コード(entity.getNinteiShinseiHoreiKubunCode().value());
-        eucEntity.set申請区分_法令(NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode().value()).get名称());
-        eucEntity.set申請区分_申請時_コード(entity.getNinteiShinseiShinseijiKubunCode().value());
-        eucEntity.set申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode().value()).get名称());
-        eucEntity.set処理状態区分コード(entity.getShoriJotaiKubun().value());
-        eucEntity.set処理状態区分(ShoriJotaiKubun.toValue(entity.getShoriJotaiKubun().value()).get名称());
+        eucEntity.set申請書区分((!RString.isNullOrEmpty(entity.getShienShinseiKubun()))
+                ? ShienShinseiKubun.toValue(entity.getShienShinseiKubun()).get名称() : RString.EMPTY);
+        eucEntity.set申請区分_法令_コード(nullToEmpty(entity.getNinteiShinseiHoreiKubunCode()));
+        eucEntity.set申請区分_法令((entity.getNinteiShinseiHoreiKubunCode() != null && !entity.getNinteiShinseiHoreiKubunCode().isEmpty())
+                ? NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set申請区分_申請時_コード(nullToEmpty(entity.getNinteiShinseiShinseijiKubunCode()));
+        eucEntity.set申請区分_申請時((entity.getNinteiShinseiShinseijiKubunCode() != null && !entity.getNinteiShinseiShinseijiKubunCode().isEmpty())
+                ? NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set処理状態区分コード(nullToEmpty(entity.getShoriJotaiKubun()));
+        eucEntity.set処理状態区分((entity.getShoriJotaiKubun() != null && !entity.getShoriJotaiKubun().isEmpty())
+                ? ShoriJotaiKubun.toValue(entity.getShoriJotaiKubun().value()).get名称() : RString.EMPTY);
         eucEntity.set申請時_医療機関コード(entity.getShinseiShujiiIryokikanCode());
         eucEntity.set申請時_医療機関名称(entity.getShinseiIryoKikanMeisho());
         eucEntity.set申請時_主治医コード(entity.getShinseiShujiiCode());
         eucEntity.set申請時_主治医名(entity.getShinseiShujiiName());
         eucEntity.set依頼区分コード(entity.getIkenshoIraiKubun());
-        eucEntity.set依頼区分(IkenshoIraiKubun.toValue(entity.getIkenshoIraiKubun()).get名称());
+        eucEntity.set依頼区分((!RString.isNullOrEmpty(entity.getIkenshoIraiKubun()))
+                ? IkenshoIraiKubun.toValue(entity.getIkenshoIraiKubun()).get名称() : RString.EMPTY);
         eucEntity.set依頼時_医療機関コード(entity.getIraiShujiiIryokikanCode());
         eucEntity.set依頼時_医療機関名称(entity.getIraiIryoKikanMeisho());
         eucEntity.set依頼時_主治医コード(entity.getIraiShujiiCode());
         eucEntity.set依頼時_主治医名(entity.getIraiShujiiName());
         eucEntity.set依頼時_医師区分コード(entity.getIraiIshiKubunCode());
-        eucEntity.set依頼時_医師区分(IshiKubunCode.toValue(entity.getIraiIshiKubunCode()).get名称());
+        eucEntity.set依頼時_医師区分((!RString.isNullOrEmpty(entity.getIraiIshiKubunCode()))
+                ? IshiKubunCode.toValue(entity.getIraiIshiKubunCode()).get名称() : RString.EMPTY);
         eucEntity.set入手時_医療機関コード(entity.getNyushuShujiiIryokikanCode());
         eucEntity.set入手時_医療機関名称(entity.getNyushuIryoKikanMeisho());
         eucEntity.set入手時_主治医コード(entity.getNyushuShujiiCode());
@@ -130,10 +141,12 @@ public class IkenshoJoho09BEucEntityEditor {
         eucEntity.set読取日(format日付(entity.getIkenshoReadYMD()));
         eucEntity.set最終診療日(format日付(entity.getSaishuShinryoYMD()));
         eucEntity.set意見書同意(IsIkenshoDoiUmu.toValue(entity.isIkenshoDoiFlag()).get名称());
-        eucEntity.set意見書作成回数区分コード(entity.getIkenshoSakuseiKaisuKubun().value());
-        eucEntity.set意見書作成回数区分(IkenshoSakuseiKaisuKubun.toValue(entity.getIkenshoSakuseiKaisuKubun().value()).get名称());
-        eucEntity.set在宅or施設区分コード(entity.getZaitakuShisetsuKubun().value());
-        eucEntity.set在宅or施設区分(ZaitakuShisetsuKubun.toValue(entity.getZaitakuShisetsuKubun().value()).get名称());
+        eucEntity.set意見書作成回数区分コード(nullToEmpty(entity.getIkenshoSakuseiKaisuKubun()));
+        eucEntity.set意見書作成回数区分((entity.getIkenshoSakuseiKaisuKubun() != null && !entity.getIkenshoSakuseiKaisuKubun().isEmpty())
+                ? IkenshoSakuseiKaisuKubun.toValue(entity.getIkenshoSakuseiKaisuKubun().value()).get名称() : RString.EMPTY);
+        eucEntity.set在宅or施設区分コード(nullToEmpty(entity.getZaitakuShisetsuKubun()));
+        eucEntity.set在宅or施設区分((entity.getZaitakuShisetsuKubun() != null && !entity.getZaitakuShisetsuKubun().isEmpty())
+                ? ZaitakuShisetsuKubun.toValue(entity.getZaitakuShisetsuKubun().value()).get名称() : RString.EMPTY);
         eucEntity.set他科受診の有無(TakaJushinUmu.toValue(entity.isExistTakaJushinFlag()).get名称());
         eucEntity.set内科受診の有無(IsNaikajJshinUmu.toValue(entity.isExistNaikaJushinFlag()).get名称());
         eucEntity.set精神科受診の有無(IsSeishinkaJushinUmu.toValue(entity.isExistSeishinkaJushinFlag()).get名称());
@@ -156,7 +169,8 @@ public class IkenshoJoho09BEucEntityEditor {
         eucEntity.set診断名３(entity.getShindamMei3());
         eucEntity.set発症日３(entity.getHasshoYMD3());
         eucEntity.set症状としての安定性コード(entity.getAnteisei());
-        eucEntity.set症状としての安定性(Anteisei.toValue(entity.getAnteisei()).get名称());
+        eucEntity.set症状としての安定性((!RString.isNullOrEmpty(entity.getAnteisei()))
+                ? Anteisei.toValue(entity.getAnteisei()).get名称() : RString.EMPTY);
         eucEntity.set不安定状況(entity.getFuanteiJokyo());
         eucEntity.set治療内容(convert改行(entity.getChiryoNaiyo()));
         eucEntity.set点滴の管理(get意見項目01名称(get意見項目(意見項目List, Renban._1.getValue())));
@@ -392,10 +406,22 @@ public class IkenshoJoho09BEucEntityEditor {
     }
 
     private static RString format日付(FlexibleDate value) {
-        return value.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        return (value != null)
+                ? value.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString()
+                : RString.EMPTY;
     }
 
     private static RString convert改行(RString text) {
-        return new RStringBuilder(text).replace(改行, 下矢印).toRString();
+        return (text != null)
+                ? new RStringBuilder(text).replace(改行, 下矢印).toRString()
+                : RString.EMPTY;
+    }
+
+    private static RString nullToEmpty(Code item) {
+        return (item != null) ? item.value() : RString.EMPTY;
+    }
+
+    private static RString nullToEmpty(AtenaMeisho item) {
+        return (item != null) ? item.value() : RString.EMPTY;
     }
 }

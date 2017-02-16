@@ -320,10 +320,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      * 要介護認定調査票（概況調査＋基本調査　片面印刷のOCR）を出力します。
      *
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
+     * @param layoutIndex
      */
-    public void print認定調査票_OCR片面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List) {
+    public void print認定調査票_片面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, int layoutIndex) {
         if (!認定調査票_概況調査List.isEmpty()) {
-            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List);
+            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List, layoutIndex);
             ChosahyoOcrKatamenProperty property = new ChosahyoOcrKatamenProperty();
             try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);

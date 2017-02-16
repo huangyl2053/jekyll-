@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBZ-1300-130 xuyannan
  */
 public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIryokikanAndShujiiGuideDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,6 +51,8 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     private RString hdnShujiiCode;
     @JsonProperty("hdnDataPass")
     private RString hdnDataPass;
+    @JsonProperty("hdnCanJokyoMuko")
+    private RString hdnCanJokyoMuko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -182,6 +184,24 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     @JsonProperty("hdnDataPass")
     public void setHdnDataPass(RString hdnDataPass) {
         this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
+     * gethdnCanJokyoMuko
+     * @return hdnCanJokyoMuko
+     */
+    @JsonProperty("hdnCanJokyoMuko")
+    public RString getHdnCanJokyoMuko() {
+        return hdnCanJokyoMuko;
+    }
+
+    /*
+     * sethdnCanJokyoMuko
+     * @param hdnCanJokyoMuko hdnCanJokyoMuko
+     */
+    @JsonProperty("hdnCanJokyoMuko")
+    public void setHdnCanJokyoMuko(RString hdnCanJokyoMuko) {
+        this.hdnCanJokyoMuko = hdnCanJokyoMuko;
     }
 
     /*

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uzi.divcontroller.entity.commonchilddiv.ImageMaski
  * @author 自動生成
  */
 public class ImageJohoMaskingDialogDiv extends Panel implements IImageJohoMaskingDialogDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

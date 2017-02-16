@@ -6,12 +6,8 @@ var DBE;
                 this.fieldName = fieldName;
                 this.controls = new ImageJohoMaskingDialog.Controls(fieldName);
                 Uz.GyomuJSHelper.registOriginalEvent(DBE.ImageJohoMaskingDialog.Events.onClick_btnHozon(), function (control) {
-                    (Uz)._MessageUtil.confirm("保存します。よろしいですか？", function (isOk) {
-                        if (isOk) {
-                            UZI.ImageMasking.EventScripts.beforeClick();
-                            $("#" + Uz.JSControlUtil.getJSControl("btnSave").fieldName).click();
-                        }
-                    });
+                    UZI.ImageMasking.EventScripts.beforeClick();
+                    $("#" + Uz.JSControlUtil.getJSControl("btnSave").fieldName).click();
                 });
             }
             ModeController.prototype.Properties = function () {

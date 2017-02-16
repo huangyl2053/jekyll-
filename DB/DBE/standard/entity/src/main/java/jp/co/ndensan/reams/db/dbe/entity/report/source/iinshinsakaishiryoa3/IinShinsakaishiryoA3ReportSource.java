@@ -379,11 +379,17 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public RString shisetsuTelTxit;
     @ReportItem(name = "imgShisetsuTel", order = 238)
     public RString imgShisetsuTel;
+    @ReportItem(name = "shisetsuName", length = 7, order = 239)
+    public RString shisetsuName;
+    @ReportItem(name = "jusho", length = 7, order = 240)
+    public RString jusho;
+    @ReportItem(name = "telNo", length = 3, order = 241)
+    public RString telNo;
 
     //DBE517041_GaikyotokkiTextA3
-    @ReportItem(name = "gaikyotokkiImg", order = 239)
+    @ReportItem(name = "gaikyotokkiImg", order = 250)
     public RString gaikyotokkiImg;
-    @ReportItem(name = "gaikyotokkiText", order = 240)
+    @ReportItem(name = "gaikyotokkiText", order = 251)
     public RString gaikyotokkiText;
 
     //DBE517031_TokkiText1A3

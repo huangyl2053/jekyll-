@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  * @reamsid_L DBZ-1300-140 chengsanyuan
  */
 public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIryokikanAndShujiiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -70,6 +70,8 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     private RString hdnDataPass;
     @JsonProperty("hdnSubGyomuModel")
     private RString hdnSubGyomuModel;
+    @JsonProperty("hdnIsJokyo")
+    private RString hdnIsJokyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -363,6 +365,24 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     @JsonProperty("hdnSubGyomuModel")
     public void setHdnSubGyomuModel(RString hdnSubGyomuModel) {
         this.hdnSubGyomuModel = hdnSubGyomuModel;
+    }
+
+    /*
+     * gethdnIsJokyo
+     * @return hdnIsJokyo
+     */
+    @JsonProperty("hdnIsJokyo")
+    public RString getHdnIsJokyo() {
+        return hdnIsJokyo;
+    }
+
+    /*
+     * sethdnIsJokyo
+     * @param hdnIsJokyo hdnIsJokyo
+     */
+    @JsonProperty("hdnIsJokyo")
+    public void setHdnIsJokyo(RString hdnIsJokyo) {
+        this.hdnIsJokyo = hdnIsJokyo;
     }
 
     /*

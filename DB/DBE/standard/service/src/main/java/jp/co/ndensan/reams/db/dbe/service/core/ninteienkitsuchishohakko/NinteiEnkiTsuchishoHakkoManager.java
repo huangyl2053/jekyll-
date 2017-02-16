@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteienkitsuchishohakko
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteienkitsuchishohakko.INinteiEnkiTsuchishoHakkoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4101NinteiShinseiJohoDac;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoDbT5101Child;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -113,12 +113,12 @@ public class NinteiEnkiTsuchishoHakkoManager {
      * @return 要介護認定申請情報List
      */
     @Transaction
-    public List<NinteiShinseiJohoChild> get要介護認定申請情報(List<RString> 申請書管理番号List) {
-        List<NinteiShinseiJohoChild> 要介護認定申請情報List = new ArrayList<>();
-        DbT4101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
-        List<DbT4101NinteiShinseiJohoEntity> entityList = dac.selectByZenkaiShinseishoKanriNoList(申請書管理番号List);
-        for (DbT4101NinteiShinseiJohoEntity entity : entityList) {
-            要介護認定申請情報List.add(new NinteiShinseiJohoChild(entity));
+    public List<NinteiShinseiJohoDbT5101Child> get要介護認定申請情報(List<RString> 申請書管理番号List) {
+        List<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報List = new ArrayList<>();
+        DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
+        List<DbT5101NinteiShinseiJohoEntity> entityList = dac.selectByZenkaiShinseishoKanriNoList(申請書管理番号List);
+        for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
+            要介護認定申請情報List.add(new NinteiShinseiJohoDbT5101Child(entity));
         }
         return 要介護認定申請情報List;
     }
@@ -131,20 +131,21 @@ public class NinteiEnkiTsuchishoHakkoManager {
      *
      */
     @Transaction
-    public void 更新処理(List<NinteiShinseiJohoChild> 要介護認定申請情報List, List<DgHakkotaishoshaRow> rowEntityList) {
-        DbT4101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT4101NinteiShinseiJohoDac.class);
-        for (NinteiShinseiJohoChild 要介護認定申請情報 : 要介護認定申請情報List) {
-            DbT4101NinteiShinseiJohoEntity entity = get更新要介護認定申請情報(要介護認定申請情報, rowEntityList);
+    public void 更新処理(List<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報List, List<DgHakkotaishoshaRow> rowEntityList) {
+        DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
+        for (NinteiShinseiJohoDbT5101Child 要介護認定申請情報 : 要介護認定申請情報List) {
+            DbT5101NinteiShinseiJohoEntity entity = get更新要介護認定申請情報(要介護認定申請情報, rowEntityList);
             if (entity != null) {
                 dac.save(entity);
             }
         }
     }
 
-    private DbT4101NinteiShinseiJohoEntity get更新要介護認定申請情報(NinteiShinseiJohoChild 要介護認定申請情報, List<DgHakkotaishoshaRow> rowEntityList) {
+    private DbT5101NinteiShinseiJohoEntity get更新要介護認定申請情報(NinteiShinseiJohoDbT5101Child 要介護認定申請情報, List<DgHakkotaishoshaRow> rowEntityList) {
         for (DgHakkotaishoshaRow row : rowEntityList) {
             if (要介護認定申請情報.get申請書管理番号().getColumnValue().equals(row.get申請書管理番号())) {
-                DbT4101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
+//                DbT4101NinteiShinseiJohoEntity dbT4101entity = 要介護認定申請情報.toEntity();
+                DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
                 entity.setEnkiKetteiYMD(rDateToFlexibleDate(row.get延期決定日()));
                 entity.setEnkiRiyu(row.get延期理由());
                 entity.setEnkiTsuchiHakkoYMD(rDateToFlexibleDate(row.get通知書発行日()));
@@ -174,8 +175,9 @@ public class NinteiEnkiTsuchishoHakkoManager {
     @Transaction
     public List<RString> get延期の理由() {
         List<UzT0007CodeEntity> entityList
-                = CodeMaster.getCodeRireki(SubGyomuCode.DBD介護受給, DBDCodeShubetsu.延期理由.getコード());
+                = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, DBECodeShubetsu.延期理由.getコード());
         List<RString> 延期の理由 = new ArrayList<>();
+        延期の理由.add(RString.EMPTY);
         for (UzT0007CodeEntity entity : entityList) {
             延期の理由.add(entity.getコード略称());
         }

@@ -337,6 +337,12 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString imgShisetsuTel;
     @ReportItem(name = "shinsakaiOrder", order = 192)
     public RString shinsakaiOrder;
+    @ReportItem(name = "shisetsuName", length = 7, order = 193)
+    public RString shisetsuName;
+    @ReportItem(name = "jusho", length = 7, order = 194)
+    public RString jusho;
+    @ReportItem(name = "telNo", length = 3, order = 195)
+    public RString telNo;
 
     //DBE517041
     @ReportItem(name = "gaikyotokkiImg", order = 156)
@@ -659,6 +665,7 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listZenkaiｙukokikan2_1;
     @ReportItem(name = "listYukokikan2_1", length = 19, order = 638)
     public RString listYukokikan2_1;
+    
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.HanteiKekkaHyoA3ReportFormGroupIndex;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iintokkitext.IinTokkiTextA3ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -161,6 +162,11 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         source.imgShisetsuTel = item.get電話番号イメージ();
         source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
                 .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
+        if (!ServiceKubunCode.なし.get名称().equals(item.getSabisuKubun())) {
+            source.shisetsuName = new RString("施設名　：");
+            source.jusho = new RString("住所　〒");
+            source.telNo = new RString("TEL");
+        }
         return source;
     }
 

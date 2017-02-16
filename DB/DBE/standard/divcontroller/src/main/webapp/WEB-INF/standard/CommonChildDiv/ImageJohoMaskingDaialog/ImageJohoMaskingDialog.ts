@@ -13,11 +13,12 @@ module DBE
                 this.controls = new Controls(fieldName);
                 Uz.GyomuJSHelper.registOriginalEvent(DBE.ImageJohoMaskingDialog.Events.onClick_btnHozon(),
                 function (control) {
-                         (<any>Uz)._MessageUtil.confirm("保存します。よろしいですか？", function (isOk) {
-                             if (isOk) { UZI.ImageMasking.EventScripts.beforeClick();
+//                         (<any>Uz)._MessageUtil.confirm("保存します。よろしいですか？", function (isOk) {
+//                             if (isOk) {
+                                  UZI.ImageMasking.EventScripts.beforeClick();
                                  $("#" + Uz.JSControlUtil.getJSControl("btnSave").fieldName).click();
-                             }
-                         });
+//                             }
+//                         });
                  });
             }
 

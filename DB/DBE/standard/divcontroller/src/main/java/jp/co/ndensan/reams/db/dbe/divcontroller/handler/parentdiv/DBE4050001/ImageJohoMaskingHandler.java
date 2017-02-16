@@ -57,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * イメージ情報マスキングの抽象Handlerクラスです。
@@ -74,13 +75,13 @@ public class ImageJohoMaskingHandler {
     private static final int 意見書_表ページ = 1;
     private static final int 意見書_裏ページ = 2;
     private static final RString 前排他用文字列 = new RString("DBEShinseishoKanriNo");
-    private static final RString 状態_削除作業用 = new RString("削除");
+    private static final RString 状態_削除 = new RString("削除");
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
+    private static final RString マスク有 = new RString("有");
     private static final RString イメージファイル終端 = new RString(".png");
     private static final RString BAKファイル終端 = new RString("_BAK.png");
     private static final RString 編集後ファイル終端 = new RString("_NEW.png");
-//    private static final RString ローカルファイル名 = new RString("IMG");
 
     /**
      * コンストラクタです。
@@ -234,7 +235,6 @@ public class ImageJohoMaskingHandler {
         dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         RString outputImagePath = Directory.createTmpDirectory();
         RString imagePath = RString.EMPTY;
-//        RString imagePath = Path.combinePath(outputImagePath, ローカルファイル名);
 
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(taishoshaRow.get申請書管理番号()));
         RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
@@ -285,20 +285,20 @@ public class ImageJohoMaskingHandler {
                 dgImageMaskingTaisho_Row 検索用 = rowList.get(j);
                 RString 比較用ファイル名 = 検索対象.getImageName().replace(new RString(".png"), new RString("_BAK.png"));
                 if (検索用.getImageName().equals(比較用ファイル名)) {
-                    検索対象.setHasMask(new RString("有"));
+                    検索対象.setHasMask(マスク有);
                     検索対象.setMaskImagePath(検索対象.getImagePath());
                     検索対象.setImagePath(検索用.getImagePath());
-                    検索用.setState(状態_削除作業用);
+                    検索用.setState(状態_削除);
                 }
             }
         }
 
         for (int i = 0; i < rowList.size(); i++) {
             dgImageMaskingTaisho_Row 検索対象 = rowList.get(i);
-            if (!検索対象.getState().equals(状態_削除作業用)) {
+            if (!検索対象.getState().equals(状態_削除)) {
                 RString 日本語名称 = マスク有りイメージ一覧.getEnumToImageName(検索対象.getImageName()).getイメージ日本語名称();
                 if (日本語名称.isEmpty()) {
-                    検索対象.setState(状態_削除作業用);
+                    検索対象.setState(状態_削除);
                 } else {
                     検索対象.setImageName(日本語名称);
                 }
@@ -307,7 +307,7 @@ public class ImageJohoMaskingHandler {
 
         for (int i = rowList.size() - 1; i >= 0; i--) {
             dgImageMaskingTaisho_Row 検索対象 = rowList.get(i);
-            if (検索対象.getState().equals(状態_削除作業用)) {
+            if (検索対象.getState().equals(状態_削除)) {
                 rowList.remove(i);
             }
         }
@@ -320,12 +320,23 @@ public class ImageJohoMaskingHandler {
      */
     public void deleteEditedData() {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
-        new File(row.getEditImagePath().toString()).delete();
-        row.setEditImagePath(RString.EMPTY);
-        row.setState(RString.EMPTY);
-        if (row.getMaskImagePath().isEmpty()) {
-            row.setHasMask(RString.EMPTY);
+        if (row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
+            new File(row.getEditImagePath().toString()).delete();
+            row.setEditImagePath(RString.EMPTY);
         }
+        if (!row.getMaskImagePath().isEmpty()) {
+            row.setHasMask(マスク有);
+        }
+        row.setState(RString.EMPTY);
+    }
+
+    /**
+     * 既に保存されているマスキングデータを削除いたします
+     */
+    public void deleteMaskingData() {
+        dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
+        row.setState(状態_削除);
+        row.setHasMask(RString.EMPTY);
     }
 
     /**
@@ -368,33 +379,42 @@ public class ImageJohoMaskingHandler {
         SharedAppendOption option = new SharedAppendOption();
         option.overWrite(true);
         SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), "", option);
-        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), "", option);
-//        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getImagePath()), ローカルファイル名.toString(), option);
-//        SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), ローカルファイル名.toString(), option);
+        if (row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
+            SharedFile.appendNewFile(descriptor, new FilesystemPath(row.getEditImagePath()), "", option);
+        } else if (row.getState().equals(状態_削除)) {
+            SharedFile.deleteFileInEntry(descriptor, row.getMaskImagePath().toString());
+        }
     }
 
     private void saveLocalFile(dgImageMaskingTaisho_Row row) {
-
-        File newFile = new File(row.getEditImagePath().toString());
-        File saveFile = new File(row.getEditImagePath().replace(編集後ファイル終端, イメージファイル終端).toString());
-        if (row.getState().equals(状態_追加)) {
-            File genponFile = new File(row.getImagePath().toString());
-            File renameFile = new File(row.getImagePath().replace(イメージファイル終端, BAKファイル終端).toString());
-            genponFile.renameTo(renameFile);
-            row.setImagePath(new RString(renameFile.getPath()));
-        } else if (row.getState().equals(状態_修正)) {
+        if (row.getState().equals(状態_削除)) {
             File maskFile = new File(row.getMaskImagePath().toString());
+            File genponFile = new File(row.getImagePath().toString());
+            row.setMaskImagePath(new RString(genponFile.getName()));
             maskFile.delete();
+            genponFile.renameTo(maskFile);
+            row.setImagePath(new RString(maskFile.getPath()));
+        } else {
+            File newFile = new File(row.getEditImagePath().toString());
+            File saveFile = new File(row.getEditImagePath().replace(編集後ファイル終端, イメージファイル終端).toString());
+            if (row.getState().equals(状態_追加)) {
+                File genponFile = new File(row.getImagePath().toString());
+                File renameFile = new File(row.getImagePath().replace(イメージファイル終端, BAKファイル終端).toString());
+                genponFile.renameTo(renameFile);
+                row.setImagePath(new RString(renameFile.getPath()));
+            } else if (row.getState().equals(状態_修正)) {
+                File maskFile = new File(row.getMaskImagePath().toString());
+                maskFile.delete();
+            }
+            newFile.renameTo(saveFile);
+            row.setEditImagePath(new RString(saveFile.getPath()));
         }
-        newFile.renameTo(saveFile);
-        row.setEditImagePath(new RString(saveFile.getPath()));
     }
 
     private void saveGamenData(dgImageMaskingTaisho_Row row) {
+        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
         if (row.getState().equals(状態_追加)) {
-            ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
-            int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
-
             if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
                 GaikyoChosaTokki gaikyotokki = new GaikyoChosaTokki(申請書管理番号,
                         認定調査依頼履歴番号,
@@ -409,8 +429,15 @@ public class ImageJohoMaskingHandler {
                     || row.getImageName().equals(マスク有りイメージ一覧.E0002.getイメージ日本語名称())) {
 
                 int 主治医意見書作成依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-                Code 帳票分類ID = new Code(ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class));
-
+                RString 帳票ID = ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class);
+                Code 帳票分類ID;
+                if (帳票ID.equals(new RString("701")) || 帳票ID.equals(new RString("702"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("701") : new Code("702");
+                } else if (帳票ID.equals(new RString("121")) || 帳票ID.equals(new RString("122"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("1222");
+                } else {
+                    帳票分類ID = new Code(帳票ID);
+                }
                 IkenshoImageJoho imageJoho = new IkenshoImageJoho(
                         申請書管理番号,
                         主治医意見書作成依頼履歴番号,
@@ -438,6 +465,56 @@ public class ImageJohoMaskingHandler {
 
                 tokkijikoManager.save認定調査票_特記情報(builder.build());
             }
+        } else if (row.getState().equals(状態_削除)) {
+            if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
+                GaikyoChosaTokkiManager dbt5213Manager = InstanceProvider.create(GaikyoChosaTokkiManager.class);
+                GaikyoChosaTokki gaikyotokki = dbt5213Manager.get概況調査特記マスク(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        TokkijikoTextImageKubun.イメージ.getコード());
+                if (gaikyotokki != null) {
+                    gaikyotokki = gaikyotokki.deleted();
+                    gaikyoManager.save概況調査特記(gaikyotokki);
+                }
+            } else if (row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称())
+                    || row.getImageName().equals(マスク有りイメージ一覧.E0002.getイメージ日本語名称())) {
+                int 主治医意見書作成依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
+                RString 帳票ID = ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class);
+                Code 帳票分類ID;
+                if (帳票ID.equals(new RString("701")) || 帳票ID.equals(new RString("702"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("701") : new Code("702");
+                } else if (帳票ID.equals(new RString("121")) || 帳票ID.equals(new RString("122"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("1222");
+                } else {
+                    帳票分類ID = new Code(帳票ID);
+                }
+                IkenshoImageJohoManager dbt5305 = IkenshoImageJohoManager.createInstance();
+                IkenshoImageJoho imageJoho = dbt5305.get要介護認定意見書イメージ情報(
+                        申請書管理番号,
+                        主治医意見書作成依頼履歴番号,
+                        帳票分類ID,
+                        GenponMaskKubun.マスク.getコード(),
+                        row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? 意見書_表ページ : 意見書_裏ページ);
+                if (imageJoho != null) {
+                    imageJoho = imageJoho.deleted();
+                    imageJohoManager.save要介護認定意見書イメージ情報(imageJoho);
+                }
+            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
+                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+                int 連番 = Integer.parseInt(row.getEditImagePath().substring(row.getEditImagePath().length() - 特記事項連番開始位置, row.getEditImagePath().length() - 特記事項連番終了位置).toString()) + 1;
+                NinteichosahyoTokkijikoManager dbt5205 = NinteichosahyoTokkijikoManager.createInstance();
+                NinteichosahyoTokkijiko tokkijiko = dbt5205.get認定調査票_特記情報(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        連番,
+                        TokkijikoTextImageKubun.イメージ.getコード(),
+                        new Code(GenponMaskKubun.マスク.getコード()));
+                if (tokkijiko != null) {
+                    tokkijiko = tokkijiko.deleted();
+                    tokkijikoManager.save認定調査票_特記情報(tokkijiko);
+                }
+            }
         }
     }
 
@@ -455,10 +532,15 @@ public class ImageJohoMaskingHandler {
     public void changeButtonState() {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
         div.getBtnMaskingGenpon().setDisabled(false);
-        if (row.getHasMask().equals(new RString("有")) || !row.getState().isEmpty()) {
+        if (row.getHasMask().equals(マスク有) || row.getState().equals(状態_追加)) {
             div.getBtnMaskingMask().setDisabled(false);
         } else {
             div.getBtnMaskingMask().setDisabled(true);
+        }
+        if (row.getHasMask().equals(マスク有) && row.getState().isEmpty()) {
+            div.getBtnSakujo().setDisabled(false);
+        } else {
+            div.getBtnSakujo().setDisabled(true);
         }
         if (!row.getState().isEmpty()) {
             div.getBtnTorikeshi().setDisabled(false);
@@ -470,6 +552,7 @@ public class ImageJohoMaskingHandler {
     public void setDisabledStateToButton() {
         div.getBtnMaskingGenpon().setDisabled(true);
         div.getBtnMaskingMask().setDisabled(true);
+        div.getBtnSakujo().setDisabled(true);
         div.getBtnTorikeshi().setDisabled(true);
     }
 

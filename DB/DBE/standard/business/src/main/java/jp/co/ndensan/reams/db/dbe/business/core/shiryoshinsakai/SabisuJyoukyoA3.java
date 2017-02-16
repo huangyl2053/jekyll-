@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
@@ -120,9 +122,11 @@ public class SabisuJyoukyoA3 {
     private static final RString 認定調査主治段階悪化 = new RString("★");
     private static final RString 認定調査主治段階改善 = new RString("☆");
     private static final RString SEPARATOR = new RString("/");
+    private static final RString COMMA = new RString(".");
     private static final int 基準時間算出用_10 = 10;
     private static final int 基準時間算出用_5 = 5;
     private static final int 基準時間算出用_12 = 12;
+    private final String regex = "[^0]";
 
     /**
      * サービスの状況を設定します。
@@ -1190,7 +1194,15 @@ public class SabisuJyoukyoA3 {
         項目.set要介護認定等基準時間_機能訓練(new RString(new Decimal(entity.getKijunJikanKinoKunren()).divide(基準時間算出用_10).toString()));
         項目.set要介護認定等基準時間_医療関連(new RString(new Decimal(entity.getKijunJikanIryoKanren()).divide(基準時間算出用_10).toString()));
         項目.set要介護認定等基準時間_認知症加算(new RString(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10).toString()));
-        項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+        if (!RString.isNullOrEmpty(entity.getIchijiHnateiKeikokuCode())) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(entity.getIchijiHnateiKeikokuCode());
+            if (matcher.find()) {
+                項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+            } else {
+                項目.set警告コード(RString.EMPTY);
+            }
+        }
         List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
         TyukanHyouka 中間評価項目 = new TyukanHyouka();
         中間評価項目.set第1群(new RString(new Decimal(entity.getChukanHyokaKomoku1gun()).divide(基準時間算出用_10).toString()));
@@ -1199,11 +1211,36 @@ public class SabisuJyoukyoA3 {
         中間評価項目.set第4群(new RString(new Decimal(entity.getChukanHyokaKomoku4gun()).divide(基準時間算出用_10).toString()));
         中間評価項目.set第5群(new RString(new Decimal(entity.getChukanHyokaKomoku5gun()).divide(基準時間算出用_10).toString()));
         TyukanHyouka 前中間評価項目 = new TyukanHyouka();
-        前中間評価項目.set第1群(new RString(new Decimal(entity.getZChukanHyokaKomoku1gun()).divide(基準時間算出用_10).toString()));
-        前中間評価項目.set第2群(new RString(new Decimal(entity.getZChukanHyokaKomoku2gun()).divide(基準時間算出用_10).toString()));
-        前中間評価項目.set第3群(new RString(new Decimal(entity.getZChukanHyokaKomoku3gun()).divide(基準時間算出用_10).toString()));
-        前中間評価項目.set第4群(new RString(new Decimal(entity.getZChukanHyokaKomoku4gun()).divide(基準時間算出用_10).toString()));
-        前中間評価項目.set第5群(new RString(new Decimal(entity.getZChukanHyokaKomoku5gun()).divide(基準時間算出用_10).toString()));
+        if (entity.getZChukanHyokaKomoku1gun() != 0) {
+            前中間評価項目.set第1群(trimFormat前回中間評価点(
+                    new RString(new Decimal(entity.getZChukanHyokaKomoku1gun()).divide(基準時間算出用_10).toString())));
+        } else {
+            前中間評価項目.set第1群(RString.EMPTY);
+        }
+        if (entity.getZChukanHyokaKomoku2gun() != 0) {
+            前中間評価項目.set第2群(trimFormat前回中間評価点(
+                    new RString(new Decimal(entity.getZChukanHyokaKomoku2gun()).divide(基準時間算出用_10).toString())));
+        } else {
+            前中間評価項目.set第2群(RString.EMPTY);
+        }
+        if (entity.getZChukanHyokaKomoku3gun() != 0) {
+            前中間評価項目.set第3群(trimFormat前回中間評価点(
+                    new RString(new Decimal(entity.getZChukanHyokaKomoku3gun()).divide(基準時間算出用_10).toString())));
+        } else {
+            前中間評価項目.set第3群(RString.EMPTY);
+        }
+        if (entity.getZChukanHyokaKomoku4gun() != 0) {
+            前中間評価項目.set第4群(trimFormat前回中間評価点(
+                    new RString(new Decimal(entity.getZChukanHyokaKomoku4gun()).divide(基準時間算出用_10).toString())));
+        } else {
+            前中間評価項目.set第4群(RString.EMPTY);
+        }
+        if (entity.getZChukanHyokaKomoku5gun() != 0) {
+            前中間評価項目.set第5群(trimFormat前回中間評価点(
+                    new RString(new Decimal(entity.getZChukanHyokaKomoku5gun()).divide(基準時間算出用_10).toString())));
+        } else {
+            前中間評価項目.set第5群(RString.EMPTY);
+        }
         中間評価リスト.add(中間評価項目);
         中間評価リスト.add(前中間評価項目);
         項目.set中間評価リスト(中間評価リスト);
@@ -1239,6 +1276,16 @@ public class SabisuJyoukyoA3 {
             }
         }
         setコード(項目, entity);
+    }
+    
+    private RString trimFormat前回中間評価点(RString score) {
+        RStringBuilder scoreBuilder = new RStringBuilder();
+        if (2 == score.indexOf(COMMA)) {
+            scoreBuilder.append(RString.HALF_SPACE).append(score);
+        } else if (1 == score.indexOf(COMMA)) {
+            scoreBuilder.append(RString.HALF_SPACE).append(RString.HALF_SPACE).append(score);
+        }
+        return scoreBuilder.toRString();
     }
 
     private void setコード(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
@@ -1363,6 +1410,9 @@ public class SabisuJyoukyoA3 {
             } else if (A_09.equals(厚労省IF識別コード) || B_09.equals(厚労省IF識別コード)) {
                 一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
             }
+        }
+        if (一次判定結果.equals(一次判定結果_認知症加算)) {
+            return builder.append(一次判定結果).toRString();
         }
         return builder.append(一次判定結果)
                 .append("→")

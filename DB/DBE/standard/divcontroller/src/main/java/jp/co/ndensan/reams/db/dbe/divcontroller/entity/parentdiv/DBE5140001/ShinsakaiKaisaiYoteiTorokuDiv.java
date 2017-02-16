@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -156,16 +156,6 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtYearMonth() {
-        return this.getShinsakaiKaisaiYoteiIchiran().getTxtYearMonth();
-    }
-
-    @JsonIgnore
-    public void  setTxtYearMonth(TextBoxDate txtYearMonth) {
-        this.getShinsakaiKaisaiYoteiIchiran().setTxtYearMonth(txtYearMonth);
-    }
-
-    @JsonIgnore
     public Button getBtnHyojiTsukiHenko() {
         return this.getShinsakaiKaisaiYoteiIchiran().getBtnHyojiTsukiHenko();
     }
@@ -173,6 +163,16 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnHyojiTsukiHenko(Button btnHyojiTsukiHenko) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnHyojiTsukiHenko(btnHyojiTsukiHenko);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtYearMonth() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getTxtYearMonth();
+    }
+
+    @JsonIgnore
+    public void  setTxtYearMonth(TextBoxDate txtYearMonth) {
+        this.getShinsakaiKaisaiYoteiIchiran().setTxtYearMonth(txtYearMonth);
     }
 
     @JsonIgnore

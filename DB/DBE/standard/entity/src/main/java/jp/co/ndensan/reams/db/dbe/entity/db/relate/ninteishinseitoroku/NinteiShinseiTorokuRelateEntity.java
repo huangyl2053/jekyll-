@@ -57,6 +57,7 @@ public class NinteiShinseiTorokuRelateEntity {
     private FlexibleDate 前回認定有効期間開始;
     private FlexibleDate 前回認定有効期間終了;
     private FlexibleDate 取下年月日;
+    private FlexibleDate 却下年月日;
     private JigyoshaNo 入所施設コード;
 //    private RString 介護認定審査会意見;
     private RString 市町村連絡事項;
@@ -75,6 +76,7 @@ public class NinteiShinseiTorokuRelateEntity {
     private TelNo 申請届出者電話番号;
     private Code 取下区分コード;
     private RString 取下理由;
+    private RString 却下理由;
     private FlexibleDate 延期決定年月日;
     private RString 延期理由;
     private FlexibleDate  延期通知発行年月日;

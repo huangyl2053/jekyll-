@@ -19,6 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase {
 
+    private static final String BATCH_FLAG = "batchFlag";
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String IKENSHO_KIJUNBI_TO = "ikenshoKijunbiTo";
     private static final String IKENSHO_KIJUNBI_FROM = "ikenshoKijunbiFrom";
@@ -29,6 +30,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8314555813503538349L;
 
+    @BatchParameter(key = BATCH_FLAG, name = "バッチフラグ")
+    private boolean batchFlag;
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
     @BatchParameter(key = IKENSHO_KIJUNBI_TO, name = "基準日FROM")
@@ -55,6 +58,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
     /**
      * コンストラクタです。
      *
+     * @param batchFlag
      * @param syohyoSyuturyoku 帳票出力区分
      * @param ikenshoKinyubiFrom 意見書記入日FROM
      * @param ikenshoKinyubiTo 意見書記入日TO
@@ -63,13 +67,15 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
      * @param shokisaiHokensya 証記載保険者
      * @param keyJoho キー情報Entityリスト
      */
-    public DBE601001_IkenshoSakuseiJIssekiParameter(RString syohyoSyuturyoku,
+    public DBE601001_IkenshoSakuseiJIssekiParameter(boolean batchFlag,
+            RString syohyoSyuturyoku,
             RString ikenshoKinyubiFrom,
             RString ikenshoKinyubiTo,
             RString hokensya,
             RString hokensyaName,
             RString shokisaiHokensya,
             List<IkenshoJissekiIchiranKey> keyJoho) {
+        this.batchFlag = batchFlag;
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.ikenshoKijunbiFrom = ikenshoKinyubiFrom;
         this.ikenshoKijunbiTo = ikenshoKinyubiTo;
@@ -85,7 +91,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
      * @return 主治医意見書作成実績集計表のProcessParameter
      */
     public IkenshoJissekiIchiranProcessParameter toProcessParamter() {
-        return new IkenshoJissekiIchiranProcessParameter(syohyoSyuturyoku,
+        return new IkenshoJissekiIchiranProcessParameter(batchFlag,
+                syohyoSyuturyoku,
                 ikenshoKijunbiFrom,
                 ikenshoKijunbiTo,
                 ikenshoKijunbiKubun,

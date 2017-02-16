@@ -196,7 +196,15 @@ public class NinteiShinseiTorokuHandler {
             if (result.get取下年月日() != null && !result.get取下年月日().isEmpty()) {
                 div.getTxtTorisageDate().setValue(new RDate(result.get取下年月日().toString()));
             }
-            div.getTxtTorisageJiyu().setValue(result.get取下理由());
+            if (result.get却下年月日() != null && !result.get却下年月日().isEmpty()) {
+                div.getTxtTorisageDate().setValue(new RDate(result.get却下年月日().toString()));
+            }
+            if (result.get取下理由() != null && !result.get取下理由().isEmpty()) {
+                div.getTxtTorisageJiyu().setValue(result.get取下理由());
+            }
+            if (result.get却下理由() != null && !result.get却下理由().isEmpty()) {
+                div.getTxtTorisageJiyu().setValue(result.get却下理由());
+            }
             if (result.get取下区分コード() != null && !TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())) {
                 div.getDdlTorisageJiyu().setSelectedKey(result.get取下区分コード().value());
             }
@@ -513,7 +521,7 @@ public class NinteiShinseiTorokuHandler {
         div.getTxtEnkiMikomiKikan().setReadOnly(flag);
         div.getBtnEnkiRiyuTeikeibun().setDisabled(flag);
         div.getTxtEnkiRiyu().setReadOnly(flag);
-        div.getTplShinseishaJoho().setDisabled(true);
+        div.getTplShinseishaJoho().setDisabled(flag);
     }
 
     /**

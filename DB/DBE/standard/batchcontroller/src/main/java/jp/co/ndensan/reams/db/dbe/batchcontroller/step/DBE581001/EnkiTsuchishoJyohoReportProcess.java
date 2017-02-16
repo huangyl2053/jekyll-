@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
@@ -67,7 +66,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBD-1410-020 chenxin
  */
-public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101NinteiShinseiJohoEntity> {
+public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101NinteiShinseiJohoEntity> {
 
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
@@ -75,7 +74,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
     private static final ReportId REPORT_DBE581001 = ReportIdDBE.DBE581001.getReportId();
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.enkitsuchisho."
+            = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.enkitsuchisho."
                     + "IEnkiTsuchishoMapper.selectBy申請書管理番号リスト");
 
     @BatchWriter
@@ -83,7 +82,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     private ReportSourceWriter<YokaigoNinteiEnkiTshuchishoReportSource> reportSourceWriter;
     private EnkiTsuchishohakenIchiranhyoJyohoProcessParameter parameter;
     @BatchWriter
-    private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101TableWriter;
+    private BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101TableWriter;
     private SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private static final RString 申請書管理番号リスト = new RString("【申請書管理番号】");
     private static final RString 申請書管理番号空白 = new RString("　　　　　　　　　　　　");
@@ -98,7 +97,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     protected void initialize() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBE581001.value()).create();
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
-        dbT4101TableWriter = new BatchPermanentTableWriter<>(DbT4101NinteiShinseiJohoEntity.class);
+        dbT5101TableWriter = new BatchPermanentTableWriter<>(DbT5101NinteiShinseiJohoEntity.class);
         IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
         builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
@@ -115,7 +114,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
     }
 
     @Override
-    protected void process(DbT4101NinteiShinseiJohoEntity dbtEntity) {
+    protected void process(DbT5101NinteiShinseiJohoEntity dbtEntity) {
         YokaigoNinteiEnkiTshuchishoEntity entity = new YokaigoNinteiEnkiTshuchishoEntity();
         entity.setEntity(dbtEntity);
         DbT5101NinteiShinseiJohoDac dbT5101Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
@@ -186,7 +185,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT4101Nin
 
         dbtEntity.setEnkiTsuchiHakkoYMD(通知書発行日);
         dbtEntity.setEnkiTsuchiHakkoKaisu(entity.getEntity().getEnkiTsuchiHakkoKaisu() + 1);
-        dbT4101TableWriter.update(dbtEntity);
+        dbT5101TableWriter.update(dbtEntity);
     }
 
     private FlexibleDate get通知書発行日(RString 申請書管理番号) {

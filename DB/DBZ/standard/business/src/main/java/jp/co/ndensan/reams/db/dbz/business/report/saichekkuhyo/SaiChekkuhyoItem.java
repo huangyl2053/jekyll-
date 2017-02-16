@@ -357,4 +357,110 @@ public class SaiChekkuhyoItem {
         this.listJiritsudo_1 = listJiritsudo_1;
         this.listJiritsudo_2 = listJiritsudo_2;
     }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param zenkaiIchijiHantei 前回一次判定結果
+     * @param hihokenshaKubun 被保険者番号
+     * @param hokenshaName 氏名
+     * @param age 年齢
+     * @param zenkaiNijiHantei 前回二次判定結果
+     * @param zenkaiNijihanteiYMD 前回二次判定日
+     * @param seinengappi 生年月日
+     *
+     */
+    public SaiChekkuhyoItem(
+            RString zenkaiIchijiHantei,
+            RString hihokenshaKubun,
+            RString hokenshaName,
+            RString age,
+            RString zenkaiNijiHantei,
+            RString zenkaiNijihanteiYMD,
+            RString seinengappi
+    ) {
+        this.zenkaiIchijiHantei = zenkaiIchijiHantei;
+        this.hihokenshaKubun = hihokenshaKubun;
+        this.hokenshaName = hokenshaName;
+        this.age = age;
+        this.zenkaiNijiHantei = zenkaiNijiHantei;
+        this.zenkaiNijihanteiYMD = zenkaiNijihanteiYMD;
+        this.seinengappi = seinengappi;
+        this.listIchigun_1 = RString.EMPTY;
+        this.listIchigun_2 = RString.EMPTY;
+        this.listIchigun_3 = RString.EMPTY;
+        this.listIchigun_4 = RString.EMPTY;
+        this.listIchigun_5 = RString.EMPTY;
+        this.listIchigun_6 = RString.EMPTY;
+        this.listIchigun_7 = RString.EMPTY;
+        this.listIchigun_8 = RString.EMPTY;
+        this.listIchigun_9 = RString.EMPTY;
+        this.listIchigun_10 = RString.EMPTY;
+        this.listIchigun_11 = RString.EMPTY;
+        this.listIchigun_12 = RString.EMPTY;
+        this.listIchigun_13 = RString.EMPTY;
+        this.listIchigun_14 = RString.EMPTY;
+        this.listIchigun_15 = RString.EMPTY;
+        this.listIchigun_16 = RString.EMPTY;
+        this.listIchigun_17 = RString.EMPTY;
+        this.listIchigun_18 = RString.EMPTY;
+        this.listIchigun_19 = RString.EMPTY;
+        this.listIchigun_20 = RString.EMPTY;
+        this.listNigun_1 = RString.EMPTY;
+        this.listNigun_2 = RString.EMPTY;
+        this.listNigun_3 = RString.EMPTY;
+        this.listNigun_4 = RString.EMPTY;
+        this.listNigun_5 = RString.EMPTY;
+        this.listNigun_6 = RString.EMPTY;
+        this.listNigun_7 = RString.EMPTY;
+        this.listNigun_8 = RString.EMPTY;
+        this.listNigun_9 = RString.EMPTY;
+        this.listNigun_10 = RString.EMPTY;
+        this.listNigun_11 = RString.EMPTY;
+        this.listNigun_12 = RString.EMPTY;
+        this.listSangun_1 = RString.EMPTY;
+        this.listSangun_2 = RString.EMPTY;
+        this.listSangun_3 = RString.EMPTY;
+        this.listSangun_4 = RString.EMPTY;
+        this.listSangun_5 = RString.EMPTY;
+        this.listSangun_6 = RString.EMPTY;
+        this.listSangun_7 = RString.EMPTY;
+        this.listSangun_8 = RString.EMPTY;
+        this.listSangun_9 = RString.EMPTY;
+        this.listYongun_1 = RString.EMPTY;
+        this.listYongun_2 = RString.EMPTY;
+        this.listYongun_3 = RString.EMPTY;
+        this.listYongun_4 = RString.EMPTY;
+        this.listYongun_5 = RString.EMPTY;
+        this.listYongun_6 = RString.EMPTY;
+        this.listYongun_7 = RString.EMPTY;
+        this.listYongun_8 = RString.EMPTY;
+        this.listYongun_9 = RString.EMPTY;
+        this.listYongun_10 = RString.EMPTY;
+        this.listYongun_11 = RString.EMPTY;
+        this.listYongun_12 = RString.EMPTY;
+        this.listYongun_13 = RString.EMPTY;
+        this.listYongun_14 = RString.EMPTY;
+        this.listYongun_15 = RString.EMPTY;
+        this.listGogun_1 = RString.EMPTY;
+        this.listGogun_2 = RString.EMPTY;
+        this.listGogun_3 = RString.EMPTY;
+        this.listGogun_4 = RString.EMPTY;
+        this.listGogun_5 = RString.EMPTY;
+        this.listGogun_6 = RString.EMPTY;
+        this.listRokugun_1 = RString.EMPTY;
+        this.listRokugun_2 = RString.EMPTY;
+        this.listRokugun_3 = RString.EMPTY;
+        this.listRokugun_4 = RString.EMPTY;
+        this.listRokugun_5 = RString.EMPTY;
+        this.listRokugun_6 = RString.EMPTY;
+        this.listRokugun_7 = RString.EMPTY;
+        this.listRokugun_8 = RString.EMPTY;
+        this.listRokugun_9 = RString.EMPTY;
+        this.listRokugun_10 = RString.EMPTY;
+        this.listRokugun_11 = RString.EMPTY;
+        this.listRokugun_12 = RString.EMPTY;
+        this.listJiritsudo_1 = RString.EMPTY;
+        this.listJiritsudo_2 = RString.EMPTY;
+    }
 }

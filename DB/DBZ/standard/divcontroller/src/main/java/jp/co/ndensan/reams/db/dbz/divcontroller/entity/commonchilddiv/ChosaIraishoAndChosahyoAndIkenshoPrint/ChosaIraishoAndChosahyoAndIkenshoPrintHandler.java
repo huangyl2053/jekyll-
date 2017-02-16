@@ -1190,6 +1190,40 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
                             NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
                     ));
+                } else {
+                    ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                    itemList.add(new SaiChekkuhyoItem(
+                            get判定結果(business.get厚労省IF識別コード(), business.get要介護認定一次判定結果コード()),
+                            business.get被保険者番号(),
+                            business.get被保険者氏名(),
+                            business.get年齢(),
+                            get判定結果(business.get厚労省IF識別コード(), business.get二次判定要介護状態区分コード()),
+                            business.get二次判定年月日(),
+                            business.get生年月日()
+                    ));
+                }
+            } else {
+                NinteiShinseiJoho ninteiShinseiJoho = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                if (ninteiShinseiJoho != null) {
+                    itemList.add(new SaiChekkuhyoItem(
+                            RString.EMPTY,
+                            ninteiShinseiJoho.get被保険者番号(),
+                            ninteiShinseiJoho.get被保険者氏名().value(),
+                            new RString(ninteiShinseiJoho.get年齢()),
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            new RString(ninteiShinseiJoho.get生年月日().toString())
+                    ));
+                } else {
+                    itemList.add(new SaiChekkuhyoItem(
+                            RString.EMPTY,
+                            row.getHihokenshaBango(),
+                            row.getHihokenshaShimei(),
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            RString.EMPTY,
+                            RString.EMPTY
+                    ));
                 }
             }
         }
@@ -1361,7 +1395,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     生年月日,
                     Seibetsu.toValue(business.get性別()).get名称(),
                     提出期限,
-                    business.get主治医医療機関コード());
+                    business.get主治医医療機関コード(),
+                    business.get市町村コード());
             itemList.add(item);
         }
         return itemList;

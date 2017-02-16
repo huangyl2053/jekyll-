@@ -32,6 +32,7 @@
         , "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD"
         , "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD"
         , "DbT5301ShujiiIkenshoIraiJoho"."seikyushoShutsuryokuYMD"
+        , "DbT5301ShujiiIkenshoIraiJoho"."sakuseiryoSeikyuKubun"
         , "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho"
         , "DbT5912ShujiiJoho"."shujiiName"
         , "DbT5911ShujiiIryoKikanJoho_pre"."iryoKikanMeisho" AS "Temp_iryoKikanMeisho"
@@ -127,6 +128,7 @@
         <result property="iraishoShutsuryokuYMD" column="iraishoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoShutsuryokuYMD" column="ikenshoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="seikyushoShutsuryokuYMD" column="seikyushoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="sakuseiryoSeikyuKubun" column="sakuseiryoSeikyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="temp_iryoKikanMeisho" column="Temp_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

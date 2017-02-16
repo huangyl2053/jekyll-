@@ -53,6 +53,11 @@ public class ChosaItakusakiGuideHandler {
             LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
             div.getHokensha().setSelectedShichosonIfExist(市町村コード);
         }
+        if (dataPassModel != null && !RString.isNullOrEmpty(dataPassModel.get委託先コード())) {
+            RString 委託先コード = dataPassModel.get委託先コード();
+            div.getTxtChosaItakusakiCodeFrom().setValue(委託先コード);
+            div.getTxtChosaItakuaskiCodeTo().setValue(委託先コード);
+        }
         List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
         ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {
@@ -93,7 +98,7 @@ public class ChosaItakusakiGuideHandler {
                 kensakuKekkaIchiran_Row.setItakusakiKanaMeisho(nullToEmpty(business.get事業者名称カナ()));
                 kensakuKekkaIchiran_Row.setItakusakiKubun(nullToEmpty(business.get調査委託区分()));
                 kensakuKekkaIchiran_Row.setItakusakiJokyo(nullToEmpty(business.is状況フラグ()
-                                                                      ? new RString("有効") : new RString("無効")));
+                        ? new RString("有効") : new RString("無効")));
                 kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
                 if (!business.is状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);

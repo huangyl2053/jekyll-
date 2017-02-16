@@ -12,21 +12,22 @@
         SELECT
         T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
         , T7051."shichosonMeisho" AS 市町村名称
-        , T5602."shujiiIryoKikanCode" AS 医療機関コード
+        , T5302."shujiiIryoKikanCode" AS 医療機関コード
         , T5911."iryoKikanMeisho" AS 医療機関名称
         , T5912."shujiiName" AS 主治医氏名
         , T5101."hihokenshaNo" AS 被保険者番号
         , T5101."hihokenshaName" AS 申請者氏名
-        , T5602."iraishoSakuseiIraiYMD" AS 依頼日
-        , T5602."ikenshoKinyuYMD" AS 記入日
-        , T5602."ikenshoJuryoYMD" AS 入手日
+        , T5301."ikenshoSakuseiIraiYMD" AS 依頼日
+        , T5302."ikenshoKinyuYMD" AS 記入日
+        , T5302."ikenshoJuryoYMD" AS 入手日
         , T5302."zaitakuShisetsuKubun" AS 在宅_施設区分
-        , T5302."ikenshoIraiKubun" AS 主治医意見書依頼区分
-        , T5602."ishiKubunCode" AS 医師区分コード
-        , T5602."shinseishoKanriNo" AS 申請書管理番号
-        , T5602."ikenshoIraiRirekiNo" AS 主治医意見書作成依頼履歴番号
-        , T5602."shujiiCode" AS 主治医コード
+        , T5302."ikenshoSakuseiKaisuKubun" AS 意見書作成回数区分
+        , CAST(T5032.tanka AS text) AS 単価
+        , T5302."shinseishoKanriNo" AS 申請書管理番号
+        , T5302."ikenshoIraiRirekiNo" AS 主治医意見書作成依頼履歴番号
+        , T5302."shujiiCode" AS 主治医コード
         <include refid="core" />
+        <include refid="group" />
         <include refid="order" />
     </select>
 
@@ -35,51 +36,78 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshojissekiichiran.IkenshoJissekiIchiranMybitisParamter" fetchSize="500"  resultOrdered="true">
         SELECT
         COUNT(*)
+        FROM (
+        SELECT
+        T7051."shoKisaiHokenshaNo"
+        , T7051."shichosonMeisho"
+        , T5302."shujiiIryoKikanCode"
+        , T5911."iryoKikanMeisho"
+        , T5912."shujiiName"
+        , T5101."hihokenshaNo"
+        , T5101."hihokenshaName"
+        , T5301."ikenshoSakuseiIraiYMD"
+        , T5302."ikenshoKinyuYMD"
+        , T5302."ikenshoJuryoYMD"
+        , T5302."zaitakuShisetsuKubun"
+        , T5302."ikenshoSakuseiKaisuKubun"
+        , T5032.tanka
+        , T5302."shinseishoKanriNo"
+        , T5302."ikenshoIraiRirekiNo"
+        , T5302."shujiiCode"
         <include refid="core" />
+        <include refid="group" />
+        ) AS A
     </select>
-
 
     <sql id="core">
         FROM
-        rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS T5602
+        rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
-        ON T5101."shinseishoKanriNo" = T5602."shinseishoKanriNo"
+        ON T5101."shinseishoKanriNo" = T5302."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
         ON T5911."shichosonCode" = T7051."shichosonCode"
-        AND T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
+        AND T5911."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode"
         INNER JOIN rgdb."DbT5912ShujiiJoho" AS T5912
         ON T5912."shichosonCode" = T7051."shichosonCode"
-        AND T5912."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
-        AND T5912."shujiiCode" = T5602."shujiiCode"
-        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
-        ON T5602."shinseishoKanriNo" = T5302."shinseishoKanriNo"
-        AND T5602."ikenshoIraiRirekiNo" = T5302."ikenshoIraiRirekiNo"
+        AND T5912."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode"
+        AND T5912."shujiiCode" = T5302."shujiiCode"
+        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
+        ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5032ShujiiIkenshoHoshuTanka" AS T5032
+        ON T5302."ikenshoSakuseiKaisuKubun" = T5032."ikenshoSakuseiKaisuKubun"
+        AND T5302."zaitakuShisetsuKubun" = T5032."zaitakuShisetsuKubun"
+        <if test="基準日FROMFlag">
+            AND T5032."kaishiYM" <![CDATA[<=]]> #{基準日FROM}
+        </if>
+        <if test="基準日TOFlag">
+            AND T5032."shuryoYM" <![CDATA[>=]]> #{基準日TO}
+        </if>
         <where>
             <choose>
                 <when test="基準日区分 == 1">
                     <if test="基準日FROMFlag">
-                        AND #{基準日FROM} <![CDATA[<=]]> T5602."iraishoSakuseiIraiYMD"
+                        AND #{基準日FROM} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                     </if>
                     <if test="基準日TOFlag">
-                        AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{基準日TO}
+                        AND T5302."ikenshoReadYMD" <![CDATA[<=]]> #{基準日TO}
                     </if>
                 </when>
                 <when test="基準日区分 == 2">
                     <if test="基準日FROMFlag">
-                        AND #{基準日FROM} <![CDATA[<=]]> T5602."ikenshoKinyuYMD"
+                        AND #{基準日FROM} <![CDATA[<=]]> T5302."ikenshoKinyuYMD"
                     </if>
                     <if test="基準日TOFlag">
-                        AND T5602."ikenshoKinyuYMD" <![CDATA[<=]]> #{基準日TO}
+                        AND T5302."ikenshoKinyuYMD" <![CDATA[<=]]> #{基準日TO}
                     </if>
                 </when>
                 <when test="基準日区分 == 3">
                     <if test="基準日FROMFlag">
-                        AND #{基準日FROM} <![CDATA[<=]]> T5602."ikenshoJuryoYMD"
+                        AND #{基準日FROM} <![CDATA[<=]]> T5302."ikenshoJuryoYMD"
                     </if>
                     <if test="基準日TOFlag">
-                        AND T5602."ikenshoJuryoYMD" <![CDATA[<=]]> #{基準日TO}
+                        AND T5302."ikenshoJuryoYMD" <![CDATA[<=]]> #{基準日TO}
                     </if>
                 </when>
             </choose>
@@ -92,18 +120,37 @@
                          separator="OR"
                          close=")">
                     (
-                    T5602."shujiiIryoKikanCode" = #{item.shujiiIryoKikanCode}
-                    AND T5602."shujiiCode" = #{item.shujiiCode}
-                    AND T5602."shinseishoKanriNo" = #{item.shinseishoKanriNo}
-                    AND T5602."ikenshoIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
+                    T5302."shujiiIryoKikanCode" = #{item.shujiiIryoKikanCode}
+                    AND T5302."shujiiCode" = #{item.shujiiCode}
+                    AND T5302."shinseishoKanriNo" = #{item.shinseishoKanriNo}
+                    AND T5302."ikenshoIraiRirekiNo" = #{item.ikenshoIraiRirekiNo}
                     )
                 </foreach>
             </if>
         </where>
     </sql>
+    
+    <sql id="group">
+        GROUP BY T7051."shoKisaiHokenshaNo"
+        , T7051."shichosonMeisho"
+        , T5302."shujiiIryoKikanCode"
+        , T5911."iryoKikanMeisho"
+        , T5912."shujiiName"
+        , T5101."hihokenshaNo"
+        , T5101."hihokenshaName"
+        , T5301."ikenshoSakuseiIraiYMD"
+        , T5302."ikenshoKinyuYMD"
+        , T5302."ikenshoJuryoYMD"
+        , T5302."zaitakuShisetsuKubun"
+        , T5302."ikenshoSakuseiKaisuKubun"
+        , T5032.tanka
+        , T5302."shinseishoKanriNo" 
+        , T5302."ikenshoIraiRirekiNo"
+        , T5302."shujiiCode"
+    </sql>
 
     <sql id="order">
-        ORDER BY T5602."shujiiIryoKikanCode", T5602."shujiiCode", T5602."shinseishoKanriNo", T5602."ikenshoIraiRirekiNo"
+        ORDER BY T5302."shujiiIryoKikanCode", T5302."shujiiCode", T5302."shinseishoKanriNo", T5302."ikenshoIraiRirekiNo"
         <if test="件数Flag">
             LIMIT #{件数}
         </if>

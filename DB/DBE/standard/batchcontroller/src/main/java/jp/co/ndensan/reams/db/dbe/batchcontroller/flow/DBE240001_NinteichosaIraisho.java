@@ -67,10 +67,11 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         if (getParameter().is認定調査依頼一覧()) {
             executeStep(ICHIRANHYOREPORT_PROCESS);
         }
-        if (getParameter().is認定調査票_概況調査()) {
+        if (getParameter().is認定調査票_概況調査() && getParameter().is認定調査票_基本調査()) {
+            call概況基本片面();
+        } else if (getParameter().is認定調査票_概況調査()) {
             executeStep(認定調査票_片面_概況調査);
-        }
-        if (getParameter().is認定調査票_基本調査()) {
+        } else if (getParameter().is認定調査票_基本調査()) {
             executeStep(認定調査票_片面_基本調査);
         }
         if (getParameter().is認定調査票_概況基本()) {
@@ -93,6 +94,19 @@ public class DBE240001_NinteichosaIraisho extends BatchFlowBase<DBE220010_Iraish
         }
         if (getParameter().is認定調査依頼履歴一覧()) {
             executeStep(CHOSAIRAIRIREKIICHIRAN);
+        }
+    }
+
+    private void call概況基本片面() {
+        RString 帳票ID_表 = DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票_概況基本_帳票ID_表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, getParameter().getShichosonCode());
+        RString 帳票ID_裏 = DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票_概況基本_帳票ID_裏, RDate.getNowDate(), SubGyomuCode.DBE認定支援, getParameter().getShichosonCode());
+        if (!帳票ID_表.equals(帳票ID_裏)) {
+            executeStep(認定調査票_片面_概況調査);
+            executeStep(認定調査票_片面_基本調査);
+        } else {
+            executeStep(認定調査票_両面);
         }
     }
 

@@ -145,7 +145,11 @@ public class Masking {
      */
     public ResponseData<MaskingDiv> onClick_btnShorikeizoku(MaskingDiv div) {
         getHandler(div).initialize();
-        return ResponseData.of(div).setState(DBE2080001StateName.登録);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            return ResponseData.of(div).setState(DBE2080001StateName.登録);
+        } else {
+            return ResponseData.of(div).setState(DBE2080001StateName.登録fromサブメニュー);
+        }
     }
 
     /**

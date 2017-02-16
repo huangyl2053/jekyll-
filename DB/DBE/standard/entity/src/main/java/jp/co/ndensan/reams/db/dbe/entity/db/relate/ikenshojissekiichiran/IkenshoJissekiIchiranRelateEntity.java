@@ -30,8 +30,8 @@ public class IkenshoJissekiIchiranRelateEntity {
     private RString 記入日;
     private RString 入手日;
     private RString 在宅_施設区分;
-    private RString 主治医意見書依頼区分;
-    private RString 医師区分コード;
+    private RString 意見書作成回数区分;
+    private RString 単価;
     private RString 申請書管理番号;
     private RString 主治医意見書作成依頼履歴番号;
     private RString 主治医コード;

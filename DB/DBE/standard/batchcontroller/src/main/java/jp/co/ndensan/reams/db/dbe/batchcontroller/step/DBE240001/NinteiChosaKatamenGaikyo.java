@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIra
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -64,7 +65,12 @@ public class NinteiChosaKatamenGaikyo extends BatchProcessBase<HomonChosaIraisho
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity));
+        ChosahyoGaikyochosaReport report;
+        if (ReportIdDBZ.DBE221012.getReportId().equals(帳票)) {
+            report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity), 1);
+        } else {
+            report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity));
+        }
         report.writeBy(reportSourceWriter);
     }
 

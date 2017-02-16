@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.euc.dbe010002;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.core.Renban;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.ChosahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010002_ChosahyoJoho99AEucEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser01;
@@ -51,6 +54,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItem
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -67,7 +72,7 @@ public class ChosahyoJoho99AEucEntityEditor {
 
     private static final RString 改行 = new RString("<br/>");
     private static final RString 下矢印 = new RString("↓");
-    private static final Decimal 百 = new Decimal("100");
+    private static final Decimal 十 = new Decimal("10");
 
     private ChosahyoJoho99AEucEntityEditor() {
     }
@@ -94,48 +99,59 @@ public class ChosahyoJoho99AEucEntityEditor {
         eucEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         eucEntity.set保険者名(entity.getShichosonMeisho());
         eucEntity.set被保険者番号(entity.getHihokenshaNo());
-        eucEntity.set被保険者氏名(entity.getHihokenshaName().value());
-        eucEntity.set性別コード(entity.getSeibetsu().value());
-        eucEntity.set性別(Gender.toValue(entity.getSeibetsu().value()).getCommonName());
+        eucEntity.set被保険者氏名(nullToEmpty(entity.getHihokenshaName()));
+        eucEntity.set性別コード(nullToEmpty(entity.getSeibetsu()));
+        eucEntity.set性別((entity.getSeibetsu() != null && !entity.getSeibetsu().isEmpty())
+                ? Gender.toValue(entity.getSeibetsu().value()).getCommonName() : RString.EMPTY);
         eucEntity.set生年月日(format日付(entity.getSeinengappiYMD()));
         eucEntity.set年齢(new RString(entity.getAge()));
         eucEntity.set被保険者区分コード(entity.getHihokenshaKubunCode());
-        eucEntity.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+        eucEntity.set被保険者区分((!RString.isNullOrEmpty(entity.getHihokenshaKubunCode()))
+                ? HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称() : RString.EMPTY);
         eucEntity.set_２号特定疾病コード(entity.getNigoTokuteiShippeiCode());
-        eucEntity.set_２号特定疾病名(TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode()).get名称());
+        eucEntity.set_２号特定疾病名((!RString.isNullOrEmpty(entity.getNigoTokuteiShippeiCode()))
+                ? TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode()).get名称() : RString.EMPTY);
         eucEntity.set申請日(format日付(entity.getNinteiShinseiYMD()));
         eucEntity.set申請書区分コード(entity.getShienShinseiKubun());
-        eucEntity.set申請書区分(ShienShinseiKubun.toValue(entity.getShienShinseiKubun()).get名称());
-        eucEntity.set申請区分_法令_コード(entity.getNinteiShinseiHoreiKubunCode().value());
-        eucEntity.set申請区分_法令(NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode().value()).get名称());
-        eucEntity.set申請区分_申請時_コード(entity.getNinteiShinseiShinseijiKubunCode().value());
-        eucEntity.set申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode().value()).get名称());
-        eucEntity.set処理状態区分コード(entity.getShoriJotaiKubun().value());
-        eucEntity.set処理状態区分(ShoriJotaiKubun.toValue(entity.getShoriJotaiKubun().value()).get名称());
+        eucEntity.set申請書区分((!RString.isNullOrEmpty(entity.getShienShinseiKubun()))
+                ? ShienShinseiKubun.toValue(entity.getShienShinseiKubun()).get名称() : RString.EMPTY);
+        eucEntity.set申請区分_法令_コード(nullToEmpty(entity.getNinteiShinseiHoreiKubunCode()));
+        eucEntity.set申請区分_法令((entity.getNinteiShinseiHoreiKubunCode() != null && !entity.getNinteiShinseiHoreiKubunCode().isEmpty())
+                ? NinteiShinseiHoreiCode.toValue(entity.getNinteiShinseiHoreiKubunCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set申請区分_申請時_コード(nullToEmpty(entity.getNinteiShinseiShinseijiKubunCode()));
+        eucEntity.set申請区分_申請時((entity.getNinteiShinseiShinseijiKubunCode() != null && !entity.getNinteiShinseiShinseijiKubunCode().isEmpty())
+                ? NinteiShinseiShinseijiKubunCode.toValue(entity.getNinteiShinseiShinseijiKubunCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set処理状態区分コード(nullToEmpty(entity.getShoriJotaiKubun()));
+        eucEntity.set処理状態区分((entity.getShoriJotaiKubun() != null && !entity.getShoriJotaiKubun().isEmpty())
+                ? ShoriJotaiKubun.toValue(entity.getShoriJotaiKubun().value()).get名称() : RString.EMPTY);
         eucEntity.set申請時_調査委託先コード(entity.getShinseiNinteiChosaItakusakiCode());
         eucEntity.set申請時_調査委託先名称(entity.getShinseiJigyoshaMeisho());
         eucEntity.set申請時_調査員コード(entity.getShinseiNinteiChosainCode());
         eucEntity.set申請時_調査員名(entity.getShinseiChosainShimei());
-        eucEntity.set依頼区分コード(entity.getNinteichosaIraiKubunCode().value());
-        eucEntity.set依頼区分(NinteiChousaIraiKubunCode.toValue(entity.getNinteichosaIraiKubunCode().value()).get名称());
-        eucEntity.set依頼時_調査委託先コード(entity.getIraiNinteichosaItakusakiCode().value());
+        eucEntity.set依頼区分コード(nullToEmpty(entity.getNinteichosaIraiKubunCode()));
+        eucEntity.set依頼区分((entity.getNinteichosaIraiKubunCode() != null && !entity.getNinteichosaIraiKubunCode().isEmpty())
+                ? NinteiChousaIraiKubunCode.toValue(entity.getNinteichosaIraiKubunCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set依頼時_調査委託先コード(nullToEmpty(entity.getIraiNinteichosaItakusakiCode()));
         eucEntity.set依頼時_調査委託先名称(entity.getIraiJigyoshaMeisho());
         eucEntity.set依頼時_調査員コード(entity.getIraiNinteiChosainCode());
         eucEntity.set依頼時_調査員名(entity.getIraiChosainShimei());
-        eucEntity.set入手時_調査委託先コード(entity.getNyushuChosaItakusakiCode().value());
+        eucEntity.set入手時_調査委託先コード(nullToEmpty(entity.getNyushuChosaItakusakiCode()));
         eucEntity.set入手時_調査委託先名称(entity.getNyushuIraiJigyoshaMeisho());
         eucEntity.set入手時_調査員コード(entity.getNyushuChosainCode());
         eucEntity.set入手時_調査員名(entity.getNyushuIraiChosainShimei());
         eucEntity.set調査回数(new RString(entity.getNinteichosaIraiKaisu()));
         eucEntity.set調査実施日(format日付(entity.getNinteichosaJisshiYMD()));
         eucEntity.set受領日(format日付(entity.getNinteichosaJuryoYMD()));
-        eucEntity.set調査区分コード(entity.getNinteiChosaKubunCode().value());
-        eucEntity.set調査区分(ChosaKubun.toValue(entity.getNinteiChosaKubunCode().value()).get名称());
-        eucEntity.set実施場所コード(entity.getChosaJisshiBashoCode().value());
-        eucEntity.set実施場所(ChosaJisshiBashoCode.toValue(entity.getChosaJisshiBashoCode().value()).get名称());
+        eucEntity.set調査区分コード(nullToEmpty(entity.getNinteiChosaKubunCode()));
+        eucEntity.set調査区分((entity.getNinteiChosaKubunCode() != null && !entity.getNinteiChosaKubunCode().isEmpty())
+                ? ChosaKubun.toValue(entity.getNinteiChosaKubunCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set実施場所コード(nullToEmpty(entity.getChosaJisshiBashoCode()));
+        eucEntity.set実施場所((entity.getChosaJisshiBashoCode() != null && !entity.getChosaJisshiBashoCode().isEmpty())
+                ? ChosaJisshiBashoCode.toValue(entity.getChosaJisshiBashoCode().value()).get名称() : RString.EMPTY);
         eucEntity.set実施場所名称(entity.getChosaJisshiBashoMeisho());
-        eucEntity.setサービス区分コード(entity.getServiceKubunCode().value());
-        eucEntity.setサービス区分(ServiceKubunCode.toValue(entity.getServiceKubunCode().value()).get名称());
+        eucEntity.setサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
+        eucEntity.setサービス区分((entity.getServiceKubunCode() != null && !entity.getServiceKubunCode().isEmpty())
+                ? ServiceKubunCode.toValue(entity.getServiceKubunCode().value()).get名称() : RString.EMPTY);
         eucEntity.set訪問介護(getサービスの状況(サービスの状況List, Renban._1.getValue()));
         eucEntity.set訪問入浴介護(getサービスの状況(サービスの状況List, Renban._2.getValue()));
         eucEntity.set訪問看護(getサービスの状況(サービスの状況List, Renban._3.getValue()));
@@ -242,21 +258,25 @@ public class ChosahyoJoho99AEucEntityEditor {
         eucEntity.setモニター測定(get調査項目01名称(get調査項目(調査項目List, Renban._83.getValue())));
         eucEntity.setじょくそうの処置(get調査項目01名称(get調査項目(調査項目List, Renban._84.getValue())));
         eucEntity.setカテーテル(get調査項目01名称(get調査項目(調査項目List, Renban._85.getValue())));
-        eucEntity.set障害高齢者の日常生活自立度コード(entity.getShogaiNichijoSeikatsuJiritsudoCode().value());
-        eucEntity.set障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode
-                .toValue(entity.getShogaiNichijoSeikatsuJiritsudoCode().value()).get名称());
-        eucEntity.set認知症高齢者の日常生活自立度コード(entity.getNinchishoNichijoSeikatsuJiritsudoCode().value());
-        eucEntity.set認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode
-                .toValue(entity.getNinchishoNichijoSeikatsuJiritsudoCode().value()).get名称());
+        eucEntity.set障害高齢者の日常生活自立度コード(nullToEmpty(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
+        eucEntity.set障害高齢者の日常生活自立度(
+                (entity.getShogaiNichijoSeikatsuJiritsudoCode() != null && !entity.getShogaiNichijoSeikatsuJiritsudoCode().isEmpty())
+                ? ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.getShogaiNichijoSeikatsuJiritsudoCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set認知症高齢者の日常生活自立度コード(nullToEmpty(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+        eucEntity.set認知症高齢者の日常生活自立度(
+                (entity.getNinchishoNichijoSeikatsuJiritsudoCode() != null && !entity.getNinchishoNichijoSeikatsuJiritsudoCode().isEmpty())
+                ? NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                        entity.getNinchishoNichijoSeikatsuJiritsudoCode().value()).get名称() : RString.EMPTY);
         eucEntity.set判定区分コード(KariIchijiHanteiKubun.toValue(entity.isKariIchijiHanteiKubun()).get名称());
         eucEntity.set判定区分(KariIchijiHanteiKubun.toValue(entity.isKariIchijiHanteiKubun()).get名称());
         eucEntity.set一次判定日(format日付(entity.getIchijiHanteiYMD()));
-        eucEntity.set一次判定結果コード(entity.getIchijiHanteiKekkaCode().value());
-        eucEntity.set一次判定結果(IchijiHanteiKekkaCode99.toValue(
-                entity.getIchijiHanteiKekkaCode().value()).get名称());
-        eucEntity.set一次判定結果コード_認知症加算(entity.getIchijiHanteiKekkaNinchishoKasanCode().value());
-        eucEntity.set一次判定結果_認知症加算(IchijiHanteiKekkaCode99.toValue(
-                entity.getIchijiHanteiKekkaNinchishoKasanCode().value()).get名称());
+        eucEntity.set一次判定結果コード(nullToEmpty(entity.getIchijiHanteiKekkaCode()));
+        eucEntity.set一次判定結果((entity.getIchijiHanteiKekkaCode() != null && !entity.getIchijiHanteiKekkaCode().isEmpty())
+                ? IchijiHanteiKekkaCode99.toValue(entity.getIchijiHanteiKekkaCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set一次判定結果コード_認知症加算(nullToEmpty(entity.getIchijiHanteiKekkaNinchishoKasanCode()));
+        eucEntity.set一次判定結果_認知症加算(
+                (entity.getIchijiHanteiKekkaNinchishoKasanCode() != null && !entity.getIchijiHanteiKekkaNinchishoKasanCode().isEmpty())
+                ? IchijiHanteiKekkaCode99.toValue(entity.getIchijiHanteiKekkaNinchishoKasanCode().value()).get名称() : RString.EMPTY);
         eucEntity.set要介護認定基準時間(format得点(entity.getKijunJikan()));
         eucEntity.set要基準時間_食事(format得点(entity.getKijunJikanShokuji()));
         eucEntity.set要基準時間_排泄(format得点(entity.getKijunJikanHaisetsu()));
@@ -272,14 +292,26 @@ public class ChosahyoJoho99AEucEntityEditor {
         eucEntity.set中間評価項目得点第３群(format得点(entity.getChukanHyokaKomoku3gun()));
         eucEntity.set中間評価項目得点第４群(format得点(entity.getChukanHyokaKomoku4gun()));
         eucEntity.set中間評価項目得点第５群(format得点(entity.getChukanHyokaKomoku5gun()));
-        eucEntity.set一次判定警告コード((Integer.parseInt(entity.getIchijiHnateiKeikokuCode().toString()) == 0)
-                ? entity.getIchijiHnateiKeikokuCode() : RString.EMPTY);
-        eucEntity.set状態の安定性コード(entity.getJotaiAnteiseiCode().value());
-        eucEntity.set状態の安定性(JotaiAnteiseiCode.toValue(entity.getJotaiAnteiseiCode().value()).get名称());
-        eucEntity.set認知症自立度Ⅱ以上の蓋然性(new RString(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
-        eucEntity.set給付区分コード(entity.getSuiteiKyufuKubunCode().value());
-        eucEntity.set給付区分(SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode().value()).get名称());
+        eucEntity.set一次判定警告コード(get一次判定警告コード(entity.getIchijiHnateiKeikokuCode()));
+        eucEntity.set状態の安定性コード(nullToEmpty(entity.getJotaiAnteiseiCode()));
+        eucEntity.set状態の安定性((entity.getJotaiAnteiseiCode() != null && !entity.getJotaiAnteiseiCode().isEmpty())
+                ? JotaiAnteiseiCode.toValue(entity.getJotaiAnteiseiCode().value()).get名称() : RString.EMPTY);
+        eucEntity.set認知症自立度Ⅱ以上の蓋然性(nullToEmpty(entity.getNinchishoJiritsudoIIijoNoGaizensei()));
+        eucEntity.set給付区分コード(nullToEmpty(entity.getSuiteiKyufuKubunCode()));
+        eucEntity.set給付区分((entity.getSuiteiKyufuKubunCode() != null && !entity.getSuiteiKyufuKubunCode().isEmpty())
+                ? SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode().value()).get名称() : RString.EMPTY);
         return eucEntity;
+    }
+
+    private static RString get一次判定警告コード(RString 一次判定警告コード) {
+        if (!RString.isNullOrEmpty(一次判定警告コード)) {
+            Pattern pattern = Pattern.compile("[^0]");
+            Matcher matcher = pattern.matcher(一次判定警告コード);
+            if (matcher.find()) {
+                return 一次判定警告コード;
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static RString getサービスの状況(List<DbT5207NinteichosahyoServiceJokyoEntity> サービスの状況List, int 連番) {
@@ -400,7 +432,7 @@ public class ChosahyoJoho99AEucEntityEditor {
     }
 
     private static RString format得点(int value) {
-        return new RString(new Decimal(value).divide(百).toString("#,##"));
+        return new RString(new Decimal(value).divide(十).toString("##0.0"));
     }
 
     private static RString format日付(FlexibleDate value) {
@@ -409,5 +441,21 @@ public class ChosahyoJoho99AEucEntityEditor {
 
     private static RString convert改行(RString text) {
         return new RStringBuilder(text).replace(改行, 下矢印).toRString();
+    }
+
+    private static RString nullToEmpty(Code item) {
+        return (item != null) ? item.value() : RString.EMPTY;
+    }
+
+    private static RString nullToEmpty(AtenaMeisho item) {
+        return (item != null) ? item.value() : RString.EMPTY;
+    }
+
+    private static RString nullToEmpty(JigyoshaNo item) {
+        return (item != null) ? item.value() : RString.EMPTY;
+    }
+
+    private static RString nullToEmpty(Decimal item) {
+        return (item != null) ? new RString(item.toString()) : RString.EMPTY;
     }
 }

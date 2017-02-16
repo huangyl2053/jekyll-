@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.shinsakaisukejuruhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaisukejuruhyo.ShinsakaisukejuruhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -21,22 +22,26 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
     private final List<ShinsakaisukejuruhyoBodyItem> bodyItemList;
     private final ShinsakaisukejuruhyoBodyItem bodyItem;
     private final ShinsakaisukejuruhyoHeadItem headItem;
+    private final List<RString> 審査会委員コードリスト;
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 介護認定審査会スケジュール表ヘッダのITEM
      * @param item item
+     * @param 審査会委員コードリスト List<RString>
      * @return 介護認定審査会スケジュール表のReport
      */
     public static ShinsakaisukejuruhyoReport createFrom(
             ShinsakaisukejuruhyoHeadItem headItem,
-            ShinsakaisukejuruhyoBodyItem item) {
+            ShinsakaisukejuruhyoBodyItem item,
+            List<RString> 審査会委員コードリスト) {
 
         return new ShinsakaisukejuruhyoReport(
                 headItem,
                 item,
-                null);
+                null,
+                審査会委員コードリスト);
     }
 
     /**
@@ -53,7 +58,8 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
         return new ShinsakaisukejuruhyoReport(
                 headItem,
                 null,
-                itemList);
+                itemList,
+                null);
     }
 
     /**
@@ -61,16 +67,19 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
      *
      * @param headItem 介護認定審査会スケジュール表ヘッダのITEM
      * @param bodyItem bodyItem
+     * @param 審査会委員コードリスト List<RString>
      * @param itemList 介護認定審査会スケジュール表のITEMリスト
      */
     protected ShinsakaisukejuruhyoReport(
             ShinsakaisukejuruhyoHeadItem headItem,
             ShinsakaisukejuruhyoBodyItem bodyItem,
-            List<ShinsakaisukejuruhyoBodyItem> itemList) {
+            List<ShinsakaisukejuruhyoBodyItem> itemList,
+            List<RString> 審査会委員コードリスト) {
 
         this.headItem = headItem;
         this.bodyItem = bodyItem;
         this.bodyItemList = itemList;
+        this.審査会委員コードリスト = 審査会委員コードリスト;
     }
 
     @Override
@@ -78,16 +87,22 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
             int renban = 0;
             ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
-            for (ShinsakaisukejuruhyoBodyItem item : bodyItemList) {
-                renban++;
-                item.set項番(renban);
-                ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(item);
-                IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
-                reportSourceWriter.writeLine(builder);
+            for (RString 審査会委員コード : 審査会委員コードリスト) {
+                printBodyItemList(renban, headerEditor, reportSourceWriter);
             }
         } else {
             ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
             ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(bodyItem);
+            IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
+            reportSourceWriter.writeLine(builder);
+        }
+    }
+
+    private void printBodyItemList(int renban, ShinsakaisukejuruhyoHeaderEditor headerEditor, ReportSourceWriter<ShinsakaisukejuruhyoReportSource> reportSourceWriter) {
+        for (ShinsakaisukejuruhyoBodyItem item : bodyItemList) {
+            renban++;
+            item.set項番(renban);
+            ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(item);
             IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

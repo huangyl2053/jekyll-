@@ -15,14 +15,18 @@ import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.Chosah
 public class ChosahyoKihonchosaKatamenEditor implements IChosahyoKihonchosaKatamenEditor {
 
     private final ChosahyoKihonchosaKatamenItem item;
+    private final int layoutIndex;
 
     /**
      * コンストラクタです。
      *
      * @param item {@link ChosahyoKihonchosaKatamenItem}
+     * @param layoutIndex
      */
-    protected ChosahyoKihonchosaKatamenEditor(ChosahyoKihonchosaKatamenItem item) {
+    protected ChosahyoKihonchosaKatamenEditor(ChosahyoKihonchosaKatamenItem item, int layoutIndex) {
         this.item = item;
+        this.layoutIndex = layoutIndex;
+
     }
 
     @Override
@@ -49,6 +53,7 @@ public class ChosahyoKihonchosaKatamenEditor implements IChosahyoKihonchosaKatam
         source.hihokenshaNo8 = item.getHihokenshaNo8();
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
+        source.layoutIndex = layoutIndex;
         return source;
     }
 }

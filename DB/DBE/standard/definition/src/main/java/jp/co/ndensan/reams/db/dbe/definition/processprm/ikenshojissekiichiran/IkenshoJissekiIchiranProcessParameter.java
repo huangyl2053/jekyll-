@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class IkenshoJissekiIchiranProcessParameter implements IBatchProcessParameter {
 
+    private final boolean batchFlag;
     private final RString 帳票出力区分;
     private final RString 基準日FROM;
     private final RString 基準日TO;
@@ -33,6 +34,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
     /**
      * コンストラクタです。
      *
+     * @param batchFlag
      * @param 帳票出力区分 帳票出力区分
      * @param 基準日FROM 基準日FROM
      * @param 基準日TO 基準日TO
@@ -42,7 +44,8 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
      * @param 保険者名称 保険者名称
      * @param keyJoho キー情報Entityリスト
      */
-    public IkenshoJissekiIchiranProcessParameter(RString 帳票出力区分,
+    public IkenshoJissekiIchiranProcessParameter(boolean batchFlag,
+            RString 帳票出力区分,
             RString 基準日FROM,
             RString 基準日TO,
             RString 基準日区分,
@@ -50,6 +53,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
             RString 保険者名称,
             RString 証記載保険者,
             List<IkenshoJissekiIchiranKey> keyJoho) {
+        this.batchFlag = batchFlag;
         this.帳票出力区分 = 帳票出力区分;
         this.基準日FROM = 基準日FROM;
         this.基準日TO = 基準日TO;
@@ -66,7 +70,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
      * @return 主治医意見書作成実績集計表のデータ取得パラメータ
      */
     public IkenshoJissekiIchiranMybitisParamter toMybitisParamter() {
-        return IkenshoJissekiIchiranMybitisParamter.createParamter(true,
+        return IkenshoJissekiIchiranMybitisParamter.createParamter(batchFlag,
                 基準日FROM,
                 基準日TO,
                 基準日区分,

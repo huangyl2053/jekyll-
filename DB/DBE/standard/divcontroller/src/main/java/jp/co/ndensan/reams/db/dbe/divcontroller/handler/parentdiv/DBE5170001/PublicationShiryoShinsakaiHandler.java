@@ -52,6 +52,7 @@ public class PublicationShiryoShinsakaiHandler {
     private final RString 印刷帳票_予備判定記入票 = new RString("3");
     private final RString 印刷帳票_概況特記一覧 = new RString("4");
     private final RString 概況特記出力しない = new RString("2");
+    private final RString 概況特記一覧出力しない = new RString("2");
     private final PublicationShiryoShinsakaiDiv div;
     private static final int INT_4 = 4;
     private static final int INT_0 = 0;
@@ -92,6 +93,9 @@ public class PublicationShiryoShinsakaiHandler {
         set審査会資料選択可能の設定();
         List<RString> 事務 = new ArrayList<>();
         事務.add(印刷帳票_概況特記);
+        if (概況特記一覧出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料概況特記一覧, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            事務.add(印刷帳票_概況特記一覧);
+        }
         div.getChkPrintChoyoJimu2().setDisabledItemsByKey(事務);
         div.getTxtShiryoNoStart().setDisabled(true);
         div.getTxtSiryoNoEnd().setDisabled(true);
@@ -106,6 +110,9 @@ public class PublicationShiryoShinsakaiHandler {
         List<RString> 委員 = new ArrayList<>();
         if (作成条件_全件.equals(作成条件)) {
             事務.add(印刷帳票_概況特記);
+            if (概況特記一覧出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料概況特記一覧, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                事務.add(印刷帳票_概況特記一覧);
+            }
             div.getChkPrintChoyoJimu2().setDisabledItemsByKey(事務);
             div.getChkPrintChohyoIin2().setDisabledItemsByKey(委員);
             div.getTxtShiryoNoStart().clearValue();
@@ -449,6 +456,9 @@ public class PublicationShiryoShinsakaiHandler {
         事務.add(印刷帳票_予備判定記入票);
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             事務.add(印刷帳票_概況特記);
+        }
+        if (概況特記一覧出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.介護認定審査会資料概況特記一覧, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            事務.add(印刷帳票_概況特記一覧);
         }
         div.getChkPrintChoyoJimu2().setDisabledItemsByKey(事務);
 

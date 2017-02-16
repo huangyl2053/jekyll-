@@ -866,6 +866,16 @@
         "DbT5501ShinsakaiKaisaiYoteiJoho"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
 
+    <select id="getSelectByKey_DbT5502ShinsakaiWariateJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.ResultMap_DbT5502ShinsakaiWariateJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinItiziHanteiMyBatisParameter" fetchSize="500"  resultOrdered="true">
+        SELECT
+          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
+        FROM
+          rgdb."DbT5502ShinsakaiWariateJoho" AS "DbT5502ShinsakaiWariateJoho"
+        WHERE
+          "DbT5502ShinsakaiWariateJoho"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+    </select>
+
     <resultMap id="Result_ShinsakaiIinCode" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinCodeEntity" autoMapping="true">
         <result property="shinsakaiIinCode" column="dbt5503_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shinsakaiIinShimei" column="dbt5594_shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
@@ -935,7 +945,7 @@
         <result property="合議体名称" column="dbt5591_gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="資料作成年月日" column="dbt5501_shiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-
+    
     <select id="getTokkiJikouItiziHantei"
             resultMap="Result_TokkiJikouItiziHantei"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"

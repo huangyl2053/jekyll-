@@ -35,13 +35,9 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -103,10 +99,6 @@ public class SeikatsuhogoToroku {
             div.getBtnSaiban().setDisabled(false);
         }
         getHandler(div).load(result, list, ninteiTandokuDounyuFlag);
-        RStringBuilder 前排他制御 = new RStringBuilder();
-        前排他制御.append("DBEShinseishoKanriNo");
-        前排他制御.append(申請書管理番号);
-        前排他ロックキー(前排他制御.toRString());
         return ResponseData.of(div).respond();
     }
 
@@ -249,10 +241,6 @@ public class SeikatsuhogoToroku {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        RStringBuilder 前排他制御 = new RStringBuilder();
-        前排他制御.append("DBEShinseishoKanriNo");
-        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
-        前排他キーの解除(前排他制御.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE1020001TransitionEventName.申請情報入力へ).respond();
     }
 
@@ -322,16 +310,5 @@ public class SeikatsuhogoToroku {
         }
         return list;
     }
-
-    private void 前排他ロックキー(RString 排他ロックキー) {
-        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        }
-    }
-
-    private void 前排他キーの解除(RString 排他) {
-        LockingKey 排他キー = new LockingKey(排他);
-        RealInitialLocker.release(排他キー);
-    }
+    
 }

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIra
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -64,7 +65,12 @@ public class NinteiChosaKatamenKihon extends BatchProcessBase<HomonChosaIraishoR
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        ChosahyoKihonchosaKatamenReport report = ChosahyoKihonchosaKatamenReport.createFrom(business.setChosahyoKihonchosaKatamenItem(entity));
+        ChosahyoKihonchosaKatamenReport report;
+        if (ReportIdDBZ.DBE221012.getReportId().equals(帳票)) {
+            report = ChosahyoKihonchosaKatamenReport.createFrom(business.setChosahyoKihonchosaKatamenItem(entity), 2);
+        } else {
+            report = ChosahyoKihonchosaKatamenReport.createFrom(business.setChosahyoKihonchosaKatamenItem(entity));
+        }
         report.writeBy(reportSourceWriter);
     }
 

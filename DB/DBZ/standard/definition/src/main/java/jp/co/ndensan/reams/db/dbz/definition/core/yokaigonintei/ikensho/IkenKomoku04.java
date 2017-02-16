@@ -16,24 +16,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum IkenKomoku04 {
 
     /**
-     * コード:1 名称:問題なし 略称:定義なし
+     * コード:1 名称:問題なし 略称:問題なし
      */
-    問題なし("1", "問題なし"),
+    問題なし("1", "問題なし", "問題なし"),
     /**
-     * コード:2 名称:問題あり 略称:定義なし
+     * コード:2 名称:問題あり 略称:問題あり
      */
-    問題あり("2", "問題あり"),
+    問題あり("2", "問題あり", "問題あり"),
     /**
-     * コード:9 名称:記載なし 略称:定義なし
+     * コード:9 名称:記載なし 略称:記載なし
      */
-    記載なし("9", "記載なし");
+    記載なし("9", "記載なし", "記載なし");
 
     private final RString code;
     private final RString fullName;
+    private final RString abbreviatedName;
 
-    private IkenKomoku04(String code, String fullname) {
+    private IkenKomoku04(String code, String fullname, String abbreviatedName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.abbreviatedName = new RString(abbreviatedName);
     }
 
     /**
@@ -52,6 +54,15 @@ public enum IkenKomoku04 {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 意見書項目内容04の略称を返します。
+     *
+     * @return 意見書項目内容04の略称
+     */
+    public RString get略称() {
+        return abbreviatedName;
     }
 
     /**

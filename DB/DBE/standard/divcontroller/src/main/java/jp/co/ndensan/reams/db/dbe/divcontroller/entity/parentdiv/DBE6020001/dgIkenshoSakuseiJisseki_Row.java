@@ -35,7 +35,7 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
     private RString zaitakuKe;
     private RString shisetsuShin;
     private RString shisetsuKe;
-    private RString ishiKubun;
+    private RString tanka;
     private RString shinseishoKanriNo;
     private RString ikenshoIraiRirekiNo;
 
@@ -55,7 +55,7 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.zaitakuKe = RString.EMPTY;
         this.shisetsuShin = RString.EMPTY;
         this.shisetsuKe = RString.EMPTY;
-        this.ishiKubun = RString.EMPTY;
+        this.tanka = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.ikenshoIraiRirekiNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
@@ -72,12 +72,12 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.setOriginalData("zaitakuKe", zaitakuKe);
         this.setOriginalData("shisetsuShin", shisetsuShin);
         this.setOriginalData("shisetsuKe", shisetsuKe);
-        this.setOriginalData("ishiKubun", ishiKubun);
+        this.setOriginalData("tanka", tanka);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
     }
 
-    public dgIkenshoSakuseiJisseki_Row(RString hokensha, RString code, RString meisho, RString shujiiCode, RString shujiimei, RString hihokenshaBango, RString shimei, RString iraibi, RString kinyubi, RString nyushubi, RString zaitakuShin, RString zaitakuKe, RString shisetsuShin, RString shisetsuKe, RString ishiKubun, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo) {
+    public dgIkenshoSakuseiJisseki_Row(RString hokensha, RString code, RString meisho, RString shujiiCode, RString shujiimei, RString hihokenshaBango, RString shimei, RString iraibi, RString kinyubi, RString nyushubi, RString zaitakuShin, RString zaitakuKe, RString shisetsuShin, RString shisetsuKe, RString tanka, RString shinseishoKanriNo, RString ikenshoIraiRirekiNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("code", code);
@@ -93,7 +93,7 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.setOriginalData("zaitakuKe", zaitakuKe);
         this.setOriginalData("shisetsuShin", shisetsuShin);
         this.setOriginalData("shisetsuKe", shisetsuKe);
-        this.setOriginalData("ishiKubun", ishiKubun);
+        this.setOriginalData("tanka", tanka);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
         this.hokensha = hokensha;
@@ -110,7 +110,7 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.zaitakuKe = zaitakuKe;
         this.shisetsuShin = shisetsuShin;
         this.shisetsuKe = shisetsuKe;
-        this.ishiKubun = ishiKubun;
+        this.tanka = tanka;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
     }
@@ -171,8 +171,8 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         return shisetsuKe;
     }
 
-    public RString getIshiKubun() {
-        return ishiKubun;
+    public RString getTanka() {
+        return tanka;
     }
 
     public RString getShinseishoKanriNo() {
@@ -253,9 +253,9 @@ public class dgIkenshoSakuseiJisseki_Row extends DataRow {
         this.shisetsuKe = shisetsuKe;
     }
 
-    public void setIshiKubun(RString ishiKubun) {
-        this.setOriginalData("ishiKubun", ishiKubun);
-        this.ishiKubun = ishiKubun;
+    public void setTanka(RString tanka) {
+        this.setOriginalData("tanka", tanka);
+        this.tanka = tanka;
     }
 
     public void setShinseishoKanriNo(RString shinseishoKanriNo) {

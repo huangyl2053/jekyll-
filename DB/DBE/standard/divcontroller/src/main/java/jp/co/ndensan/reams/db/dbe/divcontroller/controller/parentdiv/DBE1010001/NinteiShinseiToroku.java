@@ -83,14 +83,12 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -262,21 +260,7 @@ public class NinteiShinseiToroku {
             div.setHdnJogaiMode(new RString("入力"));
             setIconName(div, 管理番号);
             div.setHdnShinseishoKanriNo(管理番号.value());
-            ShinsakaiIinItiranData shinsakaiIinItiranData = new ShinsakaiIinItiranData();
-            List<ShinsakaiIinItiran> list = new ArrayList();
-            for (ShinsakaiIinRelateJoho joho : getService().get審査会委員一覧検索して審査会委員情報(管理番号.value()).records()) {
-                RStringBuilder 所属機関 = new RStringBuilder();
-                所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
-                所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
-                所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
-                ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
-                shinsakaiIinItiran.setShimei(joho.get介護認定審査会委員氏名().getColumnValue());
-                shinsakaiIinItiran.setShinsakaiIinCode(joho.get介護認定審査会委員コード());
-                shinsakaiIinItiran.setShozokuKikan(所属機関.toRString());
-                list.add(shinsakaiIinItiran);
-            }
-            shinsakaiIinItiranData.setShinsakaiIinItiranList(list);
-            div.setHdnJogaiShinsainJoho(DataPassingConverter.serialize(shinsakaiIinItiranData));
+            div.setHdnJogaiShinsainJoho(DataPassingConverter.serialize(getShinsakaiIinItiranData(管理番号)));
 
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkShikakuShutokuMae().setReadOnly(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
@@ -350,10 +334,6 @@ public class NinteiShinseiToroku {
             div.getSinseiTorisage().setReadOnly(true);
             setShinseiJiyu(result, div);
             getHandler(div).loadPnlSinseishaJoho();
-            RStringBuilder 前排他制御 = new RStringBuilder();
-            前排他制御.append("DBEShinseishoKanriNo");
-            前排他制御.append(管理番号);
-            前排他ロックキー(前排他制御.toRString());
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
@@ -361,6 +341,24 @@ public class NinteiShinseiToroku {
         div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
         
         return ResponseData.of(div).respond();
+    }
+    
+    private ShinsakaiIinItiranData getShinsakaiIinItiranData(ShinseishoKanriNo 管理番号) {
+        ShinsakaiIinItiranData shinsakaiIinItiranData = new ShinsakaiIinItiranData();
+        List<ShinsakaiIinItiran> list = new ArrayList();
+        for (ShinsakaiIinRelateJoho joho : getService().get審査会委員一覧検索して審査会委員情報(管理番号.value()).records()) {
+            RStringBuilder 所属機関 = new RStringBuilder();
+            所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
+            所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
+            所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
+            ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
+            shinsakaiIinItiran.setShimei(joho.get介護認定審査会委員氏名().getColumnValue());
+            shinsakaiIinItiran.setShinsakaiIinCode(joho.get介護認定審査会委員コード());
+            shinsakaiIinItiran.setShozokuKikan(所属機関.toRString());
+            list.add(shinsakaiIinItiran);
+        }
+        shinsakaiIinItiranData.setShinsakaiIinItiranList(list);
+        return shinsakaiIinItiranData;
     }
 
     private void setShinseiJiyu(NinteiShinseiTorokuResult result, NinteiShinseiTorokuDiv div) {
@@ -523,10 +521,10 @@ public class NinteiShinseiToroku {
                 delCount++;
             }
         }
-        if (data.getDbdBusiness() != null && (!data.getDbdBusiness().isEmpty() || delCount != data.getDbdBusiness().size())) {
-            div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
-        } else {
+        if (data.getDbdBusiness() == null  || delCount == data.getDbdBusiness().size()) {
             div.getBtnRenrakusaki().setIconNameEnum(IconName.NONE);
+        } else {
+            div.getBtnRenrakusaki().setIconNameEnum(IconName.Complete);
         }
         return ResponseData.of(div).respond();
     }
@@ -633,9 +631,9 @@ public class NinteiShinseiToroku {
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
     public ResponseData<NinteiShinseiTorokuDiv> onClick_btnBackToIchiran(NinteiShinseiTorokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest() && is変更(div)) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
-        }
+        } 
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
@@ -644,6 +642,27 @@ public class NinteiShinseiToroku {
         前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
         前排他キーの解除(前排他制御.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.一覧に戻る).respond();
+    }
+    
+    /**
+     * 再検索　ボタン
+     *
+     *
+     * @param div 審査依頼受付／みなし２号審査受付Div
+     * @return ResponseData<NinteiShinseiTorokuDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuDiv> onClick_btnReSearch(NinteiShinseiTorokuDiv div) {
+//        if (!ResponseHolder.isReRequest() && is変更(div)) {
+//            return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
+//        } 
+//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//            return ResponseData.of(div).respond();
+//        }
+        RStringBuilder 前排他制御 = new RStringBuilder();
+        前排他制御.append("DBEShinseishoKanriNo");
+        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class));
+        前排他キーの解除(前排他制御.toRString());
+        return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.再検索).respond();
     }
 
     /**
@@ -662,14 +681,11 @@ public class NinteiShinseiToroku {
 //        NinteiChosaJokyoDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkai(), NinteiChosaJokyoDataPass.class);
 //        NinteiChosaJokyoDataPass konkai = DataPassingConverter.deserialize(div.getHdnKonkai(), NinteiChosaJokyoDataPass.class);
 
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            div.getCcdKanryoMessage().setMessage(new RString("要介護認定申請情報の保存処理が完了しました。"),
-                    new RString("被保険者番号"), 
-                    div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue(), 
-                    div.getTplShinseishaJoho().getTxtJohoAtenaMeisho().getDomain().getColumnValue(), true);
-            return goToKanryo(response);
-        }
+//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+//                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+//            
+//            return 
+//        }
         
         validationMessages.add(getValidationHandler(div).取下日理由必須チェック());
         validationMessages.add(getValidationHandler(div).区分変更申請時取下日理由入力チェック());
@@ -723,11 +739,8 @@ public class NinteiShinseiToroku {
                 manager.save申請計画情報(ninteiKeikakuJoho);
                 dbt5105Manager.save要介護認定完了情報(new NinteiKanryoJoho(申請書管理番号));
 
-                RStringBuilder 前排他制御 = new RStringBuilder();
-                前排他制御.append("DBEShinseishoKanriNo");
-                前排他制御.append(申請書管理番号);
-                前排他キーの解除(前排他制御.toRString());
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("みなし２号審査受付")).respond();
+                return goToKanryo(div, response);
+                //return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("みなし２号審査受付")).respond();
             }
             return ResponseData.of(div).respond();
         } else {
@@ -741,7 +754,13 @@ public class NinteiShinseiToroku {
         }
     }
 
-    private ResponseData<NinteiShinseiTorokuDiv> goToKanryo(IParentResponse<NinteiShinseiTorokuDiv> response) {
+    private ResponseData<NinteiShinseiTorokuDiv> goToKanryo(NinteiShinseiTorokuDiv div, IParentResponse<NinteiShinseiTorokuDiv> response) {
+        
+        
+        div.getCcdKanryoMessage().setMessage(new RString("要介護認定申請情報の保存処理が完了しました。"),
+                    new RString("被保険者番号"), 
+                    div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue(), 
+                    div.getTplShinseishaJoho().getTxtJohoAtenaMeisho().getDomain().getColumnValue(), true);
         if (ViewStateHolder.get(ViewStateKeys.処理モード, Boolean.class)) {
             return response.setState(DBE1010001StateName.完了遷移有);
         } else {
@@ -808,7 +827,6 @@ public class NinteiShinseiToroku {
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
             } else if (div.getTxtTorisageDate().getValue() != null && !div.getTxtTorisageJiyu().getValue().isEmpty()) {
                 shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
-                shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
                 shinseiJohoBuilder.set審査継続区分(false);
                 shinseiJohoBuilder.set論理削除フラグ(false);
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
@@ -832,10 +850,31 @@ public class NinteiShinseiToroku {
             前排他制御.append("DBEShinseishoKanriNo");
             前排他制御.append(申請書管理番号.value());
             前排他キーの解除(前排他制御.toRString());
-            return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
+            return goToKanryo(div, response);
+//            return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
         }
         return response.respond();
     }
+    
+    private boolean is変更(NinteiShinseiTorokuDiv div) {
+        KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
+        ShinsakaiIinItiranData dataList = DataPassingConverter.deserialize(div.getHdnJogaiShinsainJoho(), ShinsakaiIinItiranData.class);
+        NinteiShinseiBusinessCollection zenkaiJoho = DataPassingConverter.deserialize(div.getHdnRenrakusakiJoho(), NinteiShinseiBusinessCollection.class);
+        NinteiShinseiJoho shinseiJoho = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
+        Boolean 変更有無フラグ1 = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho).build().toEntity().hasChanged();
+        Boolean 変更有無フラグ2 = 介護連絡先情報変更有無フラグ(zenkaiJoho.getDbdBusiness());
+        Boolean 変更有無フラグ3 = Boolean.FALSE;
+        ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY);
+        if (shinseitodokedeJoho != null) {
+            変更有無フラグ3 = shinseitodokedeJoho.toEntity().hasChanged();
+        }
+        Boolean 変更有無フラグ4 = Boolean.FALSE;
+        if (dataList != null && dataList.getShinsakaiIinItiranList() != null) {
+            変更有無フラグ4 = 審査会委員除外情報変更有無フラグ(shinseiJoho.get申請書管理番号(), dataList);
+        }
+        return 変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4;
+    }
+    
 
     private ResponseData<NinteiShinseiTorokuDiv> doSakujo(IParentResponse<NinteiShinseiTorokuDiv> response, NinteiShinseiTorokuDiv div,
             ValidationMessageControlPairs validationMessages, NinteiShinseiJoho shinseiJoho) {
@@ -865,7 +904,12 @@ public class NinteiShinseiToroku {
             } else {
                 manager.deleteAllBy申請書管理番号(申請書管理番号.value());
             }
-            return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("要介護認定申請削除")).respond();
+            RStringBuilder 前排他制御 = new RStringBuilder();
+            前排他制御.append("DBEShinseishoKanriNo");
+            前排他制御.append(申請書管理番号.value());
+            前排他キーの解除(前排他制御.toRString());
+            return goToKanryo(div, response);
+//            return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("要介護認定申請削除")).respond();
         }
         return response.respond();
     }
@@ -931,17 +975,11 @@ public class NinteiShinseiToroku {
     private boolean 審査会委員除外情報変更有無フラグ(ShinseishoKanriNo 申請書管理番号, ShinsakaiIinItiranData dataList) {
         Boolean flag = Boolean.FALSE;
         if (dataList != null && dataList.getShinsakaiIinItiranList() != null) {
-            int reban = 1;
             for (ShinsakaiIinItiran data : dataList.getShinsakaiIinItiranList()) {
-                ShinsakaiIinJogaiJoho iinJogaiJoho = new ShinsakaiIinJogaiJoho(申請書管理番号, reban);
-                ShinsakaiIinJogaiJohoBuilder builder = iinJogaiJoho.createBuilderForEdit();
-                builder.set除外対象審査会委員コード(data.getShinsakaiIinCode());
-                flag = builder.build().toEntity().hasChanged();
-                if (flag) {
+                if (!getShinsakaiIinItiranData(申請書管理番号).getShinsakaiIinItiranList().contains(data)) {
+                    flag = true;
                     break;
                 }
-
-                reban = reban + 1;
             }
         }
         return flag;
@@ -992,7 +1030,7 @@ public class NinteiShinseiToroku {
         }
         return flag;
     }
-
+    
     private RenrakusakiJoho set介護連絡先情報(RenrakusakiJoho renrakusakiJoho, boolean flag, ShinseishoKanriNo 申請書管理番号) {
         RenrakusakiJoho renrakusaki = null;
         if (flag) {
@@ -1051,9 +1089,9 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set主治医への連絡事項(div.getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko());
         shinseiJohoBuilder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         if (RString.isNullOrEmpty(div.getShisetsuJoho().getTxtNyushoShisetsu().getValue())) {
-            shinseiJohoBuilder.set施設入所の有無(true);
-        } else {
             shinseiJohoBuilder.set施設入所の有無(false);
+        } else {
+            shinseiJohoBuilder.set施設入所の有無(true);
         }
 //        if (!RString.isNullOrEmpty(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
 //            shinseiJohoBuilder.set入所施設コード(new JigyoshaNo(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo()));
@@ -1081,13 +1119,32 @@ public class NinteiShinseiToroku {
         }
         shinseiJohoBuilder.set認定申請区分_法令_コード(new Code(kihonJohoInputDiv.getDdlShinseiKubunHorei().getSelectedKey()));
         shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
-        if (div.getTxtTorisageDate().getValue() != null && !div.getTxtTorisageDate().getValue().toDateString().isEmpty()) {
-            shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue().toFlexibleDate());
-        }
-        shinseiJohoBuilder.set取下理由(div.getTxtTorisageJiyu().getValue());
         shinseiJohoBuilder.set入所施設名称(new AtenaMeisho(div.getTxtNyushoShisetsu().getValue()));
         //shinseiJohoBuilder.set市町村コード(LasdecCode.EMPTY)		
-
+        if (div.getTxtEnkiKetteiYMD().getValue() != null && !div.getTxtEnkiKetteiYMD().getValue().toDateString().trim().isEmpty()) {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.延期.getコード()));
+        }
+        if (TorisageKubunCode.取り下げ.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())) {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.取下.getコード()));
+            shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
+            shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
+            shinseiJohoBuilder.set取下理由(div.getTxtTorisageJiyu().getValue());
+            shinseiJohoBuilder.set却下年月日(FlexibleDate.EMPTY);
+            shinseiJohoBuilder.set却下理由(RString.EMPTY);
+        } else if (TorisageKubunCode.却下.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())
+                || TorisageKubunCode.区分変更却下.getコード().equals(div.getDdlTorisageJiyu().getSelectedKey())) {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.却下.getコード()));
+            shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.無効.getコード()));
+            shinseiJohoBuilder.set却下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
+            shinseiJohoBuilder.set却下理由(div.getTxtTorisageJiyu().getValue());
+            shinseiJohoBuilder.set取下年月日(FlexibleDate.EMPTY);
+            shinseiJohoBuilder.set取下理由(RString.EMPTY);
+        } else {
+            shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
+            shinseiJohoBuilder.set取下理由(div.getTxtTorisageJiyu().getValue());
+            shinseiJohoBuilder.set却下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
+            shinseiJohoBuilder.set却下理由(div.getTxtTorisageJiyu().getValue());
+        }
         shinseiJohoBuilder.set論理削除フラグ(false);
         return shinseiJohoBuilder;
     }
@@ -1139,7 +1196,7 @@ public class NinteiShinseiToroku {
         }
         return ninteiKeikakuJohoBuilder.build();
     }
-
+    
     private ShinseitodokedeJoho get認定申請届出者情報(NinteiShinseiTorokuDiv div, boolean flag, ShinseishoKanriNo 申請書管理番号) {
         ShinseitodokedeJoho todokedeJoho = null;
         if (flag) {
@@ -1153,10 +1210,10 @@ public class NinteiShinseiToroku {
             todokedeJohoBuilder.set申請届出代行区分コード(new Code(todokedeshaNaiyo.get届出代行区分()));
             todokedeJohoBuilder.set申請届出者氏名(todokedeshaNaiyo.get氏名());
             todokedeJohoBuilder.set申請届出者氏名カナ(todokedeshaNaiyo.getカナ氏名());
-            todokedeJohoBuilder.set申請届出者続柄コード(todokedeshaNaiyo.get本人との関係性());
+            todokedeJohoBuilder.set申請届出者続柄コード(todokedeshaNaiyo.get本人との関係性().trim());
             if (!RString.isNullOrEmpty(todokedeshaNaiyo.get事業者コード())) {
                 todokedeJohoBuilder.set申請届出代行事業者番号(new JigyoshaNo(todokedeshaNaiyo.get事業者コード()));
-            }
+            }   
             todokedeJohoBuilder.set事業者区分(todokedeshaNaiyo.get申請関係者());
             if (new RString("key0").equals(todokedeshaNaiyo.get管内管外区分())) {
                 todokedeJohoBuilder.set申請届出者郵便番号(todokedeshaNaiyo.get郵便番号());
@@ -1229,9 +1286,9 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set情報提供への同意有無(div.getChkJohoTeikyoDoi().isAllSelected());
         shinseiJohoBuilder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         if (RString.isNullOrEmpty(div.getShisetsuJoho().getTxtNyushoShisetsu().getValue())) {
-            shinseiJohoBuilder.set施設入所の有無(true);
-        } else {
             shinseiJohoBuilder.set施設入所の有無(false);
+        } else {
+            shinseiJohoBuilder.set施設入所の有無(true);
         }
 //        if (!RString.isNullOrEmpty(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
 //            shinseiJohoBuilder.set入所施設コード(new JigyoshaNo(div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo()));

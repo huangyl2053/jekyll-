@@ -19,6 +19,7 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
 
     private final List<ChosahyoGaikyochosaItem> itemList;
     private final ChosahyoGaikyochosaItem item;
+    private final int layoutIndex;
 
     /**
      * インスタンスを生成します。
@@ -27,7 +28,7 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
      * @return 要介護認定調査票（概況調査）のReport
      */
     public static ChosahyoGaikyochosaReport createFrom(List<ChosahyoGaikyochosaItem> itemList) {
-        return new ChosahyoGaikyochosaReport(itemList, null);
+        return new ChosahyoGaikyochosaReport(itemList, null, 0);
     }
 
     /**
@@ -37,7 +38,29 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
      * @return 要介護認定調査票（概況調査）のReport
      */
     public static ChosahyoGaikyochosaReport createFrom(ChosahyoGaikyochosaItem item) {
-        return new ChosahyoGaikyochosaReport(null, item);
+        return new ChosahyoGaikyochosaReport(null, item, 0);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param itemList 要介護認定調査票（概況調査）のItem
+     * @param layoutIndex
+     * @return 要介護認定調査票（概況調査）のReport
+     */
+    public static ChosahyoGaikyochosaReport createFrom(List<ChosahyoGaikyochosaItem> itemList, int layoutIndex) {
+        return new ChosahyoGaikyochosaReport(itemList, null, layoutIndex);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param item 要介護認定調査票（概況調査）のItem
+     * @param layoutIndex
+     * @return 要介護認定調査票（概況調査）のReport
+     */
+    public static ChosahyoGaikyochosaReport createFrom(ChosahyoGaikyochosaItem item, int layoutIndex) {
+        return new ChosahyoGaikyochosaReport(null, item, layoutIndex);
     }
 
     /**
@@ -45,10 +68,12 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
      *
      * @param itemList 要介護認定調査票（概況調査）のItemList
      * @param item 要介護認定調査票（概況調査）のItem
+     * @param layoutIndex
      */
-    protected ChosahyoGaikyochosaReport(List<ChosahyoGaikyochosaItem> itemList, ChosahyoGaikyochosaItem item) {
+    protected ChosahyoGaikyochosaReport(List<ChosahyoGaikyochosaItem> itemList, ChosahyoGaikyochosaItem item, int layoutIndex) {
         this.itemList = itemList;
         this.item = item;
+        this.layoutIndex = layoutIndex;
     }
 
     /**
@@ -60,12 +85,12 @@ public class ChosahyoGaikyochosaReport extends Report<ChosahyoGaikyochosaReportS
     public void writeBy(ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter) {
         if (itemList != null) {
             for (ChosahyoGaikyochosaItem chosahyoGaikyochosaItem : itemList) {
-                IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(chosahyoGaikyochosaItem, 0);
+                IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(chosahyoGaikyochosaItem, layoutIndex);
                 IChosahyoGaikyochosaBuilder builder = new ChosahyoGaikyochosaBuilderImpl(editor);
                 reportSourceWriter.writeLine(builder);
             }
         } else {
-            IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(item, 0);
+            IChosahyoGaikyochosaEditor editor = new ChosahyoGaikyochosaEditorImpl(item, layoutIndex);
             IChosahyoGaikyochosaBuilder builder = new ChosahyoGaikyochosaBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }

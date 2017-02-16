@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiiinJohoManage
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -36,6 +35,8 @@ public class ShinsakaiScheduleHakko {
     private final RString 帳票出力区分2 = new RString("2");
     private final RString 帳票出力区分3 = new RString("3");
     private final RString 帳票出力区分4 = new RString("4");
+    private final RString スケジュール表 = new RString("key0");
+    private final RString スケジュール表_年間 = new RString("key1");
 
     /**
      * 画面初期化処理です。
@@ -44,57 +45,72 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<ShinsakaiScheduleHakkoDiv>
      */
     public ResponseData<ShinsakaiScheduleHakkoDiv> onLoad(ShinsakaiScheduleHakkoDiv div) {
-        div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys().clear();
-        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys().clear();
+        div.getShinsakaiScheduleSrch().getRadPrintType().clearSelectedItem();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
-        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().setWidth(new RString("310px"));
-        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().getSelectedKeys().clear();
-        div.getShinsakaiScheduleSrch().getTxtNendo().clearValue();
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(JIKO_BTTON, false);
+        div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().clearValue();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 介護認定審査会スケジュール表（鑑）チェックボックスを押下した際に実行します。
+     * 開催予定期間を変更した際に実行します。
      *
      * @param div 介護認定審査会開催予定登録div
      * @return ResponseData<ShinsakaiScheduleHakkoDiv>
      */
-    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnCheckBox(ShinsakaiScheduleHakkoDiv div) {
-        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys();
-        List<RString> selectKey_Kagami = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
-        if (!selectKey.isEmpty()
-                && 介護認定審査会スケジュール表鑑.equals(selectKey.get(0))
-                && selectKey_Kagami.isEmpty()) {
-            ShinsakaiiinJohoManager shinsakaiiinJohoManager = InstanceProvider.create(ShinsakaiiinJohoManager.class);
-            SearchResult<ShinsakaiIinJohoGoitaiBusiness> shoriDateKanri = shinsakaiiinJohoManager.search審査会委員情報();
-            setDgShinsakaiScheduleKagami(shoriDateKanri, div);
-            div.getDgShinsakaiScheduleKagami().setVisible(true);
-        } else if (selectKey.isEmpty() && selectKey_Kagami.isEmpty()) {
-            div.getDgShinsakaiScheduleKagami().setVisible(false);
+    public ResponseData<ShinsakaiScheduleHakkoDiv> onChange_TxtShinsakaiKaisaiYoteiKikan(ShinsakaiScheduleHakkoDiv div) {
+        RString 帳票種類 = div.getShinsakaiScheduleSrch().getRadPrintType().getSelectedKey();
+        setShinsakaiIinIchiran(div, 帳票種類);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 印刷帳票を選択したときに実行します。
+     *
+     * @param div 介護認定審査会開催予定登録div
+     * @return ResponseData<ShinsakaiScheduleHakkoDiv>
+     */
+    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_radPrintType(ShinsakaiScheduleHakkoDiv div) {
+        RString 帳票種類 = div.getShinsakaiScheduleSrch().getRadPrintType().getSelectedKey();
+        if (!RString.isNullOrEmpty(帳票種類)) {
+            if (スケジュール表.equals(帳票種類)) {
+                setShinsakaiIinIchiran(div, 帳票種類);
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().clearValue();
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().setDisabled(true);
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().setReadOnly(false);
+            } else if (スケジュール表_年間.equals(帳票種類)) {
+                List<dgShinsakaiScheduleKagami_Row> dgShinsakaiScheduleKagamiRow = new ArrayList<>();
+                div.getDgShinsakaiScheduleKagami().setDataSource(dgShinsakaiScheduleKagamiRow);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
+                div.getDgShinsakaiScheduleKagami().setVisible(false);
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().getSelectedItems().clear();
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().setDisabled(false);
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().setReadOnly(true);
+            }
         }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 介護認定審査会スケジュール表（鑑）チェックボックスを押下した際に実行します。
+     * スケジュール表が選択され、開催予定期間が入力されたとき実行されます。
      *
-     * @param div 介護認定審査会開催予定登録3div
-     * @return ResponseData<ShinsakaiScheduleHakkoDiv>
+     * @param div 介護認定審査会開催予定登録div
+     * @param 帳票種類 RString
      */
-    public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnCheckBoxJin(ShinsakaiScheduleHakkoDiv div) {
-        List<RString> selectKey = div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().getSelectedKeys();
-        List<RString> selectKey_Kagami = div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().getSelectedKeys();
-        if (!selectKey_Kagami.isEmpty() && 介護認定審査会スケジュール表鑑.equals(selectKey_Kagami.get(0))) {
+    private void setShinsakaiIinIchiran(ShinsakaiScheduleHakkoDiv div, RString 帳票種類) {
+        if (div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue() != null
+                && div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue() != null
+                && スケジュール表.equals(帳票種類)) {
+            List<dgShinsakaiScheduleKagami_Row> dgShinsakaiScheduleKagamiRow = new ArrayList<>();
+            div.getDgShinsakaiScheduleKagami().setDataSource(dgShinsakaiScheduleKagamiRow);
+            RString 開催予定期間From = new RString(div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toString());
+            RString 開催予定期間To = new RString(div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toString());
             ShinsakaiiinJohoManager shinsakaiiinJohoManager = InstanceProvider.create(ShinsakaiiinJohoManager.class);
-            SearchResult<ShinsakaiIinJohoGoitaiBusiness> shoriDateKanri = shinsakaiiinJohoManager.search審査会委員情報();
+            SearchResult<ShinsakaiIinJohoGoitaiBusiness> shoriDateKanri = shinsakaiiinJohoManager.search審査会委員情報(開催予定期間From, 開催予定期間To);
             setDgShinsakaiScheduleKagami(shoriDateKanri, div);
             div.getDgShinsakaiScheduleKagami().setVisible(true);
-        } else if (selectKey.isEmpty() && selectKey_Kagami.isEmpty()) {
-            div.getDgShinsakaiScheduleKagami().setVisible(false);
         }
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -156,14 +172,14 @@ public class ShinsakaiScheduleHakko {
         }
         RString nendoParameter = RString.EMPTY;
         RString kubun = 帳票出力区分1;
-        if (div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleNenkan().isAllSelected()) {
-            nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().getYear().toDateString();
+        if (スケジュール表_年間.equals(div.getShinsakaiScheduleSrch().getRadPrintType().getSelectedKey())) {
+            nendoParameter = div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().getValue().getYear().toDateString();
             kubun = 帳票出力区分2;
-        } else if (div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().isAllSelected()
-                && !div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().isAllSelected()) {
+        } else if (スケジュール表.equals(div.getShinsakaiScheduleSrch().getRadPrintType().getSelectedKey())
+                && !div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().isAllSelected()) {
             kubun = 帳票出力区分3;
-        } else if (!div.getShinsakaiScheduleSrch().getChkShinsakaiSchedule().isAllSelected()
-                && div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().isAllSelected()) {
+        } else if (!スケジュール表.equals(div.getShinsakaiScheduleSrch().getRadPrintType().getSelectedKey())
+                && div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().isAllSelected()) {
             kubun = 帳票出力区分4;
         }
         RString From期間 = null;

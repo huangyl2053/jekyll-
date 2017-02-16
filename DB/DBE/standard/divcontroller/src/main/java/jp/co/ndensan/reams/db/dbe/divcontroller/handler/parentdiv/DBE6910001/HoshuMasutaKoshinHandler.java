@@ -24,10 +24,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgHo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgIkenShohoshuTankaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6910001.dgShinsakaiIinBetuTanka_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -42,6 +45,8 @@ public class HoshuMasutaKoshinHandler {
     private final RString 追加モード = new RString("追加");
     private final RString 更新モード = new RString("修正");
     private final RString 削除モード = new RString("削除");
+    private static final RString 委員 = new RString("1");
+    private static final RString 医師 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -97,8 +102,13 @@ public class HoshuMasutaKoshinHandler {
         div.getHoshuMasutaTab().getTxtChoKaishiYM().clearDomain();
         div.getHoshuMasutaTab().getTxtChoShuryoYM().clearDomain();
         div.getHoshuMasutaTab().getTxtChoTanka().clearValue();
-        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().
-                setSelectedKey(ShinsakaiIinShubetsu.委員.getコード());
+        if (委員.equals(DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate()))) {
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().
+                    setSelectedKey(ShinsakaiIinShubetsu.委員.getコード());
+        } else if (医師.equals(DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate()))) {
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().
+                    setSelectedKey(ShinsakaiIinShubetsu.医師.getコード());
+        }
         div.setChosainhoshuTankaState(追加モード);
     }
 
@@ -137,8 +147,13 @@ public class HoshuMasutaKoshinHandler {
         div.getHoshuMasutaTab().getTxtChoKaishiYM().clearDomain();
         div.getHoshuMasutaTab().getTxtChoShuryoYM().clearDomain();
         div.getHoshuMasutaTab().getTxtChoTanka().clearValue();
-        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().
-                setSelectedKey(ShinsakaiIinShubetsu.委員.getコード());
+        if (委員.equals(DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate()))) {
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().
+                    setSelectedKey(ShinsakaiIinShubetsu.委員.getコード());
+        } else if (医師.equals(DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate()))) {
+            div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().
+                    setSelectedKey(ShinsakaiIinShubetsu.医師.getコード());
+        }
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().setSelectedItem(div.getHoshuMasutaTab().getTabChosainhoshuTanka());
     }
 
@@ -518,7 +533,7 @@ public class HoshuMasutaKoshinHandler {
             }
         }
     }
-    
+
     private void set審査員報酬単価一覧情報(List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報) {
         List<dgChosainhoshuTankaIchiran_Row> 審査員報酬単価一覧情報 = new ArrayList<>();
         for (ShinsakaiIinHoshuTanka 審査員報酬単価 : 審査員報酬単価マスタ情報) {
@@ -547,9 +562,21 @@ public class HoshuMasutaKoshinHandler {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (ShinsakaiIinShubetsu 介護認定審査委員種別 : ShinsakaiIinShubetsu.values()) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
-            keyValue.setKey(介護認定審査委員種別.getコード());
-            keyValue.setValue(介護認定審査委員種別.get名称());
-            dataSource.add(keyValue);
+            if (委員.equals(DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate()))) {
+                if (ShinsakaiIinShubetsu.委員.getコード().equals(介護認定審査委員種別.getコード())
+                        || ShinsakaiIinShubetsu.委員長.getコード().equals(介護認定審査委員種別.getコード())) {
+                    keyValue.setKey(介護認定審査委員種別.getコード());
+                    keyValue.setValue(介護認定審査委員種別.get名称());
+                    dataSource.add(keyValue);
+                }
+            } else if (医師.equals(DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate()))) {
+                if (ShinsakaiIinShubetsu.医師.getコード().equals(介護認定審査委員種別.getコード())
+                        || ShinsakaiIinShubetsu.医師以外.getコード().equals(介護認定審査委員種別.getコード())) {
+                    keyValue.setKey(介護認定審査委員種別.getコード());
+                    keyValue.setValue(介護認定審査委員種別.get名称());
+                    dataSource.add(keyValue);
+                }
+            }
         }
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().setDataSource(dataSource);
     }

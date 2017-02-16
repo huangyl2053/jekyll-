@@ -10,13 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran.IkenshoJissekiIchiran;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshojissekiichiran.IkenshoJissekiIchiranKey;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.DBE6020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.dgIkenshoSakuseiJisseki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -96,20 +96,18 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             RString 施設_新 = RString.EMPTY;
             RString 施設_継 = RString.EMPTY;
             if (ZaitakuShisetsuKubun.在宅.getコード().equals(data.get在宅_施設区分())) {
-                if (IkenshoIraiKubun.初回依頼.getコード().equals(data.get主治医意見書依頼区分())) {
+                if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(data.get意見書作成回数区分())) {
                     在宅_新 = MARU;
                 }
-                if (IkenshoIraiKubun.再依頼.getコード().equals(data.get主治医意見書依頼区分())
-                        || IkenshoIraiKubun.再意見書.getコード().equals(data.get主治医意見書依頼区分())) {
+                if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(data.get意見書作成回数区分())) {
                     在宅_継 = MARU;
                 }
             }
             if (ZaitakuShisetsuKubun.施設.getコード().equals(data.get在宅_施設区分())) {
-                if (IkenshoIraiKubun.初回依頼.getコード().equals(data.get主治医意見書依頼区分())) {
+                if (IkenshoSakuseiKaisuKubun.初回.getコード().equals(data.get意見書作成回数区分())) {
                     施設_新 = MARU;
                 }
-                if (IkenshoIraiKubun.再依頼.getコード().equals(data.get主治医意見書依頼区分())
-                        || IkenshoIraiKubun.再意見書.getコード().equals(data.get主治医意見書依頼区分())) {
+                if (IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(data.get意見書作成回数区分())) {
                     施設_継 = MARU;
                 }
             }
@@ -128,7 +126,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
                     在宅_継,
                     施設_新,
                     施設_継,
-                    IshiKubunCode.toValue(data.get医師区分コード()).get名称(),
+                    data.get単価(),
                     data.get申請書管理番号(),
                     data.get主治医意見書作成依頼履歴番号()
             );
@@ -151,19 +149,26 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * バッチパラメータを作成します。
      *
      * @param 帳票出力区分 帳票出力区分
+     * @param 状態
      * @return バッチパラメータ
      */
-    public DBE601001_IkenshoSakuseiJIssekiParameter createBatchParam(RString 帳票出力区分) {
+    public DBE601001_IkenshoSakuseiJIssekiParameter createBatchParam(RString 帳票出力区分, RString 状態) {
         DBE601001_IkenshoSakuseiJIssekiParameter param = new DBE601001_IkenshoSakuseiJIssekiParameter();
         List<IkenshoJissekiIchiranKey> keyJoho = new ArrayList<>();
-        for (dgIkenshoSakuseiJisseki_Row row : div.getDgIkenshoSakuseiJisseki().getDataSource()) {
-            if (row.getSelected()) {
-                IkenshoJissekiIchiranKey key = new IkenshoJissekiIchiranKey();
-                key.setShujiiIryoKikanCode(row.getCode());
-                key.setShujiiCode(row.getShujiiCode());
-                key.setShinseishoKanriNo(row.getShinseishoKanriNo());
-                key.setIkenshoIraiRirekiNo(Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
-                keyJoho.add(key);
+        boolean batchflag = true;
+        if (状態.equals(DBE6020001StateName.検索.getName())) {
+            batchflag = false;
+        }
+        if (batchflag) {
+            for (dgIkenshoSakuseiJisseki_Row row : div.getDgIkenshoSakuseiJisseki().getDataSource()) {
+                if (row.getSelected()) {
+                    IkenshoJissekiIchiranKey key = new IkenshoJissekiIchiranKey();
+                    key.setShujiiIryoKikanCode(row.getCode());
+                    key.setShujiiCode(row.getShujiiCode());
+                    key.setShinseishoKanriNo(row.getShinseishoKanriNo());
+                    key.setIkenshoIraiRirekiNo(Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()));
+                    keyJoho.add(key);
+                }
             }
         }
         param.setKeyJoho(keyJoho);
@@ -182,6 +187,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         param.setHokensyaName(div.getCcdHokensya().getSelectedItem().get市町村名称());
         param.setShokisaiHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
+        param.setBatchFlag(batchflag);
         return param;
     }
 

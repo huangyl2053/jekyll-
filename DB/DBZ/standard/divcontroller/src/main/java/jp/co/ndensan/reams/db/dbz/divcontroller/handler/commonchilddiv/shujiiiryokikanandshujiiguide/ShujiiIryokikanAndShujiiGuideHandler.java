@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -49,6 +49,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
+            div.setMode_TaishoMode(TaishoMode.getEnum(dataPassModel.get対象モード().toString()));
         }
         div.getKensakuKekkaIchiran().getDgKensakuKekkaIchiran().setDataSource(null);
     }
@@ -67,29 +68,24 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
      */
     public void setDataGrid(List<ShujiiIryokikanAndShujii> list) {
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
-        if (!list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                ShujiiIryokikanAndShujii business = list.get(i);
-                dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
-                kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get主治医医療機関コード()));
-                kensakuKekkaIchiran_Row.setIryoKikanMeisho(nullToEmpty(business.get主治医医療機関名称()));
-                kensakuKekkaIchiran_Row.setIryoKikanKanaMeisho(nullToEmpty(business.get主治医医療機関カナ()));
-                kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
-                kensakuKekkaIchiran_Row.setIryoKikantelNo(nullToEmpty(business.get主治医医療機関情報_電話番号()));
-                kensakuKekkaIchiran_Row.setIryoKikanJokyo(business.is主治医医療機関情報_状況フラグ()
-                        ? new RString("有効") : new RString("無効"));
-                kensakuKekkaIchiran_Row.getShujiiCode().setValue(nullToEmpty(business.get主治医コード()));
-                kensakuKekkaIchiran_Row.setShujiiShimei(nullToEmpty(business.get主治医氏名()));
-                kensakuKekkaIchiran_Row.setShujiiKanaMeisho(nullToEmpty(business.get主治医カナ()));
-                kensakuKekkaIchiran_Row.setShujiiJoukyo(business.is主治医情報_状況フラグ()
-                        ? new RString("有効") : new RString("無効"));
-                if (!business.is主治医医療機関情報_状況フラグ() || !business.is主治医情報_状況フラグ()) {
-                    kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
-                }
-                kensakuKekkaIchiran_Row.setIryoKikanYubinBango(business.get主治医医療機関情報_郵便番号());     
-                kensakuKekkaIchiran_Row.setShujiiShichosonCode(business.get市町村コード());
-                kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
-            }
+        for (int i = 0; i < list.size(); i++) {
+            ShujiiIryokikanAndShujii business = list.get(i);
+            dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
+            kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get主治医医療機関コード()));
+            kensakuKekkaIchiran_Row.setIryoKikanMeisho(nullToEmpty(business.get主治医医療機関名称()));
+            kensakuKekkaIchiran_Row.setIryoKikanKanaMeisho(nullToEmpty(business.get主治医医療機関カナ()));
+            kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
+            kensakuKekkaIchiran_Row.setIryoKikantelNo(nullToEmpty(business.get主治医医療機関情報_電話番号()));
+            kensakuKekkaIchiran_Row.setIryoKikanJokyo(business.is主治医医療機関情報_状況フラグ()
+                    ? new RString("有効") : new RString("無効"));
+            kensakuKekkaIchiran_Row.getShujiiCode().setValue(nullToEmpty(business.get主治医コード()));
+            kensakuKekkaIchiran_Row.setShujiiShimei(nullToEmpty(business.get主治医氏名()));
+            kensakuKekkaIchiran_Row.setShujiiKanaMeisho(nullToEmpty(business.get主治医カナ()));
+            kensakuKekkaIchiran_Row.setShujiiJoukyo(business.is主治医情報_状況フラグ()
+                    ? new RString("有効") : new RString("無効"));
+            kensakuKekkaIchiran_Row.setIryoKikanYubinBango(business.get主治医医療機関情報_郵便番号());
+            kensakuKekkaIchiran_Row.setShujiiShichosonCode(business.get市町村コード());
+            kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
         }
         div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
     }

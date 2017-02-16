@@ -63,7 +63,9 @@ public class SeikatsuhogoTorokuHandler {
         div.getCcdZenkokuJushoInput().initialize();
         if (ninteiTandokuDounyuFlag) {
             ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setVisible(false);
+            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
             ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
+            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtJusho().setLabelLWidth(new RString("S"));
             div.getBtnAtenaKensaku().setVisible(false);
         }
         List<KeyValueDataSource> sourceList = new ArrayList<>();

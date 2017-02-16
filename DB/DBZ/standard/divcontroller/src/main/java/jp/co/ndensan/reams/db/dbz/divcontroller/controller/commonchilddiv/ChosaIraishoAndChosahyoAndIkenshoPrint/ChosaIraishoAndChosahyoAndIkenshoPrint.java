@@ -411,10 +411,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         }
 
         List<RString> 調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
-        if (調査票選択selectedKeys.contains(KEY0)) {
+        if (調査票選択selectedKeys.contains(KEY0) && 調査票選択selectedKeys.contains(KEY1)) {
+            call認定調査票両面_概況AND基本調査(div, printService, 保険者市町村コード);
+        } else if (調査票選択selectedKeys.contains(KEY0)) {
             call認定調査票_概況調査(div, printService, 保険者市町村コード);
-        }
-        if (調査票選択selectedKeys.contains(KEY1)) {
+        } else if (調査票選択selectedKeys.contains(KEY1)) {
             call認定調査票_基本調査(div, printService, 保険者市町村コード);
         }
         if (調査票選択selectedKeys.contains(KEY2)) {
@@ -500,12 +501,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
     private void call認定調査票両面_概況AND基本調査(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div,
             ChosaIraishoAndChosahyoAndIkenshoPrintService printService, RString 保険者市町村コード) {
-        RString 帳票ID = DbBusinessConfig.get(
+        RString 帳票ID_表 = DbBusinessConfig.get(
                 ConfigNameDBE.認定調査票_概況基本_帳票ID_表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        if (ReportIdDBZ.DBE221001.getReportId().value().equals(帳票ID)) {
-            printService.print認定調査票_概況調査(getHandler(div).create認定調査票_概況調査パラメータ(), new ReportId(帳票ID));
-        } else if (ReportIdDBZ.DBE221011.getReportId().value().equals(帳票ID)) {
-            printService.print認定調査票_両面(getHandler(div).create認定調査票_概況調査パラメータ(), 帳票ID);
+        RString 帳票ID_裏 = DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票_概況基本_帳票ID_裏, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (!帳票ID_表.equals(帳票ID_裏)) {
+            call認定調査票_概況調査(div, printService, 保険者市町村コード);
+            call認定調査票_基本調査(div, printService, 保険者市町村コード);
+        } else if (ReportIdDBZ.DBE221001.getReportId().value().equals(帳票ID_表)) {
+            printService.print認定調査票_概況調査(getHandler(div).create認定調査票_概況調査パラメータ(), new ReportId(帳票ID_表));
+        } else {
+            printService.print認定調査票_両面(getHandler(div).create認定調査票_概況調査パラメータ(), 帳票ID_表);
         }
     }
 
@@ -521,14 +527,21 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             ChosaIraishoAndChosahyoAndIkenshoPrintService printService, RString 保険者市町村コード) {
         RString 帳票ID = DbBusinessConfig.get(
                 ConfigNameDBE.認定調査票_概況基本_帳票ID_表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        printService.print認定調査票_概況調査(getHandler(div).create認定調査票_概況調査パラメータ(), new ReportId(帳票ID));
-
+        if (ReportIdDBZ.DBE221012.getReportId().value().equals(帳票ID)) {
+            printService.print認定調査票_片面(getHandler(div).create認定調査票_概況調査パラメータ(), 1);
+        } else {
+            printService.print認定調査票_概況調査(getHandler(div).create認定調査票_概況調査パラメータ(), new ReportId(帳票ID));
+        }
     }
 
     private void call認定調査票_基本調査(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService, RString 保険者市町村コード) {
         RString 帳票ID = DbBusinessConfig.get(
-                ConfigNameDBE.認定調査票_概況基本_帳票ID_表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        printService.print認定調査票_基本調査(getHandler(div).create認定調査票_基本調査パラメータ(), new ReportId(帳票ID));
+                ConfigNameDBE.認定調査票_概況基本_帳票ID_裏, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
+        if (ReportIdDBZ.DBE221012.getReportId().value().equals(帳票ID)) {
+            printService.print認定調査票_片面(getHandler(div).create認定調査票_概況調査パラメータ(), 2);
+        } else {
+            printService.print認定調査票_基本調査(getHandler(div).create認定調査票_基本調査パラメータ(), new ReportId(帳票ID));
+        }
     }
 
     private void call認定調査票_特記事項(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div,

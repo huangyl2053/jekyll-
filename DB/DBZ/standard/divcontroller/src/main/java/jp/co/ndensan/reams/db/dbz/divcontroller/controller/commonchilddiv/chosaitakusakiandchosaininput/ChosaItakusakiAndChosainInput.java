@@ -88,6 +88,7 @@ public class ChosaItakusakiAndChosainInput {
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_BtnChosaItakusakiGuide(ChosaItakusakiAndChosainInputDiv div) {
         KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
         modle.set市町村コード(div.getHdnShichosonCode());
+        modle.set委託先コード(div.getTxtChosaItakusakiCode().getValue());
         modle.set対象モード(new RString(TaishoMode.Itakusaki.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
         return ResponseData.of(div).respond();

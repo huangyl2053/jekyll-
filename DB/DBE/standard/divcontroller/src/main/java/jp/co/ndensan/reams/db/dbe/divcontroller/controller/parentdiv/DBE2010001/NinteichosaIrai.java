@@ -90,7 +90,6 @@ public class NinteichosaIrai {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString UIコンテナID_DBEUC22001 = new RString("DBEUC22001");
     private static final RString 修正 = new RString("Modified");
-    private static final RString FW_VALUE_BATCH = new RString("Batch");
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
@@ -232,7 +231,6 @@ public class NinteichosaIrai {
         handler.set手動割付時使用可否(true);
         handler.clear認定調査依頼登録パネル();
         handler.set認定調査依頼登録パネル();
-        requestDiv.getCcdItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
         requestDiv.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().setDisabled(true);
         requestDiv.getCcdItakusakiAndChosainInput().getTxtChosainCode().setDisabled(true);
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.手動割付内容入力);
@@ -435,7 +433,6 @@ public class NinteichosaIrai {
             }
 
             for (dgNinteiTaskList_Row row : ModifyList) {
-
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 RString 認定調査依頼履歴番号 = row.getNinteichosaIraiRirekiNo();
                 Code 厚労省IF識別コード = new Code(row.getKoroshoIfShikibetsuCode());

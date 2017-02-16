@@ -79,7 +79,8 @@ public class DBE514001_ShinsakaiScheduleParameter extends BatchParameterBase {
         return new KaigoNinteiShinsakaiScheduleProcessParamter(shinsakaiKaisaiKikanFrom,
                 shinsakaiKaisaiKikanTo,
                 nendo,
-                chohyoShutsuryokuKubun);
+                chohyoShutsuryokuKubun,
+                shinsakaiIinCodeList);
     }
 
     /**

@@ -66,6 +66,8 @@ public class NinteiShinseiRenrakusakiJoho {
         div.getDgRenrakusakiIchiran().setReadOnly(true);
         div.getBtnFukushaTsuika().setDisabled(false);
         div.getBtnKakutei().setDisabled(true);
+        div.getDdlRenrakusakiKubun().setDisabled(false);
+        div.getDdlTsuzukigara().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
