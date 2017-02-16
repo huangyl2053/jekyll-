@@ -37,7 +37,7 @@ public class HokenshaListLoader {
                 return KaigoNinteiHokenshaListLoader.createInstance().getShichosonCodeNameList();
             default:
                 return jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader
-                        .createInstance().getShichosonCodeNameList(gyomuBunrui); // 呼び出し元で業務分類つかってない
+                        .createInstance().getShichosonCodeNameList(gyomuBunrui); 
         }
     }
 }
