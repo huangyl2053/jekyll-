@@ -28,6 +28,7 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
     private final boolean 東芝版フラグ;
     private final boolean 法改正後フラグ;
     private final boolean センター送信運用有無フラグ;
+    private final boolean 情報提供同意有無フラグ;
 
     /**
      * コンストラクタです。
@@ -50,6 +51,7 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
         this.東芝版フラグ = 東芝版フラグ;
         this.法改正後フラグ = false;
         this.センター送信運用有無フラグ = false;
+        this.情報提供同意有無フラグ = false;
     }
 
     /**
@@ -62,6 +64,7 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
      * @param 東芝版フラグ 東芝版フラグ
      * @param 法改正後フラグ 法改正後フラグ
      * @param センター送信運用有無フラグ センター送信運用有無フラグ
+     * @param 情報提供同意有無フラグ 情報提供同意有無フラグ
      */
     public RenkeiDataTorikomiProcessParamter(RString 市町村コード,
             List<RString> 取込み対象ファイルリスト,
@@ -69,7 +72,8 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
             boolean 厚労省フラグ,
             boolean 東芝版フラグ,
             boolean 法改正後フラグ,
-            boolean センター送信運用有無フラグ) {
+            boolean センター送信運用有無フラグ,
+            boolean 情報提供同意有無フラグ) {
         this.市町村コード = 市町村コード;
         this.取込み対象ファイルリスト = 取込み対象ファイルリスト;
         this.申請情報データリスト = 申請情報データリスト;
@@ -77,6 +81,7 @@ public class RenkeiDataTorikomiProcessParamter implements IBatchProcessParameter
         this.東芝版フラグ = 東芝版フラグ;
         this.法改正後フラグ = 法改正後フラグ;
         this.センター送信運用有無フラグ = センター送信運用有無フラグ;
+        this.情報提供同意有無フラグ = 情報提供同意有無フラグ;
     }
 
     /**

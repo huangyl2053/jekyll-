@@ -83,6 +83,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     private static final RString SJIS = new RString("1");
     private static final RString UTF8 = new RString("2");
     private static final RString センター送信運用有 = new RString("1");
+    private static final RString 情報提供_同意有無_初期設定_同意する = new RString("1");
     private RString path;
     private RString 認定申請ファイル;
     private RString 主治医情報ファイル;
@@ -129,6 +130,12 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
                 getParameter().setセンター送信運用有無フラグ(true);
             } else {
                 getParameter().setセンター送信運用有無フラグ(false);
+            }
+            if (情報提供_同意有無_初期設定_同意する.equals(
+                    DbBusinessConfig.get(ConfigNameDBE.情報提供_同意有無_初期設定, 基準日, SubGyomuCode.DBE認定支援, getParameter().get市町村コード()))) {
+                getParameter().set情報提供同意有無フラグ(true);
+            } else {
+                getParameter().set情報提供同意有無フラグ(false);
             }
             主治医情報ファイル = Path.combinePath(path, 主治医情報ファイル名);
             医療機関ファイル = Path.combinePath(path, 医療機関ファイル名);

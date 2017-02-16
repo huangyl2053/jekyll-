@@ -86,13 +86,15 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         dbT5121Writer.insert(business.getDbT5121Entity(entity));
         dbT5120Writer.insert(business.getDbT5120Entity(entity, processParamter));
         if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.職権.getコード())) {
-            dbT5105Writer.insert(business.getDbT5105Entity(entity, processParamter));
+            dbT5105Writer.insert(business.getDbT5105Entity(entity, false, processParamter));
         } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
-            dbT5105Writer.insert(business.getDbT5105Entity(entity, processParamter));
+            dbT5105Writer.insert(business.getDbT5105Entity(entity, false, processParamter));
             dbT5129Writer.insert(business.getDbT5129Entity(entity));
         } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
-            dbT5105Writer.insert(business.getDbT5105Entity(entity, processParamter));
+            dbT5105Writer.insert(business.getDbT5105Entity(entity, false, processParamter));
             dbT5130Writer.insert(business.getDbT5130Entity(entity));
+        } else {
+            dbT5105Writer.insert(business.getDbT5105Entity(entity, true, processParamter));
         }
     }
 }
