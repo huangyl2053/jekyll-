@@ -24,12 +24,12 @@ var DBZ;
                 return "onClose_btnShinsakaiIinGuide";
             };
 
-            Events.onClick_btnModoru = function () {
-                return "onClick_btnModoru";
-            };
-
             Events.onClick_btnToroku = function () {
                 return "onClick_btnToroku";
+            };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
             };
 
             Events.onClick_btnKakutei = function () {
@@ -95,12 +95,12 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblShozokuKikan"));
             };
 
-            Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            };
-
             Controls.prototype.btnToroku = function () {
                 return new UZA.Button(this.convFiledName("btnToroku"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
             };
 
             Controls.prototype.btnKakutei = function () {

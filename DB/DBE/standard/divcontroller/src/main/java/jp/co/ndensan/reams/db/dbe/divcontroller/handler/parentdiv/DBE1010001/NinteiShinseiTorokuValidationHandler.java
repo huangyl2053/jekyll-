@@ -177,7 +177,7 @@ public class NinteiShinseiTorokuValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (!div.getServiceDel().getTxtServiceDeleteRiyu().getValue().isEmpty()
                 && (!div.getTxtTorisageJiyu().getValue().isNullOrEmpty()
-                || !div.getTxtTorisageDate().getValue().toDateString().isNullOrEmpty()
+                || !(div.getTxtTorisageDate().getValue() != null && div.getTxtTorisageDate().getValue().toDateString().isNullOrEmpty())
                 || !div.getDdlTorisageJiyu().getSelectedValue().isNullOrEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請サービス削除と取下理由は同時存在));
         }

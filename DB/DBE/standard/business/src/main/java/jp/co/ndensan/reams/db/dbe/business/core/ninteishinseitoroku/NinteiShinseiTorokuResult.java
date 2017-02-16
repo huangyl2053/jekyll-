@@ -281,6 +281,15 @@ public class NinteiShinseiTorokuResult {
     }
 
     /**
+     * 却下年月日を取得します。
+     *
+     * @return 却下年月日
+     */
+    public FlexibleDate get却下年月日() {
+        return entity.get却下年月日();
+    }
+
+    /**
      * 入所施設コードを取得します。
      *
      * @return 入所施設コード
@@ -431,6 +440,15 @@ public class NinteiShinseiTorokuResult {
      */
     public RString get取下理由() {
         return entity.get取下理由();
+    }
+    
+    /**
+     * 却下理由を取得します。
+     *
+     * @return 却下理由
+     */
+    public RString get却下理由() {
+        return entity.get却下理由();
     }
     
     /**

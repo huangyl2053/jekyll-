@@ -4,30 +4,30 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShin
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * JogaiShinsainJoho のクラスファイル
  *
  * @reamsid_L DBZ-1300-040 dongyabin
  */
-public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv, IDialogDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,10 +38,10 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     private ShinsakaiIinIchiranDiv ShinsakaiIinIchiran;
     @JsonProperty("ShinsakaiIinJoho")
     private ShinsakaiIinJohoDiv ShinsakaiIinJoho;
-    @JsonProperty("btnModoru")
-    private Button btnModoru;
     @JsonProperty("btnToroku")
     private Button btnToroku;
+    @JsonProperty("btnModoru")
+    private Button btnModoru;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("hdnShokisaiHokenshaNo")
@@ -100,24 +100,6 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     /*
-     * getbtnModoru
-     * @return btnModoru
-     */
-    @JsonProperty("btnModoru")
-    public Button getBtnModoru() {
-        return btnModoru;
-    }
-
-    /*
-     * setbtnModoru
-     * @param btnModoru btnModoru
-     */
-    @JsonProperty("btnModoru")
-    public void setBtnModoru(Button btnModoru) {
-        this.btnModoru = btnModoru;
-    }
-
-    /*
      * getbtnToroku
      * @return btnToroku
      */
@@ -133,6 +115,24 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     @JsonProperty("btnToroku")
     public void setBtnToroku(Button btnToroku) {
         this.btnToroku = btnToroku;
+    }
+
+    /*
+     * getbtnModoru
+     * @return btnModoru
+     */
+    @JsonProperty("btnModoru")
+    public Button getBtnModoru() {
+        return btnModoru;
+    }
+
+    /*
+     * setbtnModoru
+     * @param btnModoru btnModoru
+     */
+    @JsonProperty("btnModoru")
+    public void setBtnModoru(Button btnModoru) {
+        this.btnModoru = btnModoru;
     }
 
     /*
@@ -297,11 +297,11 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
+        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
     }
 
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+    public void setMode_ShoriType( ShoriType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
     }
 
     /*
@@ -313,7 +313,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setBtnShinkiTsuika(Button btnShinkiTsuika) {
+    public void  setBtnShinkiTsuika(Button btnShinkiTsuika) {
         this.getShinsakaiIinIchiran().setBtnShinkiTsuika(btnShinkiTsuika);
     }
 
@@ -323,7 +323,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
+    public void  setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
         this.getShinsakaiIinIchiran().setDgShinsakaiIinIchiran(dgShinsakaiIinIchiran);
     }
 
@@ -333,7 +333,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiIinCode(TextBox txtShinsakaiIinCode) {
+    public void  setTxtShinsakaiIinCode(TextBox txtShinsakaiIinCode) {
         this.getShinsakaiIinJoho().setTxtShinsakaiIinCode(txtShinsakaiIinCode);
     }
 
@@ -343,7 +343,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
+    public void  setBtnShinsakaiIinGuide(ButtonDialog btnShinsakaiIinGuide) {
         this.getShinsakaiIinJoho().setBtnShinsakaiIinGuide(btnShinsakaiIinGuide);
     }
 
@@ -353,7 +353,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiIinName(TextBox txtShinsakaiIinName) {
+    public void  setTxtShinsakaiIinName(TextBox txtShinsakaiIinName) {
         this.getShinsakaiIinJoho().setTxtShinsakaiIinName(txtShinsakaiIinName);
     }
 
@@ -363,7 +363,7 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setDgShozokuKikanIchiran(DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran) {
+    public void  setDgShozokuKikanIchiran(DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran) {
         this.getShinsakaiIinJoho().setDgShozokuKikanIchiran(dgShozokuKikanIchiran);
     }
 
@@ -373,10 +373,11 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public void setLblShozokuKikan(Label lblShozokuKikan) {
+    public void  setLblShozokuKikan(Label lblShozokuKikan) {
         this.getShinsakaiIinJoho().setLblShozokuKikan(lblShozokuKikan);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }

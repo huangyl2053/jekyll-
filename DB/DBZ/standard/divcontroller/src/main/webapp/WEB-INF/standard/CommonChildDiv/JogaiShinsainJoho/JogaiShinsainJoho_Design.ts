@@ -28,12 +28,12 @@ module DBZ {
                 return "onClose_btnShinsakaiIinGuide";
             }
 
-            public static onClick_btnModoru(): string {
-                return "onClick_btnModoru";
-            }
-
             public static onClick_btnToroku(): string {
                 return "onClick_btnToroku";
+            }
+
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
             }
 
             public static onClick_btnKakutei(): string {
@@ -101,12 +101,12 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblShozokuKikan"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
-            }
-
             public btnToroku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnToroku"));
+            }
+
+            public btnModoru(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
             public btnKakutei(): UZA.Button {

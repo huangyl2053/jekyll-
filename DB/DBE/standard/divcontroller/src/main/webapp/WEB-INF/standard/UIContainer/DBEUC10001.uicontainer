@@ -87,6 +87,20 @@
      "eventName": "完了状態",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "再検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "要介護認定申請検索",
+     "toState": "default"
     }
    ]
   }
