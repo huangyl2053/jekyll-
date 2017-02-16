@@ -15,6 +15,7 @@ import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
@@ -39,9 +40,65 @@ public class HokenshaListDivHandler {
     }
 
     /**
-     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。 また、共有子Div内に、取得した保険者のリストを保持します。
+     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
+     * また、共有子Div内に、取得した保険者のリストを保持します。
      */
-    void loadAndHoldHokenshaList(GyomuBunrui 業務分類, boolean 全市町村の表示有無) {
+    void loadAndHoldHokenshaList(GyomuBunrui 業務分類) {
+        List<HokenshaSummary> hokenshaList = getHokenshaList(業務分類);
+
+        List<KeyValueDataSource> list = new ArrayList<>();
+
+        if (1 < hokenshaList.size()) {
+            list.add(new KeyValueDataSource(ALL_SHICHOSON_KEY, ALL_SHICHOSON_VALUE));
+        }
+        createMaping(hokenshaList, list);
+    }
+
+    /**
+     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
+     * また、共有子Div内に、取得した保険者のリストを保持します。
+     */
+    void loadAndHoldHokenshaList(GyomuBunrui 業務分類, HokenshaDDLPattem 保険者パターン) {
+        List<HokenshaSummary> hokenshaList = getHokenshaList(業務分類);
+
+        List<KeyValueDataSource> list = new ArrayList<>();
+
+        List<HokenshaSummary> chokenshaList = new ArrayList<>();
+        if (1 < hokenshaList.size()) {
+            for (HokenshaSummary s : hokenshaList) {
+                if (s.get保険者区分().getコード().equals(保険者パターン.code())) {
+                    chokenshaList.add(s);
+                }
+            }
+            createMaping(chokenshaList, list);
+        } else {
+            createMaping(hokenshaList, list);
+        }
+    }
+
+    /**
+     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
+     * また、共有子Div内に、取得した保険者のリストを保持します。
+     */
+    void loadAndHoldHokenshaList(GyomuBunrui 業務分類, RString 証記載保険者番号) {
+        List<HokenshaSummary> hokenshaList = getHokenshaList(業務分類);
+
+        List<KeyValueDataSource> list = new ArrayList<>();
+
+        List<HokenshaSummary> chokenshaList = new ArrayList<>();
+        if (1 < hokenshaList.size()) {
+            for (HokenshaSummary s : hokenshaList) {
+                if (s.get証記載保険者番号().value().equals(証記載保険者番号)) {
+                    chokenshaList.add(s);
+                }
+            }
+            createMaping(chokenshaList, list);
+        } else {
+            createMaping(hokenshaList, list);
+        }
+    }
+
+    private List<HokenshaSummary> getHokenshaList(GyomuBunrui 業務分類) {
         List<HokenshaSummary> hokenshaList = new ArrayList<>(
                 HokenshaListLoader.createInstance()
                 .getShichosonCodeNameList(業務分類)
@@ -56,13 +113,10 @@ public class HokenshaListDivHandler {
                         Comparators.<LasdecCode>naturalOrder());
             }
         });
+        return hokenshaList;
+    }
 
-        List<KeyValueDataSource> list = new ArrayList<>();
-
-        if (全市町村の表示有無 && 1 < hokenshaList.size()) {
-            list.add(new KeyValueDataSource(ALL_SHICHOSON_KEY, ALL_SHICHOSON_VALUE));
-        }
-
+    private void createMaping(List<HokenshaSummary> hokenshaList, List<KeyValueDataSource> list) {
         Map<RString, HokenshaSummary> map = new HashMap<>();
         for (HokenshaSummary s : hokenshaList) {
             RString key = new RString(UUID.randomUUID().toString());
@@ -123,8 +177,8 @@ public class HokenshaListDivHandler {
     /**
      * ddlHokenshaListで選択されている市町村名に該当する保険者の情報を{@link HokenshaSummary}の形で返却します。
      *
-     * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}. 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
-     * @throws {@link #loadAndHoldHokenshaList()} により、共有子Divの保険者情報が設定されていない場合
+     * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}.
+     * 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
      */
     public HokenshaSummary getSelectedItemAsHokenshaSummary() {
         if (!ShichosonListHolder.hasShichosonList(div)) {

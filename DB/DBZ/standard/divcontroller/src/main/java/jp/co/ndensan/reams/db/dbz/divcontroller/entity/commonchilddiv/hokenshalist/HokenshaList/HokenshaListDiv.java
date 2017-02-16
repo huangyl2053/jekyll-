@@ -4,14 +4,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshal
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * HokenshaList のクラスファイル
@@ -19,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  * @author 自動生成
  */
 public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
     /*
      * [ private の作成 ]
@@ -61,18 +65,24 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     }
 
     @Override
-    public HokenshaSummary getSelectedItem() {
-        return this.createHandler().getSelectedItemAsHokenshaSummary();
-    }
-
-    private HokenshaListDivHandler createHandler() {
-        return new HokenshaListDivHandler(this);
+    public void loadHokenshaList(GyomuBunrui 業務分類) {
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類));
+        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
+            this.ddlHokenshaList.setSelectedIndex(0);
+        }
     }
 
     @Override
-    public void loadHokenshaList(GyomuBunrui 業務分類) {
-//        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類));
-        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類), true);
+    public void loadHokenshaList(GyomuBunrui 業務分類, HokenshaDDLPattem 保険者DDLパターン) {
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類), Objects.requireNonNull(保険者DDLパターン));
+        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
+            this.ddlHokenshaList.setSelectedIndex(0);
+        }
+    }
+
+    @Override
+    public void loadHokenshaList(GyomuBunrui 業務分類, RString 証記載保険者番号) {
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類), Objects.requireNonNull(証記載保険者番号));
         if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
             this.ddlHokenshaList.setSelectedIndex(0);
         }
@@ -84,16 +94,17 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     }
 
     @Override
-    public void loadHokenshaList(GyomuBunrui 業務分類, boolean 全市町村表示有無) {
-        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類),
-                Objects.requireNonNull(全市町村表示有無));
-        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
-            this.ddlHokenshaList.setSelectedIndex(0);
-        }
-    }
-
-    @Override
     public void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
         this.createHandler().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
     }
+
+    @Override
+    public HokenshaSummary getSelectedItem() {
+        return this.createHandler().getSelectedItemAsHokenshaSummary();
+    }
+
+    private HokenshaListDivHandler createHandler() {
+        return new HokenshaListDivHandler(this);
+    }
+
 }
