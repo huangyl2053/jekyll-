@@ -1370,6 +1370,9 @@
         rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
         INNER JOIN
+	rgdb."DbT5115Image" T5115 
+        ON T5115."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN
         (
         select
         *
@@ -1417,8 +1420,7 @@
         FROM
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
         WHERE
-        T5205."tokkijikoTextImageKubun" = '2'
-        AND T5205."genponMaskKubun" = '2'
+        T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
         AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
         )
         LEFT JOIN
@@ -1432,6 +1434,7 @@
         rgdb."DbT5305IkenshoImageJoho" T5305b
         WHERE
         T5305."iraiRirekiNo" <![CDATA[ < ]]> T5305b."iraiRirekiNo"
+        AND T5305b."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         LEFT JOIN
@@ -1444,6 +1447,7 @@
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
         WHERE
         T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
+        AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo" 
         <if test = "市町村コード.toString() != ''.toString()">
@@ -1558,8 +1562,7 @@
         FROM
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
         WHERE
-        T5205."tokkijikoTextImageKubun" = '2'
-        AND T5205."genponMaskKubun" = '2'
+        T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
         AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
         )
         LEFT JOIN
@@ -1573,6 +1576,7 @@
         rgdb."DbT5305IkenshoImageJoho" T5305b
         WHERE
         T5305."iraiRirekiNo" <![CDATA[ < ]]> T5305b."iraiRirekiNo"
+        AND T5305b."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         LEFT JOIN
@@ -1585,6 +1589,7 @@
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
         WHERE
         T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
+        AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo" 
         <if test = "市町村コード.toString() != ''.toString()">

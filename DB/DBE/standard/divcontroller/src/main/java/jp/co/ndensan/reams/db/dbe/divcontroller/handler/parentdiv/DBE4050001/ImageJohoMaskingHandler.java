@@ -323,7 +323,8 @@ public class ImageJohoMaskingHandler {
         if (row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
             new File(row.getEditImagePath().toString()).delete();
             row.setEditImagePath(RString.EMPTY);
-        } else if (row.getState().equals(状態_削除)) {
+        }
+        if (!row.getMaskImagePath().isEmpty()) {
             row.setHasMask(マスク有);
         }
         row.setState(RString.EMPTY);
@@ -428,8 +429,15 @@ public class ImageJohoMaskingHandler {
                     || row.getImageName().equals(マスク有りイメージ一覧.E0002.getイメージ日本語名称())) {
 
                 int 主治医意見書作成依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-                Code 帳票分類ID = new Code(ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class));
-
+                RString 帳票ID = ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class);
+                Code 帳票分類ID;
+                if (帳票ID.equals(new RString("701")) || 帳票ID.equals(new RString("702"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("701") : new Code("702");
+                } else if (帳票ID.equals(new RString("121")) || 帳票ID.equals(new RString("122"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("1222");
+                } else {
+                    帳票分類ID = new Code(帳票ID);
+                }
                 IkenshoImageJoho imageJoho = new IkenshoImageJoho(
                         申請書管理番号,
                         主治医意見書作成依頼履歴番号,
@@ -471,7 +479,15 @@ public class ImageJohoMaskingHandler {
             } else if (row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称())
                     || row.getImageName().equals(マスク有りイメージ一覧.E0002.getイメージ日本語名称())) {
                 int 主治医意見書作成依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-                Code 帳票分類ID = new Code(ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class));
+                RString 帳票ID = ViewStateHolder.get(ViewStateKeys.帳票分類ID, RString.class);
+                Code 帳票分類ID;
+                if (帳票ID.equals(new RString("701")) || 帳票ID.equals(new RString("702"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("701") : new Code("702");
+                } else if (帳票ID.equals(new RString("121")) || 帳票ID.equals(new RString("122"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("1222");
+                } else {
+                    帳票分類ID = new Code(帳票ID);
+                }
                 IkenshoImageJohoManager dbt5305 = IkenshoImageJohoManager.createInstance();
                 IkenshoImageJoho imageJoho = dbt5305.get要介護認定意見書イメージ情報(
                         申請書管理番号,
