@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -42,6 +43,7 @@ public class DbT5301UpdateProcess extends BatchProcessBase<DbT5201NinteichosaIra
 
     @Override
     protected void process(DbT5201NinteichosaIraiJohoEntity entity) {
+        entity.setChosahyoTouShutsuryokuYMD(FlexibleDate.getNowDate());
         entity.setMobileDataShutsuryokuZumiFlag(MobileDataShutsuryokuFlag.出力済.isモバイルデータ出力());
         dbT5301SEntityWriter.update(entity);
     }

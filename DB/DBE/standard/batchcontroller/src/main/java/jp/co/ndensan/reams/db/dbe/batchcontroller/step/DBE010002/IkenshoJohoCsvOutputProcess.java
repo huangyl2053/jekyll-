@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -65,6 +66,8 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 出力条件タイトル_申請書管理番号 = new RString("【申請書管理番号】");
+    private static final RString スペース = new RString("　　　　　　　　　");
+    private static final Decimal 申請書管理番号の1行表示最大件数 = new Decimal(9);
 
     @BatchWriter
     private CsvWriter<DBE010003_IkenshoJoho09BEucEntity> csvWriter_09B;
@@ -209,7 +212,15 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
         List<RString> 申請書管理番号リスト = processParameter.get申請書管理番号リスト();
         builder.append(申請書管理番号リスト.get(0));
         for (int index = 1; index < 申請書管理番号リスト.size(); index++) {
-            builder.append(", ").append(申請書管理番号リスト.get(index));
+            if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ZERO)) {
+                builder.append(", ").append(申請書管理番号リスト.get(index)).append(", ");
+                出力条件.add(builder.toRString());
+                builder = new RStringBuilder().append(スペース);
+            } else if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ONE)) {
+                builder.append(申請書管理番号リスト.get(index));
+            } else {
+                builder.append(", ").append(申請書管理番号リスト.get(index));
+            }
         }
         出力条件.add(builder.toRString());
         Association association = AssociationFinderFactory.createInstance().getAssociation();

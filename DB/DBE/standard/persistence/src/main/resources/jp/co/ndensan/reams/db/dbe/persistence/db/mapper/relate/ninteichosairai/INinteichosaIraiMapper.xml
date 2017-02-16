@@ -26,158 +26,117 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
             resultType="int" fetchSize="500">
         SELECT
-        COALESCE(SUM(DbT5913ChosainJoho."chosaKanoNinzuPerMonth"), 0)
+            COALESCE(SUM(DbT5913ChosainJoho."chosaKanoNinzuPerMonth"), 0)
         FROM
-        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
-        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        INNER JOIN
-        rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
-        ON  DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        AND
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        <if test="地区コード.toString() == ''.toString() || 地区コード == NULL">
-            AND
-            (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
-        </if>
-        <if test="地区コード.toString() != ''.toString() and 地区コード != NULL">
-            AND
-            DbT5913ChosainJoho."chikuCode" = #{地区コード}
-        </if>
-        AND
-        DbT5913ChosainJoho."jokyoFlag" = TRUE
+            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+                ON DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+            INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+                ON DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+                   AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+                   <if test="地区コード == null or 地区コード.isEmpty()">
+                   AND (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
+                   </if>
+                   <if test="地区コード != null and !地区コード.isEmpty()">
+                   AND DbT5913ChosainJoho."chikuCode" = #{地区コード}
+                   </if>
+                   AND DbT5913ChosainJoho."jokyoFlag" = TRUE
         WHERE
-        DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
-        AND
-        DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
-        AND
-        DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+            DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
+            AND DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
+            AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
     </select>
     <select resultOrdered="true" id="select割付済人数"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
             resultType="int" fetchSize="500">
         SELECT
-        COUNT(0)
+            COUNT(0)
         FROM
-        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
-
-        INNER JOIN
-        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-        ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE
-
-        INNER JOIN
-        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
-        ON  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode"
-        AND
-        DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
-        AND
-        DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
-        AND
-        DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
-        ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-        INNER JOIN
-        rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
-        ON  DbT5913ChosainJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
-        AND
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode"
-        AND
-        DbT5913ChosainJoho."ninteiChosainCode" = DbT5201NinteichosaIraiJoho."ninteiChosainCode"
-        <if test="地区コード.toString() == ''.toString() || 地区コード == NULL">
-            AND
-            (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
-        </if>
-        <if test="地区コード.toString() != ''.toString() and 地区コード != NULL">
-            AND
-            DbT5913ChosainJoho."chikuCode" = #{地区コード}
-        </if>
-        AND
-        DbT5913ChosainJoho."jokyoFlag" = TRUE
+            rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201NinteichosaIraiJoho
+            INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+                ON DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                   AND DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE
+            INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+                ON DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode"
+                   AND DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
+                   AND DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
+                   AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+                ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+            INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+                ON DbT5913ChosainJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
+                   AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode"
+                   AND DbT5913ChosainJoho."ninteiChosainCode" = DbT5201NinteichosaIraiJoho."ninteiChosainCode"
+                   <if test="地区コード == null or 地区コード.isEmpty()">
+                   AND (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
+                   </if>
+                   <if test="地区コード != null and !地区コード.isEmpty()">
+                   AND DbT5913ChosainJoho."chikuCode" = #{地区コード}
+                   </if>
+                   AND DbT5913ChosainJoho."jokyoFlag" = TRUE
         WHERE
-        DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = (
-        SELECT MAX("DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo")
-        FROM rgdb."DbT5201NinteichosaIraiJoho"
-        WHERE "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo")
-        AND
-        substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 1, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
-        AND
-        DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
-        AND
-        DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
+            DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = (SELECT MAX("DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo")
+                                                                    FROM rgdb."DbT5201NinteichosaIraiJoho"
+                                                                    WHERE "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = DbT5201NinteichosaIraiJoho."shinseishoKanriNo")
+            AND substr(DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD", 1, 6) = TO_CHAR(CURRENT_TIMESTAMP, 'YYYYMM')
+            AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
+            AND DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
     </select>
     <select resultOrdered="true" id="select委託先調査員情報"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
             resultMap="resultMap_委託先調査員情報" fetchSize="500">
         SELECT
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode,
-        DbT5913ChosainJoho."ninteiChosainCode" AS ninteiChosainCode,
-        DbT5913ChosainJoho."chosaKanoNinzuPerMonth" AS chosaKanoNinzuPerMonth
+            DbT5913ChosainJoho."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode,
+            DbT5913ChosainJoho."ninteiChosainCode" AS ninteiChosainCode,
+            DbT5913ChosainJoho."chosaKanoNinzuPerMonth" AS chosaKanoNinzuPerMonth
         FROM
-        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
-        ON  DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
-        INNER JOIN
-        rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
-        ON  DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        AND
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        <if test="地区コード.toString() == ''.toString() || 地区コード == NULL">
-            AND
-            (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
-        </if>
-        <if test="地区コード.toString() != ''.toString() and 地区コード != NULL">
-            AND
-            DbT5913ChosainJoho."chikuCode" = #{地区コード}
-        </if>
-        AND
-        DbT5913ChosainJoho."jokyoFlag" = TRUE
+            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+                ON DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
+            INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+                ON DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+                   AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+                   <if test="地区コード == null or 地区コード.isEmpty()">
+                   AND (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR DbT5913ChosainJoho."chikuCode" IS NULL)
+                   </if>
+                   <if test="地区コード != null and !地区コード.isEmpty()">
+                   AND DbT5913ChosainJoho."chikuCode" = #{地区コード}
+                   </if>
+                   AND DbT5913ChosainJoho."jokyoFlag" = TRUE
         WHERE
-        DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
-        AND
-        DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
-        AND
-        DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+            DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
+            AND DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
+            AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
         ORDER BY
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode", DbT5913ChosainJoho."ninteiChosainCode"
+            DbT5913ChosainJoho."ninteiChosaItakusakiCode", DbT5913ChosainJoho."ninteiChosainCode"
     </select>
     <select resultOrdered="true" id="select認定調査委託先And調査員情報"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
             resultMap="resultMap_認定調査委託先And調査員情報" fetchSize="500">
         SELECT
-        DbT5910NinteichosaItakusakiJoho.*,
-        DbT5913ChosainJoho.*
+            DbT5910NinteichosaItakusakiJoho.*,
+            DbT5913ChosainJoho.*
         FROM
-        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
-        INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
-        ON  DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
-        INNER JOIN
-        rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
-        ON  DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        AND
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-        <if test="地区コード.toString() == ''.toString() || 地区コード == NULL">
-            AND
-            (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
-        </if>
-        <if test="地区コード.toString() != ''.toString() and 地区コード != NULL">
-            AND
-            DbT5913ChosainJoho."chikuCode" = #{地区コード}
-        </if>
-        AND
-        DbT5913ChosainJoho."jokyoFlag" = TRUE
+            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+                ON DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
+            INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+                ON DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+                   AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+                   <if test="地区コード == null or 地区コード.isEmpty()">
+                   AND (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
+                   </if>
+                   <if test="地区コード != null and !地区コード.isEmpty()">
+                   AND DbT5913ChosainJoho."chikuCode" = #{地区コード}
+                   </if>
+                   AND DbT5913ChosainJoho."jokyoFlag" = TRUE
         WHERE
-        DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
-        AND
-        DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
-        AND
-        DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+            DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
+            AND DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
+            AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
         ORDER BY
-        DbT5913ChosainJoho."ninteiChosaItakusakiCode", DbT5913ChosainJoho."ninteiChosainCode"
+            DbT5913ChosainJoho."ninteiChosaItakusakiCode",
+            DbT5913ChosainJoho."ninteiChosainCode"
     </select>
     <select resultOrdered="true" id="selectMax認定調査依頼履歴番号"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"

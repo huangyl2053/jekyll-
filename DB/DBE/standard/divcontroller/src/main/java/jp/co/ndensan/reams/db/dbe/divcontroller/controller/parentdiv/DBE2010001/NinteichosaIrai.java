@@ -90,7 +90,6 @@ public class NinteichosaIrai {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString UIコンテナID_DBEUC22001 = new RString("DBEUC22001");
     private static final RString 修正 = new RString("Modified");
-    private static final RString FW_VALUE_BATCH = new RString("Batch");
 
     /**
      * 完了処理・認定調査依頼に初期化を設定します。
