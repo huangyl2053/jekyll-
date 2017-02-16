@@ -319,7 +319,6 @@ public class NinteichosaIraiHandler {
         調査依頼モードの日付設定(row, business);
         if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())
                 || row.getChosaIraiKigen().getValue() == null
-                || row.getChosaIraishoHakkoDay().getValue() == null
                 || row.getChousahyoOutput().getValue() == null) {
             notUpdateCount++;
             row.setJotai(未);
