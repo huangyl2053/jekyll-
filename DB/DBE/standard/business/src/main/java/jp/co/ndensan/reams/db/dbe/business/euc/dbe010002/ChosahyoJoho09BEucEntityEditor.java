@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * 申請者調査票情報09BCSVエンティティ編集クラスです。
@@ -285,7 +286,9 @@ public final class ChosahyoJoho09BEucEntityEditor {
         eucEntity.set中間評価項目得点第４群(format得点(entity.getChukanHyokaKomoku4gun()));
         eucEntity.set中間評価項目得点第５群(format得点(entity.getChukanHyokaKomoku5gun()));
         eucEntity.set一次判定警告コード(
-                (entity.getIchijiHnateiKeikokuCode() != null && Integer.parseInt(entity.getIchijiHnateiKeikokuCode().toString()) == 0)
+                (entity.getIchijiHnateiKeikokuCode() != null
+                && NumberUtils.isNumber(entity.getIchijiHnateiKeikokuCode().toString())
+                && Integer.parseInt(entity.getIchijiHnateiKeikokuCode().toString()) == 0)
                 ? entity.getIchijiHnateiKeikokuCode() : RString.EMPTY);
         eucEntity.set状態の安定性コード(nullToEmpty(entity.getJotaiAnteiseiCode()));
         eucEntity.set状態の安定性((entity.getJotaiAnteiseiCode() != null && !entity.getJotaiAnteiseiCode().isEmpty())

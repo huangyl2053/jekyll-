@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * 申請者基本情報CSVエンティティ編集クラスです。
@@ -122,7 +123,9 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set処理状態区分((entity.getShoriJotaiKubun() != null && !entity.getShoriJotaiKubun().isEmpty())
                 ? ShoriJotaiKubun.toValue(entity.getShoriJotaiKubun().value()).get名称() : RString.EMPTY);
         eucEntity.set在宅or施設((entity.isShisetsuNyushoFlag()) ? ZaitakuShisetsuKubun.施設.get名称() : ZaitakuShisetsuKubun.在宅.get名称());
-        eucEntity.set入所施設コード((entity.getNyushoShisetsuCode() != null && Integer.parseInt(entity.getNyushoShisetsuCode().toString()) == 0)
+        eucEntity.set入所施設コード((entity.getNyushoShisetsuCode() != null
+                && NumberUtils.isNumber(entity.getNyushoShisetsuCode().toString())
+                && Integer.parseInt(entity.getNyushoShisetsuCode().toString()) == 0)
                 ? entity.getNyushoShisetsuCode().value() : RString.EMPTY);
         eucEntity.set入所施設名称(nullToEmpty(entity.getNyushoShisetsuMeisho()));
         eucEntity.set連絡先氏名(nullToEmpty(entity.getRenrakusakiShimei()));

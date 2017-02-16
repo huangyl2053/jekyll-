@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho02AEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho06AEucEntityEditor;
@@ -24,6 +25,11 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -35,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -57,6 +64,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
     private static final RString CSV_FILE_NAME_99A = new RString("申請者意見書情報99A.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString 出力条件タイトル_申請書管理番号 = new RString("【申請書管理番号】");
 
     @BatchWriter
     private CsvWriter<DBE010003_IkenshoJoho09BEucEntity> csvWriter_09B;
@@ -171,6 +179,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
 
     @Override
     protected void afterExecute() {
+        output出力条件表();
         csvWriter_09B.close();
         csvWriter_09A.close();
         csvWriter_06A.close();
@@ -191,5 +200,30 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
         if (exist99A) {
             fileSpoolManager.spool(filePath_99A);
         }
+    }
+
+    private void output出力条件表() {
+        List<RString> 出力条件 = new ArrayList();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(出力条件タイトル_申請書管理番号);
+        List<RString> 申請書管理番号リスト = processParameter.get申請書管理番号リスト();
+        builder.append(申請書管理番号リスト.get(0));
+        for (int index = 1; index < 申請書管理番号リスト.size(); index++) {
+            builder.append(", ").append(申請書管理番号リスト.get(index));
+        }
+        出力条件.add(builder.toRString());
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        EucFileOutputJokenhyoItem 帳票出力条件
+                = new EucFileOutputJokenhyoItem(
+                        new RString("申請者意見書情報.csv"),
+                        association.getLasdecCode_().getColumnValue(),
+                        association.get市町村名(),
+                        new RString(JobContextHolder.getJobId()),
+                        new RString("ShinseishaIkenshoJoho.csv"),
+                        EUC_ENTITY_ID.toRString(),
+                        new RString(csvWriter_09B.getCount() + csvWriter_09A.getCount()
+                                + csvWriter_06A.getCount() + csvWriter_02A.getCount() + csvWriter_99A.getCount()),
+                        出力条件);
+        OutputJokenhyoFactory.createInstance(帳票出力条件).print();
     }
 }
