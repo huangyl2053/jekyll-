@@ -346,13 +346,97 @@
     <select resultOrdered="true" id="select意見書情報" resultMap="resultMap_IkenshoJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter" fetchSize="1000">
         SELECT
-            *
+            "DbT5101NinteiShinseiJoho"."shinseishoKanriNo",
+            "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo",
+            "DbT7051KoseiShichosonMaster"."shichosonMeisho",
+            "DbT5101NinteiShinseiJoho"."hihokenshaNo",
+            "DbT5101NinteiShinseiJoho"."hihokenshaName",
+            "DbT5101NinteiShinseiJoho"."seibetsu",
+            "DbT5101NinteiShinseiJoho"."seinengappiYMD",
+            "DbT5101NinteiShinseiJoho"."age",
+            "DbT5101NinteiShinseiJoho"."hihokenshaKubunCode",
+            "DbT5101NinteiShinseiJoho"."nigoTokuteiShippeiCode",
+            "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD",
+            "DbT5101NinteiShinseiJoho"."shienShinseiKubun",
+            "DbT5101NinteiShinseiJoho"."ninteiShinseiHoreiKubunCode",
+            "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode",
+            "DbT5101NinteiShinseiJoho"."shoriJotaiKubun",
+            "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode" AS "shinseiShujiiIryokikanCode",
+            "Shinsei_DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS "shinseiIryoKikanMeisho",
+            "DbT5101NinteiShinseiJoho"."shujiiCode" AS "shinseiShujiiCode",
+            "Shinsei_DbT5912ShujiiJoho"."shujiiName" AS "shinseiShujiiName",
+            "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiKubun",
+            "DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" AS "iraiShujiiIryokikanCode",
+            "Irai_DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS "iraiIryoKikanMeisho",
+            "DbT5301ShujiiIkenshoIraiJoho"."shujiiCode" AS "iraiShujiiCode",
+            "Irai_DbT5912ShujiiJoho"."shujiiName" AS "iraiShujiiName",
+            "DbT5301ShujiiIkenshoIraiJoho"."ishiKubunCode" AS "iraiIshiKubunCode",
+            "DbT5302ShujiiIkenshoJoho"."shujiiIryoKikanCode" AS "nyushuShujiiIryokikanCode",
+            "Nyushu_DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS "nyushuIryoKikanMeisho",
+            "DbT5302ShujiiIkenshoJoho"."shujiiCode" AS "nyushuShujiiCode",
+            "Nyushu_DbT5912ShujiiJoho"."shujiiName" AS "nyushuShujiiName",
+            "DbT5302ShujiiIkenshoJoho"."ikenshoJuryoYMD",
+            "DbT5302ShujiiIkenshoJoho"."ikenshoKinyuYMD",
+            "DbT5302ShujiiIkenshoJoho"."ikenshoReadYMD",
+            "DbT5302ShujiiIkenshoJoho"."saishuShinryoYMD",
+            "DbT5302ShujiiIkenshoJoho"."ikenshoDoiFlag",
+            "DbT5302ShujiiIkenshoJoho"."ikenshoSakuseiKaisuKubun",
+            "DbT5302ShujiiIkenshoJoho"."zaitakuShisetsuKubun",
+            "DbT5302ShujiiIkenshoJoho"."existTakaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existNaikaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existSeishinkaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existGekaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existSeikeigekaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existNoshinkeigekaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existHifukaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existHinyokikaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existFujinkaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existJibiinkokaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existRehabilitationkaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existShikaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existGankaJushinFlag",
+            "DbT5302ShujiiIkenshoJoho"."existSonotaJushinkaFlag",
+            "DbT5302ShujiiIkenshoJoho"."sonotaJushinKaMei",
+            "DbT5302ShujiiIkenshoJoho"."shindamMei1",
+            "DbT5302ShujiiIkenshoJoho"."hasshoYMD1",
+            "DbT5302ShujiiIkenshoJoho"."shindamMei2",
+            "DbT5302ShujiiIkenshoJoho"."hasshoYMD2",
+            "DbT5302ShujiiIkenshoJoho"."shindamMei3",
+            "DbT5302ShujiiIkenshoJoho"."hasshoYMD3",
+            "DbT5302ShujiiIkenshoJoho"."anteisei",
+            "DbT5302ShujiiIkenshoJoho"."fuanteiJokyo",
+            "DbT5302ShujiiIkenshoJoho"."chiryoNaiyo",
+            "DbT5302ShujiiIkenshoJoho"."tokkiJiko",
+            "DbT5302ShujiiIkenshoJoho"."nijiHanteiKekkaRenrakuFlag",
+            "DbT5302ShujiiIkenshoJoho"."ikenshoMemo",
+            "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode"
         FROM
             rgdb."DbT5101NinteiShinseiJoho"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
                 ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
-            LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho"
+            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "Shinsei_DbT5911ShujiiIryoKikanJoho"
+                ON "Shinsei_DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+                   AND "Shinsei_DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+            LEFT JOIN rgdb."DbT5912ShujiiJoho" AS "Shinsei_DbT5912ShujiiJoho"
+                ON "Shinsei_DbT5912ShujiiJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+                   AND "Shinsei_DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+                   AND "Shinsei_DbT5912ShujiiJoho"."shujiiCode" = "DbT5101NinteiShinseiJoho"."shujiiCode"
+            LEFT JOIN (SELECT *
+                       FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS "mst"
+                       WHERE NOT EXISTS (SELECT 'X'
+                                         FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS "slv"
+                                         WHERE "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+                                               AND "mst"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
+                                        )
+                      ) AS "DbT5301ShujiiIkenshoIraiJoho"
                 ON "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "Irai_DbT5911ShujiiIryoKikanJoho"
+                ON "Irai_DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+                   AND "Irai_DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode"
+            LEFT JOIN rgdb."DbT5912ShujiiJoho" AS "Irai_DbT5912ShujiiJoho"
+                ON "Irai_DbT5912ShujiiJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+                   AND "Irai_DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode"
+                   AND "Irai_DbT5912ShujiiJoho"."shujiiCode" = "DbT5301ShujiiIkenshoIraiJoho"."shujiiCode"
             LEFT JOIN (SELECT *
                        FROM rgdb."DbT5302ShujiiIkenshoJoho" AS "mst"
                        WHERE NOT EXISTS (SELECT 'X'
@@ -362,8 +446,13 @@
                                         )
                       ) AS "DbT5302ShujiiIkenshoJoho"
                 ON "DbT5302ShujiiIkenshoJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            LEFT JOIN rgdb."DbT5303ShujiiIkenshoKinyuItem"
-                ON "DbT5303ShujiiIkenshoKinyuItem"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "Nyushu_DbT5911ShujiiIryoKikanJoho"
+                ON "Nyushu_DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+                   AND "Nyushu_DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT5302ShujiiIkenshoJoho"."shujiiIryoKikanCode"
+            LEFT JOIN rgdb."DbT5912ShujiiJoho" AS "Nyushu_DbT5912ShujiiJoho"
+                ON "Nyushu_DbT5912ShujiiJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+                   AND "Nyushu_DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5302ShujiiIkenshoJoho"."shujiiIryoKikanCode"
+                   AND "Nyushu_DbT5912ShujiiJoho"."shujiiCode" = "DbT5302ShujiiIkenshoJoho"."shujiiCode"
         WHERE
             "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" IN
             <foreach collection="申請書管理番号リスト" item="申請書管理番号" open="(" separator="," close=")">
@@ -454,17 +543,33 @@
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5211NinteichosahyoChosaItemMapper.allColumns_DbT5211NinteichosahyoChosaItem" />
         FROM
             rgdb."DbT5101NinteiShinseiJoho"
-            INNER JOIN rgdb."DbT5102NinteiKekkaJoho"
-                ON "DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
             INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem"
-                ON "DbT5211NinteichosahyoChosaItem"."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo"
+                ON "DbT5211NinteichosahyoChosaItem"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
                    AND "DbT5211NinteichosahyoChosaItem"."ninteichosaRirekiNo" = (SELECT MAX(DbT5211Nintei."ninteichosaRirekiNo")
                                                                                  FROM rgdb."DbT5211NinteichosahyoChosaItem" AS DbT5211Nintei
-                                                                                 WHERE DbT5211Nintei."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo")
+                                                                                 WHERE DbT5211Nintei."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         WHERE
             "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
         ORDER BY
             "DbT5211NinteichosahyoChosaItem"."remban"
+    </select>
+
+    <select resultOrdered="true" id="select要介護認定主治医意見書記入項目"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.ResultMap_DbT5303ShujiiIkenshoKinyuItemEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5303ShujiiIkenshoKinyuItemMapper.allColumns_DbT5303ShujiiIkenshoKinyuItem" />
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho"
+            INNER JOIN rgdb."DbT5303ShujiiIkenshoKinyuItem"
+                ON "DbT5303ShujiiIkenshoKinyuItem"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+                   AND "DbT5303ShujiiIkenshoKinyuItem"."ikenshoIraiRirekiNo" = (SELECT MAX(DbT5303Shujii."ikenshoIraiRirekiNo")
+                                                                               FROM rgdb."DbT5303ShujiiIkenshoKinyuItem" AS DbT5303Shujii
+                                                                               WHERE DbT5303Shujii."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
+        WHERE
+            "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
+        ORDER BY
+            "DbT5303ShujiiIkenshoKinyuItem"."remban"
     </select>
 
     <select resultOrdered="true" id="select要介護認定主治医意見書意見項目"
@@ -474,13 +579,11 @@
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />
         FROM
             rgdb."DbT5101NinteiShinseiJoho"
-            INNER JOIN rgdb."DbT5102NinteiKekkaJoho"
-                ON "DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
             INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem"
-                ON "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo"
+                ON "DbT5304ShujiiIkenshoIkenItem"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
                    AND "DbT5304ShujiiIkenshoIkenItem"."ikenshoIraiRirekiNo" = (SELECT MAX(DbT5304Shujii."ikenshoIraiRirekiNo")
                                                                                FROM rgdb."DbT5304ShujiiIkenshoIkenItem" AS DbT5304Shujii
-                                                                               WHERE DbT5304Shujii."shinseishoKanriNo" = "DbT5102NinteiKekkaJoho"."shinseishoKanriNo")
+                                                                               WHERE DbT5304Shujii."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         WHERE
             "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
         ORDER BY
