@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.enkitsuchisho.YokaigoNinteiEn
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe581001.YokaigoNinteiEnkiTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -64,33 +64,33 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
         source.title = DbBusinessConfig.get(ConfigNameDBE.要介護認定延期通知書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         source.tsuchibun1 = entity.get通知文1();
         source.tsuchibun2 = entity.get通知文2();
-        DbT4101NinteiShinseiJohoEntity dbT4101entity = entity.getEntity();
-        if (dbT4101entity != null) {
-            if (dbT4101entity.getHihokenshaName() != null) {
-                source.hihokenshaNo1 = dbT4101entity.getHihokenshaNo().substring(0, INT_1);
-                source.hihokenshaNo2 = dbT4101entity.getHihokenshaNo().substring(INT_1, INT_2);
-                source.hihokenshaNo3 = dbT4101entity.getHihokenshaNo().substring(INT_2, INT_3);
-                source.hihokenshaNo4 = dbT4101entity.getHihokenshaNo().substring(INT_3, INT_4);
-                source.hihokenshaNo5 = dbT4101entity.getHihokenshaNo().substring(INT_4, INT_5);
-                source.hihokenshaNo6 = dbT4101entity.getHihokenshaNo().substring(INT_5, INT_6);
-                source.hihokenshaNo7 = dbT4101entity.getHihokenshaNo().substring(INT_6, INT_7);
-                source.hihokenshaNo8 = dbT4101entity.getHihokenshaNo().substring(INT_7, INT_8);
-                source.hihokenshaNo9 = dbT4101entity.getHihokenshaNo().substring(INT_8, INT_9);
-                source.hihokenshaNo10 = dbT4101entity.getHihokenshaNo().substring(INT_9, INT_10);
+        DbT5101NinteiShinseiJohoEntity dbT5101entity = entity.getEntity();
+        if (dbT5101entity != null) {
+            if (dbT5101entity.getHihokenshaName() != null) {
+                source.hihokenshaNo1 = dbT5101entity.getHihokenshaNo().substring(0, INT_1);
+                source.hihokenshaNo2 = dbT5101entity.getHihokenshaNo().substring(INT_1, INT_2);
+                source.hihokenshaNo3 = dbT5101entity.getHihokenshaNo().substring(INT_2, INT_3);
+                source.hihokenshaNo4 = dbT5101entity.getHihokenshaNo().substring(INT_3, INT_4);
+                source.hihokenshaNo5 = dbT5101entity.getHihokenshaNo().substring(INT_4, INT_5);
+                source.hihokenshaNo6 = dbT5101entity.getHihokenshaNo().substring(INT_5, INT_6);
+                source.hihokenshaNo7 = dbT5101entity.getHihokenshaNo().substring(INT_6, INT_7);
+                source.hihokenshaNo8 = dbT5101entity.getHihokenshaNo().substring(INT_7, INT_8);
+                source.hihokenshaNo9 = dbT5101entity.getHihokenshaNo().substring(INT_8, INT_9);
+                source.hihokenshaNo10 = dbT5101entity.getHihokenshaNo().substring(INT_9, INT_10);
                 source.shikibetsuCode = RString.EMPTY;
-                source.hihokenshaNo = dbT4101entity.getHihokenshaNo();
+                source.hihokenshaNo = dbT5101entity.getHihokenshaNo();
             }
-            if (dbT4101entity.getHihokenshaName() != null) {
-                source.hihokenshaName = dbT4101entity.getHihokenshaName().getColumnValue();
+            if (dbT5101entity.getHihokenshaName() != null) {
+                source.hihokenshaName = dbT5101entity.getHihokenshaName().getColumnValue();
             }
-            source.riyu1 = dbT4101entity.getEnkiRiyu();
-            FlexibleDate enkiMikomiKaishiYMD = dbT4101entity.getEnkiMikomiKaishiYMD();
+            source.riyu1 = dbT5101entity.getEnkiRiyu();
+            FlexibleDate enkiMikomiKaishiYMD = dbT5101entity.getEnkiMikomiKaishiYMD();
             if (enkiMikomiKaishiYMD != null && !enkiMikomiKaishiYMD.isEmpty() && enkiMikomiKaishiYMD.isWareki()) {
                 source.shoriMikomiKaishiYMD = enkiMikomiKaishiYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
             }
-            FlexibleDate enkiMikomiShuryoYMD = dbT4101entity.getEnkiMikomiShuryoYMD();
+            FlexibleDate enkiMikomiShuryoYMD = dbT5101entity.getEnkiMikomiShuryoYMD();
             if (enkiMikomiShuryoYMD != null && !enkiMikomiShuryoYMD.isEmpty() && enkiMikomiShuryoYMD.isWareki()) {
                 source.shoriMikomiShuryoYMD = enkiMikomiShuryoYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)

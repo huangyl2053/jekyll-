@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.enkitsuchisho;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class YokaigoNinteiEnkiTshuchishoEntity {
 
-    private DbT4101NinteiShinseiJohoEntity entity;
+    private DbT5101NinteiShinseiJohoEntity entity;
 
     private RString 文書番号;
     private RString 電子公印;
