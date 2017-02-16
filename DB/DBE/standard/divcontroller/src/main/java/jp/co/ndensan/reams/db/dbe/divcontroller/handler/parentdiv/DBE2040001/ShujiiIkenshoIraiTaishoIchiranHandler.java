@@ -106,7 +106,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を完了するボタン, false);
             if (div.getRadShoriJyotai().getSelectedKey().equals(KEY_可)) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を登録するボタン, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼を登録するボタン, false);
             }
         }
     }
@@ -287,6 +287,9 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             int index = dataSource.indexOf(row);
             row.getIkenshoIraiDay().setValue(div.getTxtSakuseiIraiYmd().getValue());
             row.setIkenshoIraiKubun(div.getDdlIraiKubun().getSelectedKey());
+            RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
+                    .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
+            row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
             row.setRowState(RowState.Modified);
             row.setCancelButtonState(DataGridButtonState.Enabled);
             dataSource.set(index, row);
