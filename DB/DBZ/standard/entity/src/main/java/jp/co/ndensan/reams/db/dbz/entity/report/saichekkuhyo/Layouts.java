@@ -13,6 +13,10 @@ package jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo;
 public enum Layouts {
 
     /**
+     * 0を指定したい場合
+     */
+    指定_0(0),
+    /**
      * レイアウト一件目
      */
     鑑(1),

@@ -66,11 +66,11 @@ public class NinteiChosaRyomen extends BatchProcessBase<HomonChosaIraishoRelateE
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        if (ReportIdDBZ.DBE221011.getReportId().equals(帳票)) {
-            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(business.setDBE221011Item(entity));
-            report.writeBy(reportSourceWriter);
-        } else if (ReportIdDBZ.DBE221001.getReportId().equals(帳票)) {
+        if (ReportIdDBZ.DBE221001.getReportId().equals(帳票)) {
             ChosahyoGaikyochosaReport report = ChosahyoGaikyochosaReport.createFrom(business.setDBE221011Item(entity));
+            report.writeBy(reportSourceWriter);
+        } else {
+            ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(business.setDBE221011Item(entity));
             report.writeBy(reportSourceWriter);
         }
     }

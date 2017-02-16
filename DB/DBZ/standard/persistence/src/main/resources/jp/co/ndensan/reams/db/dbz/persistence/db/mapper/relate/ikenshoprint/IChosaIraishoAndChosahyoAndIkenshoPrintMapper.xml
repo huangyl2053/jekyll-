@@ -600,6 +600,7 @@
         ,A."seibetsu"
         ,A."jusho"
         ,A."ninteiShinseiYMD"
+        ,A."shichosonCode"
         ,B."ikenshoSakuseiIraiYMD"
         ,B."ikenshoSakuseiKigenYMD"
         ,B."shujiiIryokikanCode"
@@ -643,7 +644,9 @@
             #{code}
         </foreach>
         AND A."logicalDeletedFlag" = FALSE
-        ORDER BY A."shinseishoKanriNo"
+        ORDER BY 
+        A."shichosonCode",
+        A."shinseishoKanriNo"
 
     </select>
 

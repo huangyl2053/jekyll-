@@ -59,7 +59,7 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
     private ShujiiIkenshoProcessParamter processParamter;
     private NinshoshaSource ninshoshaSource;
     private boolean is認定広域 = false;
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shujiiIryokikanCode")));
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shichosonCode"), new RString("shujiiIryokikanCode")));
     @BatchWriter
     private BatchReportWriter<IkenshoSakuseiIraiIchiranhyoReportSource> batchWriter;
     private ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter;
@@ -98,7 +98,8 @@ public class IkenshoSakuseiIraiIchiranhyoProcess extends BatchKeyBreakBase<Shuji
     }
 
     private boolean hasBrek(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity before, ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity current) {
-        return !before.get主治医医療機関コード().equals(current.get主治医医療機関コード());
+        return !before.get市町村コード().equals(current.get市町村コード())
+                || !before.get主治医医療機関コード().equals(current.get主治医医療機関コード());
     }
 
     @Override

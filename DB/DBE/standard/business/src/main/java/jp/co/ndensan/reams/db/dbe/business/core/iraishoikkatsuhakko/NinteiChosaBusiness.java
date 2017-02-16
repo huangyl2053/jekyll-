@@ -1357,6 +1357,16 @@ public class NinteiChosaBusiness {
                     前回連番Map.get(NinteichosaKomokuMapping09A.カテーテル.getコード()),
                     entity.get前回障害高齢者自立度(),
                     entity.get前回認知症高齢者自立度());
+        } else {
+            item = new SaiChekkuhyoItem(
+                    entity.get前回一次判定結果(),
+                    entity.get被保険者番号(),
+                    entity.get被保険者氏名(),
+                    entity.get年齢(),
+                    entity.get前回二次判定結果(),
+                    entity.get前回二次判定日(),
+                    entity.get生年月日()
+            );
         }
         前回連番Map.clear();
         return item;
@@ -1557,7 +1567,6 @@ public class NinteiChosaBusiness {
                 entity.get前回障害高齢者自立度(),
                 entity.get前回認知症高齢者自立度()
         );
-
     }
 
     /**

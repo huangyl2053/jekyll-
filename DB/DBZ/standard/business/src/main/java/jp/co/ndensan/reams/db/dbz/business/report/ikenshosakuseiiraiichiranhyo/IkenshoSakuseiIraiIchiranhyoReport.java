@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoHeaderItem;
-import jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReport;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -35,8 +33,8 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
     public static IkenshoSakuseiIraiIchiranhyoReport createFrom(List<IkenshoSakuseiIraiIchiranhyoItem> bodyItemList) {
         return new IkenshoSakuseiIraiIchiranhyoReport(bodyItemList);
     }
-    
-        /**
+
+    /**
      * インスタンスを生成します。
      *
      * @param bodyItem 主治医意見書作成依頼一覧のリストITEM
@@ -60,6 +58,7 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
     @Override
     public void writeBy(ReportSourceWriter<IkenshoSakuseiIraiIchiranhyoReportSource> reportSourceWriter) {
         int index = ZERO;
+        int pageCount = ZERO;
         Collections.sort(bodyItemList, new Comparator<IkenshoSakuseiIraiIchiranhyoItem>() {
             @Override
             public int compare(IkenshoSakuseiIraiIchiranhyoItem entity1, IkenshoSakuseiIraiIchiranhyoItem entity2) {
@@ -70,14 +69,20 @@ public class IkenshoSakuseiIraiIchiranhyoReport extends Report<IkenshoSakuseiIra
                 }
             }
         });
-        RString keyBreak = RString.EMPTY;
+        RString keyBreak1 = RString.EMPTY;
+        RString keyBreak2 = RString.EMPTY;
         for (IkenshoSakuseiIraiIchiranhyoItem item : bodyItemList) {
-            if (!keyBreak.equals(item.getShujiiIryokikanCode())) {
+            if (!keyBreak1.equals(item.getShichosonCode()) || !keyBreak2.equals(item.getShujiiIryokikanCode())) {
                 index = ZERO;
+                pageCount = ZERO;
             }
             index++;
-            keyBreak = item.getShujiiIryokikanCode();
-            IkenshoSakuseiIraiIchiranhyoEditor bodyEditor = new IkenshoSakuseiIraiIchiranhyoBodyEditor(item, index);
+            keyBreak1 = item.getShichosonCode();
+            keyBreak2 = item.getShujiiIryokikanCode();
+            if (index % 20 == 1) {
+                pageCount++;
+            }
+            IkenshoSakuseiIraiIchiranhyoEditor bodyEditor = new IkenshoSakuseiIraiIchiranhyoBodyEditor(item, index, pageCount);
             IkenshoSakuseiIraiIchiranhyoBuilder builder = new IkenshoSakuseiIraiBuilderItem(bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

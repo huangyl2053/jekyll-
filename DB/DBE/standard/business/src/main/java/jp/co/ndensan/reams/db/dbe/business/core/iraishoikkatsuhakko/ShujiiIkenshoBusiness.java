@@ -610,7 +610,8 @@ public class ShujiiIkenshoBusiness {
                 get和暦(entity.get生年月日()),
                 Seibetsu.toValue(entity.get性別()).get名称(),
                 get提出期限(),
-                entity.get主治医医療機関コード());
+                entity.get主治医医療機関コード(),
+                entity.get市町村コード());
     }
 
     private RString get提出期限() {

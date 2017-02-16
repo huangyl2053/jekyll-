@@ -49,28 +49,32 @@ public class IkenshoSakuseiIraiIchiranhyoReportSource implements IReportSource {
     public RString meishoFuyo;
     @ReportItem(name = "printTimeStamp", length = 34, order = 16)
     public RString printTimeStamp;
-    @ReportItem(name = "listIchiranhyo_1", length = 3, order = 17)
+    @ReportItem(name = "pageCountForIryokikan", length = 10, order = 17)
+    public RString pageCountForIryokikan;
+    @ReportItem(name = "listIchiranhyo_1", length = 3, order = 18)
     public RString listIchiranhyo_1;
-    @ReportItem(name = "listIchiranhyo_2", length = 18, order = 18)
+    @ReportItem(name = "listIchiranhyo_2", length = 18, order = 19)
     public RString listIchiranhyo_2;
-    @ReportItem(name = "listIchiranhyo_3", length = 10, order = 19)
+    @ReportItem(name = "listIchiranhyo_3", length = 10, order = 20)
     public RString listIchiranhyo_3;
-    @ReportItem(name = "listIchiranhyo_4", length = 16, order = 20)
+    @ReportItem(name = "listIchiranhyo_4", length = 16, order = 21)
     public RString listIchiranhyo_4;
-    @ReportItem(name = "listIchiranhyo_5", length = 24, order = 21)
+    @ReportItem(name = "listIchiranhyo_5", length = 24, order = 22)
     public RString listIchiranhyo_5;
-    @ReportItem(name = "listIchiranhyo_6", length = 40, order = 22)
+    @ReportItem(name = "listIchiranhyo_6", length = 40, order = 23)
     public RString listIchiranhyo_6;
-    @ReportItem(name = "listIchiranhyo_7", length = 10, order = 23)
+    @ReportItem(name = "listIchiranhyo_7", length = 10, order = 24)
     public RString listIchiranhyo_7;
-    @ReportItem(name = "listIchiranhyo_8", length = 2, order = 24)
+    @ReportItem(name = "listIchiranhyo_8", length = 2, order = 25)
     public RString listIchiranhyo_8;
-    @ReportItem(name = "listIchiranhyo_9", length = 10, order = 25)
+    @ReportItem(name = "listIchiranhyo_9", length = 10, order = 26)
     public RString listIchiranhyo_9;
-    @ReportItem(name = "tsuchibun1", order = 26)
+    @ReportItem(name = "tsuchibun1", order = 27)
     public RString tsuchibun1;
-    @ReportItem(name = "shujiiIryokikanCode", order = 27)
+    @ReportItem(name = "shujiiIryokikanCode", order = 999)
     public RString shujiiIryokikanCode;
+    @ReportItem(name = "shichosonCode", order = 998)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -83,6 +87,7 @@ public class IkenshoSakuseiIraiIchiranhyoReportSource implements IReportSource {
      */
     public enum ReportSourceFields {
 
+        shichosonCode,
         shujiiIryokikanCode
     }
 }
