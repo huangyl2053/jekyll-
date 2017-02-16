@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.definition.core.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
@@ -351,13 +352,12 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             }
 
             for (dgNinteiTaskList_Row row : ModifyList) {
-                RString 意見書依頼区分 = div.getDdlIraiKubun().getSelectedKey();
-
+                boolean is指定医 = get指定医フラグ(row.getIshiKubunCode());
                 NinteiShinseiJoho 要介護認定申請情報 = manager.get要介護認定申請情報(row.getShinseishoKanriNo());
                 NinteiShinseiJohoBuilder builder = 要介護認定申請情報.createBuilderForEdit()
-                        .set主治医医療機関コード(div.getCcdShujiiInput().getIryoKikanCode())
-                        .set主治医コード(div.getCcdShujiiInput().getShujiiCode())
-                        .set指定医フラグ(div.getCcdShujiiInput().hasShiteii())
+                        .set主治医医療機関コード(row.getKonkaiShujiiIryokikanCode())
+                        .set主治医コード(row.getKonkaiShujiiCode())
+                        .set指定医フラグ(is指定医)
                         .setShujiiIkenshoIraiJoho(handler.create主治医意見書作成依頼(要介護認定申請情報, row));
                 manager.saveList(builder.build().modifiedModel());
             }
@@ -387,6 +387,13 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).setState(DBE2040001StateName.登録);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean get指定医フラグ(RString 医師区分コード) {
+        if (IshiKubun.指定医.getCode().equals(医師区分コード)) {
+            return true;
+        }
+        return false;
     }
 
     /**
