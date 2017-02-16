@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  *
  * @reamsid_L DBZ-1300-040 dongyabin
  */
-public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv {
+public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv, IDialogDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
