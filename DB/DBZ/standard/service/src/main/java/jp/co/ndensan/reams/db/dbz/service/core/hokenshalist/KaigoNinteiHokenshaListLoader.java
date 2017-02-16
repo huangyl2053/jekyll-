@@ -71,7 +71,7 @@ final class KaigoNinteiHokenshaListLoader {
         }
         RString shichosonShikibetsuID = shichosonJoho.get市町村識別ID().value();
         TokeiTaishoKubun 保険者区分 = TokeiTaishoKubun.構成市町村分;
-        RString 広域保険者 = DbBusinessConfig.get(ConfigNameDBE.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 広域保険者 = DbBusinessConfig.get(ConfigNameDBE.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         List<HokenshaSummary> output = new ArrayList<>();
         for (KoseiShichosonMaster genShichosonJoho : genShichosonJohoList) {
             if (genShichosonJoho.get市町村コード().value().equals(広域保険者)) {

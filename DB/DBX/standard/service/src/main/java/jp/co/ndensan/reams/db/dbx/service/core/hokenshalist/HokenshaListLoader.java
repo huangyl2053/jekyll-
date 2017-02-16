@@ -137,7 +137,7 @@ public class HokenshaListLoader {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
         }
         RString shichosonShikibetsuID = 市町村情報.get市町村識別ID().value();
-        RString 広域保険者 = DbBusinessConfig.get(ConfigNameDBE.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 広域保険者 = DbBusinessConfig.get(ConfigNameDBE.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         List<HokenshaSummary> output = new ArrayList<>();
         output.add(toShichosonCodeNameResult(市町村情報, TokeiTaishoKubun.保険者分));
         for (KoseiShichosonMaster genShichosonJoho : zenShichosonJohoList) {
@@ -188,7 +188,7 @@ public class HokenshaListLoader {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
         }
         RString shichosonShikibetsuID = 市町村情報.get市町村識別ID().value();
-        RString 広域保険者 = DbBusinessConfig.get(ConfigNameDBE.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 広域保険者 = DbBusinessConfig.get(ConfigNameDBE.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         List<HokenshaSummary> output = new ArrayList<>();
         output.add(toShichosonCodeNameResult(市町村情報, TokeiTaishoKubun.保険者分));
         for (KoseiShichosonMaster genShichosonJoho : genShichosonJohoList) {
