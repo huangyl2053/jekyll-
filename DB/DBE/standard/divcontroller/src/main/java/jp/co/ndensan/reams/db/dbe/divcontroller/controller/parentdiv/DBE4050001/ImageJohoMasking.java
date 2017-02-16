@@ -187,7 +187,7 @@ public class ImageJohoMasking {
     public ResponseData<ImageJohoMaskingDiv> onBefore_onClickbtnMaskingGenpon(ImageJohoMaskingDiv div) {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
         if (!ResponseHolder.isReRequest()) {
-            if (!row.getMaskImagePath().isEmpty() || !row.getEditImagePath().isEmpty()) {
+            if (!row.getHasMask().isEmpty() || row.getState().equals(new RString("追加")) || row.getState().equals(new RString("修正"))) {
                 QuestionMessage message = new QuestionMessage(DbeQuestionMessages.データ有確認.getMessage().getCode(),
                         DbeQuestionMessages.データ有確認.getMessage().replace("マスキングイメージ", "再度マスキングを").evaluate());
                 return ResponseData.of(div).addMessage(message).respond();

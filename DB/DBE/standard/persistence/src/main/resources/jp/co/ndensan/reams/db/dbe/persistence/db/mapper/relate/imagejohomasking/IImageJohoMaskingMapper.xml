@@ -88,6 +88,7 @@
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
         ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
         AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo" 
+        AND T5202."gaikyoChosaTextImageKubun" = '2'
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" T5116 
@@ -119,20 +120,21 @@
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205
         on T5205."tokkijikoTextImageKubun" = #{イメージ区分}
         AND T5205."genponMaskKubun" ='2'
-        AND NOT EXISTS	(
+        AND NOT EXISTS (
         SELECT
         'X'
         FROM
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
         WHERE
         T5205."ninteichosaRirekiNo" <![CDATA[<]]> T5205b."ninteichosaRirekiNo"
+        AND T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
         )
         AND T5205."shinseishoKanriNo" = T5101."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
         on T5305."genponMaskKubun" <![CDATA[<>]]> #{イメージ区分}
         AND T5305."remban" = '1'
-        AND NOT EXISTS	(
+        AND NOT EXISTS (
         SELECT
         'X'
         FROM
@@ -160,6 +162,7 @@
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
         WHERE
         T5213."ninteichosaRirekiNo" <![CDATA[<]]> T5213b."ninteichosaRirekiNo"
+        AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
         )
         AND T5101."shinseishoKanriNo" = T5213."shinseishoKanriNo"
 
