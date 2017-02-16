@@ -291,7 +291,7 @@ public class ChosahyoJoho09AEucEntityEditor {
         eucEntity.set状態の安定性コード(nullToEmpty(entity.getJotaiAnteiseiCode()));
         eucEntity.set状態の安定性((entity.getJotaiAnteiseiCode() != null && !entity.getJotaiAnteiseiCode().isEmpty())
                 ? JotaiAnteiseiCode.toValue(entity.getJotaiAnteiseiCode().value()).get名称() : RString.EMPTY);
-        eucEntity.set認知症自立度Ⅱ以上の蓋然性(new RString(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
+        eucEntity.set認知症自立度Ⅱ以上の蓋然性(nullToEmpty(entity.getNinchishoJiritsudoIIijoNoGaizensei()));
         eucEntity.set給付区分コード(nullToEmpty(entity.getSuiteiKyufuKubunCode()));
         eucEntity.set給付区分((entity.getSuiteiKyufuKubunCode() != null && !entity.getSuiteiKyufuKubunCode().isEmpty())
                 ? SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode().value()).get名称() : RString.EMPTY);
@@ -433,5 +433,9 @@ public class ChosahyoJoho09AEucEntityEditor {
 
     private static RString nullToEmpty(JigyoshaNo item) {
         return (item != null) ? item.value() : RString.EMPTY;
+    }
+
+    private static RString nullToEmpty(Decimal item) {
+        return (item != null) ? new RString(item.toString()) : RString.EMPTY;
     }
 }
