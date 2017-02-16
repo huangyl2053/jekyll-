@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.OutputJokenhyoFactoryProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiKaisaiYoteiJohoUpdateProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -27,7 +27,7 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     private static final RString 事務局_審査会資料一括作成ID = new RString("DBE517001_ShinsakaiShiryoJImukyoku");
     private static final String 委員_審査会資料一括作成 = "DBE517002_ShinsakaiShiryoIin";
     private static final RString 委員_審査会資料一括作成ID = new RString("DBE517002_ShinsakaiShiryoIin");
-    private static final String 審査会開催予定情報更新 = "kousin";
+    private static final String 審査会情報更新 = "kousin";
     private static final String 出力条件表出力 = "outputJokenhyoFactory";
     private static final RString 選択 = new RString("1");
     private Map<RString, RString> 出力帳票一覧Map = new HashMap<>();
@@ -44,7 +44,7 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
             is資料作成 = true;
         }
         if (is資料作成) {
-            executeStep(審査会開催予定情報更新);
+            executeStep(審査会情報更新);
             executeStep(出力条件表出力);
         }
     }
@@ -80,9 +80,9 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      *
      * @return バッチコマンド
      */
-    @Step(審査会開催予定情報更新)
+    @Step(審査会情報更新)
     protected IBatchFlowCommand createKosinData() {
-        return loopBatch(ShinsakaiKaisaiYoteiJohoUpdateProcess.class)
+        return loopBatch(ShinsakaiJohoUpdateProcess.class)
                 .arguments(getParameter().toIinItiziHanteiProcessParameter()).define();
     }
 

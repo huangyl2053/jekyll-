@@ -45,7 +45,10 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 保険者番号
      */
     public RString get保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
+        if (entity.isJimukyoku()) {
+            return entity.getShoKisaiHokenshaNo();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -54,7 +57,10 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 被保険者番号
      */
     public RString get被保険者番号() {
-        return entity.getHihokenshaNo();
+        if (entity.isJimukyoku()) {
+            return entity.getHihokenshaNo();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -72,7 +78,10 @@ public class JimuShinsakaiWariateJohoBusiness {
      * @return 名前
      */
     public RString get名前() {
-        return entity.getHihokenshaName().getColumnValue();
+        if (entity.isJimukyoku()) {
+            return entity.getHihokenshaName().getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     /**

@@ -48,7 +48,10 @@ public class JimuSonotashiryoBusiness {
      * @return 保険者番号
      */
     public RString get保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
+        if (entity.isJimukyoku()) {
+            return entity.getShoKisaiHokenshaNo();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -57,7 +60,10 @@ public class JimuSonotashiryoBusiness {
      * @return 被保険者番号
      */
     public RString get被保険者番号() {
-        return entity.getHihokenshaNo();
+        if (entity.isJimukyoku()) {
+            return entity.getHihokenshaNo();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -78,7 +84,10 @@ public class JimuSonotashiryoBusiness {
      * @return 名前
      */
     public RString get名前() {
-        return entity.getHihokenshaName().getColumnValue();
+        if (entity.isJimukyoku()) {
+            return entity.getHihokenshaName().getColumnValue();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -147,7 +156,7 @@ public class JimuSonotashiryoBusiness {
     public List<RString> getその他資料イメージパスリスト() {
         return ファイル名List;
     }
-    
+
     /**
      * 審査順を取得します。
      *

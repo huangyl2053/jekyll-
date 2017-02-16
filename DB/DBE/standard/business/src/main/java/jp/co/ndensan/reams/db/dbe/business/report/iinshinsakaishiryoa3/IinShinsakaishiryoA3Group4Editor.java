@@ -62,7 +62,7 @@ public class IinShinsakaishiryoA3Group4Editor implements IIinShinsakaishiryoA3Ed
         source.shinsaDD = get日(business.get今回認定審査年月日());
         source.imgIkensho1 = business.get主治医意見書イメージ１();
         source.imgIkensho2 = business.get主治医意見書イメージ２();
-        source.layout = IinShinsakaiShiryoA3Layouts.委員用主治医意見書.index();;
+        source.layout = IinShinsakaiShiryoA3Layouts.委員用主治医意見書.index();
         return source;
     }
 

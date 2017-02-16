@@ -9,15 +9,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KumiawaseCommonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3.JimuShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
+
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
@@ -129,6 +131,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         kumiawaseCommonBusiness.set申請書管理番号リスト_一次判定結果(申請書管理番号List, itiziHanteiEntityList);
         kumiawaseCommonBusiness.set申請書管理番号リスト_共通情報(申請書管理番号List);
         
+        List<JimuTuikaSiryoBusiness> 審査追加対象者一覧 = get審査追加対象者一覧表情報(申請書管理番号List);
         int 審査番号 = 1;
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
             kumiawaseCommonBusiness.setImageFilePath(shinseishoKanriNo, batchReportWriter.getImageFolderPath());
@@ -136,10 +139,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                     get一次判定結果票(shinseishoKanriNo),
                     kumiawaseCommonBusiness.getOpinionFileInfo(shinseishoKanriNo, true),
                     kumiawaseCommonBusiness.getOtherFileInfo(shinseishoKanriNo, true), 
-                    kumiawaseCommonBusiness.getAdditionalFileInfo(shinseishoKanriNo, paramter,
-                            ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
-                                KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())),
-                    reportId, 
+                    審査追加対象者一覧,
                     is審査会対象一覧印刷済み, 
                     paramter.getSakuseiJoken(),
                     paramter.getPrintHou(),
@@ -170,7 +170,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         }
     }
 
-    private IchijihanteikekkahyoA3Entity get一次判定結果票(ShinseishoKanriNo shinseishoKanriNo) {
+    private IchijihanteikekkahyoA3Business get一次判定結果票(ShinseishoKanriNo shinseishoKanriNo) {
         for (ItiziHanteiEntity entity : itiziHanteiEntityList) {
             ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
             if (shinseishoKanriNo.equals(申請書管理番号)) {
@@ -203,11 +203,12 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                     特記情報 = get特記情報(審査会資料共通Entity);
                 }
                 主治医意見書情報.addAll(主治医意見書);
-                return new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
+                return new IchijihanteikekkahyoA3Business(new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                         調査票調査項目, 前回調査票調査項目, 主治医意見書情報,
                         前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                         審査会資料共通Entity, 主治医意見書,
-                        new RString(myBatisParameter.getGogitaiNo()), 特記情報, batchReportWriter.getImageFolderPath());
+                        new RString(myBatisParameter.getGogitaiNo()), 特記情報, batchReportWriter.getImageFolderPath()),
+                        true);
             }
         }
         return null;
@@ -222,6 +223,15 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);
+    }
+    
+    private List<JimuTuikaSiryoBusiness> get審査追加対象者一覧表情報(List<ShinseishoKanriNo> 申請書管理番号リスト) {
+        List<JimuTuikaSiryoBusiness> 審査追加対象者一覧 = new ArrayList<>();
+        for (ShinseishoKanriNo 申請書管理番号 : 申請書管理番号リスト) {
+            審査追加対象者一覧.add(kumiawaseCommonBusiness.getAdditionalFileInfo(申請書管理番号,paramter,
+                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())));
+        }
+        return 審査追加対象者一覧;
     }
 
     @Override

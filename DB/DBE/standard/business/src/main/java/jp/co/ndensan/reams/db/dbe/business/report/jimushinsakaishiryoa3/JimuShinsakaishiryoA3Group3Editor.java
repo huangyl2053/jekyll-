@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -66,7 +66,7 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
     private static final int PAGE2COUNT = 34;
     private static final int PAGE1連番名称COUNT = 30;
     private static final int PAGE2連番名称COUNT = 34;
-    private final IchijihanteikekkahyoA3Entity item;
+    private final IchijihanteikekkahyoA3Business item;
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
@@ -74,12 +74,12 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
     /**
      * インスタンスを生成します。
      *
-     * @param item IchijihanteikekkahyoA3Entity
+     * @param item IchijihanteikekkahyoA3Business
      * @param 特記事項List List<RString>
      * @param index int
      * @param page int
      */
-    protected JimuShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item,
+    protected JimuShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Business item,
             List<RString> 特記事項List,
             int index,
             int page) {
@@ -99,11 +99,6 @@ public class JimuShinsakaishiryoA3Group3Editor implements IJimuShinsakaishiryoA3
         source.hokenshaNo = item.get特記事項保険者番号();
         source.hihokenshaNo = item.get特記事項被保険者番号();
         source.hihokenshaName = item.get名前();
-        if (!全面.equals(item.get特記パターン())) {
-            source.hokenshaNo1 = item.get特記事項保険者番号();
-            source.hihokenshaNo1 = item.get特記事項被保険者番号();
-            source.hihokenshaName1 = item.get名前();
-        }
         source.sakuseiGengo = get元号(item.get認定申請年月日());
         source.sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);

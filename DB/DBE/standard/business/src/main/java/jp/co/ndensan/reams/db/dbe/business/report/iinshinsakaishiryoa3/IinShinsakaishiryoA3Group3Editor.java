@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.IinShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
@@ -66,7 +67,7 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
     private static final int PAGE2COUNT = 34;
     private static final int PAGE1連番名称COUNT = 30;
     private static final int PAGE2連番名称COUNT = 34;
-    private final IchijihanteikekkahyoA3Entity item;
+    private final IchijihanteikekkahyoA3Business item;
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
@@ -79,7 +80,7 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
      * @param index int
      * @param page int
      */
-    protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Entity item,
+    protected IinShinsakaishiryoA3Group3Editor(IchijihanteikekkahyoA3Business item,
             List<RString> 特記事項List, int index, int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
@@ -94,9 +95,9 @@ public class IinShinsakaishiryoA3Group3Editor implements IIinShinsakaishiryoA3Ed
 
     private IinShinsakaishiryoA3ReportSource editSource(IinShinsakaishiryoA3ReportSource source) {
         source.shinsakaiOrder = item.get審査人数();
-        source.hokenshaNo = RString.EMPTY;
-        source.hihokenshaNo = RString.EMPTY;
-        source.hihokenshaName = RString.EMPTY;
+        source.hokenshaNo = item.get保険者番号();
+        source.hihokenshaNo = item.get被保険者番号();
+        source.hihokenshaName = item.get被保険者氏名();
         source.sakuseiGengo = get元号(item.get認定申請年月日());
         source.sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
                 RString.EMPTY).replace(new RString("年"), RString.EMPTY);
