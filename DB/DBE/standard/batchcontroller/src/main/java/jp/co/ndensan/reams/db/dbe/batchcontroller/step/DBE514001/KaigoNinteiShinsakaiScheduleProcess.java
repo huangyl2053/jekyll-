@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -71,7 +70,7 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
     @Override
     protected void process(KaigoNinteiShinsakaiScheduleRelateEntity entity) {
         ShinsakaisukejuruhyoReport report
-                = ShinsakaisukejuruhyoReport.createFrom(business.setHeaderItem(), business.setBodyItem(entity));
+                = ShinsakaisukejuruhyoReport.createFrom(business.setHeaderItem(), business.setBodyItem(entity), processParamter.getShinsakaiIinCodeList());
         report.writeBy(reportSourceWriter);
     }
 

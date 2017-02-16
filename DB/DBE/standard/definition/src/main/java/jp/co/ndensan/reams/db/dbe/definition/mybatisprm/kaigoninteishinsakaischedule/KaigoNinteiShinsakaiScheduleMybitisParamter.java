@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class KaigoNinteiShinsakaiScheduleMybitisParamter implements IMyBatisPara
     private final RString shinsakaiKaisaiKikanFrom;
     private final RString shinsakaiKaisaiKikanTo;
     private final RString nendo;
+    private final List<RString> shinsakaiIinCodeList;
 
     /**
      * コンストラクタです。
@@ -28,14 +30,17 @@ public class KaigoNinteiShinsakaiScheduleMybitisParamter implements IMyBatisPara
      * @param 介護認定審査会開催予定期間From 介護認定審査会開催予定期間From
      * @param 介護認定審査会開催予定期間To 介護認定審査会開催予定期間To
      * @param 年度 年度
+     * @param 審査会委員コードリスト 審査会委員コードリスト
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public KaigoNinteiShinsakaiScheduleMybitisParamter(
             RString 介護認定審査会開催予定期間From,
             RString 介護認定審査会開催予定期間To,
-            RString 年度) {
+            RString 年度,
+            List<RString> 審査会委員コードリスト) {
         this.shinsakaiKaisaiKikanFrom = 介護認定審査会開催予定期間From;
         this.shinsakaiKaisaiKikanTo = 介護認定審査会開催予定期間To;
         this.nendo = 年度;
+        this.shinsakaiIinCodeList = 審査会委員コードリスト;
     }
 }

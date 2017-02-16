@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiScheduleSrchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,16 +24,12 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
      */
     @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
     private TextBoxDateRange txtShinsakaiKaisaiYoteiKikan;
-    @JsonProperty("chkShinsakaiSchedule")
-    private CheckBoxList chkShinsakaiSchedule;
-    @JsonProperty("chkShinsakaiScheduleKagami")
-    private CheckBoxList chkShinsakaiScheduleKagami;
-    @JsonProperty("Sp1")
-    private Space Sp1;
-    @JsonProperty("chkShinsakaiScheduleNenkan")
-    private CheckBoxList chkShinsakaiScheduleNenkan;
-    @JsonProperty("txtNendo")
-    private TextBoxDate txtNendo;
+    @JsonProperty("ScheduleSpace")
+    private Space ScheduleSpace;
+    @JsonProperty("radPrintType")
+    private RadioButton radPrintType;
+    @JsonProperty("SchedulePrintOption")
+    private SchedulePrintOptionDiv SchedulePrintOption;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,93 +56,80 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
     }
 
     /*
-     * getchkShinsakaiSchedule
-     * @return chkShinsakaiSchedule
+     * getScheduleSpace
+     * @return ScheduleSpace
      */
-    @JsonProperty("chkShinsakaiSchedule")
-    public CheckBoxList getChkShinsakaiSchedule() {
-        return chkShinsakaiSchedule;
+    @JsonProperty("ScheduleSpace")
+    public Space getScheduleSpace() {
+        return ScheduleSpace;
     }
 
     /*
-     * setchkShinsakaiSchedule
-     * @param chkShinsakaiSchedule chkShinsakaiSchedule
+     * setScheduleSpace
+     * @param ScheduleSpace ScheduleSpace
      */
-    @JsonProperty("chkShinsakaiSchedule")
-    public void setChkShinsakaiSchedule(CheckBoxList chkShinsakaiSchedule) {
-        this.chkShinsakaiSchedule = chkShinsakaiSchedule;
+    @JsonProperty("ScheduleSpace")
+    public void setScheduleSpace(Space ScheduleSpace) {
+        this.ScheduleSpace = ScheduleSpace;
     }
 
     /*
-     * getchkShinsakaiScheduleKagami
-     * @return chkShinsakaiScheduleKagami
+     * getradPrintType
+     * @return radPrintType
      */
-    @JsonProperty("chkShinsakaiScheduleKagami")
+    @JsonProperty("radPrintType")
+    public RadioButton getRadPrintType() {
+        return radPrintType;
+    }
+
+    /*
+     * setradPrintType
+     * @param radPrintType radPrintType
+     */
+    @JsonProperty("radPrintType")
+    public void setRadPrintType(RadioButton radPrintType) {
+        this.radPrintType = radPrintType;
+    }
+
+    /*
+     * getSchedulePrintOption
+     * @return SchedulePrintOption
+     */
+    @JsonProperty("SchedulePrintOption")
+    public SchedulePrintOptionDiv getSchedulePrintOption() {
+        return SchedulePrintOption;
+    }
+
+    /*
+     * setSchedulePrintOption
+     * @param SchedulePrintOption SchedulePrintOption
+     */
+    @JsonProperty("SchedulePrintOption")
+    public void setSchedulePrintOption(SchedulePrintOptionDiv SchedulePrintOption) {
+        this.SchedulePrintOption = SchedulePrintOption;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
     public CheckBoxList getChkShinsakaiScheduleKagami() {
-        return chkShinsakaiScheduleKagami;
+        return this.getSchedulePrintOption().getChkShinsakaiScheduleKagami();
     }
 
-    /*
-     * setchkShinsakaiScheduleKagami
-     * @param chkShinsakaiScheduleKagami chkShinsakaiScheduleKagami
-     */
-    @JsonProperty("chkShinsakaiScheduleKagami")
-    public void setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
-        this.chkShinsakaiScheduleKagami = chkShinsakaiScheduleKagami;
+    @JsonIgnore
+    public void  setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
+        this.getSchedulePrintOption().setChkShinsakaiScheduleKagami(chkShinsakaiScheduleKagami);
     }
 
-    /*
-     * getSp1
-     * @return Sp1
-     */
-    @JsonProperty("Sp1")
-    public Space getSp1() {
-        return Sp1;
-    }
-
-    /*
-     * setSp1
-     * @param Sp1 Sp1
-     */
-    @JsonProperty("Sp1")
-    public void setSp1(Space Sp1) {
-        this.Sp1 = Sp1;
-    }
-
-    /*
-     * getchkShinsakaiScheduleNenkan
-     * @return chkShinsakaiScheduleNenkan
-     */
-    @JsonProperty("chkShinsakaiScheduleNenkan")
-    public CheckBoxList getChkShinsakaiScheduleNenkan() {
-        return chkShinsakaiScheduleNenkan;
-    }
-
-    /*
-     * setchkShinsakaiScheduleNenkan
-     * @param chkShinsakaiScheduleNenkan chkShinsakaiScheduleNenkan
-     */
-    @JsonProperty("chkShinsakaiScheduleNenkan")
-    public void setChkShinsakaiScheduleNenkan(CheckBoxList chkShinsakaiScheduleNenkan) {
-        this.chkShinsakaiScheduleNenkan = chkShinsakaiScheduleNenkan;
-    }
-
-    /*
-     * gettxtNendo
-     * @return txtNendo
-     */
-    @JsonProperty("txtNendo")
+    @JsonIgnore
     public TextBoxDate getTxtNendo() {
-        return txtNendo;
+        return this.getSchedulePrintOption().getTxtNendo();
     }
 
-    /*
-     * settxtNendo
-     * @param txtNendo txtNendo
-     */
-    @JsonProperty("txtNendo")
-    public void setTxtNendo(TextBoxDate txtNendo) {
-        this.txtNendo = txtNendo;
+    @JsonIgnore
+    public void  setTxtNendo(TextBoxDate txtNendo) {
+        this.getSchedulePrintOption().setTxtNendo(txtNendo);
     }
 
     // </editor-fold>

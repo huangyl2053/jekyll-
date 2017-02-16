@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,10 +31,10 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     private Button btnRight;
     @JsonProperty("lblMonth")
     private Label lblMonth;
-    @JsonProperty("txtYearMonth")
-    private TextBoxDate txtYearMonth;
     @JsonProperty("btnHyojiTsukiHenko")
     private Button btnHyojiTsukiHenko;
+    @JsonProperty("txtYearMonth")
+    private TextBoxDate txtYearMonth;
     @JsonProperty("dgShinsakaiKaisaiYoteiIchiran")
     private DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaiKaisaiYoteiIchiran;
     @JsonProperty("txtCopyFrom")
@@ -147,24 +147,6 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     }
 
     /*
-     * gettxtYearMonth
-     * @return txtYearMonth
-     */
-    @JsonProperty("txtYearMonth")
-    public TextBoxDate getTxtYearMonth() {
-        return txtYearMonth;
-    }
-
-    /*
-     * settxtYearMonth
-     * @param txtYearMonth txtYearMonth
-     */
-    @JsonProperty("txtYearMonth")
-    public void setTxtYearMonth(TextBoxDate txtYearMonth) {
-        this.txtYearMonth = txtYearMonth;
-    }
-
-    /*
      * getbtnHyojiTsukiHenko
      * @return btnHyojiTsukiHenko
      */
@@ -180,6 +162,24 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     @JsonProperty("btnHyojiTsukiHenko")
     public void setBtnHyojiTsukiHenko(Button btnHyojiTsukiHenko) {
         this.btnHyojiTsukiHenko = btnHyojiTsukiHenko;
+    }
+
+    /*
+     * gettxtYearMonth
+     * @return txtYearMonth
+     */
+    @JsonProperty("txtYearMonth")
+    public TextBoxDate getTxtYearMonth() {
+        return txtYearMonth;
+    }
+
+    /*
+     * settxtYearMonth
+     * @param txtYearMonth txtYearMonth
+     */
+    @JsonProperty("txtYearMonth")
+    public void setTxtYearMonth(TextBoxDate txtYearMonth) {
+        this.txtYearMonth = txtYearMonth;
     }
 
     /*
