@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.euc.dbe010002;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.core.Renban;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.ChosahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010002_ChosahyoJoho02AEucEntity;
@@ -57,7 +59,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * 申請者調査票情報02ACSVエンティティ編集クラスです。
@@ -282,11 +283,7 @@ public final class ChosahyoJoho02AEucEntityEditor {
         eucEntity.set中間評価項目得点第３群(format得点(entity.getChukanHyokaKomoku3gun()));
         eucEntity.set中間評価項目得点第４群(format得点(entity.getChukanHyokaKomoku4gun()));
         eucEntity.set中間評価項目得点第５群(format得点(entity.getChukanHyokaKomoku5gun()));
-        eucEntity.set一次判定警告コード(
-                (entity.getIchijiHnateiKeikokuCode() != null
-                && NumberUtils.isNumber(entity.getIchijiHnateiKeikokuCode().toString())
-                && Integer.parseInt(entity.getIchijiHnateiKeikokuCode().toString()) == 0)
-                ? entity.getIchijiHnateiKeikokuCode() : RString.EMPTY);
+        eucEntity.set一次判定警告コード(get一次判定警告コード(entity.getIchijiHnateiKeikokuCode()));
         eucEntity.set状態の安定性コード(nullToEmpty(entity.getJotaiAnteiseiCode()));
         eucEntity.set状態の安定性((entity.getJotaiAnteiseiCode() != null && !entity.getJotaiAnteiseiCode().isEmpty())
                 ? JotaiAnteiseiCode.toValue(entity.getJotaiAnteiseiCode().value()).get名称() : RString.EMPTY);
@@ -295,6 +292,17 @@ public final class ChosahyoJoho02AEucEntityEditor {
         eucEntity.set給付区分((entity.getSuiteiKyufuKubunCode() != null && !entity.getSuiteiKyufuKubunCode().isEmpty())
                 ? SuiteiKyufuKubunCode.toValue(entity.getSuiteiKyufuKubunCode().value()).get名称() : RString.EMPTY);
         return eucEntity;
+    }
+
+    private static RString get一次判定警告コード(RString 一次判定警告コード) {
+        if (!RString.isNullOrEmpty(一次判定警告コード)) {
+            Pattern pattern = Pattern.compile("[^0]");
+            Matcher matcher = pattern.matcher(一次判定警告コード);
+            if (matcher.find()) {
+                return 一次判定警告コード;
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static RString getサービスの状況(List<DbT5207NinteichosahyoServiceJokyoEntity> サービスの状況List, int 連番) {

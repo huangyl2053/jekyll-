@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.business.euc.dbe010001;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.core.Renban;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.KihonJohoEntity;
@@ -59,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * 申請者基本情報CSVエンティティ編集クラスです。
@@ -123,10 +124,7 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set処理状態区分((entity.getShoriJotaiKubun() != null && !entity.getShoriJotaiKubun().isEmpty())
                 ? ShoriJotaiKubun.toValue(entity.getShoriJotaiKubun().value()).get名称() : RString.EMPTY);
         eucEntity.set在宅or施設((entity.isShisetsuNyushoFlag()) ? ZaitakuShisetsuKubun.施設.get名称() : ZaitakuShisetsuKubun.在宅.get名称());
-        eucEntity.set入所施設コード((entity.getNyushoShisetsuCode() != null
-                && NumberUtils.isNumber(entity.getNyushoShisetsuCode().toString())
-                && Integer.parseInt(entity.getNyushoShisetsuCode().toString()) == 0)
-                ? entity.getNyushoShisetsuCode().value() : RString.EMPTY);
+        eucEntity.set入所施設コード(get入所施設コード(entity.getNyushoShisetsuCode()));
         eucEntity.set入所施設名称(nullToEmpty(entity.getNyushoShisetsuMeisho()));
         eucEntity.set連絡先氏名(nullToEmpty(entity.getRenrakusakiShimei()));
         eucEntity.set連絡先郵便番号(nullToEmpty(entity.getRenrakusakiYubinNo()));
@@ -417,6 +415,17 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set前回_二次判定結果(
                 (entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode() != null && !entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode().isEmpty())
                 ? YokaigoJotaiKubun99.toValue(entity.getZenkaiNijiHanteiYokaigoJotaiKubunCode().value()).get名称() : RString.EMPTY);
+    }
+
+    private static RString get入所施設コード(JigyoshaNo 入所施設コード) {
+        if (入所施設コード != null && !入所施設コード.isEmpty()) {
+            Pattern pattern = Pattern.compile("[^0]");
+            Matcher matcher = pattern.matcher(入所施設コード.value());
+            if (matcher.find()) {
+                return 入所施設コード.value();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static RString get意見項目(List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List, int 連番) {

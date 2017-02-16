@@ -232,7 +232,7 @@ public class DBE010003_IkenshoJoho09AEucEntity {
     private RString 専門医受診の有無;
     @CsvField(order = 107, name = "専門医受診の有無_詳細")
     private RString 専門医受診の有無_詳細;
-    @CsvField(order = 180, name = "利き腕")
+    @CsvField(order = 108, name = "利き腕")
     private RString 利き腕;
     @CsvField(order = 109, name = "身長")
     private RString 身長;

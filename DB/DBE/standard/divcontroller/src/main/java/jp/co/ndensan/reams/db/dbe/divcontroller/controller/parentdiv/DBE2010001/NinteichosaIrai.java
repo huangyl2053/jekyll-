@@ -433,7 +433,6 @@ public class NinteichosaIrai {
             }
 
             for (dgNinteiTaskList_Row row : ModifyList) {
-
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 RString 認定調査依頼履歴番号 = row.getNinteichosaIraiRirekiNo();
                 Code 厚労省IF識別コード = new Code(row.getKoroshoIfShikibetsuCode());

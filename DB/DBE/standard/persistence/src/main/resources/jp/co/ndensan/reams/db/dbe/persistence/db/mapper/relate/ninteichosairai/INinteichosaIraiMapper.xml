@@ -114,29 +114,29 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
             resultMap="resultMap_認定調査委託先And調査員情報" fetchSize="500">
         SELECT
-            DbT5910NinteichosaItakusakiJoho.*,
-            DbT5913ChosainJoho.*
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
         FROM
-            rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
-            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
-                ON DbT7051KoseiShichosonMaster."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
-            INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
-                ON DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-                   AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+            rgdb."DbT5910NinteichosaItakusakiJoho"
+            INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
+                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5910NinteichosaItakusakiJoho"."shichosonCode"
+            INNER JOIN rgdb."DbT5913ChosainJoho"
+                ON "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
+                   AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode"
                    <if test="地区コード == null or 地区コード.isEmpty()">
-                   AND (DbT5913ChosainJoho."chikuCode" = #{地区コード} OR  DbT5913ChosainJoho."chikuCode" IS NULL)
+                   AND ("DbT5913ChosainJoho"."chikuCode" = #{地区コード} OR  "DbT5913ChosainJoho"."chikuCode" IS NULL)
                    </if>
                    <if test="地区コード != null and !地区コード.isEmpty()">
-                   AND DbT5913ChosainJoho."chikuCode" = #{地区コード}
+                   AND "DbT5913ChosainJoho"."chikuCode" = #{地区コード}
                    </if>
-                   AND DbT5913ChosainJoho."jokyoFlag" = TRUE
+                   AND "DbT5913ChosainJoho"."jokyoFlag" = TRUE
         WHERE
-            DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = #{保険者番号}
-            AND DbT5910NinteichosaItakusakiJoho."autoWaritsukeFlag" = TRUE
-            AND DbT5910NinteichosaItakusakiJoho."jokyoFlag" = TRUE
+            "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = #{保険者番号}
+            AND "DbT5910NinteichosaItakusakiJoho"."autoWaritsukeFlag" = TRUE
+            AND "DbT5910NinteichosaItakusakiJoho"."jokyoFlag" = TRUE
         ORDER BY
-            DbT5913ChosainJoho."ninteiChosaItakusakiCode",
-            DbT5913ChosainJoho."ninteiChosainCode"
+            "DbT5913ChosainJoho"."ninteiChosaItakusakiCode",
+            "DbT5913ChosainJoho"."ninteiChosainCode"
     </select>
     <select resultOrdered="true" id="selectMax認定調査依頼履歴番号"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
