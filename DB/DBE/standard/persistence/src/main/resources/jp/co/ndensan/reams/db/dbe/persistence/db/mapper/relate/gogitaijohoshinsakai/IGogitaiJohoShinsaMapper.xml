@@ -13,7 +13,9 @@
         <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get合議体情報"
-            resultMap="resultMap_GogitaiJoho" parameterType="jp.co.ndensan.reams.uz.uza.lang.RDate" fetchSize="500">
+            resultMap="resultMap_GogitaiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyotei.GogitaiIchiranJohoMapperParameter"          
+            fetchSize="500">
         SELECT
         DbT5591."gogitaiNo" AS "gogitaiNo"
         ,DbT5591."gogitaiMei" AS "gogitaiMei"
@@ -36,9 +38,9 @@
         ON
         DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
         WHERE
-        DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{基準日}
+        DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{YukoYMDFrom}
         AND
-        #{基準日} <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
+        #{YukoYMDTo} <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
         ORDER BY
         "gogitaiNo"
     </select>

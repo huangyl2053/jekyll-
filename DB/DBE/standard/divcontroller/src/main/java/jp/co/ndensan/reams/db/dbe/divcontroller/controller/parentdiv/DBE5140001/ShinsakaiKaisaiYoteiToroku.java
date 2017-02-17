@@ -925,7 +925,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_初期化;
         ViewStateHolder.put(ViewStateKeys.押下フラグ, 登録ボタン未押下);
         set介護認定審査会開催予定一覧(年月);
-        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList = gogitaiManager.get合議体情報(date);
+        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
+                = gogitaiManager.get合議体情報(date.getYearMonth().toDateString(), new RString(date.getLastDay()));
         set合議体情報(gogitaiBusinessList);
         div.getTxtSeteibi().setValue(date);
         if (date.getDayValue() == 1) {
@@ -960,7 +961,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(new RDate(date2.getYearValue(), date2.getDayValue()));
+                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()));
         set合議体情報(gogitaiBusinessList);
         clear入力();
     }
@@ -985,7 +986,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(new RDate(date2.getYearValue(), date2.getDayValue()));
+                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()));
         set合議体情報(gogitaiBusinessList);
         clear入力();
     }
@@ -1007,7 +1008,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(new RDate(date2.getYearValue(), date2.getDayValue()));
+                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()));
         set合議体情報(gogitaiBusinessList);
         clear入力();
     }
