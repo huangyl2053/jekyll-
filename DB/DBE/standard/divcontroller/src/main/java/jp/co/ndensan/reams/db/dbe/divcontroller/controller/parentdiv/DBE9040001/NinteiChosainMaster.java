@@ -99,6 +99,7 @@ public class NinteiChosainMaster {
         getHandler(div).clearKensakuJoken();
 
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
+        ViewStateHolder.put(ViewStateKeys.市町村コード, div.getChosainSearch().getHokenshaList().getSelectedItem().get市町村コード().value());
 
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             LasdecCode 市町村コード = new LasdecCode(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
@@ -260,11 +261,16 @@ public class NinteiChosainMaster {
         getHandler(div).setDisabledFalseToChosainJohoToMeisai();
         getHandler(div).clearChosainJohoToMeisai();
         div.getChosainJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
-
+        
+        RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
+        if(!RString.isNullOrEmpty(市町村コード)){
+             div.getChosainJohoInput().getTxtShichoson().setValue(市町村コード);
+             onBlur_txtShichoson(div);
+        }
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
-            RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
             div.getChosainJohoInput().getTxtShichoson().setValue(市町村コード);
+            div.getChosainJohoInput().getTxtShichoson().setDisabled(true);
             div.getChosainJohoInput().getTxtChosaItakusaki().setValue(認定調査委託先コード);
             onBlur_txtShichoson(div);
             onBlur_txtChosaItakusaki(div);
