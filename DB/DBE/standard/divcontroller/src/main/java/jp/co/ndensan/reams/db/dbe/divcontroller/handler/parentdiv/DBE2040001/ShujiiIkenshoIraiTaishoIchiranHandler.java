@@ -279,6 +279,25 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     }
 
     /**
+     * 作成料請求区分コードを取得します。
+     *
+     * @param 作成料請求区分名称 RString
+     * @return 作成料請求区分コード RString
+     */
+    public RString get作成料請求区分コード(RString 作成料請求区分名称) {
+        RString 作成料請求区分コード = RString.EMPTY;
+        if (RString.isNullOrEmpty(作成料請求区分名称)) {
+            return 作成料請求区分コード;
+        }
+        for (SakuseiryoSeikyuKubun sakuseiryoSeikyuKubun : SakuseiryoSeikyuKubun.values()) {
+            if (sakuseiryoSeikyuKubun.get名称().equals(作成料請求区分名称)) {
+                作成料請求区分コード = sakuseiryoSeikyuKubun.getコード();
+            }
+        }
+        return 作成料請求区分コード;
+    }
+
+    /**
      * 対象者一覧データグリッドで選択した対象者に依頼日を設定します。
      */
     public void set依頼日() {
@@ -331,6 +350,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         builder.set主治医意見書作成依頼年月日(new FlexibleDate(row.getIkenshoIraiDay().getValue().toDateString()));
         builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
         builder.set論理削除フラグ(false);
+        builder.set作成料請求区分(new Code(get作成料請求区分コード(row.getSakuseiryoSeikyuKubun())));
         list.add(builder.build());
         return list;
     }
