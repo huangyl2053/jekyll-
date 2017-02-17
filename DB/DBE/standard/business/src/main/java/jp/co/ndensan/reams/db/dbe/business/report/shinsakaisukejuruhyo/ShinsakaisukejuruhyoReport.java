@@ -85,9 +85,9 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaisukejuruhyoReportSource> reportSourceWriter) {
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            int renban = 0;
-            ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
             for (RString 審査会委員コード : 審査会委員コードリスト) {
+                int renban = 0;
+                ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
                 printBodyItemList(renban, headerEditor, reportSourceWriter);
             }
         } else {

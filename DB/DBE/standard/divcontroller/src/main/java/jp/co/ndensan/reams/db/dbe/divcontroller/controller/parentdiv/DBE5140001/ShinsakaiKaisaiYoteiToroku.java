@@ -114,8 +114,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_週COPY = new RString("週COPY");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-    private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-            UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+    private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+            UrQuestionMessages.保存の確認.getMessage().evaluate());
     private static final WarningMessage 操作可否 = new WarningMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode(),
             UrWarningMessages.未保存情報の破棄確認.getMessage().replace("審議会開催予定").evaluate());
     private final ShinsakaiKaisaiYoteiJohoManager yoteiJohoManager;
@@ -624,7 +624,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getBtnToroku().setDisabled(false);
@@ -668,6 +668,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getLblCopyFrom().setDisplayNone(true);
             div.getLblCopyTo().setDisplayNone(true);
             div.getBtnWeekCopy().setDisplayNone(true);
+            div.getShinsakaiKaisaiYoteiIchiran().getTxtYearMonth().clearValue();
             div.getDgShinsakaiKaisaiYoteiIchiran().setWidth(width_1210);
             div.getShinsakaiKaisaiYoteiIchiran().setWidth(width_1225);
 
