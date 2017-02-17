@@ -28,7 +28,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 認定調査票_特記事項_デザイン用紙の帳票出力処理クラスです。
@@ -58,7 +61,22 @@ public class NinteiChosaTokkiJiko extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value())
+                .addBreak(new BreakerCatalog<ChosahyoTokkijikoReportSource>().new SimpleLayoutBreaker(
+                    new RString("layout")) {
+            @Override
+                    public ReportLineRecord<ChosahyoTokkijikoReportSource> occuredBreak(
+                            ReportLineRecord<ChosahyoTokkijikoReportSource> currentRecord,
+                            ReportLineRecord<ChosahyoTokkijikoReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                                int layout = currentRecord.getSource().layout.index();
+                                currentRecord.setFormGroupIndex(layout);
+                                if (nextRecord != null && nextRecord.getSource() != null) {
+                                    layout = nextRecord.getSource().layout.index();
+                                    nextRecord.setFormGroupIndex(layout);
+                                }
+                                return currentRecord;
+                            }
+                }).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 

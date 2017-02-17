@@ -417,7 +417,7 @@ public class IraishoIkkatsuHakkoHandler {
 
     private void setNinteiChkShinseiTani() {
         RDate 基準日 = RDate.getNowDate();
-        RString 保険者市町村コード = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value();
+        RString 保険者市町村コード = div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value();
 
         if (!div.getChkChosahyoIraisho().isDisplayNone()) {
             List<RString> 依頼書選択selectedKeys = new ArrayList<>();
