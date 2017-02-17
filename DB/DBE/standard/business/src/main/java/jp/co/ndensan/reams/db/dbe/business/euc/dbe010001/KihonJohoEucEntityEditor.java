@@ -97,10 +97,12 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set生年月日(format日付(entity.getSeinengappiYMD()));
         eucEntity.set年齢(new RString(entity.getAge()));
         eucEntity.set被保険者区分コード(entity.getHihokenshaKubunCode());
-        eucEntity.set被保険者区分((!RString.isNullOrEmpty(entity.getHihokenshaKubunCode()))
+        eucEntity.set被保険者区分(
+                (entity.getHihokenshaKubunCode() != null && !entity.getHihokenshaKubunCode().trim().isEmpty())
                 ? HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称() : RString.EMPTY);
         eucEntity.set_２号特定疾病コード(entity.getNigoTokuteiShippeiCode());
-        eucEntity.set_２号特定疾病名((!RString.isNullOrEmpty(entity.getNigoTokuteiShippeiCode()))
+        eucEntity.set_２号特定疾病名(
+                (entity.getNigoTokuteiShippeiCode() != null && !entity.getNigoTokuteiShippeiCode().trim().isEmpty())
                 ? TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode()).get名称() : RString.EMPTY);
         eucEntity.set郵便番号(nullToEmpty(entity.getYubinNo()));
         eucEntity.set住所(nullToEmpty(entity.getJusho()));
@@ -112,7 +114,7 @@ public final class KihonJohoEucEntityEditor {
                 : RString.EMPTY);
         eucEntity.set申請日(format日付(entity.getNinteiShinseiYMD()));
         eucEntity.set申請書区分コード(entity.getShienShinseiKubun());
-        eucEntity.set申請書区分((!RString.isNullOrEmpty(entity.getShienShinseiKubun()))
+        eucEntity.set申請書区分((entity.getShienShinseiKubun() != null && !entity.getShienShinseiKubun().trim().isEmpty())
                 ? ShienShinseiKubun.toValue(entity.getShienShinseiKubun()).get名称() : RString.EMPTY);
         eucEntity.set申請区分_法令_コード(nullToEmpty(entity.getNinteiShinseiHoreiKubunCode()));
         eucEntity.set申請区分_法令((entity.getNinteiShinseiHoreiKubunCode() != null && !entity.getNinteiShinseiHoreiKubunCode().isEmpty())
@@ -132,7 +134,7 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set連絡先電話番号(nullToEmpty(entity.getRenrakusakiTelNo()));
         eucEntity.set連絡先携帯番号(nullToEmpty(entity.getRenrakusakiKeitaiTelNo()));
         eucEntity.set連絡先続柄コード(entity.getRenrakusakiTuzukigara());
-        eucEntity.set連絡先続柄((!RString.isNullOrEmpty(entity.getRenrakusakiTuzukigara()))
+        eucEntity.set連絡先続柄((entity.getRenrakusakiTuzukigara() != null && !entity.getRenrakusakiTuzukigara().trim().isEmpty())
                 ? RensakusakiTsuzukigara.toValue(entity.getRenrakusakiTuzukigara()).get名称() : RString.EMPTY);
         eucEntity.set代行区分コード(nullToEmpty(entity.getShinseiTodokedeDaikoKubunCode()));
         eucEntity.set代行区分((entity.getShinseiTodokedeDaikoKubunCode() != null && !entity.getShinseiTodokedeDaikoKubunCode().isEmpty())
@@ -143,7 +145,7 @@ public final class KihonJohoEucEntityEditor {
         eucEntity.set届出者電話番号(nullToEmpty(entity.getShinseiTodokedeshaTelNo()));
         eucEntity.set届出者続柄(entity.getShinseiTodokedeshaTsuzukigara());
         eucEntity.set事業者区分コード(entity.getJigyoshaKubun());
-        eucEntity.set事業者区分((!RString.isNullOrEmpty(entity.getJigyoshaKubun()))
+        eucEntity.set事業者区分((entity.getJigyoshaKubun() != null && !entity.getJigyoshaKubun().trim().isEmpty())
                 ? JigyoshaKubun.toValue(entity.getJigyoshaKubun()).get名称() : RString.EMPTY);
         eucEntity.set事業者番号(entity.getShinseiTodokedeDaikoJigyoshaNo());
         eucEntity.set現在の段階(get現在の段階(entity));
@@ -438,11 +440,11 @@ public final class KihonJohoEucEntityEditor {
     }
 
     private static RString get意見項目02名称(RString code) {
-        return (!RString.isNullOrEmpty(code)) ? IkenKomoku02.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku02.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目03名称(RString code) {
-        return (!RString.isNullOrEmpty(code)) ? IkenKomoku03.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku03.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString format日付(FlexibleDate value) {

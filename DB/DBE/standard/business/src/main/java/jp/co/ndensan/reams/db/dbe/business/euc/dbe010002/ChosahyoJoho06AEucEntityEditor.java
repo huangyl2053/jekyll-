@@ -105,14 +105,14 @@ public class ChosahyoJoho06AEucEntityEditor {
         eucEntity.set生年月日(format日付(entity.getSeinengappiYMD()));
         eucEntity.set年齢(new RString(entity.getAge()));
         eucEntity.set被保険者区分コード(entity.getHihokenshaKubunCode());
-        eucEntity.set被保険者区分((!RString.isNullOrEmpty(entity.getHihokenshaKubunCode()))
+        eucEntity.set被保険者区分((entity.getHihokenshaKubunCode() != null && !entity.getHihokenshaKubunCode().trim().isEmpty())
                 ? HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称() : RString.EMPTY);
         eucEntity.set_２号特定疾病コード(entity.getNigoTokuteiShippeiCode());
-        eucEntity.set_２号特定疾病名((!RString.isNullOrEmpty(entity.getNigoTokuteiShippeiCode()))
+        eucEntity.set_２号特定疾病名((entity.getNigoTokuteiShippeiCode() != null && !entity.getNigoTokuteiShippeiCode().trim().isEmpty())
                 ? TokuteiShippei.toValue(entity.getNigoTokuteiShippeiCode()).get名称() : RString.EMPTY);
         eucEntity.set申請日(format日付(entity.getNinteiShinseiYMD()));
         eucEntity.set申請書区分コード(entity.getShienShinseiKubun());
-        eucEntity.set申請書区分((!RString.isNullOrEmpty(entity.getShienShinseiKubun()))
+        eucEntity.set申請書区分((entity.getShienShinseiKubun() != null && !entity.getShienShinseiKubun().trim().isEmpty())
                 ? ShienShinseiKubun.toValue(entity.getShienShinseiKubun()).get名称() : RString.EMPTY);
         eucEntity.set申請区分_法令_コード(nullToEmpty(entity.getNinteiShinseiHoreiKubunCode()));
         eucEntity.set申請区分_法令((entity.getNinteiShinseiHoreiKubunCode() != null && !entity.getNinteiShinseiHoreiKubunCode().isEmpty())
@@ -305,7 +305,7 @@ public class ChosahyoJoho06AEucEntityEditor {
     }
 
     private static RString get一次判定警告コード(RString 一次判定警告コード) {
-        if (!RString.isNullOrEmpty(一次判定警告コード)) {
+        if (一次判定警告コード != null && !一次判定警告コード.trim().isEmpty()) {
             Pattern pattern = Pattern.compile("[^0]");
             Matcher matcher = pattern.matcher(一次判定警告コード);
             if (matcher.find()) {
