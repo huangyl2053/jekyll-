@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -52,6 +53,9 @@ public class ChosaItakusakiAndChosainGuide {
      * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onLoad(ChosaItakusakiAndChosainGuideDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         getHandler(div).intialize();
 
@@ -90,12 +94,20 @@ public class ChosaItakusakiAndChosainGuide {
      * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onClick_btnKensaku(ChosaItakusakiAndChosainGuideDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxKensu();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
-        getHandler(div).setDataGrid(list);
+        if (!list.isEmpty()) {
+            getHandler(div).setDataGrid(list);
+        } else {
+            div.getDgKensakuKekkaIchiran().clearSource();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
