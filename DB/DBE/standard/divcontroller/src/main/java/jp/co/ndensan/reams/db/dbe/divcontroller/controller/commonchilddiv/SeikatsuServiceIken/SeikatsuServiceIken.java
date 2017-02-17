@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.SeikatsuServiceIken;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.SeikatsuServiceIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.SeikatsuServiceIkenHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
@@ -30,14 +28,6 @@ public class SeikatsuServiceIken {
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
-    public static final Map<RString, RString> 歩行補助使用チェックボックス用Map;
-
-    static {
-        歩行補助使用チェックボックス用Map = new LinkedHashMap<>();
-        歩行補助使用チェックボックス用Map.put(KEY0, new RString("用いていない "));
-        歩行補助使用チェックボックス用Map.put(KEY1, new RString("屋外で使用 　　　　　　"));
-        歩行補助使用チェックボックス用Map.put(KEY2, new RString("屋内で使用"));
-    }
 
     /**
      * コンストラクタです。
@@ -69,9 +59,6 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkHokohojoShiyo(SeikatsuServiceIkenDiv div) {
 
         if (div.getChkHokohojoShiyo().getSelectedKeys().contains(KEY0)) {
-
-            div.getChkHokohojoShiyo()
-                    .setDataSource(KeyValueDataSourceConverter.getDataSource(歩行補助使用チェックボックス用Map));
             List<RString> checkTargetList = new ArrayList();
             checkTargetList.add(KEY0);
             div.getChkHokohojoShiyo().setSelectedItemsByKey(checkTargetList);
@@ -80,10 +67,7 @@ public class SeikatsuServiceIken {
             disabledTargetList.add(KEY2);
             div.getChkHokohojoShiyo().setDisabledItemsByKey(disabledTargetList);
         } else {
-            List<RString> selectedKeys = div.getChkHokohojoShiyo().getSelectedKeys();
-            div.getChkHokohojoShiyo()
-                    .setDataSource(KeyValueDataSourceConverter.getDataSource(歩行補助使用チェックボックス用Map));
-            div.getChkHokohojoShiyo().setSelectedItemsByKey(selectedKeys);
+            div.getChkHokohojoShiyo().setDisabledItemsByKey(Collections.<RString>emptyList());
         }
         return ResponseData.of(div).respond();
     }
