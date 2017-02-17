@@ -16,13 +16,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiChosaDataOutput のクラスファイル
- *
+ * NinteiChosaDataOutput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiChosaDataOutputDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -105,7 +104,7 @@ public class NinteiChosaDataOutputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
+    public void  setBtnKyufuJissekiSearchClear(Button btnKyufuJissekiSearchClear) {
         this.getNinteiKensakuJyoken().setBtnKyufuJissekiSearchClear(btnKyufuJissekiSearchClear);
     }
 
@@ -115,7 +114,7 @@ public class NinteiChosaDataOutputDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
+    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getNinteiKensakuJyoken().setTxtMaxCount(txtMaxCount);
     }
 
@@ -130,12 +129,22 @@ public class NinteiChosaDataOutputDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkShutsuryokuZumi() {
+        return this.getNinteiKensakuJyoken().getChkShutsuryokuZumi();
+    }
+
+    @JsonIgnore
+    public void  setChkShutsuryokuZumi(CheckBoxList chkShutsuryokuZumi) {
+        this.getNinteiKensakuJyoken().setChkShutsuryokuZumi(chkShutsuryokuZumi);
+    }
+
+    @JsonIgnore
     public DataGrid<dgNinteiChosaData_Row> getDgNinteiChosaData() {
         return this.getNinteiIchiran().getDgNinteiChosaData();
     }
 
     @JsonIgnore
-    public void setDgNinteiChosaData(DataGrid<dgNinteiChosaData_Row> dgNinteiChosaData) {
+    public void  setDgNinteiChosaData(DataGrid<dgNinteiChosaData_Row> dgNinteiChosaData) {
         this.getNinteiIchiran().setDgNinteiChosaData(dgNinteiChosaData);
     }
 

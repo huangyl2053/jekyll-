@@ -14,13 +14,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteiKensakuJyoken のクラスファイル
- *
+ * NinteiKensakuJyoken のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiKensakuJyokenDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +34,8 @@ public class NinteiKensakuJyokenDiv extends Panel {
     private HokenshaListDiv ccdHokensha;
     @JsonProperty("ccdChosaltakusakiAndChosainInput")
     private ChosaItakusakiAndChosainInputDiv ccdChosaltakusakiAndChosainInput;
+    @JsonProperty("chkShutsuryokuZumi")
+    private CheckBoxList chkShutsuryokuZumi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,6 +95,24 @@ public class NinteiKensakuJyokenDiv extends Panel {
     @JsonProperty("ccdChosaltakusakiAndChosainInput")
     public IChosaItakusakiAndChosainInputDiv getCcdChosaltakusakiAndChosainInput() {
         return ccdChosaltakusakiAndChosainInput;
+    }
+
+    /*
+     * getchkShutsuryokuZumi
+     * @return chkShutsuryokuZumi
+     */
+    @JsonProperty("chkShutsuryokuZumi")
+    public CheckBoxList getChkShutsuryokuZumi() {
+        return chkShutsuryokuZumi;
+    }
+
+    /*
+     * setchkShutsuryokuZumi
+     * @param chkShutsuryokuZumi chkShutsuryokuZumi
+     */
+    @JsonProperty("chkShutsuryokuZumi")
+    public void setChkShutsuryokuZumi(CheckBoxList chkShutsuryokuZumi) {
+        this.chkShutsuryokuZumi = chkShutsuryokuZumi;
     }
 
     // </editor-fold>
