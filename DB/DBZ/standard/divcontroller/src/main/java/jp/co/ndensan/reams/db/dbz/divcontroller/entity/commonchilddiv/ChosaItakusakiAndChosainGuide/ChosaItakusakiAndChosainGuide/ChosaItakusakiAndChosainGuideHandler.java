@@ -90,8 +90,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
      */
     public void setDataGrid(List<KijuntsukiShichosonjoho> list) {
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
-        div.getKensakuKekkaIchiran().setVisible(true);
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size() && i < div.getTxtMaxKensu().getText().toInt(); i++) {
             KijuntsukiShichosonjoho business = list.get(i);
             dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
             kensakuKekkaIchiran_Row.getItakusakicode().setValue(nullToEmpty(business.get認定調査委託先コード()));
@@ -112,8 +111,23 @@ public class ChosaItakusakiAndChosainGuideHandler {
             kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
         }
         div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
+        div.getDgKensakuKekkaIchiran().getGridSetting().setSelectedRowCount(list.size());
+        div.getDgKensakuKekkaIchiran().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
         div.getTxtChikuCode().setMaxLength(5);
         div.getTxtChikuCode().setPaddingZero(true);
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        if (dataPassModel.get対象モード().equals(new RString(TaishoMode.Itakusaki.name()))) {
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainCode").setVisible(false);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainShimei").setVisible(false);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainKanaShimei").setVisible(false);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainHJokyo").setVisible(false);
+        } else {
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainCode").setVisible(true);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainShimei").setVisible(true);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainKanaShimei").setVisible(true);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainHJokyo").setVisible(true);
+        }
     }
 
     /**

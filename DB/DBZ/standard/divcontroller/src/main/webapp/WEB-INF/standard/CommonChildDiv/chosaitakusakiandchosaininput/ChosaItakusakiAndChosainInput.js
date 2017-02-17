@@ -43,6 +43,27 @@ var DBZ;
                     this.controls.btnChosainGuide().displayNone = false;
                 };
 
+                ShoriType.prototype.SingleInputMode = function () {
+                    this.controls.txtChosainCode().readOnly = true;
+                    this.controls.btnChosainGuide().disabled = false;
+
+                    this.controls.txtChosaItakusakiCode().readOnly = true;
+                    this.controls.btnChosaItakusakiGuide().disabled = true;
+
+                    this.controls.btnZenkaiFukusha().displayNone = false;
+                    this.controls.btnClear().displayNone = false;
+
+                    this.controls.btnZenkaiFukusha().disabled = true;
+                    this.controls.btnClear().disabled = true;
+                    this.controls.btnChosainRenrakuJiko().disabled = true;
+
+                    this.controls.btnChosainRenrakuJiko().displayNone = false;
+                    this.controls.btnZenkaiFukusha().displayNone = false;
+                    this.controls.btnClear().displayNone = false;
+                    this.controls.btnChosaItakusakiGuide().displayNone = false;
+                    this.controls.btnChosainGuide().displayNone = false;
+                };
+
                 ShoriType.prototype.ShokaiMode = function () {
                     this.controls.txtChosainCode().readOnly = true;
                     this.controls.btnChosainGuide().disabled = true;
@@ -76,6 +97,24 @@ var DBZ;
                     this.controls.btnChosainRenrakuJiko().displayNone = true;
                     this.controls.btnChosaItakusakiGuide().displayNone = false;
                     this.controls.btnChosainGuide().displayNone = false;
+                };
+
+                ShoriType.prototype.SimpleSingleInputMode = function () {
+                    this.controls.txtChosainCode().readOnly = true;
+                    this.controls.btnChosainGuide().disabled = false;
+
+                    this.controls.txtChosaItakusakiCode().readOnly = true;
+                    this.controls.btnChosaItakusakiGuide().disabled = true;
+
+                    this.controls.btnZenkaiFukusha().disabled = true;
+                    this.controls.btnClear().disabled = true;
+                    this.controls.btnChosainRenrakuJiko().disabled = true;
+
+                    this.controls.btnZenkaiFukusha().displayNone = true;
+                    this.controls.btnClear().displayNone = true;
+                    this.controls.btnChosainRenrakuJiko().displayNone = true;
+                    this.controls.btnChosaItakusakiGuide().displayNone = true;
+                    this.controls.btnChosainGuide().displayNone = true;
                 };
 
                 ShoriType.prototype.SimpleShokaiMode = function () {
@@ -115,6 +154,7 @@ var DBZ;
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
                 editTypes.addEditType("ChosaItakusakiCode_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("ChosainCode_required", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
             };
 
@@ -124,6 +164,14 @@ var DBZ;
 
             PublicProperties.prototype.setChosaItakusakiCode_required = function (value) {
                 return this.controls.txtChosaItakusakiCode().required = value;
+            };
+
+            PublicProperties.prototype.getChosainCode_required = function () {
+                return this.controls.txtChosainCode().required;
+            };
+
+            PublicProperties.prototype.setChosainCode_required = function (value) {
+                return this.controls.txtChosainCode().required = value;
             };
             return PublicProperties;
         })();
