@@ -91,6 +91,30 @@
      "eventName": "処理終了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5160001",
+     "layoutTitle": "介護認定審査会対象者割付（割付）",
+     "eventName": "基本運用へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4010001",
+     "toLayoutTitle": "基本運用・介護認定審査会登録",
+     "toState": "完了のみ登録"
+    },
+    {
+     "id": "9",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4010001",
+     "layoutTitle": "基本運用・介護認定審査会登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

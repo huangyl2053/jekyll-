@@ -52,6 +52,7 @@
         DbT5116_Zenkai."ichijiHanteiKekkaCode" AS 要介護認定前回一次判定結果コード,
         DbT5102_Zenkai."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
         DbT5105."maskingKanryoYMD" AS マスキング完了年月日,
+        DbT5105."ninteiShinsakaiWariateKanryoYMD" AS 認定審査会割付完了年月日,
         DbT7051."shichosonMeisho" AS 市町村名称,
         DbT7051."shoKisaiHokenshaNo" AS 証記載保険者番号,
         DbT5203."shogaiNichijoSeikatsuJiritsudoCode" AS 調査票_障害高齢者の日常生活自立度コード,

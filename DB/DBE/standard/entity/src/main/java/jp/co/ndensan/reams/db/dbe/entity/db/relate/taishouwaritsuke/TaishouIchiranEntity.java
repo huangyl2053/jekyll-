@@ -42,6 +42,7 @@ public class TaishouIchiranEntity {
     private Code 要介護認定前回一次判定結果コード;
     private Code 二次判定要介護状態区分コード;
     private FlexibleDate マスキング完了年月日;
+    private FlexibleDate 認定審査会割付完了年月日;
     private RString 市町村名称;
     private ShoKisaiHokenshaNo 証記載保険者番号;
     private Code 調査票_障害高齢者の日常生活自立度コード;

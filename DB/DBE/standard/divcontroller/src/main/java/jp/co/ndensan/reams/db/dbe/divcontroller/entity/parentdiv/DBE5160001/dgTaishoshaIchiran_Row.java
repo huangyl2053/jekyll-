@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 26 09:49:55 JST 2016 
+ * Thu Feb 16 11:42:25 JST 2017 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgTaishoshaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
 
     private RString jotaiFlag;
     private RString shinsajunKakuteiFlag;
@@ -53,6 +53,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private RString shujii;
     private Boolean torokuZumiFlag;
     private RString torokuZumiNo;
+    private RString ninteiShinsakaiWariateKanryoYMD;
 
     public dgTaishoshaIchiran_Row() {
         super();
@@ -87,6 +88,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shujii = RString.EMPTY;
         this.torokuZumiFlag = false;
         this.torokuZumiNo = RString.EMPTY;
+        this.ninteiShinsakaiWariateKanryoYMD = RString.EMPTY;
         this.setOriginalData("jotaiFlag", jotaiFlag);
         this.setOriginalData("shinsajunKakuteiFlag", shinsajunKakuteiFlag);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
@@ -118,9 +120,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shujii", shujii);
         this.setOriginalData("torokuZumiFlag", torokuZumiFlag);
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
+        this.setOriginalData("ninteiShinsakaiWariateKanryoYMD", ninteiShinsakaiWariateKanryoYMD);
     }
 
-    public dgTaishoshaIchiran_Row(RString jotaiFlag, RString shinsajunKakuteiFlag, RString shinseishoKanriNo, RString no, RString priority, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanKaishiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString konkaiIchijiHantei, RString masking, RString hokenshaNo, RString hokenshaName, RString zenkaiIchijiHantei, RString zenkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString nyushiShisetsu, RString chosaKikan, RString chosain, RString saiChosa, RString iryoKikan, RString shujii, Boolean torokuZumiFlag, RString torokuZumiNo) {
+    public dgTaishoshaIchiran_Row(RString jotaiFlag, RString shinsajunKakuteiFlag, RString shinseishoKanriNo, RString no, RString priority, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanKaishiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString konkaiIchijiHantei, RString masking, RString hokenshaNo, RString hokenshaName, RString zenkaiIchijiHantei, RString zenkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString nyushiShisetsu, RString chosaKikan, RString chosain, RString saiChosa, RString iryoKikan, RString shujii, Boolean torokuZumiFlag, RString torokuZumiNo, RString ninteiShinsakaiWariateKanryoYMD) {
         super();
         this.setOriginalData("jotaiFlag", jotaiFlag);
         this.setOriginalData("shinsajunKakuteiFlag", shinsajunKakuteiFlag);
@@ -153,6 +156,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shujii", shujii);
         this.setOriginalData("torokuZumiFlag", torokuZumiFlag);
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
+        this.setOriginalData("ninteiShinsakaiWariateKanryoYMD", ninteiShinsakaiWariateKanryoYMD);
         this.jotaiFlag = jotaiFlag;
         this.shinsajunKakuteiFlag = shinsajunKakuteiFlag;
         this.shinseishoKanriNo = shinseishoKanriNo;
@@ -184,6 +188,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shujii = shujii;
         this.torokuZumiFlag = torokuZumiFlag;
         this.torokuZumiNo = torokuZumiNo;
+        this.ninteiShinsakaiWariateKanryoYMD = ninteiShinsakaiWariateKanryoYMD;
     }
 
     public RString getJotaiFlag() {
@@ -308,6 +313,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
 
     public RString getTorokuZumiNo() {
         return torokuZumiNo;
+    }
+
+    public RString getNinteiShinsakaiWariateKanryoYMD() {
+        return ninteiShinsakaiWariateKanryoYMD;
     }
 
     public void setJotaiFlag(RString jotaiFlag) {
@@ -463,6 +472,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setTorokuZumiNo(RString torokuZumiNo) {
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
         this.torokuZumiNo = torokuZumiNo;
+    }
+
+    public void setNinteiShinsakaiWariateKanryoYMD(RString ninteiShinsakaiWariateKanryoYMD) {
+        this.setOriginalData("ninteiShinsakaiWariateKanryoYMD", ninteiShinsakaiWariateKanryoYMD);
+        this.ninteiShinsakaiWariateKanryoYMD = ninteiShinsakaiWariateKanryoYMD;
     }
 
     // </editor-fold>

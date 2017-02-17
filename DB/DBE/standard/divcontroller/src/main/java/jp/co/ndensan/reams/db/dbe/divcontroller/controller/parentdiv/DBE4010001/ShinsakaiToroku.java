@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -72,6 +73,7 @@ public class ShinsakaiToroku {
     private final RString 介護認定審査会割当 = new RString("完了処理・介護認定審査会割当");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
+    private static final RString UIコンテナID_DBEUC51601 = new RString("DBEUC51601");
 
     /**
      * 画面初期化処理です。
@@ -81,7 +83,7 @@ public class ShinsakaiToroku {
      */
     public ResponseData<ShinsakaiTorokuDiv> onLoad(ShinsakaiTorokuDiv div) {
         getHandler(div).set対象者最大表示件数();
-        getHandler(div).onLoad();
+        getHandler(div).onLoad(ResponseHolder.getState());
         getHandler(div).審査会一覧データグリッド初期化();       
         getHandler(div).set審査会最大表示件数();
         ViewStateHolder.put(ViewStateKeys.状態, div.getRadTaishoshaJotai().getSelectedKey());
@@ -222,7 +224,7 @@ public class ShinsakaiToroku {
             }
         }
         ViewStateHolder.put(ViewStateKeys.状態, div.getRadTaishoshaJotai().getSelectedKey());
-        getHandler(div).setJyotaiKubun();
+        getHandler(div).setJyotaiKubun(ResponseHolder.getState());
         return ResponseData.of(div).respond();
     }
 
@@ -312,7 +314,7 @@ public class ShinsakaiToroku {
                 return ResponseData.of(div).respond();
             }
         }
-        getHandler(div).onLoad();
+        getHandler(div).onLoad(ResponseHolder.getState());
         return ResponseData.of(div).respond();
     }
 
@@ -355,8 +357,14 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnContinue(ShinsakaiTorokuDiv div) {
-        getHandler(div).onLoad();
-        return ResponseData.of(div).setState(DBE4010001StateName.登録);
+        DBE4010001StateName stateName;
+        if (UIコンテナID_DBEUC51601.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
+            stateName = DBE4010001StateName.完了のみ登録;
+        } else {
+            stateName = DBE4010001StateName.登録;
+        }
+        getHandler(div).onLoad(ResponseHolder.getState());
+        return ResponseData.of(div).setState(stateName);
     }
     private List<dgNinteiTaskList_Row> get修正リスト(ShinsakaiTorokuDiv div) {
         List<dgNinteiTaskList_Row> データリスト = div.getDgNinteiTaskList().getDataSource();

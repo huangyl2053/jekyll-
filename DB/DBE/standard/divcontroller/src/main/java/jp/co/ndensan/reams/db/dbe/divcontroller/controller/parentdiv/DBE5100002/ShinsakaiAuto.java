@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100002.Val
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -86,6 +87,7 @@ public class ShinsakaiAuto {
      * @return ResponseData<ShinsakaiAutoDiv>
      */
     public ResponseData<ShinsakaiAutoDiv> onClick_btnReturn(ShinsakaiAutoDiv shinDiv) {
+        ViewStateHolder.put(ViewStateKeys.開催番号, RString.EMPTY);
         return ResponseData.of(shinDiv).forwardWithEventName(DBE5100002TransitionEventName.審査会一覧へ戻る).respond();
     }
 
