@@ -28,9 +28,9 @@
         ON
         DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
         AND
-        DbT5591."gogitaiYukoKikanKaishiYMD" = DbT5593."gogitaiYukoKikanKaishiYMD"
+        DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5593."gogitaiYukoKikanKaishiYMD"
         AND
-        DbT5591."gogitaiYukoKikanShuryoYMD" = DbT5593."gogitaiYukoKikanShuryoYMD"
+        DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DbT5593."gogitaiYukoKikanShuryoYMD"
         INNER JOIN
         rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
         ON

@@ -87,6 +87,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
             kensakuKekkaIchiran_Row.setShujiiShichosonCode(business.get市町村コード());
             kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
         }
+        div.getDgKensakuKekkaIchiran().clearSource();
         div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
     }
 

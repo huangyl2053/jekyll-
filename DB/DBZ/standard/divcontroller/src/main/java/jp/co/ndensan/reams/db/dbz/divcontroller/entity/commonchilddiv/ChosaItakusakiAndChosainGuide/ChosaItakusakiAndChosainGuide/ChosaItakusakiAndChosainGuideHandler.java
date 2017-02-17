@@ -11,15 +11,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
-import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 
 /**
  * 調査委託先＆調査員ガイドDivのHandlerクラスです。
@@ -53,6 +53,12 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getDdlChosaItakusakiKubun().setDataSource(ddlShoriKubun);
         div.getTxtChikuCode().setMaxLength(5);
         div.getTxtChikuCode().setPaddingZero(true);
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        if (dataPassModel != null) {
+            div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
+            div.setMode_TaishoMode(TaishoMode.getEnum(dataPassModel.get対象モード().toString()));
+        }
     }
 
     /**
