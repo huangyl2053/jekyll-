@@ -184,9 +184,6 @@ public class NinteichosaIraiValidationHandler {
                 if (row.getChosaIraiKigen().getValue() == null) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可_認定調査期限年月日));
                 }
-                if (row.getChosaIraishoHakkoDay().getValue() == null) {
-                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可_依頼書出力年月日));
-                }
                 if (row.getChousahyoOutput().getValue() == null) {
                     validationMessages.add(new ValidationMessageControlPair(RRVMessages.理由付き完了不可_調査票等出力年月日));
                 }
@@ -288,7 +285,6 @@ public class NinteichosaIraiValidationHandler {
         複数選択不可_認定調査票入手一覧(DbeErrorMessages.複数選択不可, "認定調査依頼一覧"),
         理由付き完了不可(DbzErrorMessages.理由付き完了不可, "認定調査依頼先が未確定"),
         理由付き完了不可_認定調査期限年月日(DbzErrorMessages.理由付き完了不可, "認定調査期限年月日が未設定"),
-        理由付き完了不可_依頼書出力年月日(DbzErrorMessages.理由付き完了不可, "依頼書出力年月日が未設定"),
         理由付き完了不可_調査票等出力年月日(DbzErrorMessages.理由付き完了不可, "調査票等出力年月日が未設定"),
         認定調査依頼未割付(DbeErrorMessages.認定調査依頼未割付),
         委託先未設定(DbeErrorMessages.委託先未設定),
