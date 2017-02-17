@@ -74,56 +74,38 @@ public class SonotashiryoPrintService {
         if (イメージ共有ファイルID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
             RString path = copySharedFiles(descriptor);
-
             RString イメージファイルパスA = getAイメージファイルパス(descriptor, path, その他資料マスキング区分);
-            if (!イメージファイルパスA.isEmpty()) {
-                try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
-                    ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+            RString イメージファイルパスB = getBイメージファイルパス(descriptor, path, その他資料マスキング区分);
+            RString イメージファイルパスC = getCイメージファイルパス(descriptor, path, その他資料マスキング区分);
+            RString イメージファイルパスD = getDイメージファイルパス(descriptor, path, その他資料マスキング区分);
+            RString イメージファイルパスE = getEイメージファイルパス(descriptor, path, その他資料マスキング区分);
+            RString イメージファイルパスF = getFイメージファイルパス(descriptor, path, その他資料マスキング区分);
+            try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
+                ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                if (!イメージファイルパスA.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスA));
                     report.writeBy(reportSourceWriter);
                 }
-            }
-
-            RString イメージファイルパスB = getBイメージファイルパス(descriptor, path, その他資料マスキング区分);
-            if (!イメージファイルパスB.isEmpty()) {
-                try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
-                    ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                if (!イメージファイルパスB.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスB));
                     report.writeBy(reportSourceWriter);
                 }
-            }
-
-            RString イメージファイルパスC = getCイメージファイルパス(descriptor, path, その他資料マスキング区分);
-            if (!イメージファイルパスC.isEmpty()) {
-                try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
-                    ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                if (!イメージファイルパスC.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスC));
                     report.writeBy(reportSourceWriter);
                 }
-            }
 
-            RString イメージファイルパスD = getDイメージファイルパス(descriptor, path, その他資料マスキング区分);
-            if (!イメージファイルパスD.isEmpty()) {
-                try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
-                    ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                if (!イメージファイルパスD.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスD));
                     report.writeBy(reportSourceWriter);
                 }
-            }
 
-            RString イメージファイルパスE = getEイメージファイルパス(descriptor, path, その他資料マスキング区分);
-            if (!イメージファイルパスE.isEmpty()) {
-                try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
-                    ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                if (!イメージファイルパスE.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスE));
                     report.writeBy(reportSourceWriter);
                 }
-            }
 
-            RString イメージファイルパスF = getFイメージファイルパス(descriptor, path, その他資料マスキング区分);
-            if (!イメージファイルパスF.isEmpty()) {
-                try (ReportAssembler<SonoTashiryoReportSource> assembler = createAssembler(new SonotashiryoProperty(), reportManager)) {
-                    ReportSourceWriter<SonoTashiryoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                if (!イメージファイルパスF.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスF));
                     report.writeBy(reportSourceWriter);
                 }
