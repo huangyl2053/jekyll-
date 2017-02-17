@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -429,23 +428,6 @@ public class ShujiiIkenshoIraiTaishoIchiran {
             return ResponseData.of(div).setState(DBE2040001StateName.完了);
         }
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 完了画面の「処理を継続する」を押し、完了処理・主治医意見書依頼の初期化する。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<ShujiiIkenshoIraiTaishoIchiranDiv> onClick_btnModoruShujiiIkenshoIraiTaishoIchiran(ShujiiIkenshoIraiTaishoIchiranDiv div) {
-        DBE2040001StateName stateName;
-        if (UIコンテナID_DBEUC23001.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
-            stateName = DBE2040001StateName.完了のみ登録;
-        } else {
-            stateName = DBE2040001StateName.処理継続;
-        }
-        getHandler(div).initialize(stateName.getName());
-        return ResponseData.of(div).setState(stateName);
     }
 
     private ShujiiIkenshoIraiCsvEntity getCsvData(dgNinteiTaskList_Row row) {

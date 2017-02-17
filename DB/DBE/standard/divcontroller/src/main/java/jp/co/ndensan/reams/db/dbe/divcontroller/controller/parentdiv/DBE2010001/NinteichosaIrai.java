@@ -40,7 +40,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiCh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -593,23 +592,6 @@ public class NinteichosaIrai {
     public ResponseData onChange_txtMaxCount(NinteichosaIraiDiv requestDiv) {
         getHandler(requestDiv).initDataGrid();
         return ResponseData.of(requestDiv).respond();
-    }
-
-    /**
-     * 継続ボタン押下動作です。
-     *
-     * @param requestDiv NinteichosaIraiDiv
-     * @return ResponseData
-     */
-    public ResponseData onClick_btnContinue(NinteichosaIraiDiv requestDiv) {
-        DBE2010001StateName stateName;
-        if (UIコンテナID_DBEUC22001.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
-            stateName = DBE2010001StateName.完了のみ登録;
-        } else {
-            stateName = DBE2010001StateName.登録;
-        }
-        getHandler(requestDiv).onLoad(stateName.getName());
-        return ResponseData.of(requestDiv).setState(stateName);
     }
 
     /**
