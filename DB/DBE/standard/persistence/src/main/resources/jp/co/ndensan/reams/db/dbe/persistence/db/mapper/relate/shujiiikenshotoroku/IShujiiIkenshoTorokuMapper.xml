@@ -6,13 +6,14 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshotoroku.IShujiiIkenshoTorokuMapper">
      <select resultOrdered="true" id="getShujiiIkenshoForLoad" resultMap="resultMap_ShujiiIkenshoTorokuRelateEntity"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
              fetchSize="500">
           SELECT
                 DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo",
                 DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
                 DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiKubun",
-                DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag",        
+                DbT5301ShujiiIkenshoIraiJoho."sakuseiryoSeikyuKubun",
+                DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag",
                 (case DbT5912ShujiiJoho_Ikensho."shujiiCode"
                     WHEN null THEN DbT5912ShujiiJoho."shujiiCode"
                     WHEN '' THEN DbT5912ShujiiJoho."shujiiCode"
@@ -24,19 +25,19 @@
                     ELSE DbT5912ShujiiJoho_Ikensho."shujiiName"
                 END) AS"shujiiName",
                 DbT5302ShujiiIkenshoJoho."ikenshoKinyuYMD",
-                (case DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" 
-                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" 
-                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" 
-                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" 
+                (case DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
+                    WHEN null THEN  DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+                    ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
                 END) AS "shujiiIryokikanCode",
                 (case DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho"
                     WHEN null THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
-                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" 
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho"
                 END) AS "iryoKikanMeisho",
                 (case DbT5911ShujiiIryoKikanJoho_Ikensho."telNo"
                     WHEN null THEN  DbT5911ShujiiIryoKikanJoho."telNo"
-                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."telNo" 
+                    WHEN '' THEN  DbT5911ShujiiIryoKikanJoho."telNo"
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."telNo"
                 END) AS "telNo",
                (case DbT5911ShujiiIryoKikanJoho_Ikensho."jusho"
@@ -51,6 +52,7 @@
                 END) AS "faxNo",
                 DbT5302ShujiiIkenshoJoho."saishuShinryoYMD",
                 DbT5302ShujiiIkenshoJoho."ikenshoSakuseiKaisuKubun",
+                DbT5302ShujiiIkenshoJoho."zaitakuShisetsuKubun",
                 DbT5302ShujiiIkenshoJoho."existTakaJushinFlag",
                 DbT5302ShujiiIkenshoJoho."existNaikaJushinFlag",
                 DbT5302ShujiiIkenshoJoho."existSeishinkaJushinFlag",
@@ -67,41 +69,52 @@
                 DbT5302ShujiiIkenshoJoho."existSonotaJushinkaFlag",
                 DbT5302ShujiiIkenshoJoho."sonotaJushinKaMei",
                 DbT5302ShujiiIkenshoJoho."ikenshoMemo",
+                DbT5302ShujiiIkenshoJoho."nijiHanteiKekkaRenrakuFlag",
                 DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode",
-                DbT5302ShujiiIkenshoJoho."nijiHanteiKekkaRenrakuFlag"
+                DbT5101NinteiShinseiJoho."shichosonCode" AS "shichosonCode"
           FROM
                 rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301ShujiiIkenshoIraiJoho
+          INNER JOIN
+            (
+                SELECT
+                    DbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
+                    DbT5101."shichosonCode" AS "shichosonCode",
+                    DbT5101."koroshoIfShikibetsuCode" AS "koroshoIfShikibetsuCode"
+                FROM
+                    rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+                WHERE
+                        "shinseishoKanriNo" = #{管理番号}
+                    AND "logicalDeletedFlag" = false
+            ) AS DbT5101NinteiShinseiJoho
+          ON
+                DbT5101NinteiShinseiJoho."shinseishoKanriNo" =  DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
           LEFT JOIN
                 rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302ShujiiIkenshoJoho
           ON
                 DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5302ShujiiIkenshoJoho."shinseishoKanriNo"
                 AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo"
-          LEFT JOIN 
+          LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho
-          ON 
+          ON
                 DbT5301ShujiiIkenshoIraiJoho."shujiiIryokikanCode" = DbT5912ShujiiJoho."shujiiIryokikanCode"
                 AND DbT5301ShujiiIkenshoIraiJoho."shujiiCode" = DbT5912ShujiiJoho."shujiiCode"
-                AND DbT5912ShujiiJoho."shichosonCode" = #{市町村コード}
-          LEFT JOIN 
+                AND DbT5912ShujiiJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
+          LEFT JOIN
                 rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho_Ikensho
-          ON 
+          ON
                 DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5912ShujiiJoho_Ikensho."shujiiIryokikanCode"
                 AND DbT5302ShujiiIkenshoJoho."shujiiCode" = DbT5912ShujiiJoho_Ikensho."shujiiCode"
-                AND DbT5912ShujiiJoho_Ikensho."shichosonCode" = #{市町村コード}
-          LEFT JOIN 
+                AND DbT5912ShujiiJoho_Ikensho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
+          LEFT JOIN
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho
-          ON 
+          ON
                 DbT5301ShujiiIkenshoIraiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
-                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
-         LEFT JOIN 
-                rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho_Ikensho
-          ON 
-                DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
-                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
+                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
          LEFT JOIN
-               rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
-         ON
-                DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" =  DbT5101NinteiShinseiJoho."shinseishoKanriNo"
+                rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho_Ikensho
+          ON
+                DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
+                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
           <!--INNER JOIN
                 rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
           ON
@@ -112,13 +125,11 @@
                 AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL
                 AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL-->
           WHERE
-                DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = #{管理番号}
-                AND DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag" = false
+                DbT5301ShujiiIkenshoIraiJoho."logicalDeletedFlag" = false
           ORDER BY DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" DESC
           LIMIT 1
-                <!--AND DbT5301ShujiiIkenshoIraiJoho"ikenshoIraiRirekiNo" = #{履歴番号}-->
     </select>
-    
+
     <select resultOrdered="true" id="getShujiiIkenshoKensu"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
             resultType="int" fetchSize="500">
@@ -130,7 +141,7 @@
           DbT5302ShujiiIkenshoJoho."shinseishoKanriNo" = #{管理番号}
           AND  DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo" = #{履歴番号}
     </select>
-    
+
     <select resultOrdered="true" id="getIchijiHantei"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
             resultType="int" fetchSize="500">
@@ -141,7 +152,7 @@
         WHERE
         DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo" = #{管理番号}
     </select>
-    
+
     <select resultOrdered="true" id="getIchijiHanteiKanryo"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
             resultType="int" fetchSize="500">
@@ -153,7 +164,7 @@
         DbT5105NinteiKanryoJoho."shinseishoKanriNo" = #{管理番号}
         AND NOT("ichijiHanteiKanryoYMD" is NUll OR "ichijiHanteiKanryoYMD" = '')
     </select>
-    
+
     <select resultOrdered="true" id="getIchijiHanteiMikanryo"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter"
             resultType="int" fetchSize="500">
@@ -169,10 +180,11 @@
     <resultMap id="resultMap_ShujiiIkenshoTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku.ShujiiIkenshoTorokuRelateEntity" autoMapping="true">
         <id column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id column="ikenshoIraiRirekiNo" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <association property="dbt5301Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
         <association property="dbt5302Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
         <association property="dbt5912Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
         <association property="dbt5911Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
     </resultMap>
-    
+
 </mapper>

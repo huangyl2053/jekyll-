@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaTishoJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class ChosaTishoJohoDiv extends Panel {
     private TextBoxDate txtSaishuShinryoYMD;
     @JsonProperty("radIkenshoSakuseiKaisu")
     private RadioButton radIkenshoSakuseiKaisu;
+    @JsonProperty("radZaitakuShisetsuKubun")
+    private RadioButton radZaitakuShisetsuKubun;
     @JsonProperty("radTakaShinryo")
     private RadioButton radTakaShinryo;
     @JsonProperty("chkTakaJushinSelect")
@@ -74,6 +76,24 @@ public class ChosaTishoJohoDiv extends Panel {
     @JsonProperty("radIkenshoSakuseiKaisu")
     public void setRadIkenshoSakuseiKaisu(RadioButton radIkenshoSakuseiKaisu) {
         this.radIkenshoSakuseiKaisu = radIkenshoSakuseiKaisu;
+    }
+
+    /*
+     * getradZaitakuShisetsuKubun
+     * @return radZaitakuShisetsuKubun
+     */
+    @JsonProperty("radZaitakuShisetsuKubun")
+    public RadioButton getRadZaitakuShisetsuKubun() {
+        return radZaitakuShisetsuKubun;
+    }
+
+    /*
+     * setradZaitakuShisetsuKubun
+     * @param radZaitakuShisetsuKubun radZaitakuShisetsuKubun
+     */
+    @JsonProperty("radZaitakuShisetsuKubun")
+    public void setRadZaitakuShisetsuKubun(RadioButton radZaitakuShisetsuKubun) {
+        this.radZaitakuShisetsuKubun = radZaitakuShisetsuKubun;
     }
 
     /*

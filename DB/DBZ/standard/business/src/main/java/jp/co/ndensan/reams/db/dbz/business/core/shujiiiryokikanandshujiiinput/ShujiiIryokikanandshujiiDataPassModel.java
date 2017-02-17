@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput;
 
 import java.io.Serializable;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,4 +33,16 @@ public class ShujiiIryokikanandshujiiDataPassModel implements Serializable {
     private RString 電話番号;
     private RString FAX番号;
 
+    @Nonnull
+    public AtenaJusho get住所AsAtenaJusho() {
+        return this.住所 == null ? AtenaJusho.EMPTY : new AtenaJusho(this.住所);
+    }
+
+    public TelNo get電話番号AsTelNo() {
+        return this.電話番号 == null ? TelNo.EMPTY : new TelNo(this.電話番号);
+    }
+
+    public TelNo getFAX番号AsTelNo() {
+        return this.FAX番号 == null ? TelNo.EMPTY : new TelNo(this.FAX番号);
+    }
 }

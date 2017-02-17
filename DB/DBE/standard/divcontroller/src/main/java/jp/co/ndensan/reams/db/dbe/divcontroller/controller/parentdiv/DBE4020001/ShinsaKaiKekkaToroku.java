@@ -76,7 +76,6 @@ public class ShinsaKaiKekkaToroku {
     private static final RString 認定ｿﾌﾄ2006 = new RString("06A");
     private static final RString 認定ｿﾌﾄ2009_A = new RString("09A");
     private static final RString 認定ｿﾌﾄ2009_B = new RString("09B");
-    private static final RString 審査会結果OCR使用 = new RString("1");
 
     /**
      * 画面初期化処理です。
@@ -87,9 +86,6 @@ public class ShinsaKaiKekkaToroku {
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onLoad(ShinsaKaiKekkaTorokuDiv div) {
         ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
         handler.onLoad();
-        handler.initTextOf処理を進めるボタン();
-        handler.setDisplayOCR結果登録ボタン(uses審査会結果登録OCR());
-        handler.setDisabled登録ボタンfrom選択状態();
         return ResponseData.of(div).respond();
     }
 
@@ -126,6 +122,9 @@ public class ShinsaKaiKekkaToroku {
      * @return レスポンスデータ
      */
     public ResponseData<ShinsaKaiKekkaTorokuDiv> onChange_dgNinteiTaskListSelected(ShinsaKaiKekkaTorokuDiv div) {
+        if (ShinsaKaiKekkaTorokuHandler.is完了のみの登録State()) {
+            return ResponseData.of(div).respond();
+        }
         ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
         handler.setDisabled登録ボタンfrom選択状態();
         return ResponseData.of(div).respond();
@@ -380,11 +379,5 @@ public class ShinsaKaiKekkaToroku {
 
     private ShinsaKaiKekkaTorokuValidationHandler getValidationHandler(ShinsaKaiKekkaTorokuDiv div) {
         return new ShinsaKaiKekkaTorokuValidationHandler(div);
-    }
-
-    private static boolean uses審査会結果登録OCR() {
-        RString 審査会結果登録OCR使用可否
-                = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        return (審査会結果登録OCR使用可否.equals(審査会結果OCR使用));
     }
 }

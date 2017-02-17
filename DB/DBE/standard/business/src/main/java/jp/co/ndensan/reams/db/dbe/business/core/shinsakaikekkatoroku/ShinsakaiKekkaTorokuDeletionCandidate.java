@@ -42,6 +42,13 @@ public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
     }
 
     /**
+     * @return イメージを保持している場合、{@code true}.
+     */
+    public boolean hasImages() {
+        return this.entity.getSharedFileID() != null;
+    }
+
+    /**
      * @return 保持する値から生成した{@link ReadOnlySharedFileEntryDescriptor}
      */
     public ReadOnlySharedFileEntryDescriptor toReadOnlySharedFileEntryDescriptor() {
@@ -79,11 +86,14 @@ public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
         e.setChosaIrai(asDeletedIfTimely(this.entity.getChosaIraiEntity(), hanteiKekka));
         e.setIkenshoIrai(asDeletedIfTimely(this.entity.getIkenshoIraiEntity(), hanteiKekka));
         e.setIchijiHantei(asDeletedIfTimely(this.entity.getIchijiHanteiEntity(), hanteiKekka));
-        return new ShinsakaiKekkaTorokuDeletionCandidate(entity, findTargetsToDeleteImage(hanteiKekka));
+        return new ShinsakaiKekkaTorokuDeletionCandidate(e, findTargetsToDeleteImage(hanteiKekka));
     }
 
     private static List<DbT5201NinteichosaIraiJohoEntity> asDeletedIfTimely(DbT5201NinteichosaIraiJohoEntity chosa, HanteiKekkaCode hanteiKekka) {
-        if (hanteiKekka == HanteiKekkaCode.再調査_意見書のみ
+        if (chosa == null) {
+            return Collections.emptyList();
+        }
+        if (hanteiKekka == HanteiKekkaCode.再調査_調査のみ
                 || hanteiKekka == HanteiKekkaCode.再調査_調査_意見書) {
             DbT5201NinteichosaIraiJohoEntity ne = chosa.clone();
             ne.setLogicalDeletedFlag(true);
@@ -94,7 +104,10 @@ public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
     }
 
     private static List<DbT5301ShujiiIkenshoIraiJohoEntity> asDeletedIfTimely(DbT5301ShujiiIkenshoIraiJohoEntity iken, HanteiKekkaCode hanteiKekka) {
-        if (hanteiKekka == HanteiKekkaCode.再調査_調査のみ
+        if (iken == null) {
+            return Collections.emptyList();
+        }
+        if (hanteiKekka == HanteiKekkaCode.再調査_意見書のみ
                 || hanteiKekka == HanteiKekkaCode.再調査_調査_意見書) {
             DbT5301ShujiiIkenshoIraiJohoEntity ne = iken.clone();
             ne.setLogicalDeletedFlag(true);
@@ -105,6 +118,9 @@ public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
     }
 
     private static List<DbT5116IchijiHanteiKekkaJohoEntity> asDeletedIfTimely(DbT5116IchijiHanteiKekkaJohoEntity ichiji, HanteiKekkaCode hanteiKekka) {
+        if (ichiji == null) {
+            return Collections.emptyList();
+        }
         if (hanteiKekka == HanteiKekkaCode.再調査_調査のみ
                 || hanteiKekka == HanteiKekkaCode.再調査_意見書のみ
                 || hanteiKekka == HanteiKekkaCode.再調査_調査_意見書) {

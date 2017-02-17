@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class NichijoJiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,8 +22,6 @@ public class NichijoJiritsudoDiv extends Panel {
      */
     @JsonProperty("radShogaiKoreishaNichijoSeikatsuJiritsudo")
     private RadioButton radShogaiKoreishaNichijoSeikatsuJiritsudo;
-    @JsonProperty("radTankiKioku")
-    private RadioButton radTankiKioku;
     @JsonProperty("radNinchishoKoreishaJiritsu")
     private RadioButton radNinchishoKoreishaJiritsu;
 
@@ -49,24 +47,6 @@ public class NichijoJiritsudoDiv extends Panel {
     @JsonProperty("radShogaiKoreishaNichijoSeikatsuJiritsudo")
     public void setRadShogaiKoreishaNichijoSeikatsuJiritsudo(RadioButton radShogaiKoreishaNichijoSeikatsuJiritsudo) {
         this.radShogaiKoreishaNichijoSeikatsuJiritsudo = radShogaiKoreishaNichijoSeikatsuJiritsudo;
-    }
-
-    /*
-     * getradTankiKioku
-     * @return radTankiKioku
-     */
-    @JsonProperty("radTankiKioku")
-    public RadioButton getRadTankiKioku() {
-        return radTankiKioku;
-    }
-
-    /*
-     * setradTankiKioku
-     * @param radTankiKioku radTankiKioku
-     */
-    @JsonProperty("radTankiKioku")
-    public void setRadTankiKioku(RadioButton radTankiKioku) {
-        this.radTankiKioku = radTankiKioku;
     }
 
     /*

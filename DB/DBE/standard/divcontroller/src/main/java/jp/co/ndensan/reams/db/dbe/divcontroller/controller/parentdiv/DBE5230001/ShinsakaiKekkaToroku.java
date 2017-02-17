@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5230001
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.CheckForNull;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoIdentifier;
@@ -19,13 +19,15 @@ import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.NinteiShinseiKubunHoreiMethod;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.NinteiShinseiKubunHoreiCalculator;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.OperationMode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.ShinsakaiKekkaTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.ShinsakaiKekkaTorokuValidationHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.TaishoshaIchiranRow;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.IShinsaKekkaPreserver;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.IShinsakakKekksaTorokuManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuService;
@@ -152,29 +154,12 @@ public class ShinsakaiKekkaToroku {
             return ResponseData.of(div).respond();
         }
         dgTaishoshaIchiran_Row updatingRow = handler.find更新中RowOrNull();
-        if (updatingRow == null /*|| /*!handler.has個別事項Changed()*/) {
+        if (updatingRow == null) {
             handler.set個別表示欄入力可();
-            handler.displayTo個別表示欄(clickedRow);
+            handler.displayTo個別表示欄(clickedRow, mode);
             ViewStateHolder.put(ViewStateKeys.処理モード, mode);
             return ResponseData.of(div).respond();
         }
-        //<editor-fold defaultstate="collapsed" desc="コメント中…必要がありそうならば、復活する。">
-//        if (選択行.getShinsakaiJunjo().equals(更新対象行.getShinsakaiJunjo())) {
-//            return ResponseData.of(div).respond();
-//        }
-//        if (!ResponseHolder.isReRequest()) {
-//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-//                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-//            return ResponseData.of(div).addMessage(message).respond();
-//        }
-//        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-//                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            handler.set個別表示欄入力可();
-//            handler.displayTo個別表示欄(選択行);
-//            return ResponseData.of(div).respond();
-//        }
-//        handler.set選択行(更新対象行.getShinsakaiJunjo());
-//</editor-fold >
         return ResponseData.of(div).respond();
     }
 
@@ -192,36 +177,49 @@ public class ShinsakaiKekkaToroku {
             return ResponseData.of(div).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            RString shinseishoKanriNo = row.getShinseishoKanriNo();
-            if (mode.is更新() && had審査結果登録(shinseishoKanriNo)) {
-                return ResponseData.of(div)
-                        .addMessage(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage())
-                        .respond();
-            }
-            if (mode.is削除() && had審査結果登録(shinseishoKanriNo)) {
-                return ResponseData.of(div)
-                        .addMessage(DbeErrorMessages.審査結果登録済のため処理不可.getMessage())
-                        .respond();
+            ResponseData r = checkCanKakuteiIfPossibleReturnNull(div, row, mode);
+            if (r != null) {
+                return r;
             }
         }
         if (ResponseHolder.getMessageCode().toString().equals(DbeErrorMessages.審査結果登録済のため処理不可.getMessage().getCode())) {
             return ResponseData.of(div).respond();
         }
-        if (ResponseHolder.getMessageCode().toString().equals(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage().getCode())) {
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
         }
 
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).validate個別();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-
         handler.set個別表示欄To更新中Row(mode);
         handler.clear個別表示欄();
         handler.set個別表示欄入力不可();
         return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<ShinsakaiKekkaTorokuDiv> checkCanKakuteiIfPossibleReturnNull(ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row row, OperationMode mode) {
+        ShinsakaiKekkaTorokuHandler handler = getHandler(div);
+        if (mode.is更新()) {
+            if (Objects.equals(row.getHenkoMaeTorisageKubunCode(), handler.calculateTorisageKubunCodeBy個別入力欄())) {
+                return ResponseData.of(div)
+                        .addMessage(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage())
+                        .respond();
+            }
+            if (had審査結果登録(row.getShinseishoKanriNo())) {
+                return ResponseData.of(div)
+                        .addMessage(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage())
+                        .respond();
+            }
+            return null;
+        }
+        if (mode.is削除() && had審査結果登録(row.getShinseishoKanriNo())) {
+            return ResponseData.of(div)
+                    .addMessage(DbeErrorMessages.審査結果登録済のため処理不可.getMessage())
+                    .respond();
+        }
+        return null;
     }
 
     private static boolean had審査結果登録(RString shinseishoKanriNo) {
@@ -274,124 +272,14 @@ public class ShinsakaiKekkaToroku {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             service.saveBy(new ShinsaKekkaPreserver(div));
-            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-        }
-        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            removeViewState();
-            return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
+            div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setSuccessMessage(
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()));
+            return ResponseData.of(div).setState(DBE5230001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
 
     //<editor-fold defaultstate="collapsed" desc="ShinsaKekkaPreserver">
-    @lombok.AllArgsConstructor
-    private static class TaishoshaIchiranRow {
-
-        private final dgTaishoshaIchiran_Row aRow;
-
-        private ShinseishoKanriNo getShinseishoKanriNo() {
-            return new ShinseishoKanriNo(aRow.getShinseishoKanriNo());
-        }
-
-        private FlexibleDate getNijiHanteiYMD() {
-            return aRow.getNijiHanteiDate().getValue();
-        }
-
-        private Code getKonkaiNijiHanteiCode() {
-            RString code = aRow.getKonkaiNijiHanteiCode();
-            if (RString.isNullOrEmpty(code)) {
-                return Code.EMPTY;
-            } else {
-                return new Code(code);
-            }
-        }
-
-        @CheckForNull
-        private Integer getNinteiKikanTsukiSu() {
-            RString num = aRow.getNinteiKikanTukisu();
-            if (RString.isNullOrEmpty(num)) {
-                return null;
-            }
-            return Integer.parseInt(num.toString());
-        }
-
-        private KaigoRowState getJotai() {
-            RString value = aRow.getJotai();
-            if (RString.isNullOrEmpty(value)) {
-                return KaigoRowState.空白;
-            }
-            return KaigoRowState.valueOf(value.toString());
-        }
-
-        private HanteiKekkaCode getHanteiKekka() {
-            RString code = aRow.getHanteiKekkaCode();
-            if (RString.isNullOrEmpty(code)) {
-                return null;
-            }
-            return HanteiKekkaCode.toValue(code);
-        }
-
-        private Code getHoreiKubunCode() {
-            NinteiShinseiKubunShinsei 申請時申請区分 = NinteiShinseiKubunShinsei.toValue(
-                    Integer.parseInt(aRow.getShinseiKubunShinseijiCode().toString())
-            );
-            YokaigoJotaiKubun09 前回二次判定 = YokaigoJotaiKubun09.toValue(aRow.getZenkaiNijiHantei());
-            FlexibleDate 前回有効期間終了日 = aRow.getZenkaiYukoKikanShuryoDay().getValue();
-            YokaigoJotaiKubun09 今回二次判定 = YokaigoJotaiKubun09.toValue(aRow.getHanteiKekka());
-            FlexibleDate 申請日 = aRow.getShinseiDay().getValue();
-            NinteiShinseiKubunHorei kubun
-                    = NinteiShinseiKubunHoreiMethod.calculate(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
-            return (kubun == null)
-                    ? Code.EMPTY
-                    : new Code(new RString(kubun.getコード()));
-        }
-
-        private Code getTorisageKubunCode() {
-            NinteiShinseiKubunShinsei 申請時申請区分 = NinteiShinseiKubunShinsei.toValue(
-                    Integer.parseInt(aRow.getShinseiKubunShinseijiCode().toString())
-            );
-            YokaigoJotaiKubun09 前回二次判定 = YokaigoJotaiKubun09.toValue(aRow.getZenkaiNijiHantei());
-            FlexibleDate 前回有効期間終了日 = aRow.getZenkaiYukoKikanShuryoDay().getValue();
-            YokaigoJotaiKubun09 今回二次判定 = YokaigoJotaiKubun09.toValue(aRow.getHanteiKekka());
-            FlexibleDate 申請日 = aRow.getShinseiDay().getValue();
-            return TorisageKubun.toValue(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日)
-                    .get取下げ区分コード();
-        }
-
-        private RString getShinsakaiIkenShuruiCode() {
-            return aRow.getHidIkenCode();
-        }
-
-        private RString getShinsakaiMemo() {
-            return aRow.getHidMemo();
-        }
-
-        private RString getShinsakaiIken() {
-            return aRow.getHidIken();
-        }
-
-        private RString getIchijiHanteiKekkaHenkoRiyu() {
-            return aRow.getIchijiHanteiKekkaHenkoRiyu();
-        }
-
-        private Code getJotaiZoReiCode() {
-            RString code = aRow.getJotaizoCode();
-            if (RString.isNullOrEmpty(code)) {
-                return Code.EMPTY;
-            } else {
-                return new Code(code);
-            }
-        }
-
-        private FlexibleDate getNinteiYukoKikanKaishiYMD() {
-            return aRow.getNinteiKikanKaishi().getValue();
-        }
-
-        private FlexibleDate getNinteiYukoKikanShuryoYMD() {
-            return aRow.getNinteiKikanShuryo().getValue();
-        }
-    }
-
     private static class ShinsaKekkaPreserver implements IShinsaKekkaPreserver {
 
         private final ShinsakaiKekkaTorokuDiv div;
@@ -410,9 +298,13 @@ public class ShinsakaiKekkaToroku {
             RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
             for (dgTaishoshaIchiran_Row row : rowList) {
                 TaishoshaIchiranRow row2 = new TaishoshaIchiranRow(row);
-                switch (row2.getJotai()) {
+                KaigoRowState state = row2.getJotai();
+                switch (state) {
+                    case 追加:
+                        saveBy(manager, row2, 開催番号, state);
+                        return;
                     case 修正:
-                        saveBy(manager, row2, 開催番号);
+                        saveBy(manager, row2, 開催番号, state);
                         continue;
                     case 削除:
                         deleteBy(manager, row2, 開催番号);
@@ -421,8 +313,11 @@ public class ShinsakaiKekkaToroku {
             }
         }
 
-        private static void saveBy(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号) {
+        private static void saveBy(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号, KaigoRowState state) {
             HanteiKekkaCode hanteiKekka = row.getHanteiKekka();
+            if (hanteiKekka == null) {
+                return;
+            }
             update介護認定審査会割当情報(manager, row, 開催番号, hanteiKekka);
             update要介護認定完了情報(manager, row, hanteiKekka);
             if (hanteiKekka == HanteiKekkaCode.認定) {
@@ -433,8 +328,10 @@ public class ShinsakaiKekkaToroku {
             if (hanteiKekka.is再調査()) {
                 delete削除候補情報(manager, row, hanteiKekka);
             }
-            reset要介護認定申請情報(manager, row);
-            delete要介護認定結果情報(manager, row);
+            if (state == KaigoRowState.修正) {
+                reset要介護認定申請情報(manager, row);
+                delete要介護認定結果情報(manager, row);
+            }
         }
 
         //<editor-fold defaultstate="collapsed" desc="methods for saveBy()">
@@ -525,6 +422,7 @@ public class ShinsakaiKekkaToroku {
             NinteiKekkaJoho ninteiKekka = ninteiKekkaJoho.get(identifier);
             if (ninteiKekka == null) {
                 manager.save要介護認定結果情報(edited(new NinteiKekkaJoho(identifier.get申請書管理番号()), row, 開催番号));
+                return;
             }
             manager.save要介護認定結果情報(edited(ninteiKekka, row, 開催番号));
         }
@@ -557,22 +455,17 @@ public class ShinsakaiKekkaToroku {
             delete介護認定審査会割当情報(manager, row, 開催番号);
         }
 
-        private static boolean isNullOrEmpty(Code code) {
-            return code == null || code.isEmpty();
-        }
-
         private static void reset要介護認定申請情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row) {
             Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
                     = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
             NinteiShinseiJohoIdentifier identifier = new NinteiShinseiJohoIdentifier(row.getShinseishoKanriNo());
             NinteiShinseiJoho ninteiShinsei = ninteiShinseiJoho.get(identifier);
-            if (isNullOrEmpty(ninteiShinsei.get認定申請区分_法令_コード())
-                    && isNullOrEmpty(ninteiShinsei.get取下区分コード())) {
+            if (!row.hasTorisageKubunChanged()) {
                 return;
             }
             NinteiShinseiJohoBuilder builder = ninteiShinsei.createBuilderForEdit();
             builder.set認定申請区分_法令_コード(Code.EMPTY);
-            builder.set取下区分コード(Code.EMPTY);
+            builder.set取下区分コード(row.getHenkoMaeTorisageKubun());
             manager.save要介護認定申請情報(builder.build());
         }
 
@@ -622,7 +515,7 @@ public class ShinsakaiKekkaToroku {
         FlexibleDate 前回有効期間終了日 = handler.get前回有効期間終了日();
         YokaigoJotaiKubun09 今回二次判定 = handler.get今回二次判定();
         FlexibleDate 申請日 = div.getTxtShinseiDay().getValue();
-        NinteiShinseiKubunHorei 法令申請区分 = NinteiShinseiKubunHoreiMethod.calculate(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
+        NinteiShinseiKubunHorei 法令申請区分 = NinteiShinseiKubunHoreiCalculator.calculate(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
         TorisageKubun 取下区分 = TorisageKubun.toValue(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
         handler.set法令申請区分(法令申請区分);
         handler.set取下区分(取下区分);

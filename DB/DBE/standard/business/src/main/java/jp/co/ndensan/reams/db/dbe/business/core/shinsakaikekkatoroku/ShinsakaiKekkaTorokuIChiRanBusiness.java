@@ -162,7 +162,8 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
         if (entity.get取下区分コード() == null) {
             return RString.EMPTY;
         }
-        return new RString(TorisageKubun.toValue(entity.get取下区分コード()).toString());
+        TorisageKubun kubun = TorisageKubun.toValue(entity.get取下区分コード());
+        return kubun == null ? RString.EMPTY : kubun.getName();
     }
 
     /**
@@ -170,11 +171,11 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      *
      * @return 取下区分コード
      */
-    public TorisageKubun get取下区分コード() {
+    public RString get取下区分コード() {
         if (entity.get取下区分コード() == null) {
-            return null;
+            return RString.EMPTY;
         }
-        return TorisageKubun.toValue(entity.get取下区分コード());
+        return entity.get取下区分コード().value();
     }
 
     /**
@@ -427,10 +428,10 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      */
     public RString get審査会意見種類コード() {
         RString 審査会意見種類 = entity.get審査会意見種類();
-        if (RString.isNullOrEmpty(審査会意見種類)) {
-            return entity.get審査会意見種類();
+        if (審査会意見種類 == null) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
+        return 審査会意見種類.trim();
     }
 
     /**

@@ -117,16 +117,16 @@ module DBE {
                 return new UZA.RadioButton(this.convFiledName("radShogaiKoreishaNichijoSeikatsuJiritsudo"));
             }
 
-            public radTankiKioku(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radTankiKioku"));
-            }
-
             public radNinchishoKoreishaJiritsu(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radNinchishoKoreishaJiritsu"));
             }
 
             public NinchishoChukakuShojo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinchishoChukakuShojo"));
+            }
+
+            public radTankiKioku(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTankiKioku"));
             }
 
             public radNichijoNinchiNoryoku(): UZA.RadioButton {

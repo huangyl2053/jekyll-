@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.dgNinteiTaskList_Row;
@@ -41,8 +42,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -90,7 +91,28 @@ public class ShinsaKaiKekkaTorokuHandler {
         div.getTxtMaxKensu().setMaxLength(Integer.toString(div.getTxtMaxKensu().getMaxValue().intValue()).length());
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        if (is完了のみの登録State()) {
+            div.getRadTaishosyaJotai().setDisabled(true);
+            div.getRadTaishosyaJotai().setSelectedKey(KEY1);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, false);
+        } else {
+            setDisabled登録ボタンfrom選択状態();
+        }
         二次判定モード();
+        initTextOf処理を進めるボタン();
+        setDisplayOCR結果登録ボタン(uses審査会結果登録OCR());
+    }
+
+    public static boolean is完了のみの登録State() {
+        return ResponseHolder.getState().equals(DBE4020001StateName.完了のみの登録.getName());
+    }
+
+    private static boolean uses審査会結果登録OCR() {
+        RString 審査会結果登録OCR使用可否
+                = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        return (審査会結果登録OCR使用可否.equals(運用する));
     }
 
     /**
@@ -291,8 +313,8 @@ public class ShinsaKaiKekkaTorokuHandler {
                 row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
                 row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
-                row.setShinseiKubunHorei(business.get認定申請区分法令コード() == null
-                        ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード().getKey()).get名称());
+                NinteiShinseiHoreiCode horei = NinteiShinseiHoreiCode.toValue(business.get認定申請区分法令コード().getKey());
+                row.setShinseiKubunHorei(horei == null ? RString.EMPTY : horei.get名称());
                 if (business.get二次判定結果入力年月日() != null && !business.get二次判定結果入力年月日().isEmpty()) {
                     row.getNijihanteiKekkaToroku().setValue(new RDate(business.get二次判定結果入力年月日().toString()));
                 }

@@ -53,4 +53,13 @@ public final class ShujiiIkenshoTorokuMapperParameter {
         return new ShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
     }
 
+    /**
+     * 申請書管理番号のみを利用して意見書情報を検索する際のパラメータを生成します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 主治医意見書登録パラメータークラス
+     */
+    public static ShujiiIkenshoTorokuMapperParameter findBy(ShinseishoKanriNo 申請書管理番号) {
+        return new ShujiiIkenshoTorokuMapperParameter(申請書管理番号, 0, LasdecCode.EMPTY);
+    }
 }

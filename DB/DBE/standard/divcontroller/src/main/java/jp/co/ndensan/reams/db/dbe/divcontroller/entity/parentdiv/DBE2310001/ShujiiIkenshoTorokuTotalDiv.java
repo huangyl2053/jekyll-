@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuTotalDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -405,16 +405,6 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
-        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanTelNumber();
-    }
-
-    @JsonIgnore
-    public void  setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
-        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanTelNumber(txtShujiiIryoKikanTelNumber);
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtKinyuYMD() {
         return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtKinyuYMD();
     }
@@ -432,6 +422,16 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     @JsonIgnore
     public void  setTxtShujiiIryoKikanShozaichi(TextBoxJusho txtShujiiIryoKikanShozaichi) {
         this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanShozaichi(txtShujiiIryoKikanShozaichi);
+    }
+
+    @JsonIgnore
+    public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().getTxtShujiiIryoKikanTelNumber();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getShujiiJoho().setTxtShujiiIryoKikanTelNumber(txtShujiiIryoKikanTelNumber);
     }
 
     @JsonIgnore
@@ -472,6 +472,16 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     @JsonIgnore
     public void  setRadIkenshoSakuseiKaisu(RadioButton radIkenshoSakuseiKaisu) {
         this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getChosaTishoJoho().setRadIkenshoSakuseiKaisu(radIkenshoSakuseiKaisu);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadZaitakuShisetsuKubun() {
+        return this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getChosaTishoJoho().getRadZaitakuShisetsuKubun();
+    }
+
+    @JsonIgnore
+    public void  setRadZaitakuShisetsuKubun(RadioButton radZaitakuShisetsuKubun) {
+        this.getShujiiIkenshoToroku().getIkenshoKihonJoho().getChosaTishoJoho().setRadZaitakuShisetsuKubun(radZaitakuShisetsuKubun);
     }
 
     @JsonIgnore

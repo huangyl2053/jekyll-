@@ -131,6 +131,7 @@ public enum YokaigoJotaiKubun09 {
                 return yokaigoJotaiKubun09;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護状態区分コード09"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(
+                new StringBuilder().append(code).append("は、要介護状態区分コード09").toString()));
     }
 }

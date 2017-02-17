@@ -33,7 +33,7 @@ public class IShinsakaiKekkaTorokuMapperTest extends DbeTestDacBase {
         @Test
         public void get関連情報() {
             IShinsakaiKekkaTorokuMapper sut = sqlSession.getMapper(IShinsakaiKekkaTorokuMapper.class);
-            ShinsakaiKekkaTorokuParameter param = ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(new RString("20100001"));
+            ShinsakaiKekkaTorokuParameter param = ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(new RString("20150084"));
             for (ShinsakaiKekkaTorokuDeletionCandidateEntity o : sut.get削除候補s(param)) {
                 System.out.println(o.getShinseishoKanriNo().value());
                 System.out.println(o.getShoKaisaiHokenshaNo());
@@ -41,7 +41,7 @@ public class IShinsakaiKekkaTorokuMapperTest extends DbeTestDacBase {
                 System.out.println(o.getSharedFileID());
                 if (o.getChosaIraiEntity() != null) {
                     System.out.print("　調査依頼：");
-                    System.out.println(o.getChosaIraiEntity().getShinseishoKanriNo().value());
+                    System.out.print(o.getChosaIraiEntity().getShinseishoKanriNo().value());
                 }
                 if (o.getIkenshoIraiEntity() != null) {
                     System.out.print("意見書依頼：");

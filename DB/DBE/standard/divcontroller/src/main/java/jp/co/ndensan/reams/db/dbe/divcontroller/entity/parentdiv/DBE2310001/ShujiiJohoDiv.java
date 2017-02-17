@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,12 +36,12 @@ public class ShujiiJohoDiv extends Panel {
     private ButtonDialog btnShujiiGuide;
     @JsonProperty("txtSujiiName")
     private TextBox txtSujiiName;
-    @JsonProperty("txtShujiiIryoKikanTelNumber")
-    private TextBoxTelNo txtShujiiIryoKikanTelNumber;
     @JsonProperty("txtKinyuYMD")
     private TextBoxDate txtKinyuYMD;
     @JsonProperty("txtShujiiIryoKikanShozaichi")
     private TextBoxJusho txtShujiiIryoKikanShozaichi;
+    @JsonProperty("txtShujiiIryoKikanTelNumber")
+    private TextBoxTelNo txtShujiiIryoKikanTelNumber;
     @JsonProperty("txtShujiiIryoKikanFaxNumber")
     private TextBoxTelNo txtShujiiIryoKikanFaxNumber;
 
@@ -178,24 +178,6 @@ public class ShujiiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtShujiiIryoKikanTelNumber
-     * @return txtShujiiIryoKikanTelNumber
-     */
-    @JsonProperty("txtShujiiIryoKikanTelNumber")
-    public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
-        return txtShujiiIryoKikanTelNumber;
-    }
-
-    /*
-     * settxtShujiiIryoKikanTelNumber
-     * @param txtShujiiIryoKikanTelNumber txtShujiiIryoKikanTelNumber
-     */
-    @JsonProperty("txtShujiiIryoKikanTelNumber")
-    public void setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
-        this.txtShujiiIryoKikanTelNumber = txtShujiiIryoKikanTelNumber;
-    }
-
-    /*
      * gettxtKinyuYMD
      * @return txtKinyuYMD
      */
@@ -229,6 +211,24 @@ public class ShujiiJohoDiv extends Panel {
     @JsonProperty("txtShujiiIryoKikanShozaichi")
     public void setTxtShujiiIryoKikanShozaichi(TextBoxJusho txtShujiiIryoKikanShozaichi) {
         this.txtShujiiIryoKikanShozaichi = txtShujiiIryoKikanShozaichi;
+    }
+
+    /*
+     * gettxtShujiiIryoKikanTelNumber
+     * @return txtShujiiIryoKikanTelNumber
+     */
+    @JsonProperty("txtShujiiIryoKikanTelNumber")
+    public TextBoxTelNo getTxtShujiiIryoKikanTelNumber() {
+        return txtShujiiIryoKikanTelNumber;
+    }
+
+    /*
+     * settxtShujiiIryoKikanTelNumber
+     * @param txtShujiiIryoKikanTelNumber txtShujiiIryoKikanTelNumber
+     */
+    @JsonProperty("txtShujiiIryoKikanTelNumber")
+    public void setTxtShujiiIryoKikanTelNumber(TextBoxTelNo txtShujiiIryoKikanTelNumber) {
+        this.txtShujiiIryoKikanTelNumber = txtShujiiIryoKikanTelNumber;
     }
 
     /*
