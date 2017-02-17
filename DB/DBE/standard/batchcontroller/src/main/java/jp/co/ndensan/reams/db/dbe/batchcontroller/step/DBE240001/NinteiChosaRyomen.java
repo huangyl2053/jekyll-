@@ -65,6 +65,7 @@ public class NinteiChosaRyomen extends BatchProcessBase<HomonChosaIraishoRelateE
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value())
                 .addBreak(new BreakerCatalog<ChosahyoGaikyochosaReportSource>().new SimpleLayoutBreaker(
+
                     new RString("layoutIndex")) {
             @Override
                     public ReportLineRecord<ChosahyoGaikyochosaReportSource> occuredBreak(

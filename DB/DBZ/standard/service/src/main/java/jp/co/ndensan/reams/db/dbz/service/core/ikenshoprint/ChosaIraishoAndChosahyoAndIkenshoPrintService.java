@@ -84,6 +84,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
 import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
@@ -321,16 +322,18 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
      *
      * @param 認定調査票_概況調査List 認定調査票_概況調査List
      * @param layoutIndex
+     * @return
      */
-    public void print認定調査票_片面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, int layoutIndex) {
+    public SourceDataCollection print認定調査票_片面(List<ChosahyoGaikyochosaItem> 認定調査票_概況調査List, int layoutIndex) {
         if (!認定調査票_概況調査List.isEmpty()) {
             ChosahyoGaikyoAndKihonchosaReport report = ChosahyoGaikyoAndKihonchosaReport.createFrom(認定調査票_概況調査List, layoutIndex);
             ChosahyoOcrKatamenProperty property = new ChosahyoOcrKatamenProperty();
-            try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager)) {
+            try (ReportAssembler<ChosahyoGaikyochosaReportSource> assembler = createAssembler(property, reportManager, layoutIndex)) {
                 ReportSourceWriter<ChosahyoGaikyochosaReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                 report.writeBy(reportSourceWriter);
             }
         }
+        return null;
     }
 
     /**
@@ -437,6 +440,18 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         }
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager, int layoutIndex) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        builder.setFormGroupIndex(layoutIndex);
         return builder.<T>create();
     }
 

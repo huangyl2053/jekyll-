@@ -506,7 +506,6 @@ public class IraishoIkkatsuHakkoHandler {
         } else {
             div.getRadTeishutsuKigen().setSelectedKey(COMMON_SELECTED);
         }
-        div.getRadTeishutsuKigen().setDisabled(true);
         setTxtKyotsuHizuke();
     }
 

@@ -392,7 +392,7 @@ public class ShujiiIkenshoBusiness {
         RString hakkobi = processParamter.getHakkobi();
 
         if (!RString.isNullOrEmpty(hakkobi)) {
-            if (processParamter.isShujiiIkenshoSakuseiIraisho()) {
+            if (processParamter.isShujiiIkenshoSakuseiIraisho() || processParamter.isIkenshoSakuseiIraiIchiran()) {
                 dbT5301Entity.setIraishoShutsuryokuYMD(new FlexibleDate(hakkobi));
             }
             if (processParamter.isIkenshoKinyu()) {

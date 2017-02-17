@@ -128,7 +128,7 @@
             rgdb."DbT5301ShujiiIkenshoIraiJoho" as "slv"
             WHERE
             "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
-            AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" > "slv"."ikenshoIraiRirekiNo"
+            AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" <![CDATA[<]]> "slv"."ikenshoIraiRirekiNo"
             )
             AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag"= false
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"

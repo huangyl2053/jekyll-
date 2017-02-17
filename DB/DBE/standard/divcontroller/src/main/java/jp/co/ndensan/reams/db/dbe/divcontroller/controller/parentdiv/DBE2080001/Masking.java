@@ -39,12 +39,15 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -66,7 +69,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class Masking {
 
-    private static final RString CSVファイル名 = new RString("DBE2080001_MaskingIchiran.csv");
+    private static final RString CSVファイルID_マスキング一覧 = new RString("DBE208001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
     private static final RString 完了可能 = new RString("2");
@@ -179,7 +182,8 @@ public class Masking {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(MaskingDiv div, IDownLoadServletResponse response) {
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_マスキング一覧);
+        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
@@ -191,11 +195,11 @@ public class Masking {
             }
             csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
     /**
@@ -311,7 +315,7 @@ public class Masking {
         if (date == null) {
             return RString.EMPTY;
         }
-        return date.wareki().toDateString();
+        return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
     }
 
     private MaskingHandler getHandler(MaskingDiv div) {
