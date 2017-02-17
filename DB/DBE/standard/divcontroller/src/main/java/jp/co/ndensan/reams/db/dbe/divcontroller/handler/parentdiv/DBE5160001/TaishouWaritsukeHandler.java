@@ -25,12 +25,14 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.Taishou
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.TaishouWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgWaritsukeKohoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.konicho.taishouwaritsuke.TaishouWaritsukeFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
@@ -370,6 +372,7 @@ public class TaishouWaritsukeHandler {
         RString 前回二次判定 = RString.EMPTY;
         dgTaishoshaIchiran_Row row;
         RString 最大登録済No = ZERO;
+        RString 認定審査会割付完了日 = RString.EMPTY;
         for (Taishouichiran taishouichiran : ichiranList) {
             RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
             RString 登録済No = no;
@@ -430,6 +433,9 @@ public class TaishouWaritsukeHandler {
                 前回一次判定 = set前回一次判定区分(taishouichiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
                 前回二次判定 = set前回二次判定区分(taishouichiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
             }
+            if (taishouichiran.get認定審査会割付完了年月日() != null && !taishouichiran.get認定審査会割付完了年月日().isEmpty()) {
+                認定審査会割付完了日 = new RString(taishouichiran.get認定審査会割付完了年月日().toString());
+            }
             row = new dgTaishoshaIchiran_Row(
                     対象者一覧状態フラグ,
                     taishouichiran.get介護認定審査会審査順確定フラグ() ? 審査順確定フラグ_確定 : 審査順確定フラグ_確定しない,
@@ -461,7 +467,8 @@ public class TaishouWaritsukeHandler {
                     taishouichiran.get医療機関名称(),
                     taishouichiran.get主治医氏名().getColumnValue(),
                     登録済フラグ,
-                    登録済No
+                    登録済No,
+                    認定審査会割付完了日
             );
             rows.add(row);
             if (登録済No.toInt() > 最大登録済No.toInt()) {
@@ -679,7 +686,8 @@ public class TaishouWaritsukeHandler {
                 kohoshaIchiran_Row.getIryoKikan(),
                 kohoshaIchiran_Row.getShujii(),
                 kohoshaIchiran_Row.getTorokuZumiFlag(),
-                kohoshaIchiran_Row.getTorokuZumiNo()
+                kohoshaIchiran_Row.getTorokuZumiNo(),
+                RString.EMPTY
         );
         div.getDgTaishoshaIchiran().getDataSource().add(taishoshaIchiran_Row);
         div.getDgWaritsukeKohoshaIchiran().getDataSource().remove(kohoshaIchiran_Row);
@@ -774,6 +782,14 @@ public class TaishouWaritsukeHandler {
                 ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(parameter);
                 if (shinsakaiWariateJoho != null) {
                     johoManager.saveOrDeletePhysicalBy介護認定審査会割当情報(shinsakaiWariateJoho.deleted());
+                }
+                NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
+                NinteiKanryoJoho ninteiKanryoJoho = manager.get要介護認定完了情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                if (ninteiKanryoJoho != null) {
+                    ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit()
+                            .set認定審査会割当完了年月日(null)
+                            .build();
+                    manager.save要介護認定完了情報(ninteiKanryoJoho);
                 }
             }
         }

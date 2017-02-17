@@ -54,6 +54,7 @@ public class Taishouichiran {
         this.entity.set要介護認定前回一次判定結果コード(checkNullForCode(entity.get要介護認定前回一次判定結果コード()));
         this.entity.set二次判定要介護状態区分コード(checkNullForCode(entity.get二次判定要介護状態区分コード()));
         this.entity.setマスキング完了年月日(checkNullForFlexibleDate(entity.getマスキング完了年月日()));
+        this.entity.set認定審査会割付完了年月日(checkNullForFlexibleDate(entity.get認定審査会割付完了年月日()));
         this.entity.set市町村名称(checkNullForRString(entity.get市町村名称()));
         this.entity.set証記載保険者番号(checkNullForShoKisaiHokenshaNo(entity.get証記載保険者番号()));
         this.entity.set調査票_障害高齢者の日常生活自立度コード(checkNullForCode(entity.get調査票_障害高齢者の日常生活自立度コード()));
@@ -184,6 +185,15 @@ public class Taishouichiran {
      */
     public FlexibleDate getマスキング完了年月日() {
         return entity.getマスキング完了年月日();
+    }
+
+    /**
+     * get認定審査会割付完了年月日
+     *
+     * @return 認定審査会割付完了年月日
+     */
+    public FlexibleDate get認定審査会割付完了年月日() {
+        return entity.get認定審査会割付完了年月日();
     }
 
     /**

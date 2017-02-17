@@ -161,7 +161,7 @@
         SELECT
         "hihokenshaNo"
         , "hihokenshaName"
-        ,　"shichosonCode" 
+        , "shichosonCode" 
         , seibetsu
         , "seinengappiYMD"
         , "ninteiShinseiYMD"

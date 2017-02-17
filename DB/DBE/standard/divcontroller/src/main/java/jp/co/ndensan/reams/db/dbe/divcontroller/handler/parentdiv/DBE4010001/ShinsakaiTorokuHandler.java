@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShinsakaiJidoWaritsuke;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001StateName;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
@@ -77,6 +78,7 @@ public class ShinsakaiTorokuHandler {
             = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     private static final RString 検索制御_最大取得件数
             = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+    private static final RString ラジオボタンキー_完了可能 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -90,8 +92,13 @@ public class ShinsakaiTorokuHandler {
     /**
      * 完了処理・介護認定審査会登録の初期化を設定します。
      *
+     * @param stateName stateName
      */
-    public void onLoad() {
+    public void onLoad(RString stateName) {
+        if (DBE4010001StateName.完了のみ登録.getName().equals(stateName)) {
+            div.getRadTaishoshaJotai().setSelectedKey(ラジオボタンキー_完了可能);
+            div.getRadTaishoshaJotai().setDisabled(true);
+        }
         RString key = div.getRadTaishoshaJotai().getSelectedKey();
         RString 状態区分 = new RString("");
 
@@ -100,21 +107,27 @@ public class ShinsakaiTorokuHandler {
             div.getTxtMishoriCount().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(true);
             div.getTxtTotalCount().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, true);
+            if (!DBE4010001StateName.完了のみ登録.getName().equals(stateName)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, true);
+            }
         } else if (KEY1.equals(key)) {
             状態区分 = new RString("2");
             div.getTxtMishoriCount().setDisplayNone(true);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
+            if (!DBE4010001StateName.完了のみ登録.getName().equals(stateName)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
+            }
         } else {
             div.getTxtMishoriCount().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
+            if (!DBE4010001StateName.完了のみ登録.getName().equals(stateName)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
+            }
         }
 
         if (div.getTxtTaishoshaMaxHyojiKensu() == null
@@ -301,9 +314,11 @@ public class ShinsakaiTorokuHandler {
 
     /**
      * 対象者状態ラジオボタンの表示処理です。
+     * 
+     * @param stateName stateName
      */
-    public void setJyotaiKubun() {
-        onLoad();
+    public void setJyotaiKubun(RString stateName) {
+        onLoad(stateName);
     }
 
     /**
