@@ -361,7 +361,7 @@ public class Ninteishinseibi {
             if (RString.isNullOrEmpty(entry.getValue())) {
                 サービス状況フラグ = false;
             } else {
-                サービス状況フラグ = Boolean.getBoolean(entry.getValue().toString());
+                サービス状況フラグ = Boolean.parseBoolean(entry.getValue().toString());
             }
             resultサービス状況フラグList.add(new NinteichosahyoServiceJokyoFlag(
                     申請書管理番号,
