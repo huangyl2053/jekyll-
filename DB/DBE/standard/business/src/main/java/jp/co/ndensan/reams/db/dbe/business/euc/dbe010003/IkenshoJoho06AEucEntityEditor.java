@@ -332,75 +332,75 @@ public class IkenshoJoho06AEucEntityEditor {
     }
 
     private static RString get意見項目01名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku01.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku01.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目02名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku02.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku02.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目03名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku03.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku03.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目04名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku04.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku04.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目05名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku05.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku05.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目06名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku06.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku06.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目07名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku07.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku07.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目08名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku08.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku08.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目09名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku09.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku09.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目10名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku10.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku10.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目11名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku11.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku11.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目12名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku12.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku12.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目13名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku13.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku13.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目14名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku14.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku14.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目15名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku15.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku15.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目16名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku16.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku16.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目17名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku17.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku17.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get意見項目18名称(RString code) {
-        return (!code.trim().isEmpty()) ? IkenKomoku18.toValue(code).get名称() : RString.EMPTY;
+        return (code != null && !code.trim().isEmpty()) ? IkenKomoku18.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString format日付(FlexibleDate value) {
