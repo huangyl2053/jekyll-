@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoh
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteitoroku.IShinsakaiKaisaiYoteiTorokuMapper;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -30,10 +32,12 @@ public class ShinsakaiKaisaiYoteiTorokuManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5501ShinsakaiKaisaiYoteiJohoDac dbt5501dac;
+    private final DbT5503ShinsakaiWariateIinJohoDac dbt5503dac;
 
     ShinsakaiKaisaiYoteiTorokuManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbt5501dac = InstanceProvider.create(DbT5501ShinsakaiKaisaiYoteiJohoDac.class);
+        this.dbt5503dac = InstanceProvider.create(DbT5503ShinsakaiWariateIinJohoDac.class);
     }
 
     /**
@@ -42,16 +46,20 @@ public class ShinsakaiKaisaiYoteiTorokuManager {
      * @param mapperProvider mapperProvider
      */
     ShinsakaiKaisaiYoteiTorokuManager(
-            MapperProvider mapperProvider, DbT5501ShinsakaiKaisaiYoteiJohoDac dbt5501dac
+            MapperProvider mapperProvider,
+            DbT5501ShinsakaiKaisaiYoteiJohoDac dbt5501dac,
+            DbT5503ShinsakaiWariateIinJohoDac dbt5503dac
     ) {
         this.mapperProvider = mapperProvider;
         this.dbt5501dac = dbt5501dac;
+        this.dbt5503dac = dbt5503dac;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiTorokuManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiTorokuManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiTorokuManager}のインスタンス
      */
     public static ShinsakaiKaisaiYoteiTorokuManager createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiYoteiTorokuManager.class);
@@ -116,5 +124,17 @@ public class ShinsakaiKaisaiYoteiTorokuManager {
             return 0;
         }
         return dbt5501dac.save(介護認定審査会開催予定情報.toEntity());
+    }
+
+    /**
+     * 介護認定審査会開催予定情報{@link ShinsakaiKaisaiYoteiJoho}を登録/更新します。
+     *
+     * @param entity DbT5503ShinsakaiWariateIinJohoEntity
+     * @return 登録/更新件数 登録/更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean insertOrUpdateShinsakai(DbT5503ShinsakaiWariateIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
+        return 0 < dbt5503dac.save(entity);
     }
 }

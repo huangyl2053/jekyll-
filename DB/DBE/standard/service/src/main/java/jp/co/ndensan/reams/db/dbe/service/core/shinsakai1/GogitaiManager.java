@@ -58,13 +58,32 @@ public class GogitaiManager {
      *
      * @param 基準年月 RString
      * @param 末日 RString
+     * @param 合議体No RString
      * @return 合議体情報
      */
-    public SearchResult<GogitaiJohoShinsaRelateBusiness> get合議体情報(RString 基準年月, RString 末日) {
+    public SearchResult<GogitaiJohoShinsaRelateBusiness> get合議体情報(RString 基準年月, RString 末日, RString 合議体No) {
         List<GogitaiJohoShinsaRelateBusiness> 合議体情報 = new ArrayList<>();
         RString 開催予定開始日 = 基準年月.concat(末日);
         RString 開催予定終了日 = 基準年月.concat(月初日);
-        GogitaiIchiranJohoMapperParameter param = GogitaiIchiranJohoMapperParameter.createGogitaiJoho(開催予定開始日, 開催予定終了日);
+        GogitaiIchiranJohoMapperParameter param = GogitaiIchiranJohoMapperParameter.createGogitaiJoho(開催予定開始日, 開催予定終了日, 合議体No);
+        IGogitaiJohoShinsaMapper mapper = mapperProvider.create(IGogitaiJohoShinsaMapper.class);
+        List<GogitaiJohoShinsaRelateEntity> entityList = mapper.get合議体情報(param);
+        for (GogitaiJohoShinsaRelateEntity entity : entityList) {
+            合議体情報.add(new GogitaiJohoShinsaRelateBusiness(entity));
+        }
+        return SearchResult.of(合議体情報, 0, false);
+    }
+
+    /**
+     * 合議体情報のリストを取得処理です。
+     *
+     * @param 開催予定日 RString
+     * @param 合議体No RString
+     * @return 合議体情報
+     */
+    public SearchResult<GogitaiJohoShinsaRelateBusiness> get合議体情報By開催予定日(RString 開催予定日, RString 合議体No) {
+        List<GogitaiJohoShinsaRelateBusiness> 合議体情報 = new ArrayList<>();
+        GogitaiIchiranJohoMapperParameter param = GogitaiIchiranJohoMapperParameter.createGogitaiJoho(開催予定日, 開催予定日, 合議体No);
         IGogitaiJohoShinsaMapper mapper = mapperProvider.create(IGogitaiJohoShinsaMapper.class);
         List<GogitaiJohoShinsaRelateEntity> entityList = mapper.get合議体情報(param);
         for (GogitaiJohoShinsaRelateEntity entity : entityList) {

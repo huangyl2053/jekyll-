@@ -85,19 +85,14 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaisukejuruhyoReportSource> reportSourceWriter) {
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            for (RString 審査会委員コード : 審査会委員コードリスト) {
-                int renban = 0;
-                ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
-                printBodyItemList(renban, headerEditor, reportSourceWriter);
-            }
+            int renban = 0;
+            ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
+            printBodyItemList(renban, headerEditor, reportSourceWriter);
         } else {
-            for (RString 審査会委員コード : 審査会委員コードリスト) {
-                ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
-                ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(bodyItem);
-                IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
-                reportSourceWriter.writeLine(builder);
-            }
-
+            ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
+            ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(bodyItem);
+            IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
+            reportSourceWriter.writeLine(builder);
         }
     }
 

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohoshinsakai.GogitaiJohoShinsaRelateBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001StateName;
@@ -34,7 +36,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
@@ -72,6 +73,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  *
@@ -651,6 +653,22 @@ public class ShinsakaiKaisaiYoteiToroku {
                     builder.setモバイルデータ出力年月日(FlexibleDate.EMPTY);
                     yoteiJoho.toEntity().setState(EntityDataState.Added);
                     yoteiTorokuManager.insertOrUpdate(builder.build());
+
+                    SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
+                            = gogitaiManager.get合議体情報By開催予定日(new RString(parameter.get日付().toString()), new RString(parameter.get合議体番号()));
+                    for (GogitaiJohoShinsaRelateBusiness 審査会委員 : gogitaiBusinessList.records()) {
+                        ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(parameter.get開催番号().trim(), 審査会委員.get介護認定審査会委員コード());
+                        ShinsakaiWariateIinJoho2Builder builderIinJoho = wariateIinJoho.createBuilderForEdit();
+                        builderIinJoho.set介護認定審査会開催年月日(parameter.get日付());
+                        builderIinJoho.set委員出席(true);
+                        builderIinJoho.set委員出席時間(parameter.get開始予定時刻());
+                        builderIinJoho.set委員退席時間(parameter.get終了予定時刻());
+                        builderIinJoho.set委員遅刻有無(false);
+                        builderIinJoho.set委員早退有無(false);
+                        builderIinJoho.set介護認定審査会議長区分コード(new Code(審査会委員.get合議体長区分コード()));
+                        builderIinJoho.build().isAdded();
+                        yoteiTorokuManager.insertOrUpdateShinsakai(builderIinJoho.build().toEntity());
+                    }
                 } else if (parameter.is存在() && parameter.is変更()) {
                     ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(parameter.get開催番号().trim());
                     ShinsakaiKaisaiYoteiJoho yoteiJoho = models.get(key);
@@ -926,7 +944,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         ViewStateHolder.put(ViewStateKeys.押下フラグ, 登録ボタン未押下);
         set介護認定審査会開催予定一覧(年月);
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(date.getYearMonth().toDateString(), new RString(date.getLastDay()));
+                = gogitaiManager.get合議体情報(date.getYearMonth().toDateString(), new RString(date.getLastDay()), RString.EMPTY);
         set合議体情報(gogitaiBusinessList);
         div.getTxtSeteibi().setValue(date);
         if (date.getDayValue() == 1) {
@@ -961,7 +979,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()));
+                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
         set合議体情報(gogitaiBusinessList);
         clear入力();
     }
@@ -986,7 +1004,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()));
+                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
         set合議体情報(gogitaiBusinessList);
         clear入力();
     }
@@ -1008,7 +1026,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()));
+                = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
         set合議体情報(gogitaiBusinessList);
         clear入力();
     }

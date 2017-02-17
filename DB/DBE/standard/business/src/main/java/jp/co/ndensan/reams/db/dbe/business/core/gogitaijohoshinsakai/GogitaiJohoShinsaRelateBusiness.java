@@ -56,6 +56,15 @@ public class GogitaiJohoShinsaRelateBusiness {
     }
 
     /**
+     * 介護認定審査会委員コードのgetメソッドです。
+     *
+     * @return 介護認定審査会委員コード
+     */
+    public RString get介護認定審査会委員コード() {
+        return entity.get介護認定審査会委員コード();
+    }
+
+    /**
      * 介護認定審査会委員氏名のgetメソッドです。
      *
      * @return 介護認定審査会委員氏名
@@ -127,4 +136,14 @@ public class GogitaiJohoShinsaRelateBusiness {
     public RString get介護認定審査会終了予定時刻() {
         return entity.get介護認定審査会終了予定時刻();
     }
+
+    /**
+     * 合議体長区分コードのgetメソッドです。
+     *
+     * @return 介護認定審査会委員コード
+     */
+    public RString get合議体長区分コード() {
+        return entity.get合議体長区分コード();
+    }
+
 }

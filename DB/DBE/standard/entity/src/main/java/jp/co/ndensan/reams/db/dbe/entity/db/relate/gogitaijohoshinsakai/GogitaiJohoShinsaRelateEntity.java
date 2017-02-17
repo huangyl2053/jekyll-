@@ -22,6 +22,7 @@ public class GogitaiJohoShinsaRelateEntity {
     private int 合議体番号;
     private RString 合議体名称;
     private boolean 合議体精神科医存在フラグ;
+    private RString 介護認定審査会委員コード;
     private RString 介護認定審査会委員氏名;
     private RString 介護認定審査会開催場所コード;
     private int 介護認定審査会予定定員;
@@ -30,4 +31,5 @@ public class GogitaiJohoShinsaRelateEntity {
     private FlexibleDate 介護認定審査会開催予定年月日;
     private RString 介護認定審査会開始予定時刻;
     private RString 介護認定審査会終了予定時刻;
+    private RString 合議体長区分コード;
 }

@@ -16,16 +16,24 @@ public final class GogitaiIchiranJohoMapperParameter {
 
     private final RString YukoYMDFrom;
     private final RString YukoYMDTo;
+    private final int GogitaiNo;
+    private final boolean usesGogitaiNo;
 
     /**
      * コンストラクタです。
      *
      * @param YukoYMDFrom 有効期間開始日
      * @param YukoYMDTo 有効期間終了日
+     * @param GogitaiNo 合議体No
      */
-    private GogitaiIchiranJohoMapperParameter(RString YukoYMDFrom, RString YukoYMDTo) {
+    private GogitaiIchiranJohoMapperParameter(RString YukoYMDFrom,
+            RString YukoYMDTo,
+            int GogitaiNo,
+            boolean usesGogitaiNo) {
         this.YukoYMDFrom = YukoYMDFrom;
         this.YukoYMDTo = YukoYMDTo;
+        this.GogitaiNo = GogitaiNo;
+        this.usesGogitaiNo = usesGogitaiNo;
     }
 
     /**
@@ -33,10 +41,14 @@ public final class GogitaiIchiranJohoMapperParameter {
      *
      * @param YukoYMDFrom 有効期間開始日
      * @param YukoYMDTo 有効期間終了日
+     * @param GogitaiNo 合議体no
      * @return 合議体情報一覧表示パラメータ
      */
     public static GogitaiIchiranJohoMapperParameter createGogitaiJoho(
-            RString YukoYMDFrom, RString YukoYMDTo) {
-        return new GogitaiIchiranJohoMapperParameter(YukoYMDFrom, YukoYMDTo);
+            RString YukoYMDFrom, RString YukoYMDTo, RString GogitaiNo) {
+        return new GogitaiIchiranJohoMapperParameter(YukoYMDFrom,
+                YukoYMDTo,
+                (!RString.isNullOrEmpty(GogitaiNo) ? Integer.parseInt(GogitaiNo.toString()) : 0),
+                !RString.isNullOrEmpty(GogitaiNo));
     }
 }
