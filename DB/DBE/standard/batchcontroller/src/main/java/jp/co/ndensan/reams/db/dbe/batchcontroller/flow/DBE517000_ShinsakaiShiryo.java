@@ -10,6 +10,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.OutputJokenhyoFactoryProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiShiryoUpdateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -83,7 +84,7 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     @Step(審査会情報更新)
     protected IBatchFlowCommand createKosinData() {
         return loopBatch(ShinsakaiJohoUpdateProcess.class)
-                .arguments(getParameter().toIinItiziHanteiProcessParameter()).define();
+                .arguments(getParameter().toShinsakaiShiryoUpdateProcessParameter()).define();
     }
 
     /**

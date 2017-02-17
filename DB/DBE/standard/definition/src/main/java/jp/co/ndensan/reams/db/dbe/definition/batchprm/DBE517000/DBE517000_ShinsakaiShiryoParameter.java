@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517001.DBE517001_ShinsakaiShiryoJImukyokuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiShiryoUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
@@ -292,10 +292,10 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     /**
      * 介護認定更新ProcessParameterに転換します。
      *
-     * @return IinItiziHanteiProcessParameter
+     * @return ShinsakaiShiryoUpdateProcessParameter
      */
-    public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
-        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
+    public ShinsakaiShiryoUpdateProcessParameter toShinsakaiShiryoUpdateProcessParameter() {
+        return new ShinsakaiShiryoUpdateProcessParameter(shinsakaiKaisaiNo);
     }
 
     /**
