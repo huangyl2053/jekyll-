@@ -91,10 +91,13 @@ public class ShinsakaisukejuruhyoReport extends Report<ShinsakaisukejuruhyoRepor
                 printBodyItemList(renban, headerEditor, reportSourceWriter);
             }
         } else {
-            ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
-            ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(bodyItem);
-            IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
-            reportSourceWriter.writeLine(builder);
+            for (RString 審査会委員コード : 審査会委員コードリスト) {
+                ShinsakaisukejuruhyoHeaderEditor headerEditor = new ShinsakaisukejuruhyoHeaderEditor(headItem);
+                ShinsakaisukejuruhyoBodyEditor bodyEditor = new ShinsakaisukejuruhyoBodyEditor(bodyItem);
+                IShinsakaisukejuruhyoBuilder builder = new ShinsakaisukejuruhyoBuilderImpl(headerEditor, bodyEditor);
+                reportSourceWriter.writeLine(builder);
+            }
+
         }
     }
 

@@ -93,7 +93,7 @@ public class ShinsakaiScheduleHakko {
     }
 
     /**
-     * スケジュール表が選択され、開催予定期間が入力されたとき実行されます。
+     * 開催予定期間が入力されたとき実行されます。
      *
      * @param div 介護認定審査会開催予定登録div
      * @param 帳票種類 RString
