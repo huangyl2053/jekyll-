@@ -84,7 +84,11 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
     private RString filePath_06A;
     private RString filePath_02A;
     private RString filePath_99A;
-    private FileSpoolManager fileSpoolManager;
+    private FileSpoolManager fileSpoolManager_09B;
+    private FileSpoolManager fileSpoolManager_09A;
+    private FileSpoolManager fileSpoolManager_06A;
+    private FileSpoolManager fileSpoolManager_02A;
+    private FileSpoolManager fileSpoolManager_99A;
     private ShinseishaDataOutProcessParameter processParameter;
     private IShinseishaDataOutMapper mapper;
     private boolean exist09B;
@@ -95,7 +99,11 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
 
     @Override
     protected void initialize() {
-        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        fileSpoolManager_09B = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        fileSpoolManager_09A = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        fileSpoolManager_06A = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        fileSpoolManager_02A = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        fileSpoolManager_99A = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         mapper = InstanceProvider.create(MapperProvider.class).create(IShinseishaDataOutMapper.class);
         exist09B = false;
         exist09A = false;
@@ -111,7 +119,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
 
     @Override
     protected void createWriter() {
-        filePath_09B = Path.combinePath(fileSpoolManager.getEucOutputDirectry(), CSV_FILE_NAME_09B);
+        filePath_09B = Path.combinePath(fileSpoolManager_09B.getEucOutputDirectry(), CSV_FILE_NAME_09B);
         csvWriter_09B = new CsvWriter.InstanceBuilder(filePath_09B).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -120,7 +128,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
                 hasHeader(true).
                 build();
 
-        filePath_09A = Path.combinePath(fileSpoolManager.getEucOutputDirectry(), CSV_FILE_NAME_09A);
+        filePath_09A = Path.combinePath(fileSpoolManager_09A.getEucOutputDirectry(), CSV_FILE_NAME_09A);
         csvWriter_09A = new CsvWriter.InstanceBuilder(filePath_09A).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -129,7 +137,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
                 hasHeader(true).
                 build();
 
-        filePath_06A = Path.combinePath(fileSpoolManager.getEucOutputDirectry(), CSV_FILE_NAME_06A);
+        filePath_06A = Path.combinePath(fileSpoolManager_06A.getEucOutputDirectry(), CSV_FILE_NAME_06A);
         csvWriter_06A = new CsvWriter.InstanceBuilder(filePath_06A).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -138,7 +146,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
                 hasHeader(true).
                 build();
 
-        filePath_02A = Path.combinePath(fileSpoolManager.getEucOutputDirectry(), CSV_FILE_NAME_02A);
+        filePath_02A = Path.combinePath(fileSpoolManager_02A.getEucOutputDirectry(), CSV_FILE_NAME_02A);
         csvWriter_02A = new CsvWriter.InstanceBuilder(filePath_02A).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -147,7 +155,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
                 hasHeader(true).
                 build();
 
-        filePath_99A = Path.combinePath(fileSpoolManager.getEucOutputDirectry(), CSV_FILE_NAME_99A);
+        filePath_99A = Path.combinePath(fileSpoolManager_99A.getEucOutputDirectry(), CSV_FILE_NAME_99A);
         csvWriter_99A = new CsvWriter.InstanceBuilder(filePath_99A).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -189,19 +197,19 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
         csvWriter_02A.close();
         csvWriter_99A.close();
         if (exist09B) {
-            fileSpoolManager.spool(filePath_09B);
+            fileSpoolManager_09B.spool(filePath_09B);
         }
         if (exist09A) {
-            fileSpoolManager.spool(filePath_09A);
+            fileSpoolManager_09A.spool(filePath_09A);
         }
         if (exist06A) {
-            fileSpoolManager.spool(filePath_06A);
+            fileSpoolManager_06A.spool(filePath_06A);
         }
         if (exist02A) {
-            fileSpoolManager.spool(filePath_02A);
+            fileSpoolManager_02A.spool(filePath_02A);
         }
         if (exist99A) {
-            fileSpoolManager.spool(filePath_99A);
+            fileSpoolManager_99A.spool(filePath_99A);
         }
     }
 
