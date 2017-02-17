@@ -360,75 +360,75 @@ public class ChosahyoJoho99AEucEntityEditor {
     }
 
     private static RString get調査項目01名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser01.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser01.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目02名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser02.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser02.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目03名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser03.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser03.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目04名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser04.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser04.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目08名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser08.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser08.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目09名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser09.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser09.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目14名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser14.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser14.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目15名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser15.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser15.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目16名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser16.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser16.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目20名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser20.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser20.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目21名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser21.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser21.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目22名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser22.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser22.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目23名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser23.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser23.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目30名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser30.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser30.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目31名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser31.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser31.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目32名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser32.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser32.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目33名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser33.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser33.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString get調査項目34名称(RString code) {
-        return (!code.isEmpty()) ? ChosaAnser34.toValue(code).get名称() : RString.EMPTY;
+        return (!code.trim().isEmpty()) ? ChosaAnser34.toValue(code).get名称() : RString.EMPTY;
     }
 
     private static RString format得点(int value) {
