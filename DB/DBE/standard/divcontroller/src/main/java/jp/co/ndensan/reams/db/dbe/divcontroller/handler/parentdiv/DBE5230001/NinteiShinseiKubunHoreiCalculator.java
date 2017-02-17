@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 /**
  *
  */
-public final class NinteiShinseiKubunHoreiMethod {
+public final class NinteiShinseiKubunHoreiCalculator {
 
-    private NinteiShinseiKubunHoreiMethod() {
+    private NinteiShinseiKubunHoreiCalculator() {
     }
 
     private static final int 更新申請可能日数 = 61;
@@ -48,6 +48,9 @@ public final class NinteiShinseiKubunHoreiMethod {
             YokaigoJotaiKubun09 今回二次判定結果,
             FlexibleDate 申請日,
             FlexibleDate 前回有効期間終了日) {
+        if (前回二次判定結果 == null || 今回二次判定結果 == null) {
+            return null;
+        }
         if (前回二次判定結果 == 今回二次判定結果) {
             if (申請日.plusDay(更新申請可能日数).isBeforeOrEquals(前回有効期間終了日)) {
                 return NinteiShinseiKubunHorei.区分変更申請;
@@ -72,6 +75,9 @@ public final class NinteiShinseiKubunHoreiMethod {
     private static NinteiShinseiKubunHorei get申請区分法令At更新申請(
             YokaigoJotaiKubun09 前回二次判定結果,
             YokaigoJotaiKubun09 今回二次判定結果) {
+        if (前回二次判定結果 == null || 今回二次判定結果 == null) {
+            return null;
+        }
         if (前回二次判定結果.is要支援() && 今回二次判定結果.is要支援()) {
             return NinteiShinseiKubunHorei.更新申請;
         }
@@ -88,9 +94,9 @@ public final class NinteiShinseiKubunHoreiMethod {
     }
 
     private static NinteiShinseiKubunHorei get申請区分法令At新規申請(YokaigoJotaiKubun09 今回二次判定結果) {
-        if (今回二次判定結果.is要支援() || 今回二次判定結果.is要介護()) {
-            return NinteiShinseiKubunHorei.新規申請;
+        if (今回二次判定結果 == null) {
+            return null;
         }
-        return null;
+        return NinteiShinseiKubunHorei.新規申請;
     }
 }

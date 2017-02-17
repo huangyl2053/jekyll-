@@ -25,17 +25,18 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJot
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * 介護認定審査会審査結果登録クラスです。
@@ -50,7 +51,6 @@ public class ShinsakaiKekkaTorokuHandler {
     private static final int 認定期間月数12ヶ月 = 12;
     private static final int 認定期間月数24ヶ月 = 24;
     private static final int 月の初めの日 = 1;
-    private static final RString 更新_FLAG = new RString("1");
     private static final RString 保存するボタンID = new RString("btnUpdate");
 
     /**
@@ -135,7 +135,7 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get申請区分_法令コード(),
                     認定申請日,
                     business.get取下区分名称(),
-                    business.get取下区分コード().get取下げ区分コード().value(),
+                    business.get取下区分コード(),
                     前回有効期間終了日,
                     business.get前回一次判定(),
                     business.get今回一次判定(),
@@ -164,8 +164,15 @@ public class ShinsakaiKekkaTorokuHandler {
                     RString.EMPTY,
                     business.get申請書管理番号(),
                     business.get一次判定(),
-                    business.厚労省IF識別コード()
+                    business.厚労省IF識別コード(),
+                    business.get取下区分コード()
             );
+            if (!row.getHanteiKekkaCode().isEmpty()) {
+                row.setMd5(new TaishoshaIchiranRow(row).toMd5());
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
+            } else {
+                row.setDeleteButtonState(DataGridButtonState.Disabled);
+            }
             dataSource.add(row);
         }
         div.getShinseishaIchiran().getDgTaishoshaIchiran().setDataSource(dataSource);
@@ -186,7 +193,7 @@ public class ShinsakaiKekkaTorokuHandler {
         initalize(headList, iChiRanList);
         if (iChiRanList.size() == 1) {
             set個別表示欄入力可();
-            this.displayTo個別表示欄(div.getDgTaishoshaIchiran().getDataSource().get(0));
+            this.displayTo個別表示欄(div.getDgTaishoshaIchiran().getDataSource().get(0), OperationMode.更新);
         }
         if (iChiRanList.isEmpty()) {
             set操作不可();
@@ -194,20 +201,58 @@ public class ShinsakaiKekkaTorokuHandler {
         }
     }
 
-//    /**
-//     * 個別エリアのデータを変更しました。
-//     *
-//     * @return boolean 変更あり：TRUE、変更なし：FALSE
-//     */
-//    public boolean has個別表示欄Changed() {
-//        return !div.getHdnHasChanged().equals(toMd5From個別表示欄());
-//    }
     /**
      * 個別エリアの値を設定します。
      *
      * @param row
+     * @param mode
      */
-    public void displayTo個別表示欄(dgTaishoshaIchiran_Row row) {
+    public void displayTo個別表示欄(dgTaishoshaIchiran_Row row, OperationMode mode) {
+        reflectClickedRowTo個別事項表示欄(row);
+        setInputable個別事項表示欄By(mode);
+        if (mode != OperationMode.更新) {
+            return;
+        }
+        /**
+         * 二次判断が「要介護１」の場合のみ、状態像の入力が必須となるがを設定
+         */
+        set状態像Deisabled(get今回二次判定() != YokaigoJotaiKubun09.要介護1);
+        boolean is認定 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード());
+        set個別入力制御変更By判定結果(is認定);
+        if (!is認定) {
+            clear個別表示欄今回入力内容判定結果以外();
+        }
+        div.setHdnHasChanged(toRString_個別事項表示欄());
+    }
+
+    private RString toRString_個別事項表示欄() {
+        RStringBuilder rsb = new RStringBuilder();
+        RDate 認定期間From = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue();
+        RDate 認定期間To = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
+        RString 認定期間開始日文字列 = (認定期間From == null) ? RString.EMPTY : 認定期間From.toDateString();
+        RString 認定期間終了日文字列 = (認定期間To == null) ? RString.EMPTY : 認定期間To.toDateString();
+        rsb.append(div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtBirthYMD().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtShinseiKubunLaw().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtTorisageKubun().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtIchijiHantei().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtTokuteiShippei().getValue())
+                .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedValue())
+                .append(div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey())
+                .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
+                .append(認定期間開始日文字列)
+                .append(認定期間終了日文字列)
+                .append((get認定期間月数() != 0) ? new RString(get認定期間月数()) : RString.EMPTY)
+                .append(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue())
+                .append(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey())
+                .append(div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue())
+                .append(div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().getValue());
+        return rsb.toRString();
+    }
+
+    private void reflectClickedRowTo個別事項表示欄(dgTaishoshaIchiran_Row row) throws IllegalArgumentException {
         clear個別表示欄();
         div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().setValue(row.getShinsakaiJunjo());
         div.getKobetsuHyojiArea().getTxtShinseiDay().setValue(row.getShinseiDay().getValue());
@@ -278,49 +323,54 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setValue(RString.EMPTY);
         }
-        /**
-         * 二次判断が「要介護１」の場合のみ、状態像の入力が必須となるがを設定
-         */
-        if (get今回二次判定() == YokaigoJotaiKubun09.要介護1) {
-            set状態像Deisabled(false);
-        } else {
-            set状態像Deisabled(true);
-        }
-        boolean is入力可 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード());
-        set個別入力制御変更from判定結果(is入力可);
-        if (!is入力可) {
-            clear個別表示欄今回入力内容判定結果以外();
-        }
-
-        //TODO 以下の処理が必要かどうか判断
-//        div.setHdnHasChanged(toMd5From個別表示欄());
     }
 
-    private RString toMd5From個別表示欄() {
-        RStringBuilder rsb = new RStringBuilder();
-        RDate 認定期間From = div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().getValue();
-        RDate 認定期間To = div.getKobetsuHyojiArea().getTxtNinteiKikanTo().getValue();
-        RString 認定期間開始日文字列 = (認定期間From == null) ? RString.EMPTY : 認定期間From.toDateString();
-        RString 認定期間終了日文字列 = (認定期間To == null) ? RString.EMPTY : 認定期間To.toDateString();
-        rsb.append(div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtBirthYMD().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtShinseiKubunLaw().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtTorisageKubun().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtIchijiHantei().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtTokuteiShippei().getValue())
-                .append(div.getKobetsuHyojiArea().getDdlJotaiZo().getSelectedValue())
-                .append(div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey())
-                .append(div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey())
-                .append(認定期間開始日文字列)
-                .append(認定期間終了日文字列)
-                .append((get認定期間月数() != 0) ? new RString(get認定期間月数()) : RString.EMPTY)
-                .append(div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue())
-                .append(div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey())
-                .append(div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue())
-                .append(div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().getValue());
-        return new RString(DigestUtils.md5Hex(rsb.toString()));
+    private void setInputable個別事項表示欄By(OperationMode mode) {
+        boolean disable = (mode == OperationMode.削除);
+        div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(disable);
+        div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(disable);
+        div.getKobetsuHyojiArea().getBtnNinteiChosaJokyoShokai().setDisabled(disable);
+        div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(disable);
+        div.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide().setDisabled(disable);
+        div.getKobetsuHyojiArea().getDdlHanteiKekka().setDisabled(disable);
+        div.getKobetsuHyojiArea().getDdlJotaiZo().setDisabled(disable);
+        div.getKobetsuHyojiArea().getDdlNijiHantei().setDisabled(disable);
+        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setDisabled(disable);
+        div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setDisabled(disable);
+        div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setDisabled(disable);
+        div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setDisabled(disable);
+        div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setDisabled(disable);
+        div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setDisabled(disable);
+        div.getKobetsuHyojiArea().getTxtShinsakaiIken().setDisabled(disable);
+        div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setDisabled(disable);
+    }
+
+    private void set個別入力制御変更By判定結果(boolean hyojiSeigyoFlag) {
+        div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getDdlJotaiZo().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getTxtShinsakaiIken().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setReadOnly(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getBtnNinteiChosaJokyoShokai().setDisabled(!hyojiSeigyoFlag);
+        div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(!hyojiSeigyoFlag);
+    }
+
+    public RString calculateTorisageKubunCodeBy個別入力欄() {
+        NinteiShinseiKubunShinsei 申請時申請区分 = get申請時申請区分();
+        YokaigoJotaiKubun09 前回二次判定 = get前回二次判定();
+        FlexibleDate 前回有効期間終了日 = get前回有効期間終了日();
+        YokaigoJotaiKubun09 今回二次判定 = get今回二次判定();
+        FlexibleDate 申請日 = div.getTxtShinseiDay().getValue();
+        TorisageKubun k = TorisageKubun.toValue(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
+        return k == null ? RString.EMPTY : k.get取下げ区分コード().value();
     }
 
     /**
@@ -346,35 +396,46 @@ public class ShinsakaiKekkaTorokuHandler {
 
     //<editor-fold defaultstate="collapsed" desc="_set個別表示欄To更新中Row">
     private dgTaishoshaIchiran_Row update更新対象Row(dgTaishoshaIchiran_Row row) {
-        RString newMd5 = toMd5From個別表示欄();
-        if (Objects.equals(newMd5, row.getMd5())) {
-            row.setJotai(KaigoRowState.空白.getStateName());
-            return row;
+        row.setDeleteButtonState(DataGridButtonState.Enabled);
+        HanteiKekkaCode 判定結果 = get判定結果();
+        if (判定結果 != null) {
+            row.setHanteiKekka(判定結果.get名称());
+            row.setHanteiKekkaCode(判定結果.getコード());
+        } else {
+            row.setHanteiKekka(RString.EMPTY);
+            row.setHanteiKekkaCode(RString.EMPTY);
         }
-        row.setJotai(KaigoRowState.修正.getStateName());
-        row.setMd5(newMd5);
-
-        NinteiShinseiKubunShinsei 申請時申請区分 = get申請時申請区分();
-        YokaigoJotaiKubun09 前回二次判定 = get前回二次判定();
-        FlexibleDate 前回有効期間終了日 = get前回有効期間終了日();
-        YokaigoJotaiKubun09 今回二次判定 = get今回二次判定();
-        FlexibleDate 申請日 = div.getTxtShinseiDay().getValue();
-        NinteiShinseiKubunHorei 法令申請区分 = NinteiShinseiKubunHoreiMethod.calculate(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
-        if (法令申請区分 == null) {
+        if (判定結果 == HanteiKekkaCode.認定) {
+            NinteiShinseiKubunShinsei 申請時申請区分 = get申請時申請区分();
+            YokaigoJotaiKubun09 前回二次判定 = get前回二次判定();
+            FlexibleDate 前回有効期間終了日 = get前回有効期間終了日();
+            YokaigoJotaiKubun09 今回二次判定 = get今回二次判定();
+            FlexibleDate 申請日 = div.getTxtShinseiDay().getValue();
+            NinteiShinseiKubunHorei 法令申請区分 = NinteiShinseiKubunHoreiCalculator.calculate(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
+            if (法令申請区分 == null) {
+                row.setShinseiKubunLaw(RString.EMPTY);
+                row.setShinseiKubunLawCode(RString.EMPTY);
+            } else {
+                row.setShinseiKubunLaw(法令申請区分.getName());
+                row.setShinseiKubunLawCode(new RString(法令申請区分.getコード()));
+            }
+            TorisageKubun 取下区分 = TorisageKubun.toValue(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
+            if (取下区分 == null) {
+                row.setTorisageKubunTx(RString.EMPTY);
+                row.setTorisageKubunCode(RString.EMPTY);
+            } else {
+                row.setTorisageKubunTx(取下区分.getName());
+                row.setTorisageKubunCode(取下区分.get取下げ区分コード().value());
+            }
+        } else {
             row.setShinseiKubunLaw(RString.EMPTY);
             row.setShinseiKubunLawCode(RString.EMPTY);
-        } else {
-            row.setShinseiKubunLaw(法令申請区分.getName());
-            row.setShinseiKubunLawCode(new RString(法令申請区分.getコード()));
+            RString code = row.getHenkoMaeTorisageKubunCode();
+            TorisageKubun kubun = TorisageKubun.toValue(code);
+            row.setTorisageKubunTx(kubun == null ? RString.EMPTY : kubun.getName());
+            row.setTorisageKubunCode(code);
         }
-        TorisageKubun 取下区分 = TorisageKubun.toValue(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
-        if (取下区分 == null) {
-            row.setTorisageKubunTx(RString.EMPTY);
-            row.setTorisageKubunCode(RString.EMPTY);
-        } else {
-            row.setTorisageKubunTx(取下区分.getName());
-            row.setTorisageKubunCode(取下区分.get取下げ区分コード().value());
-        }
+
         RDate 二次判定日 = div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue();
         if (二次判定日 != null) {
             row.getNijiHanteiDate().setValue(new FlexibleDate(二次判定日.toDateString()));
@@ -396,14 +457,7 @@ public class ShinsakaiKekkaTorokuHandler {
             row.setJotaizo(RString.EMPTY);
             row.setJotaizoCode(RString.EMPTY);
         }
-        HanteiKekkaCode 判定結果 = get判定結果();
-        if (判定結果 != null) {
-            row.setHanteiKekka(判定結果.get名称());
-            row.setHanteiKekkaCode(判定結果.getコード());
-        } else {
-            row.setHanteiKekka(RString.EMPTY);
-            row.setHanteiKekkaCode(RString.EMPTY);
-        }
+
         RString 二次判定 = div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedValue();
         RString 二次判定コード = div.getKobetsuHyojiArea().getDdlNijiHantei().getSelectedKey();
         if (!RString.isNullOrEmpty(二次判定)) {
@@ -441,14 +495,18 @@ public class ShinsakaiKekkaTorokuHandler {
         RString 審査会メモ = div.getKobetsuHyojiArea().getTxtShinsakaiMemo().getValue();
         if (!RString.isNullOrEmpty(審査会メモ)) {
             row.setHidMemo(審査会メモ);
+            row.setShinsakaiMemo(true);
         } else {
             row.setHidMemo(RString.EMPTY);
+            row.setShinsakaiMemo(false);
         }
         RString 審査会意見 = div.getKobetsuHyojiArea().getTxtShinsakaiIken().getValue();
         if (!RString.isNullOrEmpty(審査会意見)) {
             row.setHidIken(審査会意見);
+            row.setShinsakaiIken(true);
         } else {
             row.setHidIken(RString.EMPTY);
+            row.setShinsakaiIken(false);
         }
         RString 審査会意見種類コード = div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedKey();
         if (!RString.isNullOrEmpty(審査会意見種類コード)) {
@@ -462,11 +520,27 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             row.setIchijiHanteiKekkaHenkoRiyu(RString.EMPTY);
         }
+
+        if (row.getMd5().isEmpty()) {
+            row.setJotai(KaigoRowState.追加.getStateName());
+            return row;
+        }
+        RString newMd5 = new TaishoshaIchiranRow(row).toMd5();
+        if (Objects.equals(newMd5, row.getMd5())) {
+            row.setJotai(KaigoRowState.空白.getStateName());
+            return row;
+        }
+        row.setJotai(KaigoRowState.修正.getStateName());
         return row;
     }
 
     private dgTaishoshaIchiran_Row delete更新対象Row(dgTaishoshaIchiran_Row row) {
-        row.setJotai(KaigoRowState.削除.getStateName());
+        row.setDeleteButtonState(DataGridButtonState.Disabled);
+        if (row.getMd5().isEmpty()) {
+            row.setJotai(KaigoRowState.空白.getStateName());
+        } else {
+            row.setJotai(KaigoRowState.削除.getStateName());
+        }
         return row;
     }
     //</editor-fold>
@@ -595,40 +669,24 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      */
     public void set個別入力制御変更from判定結果() {
-        boolean is入力可 = (get判定結果() == HanteiKekkaCode.認定);
-        set個別入力制御変更from判定結果(is入力可);
-        if (!is入力可 || is判定結果変更前入力不可()) {
+        boolean is認定 = (get判定結果() == HanteiKekkaCode.認定);
+        set個別入力制御変更By判定結果(is認定);
+        if (!is認定 || is判定結果変更前入力不可()) {
             clear個別表示欄今回入力内容判定結果以外();
         }
-        if (is入力可 || !is判定結果変更前入力不可()) {
-            displayTo個別表示欄(find更新中RowOrNull());
-        }
-        if (is入力可) {
+        if (is認定 || !is判定結果変更前入力不可()) {
+            reflectClickedRowTo個別事項表示欄(find更新中RowOrNull());
+            // 一度クリアされるので再設定する。
             div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(HanteiKekkaCode.認定.getコード());
-            set個別入力制御変更from判定結果(is入力可);
+            if (div.getTxtNijiHanteiDay().getValue() == null) {
+                RDate rData = new RDate(div.getTxtKaisaiNichiji().getValue().seireki().toDateString().toString());
+                div.getTxtNijiHanteiDay().setValue(rData);
+            }
         }
     }
 
     private boolean is判定結果変更前入力不可() {
         return div.getKobetsuHyojiArea().getTxtNijiHanteiDay().isReadOnly();
-    }
-
-    private void set個別入力制御変更from判定結果(boolean hyojiSeigyoFlag) {
-        div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getDdlJotaiZo().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getDdlNijiHantei().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getTxtNinteiKikanFrom().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getTxtNinteiKikanTo().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnShinsakaiMemoTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnShinsakiIkenTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getTxtShinsakaiIken().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnNinteiChosaJokyoShokai().setDisabled(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(!hyojiSeigyoFlag);
     }
 
     /**
@@ -713,7 +771,8 @@ public class ShinsakaiKekkaTorokuHandler {
             return null;
         }
         dgTaishoshaIchiran_Row 更新対象row = find更新中RowOrNull();
-        FlexibleDate 二次判定日 = 更新対象row.getNijiHanteiDate().getValue();
+        RDate nijiHanteiDate = div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getValue();
+        FlexibleDate 二次判定日 = (nijiHanteiDate == null) ? null : new FlexibleDate(nijiHanteiDate.toDateString());
         FlexibleDate 前回有効期間終了日 = 更新対象row.getZenkaiYukoKikanShuryoDay().getValue();
         YokaigoJotaiKubun09 前回二次判定 = get前回二次判定();
         YokaigoJotaiKubun09 今回二次判定 = get今回二次判定();
@@ -1061,11 +1120,15 @@ public class ShinsakaiKekkaTorokuHandler {
     }
 
     private static RDate get翌日(FlexibleDate 基準日) {
-        return new RDate(基準日.plusDay(1).toString());
+        return new RDate(基準日.plusDay(1).seireki().toDateString().toString());
     }
 
     private static RDate get当日(FlexibleDate 基準日) {
-        return new RDate(基準日.toString());
+        try {
+            return new RDate(基準日.seireki().toDateString().toString());
+        } catch (Exception e) {
+            throw new ApplicationException(基準日.seireki().toDateString().toString());
+        }
     }
 
     private static int calculate認定期間月数(NinteiShinseiKubunShinsei 申請時申請区分) {

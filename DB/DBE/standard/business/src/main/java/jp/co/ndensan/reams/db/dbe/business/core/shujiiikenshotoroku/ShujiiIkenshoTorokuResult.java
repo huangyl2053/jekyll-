@@ -1,7 +1,13 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku.ShujiiIkenshoTorokuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -151,8 +157,41 @@ public class ShujiiIkenshoTorokuResult {
      *
      * @return 意見書作成回数区分
      */
-    public Code get意見書作成回数区分() {
-        return entity.getDbt5302Entity().getIkenshoSakuseiKaisuKubun();
+    @CheckForNull
+    public IkenshoSakuseiKaisuKubun get意見書作成回数区分() {
+        Code code = entity.getDbt5302Entity().getIkenshoSakuseiKaisuKubun();
+        if (code == null || code.isEmpty()) {
+            return null;
+        }
+        return IkenshoSakuseiKaisuKubun.toValue(code.value());
+    }
+
+    /**
+     * 在宅/施設区分を返します。
+     *
+     * @return 在宅/施設区分
+     */
+    @CheckForNull
+    public ZaitakuShisetsuKubun get在宅施設区分() {
+        Code code = entity.getDbt5302Entity().getZaitakuShisetsuKubun();
+        if (code == null || code.isEmpty()) {
+            return null;
+        }
+        return ZaitakuShisetsuKubun.toValue(code.value());
+    }
+
+    /**
+     * 作成料請求区分を返します。
+     *
+     * @return 作成料請求区分
+     */
+    @CheckForNull
+    public SakuseiryoSeikyuKubun get作成料請求区分() {
+        Code code = entity.getDbt5301Entity().getSakuseiryoSeikyuKubun();
+        if (code == null || code.isEmpty()) {
+            return null;
+        }
+        return SakuseiryoSeikyuKubun.toValue(code.value());
     }
 
     /**
@@ -333,5 +372,13 @@ public class ShujiiIkenshoTorokuResult {
      */
     public boolean is連絡確認の有無() {
         return entity.getDbt5302Entity().getNijiHanteiKekkaRenrakuFlag();
+    }
+
+    /**
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        LasdecCode s = entity.getShichosonCode();
+        return s == null ? LasdecCode.EMPTY : s;
     }
 }

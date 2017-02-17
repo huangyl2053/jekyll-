@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2310001.Shuj
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -82,11 +84,25 @@ public class ShujiiIkenshoTorokuHandler {
         div.getTxtShujiiIryoKikanTelNumber().setDomain(result.get電話番号() == null ? TelNo.EMPTY : result.get電話番号());
         div.getTxtShujiiIryoKikanFaxNumber().setDomain(result.getFAX番号() == null ? TelNo.EMPTY : result.getFAX番号());
         div.getTxtSaishuShinryoYMD().setValue(flexToRdate(result.get最終診察日()));
-        if (result.get意見書作成回数区分() != null) {
+
+        SakuseiryoSeikyuKubun sakuseiryoSeikyuKubun = result.get作成料請求区分();
+        IkenshoSakuseiKaisuKubun sakuseiKaisuKubun = result.get意見書作成回数区分();
+        if (sakuseiKaisuKubun != null) {
             div.getRadIkenshoSakuseiKaisu().setSelectedKey(
-                    IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(result.get意見書作成回数区分().value())
-                    ? SELECT_KEY1 : SELECT_KEY0);
+                    IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(sakuseiKaisuKubun.getコード())
+                            ? SELECT_KEY1 : SELECT_KEY0);
+        } else if (sakuseiryoSeikyuKubun != null) {
+            div.getRadIkenshoSakuseiKaisu().setSelectedKey(
+                    IkenshoSakuseiKaisuKubun._2回目以降.getコード().equals(sakuseiryoSeikyuKubun.as作成回数区分().getコード())
+                            ? SELECT_KEY1 : SELECT_KEY0);
         }
+        ZaitakuShisetsuKubun zaitakuShisetsuKubun = result.get在宅施設区分();
+        if (zaitakuShisetsuKubun != null) {
+            div.getRadZaitakuShisetsuKubun().setSelectedKey(zaitakuShisetsuKubun.getコード());
+        } else if (sakuseiryoSeikyuKubun != null) {
+            div.getRadZaitakuShisetsuKubun().setSelectedKey(sakuseiryoSeikyuKubun.as在宅施設区分().getコード());
+        }
+
         div.getRadTakaShinryo().setSelectedKey(result.is他科受診の有無() ? SELECT_KEY0 : SELECT_KEY1);
         setChkTakaJushin(result);
         List<RString> selKeysList = new ArrayList<>();

@@ -646,7 +646,7 @@
         INNER JOIN
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
             ON DbT5101."shinseishoKanriNo" = targets."shinseishoKanriNo"
-        INNER JOIN
+        LEFT JOIN
             rgdb."DbT5201NinteichosaIraiJoho" AS "DbT5201NinteichosaIraiJoho"
             ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = targets."shinseishoKanriNo"
             AND NOT EXISTS (
@@ -658,7 +658,7 @@
                      "shinseishoKanriNo" = "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo"
                  AND "ninteichosaIraiRirekiNo" <![CDATA[<]]> "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo"
             )
-        INNER JOIN
+        LEFT JOIN
             rgdb."DbT5301ShujiiIkenshoIraiJoho" AS "DbT5301ShujiiIkenshoIraiJoho"
             ON "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = targets."shinseishoKanriNo"
             AND NOT EXISTS (
@@ -670,7 +670,7 @@
                      "shinseishoKanriNo" = "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo"
                  AND "ikenshoIraiRirekiNo" <![CDATA[<]]> "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo"
             )
-        INNER JOIN
+        LEFT JOIN
             rgdb."DbT5116IchijiHanteiKekkaJoho" AS "DbT5116IchijiHanteiKekkaJoho"
             ON "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" = targets."shinseishoKanriNo"
         LEFT JOIN

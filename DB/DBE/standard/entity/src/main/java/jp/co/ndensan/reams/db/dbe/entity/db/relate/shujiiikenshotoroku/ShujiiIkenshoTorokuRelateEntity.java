@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEn
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医意見書登録RelateEntityクラスです。
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkenshoTorokuRelateEntity {
 
+    private LasdecCode shichosonCode;
     private DbT5301ShujiiIkenshoIraiJohoEntity dbt5301Entity;
     private DbT5302ShujiiIkenshoJohoEntity dbt5302Entity;
     private DbT5912ShujiiJohoEntity dbt5912Entity;

@@ -79,7 +79,11 @@ public class ShinsakaiKekkaTorokuDeletionCandidateEntity implements Serializable
      */
     @CheckForNull
     public DbT5201NinteichosaIraiJohoEntity getChosaIraiEntity() {
-        return getFirstOrNull(this.chosaIrai);
+        DbT5201NinteichosaIraiJohoEntity e = getFirstOrNull(this.chosaIrai);
+        if (e == null || e.getKoroshoIfShikibetsuCode() == null) {
+            return null;
+        }
+        return e;
     }
 
     private static <T extends DbTableEntityBase> T getFirstOrNull(List<? extends T> list) {
@@ -91,7 +95,11 @@ public class ShinsakaiKekkaTorokuDeletionCandidateEntity implements Serializable
      */
     @CheckForNull
     public DbT5301ShujiiIkenshoIraiJohoEntity getIkenshoIraiEntity() {
-        return getFirstOrNull(this.ikenshoIrai);
+        DbT5301ShujiiIkenshoIraiJohoEntity e = getFirstOrNull(this.ikenshoIrai);
+        if (e == null || e.getKoroshoIfShikibetsuCode() == null) {
+            return null;
+        }
+        return e;
     }
 
     /**
@@ -99,6 +107,10 @@ public class ShinsakaiKekkaTorokuDeletionCandidateEntity implements Serializable
      */
     @CheckForNull
     public DbT5116IchijiHanteiKekkaJohoEntity getIchijiHanteiEntity() {
-        return getFirstOrNull(this.ichijiHantei);
+        DbT5116IchijiHanteiKekkaJohoEntity e = getFirstOrNull(this.ichijiHantei);
+        if (e == null || e.getIchijiHanteiKekkaCode() == null) {
+            return null;
+        }
+        return e;
     }
 }

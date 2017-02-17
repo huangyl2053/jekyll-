@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2310001;
 
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
@@ -133,11 +134,7 @@ public class ShujiiIkenshoTorokuTotal {
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onLoad(ShujiiIkenshoTorokuTotalDiv div) {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
-        int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
-        LasdecCode 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
-        ShujiiIkenshoTorokuMapperParameter param
-                = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
-        SearchResult<ShujiiIkenshoTorokuResult> resultList = service.getDataForLoad(param);
+        SearchResult<ShujiiIkenshoTorokuResult> resultList = service.getDataForLoad(ShujiiIkenshoTorokuMapperParameter.findBy(管理番号));
 
         if (resultList.records().isEmpty()) {
             if (!ResponseHolder.isReRequest()) {
@@ -148,7 +145,9 @@ public class ShujiiIkenshoTorokuTotal {
                 return ResponseData.of(div).respond();
             }
         }
-        if (!resultList.records().get(0).get厚労省IF識別コード().equals(厚労省IF識別番号_09B)
+        ShujiiIkenshoTorokuResult result = resultList.records().get(0);
+
+        if (!Objects.equals(result.get厚労省IF識別コード(), 厚労省IF識別番号_09B)
                 && !(new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.認定ソフトバージョンエラー.getMessage()).respond();
         }
@@ -157,28 +156,32 @@ public class ShujiiIkenshoTorokuTotal {
             setReadOnly(div);
             div.getRadJotaiKubun().setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
-            return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
+            if (UIContainerID_主治医意見書入手.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2310001StateName.初期表示_一覧);
+            } else {
+                return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
+            }
         }
 
-        履歴番号 = resultList.records().get(0).get主治医意見書作成依頼履歴番号();
+        LasdecCode 市町村コード = result.get市町村コード();
+        ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
+        int 履歴番号 = result.get主治医意見書作成依頼履歴番号();
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼履歴番号, new RString(履歴番号));
         Image image = imageManager.getイメージ情報(管理番号);
         NinteiShinseiJoho ninteiShinseiJoho = ninteiManager.get意見書情報(NinteiShinseiJohoMapperParameter.create主治医意見書登録Param(管理番号, 履歴番号));
-        if (resultList.records().get(0).get主治医意見書記入年月日() == null) {
+        if (result.get主治医意見書記入年月日() == null) {
             div.setHdnHasChanged(RString.EMPTY);
             div.getRadTakaShinryo().setSelectedKey(SELECT_KEY1);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_ADD);
             getHandler(div).setChosaTishoJohoDisable(true);
             getHandler(div).setSonotaDisable(true);
-            div.getTxtKinyuYMD().setDisabled(false);
         } else {
-            getHandler(div).load(resultList.records().get(0));
-            div.getTxtKinyuYMD().setDisabled(true);
+            getHandler(div).load(result);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
         }
         div.setHdnHasChanged(getHandler(div).getDataRString());
         div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
-        getHandler(div).setChkTakaJushin(resultList.records().get(0));
+        getHandler(div).setChkTakaJushin(result);
         ViewStateHolder.put(ViewStateKeys.意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, image);
 
@@ -192,6 +195,8 @@ public class ShujiiIkenshoTorokuTotal {
                 && new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             照会のみ = true;
         }
+
+        ShujiiIkenshoTorokuMapperParameter param = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
         int 一次判定データ = service.getIchijiHantei(param);
         int 一値判定完了 = service.getIchijiHanteiKanryo(param);
 
@@ -374,11 +379,14 @@ public class ShujiiIkenshoTorokuTotal {
      * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onOKClose_btnShujiiGuide(ShujiiIkenshoTorokuTotalDiv div) {
-        ShujiiIryokikanandshujiiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
-        div.getIkenshoKihonJoho().getTxtShujiiCode().setValue(modle.get主治医コード());
-        div.getIkenshoKihonJoho().getTxtSujiiName().setValue(modle.get主治医氏名());
-        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().setValue(modle.get主治医医療機関コード());
-        div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().setValue(modle.get主治医医療機関名称());
+        ShujiiIryokikanandshujiiDataPassModel model = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getTxtShujiiCode().setValue(model.get主治医コード());
+        div.getTxtSujiiName().setValue(model.get主治医氏名());
+        div.getTxtShujiiIryoKikanCode().setValue(model.get主治医医療機関コード());
+        div.getTxtShujiiIryoKikanMei().setValue(model.get主治医医療機関名称());
+        div.getTxtShujiiIryoKikanShozaichi().setDomain(model.get住所AsAtenaJusho());
+        div.getTxtShujiiIryoKikanTelNumber().setDomain(model.get電話番号AsTelNo());
+        div.getTxtShujiiIryoKikanFaxNumber().setDomain(model.getFAX番号AsTelNo());
         return ResponseData.of(div).respond();
     }
 
@@ -588,9 +596,13 @@ public class ShujiiIkenshoTorokuTotal {
      * 検索に戻るボタンを押下の場合、要介護認定申請検索へ遷移します。
      *
      * @param div 主治医意見書登録Div
-     * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
+     * @return ResponseData
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnResearch(ShujiiIkenshoTorokuTotalDiv div) {
+        return onClick_ButtonsToReturnTaishoshaKensaku(div, DBE2310001TransitionEventName.申請者検索に戻る);
+    }
+
+    private ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_ButtonsToReturnTaishoshaKensaku(ShujiiIkenshoTorokuTotalDiv div, DBE2310001TransitionEventName eventName) {
         if (!ResponseHolder.isReRequest()) {
             RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
             RString beforeChange = getHandler(div).getDataRString();
@@ -602,7 +614,15 @@ public class ShujiiIkenshoTorokuTotal {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).forwardWithEventName(DBE2310001TransitionEventName.申請者検索に戻る).respond();
+        return ResponseData.of(div).forwardWithEventName(eventName).respond();
+    }
+
+    /**
+     * @param div 主治医意見書登録Div
+     * @return ResponseData
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnSearchResult(ShujiiIkenshoTorokuTotalDiv div) {
+        return onClick_ButtonsToReturnTaishoshaKensaku(div, DBE2310001TransitionEventName.申請者検索結果一覧に戻る);
     }
 
     /**
@@ -646,8 +666,11 @@ public class ShujiiIkenshoTorokuTotal {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         if (!ResponseHolder.isReRequest()) {
-            RString beforeChange = getHandler(div).getDataRString();
             if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
+                ValidationMessageControlPairs canSave = getValidationHandler(div).validateCanSave();
+                if (canSave.iterator().hasNext()) {
+                    return ResponseData.of(div).addValidationMessages(canSave).respond();
+                }
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
@@ -657,10 +680,6 @@ public class ShujiiIkenshoTorokuTotal {
 
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
-            IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(管理番号);
-
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
             if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
                 RStringBuilder 前排他制御開催番号 = new RStringBuilder();
@@ -668,18 +687,20 @@ public class ShujiiIkenshoTorokuTotal {
                 前排他制御開催番号.append(管理番号);
                 前排他キーの解除(前排他制御開催番号.toRString());
                 return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-            } else if (!ResponseHolder.isReRequest() && 一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
-                return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
-            } else {
-                getEndMessage(div);
-                return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
             }
+            IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
+            IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(管理番号);
+            if (!ResponseHolder.isReRequest() && 一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
+                return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
+            }
+            getEndMessage(div);
+            return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
         }
 
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
-            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.削除終了.getMessage().evaluate().toString()), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.削除終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
             RStringBuilder 前排他制御開催番号 = new RStringBuilder();
             前排他制御開催番号.append("DBEShinseishoKanriNo");
             前排他制御開催番号.append(管理番号);
@@ -778,6 +799,11 @@ public class ShujiiIkenshoTorokuTotal {
         shujiiIkenshoBuilder.set意見書作成回数区分(SELECT_KEY0.equals(div.getRadIkenshoSakuseiKaisu().getSelectedKey())
                 ? new Code(IkenshoSakuseiKaisuKubun.初回.getコード())
                 : new Code(IkenshoSakuseiKaisuKubun._2回目以降.getコード()));
+
+        RString zaitakuShisetsuKubun = div.getRadZaitakuShisetsuKubun().getSelectedKey();
+        if (!RString.isNullOrEmpty(zaitakuShisetsuKubun)) {
+            shujiiIkenshoBuilder.set在宅_施設区分(new Code(zaitakuShisetsuKubun));
+        }
         shujiiIkenshoBuilder.set意見書同意フラグ(SELECT_KEY0.equals(div.getRadDoi().getSelectedKey()));
         shujiiIkenshoBuilder.set最終診療日(rdateToFlex(div.getTxtSaishuShinryoYMD().getValue()));
         shujiiIkenshoBuilder.set他科受診の有無(SELECT_KEY0.equals(div.getRadTakaShinryo().getSelectedKey()));

@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -58,7 +56,7 @@ class ShinsakaiKekkaTorokuManager implements IShinsakakKekksaTorokuManager {
 
     @Override
     public int save要介護認定結果情報(NinteiKekkaJoho ninteiKekka) {
-        return dbT5102Dac.save(ninteiKekka.toEntity());
+        return dbT5102Dac.saveOrDelete(ninteiKekka.toEntity());
     }
 
     @Override
@@ -82,38 +80,36 @@ class ShinsakaiKekkaTorokuManager implements IShinsakakKekksaTorokuManager {
         save調査依頼情報(e.getChosaIraiEntity());
         save意見書依頼情報(e.getIkenshoIraiEntity());
         save一次判定結果情報(e.getIchijiHanteiEntity());
-        deletePastImages(o.toReadOnlySharedFileEntryDescriptor(), o.getTargetsToDeleteImage());
+        if (o.hasImages()) {
+            deletePastImages(o.toReadOnlySharedFileEntryDescriptor(), o.getTargetsToDeleteImage());
+        }
     }
 
     private void save調査依頼情報(DbT5201NinteichosaIraiJohoEntity entity) {
         if (entity == null || entity.getState() == EntityDataState.Unchanged) {
             return;
         }
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new StringBuilder().append("調査依頼情報:").append(entity.getState()).toString());
-//        dbT5201Dac.save(entity);
+        dbT5201Dac.save(entity);
     }
 
     private void save意見書依頼情報(DbT5301ShujiiIkenshoIraiJohoEntity entity) {
         if (entity == null || entity.getState() == EntityDataState.Unchanged) {
             return;
         }
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new StringBuilder().append("意見書依頼情報:").append(entity.getState()).toString());
-//        dbT5301Dac.save(entity);
+        dbT5301Dac.save(entity);
     }
 
     private void save一次判定結果情報(DbT5116IchijiHanteiKekkaJohoEntity entity) {
         if (entity == null || entity.getState() == EntityDataState.Unchanged) {
             return;
         }
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, new StringBuilder().append("一次判定結果情報:").append(entity.getState()).toString());
-//        dbT5116Dac.save(entity);
+        dbT5116Dac.saveOrDeletePhysical(entity);
     }
 
     private static void deletePastImages(ReadOnlySharedFileEntryDescriptor ro_sfd, Collection<? extends OcrImageClassification> targets) {
         if (targets.isEmpty()) {
             return;
         }
-
         List<RString> filePaths = listFilePathInEntry(ro_sfd);
         for (final OcrImageClassification target : targets) {
             deletePastImagesInEntryPer(target, filePaths, ro_sfd);
