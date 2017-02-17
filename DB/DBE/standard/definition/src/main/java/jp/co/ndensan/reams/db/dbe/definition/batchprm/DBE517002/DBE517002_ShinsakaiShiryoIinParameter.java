@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiShiryoUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTuikaSiryoProcessParameter;
@@ -382,10 +382,10 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
     /**
      * 介護認定更新ProcessParameterに転換します。
      *
-     * @return IinItiziHanteiProcessParameter
+     * @return ShinsakaiShiryoUpdateProcessParameter
      */
-    public IinItiziHanteiProcessParameter toIinItiziHanteiProcessParameter() {
-        return new IinItiziHanteiProcessParameter(shinsakaiKaisaiNo, shuturyokuJun, sakuseiJoken, bangoStart, bangoEnd, gogitaiNo);
+    public ShinsakaiShiryoUpdateProcessParameter toShinsakaiShiryoUpdateProcessParameter() {
+        return new ShinsakaiShiryoUpdateProcessParameter(shinsakaiKaisaiNo);
     }
 
     /**

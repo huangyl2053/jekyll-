@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinItiziHanteiProcessParameter;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiShiryoUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
@@ -22,20 +23,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5502ShinsakaiWariateJohoEntity> {
+public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5501ShinsakaiKaisaiYoteiJohoEntity> {
 
     private static final RString SELECT_SHINSAKAIWARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getSelectByKey_DbT5502ShinsakaiWariateJoho");
-    private IinItiziHanteiProcessParameter paramter;
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getSelectByKey");
+    private ShinsakaiShiryoUpdateProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
-    
+
     @BatchWriter
     BatchPermanentTableWriter<DbT5501ShinsakaiKaisaiYoteiJohoEntity> DbT5501TableWriter;
     BatchPermanentTableWriter<DbT5502ShinsakaiWariateJohoEntity> DbT5502TableWriter;
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_SHINSAKAIWARIATEJOHO, paramter.toIinItiziHanteiMyBatisParameter());
+        return new BatchDbReader(SELECT_SHINSAKAIWARIATEJOHO, paramter.toShinsakaiShiryoUpdateMyBatisParameter());
     }
 
     @Override
@@ -45,17 +46,19 @@ public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5502Shinsaka
     }
 
     @Override
-    protected void process(DbT5502ShinsakaiWariateJohoEntity entity) {
+    protected void process(DbT5501ShinsakaiKaisaiYoteiJohoEntity entity) {
         entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
-        DbT5502TableWriter.update(entity);
+        entity.setShiryoSakuseiZumiFlag(true);
+        DbT5501TableWriter.update(entity);
     }
 
     @Override
     protected void afterExecute() {
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        DbT5501ShinsakaiKaisaiYoteiJohoEntity entity = mapper.getSelectByKey(paramter.toIinItiziHanteiMyBatisParameter());
-        entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
-        entity.setShiryoSakuseiZumiFlag(true);
-        DbT5501TableWriter.update(entity);
+        List<DbT5502ShinsakaiWariateJohoEntity> entities = mapper.getSelectByKey_DbT5502ShinsakaiWariateJoho(paramter.toShinsakaiShiryoUpdateMyBatisParameter());
+        for (DbT5502ShinsakaiWariateJohoEntity entity : entities) {
+            entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
+            DbT5502TableWriter.update(entity);
+        }
     }
 }

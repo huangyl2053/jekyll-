@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinItiziHanteiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.ShinsakaiShiryoUpdateMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTuutishoMyBatisParameter;
@@ -227,7 +227,7 @@ public interface IShiryoShinsakaiIinMapper {
      * @param parameter IinShinsakaiIinJohoMyBatisParameter
      * @return DbT5501ShinsakaiKaisaiYoteiJohoEntity
      */
-    DbT5501ShinsakaiKaisaiYoteiJohoEntity getSelectByKey(IinItiziHanteiMyBatisParameter parameter);
+    DbT5501ShinsakaiKaisaiYoteiJohoEntity getSelectByKey(ShinsakaiShiryoUpdateMyBatisParameter parameter);
 
     /**
      * 介護認定審査会割当情報のSelectBy審査会開催番号処理です。
@@ -235,7 +235,7 @@ public interface IShiryoShinsakaiIinMapper {
      * @param parameter IinShinsakaiIinJohoMyBatisParameter
      * @return DbT5502ShinsakaiWariateJohoEntity
      */
-    List<DbT5502ShinsakaiWariateJohoEntity> getSelectByKey_DbT5502ShinsakaiWariateJoho(IinItiziHanteiMyBatisParameter parameter);
+    List<DbT5502ShinsakaiWariateJohoEntity> getSelectByKey_DbT5502ShinsakaiWariateJoho(ShinsakaiShiryoUpdateMyBatisParameter parameter);
 
     /**
      * 委員用一次判定結果と特記事項情報を取得します。
