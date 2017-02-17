@@ -230,8 +230,6 @@ public class NinteichosaIrai {
         handler.set手動割付時使用可否(true);
         handler.clear認定調査依頼登録パネル();
         handler.set認定調査依頼登録パネル();
-        requestDiv.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().setDisabled(true);
-        requestDiv.getCcdItakusakiAndChosainInput().getTxtChosainCode().setDisabled(true);
         return ResponseData.of(requestDiv).setState(DBE2010001StateName.手動割付内容入力);
     }
 
