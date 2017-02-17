@@ -60,7 +60,7 @@ class ShujiiikenshoBuilder implements IShujiiikenshoBuilder {
         source.shinsaYY = !RString.isNullOrEmpty(item.get審査日_年()) ? item.get審査日_年().substring(2) : RString.EMPTY;
         source.shinsaMM = item.get審査日_月();
         source.shinsaDD = item.get審査日_日();
-        source.imgIkensho1 = item.getイメージファイル1();
+//        source.imgIkensho1 = item.getイメージファイル1();
         source.imgIkensho2 = item.getイメージファイル2();
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
