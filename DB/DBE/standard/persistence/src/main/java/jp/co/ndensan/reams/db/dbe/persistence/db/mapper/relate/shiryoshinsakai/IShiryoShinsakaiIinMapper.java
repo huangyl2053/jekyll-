@@ -235,7 +235,7 @@ public interface IShiryoShinsakaiIinMapper {
      * @param parameter IinShinsakaiIinJohoMyBatisParameter
      * @return DbT5502ShinsakaiWariateJohoEntity
      */
-    DbT5502ShinsakaiWariateJohoEntity getSelectByKey_DbT5502ShinsakaiWariateJoho(IinItiziHanteiMyBatisParameter parameter);
+    List<DbT5502ShinsakaiWariateJohoEntity> getSelectByKey_DbT5502ShinsakaiWariateJoho(IinItiziHanteiMyBatisParameter parameter);
 
     /**
      * 委員用一次判定結果と特記事項情報を取得します。
