@@ -202,18 +202,18 @@
         ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
         ON DbT5911."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
-        AND DbT5911."shichosonCode" = =DbT5101."shichosonCode"
+        AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
         INNER JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
         ON DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
         AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
-        AND DbT5912."shichosonCode" = =DbT5101."shichosonCode"
+        AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
         INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5910."shichosonCode" = =DbT5101."shichosonCode"
+        AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
         INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
-        AND DbT5913."shichosonCode" = =DbT5101."shichosonCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5201."ninteichosaIraiRirekiNo" = (
@@ -242,7 +242,7 @@
                 AND DbT5121."shinseishoKanriNo" IS NULL
             </if>
             <if test="shichosonCodeFlag">
-                AND =DbT5101."shichosonCode" = #{shichosonCode}
+                AND DbT5101."shichosonCode" = #{shichosonCode}
             </if>
             <if test="radKensakuHohoKey1">
                 <choose>
