@@ -54,9 +54,9 @@
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2060001",
+     "toLayoutName": "DBE2210003",
      "toLayoutTitle": "基本運用・認定調査結果入手",
-     "toState": "登録"
+     "toState": "画面破棄"
     },
     {
      "id": "5",
@@ -146,6 +146,20 @@
      "layoutTitle": "",
      "eventName": "基本運用に進む",
      "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2060001",
+     "toLayoutTitle": "基本運用・認定調査結果入手",
+     "toState": "登録"
+    },
+    {
+     "id": "12",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2210003",
+     "layoutTitle": "特記一覧登録",
+     "eventName": "基本運用に戻る",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2060001",
