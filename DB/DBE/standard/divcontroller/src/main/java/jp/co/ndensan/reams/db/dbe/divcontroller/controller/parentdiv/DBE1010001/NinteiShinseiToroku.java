@@ -85,6 +85,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -1070,7 +1071,7 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set被保険者氏名カナ(div.getTplShinseishaJoho().getTxtJohoAtenaKanaMeisho().getDomain());
         shinseiJohoBuilder.set被保険者氏名(div.getTplShinseishaJoho().getTxtJohoAtenaMeisho().getDomain());
         shinseiJohoBuilder.set郵便番号(div.getTplShinseishaJoho().getTxtJohoYubinNo().getValue());
-        shinseiJohoBuilder.set住所(div.getTplShinseishaJoho().getTxtJohoJusho().getDomain());
+        shinseiJohoBuilder.set住所(new AtenaJusho(div.getTplShinseishaJoho().getTxtJohoJusho().getDomain().value().trim()));
         shinseiJohoBuilder.set電話番号(div.getTplShinseishaJoho().getTxtJohoTelNo().getDomain());
         if (!RString.isNullOrEmpty(div.getTplShinseishaJoho().getTxtJohoNenrei().getValue())) {
             shinseiJohoBuilder.set年齢(div.getTplShinseishaJoho().getTxtJohoNenrei().getValue().replace(歳, RString.EMPTY).toInt());
