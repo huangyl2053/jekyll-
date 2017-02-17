@@ -65,7 +65,7 @@ public class SeikatsuhogoTorokuHandler {
             ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setVisible(false);
             ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
             ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
-            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtJusho().setLabelLWidth(new RString("S"));
+            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtJusho().setLabelLWidth(new RString("0px"));
             div.getBtnAtenaKensaku().setVisible(false);
         }
         List<KeyValueDataSource> sourceList = new ArrayList<>();

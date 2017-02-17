@@ -265,12 +265,12 @@ public class NinteiChosainMaster {
         RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
         if(!RString.isNullOrEmpty(市町村コード)){
              div.getChosainJohoInput().getTxtShichoson().setValue(市町村コード);
+             div.getChosainJohoInput().getTxtShichoson().setDisabled(true);
              onBlur_txtShichoson(div);
         }
         RString 認定調査委託先コード = ViewStateHolder.get(SaibanHanyokeyName.調査委託先コード, RString.class);
         if (!RString.isNullOrEmpty(認定調査委託先コード)) {
             div.getChosainJohoInput().getTxtShichoson().setValue(市町村コード);
-            div.getChosainJohoInput().getTxtShichoson().setDisabled(true);
             div.getChosainJohoInput().getTxtChosaItakusaki().setValue(認定調査委託先コード);
             onBlur_txtShichoson(div);
             onBlur_txtChosaItakusaki(div);

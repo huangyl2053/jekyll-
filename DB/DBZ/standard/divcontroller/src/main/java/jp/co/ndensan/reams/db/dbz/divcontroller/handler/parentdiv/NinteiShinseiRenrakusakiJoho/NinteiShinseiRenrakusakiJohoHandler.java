@@ -141,7 +141,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      */
     public void setRenrakusaki(List<RenrakusakiJoho> renrakusakiJohoList) {
         List<dgRenrakusakiIchiran_Row> dateSource = new ArrayList<>();
-        for (RenrakusakiJoho renrakusakiJoho : renrakusakiJohoList) {
+           for (RenrakusakiJoho renrakusakiJoho : renrakusakiJohoList) {
             TextBoxNum remban = new TextBoxNum();
             TextBoxNum yusen = new TextBoxNum();
             remban.setValue(Decimal.valueOf(renrakusakiJoho.get連番()));
