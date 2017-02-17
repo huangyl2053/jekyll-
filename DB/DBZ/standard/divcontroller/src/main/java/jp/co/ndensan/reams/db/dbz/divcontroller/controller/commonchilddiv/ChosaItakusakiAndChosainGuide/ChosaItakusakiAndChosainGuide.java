@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.Kijunt
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
@@ -63,8 +64,14 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
             div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(dataPassModel.get市町村コード()));
-            div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
-            div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
+            div.getTxtChosaItakusakiCodeFrom().setValue(RString.EMPTY);
+            div.getTxtChosaItakuaskiCodeTo().setValue(RString.EMPTY);
+            div.getTxtChosaItakusakiName().setValue(RString.EMPTY);
+            if (dataPassModel.get対象モード().equals(new RString(TaishoMode.Chosain.name()))) {
+                div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
+                div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
+                div.getTxtChosaItakusakiName().setValue(dataPassModel.get委託先名());
+            }
         }
         if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
             if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
@@ -77,7 +84,12 @@ public class ChosaItakusakiAndChosainGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
+        List<KijuntsukiShichosonjoho> list;
+        if (dataPassModel != null && dataPassModel.get対象モード().equals(new RString(TaishoMode.Chosain.name()))) {
+            list = finder.getKojinJokyoShokai(createParam(div)).records();
+        } else {
+            list = finder.getChosaItakusaki(createParam(div)).records();
+        }
         if (!list.isEmpty()) {
             getHandler(div).setDataGrid(list);
         } else {
@@ -101,7 +113,14 @@ public class ChosaItakusakiAndChosainGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        List<KijuntsukiShichosonjoho> list;
+        if (dataPassModel != null && dataPassModel.get対象モード().equals(new RString(TaishoMode.Chosain.name()))) {
+            list = finder.getKojinJokyoShokai(createParam(div)).records();
+        } else {
+            list = finder.getChosaItakusaki(createParam(div)).records();
+        }
         if (!list.isEmpty()) {
             getHandler(div).setDataGrid(list);
         } else {
@@ -171,10 +190,7 @@ public class ChosaItakusakiAndChosainGuide {
             調査員コードFrom = div.getTxtChosainCodeFrom().getText();
             調査員コードTo = div.getTxtChosainCodeTo().getText();
         }
-//        市町村コード = dataPassModel.get市町村コード();
-//        if (RString.isNullOrEmpty(市町村コード)) {
         市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
-//        }
         return ChosaItakusakiAndChosainGuideParameter.createParam(
                 調査委託先コードFrom,
                 調査委託先コードTo,
@@ -186,7 +202,7 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getRadChosainJokyo().getSelectedKey(),
                 div.getTxtChosainName().getValue(),
                 div.getTxtChosainKanaShimei().getValue(),
-                div.getTxtMaxKensu().getValue(),
+                null,
                 市町村コード,
                 ControlDataHolder.getSubGyomuCD().value(),
                 div.getTxtChikuCode().getDomain().value(),

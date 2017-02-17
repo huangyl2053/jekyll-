@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  * @reamsid_L DBZ-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaItakusakiAndChosainInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -329,8 +329,10 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     public static enum ShoriType implements ICommonChildDivMode {
 
         InputMode("InputMode"),
+        SingleInputMode("SingleInputMode"),
         ShokaiMode("ShokaiMode"),
         SimpleInputMode("SimpleInputMode"),
+        SimpleSingleInputMode("SimpleSingleInputMode"),
         SimpleShokaiMode("SimpleShokaiMode");
 
         private final String name;

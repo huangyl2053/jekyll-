@@ -93,18 +93,28 @@ public class ChosaItakusakiAndChosainInputHandler {
      * (認定調査委託先コード）引数から受け取った認定調査委託先情報を取得します。
      */
     public void onBlurTxtChosaItakusakiCode() {
+        if (!RString.isNullOrEmpty(div.getTxtChosaItakusakiCode().getText())) {
         ChosaItakusakiAndChosainInputFinder finder = ChosaItakusakiAndChosainInputFinder.createInstance();
         NinteichosaItakusakiJoho ninteichosaItakusakiJoho
                 = finder.onBlurTxtChosaItakusakiCode(new LasdecCode(div.getHdnShichosonCode()), div.getTxtChosaItakusakiCode().getText());
         div.getTxtChosaItakusakiName().setValue(ninteichosaItakusakiJoho == null ? RString.EMPTY
                 : ninteichosaItakusakiJoho.get事業者名称() == null ? RString.EMPTY
                 : ninteichosaItakusakiJoho.get事業者名称());
+        div.getTxtChosainCode().clearValue();
+        div.getTxtChosainName().clearValue();
+        } else {
+            div.getTxtChosaItakusakiCode().clearValue();
+            div.getTxtChosaItakusakiName().clearValue();
+            div.getTxtChosainCode().clearValue();
+            div.getTxtChosainName().clearValue();
+        }
     }
 
     /**
      * (調査員コード）引数から受け取った調査員情報を取得します。
      */
     public void onBlurTxtChosainCode() {
+        if (!RString.isNullOrEmpty(div.getTxtChosainCode().getText())) {
         ChosaItakusakiAndChosainInputFinder finder = ChosaItakusakiAndChosainInputFinder.createInstance();
         ShinsakaiChosainJoho shinsakaiChosainJoho
                 = finder.onBlurTxtChosainCode(
@@ -114,6 +124,10 @@ public class ChosaItakusakiAndChosainInputHandler {
         div.getTxtChosainName().setValue(shinsakaiChosainJoho == null ? RString.EMPTY
                 : shinsakaiChosainJoho.get調査員氏名() == null ? RString.EMPTY
                 : shinsakaiChosainJoho.get調査員氏名());
+        } else {
+            div.getTxtChosainCode().clearValue();
+            div.getTxtChosainName().clearValue();
+        }
     }
 
     /**
