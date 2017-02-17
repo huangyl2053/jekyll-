@@ -169,7 +169,7 @@ public class IkenshoJoho09BEucEntityEditor {
         eucEntity.set診断名３(entity.getShindamMei3());
         eucEntity.set発症日３(entity.getHasshoYMD3());
         eucEntity.set症状としての安定性コード(entity.getAnteisei());
-        eucEntity.set症状としての安定性((!RString.isNullOrEmpty(entity.getAnteisei()))
+        eucEntity.set症状としての安定性((entity.getAnteisei() != null && !entity.getAnteisei().trim().isEmpty())
                 ? Anteisei.toValue(entity.getAnteisei()).get名称() : RString.EMPTY);
         eucEntity.set不安定状況(entity.getFuanteiJokyo());
         eucEntity.set治療内容(convert改行(entity.getChiryoNaiyo()));
