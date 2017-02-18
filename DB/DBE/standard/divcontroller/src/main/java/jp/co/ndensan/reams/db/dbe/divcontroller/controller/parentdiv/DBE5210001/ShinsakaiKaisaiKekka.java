@@ -79,6 +79,7 @@ public class ShinsakaiKaisaiKekka {
         List<ShinsakaiOnseiJoho2> 音声情報リスト = onseiJohoManager.get介護認定審査会音声情報(開催番号);
         ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
         handler.onLoad(saiYoteiJoho, 音声情報リスト);
+        onClick_btnCalcShoyoTime(div);
         handler.setDisabled();
         List<ShinsakaiWariateIinJohoBusiness> list = service.get審査会委員一覧検索(開催番号).records();
         if (list.isEmpty()) {

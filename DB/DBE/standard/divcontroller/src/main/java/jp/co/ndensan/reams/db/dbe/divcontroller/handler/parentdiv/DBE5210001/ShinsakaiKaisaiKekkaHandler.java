@@ -49,6 +49,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアです。
      *
+     * @param 音声情報リスト 音声情報リスト
      * @param saiYoteiJoho ヘッドエリア内容
      */
     public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho, List<ShinsakaiOnseiJoho2> 音声情報リスト) {
@@ -58,17 +59,28 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.setGogitaiNo(new RString(String.valueOf(business.get合議体番号())));
             div.getTxtGogitai().setValue(business.get合議体名称());
             div.getTxtYoteiTeiin().setValue(new Decimal(business.get予定人数()));
-            div.getShinsakaiKaisaiInfo().getTxtJissiSu().setValue(new Decimal(business.get実施人数()));
             div.getTxtYoteiKaijo().setValue(business.get介護認定審査会開催場所名称());
             div.getTxtKaisaiYoteibi().setValue(business.get開催予定日());
             div.getTxtYoteiStartTime().setValue(strToTime(business.get予定開始時間()));
             div.getTxtYoteiEndTime().setValue(strToTime(business.get予定終了時間()));
-            div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催日());
-            div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
-            div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
             div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new Decimal(business.get所要時間()));
-            if (business.get開催会場() != null) {
-                div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+            
+            if (business.get介護認定審査会開催番号() != null && !business.get介護認定審査会開催番号().isEmpty()) {
+                div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催日());
+                div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
+                div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
+                div.getShinsakaiKaisaiInfo().getTxtJissiSu().setValue(new Decimal(business.get実施人数()));
+                if (business.get開催会場() != null) {
+                    div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+                }
+            } else {
+                div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催予定日());
+                div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get予定開始時間()));
+                div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().setValue(strToTime(business.get予定終了時間()));
+                div.getShinsakaiKaisaiInfo().getTxtJissiSu().setValue(new Decimal(business.get予定人数()));
+                if (business.get介護認定審査会開催予定場所コード() != null) {
+                    div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setSelectedKey(business.get介護認定審査会開催予定場所コード());
+                }
             }
         }
         if (div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue() == null || div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue().isEmpty()) {

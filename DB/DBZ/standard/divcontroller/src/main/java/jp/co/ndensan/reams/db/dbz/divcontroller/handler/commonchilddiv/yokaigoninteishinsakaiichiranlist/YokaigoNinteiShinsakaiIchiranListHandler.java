@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -50,6 +51,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     private static final RString KEY0 = new RString("key0");
     private static final int LENGTH_4 = 4;
     private final YokaigoNinteiShinsakaiIchiranListDiv div;
+    private static final RString メニューID_514 = new RString("DBEMN61004");
 
     /**
      * コンストラクタです。
@@ -66,6 +68,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
      * @param モード モード
      */
     public void initialize(RString モード) {
+        RString menuID = ResponseHolder.getMenuID();
         ViewStateHolder.put(ViewStateKeys.モード, モード);
         if (モード_開催予定登録.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.KaisaiYoteiToroku);
@@ -87,6 +90,10 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         if (モード_データ出力.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.DataShutsuryoku);
         }
+        if (モード_データ出力.equals(モード) && menuID.equals(メニューID_514)) {
+            div.getDgShinsakaiIchiran().getGridSetting().setMultiSelectable(false);
+            div.getDgShinsakaiIchiran().getGridSetting().setIsShowSelectButtonColumn(true);
+        }
         if (モード_判定結果.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.HanteiKekka);
             DataGridSetting dataGridSetting = div.getDgShinsakaiIchiran().getGridSetting();
@@ -94,6 +101,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             dataGridSetting.setIsShowSelectButtonColumn(true);
             div.getDgShinsakaiIchiran().setGridSetting(dataGridSetting);
         }
+        
     }
 
     /**

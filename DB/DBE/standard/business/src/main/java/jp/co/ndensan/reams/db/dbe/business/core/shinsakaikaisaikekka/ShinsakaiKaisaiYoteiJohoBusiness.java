@@ -39,6 +39,15 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
     }
 
     /**
+     * 介護認定審査会開催結果情報の介護認定審査会開催番号を返します。
+     *
+     * @return 介護認定審査会開催番号
+     */
+    public RString get介護認定審査会開催番号() {
+        return entity.get介護認定審査会開催番号();
+    }
+
+    /**
      * 合議体番号を返します。
      *
      * @return 合議体番号
@@ -81,6 +90,15 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
      */
     public RString get介護認定審査会開催場所名称() {
         return entity.get介護認定審査会開催場所名称();
+    }
+    
+    /**
+     * 介護認定審査会開催予定場所コードを返します。
+     *
+     * @return 介護認定審査会開催予定場所コード
+     */
+    public RString get介護認定審査会開催予定場所コード() {
+        return entity.get介護認定審査会開催予定場所コード();
     }
 
     /**

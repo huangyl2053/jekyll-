@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -35,6 +36,8 @@ public class YokaigoNinteiShinsakaiIchiranList {
     private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
     private static final RString モード_データ出力 = new RString("dataShutsuryoku");
     private static final RString モード_判定結果 = new RString("hanteiKekka");
+    private static final RString 結果登録審査会未完了のみ = new RString("結果登録審査会未完了のみ");
+    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
     private RString モード;
     private RString 表示条件;
     private RString ダミー審査会;
@@ -63,7 +66,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
         div.getRadHyojiJokenWaritsukeKanryo().setSelectedKey(ラジオボタン初期化_key0);
         div.getRadHyojiJokenShinsakaiMikanryo().setSelectedKey(ラジオボタン初期化_key0);
         div.getRadHyojiJokenShinsakaiKanryo().setSelectedKey(ラジオボタン初期化_key0);
-        div.getRadDammyShinsakai().setSelectedKey(ラジオボタン初期化_key1);
+        div.getRadDammyShinsakai().setSelectedKey(ラジオボタン初期化_key0);
         getHandler(div).set最大取得件数();
         return ResponseData.of(div).respond();
     }
@@ -75,6 +78,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
+        RString menuID = ResponseHolder.getMenuID();
         div.getDgShinsakaiIchiran().getDataSource().clear();
         div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(0);
         div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(0);
@@ -100,6 +104,9 @@ public class YokaigoNinteiShinsakaiIchiranList {
         if (モード_判定結果.equals(モード)) {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
 
+        }
+        if (モード_事前結果登録.equals(モード) && メニューID_審査会審査結果登録.equals(menuID)) {
+            表示条件 = 結果登録審査会未完了のみ;
         }
         RString 期間From;
         RString 期間To;

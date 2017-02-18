@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinsakaiKaisaiYoteiJohoEntity {
 
     private RString 審査会名称;
+    private RString 介護認定審査会開催番号;
+    private RString 介護認定審査会開催予定場所コード;
     private int 合議体番号;
     private RString 合議体名称;
     private int 予定人数;

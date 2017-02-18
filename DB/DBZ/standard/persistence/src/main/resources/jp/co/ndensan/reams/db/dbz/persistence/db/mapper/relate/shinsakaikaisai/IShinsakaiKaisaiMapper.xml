@@ -69,6 +69,13 @@
                         FROM rgdb."DbT5512ShinsakaiOnseiJoho" AS shinsakaiOnseiJoho
                         GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo"	) AS TB1
                 ON TB1."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        <if test="is結果登録審査会未完了のみ">
+        RIGHT JOIN  (SELECT shinsakaiWariateJoho."shinsakaiKaisaiNo" 
+                        FROM rgdb."DbT5502ShinsakaiWariateJoho" AS shinsakaiWariateJoho 
+                        WHERE shinsakaiWariateJoho."hanteiKekkaCode" IS NULL OR shinsakaiWariateJoho."hanteiKekkaCode" = '' 
+                        GROUP BY shinsakaiWariateJoho."shinsakaiKaisaiNo")  AS TB2
+        ON TB2."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"    
+        </if>        
         WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
                 AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{表示期間From}
          	AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{表示期間To}
@@ -79,7 +86,10 @@
             AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1'
         </if>
         <if test="is審査会未完了のみ">
-            AND (shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0' OR shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1')
+            AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1'
+        </if>
+        <if test="is結果登録審査会未完了のみ">
+            AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '2'
         </if>
         <if test="is審査会完了のみ">
             AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '2'
