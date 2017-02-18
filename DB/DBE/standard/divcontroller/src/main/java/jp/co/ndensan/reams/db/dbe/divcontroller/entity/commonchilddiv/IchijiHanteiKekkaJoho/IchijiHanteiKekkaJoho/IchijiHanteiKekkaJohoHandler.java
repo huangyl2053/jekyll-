@@ -68,9 +68,9 @@ public class IchijiHanteiKekkaJohoHandler {
             return value;
         }
 
-        private static MiSumiKubun toValue(RString key) {
+        private static MiSumiKubun toKey(RString key) {
             for (MiSumiKubun kubun : values()) {
-                if (kubun.getValue().equals(key)) {
+                if (kubun.getKey().equals(key)) {
                     return kubun;
                 }
             }
@@ -404,7 +404,7 @@ public class IchijiHanteiKekkaJohoHandler {
     public IchijiHanteiKekkaJoho 呼び出し元画面への戻り値(IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho) {
 
         boolean kariIchijiHanteiKubun = false;
-        if (MiSumiKubun.未.equals(MiSumiKubun.toValue(div.getDdlJiritsudoIkensho().getSelectedKey()))) {
+        if (MiSumiKubun.未.equals(MiSumiKubun.toKey(div.getDdlJiritsudoIkensho().getSelectedKey()))) {
             kariIchijiHanteiKubun = true;
         }
         IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
