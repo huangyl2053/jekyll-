@@ -699,7 +699,7 @@
         ON dbt7051."shoKisaiHokenshaNo" = dbt5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT7052KoseiShichosonShishoMaster" AS dbt7052
         ON dbt5101."shishoCode" = dbt7052."shishoCode"
-        AND dbt7051."shichosonCode" = dbt7052."shichosonCode"
+        AND dbt5101."shichosonCode" = dbt7052."shichosonCode"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" dbt5201
         ON dbt5101."shinseishoKanriNo" = dbt5201."shinseishoKanriNo"
         AND dbt5201."logicalDeletedFlag" = FALSE
@@ -718,11 +718,11 @@
         ON dbt5203."shinseishoKanriNo" = dbt5201."shinseishoKanriNo"
         AND dbt5203."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
-        ON dbt5910."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5910."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5910."ninteichosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
         AND dbt5910."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbt5913
-        ON dbt5913."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5913."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
         AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
         AND dbt5913."jokyoFlag" = TRUE
@@ -745,12 +745,12 @@
         AND dbt5304."remban" = 14)
         AND dbt5304."remban" = 14
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbt5912
-        ON dbt5912."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5912."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5912."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
         AND dbt5912."shujiiCode" = dbt5301."shujiiCode"
         AND dbt5912."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbt5911
-        ON dbt5911."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5911."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5911."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
         AND dbt5911."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116
