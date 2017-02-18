@@ -55,7 +55,7 @@
         ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911ShujiiIryoKikanJoho
-        ON  DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        ON  DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
         AND DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5101NinteiShinseiJoho."shujiiIryokikanCode"
         INNER JOIN
         rgdb."DbT5912ShujiiJoho"  AS  DbT5912ShujiiJoho
@@ -160,7 +160,7 @@
         ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho"  AS  DbT5911ShujiiIryoKikanJoho
-        ON DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        ON DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
         AND DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" = DbT5101NinteiShinseiJoho."shujiiIryokikanCode"
         INNER JOIN
         rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho

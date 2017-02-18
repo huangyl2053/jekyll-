@@ -74,10 +74,8 @@
                 ON T5202."shinseishoKanriNo" = T5601."shinseishoKanriNo"
                 AND T5202."ninteichosaRirekiNo" = T5601."ninteichosaIraiRirekiNo"
                 AND T5202."gaikyoChosaTextImageKubun" = #{概況調査イメージ区分}
-                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
-                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-                ON T5910."shichosonCode" = T7051."shichosonCode"
+                ON T5910."shichosonCode" = T5101."shichosonCode"
                 AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
                 INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
@@ -115,10 +113,8 @@
                 ON T5202."shinseishoKanriNo" = T5601."shinseishoKanriNo"
                 AND T5202."ninteichosaRirekiNo" = T5601."ninteichosaIraiRirekiNo"
                 AND T5202."gaikyoChosaTextImageKubun" = #{概況調査イメージ区分}
-                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
-                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-                ON T5910."shichosonCode" = T7051."shichosonCode"
+                ON T5910."shichosonCode" = T5101."shichosonCode"
                 AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
                 LEFT JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
                 ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
@@ -163,7 +159,7 @@
                 INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
                 ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-                ON  T5910."shichosonCode" = T7051."shichosonCode"
+                ON  T5910."shichosonCode" = T5101."shichosonCode"
                 AND  T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
                 INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
                 ON  T5913."shichosonCode" = T5910."shichosonCode"
@@ -205,10 +201,8 @@
                  AND #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To}
                 </if>
-                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
-                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                ON  T5911."shichosonCode" = T5101."shichosonCode"
                 AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
                 INNER JOIN rgdb."DbT5032ShujiiIkenshoHoshuTanka" AS T5032
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
@@ -257,10 +251,8 @@
                  AND  #{実績期間From} <![CDATA[<=]]> T5302."ikenshoReadYMD"
                  AND  T5302."ikenshoReadYMD" <![CDATA[<=]]> #{実績期間To} 
                 </if>
-                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
-                ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                ON  T5911."shichosonCode" = T5101."shichosonCode"
                 AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
                 INNER JOIN rgdb."DbT5032ShujiiIkenshoHoshuTanka" AS T5032
                 ON  T5032."ikenshoSakuseiKaisuKubun" = T5302."ikenshoSakuseiKaisuKubun"
@@ -310,7 +302,7 @@
                 INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
                 ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                ON  T5911."shichosonCode" = T5101."shichosonCode"
                 AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
                 INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
                 ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
@@ -357,7 +349,7 @@
                 INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
                 ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-                ON  T5911."shichosonCode" = T7051."shichosonCode"
+                ON  T5911."shichosonCode" = T5101."shichosonCode"
                 AND  T5911."shujiiIryokikanCode" = T5602."shujiiIryoKikanCode"
                 INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS T5302
                 ON  T5302."shinseishoKanriNo" = T5602."shinseishoKanriNo"
