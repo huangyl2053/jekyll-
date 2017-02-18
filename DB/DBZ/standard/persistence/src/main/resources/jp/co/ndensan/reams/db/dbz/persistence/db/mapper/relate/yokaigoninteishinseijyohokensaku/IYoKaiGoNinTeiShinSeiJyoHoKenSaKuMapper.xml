@@ -435,8 +435,10 @@
                             AND        DbT5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo") 
     LEFT OUTER JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
     ON    DbT5101."ninteiChosaItakusakiCode"        =    DbT5910."ninteichosaItakusakiCode"
+    AND DbT5101."shichosonCode" = DbT5910."shichosonCode"  
     LEFT OUTER JOIN  rgdb."DbT5913ChosainJoho" DbT5913
     ON    DbT5101."ninteiChosainCode"            =    DbT5913."ninteiChosainCode"
+    AND DbT5101."shichosonCode" = DbT5913."shichosonCode"
     LEFT OUTER JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202
     ON    DbT5101."shinseishoKanriNo"              =    DbT5202."shinseishoKanriNo"
     AND DbT5201."ninteichosaIraiRirekiNo" = DbT5202."ninteichosaRirekiNo" 
@@ -445,8 +447,10 @@
     AND DbT5201."ninteichosaIraiRirekiNo" = DbT5203."ninteichosaRirekiNo"
     LEFT OUTER JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
     ON    DbT5101."shujiiIryokikanCode"        =    DbT5911."shujiiIryokikanCode"
+    AND DbT5101."shichosonCode" = DbT5911."shichosonCode"
     LEFT OUTER JOIN  rgdb."DbT5912ShujiiJoho" DbT5912                           
     ON    DbT5101."shujiiCode"                =    DbT5912."shujiiCode"
+    AND DbT5101."shichosonCode" = DbT5912."shichosonCode"
     LEFT OUTER JOIN  rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
     ON    DbT5101."shinseishoKanriNo"              =    DbT5302."shinseishoKanriNo"
     AND DbT5301."ikenshoIraiRirekiNo" = DbT5302."ikenshoIraiRirekiNo"

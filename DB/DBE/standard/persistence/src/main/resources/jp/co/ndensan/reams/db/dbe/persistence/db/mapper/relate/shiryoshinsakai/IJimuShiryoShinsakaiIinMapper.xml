@@ -360,9 +360,9 @@
         SELECT dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
         FROM rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
         WHERE dbt5594."shinsakaiIinCode" IN (
-          SELECT dbt5503."shinsakaiIinCode"
-          FROM rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
-          WHERE dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        SELECT dbt5503."shinsakaiIinCode"
+        FROM rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
+        WHERE dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         )
         ORDER BY
         dbt5594."shinsakaiIinCode"
@@ -1147,11 +1147,11 @@
         ON dbt5203."shinseishoKanriNo" = dbt5201."shinseishoKanriNo"
         AND dbt5203."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
-        ON dbt5910."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5910."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5910."ninteichosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
         AND dbt5910."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbt5913
-        ON dbt5913."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5913."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
         AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
         AND dbt5913."jokyoFlag" = TRUE
@@ -1174,12 +1174,12 @@
         AND dbt5304."remban" = 14)
         AND dbt5304."remban" = 14
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbt5912
-        ON dbt5912."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5912."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5912."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
         AND dbt5912."shujiiCode" = dbt5301."shujiiCode"
         AND dbt5912."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbt5911
-        ON dbt5911."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5911."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5911."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
         AND dbt5911."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116
@@ -1238,11 +1238,11 @@
         ON dbt5203."shinseishoKanriNo" = dbt5201."shinseishoKanriNo"
         AND dbt5203."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbt5910
-        ON dbt5910."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5910."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5910."ninteichosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
         AND dbt5910."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbt5913
-        ON dbt5913."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5913."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
         AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
         AND dbt5913."jokyoFlag" = TRUE
@@ -1265,12 +1265,12 @@
         AND dbt5304."remban" = 14)
         AND dbt5304."remban" = 14
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbt5912
-        ON dbt5912."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5912."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5912."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
         AND dbt5912."shujiiCode" = dbt5301."shujiiCode"
         AND dbt5912."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbt5911
-        ON dbt5911."shichosonCode" = dbt7051."shichosonCode"
+        ON dbt5911."shichosonCode" = dbt5101."shichosonCode"
         AND dbt5911."shujiiIryokikanCode" = dbt5301."shujiiIryokikanCode"
         AND dbt5911."jokyoFlag" = TRUE
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" dbt5116

@@ -125,18 +125,18 @@
 					AND      G."ninteichosaRirekiNo" <![CDATA[ < ]]> G1."ninteichosaRirekiNo" )									
 	LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho"   AS H														
 		ON    C."ninteiChosaItakusakiCode" = H."ninteichosaItakusakiCode"													
-		AND 	H."shichosonCode" = D."shichosonCode"												
+		AND 	H."shichosonCode" = C."shichosonCode"												
 	LEFT JOIN   rgdb."DbT5913ChosainJoho"   AS I														
 		ON    C."ninteiChosaItakusakiCode" = I."ninteiChosaItakusakiCode"													
 		AND 	C."ninteiChosainCode" = I."ninteiChosainCode"												
-		AND 	I."shichosonCode" = D."shichosonCode"												
+		AND 	I."shichosonCode" = C."shichosonCode"												
 	LEFT JOIN   rgdb."DbT5911ShujiiIryoKikanJoho"   AS J														
 		ON    C."shujiiIryokikanCode" =J."shujiiIryokikanCode"													
-		AND 	J."shichosonCode" = D."shichosonCode"											
+		AND 	J."shichosonCode" = C."shichosonCode"											
 	LEFT JOIN  rgdb."DbT5912ShujiiJoho"  AS K														
 		ON    C."shujiiIryokikanCode" = K."shujiiIryokikanCode"													
 		AND 	C."shujiiCode" =K."shujiiCode"												
-		AND 	K."shichosonCode" = D."shichosonCode"												
+		AND 	K."shichosonCode" = C."shichosonCode"												
 	WHERE														
 		A."shinsakaiKaisaiNo" = #{審査会開催番号}												
 	ORDER  BY   "shinsakaiOrder"													

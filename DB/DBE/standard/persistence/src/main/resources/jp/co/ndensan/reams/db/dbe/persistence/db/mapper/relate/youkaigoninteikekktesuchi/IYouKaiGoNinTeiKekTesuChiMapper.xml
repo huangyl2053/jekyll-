@@ -59,11 +59,11 @@
         </if>
         INNER JOIN  rgdb."DbT5911ShujiiIryoKikanJoho"
         ON  rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
-        AND rgdb."DbT5911ShujiiIryoKikanJoho"."shichosonCode" = rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
+        AND rgdb."DbT5911ShujiiIryoKikanJoho"."shichosonCode" = rgdb."DbT5101NinteiShinseiJoho"."shichosonCode"
         INNER JOIN  rgdb."DbT5912ShujiiJoho"
         ON  rgdb."DbT5912ShujiiJoho"."shujiiIryokikanCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
         AND rgdb."DbT5912ShujiiJoho"."shujiiCode" = rgdb."DbT5101NinteiShinseiJoho"."shujiiCode"
-        AND rgdb."DbT5912ShujiiJoho"."shichosonCode" = rgdb."DbT7051KoseiShichosonMaster"."shichosonCode"
+        AND rgdb."DbT5912ShujiiJoho"."shichosonCode" = rgdb."DbT5101NinteiShinseiJoho"."shichosonCode"
         INNER JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"
         ON  rgdb."DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
         AND rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" =

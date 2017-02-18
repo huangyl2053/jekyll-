@@ -216,7 +216,7 @@
         ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo" 
         AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo" 
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS T5913
-        ON T5913."shichosonCode" = T7051."shichosonCode"
+        ON T5913."shichosonCode" = T5101."shichosonCode"
         AND T5913."ninteiChosaItakusakiCode" = T5202."chosaItakusakiCode"
         AND T5913."ninteiChosainCode" = T5202."chosainCode"
         LEFT JOIN rgdb."DbT5206GaikyoTokki" AS T5206 
@@ -240,7 +240,7 @@
         LEFT JOIN rgdb."DbT5122TsuchishoHakkoJoho" AS T5122 
         ON T5101."shinseishoKanriNo" = T5122."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-        ON T5910."shichosonCode" = T7051."shichosonCode"
+        ON T5910."shichosonCode" = T5101."shichosonCode"
         AND T5910."ninteichosaItakusakiCode" = T5202."chosaItakusakiCode"
         WHERE
         T5511."shinsakaiKaisaiNo" = #{kaisaiBangou} 
