@@ -23,8 +23,6 @@
                 dbT5301."ikenshoIraiRirekiNo" AS ikenshoIraiRirekiNo
             FROM
                 rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
-            INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
-                ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo" 
             INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbT5301
                 ON dbT5301."shujiiIryokikanCode" = dbT5101."shujiiIryokikanCode" 
                 AND dbT5301."shujiiCode" = dbT5101."shujiiCode"
@@ -38,10 +36,10 @@
                                                     )
                 AND dbT5301."logicalDeletedFlag" = false
             INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911 
-                ON dbT5911."shichosonCode" = dbT7051."shichosonCode" 
+                ON dbT5911."shichosonCode" = dbT5101."shichosonCode" 
                 AND dbT5911."shujiiIryokikanCode" = dbT5301."shujiiIryokikanCode"
             INNER JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912 
-                ON dbT5912."shichosonCode" = dbT7051."shichosonCode" 
+                ON dbT5912."shichosonCode" = dbT5101."shichosonCode" 
                 AND dbT5912."shujiiIryokikanCode" = dbT5301."shujiiIryokikanCode"
                 AND dbT5912."shujiiCode" = dbT5301."shujiiCode"
             LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS dbT5302 

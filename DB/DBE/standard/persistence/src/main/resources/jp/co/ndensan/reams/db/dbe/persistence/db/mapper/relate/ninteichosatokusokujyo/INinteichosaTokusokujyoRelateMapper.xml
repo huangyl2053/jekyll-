@@ -79,12 +79,12 @@
 
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS "DbT5910NinteichosaItakusakiJoho"
-        ON "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shichosonCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_shichosonCode"
+        ON "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shichosonCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_shichosonCode"
         AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = "DbT5910NinteichosaItakusakiJoho"."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
 
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.noDeleted_DbT5913ChosainJoho" />) AS "DbT5913ChosainJoho"
-        ON "DbT7051KoseiShichosonMaster"."dbT7051KoseiShichosonMaster_shichosonCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_shichosonCode"
+        ON "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shichosonCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_shichosonCode"
         AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_ninteiChosaItakusakiCode"
         AND "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosainCode" = "DbT5913ChosainJoho"."dbT5913ChosainJoho_ninteiChosainCode"
 
@@ -149,7 +149,7 @@
         ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho
-        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
         AND DbT5101NinteiShinseiJoho."ninteiChosaItakusakiCode" =  DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
         LEFT JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho

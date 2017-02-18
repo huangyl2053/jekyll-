@@ -67,10 +67,10 @@
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-        ON T5911."shichosonCode" = T7051."shichosonCode"
+        ON T5911."shichosonCode" = T5101."shichosonCode"
         AND T5911."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode"
         INNER JOIN rgdb."DbT5912ShujiiJoho" AS T5912
-        ON T5912."shichosonCode" = T7051."shichosonCode"
+        ON T5912."shichosonCode" = T5101."shichosonCode"
         AND T5912."shujiiIryokikanCode" = T5302."shujiiIryoKikanCode"
         AND T5912."shujiiCode" = T5302."shujiiCode"
         INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
@@ -112,7 +112,7 @@
                 </when>
             </choose>
             <if test="保険者Flag">
-                AND T7051."shichosonCode" = #{保険者}
+                AND T5101."shichosonCode" = #{保険者}
             </if>
             <if test="batchFlag">
                 AND

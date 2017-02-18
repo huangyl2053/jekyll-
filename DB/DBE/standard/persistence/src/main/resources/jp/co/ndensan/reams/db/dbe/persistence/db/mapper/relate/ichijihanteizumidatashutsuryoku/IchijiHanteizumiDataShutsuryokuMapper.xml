@@ -296,17 +296,17 @@
                                         J1."shinseishoKanriNo" = J."shinseishoKanriNo"
                        )
                  LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" as K
-                        ON  K."shichosonCode" = B."shichosonCode"
+                        ON  K."shichosonCode" = A."shichosonCode"
                        AND  K."ninteichosaItakusakiCode" = A."ninteiChosaItakusakiCode"
                  LEFT JOIN  rgdb."DbT5913ChosainJoho" as L
-                        ON  L."shichosonCode" = B."shichosonCode"
+                        ON  L."shichosonCode" = A."shichosonCode"
                        AND  L."ninteiChosaItakusakiCode" = A."ninteiChosaItakusakiCode"
                        AND  L."ninteiChosainCode" = A."ninteiChosainCode"
                  LEFT JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" as  M
-                        ON  M."shichosonCode" = B."shichosonCode"
+                        ON  M."shichosonCode" = A."shichosonCode"
                        AND  M."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                  LEFT JOIN  rgdb."DbT5912ShujiiJoho" AS N
-                        ON  N."shichosonCode" = B."shichosonCode"
+                        ON  N."shichosonCode" = A."shichosonCode"
                        AND  N."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                        AND  N."shujiiCode" = A."shujiiCode"
                  LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" as O
