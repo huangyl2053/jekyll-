@@ -70,35 +70,6 @@ public class ShinsakaiTorokuFinder {
         }
         return SearchResult.of(審査会登録List, 0, false);
     }
-    
-    /**
-     * 適用情報リストを取得します。
-     *
-     * @param parameter YokaigoNinteiTaskListParameter
-     * @return 他住所地特例者管理 他住所地特例者管理
-     */
-    @Transaction
-    public ShinSaKaiBusiness get前審査会登録(YokaigoNinteiTaskListParameter parameter) {
-        ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
-        IShinsakaiTorokuMapper mapper = mapperProvider.create(IShinsakaiTorokuMapper.class);
-        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前審査会登録(parameter);
-        for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
-            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
-            set前審査会登録(要介護認定完了情報, shinSaKaiBusiness);
-        }
-        return shinSaKaiBusiness;
-    }
-
-    private void set前審査会登録(
-            List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
-            ShinSaKaiBusiness shinSaKaiBusiness) {
-        List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();
-        for (DbT5105NinteiKanryoJohoEntity entity : 要介護認定完了情報) {
-            entity.initializeMd5();
-            要介護認定完了情報Lsit.add(new NinteiKanryoJoho(entity));
-        }
-        shinSaKaiBusiness.set要介護認定完了情報Lsit(要介護認定完了情報Lsit);
-    }
 
     /**
      * 審査会一覧を検索します。

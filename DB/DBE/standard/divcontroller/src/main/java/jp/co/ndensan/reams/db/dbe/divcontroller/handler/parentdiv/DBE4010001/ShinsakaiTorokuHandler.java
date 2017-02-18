@@ -29,12 +29,15 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001StateName;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -79,6 +82,7 @@ public class ShinsakaiTorokuHandler {
     private static final RString 検索制御_最大取得件数
             = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     private static final RString ラジオボタンキー_完了可能 = new RString("1");
+    private static final RString 一次判定後 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -135,15 +139,19 @@ public class ShinsakaiTorokuHandler {
                 && 1 <= div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue())) {
             div.getTxtTaishoshaMaxHyojiKensu().setValue(new Decimal(検索制御_最大取得件数.toString()));
         }
-
+        RString マスキングチェックタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        boolean is一次判定後 = 一次判定後.equals(マスキングチェックタイミング);
         List<ShinsakaiTorokuBusiness> 審査会登録List = ShinsakaiTorokuFinder.createInstance().
                 get審査会登録モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分)).records();
+                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分, Decimal.ZERO, LasdecCode.EMPTY, is一次判定後)).records();
         if (!審査会登録List.isEmpty()) {
-            ShinSaKaiBusiness 前審査会登録Model = ShinsakaiTorokuFinder.createInstance().
-                    get前審査会登録(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分));
-            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査会登録Model.get要介護認定完了情報Lsit()));
+            List<NinteiKanryoJoho> ninteiKanryoJohoList = new ArrayList();
+            for (ShinsakaiTorokuBusiness business : 審査会登録List) {
+                DbT5105NinteiKanryoJohoEntity entity = business.get認定完了情報();
+                entity.initializeMd5();
+                ninteiKanryoJohoList.add(new NinteiKanryoJoho(entity));
+            }
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(ninteiKanryoJohoList));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }

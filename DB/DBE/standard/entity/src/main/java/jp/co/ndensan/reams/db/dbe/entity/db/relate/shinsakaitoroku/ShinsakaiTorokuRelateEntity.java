@@ -7,6 +7,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,4 +45,9 @@ public class ShinsakaiTorokuRelateEntity {
     private FlexibleDate shinsakaiWariateYMD;
     private int shinsakaiOrder;
     private RString gogitaiMei;
+    private DbT5105NinteiKanryoJohoEntity 要介護認定完了情報Entity;
+    
+    public ShinsakaiTorokuRelateEntity() {
+        要介護認定完了情報Entity = new DbT5105NinteiKanryoJohoEntity();
+    }
 }

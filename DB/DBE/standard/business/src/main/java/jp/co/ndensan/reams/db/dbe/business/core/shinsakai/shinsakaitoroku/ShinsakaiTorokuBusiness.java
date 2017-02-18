@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaitoroku;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -29,6 +30,15 @@ public class ShinsakaiTorokuBusiness {
      */
     public ShinsakaiTorokuBusiness(ShinsakaiTorokuRelateEntity entity) {
         this.entity = entity;
+    }
+    
+    /**
+     * 認定完了情報を返します。
+     * 
+     * @return 認定完了情報
+     */
+    public DbT5105NinteiKanryoJohoEntity get認定完了情報() {
+        return entity.get要介護認定完了情報Entity();
     }
     
     /**
