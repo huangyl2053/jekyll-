@@ -43,6 +43,7 @@ public class NinteiChosaDataOutputHandler {
     private final NinteiChosaDataOutputDiv div;
     private static final RString BTNEXECUTE = new RString("btnExecute");
     private static final RString BTNKENSAKU = new RString("btnKensaku");
+    private static final RString KEY_出力済みも含むチェックボックス = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -93,11 +94,16 @@ public class NinteiChosaDataOutputHandler {
      * @return NinteiChosaDataOutputMybitisParameter
      */
     public NinteiChosaDataOutputMybitisParameter setParameter() {
+        boolean isShutsuryokuZumiFukumu = false;
+        if (div.getChkShutsuryokuZumi().getSelectedKeys().contains(KEY_出力済みも含むチェックボックス)) {
+            isShutsuryokuZumiFukumu = true;
+        }
         return NinteiChosaDataOutputMybitisParameter.createSelectByKeyParam(
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
                 div.getTxtMaxCount().getValue(),
-                div.getCcdHokensha().getSelectedItem().get市町村コード().value());
+                div.getCcdHokensha().getSelectedItem().get市町村コード().value(),
+                isShutsuryokuZumiFukumu);
     }
 
     /**

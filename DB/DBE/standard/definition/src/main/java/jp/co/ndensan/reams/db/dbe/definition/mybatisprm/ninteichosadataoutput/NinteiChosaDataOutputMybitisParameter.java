@@ -29,6 +29,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
     private final boolean isNinteichosaItakusakiCode;
     private final boolean isNinteiChosainCode;
     private final boolean isShichoson;
+    private final boolean isShutsuryokuZumiFukumu;
 
     //全市町村を選択したことを示す市町村コード
     private static final RString ALL_SHICHOSON_KEY = new RString("000000");
@@ -43,6 +44,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
      * @param is認定調査委託先コード is認定調査委託先コード
      * @param is認定調査員コード is認定調査員コード
      * @param is全市町村 is全市町村
+     * @param is出力済み含む is出力済み含む
      */
     private NinteiChosaDataOutputMybitisParameter(RString 認定調査委託先コード,
             RString 認定調査員コード,
@@ -50,7 +52,8 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
             RString 市町村コード,
             boolean is認定調査委託先コード,
             boolean is認定調査員コード,
-            boolean is全市町村) {
+            boolean is全市町村,
+            boolean is出力済み含む) {
         this.ninteichosaItakusakiCode = 認定調査委託先コード;
         this.ninteiChosainCode = 認定調査員コード;
         this.maxCount = 最大表示件数;
@@ -58,6 +61,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
         this.isNinteichosaItakusakiCode = is認定調査委託先コード;
         this.isNinteiChosainCode = is認定調査員コード;
         this.isShichoson = is全市町村;
+        this.isShutsuryokuZumiFukumu = is出力済み含む;
     }
 
     /**
@@ -67,13 +71,15 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
      * @param 認定調査員コード 認定調査員コード
      * @param 最大表示件数 最大表示件数
      * @param 市町村コード 市町村コード
+     * @param is出力済み含む is出力済み含む
      * @return ShujiiIkenshoSakuseiMybitisParamter
      */
     public static NinteiChosaDataOutputMybitisParameter createSelectByKeyParam(
             RString 認定調査委託先コード,
             RString 認定調査員コード,
             Decimal 最大表示件数,
-            RString 市町村コード) {
+            RString 市町村コード,
+            boolean is出力済み含む) {
 
         boolean is認定調査委託先コード = false;
         boolean is認定調査員コード = false;
@@ -94,6 +100,7 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
                 市町村コード,
                 is認定調査委託先コード,
                 is認定調査員コード,
-                is全市町村);
+                is全市町村,
+                is出力済み含む);
     }
 }

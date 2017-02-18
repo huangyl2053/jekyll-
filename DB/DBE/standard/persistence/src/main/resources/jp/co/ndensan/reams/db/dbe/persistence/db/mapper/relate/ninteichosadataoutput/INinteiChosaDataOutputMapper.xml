@@ -324,8 +324,6 @@
         )
         AND DbT5201."logicalDeletedFlag" = false
         AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
-        AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != '')
-        AND (DbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5201."iraishoShutsuryokuYMD" != '')
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaKanryoYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
@@ -338,6 +336,9 @@
         </if>
         <if test= "!isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
+        </if>
+        <if test= "!isShutsuryokuZumiFukumu">
+            AND DbT5201."mobileDataShutsuryokuZumiFlag" = FALSE
         </if>
     </select>
 
@@ -382,8 +383,6 @@
         )
         AND DbT5201."logicalDeletedFlag" = false
         AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
-        AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != '')
-        AND (DbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND DbT5201."iraishoShutsuryokuYMD" != '')
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaKanryoYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
@@ -396,6 +395,9 @@
         </if>
         <if test= "!isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
+        </if>
+        <if test= "!isShutsuryokuZumiFukumu">
+            AND DbT5201."mobileDataShutsuryokuZumiFlag" = FALSE
         </if>
         ORDER BY
         DbT5101."hihokenshaKana"
