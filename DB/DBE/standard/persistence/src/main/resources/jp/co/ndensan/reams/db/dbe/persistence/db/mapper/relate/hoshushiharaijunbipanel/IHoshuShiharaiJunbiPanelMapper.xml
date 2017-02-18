@@ -24,10 +24,8 @@
                 ON T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo"
                 AND T5101."shoriJotaiKubun" IN (#{処理状態区分_通常},#{処理状態区分_延期})
                 AND T5101."logicalDeletedFlag" = False
-                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
-                ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                 INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
-                ON T5910."shichosonCode" = T7051."shichosonCode"
+                ON T5910."shichosonCode" = T5101."shichosonCode"
                 AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
                 INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
                 ON T5913."shichosonCode" = T5910."shichosonCode"
