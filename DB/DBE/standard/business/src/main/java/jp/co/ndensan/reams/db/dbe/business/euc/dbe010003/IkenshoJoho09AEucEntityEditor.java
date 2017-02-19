@@ -71,9 +71,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class IkenshoJoho09AEucEntityEditor {
 
-    private static final RString 改行 = new RString("<br/>");
-    private static final RString 下矢印 = new RString("↓");
-
     private IkenshoJoho09AEucEntityEditor() {
     }
 
@@ -413,7 +410,7 @@ public class IkenshoJoho09AEucEntityEditor {
 
     private static RString convert改行(RString text) {
         return (text != null)
-                ? new RStringBuilder(text).replace(改行, 下矢印).toRString()
+                ? new RStringBuilder(text).replace("\r", "").replace("\n", "↓").toRString()
                 : RString.EMPTY;
     }
 
