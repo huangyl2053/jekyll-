@@ -95,13 +95,27 @@ public class ShinseishaDataOutput {
     }
 
     /**
+     * 申請検索状態の「CSV出力を実行する」ボタンクリックイベントです。
+     *
+     * @param div ShinseishaDataOutputDiv
+     * @return ResponseData
+     */
+    public ResponseData<ShinseishaDataOutputDiv> onClick_btnBatchRegister(ShinseishaDataOutputDiv div) {
+        ValidationMessageControlPairs pairs = getValidationHandler(div).validateBtnBatchRegister();
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 申請一覧状態の「CSV出力を実行する」ボタンクリックイベントです。
      *
      * @param div ShinseishaDataOutputDiv
      * @return ResponseData
      */
     public ResponseData<ShinseishaDataOutputDiv> onClick_btnBatchRegister2(ShinseishaDataOutputDiv div) {
-        ValidationMessageControlPairs pairs = getValidationHandler(div).validate();
+        ValidationMessageControlPairs pairs = getValidationHandler(div).validateBtnBatchRegister2();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }

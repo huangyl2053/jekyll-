@@ -32,12 +32,30 @@ public class ShinseishaDataOutputValidationHandler {
     }
 
     /**
-     * 申請一覧状態の「CSV出力を実行する」ボタンクリック時のバリデーションチェックを行います。
+     * 申請検索状態の「CSV出力を実行する」ボタンクリック時のバリデーションチェックです。
      *
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validate() {
+    public ValidationMessageControlPairs validateBtnBatchRegister() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getChkOutputCsv().getSelectedKeys().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    ShinseishaDataOutputValidationHandler.RRVMessages.選択されていない, div.getChkOutputCsv()));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 申請一覧状態の「CSV出力を実行する」ボタンクリック時のバリデーションチェックです。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateBtnBatchRegister2() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (div.getChkOutputCsv().getSelectedKeys().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    ShinseishaDataOutputValidationHandler.RRVMessages.選択されていない, div.getChkOutputCsv()));
+        }
         if (div.getDgShinseiJoho().getSelectedItems() == null || div.getDgShinseiJoho().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
                     ShinseishaDataOutputValidationHandler.RRVMessages.対象行を選択, div.getDgShinseiJoho()));
@@ -47,6 +65,7 @@ public class ShinseishaDataOutputValidationHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
+        選択されていない(UrErrorMessages.選択されていない, "出力するCSVファイル"),
         対象行を選択(UrErrorMessages.対象行を選択);
 
         private final Message message;
