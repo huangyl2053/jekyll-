@@ -62,7 +62,14 @@ public class EnkiTsuchishohakenIchiranhyoJyohoProcessParameter implements IBatch
      * @return EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter
      */
     public EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter toEnkiTsuchishohakenIchiranhyoJyohoMybatisParameter() {
-        return new EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(処理見込み日From, 処理見込み日To, 通知書発行日.get(0), 文書番号);
+        FlexibleDate 発行日;
+        if (通知書発行日 == null || 通知書発行日.isEmpty()) {
+            発行日 = FlexibleDate.EMPTY;
+        } else {
+            発行日 = 通知書発行日.get(0);
+        }
+
+        return new EnkiTsuchishohakenIchiranhyoJyohoMybatisParameter(処理見込み日From, 処理見込み日To, 発行日, 文書番号);
     }
 
     /**

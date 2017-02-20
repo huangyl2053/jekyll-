@@ -57,10 +57,10 @@ public class DBE581001_EnkitsuchiTest extends DbeTestBase {
         List<RString> shinseishoKanriNoList = new ArrayList<>();
         shinseishoKanriNoList.add(new RString("20973220150300181"));
         param.set申請書管理番号リスト(shinseishoKanriNoList);
-        param.set画面モード(new RString("2"));
+        param.set画面モード(new RString("1"));
 
         List<FlexibleDate> tsuchishoHakkoYMD = new ArrayList<>();
-        tsuchishoHakkoYMD.add(new FlexibleDate("20170216"));
+        tsuchishoHakkoYMD.add(null);
         param.set通知書発行日(tsuchishoHakkoYMD);
 
         return param;

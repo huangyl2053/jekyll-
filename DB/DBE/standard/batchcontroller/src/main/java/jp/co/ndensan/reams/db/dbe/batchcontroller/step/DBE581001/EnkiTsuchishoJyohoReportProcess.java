@@ -19,23 +19,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KaigoDonyuKeitaiManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
-import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.DainoRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.HojinDaihyoshaRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SetainushiRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
-import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -51,10 +39,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -98,18 +84,18 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101Nin
         batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBE581001.value()).create();
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
         dbT5101TableWriter = new BatchPermanentTableWriter<>(DbT5101NinteiShinseiJohoEntity.class);
-        IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
-        AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
-        builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
-        builder.set識別コード(ShikibetsuCode.EMPTY);
-        builder.set基準日(FlexibleDate.getNowDate());
-        builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
-        builder.set世帯主利用区分(SetainushiRiyoKubun.利用しない);
-        builder.set代納人利用区分(DainoRiyoKubun.利用する);
-        builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
-        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
-        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, AssociationFinderFactory.createInstance().getAssociation(), get帳票共通情報(REPORT_DBE581001));
-        sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
+//        IAtesakiGyomuHanteiKey key = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBE認定支援);
+//        AtesakiPSMSearchKeyBuilder builder = new AtesakiPSMSearchKeyBuilder(key);
+//        builder.set業務固有キー利用区分(GyomuKoyuKeyRiyoKubun.利用しない);
+//        builder.set識別コード(ShikibetsuCode.EMPTY);
+//        builder.set基準日(FlexibleDate.getNowDate());
+//        builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
+//        builder.set世帯主利用区分(SetainushiRiyoKubun.利用しない);
+//        builder.set代納人利用区分(DainoRiyoKubun.利用する);
+//        builder.set法人代表者利用区分(HojinDaihyoshaRiyoKubun.利用しない);
+//        IAtesaki 宛先 = ShikibetsuTaishoService.getAtesakiFinder().get宛先(builder.build());
+//        EditedAtesaki 編集後宛先 = EditedAtesakiBuilder.create編集後宛先(宛先, AssociationFinderFactory.createInstance().getAssociation(), get帳票共通情報(REPORT_DBE581001));
+//        sofubutsuAtesakiSource = 編集後宛先.getSofubutsuAtesakiSource().get送付物宛先ソース();
 
     }
 
@@ -131,16 +117,20 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101Nin
         }
         if (広域フラグ = true){
             set送付先申請先情報(entity, 要介護認定申請情報);
-        }else{
+        } else {
+            sofubutsuAtesakiSource.jushoText = dbtEntity.getJusho().value();
+            sofubutsuAtesakiSource.shimeiText = dbtEntity.getHihokenshaName().value();
+            sofubutsuAtesakiSource.yubinNo = dbtEntity.getYubinNo().getYubinNo();
+
             set送付物宛先情報(entity);
         }
         
-        FlexibleDate 通知書発行日 = get通知書発行日(dbtEntity.getShinseishoKanriNo().value());
+        FlexibleDate 発行日 = get通知書発行日(dbtEntity.getShinseishoKanriNo().value());
         entity.set文書番号(parameter.get文書番号());
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBD介護受給,
                 REPORT_DBE581001,
-                通知書発行日,
+                発行日,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし,
                 reportSourceWriter);
@@ -183,19 +173,19 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101Nin
         YokaigoNinteiEnkiTshuchishoReport report = new YokaigoNinteiEnkiTshuchishoReport(entity);
         report.writeBy(reportSourceWriter);
 
-        dbtEntity.setEnkiTsuchiHakkoYMD(通知書発行日);
+        dbtEntity.setEnkiTsuchiHakkoYMD(発行日);
         dbtEntity.setEnkiTsuchiHakkoKaisu(entity.getEntity().getEnkiTsuchiHakkoKaisu() + 1);
         dbT5101TableWriter.update(dbtEntity);
     }
 
     private FlexibleDate get通知書発行日(RString 申請書管理番号) {
-        FlexibleDate 通知書発行日 = FlexibleDate.EMPTY;
+        FlexibleDate 発行日 = FlexibleDate.EMPTY;
         for (int index = 0; index < parameter.get申請書管理番号リスト().size(); index++) {
             if (申請書管理番号.equals(parameter.get申請書管理番号リスト().get(index))) {
-                通知書発行日 = parameter.get通知書発行日().get(index);
+                発行日 = parameter.get通知書発行日().get(index);
             }
         }
-        return 通知書発行日;
+        return 発行日;
     }
 
     private void set送付先申請先情報(YokaigoNinteiEnkiTshuchishoEntity entity, DbT5101NinteiShinseiJohoEntity 要介護認定申請情報){
