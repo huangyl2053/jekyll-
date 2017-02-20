@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 27 11:40:56 JST 2016 
+ * Mon Feb 20 14:02:36 JST 2017 
  */
 
 
@@ -20,39 +20,39 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgTorikomiTaiasho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
 
-    private RString meisho;
+    private RString importingFileName;
     private TextBoxNum dataNum;
     private RString fileName;
     private RString csvName;
 
     public dgTorikomiTaiasho_Row() {
         super();
-        this.meisho = RString.EMPTY;
+        this.importingFileName = RString.EMPTY;
         this.dataNum = new TextBoxNum();
         this.fileName = RString.EMPTY;
         this.csvName = RString.EMPTY;
-        this.setOriginalData("meisho", meisho);
+        this.setOriginalData("importingFileName", importingFileName);
         this.setOriginalData("dataNum", dataNum);
         this.setOriginalData("fileName", fileName);
         this.setOriginalData("csvName", csvName);
     }
 
-    public dgTorikomiTaiasho_Row(RString meisho, TextBoxNum dataNum, RString fileName, RString csvName) {
+    public dgTorikomiTaiasho_Row(RString importingFileName, TextBoxNum dataNum, RString fileName, RString csvName) {
         super();
-        this.setOriginalData("meisho", meisho);
+        this.setOriginalData("importingFileName", importingFileName);
         this.setOriginalData("dataNum", dataNum);
         this.setOriginalData("fileName", fileName);
         this.setOriginalData("csvName", csvName);
-        this.meisho = meisho;
+        this.importingFileName = importingFileName;
         this.dataNum = dataNum;
         this.fileName = fileName;
         this.csvName = csvName;
     }
 
-    public RString getMeisho() {
-        return meisho;
+    public RString getImportingFileName() {
+        return importingFileName;
     }
 
     public TextBoxNum getDataNum() {
@@ -67,9 +67,9 @@ public class dgTorikomiTaiasho_Row extends DataRow {
         return csvName;
     }
 
-    public void setMeisho(RString meisho) {
-        this.setOriginalData("meisho", meisho);
-        this.meisho = meisho;
+    public void setImportingFileName(RString importingFileName) {
+        this.setOriginalData("importingFileName", importingFileName);
+        this.importingFileName = importingFileName;
     }
 
     public void setDataNum(TextBoxNum dataNum) {

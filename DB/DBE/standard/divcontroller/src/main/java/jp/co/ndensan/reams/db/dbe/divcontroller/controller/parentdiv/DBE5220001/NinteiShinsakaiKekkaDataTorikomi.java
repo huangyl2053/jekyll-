@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5220001;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE518002.DBE518002_NinteiShinsaIraiIfTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiHandler;
@@ -14,7 +16,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
@@ -27,9 +31,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteiShinsakaiKekkaDataTorikomi {
 
-    private static final RString SELECT_KEY0 = new RString("key0");
-    private static final RString SELECT_KEY1 = new RString("key1");
-
     /**
      * 画面初期化処理です。
      *
@@ -37,37 +38,6 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
      */
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onLoad(NinteiShinsakaiKekkaDataTorikomiDiv div) {
-        getHandler(div).setOnLoad();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 取込み対象データラジオボタンイベント処理です。
-     *
-     * @param div 画面情報
-     * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
-     */
-    public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onClick_ChkRadTorikomiTaishoData(NinteiShinsakaiKekkaDataTorikomiDiv div) {
-        if (div.getRadTorikomiTaishoData().getSelectedKey().contains(SELECT_KEY0)) {
-            div.getRadTorikomiNaiyo().setDisabled(false);
-            div.getRadShinsain().setDisabled(false);
-        } else {
-            div.getRadShinsain().setSelectedKey(SELECT_KEY1);
-            div.getRadTorikomiNaiyo().setSelectedKey(SELECT_KEY1);
-            div.getRadTorikomiNaiyo().setDisabled(true);
-            div.getRadShinsain().setDisabled(true);
-        }
-        getHandler(div).setOnLoad();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 出欠情報ラジオボタンイベント処理です。
-     *
-     * @param div 画面情報
-     * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
-     */
-    public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onClick_ChRradShinsain(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         getHandler(div).setOnLoad();
         return ResponseData.of(div).respond();
     }
@@ -92,14 +62,24 @@ public class NinteiShinsakaiKekkaDataTorikomi {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onclick_BtnUpload(NinteiShinsakaiKekkaDataTorikomiDiv div, FileData[] files) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        for (FileData file : files) {
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).一致性チェック(validationMessages, file.getFileName(), file.getFilePath());
+        ValidationMessageControlPairs fileNumCheck = getValidationHandler(div).validateFileNum(validationMessages, files);
+        if (fileNumCheck.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(fileNumCheck).respond();
+        }
+        for (File file : unzipped(files[0].getFilePath())) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).一致性チェック(validationMessages, file);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             savaCsvファイル(file, div);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private static List<File> unzipped(RString zipFilePath) {
+        RString outputFolderPath = Directory.createTmpDirectory();
+        ZipUtil.extractAllFiles(zipFilePath, outputFolderPath);
+        return Arrays.asList(new File(outputFolderPath.toString()).listFiles());
     }
 
     /**
@@ -118,11 +98,10 @@ public class NinteiShinsakaiKekkaDataTorikomi {
         return ResponseData.of(div).respond();
     }
 
-    private boolean savaCsvファイル(FileData file, NinteiShinsakaiKekkaDataTorikomiDiv div) {
+    private boolean savaCsvファイル(File local, NinteiShinsakaiKekkaDataTorikomiDiv div) {
         RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-            .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         File サーバ = new File(path.toString());
-        File local = new File(file.getFilePath().toString());
         boolean mkdirsFlag = false;
         boolean delFileFlag = false;
         File tmpfile;
@@ -132,7 +111,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
             mkdirsFlag = true;
         }
         if (mkdirsFlag) {
-            tmpfile = new File(サーバ, getHandler(div).getFileName(file).toString());
+            tmpfile = new File(サーバ, getHandler(div).getFileName(local).toString());
             if (tmpfile.exists()) {
                 delFileFlag = tmpfile.delete();
             } else {

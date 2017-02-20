@@ -5,17 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiDataName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.dgTorikomiTaiasho_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -30,7 +34,6 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
     private static final RString 分割 = new RString("＿");
     private static final int 回数 = 0;
     private static final int ファイル名 = 1;
-    private static final RString KEY_0 = new RString("0");
 
     /**
      * コンストラクタです。
@@ -55,15 +58,33 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
     }
 
     /**
+     * @param validPairs ValidationMessageControlPairs
+     * @param fileData
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateFileNum(ValidationMessageControlPairs validPairs, FileData[] fileData) {
+        if (fileData == null || 1 < fileData.length) {
+            validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.取込ファイル_1件, div.getUplPanel()));
+        }
+        return validPairs;
+    }
+
+    /**
      * 一致性チェックです
      *
      * @param validPairs ValidationMessageControlPairs
-     * @param fileName fileName
-     * @param filePath filePath
+     * @param file file
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 一致性チェック(ValidationMessageControlPairs validPairs, RString fileName, RString filePath) {
+    public ValidationMessageControlPairs 一致性チェック(ValidationMessageControlPairs validPairs, File file) {
         boolean flag = true;
+        RString fileName = new RString(file.getName());
+        RString filePath = null;
+        try {
+            filePath = new RString(file.getCanonicalPath());
+        } catch (IOException e) {
+            throw new ApplicationException("ファイルの解凍に失敗しました。");
+        }
         List<RString> splite = fileName.split(分割.toString());
         if (splite.size() < 2) {
             validPairs.add(new ValidationMessageControlPair(NinteiShinsakaiKekkaDataTorikomiMessages.一致性チェック, div.getUplPanel()));
@@ -74,6 +95,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
                 if (row.getCsvName().equals(splite.get(ファイル名)) && shinsakaiData.getファイル名称().equals(splite.get(ファイル名))) {
                     CsvListReader read = new CsvListReader.InstanceBuilder(filePath).build();
                     Decimal 件数 = new Decimal(getSize(read));
+                    row.setImportingFileName(fileName);
                     row.getDataNum().setValue(件数);
                     set隠し項目(shinsakaiData, splite, 件数);
                     flag = false;
@@ -93,25 +115,19 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
      * @return
      */
     public ValidationMessageControlPairs 回数チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getRadTorikomiTaishoData().getSelectedKey().contains(KEY_0)) {
+        TorikomiConditions c = new TorikomiConditions(div);
+        if (c.get取込対象データ().isMobile()) {
             check開催回数一致(validPairs);
         }
         return validPairs;
     }
 
     private void check開催回数一致(ValidationMessageControlPairs validPairs) {
-        if (div.getRadShinsain().getSelectedKey().equals(KEY_0)) {
-            if (!div.getHdnTxtKaisaiKaisuIin().equals(div.getHdnTxtKaisaiKaisuJoho())
+        if (!div.getHdnTxtKaisaiKaisuIin().equals(div.getHdnTxtKaisaiKaisuJoho())
                 || !div.getHdnTxtKaisaiKaisuIin().equals(div.getHdnTxtKaisaiKaisuKekka())
                 || !div.getHdnTxtKaisaiKaisuJoho().equals(div.getHdnTxtKaisaiKaisuKekka())) {
-                validPairs.add(new ValidationMessageControlPair(
+            validPairs.add(new ValidationMessageControlPair(
                     new ValidationMessage(UrErrorMessages.項目に対する制約, "開催回", "一つ"), div.getDgTorikomiTaiasho()));
-            }
-        } else {
-            if (!div.getHdnTxtKaisaiKaisuJoho().equals(div.getHdnTxtKaisaiKaisuKekka())) {
-                validPairs.add(new ValidationMessageControlPair(
-                    new ValidationMessage(UrErrorMessages.項目に対する制約, "開催回", "一つ"), div.getDgTorikomiTaiasho()));
-            }
         }
     }
 
@@ -150,7 +166,7 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
         for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
             if (null == row.getDataNum().getValue() || 0 == row.getDataNum().getValue().compareTo(Decimal.ZERO)) {
                 validPairs.add(new ValidationMessageControlPair(new ValidationMessage(
-                    UrErrorMessages.対象データなし_追加メッセージあり, row.getFileName().toString()), div.getDgTorikomiTaiasho()));
+                        UrErrorMessages.対象データなし_追加メッセージあり, row.getFileName().toString()), div.getDgTorikomiTaiasho()));
             }
         }
         return validPairs;
@@ -159,7 +175,8 @@ public class NinteiShinsakaiKekkaDataTorikomiValidationHandler {
     private static enum NinteiShinsakaiKekkaDataTorikomiMessages implements IValidationMessage {
 
         対象未選択チェック(UrErrorMessages.選択されていない, "取込みファイル内容一覧対象"),
-        一致性チェック(UrErrorMessages.不正, "アップロードファイルの名称");
+        一致性チェック(UrErrorMessages.不正, "アップロードファイルの名称"),
+        取込ファイル_1件(UrErrorMessages.項目に対する制約, "取り込むファイル", "1件");
         private final Message message;
 
         private NinteiShinsakaiKekkaDataTorikomiMessages(IMessageGettable message, String... replacements) {

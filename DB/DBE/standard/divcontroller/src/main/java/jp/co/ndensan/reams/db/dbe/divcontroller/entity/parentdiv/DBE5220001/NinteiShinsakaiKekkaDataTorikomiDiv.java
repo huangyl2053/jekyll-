@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
     private DataTorikomiDiv DataTorikomi;
     @JsonProperty("uploadPanel")
     private uploadPanelDiv uploadPanel;
+    @JsonProperty("UploadedFiles")
+    private UploadedFilesDiv UploadedFiles;
     @JsonProperty("hdnTxtKaisaiKaisuKekka")
     private RString hdnTxtKaisaiKaisuKekka;
     @JsonProperty("hdnTxtKensuShinsaKekka")
@@ -84,6 +86,24 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
     @JsonProperty("uploadPanel")
     public void setUploadPanel(uploadPanelDiv uploadPanel) {
         this.uploadPanel = uploadPanel;
+    }
+
+    /*
+     * getUploadedFiles
+     * @return UploadedFiles
+     */
+    @JsonProperty("UploadedFiles")
+    public UploadedFilesDiv getUploadedFiles() {
+        return UploadedFiles;
+    }
+
+    /*
+     * setUploadedFiles
+     * @param UploadedFiles UploadedFiles
+     */
+    @JsonProperty("UploadedFiles")
+    public void setUploadedFiles(UploadedFilesDiv UploadedFiles) {
+        this.UploadedFiles = UploadedFiles;
     }
 
     /*
@@ -234,16 +254,6 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public RadioButton getRadTorikomiTaishoData() {
-        return this.getDataTorikomi().getRadTorikomiTaishoData();
-    }
-
-    @JsonIgnore
-    public void  setRadTorikomiTaishoData(RadioButton radTorikomiTaishoData) {
-        this.getDataTorikomi().setRadTorikomiTaishoData(radTorikomiTaishoData);
-    }
-
-    @JsonIgnore
     public RadioButton getRadTorikomiNaiyo() {
         return this.getDataTorikomi().getRadTorikomiNaiyo();
     }
@@ -251,36 +261,6 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void  setRadTorikomiNaiyo(RadioButton radTorikomiNaiyo) {
         this.getDataTorikomi().setRadTorikomiNaiyo(radTorikomiNaiyo);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadShinsain() {
-        return this.getDataTorikomi().getRadShinsain();
-    }
-
-    @JsonIgnore
-    public void  setRadShinsain(RadioButton radShinsain) {
-        this.getDataTorikomi().setRadShinsain(radShinsain);
-    }
-
-    @JsonIgnore
-    public Label getLblTorikomiTaisho() {
-        return this.getDataTorikomi().getLblTorikomiTaisho();
-    }
-
-    @JsonIgnore
-    public void  setLblTorikomiTaisho(Label lblTorikomiTaisho) {
-        this.getDataTorikomi().setLblTorikomiTaisho(lblTorikomiTaisho);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgTorikomiTaiasho_Row> getDgTorikomiTaiasho() {
-        return this.getDataTorikomi().getDgTorikomiTaiasho();
-    }
-
-    @JsonIgnore
-    public void  setDgTorikomiTaiasho(DataGrid<dgTorikomiTaiasho_Row> dgTorikomiTaiasho) {
-        this.getDataTorikomi().setDgTorikomiTaiasho(dgTorikomiTaiasho);
     }
 
     @JsonIgnore
@@ -301,6 +281,26 @@ public class NinteiShinsakaiKekkaDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void  setBtnUpload(Button btnUpload) {
         this.getUploadPanel().setBtnUpload(btnUpload);
+    }
+
+    @JsonIgnore
+    public Label getLblTorikomiTaisho() {
+        return this.getUploadedFiles().getLblTorikomiTaisho();
+    }
+
+    @JsonIgnore
+    public void  setLblTorikomiTaisho(Label lblTorikomiTaisho) {
+        this.getUploadedFiles().setLblTorikomiTaisho(lblTorikomiTaisho);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgTorikomiTaiasho_Row> getDgTorikomiTaiasho() {
+        return this.getUploadedFiles().getDgTorikomiTaiasho();
+    }
+
+    @JsonIgnore
+    public void  setDgTorikomiTaiasho(DataGrid<dgTorikomiTaiasho_Row> dgTorikomiTaiasho) {
+        this.getUploadedFiles().setDgTorikomiTaiasho(dgTorikomiTaiasho);
     }
 
     // </editor-fold>

@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * uploadPanel のクラスファイル 
+ * UploadedFiles のクラスファイル 
  * 
  * @author 自動生成
  */
-public class uploadPanelDiv extends Panel {
+public class UploadedFilesDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
@@ -21,10 +21,10 @@ public class uploadPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("UplPanel")
-    private UploadPanel UplPanel;
-    @JsonProperty("btnUpload")
-    private Button btnUpload;
+    @JsonProperty("lblTorikomiTaisho")
+    private Label lblTorikomiTaisho;
+    @JsonProperty("dgTorikomiTaiasho")
+    private DataGrid<dgTorikomiTaiasho_Row> dgTorikomiTaiasho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +33,39 @@ public class uploadPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getUplPanel
-     * @return UplPanel
+     * getlblTorikomiTaisho
+     * @return lblTorikomiTaisho
      */
-    @JsonProperty("UplPanel")
-    public UploadPanel getUplPanel() {
-        return UplPanel;
+    @JsonProperty("lblTorikomiTaisho")
+    public Label getLblTorikomiTaisho() {
+        return lblTorikomiTaisho;
     }
 
     /*
-     * setUplPanel
-     * @param UplPanel UplPanel
+     * setlblTorikomiTaisho
+     * @param lblTorikomiTaisho lblTorikomiTaisho
      */
-    @JsonProperty("UplPanel")
-    public void setUplPanel(UploadPanel UplPanel) {
-        this.UplPanel = UplPanel;
+    @JsonProperty("lblTorikomiTaisho")
+    public void setLblTorikomiTaisho(Label lblTorikomiTaisho) {
+        this.lblTorikomiTaisho = lblTorikomiTaisho;
     }
 
     /*
-     * getbtnUpload
-     * @return btnUpload
+     * getdgTorikomiTaiasho
+     * @return dgTorikomiTaiasho
      */
-    @JsonProperty("btnUpload")
-    public Button getBtnUpload() {
-        return btnUpload;
+    @JsonProperty("dgTorikomiTaiasho")
+    public DataGrid<dgTorikomiTaiasho_Row> getDgTorikomiTaiasho() {
+        return dgTorikomiTaiasho;
     }
 
     /*
-     * setbtnUpload
-     * @param btnUpload btnUpload
+     * setdgTorikomiTaiasho
+     * @param dgTorikomiTaiasho dgTorikomiTaiasho
      */
-    @JsonProperty("btnUpload")
-    public void setBtnUpload(Button btnUpload) {
-        this.btnUpload = btnUpload;
+    @JsonProperty("dgTorikomiTaiasho")
+    public void setDgTorikomiTaiasho(DataGrid<dgTorikomiTaiasho_Row> dgTorikomiTaiasho) {
+        this.dgTorikomiTaiasho = dgTorikomiTaiasho;
     }
 
     // </editor-fold>
