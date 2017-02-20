@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.Chosah
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 
 /**
  * 帳票出力用認定調査実績集計表Builderクラスです。
@@ -41,7 +40,8 @@ public final class ChosahyoJissekiIchiranChange {
                 dateFormat(entity.get認定調査実施年月日()),
                 dateFormat(entity.get認定調査受領年月日()),
                 ChosaKubun.toValue(entity.get認定調査区分コード()).get名称(),
-                NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+                entity.is訪問の種類() ? new RString("居宅") : new RString("施設"),
+                entity.get単価());
         return data;
     }
 

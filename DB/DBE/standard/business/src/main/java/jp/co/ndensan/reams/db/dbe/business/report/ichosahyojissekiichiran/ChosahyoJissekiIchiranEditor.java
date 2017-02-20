@@ -55,6 +55,7 @@ public class ChosahyoJissekiIchiranEditor implements IChosahyoJissekiIchiranEdit
         source.listChosaJissekiIchiran_9 = item.get調査入手日();
         source.listChosaJissekiIchiran_10 = item.get調査区分();
         source.listChosaJissekiIchiran_11 = item.get訪問の種類();
+        source.listChosaJissekiIchiran_12 = item.get単価();
         
         return source;
     }

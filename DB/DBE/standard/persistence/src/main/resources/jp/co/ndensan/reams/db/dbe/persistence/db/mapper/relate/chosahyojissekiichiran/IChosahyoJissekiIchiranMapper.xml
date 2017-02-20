@@ -12,9 +12,9 @@
         SELECT
         T7051."shoKisaiHokenshaNo" AS 証記載保険者番号
         , T7051."shichosonMeisho" AS 市町村名称
-        , T5601."ninteichosaItakusakiCode" AS 調査委託先コード
+        , T5202."chosaItakusakiCode" AS 調査委託先コード
         , T5910."jigyoshaMeisho" AS 事業者名称
-        , T5601."ninteichosainCode" AS 調査員コード
+        , T5202."chosainCode" AS 調査員コード
         , T5913."chosainShimei" AS 調査員氏名
         , T5101."hihokenshaNo" AS 被保険者番号
         , T5101."hihokenshaName" AS 被保険者氏名
@@ -22,10 +22,10 @@
         , T5202."ninteichosaJisshiYMD" AS 認定調査実施年月日
         , T5202."ninteichosaJuryoYMD" AS 認定調査受領年月日
         , T5202."ninteiChosaKubunCode" AS 認定調査区分コード
-        , T5202."ninteichosaIraiKaisu" AS 認定調査実施場所名称
-        , T5202."ninteichousaIraiKubunCode" AS 認定調査依頼区分コード
-        , T5601."shinseishoKanriNo" AS 申請書管理番号
-        , T5601."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
+        , T5210."shisetsuRiyoFlag" AS 訪問の種類
+        , CAST(T5031.tanka AS TEXT) AS 単価
+        , T5202."shinseishoKanriNo" AS 申請書管理番号
+        , T5202."ninteichosaRirekiNo" AS 認定調査依頼履歴番号
         , COUNT(*) OVER() as "totalCount"
         <include refid="core" />
         <include refid="order" />
@@ -33,24 +33,34 @@
 
     <sql id="core">
         FROM
-        rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS T5601
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
-        ON T5101."shinseishoKanriNo" = T5601."shinseishoKanriNo"
+        ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo"	
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
         ON T5910."shichosonCode" = T5101."shichosonCode"
-        AND T5910."ninteichosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
+        AND T5910."ninteichosaItakusakiCode" = T5202."chosaItakusakiCode"
         INNER JOIN rgdb."DbT5913ChosainJoho" AS T5913
         ON T5913."shichosonCode" = T5101."shichosonCode"
-        AND T5913."ninteiChosaItakusakiCode" = T5601."ninteichosaItakusakiCode"
-        AND T5913."ninteiChosainCode" = T5601."ninteichosainCode"
-        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
-        ON T5601."shinseishoKanriNo" = T5202."shinseishoKanriNo"
-        AND T5601."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo"
+        AND T5913."ninteiChosaItakusakiCode" = T5202."chosaItakusakiCode"
+        AND T5913."ninteiChosainCode" = T5202."chosainCode"
+        INNER JOIN rgdb."DbT5210NinteichosahyoShisetsuRiyo" AS T5210
+        ON T5210."shinseishoKanriNo" = T5202."shinseishoKanriNo"
+        AND T5210."ninteichosaRirekiNo" = T5202."ninteichosaRirekiNo"
+        AND T5210.remban = 1
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
-        ON T5201."shinseishoKanriNo" = T5601."shinseishoKanriNo"
-        AND T5201."ninteichosaIraiRirekiNo" = T5601."ninteichosaIraiRirekiNo"
+        ON T5201."shinseishoKanriNo" = T5202."shinseishoKanriNo"
+        AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo"
+        INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
+        ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
+        AND (T5031."homonShubetsu" = '1') = T5210."shisetsuRiyoFlag"
+        <if test="基準日FROMFlag">
+            AND T5031."kaishiYM" <![CDATA[<=]]> SUBSTRING(#{基準日FROM}, 1, 6)
+        </if>
+        <if test="基準日TOFlag">
+            AND SUBSTRING(#{基準日TO}, 1, 6) <![CDATA[<=]]> "shuryoYM"
+        </if>
         <where>
             <choose>
                 <when test="基準日区分 == 1">
@@ -87,10 +97,10 @@
                          separator="OR"
                          close=")">
                     (
-                    T5601."ninteichosaItakusakiCode" = #{item.ninteichosaItakusakiCode}
-                    AND T5601."ninteichosainCode" = #{item.ninteichosainCode}
-                    AND T5601."shinseishoKanriNo" = #{item.shinseishoKanriNo}
-                    AND T5601."ninteichosaIraiRirekiNo" = #{item.ninteichosaRirekiNo}
+                    T5202."chosaItakusakiCode" = #{item.ninteichosaItakusakiCode}
+                    AND T5202."chosainCode" = #{item.ninteichosainCode}
+                    AND T5202."shinseishoKanriNo" = #{item.shinseishoKanriNo}
+                    AND T5202."ninteichosaRirekiNo" = #{item.ninteichosaRirekiNo}
                     )
                 </foreach>
             </if>
@@ -98,7 +108,7 @@
     </sql>
 
     <sql id="order">
-        ORDER BY T5601."ninteichosaItakusakiCode", T5601."ninteichosainCode", T5601."shinseishoKanriNo", T5601."ninteichosaIraiRirekiNo"
+        ORDER BY T5202."chosaItakusakiCode", T5202."chosainCode", T5202."shinseishoKanriNo", T5202."ninteichosaRirekiNo"
         <if test="件数Flag">
             LIMIT #{件数}
         </if>

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.dgNinteiChosaJisseki_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -96,7 +95,8 @@ public class NinteiChosaJissekiShokaiHandler {
                     dataFormat(data.get認定調査実施年月日()),
                     dataFormat(data.get認定調査入手年月日()),
                     ChosaKubun.toValue(data.get認定調査区分コード()).get名称(),
-                    NinteiChousaIraiKubunCode.toValue(data.get認定調査依頼区分コード()).get名称(),
+                    data.is訪問の種類() ? new RString("居宅") : new RString("施設"),
+                    data.get単価(),
                     data.get申請書管理番号(),
                     data.get認定調査依頼履歴番号()
             );

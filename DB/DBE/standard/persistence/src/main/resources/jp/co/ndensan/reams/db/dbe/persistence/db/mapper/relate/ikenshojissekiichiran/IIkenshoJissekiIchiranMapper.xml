@@ -79,10 +79,10 @@
         ON T5302."ikenshoSakuseiKaisuKubun" = T5032."ikenshoSakuseiKaisuKubun"
         AND T5302."zaitakuShisetsuKubun" = T5032."zaitakuShisetsuKubun"
         <if test="基準日FROMFlag">
-            AND T5032."kaishiYM" <![CDATA[<=]]> #{基準日FROM}
+            AND T5032."kaishiYM" <![CDATA[<=]]> SUBSTRING(#{基準日FROM}, 1, 6)
         </if>
         <if test="基準日TOFlag">
-            AND T5032."shuryoYM" <![CDATA[>=]]> #{基準日TO}
+            AND T5032."shuryoYM" <![CDATA[>=]]> SUBSTRING(#{基準日TO}, 1, 6)
         </if>
         <where>
             <choose>

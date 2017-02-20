@@ -31,8 +31,8 @@ public class ChosahyoJissekiIchiranRelateEntity {
     private RString 認定調査実施年月日;
     private RString 認定調査受領年月日;
     private RString 認定調査区分コード;
-    private RString 認定調査実施場所名称;
-    private RString 認定調査依頼区分コード;
+    private boolean 訪問の種類;
+    private RString 単価;
     private RString 申請書管理番号;
     private RString 認定調査依頼履歴番号;
     private int totalCount;

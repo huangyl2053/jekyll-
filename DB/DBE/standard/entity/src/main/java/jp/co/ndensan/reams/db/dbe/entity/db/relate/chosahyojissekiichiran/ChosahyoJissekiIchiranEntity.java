@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,6 +49,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
     private final RString 調査区分;
     @CsvField(order = 13, name = "訪問の種類")
     private final RString 訪問の種類;
+    @CsvField(order = 14, name = "単価")
+    private final RString 単価;
 
     /**
      * コンストラクタです。
@@ -67,6 +68,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
      * @param 調査入手日 調査入手日
      * @param 調査区分 調査区分
      * @param 訪問の種類 訪問の種類
+     * @param 単価
      */
     public ChosahyoJissekiIchiranEntity(
             RString 保険者番号,
@@ -81,7 +83,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
             RString 調査実施日,
             RString 調査入手日,
             RString 調査区分,
-            RString 訪問の種類) {
+            RString 訪問の種類,
+            RString 単価) {
         this.保険者番号 = 保険者番号;
         this.保険者名称 = 保険者名称;
         this.調査機関コード = 調査機関コード;
@@ -95,6 +98,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査入手日 = 調査入手日;
         this.調査区分 = 調査区分;
         this.訪問の種類 = 訪問の種類;
+        this.単価 = 単価;
     }
 
     public ChosahyoJissekiIchiranEntity(ChosahyoJissekiIchiranRelateEntity relateEntity) {
@@ -110,7 +114,12 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査実施日 = dateFormat(relateEntity.get認定調査実施年月日());
         this.調査入手日 = dateFormat(relateEntity.get認定調査受領年月日());
         this.調査区分 = ChosaKubun.toValue(relateEntity.get認定調査区分コード()).get名称();
-        this.訪問の種類 = NinteiChousaIraiKubunCode.toValue(relateEntity.get認定調査依頼区分コード()).get名称();
+        if (relateEntity.is訪問の種類()) {
+            this.訪問の種類 = new RString("居宅");
+        } else {
+            this.訪問の種類 = new RString("施設");
+        }
+        this.単価 = relateEntity.get単価();
     }
     
     private static RString dateFormat(RString date) {

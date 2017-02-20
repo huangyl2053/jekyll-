@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 22 09:12:24 JST 2016 
+ * Mon Feb 20 14:35:24 JST 2017 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosaJisseki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
 
     private RString hokensha;
     private RString code;
@@ -33,6 +33,7 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
     private RString nyushubi;
     private RString chosaKubun;
     private RString homonNoShurui;
+    private RString tanka;
     private RString shinseishoKanriNo;
     private RString ninteichosaRirekiNo;
 
@@ -50,6 +51,7 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.nyushubi = RString.EMPTY;
         this.chosaKubun = RString.EMPTY;
         this.homonNoShurui = RString.EMPTY;
+        this.tanka = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.ninteichosaRirekiNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
@@ -64,11 +66,12 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.setOriginalData("nyushubi", nyushubi);
         this.setOriginalData("chosaKubun", chosaKubun);
         this.setOriginalData("homonNoShurui", homonNoShurui);
+        this.setOriginalData("tanka", tanka);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ninteichosaRirekiNo", ninteichosaRirekiNo);
     }
 
-    public dgNinteiChosaJisseki_Row(RString hokensha, RString code, RString meisho, RString ninteichosainCode, RString chosainMei, RString hihokenshaBango, RString shimei, RString iraibi, RString jisshibi, RString nyushubi, RString chosaKubun, RString homonNoShurui, RString shinseishoKanriNo, RString ninteichosaRirekiNo) {
+    public dgNinteiChosaJisseki_Row(RString hokensha, RString code, RString meisho, RString ninteichosainCode, RString chosainMei, RString hihokenshaBango, RString shimei, RString iraibi, RString jisshibi, RString nyushubi, RString chosaKubun, RString homonNoShurui, RString tanka, RString shinseishoKanriNo, RString ninteichosaRirekiNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("code", code);
@@ -82,6 +85,7 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.setOriginalData("nyushubi", nyushubi);
         this.setOriginalData("chosaKubun", chosaKubun);
         this.setOriginalData("homonNoShurui", homonNoShurui);
+        this.setOriginalData("tanka", tanka);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("ninteichosaRirekiNo", ninteichosaRirekiNo);
         this.hokensha = hokensha;
@@ -96,6 +100,7 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.nyushubi = nyushubi;
         this.chosaKubun = chosaKubun;
         this.homonNoShurui = homonNoShurui;
+        this.tanka = tanka;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.ninteichosaRirekiNo = ninteichosaRirekiNo;
     }
@@ -146,6 +151,10 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
 
     public RString getHomonNoShurui() {
         return homonNoShurui;
+    }
+
+    public RString getTanka() {
+        return tanka;
     }
 
     public RString getShinseishoKanriNo() {
@@ -214,6 +223,11 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
     public void setHomonNoShurui(RString homonNoShurui) {
         this.setOriginalData("homonNoShurui", homonNoShurui);
         this.homonNoShurui = homonNoShurui;
+    }
+
+    public void setTanka(RString tanka) {
+        this.setOriginalData("tanka", tanka);
+        this.tanka = tanka;
     }
 
     public void setShinseishoKanriNo(RString shinseishoKanriNo) {

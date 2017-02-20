@@ -37,6 +37,8 @@ public class ChosahyoJissekiIchiranReportSource implements IReportSource {
     public RString listChosaJissekiIchiran_10;
     @ReportItem(name = "listChosaJissekiIchiran_11", length = 4, order = 12)
     public RString listChosaJissekiIchiran_11;
+    @ReportItem(name = "listChosaJissekiIchiran_12", length = 9, order = 13)
+    public RString listChosaJissekiIchiran_12;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

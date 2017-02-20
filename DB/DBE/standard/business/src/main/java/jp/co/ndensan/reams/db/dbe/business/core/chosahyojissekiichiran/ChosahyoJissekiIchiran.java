@@ -135,21 +135,21 @@ public class ChosahyoJissekiIchiran {
     }
 
     /**
-     * 認定調査実施場所名称を取得します。
+     * 訪問の種類を取得します。
      *
-     * @return 認定調査実施場所名称
+     * @return 訪問の種類
      */
-    public RString get認定調査実施場所名称() {
-        return entity.get認定調査実施場所名称();
+    public boolean is訪問の種類() {
+        return entity.is訪問の種類();
     }
 
     /**
-     * 認定調査依頼区分コードを取得します。
+     * 単価を取得します。
      *
-     * @return 認定調査依頼区分コード
+     * @return 単価コード
      */
-    public RString get認定調査依頼区分コード() {
-        return entity.get認定調査依頼区分コード();
+    public RString get単価() {
+        return entity.get単価();
     }
 
     /**
