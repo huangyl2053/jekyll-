@@ -334,6 +334,12 @@ public class ShujiiMaster {
     }
 
     private ShujiiMasterCsvEntity getCsvData(dgShujiiIchiran_Row row) {
+        RString 性別コード = RString.EMPTY;
+        if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
+            性別コード = Seibetsu.男.getコード();
+        } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
+            性別コード = Seibetsu.女.getコード();
+        }
         ShujiiMasterCsvEntity data = new ShujiiMasterCsvEntity(
                 row.getShichosonCode(),
                 row.getShichoson(),
@@ -342,7 +348,7 @@ public class ShujiiMaster {
                 row.getShujiiKanaShimei(),
                 row.getShujiiIryoKikanCode().getValue(),
                 row.getShujiiIryoKikan(),
-                Seibetsu.男.get名称().equals(row.getSeibetsu()) ? Seibetsu.男.getコード() : Seibetsu.女.getコード(),
+                性別コード,
                 row.getSeibetsu(),
                 row.getShinryoka(),
                 row.getShiteii(),
