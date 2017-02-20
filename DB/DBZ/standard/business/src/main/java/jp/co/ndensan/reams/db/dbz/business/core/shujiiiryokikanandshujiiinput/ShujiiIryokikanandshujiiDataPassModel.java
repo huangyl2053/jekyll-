@@ -32,17 +32,35 @@ public class ShujiiIryokikanandshujiiDataPassModel implements Serializable {
     private RString 住所;
     private RString 電話番号;
     private RString FAX番号;
+    private RString 医療機関郵便番号;
+    private RString 医療機関住所;
+    private RString 医療機関電話番号;
+    private RString 医療機関FAX番号;
 
     @Nonnull
     public AtenaJusho get住所AsAtenaJusho() {
         return this.住所 == null ? AtenaJusho.EMPTY : new AtenaJusho(this.住所);
     }
+    
+    @Nonnull
+    public AtenaJusho get医療機関住所AsAtenaJusho(){
+        return this.医療機関住所 == null ? AtenaJusho.EMPTY : new AtenaJusho(this.医療機関住所);
+    }
 
     public TelNo get電話番号AsTelNo() {
         return this.電話番号 == null ? TelNo.EMPTY : new TelNo(this.電話番号);
+    }
+    
+    public TelNo get医療機関電話番号AsTelNo(){
+        return this.医療機関電話番号 == null ? TelNo.EMPTY : new TelNo(this.医療機関電話番号);
     }
 
     public TelNo getFAX番号AsTelNo() {
         return this.FAX番号 == null ? TelNo.EMPTY : new TelNo(this.FAX番号);
     }
+    
+    public TelNo get医療機関FAX番号AsTelNo(){
+        return this.医療機関FAX番号 == null ? TelNo.EMPTY : new TelNo(this.医療機関FAX番号);
+    }
+    
 }

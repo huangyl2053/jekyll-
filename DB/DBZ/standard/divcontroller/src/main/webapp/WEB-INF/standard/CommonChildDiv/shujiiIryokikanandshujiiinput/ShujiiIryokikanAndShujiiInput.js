@@ -162,6 +162,14 @@ var DBZ;
                 return editTypes;
             };
 
+            PublicProperties.prototype.getIryoKikanCode_required = function () {
+                return this.controls.txtIryoKikanCode().required;
+            };
+
+            PublicProperties.prototype.setIryoKikanCode_required = function (value) {
+                return this.controls.txtIryoKikanCode().required = value;
+            };
+
             PublicProperties.prototype.getShujiiCode_required = function () {
                 return this.controls.txtShujiiCode().required;
             };

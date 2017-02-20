@@ -74,17 +74,23 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
             kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get主治医医療機関コード()));
             kensakuKekkaIchiran_Row.setIryoKikanMeisho(nullToEmpty(business.get主治医医療機関名称()));
             kensakuKekkaIchiran_Row.setIryoKikanKanaMeisho(nullToEmpty(business.get主治医医療機関カナ()));
+            kensakuKekkaIchiran_Row.setIryoKikanYubinBango(business.get主治医医療機関情報_郵便番号());
             kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
             kensakuKekkaIchiran_Row.setIryoKikantelNo(nullToEmpty(business.get主治医医療機関情報_電話番号()));
+             kensakuKekkaIchiran_Row.setIryoKikanFaxNo(nullToEmpty(business.get主治医医療機関情報_FAX番号()));
             kensakuKekkaIchiran_Row.setIryoKikanJokyo(business.is主治医医療機関情報_状況フラグ()
                     ? new RString("有効") : new RString("無効"));
             kensakuKekkaIchiran_Row.getShujiiCode().setValue(nullToEmpty(business.get主治医コード()));
             kensakuKekkaIchiran_Row.setShujiiShimei(nullToEmpty(business.get主治医氏名()));
             kensakuKekkaIchiran_Row.setShujiiKanaMeisho(nullToEmpty(business.get主治医カナ()));
+            kensakuKekkaIchiran_Row.setShujiiYubinBango(business.get主治医情報_郵便番号());
+            kensakuKekkaIchiran_Row.setShujiijusho(nullToEmpty(business.get主治医情報_住所()));
+            kensakuKekkaIchiran_Row.setShujiitelNo(nullToEmpty(business.get主治医情報_電話番号()));
+            kensakuKekkaIchiran_Row.setShujiiFaxNo(nullToEmpty(business.get主治医情報_FAX番号()));
             kensakuKekkaIchiran_Row.setShujiiJoukyo(business.is主治医情報_状況フラグ()
                     ? new RString("有効") : new RString("無効"));
-            kensakuKekkaIchiran_Row.setIryoKikanYubinBango(business.get主治医医療機関情報_郵便番号());
             kensakuKekkaIchiran_Row.setShujiiShichosonCode(business.get市町村コード());
+            
             kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
         }
         div.getDgKensakuKekkaIchiran().clearSource();
@@ -113,16 +119,25 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
         if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.toString().equals(model.toString())) {
             newDataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
             newDataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
+            newDataPassModel.set郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanYubinBango());
+            newDataPassModel.set住所(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanjusho());
+            newDataPassModel.set電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikantelNo());
+            newDataPassModel.setFAX番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanFaxNo());
         } else if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.ShujiiMode.toString().equals(model.toString())) {
             newDataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
             newDataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
             newDataPassModel.set主治医コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiCode().getValue());
             newDataPassModel.set主治医氏名(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiShimei());
+            newDataPassModel.set郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiYubinBango());
+            newDataPassModel.set住所(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiijusho());
+            newDataPassModel.set電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiitelNo());
+            newDataPassModel.setFAX番号(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiFaxNo());
         }
-        newDataPassModel.set郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanYubinBango());
-        newDataPassModel.set住所(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanjusho());
-        newDataPassModel.set電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikantelNo());
-        
+        newDataPassModel.set医療機関郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanYubinBango());
+        newDataPassModel.set医療機関住所(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanjusho());
+        newDataPassModel.set医療機関電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikantelNo());
+        newDataPassModel.set医療機関FAX番号(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanFaxNo());
+
         div.setHdnDataPass(DataPassingConverter.serialize(newDataPassModel));
     }
 

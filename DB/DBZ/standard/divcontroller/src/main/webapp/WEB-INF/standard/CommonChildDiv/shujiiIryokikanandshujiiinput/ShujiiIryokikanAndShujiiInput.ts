@@ -171,6 +171,14 @@ module DBZ {
                 return editTypes;
             }
 
+            public getIryoKikanCode_required() {
+                return this.controls.txtIryoKikanCode().required;
+            }
+
+            public setIryoKikanCode_required(value) {
+                return this.controls.txtIryoKikanCode().required = value;
+            }
+
             public getShujiiCode_required() {
                 return this.controls.txtShujiiCode().required;
             }

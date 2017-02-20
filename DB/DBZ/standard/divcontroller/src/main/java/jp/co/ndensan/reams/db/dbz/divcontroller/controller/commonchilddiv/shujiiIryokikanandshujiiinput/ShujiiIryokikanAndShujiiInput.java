@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.shujiiIryokikanandshujiiinput;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -53,14 +54,11 @@ public class ShujiiIryokikanAndShujiiInput {
      * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBlur_txtIryoKikanCode(ShujiiIryokikanAndShujiiInputDiv div) {
-//        RString 主治医医療機関名称 = servie.getIryoKikanMeisho(new LasdecCode(div.getHdnShichosonCode()),
-//                div.getTxtIryoKikanCode().getValue());
-
         createHandler(div).setIryoKikanName(RString.EMPTY);
-
-        if (RString.isNullOrEmpty(div.getTxtIryoKikanCode().getValue())) {
-            div.getTxtShujiiCode().setValue(RString.EMPTY);
-            createHandler(div).setShujiiName(RString.EMPTY);
+        div.getTxtShujiiCode().setValue(RString.EMPTY);
+        createHandler(div).setShujiiName(RString.EMPTY);
+        
+        if (RString.isNullOrEmpty(div.getIryoKikanCode())) {
             return ResponseData.of(div).respond();
         }
 
@@ -96,15 +94,13 @@ public class ShujiiIryokikanAndShujiiInput {
      * @return ResponseData<ShujiiIryokikanAndShujiiInputDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiInputDiv> onBlur_txtShujiiCode(ShujiiIryokikanAndShujiiInputDiv div) {
-        //TODO n8178 城間 修正していく中で不要になったコード？ 詳細不明だが未使用＋onBlur_txtIryoKikanCodeの同様のコードにならってコメントアウト
-//        RString 主治医氏名 = servie.getShujiiName(new LasdecCode(div.getHdnShichosonCode()),
-//                div.getTxtIryoKikanCode().getValue(),
-//                div.getTxtShujiiCode().getValue());
-
         createHandler(div).setShujiiName(RString.EMPTY);
 
         if (RString.isNullOrEmpty(div.getTxtIryoKikanCode().getValue())
                 || RString.isNullOrEmpty(div.getTxtShujiiCode().getValue())) {
+            List<RString> shiteiiList = new ArrayList();
+            div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
+            div.getChkShiteii().setDisabled(false);
             return ResponseData.of(div).respond();
         }
 

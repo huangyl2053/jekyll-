@@ -147,12 +147,11 @@ public class ShujiiIryokikanAndShujiiInputHandler {
             指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
         }
         List<RString> shiteiiList = new ArrayList();
+        div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
         if (指定医フラグ) {
-            shiteiiList.add(KEY0);
             div.getChkShiteii().setDisabled(false);
         } else {
             div.getChkShiteii().setDisabled(true);
         }
-        div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
     }
 }
