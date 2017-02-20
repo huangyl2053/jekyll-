@@ -23,14 +23,19 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
 
     private final ChosaIraiIchiranhyoBodyItem item;
+    private final int index;
+    private final int pageCount;
+    private static final RString 非表示_事業者番号 = new RString("0000000000");
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link ChosaIraiIchiranhyoBodyItem}
      */
-    protected ChosaIraiIchiranhyoBodyEditor(ChosaIraiIchiranhyoBodyItem item) {
+    protected ChosaIraiIchiranhyoBodyEditor(ChosaIraiIchiranhyoBodyItem item, int index, int pageCount) {
         this.item = item;
+        this.index = index;
+        this.pageCount = pageCount;
     }
 
     /**
@@ -72,13 +77,17 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.yubinNo1 = item.getYubinNo1();
         source.jushoText = item.getJushoText();
         source.kikanNameText = item.getKikanNameText();
-        source.shimeiText = item.getShimeiText();
         source.meishoFuyo = item.getMeishoFuyo();
-        source.jigyoshaNo = item.getJigyoshaNo();
+        if (!item.getJigyoshaNo().isEmpty()) {
+            if (!非表示_事業者番号.equals(item.getJigyoshaNo())) {
+                source.lbl_jigyoshaNo = new RString("（事業者番号）");
+                source.jigyoshaNo = item.getJigyoshaNo();
+            }
+        }
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.tsuchibun2 = item.getTsuchibun2();
-        source.listIchiranhyo_1 = item.getListIchiranhyo_1();
+        source.listIchiranhyo_1 = new RString(index);
         source.listIchiranhyo_2 = item.getListIchiranhyo_2();
         source.listIchiranhyo_3 = item.getListIchiranhyo_3();
         if (item.getListIchiranhyo_4() == null || item.getListIchiranhyo_4().isEmpty()) {
@@ -104,6 +113,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         }
         source.shichosoncode = item.getShichosonCode();
         source.chosaitakusakicode = item.getChosaItakusakiCode();
+        source.pageCountForItakusaki = new RString(pageCount);
         return source;
     }
 

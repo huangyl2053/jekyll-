@@ -50,7 +50,6 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
         source.yubinNo1 = item.getYubinNo1();
         source.jushoText = item.getJushoText();
         source.kikanNameText = item.getKikanNameText();
-        source.shimeiText = item.getShimeiText();
         source.meishoFuyo = item.getMeishoFuyo();
         source.printTimeStamp = item.getPrintTimeStamp();
         source.title = item.getTitle();
@@ -65,6 +64,7 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
         source.listIchiranhyo_8 = item.getListIchiranhyo_8();
         source.listIchiranhyo_9 = item.getListIchiranhyo_9();
         source.shujiiIryokikanCode = item.getShujiiIryokikanCode();
+        source.shichosonCode = item.getShichosonCode();
         source.pageCountForIryokikan = new RString(String.valueOf(pageCount));
         return source;
     }

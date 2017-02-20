@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -19,6 +20,7 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
 
     private final List<ChosaIraiIchiranhyoBodyItem> bodyItemList;
     private final ChosaIraiIchiranhyoBodyItem bodyItem;
+    private static final int ZERO = 0;
 
     /**
      * インスタンスを生成します。
@@ -63,14 +65,28 @@ public class ChosaIraiIchiranhyoReport extends Report<ChosaIraiIchiranhyoReportS
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter) {
+        int index = ZERO;
+        int pageCount = ZERO;
         if (bodyItemList != null) {
+            RString keyBreak1 = RString.EMPTY;
+            RString keyBreak2 = RString.EMPTY;
             for (ChosaIraiIchiranhyoBodyItem item : bodyItemList) {
-                IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(item);
+                if (!keyBreak1.equals(item.getShichosonCode()) || !keyBreak2.equals(item.getChosaItakusakiCode())) {
+                    index = ZERO;
+                    pageCount = ZERO;
+                }
+                index++;
+                keyBreak1 = item.getShichosonCode();
+                keyBreak2 = item.getChosaItakusakiCode();
+                if (index % 15 == 1) {
+                    pageCount++;
+                }
+                IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(item, index, pageCount);
                 IChosaIraiIchiranhyoBuilder builder = new ChosaIraiIchiranhyoBuilderImpl(bodyEditor);
                 reportSourceWriter.writeLine(builder);
             }
         } else {
-            IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(bodyItem);
+            IChosaIraiIchiranhyoEditor bodyEditor = new ChosaIraiIchiranhyoBodyEditor(bodyItem, 1, 1);
             IChosaIraiIchiranhyoBuilder builder = new ChosaIraiIchiranhyoBuilderImpl(bodyEditor);
             reportSourceWriter.writeLine(builder);
         }

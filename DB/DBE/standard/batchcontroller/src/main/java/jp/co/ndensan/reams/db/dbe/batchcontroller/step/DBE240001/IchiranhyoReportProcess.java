@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -62,6 +63,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
     private Map<Integer, RString> 通知文Map;
     private NinteiChosaProcessParamter processParamter;
     private boolean is認定広域 = false;
+    private List<ChosaIraiIchiranhyoBodyItem> businessList;
 
     @BatchWriter
     private BatchReportWriter<ChosaIraiIchiranhyoReportSource> ichiranhyoBatchReportWriter;
@@ -106,6 +108,8 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
                     NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
                     ichiranhyoReportSourceWriter);
         }
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
     }
 
     @Override
@@ -121,16 +125,16 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
 
     @Override
     protected void usualProcess(HomonChosaIraishoRelateEntity entity) {
-        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
-        ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.
-                createFrom(business.setBodyItem(entity, 連番, ninshoshaSource, 通知文Map));
-        report.writeBy(ichiranhyoReportSourceWriter);
+        businessList.add(business.setBodyItem(entity, 連番, ninshoshaSource, 通知文Map));
         連番++;
     }
 
     @Override
     protected void afterExecute() {
+        if (!businessList.isEmpty()) {
+            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(businessList);
+            report.writeBy(ichiranhyoReportSourceWriter);
+        }
         バッチ出力条件リストの出力();
     }
 

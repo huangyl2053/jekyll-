@@ -57,7 +57,9 @@ import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -1673,6 +1675,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
                 Map<Integer, RString> 通知文
                         = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
+                ITextHenkanRule henkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE235001.getReportId());
+                henkanRule.add(new RString("＠＠＠＠＠＠＠＠"), new RDate(row.getNinteiShinseibi().toString()).wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 KaigohokenShindanMeireishoHeaderItem item = new KaigohokenShindanMeireishoHeaderItem(
                         div.getCcdBunshoNo().get文書番号(),
                         div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
@@ -1691,7 +1696,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         get名称付与(),
                         customerBarCode,
                         RString.EMPTY,
-                        通知文.get(1),
+                        henkanRule.editText(通知文.get(1)),
                         business.get被保険者番号(),
                         business.get医療機関名称(),
                         business.get主治医氏名(),
