@@ -46,8 +46,10 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -171,7 +173,7 @@ public class ShinsaKaiKekkaToroku {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
         try (CsvWriter<ShinsaKaiKekkaTorokuCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
 
             List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
@@ -349,7 +351,7 @@ public class ShinsaKaiKekkaToroku {
 
     private RString 日期転換(RDate 日期) {
         if (日期 != null) {
-            return 日期.wareki().toDateString();
+            return 日期.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
         return RString.EMPTY;
     }
