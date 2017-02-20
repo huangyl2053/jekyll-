@@ -118,6 +118,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
             UrQuestionMessages.保存の確認.getMessage().evaluate());
+    private static final QuestionMessage SAKUJOMESSAGE = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
+            UrQuestionMessages.削除の確認.getMessage().evaluate());
     private static final WarningMessage 操作可否 = new WarningMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode(),
             UrWarningMessages.未保存情報の破棄確認.getMessage().replace("審議会開催予定").evaluate());
     private final ShinsakaiKaisaiYoteiJohoManager yoteiJohoManager;
@@ -434,6 +436,142 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     /**
+     * 「削除」ボタン１<br/>
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_btnDelete1(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        this.div = div;
+        ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
+        ValidationMessageControlPairs validPairs = validationHandler.予定進捗状況チェック(INDEX_1, yoteiJohoEntityList2);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
+        }
+        delete開催予定(div);
+        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+        init();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「削除」ボタン２<br/>
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_btnDelete2(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        this.div = div;
+        ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
+        ValidationMessageControlPairs validPairs = validationHandler.予定進捗状況チェック(INDEX_2, yoteiJohoEntityList2);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
+        }
+        delete開催予定(div);
+        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+        init();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「削除」ボタン３<br/>
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_btnDelete3(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        this.div = div;
+        ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
+        ValidationMessageControlPairs validPairs = validationHandler.予定進捗状況チェック(INDEX_3, yoteiJohoEntityList2);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
+        }
+        delete開催予定(div);
+        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+        init();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「削除」ボタン４<br/>
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_btnDelete4(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        this.div = div;
+        ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
+        ValidationMessageControlPairs validPairs = validationHandler.予定進捗状況チェック(INDEX_4, yoteiJohoEntityList2);
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
+        }
+        delete開催予定(div);
+        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+        init();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 開催予定削除処理<br/>
+     *
+     * @param div ShinsakaiKaisaiYoteiTorokuDiv
+     */
+    private void delete開催予定(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
+                = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
+
+        dgKaisaiYoteiNyuryokuran_Row row = div.getDgKaisaiYoteiNyuryokuran().getActiveRow();
+        RString 合議体番号 = row.getKaisaiGogitai1().getValue();
+        RString 開催時間 = getFormat時間枠(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiTime().getValue());
+
+        for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
+            if (new RString(entity.get日付().toString()).equals(div.getTxtSeteibi().getValue().toDateString())
+                    && get検索時間枠(entity.get開始予定時刻(), entity.get終了予定時刻()).equals(開催時間)
+                    && entity.get合議体番号() == Integer.valueOf(合議体番号.toString())) {
+                ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(entity.get開催番号());
+                ShinsakaiKaisaiYoteiJoho yoteiJoho = models.get(key);
+                ShinsakaiKaisaiYoteiJohoBuilder builder = yoteiJoho.createBuilderForEdit();
+                yoteiJoho.toEntity().setState(EntityDataState.Deleted);
+                yoteiTorokuManager.insertOrUpdate(builder.build().deleted());
+
+                delete割当委員情報(entity, 合議体番号);
+            }
+        }
+    }
+
+    /**
+     * 割当委員情報の削除
+     *
+     * @param entity ShinsakaiKaisaiYoteiJohoParameter
+     * @param 合議体番号 RString
+     */
+    private void delete割当委員情報(ShinsakaiKaisaiYoteiJohoParameter entity, RString 合議体番号) {
+        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
+                = gogitaiManager.get合議体情報By開催予定日(new RString(entity.get日付().toString()), 合議体番号);
+        for (GogitaiJohoShinsaRelateBusiness 審査会委員 : gogitaiBusinessList.records()) {
+            ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(entity.get開催番号(), 審査会委員.get介護認定審査会委員コード());
+            ShinsakaiWariateIinJoho2Builder builderIinJoho = wariateIinJoho.createBuilderForEdit();
+            yoteiTorokuManager.deleteShinsakai(builderIinJoho.build().toEntity());
+        }
+    }
+
+    /**
      * 「開催予定詳細をクリアする」ボタン。<br/>
      *
      * @param div ShinsakaiKaisaiYoteiTorokuDiv
@@ -488,7 +626,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_BtnWeekCopy(ShinsakaiKaisaiYoteiTorokuDiv div) {
 
         FlexibleYearMonth 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).getYearMonth();
-        FlexibleYearMonth 週コピー実施翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
+        FlexibleYearMonth 週コピー実施翌月更新月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class
+        );
         if (表示月.equals(週コピー実施翌月更新月)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(
@@ -504,12 +643,16 @@ public class ShinsakaiKaisaiYoteiToroku {
         this.div = div;
         ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
         ValidationMessageControlPairs validPairs = getWeekCopyCheck(validationHandler);
-        if (validPairs.iterator().hasNext()) {
+
+        if (validPairs.iterator()
+                .hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -554,8 +697,11 @@ public class ShinsakaiKaisaiYoteiToroku {
                 set開催予定入力欄(div.getTxtSeteibi().getValue());
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
-        return ResponseData.of(div).respond();
+
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(
+                new RString("btnHozon"), false);
+        return ResponseData.of(div)
+                .respond();
 
     }
 
@@ -632,7 +778,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getBtnToroku().setDisabled(false);
             set番号(div);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
-                    = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
+                    = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class
+                    );
             for (ShinsakaiKaisaiYoteiJohoParameter parameter : yoteiJohoEntityList2) {
                 if (!parameter.is存在()) {
                     ShinsakaiKaisaiYoteiJoho yoteiJoho = new ShinsakaiKaisaiYoteiJoho(parameter.get開催番号().trim());
@@ -678,22 +825,34 @@ public class ShinsakaiKaisaiYoteiToroku {
                     yoteiTorokuManager.insertOrUpdate(builder.build());
                 }
             }
+
             init();
 
-            div.getDgShinsakaiKaisaiYoteiIchiran().setDisabled(true);
-            div.getTxtCopyFrom().setVisible(false);
-            div.getTxtCopyTo().setVisible(false);
-            div.getLblCopyFrom().setDisplayNone(true);
-            div.getLblCopyTo().setDisplayNone(true);
-            div.getBtnWeekCopy().setDisplayNone(true);
-            div.getShinsakaiKaisaiYoteiIchiran().getTxtYearMonth().clearValue();
-            div.getDgShinsakaiKaisaiYoteiIchiran().setWidth(width_1210);
-            div.getShinsakaiKaisaiYoteiIchiran().setWidth(width_1225);
+            div.getDgShinsakaiKaisaiYoteiIchiran()
+                    .setDisabled(true);
+            div.getTxtCopyFrom()
+                    .setVisible(false);
+            div.getTxtCopyTo()
+                    .setVisible(false);
+            div.getLblCopyFrom()
+                    .setDisplayNone(true);
+            div.getLblCopyTo()
+                    .setDisplayNone(true);
+            div.getBtnWeekCopy()
+                    .setDisplayNone(true);
+            div.getShinsakaiKaisaiYoteiIchiran()
+                    .getTxtYearMonth().clearValue();
+            div.getDgShinsakaiKaisaiYoteiIchiran()
+                    .setWidth(width_1210);
+            div.getShinsakaiKaisaiYoteiIchiran()
+                    .setWidth(width_1225);
 
-            div.getCcdKanryoMessege().setMessage(new RString(
-                    UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessege()
+                    .setMessage(new RString(
+                                    UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
             FlowParameterAccessor.merge(FlowParameters.of(new RString("key"), new RString("Kanryo")));
-            return ResponseData.of(div).setState(DBE5140001StateName.完了);
+            return ResponseData.of(div)
+                    .setState(DBE5140001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
@@ -785,12 +944,15 @@ public class ShinsakaiKaisaiYoteiToroku {
                 entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号).replace(BATU, 合議体番号));
             }
             yoteiJohoEntityList2.addAll(shinkiList);
+
         }
     }
 
     private boolean isKoshin(List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuranRowList) {
-        if (ViewStateHolder.get(ViewStateKeys.押下フラグ, RString.class).equals(登録ボタン押下)) {
+        if (ViewStateHolder.get(ViewStateKeys.押下フラグ, RString.class
+        ).equals(登録ボタン押下)) {
             ViewStateHolder.put(ViewStateKeys.押下フラグ, 登録ボタン未押下);
+
             return false;
         };
         for (dgKaisaiYoteiNyuryokuran_Row dgNyuryokuRow : nyuryokuranRowList) {
@@ -972,15 +1134,19 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_月;
 
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
-        FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class);
-        if (表示月.getYearMonth().equals(当月更新有りの月)) {
+        FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class
+        );
+        if (表示月.getYearMonth()
+                .equals(当月更新有りの月)) {
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_当月分);
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
                 = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
+
         set合議体情報(gogitaiBusinessList);
+
         clear入力();
     }
 
@@ -997,15 +1163,19 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_月;
 
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
-        FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
-        if (表示月.getYearMonth().equals(翌月更新有りの月)) {
+        FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class
+        );
+        if (表示月.getYearMonth()
+                .equals(翌月更新有りの月)) {
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_翌月分);
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
                 = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
+
         set合議体情報(gogitaiBusinessList);
+
         clear入力();
     }
 
@@ -1016,18 +1186,24 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_月;
 
         FlexibleDate 表示月 = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
-        FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class);
+        FlexibleYearMonth 翌月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_翌月更新月, FlexibleYearMonth.class
+        );
         FlexibleYearMonth 当月更新有りの月 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報_当月更新月, FlexibleYearMonth.class);
-        if (表示月.getYearMonth().equals(翌月更新有りの月)) {
+
+        if (表示月.getYearMonth()
+                .equals(翌月更新有りの月)) {
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_翌月分);
-        } else if (表示月.getYearMonth().equals(当月更新有りの月)) {
+        } else if (表示月.getYearMonth()
+                .equals(当月更新有りの月)) {
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(審査会開催予定一覧_当月分);
         } else {
             set介護認定審査会開催予定一覧(date2.getYearMonth().toDateString());
         }
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
                 = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
+
         set合議体情報(gogitaiBusinessList);
+
         clear入力();
     }
 

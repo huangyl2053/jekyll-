@@ -120,9 +120,7 @@ public class ShinsakaiKaisaiYoteiTorokuManager {
      */
     @Transaction
     public int insertOrUpdate(ShinsakaiKaisaiYoteiJoho 介護認定審査会開催予定情報) {
-        if (!介護認定審査会開催予定情報.hasChanged()) {
-            return 0;
-        }
+        requireNonNull(介護認定審査会開催予定情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報エンティティ"));
         return dbt5501dac.save(介護認定審査会開催予定情報.toEntity());
     }
 
@@ -136,5 +134,17 @@ public class ShinsakaiKaisaiYoteiTorokuManager {
     public boolean insertOrUpdateShinsakai(DbT5503ShinsakaiWariateIinJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
         return 0 < dbt5503dac.save(entity);
+    }
+
+    /**
+     * 介護認定審査会開催予定情報{@link ShinsakaiKaisaiYoteiJoho}を削除します。
+     *
+     * @param entity DbT5503ShinsakaiWariateIinJohoEntity
+     * @return 登録/更新件数 登録/更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean deleteShinsakai(DbT5503ShinsakaiWariateIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
+        return 0 < dbt5503dac.deletePhysical(entity);
     }
 }

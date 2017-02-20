@@ -97,7 +97,7 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
     public int save(DbT5501ShinsakaiKaisaiYoteiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報エンティティ"));
 
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 
     /**
