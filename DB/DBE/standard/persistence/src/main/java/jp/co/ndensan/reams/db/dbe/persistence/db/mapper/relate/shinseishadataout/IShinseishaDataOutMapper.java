@@ -28,26 +28,23 @@ public interface IShinseishaDataOutMapper {
     /**
      * 基本情報を抽出します。
      *
-     * @param parameter ShinseishaDataOutMybatisParameter
      * @return KihonJohoEntityのリスト
      */
-    List<KihonJohoEntity> select基本情報(ShinseishaDataOutMybatisParameter parameter);
+    List<KihonJohoEntity> select基本情報();
 
     /**
      * 調査票情報を抽出します。
      *
-     * @param parameter ShinseishaDataOutMybatisParameter
      * @return ChosahyoEntityのリスト
      */
-    List<ChosahyoEntity> select調査票情報(ShinseishaDataOutMybatisParameter parameter);
+    List<ChosahyoEntity> select調査票情報();
 
     /**
      * 意見書情報を抽出します。
      *
-     * @param parameter ShinseishaDataOutMybatisParameter
      * @return IkenshoJohoEntityのリスト
      */
-    List<IkenshoJohoEntity> select意見書情報(ShinseishaDataOutMybatisParameter parameter);
+    List<IkenshoJohoEntity> select意見書情報();
 
     /**
      * 認定調査票サービスの状況を抽出します。

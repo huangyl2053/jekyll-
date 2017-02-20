@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,23 +19,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 public class ShinseishaDataOutProcessParameter implements IBatchProcessParameter {
 
+    private final ShinseiKensakuMapperParameter 検索条件;
     private final List<RString> 申請書管理番号リスト;
 
     /**
      * コンストラクタです。
      *
+     * @param 検索条件 検索条件
      * @param 申請書管理番号リスト 申請書管理番号リスト
      */
-    public ShinseishaDataOutProcessParameter(List<RString> 申請書管理番号リスト) {
+    public ShinseishaDataOutProcessParameter(ShinseiKensakuMapperParameter 検索条件,
+            List<RString> 申請書管理番号リスト) {
+        this.検索条件 = 検索条件;
         this.申請書管理番号リスト = 申請書管理番号リスト;
-    }
-
-    /**
-     * Mybatisパラメータを生成します。
-     *
-     * @return ShinseishaDataOutMybatisParameter
-     */
-    public ShinseishaDataOutMybatisParameter toMybatisParameter() {
-        return new ShinseishaDataOutMybatisParameter(申請書管理番号リスト);
     }
 }

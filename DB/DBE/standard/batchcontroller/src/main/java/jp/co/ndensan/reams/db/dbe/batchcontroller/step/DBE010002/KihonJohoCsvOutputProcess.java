@@ -70,7 +70,7 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override

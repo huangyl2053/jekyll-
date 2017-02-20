@@ -117,7 +117,7 @@ public class ChosahyoJohoCsvOutputProcess extends BatchProcessBase<ChosahyoEntit
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override

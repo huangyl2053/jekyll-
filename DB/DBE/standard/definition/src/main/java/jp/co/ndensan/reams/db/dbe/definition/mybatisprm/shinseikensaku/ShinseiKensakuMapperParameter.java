@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.util.RStrings;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinseiKensakuMapperParameter {
+public class ShinseiKensakuMapperParameter implements IMyBatisParameter {
 
     // 被保険者番号
     private RString hihokenshaNo;
@@ -297,7 +298,8 @@ public class ShinseiKensakuMapperParameter {
     private List<ShinseishoKanriNo> shinseishoKanriNos;
 
     /**
-     * 検索に用いる被保険者氏名を設定します。 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
+     * 検索に用いる被保険者氏名を設定します。 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
+     * 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
      *
      * @param hihokenshaName 検索に用いる被保険者氏名
      */

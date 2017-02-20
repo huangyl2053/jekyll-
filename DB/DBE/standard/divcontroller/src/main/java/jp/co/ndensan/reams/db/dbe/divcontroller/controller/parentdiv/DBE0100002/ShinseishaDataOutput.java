@@ -19,10 +19,8 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFind
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -130,17 +128,9 @@ public class ShinseishaDataOutput {
      */
     public ResponseData<DBE010002_ShinseishaDataOutParameter> createBatchParameter(ShinseishaDataOutputDiv div) {
         RString 被保険者番号 = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
-        SearchResult<ShinseiKensakuBusiness> searchResult
-                = ShinseiKensakuFinder.createInstance().getShinseiKensaku_noLimit(getHandler(div).createSearchParameter(被保険者番号));
-        if (searchResult.totalCount() == 0) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         DBE010002_ShinseishaDataOutParameter parameter = new DBE010002_ShinseishaDataOutParameter();
-        List<RString> 申請書管理番号リスト = new ArrayList<>();
-        for (ShinseiKensakuBusiness business : searchResult.records()) {
-            申請書管理番号リスト.add(business.get申請書管理番号().value());
-        }
-        parameter.set申請書管理番号リスト(申請書管理番号リスト);
+        parameter.set検索実行(true);
+        parameter.set検索条件(getHandler(div).createSearchParameter(被保険者番号));
         parameter.set基本情報出力(div.getChkOutputCsv().getSelectedKeys().contains(基本情報));
         parameter.set調査票情報出力(div.getChkOutputCsv().getSelectedKeys().contains(調査票情報));
         parameter.set意見書情報出力(div.getChkOutputCsv().getSelectedKeys().contains(意見書情報));
@@ -159,6 +149,7 @@ public class ShinseishaDataOutput {
         for (dgShinseiJoho_Row row : div.getDgShinseiJoho().getSelectedItems()) {
             申請書管理番号リスト.add(row.getShinseishoKanriNo());
         }
+        parameter.set検索実行(false);
         parameter.set申請書管理番号リスト(申請書管理番号リスト);
         parameter.set基本情報出力(div.getChkOutputCsv().getSelectedKeys().contains(基本情報));
         parameter.set調査票情報出力(div.getChkOutputCsv().getSelectedKeys().contains(調査票情報));
