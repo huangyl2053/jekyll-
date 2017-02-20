@@ -680,15 +680,17 @@ public class ShinseishaDataOutputHandler {
     }
 
     private RString get一次判定結果(ShinseiKensakuBusiness business) {
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.asCode().equals(business.get厚労省IF識別コード())
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.asCode().equals(business.get厚労省IF識別コード())) {
-            return IchijiHanteiKekkaCode09.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.asCode().equals(business.get厚労省IF識別コード())) {
-            return IchijiHanteiKekkaCode06.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.asCode().equals(business.get厚労省IF識別コード())) {
-            return IchijiHanteiKekkaCode02.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.asCode().equals(business.get厚労省IF識別コード())) {
-            return IchijiHanteiKekkaCode99.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
+        if (business.get要介護認定一次判定結果コード() != null && business.get要介護認定一次判定結果コード().value().trim().isEmpty()) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.asCode().equals(business.get厚労省IF識別コード())
+                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.asCode().equals(business.get厚労省IF識別コード())) {
+                return IchijiHanteiKekkaCode09.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.asCode().equals(business.get厚労省IF識別コード())) {
+                return IchijiHanteiKekkaCode06.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.asCode().equals(business.get厚労省IF識別コード())) {
+                return IchijiHanteiKekkaCode02.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.asCode().equals(business.get厚労省IF識別コード())) {
+                return IchijiHanteiKekkaCode99.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
+            }
         }
         return RString.EMPTY;
     }

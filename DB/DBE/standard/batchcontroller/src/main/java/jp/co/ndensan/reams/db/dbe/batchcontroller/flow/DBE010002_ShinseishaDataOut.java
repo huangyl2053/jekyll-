@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002.ChosahyoJohoCsv
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002.IkenshoJohoCsvOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002.KensakuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002.KihonJohoCsvOutputProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002.TempTableCreateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE010002.DBE010002_ShinseishaDataOutParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class DBE010002_ShinseishaDataOut extends BatchFlowBase<DBE010002_ShinseishaDataOutParameter> {
 
     private static final String KENSAKU = "kensaku";
-    private static final String TEMPTABLE_CREATE = "tempTableCreate";
     private static final String KIHONJOHO_CSVOUTPUT = "kihonJohoCsvOutput";
     private static final String CHOSAHYOJOHO_CSVOUTPUT = "chosahyoJohoCsvOutput";
     private static final String IKENSHOJOHO_CSVOUTPUT = "ikenshoJohoCsvOutput";
@@ -32,8 +30,6 @@ public class DBE010002_ShinseishaDataOut extends BatchFlowBase<DBE010002_Shinsei
     protected void defineFlow() {
         if (getParameter().is検索実行()) {
             executeStep(KENSAKU);
-        } else {
-            executeStep(TEMPTABLE_CREATE);
         }
         if (getParameter().is基本情報出力()) {
             executeStep(KIHONJOHO_CSVOUTPUT);
@@ -49,13 +45,6 @@ public class DBE010002_ShinseishaDataOut extends BatchFlowBase<DBE010002_Shinsei
     @Step(KENSAKU)
     protected IBatchFlowCommand kensaku() {
         return loopBatch(KensakuProcess.class)
-                .arguments(getParameter().toProcessParameter())
-                .define();
-    }
-
-    @Step(TEMPTABLE_CREATE)
-    protected IBatchFlowCommand tempTableCreate() {
-        return simpleBatch(TempTableCreateProcess.class)
                 .arguments(getParameter().toProcessParameter())
                 .define();
     }

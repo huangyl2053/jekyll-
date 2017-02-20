@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho09AEucEntity
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho09BEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho99AEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout.ShinseishaDataOutProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.IkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010003_IkenshoJoho02AEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010003_IkenshoJoho06AEucEntity;
@@ -88,6 +89,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
     private FileSpoolManager fileSpoolManager_06A;
     private FileSpoolManager fileSpoolManager_02A;
     private FileSpoolManager fileSpoolManager_99A;
+    private ShinseishaDataOutProcessParameter processParameter;
     private IShinseishaDataOutMapper mapper;
     private boolean exist09B;
     private boolean exist09A;
@@ -114,7 +116,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMybatisParameter());
     }
 
     @Override
@@ -220,6 +222,9 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
 
     private void output出力条件表() {
         List<RString> 出力条件 = new ArrayList();
+        if (!processParameter.is検索実行()) {
+            申請書管理番号リスト = processParameter.get申請書管理番号リスト();
+        }
         if (!申請書管理番号リスト.isEmpty()) {
             RStringBuilder builder = new RStringBuilder();
             builder.append(出力条件タイトル_申請書管理番号);

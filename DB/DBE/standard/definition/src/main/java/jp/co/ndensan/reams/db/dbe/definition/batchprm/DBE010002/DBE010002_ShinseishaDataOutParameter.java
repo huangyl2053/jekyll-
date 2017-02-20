@@ -52,6 +52,6 @@ public class DBE010002_ShinseishaDataOutParameter extends BatchParameterBase {
      * @return ShinseishaDataOutProcessParameter
      */
     public ShinseishaDataOutProcessParameter toProcessParameter() {
-        return new ShinseishaDataOutProcessParameter(検索条件, 申請書管理番号リスト);
+        return new ShinseishaDataOutProcessParameter(検索実行, 検索条件, 申請書管理番号リスト);
     }
 }

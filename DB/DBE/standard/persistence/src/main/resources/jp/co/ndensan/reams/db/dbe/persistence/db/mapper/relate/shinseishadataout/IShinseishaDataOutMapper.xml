@@ -3,7 +3,8 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseishadataout.IShinseishaDataOutMapper">
 
-    <select resultOrdered="true" id="select基本情報" resultMap="resultMap_KihonJohoEntity" fetchSize="1000">
+    <select resultOrdered="true" id="select基本情報" resultMap="resultMap_KihonJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter" fetchSize="1000">
         SELECT
             "DbT5101NinteiShinseiJoho"."shinseishoKanriNo",
             "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo",
@@ -112,9 +113,14 @@
             "DbT7211GaibuRenkeiDataoutputJoho"."shinsakaiKekkaJohoChushutsuYMD",
             "DbT7211GaibuRenkeiDataoutputJoho"."centerSoshinChushutsuYMD"
         FROM
+            <if test="検索実行">
             "OutputTaishoTemp"
             INNER JOIN rgdb."DbT5101NinteiShinseiJoho"
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "OutputTaishoTemp"."shinseishoKanriNo"
+            </if>
+            <if test="!検索実行">
+            rgdb."DbT5101NinteiShinseiJoho"
+            </if>
             INNER JOIN rgdb."DbT5105NinteiKanryoJoho"
                 ON "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
@@ -201,13 +207,21 @@
                 ON "Zenkai_DbT5510IchiGojiHanteiKekkaJoho"."shinseishoKanriNo" = "DbT5121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo"
             LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS "Zenkai_DbT5102NinteiKekkaJoho"
                 ON "Zenkai_DbT5102NinteiKekkaJoho"."shinseishoKanriNo" = "DbT5121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo"
+        <if test="!検索実行">
+        WHERE
+            "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" IN
+            <foreach collection="申請書管理番号リスト" item="申請書管理番号" open="(" separator="," close=")">
+            #{申請書管理番号}
+            </foreach>
+        </if>
         ORDER BY
             "DbT7051KoseiShichosonMaster"."shichosonCode",
             "DbT5101NinteiShinseiJoho"."hihokenshaNo",
             "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" DESC
     </select>
 
-    <select resultOrdered="true" id="select調査票情報" resultMap="resultMap_ChosahyoEntity" fetchSize="1000">
+    <select resultOrdered="true" id="select調査票情報" resultMap="resultMap_ChosahyoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter" fetchSize="1000">
         SELECT
             "DbT5101NinteiShinseiJoho"."shinseishoKanriNo",
             "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo",
@@ -273,9 +287,14 @@
             "DbT5116IchijiHanteiKekkaJoho"."suiteiKyufuKubunCode",
             "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode"
         FROM
+            <if test="検索実行">
             "OutputTaishoTemp"
             INNER JOIN rgdb."DbT5101NinteiShinseiJoho"
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "OutputTaishoTemp"."shinseishoKanriNo"
+            </if>
+            <if test="!検索実行">
+            rgdb."DbT5101NinteiShinseiJoho"
+            </if>
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
                 ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
             LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS "Shinsei_DbT5910NinteichosaItakusakiJoho"
@@ -329,13 +348,21 @@
                                         )
                       ) AS "DbT5203NinteichosahyoKihonChosa"
                 ON "DbT5203NinteichosahyoKihonChosa"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        <if test="!検索実行">
+        WHERE
+            "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" IN
+            <foreach collection="申請書管理番号リスト" item="申請書管理番号" open="(" separator="," close=")">
+            #{申請書管理番号}
+            </foreach>
+        </if>
         ORDER BY
             "DbT7051KoseiShichosonMaster"."shichosonCode",
             "DbT5101NinteiShinseiJoho"."hihokenshaNo",
             "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" DESC
     </select>
 
-    <select resultOrdered="true" id="select意見書情報" resultMap="resultMap_IkenshoJohoEntity" fetchSize="1000">
+    <select resultOrdered="true" id="select意見書情報" resultMap="resultMap_IkenshoJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter" fetchSize="1000">
         SELECT
             "DbT5101NinteiShinseiJoho"."shinseishoKanriNo",
             "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo",
@@ -402,9 +429,14 @@
             "DbT5302ShujiiIkenshoJoho"."ikenshoMemo",
             "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode"
         FROM
+            <if test="検索実行">
             "OutputTaishoTemp"
             INNER JOIN rgdb."DbT5101NinteiShinseiJoho"
                 ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "OutputTaishoTemp"."shinseishoKanriNo"
+            </if>
+            <if test="!検索実行">
+            rgdb."DbT5101NinteiShinseiJoho"
+            </if>
             INNER JOIN rgdb."DbT7051KoseiShichosonMaster"
                 ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
             LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "Shinsei_DbT5911ShujiiIryoKikanJoho"
@@ -446,6 +478,13 @@
                 ON "Nyushu_DbT5912ShujiiJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
                    AND "Nyushu_DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5302ShujiiIkenshoJoho"."shujiiIryoKikanCode"
                    AND "Nyushu_DbT5912ShujiiJoho"."shujiiCode" = "DbT5302ShujiiIkenshoJoho"."shujiiCode"
+        <if test="!検索実行">
+        WHERE
+            "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" IN
+            <foreach collection="申請書管理番号リスト" item="申請書管理番号" open="(" separator="," close=")">
+            #{申請書管理番号}
+            </foreach>
+        </if>
         ORDER BY
             "DbT7051KoseiShichosonMaster"."shichosonCode",
             "DbT5101NinteiShinseiJoho"."hihokenshaNo",
