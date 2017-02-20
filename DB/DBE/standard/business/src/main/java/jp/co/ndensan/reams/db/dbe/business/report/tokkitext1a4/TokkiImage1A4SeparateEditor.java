@@ -198,17 +198,17 @@ public final class TokkiImage1A4SeparateEditor {
                 : yokaigoNinteiJohoTeikyoEntity.get審査会開催日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getDay());
         ninteiEntity.set厚労省IF識別コード(yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード());
-        setBodyItem_Sub(特記事項List, ninteiEntity, 特記事項マスキング区分, イメージID);
+        setBodyItem_Sub(yokaigoNinteiJohoTeikyoEntity, 特記事項List, ninteiEntity, 特記事項マスキング区分, イメージID);
         return ninteiEntity;
     }
 
-    private static TokkiText1A4Entity setBodyItem_Sub(List<NinteichosaRelate> entity,
-            TokkiText1A4Entity ninteiEntity, RString 特記事項マスキング区分, RDateTime イメージID) {
+    private static TokkiText1A4Entity setBodyItem_Sub(YokaigoNinteiJohoTeikyoEntity yokaigoNinteiJohoTeikyoEntity,
+            List<NinteichosaRelate> entity, TokkiText1A4Entity ninteiEntity, RString 特記事項マスキング区分, RDateTime イメージID) {
         List<TokkiTextEntity> 特記事項List = new ArrayList<>();
         List<TokkiTextEntity> 特記事項番号リスト = new ArrayList<>();
         List<TokkiTextEntity> イメージリスト = new ArrayList<>();
         List<TokkiTextEntity> 全イメージリスト = new ArrayList<>();
-        RString 共有ファイル名 = ninteiEntity.get保険者番号().concat(ninteiEntity.get被保険者番号());
+        RString 共有ファイル名 = yokaigoNinteiJohoTeikyoEntity.get保険者番号().concat(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
         RString path = copySharedFiles(イメージID, 共有ファイル名);
         ninteiEntity.set概況調査特記事項イメージ(getImageFile_C0007(path, 特記事項マスキング区分));
         for (int i = 0; i < entity.size(); i++) {
