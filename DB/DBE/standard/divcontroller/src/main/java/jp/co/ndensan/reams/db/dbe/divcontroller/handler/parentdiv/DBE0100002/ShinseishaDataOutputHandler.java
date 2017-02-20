@@ -680,7 +680,7 @@ public class ShinseishaDataOutputHandler {
     }
 
     private RString get一次判定結果(ShinseiKensakuBusiness business) {
-        if (business.get要介護認定一次判定結果コード() != null && business.get要介護認定一次判定結果コード().value().trim().isEmpty()) {
+        if (business.get要介護認定一次判定結果コード() != null && !business.get要介護認定一次判定結果コード().value().trim().isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.asCode().equals(business.get厚労省IF識別コード())
                     || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.asCode().equals(business.get厚労省IF識別コード())) {
                 return IchijiHanteiKekkaCode09.toValue(business.get要介護認定一次判定結果コード().value()).get名称();
