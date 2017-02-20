@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsataishodataoutput.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5180001.ShinsaTaishoDataDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5180001.ShinsaTaishoDataValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -55,6 +56,7 @@ public class ShinsaTaishoData {
     public ResponseData<ShinsaTaishoDataOutPutBatchParammeter> onClick_btnAction(ShinsaTaishoDataDiv div) {
         ShinsaTaishoDataOutPutBatchParammeter parameter = new ShinsaTaishoDataOutPutBatchParammeter();
         parameter.setKaisaiBangou(div.getCcdShinsakaiIchiranList().get開催番号List().get(0));
+        parameter.setTempPath(Directory.createTmpDirectory());
         return ResponseData.of(parameter).respond();
     }
 

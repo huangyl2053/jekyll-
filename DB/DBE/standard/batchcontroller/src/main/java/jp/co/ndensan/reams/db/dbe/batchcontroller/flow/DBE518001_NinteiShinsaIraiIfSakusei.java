@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.Co
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.DbT5501UpdateProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.GaikyoChosaDataOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.KihonChosaKomokuDataOutputProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.ShinsakaiFileOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.ShinsakaiIinJohoOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput.ShinsakaiJohoOutputProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsataishodataoutput.ShinsaTaishoDataOutPutBatchParammeter;
@@ -28,6 +29,7 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
     private static final String 基本調査項目データ出力 = "基本調査項目データ出力";
     private static final String 概況調査データ出力 = "概況調査データ出力";
     private static final String コードマスタ出力 = "コードマスタ出力";
+    private static final String ファイル出力 = "ファイル出力";
     private static final String DbT5501更新 = "DbT5501更新";
 
     @Override
@@ -37,6 +39,7 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
         executeStep(概況調査データ出力);
         executeStep(基本調査項目データ出力);
         executeStep(コードマスタ出力);
+        executeStep(ファイル出力);
         executeStep(DbT5501更新);
 
     }
@@ -93,6 +96,17 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
     @Step(コードマスタ出力)
     protected IBatchFlowCommand callコードマスタ出力() {
         return simpleBatch(CodeMasterOutputProcess.class)
+                .arguments(getParameter().toShinsaTaishoDataOutProcessParammeter()).define();
+    }
+
+    /**
+     * コードマスタCSV出力Processです。
+     *
+     * @return コードマスタCSV出力
+     */
+    @Step(ファイル出力)
+    protected IBatchFlowCommand callファイル出力() {
+        return simpleBatch(ShinsakaiFileOutputProcess.class)
                 .arguments(getParameter().toShinsaTaishoDataOutProcessParammeter()).define();
     }
 

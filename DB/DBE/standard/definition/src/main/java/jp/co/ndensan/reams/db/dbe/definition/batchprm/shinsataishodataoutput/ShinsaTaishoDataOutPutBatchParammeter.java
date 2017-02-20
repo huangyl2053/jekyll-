@@ -24,7 +24,10 @@ public class ShinsaTaishoDataOutPutBatchParammeter extends BatchParameterBase {
 
     private static final String KEY_KAISAIBANGOU = "kaisaiBangou";
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
+    private static final String KEY_TEMPPATH = "tempPath";
+    @BatchParameter(key = KEY_TEMPPATH, name = "テンプレートパス")
     private RString kaisaiBangou;
+    private RString tempPath;
 
     /**
      * バーチのパラメータを作成します。
@@ -32,6 +35,6 @@ public class ShinsaTaishoDataOutPutBatchParammeter extends BatchParameterBase {
      * @return ShinsaTaishoDataOutProcessParammeter
      */
     public ShinsaTaishoDataOutPutProcessParammeter toShinsaTaishoDataOutProcessParammeter() {
-        return new ShinsaTaishoDataOutPutProcessParammeter(kaisaiBangou);
+        return new ShinsaTaishoDataOutPutProcessParammeter(kaisaiBangou, tempPath);
     }
 }
