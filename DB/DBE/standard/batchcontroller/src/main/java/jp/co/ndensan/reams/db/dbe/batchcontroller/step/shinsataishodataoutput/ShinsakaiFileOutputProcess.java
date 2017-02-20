@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class ShinsakaiFileOutputProcess extends SimpleBatchProcessBase {
 
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518006");
     private static final EucEntityId EUC_ENTITY_ID_SHINSAKAIJOHO = new EucEntityId("DBE518001");
     private static final EucEntityId EUC_ENTITY_ID_IINJOHO = new EucEntityId("DBE518002");
     private static final EucEntityId EUC_ENTITY_ID_GAIKYO = new EucEntityId("DBE518003");
