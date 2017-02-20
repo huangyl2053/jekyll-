@@ -26,8 +26,7 @@ public class ShinsakaiShiryoUpdateProcessParameter implements IBatchProcessParam
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public ShinsakaiShiryoUpdateProcessParameter(
-            RString shinsakaiKaisaiNo) {
+    public ShinsakaiShiryoUpdateProcessParameter(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 

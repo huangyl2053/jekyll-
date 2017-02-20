@@ -26,8 +26,7 @@ public class ShinsakaiShiryoUpdateMyBatisParameter implements IMyBatisParameter 
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public ShinsakaiShiryoUpdateMyBatisParameter(
-            RString shinsakaiKaisaiNo) {
+    public ShinsakaiShiryoUpdateMyBatisParameter(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 }

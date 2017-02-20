@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.Shinsaka
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
+import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -23,15 +24,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0150-200 linghuhang
  */
-public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5501ShinsakaiKaisaiYoteiJohoEntity> {
+public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5502ShinsakaiWariateJohoEntity> {
 
     private static final RString SELECT_SHINSAKAIWARIATEJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getSelectByKey");
+            + ".mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper.getSelectByKey_DbT5502ShinsakaiWariateJoho");
     private ShinsakaiShiryoUpdateProcessParameter paramter;
     private IShiryoShinsakaiIinMapper mapper;
 
     @BatchWriter
     BatchPermanentTableWriter<DbT5501ShinsakaiKaisaiYoteiJohoEntity> DbT5501TableWriter;
+    @BatchWriter
     BatchPermanentTableWriter<DbT5502ShinsakaiWariateJohoEntity> DbT5502TableWriter;
 
     @Override
@@ -41,24 +43,26 @@ public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5501Shinsaka
 
     @Override
     protected void createWriter() {
-        DbT5501TableWriter = new BatchPermanentTableWriter<>(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
-        DbT5502TableWriter = new BatchPermanentTableWriter<>(DbT5502ShinsakaiWariateJohoEntity.class);
+        DbT5501TableWriter = new BatchPermanentTableWriter(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
+        DbT5502TableWriter = new BatchPermanentTableWriter(DbT5502ShinsakaiWariateJohoEntity.class);
     }
 
     @Override
-    protected void process(DbT5501ShinsakaiKaisaiYoteiJohoEntity entity) {
+    protected void process(DbT5502ShinsakaiWariateJohoEntity entity) {
         entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
-        entity.setShiryoSakuseiZumiFlag(true);
-        DbT5501TableWriter.update(entity);
+        DbT5502TableWriter.update(entity);
     }
 
     @Override
     protected void afterExecute() {
         mapper = getMapper(IShiryoShinsakaiIinMapper.class);
-        List<DbT5502ShinsakaiWariateJohoEntity> entities = mapper.getSelectByKey_DbT5502ShinsakaiWariateJoho(paramter.toShinsakaiShiryoUpdateMyBatisParameter());
-        for (DbT5502ShinsakaiWariateJohoEntity entity : entities) {
-            entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
-            DbT5502TableWriter.update(entity);
-        }
+        DbT5501ShinsakaiKaisaiYoteiJohoEntity entity = mapper.getSelectByKey(paramter.toShinsakaiShiryoUpdateMyBatisParameter());
+        entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
+        entity.setShiryoSakuseiZumiFlag(true);
+        DbT5501TableWriter.update(entity);
+//        for (DbT5502ShinsakaiWariateJohoEntity entity : entities) {
+//            entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
+//            DbT5502TableWriter.update(entity);
+//        }
     }
 }
