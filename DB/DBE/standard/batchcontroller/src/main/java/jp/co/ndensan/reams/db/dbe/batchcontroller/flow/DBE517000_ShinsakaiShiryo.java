@@ -10,7 +10,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.OutputJokenhyoFactoryProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiShiryoUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -45,7 +45,27 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
             is資料作成 = true;
         }
         if (is資料作成) {
-            executeStep(審査会情報更新);
+            Map<RString, RString> 帳票Map = new HashMap<>();
+            Map<RString, RString> 帳票Map1 = null;
+            Map<RString, RString> 帳票Map2 = null;
+            if (isOutputJimukyokuinShinsakaiShiryo()) {
+                帳票Map1 = getResult(Map.class, 事務局_審査会資料一括作成, new RString("出力帳票一覧"));
+            }
+            if (isOutputShinsakaiIinShinsakaiShiryo()) {
+                帳票Map2 = getResult(Map.class, 委員_審査会資料一括作成, new RString("出力帳票一覧"));
+            }
+            if (帳票Map1 != null) {
+                帳票Map.putAll(帳票Map1);
+            }
+            if (帳票Map2 != null) {
+                帳票Map.putAll(帳票Map2);
+            }
+            if (帳票Map.containsKey(ReportIdDBE.DBE517901.getReportId().getColumnValue())
+                    || 帳票Map.containsKey(ReportIdDBE.DBE517902.getReportId().getColumnValue())
+                    || 帳票Map.containsKey(ReportIdDBE.DBE517903.getReportId().getColumnValue())
+                    || 帳票Map.containsKey(ReportIdDBE.DBE517904.getReportId().getColumnValue())) {
+                executeStep(審査会情報更新);
+            }
             executeStep(出力条件表出力);
         }
     }

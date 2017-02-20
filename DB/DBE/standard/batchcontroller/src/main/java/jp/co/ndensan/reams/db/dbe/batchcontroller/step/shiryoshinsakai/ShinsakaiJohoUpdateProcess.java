@@ -60,9 +60,5 @@ public class ShinsakaiJohoUpdateProcess extends BatchProcessBase<DbT5502Shinsaka
         entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
         entity.setShiryoSakuseiZumiFlag(true);
         DbT5501TableWriter.update(entity);
-//        for (DbT5502ShinsakaiWariateJohoEntity entity : entities) {
-//            entity.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
-//            DbT5502TableWriter.update(entity);
-//        }
     }
 }

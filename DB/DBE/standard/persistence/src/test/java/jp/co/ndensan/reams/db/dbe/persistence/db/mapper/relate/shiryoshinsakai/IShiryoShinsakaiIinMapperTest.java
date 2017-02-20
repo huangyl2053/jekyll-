@@ -10,6 +10,9 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.Shinsaka
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput.IImageinputMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,6 +24,9 @@ public class IShiryoShinsakaiIinMapperTest extends DbeTestDacBase {
 
     private static final RString 審査会開催番号 = new RString("20160150");
     
+    @BatchWriter
+    BatchPermanentTableWriter<DbT5502ShinsakaiWariateJohoEntity> DbT5502TableWriter;
+
     public IShiryoShinsakaiIinMapperTest() {
     }
 
@@ -31,6 +37,7 @@ public class IShiryoShinsakaiIinMapperTest extends DbeTestDacBase {
 
     @Test
     public void getSelectByKey_DbT5502ShinsakaiWariateJoho() {
+        DbT5502TableWriter = new BatchPermanentTableWriter(DbT5502ShinsakaiWariateJohoEntity.class);
         IShiryoShinsakaiIinMapper sut = this.sqlSession.getMapper(IShiryoShinsakaiIinMapper.class);
         ShinsakaiShiryoUpdateMyBatisParameter param = new ShinsakaiShiryoUpdateMyBatisParameter(審査会開催番号);
         List<DbT5502ShinsakaiWariateJohoEntity> entities = sut.getSelectByKey_DbT5502ShinsakaiWariateJoho(param);
@@ -38,6 +45,15 @@ public class IShiryoShinsakaiIinMapperTest extends DbeTestDacBase {
         System.out.println(entities.size());
         DbT5502ShinsakaiWariateJohoEntity entity = entities.get(0);
         System.out.println(entity.getShinsakaiKaisaiNo());
+        System.out.println(entity.getShinseishoKanriNo());
         System.out.println(entity.getShinsakaiKaisaiYMD());
+        for (DbT5502ShinsakaiWariateJohoEntity entity2 : entities) {
+            entity2.setShinsakaiShiryoSakuseiYMD(FlexibleDate.getNowDate());
+            try {
+                DbT5502TableWriter.update(entity2);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 }
