@@ -14,17 +14,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class txtShinseiNinteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShinseiYMD")
-    private TextBoxDateRange txtShinseiYMD;
-    @JsonProperty("NinteiYMD")
-    private TextBoxDateRange NinteiYMD;
+    @JsonProperty("rdoShinseiNintei")
+    private RadioButton rdoShinseiNintei;
+    @JsonProperty("txtKijunYMD")
+    private TextBoxDateRange txtKijunYMD;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBoxCode txtHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +35,57 @@ public class txtShinseiNinteiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtShinseiYMD
-     * @return txtShinseiYMD
+     * getrdoShinseiNintei
+     * @return rdoShinseiNintei
      */
-    @JsonProperty("txtShinseiYMD")
-    public TextBoxDateRange getTxtShinseiYMD() {
-        return txtShinseiYMD;
+    @JsonProperty("rdoShinseiNintei")
+    public RadioButton getRdoShinseiNintei() {
+        return rdoShinseiNintei;
     }
 
     /*
-     * settxtShinseiYMD
-     * @param txtShinseiYMD txtShinseiYMD
+     * setrdoShinseiNintei
+     * @param rdoShinseiNintei rdoShinseiNintei
      */
-    @JsonProperty("txtShinseiYMD")
-    public void setTxtShinseiYMD(TextBoxDateRange txtShinseiYMD) {
-        this.txtShinseiYMD = txtShinseiYMD;
+    @JsonProperty("rdoShinseiNintei")
+    public void setRdoShinseiNintei(RadioButton rdoShinseiNintei) {
+        this.rdoShinseiNintei = rdoShinseiNintei;
     }
 
     /*
-     * getNinteiYMD
-     * @return NinteiYMD
+     * gettxtKijunYMD
+     * @return txtKijunYMD
      */
-    @JsonProperty("NinteiYMD")
-    public TextBoxDateRange getNinteiYMD() {
-        return NinteiYMD;
+    @JsonProperty("txtKijunYMD")
+    public TextBoxDateRange getTxtKijunYMD() {
+        return txtKijunYMD;
     }
 
     /*
-     * setNinteiYMD
-     * @param NinteiYMD NinteiYMD
+     * settxtKijunYMD
+     * @param txtKijunYMD txtKijunYMD
      */
-    @JsonProperty("NinteiYMD")
-    public void setNinteiYMD(TextBoxDateRange NinteiYMD) {
-        this.NinteiYMD = NinteiYMD;
+    @JsonProperty("txtKijunYMD")
+    public void setTxtKijunYMD(TextBoxDateRange txtKijunYMD) {
+        this.txtKijunYMD = txtKijunYMD;
+    }
+
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBoxCode getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     // </editor-fold>

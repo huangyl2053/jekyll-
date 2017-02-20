@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0220001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.KanryoShoriStatus;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.DBE0220001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.GetsureiShoriDiv;
@@ -25,9 +26,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.GeTuReiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -78,6 +79,8 @@ public class GetsureiShori {
     private static final RString EUC_ENTITY_ID = new RString("DBE202001");
     private static final RString KEY = new RString("key");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
+    private static final RString センター送信 = new RString("センター送信");
+    private static final RString センター送信_完了日登録方法_バッチ実行時 = new RString("1");
 
     /**
      * 完了処理・センター送信の初期化。(オンロード)<br/>
@@ -246,13 +249,17 @@ public class GetsureiShori {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().replace(センター送信.toString()).getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
+            RString センター送信_完了日登録方法 = DbBusinessConfig.get(DbeConfigKey.センター送信_完了日登録方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (!センター送信_完了日登録方法_バッチ実行時.equals(センター送信_完了日登録方法)) {
+                return ResponseData.of(div).setState(DBE0220001StateName.完了);
+            }
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
 
             for (dgNinteiTaskList_Row row : rowList) {

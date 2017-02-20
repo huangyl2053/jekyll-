@@ -34,13 +34,14 @@ public final class CreateTargetMapperParameter {
     private final boolean shinnseiShuuryou;
     private final boolean ninnteiKaishi;
     private final boolean ninnteiShuuryou;
-    private static final RString データ選択 = new RString("key0");
+    private final RString hihokenshaNo;
+    private static final RString データ選択 = new RString("0");
     private final RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分,
             RDate.getNowDate(), SubGyomuCode.DBE認定支援);
 
     private CreateTargetMapperParameter(RString データ出力, List<RString> 申請書管理番号, FlexibleDate 申請日_開始, FlexibleDate 申請日_終了,
             FlexibleDate 認定日_開始, FlexibleDate 認定日_終了, int 件数, boolean detaFlg, boolean shinnseiKaishi,
-            boolean shinnseiShuuryou, boolean ninnteiKaishi, boolean ninnteiShuuryou) {
+            boolean shinnseiShuuryou, boolean ninnteiKaishi, boolean ninnteiShuuryou, RString 被保険者番号) {
         this.データ出力 = データ出力;
         this.申請書管理番号 = 申請書管理番号;
         this.申請日_開始 = 申請日_開始;
@@ -53,6 +54,7 @@ public final class CreateTargetMapperParameter {
         this.shinnseiShuuryou = shinnseiShuuryou;
         this.ninnteiKaishi = ninnteiKaishi;
         this.ninnteiShuuryou = ninnteiShuuryou;
+        this.hihokenshaNo = 被保険者番号;
     }
 
     /**
@@ -64,13 +66,14 @@ public final class CreateTargetMapperParameter {
      * @param 認定日_開始 認定日_開始
      * @param 認定日_終了 認定日_終了
      * @param 件数 件数
+     * @param 被保険者番号 被保険者番号
      * @return センター送信データパラメータ
      */
     public static CreateTargetMapperParameter createParam(RString データ出力, FlexibleDate 申請日_開始, FlexibleDate 申請日_終了,
-            FlexibleDate 認定日_開始, FlexibleDate 認定日_終了, int 件数) {
+            FlexibleDate 認定日_開始, FlexibleDate 認定日_終了, int 件数, RString 被保険者番号) {
         return new CreateTargetMapperParameter(データ出力, null, 申請日_開始, 申請日_終了, 認定日_開始, 認定日_終了, 件数,
                 データ選択.equals(データ出力), 申請日_開始 != null && !申請日_開始.isEmpty(), 申請日_終了 != null && !申請日_終了.isEmpty(),
-                認定日_開始 != null && !認定日_開始.isEmpty(), 認定日_終了 != null && !認定日_終了.isEmpty());
+                認定日_開始 != null && !認定日_開始.isEmpty(), 認定日_終了 != null && !認定日_終了.isEmpty(), 被保険者番号);
     }
 
     /**
@@ -81,6 +84,6 @@ public final class CreateTargetMapperParameter {
      */
     public static CreateTargetMapperParameter createCsvDataParam(List<RString> 申請書管理番号) {
         return new CreateTargetMapperParameter(RString.EMPTY, 申請書管理番号, FlexibleDate.MAX, FlexibleDate.MAX,
-                FlexibleDate.MAX, FlexibleDate.MAX, 0, true, true, true, true, true);
+                FlexibleDate.MAX, FlexibleDate.MAX, 0, true, true, true, true, true, RString.EMPTY);
     }
 }

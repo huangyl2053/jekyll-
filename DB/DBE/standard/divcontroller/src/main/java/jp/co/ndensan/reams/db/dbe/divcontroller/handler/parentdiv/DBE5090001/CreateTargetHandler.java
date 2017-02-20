@@ -43,8 +43,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class CreateTargetHandler {
 
     private final CreateTargetDiv div;
-    private static final RString キー_0 = new RString("key0");
-    private static final RString キー_1 = new RString("key1");
+    private static final RString キー_0 = new RString("0");
+    private static final RString キー_1 = new RString("1");
+    private static final RString 基準日_認定申請日キー = new RString("0");
+    private static final RString 基準日_二次判定日キー = new RString("1");
 
     /**
      * コンストラクタです。
@@ -60,13 +62,7 @@ public class CreateTargetHandler {
      *
      */
     public void onLoad() {
-        div.getRdoShinseiNintei().setSelectedKey(キー_1);
-        div.getTxtShinseiYMD().setDisabled(true);
-        div.getTxtShinseiYMD().setToRequired(false);
-        div.getTxtShinseiYMD().setFromRequired(false);
-        div.getNinteiYMD().setToRequired(true);
-        div.getNinteiYMD().setFromRequired(true);
-        div.getNinteiYMD().setDisabled(false);
+        div.getRdoShinseiNintei().setSelectedKey(基準日_二次判定日キー);
         div.getRdoSyutsuryoku().setSelectedKey(キー_0);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
@@ -79,22 +75,8 @@ public class CreateTargetHandler {
      *
      */
     public void onClick_btnClear() {
-        div.getRdoShinseiNintei().setSelectedKey(キー_1);
-        div.getTxtShinseiYMD().setDisabled(true);
-        div.getTxtShinseiYMD().clearFromValue();
-        div.getTxtShinseiYMD().clearToValue();
-        div.getTxtShinseiYMD().setToRequired(false);
-        div.getTxtShinseiYMD().setFromRequired(false);
-        div.getNinteiYMD().setDisabled(false);
-        div.getNinteiYMD().clearFromValue();
-        div.getNinteiYMD().clearToValue();
-        div.getNinteiYMD().setToRequired(true);
-        div.getNinteiYMD().setFromRequired(true);
-        div.getRdoSyutsuryoku().setSelectedKey(キー_0);
-        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
-                .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
-                .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtHihokenshaNo().clearValue();
+        onLoad();
     }
 
     /**
@@ -102,25 +84,8 @@ public class CreateTargetHandler {
      *
      */
     public void onChange_btnChange() {
-        if (キー_0.equals(div.getRdoShinseiNintei().getSelectedKey())) {
-            div.getTxtShinseiYMD().setDisabled(false);
-            div.getNinteiYMD().setDisabled(true);
-            div.getNinteiYMD().clearFromValue();
-            div.getNinteiYMD().clearToValue();
-            div.getTxtShinseiYMD().setToRequired(true);
-            div.getTxtShinseiYMD().setFromRequired(true);
-            div.getNinteiYMD().setToRequired(false);
-            div.getNinteiYMD().setFromRequired(false);
-        } else {
-            div.getTxtShinseiYMD().setDisabled(true);
-            div.getTxtShinseiYMD().clearFromValue();
-            div.getTxtShinseiYMD().clearToValue();
-            div.getNinteiYMD().setDisabled(false);
-            div.getTxtShinseiYMD().setToRequired(false);
-            div.getTxtShinseiYMD().setFromRequired(false);
-            div.getNinteiYMD().setToRequired(true);
-            div.getNinteiYMD().setFromRequired(true);
-        }
+        div.getTxtKijunYMD().clearFromValue();
+        div.getTxtKijunYMD().clearToValue();
     }
 
     /**
@@ -139,6 +104,7 @@ public class CreateTargetHandler {
             row.setHihokenshaShimeiKana(list.get被保険者氏名カナ().value());
             row.setSex(Seibetsu.toValue(list.get性別().value()).get名称());
             row.getBirthDate().setValue(getNull(list.get生年月日()));
+            row.setKoroshoIfShikibetsuCode(list.get厚労省IF識別コード().value());
             row.getNinteiShinseibi().setValue(getNull(list.get認定申請年月日()));
             row.setShinseiKubunShin(NinteiShinseiShinseijiKubunCode.toValue(list.get認定申請区分_申請時コード().value()).get名称());
             if (list.get認定申請区分_法令コード() != null && !list.get認定申請区分_法令コード().value().isEmpty()) {
@@ -206,19 +172,15 @@ public class CreateTargetHandler {
         if (キー_0.equals(div.getRdoSyutsuryoku().getSelectedKey())) {
             データ出力 = キー_0;
         }
-        if (div.getTxtShinseiYMD().getFromValue() != null) {
-            申請_開始日 = new FlexibleDate(div.getTxtShinseiYMD().getFromValue().toDateString());
-        }
-        if (div.getTxtShinseiYMD().getToValue() != null) {
-            申請_終了日 = new FlexibleDate(div.getTxtShinseiYMD().getToValue().toDateString());
-        }
-        if (div.getNinteiYMD().getFromValue() != null) {
-            認定_開始日 = new FlexibleDate(div.getNinteiYMD().getFromValue().toDateString());
-        }
-        if (div.getNinteiYMD().getToValue() != null) {
-            認定_終了日 = new FlexibleDate(div.getNinteiYMD().getToValue().toDateString());
+        if (基準日_認定申請日キー.equals(div.getRdoShinseiNintei().getSelectedKey())) {
+            申請_開始日 = new FlexibleDate(div.getTxtKijunYMD().getFromValue().toDateString());
+            申請_終了日 = new FlexibleDate(div.getTxtKijunYMD().getToValue().toDateString());
+        } else if (基準日_二次判定日キー.equals(div.getRdoShinseiNintei().getSelectedKey())) {
+            認定_開始日 = new FlexibleDate(div.getTxtKijunYMD().getFromValue().toDateString());
+            認定_終了日 = new FlexibleDate(div.getTxtKijunYMD().getToValue().toDateString());
         }
         return CreateTargetMapperParameter.createParam(データ出力, 申請_開始日, 申請_終了日,
-                認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
+                認定_開始日, 認定_終了日, Integer.parseInt(div.getTxtMaxKensu().getValue().toString()),
+                div.getTxtHihokenshaNo().getValue());
     }
 }

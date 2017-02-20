@@ -44,15 +44,9 @@ public class CreateTargetValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (キー_0.equals(div.getRdoShinseiNintei().getSelectedKey())
-                && (div.getTxtShinseiYMD().getFromValue() == null || div.getTxtShinseiYMD().getToValue() == null)) {
+        if (div.getTxtKijunYMD().getFromValue() == null || div.getTxtKijunYMD().getToValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new CreateTargetMessages(UrErrorMessages.必須項目), div.getTxtShinseiYMD()));
-        }
-        if (キー_1.equals(div.getRdoShinseiNintei().getSelectedKey())
-                && (div.getNinteiYMD().getFromValue() == null || div.getNinteiYMD().getToValue() == null)) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new CreateTargetMessages(UrErrorMessages.必須項目), div.getNinteiYMD()));
+                    new CreateTargetMessages(UrErrorMessages.必須項目), div.getTxtKijunYMD()));
         }
         return validationMessages;
     }

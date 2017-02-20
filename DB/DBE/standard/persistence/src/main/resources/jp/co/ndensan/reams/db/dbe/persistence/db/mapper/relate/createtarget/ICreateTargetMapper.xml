@@ -65,6 +65,9 @@
             <if test="ninnteiShuuryou">
                 AND dbt5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{認定日_終了}
             </if>
+            <if test="hihokenshaNo!=null and hihokenshaNo.toString()!=''">
+                AND dbt5101."hihokenshaNo" = #{hihokenshaNo}
+            </if>
     </select>
     <select resultOrdered="true" id="getTaishouJouhou" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter"
@@ -123,6 +126,9 @@
             </if>
             <if test="ninnteiShuuryou">
                 AND dbt5102."nijiHanteiYMD" <![CDATA[<=]]> #{認定日_終了}
+            </if>
+            <if test="hihokenshaNo!=null and hihokenshaNo.toString()!=''">
+                AND dbt5101."hihokenshaNo" = #{hihokenshaNo}
             </if>
           ORDER BY
             dbt5101."hihokenshaNo" 

@@ -672,4 +672,6 @@ public class CreateTargetCsvEntity {
     private RString 前回識別コード;
     @CsvField(order = 327, name = "認定審査会意見等")
     private RString 認定審査会意見等;
+    @CsvField(order = 328, name = "コメント等")
+    private RString コメント等;
 }

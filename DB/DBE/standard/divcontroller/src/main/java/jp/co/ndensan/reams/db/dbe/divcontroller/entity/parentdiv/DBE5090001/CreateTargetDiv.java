@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class CreateTargetDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -74,26 +74,6 @@ public class CreateTargetDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TxtRdoShinseiNinteiDiv getTxtRdoShinseiNintei() {
-        return this.getNinteishinseibi().getTxtRdoShinseiNintei();
-    }
-
-    @JsonIgnore
-    public void  setTxtRdoShinseiNintei(TxtRdoShinseiNinteiDiv TxtRdoShinseiNintei) {
-        this.getNinteishinseibi().setTxtRdoShinseiNintei(TxtRdoShinseiNintei);
-    }
-
-    @JsonIgnore
-    public RadioButton getRdoShinseiNintei() {
-        return this.getNinteishinseibi().getTxtRdoShinseiNintei().getRdoShinseiNintei();
-    }
-
-    @JsonIgnore
-    public void  setRdoShinseiNintei(RadioButton rdoShinseiNintei) {
-        this.getNinteishinseibi().getTxtRdoShinseiNintei().setRdoShinseiNintei(rdoShinseiNintei);
-    }
-
-    @JsonIgnore
     public txtShinseiNinteiDiv getTxtShinseiNintei() {
         return this.getNinteishinseibi().getTxtShinseiNintei();
     }
@@ -104,23 +84,33 @@ public class CreateTargetDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtShinseiYMD() {
-        return this.getNinteishinseibi().getTxtShinseiNintei().getTxtShinseiYMD();
+    public RadioButton getRdoShinseiNintei() {
+        return this.getNinteishinseibi().getTxtShinseiNintei().getRdoShinseiNintei();
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxDateRange txtShinseiYMD) {
-        this.getNinteishinseibi().getTxtShinseiNintei().setTxtShinseiYMD(txtShinseiYMD);
+    public void  setRdoShinseiNintei(RadioButton rdoShinseiNintei) {
+        this.getNinteishinseibi().getTxtShinseiNintei().setRdoShinseiNintei(rdoShinseiNintei);
     }
 
     @JsonIgnore
-    public TextBoxDateRange getNinteiYMD() {
-        return this.getNinteishinseibi().getTxtShinseiNintei().getNinteiYMD();
+    public TextBoxDateRange getTxtKijunYMD() {
+        return this.getNinteishinseibi().getTxtShinseiNintei().getTxtKijunYMD();
     }
 
     @JsonIgnore
-    public void  setNinteiYMD(TextBoxDateRange NinteiYMD) {
-        this.getNinteishinseibi().getTxtShinseiNintei().setNinteiYMD(NinteiYMD);
+    public void  setTxtKijunYMD(TextBoxDateRange txtKijunYMD) {
+        this.getNinteishinseibi().getTxtShinseiNintei().setTxtKijunYMD(txtKijunYMD);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtHihokenshaNo() {
+        return this.getNinteishinseibi().getTxtShinseiNintei().getTxtHihokenshaNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+        this.getNinteishinseibi().getTxtShinseiNintei().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
     @JsonIgnore
