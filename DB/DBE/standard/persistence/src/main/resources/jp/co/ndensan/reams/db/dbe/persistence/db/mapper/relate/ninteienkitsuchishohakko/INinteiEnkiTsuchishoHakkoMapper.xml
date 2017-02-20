@@ -170,10 +170,10 @@
             AND  (T5101."ninteiShinseiShinseijiKubunCode" = #{申請区分_更新申請} OR T5101."ninteiShinseiShinseijiKubunCode" = #{申請区分_区分変更申請})
         </if>
         <if test="is発行有無_発行未チェックON">
-            AND  (T5101."enkiTsuchiHakkoYMD" IS NULL)
+            AND  COALESCE(T5101."enkiTsuchiHakkoYMD",'') = ''
         </if>
         <if test="is発行有無_発行済チェックON">
-            AND  (T5101."enkiTsuchiHakkoYMD" IS NOT NULL)
+            AND  COALESCE(T5101."enkiTsuchiHakkoYMD",'') <![CDATA[<>]]> ''
         </if>
         <if test="!isみなし二号等対象フラグ">
             AND T5101."minashiNigoEtcTaishoFlag" = #{isみなし二号等対象フラグ}
@@ -194,66 +194,66 @@
         
         <if test="is認定調査_調査未チェックON">
             <if test="is単一">
-                AND  (F."ninteichosaKanryoYMD" IS NULL)
+                AND COALESCE(F."ninteichosaKanryoYMD",'') = ''
             </if>
             <if test="!is単一">
-                AND  T5202."ninteichosaJisshiYMD" IS NULL
+                AND COALESCE(T5202."ninteichosaJisshiYMD",'') = ''
             </if>
         </if>
         <if test="is認定調査_調査済チェックON">
             <if test="is単一">
-                AND  (F."ninteichosaKanryoYMD" IS NOT NULL)
+                AND COALESCE(F."ninteichosaKanryoYMD",'') <![CDATA[<>]]> ''
             </if>
             <if test="!is単一">
-                AND  T5202."ninteichosaJisshiYMD" IS NOT NULL
+                AND COALESCE(T5202."ninteichosaJisshiYMD",'') <![CDATA[<>]]> ''
             </if>
         </if>
         <if test="is意見書受領_受領未チェックON">
             <if test="is単一">
-                AND  (F."ikenshoTorokuKanryoYMD" IS NULL)
+                AND COALESCE(F."ikenshoTorokuKanryoYMD",'') = ''
             </if>
             <if test="!is単一">
-                AND  T5302."ikenshoJuryoYMD" IS NULL
+                AND COALESCE(T5302."ikenshoJuryoYMD",'') = ''
             </if>
         </if>
         <if test="is意見書受領_受領済チェックON">
             <if test="is単一">
-                AND  (F."ikenshoTorokuKanryoYMD" IS NOT NULL)
+                AND COALESCE(F."ikenshoTorokuKanryoYMD",'') <![CDATA[<>]]> ''
             </if>
             <if test="!is単一">
-                AND  T5302."ikenshoJuryoYMD" IS NOT NULL
+                AND COALESCE(T5302."ikenshoJuryoYMD",'') <![CDATA[<>]]> ''
             </if>
         </if>
         <if test="is一次判定_判定未チェックON">
             <if test="is単一">
-                AND  (F."ichijiHanteiKanryoYMD" IS NULL)
+                AND COALESCE(F."ichijiHanteiKanryoYMD",'') = ''
             </if>
             <if test="!is単一">
-                AND  T5116."ichijiHanteiYMD" IS NULL
+                AND COALESCE(T5116."ichijiHanteiYMD",'') = ''
             </if>
         </if>
         <if test="is一次判定_判定済チェックON">
             <if test="is単一">
-                AND  (F."ichijiHanteiKanryoYMD" IS NOT NULL)
+                AND COALESCE(F."ichijiHanteiKanryoYMD",'') <![CDATA[<>]]> ''
             </if>
             <if test="!is単一">
-                AND  T5116."ichijiHanteiYMD" IS NOT NULL
+                AND COALESCE(T5116."ichijiHanteiYMD",'') <![CDATA[<>]]> ''
             </if>
         </if>
         <if test="is審査会割付_割付未チェックON">
             <if test="is単一">
-                AND  (F."ninteiShinsakaiWariateKanryoYMD" IS NULL)
+                AND COALESCE(F."ninteiShinsakaiWariateKanryoYMD",'') = ''
             </if>
             <if test="!is単一">
-                AND  T5501."shinsakaiKaisaiYoteiYMD" IS NULL
+                AND COALESCE(T5501."shinsakaiKaisaiYoteiYMD",'') = ''
             </if>
         </if>
         <if test="is審査会割付_割付済チェックON">
             <if test="is単一">
-                AND  (F."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL)
+                AND COALESCE(F."ninteiShinsakaiWariateKanryoYMD",'') <![CDATA[<>]]> ''
             </if>
             <if test="!is単一">
-                AND  T5501."shinsakaiKaisaiYoteiYMD" IS NOT NULL
+                AND COALESCE(T5501."shinsakaiKaisaiYoteiYMD",'') <![CDATA[<>]]> ''
             </if>
         </if>
     </sql>

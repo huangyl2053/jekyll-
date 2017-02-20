@@ -76,10 +76,10 @@
             
         WHERE
             <if test="tsuchishohakkonbi != null and !tsuchishohakkonbi.isEmpty()">
-             T5101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
+                T5101."enkiTsuchiHakkoYMD" = #{tsuchishohakkonbi}
             </if>
             <if test="tsuchishohakkonbi == null or tsuchishohakkonbi.isEmpty()">
-                T5101."enkiTsuchiHakkoYMD" IS NULL
+                COALESCE(T5101."enkiTsuchiHakkoYMD",'') <![CDATA[<>]]> ''
             </if>
             <if test="shorimikomibiFrom != null and !shorimikomibiFrom.isEmpty()">
                 AND #{shorimikomibiFrom} <![CDATA[<=]]>  T5101."enkiKetteiYMD"
