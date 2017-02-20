@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class GetsureiShoriHandler {
 
     private static final String JotaiColumnName = "jyotai";
-    private static final RString FIELDNAME_月例処理を完了する = new RString("btnCompleteGetsureiShori");
     private final GetsureiShoriDiv div;
 
     /**
@@ -74,23 +72,19 @@ public class GetsureiShoriHandler {
      * @param 状態区分 状態区分
      */
     public void set検索結果表示時の制御(RString 状態区分) {
-
         KanryoShoriStatus 状態 = KanryoShoriStatus.toValue(状態区分);
         if (状態 == KanryoShoriStatus.未処理) {
             div.getTxtMisyori().setDisplayNone(false);
             div.getTxtKanryouKano().setDisplayNone(true);
             div.getTxtGokei().setDisplayNone(true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELDNAME_月例処理を完了する, true);
         } else if (状態 == KanryoShoriStatus.完了可能) {
             div.getTxtMisyori().setDisplayNone(true);
             div.getTxtKanryouKano().setDisplayNone(false);
             div.getTxtGokei().setDisplayNone(true);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELDNAME_月例処理を完了する, false);
         } else {
             div.getTxtMisyori().setDisplayNone(false);
             div.getTxtKanryouKano().setDisplayNone(false);
             div.getTxtGokei().setDisplayNone(false);
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELDNAME_月例処理を完了する, false);
         }
     }
 

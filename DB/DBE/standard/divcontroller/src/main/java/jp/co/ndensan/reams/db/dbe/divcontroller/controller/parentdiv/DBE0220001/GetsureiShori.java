@@ -94,7 +94,6 @@ public class GetsureiShori {
         RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, 基準日, SubGyomuCode.DBU介護統計報告);
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, 基準日, SubGyomuCode.DBU介護統計報告);
         状態区分 = RString.isNullOrEmpty(状態区分) ? KanryoShoriStatus.すべて.getコード() : 状態区分;
-
         YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, toDecimal(最大取得件数));
         YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
         SearchResult<GeTuReiSyoRiBusiness> 検索結果 = finder.get月例処理モード(検索条件);
@@ -102,11 +101,14 @@ public class GetsureiShori {
         getHandler(div).initialize(状態区分, toDecimal(最大取得件数), toDecimal(最大取得件数上限));
         getHandler(div).set対象者一覧(検索結果);
         getHandler(div).set検索結果表示時の制御(状態区分);
-
         if (認定完了情報 == null || 認定完了情報.get要介護認定完了情報Lsit() == null || 認定完了情報.get要介護認定完了情報Lsit().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(認定完了情報.get要介護認定完了情報Lsit()));
+        }
+        KanryoShoriStatus 状態 = KanryoShoriStatus.toValue(状態区分);
+        if (状態 == KanryoShoriStatus.未処理) {
+            return ResponseData.of(div).setState(DBE0220001StateName.未処理状態);
         }
         return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
@@ -139,7 +141,11 @@ public class GetsureiShori {
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(認定完了情報.get要介護認定完了情報Lsit()));
         }
-        return ResponseData.of(div).respond();
+        KanryoShoriStatus 状態 = KanryoShoriStatus.toValue(状態区分);
+        if (状態 == KanryoShoriStatus.未処理) {
+            return ResponseData.of(div).setState(DBE0220001StateName.未処理状態);
+        }
+        return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
 
     /**
@@ -249,8 +255,8 @@ public class GetsureiShori {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().replace(センター送信.toString()).getCode(),
-                    DbeQuestionMessages.完了日登録確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace(センター送信.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
