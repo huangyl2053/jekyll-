@@ -5,14 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.YobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoReportSource;
@@ -39,8 +40,8 @@ public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJoho
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(JimukyokuyoYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
-    private JimuTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
-    private JimuYobihanteiKinyuhyoBusiness business;
+    private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
+    private YobihanteiKinyuhyoBusiness business;
     private int データ件数;
     private static final int 満ページ件数 = 10;
     @BatchWriter
@@ -50,10 +51,12 @@ public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJoho
     @Override
     protected void initialize() {
         データ件数 = 0;
-        myBatisParameter = paramter.toJimuTokkiJikouItiziHanteiMyBatisParameter();
+        myBatisParameter = paramter.toIinTokkiJikouItiziHanteiMyBatisParameter();
         myBatisParameter.setOrderKakuteiFlg(ShinsakaiOrderKakuteiFlg.確定.is介護認定審査会審査順確定());
-        myBatisParameter.setIsShoriJotaiKubun0(ShoriJotaiKubun.通常.getコード());
-        myBatisParameter.setIsShoriJotaiKubun3(ShoriJotaiKubun.延期.getコード());
+        List<RString> shoriJotaiKubunList = new ArrayList<>();
+        shoriJotaiKubunList.add(ShoriJotaiKubun.通常.getコード());
+        shoriJotaiKubunList.add(ShoriJotaiKubun.延期.getコード());
+        myBatisParameter.setShoriJotaiKubunList(shoriJotaiKubunList);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJoho
 
     @Override
     protected void usualProcess(HanteiJohoEntity entity) {
-        business = new JimuYobihanteiKinyuhyoBusiness(entity, paramter);
+        business = new YobihanteiKinyuhyoBusiness(entity, paramter);
         JimukyokuyoYobihanteiKinyuhyoReport report = new JimukyokuyoYobihanteiKinyuhyoReport(business);
         データ件数 = データ件数 + 1;
         report.writeBy(reportSourceWriter);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IinYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.YobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -42,7 +42,7 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
     //private static final int 満ページ件数 = 10;
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
-    private IinYobihanteiKinyuhyoBusiness business;
+    private YobihanteiKinyuhyoBusiness business;
     private int データ件数;
 
     @BatchWriter
@@ -67,7 +67,7 @@ public class IinHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoE
 
     @Override
     protected void usualProcess(HanteiJohoEntity entity) {
-        business = new IinYobihanteiKinyuhyoBusiness(entity, paramter);
+        business = new YobihanteiKinyuhyoBusiness(entity, paramter);
         IinYobihanteiKinyuhyoReport report = IinYobihanteiKinyuhyoReport.createFrom(business);
         データ件数 = データ件数 + 1;
         report.writeBy(reportSourceWriter);

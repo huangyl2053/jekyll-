@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IinYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.YobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class IinYobihanteiKinyuhyoEditor implements IIinYobihanteiKinyuhyoEditor {
 
     private static final int INT_4 = 4;
-    private final IinYobihanteiKinyuhyoBusiness business;
+    private final YobihanteiKinyuhyoBusiness business;
 
     /**
      * コンストラクタです。
      *
      * @param business {@link IinYobihanteiKinyuhyoBusiness}
      */
-    protected IinYobihanteiKinyuhyoEditor(IinYobihanteiKinyuhyoBusiness business) {
+    protected IinYobihanteiKinyuhyoEditor(YobihanteiKinyuhyoBusiness business) {
         this.business = business;
     }
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.iinyobihanteikinyuhyo;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IinYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.YobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinyobihanteikinyuhyo.IinYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class IinYobihanteiKinyuhyoReport extends Report<IinYobihanteiKinyuhyoReportSource> {
 
-    private final IinYobihanteiKinyuhyoBusiness business;
+    private final YobihanteiKinyuhyoBusiness business;
 
     /**
      * インスタンスを生成します。
@@ -25,8 +25,7 @@ public class IinYobihanteiKinyuhyoReport extends Report<IinYobihanteiKinyuhyoRep
      * @param business 委員用予備判定記入表
      * @return 委員用予備判定記入表のReport
      */
-    public static IinYobihanteiKinyuhyoReport createFrom(IinYobihanteiKinyuhyoBusiness business) {
-
+    public static IinYobihanteiKinyuhyoReport createFrom(YobihanteiKinyuhyoBusiness business) {
         return new IinYobihanteiKinyuhyoReport(business);
     }
 
@@ -35,7 +34,7 @@ public class IinYobihanteiKinyuhyoReport extends Report<IinYobihanteiKinyuhyoRep
      *
      * @param business 委員用予備判定記入表
      */
-    protected IinYobihanteiKinyuhyoReport(IinYobihanteiKinyuhyoBusiness business) {
+    protected IinYobihanteiKinyuhyoReport(YobihanteiKinyuhyoBusiness business) {
         this.business = business;
     }
 

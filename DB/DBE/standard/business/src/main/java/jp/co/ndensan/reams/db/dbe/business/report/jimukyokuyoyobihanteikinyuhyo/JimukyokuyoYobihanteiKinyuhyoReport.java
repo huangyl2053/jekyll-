@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.jimukyokuyoyobihanteikinyuhyo;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuYobihanteiKinyuhyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.YobihanteiKinyuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyoyobihanteikinyuhyo.JimukyokuyoYobihanteiKinyuhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JimukyokuyoYobihanteiKinyuhyoReport extends Report<JimukyokuyoYobihanteiKinyuhyoReportSource> {
 
-    private final JimuYobihanteiKinyuhyoBusiness business;
+    private final YobihanteiKinyuhyoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
      * @param business 申請に関する帳票発行
      */
-    public JimukyokuyoYobihanteiKinyuhyoReport(JimuYobihanteiKinyuhyoBusiness business) {
+    public JimukyokuyoYobihanteiKinyuhyoReport(YobihanteiKinyuhyoBusiness business) {
         this.business = business;
     }
 

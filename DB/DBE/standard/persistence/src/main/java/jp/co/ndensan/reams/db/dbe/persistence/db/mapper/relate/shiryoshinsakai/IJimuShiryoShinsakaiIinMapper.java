@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuGaikyoTokkiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.GaikyoTokkiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ImjJohoEntity;
@@ -161,10 +161,10 @@ public interface IJimuShiryoShinsakaiIinMapper {
     /**
      * 要介護認定申請者に関する予備判定記入情報を取得する。
      *
-     * @param parameter JimuTokkiJikouItiziHanteiMyBatisParameter
+     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
      * @return List<HanteiJohoEntity> 予備判定記入情報
      */
-    List<HanteiJohoEntity> getJimuHanteiJoho(JimuTokkiJikouItiziHanteiMyBatisParameter parameter);
+    List<HanteiJohoEntity> getHanteiJoho(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
 
     /**
      * 事務局用概況特記一覧表を取得する。
