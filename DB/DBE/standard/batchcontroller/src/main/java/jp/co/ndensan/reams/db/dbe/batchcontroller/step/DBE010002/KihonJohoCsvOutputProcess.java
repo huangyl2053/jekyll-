@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010001.KihonJohoEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout.ShinseishaDataOutProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.KihonJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010001_KihonJohoEucEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseishadataout.IShinseishaDataOutMapper;
@@ -59,13 +58,14 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
     private CsvWriter<DBE010001_KihonJohoEucEntity> csvWriter;
     private FileSpoolManager fileSpoolManager;
     private RString filePath;
-    private ShinseishaDataOutProcessParameter processParameter;
     private IShinseishaDataOutMapper mapper;
+    private List<RString> 申請書管理番号リスト;
 
     @Override
     protected void initialize() {
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         mapper = InstanceProvider.create(MapperProvider.class).create(IShinseishaDataOutMapper.class);
+        申請書管理番号リスト = new ArrayList<>();
     }
 
     @Override
@@ -90,6 +90,7 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
         ShinseishaDataOutMybatisParameter parameter = new ShinseishaDataOutMybatisParameter(entity.getShinseishoKanriNo());
         List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List = mapper.select要介護認定主治医意見書意見項目(parameter);
         csvWriter.writeLine(KihonJohoEucEntityEditor.edit(entity, 意見項目List));
+        申請書管理番号リスト.add(entity.getShinseishoKanriNo());
     }
 
     @Override
@@ -101,22 +102,23 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
 
     private void output出力条件表() {
         List<RString> 出力条件 = new ArrayList();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(出力条件タイトル_申請書管理番号);
-        List<RString> 申請書管理番号リスト = processParameter.get申請書管理番号リスト();
-        builder.append(申請書管理番号リスト.get(0));
-        for (int index = 1; index < 申請書管理番号リスト.size(); index++) {
-            if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ZERO)) {
-                builder.append(", ").append(申請書管理番号リスト.get(index)).append(", ");
-                出力条件.add(builder.toRString());
-                builder = new RStringBuilder().append(スペース);
-            } else if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ONE)) {
-                builder.append(申請書管理番号リスト.get(index));
-            } else {
-                builder.append(", ").append(申請書管理番号リスト.get(index));
+        if (!申請書管理番号リスト.isEmpty()) {
+            RStringBuilder builder = new RStringBuilder();
+            builder.append(出力条件タイトル_申請書管理番号);
+            builder.append(申請書管理番号リスト.get(0));
+            for (int index = 1; index < 申請書管理番号リスト.size(); index++) {
+                if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ZERO)) {
+                    builder.append(", ").append(申請書管理番号リスト.get(index)).append(", ");
+                    出力条件.add(builder.toRString());
+                    builder = new RStringBuilder().append(スペース);
+                } else if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ONE)) {
+                    builder.append(申請書管理番号リスト.get(index));
+                } else {
+                    builder.append(", ").append(申請書管理番号リスト.get(index));
+                }
             }
+            出力条件.add(builder.toRString());
         }
-        出力条件.add(builder.toRString());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem 帳票出力条件
                 = new EucFileOutputJokenhyoItem(

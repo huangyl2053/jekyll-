@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho09AEucEntity
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho09BEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010003.IkenshoJoho99AEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout.ShinseishaDataOutProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.IkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010003_IkenshoJoho02AEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010003_IkenshoJoho06AEucEntity;
@@ -89,13 +88,13 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
     private FileSpoolManager fileSpoolManager_06A;
     private FileSpoolManager fileSpoolManager_02A;
     private FileSpoolManager fileSpoolManager_99A;
-    private ShinseishaDataOutProcessParameter processParameter;
     private IShinseishaDataOutMapper mapper;
     private boolean exist09B;
     private boolean exist09A;
     private boolean exist06A;
     private boolean exist02A;
     private boolean exist99A;
+    private List<RString> 申請書管理番号リスト;
 
     @Override
     protected void initialize() {
@@ -110,6 +109,7 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
         exist06A = false;
         exist02A = false;
         exist99A = false;
+        申請書管理番号リスト = new ArrayList<>();
     }
 
     @Override
@@ -173,18 +173,23 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
             csvWriter_09B.writeLine(IkenshoJoho09BEucEntityEditor.edit(entity, 記入項目List, 意見項目List));
             exist09B = true;
+            申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
             csvWriter_09A.writeLine(IkenshoJoho09AEucEntityEditor.edit(entity, 記入項目List, 意見項目List));
             exist09A = true;
+            申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
             csvWriter_06A.writeLine(IkenshoJoho06AEucEntityEditor.edit(entity, 記入項目List, 意見項目List));
             exist06A = true;
+            申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
             csvWriter_02A.writeLine(IkenshoJoho02AEucEntityEditor.edit(entity, 記入項目List, 意見項目List));
             exist02A = true;
+            申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.asCode().equals(entity.getKoroshoIfShikibetsuCode())) {
             csvWriter_99A.writeLine(IkenshoJoho99AEucEntityEditor.edit(entity, 記入項目List, 意見項目List));
             exist99A = true;
+            申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         }
     }
 
@@ -215,22 +220,23 @@ public class IkenshoJohoCsvOutputProcess extends BatchProcessBase<IkenshoJohoEnt
 
     private void output出力条件表() {
         List<RString> 出力条件 = new ArrayList();
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(出力条件タイトル_申請書管理番号);
-        List<RString> 申請書管理番号リスト = processParameter.get申請書管理番号リスト();
-        builder.append(申請書管理番号リスト.get(0));
-        for (int index = 1; index < 申請書管理番号リスト.size(); index++) {
-            if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ZERO)) {
-                builder.append(", ").append(申請書管理番号リスト.get(index)).append(", ");
-                出力条件.add(builder.toRString());
-                builder = new RStringBuilder().append(スペース);
-            } else if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ONE)) {
-                builder.append(申請書管理番号リスト.get(index));
-            } else {
-                builder.append(", ").append(申請書管理番号リスト.get(index));
+        if (!申請書管理番号リスト.isEmpty()) {
+            RStringBuilder builder = new RStringBuilder();
+            builder.append(出力条件タイトル_申請書管理番号);
+            builder.append(申請書管理番号リスト.get(0));
+            for (int index = 1; index < 申請書管理番号リスト.size(); index++) {
+                if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ZERO)) {
+                    builder.append(", ").append(申請書管理番号リスト.get(index)).append(", ");
+                    出力条件.add(builder.toRString());
+                    builder = new RStringBuilder().append(スペース);
+                } else if (new Decimal(index + 1).remainder(申請書管理番号の1行表示最大件数).equals(Decimal.ONE)) {
+                    builder.append(申請書管理番号リスト.get(index));
+                } else {
+                    builder.append(", ").append(申請書管理番号リスト.get(index));
+                }
             }
+            出力条件.add(builder.toRString());
         }
-        出力条件.add(builder.toRString());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         EucFileOutputJokenhyoItem 帳票出力条件
                 = new EucFileOutputJokenhyoItem(
