@@ -300,22 +300,22 @@ public class ShujiiIkenshoBusiness {
         item.setHihokenshaName(entity.get被保険者氏名());
         item.setBirthYMD(get和暦(entity.get生年月日(), true));
         item.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
-        if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             item.setShubetsuZaitaku(記号);
             item.setShubetsuShisetsu(RString.EMPTY);
             item.setShubetsuShinki(記号);
             item.setShubetsuKeizoku(RString.EMPTY);
-        } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             item.setShubetsuZaitaku(RString.EMPTY);
             item.setShubetsuShisetsu(記号);
             item.setShubetsuShinki(記号);
             item.setShubetsuKeizoku(RString.EMPTY);
-        } else if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             item.setShubetsuZaitaku(記号);
             item.setShubetsuShisetsu(RString.EMPTY);
             item.setShubetsuShinki(RString.EMPTY);
             item.setShubetsuKeizoku(記号);
-        } else if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             item.setShubetsuZaitaku(RString.EMPTY);
             item.setShubetsuShisetsu(記号);
             item.setShubetsuShinki(RString.EMPTY);
@@ -331,7 +331,7 @@ public class ShujiiIkenshoBusiness {
     }
 
     private void set意見書作成料(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity, ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
-        if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             RString shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiZaitakuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(shinkiZaitakuKingaku.substring(1, 2));
@@ -342,7 +342,7 @@ public class ShujiiIkenshoBusiness {
             item.setSeikyugakuIkenshoSakuseiRyo3(shinkiZaitakuKingaku.substring(2, INT3));
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiZaitakuKingaku.substring(INT3, INT4));
         }
-        if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             RString shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(shinkiShisetsuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(shinkiShisetsuKingaku.substring(1, 2));
@@ -354,7 +354,7 @@ public class ShujiiIkenshoBusiness {
             item.setSeikyugakuIkenshoSakuseiRyo4(shinkiShisetsuKingaku.substring(INT3, INT4));
 
         }
-        if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             RString keizokuZaitakuKingaku = item.getKeizokuZaitakuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuZaitakuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(keizokuZaitakuKingaku.substring(1, 2));
@@ -366,7 +366,7 @@ public class ShujiiIkenshoBusiness {
             item.setSeikyugakuIkenshoSakuseiRyo4(keizokuZaitakuKingaku.substring(INT3, INT4));
 
         }
-        if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
             RString keizokuShisetsuKingaku = item.getKeizokuShisetsuKingaku();
             item.setIkenshoSakuseiRyo1(keizokuShisetsuKingaku.substring(0, 1));
             item.setIkenshoSakuseiRyo2(keizokuShisetsuKingaku.substring(1, 2));
