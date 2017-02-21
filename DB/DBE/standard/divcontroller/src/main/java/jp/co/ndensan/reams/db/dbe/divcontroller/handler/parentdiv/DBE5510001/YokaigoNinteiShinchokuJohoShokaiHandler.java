@@ -171,7 +171,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * @param searchResult 要介護認定進捗状況照会情報
      */
     public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> searchResult) {
-        set検索条件切替(true);
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
         if (searchResult.records().isEmpty()) {
@@ -180,6 +179,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         for (YokaigoNinteiShinchokuJoho joho : searchResult.records()) {
             dg_row.add(setRow(joho));
         }
+        set検索条件切替(true);
         div.getDgShinseiJoho().setDataSource(dg_row);
         div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大取得件数());
         div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
@@ -373,7 +373,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         onload();
         div.getTxtHihokenshaNo().clearValue();
         div.getTxtShikibetsuCode().clearValue();
-        div.getTxtShimei().clearValue();
+        div.getTxtShimei().clearDomain();
         div.getTxtShiteiHizukeRange().clearFromValue();
         div.getTxtShiteiHizukeRange().clearToValue();
         div.getChkNinteiChosaIrai().setSelectedItemsByKey(CHK_BOX_NASI);

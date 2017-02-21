@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * YokaigoNinteiShinchokuJohoShokai のクラスファイル 
@@ -18,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -116,12 +117,12 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShimei() {
+    public TextBoxAtenaMeisho getTxtShimei() {
         return this.getKensakuJoken().getSerchFromHohokensha().getTxtShimei();
     }
 
     @JsonIgnore
-    public void  setTxtShimei(TextBox txtShimei) {
+    public void  setTxtShimei(TextBoxAtenaMeisho txtShimei) {
         this.getKensakuJoken().getSerchFromHohokensha().setTxtShimei(txtShimei);
     }
 

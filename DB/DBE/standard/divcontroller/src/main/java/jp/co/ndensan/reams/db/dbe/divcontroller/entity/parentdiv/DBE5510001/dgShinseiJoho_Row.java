@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 08 17:19:39 JST 2016 
+ * Mon Feb 20 19:46:08 JST 2017 
  */
 
 
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgShinseiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
 
     private Button btnShokai;
     private RString hokensha;
@@ -152,7 +152,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
     }
 
-    public dgShinseiJoho_Row(Button btnShokai, RString hokensha, RString hihokenshaNo, RString shimei, RString hihoKubun, TextBoxDate shinseiDay, RString shinseiKubun, RString chosaIrai, RString chosaJisshi, RString chosaTokki, RString shujiiIkenshoIrai, RString shujiiIkenshoJuryo, RString ichijiHantei, RString maskingKanryo, RString shinsakaiWaritsuke, RString shinsakaiJisshi, TextBoxDate ninteiChosaIraiDay, TextBoxDate ninteiChosaJuryoDay, RString ninteiChosaItakusaki, RString ninteiChosain, TextBoxDate shujiiIkenshoIraiDay, TextBoxDate shujiiJuryoDay, RString shujiiIryoKikan, RString shujiiName, TextBoxDate ichijiHanteiDay, TextBoxDate ichijiHanteiKanryouDay, RString ichijiHanteiKekka, TextBoxDate kaigoNinteiShinsakaiWaritsukeDay, RString kaigoNinteiShinsakaiShiryo, TextBoxDate kaigoNinteiShinsakaiYoteiDay, TextBoxDate kaigoNinteiShinsakaiKaisaiDay, RString kaigoNinteiShinsakaiKaisaiNo, RString kaigoNinteiShinsakaiGogitai, RString kaigoNinteiShinsakaiYokaigodo, RString hihokenshaYubinNo, RString hihokenshaJusho, RString hihokenshaSeibetsu, TextBoxDate hihokenshaBirthDay, TextBoxNum hihokenshaNenrei, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo) {
+    public dgShinseiJoho_Row(RString hokensha, RString hihokenshaNo, RString shimei, RString hihoKubun, TextBoxDate shinseiDay, RString shinseiKubun, RString chosaIrai, RString chosaJisshi, RString chosaTokki, RString shujiiIkenshoIrai, RString shujiiIkenshoJuryo, RString ichijiHantei, RString maskingKanryo, RString shinsakaiWaritsuke, RString shinsakaiJisshi, TextBoxDate ninteiChosaIraiDay, TextBoxDate ninteiChosaJuryoDay, RString ninteiChosaItakusaki, RString ninteiChosain, TextBoxDate shujiiIkenshoIraiDay, TextBoxDate shujiiJuryoDay, RString shujiiIryoKikan, RString shujiiName, TextBoxDate ichijiHanteiDay, TextBoxDate ichijiHanteiKanryouDay, RString ichijiHanteiKekka, TextBoxDate kaigoNinteiShinsakaiWaritsukeDay, RString kaigoNinteiShinsakaiShiryo, TextBoxDate kaigoNinteiShinsakaiYoteiDay, TextBoxDate kaigoNinteiShinsakaiKaisaiDay, RString kaigoNinteiShinsakaiKaisaiNo, RString kaigoNinteiShinsakaiGogitai, RString kaigoNinteiShinsakaiYokaigodo, RString hihokenshaYubinNo, RString hihokenshaJusho, RString hihokenshaSeibetsu, TextBoxDate hihokenshaBirthDay, TextBoxNum hihokenshaNenrei, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo) {
         super();
         this.setOriginalData("btnShokai", btnShokai);
         this.setOriginalData("hokensha", hokensha);

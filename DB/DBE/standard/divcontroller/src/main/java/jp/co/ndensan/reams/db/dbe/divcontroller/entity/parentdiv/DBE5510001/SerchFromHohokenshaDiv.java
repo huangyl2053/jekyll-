@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * SerchFromHohokensha のクラスファイル 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SerchFromHohokenshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,7 +27,7 @@ public class SerchFromHohokenshaDiv extends Panel {
     @JsonProperty("txtShikibetsuCode")
     private TextBoxCode txtShikibetsuCode;
     @JsonProperty("txtShimei")
-    private TextBox txtShimei;
+    private TextBoxAtenaMeisho txtShimei;
     @JsonProperty("ddlNameMatchType")
     private DropDownList ddlNameMatchType;
 
@@ -77,7 +78,7 @@ public class SerchFromHohokenshaDiv extends Panel {
      * @return txtShimei
      */
     @JsonProperty("txtShimei")
-    public TextBox getTxtShimei() {
+    public TextBoxAtenaMeisho getTxtShimei() {
         return txtShimei;
     }
 
@@ -86,7 +87,7 @@ public class SerchFromHohokenshaDiv extends Panel {
      * @param txtShimei txtShimei
      */
     @JsonProperty("txtShimei")
-    public void setTxtShimei(TextBox txtShimei) {
+    public void setTxtShimei(TextBoxAtenaMeisho txtShimei) {
         this.txtShimei = txtShimei;
     }
 

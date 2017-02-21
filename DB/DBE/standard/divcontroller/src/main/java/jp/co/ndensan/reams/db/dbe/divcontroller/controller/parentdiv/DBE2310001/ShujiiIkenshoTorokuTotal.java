@@ -401,7 +401,7 @@ public class ShujiiIkenshoTorokuTotal {
         LasdecCode 市町村コード = (ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class));
         modle.set市町村コード(new RString(市町村コード.toString()));
         modle.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
-        modle.set主治医医療機関コード(div.getIkenshoKihonJoho().getTxtShujiiCode().getValue());
+        modle.set主治医医療機関コード(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanCode().getValue());
         modle.set主治医医療機関名称(div.getIkenshoKihonJoho().getTxtShujiiIryoKikanMei().getValue());
         modle.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
