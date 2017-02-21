@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class FileTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class FileTorikomiDiv extends Panel {
      */
     @JsonProperty("uplFileTorikomi")
     private UploadPanel uplFileTorikomi;
+    @JsonProperty("btnUpload")
+    private Button btnUpload;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +48,24 @@ public class FileTorikomiDiv extends Panel {
     @JsonProperty("uplFileTorikomi")
     public void setUplFileTorikomi(UploadPanel uplFileTorikomi) {
         this.uplFileTorikomi = uplFileTorikomi;
+    }
+
+    /*
+     * getbtnUpload
+     * @return btnUpload
+     */
+    @JsonProperty("btnUpload")
+    public Button getBtnUpload() {
+        return btnUpload;
+    }
+
+    /*
+     * setbtnUpload
+     * @param btnUpload btnUpload
+     */
+    @JsonProperty("btnUpload")
+    public void setBtnUpload(Button btnUpload) {
+        this.btnUpload = btnUpload;
     }
 
     // </editor-fold>

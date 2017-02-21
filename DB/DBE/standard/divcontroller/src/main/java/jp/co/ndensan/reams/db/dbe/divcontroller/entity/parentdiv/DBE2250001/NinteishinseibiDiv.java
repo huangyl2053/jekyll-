@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteishinseibiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -157,12 +157,22 @@ public class NinteishinseibiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtNinzu() {
+    public Button getBtnUpload() {
+        return this.getFileTorikomi().getBtnUpload();
+    }
+
+    @JsonIgnore
+    public void  setBtnUpload(Button btnUpload) {
+        this.getFileTorikomi().setBtnUpload(btnUpload);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtNinzu() {
         return this.getNinteiIchiran().getTxtNinzu();
     }
 
     @JsonIgnore
-    public void  setTxtNinzu(TextBox txtNinzu) {
+    public void  setTxtNinzu(TextBoxNum txtNinzu) {
         this.getNinteiIchiran().setTxtNinzu(txtNinzu);
     }
 
