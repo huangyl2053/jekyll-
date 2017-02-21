@@ -195,7 +195,7 @@ public class ImageinputRelate extends RelatedDataBase {
 
     @Override
     public boolean had一次判定() {
-        return isTrue(entity.get仮一次判定区分());
+        return isFalse(entity.get仮一次判定区分());
     }
 
     @Override

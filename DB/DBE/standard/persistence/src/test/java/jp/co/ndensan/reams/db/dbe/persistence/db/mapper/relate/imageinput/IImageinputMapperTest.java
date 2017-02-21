@@ -29,23 +29,32 @@ public class IImageinputMapperTest extends DbeTestDacBase {
 
     @Test
     public void get意見書関連データ() {
+        System.out.println("- get意見書関連データ() -----------------------------");
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
         ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
         List<ImageinputRelateEntity> entities = sut.get意見書関連データ(param);
         System.out.println(entities.isEmpty());
         ImageinputRelateEntity entity = entities.get(0);
-        System.out.println(entity.get主治医意見書情報().isEmpty());
-        System.out.println(entity.get被保険者カナ());
-        System.out.println(entity.is論理削除フラグ());
-        System.out.println(entity.isMatches指定申請日());
-        System.out.println(entity.get主治医意見書作成依頼年月日());
+        System.out.println("\t被保カナ：" + entity.get被保険者カナ());
+        System.out.println("\t論削フラ：" + entity.is論理削除フラグ());
+        System.out.println("\tmc申請日：" + entity.isMatches指定申請日());
+        System.out.println("\t意作依日：" + entity.get主治医意見書作成依頼年月日());
+        System.out.println("\t意依完日：" + entity.get意見書作成依頼完了日());
+        System.out.println("\t仮一次区：" + entity.get仮一次判定区分());
     }
 
     @Test
     public void getその他資料関連データ() {
+        System.out.println("- getその他資料関連データ() -------------------------");
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
         ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
         List<ImageInputSontaRelateEntity> entities = sut.getその他資料関連データ(param);
-        System.out.println(entities.isEmpty());
+        ImageInputSontaRelateEntity entity = entities.get(0);
+        System.out.println("\t被保カナ：" + entity.getHihokenshaKana());
+        System.out.println("\t論削フラ：" + entity.isLogicalDeletedFlag());
+        System.out.println("\t認申請日：" + entity.isMatchesShiteiShinseiYMD());
+        System.out.println("\t意依完日：" + entity.getIkenshoSakuseiIraiKanryoYMD());
+        System.out.println("\t調依完日：" + entity.getNinteichosaIraiKanryoYMD());
+        System.out.println("\t仮一次区：" + entity.getKariIchijiHanteiKubun());
     }
 }

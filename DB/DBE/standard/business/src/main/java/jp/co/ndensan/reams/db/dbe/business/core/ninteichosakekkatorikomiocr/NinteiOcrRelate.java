@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
@@ -200,7 +199,7 @@ public class NinteiOcrRelate extends RelatedDataBase {
 
     @Override
     public boolean had一次判定() {
-        return isTrue(entity.get仮一次判定区分());
+        return isFalse(entity.get仮一次判定区分());
     }
 
     @Override

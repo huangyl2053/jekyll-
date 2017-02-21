@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * その他資料取込時に参照します。ひとつの申請に関連するデータを保持します。
  */
 public class ImageInputSontaRelate extends RelatedDataBase {
 
@@ -60,7 +59,7 @@ public class ImageInputSontaRelate extends RelatedDataBase {
 
     @Override
     protected boolean had一次判定() {
-        return Objects.equals(true, this.entity.getKariIchijiHanteiKubun());
+        return isFalse(this.entity.getKariIchijiHanteiKubun());
     }
 
     @Override
@@ -75,7 +74,7 @@ public class ImageInputSontaRelate extends RelatedDataBase {
 
     @Override
     protected boolean had依頼() {
-        return isValid(entity.getIkenshoSakuseiIraiKanryoYMD()) || isValid(entity.getNinteichosaIraiKanryoYMD());
+        return isValid(this.entity.getIkenshoSakuseiIraiKanryoYMD()) || isValid(this.entity.getNinteichosaIraiKanryoYMD());
     }
 
     @Override

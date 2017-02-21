@@ -90,7 +90,7 @@
         WHERE
           T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
           AND T5101."hihokenshaNo" = #{被保険者番号}
-        ORDER BY matches指定申請日 DESC, t5101_論理削除フラグ, t5101_認定申請年月日 DESC
+        ORDER BY matches指定申請日 DESC, 論理削除フラグ, 認定申請年月日 DESC
         LIMIT 1
     </select>
 

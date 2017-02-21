@@ -167,9 +167,9 @@ public abstract class RelatedDataBase implements IRelatedData {
 
     /**
      * @param bool {@link Boolean}
-     * @return 指定の値が{@code null}ではなく、かつ、{@code true}と一致する場合、{@code true}.
+     * @return 指定の値が{@code null}ではなく、かつ、{@code false}と一致する場合、{@code true}.
      */
-    protected static boolean isTrue(Boolean bool) {
-        return java.util.Objects.equals(true, bool);
+    protected static boolean isFalse(Boolean bool) {
+        return java.util.Objects.equals(false, bool);
     }
 }
