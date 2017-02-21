@@ -488,6 +488,7 @@ public class GogitaiJohoSakusei {
             if(JYOTAI_CODE_ADD.equals(jyotai) || JYOTAI_CODE_UPD.equals(jyotai)){
                validationMessages.add(getValidationHandler(div).yukoKikanCheck());
             }  
+            validationMessages.add(getValidationHandler(div).委員人数チェック());
 //        validationMessages.add(getValidationHandler(div).shinsainListRequiredCheck());
 //        validationMessages.add(getValidationHandler(div).shinsainPersonNumCheck());
             if (validationMessages.iterator().hasNext()) {

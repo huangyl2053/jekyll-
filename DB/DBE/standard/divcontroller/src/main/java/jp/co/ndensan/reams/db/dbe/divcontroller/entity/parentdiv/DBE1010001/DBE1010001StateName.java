@@ -17,7 +17,8 @@ public enum DBE1010001StateName implements IStateEnumerations {
     NoChange(""),
     Default("default"),
     完了("完了"),
-    完了遷移有("完了遷移有");
+    完了遷移有("完了遷移有"),
+    照会("照会");
 
     private final RString name;
 

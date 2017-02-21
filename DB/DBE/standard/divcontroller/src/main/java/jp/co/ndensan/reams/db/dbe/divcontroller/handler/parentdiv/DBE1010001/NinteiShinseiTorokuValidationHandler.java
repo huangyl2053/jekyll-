@@ -163,7 +163,8 @@ public class NinteiShinseiTorokuValidationHandler {
         boolean isTorisageDateEmpty = div.getTxtTorisageDate().getValue() == null || div.getTxtTorisageDate().getValue().toDateString().isEmpty();
         boolean isTxtTorisageJiyuEmpty = div.getTxtTorisageJiyu().getValue() == null || div.getTxtTorisageJiyu().getValue().isEmpty();
         if (!div.getDdlTorisageJiyu().getSelectedValue().isEmpty() && (isTorisageDateEmpty || isTxtTorisageJiyuEmpty)) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須));
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須, 
+                    isTorisageDateEmpty ? div.getTxtTorisageDate() : div.getTxtTorisageJiyu()));
         }
         return validationMessages;
     }

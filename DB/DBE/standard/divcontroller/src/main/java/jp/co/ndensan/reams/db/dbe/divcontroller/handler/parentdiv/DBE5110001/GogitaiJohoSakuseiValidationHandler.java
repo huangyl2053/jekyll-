@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
@@ -208,7 +209,25 @@ public class GogitaiJohoSakuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
         if (div.getTxtIinTeiin().getValue().intValue() < rowList.size()) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.超過));
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.審査会委員定員数超過));
+            return validationMessages;
+        }
+
+        return validationMessages;
+    }
+
+    /**
+     *
+     * 「入力内容を確定する」をクリック時委員の人数チをチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 委員人数チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
+        int 最低定員数 = DbBusinessConfig.get(ConfigNameDBE.審査会最低定員数, RDate.getNowDate()).toInt();
+        if (最低定員数 > rowList.size()) {
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.審査会最低定員数不足));
             return validationMessages;
         }
 
@@ -333,6 +352,8 @@ public class GogitaiJohoSakuseiValidationHandler {
         合議体委員数が最大値を超過(DbeErrorMessages.合議体委員数が最大値を超過),
         審査会の合議体長は必ず１人(DbeErrorMessages.審査会の合議体長は必ず１人),
         超過(DbeErrorMessages.超過, "審査会委員", "審査会委員定員"),
+        審査会委員定員数超過(DbeWarningMessages.審査会委員定員数超過),
+        審査会最低定員数不足(DbeWarningMessages.審査会最低定員数不足),
         対象データなし_追加メッセージあり(UrErrorMessages.対象データなし_追加メッセージあり, "合議体一覧");
 
         private final Message message;
