@@ -99,15 +99,12 @@
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
           ON T5201."shinseishoKanriNo" = T5202."shinseishoKanriNo"
           AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo"
-          AND T5202."gaikyoChosaTextImageKubun" = (
-            SELECT
-              UzT0002CustomConfig."configValue" AS イメージ区分
-            FROM
-              rgdb."UzT0002CustomConfig" AS UzT0002CustomConfig
-            WHERE
-              UzT0002CustomConfig."schemaName" = 'rgdb'
-              AND UzT0002CustomConfig."subGyomuCode" = 'DBE'
-              AND UzT0002CustomConfig."configName" = '概況調査テキストイメージ区分'
+          AND NOT EXISTS (
+            SELECT 'X'
+            FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202_SUB
+            WHERE T5202."shinseishoKanriNo" = T5202_SUB."shinseishoKanriNo"
+            AND T5202."ninteichosaRirekiNo" = T5202_SUB."ninteichosaRirekiNo"
+            AND T5202."gaikyoChosaTextImageKubun" <![CDATA[<]]> T5202_SUB."gaikyoChosaTextImageKubun"
           )
       WHERE T5101."shinseishoKanriNo" = #{申請書管理番号}
    </select>

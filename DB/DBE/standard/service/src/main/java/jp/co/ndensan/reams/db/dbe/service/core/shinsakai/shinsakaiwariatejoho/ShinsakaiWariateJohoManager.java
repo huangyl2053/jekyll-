@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 介護認定審査会割当情報を管理するクラスです。
@@ -116,8 +117,10 @@ public class ShinsakaiWariateJohoManager {
         if (要介護認定完了情報 == null) {
             return false;
         }
-        if (!(要介護認定完了情報.getNinteiShinsakaiWariateKanryoYMD() == null)) {
-            return true;
+        if (要介護認定完了情報.getNinteiShinsakaiWariateKanryoYMD() != null) {
+            if (!要介護認定完了情報.getNinteiShinsakaiWariateKanryoYMD().isEmpty()) {
+                return true;
+            }
         }
         return false;
     }
