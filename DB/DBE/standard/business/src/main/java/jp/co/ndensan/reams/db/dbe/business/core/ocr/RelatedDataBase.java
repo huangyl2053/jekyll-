@@ -162,7 +162,7 @@ public abstract class RelatedDataBase implements IRelatedData {
      * 指定の{@link FlexibleDate}が{@code null}でなく、かつ、実在する日付を持つ場合、{@code true}.
      */
     protected static boolean isValid(FlexibleDate fDate) {
-        return fDate != null && fDate.isEmpty();
+        return fDate != null && fDate.isValid();
     }
 
     /**
