@@ -579,24 +579,23 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder checkDbT5101同情報(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5101Entity().getLogicalDeletedFlag()) {
-            return errorBuilder;
-        }
-        if (entity.getDbT5101Entity().getTorisageKubunCode() != null 
-                && entity.getDbT5101Entity().getTorisageKubunCode().equals(new Code(TorisageKubunCode.取り下げ.getコード()))) {
-            return errorBuilder;
-        }
-        if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
-            if (entity.getDbT5101Entity() == null) {
+        if (entity.getDbT5101Entity() != null) {
+            if (entity.getDbT5101Entity().getLogicalDeletedFlag()) {
+                return errorBuilder;
+            }
+            if (entity.getDbT5101Entity().getTorisageKubunCode() != null
+                    && entity.getDbT5101Entity().getTorisageKubunCode().equals(new Code(TorisageKubunCode.取り下げ.getコード()))) {
+                return errorBuilder;
+            }
+            if (entity.getDbT5102Entity() == null
+                    || entity.getDbT5102Entity().getNijiHanteiYMD() == null
+                    || entity.getDbT5102Entity().getNijiHanteiYMD().isEmpty()) {
+                errorBuilder.append(new RString("二次判定結果の出ていない申請が存在します；"));
+            }
+        } else {
+            if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
                 errorBuilder.append(new RString("申請データが存在しません；"));
             }
-            return errorBuilder;
-        }
-        if (entity.getDbT5101Entity() != null
-                && (entity.getDbT5102Entity() == null
-                || entity.getDbT5102Entity().getNijiHanteiYMD() == null
-                || entity.getDbT5102Entity().getNijiHanteiYMD().isEmpty())) {
-            errorBuilder.append(new RString("二次判定結果の出ていない申請が存在します；"));
         }
         return errorBuilder;
     }
