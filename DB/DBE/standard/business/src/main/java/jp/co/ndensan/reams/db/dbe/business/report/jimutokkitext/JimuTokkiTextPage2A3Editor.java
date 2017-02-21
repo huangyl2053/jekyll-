@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimutokkitext.JimuTokkiTextA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -64,7 +64,7 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
     private static final int PAGE2COUNT = 34;
     private static final int PAGE1連番名称COUNT = 30;
     private static final int PAGE2連番名称COUNT = 34;
-    private final IchijihanteikekkahyoA3Entity item;
+    private final IchijihanteikekkahyoA3Business item;
     private final int index;
     private final int page;
     private final List<RString> 特記事項List;
@@ -77,7 +77,7 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
      * @param index int
      * @param page int
      */
-    protected JimuTokkiTextPage2A3Editor(IchijihanteikekkahyoA3Entity item, List<RString> 特記事項List, int index, int page) {
+    protected JimuTokkiTextPage2A3Editor(IchijihanteikekkahyoA3Business item, List<RString> 特記事項List, int index, int page) {
         this.item = item;
         this.特記事項List = 特記事項List;
         this.index = index;

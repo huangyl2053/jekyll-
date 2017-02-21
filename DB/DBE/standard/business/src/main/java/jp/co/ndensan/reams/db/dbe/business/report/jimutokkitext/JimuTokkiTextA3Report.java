@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimutokkitext.JimuTokkiTextA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -26,14 +26,14 @@ public class JimuTokkiTextA3Report extends Report<JimuTokkiTextA3ReportSource> {
     private static final int PAGECOUN = 15;
     private static final int MAXCOUNT = 30;
     private static final int PAGETWO_MAXCOUNT = 34;
-    private final IchijihanteikekkahyoA3Entity data;
+    private final IchijihanteikekkahyoA3Business data;
 
     /**
      * インスタンスを生成します。
      *
-     * @param data 一次判定+特記事項A3版のEntityクラス
+     * @param data 一次判定+特記事項A3版のBusinessクラス
      */
-    public JimuTokkiTextA3Report(IchijihanteikekkahyoA3Entity data) {
+    public JimuTokkiTextA3Report(IchijihanteikekkahyoA3Business data) {
         this.data = data;
     }
 
