@@ -53,7 +53,18 @@ public class NinteiChosaTokusokujoOutputJokenhyoEditor {
         出力条件List.add(new RString("【調査期限】").concat(edit調査期限(param.getTemp_認定調査督促期限日数())));
         出力条件List.add(new RString("【印刷済対象者】").concat(edit印刷済対象者条件(param.getTemp_印刷済対象者())));
         出力条件List.add(new RString("【督促方法】").concat(edit督促方法(param.getTemp_督促方法())));
-        出力条件List.add(new RString("【督促メモ】").concat(edit督促メモ(param.getTemp_督促メモ())));
+        List<RString> 督促メモList = edit督促メモ(param.getTemp_督促メモ());
+        if (督促メモList != null && !督促メモList.isEmpty()) {
+            for (RString row : 督促メモList) {
+                if (row.equals(督促メモList.get(0))) {
+                    出力条件List.add(new RString("【督促メモ】").concat(row));
+                } else {
+                    出力条件List.add(new RString("　　　　　　").concat(row));
+                }
+            }
+        } else {
+            出力条件List.add(new RString("【督促メモ】"));
+        }
         出力条件List.add(new RString("【督促日】").concat(param.getTemp_督促日().wareki().toDateString()));
         return 出力条件List;
     }
@@ -89,13 +100,13 @@ public class NinteiChosaTokusokujoOutputJokenhyoEditor {
                 : new RString("対象外にする");
     }
 
-    private RString edit督促メモ(RString 督促メモ) {
+    private List<RString> edit督促メモ(RString 督促メモ) {
         if (督促メモ == null || 督促メモ.isEmpty()) {
-            return RString.EMPTY;
+            return new ArrayList<>();
         }
         if (督促メモ.length() <= 督促メモ表示最大桁数) {
-            return 督促メモ;
+            return 督促メモ.split("\n");
         }
-        return 督促メモ.substring(0, 督促メモ表示最大桁数);
+        return 督促メモ.substring(0, 督促メモ表示最大桁数).split("\n");
     }
 }

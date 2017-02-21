@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.JimuTokkiTextA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -55,7 +56,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
             new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.tokkiText1.name()),
             new RString(JimuTokkiTextA3ReportSource.ReportSourceFields.tokkiImg1.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
-    private IchijihanteikekkahyoA3Entity item;
+    private IchijihanteikekkahyoA3Business item;
     private IJimuShiryoShinsakaiIinMapper mapper;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
@@ -114,14 +115,14 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
             特記情報 = get特記情報(get共通情報(共通情報, 申請書管理番号));
         }
         主治医意見書情報.addAll(主治医意見書);
-        item = new IchijihanteikekkahyoA3Entity();
-        item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
+        IchijihanteikekkahyoA3Entity ichijiHanteiEntity = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書情報,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, 申請書管理番号), 主治医意見書, new RString(myBatisParameter.getGogitaiNo()),
                 特記情報, batchWriteA3.getImageFolderPath());
-        item.setServiceKubunCode(entity.getServiceKubunCode());
-        item.set審査番号(審査番号);
+        ichijiHanteiEntity.setServiceKubunCode(entity.getServiceKubunCode());
+        ichijiHanteiEntity.set審査番号(審査番号);
+        item = new IchijihanteikekkahyoA3Business(ichijiHanteiEntity, true);
         JimuTokkiTextA3Report report = new JimuTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
         審査番号++;
@@ -129,6 +130,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void createWriter() {
+        
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(

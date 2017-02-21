@@ -43,57 +43,71 @@ public class HanteiKekkaHyoA3ReportFormGroupIndex {
      * @return 対応するFormGroupIndex
      */
     public static int getFormGroupIndex(Code サービス区分コード, RString 特記事項テキストイメージ区分, RString 特記パターン) {
-        if (isサービス区分コード_予防及び介護以外(サービス区分コード)
-                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
                 && 特記パターン.equals(全面)) {
             return INT_1;
-        } else if (isサービス区分コード_予防及び介護以外(サービス区分コード)
-                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+        } else if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
                 && 特記パターン.equals(短冊)) {
             return INT_2;
-        } else if (isサービス区分コード_予防及び介護以外(サービス区分コード)
-                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
                 && 特記パターン.equals(全面)) {
             return INT_3;
-        } else if (isサービス区分コード_予防及び介護以外(サービス区分コード)
-                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
                 && 特記パターン.equals(短冊)) {
             return INT_4;
-        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(全面)) {
-            return INT_5;
-        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(短冊)) {
-            return INT_6;
-        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(全面)) {
-            return INT_7;
-        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(短冊)) {
-            return INT_8;
-        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(全面)) {
-            return INT_9;
-        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(短冊)) {
-            return INT_10;
-        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(全面)) {
-            return INT_11;
-        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
-                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
-                && 特記パターン.equals(短冊)) {
-            return INT_12;
-        } else {
-            return INT_1;
         }
+        return INT_1;
+//        if (isサービス区分コード_予防及び介護以外(サービス区分コード)
+//                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(全面)) {
+//            return INT_1;
+//        } else if (isサービス区分コード_予防及び介護以外(サービス区分コード)
+//                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(短冊)) {
+//            return INT_2;
+//        } else if (isサービス区分コード_予防及び介護以外(サービス区分コード)
+//                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(全面)) {
+//            return INT_3;
+//        } else if (isサービス区分コード_予防及び介護以外(サービス区分コード)
+//                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(短冊)) {
+//            return INT_4;
+//        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(全面)) {
+//            return INT_5;
+//        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(短冊)) {
+//            return INT_6;
+//        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(全面)) {
+//            return INT_7;
+//        } else if (ChoiceResultItem.ServiceKubun.予防.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(短冊)) {
+//            return INT_8;
+//        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(全面)) {
+//            return INT_9;
+//        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.テキスト.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(短冊)) {
+//            return INT_10;
+//        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(全面)) {
+//            return INT_11;
+//        } else if (ChoiceResultItem.ServiceKubun.介護.getCode().equals(サービス区分コード.value())
+//                && TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項テキストイメージ区分)
+//                && 特記パターン.equals(短冊)) {
+//            return INT_12;
+//        } else {
+//            return INT_1;
+//        }
     }
 
     /**

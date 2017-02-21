@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
 import jp.co.ndensan.reams.db.dbe.business.report.iintokkitext.IinTokkiTextA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -57,7 +58,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
     private IShiryoShinsakaiIinMapper mapper;
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
-    private IchijihanteikekkahyoA3Entity item;
+    private IchijihanteikekkahyoA3Business item;
     private int データ件数;
     private int 審査番号;
 
@@ -114,7 +115,6 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
 
     @Override
     protected void usualProcess(ItiziHanteiEntity entity) {
-        item = new IchijihanteikekkahyoA3Entity();
         myBatisParameter.setShinseishoKanri(entity.getShinseishoKanriNo());
         myBatisParameter.setNinteichosaRirekiNo(entity.getNinteichosaIraiRirekiNo());
         myBatisParameter.setShinseishoKanriZ(entity.getZShinseishoKanriNo());
@@ -138,13 +138,14 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         if (get共通情報(共通情報, entity.getShinseishoKanriNo()) != null) {
             特記情報 = get特記情報(get共通情報(共通情報, entity.getShinseishoKanriNo()));
         }
-        item = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
+        IchijihanteikekkahyoA3Entity ichijiHanteiEntity = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                 get共通情報(共通情報, entity.getShinseishoKanriNo()), 主治医意見書, new RString(paramter.getGogitaiNo()),
                 特記情報, batchWriteA3.getImageFolderPath());
-        item.setServiceKubunCode(entity.getServiceKubunCode());
-        item.set審査番号(審査番号);
+        ichijiHanteiEntity.setServiceKubunCode(entity.getServiceKubunCode());
+        ichijiHanteiEntity.set審査番号(審査番号);
+        item = new IchijihanteikekkahyoA3Business(ichijiHanteiEntity, false);
         IinTokkiTextA3Report report = new IinTokkiTextA3Report(item);
         report.writeBy(reportSourceWriterA3);
         審査番号++;

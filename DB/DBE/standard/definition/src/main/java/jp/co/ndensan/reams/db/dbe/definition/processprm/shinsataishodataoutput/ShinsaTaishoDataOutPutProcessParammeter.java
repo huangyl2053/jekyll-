@@ -23,15 +23,18 @@ import lombok.Setter;
 public class ShinsaTaishoDataOutPutProcessParammeter implements IBatchProcessParameter {
 
     private final RString kaisaiBangou;
+    private final RString tempPath;
 
     /**
      * コンストラクタです。
      *
      * @param kaisaiBangou 開催番号
+     * @param tempPath
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public ShinsaTaishoDataOutPutProcessParammeter(RString kaisaiBangou) {
+    public ShinsaTaishoDataOutPutProcessParammeter(RString kaisaiBangou, RString tempPath) {
         this.kaisaiBangou = kaisaiBangou;
+        this.tempPath = tempPath;
     }
 
     /**

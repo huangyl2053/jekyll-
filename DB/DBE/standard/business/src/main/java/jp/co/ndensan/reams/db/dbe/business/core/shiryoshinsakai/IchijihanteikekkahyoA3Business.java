@@ -1124,9 +1124,9 @@ public class IchijihanteikekkahyoA3Business {
     /**
      * serviceKubunCodeを取得します。
      *
-     * @return serviceKubunCode
+     * @return ServiceKubunCode
      */
-    public Code getserviceKubunCode() {
+    public Code getServiceKubunCode() {
         return entity.getServiceKubunCode();
     }
 
