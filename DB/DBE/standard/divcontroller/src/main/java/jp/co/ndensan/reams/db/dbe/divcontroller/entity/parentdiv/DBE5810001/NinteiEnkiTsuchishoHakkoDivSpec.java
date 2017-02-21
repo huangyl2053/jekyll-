@@ -215,6 +215,24 @@ public enum NinteiEnkiTsuchishoHakkoDivSpec implements IPredicate<NinteiEnkiTsuc
             }
             return true;
         }
+            },
+    選択行発行日チェック {
+        /**
+         * 選択行発行日チェックです。
+         *
+         * @param div 認定延期通知発行Div
+         * @return true:発行日未設定行無です、false:発行日未設定行有です。
+         */
+        @Override
+        public boolean apply(NinteiEnkiTsuchishoHakkoDiv div) {
+            List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
+            for (dgHakkotaishosha_Row row : rowList) {
+                if (row.getTsuchishohakkoymd().getText().isEmpty()) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }
