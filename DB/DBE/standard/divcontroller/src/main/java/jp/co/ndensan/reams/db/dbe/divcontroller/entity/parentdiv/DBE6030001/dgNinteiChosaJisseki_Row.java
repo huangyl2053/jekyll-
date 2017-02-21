@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 20 14:35:24 JST 2017 
+ * Tue Feb 21 10:11:36 JST 2017 
  */
 
 
@@ -28,7 +28,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
     private RString chosainMei;
     private RString hihokenshaBango;
     private RString shimei;
-    private RString iraibi;
     private RString jisshibi;
     private RString nyushubi;
     private RString chosaKubun;
@@ -46,7 +45,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.chosainMei = RString.EMPTY;
         this.hihokenshaBango = RString.EMPTY;
         this.shimei = RString.EMPTY;
-        this.iraibi = RString.EMPTY;
         this.jisshibi = RString.EMPTY;
         this.nyushubi = RString.EMPTY;
         this.chosaKubun = RString.EMPTY;
@@ -61,7 +59,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.setOriginalData("chosainMei", chosainMei);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
         this.setOriginalData("shimei", shimei);
-        this.setOriginalData("iraibi", iraibi);
         this.setOriginalData("jisshibi", jisshibi);
         this.setOriginalData("nyushubi", nyushubi);
         this.setOriginalData("chosaKubun", chosaKubun);
@@ -71,7 +68,7 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.setOriginalData("ninteichosaRirekiNo", ninteichosaRirekiNo);
     }
 
-    public dgNinteiChosaJisseki_Row(RString hokensha, RString code, RString meisho, RString ninteichosainCode, RString chosainMei, RString hihokenshaBango, RString shimei, RString iraibi, RString jisshibi, RString nyushubi, RString chosaKubun, RString homonNoShurui, RString tanka, RString shinseishoKanriNo, RString ninteichosaRirekiNo) {
+    public dgNinteiChosaJisseki_Row(RString hokensha, RString code, RString meisho, RString ninteichosainCode, RString chosainMei, RString hihokenshaBango, RString shimei, RString jisshibi, RString nyushubi, RString chosaKubun, RString homonNoShurui, RString tanka, RString shinseishoKanriNo, RString ninteichosaRirekiNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("code", code);
@@ -80,7 +77,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.setOriginalData("chosainMei", chosainMei);
         this.setOriginalData("hihokenshaBango", hihokenshaBango);
         this.setOriginalData("shimei", shimei);
-        this.setOriginalData("iraibi", iraibi);
         this.setOriginalData("jisshibi", jisshibi);
         this.setOriginalData("nyushubi", nyushubi);
         this.setOriginalData("chosaKubun", chosaKubun);
@@ -95,7 +91,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
         this.chosainMei = chosainMei;
         this.hihokenshaBango = hihokenshaBango;
         this.shimei = shimei;
-        this.iraibi = iraibi;
         this.jisshibi = jisshibi;
         this.nyushubi = nyushubi;
         this.chosaKubun = chosaKubun;
@@ -131,10 +126,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
 
     public RString getShimei() {
         return shimei;
-    }
-
-    public RString getIraibi() {
-        return iraibi;
     }
 
     public RString getJisshibi() {
@@ -198,11 +189,6 @@ public class dgNinteiChosaJisseki_Row extends DataRow {
     public void setShimei(RString shimei) {
         this.setOriginalData("shimei", shimei);
         this.shimei = shimei;
-    }
-
-    public void setIraibi(RString iraibi) {
-        this.setOriginalData("iraibi", iraibi);
-        this.iraibi = iraibi;
     }
 
     public void setJisshibi(RString jisshibi) {

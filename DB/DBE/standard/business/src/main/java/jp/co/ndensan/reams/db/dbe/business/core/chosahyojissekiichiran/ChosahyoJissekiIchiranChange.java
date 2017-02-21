@@ -36,7 +36,6 @@ public final class ChosahyoJissekiIchiranChange {
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 entity.get被保険者氏名(),
-                dateFormat(entity.get認定調査依頼年月日()),
                 dateFormat(entity.get認定調査実施年月日()),
                 dateFormat(entity.get認定調査受領年月日()),
                 ChosaKubun.toValue(entity.get認定調査区分コード()).get名称(),

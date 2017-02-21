@@ -19,6 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
 
+    private static final String BATCH_FLAG = "batchFlag";
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String CHOSA_KIJUNBI_TO = "chosaKijunbiTo";
     private static final String CHOSA_KIJUNBI_FROM = "chosaKijunbiFrom";
@@ -26,8 +27,11 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
     private static final String HOKENSYA = "hokensya";
     private static final String SHOKISAI_HOKENSYA = "shokisaiHokensya";
     private static final String KEY_JOHO = "keyJoho";
+    private static final String BREAK_POINT = "breakPoint";
     private static final long serialVersionUID = 8314555813503538349L;
 
+    @BatchParameter(key = BATCH_FLAG, name = "バッチフラグ")
+    private boolean batchFlag;
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
     @BatchParameter(key = CHOSA_KIJUNBI_TO, name = "基準日TO")
@@ -42,6 +46,8 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
     private RString shokisaiHokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<ChosahyoJissekiIchiranKey> keyJoho;
+    @BatchParameter(key = BREAK_POINT, name = "改頁")
+    private RString breakPoint;
 
     /**
      * コンストラクタです。
@@ -52,6 +58,7 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      *
+     * @param batchFlag
      * @param syohyoSyuturyoku 帳票出力区分
      * @param chosaKijunbiFrom 基準日FROM
      * @param chosaKijunbiTo 基準日TO
@@ -59,14 +66,18 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
      * @param hokensya 保険者
      * @param shoKisaiHokensya 証記載保険者
      * @param keyJoho キー情報Entityリスト
+     * @param breakPoint
      */
-    public DBE601002_NinteichosaJissekiParameter(RString syohyoSyuturyoku,
+    public DBE601002_NinteichosaJissekiParameter(boolean batchFlag,
+            RString syohyoSyuturyoku,
             RString chosaKijunbiFrom,
             RString chosaKijunbiTo,
             RString chosaKijunbiKubun,
             RString hokensya,
             RString shoKisaiHokensya,
-            List<ChosahyoJissekiIchiranKey> keyJoho) {
+            List<ChosahyoJissekiIchiranKey> keyJoho,
+            RString breakPoint) {
+        this.batchFlag = batchFlag;
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.chosaKijunbiFrom = chosaKijunbiFrom;
         this.chosaKijunbiTo = chosaKijunbiTo;
@@ -74,6 +85,7 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
         this.hokensya = hokensya;
         this.shokisaiHokensya = shoKisaiHokensya;
         this.keyJoho = keyJoho;
+        this.breakPoint = breakPoint;
     }
 
     /**
@@ -82,12 +94,14 @@ public class DBE601002_NinteichosaJissekiParameter extends BatchParameterBase {
      * @return 帳票出力用認定調査実績集計表のProcessParameter
      */
     public ChosahyoJissekiIchiranProcessParameter toProcessParamter() {
-        return new ChosahyoJissekiIchiranProcessParameter(syohyoSyuturyoku,
+        return new ChosahyoJissekiIchiranProcessParameter(batchFlag,
+                syohyoSyuturyoku,
                 chosaKijunbiFrom,
                 chosaKijunbiTo,
                 chosaKijunbiKubun,
                 hokensya,
                 shokisaiHokensya,
-                keyJoho);
+                keyJoho,
+                breakPoint);
     }
 }

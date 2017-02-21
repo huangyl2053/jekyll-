@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran.IkenshoJissekiIchiranChange;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshojissekiichiran.IkenshoJissekiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.IkenshoShukeiKijunbiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojissekiichiran.IkenshoJissekiIchiranProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IIkenshoJissekiIchiranCsvEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran.IkenshoJissekiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.ikenshojissekiichiran.IkenshoJissekiIchiranReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -30,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -54,6 +55,7 @@ public class IkenshoJissekiIchiranProcessREPORT extends BatchProcessBase<Ikensho
     private IkenshoJissekiIchiranProcessParameter paramter;
     private RString 導入団体コード;
     private RString 市町村名;
+    private static final RString 改頁項目 = new RString("主治医医療機関コード");
 
     @BatchWriter
     private BatchReportWriter<IkenshoJissekiIchiranReportSource> batchWrite;
@@ -74,7 +76,18 @@ public class IkenshoJissekiIchiranProcessREPORT extends BatchProcessBase<Ikensho
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        List<RString> PAGE_BREAK_KEYS;
+        if (paramter.get改頁().equals(改頁項目)) {
+            PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+                    new RString(IkenshoJissekiIchiranReportSource.ReportSourceFields.listIkenshoJissekiIchiran_1.name()),
+                    new RString(IkenshoJissekiIchiranReportSource.ReportSourceFields.listIkenshoJissekiIchiran_2.name())));
+        } else {
+            PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+                    new RString(IkenshoJissekiIchiranReportSource.ReportSourceFields.listIkenshoJissekiIchiran_1.name())));
+        }
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<IkenshoJissekiIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -116,6 +129,7 @@ public class IkenshoJissekiIchiranProcessREPORT extends BatchProcessBase<Ikensho
         出力条件.add(get出力条件_基準日区分From(基準日区分));
         出力条件.add(get出力条件_基準日区分To(基準日区分));
         出力条件.add(保険者_SB.toRString());
+        出力条件.add(get出力条件_改頁());
         return 出力条件;
     }
 
@@ -142,6 +156,12 @@ public class IkenshoJissekiIchiranProcessREPORT extends BatchProcessBase<Ikensho
                 .append(new RString("（To）】"))
                 .append(dateFormat(paramter.get基準日TO()))
                 .toRString();
+    }
+    
+    private RString get出力条件_改頁() {
+        RString 改頁 = new RString("【改頁】");
+        改頁.concat(paramter.get改頁());
+        return 改頁;
     }
 
     private PersonalData toPersonalData(IkenshoJissekiIchiranRelateEntity entity) {

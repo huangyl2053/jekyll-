@@ -32,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -61,7 +63,7 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
             + "IChosahyoJissekiIchiranMapper.get帳票出力用認定調査実績集計表");
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601002.getReportId();
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE603001"));
-    private static final RString CSV_NAME = new RString("認定調査実績集計.csv");
+    private static final RString CSV_NAME = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, new RString("DBE603001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString なし = new RString("なし");

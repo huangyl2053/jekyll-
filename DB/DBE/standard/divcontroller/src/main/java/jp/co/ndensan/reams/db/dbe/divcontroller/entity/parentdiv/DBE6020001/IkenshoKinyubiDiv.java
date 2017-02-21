@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IkenshoKinyubiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,10 @@ public class IkenshoKinyubiDiv extends Panel {
     private RadioButton radKensakuKijunbi;
     @JsonProperty("txtIkenshoKinyubi")
     private TextBoxDateRange txtIkenshoKinyubi;
+    @JsonProperty("radShutsuryokuHoho")
+    private RadioButton radShutsuryokuHoho;
+    @JsonProperty("ddlKaipage")
+    private DropDownList ddlKaipage;
     @JsonProperty("btnKensakuClear")
     private Button btnKensakuClear;
     @JsonProperty("txtMaxKensu")
@@ -74,6 +78,42 @@ public class IkenshoKinyubiDiv extends Panel {
     @JsonProperty("txtIkenshoKinyubi")
     public void setTxtIkenshoKinyubi(TextBoxDateRange txtIkenshoKinyubi) {
         this.txtIkenshoKinyubi = txtIkenshoKinyubi;
+    }
+
+    /*
+     * getradShutsuryokuHoho
+     * @return radShutsuryokuHoho
+     */
+    @JsonProperty("radShutsuryokuHoho")
+    public RadioButton getRadShutsuryokuHoho() {
+        return radShutsuryokuHoho;
+    }
+
+    /*
+     * setradShutsuryokuHoho
+     * @param radShutsuryokuHoho radShutsuryokuHoho
+     */
+    @JsonProperty("radShutsuryokuHoho")
+    public void setRadShutsuryokuHoho(RadioButton radShutsuryokuHoho) {
+        this.radShutsuryokuHoho = radShutsuryokuHoho;
+    }
+
+    /*
+     * getddlKaipage
+     * @return ddlKaipage
+     */
+    @JsonProperty("ddlKaipage")
+    public DropDownList getDdlKaipage() {
+        return ddlKaipage;
+    }
+
+    /*
+     * setddlKaipage
+     * @param ddlKaipage ddlKaipage
+     */
+    @JsonProperty("ddlKaipage")
+    public void setDdlKaipage(DropDownList ddlKaipage) {
+        this.ddlKaipage = ddlKaipage;
     }
 
     /*

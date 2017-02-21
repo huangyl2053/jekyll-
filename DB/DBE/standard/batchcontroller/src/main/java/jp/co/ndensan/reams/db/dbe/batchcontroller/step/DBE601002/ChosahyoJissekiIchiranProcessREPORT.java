@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601002;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyojissekiichiran.ChosahyoJissekiIchiranChange;
 import jp.co.ndensan.reams.db.dbe.business.report.ichosahyojissekiichiran.ChosahyoJissekiIchiranReport;
@@ -36,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -51,9 +54,9 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
     private static final ReportId REPORT_ID = ReportIdDBE.DBE601002.getReportId();
     private static final RString なし = new RString("なし");
     private ChosahyoJissekiIchiranProcessParameter paramter;
-
     private RString 導入団体コード;
     private RString 市町村名;
+    private static final RString 改頁項目 = new RString("調査委託先コード");
 
     @BatchWriter
     private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
@@ -74,7 +77,18 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value()).create();
+        List<RString> PAGE_BREAK_KEYS;
+        if (paramter.get改頁().equals(改頁項目)) {
+            PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+                    new RString(ChosahyoJissekiIchiranReportSource.ReportSourceFields.listChosaJissekiIchiran_1.name()),
+                    new RString(ChosahyoJissekiIchiranReportSource.ReportSourceFields.listChosaJissekiIchiran_2.name())));
+        } else {
+            PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+                    new RString(ChosahyoJissekiIchiranReportSource.ReportSourceFields.listChosaJissekiIchiran_1.name())));
+        }
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<ChosahyoJissekiIchiranReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
 
@@ -114,6 +128,7 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
         出力条件.add(get出力条件_基準日From(基準日区分));
         出力条件.add(get出力条件_基準日TO(基準日区分));
         出力条件.add(保険者_SB.toRString());
+        出力条件.add(get出力条件_改頁());
         return 出力条件;
     }
 
@@ -140,6 +155,12 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
                 .append("（To）】")
                 .append(dateFormat(paramter.get基準日TO()))
                 .toRString();
+    }
+
+    private RString get出力条件_改頁() {
+        RString 改頁 = new RString("【改頁】");
+        改頁.concat(paramter.get改頁());
+        return 改頁;
     }
 
     private PersonalData toPersonalData(ChosahyoJissekiIchiranRelateEntity entity) {

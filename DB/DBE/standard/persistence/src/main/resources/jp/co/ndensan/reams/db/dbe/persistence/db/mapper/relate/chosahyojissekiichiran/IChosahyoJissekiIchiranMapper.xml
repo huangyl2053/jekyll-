@@ -18,7 +18,6 @@
         , T5913."chosainShimei" AS 調査員氏名
         , T5101."hihokenshaNo" AS 被保険者番号
         , T5101."hihokenshaName" AS 被保険者氏名
-        , T5201."ninteichosaIraiYMD" AS 認定調査依頼年月日
         , T5202."ninteichosaJisshiYMD" AS 認定調査実施年月日
         , T5202."ninteichosaJuryoYMD" AS 認定調査受領年月日
         , T5202."ninteiChosaKubunCode" AS 認定調査区分コード
@@ -28,12 +27,19 @@
         , T5202."ninteichosaRirekiNo" AS 認定調査依頼履歴番号
         , COUNT(*) OVER() as "totalCount"
         <include refid="core" />
+        <include refid="group" />
         <include refid="order" />
     </select>
 
     <sql id="core">
         FROM
-        rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
+        ( SELECT * FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS A
+        WHERE NOT EXISTS (
+        SELECT 'X' FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS B
+        WHERE A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        AND A."ninteichosaRirekiNo" = B."ninteichosaRirekiNo"
+        AND A."gaikyoChosaTextImageKubun" <![CDATA[<]]> B."gaikyoChosaTextImageKubun"
+        ) ) AS T5202
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
         ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo"	
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
@@ -49,9 +55,6 @@
         ON T5210."shinseishoKanriNo" = T5202."shinseishoKanriNo"
         AND T5210."ninteichosaRirekiNo" = T5202."ninteichosaRirekiNo"
         AND T5210.remban = 1
-        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
-        ON T5201."shinseishoKanriNo" = T5202."shinseishoKanriNo"
-        AND T5201."ninteichosaIraiRirekiNo" = T5202."ninteichosaRirekiNo"
         INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
         ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
         AND (T5031."homonShubetsu" = '1') = T5210."shisetsuRiyoFlag"
@@ -63,14 +66,6 @@
         </if>
         <where>
             <choose>
-                <when test="基準日区分 == 1">
-                    <if test="基準日FROMFlag">
-                        AND #{基準日FROM} <![CDATA[<=]]> T5201."ninteichosaIraiYMD"
-                    </if>
-                    <if test="基準日TOFlag">
-                        AND T5201."ninteichosaIraiYMD" <![CDATA[<=]]> #{基準日TO}
-                    </if>
-                </when>
                 <when test="基準日区分 == 2">
                     <if test="基準日FROMFlag">
                         AND #{基準日FROM} <![CDATA[<=]]> T5202."ninteichosaJisshiYMD"
@@ -106,9 +101,38 @@
             </if>
         </where>
     </sql>
+    
+    <sql id="group">
+        GROUP BY T7051."shoKisaiHokenshaNo"
+        , T7051."shichosonMeisho"
+        , T5202."chosaItakusakiCode"
+        , T5910."jigyoshaMeisho"
+        , T5202."chosainCode"
+        , T5913."chosainShimei"
+        , T5101."hihokenshaNo"
+        , T5101."hihokenshaName"
+        , T5202."ninteichosaJisshiYMD"
+        , T5202."ninteichosaJuryoYMD"
+        , T5202."ninteiChosaKubunCode"
+        , T5210."shisetsuRiyoFlag"
+        , CAST(T5031.tanka AS TEXT)
+        , T5202."shinseishoKanriNo"
+        , T5202."ninteichosaRirekiNo"
+    </sql>
 
     <sql id="order">
-        ORDER BY T5202."chosaItakusakiCode", T5202."chosainCode", T5202."shinseishoKanriNo", T5202."ninteichosaRirekiNo"
+        ORDER BY T7051."shoKisaiHokenshaNo"
+        , T5202."chosaItakusakiCode"
+        , T5202."chosainCode"
+        , T5101."hihokenshaNo"
+        <choose>
+            <when test="基準日区分 == 2">
+                , T5202."ninteichosaJisshiYMD"
+            </when>
+            <when test="基準日区分 == 3">
+                , T5202."ninteichosaJuryoYMD"
+            </when>
+        </choose>
         <if test="件数Flag">
             LIMIT #{件数}
         </if>

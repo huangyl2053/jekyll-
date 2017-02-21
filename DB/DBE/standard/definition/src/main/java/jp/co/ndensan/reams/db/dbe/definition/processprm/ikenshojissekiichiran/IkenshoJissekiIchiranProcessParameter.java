@@ -30,6 +30,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
     private final RString 保険者名称;
     private final RString 証記載保険者;
     private final List<IkenshoJissekiIchiranKey> keyJoho;
+    private final RString 改頁;
 
     /**
      * コンストラクタです。
@@ -43,6 +44,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
      * @param 保険者 保険者
      * @param 保険者名称 保険者名称
      * @param keyJoho キー情報Entityリスト
+     * @param 改頁 改頁
      */
     public IkenshoJissekiIchiranProcessParameter(boolean batchFlag,
             RString 帳票出力区分,
@@ -52,7 +54,8 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
             RString 保険者,
             RString 保険者名称,
             RString 証記載保険者,
-            List<IkenshoJissekiIchiranKey> keyJoho) {
+            List<IkenshoJissekiIchiranKey> keyJoho,
+            RString 改頁) {
         this.batchFlag = batchFlag;
         this.帳票出力区分 = 帳票出力区分;
         this.基準日FROM = 基準日FROM;
@@ -62,6 +65,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
         this.保険者 = 保険者;
         this.保険者名称 = 保険者名称;
         this.keyJoho = keyJoho;
+        this.改頁 = 改頁;
     }
 
     /**
@@ -75,6 +79,7 @@ public final class IkenshoJissekiIchiranProcessParameter implements IBatchProces
                 基準日TO,
                 基準日区分,
                 保険者,
-                keyJoho);
+                keyJoho,
+                改頁);
     }
 }
