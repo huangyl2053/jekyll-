@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJ
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
+ * 審査会資料（組み合わせ）の事務局用、委員用の共通処理クラスです。
+ * 
  * @author n3423
  */
 public class KumiawaseCommonBusiness {
@@ -52,7 +52,7 @@ public class KumiawaseCommonBusiness {
 
     /**
      * 当クラスにて使用するイメージファイルパスを設定します。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      * @param batchImageFolderPath イメージ格納用パス
      */
@@ -68,6 +68,17 @@ public class KumiawaseCommonBusiness {
     }
 
     /**
+     * 当クラスにて使用するイメージファイルパスを設定します。
+     *
+     * @param sharedFileId 共有ファイルID
+     * @param sharedFileName 共有ファイル名称（証記載保険者番号＋被保険者番号）
+     * @param batchImageFolderPath イメージ格納用パス
+     */
+    public void setImageFilePath(RDateTime sharedFileId, RString sharedFileName, RString batchImageFolderPath) {
+        imageFilePath = copySharedFiles(sharedFileId, sharedFileName, batchImageFolderPath);
+    }
+
+    /**
      * 主治医意見書情報を取得します。
      *
      * @param shinseishoKanriNo 申請書管理番号
@@ -79,17 +90,31 @@ public class KumiawaseCommonBusiness {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
                 entity.setJimukyoku(isJimu);
                 JimuShinsakaiWariateJohoBusiness business = new JimuShinsakaiWariateJohoBusiness(entity);
-                if (isJimu) {
-                    business.set主治医意見書イメージ１(DBEImageUtil.getOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書表.getImageFileName()));
-                    business.set主治医意見書イメージ２(DBEImageUtil.getOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書裏.getImageFileName()));
-                } else {
-                    business.set主治医意見書イメージ１(DBEImageUtil.getMaskOrOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書表.getImageFileName()));
-                    business.set主治医意見書イメージ２(DBEImageUtil.getMaskOrOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書裏.getImageFileName()));
-                }
+                List<RString> opinionFilePath = getOpinionFilePath(isJimu);
+                business.set主治医意見書イメージ１(opinionFilePath.get(0));
+                business.set主治医意見書イメージ２(opinionFilePath.get(1));
                 return business;
             }
         }
         return null;
+    }
+
+    /**
+     * 主治医意見書のイメージパスリストを取得します。
+     *
+     * @param isJimu 事務局用
+     * @return 意見書イメージパスリスト
+     */
+    public List<RString> getOpinionFilePath(boolean isJimu) {
+        List<RString> opinionFilePathList = new ArrayList<>();
+        if (isJimu) {
+            opinionFilePathList.add(DBEImageUtil.getOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書表.getImageFileName()));
+            opinionFilePathList.add(DBEImageUtil.getOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書裏.getImageFileName()));
+        } else {
+            opinionFilePathList.add(DBEImageUtil.getMaskOrOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書表.getImageFileName()));
+            opinionFilePathList.add(DBEImageUtil.getMaskOrOriginalImageFilePath(imageFilePath, ImageFileName.主治医意見書裏.getImageFileName()));
+        }
+        return opinionFilePathList;
     }
 
     /**
@@ -103,17 +128,43 @@ public class KumiawaseCommonBusiness {
         JimuSonotashiryoBusiness business = null;
         for (ShinsakaiSiryoKyotsuEntity entity : shinsakaiShiryoCommonEntityList) {
             if (shinseishoKanriNo.equals(entity.getShinseishoKanriNo())) {
-                if (!isJimu) {
-                    entity.setHihokenshaName(AtenaMeisho.EMPTY);
-                }
                 entity.setJimukyoku(isJimu);
-                List<RString> イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), ImageFileItem.getOtherFileImageFileList_Mask(), isJimu);
+                List<RString> イメージファイルリスト = getOtherFilePath(entity.getImageSharedFileId(), ImageFileItem.getOtherFileImageFileList_Mask(), isJimu);
                 if (イメージファイルリスト != null && !イメージファイルリスト.isEmpty()) {
                     business = new JimuSonotashiryoBusiness(entity, イメージファイルリスト);
                 }
             }
         }
         return business;
+    }
+    
+    /**
+     * その他資料を取得します。
+     *
+     * @param sharedFileId 共有ファイルID
+     * @param ファイル名List イメージファイルリスト
+     * @param isJimu 事務局用
+     * @return その他資料
+     */
+    public List<RString> getOtherFilePath(RDateTime sharedFileId, List<RString> ファイル名List, boolean isJimu) {
+        List<RString> ファイルPathList = new ArrayList<>();
+        if (sharedFileId == null) {
+            return ファイルPathList;
+        }
+        for (RString ファイル名 : ファイル名List) {
+            if (!RString.isNullOrEmpty(imageFilePath)) {
+                RString fileFullPath;
+                if (isJimu) {
+                    fileFullPath = DBEImageUtil.getOriginalImageFilePath(imageFilePath, ファイル名);
+                } else {
+                    fileFullPath = DBEImageUtil.getMaskOrOriginalImageFilePath(imageFilePath, ファイル名);
+                }
+                if (!RString.isNullOrEmpty(fileFullPath)) {
+                    ファイルPathList.add(fileFullPath);
+                }
+            }
+        }
+        return ファイルPathList;
     }
 
     /**
@@ -184,35 +235,14 @@ public class KumiawaseCommonBusiness {
     }
 
     /**
-     * その他資料を取得します。
-     *
-     * @param sharedFileId 共有ファイルID
-     * @param ファイル名List イメージファイルリスト
-     * @param isJimu 事務局用
-     * @return その他資料
+     * 指定したローカルパスにイメージファイルをコピーし、コピー先のフォルダパスを返します。
+     * 
+     * @param sharedFileId RDateTime
+     * @param sharedFileName RString
+     * @param batchImageFolderPath RString
+     * @return コピー先パス
      */
-    private List<RString> getその他資料(RDateTime sharedFileId, List<RString> ファイル名List, boolean isJimu) {
-        List<RString> ファイルPathList = new ArrayList<>();
-        if (sharedFileId == null) {
-            return ファイルPathList;
-        }
-        for (RString ファイル名 : ファイル名List) {
-            if (!RString.isNullOrEmpty(imageFilePath)) {
-                RString fileFullPath;
-                if (isJimu) {
-                    fileFullPath = DBEImageUtil.getOriginalImageFilePath(imageFilePath, ファイル名);
-                } else {
-                    fileFullPath = DBEImageUtil.getMaskOrOriginalImageFilePath(imageFilePath, ファイル名);
-                }
-                if (!RString.isNullOrEmpty(fileFullPath)) {
-                    ファイルPathList.add(fileFullPath);
-                }
-            }
-        }
-        return ファイルPathList;
-    }
-
-    private RString copySharedFiles(RDateTime sharedFileId, RString sharedFileName, RString batchImageFolderPath) {
+    public RString copySharedFiles(RDateTime sharedFileId, RString sharedFileName, RString batchImageFolderPath) {
         if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
             return RString.EMPTY;
         }

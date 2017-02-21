@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IkenshoCommonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaiWariateJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoa3.ShujiiikenshoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -24,13 +24,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -48,12 +41,6 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
             new RString(ShujiiikenshoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinShinsakaiIinJohoProcessParameter paramter;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
-    private JimuShinsakaiWariateJohoBusiness business;
-    private static final RString ファイルID_E0001 = new RString("E0001.png");
-    private static final RString ファイルID_E0002 = new RString("E0002.png");
-    private static final RString ファイルID_E0001BAK = new RString("E0001_BAK.png");
-    private static final RString ファイルID_E0002BAK = new RString("E0002_BAK.png");
-    private static final RString SEPARATOR = new RString("/");
 
     @BatchWriter
     private BatchReportWriter<ShujiiikenshoA3ReportSource> batchWriteA3;
@@ -75,16 +62,7 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
         entity.setJimukyoku(true);
-        business = new JimuShinsakaiWariateJohoBusiness(entity);
-        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
-        if (entity.isJimukyoku()) {
-            business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001BAK));
-            business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002BAK));
-        } else {
-            business.set主治医意見書イメージ１(共有ファイルを引き出す(path, ファイルID_E0001));
-            business.set主治医意見書イメージ２(共有ファイルを引き出す(path, ファイルID_E0002));
-        }
+        JimuShinsakaiWariateJohoBusiness business = IkenshoCommonBusiness.createBusiness(entity, batchWriteA3.getImageFolderPath());
         ShujiiikenshoA3Report reportA3 = new ShujiiikenshoA3Report(business);
         reportA3.writeBy(reportSourceWriterA3);
     }
@@ -108,31 +86,5 @@ public class JimuIkenshoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsakai
 
     @Override
     protected void afterExecute() {
-    }
-
-    private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        RString fileFullPath = getFilePath(path, fileName);
-        if (!RString.isNullOrEmpty(fileFullPath)) {
-            return fileFullPath;
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
-            return RString.EMPTY;
-        }
-        try {
-            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA3.getImageFolderPath());
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
     }
 }

@@ -64,18 +64,18 @@
             <if test="isSonotaKikanCodeFlag">
                 AND DbT5595."sonotaKikanCode" = #{sonotaKikanCode}
             </if>
-            <if test="kikenFlag == '1'">
+            <if test="kikenFlag.toString() == 'key0'">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[<=]]> #{systemDate}
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{systemDate}
             </if>
-            <if test="kikenFlag == '2'">
+            <if test="kikenFlag.toString() == 'key2'">
                 AND (rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[>=]]> #{systemDate}
                 OR rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{systemDate})
             </if>
-            <if test="haishiFlag == '1'">
+            <if test="haishiFlag.toString() == 1">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = true
             </if>
-            <if test="haishiFlag == '2'">
+            <if test="haishiFlag.toString() == 2">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = false
             </if>
             <if test="isShoKisaiHokenshaNoFlag">

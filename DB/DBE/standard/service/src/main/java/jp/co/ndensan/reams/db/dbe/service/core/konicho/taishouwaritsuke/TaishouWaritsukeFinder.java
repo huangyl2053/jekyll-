@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.service.core.konicho.taishouwaritsuke;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
@@ -16,15 +15,14 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountSh
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.TaishouIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.KohoshaIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.ParamEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouWaritsukeHeadEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taishouwaritsuke.ITaishouWaritsukeMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -106,18 +104,18 @@ public class TaishouWaritsukeFinder {
     }
 
     /**
-     * get申請書情報by申請書管理番号
+     * getParamData
      *
      * @param 申請書管理番号 申請書管理番号
-     * @return 要介護認定申請情報
+     * @return オブザーバーチェックの検索パラメータ取得
      */
-    public NinteiShinseiJoho2 get申請書情報by申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        DbT5101NinteiShinseiJohoDac dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
-        DbT5101NinteiShinseiJohoEntity entity = dac.get申請書情報by申請書管理番号(申請書管理番号);
+    public ParamEntity getParamData(ShinseishoKanriNo 申請書管理番号) {
+        ITaishouWaritsukeMapper mapper = mapperProvider.create(ITaishouWaritsukeMapper.class);
+        ParamEntity entity = mapper.getParamData(申請書管理番号);
         if (entity != null) {
-            return new NinteiShinseiJoho2(entity);
+            return entity;
         } else {
-            return new NinteiShinseiJoho2(new DbT5101NinteiShinseiJohoEntity());
+            return null;
         }
     }
 

@@ -33,7 +33,9 @@ public class IkenshoSakuseiJissekiShokai {
 
     private static final RString CSVを出力する = new RString("1");
     private static final RString 集計表を発行する = new RString("2");
-    private static RString 状態;
+    private static final RString 一覧表 = new RString("1");
+    private static final RString CSVファイル = new RString("2");
+    private static RString STATE;
 
     /**
      * 画面の初期化です。
@@ -47,7 +49,7 @@ public class IkenshoSakuseiJissekiShokai {
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        状態 = DBE6020001StateName.検索.getName();
+        STATE = DBE6020001StateName.検索.getName();
         return ResponseData.of(div).respond();
     }
 
@@ -59,7 +61,7 @@ public class IkenshoSakuseiJissekiShokai {
      */
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_BtnKensakuClear(IkenshoSakuseiJissekiShokaiDiv div) {
         getHandler(div).onClick_BtnKensakuClear();
-        状態 = DBE6020001StateName.検索.getName();
+        STATE = DBE6020001StateName.検索.getName();
         return ResponseData.of(div).setState(DBE6020001StateName.検索);
     }
 
@@ -86,10 +88,11 @@ public class IkenshoSakuseiJissekiShokai {
                 意見書記入日TO,
                 div.getRadKensakuKijunbi().getSelectedKey(),
                 div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
-                new RString(div.getTxtMaxKensu().getValue().toString()));
+                new RString(div.getTxtMaxKensu().getValue().toString()),
+                div.getDdlKaipage().getSelectedKey());
         Message message = getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
         if (message == null) {
-            状態 = DBE6020001StateName.一覧.getName();
+            STATE = DBE6020001StateName.一覧.getName();
             return ResponseData.of(div).setState(DBE6020001StateName.一覧);
         }
         return ResponseData.of(div).addMessage(message).respond();
@@ -112,7 +115,7 @@ public class IkenshoSakuseiJissekiShokai {
      * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
      */
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_btnReSearch(IkenshoSakuseiJissekiShokaiDiv div) {
-        状態 = DBE6020001StateName.検索.getName();
+        STATE = DBE6020001StateName.検索.getName();
         return ResponseData.of(div).setState(DBE6020001StateName.検索);
     }
 
@@ -123,7 +126,7 @@ public class IkenshoSakuseiJissekiShokai {
      * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
      */
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_BatchButton(IkenshoSakuseiJissekiShokaiDiv div) {
-        if (状態.equals(DBE6020001StateName.検索.getName())) {
+        if (STATE.equals(DBE6020001StateName.検索.getName())) {
             if (ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).setState(DBE6020001StateName.検索);
             }
@@ -140,14 +143,15 @@ public class IkenshoSakuseiJissekiShokai {
                     意見書記入日TO,
                     div.getRadKensakuKijunbi().getSelectedKey(),
                     div.getCcdHokensya().getSelectedItem().get市町村コード().value(),
-                    new RString(div.getTxtMaxKensu().getValue().toString()));
+                    new RString(div.getTxtMaxKensu().getValue().toString()),
+                    div.getDdlKaipage().getSelectedKey());
             Message message = getHandler(div).onClick_BtnKensaku(IkenshoSakuseiJissekiShokaiFindler.createInstance().get主治医意見書作成実績集計表(paramter));
             if (message != null) {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             return ResponseData.of(div).respond();
         }
-        if (状態.equals(DBE6020001StateName.一覧.getName())) {
+        if (STATE.equals(DBE6020001StateName.一覧.getName())) {
             ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -158,24 +162,41 @@ public class IkenshoSakuseiJissekiShokai {
     }
 
     /**
-     * 「CSVを出力する」ボタンを押します。
+     * 「作表処理を実行する」ボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
+     */
+    public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnHakko(IkenshoSakuseiJissekiShokaiDiv div) {
+        DBE601001_IkenshoSakuseiJIssekiParameter paramter = new DBE601001_IkenshoSakuseiJIssekiParameter();
+        if (div.getRadShutsuryokuHoho().getSelectedKey().equals(一覧表)) {
+            paramter = getHandler(div).createBatchParam(集計表を発行する, STATE);
+        }
+        if (div.getRadShutsuryokuHoho().getSelectedKey().equals(CSVファイル)) {
+            paramter = getHandler(div).createBatchParam(CSVを出力する, STATE);
+        }
+        return ResponseData.of(paramter).respond();
+    }
+
+    /**
+     * 「CSV作成を実行する」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
      */
     public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnShutsutyoku(IkenshoSakuseiJissekiShokaiDiv div) {
-        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(CSVを出力する, 状態);
+        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(CSVを出力する, STATE);
         return ResponseData.of(paramter).respond();
     }
 
     /**
-     * 「集計表を発行する」ボタンを押します。
+     * 「一覧表作成を実行する」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
      */
     public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnPulish(IkenshoSakuseiJissekiShokaiDiv div) {
-        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(集計表を発行する, 状態);
+        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(集計表を発行する, STATE);
         return ResponseData.of(paramter).respond();
     }
 

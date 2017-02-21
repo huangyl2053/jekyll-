@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProcessParameter {
 
+    private final boolean batchFlag;
     private final RString 帳票出力区分;
     private final RString 基準日FROM;
     private final RString 基準日TO;
@@ -28,10 +29,12 @@ public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProce
     private final RString 保険者;
     private final RString 証記載保険者;
     private final List<ChosahyoJissekiIchiranKey> keyJoho;
+    private final RString 改頁;
 
     /**
      * コンストラクタです。
      *
+     * @param batchFlag
      * @param 帳票出力区分 帳票出力区分
      * @param 基準日FROM 基準日FROM
      * @param 基準日TO 基準日TO
@@ -39,14 +42,18 @@ public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProce
      * @param 保険者 保険者
      * @param 証記載保険者 証記載保険者
      * @param keyJoho キー情報Entityリスト
+     * @param 改頁
      */
-    public ChosahyoJissekiIchiranProcessParameter(RString 帳票出力区分,
+    public ChosahyoJissekiIchiranProcessParameter(boolean batchFlag,
+            RString 帳票出力区分,
             RString 基準日FROM,
             RString 基準日TO,
             RString 基準日区分,
             RString 保険者,
             RString 証記載保険者,
-            List<ChosahyoJissekiIchiranKey> keyJoho) {
+            List<ChosahyoJissekiIchiranKey> keyJoho,
+            RString 改頁) {
+        this.batchFlag = batchFlag;
         this.帳票出力区分 = 帳票出力区分;
         this.基準日FROM = 基準日FROM;
         this.基準日TO = 基準日TO;
@@ -54,6 +61,7 @@ public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProce
         this.保険者 = 保険者;
         this.証記載保険者 = 証記載保険者;
         this.keyJoho = keyJoho;
+        this.改頁 = 改頁;
     }
 
     /**
@@ -62,11 +70,12 @@ public final class ChosahyoJissekiIchiranProcessParameter implements IBatchProce
      * @return 帳票出力用認定調査実績集計表のデータ取得パラメータ
      */
     public ChosahyoJissekiIchiranMybitisParamter toMybitisParamter() {
-        return ChosahyoJissekiIchiranMybitisParamter.createParamter(true,
+        return ChosahyoJissekiIchiranMybitisParamter.createParamter(batchFlag,
                 基準日FROM,
                 基準日TO,
                 基準日区分,
                 保険者,
-                keyJoho);
+                keyJoho,
+                改頁);
     }
 }

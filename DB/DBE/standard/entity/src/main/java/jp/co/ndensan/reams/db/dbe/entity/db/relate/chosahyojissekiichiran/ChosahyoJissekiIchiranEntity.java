@@ -39,17 +39,15 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
     private final RString 被保険者番号;
     @CsvField(order = 8, name = "被保険者氏名")
     private final RString 被保険者氏名;
-    @CsvField(order = 9, name = "調査依頼日")
-    private final RString 調査依頼日;
-    @CsvField(order = 10, name = "調査実施日")
+    @CsvField(order = 9, name = "調査実施日")
     private final RString 調査実施日;
-    @CsvField(order = 11, name = "調査入手日")
-    private final RString 調査入手日;
-    @CsvField(order = 12, name = "調査区分")
+    @CsvField(order = 10, name = "入手日")
+    private final RString 入手日;
+    @CsvField(order = 11, name = "調査区分")
     private final RString 調査区分;
-    @CsvField(order = 13, name = "訪問の種類")
+    @CsvField(order = 12, name = "訪問の種類")
     private final RString 訪問の種類;
-    @CsvField(order = 14, name = "単価")
+    @CsvField(order = 13, name = "単価")
     private final RString 単価;
 
     /**
@@ -63,9 +61,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
      * @param 調査員氏名 調査員氏名
      * @param 被保険者番号 被保険者番号
      * @param 申請者氏名 申請者氏名
-     * @param 調査依頼日 調査依頼日
      * @param 調査実施日 調査実施日
-     * @param 調査入手日 調査入手日
+     * @param 入手日 入手日
      * @param 調査区分 調査区分
      * @param 訪問の種類 訪問の種類
      * @param 単価
@@ -79,9 +76,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
             RString 調査員氏名,
             RString 被保険者番号,
             RString 申請者氏名,
-            RString 調査依頼日,
             RString 調査実施日,
-            RString 調査入手日,
+            RString 入手日,
             RString 調査区分,
             RString 訪問の種類,
             RString 単価) {
@@ -93,9 +89,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査員氏名 = 調査員氏名;
         this.被保険者番号 = 被保険者番号;
         this.被保険者氏名 = 申請者氏名;
-        this.調査依頼日 = 調査依頼日;
         this.調査実施日 = 調査実施日;
-        this.調査入手日 = 調査入手日;
+        this.入手日 = 入手日;
         this.調査区分 = 調査区分;
         this.訪問の種類 = 訪問の種類;
         this.単価 = 単価;
@@ -110,9 +105,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査員氏名 = relateEntity.get調査員氏名();
         this.被保険者番号 = relateEntity.get被保険者番号();
         this.被保険者氏名 = relateEntity.get被保険者氏名();
-        this.調査依頼日 = dateFormat(relateEntity.get認定調査依頼年月日());
         this.調査実施日 = dateFormat(relateEntity.get認定調査実施年月日());
-        this.調査入手日 = dateFormat(relateEntity.get認定調査受領年月日());
+        this.入手日 = dateFormat(relateEntity.get認定調査受領年月日());
         this.調査区分 = ChosaKubun.toValue(relateEntity.get認定調査区分コード()).get名称();
         if (relateEntity.is訪問の種類()) {
             this.訪問の種類 = new RString("居宅");

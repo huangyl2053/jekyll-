@@ -27,6 +27,10 @@ public class ChosaJisshibiDiv extends Panel {
     private RadioButton radKijunbi;
     @JsonProperty("txtChosaJisshibi")
     private TextBoxDateRange txtChosaJisshibi;
+    @JsonProperty("radShutsuryokuHoho")
+    private RadioButton radShutsuryokuHoho;
+    @JsonProperty("ddlKaipage")
+    private DropDownList ddlKaipage;
     @JsonProperty("txtMaxKensu")
     private TextBoxNum txtMaxKensu;
     @JsonProperty("btnKensakuClear")
@@ -74,6 +78,42 @@ public class ChosaJisshibiDiv extends Panel {
     @JsonProperty("txtChosaJisshibi")
     public void setTxtChosaJisshibi(TextBoxDateRange txtChosaJisshibi) {
         this.txtChosaJisshibi = txtChosaJisshibi;
+    }
+
+    /*
+     * getradShutsuryokuHoho
+     * @return radShutsuryokuHoho
+     */
+    @JsonProperty("radShutsuryokuHoho")
+    public RadioButton getRadShutsuryokuHoho() {
+        return radShutsuryokuHoho;
+    }
+
+    /*
+     * setradShutsuryokuHoho
+     * @param radShutsuryokuHoho radShutsuryokuHoho
+     */
+    @JsonProperty("radShutsuryokuHoho")
+    public void setRadShutsuryokuHoho(RadioButton radShutsuryokuHoho) {
+        this.radShutsuryokuHoho = radShutsuryokuHoho;
+    }
+
+    /*
+     * getddlKaipage
+     * @return ddlKaipage
+     */
+    @JsonProperty("ddlKaipage")
+    public DropDownList getDdlKaipage() {
+        return ddlKaipage;
+    }
+
+    /*
+     * setddlKaipage
+     * @param ddlKaipage ddlKaipage
+     */
+    @JsonProperty("ddlKaipage")
+    public void setDdlKaipage(DropDownList ddlKaipage) {
+        this.ddlKaipage = ddlKaipage;
     }
 
     /*

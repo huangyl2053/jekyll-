@@ -40,7 +40,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class IkenshoSakuseiJissekiShokaiHandler {
 
     private static final RString MARU = new RString("○");
-    private static final RString KEY_基準日_初期値 = new RString("3");
+    private static final RString KEY_基準日_初期値 = new RString("2");
+    private static final RString KEY_出力方法_初期値 = new RString("1");
+    private static final RString KEY_改頁_初期値 = new RString("0");
     private final IkenshoSakuseiJissekiShokaiDiv div;
 
     /**
@@ -59,6 +61,8 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         div.getRadKensakuKijunbi().setSelectedKey(KEY_基準日_初期値);
         div.getTxtIkenshoKinyubi().clearFromValue();
         div.getTxtIkenshoKinyubi().clearToValue();
+        div.getRadShutsuryokuHoho().setSelectedKey(KEY_出力方法_初期値);
+        div.getDdlKaipage().setSelectedKey(KEY_改頁_初期値);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);
@@ -119,9 +123,9 @@ public class IkenshoSakuseiJissekiShokaiHandler {
                     data.get主治医氏名(),
                     data.get被保険者番号(),
                     data.get申請者氏名(),
-                    dataFormat(data.get依頼日()),
                     dataFormat(data.get記入日()),
                     dataFormat(data.get入手日()),
+                    dataFormat(data.get処理日()),
                     在宅_新,
                     在宅_継,
                     施設_新,
@@ -149,14 +153,14 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * バッチパラメータを作成します。
      *
      * @param 帳票出力区分 帳票出力区分
-     * @param 状態
+     * @param STATE
      * @return バッチパラメータ
      */
-    public DBE601001_IkenshoSakuseiJIssekiParameter createBatchParam(RString 帳票出力区分, RString 状態) {
+    public DBE601001_IkenshoSakuseiJIssekiParameter createBatchParam(RString 帳票出力区分, RString STATE) {
         DBE601001_IkenshoSakuseiJIssekiParameter param = new DBE601001_IkenshoSakuseiJIssekiParameter();
         List<IkenshoJissekiIchiranKey> keyJoho = new ArrayList<>();
         boolean batchflag = true;
-        if (状態.equals(DBE6020001StateName.検索.getName())) {
+        if (STATE.equals(DBE6020001StateName.検索.getName())) {
             batchflag = false;
         }
         if (batchflag) {
@@ -188,6 +192,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         param.setShokisaiHokensya(div.getCcdHokensya().getSelectedItem().get証記載保険者番号().value());
         param.setSyohyoSyuturyoku(帳票出力区分);
         param.setBatchFlag(batchflag);
+        param.setBreakPoint(div.getDdlKaipage().getSelectedValue());
         return param;
     }
 

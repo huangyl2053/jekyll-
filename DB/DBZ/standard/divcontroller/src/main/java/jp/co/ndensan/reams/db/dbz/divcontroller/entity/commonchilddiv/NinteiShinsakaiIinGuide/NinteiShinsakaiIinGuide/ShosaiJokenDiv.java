@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class ShosaiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,10 +30,6 @@ public class ShosaiJokenDiv extends Panel {
     private DropDownList ddlKaigoJigyosha;
     @JsonProperty("ddlSonotaJigyosha")
     private DropDownList ddlSonotaJigyosha;
-    @JsonProperty("chkKiken")
-    private CheckBoxList chkKiken;
-    @JsonProperty("chkHaishi")
-    private CheckBoxList chkHaishi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -111,42 +107,6 @@ public class ShosaiJokenDiv extends Panel {
     @JsonProperty("ddlSonotaJigyosha")
     public void setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
         this.ddlSonotaJigyosha = ddlSonotaJigyosha;
-    }
-
-    /*
-     * getchkKiken
-     * @return chkKiken
-     */
-    @JsonProperty("chkKiken")
-    public CheckBoxList getChkKiken() {
-        return chkKiken;
-    }
-
-    /*
-     * setchkKiken
-     * @param chkKiken chkKiken
-     */
-    @JsonProperty("chkKiken")
-    public void setChkKiken(CheckBoxList chkKiken) {
-        this.chkKiken = chkKiken;
-    }
-
-    /*
-     * getchkHaishi
-     * @return chkHaishi
-     */
-    @JsonProperty("chkHaishi")
-    public CheckBoxList getChkHaishi() {
-        return chkHaishi;
-    }
-
-    /*
-     * setchkHaishi
-     * @param chkHaishi chkHaishi
-     */
-    @JsonProperty("chkHaishi")
-    public void setChkHaishi(CheckBoxList chkHaishi) {
-        this.chkHaishi = chkHaishi;
     }
 
     // </editor-fold>

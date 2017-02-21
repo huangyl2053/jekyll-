@@ -77,6 +77,7 @@ public class ShujiiMaster {
     private static final RString 四マスタ優先表示市町村識別ID
             = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    private static final RString カーソル位置 = new RString("txtSearchShujiiIryokikanCodeFrom");
 
     /**
      * コンストラクタです。
@@ -104,8 +105,8 @@ public class ShujiiMaster {
             searchChosainInfo(div);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
-
-        return ResponseData.of(div).setState(DBE9020001StateName.検索);
+        ResponseData.of(div).setState(DBE9020001StateName.検索);
+        return ResponseData.of(div).focusId(カーソル位置).respond();
     }
 
     /**

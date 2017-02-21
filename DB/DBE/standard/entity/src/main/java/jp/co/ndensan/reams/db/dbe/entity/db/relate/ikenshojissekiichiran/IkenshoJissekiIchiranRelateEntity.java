@@ -26,9 +26,9 @@ public class IkenshoJissekiIchiranRelateEntity {
     private RString 主治医氏名;
     private RString 被保険者番号;
     private RString 申請者氏名;
-    private RString 依頼日;
     private RString 記入日;
     private RString 入手日;
+    private RString 処理日;
     private RString 在宅_施設区分;
     private RString 意見書作成回数区分;
     private RString 単価;

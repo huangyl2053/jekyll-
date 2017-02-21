@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +29,6 @@ public class ShujiiJohoInputDiv extends Panel {
     private ButtonDialog btnToSearchShichoson;
     @JsonProperty("txtShichosonmei")
     private TextBox txtShichosonmei;
-    @JsonProperty("txtShichosonShokibetsuID")
-    private TextBox txtShichosonShokibetsuID;
     @JsonProperty("txtShujiiIryoKikanCode")
     private TextBoxCode txtShujiiIryoKikanCode;
     @JsonProperty("btnToSearchIryoKikan")
@@ -61,8 +59,8 @@ public class ShujiiJohoInputDiv extends Panel {
     private RadioButton radJokyoFlag;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
-    @JsonProperty("btnTorikeshi")
-    private Button btnTorikeshi;
+    @JsonProperty("btnModoru")
+    private Button btnModoru;
     @JsonProperty("state")
     private RString state;
     @JsonProperty("hiddenInputDiv")
@@ -126,24 +124,6 @@ public class ShujiiJohoInputDiv extends Panel {
     @JsonProperty("txtShichosonmei")
     public void setTxtShichosonmei(TextBox txtShichosonmei) {
         this.txtShichosonmei = txtShichosonmei;
-    }
-
-    /*
-     * gettxtShichosonShokibetsuID
-     * @return txtShichosonShokibetsuID
-     */
-    @JsonProperty("txtShichosonShokibetsuID")
-    public TextBox getTxtShichosonShokibetsuID() {
-        return txtShichosonShokibetsuID;
-    }
-
-    /*
-     * settxtShichosonShokibetsuID
-     * @param txtShichosonShokibetsuID txtShichosonShokibetsuID
-     */
-    @JsonProperty("txtShichosonShokibetsuID")
-    public void setTxtShichosonShokibetsuID(TextBox txtShichosonShokibetsuID) {
-        this.txtShichosonShokibetsuID = txtShichosonShokibetsuID;
     }
 
     /*
@@ -417,21 +397,21 @@ public class ShujiiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnTorikeshi
-     * @return btnTorikeshi
+     * getbtnModoru
+     * @return btnModoru
      */
-    @JsonProperty("btnTorikeshi")
-    public Button getBtnTorikeshi() {
-        return btnTorikeshi;
+    @JsonProperty("btnModoru")
+    public Button getBtnModoru() {
+        return btnModoru;
     }
 
     /*
-     * setbtnTorikeshi
-     * @param btnTorikeshi btnTorikeshi
+     * setbtnModoru
+     * @param btnModoru btnModoru
      */
-    @JsonProperty("btnTorikeshi")
-    public void setBtnTorikeshi(Button btnTorikeshi) {
-        this.btnTorikeshi = btnTorikeshi;
+    @JsonProperty("btnModoru")
+    public void setBtnModoru(Button btnModoru) {
+        this.btnModoru = btnModoru;
     }
 
     /*

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Feb 16 11:42:25 JST 2017 
+ * Mon Feb 20 23:59:11 JST 2017 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
 
 
 /**
@@ -51,6 +52,10 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
     private RString saiChosa;
     private RString iryoKikan;
     private RString shujii;
+    private Icon observerCheckShujii;
+    private Icon observerCheckChosain;
+    private Icon observerCheckNyushoShisetsu;
+    private Icon observerCheckSonota;
     private Boolean torokuZumiFlag;
     private RString torokuZumiNo;
 
@@ -85,6 +90,10 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
         this.saiChosa = RString.EMPTY;
         this.iryoKikan = RString.EMPTY;
         this.shujii = RString.EMPTY;
+        this.observerCheckShujii = new Icon();
+        this.observerCheckChosain = new Icon();
+        this.observerCheckNyushoShisetsu = new Icon();
+        this.observerCheckSonota = new Icon();
         this.torokuZumiFlag = false;
         this.torokuZumiNo = RString.EMPTY;
         this.setOriginalData("jotaiFlag", jotaiFlag);
@@ -116,11 +125,15 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
         this.setOriginalData("saiChosa", saiChosa);
         this.setOriginalData("iryoKikan", iryoKikan);
         this.setOriginalData("shujii", shujii);
+        this.setOriginalData("observerCheckShujii", observerCheckShujii);
+        this.setOriginalData("observerCheckChosain", observerCheckChosain);
+        this.setOriginalData("observerCheckNyushoShisetsu", observerCheckNyushoShisetsu);
+        this.setOriginalData("observerCheckSonota", observerCheckSonota);
         this.setOriginalData("torokuZumiFlag", torokuZumiFlag);
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
     }
 
-    public dgWaritsukeKohoshaIchiran_Row(RString jotaiFlag, RString shinsajunKakuteiFlag, RString shinseishoKanriNo, RString no, RString priority, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanKaishiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString konkaiIchijiHantei, RString masking, RString hokenshaNo, RString hokenshaName, RString zenkaiIchijiHantei, RString zenkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString nyushiShisetsu, RString chosaKikan, RString chosain, RString saiChosa, RString iryoKikan, RString shujii, Boolean torokuZumiFlag, RString torokuZumiNo) {
+    public dgWaritsukeKohoshaIchiran_Row(RString jotaiFlag, RString shinsajunKakuteiFlag, RString shinseishoKanriNo, RString no, RString priority, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanKaishiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString konkaiIchijiHantei, RString masking, RString hokenshaNo, RString hokenshaName, RString zenkaiIchijiHantei, RString zenkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString nyushiShisetsu, RString chosaKikan, RString chosain, RString saiChosa, RString iryoKikan, RString shujii, Icon observerCheckShujii, Icon observerCheckChosain, Icon observerCheckNyushoShisetsu, Icon observerCheckSonota, Boolean torokuZumiFlag, RString torokuZumiNo) {
         super();
         this.setOriginalData("jotaiFlag", jotaiFlag);
         this.setOriginalData("shinsajunKakuteiFlag", shinsajunKakuteiFlag);
@@ -151,6 +164,10 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
         this.setOriginalData("saiChosa", saiChosa);
         this.setOriginalData("iryoKikan", iryoKikan);
         this.setOriginalData("shujii", shujii);
+        this.setOriginalData("observerCheckShujii", observerCheckShujii);
+        this.setOriginalData("observerCheckChosain", observerCheckChosain);
+        this.setOriginalData("observerCheckNyushoShisetsu", observerCheckNyushoShisetsu);
+        this.setOriginalData("observerCheckSonota", observerCheckSonota);
         this.setOriginalData("torokuZumiFlag", torokuZumiFlag);
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
         this.jotaiFlag = jotaiFlag;
@@ -182,6 +199,10 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
         this.saiChosa = saiChosa;
         this.iryoKikan = iryoKikan;
         this.shujii = shujii;
+        this.observerCheckShujii = observerCheckShujii;
+        this.observerCheckChosain = observerCheckChosain;
+        this.observerCheckNyushoShisetsu = observerCheckNyushoShisetsu;
+        this.observerCheckSonota = observerCheckSonota;
         this.torokuZumiFlag = torokuZumiFlag;
         this.torokuZumiNo = torokuZumiNo;
     }
@@ -300,6 +321,22 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
 
     public RString getShujii() {
         return shujii;
+    }
+
+    public Icon getObserverCheckShujii() {
+        return observerCheckShujii;
+    }
+
+    public Icon getObserverCheckChosain() {
+        return observerCheckChosain;
+    }
+
+    public Icon getObserverCheckNyushoShisetsu() {
+        return observerCheckNyushoShisetsu;
+    }
+
+    public Icon getObserverCheckSonota() {
+        return observerCheckSonota;
     }
 
     public Boolean getTorokuZumiFlag() {
@@ -453,6 +490,26 @@ public class dgWaritsukeKohoshaIchiran_Row extends DataRow {
     public void setShujii(RString shujii) {
         this.setOriginalData("shujii", shujii);
         this.shujii = shujii;
+    }
+
+    public void setObserverCheckShujii(Icon observerCheckShujii) {
+        this.setOriginalData("observerCheckShujii", observerCheckShujii);
+        this.observerCheckShujii = observerCheckShujii;
+    }
+
+    public void setObserverCheckChosain(Icon observerCheckChosain) {
+        this.setOriginalData("observerCheckChosain", observerCheckChosain);
+        this.observerCheckChosain = observerCheckChosain;
+    }
+
+    public void setObserverCheckNyushoShisetsu(Icon observerCheckNyushoShisetsu) {
+        this.setOriginalData("observerCheckNyushoShisetsu", observerCheckNyushoShisetsu);
+        this.observerCheckNyushoShisetsu = observerCheckNyushoShisetsu;
+    }
+
+    public void setObserverCheckSonota(Icon observerCheckSonota) {
+        this.setOriginalData("observerCheckSonota", observerCheckSonota);
+        this.observerCheckSonota = observerCheckSonota;
     }
 
     public void setTorokuZumiFlag(Boolean torokuZumiFlag) {

@@ -437,7 +437,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         List<RString> 差異チェック票選択selectedKeys = div.getChkChosahyoSai().getSelectedKeys();
         if (差異チェック票選択selectedKeys.contains(KEY0)) {
-            call認定調査差異チェック表(div, printService);
+            call認定調査差異チェック表(div, printService, 保険者市町村コード);
         }
 
         List<RString> 委託特記事項選択selectedKeys = div.getChkChosahyoTokki().getSelectedKeys();
@@ -488,8 +488,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         }
     }
 
-    private void call認定調査差異チェック表(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
-        RString 差異チェック票_印刷タイプ = DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+    private void call認定調査差異チェック表(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div,
+            ChosaIraishoAndChosahyoAndIkenshoPrintService printService, RString 保険者市町村コード) {
+        RString 差異チェック票_印刷タイプ = DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
         if (CONFIGVALUE1.equals(差異チェック票_印刷タイプ)) {
             printService.print要介護認定調査票差異チェック票_片面(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         } else if (CONFIGVALUE2.equals(差異チェック票_印刷タイプ)) {

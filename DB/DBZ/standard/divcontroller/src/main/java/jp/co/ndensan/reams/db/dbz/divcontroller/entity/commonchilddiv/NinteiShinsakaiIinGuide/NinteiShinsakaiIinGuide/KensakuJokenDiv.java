@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -191,6 +191,36 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtKijunbi() {
+        return this.getKensakuJokenInput().getTxtKijunbi();
+    }
+
+    @JsonIgnore
+    public void  setTxtKijunbi(TextBoxDate txtKijunbi) {
+        this.getKensakuJokenInput().setTxtKijunbi(txtKijunbi);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKikan() {
+        return this.getKensakuJokenInput().getRadKikan();
+    }
+
+    @JsonIgnore
+    public void  setRadKikan(RadioButton radKikan) {
+        this.getKensakuJokenInput().setRadKikan(radKikan);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkHaishi() {
+        return this.getKensakuJokenInput().getChkHaishi();
+    }
+
+    @JsonIgnore
+    public void  setChkHaishi(CheckBoxList chkHaishi) {
+        this.getKensakuJokenInput().setChkHaishi(chkHaishi);
+    }
+
+    @JsonIgnore
     public Label getLblShozoku() {
         return this.getShosaiJoken().getLblShozoku();
     }
@@ -228,26 +258,6 @@ public class KensakuJokenDiv extends Panel {
     @JsonIgnore
     public void  setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
         this.getShosaiJoken().setDdlSonotaJigyosha(ddlSonotaJigyosha);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkKiken() {
-        return this.getShosaiJoken().getChkKiken();
-    }
-
-    @JsonIgnore
-    public void  setChkKiken(CheckBoxList chkKiken) {
-        this.getShosaiJoken().setChkKiken(chkKiken);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkHaishi() {
-        return this.getShosaiJoken().getChkHaishi();
-    }
-
-    @JsonIgnore
-    public void  setChkHaishi(CheckBoxList chkHaishi) {
-        this.getShosaiJoken().setChkHaishi(chkHaishi);
     }
 
     // </editor-fold>

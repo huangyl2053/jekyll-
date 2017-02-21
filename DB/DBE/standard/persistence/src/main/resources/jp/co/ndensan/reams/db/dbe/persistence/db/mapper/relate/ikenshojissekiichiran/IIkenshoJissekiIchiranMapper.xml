@@ -17,9 +17,9 @@
         , T5912."shujiiName" AS 主治医氏名
         , T5101."hihokenshaNo" AS 被保険者番号
         , T5101."hihokenshaName" AS 申請者氏名
-        , T5301."ikenshoSakuseiIraiYMD" AS 依頼日
         , T5302."ikenshoKinyuYMD" AS 記入日
         , T5302."ikenshoJuryoYMD" AS 入手日
+        , T5302."ikenshoReadYMD" AS 処理日
         , T5302."zaitakuShisetsuKubun" AS 在宅_施設区分
         , T5302."ikenshoSakuseiKaisuKubun" AS 意見書作成回数区分
         , CAST(T5032.tanka AS text) AS 単価
@@ -45,9 +45,9 @@
         , T5912."shujiiName"
         , T5101."hihokenshaNo"
         , T5101."hihokenshaName"
-        , T5301."ikenshoSakuseiIraiYMD"
         , T5302."ikenshoKinyuYMD"
         , T5302."ikenshoJuryoYMD"
+        , T5302."ikenshoReadYMD"
         , T5302."zaitakuShisetsuKubun"
         , T5302."ikenshoSakuseiKaisuKubun"
         , T5032.tanka
@@ -56,6 +56,7 @@
         , T5302."shujiiCode"
         <include refid="core" />
         <include refid="group" />
+        <include refid="order" />
         ) AS A
     </select>
 
@@ -82,7 +83,7 @@
             AND T5032."kaishiYM" <![CDATA[<=]]> SUBSTRING(#{基準日FROM}, 1, 6)
         </if>
         <if test="基準日TOFlag">
-            AND T5032."shuryoYM" <![CDATA[>=]]> SUBSTRING(#{基準日TO}, 1, 6)
+            AND SUBSTRING(#{基準日TO}, 1, 6) <![CDATA[<=]]> T5032."shuryoYM"
         </if>
         <where>
             <choose>
@@ -138,9 +139,9 @@
         , T5912."shujiiName"
         , T5101."hihokenshaNo"
         , T5101."hihokenshaName"
-        , T5301."ikenshoSakuseiIraiYMD"
         , T5302."ikenshoKinyuYMD"
         , T5302."ikenshoJuryoYMD"
+        , T5302."ikenshoReadYMD"
         , T5302."zaitakuShisetsuKubun"
         , T5302."ikenshoSakuseiKaisuKubun"
         , T5032.tanka
@@ -150,7 +151,21 @@
     </sql>
 
     <sql id="order">
-        ORDER BY T5302."shujiiIryoKikanCode", T5302."shujiiCode", T5302."shinseishoKanriNo", T5302."ikenshoIraiRirekiNo"
+        ORDER BY T7051."shoKisaiHokenshaNo"
+        , T5302."shujiiIryoKikanCode"
+        , T5302."shujiiCode"
+        , T5101."hihokenshaNo"
+        <choose>
+            <when test="基準日区分 == 1">
+                , T5302."ikenshoReadYMD"
+            </when>
+            <when test="基準日区分 == 2">
+                , T5302."ikenshoKinyuYMD"
+            </when>
+            <when test="基準日区分 == 3">
+                , T5302."ikenshoJuryoYMD"
+            </when>
+        </choose>
         <if test="件数Flag">
             LIMIT #{件数}
         </if>

@@ -36,6 +36,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
     private final int 件数;
     private final boolean gamenFlag;
     private final List<IkenshoJissekiIchiranKey> keyJoho;
+    private final RString 改頁;
 
     private IkenshoJissekiIchiranMybitisParamter(boolean batchFlag,
             boolean 基準日FROMFlag,
@@ -49,7 +50,8 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
             boolean 件数Flag,
             int 件数,
             boolean gamenFlag,
-            List<IkenshoJissekiIchiranKey> keyJoho) {
+            List<IkenshoJissekiIchiranKey> keyJoho,
+            RString 改頁) {
         this.batchFlag = batchFlag;
         this.基準日FROMFlag = 基準日FROMFlag;
         this.基準日FROM = 基準日FROM;
@@ -63,6 +65,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
         this.件数 = 件数;
         this.gamenFlag = gamenFlag;
         this.keyJoho = keyJoho;
+        this.改頁 = 改頁;
     }
 
     /**
@@ -74,6 +77,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
      * @param 基準日区分 基準日区分
      * @param 保険者 保険者
      * @param keyJoho 主治医意見書作成実績集計表のキー情報
+     * @param 改頁 改頁
      * @return 主治医意見書作成実績集計表のデータ取得パラメータ
      */
     public static IkenshoJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
@@ -81,7 +85,8 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
             RString 基準日TO,
             RString 基準日区分,
             RString 保険者,
-            List<IkenshoJissekiIchiranKey> keyJoho) {
+            List<IkenshoJissekiIchiranKey> keyJoho,
+            RString 改頁) {
         return new IkenshoJissekiIchiranMybitisParamter(batchFlag,
                 !RString.isNullOrEmpty(基準日FROM),
                 基準日FROM,
@@ -94,7 +99,8 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
                 false,
                 0,
                 false,
-                keyJoho);
+                keyJoho,
+                改頁);
     }
 
     /**
@@ -106,6 +112,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
      * @param 基準日区分 基準日区分
      * @param 保険者 保険者
      * @param 最大表示件数 最大表示件数
+     * @param 改頁 改頁
      * @return 主治医意見書作成実績集計表のデータ取得パラメータ
      */
     public static IkenshoJissekiIchiranMybitisParamter createGamenParamter(boolean batchFlag,
@@ -113,7 +120,8 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
             RString 基準日TO,
             RString 基準日区分,
             RString 保険者,
-            RString 最大表示件数) {
+            RString 最大表示件数,
+            RString 改頁) {
         return new IkenshoJissekiIchiranMybitisParamter(batchFlag,
                 !RString.isNullOrEmpty(基準日FROM),
                 基準日FROM,
@@ -126,6 +134,7 @@ public final class IkenshoJissekiIchiranMybitisParamter implements IMyBatisParam
                 !RString.isNullOrEmpty(最大表示件数),
                 Integer.parseInt(最大表示件数.toString()),
                 true,
-                null);
+                null,
+                改頁);
     }
 }

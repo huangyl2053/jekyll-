@@ -95,6 +95,26 @@ public class NinteiChosaJissekiShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadShutsuryokuHoho() {
+        return this.getChosaJisshibi().getRadShutsuryokuHoho();
+    }
+
+    @JsonIgnore
+    public void  setRadShutsuryokuHoho(RadioButton radShutsuryokuHoho) {
+        this.getChosaJisshibi().setRadShutsuryokuHoho(radShutsuryokuHoho);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKaipage() {
+        return this.getChosaJisshibi().getDdlKaipage();
+    }
+
+    @JsonIgnore
+    public void  setDdlKaipage(DropDownList ddlKaipage) {
+        this.getChosaJisshibi().setDdlKaipage(ddlKaipage);
+    }
+
+    @JsonIgnore
     public TextBoxNum getTxtMaxKensu() {
         return this.getChosaJisshibi().getTxtMaxKensu();
     }

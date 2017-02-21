@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuSonotashiryoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.SonotaShiryoCommonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.sonotashiryoa3.SonotashiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -25,10 +25,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -46,10 +42,6 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
             new RString(SonotashiryoA3ReportSource.ReportSourceFields.hokenshaNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
     private IinTokkiJikouItiziHanteiMyBatisParameter myBatisParameter;
-    private JimuSonotashiryoBusiness その他資料;
-    private static final int INDEX_5 = 5;
-    private static final RString ファイル名_G0001 = new RString("G0001.png");
-    private static final RString SEPARATOR = new RString("/");
 
     @BatchWriter
     private BatchReportWriter<SonotashiryoA3ReportSource> batchWriteA3;
@@ -85,22 +77,12 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
 
     @Override
     protected void usualProcess(ShinsakaiSiryoKyotsuEntity entity) {
-        RString 共有ファイル名 = entity.getShoKisaiHokenshaNo().concat(entity.getHihokenshaNo());
-        RString path = getFilePath(entity.getImageSharedFileId(), 共有ファイル名);
-        entity.setHihokenshaName(AtenaMeisho.EMPTY);
-        entity.setShoKisaiHokenshaNo(RString.EMPTY);
-        entity.setHihokenshaNo(RString.EMPTY);
         entity.setJimukyoku(false);
-        List<RString> イメージファイルリスト;
-        if (!entity.isJimukyoku()) {
-            イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料マスキング後イメージファイル名(), path);
-        } else {
-            イメージファイルリスト = getその他資料(entity.getImageSharedFileId(), getその他資料原本イメージファイル名(), path);
+        JimuSonotashiryoBusiness business = SonotaShiryoCommonBusiness.createBusiness(entity, batchWriteA3.getImageFolderPath());
+        if (business != null) {
+            SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(business);
+            reportA3.writeBy(reportSourceWriterA3);
         }
-        その他資料 = new JimuSonotashiryoBusiness(entity, イメージファイルリスト);
-        その他資料.set事務局概況特記イメージ(共有ファイルを引き出す(path));
-        SonotashiryoA3Report reportA3 = new SonotashiryoA3Report(その他資料);
-        reportA3.writeBy(reportSourceWriterA3);
     }
 
     @Override
@@ -110,143 +92,4 @@ public class IinSonotaJohoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
     private boolean hasBreak(ShinsakaiSiryoKyotsuEntity before, ShinsakaiSiryoKyotsuEntity current) {
         return before.getShinsakaiOrder() != current.getShinsakaiOrder();
     }
-
-    /**
-     * その他資料を取得します。
-     *
-     * @param sharedFileId 共有ファイルID
-     * @param ファイル名List イメージファイルリスト
-     * @param ファイルパス ファイルパス
-     * @return その他資料
-     */
-    public List<RString> getその他資料(RDateTime sharedFileId, List<RString> ファイル名List, RString ファイルパス) {
-        List<RString> ファイルPathList = new ArrayList<>();
-        if (sharedFileId == null) {
-            return ファイルPathList;
-        }
-        int index = 0;
-        for (int i = 0; i < ファイル名List.size(); i++) {
-            RString ファイル名 = ファイル名List.get(i);
-            if (!RString.isNullOrEmpty(ファイルパス) && index < INDEX_5) {
-                RString fileFullPath = getFilePath(ファイルパス, ファイル名);
-                if (!RString.isNullOrEmpty(fileFullPath)) {
-                    ファイルPathList.add(fileFullPath);
-                    index = i + 1;
-                }
-            }
-            if (INDEX_5 <= index) {
-                return ファイルPathList;
-            }
-        }
-        return ファイルPathList;
-    }
-
-    private List<RString> getその他資料マスキング後イメージファイル名() {
-        List<RString> ファイル名 = new ArrayList<>();
-        ファイル名.add(new RString("F1401A01.png"));
-        ファイル名.add(new RString("F1401A02.png"));
-        ファイル名.add(new RString("F1401A03.png"));
-        ファイル名.add(new RString("F1401A04.png"));
-        ファイル名.add(new RString("F1401A05.png"));
-        ファイル名.add(new RString("F1401A06.png"));
-        ファイル名.add(new RString("F1401B01.png"));
-        ファイル名.add(new RString("F1401B02.png"));
-        ファイル名.add(new RString("F1401B03.png"));
-        ファイル名.add(new RString("F1401B04.png"));
-        ファイル名.add(new RString("F1401B05.png"));
-        ファイル名.add(new RString("F1401B06.png"));
-        ファイル名.add(new RString("F1401C01.png"));
-        ファイル名.add(new RString("F1401C02.png"));
-        ファイル名.add(new RString("F1401C03.png"));
-        ファイル名.add(new RString("F1401C04.png"));
-        ファイル名.add(new RString("F1401C05.png"));
-        ファイル名.add(new RString("F1401C06.png"));
-        ファイル名.add(new RString("F1401D01.png"));
-        ファイル名.add(new RString("F1401D02.png"));
-        ファイル名.add(new RString("F1401D03.png"));
-        ファイル名.add(new RString("F1401D04.png"));
-        ファイル名.add(new RString("F1401D05.png"));
-        ファイル名.add(new RString("F1401D06.png"));
-        ファイル名.add(new RString("F1401E01.png"));
-        ファイル名.add(new RString("F1401E02.png"));
-        ファイル名.add(new RString("F1401E03.png"));
-        ファイル名.add(new RString("F1401E04.png"));
-        ファイル名.add(new RString("F1401E05.png"));
-        ファイル名.add(new RString("F1401E06.png"));
-        ファイル名.add(new RString("F1401F01.png"));
-        ファイル名.add(new RString("F1401F02.png"));
-        ファイル名.add(new RString("F1401F03.png"));
-        ファイル名.add(new RString("F1401F04.png"));
-        ファイル名.add(new RString("F1401F05.png"));
-        ファイル名.add(new RString("F1401F06.png"));
-        return ファイル名;
-    }
-
-    private List<RString> getその他資料原本イメージファイル名() {
-        List<RString> ファイル名 = new ArrayList<>();
-        ファイル名.add(new RString("F1401A01_BAK.png"));
-        ファイル名.add(new RString("F1401A02_BAK.png"));
-        ファイル名.add(new RString("F1401A03_BAK.png"));
-        ファイル名.add(new RString("F1401A04_BAK.png"));
-        ファイル名.add(new RString("F1401A05_BAK.png"));
-        ファイル名.add(new RString("F1401A06_BAK.png"));
-        ファイル名.add(new RString("F1401B01_BAK.png"));
-        ファイル名.add(new RString("F1401B02_BAK.png"));
-        ファイル名.add(new RString("F1401B03_BAK.png"));
-        ファイル名.add(new RString("F1401B04_BAK.png"));
-        ファイル名.add(new RString("F1401B05_BAK.png"));
-        ファイル名.add(new RString("F1401B06_BAK.png"));
-        ファイル名.add(new RString("F1401C01_BAK.png"));
-        ファイル名.add(new RString("F1401C02_BAK.png"));
-        ファイル名.add(new RString("F1401C03_BAK.png"));
-        ファイル名.add(new RString("F1401C04_BAK.png"));
-        ファイル名.add(new RString("F1401C05_BAK.png"));
-        ファイル名.add(new RString("F1401C06_BAK.png"));
-        ファイル名.add(new RString("F1401D01_BAK.png"));
-        ファイル名.add(new RString("F1401D02_BAK.png"));
-        ファイル名.add(new RString("F1401D03_BAK.png"));
-        ファイル名.add(new RString("F1401D04_BAK.png"));
-        ファイル名.add(new RString("F1401D05_BAK.png"));
-        ファイル名.add(new RString("F1401D06_BAK.png"));
-        ファイル名.add(new RString("F1401E01_BAK.png"));
-        ファイル名.add(new RString("F1401E02_BAK.png"));
-        ファイル名.add(new RString("F1401E03_BAK.png"));
-        ファイル名.add(new RString("F1401E04_BAK.png"));
-        ファイル名.add(new RString("F1401E05_BAK.png"));
-        ファイル名.add(new RString("F1401E06_BAK.png"));
-        ファイル名.add(new RString("F1401F01_BAK.png"));
-        ファイル名.add(new RString("F1401F02_BAK.png"));
-        ファイル名.add(new RString("F1401F03_BAK.png"));
-        ファイル名.add(new RString("F1401F04_BAK.png"));
-        ファイル名.add(new RString("F1401F05_BAK.png"));
-        ファイル名.add(new RString("F1401F06_BAK.png"));
-        return ファイル名;
-    }
-
-    private RString 共有ファイルを引き出す(RString path) {
-        RString fileFullPath = getFilePath(path, ファイル名_G0001);
-        if (!RString.isNullOrEmpty(fileFullPath)) {
-            return fileFullPath;
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
-            return RString.EMPTY;
-        }
-        try {
-            return DBEImageUtil.copySharedFiles(sharedFileId, sharedFileName, batchWriteA3.getImageFolderPath());
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-    }
-
 }

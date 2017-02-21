@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -34,6 +33,9 @@ public class NinteiChosaJissekiShokai {
 
     private static final RString CSVを出力する = new RString("1");
     private static final RString 集計表を発行する = new RString("2");
+    private static final RString 一覧表 = new RString("1");
+    private static final RString CSVファイル = new RString("2");
+    private static RString STATE;
 
     /**
      * 画面の初期化です。
@@ -47,6 +49,7 @@ public class NinteiChosaJissekiShokai {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getChosaJisshibi().getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        STATE = DBE6030001StateName.初期表示.getName();
         return ResponseData.of(div).respond();
     }
 
@@ -58,9 +61,8 @@ public class NinteiChosaJissekiShokai {
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnKensakuClear(NinteiChosaJissekiShokaiDiv div) {
         getHandler(div).onClick_BtnKensakuClear();
-        div.getChosaJisshibi().getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
-                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        return ResponseData.of(div).respond();
+        STATE = DBE6030001StateName.初期表示.getName();
+        return ResponseData.of(div).setState(DBE6030001StateName.初期表示);
     }
 
     /**
@@ -86,9 +88,11 @@ public class NinteiChosaJissekiShokai {
                 意見書記入日TO,
                 div.getRadKijunbi().getSelectedKey(),
                 div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value(),
-                new RString(div.getChosaJisshibi().getTxtMaxKensu().getValue().toString()));
+                new RString(div.getChosaJisshibi().getTxtMaxKensu().getValue().toString()),
+                div.getDdlKaipage().getSelectedValue());
         Message message = getHandler(div).onClick_btnKensaku(NinteiChosaJissekiShokaiFindler.creatInstance().get帳票出力用認定調査実績集計表(paramter));
         if (message == null) {
+            STATE = DBE6030001StateName.一覧.getName();
             return ResponseData.of(div).setState(DBE6030001StateName.一覧);
         }
         return ResponseData.of(div).addMessage(message).respond();
@@ -100,7 +104,8 @@ public class NinteiChosaJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
-    public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnBackToKensaku(NinteiChosaJissekiShokaiDiv div) {
+    public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnReSearch(NinteiChosaJissekiShokaiDiv div) {
+        STATE = DBE6030001StateName.初期表示.getName();
         return ResponseData.of(div).setState(DBE6030001StateName.初期表示);
     }
 
@@ -111,15 +116,6 @@ public class NinteiChosaJissekiShokai {
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onChange_State(NinteiChosaJissekiShokaiDiv div) {
-        if (ResponseHolder.getState().equals(DBE6030001StateName.一覧.getName())) {
-            if (div.getDgNinteiChosaJisseki().getDataSource().isEmpty()) {
-                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), true);
-                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), true);
-            } else {
-                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnPulish"), false);
-                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnShutsutyoku"), false);
-            }
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -130,32 +126,76 @@ public class NinteiChosaJissekiShokai {
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_BatchButton(NinteiChosaJissekiShokaiDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (STATE.equals(DBE6030001StateName.初期表示.getName())) {
+            if (ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).setState(DBE6030001StateName.初期表示);
+            }
+            RString 意見書記入日FROM = RString.EMPTY;
+            RString 意見書記入日TO = RString.EMPTY;
+            if (div.getChosaJisshibi().getTxtChosaJisshibi().getFromValue() != null) {
+                意見書記入日FROM = div.getChosaJisshibi().getTxtChosaJisshibi().getFromValue().toDateString();
+            }
+            if (div.getChosaJisshibi().getTxtChosaJisshibi().getToValue() != null) {
+                意見書記入日TO = div.getChosaJisshibi().getTxtChosaJisshibi().getToValue().toDateString();
+            }
+            ChosahyoJissekiIchiranMybitisParamter paramter = ChosahyoJissekiIchiranMybitisParamter.createGamenParamter(false,
+                    意見書記入日FROM,
+                    意見書記入日TO,
+                    div.getRadKijunbi().getSelectedKey(),
+                    div.getChosaJisshibi().getCcdHokensya().getSelectedItem().get市町村コード().value(),
+                    new RString(div.getChosaJisshibi().getTxtMaxKensu().getValue().toString()),
+                    div.getDdlKaipage().getSelectedValue());
+            Message message = getHandler(div).onClick_btnKensaku(NinteiChosaJissekiShokaiFindler.creatInstance().get帳票出力用認定調査実績集計表(paramter));
+            if (message != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            return ResponseData.of(div).respond();
+        }
+        if (STATE.equals(DBE6030001StateName.一覧.getName())) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForCheckedDataCount();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「CSVを出力する」ボタンを押します。
+     * 「作表処理を実行する」ボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
+     */
+    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnHakko(NinteiChosaJissekiShokaiDiv div) {
+        DBE601002_NinteichosaJissekiParameter param = new DBE601002_NinteichosaJissekiParameter();
+        if (div.getRadShutsuryokuHoho().getSelectedKey().equals(一覧表)) {
+            param = getHandler(div).createBatchParam(集計表を発行する, STATE);
+        }
+        if (div.getRadShutsuryokuHoho().getSelectedKey().equals(CSVファイル)) {
+            param = getHandler(div).createBatchParam(CSVを出力する, STATE);
+        }
+        return ResponseData.of(param).respond();
+    }
+
+    /**
+     * 「CSV作成を実行する」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
      */
     public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnShutsutyoku(NinteiChosaJissekiShokaiDiv div) {
-        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(CSVを出力する);
+        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(CSVを出力する, STATE);
         return ResponseData.of(param).respond();
     }
 
     /**
-     * 「集計表を発行する」ボタンを押します。
+     * 「一覧表作成を実行する」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
      */
     public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnPulish(NinteiChosaJissekiShokaiDiv div) {
-        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(集計表を発行する);
+        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(集計表を発行する, STATE);
         return ResponseData.of(param).respond();
     }
 

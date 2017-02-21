@@ -40,12 +40,12 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 被保険者番号;
     @CsvField(order = 8, name = "被保険者氏名")
     private final RString 被保険者氏名;
-    @CsvField(order = 9, name = "依頼日")
-    private final RString 依頼日;
-    @CsvField(order = 10, name = "記入日")
+    @CsvField(order = 9, name = "記入日")
     private final RString 記入日;
-    @CsvField(order = 11, name = "入手日")
+    @CsvField(order = 10, name = "入手日")
     private final RString 入手日;
+    @CsvField(order = 11, name = "処理日")
+    private final RString 処理日;
     @CsvField(order = 12, name = "在宅_新")
     private final RString 入手パターン_在新;
     @CsvField(order = 13, name = "在宅_継")
@@ -70,9 +70,9 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
      * @param 主治医氏名 主治医氏名
      * @param 被保険者番号 被保険者番号
      * @param 申請者氏名 申請者氏名
-     * @param 依頼日 依頼日
      * @param 記入日 記入日
      * @param 入手日 入手日
+     * @param 処理日 処理日
      * @param 入手パターン_在新 入手パターン_在新
      * @param 入手パターン_在継 入手パターン_在継
      * @param 入手パターン_施新 入手パターン_施新
@@ -87,9 +87,9 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
             RString 主治医氏名,
             RString 被保険者番号,
             RString 申請者氏名,
-            RString 依頼日,
             RString 記入日,
             RString 入手日,
+            RString 処理日,
             RString 入手パターン_在新,
             RString 入手パターン_在継,
             RString 入手パターン_施新,
@@ -103,9 +103,9 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.主治医氏名 = 主治医氏名;
         this.被保険者番号 = 被保険者番号;
         this.被保険者氏名 = 申請者氏名;
-        this.依頼日 = 依頼日;
         this.記入日 = 記入日;
         this.入手日 = 入手日;
+        this.処理日 = 処理日;
         this.入手パターン_在新 = 入手パターン_在新;
         this.入手パターン_在継 = 入手パターン_在継;
         this.入手パターン_施新 = 入手パターン_施新;
@@ -142,9 +142,9 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.主治医氏名 = relateEntity.get主治医氏名();
         this.被保険者番号 = relateEntity.get被保険者番号();
         this.被保険者氏名 = relateEntity.get申請者氏名();
-        this.依頼日 = dateFormat(relateEntity.get依頼日());
         this.記入日 = dateFormat(relateEntity. get記入日());
         this.入手日 = dateFormat(relateEntity.get入手日());
+        this.処理日 = dateFormat(relateEntity.get処理日());
         this.入手パターン_在新 = 在宅_新;
         this.入手パターン_在継 = 在宅_継;
         this.入手パターン_施新 = 施設_新;

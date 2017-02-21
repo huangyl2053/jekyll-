@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
+
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601002.ChosahyoJissekiIchiranProcessCSV;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601002.ChosahyoJissekiIchiranProcessREPORT;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
@@ -26,12 +27,10 @@ public class DBE601002_NinteichosaJisseki extends BatchFlowBase<DBE601002_Nintei
 
     @Override
     protected void defineFlow() {
-        if (!getParameter().getKeyJoho().isEmpty()) {
-            if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
-                executeStep(CHOSAHYO_JISSEKI_ICHIRAN_CSV);
-            } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
-                executeStep(CHOSAHYO_JISSEKI_ICHIRAN_REPORT);
-            }
+        if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
+            executeStep(CHOSAHYO_JISSEKI_ICHIRAN_CSV);
+        } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
+            executeStep(CHOSAHYO_JISSEKI_ICHIRAN_REPORT);
         }
     }
 

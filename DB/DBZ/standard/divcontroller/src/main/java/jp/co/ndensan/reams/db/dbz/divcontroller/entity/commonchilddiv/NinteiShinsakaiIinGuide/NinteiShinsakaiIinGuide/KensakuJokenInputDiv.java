@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * 
  */
 public class KensakuJokenInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,6 +36,12 @@ public class KensakuJokenInputDiv extends Panel {
     private DropDownList ddlShinsainShikakuCode;
     @JsonProperty("ccdHokensha")
     private HokenshaListDiv ccdHokensha;
+    @JsonProperty("txtKijunbi")
+    private TextBoxDate txtKijunbi;
+    @JsonProperty("radKikan")
+    private RadioButton radKikan;
+    @JsonProperty("chkHaishi")
+    private CheckBoxList chkHaishi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -140,6 +146,60 @@ public class KensakuJokenInputDiv extends Panel {
     @JsonProperty("ccdHokensha")
     public IHokenshaListDiv getCcdHokensha() {
         return ccdHokensha;
+    }
+
+    /*
+     * gettxtKijunbi
+     * @return txtKijunbi
+     */
+    @JsonProperty("txtKijunbi")
+    public TextBoxDate getTxtKijunbi() {
+        return txtKijunbi;
+    }
+
+    /*
+     * settxtKijunbi
+     * @param txtKijunbi txtKijunbi
+     */
+    @JsonProperty("txtKijunbi")
+    public void setTxtKijunbi(TextBoxDate txtKijunbi) {
+        this.txtKijunbi = txtKijunbi;
+    }
+
+    /*
+     * getradKikan
+     * @return radKikan
+     */
+    @JsonProperty("radKikan")
+    public RadioButton getRadKikan() {
+        return radKikan;
+    }
+
+    /*
+     * setradKikan
+     * @param radKikan radKikan
+     */
+    @JsonProperty("radKikan")
+    public void setRadKikan(RadioButton radKikan) {
+        this.radKikan = radKikan;
+    }
+
+    /*
+     * getchkHaishi
+     * @return chkHaishi
+     */
+    @JsonProperty("chkHaishi")
+    public CheckBoxList getChkHaishi() {
+        return chkHaishi;
+    }
+
+    /*
+     * setchkHaishi
+     * @param chkHaishi chkHaishi
+     */
+    @JsonProperty("chkHaishi")
+    public void setChkHaishi(CheckBoxList chkHaishi) {
+        this.chkHaishi = chkHaishi;
     }
 
     // </editor-fold>

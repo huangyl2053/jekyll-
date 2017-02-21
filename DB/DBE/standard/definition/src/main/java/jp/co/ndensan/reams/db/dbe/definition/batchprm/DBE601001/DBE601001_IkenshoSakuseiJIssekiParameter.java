@@ -28,6 +28,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
     private static final String HOKENSYANAME = "hokensyaname";
     private static final String SHOKISAI_HOKENSYA = "shokisaiHokensya";
     private static final String KEY_JOHO = "keyJoho";
+    private static final String BREAK_POINT = "breakPoint";
     private static final long serialVersionUID = 8314555813503538349L;
 
     @BatchParameter(key = BATCH_FLAG, name = "バッチフラグ")
@@ -48,6 +49,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
     private RString shokisaiHokensya;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<IkenshoJissekiIchiranKey> keyJoho;
+    @BatchParameter(key = BREAK_POINT, name = "改頁")
+    private RString breakPoint;
 
     /**
      * コンストラクタです。
@@ -66,6 +69,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
      * @param hokensyaName 保険者名称
      * @param shokisaiHokensya 証記載保険者
      * @param keyJoho キー情報Entityリスト
+     * @param breakPoint 改頁
      */
     public DBE601001_IkenshoSakuseiJIssekiParameter(boolean batchFlag,
             RString syohyoSyuturyoku,
@@ -74,7 +78,8 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
             RString hokensya,
             RString hokensyaName,
             RString shokisaiHokensya,
-            List<IkenshoJissekiIchiranKey> keyJoho) {
+            List<IkenshoJissekiIchiranKey> keyJoho,
+            RString breakPoint) {
         this.batchFlag = batchFlag;
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.ikenshoKijunbiFrom = ikenshoKinyubiFrom;
@@ -83,6 +88,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
         this.hokensya = hokensya;
         this.hokensyaName = hokensyaName;
         this.keyJoho = keyJoho;
+        this.breakPoint = breakPoint;
     }
 
     /**
@@ -99,6 +105,7 @@ public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase
                 hokensya,
                 hokensyaName,
                 shokisaiHokensya,
-                keyJoho);
+                keyJoho,
+                breakPoint);
     }
 }

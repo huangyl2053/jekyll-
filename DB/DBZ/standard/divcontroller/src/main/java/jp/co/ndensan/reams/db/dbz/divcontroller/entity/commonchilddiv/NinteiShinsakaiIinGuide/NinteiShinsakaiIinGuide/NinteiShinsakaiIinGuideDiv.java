@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * 
  */
 public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsakaiIinGuideDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -231,6 +231,36 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtKijunbi() {
+        return this.getKensakuJoken().getKensakuJokenInput().getTxtKijunbi();
+    }
+
+    @JsonIgnore
+    public void  setTxtKijunbi(TextBoxDate txtKijunbi) {
+        this.getKensakuJoken().getKensakuJokenInput().setTxtKijunbi(txtKijunbi);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadKikan() {
+        return this.getKensakuJoken().getKensakuJokenInput().getRadKikan();
+    }
+
+    @JsonIgnore
+    public void  setRadKikan(RadioButton radKikan) {
+        this.getKensakuJoken().getKensakuJokenInput().setRadKikan(radKikan);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkHaishi() {
+        return this.getKensakuJoken().getKensakuJokenInput().getChkHaishi();
+    }
+
+    @JsonIgnore
+    public void  setChkHaishi(CheckBoxList chkHaishi) {
+        this.getKensakuJoken().getKensakuJokenInput().setChkHaishi(chkHaishi);
+    }
+
+    @JsonIgnore
     public TextBoxNum getTxtMaxKensu() {
         return this.getKensakuJoken().getTxtMaxKensu();
     }
@@ -308,26 +338,6 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     @JsonIgnore
     public void  setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
         this.getKensakuJoken().getShosaiJoken().setDdlSonotaJigyosha(ddlSonotaJigyosha);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkKiken() {
-        return this.getKensakuJoken().getShosaiJoken().getChkKiken();
-    }
-
-    @JsonIgnore
-    public void  setChkKiken(CheckBoxList chkKiken) {
-        this.getKensakuJoken().getShosaiJoken().setChkKiken(chkKiken);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkHaishi() {
-        return this.getKensakuJoken().getShosaiJoken().getChkHaishi();
-    }
-
-    @JsonIgnore
-    public void  setChkHaishi(CheckBoxList chkHaishi) {
-        this.getKensakuJoken().getShosaiJoken().setChkHaishi(chkHaishi);
     }
 
     @JsonIgnore

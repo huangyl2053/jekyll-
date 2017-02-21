@@ -25,6 +25,8 @@
         rgdb."DbT5591GogitaiJoho" AS DbT5591
         ON
         DbT5591."gogitaiNo"=DbT5501."gogitaiNo"
+        AND DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5501."shinsakaiKaisaiYoteiYMD"
+        AND DbT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
         LEFT JOIN
         rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS DbT5592
         ON
@@ -240,38 +242,103 @@
         ORDER BY DbT5101."shinsakaiYusenWaritsukeKubunCode" DESC,
         DbT5101."ninteiShinseiYMD" ASC
     </select>
+    
+    <select id="getParamData"  resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.ParamEntity" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" resultOrdered="true">
+        SELECT 
+        DbT5101."shichosonCode" AS 市町村コード, 
+        DbT5101."nyushoShisetsuCode" AS 入所施設コード, 
+        DbT5202."chosaItakusakiCode" AS 調査委託先コード, 
+        DbT5202."chosainCode" AS 調査員コード, 
+        DbT5302."shujiiIryoKikanCode" AS 主治医医療機関コード, 
+        DbT5302."shujiiCode" AS 主治医コード 
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN (
+            SELECT * 
+            FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202_SUB1 
+            WHERE 
+            DbT5202_SUB1."shinseishoKanriNo" = #{shinseishoKanriNo}
+            AND NOT EXISTS(
+            SELECT 'X' 
+            FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202_SUB2 
+            WHERE DbT5202_SUB1."shinseishoKanriNo" = DbT5202_SUB2."shinseishoKanriNo" 
+            AND DbT5202_SUB1."ninteichosaRirekiNo" <![CDATA[<]]> DbT5202_SUB2."ninteichosaRirekiNo"
+            )
+            ORDER BY DbT5202_SUB1."gaikyoChosaTextImageKubun" 
+            LIMIT 1
+        ) AS DbT5202
+        ON DbT5101."shinseishoKanriNo" = dbT5202."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302 
+        ON DbT5101."shinseishoKanriNo" = DbT5302."shinseishoKanriNo" 
+        AND NOT EXISTS(
+            SELECT 'X' 
+            FROM rgdb."DbT5302ShujiiIkenshoJoho" DbT5302_SUB 
+            WHERE DbT5302."shinseishoKanriNo" = DbT5302_SUB."shinseishoKanriNo" 
+            AND DbT5302."ikenshoIraiRirekiNo" <![CDATA[<]]> DbT5302_SUB."ikenshoIraiRirekiNo"
+        )
+        WHERE
+        DbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND
+        DbT5101."logicalDeletedFlag" = FALSE
+    </select>
 
     <select id="countShinsakaiWariateIinJoho"  resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter" resultOrdered="true">
-        SELECT
-        COUNT(0)
-        FROM
-        rgdb."DbT5503ShinsakaiWariateIinJoho" AS DbT5503
-        INNER JOIN
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" DbT5595
-        ON DbT5503."shinsakaiIinCode"=DbT5595."shinsakaiIinCode"
-        WHERE
-        DbT5503."shinsakaiKaisaiNo" = #{kaisaiNo}
-        <if test="isKikannMade">
-            AND(
-            DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode}
-            OR DbT5595."ninteichosaItakusakiCode" = #{ninteiChosaItakusakiCode}
-            OR DbT5595."shujiiIryokikanCode" = #{nyushoShisetsuCode}
-            OR DbT5595."ninteichosaItakusakiCode" = #{nyushoShisetsuCode}
-            )
-        </if>
-        <if test="!isKikannMade">
-            AND(
-            (
-            DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode}
-            AND
-            DbT5595."shujiiCode" = #{shujiiCode}
-            )
-            OR (
-            DbT5595."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
-            AND
-            DbT5595."ninteiChosainNo" = #{ninteiChosainNo}
-            )
-            )
+        SELECT 
+        COUNT(0) 
+        FROM 
+        rgdb."DbT5503ShinsakaiWariateIinJoho" AS DbT5503 
+        INNER JOIN 
+        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" DbT5595 
+        ON DbT5503."shinsakaiIinCode"=DbT5595."shinsakaiIinCode" 
+        WHERE 
+        DbT5503."shinsakaiKaisaiNo" = #{kaisaiNo} 
+        <if test="isKikannMade"> 
+            AND( 
+            1 = 1
+            <if test="isIryoKikan"> 
+                AND 
+                DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode} 
+            </if> 
+            <if test="isItakusaki"> 
+                AND 
+                DbT5595."ninteichosaItakusakiCode" = #{ninteiChosaItakusakiCode} 
+            </if> 
+            <if test="isNyushoShisetsu"> 
+                AND 
+                DbT5595."shujiiIryokikanCode" IN (
+                SELECT DbT5910."ninteichosaItakusakiCode" 
+                FROM 
+                rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910 
+                WHERE DbT5910."jigyoshaNo" = #{nyushoShisetsuCode} 
+                AND 
+                DbT5910."shichosonCode" = #{shichosonCode}) 
+                OR 
+                DbT5595."ninteichosaItakusakiCode" IN (
+                SELECT DbT5911."iryokikanCode" 
+                FROM 
+                rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
+                WHERE DbT5911."iryokikanCode" = #{nyushoShisetsuCode} 
+                AND 
+                DbT5911."shichosonCode" = #{shichosonCode}) 
+            </if> 
+            ) 
+        </if> 
+        <if test="!isKikannMade"> 
+            AND( 
+            1 = 1 
+            <if test="isIryoKikan"> 
+                AND 
+                DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode} 
+                AND 
+                DbT5595."shujiiCode" = #{shujiiCode} 
+            </if> 
+            <if test="isItakusaki"> 
+                AND 
+                DbT5595."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode} 
+                AND 
+                DbT5595."ninteiChosainNo" = #{ninteiChosainNo} 
+            </if> 
+            ) 
         </if>
     </select>
 

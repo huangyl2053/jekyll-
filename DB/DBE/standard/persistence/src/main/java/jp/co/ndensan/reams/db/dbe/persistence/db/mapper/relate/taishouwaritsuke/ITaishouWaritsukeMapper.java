@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountSh
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.TaishouIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.KohoshaIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.ParamEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouWaritsukeHeadEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,6 +47,13 @@ public interface ITaishouWaritsukeMapper {
      * @return 対象者一覧
      */
     List<KohoshaIchiranEntity> getKohoshaIchiran(KohoshaIchiranMapperParameter param);
+    
+    /**
+     * 
+     * @param shinseishoKanriNo
+     * @return 
+     */
+    ParamEntity getParamData(ShinseishoKanriNo shinseishoKanriNo);
 
     /**
      * 介護認定審査会対象者申請者オブザーバーチェック
