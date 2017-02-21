@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ImagekanriJoho implements Serializable {
 
     private final ImagekanriJohoEntity entity;
+    private final ShinsakaiWariateHistories shinsakaiWariateHistories;
 
     /**
      * コンストラクタです。<br/>
@@ -30,6 +31,7 @@ public class ImagekanriJoho implements Serializable {
      */
     public ImagekanriJoho(ImagekanriJohoEntity entity) {
         this.entity = entity;
+        this.shinsakaiWariateHistories = new ShinsakaiWariateHistories(entity.getShisakaiWariateEntities());
     }
 
     /**
@@ -203,4 +205,10 @@ public class ImagekanriJoho implements Serializable {
         return entity.getHihokenshaNo();
     }
 
+    /**
+     * @return 審査会割当の履歴
+     */
+    public ShinsakaiWariateHistories get審査会割当履歴() {
+        return this.shinsakaiWariateHistories;
+    }
 }

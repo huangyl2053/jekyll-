@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.core.shinsakai;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -94,5 +95,18 @@ public enum HanteiKekkaCode {
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("判定結果コード"));
+    }
+
+    /**
+     * @param code コード
+     * @return 指定のコードが{@link HanteiKekkaCode}へ変換可能な場合、{@code true}.
+     */
+    public static boolean existsCode(RString code) {
+        for (HanteiKekkaCode value : values()) {
+            if (Objects.equals(value.codeValue, code)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

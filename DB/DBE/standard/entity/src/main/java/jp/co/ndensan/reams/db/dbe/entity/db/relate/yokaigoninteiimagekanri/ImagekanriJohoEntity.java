@@ -6,8 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,4 +44,12 @@ public class ImagekanriJohoEntity implements Serializable {
     private FlexibleDate centerSoshinYMD;
     private RString shoKisaiHokenshaNo;
     private RString hihokenshaNo;
+    private List<DbT5502ShinsakaiWariateJohoEntity> shisakaiWariateEntities;
+
+    /**
+     * イメージ管理情報エンティティを生成します。
+     */
+    public ImagekanriJohoEntity() {
+        this.shisakaiWariateEntities = new ArrayList<>();
+    }
 }

@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.basic;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import javax.annotation.CheckForNull;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -168,6 +170,18 @@ public class ShinsakaiWariateJoho
     }
 
     /**
+     * @return {@link HanteiKekkaCode}
+     */
+    @CheckForNull
+    public HanteiKekkaCode getHanteiKekkaCode() {
+        Code code = entity.getHanteiKekkaCode();
+        if (code == null || !HanteiKekkaCode.existsCode(code.value())) {
+            return null;
+        }
+        return HanteiKekkaCode.toValue(code.value());
+    }
+
+    /**
      * {@link DbT5502ShinsakaiWariateJohoEntity}のクローンを返します。
      *
      * @return {@link DbT5502ShinsakaiWariateJohoEntity}のクローン
@@ -188,7 +202,8 @@ public class ShinsakaiWariateJoho
     }
 
     /**
-     * 介護認定審査会割当情報のみを変更対象とします。<br/> {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護認定審査会割当情報のみを変更対象とします。<br/>
+     * {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShinsakaiWariateJoho}
      */
@@ -202,7 +217,8 @@ public class ShinsakaiWariateJoho
     }
 
     /**
-     * 保持する介護認定審査会割当情報を削除対象とします。<br/> {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護認定審査会割当情報を削除対象とします。<br/>
+     * {@link DbT5502ShinsakaiWariateJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShinsakaiWariateJoho}
      */

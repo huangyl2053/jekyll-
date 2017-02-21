@@ -7,83 +7,138 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteiimagekanri.IYokaigoninteiimagekanriMapper">
 
     <select id="getImageJoho"
-            resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity"
+            resultMap="resultMap_getImageJoho"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="500"
             resultOrdered="true" >
-        SELECT T5101."shinseishoKanriNo",
-        T5201."ninteichosaIraiRirekiNo",
-        T5301."ikenshoIraiRirekiNo",
-        T5202."ninteichosaJisshiYMD",
-        T5202."ninteichosaJuryoYMD",
-        T5202."gaikyoChosaTextImageKubun",
-        T5202."chosaItakusakiCode",
-        T5202."chosainCode",
-        T5206."gaikyoTokkiTextImageKubun",
-        T5302."ikenshoReadYMD",
-        T5302."ikenshoKinyuYMD",
-        T5302."shujiiIryoKikanCode",
-        T5302."shujiiCode",
-        T5101."ninteiShinseiYMD",
-        T5115."imageSharedFileId",
-        T5105."ninteiShinsakaiKanryoYMD",
-        T5105."centerSoshinYMD",
-        T5101."shoKisaiHokenshaNo",
-        T5101."hihokenshaNo"
-        FROM rgdb."DbT5101NinteiShinseiJoho" T5101
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" T5105
-        ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" T5201
-        ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-        AND T5101."logicalDeletedFlag" = FALSE
-        AND NOT EXISTS (SELECT 'X'
-        FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-        WHERE T5201."shinseishoKanriNo" = B1."shinseishoKanriNo"
-        AND B1."logicalDeletedFlag" = FALSE
-        AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo")
-        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301
-        ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
-        AND (
-          T5301."logicalDeletedFlag" = FALSE
-          OR T5301."logicalDeletedFlag" is NULL
-        )
-        AND NOT EXISTS (SELECT 'X'
-        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B2
-        WHERE T5301."shinseishoKanriNo" = B2."shinseishoKanriNo"
-        AND (
-          B2."logicalDeletedFlag" = FALSE
-          OR B2."logicalDeletedFlag" is NULL
-        )
-        AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo")
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202
-        ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-        AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
-        AND T5202."gaikyoChosaTextImageKubun" = (
-          SELECT T5202Sub."gaikyoChosaTextImageKubun"
-          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202Sub
-          WHERE T5202Sub."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-          AND T5202Sub."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
-          ORDER BY T5202Sub."gaikyoChosaTextImageKubun" DESC
-          LIMIT (1)
-        )
-        LEFT JOIN rgdb."DbT5206GaikyoTokki" T5206
-        ON T5206."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-        AND T5206."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
-        AND T5206."gaikyoTokkiTextImageKubun" = (
-          SELECT T5206Sub."gaikyoTokkiTextImageKubun"
-          FROM rgdb."DbT5206GaikyoTokki" T5206Sub
-          WHERE T5206Sub."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-          AND T5206Sub."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
-          ORDER BY T5206Sub."gaikyoTokkiTextImageKubun" DESC
-          LIMIT (1)
-        )
-        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302
-        ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo"
-        AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
-        LEFT JOIN rgdb."DbT5115Image" T5115
-        ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
-        WHERE T5101."shinseishoKanriNo" = #{shinseishoKanriNo}
-        AND T5101."logicalDeletedFlag" = FALSE
+        SELECT
+            T5101."shinseishoKanriNo",
+            T5201."ninteichosaIraiRirekiNo",
+            T5301."ikenshoIraiRirekiNo",
+            T5202."ninteichosaJisshiYMD",
+            T5202."ninteichosaJuryoYMD",
+            T5202."gaikyoChosaTextImageKubun",
+            T5202."chosaItakusakiCode",
+            T5202."chosainCode",
+            T5206."gaikyoTokkiTextImageKubun",
+            T5302."ikenshoReadYMD",
+            T5302."ikenshoKinyuYMD",
+            T5302."shujiiIryoKikanCode",
+            T5302."shujiiCode",
+            T5101."ninteiShinseiYMD",
+            T5115."imageSharedFileId",
+            T5105."ninteiShinsakaiKanryoYMD",
+            T5105."centerSoshinYMD",
+            T5101."shoKisaiHokenshaNo",
+            T5101."hihokenshaNo",
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" T5101
+        INNER JOIN
+            rgdb."DbT5105NinteiKanryoJoho" T5105
+            ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" T5201
+            ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+            AND T5101."logicalDeletedFlag" = FALSE
+            AND NOT EXISTS (
+                SELECT
+                    'X'
+                FROM
+                    rgdb."DbT5201NinteichosaIraiJoho" AS B1
+                WHERE
+                    T5201."shinseishoKanriNo" = B1."shinseishoKanriNo"
+                AND B1."logicalDeletedFlag" = FALSE
+                AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+            )
+        LEFT JOIN
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301
+            ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+            AND (
+                T5301."logicalDeletedFlag" = FALSE
+                OR T5301."logicalDeletedFlag" is NULL
+            )
+            AND NOT EXISTS (
+                SELECT
+                    'X'
+                FROM
+                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B2
+                WHERE
+                    T5301."shinseishoKanriNo" = B2."shinseishoKanriNo"
+                    AND (
+                      B2."logicalDeletedFlag" = FALSE
+                      OR B2."logicalDeletedFlag" is NULL
+                    )
+                    AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B2."ikenshoIraiRirekiNo"
+            )
+        LEFT JOIN
+            rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202
+            ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+            AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+            AND T5202."gaikyoChosaTextImageKubun" = (
+                SELECT
+                    T5202Sub."gaikyoChosaTextImageKubun"
+                FROM
+                    rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202Sub
+                WHERE
+                    T5202Sub."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+                    AND T5202Sub."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+                ORDER BY
+                    T5202Sub."gaikyoChosaTextImageKubun" DESC
+                LIMIT (1)
+            )
+        LEFT JOIN
+            rgdb."DbT5206GaikyoTokki" T5206
+            ON T5206."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+            AND T5206."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+            AND T5206."gaikyoTokkiTextImageKubun" = (
+                SELECT
+                    T5206Sub."gaikyoTokkiTextImageKubun"
+                FROM
+                    rgdb."DbT5206GaikyoTokki" T5206Sub
+                WHERE
+                    T5206Sub."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+                    AND T5206Sub."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
+                ORDER BY
+                    T5206Sub."gaikyoTokkiTextImageKubun" DESC
+                LIMIT (1)
+            )
+        LEFT JOIN
+            rgdb."DbT5302ShujiiIkenshoJoho" T5302
+            ON T5302."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+            AND T5302."ikenshoIraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5115Image" T5115
+            ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5502ShinsakaiWariateJoho" "DbT5502ShinsakaiWariateJoho"
+            ON T5101."shinseishoKanriNo" = "DbT5502ShinsakaiWariateJoho"."shinseishoKanriNo"
+        WHERE
+            T5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+            AND T5101."logicalDeletedFlag" = FALSE
     </select>
+
+    <resultMap id="resultMap_getImageJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity">
+        <id property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="ninteichosaIraiRirekiNo"   column="ninteichosaIraiRirekiNo" />
+        <result property="ikenshoIraiRirekiNo"       column="ikenshoIraiRirekiNo" />
+        <result property="ninteichosaJisshiYMD"      column="ninteichosaJisshiYMD"      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteichosaJuryoYMD"       column="ninteichosaJuryoYMD"       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gaikyoChosaTextImageKubun" column="gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaItakusakiCode"        column="chosaItakusakiCode"        typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="chosainCode"               column="chosainCode"               typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaikyoTokkiTextImageKubun" column="gaikyoTokkiTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoKinyuYMD"           column="ikenshoReadYMD"            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoReadYMD"            column="ikenshoKinyuYMD"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shujiiIryoKikanCode"       column="shujiiIryoKikanCode"       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiCode"                column="shujiiCode"                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiYMD"          column="ninteiShinseiYMD"          typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="imageSharedFileId"         column="imageSharedFileId"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="ninteiShinsakaiKanryoYMD"  column="ninteiShinsakaiKanryoYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="centerSoshinYMD"           column="centerSoshinYMD"           typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shoKisaiHokenshaNo"        column="shoKisaiHokenshaNo"        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo"              column="hihokenshaNo"              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <collection property="shisakaiWariateEntities"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.ResultMap_DbT5502ShinsakaiWariateJohoEntity"/>
+    </resultMap>
 
 </mapper>

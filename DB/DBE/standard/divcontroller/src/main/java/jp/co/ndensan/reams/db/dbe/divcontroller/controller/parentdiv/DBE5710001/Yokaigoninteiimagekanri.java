@@ -3,7 +3,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ImageDisplay.ImageDisplay.ImageDisplayValidationHandler;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ShinsakaiWariateHistories;
+import static jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages.審査会結果登録済み_イメージ削除不可;
+import static jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages.審査会資料作成済みイメージ_削除確認;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.DBE5710001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.YokaigoninteiimagekanriDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710001.YokaigoninteiimagekanriHandler;
@@ -16,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -88,12 +92,35 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
-     * イメージ削除ボタンをクリックします。
+     * イメージ削除ボタンがクリックされた際の処理です。
      *
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnImageDelete(YokaigoninteiimagekanriDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            ImagekanriJoho imageKanri = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+            ShinsakaiWariateHistories histories = imageKanri.get審査会割当履歴();
+            if (histories.findDeletableImages().isNone()) {
+                return ResponseData.of(div)
+                        .addMessage(審査会結果登録済み_イメージ削除不可.getMessage())
+                        .respond();
+            }
+            if (histories.had審査会資料Published()) {
+                return ResponseData.of(div)
+                        .addMessage(審査会資料作成済みイメージ_削除確認.getMessage())
+                        .respond();
+            }
+        }
+        //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+        String messageCode = ResponseHolder.getMessageCode().toString();
+        if (審査会結果登録済み_イメージ削除不可.getMessage().getCode().equals(messageCode)) {
+            return ResponseData.of(div).respond();
+        }
+        if (審査会資料作成済みイメージ_削除確認.getMessage().getCode().equals(messageCode)
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.要介護認定イメージ情報削除へ).respond();
     }
 
@@ -138,10 +165,6 @@ public class Yokaigoninteiimagekanri {
     public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnGaikyoTokki(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.イメージ区分, イメージ区分_調査票概況);
         return ResponseData.of(div).respond();
-    }
-
-    private ImageDisplayValidationHandler getValidationHandler() {
-        return new ImageDisplayValidationHandler();
     }
 
     /**
