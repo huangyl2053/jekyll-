@@ -35,8 +35,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJohoEntity> {
 
-    private static final RString SELECT_JIMUHANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
-            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.getJimuHanteiJoho");
+    private static final RString SELECT_HANTEIJOHO = new RString("jp.co.ndensan.reams.db.dbe.persistence.db"
+            + ".mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper.getHanteiJoho");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(JimukyokuyoYobihanteiKinyuhyoReportSource.ReportSourceFields.shinsakaiKaisaiNo.name())));
     private IinTokkiJikouItiziHanteiProcessParameter paramter;
@@ -61,7 +61,7 @@ public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJoho
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_JIMUHANTEIJOHO, myBatisParameter);
+        return new BatchDbReader(SELECT_HANTEIJOHO, myBatisParameter);
     }
 
     @Override
