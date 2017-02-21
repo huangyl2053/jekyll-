@@ -33,6 +33,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity {
     private FlexibleDate temp_督促状発行日;
     private RString temp_調査委託先コード;
     private RString temp_事業者名称;
+    private RString temp_調査員コード;
     private RString temp_調査員氏名;
     private RString temp_事業者住所;
     private TelNo temp_事業者電話番号;

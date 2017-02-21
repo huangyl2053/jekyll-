@@ -57,7 +57,10 @@ public class ShujiiIkenTokusokujoCsvEntity {
     @CsvField(order = 15, name = "事業者電話番号")
     private final RString kikanTel;
 
-    @CsvField(order = 16, name = "主治医氏名")
+    @CsvField(order = 16, name = "主治医コード")
+    private final RString shujiiCode;
+
+    @CsvField(order = 17, name = "主治医氏名")
     private final RString shujiiName;
 
     /**
@@ -76,6 +79,7 @@ public class ShujiiIkenTokusokujoCsvEntity {
      * @param kikanName 事業者名称
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
+     * @param shujiiCode
      * @param shujiiName 主治医氏名
      */
     public ShujiiIkenTokusokujoCsvEntity(
@@ -92,6 +96,7 @@ public class ShujiiIkenTokusokujoCsvEntity {
             RString kikanName,
             RString kikanJusho,
             RString kikanTel,
+            RString shujiiCode,
             RString shujiiName) {
         this.cityCode = cityCode;
         this.cityName = cityName;
@@ -107,5 +112,6 @@ public class ShujiiIkenTokusokujoCsvEntity {
         this.kikanJusho = kikanJusho;
         this.kikanTel = kikanTel;
         this.shujiiName = shujiiName;
+        this.shujiiCode = shujiiCode;
     }
 }

@@ -83,6 +83,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private static final RString ヘッダ_督促状発行日 = new RString("督促状発行日");
     private static final RString ヘッダ_調査委託先コード = new RString("調査委託先コード");
     private static final RString ヘッダ_事業所名称 = new RString("調査委託先名称");
+    private static final RString ヘッダ_調査員コード = new RString("調査員コード");
     private static final RString ヘッダ_調査員氏名 = new RString("調査員氏名");
     private static final RString ヘッダ_事業者住所 = new RString("調査機関住所");
     private static final RString ヘッダ_事業者電話番号 = new RString("調査機関電話番号");
@@ -131,17 +132,18 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
             csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
                     CSVタイトル, null, null, null, null,
                     null, null, null, null,
-                    null, null, null, null, null));
+                    null, null, null, null, null, null));
             csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
                     印刷年月日.concat(RString.HALF_SPACE).concat(時分秒),
                     null, null, null, null,
                     null, null, null, null,
-                    null, null, null, null, null));
+                    null, null, null, null, null, null));
             csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
                     ヘッダ_NO, ヘッダ_市町村コード,
                     ヘッダ_市町村名称, ヘッダ_保険者名, ヘッダ_被保険者番号,
                     ヘッダ_被保険者氏名カナ, ヘッダ_被保険者氏名, ヘッダ_申請日, ヘッダ_督促状発行日,
-                    ヘッダ_調査委託先コード, ヘッダ_事業所名称, ヘッダ_事業者住所, ヘッダ_事業者電話番号, ヘッダ_調査員氏名));
+                    ヘッダ_調査委託先コード, ヘッダ_事業所名称, ヘッダ_事業者住所, ヘッダ_事業者電話番号,
+                    ヘッダ_調査員コード, ヘッダ_調査員氏名));
         }
     }
 

@@ -63,13 +63,13 @@
         AND  DbT5912ShujiiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
         AND  DbT5912ShujiiJoho."shujiiCode" = DbT5101NinteiShinseiJoho."shujiiCode"
         INNER JOIN (
-            SELECT
-                DbT5301.*,
-                ROW_NUMBER() OVER (PARTITION BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo",
-                                                DbT5301."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo"
-                                   ORDER BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" DESC) AS "rowNum"
-            FROM
-            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.noDeleted_DbT5301ShujiiIkenshoIraiJoho" />) AS DbT5301
+        SELECT
+        DbT5301.*,
+        ROW_NUMBER() OVER (PARTITION BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo",
+        DbT5301."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo"
+        ORDER BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" DESC) AS "rowNum"
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.noDeleted_DbT5301ShujiiIkenshoIraiJoho" />) AS DbT5301
         ) AS DbT5301ShujiiIkenshoIraiJoho
         ON  DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND DbT5301ShujiiIkenshoIraiJoho."rowNum" = 1
@@ -95,28 +95,32 @@
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
         WHERE
-            DbT5101NinteiShinseiJoho."shujiiIryokikanCode" is not null
-            AND DbT5101NinteiShinseiJoho."shujiiIryokikanCode" <![CDATA[<>]]> ''
-            AND  DbT5101NinteiShinseiJoho."shujiiCode" is not null
-            AND  DbT5101NinteiShinseiJoho."shujiiCode" <![CDATA[<>]]> ''
-            GROUP BY
-            DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
-            DbT5101NinteiShinseiJoho."hihokenshaNo"
-            ) AS dbT5101
-            ON
-            dbT5101.shoKisaiHokenshaNo = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-            AND  dbT5101.hihokenshaNo = DbT5101NinteiShinseiJoho."hihokenshaNo"
-            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{取下}
-            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{却下}
-            <if test="uses保険者コード">
-                AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
-            </if>
-            <if test="uses主治医医療機関コード">
-                AND  DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{temp_主治医医療機関コード}
-            </if>
-            <if test="uses主治医コード">
-                AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
-            </if>
+        DbT5101NinteiShinseiJoho."shujiiIryokikanCode" is not null
+        AND DbT5101NinteiShinseiJoho."shujiiIryokikanCode" <![CDATA[<>]]> ''
+        AND  DbT5101NinteiShinseiJoho."shujiiCode" is not null
+        AND  DbT5101NinteiShinseiJoho."shujiiCode" <![CDATA[<>]]> ''
+        GROUP BY
+        DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
+        DbT5101NinteiShinseiJoho."hihokenshaNo"
+        ) AS dbT5101
+        ON
+        dbT5101.shoKisaiHokenshaNo = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+        AND  dbT5101.hihokenshaNo = DbT5101NinteiShinseiJoho."hihokenshaNo"
+        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{取下}
+        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" <![CDATA[<>]]> #{却下}
+        <if test="uses保険者コード">
+            AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
+        </if>
+        <if test="uses主治医医療機関コード">
+            AND  DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{temp_主治医医療機関コード}
+        </if>
+        <if test="uses主治医コード">
+            AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
+        </if>
+        ORDER BY
+        DbT5101NinteiShinseiJoho."shujiiIryokikanCode",
+        DbT5101NinteiShinseiJoho."shujiiCode",
+        DbT5101NinteiShinseiJoho."hihokenshaNo"
     </select>
 
     <resultMap id="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoHakkoRelateEntity" autoMapping="true">
@@ -132,6 +136,7 @@
         <result property="temp_医療機関コード" column="temp_医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_主治医コード" column="temp_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_主治医氏名" column="temp_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
@@ -151,6 +156,7 @@
         DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" AS temp_医療機関コード,
         DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" AS temp_事業者名称,
         DbT5911ShujiiIryoKikanJoho."jusho" AS temp_事業者住所,
+        DbT5912ShujiiJoho."shujiiCode" AS temp_主治医コード,
         DbT5912ShujiiJoho."shujiiName" AS temp_主治医氏名,
         DbT5911ShujiiIryoKikanJoho."telNo" AS temp_事業者電話番号
         FROM
@@ -213,9 +219,9 @@
     </select>
 
     <select resultOrdered="true" id="select市町村コード"
-        resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity"
-        parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
-        fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+            fetchSize="500">
         SELECT
         DbT7051."shichosonCode" AS shichosonCode
         FROM rgdb."DbT7051KoseiShichosonMaster" AS DbT7051

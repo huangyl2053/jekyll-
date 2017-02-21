@@ -84,6 +84,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private static final RString 被保険者氏名 = new RString("被保険者氏名");
     private static final RString 申請日 = new RString("申請日");
     private static final RString 督促状発行日 = new RString("督促状発行日");
+    private static final RString 主治医コード = new RString("主治医コード");
     private static final RString 氏名 = new RString("主治医氏名");
     private static final RString 医療機関コード = new RString("主治医医療機関コード");
     private static final RString 事業者名称 = new RString("主治医医療機関名称");
@@ -127,7 +128,7 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
             csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
                     CSVタイトル, null, null, null, null,
                     null, null, null, null,
-                    null, null, null, null, null));
+                    null, null, null, null, null, null));
             RStringBuilder systemDateTime = new RStringBuilder();
             RDateTime datetime = RDate.getNowDateTime();
             systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
@@ -145,10 +146,10 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
                     systemDateTime.toRString(),
                     null, null, null, null,
                     null, null, null, null,
-                    null, null, null, null, null));
+                    null, null, null, null, null, null));
             csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
                     番号, 市町村コード, 市町村名称, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
-                    医療機関コード, 事業者名称, 事業者住所, 事業者電話番号, 氏名));
+                    医療機関コード, 事業者名称, 事業者住所, 事業者電話番号, 主治医コード, 氏名));
         }
     }
 
@@ -174,20 +175,21 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
             csvWriter.writeLine(createCsvEntity(
                     item,
                     entity.getTemp_医療機関コード() == null ? RString.EMPTY : entity.getTemp_医療機関コード(),
+                    entity.getTemp_主治医コード() == null ? RString.EMPTY : entity.getTemp_主治医コード(),
                     index));
         }
         index = index + 1;
     }
 
     private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item,
-            RString 医療機関コード, int idenx) {
+            RString 医療機関コード, RString 主治医コード, int idenx) {
         return new ShujiiIkenTokusokujoCsvEntity(
                 new RString(String.valueOf(idenx)), item.getCityCode(), item.getCityName(), item.getListUpper1_1(),
                 item.getListLower1_1(), item.getListUpper1_2(),
                 item.getListLower1_2(), item.getListShinseiYMD_1().toDateString(),
                 item.getListTokusokujoHakkoYMD_1().toDateString(),
                 医療機関コード, item.getListUpper2_1(),
-                item.getListUpper2_2(), item.getListLower2_2(), item.getListLower2_1());
+                item.getListUpper2_2(), item.getListLower2_2(), 主治医コード, item.getListLower2_1());
     }
 
     @Override

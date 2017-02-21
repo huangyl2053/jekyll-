@@ -36,6 +36,7 @@ public class ShujiiIkenTokusokujoHakkoRelateEntity {
     private RString temp_医療機関コード;
     private RString temp_事業者名称;
     private RString temp_事業者住所;
+    private RString temp_主治医コード;
     private RString temp_主治医氏名;
     private TelNo temp_事業者電話番号;
     private ShinseishoKanriNo temp_申請書管理番号;

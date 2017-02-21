@@ -61,7 +61,10 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     @CsvField(order = 15, name = "事業者電話番号")
     private RString kikanTel;
 
-    @CsvField(order = 16, name = "調査員氏名")
+    @CsvField(order = 16, name = "調査員コード")
+    private RString chosainCode;
+
+    @CsvField(order = 17, name = "調査員氏名")
     private RString chosainShime;
 
     /**
@@ -86,6 +89,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
      * @param kikanName 事業者名称
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
+     * @param chosainCode
      * @param chosainShime 調査員氏名
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
@@ -102,6 +106,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
             RString kikanName,
             RString kikanJusho,
             RString kikanTel,
+            RString chosainCode,
             RString chosainShime) {
         this.cityCode = cityCode;
         this.cityName = cityName;
@@ -117,6 +122,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         this.chosainShime = chosainShime;
         this.kikanJusho = kikanJusho;
         this.kikanTel = kikanTel;
+        this.chosainCode = chosainCode;
     }
 
     /**
@@ -140,6 +146,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         csvEntity.chosaItakusakiCode = entity.getTemp_調査委託先コード() == null ? RString.EMPTY : entity.getTemp_調査委託先コード();
         csvEntity.kikanName = entity.getTemp_事業者名称() == null ? RString.EMPTY : entity.getTemp_事業者名称();
+        csvEntity.chosainCode = entity.getTemp_調査員コード();
         csvEntity.chosainShime = entity.getTemp_調査員氏名();
         csvEntity.kikanJusho = entity.getTemp_事業者住所();
         csvEntity.kikanTel = entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue();
