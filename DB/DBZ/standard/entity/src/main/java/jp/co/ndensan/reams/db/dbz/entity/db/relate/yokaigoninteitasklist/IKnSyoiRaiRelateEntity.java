@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -28,6 +29,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IKnSyoiRaiRelateEntity implements Serializable {
 
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;

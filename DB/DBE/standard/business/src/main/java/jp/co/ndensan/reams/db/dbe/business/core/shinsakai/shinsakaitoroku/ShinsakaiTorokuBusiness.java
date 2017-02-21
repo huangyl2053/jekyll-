@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaitoroku;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -16,13 +16,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 審査会登録画面を管理するクラスです。
- * 
+ *
  * @author n3402 猪股祐太
  */
 public class ShinsakaiTorokuBusiness {
-    
+
     private final ShinsakaiTorokuRelateEntity entity;
-    
+
     /**
      * 審査会登録項目を返します。
      *
@@ -31,16 +31,25 @@ public class ShinsakaiTorokuBusiness {
     public ShinsakaiTorokuBusiness(ShinsakaiTorokuRelateEntity entity) {
         this.entity = entity;
     }
-    
+
     /**
      * 認定完了情報を返します。
-     * 
+     *
      * @return 認定完了情報
      */
     public DbT5105NinteiKanryoJohoEntity get認定完了情報() {
         return entity.get要介護認定完了情報Entity();
     }
-    
+
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
+    }
+
     /**
      * 申請書管理番号を返します。
      *
@@ -202,7 +211,7 @@ public class ShinsakaiTorokuBusiness {
     public FlexibleDate get介護認定審査会割当年月日() {
         return entity.getShinsakaiWariateYMD();
     }
-    
+
     /**
      * 審査順を返します。
      *
@@ -211,10 +220,10 @@ public class ShinsakaiTorokuBusiness {
     public int get審査順() {
         return entity.getShinsakaiOrder();
     }
-    
+
     /**
      * 合議体名称を返します。
-     * 
+     *
      * @return 合議体名称
      */
     public RString get合議体名称() {

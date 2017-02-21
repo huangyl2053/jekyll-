@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisai;
 
 import java.io.Serializable;

@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -265,6 +264,7 @@ public class ShinsakaiTorokuHandler {
                 row.setJotai(完了可能);
                 completeCount++;
             }
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
@@ -322,7 +322,7 @@ public class ShinsakaiTorokuHandler {
 
     /**
      * 対象者状態ラジオボタンの表示処理です。
-     * 
+     *
      * @param stateName stateName
      */
     public void setJyotaiKubun(RString stateName) {

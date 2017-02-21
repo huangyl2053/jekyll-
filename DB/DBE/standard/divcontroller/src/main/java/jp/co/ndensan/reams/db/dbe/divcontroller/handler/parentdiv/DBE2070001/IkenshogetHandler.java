@@ -114,11 +114,11 @@ public class IkenshogetHandler {
         List<dgNinteiTaskList_Row> rowListNotreated = new ArrayList<>();
         int completeCount = 0;
         int notCount = 0;
-        RString 督促方法 = RString.EMPTY;
+        RString 督促方法;
         for (IkenSyoNyuSyuBusiness business : 意見書入手List.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
-
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null

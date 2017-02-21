@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,6 +38,15 @@ public class GeTuReiSyoRiBusiness {
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
     }
 
     /**

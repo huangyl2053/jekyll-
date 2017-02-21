@@ -184,9 +184,8 @@ public class NinteichosaKekkaNyushuHandler {
             if (!isDisplay(business.get認定調査実施年月日())) {
                 continue;
             }
-
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
-
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHokensha(RString.isNullOrEmpty(business.get保険者名()) ? RString.EMPTY : business.get保険者名());
             row.getNinteiShinseiYMD().setValue(toRDate(business.get認定申請年月日()));
             row.setHihoNo(RString.isNullOrEmpty(business.get被保険者番号()) ? RString.EMPTY : business.get被保険者番号());

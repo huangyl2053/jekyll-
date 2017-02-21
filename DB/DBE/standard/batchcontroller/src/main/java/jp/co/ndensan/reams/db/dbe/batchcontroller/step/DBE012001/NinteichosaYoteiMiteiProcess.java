@@ -110,7 +110,8 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
     private PersonalData toPersonalData(NinteichosaYoteiMiteiRelateEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
                 entity.getDbT5101_shinseishoKanriNo().value());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        return PersonalData.of(new ShikibetsuCode(entity.getDbT5101_shoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                .concat(entity.getDbT5101_hihokenshaNo())), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

@@ -86,7 +86,7 @@ public class ShinsakaiToroku {
     public ResponseData<ShinsakaiTorokuDiv> onLoad(ShinsakaiTorokuDiv div) {
         getHandler(div).set対象者最大表示件数();
         getHandler(div).onLoad(ResponseHolder.getState());
-        getHandler(div).審査会一覧データグリッド初期化();       
+        getHandler(div).審査会一覧データグリッド初期化();
         getHandler(div).set審査会最大表示件数();
         ViewStateHolder.put(ViewStateKeys.状態, div.getRadTaishoshaJotai().getSelectedKey());
         return ResponseData.of(div).respond();
@@ -120,22 +120,24 @@ public class ShinsakaiToroku {
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsakaiTorokuDiv div, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会登録一覧);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<ShinsakaiTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
-                personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo()));
                 csvWriter.writeLine(getCsvData(row));
+                PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                                row.getShinseishoKanriNo()));
+                personalDataList.add(personalData);
             }
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        AccessLogger.log(AccessLogType.照会, personalData);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
@@ -219,8 +221,8 @@ public class ShinsakaiToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 div.getRadTaishoshaJotai().setSelectedKey(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
                 return ResponseData.of(div).respond();
             }
@@ -311,8 +313,8 @@ public class ShinsakaiToroku {
                 return ResponseData.of(div).addMessage(message).respond();
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
             }
         }
@@ -351,7 +353,6 @@ public class ShinsakaiToroku {
         return ResponseData.of(div).setState(DBE4010001StateName.登録);
     }
 
-    
     /**
      * 継続ボタン押下動作です。
      *
@@ -368,6 +369,7 @@ public class ShinsakaiToroku {
         getHandler(div).onLoad(ResponseHolder.getState());
         return ResponseData.of(div).setState(stateName);
     }
+
     private List<dgNinteiTaskList_Row> get修正リスト(ShinsakaiTorokuDiv div) {
         List<dgNinteiTaskList_Row> データリスト = div.getDgNinteiTaskList().getDataSource();
         List<dgNinteiTaskList_Row> 修正リスト = new ArrayList<>();
