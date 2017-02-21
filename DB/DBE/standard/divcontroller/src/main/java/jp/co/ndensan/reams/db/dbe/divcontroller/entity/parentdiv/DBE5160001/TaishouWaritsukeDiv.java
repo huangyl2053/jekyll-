@@ -217,6 +217,16 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblTaishoshaSort() {
+        return this.getShinsakaiTaishoshaWaritsuke().getWaritsukeTaishoshaIchiran().getLblTaishoshaSort();
+    }
+
+    @JsonIgnore
+    public void  setLblTaishoshaSort(Label lblTaishoshaSort) {
+        this.getShinsakaiTaishoshaWaritsuke().getWaritsukeTaishoshaIchiran().setLblTaishoshaSort(lblTaishoshaSort);
+    }
+
+    @JsonIgnore
     public DataGrid<dgTaishoshaIchiran_Row> getDgTaishoshaIchiran() {
         return this.getShinsakaiTaishoshaWaritsuke().getWaritsukeTaishoshaIchiran().getDgTaishoshaIchiran();
     }

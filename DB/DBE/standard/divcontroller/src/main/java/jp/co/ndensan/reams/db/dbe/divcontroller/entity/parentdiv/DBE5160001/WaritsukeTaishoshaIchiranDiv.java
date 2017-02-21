@@ -23,6 +23,8 @@ public class WaritsukeTaishoshaIchiranDiv extends Panel {
      */
     @JsonProperty("lblTaishosha")
     private Label lblTaishosha;
+    @JsonProperty("lblTaishoshaSort")
+    private Label lblTaishoshaSort;
     @JsonProperty("dgTaishoshaIchiran")
     private DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran;
 
@@ -48,6 +50,24 @@ public class WaritsukeTaishoshaIchiranDiv extends Panel {
     @JsonProperty("lblTaishosha")
     public void setLblTaishosha(Label lblTaishosha) {
         this.lblTaishosha = lblTaishosha;
+    }
+
+    /*
+     * getlblTaishoshaSort
+     * @return lblTaishoshaSort
+     */
+    @JsonProperty("lblTaishoshaSort")
+    public Label getLblTaishoshaSort() {
+        return lblTaishoshaSort;
+    }
+
+    /*
+     * setlblTaishoshaSort
+     * @param lblTaishoshaSort lblTaishoshaSort
+     */
+    @JsonProperty("lblTaishoshaSort")
+    public void setLblTaishoshaSort(Label lblTaishoshaSort) {
+        this.lblTaishoshaSort = lblTaishoshaSort;
     }
 
     /*
