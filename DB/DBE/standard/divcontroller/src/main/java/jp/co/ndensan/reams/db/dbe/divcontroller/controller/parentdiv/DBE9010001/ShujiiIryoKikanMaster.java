@@ -93,6 +93,7 @@ public class ShujiiIryoKikanMaster {
             = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表.csv");
+    private static final RString カーソル位置 = new RString("txtSearchShujiiIryokikanCodeFrom");
 
     /**
      * コンストラクタです。
@@ -110,7 +111,7 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onLoad(ShujiiIryoKikanMasterDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, true);
         getHandler(div).clearKensakuJoken();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).focusId(カーソル位置).respond();
     }
 
     /**
