@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class NinteiShinsakaiIinGuideHandler {
 
     private final NinteiShinsakaiIinGuideDiv div;
+    private static final RString KEY0 = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -76,9 +77,9 @@ public class NinteiShinsakaiIinGuideHandler {
         div.getDdlKaigoJigyosha().getDataSource().clear();
         div.getDdlSonotaJigyosha().getDataSource().clear();
         List<RString> list = new ArrayList();
-        list.add(new RString("key0"));
-        div.getKensakuJoken().getShosaiJoken().getChkHaishi().setSelectedItemsByKey(list);
-        div.getKensakuJoken().getShosaiJoken().getChkKiken().setSelectedItemsByKey(list);
+        list.add(KEY0);
+        div.getKensakuJoken().getChkHaishi().setSelectedItemsByKey(list);
+        div.getKensakuJoken().getRadKikan().setSelectedKey(KEY0);
     }
 
     /**
@@ -107,6 +108,7 @@ public class NinteiShinsakaiIinGuideHandler {
         for (Sikaku sikaku : Sikaku.values()) {
             審査会委員資格リスト.add(new KeyValueDataSource(sikaku.getコード(), sikaku.get名称()));
         }
+        審査会委員資格リスト.remove(new KeyValueDataSource(Sikaku.精神科医.getコード(), Sikaku.精神科医.get名称()));
         div.getDdlShinsainShikakuCode().setDataSource(審査会委員資格リスト);
     }
 

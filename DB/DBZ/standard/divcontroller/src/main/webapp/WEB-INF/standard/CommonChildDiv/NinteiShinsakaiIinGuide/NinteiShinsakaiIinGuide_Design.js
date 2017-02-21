@@ -79,6 +79,18 @@ var DBZ;
                 return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
             };
 
+            Controls.prototype.txtKijunbi = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKijunbi"));
+            };
+
+            Controls.prototype.radKikan = function () {
+                return new UZA.RadioButton(this.convFiledName("radKikan"));
+            };
+
+            Controls.prototype.chkHaishi = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHaishi"));
+            };
+
             Controls.prototype.txtMaxKensu = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
             };
@@ -109,14 +121,6 @@ var DBZ;
 
             Controls.prototype.ddlSonotaJigyosha = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlSonotaJigyosha"));
-            };
-
-            Controls.prototype.chkKiken = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKiken"));
-            };
-
-            Controls.prototype.chkHaishi = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkHaishi"));
             };
 
             Controls.prototype.ShinsakaiIinIchiran = function () {

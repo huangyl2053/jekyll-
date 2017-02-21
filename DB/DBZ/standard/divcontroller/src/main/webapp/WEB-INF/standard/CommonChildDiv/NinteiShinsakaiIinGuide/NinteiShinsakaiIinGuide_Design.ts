@@ -86,6 +86,18 @@ module DBZ {
                 return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
             }
 
+            public txtKijunbi(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtKijunbi"));
+            }
+
+            public radKikan(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKikan"));
+            }
+
+            public chkHaishi(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkHaishi"));
+            }
+
             public txtMaxKensu(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
             }
@@ -116,14 +128,6 @@ module DBZ {
 
             public ddlSonotaJigyosha(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlSonotaJigyosha"));
-            }
-
-            public chkKiken(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKiken"));
-            }
-
-            public chkHaishi(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkHaishi"));
             }
 
             public ShinsakaiIinIchiran(): UZA.Panel {

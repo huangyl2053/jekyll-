@@ -393,23 +393,25 @@ public class GogitaiJohoSakuseiHandler {
         List<dgHoketsuShinsainList_Row> hoketsuShinsainList = new ArrayList<>();
         List<dgShinsainList_Row> shinsainList = new ArrayList<>();
         for (GogitaiWariateIinJoho result : resultList) {
-            if (result.is補欠()) {
+            if (result.is補欠() && !result.getShinsakaiIinJohoList().get(0).isDeleted()) {
                 dgHoketsuShinsainList_Row hoketsuShinsainRow = new dgHoketsuShinsainList_Row();
                 hoketsuShinsainRow.setHoketsuShinsakaiIinShimei(nullToEmpty(result.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名()));
                 hoketsuShinsainRow.setHoketsuShinsakaiIinCode(result.get介護認定審査会委員コード());
                 hoketsuShinsainList.add(hoketsuShinsainRow);
                 continue;
             }
-            dgShinsainList_Row shinsainRow = new dgShinsainList_Row();
-            shinsainRow.setShinsakaiIinShimei(nullToEmpty(result.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名()));
-            shinsainRow.setShinsakaiIinCode(result.get介護認定審査会委員コード());
-            if (GogitaichoKubunCode.副合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
-                shinsainRow.setFukuGogitaicho(Boolean.TRUE);
+            if (!result.isDeleted()) {
+                dgShinsainList_Row shinsainRow = new dgShinsainList_Row();
+                shinsainRow.setShinsakaiIinShimei(nullToEmpty(result.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名()));
+                shinsainRow.setShinsakaiIinCode(result.get介護認定審査会委員コード());
+                if (GogitaichoKubunCode.副合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
+                    shinsainRow.setFukuGogitaicho(Boolean.TRUE);
+                }
+                if (GogitaichoKubunCode.合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
+                    shinsainRow.setGogitaicho(Boolean.TRUE);
+                }
+                shinsainList.add(shinsainRow);
             }
-            if (GogitaichoKubunCode.合議体長.getコード().equals(nullToEmpty(result.get合議体長区分コード()))) {
-                shinsainRow.setGogitaicho(Boolean.TRUE);
-            }
-            shinsainList.add(shinsainRow);
         }
         div.getDgHoketsuShinsainList().setDataSource(hoketsuShinsainList);
         div.getDgShinsainList().setDataSource(shinsainList);
@@ -477,7 +479,7 @@ public class GogitaiJohoSakuseiHandler {
         gogitaiJohoBuilder = 合議体割当審査員情報編集(gogitaiJohoBuilder);
         return gogitaiJohoBuilder.build();
     }
-
+    
     private GogitaiJohoBuilder 合議体割当審査員情報編集(GogitaiJohoBuilder gogitaiJohoBuilder) {
         for (dgShinsainList_Row shinsainRow : div.getDgShinsainList().getDataSource()) {
             GogitaiWariateIinJoho gogitaiWariateIinJoho = new GogitaiWariateIinJoho(
@@ -500,7 +502,7 @@ public class GogitaiJohoSakuseiHandler {
             gogitaiWariateIinJoho = gogitaiWariateIinJohoBuilder.build();
             gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
         }
-
+        
         for (dgHoketsuShinsainList_Row hoketsuShinsainRow : div.getDgHoketsuShinsainList().getDataSource()) {
             GogitaiWariateIinJoho gogitaiWariateIinJoho = new GogitaiWariateIinJoho(
                     Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),

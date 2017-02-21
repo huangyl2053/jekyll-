@@ -11,6 +11,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE511001.DBE511001_GogitaiIkkatuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
@@ -50,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -363,6 +365,19 @@ public class GogitaiJohoSakusei {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            
+            Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
+            GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
+                    div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
+                    new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
+            GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
+            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(new GogitaiWariateIinJohoIdentifier(gogitaiJoho.get合議体番号(), gogitaiJoho.get合議体有効期間開始年月日(), div.getDgShinsainList().getActiveRow().getShinsakaiIinCode()));
+            gogitaiWariateIinJoho = gogitaiWariateIinJoho.deleted();
+            ShinsakaiIinJoho shinsakaiIinJoho = gogitaiWariateIinJoho.getGogitaiWariateIinJoho(new ShinsakaiIinJohoIdentifier(gogitaiWariateIinJoho.get介護認定審査会委員コード()));
+            shinsakaiIinJoho = shinsakaiIinJoho.deleted();
+            gogitaiJoho = gogitaiJoho.createBuilderForEdit().setGogitaiWariateIinJoho(gogitaiWariateIinJoho).build();
+            gogitaiJohoModel.add(gogitaiJoho);
+            ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
             div.getDgShinsainList().getDataSource().remove(div.getDgShinsainList().getClickedRowId());
         }
         return ResponseData.of(div).respond();
@@ -379,6 +394,18 @@ public class GogitaiJohoSakusei {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
+            GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
+                    div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
+                    new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
+            GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
+            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(new GogitaiWariateIinJohoIdentifier(gogitaiJoho.get合議体番号(), gogitaiJoho.get合議体有効期間開始年月日(), div.getDgHoketsuShinsainList().getClickedItem().getHoketsuShinsakaiIinCode()));
+            gogitaiWariateIinJoho = gogitaiWariateIinJoho.deleted();
+            ShinsakaiIinJoho shinsakaiIinJoho = gogitaiWariateIinJoho.getGogitaiWariateIinJoho(new ShinsakaiIinJohoIdentifier(gogitaiWariateIinJoho.get介護認定審査会委員コード()));
+            shinsakaiIinJoho = shinsakaiIinJoho.deleted();
+            gogitaiJoho = gogitaiJoho.createBuilderForEdit().setGogitaiWariateIinJoho(gogitaiWariateIinJoho).build();
+            gogitaiJohoModel.add(gogitaiJoho);
+            ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
             div.getDgHoketsuShinsainList().getDataSource().remove(div.getDgHoketsuShinsainList().getClickedRowId());
         }
         return ResponseData.of(div).respond();
@@ -401,15 +428,17 @@ public class GogitaiJohoSakusei {
         }
         if (ResponseHolder.getButtonType() != MessageDialogSelectedResult.No) {
             ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-            GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
+            if (!div.getDgGogitaiIchiran().getSelectedItems().isEmpty()) {
+                GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
                         div.getDgGogitaiIchiran().getSelectedItems().get(0).getGogitaiNumber().getValue().intValue(),
                         new FlexibleDate(div.getDgGogitaiIchiran().getSelectedItems().get(0).getYukoKaishiYMD().getValue().toDateString()));
-            GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
-//            gogitaiJoho.createBuilderForEdit().setState(EntityDataState.Unchanged).build();
-            gogitaiJohoModel.deleteOrRemove(identifier);
-            gogitaiJohoModel.add(gogitaiJoho.createBuilderForEdit().setState(EntityDataState.Unchanged).build());
-            div.getDgGogitaiIchiran().getSelectedItems().get(0).setJyotai(RString.EMPTY);
-            ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
+                GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
+//                gogitaiJoho.createBuilderForEdit().setState(EntityDataState.Unchanged).build();
+//                gogitaiJohoModel.deleteOrRemove(identifier);
+                gogitaiJohoModel.add(gogitaiJoho.createBuilderForEdit().setState(EntityDataState.Unchanged).build());
+//                div.getDgGogitaiIchiran().getSelectedItems().get(0).setJyotai(RString.EMPTY);
+                ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
+            }
             getHandler(div).合議体詳細情報初期状態設定();
             List<dgGogitaiIchiran_Row> ichiranList = div.getDgGogitaiIchiran().getDataSource();
             boolean notUpdate = true;
@@ -421,6 +450,8 @@ public class GogitaiJohoSakusei {
             }
             if (notUpdate) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, true);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, false);
             }
         }
             
@@ -433,7 +464,7 @@ public class GogitaiJohoSakusei {
      * @param div 合議体情報作成Div
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
-    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnkosin(GogitaiJohoSakuseiDiv div) {
+     public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnkosin(GogitaiJohoSakuseiDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確定の確認.getMessage()).respond();
         }

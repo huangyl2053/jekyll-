@@ -186,7 +186,9 @@ public class GogitaiJohoManager {
 
     private void deletePhysical合議体割当委員情報リスト(List<GogitaiWariateIinJoho> 合議体割当委員情報List) {
         for (GogitaiWariateIinJoho 合議体割当委員情報 : 合議体割当委員情報List) {
-            合議体割当委員情報Manager.deletePhysical(合議体割当委員情報);
+            if (!合議体割当委員情報.isDeleted()) {
+                合議体割当委員情報Manager.deletePhysical(合議体割当委員情報);
+            }
         }
     }
 

@@ -83,8 +83,9 @@ public class NinteiShinsakaiIinGuide {
         if (maxKensu.intValue() > get最大取得件数上限().intValue()) {
             throw new ApplicationException("最大取得件数上限が超過しています。最大取得件数上限(" + get最大取得件数上限().intValue() + ")以下に調整してください。");
         }
-        RString kikenFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkKiken().getSelectedKeys());
-        RString haishiFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkHaishi().getSelectedKeys());
+        RString kikenFlag = div.getKensakuJoken().getRadKikan().getSelectedKey();
+        RString haishiFlag = getChkFlag(div.getKensakuJoken().getChkHaishi().getSelectedKeys());
+        FlexibleDate 基準日 = get基準日(div.getTxtKijunbi().getValue());
         NinteiShinsakaiIinGuideMapperParameter parameter;
         parameter = NinteiShinsakaiIinGuideMapperParameter.createSelectByKeyParam(
                 shinsakaiIinCodeFrom,
@@ -99,7 +100,7 @@ public class NinteiShinsakaiIinGuide {
                 haishiFlag,
                 maxKensu,
                 hokensha,
-                new FlexibleDate(RDate.getNowDate().toDateString())
+                基準日
         );
         List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト = NinteiShinsakaiIinGuideManager.createInstance().
                 get審査会委員一覧情報(parameter).records();
@@ -188,6 +189,15 @@ public class NinteiShinsakaiIinGuide {
         }
         return chkFlag;
     }
+    
+    private FlexibleDate get基準日(RDate 基準日) {
+        RDate sysDate = RDate.getNowDate();
+        if (基準日 == null || 基準日.toDateString().isEmpty() || 基準日.isBeforeOrEquals(sysDate)) {
+            return new FlexibleDate(RDate.getNowDate().toDateString());
+        } else {
+            return new FlexibleDate(基準日.toDateString());
+        }
+     }
 
     @JsonIgnore
     private NinteiShinsakaiIinGuideHandler getHandler(NinteiShinsakaiIinGuideDiv div) {
