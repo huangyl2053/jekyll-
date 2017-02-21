@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 完了処理・マスキングのHandlerクラスです。
@@ -123,6 +124,7 @@ public class MaskingHandler {
                 }
 
                 マスキングモードの日付設定(row, business);
+                row.setShoKisaiHokenshaNo(business.getShoKisaiHokenshaNo()== null ? ShoKisaiHokenshaNo.EMPTY.getColumnValue() : business.getShoKisaiHokenshaNo().getColumnValue());
                 rowList.add(row);
             }
         }

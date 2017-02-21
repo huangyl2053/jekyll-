@@ -286,6 +286,7 @@ public class SabisuJyoukyoA3 {
             項目.setSabisuKubun(new RString("なし"));
             setサービス(項目, null, ファイルパス);
         }
+        項目.setServiceKubunCode(entity.getServiceKubunCode());
     }
 
     private void 予防給付サービスの状況(DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity,

@@ -190,6 +190,10 @@ public class Masking {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 if (row.getSelected()) {
+                    ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getShoKisaiHokenshaNo().substring(0, 5).concat(row.getHihoNumber()));
+                    PersonalData personalData = PersonalData.of(shikibetsuCode, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                        row.getShinseishoKanriNo()));
+                    AccessLogger.log(AccessLogType.照会, personalData);
                     csvWriter.writeLine(getCsvData(row));
                 }
             }

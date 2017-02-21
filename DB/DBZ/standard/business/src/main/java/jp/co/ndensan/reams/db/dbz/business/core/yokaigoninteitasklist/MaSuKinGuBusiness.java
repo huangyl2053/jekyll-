@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.MaSuKinGuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -174,4 +175,14 @@ public class MaSuKinGuBusiness {
     public int getTotalCount() {
         return entity.getTotalCount();
     }
+
+    /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return
+     */
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+        return entity.getShoKisaiHokenshaNo();
+    }
+
 }

@@ -125,7 +125,8 @@ public class ShinseiJouhouInsatuProcess extends BatchProcessBase<ShinseiMonitorE
     private PersonalData toPersonalData(ShinseiMonitorEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
                 entity.get申請書管理番号());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        return PersonalData.of(new ShikibetsuCode(entity.get保険者番号().padZeroToLeft(6).substring(0, 5)
+                .concat(entity.get被保険者番号())), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

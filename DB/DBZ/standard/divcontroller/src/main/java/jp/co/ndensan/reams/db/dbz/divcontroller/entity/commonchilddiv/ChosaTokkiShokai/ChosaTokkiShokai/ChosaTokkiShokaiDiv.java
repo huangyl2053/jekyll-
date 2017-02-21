@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @reamsid_L DBE-3000-200 liangbc
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -2604,22 +2604,22 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
             RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
             NinteiShinseiJohoManager ninteiShinseiJohoManager = InstanceProvider.create(NinteiShinseiJohoManager.class);
             NinteiShinseiJoho 認定申請情報 = ninteiShinseiJohoManager.get要介護認定申請情報(申請書管理番号);
-            boolean is短冊タイプ = false;
-            if (認定申請情報.get認定申請年月日().isAfterOrEquals(
+            boolean isタイルタイプ = false;
+            if (認定申請情報.get認定申請年月日().isBeforeOrEquals(
                     new FlexibleDate(DbBusinessConfig.get(ConfigNameDBE.認定調査票特記事項_様式切替日, RDate.getNowDate(), SubGyomuCode.DBE認定支援)))) {
-                is短冊タイプ = true;
+                isタイルタイプ = true;
             }
-            if (!is短冊タイプ) {
+            if (isタイルタイプ) {
                 this.imgPanel1.setDisplayNone(false);
                 for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
                     initializaイメージエリア(出力イメージフォルダパス, 認定調査特記事項マッピング,
-                            認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), !is短冊タイプ);
+                            認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), isタイルタイプ);
                 }
             } else {
                 this.imgPanel2.setDisplayNone(false);
                 for (NinteichosahyoTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
                     initializaイメージエリア(出力イメージフォルダパス, 認定調査特記事項マッピング,
-                            認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), is短冊タイプ);
+                            認定調査特記事項, 認定調査特記事項.get認定調査特記事項連番(), isタイルタイプ);
                 }
             }
         } else {
@@ -2835,7 +2835,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private void initializaイメージエリア(RString 出力イメージフォルダパス, NinteiChosaTokkiJikou 認定調査特記事項マッピング,
-            NinteichosahyoTokkijiko 認定調査特記事項, int remban, boolean is短冊タイプ) {
+            NinteichosahyoTokkijiko 認定調査特記事項, int remban, boolean isタイルタイプ) {
         downLoadFilePath = getFilePath(出力イメージフォルダパス, replaceShareFileName(
                 NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(), remban, false));
         RString path原本 = downLoadFilePath;
@@ -2846,7 +2846,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                     NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(this.txtTokkiJikouNo.getValue()).getイメージファイル(), remban, true));
         }
 
-        if (!is短冊タイプ) {
+        if (isタイルタイプ) {
             switch (remban) {
                 case 1:
                     this.imgPanel1.getTxtTokkijikoNo11().setDisplayNone(false);

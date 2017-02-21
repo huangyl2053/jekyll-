@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai;
 
 import java.io.Serializable;
@@ -126,10 +125,10 @@ public class ShinsakaiKaisai implements Serializable {
     public RString get合議体番号() {
         return new RString(entity.get合議体番号());
     }
-    
+
     /**
      * 最大審査順を取得します。
-     * 
+     *
      * @return 最大審査順
      */
     public RString get最大審査順() {

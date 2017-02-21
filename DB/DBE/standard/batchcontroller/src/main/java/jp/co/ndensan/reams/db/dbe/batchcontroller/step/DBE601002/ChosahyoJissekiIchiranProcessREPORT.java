@@ -159,8 +159,8 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
 
     private RString get出力条件_改頁() {
         RString 改頁 = new RString("【改頁】");
-        改頁.concat(paramter.get改頁());
-        return 改頁;
+        return 改頁.concat(paramter.get改頁());
+
     }
 
     private PersonalData toPersonalData(ChosahyoJissekiIchiranRelateEntity entity) {

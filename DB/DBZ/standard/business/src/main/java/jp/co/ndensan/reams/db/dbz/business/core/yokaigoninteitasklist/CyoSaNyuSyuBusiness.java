@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity;
@@ -30,6 +31,15 @@ public class CyoSaNyuSyuBusiness {
      */
     public CyoSaNyuSyuBusiness(CyoSaNyuSyuRelateEntity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
     }
 
     /**

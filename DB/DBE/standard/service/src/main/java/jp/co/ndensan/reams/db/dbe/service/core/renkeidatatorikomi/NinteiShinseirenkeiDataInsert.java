@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -579,6 +579,13 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder checkDbT5101同情報(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
+        if (entity.getDbT5101Entity().getLogicalDeletedFlag()) {
+            return errorBuilder;
+        }
+        if (entity.getDbT5101Entity().getTorisageKubunCode() != null 
+                && entity.getDbT5101Entity().getTorisageKubunCode().equals(new Code(TorisageKubunCode.取り下げ.getコード()))) {
+            return errorBuilder;
+        }
         if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
             if (entity.getDbT5101Entity() == null) {
                 errorBuilder.append(new RString("申請データが存在しません；"));

@@ -99,7 +99,7 @@ public class GetsureiShoriHandler {
         int notCount = 0;
         for (GeTuReiSyoRiBusiness business : 検索結果.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
-
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             if (business.getセンター送信情報抽出年月日() == null || business.getセンター送信情報抽出年月日().isEmpty()) {
                 row.setJyotai(KanryoShoriStatus.未処理.get略称());
                 row.setCellBgColor(JotaiColumnName, DataGridCellBgColor.bgColorRed);

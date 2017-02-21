@@ -105,8 +105,7 @@ public class ShujiiMaster {
             searchChosainInfo(div);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
-        ResponseData.of(div).setState(DBE9020001StateName.検索);
-        return ResponseData.of(div).focusId(カーソル位置).respond();
+        return ResponseData.of(div).setState(DBE9020001StateName.検索);
     }
 
     /**

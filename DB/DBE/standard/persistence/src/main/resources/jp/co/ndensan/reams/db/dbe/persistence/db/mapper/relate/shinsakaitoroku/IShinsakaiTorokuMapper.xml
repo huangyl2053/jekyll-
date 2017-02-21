@@ -8,6 +8,7 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
             DbT5101."shinseishoKanriNo",
+            DbT5101."shoKisaiHokenshaNo",
             DbT5101."hihokenshaNo",
             DbT5101."hihokenshaName",
             DbT5101."ninteiShinseiShinseijiKubunCode",
@@ -79,6 +80,7 @@
     </select>
     <resultMap id="resultMap_ShinsakaiTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity" autoMapping="true">
     <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+    <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
     <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="hihokenshaName"  column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     <result property="shinseijiKubunCode"  column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
@@ -150,7 +152,7 @@
         WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
                 AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{表示期間From}
          	AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{表示期間To}
-                AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0'
+                AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" IN ('0', '1')
                 AND shinsakaiKaisaiYoteiJoho."shinsakaiYoteiTeiin" <![CDATA[>]]> shinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"
         <if test="is開催予定登録OR対象者割付">
             <if test="is表示しない">

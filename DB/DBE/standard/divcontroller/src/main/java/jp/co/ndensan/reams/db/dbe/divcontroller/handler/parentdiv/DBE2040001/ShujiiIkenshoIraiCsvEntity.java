@@ -42,7 +42,7 @@ public class ShujiiIkenshoIraiCsvEntity {
     private final RString 依頼書発行日;
     @CsvField(order = 120, name = "意見書出力日")
     private final RString 意見書出力日;
-    @CsvField(order = 130, name = "依頼期限")
+    @CsvField(order = 130, name = "提出期限")
     private final RString 依頼期限;
     @CsvField(order = 140, name = "作成料請求区分コード")
     private final RString 作成料請求区分コード;

@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -39,6 +38,7 @@ public class NinteiEnkiTsuchishoHakko {
 
     private final RString グループコード = new RString("1007");
     private final RString 一覧表を発行する_FileName = new RString("btnPrint1");
+    private final RString 変更フラグ_変更 = new RString("1");
 
     /**
      * 画面初期化処理です。
@@ -90,6 +90,7 @@ public class NinteiEnkiTsuchishoHakko {
         List<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報 = handler.get要介護認定申請情報(発行対象者一覧情報);
         ArrayList<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報ArrayList = new ArrayList<>(要介護認定申請情報);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報List, 要介護認定申請情報ArrayList);
+        ViewStateHolder.put(ViewStateKeys.認定延期通知書, RString.EMPTY);
         return ResponseData.of(div).setState(通知書);
     }
 
@@ -107,6 +108,7 @@ public class NinteiEnkiTsuchishoHakko {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         getHandler(div).対象行延期理由のセット();
+        ViewStateHolder.put(ViewStateKeys.認定延期通知書, 変更フラグ_変更);
         return ResponseData.of(div).respond();
     }
 
@@ -150,6 +152,7 @@ public class NinteiEnkiTsuchishoHakko {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         getHandler(div).対象行延期内容の更新();
+        ViewStateHolder.put(ViewStateKeys.認定延期通知書, 変更フラグ_変更);
         return ResponseData.of(div).respond();
     }
 
@@ -161,17 +164,22 @@ public class NinteiEnkiTsuchishoHakko {
      */
     public ResponseData<NinteiEnkiTsuchishoHakkoDiv> onClick_btnBack(NinteiEnkiTsuchishoHakkoDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
+            if (ViewStateHolder.get(ViewStateKeys.認定延期通知書, RString.class).equals(変更フラグ_変更)) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
+            }
         }
-        if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            List<KeyValueDataSource> emptyDataSource = new ArrayList<>();
-            div.getDdlEnkiRiyuInput().setDataSource(emptyDataSource);
+        if (!new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                || (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes))) {
+//            List<KeyValueDataSource> emptyDataSource = new ArrayList<>();
+//            div.getDdlEnkiRiyuInput().setDataSource(emptyDataSource);
+            div.getDdlEnkiRiyuInput().setSelectedIndex(0);
             div.getTxtnkiKetteiDate().clearValue();
             div.getTxtTsuchishoHakkoDate().clearValue();
             div.getTxtMikomiDateTsuchisho().clearFromValue();
             div.getTxtMikomiDateTsuchisho().clearToValue();
-            getHandler(div).onLoad();
+//            div.getBatchParameter().getEnkiTsuchiHakkoTaishosha().setHiddenUpdate(RString.EMPTY);
+//            getHandler(div).onLoad();
             return ResponseData.of(div).setState(検索);
         }
         return ResponseData.of(div).respond();
@@ -199,6 +207,7 @@ public class NinteiEnkiTsuchishoHakko {
             ArrayList<NinteiShinseiJohoDbT5101Child> 要介護認定申請情報ArrayList
                     = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報List, ArrayList.class);
             getHandler(div).更新処理(要介護認定申請情報ArrayList);
+            ViewStateHolder.put(ViewStateKeys.認定延期通知書, RString.EMPTY);
             return ResponseData.of(div).setState(完了);
         }
         return ResponseData.of(div).respond();
@@ -226,6 +235,7 @@ public class NinteiEnkiTsuchishoHakko {
         NinteiEnkiTsuchishoHakkoValidationHandler validationHandler = getValidationHandler();
         if (通知書.getName().equals(ResponseHolder.getState())) {
             validationHandler.対象行を選択チェック(pairs, div);
+            validationHandler.選択行発行日チェック(pairs, div);
             validationHandler.変更内容保存チェック(pairs, div);
         } else if (検索.getName().equals(ResponseHolder.getState())) {
             validationHandler.発行一覧表_終了日が開始日以前チェック(pairs, div);

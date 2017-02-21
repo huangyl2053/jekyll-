@@ -35,6 +35,7 @@ public class NinteiChosaJissekiShokai {
     private static final RString 集計表を発行する = new RString("2");
     private static final RString 一覧表 = new RString("1");
     private static final RString CSVファイル = new RString("2");
+    private static final RString なし = new RString("0");
     private static RString STATE;
 
     /**
@@ -104,7 +105,7 @@ public class NinteiChosaJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
-    public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_btnReSearch(NinteiChosaJissekiShokaiDiv div) {
+    public ResponseData<NinteiChosaJissekiShokaiDiv> onClick_BtnReSearch(NinteiChosaJissekiShokaiDiv div) {
         STATE = DBE6030001StateName.初期表示.getName();
         return ResponseData.of(div).setState(DBE6030001StateName.初期表示);
     }
@@ -116,6 +117,22 @@ public class NinteiChosaJissekiShokai {
      * @return ResponseData<NinteiChosaJissekiShokaiDiv>
      */
     public ResponseData<NinteiChosaJissekiShokaiDiv> onChange_State(NinteiChosaJissekiShokaiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 出力方法を変更した時のイベントです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<NinteiChosaJissekiShokaiDiv>
+     */
+    public ResponseData<NinteiChosaJissekiShokaiDiv> onChange_RadShutsuryokuHoho(NinteiChosaJissekiShokaiDiv div) {
+        if (div.getRadShutsuryokuHoho().getSelectedKey().equals(CSVファイル)) {
+            div.getDdlKaipage().setSelectedKey(なし);
+            div.getDdlKaipage().setDisabled(true);
+        } else {
+            div.getDdlKaipage().setDisabled(false);
+        }
         return ResponseData.of(div).respond();
     }
 

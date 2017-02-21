@@ -156,7 +156,8 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     private PersonalData toPersonalData(NinteichosaIraiHenkoRelateEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
                 entity.getShinseishoKanriNo().value());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        return PersonalData.of(new ShikibetsuCode(entity.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                .concat(entity.getHihokenshaNo())), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

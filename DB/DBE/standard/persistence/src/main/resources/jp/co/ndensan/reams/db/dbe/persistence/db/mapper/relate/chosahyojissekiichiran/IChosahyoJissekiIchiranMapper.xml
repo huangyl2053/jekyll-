@@ -58,12 +58,16 @@
         INNER JOIN rgdb."DbT5031NinteiChosaHoshuTanka" AS T5031
         ON T5031."chosaKubun" = T5202."ninteiChosaKubunCode"
         AND (T5031."homonShubetsu" = '1') = T5210."shisetsuRiyoFlag"
-        <if test="基準日FROMFlag">
-            AND T5031."kaishiYM" <![CDATA[<=]]> SUBSTRING(#{基準日FROM}, 1, 6)
-        </if>
-        <if test="基準日TOFlag">
-            AND SUBSTRING(#{基準日TO}, 1, 6) <![CDATA[<=]]> "shuryoYM"
-        </if>
+        <choose>
+            <when test="基準日区分 == 2">
+                AND T5031."kaishiYM" <![CDATA[<=]]> T5202."ninteichosaJisshiYMD"
+                AND T5202."ninteichosaJisshiYMD" <![CDATA[<=]]> "shuryoYM"
+            </when>
+            <when test="基準日区分 == 3">
+                AND T5031."kaishiYM" <![CDATA[<=]]> T5202."ninteichosaJuryoYMD"
+                AND T5202."ninteichosaJuryoYMD" <![CDATA[<=]]> "shuryoYM"
+            </when>
+        </choose>
         <where>
             <choose>
                 <when test="基準日区分 == 2">

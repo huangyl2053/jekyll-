@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 20 19:21:19 JST 2016 
+ * Tue Feb 21 20:25:32 JST 2017 
  */
 
 
@@ -22,9 +22,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
 
     private RString jotai;
+    private RString shoKisaiHokenshaNo;
     private RString hokensha;
     private TextBoxDate ninteiShinseiDay;
     private RString hihoNumber;
@@ -47,6 +48,7 @@ public class dgNinteiTaskList_Row extends DataRow {
     public dgNinteiTaskList_Row() {
         super();
         this.jotai = RString.EMPTY;
+        this.shoKisaiHokenshaNo = RString.EMPTY;
         this.hokensha = RString.EMPTY;
         this.ninteiShinseiDay = new TextBoxDate();
         this.hihoNumber = RString.EMPTY;
@@ -66,6 +68,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.gogitai = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("jotai", jotai);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
@@ -86,9 +89,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgNinteiTaskList_Row(RString jotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate chosahyoKanryoDay, TextBoxDate ikenshoNyushuKanryoDay, TextBoxDate maskingKanryoDay, TextBoxDate shinsakaiwaritukeDay, TextBoxDate shinsakaiKaisaiDay, TextBoxTime shinsakaiKaisaiJikan, TextBoxNum shinsakaiOrder, RString yusenWaritsukesha, RString kaisaiNumber, RString shinsakaiMeisho, RString gogitai, RString shinseishoKanriNo) {
+    public dgNinteiTaskList_Row(RString jotai, RString shoKisaiHokenshaNo, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate chosahyoKanryoDay, TextBoxDate ikenshoNyushuKanryoDay, TextBoxDate maskingKanryoDay, TextBoxDate shinsakaiwaritukeDay, TextBoxDate shinsakaiKaisaiDay, TextBoxTime shinsakaiKaisaiJikan, TextBoxNum shinsakaiOrder, RString yusenWaritsukesha, RString kaisaiNumber, RString shinsakaiMeisho, RString gogitai, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("jotai", jotai);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
@@ -108,6 +112,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("gogitai", gogitai);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.jotai = jotai;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
         this.hihoNumber = hihoNumber;
@@ -130,6 +135,10 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getJotai() {
         return jotai;
+    }
+
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     public RString getHokensha() {
@@ -207,6 +216,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setJotai(RString jotai) {
         this.setOriginalData("jotai", jotai);
         this.jotai = jotai;
+    }
+
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     public void setHokensha(RString hokensha) {

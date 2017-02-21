@@ -20,17 +20,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -102,7 +96,7 @@ public class KanryoShoriShinsaUketsukeHandler {
         List<ShinSaKeTuKeBusiness> リスト = 審査受付.records();
         int totalCount = 審査受付.totalCount();
         put審査受付List(リスト);
-        List<PersonalData> personalData = new ArrayList<>();
+//        List<PersonalData> personalData = new ArrayList<>();
         for (ShinSaKeTuKeBusiness value : リスト) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(value.get保険者() == null ? RString.EMPTY : value.get保険者());
@@ -114,10 +108,10 @@ public class KanryoShoriShinsaUketsukeHandler {
             row.setShinseiKubunShinseiji(value.get認定申請区分_申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(value.get認定申請区分_申請時コード().getKey()).get名称());
             row.setShinseishoKanriNo(value.get申請書管理番号() == null ? RString.EMPTY : value.get申請書管理番号().value());
-            personalData.add(createPersonalData(row.getShinseishoKanriNo()));
+//            personalData.add(createPersonalData(row.getShinseishoKanriNo()));
             rows.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
+//        AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgNinteiTaskList().setDataSource(rows);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(totalCount);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtMaxCount().getValue().intValue());
@@ -150,8 +144,8 @@ public class KanryoShoriShinsaUketsukeHandler {
         }
     }
 
-    private PersonalData createPersonalData(RString 申請書管理番号) {
-        return PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                new RString("申請書管理番号"), 申請書管理番号));
-    }
+//    private PersonalData createPersonalData(RString 申請書管理番号) {
+//        return PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+//                new RString("申請書管理番号"), 申請書管理番号));
+//    }
 }

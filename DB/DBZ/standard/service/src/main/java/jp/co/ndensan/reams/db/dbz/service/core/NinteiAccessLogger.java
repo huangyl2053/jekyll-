@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
- *
- * @author n3415
+ * 認定用アクセスログクラス
  * @deprecated 複数件のアクセスログを出力すると、パフォーマンスが大幅に低下します。{@link jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger}
  * を使ってください。
  */

@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2070001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.DBE2070001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2070001.IkenshoNyushuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2070001.IkenshogetHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2070001.IkenshogetValidationHandler;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -142,15 +143,17 @@ public class Ikenshoget {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(IkenshogetDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row, div));
-                personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo()));
+                PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                                row.getShinseishoKanriNo()));
+                personalDataList.add(personalData);
             }
             csvWriter.close();
         }
@@ -158,7 +161,7 @@ public class Ikenshoget {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        AccessLogger.log(AccessLogType.照会, personalData);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
@@ -275,16 +278,16 @@ public class Ikenshoget {
 
     private IkenshoNyushuCsvEntity getCsvData(dgNinteiTaskList_Row row, IkenshogetDiv div) {
         RString jyotaiKubun = null;
-        RString 督促方法 = RString.EMPTY;
+        RString 督促方法区分 = RString.EMPTY;
         if (row.getJyotai().equals(new RString("未"))) {
             jyotaiKubun = new RString("未処理");
         } else if (row.getJyotai().equals(new RString("可"))) {
             jyotaiKubun = new RString("完了可能");
         }
         if (row.getChosaTokusokuHoho() == null || row.getChosaTokusokuHoho().isEmpty()) {
-            督促方法 = RString.EMPTY;
+            督促方法区分 = RString.EMPTY;
         } else {
-            督促方法 = getHandler(div).get督促方法(row.getChosaTokusokuHoho());
+            督促方法区分 = getHandler(div).get督促方法区分(row.getChosaTokusokuHoho());
         }
         return new IkenshoNyushuCsvEntity(
                 row.getShinseishoKanriNo(),
@@ -301,8 +304,8 @@ public class Ikenshoget {
                 getパターン1(row.getIkenshoNyushuTeikei().getValue()),
                 getパターン1(row.getNyusyubi().getValue()),
                 getパターン1(row.getChosaTokusokuHakkoDay().getValue()),
+                督促方法区分,
                 row.getChosaTokusokuHoho(),
-                督促方法,
                 row.getChosaTokusokuCount().getValue(),
                 getパターン1(row.getChosaTokusokuLiit().getValue()),
                 RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));

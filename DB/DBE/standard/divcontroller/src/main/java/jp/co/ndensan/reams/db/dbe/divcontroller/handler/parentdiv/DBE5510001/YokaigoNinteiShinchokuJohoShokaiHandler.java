@@ -53,15 +53,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
     private enum KensakuHoho {
 
-        被保険者から検索する場合(DATE_SOURCE_KEY0, "330px"),
-        進捗状況から検索する場合(DATE_SOURCE_KEY1, "330px");
+        被保険者から検索する場合(DATE_SOURCE_KEY0),
+        進捗状況から検索する場合(DATE_SOURCE_KEY1);
 
         private final RString key;
-        private final RString dgShinseiJohoHeigh;
 
-        private KensakuHoho(RString key, String dgShinseiJohoHeight) {
+        private KensakuHoho(RString key) {
             this.key = key;
-            this.dgShinseiJohoHeigh = new RString(dgShinseiJohoHeight);
         }
     }
     private final YokaigoNinteiShinchokuJohoShokaiDiv div;
@@ -82,7 +80,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadKensakuHoho().setSelectedKey(KensakuHoho.被保険者から検索する場合.key);
         div.getShinseiJohoIchiran().setIsOpen(false);
-        div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
         div.getDdlNameMatchType().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
         div.getTxtShiteiHizukeRange().setDisabled(true);
@@ -123,13 +120,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                 div.getSerchFromHohokensha().setDisplayNone(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(false);
                 div.getSerchFromShinchokuJokyo().setIsOpen(true);
-                div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
                 return;
             case 被保険者から検索する場合:
                 div.getSerchFromHohokensha().setDisplayNone(false);
                 div.getSerchFromHohokensha().setIsOpen(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-                div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
                 return;
             default:
         }
@@ -393,7 +388,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             div.getSerchFromHohokensha().setDisplayNone(true);
             div.getSerchFromShinchokuJokyo().setDisplayNone(false);
             div.getSerchFromShinchokuJokyo().setIsOpen(true);
-            div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
         }
     }
 }

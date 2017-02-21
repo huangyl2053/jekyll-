@@ -116,6 +116,7 @@ public class ShinsakaiTaishoshaHandler {
         }
 
         List<dgTaishoshaIchiran_Row> listRow = new ArrayList();
+        List<PersonalData> personalDataList = new ArrayList<>();
         for (ShinsakaiTaishoshaBusiness shinsakaiTai : 一覧情報) {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
             TextBoxNum no = new TextBoxNum();
@@ -179,19 +180,17 @@ public class ShinsakaiTaishoshaHandler {
             }
             row.setShinseishoKanriNo(shinsakaiTai.getShinseishoKanriNo().getColumnValue());
             listRow.add(row);
-            アクセスログ(shinsakaiTai.getShinseishoKanriNo().getColumnValue());
+            アクセスログ(personalDataList, row);
         }
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         div.getDgTaishoshaIchiran().setDataSource(listRow);
     }
 
-    private void アクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(SHIKI, 管理番号,
-                申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+    private void アクセスログ(List<PersonalData> personalDataList, dgTaishoshaIchiran_Row row) {
+        PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                .concat(row.getHihokenshaNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                        row.getShinseishoKanriNo()));
+        personalDataList.add(personalData);
     }
 
     /**

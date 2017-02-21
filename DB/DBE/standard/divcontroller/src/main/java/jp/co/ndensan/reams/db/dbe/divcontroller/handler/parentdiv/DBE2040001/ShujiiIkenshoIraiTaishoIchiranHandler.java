@@ -251,6 +251,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setCancelButtonState(DataGridButtonState.Enabled);
             row.getIkenshoIraiIraishoHakkoDay().setValue(null);
             row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(null);
+            row.getIkenshoIraiKigen().setValue(null);
             RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
                     .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
             row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
@@ -406,6 +407,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
 
     private dgNinteiTaskList_Row createNinteiTaskList_Row(IKnSyoiRaiBusiness business) {
         dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+        row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
         row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
         row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
         row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());

@@ -30,13 +30,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -265,6 +266,7 @@ public class ShinsakaiTorokuHandler {
                 row.setJotai(完了可能);
                 completeCount++;
             }
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
@@ -459,6 +461,7 @@ public class ShinsakaiTorokuHandler {
         if (joho != null) {
             ShinsakaiKaisaiYoteiJoho2Builder builder = joho.createBuilderForEdit();
             builder.set介護認定審査会割当済み人数(更新件数 + joho.get介護認定審査会割当済み人数());
+            builder.set介護認定審査会進捗状況(new Code(ShinsakaiShinchokuJokyo.未開催_割付完了.getコード()));
             kaisaiYoteiJohoManager.save(builder.build().modifiedModel());
         }
 

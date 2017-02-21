@@ -94,6 +94,8 @@ public class ShujiiIryoKikanMaster {
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表.csv");
     private static final RString カーソル位置 = new RString("txtSearchShujiiIryokikanCodeFrom");
+    private static final RString 検索モード = new RString("検索");
+    private static final RString 非検索モード = new RString("非検索");
 
     /**
      * コンストラクタです。
@@ -110,8 +112,9 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onLoad(ShujiiIryoKikanMasterDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, true);
+        ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
         getHandler(div).clearKensakuJoken();
-        return ResponseData.of(div).focusId(カーソル位置).respond();
+        return ResponseData.of(div).setState(DBE9010001StateName.検索);
     }
 
     /**
@@ -122,10 +125,15 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onStateChange(ShujiiIryoKikanMasterDiv div) {
         boolean changeFlag = Boolean.FALSE;
+        RString モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
         for (dgShujiiIchiran_Row row : div.getShujiiIchiran().getDgShujiiIchiran().getDataSource()) {
             if (!row.getJotai().isEmpty() && !row.getJotai().isNull()) {
                 changeFlag = Boolean.TRUE;
             }
+        }
+        if (検索モード.equals(モード)) {
+            ViewStateHolder.put(ViewStateKeys.モード, 非検索モード);
+            return ResponseData.of(div).respond();
         }
         if (changeFlag) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), Boolean.FALSE);
@@ -681,11 +689,13 @@ public class ShujiiIryoKikanMaster {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 onLoad(div);
                 div.getShujiiSearch().setDisabled(false);
+                ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
                 return ResponseData.of(div).setState(DBE9010001StateName.検索);
             }
         } else {
             onLoad(div);
             div.getShujiiSearch().setDisabled(false);
+            ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
             return ResponseData.of(div).setState(DBE9010001StateName.検索);
         }
         return ResponseData.of(div).respond();
@@ -817,6 +827,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackSearchShujii(ShujiiIryoKikanMasterDiv div) {
         getHandler(div).clearKensakuJoken();
+        ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
         return ResponseData.of(div).setState(DBE9010001StateName.検索);
     }
 

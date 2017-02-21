@@ -295,7 +295,7 @@ public class ShinsaKaiKekkaTorokuHandler {
         for (NiJiHanTeiBusiness business : 二次判定List) {
             if (i < div.getTxtMaxKensu().getValue().intValue()) {
                 dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
-
+                row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
                 if (business.get二次判定結果入力年月日() == null) {
                     row.setJotai(未処理);
                     row.setCellBgColor(状態, DataGridCellBgColor.bgColorRed);

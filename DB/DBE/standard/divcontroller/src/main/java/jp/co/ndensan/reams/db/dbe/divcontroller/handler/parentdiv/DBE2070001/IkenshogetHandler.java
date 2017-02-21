@@ -114,11 +114,11 @@ public class IkenshogetHandler {
         List<dgNinteiTaskList_Row> rowListNotreated = new ArrayList<>();
         int completeCount = 0;
         int notCount = 0;
-        RString 督促方法 = RString.EMPTY;
+        RString 督促方法;
         for (IkenSyoNyuSyuBusiness business : 意見書入手List.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
-
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
             row.setHihoShimei(business.get氏名() == null ? RString.EMPTY : business.get氏名().value());
             row.setShinseiKubunShinseiji(business.get認定申請区分申請時コード() == null
@@ -180,16 +180,23 @@ public class IkenshogetHandler {
 
     public RString get督促方法(RString 督促方法区分) {
         RString 督促方法 = RString.EMPTY;
-        if (NinteichosaTokusokuHoho.督促状郵送.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.督促状郵送.get名称();
-        } else if (NinteichosaTokusokuHoho.督促状ＦＡＸ.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.督促状ＦＡＸ.get名称();
-        } else if (NinteichosaTokusokuHoho.電話.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.電話.get名称();
-        } else if (NinteichosaTokusokuHoho.その他.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.その他.get名称();
+        for (NinteichosaTokusokuHoho item : NinteichosaTokusokuHoho.values()) {
+            if (item.getCode().equals(督促方法区分)) {
+                督促方法 = item.get名称();
+            }
         }
         return 督促方法;
+    }
+
+    public RString get督促方法区分(RString 督促方法名称) {
+
+        RString 督促方法区分 = RString.EMPTY;
+        for (NinteichosaTokusokuHoho item : NinteichosaTokusokuHoho.values()) {
+            if (item.get名称().equals(督促方法名称)) {
+                督促方法区分 = item.getCode();
+            }
+        }
+        return 督促方法区分;
     }
 
     private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {

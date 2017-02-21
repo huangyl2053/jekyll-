@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Dec 26 19:42:11 JST 2016 
+ * Tue Feb 21 14:57:20 JST 2017 
  */
 
 
@@ -20,9 +20,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_08-44-29">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
 
     private RString jyotai;
+    private RString shoKisaiHokenshaNo;
     private RString hokensha;
     private TextBoxDate ninteiShinseiDay;
     private RString hihoNumber;
@@ -36,6 +37,7 @@ public class dgNinteiTaskList_Row extends DataRow {
     public dgNinteiTaskList_Row() {
         super();
         this.jyotai = RString.EMPTY;
+        this.shoKisaiHokenshaNo = RString.EMPTY;
         this.hokensha = RString.EMPTY;
         this.ninteiShinseiDay = new TextBoxDate();
         this.hihoNumber = RString.EMPTY;
@@ -46,6 +48,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.centerSoshinDay = new TextBoxDate();
         this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("jyotai", jyotai);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
@@ -57,9 +60,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgNinteiTaskList_Row(RString jyotai, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate getsureiShoriKanryoDay, TextBoxDate centerSoshinDay, RString shinseishoKanriNo) {
+    public dgNinteiTaskList_Row(RString jyotai, RString shoKisaiHokenshaNo, RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseiKubunHorei, TextBoxDate getsureiShoriKanryoDay, TextBoxDate centerSoshinDay, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("jyotai", jyotai);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
@@ -70,6 +74,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("centerSoshinDay", centerSoshinDay);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.jyotai = jyotai;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
         this.hihoNumber = hihoNumber;
@@ -83,6 +88,10 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getJyotai() {
         return jyotai;
+    }
+
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     public RString getHokensha() {
@@ -124,6 +133,11 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setJyotai(RString jyotai) {
         this.setOriginalData("jyotai", jyotai);
         this.jyotai = jyotai;
+    }
+
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     public void setHokensha(RString hokensha) {
