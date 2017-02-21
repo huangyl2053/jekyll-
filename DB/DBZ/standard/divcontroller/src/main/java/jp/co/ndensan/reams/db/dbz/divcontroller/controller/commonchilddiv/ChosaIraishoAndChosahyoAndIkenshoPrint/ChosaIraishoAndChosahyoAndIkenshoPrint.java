@@ -304,9 +304,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         RString radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
         RDate date = RDate.getNowDate();
-        RString 期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, date, SubGyomuCode.DBE認定支援);
+        RString 期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, date, SubGyomuCode.DBE認定支援,
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         int 作成期限日数
-                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, date, SubGyomuCode.DBE認定支援).toString());
+                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, date, SubGyomuCode.DBE認定支援,
+                                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value()).toString());
         FlexibleDate 作成期限年月日 = null;
         if (KEY0.equals(radTeishutsuKigen)) {
             if (CONFIGVALUE1.equals(期限設定方法)) {
@@ -320,7 +322,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         } else if (KEY2.equals(radTeishutsuKigen)) {
             RDate 共通日 = div.getTxtKyotsuDay().getValue();
             作成期限年月日
-                    = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.plusDay(作成期限日数).toDateString()));
+                    = (共通日 == null ? FlexibleDate.EMPTY : new FlexibleDate(共通日.toDateString()));
         }
         shujiiIkenshoIraiJohoBuilder = shujiiIkenshoIraiJohoBuilder.set主治医意見書作成期限年月日(作成期限年月日);
 
@@ -363,9 +365,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         RString radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
         RDate date = RDate.getNowDate();
-        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援);
+        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援,
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         int 認定調査作成期限日数
-                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援).toString());
+                = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, date, SubGyomuCode.DBE認定支援,
+                                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value()).toString());
         FlexibleDate 認定調査期限年月日 = null;
         if (KEY0.equals(radTeishutsuKigen)) {
             if (CONFIGVALUE1.equals(認定調査期限設定方法)) {
