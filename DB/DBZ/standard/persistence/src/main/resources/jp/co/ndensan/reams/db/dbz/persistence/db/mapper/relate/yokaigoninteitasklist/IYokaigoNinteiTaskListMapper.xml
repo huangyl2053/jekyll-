@@ -188,6 +188,7 @@
         <result property="hasTokkiMask"  column="hasTokkiMask"/>
         <result property="hasIkenshoMask"  column="hasIkenshoMask"/>
         <result property="hasGaikyoMask"  column="hasGaikyoMask"/>
+        <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_ShinSaKaiToRoKuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -1339,6 +1340,7 @@
         DbT5105."ninteichosaKanryoYMD",
         DbT5105."ikenshoTorokuKanryoYMD",
         DbT5105."maskingKanryoYMD",
+        DbT5101."shoKisaiHokenshaNo",
         CASE
         WHEN T5205."shinseishoKanriNo" is not null
         AND T5205."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true
@@ -1488,6 +1490,7 @@
         DbT5105."ninteichosaKanryoYMD",
         DbT5105."ikenshoTorokuKanryoYMD",
         DbT5105."maskingKanryoYMD",
+        DbT5101."shoKisaiHokenshaNo",
         CASE
         WHEN T5205."shinseishoKanriNo" is not null
         AND T5205."shinseishoKanriNo" <![CDATA[ <> ]]> '' THEN true

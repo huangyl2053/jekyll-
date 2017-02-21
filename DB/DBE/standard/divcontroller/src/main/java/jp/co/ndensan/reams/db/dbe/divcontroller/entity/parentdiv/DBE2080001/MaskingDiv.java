@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class MaskingDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,11 +97,6 @@ public class MaskingDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getChosairaitaishoshaichiran().getCcdHokenshaList();
-    }
-
-    @JsonIgnore
     public RadioButton getRadTaishoDataKubun() {
         return this.getChosairaitaishoshaichiran().getRadTaishoDataKubun();
     }
@@ -159,6 +154,11 @@ public class MaskingDiv extends Panel {
     @JsonIgnore
     public void  setTxtSaidaiHyojiKensu(TextBoxNum TxtSaidaiHyojiKensu) {
         this.getChosairaitaishoshaichiran().setTxtSaidaiHyojiKensu(TxtSaidaiHyojiKensu);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getChosairaitaishoshaichiran().getCcdHokenshaList();
     }
 
     @JsonIgnore

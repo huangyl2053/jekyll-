@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 要介護認定申請情報&構成市町村マスタ&要介護認定完了情報RelateEntityクラスです。
@@ -40,4 +41,5 @@ public class MaSuKinGuRelateEntity {
     private boolean hasIkenshoMask;
     private boolean hasGaikyoMask;
     private int totalCount;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 }
