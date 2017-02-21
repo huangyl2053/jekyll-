@@ -313,7 +313,7 @@ public class KanryoshoriIchijihanteiHandler {
 
         row.getChosaJissibi().setValue(business.get認定調査実施年月日());
         row.getIkenshoJuryobi().setValue(business.get主治医意見書受領年月日());
-        if (business.get主治医意見書受領年月日() != null) {
+        if (business.get主治医意見書登録完了年月日() != null) {
             row.setIkenshoJuryo(new RString("●"));
         } else {
             row.setIkenshoJuryo(RString.EMPTY);

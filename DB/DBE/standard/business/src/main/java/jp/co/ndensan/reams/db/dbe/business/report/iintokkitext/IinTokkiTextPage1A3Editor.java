@@ -162,7 +162,7 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         source.imgShisetsuTel = item.get電話番号イメージ();
         source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
                 .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
-        if (!ServiceKubunCode.なし.getコード().equals(item.getServiceKubunCode())) {
+        if (!ServiceKubunCode.なし.getコード().equals(item.getServiceKubunCode().getColumnValue())) {
             source.shisetsuName = new RString("施設名　：");
             source.jusho = new RString("住所　〒");
             source.telNo = new RString("TEL");
