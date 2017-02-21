@@ -170,6 +170,9 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
         出力条件.add(get出力条件_基準日From(基準日区分));
         出力条件.add(get出力条件_基準日TO(基準日区分));
         出力条件.add(保険者_SB.toRString());
+        if (集計表を発行する.equals(paramter.get帳票出力区分())) {
+            出力条件.add(get出力条件_改頁(paramter.get改頁()));
+        }
         return 出力条件;
     }
 
@@ -196,6 +199,11 @@ public class ChosahyoJissekiIchiranProcess extends BatchProcessBase<ChosahyoJiss
                 .append("（To）】")
                 .append(dateFormat(paramter.get基準日TO()))
                 .toRString();
+    }
+
+    private RString get出力条件_改頁(RString 改頁) {
+        RString 改頁項目 = new RString("【改頁】");
+        return 改頁項目.concat(改頁);
     }
 
     private PersonalData toPersonalData(ChosahyoJissekiIchiranRelateEntity entity) {

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票出力用認定調査実績集計表Builderクラスです。
@@ -54,7 +56,7 @@ public class ChosahyoJissekiIchiranEditor implements IChosahyoJissekiIchiranEdit
         source.listChosaJissekiIchiran_8 = item.get入手日();
         source.listChosaJissekiIchiran_9 = item.get調査区分();
         source.listChosaJissekiIchiran_10 = item.get訪問の種類();
-        source.listChosaJissekiIchiran_11 = item.get単価();
+        source.listChosaJissekiIchiran_11 = get数値(item.get単価());
         
         return source;
     }
@@ -75,6 +77,10 @@ public class ChosahyoJissekiIchiranEditor implements IChosahyoJissekiIchiranEdit
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(作成);
         return printTimeStampSb.toRString();
+    }
+    
+    private RString get数値(RString 単価) {
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(単価.toString()), 0);
     }
 
 }

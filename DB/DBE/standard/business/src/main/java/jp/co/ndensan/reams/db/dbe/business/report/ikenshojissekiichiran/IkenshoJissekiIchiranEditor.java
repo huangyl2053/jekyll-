@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 主治医意見書作成実績集計表のEditorです。
@@ -57,7 +59,7 @@ public class IkenshoJissekiIchiranEditor implements IIkenshoJissekiIchiranEditor
         source.listIkenshoJissekiIchiran_11 = item.get入手パターン_在継();
         source.listIkenshoJissekiIchiran_12 = item.get入手パターン_施新();
         source.listIkenshoJissekiIchiran_13 = item.get入手パターン_施継();
-        source.listIkenshoJissekiIchiran_14 = item.get単価();
+        source.listIkenshoJissekiIchiran_14 = get数値(item.get単価());
         return source;
     }
 
@@ -77,5 +79,9 @@ public class IkenshoJissekiIchiranEditor implements IIkenshoJissekiIchiranEditor
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(作成);
         return printTimeStampSb.toRString();
+    }
+    
+    private RString get数値(RString 単価) {
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(単価.toString()), 0);
     }
 }

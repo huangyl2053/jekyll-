@@ -63,6 +63,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
         div.getTxtIkenshoKinyubi().clearToValue();
         div.getRadShutsuryokuHoho().setSelectedKey(KEY_出力方法_初期値);
         div.getDdlKaipage().setSelectedKey(KEY_改頁_初期値);
+        div.getDdlKaipage().setDisabled(false);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getCcdHokensya().loadHokenshaList(GyomuBunrui.介護認定);

@@ -35,6 +35,7 @@ public class IkenshoSakuseiJissekiShokai {
     private static final RString 集計表を発行する = new RString("2");
     private static final RString 一覧表 = new RString("1");
     private static final RString CSVファイル = new RString("2");
+    private static final RString なし = new RString("0");
     private static RString STATE;
 
     /**
@@ -107,6 +108,23 @@ public class IkenshoSakuseiJissekiShokai {
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onChange_State(IkenshoSakuseiJissekiShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 出力方法を変更した時のイベントです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
+     */
+    public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onChange_RadShutsuryokuHoho(IkenshoSakuseiJissekiShokaiDiv div) {
+        if (div.getRadShutsuryokuHoho().getSelectedKey().equals(CSVファイル)) {
+            div.getDdlKaipage().setSelectedKey(なし);
+            div.getDdlKaipage().setDisabled(true);
+        } else {
+            div.getDdlKaipage().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
 
     /**
      * 「条件に戻る」ボタンを押します。
@@ -114,7 +132,7 @@ public class IkenshoSakuseiJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<IkenshoSakuseiJissekiShokaiDiv>
      */
-    public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_btnReSearch(IkenshoSakuseiJissekiShokaiDiv div) {
+    public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onClick_BtnReSearch(IkenshoSakuseiJissekiShokaiDiv div) {
         STATE = DBE6020001StateName.検索.getName();
         return ResponseData.of(div).setState(DBE6020001StateName.検索);
     }
