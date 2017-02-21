@@ -152,7 +152,7 @@
         WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
                 AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{表示期間From}
          	AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{表示期間To}
-                AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0'
+                AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" IN ('0', '1')
                 AND shinsakaiKaisaiYoteiJoho."shinsakaiYoteiTeiin" <![CDATA[>]]> shinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"
         <if test="is開催予定登録OR対象者割付">
             <if test="is表示しない">
