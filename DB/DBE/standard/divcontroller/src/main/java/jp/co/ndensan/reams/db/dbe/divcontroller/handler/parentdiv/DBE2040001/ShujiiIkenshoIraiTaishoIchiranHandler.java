@@ -251,6 +251,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.setCancelButtonState(DataGridButtonState.Enabled);
             row.getIkenshoIraiIraishoHakkoDay().setValue(null);
             row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(null);
+            row.getIkenshoIraiKigen().setValue(null);
             RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
                     .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
             row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
