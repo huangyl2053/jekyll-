@@ -617,22 +617,18 @@ public class ShinsakaiKekkaTorokuHandler {
     //<editor-fold defaultstate="collapsed" desc="ドロップダウンリストの初期化">
     private void set状態像コードドロップダウン() {
         List<KeyValueDataSource> 状態像コードリスト = new ArrayList();
-        状態像コードリスト.add(new KeyValueDataSource(YokaigoJotaizoReiCode.その他.getコード(), YokaigoJotaizoReiCode.その他.get名称()));
-        状態像コードリスト.add(new KeyValueDataSource(YokaigoJotaizoReiCode.不安定な状態.getコード(), YokaigoJotaizoReiCode.不安定な状態.get名称()));
-        状態像コードリスト.add(new KeyValueDataSource(YokaigoJotaizoReiCode.認知機能の低下等.getコード(), YokaigoJotaizoReiCode.認知機能の低下等.get名称()));
+        for (YokaigoJotaizoReiCode v : YokaigoJotaizoReiCode.values()) {
+            状態像コードリスト.add(new KeyValueDataSource(v.getコード(), v.get名称()));
+        }
         div.getKobetsuHyojiArea().getDdlJotaiZo().setDataSource(状態像コードリスト);
     }
 
     private void set判定結果ドロップダウン() {
         List<KeyValueDataSource> 判定結果リスト = new ArrayList();
-        判定結果リスト.add(new KeyValueDataSource(HanteiKekkaCode.再審査.getコード(), HanteiKekkaCode.再審査.get名称()));
-        判定結果リスト.add(new KeyValueDataSource(HanteiKekkaCode.再調査_意見書のみ.getコード(), HanteiKekkaCode.再調査_意見書のみ.get名称()));
-        判定結果リスト.add(new KeyValueDataSource(HanteiKekkaCode.再調査_調査_意見書.getコード(), HanteiKekkaCode.再調査_調査_意見書.get名称()));
-        判定結果リスト.add(new KeyValueDataSource(HanteiKekkaCode.再調査_調査のみ.getコード(), HanteiKekkaCode.再調査_調査のみ.get名称()));
-        判定結果リスト.add(new KeyValueDataSource(HanteiKekkaCode.未審査.getコード(), HanteiKekkaCode.未審査.get名称()));
-        判定結果リスト.add(new KeyValueDataSource(HanteiKekkaCode.認定.getコード(), HanteiKekkaCode.認定.get名称()));
+        for (HanteiKekkaCode v : HanteiKekkaCode.values()) {
+            判定結果リスト.add(new KeyValueDataSource(v.getコード(), v.get名称()));
+        }
         div.getKobetsuHyojiArea().getDdlHanteiKekka().setDataSource(判定結果リスト);
-
     }
 
     private void set二次判定ドロップダウン() {
