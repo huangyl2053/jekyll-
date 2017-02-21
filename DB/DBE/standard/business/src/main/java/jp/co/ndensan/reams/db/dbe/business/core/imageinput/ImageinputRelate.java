@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ImageinputRelate extends RelatedDataBase {
 
+    private static final RString IRAI_NAME = new RString("主治医意見書の作成");
     private final ImageinputRelateEntity entity;
 
     /**
@@ -42,12 +43,12 @@ public class ImageinputRelate extends RelatedDataBase {
 
     @Override
     public RString get被保険者氏名() {
-        return entity.getT5101_被保険者氏名();
+        return entity.get被保険者氏名();
     }
 
     @Override
     public RString get被保険者カナ() {
-        return entity.getT5101_被保険者カナ();
+        return entity.get被保険者カナ();
     }
 
     /**
@@ -56,7 +57,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 証記載保険者番号
      */
     public RString get証記載保険者番号() {
-        return entity.getT5101_証記載保険者番号();
+        return entity.get証記載保険者番号();
     }
 
     /**
@@ -65,7 +66,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 被保険者番号
      */
     public RString get被保険者番号() {
-        return entity.getT5101_被保険者番号();
+        return entity.get被保険者番号();
     }
 
     /**
@@ -74,16 +75,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 施設入所の有無
      */
     public boolean has施設入所() {
-        return entity.isT5101_施設入所の有無();
-    }
-
-    /**
-     * 市町村名称を返します。
-     *
-     * @return 市町村名称
-     */
-    public RString get市町村名称() {
-        return entity.getT7051_市町村名称();
+        return entity.is施設入所の有無();
     }
 
     /**
@@ -92,7 +84,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 申請書管理番号
      */
     public RString get申請書管理番号Value() {
-        return entity.getT5101_申請書管理番号();
+        return entity.get申請書管理番号();
     }
 
     /**
@@ -106,7 +98,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 申請に紐付く九共有ファイルID. もしくは、{@code null}.
      */
     public RDateTime getSharedFileIDOrNull() {
-        return this.entity.getT5115_イメージ共有ファイルID();
+        return this.entity.getイメージ共有ファイルID();
     }
 
     /**
@@ -115,7 +107,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 主治医コード
      */
     public RString get主治医コード() {
-        return entity.getT5912_主治医コード();
+        return entity.get主治医コード();
     }
 
     /**
@@ -124,7 +116,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 主治医氏名
      */
     public RString get主治医氏名() {
-        return entity.getT5912_主治医氏名();
+        return entity.get主治医氏名();
     }
 
     /**
@@ -133,7 +125,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getT5911_主治医医療機関コード();
+        return entity.get主治医医療機関コード();
     }
 
     /**
@@ -142,7 +134,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 医療機関名称
      */
     public RString get医療機関名称() {
-        return entity.getT5911_医療機関名称();
+        return entity.get医療機関名称();
     }
 
     /**
@@ -151,7 +143,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 意見書作成依頼日
      */
     public FlexibleDate get意見書作成依頼日() {
-        return entity.getT5301_主治医意見書作成依頼年月日();
+        return entity.get主治医意見書作成依頼年月日();
     }
 
     /**
@@ -160,7 +152,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 主治医意見書依頼区分
      */
     public RString get主治医意見書依頼区分() {
-        return entity.getT5301_主治医意見書依頼区分();
+        return entity.get主治医意見書依頼区分();
     }
 
     /**
@@ -169,7 +161,7 @@ public class ImageinputRelate extends RelatedDataBase {
      * @return 主治医意見書作成依頼履歴番号
      */
     public int get主治医意見書作成依頼履歴番号() {
-        return entity.getT5301_主治医意見書作成依頼履歴番号();
+        return entity.get主治医意見書作成依頼履歴番号();
     }
 
     /**
@@ -183,7 +175,7 @@ public class ImageinputRelate extends RelatedDataBase {
 
     @Override
     public FlexibleDate get認定申請日() {
-        return entity.getT5101_認定申請年月日();
+        return entity.get認定申請年月日();
     }
 
     @Override
@@ -193,17 +185,27 @@ public class ImageinputRelate extends RelatedDataBase {
 
     @Override
     public KoroshoIfShikibetsuCode get厚労省IF識別コード() {
-        return KoroshoIfShikibetsuCode.toValue(entity.getT5101_厚労省IF識別コード());
+        return KoroshoIfShikibetsuCode.toValue(entity.get厚労省IF識別コード());
     }
 
     @Override
-    public boolean has論理削除() {
-        return entity.isT5101_論理削除フラグ();
+    public boolean had論理削除() {
+        return entity.is論理削除フラグ();
     }
 
     @Override
-    public boolean has一次判定() {
-        return entity.getT5105_一次判定完了日() != null && !entity.getT5105_一次判定完了日().isEmpty();
+    public boolean had一次判定() {
+        return isTrue(entity.get仮一次判定区分());
+    }
+
+    @Override
+    protected boolean had依頼() {
+        return isValid(entity.get意見書作成依頼完了日());
+    }
+
+    @Override
+    protected RString get依頼名() {
+        return IRAI_NAME;
     }
 
     /**

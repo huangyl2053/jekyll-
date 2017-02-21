@@ -8,7 +8,6 @@
         SELECT
           T5101."shoKisaiHokenshaNo" AS 証記載保険者番号
           , T5101."hihokenshaNo" AS 被保険者番号
-          , T7051."shichosonMeisho" AS 保険者
           , T5101."hihokenshaName" AS 被保険者氏名
           , T5101."hihokenshaKana" AS 被保険者カナ
           , T5101."ninteiShinseiYMD" AS 認定申請日
@@ -23,11 +22,12 @@
           , T5201."ninteichosaIraiKubunCode" AS 認定調査依頼区分コード
           , T5201."ninteichosaIraiKaisu" AS 認定調査回数
           , T5201."ninteichosaIraiYMD" AS 認定調査依頼日
-          , T5105."ichijiHanteiKanryoYMD" AS 一次判定完了日
+          , T5105."ninteichosaIraiKanryoYMD" AS 認定調査依頼完了日
+          , T5116."kariIchijiHanteiKubun" AS 仮一次判定区分
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
-          INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
+          LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
             ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
             AND T5201."logicalDeletedFlag" = FALSE
             AND NOT EXISTS (
@@ -40,17 +40,12 @@
                 AND B1."logicalDeletedFlag" = False
                 AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
             )
-          INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
-            ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
-          INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
+          LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
             ON T5101."shinseishoKanriNo" = T5105."shinseishoKanriNo"
-            AND T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
-            AND T5105."ninteiShinsakaiKanryoYMD" IS NULL
-            AND T5105."centerSoshinYMD" IS NULL
           LEFT JOIN rgdb."DbT5115Image" AS T5115
             ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
+          LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS T5116
+            ON T5101."shinseishoKanriNo" = T5116."shinseishoKanriNo"
           WHERE
             T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
             AND T5101."hihokenshaNo" = #{被保険者番号}

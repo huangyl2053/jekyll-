@@ -59,14 +59,14 @@ public class NinteiOcrFinder {
      * @param paramter 検索用のパラメータ
      * @return 関連データ
      */
-    public SearchResult<NinteiOcrRelate> get関連データ(NinteiOcrMapperParamter paramter) {
+    public List<NinteiOcrRelate> get関連データ(NinteiOcrMapperParamter paramter) {
         List<NinteiOcrRelate> imageinputList = new ArrayList<>();
         INinteiOcrMapper mapper = mapperProvider.create(INinteiOcrMapper.class);
         List<NinteiChosaKekkaTorikomiOcrRelateEntity> entityList = mapper.get関連データ(paramter);
         for (NinteiChosaKekkaTorikomiOcrRelateEntity entity : entityList) {
             imageinputList.add(new NinteiOcrRelate(entity));
         }
-        return SearchResult.of(imageinputList, 0, false);
+        return imageinputList;
     }
 
     /**

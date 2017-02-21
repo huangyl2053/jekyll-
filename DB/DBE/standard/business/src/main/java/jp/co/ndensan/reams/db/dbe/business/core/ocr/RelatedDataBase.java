@@ -56,12 +56,22 @@ public abstract class RelatedDataBase implements IRelatedData {
     /**
      * @return 論理削除済みの場合、{@code true}.
      */
-    protected abstract boolean has論理削除();
+    protected abstract boolean had論理削除();
+
+    /**
+     * @return 依頼済みの場合、{@code true}.
+     */
+    protected abstract boolean had依頼();
+
+    /**
+     * @return 依頼未完了のエラーメッセージで依頼の名称として利用する値
+     */
+    protected abstract RString get依頼名();
 
     /**
      * @return 一次判定実施済みの場合、{@code true}.
      */
-    protected abstract boolean has一次判定();
+    protected abstract boolean had一次判定();
 
     /**
      * {@link RelatedDataBase}生成時の処理状況を持ちます。
@@ -88,24 +98,38 @@ public abstract class RelatedDataBase implements IRelatedData {
             return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.過去制度での申請);
         }
         if (!matches指定申請日()) {
-            if (has論理削除()) {
-                return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
+            if (had論理削除()) {
+                return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.すべての申請情報が論理削除);
             }
             return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.申請日一致なし_直近申請日提示
                     .replaced(OcrTorikomiMessages.toSlashSeparatedSeireki(get認定申請日())));
         }
-        if (has論理削除()) {
+        if (had論理削除()) {
             return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.削除された申請);
         }
-        if (has一次判定()) {
+        if (!had依頼()) {
+            return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.依頼未完了.replaced(get依頼名().toString()));
+        }
+        if (had一次判定()) {
             switch (context.get一次判定済時処理()) {
                 case エラーとする:
                     return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.一次判定済みの申請_エラー);
                 default:
-                    return createResults(context.getOcrData(), IProcessingResult.Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告);
+                    return hasToRetryIchijiHantei(context.getOcrData())
+                            ? createResults(context.getOcrData(), IProcessingResult.Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告_要再判定)
+                            : createResults(context.getOcrData(), IProcessingResult.Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告);
             }
         }
         return ProcessingResults.EMPTY;
+    }
+
+    private static boolean hasToRetryIchijiHantei(Iterable<? extends IOcrData> ocrData) {
+        for (IOcrData o : ocrData) {
+            if (o.getOCRID().isUsesIchijiHantei()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -130,5 +154,22 @@ public abstract class RelatedDataBase implements IRelatedData {
             results.add(ProcessingResultFactory.create(type, o, messageToNote));
         }
         return results;
+    }
+
+    /**
+     * @param fDate 判定対象{@link FlexibleDate}
+     * @return
+     * 指定の{@link FlexibleDate}が{@code null}でなく、かつ、実在する日付を持つ場合、{@code true}.
+     */
+    protected static boolean isValid(FlexibleDate fDate) {
+        return fDate != null && fDate.isEmpty();
+    }
+
+    /**
+     * @param bool {@link Boolean}
+     * @return 指定の値が{@code null}ではなく、かつ、{@code true}と一致する場合、{@code true}.
+     */
+    protected static boolean isTrue(Boolean bool) {
+        return java.util.Objects.equals(true, bool);
     }
 }

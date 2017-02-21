@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageInputSontaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,17 +28,24 @@ public class IImageinputMapperTest extends DbeTestDacBase {
     }
 
     @Test
-    public void get関連データ() {
+    public void get意見書関連データ() {
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
         ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
-        List<ImageinputRelateEntity> entities = sut.get関連データ(param);
+        List<ImageinputRelateEntity> entities = sut.get意見書関連データ(param);
         System.out.println(entities.isEmpty());
         ImageinputRelateEntity entity = entities.get(0);
         System.out.println(entity.get主治医意見書情報().isEmpty());
-        System.out.println(entity.getT5101_被保険者カナ());
-        System.out.println(entity.isT5101_論理削除フラグ());
+        System.out.println(entity.get被保険者カナ());
+        System.out.println(entity.is論理削除フラグ());
         System.out.println(entity.isMatches指定申請日());
-        System.out.println(entity.getT5105_一次判定完了日());
-        System.out.println(entity.getT5301_主治医意見書作成依頼年月日());
+        System.out.println(entity.get主治医意見書作成依頼年月日());
+    }
+
+    @Test
+    public void getその他資料関連データ() {
+        IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
+        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
+        List<ImageInputSontaRelateEntity> entities = sut.getその他資料関連データ(param);
+        System.out.println(entities.isEmpty());
     }
 }

@@ -15,52 +15,55 @@ public enum OCRID {
     /**
      * 認定調査票 概況調査区
      */
-    _501("501"),
+    _501("501", false),
     /**
      * 認定調査票 基本調査
      */
-    _502("502"),
+    _502("502", true),
     /**
      * 認定調査票 特記事項
      */
-    _550("550"),
+    _550("550", false),
     /**
      * 認定調査票 概況特記 箇条書き特記
      */
-    _570("570"),
+    _570("570", false),
     /**
      * 意見書OCR 1枚目
      */
-    _701("701"),
+    _701("701", true),
     /**
      * 意見書OCR 2枚目
      */
-    _702("702"),
+    _702("702", true),
     /**
      * 意見書規定外 表
      */
-    _777("777"),
+    _777("777", true),
     /**
      * 意見書規定外 裏
      */
-    _778("778"),
+    _778("778", false),
     /**
      * その他資料
      */
-    _801("801"),
+    _801("801", false),
     /**
      * 空（nullObject）
      */
     EMPTY;
 
     private final RString theValue;
+    private final boolean isUsedIchijiHanteiFlag;
 
     private OCRID() {
         this.theValue = RString.EMPTY;
+        this.isUsedIchijiHanteiFlag = false;
     }
 
-    private OCRID(String value) {
+    private OCRID(String value, boolean isUsedIchijiHantei) {
         this.theValue = new RString(value);
+        this.isUsedIchijiHanteiFlag = isUsedIchijiHantei;
     }
 
     /**
@@ -70,6 +73,13 @@ public enum OCRID {
      */
     public RString value() {
         return this.theValue;
+    }
+
+    /**
+     * @return 一次判定で利用される帳票である場合、{@code true}.
+     */
+    public boolean isUsesIchijiHantei() {
+        return this.isUsedIchijiHanteiFlag;
     }
 
     /**

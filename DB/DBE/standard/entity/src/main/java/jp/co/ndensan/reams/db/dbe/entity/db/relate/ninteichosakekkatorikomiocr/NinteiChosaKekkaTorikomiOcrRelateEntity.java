@@ -22,7 +22,6 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
 
     private RString 証記載保険者番号;
     private RString 被保険者番号;
-    private RString 保険者;
     private RString 被保険者氏名;
     private RString 被保険者カナ;
     private FlexibleDate 認定申請日;
@@ -37,6 +36,7 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
     private Code 認定調査依頼区分コード;
     private int 認定調査回数;
     private FlexibleDate 認定調査依頼日;
-    private FlexibleDate 一次判定完了日;
+    private FlexibleDate 認定調査依頼完了日;
+    private Boolean 仮一次判定区分;
     private boolean matches指定申請日;
 }

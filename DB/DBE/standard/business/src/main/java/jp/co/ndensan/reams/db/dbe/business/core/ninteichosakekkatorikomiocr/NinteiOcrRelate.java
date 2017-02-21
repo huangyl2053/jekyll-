@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiOcrRelate extends RelatedDataBase {
 
+    private static final RString IRAI_NAME = new RString("認定調査");
     private final NinteiChosaKekkaTorikomiOcrRelateEntity entity;
 
     /**
@@ -56,15 +58,6 @@ public class NinteiOcrRelate extends RelatedDataBase {
      */
     public RString get被保険者番号() {
         return entity.get被保険者番号();
-    }
-
-    /**
-     * 保険者を取得します。
-     *
-     * @return 保険者
-     */
-    public RString get保険者() {
-        return entity.get保険者();
     }
 
     /**
@@ -201,13 +194,23 @@ public class NinteiOcrRelate extends RelatedDataBase {
     }
 
     @Override
-    public boolean has論理削除() {
+    public boolean had論理削除() {
         return entity.is論理削除フラグ();
     }
 
     @Override
-    public boolean has一次判定() {
-        return entity.get一次判定完了日() != null && !entity.get一次判定完了日().isEmpty();
+    public boolean had一次判定() {
+        return isTrue(entity.get仮一次判定区分());
+    }
+
+    @Override
+    protected boolean had依頼() {
+        return isValid(entity.get認定調査依頼完了日());
+    }
+
+    @Override
+    protected RString get依頼名() {
+        return IRAI_NAME;
     }
 
     /**

@@ -7,13 +7,14 @@ package jp.co.ndensan.reams.db.dbe.service.core.imageinput;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageInputSontaRelate;
 import jp.co.ndensan.reams.db.dbe.business.core.imageinput.ImageinputRelate;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imageinput.ImageinputMapperParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageInputSontaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imageinput.IImageinputMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -59,15 +60,30 @@ public class ImageinputFinder {
      * @param paramter 検索用のパラメータ
      * @return 関連データ
      */
-    public SearchResult<ImageinputRelate> get関連データ(ImageinputMapperParamter paramter) {
+    public List<ImageinputRelate> get意見書関連データ(ImageinputMapperParamter paramter) {
         List<ImageinputRelate> imageinputList = new ArrayList<>();
         IImageinputMapper mapper = mapperProvider.create(IImageinputMapper.class);
-        List<ImageinputRelateEntity> entityList = mapper.get関連データ(paramter);
+        List<ImageinputRelateEntity> entityList = mapper.get意見書関連データ(paramter);
         for (ImageinputRelateEntity entity : entityList) {
             initMd5(entity.get主治医意見書情報());
             imageinputList.add(new ImageinputRelate(entity));
         }
-        return SearchResult.of(imageinputList, 0, false);
+        return imageinputList;
+    }
+
+    /**
+     * その他資料の関連データを取得します。
+     *
+     * @param parameter 検索用のパラメータ
+     * @return 関連データ
+     */
+    public List<ImageInputSontaRelate> getその他資料関連データ(ImageinputMapperParamter parameter) {
+        List<ImageInputSontaRelate> list = new ArrayList<>();
+        IImageinputMapper mapper = mapperProvider.create(IImageinputMapper.class);
+        for (ImageInputSontaRelateEntity entity : mapper.getその他資料関連データ(parameter)) {
+            list.add(new ImageInputSontaRelate(entity));
+        }
+        return list;
     }
 
     private static void initMd5(List<? extends DbTableEntityBase<?>> entities) {

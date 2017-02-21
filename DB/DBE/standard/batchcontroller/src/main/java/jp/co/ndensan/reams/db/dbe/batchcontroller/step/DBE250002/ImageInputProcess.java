@@ -181,10 +181,10 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     //<editor-fold defaultstate="collapsed" desc="ID777, 778">
     private List<OcrTorikomiResult> processID777or778(OcrIkens ocrIkens, ShinseiKey key) {
         ImageinputMapperParamter param = toParameterToSearchRelatedData(key);
-        List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get関連データ(param).records();
+        List<ImageinputRelate> relatedData = ImageinputFinder.createInstance().get意見書関連データ(param);
         if (relatedData.isEmpty()) {
             return OcrTorikomiResultsFactory.create(key, ocrIkens,
-                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
+                    IProcessingResult.Type.ERROR, OcrTorikomiMessages.申請情報なし);
         }
 
         final ImageinputRelate ir = relatedData.get(0);

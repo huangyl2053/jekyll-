@@ -216,7 +216,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private List<OcrTorikomiResult> otherOperation(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
         NinteiOcrMapperParamter paramter = toParameterToSearchRelatedData(key);
         NinteiOcrFinder finder = NinteiOcrFinder.createInstance();
-        List<NinteiOcrRelate> relatedData = finder.get関連データ(paramter).records();
+        List<NinteiOcrRelate> relatedData = finder.get関連データ(paramter);
         if (relatedData.isEmpty()) {
             return makeErrorsForRelatedDataNotFound(ocrChosas, key);
         }
@@ -499,7 +499,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static List<OcrTorikomiResult> makeErrorsForRelatedDataNotFound(OcrChosasByOCRID ocrChosas, ShinseiKey key) {
         return OcrTorikomiResultsFactory.create(key, ocrChosas.values(),
-                IProcessingResult.Type.ERROR, OcrTorikomiMessages.有効な要介護認定申請なし);
+                IProcessingResult.Type.ERROR, OcrTorikomiMessages.申請情報なし);
     }
     //</editor-fold>
 
