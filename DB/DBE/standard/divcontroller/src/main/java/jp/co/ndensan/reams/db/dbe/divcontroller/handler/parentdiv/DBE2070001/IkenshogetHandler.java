@@ -180,16 +180,23 @@ public class IkenshogetHandler {
 
     public RString get督促方法(RString 督促方法区分) {
         RString 督促方法 = RString.EMPTY;
-        if (NinteichosaTokusokuHoho.督促状郵送.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.督促状郵送.get名称();
-        } else if (NinteichosaTokusokuHoho.督促状ＦＡＸ.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.督促状ＦＡＸ.get名称();
-        } else if (NinteichosaTokusokuHoho.電話.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.電話.get名称();
-        } else if (NinteichosaTokusokuHoho.その他.getCode().equals(督促方法区分)) {
-            督促方法 = NinteichosaTokusokuHoho.その他.get名称();
+        for (NinteichosaTokusokuHoho item : NinteichosaTokusokuHoho.values()) {
+            if (item.getCode().equals(督促方法区分)) {
+                督促方法 = item.get名称();
+            }
         }
         return 督促方法;
+    }
+
+    public RString get督促方法区分(RString 督促方法名称) {
+
+        RString 督促方法区分 = RString.EMPTY;
+        for (NinteichosaTokusokuHoho item : NinteichosaTokusokuHoho.values()) {
+            if (item.get名称().equals(督促方法名称)) {
+                督促方法区分 = item.getCode();
+            }
+        }
+        return 督促方法区分;
     }
 
     private void 意見書入手モードの日付設定(dgNinteiTaskList_Row row, IkenSyoNyuSyuBusiness business) {
