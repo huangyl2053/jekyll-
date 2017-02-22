@@ -243,7 +243,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         概況調査の初期化(概況調査情報, 申請書管理番号, 認定調査履歴番号);
         概況調査_住宅改修情報の初期化(申請書管理番号, 認定調査履歴番号);
-        概況調査_給付関連情報の初期化(申請書管理番号, 認定調査履歴番号);
+        概況調査_給付関連情報の初期化(概況調査情報, 申請書管理番号, 認定調査履歴番号);
         initialize一次判定(申請書管理番号);
     }
 
@@ -252,7 +252,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             在宅施設タブの設定(概況調査情報.getTemp_現在の状況コード());
             サービス区分の設定(概況調査情報.getTemp_現在のサービス区分コード());
             施設関連の詳細設定(概況調査情報);
-            div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().setValue(概況調査情報.getTemp_特記());
+            概況調査特記の設定(概況調査情報);
         } else {
             div.getRadGenzaiservis().setSelectedKey(予防給付サービス_選択);
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().setSelectedKey(住宅改修_無);
@@ -261,6 +261,14 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         給付サービスの初期設定(申請書管理番号, 認定調査履歴番号);
         利用施設の初期設定(申請書管理番号, 認定調査履歴番号);
+    }
+
+    private void 概況調査特記の設定(TempData 概況調査情報) {
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().setDisabled(true);
+        } else {
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().setValue(概況調査情報.getTemp_特記());
+        }
     }
 
     private void 在宅施設タブの設定(RString 現在の状況コード) {
@@ -285,13 +293,20 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     private void 施設関連の詳細設定(TempData 概況調査情報) {
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(概況調査情報.getTemp_利用施設名());
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
-                .setValue(new YubinNo(概況調査情報.getTemp_利用施設郵便番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設郵便番号()));
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho()
-                .setDomain(new AtenaJusho(概況調査情報.getTemp_利用施設住所() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設住所()));
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo()
-                .setDomain(new TelNo(概況調査情報.getTemp_利用施設電話番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設電話番号()));
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setDisabled(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo().setDisabled(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho().setDisabled(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDisabled(true);
+        } else {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(概況調査情報.getTemp_利用施設名());
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
+                    .setValue(new YubinNo(概況調査情報.getTemp_利用施設郵便番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設郵便番号()));
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho()
+                    .setDomain(new AtenaJusho(概況調査情報.getTemp_利用施設住所() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設住所()));
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo()
+                    .setDomain(new TelNo(概況調査情報.getTemp_利用施設電話番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設電話番号()));
+        }
     }
 
     private void setChosaJisshishaJohoModel(ChosaJisshishaJohoModel model, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
@@ -363,9 +378,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
      *
      * @param model 調査実施者情報に渡すパラメータ
      */
-    public void 調査実施者情報子DIV初期化(ChosaJisshishaJohoModel model) {
+    private void 調査実施者情報子DIV初期化(ChosaJisshishaJohoModel model) {
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Input);
         div.getCcdChosaJisshishaJoho().intialize(model);
+        RString 概況調査テキストイメージ区分 = ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class);
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査テキストイメージ区分)) {
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
+        }
     }
 
     private void 給付サービスの初期設定(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
@@ -498,14 +517,19 @@ public class NinnteiChousaKekkaTouroku1Handler {
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().setSelectedKey(住宅改修);
     }
 
-    private void 概況調査_給付関連情報の初期化(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号) {
-        NinteichosahyoKinyuItemManager manager = new NinteichosahyoKinyuItemManager();
-        List<NinteichosahyoKinyuItem> 認定調査記入項目List = manager.get認定調査票_概況調査_記入項目List(申請書管理番号, 認定調査履歴番号);
-        for (NinteichosahyoKinyuItem 認定調査記入項目 : 認定調査記入項目List) {
-            if (GaikyoChosahyouKinyuKomoku09B.市町村特別給付.get連番().equals(new RString(認定調査記入項目.get連番()))) {
-                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().setValue(認定調査記入項目.getサービスの状況記入());
-            } else if (GaikyoChosahyouKinyuKomoku09B.介護保険給付外の在宅サービス.get連番().equals(new RString(認定調査記入項目.get連番()))) {
-                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setValue(認定調査記入項目.getサービスの状況記入());
+    private void 概況調査_給付関連情報の初期化(TempData 概況調査情報, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号) {
+        if (概況調査情報 != null && TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().setDisabled(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setDisabled(true);
+        } else {
+            NinteichosahyoKinyuItemManager manager = new NinteichosahyoKinyuItemManager();
+            List<NinteichosahyoKinyuItem> 認定調査記入項目List = manager.get認定調査票_概況調査_記入項目List(申請書管理番号, 認定調査履歴番号);
+            for (NinteichosahyoKinyuItem 認定調査記入項目 : 認定調査記入項目List) {
+                if (GaikyoChosahyouKinyuKomoku09B.市町村特別給付.get連番().equals(new RString(認定調査記入項目.get連番()))) {
+                    div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().setValue(認定調査記入項目.getサービスの状況記入());
+                } else if (GaikyoChosahyouKinyuKomoku09B.介護保険給付外の在宅サービス.get連番().equals(new RString(認定調査記入項目.get連番()))) {
+                    div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setValue(認定調査記入項目.getサービスの状況記入());
+                }
             }
         }
     }
