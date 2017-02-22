@@ -205,6 +205,10 @@ public class NinteiShinseiToroku {
 
         if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID)) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+            RStringBuilder 前排他制御 = new RStringBuilder();
+            前排他制御.append("DBEShinseishoKanriNo");
+            前排他制御.append(管理番号.getColumnValue());
+            前排他ロックキー(前排他制御.toRString());
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
 
             ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, manager.get要介護認定申請情報(管理番号));
@@ -283,10 +287,6 @@ public class NinteiShinseiToroku {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, true);
                 return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).addValidationMessages(validationMessages).respond();
             }
-            RStringBuilder 前排他制御 = new RStringBuilder();
-            前排他制御.append("DBEShinseishoKanriNo");
-            前排他制御.append(管理番号.getColumnValue());
-            前排他ロックキー(前排他制御.toRString());
             return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
@@ -940,11 +940,6 @@ public class NinteiShinseiToroku {
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.完了).parameter(完了param);
     }
     
-    public ResponseData<NinteiShinseiTorokuDiv> onClick_btnBackToKojin(NinteiShinseiTorokuDiv div) {
-
-        return ResponseData.of(div).respond();
-    }
-
     private NinteiShinseiTorokuHandler getHandler(NinteiShinseiTorokuDiv div) {
         return new NinteiShinseiTorokuHandler(div);
     }
