@@ -32,10 +32,10 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class IkenshoSakuseiIrai {
 
     private static final RString 指定医 = new RString("2");
+    private static final RString 保存するボタン名 = new RString("btnUpdate");
 
     /**
      * 主治医意見書作成依頼(手動)の初期化です。
@@ -73,29 +74,22 @@ public class IkenshoSakuseiIrai {
         }
         div.getCcdShujiiInput().setShiteii(is指定医);
         if (!RealInitialLocker.tryGetLock(get排他キー())) {
-            div.setReadOnly(true);
             throw new PessimisticLockingException();
         }
         createHandler(div).initialize(主治医意見書作成依頼);
         div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
-        
+
         if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
                 div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())) {
+            div.setDisabled(false);
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             return ResponseData.of(div).setState(DBE2410002StateName.ReadOnly);
         }
-
+        div.setDisabled(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン名, false);
         return ResponseData.of(div).respond();
     }
 
-    private LockingKey get排他キー() {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        RStringBuilder lockingKey = new RStringBuilder(SubGyomuCode.DBE認定支援.getColumnValue());
-        lockingKey.append(new RString("ShinseishoKanriNo"));
-        lockingKey.append(申請書管理番号.value());
-        return new LockingKey(lockingKey.toRString());
-    }
-    
     /**
      * 「保存する」ボタン押下時、意見書作成依頼情報を更新します。
      *
@@ -125,10 +119,10 @@ public class IkenshoSakuseiIrai {
         }
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「依頼書等を印刷する」ボタン押下時
-     * 
+     *
      * @param div IkenshoSakuseiIraiDiv
      * @return ResponseData<IkenshoSakuseiIraiDiv>
      */
@@ -142,15 +136,24 @@ public class IkenshoSakuseiIrai {
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「戻る」ボタンを押す処理です。
+     *
      * @param div IkenshoSakuseiIraiDiv
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<IkenshoSakuseiIraiDiv> onClick_btnBack(IkenshoSakuseiIraiDiv div) {
         RealInitialLocker.release(get排他キー());
         return ResponseData.of(div).respond();
+    }
+
+    private LockingKey get排他キー() {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        RStringBuilder lockingKey = new RStringBuilder(SubGyomuCode.DBE認定支援.getColumnValue());
+        lockingKey.append(new RString("ShinseishoKanriNo"));
+        lockingKey.append(申請書管理番号.value());
+        return new LockingKey(lockingKey.toRString());
     }
 
     private void 保存処理(IkenshoSakuseiIraiDiv div) {
@@ -163,7 +166,7 @@ public class IkenshoSakuseiIrai {
                 .create主治医意見書作成依頼(要介護認定申請情報, ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value()));
         IkenshoSakuseiIraiManager.createInstance().saveList(builder.build().modifiedModel());
     }
-    
+
     private void 完了データ更新() {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
