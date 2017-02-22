@@ -158,6 +158,7 @@
         <result property="ikenshoReadYMD"  column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="iryoKikanMeisho"  column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiName"  column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ChoyoID"  column="ChoyoID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_IChiJiHanTeiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -1102,7 +1103,8 @@
         DbT4302."ikenshoKinyuYMD",
         DbT4302."ikenshoReadYMD",
         DbT5911."iryoKikanMeisho",
-        DbT5912."shujiiName"
+        DbT5912."shujiiName",
+        DbT5305."ChoyoID"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER JOIN
@@ -1143,6 +1145,24 @@
         ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
         AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
         AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        (
+        SELECT
+        *
+        FROM rgdb."DbT5305IkenshoImageJoho" DbT5305_temp
+        WHERE
+        NOT EXISTS(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5305IkenshoImageJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5305_temp."shinseishoKanriNo"
+        AND "ChoyoID" <![CDATA[ < ]]> DbT5305_temp."ChoyoID"
+        )
+        ) DbT5305
+        ON DbT5305."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5305."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL

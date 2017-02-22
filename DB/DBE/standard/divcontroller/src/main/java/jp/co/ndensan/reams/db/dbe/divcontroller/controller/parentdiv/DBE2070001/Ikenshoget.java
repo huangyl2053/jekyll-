@@ -301,7 +301,7 @@ public class Ikenshoget {
                 getパターン1(row.getKoshinKanryoDay().getValue()),
                 getコード(row.getIkenshoIraiShokai(), 2),
                 row.getIkenshoIraiShokai(),
-                getパターン1(row.getIkenshoNyushuTeikei().getValue()),
+                row.getIkenshoNyushuTeikei(),
                 getパターン1(row.getNyusyubi().getValue()),
                 getパターン1(row.getChosaTokusokuHakkoDay().getValue()),
                 督促方法区分,

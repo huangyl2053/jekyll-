@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2070001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShujiiIkenshoImageId;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.IkenshogetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2070001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
@@ -126,7 +127,7 @@ public class IkenshogetHandler {
             if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
-//            row.getIkenshoNyushuTeikei().setValue();
+            row.setIkenshoNyushuTeikei(get定型OR定型外(business.get帳票ID()));
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().value().equals(RString.EMPTY)
                     || business.get意見書作成回数区分().value().equals(RString.HALF_SPACE)
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
@@ -176,6 +177,17 @@ public class IkenshogetHandler {
             div.getTxtKanryouKano().setDisplayNone(false);
             div.getTxtMisyori().setDisplayNone(false);
         }
+    }
+
+    private RString get定型OR定型外(RString 帳票ID) {
+        RString 定型OR定型外 = RString.EMPTY;
+
+        for (ShujiiIkenshoImageId item : ShujiiIkenshoImageId.values()) {
+            if (item.get帳票ID().equals(帳票ID)) {
+                定型OR定型外 = item.getName();
+            }
+        }
+        return 定型OR定型外;
     }
 
     public RString get督促方法(RString 督促方法区分) {
