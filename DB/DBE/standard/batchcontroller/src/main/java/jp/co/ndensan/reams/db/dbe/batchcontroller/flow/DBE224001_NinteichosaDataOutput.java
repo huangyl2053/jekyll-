@@ -232,6 +232,6 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
     @Step(DBUPDATEPROCESS)
     protected IBatchFlowCommand callDbT5301UpdateProcess() {
         return loopBatch(DbT5301UpdateProcess.class)
-                .arguments(getProcessParameter(ninteiChosaCsvTempTableName, shinseishoKanriNoList)).define();
+                .arguments(getProcessParameter(ninteiChosaCsvTempTableName, getParameter().getShinseishoKanriNoList())).define();
     }
 }
