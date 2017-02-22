@@ -315,8 +315,8 @@ public class IchijiHanteiKekkaJohoHandler {
         return new Decimal(DecimalFormatter.toRString(new Decimal(基準時間).divide(DOUBLE_10), 1).toString());
     }
     
-    private Decimal change小数第1位(Decimal 基準時間) {
-        return new Decimal(DecimalFormatter.toRString(基準時間.divide(DOUBLE_10), 1).toString());
+    private Decimal change小数第1位(Decimal パーセント) {
+        return new Decimal(DecimalFormatter.toRString(パーセント, 1).toString());
     }
 
     private void set認知症自立度(ShinseishoKanriNo shinseishoKanriNo) {

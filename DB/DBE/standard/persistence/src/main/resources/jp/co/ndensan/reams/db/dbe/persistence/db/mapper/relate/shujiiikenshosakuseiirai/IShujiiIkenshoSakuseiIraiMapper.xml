@@ -96,7 +96,15 @@
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS "DbT5105NinteiKanryoJoho"
         ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
         AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND "DbT5105NinteiKanryoJoho"."ikenshoSakuseiIraiKanryoYMD" IS NULL
+        AND "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" 
+        IN 
+        (
+        SELECT
+        DISTINCT CASE WHEN DbT5302."shinseishoKanriNo" IS NULL THEN DbT5101."shinseishoKanriNo" ELSE '' END 
+        FROM rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
+        ON DbT5101."shinseishoKanriNo" = DbT5302."shinseishoKanriNo"
+        )
         ORDER BY
         "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
         , "DbT5101NinteiShinseiJoho"."ninteiChosainCode"

@@ -94,21 +94,21 @@ public class NinteiShinseiTorokuValidationHandler {
         return validationMessages;
     }
 
-    /**
-     * 区分変更申請時取下日理由入力チェック
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 区分変更申請時取下日理由入力チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(
-                div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().getSelectedKey())
-                && (!div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || !div.getTxtTorisageJiyu().getValue().isEmpty())) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可,
-                    div.getSinseiTorisage()));
-        }
-        return validationMessages;
-    }
+//    /**
+//     * 区分変更申請時取下日理由入力チェック
+//     *
+//     * @return ValidationMessageControlPairs
+//     */
+//    public ValidationMessageControlPairs 区分変更申請時取下日理由入力チェック() {
+//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//        if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(
+//                div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().getSelectedKey())
+//                && (!div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || !div.getTxtTorisageJiyu().getValue().isEmpty())) {
+//            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可,
+//                    div.getSinseiTorisage()));
+//        }
+//        return validationMessages;
+//    }
 
     /**
      * センタ送信データ出力完了チェック

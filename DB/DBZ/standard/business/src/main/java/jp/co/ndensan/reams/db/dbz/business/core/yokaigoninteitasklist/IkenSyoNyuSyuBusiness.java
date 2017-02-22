@@ -228,4 +228,13 @@ public class IkenSyoNyuSyuBusiness {
     public RString get主治医() {
         return entity.getShujiiName();
     }
+
+    /**
+     * 意見書イメージの帳票IDを返します。
+     *
+     * @return 帳票ID
+     */
+    public RString get帳票ID() {
+        return entity.getChoyoID();
+    }
 }

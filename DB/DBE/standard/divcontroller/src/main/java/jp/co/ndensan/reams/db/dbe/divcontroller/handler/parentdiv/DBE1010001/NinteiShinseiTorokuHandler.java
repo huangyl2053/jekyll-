@@ -482,7 +482,7 @@ public class NinteiShinseiTorokuHandler {
         datapass.set続柄(result.get申請届出者続柄());
         //datapass.set識別コード(result.get識別コード().value());
         if (result.get申請届出者郵便番号() != null) {
-            datapass.set郵便番号(result.get申請届出者郵便番号().getEditedYubinNo());
+            datapass.set郵便番号(result.get申請届出者郵便番号().getYubinNo());
         }
         if (result.get申請届出者電話番号() != null
                 && !RString.isNullOrEmpty(result.get申請届出者電話番号().value())) {

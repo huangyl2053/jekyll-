@@ -432,9 +432,38 @@ public class NinteiShinseiToroku {
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
     public ResponseData<NinteiShinseiTorokuDiv> onChange_ddlTodokedeDaikoKubun(NinteiShinseiTorokuDiv div) {
+        ShinseitodokedeJoho todokedeJoho = ViewStateHolder.get(ViewStateKeys.要介護認定申請届出情報, ShinseitodokedeJoho.class);
         if (ShinseiTodokedeDaikoKubunCode.本人.getCode().equals(div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().getSelectedKey())) {
             div.getCcdShinseiTodokedesha().initialize(getHandler(div).set届出情報());
-            
+        } else if (todokedeJoho != null 
+                && div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().getSelectedKey().equals(todokedeJoho.get申請届出代行区分コード().value())) {
+            NinteiShinseiTodokedeshaDataPassModel datapass = new NinteiShinseiTodokedeshaDataPassModel();
+            datapass.setカナ氏名(todokedeJoho.get申請届出者氏名カナ());
+            if (!RString.isNullOrEmpty(todokedeJoho.get事業者区分())
+                    && !todokedeJoho.get事業者区分().trim().isEmpty()) {
+                datapass.set事業者区分(todokedeJoho.get事業者区分());
+            }
+            datapass.set住所(todokedeJoho.get申請届出者住所());
+            datapass.set氏名(todokedeJoho.get申請届出者氏名());
+            if (todokedeJoho.get申請届出代行事業者番号() != null
+                    && !RString.isNullOrEmpty(todokedeJoho.get申請届出代行事業者番号().value())) {
+                datapass.set申請届出代行事業者番号(todokedeJoho.get申請届出代行事業者番号().value());
+            }
+            if (todokedeJoho.get申請届出代行区分コード() != null
+                    && !RString.isNullOrEmpty(todokedeJoho.get申請届出代行区分コード().value())) {
+                datapass.set申請届出代行区分コード(todokedeJoho.get申請届出代行区分コード().value());
+            }
+            datapass.set続柄(todokedeJoho.get申請届出者続柄コード());
+            //datapass.set識別コード(result.get識別コード().value());
+            if (todokedeJoho.get申請届出者郵便番号() != null) {
+                datapass.set郵便番号(todokedeJoho.get申請届出者郵便番号().getYubinNo());
+            }
+            if (todokedeJoho.get申請届出者電話番号() != null
+                    && !RString.isNullOrEmpty(todokedeJoho.get申請届出者電話番号().value())) {
+                datapass.set電話番号(todokedeJoho.get申請届出者電話番号().value());
+            }
+            datapass.set申請書管理番号(todokedeJoho.get申請書管理番号().value());
+            div.getCcdShinseiTodokedesha().initialize(datapass);
         } else {
             div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput().clear();
             div.getCcdShinseiTodokedesha().getTxtShimei().clearValue();
@@ -688,16 +717,11 @@ public class NinteiShinseiToroku {
 //        NinteiChosaJokyoDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkai(), NinteiChosaJokyoDataPass.class);
 //        NinteiChosaJokyoDataPass konkai = DataPassingConverter.deserialize(div.getHdnKonkai(), NinteiChosaJokyoDataPass.class);
 
-//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-//                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-//            
-//            return 
-//        }
-        
         validationMessages.add(getValidationHandler(div).取下日理由必須チェック());
-        validationMessages.add(getValidationHandler(div).区分変更申請時取下日理由入力チェック());
+//        validationMessages.add(getValidationHandler(div).区分変更申請時取下日理由入力チェック());
         validationMessages.add(getValidationHandler(div).申請サービス削除と取下理由存在チェック());
         validationMessages.add(getValidationHandler(div).特定疾病入力必須チェック());
+        validationMessages.add(getValidationHandler(div).延期入力チェック());
 
         if (MENUID_DBEMN31003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.処理モード, Boolean.TRUE);

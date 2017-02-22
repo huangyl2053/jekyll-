@@ -29,9 +29,17 @@ public enum ShujiiIkenshoImageId {
      */
     次期_裏("702", Teikei.定型),
     /**
-     * OCR_UI
+     * 現行_定型外
      */
-    OCR_UI("999", Teikei.定型外);
+    現行_定型外("999", Teikei.定型外),
+    /**
+     * 次期_定型外_表
+     */
+    次期_定型外_表("777", Teikei.定型外),
+    /**
+     * 次期_定型外_裏
+     */
+    次期_定型外_裏("778", Teikei.定型外);
 
     private final RString chohyoID;
     private final Teikei teikei;
@@ -65,7 +73,7 @@ public enum ShujiiIkenshoImageId {
      * @return enumの名称
      */
     public RString getName() {
-        return this.getName();
+        return new RString(this.teikei.toString());
     }
 
     /**
