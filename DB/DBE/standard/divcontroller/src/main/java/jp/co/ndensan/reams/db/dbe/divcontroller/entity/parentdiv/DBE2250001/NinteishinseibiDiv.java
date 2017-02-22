@@ -186,5 +186,15 @@ public class NinteishinseibiDiv extends Panel {
         this.getNinteiIchiran().setDgNinteiChosaData(dgNinteiChosaData);
     }
 
+    @JsonIgnore
+    public ButtonDownLoad getBtnErrorListOutput() {
+        return this.getNinteiIchiran().getBtnErrorListOutput();
+    }
+
+    @JsonIgnore
+    public void  setBtnErrorListOutput(ButtonDownLoad btnErrorListOutput) {
+        this.getNinteiIchiran().setBtnErrorListOutput(btnErrorListOutput);
+    }
+
     // </editor-fold>
 }

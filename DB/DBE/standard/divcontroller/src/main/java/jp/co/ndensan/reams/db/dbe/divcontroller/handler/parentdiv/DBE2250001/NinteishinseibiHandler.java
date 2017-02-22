@@ -17,12 +17,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNinteiChosaData_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosadatatorikomi.NinteiChosaDataTorikomiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
@@ -30,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -70,6 +67,7 @@ public class NinteishinseibiHandler {
      */
     public void initialize() {
         div.getDgNinteiChosaData().setDataSource(new ArrayList<dgNinteiChosaData_Row>());
+        div.getBtnErrorListOutput().setDisabled(true);
     }
 
     /**
@@ -82,8 +80,6 @@ public class NinteishinseibiHandler {
      */
     public void set認定調査一覧データグリッド(List<ChosaKekkaNyuryokuCsvEntity> 基本調査データCsvEntityList,
             RString filePath_概況特記データ, RString filePath_特記情報データ, RString 認定調査結果入手_必須調査票) {
-        DbAccessLogger accessLogger = new DbAccessLogger();
-        accessLogger.flushBy(AccessLogType.照会);
         Map<ShinseishoKanriNo, List<NinteichosahyoTokkijiko>> 特記事項Map = new HashMap<>();
         Map<ShinseishoKanriNo, GaikyoTokki> 概況特記事項Map = new HashMap<>();
         List<NinteichosahyoTokkijiko> 特記事項List;
@@ -107,7 +103,6 @@ public class NinteishinseibiHandler {
                 特記事項Map.put(申請書管理番号, 特記事項List);
                 概況特記事項Map.put(申請書管理番号, 概況特記事項);
             }
-            accessLogger.store(new ShoKisaiHokenshaNo(基本調査データCsvEntity.get証記載保険者番号()), 基本調査データCsvEntity.get被保険者番号());
         }
         div.getDgNinteiChosaData().setDataSource(dataSource);
         div.getTxtNinzu().setValue(new Decimal(dataSource.size()));
@@ -128,6 +123,21 @@ public class NinteishinseibiHandler {
             }
         }
         return false;
+    }
+
+    /**
+     * 認定調査一覧データグリッドの状態がNGの行のリストを返します。
+     *
+     * @return 認定調査一覧データグリッドの状態がNGの行のリスト
+     */
+    public List<dgNinteiChosaData_Row> getNG行() {
+        List<dgNinteiChosaData_Row> ngRowList = new ArrayList<>();
+        for (dgNinteiChosaData_Row row : div.getDgNinteiChosaData().getDataSource()) {
+            if (状態_NG.equals(row.getJyotai())) {
+                ngRowList.add(row);
+            }
+        }
+        return ngRowList;
     }
 
     private dgNinteiChosaData_Row editRow(ShinseishoKanriNo 申請書管理番号,
@@ -508,18 +518,22 @@ public class NinteishinseibiHandler {
                 && 認定調査情報 == null) {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(申請未登録);
+            div.getBtnErrorListOutput().setDisabled(false);
         } else if (認定調査情報 == null
                 || !認定調査情報.exist認定調査依頼情報()
                 || 認定調査情報.exist論理削除フラグ()) {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(依頼未登録);
+            div.getBtnErrorListOutput().setDisabled(false);
         } else if (認定調査情報.get認定調査依頼完了日() == null) {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(依頼未完了);
+            div.getBtnErrorListOutput().setDisabled(false);
         } else if (認定調査情報.get認定調査依頼完了日() != null
                 && !認定調査情報.exist本判定一次判定データ()) {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(一次判定済み);
+            div.getBtnErrorListOutput().setDisabled(false);
         } else if ((必須調査票_パターン2.equals(認定調査結果入手_必須調査票)
                 || 必須調査票_パターン3.equals(認定調査結果入手_必須調査票))
                 && 特記事項List.isEmpty()) {

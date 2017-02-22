@@ -87,7 +87,6 @@ public class NinteichosaIrai {
 
     private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString UIコンテナID_DBEUC22001 = new RString("DBEUC22001");
     private static final RString 修正 = new RString("Modified");
 
     /**

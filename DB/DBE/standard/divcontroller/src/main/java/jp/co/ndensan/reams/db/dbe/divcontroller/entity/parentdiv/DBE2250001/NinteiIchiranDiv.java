@@ -25,6 +25,8 @@ public class NinteiIchiranDiv extends Panel {
     private TextBoxNum txtNinzu;
     @JsonProperty("dgNinteiChosaData")
     private DataGrid<dgNinteiChosaData_Row> dgNinteiChosaData;
+    @JsonProperty("btnErrorListOutput")
+    private ButtonDownLoad btnErrorListOutput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +68,24 @@ public class NinteiIchiranDiv extends Panel {
     @JsonProperty("dgNinteiChosaData")
     public void setDgNinteiChosaData(DataGrid<dgNinteiChosaData_Row> dgNinteiChosaData) {
         this.dgNinteiChosaData = dgNinteiChosaData;
+    }
+
+    /*
+     * getbtnErrorListOutput
+     * @return btnErrorListOutput
+     */
+    @JsonProperty("btnErrorListOutput")
+    public ButtonDownLoad getBtnErrorListOutput() {
+        return btnErrorListOutput;
+    }
+
+    /*
+     * setbtnErrorListOutput
+     * @param btnErrorListOutput btnErrorListOutput
+     */
+    @JsonProperty("btnErrorListOutput")
+    public void setBtnErrorListOutput(ButtonDownLoad btnErrorListOutput) {
+        this.btnErrorListOutput = btnErrorListOutput;
     }
 
     // </editor-fold>
