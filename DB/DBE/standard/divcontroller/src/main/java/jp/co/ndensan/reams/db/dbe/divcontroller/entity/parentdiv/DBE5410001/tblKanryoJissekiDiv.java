@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKanryoJissekiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -77,49 +77,61 @@ public class tblKanryoJissekiDiv extends TablePanel {
     private celTableCell31AttblKanryoJisseki celTableCell31;
     @JsonProperty("celTableCell32")
     private celTableCell32AttblKanryoJisseki celTableCell32;
+    @JsonProperty("TableCell1")
+    private TableCell1AttblKanryoJisseki TableCell1;
+    @JsonProperty("TableCell2")
+    private TableCell2AttblKanryoJisseki TableCell2;
+    @JsonProperty("TableCell3")
+    private TableCell3AttblKanryoJisseki TableCell3;
+    @JsonProperty("TableCell4")
+    private TableCell4AttblKanryoJisseki TableCell4;
+    @JsonProperty("TableCell5")
+    private TableCell5AttblKanryoJisseki TableCell5;
+    @JsonProperty("TableCell6")
+    private TableCell6AttblKanryoJisseki TableCell6;
 
     /*
      * [ Helperの作成 ]
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
     @JsonIgnore
+    public Label getLblNinteiShinsakai() {
+        return this.celTableCell2.getLblNinteiShinsakai();
+    }
+
+    @JsonIgnore
     public Label getLblChosaIrai() {
-        return this.celTableCell2.getLblChosaIrai();
+        return this.celTableCell3.getLblChosaIrai();
     }
 
     @JsonIgnore
     public Label getLblChosahyoNyushu() {
-        return this.celTableCell3.getLblChosahyoNyushu();
+        return this.celTableCell7.getLblChosahyoNyushu();
     }
 
     @JsonIgnore
     public Label getLblIkenshoIrai() {
-        return this.celTableCell7.getLblIkenshoIrai();
+        return this.celTableCell8.getLblIkenshoIrai();
     }
 
     @JsonIgnore
     public Label getIkenshoNyushu() {
-        return this.celTableCell8.getIkenshoNyushu();
+        return this.celTableCell9.getIkenshoNyushu();
     }
 
     @JsonIgnore
     public Label getLblIchijiHantei() {
-        return this.celTableCell9.getLblIchijiHantei();
+        return this.celTableCell10.getLblIchijiHantei();
     }
 
     @JsonIgnore
     public Label getLblMasking() {
-        return this.celTableCell10.getLblMasking();
+        return this.celTableCell11.getLblMasking();
     }
 
     @JsonIgnore
     public Label getLblShinsakaiToroku() {
-        return this.celTableCell11.getLblShinsakaiToroku();
-    }
-
-    @JsonIgnore
-    public Label getLblNijiHantei() {
-        return this.celTableCell12.getLblNijiHantei();
+        return this.celTableCell12.getLblShinsakaiToroku();
     }
 
     @JsonIgnore
@@ -128,43 +140,43 @@ public class tblKanryoJissekiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtNinteiShinsakaiYoteiDate() {
+        return this.celTableCell5.getTxtNinteiShinsakaiYoteiDate();
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtChosaIraiYoteiDate() {
-        return this.celTableCell5.getTxtChosaIraiYoteiDate();
+        return this.celTableCell6.getTxtChosaIraiYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtChosahyoNyushuYoteiDate() {
-        return this.celTableCell6.getTxtChosahyoNyushuYoteiDate();
+        return this.celTableCell16.getTxtChosahyoNyushuYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtIkenshoIraiYoteiDate() {
-        return this.celTableCell16.getTxtIkenshoIraiYoteiDate();
+        return this.celTableCell17.getTxtIkenshoIraiYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtIkenshoNyushuYoteiDate() {
-        return this.celTableCell17.getTxtIkenshoNyushuYoteiDate();
+        return this.celTableCell18.getTxtIkenshoNyushuYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtIchijiHanteiYoteiDate() {
-        return this.celTableCell18.getTxtIchijiHanteiYoteiDate();
+        return this.celTableCell19.getTxtIchijiHanteiYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtMaskingYoteiDate() {
-        return this.celTableCell19.getTxtMaskingYoteiDate();
+        return this.celTableCell20.getTxtMaskingYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtShinsakaiTorokuYoteiDate() {
-        return this.celTableCell20.getTxtShinsakaiTorokuYoteiDate();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return this.celTableCell21.getTxtNijiHanteiYoteiDate();
+        return this.celTableCell21.getTxtShinsakaiTorokuYoteiDate();
     }
 
     @JsonIgnore
@@ -173,43 +185,73 @@ public class tblKanryoJissekiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtNinteiShinsakaiJissekiDate() {
+        return this.celTableCell25.getTxtNinteiShinsakaiJissekiDate();
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtChosaIraiJissekiDate() {
-        return this.celTableCell25.getTxtChosaIraiJissekiDate();
+        return this.celTableCell26.getTxtChosaIraiJissekiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtChosahyoNyushuJissekiDate() {
-        return this.celTableCell26.getTxtChosahyoNyushuJissekiDate();
+        return this.celTableCell27.getTxtChosahyoNyushuJissekiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtIkenshoIraiJissekiDate() {
-        return this.celTableCell27.getTxtIkenshoIraiJissekiDate();
+        return this.celTableCell28.getTxtIkenshoIraiJissekiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtIkenshoNyushuJissekiDate() {
-        return this.celTableCell28.getTxtIkenshoNyushuJissekiDate();
+        return this.celTableCell29.getTxtIkenshoNyushuJissekiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtIchijiHanteiJissekiDate() {
-        return this.celTableCell29.getTxtIchijiHanteiJissekiDate();
+        return this.celTableCell30.getTxtIchijiHanteiJissekiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtMaskingJissekiDate() {
-        return this.celTableCell30.getTxtMaskingJissekiDate();
+        return this.celTableCell31.getTxtMaskingJissekiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtShinsakaiTorokuJissekiDate() {
-        return this.celTableCell31.getTxtShinsakaiTorokuJissekiDate();
+        return this.celTableCell32.getTxtShinsakaiTorokuJissekiDate();
+    }
+
+    @JsonIgnore
+    public Label getLblNijiHantei() {
+        return this.TableCell1.getLblNijiHantei();
+    }
+
+    @JsonIgnore
+    public Label getLblCenterSoshin() {
+        return this.TableCell2.getLblCenterSoshin();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return this.TableCell3.getTxtNijiHanteiYoteiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return this.TableCell4.getTxtCenterSoshinYoteiDate();
     }
 
     @JsonIgnore
     public TextBoxDate getTxtNijiHanteiJissekiDate() {
-        return this.celTableCell32.getTxtNijiHanteiJissekiDate();
+        return this.TableCell5.getTxtNijiHanteiJissekiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinJissekiDate() {
+        return this.TableCell6.getTxtCenterSoshinJissekiDate();
     }
 
     /*
@@ -704,6 +746,114 @@ public class tblKanryoJissekiDiv extends TablePanel {
         this.celTableCell32 = celTableCell32;
     }
 
+    /*
+     * getTableCell1
+     * @return TableCell1
+     */
+    @JsonProperty("TableCell1")
+    private TableCell1AttblKanryoJisseki getTableCell1() {
+        return TableCell1;
+    }
+
+    /*
+     * setTableCell1
+     * @param TableCell1 TableCell1
+     */
+    @JsonProperty("TableCell1")
+    private void setTableCell1(TableCell1AttblKanryoJisseki TableCell1) {
+        this.TableCell1 = TableCell1;
+    }
+
+    /*
+     * getTableCell2
+     * @return TableCell2
+     */
+    @JsonProperty("TableCell2")
+    private TableCell2AttblKanryoJisseki getTableCell2() {
+        return TableCell2;
+    }
+
+    /*
+     * setTableCell2
+     * @param TableCell2 TableCell2
+     */
+    @JsonProperty("TableCell2")
+    private void setTableCell2(TableCell2AttblKanryoJisseki TableCell2) {
+        this.TableCell2 = TableCell2;
+    }
+
+    /*
+     * getTableCell3
+     * @return TableCell3
+     */
+    @JsonProperty("TableCell3")
+    private TableCell3AttblKanryoJisseki getTableCell3() {
+        return TableCell3;
+    }
+
+    /*
+     * setTableCell3
+     * @param TableCell3 TableCell3
+     */
+    @JsonProperty("TableCell3")
+    private void setTableCell3(TableCell3AttblKanryoJisseki TableCell3) {
+        this.TableCell3 = TableCell3;
+    }
+
+    /*
+     * getTableCell4
+     * @return TableCell4
+     */
+    @JsonProperty("TableCell4")
+    private TableCell4AttblKanryoJisseki getTableCell4() {
+        return TableCell4;
+    }
+
+    /*
+     * setTableCell4
+     * @param TableCell4 TableCell4
+     */
+    @JsonProperty("TableCell4")
+    private void setTableCell4(TableCell4AttblKanryoJisseki TableCell4) {
+        this.TableCell4 = TableCell4;
+    }
+
+    /*
+     * getTableCell5
+     * @return TableCell5
+     */
+    @JsonProperty("TableCell5")
+    private TableCell5AttblKanryoJisseki getTableCell5() {
+        return TableCell5;
+    }
+
+    /*
+     * setTableCell5
+     * @param TableCell5 TableCell5
+     */
+    @JsonProperty("TableCell5")
+    private void setTableCell5(TableCell5AttblKanryoJisseki TableCell5) {
+        this.TableCell5 = TableCell5;
+    }
+
+    /*
+     * getTableCell6
+     * @return TableCell6
+     */
+    @JsonProperty("TableCell6")
+    private TableCell6AttblKanryoJisseki getTableCell6() {
+        return TableCell6;
+    }
+
+    /*
+     * setTableCell6
+     * @param TableCell6 TableCell6
+     */
+    @JsonProperty("TableCell6")
+    private void setTableCell6(TableCell6AttblKanryoJisseki TableCell6) {
+        this.TableCell6 = TableCell6;
+    }
+
     // </editor-fold>
 }
 /**
@@ -712,7 +862,7 @@ public class tblKanryoJissekiDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell1AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
 
     // </editor-fold>
 }
@@ -722,7 +872,37 @@ class celTableCell1AttblKanryoJisseki extends TableCell {
  * @author 自動生成
  */
 class celTableCell2AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("lblNinteiShinsakai")
+    private Label lblNinteiShinsakai;
+
+    /*
+     * getlblNinteiShinsakai
+     * @return lblNinteiShinsakai
+     */
+    @JsonProperty("lblNinteiShinsakai")
+    public Label getLblNinteiShinsakai() {
+        return lblNinteiShinsakai;
+    }
+
+    /*
+     * setlblNinteiShinsakai
+     * @param lblNinteiShinsakai lblNinteiShinsakai
+     */
+    @JsonProperty("lblNinteiShinsakai")
+    public void setLblNinteiShinsakai(Label lblNinteiShinsakai) {
+        this.lblNinteiShinsakai = lblNinteiShinsakai;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celTableCell3 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTableCell3AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblChosaIrai")
     private Label lblChosaIrai;
 
@@ -747,12 +927,12 @@ class celTableCell2AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell3 のクラスファイル 
+ * celTableCell7 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell3AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell7AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblChosahyoNyushu")
     private Label lblChosahyoNyushu;
 
@@ -777,12 +957,12 @@ class celTableCell3AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell7 のクラスファイル 
+ * celTableCell8 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell7AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell8AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblIkenshoIrai")
     private Label lblIkenshoIrai;
 
@@ -807,12 +987,12 @@ class celTableCell7AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell8 のクラスファイル 
+ * celTableCell9 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell8AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell9AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("IkenshoNyushu")
     private Label IkenshoNyushu;
 
@@ -837,12 +1017,12 @@ class celTableCell8AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell9 のクラスファイル 
+ * celTableCell10 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell9AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell10AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblIchijiHantei")
     private Label lblIchijiHantei;
 
@@ -867,12 +1047,12 @@ class celTableCell9AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell10 のクラスファイル 
+ * celTableCell11 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell10AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell11AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblMasking")
     private Label lblMasking;
 
@@ -897,12 +1077,12 @@ class celTableCell10AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell11 のクラスファイル 
+ * celTableCell12 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell11AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell12AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblShinsakaiToroku")
     private Label lblShinsakaiToroku;
 
@@ -927,42 +1107,12 @@ class celTableCell11AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell12 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celTableCell12AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
-    @JsonProperty("lblNijiHantei")
-    private Label lblNijiHantei;
-
-    /*
-     * getlblNijiHantei
-     * @return lblNijiHantei
-     */
-    @JsonProperty("lblNijiHantei")
-    public Label getLblNijiHantei() {
-        return lblNijiHantei;
-    }
-
-    /*
-     * setlblNijiHantei
-     * @param lblNijiHantei lblNijiHantei
-     */
-    @JsonProperty("lblNijiHantei")
-    public void setLblNijiHantei(Label lblNijiHantei) {
-        this.lblNijiHantei = lblNijiHantei;
-    }
-
-    // </editor-fold>
-}
-/**
  * celTableCell4 のクラスファイル 
  * 
  * @author 自動生成
  */
 class celTableCell4AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblKanryoYotei")
     private Label lblKanryoYotei;
 
@@ -992,7 +1142,37 @@ class celTableCell4AttblKanryoJisseki extends TableCell {
  * @author 自動生成
  */
 class celTableCell5AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtNinteiShinsakaiYoteiDate")
+    private TextBoxDate txtNinteiShinsakaiYoteiDate;
+
+    /*
+     * gettxtNinteiShinsakaiYoteiDate
+     * @return txtNinteiShinsakaiYoteiDate
+     */
+    @JsonProperty("txtNinteiShinsakaiYoteiDate")
+    public TextBoxDate getTxtNinteiShinsakaiYoteiDate() {
+        return txtNinteiShinsakaiYoteiDate;
+    }
+
+    /*
+     * settxtNinteiShinsakaiYoteiDate
+     * @param txtNinteiShinsakaiYoteiDate txtNinteiShinsakaiYoteiDate
+     */
+    @JsonProperty("txtNinteiShinsakaiYoteiDate")
+    public void setTxtNinteiShinsakaiYoteiDate(TextBoxDate txtNinteiShinsakaiYoteiDate) {
+        this.txtNinteiShinsakaiYoteiDate = txtNinteiShinsakaiYoteiDate;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celTableCell6 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTableCell6AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtChosaIraiYoteiDate")
     private TextBoxDate txtChosaIraiYoteiDate;
 
@@ -1017,12 +1197,12 @@ class celTableCell5AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell6 のクラスファイル 
+ * celTableCell16 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell6AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell16AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtChosahyoNyushuYoteiDate")
     private TextBoxDate txtChosahyoNyushuYoteiDate;
 
@@ -1047,12 +1227,12 @@ class celTableCell6AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell16 のクラスファイル 
+ * celTableCell17 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell16AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell17AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtIkenshoIraiYoteiDate")
     private TextBoxDate txtIkenshoIraiYoteiDate;
 
@@ -1077,12 +1257,12 @@ class celTableCell16AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell17 のクラスファイル 
+ * celTableCell18 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell17AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell18AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtIkenshoNyushuYoteiDate")
     private TextBoxDate txtIkenshoNyushuYoteiDate;
 
@@ -1107,12 +1287,12 @@ class celTableCell17AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell18 のクラスファイル 
+ * celTableCell19 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell18AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell19AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtIchijiHanteiYoteiDate")
     private TextBoxDate txtIchijiHanteiYoteiDate;
 
@@ -1137,12 +1317,12 @@ class celTableCell18AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell19 のクラスファイル 
+ * celTableCell20 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell19AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell20AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtMaskingYoteiDate")
     private TextBoxDate txtMaskingYoteiDate;
 
@@ -1167,12 +1347,12 @@ class celTableCell19AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell20 のクラスファイル 
+ * celTableCell21 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell20AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell21AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtShinsakaiTorokuYoteiDate")
     private TextBoxDate txtShinsakaiTorokuYoteiDate;
 
@@ -1197,42 +1377,12 @@ class celTableCell20AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell21 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celTableCell21AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
-    @JsonProperty("txtNijiHanteiYoteiDate")
-    private TextBoxDate txtNijiHanteiYoteiDate;
-
-    /*
-     * gettxtNijiHanteiYoteiDate
-     * @return txtNijiHanteiYoteiDate
-     */
-    @JsonProperty("txtNijiHanteiYoteiDate")
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return txtNijiHanteiYoteiDate;
-    }
-
-    /*
-     * settxtNijiHanteiYoteiDate
-     * @param txtNijiHanteiYoteiDate txtNijiHanteiYoteiDate
-     */
-    @JsonProperty("txtNijiHanteiYoteiDate")
-    public void setTxtNijiHanteiYoteiDate(TextBoxDate txtNijiHanteiYoteiDate) {
-        this.txtNijiHanteiYoteiDate = txtNijiHanteiYoteiDate;
-    }
-
-    // </editor-fold>
-}
-/**
  * celTableCell24 のクラスファイル 
  * 
  * @author 自動生成
  */
 class celTableCell24AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("lblKanryoJisseki")
     private Label lblKanryoJisseki;
 
@@ -1262,7 +1412,37 @@ class celTableCell24AttblKanryoJisseki extends TableCell {
  * @author 自動生成
  */
 class celTableCell25AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtNinteiShinsakaiJissekiDate")
+    private TextBoxDate txtNinteiShinsakaiJissekiDate;
+
+    /*
+     * gettxtNinteiShinsakaiJissekiDate
+     * @return txtNinteiShinsakaiJissekiDate
+     */
+    @JsonProperty("txtNinteiShinsakaiJissekiDate")
+    public TextBoxDate getTxtNinteiShinsakaiJissekiDate() {
+        return txtNinteiShinsakaiJissekiDate;
+    }
+
+    /*
+     * settxtNinteiShinsakaiJissekiDate
+     * @param txtNinteiShinsakaiJissekiDate txtNinteiShinsakaiJissekiDate
+     */
+    @JsonProperty("txtNinteiShinsakaiJissekiDate")
+    public void setTxtNinteiShinsakaiJissekiDate(TextBoxDate txtNinteiShinsakaiJissekiDate) {
+        this.txtNinteiShinsakaiJissekiDate = txtNinteiShinsakaiJissekiDate;
+    }
+
+    // </editor-fold>
+}
+/**
+ * celTableCell26 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTableCell26AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtChosaIraiJissekiDate")
     private TextBoxDate txtChosaIraiJissekiDate;
 
@@ -1287,12 +1467,12 @@ class celTableCell25AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell26 のクラスファイル 
+ * celTableCell27 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell26AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell27AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtChosahyoNyushuJissekiDate")
     private TextBoxDate txtChosahyoNyushuJissekiDate;
 
@@ -1317,12 +1497,12 @@ class celTableCell26AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell27 のクラスファイル 
+ * celTableCell28 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell27AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell28AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtIkenshoIraiJissekiDate")
     private TextBoxDate txtIkenshoIraiJissekiDate;
 
@@ -1347,12 +1527,12 @@ class celTableCell27AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell28 のクラスファイル 
+ * celTableCell29 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell28AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell29AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtIkenshoNyushuJissekiDate")
     private TextBoxDate txtIkenshoNyushuJissekiDate;
 
@@ -1377,12 +1557,12 @@ class celTableCell28AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell29 のクラスファイル 
+ * celTableCell30 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell29AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell30AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtIchijiHanteiJissekiDate")
     private TextBoxDate txtIchijiHanteiJissekiDate;
 
@@ -1407,12 +1587,12 @@ class celTableCell29AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell30 のクラスファイル 
+ * celTableCell31 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell30AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell31AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtMaskingJissekiDate")
     private TextBoxDate txtMaskingJissekiDate;
 
@@ -1437,12 +1617,12 @@ class celTableCell30AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell31 のクラスファイル 
+ * celTableCell32 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell31AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class celTableCell32AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtShinsakaiTorokuJissekiDate")
     private TextBoxDate txtShinsakaiTorokuJissekiDate;
 
@@ -1467,12 +1647,132 @@ class celTableCell31AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
- * celTableCell32 のクラスファイル 
+ * TableCell1 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celTableCell32AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+class TableCell1AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("lblNijiHantei")
+    private Label lblNijiHantei;
+
+    /*
+     * getlblNijiHantei
+     * @return lblNijiHantei
+     */
+    @JsonProperty("lblNijiHantei")
+    public Label getLblNijiHantei() {
+        return lblNijiHantei;
+    }
+
+    /*
+     * setlblNijiHantei
+     * @param lblNijiHantei lblNijiHantei
+     */
+    @JsonProperty("lblNijiHantei")
+    public void setLblNijiHantei(Label lblNijiHantei) {
+        this.lblNijiHantei = lblNijiHantei;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell2 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell2AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("lblCenterSoshin")
+    private Label lblCenterSoshin;
+
+    /*
+     * getlblCenterSoshin
+     * @return lblCenterSoshin
+     */
+    @JsonProperty("lblCenterSoshin")
+    public Label getLblCenterSoshin() {
+        return lblCenterSoshin;
+    }
+
+    /*
+     * setlblCenterSoshin
+     * @param lblCenterSoshin lblCenterSoshin
+     */
+    @JsonProperty("lblCenterSoshin")
+    public void setLblCenterSoshin(Label lblCenterSoshin) {
+        this.lblCenterSoshin = lblCenterSoshin;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell3 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell3AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtNijiHanteiYoteiDate")
+    private TextBoxDate txtNijiHanteiYoteiDate;
+
+    /*
+     * gettxtNijiHanteiYoteiDate
+     * @return txtNijiHanteiYoteiDate
+     */
+    @JsonProperty("txtNijiHanteiYoteiDate")
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return txtNijiHanteiYoteiDate;
+    }
+
+    /*
+     * settxtNijiHanteiYoteiDate
+     * @param txtNijiHanteiYoteiDate txtNijiHanteiYoteiDate
+     */
+    @JsonProperty("txtNijiHanteiYoteiDate")
+    public void setTxtNijiHanteiYoteiDate(TextBoxDate txtNijiHanteiYoteiDate) {
+        this.txtNijiHanteiYoteiDate = txtNijiHanteiYoteiDate;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell4 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell4AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtCenterSoshinYoteiDate")
+    private TextBoxDate txtCenterSoshinYoteiDate;
+
+    /*
+     * gettxtCenterSoshinYoteiDate
+     * @return txtCenterSoshinYoteiDate
+     */
+    @JsonProperty("txtCenterSoshinYoteiDate")
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return txtCenterSoshinYoteiDate;
+    }
+
+    /*
+     * settxtCenterSoshinYoteiDate
+     * @param txtCenterSoshinYoteiDate txtCenterSoshinYoteiDate
+     */
+    @JsonProperty("txtCenterSoshinYoteiDate")
+    public void setTxtCenterSoshinYoteiDate(TextBoxDate txtCenterSoshinYoteiDate) {
+        this.txtCenterSoshinYoteiDate = txtCenterSoshinYoteiDate;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell5 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell5AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtNijiHanteiJissekiDate")
     private TextBoxDate txtNijiHanteiJissekiDate;
 
@@ -1492,6 +1792,36 @@ class celTableCell32AttblKanryoJisseki extends TableCell {
     @JsonProperty("txtNijiHanteiJissekiDate")
     public void setTxtNijiHanteiJissekiDate(TextBoxDate txtNijiHanteiJissekiDate) {
         this.txtNijiHanteiJissekiDate = txtNijiHanteiJissekiDate;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell6 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell6AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtCenterSoshinJissekiDate")
+    private TextBoxDate txtCenterSoshinJissekiDate;
+
+    /*
+     * gettxtCenterSoshinJissekiDate
+     * @return txtCenterSoshinJissekiDate
+     */
+    @JsonProperty("txtCenterSoshinJissekiDate")
+    public TextBoxDate getTxtCenterSoshinJissekiDate() {
+        return txtCenterSoshinJissekiDate;
+    }
+
+    /*
+     * settxtCenterSoshinJissekiDate
+     * @param txtCenterSoshinJissekiDate txtCenterSoshinJissekiDate
+     */
+    @JsonProperty("txtCenterSoshinJissekiDate")
+    public void setTxtCenterSoshinJissekiDate(TextBoxDate txtCenterSoshinJissekiDate) {
+        this.txtCenterSoshinJissekiDate = txtCenterSoshinJissekiDate;
     }
 
     // </editor-fold>

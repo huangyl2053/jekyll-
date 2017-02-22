@@ -1,9 +1,10 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokkiShiryoShokai.ChosaTokkiShiryoShokai.ChosaTokkiShiryoShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokkiShiryoShokai.ChosaTokkiShiryoShokai.IChosaTokkiShiryoShokaiDiv;
@@ -17,13 +18,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShokaiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-07_19-12-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ShujiiIryokikaknAndShujiiInput")
+    private ShujiiIryokikaknAndShujiiInputDiv ShujiiIryokikaknAndShujiiInput;
     @JsonProperty("txtJiritsudo")
     private TextBox txtJiritsudo;
     @JsonProperty("txtTankiKioku")
@@ -42,6 +45,14 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     private RString hiddenShinseishoKanriNo;
     @JsonProperty("hiddenIkenshoIraiRirekiNo")
     private RString hiddenIkenshoIraiRirekiNo;
+    @JsonProperty("hdnShujiiIryoKikanCode")
+    private RString hdnShujiiIryoKikanCode;
+    @JsonProperty("hdnShujiiIryoKikanName")
+    private RString hdnShujiiIryoKikanName;
+    @JsonProperty("hdnShujiiCode")
+    private RString hdnShujiiCode;
+    @JsonProperty("hdnShujiiName")
+    private RString hdnShujiiName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,6 +60,24 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getShujiiIryokikaknAndShujiiInput
+     * @return ShujiiIryokikaknAndShujiiInput
+     */
+    @JsonProperty("ShujiiIryokikaknAndShujiiInput")
+    public ShujiiIryokikaknAndShujiiInputDiv getShujiiIryokikaknAndShujiiInput() {
+        return ShujiiIryokikaknAndShujiiInput;
+    }
+
+    /*
+     * setShujiiIryokikaknAndShujiiInput
+     * @param ShujiiIryokikaknAndShujiiInput ShujiiIryokikaknAndShujiiInput
+     */
+    @JsonProperty("ShujiiIryokikaknAndShujiiInput")
+    public void setShujiiIryokikaknAndShujiiInput(ShujiiIryokikaknAndShujiiInputDiv ShujiiIryokikaknAndShujiiInput) {
+        this.ShujiiIryokikaknAndShujiiInput = ShujiiIryokikaknAndShujiiInput;
+    }
+
     /*
      * gettxtJiritsudo
      * @return txtJiritsudo
@@ -200,6 +229,121 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     @JsonProperty("hiddenIkenshoIraiRirekiNo")
     public void setHiddenIkenshoIraiRirekiNo(RString hiddenIkenshoIraiRirekiNo) {
         this.hiddenIkenshoIraiRirekiNo = hiddenIkenshoIraiRirekiNo;
+    }
+
+    /*
+     * gethdnShujiiIryoKikanCode
+     * @return hdnShujiiIryoKikanCode
+     */
+    @JsonProperty("hdnShujiiIryoKikanCode")
+    public RString getHdnShujiiIryoKikanCode() {
+        return hdnShujiiIryoKikanCode;
+    }
+
+    /*
+     * sethdnShujiiIryoKikanCode
+     * @param hdnShujiiIryoKikanCode hdnShujiiIryoKikanCode
+     */
+    @JsonProperty("hdnShujiiIryoKikanCode")
+    public void setHdnShujiiIryoKikanCode(RString hdnShujiiIryoKikanCode) {
+        this.hdnShujiiIryoKikanCode = hdnShujiiIryoKikanCode;
+    }
+
+    /*
+     * gethdnShujiiIryoKikanName
+     * @return hdnShujiiIryoKikanName
+     */
+    @JsonProperty("hdnShujiiIryoKikanName")
+    public RString getHdnShujiiIryoKikanName() {
+        return hdnShujiiIryoKikanName;
+    }
+
+    /*
+     * sethdnShujiiIryoKikanName
+     * @param hdnShujiiIryoKikanName hdnShujiiIryoKikanName
+     */
+    @JsonProperty("hdnShujiiIryoKikanName")
+    public void setHdnShujiiIryoKikanName(RString hdnShujiiIryoKikanName) {
+        this.hdnShujiiIryoKikanName = hdnShujiiIryoKikanName;
+    }
+
+    /*
+     * gethdnShujiiCode
+     * @return hdnShujiiCode
+     */
+    @JsonProperty("hdnShujiiCode")
+    public RString getHdnShujiiCode() {
+        return hdnShujiiCode;
+    }
+
+    /*
+     * sethdnShujiiCode
+     * @param hdnShujiiCode hdnShujiiCode
+     */
+    @JsonProperty("hdnShujiiCode")
+    public void setHdnShujiiCode(RString hdnShujiiCode) {
+        this.hdnShujiiCode = hdnShujiiCode;
+    }
+
+    /*
+     * gethdnShujiiName
+     * @return hdnShujiiName
+     */
+    @JsonProperty("hdnShujiiName")
+    public RString getHdnShujiiName() {
+        return hdnShujiiName;
+    }
+
+    /*
+     * sethdnShujiiName
+     * @param hdnShujiiName hdnShujiiName
+     */
+    @JsonProperty("hdnShujiiName")
+    public void setHdnShujiiName(RString hdnShujiiName) {
+        this.hdnShujiiName = hdnShujiiName;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBoxCode getTxtShujiiIryoKikanCode() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanCode(TextBoxCode txtShujiiIryoKikanCode) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiIryoKikanCode(txtShujiiIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiIryoKikanName() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiIryoKikanName(TextBox txtShujiiIryoKikanName) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiIryoKikanName(txtShujiiIryoKikanName);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtShujiiCode() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiCode(TextBoxCode txtShujiiCode) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiCode(txtShujiiCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShujiiName() {
+        return this.getShujiiIryokikaknAndShujiiInput().getTxtShujiiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujiiName(TextBox txtShujiiName) {
+        this.getShujiiIryokikaknAndShujiiInput().setTxtShujiiName(txtShujiiName);
     }
 
     // </editor-fold>

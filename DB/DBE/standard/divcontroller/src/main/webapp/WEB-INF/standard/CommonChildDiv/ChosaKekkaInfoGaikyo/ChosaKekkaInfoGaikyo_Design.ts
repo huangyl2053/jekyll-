@@ -53,6 +53,26 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoMeisho"));
             }
 
+            public ChosaItakusakiAndChosainGuide(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ChosaItakusakiAndChosainGuide"));
+            }
+
+            public txtChosaItakusakiCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosaItakusakiCode"));
+            }
+
+            public txtChosaItakusakiName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            }
+
+            public txtNinteiChosainCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtNinteiChosainCode"));
+            }
+
+            public txtNinteiChosainName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosainName"));
+            }
+
             public JisshiBashoMeishoPanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("JisshiBashoMeishoPanel"));
             }

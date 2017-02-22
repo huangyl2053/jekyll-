@@ -29,6 +29,7 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate ichijiHanteiYoteiYMD;
     private FlexibleDate ninteiShinsakaiWariateYoteiYMD;
     private FlexibleDate ninteiShinsakaiYoteiYMD;
+    private FlexibleDate centerSoshinYoteiYMD;
     private FlexibleDate ninteichosaIraiKanryoYMD;
     private FlexibleDate ninteichosaKanryoYMD;
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
@@ -37,6 +38,7 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate maskingKanryoYMD;
     private FlexibleDate ninteiShinsakaiWariateKanryoYMD;
     private FlexibleDate ninteiShinsakaiKanryoYMD;
+    private FlexibleDate centerSoshinYMD;
     private RString shoKisaiHokenshaNo;
     private RString hihokenshaNo;
     private FlexibleDate ninteiShinseiYMD;
@@ -179,5 +181,4 @@ public class KojinJokyoShokaiRelateEntity {
     private int ninteichosaIraiRirekiNo;
     private FlexibleDate ninteichosaIraiYMD;
     private RString ichijiHnateiKeikokuCode;
-
 }

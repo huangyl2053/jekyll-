@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo.ChosaKekkaInfoGaikyo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGaikyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-16_10-13-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,6 +32,8 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private TextBox txtChosaJisshiBashoCode;
     @JsonProperty("txtChosaJisshiBashoMeisho")
     private TextBox txtChosaJisshiBashoMeisho;
+    @JsonProperty("ChosaItakusakiAndChosainGuide")
+    private ChosaItakusakiAndChosainGuideDiv ChosaItakusakiAndChosainGuide;
     @JsonProperty("JisshiBashoMeishoPanel")
     private JisshiBashoMeishoPanelDiv JisshiBashoMeishoPanel;
     @JsonProperty("GaikyoChosaTokkiPanel")
@@ -66,6 +68,14 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private RString maskImage;
     @JsonProperty("hdnTextImageKubun")
     private RString hdnTextImageKubun;
+    @JsonProperty("hdnChosaItakusakiCode")
+    private RString hdnChosaItakusakiCode;
+    @JsonProperty("hdnChosaItakusakiName")
+    private RString hdnChosaItakusakiName;
+    @JsonProperty("hdnNinteiChosainCode")
+    private RString hdnNinteiChosainCode;
+    @JsonProperty("hdnNinteiChosainName")
+    private RString hdnNinteiChosainName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -143,6 +153,24 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonProperty("txtChosaJisshiBashoMeisho")
     public void setTxtChosaJisshiBashoMeisho(TextBox txtChosaJisshiBashoMeisho) {
         this.txtChosaJisshiBashoMeisho = txtChosaJisshiBashoMeisho;
+    }
+
+    /*
+     * getChosaItakusakiAndChosainGuide
+     * @return ChosaItakusakiAndChosainGuide
+     */
+    @JsonProperty("ChosaItakusakiAndChosainGuide")
+    public ChosaItakusakiAndChosainGuideDiv getChosaItakusakiAndChosainGuide() {
+        return ChosaItakusakiAndChosainGuide;
+    }
+
+    /*
+     * setChosaItakusakiAndChosainGuide
+     * @param ChosaItakusakiAndChosainGuide ChosaItakusakiAndChosainGuide
+     */
+    @JsonProperty("ChosaItakusakiAndChosainGuide")
+    public void setChosaItakusakiAndChosainGuide(ChosaItakusakiAndChosainGuideDiv ChosaItakusakiAndChosainGuide) {
+        this.ChosaItakusakiAndChosainGuide = ChosaItakusakiAndChosainGuide;
     }
 
     /*
@@ -452,8 +480,120 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
+     * gethdnChosaItakusakiCode
+     * @return hdnChosaItakusakiCode
+     */
+    @JsonProperty("hdnChosaItakusakiCode")
+    public RString getHdnChosaItakusakiCode() {
+        return hdnChosaItakusakiCode;
+    }
+
+    /*
+     * sethdnChosaItakusakiCode
+     * @param hdnChosaItakusakiCode hdnChosaItakusakiCode
+     */
+    @JsonProperty("hdnChosaItakusakiCode")
+    public void setHdnChosaItakusakiCode(RString hdnChosaItakusakiCode) {
+        this.hdnChosaItakusakiCode = hdnChosaItakusakiCode;
+    }
+
+    /*
+     * gethdnChosaItakusakiName
+     * @return hdnChosaItakusakiName
+     */
+    @JsonProperty("hdnChosaItakusakiName")
+    public RString getHdnChosaItakusakiName() {
+        return hdnChosaItakusakiName;
+    }
+
+    /*
+     * sethdnChosaItakusakiName
+     * @param hdnChosaItakusakiName hdnChosaItakusakiName
+     */
+    @JsonProperty("hdnChosaItakusakiName")
+    public void setHdnChosaItakusakiName(RString hdnChosaItakusakiName) {
+        this.hdnChosaItakusakiName = hdnChosaItakusakiName;
+    }
+
+    /*
+     * gethdnNinteiChosainCode
+     * @return hdnNinteiChosainCode
+     */
+    @JsonProperty("hdnNinteiChosainCode")
+    public RString getHdnNinteiChosainCode() {
+        return hdnNinteiChosainCode;
+    }
+
+    /*
+     * sethdnNinteiChosainCode
+     * @param hdnNinteiChosainCode hdnNinteiChosainCode
+     */
+    @JsonProperty("hdnNinteiChosainCode")
+    public void setHdnNinteiChosainCode(RString hdnNinteiChosainCode) {
+        this.hdnNinteiChosainCode = hdnNinteiChosainCode;
+    }
+
+    /*
+     * gethdnNinteiChosainName
+     * @return hdnNinteiChosainName
+     */
+    @JsonProperty("hdnNinteiChosainName")
+    public RString getHdnNinteiChosainName() {
+        return hdnNinteiChosainName;
+    }
+
+    /*
+     * sethdnNinteiChosainName
+     * @param hdnNinteiChosainName hdnNinteiChosainName
+     */
+    @JsonProperty("hdnNinteiChosainName")
+    public void setHdnNinteiChosainName(RString hdnNinteiChosainName) {
+        this.hdnNinteiChosainName = hdnNinteiChosainName;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public TextBoxCode getTxtChosaItakusakiCode() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaItakusakiCode(TextBoxCode txtChosaItakusakiCode) {
+        this.getChosaItakusakiAndChosainGuide().setTxtChosaItakusakiCode(txtChosaItakusakiCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChosaItakusakiName() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtChosaItakusakiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+        this.getChosaItakusakiAndChosainGuide().setTxtChosaItakusakiName(txtChosaItakusakiName);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtNinteiChosainCode() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtNinteiChosainCode(TextBoxCode txtNinteiChosainCode) {
+        this.getChosaItakusakiAndChosainGuide().setTxtNinteiChosainCode(txtNinteiChosainCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtNinteiChosainName() {
+        return this.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainName();
+    }
+
+    @JsonIgnore
+    public void  setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
+        this.getChosaItakusakiAndChosainGuide().setTxtNinteiChosainName(txtNinteiChosainName);
+    }
+
     @JsonIgnore
     public DynamicImage getImgChosaJisshiBashoMeisho() {
         return this.getJisshiBashoMeishoPanel().getImgChosaJisshiBashoMeisho();

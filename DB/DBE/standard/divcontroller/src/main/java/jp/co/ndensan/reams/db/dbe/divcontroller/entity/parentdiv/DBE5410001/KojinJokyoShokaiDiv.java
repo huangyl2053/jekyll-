@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -53,6 +53,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private ShinseiTorisageDiv ShinseiTorisage;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
+    @JsonProperty("btnShinseiInfoshokai")
+    private Button btnShinseiInfoshokai;
     @JsonProperty("hdnHokenshaCode")
     private RString hdnHokenshaCode;
     @JsonProperty("NinteiShinseiBusinessCollection")
@@ -85,6 +87,22 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnIchijiHanteiKekka;
     @JsonProperty("hdnImageLocalCopyPath")
     private RString hdnImageLocalCopyPath;
+    @JsonProperty("hdnShujiiIryoKikanCode")
+    private RString hdnShujiiIryoKikanCode;
+    @JsonProperty("hdnShujiiIryoKikanName")
+    private RString hdnShujiiIryoKikanName;
+    @JsonProperty("hdnShujiiCode")
+    private RString hdnShujiiCode;
+    @JsonProperty("hdnShujiiName")
+    private RString hdnShujiiName;
+    @JsonProperty("hdnChosaItakusakiCode")
+    private RString hdnChosaItakusakiCode;
+    @JsonProperty("hdnChosaItakusakiName")
+    private RString hdnChosaItakusakiName;
+    @JsonProperty("hdnNinteiChosainCode")
+    private RString hdnNinteiChosainCode;
+    @JsonProperty("hdnNinteiChosainName")
+    private RString hdnNinteiChosainName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -333,6 +351,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return ccdNinteiShinseishaKihonInfo;
+    }
+
+    /*
+     * getbtnShinseiInfoshokai
+     * @return btnShinseiInfoshokai
+     */
+    @JsonProperty("btnShinseiInfoshokai")
+    public Button getBtnShinseiInfoshokai() {
+        return btnShinseiInfoshokai;
+    }
+
+    /*
+     * setbtnShinseiInfoshokai
+     * @param btnShinseiInfoshokai btnShinseiInfoshokai
+     */
+    @JsonProperty("btnShinseiInfoshokai")
+    public void setBtnShinseiInfoshokai(Button btnShinseiInfoshokai) {
+        this.btnShinseiInfoshokai = btnShinseiInfoshokai;
     }
 
     /*
@@ -624,8 +660,157 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
+     * gethdnShujiiIryoKikanCode
+     * @return hdnShujiiIryoKikanCode
+     */
+    @JsonProperty("hdnShujiiIryoKikanCode")
+    public RString getHdnShujiiIryoKikanCode() {
+        return hdnShujiiIryoKikanCode;
+    }
+
+    /*
+     * sethdnShujiiIryoKikanCode
+     * @param hdnShujiiIryoKikanCode hdnShujiiIryoKikanCode
+     */
+    @JsonProperty("hdnShujiiIryoKikanCode")
+    public void setHdnShujiiIryoKikanCode(RString hdnShujiiIryoKikanCode) {
+        this.hdnShujiiIryoKikanCode = hdnShujiiIryoKikanCode;
+    }
+
+    /*
+     * gethdnShujiiIryoKikanName
+     * @return hdnShujiiIryoKikanName
+     */
+    @JsonProperty("hdnShujiiIryoKikanName")
+    public RString getHdnShujiiIryoKikanName() {
+        return hdnShujiiIryoKikanName;
+    }
+
+    /*
+     * sethdnShujiiIryoKikanName
+     * @param hdnShujiiIryoKikanName hdnShujiiIryoKikanName
+     */
+    @JsonProperty("hdnShujiiIryoKikanName")
+    public void setHdnShujiiIryoKikanName(RString hdnShujiiIryoKikanName) {
+        this.hdnShujiiIryoKikanName = hdnShujiiIryoKikanName;
+    }
+
+    /*
+     * gethdnShujiiCode
+     * @return hdnShujiiCode
+     */
+    @JsonProperty("hdnShujiiCode")
+    public RString getHdnShujiiCode() {
+        return hdnShujiiCode;
+    }
+
+    /*
+     * sethdnShujiiCode
+     * @param hdnShujiiCode hdnShujiiCode
+     */
+    @JsonProperty("hdnShujiiCode")
+    public void setHdnShujiiCode(RString hdnShujiiCode) {
+        this.hdnShujiiCode = hdnShujiiCode;
+    }
+
+    /*
+     * gethdnShujiiName
+     * @return hdnShujiiName
+     */
+    @JsonProperty("hdnShujiiName")
+    public RString getHdnShujiiName() {
+        return hdnShujiiName;
+    }
+
+    /*
+     * sethdnShujiiName
+     * @param hdnShujiiName hdnShujiiName
+     */
+    @JsonProperty("hdnShujiiName")
+    public void setHdnShujiiName(RString hdnShujiiName) {
+        this.hdnShujiiName = hdnShujiiName;
+    }
+
+    /*
+     * gethdnChosaItakusakiCode
+     * @return hdnChosaItakusakiCode
+     */
+    @JsonProperty("hdnChosaItakusakiCode")
+    public RString getHdnChosaItakusakiCode() {
+        return hdnChosaItakusakiCode;
+    }
+
+    /*
+     * sethdnChosaItakusakiCode
+     * @param hdnChosaItakusakiCode hdnChosaItakusakiCode
+     */
+    @JsonProperty("hdnChosaItakusakiCode")
+    public void setHdnChosaItakusakiCode(RString hdnChosaItakusakiCode) {
+        this.hdnChosaItakusakiCode = hdnChosaItakusakiCode;
+    }
+
+    /*
+     * gethdnChosaItakusakiName
+     * @return hdnChosaItakusakiName
+     */
+    @JsonProperty("hdnChosaItakusakiName")
+    public RString getHdnChosaItakusakiName() {
+        return hdnChosaItakusakiName;
+    }
+
+    /*
+     * sethdnChosaItakusakiName
+     * @param hdnChosaItakusakiName hdnChosaItakusakiName
+     */
+    @JsonProperty("hdnChosaItakusakiName")
+    public void setHdnChosaItakusakiName(RString hdnChosaItakusakiName) {
+        this.hdnChosaItakusakiName = hdnChosaItakusakiName;
+    }
+
+    /*
+     * gethdnNinteiChosainCode
+     * @return hdnNinteiChosainCode
+     */
+    @JsonProperty("hdnNinteiChosainCode")
+    public RString getHdnNinteiChosainCode() {
+        return hdnNinteiChosainCode;
+    }
+
+    /*
+     * sethdnNinteiChosainCode
+     * @param hdnNinteiChosainCode hdnNinteiChosainCode
+     */
+    @JsonProperty("hdnNinteiChosainCode")
+    public void setHdnNinteiChosainCode(RString hdnNinteiChosainCode) {
+        this.hdnNinteiChosainCode = hdnNinteiChosainCode;
+    }
+
+    /*
+     * gethdnNinteiChosainName
+     * @return hdnNinteiChosainName
+     */
+    @JsonProperty("hdnNinteiChosainName")
+    public RString getHdnNinteiChosainName() {
+        return hdnNinteiChosainName;
+    }
+
+    /*
+     * sethdnNinteiChosainName
+     * @param hdnNinteiChosainName hdnNinteiChosainName
+     */
+    @JsonProperty("hdnNinteiChosainName")
+    public void setHdnNinteiChosainName(RString hdnNinteiChosainName) {
+        this.hdnNinteiChosainName = hdnNinteiChosainName;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public Label getLblNinteiShinsakai() {
+        return this.getTblKanryoJisseki().getLblNinteiShinsakai();
+    }
+
     @JsonIgnore
     public Label getLblChosaIrai() {
         return this.getTblKanryoJisseki().getLblChosaIrai();
@@ -662,13 +847,13 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblNijiHantei() {
-        return this.getTblKanryoJisseki().getLblNijiHantei();
+    public Label getLblKanryoYotei() {
+        return this.getTblKanryoJisseki().getLblKanryoYotei();
     }
 
     @JsonIgnore
-    public Label getLblKanryoYotei() {
-        return this.getTblKanryoJisseki().getLblKanryoYotei();
+    public TextBoxDate getTxtNinteiShinsakaiYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtNinteiShinsakaiYoteiDate();
     }
 
     @JsonIgnore
@@ -707,13 +892,13 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return this.getTblKanryoJisseki().getTxtNijiHanteiYoteiDate();
+    public Label getLblKanryoJisseki() {
+        return this.getTblKanryoJisseki().getLblKanryoJisseki();
     }
 
     @JsonIgnore
-    public Label getLblKanryoJisseki() {
-        return this.getTblKanryoJisseki().getLblKanryoJisseki();
+    public TextBoxDate getTxtNinteiShinsakaiJissekiDate() {
+        return this.getTblKanryoJisseki().getTxtNinteiShinsakaiJissekiDate();
     }
 
     @JsonIgnore
@@ -752,8 +937,33 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblNijiHantei() {
+        return this.getTblKanryoJisseki().getLblNijiHantei();
+    }
+
+    @JsonIgnore
+    public Label getLblCenterSoshin() {
+        return this.getTblKanryoJisseki().getLblCenterSoshin();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtNijiHanteiYoteiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtCenterSoshinYoteiDate();
+    }
+
+    @JsonIgnore
     public TextBoxDate getTxtNijiHanteiJissekiDate() {
         return this.getTblKanryoJisseki().getTxtNijiHanteiJissekiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinJissekiDate() {
+        return this.getTblKanryoJisseki().getTxtCenterSoshinJissekiDate();
     }
 
     @JsonIgnore
