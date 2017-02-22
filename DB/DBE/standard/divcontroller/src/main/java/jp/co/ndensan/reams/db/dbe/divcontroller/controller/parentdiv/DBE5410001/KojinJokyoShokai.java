@@ -5,38 +5,27 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5410001;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
-import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
-import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokaiResult;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kojinjokyoshokai.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.DBE5410001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001.KojinJokyoShokaiHandler;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -58,7 +47,7 @@ public class KojinJokyoShokai {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
+        List<KojinJokyoShokaiResult> kojinJokyoShokaiList
                 = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
         getHandler(div).setKihonInfo(申請書管理番号);
         if (!kojinJokyoShokaiList.isEmpty()) {
@@ -103,7 +92,7 @@ public class KojinJokyoShokai {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
+        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokaiResult> kojinJokyoShokaiList
                 = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
         NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
         if (!kojinJokyoShokaiList.isEmpty()) {
@@ -179,6 +168,10 @@ public class KojinJokyoShokai {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnNinteiChosaRirekiNo(認定調査依頼履歴番号);
+        div.setHdnChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue());
+        div.setHdnChosaItakusakiName(div.getTxtChosaItakusakiName().getValue());
+        div.setHdnNinteiChosainCode(div.getTxtNinteiChosainCode().getValue());
+        div.setHdnNinteiChosainName(div.getTxtNinteiChosainName().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -195,6 +188,10 @@ public class KojinJokyoShokai {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnIkenshoIraiRirekiNo(主治医意見書作成依頼履歴番号);
+        div.setHdnShujiiIryoKikanCode(div.getTxtShujiiIryoKikanCode().getValue());
+        div.setHdnShujiiIryoKikanName(div.getTxtShujiiIryoKikanName().getValue());
+        div.setHdnShujiiCode(div.getTxtShujiiCode().getValue());
+        div.setHdnShujiiName(div.getTxtShujiiName().getValue());
         return ResponseData.of(div).respond();
     }
 
@@ -244,7 +241,7 @@ public class KojinJokyoShokai {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
+        List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokaiResult> kojinJokyoShokaiList
                 = kojinJokyoShokaiFinder.getKojinShinchokuJokyohyo(parameter).records();
         if (!kojinJokyoShokaiList.isEmpty()) {
             KojinShinchokuJokyohyoJoho jokyohyoEntity = getHandler(div).setKojinShinchokuJokyohyo(kojinJokyoShokaiList);
@@ -282,6 +279,18 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnToShinchokuJyokyo(KojinJokyoShokaiDiv div) {
         ViewStateHolder.put(ViewStateKeys.保険者番号, div.getHdnShokisaiHokenshaNo());
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.進捗状況照会に遷移する).respond();
+    }
+
+    /**
+     * 申請情報を照会に遷移する
+     *
+     * @param div KojinJokyoShokaiDiv
+     * @return ResponseData<KojinJokyoShokaiDiv>
+     */
+    public ResponseData<KojinJokyoShokaiDiv> onClick_btnShinseiInfoshokai(KojinJokyoShokaiDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+        return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.申請情報照会に遷移する).respond();
     }
 
     private KojinJokyoShokaiHandler getHandler(KojinJokyoShokaiDiv div) {

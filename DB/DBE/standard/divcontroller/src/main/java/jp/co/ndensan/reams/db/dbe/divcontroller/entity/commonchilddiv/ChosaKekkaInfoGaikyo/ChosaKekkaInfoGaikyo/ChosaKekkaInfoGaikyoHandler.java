@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo.ChosaKekkaInfoGaikyo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +85,7 @@ public class ChosaKekkaInfoGaikyoHandler {
         } else {
             setDisplayNoneテキストコントロール();
         }
+        set認定調査委託先認定調査員();
         set利用施設種類(shisetsuRiyos);
         setサービス状況(serviceJokyos);
         set住宅改修(serviceJokyos);
@@ -551,5 +552,12 @@ public class ChosaKekkaInfoGaikyoHandler {
                 gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setSrc(DBEImageUtil.sanitizePath(概況特記ImagePath));
             }
         }
+    }
+
+    private void set認定調査委託先認定調査員() {
+        gaikyoDiv.getTxtChosaItakusakiCode().setValue(gaikyoDiv.getHdnChosaItakusakiCode());
+        gaikyoDiv.getTxtChosaItakusakiName().setValue(gaikyoDiv.getHdnChosaItakusakiName());
+        gaikyoDiv.getTxtNinteiChosainCode().setValue(gaikyoDiv.getHdnNinteiChosainCode());
+        gaikyoDiv.getTxtNinteiChosainName().setValue(gaikyoDiv.getHdnNinteiChosainName());
     }
 }

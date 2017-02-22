@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @reamsid_L DBE-0200-010 suguangjun
  */
-public class KojinJokyoShokai {
+public class KojinJokyoShokaiResult {
 
     private final KojinJokyoShokaiRelateEntity entity;
 
@@ -35,7 +35,7 @@ public class KojinJokyoShokai {
      *
      * @param entity DBより取得した{@link KojinJokyoShokaiRelateEntity}
      */
-    public KojinJokyoShokai(KojinJokyoShokaiRelateEntity entity) {
+    public KojinJokyoShokaiResult(KojinJokyoShokaiRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定個人状況照会情報"));
     }
 
@@ -103,6 +103,15 @@ public class KojinJokyoShokai {
     }
 
     /**
+     * センター送信予定年月日を返します。
+     *
+     * @return センター送信予定年月日
+     */
+    public FlexibleDate getセンター送信予定年月日() {
+        return entity.getCenterSoshinYoteiYMD();
+    }
+
+    /**
      * 認定調査依頼完了年月日を返します。
      *
      * @return 認定調査依頼完了年月日
@@ -146,7 +155,7 @@ public class KojinJokyoShokai {
     public int get主治医意見書作成依頼履歴番号() {
         return entity.getIkenshoIraiRirekiNo();
     }
-    
+
     /**
      * 主治医意見書作成依頼年月日を返します。
      *
@@ -208,6 +217,15 @@ public class KojinJokyoShokai {
      */
     public FlexibleDate get認定審査会完了年月日() {
         return entity.getNinteiShinsakaiKanryoYMD();
+    }
+
+    /**
+     * センター送信年月日を返します。
+     *
+     * @return センター送信年月日
+     */
+    public FlexibleDate getセンター送信年月日() {
+        return entity.getCenterSoshinYMD();
     }
 
     /**
@@ -1462,7 +1480,7 @@ public class KojinJokyoShokai {
     public RString get一次判定警告コード() {
         return entity.getIchijiHnateiKeikokuCode();
     }
-    
+
     /**
      * 取下区分コードを返します。
      *
@@ -1471,7 +1489,7 @@ public class KojinJokyoShokai {
     public Code get取下区分コード() {
         return entity.getTorisageKubunCode();
     }
-    
+
     /**
      * 取下年月日を返します。
      *
@@ -1480,7 +1498,7 @@ public class KojinJokyoShokai {
     public FlexibleDate get取下年月日() {
         return entity.getTorisageYMD();
     }
-    
+
     /**
      * 取下事由を返します。
      *

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekkaInfoGaikyo.ChosaKekkaInfoGaikyo;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -29,10 +29,6 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel {
     private TextBoxCode txtNinteiChosainCode;
     @JsonProperty("txtNinteiChosainName")
     private TextBox txtNinteiChosainName;
-    @JsonProperty("txtChosaIraiDate")
-    private TextBoxFlexibleDate txtChosaIraiDate;
-    @JsonProperty("btnNinteiChosaIraiShokai")
-    private ButtonDialog btnNinteiChosaIraiShokai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -110,42 +106,6 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel {
     @JsonProperty("txtNinteiChosainName")
     public void setTxtNinteiChosainName(TextBox txtNinteiChosainName) {
         this.txtNinteiChosainName = txtNinteiChosainName;
-    }
-
-    /*
-     * gettxtChosaIraiDate
-     * @return txtChosaIraiDate
-     */
-    @JsonProperty("txtChosaIraiDate")
-    public TextBoxFlexibleDate getTxtChosaIraiDate() {
-        return txtChosaIraiDate;
-    }
-
-    /*
-     * settxtChosaIraiDate
-     * @param txtChosaIraiDate txtChosaIraiDate
-     */
-    @JsonProperty("txtChosaIraiDate")
-    public void setTxtChosaIraiDate(TextBoxFlexibleDate txtChosaIraiDate) {
-        this.txtChosaIraiDate = txtChosaIraiDate;
-    }
-
-    /*
-     * getbtnNinteiChosaIraiShokai
-     * @return btnNinteiChosaIraiShokai
-     */
-    @JsonProperty("btnNinteiChosaIraiShokai")
-    public ButtonDialog getBtnNinteiChosaIraiShokai() {
-        return btnNinteiChosaIraiShokai;
-    }
-
-    /*
-     * setbtnNinteiChosaIraiShokai
-     * @param btnNinteiChosaIraiShokai btnNinteiChosaIraiShokai
-     */
-    @JsonProperty("btnNinteiChosaIraiShokai")
-    public void setBtnNinteiChosaIraiShokai(ButtonDialog btnNinteiChosaIraiShokai) {
-        this.btnNinteiChosaIraiShokai = btnNinteiChosaIraiShokai;
     }
 
     // </editor-fold>

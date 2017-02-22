@@ -47,6 +47,26 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtChosaJisshiBashoMeisho"));
             };
 
+            Controls.prototype.ChosaItakusakiAndChosainGuide = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusakiAndChosainGuide"));
+            };
+
+            Controls.prototype.txtChosaItakusakiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosaItakusakiCode"));
+            };
+
+            Controls.prototype.txtChosaItakusakiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            };
+
+            Controls.prototype.txtNinteiChosainCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtNinteiChosainCode"));
+            };
+
+            Controls.prototype.txtNinteiChosainName = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinteiChosainName"));
+            };
+
             Controls.prototype.JisshiBashoMeishoPanel = function () {
                 return new UZA.Panel(this.convFiledName("JisshiBashoMeishoPanel"));
             };

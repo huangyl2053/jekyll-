@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -29,12 +29,6 @@ public class ShujiiIryokikaknAndShujiiInputDiv extends Panel {
     private TextBoxCode txtShujiiCode;
     @JsonProperty("txtShujiiName")
     private TextBox txtShujiiName;
-    @JsonProperty("chkShiteii")
-    private CheckBoxList chkShiteii;
-    @JsonProperty("txtIkenshoIraiDate")
-    private TextBoxFlexibleDate txtIkenshoIraiDate;
-    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
-    private ButtonDialog btnShujiiIkenshoSakuseiIraiShokai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -112,60 +106,6 @@ public class ShujiiIryokikaknAndShujiiInputDiv extends Panel {
     @JsonProperty("txtShujiiName")
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName = txtShujiiName;
-    }
-
-    /*
-     * getchkShiteii
-     * @return chkShiteii
-     */
-    @JsonProperty("chkShiteii")
-    public CheckBoxList getChkShiteii() {
-        return chkShiteii;
-    }
-
-    /*
-     * setchkShiteii
-     * @param chkShiteii chkShiteii
-     */
-    @JsonProperty("chkShiteii")
-    public void setChkShiteii(CheckBoxList chkShiteii) {
-        this.chkShiteii = chkShiteii;
-    }
-
-    /*
-     * gettxtIkenshoIraiDate
-     * @return txtIkenshoIraiDate
-     */
-    @JsonProperty("txtIkenshoIraiDate")
-    public TextBoxFlexibleDate getTxtIkenshoIraiDate() {
-        return txtIkenshoIraiDate;
-    }
-
-    /*
-     * settxtIkenshoIraiDate
-     * @param txtIkenshoIraiDate txtIkenshoIraiDate
-     */
-    @JsonProperty("txtIkenshoIraiDate")
-    public void setTxtIkenshoIraiDate(TextBoxFlexibleDate txtIkenshoIraiDate) {
-        this.txtIkenshoIraiDate = txtIkenshoIraiDate;
-    }
-
-    /*
-     * getbtnShujiiIkenshoSakuseiIraiShokai
-     * @return btnShujiiIkenshoSakuseiIraiShokai
-     */
-    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
-    public ButtonDialog getBtnShujiiIkenshoSakuseiIraiShokai() {
-        return btnShujiiIkenshoSakuseiIraiShokai;
-    }
-
-    /*
-     * setbtnShujiiIkenshoSakuseiIraiShokai
-     * @param btnShujiiIkenshoSakuseiIraiShokai btnShujiiIkenshoSakuseiIraiShokai
-     */
-    @JsonProperty("btnShujiiIkenshoSakuseiIraiShokai")
-    public void setBtnShujiiIkenshoSakuseiIraiShokai(ButtonDialog btnShujiiIkenshoSakuseiIraiShokai) {
-        this.btnShujiiIkenshoSakuseiIraiShokai = btnShujiiIkenshoSakuseiIraiShokai;
     }
 
     // </editor-fold>

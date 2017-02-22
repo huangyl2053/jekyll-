@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaI
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
+import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokaiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoirai.ShujiiIkenshoIraiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaK
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfokihon.ChosaKekkaInfoKihonFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai.KojinJokyoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshoiraishokai.ShujiiIkenshoIraiShokaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
@@ -60,8 +62,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -79,6 +80,7 @@ public class KojinJokyoShokaiHandler {
     private final Code 識別コード_09A = new Code("09A");
     private final Code 識別コード_09B = new Code("09B");
     private final RString 指定医 = new RString("指定医");
+    private final RString センター送信_運用無 = new RString("2");
     private final String regex = "[^0]";
     private final KojinJokyoShokaiDiv div;
 
@@ -96,7 +98,7 @@ public class KojinJokyoShokaiHandler {
      *
      * @param kojinJokyoShokaiList 要介護認定個人状況データ
      */
-    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    public void setKojinJokyoShokai(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         div.setHdnHihokenshaNo(kojinJokyoShokaiList.get(0).get被保番号());
         div.setHdnShokisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
         div.getShujiiIryokikaknAndShujiiInput().getTxtShujiiIryoKikanCode().setValue(kojinJokyoShokaiList.get(0).get主治医医療機関コード());
@@ -245,7 +247,7 @@ public class KojinJokyoShokaiHandler {
         }
     }
 
-    private void getchkShiteii(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    private void getchkShiteii(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         RString 医師区分 = RString.EMPTY;
         if (kojinJokyoShokaiList.get(0).get医師区分コード() != null && !kojinJokyoShokaiList.get(0).get医師区分コード().isEmpty()) {
             医師区分 = IshiKubunCode.toValue(kojinJokyoShokaiList.get(0).get医師区分コード().value()).get名称();
@@ -260,7 +262,8 @@ public class KojinJokyoShokaiHandler {
         }
     }
 
-    private void getKojinJokyoShokai1(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    private void getKojinJokyoShokai1(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
+        RString センター送信_運用有無 = DbBusinessConfig.get(ConfigNameDBE.センター送信_運用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (kojinJokyoShokaiList.get(0).get認定調査依頼予定年月日() != null) {
             div.getTxtChosaIraiYoteiDate().setValue(new RDate(kojinJokyoShokaiList.get(0).get認定調査依頼予定年月日().toString()));
         }
@@ -288,6 +291,15 @@ public class KojinJokyoShokaiHandler {
         if (kojinJokyoShokaiList.get(0).get認定審査会予定年月日() != null) {
             div.getTxtNijiHanteiYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定審査会予定年月日().toString()));
+        }
+        if (センター送信_運用無.equals(センター送信_運用有無)
+                && kojinJokyoShokaiList.get(0).getセンター送信予定年月日() != null) {
+            div.getTxtCenterSoshinYoteiDate().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).getセンター送信予定年月日().toString()));
+        }
+        if (kojinJokyoShokaiList.get(0).get認定審査会完了年月日() != null) {
+            div.getTxtNinteiShinsakaiYoteiDate().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).get認定審査会完了年月日().toString()));
         }
         if (kojinJokyoShokaiList.get(0).get認定調査依頼完了年月日() != null) {
             div.getTxtChosaIraiJissekiDate().setValue(new RDate(
@@ -325,9 +337,14 @@ public class KojinJokyoShokaiHandler {
             div.getTxtNinteiShinseiDay().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定申請年月日().toString()));
         }
+        if (センター送信_運用無.equals(センター送信_運用有無)
+                && kojinJokyoShokaiList.get(0).getセンター送信年月日() != null) {
+            div.getTxtCenterSoshinJissekiDate().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).getセンター送信年月日().toString()));
+        }
     }
 
-    private void getKojinJokyoShokai2(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    private void getKojinJokyoShokai2(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         if (kojinJokyoShokaiList.get(0).get認定申請区分申請時() != null && !kojinJokyoShokaiList.get(0).get認定申請区分申請時().isEmpty()) {
             div.getTxtShinseiKubunShinseiji().setValue(NinteiShinseiShinseijiKubunCode.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get認定申請区分申請時().toString())).get名称());
@@ -378,11 +395,11 @@ public class KojinJokyoShokaiHandler {
         }
     }
 
-    private void set認定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    private void set認定結果(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         div.getTxtNinteiKekka().setValue(kojinJokyoShokaiList.get(0).get二次判定結果名称());
     }
 
-    private void set一次判定結果(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    private void set一次判定結果(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
 //<<<<<<< HEAD
         div.getTxtIchijiHantei().setValue(kojinJokyoShokaiList.get(0).get一次判定結果名称());
         if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get一次判定警告コード())) {
@@ -448,11 +465,11 @@ public class KojinJokyoShokaiHandler {
      * @param kojinJokyoShokaiList 要介護認定個人状況データ
      * @return KojinShinchokuJokyohyoEntity
      */
-    public KojinShinchokuJokyohyoJoho setKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    public KojinShinchokuJokyohyoJoho setKojinShinchokuJokyohyo(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         return getKojinShinchokuJokyohyo(kojinJokyoShokaiList);
     }
 
-    private KojinShinchokuJokyohyoJoho getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    private KojinShinchokuJokyohyoJoho getKojinShinchokuJokyohyo(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         KojinShinchokuJokyohyoJoho jokyohyoEntity = new KojinShinchokuJokyohyoJoho();
         jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号());
         jokyohyoEntity.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(

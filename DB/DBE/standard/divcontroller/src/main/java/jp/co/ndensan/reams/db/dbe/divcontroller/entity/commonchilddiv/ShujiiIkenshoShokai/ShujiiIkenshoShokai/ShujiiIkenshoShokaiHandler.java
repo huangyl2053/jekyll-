@@ -3,25 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.imageio.ImageIO;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
@@ -35,13 +27,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
-import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SearchSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -83,6 +72,7 @@ public class ShujiiIkenshoShokaiHandler {
         if (entityList != null && !entityList.isEmpty()) {
             厚労省IF識別コード = entityList.get(0).getKoroshoIfShikibetsuCode().value();
         }
+        set主治医医療機関主治医();
         if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_99A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
@@ -108,7 +98,7 @@ public class ShujiiIkenshoShokaiHandler {
             RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
             List<RString> イメージ原本パスリスト = get原本FilePathList(出力イメージフォルダパス);
             List<RString> イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス);
-            
+
             イメージ原本バイナリリスト = createImageBinaryList(イメージ原本パスリスト);
             イメージマスクバイナリリスト = createImageBinaryList(イメージマスクパスリスト);
             原本タイトルリスト = getTitleList(イメージ原本パスリスト);
@@ -119,7 +109,7 @@ public class ShujiiIkenshoShokaiHandler {
 
         div.getCcdChosaTokkiShiryoShokai().initialize(イメージ原本バイナリリスト, イメージマスクバイナリリスト, 原本タイトルリスト, マスクタイトルリスト);
     }
-    
+
     private List<RString> createImageBinaryList(List<RString> imagePathList) {
         List<RString> imageBinaryList = new ArrayList<>();
         for (RString imagePath : imagePathList) {
@@ -281,5 +271,12 @@ public class ShujiiIkenshoShokaiHandler {
             titleList.add(new RString(index).concat("枚目"));
         }
         return titleList;
+    }
+
+    private void set主治医医療機関主治医() {
+        div.getTxtShujiiIryoKikanCode().setValue(div.getHdnShujiiIryoKikanCode());
+        div.getTxtShujiiIryoKikanName().setValue(div.getHdnShujiiIryoKikanName());
+        div.getTxtShujiiCode().setValue(div.getHdnShujiiCode());
+        div.getTxtShujiiName().setValue(div.getHdnShujiiName());
     }
 }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.basic.kojinjokyoshokai;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
+import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokaiResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kojinjokyoshokai.KojinJokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai.KojinJokyoShokaiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kojinjokyoshokai.IKojinJokyoShokaiMapper;
@@ -61,13 +61,13 @@ public class KojinJokyoShokaiFinder {
      * @return KojinJokyoShokai 要介護認定個人状況照会情報 nullが返る可能性があります。
      */
     @Transaction
-    public SearchResult<KojinJokyoShokai> getKojinJokyoShokai(KojinJokyoShokaiParameter parameter) {
+    public SearchResult<KojinJokyoShokaiResult> getKojinJokyoShokai(KojinJokyoShokaiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
         IKojinJokyoShokaiMapper mapper = mapperProvider.create(IKojinJokyoShokaiMapper.class);
         KojinJokyoShokaiRelateEntity kojinJokyoShokaiRelateEntity = mapper.selectKojinJokyoShokai(parameter);
-        List<KojinJokyoShokai> kojinJokyoShokaiList = new ArrayList();
+        List<KojinJokyoShokaiResult> kojinJokyoShokaiList = new ArrayList();
         if (kojinJokyoShokaiRelateEntity != null) {
-            kojinJokyoShokaiList.add(new KojinJokyoShokai(kojinJokyoShokaiRelateEntity));
+            kojinJokyoShokaiList.add(new KojinJokyoShokaiResult(kojinJokyoShokaiRelateEntity));
         }
 
         return SearchResult.of(kojinJokyoShokaiList, kojinJokyoShokaiList.size(), true);
@@ -80,13 +80,13 @@ public class KojinJokyoShokaiFinder {
      * @return KojinJokyoShokai 要介護認定個人状況照会情報 nullが返る可能性があります。
      */
     @Transaction
-    public SearchResult<KojinJokyoShokai> getKojinShinchokuJokyohyo(KojinJokyoShokaiParameter parameter) {
+    public SearchResult<KojinJokyoShokaiResult> getKojinShinchokuJokyohyo(KojinJokyoShokaiParameter parameter) {
         requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
         IKojinJokyoShokaiMapper mapper = mapperProvider.create(IKojinJokyoShokaiMapper.class);
         KojinJokyoShokaiRelateEntity shokaiRelateEntity = mapper.selectKojinShinchokuJokyohyo(parameter);
-        List<KojinJokyoShokai> businessList = new ArrayList();
+        List<KojinJokyoShokaiResult> businessList = new ArrayList();
         if (shokaiRelateEntity != null) {
-            businessList.add(new KojinJokyoShokai(shokaiRelateEntity));
+            businessList.add(new KojinJokyoShokaiResult(shokaiRelateEntity));
         }
         return SearchResult.of(businessList, 0, false);
     }
