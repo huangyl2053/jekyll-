@@ -24,9 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -73,6 +70,21 @@ public class ShinseiKensaku {
             div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
         }
         return ResponseData.of(div).setState(findStateAt条件指定(div));
+    }
+
+    /**
+     * onActive処理です。
+     *
+     * @param div ShinseiKensakuDiv
+     * @return ResponseData<ShinseiKensakuDiv>
+     */
+    public ResponseData<ShinseiKensakuDiv> onActive(ShinseiKensakuDiv div) {
+        Boolean is機能詳細画面から再検索 = ViewStateHolder.get(ViewStateKeys.機能詳細画面から再検索, Boolean.class);
+        if(is機能詳細画面から再検索 != null && is機能詳細画面から再検索.equals(Boolean.TRUE)){
+            div.getCcdNinteishinseishaFinder().initialize();
+        }
+        ViewStateHolder.remove(ViewStateKeys.機能詳細画面から再検索);
+        return ResponseData.of(div).respond();
     }
 
     private static DBE0100001StateName findStateAt条件指定(ShinseiKensakuDiv div) {
@@ -219,7 +231,7 @@ public class ShinseiKensaku {
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);
         NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, 被保険者番号);
         ninteiAccessLogger.log();
-
+        
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
@@ -275,9 +287,8 @@ public class ShinseiKensaku {
         }
         if (MENUID_DBEMN71003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定進捗情報データ出力へ).respond();
+                return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定進捗情報データ出力へ).respond();
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -301,9 +312,8 @@ public class ShinseiKensaku {
      */
     public ResponseData<ShinseiKensakuDiv> onClick_btnModoru(ShinseiKensakuDiv div) {
         div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
-        onClick_btnClear(div);
         div.getBtnClear().setDisabled(false);
-        return ResponseData.of(div).setState(findStateAt条件指定(div));
+            return ResponseData.of(div).setState(findStateAt条件指定(div));
     }
 
     /**
@@ -329,7 +339,6 @@ public class ShinseiKensaku {
             FlowParameterAccessor.merge(fp);
             div.setWfParameter(WORKFLOW_KEY_KANRYO);
         }
-        //div.getCcdKanryoMessage().setMessage(完了メッセージ, RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE0100001StateName.検索結果一覧);
     }
 
@@ -399,19 +408,5 @@ public class ShinseiKensaku {
 
     private ShinseiKensakuHandler getHandler(ShinseiKensakuDiv div) {
         return new ShinseiKensakuHandler(div);
-    }
-
-    private static class ShinseiKensakuErrorMessage implements IMessageGettable, IValidationMessage {
-
-        private final Message message;
-
-        public ShinseiKensakuErrorMessage(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

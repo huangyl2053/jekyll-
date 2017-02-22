@@ -74,7 +74,18 @@ public class YokaigoNinteiJohoTeikyo {
         ViewStateHolder.put(ViewStateKeys.認定申請情報, business);
         return ResponseData.of(div).respond();
     }
-
+    
+    /**
+     * btn_ToSearchイベントです。
+     *
+     * @param div YokaigoNinteiJohoTeikyoDiv
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_ToSearch(YokaigoNinteiJohoTeikyoDiv div) {
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 認定調査票チェックボックス変更します。
      *

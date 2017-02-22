@@ -184,16 +184,17 @@ public class Masking {
     public IDownLoadServletResponse onClick_btnOutputCsv(MaskingDiv div, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_マスキング一覧);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 if (row.getSelected()) {
-                    ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getShoKisaiHokenshaNo().substring(0, 5).concat(row.getHihoNumber()));
+                    ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5).concat(row.getHihoNumber()));
                     PersonalData personalData = PersonalData.of(shikibetsuCode, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo()));
-                    AccessLogger.log(AccessLogType.照会, personalData);
+                            row.getShinseishoKanriNo()));
+                    personalDataList.add(personalData);
                     csvWriter.writeLine(getCsvData(row));
                 }
             }
@@ -203,6 +204,7 @@ public class Masking {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 

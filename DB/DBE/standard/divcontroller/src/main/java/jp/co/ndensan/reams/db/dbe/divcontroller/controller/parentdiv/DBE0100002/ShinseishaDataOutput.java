@@ -176,7 +176,6 @@ public class ShinseishaDataOutput {
      */
     public ResponseData<ShinseishaDataOutputDiv> onClick_btnModoru(ShinseishaDataOutputDiv div) {
         div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
-        onClick_btnClear(div);
         div.getBtnClear().setDisabled(false);
         return ResponseData.of(div).setState(DBE0100002StateName.申請検索);
     }

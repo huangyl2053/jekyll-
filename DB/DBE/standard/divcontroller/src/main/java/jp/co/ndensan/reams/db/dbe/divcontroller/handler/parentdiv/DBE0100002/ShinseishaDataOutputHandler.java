@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -108,10 +109,18 @@ public class ShinseishaDataOutputHandler {
             row.getShinseiDay().setValue((business.get認定申請年月日() != null) ? new RDate(business.get認定申請年月日().toString()) : null);
             row.setShinseikubunshinseiji((business.get認定申請区分_申請時_コード() != null)
                     ? NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード().value()).get名称() : RString.EMPTY);
-            row.setIchijiHanteiKekka((business.get要介護認定一次判定結果コード() != null) ? get一次判定結果(business) : RString.EMPTY);
+            if (business.get要介護認定一次判定結果コード() != null && !Code.EMPTY.equals(business.get要介護認定一次判定結果コード())) {
+                row.setIchijiHanteiKekka(get一次判定結果(business));
+            } else {
+                row.setIchijiHanteiKekka(RString.EMPTY);
+            }
             row.getIchijiHanteiYMD().setValue((business.get要介護認定一次判定年月日() != null)
                     ? business.get要介護認定一次判定年月日() : FlexibleDate.EMPTY);
-            row.setNijiHanteiYokaigoJotaiKubun((business.get二次判定要介護状態区分コード() != null) ? get二次判定結果(business) : RString.EMPTY);
+            if (business.get二次判定要介護状態区分コード() != null && !Code.EMPTY.equals(business.get二次判定要介護状態区分コード())) {
+                row.setNijiHanteiYokaigoJotaiKubun(get二次判定結果(business));
+            } else {
+                row.setNijiHanteiYokaigoJotaiKubun(RString.EMPTY);
+            }
             row.getNijiHanteiYMD().setValue((business.get二次判定年月日() != null) ? business.get二次判定年月日() : FlexibleDate.EMPTY);
             row.setNijiHanteiNinteiYukoKikan((business.get二次判定認定有効期間() != 0)
                     ? new RStringBuilder().append(business.get二次判定認定有効期間()).append("ヶ月").toRString() : RString.EMPTY);
