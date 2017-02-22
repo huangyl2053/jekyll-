@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class NinteiChosaDataOutputResult {
 
-    private static final RString ステータス設定値 = new RString("未");
+    private static final RString ステータス設定値 = new RString("未入力");
 
     /**
      * EucCsvEntityの設定メッソドです。
@@ -188,6 +188,9 @@ public class NinteiChosaDataOutputResult {
             eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entityZenkai.get障害日常生活自立度コード()).get名称());
         }
         set調査項目_前回(eucCsvEntity, entityZenkai);
+        eucCsvEntity.set前回_厚労省IF識別コード(entityZenkai.get厚労省IF識別コード());
+        eucCsvEntity.set前回_認定日(entityParam.get認定日_前回());
+        eucCsvEntity.set前回_認定結果コード(entityParam.get認定結果コード_前回());
     }
 
     private void setサービス状況_今回(NinteiChosaDataOutputEucCsvEntity eucCsvEntity, NinteiChosaDataOutputBatchRelateEntity entity) {
@@ -856,7 +859,7 @@ public class NinteiChosaDataOutputResult {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【認定調査員】"));
         if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()) {
-        jokenBuilder.append(processParamter.getNinteiChosainCode());
+            jokenBuilder.append(processParamter.getNinteiChosainCode());
             jokenBuilder.append(new RString(" "));
             jokenBuilder.append(認定調査員);
         }

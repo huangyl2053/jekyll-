@@ -719,6 +719,8 @@
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity"
                autoMapping="true">
         <id column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定日_前回" column="認定日_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定結果コード_前回" column="認定結果コード_前回" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association  property="今回分Entity"
                       resultMap="resultMap_getCsvTable"/>
         <association  property="前回分Entity"
@@ -729,12 +731,17 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputCsvMybitisParameter" fetchSize="500">
         SELECT
         <include refid="selectItem" />,
-        <include refid="selectItemZenkai" />
+        <include refid="selectItemZenkai" />,
+        "DbT5102"."nijiHanteiYMD" AS "認定日_前回",
+        "DbT5102"."nijiHanteiYokaigoJotaiKubunCode" AS "認定結果コード_前回"
         FROM &quot;${csvTempTableName}&quot; AS "CsvTempTable"
         LEFT JOIN
         &quot;${csvTempTableNameZenkai}&quot; AS "CsvTempTableZenkai"
         ON
         "CsvTempTable".申請書管理番号 = "CsvTempTableZenkai".前回申請書管理番号
+        LEFT JOIN
+        rgdb."DbT5102NinteiKekkaJoho" AS "DbT5102"
+        ON "CsvTempTableZenkai".前回申請書管理番号 = "DbT5102"."shinseishoKanriNo"
     </select>
 
     <!--今回分のresultMap-->

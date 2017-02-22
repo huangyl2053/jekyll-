@@ -1299,4 +1299,10 @@ public class NinteiChosaDataOutputEucCsvEntity {
     private RString 被保険者区分;
     @CsvField(order = 640, name = "認定調査委託先市町村コード")
     private RString 認定調査委託先市町村コード;
+    @CsvField(order = 641, name = "前回_厚労省IF識別コード")
+    private RString 前回_厚労省IF識別コード;
+    @CsvField(order = 642, name = "前回_認定日")
+    private RString 前回_認定日;
+    @CsvField(order = 643, name = "前回_認定結果コード")
+    private RString 前回_認定結果コード;
 }
