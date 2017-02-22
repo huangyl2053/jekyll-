@@ -31,7 +31,9 @@ public class IImageinputMapperTest extends DbeTestDacBase {
     public void get意見書関連データ() {
         System.out.println("- get意見書関連データ() -----------------------------");
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
-        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
+//        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
+//        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000287539"), new RString("19990917"));
+        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000001970"), new RString("20150501"));
         List<ImageinputRelateEntity> entities = sut.get意見書関連データ(param);
         System.out.println(entities.isEmpty());
         ImageinputRelateEntity entity = entities.get(0);
@@ -41,6 +43,7 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println("\t意作依日：" + entity.get主治医意見書作成依頼年月日());
         System.out.println("\t意依完日：" + entity.get意見書作成依頼完了日());
         System.out.println("\t仮一次区：" + entity.get仮一次判定区分());
+        System.out.println("\tイメージ：" + entity.get意見書イメージ情報().isEmpty());
     }
 
     @Test

@@ -103,8 +103,8 @@ public class ShinsakaiWariateHistoriesTest {
             new Fixture(HanteiKekkaCode.再審査, null, DeletableImages.全て),
             new Fixture(HanteiKekkaCode.未審査, null, DeletableImages.全て),
             // 前回の判定結果が「再調査」で、今回が未判定(null)であれば、やりなおす対象以外のイメージは削除不可
-            new Fixture(HanteiKekkaCode.再調査_意見書のみ, null, DeletableImages.意見書のみ),
-            new Fixture(HanteiKekkaCode.再調査_調査のみ, null, DeletableImages.調査票のみ),
+            new Fixture(HanteiKekkaCode.再調査_意見書のみ, null, DeletableImages.意見書関連のみ),
+            new Fixture(HanteiKekkaCode.再調査_調査のみ, null, DeletableImages.調査票関連のみ),
             new Fixture(HanteiKekkaCode.再調査_調査_意見書, null, DeletableImages.無し),
             // 前回に判定結果に関わらず、最新の割付情報に判定結果があれば、結果は「無し」
             new Fixture(HanteiKekkaCode.再審査, HanteiKekkaCode.認定, DeletableImages.無し),

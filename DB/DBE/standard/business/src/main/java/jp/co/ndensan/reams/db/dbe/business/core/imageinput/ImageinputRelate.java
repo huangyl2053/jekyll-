@@ -173,6 +173,13 @@ public class ImageinputRelate extends RelatedDataBase {
         return new ArrayList<>(entity.get主治医意見書情報());
     }
 
+    /**
+     * @return イメージの情報
+     */
+    public IkenshoImages get意見書イメージs() {
+        return new IkenshoImages(this.get申請書管理番号(), this.get主治医意見書作成依頼履歴番号(), entity.get意見書イメージ情報());
+    }
+
     @Override
     public FlexibleDate get認定申請日() {
         return entity.get認定申請年月日();

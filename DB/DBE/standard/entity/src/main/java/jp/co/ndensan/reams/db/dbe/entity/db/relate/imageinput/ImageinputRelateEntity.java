@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,6 +42,7 @@ public class ImageinputRelateEntity {
     private FlexibleDate 意見書作成依頼完了日;
     private Boolean 仮一次判定区分;
     private List<DbT5302ShujiiIkenshoJohoEntity> 主治医意見書情報;
+    private List<DbT5305IkenshoImageJohoEntity> 意見書イメージ情報;
     private boolean matches指定申請日;
 
 }

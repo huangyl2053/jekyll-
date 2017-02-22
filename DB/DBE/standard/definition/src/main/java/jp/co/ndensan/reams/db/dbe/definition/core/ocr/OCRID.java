@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.ocr;
 
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -73,6 +74,13 @@ public enum OCRID {
      */
     public RString value() {
         return this.theValue;
+    }
+
+    /**
+     * @return コードに変換した結果
+     */
+    public Code asCode() {
+        return new Code(this.theValue);
     }
 
     /**

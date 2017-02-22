@@ -53,6 +53,7 @@
           , T5105."ikenshoSakuseiIraiKanryoYMD" AS 意見書作成依頼完了日
           , T5116."kariIchijiHanteiKubun" AS 仮一次判定区分
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho"/>
+          , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5305IkenshoImageJohoMapper.allColumns_DbT5305IkenshoImageJoho" />
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
@@ -87,11 +88,13 @@
             ON T5101."shinseishoKanriNo" = T5115."shinseishoKanriNo"
           LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS T5116
             ON T5101."shinseishoKanriNo" = T5116."shinseishoKanriNo"
+          LEFT JOIN rgdb."DbT5305IkenshoImageJoho" AS "DbT5305IkenshoImageJoho"
+            ON "DbT5305IkenshoImageJoho"."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+            AND "DbT5305IkenshoImageJoho"."iraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
         WHERE
           T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
           AND T5101."hihokenshaNo" = #{被保険者番号}
         ORDER BY matches指定申請日 DESC, 論理削除フラグ, 認定申請年月日 DESC
-        LIMIT 1
     </select>
 
     <resultMap id="ResultMap_get意見書関連データ" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity" autoMapping="true">
@@ -116,6 +119,7 @@
         <result property="仮一次判定区分" column="仮一次判定区分"/>
         <result property="matches指定申請日" column="matches指定申請日"/>
         <collection property="主治医意見書情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
+        <collection property="意見書イメージ情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5305IkenshoImageJohoMapper.ResultMap_DbT5305IkenshoImageJohoEntity"/>
     </resultMap>
 
     <!-- その他資料に関連するデータを取得します。 -->

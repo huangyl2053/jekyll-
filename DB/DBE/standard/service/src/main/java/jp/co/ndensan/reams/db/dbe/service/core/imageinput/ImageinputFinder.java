@@ -66,9 +66,16 @@ public class ImageinputFinder {
         List<ImageinputRelateEntity> entityList = mapper.get意見書関連データ(paramter);
         for (ImageinputRelateEntity entity : entityList) {
             initMd5(entity.get主治医意見書情報());
+            initMd5(entity.get意見書イメージ情報());
             imageinputList.add(new ImageinputRelate(entity));
         }
         return imageinputList;
+    }
+
+    private static void initMd5(List<? extends DbTableEntityBase<?>> entities) {
+        for (DbTableEntityBase<?> entity : entities) {
+            entity.initializeMd5();
+        }
     }
 
     /**
@@ -84,11 +91,5 @@ public class ImageinputFinder {
             list.add(new ImageInputSontaRelate(entity));
         }
         return list;
-    }
-
-    private static void initMd5(List<? extends DbTableEntityBase<?>> entities) {
-        for (DbTableEntityBase<?> entity : entities) {
-            entity.initializeMd5();
-        }
     }
 }

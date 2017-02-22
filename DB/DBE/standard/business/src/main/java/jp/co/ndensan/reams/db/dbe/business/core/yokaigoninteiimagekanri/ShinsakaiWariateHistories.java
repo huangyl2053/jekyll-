@@ -99,11 +99,11 @@ public final class ShinsakaiWariateHistories implements java.io.Serializable {
         }
         switch (beforeHanteiKekka) {
             case 再調査_意見書のみ:
-                return DeletableImages.意見書のみ;
+                return DeletableImages.意見書関連のみ;
             case 再調査_調査のみ:
-                return DeletableImages.調査票のみ;
+                return DeletableImages.調査票関連のみ;
             case 再調査_調査_意見書:
-                return DeletableImages.無し;
+                return DeletableImages.その他資料のみ;
             default:
                 return DeletableImages.全て;
         }
