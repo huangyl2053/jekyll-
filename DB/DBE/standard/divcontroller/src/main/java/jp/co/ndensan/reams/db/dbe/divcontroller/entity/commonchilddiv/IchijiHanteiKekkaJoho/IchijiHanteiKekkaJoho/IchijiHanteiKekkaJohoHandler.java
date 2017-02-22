@@ -269,10 +269,10 @@ public class IchijiHanteiKekkaJohoHandler {
 
         set認知症自立度(shinseishoKanriNo);
 
-        if (hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().equals(new Decimal(-1))) {
+        if (hasNot主治医意見書(shinseishoKanriNo) || hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().equals(new Decimal(-1))) {
             div.getTxtGaizensei().clearValue();
         } else {
-            div.getTxtGaizensei().setValue(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性());
+            div.getTxtGaizensei().setValue(change小数第1位(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性()));
         }
         div.setHiddenGaizensei(new RString(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2).toString()));
 
@@ -313,6 +313,10 @@ public class IchijiHanteiKekkaJohoHandler {
 
     private Decimal change小数第1位(int 基準時間) {
         return new Decimal(DecimalFormatter.toRString(new Decimal(基準時間).divide(DOUBLE_10), 1).toString());
+    }
+    
+    private Decimal change小数第1位(Decimal 基準時間) {
+        return new Decimal(DecimalFormatter.toRString(基準時間.divide(DOUBLE_10), 1).toString());
     }
 
     private void set認知症自立度(ShinseishoKanriNo shinseishoKanriNo) {
