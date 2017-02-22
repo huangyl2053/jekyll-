@@ -530,7 +530,7 @@ public class NinteishinseibiHandler {
             row.setErrorJiyu(依頼未完了);
             div.getBtnErrorListOutput().setDisabled(false);
         } else if (認定調査情報.get認定調査依頼完了日() != null
-                && !認定調査情報.exist本判定一次判定データ()) {
+                && 認定調査情報.exist本判定一次判定データ()) {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(一次判定済み);
             div.getBtnErrorListOutput().setDisabled(false);
