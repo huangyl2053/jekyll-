@@ -104,7 +104,7 @@
         AND  "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoriJotaiKubun" != '2'
         ORDER BY
         "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosaItakusakiCode",
-        "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosainCode"
+        "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_ninteiChosainCode",
         "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo",
         "DbT5101NinteiShinseiJoho"."dbT5101NinteiShinseiJoho_hihokenshaKana"
     </select>
