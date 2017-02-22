@@ -738,10 +738,10 @@
         LEFT JOIN
         &quot;${csvTempTableNameZenkai}&quot; AS "CsvTempTableZenkai"
         ON
-        "CsvTempTable".申請書管理番号 = "CsvTempTableZenkai".前回申請書管理番号
+        "CsvTempTable".前回申請書管理番号 = "CsvTempTableZenkai".申請書管理番号
         LEFT JOIN
         rgdb."DbT5102NinteiKekkaJoho" AS "DbT5102"
-        ON "CsvTempTableZenkai".前回申請書管理番号 = "DbT5102"."shinseishoKanriNo"
+        ON "CsvTempTableZenkai".申請書管理番号 = "DbT5102"."shinseishoKanriNo"
     </select>
 
     <!--今回分のresultMap-->
