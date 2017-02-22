@@ -97,11 +97,11 @@ public class IkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<IkenshoSakuseiIraiDiv> onClick_btnUpdate(IkenshoSakuseiIraiDiv div) {
-        ValidationMessageControlPairs validPairs = createValidationHandler(div).check保存();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validPairs = createValidationHandler(div).check保存();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -110,7 +110,7 @@ public class IkenshoSakuseiIrai {
             if (createHandler(div).結果データ有無()) {
                 完了データ更新();
             }
-            onLoad(div);
+//            onLoad(div);
             RealInitialLocker.release(get排他キー());
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             div.getKanryoMessage().setSuccessMessage(
