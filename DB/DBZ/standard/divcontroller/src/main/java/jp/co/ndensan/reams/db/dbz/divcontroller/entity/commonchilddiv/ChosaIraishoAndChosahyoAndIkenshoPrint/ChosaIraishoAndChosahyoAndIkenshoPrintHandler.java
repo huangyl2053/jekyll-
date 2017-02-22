@@ -1721,6 +1721,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoTeishutsuIraishoItem> create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ() {
         List<ShujiiIkenshoTeishutsuIraishoItem> itemList = new ArrayList<>();
+
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ShujiiIkenshoTeishutsuIraishoItem item = new ShujiiIkenshoTeishutsuIraishoItem();
             RString hihokenshaNo = row.getHohokenshaBango().padRight(RString.HALF_SPACE, 数字_10);
@@ -1772,7 +1773,25 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
             Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
                     ReportIdDBZ.DBE236001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
-            item.setTsuchibun1(通知文.get(数字_1));
+            RString 意見書作成提出期限 = RString.EMPTY;
+            ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
+                    = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
+            List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
+                    .get意見書作成依頼書(parameter).records();
+            if (!businessList.isEmpty()) {
+                ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
+                意見書作成提出期限 = set意見書作成提出期限(business);
+            }
+            RString 変換後文字列;
+            if (!RString.isNullOrEmpty(意見書作成提出期限)) {
+                変換後文字列 = new RDate(意見書作成提出期限.toString()).wareki().eraType(EraType.KANJI).
+                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            } else {
+                変換後文字列 = new RString("　　　　　　　　");
+            }
+            ITextHenkanRule henkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId());
+            henkanRule.add(new RString("＠＠＠＠＠＠＠＠"), 変換後文字列);
+            item.setTsuchibun1(henkanRule.editText(通知文.get(数字_1)));
             item.setTsuchibun2(通知文.get(数字_2));
             item.setYubinNo1(getEditedYubinNo(row.getIryoKikanYubinNo()));
             item.setJushoText(row.getIryoukikanShozaichi());

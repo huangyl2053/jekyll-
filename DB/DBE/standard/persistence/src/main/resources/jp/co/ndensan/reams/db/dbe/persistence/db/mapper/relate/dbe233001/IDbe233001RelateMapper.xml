@@ -118,6 +118,7 @@
             AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
         </if>
         ORDER BY
+        DbT5101NinteiShinseiJoho."shichosonCode",
         DbT5101NinteiShinseiJoho."shujiiIryokikanCode",
         DbT5101NinteiShinseiJoho."shujiiCode",
         DbT5101NinteiShinseiJoho."hihokenshaNo"
@@ -216,6 +217,11 @@
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
         </where>
+        ORDER BY
+        DbT5101NinteiShinseiJoho."shichosonCode",
+        DbT5101NinteiShinseiJoho."shujiiIryokikanCode",
+        DbT5101NinteiShinseiJoho."shujiiCode",
+        DbT5101NinteiShinseiJoho."hihokenshaNo"
     </select>
 
     <select resultOrdered="true" id="select市町村コード"
