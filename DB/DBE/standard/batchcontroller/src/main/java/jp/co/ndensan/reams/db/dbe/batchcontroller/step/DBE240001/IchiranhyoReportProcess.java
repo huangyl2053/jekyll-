@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE240001;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -79,6 +80,7 @@ public class IchiranhyoReportProcess extends BatchKeyBreakBase<HomonChosaIraisho
                 is認定広域 = true;
             }
         }
+        businessList = new ArrayList<>();
     }
 
     @Override

@@ -434,10 +434,15 @@ public class ImageJohoMaskingHandler {
                 if (帳票ID.equals(new RString("701")) || 帳票ID.equals(new RString("702"))) {
                     帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("701") : new Code("702");
                 } else if (帳票ID.equals(new RString("121")) || 帳票ID.equals(new RString("122"))) {
-                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("1222");
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("122");
+                } else if (帳票ID.equals(new RString("777")) || 帳票ID.equals(new RString("778"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("777") : new Code("778");
+                } else if (帳票ID.equals(new RString("999"))) {
+                    帳票分類ID = new Code("999");
                 } else {
                     帳票分類ID = new Code(帳票ID);
                 }
+
                 IkenshoImageJoho imageJoho = new IkenshoImageJoho(
                         申請書管理番号,
                         主治医意見書作成依頼履歴番号,
