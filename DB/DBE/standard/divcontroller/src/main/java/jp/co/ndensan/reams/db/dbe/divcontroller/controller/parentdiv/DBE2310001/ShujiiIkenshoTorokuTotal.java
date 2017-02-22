@@ -599,6 +599,7 @@ public class ShujiiIkenshoTorokuTotal {
      * @return ResponseData
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnResearch(ShujiiIkenshoTorokuTotalDiv div) {
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
         return onClick_ButtonsToReturnTaishoshaKensaku(div, DBE2310001TransitionEventName.申請者検索に戻る);
     }
 

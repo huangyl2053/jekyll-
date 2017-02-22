@@ -893,6 +893,8 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initTennyuNashi() {
+        List<RString> list = new ArrayList<>();
+        div.getChkTennyu().setSelectedItemsByKey(list);
         RString menuID = ResponseHolder.getMenuID();
         if (MENUID_DBEMN41005.equals(menuID)
                 || MENUID_DBEMN42002.equals(menuID)

@@ -93,6 +93,17 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
+     * btnReSearch処理。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> btnReSearch(YokaigoninteiimagekanriDiv div) {
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * イメージ削除ボタンがクリックされた際の処理です。
      *
      * @param div 介護認定審査会委員情報

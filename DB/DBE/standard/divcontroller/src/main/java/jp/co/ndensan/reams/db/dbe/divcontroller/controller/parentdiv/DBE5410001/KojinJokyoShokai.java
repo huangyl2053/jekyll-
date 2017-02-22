@@ -267,6 +267,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnBackIryokikanToComplet(KojinJokyoShokaiDiv div) {
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.検索に戻る).respond();
     }
 

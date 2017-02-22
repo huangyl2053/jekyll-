@@ -676,6 +676,7 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnReSearch(NinnteiChousaKekkaTouroku1Div div) {
         前排他キーの解除();
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.検索に戻る).respond();
     }
 

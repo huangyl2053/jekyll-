@@ -92,6 +92,17 @@ public class KojinIraiNaiyouKoshin {
         return ResponseData.of(div).forwardWithEventName(DBE2410001TransitionEventName.検索へ戻る).respond();
     }
     
+     /**
+     * btn_ReSearch処理。
+     *
+     * @param div KojinIraiNaiyouKoshinDiv
+     * @return ResponseData<KojinIraiNaiyouKoshinDiv>
+     */
+    public ResponseData<KojinIraiNaiyouKoshinDiv> btn_ReSearch(KojinIraiNaiyouKoshinDiv div) {
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 調査の「依頼書等を印刷する」ボタン押下時
      * 

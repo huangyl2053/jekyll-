@@ -664,6 +664,7 @@ public class NinteiShinseiToroku {
 //        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
 //            return ResponseData.of(div).respond();
 //        }
+        ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
         RStringBuilder 前排他制御 = new RStringBuilder();
         前排他制御.append("DBEShinseishoKanriNo");
         前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).getColumnValue());

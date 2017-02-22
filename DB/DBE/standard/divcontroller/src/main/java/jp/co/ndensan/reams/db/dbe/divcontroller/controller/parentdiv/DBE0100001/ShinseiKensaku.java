@@ -313,7 +313,8 @@ public class ShinseiKensaku {
     public ResponseData<ShinseiKensakuDiv> onClick_btnModoru(ShinseiKensakuDiv div) {
         div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
         div.getBtnClear().setDisabled(false);
-            return ResponseData.of(div).setState(findStateAt条件指定(div));
+        div.getTxtMaxDisp().setDisabled(false);
+        return ResponseData.of(div).setState(findStateAt条件指定(div));
     }
 
     /**
