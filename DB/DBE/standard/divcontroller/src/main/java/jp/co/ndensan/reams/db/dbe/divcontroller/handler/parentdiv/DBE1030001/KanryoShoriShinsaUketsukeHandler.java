@@ -109,6 +109,8 @@ public class KanryoShoriShinsaUketsukeHandler {
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(value.get認定申請区分_申請時コード().getKey()).get名称());
             row.setShinseishoKanriNo(value.get申請書管理番号() == null ? RString.EMPTY : value.get申請書管理番号().value());
 //            personalData.add(createPersonalData(row.getShinseishoKanriNo()));
+            row.setJusho(value.get住所() == null ? RString.EMPTY : value.get住所().value());
+            row.setTelNo(value.get電話番号() == null ? RString.EMPTY : value.get電話番号().value());
             rows.add(row);
         }
 //        AccessLogger.log(AccessLogType.照会, personalData);

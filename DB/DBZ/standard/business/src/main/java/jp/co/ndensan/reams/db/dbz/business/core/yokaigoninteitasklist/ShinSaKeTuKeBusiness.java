@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKeTuKeRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -64,6 +66,24 @@ public class ShinSaKeTuKeBusiness {
      */
     public AtenaMeisho get被保険者氏名() {
         return entity.getHihokenshaName();
+    }
+
+    /**
+     * 住所を返します。
+     *
+     * @return 住所
+     */
+    public AtenaJusho get住所() {
+        return entity.getJusho();
+    }
+
+    /**
+     * 電話番号を返します。
+     *
+     * @return 電話番号
+     */
+    public TelNo get電話番号() {
+        return entity.getTelNo();
     }
 
     /**

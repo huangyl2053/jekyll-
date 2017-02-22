@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -27,6 +29,8 @@ public class ShinSaKeTuKeRelateEntity {
     private Code shinseijiKubunCode;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
+    private AtenaJusho jusho;
+    private TelNo telNo;
     private FlexibleDate ninteiShinseiYMD;
     private FlexibleDate koshinTsuchiHakkoYMD;
     private FlexibleDate koshinTsuchiHakkoKanryoYMD;

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 27 14:31:24 JST 2016 
+ * Wed Feb 22 11:12:37 JST 2017 
  */
 
 
@@ -20,12 +20,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
 
     private RString hokensha;
     private TextBoxDate ninteiShinseiDay;
     private RString hihoNumber;
     private RString hihoShimei;
+    private RString jusho;
+    private RString telNo;
     private RString shinseiKubunShinseiji;
     private RString shinseishoKanriNo;
 
@@ -35,28 +37,36 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.ninteiShinseiDay = new TextBoxDate();
         this.hihoNumber = RString.EMPTY;
         this.hihoShimei = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.telNo = RString.EMPTY;
         this.shinseiKubunShinseiji = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
         this.setOriginalData("hihoShimei", hihoShimei);
+        this.setOriginalData("jusho", jusho);
+        this.setOriginalData("telNo", telNo);
         this.setOriginalData("shinseiKubunShinseiji", shinseiKubunShinseiji);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgNinteiTaskList_Row(RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString shinseiKubunShinseiji, RString shinseishoKanriNo) {
+    public dgNinteiTaskList_Row(RString hokensha, TextBoxDate ninteiShinseiDay, RString hihoNumber, RString hihoShimei, RString jusho, RString telNo, RString shinseiKubunShinseiji, RString shinseishoKanriNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("ninteiShinseiDay", ninteiShinseiDay);
         this.setOriginalData("hihoNumber", hihoNumber);
         this.setOriginalData("hihoShimei", hihoShimei);
+        this.setOriginalData("jusho", jusho);
+        this.setOriginalData("telNo", telNo);
         this.setOriginalData("shinseiKubunShinseiji", shinseiKubunShinseiji);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.hokensha = hokensha;
         this.ninteiShinseiDay = ninteiShinseiDay;
         this.hihoNumber = hihoNumber;
         this.hihoShimei = hihoShimei;
+        this.jusho = jusho;
+        this.telNo = telNo;
         this.shinseiKubunShinseiji = shinseiKubunShinseiji;
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
@@ -75,6 +85,14 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public RString getHihoShimei() {
         return hihoShimei;
+    }
+
+    public RString getJusho() {
+        return jusho;
+    }
+
+    public RString getTelNo() {
+        return telNo;
     }
 
     public RString getShinseiKubunShinseiji() {
@@ -103,6 +121,16 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setHihoShimei(RString hihoShimei) {
         this.setOriginalData("hihoShimei", hihoShimei);
         this.hihoShimei = hihoShimei;
+    }
+
+    public void setJusho(RString jusho) {
+        this.setOriginalData("jusho", jusho);
+        this.jusho = jusho;
+    }
+
+    public void setTelNo(RString telNo) {
+        this.setOriginalData("telNo", telNo);
+        this.telNo = telNo;
     }
 
     public void setShinseiKubunShinseiji(RString shinseiKubunShinseiji) {

@@ -103,7 +103,7 @@ public class NinteiShinseiTorokuValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(
                 div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().getSelectedKey())
-                && (div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || div.getTxtTorisageJiyu().getValue().isEmpty())) {
+                && (!div.getDdlTorisageJiyu().getSelectedValue().isEmpty() || !div.getTxtTorisageJiyu().getValue().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.区分変更申請時取下日理由入力不可,
                     div.getSinseiTorisage()));
         }
@@ -127,12 +127,13 @@ public class NinteiShinseiTorokuValidationHandler {
     /**
      * 認定審査会割当完了チェック
      *
-     * @param 送付年月日 FlexibleDate
+     * @param result NinteiShinseiTorokuResult
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 認定審査会割当完了更新不可チェック(FlexibleDate 送付年月日) {
+    public ValidationMessageControlPairs 認定審査会割当完了更新不可チェック(NinteiShinseiTorokuResult result) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (送付年月日 != null && !送付年月日.isEmpty()) {
+        if ((result.get判定結果コード() != null && !result.get判定結果コード().isEmpty()) 
+                || (result.get介護認定審査会割当年月日() != null && !result.get介護認定審査会割当年月日().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.認定審査会割当完了更新不可));
         }
         return validationMessages;
@@ -163,8 +164,8 @@ public class NinteiShinseiTorokuValidationHandler {
         boolean isTorisageDateEmpty = div.getTxtTorisageDate().getValue() == null || div.getTxtTorisageDate().getValue().toDateString().isEmpty();
         boolean isTxtTorisageJiyuEmpty = div.getTxtTorisageJiyu().getValue() == null || div.getTxtTorisageJiyu().getValue().isEmpty();
         if (!div.getDdlTorisageJiyu().getSelectedValue().isEmpty() && (isTorisageDateEmpty || isTxtTorisageJiyuEmpty)) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須, 
-                    isTorisageDateEmpty ? div.getTxtTorisageDate() : div.getTxtTorisageJiyu()));
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.申請取下時は取下日理由必須,
+                    div.getSinseiTorisage()));
         }
         return validationMessages;
     }

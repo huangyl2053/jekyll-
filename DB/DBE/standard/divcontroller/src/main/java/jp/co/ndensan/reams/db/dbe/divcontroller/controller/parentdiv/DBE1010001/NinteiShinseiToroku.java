@@ -205,10 +205,14 @@ public class NinteiShinseiToroku {
 
         if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID)) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-            RStringBuilder 前排他制御 = new RStringBuilder();
-            前排他制御.append("DBEShinseishoKanriNo");
-            前排他制御.append(管理番号.getColumnValue());
-            前排他ロックキー(前排他制御.toRString());
+            try {
+                RStringBuilder 前排他制御 = new RStringBuilder();
+                前排他制御.append("DBEShinseishoKanriNo");
+                前排他制御.append(管理番号.getColumnValue());
+                前排他ロックキー(前排他制御.toRString());
+            } catch (PessimisticLockingException e) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, true);
+            }
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
 
             ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, manager.get要介護認定申請情報(管理番号));
@@ -224,10 +228,6 @@ public class NinteiShinseiToroku {
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
-                
-                ViewStateHolder.put(ViewStateKeys.処理日, result.getIF送付年月日());
-                ViewStateHolder.put(ViewStateKeys.認定申請年月日, result.get認定申請情報登録完了年月日());
-                ViewStateHolder.put(ViewStateKeys.報告年月, result.getセンター送信年月日());
             } 
             getHandler(div).loadPnl(result, ninteiTandokuDounyuFlag);
             ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
@@ -777,18 +777,18 @@ public class NinteiShinseiToroku {
     private ResponseData<NinteiShinseiTorokuDiv> doUpdate(IParentResponse<NinteiShinseiTorokuDiv> response, NinteiShinseiTorokuDiv div,
             ValidationMessageControlPairs validationMessages, NinteiShinseiBusinessCollection zenkaiJoho, ShinsakaiIinItiranData dataList,
             NinteiShinseiJoho shinseiJoho) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
-        FlexibleDate IF送付年月日 = ViewStateHolder.get(ViewStateKeys.処理日, FlexibleDate.class);
-        FlexibleDate センター送信年月日 = ViewStateHolder.get(ViewStateKeys.報告年月, FlexibleDate.class);
-        FlexibleDate 認定申請情報登録完了年月日 = ViewStateHolder.get(ViewStateKeys.認定申請年月日, FlexibleDate.class);
-        if (認定申請情報登録完了年月日 != null && !認定申請情報登録完了年月日.isEmpty()) {
+        NinteiShinseiTorokuResult result = manager.getDataForLoad(申請書管理番号);
+        
+        if (result.get認定申請情報登録完了年月日() != null && !result.get認定申請情報登録完了年月日().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.処理モード, Boolean.FALSE);
         } else {
             ViewStateHolder.put(ViewStateKeys.処理モード, Boolean.TRUE);
         }
-
-        validationMessages.add(getValidationHandler(div).センタ送信データ出力完了更新不可チェック(センター送信年月日));
-        validationMessages.add(getValidationHandler(div).認定審査会割当完了更新不可チェック(IF送付年月日));
+        
+        validationMessages.add(getValidationHandler(div).センタ送信データ出力完了更新不可チェック(result.getIF送付年月日()));
+        validationMessages.add(getValidationHandler(div).認定審査会割当完了更新不可チェック(result));
 
         Boolean 変更有無フラグ1 = Boolean.FALSE;
         NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
@@ -845,7 +845,6 @@ public class NinteiShinseiToroku {
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
             }
             save介護連絡先情報(zenkaiJoho.getDbdBusiness());
-            ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             del審査会委員除外情報(申請書管理番号, dataList);
             add審査会委員除外情報(申請書管理番号, dataList);
             if (shinseitodokedeJoho != null) {
@@ -940,6 +939,12 @@ public class NinteiShinseiToroku {
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.完了).parameter(完了param);
     }
     
+    public ResponseData<NinteiShinseiTorokuDiv> onClick_btnBackToKojin(NinteiShinseiTorokuDiv div) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号.value());
+        return ResponseData.of(div).respond();
+    }
+
     private NinteiShinseiTorokuHandler getHandler(NinteiShinseiTorokuDiv div) {
         return new NinteiShinseiTorokuHandler(div);
     }
