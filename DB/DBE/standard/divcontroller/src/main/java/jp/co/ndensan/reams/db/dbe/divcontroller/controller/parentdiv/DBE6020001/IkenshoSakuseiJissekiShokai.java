@@ -108,7 +108,7 @@ public class IkenshoSakuseiJissekiShokai {
     public ResponseData<IkenshoSakuseiJissekiShokaiDiv> onChange_State(IkenshoSakuseiJissekiShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 出力方法を変更した時のイベントです。
      *
@@ -124,7 +124,6 @@ public class IkenshoSakuseiJissekiShokai {
         }
         return ResponseData.of(div).respond();
     }
-
 
     /**
      * 「条件に戻る」ボタンを押します。
@@ -193,28 +192,6 @@ public class IkenshoSakuseiJissekiShokai {
         if (div.getRadShutsuryokuHoho().getSelectedKey().equals(CSVファイル)) {
             paramter = getHandler(div).createBatchParam(CSVを出力する, STATE);
         }
-        return ResponseData.of(paramter).respond();
-    }
-
-    /**
-     * 「CSV作成を実行する」ボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
-     */
-    public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnShutsutyoku(IkenshoSakuseiJissekiShokaiDiv div) {
-        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(CSVを出力する, STATE);
-        return ResponseData.of(paramter).respond();
-    }
-
-    /**
-     * 「一覧表作成を実行する」ボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<IkenshoJissekiIchiranBatchParameter>
-     */
-    public ResponseData<DBE601001_IkenshoSakuseiJIssekiParameter> onClick_BtnPulish(IkenshoSakuseiJissekiShokaiDiv div) {
-        DBE601001_IkenshoSakuseiJIssekiParameter paramter = getHandler(div).createBatchParam(集計表を発行する, STATE);
         return ResponseData.of(paramter).respond();
     }
 

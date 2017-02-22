@@ -119,7 +119,7 @@ public class NinteiChosaJissekiShokai {
     public ResponseData<NinteiChosaJissekiShokaiDiv> onChange_State(NinteiChosaJissekiShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 出力方法を変更した時のイベントです。
      *
@@ -191,28 +191,6 @@ public class NinteiChosaJissekiShokai {
         if (div.getRadShutsuryokuHoho().getSelectedKey().equals(CSVファイル)) {
             param = getHandler(div).createBatchParam(CSVを出力する, STATE);
         }
-        return ResponseData.of(param).respond();
-    }
-
-    /**
-     * 「CSV作成を実行する」ボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
-     */
-    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnShutsutyoku(NinteiChosaJissekiShokaiDiv div) {
-        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(CSVを出力する, STATE);
-        return ResponseData.of(param).respond();
-    }
-
-    /**
-     * 「一覧表作成を実行する」ボタンを押します。
-     *
-     * @param div 画面情報
-     * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
-     */
-    public ResponseData<DBE601002_NinteichosaJissekiParameter> onClick_BtnPulish(NinteiChosaJissekiShokaiDiv div) {
-        DBE601002_NinteichosaJissekiParameter param = getHandler(div).createBatchParam(集計表を発行する, STATE);
         return ResponseData.of(param).respond();
     }
 
