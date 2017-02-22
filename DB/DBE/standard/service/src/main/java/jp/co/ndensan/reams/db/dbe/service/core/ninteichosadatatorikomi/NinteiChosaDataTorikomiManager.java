@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo;
+package jp.co.ndensan.reams.db.dbe.service.core.ninteichosadatatorikomi;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBE-1870-010 houtianpeng
  */
-public class NiTeiCyoSaiChiRanManager {
+public class NinteiChosaDataTorikomiManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5202NinteichosahyoGaikyoChosaDac dbT5202Dac;
@@ -67,7 +67,7 @@ public class NiTeiCyoSaiChiRanManager {
     /**
      * コンストラクタです。
      */
-    public NiTeiCyoSaiChiRanManager() {
+    public NinteiChosaDataTorikomiManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         dbT5202Dac = InstanceProvider.create(DbT5202NinteichosahyoGaikyoChosaDac.class);
         dbT5206Dac = InstanceProvider.create(DbT5206GaikyoTokkiDac.class);
@@ -81,12 +81,12 @@ public class NiTeiCyoSaiChiRanManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link NiTeiCyoSaiChiRanManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link NinteiChosaDataTorikomiManager}のインスタンスを返します。
      *
      * @return JigyoshaInputGuideFinder
      */
-    public static NiTeiCyoSaiChiRanManager createInstance() {
-        return InstanceProvider.create(NiTeiCyoSaiChiRanManager.class);
+    public static NinteiChosaDataTorikomiManager createInstance() {
+        return InstanceProvider.create(NinteiChosaDataTorikomiManager.class);
     }
 
     /**
@@ -94,7 +94,7 @@ public class NiTeiCyoSaiChiRanManager {
      *
      * @param mapperProvider mapper取得
      */
-    NiTeiCyoSaiChiRanManager(
+    NinteiChosaDataTorikomiManager(
             MapperProvider mapperProvider,
             DbT5202NinteichosahyoGaikyoChosaDac dbT5202Dac,
             DbT5206GaikyoTokkiDac dbT5206Dac,
@@ -149,7 +149,6 @@ public class NiTeiCyoSaiChiRanManager {
      * @param 特記情報 NinteichosahyoTokkijiko
      * @param 概況特記 NinteichosahyoGaikyoChosa
      * @param 基本調査 NinteichosahyoKihonChosa
-     * @param 要介護認定調査履歴番号 int
      * @param 調査項目 NinteichosahyoChosaItem
      * @param サービスの状況 NinteichosahyoServiceJokyo
      * @param サービスの状況フラグ NinteichosahyoServiceJokyoFlag

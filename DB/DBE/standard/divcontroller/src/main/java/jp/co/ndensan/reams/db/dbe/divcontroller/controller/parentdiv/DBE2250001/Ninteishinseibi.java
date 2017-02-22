@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.NinteishinseibiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNinteiChosaData_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2250001.NinteishinseibiHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosadatatorikomi.NinteiChosaDataTorikomiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokki;
@@ -30,16 +32,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -50,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -70,6 +70,8 @@ public class Ninteishinseibi {
     private static final RString 特記情報データCSV名 = new RString("出力_特記情報データ.csv");
     private static final RString 状態_変更 = new RString("変更");
     private static final RString 状態_警告 = new RString("警告");
+    private static final RString 必須調査票_パターン2 = new RString("2");
+    private static final RString 必須調査票_パターン3 = new RString("3");
     private static final RString WORKFOLDERNAME = new RString("ninteishosaDataTorikomiWork");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
@@ -116,18 +118,18 @@ public class Ninteishinseibi {
                         + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
             }
         }
-        if (filePath_基本調査データ.isEmpty() || filePath_概況特記データ.isEmpty() || filePath_特記情報データ.isEmpty()) {
-            Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
-            throw new ApplicationException("以下の３ファイルを同時に取込んでください。<br>"
-                    + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
-        }
+
+        RString 認定調査結果入手_必須調査票
+                = DbBusinessConfig.get(ConfigNameDBE.認定調査結果入手_必須調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        check必要なCSV取込(filePath_基本調査データ, filePath_概況特記データ, filePath_特記情報データ, 認定調査結果入手_必須調査票);
 
         List<ChosaKekkaNyuryokuCsvEntity> 基本調査データCsvEntityList = get基本調査データ(filePath_基本調査データ);
         if (基本調査データCsvEntityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("基本調査データ"));
         }
 
-        getHandler(div).set認定調査一覧データグリッド(基本調査データCsvEntityList, filePath_概況特記データ, filePath_特記情報データ);
+        getHandler(div).set認定調査一覧データグリッド(基本調査データCsvEntityList,
+                filePath_概況特記データ, filePath_特記情報データ, 認定調査結果入手_必須調査票);
         Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
         return ResponseData.of(div).respond();
     }
@@ -176,7 +178,7 @@ public class Ninteishinseibi {
                 if (状態_変更.equals(row.getJyotai()) || 状態_警告.equals(row.getJyotai())) {
                     申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                     認定調査依頼履歴番号 = row.getNinteichosaIraiRirekiNo().getValue().intValue();
-                    NiTeiCyoSaiChiRanManager.createInstance().save認定調査データ(
+                    NinteiChosaDataTorikomiManager.createInstance().save認定調査データ(
                             申請書管理番号,
                             認定調査依頼履歴番号,
                             row.getGaikyoTokkiTextImageKubun(),
@@ -219,12 +221,7 @@ public class Ninteishinseibi {
         builder.set概況調査テキストイメージ区分(TokkijikoTextImageKubun.valueOf(row.
                 getGaikyoTokkiTextImageKubun().toString()).getコード());
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
-        if (!RString.isNullOrEmpty(row.getNinteichousaIraiKubunCode())) {
-            builder.set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.
-                    valueOf(row.getNinteichousaIraiKubunCode().toString()).getコード()));
-        } else {
-            builder.set認定調査依頼区分コード(Code.EMPTY);
-        }
+        builder.set認定調査依頼区分コード(new Code(row.getNinteichousaIraiKubunCode()));
         if (!RString.isNullOrEmpty(row.getNinteichosaIraiKaisu())) {
             builder.set認定調査回数(Integer.valueOf(row.getNinteichosaIraiKaisu().toString()));
         } else {
@@ -249,12 +246,7 @@ public class Ninteishinseibi {
             builder.set認定調査実施場所コード(Code.EMPTY);
         }
         builder.set認定調査実施場所名称(row.getChosaJisshiBashoMeisho());
-        if (!RString.isNullOrEmpty(row.getServiceKubunCode())) {
-            builder.set認定調査_サービス区分コード(new Code(ServiceKubunCode.
-                    valueOf(row.getServiceKubunCode().toString()).getコード()));
-        } else {
-            builder.set認定調査_サービス区分コード(Code.EMPTY);
-        }
+        builder.set認定調査_サービス区分コード(new Code(row.getServiceKubunCode()));
         builder.set利用施設名(row.getRiyoShisetsuShimei());
         if (!RString.isNullOrEmpty(row.getRiyoShisetsuJusho())) {
             builder.set利用施設住所(new AtenaJusho(row.getRiyoShisetsuJusho()));
@@ -285,18 +277,8 @@ public class Ninteishinseibi {
         builder.set要介護認定調査履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set要介護認定調査履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
-        if (RString.isNullOrEmpty(row.getNinchishoNichijoSeikatsuJiritsudoCode())) {
-            builder.set認定調査_認知症高齢者の日常生活自立度コード(Code.EMPTY);
-        } else {
-            builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(NinchishoNichijoSeikatsuJiritsudoCode.
-                    valueOf(row.getNinchishoNichijoSeikatsuJiritsudoCode().toString()).getコード()));
-        }
-        if (RString.isNullOrEmpty(row.getShogaiNichijoSeikatsuJiritsudoCode())) {
-            builder.set認定調査_障害高齢者の日常生活自立度コード(Code.EMPTY);
-        } else {
-            builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(ShogaiNichijoSeikatsuJiritsudoCode.
-                    valueOf(row.getShogaiNichijoSeikatsuJiritsudoCode().toString()).getコード()));
-        }
+        builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(row.getNinchishoNichijoSeikatsuJiritsudoCode()));
+        builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(row.getShogaiNichijoSeikatsuJiritsudoCode()));
         return builder.build();
     }
 
@@ -468,6 +450,28 @@ public class Ninteishinseibi {
         }
         csvReader.close();
         return csvEntityList;
+    }
+
+    private void check必要なCSV取込(RString filePath_基本調査データ, RString filePath_概況特記データ,
+            RString filePath_特記情報データ, RString 認定調査結果入手_必須調査票) {
+        if (必須調査票_パターン2.equals(認定調査結果入手_必須調査票)) {
+            if (filePath_基本調査データ.isEmpty() || filePath_特記情報データ.isEmpty()) {
+                Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
+                throw new ApplicationException("以下の２ファイルを同時に取込んでください。<br>"
+                        + 概況調査_基本調査データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
+            }
+        } else if (必須調査票_パターン3.equals(認定調査結果入手_必須調査票)) {
+            if (filePath_基本調査データ.isEmpty() || filePath_概況特記データ.isEmpty() || filePath_特記情報データ.isEmpty()) {
+                Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
+                throw new ApplicationException("以下の３ファイルを同時に取込んでください。<br>"
+                        + 概況調査_基本調査データCSV名.toString() + "<br>" + 概況特記データCSV名.toString() + "<br>" + 特記情報データCSV名.toString());
+            }
+        } else {
+            if (filePath_基本調査データ.isEmpty()) {
+                Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
+                throw new ApplicationException(概況調査_基本調査データCSV名.toString() + "を取込んでください。");
+            }
+        }
     }
 
     private NinteishinseibiHandler getHandler(NinteishinseibiDiv div) {

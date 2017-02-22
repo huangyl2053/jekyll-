@@ -32,7 +32,7 @@ public class ShujiiikenshoProperty extends ReportPropertyBase<ShujiiikenshoRepor
     public Breakers<ShujiiikenshoReportSource> defineBreakers(
             Breakers<ShujiiikenshoReportSource> breakers,
             BreakerCatalog<ShujiiikenshoReportSource> catalog) {
-        return breakers.add(catalog.new SimplePageBreaker(
+        return breakers.add(catalog.new SimpleLayoutBreaker(
             ShujiiikenshoReportSource.LAYOUTBREAKITEM) {
             @Override
             public ReportLineRecord<ShujiiikenshoReportSource> occuredBreak(

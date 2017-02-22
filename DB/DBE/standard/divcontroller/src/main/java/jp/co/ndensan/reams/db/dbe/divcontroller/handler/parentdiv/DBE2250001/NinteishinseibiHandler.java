@@ -15,27 +15,19 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.Chos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.ChosaKekkaNyuryokuTokkiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.NinteishinseibiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.dgNinteiChosaData_Row;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakainenkansukejuruhyo.NiTeiCyoSaiChiRanManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosadatatorikomi.NinteiChosaDataTorikomiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -86,28 +78,31 @@ public class NinteishinseibiHandler {
      * @param 基本調査データCsvEntityList ChosaKekkaNyuryokuCsvEntityのリスト
      * @param filePath_概況特記データ 概況特記データのファイルパス
      * @param filePath_特記情報データ 特記情報データのファイルパス
+     * @param 認定調査結果入手_必須調査票 認定調査結果入手_必須調査票
      */
     public void set認定調査一覧データグリッド(List<ChosaKekkaNyuryokuCsvEntity> 基本調査データCsvEntityList,
-            RString filePath_概況特記データ, RString filePath_特記情報データ) {
+            RString filePath_概況特記データ, RString filePath_特記情報データ, RString 認定調査結果入手_必須調査票) {
         DbAccessLogger accessLogger = new DbAccessLogger();
         accessLogger.flushBy(AccessLogType.照会);
-        RString 認定調査結果入手_必須調査票
-                = DbBusinessConfig.get(ConfigNameDBE.認定調査結果入手_必須調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         Map<ShinseishoKanriNo, List<NinteichosahyoTokkijiko>> 特記事項Map = new HashMap<>();
         Map<ShinseishoKanriNo, GaikyoTokki> 概況特記事項Map = new HashMap<>();
         List<NinteichosahyoTokkijiko> 特記事項List;
         GaikyoTokki 概況特記事項;
         NinteiChosaDataTorikomiRelate 認定調査情報;
         ShinseishoKanriNo 申請書管理番号;
-        NiTeiCyoSaiChiRanManager manager = NiTeiCyoSaiChiRanManager.createInstance();
+        int 認定調査依頼履歴番号;
+        NinteiChosaDataTorikomiManager manager = NinteiChosaDataTorikomiManager.createInstance();
         List<dgNinteiChosaData_Row> dataSource = new ArrayList<>();
         for (ChosaKekkaNyuryokuCsvEntity 基本調査データCsvEntity : 基本調査データCsvEntityList) {
-            特記事項List = get特記事項List(filePath_特記情報データ, 基本調査データCsvEntity);
-            概況特記事項 = get概況特記情報(filePath_概況特記データ, 基本調査データCsvEntity);
             認定調査情報 = manager.get認定調査情報(基本調査データCsvEntity.get証記載保険者番号(),
                     基本調査データCsvEntity.get被保険者番号(), 基本調査データCsvEntity.get認定申請年月日());
             申請書管理番号 = get申請書管理番号(基本調査データCsvEntity, 認定調査情報);
-            dataSource.add(editRow(申請書管理番号, 基本調査データCsvEntity, 特記事項List, 概況特記事項, 認定調査情報, 認定調査結果入手_必須調査票));
+            認定調査依頼履歴番号 = get認定調査依頼履歴番号(基本調査データCsvEntity, 認定調査情報);
+
+            特記事項List = get特記事項List(filePath_特記情報データ, 基本調査データCsvEntity, 申請書管理番号, 認定調査依頼履歴番号);
+            概況特記事項 = get概況特記情報(filePath_概況特記データ, 基本調査データCsvEntity, 申請書管理番号, 認定調査依頼履歴番号);
+            dataSource.add(editRow(申請書管理番号, 認定調査依頼履歴番号, 基本調査データCsvEntity,
+                    特記事項List, 概況特記事項, 認定調査情報, 認定調査結果入手_必須調査票));
             if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
                 特記事項Map.put(申請書管理番号, 特記事項List);
                 概況特記事項Map.put(申請書管理番号, 概況特記事項);
@@ -136,6 +131,7 @@ public class NinteishinseibiHandler {
     }
 
     private dgNinteiChosaData_Row editRow(ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
             ChosaKekkaNyuryokuCsvEntity entity,
             List<NinteichosahyoTokkijiko> 特記事項List,
             GaikyoTokki 概況特記事項,
@@ -144,47 +140,43 @@ public class NinteishinseibiHandler {
         dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
         row.setHokenja(entity.get保険者名());
         row.getNinteiShinseiYMD().setValue(convertFlexibleDate(entity.get認定申請年月日()));
-        row.getHihokenshaNo().setValue(entity.get証記載保険者番号());
+        row.getHihokenshaNo().setValue(entity.get被保険者番号());
         row.setHihokenshaName(entity.get被保険者氏名());
         row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.to名称OrDefault(entity.get認定申請区分申請時コード(), RString.EMPTY));
         row.getNinteichosaIraiKanryoYMD().setValue(convertFlexibleDate(entity.get認定調査依頼完了年月日()));
         row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+        row.setNinteiChosaItakusakimei(entity.get調査委託先());
         row.setNinteiChosainCode(entity.get認定調査員コード());
+        row.setNinteiChosainName(entity.get調査員氏名());
         row.getNinteichosaJisshiYMD().setValue(convertFlexibleDate(entity.get認定調査実施年月日()));
         row.setShinseishoKanriNo(申請書管理番号.value());
-        row.getNinteichosaIraiRirekiNo().setValue(new Decimal(get認定調査依頼履歴番号(entity, 認定調査情報)));
+        row.getNinteichosaIraiRirekiNo().setValue(new Decimal(認定調査依頼履歴番号));
         row.setKoroshoIfShikibetsuCode(entity.get厚労省IF識別コード());
-        if (RString.isNullOrEmpty(entity.get認定調査_認知症高齢者の日常生活自立度コード())) {
-            row.setNinchishoNichijoSeikatsuJiritsudoCode(RString.EMPTY);
-        } else {
-            row.setNinchishoNichijoSeikatsuJiritsudoCode(
-                    NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査_認知症高齢者の日常生活自立度コード()).get名称());
-        }
-        if (RString.isNullOrEmpty(entity.get認定調査_障害高齢者の日常生活自立度コード())) {
-            row.setShogaiNichijoSeikatsuJiritsudoCode(RString.EMPTY);
-        } else {
-            row.setShogaiNichijoSeikatsuJiritsudoCode(
-                    ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査_障害高齢者の日常生活自立度コード()).get名称());
-        }
+        row.setNinchishoNichijoSeikatsuJiritsudoCode(
+                (!RString.isNullOrEmpty(entity.get認定調査_認知症高齢者の日常生活自立度コード()))
+                ? entity.get認定調査_認知症高齢者の日常生活自立度コード()
+                : RString.EMPTY);
+        row.setShogaiNichijoSeikatsuJiritsudoCode(
+                (!RString.isNullOrEmpty(entity.get認定調査_障害高齢者の日常生活自立度コード()))
+                ? entity.get認定調査_障害高齢者の日常生活自立度コード()
+                : RString.EMPTY);
         row.setGaikyoTokkiTextImageKubun(entity.get概況特記テキスト_イメージ区分コード());
         row.setJutakuKaishu(entity.get住宅改修改修箇所());
         row.setTokubetsuKyufuService(entity.get市町村特別給付サービス種類名());
         row.setZaitakuService(entity.get介護保険給付以外の在宅サービス種類名());
-        if (RString.isNullOrEmpty(entity.get認定調査依頼区分コード())) {
-            row.setNinteichousaIraiKubunCode(RString.EMPTY);
-        } else {
-            row.setNinteichousaIraiKubunCode(NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
-        }
+        row.setNinteichousaIraiKubunCode(
+                (!RString.isNullOrEmpty(entity.get認定調査依頼区分コード()))
+                ? entity.get認定調査依頼区分コード()
+                : RString.EMPTY);
         row.setNinteichosaIraiKaisu(entity.get認定調査回数());
         row.getNinteichosaJuryoYMD().setValue(convertFlexibleDate(entity.get認定調査受領年月日()));
         row.setNinteiChosaKubunCode(entity.get認定調査区分コード());
         row.setChosaJisshiBashoCode(entity.get認定調査実施場所コード());
         row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所());
-        if (RString.isNullOrEmpty(entity.get認定調査_サービス区分コード())) {
-            row.setServiceKubunCode(RString.EMPTY);
-        } else {
-            row.setServiceKubunCode(ServiceKubunCode.toValue(entity.get認定調査_サービス区分コード()).get名称());
-        }
+        row.setServiceKubunCode(
+                (!RString.isNullOrEmpty(entity.get認定調査_サービス区分コード()))
+                ? entity.get認定調査_サービス区分コード()
+                : RString.EMPTY);
         row.setRiyoShisetsuShimei(entity.get利用施設名());
         row.setRiyoShisetsuJusho(entity.get利用施設住所());
         row.setRiyoShisetsuTelNo(entity.get利用施設電話番号());
@@ -510,22 +502,52 @@ public class NinteishinseibiHandler {
         return valueList;
     }
 
-    private FlexibleDate convertFlexibleDate(RString 年月日) {
-        return (FlexibleDate.canConvert(年月日)) ? new FlexibleDate(年月日) : FlexibleDate.EMPTY;
+    private void set状態(dgNinteiChosaData_Row row, ChosaKekkaNyuryokuCsvEntity entity, List<NinteichosahyoTokkijiko> 特記事項List,
+            GaikyoTokki 概況特記事項, RString 認定調査結果入手_必須調査票, NinteiChosaDataTorikomiRelate 認定調査情報) {
+        if ((entity.get申請書管理番号().isEmpty() || entity.get認定調査依頼履歴番号().isEmpty())
+                && 認定調査情報 == null) {
+            row.setJyotai(状態_NG);
+            row.setErrorJiyu(申請未登録);
+        } else if (認定調査情報 == null
+                || !認定調査情報.exist認定調査依頼情報()
+                || 認定調査情報.exist論理削除フラグ()) {
+            row.setJyotai(状態_NG);
+            row.setErrorJiyu(依頼未登録);
+        } else if (認定調査情報.get認定調査依頼完了日() == null) {
+            row.setJyotai(状態_NG);
+            row.setErrorJiyu(依頼未完了);
+        } else if (認定調査情報.get認定調査依頼完了日() != null
+                && !認定調査情報.exist本判定一次判定データ()) {
+            row.setJyotai(状態_NG);
+            row.setErrorJiyu(一次判定済み);
+        } else if ((必須調査票_パターン2.equals(認定調査結果入手_必須調査票)
+                || 必須調査票_パターン3.equals(認定調査結果入手_必須調査票))
+                && 特記事項List.isEmpty()) {
+            row.setJyotai(状態_警告);
+            row.setErrorJiyu(特記事項未入力);
+        } else if (必須調査票_パターン3.equals(認定調査結果入手_必須調査票)
+                && 概況特記事項 == null) {
+            row.setJyotai(状態_警告);
+            row.setErrorJiyu(概況特記未入力);
+        } else {
+            row.setJyotai(状態_変更);
+            row.setErrorJiyu(RString.EMPTY);
+        }
     }
 
-    private List<NinteichosahyoTokkijiko> get特記事項List(RString ファイルパス_特記情報データ, ChosaKekkaNyuryokuCsvEntity entity) {
+    private List<NinteichosahyoTokkijiko> get特記事項List(RString ファイルパス_特記情報データ,
+            ChosaKekkaNyuryokuCsvEntity entity, ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
         List<ChosaKekkaNyuryokuTokkiCsvEntity> csvEntityList_特記情報データ = データ取込_特記情報データ(ファイルパス_特記情報データ);
         List<NinteichosahyoTokkijiko> 特記事項List = new ArrayList<>();
         for (ChosaKekkaNyuryokuTokkiCsvEntity 特記情報データ : csvEntityList_特記情報データ) {
             if (!特記情報データ.get認定調査特記事項番号().isEmpty()
-                    && entity.get申請書管理番号().equals(特記情報データ.get申請書管理番号())) {
+                    && 申請書管理番号.value().equals(特記情報データ.get申請書管理番号())) {
                 int 認定調査特記事項連番 = (NumberUtils.isNumber(特記情報データ.get認定調査特記事項連番().toString()))
                         ? Integer.valueOf(特記情報データ.get認定調査特記事項連番().toString())
                         : 0;
                 特記事項List.add(new NinteichosahyoTokkijiko(
-                        new ShinseishoKanriNo(entity.get申請書管理番号()),
-                        Integer.valueOf(entity.get認定調査依頼履歴番号().toString()),
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
                         特記情報データ.get認定調査特記事項番号(),
                         認定調査特記事項連番,
                         entity.get概況特記テキスト_イメージ区分コード(),
@@ -562,13 +584,14 @@ public class NinteishinseibiHandler {
         return csvEntityList;
     }
 
-    private GaikyoTokki get概況特記情報(RString ファイルパス_概況特記データ, ChosaKekkaNyuryokuCsvEntity entity) {
+    private GaikyoTokki get概況特記情報(RString ファイルパス_概況特記データ,
+            ChosaKekkaNyuryokuCsvEntity entity, ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
         List<ChosaKekkaNyuryokuGaikyoTokkiCsvEntity> csvEntityList_概況特記データ = データ取込_概況特記データ(ファイルパス_概況特記データ);
         GaikyoTokki 概況特記事項 = null;
         for (ChosaKekkaNyuryokuGaikyoTokkiCsvEntity 概況特記データ : csvEntityList_概況特記データ) {
-            概況特記事項 = new GaikyoTokki(new ShinseishoKanriNo(
-                    entity.get申請書管理番号()),
-                    Integer.valueOf(entity.get認定調査依頼履歴番号().toString()),
+            概況特記事項 = new GaikyoTokki(
+                    申請書管理番号,
+                    認定調査依頼履歴番号,
                     entity.get概況特記テキスト_イメージ区分コード(),
                     new Code(GenponMaskKubun.原本.getコード()))
                     .createBuilderForEdit()
@@ -628,36 +651,7 @@ public class NinteishinseibiHandler {
         }
     }
 
-    private void set状態(dgNinteiChosaData_Row row, ChosaKekkaNyuryokuCsvEntity entity, List<NinteichosahyoTokkijiko> 特記事項List,
-            GaikyoTokki 概況特記事項, RString 認定調査結果入手_必須調査票, NinteiChosaDataTorikomiRelate 認定調査情報) {
-        if ((entity.get申請書管理番号().isEmpty() || entity.get認定調査依頼履歴番号().isEmpty())
-                && 認定調査情報 == null) {
-            row.setJyotai(状態_NG);
-            row.setErrorJiyu(申請未登録);
-        } else if (認定調査情報 == null
-                || !認定調査情報.exist認定調査依頼情報()
-                || 認定調査情報.exist論理削除フラグ()) {
-            row.setJyotai(状態_NG);
-            row.setErrorJiyu(依頼未登録);
-        } else if (認定調査情報.get認定調査依頼完了日() == null) {
-            row.setJyotai(状態_NG);
-            row.setErrorJiyu(依頼未完了);
-        } else if (認定調査情報.get認定調査依頼完了日() != null
-                && !認定調査情報.exist本判定一次判定データ()) {
-            row.setJyotai(状態_NG);
-            row.setErrorJiyu(一次判定済み);
-        } else if ((必須調査票_パターン2.equals(認定調査結果入手_必須調査票)
-                || 必須調査票_パターン3.equals(認定調査結果入手_必須調査票))
-                && 特記事項List.isEmpty()) {
-            row.setJyotai(状態_警告);
-            row.setErrorJiyu(特記事項未入力);
-        } else if (必須調査票_パターン3.equals(認定調査結果入手_必須調査票)
-                && 概況特記事項 == null) {
-            row.setJyotai(状態_警告);
-            row.setErrorJiyu(概況特記未入力);
-        } else {
-            row.setJyotai(状態_変更);
-            row.setErrorJiyu(RString.EMPTY);
-        }
+    private FlexibleDate convertFlexibleDate(RString 年月日) {
+        return (FlexibleDate.canConvert(年月日)) ? new FlexibleDate(年月日) : FlexibleDate.EMPTY;
     }
 }
