@@ -62,7 +62,7 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、調査票(概況+調査票特記)のイメージファイル存在チェックを実行します。
+     * 「削除」ボタンを押下する場合、調査票(概況+調査票特記)のイメージファイル存在チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
@@ -73,7 +73,7 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、調査票概況イメージファイル存在チェックを実行します。
+     * 「削除」ボタンを押下する場合、調査票概況イメージファイル存在チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
@@ -84,7 +84,7 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、主治医意見書イメージファイル存在チェックを実行します。
+     * 「削除」ボタンを押下する場合、主治医意見書イメージファイル存在チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
@@ -95,7 +95,7 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、その他資料イメージファイル存在チェックを実行します。
+     * 「削除」ボタンを押下する場合、その他資料イメージファイル存在チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
@@ -106,7 +106,7 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、マスクイメージファイル存在チェックを実行します。
+     * 「削除」ボタンを押下する場合、マスクイメージファイル存在チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
@@ -117,7 +117,7 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、調査票認定調査委託料支払年月日チェックを実行します。
+     * 「削除」ボタンを押下する場合、調査票認定調査委託料支払年月日チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
@@ -128,13 +128,31 @@ public class DeletePanelValidationHandler {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、主治医意見書報酬支払年月日チェックを実行します。
+     * 「削除」ボタンを押下する場合、主治医意見書報酬支払年月日チェックを実行しません。メッセージだけ返します。
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 主治医意見書報酬支払年月日チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(new ValidationMessageControlPair(RRVMessages.主治医意見書削除不可));
+        return validationMessages;
+    }
+
+    /**
+     * @return 調査票が削除できない場合のメッセージ
+     */
+    public ValidationMessageControlPairs message調査票削除不可() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.再意見書時_調査票削除不可, div.getChkImage()));
+        return validationMessages;
+    }
+
+    /**
+     * @return 意見書が削除できない場合のメッセージ
+     */
+    public ValidationMessageControlPairs message意見書削除不可() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.再調査票時_意見書削除不可, div.getChkImage()));
         return validationMessages;
     }
 
@@ -148,7 +166,9 @@ public class DeletePanelValidationHandler {
         マスクイメージ存在しない(UrErrorMessages.存在しない, "マスクイメージファイル"),
         削除ファイル未指定(UrErrorMessages.未指定, "削除ファイルを"),
         調査票削除不可(UrErrorMessages.削除不可, "認定調査委託料が支払われた"),
-        主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払われた");
+        主治医意見書削除不可(UrErrorMessages.削除不可, "主治医意見書報酬が支払われた"),
+        再意見書時_調査票削除不可(UrErrorMessages.削除不可, "認定調査票は、再調査の対象ではない"),
+        再調査票時_意見書削除不可(UrErrorMessages.削除不可, "主治医意見書は、再調査の対象ではない");
 
         private final Message message;
 

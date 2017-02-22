@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -213,18 +214,22 @@ public class Yokaigoninteiimagekanri {
         if (イメージ管理情報.get認定申請日() != null) {
             div.getTxtShinseiYMD().setValue(new RDate(イメージ管理情報.get認定申請日().toString()));
         }
-        if (イメージ管理情報.get認定調査受領年月日() != null) {
+        if (isValid(イメージ管理情報.get認定調査受領年月日())) {
             div.getTxtJuryoYMD().setValue(new RDate(イメージ管理情報.get認定調査受領年月日().toString()));
         }
-        if (イメージ管理情報.get認定調査実施年月日() != null) {
+        if (isValid(イメージ管理情報.get認定調査実施年月日())) {
             div.getTxtJishiYMD().setValue(new RDate(イメージ管理情報.get認定調査実施年月日().toString()));
         }
-        if (イメージ管理情報.get主治医意見書読取年月日() != null && !イメージ管理情報.get主治医意見書読取年月日().isEmpty()) {
+        if (isValid(イメージ管理情報.get主治医意見書読取年月日())) {
             div.getTxtReadYMD().setValue(new RDate(イメージ管理情報.get主治医意見書読取年月日().toString()));
         }
-        if (イメージ管理情報.get主治医意見書記入年月日() != null && !イメージ管理情報.get主治医意見書記入年月日().isEmpty()) {
+        if (isValid(イメージ管理情報.get主治医意見書記入年月日())) {
             div.getTxtKinyuYMD().setValue(new RDate(イメージ管理情報.get主治医意見書記入年月日().toString()));
         }
+    }
+
+    private static boolean isValid(FlexibleDate fDate) {
+        return fDate != null && fDate.isValid();
     }
 
     private void init_SetBtnControlDisabled(YokaigoninteiimagekanriDiv div) {

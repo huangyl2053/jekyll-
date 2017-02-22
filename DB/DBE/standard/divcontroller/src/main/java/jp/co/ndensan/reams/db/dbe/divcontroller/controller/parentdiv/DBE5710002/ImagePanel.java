@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ImagePanel {
 
-    private static final RString 書庫化ファイル名 = new RString("Image.zip");
     private static final RString 調査票 = new RString("1");
     private static final RString 調査票概況 = new RString("2");
     private static final RString 主治医意見書 = new RString("3");
@@ -71,9 +70,8 @@ public class ImagePanel {
     public ResponseData<ImagePanelDiv> onclick_btnDownLoadCheck(ImagePanelDiv div) {
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-                new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
+                new FilesystemName(sharedFileName(イメージ情報)), イメージ情報.getイメージ共有ファイルID());
         YokaigoninteiimageShutsuryokuFinder finder = new YokaigoninteiimageShutsuryokuFinder(ro_sfed);
-        ImagePanelHandler handler = new ImagePanelHandler();
         List<RString> 存在するファイル = finder.getSharedFile();
         List<RString> 存在する調査票ファイル = finder.get存在したイメージファイル(ImageFileItem.getGaikyoChosaImageFileList_ALL(), 存在するファイル);
         存在する調査票ファイル.addAll(finder.get存在したイメージファイル(ImageFileItem.getChosahyoTokkiImageFileList_ALL(), 存在するファイル));
@@ -89,6 +87,10 @@ public class ImagePanel {
         return ResponseData.of(div).respond();
     }
 
+    private static RString sharedFileName(ImagekanriJoho imageKanri) {
+        return imageKanri.get証記載保険者番号().concat(imageKanri.get被保険者番号());
+    }
+
     /**
      * イメージファイルをdownLoadします。
      *
@@ -100,6 +102,7 @@ public class ImagePanel {
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
         ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
                 new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
+        RString 書庫化ファイル名 = sharedFileName(イメージ情報).concat(".zip");
         RString zipPath = Path.combinePath(Path.getTmpDirectoryPath(), 書庫化ファイル名);
         File zipFile = new File(zipPath.toString());
         if (zipFile.exists()) {

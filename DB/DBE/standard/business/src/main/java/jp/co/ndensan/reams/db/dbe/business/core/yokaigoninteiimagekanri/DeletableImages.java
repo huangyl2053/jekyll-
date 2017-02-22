@@ -13,24 +13,46 @@ public enum DeletableImages {
     /**
      * すべてのイメージを削除可能なことを表します。
      */
-    全て,
+    全て(true, true),
     /**
      * 意見書に関連するイメージのみを削除可能なことを表します。
      */
-    意見書のみ,
+    意見書のみ(false, true),
     /**
      * 調査票に関連するイメージのみを削除可能なことを表します。
      */
-    調査票のみ,
+    調査票のみ(true, false),
     /**
      * 削除可能なイメージが何もないことを表します。
      */
-    無し;
+    無し(false, false);
+
+    private final boolean canDeleteChosahyoFlag;
+    private final boolean canDeleteIkenshoFlag;
+
+    private DeletableImages(boolean canDeleteChosahyoFlag, boolean canDeleteIkenshoFlag) {
+        this.canDeleteChosahyoFlag = canDeleteChosahyoFlag;
+        this.canDeleteIkenshoFlag = canDeleteIkenshoFlag;
+    }
 
     /**
      * @return 何のイメージも削除できない場合、{@code true}.
      */
     public boolean isNone() {
         return this == DeletableImages.無し;
+    }
+
+    /**
+     * @return 調査票が削除可能な場合、{@code true}.
+     */
+    public boolean canDelete調査票() {
+        return this.canDeleteChosahyoFlag;
+    }
+
+    /**
+     * @return 意見書が削除可能な場合、{@code true}.
+     */
+    public boolean canDelete意見書() {
+        return this.canDeleteIkenshoFlag;
     }
 }

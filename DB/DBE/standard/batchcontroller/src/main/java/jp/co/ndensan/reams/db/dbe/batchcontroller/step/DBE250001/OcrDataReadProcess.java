@@ -350,6 +350,10 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         SaveImageFilesResult saveImageResult = copyImageFilesToDirectory_ID550(ocrChosas, nr, sharedFileID, updatingTokkiJikos);
         IProcessingResults prs = saveImageResult.getProcessingResults();
         results.addAll(prs);
+        if (results.hasError()) {
+            return new SaveImageFilesResult(saveImageResult.getSharedFileID(), results);
+        }
+
         insertOrUpdate特記情報By(this.writerTokki, entity, nr, updatingTokkiJikos.removed(prs.allOcrDataInError()));
         return new SaveImageFilesResult(saveImageResult.getSharedFileID(), results);
     }
