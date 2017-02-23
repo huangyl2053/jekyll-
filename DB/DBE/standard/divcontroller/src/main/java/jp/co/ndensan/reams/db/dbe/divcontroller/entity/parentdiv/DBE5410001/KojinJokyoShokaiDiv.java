@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,10 +51,10 @@ public class KojinJokyoShokaiDiv extends Panel {
     private ChosaItakusakiAndChosainGuideDiv ChosaItakusakiAndChosainGuide;
     @JsonProperty("ShinseiTorisage")
     private ShinseiTorisageDiv ShinseiTorisage;
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("btnShinseiInfoshokai")
     private Button btnShinseiInfoshokai;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("hdnHokenshaCode")
     private RString hdnHokenshaCode;
     @JsonProperty("NinteiShinseiBusinessCollection")
@@ -345,15 +345,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * getbtnShinseiInfoshokai
      * @return btnShinseiInfoshokai
      */
@@ -369,6 +360,15 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("btnShinseiInfoshokai")
     public void setBtnShinseiInfoshokai(Button btnShinseiInfoshokai) {
         this.btnShinseiInfoshokai = btnShinseiInfoshokai;
+    }
+
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     /*
@@ -847,6 +847,16 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblNijiHantei() {
+        return this.getTblKanryoJisseki().getLblNijiHantei();
+    }
+
+    @JsonIgnore
+    public Label getLblCenterSoshin() {
+        return this.getTblKanryoJisseki().getLblCenterSoshin();
+    }
+
+    @JsonIgnore
     public Label getLblKanryoYotei() {
         return this.getTblKanryoJisseki().getLblKanryoYotei();
     }
@@ -892,6 +902,16 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtNijiHanteiYoteiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtCenterSoshinYoteiDate();
+    }
+
+    @JsonIgnore
     public Label getLblKanryoJisseki() {
         return this.getTblKanryoJisseki().getLblKanryoJisseki();
     }
@@ -934,26 +954,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonIgnore
     public TextBoxDate getTxtShinsakaiTorokuJissekiDate() {
         return this.getTblKanryoJisseki().getTxtShinsakaiTorokuJissekiDate();
-    }
-
-    @JsonIgnore
-    public Label getLblNijiHantei() {
-        return this.getTblKanryoJisseki().getLblNijiHantei();
-    }
-
-    @JsonIgnore
-    public Label getLblCenterSoshin() {
-        return this.getTblKanryoJisseki().getLblCenterSoshin();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return this.getTblKanryoJisseki().getTxtNijiHanteiYoteiDate();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtCenterSoshinYoteiDate() {
-        return this.getTblKanryoJisseki().getTxtCenterSoshinYoteiDate();
     }
 
     @JsonIgnore
