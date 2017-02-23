@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShujiiIryokikanAndShujiiGuide;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
@@ -57,8 +58,8 @@ public class ShujiiIryokikanAndShujiiGuide {
 
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
-        RString 市町村コード = new RString("");
         if (dataPassModel != null) {
+            RString 市町村コード;
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
             } else {
@@ -69,38 +70,53 @@ public class ShujiiIryokikanAndShujiiGuide {
                     && new RString(TaishoMode.ShujiiMode.toString()).equals(dataPassModel.get対象モード())) {
                 div.getTxtIryoKikanCodeFrom().setValue(dataPassModel.get主治医医療機関コード());
                 div.getTxtIryoKikanCodeTo().setValue(dataPassModel.get主治医医療機関コード());
+                div.getTxtIryoKikanName().setValue(dataPassModel.get主治医医療機関名称());
             }
-        }
 
-        if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
-            if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
-                div.getRadIryoKikanJokyo().setDisabled(false);
-                div.getRadShujiiJokyo().setDisabled(false);
+            if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
+                if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
+                    div.getRadIryoKikanJokyo().setDisabled(false);
+                    div.getRadShujiiJokyo().setDisabled(false);
+                }
             }
+            search主治医医療機関and主治医(div, dataPassModel, 市町村コード);
         }
+        return ResponseData.of(div).respond();
+    }
 
-        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
-                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
-                        市町村コード,
-                        SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),
-                        div.getTxtIryoKikanCodeFrom().getValue(),
-                        div.getTxtIryoKikanCodeTo().getValue(),
-                        状況フラグ_有効.equals(div.getRadIryoKikanJokyo().getSelectedValue()),
-                        div.getTxtIryoKikanName().getValue(),
-                        div.getTxtIryoKikanKanaMeisho().getValue(),
-                        div.getTxtShuijiiCodeFrom().getValue(),
-                        div.getTxtShujiiCodeTo().getValue(),
-                        状況フラグ_有効.equals(div.getRadShujiiJokyo().getSelectedValue()),
-                        div.getTxtShujiiShimei().getValue(),
-                        div.getTxtShujiiKanaShimei().getValue(),
-                        div.getTxtMaxKensu().getValue().intValue())).records();
+    private ResponseData<ShujiiIryokikanAndShujiiGuideDiv> search主治医医療機関and主治医(ShujiiIryokikanAndShujiiGuideDiv div, ShujiiIryokikanandshujiiDataPassModel dataPassModel, RString 市町村コード) {
+        List<ShujiiIryokikanAndShujii> list = new ArrayList<>();
+        ShujiiIryokikanAndShujiiGuideParameter parameter = getParameter(div, 市町村コード);
+        if (dataPassModel.get対象モード().toString().equals(TaishoMode.IryoKikanMode.name())) {
+            list = finder.search主治医医療機関情報(parameter).records();
+        }
+        if (dataPassModel.get対象モード().toString().equals(TaishoMode.ShujiiMode.name())) {
+            list = finder.search主治医医療機関_主治医情報(parameter).records();
+        }
         if (!list.isEmpty()) {
-            getHandler(div).setDataGrid(list);
+            getHandler(div).setDataGrid(list, dataPassModel.get対象モード());
         } else {
             div.getDgKensakuKekkaIchiran().clearSource();
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private ShujiiIryokikanAndShujiiGuideParameter getParameter(ShujiiIryokikanAndShujiiGuideDiv div, RString 市町村コード) {
+        return ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
+                市町村コード,
+                SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),
+                div.getTxtIryoKikanCodeFrom().getValue(),
+                div.getTxtIryoKikanCodeTo().getValue(),
+                状況フラグ_有効.equals(div.getRadIryoKikanJokyo().getSelectedValue()),
+                div.getTxtIryoKikanName().getValue(),
+                div.getTxtIryoKikanKanaMeisho().getValue(),
+                div.getTxtShuijiiCodeFrom().getValue(),
+                div.getTxtShujiiCodeTo().getValue(),
+                状況フラグ_有効.equals(div.getRadShujiiJokyo().getSelectedValue()),
+                div.getTxtShujiiShimei().getValue(),
+                div.getTxtShujiiKanaShimei().getValue(),
+                div.getTxtMaxKensu().getValue().intValue());
     }
 
     /**
@@ -132,34 +148,10 @@ public class ShujiiIryokikanAndShujiiGuide {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class
         );
-        RString 市町村コード = new RString("");
+
         if (dataPassModel != null) {
-//            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
-//            } else {
-//                市町村コード = dataPassModel.get市町村コード();
-//            }
-        }
-        List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
-                ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
-                        市町村コード,
-                        SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),
-                        div.getTxtIryoKikanCodeFrom().getValue(),
-                        div.getTxtIryoKikanCodeTo().getValue(),
-                        状況フラグ_有効.equals(div.getRadIryoKikanJokyo().getSelectedValue()),
-                        div.getTxtIryoKikanName().getValue(),
-                        div.getTxtIryoKikanKanaMeisho().getValue(),
-                        div.getTxtShuijiiCodeFrom().getValue(),
-                        div.getTxtShujiiCodeTo().getValue(),
-                        状況フラグ_有効.equals(div.getRadShujiiJokyo().getSelectedValue()),
-                        div.getTxtShujiiShimei().getValue(),
-                        div.getTxtShujiiKanaShimei().getValue(),
-                        div.getTxtMaxKensu().getValue().intValue())).records();
-        if (!list.isEmpty()) {
-            getHandler(div).setDataGrid(list);
-        } else {
-            div.getDgKensakuKekkaIchiran().clearSource();
-            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            RString 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+            search主治医医療機関and主治医(div, dataPassModel, 市町村コード);
         }
         return ResponseData.of(div).respond();
     }

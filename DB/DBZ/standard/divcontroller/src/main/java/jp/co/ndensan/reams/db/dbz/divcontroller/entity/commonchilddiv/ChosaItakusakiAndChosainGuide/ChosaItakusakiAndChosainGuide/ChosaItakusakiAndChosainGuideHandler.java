@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItaku
 public class ChosaItakusakiAndChosainGuideHandler {
 
     private final ChosaItakusakiAndChosainGuideDiv div;
+    private static final int 委託先モードのカラム幅 = 357;
+    private static final int 調査員モードのカラム幅 = 169;
 
     /**
      * コンストラクタです。
@@ -58,6 +60,12 @@ public class ChosaItakusakiAndChosainGuideHandler {
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
             div.setMode_TaishoMode(TaishoMode.getEnum(dataPassModel.get対象モード().toString()));
+            if (dataPassModel.get対象モード().toString().equals(TaishoMode.Itakusaki.name())) {
+                div.setTitle(new RString("認定調査委託先選択"));
+            }
+            if (dataPassModel.get対象モード().toString().equals(TaishoMode.Chosain.name())) {
+                div.setTitle(new RString("認定調査員選択"));
+            }
         }
     }
 
@@ -87,8 +95,9 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 調査委託先＆調査員ガ情報gridエリア。
      *
      * @param list 情報gridエリア内容
+     * @param mode
      */
-    public void setDataGrid(List<KijuntsukiShichosonjoho> list) {
+    public void setDataGrid(List<KijuntsukiShichosonjoho> list, RString mode) {
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
         for (int i = 0; i < list.size() && i < div.getTxtMaxKensu().getText().toInt(); i++) {
             KijuntsukiShichosonjoho business = list.get(i);
@@ -115,18 +124,17 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getDgKensakuKekkaIchiran().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
         div.getTxtChikuCode().setMaxLength(5);
         div.getTxtChikuCode().setPaddingZero(true);
-        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
-                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        if (dataPassModel.get対象モード().equals(new RString(TaishoMode.Itakusaki.name()))) {
+        if (mode.toString().equals(TaishoMode.Itakusaki.name())) {
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("itakusakiMeisho").setWidth(委託先モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("itakusakiKanaMeisho").setWidth(委託先モードのカラム幅);
             div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainCode").setVisible(false);
             div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainShimei").setVisible(false);
             div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainKanaShimei").setVisible(false);
             div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainHJokyo").setVisible(false);
-        } else {
-            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainCode").setVisible(true);
-            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainShimei").setVisible(true);
-            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainKanaShimei").setVisible(true);
-            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("chosainHJokyo").setVisible(true);
+        }
+        if (mode.toString().equals(TaishoMode.Chosain.name())) {
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("itakusakiMeisho").setWidth(調査員モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("itakusakiKanaMeisho").setWidth(調査員モードのカラム幅);
         }
     }
 

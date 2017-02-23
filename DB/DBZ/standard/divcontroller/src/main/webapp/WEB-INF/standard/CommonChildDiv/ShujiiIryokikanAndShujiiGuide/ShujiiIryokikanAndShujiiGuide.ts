@@ -44,11 +44,20 @@ module DBZ {
                     gridSetting.columns[0].visible = true;
                     gridSetting.columns[1].visible = true;
                     gridSetting.columns[2].visible = true;
-                    gridSetting.columns[3].visible = true;
+                    gridSetting.columns[3].visible = false;
                     gridSetting.columns[4].visible = true;
                     gridSetting.columns[5].visible = false;
                     gridSetting.columns[6].visible = false;
-                    gridSetting.columns[7].visible = false;
+                    gridSetting.columns[7].visible = true;
+                    gridSetting.columns[8].visible = false;
+                    gridSetting.columns[9].visible = false;
+                    gridSetting.columns[10].visible = false;
+                    gridSetting.columns[11].visible = false;
+                    gridSetting.columns[12].visible = false;
+                    gridSetting.columns[13].visible = false;
+                    gridSetting.columns[14].visible = false;
+                    gridSetting.columns[15].visible = false;
+                    gridSetting.columns[16].visible = false;
                     this.controls.dgKensakuKekkaIchiran().gridSetting = gridSetting;
                     this.controls.dgKensakuKekkaIchiran()._control.afterPropertiesSet();
                 }
@@ -64,11 +73,20 @@ module DBZ {
                     gridSetting.columns[0].visible = true;
                     gridSetting.columns[1].visible = true;
                     gridSetting.columns[2].visible = true;
-                    gridSetting.columns[3].visible = true;
-                    gridSetting.columns[4].visible = true;
-                    gridSetting.columns[5].visible = true;
-                    gridSetting.columns[6].visible = true;
+                    gridSetting.columns[3].visible = false;
+                    gridSetting.columns[4].visible = false;
+                    gridSetting.columns[5].visible = false;
+                    gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = true;
+                    gridSetting.columns[8].visible = true;
+                    gridSetting.columns[9].visible = true;
+                    gridSetting.columns[10].visible = true;
+                    gridSetting.columns[11].visible = false;
+                    gridSetting.columns[12].visible = false;
+                    gridSetting.columns[13].visible = false;
+                    gridSetting.columns[14].visible = false;
+                    gridSetting.columns[15].visible = true;
+                    gridSetting.columns[16].visible = false;
                     this.controls.dgKensakuKekkaIchiran().gridSetting = gridSetting;
                     this.controls.dgKensakuKekkaIchiran()._control.afterPropertiesSet();
                 }

@@ -58,6 +58,10 @@ module DBZ
                     gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = false;
                     gridSetting.columns[8].visible = false;
+                    gridSetting.columns[9].visible = false;
+                    gridSetting.columns[10].visible = false;
+                    gridSetting.columns[11].visible = false;
+                    gridSetting.columns[12].visible = false;
                     this.controls.dgKensakuKekkaIchiran().gridSetting = gridSetting;
                     this.controls.dgKensakuKekkaIchiran()._control.afterPropertiesSet();
                 }
@@ -85,6 +89,10 @@ module DBZ
                     gridSetting.columns[6].visible = true;
                     gridSetting.columns[7].visible = true;
                     gridSetting.columns[8].visible = true;
+                    gridSetting.columns[9].visible = false;
+                    gridSetting.columns[10].visible = false;
+                    gridSetting.columns[11].visible = false;
+                    gridSetting.columns[12].visible = false;
                     this.controls.dgKensakuKekkaIchiran().gridSetting = gridSetting;
                     this.controls.dgKensakuKekkaIchiran()._control.afterPropertiesSet();
                 }
