@@ -140,17 +140,13 @@
     },
     {
      "id": "11",
-     "type": "ordinal",
+     "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2060001",
      "layoutTitle": "基本運用・認定調査結果入手",
-     "eventName": "調査結果登録遷移",
+     "eventName": "処理完了",
      "destroy": true,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2210001",
-     "toLayoutTitle": "認定調査結果登録",
-     "toState": "調査結果登録"
+     "condition": ""
     }
    ]
   }

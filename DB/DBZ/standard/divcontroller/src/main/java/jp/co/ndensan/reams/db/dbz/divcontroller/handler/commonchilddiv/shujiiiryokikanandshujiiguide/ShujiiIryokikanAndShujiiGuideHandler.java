@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIryokikanAndShujiiGuideHandler {
 
     private final ShujiiIryokikanAndShujiiGuideDiv div;
+    private static final int 医療機関モードのカラム幅 = 268;
+    private static final int 主治医モードのカラム幅 = 174;
 
     /**
      * コンストラクタです。
@@ -50,6 +52,12 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
             div.setMode_TaishoMode(TaishoMode.getEnum(dataPassModel.get対象モード().toString()));
+            if (dataPassModel.get対象モード().toString().equals(TaishoMode.IryoKikanMode.name())) {
+                div.setTitle(new RString("主治医医療機関選択"));
+            }
+            if (dataPassModel.get対象モード().toString().equals(TaishoMode.ShujiiMode.name())) {
+                div.setTitle(new RString("主治医選択"));
+            }
         }
         div.getKensakuKekkaIchiran().getDgKensakuKekkaIchiran().setDataSource(null);
     }
@@ -65,10 +73,11 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
      * 主治医医療機関＆主治医情報gridエリア。
      *
      * @param list 情報gridエリア内容
+     * @param mode
      */
-    public void setDataGrid(List<ShujiiIryokikanAndShujii> list) {
+    public void setDataGrid(List<ShujiiIryokikanAndShujii> list, RString mode) {
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size() && i < div.getTxtMaxKensu().getText().toInt(); i++) {
             ShujiiIryokikanAndShujii business = list.get(i);
             dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
             kensakuKekkaIchiran_Row.getIryoKikancode().setValue(nullToEmpty(business.get主治医医療機関コード()));
@@ -77,7 +86,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
             kensakuKekkaIchiran_Row.setIryoKikanYubinBango(business.get主治医医療機関情報_郵便番号());
             kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
             kensakuKekkaIchiran_Row.setIryoKikantelNo(nullToEmpty(business.get主治医医療機関情報_電話番号()));
-             kensakuKekkaIchiran_Row.setIryoKikanFaxNo(nullToEmpty(business.get主治医医療機関情報_FAX番号()));
+            kensakuKekkaIchiran_Row.setIryoKikanFaxNo(nullToEmpty(business.get主治医医療機関情報_FAX番号()));
             kensakuKekkaIchiran_Row.setIryoKikanJokyo(business.is主治医医療機関情報_状況フラグ()
                     ? new RString("有効") : new RString("無効"));
             kensakuKekkaIchiran_Row.getShujiiCode().setValue(nullToEmpty(business.get主治医コード()));
@@ -90,11 +99,24 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
             kensakuKekkaIchiran_Row.setShujiiJoukyo(business.is主治医情報_状況フラグ()
                     ? new RString("有効") : new RString("無効"));
             kensakuKekkaIchiran_Row.setShujiiShichosonCode(business.get市町村コード());
-            
+
             kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
         }
         div.getDgKensakuKekkaIchiran().clearSource();
         div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
+        div.getDgKensakuKekkaIchiran().getGridSetting().setSelectedRowCount(list.size());
+        div.getDgKensakuKekkaIchiran().getGridSetting().setLimitRowCount(div.getTxtMaxKensu().getValue().intValue());
+        if (mode.toString().equals(TaishoMode.IryoKikanMode.name())) {
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("iryoKikanMeisho").setWidth(医療機関モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("iryoKikanKanaMeisho").setWidth(医療機関モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("iryoKikanjusho").setWidth(医療機関モードのカラム幅);
+        }
+        if (mode.toString().equals(TaishoMode.ShujiiMode.name())) {
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("iryoKikanMeisho").setWidth(主治医モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("iryoKikanKanaMeisho").setWidth(主治医モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("shujiiShimei").setWidth(主治医モードのカラム幅);
+            div.getDgKensakuKekkaIchiran().getGridSetting().getColumn("shujiiKanaMeisho").setWidth(主治医モードのカラム幅);
+        }
     }
 
     /**

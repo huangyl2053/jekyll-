@@ -205,6 +205,18 @@ module DBE {
                 return new UZA.Label(this.convFiledName("lblNoImageTokubetsuKyufu"));
             }
 
+            public TokubetsuKyufuSmallPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TokubetsuKyufuSmallPanel"));
+            }
+
+            public imgTokubetsuKyufuSmall(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgTokubetsuKyufuSmall"));
+            }
+
+            public lblImgTokubetsuKyufuSmall(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblImgTokubetsuKyufuSmall"));
+            }
+
             public ZaitakuServicePanel(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ZaitakuServicePanel"));
             }
@@ -219,6 +231,18 @@ module DBE {
 
             public lblNoImageZaitakuService(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblNoImageZaitakuService"));
+            }
+
+            public ZaitakuServiceSmallPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ZaitakuServiceSmallPanel"));
+            }
+
+            public imgZaitakuServiceSmall(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgZaitakuServiceSmall"));
+            }
+
+            public lblImgZaitakuServiceSmall(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblImgZaitakuServiceSmall"));
             }
 
             public GaikyoTokkiPanel(): UZA.Panel {

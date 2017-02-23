@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyochosaitem.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokinyuitem.NinteichosahyoKinyuItem;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
@@ -130,28 +132,6 @@ public class YokaigoNinteiJohoTeikyoFinder {
             return null;
         }
         return new NinnteiRiriBusiness(entity);
-    }
-
-    /**
-     * 特記事項区分のリストを取得します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 特記事項マスキング区分 特記事項マスキング区分
-     * @return 要介護認定情報提供データ
-     */
-    @Transaction
-    public List<RString> get特記事項区分(ShinseishoKanriNo 申請書管理番号, RString 特記事項マスキング区分) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(特記事項マスキング区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項マスキング区分"));
-        YokaigoBatchMybitisParamter paramter = YokaigoBatchMybitisParamter.createParam(申請書管理番号.value(), 特記事項マスキング区分);
-        IYokaigoNinteiJohoTeikyoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoTeikyoMapper.class);
-        List<NinteichosaRelateEntity> entityList = mapper.get特記事項区分(paramter);
-
-        List<RString> 特記事項区分List = new ArrayList<>();
-        for (NinteichosaRelateEntity entity : entityList) {
-            特記事項区分List.add(entity.get特記事項区分());
-        }
-        return 特記事項区分List;
     }
 
     /**
@@ -363,5 +343,24 @@ public class YokaigoNinteiJohoTeikyoFinder {
         DbT5101NinteiShinseiJohoEntity entity = entityList.get(0);
         entity.initializeMd5();
         return new NinteiShinseiJoho(entity);
+    }
+
+    /**
+     * 一次判定結果情報を取得します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return 一次判定結果情報
+     */
+    @Transaction
+    public IchijiHanteiKekkaJoho get一次判定結果情報(ShinseishoKanriNo 申請書管理番号) {
+        IYokaigoNinteiJohoTeikyoMapper mapper = InstanceProvider.create(MapperProvider.class).create(IYokaigoNinteiJohoTeikyoMapper.class);
+        YokaigoBatchMybitisParamter paramter = YokaigoBatchMybitisParamter.createParam(申請書管理番号);
+        List<DbT5116IchijiHanteiKekkaJohoEntity> entityList = mapper.select一次判定結果情報(paramter);
+        if (entityList.isEmpty()) {
+            return null;
+        }
+        DbT5116IchijiHanteiKekkaJohoEntity entity = entityList.get(0);
+        entity.initializeMd5();
+        return new IchijiHanteiKekkaJoho(entity);
     }
 }

@@ -399,31 +399,32 @@ public class ShujiiIkenshoBusiness {
                 dbT5301Entity.setIkenshoShutsuryokuYMD(new FlexibleDate(hakkobi));
             }
         }
+        if (processParamter.isShujiiIkenshoSakuseiIraisho() || processParamter.isIkenshoSakuseiIraiIchiran()) {
+            RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
+            switch (processParamter.getTeishutsuKigen().toString()) {
+                case "0":
+                    int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
+                            基準日, SubGyomuCode.DBE認定支援).toString());
+                    if (文字列1.equals(主治医意見書作成期限設定方法)) {
+                        FlexibleDate 作成依頼日 = entity.get主治医意見書作成依頼年月日();
+                        dbT5301Entity.setIkenshoSakuseiKigenYMD(作成依頼日.plusDay(期限日数));
+                    } else {
+                        FlexibleDate 作成依頼日 = new FlexibleDate(entity.get認定申請年月日());
+                        dbT5301Entity.setIkenshoSakuseiKigenYMD(作成依頼日.plusDay(期限日数));
+                    }
+                    break;
+                case "1":
+                    dbT5301Entity.setIkenshoSakuseiKigenYMD(FlexibleDate.EMPTY);
+                    break;
+                case "2":
+                    if (!RString.isNullOrEmpty(processParamter.getKyotsuHizuke())) {
+                        dbT5301Entity.setIkenshoSakuseiKigenYMD(new FlexibleDate(processParamter.getKyotsuHizuke()));
+                    }
+                    break;
+                default:
+                    break;
 
-        RString 主治医意見書作成期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
-        switch (processParamter.getTeishutsuKigen().toString()) {
-            case "0":
-                int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        基準日, SubGyomuCode.DBE認定支援).toString());
-                if (文字列1.equals(主治医意見書作成期限設定方法)) {
-                    FlexibleDate 作成依頼日 = entity.get主治医意見書作成依頼年月日();
-                    dbT5301Entity.setIkenshoSakuseiKigenYMD(作成依頼日.plusDay(期限日数));
-                } else {
-                    FlexibleDate 作成依頼日 = new FlexibleDate(entity.get認定申請年月日());
-                    dbT5301Entity.setIkenshoSakuseiKigenYMD(作成依頼日.plusDay(期限日数));
-                }
-                break;
-            case "1":
-                dbT5301Entity.setIkenshoSakuseiKigenYMD(FlexibleDate.EMPTY);
-                break;
-            case "2":
-                if (!RString.isNullOrEmpty(processParamter.getKyotsuHizuke())) {
-                    dbT5301Entity.setIkenshoSakuseiKigenYMD(new FlexibleDate(processParamter.getKyotsuHizuke()));
-                }
-                break;
-            default:
-                break;
-
+            }
         }
         return dbT5301Entity;
     }

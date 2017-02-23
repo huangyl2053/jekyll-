@@ -18,7 +18,7 @@ import lombok.Setter;
 
 /**
  * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆認定調査依頼情報＆認定調査票（概況調査）＆
- * 認定調査委託先情報＆調査員情報RelateEntityクラスです。
+ * 認定調査委託先情報＆調査員情報＆認定調査票（基本調査）＆認定調査票（特記事項）＆認定調査票（概況特記）RelateEntityクラスです。
  *
  * @reamsid_L DBE-3000-160 houtianpeng
  */
@@ -27,10 +27,11 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class CyoSaNyuSyuRelateEntity {
 
-    private ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo dbt5101ShinseishoKanriNo;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
+    private AtenaMeisho hihokenshaKana;
     private FlexibleDate ninteiShinseiYMD;
     private Code shinseijiKubunCode;
     private int saiChosaIraiKaisu;
@@ -50,4 +51,7 @@ public class CyoSaNyuSyuRelateEntity {
     private int ninteichosaIraiRirekiNo;
     private ChosaItakusakiCode ninteiChosaItakusakiCode;
     private ChosainCode ninteiChosainCode;
+    private ShinseishoKanriNo dbt5203ShinseishoKanriNo;
+    private ShinseishoKanriNo dbt5205ShinseishoKanriNo;
+    private ShinseishoKanriNo dbt5206ShinseishoKanriNo;
 }

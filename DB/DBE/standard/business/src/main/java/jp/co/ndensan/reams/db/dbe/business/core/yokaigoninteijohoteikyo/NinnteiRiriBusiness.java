@@ -174,6 +174,15 @@ public class NinnteiRiriBusiness implements Serializable {
     }
 
     /**
+     * 認定調査依頼履歴番号のgetメソッドです。
+     *
+     * @return 認定調査依頼履歴番号
+     */
+    public int get認定調査依頼履歴番号() {
+        return entity.getNinteichosaIraiRirekiNo();
+    }
+
+    /**
      * 認定調査依頼年月日のgetメソッドです。
      *
      * @return 認定調査依頼年月日
@@ -207,6 +216,15 @@ public class NinnteiRiriBusiness implements Serializable {
      */
     public FlexibleDate get主治医意見書受領年月日() {
         return entity.getIkenshoJuryoYMD();
+    }
+
+    /**
+     * 主治医意見書作成依頼履歴番号のgetメソッドです。
+     *
+     * @return 主治医意見書作成依頼履歴番号
+     */
+    public int get主治医意見書作成依頼履歴番号() {
+        return entity.getIkenshoIraiRirekiNo();
     }
 
     /**
@@ -279,6 +297,24 @@ public class NinnteiRiriBusiness implements Serializable {
      */
     public RString get申請書管理番号() {
         return entity.getShinseishoKanriNo();
+    }
+
+    /**
+     * 証記載保険者番号のgetメソッドです。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
+    }
+
+    /**
+     * 被保険者番号のgetメソッドです。
+     *
+     * @return 被保険者番号
+     */
+    public RString get被保険者番号() {
+        return entity.getHihokenshaNo();
     }
 
     /**

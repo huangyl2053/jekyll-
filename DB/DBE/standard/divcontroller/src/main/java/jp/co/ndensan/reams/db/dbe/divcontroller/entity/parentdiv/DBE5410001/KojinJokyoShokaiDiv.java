@@ -51,10 +51,10 @@ public class KojinJokyoShokaiDiv extends Panel {
     private ChosaItakusakiAndChosainGuideDiv ChosaItakusakiAndChosainGuide;
     @JsonProperty("ShinseiTorisage")
     private ShinseiTorisageDiv ShinseiTorisage;
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("btnShinseiInfoshokai")
     private Button btnShinseiInfoshokai;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("hdnHokenshaCode")
     private RString hdnHokenshaCode;
     @JsonProperty("NinteiShinseiBusinessCollection")
@@ -103,6 +103,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnNinteiChosainCode;
     @JsonProperty("hdnNinteiChosainName")
     private RString hdnNinteiChosainName;
+    @JsonProperty("hdnNinteiShinseibi")
+    private RString hdnNinteiShinseibi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -345,15 +347,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * getbtnShinseiInfoshokai
      * @return btnShinseiInfoshokai
      */
@@ -369,6 +362,15 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("btnShinseiInfoshokai")
     public void setBtnShinseiInfoshokai(Button btnShinseiInfoshokai) {
         this.btnShinseiInfoshokai = btnShinseiInfoshokai;
+    }
+
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     /*
@@ -804,6 +806,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     /*
+     * gethdnNinteiShinseibi
+     * @return hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public RString getHdnNinteiShinseibi() {
+        return hdnNinteiShinseibi;
+    }
+
+    /*
+     * sethdnNinteiShinseibi
+     * @param hdnNinteiShinseibi hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public void setHdnNinteiShinseibi(RString hdnNinteiShinseibi) {
+        this.hdnNinteiShinseibi = hdnNinteiShinseibi;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -844,6 +864,16 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonIgnore
     public Label getLblShinsakaiToroku() {
         return this.getTblKanryoJisseki().getLblShinsakaiToroku();
+    }
+
+    @JsonIgnore
+    public Label getLblNijiHantei() {
+        return this.getTblKanryoJisseki().getLblNijiHantei();
+    }
+
+    @JsonIgnore
+    public Label getLblCenterSoshin() {
+        return this.getTblKanryoJisseki().getLblCenterSoshin();
     }
 
     @JsonIgnore
@@ -892,6 +922,16 @@ public class KojinJokyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtNijiHanteiYoteiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return this.getTblKanryoJisseki().getTxtCenterSoshinYoteiDate();
+    }
+
+    @JsonIgnore
     public Label getLblKanryoJisseki() {
         return this.getTblKanryoJisseki().getLblKanryoJisseki();
     }
@@ -934,26 +974,6 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonIgnore
     public TextBoxDate getTxtShinsakaiTorokuJissekiDate() {
         return this.getTblKanryoJisseki().getTxtShinsakaiTorokuJissekiDate();
-    }
-
-    @JsonIgnore
-    public Label getLblNijiHantei() {
-        return this.getTblKanryoJisseki().getLblNijiHantei();
-    }
-
-    @JsonIgnore
-    public Label getLblCenterSoshin() {
-        return this.getTblKanryoJisseki().getLblCenterSoshin();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return this.getTblKanryoJisseki().getTxtNijiHanteiYoteiDate();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtCenterSoshinYoteiDate() {
-        return this.getTblKanryoJisseki().getTxtCenterSoshinYoteiDate();
     }
 
     @JsonIgnore

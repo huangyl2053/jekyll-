@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -11,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoHandler;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -24,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  *
  */
 public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinseishaKihonInfoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-16_05-18-04">
     /*
      * [ private の作成 ]
@@ -444,7 +447,7 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     public RString get被保険者番号() {
         return this.getTxtHihokenshaNo().getValue();
     }
-    
+
     /**
      * 証記載保険者番号を取得します。
      *
@@ -458,5 +461,15 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
     @Override
     public RString get申請区分申請時() {
         return this.getTxtShinseiKubunShinseiji().getValue();
+    }
+
+    /**
+     * 認定申請日を取得します。
+     *
+     * @return 認定申請日 認定申請日
+     */
+    @Override
+    public RDate get認定申請日() {
+        return this.getTxtNinteiShinseibi().getValue();
     }
 }

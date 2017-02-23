@@ -5,20 +5,37 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0900001;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.RembanServiceJokyoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyo;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.HihokenshaJyuhouBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinnteiRiriBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteijohoteikyo.NinteichosaRelate;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IsIkenshoDoiUmu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 要介護認定情報提供Divを制御クラスです。
@@ -35,8 +53,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class YokaigoNinteiJohoTeikyoHandler {
 
     private final YokaigoNinteiJohoTeikyoDiv div;
-    private final RString キー_0 = new RString("key0");
-    private final RString キー_1 = new RString("key1");
+    private final RString 同意あり = new RString("key0");
+    private final RString 同意なし = new RString("key1");
     private final RString なし = new RString("0");
     private final RString あり = new RString("1");
     private final RString 検索へ戻るボタン名 = new RString("btnToSearch");
@@ -88,16 +106,15 @@ public class YokaigoNinteiJohoTeikyoHandler {
 
         if (business != null) {
             if (IsExistJohoTeikyoDoui.toValue(business.is情報提供への同意有無()).is同意する()) {
-                div.getNinteiKekkaShosai().getRadHihokenshaJohoTeikyoDoi().setSelectedKey(キー_0);
+                div.getNinteiKekkaShosai().getRadHihokenshaJohoTeikyoDoi().setSelectedKey(同意あり);
             } else {
-                div.getNinteiKekkaShosai().getRadHihokenshaJohoTeikyoDoi().setSelectedKey(キー_1);
+                div.getNinteiKekkaShosai().getRadHihokenshaJohoTeikyoDoi().setSelectedKey(同意なし);
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(発行するボタン名, true);
             }
             if (IsIkenshoDoiUmu.toValue(business.is意見書同意フラグ()).isしないする()) {
-                div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().setSelectedKey(キー_0);
+                div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().setSelectedKey(同意あり);
             } else {
-                div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().setSelectedKey(キー_1);
-                div.getChkShujiiIkensho().setDisabled(true);
+                div.getNinteiKekkaShosai().getRadShijiiJohoTeikyoDoi().setSelectedKey(同意なし);
             }
             div.getNinteiKekkaShosai().getTxtShinseibi().setValue(getNull(business.get認定申請日()));
             div.getNinteiKekkaShosai().getTxtShinseiKubunShin().setValue(
@@ -119,6 +136,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
                     business.get主治医医療機関コード(), business.get医療機関名称(), business.get主治医コード(), business.get主治医氏名());
             div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(getNull(business.get審査会開催予定日()));
             div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(getNull(business.get審査会開催日()));
+            set発行する帳票CheckBox(business);
         }
     }
 
@@ -179,6 +197,82 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getHakkoChohyo().getRadIchijiHanteiMasking().setSelectedKey(なし);
         } else {
             div.getHakkoChohyo().getRadIchijiHanteiMasking().setDisabled(false);
+        }
+    }
+
+    private void set発行する帳票CheckBox(NinnteiRiriBusiness business) {
+        if (同意あり.equals(div.getRadHihokenshaJohoTeikyoDoi().getSelectedKey())) {
+            set認定調査票CheckBox(business);
+            set特記事項CheckBox(business);
+            set主治医意見書CheckBox(business);
+            setその他資料CheckBox(business);
+            set一次判定結果CheckBox(business);
+        }
+    }
+
+    private void set認定調査票CheckBox(NinnteiRiriBusiness business) {
+        ChosaKekkaInfoGaikyoFinder finder = ChosaKekkaInfoGaikyoFinder.createInstance();
+        ChosaKekkaInfoGaikyoParameter gaikyoParameter = ChosaKekkaInfoGaikyoParameter.
+                createGamenParam(business.get申請書管理番号(), business.get認定調査依頼履歴番号(), RString.EMPTY, RString.EMPTY);
+        List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList = finder.getChosaKekkaInfoGaikyo(gaikyoParameter).records();
+        if (!chosaKekkaInfoGaikyoList.isEmpty()) {
+            div.getChkNinteiChosahyo().setDisabled(false);
+        } else {
+            gaikyoParameter = ChosaKekkaInfoGaikyoParameter.createGamenParam(business.get申請書管理番号(), business.get認定調査依頼履歴番号(),
+                    TokkijikoTextImageKubun.テキスト.getコード(), TokkijikoTextImageKubun.テキスト.getコード());
+            List<RembanServiceJokyoBusiness> serviceJokyos = finder.getRembanServiceJokyo(gaikyoParameter).records();
+            List<NinteichosahyoShisetsuRiyo> shisetsuRiyos = finder.get5210NinteichosahyoShisetsu(gaikyoParameter).records();
+            if (!serviceJokyos.isEmpty() || !shisetsuRiyos.isEmpty()) {
+                div.getChkNinteiChosahyo().setDisabled(false);
+            }
+        }
+    }
+
+    private void set特記事項CheckBox(NinnteiRiriBusiness business) {
+        List<NinteichosaRelate> 特記事項List
+                = YokaigoNinteiJohoTeikyoFinder.createInstance().get特記事項List(new ShinseishoKanriNo(business.get申請書管理番号()), なし);
+        if (!特記事項List.isEmpty()) {
+            div.getChkTokkiJiko().setDisabled(false);
+        }
+    }
+
+    private void set主治医意見書CheckBox(NinnteiRiriBusiness business) {
+        if (同意あり.equals(div.getRadShijiiJohoTeikyoDoi().getSelectedKey())) {
+            List<ShujiiIkenshoIkenItemEntity> entityList = ShujiiIkenshoIkenItemManager.createInstance()
+                    .select主治医意見書(new ShinseishoKanriNo(business.get申請書管理番号()), business.get主治医意見書作成依頼履歴番号());
+            if (!entityList.isEmpty()) {
+                div.getChkShujiiIkensho().setDisabled(false);
+            }
+        }
+    }
+
+    private void setその他資料CheckBox(NinnteiRiriBusiness business) {
+        ImageManager imageManager = InstanceProvider.create(ImageManager.class);
+        Image imageJoho = imageManager.getイメージ情報(new ShinseishoKanriNo(business.get申請書管理番号()));
+        if (imageJoho != null) {
+            ImagekanriJohoEntity imageKanriJohoEntity = new ImagekanriJohoEntity();
+            imageKanriJohoEntity.setHihokenshaNo(business.get被保険者番号());
+            imageKanriJohoEntity.setShoKisaiHokenshaNo(business.get証記載保険者番号());
+            imageKanriJohoEntity.setImageSharedFileId(imageJoho.getイメージ共有ファイルID());
+            ImagekanriJoho イメージ管理情報 = new ImagekanriJoho(imageKanriJohoEntity);
+            RString toCopyPath = DBEImageUtil.copySharedFiles(
+                    イメージ管理情報.getイメージ共有ファイルID(), business.get証記載保険者番号().concat(business.get被保険者番号()));
+            List<RString> otherFileList = ImageFileItem.getOtherFileImageFileList_Mask();
+            for (RString otherFile : otherFileList) {
+                if (!RString.isNullOrEmpty(DBEImageUtil.getMaskOrOriginalImageFilePath(toCopyPath, otherFile))) {
+                    div.getChkSonotaShiryo().setDisabled(false);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    private void set一次判定結果CheckBox(NinnteiRiriBusiness business) {
+        IchijiHanteiKekkaJoho 一次判定結果情報
+                = YokaigoNinteiJohoTeikyoFinder.createInstance().get一次判定結果情報(new ShinseishoKanriNo(business.get申請書管理番号()));
+        if (一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
+            div.getChkIchijiHanteiKekka().setDisabled(false);
         }
     }
 

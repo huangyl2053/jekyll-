@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ChosaItakusakiAndChosainGuide;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
@@ -72,26 +73,32 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
                 div.getTxtChosaItakusakiName().setValue(dataPassModel.get委託先名());
             }
-        }
-        if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
-            if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
-                div.getRadItakusakiJokyo().setDisabled(false);
-                div.getRadChosainJokyo().setDisabled(false);
+            if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
+                if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {
+                    div.getRadItakusakiJokyo().setDisabled(false);
+                    div.getRadChosainJokyo().setDisabled(false);
+                }
             }
-        }
 
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxKensu();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxKensu();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+            search認定調査委託先and調査員(div, dataPassModel);
         }
-        List<KijuntsukiShichosonjoho> list;
-        if (dataPassModel != null && dataPassModel.get対象モード().equals(new RString(TaishoMode.Chosain.name()))) {
-            list = finder.getKojinJokyoShokai(createParam(div)).records();
-        } else {
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<ChosaItakusakiAndChosainGuideDiv> search認定調査委託先and調査員(ChosaItakusakiAndChosainGuideDiv div, KijuntsukiShichosonjohoiDataPassModel dataPassModel) {
+        List<KijuntsukiShichosonjoho> list = new ArrayList<>();
+        if (dataPassModel.get対象モード().toString().equals(TaishoMode.Itakusaki.name())) {
             list = finder.getChosaItakusaki(createParam(div)).records();
         }
+        if (dataPassModel.get対象モード().toString().equals(TaishoMode.Chosain.name())) {
+            list = finder.getKojinJokyoShokai(createParam(div)).records();
+        }
         if (!list.isEmpty()) {
-            getHandler(div).setDataGrid(list);
+            getHandler(div).setDataGrid(list, dataPassModel.get対象モード());
         } else {
             div.getDgKensakuKekkaIchiran().clearSource();
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
@@ -115,17 +122,8 @@ public class ChosaItakusakiAndChosainGuide {
         }
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        List<KijuntsukiShichosonjoho> list;
-        if (dataPassModel != null && dataPassModel.get対象モード().equals(new RString(TaishoMode.Chosain.name()))) {
-            list = finder.getKojinJokyoShokai(createParam(div)).records();
-        } else {
-            list = finder.getChosaItakusaki(createParam(div)).records();
-        }
-        if (!list.isEmpty()) {
-            getHandler(div).setDataGrid(list);
-        } else {
-            div.getDgKensakuKekkaIchiran().clearSource();
-            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        if (dataPassModel != null) {
+            search認定調査委託先and調査員(div, dataPassModel);
         }
         return ResponseData.of(div).respond();
     }

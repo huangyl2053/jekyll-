@@ -382,6 +382,15 @@ public class IchijiHanteiKekkaJoho
     }
 
     /**
+     * 仮一次判定区分を返します。
+     *
+     * @return 仮一次判定区分
+     */
+    public boolean get仮一次判定区分() {
+        return entity.getKariIchijiHanteiKubun();
+    }
+
+    /**
      * {@link DbT5116IchijiHanteiKekkaJohoEntity}のクローンを返します。
      *
      * @return {@link DbT5116IchijiHanteiKekkaJohoEntity}のクローン
@@ -402,7 +411,8 @@ public class IchijiHanteiKekkaJoho
     }
 
     /**
-     * 要介護認定一次判定結果情報のみを変更対象とします。<br/> {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 要介護認定一次判定結果情報のみを変更対象とします。<br/>
+     * {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link IchijiHanteiKekkaJoho}
      */
@@ -417,7 +427,8 @@ public class IchijiHanteiKekkaJoho
     }
 
     /**
-     * 保持する要介護認定一次判定結果情報を削除対象とします。<br/> {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する要介護認定一次判定結果情報を削除対象とします。<br/>
+     * {@link DbT5116IchijiHanteiKekkaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link IchijiHanteiKekkaJoho}
      */

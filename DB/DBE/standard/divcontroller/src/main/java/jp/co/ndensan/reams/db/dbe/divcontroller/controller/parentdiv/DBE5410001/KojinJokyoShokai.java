@@ -172,6 +172,7 @@ public class KojinJokyoShokai {
         div.setHdnChosaItakusakiName(div.getTxtChosaItakusakiName().getValue());
         div.setHdnNinteiChosainCode(div.getTxtNinteiChosainCode().getValue());
         div.setHdnNinteiChosainName(div.getTxtNinteiChosainName().getValue());
+        div.setHdnNinteiShinseibi(div.getCcdNinteiShinseishaKihonInfo().get認定申請日().toDateString());
         return ResponseData.of(div).respond();
     }
 

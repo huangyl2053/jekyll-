@@ -45,17 +45,25 @@ public class NinteichosaIraiListCsvEntity {
     private final RString chosainShimei;
     @CsvField(order = 14, name = "(調査票入手)調査実施日")
     private final RString ninteichosaJisshiYMD;
-    @CsvField(order = 15, name = "(調査督促)督促発行日")
+    @CsvField(order = 15, name = "(調査票入手)概況調査")
+    private final RString gaikyoChosaToroku;
+    @CsvField(order = 16, name = "(調査票入手)基本調査")
+    private final RString kihonChosaToroku;
+    @CsvField(order = 17, name = "(調査票入手)特記事項")
+    private final RString tokkiJikoToroku;
+    @CsvField(order = 18, name = "(調査票入手)概況特記")
+    private final RString gaikyoTokkiToroku;
+    @CsvField(order = 19, name = "(調査督促)督促発行日")
     private final RString ninteichosaTokusokuYMD;
-    @CsvField(order = 16, name = "(調査督促)方法")
+    @CsvField(order = 20, name = "(調査督促)方法")
     private final RString ninteichosaTokusokuHoho;
-    @CsvField(order = 17, name = "(調査督促)回数")
+    @CsvField(order = 21, name = "(調査督促)回数")
     private final RString ninteichosaTokusokuKaisu;
-    @CsvField(order = 18, name = "(調査督促)期限")
+    @CsvField(order = 22, name = "(調査督促)期限")
     private final RString ninteichosaKigenYMD;
-    @CsvField(order = 19, name = "地区コード")
+    @CsvField(order = 23, name = "地区コード")
     private final RString chikuCode;
-    @CsvField(order = 20, name = "地区")
+    @CsvField(order = 24, name = "地区")
     private final RString chikuName;
 
     /**
@@ -75,6 +83,10 @@ public class NinteichosaIraiListCsvEntity {
      * @param ninteiChosainCode (今回調査)調査員コード
      * @param chosainShimei (今回調査)調査員
      * @param ninteichosaJisshiYMD (調査票入手)調査実施日
+     * @param gaikyoChosaToroku (調査票入手)概況調査
+     * @param kihonChosaToroku (調査票入手)基本調査
+     * @param tokkiJikoToroku (調査票入手)特記事項
+     * @param gaikyoTokkiToroku (調査票入手)概況特記
      * @param ninteichosaTokusokuYMD (調査督促)督促発行日
      * @param ninteichosaTokusokuHoho (調査督促)方法
      * @param ninteichosaTokusokuKaisu (調査督促)回数
@@ -97,6 +109,10 @@ public class NinteichosaIraiListCsvEntity {
             RString ninteiChosainCode,
             RString chosainShimei,
             RString ninteichosaJisshiYMD,
+            RString gaikyoChosaToroku,
+            RString kihonChosaToroku,
+            RString tokkiJikoToroku,
+            RString gaikyoTokkiToroku,
             RString ninteichosaTokusokuYMD,
             RString ninteichosaTokusokuHoho,
             RString ninteichosaTokusokuKaisu,
@@ -117,6 +133,10 @@ public class NinteichosaIraiListCsvEntity {
         this.ninteiChosainCode = ninteiChosainCode;
         this.chosainShimei = chosainShimei;
         this.ninteichosaJisshiYMD = ninteichosaJisshiYMD;
+        this.gaikyoChosaToroku = gaikyoChosaToroku;
+        this.kihonChosaToroku = kihonChosaToroku;
+        this.tokkiJikoToroku = tokkiJikoToroku;
+        this.gaikyoTokkiToroku = gaikyoTokkiToroku;
         this.ninteichosaTokusokuYMD = ninteichosaTokusokuYMD;
         this.ninteichosaTokusokuHoho = ninteichosaTokusokuHoho;
         this.ninteichosaTokusokuKaisu = ninteichosaTokusokuKaisu;

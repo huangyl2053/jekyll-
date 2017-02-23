@@ -135,6 +135,7 @@ public class SeikatsuhogoTorokuHandler {
         if (前回申請書管理番号 != null) {
             business.set前回申請書管理番号(前回申請書管理番号);
         }
+        business.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         return business;
     }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2060001;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.KanryoShoriStatus;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.NinteichosaKekkaNyushuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
@@ -63,7 +64,7 @@ public enum NinteichosaKekkaNyushuSpec implements IPredicate<NinteichosaKekkaNyu
 
                 @Override
                 public boolean apply(NinteichosaKekkaNyushuDiv div) {
-                    return !SpecHelper.is認定調査票入手一覧調査実施日が空白行を選択(div);
+                    return !SpecHelper.is認定調査票入手一覧完了不可能行を選択(div);
                 }
             };
 
@@ -129,17 +130,17 @@ public enum NinteichosaKekkaNyushuSpec implements IPredicate<NinteichosaKekkaNyu
         }
 
         /**
-         * 認定調査票入手一覧データで調査実施日が空白の行を選択しているとき、trueを返します。
+         * 認定調査票入手一覧データで完了不可能の行を選択しているとき、trueを返します。
          *
          * @param div NinteichosaKekkaNyushuDiv
          * @return booelan
          */
-        public static boolean is認定調査票入手一覧調査実施日が空白行を選択(NinteichosaKekkaNyushuDiv div) {
+        public static boolean is認定調査票入手一覧完了不可能行を選択(NinteichosaKekkaNyushuDiv div) {
             if (is認定調査票入手一覧未選択(div)) {
                 return false;
             }
             for (dgNinteiTaskList_Row item : div.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems()) {
-                if (item.getChosaJisshiYMD().getValue() == null) {
+                if (KanryoShoriStatus.未処理.get略称().equals(item.getJotai())) {
                     return true;
                 }
             }

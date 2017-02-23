@@ -86,7 +86,7 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     @Override
     protected void process(NinteiChosaBasicDataRelateEntity entity) {
         if (認定調査委託先名称 == null || 認定調査委託先名称.isEmpty()) {
-            認定調査委託先名称 = entity.get今回分Entity().get市町村名称();
+            認定調査委託先名称 = entity.get今回分Entity().get事業者名称();
         }
         if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()
                 && (認定調査員氏名 == null || 認定調査員氏名.isEmpty())) {

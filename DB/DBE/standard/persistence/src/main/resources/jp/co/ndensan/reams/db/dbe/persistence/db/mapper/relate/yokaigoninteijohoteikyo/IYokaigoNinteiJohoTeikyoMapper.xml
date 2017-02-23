@@ -54,7 +54,9 @@
         <result property="shujiiCode" column="DbT5101_shujiiCode"                                              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiIryokikanCode" column="DbT5101_shujiiIryokikanCode"                            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="johoteikyoSiryoOutputYMD" column="DbT5101_johoteikyoSiryoOutputYMD"                  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="shinseishoKanriNo" column="DbT5102_shinseishoKanriNo"                                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseishoKanriNo" column="DbT5101_shinseishoKanriNo"                                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="DbT5101_shoKisaiHokenshaNo"                              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="DbT5101_hihokenshaNo"                                          typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nijiHanteiYMD" column="DbT5102_nijiHanteiYMD"                                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="nijiHanteiYokaigoJotaiKubunCode" column="DbT5102_nijiHanteiYokaigoJotaiKubunCode"    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiNinteiYukoKikan" column="DbT5102_nijiHanteiNinteiYukoKikan" />
@@ -62,10 +64,12 @@
         <result property="nijiHanteiNinteiYukoShuryoYMD" column="DbT5102_nijiHanteiNinteiYukoShuryoYMD"        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaJisshiYMD" column="DbT5202_ninteichosaJisshiYMD"                          typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaJuryoYMD" column="DbT5202_ninteichosaJuryoYMD"                            typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteichosaIraiRirekiNo" column="DbT5201_ninteichosaIraiRirekiNo" />
         <result property="ninteichosaIraiYMD" column="DbT5201_ninteichosaIraiYMD"                              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho"                                      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosainShimei" column="DbT5913_chosainShimei"                                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoJuryoYMD" column="DbT5302_ikenshoJuryoYMD"                                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ikenshoIraiRirekiNo" column="DbT5301_ikenshoIraiRirekiNo" />
         <result property="ikenshoSakuseiIraiYMD" column="DbT5301_ikenshoSakuseiIraiYMD"                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="iryoKikanMeisho" column="DbT5911_iryoKikanMeisho"                                    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shujiiName" column="DbT5912_shujiiName"                                              typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -91,7 +95,9 @@
         , DbT5101NinteiShinseiJoho."shujiiIryokikanCode" AS DbT5101_shujiiIryokikanCode
         , DbT5101NinteiShinseiJoho."johoteikyoSiryoOutputYMD" AS DbT5101_johoteikyoSiryoOutputYMD
         , DbT5101NinteiShinseiJoho."johoteikyoDoiFlag" AS DbT5101_johoteikyoDoiFlag
-        , DbT5101NinteiShinseiJoho."shinseishoKanriNo" AS DbT5102_shinseishoKanriNo
+        , DbT5101NinteiShinseiJoho."shinseishoKanriNo" AS DbT5101_shinseishoKanriNo
+        , DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" AS DbT5101_shoKisaiHokenshaNo
+        , DbT5101NinteiShinseiJoho."hihokenshaNo" AS DbT5101_hihokenshaNo
         , DbT5102NinteiKekkaJoho."nijiHanteiYMD" AS DbT5102_nijiHanteiYMD
         , DbT5102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode" AS DbT5102_nijiHanteiYokaigoJotaiKubunCode
         , DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoKikan" AS DbT5102_nijiHanteiNinteiYukoKikan
@@ -99,11 +105,13 @@
         , DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD" AS DbT5102_nijiHanteiNinteiYukoShuryoYMD
         , DbT5202NinteichosahyoGaikyoChosa."ninteichosaJisshiYMD" AS DbT5202_ninteichosaJisshiYMD
         , DbT5202NinteichosahyoGaikyoChosa."ninteichosaJuryoYMD" AS DbT5202_ninteichosaJuryoYMD
+        , DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" AS DbT5201_ninteichosaIraiRirekiNo
         , DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD" AS DbT5201_ninteichosaIraiYMD
         , DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho" AS DbT5910_jigyoshaMeisho
         , DbT5913ChosainJoho."chosainShimei" AS DbT5913_chosainShimei
         , DbT5302ShujiiIkenshoJoho."ikenshoJuryoYMD" AS DbT5302_ikenshoJuryoYMD
         , DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag" AS DbT5302_ikenshoDoiFlag
+        , DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" AS DbT5301_ikenshoIraiRirekiNo
         , DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiIraiYMD" AS DbT5301_ikenshoSakuseiIraiYMD
         , DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" AS DbT5911_iryoKikanMeisho
         , DbT5912ShujiiJoho."shujiiName" AS DbT5912_shujiiName
@@ -317,36 +325,6 @@
         <result property="イメージID"  column="イメージID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>
 
-    <select resultOrdered="true" id="get特記事項区分" resultMap="resultMap_NinteichosaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter" fetchSize="500">
-        SELECT
-            DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoNo" AS 特記事項番号,
-            DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoRemban" AS 特記事項連番,
-            DbT5205NinteichosahyoTokkijiko."tokkijikoTextImageKubun" AS イメージ区分,
-            DbT5205NinteichosahyoTokkijiko."tokkiJiko" AS 特記事項,
-            DbT5115Image."imageSharedFileId" AS イメージID
-        FROM
-            rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205NinteichosahyoTokkijiko,
-            rgdb."DbT5115Image" AS DbT5115Image
-        WHERE
-            DbT5205NinteichosahyoTokkijiko."shinseishoKanriNo"=DbT5115Image."shinseishoKanriNo"
-            AND DbT5205NinteichosahyoTokkijiko."shinseishoKanriNo" IN
-                <foreach collection="申請書管理番号List" item="申請書管理番号" open="(" separator="," close=")">
-                #{申請書管理番号}
-                </foreach>
-            AND DbT5205NinteichosahyoTokkijiko."ninteichosaRirekiNo" = (SELECT MAX(DbT5202."ninteichosaRirekiNo") AS 認定調査依頼履歴番号
-                                                                        FROM   rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
-                                                                        WHERE  DbT5202."shinseishoKanriNo" IN
-                                                                               <foreach collection="申請書管理番号List" item="申請書管理番号" open="(" separator="," close=")">
-                                                                               #{申請書管理番号}
-                                                                               </foreach>
-                                                                       )
-            AND DbT5205NinteichosahyoTokkijiko."genponMaskKubun" = #{原本マスク区分}
-        ORDER BY
-            DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoNo",
-            DbT5205NinteichosahyoTokkijiko."ninteichosaTokkijikoRemban"
-    </select>
-
     <select resultOrdered="true" id="get特記事項リスト" resultMap="resultMap_NinteichosaEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter" fetchSize="500">
         SELECT
@@ -476,6 +454,21 @@
             </foreach>
         ORDER BY
             DbT5208NinteichosahyoServiceJokyoFlag."remban"
+    </select>
+
+    <select resultOrdered="true" id="select一次判定結果情報"
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo.YokaigoBatchMybitisParamter" fetchSize="500">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
+        FROM
+            rgdb."DbT5116IchijiHanteiKekkaJoho"
+        WHERE
+            "shinseishoKanriNo" IN
+            <foreach collection="申請書管理番号List" item="申請書管理番号" open="(" separator="," close=")">
+            #{申請書管理番号}
+            </foreach>
+            AND "isDeleted" = false
     </select>
 
     <resultMap id="resultMap_YokaigoNinteiJohoTeikyoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoEntity" autoMapping="true">

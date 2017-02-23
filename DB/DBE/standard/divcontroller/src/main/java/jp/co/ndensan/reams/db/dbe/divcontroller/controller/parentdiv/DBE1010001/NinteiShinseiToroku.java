@@ -90,6 +90,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -103,6 +104,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -131,6 +133,8 @@ public class NinteiShinseiToroku {
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
     private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
+    private static final RString BTNRESEARCH_FILENAME = new RString("btnReSearch");
+    private static final RString BTNBACK_FILENAME = new RString("btnBackToIchiran");
     private static final int INT_0 = 0;
     private static final int ZERO_17 = 17;
     private static final int ZERO_5 = 5;
@@ -298,13 +302,14 @@ public class NinteiShinseiToroku {
             }
             if (business != null) {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
-                getHandler(div).loadInsert(business, business.get保険者().get市町村コード(), 介護導入形態);
+                getHandler(div).loadInsert(business, business.get市町村コード(), 介護導入形態);
                 getHandler(div).set医療保険(manager.get医療保険履歴(business.get識別コード()));
                 set連絡先(business.get前回申請書管理番号(), div, true);
                 div.setHdnJogaiMode(new RString("入力"));
                 div.setHdnShinseishoKanriNo(RString.EMPTY);
             }
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBackToIchiran"), false);
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNBACK_FILENAME, false);
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNRESEARCH_FILENAME, false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShisho().setDisabled(Boolean.TRUE);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiShubetsu().setReadOnly(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunShinseiji().setReadOnly(false);
@@ -854,10 +859,8 @@ public class NinteiShinseiToroku {
             } else if (NinteiShinseiShinseijiKubunCode.区分変更申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 //「編集仕様：区分変更」としてデータを更新する
                 shinseiJohoBuilder.set申請サービス削除の理由(div.getServiceDel().getTxtServiceDeleteRiyu().getValue());
-                shinseiJohoBuilder.set取下区分コード(new Code(TorisageKubunCode.認定申請有効.getコード()));
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
             } else if (div.getTxtTorisageDate().getValue() != null && !div.getTxtTorisageJiyu().getValue().isEmpty()) {
-                shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
                 shinseiJohoBuilder.set審査継続区分(false);
                 shinseiJohoBuilder.set論理削除フラグ(false);
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
@@ -1123,6 +1126,7 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         shinseiJohoBuilder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
         shinseiJohoBuilder.set主治医への連絡事項(div.getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko());
+        shinseiJohoBuilder.set市町村コード(new LasdecCode(div.getCcdShikakuInfo().getHookenshaCode()));
         shinseiJohoBuilder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         if (RString.isNullOrEmpty(div.getShisetsuJoho().getTxtNyushoShisetsu().getValue())) {
             shinseiJohoBuilder.set施設入所の有無(false);
@@ -1154,7 +1158,10 @@ public class NinteiShinseiToroku {
             shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey()));
         }
         shinseiJohoBuilder.set認定申請区分_法令_コード(new Code(kihonJohoInputDiv.getDdlShinseiKubunHorei().getSelectedKey()));
-        shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
+        
+        if (!RString.isNullOrEmpty(div.getDdlTorisageJiyu().getSelectedKey())) {
+            shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
+        }
         shinseiJohoBuilder.set入所施設名称(new AtenaMeisho(div.getTxtNyushoShisetsu().getValue()));
         //shinseiJohoBuilder.set市町村コード(LasdecCode.EMPTY)		
         if (div.getTxtEnkiKetteiYMD().getValue() != null && !div.getTxtEnkiKetteiYMD().getValue().toDateString().trim().isEmpty()) {
@@ -1345,7 +1352,7 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set認定調査員コード(new ChosainCode(div.getCcdChodsItakusakiAndChosainInput().getTxtChosainCode().getValue()));
         shinseiJohoBuilder.set調査員への連絡事項(div.getCcdChodsItakusakiAndChosainInput().getChosainRenrakuJiko());
         shinseiJohoBuilder.set入所施設名称(new AtenaMeisho(div.getTxtNyushoShisetsu().getValue()));
-        //shinseiJohoBuilder.set市町村コード(LasdecCode.EMPTY)
+        shinseiJohoBuilder.set市町村コード(new LasdecCode(div.getCcdShikakuInfo().getHookenshaCode()));
         return shinseiJohoBuilder.build();
     }
 
@@ -1387,13 +1394,13 @@ public class NinteiShinseiToroku {
     }
 
     private ShinseishoKanriNo get申請書管理番号(NinteiShinseiTorokuDiv div) {
-        KaigoHokensha hokensha = dbt7050Manager.get介護保険者By広域保険者番号(new ShoKisaiHokenshaNo(div.getCcdShikakuInfo().getHookenshaCode()));
+        LasdecCode 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード,  LasdecCode.class);
         RString 連番 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
         RStringBuilder rsb = new RStringBuilder();
-        if (ZERO_6.equals(div.getCcdShikakuInfo().getHookenshaCode())) {
+        if (ZERO_6.equals(div.getCcdShikakuInfo().getHookenshaCode()) || 市町村コード == null) {
             rsb.append(ZERO_6);
         } else {
-            rsb.append(hokensha.get広域保険者市町村コード().value());
+            rsb.append(市町村コード.code市町村());
         }
         rsb.append(RDate.getNowDate().getYearMonth().toDateString());
         rsb.append(連番.padZeroToLeft(ZERO_5));

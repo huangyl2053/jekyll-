@@ -90,6 +90,8 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
     private static final RString 総合事業未実施 = new RString("総合事業未実施");
     private static final RString 総合事業実施済 = new RString("総合事業実施済");
     private static final RString すべて = new RString("1");
+    private final RString マスキングなし = new RString("0");
+    private final RString マスキングあり = new RString("1");
 
     @Override
     protected void initialize() {
@@ -128,7 +130,7 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
 
         tokkiText1A4AllReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
-                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker( TokkiText1ReportSource.LAYOUTBREAKITEM) {
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
                             ReportLineRecord<TokkiText1ReportSource> currentRecord,
@@ -166,8 +168,14 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
     @Override
     protected void process(YokaigoNinteiJohoTeikyoEntity entity) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(entity.get申請書管理番号());
-        List<RString> 特記事項区分List = finder.get特記事項区分(申請書管理番号, processPrm.get特記事項マスキング区分());
         List<NinteichosaRelate> 特記事項List = finder.get特記事項List(申請書管理番号, processPrm.get特記事項マスキング区分());
+        if (マスキングあり.equals(processPrm.get特記事項マスキング区分()) && 特記事項List.isEmpty()) {
+            特記事項List = finder.get特記事項List(申請書管理番号, マスキングなし);
+        }
+        List<RString> 特記事項区分List = new ArrayList<>();
+        for (NinteichosaRelate 特記事項 : 特記事項List) {
+            特記事項区分List.add(特記事項.get特記事項区分());
+        }
         RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
         if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
             if (entity.get認定申請年月日().isBeforeOrEquals(processPrm.get特記事項判定日())) {

@@ -41,6 +41,10 @@ public class tblKanryoJissekiDiv extends TablePanel {
     private celTableCell11AttblKanryoJisseki celTableCell11;
     @JsonProperty("celTableCell12")
     private celTableCell12AttblKanryoJisseki celTableCell12;
+    @JsonProperty("TableCell1")
+    private TableCell1AttblKanryoJisseki TableCell1;
+    @JsonProperty("TableCell2")
+    private TableCell2AttblKanryoJisseki TableCell2;
     @JsonProperty("celTableCell4")
     private celTableCell4AttblKanryoJisseki celTableCell4;
     @JsonProperty("celTableCell5")
@@ -59,6 +63,10 @@ public class tblKanryoJissekiDiv extends TablePanel {
     private celTableCell20AttblKanryoJisseki celTableCell20;
     @JsonProperty("celTableCell21")
     private celTableCell21AttblKanryoJisseki celTableCell21;
+    @JsonProperty("TableCell3")
+    private TableCell3AttblKanryoJisseki TableCell3;
+    @JsonProperty("TableCell4")
+    private TableCell4AttblKanryoJisseki TableCell4;
     @JsonProperty("celTableCell24")
     private celTableCell24AttblKanryoJisseki celTableCell24;
     @JsonProperty("celTableCell25")
@@ -77,14 +85,6 @@ public class tblKanryoJissekiDiv extends TablePanel {
     private celTableCell31AttblKanryoJisseki celTableCell31;
     @JsonProperty("celTableCell32")
     private celTableCell32AttblKanryoJisseki celTableCell32;
-    @JsonProperty("TableCell1")
-    private TableCell1AttblKanryoJisseki TableCell1;
-    @JsonProperty("TableCell2")
-    private TableCell2AttblKanryoJisseki TableCell2;
-    @JsonProperty("TableCell3")
-    private TableCell3AttblKanryoJisseki TableCell3;
-    @JsonProperty("TableCell4")
-    private TableCell4AttblKanryoJisseki TableCell4;
     @JsonProperty("TableCell5")
     private TableCell5AttblKanryoJisseki TableCell5;
     @JsonProperty("TableCell6")
@@ -135,6 +135,16 @@ public class tblKanryoJissekiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblNijiHantei() {
+        return this.TableCell1.getLblNijiHantei();
+    }
+
+    @JsonIgnore
+    public Label getLblCenterSoshin() {
+        return this.TableCell2.getLblCenterSoshin();
+    }
+
+    @JsonIgnore
     public Label getLblKanryoYotei() {
         return this.celTableCell4.getLblKanryoYotei();
     }
@@ -180,6 +190,16 @@ public class tblKanryoJissekiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return this.TableCell3.getTxtNijiHanteiYoteiDate();
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return this.TableCell4.getTxtCenterSoshinYoteiDate();
+    }
+
+    @JsonIgnore
     public Label getLblKanryoJisseki() {
         return this.celTableCell24.getLblKanryoJisseki();
     }
@@ -222,26 +242,6 @@ public class tblKanryoJissekiDiv extends TablePanel {
     @JsonIgnore
     public TextBoxDate getTxtShinsakaiTorokuJissekiDate() {
         return this.celTableCell32.getTxtShinsakaiTorokuJissekiDate();
-    }
-
-    @JsonIgnore
-    public Label getLblNijiHantei() {
-        return this.TableCell1.getLblNijiHantei();
-    }
-
-    @JsonIgnore
-    public Label getLblCenterSoshin() {
-        return this.TableCell2.getLblCenterSoshin();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return this.TableCell3.getTxtNijiHanteiYoteiDate();
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtCenterSoshinYoteiDate() {
-        return this.TableCell4.getTxtCenterSoshinYoteiDate();
     }
 
     @JsonIgnore
@@ -423,6 +423,42 @@ public class tblKanryoJissekiDiv extends TablePanel {
     }
 
     /*
+     * getTableCell1
+     * @return TableCell1
+     */
+    @JsonProperty("TableCell1")
+    private TableCell1AttblKanryoJisseki getTableCell1() {
+        return TableCell1;
+    }
+
+    /*
+     * setTableCell1
+     * @param TableCell1 TableCell1
+     */
+    @JsonProperty("TableCell1")
+    private void setTableCell1(TableCell1AttblKanryoJisseki TableCell1) {
+        this.TableCell1 = TableCell1;
+    }
+
+    /*
+     * getTableCell2
+     * @return TableCell2
+     */
+    @JsonProperty("TableCell2")
+    private TableCell2AttblKanryoJisseki getTableCell2() {
+        return TableCell2;
+    }
+
+    /*
+     * setTableCell2
+     * @param TableCell2 TableCell2
+     */
+    @JsonProperty("TableCell2")
+    private void setTableCell2(TableCell2AttblKanryoJisseki TableCell2) {
+        this.TableCell2 = TableCell2;
+    }
+
+    /*
      * getcelTableCell4
      * @return celTableCell4
      */
@@ -585,6 +621,42 @@ public class tblKanryoJissekiDiv extends TablePanel {
     }
 
     /*
+     * getTableCell3
+     * @return TableCell3
+     */
+    @JsonProperty("TableCell3")
+    private TableCell3AttblKanryoJisseki getTableCell3() {
+        return TableCell3;
+    }
+
+    /*
+     * setTableCell3
+     * @param TableCell3 TableCell3
+     */
+    @JsonProperty("TableCell3")
+    private void setTableCell3(TableCell3AttblKanryoJisseki TableCell3) {
+        this.TableCell3 = TableCell3;
+    }
+
+    /*
+     * getTableCell4
+     * @return TableCell4
+     */
+    @JsonProperty("TableCell4")
+    private TableCell4AttblKanryoJisseki getTableCell4() {
+        return TableCell4;
+    }
+
+    /*
+     * setTableCell4
+     * @param TableCell4 TableCell4
+     */
+    @JsonProperty("TableCell4")
+    private void setTableCell4(TableCell4AttblKanryoJisseki TableCell4) {
+        this.TableCell4 = TableCell4;
+    }
+
+    /*
      * getcelTableCell24
      * @return celTableCell24
      */
@@ -744,78 +816,6 @@ public class tblKanryoJissekiDiv extends TablePanel {
     @JsonProperty("celTableCell32")
     private void setCelTableCell32(celTableCell32AttblKanryoJisseki celTableCell32) {
         this.celTableCell32 = celTableCell32;
-    }
-
-    /*
-     * getTableCell1
-     * @return TableCell1
-     */
-    @JsonProperty("TableCell1")
-    private TableCell1AttblKanryoJisseki getTableCell1() {
-        return TableCell1;
-    }
-
-    /*
-     * setTableCell1
-     * @param TableCell1 TableCell1
-     */
-    @JsonProperty("TableCell1")
-    private void setTableCell1(TableCell1AttblKanryoJisseki TableCell1) {
-        this.TableCell1 = TableCell1;
-    }
-
-    /*
-     * getTableCell2
-     * @return TableCell2
-     */
-    @JsonProperty("TableCell2")
-    private TableCell2AttblKanryoJisseki getTableCell2() {
-        return TableCell2;
-    }
-
-    /*
-     * setTableCell2
-     * @param TableCell2 TableCell2
-     */
-    @JsonProperty("TableCell2")
-    private void setTableCell2(TableCell2AttblKanryoJisseki TableCell2) {
-        this.TableCell2 = TableCell2;
-    }
-
-    /*
-     * getTableCell3
-     * @return TableCell3
-     */
-    @JsonProperty("TableCell3")
-    private TableCell3AttblKanryoJisseki getTableCell3() {
-        return TableCell3;
-    }
-
-    /*
-     * setTableCell3
-     * @param TableCell3 TableCell3
-     */
-    @JsonProperty("TableCell3")
-    private void setTableCell3(TableCell3AttblKanryoJisseki TableCell3) {
-        this.TableCell3 = TableCell3;
-    }
-
-    /*
-     * getTableCell4
-     * @return TableCell4
-     */
-    @JsonProperty("TableCell4")
-    private TableCell4AttblKanryoJisseki getTableCell4() {
-        return TableCell4;
-    }
-
-    /*
-     * setTableCell4
-     * @param TableCell4 TableCell4
-     */
-    @JsonProperty("TableCell4")
-    private void setTableCell4(TableCell4AttblKanryoJisseki TableCell4) {
-        this.TableCell4 = TableCell4;
     }
 
     /*
@@ -1107,6 +1107,66 @@ class celTableCell12AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
+ * TableCell1 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell1AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("lblNijiHantei")
+    private Label lblNijiHantei;
+
+    /*
+     * getlblNijiHantei
+     * @return lblNijiHantei
+     */
+    @JsonProperty("lblNijiHantei")
+    public Label getLblNijiHantei() {
+        return lblNijiHantei;
+    }
+
+    /*
+     * setlblNijiHantei
+     * @param lblNijiHantei lblNijiHantei
+     */
+    @JsonProperty("lblNijiHantei")
+    public void setLblNijiHantei(Label lblNijiHantei) {
+        this.lblNijiHantei = lblNijiHantei;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell2 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell2AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("lblCenterSoshin")
+    private Label lblCenterSoshin;
+
+    /*
+     * getlblCenterSoshin
+     * @return lblCenterSoshin
+     */
+    @JsonProperty("lblCenterSoshin")
+    public Label getLblCenterSoshin() {
+        return lblCenterSoshin;
+    }
+
+    /*
+     * setlblCenterSoshin
+     * @param lblCenterSoshin lblCenterSoshin
+     */
+    @JsonProperty("lblCenterSoshin")
+    public void setLblCenterSoshin(Label lblCenterSoshin) {
+        this.lblCenterSoshin = lblCenterSoshin;
+    }
+
+    // </editor-fold>
+}
+/**
  * celTableCell4 のクラスファイル 
  * 
  * @author 自動生成
@@ -1377,6 +1437,66 @@ class celTableCell21AttblKanryoJisseki extends TableCell {
     // </editor-fold>
 }
 /**
+ * TableCell3 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell3AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtNijiHanteiYoteiDate")
+    private TextBoxDate txtNijiHanteiYoteiDate;
+
+    /*
+     * gettxtNijiHanteiYoteiDate
+     * @return txtNijiHanteiYoteiDate
+     */
+    @JsonProperty("txtNijiHanteiYoteiDate")
+    public TextBoxDate getTxtNijiHanteiYoteiDate() {
+        return txtNijiHanteiYoteiDate;
+    }
+
+    /*
+     * settxtNijiHanteiYoteiDate
+     * @param txtNijiHanteiYoteiDate txtNijiHanteiYoteiDate
+     */
+    @JsonProperty("txtNijiHanteiYoteiDate")
+    public void setTxtNijiHanteiYoteiDate(TextBoxDate txtNijiHanteiYoteiDate) {
+        this.txtNijiHanteiYoteiDate = txtNijiHanteiYoteiDate;
+    }
+
+    // </editor-fold>
+}
+/**
+ * TableCell4 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class TableCell4AttblKanryoJisseki extends TableCell {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    @JsonProperty("txtCenterSoshinYoteiDate")
+    private TextBoxDate txtCenterSoshinYoteiDate;
+
+    /*
+     * gettxtCenterSoshinYoteiDate
+     * @return txtCenterSoshinYoteiDate
+     */
+    @JsonProperty("txtCenterSoshinYoteiDate")
+    public TextBoxDate getTxtCenterSoshinYoteiDate() {
+        return txtCenterSoshinYoteiDate;
+    }
+
+    /*
+     * settxtCenterSoshinYoteiDate
+     * @param txtCenterSoshinYoteiDate txtCenterSoshinYoteiDate
+     */
+    @JsonProperty("txtCenterSoshinYoteiDate")
+    public void setTxtCenterSoshinYoteiDate(TextBoxDate txtCenterSoshinYoteiDate) {
+        this.txtCenterSoshinYoteiDate = txtCenterSoshinYoteiDate;
+    }
+
+    // </editor-fold>
+}
+/**
  * celTableCell24 のクラスファイル 
  * 
  * @author 自動生成
@@ -1642,126 +1762,6 @@ class celTableCell32AttblKanryoJisseki extends TableCell {
     @JsonProperty("txtShinsakaiTorokuJissekiDate")
     public void setTxtShinsakaiTorokuJissekiDate(TextBoxDate txtShinsakaiTorokuJissekiDate) {
         this.txtShinsakaiTorokuJissekiDate = txtShinsakaiTorokuJissekiDate;
-    }
-
-    // </editor-fold>
-}
-/**
- * TableCell1 のクラスファイル 
- * 
- * @author 自動生成
- */
-class TableCell1AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
-    @JsonProperty("lblNijiHantei")
-    private Label lblNijiHantei;
-
-    /*
-     * getlblNijiHantei
-     * @return lblNijiHantei
-     */
-    @JsonProperty("lblNijiHantei")
-    public Label getLblNijiHantei() {
-        return lblNijiHantei;
-    }
-
-    /*
-     * setlblNijiHantei
-     * @param lblNijiHantei lblNijiHantei
-     */
-    @JsonProperty("lblNijiHantei")
-    public void setLblNijiHantei(Label lblNijiHantei) {
-        this.lblNijiHantei = lblNijiHantei;
-    }
-
-    // </editor-fold>
-}
-/**
- * TableCell2 のクラスファイル 
- * 
- * @author 自動生成
- */
-class TableCell2AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
-    @JsonProperty("lblCenterSoshin")
-    private Label lblCenterSoshin;
-
-    /*
-     * getlblCenterSoshin
-     * @return lblCenterSoshin
-     */
-    @JsonProperty("lblCenterSoshin")
-    public Label getLblCenterSoshin() {
-        return lblCenterSoshin;
-    }
-
-    /*
-     * setlblCenterSoshin
-     * @param lblCenterSoshin lblCenterSoshin
-     */
-    @JsonProperty("lblCenterSoshin")
-    public void setLblCenterSoshin(Label lblCenterSoshin) {
-        this.lblCenterSoshin = lblCenterSoshin;
-    }
-
-    // </editor-fold>
-}
-/**
- * TableCell3 のクラスファイル 
- * 
- * @author 自動生成
- */
-class TableCell3AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
-    @JsonProperty("txtNijiHanteiYoteiDate")
-    private TextBoxDate txtNijiHanteiYoteiDate;
-
-    /*
-     * gettxtNijiHanteiYoteiDate
-     * @return txtNijiHanteiYoteiDate
-     */
-    @JsonProperty("txtNijiHanteiYoteiDate")
-    public TextBoxDate getTxtNijiHanteiYoteiDate() {
-        return txtNijiHanteiYoteiDate;
-    }
-
-    /*
-     * settxtNijiHanteiYoteiDate
-     * @param txtNijiHanteiYoteiDate txtNijiHanteiYoteiDate
-     */
-    @JsonProperty("txtNijiHanteiYoteiDate")
-    public void setTxtNijiHanteiYoteiDate(TextBoxDate txtNijiHanteiYoteiDate) {
-        this.txtNijiHanteiYoteiDate = txtNijiHanteiYoteiDate;
-    }
-
-    // </editor-fold>
-}
-/**
- * TableCell4 のクラスファイル 
- * 
- * @author 自動生成
- */
-class TableCell4AttblKanryoJisseki extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
-    @JsonProperty("txtCenterSoshinYoteiDate")
-    private TextBoxDate txtCenterSoshinYoteiDate;
-
-    /*
-     * gettxtCenterSoshinYoteiDate
-     * @return txtCenterSoshinYoteiDate
-     */
-    @JsonProperty("txtCenterSoshinYoteiDate")
-    public TextBoxDate getTxtCenterSoshinYoteiDate() {
-        return txtCenterSoshinYoteiDate;
-    }
-
-    /*
-     * settxtCenterSoshinYoteiDate
-     * @param txtCenterSoshinYoteiDate txtCenterSoshinYoteiDate
-     */
-    @JsonProperty("txtCenterSoshinYoteiDate")
-    public void setTxtCenterSoshinYoteiDate(TextBoxDate txtCenterSoshinYoteiDate) {
-        this.txtCenterSoshinYoteiDate = txtCenterSoshinYoteiDate;
     }
 
     // </editor-fold>

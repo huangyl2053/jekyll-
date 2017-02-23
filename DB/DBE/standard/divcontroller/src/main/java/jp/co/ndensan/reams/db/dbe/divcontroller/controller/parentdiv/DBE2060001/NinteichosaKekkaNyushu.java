@@ -225,17 +225,6 @@ public class NinteichosaKekkaNyushu {
         return ResponseData.of(requestDiv).respond();
     }
 
-    /**
-     * 「処理を継続する」ボタンを押下する場合、画面を再表示して登録状態に遷移します。
-     *
-     * @param requestDiv 完了処理・認定調査結果入手Div
-     * @return レスポンス
-     */
-    public ResponseData onClick_btnContinue(NinteichosaKekkaNyushuDiv requestDiv) {
-        getHandler(requestDiv).initialDataGrid();
-        return ResponseData.of(requestDiv).setState(DBE2060001StateName.登録);
-    }
-
     private NinteichosaIraiListCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         return new NinteichosaIraiListCsvEntity(
                 row.getShinseishoKanriNo(),
@@ -252,6 +241,10 @@ public class NinteichosaKekkaNyushu {
                 row.getChosainCode(),
                 row.getChosain(),
                 getDate32(row.getChosaJisshiYMD().getValue()),
+                row.getGaikyoChosaToroku(),
+                row.getKihonChosaToroku(),
+                row.getTokkiJikoToroku(),
+                row.getGaikyoTokkiToroku(),
                 getDate32(row.getTokusokuHakkoYMD().getValue()),
                 row.getTokusokuHoho(),
                 new RString(row.getTokusokuKaisu().getValue().toString()),

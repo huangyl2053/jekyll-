@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.Ninte
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
@@ -134,18 +135,18 @@ public interface IYokaigoNinteiJohoTeikyoMapper {
     List<RString> get認定調査特記事項番号(YokaigoBatchMybitisParamter param);
 
     /**
-     * 検索条件より、特記事項区分を検索する。
-     *
-     * @param param 特記事項区分検索条件
-     * @return NinteichosaRelateEntity{@code list}
-     */
-    List<NinteichosaRelateEntity> get特記事項区分(YokaigoBatchMybitisParamter param);
-
-    /**
      * 検索条件より、特記事項リストを検索する。
      *
      * @param param 特特記事項リスト検索条件
      * @return NinteichosaRelateEntity{@code list}
      */
     List<NinteichosaRelateEntity> get特記事項リスト(YokaigoBatchMybitisParamter param);
+
+    /**
+     * 検索条件より、一次判定結果情報を検索する。
+     *
+     * @param param 特特記事項リスト検索条件
+     * @return DbT5116IchijiHanteiKekkaJohoEntity{@code list}
+     */
+    List<DbT5116IchijiHanteiKekkaJohoEntity> select一次判定結果情報(YokaigoBatchMybitisParamter param);
 }
