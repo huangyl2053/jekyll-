@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
@@ -15,9 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.Shinsaka
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -26,46 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
 
     private final ShinsakaiKekkaTorokuDeletionCandidateEntity entity;
-    private final List<OcrImageClassification> targetsToDeleteImage;
 
     /**
      * @param entity {@link ShinsakaiKekkaTorokuDeletionCandidateEntity}
      */
     public ShinsakaiKekkaTorokuDeletionCandidate(ShinsakaiKekkaTorokuDeletionCandidateEntity entity) {
         this.entity = entity;
-        this.targetsToDeleteImage = Collections.emptyList();
-    }
-
-    private ShinsakaiKekkaTorokuDeletionCandidate(ShinsakaiKekkaTorokuDeletionCandidateEntity entity, List<OcrImageClassification> targetsToDeleteImage) {
-        this.entity = entity;
-        this.targetsToDeleteImage = Collections.unmodifiableList(targetsToDeleteImage);
-    }
-
-    /**
-     * @return イメージを保持している場合、{@code true}.
-     */
-    public boolean hasImages() {
-        return this.entity.getSharedFileID() != null;
-    }
-
-    /**
-     * @return 保持する値から生成した{@link ReadOnlySharedFileEntryDescriptor}
-     */
-    public ReadOnlySharedFileEntryDescriptor toReadOnlySharedFileEntryDescriptor() {
-        return new ReadOnlySharedFileEntryDescriptor(
-                FilesystemName.fromString(new RStringBuilder()
-                        .append(this.entity.getShoKaisaiHokenshaNo())
-                        .append(this.entity.getHihokenshaNo())
-                        .toRString()),
-                this.entity.getSharedFileID()
-        );
-    }
-
-    /**
-     * @return 削除対象のイメージの種類すべて
-     */
-    public List<OcrImageClassification> getTargetsToDeleteImage() {
-        return this.targetsToDeleteImage;
     }
 
     /**
@@ -86,7 +47,7 @@ public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
         e.setChosaIrai(asDeletedIfTimely(this.entity.getChosaIraiEntity(), hanteiKekka));
         e.setIkenshoIrai(asDeletedIfTimely(this.entity.getIkenshoIraiEntity(), hanteiKekka));
         e.setIchijiHantei(asDeletedIfTimely(this.entity.getIchijiHanteiEntity(), hanteiKekka));
-        return new ShinsakaiKekkaTorokuDeletionCandidate(e, findTargetsToDeleteImage(hanteiKekka));
+        return new ShinsakaiKekkaTorokuDeletionCandidate(e);
     }
 
     private static List<DbT5201NinteichosaIraiJohoEntity> asDeletedIfTimely(DbT5201NinteichosaIraiJohoEntity chosa, HanteiKekkaCode hanteiKekka) {
@@ -129,21 +90,6 @@ public class ShinsakaiKekkaTorokuDeletionCandidate implements Serializable {
             return Collections.singletonList(ne);
         } else {
             return Collections.singletonList(ichiji);
-        }
-    }
-
-    private static List<OcrImageClassification> findTargetsToDeleteImage(HanteiKekkaCode hanteiKekka) {
-        switch (hanteiKekka) {
-            case 再調査_意見書のみ:
-                return Arrays.asList(OcrImageClassification.意見書_OCR, OcrImageClassification.意見書_規定外_規定外ID);
-            case 再調査_調査のみ:
-                return Arrays.asList(OcrImageClassification.調査票_概況調査, OcrImageClassification.調査票_特記事項);
-            case 再調査_調査_意見書:
-                List<OcrImageClassification> list = new ArrayList<>(Arrays.asList(OcrImageClassification.values()));
-                list.remove(OcrImageClassification.その他資料);
-                return list;
-            default:
-                return Collections.emptyList();
         }
     }
 }
