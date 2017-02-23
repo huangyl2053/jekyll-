@@ -1158,6 +1158,7 @@
         rgdb."DbT5305IkenshoImageJoho"
         WHERE
         "shinseishoKanriNo" = DbT5305_temp."shinseishoKanriNo"
+        AND "iraiRirekiNo" = DbT5305_temp."iraiRirekiNo"
         AND "ChoyoID" <![CDATA[ < ]]> DbT5305_temp."ChoyoID"
         )
         ) DbT5305
