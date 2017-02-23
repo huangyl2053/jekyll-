@@ -16,8 +16,7 @@ public enum DBE0220001StateName implements IStateEnumerations {
 
     NoChange(""),
     初期表示("初期表示"),
-    完了("完了"),
-    未処理状態("未処理状態");
+    完了("完了");
 
     private final RString name;
 
