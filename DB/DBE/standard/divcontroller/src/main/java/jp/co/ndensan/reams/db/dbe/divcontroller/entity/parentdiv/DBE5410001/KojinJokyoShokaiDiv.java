@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -103,6 +103,8 @@ public class KojinJokyoShokaiDiv extends Panel {
     private RString hdnNinteiChosainCode;
     @JsonProperty("hdnNinteiChosainName")
     private RString hdnNinteiChosainName;
+    @JsonProperty("hdnNinteiShinseibi")
+    private RString hdnNinteiShinseibi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -801,6 +803,24 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("hdnNinteiChosainName")
     public void setHdnNinteiChosainName(RString hdnNinteiChosainName) {
         this.hdnNinteiChosainName = hdnNinteiChosainName;
+    }
+
+    /*
+     * gethdnNinteiShinseibi
+     * @return hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public RString getHdnNinteiShinseibi() {
+        return hdnNinteiShinseibi;
+    }
+
+    /*
+     * sethdnNinteiShinseibi
+     * @param hdnNinteiShinseibi hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public void setHdnNinteiShinseibi(RString hdnNinteiShinseibi) {
+        this.hdnNinteiShinseibi = hdnNinteiShinseibi;
     }
 
     /*

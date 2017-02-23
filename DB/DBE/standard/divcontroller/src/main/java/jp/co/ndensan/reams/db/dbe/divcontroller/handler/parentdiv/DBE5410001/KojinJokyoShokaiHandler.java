@@ -292,13 +292,13 @@ public class KojinJokyoShokaiHandler {
             div.getTxtNijiHanteiYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定審査会予定年月日().toString()));
         }
-        if (センター送信_運用無.equals(センター送信_運用有無)
+        if (!センター送信_運用無.equals(センター送信_運用有無)
                 && kojinJokyoShokaiList.get(0).getセンター送信予定年月日() != null) {
             div.getTxtCenterSoshinYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).getセンター送信予定年月日().toString()));
         }
         if (kojinJokyoShokaiList.get(0).get認定審査会完了年月日() != null) {
-            div.getTxtNinteiShinsakaiYoteiDate().setValue(new RDate(
+            div.getTxtNinteiShinsakaiJissekiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定審査会完了年月日().toString()));
         }
         if (kojinJokyoShokaiList.get(0).get認定調査依頼完了年月日() != null) {
@@ -337,7 +337,7 @@ public class KojinJokyoShokaiHandler {
             div.getTxtNinteiShinseiDay().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定申請年月日().toString()));
         }
-        if (センター送信_運用無.equals(センター送信_運用有無)
+        if (!センター送信_運用無.equals(センター送信_運用有無)
                 && kojinJokyoShokaiList.get(0).getセンター送信年月日() != null) {
             div.getTxtCenterSoshinJissekiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).getセンター送信年月日().toString()));

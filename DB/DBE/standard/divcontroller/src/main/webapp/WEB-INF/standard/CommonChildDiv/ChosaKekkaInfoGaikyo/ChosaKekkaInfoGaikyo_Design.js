@@ -199,6 +199,18 @@ var DBE;
                 return new UZA.Label(this.convFiledName("lblNoImageTokubetsuKyufu"));
             };
 
+            Controls.prototype.TokubetsuKyufuSmallPanel = function () {
+                return new UZA.Panel(this.convFiledName("TokubetsuKyufuSmallPanel"));
+            };
+
+            Controls.prototype.imgTokubetsuKyufuSmall = function () {
+                return new UZA.DynamicImage(this.convFiledName("imgTokubetsuKyufuSmall"));
+            };
+
+            Controls.prototype.lblImgTokubetsuKyufuSmall = function () {
+                return new UZA.Label(this.convFiledName("lblImgTokubetsuKyufuSmall"));
+            };
+
             Controls.prototype.ZaitakuServicePanel = function () {
                 return new UZA.Panel(this.convFiledName("ZaitakuServicePanel"));
             };
@@ -213,6 +225,18 @@ var DBE;
 
             Controls.prototype.lblNoImageZaitakuService = function () {
                 return new UZA.Label(this.convFiledName("lblNoImageZaitakuService"));
+            };
+
+            Controls.prototype.ZaitakuServiceSmallPanel = function () {
+                return new UZA.Panel(this.convFiledName("ZaitakuServiceSmallPanel"));
+            };
+
+            Controls.prototype.imgZaitakuServiceSmall = function () {
+                return new UZA.DynamicImage(this.convFiledName("imgZaitakuServiceSmall"));
+            };
+
+            Controls.prototype.lblImgZaitakuServiceSmall = function () {
+                return new UZA.Label(this.convFiledName("lblImgZaitakuServiceSmall"));
             };
 
             Controls.prototype.GaikyoTokkiPanel = function () {

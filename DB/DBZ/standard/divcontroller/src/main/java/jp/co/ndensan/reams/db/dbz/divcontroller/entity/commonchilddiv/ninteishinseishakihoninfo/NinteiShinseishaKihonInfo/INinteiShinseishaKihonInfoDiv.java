@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
@@ -30,12 +31,19 @@ public interface INinteiShinseishaKihonInfoDiv extends ICommonChildDivBaseProper
      * @return 証記載保険者番号
      */
     RString get証記載保険者番号();
-    
+
     /**
      * 申請区分申請時を取得します。
      *
      * @return 申請区分申請時
      */
     RString get申請区分申請時();
+
+    /**
+     * 認定申請日を取得します。
+     *
+     * @return 認定申請日
+     */
+    RDate get認定申請日();
 
 }

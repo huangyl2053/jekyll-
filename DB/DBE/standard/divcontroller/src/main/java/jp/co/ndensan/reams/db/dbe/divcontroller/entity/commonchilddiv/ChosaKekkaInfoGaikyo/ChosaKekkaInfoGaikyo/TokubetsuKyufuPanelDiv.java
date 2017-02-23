@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -27,6 +28,8 @@ public class TokubetsuKyufuPanelDiv extends Panel {
     private DynamicImage imgTokubetsuKyufu;
     @JsonProperty("lblNoImageTokubetsuKyufu")
     private Label lblNoImageTokubetsuKyufu;
+    @JsonProperty("TokubetsuKyufuSmallPanel")
+    private TokubetsuKyufuSmallPanelDiv TokubetsuKyufuSmallPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +89,47 @@ public class TokubetsuKyufuPanelDiv extends Panel {
     @JsonProperty("lblNoImageTokubetsuKyufu")
     public void setLblNoImageTokubetsuKyufu(Label lblNoImageTokubetsuKyufu) {
         this.lblNoImageTokubetsuKyufu = lblNoImageTokubetsuKyufu;
+    }
+
+    /*
+     * getTokubetsuKyufuSmallPanel
+     * @return TokubetsuKyufuSmallPanel
+     */
+    @JsonProperty("TokubetsuKyufuSmallPanel")
+    public TokubetsuKyufuSmallPanelDiv getTokubetsuKyufuSmallPanel() {
+        return TokubetsuKyufuSmallPanel;
+    }
+
+    /*
+     * setTokubetsuKyufuSmallPanel
+     * @param TokubetsuKyufuSmallPanel TokubetsuKyufuSmallPanel
+     */
+    @JsonProperty("TokubetsuKyufuSmallPanel")
+    public void setTokubetsuKyufuSmallPanel(TokubetsuKyufuSmallPanelDiv TokubetsuKyufuSmallPanel) {
+        this.TokubetsuKyufuSmallPanel = TokubetsuKyufuSmallPanel;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgTokubetsuKyufuSmall() {
+        return this.getTokubetsuKyufuSmallPanel().getImgTokubetsuKyufuSmall();
+    }
+
+    @JsonIgnore
+    public void  setImgTokubetsuKyufuSmall(DynamicImage imgTokubetsuKyufuSmall) {
+        this.getTokubetsuKyufuSmallPanel().setImgTokubetsuKyufuSmall(imgTokubetsuKyufuSmall);
+    }
+
+    @JsonIgnore
+    public Label getLblImgTokubetsuKyufuSmall() {
+        return this.getTokubetsuKyufuSmallPanel().getLblImgTokubetsuKyufuSmall();
+    }
+
+    @JsonIgnore
+    public void  setLblImgTokubetsuKyufuSmall(Label lblImgTokubetsuKyufuSmall) {
+        this.getTokubetsuKyufuSmallPanel().setLblImgTokubetsuKyufuSmall(lblImgTokubetsuKyufuSmall);
     }
 
     // </editor-fold>

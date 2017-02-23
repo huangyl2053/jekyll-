@@ -40,6 +40,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJis
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -142,6 +143,10 @@ public class ChosaKekkaInfoGaikyoHandler {
         gaikyoDiv.getShisetsuRiyoPanel().getImgRiyoShisetsuJusho().setDisplayNone(true);
         gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);
         gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setDisplayNone(true);
+        gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().setDisplayNone(true);
+        gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().setDisplayNone(true);
+        gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getImgTokubetsuKyufuSmall().setDisplayNone(true);
+        gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getImgZaitakuServiceSmall().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getImgGaikyoTokki().setDisplayNone(true);
     }
 
@@ -497,18 +502,54 @@ public class ChosaKekkaInfoGaikyoHandler {
     private void setImageサービス(RString 出力イメージフォルダパス) {
         if (!出力する.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             RString 市町村特別給付ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.市町村特別給付.getImageFileName());
+            boolean isタイルタイプ = false;
+            if (new FlexibleDate(gaikyoDiv.getHdnNinteiShinseibi()).isBeforeOrEquals(
+                    new FlexibleDate(DbBusinessConfig.get(ConfigNameDBE.認定調査票特記事項_様式切替日, RDate.getNowDate(), SubGyomuCode.DBE認定支援)))) {
+                isタイルタイプ = true;
+            }
             if (RString.isNullOrEmpty(市町村特別給付ImagePath)) {
                 gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);
+                gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().setDisplayNone(true);
+                gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getLblImgTokubetsuKyufuSmall().setDisplayNone(true);
+                gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getImgTokubetsuKyufuSmall().setDisplayNone(true);
                 gaikyoDiv.getTokubetsuKyufuPanel().getLblNoImageTokubetsuKyufu().setDisplayNone(false);
             } else {
-                gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(DBEImageUtil.sanitizePath(市町村特別給付ImagePath));
+                if (isタイルタイプ) {
+                    gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getLblImgTokubetsuKyufuSmall().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getImgTokubetsuKyufuSmall().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getLblNoImageTokubetsuKyufu().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setSrc(DBEImageUtil.sanitizePath(市町村特別給付ImagePath));
+                } else {
+                    gaikyoDiv.getTokubetsuKyufuPanel().getLblNoImageTokubetsuKyufu().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufu().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().setDisplayNone(false);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getLblImgTokubetsuKyufuSmall().setDisplayNone(true);
+                    gaikyoDiv.getTokubetsuKyufuPanel().getImgTokubetsuKyufuSmall().setSrc(DBEImageUtil.sanitizePath(市町村特別給付ImagePath));
+                }
             }
             RString 在宅サービスImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.介護保険給付外のサービス.getImageFileName());
             if (RString.isNullOrEmpty(在宅サービスImagePath)) {
+                gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().setDisplayNone(true);
+                gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getImgZaitakuServiceSmall().setDisplayNone(true);
+                gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getLblImgZaitakuServiceSmall().setDisplayNone(true);
                 gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setDisplayNone(true);
                 gaikyoDiv.getZaitakuServicePanel().getLblNoImageZaitakuService().setDisplayNone(false);
             } else {
-                gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(DBEImageUtil.sanitizePath(在宅サービスImagePath));
+                if (isタイルタイプ) {
+                    gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getImgZaitakuServiceSmall().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getLblImgZaitakuServiceSmall().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getLblNoImageZaitakuService().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setSrc(DBEImageUtil.sanitizePath(在宅サービスImagePath));
+                } else {
+                    gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().setDisplayNone(false);
+                    gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getImgZaitakuServiceSmall().setDisplayNone(false);
+                    gaikyoDiv.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getLblImgZaitakuServiceSmall().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getLblNoImageZaitakuService().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getImgZaitakuService().setDisplayNone(true);
+                    gaikyoDiv.getZaitakuServicePanel().getImgZaitakuServiceSmall().setSrc(DBEImageUtil.sanitizePath(在宅サービスImagePath));
+                }
             }
         } else {
             gaikyoDiv.getTokubetsuKyufuPanel().setDisplayNone(true);

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaKekk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -27,6 +28,8 @@ public class ZaitakuServicePanelDiv extends Panel {
     private DynamicImage imgZaitakuService;
     @JsonProperty("lblNoImageZaitakuService")
     private Label lblNoImageZaitakuService;
+    @JsonProperty("ZaitakuServiceSmallPanel")
+    private ZaitakuServiceSmallPanelDiv ZaitakuServiceSmallPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +89,47 @@ public class ZaitakuServicePanelDiv extends Panel {
     @JsonProperty("lblNoImageZaitakuService")
     public void setLblNoImageZaitakuService(Label lblNoImageZaitakuService) {
         this.lblNoImageZaitakuService = lblNoImageZaitakuService;
+    }
+
+    /*
+     * getZaitakuServiceSmallPanel
+     * @return ZaitakuServiceSmallPanel
+     */
+    @JsonProperty("ZaitakuServiceSmallPanel")
+    public ZaitakuServiceSmallPanelDiv getZaitakuServiceSmallPanel() {
+        return ZaitakuServiceSmallPanel;
+    }
+
+    /*
+     * setZaitakuServiceSmallPanel
+     * @param ZaitakuServiceSmallPanel ZaitakuServiceSmallPanel
+     */
+    @JsonProperty("ZaitakuServiceSmallPanel")
+    public void setZaitakuServiceSmallPanel(ZaitakuServiceSmallPanelDiv ZaitakuServiceSmallPanel) {
+        this.ZaitakuServiceSmallPanel = ZaitakuServiceSmallPanel;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgZaitakuServiceSmall() {
+        return this.getZaitakuServiceSmallPanel().getImgZaitakuServiceSmall();
+    }
+
+    @JsonIgnore
+    public void  setImgZaitakuServiceSmall(DynamicImage imgZaitakuServiceSmall) {
+        this.getZaitakuServiceSmallPanel().setImgZaitakuServiceSmall(imgZaitakuServiceSmall);
+    }
+
+    @JsonIgnore
+    public Label getLblImgZaitakuServiceSmall() {
+        return this.getZaitakuServiceSmallPanel().getLblImgZaitakuServiceSmall();
+    }
+
+    @JsonIgnore
+    public void  setLblImgZaitakuServiceSmall(Label lblImgZaitakuServiceSmall) {
+        this.getZaitakuServiceSmallPanel().setLblImgZaitakuServiceSmall(lblImgZaitakuServiceSmall);
     }
 
     // </editor-fold>
