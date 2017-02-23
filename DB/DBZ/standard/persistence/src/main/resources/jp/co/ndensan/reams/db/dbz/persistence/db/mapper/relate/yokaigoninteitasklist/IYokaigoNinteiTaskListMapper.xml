@@ -602,12 +602,12 @@
         AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="状態区分 == 1">
             AND((DbT5910."jigyoshaMeisho" IS NULL OR DbT5910."jigyoshaMeisho" = '')
-            OR (DbT5201."ninteichosaKigenYMD" IS NULL OR DbT5201."ninteichosaKigenYMD" = '')
+            OR (DbT5201."ninteichosaIraiYMD" IS NULL OR DbT5201."ninteichosaIraiYMD" = '')
             OR (DbT5201."chosahyoTouShutsuryokuYMD" IS NULL OR DbT5201."chosahyoTouShutsuryokuYMD" = ''))
         </if>
         <if test="状態区分 == 2">
             AND((DbT5910."jigyoshaMeisho" IS NOT NULL AND DbT5910."jigyoshaMeisho" != '')
-            AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
+            AND (DbT5201."ninteichosaIraiYMD" IS NOT NULL AND DbT5201."ninteichosaIraiYMD" != '')
             AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != ''))
         </if>
         <if test="市町村コード.toString() != ''.toString()">

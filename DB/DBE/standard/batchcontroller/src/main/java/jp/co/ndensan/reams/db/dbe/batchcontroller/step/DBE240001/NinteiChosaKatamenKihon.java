@@ -59,7 +59,11 @@ public class NinteiChosaKatamenKihon extends BatchProcessBase<HomonChosaIraishoR
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).create();
+        if (ReportIdDBZ.DBE221012.getReportId().equals(帳票)) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).setStartFormGroup(2).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
