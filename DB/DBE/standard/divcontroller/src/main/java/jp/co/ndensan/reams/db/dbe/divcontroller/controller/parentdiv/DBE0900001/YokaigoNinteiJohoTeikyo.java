@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0900001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItem;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyochosaitem.NinteichosahyoChosaItem;
@@ -58,6 +59,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YokaigoNinteiJohoTeikyo {
 
+    private final RString なし = new RString("0");
+    private final RString あり = new RString("1");
+
     /**
      * ページロードイベントです。
      *
@@ -74,7 +78,7 @@ public class YokaigoNinteiJohoTeikyo {
         ViewStateHolder.put(ViewStateKeys.認定申請情報, business);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * btn_ToSearchイベントです。
      *
@@ -85,7 +89,7 @@ public class YokaigoNinteiJohoTeikyo {
         ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 認定調査票チェックボックス変更します。
      *
@@ -217,8 +221,14 @@ public class YokaigoNinteiJohoTeikyo {
 
             if (div.getChkTokkiJiko().isAllSelected()) {
                 RString 特記事項マスキング区分 = div.getRadTokkiJikoMasking().getSelectedKey();
-                List<RString> 特記事項区分List = finder.get特記事項区分(申請書管理番号, 特記事項マスキング区分);
                 List<NinteichosaRelate> 特記事項List = finder.get特記事項List(申請書管理番号, 特記事項マスキング区分);
+                if (あり.equals(特記事項マスキング区分) && 特記事項List.isEmpty()) {
+                    特記事項List = finder.get特記事項List(申請書管理番号, なし);
+                }
+                List<RString> 特記事項区分List = new ArrayList<>();
+                for (NinteichosaRelate 特記事項 : 特記事項List) {
+                    特記事項区分List.add(特記事項.get特記事項区分());
+                }
                 print特記事項(business, 特記事項区分List, 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID, reportManager);
             }
 
