@@ -188,39 +188,39 @@ public class NinteiChosaBusiness {
      */
     public DbT5201NinteichosaIraiJohoEntity update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = entity.getDbt5201Entity();
-        RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        switch (processParamter.getTeishutsuKigen().toString()) {
-            case "0":
-                int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数,
-                        RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
-                if (文字列1.equals(認定調査期限設定方法)) {
-                    FlexibleDate 認定調査依頼日 = entity.get認定調査依頼年月日();
-                    if (認定調査依頼日 != null && !認定調査依頼日.isEmpty()) {
-                        dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
-                    }
-                } else {
-                    RString 申請年月日 = entity.get認定申請年月日();
-                    if (申請年月日 != null && !申請年月日.isEmpty()) {
-                        FlexibleDate 認定調査依頼日 = new FlexibleDate(申請年月日);
-                        dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
-                    }
-                }
-                break;
-            case "1":
-                dbT5201Entity.setNinteichosaKigenYMD(FlexibleDate.EMPTY);
-                break;
-            case "2":
-                if (!RString.isNullOrEmpty(processParamter.getKyotsuHizuke())) {
-                    dbT5201Entity.setNinteichosaKigenYMD(new FlexibleDate(processParamter.getKyotsuHizuke()));
-                }
-                break;
-            default:
-                break;
-        }
         if (processParamter.is認定調査依頼一覧表() || processParamter.is認定調査依頼書()) {
+            RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            switch (processParamter.getTeishutsuKigen().toString()) {
+                case "0":
+                    int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数,
+                            RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+                    if (文字列1.equals(認定調査期限設定方法)) {
+                        FlexibleDate 認定調査依頼日 = entity.get認定調査依頼年月日();
+                        if (認定調査依頼日 != null && !認定調査依頼日.isEmpty()) {
+                            dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
+                        }
+                    } else {
+                        RString 申請年月日 = entity.get認定申請年月日();
+                        if (申請年月日 != null && !申請年月日.isEmpty()) {
+                            FlexibleDate 認定調査依頼日 = new FlexibleDate(申請年月日);
+                            dbT5201Entity.setNinteichosaKigenYMD(認定調査依頼日.plusDay(期限日数));
+                        }
+                    }
+                    break;
+                case "1":
+                    dbT5201Entity.setNinteichosaKigenYMD(FlexibleDate.EMPTY);
+                    break;
+                case "2":
+                    if (!RString.isNullOrEmpty(processParamter.getKyotsuHizuke())) {
+                        dbT5201Entity.setNinteichosaKigenYMD(new FlexibleDate(processParamter.getKyotsuHizuke()));
+                    }
+                    break;
+                default:
+                    break;
+            }
             dbT5201Entity.setIraishoShutsuryokuYMD(get発行日(processParamter.getHakkobi()));
         }
-        if (is調査票等出力年月日()) {
+        if (processParamter.is認定調査票_概況調査() || processParamter.is認定調査票_概況基本()) {
             dbT5201Entity.setChosahyoTouShutsuryokuYMD(get発行日(processParamter.getHakkobi()));
         }
         return dbT5201Entity;

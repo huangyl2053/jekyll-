@@ -156,7 +156,7 @@ public class NinteichosaKekkaNyushuValidationHandler {
         対象行を選択(UrErrorMessages.対象行を選択),
         複数選択不可(DbeErrorMessages.複数選択不可, "認定調査票入手一覧"),
         理由付き登録不可(DbzErrorMessages.理由付き登録不可, "調査票入力済"),
-        理由付き完了不可(DbzErrorMessages.理由付き完了不可, "調査票未入力"),
+        理由付き完了不可(DbzErrorMessages.理由付き完了不可, "必須調査票未入手の申請が含まれている"),
         存在しない(UrErrorMessages.存在しない, "モバイル取込対象データ"),
         ファイルが存在しない(UrErrorMessages.対象ファイルが存在しない, "調査取込用データ（モバイル）");
 

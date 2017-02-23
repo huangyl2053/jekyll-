@@ -318,7 +318,7 @@ public class NinteichosaIraiHandler {
         row.setShichosonCode(business.get市町村コード());
         調査依頼モードの日付設定(row, business);
         if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())
-                || row.getChosaIraiKigen().getValue() == null
+                || row.getNinteichosaIraiYmd().getValue() == null
                 || row.getChousahyoOutput().getValue() == null) {
             notUpdateCount++;
             row.setJotai(未);

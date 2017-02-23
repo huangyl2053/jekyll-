@@ -90,7 +90,9 @@ public interface IYokaigoNinteiTaskListMapper {
     List<ShinSaKaiToRoKuRelate> get前意見書依頼(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆ 認定調査依頼情報＆認定調査票（概況調査）＆認定調査委託先情報＆調査員情報
+     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ＆ 
+     * 認定調査依頼情報＆認定調査票（概況調査）＆認定調査票（基本調査）＆認定調査票（特記事項）＆認定調査票（概況特記）＆
+     * 認定調査委託先情報＆調査員情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return ChosaNyushuRelateWithCountEntity
@@ -98,13 +100,12 @@ public interface IYokaigoNinteiTaskListMapper {
     ChosaNyushuRelateWithCountEntity get調査入手(YokaigoNinteiTaskListParameter parameter);
 
     /**
-     * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ ＆
-     * 認定調査依頼情報＆認定調査票（概況調査）＆認定調査委託先情報＆調査員情報
+     * 要介護認定完了情報
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return List<ShinSaKaiToRoKuRelate>
      */
-    List<ShinSaKaiToRoKuRelate> get前調査入手(YokaigoNinteiTaskListParameter parameter);
+    List<ShinSaKaiToRoKuRelate> get全調査入手(YokaigoNinteiTaskListParameter parameter);
 
     /**
      * 要介護認定申請情報＆申請履歴情報＆要介護認定完了情報＆構成市町村マスタ

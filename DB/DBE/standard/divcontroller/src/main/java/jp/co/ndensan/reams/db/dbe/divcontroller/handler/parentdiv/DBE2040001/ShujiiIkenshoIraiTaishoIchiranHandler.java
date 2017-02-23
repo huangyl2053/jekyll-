@@ -67,6 +67,9 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
     private static final RString 意見書依頼を登録するボタン = new RString("btnUpdate");
     int completeCount = 0;
     int notreatedCount = 0;
+    private static final RString 依頼書のみ = new RString("1");
+    private static final RString 意見書のみ = new RString("2");
+    private static final RString 依頼書_意見書 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -118,8 +121,9 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
         Decimal 最大件数 = div.getTxtSaidaiHyojiKensu().getValue();
+        RString 追加完了条件 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書依頼_追加完了条件, RDate.getNowDate(), SubGyomuCode.DBE認定支援, new RString(市町村コード.toString()));
         SearchResult<IKnSyoiRaiBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().get意見書依頼モード(YokaigoNinteiTaskListParameter.
-                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, div.getTxtSaidaiHyojiKensu().getValue(), 市町村コード));
+                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, div.getTxtSaidaiHyojiKensu().getValue(), 市町村コード, 追加完了条件));
         int totalCount = searchResult.totalCount();
         List<IKnSyoiRaiBusiness> 主治医意見書作成依頼情報List = searchResult.records();
         ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼情報, (ArrayList) 主治医意見書作成依頼情報List);
@@ -441,16 +445,66 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(business.get作成料請求区分()));
         意見書依頼モードの日付設定(row, business);
         row.setCancelButtonState(DataGridButtonState.Disabled);
-        if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
-                && business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()
-                && business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
-            row.setJyotai(COMPLETE);
-            completeCount++;
+
+        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+        RString 追加完了条件 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書依頼_追加完了条件, RDate.getNowDate(), SubGyomuCode.DBE認定支援, new RString(市町村コード.toString()));
+        if (追加完了条件.equals(依頼書のみ)) {
+            if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
+                    && business.get今回主治医() != null && !business.get今回主治医().isEmpty()
+                    && business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()) {
+                row.setJyotai(COMPLETE);
+                completeCount++;
+            } else {
+                row.setJyotai(NOTREATED);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
+                notreatedCount++;
+            }
+        } else if (追加完了条件.equals(意見書のみ)) {
+            if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
+                    && business.get今回主治医() != null && !business.get今回主治医().isEmpty()
+                    && business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
+                row.setJyotai(COMPLETE);
+                completeCount++;
+            } else {
+                row.setJyotai(NOTREATED);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
+                notreatedCount++;
+            }
+        } else if (追加完了条件.equals(依頼書_意見書)) {
+            if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
+                    && business.get今回主治医() != null && !business.get今回主治医().isEmpty()
+                    && business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()
+                    && business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
+                row.setJyotai(COMPLETE);
+                completeCount++;
+            } else {
+                row.setJyotai(NOTREATED);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
+                notreatedCount++;
+            }
         } else {
-            row.setJyotai(NOTREATED);
-            row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
-            notreatedCount++;
+            if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
+                    && business.get今回主治医() != null && !business.get今回主治医().isEmpty()) {
+                row.setJyotai(COMPLETE);
+                completeCount++;
+            } else {
+                row.setJyotai(NOTREATED);
+                row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
+                notreatedCount++;
+            }
         }
+
+//        if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
+//                && business.get今回主治医() != null && !business.get今回主治医().isEmpty()) {
+////                && business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()
+////                && business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
+//            row.setJyotai(COMPLETE);
+//            completeCount++;
+//        } else {
+//            row.setJyotai(NOTREATED);
+//            row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
+//            notreatedCount++;
+//        }
         return row;
     }
 

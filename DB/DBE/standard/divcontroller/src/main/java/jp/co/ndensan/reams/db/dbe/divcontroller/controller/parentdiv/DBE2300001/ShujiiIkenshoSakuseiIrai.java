@@ -435,8 +435,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 NinteiKanryoJohoIdentifier ninteiKanryoJohoIdentifier = new NinteiKanryoJohoIdentifier(申請書管理番号);
                 NinteiKanryoJoho ninteiKanryoJoho = ninteiKanryoJohoList.get(ninteiKanryoJohoIdentifier)
                         .createBuilderForEdit()
-                        .set主治医意見書作成依頼完了年月日(FlexibleDate.EMPTY)
-                        .set主治医意見書登録完了年月日(FlexibleDate.EMPTY)
+                        .set主治医意見書作成依頼完了年月日(null)
+                        .set主治医意見書登録完了年月日(null)
                         .build();
                 ninteiKanryoJohoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
             }

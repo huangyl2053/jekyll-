@@ -103,6 +103,8 @@ public class JogaiShinsainJoho {
         List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
         rowList.remove(div.getDgShinsakaiIinIchiran().getClickedRowId());
         div.getDgShinsakaiIinIchiran().setDataSource(rowList);
+        getHandler(div).画面項目にセットされている値をクリア();
+        div.getBtnToroku().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 

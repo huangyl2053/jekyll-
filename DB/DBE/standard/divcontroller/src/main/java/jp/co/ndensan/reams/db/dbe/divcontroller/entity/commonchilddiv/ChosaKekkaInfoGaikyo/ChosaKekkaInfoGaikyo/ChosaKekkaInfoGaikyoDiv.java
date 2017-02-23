@@ -76,6 +76,8 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     private RString hdnNinteiChosainCode;
     @JsonProperty("hdnNinteiChosainName")
     private RString hdnNinteiChosainName;
+    @JsonProperty("hdnNinteiShinseibi")
+    private RString hdnNinteiShinseibi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -552,6 +554,24 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     /*
+     * gethdnNinteiShinseibi
+     * @return hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public RString getHdnNinteiShinseibi() {
+        return hdnNinteiShinseibi;
+    }
+
+    /*
+     * sethdnNinteiShinseibi
+     * @param hdnNinteiShinseibi hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public void setHdnNinteiShinseibi(RString hdnNinteiShinseibi) {
+        this.hdnNinteiShinseibi = hdnNinteiShinseibi;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -782,6 +802,46 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonIgnore
     public void  setLblNoImageRiyoShisetsuJusho(Label lblNoImageRiyoShisetsuJusho) {
         this.getShisetsuRiyoPanel().getShisetsuJushoPanel().setLblNoImageRiyoShisetsuJusho(lblNoImageRiyoShisetsuJusho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokubetsuKyufuSmall() {
+        return this.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getImgTokubetsuKyufuSmall();
+    }
+
+    @JsonIgnore
+    public void  setImgTokubetsuKyufuSmall(DynamicImage imgTokubetsuKyufuSmall) {
+        this.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().setImgTokubetsuKyufuSmall(imgTokubetsuKyufuSmall);
+    }
+
+    @JsonIgnore
+    public Label getLblImgTokubetsuKyufuSmall() {
+        return this.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().getLblImgTokubetsuKyufuSmall();
+    }
+
+    @JsonIgnore
+    public void  setLblImgTokubetsuKyufuSmall(Label lblImgTokubetsuKyufuSmall) {
+        this.getTokubetsuKyufuPanel().getTokubetsuKyufuSmallPanel().setLblImgTokubetsuKyufuSmall(lblImgTokubetsuKyufuSmall);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgZaitakuServiceSmall() {
+        return this.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getImgZaitakuServiceSmall();
+    }
+
+    @JsonIgnore
+    public void  setImgZaitakuServiceSmall(DynamicImage imgZaitakuServiceSmall) {
+        this.getZaitakuServicePanel().getZaitakuServiceSmallPanel().setImgZaitakuServiceSmall(imgZaitakuServiceSmall);
+    }
+
+    @JsonIgnore
+    public Label getLblImgZaitakuServiceSmall() {
+        return this.getZaitakuServicePanel().getZaitakuServiceSmallPanel().getLblImgZaitakuServiceSmall();
+    }
+
+    @JsonIgnore
+    public void  setLblImgZaitakuServiceSmall(Label lblImgZaitakuServiceSmall) {
+        this.getZaitakuServicePanel().getZaitakuServiceSmallPanel().setLblImgZaitakuServiceSmall(lblImgZaitakuServiceSmall);
     }
 
     // </editor-fold>

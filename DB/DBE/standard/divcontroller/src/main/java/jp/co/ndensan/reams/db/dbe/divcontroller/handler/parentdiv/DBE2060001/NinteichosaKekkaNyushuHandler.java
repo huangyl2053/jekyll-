@@ -56,6 +56,13 @@ public class NinteichosaKekkaNyushuHandler {
     private static final RString 調査結果を登録するボタン = new RString("btnKekkaTouroku");
     private static final RString 調査票入手を完了するボタン = new RString("btnChousaResultKanryo");
     private static final RString UIContainer_DBEUC22101 = new RString("DBEUC22101");
+    private static final RString 概況基本調査 = new RString("1");
+    private static final RString 概況基本調査_特記 = new RString("2");
+    private static final RString 概況基本調査_特記_概況特記 = new RString("3");
+    private static final RString 概況特記出力する = new RString("1");
+    private static final RString 列_概況特記登録 = new RString("gaikyoTokkiToroku");
+    private static final RString データ有 = new RString("●");
+    private static final String 列_状態 = "jotai";
     private static final int INT_0 = 0;
 
     /**
@@ -100,15 +107,30 @@ public class NinteichosaKekkaNyushuHandler {
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         RString 状態 = div.getRadJotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtMaxKensu().getValue();
+        boolean is特記事項必須 = false;
+        boolean is概況特記必須 = false;
+        if (!概況特記出力する.equals(DbBusinessConfig.get(
+                ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            div.getDgNinteiTaskList().getGridSetting().getColumn(列_概況特記登録).setVisible(false);
+        }
+        if (概況基本調査_特記.equals(DbBusinessConfig.get(
+                ConfigNameDBE.認定調査結果入手_必須調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            is特記事項必須 = true;
+        } else if (概況基本調査_特記_概況特記.equals(
+                DbBusinessConfig.get(ConfigNameDBE.認定調査結果入手_必須調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            is特記事項必須 = true;
+            is概況特記必須 = true;
+        }
         SearchResult<CyoSaNyuSyuBusiness> searchResult = YokaigoNinteiTaskListFinder.createInstance().
                 get調査入手モード(YokaigoNinteiTaskListParameter.
-                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大取得件数, 市町村コード));
+                        createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態, 最大取得件数,
+                                市町村コード, false, is特記事項必須, is概況特記必須));
         List<CyoSaNyuSyuBusiness> 調査入手List = searchResult.records();
         if (!調査入手List.isEmpty()) {
-            ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
-                    get前調査入手モード(YokaigoNinteiTaskListParameter.
+            ShinSaKaiBusiness 全調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
+                    get全調査入手モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
-            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査入手Model.get要介護認定完了情報Lsit()));
+            ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(全調査入手Model.get要介護認定完了情報Lsit()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
@@ -181,9 +203,9 @@ public class NinteichosaKekkaNyushuHandler {
         int mishoriCount = 0;
         int kanryoKanoCount = 0;
         for (CyoSaNyuSyuBusiness business : searchResult.records()) {
-            if (!isDisplay(business.get認定調査実施年月日())) {
-                continue;
-            }
+//            if (!isDisplay(business.get認定調査実施年月日())) {
+//                continue;
+//            }
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHokensha(RString.isNullOrEmpty(business.get保険者名()) ? RString.EMPTY : business.get保険者名());
@@ -196,12 +218,56 @@ public class NinteichosaKekkaNyushuHandler {
             row.setChosain(RString.isNullOrEmpty(business.get調査員氏名()) ? RString.EMPTY : business.get調査員氏名());
             if (business.get認定調査実施年月日() != null && !business.get認定調査実施年月日().isEmpty()) {
                 row.getChosaJisshiYMD().setValue(new RDate(business.get認定調査実施年月日().toString()));
-                row.setJotai(KanryoShoriStatus.完了可能.get略称());
-                kanryoKanoCount++;
+                row.setGaikyoChosaToroku(データ有);
             } else {
-                row.setJotai(KanryoShoriStatus.未処理.get略称());
-                row.setCellBgColor("jotai", DataGridCellBgColor.bgColorRed);
-                mishoriCount++;
+                row.setGaikyoChosaToroku(RString.EMPTY);
+            }
+            if (business.get基本調査_申請書管理番号() != null) {
+                row.setKihonChosaToroku(データ有);
+            } else {
+                row.setKihonChosaToroku(RString.EMPTY);
+            }
+            if (business.get特記事項_申請書管理番号() != null) {
+                row.setTokkiJikoToroku(データ有);
+            } else {
+                row.setTokkiJikoToroku(RString.EMPTY);
+            }
+            if (business.get概況特記_申請書管理番号() != null) {
+                row.setGaikyoTokkiToroku(データ有);
+            } else {
+                row.setGaikyoTokkiToroku(RString.EMPTY);
+            }
+            if (概況基本調査.equals(DbBusinessConfig.get(
+                    ConfigNameDBE.認定調査結果入手_必須調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                if (!RString.isNullOrEmpty(row.getGaikyoChosaToroku()) && !RString.isNullOrEmpty(row.getKihonChosaToroku())) {
+                    row.setJotai(KanryoShoriStatus.完了可能.get略称());
+                    kanryoKanoCount++;
+                } else {
+                    row.setJotai(KanryoShoriStatus.未処理.get略称());
+                    row.setCellBgColor(列_状態, DataGridCellBgColor.bgColorRed);
+                    mishoriCount++;
+                }
+            } else if (概況基本調査_特記.equals(DbBusinessConfig.get(
+                    ConfigNameDBE.認定調査結果入手_必須調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                if (!RString.isNullOrEmpty(row.getGaikyoChosaToroku()) && !RString.isNullOrEmpty(row.getKihonChosaToroku())
+                        && !RString.isNullOrEmpty(row.getTokkiJikoToroku())) {
+                    row.setJotai(KanryoShoriStatus.完了可能.get略称());
+                    kanryoKanoCount++;
+                } else {
+                    row.setJotai(KanryoShoriStatus.未処理.get略称());
+                    row.setCellBgColor(列_状態, DataGridCellBgColor.bgColorRed);
+                    mishoriCount++;
+                }
+            } else {
+                if (!RString.isNullOrEmpty(row.getGaikyoChosaToroku()) && !RString.isNullOrEmpty(row.getKihonChosaToroku())
+                        && !RString.isNullOrEmpty(row.getTokkiJikoToroku()) && !RString.isNullOrEmpty(row.getGaikyoTokkiToroku())) {
+                    row.setJotai(KanryoShoriStatus.完了可能.get略称());
+                    kanryoKanoCount++;
+                } else {
+                    row.setJotai(KanryoShoriStatus.未処理.get略称());
+                    row.setCellBgColor(列_状態, DataGridCellBgColor.bgColorRed);
+                    mishoriCount++;
+                }
             }
             row.getTokusokuHakkoYMD().setValue(toRDate(business.get認定調査督促年月日()));
             row.setTokusokuHoho(RString.isNullOrEmpty(business.get認定調査督促方法()) || business.get認定調査督促方法().equals(RString.EMPTY)
@@ -216,7 +282,7 @@ public class NinteichosaKekkaNyushuHandler {
             row.setChosaItakusakiCode(get認定調査委託先コード(business.get認定調査委託先コード()));
             row.setChosainCode(get調査員コード(business.get調査員コード()));
             row.setChikuCode(RString.isNullOrEmpty(business.get地区コード()) ? RString.EMPTY : business.get地区コード());
-            row.setShinseishoKanriNo(get申請書管理番号(business.get申請書管理番号()));
+            row.setShinseishoKanriNo(get申請書管理番号(business.get認定申請情報_申請書管理番号()));
             row.setNinteichosaIraiRirekiNo(new RString(business.get認定調査依頼履歴番号()));
 
             rowList.add(row);

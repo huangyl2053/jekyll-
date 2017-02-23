@@ -170,7 +170,8 @@ public class NinteiShinseiRenrakusakiJoho {
             div.getDgRenrakusakiIchiran().setDataSource(dateSoruce);
             data.setDbdBusiness(johoList);
             ViewStateHolder.put(ViewStateKeys.連絡先情報, data);
-
+            getHandler(div).setClear();
+            div.getBtnToroku().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }

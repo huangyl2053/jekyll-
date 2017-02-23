@@ -150,10 +150,8 @@ public class NinteiShinseiTorokuHandler {
 
         if (市町村コード.isEmpty()) {
             市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-            div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
-        } else {
-            div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
-        }
+        } 
+        div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (HihokenshaKubunCode hihokenshaKubun : HihokenshaKubunCode.values()) {

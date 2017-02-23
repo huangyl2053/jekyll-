@@ -956,6 +956,18 @@ public class NinteiShinseiJohoBuilder {
     }
 
     /**
+     * 市町村コードを設定します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return {@link NinteiShinseiJohoBuilder}
+     */
+    public NinteiShinseiJohoBuilder set市町村コード(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        entity.setShichosonCode(市町村コード);
+        return this;
+    }
+
+    /**
      * 論理削除フラグを設定します。
      *
      * @param 論理削除フラグ 論理削除フラグ

@@ -106,10 +106,6 @@ public class GetsureiShori {
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(認定完了情報.get要介護認定完了情報Lsit()));
         }
-        KanryoShoriStatus 状態 = KanryoShoriStatus.toValue(状態区分);
-        if (状態 == KanryoShoriStatus.未処理) {
-            return ResponseData.of(div).setState(DBE0220001StateName.未処理状態);
-        }
         return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
 
@@ -140,10 +136,6 @@ public class GetsureiShori {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(認定完了情報.get要介護認定完了情報Lsit()));
-        }
-        KanryoShoriStatus 状態 = KanryoShoriStatus.toValue(状態区分);
-        if (状態 == KanryoShoriStatus.未処理) {
-            return ResponseData.of(div).setState(DBE0220001StateName.未処理状態);
         }
         return ResponseData.of(div).setState(DBE0220001StateName.初期表示);
     }
