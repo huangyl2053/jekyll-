@@ -851,19 +851,21 @@ public class NinteiChosaDataOutputResult {
     public List<RString> get出力条件(NinteiChosaDataCsvProcessParamter processParamter, RString 認定調査委託先, RString 認定調査員, RString 市町村) {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
-        jokenBuilder.append(new RString("【認定調査委託先】"));
-        jokenBuilder.append(processParamter.getNinteichosaItakusakiCode());
-        jokenBuilder.append(new RString(" "));
-        jokenBuilder.append(認定調査委託先);
-        出力条件List.add(jokenBuilder.toRString());
-        jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("【認定調査員】"));
-        if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()) {
-            jokenBuilder.append(processParamter.getNinteiChosainCode());
+        if (processParamter.getNinteichosaItakusakiCode() != null && !processParamter.getNinteichosaItakusakiCode().isEmpty()) {
+            jokenBuilder.append(new RString("【認定調査委託先】"));
+            jokenBuilder.append(processParamter.getNinteichosaItakusakiCode());
             jokenBuilder.append(new RString(" "));
-            jokenBuilder.append(認定調査員);
+            jokenBuilder.append(認定調査委託先);
+            出力条件List.add(jokenBuilder.toRString());
+            jokenBuilder = new RStringBuilder();
+            jokenBuilder.append(new RString("【認定調査員】"));
+            if (processParamter.getNinteiChosainCode() != null && !processParamter.getNinteiChosainCode().isEmpty()) {
+                jokenBuilder.append(processParamter.getNinteiChosainCode());
+                jokenBuilder.append(new RString(" "));
+                jokenBuilder.append(認定調査員);
+            }
+            出力条件List.add(jokenBuilder.toRString());
         }
-        出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【市町村】"));
         jokenBuilder.append(processParamter.getShichosonCode());

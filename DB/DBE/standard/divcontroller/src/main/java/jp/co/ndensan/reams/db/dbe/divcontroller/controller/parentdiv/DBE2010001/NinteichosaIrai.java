@@ -282,8 +282,7 @@ public class NinteichosaIrai {
         param.setShinseishoKanriNoList(申請書管理番号リスト);
         param.setHihokenshaNoList(被保険者番号リスト);
         param.setNinteiChosainCode(RString.EMPTY);
-        param.setNinteichosaItakusakiCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList()
-                .getSelectedItems().get(0).getKonkaiChosaItakusakiCode());
+        param.setNinteichosaItakusakiCode(RString.EMPTY);
         param.setShichosonCode(requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList()
                 .getSelectedItems().get(0).getHokenshaCode());
         param.setAddedFileName(getモバイルデータ出力ファイル付加名称(rowList));
