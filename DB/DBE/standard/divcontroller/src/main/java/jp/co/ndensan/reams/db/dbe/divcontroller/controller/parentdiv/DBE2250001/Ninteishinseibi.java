@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -276,9 +275,8 @@ public class Ninteishinseibi {
                         row.getGaikyoTokkiTextImageKubun())
                 .createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        builder.set認定調査依頼履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set概況調査テキストイメージ区分(TokkijikoTextImageKubun.valueOf(row.
-                getGaikyoTokkiTextImageKubun().toString()).getコード());
+        builder.set認定調査依頼履歴番号(row.getNinteichosaIraiRirekiNo().getValue().intValue());
+        builder.set概況調査テキストイメージ区分(row.getGaikyoTokkiTextImageKubun());
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.set認定調査依頼区分コード(new Code(row.getNinteichousaIraiKubunCode()));
         builder.set認定調査回数(
@@ -310,8 +308,7 @@ public class Ninteishinseibi {
                         row.getNinteichosaIraiRirekiNo().getValue().intValue())
                 .createBuilderForEdit();
         builder.set申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-        builder.set要介護認定調査履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
-        builder.set要介護認定調査履歴番号(Integer.valueOf(row.getNinteichosaIraiRirekiNo().toString()));
+        builder.set要介護認定調査履歴番号(row.getNinteichosaIraiRirekiNo().getValue().intValue());
         builder.set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()));
         builder.set認定調査_認知症高齢者の日常生活自立度コード(new Code(row.getNinchishoNichijoSeikatsuJiritsudoCode()));
         builder.set認定調査_障害高齢者の日常生活自立度コード(new Code(row.getShogaiNichijoSeikatsuJiritsudoCode()));
@@ -332,7 +329,7 @@ public class Ninteishinseibi {
                     new NinteichosahyoChosaItem(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                             row.getNinteichosaIraiRirekiNo().getValue().intValue(),
-                            Integer.valueOf(entry.getKey().toString()))
+                            Integer.parseInt(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                     .set調査項目(entry.getValue())
@@ -356,13 +353,13 @@ public class Ninteishinseibi {
             if (RString.isNullOrEmpty(entry.getValue())) {
                 サービスの状況 = 0;
             } else {
-                サービスの状況 = Integer.valueOf(entry.getValue().toString());
+                サービスの状況 = Integer.parseInt(entry.getValue().toString());
             }
             resultサービス状況List.add(
                     new NinteichosahyoServiceJokyo(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                             row.getNinteichosaIraiRirekiNo().getValue().intValue(),
-                            Integer.valueOf(entry.getKey().toString()))
+                            Integer.parseInt(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                     .setサービスの状況(サービスの状況)
@@ -392,7 +389,7 @@ public class Ninteishinseibi {
                     new NinteichosahyoServiceJokyoFlag(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                             row.getNinteichosaIraiRirekiNo().getValue().intValue(),
-                            Integer.valueOf(entry.getKey().toString()))
+                            Integer.parseInt(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                     .setサービスの状況フラグ(サービス状況フラグ)
@@ -416,7 +413,7 @@ public class Ninteishinseibi {
                     new NinteichosahyoKinyuItem(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                             row.getNinteichosaIraiRirekiNo().getValue().intValue(),
-                            Integer.valueOf(entry.getKey().toString()))
+                            Integer.parseInt(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                     .setサービスの状況記入(entry.getValue())
@@ -446,7 +443,7 @@ public class Ninteishinseibi {
                     new NinteichosahyoShisetsuRiyo(
                             new ShinseishoKanriNo(row.getShinseishoKanriNo()),
                             row.getNinteichosaIraiRirekiNo().getValue().intValue(),
-                            Integer.valueOf(entry.getKey().toString()))
+                            Integer.parseInt(entry.getKey().toString()))
                     .createBuilderForEdit()
                     .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
                     .set施設利用フラグ(施設利用フラグ)

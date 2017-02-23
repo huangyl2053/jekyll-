@@ -87,6 +87,7 @@ public class NinteishinseibiHandler {
         NinteiChosaDataTorikomiRelate 認定調査情報;
         ShinseishoKanriNo 申請書管理番号;
         int 認定調査依頼履歴番号;
+        FlexibleDate 受領年月日 = FlexibleDate.getNowDate();
         NinteiChosaDataTorikomiManager manager = NinteiChosaDataTorikomiManager.createInstance();
         List<dgNinteiChosaData_Row> dataSource = new ArrayList<>();
         for (ChosaKekkaNyuryokuCsvEntity 基本調査データCsvEntity : 基本調査データCsvEntityList) {
@@ -98,7 +99,7 @@ public class NinteishinseibiHandler {
             特記事項List = get特記事項List(filePath_特記情報データ, 基本調査データCsvEntity, 申請書管理番号, 認定調査依頼履歴番号);
             概況特記事項 = get概況特記情報(filePath_概況特記データ, 基本調査データCsvEntity, 申請書管理番号, 認定調査依頼履歴番号);
             dataSource.add(editRow(申請書管理番号, 認定調査依頼履歴番号, 基本調査データCsvEntity,
-                    特記事項List, 概況特記事項, 認定調査情報, 認定調査結果入手_必須調査票));
+                    特記事項List, 概況特記事項, 認定調査情報, 認定調査結果入手_必須調査票, 受領年月日));
             if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
                 特記事項Map.put(申請書管理番号, 特記事項List);
                 概況特記事項Map.put(申請書管理番号, 概況特記事項);
@@ -146,7 +147,8 @@ public class NinteishinseibiHandler {
             List<NinteichosahyoTokkijiko> 特記事項List,
             GaikyoTokki 概況特記事項,
             NinteiChosaDataTorikomiRelate 認定調査情報,
-            RString 認定調査結果入手_必須調査票) {
+            RString 認定調査結果入手_必須調査票,
+            FlexibleDate 受領年月日) {
         dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
         row.setHokenja(entity.get保険者名());
         row.getNinteiShinseiYMD().setValue(convertFlexibleDate(entity.get認定申請年月日()));
@@ -179,7 +181,7 @@ public class NinteishinseibiHandler {
                 ? entity.get認定調査依頼区分コード()
                 : RString.EMPTY);
         row.setNinteichosaIraiKaisu(entity.get認定調査回数());
-        row.getNinteichosaJuryoYMD().setValue(convertFlexibleDate(entity.get認定調査受領年月日()));
+        row.getNinteichosaJuryoYMD().setValue(受領年月日);
         row.setNinteiChosaKubunCode(entity.get認定調査区分コード());
         row.setChosaJisshiBashoCode(entity.get認定調査実施場所コード());
         row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所());
@@ -193,7 +195,7 @@ public class NinteishinseibiHandler {
         row.setRiyoShisetsuYubinNo(entity.get利用施設郵便番号());
         row.setTokki(entity.get特記());
         row.getTokkijikoUketsukeYMD().setValue(convertFlexibleDate(entity.get認定調査特記事項受付年月日()));
-        row.getTokkijikoJuryoYMD().setValue(convertFlexibleDate(entity.get認定調査特記事項受領年月日()));
+        row.getTokkijikoJuryoYMD().setValue(受領年月日);
 
         //5207
         row.setServiceJokyoRemban(createCommaSplitString(createサービス状況連番List(entity)));
@@ -557,7 +559,7 @@ public class NinteishinseibiHandler {
             if (!特記情報データ.get認定調査特記事項番号().isEmpty()
                     && 申請書管理番号.value().equals(特記情報データ.get申請書管理番号())) {
                 int 認定調査特記事項連番 = (NumberUtils.isNumber(特記情報データ.get認定調査特記事項連番().toString()))
-                        ? Integer.valueOf(特記情報データ.get認定調査特記事項連番().toString())
+                        ? Integer.parseInt(特記情報データ.get認定調査特記事項連番().toString())
                         : 0;
                 特記事項List.add(new NinteichosahyoTokkijiko(
                         申請書管理番号,
