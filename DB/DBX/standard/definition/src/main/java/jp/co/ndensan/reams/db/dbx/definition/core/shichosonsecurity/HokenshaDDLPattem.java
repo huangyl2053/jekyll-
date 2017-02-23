@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,6 +12,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author n3601
  */
 public enum HokenshaDDLPattem {
+
+    /**
+     * 全市町村以外
+     */
+    全市町村以外("0"),
     /**
      * 構成市町村全て
      */
@@ -21,7 +25,7 @@ public enum HokenshaDDLPattem {
      * 広域保険者のみ
      */
     広域保険者のみ("4");
-    
+
     private final RString aCode;
 
     private HokenshaDDLPattem(String code) {

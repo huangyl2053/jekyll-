@@ -66,7 +66,11 @@ public class HokenshaListDivHandler {
         List<HokenshaSummary> chokenshaList = new ArrayList<>();
         if (1 < hokenshaList.size()) {
             for (HokenshaSummary s : hokenshaList) {
-                if (s.get保険者区分().getコード().equals(保険者パターン.code())) {
+                if (!HokenshaDDLPattem.全市町村以外.equals(保険者パターン)) {
+                    if (s.get保険者区分().getコード().equals(保険者パターン.code())) {
+                        chokenshaList.add(s);
+                    }
+                } else {
                     chokenshaList.add(s);
                 }
             }
