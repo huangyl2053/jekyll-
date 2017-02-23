@@ -298,6 +298,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
      * @return List<RenrakusakiJoho>
      */
     public List<RenrakusakiJoho> setBusiness(List<RenrakusakiJoho> dbdBusiness) {
+        if (RString.isNullOrEmpty(div.getDgRenrakusakiIchiran().getDataSource().get(INT_0).getShinseishoKanriNo())) {
+            dbdBusiness = new ArrayList<>();
+        }
         for (dgRenrakusakiIchiran_Row row : div.getDgRenrakusakiIchiran().getDataSource()) {
             if (RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
                 RenrakusakiJoho business = new RenrakusakiJoho(ShinseishoKanriNo.EMPTY, row.getRenban().getValue().intValue());

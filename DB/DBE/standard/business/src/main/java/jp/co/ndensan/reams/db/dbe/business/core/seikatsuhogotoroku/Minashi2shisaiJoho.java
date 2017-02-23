@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,6 +52,25 @@ public class Minashi2shisaiJoho implements Serializable {
     private RString 支所コード;
     private RString 年齢;
     private ShinseishoKanriNo 前回申請書管理番号;
+    private LasdecCode 市町村コード;
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード 
+     */    
+    public LasdecCode get市町村コード() {
+        return 市町村コード;
+    }
+
+    /**
+     * 市町村コードを設定します。
+     *
+     * @param 市町村コード 市町村コード
+     */
+    public void set市町村コード(LasdecCode 市町村コード) {
+        this.市町村コード = 市町村コード;
+    }
 
     /**
      * 保険者を設定します。

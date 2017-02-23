@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.Sei
 import jp.co.ndensan.reams.db.dbe.service.core.seikatsuhogotoroku.SeikatsuhogoTorokuFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -89,7 +90,8 @@ public class SeikatsuhogoToroku {
     public ResponseData<SeikatsuhogoTorokuDiv> onLoad(SeikatsuhogoTorokuDiv div) {
         RString code = shishoSecurity.getShishoCode(ControlDataHolder.getUserId());
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+//        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
         List<KoseiShichosonShishoMaster> list = getList(null, code, div);
         SeikatsuhogoTorokuResult result = null;
         if (!RString.isNullOrEmpty(申請書管理番号)) {
