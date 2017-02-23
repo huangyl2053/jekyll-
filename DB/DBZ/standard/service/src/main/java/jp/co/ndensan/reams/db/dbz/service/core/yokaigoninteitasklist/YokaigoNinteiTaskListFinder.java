@@ -206,24 +206,24 @@ public class YokaigoNinteiTaskListFinder {
     }
 
     /**
-     * 前調査入手を取得します。
+     * 全調査入手を取得します。
      *
      * @param parameter YokaigoNinteiTaskListParameter
      * @return 他住所地特例者管理 他住所地特例者管理
      */
     @Transaction
-    public ShinSaKaiBusiness get前調査入手モード(YokaigoNinteiTaskListParameter parameter) {
+    public ShinSaKaiBusiness get全調査入手モード(YokaigoNinteiTaskListParameter parameter) {
         ShinSaKaiBusiness shinSaKaiBusiness = new ShinSaKaiBusiness();
         IYokaigoNinteiTaskListMapper mapper = mapperProvider.create(IYokaigoNinteiTaskListMapper.class);
-        List<ShinSaKaiToRoKuRelate> entityList = mapper.get前調査入手(parameter);
+        List<ShinSaKaiToRoKuRelate> entityList = mapper.get全調査入手(parameter);
         for (ShinSaKaiToRoKuRelate shinSaKaiToRoKuRelate : entityList) {
             List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報 = shinSaKaiToRoKuRelate.get要介護認定完了情報EntityLsit();
-            set前調査入手(要介護認定完了情報, shinSaKaiBusiness);
+            set全調査入手(要介護認定完了情報, shinSaKaiBusiness);
         }
         return shinSaKaiBusiness;
     }
 
-    private void set前調査入手(
+    private void set全調査入手(
             List<DbT5105NinteiKanryoJohoEntity> 要介護認定完了情報,
             ShinSaKaiBusiness shinSaKaiBusiness) {
         List<NinteiKanryoJoho> 要介護認定完了情報Lsit = new ArrayList();

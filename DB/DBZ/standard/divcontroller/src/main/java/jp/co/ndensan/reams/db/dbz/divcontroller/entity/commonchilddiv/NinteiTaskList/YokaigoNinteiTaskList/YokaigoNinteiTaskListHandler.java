@@ -247,10 +247,10 @@ public class YokaigoNinteiTaskListHandler {
                     get調査入手モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             if (!調査入手List.isEmpty()) {
-                ShinSaKaiBusiness 前調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
-                        get前調査入手モード(YokaigoNinteiTaskListParameter.
+                ShinSaKaiBusiness 全調査入手Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get全調査入手モード(YokaigoNinteiTaskListParameter.
                                 createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
-                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前調査入手Model.get要介護認定完了情報Lsit()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(全調査入手Model.get要介護認定完了情報Lsit()));
             } else {
                 ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
             }
@@ -664,7 +664,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setNinteiChosainCode(business.get調査員コード() == null
                     ? RString.EMPTY : business.get調査員コード().value());
             row.setChikuCode(business.get地区コード() == null ? RString.EMPTY : business.get地区コード());
-            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            row.setShinseishoKanriNo(business.get認定申請情報_申請書管理番号() == null ? RString.EMPTY : business.get認定申請情報_申請書管理番号().value());
             調査入手モードの日付設定(row, business);
             rowList.add(row);
         }

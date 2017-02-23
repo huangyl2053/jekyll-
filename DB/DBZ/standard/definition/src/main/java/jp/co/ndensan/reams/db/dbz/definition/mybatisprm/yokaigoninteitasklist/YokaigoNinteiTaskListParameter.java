@@ -25,16 +25,54 @@ public final class YokaigoNinteiTaskListParameter {
     private final Decimal 件数;
     private final LasdecCode 市町村コード;
     private final boolean isItijiHannteiAto;
+    private final boolean is特記事項必須;
+    private final boolean is概況特記必須;
 
-    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分, Decimal 件数, LasdecCode 市町村コード, boolean 一次判定後フラグ) {
+    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分, Decimal 件数, LasdecCode 市町村コード,
+            boolean 一次判定後フラグ, boolean is特記事項必須, boolean is概況特記必須) {
         this.通常 = 通常;
         this.延期 = 延期;
         this.状態区分 = 状態区分;
         this.件数 = 件数;
         this.市町村コード = 市町村コード;
         this.isItijiHannteiAto = 一次判定後フラグ;
+        this.is特記事項必須 = is特記事項必須;
+        this.is概況特記必須 = is概況特記必須;
     }
 
+    /**
+     * 検索処理取得パラメータ設定
+     *
+     * @param 通常 RString
+     * @param 延期 RString
+     * @param 状態区分 RString
+     * @param 件数 Decimal
+     * @param 市町村コード LasdecCode
+     * @param 一次判定後フラグ boolean
+     * @param is特記事項必須 boolean
+     * @param is概況特記必須 boolean
+     * @return YokaigoNinteiTaskListParameter
+     */
+    public static YokaigoNinteiTaskListParameter createParameter(
+            RString 通常,
+            RString 延期,
+            RString 状態区分,
+            Decimal 件数,
+            LasdecCode 市町村コード,
+            boolean 一次判定後フラグ,
+            boolean is特記事項必須,
+            boolean is概況特記必須) {
+        return new YokaigoNinteiTaskListParameter(
+                通常,
+                延期,
+                状態区分,
+                件数,
+                市町村コード,
+                一次判定後フラグ,
+                is特記事項必須,
+                is概況特記必須);
+    }
+    
     /**
      * 検索処理取得パラメータ設定
      *
@@ -47,19 +85,21 @@ public final class YokaigoNinteiTaskListParameter {
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
-        RString 通常,
-        RString 延期,
-        RString 状態区分,
-        Decimal 件数,
-        LasdecCode 市町村コード,
-        boolean 一次判定後フラグ) {
+            RString 通常,
+            RString 延期,
+            RString 状態区分,
+            Decimal 件数,
+            LasdecCode 市町村コード,
+            boolean 一次判定後フラグ) {
         return new YokaigoNinteiTaskListParameter(
-            通常,
-            延期,
-            状態区分,
-            件数,
-            市町村コード,
-            一次判定後フラグ);
+                通常,
+                延期,
+                状態区分,
+                件数,
+                市町村コード,
+                一次判定後フラグ,
+                false,
+                false);
     }
 
     /**
@@ -73,18 +113,20 @@ public final class YokaigoNinteiTaskListParameter {
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
-        RString 通常,
-        RString 延期,
-        RString 状態区分,
-        Decimal 件数,
-        LasdecCode 市町村コード) {
+            RString 通常,
+            RString 延期,
+            RString 状態区分,
+            Decimal 件数,
+            LasdecCode 市町村コード) {
         return new YokaigoNinteiTaskListParameter(
-            通常,
-            延期,
-            状態区分,
-            件数,
-            市町村コード,
-            false);
+                通常,
+                延期,
+                状態区分,
+                件数,
+                市町村コード,
+                false,
+                false,
+                false);
     }
 
     /**
@@ -97,17 +139,19 @@ public final class YokaigoNinteiTaskListParameter {
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
-        RString 通常,
-        RString 延期,
-        RString 状態区分,
-        Decimal 件数) {
+            RString 通常,
+            RString 延期,
+            RString 状態区分,
+            Decimal 件数) {
         return new YokaigoNinteiTaskListParameter(
-            通常,
-            延期,
-            状態区分,
-            件数,
-            LasdecCode.EMPTY,
-            false);
+                通常,
+                延期,
+                状態区分,
+                件数,
+                LasdecCode.EMPTY,
+                false,
+                false,
+                false);
     }
 
     /**
@@ -119,16 +163,18 @@ public final class YokaigoNinteiTaskListParameter {
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
-        RString 通常,
-        RString 延期,
-        RString 状態区分) {
+            RString 通常,
+            RString 延期,
+            RString 状態区分) {
         return new YokaigoNinteiTaskListParameter(
-            通常,
-            延期,
-            状態区分,
-            Decimal.ZERO,
-            LasdecCode.EMPTY,
-            false);
+                通常,
+                延期,
+                状態区分,
+                Decimal.ZERO,
+                LasdecCode.EMPTY,
+                false,
+                false,
+                false);
     }
 
     /**
@@ -139,14 +185,16 @@ public final class YokaigoNinteiTaskListParameter {
      * @return YokaigoNinteiTaskListParameter
      */
     public static YokaigoNinteiTaskListParameter createParameter(
-        RString 通常,
-        RString 延期) {
+            RString 通常,
+            RString 延期) {
         return new YokaigoNinteiTaskListParameter(
-            通常,
-            延期,
-            RString.EMPTY,
-            Decimal.ZERO,
-            LasdecCode.EMPTY,
-            false);
+                通常,
+                延期,
+                RString.EMPTY,
+                Decimal.ZERO,
+                LasdecCode.EMPTY,
+                false,
+                false,
+                false);
     }
 }

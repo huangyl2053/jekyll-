@@ -43,12 +43,12 @@ public class CyoSaNyuSyuBusiness {
     }
 
     /**
-     * 申請書管理番号を返します。
+     * DbT5101申請書管理番号を返します。
      *
-     * @return 申請書管理番号
+     * @return DbT5101申請書管理番号
      */
-    public ShinseishoKanriNo get申請書管理番号() {
-        return entity.getShinseishoKanriNo();
+    public ShinseishoKanriNo get認定申請情報_申請書管理番号() {
+        return entity.getDbt5101ShinseishoKanriNo();
     }
 
     /**
@@ -67,6 +67,15 @@ public class CyoSaNyuSyuBusiness {
      */
     public AtenaMeisho get氏名() {
         return entity.getHihokenshaName();
+    }
+
+    /**
+     * 被保険者カナ氏名を返します。
+     *
+     * @return 被保険者カナ氏名
+     */
+    public AtenaMeisho getカナ氏名() {
+        return entity.getHihokenshaKana();
     }
 
     /**
@@ -229,5 +238,32 @@ public class CyoSaNyuSyuBusiness {
      */
     public ChosainCode get調査員コード() {
         return entity.getNinteiChosainCode();
+    }
+    
+    /**
+     * DbT5203申請書管理番号を返します。
+     *
+     * @return DbT5203申請書管理番号
+     */
+    public ShinseishoKanriNo get基本調査_申請書管理番号() {
+        return entity.getDbt5203ShinseishoKanriNo();
+    }
+    
+    /**
+     * DbT5205申請書管理番号を返します。
+     *
+     * @return DbT5205申請書管理番号
+     */
+    public ShinseishoKanriNo get特記事項_申請書管理番号() {
+        return entity.getDbt5205ShinseishoKanriNo();
+    }
+    
+    /**
+     * DbT5206申請書管理番号を返します。
+     *
+     * @return DbT5206申請書管理番号
+     */
+    public ShinseishoKanriNo get概況特記_申請書管理番号() {
+        return entity.getDbt5206ShinseishoKanriNo();
     }
 }

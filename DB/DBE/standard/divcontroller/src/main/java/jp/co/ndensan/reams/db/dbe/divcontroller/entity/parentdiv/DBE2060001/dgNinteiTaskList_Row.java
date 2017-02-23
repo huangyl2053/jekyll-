@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 21 14:02:11 JST 2017 
+ * Thu Feb 23 13:53:28 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgNinteiTaskList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
 
     private RString jotai;
     private RString shoKisaiHokenshaNo;
@@ -34,6 +34,10 @@ public class dgNinteiTaskList_Row extends DataRow {
     private RString chosaItakusaki;
     private RString chosain;
     private TextBoxDate chosaJisshiYMD;
+    private RString gaikyoChosaToroku;
+    private RString kihonChosaToroku;
+    private RString tokkiJikoToroku;
+    private RString gaikyoTokkiToroku;
     private TextBoxDate tokusokuHakkoYMD;
     private RString tokusokuHoho;
     private TextBoxNum tokusokuKaisu;
@@ -58,6 +62,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.chosaItakusaki = RString.EMPTY;
         this.chosain = RString.EMPTY;
         this.chosaJisshiYMD = new TextBoxDate();
+        this.gaikyoChosaToroku = RString.EMPTY;
+        this.kihonChosaToroku = RString.EMPTY;
+        this.tokkiJikoToroku = RString.EMPTY;
+        this.gaikyoTokkiToroku = RString.EMPTY;
         this.tokusokuHakkoYMD = new TextBoxDate();
         this.tokusokuHoho = RString.EMPTY;
         this.tokusokuKaisu = new TextBoxNum();
@@ -79,6 +87,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("chosaItakusaki", chosaItakusaki);
         this.setOriginalData("chosain", chosain);
         this.setOriginalData("chosaJisshiYMD", chosaJisshiYMD);
+        this.setOriginalData("gaikyoChosaToroku", gaikyoChosaToroku);
+        this.setOriginalData("kihonChosaToroku", kihonChosaToroku);
+        this.setOriginalData("tokkiJikoToroku", tokkiJikoToroku);
+        this.setOriginalData("gaikyoTokkiToroku", gaikyoTokkiToroku);
         this.setOriginalData("tokusokuHakkoYMD", tokusokuHakkoYMD);
         this.setOriginalData("tokusokuHoho", tokusokuHoho);
         this.setOriginalData("tokusokuKaisu", tokusokuKaisu);
@@ -91,7 +103,7 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
     }
 
-    public dgNinteiTaskList_Row(RString jotai, RString shoKisaiHokenshaNo, RString hokensha, TextBoxDate ninteiShinseiYMD, RString hihoNo, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate chosaIraiKanryoYMD, RString chosaItakusaki, RString chosain, TextBoxDate chosaJisshiYMD, TextBoxDate tokusokuHakkoYMD, RString tokusokuHoho, TextBoxNum tokusokuKaisu, TextBoxDate tokusokuKigen, RString tokusokuChiku, RString chosaItakusakiCode, RString chosainCode, RString chikuCode, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo) {
+    public dgNinteiTaskList_Row(RString jotai, RString shoKisaiHokenshaNo, RString hokensha, TextBoxDate ninteiShinseiYMD, RString hihoNo, RString hihoShimei, RString shinseiKubunShinseiji, TextBoxDate chosaIraiKanryoYMD, RString chosaItakusaki, RString chosain, TextBoxDate chosaJisshiYMD, RString gaikyoChosaToroku, RString kihonChosaToroku, RString tokkiJikoToroku, RString gaikyoTokkiToroku, TextBoxDate tokusokuHakkoYMD, RString tokusokuHoho, TextBoxNum tokusokuKaisu, TextBoxDate tokusokuKigen, RString tokusokuChiku, RString chosaItakusakiCode, RString chosainCode, RString chikuCode, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
@@ -104,6 +116,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.setOriginalData("chosaItakusaki", chosaItakusaki);
         this.setOriginalData("chosain", chosain);
         this.setOriginalData("chosaJisshiYMD", chosaJisshiYMD);
+        this.setOriginalData("gaikyoChosaToroku", gaikyoChosaToroku);
+        this.setOriginalData("kihonChosaToroku", kihonChosaToroku);
+        this.setOriginalData("tokkiJikoToroku", tokkiJikoToroku);
+        this.setOriginalData("gaikyoTokkiToroku", gaikyoTokkiToroku);
         this.setOriginalData("tokusokuHakkoYMD", tokusokuHakkoYMD);
         this.setOriginalData("tokusokuHoho", tokusokuHoho);
         this.setOriginalData("tokusokuKaisu", tokusokuKaisu);
@@ -125,6 +141,10 @@ public class dgNinteiTaskList_Row extends DataRow {
         this.chosaItakusaki = chosaItakusaki;
         this.chosain = chosain;
         this.chosaJisshiYMD = chosaJisshiYMD;
+        this.gaikyoChosaToroku = gaikyoChosaToroku;
+        this.kihonChosaToroku = kihonChosaToroku;
+        this.tokkiJikoToroku = tokkiJikoToroku;
+        this.gaikyoTokkiToroku = gaikyoTokkiToroku;
         this.tokusokuHakkoYMD = tokusokuHakkoYMD;
         this.tokusokuHoho = tokusokuHoho;
         this.tokusokuKaisu = tokusokuKaisu;
@@ -179,6 +199,22 @@ public class dgNinteiTaskList_Row extends DataRow {
 
     public TextBoxDate getChosaJisshiYMD() {
         return chosaJisshiYMD;
+    }
+
+    public RString getGaikyoChosaToroku() {
+        return gaikyoChosaToroku;
+    }
+
+    public RString getKihonChosaToroku() {
+        return kihonChosaToroku;
+    }
+
+    public RString getTokkiJikoToroku() {
+        return tokkiJikoToroku;
+    }
+
+    public RString getGaikyoTokkiToroku() {
+        return gaikyoTokkiToroku;
     }
 
     public TextBoxDate getTokusokuHakkoYMD() {
@@ -274,6 +310,26 @@ public class dgNinteiTaskList_Row extends DataRow {
     public void setChosaJisshiYMD(TextBoxDate chosaJisshiYMD) {
         this.setOriginalData("chosaJisshiYMD", chosaJisshiYMD);
         this.chosaJisshiYMD = chosaJisshiYMD;
+    }
+
+    public void setGaikyoChosaToroku(RString gaikyoChosaToroku) {
+        this.setOriginalData("gaikyoChosaToroku", gaikyoChosaToroku);
+        this.gaikyoChosaToroku = gaikyoChosaToroku;
+    }
+
+    public void setKihonChosaToroku(RString kihonChosaToroku) {
+        this.setOriginalData("kihonChosaToroku", kihonChosaToroku);
+        this.kihonChosaToroku = kihonChosaToroku;
+    }
+
+    public void setTokkiJikoToroku(RString tokkiJikoToroku) {
+        this.setOriginalData("tokkiJikoToroku", tokkiJikoToroku);
+        this.tokkiJikoToroku = tokkiJikoToroku;
+    }
+
+    public void setGaikyoTokkiToroku(RString gaikyoTokkiToroku) {
+        this.setOriginalData("gaikyoTokkiToroku", gaikyoTokkiToroku);
+        this.gaikyoTokkiToroku = gaikyoTokkiToroku;
     }
 
     public void setTokusokuHakkoYMD(TextBoxDate tokusokuHakkoYMD) {
