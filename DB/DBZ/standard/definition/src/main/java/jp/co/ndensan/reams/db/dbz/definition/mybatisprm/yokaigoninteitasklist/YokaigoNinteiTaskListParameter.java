@@ -27,9 +27,18 @@ public final class YokaigoNinteiTaskListParameter {
     private final boolean isItijiHannteiAto;
     private final boolean is特記事項必須;
     private final boolean is概況特記必須;
+    private final boolean usesIraisho;
+    private final boolean usesIkensho;
+    private final boolean usesIraisho_Ikensho;
+    private static final RString 依頼書のみ = new RString("1");
+    private static final RString 意見書のみ = new RString("2");
+    private static final RString 依頼書_意見書 = new RString("3");
 
     private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分, Decimal 件数, LasdecCode 市町村コード,
-            boolean 一次判定後フラグ, boolean is特記事項必須, boolean is概況特記必須) {
+            boolean 一次判定後フラグ, boolean is特記事項必須, boolean is概況特記必須,
+            boolean usesIraisho,
+            boolean usesIkensho,
+            boolean usesIraisho_Ikensho) {
         this.通常 = 通常;
         this.延期 = 延期;
         this.状態区分 = 状態区分;
@@ -38,6 +47,9 @@ public final class YokaigoNinteiTaskListParameter {
         this.isItijiHannteiAto = 一次判定後フラグ;
         this.is特記事項必須 = is特記事項必須;
         this.is概況特記必須 = is概況特記必須;
+        this.usesIraisho = usesIraisho;
+        this.usesIkensho = usesIkensho;
+        this.usesIraisho_Ikensho = usesIraisho_Ikensho;
     }
 
     /**
@@ -70,9 +82,12 @@ public final class YokaigoNinteiTaskListParameter {
                 市町村コード,
                 一次判定後フラグ,
                 is特記事項必須,
-                is概況特記必須);
+                is概況特記必須,
+                false,
+                false,
+                false);
     }
-    
+
     /**
      * 検索処理取得パラメータ設定
      *
@@ -98,6 +113,9 @@ public final class YokaigoNinteiTaskListParameter {
                 件数,
                 市町村コード,
                 一次判定後フラグ,
+                false,
+                false,
+                false,
                 false,
                 false);
     }
@@ -126,6 +144,9 @@ public final class YokaigoNinteiTaskListParameter {
                 市町村コード,
                 false,
                 false,
+                false,
+                false,
+                false,
                 false);
     }
 
@@ -151,6 +172,9 @@ public final class YokaigoNinteiTaskListParameter {
                 LasdecCode.EMPTY,
                 false,
                 false,
+                false,
+                false,
+                false,
                 false);
     }
 
@@ -174,6 +198,9 @@ public final class YokaigoNinteiTaskListParameter {
                 LasdecCode.EMPTY,
                 false,
                 false,
+                false,
+                false,
+                false,
                 false);
     }
 
@@ -195,6 +222,53 @@ public final class YokaigoNinteiTaskListParameter {
                 LasdecCode.EMPTY,
                 false,
                 false,
+                false,
+                false,
+                false,
                 false);
+    }
+
+    /**
+     * 検索処理取得パラメータ設定
+     *
+     * @param 通常 RString
+     * @param 延期 RString
+     * @param 状態区分 RString
+     * @param 件数 Decimal
+     * @param 市町村コード LasdecCode
+     * @param 追加完了条件 RString
+     * @return YokaigoNinteiTaskListParameter
+     */
+    public static YokaigoNinteiTaskListParameter createParameter(
+            RString 通常,
+            RString 延期,
+            RString 状態区分,
+            Decimal 件数,
+            LasdecCode 市町村コード,
+            RString 追加完了条件) {
+        boolean Iraisho = false;
+        boolean Ikensho = false;
+        boolean Iraisho_Ikensho = false;
+        if (追加完了条件.equals(依頼書のみ)) {
+            Iraisho = true;
+        }
+        if (追加完了条件.equals(意見書のみ)) {
+            Ikensho = true;
+        }
+        if (追加完了条件.equals(依頼書_意見書)) {
+            Iraisho_Ikensho = true;
+        }
+        return new YokaigoNinteiTaskListParameter(
+                通常,
+                延期,
+                状態区分,
+                件数,
+                市町村コード,
+                false,
+                false,
+                false,
+                Iraisho,
+                Ikensho,
+                Iraisho_Ikensho);
     }
 }
