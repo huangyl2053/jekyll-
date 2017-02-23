@@ -221,10 +221,17 @@ public class NinteishinseibiHandler {
         row.setNinteichosaTokkijikoNoRemban(createCommaSplitString(create特記事項表示文字列List(特記事項List)));
 
         //概況特記事項
-        row.setShuso(概況特記事項.get概況特記事項_主訴());
-        row.setKazokuJokyo(概況特記事項.get概況特記事項_家族状況());
-        row.setKyojuKankyo(概況特記事項.get概況特記事項_居住環境());
-        row.setKikaiKiki(概況特記事項.get概況特記事項_機器_器械());
+        if (概況特記事項 != null) {
+            row.setShuso(概況特記事項.get概況特記事項_主訴());
+            row.setKazokuJokyo(概況特記事項.get概況特記事項_家族状況());
+            row.setKyojuKankyo(概況特記事項.get概況特記事項_居住環境());
+            row.setKikaiKiki(概況特記事項.get概況特記事項_機器_器械());
+        } else {
+            row.setShuso(RString.EMPTY);
+            row.setKazokuJokyo(RString.EMPTY);
+            row.setKyojuKankyo(RString.EMPTY);
+            row.setKikaiKiki(RString.EMPTY);
+        }
         set状態(row, entity, 特記事項List, 概況特記事項, 認定調査結果入手_必須調査票, 認定調査情報);
         return row;
     }
@@ -553,24 +560,25 @@ public class NinteishinseibiHandler {
 
     private List<NinteichosahyoTokkijiko> get特記事項List(RString ファイルパス_特記情報データ,
             ChosaKekkaNyuryokuCsvEntity entity, ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
-        List<ChosaKekkaNyuryokuTokkiCsvEntity> csvEntityList_特記情報データ = データ取込_特記情報データ(ファイルパス_特記情報データ);
         List<NinteichosahyoTokkijiko> 特記事項List = new ArrayList<>();
-        for (ChosaKekkaNyuryokuTokkiCsvEntity 特記情報データ : csvEntityList_特記情報データ) {
-            if (!特記情報データ.get認定調査特記事項番号().isEmpty()
-                    && 申請書管理番号.value().equals(特記情報データ.get申請書管理番号())) {
-                int 認定調査特記事項連番 = (NumberUtils.isNumber(特記情報データ.get認定調査特記事項連番().toString()))
-                        ? Integer.parseInt(特記情報データ.get認定調査特記事項連番().toString())
-                        : 0;
-                特記事項List.add(new NinteichosahyoTokkijiko(
-                        申請書管理番号,
-                        認定調査依頼履歴番号,
-                        特記情報データ.get認定調査特記事項番号(),
-                        認定調査特記事項連番,
-                        entity.get概況特記テキスト_イメージ区分コード(),
-                        new Code(GenponMaskKubun.原本.getコード()))
-                        .createBuilderForEdit()
-                        .set特記事項(特記情報データ.get特記事項())
-                        .build());
+        if (!ファイルパス_特記情報データ.isEmpty()) {
+            for (ChosaKekkaNyuryokuTokkiCsvEntity 特記情報データ : データ取込_特記情報データ(ファイルパス_特記情報データ)) {
+                if (!特記情報データ.get認定調査特記事項番号().isEmpty()
+                        && 申請書管理番号.value().equals(特記情報データ.get申請書管理番号())) {
+                    int 認定調査特記事項連番 = (NumberUtils.isNumber(特記情報データ.get認定調査特記事項連番().toString()))
+                            ? Integer.parseInt(特記情報データ.get認定調査特記事項連番().toString())
+                            : 0;
+                    特記事項List.add(new NinteichosahyoTokkijiko(
+                            申請書管理番号,
+                            認定調査依頼履歴番号,
+                            特記情報データ.get認定調査特記事項番号(),
+                            認定調査特記事項連番,
+                            entity.get概況特記テキスト_イメージ区分コード(),
+                            new Code(GenponMaskKubun.原本.getコード()))
+                            .createBuilderForEdit()
+                            .set特記事項(特記情報データ.get特記事項())
+                            .build());
+                }
             }
         }
         return 特記事項List;
@@ -602,23 +610,24 @@ public class NinteishinseibiHandler {
 
     private GaikyoTokki get概況特記情報(RString ファイルパス_概況特記データ,
             ChosaKekkaNyuryokuCsvEntity entity, ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
-        List<ChosaKekkaNyuryokuGaikyoTokkiCsvEntity> csvEntityList_概況特記データ = データ取込_概況特記データ(ファイルパス_概況特記データ);
         GaikyoTokki 概況特記事項 = null;
-        for (ChosaKekkaNyuryokuGaikyoTokkiCsvEntity 概況特記データ : csvEntityList_概況特記データ) {
-            概況特記事項 = new GaikyoTokki(
-                    申請書管理番号,
-                    認定調査依頼履歴番号,
-                    entity.get概況特記テキスト_イメージ区分コード(),
-                    new Code(GenponMaskKubun.原本.getコード()))
-                    .createBuilderForEdit()
-                    .set住宅改修(entity.get住宅改修改修箇所())
-                    .set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名())
-                    .set介護保険給付以外の在宅サービス種類名(entity.get介護保険給付以外の在宅サービス種類名())
-                    .set概況特記事項_主訴(概況特記データ.get概況特記事項主訴())
-                    .set概況特記事項_家族状況(概況特記データ.get概況特記事項家族状況())
-                    .set概況特記事項_居住環境(概況特記データ.get概況特記事項居住環境())
-                    .set概況特記事項_機器_器械(概況特記データ.get概況特記事項機器_器械())
-                    .build();
+        if (!ファイルパス_概況特記データ.isEmpty()) {
+            for (ChosaKekkaNyuryokuGaikyoTokkiCsvEntity 概況特記データ : データ取込_概況特記データ(ファイルパス_概況特記データ)) {
+                概況特記事項 = new GaikyoTokki(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        entity.get概況特記テキスト_イメージ区分コード(),
+                        new Code(GenponMaskKubun.原本.getコード()))
+                        .createBuilderForEdit()
+                        .set住宅改修(entity.get住宅改修改修箇所())
+                        .set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名())
+                        .set介護保険給付以外の在宅サービス種類名(entity.get介護保険給付以外の在宅サービス種類名())
+                        .set概況特記事項_主訴(概況特記データ.get概況特記事項主訴())
+                        .set概況特記事項_家族状況(概況特記データ.get概況特記事項家族状況())
+                        .set概況特記事項_居住環境(概況特記データ.get概況特記事項居住環境())
+                        .set概況特記事項_機器_器械(概況特記データ.get概況特記事項機器_器械())
+                        .build();
+            }
         }
         return 概況特記事項;
     }
