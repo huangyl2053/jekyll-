@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2260001
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250002.DBE250002_ImageTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2260001.ImageinputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001.ImageinputHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2260001.ImageinputValidationHandler;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
@@ -64,19 +66,23 @@ public class Imageinput {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts
                 = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間)).isCompressedArchive(false);
-        RString SharedFileEntryDescriptorString = RString.EMPTY;
+        RString sharedFileEntryDescriptorString = RString.EMPTY;
         for (FileData file : files) {
-            if (SharedFileEntryDescriptorString.isEmpty()) {
-                SharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
+            if (sharedFileEntryDescriptorString.isEmpty()) {
+                sharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
             } else {
                 ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
                         GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み),
-                        SharedFileEntryDescriptor.fromString(SharedFileEntryDescriptorString.toString()).getSharedFileId());
+                        SharedFileEntryDescriptor.fromString(sharedFileEntryDescriptorString.toString()).getSharedFileId());
                 SharedFile.appendNewFile(ro_sfd, new FilesystemPath(file.getFilePath()), "");
             }
         }
-
-        div.setHdnSharedFileEntryInfo(SharedFileEntryDescriptorString);
+        ValidationMessageControlPairs v = getValidationHandler(div).validateUploadedFiles(sharedFileEntryDescriptorString);
+        if (v.iterator().hasNext()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(バッチ実行ボタン名, true);
+            return ResponseData.of(div).addValidationMessages(v).respond();
+        }
+        div.setHdnSharedFileEntryInfo(sharedFileEntryDescriptorString);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(バッチ実行ボタン名, false);
         return ResponseData.of(div).respond();
     }
@@ -99,5 +105,9 @@ public class Imageinput {
 
     private ImageinputHandler getHandler(ImageinputDiv div) {
         return new ImageinputHandler(div);
+    }
+
+    private ImageinputValidationHandler getValidationHandler(ImageinputDiv div) {
+        return new ImageinputValidationHandler(div);
     }
 }

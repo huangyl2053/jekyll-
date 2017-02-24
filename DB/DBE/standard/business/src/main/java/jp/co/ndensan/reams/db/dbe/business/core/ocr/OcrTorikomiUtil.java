@@ -5,12 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
+import java.io.File;
+import java.io.IOException;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,6 +26,37 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class OcrTorikomiUtil {
 
     private OcrTorikomiUtil() {
+    }
+
+    /**
+     * 指定の共有ファイルエントリを取得し、かつ、それが保持する複数のファイルパスを種類毎に分類して返します。
+     *
+     * @param rosfd 対象の共有ファイルを指示する{@link ReadOnlySharedFileDescriptor}
+     * @return 種類毎に分類されたファイルパスの{@link Map}
+     */
+    public static Map<OcrDataType, OcrFiles> copyToLocalAndGroupingByType(ReadOnlySharedFileEntryDescriptor rosfd) {
+        return groupingByType(readAllOcrDataFileTo(Directory.createTmpDirectory(), rosfd));
+    }
+
+    private static List<RString> readAllOcrDataFileTo(RString tempDirPath, ReadOnlySharedFileEntryDescriptor rosfd) {
+        File tempDir = new File(tempDirPath.toString());
+        SharedFile.copyToLocal(rosfd, new FilesystemPath(tempDirPath));
+        return setFilePath(tempDir);
+    }
+
+    private static List<RString> setFilePath(File directory) {
+        List<RString> list = new ArrayList<>();
+        for (File file : directory.listFiles()) {
+            if (file.isFile()) {
+                try {
+                    list.add(new RString(file.getCanonicalPath()));
+                } catch (IOException ex) {
+                }
+            } else {
+                list.addAll(setFilePath(file));
+            }
+        }
+        return list;
     }
 
     /**
