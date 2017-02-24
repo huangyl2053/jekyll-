@@ -129,6 +129,10 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.getTxtShujiiCode().clearValue();
         div.getTxtShujiiName().clearValue();
         div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
+        if (ShoriType.ShokaiMode != div.getMode_ShoriType() 
+                && ShoriType.SimpleShokaiMode != div.getMode_ShoriType()) {
+            div.getChkShiteii().setReadOnly(false);
+        }
     }
     
     /**
@@ -149,9 +153,9 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         List<RString> shiteiiList = new ArrayList();
         div.getChkShiteii().setSelectedItemsByKey(shiteiiList);
         if (指定医フラグ) {
-            div.getChkShiteii().setDisabled(false);
+            div.getChkShiteii().setReadOnly(false);
         } else {
-            div.getChkShiteii().setDisabled(true);
+            div.getChkShiteii().setReadOnly(true);
         }
     }
 }
