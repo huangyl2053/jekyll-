@@ -363,10 +363,10 @@
         ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-        INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5910."ninteichosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
         AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
-        INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
+        LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteiChosaItakusakiCode" = DbT5201."ninteichosaItakusakiCode"
         AND DbT5913."ninteiChosainCode" = DbT5201."ninteiChosainCode"
         AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
