@@ -151,6 +151,7 @@
         rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116IchijiHanteiKekkaJoho
         WHERE
         DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo" = #{管理番号}
+        AND DbT5116IchijiHanteiKekkaJoho."kariIchijiHanteiKubun" = false 
     </select>
 
     <select resultOrdered="true" id="getIchijiHanteiKanryo"

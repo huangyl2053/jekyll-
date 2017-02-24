@@ -163,6 +163,7 @@ public class IchijiHanteiHandler {
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setValue(new Decimal(最大表示件数.toString()));
         div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setMaxValue(new Decimal(最大上限.toString()));
+        div.getIchijiHanteiKensakuJoken().getTxtHihokenshaNo().clearValue();
     }
 
     /**
