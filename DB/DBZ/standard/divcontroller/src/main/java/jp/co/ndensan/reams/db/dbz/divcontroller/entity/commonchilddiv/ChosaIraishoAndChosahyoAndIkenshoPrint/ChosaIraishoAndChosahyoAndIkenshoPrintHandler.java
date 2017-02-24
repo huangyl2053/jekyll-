@@ -1728,9 +1728,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(数字_2));
                 item.setBirthGengo(birthYMD.wareki().eraType(EraType.KANJI).getEra());
             }
-            if (row.getSeibetsu() != null && !RString.isNullOrEmpty(row.getSeibetsu().trim())) {
-                item.setSeibetsu(Seibetsu.toValue(row.getSeibetsu()).get名称());
-            }
+            item.setSeibetsu(row.getSeibetsu());
             RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
             int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
             Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援,
