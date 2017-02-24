@@ -80,9 +80,6 @@ class ShinsakaiKekkaTorokuManager implements IShinsakakKekksaTorokuManager {
         save調査依頼情報(e.getChosaIraiEntity());
         save意見書依頼情報(e.getIkenshoIraiEntity());
         save一次判定結果情報(e.getIchijiHanteiEntity());
-        if (o.hasImages()) {
-            deletePastImages(o.toReadOnlySharedFileEntryDescriptor(), o.getTargetsToDeleteImage());
-        }
     }
 
     private void save調査依頼情報(DbT5201NinteichosaIraiJohoEntity entity) {
@@ -104,35 +101,5 @@ class ShinsakaiKekkaTorokuManager implements IShinsakakKekksaTorokuManager {
             return;
         }
         dbT5116Dac.saveOrDeletePhysical(entity);
-    }
-
-    private static void deletePastImages(ReadOnlySharedFileEntryDescriptor ro_sfd, Collection<? extends OcrImageClassification> targets) {
-        if (targets.isEmpty()) {
-            return;
-        }
-        List<RString> filePaths = listFilePathInEntry(ro_sfd);
-        for (final OcrImageClassification target : targets) {
-            deletePastImagesInEntryPer(target, filePaths, ro_sfd);
-        }
-    }
-
-    private static List<RString> listFilePathInEntry(ReadOnlySharedFileEntryDescriptor ro_sfd) {
-        List<RString> list = new ArrayList<>();
-        for (SharedFileEntryInfoEntity entity : SharedFile.getEntryInfo(ro_sfd)) {
-            if (entity.getFilesEntity() == null) {
-                continue;
-            }
-            list.add(entity.getFilesEntity().getPathname());
-        }
-        return list;
-    }
-
-    private static void deletePastImagesInEntryPer(OcrImageClassification classification, List<RString> filePaths,
-            ReadOnlySharedFileEntryDescriptor ro_sfd) {
-        for (RString filePath : filePaths) {
-            if (classification.fileNameMatcher(filePath).find()) {
-                SharedFile.deleteFileInEntry(ro_sfd, filePath.toString());
-            }
-        }
     }
 }

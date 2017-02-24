@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -56,6 +57,7 @@ public final class OcrFiles implements Iterable<RString> {
      *
      * @return CSVファイルのパス. もしくは、{@link RString#EMPTY}.
      */
+    @Nonnull
     public RString findCsvFilePath() {
         for (RString element : elements) {
             if (isCsvFile(element)) {
@@ -70,6 +72,7 @@ public final class OcrFiles implements Iterable<RString> {
      *
      * @return ca3ファイルのパス. もしくは、{@link RString#EMPTY}.
      */
+    @Nonnull
     public RString findCa3FilePath() {
         for (RString element : elements) {
             if (isCa3File(element)) {

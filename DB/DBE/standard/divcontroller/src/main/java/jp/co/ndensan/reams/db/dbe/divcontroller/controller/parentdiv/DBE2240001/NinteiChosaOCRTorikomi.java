@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2240001
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE250001.DBE250001_NinteiChosaKekkaTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2240001.NinteiChosaOCRTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiChosaKekkaTorikomiOcrHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2240001.NinteiChosaKekkaTorikomiOcrValidationHandler;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
@@ -36,6 +38,7 @@ public class NinteiChosaOCRTorikomi {
     private static final int DAY_COUNT_一週間 = 7;
     private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
     private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
+    private static final RString BUTTON_BATCH_REGISTER = new RString("btnBatchRegister");
 
     /**
      * 画面の初期化します。
@@ -62,19 +65,25 @@ public class NinteiChosaOCRTorikomi {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts
                 = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間)).isCompressedArchive(false);
-        RString SharedFileEntryDescriptorString = RString.EMPTY;
+        RString sharedFileEntryDescriptorString = RString.EMPTY;
         for (FileData file : files) {
-            if (SharedFileEntryDescriptorString.isEmpty()) {
-                SharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
+            if (sharedFileEntryDescriptorString.isEmpty()) {
+                sharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
             } else {
                 ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
                         GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み),
-                        SharedFileEntryDescriptor.fromString(SharedFileEntryDescriptorString.toString()).getSharedFileId());
+                        SharedFileEntryDescriptor.fromString(sharedFileEntryDescriptorString.toString()).getSharedFileId());
                 SharedFile.appendNewFile(ro_sfd, new FilesystemPath(file.getFilePath()), "");
             }
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnBatchRegister"), false);
-        div.setHdnSharedFileEntryInfo(SharedFileEntryDescriptorString);
+
+        ValidationMessageControlPairs v = getValidationHandler(div).validateUploadedFiles(sharedFileEntryDescriptorString);
+        if (v.iterator().hasNext()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BATCH_REGISTER, true);
+            return ResponseData.of(div).addValidationMessages(v).respond();
+        }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BATCH_REGISTER, false);
+        div.setHdnSharedFileEntryInfo(sharedFileEntryDescriptorString);
         return ResponseData.of(div).respond();
     }
 
@@ -96,5 +105,9 @@ public class NinteiChosaOCRTorikomi {
 
     private NinteiChosaKekkaTorikomiOcrHandler getHandler(NinteiChosaOCRTorikomiDiv div) {
         return new NinteiChosaKekkaTorikomiOcrHandler(div);
+    }
+
+    private NinteiChosaKekkaTorikomiOcrValidationHandler getValidationHandler(NinteiChosaOCRTorikomiDiv div) {
+        return new NinteiChosaKekkaTorikomiOcrValidationHandler(div);
     }
 }
