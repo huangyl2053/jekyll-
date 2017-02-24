@@ -589,6 +589,11 @@ public class ShujiiIkenshoTorokuTotal {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         return ResponseData.of(div).forwardWithEventName(DBE2310001TransitionEventName.申請者検索結果一覧に戻る).respond();
     }
 
@@ -600,6 +605,11 @@ public class ShujiiIkenshoTorokuTotal {
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnResearch(ShujiiIkenshoTorokuTotalDiv div) {
         ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         return onClick_ButtonsToReturnTaishoshaKensaku(div, DBE2310001TransitionEventName.申請者検索に戻る);
     }
 
@@ -615,6 +625,11 @@ public class ShujiiIkenshoTorokuTotal {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         return ResponseData.of(div).forwardWithEventName(eventName).respond();
     }
 
@@ -623,6 +638,11 @@ public class ShujiiIkenshoTorokuTotal {
      * @return ResponseData
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnSearchResult(ShujiiIkenshoTorokuTotalDiv div) {
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+        前排他制御開催番号.append("DBEShinseishoKanriNo");
+        前排他制御開催番号.append(管理番号);
+        前排他キーの解除(前排他制御開催番号.toRString());
         return onClick_ButtonsToReturnTaishoshaKensaku(div, DBE2310001TransitionEventName.申請者検索結果一覧に戻る);
     }
 
