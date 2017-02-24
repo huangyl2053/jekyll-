@@ -38,9 +38,10 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
     private GogitaiJohoSakuseiProcessParamter parameter;
     private FileSpoolManager manager;
     private int sequence;
-
+    
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
+    private static final int ZERO8 = 8;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<TempGogitaiJohoSakusei> gogitaiTempTableWriter;
@@ -99,7 +100,7 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
         temp.set開催場所コード(getRString(entity.getShinsakaiKaisaiBashoCode()));
         temp.set精神科医所属(getRString(entity.getGogitaiSeishinkaSonzaiFlag()));
         temp.set合議体ダミーフラグ(getRString(entity.getGogitaiDummyFlag()));
-        temp.set審査会委員コード(getRString(entity.getShinsakaiIinCode()));
+        temp.set審査会委員コード(getRString(entity.getShinsakaiIinCode()).padZeroToLeft(ZERO8));
         temp.set補欠(getRString(entity.getSubstituteFlag()));
         temp.set合議体長区分コード(getRString(entity.getGogitaichoKubunCode()));
 

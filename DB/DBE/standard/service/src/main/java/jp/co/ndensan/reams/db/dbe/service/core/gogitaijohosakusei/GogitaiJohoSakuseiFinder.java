@@ -192,6 +192,20 @@ public class GogitaiJohoSakuseiFinder {
         return entity != null;
     }
 
+    /**
+     * 開催場所コードの存在をチェックします。
+     *
+     * @param 合議体番号 合議体番号
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
+     * @param 合議体有効期間終了年月日 合議体有効期間終了年月日
+     * @return true:使用中 false:使用しない
+     */
+    public boolean isUsed(int 合議体番号, FlexibleDate 合議体有効期間開始年月日, FlexibleDate 合議体有効期間終了年月日) {
+        int yoteiJohoCount = dbt5501dac.countYoteiJoho(合議体番号, 合議体有効期間開始年月日, 合議体有効期間終了年月日);
+        int iinJohoCount = dbt5593dac.countByKey(合議体番号, 合議体有効期間開始年月日, 合議体有効期間終了年月日);
+        return yoteiJohoCount > 0 || iinJohoCount > 0;
+    }
+
 //    /**
 //     * CSV出力内容を取得します。
 //     *

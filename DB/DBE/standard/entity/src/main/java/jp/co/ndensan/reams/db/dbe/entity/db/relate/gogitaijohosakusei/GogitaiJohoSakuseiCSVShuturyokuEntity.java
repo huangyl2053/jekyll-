@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,12 +34,24 @@ public class GogitaiJohoSakuseiCSVShuturyokuEntity {
     private RString gogitaiKaishiYoteiTime;
     @CsvField(order = 6, name = "終了予定時刻")
     private RString gogitaiShuryoYoteiTime;
-    @CsvField(order = 7, name = "開催場所")
+    @CsvField(order = 7, name = "審査会予定定員")
+    private RString shinsakaiYoteiTeiin;
+    @CsvField(order = 8, name = "審査会自動割当定員")
+    private RString shinsakaiJidoWariateTeiin;
+    @CsvField(order = 9, name = "審査会委員定員")
+    private RString shinsakaiIinTeiin;
+    @CsvField(order = 10, name = "開催場所")
     private RString shinsakaiKaisaiBasho;
-    @CsvField(order = 8, name = "精神科医所属")
+    @CsvField(order = 11, name = "精神科医所属")
     private RString gogitaiSeishinkaSonzaiFlag;
-    @CsvField(order = 9, name = "研修（模擬）")
+    @CsvField(order = 12, name = "研修（模擬）")
     private RString gogitaiDummyFlag;
+    @CsvField(order = 13, name = "審査会委員コード")
+    private RString shinsakaiIinCode;
+    @CsvField(order = 14, name = "補欠")
+    private RString substituteFlag;
+    @CsvField(order = 15, name = "合議体長区分コード")
+    private RString gogitaichoKubunCode;
 
     /**
      * CSVデータから、合議体情報テーブルを設定します。
@@ -56,7 +69,9 @@ public class GogitaiJohoSakuseiCSVShuturyokuEntity {
         entity.setShinsakaiKaisaiBashoCode(this.shinsakaiKaisaiBasho);
         entity.setGogitaiSeishinkaSonzaiFlag(strToBoolean(this.gogitaiSeishinkaSonzaiFlag));
         entity.setGogitaiDummyFlag(strToBoolean(this.gogitaiDummyFlag));
-
+        entity.setShinsakaiJidoWariateTeiin(strToInt(this.shinsakaiJidoWariateTeiin));
+        entity.setShinsakaiIinTeiin(strToInt(this.shinsakaiIinTeiin));
+        entity.setShinsakaiYoteiTeiin(strToInt(this.shinsakaiYoteiTeiin));
         return entity;
     }
 
@@ -70,6 +85,9 @@ public class GogitaiJohoSakuseiCSVShuturyokuEntity {
         entity.setGogitaiNo(strToInt(this.gogitaiNo));
         entity.setGogitaiYukoKikanKaishiYMD(strToFlex(this.gogitaiYukoKikanKaishiYMD));
         entity.setGogitaiYukoKikanShuryoYMD(strToFlex(this.gogitaiYukoKikanShuryoYMD));
+        entity.setGogitaichoKubunCode(new Code(this.gogitaichoKubunCode));
+        entity.setShinsakaiIinCode(this.shinsakaiIinCode);
+        entity.setSubstituteFlag(strToBoolean(this.substituteFlag));
         return entity;
     }
 

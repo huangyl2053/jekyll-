@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVShuturyokuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
@@ -197,10 +198,39 @@ public class GogitaiJohoSakusei {
         try (CsvWriter<GogitaiJohoSakuseiCSVShuturyokuEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(EUC_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            List<dgGogitaiIchiran_Row> rowList = div.getGogitaiIchiran().getDgGogitaiIchiran().getDataSource();
-            for (dgGogitaiIchiran_Row row : rowList) {
-                csvWriter.writeLine(editCSV(row));
+//            List<dgGogitaiIchiran_Row> rowList = div.getGogitaiIchiran().getDgGogitaiIchiran().getDataSource();
+            
+            Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
+            Iterator<GogitaiJoho> 合議体情報 = gogitaiJohoModel.iterator();
+            while (合議体情報.hasNext()) {
+                GogitaiJoho gogitaiJoho = 合議体情報.next();
+                GogitaiJohoSakuseiCSVShuturyokuEntity entity = new GogitaiJohoSakuseiCSVShuturyokuEntity();
+                entity.setGogitaiNo(new RString(gogitaiJoho.get合議体番号()));
+                entity.setGogitaiMei(gogitaiJoho.get合議体名称());
+                entity.setGogitaiYukoKikanKaishiYMD(gogitaiJoho.get合議体有効期間開始年月日().seireki().separator(Separator.SLASH).toDateString());
+                entity.setGogitaiYukoKikanShuryoYMD(gogitaiJoho.get合議体有効期間終了年月日().seireki().separator(Separator.SLASH).toDateString());
+                entity.setGogitaiKaishiYoteiTime(gogitaiJoho.get合議体開始予定時刻());
+                entity.setGogitaiShuryoYoteiTime(gogitaiJoho.get合議体終了予定時刻());
+                entity.setShinsakaiKaisaiBasho(gogitaiJoho.get介護認定審査会開催場所コード());
+                entity.setGogitaiSeishinkaSonzaiFlag(gogitaiJoho.is合議体精神科医存在フラグ() ? new RString("0") : new RString("1"));
+                entity.setGogitaiDummyFlag(gogitaiJoho.is合議体ダミーフラグ() ? new RString("0") : new RString("1"));
+                entity.setShinsakaiJidoWariateTeiin(new RString(gogitaiJoho.get介護認定審査会自動割当定員()));
+                entity.setShinsakaiIinTeiin(new RString(gogitaiJoho.get介護認定審査会委員定員()));
+                entity.setShinsakaiYoteiTeiin(new RString(gogitaiJoho.get介護認定審査会予定定員()));
+                if (gogitaiJoho.getGogitaiWariateIinJohoList().isEmpty()) {
+                    csvWriter.writeLine(entity);
+                }
+                for (GogitaiWariateIinJoho wariateIinJoho : gogitaiJoho.getGogitaiWariateIinJohoList()) {
+                    entity.setShinsakaiIinCode(wariateIinJoho.get介護認定審査会委員コード());
+                    entity.setSubstituteFlag(wariateIinJoho.is補欠() ? new RString("0") : new RString("1"));
+                    entity.setGogitaichoKubunCode(wariateIinJoho.get合議体長区分コード().value());
+                    csvWriter.writeLine(entity);
+                }
             }
+            
+//            for (dgGogitaiIchiran_Row row : rowList) {
+//                csvWriter.writeLine(editCSV(row));
+//            }
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
@@ -271,6 +301,12 @@ public class GogitaiJohoSakusei {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(getValidationHandler(div).使用状況チェック());
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
+            
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_DEL);
             if (JYOTAI_NAME_ADD.equals(div.getDgGogitaiIchiran().getClickedItem().getJyotai())) {
                 div.getDgGogitaiIchiran().getDataSource().remove(div.getDgGogitaiIchiran().getClickedRowId());
@@ -691,19 +727,19 @@ public class GogitaiJohoSakusei {
         return false;
     }
 
-    private GogitaiJohoSakuseiCSVShuturyokuEntity editCSV(dgGogitaiIchiran_Row row) {
-        GogitaiJohoSakuseiCSVShuturyokuEntity entity = new GogitaiJohoSakuseiCSVShuturyokuEntity();
-        entity.setGogitaiNo(new RString(row.getGogitaiNumber().getValue().toString()));
-        entity.setGogitaiMei(row.getGogitaiName());
-        entity.setGogitaiYukoKikanKaishiYMD(row.getYukoKaishiYMD().getValue().seireki().separator(Separator.SLASH).toDateString());
-        entity.setGogitaiYukoKikanShuryoYMD(row.getYukoShuryoYMD().getValue().seireki().separator(Separator.SLASH).toDateString());
-        entity.setGogitaiKaishiYoteiTime(時刻転換(row.getGogitaiKaishiYoteiTime().getValue()));
-        entity.setGogitaiShuryoYoteiTime(時刻転換(row.getGogitaiShuryoYoteiTime().getValue()));
-        entity.setShinsakaiKaisaiBasho(row.getKaisaiBasho());
-        entity.setGogitaiSeishinkaSonzaiFlag(row.getSeishinkaiSonzai() == true ? new RString("該当") : new RString("非該当"));
-        entity.setGogitaiDummyFlag(row.getGogitaiDummyFlag() == true ? new RString("該当") : new RString("非該当"));
-        return entity;
-    }
+//    private GogitaiJohoSakuseiCSVShuturyokuEntity editCSV(dgGogitaiIchiran_Row row) {
+//        GogitaiJohoSakuseiCSVShuturyokuEntity entity = new GogitaiJohoSakuseiCSVShuturyokuEntity();
+//        entity.setGogitaiNo(new RString(row.getGogitaiNumber().getValue().toString()));
+//        entity.setGogitaiMei(row.getGogitaiName());
+//        entity.setGogitaiYukoKikanKaishiYMD(row.getYukoKaishiYMD().getValue().seireki().separator(Separator.SLASH).toDateString());
+//        entity.setGogitaiYukoKikanShuryoYMD(row.getYukoShuryoYMD().getValue().seireki().separator(Separator.SLASH).toDateString());
+//        entity.setGogitaiKaishiYoteiTime(時刻転換(row.getGogitaiKaishiYoteiTime().getValue()));
+//        entity.setGogitaiShuryoYoteiTime(時刻転換(row.getGogitaiShuryoYoteiTime().getValue()));
+//        entity.setShinsakaiKaisaiBasho(row.getKaisaiBasho());
+//        entity.setGogitaiSeishinkaSonzaiFlag(row.getSeishinkaiSonzai() == true ? new RString("該当") : new RString("非該当"));
+//        entity.setGogitaiDummyFlag(row.getGogitaiDummyFlag() == true ? new RString("該当") : new RString("非該当"));
+//        return entity;
+//    }
 
     private RString 時刻転換(RTime 時刻) {
         if (時刻 != null) {
