@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho.gogitaiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho.gogitaiYukoKikanKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho.gogitaiYukoKikanShuryoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -73,6 +74,26 @@ public class DbT5593GogitaiWariateIinJohoDac implements ISaveable<DbT5593Gogitai
         return accessor.select().
                 table(DbT5593GogitaiWariateIinJoho.class).
                 toList(DbT5593GogitaiWariateIinJohoEntity.class);
+    }
+
+    /**
+     * 主キーで合議体割当委員情報の件数を返します。
+     * 
+     * @param 合議体番号 合議体番号
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
+     * @param 合議体有効期間終了年月日 合議体有効期間終了年月日
+     * @return 件数
+     */
+    @Transaction
+    public int countByKey(int 合議体番号, FlexibleDate 合議体有効期間開始年月日, FlexibleDate 合議体有効期間終了年月日) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5593GogitaiWariateIinJoho.class).
+                where(and(
+                                eq(gogitaiNo, 合議体番号),
+                                eq(gogitaiYukoKikanKaishiYMD, 合議体有効期間開始年月日),
+                                eq(gogitaiYukoKikanShuryoYMD, 合議体有効期間終了年月日))).
+                getCount();
     }
 
     /**

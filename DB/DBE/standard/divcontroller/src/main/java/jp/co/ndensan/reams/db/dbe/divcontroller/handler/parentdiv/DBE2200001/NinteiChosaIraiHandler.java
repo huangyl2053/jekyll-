@@ -161,7 +161,7 @@ public class NinteiChosaIraiHandler {
             row.getChosainCode().setValue(nullToEmpty(調査員.getNinteiChosainNo()));
             row.setChosainShimei(nullToEmpty(調査員.getChosainShimei()));
             row.setChosainKanaShimei(nullToEmpty(調査員.getChosainKanaShimei()));
-            if (!RString.isNullOrEmpty(調査員.getSeibetsu())) {
+            if (調査員.getSeibetsu() != null && !RString.isNullOrEmpty(調査員.getSeibetsu().trim())) {
                 row.setChosainSeibetsu(Seibetsu.toValue(調査員.getSeibetsu()).get名称());
             }
             row.setChosainTelNo(調査員.getTelNo() == null ? RString.EMPTY : 調査員.getTelNo().value());

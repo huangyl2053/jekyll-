@@ -7,13 +7,22 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.centersoshintaishoshaichiran.CenterSoshinTaishoshaIchiranReport;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterSoshinTaishoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEditEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTransmissionEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.centersoshintaishoshaichiran.CenterSoshinTaishoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
@@ -23,9 +32,12 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -36,14 +48,20 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -68,11 +86,19 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private RString ファイル名;
     private int シーケンシャル番号;
     private int 出力データ件数;
-
+    @BatchWriter
+    private BatchReportWriter<CenterSoshinTaishoshaIchiranReportSource> batchWrite;
+    private ReportSourceWriter<CenterSoshinTaishoshaIchiranReportSource> reportSourceWriter;
     private static final RString 出力する = new RString("出力する");
     private static final RString 出力しない = new RString("出力しない");
     private static final RString 未出力のみ = new RString("未出力のみ");
     private static final RString 出力済みも含む = new RString("出力済みも含む");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString DATE_作成 = new RString("作成");
+    private static final RString DATE_ヶ月 = new RString("ヶ月");
+    private CenterSoshinTaishoshaIchiranEntity centerSoshinTaishoshaIchiranEntity;
 
     /**
      * データ有無の判定です。
@@ -91,6 +117,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     @Override
     protected void initialize() {
         outputShinseishoKanriNo = new OutputParameter<>();
+        centerSoshinTaishoshaIchiranEntity = new CenterSoshinTaishoshaIchiranEntity();
         シーケンシャル番号 = 0;
         出力データ件数 = 0;
         出力された申請書管理番号 = new ArrayList<>();
@@ -121,6 +148,12 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     }
 
     @Override
+    protected void createWriter() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE561001.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+    }
+
+    @Override
     protected void process(CenterTransmissionEntity currentEntity) {
         int 連番 = 0;
         シーケンシャル番号 = シーケンシャル番号 + 1;
@@ -135,6 +168,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
             出力された申請書管理番号.add(申請書管理番号);
             AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
         }
+        printReport(currentEntity);
     }
 
     private boolean is死亡データ(CenterTransmissionEntity before, CenterTransmissionEntity current) {
@@ -213,5 +247,91 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
             return 出力する;
         }
         return 出力しない;
+    }
+
+    private void printReport(CenterTransmissionEntity currentEntity) {
+        centerSoshinTaishoshaIchiranEntity = new CenterSoshinTaishoshaIchiranEntity();
+        centerSoshinTaishoshaIchiranEntity.setPrintTimeStamp(get印刷日時());
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_1(currentEntity.getShoKisaiHokenshaNo());
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_2(currentEntity.getShichosonMeisho());
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_3(currentEntity.getHihokenshaNo());
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_4(get被保険者氏名(currentEntity.getHihokenshaName()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_5(get認定申請日_共通ポリシーパターン1(currentEntity.getNinteiShinseiYMD()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_6(get認定申請区分_申請時_コード(currentEntity.getNinteiShinseiShinseijiKubunCode()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_7(get認定申請区分_法令_コード(currentEntity.getNinteiShinseiHoreiKubunCode()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_8(get二次判定結果(currentEntity.getKoroshoIfShikibetsuCode().value(), currentEntity.getNijiHanteiYokaigoJotaiKubunCode().value()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_9(get認定有効期間(currentEntity.getNijiHanteiNinteiYukoKikan()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_10(get開始日(currentEntity.getNijiHanteiNinteiYukoKaishiYMD()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_11(get終了日(currentEntity.getNijiHanteiNinteiYukoShuryoYMD()));
+        CenterSoshinTaishoshaIchiranReport report = new CenterSoshinTaishoshaIchiranReport(centerSoshinTaishoshaIchiranEntity);
+        report.writeBy(reportSourceWriter);
+    }
+
+    private RString get印刷日時() {
+        RDateTime printdate = RDateTime.now();
+        RStringBuilder printTimeStampSb = new RStringBuilder();
+        printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(String.format("%02d", printdate.getHour()));
+        printTimeStampSb.append(DATE_時);
+        printTimeStampSb.append(String.format("%02d", printdate.getMinute()));
+        printTimeStampSb.append(DATE_分);
+        printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
+        printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(RString.HALF_SPACE);
+        printTimeStampSb.append(DATE_作成);
+        return printTimeStampSb.toRString();
+    }
+
+    private RString get認定申請日_共通ポリシーパターン1(FlexibleDate ninteiShinseiYMD) {
+        if (ninteiShinseiYMD == null || ninteiShinseiYMD.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return ninteiShinseiYMD.wareki().toDateString();
+    }
+
+    private RString get被保険者氏名(AtenaMeisho hihokenshaName) {
+        return hihokenshaName == null ? RString.EMPTY : hihokenshaName.value();
+    }
+
+    private RString get認定申請区分_法令_コード(Code 法令code) {
+        return 法令code == null ? RString.EMPTY
+                : NinteiShinseiHoreiCode.toValue(法令code.value()) == null ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(法令code.value()).get名称();
+    }
+
+    private RString get認定申請区分_申請時_コード(Code 申請時code) {
+        return NinteiShinseiShinseijiKubunCode.toValue(申請時code.value()).get名称();
+    }
+
+    private RString get二次判定結果(RString 厚労省IF識別コード, RString 二次判定要介護状態区分コード) {
+        RString 二次判定結果;
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード).get名称();
+        } else {
+            二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
+        }
+        return 二次判定結果;
+    }
+
+    private RString get開始日(FlexibleDate 二次判定認定有効開始年月日) {
+        if (二次判定認定有効開始年月日 == null || 二次判定認定有効開始年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 二次判定認定有効開始年月日.wareki().toDateString();
+    }
+
+    private RString get終了日(FlexibleDate 二次判定認定有効終了年月日) {
+        if (二次判定認定有効終了年月日 == null || 二次判定認定有効終了年月日.isEmpty()) {
+            return RString.EMPTY;
+        }
+        return 二次判定認定有効終了年月日.wareki().toDateString();
+    }
+
+    private RString get認定有効期間(int 二次判定認定有効期間) {
+        return new RString(二次判定認定有効期間).concat(DATE_ヶ月);
     }
 }

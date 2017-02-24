@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.gogitaiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.gogitaiYukoKikanKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.gogitaiYukoKikanShuryoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -52,6 +53,34 @@ public class DbT5591GogitaiJohoDac implements ISaveable<DbT5591GogitaiJohoEntity
                 where(and(
                                 eq(gogitaiNo, 合議体番号),
                                 eq(gogitaiYukoKikanKaishiYMD, 合議体有効期間開始年月日))).
+                toObject(DbT5591GogitaiJohoEntity.class);
+    }
+
+    /**
+     * 主キーで合議体情報を取得します。
+     *
+     * @param 合議体番号 GogitaiNo
+     * @param 合議体有効期間開始年月日 GogitaiYukoKikanKaishiYMD
+     * @param 合議体有効期間終了年月日 gogitaiYukoKikanShuryoYMD
+     * @return DbT5591GogitaiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT5591GogitaiJohoEntity selectByKey(
+            int 合議体番号,
+            FlexibleDate 合議体有効期間開始年月日, FlexibleDate 合議体有効期間終了年月日) throws NullPointerException {
+        requireNonNull(合議体番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体番号"));
+        requireNonNull(合議体有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体有効期間開始年月日"));
+        requireNonNull(合議体有効期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体有効期間終了年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5591GogitaiJoho.class).
+                where(and(
+                                eq(gogitaiNo, 合議体番号),
+                                eq(gogitaiYukoKikanKaishiYMD, 合議体有効期間開始年月日),
+                                eq(gogitaiYukoKikanShuryoYMD, 合議体有効期間終了年月日))).
                 toObject(DbT5591GogitaiJohoEntity.class);
     }
 

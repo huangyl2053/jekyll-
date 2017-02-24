@@ -493,18 +493,6 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
                 notreatedCount++;
             }
         }
-
-//        if (business.get主治医意見書作成依頼年月日() != null && !business.get主治医意見書作成依頼年月日().isEmpty()
-//                && business.get今回主治医() != null && !business.get今回主治医().isEmpty()) {
-////                && business.get依頼書出力年月日() != null && !business.get依頼書出力年月日().isEmpty()
-////                && business.get意見書出力年月日() != null && !business.get意見書出力年月日().isEmpty()) {
-//            row.setJyotai(COMPLETE);
-//            completeCount++;
-//        } else {
-//            row.setJyotai(NOTREATED);
-//            row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
-//            notreatedCount++;
-//        }
         return row;
     }
 

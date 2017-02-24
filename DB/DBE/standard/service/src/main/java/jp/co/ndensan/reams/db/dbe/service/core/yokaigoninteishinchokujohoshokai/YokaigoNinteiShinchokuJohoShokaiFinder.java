@@ -18,6 +18,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.HihokenshaJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.HihokenshaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai.IYokaigoNinteiShinchokuJohoShokaiMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -74,7 +80,26 @@ public class YokaigoNinteiShinchokuJohoShokaiFinder {
         } else {
             totalCount = entityList.get(0).getTotalCount();
         }
-        boolean exceedsLimit = parameter.isMaximumDisplayNumberFlag() && parameter.getMaximumDisplayNumber() < totalCount;
+        boolean exceedsLimit = parameter.getMaximumDisplayNumber() < totalCount;
         return SearchResult.of(yokaigoNinteiShinchokuJohoList, totalCount, exceedsLimit);
+    }
+
+    /**
+     * 被保険者情報を取得します。
+     *
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param hihokenshaNo 被保険者番号
+     * @return 被保険者情報
+     */
+    @Transaction
+    public HihokenshaJohoBusiness select被保険者情報(RString shoKisaiHokenshaNo, RString hihokenshaNo) {
+        MapperProvider mapperProvider = InstanceProvider.create(MapperProvider.class);
+        IYokaigoNinteiShinchokuJohoShokaiMapper mapper = mapperProvider.create(IYokaigoNinteiShinchokuJohoShokaiMapper.class);
+        HihokenshaJohoRelateEntity entityList
+                = mapper.get被保険者情報(HihokenshaJohoParamter.createParameter(shoKisaiHokenshaNo, hihokenshaNo));
+        if (entityList == null) {
+            return null;
+        }
+        return new HihokenshaJohoBusiness(entityList);
     }
 }

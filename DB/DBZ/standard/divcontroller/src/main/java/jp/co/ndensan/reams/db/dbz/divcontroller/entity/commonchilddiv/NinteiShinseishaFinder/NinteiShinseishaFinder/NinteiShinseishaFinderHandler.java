@@ -83,7 +83,9 @@ public class NinteiShinseishaFinderHandler {
      */
     public void initialize(NinteiShinseishaFinderParameter parameter) {
         initialize();
-        div.getDdlHokenshaNumber().loadHokenshaList(parameter.get業務分類());
+        if (parameter.get業務分類() != null) {
+            div.getDdlHokenshaNumber().loadHokenshaList(parameter.get業務分類());
+        }
         setみなし2号申請チェック(parameter.isCheckedみなし2号申請());
         if (parameter.get証記載保険者番号() != null) {
             div.getDdlHokenshaNumber().setSelectedShoKisaiHokenshaNoIfExist(parameter.get証記載保険者番号());

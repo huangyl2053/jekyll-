@@ -2,6 +2,26 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBE-0210-010 dongyabin -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai.IYokaigoNinteiShinchokuJohoShokaiMapper">
+    <resultMap id="resultMap_HihokenshaJohoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.HihokenshaJohoRelateEntity" autoMapping="true">
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="get被保険者情報" resultMap="resultMap_HihokenshaJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter" fetchSize="500">
+        SELECT
+        DbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
+        , DbT5101."hihokenshaNo" AS hihokenshaNo
+        , DbT5101."hihokenshaName" AS hihokenshaName
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        WHERE
+        DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
+        AND DbT5101."hihokenshaNo" = #{被保険者番号}
+        ORDER BY
+        DbT5101."ninteiShinseiYMD" DESC
+        LIMIT 1
+    </select>
     <resultMap id="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity" autoMapping="true">
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="RStringTypeHandler" />
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
@@ -56,11 +76,7 @@
         DbT7051."shichosonMeisho",
         DbT5101."hihokenshaNo",
         DbT5101."ninteiShinseiYMD"
-        <if test="maximumDisplayNumberFlag">
-            <if test="!kensakuOptionKey0">
-            LIMIT #{maximumDisplayNumber}
-            </if>
-        </if>
+        LIMIT #{maximumDisplayNumber}
     </select>
 
     <sql id="selectShinseiIchiran">
@@ -123,51 +139,28 @@
         DbT5591."gogitaiMei",
         DbT5102."nijiHanteiYokaigoJotaiKubunCode"
         FROM rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
-        <if test="kensakuOptionKey0">
-            INNER JOIN 
-                (SELECT *
-                 FROM rgdb."DbT5105NinteiKanryoJoho"
-                 WHERE "centerSoshinYMD" IS NULL) AS DbT5105
-            ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        </if>
+        LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102 ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502 ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" AND (DbT5502."hanteiKekkaCode"='01' OR DbT5502."hanteiKekkaCode" IS NULL)
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511 ON DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5591GogitaiJoho" AS DbT5591 ON DbT5511."gogitaiNo" = DbT5591."gogitaiNo"
-            AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
-            AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
+        AND DbT5591."gogitaiYukoKikanKaishiYMD" &lt;= DbT5511."shinsakaiKaisaiYMD"
+        AND DbT5511."shinsakaiKaisaiYMD" &lt;= DbT5591."gogitaiYukoKikanShuryoYMD"
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501 ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116 ON DbT5116."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN (SELECT DISTINCT "shinseishoKanriNo", '●' AS  tokki from rgdb."DbT5205NinteichosahyoTokkijiko") TB ON TB."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         <where>
             DbT5101."logicalDeletedFlag" = False
-            AND DbT5101."shoriJotaiKubun"   IN (#{tuujou}, #{ennki})
+            <if test="!kensakuOptionKey0">
+                AND DbT5101."shoriJotaiKubun" IN (#{tuujou}, #{ennki})
+                AND DbT5105."centerSoshinYMD" IS NULL
+            </if> 
             <if test="radKensakuHohoKey0">
                 <if test="hihokenshaNoFlag">
                     AND DbT5101."hihokenshaNo" = #{hihokenshaNo}
                 </if>
                 <if test="shikibetsuCodeFlag">
                     AND DbT5101."shikibetsuCode" = #{shikibetsuCode}
-                </if>
-                <if test="useShimei">
-                    <if test="searchesShimeiByKana">
-                        AND replace(replace(DbT5101."hihokenshaKana",' ',''),'　','')
-                    </if>
-                    <if test="!searchesShimeiByKana">
-                        AND replace(replace(DbT5101."hihokenshaName",' ',''),'　','')
-                    </if>
-                    <if test="matchTypekey1">
-                        LIKE #{shimei}||'%'
-                    </if>
-                    <if test="matchTypekey2">
-                        LIKE '%'||#{shimei}
-                    </if>
-                    <if test="matchTypekey3">
-                        = #{shimei}
-                    </if>
-                    <if test="matchTypekey4">
-                        LIKE '%'||#{shimei}||'%'
-                    </if>
                 </if>
             </if>
             <if test="radKensakuHohoKey1">
@@ -186,8 +179,8 @@
                     AND TB."shinseishoKanriNo" IS NULL
                 </if>
             </if>
-            <if test="kensakuOptionKey2">
-                AND DbT5101."torisageKubunCode" <![CDATA[<>]]>  #{torisageKubunCode}
+            <if test="!kensakuOptionKey1">
+                AND DbT5101."torisageKubunCode" = #{torisageKubunCode}
             </if>
         </where>
         )
@@ -233,14 +226,7 @@
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
-        <if test="kensakuOptionKey1">
-            LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
-            ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        </if>
         <where>
-            <if test="kensakuOptionKey1">
-                AND DbT5121."shinseishoKanriNo" IS NULL
-            </if>
             <if test="shichosonCodeFlag">
                 AND DbT5101."shichosonCode" = #{shichosonCode}
             </if>

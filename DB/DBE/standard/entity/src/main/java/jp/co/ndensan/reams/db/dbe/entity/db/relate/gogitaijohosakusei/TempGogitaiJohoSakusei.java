@@ -278,7 +278,7 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
     }
 
     /**
-     * 合議体ダミーフラグを返します。
+     * 合議体ダミーフラグ(研修フラグ)を返します。
      *
      * @return 合議体ダミーフラグ
      */
@@ -287,7 +287,7 @@ public class TempGogitaiJohoSakusei implements IDbAccessable {
     }
 
     /**
-     * 合議体ダミーフラグを設定します。
+     * 合議体ダミーフラグ(研修フラグ)を設定します。
      *
      * @param 合議体ダミーフラグ 合議体ダミーフラグ
      */

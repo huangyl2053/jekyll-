@@ -27,10 +27,6 @@ public final class YokaigoNinteiParamter {
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
     private static final RString DATE_SOURCE_KEY2 = new RString("key2");
     private static final RString DATE_SOURCE_KEY3 = new RString("key3");
-    private final boolean matchTypekey1;
-    private final boolean matchTypekey2;
-    private final boolean matchTypekey3;
-    private final boolean matchTypekey4;
     private final RString shichosonCode;
     private final boolean shichosonCodeFlag;
     private final boolean radKensakuHohoKey0;
@@ -41,9 +37,7 @@ public final class YokaigoNinteiParamter {
     private final boolean hihokenshaNoFlag;
     private final RString shikibetsuCode;
     private final boolean shikibetsuCodeFlag;
-    private final boolean useShimei;
     private final RString shimei;
-    private final boolean searchesShimeiByKana;
     private final boolean hizukeHaniKey0;
     private final boolean hizukeHaniKey1;
     private final boolean hizukeHaniKey2;
@@ -67,9 +61,7 @@ public final class YokaigoNinteiParamter {
     private final boolean shinsakaiJisshiKey1;
     private final boolean kensakuOptionKey0;
     private final boolean kensakuOptionKey1;
-    private final boolean kensakuOptionKey2;
     private final int maximumDisplayNumber;
-    private final boolean maximumDisplayNumberFlag;
     private final RString torisageKubunCode;
     private final RString tuujou;
     private final RString ennki;
@@ -77,10 +69,6 @@ public final class YokaigoNinteiParamter {
     /**
      * コンストラクタです。
      *
-     * @param matchTypekey1 前方一致
-     * @param matchTypekey2 後方一致
-     * @param matchTypekey3 完全一致
-     * @param matchTypekey4 部分一致
      * @param shichosonCode 市町村コード
      * @param shichosonCodeFlag 市町村コードFlag
      * @param radKensakuHohoKey0 被保険者から検索
@@ -92,7 +80,6 @@ public final class YokaigoNinteiParamter {
      * @param shikibetsuCode 識別コード
      * @param shikibetsuCodeFlag 識別コードFlag
      * @param shimei 氏名
-     * @param searchesShimeiByKanaFlag 氏名カナ検索Flag
      * @param hizukeHaniKey0 申請日
      * @param hizukeHaniKey1 認定調査依頼日
      * @param hizukeHaniKey2 主治医意見書作成依頼日
@@ -114,17 +101,12 @@ public final class YokaigoNinteiParamter {
      * @param shinsakaiWaritsukeKey1 審査会割付「未済」
      * @param shinsakaiJisshiKey0 審査会実施「済」
      * @param shinsakaiJisshiKey1 審査会実施「未済」
-     * @param kensakuOptionKey0 申請中のみ
-     * @param kensakuOptionKey1 履歴を含める
-     * @param kensakuOptionKey2 取下げ
-     * @param maximumDisplayNumber 最大表示件数
-     * @param maximumDisplayNumberFlag 最大表示件数Flag
+     * @param kensakuOptionKey0 履歴を含める
+     * @param kensakuOptionKey1 取下げ
      * @param torisageKubunCode 取下区分コード
+     * @param maximumDisplayNumber 最大表示件数
      */
-    private YokaigoNinteiParamter(boolean matchTypekey1,
-            boolean matchTypekey2,
-            boolean matchTypekey3,
-            boolean matchTypekey4,
+    private YokaigoNinteiParamter(
             RString shichosonCode,
             boolean shichosonCodeFlag,
             boolean radKensakuHohoKey0,
@@ -136,7 +118,6 @@ public final class YokaigoNinteiParamter {
             RString shikibetsuCode,
             boolean shikibetsuCodeFlag,
             RString shimei,
-            boolean searchesShimeiByKana,
             boolean hizukeHaniKey0,
             boolean hizukeHaniKey1,
             boolean hizukeHaniKey2,
@@ -160,16 +141,10 @@ public final class YokaigoNinteiParamter {
             boolean shinsakaiJisshiKey1,
             boolean kensakuOptionKey0,
             boolean kensakuOptionKey1,
-            boolean kensakuOptionKey2,
             int maximumDisplayNumber,
-            boolean maximumDisplayNumberFlag,
             RString torisageKubunCode,
             RString tuujou,
             RString ennki) {
-        this.matchTypekey1 = matchTypekey1;
-        this.matchTypekey2 = matchTypekey2;
-        this.matchTypekey3 = matchTypekey3;
-        this.matchTypekey4 = matchTypekey4;
         this.shichosonCode = shichosonCode;
         this.shichosonCodeFlag = shichosonCodeFlag;
         this.radKensakuHohoKey0 = radKensakuHohoKey0;
@@ -180,9 +155,7 @@ public final class YokaigoNinteiParamter {
         this.hihokenshaNoFlag = hihokenshaNoFlag;
         this.shikibetsuCode = shikibetsuCode;
         this.shikibetsuCodeFlag = shikibetsuCodeFlag;
-        this.useShimei = shimei != null && !shimei.isEmpty();
         this.shimei = shimei;
-        this.searchesShimeiByKana = searchesShimeiByKana;
         this.hizukeHaniKey0 = hizukeHaniKey0;
         this.hizukeHaniKey1 = hizukeHaniKey1;
         this.hizukeHaniKey2 = hizukeHaniKey2;
@@ -206,9 +179,7 @@ public final class YokaigoNinteiParamter {
         this.shinsakaiJisshiKey1 = shinsakaiJisshiKey1;
         this.kensakuOptionKey0 = kensakuOptionKey0;
         this.kensakuOptionKey1 = kensakuOptionKey1;
-        this.kensakuOptionKey2 = kensakuOptionKey2;
         this.maximumDisplayNumber = maximumDisplayNumber;
-        this.maximumDisplayNumberFlag = maximumDisplayNumberFlag;
         this.torisageKubunCode = torisageKubunCode;
         this.tuujou = tuujou;
         this.ennki = ennki;
@@ -218,7 +189,6 @@ public final class YokaigoNinteiParamter {
      * 申請者一覧内容検索のパラメータを作成します。
      *
      * @param shichosonCode 市町村コード
-     * @param matchType 氏名検索
      * @param radKensakuHoho 検索方法
      * @param shiteiHizukeForm 指定日付From
      * @param shiteiHizukeTo 指定日付To
@@ -240,7 +210,6 @@ public final class YokaigoNinteiParamter {
      * @return YokaigoNinteiParamter
      */
     public static YokaigoNinteiParamter createParamter(RString shichosonCode,
-            RString matchType,
             RString radKensakuHoho,
             RString shiteiHizukeForm,
             RString shiteiHizukeTo,
@@ -259,28 +228,12 @@ public final class YokaigoNinteiParamter {
             List<RString> shinsakaiJisshi,
             List<RString> kensakuOption,
             int maximumDisplayNumber) {
-        boolean matchTypekay0 = false;
-        boolean matchTypekay1 = false;
-        boolean matchTypekay2 = false;
-        boolean matchTypekay3 = false;
-        if (DATE_SOURCE_KEY0.equals(matchType)) {
-            matchTypekay0 = true;
-        } else if (DATE_SOURCE_KEY1.equals(matchType)) {
-            matchTypekay1 = true;
-        } else if (DATE_SOURCE_KEY2.equals(matchType)) {
-            matchTypekay2 = true;
-        } else if (DATE_SOURCE_KEY3.equals(matchType)) {
-            matchTypekay3 = true;
-        }
         RString shimeiForKensaku
                 = RString.isNullOrEmpty(shimei) ? RString.EMPTY
                   : RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(RStrings.removedSpaces(
                 RStringUtil.removeSqlSpecialChars(shimei)
         ));
-        return new YokaigoNinteiParamter(matchTypekay0,
-                matchTypekay1,
-                matchTypekay2,
-                matchTypekay3,
+        return new YokaigoNinteiParamter(
                 shichosonCode,
                 !shichosonCode.isEmpty(),
                 DATE_SOURCE_KEY0.equals(radKensakuHoho),
@@ -292,7 +245,6 @@ public final class YokaigoNinteiParamter {
                 shikibetsuCode,
                 !shikibetsuCode.isEmpty(),
                 shimeiForKensaku,
-                RStringUtil.is半角カナOnly(shimeiForKensaku),
                 DATE_SOURCE_KEY1.equals(hizukeHani),
                 DATE_SOURCE_KEY2.equals(hizukeHani),
                 DATE_SOURCE_KEY3.equals(hizukeHani),
@@ -315,11 +267,9 @@ public final class YokaigoNinteiParamter {
                 key0判断(shinsakaiJisshi),
                 key1判断(shinsakaiJisshi),
                 kensakuOption.contains(DATE_SOURCE_KEY0),
-                !kensakuOption.contains(DATE_SOURCE_KEY1),
-                !kensakuOption.contains(DATE_SOURCE_KEY2),
+                kensakuOption.contains(DATE_SOURCE_KEY1),
                 maximumDisplayNumber,
-                maximumDisplayNumber != -1,
-                TorisageKubunCode.取り下げ.getコード(),
+                TorisageKubunCode.認定申請有効.getコード(),
                 // TODO 内部QA:712 （仕様書に処理状態区分は誤り）
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード());

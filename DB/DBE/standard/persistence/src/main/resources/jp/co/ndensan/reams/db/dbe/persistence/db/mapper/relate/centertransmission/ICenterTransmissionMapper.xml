@@ -285,6 +285,7 @@
         , M."gogitaiNo"
         , N."nijiHanteiYMD"
         , N."nijiHanteiYokaigoJotaiKubunCode"
+        , N."nijiHanteiNinteiYukoKikan"
         , N."nijiHanteiNinteiYukoKaishiYMD"
         , N."nijiHanteiNinteiYukoShuryoYMD"
         , A."nigoTokuteiShippeiCode"
@@ -535,11 +536,15 @@
         , A2."koroshoIfShikibetsuCode" AS zenkaiKoroshoIfShikibetsuCode
         , N."shinsakaiIken"
         , N."shinsakaiMemo" 
+        , DbT7051KoseiShichosonMaster."shichosonMeisho" 
         FROM
         "SoshinDataSakuseiTaishoshaTemp" 
         INNER JOIN 
         rgdb."DbT5101NinteiShinseiJoho" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
+        INNER JOIN 
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster 
+        ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = A."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" dbT7211 
         ON A."shinseishoKanriNo" = dbT7211."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5120ShinseitodokedeJoho" B 

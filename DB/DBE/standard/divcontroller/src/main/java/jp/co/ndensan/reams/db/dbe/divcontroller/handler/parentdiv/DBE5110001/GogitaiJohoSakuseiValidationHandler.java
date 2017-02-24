@@ -76,6 +76,26 @@ public class GogitaiJohoSakuseiValidationHandler {
 
     /**
      *
+     * 使用状況をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 使用状況チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
+        
+        boolean isUsed = service.isUsed(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(), 
+                div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toFlexibleDate(), 
+                div.getDgGogitaiIchiran().getClickedItem().getYukoShuryoYMD().getValue().toFlexibleDate());
+       if (isUsed) {
+           validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.削除不可));
+       }
+
+        return validationMessages;
+    }
+
+    /**
+     *
      * 開催場所コードの存在性をチェックします。
      *
      * @return ValidationMessageControlPairs
@@ -352,6 +372,7 @@ public class GogitaiJohoSakuseiValidationHandler {
         合議体委員数が最大値を超過(DbeErrorMessages.合議体委員数が最大値を超過),
         審査会の合議体長は必ず１人(DbeErrorMessages.審査会の合議体長は必ず１人),
         超過(DbeErrorMessages.超過, "審査会委員", "審査会委員定員"),
+        削除不可(DbeErrorMessages.他の情報で使用している為削除不可),
         審査会委員定員数超過(DbeWarningMessages.審査会委員定員数超過),
         審査会最低定員数不足(DbeWarningMessages.審査会最低定員数不足),
         対象データなし_追加メッセージあり(UrErrorMessages.対象データなし_追加メッセージあり, "合議体一覧");

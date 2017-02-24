@@ -11,9 +11,12 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJoh
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -119,5 +122,29 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
                 where(
                         eq(DbT5501ShinsakaiKaisaiYoteiJoho.gogitaiNo, 合議体番号)
                 ).getCount();
+    }
+    
+    /**
+     * 合議体番号,合議体有効期間で介護認定審査会開催予定情報の件数を取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
+     * @param 合議体有効期間終了年月日 合議体有効期間終了年月日
+     * @return 件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int countYoteiJoho(
+            int 合議体番号, FlexibleDate 合議体有効期間開始年月日, FlexibleDate 合議体有効期間終了年月日) throws NullPointerException {
+        requireNonNull(合議体番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5501ShinsakaiKaisaiYoteiJoho.class).
+                where(and(
+                        eq(DbT5501ShinsakaiKaisaiYoteiJoho.gogitaiNo, 合議体番号),
+                        leq(DbT5501ShinsakaiKaisaiYoteiJoho.shinsakaiKaisaiYoteiYMD, 合議体有効期間終了年月日),
+                        leq(合議体有効期間開始年月日, DbT5501ShinsakaiKaisaiYoteiJoho.shinsakaiKaisaiYoteiYMD))).getCount();
     }
 }

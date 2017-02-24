@@ -99,6 +99,7 @@ public class CenterTransmissionEntity {
     private int gogitaiNo;
     private FlexibleDate nijiHanteiYMD;
     private Code nijiHanteiYokaigoJotaiKubunCode;
+    private int nijiHanteiNinteiYukoKikan;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;
     private FlexibleDate nijiHanteiNinteiYukoShuryoYMD;
     private Code nigoTokuteiShippeiCode;
@@ -349,4 +350,5 @@ public class CenterTransmissionEntity {
     private Code zenkaiKoroshoIfShikibetsuCode;
     private RString shinsakaiIken;
     private RString shinsakaiMemo;
+    private RString shichosonMeisho;
 }

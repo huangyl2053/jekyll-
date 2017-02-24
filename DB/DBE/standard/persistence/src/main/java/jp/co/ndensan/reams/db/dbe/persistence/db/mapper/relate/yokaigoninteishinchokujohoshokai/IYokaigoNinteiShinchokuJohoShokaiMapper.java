@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.HihokenshaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity;
 
 /**
@@ -24,5 +26,12 @@ public interface IYokaigoNinteiShinchokuJohoShokaiMapper {
      * @return List<YokaigoNinteiShinchokuJohoShokaiRelateEntity>
      */
     List<YokaigoNinteiShinchokuJohoShokaiRelateEntity> get申請者一覧内容(YokaigoNinteiParamter paramter);
-
+    
+    /**
+     * 検索条件より、被保険者情報を検索する。
+     *
+     * @param param 被保険者情報検索条件
+     * @return HihokenshaJyuhouRelateEntityの{@code list}
+     */
+    HihokenshaJohoRelateEntity get被保険者情報(HihokenshaJohoParamter param);
 }

@@ -32,8 +32,10 @@ public class KensakuJokenDiv extends Panel {
     private SerchFromHohokenshaDiv SerchFromHohokensha;
     @JsonProperty("SerchFromShinchokuJokyo")
     private SerchFromShinchokuJokyoDiv SerchFromShinchokuJokyo;
-    @JsonProperty("KensakuOption")
-    private KensakuOptionDiv KensakuOption;
+    @JsonProperty("txtMaximumDisplayNumber")
+    private TextBoxNum txtMaximumDisplayNumber;
+    @JsonProperty("btnConditionClear")
+    private Button btnConditionClear;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
 
@@ -98,21 +100,39 @@ public class KensakuJokenDiv extends Panel {
     }
 
     /*
-     * getKensakuOption
-     * @return KensakuOption
+     * gettxtMaximumDisplayNumber
+     * @return txtMaximumDisplayNumber
      */
-    @JsonProperty("KensakuOption")
-    public KensakuOptionDiv getKensakuOption() {
-        return KensakuOption;
+    @JsonProperty("txtMaximumDisplayNumber")
+    public TextBoxNum getTxtMaximumDisplayNumber() {
+        return txtMaximumDisplayNumber;
     }
 
     /*
-     * setKensakuOption
-     * @param KensakuOption KensakuOption
+     * settxtMaximumDisplayNumber
+     * @param txtMaximumDisplayNumber txtMaximumDisplayNumber
      */
-    @JsonProperty("KensakuOption")
-    public void setKensakuOption(KensakuOptionDiv KensakuOption) {
-        this.KensakuOption = KensakuOption;
+    @JsonProperty("txtMaximumDisplayNumber")
+    public void setTxtMaximumDisplayNumber(TextBoxNum txtMaximumDisplayNumber) {
+        this.txtMaximumDisplayNumber = txtMaximumDisplayNumber;
+    }
+
+    /*
+     * getbtnConditionClear
+     * @return btnConditionClear
+     */
+    @JsonProperty("btnConditionClear")
+    public Button getBtnConditionClear() {
+        return btnConditionClear;
+    }
+
+    /*
+     * setbtnConditionClear
+     * @param btnConditionClear btnConditionClear
+     */
+    @JsonProperty("btnConditionClear")
+    public void setBtnConditionClear(Button btnConditionClear) {
+        this.btnConditionClear = btnConditionClear;
     }
 
     /*
@@ -138,6 +158,16 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnHihokenshaKensaku() {
+        return this.getSerchFromHohokensha().getBtnHihokenshaKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnHihokenshaKensaku(Button btnHihokenshaKensaku) {
+        this.getSerchFromHohokensha().setBtnHihokenshaKensaku(btnHihokenshaKensaku);
+    }
+
+    @JsonIgnore
     public TextBoxCode getTxtShikibetsuCode() {
         return this.getSerchFromHohokensha().getTxtShikibetsuCode();
     }
@@ -158,13 +188,13 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlNameMatchType() {
-        return this.getSerchFromHohokensha().getDdlNameMatchType();
+    public CheckBoxList getChkKensakuOption() {
+        return this.getSerchFromHohokensha().getChkKensakuOption();
     }
 
     @JsonIgnore
-    public void  setDdlNameMatchType(DropDownList ddlNameMatchType) {
-        this.getSerchFromHohokensha().setDdlNameMatchType(ddlNameMatchType);
+    public void  setChkKensakuOption(CheckBoxList chkKensakuOption) {
+        this.getSerchFromHohokensha().setChkKensakuOption(chkKensakuOption);
     }
 
     @JsonIgnore
@@ -395,46 +425,6 @@ public class KensakuJokenDiv extends Panel {
     @JsonIgnore
     public void  setSpSpace6(Space spSpace6) {
         this.getSerchFromShinchokuJokyo().getShinsakai().setSpSpace6(spSpace6);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtMaximumDisplayNumber() {
-        return this.getKensakuOption().getTxtMaximumDisplayNumber();
-    }
-
-    @JsonIgnore
-    public void  setTxtMaximumDisplayNumber(TextBoxNum txtMaximumDisplayNumber) {
-        this.getKensakuOption().setTxtMaximumDisplayNumber(txtMaximumDisplayNumber);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkKensakuOption() {
-        return this.getKensakuOption().getChkKensakuOption();
-    }
-
-    @JsonIgnore
-    public void  setChkKensakuOption(CheckBoxList chkKensakuOption) {
-        this.getKensakuOption().setChkKensakuOption(chkKensakuOption);
-    }
-
-    @JsonIgnore
-    public Button getBtnConditionClear() {
-        return this.getKensakuOption().getBtnConditionClear();
-    }
-
-    @JsonIgnore
-    public void  setBtnConditionClear(Button btnConditionClear) {
-        this.getKensakuOption().setBtnConditionClear(btnConditionClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getKensakuOption().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getKensakuOption().setBtnKensaku(btnKensaku);
     }
 
     // </editor-fold>
