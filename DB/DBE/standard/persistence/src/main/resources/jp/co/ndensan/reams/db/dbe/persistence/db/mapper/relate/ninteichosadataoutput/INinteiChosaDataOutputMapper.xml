@@ -141,7 +141,7 @@
             AND DbT5201."shinseishoKanriNo" IN
             <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
         </if>
-        <if test= "!isShichoson">
+        <if test= "isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
     </select>
@@ -229,7 +229,7 @@
             AND DbT5201."shinseishoKanriNo" IN
             <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
         </if>
-        <if test= "!isShichoson">
+        <if test= "isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
 
@@ -289,7 +289,7 @@
             AND DbT5201."shinseishoKanriNo" IN
             <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
         </if>
-        <if test= "!isShichoson">
+        <if test= "isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
     </select>
@@ -334,7 +334,7 @@
         <if test= "isNinteiChosainCode">
             AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
         </if>
-        <if test= "!isShichoson">
+        <if test= "isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
         <if test= "!isShutsuryokuZumiFukumu">
@@ -382,7 +382,7 @@
         "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         )
         AND DbT5201."logicalDeletedFlag" = false
-        AND (DbT5201."ninteichosaKigenYMD" IS NOT NULL AND DbT5201."ninteichosaKigenYMD" != '')
+        AND (DbT5201."ninteichosaIraiYMD" IS NOT NULL AND DbT5201."ninteichosaIraiYMD" != '')
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaKanryoYMD" IS NULL
         AND DbT5101."shoriJotaiKubun" IN (#{通常},#{延期})
@@ -393,7 +393,7 @@
         <if test= "isNinteiChosainCode">
             AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
         </if>
-        <if test= "!isShichoson">
+        <if test= "isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
         <if test= "!isShutsuryokuZumiFukumu">
@@ -594,7 +594,7 @@
             AND DbT5201."shinseishoKanriNo" IN
             <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
         </if>
-        <if test= "!isShichoson">
+        <if test= "isShichoson">
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
     </select>
@@ -691,7 +691,7 @@
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
         FROM
         rgdb."DbT5201NinteichosaIraiJoho"
-        <if test= "!isShinseishoKanriNo">
+        <if test= "isShinseishoKanriNo">
             WHERE
             "ninteichosaIraiRirekiNo" = ( SELECT
             MAX(Dbt5201."ninteichosaIraiRirekiNo")
@@ -699,7 +699,7 @@
             rgdb."DbT5201NinteichosaIraiJoho" AS Dbt5201
             WHERE
             "shinseishoKanriNo" = Dbt5201."shinseishoKanriNo")
-            AND  "shinseishoKanriNo" IN #{shinseishoKanriNo}
+            AND  "shinseishoKanriNo" IN #{shinseishoKanriNoList}
         </if>
     </select>
 
