@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.centersoshintaishoshaichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterSoshinTaishoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.centersoshintaishoshaichiran.CenterSoshinTaishoshaIchiranReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 完了処理・センター送信のEditorです。
@@ -15,14 +16,17 @@ import jp.co.ndensan.reams.db.dbe.entity.report.centersoshintaishoshaichiran.Cen
  */
 class CenterSoshinTaishoshaIchiranEditor implements ICenterSoshinTaishoshaIchiranEditor {
 
+    private final RString printTimeStamp;
     private final CenterSoshinTaishoshaIchiranEntity item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item NinteichosaIraiHenkoData
+     * @param printTimeStamp 作成日時
+     * @param item センター送信対象者一覧
      */
-    protected CenterSoshinTaishoshaIchiranEditor(CenterSoshinTaishoshaIchiranEntity item) {
+    protected CenterSoshinTaishoshaIchiranEditor(RString printTimeStamp, CenterSoshinTaishoshaIchiranEntity item) {
+        this.printTimeStamp = printTimeStamp;
         this.item = item;
     }
 
@@ -48,7 +52,7 @@ class CenterSoshinTaishoshaIchiranEditor implements ICenterSoshinTaishoshaIchira
     }
 
     private void editPrintTimeStamp(CenterSoshinTaishoshaIchiranReportSource source) {
-        source.printTimeStamp = item.getPrintTimeStamp();
+        source.printTimeStamp = printTimeStamp;
     }
 
     private void editListTaishoshaIchiran_1(CenterSoshinTaishoshaIchiranReportSource source) {

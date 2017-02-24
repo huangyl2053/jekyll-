@@ -62,6 +62,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -264,6 +265,12 @@ public class KojinJokyoShokaiHandler {
 
     private void getKojinJokyoShokai1(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
         RString センター送信_運用有無 = DbBusinessConfig.get(ConfigNameDBE.センター送信_運用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (kojinJokyoShokaiList.get(0).get認定申請年月日() != null) {
+            div.getTxtNinteiShinsakaiYoteiDate().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).get認定申請年月日().plusDay(Integer.parseInt(
+                            DbBusinessConfig.get(ConfigNameDBE.認定審査会受付予定年月日, RDate.getNowDate(),
+                                    kojinJokyoShokaiList.get(0).get市町村コード().getColumnValue()).toString())).toString()));
+        }
         if (kojinJokyoShokaiList.get(0).get認定調査依頼予定年月日() != null) {
             div.getTxtChosaIraiYoteiDate().setValue(new RDate(kojinJokyoShokaiList.get(0).get認定調査依頼予定年月日().toString()));
         }
@@ -283,8 +290,9 @@ public class KojinJokyoShokaiHandler {
             div.getTxtIchijiHanteiYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get要介護認定一次判定予定年月日().toString()));
         }
-        div.getTxtMaskingYoteiDate().setValue(null);
         if (kojinJokyoShokaiList.get(0).get認定審査会割当予定年月日() != null) {
+            div.getTxtMaskingYoteiDate().setValue(new RDate(
+                    kojinJokyoShokaiList.get(0).get認定審査会割当予定年月日().toString()));
             div.getTxtShinsakaiTorokuYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定審査会割当予定年月日().toString()));
         }

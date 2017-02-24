@@ -9,9 +9,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaIraiShudouDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,10 +36,10 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     private IraiprintPanelDiv IraiprintPanel;
     @JsonProperty("NinteiChosaPrint")
     private NinteiChosaPrintDiv NinteiChosaPrint;
-    @JsonProperty("KanryoMessage")
-    private KaigoKanryoMessageDiv KanryoMessage;
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
+    @JsonProperty("KanryoMessage")
+    private KaigoKanryoMessageDiv KanryoMessage;
     @JsonProperty("hiddenIuputModel")
     private RString hiddenIuputModel;
 
@@ -103,21 +104,21 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     /*
-     * getKanryoMessage
-     * @return KanryoMessage
-     */
-    @JsonProperty("KanryoMessage")
-    public IKaigoKanryoMessageDiv getKanryoMessage() {
-        return KanryoMessage;
-    }
-
-    /*
      * getccdNinteiShinseishaKihonInfo
      * @return ccdNinteiShinseishaKihonInfo
      */
     @JsonProperty("ccdNinteiShinseishaKihonInfo")
     public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
         return ccdNinteiShinseishaKihonInfo;
+    }
+
+    /*
+     * getKanryoMessage
+     * @return KanryoMessage
+     */
+    @JsonProperty("KanryoMessage")
+    public IKaigoKanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
     }
 
     /*
@@ -162,7 +163,7 @@ public class NinteiChosaIraiShudouDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
+    public ChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
         return this.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput();
     }
 

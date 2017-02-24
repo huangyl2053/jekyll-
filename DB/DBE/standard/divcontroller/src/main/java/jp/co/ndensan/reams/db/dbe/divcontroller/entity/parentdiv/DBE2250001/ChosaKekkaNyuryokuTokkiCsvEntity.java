@@ -26,12 +26,10 @@ public class ChosaKekkaNyuryokuTokkiCsvEntity {
     private RString 被保険者番号;
     @CsvField(order = 4, name = "認定申請年月日")
     private RString 認定申請年月日;
-    @CsvField(order = 5, name = "前回今回区分")
-    private RString 前回今回区分;
-    @CsvField(order = 6, name = "認定調査特記事項番号")
+    @CsvField(order = 5, name = "認定調査特記事項番号")
     private RString 認定調査特記事項番号;
-    @CsvField(order = 7, name = "認定調査特記事項連番")
+    @CsvField(order = 6, name = "認定調査特記事項連番")
     private RString 認定調査特記事項連番;
-    @CsvField(order = 8, name = "特記事項")
+    @CsvField(order = 7, name = "特記事項")
     private RString 特記事項;
 }

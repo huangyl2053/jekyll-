@@ -104,6 +104,8 @@ public class ChosaItakusakiAndChosainInput {
         KijuntsukiShichosonjohoiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         div.getTxtChosaItakusakiCode().setValue(modle.get委託先コード());
         div.getTxtChosaItakusakiName().setValue(modle.get委託先名());
+        div.getTxtChosainCode().clearValue();
+        div.getTxtChosainName().clearValue();
         return ResponseData.of(div).respond();
     }
 

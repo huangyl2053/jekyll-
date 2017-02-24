@@ -119,7 +119,7 @@ public class ShujiiIkenshoSakuseiBusiness {
 //        builder = new RStringBuilder();
 //        builder.append(SHUJIIIKENSHOSAKUSEIIRAI);
 //        builder.append(processParamter.getShujiiikenshoSakuseiIrai());
-        出力条件.add(builder.toRString());
+//        出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(SHUJIIIKENSHO);
         builder.append(processParamter.getShujiiIkensho());

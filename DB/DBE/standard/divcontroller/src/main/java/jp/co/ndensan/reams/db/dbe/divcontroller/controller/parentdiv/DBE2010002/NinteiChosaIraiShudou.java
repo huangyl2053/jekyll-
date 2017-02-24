@@ -119,8 +119,6 @@ public class NinteiChosaIraiShudou {
         }
         getHandler(div).onLoad(認定調査依頼List);
 
-        div.getCcdItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
-
         if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
                 div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())) {
             div.getNinteichosaIraiByHand().setDisabled(true);

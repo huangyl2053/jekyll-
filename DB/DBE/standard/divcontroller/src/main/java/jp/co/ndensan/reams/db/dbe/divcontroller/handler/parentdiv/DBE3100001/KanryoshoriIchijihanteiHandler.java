@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -269,6 +270,7 @@ public class KanryoshoriIchijihanteiHandler {
     }
 
     private dgHanteiTaishosha_Row setRowData(dgHanteiTaishosha_Row row, IChiJiPanTeiSyoRiBusiness business) {
+        row.setCancelButtonState(DataGridButtonState.Disabled);
         row.setRowState(RowState.Unchanged);
         row.setColumnState(RString.EMPTY);
         row.setHokensha(business.get市町村名称());
@@ -551,6 +553,7 @@ public class KanryoshoriIchijihanteiHandler {
             row.setCellBgColor("hanteiKekka", DataGridCellBgColor.bgColorRed);
             return;
         }
+        row.setCancelButtonState(DataGridButtonState.Enabled);
         row.setRowState(RowState.Modified);
         row.setHanteiKekka(一次判定_OK);
         row.setCellBgColor("hanteiKekka", DataGridCellBgColor.bgColorNormal);

@@ -260,7 +260,7 @@ public class GetsureiShori {
                 return ResponseData.of(div).setState(DBE0220001StateName.完了);
             }
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
-
+            List<PersonalData> personalDataList = new ArrayList<>();
             for (dgNinteiTaskList_Row row : rowList) {
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
@@ -271,12 +271,14 @@ public class GetsureiShori {
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
                 }
-                PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
+                PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"),
                         new RString("申請書管理番号"), row.getShinseishoKanriNo()));
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
                         row.getHihoNumber()));
-                AccessLogger.log(AccessLogType.更新, personalData);
+                personalDataList.add(personalData);
             }
+            AccessLogger.log(AccessLogType.更新, personalDataList);
 
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);

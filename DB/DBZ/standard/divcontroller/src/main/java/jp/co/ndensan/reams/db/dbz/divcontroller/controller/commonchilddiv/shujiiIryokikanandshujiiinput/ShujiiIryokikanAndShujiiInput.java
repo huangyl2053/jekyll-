@@ -215,6 +215,9 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtIryoKikanName().setValue(modle.get主治医医療機関名称());
+        div.getTxtShujiiCode().clearValue();
+        div.getTxtShujiiName().clearValue();
+        createHandler(div).setChkShiteii(new LasdecCode(modle.get市町村コード()), modle.get主治医医療機関コード(), modle.get主治医コード());
         return ResponseData.of(div).respond();
     }
 
