@@ -53,6 +53,48 @@
      "toLayoutName": "DBE5510001",
      "toLayoutTitle": "要介護認定進捗状況照会",
      "toState": "default"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5510001",
+     "layoutTitle": "要介護認定進捗状況照会",
+     "eventName": "被保険者を検索する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ5100001",
+     "toLayoutTitle": "要介護認定申請情報検索",
+     "toState": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ5100001",
+     "layoutTitle": "要介護認定申請情報検索",
+     "eventName": "検索結果選択",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5510001",
+     "toLayoutTitle": "要介護認定進捗状況照会",
+     "toState": "default"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ5100001",
+     "layoutTitle": "要介護認定申請情報検索",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5510001",
+     "toLayoutTitle": "要介護認定進捗状況照会",
+     "toState": "default"
     }
    ]
   }

@@ -15,7 +15,8 @@ public enum DBE5510001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     処理完了("処理完了"),
-    個人状況照会に遷移する("個人状況照会に遷移する");
+    個人状況照会に遷移する("個人状況照会に遷移する"),
+    被保険者を検索する("被保険者を検索する");
 
     private final RString name;
 

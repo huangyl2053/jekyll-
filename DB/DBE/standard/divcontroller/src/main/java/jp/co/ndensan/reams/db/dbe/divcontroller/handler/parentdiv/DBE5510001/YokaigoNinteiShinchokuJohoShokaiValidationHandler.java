@@ -50,6 +50,23 @@ public class YokaigoNinteiShinchokuJohoShokaiValidationHandler {
         return validationMessages;
     }
 
+    /**
+     * 被保険者番号のバリデーションチェックです。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 被保険者番号必須チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (KEY0.equals(div.getRadKensakuHoho().getSelectedKey())) {
+            if (RString.isNullOrEmpty(div.getTxtHihokenshaNo().getValue())) {
+                validationMessages.add(new ValidationMessageControlPair(
+                        YokaigoNinteiShinchokuJohoShokaiValidationHandler.RRVMessages.必須項目, div.getTxtHihokenshaNo()));
+
+            }
+        }
+        return validationMessages;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         必須項目(UrErrorMessages.必須項目);

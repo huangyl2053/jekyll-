@@ -107,6 +107,16 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnHihokenshaKensaku() {
+        return this.getKensakuJoken().getSerchFromHohokensha().getBtnHihokenshaKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnHihokenshaKensaku(Button btnHihokenshaKensaku) {
+        this.getKensakuJoken().getSerchFromHohokensha().setBtnHihokenshaKensaku(btnHihokenshaKensaku);
+    }
+
+    @JsonIgnore
     public TextBoxCode getTxtShikibetsuCode() {
         return this.getKensakuJoken().getSerchFromHohokensha().getTxtShikibetsuCode();
     }
@@ -127,13 +137,13 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlNameMatchType() {
-        return this.getKensakuJoken().getSerchFromHohokensha().getDdlNameMatchType();
+    public CheckBoxList getChkKensakuOption() {
+        return this.getKensakuJoken().getSerchFromHohokensha().getChkKensakuOption();
     }
 
     @JsonIgnore
-    public void  setDdlNameMatchType(DropDownList ddlNameMatchType) {
-        this.getKensakuJoken().getSerchFromHohokensha().setDdlNameMatchType(ddlNameMatchType);
+    public void  setChkKensakuOption(CheckBoxList chkKensakuOption) {
+        this.getKensakuJoken().getSerchFromHohokensha().setChkKensakuOption(chkKensakuOption);
     }
 
     @JsonIgnore
@@ -377,53 +387,23 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public KensakuOptionDiv getKensakuOption() {
-        return this.getKensakuJoken().getKensakuOption();
-    }
-
-    @JsonIgnore
-    public void  setKensakuOption(KensakuOptionDiv KensakuOption) {
-        this.getKensakuJoken().setKensakuOption(KensakuOption);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtMaximumDisplayNumber() {
-        return this.getKensakuJoken().getKensakuOption().getTxtMaximumDisplayNumber();
+        return this.getKensakuJoken().getTxtMaximumDisplayNumber();
     }
 
     @JsonIgnore
     public void  setTxtMaximumDisplayNumber(TextBoxNum txtMaximumDisplayNumber) {
-        this.getKensakuJoken().getKensakuOption().setTxtMaximumDisplayNumber(txtMaximumDisplayNumber);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkKensakuOption() {
-        return this.getKensakuJoken().getKensakuOption().getChkKensakuOption();
-    }
-
-    @JsonIgnore
-    public void  setChkKensakuOption(CheckBoxList chkKensakuOption) {
-        this.getKensakuJoken().getKensakuOption().setChkKensakuOption(chkKensakuOption);
+        this.getKensakuJoken().setTxtMaximumDisplayNumber(txtMaximumDisplayNumber);
     }
 
     @JsonIgnore
     public Button getBtnConditionClear() {
-        return this.getKensakuJoken().getKensakuOption().getBtnConditionClear();
+        return this.getKensakuJoken().getBtnConditionClear();
     }
 
     @JsonIgnore
     public void  setBtnConditionClear(Button btnConditionClear) {
-        this.getKensakuJoken().getKensakuOption().setBtnConditionClear(btnConditionClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getKensakuJoken().getKensakuOption().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getKensakuJoken().getKensakuOption().setBtnKensaku(btnKensaku);
+        this.getKensakuJoken().setBtnConditionClear(btnConditionClear);
     }
 
     @JsonIgnore

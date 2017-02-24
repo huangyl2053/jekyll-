@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
@@ -16,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -77,15 +77,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * 画面初期化処理です。
      */
     public void onload() {
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
         div.getRadKensakuHoho().setSelectedKey(KensakuHoho.被保険者から検索する場合.key);
         div.getShinseiJohoIchiran().setIsOpen(false);
-        div.getDdlNameMatchType().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
         div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-        div.getChkKensakuOption().setSelectedItemsByKey(Arrays.asList(DATE_SOURCE_KEY0));
         set検索条件切替(false);
         init最大表示件数();
         setDisable();
@@ -120,11 +118,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                 div.getSerchFromHohokensha().setDisplayNone(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(false);
                 div.getSerchFromShinchokuJokyo().setIsOpen(true);
+                div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
                 return;
             case 被保険者から検索する場合:
                 div.getSerchFromHohokensha().setDisplayNone(false);
                 div.getSerchFromHohokensha().setIsOpen(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(true);
+                div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
                 return;
             default:
         }

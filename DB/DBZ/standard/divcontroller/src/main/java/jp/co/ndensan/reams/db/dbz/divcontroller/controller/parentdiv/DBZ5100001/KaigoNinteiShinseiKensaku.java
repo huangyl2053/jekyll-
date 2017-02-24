@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.DBZ5100001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -40,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class KaigoNinteiShinseiKensaku {
 
     private final RString 認定メニュー = new RString("DBEUC10101");
+    private final RString DBEUC55101 = new RString("DBEUC55101");
     private final RString 要介護認定申請修正_新規 = new RString("DBDUC51206");
     private final RString 要介護認定申請修正_更新 = new RString("DBDUC51207");
     private final RString 要介護認定申請修正_区分変更 = new RString("DBDUC51208");
@@ -144,9 +147,9 @@ public class KaigoNinteiShinseiKensaku {
         KaigoNinteiShinseiKensakuHandler handler = getHandler(div);
         ShinseiKensakuMapperParameter parameter = handler.createMapperParameter最近処理者();
         SearchResult<ShinseiKensakuBusiness> 検索結果
-                = (get業務分類() == GyomuBunrui.介護事務) ? search受給(parameter)
-                : (get業務分類() == GyomuBunrui.介護認定) ? search認定(parameter)
-                : null;
+                    = (get業務分類() == GyomuBunrui.介護事務) ? search受給(parameter)
+                    : (get業務分類() == GyomuBunrui.介護認定) ? search認定(parameter)
+                    : null;
         if (検索結果 == null || 検索結果.records().isEmpty()) {
             handler.clearSearchResult();
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
@@ -189,7 +192,7 @@ public class KaigoNinteiShinseiKensaku {
         ShinseiKensakuFinder finder = ShinseiKensakuFinder.createInstance();
         return finder.search受給(parameter);
     }
-
+    
     private SearchResult<ShinseiKensakuBusiness> search認定(ShinseiKensakuMapperParameter parameter) {
         ShinseiKensakuFinder finder = ShinseiKensakuFinder.createInstance();
         return finder.search認定(parameter);
@@ -226,8 +229,7 @@ public class KaigoNinteiShinseiKensaku {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString uiContainerId = controlData.getUIContainerId();
-        if (認定メニュー.equals(uiContainerId)) {
-
+        if (認定メニュー.equals(uiContainerId) || DBEUC55101.equals(uiContainerId)) {
             return GyomuBunrui.介護認定;
         }
         if (要介護認定申請修正_新規.equals(uiContainerId)
@@ -264,7 +266,11 @@ public class KaigoNinteiShinseiKensaku {
     private NinteiShinseishaFinderParameter create検索条件parameter() {
         NinteiShinseishaFinderParameter parameter = new NinteiShinseishaFinderParameter();
         parameter.set業務分類(get業務分類());
-        parameter.setCheckedみなし2号申請(true);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString uiContainerId = controlData.getUIContainerId();
+        if (!DBEUC55101.equals(uiContainerId)) {
+            parameter.setCheckedみなし2号申請(true);
+        }
         ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
         if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
             parameter.set証記載保険者番号(証記載保険者番号);

@@ -24,12 +24,14 @@ public class SerchFromHohokenshaDiv extends Panel {
      */
     @JsonProperty("txtHihokenshaNo")
     private TextBoxCode txtHihokenshaNo;
+    @JsonProperty("btnHihokenshaKensaku")
+    private Button btnHihokenshaKensaku;
     @JsonProperty("txtShikibetsuCode")
     private TextBoxCode txtShikibetsuCode;
     @JsonProperty("txtShimei")
     private TextBoxAtenaMeisho txtShimei;
-    @JsonProperty("ddlNameMatchType")
-    private DropDownList ddlNameMatchType;
+    @JsonProperty("chkKensakuOption")
+    private CheckBoxList chkKensakuOption;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,6 +55,24 @@ public class SerchFromHohokenshaDiv extends Panel {
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.txtHihokenshaNo = txtHihokenshaNo;
+    }
+
+    /*
+     * getbtnHihokenshaKensaku
+     * @return btnHihokenshaKensaku
+     */
+    @JsonProperty("btnHihokenshaKensaku")
+    public Button getBtnHihokenshaKensaku() {
+        return btnHihokenshaKensaku;
+    }
+
+    /*
+     * setbtnHihokenshaKensaku
+     * @param btnHihokenshaKensaku btnHihokenshaKensaku
+     */
+    @JsonProperty("btnHihokenshaKensaku")
+    public void setBtnHihokenshaKensaku(Button btnHihokenshaKensaku) {
+        this.btnHihokenshaKensaku = btnHihokenshaKensaku;
     }
 
     /*
@@ -92,21 +112,21 @@ public class SerchFromHohokenshaDiv extends Panel {
     }
 
     /*
-     * getddlNameMatchType
-     * @return ddlNameMatchType
+     * getchkKensakuOption
+     * @return chkKensakuOption
      */
-    @JsonProperty("ddlNameMatchType")
-    public DropDownList getDdlNameMatchType() {
-        return ddlNameMatchType;
+    @JsonProperty("chkKensakuOption")
+    public CheckBoxList getChkKensakuOption() {
+        return chkKensakuOption;
     }
 
     /*
-     * setddlNameMatchType
-     * @param ddlNameMatchType ddlNameMatchType
+     * setchkKensakuOption
+     * @param chkKensakuOption chkKensakuOption
      */
-    @JsonProperty("ddlNameMatchType")
-    public void setDdlNameMatchType(DropDownList ddlNameMatchType) {
-        this.ddlNameMatchType = ddlNameMatchType;
+    @JsonProperty("chkKensakuOption")
+    public void setChkKensakuOption(CheckBoxList chkKensakuOption) {
+        this.chkKensakuOption = chkKensakuOption;
     }
 
     // </editor-fold>
