@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
@@ -99,6 +100,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private static final RString DATE_作成 = new RString("作成");
     private static final RString DATE_ヶ月 = new RString("ヶ月");
     private CenterSoshinTaishoshaIchiranEntity centerSoshinTaishoshaIchiranEntity;
+    private RString printTimeStamp;
 
     /**
      * データ有無の判定です。
@@ -117,6 +119,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     @Override
     protected void initialize() {
         outputShinseishoKanriNo = new OutputParameter<>();
+        printTimeStamp = get印刷日時();
         centerSoshinTaishoshaIchiranEntity = new CenterSoshinTaishoshaIchiranEntity();
         シーケンシャル番号 = 0;
         出力データ件数 = 0;
@@ -251,7 +254,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private void printReport(CenterTransmissionEntity currentEntity) {
         centerSoshinTaishoshaIchiranEntity = new CenterSoshinTaishoshaIchiranEntity();
-        centerSoshinTaishoshaIchiranEntity.setPrintTimeStamp(get印刷日時());
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_1(currentEntity.getShoKisaiHokenshaNo());
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_2(currentEntity.getShichosonMeisho());
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_3(currentEntity.getHihokenshaNo());
@@ -263,7 +265,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_9(get認定有効期間(currentEntity.getNijiHanteiNinteiYukoKikan()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_10(get開始日(currentEntity.getNijiHanteiNinteiYukoKaishiYMD()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_11(get終了日(currentEntity.getNijiHanteiNinteiYukoShuryoYMD()));
-        CenterSoshinTaishoshaIchiranReport report = new CenterSoshinTaishoshaIchiranReport(centerSoshinTaishoshaIchiranEntity);
+        CenterSoshinTaishoshaIchiranReport report = new CenterSoshinTaishoshaIchiranReport(printTimeStamp, centerSoshinTaishoshaIchiranEntity);
         report.writeBy(reportSourceWriter);
     }
 
@@ -272,7 +274,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         RStringBuilder printTimeStampSb = new RStringBuilder();
         printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
+                fillType(FillType.ZERO).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(DATE_時);
@@ -307,10 +309,15 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private RString get二次判定結果(RString 厚労省IF識別コード, RString 二次判定要介護状態区分コード) {
         RString 二次判定結果;
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
             二次判定結果 = YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード).get名称();
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
             二次判定結果 = YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード).get名称();
         } else {
             二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
         }
