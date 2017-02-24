@@ -183,7 +183,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getCcdShujiiInput().initialize(new LasdecCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode()),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getCcdShujiiInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
-        if (div.getDgNinteiTaskList().getSelectedItems().size() == 1) {
+        if (!div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
             div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
             div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
