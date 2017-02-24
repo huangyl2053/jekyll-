@@ -64,7 +64,7 @@ public class IkenshoSakuseiIrai {
         IkenshoirairirekiichiranShudou 主治医意見書作成依頼 = manager.get主治医意見書作成依頼(申請書管理番号.value());
         NinteiShinseiJoho 要介護認定申請情報 = manager.get要介護認定申請情報(申請書管理番号.value());
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, 要介護認定申請情報);
-        div.getCcdShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.SimpleInputMode);
+        div.getCcdShujiiInput().setMode_ShoriType(ShujiiIryokikanAndShujiiInputDiv.ShoriType.DialogInputMode);
         div.getCcdShujiiInput().initialize(主治医意見書作成依頼.get市町村コード(), 申請書管理番号, SubGyomuCode.DBE認定支援,
                 主治医意見書作成依頼.get主治医医療機関コード(), 主治医意見書作成依頼.get医療機関名称(),
                 主治医意見書作成依頼.get主治医コード(), 主治医意見書作成依頼.get主治医氏名());
@@ -77,7 +77,6 @@ public class IkenshoSakuseiIrai {
             throw new PessimisticLockingException();
         }
         createHandler(div).initialize(主治医意見書作成依頼);
-        div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
 
         if (NinteiShinseiShinseijiKubunCode.転入申請.get名称().equals(
                 div.getCcdNinteiShinseishaKihonInfo().get申請区分申請時())) {

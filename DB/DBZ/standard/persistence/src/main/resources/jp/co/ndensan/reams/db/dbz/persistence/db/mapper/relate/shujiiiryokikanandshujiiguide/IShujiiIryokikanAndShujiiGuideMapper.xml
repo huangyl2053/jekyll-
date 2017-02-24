@@ -113,6 +113,10 @@
             AND
             DbT5912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
         </if>
+        ORDER BY
+            DbT5911."shichosonCode" ASC,
+            DbT5911."shujiiIryokikanCode" ASC,
+            DbT5912."shujiiCode" ASC
     </select>
     
     <select resultOrdered="true" id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
@@ -250,5 +254,8 @@
             AND
             DbT5911."iryoKikanMeishoKana" LIKE '%' || #{iryoKikanMeishoKana} || '%'
         </if>
+        ORDER BY
+            DbT5911."shichosonCode" ASC,
+            DbT5911."shujiiIryokikanCode" ASC
     </select>
 </mapper>

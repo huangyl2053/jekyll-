@@ -140,6 +140,20 @@ var DBZ;
                     this.controls.btnClear().disabled = false;
                     this.controls.btnShujiiRenrakuJiko().displayNone = true;
                 };
+
+                ShoriType.prototype.DialogInputMode = function () {
+                    this.controls.txtIryoKikanCode().readOnly = true;
+                    this.controls.txtShujiiCode().readOnly = true;
+                    this.controls.chkShiteii().readOnly = false;
+
+                    this.controls.btnIryokikanGuide().disabled = false;
+                    this.controls.btnShujiiGuide().disabled = false;
+                    this.controls.btnShujiiRenrakuJiko().disabled = false;
+
+                    this.controls.btnZenkaiIrokikanJoho().displayNone = true;
+                    this.controls.btnClear().displayNone = true;
+                    this.controls.btnShujiiRenrakuJiko().displayNone = true;
+                };
                 return ShoriType;
             })();
             Modes.ShoriType = ShoriType;
