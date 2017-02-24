@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -40,6 +41,7 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate ninteiShinsakaiKanryoYMD;
     private FlexibleDate centerSoshinYMD;
     private RString shoKisaiHokenshaNo;
+    private LasdecCode shichosonCode;
     private RString hihokenshaNo;
     private FlexibleDate ninteiShinseiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
