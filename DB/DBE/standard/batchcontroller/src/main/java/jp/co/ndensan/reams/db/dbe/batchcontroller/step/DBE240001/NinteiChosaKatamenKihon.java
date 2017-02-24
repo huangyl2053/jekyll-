@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -29,7 +30,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
+import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 認定調査票_OCR片面の帳票出力処理クラスです。
@@ -60,7 +64,22 @@ public class NinteiChosaKatamenKihon extends BatchProcessBase<HomonChosaIraishoR
     @Override
     protected void createWriter() {
         if (ReportIdDBZ.DBE221012.getReportId().equals(帳票)) {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).setStartFormGroup(2).create();
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value())
+                    .addBreak(new BreakerCatalog<ChosahyoGaikyochosaReportSource>().new SimpleLayoutBreaker(
+                        new RString("layoutIndex")) {
+            @Override
+                        public ReportLineRecord<ChosahyoGaikyochosaReportSource> occuredBreak(
+                                ReportLineRecord<ChosahyoGaikyochosaReportSource> currentRecord,
+                                ReportLineRecord<ChosahyoGaikyochosaReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                                    int layout = currentRecord.getSource().layoutIndex;
+                                    currentRecord.setFormGroupIndex(layout);
+                                    if (nextRecord != null && nextRecord.getSource() != null) {
+                                        layout = nextRecord.getSource().layoutIndex;
+                                        nextRecord.setFormGroupIndex(layout);
+                                    }
+                                    return currentRecord;
+                                }
+                    }).setStartFormGroup(2).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).create();
         }
