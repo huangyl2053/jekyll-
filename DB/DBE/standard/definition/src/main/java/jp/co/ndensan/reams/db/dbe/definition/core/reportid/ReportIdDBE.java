@@ -527,7 +527,7 @@ public enum ReportIdDBE {
      * 報告資料の条件表用ダミー帳票ID。
      */
     DBE701000(new ReportId("DBE701000_HokokuShiryo"), new RString("報告資料")),
-     /**
+    /**
      * 介護保険診断命令書の帳票ID。
      */
     DBE235001(new ReportId("DBE235001_kaigohokenShindanMeireisho"), new RString("介護保険診断命令書")),
@@ -538,7 +538,11 @@ public enum ReportIdDBE {
     /**
      * 要介護認定延期通知書発行一覧表の帳票ＩＤです。
      */
-    DBE581002(new ReportId("DBE581002_NinteiEnkiTsuchishoHakkoIchiranhyo"), new RString("要介護認定延期通知書発行一覧表"));
+    DBE581002(new ReportId("DBE581002_NinteiEnkiTsuchishoHakkoIchiranhyo"), new RString("要介護認定延期通知書発行一覧表")),
+    /**
+     * センター送信対象者一覧の帳票ＩＤです。
+     */
+    DBE561001(new ReportId("DBE561001_CenterSoshinTaishoshaIchiran"), new RString("センター送信対象者一覧"));
 
     private final ReportId reportId;
 
