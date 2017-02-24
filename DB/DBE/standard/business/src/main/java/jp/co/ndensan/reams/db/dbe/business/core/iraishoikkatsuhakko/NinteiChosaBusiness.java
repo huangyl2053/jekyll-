@@ -72,7 +72,6 @@ public class NinteiChosaBusiness {
     private static final RString 年号_明治 = new RString("明");
     private static final RString 年号_大正 = new RString("大");
     private static final RString 年号_昭和 = new RString("昭");
-    private static final RString 記号_星 = new RString("＊");
     private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
@@ -337,7 +336,7 @@ public class NinteiChosaBusiness {
     public ChosaIraishoHeadItem setChosaIraishoHeadItem(HomonChosaIraishoRelateEntity entity, Map<Integer, RString> 通知文Map,
             NinshoshaSource ninshoshaSource, RString 文書番号) {
         RString 生年月日年号 = entity.get生年月日() != null && RDate.canConvert(entity.get生年月日())
-                ? new RDate(entity.get生年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).getEra()
+                ? new RDate(entity.get生年月日().toString()).wareki().eraType(EraType.KANJI).getEra()
                 : RString.EMPTY;
 
         getカスタマーバーコード(entity);
@@ -375,13 +374,10 @@ public class NinteiChosaBusiness {
                 getCode(被保険者番号リスト, INT8),
                 getCode(被保険者番号リスト, INT9),
                 entity.get被保険者氏名カナ(),
-                !生年月日年号.equals(年号_明治) ? 記号_星 : RString.EMPTY,
-                !生年月日年号.equals(年号_大正) ? 記号_星 : RString.EMPTY,
-                !生年月日年号.equals(年号_昭和) ? 記号_星 : RString.EMPTY,
+                生年月日年号,
                 entity.get生年月日(),
                 entity.get被保険者氏名(),
-                !entity.get性別().equals(Seibetsu.男.getコード()) ? 記号_星 : RString.EMPTY,
-                !entity.get性別().equals(Seibetsu.女.getコード()) ? 記号_星 : RString.EMPTY,
+                Seibetsu.toValue(entity.get性別()).get名称(),
                 entity.get郵便番号() != null ? new YubinNo(entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY,
                 entity.get住所(),
                 entity.get電話番号(),

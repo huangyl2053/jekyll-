@@ -65,11 +65,8 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
     private final RString jusho;
     private final RDate birthYMD;
     private final RString remban;
-    private final RString seyibenMan;
-    private final RString seyibenWoman;
-    private final RString birthGengoMeiji;
-    private final RString birthGengoTaisho;
-    private final RString birthGengoShowa;
+    private final RString seyiben;
+    private final RString birthGengo;
     private final RString shoriName;
 
     /**
@@ -120,11 +117,8 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      * @param jusho 住所
      * @param birthYMD 誕生日
      * @param remban 連番
-     * @param seyibenMan 性別男
-     * @param seyibenWoman 性別女
-     * @param birthGengoMeiji 誕生日明治birthGengoMeiji
-     * @param birthGengoTaisho 誕生日大正
-     * @param birthGengoShowa 誕生日昭和
+     * @param seyiben
+     * @param birthGengo
      * @param shoriName 処理名
      */
     public ShujiiIkenshoSakuseiTokusokujoItem(RString bunshoNo, RString denshikoin, RString hakkoYMD1,
@@ -138,8 +132,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
             RString hokenshaNo2, RString hokenshaNo3, RString hokenshaNo4, RString hokenshaNo5, RString hokenshaNo6,
             RString shinseiKubun, RString hihokenshaNameKana, RString hihokennsyaName, FlexibleDate ikenshoIraiYMD, RDate shinseiYMD,
             RString yubinNo, RString jusho, RDate birthYMD, RString remban,
-            RString seyibenMan, RString seyibenWoman, RString birthGengoMeiji, RString birthGengoTaisho,
-            RString birthGengoShowa, RString shoriName) {
+            RString seyiben, RString birthGengo, RString shoriName) {
         this.bunshoNo = bunshoNo;
         this.denshikoin = denshikoin;
         this.hakkoYMD1 = hakkoYMD1;
@@ -185,11 +178,8 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
         this.jusho = jusho;
         this.birthYMD = birthYMD;
         this.remban = remban;
-        this.seyibenMan = seyibenMan;
-        this.seyibenWoman = seyibenWoman;
-        this.birthGengoMeiji = birthGengoMeiji;
-        this.birthGengoTaisho = birthGengoTaisho;
-        this.birthGengoShowa = birthGengoShowa;
+        this.seyiben = seyiben;
+        this.birthGengo = birthGengo;
         this.shoriName = shoriName;
     }
 

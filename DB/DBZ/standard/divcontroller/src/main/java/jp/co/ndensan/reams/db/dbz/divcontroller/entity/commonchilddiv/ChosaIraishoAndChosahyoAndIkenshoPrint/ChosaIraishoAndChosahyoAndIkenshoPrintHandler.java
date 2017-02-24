@@ -391,18 +391,19 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getTxtKyotsuDay().setReadOnly(false);
             div.getTxtKyotsuDay().setRequired(true);
             IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
-            div.getTxtKyotsuDay().setValue(get共通日初期値(model.get遷移元画面区分()));
+            RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            div.getTxtKyotsuDay().setValue(get共通日初期値(model.get遷移元画面区分(), 市町村コード));
         } else {
             div.getTxtKyotsuDay().clearValue();
             div.getTxtKyotsuDay().setReadOnly(true);
         }
     }
 
-    private static RDate get共通日初期値(GamenSeniKbn 画面区分) {
+    private static RDate get共通日初期値(GamenSeniKbn 画面区分, RString 市町村コード) {
         ConfigNameDBE config = (画面区分 == GamenSeniKbn.認定調査依頼)
                 ? ConfigNameDBE.認定調査期限日数
                 : ConfigNameDBE.主治医意見書作成期限日数;
-        int day = Integer.valueOf(BusinessConfig.get(config, SubGyomuCode.DBE認定支援).toString());
+        int day = Integer.valueOf(BusinessConfig.get(config, SubGyomuCode.DBE認定支援, 市町村コード).toString());
         return RDate.getNowDate().plusDay(day);
     }
 
@@ -565,27 +566,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     customerBarCode = ReportUtil.getCustomerBarCode(business.get調査委託先郵便番号(), business.get調査委託先住所());
                 }
 
-                RString 誕生日明治 = HOUSI;
-                RString 誕生日大正 = HOUSI;
-                RString 誕生日昭和 = HOUSI;
                 FlexibleDate seinengappiYMD = new FlexibleDate(business.get生年月日());
                 RString era = seinengappiYMD.wareki().eraType(EraType.KANJI).getEra();
-                if (元号_明治.equals(era)) {
-                    誕生日明治 = RString.EMPTY;
-                } else if (元号_大正.equals(era)) {
-                    誕生日大正 = RString.EMPTY;
-                } else if (元号_昭和.equals(era)) {
-                    誕生日昭和 = RString.EMPTY;
-                }
-                RString seibetsu = business.get性別();
-                RString 性別男 = RString.EMPTY;
-                RString 性別女 = RString.EMPTY;
+                RString 誕生日元号 = era;
 
-                if (Seibetsu.男.getコード().equals(seibetsu)) {
-                    性別女 = HOUSI;
-                } else {
-                    性別男 = HOUSI;
-                }
+                RString 性別 = business.get性別() != null && !RString.isNullOrEmpty(business.get性別().trim())
+                        ? Seibetsu.toValue(business.get性別()).get名称() : RString.EMPTY;
                 RString 認定申請年月日 = RString.EMPTY;
                 if (!RString.isNullOrEmpty(business.get認定申請年月日())) {
                     認定申請年月日 = new FlexibleDate(business.get認定申請年月日()).wareki()
@@ -625,13 +611,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         被保険者番号リスト.get(INDEX_8),
                         被保険者番号リスト.get(INDEX_9),
                         business.get被保険者氏名カナ(),
-                        誕生日明治,
-                        誕生日大正,
-                        誕生日昭和,
+                        誕生日元号,
                         business.get生年月日(),
                         business.get被保険者氏名(),
-                        性別男,
-                        性別女,
+                        性別,
                         RString.isNullOrEmpty(business.get郵便番号())
                         ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
                         business.get住所(),
@@ -1309,15 +1292,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setHokenshaNo5(保険者番号リスト.get(INDEX_4));
                 item.setHokenshaNo6(保険者番号リスト.get(INDEX_5));
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
-                if (Seibetsu.男.getコード().equals(business.get性別())) {
-                    item.setSeibetsuWoman(HOUSI);
-                }
-                if (Seibetsu.女.getコード().equals(business.get性別())) {
-                    item.setSeibetsuMan(HOUSI);
-                }
+                item.setSeibetsu(business.get性別() != null && !RString.isNullOrEmpty(business.get性別().trim())
+                        ? Seibetsu.toValue(business.get性別()).get名称() : RString.EMPTY);
                 item.setHihokenshaName(business.get被保険者氏名());
                 RString 生年月日 = business.get生年月日();
-                get年号(new FlexibleDate(生年月日), item);
+                item.setBirthGengo(new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).getEra());
                 item.setBirthYMD(get和暦(生年月日, false));
                 RString 郵便番号 = business.get郵便番号();
                 if (!RString.isNullOrEmpty(郵便番号)) {
@@ -1747,27 +1726,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             if (birthYMD != null && !FlexibleDate.EMPTY.equals(birthYMD)) {
                 item.setBirthYMD(row.getBirthYMD().getValue().wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(数字_2));
-                if (new RString("明").equals(birthYMD.wareki().getEra())) {
-                    item.setBirthGengoShowa(HOUSI);
-                    item.setBirthGengoTaisho(HOUSI);
-                } else if (new RString("大").equals(birthYMD.wareki().getEra())) {
-                    item.setBirthGengoMeiji(HOUSI);
-                    item.setBirthGengoShowa(HOUSI);
-                } else if (new RString("昭").equals(birthYMD.wareki().getEra())) {
-                    item.setBirthGengoTaisho(HOUSI);
-                    item.setBirthGengoMeiji(HOUSI);
-                } else {
-                    item.setBirthGengoMeiji(HOUSI);
-                    item.setBirthGengoShowa(HOUSI);
-                    item.setBirthGengoTaisho(HOUSI);
-                }
+                item.setBirthGengo(birthYMD.wareki().eraType(EraType.KANJI).getEra());
             }
-            if (!RString.isNullOrEmpty(row.getSeibetsu())) {
-                if (Seibetsu.男.get名称().equals(row.getSeibetsu())) {
-                    item.setSeibetsuWoman(HOUSI);
-                } else if (Seibetsu.女.get名称().equals(row.getSeibetsu())) {
-                    item.setSeibetsuMan(HOUSI);
-                }
+            if (row.getSeibetsu() != null && !RString.isNullOrEmpty(row.getSeibetsu().trim())) {
+                item.setSeibetsu(Seibetsu.toValue(row.getSeibetsu()).get名称());
             }
             RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
             int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());
@@ -1927,25 +1889,24 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         return 和暦;
     }
 
-    private void get年号(FlexibleDate 生年月日, ShujiiIkenshoSakuseiIraishoItem item) {
-        RString 年号 = 生年月日.wareki().eraType(EraType.KANJI).toDateString();
-        if (年号.startsWith(元号_明治)) {
-            item.setBirthGengoShowa(HOUSI);
-            item.setBirthGengoTaisho(HOUSI);
-
-        } else if (年号.startsWith(元号_大正)) {
-            item.setBirthGengoMeiji(HOUSI);
-            item.setBirthGengoShowa(HOUSI);
-        } else if (年号.startsWith(元号_昭和)) {
-            item.setBirthGengoMeiji(HOUSI);
-            item.setBirthGengoTaisho(HOUSI);
-        } else {
-            item.setBirthGengoMeiji(HOUSI);
-            item.setBirthGengoShowa(HOUSI);
-            item.setBirthGengoTaisho(HOUSI);
-        }
-    }
-
+//    private void get年号(FlexibleDate 生年月日, ShujiiIkenshoSakuseiIraishoItem item) {
+//        RString 年号 = 生年月日.wareki().eraType(EraType.KANJI).toDateString();
+//        if (年号.startsWith(元号_明治)) {
+//            item.setBirthGengoShowa(HOUSI);
+//            item.setBirthGengoTaisho(HOUSI);
+//
+//        } else if (年号.startsWith(元号_大正)) {
+//            item.setBirthGengoMeiji(HOUSI);
+//            item.setBirthGengoShowa(HOUSI);
+//        } else if (年号.startsWith(元号_昭和)) {
+//            item.setBirthGengoMeiji(HOUSI);
+//            item.setBirthGengoTaisho(HOUSI);
+//        } else {
+//            item.setBirthGengoMeiji(HOUSI);
+//            item.setBirthGengoShowa(HOUSI);
+//            item.setBirthGengoTaisho(HOUSI);
+//        }
+//    }
     private RString get判定結果(RString 厚労省IF識別コード, RString 判定結果コード) {
         RString 判定結果 = RString.EMPTY;
         if (IFSHIKIBETSUCODE99A.equals(厚労省IF識別コード)) {

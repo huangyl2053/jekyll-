@@ -71,12 +71,9 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.hokenshaNo5 = item.getHokenshaNo5();
         source.hokenshaNo6 = item.getHokenshaNo6();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.seibetsuMan = item.getSeibetsuMan();
-        source.seibetsuWoman = item.getSeibetsuWoman();
+        source.seibetsu = item.getSeibetsu();
         source.hihokenshaName = item.getHihokenshaName();
-        source.birthGengoMeiji = item.getBirthGengoMeiji();
-        source.birthGengoTaisho = item.getBirthGengoTaisho();
-        source.birthGengoShowa = item.getBirthGengoShowa();
+        source.birthGengo = item.getBirthGengo();
         source.birthYMD = item.getBirthYMD();
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();

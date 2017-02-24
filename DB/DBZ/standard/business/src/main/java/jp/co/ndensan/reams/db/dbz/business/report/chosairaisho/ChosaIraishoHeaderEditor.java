@@ -84,11 +84,8 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         } else {
             source.birthYMD = 生年月日_パターン12(new RDate(item.getBirthYMD().toString()));
         }
-        source.birthGengoMeiji = item.getBirthGengoMeiji();
-        source.birthGengoTaisho = item.getBirthGengoTaisho();
-        source.birthGengoShowa = item.getBirthGengoShowa();
-        source.seibetsuMan = item.getSeibetsuMan();
-        source.seibetsuWoman = item.getSeibetsuWoman();
+        source.birthGengo = item.getBirthGengo();
+        source.seibetsu = item.getSeibetsu();
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();
         source.telNo = item.getTelNo();

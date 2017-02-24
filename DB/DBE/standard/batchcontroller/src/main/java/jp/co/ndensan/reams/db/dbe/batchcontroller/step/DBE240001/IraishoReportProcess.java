@@ -101,12 +101,12 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
                     iraishoReportSourceWriter);
         }
         文書番号 = processParamter.get文書番号();
+        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
+        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
     }
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        int 通知書定型文パターン番号 = RString.isNullOrEmpty(processParamter.getShichosonCode()) ? 1 : Integer.parseInt(processParamter.getShichosonCode().toString());
-        通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
         ChosaIraishoReport report = ChosaIraishoReport.createFrom(business.setChosaIraishoHeadItem(entity, 通知文Map, ninshoshaSource, 文書番号));
         report.writeBy(iraishoReportSourceWriter);
     }

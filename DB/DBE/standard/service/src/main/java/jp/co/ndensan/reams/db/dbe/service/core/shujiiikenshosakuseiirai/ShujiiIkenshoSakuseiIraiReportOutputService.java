@@ -169,7 +169,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
                     FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             for (int i = 0; i < 介護保険指定医依頼兼主治医意見書提出意見書ItemList.size(); i++) {
                 ShujiiIkenshoTeishutsuIraishoItem item = 介護保険指定医依頼兼主治医意見書提出意見書ItemList.get(i);
-                list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(item,ninshosha)));
+                list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(setNishosha(item, ninshosha)));
             }
             for (ShujiiIkenshoTeishutsuIraishoReport report : list) {
                 report.writeBy(reportSourceWriter);
@@ -194,7 +194,7 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
             for (int i = 0; i < 主治医意見書作成依頼一覧表ItemList.size(); i++) {
                 IkenshoSakuseiIraiIchiranhyoItem item = 主治医意見書作成依頼一覧表ItemList.get(i);
                 list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom2(set主治医意見書作成依頼一覧表認定者(
-                    item, ninshosha)));
+                        item, ninshosha)));
             }
             for (IkenshoSakuseiIraiIchiranhyoReport report : list) {
                 report.writeBy(reportSourceWriter);
@@ -243,27 +243,27 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
     }
 
     private ShujiiIkenshoTeishutsuIraishoItem setNishosha(ShujiiIkenshoTeishutsuIraishoItem item, NinshoshaSource ninshosha) {
-            item.setDenshiKoin(ninshosha.denshiKoin);
-            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
-            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
-            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
-            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
-            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
-            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
-            item.setKoinShoryaku(ninshosha.koinShoryaku);
+        item.setDenshiKoin(ninshosha.denshiKoin);
+        item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+        item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+        item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+        item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+        item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+        item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+        item.setKoinShoryaku(ninshosha.koinShoryaku);
         return item;
     }
 
     private IkenshoSakuseiIraiIchiranhyoItem set主治医意見書作成依頼一覧表認定者(IkenshoSakuseiIraiIchiranhyoItem item,
             NinshoshaSource ninshosha) {
-            item.setDenshiKoin(ninshosha.denshiKoin);
-            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
-            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
-            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
-            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
-            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
-            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
-            item.setKoinShoryaku(ninshosha.koinShoryaku);
+        item.setDenshiKoin(ninshosha.denshiKoin);
+        item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+        item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+        item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+        item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+        item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+        item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+        item.setKoinShoryaku(ninshosha.koinShoryaku);
         return item;
     }
 
@@ -298,58 +298,55 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
 
     private ShujiiIkenshoSakuseiIraishoItem set主治医意見書作成依頼(ShujiiIkenshoSakuseiIraishoItem item,
             NinshoshaSource ninshosha) {
-            item.setHakkoYMD1(item.getHakkoYMD1());
-            item.setDenshiKoin(ninshosha.denshiKoin);
-            item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
-            item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
-            item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
-            item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
-            item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
-            item.setKoinMojiretsu(ninshosha.koinMojiretsu);
-            item.setKoinShoryaku(ninshosha.koinShoryaku);
-            item.setBunshoNo(item.getBunshoNo());
-            item.setYubinNo1(item.getYubinNo1());
-            item.setJushoText(item.getJushoText());
-            item.setKikanNameText(item.getKikanNameText());
-            item.setShimeiText(item.getShimeiText());
-            item.setMeishoFuyo(item.getMeishoFuyo());
-            item.setCustomerBarCode(item.getCustomerBarCode());
-            item.setSonota(item.getSonota());
-            item.setAtenaRenban(item.getAtenaRenban());
-            item.setTitle(item.getTitle());
-            item.setTsuchibun1(item.getTsuchibun1());
-            item.setShinseiKubun(item.getShinseiKubun());
-            item.setHihokenshaNo1(item.getHihokenshaNo1());
-            item.setHihokenshaNo2(item.getHihokenshaNo2());
-            item.setHihokenshaNo3(item.getHihokenshaNo3());
-            item.setHihokenshaNo4(item.getHihokenshaNo4());
-            item.setHihokenshaNo5(item.getHihokenshaNo5());
-            item.setHihokenshaNo6(item.getHihokenshaNo6());
-            item.setHihokenshaNo7(item.getHihokenshaNo7());
-            item.setHihokenshaNo8(item.getHihokenshaNo8());
-            item.setHihokenshaNo9(item.getHihokenshaNo9());
-            item.setHihokenshaNo10(item.getHihokenshaNo10());
-            item.setHokenshaNo1(item.getHokenshaNo1());
-            item.setHokenshaNo2(item.getHokenshaNo2());
-            item.setHokenshaNo3(item.getHokenshaNo3());
-            item.setHokenshaNo4(item.getHokenshaNo4());
-            item.setHokenshaNo5(item.getHokenshaNo5());
-            item.setHokenshaNo6(item.getHokenshaNo6());
-            item.setHihokenshaNameKana(item.getHihokenshaNameKana());
-            item.setSeibetsuMan(item.getSeibetsuMan());
-            item.setSeibetsuWoman(item.getSeibetsuWoman());
-            item.setHihokenshaName(item.getHihokenshaName());
-            item.setBirthGengoMeiji(item.getBirthGengoMeiji());
-            item.setBirthGengoTaisho(item.getBirthGengoTaisho());
-            item.setBirthGengoShowa(item.getBirthGengoShowa());
-            item.setBirthYMD(item.getBirthYMD());
-            item.setYubinNo(item.getYubinNo());
-            item.setJusho(item.getJusho());
-            item.setShinseiYMD(item.getShinseiYMD());
-            item.setTeishutsuKigen(item.getTeishutsuKigen());
-            item.setTsuchibun2(item.getTsuchibun2());
-            item.setRemban(item.getRemban());
-            item.setShoriName(item.getShoriName());
+        item.setHakkoYMD1(item.getHakkoYMD1());
+        item.setDenshiKoin(ninshosha.denshiKoin);
+        item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+        item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+        item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+        item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+        item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+        item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+        item.setKoinShoryaku(ninshosha.koinShoryaku);
+        item.setBunshoNo(item.getBunshoNo());
+        item.setYubinNo1(item.getYubinNo1());
+        item.setJushoText(item.getJushoText());
+        item.setKikanNameText(item.getKikanNameText());
+        item.setShimeiText(item.getShimeiText());
+        item.setMeishoFuyo(item.getMeishoFuyo());
+        item.setCustomerBarCode(item.getCustomerBarCode());
+        item.setSonota(item.getSonota());
+        item.setAtenaRenban(item.getAtenaRenban());
+        item.setTitle(item.getTitle());
+        item.setTsuchibun1(item.getTsuchibun1());
+        item.setShinseiKubun(item.getShinseiKubun());
+        item.setHihokenshaNo1(item.getHihokenshaNo1());
+        item.setHihokenshaNo2(item.getHihokenshaNo2());
+        item.setHihokenshaNo3(item.getHihokenshaNo3());
+        item.setHihokenshaNo4(item.getHihokenshaNo4());
+        item.setHihokenshaNo5(item.getHihokenshaNo5());
+        item.setHihokenshaNo6(item.getHihokenshaNo6());
+        item.setHihokenshaNo7(item.getHihokenshaNo7());
+        item.setHihokenshaNo8(item.getHihokenshaNo8());
+        item.setHihokenshaNo9(item.getHihokenshaNo9());
+        item.setHihokenshaNo10(item.getHihokenshaNo10());
+        item.setHokenshaNo1(item.getHokenshaNo1());
+        item.setHokenshaNo2(item.getHokenshaNo2());
+        item.setHokenshaNo3(item.getHokenshaNo3());
+        item.setHokenshaNo4(item.getHokenshaNo4());
+        item.setHokenshaNo5(item.getHokenshaNo5());
+        item.setHokenshaNo6(item.getHokenshaNo6());
+        item.setHihokenshaNameKana(item.getHihokenshaNameKana());
+        item.setSeibetsu(item.getSeibetsu());
+        item.setHihokenshaName(item.getHihokenshaName());
+        item.setBirthGengo(item.getBirthGengo());
+        item.setBirthYMD(item.getBirthYMD());
+        item.setYubinNo(item.getYubinNo());
+        item.setJusho(item.getJusho());
+        item.setShinseiYMD(item.getShinseiYMD());
+        item.setTeishutsuKigen(item.getTeishutsuKigen());
+        item.setTsuchibun2(item.getTsuchibun2());
+        item.setRemban(item.getRemban());
+        item.setShoriName(item.getShoriName());
         return item;
     }
 }

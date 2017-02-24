@@ -40,10 +40,6 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     private final FlexibleDate 調査依頼日;
     private final int pageCount;
     private static final int 一桁 = 1;
-    private static final RString 星アイコン = new RString("＊");
-    private static final RString 明 = new RString("明");
-    private static final RString 大 = new RString("大");
-    private static final RString 昭 = new RString("昭");
     private static final int 宛名連番桁数 = 8;
 
     /**
@@ -237,35 +233,14 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     }
 
     private void edit性別(NinteiChosaTokusokujoReportSource source) {
-        RString tempP_性別男 = RString.EMPTY;
-        RString tempP_性別女 = RString.EMPTY;
-        RString seibetsuVal = entity.getSeibetsu().getColumnValue();
-        if (Seibetsu.男.getコード().toString().equals(seibetsuVal.toString())) {
-            tempP_性別女 = 星アイコン;
-        } else {
-            tempP_性別男 = 星アイコン;
+        if (entity.getSeibetsu() != null && !RString.isNullOrEmpty(entity.getSeibetsu().getColumnValue().trim())) {
+            source.seibetsu = Seibetsu.toValue(entity.getSeibetsu().getColumnValue()).get名称();
         }
-
-        source.seibetsuMan = tempP_性別男;
-        source.seibetsuWoman = tempP_性別女;
     }
 
     private void edti誕生日(NinteiChosaTokusokujoReportSource source) {
-        RString tempP_誕生日明治 = 星アイコン;
-        RString tempP_誕生日大正 = 星アイコン;
-        RString tempP_誕生日昭和 = 星アイコン;
-        RString year = entity.getSeinengappiYMD().getYear().wareki().getYear().substring(0, 1);
-        if (year.startsWith(明)) {
-            tempP_誕生日明治 = RString.EMPTY;
-        } else if (year.startsWith(大)) {
-            tempP_誕生日大正 = RString.EMPTY;
-        } else if (year.startsWith(昭)) {
-            tempP_誕生日昭和 = RString.EMPTY;
-        }
-
-        source.birthGengoMeiji = tempP_誕生日明治;
-        source.birthGengoTaisho = tempP_誕生日大正;
-        source.birthGengoShowa = tempP_誕生日昭和;
+        source.birthGengo = entity.getSeinengappiYMD() == null
+                ? RString.EMPTY : entity.getSeinengappiYMD().wareki().eraType(EraType.KANJI).getEra();
         source.birthYMD = entity.getSeinengappiYMD() == null ? RString.EMPTY : entity.getSeinengappiYMD().
                 wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(2);

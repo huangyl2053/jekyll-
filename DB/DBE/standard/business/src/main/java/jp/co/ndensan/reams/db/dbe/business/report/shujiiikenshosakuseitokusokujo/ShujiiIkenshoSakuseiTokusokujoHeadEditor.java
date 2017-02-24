@@ -114,11 +114,8 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         }
         source.tsuchibun2 = headitem.getTsuchibun2();
         source.remban = headitem.getRemban();
-        source.seibetsuMan = headitem.getSeyibenMan();
-        source.seibetsuWoman = headitem.getSeyibenWoman();
-        source.birthGengoMeiji = headitem.getBirthGengoMeiji();
-        source.birthGengoTaisho = headitem.getBirthGengoTaisho();
-        source.birthGengoShowa = headitem.getBirthGengoShowa();
+        source.seibetsu = headitem.getSeyiben();
+        source.birthGengo = headitem.getBirthGengo();
         source.shoriName = headitem.getShoriName();
         return source;
     }

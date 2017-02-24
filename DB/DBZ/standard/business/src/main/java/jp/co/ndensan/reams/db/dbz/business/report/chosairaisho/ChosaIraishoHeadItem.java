@@ -47,13 +47,10 @@ public class ChosaIraishoHeadItem {
     private final RString hihokenshaNo9;
     private final RString hihokenshaNo10;
     private final RString hihokenshaNameKana;
-    private final RString birthGengoMeiji;
-    private final RString birthGengoTaisho;
-    private final RString birthGengoShowa;
+    private final RString birthGengo;
     private final RString birthYMD;
     private final RString hihokenshaName;
-    private final RString seibetsuMan;
-    private final RString seibetsuWoman;
+    private final RString seibetsu;
     private final RString yubinNo;
     private final RString jusho;
     private final RString telNo;
@@ -98,13 +95,10 @@ public class ChosaIraishoHeadItem {
      * @param hihokenshaNo9 被保険者番号9
      * @param hihokenshaNo10 被保険者番号10
      * @param hihokenshaNameKana 被保険者氏名フリガナ
-     * @param birthGengoMeiji 誕生日明治
-     * @param birthGengoTaisho 誕生日大正
-     * @param birthGengoShowa 誕生日昭和
+     * @param birthGengo
+     * @param seibetsu
      * @param birthYMD 誕生日
      * @param hihokenshaName 被保険者氏名
-     * @param seibetsuMan 性別男
-     * @param seibetsuWoman 性別女
      * @param yubinNo 被保険者住所(郵便番号)
      * @param jusho 被保険者住所
      * @param telNo 被保険者電話番号
@@ -147,13 +141,10 @@ public class ChosaIraishoHeadItem {
             RString hihokenshaNo9,
             RString hihokenshaNo10,
             RString hihokenshaNameKana,
-            RString birthGengoMeiji,
-            RString birthGengoTaisho,
-            RString birthGengoShowa,
+            RString birthGengo,
             RString birthYMD,
             RString hihokenshaName,
-            RString seibetsuMan,
-            RString seibetsuWoman,
+            RString seibetsu,
             RString yubinNo,
             RString jusho,
             RString telNo,
@@ -194,13 +185,10 @@ public class ChosaIraishoHeadItem {
         this.hihokenshaNo9 = hihokenshaNo9;
         this.hihokenshaNo10 = hihokenshaNo10;
         this.hihokenshaNameKana = hihokenshaNameKana;
-        this.birthGengoMeiji = birthGengoMeiji;
-        this.birthGengoTaisho = birthGengoTaisho;
-        this.birthGengoShowa = birthGengoShowa;
+        this.birthGengo = birthGengo;
         this.birthYMD = birthYMD;
         this.hihokenshaName = hihokenshaName;
-        this.seibetsuMan = seibetsuMan;
-        this.seibetsuWoman = seibetsuWoman;
+        this.seibetsu = seibetsu;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.telNo = telNo;

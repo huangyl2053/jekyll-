@@ -246,9 +246,10 @@ public class NinteiChosaIraiShudouHandler {
             div.getTxtKigenymd().setReadOnly(true);
         }
     }
-    
+
     /**
      * 該当の申請書管理番号に対する結果データ存在有無を返す。
+     *
      * @return True:結果データ有り False:結果データなし
      */
     public boolean 結果データ有無() {
@@ -416,13 +417,10 @@ public class NinteiChosaIraiShudouHandler {
                 被保険者番号リスト.get(INDEX_8),
                 被保険者番号リスト.get(INDEX_9),
                 business.get被保険者氏名カナ(),
-                誕生日明治,
-                誕生日大正,
-                誕生日昭和,
+                RString.EMPTY,
                 business.get生年月日(),
                 business.get被保険者氏名(),
-                性別男,
-                性別女,
+                RString.EMPTY,
                 RString.isNullOrEmpty(business.get郵便番号()) ? RString.EMPTY : new YubinNo(business.get郵便番号()).getEditedYubinNo(),
                 business.get住所(),
                 business.get電話番号(),

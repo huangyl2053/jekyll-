@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
 
-
 /**
  * 介護保険指定医依頼兼主治医意見書提出依頼書Editorです。
  *
@@ -62,12 +61,9 @@ class ShujiiIkenshoTeishutsuIraishoEditor implements IShujiiIkenshoTeishutsuIrai
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.seibetsuMan = item.getSeibetsuMan();
-        source.seibetsuWoman = item.getSeibetsuWoman();
+        source.seibetsu = item.getSeibetsu();
         source.hihokenshaName = item.getHihokenshaName();
-        source.birthGengoMeiji = item.getBirthGengoMeiji();
-        source.birthGengoTaisho = item.getBirthGengoTaisho();
-        source.birthGengoShowa = item.getBirthGengoShowa();
+        source.birthGengo = item.getBirthGengo();
         source.birthYMD = item.getBirthYMD();
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();

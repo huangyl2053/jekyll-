@@ -50,12 +50,9 @@ public class ShujiiIkenshoTeishutsuIraishoItem {
     private RString hihokenshaNo9;
     private RString hihokenshaNo10;
     private RString hihokenshaNameKana;
-    private RString seibetsuMan;
-    private RString seibetsuWoman;
+    private RString seibetsu;
     private RString hihokenshaName;
-    private RString birthGengoMeiji;
-    private RString birthGengoTaisho;
-    private RString birthGengoShowa;
+    private RString birthGengo;
     private RString birthYMD;
     private RString yubinNo;
     private RString jusho;

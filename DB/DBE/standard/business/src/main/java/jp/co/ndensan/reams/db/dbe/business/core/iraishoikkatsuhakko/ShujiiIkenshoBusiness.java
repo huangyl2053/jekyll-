@@ -535,12 +535,10 @@ public class ShujiiIkenshoBusiness {
         }
         item.setHihokenshaNameKana(entity.get被保険者氏名カナ());
         item.setHihokenshaName(entity.get被保険者氏名());
-        item.setSeibetsuMan(Seibetsu.男.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
-        item.setSeibetsuWoman(Seibetsu.女.getコード().equals(entity.get性別()) ? RString.EMPTY : 記号_星);
-        RString 年号 = new FlexibleDate(entity.get生年月日()).wareki().eraType(EraType.KANJI).toDateString();
-        item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
-        item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
-        item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
+        item.setSeibetsu(entity.get性別() != null && !RString.isNullOrEmpty(entity.get性別().trim())
+                ? Seibetsu.toValue(entity.get性別()).get名称() : RString.EMPTY);
+        item.setBirthGengo(!RString.isNullOrEmpty(entity.get生年月日())
+                ? new FlexibleDate(entity.get生年月日()).wareki().eraType(EraType.KANJI).getEra() : RString.EMPTY);
         item.setBirthYMD(get和暦(entity.get生年月日(), false));
         item.setYubinNo(getYubinNo(entity.get郵便番号()));
         item.setJusho(entity.get住所());

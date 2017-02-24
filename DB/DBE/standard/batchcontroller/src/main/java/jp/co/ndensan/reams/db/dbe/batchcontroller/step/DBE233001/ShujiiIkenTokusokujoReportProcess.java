@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -73,10 +74,6 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private ShujiiIkenTokusokujoHakkoReportProcessParameter processPrm;
     ShujiiIkenshoSakuseiTokusokujoItem bodyItem;
 
-    private static final RString 星アイコン = new RString("＊");
-    private static final RString 明 = new RString("明");
-    private static final RString 大 = new RString("大");
-    private static final RString 昭 = new RString("昭");
     private boolean is認定広域 = false;
     private static final int 一桁 = 1;
     private NinshoshaSource ninshoshaSource;
@@ -161,28 +158,13 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     }
 
     private ShujiiIkenshoSakuseiTokusokujoItem setBodyItem(ShujiiIkenTokusokujoRelateEntity entity) {
-
-        RString tempP_性別男 = RString.EMPTY;
-        RString tempP_性別女 = RString.EMPTY;
-        RString seibetsuVal = entity.getTemp_性別コード().getColumnValue();
-        if (Seibetsu.男.getコード().toString().equals(seibetsuVal.toString())) {
-            tempP_性別女 = 星アイコン;
-        } else {
-            tempP_性別男 = 星アイコン;
+        RString tempP_性別 = RString.EMPTY;
+        if (entity.getTemp_性別コード() != null && !RString.isNullOrEmpty(entity.getTemp_性別コード().getColumnValue().trim())) {
+            tempP_性別 = Seibetsu.toValue(entity.getTemp_性別コード().getColumnValue()).get名称();
         }
-        RString tempP_誕生日明治 = RString.EMPTY;
-        RString tempP_誕生日大正 = RString.EMPTY;
-        RString tempP_誕生日昭和 = RString.EMPTY;
-        RString year = entity.getTemp_生年月日().getYear().wareki().getYear();
-        if (year.startsWith(明)) {
-            tempP_誕生日大正 = 星アイコン;
-            tempP_誕生日昭和 = 星アイコン;
-        } else if (year.startsWith(大)) {
-            tempP_誕生日明治 = 星アイコン;
-            tempP_誕生日昭和 = 星アイコン;
-        } else if (year.startsWith(昭)) {
-            tempP_誕生日明治 = 星アイコン;
-            tempP_誕生日大正 = 星アイコン;
+        RString tempP_誕生日元号 = RString.EMPTY;
+        if (entity.getTemp_生年月日() != null) {
+            tempP_誕生日元号 = entity.getTemp_生年月日().wareki().eraType(EraType.KANJI).getEra();
         }
         YubinNo yubinNo = entity.getTemp_事業者郵便番号();
         RString 宛名郵便番号 = RString.EMPTY;
@@ -248,11 +230,8 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
                 entity.getTemp_生年月日() == null ? null : new RDate(entity.getTemp_生年月日().toString()),
                 new RString("1"),
-                tempP_性別男,
-                tempP_性別女,
-                tempP_誕生日明治,
-                tempP_誕生日大正,
-                tempP_誕生日昭和,
+                tempP_性別,
+                tempP_誕生日元号,
                 entity.getTemp_処理名());
     }
 
