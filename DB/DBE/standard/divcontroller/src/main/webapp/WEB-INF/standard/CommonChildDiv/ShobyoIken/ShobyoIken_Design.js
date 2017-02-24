@@ -107,10 +107,6 @@ var DBE;
                 return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
             };
 
-            Controls.prototype.ccdCodeInputGeninShikkan = function () {
-                return new URZ.CodeInput.ModeController(this.convFiledName("ccdCodeInputGeninShikkan"));
-            };
-
             Controls.prototype.radIsShutaruGeninShikkan = function () {
                 return new UZA.RadioButton(this.convFiledName("radIsShutaruGeninShikkan"));
             };

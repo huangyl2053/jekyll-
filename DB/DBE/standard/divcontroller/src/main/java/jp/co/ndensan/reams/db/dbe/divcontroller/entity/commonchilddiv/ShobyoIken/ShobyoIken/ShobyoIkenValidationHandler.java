@@ -60,16 +60,28 @@ public class ShobyoIkenValidationHandler {
                     codeflg = true;
                 }
             }
+        } else {
+            codeflg = true;
         }
         if (!codeflg) {
-            validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.validation));
+            validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.nothingValidation));
+        }
+        List<dgGenyin_Row> rowlist = div.getGeninShikkanPanel().getDgGenyin().getDataSource();
+        if (追加.equals(div.getGeninShikkanPanel().getGeninShikkanShosai().getJotai())) {
+            for (dgGenyin_Row row : rowlist) {
+                if (row.getGeninShikkanCode().getValue().equals(div.getGeninShikkanPanel().getGeninShikkanShosai()
+                        .getCcdCodeInputGeninShikkan().getCode().getColumnValue())) {
+                    validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.addValidation));
+                }
+            }
         }
         return validationMessage;
     }
 
     private static enum IdocheckMessages implements IValidationMessage {
 
-        validation(UrErrorMessages.存在しない, "原因疾患コード");
+        nothingValidation(UrErrorMessages.存在しない, "原因疾患コード"),
+        addValidation(UrErrorMessages.既に登録済, "原因疾患コード");
 
         private final Message message;
 
