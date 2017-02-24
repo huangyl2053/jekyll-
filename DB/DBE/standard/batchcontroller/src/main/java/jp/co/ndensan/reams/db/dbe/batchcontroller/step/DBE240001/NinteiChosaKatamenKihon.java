@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
-import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -65,12 +64,12 @@ public class NinteiChosaKatamenKihon extends BatchProcessBase<HomonChosaIraishoR
     protected void createWriter() {
         if (ReportIdDBZ.DBE221012.getReportId().equals(帳票)) {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value())
-                    .addBreak(new BreakerCatalog<ChosahyoGaikyochosaReportSource>().new SimpleLayoutBreaker(
+                    .addBreak(new BreakerCatalog<ChosahyoKihonchosaKatamenReportSource>().new SimpleLayoutBreaker(
                         new RString("layoutIndex")) {
             @Override
-                        public ReportLineRecord<ChosahyoGaikyochosaReportSource> occuredBreak(
-                                ReportLineRecord<ChosahyoGaikyochosaReportSource> currentRecord,
-                                ReportLineRecord<ChosahyoGaikyochosaReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+                        public ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> occuredBreak(
+                                ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> currentRecord,
+                                ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> nextRecord, ReportDynamicChart dynamicChart) {
                                     int layout = currentRecord.getSource().layoutIndex;
                                     currentRecord.setFormGroupIndex(layout);
                                     if (nextRecord != null && nextRecord.getSource() != null) {
