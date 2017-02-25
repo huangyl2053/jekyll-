@@ -92,6 +92,8 @@ public final class NinteiChosaDataOutputMybitisParameter implements IMyBatisPara
             is認定調査員コード = true;
         }
         if (RString.isNullOrEmpty(市町村コード) || ALL_SHICHOSON_KEY.equals(市町村コード)) {
+            is全市町村 = false;
+        } else {
             is全市町村 = true;
         }
         return new NinteiChosaDataOutputMybitisParameter(認定調査委託先コード,
