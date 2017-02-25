@@ -96,6 +96,7 @@ public class KanryoShoriShinsaUketsukeHandler {
         List<ShinSaKeTuKeBusiness> リスト = 審査受付.records();
         int totalCount = 審査受付.totalCount();
         put審査受付List(リスト);
+        int CompleteCount = 0;
         for (ShinSaKeTuKeBusiness value : リスト) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(value.get保険者() == null ? RString.EMPTY : value.get保険者());
@@ -110,12 +111,13 @@ public class KanryoShoriShinsaUketsukeHandler {
             row.setJusho(value.get住所() == null ? RString.EMPTY : value.get住所().value());
             row.setTelNo(value.get電話番号() == null ? RString.EMPTY : value.get電話番号().value());
             row.setShoKisaiHokenshaNo(value.get証記載保険者番号() == null ? RString.EMPTY : value.get証記載保険者番号().getColumnValue());
+            CompleteCount++;
             rows.add(row);
         }
         div.getDgNinteiTaskList().setDataSource(rows);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(totalCount);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtMaxCount().getValue().intValue());
-        div.getTxtCompleteCount().setValue(new Decimal(totalCount));
+        div.getTxtCompleteCount().setValue(new Decimal(CompleteCount));
     }
 
     private SearchResult<ShinSaKeTuKeBusiness> get審査受付List() {
