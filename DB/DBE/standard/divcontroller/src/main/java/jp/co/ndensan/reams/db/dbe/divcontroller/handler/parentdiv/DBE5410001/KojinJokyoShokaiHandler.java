@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfokihon.ChosaKekkaInfoKihonParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kojinjokyoshokai.KojinJokyoShokaiParameter;
@@ -112,9 +113,10 @@ public class KojinJokyoShokaiHandler {
         div.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainCode().setValue(kojinJokyoShokaiList.get(0).get認定調査員コード());
         div.getChosaItakusakiAndChosainGuide().getTxtNinteiChosainName().setValue(kojinJokyoShokaiList.get(0).get調査員氏名());
         div.getChosaItakusakiAndChosainGuide().getTxtChosaIraiDate().setValue(kojinJokyoShokaiList.get(0).get認定調査依頼年月日());
-        if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue())) {
-            div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(
-                    TorisageKubunCode.toValue(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue()).get名称());
+        if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue())
+                && !TorisageKubun.認定申請有効.get取下げ区分コード().equals(kojinJokyoShokaiList.get(0).get取下区分コード())) {
+                    div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(
+                        TorisageKubunCode.toValue(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue()).get名称());
         } else {
             div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(RString.EMPTY);
         }

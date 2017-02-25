@@ -290,6 +290,7 @@
         <result property="johoTorokuKanryoYMD" column="ninteiShinseiJohoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jusho"  column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get更新対象" resultMap="resultMap_KoShiTaisyoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
@@ -2180,7 +2181,8 @@
         DbT5101."jusho",
         DbT5101."telNo",
         DbT7051."shichosonMeisho",
-        DbT5105."ninteiShinseiJohoTorokuKanryoYMD"
+        DbT5105."ninteiShinseiJohoTorokuKanryoYMD",
+        DbT5101."shoKisaiHokenshaNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051

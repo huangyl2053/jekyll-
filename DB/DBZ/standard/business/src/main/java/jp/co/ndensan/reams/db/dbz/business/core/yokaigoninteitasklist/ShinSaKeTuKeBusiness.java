@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * タスク一覧共有画面を管理するクラスです。
@@ -138,5 +139,14 @@ public class ShinSaKeTuKeBusiness {
      */
     public FlexibleDate get認定申請情報登録完了年月日() {
         return entity.getJohoTorokuKanryoYMD();
+    }
+    
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
     }
 }

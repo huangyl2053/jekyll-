@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KanryoShoriShinsaUketsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -107,11 +107,6 @@ public class KanryoShoriShinsaUketsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensya() {
-        return this.getNinteiShinseiJohoTorokuKanryo().getCcdHokensya();
-    }
-
-    @JsonIgnore
     public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
         return this.getNinteiShinseiJohoTorokuKanryo().getDgNinteiTaskList();
     }
@@ -129,6 +124,11 @@ public class KanryoShoriShinsaUketsukeDiv extends Panel {
     @JsonIgnore
     public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getNinteiShinseiJohoTorokuKanryo().setTxtMaxCount(txtMaxCount);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokensya() {
+        return this.getNinteiShinseiJohoTorokuKanryo().getCcdHokensya();
     }
 
     @JsonIgnore

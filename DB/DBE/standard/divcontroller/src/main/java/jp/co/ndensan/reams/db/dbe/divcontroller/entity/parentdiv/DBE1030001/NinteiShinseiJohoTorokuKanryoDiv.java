@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,12 +25,12 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
      */
     @JsonProperty("txtCompleteCount")
     private TextBoxNum txtCompleteCount;
-    @JsonProperty("ccdHokensya")
-    private HokenshaListDiv ccdHokensya;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
     @JsonProperty("txtMaxCount")
     private TextBoxNum txtMaxCount;
+    @JsonProperty("ccdHokensya")
+    private HokenshaListDiv ccdHokensya;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,15 +54,6 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
     @JsonProperty("txtCompleteCount")
     public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.txtCompleteCount = txtCompleteCount;
-    }
-
-    /*
-     * getccdHokensya
-     * @return ccdHokensya
-     */
-    @JsonProperty("ccdHokensya")
-    public IHokenshaListDiv getCcdHokensya() {
-        return ccdHokensya;
     }
 
     /*
@@ -99,6 +90,15 @@ public class NinteiShinseiJohoTorokuKanryoDiv extends Panel {
     @JsonProperty("txtMaxCount")
     public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.txtMaxCount = txtMaxCount;
+    }
+
+    /*
+     * getccdHokensya
+     * @return ccdHokensya
+     */
+    @JsonProperty("ccdHokensya")
+    public IHokenshaListDiv getCcdHokensya() {
+        return ccdHokensya;
     }
 
     // </editor-fold>

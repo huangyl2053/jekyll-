@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,4 +38,5 @@ public class ShinSaKeTuKeRelateEntity {
     private Code shoriJotaiKubun;
     private RString shichosonMeisho;
     private FlexibleDate johoTorokuKanryoYMD;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 }

@@ -96,7 +96,6 @@ public class KanryoShoriShinsaUketsukeHandler {
         List<ShinSaKeTuKeBusiness> リスト = 審査受付.records();
         int totalCount = 審査受付.totalCount();
         put審査受付List(リスト);
-//        List<PersonalData> personalData = new ArrayList<>();
         for (ShinSaKeTuKeBusiness value : リスト) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setHokensha(value.get保険者() == null ? RString.EMPTY : value.get保険者());
@@ -108,12 +107,11 @@ public class KanryoShoriShinsaUketsukeHandler {
             row.setShinseiKubunShinseiji(value.get認定申請区分_申請時コード() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(value.get認定申請区分_申請時コード().getKey()).get名称());
             row.setShinseishoKanriNo(value.get申請書管理番号() == null ? RString.EMPTY : value.get申請書管理番号().value());
-//            personalData.add(createPersonalData(row.getShinseishoKanriNo()));
             row.setJusho(value.get住所() == null ? RString.EMPTY : value.get住所().value());
             row.setTelNo(value.get電話番号() == null ? RString.EMPTY : value.get電話番号().value());
+            row.setShoKisaiHokenshaNo(value.get証記載保険者番号() == null ? RString.EMPTY : value.get証記載保険者番号().getColumnValue());
             rows.add(row);
         }
-//        AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgNinteiTaskList().setDataSource(rows);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(totalCount);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(div.getTxtMaxCount().getValue().intValue());
@@ -145,9 +143,4 @@ public class KanryoShoriShinsaUketsukeHandler {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         }
     }
-
-//    private PersonalData createPersonalData(RString 申請書管理番号) {
-//        return PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-//                new RString("申請書管理番号"), 申請書管理番号));
-//    }
 }
