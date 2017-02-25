@@ -123,7 +123,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
         RString 市町村コード = div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().toString().isEmpty()
-                ? RString.EMPTY : div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().code市町村RString();
+                ? RString.EMPTY : div.getSearchConditionPanel().getCcdHokensha().getSelectedItem().get市町村コード().value();
         List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(市町村コード,
