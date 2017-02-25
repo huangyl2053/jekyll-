@@ -31,6 +31,7 @@ public class KojinJokyoShokaiRelateEntity {
     private FlexibleDate ninteiShinsakaiWariateYoteiYMD;
     private FlexibleDate ninteiShinsakaiYoteiYMD;
     private FlexibleDate centerSoshinYoteiYMD;
+    private FlexibleDate ninteiShinseiJohoTorokuKanryoYMD;
     private FlexibleDate ninteichosaIraiKanryoYMD;
     private FlexibleDate ninteichosaKanryoYMD;
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;

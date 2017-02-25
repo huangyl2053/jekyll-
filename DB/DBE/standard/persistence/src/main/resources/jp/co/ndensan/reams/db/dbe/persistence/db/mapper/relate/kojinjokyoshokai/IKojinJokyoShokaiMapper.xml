@@ -12,6 +12,7 @@
         <result property="ninteiShinsakaiWariateYoteiYMD" column="DbT5123Nintei_ninteiShinsakaiWariateYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteiShinsakaiYoteiYMD" column="DbT5123Nintei_ninteiShinsakaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="centerSoshinYoteiYMD" column="DbT5123Nintei_centerSoshinYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinseiJohoTorokuKanryoYMD" column="DbT5105Nintei_ninteiShinseiJohoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaIraiKanryoYMD" column="DbT5105Nintei_ninteichosaIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ninteichosaKanryoYMD" column="DbT5105Nintei_ninteichosaKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ikenshoSakuseiIraiKanryoYMD" column="DbT5105Nintei_ikenshoSakuseiIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -188,6 +189,7 @@
               , DbT5105Nintei."ninteiShinsakaiWariateKanryoYMD" AS "DbT5105Nintei_ninteiShinsakaiWariateKanryoYMD"
               , DbT5105Nintei."ninteiShinsakaiKanryoYMD" AS "DbT5105Nintei_ninteiShinsakaiKanryoYMD"
               , DbT5105Nintei."centerSoshinYMD" AS "DbT5105Nintei_centerSoshinYMD"
+              , DbT5105Nintei."ninteiShinseiJohoTorokuKanryoYMD" AS "DbT5105Nintei_ninteiShinseiJohoTorokuKanryoYMD"
               , DbT5101Nintei."shoKisaiHokenshaNo" AS "DbT5101Nintei_shoKisaiHokenshaNo"
               , DbT5101Nintei."shichosonCode" AS "DbT5101Nintei_shichosonCode"
               , DbT5101Nintei."hihokenshaNo" AS "DbT5101Nintei_hihokenshaNo"
