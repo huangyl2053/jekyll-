@@ -27,6 +27,7 @@
         <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="合議体番号" column="gogitaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <!--判定結果一覧クエリ部品-->
     <sql id="HanteiKekkaIchiranList">
@@ -108,9 +109,9 @@
         ,A.shichosonMeisho AS shichosonMeisho
         ,A.hihokenshaNo AS hihokenshaNo
         ,A.hihokenshaName AS hihokenshaName
-        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+        ,A.tb_ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+        ,A.tb_ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+        ,A.tb_nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
         ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
         ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
         ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
@@ -120,6 +121,7 @@
         ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
         ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
         ,A.shinsakaiIken AS shinsakaiIken
+        ,A.gogitaiNo AS gogitaiNo
         FROM
         <include refid="HanteiKekkaIchiranList" />
         ORDER BY
@@ -262,16 +264,16 @@
         ,A.hihokenshaKubunCode AS hihokenshaKubunCode
         ,A.ninteiShinseiShinseijiKubunCode AS ninteiShinseiShinseijiKubunCode
         ,A.ninteiShinseiHoreiKubunCode AS ninteiShinseiHoreiKubunCode
-        ,A.ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
-        ,A.ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
-        ,A.nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
+        ,A.tb_ichijiHanteiKekkaCode AS tb_ichijiHanteiKekkaCode
+        ,A.tb_ichijiHanteiKekkaNinchishoKasanCode AS tb_ichijiHanteiKekkaNinchishoKasanCode
+        ,A.tb_nijiHanteiYokaigoJotaiKubunCode AS tb_nijiHanteiYokaigoJotaiKubunCode
         ,A.ichijiHanteiKekkaCode AS ichijiHanteiKekkaCode
         ,A.ichijiHanteiKekkaNinchishoKasanCode AS ichijiHanteiKekkaNinchishoKasanCode
         ,A.nijiHanteiYokaigoJotaiKubunCode AS nijiHanteiYokaigoJotaiKubunCode
         ,A.yokaigoJotaizoReiCode AS yokaigoJotaizoReiCode
-        ,A.nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
-        ,A.nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
-        ,A.nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
+        ,A.tb_nijiHanteiNinteiYukoKaishiYMD AS tb_nijiHanteiNinteiYukoKaishiYMD
+        ,A.tb_nijiHanteiNinteiYukoShuryoYMD AS tb_nijiHanteiNinteiYukoShuryoYMD
+        ,A.tb_nijiHanteiNinteiYukoKikan AS tb_nijiHanteiNinteiYukoKikan
         ,A.nijiHanteiNinteiYukoKaishiYMD AS nijiHanteiNinteiYukoKaishiYMD
         ,A.nijiHanteiNinteiYukoShuryoYMD AS nijiHanteiNinteiYukoShuryoYMD
         ,A.nijiHanteiNinteiYukoKikan AS nijiHanteiNinteiYukoKikan

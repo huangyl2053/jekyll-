@@ -52,7 +52,8 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
     private HanteiKekkaIchiranA3ReportSource editSource(HanteiKekkaIchiranA3ReportSource source) {
         source.title = entity.getTitle();
         source.gogitaiNo = new RString(String.valueOf(entity.get合議体番号()));
-        source.taishoHokenshaName = entity.get市町村名称();
+        source.shinsakaiKaisaiNo = entity.get審査会開催番号();
+        source.taishoHokenshaName = entity.get出力対象();
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(entity.getPrintTimeStamp().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
@@ -70,39 +71,40 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         頁数.append(entity.get総頁());
         source.pageCount1 = 頁数.toRString();
         source.listHanteikekka_1 = new RString(String.valueOf(entity.get項番()));
-        source.listHanteikekka_2 = entity.get市町村名称();
-        source.listHanteikekka_3 = entity.get証記載保険者番号();
-        source.listHanteikekka_4 = entity.get被保険者氏名();
-        source.listHanteikekka_5 = entity.get被保険者番号();
-        source.listHanteikekka_6 = entity.get生年月日() == null
+        source.listHanteikekka_2 = new RString(entity.get介護認定審査会審査順());
+        source.listHanteikekka_3 = entity.get市町村名称();
+        source.listHanteikekka_4 = entity.get証記載保険者番号();
+        source.listHanteikekka_5 = entity.get被保険者氏名();
+        source.listHanteikekka_6 = entity.get被保険者番号();
+        source.listHanteikekka_7 = entity.get生年月日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get生年月日()));
-        source.listHanteikekka_7 = Seibetsu.toValue(entity.get性別()).get名称();
-        source.listHanteikekka_8 = entity.get認定申請日() == null
+        source.listHanteikekka_8 = Seibetsu.toValue(entity.get性別()).get名称();
+        source.listHanteikekka_9 = entity.get認定申請日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get認定申請日()));
-        source.listHanteikekka_9 = entity.get二次判定年月日() == null
+        source.listHanteikekka_10 = entity.get二次判定年月日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get二次判定年月日()));
-        source.listHanteikekka_10 = entity.get被保険者区分();
-        source.listHanteikekka_11 = entity.get認定申請区分_申請時();
-        source.listHanteikekka_12 = entity.get認定申請区分_法令();
-        source.listHanteikekka_13 = entity.getTb_一次判定結果();
-        source.listHanteikekka_14 = entity.getTb_二次判定要介護状態区分();
-        source.listHanteikekka_15 = entity.get一次判定結果();
-        source.listHanteikekka_16 = entity.get二次判定要介護状態区分();
-        source.listHanteikekka_17 = entity.get要介護状態像例コード();
-        source.listHanteikekka_18 = entity.get状態像内容();
-        source.listHanteikekka_19 = entity.getTb_二次判定認定有効開始日() == null
+        source.listHanteikekka_11 = entity.get被保険者区分();
+        source.listHanteikekka_12 = entity.get認定申請区分_申請時();
+        source.listHanteikekka_13 = entity.get認定申請区分_法令();
+        source.listHanteikekka_14 = entity.getTb_一次判定結果();
+        source.listHanteikekka_15 = entity.getTb_二次判定要介護状態区分();
+        source.listHanteikekka_16 = entity.get一次判定結果();
+        source.listHanteikekka_17 = entity.get二次判定要介護状態区分();
+        source.listHanteikekka_18 = entity.get要介護状態像例コード();
+        source.listHanteikekka_19 = entity.get状態像内容();
+        source.listHanteikekka_20 = entity.getTb_二次判定認定有効開始日() == null || entity.getTb_二次判定認定有効開始日().isEmpty()
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getTb_二次判定認定有効開始日()));
-        source.listHanteikekka_20 = entity.getTb_二次判定認定有効終了日() == null
+        source.listHanteikekka_21 = entity.getTb_二次判定認定有効終了日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getTb_二次判定認定有効終了日()));
-        source.listHanteikekka_21 = new RString(entity.getTb_二次判定認定有効期間());
-        source.listHanteikekka_22 = entity.get二次判定認定有効開始年月日() == null
+        source.listHanteikekka_22 = new RString(entity.getTb_二次判定認定有効期間());
+        source.listHanteikekka_23 = entity.get二次判定認定有効開始年月日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get二次判定認定有効開始年月日()));
-        source.listHanteikekka_23 = entity.get二次判定認定有効終了年月日() == null
+        source.listHanteikekka_24 = entity.get二次判定認定有効終了年月日() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.get二次判定認定有効終了年月日()));
-        source.listHanteikekka_24 = new RString(entity.get二次判定認定有効期間());
-        source.listHanteikekka_25 = entity.get二号特定疾病コード();
-        source.listHanteikekka_26 = entity.get二号特定疾病内容();
-        source.listHanteikekka_27 = entity.get介護認定審査会意見();
+        source.listHanteikekka_25 = new RString(entity.get二次判定認定有効期間());
+        source.listHanteikekka_26 = entity.get二号特定疾病コード();
+        source.listHanteikekka_27 = entity.get二号特定疾病内容();
+        source.listHanteikekka_28 = entity.get介護認定審査会意見();
         return source;
     }
 

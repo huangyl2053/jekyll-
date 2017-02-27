@@ -52,6 +52,7 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
+        printTimeStamp.append(new RString("　"));
         printTimeStamp.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RStringBuilder nendoBuilder = new RStringBuilder();
         nendoBuilder.append(審査会情報.getShinsakaiKaisaiYMD().getNendo().

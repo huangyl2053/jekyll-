@@ -94,7 +94,7 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
         HanteikekkaKagamiEntity hanteikekkaKagamiEntity = new HanteikekkaKagamiEntity();
         hanteikekkaKagamiEntity.setPrintTimeStamp(システム時刻);
         hanteikekkaKagamiEntity.setShinsakaiKaisaiYMD(entity.getShinsakaiKaisaiYMD());
-        hanteikekkaKagamiEntity.setGogitaiNo(entity.getGogitaiNo());
+        hanteikekkaKagamiEntity.setShinsakaiKaisaiNo(processParameter.getKaisaiBangou());
         hanteikekkaKagamiEntity.setNinshoshaSource(ReportUtil.get認証者情報(
                 SubGyomuCode.DBE認定支援, ID,
                 new FlexibleDate(システム時刻.getDate().toDateString()),

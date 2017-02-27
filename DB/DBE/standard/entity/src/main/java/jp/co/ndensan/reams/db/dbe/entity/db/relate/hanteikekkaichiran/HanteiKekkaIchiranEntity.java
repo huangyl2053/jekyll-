@@ -48,4 +48,6 @@ public class HanteiKekkaIchiranEntity {
     private RString 二号特定疾病コード;
     private RString 二号特定疾病内容;
     private RString 介護認定審査会意見;
+    private RString 合議体番号;
+    private RString 審査会開催番号;
 }

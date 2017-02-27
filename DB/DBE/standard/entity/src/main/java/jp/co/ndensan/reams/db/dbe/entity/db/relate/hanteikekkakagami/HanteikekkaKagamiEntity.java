@@ -26,7 +26,7 @@ public class HanteikekkaKagamiEntity {
     private RDateTime printTimeStamp;
     private NinshoshaSource ninshoshaSource;
     private FlexibleDate shinsakaiKaisaiYMD;
-    private int gogitaiNo;
+    private RString shinsakaiKaisaiNo;
     private RString tsuchibun1;
     private RString tsuchibun2;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;

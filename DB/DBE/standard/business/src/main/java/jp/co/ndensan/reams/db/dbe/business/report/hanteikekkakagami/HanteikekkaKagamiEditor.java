@@ -50,7 +50,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
                     .fillType(FillType.BLANK).toDateString();
             source.shimeiText = ZanteiAtenaText.toValue(item.getShoKisaiHokenshaNo().value()).首長宛名文字列;
             source.meishoFuyo = 名称付与;
-            source.gogitaiNo = new RString(item.getGogitaiNo());
+            source.shinsakaiKaisaiNo = item.getShinsakaiKaisaiNo();
             source.tsuchibun1 = item.getTsuchibun1();
             source.tsuchibun2 = item.getTsuchibun2();
         }

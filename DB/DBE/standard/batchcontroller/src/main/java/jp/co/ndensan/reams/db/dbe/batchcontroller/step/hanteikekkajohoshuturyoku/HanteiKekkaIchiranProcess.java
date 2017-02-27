@@ -74,6 +74,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         List<RString> 処理状態区分 = new ArrayList<>();
         処理状態区分.add(ShoriJotaiKubun.通常.getコード());
         処理状態区分.add(ShoriJotaiKubun.延期.getコード());
+        processParameter.setShoriJotaiKubun(処理状態区分);
         ShichosonSecurityJoho shichosonSecurityJoho
                 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, processParameter.getUserId());
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
@@ -84,7 +85,6 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
             processParameter.setShoKisaiHokenshaNo(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
             出力対象 = shichosonSecurityJoho.get市町村情報().get市町村名称();
         }
-        processParameter.setShoriJotaiKubun(処理状態区分);
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toHanteiKekkaJohoShuturyokuMybatisParameter());
     }
 
@@ -120,6 +120,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         }
         entity.set総頁(総ページ数);
         entity.setNo(index);
+        entity.set審査会開催番号(processParameter.getKaisaiBangou());
         if (entity.get認定申請区分_申請時() != null && !entity.get認定申請区分_申請時().isEmpty()) {
             entity.set認定申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時()).get略称());
         } else {

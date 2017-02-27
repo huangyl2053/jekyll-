@@ -87,7 +87,11 @@ public class KekkatsuchiIchiranhyoProcess extends BatchKeyBreakBase<KekkatsuchiI
         builder.append("回");
         entity.setShinsakaiNo(builder.toRString());
         entity.setPrintTimeStamp(システム時刻);
-        entity.setSeibetsu(Seibetsu.toValue(entity.getSeibetsu()).get名称());
+        if (entity.getSeibetsu() != null && !RString.isNullOrEmpty(entity.getSeibetsu().trim())) {
+            entity.setSeibetsu(Seibetsu.toValue(entity.getSeibetsu()).get名称());
+        } else {
+            entity.setSeibetsu(RString.EMPTY);
+        }
         if (!entity.getNijiHanteiKekka().isEmpty()) {
             entity.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(entity.getNijiHanteiKekka()).get名称());
         } else {

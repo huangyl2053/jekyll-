@@ -55,4 +55,6 @@ public class HanteiKekkaIchiranA3Entity {
     private int 当前頁;
     private int 総頁;
     private int 項番;
+    private RString 出力対象;
+    private RString 審査会開催番号;
 }

@@ -20,13 +20,13 @@ public class KekkatsuchiIchiranhyoReportSource implements IReportSource {
     public RString title;
     @ReportItem(name = "shichosonName", length = 20, order = 2)
     public RString shichosonName;
-    @ReportItem(name = "shinsakaiNo", length = 4, order = 3)
+    @ReportItem(name = "shinsakaiNo", length = 10, order = 3)
     public RString shinsakaiNo;
     @ReportItem(name = "shinsakaiKaisaiYMD", length = 9, order = 4)
     public RString shinsakaiKaisaiYMD;
     @ReportItem(name = "printTimeStamp", length = 34, order = 5)
     public RString printTimeStamp;
-    @ReportItem(name = "listKekkatsuchitaisho_1", length = 2, order = 6)
+    @ReportItem(name = "listKekkatsuchitaisho_1", length = 3, order = 6)
     public RString listKekkatsuchitaisho_1;
     @ReportItem(name = "listKekkatsuchitaisho_2", length = 7, order = 7)
     public RString listKekkatsuchitaisho_2;
@@ -48,6 +48,12 @@ public class KekkatsuchiIchiranhyoReportSource implements IReportSource {
     public RString listKekkatsuchitaisho_10;
     @ReportItem(name = "listKekkatsuchitaisho_11", length = 19, order = 16)
     public RString listKekkatsuchitaisho_11;
+    @ReportItem(name = "gokeiLabel", length = 3, order = 17)
+    public RString gokeiLabel;
+    @ReportItem(name = "gokei", length = 3, order = 18)
+    public RString gokei;
+    @ReportItem(name = "kenLabel", length = 1, order = 19)
+    public RString kenLabel;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

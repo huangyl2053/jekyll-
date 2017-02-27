@@ -96,6 +96,15 @@ public class KekkatsuchiIchiranhyoEditorImpl implements IKekkatsuchiIchiranhyoEd
         builder.append(entity.getNinteiYukoshurouYMD() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getNinteiYukoshurouYMD())));
         source.listKekkatsuchitaisho_11 = builder.toRString();
+        RStringBuilder rsbGokeiLabel = new RStringBuilder();
+        rsbGokeiLabel.append(new RString("合計："));
+        source.gokeiLabel = new RString(rsbGokeiLabel.toString());
+        RStringBuilder rsbGokei = new RStringBuilder();
+        rsbGokei.append(new RString(index));
+        source.gokei = new RString(rsbGokei.toString());
+        RStringBuilder rsbkenLabel = new RStringBuilder();
+        rsbkenLabel.append(new RString("件"));
+        source.kenLabel = new RString(rsbkenLabel.toString());
         return source;
     }
 

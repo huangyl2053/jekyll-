@@ -43,13 +43,14 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString());
+        hakkoYMD.append(new RString("　"));
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         source.title = item.getTitle();
-        source.pageCount1 = new RStringBuilder(new RString("「"))
-                .append(new RString(item.get当前頁()))
+        source.gogitaiNo = item.get合議体番号();
+        source.shinsakaiKaisaiNo = item.get審査会開催番号();
+        source.pageCount1 = new RStringBuilder(new RString(item.get当前頁()))
                 .append(new RString("／"))
                 .append(new RString(item.get総頁()))
-                .append(new RString("」"))
                 .toRString();
         source.taishoHokenshaName = item.get出力対象();
         source.hakkoYMD = hakkoYMD.toRString();
@@ -78,16 +79,21 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         RStringBuilder tempTokuteishippei_1 = new RStringBuilder(String.valueOf(item.get二次判定認定有効期間()));
         tempTokuteishippei_1
                 .append("ヵ月");
-        RStringBuilder tempTokuteishippei_2 = new RStringBuilder(new RDate(item.get二次判定認定有効開始年月日().toString()).wareki()
-                .eraType(EraType.KANJI_RYAKU).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).
-                fillType(FillType.BLANK).toDateString());
-        tempTokuteishippei_2.append("～")
-                .append(new RDate(item.get二次判定認定有効終了年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
-                        firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.PERIOD).
-                        fillType(FillType.BLANK).toDateString());
+        RStringBuilder tempTokuteishippei_2 = new RStringBuilder();
+        if (item.get二次判定認定有効開始年月日() != null && !item.get二次判定認定有効開始年月日().isEmpty()
+                && item.get二次判定認定有効終了年月日() != null && !item.get二次判定認定有効終了年月日().isEmpty()) {
+            tempTokuteishippei_2 = new RStringBuilder(new RDate(item.get二次判定認定有効開始年月日().toString()).wareki()
+                    .eraType(EraType.KANJI_RYAKU).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).
+                    fillType(FillType.BLANK).toDateString());
+            tempTokuteishippei_2.append("～")
+                    .append(new RDate(item.get二次判定認定有効終了年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
+                            firstYear(FirstYear.GAN_NEN).
+                            separator(Separator.PERIOD).
+                            fillType(FillType.BLANK).toDateString());
+        }
+
         source.listYukokikan_1 = tempTokuteishippei_1.toRString();
         source.listYukokikan_2 = item.get二号特定疾病コード();
         source.listTokuteishippei_1 = tempTokuteishippei_2.toRString();
