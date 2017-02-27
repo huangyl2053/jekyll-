@@ -420,6 +420,9 @@ public class JimuTuikaSiryoBusiness {
         }
         RString 一次判定結果_認知症加算 = get一次判定結果_認知症加算(厚労省IF識別コード, 認知症加算コード);
         if (!RString.isNullOrEmpty(一次判定結果) && !RString.isNullOrEmpty(一次判定結果_認知症加算)) {
+            if (一次判定結果.equals(一次判定結果_認知症加算)) {
+                return builder.append(一次判定結果).toRString();
+            }
             return builder.append(一次判定結果)
                     .append("→")
                     .append(一次判定結果_認知症加算).toRString();

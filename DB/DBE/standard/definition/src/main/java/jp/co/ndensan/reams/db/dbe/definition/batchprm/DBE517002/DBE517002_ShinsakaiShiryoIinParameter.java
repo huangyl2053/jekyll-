@@ -42,6 +42,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
     private static final String SAKUSEIJOKEN = "sakuseiJoken";
     private static final String BANGOSTART = "bangoStart";
     private static final String BANGOEND = "bangoEnd";
+    private static final String CHOHYOIIN_KUMIAWASEFLAG = "chohyoIin_kumiawaseFlag";
     private static final String CHOHYOIIN_TUUTISHOFALG = "chohyoIin_tuutishoFalg";
     private static final String CHOHYOIIN_TOKKIJIKOUFALG = "chohyoIin_tokkiJikouFalg";
     private static final String CHOHYOIIN_ITIZIHANTEIFALG = "chohyoIin_itiziHanteiFalg";
@@ -76,6 +77,8 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
     private int bangoStart;
     @BatchParameter(key = BANGOEND, name = "終了資料番号")
     private int bangoEnd;
+    @BatchParameter(key = CHOHYOIIN_KUMIAWASEFLAG, name = "委員用審査会資料組み合わせフラグ")
+    private RString chohyoIin_kumiawaseFlag;
     @BatchParameter(key = CHOHYOIIN_TAISHOUSHAFALG, name = "委員用審査会対象者一覧フラグ")
     private RString chohyoIin_taishoushaFalg;
     @BatchParameter(key = CHOHYOIIN_TOKKIJIKOUFALG, name = "委員用特記事項フラグ")
@@ -117,6 +120,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param sakuseiJoken 作成条件
      * @param bangoStart 開始資料番号
      * @param bangoEnd 終了資料番号
+     * @param chohyoIin_kumiawaseFlag 委員用審査会資料組み合わせフラグ
      * @param chohyoIin_taishoushaFalg 委員用審査会対象者一覧フラグ
      * @param chohyoIin_tuutishoFalg 委員_審査会開催通知書フラグ
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
@@ -139,6 +143,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString sakuseiJoken,
             int bangoStart,
             int bangoEnd,
+            RString chohyoIin_kumiawaseFlag,
             RString chohyoIin_taishoushaFalg,
             RString chohyoIin_tokkiJikouFalg,
             RString chohyoIin_itiziHanteiFalg,
@@ -160,6 +165,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 sakuseiJoken,
                 bangoStart,
                 bangoEnd,
+                chohyoIin_kumiawaseFlag,
                 chohyoIin_taishoushaFalg,
                 chohyoIin_tokkiJikouFalg,
                 chohyoIin_itiziHanteiFalg,
@@ -186,6 +192,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param sakuseiJoken 作成条件
      * @param bangoStart 開始資料番号
      * @param bangoEnd 終了資料番号
+     * @param chohyoIin_kumiawaseFlag 委員用審査会資料組み合わせフラグ
      * @param chohyoIin_taishoushaFalg 委員用審査会対象者一覧フラグ
      * @param chohyoIin_tuutishoFalg 委員_審査会開催通知書フラグ
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
@@ -209,6 +216,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString sakuseiJoken,
             int bangoStart,
             int bangoEnd,
+            RString chohyoIin_kumiawaseFlag,
             RString chohyoIin_taishoushaFalg,
             RString chohyoIin_tokkiJikouFalg,
             RString chohyoIin_itiziHanteiFalg,
@@ -231,6 +239,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 sakuseiJoken,
                 bangoStart,
                 bangoEnd,
+                chohyoIin_kumiawaseFlag,
                 chohyoIin_taishoushaFalg,
                 chohyoIin_tokkiJikouFalg,
                 chohyoIin_itiziHanteiFalg,
@@ -258,6 +267,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param sakuseiJoken 作成条件
      * @param bangoStart 開始資料番号
      * @param bangoEnd 終了資料番号
+     * @param chohyoIin_kumiawaseFlag 委員用審査会資料組み合わせフラグ
      * @param chohyoIin_taishoushaFalg 委員用審査会対象者一覧フラグ
      * @param chohyoIin_tuutishoFalg 委員_審査会開催通知書フラグ
      * @param chohyoIin_tokkiJikouFalg 委員_特記事項フラグ
@@ -282,6 +292,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString sakuseiJoken,
             int bangoStart,
             int bangoEnd,
+            RString chohyoIin_kumiawaseFlag,
             RString chohyoIin_taishoushaFalg,
             RString chohyoIin_tokkiJikouFalg,
             RString chohyoIin_itiziHanteiFalg,
@@ -304,6 +315,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
         this.sakuseiJoken = sakuseiJoken;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
+        this.chohyoIin_kumiawaseFlag = chohyoIin_kumiawaseFlag;
         this.chohyoIin_taishoushaFalg = chohyoIin_taishoushaFalg;
         this.chohyoIin_tokkiJikouFalg = chohyoIin_tokkiJikouFalg;
         this.chohyoIin_itiziHanteiFalg = chohyoIin_itiziHanteiFalg;
@@ -385,7 +397,10 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @return ShinsakaiShiryoUpdateProcessParameter
      */
     public ShinsakaiShiryoUpdateProcessParameter toShinsakaiShiryoUpdateProcessParameter() {
-        return new ShinsakaiShiryoUpdateProcessParameter(shinsakaiKaisaiNo);
+        return new ShinsakaiShiryoUpdateProcessParameter(shinsakaiKaisaiNo,
+        sakuseiJoken,
+        bangoStart,
+        bangoEnd);
     }
 
     /**

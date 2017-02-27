@@ -73,34 +73,32 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
         if (選択.equals(getParameter().getChoyoJimu_gaikyouTokkiIranFalg())) {
             executeStep(事務局_概況特記一覧表);
         }
-        if ((選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
-                && 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
-                && 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
-                && 選択.equals(getParameter().getChoyoJimu_ikenshoFalg())
-                && 選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg()))
-                || (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
-                && 選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())
-                && 選択.equals(getParameter().getChoyoJimu_ikenshoFalg())
-                && 選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg()))) {
+        if (選択.equals(getParameter().getChoyoJimu_kumiawaseFlag())) {
             if (選択.equals(getParameter().getShuturyokuSutairu())) {
                 executeStep(審査会資料組み合わせ一覧A4版);
             } else {
                 executeStep(審査会資料組み合わせ一覧A3版);
             }
         } else {
-            if (選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())) {
-                executeStep(事務局_特記事項_一次判定結果);
-            }
             if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
                 executeStep(事務局_審査対象者一覧);
-            }
-            if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
-                executeStep(事務局_一次判定結果);
             }
             if (選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())) {
                 executeStep(事務局_特記事項);
             }
+            if (選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())) {
+                executeStep(事務局_一次判定結果);
+            }
+            if (選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())) {
+                executeStep(事務局_特記事項_一次判定結果);
+            }
             主治医意見書Flow();
+            if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
+                executeStep(事務局_その他資料);
+            }
+//        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+//            executeStep(事務局_追加資料鑑);
+//        }
         }
         putFlowResult(new RString("出力帳票一覧"), 出力帳票一覧);
 
@@ -113,12 +111,6 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
             } else {
                 executeStep(事務局_主治医意見書_A3);
             }
-        }
-        if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
-            executeStep(事務局_その他資料);
-        }
-        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-            executeStep(事務局_追加資料鑑);
         }
     }
 

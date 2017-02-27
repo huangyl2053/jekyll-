@@ -23,6 +23,10 @@ import org.junit.Test;
 public class IShiryoShinsakaiIinMapperTest extends DbeTestDacBase {
 
     private static final RString 審査会開催番号 = new RString("20160150");
+    private static final int 審査順開始 = 1;
+    private static final int 審査順終了 = 3;
+    private static final boolean is作成条件範囲 = false;
+    private static final boolean is作成条件追加 = false;
     
     @BatchWriter
     BatchPermanentTableWriter<DbT5502ShinsakaiWariateJohoEntity> DbT5502TableWriter;
@@ -39,7 +43,7 @@ public class IShiryoShinsakaiIinMapperTest extends DbeTestDacBase {
     public void getSelectByKey_DbT5502ShinsakaiWariateJoho() {
         DbT5502TableWriter = new BatchPermanentTableWriter(DbT5502ShinsakaiWariateJohoEntity.class);
         IShiryoShinsakaiIinMapper sut = this.sqlSession.getMapper(IShiryoShinsakaiIinMapper.class);
-        ShinsakaiShiryoUpdateMyBatisParameter param = new ShinsakaiShiryoUpdateMyBatisParameter(審査会開催番号);
+        ShinsakaiShiryoUpdateMyBatisParameter param = new ShinsakaiShiryoUpdateMyBatisParameter(審査会開催番号, 審査順開始, 審査順終了, is作成条件範囲, is作成条件追加);
         List<DbT5502ShinsakaiWariateJohoEntity> entities = sut.getSelectByKey_DbT5502ShinsakaiWariateJoho(param);
         System.out.println(entities.isEmpty());
         System.out.println(entities.size());

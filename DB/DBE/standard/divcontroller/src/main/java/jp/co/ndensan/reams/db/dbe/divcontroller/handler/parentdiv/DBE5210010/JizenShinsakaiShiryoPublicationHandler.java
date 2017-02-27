@@ -11,8 +11,14 @@ import jp.co.ndensan.reams.db.dbe.business.core.jizenshinsakaishiryopublication.
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526002.DBE526002_JIzenShinsakekkaTorokuSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210010.JizenShinsakaiShiryoPublicationDiv;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -126,7 +132,18 @@ public class JizenShinsakaiShiryoPublicationHandler {
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票chk);
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
                 .setSelectedItemsByKey(印刷審査会資料chk);
-        div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+        ShichosonSecurityJohoFinder 市町村セキュリティFinder = ShichosonSecurityJohoFinder.createInstance();
+        ShichosonSecurityJoho 市町村セキュリティ情報 = 市町村セキュリティFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
+            if (DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getCode())) {
+                div.getPublishingCondition().getCcdBunshoNoInput().initialize(new ReportId(ReportIdDBE.DBE515001.getReportId().value().concat("_")
+                        .concat(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))));
+            } else {
+                div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+            }
+        } else {
+            div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+        }
     }
 
     /**
@@ -255,6 +272,11 @@ public class JizenShinsakaiShiryoPublicationHandler {
             batchParameter.setTuutiFlag(すべて選択_印刷一次判定_A4_両面_1);
         } else {
             batchParameter.setTuutiFlag(印刷帳票_特記事項_0);
+        }
+        if (div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin().isAllSelected()) {
+            batchParameter.setKumiawaseFlag(すべて選択_印刷一次判定_A4_両面_1);
+        } else {
+            batchParameter.setKumiawaseFlag(印刷帳票_特記事項_0);
         }
         if (印刷審査会資料.contains(印刷帳票_特記事項_0)) {
             batchParameter.setTokkiJikouFlag(すべて選択_印刷一次判定_A4_両面_1);

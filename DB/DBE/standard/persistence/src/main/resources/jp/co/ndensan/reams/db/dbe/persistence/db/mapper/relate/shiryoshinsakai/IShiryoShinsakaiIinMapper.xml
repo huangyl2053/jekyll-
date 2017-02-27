@@ -862,6 +862,13 @@
           rgdb."DbT5502ShinsakaiWariateJoho" AS "DbT5502ShinsakaiWariateJoho"
         WHERE
           "DbT5502ShinsakaiWariateJoho"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> "DbT5502ShinsakaiWariateJoho"."shinsakaiOrder"
+            AND "DbT5502ShinsakaiWariateJoho"."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTsuika">
+            AND "DbT5502ShinsakaiWariateJoho"."shinsakaiShiryoSakuseiYMD" IS NULL
+        </if>
     </select>
 
     <resultMap id="Result_ShinsakaiIinCode" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinCodeEntity" autoMapping="true">

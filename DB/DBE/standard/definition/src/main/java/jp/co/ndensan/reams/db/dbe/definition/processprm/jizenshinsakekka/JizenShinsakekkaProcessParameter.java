@@ -36,6 +36,7 @@ public class JizenShinsakekkaProcessParameter implements IBatchProcessParameter 
     private final RString kaishisiyoBangou;
     private final RString shuryosiyoBangou;
     private final RString iinyoFusuu;
+    private final RString kumiawaseFlag;
     private final RString tuutiFlag;
     private final RString tokkiJikouFlag;
     private final RString itiHenteiKekkaFlag;
@@ -59,6 +60,7 @@ public class JizenShinsakekkaProcessParameter implements IBatchProcessParameter 
      * @param kaishisiyoBangou 開始資料番号
      * @param shuryosiyoBangou 終了資料番号
      * @param iinyoFusuu 審査会委員用部数
+     * @param kumiawaseFlag 審査会資料組み合わせフラグ
      * @param tuutiFlag 審査会開催通知書フラグ
      * @param tokkiJikouFlag 特記事項フラグ
      * @param itiHenteiKekkaFlag 一次判定結果票フラグ
@@ -79,6 +81,7 @@ public class JizenShinsakekkaProcessParameter implements IBatchProcessParameter 
             RString kaishisiyoBangou,
             RString shuryosiyoBangou,
             RString iinyoFusuu,
+            RString kumiawaseFlag,
             RString tuutiFlag,
             RString tokkiJikouFlag,
             RString itiHenteiKekkaFlag,
@@ -98,6 +101,7 @@ public class JizenShinsakekkaProcessParameter implements IBatchProcessParameter 
         this.kaishisiyoBangou = kaishisiyoBangou;
         this.shuryosiyoBangou = shuryosiyoBangou;
         this.iinyoFusuu = iinyoFusuu;
+        this.kumiawaseFlag = kumiawaseFlag;
         this.tuutiFlag = tuutiFlag;
         this.tokkiJikouFlag = tokkiJikouFlag;
         this.itiHenteiKekkaFlag = itiHenteiKekkaFlag;

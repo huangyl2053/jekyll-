@@ -19,15 +19,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsakaiShiryoUpdateProcessParameter implements IBatchProcessParameter {
 
+    private final RString 作成条件_範囲指定 = new RString("範囲指定");
+    private final RString 作成条件_追加分 = new RString("追加分");
     private RString shinsakaiKaisaiNo;
+    private RString sakuseiJoken;
+    private int bangoStart;
+    private int bangoEnd;
 
     /**
      * コンストラクタです。
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
+     * @param sakuseiJoken 作成条件（すべて・範囲・追加）
+     * @param bangoStart int
+     * @param bangoEnd int
      */
-    public ShinsakaiShiryoUpdateProcessParameter(RString shinsakaiKaisaiNo) {
+    public ShinsakaiShiryoUpdateProcessParameter(RString shinsakaiKaisaiNo, RString sakuseiJoken, int bangoStart, int bangoEnd) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
+        this.sakuseiJoken = sakuseiJoken;
+        this.bangoStart = bangoStart;
+        this.bangoEnd = bangoEnd;
     }
 
     /**
@@ -36,6 +47,14 @@ public class ShinsakaiShiryoUpdateProcessParameter implements IBatchProcessParam
      * @return ShinsakaiShiryoUpadateMyBatisParameter
      */
     public ShinsakaiShiryoUpdateMyBatisParameter toShinsakaiShiryoUpdateMyBatisParameter() {
-        return new ShinsakaiShiryoUpdateMyBatisParameter(shinsakaiKaisaiNo);
+        boolean isSakuseiJokenHani = false;
+        boolean isSakuseiJokenTsuika = false;
+        if (作成条件_範囲指定.equals(sakuseiJoken)) {
+            isSakuseiJokenHani = true;
+        }
+        if (作成条件_追加分.equals(sakuseiJoken)) {
+            isSakuseiJokenTsuika = true;
+        }
+        return new ShinsakaiShiryoUpdateMyBatisParameter(shinsakaiKaisaiNo, bangoStart, bangoEnd, isSakuseiJokenHani, isSakuseiJokenTsuika);
     }
 }

@@ -39,6 +39,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     private static final String KAISHISIYOBANGOU = "kaishisiyoBangou";
     private static final String SHURYOSIYOBANGOU = "shuryosiyoBangou";
     private static final String IINYOFUSUU = "iinyoFusuu";
+    private static final String KUMIAWASEFLAG = "kumiawaseFlag";
     private static final String TUUTIFLAG = "tuutiFlag";
     private static final String TOKKIJIKOUFLAG = "tokkiJikouFlag";
     private static final String ITIHENTEIKEKKAFLAG = "itiHenteiKekkaFlag";
@@ -73,6 +74,8 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     private RString shuryosiyoBangou;
     @BatchParameter(key = IINYOFUSUU, name = "審査会委員用部数")
     private RString iinyoFusuu;
+    @BatchParameter(key = KUMIAWASEFLAG, name = "審査会資料組み合わせフラグ")
+    private RString kumiawaseFlag;
     @BatchParameter(key = TUUTIFLAG, name = "審査会開催通知書フラグ")
     private RString tuutiFlag;
     @BatchParameter(key = TOKKIJIKOUFLAG, name = "特記事項フラグ")
@@ -112,6 +115,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
      * @param kaishisiyoBangou 開始資料番号
      * @param shuryosiyoBangou 終了資料番号
      * @param iinyoFusuu 審査会委員用部数
+     * @param kumiawaseFlag 審査会資料組み合わせフラグ
      * @param tuutiFlag 審査会開催通知書フラグ
      * @param tokkiJikouFlag 特記事項フラグ
      * @param itiHenteiKekkaFlag 一次判定結果票フラグ
@@ -133,6 +137,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
             RString kaishisiyoBangou,
             RString shuryosiyoBangou,
             RString iinyoFusuu,
+            RString kumiawaseFlag,
             RString tuutiFlag,
             RString tokkiJikouFlag,
             RString itiHenteiKekkaFlag,
@@ -153,6 +158,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
         this.kaishisiyoBangou = kaishisiyoBangou;
         this.shuryosiyoBangou = shuryosiyoBangou;
         this.iinyoFusuu = iinyoFusuu;
+        this.kumiawaseFlag = kumiawaseFlag;
         this.tuutiFlag = tuutiFlag;
         this.tokkiJikouFlag = tokkiJikouFlag;
         this.itiHenteiKekkaFlag = itiHenteiKekkaFlag;
@@ -181,6 +187,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 kaishisiyoBangou,
                 shuryosiyoBangou,
                 iinyoFusuu,
+                kumiawaseFlag,
                 tuutiFlag,
                 tokkiJikouFlag,
                 itiHenteiKekkaFlag,
@@ -213,6 +220,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 sakuseiJyoken,
                 bangoStart,
                 bangoEnd,
+                kumiawaseFlag,
                 RString.EMPTY,
                 tokkiJikouFlag,
                 itiHenteiKekkaFlag,

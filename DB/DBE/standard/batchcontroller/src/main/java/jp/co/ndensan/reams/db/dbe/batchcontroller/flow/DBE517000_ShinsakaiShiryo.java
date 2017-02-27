@@ -134,7 +134,8 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     }
 
     private boolean isOutputShinsakaiIinShinsakaiShiryo() {
-        if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())
+        if (選択.equals(getParameter().getChohyoIin_kumiawaseFlag())
+                || 選択.equals(getParameter().getChohyoIin_taishoushaFalg())
                 || 選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())
                 || 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
                 || 選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
@@ -148,7 +149,8 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     }
 
     private boolean isOutputJimukyokuinShinsakaiShiryo() {
-        if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
+        if (選択.equals(getParameter().getChoyoJimu_kumiawaseFlag())
+                || 選択.equals(getParameter().getChoyoJimu_taishoushaFalg())
                 || 選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())
                 || 選択.equals(getParameter().getChoyoJimu_itiziHanteiFalg())
                 || 選択.equals(getParameter().getChoyoJimu_tokkiJikouHanteiFalg())

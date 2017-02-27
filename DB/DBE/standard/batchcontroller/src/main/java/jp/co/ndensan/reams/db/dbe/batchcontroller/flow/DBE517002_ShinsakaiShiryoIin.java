@@ -60,24 +60,13 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
         if (選択.equals(getParameter().getChohyoIin_hanteiFalg())) {
             executeStep(委員_予備判定一覧);
         }
-        if ((選択.equals(getParameter().getChohyoIin_taishoushaFalg())
-                && 選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())
-                && 選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())
-                && 選択.equals(getParameter().getChohyoIin_ikenshoFalg())
-                && 選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg()))
-                || (選択.equals(getParameter().getChohyoIin_taishoushaFalg())
-                && 選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())
-                && 選択.equals(getParameter().getChohyoIin_ikenshoFalg())
-                && 選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg()))) {
+        if (選択.equals(getParameter().getChohyoIin_kumiawaseFlag())) {
             if (選択.equals(getParameter().getShuturyokuSutairu())) {
                 executeStep(審査会資料組み合わせ一覧A4版);
             } else {
                 executeStep(審査会資料組み合わせ一覧A3版);
             }
         } else {
-            if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
-                executeStep(委員_特記事項_一次判定結果);
-            }
             if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())) {
                 executeStep(委員_審査対象者一覧);
             }
@@ -87,13 +76,16 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
             if (選択.equals(getParameter().getChohyoIin_itiziHanteiFalg())) {
                 executeStep(委員_一次判定結果);
             }
+            if (選択.equals(getParameter().getChohyoIin_tokkiJikouHanteiFalg())) {
+                executeStep(委員_特記事項_一次判定結果);
+            }
+            主治医意見書Flow();
             if (選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())) {
                 executeStep(委員_その他資料);
             }
-            主治医意見書Flow();
-            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-                executeStep(委員_追加資料鑑);
-            }
+//            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+//                executeStep(委員_追加資料鑑);
+//            }
         }
         putFlowResult(new RString("出力帳票一覧"), 出力帳票一覧);
     }
