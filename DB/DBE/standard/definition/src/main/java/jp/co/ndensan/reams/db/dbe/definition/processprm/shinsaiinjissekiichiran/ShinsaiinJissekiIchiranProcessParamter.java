@@ -26,6 +26,7 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
     private final FlexibleDate 審査会実施日FROM;
     private final FlexibleDate 審査会実施日TO;
     private final List<ShinsaiinJissekiIchiranKey> keyJoho;
+    private final boolean batchFlag;
 
     /**
      * コンストラクタです。
@@ -34,15 +35,18 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
      * @param 審査会実施日FROM 審査会実施日FROM
      * @param 審査会実施日TO 審査会実施日TO
      * @param keyJoho キー情報Entityリスト
+     * @param batchFlag
      */
     public ShinsaiinJissekiIchiranProcessParamter(RString 帳票出力区分,
             FlexibleDate 審査会実施日FROM,
             FlexibleDate 審査会実施日TO,
-            List<ShinsaiinJissekiIchiranKey> keyJoho) {
+            List<ShinsaiinJissekiIchiranKey> keyJoho,
+            boolean batchFlag) {
         this.帳票出力区分 = 帳票出力区分;
         this.審査会実施日FROM = 審査会実施日FROM;
         this.審査会実施日TO = 審査会実施日TO;
         this.keyJoho = keyJoho;
+        this.batchFlag = batchFlag;
     }
 
     /**
@@ -51,7 +55,7 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
      * @return 介護認定審査会委員報酬集計表のデータ取得パラメータ
      */
     public ShinsaiinJissekiIchiranMybitisParamter toMybitisParameter() {
-        return ShinsaiinJissekiIchiranMybitisParamter.createParamter(true,
+        return ShinsaiinJissekiIchiranMybitisParamter.createParamter(batchFlag,
                 審査会実施日FROM,
                 審査会実施日TO,
                 keyJoho);

@@ -20,7 +20,6 @@ import lombok.Setter;
 public class ShinsaiinJissekiIchiranKey {
 
     private RString shinsakaiIinCode;
-    private RString shinsakaiIinHoshuKubun;
+    private RString shinsakaiKaisaiNo;
     private RString shinsakaiKaisaiYMD;
-    private int remban;
 }

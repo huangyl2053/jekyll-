@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.ShinsakaiIinHoshukubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
@@ -94,15 +93,15 @@ public class DBE601003_ShinsakaiiinJissekiTest extends DbeTestDacBase {
             List<ShinsaiinJissekiIchiranKey> keyJoho = new ArrayList<>();
             ShinsaiinJissekiIchiranKey key = new ShinsaiinJissekiIchiranKey();
             key.setShinsakaiIinCode(new RString("00000001"));
-            key.setShinsakaiIinHoshuKubun(ShinsakaiIinHoshukubun.審査報酬.getコード());
+            key.setShinsakaiKaisaiNo(new RString("00001"));
             key.setShinsakaiKaisaiYMD(new RString("20110315"));
-            key.setRemban(1);
             keyJoho.add(key);
 
             parameter.setKeyJoho(keyJoho);
             parameter.setShinsakaijisshibiFrom(FlexibleDate.EMPTY);
             parameter.setShinsakaijisshibiTo(FlexibleDate.EMPTY);
             parameter.setSyohyoSyuturyoku(new RString("2"));
+            parameter.setBatchFlag(true);
 
             return parameter;
         }

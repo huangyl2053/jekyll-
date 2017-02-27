@@ -21,15 +21,21 @@ public class ShinsaiinJissekiIchiranRelateEntity {
 
     private RString コード;
     private RString 氏名;
-    private RString 報酬区分;
-    private RString 所属機関;
+    private RString 議長区分コード;
+    private RString 審査員資格コード;
+    private boolean 出欠;
+    private RString 医療機関コード;
+    private RString 医療機関名称;
+    private RString 調査委託先コード;
+    private RString 調査委託先名称;
+    private RString その他機関コード;
+    private RString その他機関名称;
+    private RString 審査会地区コード;
     private RString 審査会地区;
     private RString 審査会番号;
     private RString 実施日;
     private RString 開始;
     private RString 終了;
-    private RString 審査員種別;
-    private boolean 出欠;
-    private RString 実施年月日;
-    private int 連番;
+    private RString 単価_委員;
+    private RString 単価_医師;
 }

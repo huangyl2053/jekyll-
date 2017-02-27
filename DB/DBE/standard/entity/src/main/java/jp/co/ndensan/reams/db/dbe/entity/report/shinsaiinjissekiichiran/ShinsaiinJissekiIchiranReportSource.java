@@ -24,18 +24,24 @@ public class ShinsaiinJissekiIchiranReportSource implements IReportSource {
     public RString listShinsainJissekiIchiran_3;
     @ReportItem(name = "listShinsainJissekiIchiran_4", length = 2, order = 6)
     public RString listShinsainJissekiIchiran_4;
-    @ReportItem(name = "listShinsainJissekiIchiran_5", length = 30, order = 7)
+    @ReportItem(name = "listShinsainJissekiIchiran_5", length = 8, order = 7)
     public RString listShinsainJissekiIchiran_5;
     @ReportItem(name = "listShinsainJissekiIchiran_6", length = 20, order = 8)
     public RString listShinsainJissekiIchiran_6;
-    @ReportItem(name = "listShinsainJissekiIchiran_7", length = 8, order = 9)
+    @ReportItem(name = "listShinsainJissekiIchiran_7", length = 15, order = 9)
     public RString listShinsainJissekiIchiran_7;
-    @ReportItem(name = "listShinsainJissekiIchiran_8", length = 11, order = 10)
+    @ReportItem(name = "listShinsainJissekiIchiran_8", length = 10, order = 10)
     public RString listShinsainJissekiIchiran_8;
-    @ReportItem(name = "listShinsainJissekiIchiran_9", length = 5, order = 11)
+    @ReportItem(name = "listShinsainJissekiIchiran_9", length = 10, order = 11)
     public RString listShinsainJissekiIchiran_9;
-    @ReportItem(name = "listShinsainJissekiIchiran_10", length = 5, order = 12)
+    @ReportItem(name = "listShinsainJissekiIchiran_10", length = 10, order = 12)
     public RString listShinsainJissekiIchiran_10; 
+    @ReportItem(name = "listShinsainJissekiIchiran_11", length = 5, order = 13)
+    public RString listShinsainJissekiIchiran_11;
+    @ReportItem(name = "listShinsainJissekiIchiran_12", length = 5, order = 14)
+    public RString listShinsainJissekiIchiran_12;
+    @ReportItem(name = "listShinsainJissekiIchiran_13", length = 10, order = 15)
+    public RString listShinsainJissekiIchiran_13; 
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

@@ -30,6 +30,7 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
     private static final String SHINSAKAI_JISSHIBI_TO = "shinsakaijisshibiTo";
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8362309102168284770L;
+    private static final String BATCH_FLAG = "batchFlag";
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
@@ -39,6 +40,8 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
     private FlexibleDate shinsakaijisshibiTo;
     @BatchParameter(key = KEY_JOHO, name = "キー情報Entityリスト")
     private List<ShinsaiinJissekiIchiranKey> keyJoho;
+    @BatchParameter(key = BATCH_FLAG, name = "バッチフラグ")
+    private boolean batchFlag;
 
     /**
      * コンストラクタです。
@@ -53,15 +56,18 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
      * @param shinsakaijisshibiFrom 審査会開催日FROM
      * @param shinsakaijisshibiTo 審査会開催日TO
      * @param keyJoho キー情報Entityリスト
+     * @param batchFlag
      */
     public DBE601003_ShinsakaiiinJissekiParameter(RString syohyoSyuturyoku,
             FlexibleDate shinsakaijisshibiFrom,
             FlexibleDate shinsakaijisshibiTo,
-            List<ShinsaiinJissekiIchiranKey> keyJoho) {
+            List<ShinsaiinJissekiIchiranKey> keyJoho,
+            boolean batchFlag) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.shinsakaijisshibiFrom = shinsakaijisshibiFrom;
         this.shinsakaijisshibiTo = shinsakaijisshibiTo;
         this.keyJoho = keyJoho;
+        this.batchFlag = batchFlag;
     }
 
     /**
@@ -73,7 +79,8 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
         return new ShinsaiinJissekiIchiranProcessParamter(syohyoSyuturyoku,
                 shinsakaijisshibiFrom,
                 shinsakaijisshibiTo,
-                keyJoho);
+                keyJoho,
+                batchFlag);
     }
 
 }

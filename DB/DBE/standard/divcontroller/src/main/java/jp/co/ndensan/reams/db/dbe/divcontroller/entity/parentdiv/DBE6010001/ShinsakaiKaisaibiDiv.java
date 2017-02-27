@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaibiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class ShinsakaiKaisaibiDiv extends Panel {
      */
     @JsonProperty("txtShinsakaiKaisaibi")
     private TextBoxDateRange txtShinsakaiKaisaibi;
+    @JsonProperty("radShutsuryokuHoho")
+    private RadioButton radShutsuryokuHoho;
     @JsonProperty("txtMaxKensu")
     private TextBoxNum txtMaxKensu;
     @JsonProperty("btnKensakuClear")
@@ -50,6 +52,24 @@ public class ShinsakaiKaisaibiDiv extends Panel {
     @JsonProperty("txtShinsakaiKaisaibi")
     public void setTxtShinsakaiKaisaibi(TextBoxDateRange txtShinsakaiKaisaibi) {
         this.txtShinsakaiKaisaibi = txtShinsakaiKaisaibi;
+    }
+
+    /*
+     * getradShutsuryokuHoho
+     * @return radShutsuryokuHoho
+     */
+    @JsonProperty("radShutsuryokuHoho")
+    public RadioButton getRadShutsuryokuHoho() {
+        return radShutsuryokuHoho;
+    }
+
+    /*
+     * setradShutsuryokuHoho
+     * @param radShutsuryokuHoho radShutsuryokuHoho
+     */
+    @JsonProperty("radShutsuryokuHoho")
+    public void setRadShutsuryokuHoho(RadioButton radShutsuryokuHoho) {
+        this.radShutsuryokuHoho = radShutsuryokuHoho;
     }
 
     /*

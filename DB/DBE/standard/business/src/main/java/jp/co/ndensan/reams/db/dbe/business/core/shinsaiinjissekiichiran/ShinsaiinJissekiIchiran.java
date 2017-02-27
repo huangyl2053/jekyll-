@@ -45,21 +45,93 @@ public class ShinsaiinJissekiIchiran {
     }
 
     /**
-     * 報酬区分を取得します。
+     * 議長区分コードを取得します。
      *
-     * @return 報酬区分
+     * @return 議長区分コード
      */
-    public RString get報酬区分() {
-        return entity.get報酬区分();
+    public RString get議長区分コード() {
+        return entity.get議長区分コード();
     }
 
     /**
-     * 所属機関名称を取得します。
+     * 審査員資格コードを取得します。
      *
-     * @return 所属機関名称
+     * @return 審査員資格コード
      */
-    public RString get所属機関() {
-        return entity.get所属機関();
+    public RString get審査員資格コード() {
+        return entity.get審査員資格コード();
+    }
+
+    /**
+     * 出欠を取得します。
+     *
+     * @return 出欠
+     */
+    public boolean is出欠() {
+        return entity.is出欠();
+    }
+
+    /**
+     * 医療機関コードを取得します。
+     *
+     * @return 医療機関コード
+     */
+    public RString get医療機関コード() {
+        return entity.get医療機関コード();
+    }
+
+    /**
+     * 医療機関名称を取得します。
+     *
+     * @return 医療機関名称
+     */
+    public RString get医療機関名称() {
+        return entity.get医療機関名称();
+    }
+
+    /**
+     * 調査委託先コードを取得します。
+     *
+     * @return 調査委託先コード
+     */
+    public RString get調査委託先コード() {
+        return entity.get調査委託先コード();
+    }
+
+    /**
+     * 調査委託先名称を取得します。
+     *
+     * @return 調査委託先名称
+     */
+    public RString get調査委託先名称() {
+        return entity.get調査委託先名称();
+    }
+
+    /**
+     * その他機関コードを取得します。
+     *
+     * @return その他機関コード
+     */
+    public RString getその他機関コード() {
+        return entity.getその他機関コード();
+    }
+
+    /**
+     * その他機関名称を取得します。
+     *
+     * @return その他機関名称
+     */
+    public RString getその他機関名称() {
+        return entity.getその他機関名称();
+    }
+    
+    /**
+     * 審査会地区コードを取得します。
+     *
+     * @return 審査会地区コード
+     */
+    public RString get審査会地区コード() {
+        return entity.get審査会地区コード();
     }
 
     /**
@@ -79,7 +151,7 @@ public class ShinsaiinJissekiIchiran {
     public RString get審査会番号() {
         return entity.get審査会番号();
     }
-
+    
     /**
      * 実施日を取得します。
      *
@@ -88,7 +160,7 @@ public class ShinsaiinJissekiIchiran {
     public RString get実施日() {
         return entity.get実施日();
     }
-
+    
     /**
      * 開始を取得します。
      *
@@ -97,7 +169,7 @@ public class ShinsaiinJissekiIchiran {
     public RString get開始() {
         return entity.get開始();
     }
-
+    
     /**
      * 終了を取得します。
      *
@@ -106,40 +178,22 @@ public class ShinsaiinJissekiIchiran {
     public RString get終了() {
         return entity.get終了();
     }
-
+    
     /**
-     * 審査員種別を取得します。
+     * 単価_委員を取得します。
      *
-     * @return 審査員種別
+     * @return 単価_委員
      */
-    public RString get審査員種別() {
-        return entity.get審査員種別();
+    public RString get単価_委員() {
+        return entity.get単価_委員();
     }
-
+    
     /**
-     * 出欠を取得します。
+     * 単価_医師を取得します。
      *
-     * @return 出欠
+     * @return 単価_医師
      */
-    public boolean is出欠() {
-        return entity.is出欠();
-    }
-
-    /**
-     * 実施年月日を取得します。
-     *
-     * @return 実施年月日
-     */
-    public RString get実施年月日() {
-        return entity.get実施年月日();
-    }
-
-    /**
-     * 連番を取得します。
-     *
-     * @return 連番
-     */
-    public int get連番() {
-        return entity.get連番();
+    public RString get単価_医師() {
+        return entity.get単価_医師();
     }
 }

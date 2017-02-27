@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 21 21:59:23 JST 2016 
+ * Mon Feb 27 10:10:19 JST 2017 
  */
 
 
@@ -19,21 +19,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShisakaiIinJisseki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-24_17-05-14">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
 
     private RString code;
     private RString shimei;
     private RString shisainShubetsu;
     private RString shukketsu;
-    private RString hoshuKubun;
+    private RString shozokuKikanCode;
     private RString shozokuKikan;
+    private RString shozokuKikanShurui;
     private RString shinsakaiChiku;
     private RString shinsakaiBango;
     private RString jisshibi;
     private RString kaishi;
     private RString shuryo;
-    private RString shinsakaiKaisaiYMD;
-    private RString remban;
+    private RString tanka;
 
     public dgShisakaiIinJisseki_Row() {
         super();
@@ -41,58 +41,58 @@ public class dgShisakaiIinJisseki_Row extends DataRow {
         this.shimei = RString.EMPTY;
         this.shisainShubetsu = RString.EMPTY;
         this.shukketsu = RString.EMPTY;
-        this.hoshuKubun = RString.EMPTY;
+        this.shozokuKikanCode = RString.EMPTY;
         this.shozokuKikan = RString.EMPTY;
+        this.shozokuKikanShurui = RString.EMPTY;
         this.shinsakaiChiku = RString.EMPTY;
         this.shinsakaiBango = RString.EMPTY;
         this.jisshibi = RString.EMPTY;
         this.kaishi = RString.EMPTY;
         this.shuryo = RString.EMPTY;
-        this.shinsakaiKaisaiYMD = RString.EMPTY;
-        this.remban = RString.EMPTY;
+        this.tanka = RString.EMPTY;
         this.setOriginalData("code", code);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("shisainShubetsu", shisainShubetsu);
         this.setOriginalData("shukketsu", shukketsu);
-        this.setOriginalData("hoshuKubun", hoshuKubun);
+        this.setOriginalData("shozokuKikanCode", shozokuKikanCode);
         this.setOriginalData("shozokuKikan", shozokuKikan);
+        this.setOriginalData("shozokuKikanShurui", shozokuKikanShurui);
         this.setOriginalData("shinsakaiChiku", shinsakaiChiku);
         this.setOriginalData("shinsakaiBango", shinsakaiBango);
         this.setOriginalData("jisshibi", jisshibi);
         this.setOriginalData("kaishi", kaishi);
         this.setOriginalData("shuryo", shuryo);
-        this.setOriginalData("shinsakaiKaisaiYMD", shinsakaiKaisaiYMD);
-        this.setOriginalData("remban", remban);
+        this.setOriginalData("tanka", tanka);
     }
 
-    public dgShisakaiIinJisseki_Row(RString code, RString shimei, RString shisainShubetsu, RString shukketsu, RString hoshuKubun, RString shozokuKikan, RString shinsakaiChiku, RString shinsakaiBango, RString jisshibi, RString kaishi, RString shuryo, RString shinsakaiKaisaiYMD, RString remban) {
+    public dgShisakaiIinJisseki_Row(RString code, RString shimei, RString shisainShubetsu, RString shukketsu, RString shozokuKikanCode, RString shozokuKikan, RString shozokuKikanShurui, RString shinsakaiChiku, RString shinsakaiBango, RString jisshibi, RString kaishi, RString shuryo, RString tanka) {
         super();
         this.setOriginalData("code", code);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("shisainShubetsu", shisainShubetsu);
         this.setOriginalData("shukketsu", shukketsu);
-        this.setOriginalData("hoshuKubun", hoshuKubun);
+        this.setOriginalData("shozokuKikanCode", shozokuKikanCode);
         this.setOriginalData("shozokuKikan", shozokuKikan);
+        this.setOriginalData("shozokuKikanShurui", shozokuKikanShurui);
         this.setOriginalData("shinsakaiChiku", shinsakaiChiku);
         this.setOriginalData("shinsakaiBango", shinsakaiBango);
         this.setOriginalData("jisshibi", jisshibi);
         this.setOriginalData("kaishi", kaishi);
         this.setOriginalData("shuryo", shuryo);
-        this.setOriginalData("shinsakaiKaisaiYMD", shinsakaiKaisaiYMD);
-        this.setOriginalData("remban", remban);
+        this.setOriginalData("tanka", tanka);
         this.code = code;
         this.shimei = shimei;
         this.shisainShubetsu = shisainShubetsu;
         this.shukketsu = shukketsu;
-        this.hoshuKubun = hoshuKubun;
+        this.shozokuKikanCode = shozokuKikanCode;
         this.shozokuKikan = shozokuKikan;
+        this.shozokuKikanShurui = shozokuKikanShurui;
         this.shinsakaiChiku = shinsakaiChiku;
         this.shinsakaiBango = shinsakaiBango;
         this.jisshibi = jisshibi;
         this.kaishi = kaishi;
         this.shuryo = shuryo;
-        this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
-        this.remban = remban;
+        this.tanka = tanka;
     }
 
     public RString getCode() {
@@ -111,12 +111,16 @@ public class dgShisakaiIinJisseki_Row extends DataRow {
         return shukketsu;
     }
 
-    public RString getHoshuKubun() {
-        return hoshuKubun;
+    public RString getShozokuKikanCode() {
+        return shozokuKikanCode;
     }
 
     public RString getShozokuKikan() {
         return shozokuKikan;
+    }
+
+    public RString getShozokuKikanShurui() {
+        return shozokuKikanShurui;
     }
 
     public RString getShinsakaiChiku() {
@@ -139,12 +143,8 @@ public class dgShisakaiIinJisseki_Row extends DataRow {
         return shuryo;
     }
 
-    public RString getShinsakaiKaisaiYMD() {
-        return shinsakaiKaisaiYMD;
-    }
-
-    public RString getRemban() {
-        return remban;
+    public RString getTanka() {
+        return tanka;
     }
 
     public void setCode(RString code) {
@@ -167,14 +167,19 @@ public class dgShisakaiIinJisseki_Row extends DataRow {
         this.shukketsu = shukketsu;
     }
 
-    public void setHoshuKubun(RString hoshuKubun) {
-        this.setOriginalData("hoshuKubun", hoshuKubun);
-        this.hoshuKubun = hoshuKubun;
+    public void setShozokuKikanCode(RString shozokuKikanCode) {
+        this.setOriginalData("shozokuKikanCode", shozokuKikanCode);
+        this.shozokuKikanCode = shozokuKikanCode;
     }
 
     public void setShozokuKikan(RString shozokuKikan) {
         this.setOriginalData("shozokuKikan", shozokuKikan);
         this.shozokuKikan = shozokuKikan;
+    }
+
+    public void setShozokuKikanShurui(RString shozokuKikanShurui) {
+        this.setOriginalData("shozokuKikanShurui", shozokuKikanShurui);
+        this.shozokuKikanShurui = shozokuKikanShurui;
     }
 
     public void setShinsakaiChiku(RString shinsakaiChiku) {
@@ -202,14 +207,9 @@ public class dgShisakaiIinJisseki_Row extends DataRow {
         this.shuryo = shuryo;
     }
 
-    public void setShinsakaiKaisaiYMD(RString shinsakaiKaisaiYMD) {
-        this.setOriginalData("shinsakaiKaisaiYMD", shinsakaiKaisaiYMD);
-        this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
-    }
-
-    public void setRemban(RString remban) {
-        this.setOriginalData("remban", remban);
-        this.remban = remban;
+    public void setTanka(RString tanka) {
+        this.setOriginalData("tanka", tanka);
+        this.tanka = tanka;
     }
 
     // </editor-fold>

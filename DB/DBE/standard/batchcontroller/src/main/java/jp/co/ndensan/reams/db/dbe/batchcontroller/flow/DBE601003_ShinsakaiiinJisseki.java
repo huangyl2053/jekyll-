@@ -27,12 +27,10 @@ public class DBE601003_ShinsakaiiinJisseki extends BatchFlowBase<DBE601003_Shins
 
     @Override
     protected void defineFlow() {
-        if (!getParameter().getKeyJoho().isEmpty()) {
-                if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
-                    executeStep(SHINSAI_JISSE_ICHIRAN_CSV);
-                } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
-                    executeStep(SHINSAI_JISSE_ICHIRAN_REPORT);
-                }
+        if (CSVを出力する.equals(getParameter().getSyohyoSyuturyoku())) {
+            executeStep(SHINSAI_JISSE_ICHIRAN_CSV);
+        } else if (集計表を発行する.equals(getParameter().getSyohyoSyuturyoku())) {
+            executeStep(SHINSAI_JISSE_ICHIRAN_REPORT);
         }
     }
 

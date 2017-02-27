@@ -57,12 +57,14 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
      * @param 審査会開催日FROM 審査会開催日FROM
      * @param 審査会開催日TO 審査会開催日TO
      * @param 最大表示件数 最大表示件数
+     * @param keyJoho
      * @return 審査会委員実績データの取得パラメータ
      */
     public static ShinsaiinJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
             FlexibleDate 審査会開催日FROM,
             FlexibleDate 審査会開催日TO,
-            RString 最大表示件数) {
+            RString 最大表示件数,
+            List<ShinsaiinJissekiIchiranKey> keyJoho) {
         return new ShinsaiinJissekiIchiranMybitisParamter(batchFlag,
                 !審査会開催日FROM.isEmpty(),
                 審査会開催日FROM,
@@ -70,7 +72,7 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
                 審査会開催日TO,
                 !RString.isNullOrEmpty(最大表示件数),
                 Integer.parseInt(最大表示件数.toString()),
-                null);
+                keyJoho);
     }
 
     /**
