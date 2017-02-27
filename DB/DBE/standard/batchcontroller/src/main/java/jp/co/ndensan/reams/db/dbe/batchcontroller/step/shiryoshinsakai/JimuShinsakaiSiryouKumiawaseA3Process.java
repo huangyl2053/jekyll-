@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KumiawaseCommonB
 import jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3.JimuShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 
@@ -107,30 +108,52 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
     @Override
     protected void process() {
         RString reportId = ReportIdDBE.DBE517902.getReportId().value();
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
-                    JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+        if (myBatisParameter.isSakuseiJokenTuika()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
+                    .setStartFormGroup(JimuShinsakaiShiryoA3Layouts.事務局用追加資料.index())
+                    .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                    .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+                        JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
-                    public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
-                            ReportLineRecord<JimuShinsakaishiryoA3ReportSource> currentRecord,
-                            ReportLineRecord<JimuShinsakaishiryoA3ReportSource> nextRecord,
-                            ReportDynamicChart dynamicChart) {
-                                int layout = currentRecord.getSource().layout;
-                                currentRecord.setFormGroupIndex(layout);
-                                if (nextRecord != null && nextRecord.getSource() != null) {
-                                    layout = nextRecord.getSource().layout;
-                                    nextRecord.setFormGroupIndex(layout);
+                        public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
+                                ReportLineRecord<JimuShinsakaishiryoA3ReportSource> currentRecord,
+                                ReportLineRecord<JimuShinsakaishiryoA3ReportSource> nextRecord,
+                                ReportDynamicChart dynamicChart) {
+                                    int layout = currentRecord.getSource().layout;
+                                    currentRecord.setFormGroupIndex(layout);
+                                    if (nextRecord != null && nextRecord.getSource() != null) {
+                                        layout = nextRecord.getSource().layout;
+                                        nextRecord.setFormGroupIndex(layout);
+                                    }
+                                    return currentRecord;
                                 }
-                                return currentRecord;
-                            }
-                }).create();
+                    }).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
+                    .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                    .addBreak(new BreakerCatalog<JimuShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker(
+                        JimuShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                        public ReportLineRecord<JimuShinsakaishiryoA3ReportSource> occuredBreak(
+                                ReportLineRecord<JimuShinsakaishiryoA3ReportSource> currentRecord,
+                                ReportLineRecord<JimuShinsakaishiryoA3ReportSource> nextRecord,
+                                ReportDynamicChart dynamicChart) {
+                                    int layout = currentRecord.getSource().layout;
+                                    currentRecord.setFormGroupIndex(layout);
+                                    if (nextRecord != null && nextRecord.getSource() != null) {
+                                        layout = nextRecord.getSource().layout;
+                                        nextRecord.setFormGroupIndex(layout);
+                                    }
+                                    return currentRecord;
+                                }
+                    }).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        
+
         List<ShinseishoKanriNo> 申請書管理番号List = new ArrayList<>();
         kumiawaseCommonBusiness.set申請書管理番号リスト_一次判定結果(申請書管理番号List, itiziHanteiEntityList);
         kumiawaseCommonBusiness.set申請書管理番号リスト_共通情報(申請書管理番号List);
-        
+
         List<JimuTuikaSiryoBusiness> 審査追加対象者一覧 = get審査追加対象者一覧表情報(申請書管理番号List);
         int 審査番号 = 1;
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
@@ -138,9 +161,9 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
             JimuShinsakaishiryoA3Report report = new JimuShinsakaishiryoA3Report(businessList,
                     get一次判定結果票(shinseishoKanriNo),
                     kumiawaseCommonBusiness.getOpinionFileInfo(shinseishoKanriNo, true),
-                    kumiawaseCommonBusiness.getOtherFileInfo(shinseishoKanriNo, true), 
+                    kumiawaseCommonBusiness.getOtherFileInfo(shinseishoKanriNo, true),
                     審査追加対象者一覧,
-                    is審査会対象一覧印刷済み, 
+                    is審査会対象一覧印刷済み,
                     paramter.getSakuseiJoken(),
                     paramter.getPrintHou(),
                     審査番号);
@@ -197,7 +220,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目 = mapper.get調査票項目(myBatisParameter);
                 List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.get前回調査票項目(myBatisParameter);
                 List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
-                ShinsakaiSiryoKyotsuEntity  審査会資料共通Entity = kumiawaseCommonBusiness.getCommonInfo(共通情報, entity.getShinseishoKanriNo(), true);
+                ShinsakaiSiryoKyotsuEntity 審査会資料共通Entity = kumiawaseCommonBusiness.getCommonInfo(共通情報, entity.getShinseishoKanriNo(), true);
                 List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
                 if (審査会資料共通Entity != null) {
                     特記情報 = get特記情報(審査会資料共通Entity);
@@ -224,12 +247,12 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);
     }
-    
+
     private List<JimuTuikaSiryoBusiness> get審査追加対象者一覧表情報(List<ShinseishoKanriNo> 申請書管理番号リスト) {
         List<JimuTuikaSiryoBusiness> 審査追加対象者一覧 = new ArrayList<>();
         for (ShinseishoKanriNo 申請書管理番号 : 申請書管理番号リスト) {
-            審査追加対象者一覧.add(kumiawaseCommonBusiness.getAdditionalFileInfo(申請書管理番号,paramter,
-                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())));
+            審査追加対象者一覧.add(kumiawaseCommonBusiness.getAdditionalFileInfo(申請書管理番号, paramter,
+                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(), KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())));
         }
         return 審査追加対象者一覧;
     }

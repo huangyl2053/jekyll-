@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KumiawaseCommonB
 import jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3.IinShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.IinShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiSiryouKumiawaseA3ProcessParameter;
@@ -107,31 +108,52 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     @Override
     protected void process() {
         RString reportId = ReportIdDBE.DBE517904.getReportId().value();
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker( 
-                     
-                    IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+        if (一覧表myBatisParameter.isSakuseiJokenTuika()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
+                    .setStartFormGroup(IinShinsakaiShiryoA3Layouts.委員用追加資料.index())
+                    .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                    .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker( 
+                        IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
-                    public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
-                            ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
-                            ReportLineRecord<IinShinsakaishiryoA3ReportSource> nextRecord,
-                            ReportDynamicChart dynamicChart) {
-                                int layout = currentRecord.getSource().layout;
-                                currentRecord.setFormGroupIndex(layout);
-                                if (nextRecord != null && nextRecord.getSource() != null) {
-                                    layout = nextRecord.getSource().layout;
-                                    nextRecord.setFormGroupIndex(layout);
+                        public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
+                                ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
+                                ReportLineRecord<IinShinsakaishiryoA3ReportSource> nextRecord,
+                                ReportDynamicChart dynamicChart) {
+                                    int layout = currentRecord.getSource().layout;
+                                    currentRecord.setFormGroupIndex(layout);
+                                    if (nextRecord != null && nextRecord.getSource() != null) {
+                                        layout = nextRecord.getSource().layout;
+                                        nextRecord.setFormGroupIndex(layout);
+                                    }
+                                    return currentRecord;
                                 }
-                                return currentRecord;
-                            }
-                }).create();
+                    }).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(reportId)
+                    .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                    .addBreak(new BreakerCatalog<IinShinsakaishiryoA3ReportSource>().new SimpleLayoutBreaker( 
+                        IinShinsakaishiryoA3ReportSource.LAYOUT_BREAK_KEYS) {
+                    @Override
+                        public ReportLineRecord<IinShinsakaishiryoA3ReportSource> occuredBreak(
+                                ReportLineRecord<IinShinsakaishiryoA3ReportSource> currentRecord,
+                                ReportLineRecord<IinShinsakaishiryoA3ReportSource> nextRecord,
+                                ReportDynamicChart dynamicChart) {
+                                    int layout = currentRecord.getSource().layout;
+                                    currentRecord.setFormGroupIndex(layout);
+                                    if (nextRecord != null && nextRecord.getSource() != null) {
+                                        layout = nextRecord.getSource().layout;
+                                        nextRecord.setFormGroupIndex(layout);
+                                    }
+                                    return currentRecord;
+                                }
+                    }).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
 
         List<ShinseishoKanriNo> 申請書管理番号List = new ArrayList<>();
         kumiawaseCommonBusiness.set申請書管理番号リスト_一次判定結果(申請書管理番号List, itiziHanteiEntityList);
         kumiawaseCommonBusiness.set申請書管理番号リスト_共通情報(申請書管理番号List);
-        
+
         List<JimuTuikaSiryoBusiness> 審査追加対象者一覧 = get審査追加対象者一覧表情報(申請書管理番号List);
         int 審査番号 = 1;
         for (ShinseishoKanriNo shinseishoKanriNo : 申請書管理番号List) {
@@ -201,11 +223,10 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                 }
                 return new IchijihanteikekkahyoA3Business(
                         new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
-                        調査票調査項目, 前回調査票調査項目, 主治医意見書,
-                        前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                        審査会資料共通Entity, 主治医意見書, new RString(paramter.getGogitaiNo()),
-                        特記情報, batchReportWriter.getImageFolderPath())
-                        , false);
+                                調査票調査項目, 前回調査票調査項目, 主治医意見書,
+                                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
+                                審査会資料共通Entity, 主治医意見書, new RString(paramter.getGogitaiNo()),
+                                特記情報, batchReportWriter.getImageFolderPath()), false);
             }
         }
         return null;
@@ -224,8 +245,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     private List<JimuTuikaSiryoBusiness> get審査追加対象者一覧表情報(List<ShinseishoKanriNo> 申請書管理番号リスト) {
         List<JimuTuikaSiryoBusiness> 審査追加対象者一覧 = new ArrayList<>();
         for (ShinseishoKanriNo 申請書管理番号 : 申請書管理番号リスト) {
-            審査追加対象者一覧.add(kumiawaseCommonBusiness.getAdditionalFileInfo(申請書管理番号,paramter.toIinShinsakaiIinJohoProcessParameter(),
-                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())));
+            審査追加対象者一覧.add(kumiawaseCommonBusiness.getAdditionalFileInfo(申請書管理番号, paramter.toIinShinsakaiIinJohoProcessParameter(),
+                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(), KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate())));
         }
         return 審査追加対象者一覧;
     }
