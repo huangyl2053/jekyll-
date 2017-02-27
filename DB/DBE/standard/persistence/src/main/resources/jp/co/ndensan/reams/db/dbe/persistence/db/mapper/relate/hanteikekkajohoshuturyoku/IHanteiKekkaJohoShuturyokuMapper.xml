@@ -128,7 +128,6 @@
         FROM
         <include refid="HanteiKekkaIchiranList" />
         ORDER BY
-        shichosonCode,
         shinsakaiOrder
     </select>
 
@@ -286,7 +285,6 @@
         FROM
         <include refid="HanteiKekkaIchiranA3List" />
         ORDER BY
-        shichosonCode,
         shinsakaiOrder
     </select>
 
