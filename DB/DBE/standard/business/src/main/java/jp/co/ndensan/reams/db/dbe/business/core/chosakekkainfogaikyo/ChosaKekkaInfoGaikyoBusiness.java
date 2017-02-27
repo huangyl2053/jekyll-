@@ -199,4 +199,40 @@ public class ChosaKekkaInfoGaikyoBusiness {
         return choentity.getKikaiKiki();
     }
 
+    /**
+     * 調査委託先コードを返します。
+     *
+     * @return 調査委託先コード
+     */
+    public RString get調査委託先コード() {
+        return choentity.getChosaItakusakiCode();
+    }
+
+    /**
+     * 事業者名称を返します。
+     *
+     * @return 事業者名称
+     */
+    public RString get事業者名称() {
+        return choentity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 調査員コードを返します。
+     *
+     * @return 調査員コード
+     */
+    public RString get調査員コード() {
+        return choentity.getChosainCode();
+    }
+
+    /**
+     * 調査員氏名を返します。
+     *
+     * @return 調査員氏名
+     */
+    public RString get調査員氏名() {
+        return choentity.getChosainShimei();
+    }
+
 }

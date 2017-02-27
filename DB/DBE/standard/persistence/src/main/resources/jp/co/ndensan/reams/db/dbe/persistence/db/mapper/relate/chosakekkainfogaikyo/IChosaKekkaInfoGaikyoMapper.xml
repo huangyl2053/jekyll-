@@ -25,6 +25,10 @@
         <result property="kazokuJokyo" column="DbT5206_kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kyojuKankyo" column="DbT5206_kyojuKankyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="kikaiKiki" column="DbT5206_kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosaItakusakiCode" column="DbT5202_chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainCode" column="DbT5202_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainShimei" column="DbT5913_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="getChosaKekkaInfoGaikyoList1"
                 resultMap="resultMap_ChosaKekkaInfoGaikyoRelateEntity" 
@@ -49,6 +53,10 @@
         ,DbT5206."kazokuJokyo" as "DbT5206_kazokuJokyo"
         ,DbT5206."kyojuKankyo" as "DbT5206_kyojuKankyo"
         ,DbT5206."kikaiKiki" as "DbT5206_kikaiKiki"
+        ,DbT5202."chosaItakusakiCode" as "DbT5202_chosaItakusakiCode"
+        ,DbT5910."jigyoshaMeisho" as "DbT5910_jigyoshaMeisho"
+        ,DbT5202."chosainCode" as "DbT5202_chosainCode"
+        ,DbT5913."chosainShimei" as "DbT5913_chosainShimei"
         FROM
         rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202
         LEFT JOIN 
@@ -63,6 +71,21 @@
         ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
         AND 
         DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        LEFT JOIN 
+        rgdb."DbT5101NinteiShinseiJoho" as DbT5101 
+        ON DbT5101."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
+        LEFT JOIN 
+        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910 
+        ON DbT5910."shichosonCode" = DbT5101."shichosonCode" 
+        AND 
+        DbT5910."ninteichosaItakusakiCode" = DbT5202."chosaItakusakiCode" 
+        LEFT JOIN 
+        rgdb."DbT5913ChosainJoho" AS DbT5913 
+        ON DbT5913."shichosonCode" = DbT5101."shichosonCode" 
+        AND 
+        DbT5913."ninteiChosaItakusakiCode" = DbT5202."chosaItakusakiCode" 
+        AND 
+        DbT5913."ninteiChosainCode" = DbT5202."chosainCode" 
         WHERE
             DbT5202."shinseishoKanriNo" = #{shinseishoKanriNo} 
             AND 

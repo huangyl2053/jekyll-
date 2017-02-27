@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshojohoshokai.IShujiiIkenshoJohoShokaiMapper">
+    <select id="select主治医意見書情報" resultMap="ResultMap_ShujiiIkenshoJohoShujiiJohoShokaiEntity" fetchSize="500" resultOrdered="true">
+        SELECT 
+        DbT5302."shujiiIryoKikanCode" as "DbT5302_shujiiIryoKikanCode" 
+        ,DbT5911."iryoKikanMeisho" as "DbT5911_iryoKikanMeisho" 
+        ,DbT5302."shujiiCode" as "DbT5302_shujiiCode" 
+        ,DbT5912."shujiiName" as "DbT5912_shujiiName" 
+        FROM
+        rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302 
+        LEFT JOIN 
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+        ON 
+        DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+        LEFT JOIN 
+        rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
+        ON 
+        DbT5911."shichosonCode" = DbT5101."shichosonCode" 
+        AND 
+        DbT5911."shujiiIryokikanCode" = DbT5302."shujiiIryoKikanCode" 
+        LEFT JOIN 
+        rgdb."DbT5912ShujiiJoho" AS DbT5912 
+        ON 
+        DbT5912."shichosonCode" = DbT5101."shichosonCode" 
+        AND 
+        DbT5912."shujiiIryokikanCode" = DbT5302."shujiiIryoKikanCode" 
+        AND 
+        DbT5912."shujiiCode" = DbT5302."shujiiCode" 
+        WHERE 
+        DbT5302."shinseishoKanriNo" = #{申請書管理番号}
+        AND 
+        DbT5302."ikenshoIraiRirekiNo" =  #{依頼履歴番号}
+    </select>
+    
+    <resultMap id="ResultMap_ShujiiIkenshoJohoShujiiJohoShokaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshojohoshokai.ShujiiIkenshoJohoShokaiEntity" autoMapping="true">
+        <result property="shujiiIryoKikanCode" column="DbT5302_shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryoKikanMeisho" column="DbT5911_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiCode" column="DbT5302_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiName" column="DbT5912_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+</mapper>

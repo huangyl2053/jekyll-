@@ -10,10 +10,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshojohoshokai.ShujiiIkenshoJohoShokaiBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshojohoshokai.ShujiiIkenshoJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
@@ -72,7 +74,9 @@ public class ShujiiIkenshoShokaiHandler {
         if (entityList != null && !entityList.isEmpty()) {
             厚労省IF識別コード = entityList.get(0).getKoroshoIfShikibetsuCode().value();
         }
-        set主治医医療機関主治医();
+        List<ShujiiIkenshoJohoShokaiBusiness> shujiiIkenshoJohoShokaiBusinessList = ShujiiIkenshoJohoShokaiFinder.createInstance()
+                .select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号).records();
+        set主治医医療機関主治医(shujiiIkenshoJohoShokaiBusinessList);
         if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
             set必須５項目_99A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
@@ -273,10 +277,10 @@ public class ShujiiIkenshoShokaiHandler {
         return titleList;
     }
 
-    private void set主治医医療機関主治医() {
-        div.getTxtShujiiIryoKikanCode().setValue(div.getHdnShujiiIryoKikanCode());
-        div.getTxtShujiiIryoKikanName().setValue(div.getHdnShujiiIryoKikanName());
-        div.getTxtShujiiCode().setValue(div.getHdnShujiiCode());
-        div.getTxtShujiiName().setValue(div.getHdnShujiiName());
+    private void set主治医医療機関主治医(List<ShujiiIkenshoJohoShokaiBusiness> shujiiIkenshoJohoShokaiBusinessList) {
+        div.getTxtShujiiIryoKikanCode().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiCode());
+        div.getTxtShujiiIryoKikanName().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getIryoKikanMeisho());
+        div.getTxtShujiiCode().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiCode());
+        div.getTxtShujiiName().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiName());
     }
 }

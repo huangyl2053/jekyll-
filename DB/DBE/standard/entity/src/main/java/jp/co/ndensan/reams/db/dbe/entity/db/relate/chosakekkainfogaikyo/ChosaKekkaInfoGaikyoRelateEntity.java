@@ -40,5 +40,9 @@ public class ChosaKekkaInfoGaikyoRelateEntity {
     private RString kazokuJokyo;
     private RString kyojuKankyo;
     private RString kikaiKiki;
+    private RString chosaItakusakiCode;
+    private RString jigyoshaMeisho;
+    private RString chosainCode;
+    private RString chosainShimei;
 
 }

@@ -86,7 +86,7 @@ public class ChosaKekkaInfoGaikyoHandler {
         } else {
             setDisplayNoneテキストコントロール();
         }
-        set認定調査委託先認定調査員();
+        set認定調査委託先認定調査員(chosaKekkaInfoGaikyoList);
         set利用施設種類(shisetsuRiyos);
         setサービス状況(serviceJokyos);
         set住宅改修(serviceJokyos);
@@ -595,10 +595,10 @@ public class ChosaKekkaInfoGaikyoHandler {
         }
     }
 
-    private void set認定調査委託先認定調査員() {
-        gaikyoDiv.getTxtChosaItakusakiCode().setValue(gaikyoDiv.getHdnChosaItakusakiCode());
-        gaikyoDiv.getTxtChosaItakusakiName().setValue(gaikyoDiv.getHdnChosaItakusakiName());
-        gaikyoDiv.getTxtNinteiChosainCode().setValue(gaikyoDiv.getHdnNinteiChosainCode());
-        gaikyoDiv.getTxtNinteiChosainName().setValue(gaikyoDiv.getHdnNinteiChosainName());
+    private void set認定調査委託先認定調査員(List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList) {
+        gaikyoDiv.getTxtChosaItakusakiCode().setValue(chosaKekkaInfoGaikyoList.get(0).get調査委託先コード());
+        gaikyoDiv.getTxtChosaItakusakiName().setValue(chosaKekkaInfoGaikyoList.get(0).get事業者名称());
+        gaikyoDiv.getTxtNinteiChosainCode().setValue(chosaKekkaInfoGaikyoList.get(0).get調査員コード());
+        gaikyoDiv.getTxtNinteiChosainName().setValue(chosaKekkaInfoGaikyoList.get(0).get調査員氏名());
     }
 }
