@@ -56,6 +56,7 @@
         ,dbT5102."shinsakaiIken" AS shinsakaiIken
         ,dbT5502."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
         ,dbT7051."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
+        ,dbT5511."gogitaiNo" AS gogitaiNo
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
@@ -69,6 +70,8 @@
         ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS dbT5116
         ON dbT5116."shinseishoKanriNo" = dbT5502."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511
+        ON dbT5511."shinsakaiKaisaiNo" = dbT5502."shinsakaiKaisaiNo"
         LEFT JOIN
         (SELECT
         dbT5116."ichijiHanteiKekkaCode"
