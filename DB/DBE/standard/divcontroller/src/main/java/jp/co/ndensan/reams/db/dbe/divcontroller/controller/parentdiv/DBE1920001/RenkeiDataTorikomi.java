@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class RenkeiDataTorikomi {
 
     private static final RString 法改正前 = new RString("key0");
+    private static final RString 法改正後 = new RString("key1");
     private static RString 要介護認定申請連携データ取込みファイル名;
     private static RString 認定調査委託先データ取込みファイル名;
     private static RString 認定調査員データ取込みファイル名;
@@ -75,6 +76,11 @@ public class RenkeiDataTorikomi {
                 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
             }
         }
+        if (RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate())) {
+            div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正前);
+        } else {
+            div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正後);
+        }
         if (div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().getSelectedKey().equals(法改正前)) {
             要介護認定申請連携データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
             認定調査委託先データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
@@ -88,8 +94,7 @@ public class RenkeiDataTorikomi {
             主治医医療機関データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医医療機関データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
             主治医データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.主治医データ取込みファイル名_新, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         }
-        getHandler(div).onLoad(RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate()),
-                path,
+        getHandler(div).onLoad(path,
                 要介護認定申請連携データ取込みファイル名,
                 認定調査委託先データ取込みファイル名,
                 認定調査員データ取込みファイル名,

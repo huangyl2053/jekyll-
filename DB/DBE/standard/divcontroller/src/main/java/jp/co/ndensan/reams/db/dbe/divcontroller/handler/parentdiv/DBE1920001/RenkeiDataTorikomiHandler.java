@@ -95,7 +95,6 @@ public class RenkeiDataTorikomiHandler {
     /**
      * 初期化の設定します。
      *
-     * @param 法改正前Flag 法改正前Flag
      * @param path path
      * @param 要介護認定申請連携データ取込み_ファイル名 要介護認定申請連携データ取込み_ファイル名
      * @param 認定調査委託先データ取込み_ファイル名 認定調査委託先データ取込み_ファイル名
@@ -103,15 +102,10 @@ public class RenkeiDataTorikomiHandler {
      * @param 主治医医療機関データ取込み_ファイル名 主治医医療機関データ取込み_ファイル名
      * @param 主治医データ取込み_ファイル名 主治医データ取込み_ファイル名
      */
-    public void onLoad(boolean 法改正前Flag, RString path, RString 要介護認定申請連携データ取込み_ファイル名,
+    public void onLoad(RString path, RString 要介護認定申請連携データ取込み_ファイル名,
             RString 認定調査委託先データ取込み_ファイル名, RString 認定調査員データ取込み_ファイル名,
             RString 主治医医療機関データ取込み_ファイル名, RString 主治医データ取込み_ファイル名) {
         div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().loadHokenshaList(GyomuBunrui.介護認定);
-        if (法改正前Flag) {
-            div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正前);
-        } else {
-            div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正後);
-        }
         要介護認定申請連携データ取込みファイル名 = 要介護認定申請連携データ取込み_ファイル名;
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
         div.getUploadArea().getBtnDataTorikomi().setDisabled(true);
