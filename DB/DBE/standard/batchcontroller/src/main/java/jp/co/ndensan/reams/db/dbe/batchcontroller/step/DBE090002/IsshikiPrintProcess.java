@@ -145,7 +145,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517181.getReportId().value())
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE091101.getReportId().value())
                 .addBreak(new BreakerCatalog<YokaigoNinteiJohoTeikyoIsshikiReportSource>().new SimpleLayoutBreaker(
                     YokaigoNinteiJohoTeikyoIsshikiReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
