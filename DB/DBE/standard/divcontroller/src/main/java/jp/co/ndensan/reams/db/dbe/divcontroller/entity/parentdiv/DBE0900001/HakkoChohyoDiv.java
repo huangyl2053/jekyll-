@@ -14,13 +14,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HakkoChohyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radOutputHoho")
+    private RadioButton radOutputHoho;
     @JsonProperty("chkNinteiChosahyo")
     private CheckBoxList chkNinteiChosahyo;
     @JsonProperty("radNinteiChosaMasking")
@@ -41,8 +43,8 @@ public class HakkoChohyoDiv extends Panel {
     private Space spSpace3;
     @JsonProperty("chkSonotaShiryo")
     private CheckBoxList chkSonotaShiryo;
-    @JsonProperty("radSohotaShiryoMasking")
-    private RadioButton radSohotaShiryoMasking;
+    @JsonProperty("radSonotaShiryoMasking")
+    private RadioButton radSonotaShiryoMasking;
     @JsonProperty("spSpace4")
     private Space spSpace4;
     @JsonProperty("chkIchijiHanteiKekka")
@@ -56,6 +58,24 @@ public class HakkoChohyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradOutputHoho
+     * @return radOutputHoho
+     */
+    @JsonProperty("radOutputHoho")
+    public RadioButton getRadOutputHoho() {
+        return radOutputHoho;
+    }
+
+    /*
+     * setradOutputHoho
+     * @param radOutputHoho radOutputHoho
+     */
+    @JsonProperty("radOutputHoho")
+    public void setRadOutputHoho(RadioButton radOutputHoho) {
+        this.radOutputHoho = radOutputHoho;
+    }
+
     /*
      * getchkNinteiChosahyo
      * @return chkNinteiChosahyo
@@ -237,21 +257,21 @@ public class HakkoChohyoDiv extends Panel {
     }
 
     /*
-     * getradSohotaShiryoMasking
-     * @return radSohotaShiryoMasking
+     * getradSonotaShiryoMasking
+     * @return radSonotaShiryoMasking
      */
-    @JsonProperty("radSohotaShiryoMasking")
-    public RadioButton getRadSohotaShiryoMasking() {
-        return radSohotaShiryoMasking;
+    @JsonProperty("radSonotaShiryoMasking")
+    public RadioButton getRadSonotaShiryoMasking() {
+        return radSonotaShiryoMasking;
     }
 
     /*
-     * setradSohotaShiryoMasking
-     * @param radSohotaShiryoMasking radSohotaShiryoMasking
+     * setradSonotaShiryoMasking
+     * @param radSonotaShiryoMasking radSonotaShiryoMasking
      */
-    @JsonProperty("radSohotaShiryoMasking")
-    public void setRadSohotaShiryoMasking(RadioButton radSohotaShiryoMasking) {
-        this.radSohotaShiryoMasking = radSohotaShiryoMasking;
+    @JsonProperty("radSonotaShiryoMasking")
+    public void setRadSonotaShiryoMasking(RadioButton radSonotaShiryoMasking) {
+        this.radSonotaShiryoMasking = radSonotaShiryoMasking;
     }
 
     /*

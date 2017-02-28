@@ -568,13 +568,14 @@ public class NinteishinseibiHandler {
                     int 認定調査特記事項連番 = (NumberUtils.isNumber(特記情報データ.get認定調査特記事項連番().toString()))
                             ? Integer.parseInt(特記情報データ.get認定調査特記事項連番().toString())
                             : 0;
-                    特記事項List.add(new NinteichosahyoTokkijiko(
-                            申請書管理番号,
-                            認定調査依頼履歴番号,
-                            特記情報データ.get認定調査特記事項番号(),
-                            認定調査特記事項連番,
-                            entity.get概況特記テキスト_イメージ区分コード(),
-                            new Code(GenponMaskKubun.原本.getコード()))
+                    特記事項List.add(
+                            new NinteichosahyoTokkijiko(
+                                    申請書管理番号,
+                                    認定調査依頼履歴番号,
+                                    特記情報データ.get認定調査特記事項番号(),
+                                    認定調査特記事項連番,
+                                    entity.get概況特記テキスト_イメージ区分コード(),
+                                    new Code(GenponMaskKubun.原本.getコード()))
                             .createBuilderForEdit()
                             .set特記事項(特記情報データ.get特記事項())
                             .build());

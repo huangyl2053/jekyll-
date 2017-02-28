@@ -130,7 +130,8 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
 
         tokkiText1A4AllReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
-                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(TokkiText1ReportSource.LAYOUTBREAKITEM) {
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+                    TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
                             ReportLineRecord<TokkiText1ReportSource> currentRecord,
@@ -148,7 +149,8 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
 
         tokkiText1A4SeparateReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517132.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
-                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(TokkiText1ReportSource.LAYOUTBREAKITEM) {
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+                    TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
                             ReportLineRecord<TokkiText1ReportSource> currentRecord,
@@ -176,7 +178,6 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
         for (NinteichosaRelate 特記事項 : 特記事項List) {
             特記事項区分List.add(特記事項.get特記事項区分());
         }
-        RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
         if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
             if (entity.get認定申請年月日().isBeforeOrEquals(processPrm.get特記事項判定日())) {
                 NinteiChosaTokkiImageEntity ninteiChosaTokkiImageEntity
@@ -184,6 +185,7 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
                 NinteiChosaTokkiImageReport report = new NinteiChosaTokkiImageReport(ninteiChosaTokkiImageEntity);
                 report.writeBy(ninteiChosaTokkiImageReportSourceWriter);
             } else {
+                RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
                 TokkiText1A4Entity tokkiText1A4Entity
                         = TokkiImage1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分(), イメージ共有ファイルID);
                 TokkiText1A4Report report = new TokkiText1A4Report(tokkiText1A4Entity);

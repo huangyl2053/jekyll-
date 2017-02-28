@@ -94,17 +94,14 @@ public class SonotashiryoPrintService {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスC));
                     report.writeBy(reportSourceWriter);
                 }
-
                 if (!イメージファイルパスD.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスD));
                     report.writeBy(reportSourceWriter);
                 }
-
                 if (!イメージファイルパスE.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスE));
                     report.writeBy(reportSourceWriter);
                 }
-
                 if (!イメージファイルパスF.isEmpty()) {
                     SonoTashiryoReport report = new SonoTashiryoReport(SonoTashiryoEntityEditor.edit(business.toEntity(), イメージファイルパスF));
                     report.writeBy(reportSourceWriter);
