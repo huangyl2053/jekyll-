@@ -73,6 +73,7 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
         setRadShujiiMasking();
         setRadSonotaShiryoMasking();
         setRadIchijiHanteiMasking();
+        set発行する帳票();
     }
 
     /**
