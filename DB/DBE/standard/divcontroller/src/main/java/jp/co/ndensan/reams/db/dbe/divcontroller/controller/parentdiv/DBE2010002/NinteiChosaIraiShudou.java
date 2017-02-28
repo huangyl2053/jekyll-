@@ -581,11 +581,6 @@ public class NinteiChosaIraiShudou {
 //        return ResponseData.of(div).respond();
 //    }
 
-    private PersonalData toPersonalData(RString shinsei) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"), shinsei);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
-    }
-
     /**
      * 「戻る」ボタンを押す処理です。
      *

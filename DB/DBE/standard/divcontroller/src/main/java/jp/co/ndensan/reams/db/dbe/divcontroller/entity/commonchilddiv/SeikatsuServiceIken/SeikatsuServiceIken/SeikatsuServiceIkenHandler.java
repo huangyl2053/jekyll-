@@ -66,6 +66,7 @@ public class SeikatsuServiceIkenHandler {
     private static final List<Integer> 連番_意見項目リスト = new ArrayList();
     private static final List<Integer> 連番_記入項目リスト = new ArrayList();
     List<RString> chkHokohojoShiyokeys = new ArrayList();
+    List<RString> chkHokohojokeys = new ArrayList();
     List<RString> chkHasseiShojokeys = new ArrayList();
     List<RString> chkIgakutekiKanrikeys = new ArrayList();
     List<RString> chkJotaiSonotakeys = new ArrayList();
@@ -355,9 +356,9 @@ public class SeikatsuServiceIkenHandler {
         if (66 == item.get連番()) {
             return edit_チェック無とチェック有(div.getChkHokohojoShiyo().getSelectedKeys(), item, KEY0);
         } else if (67 == item.get連番()) {
-            return edit_チェック無とチェック有(div.getChkHokohojoShiyo().getSelectedKeys(), item, KEY1);
+            return edit_チェック無とチェック有(div.getChkHokohojo().getSelectedKeys(), item, KEY0);
         } else if (68 == item.get連番()) {
-            return edit_チェック無とチェック有(div.getChkHokohojoShiyo().getSelectedKeys(), item, KEY2);
+            return edit_チェック無とチェック有(div.getChkHokohojo().getSelectedKeys(), item, KEY1);
         }
         return item;
     }
@@ -663,6 +664,7 @@ public class SeikatsuServiceIkenHandler {
         boolean isExits = false;
         ShujiiIkenshoIkenItem itemTemp;
         chkHokohojoShiyokeys.clear();
+        chkHokohojokeys.clear();
         chkHasseiShojokeys.clear();
         chkIgakutekiKanrikeys.clear();
         for (int 連番 : 連番_意見項目リスト) {
@@ -751,12 +753,13 @@ public class SeikatsuServiceIkenHandler {
             chkHokohojoShiyokeys.add(KEY0);
         }
         if (67 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkHokohojoShiyokeys.add(KEY1);
+            chkHokohojokeys.add(KEY0);
         }
         if (68 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-            chkHokohojoShiyokeys.add(KEY2);
+            chkHokohojokeys.add(KEY1);
         }
         div.getChkHokohojoShiyo().setSelectedItemsByKey(chkHokohojoShiyokeys);
+        div.getChkHokohojo().setSelectedItemsByKey(chkHokohojokeys);
     }
 
     private void 栄養_食生活エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {

@@ -150,7 +150,12 @@ public class KanryoShoriShinsaUketsuke {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
+            List<PersonalData> personalDataList = new ArrayList<>();
             for (dgNinteiTaskList_Row row : rowList) {
+                PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                                row.getShinseishoKanriNo()));
+                personalDataList.add(personalData);
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
@@ -169,7 +174,7 @@ public class KanryoShoriShinsaUketsuke {
                             .要介護認定完了情報が追加(申請書管理番号));
                 }
             }
-
+            AccessLogger.log(AccessLogType.更新, personalDataList);
             div.getCcdKanryoMsg().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE1030001StateName.完了);
         }

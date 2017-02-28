@@ -444,6 +444,16 @@ public class SeikatsuServiceIkenDiv extends Panel implements ISeikatsuServiceIke
     }
 
     @JsonIgnore
+    public CheckBoxList getChkHokohojo() {
+        return this.getIdo().getChkHokohojo();
+    }
+
+    @JsonIgnore
+    public void  setChkHokohojo(CheckBoxList chkHokohojo) {
+        this.getIdo().setChkHokohojo(chkHokohojo);
+    }
+
+    @JsonIgnore
     public RadioButton getRadShokujiKoi() {
         return this.getEiyoShokuseikatsu().getRadShokujiKoi();
     }
