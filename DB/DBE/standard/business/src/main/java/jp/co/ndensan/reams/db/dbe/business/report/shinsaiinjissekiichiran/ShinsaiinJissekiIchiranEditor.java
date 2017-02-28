@@ -62,7 +62,7 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
 
     private ShinsaiinJissekiIchiranReportSource editSource(ShinsaiinJissekiIchiranReportSource source) {
         RString 所属機関種類 = get所属機関の種類(item);
-        
+
         source.printTimeStamp = get作成年月日時();
         source.listShinsainJissekiIchiran_1 = item.getコード();
         source.listShinsainJissekiIchiran_2 = item.get氏名();
@@ -70,7 +70,7 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         source.listShinsainJissekiIchiran_4 = IsShusseki.toValue(item.is出欠()).get名称();
         source.listShinsainJissekiIchiran_5 = get所属機関コード(item, 所属機関種類);
         source.listShinsainJissekiIchiran_6 = get所属機関名称(item, 所属機関種類);
-        source.listShinsainJissekiIchiran_7 = get所属機関名称(item, 所属機関種類);
+        source.listShinsainJissekiIchiran_7 = 所属機関種類;
         source.listShinsainJissekiIchiran_8 = item.get審査会地区();
         source.listShinsainJissekiIchiran_9 = item.get審査会番号();
         source.listShinsainJissekiIchiran_10 = dateFormat(item.get実施日());

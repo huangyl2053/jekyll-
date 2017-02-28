@@ -32,7 +32,7 @@ import lombok.Setter;
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCsvEucEntity {
-    
+
     private static final RString 審査会単価パターン = DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     private static final RString 審査会単価パターン_委員 = ShisakaiIinJissekiIchiranShinsakaiTanka.審査会単価パターン_委員.getコード();
     private static final RString 審査会単価パターン_医師 = ShisakaiIinJissekiIchiranShinsakaiTanka.審査会単価パターン_医師.getコード();
@@ -44,29 +44,31 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
     private final RString コード;
     @CsvField(order = 2, name = "審査員名")
     private final RString 氏名;
-    @CsvField(order = 3, name = "審査員種別")
+    @CsvField(order = 3, name = "審査員種別コード")
+    private final RString 審査員種別コード;
+    @CsvField(order = 4, name = "審査員種別")
     private final RString 審査員種別;
-    @CsvField(order = 4, name = "出欠")
+    @CsvField(order = 5, name = "出欠")
     private final RString 出欠;
-    @CsvField(order = 5, name = "所属機関コード")
+    @CsvField(order = 6, name = "所属機関コード")
     private final RString 所属機関コード;
-    @CsvField(order = 6, name = "所属機関")
+    @CsvField(order = 7, name = "所属機関")
     private final RString 所属機関;
-    @CsvField(order = 7, name = "所属機関の種類")
+    @CsvField(order = 8, name = "所属機関の種類")
     private final RString 所属機関の種類;
-    @CsvField(order = 8, name = "審査会地区コード")
+    @CsvField(order = 9, name = "審査会地区コード")
     private final RString 審査会地区コード;
-    @CsvField(order = 9, name = "審査会地区")
+    @CsvField(order = 10, name = "審査会地区")
     private final RString 審査会地区;
-    @CsvField(order = 10, name = "審査会番号")
+    @CsvField(order = 11, name = "審査会番号")
     private final RString 審査会番号;
-    @CsvField(order = 11, name = "審査会実施日")
+    @CsvField(order = 12, name = "審査会実施日")
     private final RString 実施日;
-    @CsvField(order = 12, name = "開始時刻")
+    @CsvField(order = 13, name = "開始時刻")
     private final RString 開始;
-    @CsvField(order = 13, name = "終了時刻")
+    @CsvField(order = 14, name = "終了時刻")
     private final RString 終了;
-    @CsvField(order = 14, name = "報酬単価")
+    @CsvField(order = 15, name = "報酬単価")
     private final RString 報酬単価;
 
     /**
@@ -76,9 +78,10 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
      */
     public ShinsaiinJissekiIchiranEntity(ShinsaiinJissekiIchiranRelateEntity relateEntity) {
         RString 所属機関種類 = get所属機関の種類(relateEntity);
-        
+
         this.コード = relateEntity.getコード();
         this.氏名 = relateEntity.get氏名();
+        this.審査員種別コード = get審査員種別コード(relateEntity);
         this.審査員種別 = get審査員種別(relateEntity);
         this.出欠 = IsShusseki.toValue(relateEntity.is出欠()).get名称();
         this.所属機関コード = get所属機関コード(relateEntity, 所属機関種類);
@@ -93,7 +96,25 @@ public class ShinsaiinJissekiIchiranEntity implements IShinsaiinJissekiIchiranCs
         this.報酬単価 = get報酬単価(relateEntity);
 
     }
-    
+
+    private RString get審査員種別コード(ShinsaiinJissekiIchiranRelateEntity relateEntity) {
+        if (審査会単価パターン.equals(審査会単価パターン_委員)) {
+            if (relateEntity.get議長区分コード().equals(KaigoninteiShinsakaiGichoKubunCode.議長.getコード())) {
+                return ShinsakaiIinShubetsu.委員長.getコード();
+            } else {
+                return ShinsakaiIinShubetsu.委員.getコード();
+            }
+        }
+        if (審査会単価パターン.equals(審査会単価パターン_医師)) {
+            if (relateEntity.get審査員資格コード().equals(Sikaku.医師.getコード()) || relateEntity.get審査員資格コード().equals(Sikaku.歯科医師.getコード())) {
+                return ShinsakaiIinShubetsu.医師.getコード();
+            } else {
+                return ShinsakaiIinShubetsu.医師以外.getコード();
+            }
+        }
+        return RString.EMPTY;
+    }
+
     private RString get審査員種別(ShinsaiinJissekiIchiranRelateEntity relateEntity) {
         if (審査会単価パターン.equals(審査会単価パターン_委員)) {
             if (relateEntity.get議長区分コード().equals(KaigoninteiShinsakaiGichoKubunCode.議長.getコード())) {
