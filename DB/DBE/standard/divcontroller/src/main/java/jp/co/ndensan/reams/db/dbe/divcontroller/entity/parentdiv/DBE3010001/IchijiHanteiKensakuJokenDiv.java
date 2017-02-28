@@ -16,13 +16,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiKensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtHihokenshaNo")
+    private TextBoxCode txtHihokenshaNo;
     @JsonProperty("txtShinseiDateRange")
     private TextBoxDateRange txtShinseiDateRange;
     @JsonProperty("txtMaxCount")
@@ -31,8 +33,6 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
     private Button btnKyufuJissekiSearchClear;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
-    @JsonProperty("txtHihokenshaNo")
-    private TextBoxCode txtHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,6 +40,24 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBoxCode getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
+    }
+
     /*
      * gettxtShinseiDateRange
      * @return txtShinseiDateRange
@@ -101,24 +119,6 @@ public class IchijiHanteiKensakuJokenDiv extends Panel {
     @JsonProperty("ccdHokenshaList")
     public IHokenshaListDiv getCcdHokenshaList() {
         return ccdHokenshaList;
-    }
-
-    /*
-     * gettxtHihokenshaNo
-     * @return txtHihokenshaNo
-     */
-    @JsonProperty("txtHihokenshaNo")
-    public TextBoxCode getTxtHihokenshaNo() {
-        return txtHihokenshaNo;
-    }
-
-    /*
-     * settxtHihokenshaNo
-     * @param txtHihokenshaNo txtHihokenshaNo
-     */
-    @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
-        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     // </editor-fold>

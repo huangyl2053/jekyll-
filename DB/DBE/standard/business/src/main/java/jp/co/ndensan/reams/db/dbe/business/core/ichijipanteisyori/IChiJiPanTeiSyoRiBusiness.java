@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori.IChiJiPanTeiSyoRiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -337,5 +338,14 @@ public class IChiJiPanTeiSyoRiBusiness implements Serializable {
      */
     public FlexibleDate get主治医意見書登録完了年月日() {
         return entity.getIkenshoTorokuKanryoYMD();
+    }
+    
+    /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return 証記載保険者番号
+     */
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
     }
 }

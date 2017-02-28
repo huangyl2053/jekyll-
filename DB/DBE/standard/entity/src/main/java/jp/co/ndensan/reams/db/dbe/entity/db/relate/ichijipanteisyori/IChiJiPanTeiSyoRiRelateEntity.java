@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -57,4 +58,5 @@ public class IChiJiPanTeiSyoRiRelateEntity implements Serializable {
     private RString koroshoIfShikibetsuCode;
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
     private FlexibleDate ikenshoTorokuKanryoYMD;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 }
