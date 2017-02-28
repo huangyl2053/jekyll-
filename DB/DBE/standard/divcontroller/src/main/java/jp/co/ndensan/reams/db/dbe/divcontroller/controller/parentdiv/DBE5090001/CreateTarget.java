@@ -58,7 +58,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class CreateTarget {
 
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int 連番0 = 0;
     private static final int 連番1 = 1;
     private static final int 連番2 = 2;
@@ -303,8 +304,13 @@ public class CreateTarget {
         }
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             for (CreateTargetDataBusiness business : dataMap.values()) {
                 csvWriter.writeLine(getCsvData(business, 連番));
                 連番 = 連番 + 1;
