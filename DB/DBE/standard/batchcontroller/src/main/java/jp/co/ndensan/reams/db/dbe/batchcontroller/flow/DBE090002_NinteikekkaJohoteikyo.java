@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.IchijiHanteiKekkaPrintProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.IsshikiPrintProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.NinteiChosahyoPrintProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ShujiiIkenshoPrintProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.SonotaShiryoPrintProcess;
@@ -60,7 +61,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
     @Override
     protected void defineFlow() {
         if (出力方法_一式.equals(getParameter().get出力方法())) {
-            
+            executeStep(一式出力);
         } else {
             if (getParameter().is認定調査票出力()) {
                 executeStep(認定調査票出力);
@@ -83,7 +84,7 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
 
     @Step(一式出力)
     protected IBatchFlowCommand isshikiPrint() {
-        return loopBatch(null)
+        return loopBatch(IsshikiPrintProcess.class)
                 .arguments(processParameter)
                 .define();
     }
