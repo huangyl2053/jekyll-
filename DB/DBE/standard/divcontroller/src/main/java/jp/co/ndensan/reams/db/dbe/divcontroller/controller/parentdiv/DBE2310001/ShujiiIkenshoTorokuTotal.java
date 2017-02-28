@@ -176,9 +176,9 @@ public class ShujiiIkenshoTorokuTotal {
             getHandler(div).setChosaTishoJohoDisable(true);
             getHandler(div).setSonotaDisable(true);
         } else {
-            getHandler(div).load(result);
             ViewStateHolder.put(ViewStateKeys.状態, JYOTAI_CODE_UPD);
         }
+        getHandler(div).load(result);
         div.setHdnHasChanged(getHandler(div).getDataRString());
         div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
         getHandler(div).setChkTakaJushin(result);
