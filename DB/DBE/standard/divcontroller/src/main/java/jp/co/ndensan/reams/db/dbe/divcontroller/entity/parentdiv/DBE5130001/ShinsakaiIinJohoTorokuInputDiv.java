@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -238,11 +238,6 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public ICodeInputDiv getCcdshinsakaiChikuCode() {
-        return this.getShinsakaiIinJoho().getCcdshinsakaiChikuCode();
-    }
-
-    @JsonIgnore
     public TextBox getTxtBiko() {
         return this.getShinsakaiIinJoho().getTxtBiko();
     }
@@ -250,6 +245,11 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     @JsonIgnore
     public void  setTxtBiko(TextBox txtBiko) {
         this.getShinsakaiIinJoho().setTxtBiko(txtBiko);
+    }
+
+    @JsonIgnore
+    public ICodeInputDiv getCcdshinsakaiChikuCode() {
+        return this.getShinsakaiIinJoho().getCcdshinsakaiChikuCode();
     }
 
     @JsonIgnore

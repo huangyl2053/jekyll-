@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,10 +39,10 @@ public class ShinsakaiIinJohoDiv extends Panel {
     private TextBoxDate txtBirthYMD;
     @JsonProperty("ddlShikakuCode")
     private DropDownList ddlShikakuCode;
-    @JsonProperty("ccdshinsakaiChikuCode")
-    private CodeInputDiv ccdshinsakaiChikuCode;
     @JsonProperty("txtBiko")
     private TextBox txtBiko;
+    @JsonProperty("ccdshinsakaiChikuCode")
+    private CodeInputDiv ccdshinsakaiChikuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -195,15 +195,6 @@ public class ShinsakaiIinJohoDiv extends Panel {
     }
 
     /*
-     * getccdshinsakaiChikuCode
-     * @return ccdshinsakaiChikuCode
-     */
-    @JsonProperty("ccdshinsakaiChikuCode")
-    public ICodeInputDiv getCcdshinsakaiChikuCode() {
-        return ccdshinsakaiChikuCode;
-    }
-
-    /*
      * gettxtBiko
      * @return txtBiko
      */
@@ -219,6 +210,15 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("txtBiko")
     public void setTxtBiko(TextBox txtBiko) {
         this.txtBiko = txtBiko;
+    }
+
+    /*
+     * getccdshinsakaiChikuCode
+     * @return ccdshinsakaiChikuCode
+     */
+    @JsonProperty("ccdshinsakaiChikuCode")
+    public ICodeInputDiv getCcdshinsakaiChikuCode() {
+        return ccdshinsakaiChikuCode;
     }
 
     // </editor-fold>
