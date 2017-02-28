@@ -20,7 +20,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -57,6 +60,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -76,6 +80,12 @@ public class ShinsakaiToroku {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
     private static final RString UIコンテナID_DBEUC51601 = new RString("DBEUC51601");
+    private static final RString 審査会割付 = new RString("審査会割付");
+    private static final RString 審査会登録ボタンフィールド名称 = new RString("btnCompleteShinsakaiToroku");
+    private static final RString 審査会登録ボタンフィールド名称_完了のみ登録 = new RString("btnCompleteShinsakaiToroku2");
+    private static final String ボタン名_結果登録 = "申請を結果登録に";
+    private static final String ボタン名_マスキング = "申請をマスキングに";
+    private static final RString 一次判定後 = new RString("1");
 
     /**
      * 画面初期化処理です。
@@ -88,6 +98,7 @@ public class ShinsakaiToroku {
         getHandler(div).onLoad(ResponseHolder.getState());
         getHandler(div).審査会一覧データグリッド初期化();
         getHandler(div).set審査会最大表示件数();
+        set登録ボタン名称(div);
         ViewStateHolder.put(ViewStateKeys.状態, div.getRadTaishoshaJotai().getSelectedKey());
         return ResponseData.of(div).respond();
     }
@@ -188,11 +199,11 @@ public class ShinsakaiToroku {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
+                    DbeQuestionMessages.完了日登録確認.getMessage().replace(審査会割付.toString()).evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
@@ -336,11 +347,11 @@ public class ShinsakaiToroku {
         }
 
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).onClick_btnSave(修正リスト);
@@ -432,5 +443,23 @@ public class ShinsakaiToroku {
 
     private ShinsakaiTorokuValidationHandler getValidationHandler(ShinsakaiTorokuDiv div) {
         return new ShinsakaiTorokuValidationHandler(div);
+    }
+
+    private void set登録ボタン名称(ShinsakaiTorokuDiv div) {
+        RString マスキングチェックタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        boolean is一次判定後 = 一次判定後.equals(マスキングチェックタイミング);
+        if (is一次判定後) {
+            if (UIコンテナID_DBEUC51601.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
+                CommonButtonHolder.setPrefixTextByCommonButtonFieldName(審査会登録ボタンフィールド名称_完了のみ登録, ボタン名_結果登録);
+            } else {
+                CommonButtonHolder.setPrefixTextByCommonButtonFieldName(審査会登録ボタンフィールド名称, ボタン名_結果登録);
+            }
+        } else {
+            if (UIコンテナID_DBEUC51601.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
+                CommonButtonHolder.setPrefixTextByCommonButtonFieldName(審査会登録ボタンフィールド名称_完了のみ登録, ボタン名_マスキング);
+            } else {
+                CommonButtonHolder.setPrefixTextByCommonButtonFieldName(審査会登録ボタンフィールド名称, ボタン名_マスキング);
+            }
+        }
     }
 }

@@ -159,6 +159,6 @@
                 AND gogitaiJoho."gogitaiDummyFlag" = false
             </if>
         </if>
-        ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" DESC, shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD", shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
     </select>
 </mapper>
