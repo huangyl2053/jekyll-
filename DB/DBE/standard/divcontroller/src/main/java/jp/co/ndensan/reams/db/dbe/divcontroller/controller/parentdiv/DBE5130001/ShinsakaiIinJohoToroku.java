@@ -198,7 +198,8 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onClick_btnModifyShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
-
+        dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員登録情報, row);
         審査会委員一覧修正ボタンHandler(div);
         return ResponseData.of(div).respond();
     }
