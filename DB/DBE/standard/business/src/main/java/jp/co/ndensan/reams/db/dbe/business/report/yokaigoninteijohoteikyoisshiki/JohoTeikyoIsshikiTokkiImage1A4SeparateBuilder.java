@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @author N3212 竹内 和紀
  */
-public class JohoTeikyoIsshikiTokkiText1A4Builder implements IJohoTeikyoIsshikiBuilder {
+public class JohoTeikyoIsshikiTokkiImage1A4SeparateBuilder implements IJohoTeikyoIsshikiBuilder {
 
     private static final int 連番_0 = 0;
     private static final int 連番_1 = 1;
@@ -43,12 +43,10 @@ public class JohoTeikyoIsshikiTokkiText1A4Builder implements IJohoTeikyoIsshikiB
     private static final int 連番_14 = 14;
     private static final int フォームインデックス_判定用 = 30;
     private static final int 連番_計算用 = 15;
-    private static final RString すべて = new RString("1");
 
     private final TokkiText1A4Entity entity;
     private final List<RString> list;
     private final int count;
-    private final RString 情報提供資料の特記事項編集パターン;
 
     /**
      * コンストラクタです。
@@ -56,14 +54,12 @@ public class JohoTeikyoIsshikiTokkiText1A4Builder implements IJohoTeikyoIsshikiB
      * @param entity TokkiText1A4Entity
      * @param list list
      * @param count count
-     * @param 情報提供資料の特記事項編集パターン 情報提供資料の特記事項編集パターン
      */
-    public JohoTeikyoIsshikiTokkiText1A4Builder(TokkiText1A4Entity entity,
-            List<RString> list, int count, RString 情報提供資料の特記事項編集パターン) {
+    public JohoTeikyoIsshikiTokkiImage1A4SeparateBuilder(TokkiText1A4Entity entity,
+            List<RString> list, int count) {
         this.entity = entity;
         this.list = list;
         this.count = count;
-        this.情報提供資料の特記事項編集パターン = 情報提供資料の特記事項編集パターン;
     }
 
     @Override
@@ -145,17 +141,9 @@ public class JohoTeikyoIsshikiTokkiText1A4Builder implements IJohoTeikyoIsshikiB
 
     private void setレイアウトインデックス(YokaigoNinteiJohoTeikyoIsshikiReportSource source) {
         if (count < フォームインデックス_判定用) {
-            if (すべて.equals(情報提供資料の特記事項編集パターン)) {
-                source.layout = JohoTeikyoIsshiki.TokkiTextAll_image_separate.getFormGroupIndex();
-            } else {
-                source.layout = JohoTeikyoIsshiki.TokkiTextSeparate1.getFormGroupIndex();
-            }
+            source.layout = JohoTeikyoIsshiki.TokkiImageSeparate1.getFormGroupIndex();
         } else {
-            if (すべて.equals(情報提供資料の特記事項編集パターン)) {
-                source.layout = JohoTeikyoIsshiki.TokkiTextAll_image2_separate.getFormGroupIndex();
-            } else {
-                source.layout = JohoTeikyoIsshiki.TokkiTextSeparate2.getFormGroupIndex();
-            }
+            source.layout = JohoTeikyoIsshiki.TokkiImageSeparate2.getFormGroupIndex();
         }
     }
 

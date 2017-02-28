@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiShujiiikenshoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiSonoTashiryoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiImage1A4SeparateReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiText1A4Report;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.yokaigoninteijohoteikyoisshiki.YokaigoNinteiJohoTeikyoIsshikiReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -342,9 +343,8 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             RString 情報提供資料の特記事項編集パターン,
             ReportAssembler<YokaigoNinteiJohoTeikyoIsshikiReportSource> assembler) {
         ReportSourceWriter<YokaigoNinteiJohoTeikyoIsshikiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
-        JohoTeikyoIsshikiTokkiText1A4Report report = new JohoTeikyoIsshikiTokkiText1A4Report(
-                TokkiImage1A4SeparateEditor.edit(business.toEntity(), 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID),
-                情報提供資料の特記事項編集パターン);
+        JohoTeikyoIsshikiTokkiImage1A4SeparateReport report = new JohoTeikyoIsshikiTokkiImage1A4SeparateReport(
+                TokkiImage1A4SeparateEditor.edit(business.toEntity(), 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID));
         report.writeBy(reportSourceWriter);
     }
 
