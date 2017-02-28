@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -78,6 +79,8 @@ public class ShinsakaiKekkaToroku {
     private static final RString 一次判定結果変更理由定型文GroupCode = new RString("5103");
     private static final Code 二次判定結果入力方法_画面入力 = new Code("1");
     private static final RString 一_五次判定ダイアログ_照会モード = new RString("照会");
+    private static final RString UICONTAINERID = new RString("DBEUC52101");
+    private static final RString 戻るBTN = new RString("btnBack");
 
     private enum _ViewStateKey {
 
@@ -124,6 +127,10 @@ public class ShinsakaiKekkaToroku {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho = Models.create(ninteiKanryoJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, ninteiKanryoJoho);
         ViewStateHolder.put(_ViewStateKey.削除候補, new HashMap<>(service.get削除候補情報(開催番号)));
+        if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るBTN, true);
+        }
+        
         return ResponseData.of(div).respond();
     }
 
@@ -274,7 +281,11 @@ public class ShinsakaiKekkaToroku {
             service.saveBy(new ShinsaKekkaPreserver(div));
             div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()));
-            return ResponseData.of(div).setState(DBE5230001StateName.完了);
+            if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE5230001StateName.開催から終了);
+            } else {
+                return ResponseData.of(div).setState(DBE5230001StateName.完了);
+            }
         }
         return ResponseData.of(div).respond();
     }

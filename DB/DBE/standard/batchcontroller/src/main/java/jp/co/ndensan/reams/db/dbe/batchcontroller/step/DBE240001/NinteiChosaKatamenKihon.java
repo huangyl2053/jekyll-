@@ -63,22 +63,22 @@ public class NinteiChosaKatamenKihon extends BatchProcessBase<HomonChosaIraishoR
     @Override
     protected void createWriter() {
         if (ReportIdDBZ.DBE221012.getReportId().equals(帳票)) {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value())
-                    .addBreak(new BreakerCatalog<ChosahyoKihonchosaKatamenReportSource>().new SimpleLayoutBreaker(
-                        new RString("layoutIndex")) {
-            @Override
-                        public ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> occuredBreak(
-                                ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> currentRecord,
-                                ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> nextRecord, ReportDynamicChart dynamicChart) {
-                                    int layout = currentRecord.getSource().layoutIndex;
-                                    currentRecord.setFormGroupIndex(layout);
-                                    if (nextRecord != null && nextRecord.getSource() != null) {
-                                        layout = nextRecord.getSource().layoutIndex;
-                                        nextRecord.setFormGroupIndex(layout);
-                                    }
-                                    return currentRecord;
-                                }
-                    }).setStartFormGroup(2).create();
+//            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value())
+//                    .addBreak(new BreakerCatalog<ChosahyoKihonchosaKatamenReportSource>().new SimpleLayoutBreaker(
+//                        new RString("layoutIndex")) {
+//            @Override
+//                        public ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> occuredBreak(
+//                                ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> currentRecord,
+//                                ReportLineRecord<ChosahyoKihonchosaKatamenReportSource> nextRecord, ReportDynamicChart dynamicChart) {
+//                                    int layout = currentRecord.getSource().layoutIndex;
+//                                    currentRecord.setFormGroupIndex(layout);
+//                                    if (nextRecord != null && nextRecord.getSource() != null) {
+//                                        layout = nextRecord.getSource().layoutIndex;
+//                                        nextRecord.setFormGroupIndex(layout);
+//                                    }
+//                                    return currentRecord;
+//                                }
+//                    }).setStartFormGroup(2).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.value()).create();
         }

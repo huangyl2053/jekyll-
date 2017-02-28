@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 04 15:26:20 JST 2017 
+ * Mon Feb 27 15:35:11 JST 2017 
  */
 
 
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  */
 
 public class dgShinsakaiIinIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
 
     private TextBoxNum number;
     private RString shinsakjaiIinCode;

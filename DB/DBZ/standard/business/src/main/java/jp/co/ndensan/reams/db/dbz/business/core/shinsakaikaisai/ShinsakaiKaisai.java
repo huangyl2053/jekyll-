@@ -181,6 +181,15 @@ public class ShinsakaiKaisai implements Serializable {
     }
 
     /**
+     * 資料作成状況を取得します。
+     *
+     * @return 資料作成状況
+     */
+    public RString get資料作成状況() {
+        return entity.get資料作成();
+    }
+
+    /**
      * 介護認定審査会進捗状況を取得します。
      *
      * @return 介護認定審査会進捗状況

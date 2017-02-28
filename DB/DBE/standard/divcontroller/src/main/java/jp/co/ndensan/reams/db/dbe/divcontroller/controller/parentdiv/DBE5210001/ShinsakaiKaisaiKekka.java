@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2Identifier;
@@ -17,6 +18,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
@@ -25,6 +29,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaikekka.ShinsakaiKaisaiKekkaFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -32,15 +37,19 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 介護認定審査会開催結果登録するクラスです。
@@ -51,16 +60,19 @@ public class ShinsakaiKaisaiKekka {
 
     private static final int LENGTH_開催番号 = 8;
     private final ShinsakaiKaisaiKekkaFinder service;
+    private final ShinsakaiKekkaTorokuService kekkaTorokuservice;
     private final ShinsakaiKaisaiYoteiJohoManager manager;
     private final ShinsakaiOnseiJohoManager onseiJohoManager;
     private static final RString 新規モード文言 = new RString("新規モード");
     private static final RString 更新モード文言 = new RString("更新モード");
-
+    private static final RString 更新BTN = new RString("btnUpdate");
+    
     /**
      * コンストラクタです。
      */
     public ShinsakaiKaisaiKekka() {
         service = ShinsakaiKaisaiKekkaFinder.createInstance();
+        kekkaTorokuservice = ShinsakaiKekkaTorokuService.createInstance();
         manager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
         onseiJohoManager = new ShinsakaiOnseiJohoManager();
     }
@@ -87,10 +99,23 @@ public class ShinsakaiKaisaiKekka {
         } else {
             handler.initialize(list);
         }
-
+ 
         List<ShinsakaiKaisaiYoteiJoho2> yoteiJohoList = service.get審査会委員(開催番号).records();
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, shinsakaiKaisaiYoteiJoho);
+
+        SearchResult<ShinsakaiWariateJoho> wariateJohoResult = kekkaTorokuservice.get介護認定審査会割当情報(開催番号);
+        ShinsakaiKaisaiValidationHandler validationHandler = getValidationHandler(div);
+        if (!ResponseHolder.isReRequest() && validationHandler.is未作成データあり(wariateJohoResult.records())) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(更新BTN, true);
+            return ResponseData.of(div).addMessage(DbeErrorMessages.審査会資料未作成あり.getMessage()).respond();
+        }
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationHandler.開催日チェック(validationMessages);
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
 
         responseData.data = div;
         return responseData;
@@ -213,12 +238,8 @@ public class ShinsakaiKaisaiKekka {
                 && new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 || ResponseHolder.isWarningIgnoredRequest()) {
             setYotei(div);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("審査会開催結果登録")).respond();
-        }
-        if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
-                || ResponseHolder.isWarningIgnoredRequest()) {
-            return ResponseData.of(div).forwardWithEventName(DBE5210001TransitionEventName.審査会一覧に戻る).respond();
+            div.getKanryoPanel().getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()));
+            return ResponseData.of(div).setState(DBE5210001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
