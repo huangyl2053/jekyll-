@@ -117,8 +117,12 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
             RString spoolWorkPath = manager.getEucOutputDirectry();
             eucFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
             csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).hasHeader(false).build();
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(true).
+                    build();
         }
     }
 

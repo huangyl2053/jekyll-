@@ -134,7 +134,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.SJIS).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(false).
+                    hasHeader(true).
                     build();
         } else if (new RString("2").equals(一次判定IF文字コード)) {
             eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
@@ -142,7 +142,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.UTF_8withBOM).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(false).
+                    hasHeader(true).
                     build();
         }
     }

@@ -77,7 +77,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
             + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getCenterTransmissionData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE561001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
     private CenterTransmissionProcessParameter parameter;
     private CenterTransmissionMybitisParamter mybitisParamter;
@@ -136,13 +136,13 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         filename = Path.combinePath(spoolWorkPath, ファイル名);
-        csvWriterCenterTransmission = new CsvWriter.InstanceBuilder(filename).
-                setEncode(Encode.SJIS)
-                .canAppend(true)
-                .setDelimiter(EUC_WRITER_DELIMITER)
-                .setEnclosure(EUC_WRITER_ENCLOSURE)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false).build();
+        csvWriterCenterTransmission = new CsvWriter.InstanceBuilder(filename).canAppend(true).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
     }
 
     @Override

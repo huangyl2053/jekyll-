@@ -66,7 +66,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class KanryoshoriIchijihantei {
 
     private static final RString CSVファイルID = new RString("DBE310001");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ROOTTITLE = new RString("一次判定結果を完了しました。");
 
     /**
@@ -195,9 +196,13 @@ public class KanryoshoriIchijihantei {
         KanryoshoriIchijihanteiHandler handler = getHandler(div);
 
         try (CsvWriter<KanryoshoriCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgHanteiTaishosha_Row> rowList = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getSelectedItems();
             for (dgHanteiTaishosha_Row row : rowList) {
                 csvWriter.writeLine(getHandler(div).getCsvData(row));
@@ -282,7 +287,7 @@ public class KanryoshoriIchijihantei {
             if (validationMessages.existsError()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            
+
             QuestionMessage message = new QuestionMessage(DbeQuestionMessages.完了日登録確認.getMessage().getCode(),
                     DbeQuestionMessages.完了日登録確認.getMessage().replace("一次判定").evaluate());
             return ResponseData.of(div).addMessage(message).respond();

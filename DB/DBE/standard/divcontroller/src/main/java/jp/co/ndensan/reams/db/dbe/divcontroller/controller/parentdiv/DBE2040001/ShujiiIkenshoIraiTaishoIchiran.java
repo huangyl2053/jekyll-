@@ -73,7 +73,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIkenshoIraiTaishoIchiran {
 
     private static final RString CSVファイルID_主治医意見書依頼一覧 = new RString("DBE204001");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString NOTREATED = new RString("未");
     private static final RString 未処理 = new RString("未処理");
     private static final RString 完了可能 = new RString("完了可能");
@@ -180,8 +181,13 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<ShujiiIkenshoIraiCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> rowList = getHandler(div).getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));

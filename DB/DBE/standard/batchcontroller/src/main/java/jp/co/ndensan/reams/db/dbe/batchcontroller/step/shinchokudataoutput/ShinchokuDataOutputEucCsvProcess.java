@@ -53,7 +53,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE491001"));
     private ShinchokuDataOutputProcessParamter paramter;
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = RString.EMPTY;
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static List<RString> HIHOKENSHANOLIST;
     private RString eucFilePath;
     private ShinchokuDataOutputBusiness business;
@@ -95,15 +95,15 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
                     setEnclosure(EUC_WRITER_ENCLOSURE).
                     setEncode(Encode.SJIS).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(false).
+                    hasHeader(true).
                     build();
         } else if (new RString("2").equals(連携文字コード)) {
             eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilePath).
                     setDelimiter(EUC_WRITER_DELIMITER).
                     setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8).
+                    setEncode(Encode.UTF_8withBOM).
                     setNewLine(NewLine.CRLF).
-                    hasHeader(false).
+                    hasHeader(true).
                     build();
         }
     }

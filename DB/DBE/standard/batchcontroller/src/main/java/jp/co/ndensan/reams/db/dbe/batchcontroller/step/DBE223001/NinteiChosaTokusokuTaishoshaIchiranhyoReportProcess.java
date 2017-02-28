@@ -64,7 +64,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE223002");
     private static final RString CSVファイル名 = new RString("認定調査督促対象者一覧表.csv");
     private static final RString CSVタイトル = new RString("認定調査督促対象者一覧");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int INDEX_0 = 0;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
@@ -112,8 +113,13 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                     UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
             RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
             csvFilePath = Path.combinePath(spoolWorkPath, CSVファイル名);
-            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).canAppend(false)
-                    .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
+            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).canAppend(false).
+                    setDelimiter(EUC_WRITER_DELIMITER).
+                    setEnclosure(EUC_WRITER_ENCLOSURE).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(true).
+                    build();
         }
     }
 

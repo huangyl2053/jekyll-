@@ -65,7 +65,8 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class Ikenshoget {
 
     private static final RString CSVファイル名 = new RString("主治医意見書入手一覧.csv");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
 
     /**
@@ -145,8 +146,13 @@ public class Ikenshoget {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row, div));

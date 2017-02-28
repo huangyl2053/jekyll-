@@ -70,7 +70,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class Masking {
 
     private static final RString CSVファイルID_マスキング一覧 = new RString("DBE208001");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
     private static final RString 完了可能 = new RString("2");
     private static final RString 一次判定後 = new RString("1");
@@ -186,8 +187,13 @@ public class Masking {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 if (row.getSelected()) {

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,14 +27,16 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 審査会委員報酬一覧表のCSV作成プロセスクラスです。
- * 
+ *
  * @author n8417（鄒　春雨）
  */
 public class ShinsaHoshuIchiranCsvProcess extends ShinsaHoshuIchiranProcess {
 
     private FileSpoolManager fileSpoolManager;
     private RString eucFilePath;
-    
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+
     @BatchWriter
     private CsvWriter<IShinsaHoshuIchiranEntityCsvEucEntity> csvWriter;
 
@@ -42,10 +45,13 @@ public class ShinsaHoshuIchiranCsvProcess extends ShinsaHoshuIchiranProcess {
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, CSV_FILE_NAME);
-        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true)
-                .build();
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
     }
 
     @Override
@@ -57,7 +63,7 @@ public class ShinsaHoshuIchiranCsvProcess extends ShinsaHoshuIchiranProcess {
     protected void afterExecute() {
         csvWriter.close();
         fileSpoolManager.spool(eucFilePath);
-        
+
         バッチ出力条件リストの出力();
     }
 
@@ -67,17 +73,16 @@ public class ShinsaHoshuIchiranCsvProcess extends ShinsaHoshuIchiranProcess {
         RStringBuilder 審査会開催年月 = new RStringBuilder("【対象年月】");
         審査会開催年月.append(getFormatted年月(paramter.get審査会開催年月()));
         出力条件.add(審査会開催年月.toRString());
-        
+
         EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
                 new RString("介護認定審査会委員報酬一覧表CSV"),
-                導入団体.getLasdecCode_().value(), 
-                導入団体.get市町村名(), 
+                導入団体.getLasdecCode_().value(),
+                導入団体.get市町村名(),
                 new RString(JobContextHolder.getJobId()),
-                CSV_FILE_NAME, 
-                EUC_ENTITY_ID.toRString(), 
-                new RString(csvWriter.getCount()), 
+                CSV_FILE_NAME,
+                EUC_ENTITY_ID.toRString(),
+                new RString(csvWriter.getCount()),
                 出力条件);
         OutputJokenhyoFactory.createInstance(item).print();
     }
 }
-

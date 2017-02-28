@@ -75,7 +75,8 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class GetsureiShori {
 
     private static final RString UICONTAINERID_DBEUC56101 = new RString("DBEUC56101");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUC_ENTITY_ID = new RString("DBE202001");
     private static final RString KEY = new RString("key");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
@@ -192,8 +193,13 @@ public class GetsureiShori {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<CenterSoshinIchiranCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -273,7 +279,7 @@ public class GetsureiShori {
                 }
                 PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
                         .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"),
-                        new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+                                new RString("申請書管理番号"), row.getShinseishoKanriNo()));
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
                         row.getHihoNumber()));
                 personalDataList.add(personalData);

@@ -104,7 +104,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                 hasHeader(true).
                 setDelimiter(CSV_WRITER_DELIMITER).
                 setEnclosure(CSV_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 build();
 

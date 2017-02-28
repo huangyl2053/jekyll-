@@ -63,8 +63,8 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper."
             + "get概況調査データ");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518003");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-
     private static final int 連番1 = 1;
     private static final int 連番2 = 2;
     private static final int 連番3 = 3;
@@ -106,10 +106,11 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
     @Override
     protected void createWriter() {
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(false).
+                hasHeader(true).
                 build();
     }
 
