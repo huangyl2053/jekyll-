@@ -23,20 +23,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @author N3212 竹内 和紀
  */
-public class JohoTeikyoIsshikiTokkiText1A4Report extends Report<YokaigoNinteiJohoTeikyoIsshikiReportSource> {
+public class JohoTeikyoIsshikiTokkiImage1A4SeparateReport extends Report<YokaigoNinteiJohoTeikyoIsshikiReportSource> {
 
     private final TokkiText1A4Entity entity;
-    private final RString 情報提供資料の特記事項編集パターン;
 
     /**
      * インスタンスを生成します。
      *
      * @param entity 特記事項Entity
-     * @param 情報提供資料の特記事項編集パターン 情報提供資料の特記事項編集パターン
      */
-    public JohoTeikyoIsshikiTokkiText1A4Report(TokkiText1A4Entity entity, RString 情報提供資料の特記事項編集パターン) {
+    public JohoTeikyoIsshikiTokkiImage1A4SeparateReport(TokkiText1A4Entity entity) {
         this.entity = entity;
-        this.情報提供資料の特記事項編集パターン = 情報提供資料の特記事項編集パターン;
     }
 
     @Override
@@ -66,7 +63,7 @@ public class JohoTeikyoIsshikiTokkiText1A4Report extends Report<YokaigoNinteiJoh
             count = entity.get特記事項全イメージリスト().size();
         }
         for (int index = 0; index < count; index++) {
-            IJohoTeikyoIsshikiBuilder buildera = new JohoTeikyoIsshikiTokkiText1A4Builder(entity, list, index, 情報提供資料の特記事項編集パターン);
+            JohoTeikyoIsshikiTokkiImage1A4SeparateBuilder buildera = new JohoTeikyoIsshikiTokkiImage1A4SeparateBuilder(entity, list, index);
             reportSourceWriter.writeLine(buildera);
         }
     }

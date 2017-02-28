@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiNinteiChosaTokkiImageReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiShujiiikenshoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiSonoTashiryoReport;
+import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiImage1A4SeparateReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiText1A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
@@ -255,6 +256,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                 report.writeBy(reportSourceWriter);
             }
         }
+
         if (processPrm.is特記事項出力()) {
             RString 情報提供資料の特記事項編集パターン
                     = DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -276,8 +278,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                 } else {
                     TokkiText1A4Entity tokkiText1A4Entity
                             = TokkiImage1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分(), イメージ共有ファイルID);
-                    JohoTeikyoIsshikiTokkiText1A4Report report
-                            = new JohoTeikyoIsshikiTokkiText1A4Report(tokkiText1A4Entity, 情報提供資料の特記事項編集パターン);
+                    JohoTeikyoIsshikiTokkiImage1A4SeparateReport report = new JohoTeikyoIsshikiTokkiImage1A4SeparateReport(tokkiText1A4Entity);
                     report.writeBy(reportSourceWriter);
                 }
             } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
@@ -294,6 +295,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                 }
             }
         }
+
         if (processPrm.is主治医意見書出力()) {
             if (entity.is意見書同意フラグ()) {
                 ShujiiikenshoEntity shujiiikenshoEntity
@@ -302,6 +304,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                 report.writeBy(reportSourceWriter);
             }
         }
+
         if (processPrm.isその他資料出力()) {
             if (イメージ共有ファイルID != null) {
                 RString 共有フォルダ名 = entity.get保険者番号().concat(entity.get被保険者番号());
@@ -350,6 +353,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                 }
             }
         }
+
         if (processPrm.is一次判定結果出力()) {
             List<RString> 認定調査特記事項番号List = finder.get認定調査特記事項番号(申請書管理番号);
             List<NinteichosahyoChosaItem> 前回認定調査票調査項目List = finder.get前回認定調査票調査項目List(申請書管理番号);
