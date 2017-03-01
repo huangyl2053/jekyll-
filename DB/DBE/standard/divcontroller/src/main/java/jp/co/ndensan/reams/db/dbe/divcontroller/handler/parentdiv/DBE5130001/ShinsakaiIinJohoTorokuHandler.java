@@ -145,9 +145,9 @@ public class ShinsakaiIinJohoTorokuHandler {
                 row.setBiko(shinsakaiIinJoho.get備考());
             }
             if (IsHaishi.廃止.equals(IsHaishi.toValue(shinsakaiIinJoho.is廃止フラグ()))) {
-                row.setJokyo(廃止);
-            } else {
                 row.setJokyo(有効);
+            } else {
+                row.setJokyo(廃止);
             }
             if (shinsakaiIinJoho.get担当地区コード() != null) {
                 row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
