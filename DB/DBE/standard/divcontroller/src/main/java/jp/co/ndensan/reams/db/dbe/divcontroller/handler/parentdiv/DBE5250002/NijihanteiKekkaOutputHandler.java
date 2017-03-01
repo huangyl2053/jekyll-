@@ -128,7 +128,6 @@ public class NijihanteiKekkaOutputHandler {
                 dgFukushiyoguShohin.setKaigoNinteiShinsakaiName(審査会名称.toRString());
                 dgFukushiyoguShohin.setShinseishoKanriNo(jigyoshaInput.get申請書管理番号());
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
-                アクセスログ();
             }
             DataGridSetting gridSetting = nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getGridSetting();
             gridSetting.setLimitRowCount(hanteiParameter.getLimitCount());
@@ -277,18 +276,4 @@ public class NijihanteiKekkaOutputHandler {
         }
         return shinchokuParameter;
     }
-
-    /**
-     * アクセスログを出力します。
-     *
-     */
-    public void アクセスログ() {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(ShikibetsuCode.EMPTY));
-    }
-
-    private PersonalData toPersonalData(ShikibetsuCode 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("申請書管理番号"), 申請書管理番号.value());
-        return PersonalData.of(申請書管理番号, expandedInfo);
-    }
-
 }

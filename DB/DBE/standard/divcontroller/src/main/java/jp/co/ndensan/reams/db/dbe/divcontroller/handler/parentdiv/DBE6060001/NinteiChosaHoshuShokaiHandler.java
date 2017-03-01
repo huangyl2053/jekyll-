@@ -20,12 +20,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiCh
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -120,7 +118,6 @@ public class NinteiChosaHoshuShokaiHandler {
                 委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
             }
             listRow.add(row);
-            personalData.add(toPersonalData(調査一覧.get申請書管理番号().getColumnValue()));
         }
         AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgNinteiChosaHoshu().setDataSource(listRow);
@@ -129,12 +126,6 @@ public class NinteiChosaHoshuShokaiHandler {
         div.getTxtShisetsuShokai().setValue(new Decimal(施設_初));
         div.getTxtShisetsuSaichosa().setValue(new Decimal(施設_再));
         div.getTxtItakuryoGokei().setValue(委託料);
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(SHIKI, 管理番号,
-                申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

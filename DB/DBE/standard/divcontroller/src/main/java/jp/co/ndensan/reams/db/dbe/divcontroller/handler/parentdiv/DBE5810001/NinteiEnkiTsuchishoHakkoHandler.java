@@ -179,17 +179,6 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         div.getTxtTsuchishoHakkoDate().setValue(RDate.getNowDate());
         div.getTxtMikomiDateTsuchisho().clearFromValue();
         div.getTxtMikomiDateTsuchisho().clearToValue();
-        アクセスログの出力(被保番号List);
-    }
-
-    private void アクセスログの出力(List<RString> 被保番号List) {
-        List<PersonalData> personalDataList = new ArrayList<>();
-        for (RString 被保番号 : 被保番号List) {
-            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                    new ExpandedInformation(CODE_0003, NAME_被保険者番号, 被保番号));
-            personalDataList.add(personalData);
-        }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
     }
 
     private dgHakkotaishosha_Row getDataSource(NinteiEnkiTsuchishoHakkoBusiness 発行対象者情報) {

@@ -22,16 +22,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -131,9 +125,6 @@ public class CreateTargetHandler {
             row.getDataShutsuryoku().setValue(getNull(list.get送信年月日()));
             row.setShinseishokanrino(list.get申請書管理番号());
             rowList.add(row);
-            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                    new RString("申請書管理番号"), list.get申請書管理番号()));
-            AccessLogger.log(AccessLogType.照会, personalData);
         }
         div.getDgCreateTargetSummary().getGridSetting().setLimitRowCount(Integer.parseInt(div.getTxtMaxKensu().getValue().toString()));
         div.getDgCreateTargetSummary().getGridSetting().setSelectedRowCount(business.totalCount());

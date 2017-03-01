@@ -38,8 +38,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
