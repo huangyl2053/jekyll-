@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4050001
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.imagejohomasking.ImageJohoMaskingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.DBE4050001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.DBE4050001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.ImageJohoMaskingDiv;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -186,21 +184,7 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onBefore_onClickbtnMaskingGenpon(ImageJohoMaskingDiv div) {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
-        if (!ResponseHolder.isReRequest()) {
-            if (!row.getHasMask().isEmpty() || row.getState().equals(new RString("追加")) || row.getState().equals(new RString("修正"))) {
-                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.データ有確認.getMessage().getCode(),
-                        DbeQuestionMessages.データ有確認.getMessage().replace("マスキングイメージ", "再度マスキングを").evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            } else {
-                div.setHiddenImagePath(row.getImagePath());
-                return ResponseData.of(div).respond();
-            }
-        }
-        if (new RString(DbeQuestionMessages.データ有確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.setHiddenImagePath(row.getImagePath());
-            return ResponseData.of(div).respond();
-        }
+        div.setHiddenImagePath(row.getImagePath());
         return ResponseData.of(div).respond();
     }
 

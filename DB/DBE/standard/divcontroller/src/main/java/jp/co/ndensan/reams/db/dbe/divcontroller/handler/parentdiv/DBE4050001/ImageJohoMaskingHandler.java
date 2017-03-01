@@ -542,8 +542,12 @@ public class ImageJohoMaskingHandler {
      */
     public void changeButtonState() {
         dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
-        div.getBtnMaskingGenpon().setDisabled(false);
-        if (row.getHasMask().equals(マスク有) || row.getState().equals(状態_追加)) {
+        if (row.getHasMask().isEmpty() && !row.getState().equals(状態_追加) && !row.getState().equals(状態_修正)) {
+            div.getBtnMaskingGenpon().setDisabled(false);
+        } else {
+            div.getBtnMaskingGenpon().setDisabled(true);
+        }
+        if (row.getHasMask().equals(マスク有) || row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
             div.getBtnMaskingMask().setDisabled(false);
         } else {
             div.getBtnMaskingMask().setDisabled(true);
