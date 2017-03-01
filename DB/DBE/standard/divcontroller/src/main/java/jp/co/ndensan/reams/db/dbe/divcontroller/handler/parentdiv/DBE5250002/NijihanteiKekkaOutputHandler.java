@@ -20,19 +20,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -47,9 +39,7 @@ public class NijihanteiKekkaOutputHandler {
 
     private final NijihanteiKekkaOutputDiv nijidiv;
     private final RString 判定結果ボタン = new RString("btnRenkeiDataOutput");
-    private final RString 判定結果ボタン２ = new RString("btnCheck1");
     private final RString 連携ボタン = new RString("btnHanteikekkaOutput");
-    private final RString 連携ボタン２ = new RString("btnCheck2");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString 未出力のみ = new RString("未出力のみ");
@@ -71,12 +61,8 @@ public class NijihanteiKekkaOutputHandler {
      */
     public void initialize() {
         nijidiv.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(判定結果ボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(連携ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン２, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン２, true);
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         RString 検索制御_最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
@@ -96,8 +82,9 @@ public class NijihanteiKekkaOutputHandler {
      * 判定結果情報出力(保険者)検索処理する。
      *
      * @param 被保険者番号
+     * @return 検索結果が存在する場合、{@code true}.
      */
-    public void kennsaku(RString 被保険者番号) {
+    public boolean kennsaku(RString 被保険者番号) {
         List<dgTaishoshaIchiran_Row> dgTaishoshaIchiranList = new ArrayList<>();
         HanteiKekkaJouhouShuturyokuParameter hanteiParameter = createParameter(被保険者番号);
         SearchResult<HanteiKekkaJouhouShuturyokuBusiness> 判定結果情報検索結果 = HanteiKekkaJouhouShuturyokuFinder.createInstance()
@@ -115,7 +102,7 @@ public class NijihanteiKekkaOutputHandler {
                 }
                 dgFukushiyoguShohin.getNinteiShinseiDay().
                         setValue(jigyoshaInput.get認定申請年月日() == null ? FlexibleDate.EMPTY
-                                : new FlexibleDate(jigyoshaInput.get認定申請年月日().toString()));
+                                        : new FlexibleDate(jigyoshaInput.get認定申請年月日().toString()));
                 dgFukushiyoguShohin.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.
                         toValue(jigyoshaInput.get認定申請区分_申請時コード()).get名称());
                 if (jigyoshaInput.get二次判定要介護状態区分コード() != null) {
@@ -133,15 +120,15 @@ public class NijihanteiKekkaOutputHandler {
             gridSetting.setLimitRowCount(hanteiParameter.getLimitCount());
             gridSetting.setSelectedRowCount(判定結果情報検索結果.totalCount());
             nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setGridSetting(gridSetting);
-
+            nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, false);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン２, false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン２, false);
+            return true;
         } else {
-            throw new ApplicationException(UrErrorMessages.対象者が存在しない.getMessage());
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, true);
+            return false;
         }
-        nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
     }
 
     /**

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,10 @@ public class KensakuJokenDiv extends Panel {
     private RadioButton radDataShutsuryokuUmu;
     @JsonProperty("txtHyojiDataLimit")
     private TextBoxNum txtHyojiDataLimit;
+    @JsonProperty("btnClear")
+    private Button btnClear;
+    @JsonProperty("btnHyoji")
+    private Button btnHyoji;
     @JsonProperty("ccdHokensha")
     private HokenshaListDiv ccdHokensha;
 
@@ -150,6 +154,42 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("txtHyojiDataLimit")
     public void setTxtHyojiDataLimit(TextBoxNum txtHyojiDataLimit) {
         this.txtHyojiDataLimit = txtHyojiDataLimit;
+    }
+
+    /*
+     * getbtnClear
+     * @return btnClear
+     */
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    /*
+     * setbtnClear
+     * @param btnClear btnClear
+     */
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
+    }
+
+    /*
+     * getbtnHyoji
+     * @return btnHyoji
+     */
+    @JsonProperty("btnHyoji")
+    public Button getBtnHyoji() {
+        return btnHyoji;
+    }
+
+    /*
+     * setbtnHyoji
+     * @param btnHyoji btnHyoji
+     */
+    @JsonProperty("btnHyoji")
+    public void setBtnHyoji(Button btnHyoji) {
+        this.btnHyoji = btnHyoji;
     }
 
     /*

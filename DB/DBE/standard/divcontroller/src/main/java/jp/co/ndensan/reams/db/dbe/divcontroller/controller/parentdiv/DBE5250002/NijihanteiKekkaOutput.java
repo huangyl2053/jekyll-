@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.Nij
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
@@ -30,9 +32,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class NijihanteiKekkaOutput {
 
     private final RString 判定結果ボタン = new RString("btnRenkeiDataOutput");
-    private final RString 判定結果ボタン２ = new RString("btnCheck1");
     private final RString 連携ボタン = new RString("btnHanteikekkaOutput");
-    private final RString 連携ボタン２ = new RString("btnCheck2");
 
     /**
      * 判定結果情報出力(保険者)。<br/>
@@ -62,12 +62,8 @@ public class NijihanteiKekkaOutput {
         nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setMaxValue(new Decimal(検索制御_最大取得件数上限.toString()));
         nijiDiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(new Decimal(検索制御_最大取得件数.toString()));
         nijiDiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource().clear();
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(判定結果ボタン, false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(連携ボタン, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(判定結果ボタン２, true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン２, true);
         return createResponseData(nijiDiv);
     }
 
@@ -78,7 +74,12 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onClick_Btnkennsaku(NijihanteiKekkaOutputDiv div) {
-        createHandlerOf(div).kennsaku(div.getKensakuJoken().getTxtHihokenshaNo().getValue());
+        if (!ResponseHolder.isReRequest()) {
+            boolean hasFound = createHandlerOf(div).kennsaku(div.getKensakuJoken().getTxtHihokenshaNo().getValue());
+            if (!hasFound) {
+                return ResponseData.of(div).addMessage(UrErrorMessages.対象者が存在しない.getMessage()).respond();
+            }
+        }
         return createResponseData(div);
     }
 
