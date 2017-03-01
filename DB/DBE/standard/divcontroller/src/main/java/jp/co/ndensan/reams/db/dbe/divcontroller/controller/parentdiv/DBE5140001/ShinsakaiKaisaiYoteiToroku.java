@@ -770,6 +770,7 @@ public class ShinsakaiKaisaiYoteiToroku {
      * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_Hozon(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        RString 年月 = div.getLblMonth2().getText();
         this.div = div;
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
@@ -849,6 +850,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getShinsakaiKaisaiYoteiIchiran()
                     .setWidth(width_1225);
 
+            div.getLblMonth2().setText(年月);
             div.getCcdKanryoMessege()
                     .setMessage(new RString(
                                     UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
