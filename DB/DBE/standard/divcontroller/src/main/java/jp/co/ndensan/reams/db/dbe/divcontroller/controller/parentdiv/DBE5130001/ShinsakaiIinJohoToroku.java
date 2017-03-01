@@ -502,6 +502,7 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData<ShinsakaiIinJohoTorokuDiv> onClick_btnBackIchiran(ShinsakaiIinJohoTorokuDiv div) {
         div.getShinsakaiIinJohoIchiran().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
+        div.getTxtBirthYMD().clearValue();
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return responseWithSettingState(div);
     }
