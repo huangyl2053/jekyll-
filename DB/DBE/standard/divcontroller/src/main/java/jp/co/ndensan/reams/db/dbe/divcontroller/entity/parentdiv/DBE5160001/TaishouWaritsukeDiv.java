@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TaishouWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -264,6 +264,16 @@ public class TaishouWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setBtnWaritsukeKaijo(Button btnWaritsukeKaijo) {
         this.getShinsakaiTaishoshaWaritsuke().setBtnWaritsukeKaijo(btnWaritsukeKaijo);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShiryosakuseizumiKomi() {
+        return this.getShinsakaiTaishoshaWaritsuke().getChkShiryosakuseizumiKomi();
+    }
+
+    @JsonIgnore
+    public void  setChkShiryosakuseizumiKomi(CheckBoxList chkShiryosakuseizumiKomi) {
+        this.getShinsakaiTaishoshaWaritsuke().setChkShiryosakuseizumiKomi(chkShiryosakuseizumiKomi);
     }
 
     @JsonIgnore

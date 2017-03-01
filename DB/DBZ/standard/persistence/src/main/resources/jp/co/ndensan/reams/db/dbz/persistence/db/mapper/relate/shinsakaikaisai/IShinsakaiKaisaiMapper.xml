@@ -108,6 +108,10 @@
         <if test="is審査会完了のみ">
             AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '2'
         </if>
+        <if test="is審査会未開催分のみ">
+            AND (shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0'
+            OR shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1')
+        </if>
         <if test="is開催予定登録OR対象者割付">
             <if test="is表示しない">
                 AND gogitaiJoho."gogitaiDummyFlag" = false

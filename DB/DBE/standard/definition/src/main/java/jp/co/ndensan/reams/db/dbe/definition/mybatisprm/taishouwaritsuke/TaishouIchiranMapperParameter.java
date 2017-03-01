@@ -23,6 +23,8 @@ public final class TaishouIchiranMapperParameter {
     private final RString customOrder;
     private final RString tsujou;
     private final RString ennki;
+    private final boolean isSort;
+    private final boolean isShiryosakuseizumiKomi;
 
     /**
      * コンストラクタです。 「審査会順番を振りなおす」ボタンを押下しない場合
@@ -35,15 +37,36 @@ public final class TaishouIchiranMapperParameter {
         this.customOrder = RString.EMPTY;
         this.tsujou = ShoriJotaiKubun.通常.getコード();
         this.ennki = ShoriJotaiKubun.延期.getコード();
+        this.isSort = false;
+        this.isShiryosakuseizumiKomi = false;
+    }
+    
+    /**
+     * コンストラクタです。 「審査会順番を振りなおす」ボタンを押下しない場合(ソート用)
+     *
+     * @param kaisaiNo 開催番号
+     * @param isSort ソート検索有無
+     * @param isShiryosakuseizumiKomi 審査会資料作成済みデータも含むかフラグ
+     */
+    private TaishouIchiranMapperParameter(RString kaisaiNo, boolean isSort, boolean isShiryosakuseizumiKomi) {
+        this.kaisaiNo = kaisaiNo;
+        this.isButtonPushed = false;
+        this.customOrder = RString.EMPTY;
+        this.tsujou = ShoriJotaiKubun.通常.getコード();
+        this.ennki = ShoriJotaiKubun.延期.getコード();
+        this.isSort = isSort;
+        this.isShiryosakuseizumiKomi = isShiryosakuseizumiKomi;
     }
 
     /**
-     * コンストラクタです。 「審査会順番を振りなおす」ボタンを押下した場合
+     * コンストラクタです。 「審査会順番を振りなおす」ボタンを押下した場合(ソート用)
      *
      * @param kaisaiNo 開催番号
      * @param customOrder カスタムコンフィグの審査会順序
+     * @param isSort ソート検索有無
+     * @param isShiryosakuseizumiKomi 審査会資料作成済みデータも含むかフラグ
      */
-    private TaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder) {
+    private TaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder, boolean isSort, boolean isShiryosakuseizumiKomi) {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = true;
         this.tsujou = ShoriJotaiKubun.通常.getコード();
@@ -54,17 +77,22 @@ public final class TaishouIchiranMapperParameter {
                 .replace("DbT5105NinteiKanryoJoho", "DbT5105").replace("DbT5910NinteichosaItakusakiJoho", "DbT5910").
                 replace("DbT5911ShujiiIryoKikanJoho", "DbT5911").replace("DbT5913ChosainJoho", "DbT5913")
                 .replace("DbT5912ShujiiJoho", "DbT5912");
+        this.isSort = isSort;
+        this.isShiryosakuseizumiKomi = isShiryosakuseizumiKomi;
     }
 
     /**
-     * キー検索用のパラメータを生成します。「審査会順番を振りなおす」ボタンを押下した場合
+     * キー検索用のパラメータを生成します。「審査会順番を振りなおす」ボタンを押下した場合(ソート用)
      *
      * @param kaisaiNo 開催番号
      * @param customOrder カスタムコンフィグの審査会順序
+     * @param isSort ソート検索有無
+     * @param isShiryosakuseizumiKomi 審査会資料作成済みデータも含むかフラグ
      * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
      */
-    public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder) {
-        return new TaishouIchiranMapperParameter(kaisaiNo, customOrder);
+    public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(
+            RString kaisaiNo, RString customOrder, boolean isSort, boolean isShiryosakuseizumiKomi) {
+        return new TaishouIchiranMapperParameter(kaisaiNo, customOrder, isSort, isShiryosakuseizumiKomi);
     }
 
     /**
@@ -73,7 +101,27 @@ public final class TaishouIchiranMapperParameter {
      * @param kaisaiNo 開催番号
      * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
      */
-    public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(RString kaisaiNo) {
+    /**
+     * キー検索用のパラメータを生成します。「審査会順番を振りなおす」ボタンを押下しない場合(ソート用)
+     * 
+     * @param kaisaiNo 開催番号
+     * @param isSort ソート検索有無
+     * @param isShiryosakuseizumiKomi 審査会資料作成済みデータも含むかフラグ
+     * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
+     */
+    public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(
+            RString kaisaiNo, boolean isSort, boolean isShiryosakuseizumiKomi) {
+        return new TaishouIchiranMapperParameter(kaisaiNo, isSort, isShiryosakuseizumiKomi);
+    }
+
+    /**
+     * キー検索用のパラメータを生成します。「審査会順番を振りなおす」ボタンを押下しない場合
+     *
+     * @param kaisaiNo 開催番号
+     * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
+     */
+    public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(
+            RString kaisaiNo) {
         return new TaishouIchiranMapperParameter(kaisaiNo);
     }
 }

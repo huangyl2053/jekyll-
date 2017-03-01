@@ -114,5 +114,32 @@
           A."ninteiChosainCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteiChosainCode" />)
     </select>
     
+    <!-- 調査実施者情報のデータソースの取得処理 -->
+    <select resultOrdered="true" id="getChosaJisshishaJoho" resultMap="resultMap_ChosaJisshishaJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosajisshishajoho.ChosaJisshishaJohoParameter" fetchSize="500">
+        SELECT dbt5201."ninteichosaItakusakiCode" AS dbt5201_ninteichosaItakusakiCode
+        , dbt5201."ninteiChosainCode" AS dbt5201_ninteiChosainCode
+        , dbt5910."jigyoshaMeisho" AS dbt5910_jigyoshaMeisho
+        , dbt5913."chosainShimei" AS dbt5913_chosainShimei
+        FROM rgdb."DbT5201NinteichosaIraiJoho" dbt5201
+        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
+        ON dbt5101."shinseishoKanriNo" = dbt5201."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbt5910
+        ON dbt5910."shichosonCode" = dbt5101."shichosonCode"
+        AND dbt5910."ninteichosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
+        LEFT JOIN rgdb."DbT5913ChosainJoho" dbt5913
+        ON dbt5913."shichosonCode" = dbt5101."shichosonCode"
+        AND dbt5913."ninteiChosaItakusakiCode" = dbt5201."ninteichosaItakusakiCode"
+        AND dbt5913."ninteiChosainCode" = dbt5201."ninteiChosainCode"
+        WHERE dbt5201."shinseishoKanriNo" = #{申請書管理番号}
+        AND dbt5201."ninteichosaIraiRirekiNo" = #{認定調査依頼履歴番号}
+    </select>
     
+    <resultMap id="resultMap_ChosaJisshishaJohoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.chosajisshishajoho.ChosaJisshishaJohoRelateEntity" autoMapping="true">
+        <result property="ninteichosaItakusakiCode"  column="dbt5201_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>
+        <result property="ninteiChosainCode"  column="dbt5201_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeisho"  column="dbt5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei"  column="dbt5913_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+        
 </mapper>

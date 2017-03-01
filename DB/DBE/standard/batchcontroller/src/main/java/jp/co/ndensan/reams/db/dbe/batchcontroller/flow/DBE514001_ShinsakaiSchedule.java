@@ -43,10 +43,6 @@ public class DBE514001_ShinsakaiSchedule extends BatchFlowBase<DBE514001_Shinsak
                 executeStep(CALL_KAGAMIFLOW);
             }
             if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分2)) {
-                for (RString item : getParameter().getShinsakaiIinCodeList()) {
-                    executeStep(SHINSAKAISCHEDULEHYO);
-                }
-                executeStep(CALL_KAGAMIFLOW);
                 executeStep(NENKAN);
             }
             if (getParameter().getChohyoShutsuryokuKubun().equals(帳票出力区分3)) {

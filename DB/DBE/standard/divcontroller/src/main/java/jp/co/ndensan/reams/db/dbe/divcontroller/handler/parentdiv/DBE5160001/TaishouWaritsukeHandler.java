@@ -210,26 +210,58 @@ public class TaishouWaritsukeHandler {
      * 審査会順序を振りなおす。
      */
     public void 審査会順序を振りなおす() {
-        div.getDgTaishoshaIchiran().init();
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         RString カスタムコンフィグの審査会順序 = BusinessConfig.get(DbeConfigKey.審査会順序, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        boolean 審査会資料作成済込み有無 = div.getChkShiryosakuseizumiKomi().getSelectedKeys().contains(new RString("key0"));
+        List<dgTaishoshaIchiran_Row> 対象者リスト = div.getDgTaishoshaIchiran().getDataSource();
+        List<dgTaishoshaIchiran_Row> 固定対象者リスト = new ArrayList<>();
+        List<dgTaishoshaIchiran_Row> ソート対象者リスト = new ArrayList<>();
+        List<Taishouichiran> ichiranList;
         TaishouIchiranMapperParameter parameter;
-        if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
-            parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo());
+        if (審査会資料作成済込み有無) {
+            if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
+                parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), true, 審査会資料作成済込み有無);
+            } else {
+                parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序, true, 審査会資料作成済込み有無);
+            }
+            ichiranList = finder.get対象者一覧(parameter);
+            for (Taishouichiran taishoshaichiran : ichiranList) {
+                if (is対象者Gridに存在する(taishoshaichiran)) {
+                    dgTaishoshaIchiran_Row currentRow = set対象者一覧Row(taishoshaichiran);
+                    ソート対象者リスト.add(currentRow);
+                    対象者リスト.remove(currentRow);
+                }
+            }
         } else {
-            parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序);
-        }
-        List<Taishouichiran> ichiranList = finder.get対象者一覧(parameter);
-        List<Taishouichiran> grid表示対象者List = new ArrayList<>();
-        for (Taishouichiran taishoshaichiran : ichiranList) {
-            if (is対象者Gridに存在する(taishoshaichiran)) {
-                grid表示対象者List.add(taishoshaichiran);
+            for (int count = 0; count < 対象者リスト.size(); count++) {
+                dgTaishoshaIchiran_Row currentRow = 対象者リスト.get(count);
+                if (currentRow.getShinsakaiShiryoSakuseiYMD() != null
+                        && currentRow.getShinsakaiShiryoSakuseiYMD().getText() != null
+                        && !RString.isNullOrEmpty(currentRow.getShinsakaiShiryoSakuseiYMD().getText())) {
+                    固定対象者リスト.add(currentRow);
+                    対象者リスト.remove(currentRow);
+                    count--;
+                }
+            }
+            if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
+                parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), true, 審査会資料作成済込み有無);
+            } else {
+                parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序, true, 審査会資料作成済込み有無);
+            }
+            ichiranList = finder.get対象者一覧(parameter);
+            for (Taishouichiran taishoshaichiran : ichiranList) {
+                if (is対象者Gridに存在する(taishoshaichiran)) {
+                    dgTaishoshaIchiran_Row currentRow = set対象者一覧Row(taishoshaichiran);
+                    ソート対象者リスト.add(currentRow);
+                    対象者リスト.remove(currentRow);
+                }
             }
         }
-        set対象者一覧(grid表示対象者List);
-        対象者一覧No振り直し();
+        setソート対象者一覧(固定対象者リスト, ソート対象者リスト);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
@@ -237,6 +269,31 @@ public class TaishouWaritsukeHandler {
         div.getBtnJidoWaritsuke().setDisabled(true);
         div.getBtnWaritsuke().setDisabled(true);
         div.getBtnWaritsukeKaijo().setDisabled(true);
+    }
+
+    private void setソート対象者一覧(List<dgTaishoshaIchiran_Row> 固定対象者リスト,
+            List<dgTaishoshaIchiran_Row> ソート対象者リスト) {
+        List<dgTaishoshaIchiran_Row> ソート後リスト = 固定対象者リスト;
+        boolean 審査会資料作成済込み有無 = div.getChkShiryosakuseizumiKomi().getSelectedKeys().contains(new RString("key0"));
+        int 最大確定No = 0;
+        if (!ソート後リスト.isEmpty()) {
+            最大確定No = ソート後リスト.get(ソート後リスト.size() - 1).getNo().toInt();
+        }
+        if (審査会資料作成済込み有無) {
+            for (dgTaishoshaIchiran_Row row : ソート対象者リスト) {
+                最大確定No++;
+                row.setNo(new RString(最大確定No));
+                ソート後リスト.add(row);
+            }
+        } else {
+            for (dgTaishoshaIchiran_Row row : ソート対象者リスト) {
+                最大確定No++;
+                row.setNo(new RString(最大確定No));
+                ソート後リスト.add(row);
+            }
+        }
+        div.getDgTaishoshaIchiran().setDataSource(ソート後リスト);
+        ViewStateHolder.put(ViewStateKeys.番号, new RString(最大確定No));
     }
 
     /**
@@ -388,6 +445,22 @@ public class TaishouWaritsukeHandler {
 
     private void set対象者一覧(List<Taishouichiran> ichiranList) {
         List<dgTaishoshaIchiran_Row> rows = new ArrayList<>();
+        dgTaishoshaIchiran_Row row;
+        RString 最大登録済No = ZERO;
+        for (Taishouichiran taishouichiran : ichiranList) {
+            row = set対象者一覧Row(taishouichiran);
+            RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
+            RString 登録済No = no;
+            rows.add(row);
+            if (登録済No.toInt() > 最大登録済No.toInt()) {
+                最大登録済No = 登録済No;
+            }
+        }
+        div.getDgTaishoshaIchiran().setDataSource(rows);
+        ViewStateHolder.put(ViewStateKeys.番号, 最大登録済No);
+    }
+
+    private dgTaishoshaIchiran_Row set対象者一覧Row(Taishouichiran taishouichiran) {
         RString 優先;
         RString 性別;
         RString 被保区分;
@@ -395,6 +468,7 @@ public class TaishouWaritsukeHandler {
         TextBoxFlexibleDate 認定申請日;
         TextBoxFlexibleDate 前回有効期間開始日;
         TextBoxFlexibleDate 前回有効期間終了日;
+        TextBoxFlexibleDate 審査会資料作成日;
         RString 調査票_寝たきり度;
         RString 調査票_認知度;
         RString 意見書_寝たきり度;
@@ -404,139 +478,138 @@ public class TaishouWaritsukeHandler {
         RString 前回一次判定 = RString.EMPTY;
         RString 前回二次判定 = RString.EMPTY;
         dgTaishoshaIchiran_Row row;
-        RString 最大登録済No = ZERO;
         RString 認定審査会割付完了日 = RString.EMPTY;
         Icon オブザーバーチェック_主治医;
         Icon オブザーバーチェック_調査員;
         Icon オブザーバーチェック_入所施設;
         Icon オブザーバーチェック_その他;
-        for (Taishouichiran taishouichiran : ichiranList) {
-            認定申請日 = new TextBoxFlexibleDate();
-            前回有効期間開始日 = new TextBoxFlexibleDate();
-            前回有効期間終了日 = new TextBoxFlexibleDate();
-            RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
-            RString 登録済No = no;
-            Boolean 登録済フラグ = true;
-            オブザーバーチェック_主治医 = new Icon();
-            オブザーバーチェック_調査員 = new Icon();
-            オブザーバーチェック_入所施設 = new Icon();
-            オブザーバーチェック_その他 = new Icon();
-            try {
-                優先 = taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
-                        ? ShinsakaiYusenWaritsukeKubunCode.toValue(taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
-                        : RString.EMPTY;
-            } catch (IllegalArgumentException e) {
-                優先 = RString.EMPTY;
-            }
-            try {
-                性別 = Seibetsu.toValue(taishouichiran.get性別().getColumnValue()).get名称();
-            } catch (IllegalArgumentException e) {
-                性別 = RString.EMPTY;
-            }
-            try {
-                被保区分 = HihokenshaKubunCode.toValue(taishouichiran.get被保険者区分コード()).get名称();
-            } catch (IllegalArgumentException e) {
-                被保区分 = RString.EMPTY;
-            }
-            try {
-                申請区分_申請時 = NinteiShinseiShinseijiKubunCode.toValue(taishouichiran.get認定申請区分_申請時コード().getColumnValue()).get名称();
-            } catch (IllegalArgumentException e) {
-                申請区分_申請時 = RString.EMPTY;
-            }
-            認定申請日.setValue(taishouichiran.get認定申請年月日());
-            前回有効期間開始日.setValue(taishouichiran.get前回認定有効期間_開始());
-            前回有効期間終了日.setValue(taishouichiran.get前回認定有効期間_終了());
-            try {
-                調査票_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                        taishouichiran.get調査票_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            } catch (IllegalArgumentException e) {
-                調査票_寝たきり度 = RString.EMPTY;
-            }
-            try {
-                調査票_認知度 = NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                        taishouichiran.get調査票_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            } catch (IllegalArgumentException e) {
-                調査票_認知度 = RString.EMPTY;
-            }
-            try {
-                意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                        taishouichiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            } catch (IllegalArgumentException e) {
-                意見書_寝たきり度 = RString.EMPTY;
-            }
-            try {
-                意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                        taishouichiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
-            } catch (IllegalArgumentException e) {
-                意見書_認知度 = RString.EMPTY;
-            }
-            再調査 = new RString(Integer.toString(taishouichiran.get再調査依頼回数()));
-            if (taishouichiran.get厚労省IF識別コード() != null || !taishouichiran.get厚労省IF識別コード().isEmpty()) {
-                RString 厚労省IF識別コード = taishouichiran.get厚労省IF識別コード().value().substring(0, 2);
-                今回一次判定 = set今回一次判定区分(taishouichiran.get要介護認定一次判定結果コード(), 厚労省IF識別コード, 今回一次判定);
-                前回一次判定 = set前回一次判定区分(taishouichiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
-                前回二次判定 = set前回二次判定区分(taishouichiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
-            }
-            if (taishouichiran.get認定審査会割付完了年月日() != null && !taishouichiran.get認定審査会割付完了年月日().isEmpty()) {
-                認定審査会割付完了日 = new RString(taishouichiran.get認定審査会割付完了年月日().toString());
-            }
-            if (!isオブザーバーチェックOK(taishouichiran.get申請書管理番号(), true, false, false)) {
-                オブザーバーチェック_主治医.setIcon(IconType.Warning);
-            }
-            if (!isオブザーバーチェックOK(taishouichiran.get申請書管理番号(), false, true, false)) {
-                オブザーバーチェック_調査員.setIcon(IconType.Warning);
-            }
-            if (!isオブザーバーチェックOK(taishouichiran.get申請書管理番号(), false, false, true)) {
-                オブザーバーチェック_入所施設.setIcon(IconType.Warning);
-            }
-            if (!isオブザーバーチェックその他OK(taishouichiran.get申請書管理番号())) {
-                オブザーバーチェック_その他.setIcon(IconType.Warning);
-            }
-            row = new dgTaishoshaIchiran_Row(
-                    対象者一覧状態フラグ,
-                    taishouichiran.get介護認定審査会審査順確定フラグ() ? 審査順確定フラグ_確定 : 審査順確定フラグ_確定しない,
-                    taishouichiran.get申請書管理番号().getColumnValue(),
-                    no,
-                    優先,
-                    taishouichiran.get被保険者番号(),
-                    taishouichiran.get被保険者氏名().getColumnValue(),
-                    性別,
-                    被保区分,
-                    申請区分_申請時,
-                    認定申請日,
-                    前回有効期間開始日,
-                    前回有効期間終了日,
-                    今回一次判定,
-                    taishouichiran.getマスキング完了年月日().wareki().toDateString(),
-                    taishouichiran.get証記載保険者番号().getColumnValue(),
-                    taishouichiran.get市町村名称(),
-                    前回一次判定,
-                    前回二次判定,
-                    調査票_寝たきり度,
-                    調査票_認知度,
-                    意見書_寝たきり度,
-                    意見書_認知度,
-                    taishouichiran.get入所施設(),
-                    taishouichiran.get事業者名称(),
-                    taishouichiran.get調査員氏名(),
-                    再調査,
-                    taishouichiran.get医療機関名称(),
-                    taishouichiran.get主治医氏名().getColumnValue(),
-                    オブザーバーチェック_主治医,
-                    オブザーバーチェック_調査員,
-                    オブザーバーチェック_入所施設,
-                    オブザーバーチェック_その他,
-                    登録済フラグ,
-                    登録済No,
-                    認定審査会割付完了日
-            );
-            rows.add(row);
-            if (登録済No.toInt() > 最大登録済No.toInt()) {
-                最大登録済No = 登録済No;
-            }
+        TextBoxFlexibleDate 審査会資料送付日;
+        認定申請日 = new TextBoxFlexibleDate();
+        前回有効期間開始日 = new TextBoxFlexibleDate();
+        前回有効期間終了日 = new TextBoxFlexibleDate();
+        審査会資料作成日 = new TextBoxFlexibleDate();
+        RString no = new RString(Integer.toString(taishouichiran.get介護認定審査会審査順()));
+        RString 登録済No = no;
+        Boolean 登録済フラグ = true;
+        審査会資料送付日 = new TextBoxFlexibleDate();
+        オブザーバーチェック_主治医 = new Icon();
+        オブザーバーチェック_調査員 = new Icon();
+        オブザーバーチェック_入所施設 = new Icon();
+        オブザーバーチェック_その他 = new Icon();
+        try {
+            優先 = taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
+                    ? ShinsakaiYusenWaritsukeKubunCode.toValue(taishouichiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
+                    : RString.EMPTY;
+        } catch (IllegalArgumentException e) {
+            優先 = RString.EMPTY;
         }
-        div.getDgTaishoshaIchiran().setDataSource(rows);
-        ViewStateHolder.put(ViewStateKeys.番号, 最大登録済No);
+        try {
+            性別 = Seibetsu.toValue(taishouichiran.get性別().getColumnValue()).get名称();
+        } catch (IllegalArgumentException e) {
+            性別 = RString.EMPTY;
+        }
+        try {
+            被保区分 = HihokenshaKubunCode.toValue(taishouichiran.get被保険者区分コード()).get名称();
+        } catch (IllegalArgumentException e) {
+            被保区分 = RString.EMPTY;
+        }
+        try {
+            申請区分_申請時 = NinteiShinseiShinseijiKubunCode.toValue(taishouichiran.get認定申請区分_申請時コード().getColumnValue()).get名称();
+        } catch (IllegalArgumentException e) {
+            申請区分_申請時 = RString.EMPTY;
+        }
+        認定申請日.setValue(taishouichiran.get認定申請年月日());
+        前回有効期間開始日.setValue(taishouichiran.get前回認定有効期間_開始());
+        前回有効期間終了日.setValue(taishouichiran.get前回認定有効期間_終了());
+        審査会資料作成日.setValue(taishouichiran.get審査会資料作成年月日());
+        try {
+            調査票_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                    taishouichiran.get調査票_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
+        } catch (IllegalArgumentException e) {
+            調査票_寝たきり度 = RString.EMPTY;
+        }
+        try {
+            調査票_認知度 = NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                    taishouichiran.get調査票_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+        } catch (IllegalArgumentException e) {
+            調査票_認知度 = RString.EMPTY;
+        }
+        try {
+            意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                    taishouichiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
+        } catch (IllegalArgumentException e) {
+            意見書_寝たきり度 = RString.EMPTY;
+        }
+        try {
+            意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                    taishouichiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
+        } catch (IllegalArgumentException e) {
+            意見書_認知度 = RString.EMPTY;
+        }
+        再調査 = new RString(Integer.toString(taishouichiran.get再調査依頼回数()));
+        if (taishouichiran.get厚労省IF識別コード() != null || !taishouichiran.get厚労省IF識別コード().isEmpty()) {
+            RString 厚労省IF識別コード = taishouichiran.get厚労省IF識別コード().value().substring(0, 2);
+            今回一次判定 = set今回一次判定区分(taishouichiran.get要介護認定一次判定結果コード(), 厚労省IF識別コード, 今回一次判定);
+            前回一次判定 = set前回一次判定区分(taishouichiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
+            前回二次判定 = set前回二次判定区分(taishouichiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
+        }
+        if (taishouichiran.get認定審査会割付完了年月日() != null && !taishouichiran.get認定審査会割付完了年月日().isEmpty()) {
+            認定審査会割付完了日 = new RString(taishouichiran.get認定審査会割付完了年月日().toString());
+        }
+        審査会資料送付日.setValue(taishouichiran.get審査会資料送付年月日());
+        if (!isオブザーバーチェックOK(taishouichiran.get申請書管理番号(), true, false, false)) {
+            オブザーバーチェック_主治医.setIcon(IconType.Warning);
+        }
+        if (!isオブザーバーチェックOK(taishouichiran.get申請書管理番号(), false, true, false)) {
+            オブザーバーチェック_調査員.setIcon(IconType.Warning);
+        }
+        if (!isオブザーバーチェックOK(taishouichiran.get申請書管理番号(), false, false, true)) {
+            オブザーバーチェック_入所施設.setIcon(IconType.Warning);
+        }
+        if (!isオブザーバーチェックその他OK(taishouichiran.get申請書管理番号())) {
+            オブザーバーチェック_その他.setIcon(IconType.Warning);
+        }
+        row = new dgTaishoshaIchiran_Row(
+                対象者一覧状態フラグ,
+                taishouichiran.get介護認定審査会審査順確定フラグ() ? 審査順確定フラグ_確定 : 審査順確定フラグ_確定しない,
+                taishouichiran.get申請書管理番号().getColumnValue(),
+                no,
+                優先,
+                taishouichiran.get被保険者番号(),
+                taishouichiran.get被保険者氏名().getColumnValue(),
+                性別,
+                被保区分,
+                申請区分_申請時,
+                認定申請日,
+                前回有効期間開始日,
+                前回有効期間終了日,
+                審査会資料作成日,
+                今回一次判定,
+                taishouichiran.getマスキング完了年月日().wareki().toDateString(),
+                taishouichiran.get証記載保険者番号().getColumnValue(),
+                taishouichiran.get市町村名称(),
+                前回一次判定,
+                前回二次判定,
+                調査票_寝たきり度,
+                調査票_認知度,
+                意見書_寝たきり度,
+                意見書_認知度,
+                taishouichiran.get入所施設(),
+                taishouichiran.get事業者名称(),
+                taishouichiran.get調査員氏名(),
+                再調査,
+                taishouichiran.get医療機関名称(),
+                taishouichiran.get主治医氏名().getColumnValue(),
+                オブザーバーチェック_主治医,
+                オブザーバーチェック_調査員,
+                オブザーバーチェック_入所施設,
+                オブザーバーチェック_その他,
+                登録済フラグ,
+                登録済No,
+                認定審査会割付完了日,
+                審査会資料送付日
+        );
+        return row;
     }
 
     private RString set前回二次判定区分(Code code, RString 厚労省IF識別コード, RString 前回二次判定) {
@@ -701,6 +774,7 @@ public class TaishouWaritsukeHandler {
                     認定申請日,
                     前回有効期間開始日,
                     前回有効期間終了日,
+                    new TextBoxFlexibleDate(),
                     今回一次判定,
                     kohoshaIchiran.getマスキング完了年月日().wareki().toDateString(),
                     kohoshaIchiran.get証記載保険者番号().getColumnValue(),
@@ -722,7 +796,8 @@ public class TaishouWaritsukeHandler {
                     オブザーバーチェック_入所施設,
                     オブザーバーチェック_その他,
                     登録済フラグ,
-                    登録済No
+                    登録済No,
+                    new TextBoxFlexibleDate()
             );
             rows.add(row);
         }
@@ -758,6 +833,7 @@ public class TaishouWaritsukeHandler {
                 kohoshaIchiran_Row.getShinseiDay(),
                 kohoshaIchiran_Row.getZenkaiYukoKikanKaishiDay(),
                 kohoshaIchiran_Row.getZenkaiYukoKikanShuryoDay(),
+                kohoshaIchiran_Row.getShinsakaiShiryoSakuseiYMD(),
                 kohoshaIchiran_Row.getKonkaiIchijiHantei(),
                 kohoshaIchiran_Row.getMasking(),
                 kohoshaIchiran_Row.getHokenshaNo(),
@@ -780,7 +856,8 @@ public class TaishouWaritsukeHandler {
                 kohoshaIchiran_Row.getObserverCheckSonota(),
                 kohoshaIchiran_Row.getTorokuZumiFlag(),
                 kohoshaIchiran_Row.getTorokuZumiNo(),
-                RString.EMPTY
+                RString.EMPTY,
+                kohoshaIchiran_Row.getShinsakaiShiryoSofuYMD()
         );
         div.getDgTaishoshaIchiran().getDataSource().add(taishoshaIchiran_Row);
         div.getDgWaritsukeKohoshaIchiran().getDataSource().remove(kohoshaIchiran_Row);
@@ -809,6 +886,7 @@ public class TaishouWaritsukeHandler {
                 taishoshaIchiran_Row.getShinseiDay(),
                 taishoshaIchiran_Row.getZenkaiYukoKikanKaishiDay(),
                 taishoshaIchiran_Row.getZenkaiYukoKikanShuryoDay(),
+                taishoshaIchiran_Row.getShinsakaiShiryoSakuseiYMD(),
                 taishoshaIchiran_Row.getKonkaiIchijiHantei(),
                 taishoshaIchiran_Row.getMasking(),
                 taishoshaIchiran_Row.getHokenshaNo(),
@@ -830,7 +908,8 @@ public class TaishouWaritsukeHandler {
                 taishoshaIchiran_Row.getObserverCheckNyushoShisetsu(),
                 taishoshaIchiran_Row.getObserverCheckSonota(),
                 taishoshaIchiran_Row.getTorokuZumiFlag(),
-                taishoshaIchiran_Row.getTorokuZumiNo()
+                taishoshaIchiran_Row.getTorokuZumiNo(),
+                taishoshaIchiran_Row.getShinsakaiShiryoSofuYMD()
         );
         div.getDgTaishoshaIchiran().getDataSource().remove(taishoshaIchiran_Row);
         div.getDgWaritsukeKohoshaIchiran().getDataSource().add(kohoshaIchiran_Row);
@@ -846,7 +925,7 @@ public class TaishouWaritsukeHandler {
                                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
                                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
                 ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
-                if ((shinsakaiWariateJoho != null && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ()))) {
+                if (shinsakaiWariateJoho != null && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定)) {
                     ShinsakaiWariateJoho2Builder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
                     johoBuilder.set介護認定審査会審査順(row.getNo().toInt());
                     johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ());
