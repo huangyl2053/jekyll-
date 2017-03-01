@@ -58,6 +58,25 @@ public class DbT5502ShinsakaiWariateJohoDac implements ISaveable<DbT5502Shinsaka
     }
 
     /**
+     * 介護認定審査会開催番号で介護認定審査会割当情報のリストを取得します。
+     *
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @return List<DbT5502ShinsakaiWariateJohoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5502ShinsakaiWariateJohoEntity> selectByShinsakaiKaisaiNo(RString 介護認定審査会開催番号) throws NullPointerException {
+        requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5502ShinsakaiWariateJoho.class).
+                where(eq(shinsakaiKaisaiNo, 介護認定審査会開催番号)).
+                toList(DbT5502ShinsakaiWariateJohoEntity.class);
+    }
+
+    /**
      * 介護認定審査会割当情報を全件返します。
      *
      * @return DbT5502ShinsakaiWariateJohoEntityの{@code list}

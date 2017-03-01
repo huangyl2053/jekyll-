@@ -67,6 +67,26 @@ public class ShinsakaiWariateJohoManager {
     }
 
     /**
+     * 審査会開催番号に合致する介護認定審査会割当情報のリストを返します。
+     *
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @return ShinsakaiWariateJoho
+     */
+    @Transaction
+    public List<ShinsakaiWariateJoho> get介護認定審査会割当情報By介護認定審査会開催番号(RString 介護認定審査会開催番号) {
+        requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+
+        List<ShinsakaiWariateJoho> businessList = new ArrayList<>();
+        List<DbT5502ShinsakaiWariateJohoEntity> entityList = dac.selectByShinsakaiKaisaiNo(介護認定審査会開催番号);
+
+        for (DbT5502ShinsakaiWariateJohoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new ShinsakaiWariateJoho(entity));
+        }
+        return businessList;
+    }
+
+    /**
      * 介護認定審査会割当情報を全件返します。
      *
      * @return ShinsakaiWariateJohoの{@code list}
