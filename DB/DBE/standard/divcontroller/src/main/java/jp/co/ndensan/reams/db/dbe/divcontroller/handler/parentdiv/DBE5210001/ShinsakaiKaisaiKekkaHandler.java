@@ -65,7 +65,7 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.getTxtYoteiStartTime().setValue(strToTime(business.get予定開始時間()));
             div.getTxtYoteiEndTime().setValue(strToTime(business.get予定終了時間()));
             div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new Decimal(business.get所要時間()));
-            
+
             if (business.get介護認定審査会開催番号() != null && !business.get介護認定審査会開催番号().isEmpty()) {
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催日());
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
@@ -167,38 +167,6 @@ public class ShinsakaiKaisaiKekkaHandler {
      */
     public RTime get開催終了時刻() {
         return div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue();
-    }
-
-    /**
-     * 指定された開始時刻を委員一覧の出席時刻に設定します。
-     *
-     * @param 開始時刻 開始時刻
-     */
-    public void set委員一覧出席時刻(RTime 開始時刻) {
-        for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
-            boolean is欠席 = row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称());
-            boolean is遅刻 = row.getChikokuUmu().getSelectedValue().equals(IsChikokuUmu.遅刻.get名称());
-            if (is欠席 || is遅刻) {
-                continue;
-            }
-            row.getShussekiTime().setValue(開始時刻);
-        }
-    }
-
-    /**
-     * 指定された開始時刻を委員一覧の出席時刻に設定します。
-     *
-     * @param 終了時刻 開始時刻
-     */
-    public void set委員一覧退席時刻(RTime 終了時刻) {
-        for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
-            boolean is欠席 = row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称());
-            boolean is早退 = row.getSotaiUmu().getSelectedValue().equals(IssotaiUmu.早退.get名称());
-            if (is欠席 || is早退) {
-                continue;
-            }
-            row.getTaisekiTime().setValue(終了時刻);
-        }
     }
 
     /**

@@ -39,9 +39,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class ShinsakaiKaisaiValidationHandler {
 
     private static final RString 対象文言 = new RString("  対象: ");
-    private static final RString 出席時間文言 = new RString("出席時間");
-    private static final RString 退席時間文言 = new RString("退席時間");
-    private static final RString 出席時間退席時間文言 = new RString("出席時間、退席時間");
     private static final RString 議長文言 = new RString("議長");
     private static final RString 全員遅刻文言 = new RString("全員が遅刻");
     private static final RString 全員早退文言 = new RString("全員が早退");
@@ -65,8 +62,6 @@ public class ShinsakaiKaisaiValidationHandler {
     public ValidationMessageControlPairs validate(ShinsakaiKaisaiYoteiJoho2 結果情報) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         yoteiStartToKaisaiEndTimeCheck(validationMessages);
-        出席時間Check(validationMessages);
-        退席時間Check(validationMessages);
         議長人数Check(validationMessages);
         議長出席Check(validationMessages);
         必須項目Check(validationMessages);
@@ -77,8 +72,8 @@ public class ShinsakaiKaisaiValidationHandler {
         }
         return validationMessages;
     }
-    
-     /**
+
+    /**
      * 審査会資料未作成データ有無についてチェックします。
      *
      * @param 結果情報 結果情報
@@ -94,17 +89,17 @@ public class ShinsakaiKaisaiValidationHandler {
         }
         return 結果情報 == null || 結果情報.isEmpty() || is資料作成年月日無;
     }
-    
-     /**
+
+    /**
      * 開催日についてチェックします。
      *
      * @param validationMessages バリデーションメッセージ
-     * 
+     *
      */
     public void 開催日チェック(ValidationMessageControlPairs validationMessages) {
         boolean is未来日 = div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue().isAfter(FlexibleDate.getNowDate().plusDay(1));
         if (is未来日) {
-            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(DbeWarningMessages.開催日が未来日), 
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(DbeWarningMessages.開催日が未来日),
                     div.getShinsakaiKaisaiInfo().getTxtKaisaiBi()));
         }
     }
@@ -118,42 +113,6 @@ public class ShinsakaiKaisaiValidationHandler {
         if (div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue().isBefore(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShinsakaiKaisaiMessages(UrErrorMessages.期間が不正_追加メッセージあり２, "開催開始時間", "開催終了時間")));
-        }
-    }
-
-    /**
-     *
-     * 出席時間チェックをチェックします。
-     *
-     * @param validationMessages バリデーションメッセージ
-     */
-    private void 出席時間Check(ValidationMessageControlPairs validationMessages) {
-        List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
-        if (!rowList.isEmpty()) {
-            for (dgShinsakaiIinIchiran_Row row : rowList) {
-                ValidationMessageControlPair pair = 出席時間Check(row);
-                if (pair != null) {
-                    validationMessages.add(pair);
-                }
-            }
-        }
-    }
-
-    /**
-     *
-     * 退席時間 チェックをチェックします。
-     *
-     * @param validationMessages バリデーションメッセージ
-     */
-    private void 退席時間Check(ValidationMessageControlPairs validationMessages) {
-        List<dgShinsakaiIinIchiran_Row> rowList = div.getShinsakaiIinToroku().getDgShinsakaiIinIchiran().getDataSource();
-        if (!rowList.isEmpty()) {
-            for (dgShinsakaiIinIchiran_Row row : rowList) {
-                ValidationMessageControlPair pair = 退席時間Check(row);
-                if (pair != null) {
-                    validationMessages.add(pair);
-                }
-            }
         }
     }
 
@@ -325,82 +284,6 @@ public class ShinsakaiKaisaiValidationHandler {
         public Message getMessage() {
             return message;
         }
-    }
-
-    /**
-     * 出席時間と遅刻が妥当かをチェックします。
-     *
-     * @param row チェック対象
-     * @return メッセージ
-     */
-    ValidationMessageControlPair 出席時間Check(dgShinsakaiIinIchiran_Row row) {
-        if (row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称())) {
-            return null;
-        }
-        boolean is遅刻有無内容が遅刻 = row.getChikokuUmu().getSelectedValue().equals(IsChikokuUmu.遅刻.get名称());
-        RTime 審査会開催時刻 = div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue();
-        RTime 審査会終了時刻 = div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue();
-        if (審査会開催時刻.isAfter(審査会終了時刻)) {
-            return null;
-        }
-        RTime 委員出席時刻 = row.getShussekiTime().getValue();
-        if (is遅刻有無内容が遅刻 && 審査会開催時刻.equals(委員出席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                            createエラー文言(出席時間文言, row).toString()));
-        }
-        if (!is遅刻有無内容が遅刻 && !審査会開催時刻.equals(委員出席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                            createエラー文言(出席時間文言, row).toString()));
-        }
-        if (委員出席時刻.isBefore(審査会開催時刻) || 審査会終了時刻.isBefore(委員出席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                            createエラー文言(出席時間文言, row).toString()));
-        }
-        return null;
-    }
-
-    /**
-     * 退席時間と早退が妥当かをチェックします。
-     *
-     * @param row チェック対象
-     * @return メッセージ
-     */
-    ValidationMessageControlPair 退席時間Check(dgShinsakaiIinIchiran_Row row) {
-        if (row.getShukketsuKubun().getSelectedValue().equals(IsShusseki.欠席.get名称())) {
-            return null;
-        }
-        boolean is早退有無内容が早退 = row.getSotaiUmu().getSelectedValue().equals(IssotaiUmu.早退.get名称());
-        RTime 審査会開催時刻 = div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue();
-        RTime 審査会終了時刻 = div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue();
-        if (審査会開催時刻.isAfter(審査会終了時刻)) {
-            return null;
-        }
-        RTime 委員出席時刻 = row.getShussekiTime().getValue();
-        RTime 委員退席時刻 = row.getTaisekiTime().getValue();
-        if (is早退有無内容が早退 && 審査会終了時刻.equals(委員退席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                            createエラー文言(退席時間文言, row).toString()));
-        }
-        if (!is早退有無内容が早退 && !審査会終了時刻.equals(委員退席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                            createエラー文言(退席時間文言, row).toString()));
-        }
-        if (委員退席時刻.isBefore(審査会開催時刻) || 審査会終了時刻.isBefore(委員退席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.入力値が不正_追加メッセージあり,
-                            createエラー文言(退席時間文言, row).toString()));
-        }
-        if (委員出席時刻.isAfter(委員退席時刻)) {
-            return new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.大小関係が不正,
-                            createエラー文言(出席時間退席時間文言, row).toString()));
-        }
-        return null;
     }
 
     /**

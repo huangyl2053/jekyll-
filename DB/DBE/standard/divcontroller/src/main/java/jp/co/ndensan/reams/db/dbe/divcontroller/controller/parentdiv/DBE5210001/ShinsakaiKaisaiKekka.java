@@ -62,7 +62,7 @@ public class ShinsakaiKaisaiKekka {
     private static final RString 新規モード文言 = new RString("新規モード");
     private static final RString 更新モード文言 = new RString("更新モード");
     private static final RString 更新BTN = new RString("btnUpdate");
-    
+
     /**
      * コンストラクタです。
      */
@@ -95,7 +95,7 @@ public class ShinsakaiKaisaiKekka {
         } else {
             handler.initialize(list);
         }
- 
+
         List<ShinsakaiKaisaiYoteiJoho2> yoteiJohoList = service.get審査会委員(開催番号).records();
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, shinsakaiKaisaiYoteiJoho);
@@ -141,25 +141,6 @@ public class ShinsakaiKaisaiKekka {
             } catch (IOException ex) {
                 return ResponseData.of(div).addMessage(UrErrorMessages.指定ファイルが存在しない.getMessage()).respond();
             }
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 開催時間を委員一覧に反映するボタンが押されたときのイベントです。
-     *
-     * @param div 介護認定審査会開催結果登録div
-     * @return responseData
-     */
-    public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnReflectKaisaiTimeToShinsakaiIinIchiran(ShinsakaiKaisaiKekkaDiv div) {
-        ShinsakaiKaisaiKekkaHandler handler = getHandler(div);
-        RTime 開催開始時刻 = handler.get開催開始時刻();
-        if (開催開始時刻 != null) {
-            handler.set委員一覧出席時刻(開催開始時刻);
-        }
-        RTime 開催終了時刻 = handler.get開催終了時刻();
-        if (開催終了時刻 != null) {
-            handler.set委員一覧退席時刻(開催終了時刻);
         }
         return ResponseData.of(div).respond();
     }
@@ -234,7 +215,6 @@ public class ShinsakaiKaisaiKekka {
                 && new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 || ResponseHolder.isWarningIgnoredRequest()) {
             setYotei(div);
-//            div.getKanryoPanel().getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()));
             return ResponseData.of(div).setState(DBE5210001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -312,11 +292,19 @@ public class ShinsakaiKaisaiKekka {
             ShinsakaiWariateIinJoho2Builder shinsakaiWariateIinJohoBuilder = shinsakaiWariateIinJoho.createBuilderForEdit();
             shinsakaiWariateIinJohoBuilder.set介護認定審査会議長区分コード(new Code(row.getGichoKubun().getSelectedKey()));
             shinsakaiWariateIinJohoBuilder.set介護認定審査会開催年月日(div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue());
-            shinsakaiWariateIinJohoBuilder.set委員出席(Boolean.valueOf(row.getShukketsuKubun().getSelectedKey().toString()));
-            shinsakaiWariateIinJohoBuilder.set委員出席時間(row.getShussekiTime().getText().substring(0, 4).replace(":", ""));
-            shinsakaiWariateIinJohoBuilder.set委員早退有無(Boolean.valueOf(row.getSotaiUmu().getSelectedKey().toString()));
-            shinsakaiWariateIinJohoBuilder.set委員退席時間(row.getTaisekiTime().getText().substring(0, 4).replace(":", ""));
-            shinsakaiWariateIinJohoBuilder.set委員遅刻有無(Boolean.valueOf(row.getChikokuUmu().getSelectedKey().toString()));
+            boolean is出席 = Boolean.valueOf(row.getShukketsuKubun().getSelectedKey().toString());
+            shinsakaiWariateIinJohoBuilder.set委員出席(is出席);
+            if (is出席) {
+                shinsakaiWariateIinJohoBuilder.set委員出席時間(timeToStr(div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().getValue()));
+                shinsakaiWariateIinJohoBuilder.set委員退席時間(timeToStr(div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().getValue()));
+                shinsakaiWariateIinJohoBuilder.set委員早退有無(Boolean.valueOf(row.getSotaiUmu().getSelectedKey().toString()));
+                shinsakaiWariateIinJohoBuilder.set委員遅刻有無(Boolean.valueOf(row.getChikokuUmu().getSelectedKey().toString()));
+            } else {
+                shinsakaiWariateIinJohoBuilder.set委員出席時間(RString.EMPTY);
+                shinsakaiWariateIinJohoBuilder.set委員退席時間(RString.EMPTY);
+                shinsakaiWariateIinJohoBuilder.set委員早退有無(false);
+                shinsakaiWariateIinJohoBuilder.set委員遅刻有無(false);
+            }
             ShinsakaiKaisaiYoteiJoho2Builder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
             kaisaiYoteiJohoBuilder.setShinsakaiWariateIinJoho2(shinsakaiWariateIinJohoBuilder.build().modifiedModel());
             shinsakaiKaisaiYoteiJoho = kaisaiYoteiJohoBuilder.build();
