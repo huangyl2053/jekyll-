@@ -39,6 +39,7 @@ public class Taishouichiran {
         this.entity = new TaishouIchiranEntity();
         this.entity.set介護認定審査会審査順(entity.get介護認定審査会審査順());
         this.entity.set介護認定審査会審査順確定フラグ(entity.is介護認定審査会審査順確定フラグ());
+        this.entity.set審査会資料作成年月日(entity.get審査会資料作成年月日());
         this.entity.set厚労省IF識別コード(checkNullForCode(entity.get厚労省IF識別コード()));
         this.entity.set介護認定審査会優先振分区分コード(checkNullForCode(entity.get介護認定審査会優先振分区分コード()));
         this.entity.set被保険者番号(checkNullForRString(entity.get被保険者番号()));
@@ -68,6 +69,7 @@ public class Taishouichiran {
         this.entity.set医療機関名称(checkNullForRString(entity.get医療機関名称()));
         this.entity.set主治医氏名(checkNullForAtenaMeisho(entity.get主治医氏名()));
         this.entity.set申請書管理番号(checkNullForShinseishoKanriNo(entity.get申請書管理番号()));
+        this.entity.set審査会資料送付年月日(entity.get審査会資料送付年月日());
     }
 
     /**
@@ -86,6 +88,24 @@ public class Taishouichiran {
      */
     public Boolean get介護認定審査会審査順確定フラグ() {
         return entity.is介護認定審査会審査順確定フラグ();
+    }
+    
+    /**
+     * get審査会資料作成年月日
+     * 
+     * @return 審査会資料作成年月日
+     */
+    public FlexibleDate get審査会資料作成年月日() {
+        return entity.get審査会資料作成年月日();
+    }
+    
+    /**
+     * get審査会資料送付年月日
+     * 
+     * @return 審査会資料送付年月日
+     */
+    public FlexibleDate get審査会資料送付年月日() {
+        return entity.get審査会資料送付年月日();
     }
 
     /**

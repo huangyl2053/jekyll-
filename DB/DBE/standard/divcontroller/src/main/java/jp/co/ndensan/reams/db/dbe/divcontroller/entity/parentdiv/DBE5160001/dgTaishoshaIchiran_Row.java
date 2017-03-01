@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 20 23:59:11 JST 2017 
+ * Tue Feb 28 16:46:17 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
  */
 
 public class dgTaishoshaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
 
     private RString jotaiFlag;
     private RString shinsajunKakuteiFlag;
@@ -36,6 +36,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private TextBoxFlexibleDate shinseiDay;
     private TextBoxFlexibleDate zenkaiYukoKikanKaishiDay;
     private TextBoxFlexibleDate zenkaiYukoKikanShuryoDay;
+    private TextBoxFlexibleDate shinsakaiShiryoSakuseiYMD;
     private RString konkaiIchijiHantei;
     private RString masking;
     private RString hokenshaNo;
@@ -59,6 +60,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private Boolean torokuZumiFlag;
     private RString torokuZumiNo;
     private RString ninteiShinsakaiWariateKanryoYMD;
+    private TextBoxFlexibleDate shinsakaiShiryoSofuYMD;
 
     public dgTaishoshaIchiran_Row() {
         super();
@@ -75,6 +77,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shinseiDay = new TextBoxFlexibleDate();
         this.zenkaiYukoKikanKaishiDay = new TextBoxFlexibleDate();
         this.zenkaiYukoKikanShuryoDay = new TextBoxFlexibleDate();
+        this.shinsakaiShiryoSakuseiYMD = new TextBoxFlexibleDate();
         this.konkaiIchijiHantei = RString.EMPTY;
         this.masking = RString.EMPTY;
         this.hokenshaNo = RString.EMPTY;
@@ -98,6 +101,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.torokuZumiFlag = false;
         this.torokuZumiNo = RString.EMPTY;
         this.ninteiShinsakaiWariateKanryoYMD = RString.EMPTY;
+        this.shinsakaiShiryoSofuYMD = new TextBoxFlexibleDate();
         this.setOriginalData("jotaiFlag", jotaiFlag);
         this.setOriginalData("shinsajunKakuteiFlag", shinsajunKakuteiFlag);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
@@ -111,6 +115,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseiDay", shinseiDay);
         this.setOriginalData("zenkaiYukoKikanKaishiDay", zenkaiYukoKikanKaishiDay);
         this.setOriginalData("zenkaiYukoKikanShuryoDay", zenkaiYukoKikanShuryoDay);
+        this.setOriginalData("shinsakaiShiryoSakuseiYMD", shinsakaiShiryoSakuseiYMD);
         this.setOriginalData("konkaiIchijiHantei", konkaiIchijiHantei);
         this.setOriginalData("masking", masking);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -134,9 +139,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("torokuZumiFlag", torokuZumiFlag);
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
         this.setOriginalData("ninteiShinsakaiWariateKanryoYMD", ninteiShinsakaiWariateKanryoYMD);
+        this.setOriginalData("shinsakaiShiryoSofuYMD", shinsakaiShiryoSofuYMD);
     }
 
-    public dgTaishoshaIchiran_Row(RString jotaiFlag, RString shinsajunKakuteiFlag, RString shinseishoKanriNo, RString no, RString priority, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanKaishiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString konkaiIchijiHantei, RString masking, RString hokenshaNo, RString hokenshaName, RString zenkaiIchijiHantei, RString zenkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString nyushiShisetsu, RString chosaKikan, RString chosain, RString saiChosa, RString iryoKikan, RString shujii, Icon observerCheckShujii, Icon observerCheckChosain, Icon observerCheckNyushoShisetsu, Icon observerCheckSonota, Boolean torokuZumiFlag, RString torokuZumiNo, RString ninteiShinsakaiWariateKanryoYMD) {
+    public dgTaishoshaIchiran_Row(RString jotaiFlag, RString shinsajunKakuteiFlag, RString shinseishoKanriNo, RString no, RString priority, RString hihokenshaNumber, RString shimei, RString seibetsu, RString hihokenshaKubun, RString sihinseiKubunShinseiji, TextBoxFlexibleDate shinseiDay, TextBoxFlexibleDate zenkaiYukoKikanKaishiDay, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, TextBoxFlexibleDate shinsakaiShiryoSakuseiYMD, RString konkaiIchijiHantei, RString masking, RString hokenshaNo, RString hokenshaName, RString zenkaiIchijiHantei, RString zenkaiNijiHantei, RString chosahyoNetakirido, RString chosahyoNinchido, RString ikenshoNetakirido, RString ikenshoNinchido, RString nyushiShisetsu, RString chosaKikan, RString chosain, RString saiChosa, RString iryoKikan, RString shujii, Icon observerCheckShujii, Icon observerCheckChosain, Icon observerCheckNyushoShisetsu, Icon observerCheckSonota, Boolean torokuZumiFlag, RString torokuZumiNo, RString ninteiShinsakaiWariateKanryoYMD, TextBoxFlexibleDate shinsakaiShiryoSofuYMD) {
         super();
         this.setOriginalData("jotaiFlag", jotaiFlag);
         this.setOriginalData("shinsajunKakuteiFlag", shinsajunKakuteiFlag);
@@ -151,6 +157,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseiDay", shinseiDay);
         this.setOriginalData("zenkaiYukoKikanKaishiDay", zenkaiYukoKikanKaishiDay);
         this.setOriginalData("zenkaiYukoKikanShuryoDay", zenkaiYukoKikanShuryoDay);
+        this.setOriginalData("shinsakaiShiryoSakuseiYMD", shinsakaiShiryoSakuseiYMD);
         this.setOriginalData("konkaiIchijiHantei", konkaiIchijiHantei);
         this.setOriginalData("masking", masking);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -174,6 +181,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("torokuZumiFlag", torokuZumiFlag);
         this.setOriginalData("torokuZumiNo", torokuZumiNo);
         this.setOriginalData("ninteiShinsakaiWariateKanryoYMD", ninteiShinsakaiWariateKanryoYMD);
+        this.setOriginalData("shinsakaiShiryoSofuYMD", shinsakaiShiryoSofuYMD);
         this.jotaiFlag = jotaiFlag;
         this.shinsajunKakuteiFlag = shinsajunKakuteiFlag;
         this.shinseishoKanriNo = shinseishoKanriNo;
@@ -187,6 +195,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shinseiDay = shinseiDay;
         this.zenkaiYukoKikanKaishiDay = zenkaiYukoKikanKaishiDay;
         this.zenkaiYukoKikanShuryoDay = zenkaiYukoKikanShuryoDay;
+        this.shinsakaiShiryoSakuseiYMD = shinsakaiShiryoSakuseiYMD;
         this.konkaiIchijiHantei = konkaiIchijiHantei;
         this.masking = masking;
         this.hokenshaNo = hokenshaNo;
@@ -210,6 +219,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.torokuZumiFlag = torokuZumiFlag;
         this.torokuZumiNo = torokuZumiNo;
         this.ninteiShinsakaiWariateKanryoYMD = ninteiShinsakaiWariateKanryoYMD;
+        this.shinsakaiShiryoSofuYMD = shinsakaiShiryoSofuYMD;
     }
 
     public RString getJotaiFlag() {
@@ -262,6 +272,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
 
     public TextBoxFlexibleDate getZenkaiYukoKikanShuryoDay() {
         return zenkaiYukoKikanShuryoDay;
+    }
+
+    public TextBoxFlexibleDate getShinsakaiShiryoSakuseiYMD() {
+        return shinsakaiShiryoSakuseiYMD;
     }
 
     public RString getKonkaiIchijiHantei() {
@@ -356,6 +370,10 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         return ninteiShinsakaiWariateKanryoYMD;
     }
 
+    public TextBoxFlexibleDate getShinsakaiShiryoSofuYMD() {
+        return shinsakaiShiryoSofuYMD;
+    }
+
     public void setJotaiFlag(RString jotaiFlag) {
         this.setOriginalData("jotaiFlag", jotaiFlag);
         this.jotaiFlag = jotaiFlag;
@@ -419,6 +437,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setZenkaiYukoKikanShuryoDay(TextBoxFlexibleDate zenkaiYukoKikanShuryoDay) {
         this.setOriginalData("zenkaiYukoKikanShuryoDay", zenkaiYukoKikanShuryoDay);
         this.zenkaiYukoKikanShuryoDay = zenkaiYukoKikanShuryoDay;
+    }
+
+    public void setShinsakaiShiryoSakuseiYMD(TextBoxFlexibleDate shinsakaiShiryoSakuseiYMD) {
+        this.setOriginalData("shinsakaiShiryoSakuseiYMD", shinsakaiShiryoSakuseiYMD);
+        this.shinsakaiShiryoSakuseiYMD = shinsakaiShiryoSakuseiYMD;
     }
 
     public void setKonkaiIchijiHantei(RString konkaiIchijiHantei) {
@@ -534,6 +557,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setNinteiShinsakaiWariateKanryoYMD(RString ninteiShinsakaiWariateKanryoYMD) {
         this.setOriginalData("ninteiShinsakaiWariateKanryoYMD", ninteiShinsakaiWariateKanryoYMD);
         this.ninteiShinsakaiWariateKanryoYMD = ninteiShinsakaiWariateKanryoYMD;
+    }
+
+    public void setShinsakaiShiryoSofuYMD(TextBoxFlexibleDate shinsakaiShiryoSofuYMD) {
+        this.setOriginalData("shinsakaiShiryoSofuYMD", shinsakaiShiryoSofuYMD);
+        this.shinsakaiShiryoSofuYMD = shinsakaiShiryoSofuYMD;
     }
 
     // </editor-fold>

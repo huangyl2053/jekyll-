@@ -21,6 +21,7 @@ public final class ShinsakaiKaisaiParameter {
     private static final RString 割付完了のみ = new RString("割付完了分のみ");
     private static final RString 審査会未完了のみ = new RString("審査会未完了分のみ");
     private static final RString 審査会完了のみ = new RString("審査会完了分のみ");
+    private static final RString 審査会未開催分のみ = new RString("審査会未開催分のみ");
     private static final RString 全ての審査会 = new RString("全ての審査会");
     private static final RString 結果登録審査会未完了のみ = new RString("結果登録審査会未完了のみ");
     private static final RString 表示しない = new RString("表示しない");
@@ -39,6 +40,7 @@ public final class ShinsakaiKaisaiParameter {
     private final boolean is審査会完了のみ;
     private final boolean is開催予定登録OR対象者割付;
     private final boolean is表示しない;
+    private final boolean is審査会未開催分のみ;
     private final RString 審査会開催番号;
 
     /**
@@ -72,7 +74,8 @@ public final class ShinsakaiKaisaiParameter {
             boolean is開催予定登録OR対象者割付,
             boolean is表示しない,
             RString 審査会開催番号,
-            boolean is結果登録審査会未完了のみ) {
+            boolean is結果登録審査会未完了のみ,
+            boolean is審査会未開催分のみ) {
         this.表示期間From = 表示期間From;
         this.表示期間To = 表示期間To;
         this.モード = モード;
@@ -87,6 +90,7 @@ public final class ShinsakaiKaisaiParameter {
         this.is表示しない = is表示しない;
         this.審査会開催番号 = 審査会開催番号;
         this.is結果登録審査会未完了のみ = is結果登録審査会未完了のみ;
+        this.is審査会未開催分のみ = is審査会未開催分のみ;
     }
 
     /**
@@ -114,6 +118,7 @@ public final class ShinsakaiKaisaiParameter {
         boolean is開催予定登録OR対象者割付 = false;
         boolean is表示しない = false;
         boolean is結果登録審査会未完了のみ = false;
+        boolean is審査会未開催分のみ = false;
 
         if (!全ての審査会.equals(表示条件)) {
             if (割付未完了のみ.equals(表示条件)) {
@@ -122,7 +127,7 @@ public final class ShinsakaiKaisaiParameter {
             if (割付完了のみ.equals(表示条件)) {
                 is割付完了のみ = true;
             }
-            if (開催予定登録.equals(モード) || 審査会未完了のみ.equals(表示条件)) {
+            if (審査会未完了のみ.equals(表示条件)) {
                 is審査会未完了のみ = true;
             }
             if (審査会完了のみ.equals(表示条件)) {
@@ -130,6 +135,9 @@ public final class ShinsakaiKaisaiParameter {
             }
             if (結果登録審査会未完了のみ.equals(表示条件)) {
                 is結果登録審査会未完了のみ = true;
+            }
+            if (審査会未開催分のみ.equals(表示条件)) {
+                is審査会未開催分のみ = true;
             }
         }
         if ((開催予定登録.equals(モード) || 対象者割付.equals(モード)) && 表示しない.equals(ダミー審査会)) {
@@ -150,7 +158,8 @@ public final class ShinsakaiKaisaiParameter {
                 is開催予定登録OR対象者割付,
                 is表示しない,
                 RString.EMPTY,
-                is結果登録審査会未完了のみ);
+                is結果登録審査会未完了のみ,
+                is審査会未開催分のみ);
     }
 
     /**
@@ -174,6 +183,7 @@ public final class ShinsakaiKaisaiParameter {
                 false,
                 false,
                 審査会開催番号,
+                false,
                 false);
     }
 }

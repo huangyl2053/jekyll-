@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,8 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     private Button btnWaritsuke;
     @JsonProperty("btnWaritsukeKaijo")
     private Button btnWaritsukeKaijo;
+    @JsonProperty("chkShiryosakuseizumiKomi")
+    private CheckBoxList chkShiryosakuseizumiKomi;
     @JsonProperty("WaritsukeKohoshaIchiran")
     private WaritsukeKohoshaIchiranDiv WaritsukeKohoshaIchiran;
     @JsonProperty("KaigoNinteiShinsakaiKaisaiNo")
@@ -132,6 +134,24 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonProperty("btnWaritsukeKaijo")
     public void setBtnWaritsukeKaijo(Button btnWaritsukeKaijo) {
         this.btnWaritsukeKaijo = btnWaritsukeKaijo;
+    }
+
+    /*
+     * getchkShiryosakuseizumiKomi
+     * @return chkShiryosakuseizumiKomi
+     */
+    @JsonProperty("chkShiryosakuseizumiKomi")
+    public CheckBoxList getChkShiryosakuseizumiKomi() {
+        return chkShiryosakuseizumiKomi;
+    }
+
+    /*
+     * setchkShiryosakuseizumiKomi
+     * @param chkShiryosakuseizumiKomi chkShiryosakuseizumiKomi
+     */
+    @JsonProperty("chkShiryosakuseizumiKomi")
+    public void setChkShiryosakuseizumiKomi(CheckBoxList chkShiryosakuseizumiKomi) {
+        this.chkShiryosakuseizumiKomi = chkShiryosakuseizumiKomi;
     }
 
     /*

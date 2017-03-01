@@ -39,6 +39,8 @@
         SELECT
         DbT5502."shinsakaiOrder" AS 介護認定審査会審査順,
         DbT5502."shinsakaiOrderKakuteiFlag" AS 介護認定審査会審査順確定フラグ,
+        DbT5502."shinsakaiShiryoSakuseiYMD" AS 審査会資料作成年月日,
+        DbT5502."shinsakaiShiryoSofuYMD" AS 審査会資料送付年月日,
         DbT5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
         DbT5101."shinsakaiYusenWaritsukeKubunCode" AS 介護認定審査会優先振分区分コード,
         DbT5101."hihokenshaNo" AS 被保険者番号,
@@ -126,6 +128,18 @@
         ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5116_Zenkai."shinseishoKanriNo"
         WHERE
         DbT5502."shinsakaiKaisaiNo" = #{kaisaiNo}
+        <if test="isSort">
+            AND
+            (DbT5502."shinsakaiShiryoSofuYMD" IS NULL
+            OR
+            DbT5502."shinsakaiShiryoSofuYMD" = '')
+        </if>
+        <if test="isSort and !isShiryosakuseizumiKomi">
+            AND 
+            (DbT5502."shinsakaiShiryoSakuseiYMD" IS NULL
+            OR
+            DbT5502."shinsakaiShiryoSakuseiYMD" = '')
+        </if>
         <if test="!isButtonPushed">
             ORDER BY
             DbT5502."shinsakaiOrder"
@@ -254,27 +268,27 @@
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         LEFT JOIN (
-            SELECT * 
-            FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202_SUB1 
-            WHERE 
-            DbT5202_SUB1."shinseishoKanriNo" = #{shinseishoKanriNo}
-            AND NOT EXISTS(
-            SELECT 'X' 
-            FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202_SUB2 
-            WHERE DbT5202_SUB1."shinseishoKanriNo" = DbT5202_SUB2."shinseishoKanriNo" 
-            AND DbT5202_SUB1."ninteichosaRirekiNo" <![CDATA[<]]> DbT5202_SUB2."ninteichosaRirekiNo"
-            )
-            ORDER BY DbT5202_SUB1."gaikyoChosaTextImageKubun" 
-            LIMIT 1
+        SELECT * 
+        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202_SUB1 
+        WHERE 
+        DbT5202_SUB1."shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND NOT EXISTS(
+        SELECT 'X' 
+        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202_SUB2 
+        WHERE DbT5202_SUB1."shinseishoKanriNo" = DbT5202_SUB2."shinseishoKanriNo" 
+        AND DbT5202_SUB1."ninteichosaRirekiNo" <![CDATA[<]]> DbT5202_SUB2."ninteichosaRirekiNo"
+        )
+        ORDER BY DbT5202_SUB1."gaikyoChosaTextImageKubun" 
+        LIMIT 1
         ) AS DbT5202
         ON DbT5101."shinseishoKanriNo" = dbT5202."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302 
         ON DbT5101."shinseishoKanriNo" = DbT5302."shinseishoKanriNo" 
         AND NOT EXISTS(
-            SELECT 'X' 
-            FROM rgdb."DbT5302ShujiiIkenshoJoho" DbT5302_SUB 
-            WHERE DbT5302."shinseishoKanriNo" = DbT5302_SUB."shinseishoKanriNo" 
-            AND DbT5302."ikenshoIraiRirekiNo" <![CDATA[<]]> DbT5302_SUB."ikenshoIraiRirekiNo"
+        SELECT 'X' 
+        FROM rgdb."DbT5302ShujiiIkenshoJoho" DbT5302_SUB 
+        WHERE DbT5302."shinseishoKanriNo" = DbT5302_SUB."shinseishoKanriNo" 
+        AND DbT5302."ikenshoIraiRirekiNo" <![CDATA[<]]> DbT5302_SUB."ikenshoIraiRirekiNo"
         )
         WHERE
         DbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}

@@ -27,6 +27,8 @@ public class TaishouIchiranEntity {
 
     private int 介護認定審査会審査順;
     private boolean 介護認定審査会審査順確定フラグ;
+    private FlexibleDate 審査会資料作成年月日;
+    private FlexibleDate 審査会資料送付年月日;
     private Code 厚労省IF識別コード;
     private Code 介護認定審査会優先振分区分コード;
     private RString 被保険者番号;
