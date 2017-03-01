@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.dbe581002.NinteiEnkiTsuchishoHak
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -69,13 +70,27 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoHeaderEditor implements INinteiEnkiTsuch
     }
 
     private void edit処理見込期間(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
-        source.shoriMikomiKigen = null == entity.get処理見込み日From() ? RString.EMPTY : entity.get処理見込み日From()
-                .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
-                .concat(" ～ ")
-                .concat(entity.get処理見込み日To() == null ? RString.EMPTY : entity.get処理見込み日To()
-                        .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+
+        FlexibleDate dayFrom = FlexibleDate.EMPTY;
+        FlexibleDate dayTo = FlexibleDate.EMPTY;
+
+        if (entity.get処理見込み日From() != null) {
+            dayFrom = entity.get処理見込み日From();
+        }
+        if (entity.get処理見込み日To() != null) {
+            dayTo = entity.get処理見込み日To();
+        }
+        if (entity.get処理見込み日From() == null && entity.get処理見込み日To() == null) {
+            source.shoriMikomiKigen = RString.EMPTY;
+        } else {
+            source.shoriMikomiKigen = dayFrom
+                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
+                    .concat(" ～ ")
+                    .concat(dayTo
+                            .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                            .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+        }
 
     }
 
