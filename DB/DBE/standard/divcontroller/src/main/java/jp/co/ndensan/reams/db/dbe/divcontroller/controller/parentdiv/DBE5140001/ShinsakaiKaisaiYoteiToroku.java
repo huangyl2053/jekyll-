@@ -1004,12 +1004,12 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private RString setLblMonthWareki(RYearMonth month) {
-        return month.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO)
+        return month.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO)
                 .toDateString();
     }
 
     private RString setLblMonthWareki(FlexibleYearMonth month) {
-        return month.wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO)
+        return month.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO)
                 .toDateString();
     }
 
