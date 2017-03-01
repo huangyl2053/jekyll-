@@ -138,7 +138,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
         List<NinteichosahyoKinyuItem> 認定調査票記入項目List = finder.get認定調査票記入項目List(申請書管理番号);
         RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
-                && 総合事業実施済.equals(processPrm.get総合事業開始区分())) {
+                && 総合事業開始区分_実施済.equals(processPrm.get総合事業開始区分())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                     = NinteiChosaJohohyo02EntityEditor.edit(
                             entity,
@@ -151,7 +151,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
             NinteiChosaJohohyo02Report report = new NinteiChosaJohohyo02Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter02);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
-                && 総合事業未実施.equals(processPrm.get総合事業開始区分())) {
+                && 総合事業開始区分_未実施.equals(processPrm.get総合事業開始区分())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                     = NinteiChosaJohohyo12EntityEditor.edit(
                             entity,

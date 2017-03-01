@@ -41,9 +41,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokkiimage.NinteiChosaTokkiImageEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiText1A4Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.NinteiChosaJohohyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.SonoTashiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoEntity;
@@ -175,7 +173,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
         if (processPrm.is認定調査票出力()) {
             List<NinteichosahyoKinyuItem> 認定調査票記入項目List = finder.get認定調査票記入項目List(申請書管理番号);
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
-                    && 総合事業実施済.equals(processPrm.get総合事業開始区分())) {
+                    && 総合事業開始区分_実施済.equals(processPrm.get総合事業開始区分())) {
                 NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                         = NinteiChosaJohohyo02EntityEditor.edit(
                                 entity,
@@ -189,7 +187,7 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                         = new JohoTeikyoIsshikiNinteiChosaJohohyo02Report(ninteiChosaJohohyoEntity);
                 report.writeBy(reportSourceWriter);
             } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
-                    && 総合事業未実施.equals(processPrm.get総合事業開始区分())) {
+                    && 総合事業開始区分_未実施.equals(processPrm.get総合事業開始区分())) {
                 NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                         = NinteiChosaJohohyo12EntityEditor.edit(
                                 entity,
@@ -258,8 +256,6 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
         }
 
         if (processPrm.is特記事項出力()) {
-            RString 情報提供資料の特記事項編集パターン
-                    = DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             List<NinteichosaRelate> 特記事項List = finder.get特記事項List(申請書管理番号, processPrm.get特記事項マスキング区分());
             if (マスキングあり.equals(processPrm.get特記事項マスキング区分()) && 特記事項List.isEmpty()) {
                 特記事項List = finder.get特記事項List(申請書管理番号, マスキングなし);
@@ -270,27 +266,24 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
             }
             if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
                 if (entity.get認定申請年月日().isBeforeOrEquals(processPrm.get特記事項判定日())) {
-                    NinteiChosaTokkiImageEntity ninteiChosaTokkiImageEntity
-                            = NinteiChosaTokkiImageEntityEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分());
-                    JohoTeikyoIsshikiNinteiChosaTokkiImageReport report
-                            = new JohoTeikyoIsshikiNinteiChosaTokkiImageReport(ninteiChosaTokkiImageEntity);
+                    JohoTeikyoIsshikiNinteiChosaTokkiImageReport report = new JohoTeikyoIsshikiNinteiChosaTokkiImageReport(
+                            NinteiChosaTokkiImageEntityEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分()));
                     report.writeBy(reportSourceWriter);
                 } else {
-                    TokkiText1A4Entity tokkiText1A4Entity
-                            = TokkiImage1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分(), イメージ共有ファイルID);
-                    JohoTeikyoIsshikiTokkiImage1A4SeparateReport report = new JohoTeikyoIsshikiTokkiImage1A4SeparateReport(tokkiText1A4Entity);
+                    JohoTeikyoIsshikiTokkiImage1A4SeparateReport report = new JohoTeikyoIsshikiTokkiImage1A4SeparateReport(
+                            TokkiImage1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分(), イメージ共有ファイルID));
                     report.writeBy(reportSourceWriter);
                 }
             } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
                 if (すべて.equals(processPrm.get情報提供資料の特記事項編集パターン())) {
-                    TokkiText1A4Entity tokkiText1A4Entity = TokkiText1A4AllEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分());
-                    JohoTeikyoIsshikiTokkiText1A4Report report
-                            = new JohoTeikyoIsshikiTokkiText1A4Report(tokkiText1A4Entity, 情報提供資料の特記事項編集パターン);
+                    JohoTeikyoIsshikiTokkiText1A4Report report = new JohoTeikyoIsshikiTokkiText1A4Report(
+                            TokkiText1A4AllEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分()),
+                            processPrm.get情報提供資料の特記事項編集パターン());
                     report.writeBy(reportSourceWriter);
                 } else {
                     JohoTeikyoIsshikiTokkiText1A4Report report = new JohoTeikyoIsshikiTokkiText1A4Report(
                             TokkiText1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分()),
-                            情報提供資料の特記事項編集パターン);
+                            processPrm.get情報提供資料の特記事項編集パターン());
                     report.writeBy(reportSourceWriter);
                 }
             }

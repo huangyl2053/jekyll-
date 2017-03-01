@@ -314,8 +314,7 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             if (business.toEntity().get認定申請年月日().isBeforeOrEquals(特記事項判定日)) {
                 printNinteiChosaTokkiImage(business, 特記事項List, 特記事項マスキング区分, assembler);
             } else {
-                printNinteiChosaTokkiImage1A4Separate(business, 特記事項List,
-                        特記事項マスキング区分, イメージ共有ファイルID, 情報提供資料の特記事項編集パターン, assembler);
+                printNinteiChosaTokkiImage1A4Separate(business, 特記事項List, 特記事項マスキング区分, イメージ共有ファイルID, assembler);
             }
         } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
             if (すべて.equals(情報提供資料の特記事項編集パターン)) {
@@ -340,7 +339,6 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             List<NinteichosaRelate> 特記事項List,
             RString 特記事項マスキング区分,
             RDateTime イメージ共有ファイルID,
-            RString 情報提供資料の特記事項編集パターン,
             ReportAssembler<YokaigoNinteiJohoTeikyoIsshikiReportSource> assembler) {
         ReportSourceWriter<YokaigoNinteiJohoTeikyoIsshikiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
         JohoTeikyoIsshikiTokkiImage1A4SeparateReport report = new JohoTeikyoIsshikiTokkiImage1A4SeparateReport(
