@@ -57,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -202,6 +203,7 @@ public class NinteichosaItakusakiMain {
         div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(true);
         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setDisabled(true);
         div.getChosaitakusakiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
+        ViewStateHolder.put(ViewStateKeys.その他機関マスタ選択行, row);
         return ResponseData.of(div).respond();
     }
 
@@ -218,6 +220,7 @@ public class NinteichosaItakusakiMain {
         getHandler(div).setDisabledTrueToChosaitakusakiJohoInput();
         div.getChosaitakusakiJohoInput().getBtnKakutei().setDisabled(false);
         div.getChosaitakusakiJohoInput().getBtnTorikeshi().setDisabled(false);
+        ViewStateHolder.put(ViewStateKeys.その他機関マスタ選択行, row);
         return ResponseData.of(div).respond();
     }
 
@@ -230,6 +233,7 @@ public class NinteichosaItakusakiMain {
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByDlbClick_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         getHandler(div).setChosaitakusakiJohoInput(row);
+        ViewStateHolder.put(ViewStateKeys.その他機関マスタ選択行, row);
         if (状態_修正.equals(row.getJotai())) {
             div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().setDisabled(true);
             div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().setDisabled(true);
@@ -374,7 +378,6 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnKakutei(NinteichosaItakusakiMainDiv div) {
-
         RString イベント状態 = div.getChosaitakusakiJohoInput().getState();
         int sonotaKikanJohoCount = NinteichosaMasterFinder.createInstance().getSonotaKikanJohoCount(NinteichosaMasterSearchParameter.
                 createParamForSelectByKey(new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
@@ -404,7 +407,9 @@ public class NinteichosaItakusakiMain {
             SonotaKikanJohoIdentifier key = new SonotaKikanJohoIdentifier(
                     new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue());
-            RString jotai = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow().getJotai();
+            dgSonotaKikanIchiran_Row row = new dgSonotaKikanIchiran_Row();
+            row = ViewStateHolder.get(ViewStateKeys.その他機関マスタ選択行, dgSonotaKikanIchiran_Row.class);
+            RString jotai = row.getJotai();
             if (状態_追加.equals(jotai)) {
                 models.deleteOrRemove(key);
             } else {
