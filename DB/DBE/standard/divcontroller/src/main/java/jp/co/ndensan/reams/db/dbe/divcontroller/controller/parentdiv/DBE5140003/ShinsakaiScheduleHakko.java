@@ -49,6 +49,8 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearFromValue();
         div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().clearToValue();
         div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().clearValue();
+        div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().setReadOnly(true);
+        div.getShinsakaiScheduleSrch().getTxtNendo().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
