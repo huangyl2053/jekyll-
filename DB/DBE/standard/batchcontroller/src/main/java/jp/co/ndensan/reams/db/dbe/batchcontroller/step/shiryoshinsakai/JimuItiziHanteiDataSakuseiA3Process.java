@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
+import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.HanteiKekkaHyoA3ReportFormGroupIndex;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.JimuTokkiTextA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -22,9 +23,12 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiry
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimukyokuyouichijihanteikekkahyo.IchijihanteikekkahyoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimutokkitext.JimuTokkiTextA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
@@ -37,6 +41,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
@@ -130,8 +136,20 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
 
     @Override
     protected void createWriter() {
+        List<ItiziHanteiEntity> 一次判定EntityList = mapper.get事務局一次判定(myBatisParameter);
+        List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
+        for (ItiziHanteiEntity entity : 一次判定EntityList) {
+            if (get共通情報(共通情報, entity.getShinseishoKanriNo()) != null) {
+                特記情報 = get特記情報(get共通情報(共通情報, entity.getShinseishoKanriNo()));
+                break;
+            }
+        }
+        int formGroupIndex = HanteiKekkaHyoA3ReportFormGroupIndex.getFormGroupIndex(null,
+                get特記事項テキストイメージ区分(特記情報),
+                DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
+                .setStartFormGroup(formGroupIndex)
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
 
@@ -182,5 +200,14 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         myBatisParameter.setShinseishoKanriNoList(申請書管理番号リスト);
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);
+    }
+    
+    private RString get特記事項テキストイメージ区分(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
+        for (DbT5205NinteichosahyoTokkijikoEntity 特記情報 : 特記情報List) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記情報.getTokkijikoTextImageKubun())) {
+                return TokkijikoTextImageKubun.テキスト.getコード();
+            }
+        }
+        return 特記情報List.isEmpty() ? TokkijikoTextImageKubun.テキスト.getコード() : TokkijikoTextImageKubun.イメージ.getコード();
     }
 }
