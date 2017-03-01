@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohoshinsakai.GogitaiJoho
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001TransitionEventName;
@@ -812,7 +814,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                         builderIinJoho.set委員退席時間(parameter.get終了予定時刻());
                         builderIinJoho.set委員遅刻有無(false);
                         builderIinJoho.set委員早退有無(false);
-                        builderIinJoho.set介護認定審査会議長区分コード(new Code(審査会委員.get合議体長区分コード()));
+                        builderIinJoho.set介護認定審査会議長区分コード(get議長区分コード(審査会委員.get合議体長区分コード()));
                         builderIinJoho.build().isAdded();
                         yoteiTorokuManager.insertOrUpdateShinsakai(builderIinJoho.build().toEntity());
                     }
@@ -855,6 +857,20 @@ public class ShinsakaiKaisaiYoteiToroku {
                     .setState(DBE5140001StateName.完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 議長区分コードを取得します。
+     *
+     * @param 合議体長区分コード RString
+     * @return 議長区分コード Code
+     */
+    private Code get議長区分コード(RString 合議体長区分コード) {
+        RString 議長区分コード = KaigoninteiShinsakaiGichoKubunCode.委員.getコード();
+        if (GogitaichoKubunCode.合議体長.getコード().equals(合議体長区分コード)) {
+            議長区分コード = KaigoninteiShinsakaiGichoKubunCode.議長.getコード();
+        }
+        return new Code(議長区分コード);
     }
 
     private void setClear(ShinsakaiKaisaiYoteiJohoParameter entity2) {
