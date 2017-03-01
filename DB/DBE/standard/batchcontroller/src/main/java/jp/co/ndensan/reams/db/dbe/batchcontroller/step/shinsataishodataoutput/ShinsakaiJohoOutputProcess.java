@@ -41,7 +41,6 @@ public class ShinsakaiJohoOutputProcess extends BatchProcessBase<ShinsakaiJohoRe
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper."
             + "get介護認定審査会情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518001");
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ZIP拡張子 = new RString(".zip");
     private static final RString underscore = new RString("_");
@@ -63,11 +62,10 @@ public class ShinsakaiJohoOutputProcess extends BatchProcessBase<ShinsakaiJohoRe
     @Override
     protected void createWriter() {
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
     }
 

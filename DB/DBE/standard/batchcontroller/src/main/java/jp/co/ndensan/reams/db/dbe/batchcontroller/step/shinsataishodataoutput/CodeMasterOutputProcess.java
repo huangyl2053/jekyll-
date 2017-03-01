@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class CodeMasterOutputProcess extends SimpleBatchProcessBase {
 
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE518005");
-    private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
     private static final int サービス状況コード長さ = 2;
@@ -65,11 +64,10 @@ public class CodeMasterOutputProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         eucFilePath = Path.combinePath(processParamter.getTempPath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
     }
 

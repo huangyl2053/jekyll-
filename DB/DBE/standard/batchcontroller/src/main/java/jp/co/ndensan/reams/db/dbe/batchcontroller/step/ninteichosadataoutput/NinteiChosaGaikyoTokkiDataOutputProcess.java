@@ -55,9 +55,9 @@ public class NinteiChosaGaikyoTokkiDataOutputProcess extends BatchProcessBase<Ni
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
+                setEncode(Encode.SJIS).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build();
     }
 
