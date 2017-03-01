@@ -103,6 +103,10 @@ public class ShinsakaiKekkaToroku {
      * @return ResponseData 介護認定審査会審査結果登録Div
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onLoad(ShinsakaiKekkaTorokuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         List<ShinsakaiKekkaTorokuBusiness> headList = service.getヘッドエリア内容検索(開催番号).records();
@@ -113,7 +117,12 @@ public class ShinsakaiKekkaToroku {
         } else {
             handler.initalize(headList, iChiRanList, 申請書管理番号);
         }
-
+        for (ShinsakaiKekkaTorokuBusiness b : headList) {
+            if (b.is未開催()) {
+                handler.set操作不可();
+                return ResponseData.of(div).addMessage(DbeErrorMessages.開催結果未登録のため処理不可.getMessage()).respond();
+            }
+        }
         List<ShinsakaiWariateJoho> yoteiJohoList = service.get介護認定審査会割当情報(開催番号).records();
         Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会開催予定情報, shinsakaiKaisaiYoteiJoho);
@@ -130,7 +139,7 @@ public class ShinsakaiKekkaToroku {
         if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るBTN, true);
         }
-        
+
         return ResponseData.of(div).respond();
     }
 

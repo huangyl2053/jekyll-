@@ -142,4 +142,11 @@ public class ShinsakaiKekkaTorokuBusiness {
         return ShinsakaiShinchokuJokyo.toValue(entity.get進捗状況()).get名称();
     }
 
+    /**
+     * @return 未開催（中止を除く）の場合、{@code true}.
+     */
+    public boolean is未開催() {
+        ShinsakaiShinchokuJokyo s = ShinsakaiShinchokuJokyo.toValue(entity.get進捗状況());
+        return s == ShinsakaiShinchokuJokyo.未開催 || s == ShinsakaiShinchokuJokyo.未開催_割付完了;
+    }
 }

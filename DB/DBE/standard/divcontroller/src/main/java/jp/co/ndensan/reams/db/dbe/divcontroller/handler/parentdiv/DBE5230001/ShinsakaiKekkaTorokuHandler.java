@@ -1143,7 +1143,7 @@ public class ShinsakaiKekkaTorokuHandler {
     /**
      * 一切の入力処理が行えないようにします。
      */
-    private void set操作不可() {
+    public void set操作不可() {
         div.setReadOnly(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタンID, true);
     }
