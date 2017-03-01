@@ -35,8 +35,8 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private ShinsakaiIinTorokuDiv ShinsakaiIinToroku;
     @JsonProperty("onseiFile")
     private onseiFileDiv onseiFile;
-    @JsonProperty("kanryoPanel")
-    private kanryoPanelDiv kanryoPanel;
+//    @JsonProperty("kanryoPanel")
+//    private kanryoPanelDiv kanryoPanel;
     @JsonProperty("Model")
     private RString Model;
     @JsonProperty("gogitaiNo")
@@ -144,19 +144,19 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
      * getkanryoPanel
      * @return kanryoPanel
      */
-    @JsonProperty("kanryoPanel")
-    public kanryoPanelDiv getKanryoPanel() {
-        return kanryoPanel;
-    }
+//    @JsonProperty("kanryoPanel")
+//    public kanryoPanelDiv getKanryoPanel() {
+//        return kanryoPanel;
+//    }
 
     /*
      * setkanryoPanel
      * @param kanryoPanel kanryoPanel
      */
-    @JsonProperty("kanryoPanel")
-    public void setKanryoPanel(kanryoPanelDiv kanryoPanel) {
-        this.kanryoPanel = kanryoPanel;
-    }
+//    @JsonProperty("kanryoPanel")
+//    public void setKanryoPanel(kanryoPanelDiv kanryoPanel) {
+//        this.kanryoPanel = kanryoPanel;
+//    }
 
     /*
      * getModel
