@@ -19,9 +19,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosajisshishajoho.ChosaJisshishaJohoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.chosajisshishajoho.ChosaJisshishaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
@@ -88,7 +90,7 @@ public class ChosaJisshishaJohoFinder {
     public static ChosaJisshishaJohoFinder createInstance() {
         return InstanceProvider.create(ChosaJisshishaJohoFinder.class);
     }
-
+    
     /**
      * 所属機関のデータソースを取得します。
      *
@@ -218,4 +220,18 @@ public class ChosaJisshishaJohoFinder {
         }
         return null;
     }
+    
+    /**
+     * 調査実施者情報を取得します。
+     *
+     * @param parameter 調査実施者情報パラメータ
+     * 
+     * @return SearchResult<NinteichosaItakusakiJoho>
+     */
+    public ChosaJisshishaJohoRelateEntity getChosaJisshishaJoho(ChosaJisshishaJohoParameter parameter) {
+        IChosaJisshishaJohoMapper mapper = mapperProvider.create(IChosaJisshishaJohoMapper.class);
+        ChosaJisshishaJohoRelateEntity 調査実施者情報 = mapper.getChosaJisshishaJoho(parameter);
+        return 調査実施者情報;
+    }
+    
 }

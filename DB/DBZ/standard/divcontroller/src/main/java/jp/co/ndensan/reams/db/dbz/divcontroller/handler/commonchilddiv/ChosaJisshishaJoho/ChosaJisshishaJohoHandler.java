@@ -19,8 +19,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosajisshishajoho.ChosaJisshishaJohoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoValidationHandler;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.chosajisshishajoho.ChosaJisshishaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho.ChosaJisshishaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -106,22 +108,18 @@ public class ChosaJisshishaJohoHandler {
         if (key.get所属機関コード() != null && !key.get所属機関コード().isEmpty()) {
             div.getTxtShozokuKikanCode().setValue(key.get所属機関コード());
             getShozokuKikanName();
-        } else {
-            List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(key.get申請書管理番号()).records();
-            if (ninteichosaItakusakiJohoList != null && !ninteichosaItakusakiJohoList.isEmpty()) {
-                div.getTxtShozokuKikanCode().setValue(ninteichosaItakusakiJohoList.get(0).get認定調査委託先コード());
-                div.getTxtShozokuKikanName().setValue(ninteichosaItakusakiJohoList.get(0).get事業者名称());
+            if (key.get記入者コード() != null && !key.get記入者コード().isEmpty()) {
+                div.getTxtKinyushaCode().setValue(key.get記入者コード());
+                getKinyushaName();
             }
-        }
-
-        if (key.get記入者コード() != null && !key.get記入者コード().isEmpty()) {
-            div.getTxtKinyushaCode().setValue(key.get記入者コード());
-            getKinyushaName();
         } else {
-            List<ChosainJoho> chosainJohoList = service.getKinyusha(key.get申請書管理番号()).records();
-            if (chosainJohoList != null && !chosainJohoList.isEmpty()) {
-                div.getTxtKinyushaCode().setValue(chosainJohoList.get(0).get認定調査員コード());
-                div.getTxtKinyushaName().setValue(chosainJohoList.get(0).get調査員氏名());
+            ChosaJisshishaJohoParameter parameter = ChosaJisshishaJohoParameter.createParameter(new ShinseishoKanriNo(key.get申請書管理番号()), key.get認定調査依頼履歴番号());
+            ChosaJisshishaJohoRelateEntity 調査実施者情報 = service.getChosaJisshishaJoho(parameter);
+            if (調査実施者情報 != null) {
+                div.getTxtShozokuKikanCode().setValue(調査実施者情報.getNinteichosaItakusakiCode().getColumnValue());
+                div.getTxtShozokuKikanName().setValue(調査実施者情報.getJigyoshaMeisho());
+                div.getTxtKinyushaCode().setValue(調査実施者情報.getNinteiChosainCode());
+                div.getTxtKinyushaName().setValue(調査実施者情報.getChosainShimei());
             }
         }
 

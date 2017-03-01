@@ -7,8 +7,10 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosajisshishajoho.ChosaJisshishaJohoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.chosajisshishajoho.ChosaJisshishaJohoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -38,4 +40,14 @@ public interface IChosaJisshishaJohoMapper {
      * @return List<DbT5913ChosainJohoEntity>
      */
     List<DbT5913ChosainJohoEntity> getKinyushaEmpty(RString shinseishoKanriNo);
+    
+    /**
+     * 調査実施者情報のデータソースを取得します。
+     * 
+     * @param parameter 調査実施者情報パラメータ
+     * 
+     * @return ChosaJisshishaJohoRelateEntity
+     */
+    ChosaJisshishaJohoRelateEntity getChosaJisshishaJoho(ChosaJisshishaJohoParameter parameter); 
+    
 }
