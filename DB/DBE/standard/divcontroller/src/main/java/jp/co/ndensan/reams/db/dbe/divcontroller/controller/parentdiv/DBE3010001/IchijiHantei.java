@@ -28,8 +28,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -42,8 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -150,11 +146,9 @@ public class IchijiHantei {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
 
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
-        getHandler(div).対象者一覧の編集(一次判定対象者一覧List, personalData);
+        getHandler(div).対象者一覧の編集(一次判定対象者一覧List);
         getHandler(div).setLimitValueOfGrid(menuID, shinseishoKanriNoList);
 
-        AccessLogger.log(AccessLogType.照会, personalData);
         ValidationMessageControlPairs validation = getValidatisonHandler(div).データ空のチェック();
         if (validation.iterator().hasNext()) {
 
@@ -301,14 +295,12 @@ public class IchijiHantei {
 
     private ValidationMessageControlPairs 一次判定対象者一覧(IchijiHanteiDiv div, RString menuID, RString hihokenshaNo, ShinseishoKanriNoList shinseishoKanriNoList) {
         List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, hihokenshaNo, shinseishoKanriNoList);
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY));
-        getHandler(div).対象者一覧の編集(一次判定対象者一覧List, personalData);
+        getHandler(div).対象者一覧の編集(一次判定対象者一覧List);
         for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
             if (!RealInitialLocker.tryGetLock(new LockingKey(LOCKINGKEY.concat(business.get申請書管理番号().value())))) {
                 throw new PessimisticLockingException();
             }
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
         return getValidatisonHandler(div).データ空のチェック();
     }
 

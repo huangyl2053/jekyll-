@@ -215,7 +215,7 @@ public class ShisakaiIinJissekiShokaiHandler {
                     ShinsaiinJissekiIchiranKey key = new ShinsaiinJissekiIchiranKey();
                     key.setShinsakaiIinCode(row.getCode());
                     key.setShinsakaiKaisaiNo(row.getShinsakaiBango());
-                    key.setShinsakaiKaisaiYMD(row.getJisshibi());
+                    key.setShinsakaiKaisaiYMD(new RDate(row.getJisshibi().toString()).toDateString());
                     keyJoho.add(key);
                 }
             }

@@ -48,7 +48,8 @@ public class IchijiHanteizumiDataShutsuryoku {
 
     private final IchijiHanteizumiDataShutsuryokuFinder finder;
     private static final RString CSVファイル名 = new RString("IchijiHanteiSumiIchiran.csv");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 申請日 = new RString("0");
     private static final RString 一次判定日 = new RString("1");
 
@@ -124,8 +125,13 @@ public class IchijiHanteizumiDataShutsuryoku {
     public IDownLoadServletResponse onClick_btnOutputCsv(IchijiHanteizumiDataShutsuryokuDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ItiziHanteiZumiItiranEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgIchijiHanteiZumi_Row> dgChosainList = div.getDgIchijiHanteiZumi().getSelectedItems();
             for (dgIchijiHanteiZumi_Row row : dgChosainList) {
                 csvWriter.writeLine(set一次判定済一覧(row));

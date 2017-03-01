@@ -66,7 +66,6 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho" AS A 
         WHERE
         T5301."shinseishoKanriNo" = A."shinseishoKanriNo" 
-        AND A."logicalDeletedFlag" = False 
         AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> A."ikenshoIraiRirekiNo"
         ) 
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" T5302 
@@ -82,7 +81,6 @@
         rgdb."DbT5201NinteichosaIraiJoho" AS B 
         WHERE
         T5201."shinseishoKanriNo" = B."shinseishoKanriNo" 
-        AND B."logicalDeletedFlag" = False 
         AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B."ninteichosaIraiRirekiNo"
         ) 
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
@@ -116,6 +114,10 @@
         OR T5105."ninteiShinsakaiKanryoYMD" = '' )
         AND ( T5105."centerSoshinYMD" IS NULL 
         OR T5105."centerSoshinYMD" = '' )
+        <if test="!chkマスキング完了">
+            AND ( T5105."maskingKanryoYMD" IS NULL 
+            OR T5105."maskingKanryoYMD" = '' )
+        </if>
         LEFT JOIN
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205
         on T5205."tokkijikoTextImageKubun" = #{イメージ区分}
@@ -144,6 +146,7 @@
         AND T5305b."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         )
         AND T5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
+        AND (T5305."ChoyoID" = '701' OR T5305."ChoyoID" = '777')
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305a
         on T5305a."genponMaskKubun" = #{イメージ区分}

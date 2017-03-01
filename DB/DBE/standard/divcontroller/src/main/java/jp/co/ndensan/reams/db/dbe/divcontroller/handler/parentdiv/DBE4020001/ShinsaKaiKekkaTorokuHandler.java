@@ -71,6 +71,7 @@ public class ShinsaKaiKekkaTorokuHandler {
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
+    private static final RString UICONTAINERID = new RString("DBEUC52101");
 
     /**
      * コンストラクタです。
@@ -94,7 +95,11 @@ public class ShinsaKaiKekkaTorokuHandler {
         if (is完了のみの登録State()) {
             div.getRadTaishosyaJotai().setDisabled(true);
             div.getRadTaishosyaJotai().setSelectedKey(KEY1);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, true);
+            if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, true);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, true);
+            }
             CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, false);
         } else {
@@ -160,7 +165,11 @@ public class ShinsaKaiKekkaTorokuHandler {
      */
     public void setDisabled登録ボタンfrom選択状態() {
         boolean isDisabled登録ボタン = is未処理Selected(this.div) || !hasAnyData(this.div);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, isDisabled登録ボタン);
+        if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, isDisabled登録ボタン);
+        }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, isDisabled登録ボタン);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, isDisabled登録ボタン);
     }

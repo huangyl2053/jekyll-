@@ -25,6 +25,7 @@ public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase
     private static final long serialVersionUID = -1572924779386182816L;
 
     private static final String SHINSEISHOKANRINO = "shinseishoKanriNo";
+    private static final String OUTPUTHOHO = "outputHoho";
     private static final String CHKNINTEICHOSAHYO = "chkNinteiChosahyo";
     private static final String CHKTOKKIJIKO = "chkTokkiJiko";
     private static final String CHKSHUJIIIKENSHO = "chkShujiiIkensho";
@@ -38,6 +39,8 @@ public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase
 
     @BatchParameter(key = SHINSEISHOKANRINO, name = "申請書管理番号")
     private List<RString> 申請書管理番号;
+    @BatchParameter(key = OUTPUTHOHO, name = "出力方法")
+    private RString 出力方法;
     @BatchParameter(key = CHKNINTEICHOSAHYO, name = "認定調査票")
     private boolean 認定調査票出力;
     @BatchParameter(key = CHKTOKKIJIKO, name = "特記事項")
@@ -70,6 +73,7 @@ public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase
      * コンストラクタです。
      *
      * @param 申請書管理番号 申請書管理番号のリスト
+     * @param 出力方法 出力方法
      * @param 認定調査票出力 認定調査票チェックフラグ
      * @param 特記事項出力 特記事項チェックフラグ
      * @param 主治医意見書出力 主治医意見書チェックフラグ
@@ -81,11 +85,12 @@ public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase
      * @param その他資料マスキング区分 マスキング(その他資料)フラグ
      * @param 一次判定結果マスキング区分 マスキング(一次判定結果)フラグ
      */
-    public DBE090002_NinteikekkaJohoteikyoParameter(List<RString> 申請書管理番号, boolean 認定調査票出力,
-            boolean 特記事項出力, boolean 主治医意見書出力, boolean その他資料出力, boolean 一次判定結果出力,
-            RString 認定調査票マスキング区分, RString 特記事項マスキング区分, RString 主治医意見書マスキング区分,
-            RString その他資料マスキング区分, RString 一次判定結果マスキング区分) {
+    public DBE090002_NinteikekkaJohoteikyoParameter(List<RString> 申請書管理番号, RString 出力方法,
+            boolean 認定調査票出力, boolean 特記事項出力, boolean 主治医意見書出力, boolean その他資料出力,
+            boolean 一次判定結果出力, RString 認定調査票マスキング区分, RString 特記事項マスキング区分,
+            RString 主治医意見書マスキング区分, RString その他資料マスキング区分, RString 一次判定結果マスキング区分) {
         this.申請書管理番号 = 申請書管理番号;
+        this.出力方法 = 出力方法;
         this.認定調査票出力 = 認定調査票出力;
         this.特記事項出力 = 特記事項出力;
         this.主治医意見書出力 = 主治医意見書出力;

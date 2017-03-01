@@ -12,6 +12,10 @@ module DBE {
                 return "onChange_chkHokohojoShiyo";
             }
 
+            public static onChange_chkHokohojo(): string {
+                return "onChange_chkHokohojo";
+            }
+
             public static onChange_radGenzaiEiyoJotai(): string {
                 return "onChange_radGenzaiEiyoJotai";
             }
@@ -99,6 +103,10 @@ module DBE {
 
             public chkHokohojoShiyo(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkHokohojoShiyo"));
+            }
+
+            public chkHokohojo(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkHokohojo"));
             }
 
             public EiyoShokuseikatsu(): UZA.Panel {

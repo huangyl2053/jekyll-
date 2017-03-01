@@ -61,7 +61,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class KanryoShoriShinsaUketsuke {
 
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ROOTTITLE = new RString("基本運用・審査受付の保存処理が完了しました。");
     private static final RString EUC_ENTITYID = new RString("DBE103001");
 
@@ -104,8 +105,13 @@ public class KanryoShoriShinsaUketsuke {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<KanryoShoriCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -144,7 +150,12 @@ public class KanryoShoriShinsaUketsuke {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
+            List<PersonalData> personalDataList = new ArrayList<>();
             for (dgNinteiTaskList_Row row : rowList) {
+                PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                                row.getShinseishoKanriNo()));
+                personalDataList.add(personalData);
                 Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> サービス一覧情報Model
                         = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
                 RString 申請書管理番号 = row.getShinseishoKanriNo();
@@ -163,7 +174,7 @@ public class KanryoShoriShinsaUketsuke {
                             .要介護認定完了情報が追加(申請書管理番号));
                 }
             }
-
+            AccessLogger.log(AccessLogType.更新, personalDataList);
             div.getCcdKanryoMsg().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE1030001StateName.完了);
         }

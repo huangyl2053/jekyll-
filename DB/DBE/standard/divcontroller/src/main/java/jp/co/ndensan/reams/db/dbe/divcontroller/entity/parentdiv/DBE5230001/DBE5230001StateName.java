@@ -16,7 +16,8 @@ public enum DBE5230001StateName implements IStateEnumerations {
 
     NoChange(""),
     認定審査会結果登録("認定審査会結果登録"),
-    完了("完了");
+    完了("完了"),
+    開催から終了("開催から終了");
 
     private final RString name;
 

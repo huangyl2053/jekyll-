@@ -63,12 +63,13 @@ public class MaskingHandler {
                 getマスキングモード(YokaigoNinteiTaskListParameter.
                         createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(),
                                 div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue(),
-                                市町村コード), マスキングタイミング.equals(new RString("1"))).records();
+                                市町村コード, マスキングタイミング.equals(new RString("1")))).records();
         if (!マスキングList.isEmpty()) {
             ShinSaKaiBusiness 前マスキングModel = YokaigoNinteiTaskListFinder.createInstance().
                     get前マスキング(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(),
-                                    div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue()));
+                                    div.getRadTaishoDataKubun().getSelectedKey(), div.getTxtSaidaiHyojiKensu().getValue(),
+                                    市町村コード, マスキングタイミング.equals(new RString("1"))));
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前マスキングModel.get要介護認定完了情報Lsit()));
         } else {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
@@ -124,7 +125,7 @@ public class MaskingHandler {
                 }
 
                 マスキングモードの日付設定(row, business);
-                row.setShoKisaiHokenshaNo(business.getShoKisaiHokenshaNo()== null ? ShoKisaiHokenshaNo.EMPTY.getColumnValue() : business.getShoKisaiHokenshaNo().getColumnValue());
+                row.setShoKisaiHokenshaNo(business.getShoKisaiHokenshaNo() == null ? ShoKisaiHokenshaNo.EMPTY.getColumnValue() : business.getShoKisaiHokenshaNo().getColumnValue());
                 rowList.add(row);
             }
         }

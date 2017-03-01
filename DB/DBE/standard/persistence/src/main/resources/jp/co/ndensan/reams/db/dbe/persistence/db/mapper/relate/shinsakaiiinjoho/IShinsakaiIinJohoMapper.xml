@@ -47,7 +47,7 @@
         rgdb."DbT5594ShinsakaiIinJoho"
         <where>
             <if test="!isSubeteHyoji">
-                "haishiFlag" = FALSE
+                "haishiFlag" = TRUE
             </if>
             <if test="isSubeteHyoji">
                 ("haishiFlag" = FALSE OR "haishiFlag" = TRUE)
@@ -119,7 +119,7 @@
         rgdb."DbT5594ShinsakaiIinJoho"
         <where>
             <if test="!isSubeteHyoji">
-                "haishiFlag" = FALSE
+                "haishiFlag" = TRUE
             </if>
             <if test="isSubeteHyoji">
                 ("haishiFlag" = FALSE OR "haishiFlag" = TRUE)

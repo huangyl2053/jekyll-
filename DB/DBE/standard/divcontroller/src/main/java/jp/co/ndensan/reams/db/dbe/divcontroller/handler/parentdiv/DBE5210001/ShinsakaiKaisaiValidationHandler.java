@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -74,6 +76,37 @@ public class ShinsakaiKaisaiValidationHandler {
             全員が早退Check(validationMessages);
         }
         return validationMessages;
+    }
+    
+     /**
+     * 審査会資料未作成データ有無についてチェックします。
+     *
+     * @param 結果情報 結果情報
+     * @return true:あり/falseなし
+     */
+    public boolean is未作成データあり(List<ShinsakaiWariateJoho> 結果情報) {
+        boolean is資料作成年月日無 = false;
+        for (ShinsakaiWariateJoho joho : 結果情報) {
+            if (joho.get審査会資料作成年月日() == null || joho.get審査会資料作成年月日().isEmpty()) {
+                is資料作成年月日無 = true;
+                break;
+            }
+        }
+        return 結果情報 == null || 結果情報.isEmpty() || is資料作成年月日無;
+    }
+    
+     /**
+     * 開催日についてチェックします。
+     *
+     * @param validationMessages バリデーションメッセージ
+     * 
+     */
+    public void 開催日チェック(ValidationMessageControlPairs validationMessages) {
+        boolean is未来日 = div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue().isAfter(FlexibleDate.getNowDate().plusDay(1));
+        if (is未来日) {
+            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(DbeWarningMessages.開催日が未来日), 
+                    div.getShinsakaiKaisaiInfo().getTxtKaisaiBi()));
+        }
     }
 
     /**

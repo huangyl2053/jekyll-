@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShoriTaishoshaKensakuShijiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +29,8 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     private DropDownList ddlKensakuTaisho;
     @JsonProperty("txtSearchYMD")
     private TextBoxDateRange txtSearchYMD;
+    @JsonProperty("chkMasking")
+    private CheckBoxList chkMasking;
     @JsonProperty("btnClear")
     private Button btnClear;
     @JsonProperty("txtMaxDisp")
@@ -94,6 +96,24 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("txtSearchYMD")
     public void setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
         this.txtSearchYMD = txtSearchYMD;
+    }
+
+    /*
+     * getchkMasking
+     * @return chkMasking
+     */
+    @JsonProperty("chkMasking")
+    public CheckBoxList getChkMasking() {
+        return chkMasking;
+    }
+
+    /*
+     * setchkMasking
+     * @param chkMasking chkMasking
+     */
+    @JsonProperty("chkMasking")
+    public void setChkMasking(CheckBoxList chkMasking) {
+        this.chkMasking = chkMasking;
     }
 
     /*

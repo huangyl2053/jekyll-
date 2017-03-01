@@ -79,7 +79,8 @@ public class ShinsakaiIinJohoToroku {
     private static final int INT_7 = 7;
     private static final RString CSVファイル名 = new RString("介護認定審査会員登録.csv");
     private static final RString 口座情報未登録_CSVファイル名 = new RString("口座情報未登録機関一覧表.csv");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
     private final KoikiShichosonJohoFinder shichosonJohoFinder;
@@ -197,7 +198,8 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onClick_btnModifyShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
-
+        dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会委員登録情報, row);
         審査会委員一覧修正ボタンHandler(div);
         return ResponseData.of(div).respond();
     }
@@ -500,6 +502,7 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData<ShinsakaiIinJohoTorokuDiv> onClick_btnBackIchiran(ShinsakaiIinJohoTorokuDiv div) {
         div.getShinsakaiIinJohoIchiran().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
+        div.getTxtBirthYMD().clearValue();
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return responseWithSettingState(div);
     }
@@ -533,8 +536,13 @@ public class ShinsakaiIinJohoToroku {
         getValidationHandler(div).validateForCsv();
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<ShinsakaiIinTorokuCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgShinsaInJohoIchiran_Row> dataList = div.getDgShinsaInJohoIchiran().getDataSource();
             for (dgShinsaInJohoIchiran_Row row : dataList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -599,8 +607,13 @@ public class ShinsakaiIinJohoToroku {
         getValidationHandler(div).validateForCsv();
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 口座情報未登録_CSVファイル名);
         try (CsvWriter<KozaMitorokuShinsakaiIinCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgShinsaInJohoIchiran_Row> dataList = div.getDgShinsaInJohoIchiran().getDataSource();
             for (dgShinsaInJohoIchiran_Row row : dataList) {
                 if (isOutKozaMitorokuCsv(row)) {
@@ -860,5 +873,5 @@ public class ShinsakaiIinJohoToroku {
     private ShinsakaiIinJohoTorokuValidationHandler getValidationHandler(ShinsakaiIinJohoTorokuDiv div) {
         return new ShinsakaiIinJohoTorokuValidationHandler(div);
     }
-    
+
 }

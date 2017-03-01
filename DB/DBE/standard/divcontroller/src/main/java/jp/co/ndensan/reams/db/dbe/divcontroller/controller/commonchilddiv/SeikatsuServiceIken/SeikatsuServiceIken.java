@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.SeikatsuServiceIken;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.SeikatsuServiceIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.SeikatsuServiceIken.SeikatsuServiceIken.SeikatsuServiceIkenHandler;
@@ -57,17 +56,24 @@ public class SeikatsuServiceIken {
      * @return ResponseData<SeikatsuServiceIkenDiv>
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkHokohojoShiyo(SeikatsuServiceIkenDiv div) {
-
+        List<RString> checkTargetList = new ArrayList();
         if (div.getChkHokohojoShiyo().getSelectedKeys().contains(KEY0)) {
-            List<RString> checkTargetList = new ArrayList();
-            checkTargetList.add(KEY0);
+            div.getChkHokohojo().setSelectedItemsByKey(checkTargetList);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 歩行補助使用チェックボックス屋外、屋内選択時のイベントです。
+     *
+     * @param div SeikatsuServiceIkenDiv
+     * @return ResponseData<SeikatsuServiceIkenDiv>
+     */
+    public ResponseData<SeikatsuServiceIkenDiv> onChange_chkHokohojo(SeikatsuServiceIkenDiv div) {
+        List<RString> checkTargetList = new ArrayList();
+        if (div.getChkHokohojo().getSelectedKeys().contains(KEY0)
+                || div.getChkHokohojo().getSelectedKeys().contains(KEY1)) {
             div.getChkHokohojoShiyo().setSelectedItemsByKey(checkTargetList);
-            List<RString> disabledTargetList = new ArrayList();
-            disabledTargetList.add(KEY1);
-            disabledTargetList.add(KEY2);
-            div.getChkHokohojoShiyo().setDisabledItemsByKey(disabledTargetList);
-        } else {
-            div.getChkHokohojoShiyo().setDisabledItemsByKey(Collections.<RString>emptyList());
         }
         return ResponseData.of(div).respond();
     }
@@ -321,6 +327,7 @@ public class SeikatsuServiceIken {
                 .append(div.getRadKansenshoUmu().getSelectedKey())
                 .append(div.getTxtKansenshoShosai().getValue())
                 .append(div.getChkHokohojoShiyo().getSelectedKeys())
+                .append(div.getChkHokohojo().getSelectedKeys())
                 .append(div.getChkHasseiShojo().getSelectedKeys())
                 .append(div.getChkIgakutekiKanri().getSelectedKeys())
                 .toRString();

@@ -121,7 +121,7 @@
                      close=")">
                 (
                 T5503."shinsakaiIinCode" = #{item.shinsakaiIinCode}
-                AND T5511."shinsakaiKaisaiNo" = #{item.shinsakaiKaisaiCode}
+                AND T5511."shinsakaiKaisaiNo" = #{item.shinsakaiKaisaiNo}
                 AND T5511."shinsakaiKaisaiYMD" = #{item.shinsakaiKaisaiYMD}
                 )
             </foreach>

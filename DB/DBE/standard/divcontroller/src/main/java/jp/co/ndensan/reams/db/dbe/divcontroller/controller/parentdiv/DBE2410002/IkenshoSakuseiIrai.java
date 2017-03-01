@@ -109,7 +109,6 @@ public class IkenshoSakuseiIrai {
             if (createHandler(div).結果データ有無()) {
                 完了データ更新();
             }
-//            onLoad(div);
             RealInitialLocker.release(get排他キー());
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             div.getKanryoMessage().setSuccessMessage(

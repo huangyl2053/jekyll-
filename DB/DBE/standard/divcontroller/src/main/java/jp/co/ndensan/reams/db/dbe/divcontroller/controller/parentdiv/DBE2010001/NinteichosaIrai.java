@@ -86,7 +86,8 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class NinteichosaIrai {
 
     private static final RString CSVファイルID_認定調査依頼一覧 = new RString("DBE201001");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 修正 = new RString("Modified");
 
     /**
@@ -165,8 +166,13 @@ public class NinteichosaIrai {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
 
         try (CsvWriter<NinteichosaIraiItiranCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
 

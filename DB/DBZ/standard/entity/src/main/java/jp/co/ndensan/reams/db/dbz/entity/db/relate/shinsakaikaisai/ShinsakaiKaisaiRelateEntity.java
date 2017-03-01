@@ -41,6 +41,7 @@ public class ShinsakaiKaisaiRelateEntity implements Serializable {
     private FlexibleDate mobileDataOutputYMD;
     private boolean shiryoSakuseiZumiFlag;
     private RString shinsakaiShinchokuJokyo;
+    private RString 資料作成;
     private boolean gogitaiDummyFlag;
     private int 合議体番号;
 

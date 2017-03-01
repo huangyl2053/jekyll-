@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKensakuJokenDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -97,7 +97,7 @@ public class tblKensakuJokenDiv extends TablePanel {
  * @author 自動生成
  */
 class cel1AttblKensakuJoken extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("radKensakuKomoku")
     private RadioButton radKensakuKomoku;
 
@@ -127,7 +127,7 @@ class cel1AttblKensakuJoken extends TableCell {
  * @author 自動生成
  */
 class cel2AttblKensakuJoken extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     @JsonProperty("txtNijiHanteibi")
     private TextBoxDateRange txtNijiHanteibi;
     @JsonProperty("txtHihokenshaNo")

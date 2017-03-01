@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoNinteiJohoTeikyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -507,6 +507,16 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     }
 
     @JsonIgnore
+    public RadioButton getRadOutputHoho() {
+        return this.getHakkoChohyo().getRadOutputHoho();
+    }
+
+    @JsonIgnore
+    public void  setRadOutputHoho(RadioButton radOutputHoho) {
+        this.getHakkoChohyo().setRadOutputHoho(radOutputHoho);
+    }
+
+    @JsonIgnore
     public CheckBoxList getChkNinteiChosahyo() {
         return this.getHakkoChohyo().getChkNinteiChosahyo();
     }
@@ -607,13 +617,13 @@ public class YokaigoNinteiJohoTeikyoDiv extends Panel {
     }
 
     @JsonIgnore
-    public RadioButton getRadSohotaShiryoMasking() {
-        return this.getHakkoChohyo().getRadSohotaShiryoMasking();
+    public RadioButton getRadSonotaShiryoMasking() {
+        return this.getHakkoChohyo().getRadSonotaShiryoMasking();
     }
 
     @JsonIgnore
-    public void  setRadSohotaShiryoMasking(RadioButton radSohotaShiryoMasking) {
-        this.getHakkoChohyo().setRadSohotaShiryoMasking(radSohotaShiryoMasking);
+    public void  setRadSonotaShiryoMasking(RadioButton radSonotaShiryoMasking) {
+        this.getHakkoChohyo().setRadSonotaShiryoMasking(radSonotaShiryoMasking);
     }
 
     @JsonIgnore

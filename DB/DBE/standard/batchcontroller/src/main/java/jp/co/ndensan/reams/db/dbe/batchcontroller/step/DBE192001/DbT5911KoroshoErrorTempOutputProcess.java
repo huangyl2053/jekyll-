@@ -104,9 +104,9 @@ public class DbT5911KoroshoErrorTempOutputProcess extends BatchProcessBase<DbT59
         RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         Encode encode = Encode.UTF_8withBOM;
         if (new RString("1").equals(文字コード)) {
-            encode = Encode.UTF_8withBOM;
-        } else if (new RString("2").equals(文字コード)) {
             encode = Encode.SJIS;
+        } else if (new RString("2").equals(文字コード)) {
+            encode = Encode.UTF_8withBOM;
         }
         return encode;
     }

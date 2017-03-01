@@ -157,10 +157,10 @@ public class IraiJohoDataTorikomi {
                 ninteiShinseiJohoList.add(IraiJohoDataTorikomiManager.createInstance().get要介護認定申請情報(parameter, row.getHokenshaBango()));
             }
         }
-        for (NinteiShinseiJohoIraiJohoData data : ninteiShinseiJohoList) {
-            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY,
-                    new ExpandedInformation(new Code("001"), new RString("申請書管理番号"), data.get申請書管理番号())));
-        }
+//        for (NinteiShinseiJohoIraiJohoData data : ninteiShinseiJohoList) {
+//            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY,
+//                    new ExpandedInformation(new Code("001"), new RString("申請書管理番号"), data.get申請書管理番号())));
+//        }
         getHandler(div).set一覧エリア_入力チェック(ninteiShinseiJohoList);
         return ResponseData.of(div).respond();
     }

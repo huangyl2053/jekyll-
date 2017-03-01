@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.IchijiHanteiKekkaPrintProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.IsshikiPrintProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.NinteiChosahyoPrintProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.ShujiiIkenshoPrintProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090002.SonotaShiryoPrintProcess;
@@ -30,12 +31,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_NinteikekkaJohoteikyoParameter> {
 
+    private static final String 一式出力 = "isshikiPrint";
     private static final String 認定調査票出力 = "ninteiChosahyoPrint";
     private static final String 特記事項出力 = "tokkiJikoPrint";
     private static final String 主治医意見書出力 = "shujiiIkenshoPrint";
     private static final String その他資料出力 = "sonotaShiryoPrint";
     private static final String 一次判定結果出力 = "ichijiHanteiKekkaPrint";
     private static final String 要介護認定申請情報更新 = "updateData";
+
+    private final RString 出力方法_一式 = new RString("0");
 
     private YokaigoBatchProcessParamter processParameter;
 
@@ -56,22 +60,33 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
 
     @Override
     protected void defineFlow() {
-        if (getParameter().is認定調査票出力()) {
-            executeStep(認定調査票出力);
-        }
-        if (getParameter().is特記事項出力()) {
-            executeStep(特記事項出力);
-        }
-        if (getParameter().is主治医意見書出力()) {
-            executeStep(主治医意見書出力);
-        }
-        if (getParameter().isその他資料出力()) {
-            executeStep(その他資料出力);
-        }
-        if (getParameter().is一次判定結果出力()) {
-            executeStep(一次判定結果出力);
+        if (出力方法_一式.equals(getParameter().get出力方法())) {
+            executeStep(一式出力);
+        } else {
+            if (getParameter().is認定調査票出力()) {
+                executeStep(認定調査票出力);
+            }
+            if (getParameter().is特記事項出力()) {
+                executeStep(特記事項出力);
+            }
+            if (getParameter().is主治医意見書出力()) {
+                executeStep(主治医意見書出力);
+            }
+            if (getParameter().isその他資料出力()) {
+                executeStep(その他資料出力);
+            }
+            if (getParameter().is一次判定結果出力()) {
+                executeStep(一次判定結果出力);
+            }
         }
         executeStep(要介護認定申請情報更新);
+    }
+
+    @Step(一式出力)
+    protected IBatchFlowCommand isshikiPrint() {
+        return loopBatch(IsshikiPrintProcess.class)
+                .arguments(processParameter)
+                .define();
     }
 
     @Step(認定調査票出力)

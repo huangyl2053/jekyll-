@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * NinteiChosa のクラスファイル
- * 
+ *
  * @author 自動生成
  */
 public class NinteiChosaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

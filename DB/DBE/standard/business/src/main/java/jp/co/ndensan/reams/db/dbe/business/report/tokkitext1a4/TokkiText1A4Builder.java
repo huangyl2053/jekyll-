@@ -49,9 +49,11 @@ class TokkiText1A4Builder implements ITokkiText1A4Builder {
     private final int count;
 
     /**
-     * インスタンスを生成します。
+     * コンストラクタです。
      *
-     * @param editor {@link ITokkiText1A4Editor}
+     * @param entity TokkiText1A4Entity
+     * @param list list
+     * @param count count
      */
     public TokkiText1A4Builder(TokkiText1A4Entity entity, List<RString> list, int count) {
         this.entity = entity;

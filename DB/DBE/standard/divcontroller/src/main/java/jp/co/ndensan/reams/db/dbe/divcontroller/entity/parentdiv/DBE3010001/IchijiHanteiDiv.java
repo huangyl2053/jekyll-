@@ -18,21 +18,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IchijiHanteiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("IchijiHanteiKensakuJoken")
+    private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("IchijiHanteiShoriTaishoshaIchiran")
     private IchijiHanteiShoriTaishoshaIchiranDiv IchijiHanteiShoriTaishoshaIchiran;
     @JsonProperty("torikomiPanel")
     private torikomiPanelDiv torikomiPanel;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("IchijiHanteiKensakuJoken")
-    private IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken;
     @JsonProperty("インデックス")
     private RString インデックス;
     @JsonProperty("ファイルID")
@@ -48,6 +48,24 @@ public class IchijiHanteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getIchijiHanteiKensakuJoken
+     * @return IchijiHanteiKensakuJoken
+     */
+    @JsonProperty("IchijiHanteiKensakuJoken")
+    public IchijiHanteiKensakuJokenDiv getIchijiHanteiKensakuJoken() {
+        return IchijiHanteiKensakuJoken;
+    }
+
+    /*
+     * setIchijiHanteiKensakuJoken
+     * @param IchijiHanteiKensakuJoken IchijiHanteiKensakuJoken
+     */
+    @JsonProperty("IchijiHanteiKensakuJoken")
+    public void setIchijiHanteiKensakuJoken(IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken) {
+        this.IchijiHanteiKensakuJoken = IchijiHanteiKensakuJoken;
+    }
+
     /*
      * getIchijiHanteiShoriTaishoshaIchiran
      * @return IchijiHanteiShoriTaishoshaIchiran
@@ -91,24 +109,6 @@ public class IchijiHanteiDiv extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
-    }
-
-    /*
-     * getIchijiHanteiKensakuJoken
-     * @return IchijiHanteiKensakuJoken
-     */
-    @JsonProperty("IchijiHanteiKensakuJoken")
-    public IchijiHanteiKensakuJokenDiv getIchijiHanteiKensakuJoken() {
-        return IchijiHanteiKensakuJoken;
-    }
-
-    /*
-     * setIchijiHanteiKensakuJoken
-     * @param IchijiHanteiKensakuJoken IchijiHanteiKensakuJoken
-     */
-    @JsonProperty("IchijiHanteiKensakuJoken")
-    public void setIchijiHanteiKensakuJoken(IchijiHanteiKensakuJokenDiv IchijiHanteiKensakuJoken) {
-        this.IchijiHanteiKensakuJoken = IchijiHanteiKensakuJoken;
     }
 
     /*

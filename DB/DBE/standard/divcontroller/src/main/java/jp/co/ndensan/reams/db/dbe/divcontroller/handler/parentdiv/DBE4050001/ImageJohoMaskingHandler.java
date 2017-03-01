@@ -128,7 +128,8 @@ public class ImageJohoMaskingHandler {
                 null,
                 div.getTxtHihokenshaNumber().getValue(),
                 div.getTxtMaxDisp().getValue(),
-                new RString("1").equals(マスキングタイミング));
+                new RString("1").equals(マスキングタイミング),
+                !div.getChkMasking().getSelectedKeys().isEmpty());
         return ImageJohoMaskingFinder.createInstance().getDataForLoad(param).records();
     }
 
@@ -148,7 +149,8 @@ public class ImageJohoMaskingHandler {
                 shinseishoKanriNoList.getShinseishoKanriNoS(),
                 RString.EMPTY,
                 div.getTxtMaxDisp().getValue(),
-                new RString("1").equals(マスキングタイミング));
+                new RString("1").equals(マスキングタイミング),
+                false);
         return ImageJohoMaskingFinder.createInstance().getDataForLoad(param).records();
     }
 
@@ -447,7 +449,7 @@ public class ImageJohoMaskingHandler {
                         申請書管理番号,
                         主治医意見書作成依頼履歴番号,
                         帳票分類ID, GenponMaskKubun.マスク.getコード(),
-                        row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? 意見書_表ページ : 意見書_裏ページ);
+                        1);
 
                 IkenshoImageJohoBuilder builder = imageJoho.createBuilderForEdit();
 
@@ -489,7 +491,11 @@ public class ImageJohoMaskingHandler {
                 if (帳票ID.equals(new RString("701")) || 帳票ID.equals(new RString("702"))) {
                     帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("701") : new Code("702");
                 } else if (帳票ID.equals(new RString("121")) || 帳票ID.equals(new RString("122"))) {
-                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("1222");
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("121") : new Code("122");
+                } else if (帳票ID.equals(new RString("777")) || 帳票ID.equals(new RString("778"))) {
+                    帳票分類ID = row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? new Code("777") : new Code("778");
+                } else if (帳票ID.equals(new RString("999"))) {
+                    帳票分類ID = new Code("999");
                 } else {
                     帳票分類ID = new Code(帳票ID);
                 }
@@ -499,7 +505,7 @@ public class ImageJohoMaskingHandler {
                         主治医意見書作成依頼履歴番号,
                         帳票分類ID,
                         GenponMaskKubun.マスク.getコード(),
-                        row.getImageName().equals(マスク有りイメージ一覧.E0001.getイメージ日本語名称()) ? 意見書_表ページ : 意見書_裏ページ);
+                        1);
                 if (imageJoho != null) {
                     imageJoho = imageJoho.deleted();
                     imageJohoManager.save要介護認定意見書イメージ情報(imageJoho);

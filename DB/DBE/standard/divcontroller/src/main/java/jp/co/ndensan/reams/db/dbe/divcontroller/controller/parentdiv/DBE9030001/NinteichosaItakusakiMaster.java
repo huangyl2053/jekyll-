@@ -97,7 +97,8 @@ public class NinteichosaItakusakiMaster {
     private static final RString 削除状態 = new RString("削除");
     private static final RString 追加状態コード = new RString("追加");
     private static final RString 修正状態コード = new RString("修正");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString 口座情報チェックREPLACE = new RString("口座情報");
     private static final RString 事業者番号存在チェックREPLACE = new RString("事業者番号");
@@ -255,8 +256,13 @@ public class NinteichosaItakusakiMaster {
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<NinteichosaItakusakiJohoCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             int rowIndex = 0;
 
             KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
@@ -345,8 +351,13 @@ public class NinteichosaItakusakiMaster {
 
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
         try (CsvWriter<NinteichosaItakusakiKozaMitorokuJohoCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgChosainIchiran_Row> dataList = div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource();
             int rowIndex = 0;
             for (dgChosainIchiran_Row row : dataList) {
@@ -366,7 +377,7 @@ public class NinteichosaItakusakiMaster {
 
     private NinteichosaItakusakiKozaMitorokuJohoCsvEntity getCsvDataSonota(NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex) {
         NinteichosaItakusakiKozaMitorokuJohoCsvEntity csvEntity = new NinteichosaItakusakiKozaMitorokuJohoCsvEntity();
-        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
+        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(EUC_WRITER_DELIMITER.toString()).get(rowIndex));
         csvEntity.set市町村(row.getShichoson());
         csvEntity.set調査委託先コード(row.getChosaItakusakiCode().getValue());
         csvEntity.set事業者番号(row.getJigyoshaNo());
@@ -593,7 +604,7 @@ public class NinteichosaItakusakiMaster {
     private void changeSelectID(int selectID, NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row) {
         if (selectID == -1) {
             div.setHdnShichosonCodeList(div.getHdnShichosonCodeList().concat(
-                    div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(CSV_WRITER_DELIMITER));
+                    div.getChosaitakusakiJohoInput().getTxtShichoson().getValue()).concat(EUC_WRITER_DELIMITER));
             div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().add(row);
         } else {
             div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
@@ -692,7 +703,7 @@ public class NinteichosaItakusakiMaster {
             for (dgChosainIchiran_Row row : div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource()) {
                 if (削除状態.equals(row.getJotai())
                         && !getHandler(div).削除行データの整合性チェック(
-                                new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString())
+                                new LasdecCode(div.getHdnShichosonCodeList().split(EUC_WRITER_DELIMITER.toString())
                                         .get(rowIndex)), row.getChosaItakusakiCode().getValue())) {
                     throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
 
@@ -821,7 +832,7 @@ public class NinteichosaItakusakiMaster {
     private NinteichosaItakusakiJohoCsvEntity converterDataSourceFromToCsvEntity(
             NinteichosaItakusakiMasterDiv div, dgChosainIchiran_Row row, int rowIndex, RString 金融機関名称, RString 支店名) {
         NinteichosaItakusakiJohoCsvEntity csvEntity = new NinteichosaItakusakiJohoCsvEntity();
-        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
+        csvEntity.set市町村コード(div.getHdnShichosonCodeList().split(EUC_WRITER_DELIMITER.toString()).get(rowIndex));
         csvEntity.set市町村(row.getShichoson());
         csvEntity.set調査委託先コード(row.getChosaItakusakiCode().getValue());
         csvEntity.set事業者番号(row.getJigyoshaNo());

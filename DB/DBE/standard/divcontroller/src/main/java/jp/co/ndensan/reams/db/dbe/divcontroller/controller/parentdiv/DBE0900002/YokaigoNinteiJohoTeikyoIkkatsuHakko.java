@@ -90,6 +90,17 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakko {
     }
 
     /**
+     * 出力方法ラジオボタン変更イベントです。
+     *
+     * @param div YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv> onChange_radOutputHoho(YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv div) {
+        getHandler(div).set発行する帳票();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 認定調査票チェックボックスのチェンジイベントです。
      *
      * @param div YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv

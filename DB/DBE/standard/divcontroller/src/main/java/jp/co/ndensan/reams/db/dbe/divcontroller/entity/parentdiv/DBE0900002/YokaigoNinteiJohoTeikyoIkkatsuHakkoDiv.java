@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -173,6 +173,16 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv extends PanelBatchParameter 
     @JsonIgnore
     public void  setDgShinseiList(DataGrid<dgShinseiList_Row> dgShinseiList) {
         this.getShinseiList().setDgShinseiList(dgShinseiList);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadOutputHoho() {
+        return this.getPrintChohyoSelect().getRadOutputHoho();
+    }
+
+    @JsonIgnore
+    public void  setRadOutputHoho(RadioButton radOutputHoho) {
+        this.getPrintChohyoSelect().setRadOutputHoho(radOutputHoho);
     }
 
     @JsonIgnore

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -121,8 +123,8 @@ public class ShinsakaiIinJohoTorokuHandler {
             }
             row.setShimei(shinsakaiIinJoho.get介護認定審査会委員氏名().value());
             row.setKanaShimei(shinsakaiIinJoho.get介護認定審査会委員氏名カナ().value());
-            if (!RString.isNullOrEmpty(Seibetsu.toValue(shinsakaiIinJoho.get性別().trim()).get名称())) {
-                row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別()).get名称());
+            if (shinsakaiIinJoho.get性別() != null && !Seibetsu.toValue(shinsakaiIinJoho.get性別().trim()).get名称().isEmpty()) {
+                row.setSeibetsu(Seibetsu.toValue(shinsakaiIinJoho.get性別().trim()).get名称());
             } else {
                 row.setSeibetsu(RString.EMPTY);
             }
@@ -143,9 +145,9 @@ public class ShinsakaiIinJohoTorokuHandler {
                 row.setBiko(shinsakaiIinJoho.get備考());
             }
             if (IsHaishi.廃止.equals(IsHaishi.toValue(shinsakaiIinJoho.is廃止フラグ()))) {
-                row.setJokyo(廃止);
-            } else {
                 row.setJokyo(有効);
+            } else {
+                row.setJokyo(廃止);
             }
             if (shinsakaiIinJoho.get担当地区コード() != null) {
                 row.setShinsakaiChikuCode(shinsakaiIinJoho.get担当地区コード().value());
@@ -514,7 +516,7 @@ public class ShinsakaiIinJohoTorokuHandler {
     public void setShinsakiToIchiran(RString eventJotai) {
         dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getDgShinsaInJohoIchiran().getActiveRow();
+            row = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員登録情報, dgShinsaInJohoIchiran_Row.class);
         }
         row.setShinsainCode(div.getTxtShinsainCode().getValue());
         row.getShinsakaiIinKaishiYMD().setValue(div.getTxtShinsaIinYMDFrom().getValue());
@@ -548,6 +550,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
 
         int index = div.getDgShinsaInJohoIchiran().getClickedRowId();
+        index = row.getId();
         if (状態_追加.equals(eventJotai)) {
             row.setStatus(eventJotai);
             div.getDgShinsaInJohoIchiran().getDataSource().add(row);

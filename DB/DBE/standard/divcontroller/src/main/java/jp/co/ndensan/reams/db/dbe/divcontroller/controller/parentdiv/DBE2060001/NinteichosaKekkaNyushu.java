@@ -65,8 +65,8 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 public class NinteichosaKekkaNyushu {
 
     private static final RString CSVファイルID_認定調査結果入手 = new RString("DBE206001");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
 
     /**
      * 完了処理・認定調査結果入手に初期化を設定します。
@@ -141,8 +141,13 @@ public class NinteichosaKekkaNyushu {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<NinteichosaIraiListCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 csvWriter.writeLine(getCsvData(row));

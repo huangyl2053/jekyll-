@@ -38,6 +38,8 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
     private static final RString 被保険者番号 = new RString("1");
     private final RString マスキング_なし = new RString("0");
     private final RString マスキング_あり = new RString("1");
+    private final RString 出力方法_一式 = new RString("0");
+    private final RString KEY0 = new RString("key0");
 
     private final YokaigoNinteiJohoTeikyoIkkatsuHakkoDiv div;
 
@@ -71,6 +73,7 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
         setRadShujiiMasking();
         setRadSonotaShiryoMasking();
         setRadIchijiHanteiMasking();
+        set発行する帳票();
     }
 
     /**
@@ -177,6 +180,47 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
     }
 
     /**
+     * 発行する帳票に関するコントロールを設定します。
+     */
+    public void set発行する帳票() {
+        if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+            List<RString> keys = new ArrayList<>();
+            keys.add(KEY0);
+            div.getChkNinteiChosahyo().setDisabled(true);
+            div.getChkNinteiChosahyo().setSelectedItemsByKey(keys);
+            div.getChkTokkiJiko().setDisabled(true);
+            div.getChkTokkiJiko().setSelectedItemsByKey(keys);
+            div.getChkShujiiIkensho().setDisabled(true);
+            div.getChkShujiiIkensho().setSelectedItemsByKey(keys);
+            div.getChkSonotaShiryo().setDisabled(true);
+            div.getChkSonotaShiryo().setSelectedItemsByKey(keys);
+            div.getChkIchijiHanteiKekka().setDisabled(true);
+            div.getChkIchijiHanteiKekka().setSelectedItemsByKey(keys);
+            div.getRadNinteiChosaMasking().setDisabled(false);
+            div.getRadTokkiJikoMasking().setDisabled(false);
+            div.getRadShujiiMasking().setDisabled(false);
+            div.getRadSonotaShiryoMasking().setDisabled(false);
+            div.getRadIchijiHanteiMasking().setDisabled(false);
+        } else {
+            div.getChkNinteiChosahyo().setDisabled(false);
+            div.getChkNinteiChosahyo().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkTokkiJiko().setDisabled(false);
+            div.getChkTokkiJiko().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkShujiiIkensho().setDisabled(false);
+            div.getChkShujiiIkensho().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkSonotaShiryo().setDisabled(false);
+            div.getChkSonotaShiryo().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getChkIchijiHanteiKekka().setDisabled(false);
+            div.getChkIchijiHanteiKekka().setSelectedItemsByKey(new ArrayList<RString>());
+            div.getRadNinteiChosaMasking().setDisabled(true);
+            div.getRadTokkiJikoMasking().setDisabled(true);
+            div.getRadShujiiMasking().setDisabled(true);
+            div.getRadSonotaShiryoMasking().setDisabled(true);
+            div.getRadIchijiHanteiMasking().setDisabled(true);
+        }
+    }
+
+    /**
      * 主治医意見書チェックボックスのみ選択されているか返します。
      *
      * @return true：主治医意見書チェックボックスのみ選択されている場合<br/>
@@ -240,7 +284,7 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
     /**
      * 検索用パラメータを作成します。
      *
-     * @return DBE090002_NinteikekkaJohoteikyoParameter
+     * @return YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter
      */
     public YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter createSearchParameter() {
         return new YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter(
@@ -267,6 +311,7 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
             申請書管理番号List.add(row.getShinseishoKanriNo());
         }
         parameter.set申請書管理番号(申請書管理番号List);
+        parameter.set出力方法(div.getRadOutputHoho().getSelectedKey());
         parameter.set認定調査票出力(div.getChkNinteiChosahyo().isAllSelected());
         parameter.set特記事項出力(div.getChkTokkiJiko().isAllSelected());
         parameter.set主治医意見書出力(div.getChkShujiiIkensho().isAllSelected());

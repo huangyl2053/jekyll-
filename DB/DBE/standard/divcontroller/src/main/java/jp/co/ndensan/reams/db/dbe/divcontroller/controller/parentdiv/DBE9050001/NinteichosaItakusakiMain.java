@@ -74,7 +74,6 @@ public class NinteichosaItakusakiMain {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CSVファイル名 = new RString("その他機関情報.csv");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString ROOTTITLE = new RString("その他機関マスタの保存処理が完了しました。");
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表（その他機関）.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE910081"));
@@ -259,8 +258,13 @@ public class NinteichosaItakusakiMain {
 
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<NinteichosaItakusakiCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
             KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
             List<KinyuKikan> 金融機関情報 = new ArrayList<>();
@@ -581,8 +585,13 @@ public class NinteichosaItakusakiMain {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), OUTPUT_CSV_FILE_NAME);
         boolean is該当データなし = true;
         try (CsvWriter<SonotaKikanJohoCSVEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
             for (dgSonotaKikanIchiran_Row row : dataList) {
                 if (row.getKinyuKikanCode().isNull() || row.getKinyuKikanCode().isEmpty()) {

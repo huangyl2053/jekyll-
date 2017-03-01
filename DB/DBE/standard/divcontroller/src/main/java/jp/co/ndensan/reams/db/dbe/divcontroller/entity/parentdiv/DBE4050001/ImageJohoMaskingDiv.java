@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageJohoMaskingDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -178,6 +178,16 @@ public class ImageJohoMaskingDiv extends Panel {
     @JsonIgnore
     public void  setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
         this.getShoriTaishoshaKensakuShiji().setTxtSearchYMD(txtSearchYMD);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkMasking() {
+        return this.getShoriTaishoshaKensakuShiji().getChkMasking();
+    }
+
+    @JsonIgnore
+    public void  setChkMasking(CheckBoxList chkMasking) {
+        this.getShoriTaishoshaKensakuShiji().setChkMasking(chkMasking);
     }
 
     @JsonIgnore

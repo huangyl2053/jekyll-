@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,8 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private ShinsakaiIinTorokuDiv ShinsakaiIinToroku;
     @JsonProperty("onseiFile")
     private onseiFileDiv onseiFile;
+//    @JsonProperty("kanryoPanel")
+//    private kanryoPanelDiv kanryoPanel;
     @JsonProperty("Model")
     private RString Model;
     @JsonProperty("gogitaiNo")
@@ -137,6 +139,24 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     public void setOnseiFile(onseiFileDiv onseiFile) {
         this.onseiFile = onseiFile;
     }
+
+    /*
+     * getkanryoPanel
+     * @return kanryoPanel
+     */
+//    @JsonProperty("kanryoPanel")
+//    public kanryoPanelDiv getKanryoPanel() {
+//        return kanryoPanel;
+//    }
+
+    /*
+     * setkanryoPanel
+     * @param kanryoPanel kanryoPanel
+     */
+//    @JsonProperty("kanryoPanel")
+//    public void setKanryoPanel(kanryoPanelDiv kanryoPanel) {
+//        this.kanryoPanel = kanryoPanel;
+//    }
 
     /*
      * getModel

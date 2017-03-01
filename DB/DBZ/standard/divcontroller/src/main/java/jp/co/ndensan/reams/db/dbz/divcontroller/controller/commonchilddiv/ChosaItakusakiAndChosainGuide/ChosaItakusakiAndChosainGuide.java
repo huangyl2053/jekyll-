@@ -69,9 +69,9 @@ public class ChosaItakusakiAndChosainGuide {
             div.getTxtChosaItakuaskiCodeTo().setValue(RString.EMPTY);
             div.getTxtChosaItakusakiName().setValue(RString.EMPTY);
             if (dataPassModel.get対象モード().equals(new RString(TaishoMode.Chosain.name()))) {
-                div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
-                div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード());
-                div.getTxtChosaItakusakiName().setValue(dataPassModel.get委託先名());
+                div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
+                div.getTxtChosaItakuaskiCodeTo().setValue(dataPassModel.get委託先コード() != null ? dataPassModel.get委託先コード() : RString.EMPTY);
+                div.getTxtChosaItakusakiName().setValue(dataPassModel.get委託先名() != null ? dataPassModel.get委託先名() : RString.EMPTY);
             }
             if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {
                 if (状況フラグ無効可.equals(div.getHdnCanJokyoMuko())) {

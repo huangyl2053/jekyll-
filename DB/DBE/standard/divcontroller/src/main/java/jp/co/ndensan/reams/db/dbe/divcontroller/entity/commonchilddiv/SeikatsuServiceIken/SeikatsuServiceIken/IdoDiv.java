@@ -27,6 +27,8 @@ public class IdoDiv extends Panel {
     private RadioButton radKurumaisuShiyo;
     @JsonProperty("chkHokohojoShiyo")
     private CheckBoxList chkHokohojoShiyo;
+    @JsonProperty("chkHokohojo")
+    private CheckBoxList chkHokohojo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +88,24 @@ public class IdoDiv extends Panel {
     @JsonProperty("chkHokohojoShiyo")
     public void setChkHokohojoShiyo(CheckBoxList chkHokohojoShiyo) {
         this.chkHokohojoShiyo = chkHokohojoShiyo;
+    }
+
+    /*
+     * getchkHokohojo
+     * @return chkHokohojo
+     */
+    @JsonProperty("chkHokohojo")
+    public CheckBoxList getChkHokohojo() {
+        return chkHokohojo;
+    }
+
+    /*
+     * setchkHokohojo
+     * @param chkHokohojo chkHokohojo
+     */
+    @JsonProperty("chkHokohojo")
+    public void setChkHokohojo(CheckBoxList chkHokohojo) {
+        this.chkHokohojo = chkHokohojo;
     }
 
     // </editor-fold>

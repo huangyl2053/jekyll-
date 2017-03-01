@@ -92,9 +92,9 @@ public class JizenShinsaKekkaProcess extends BatchProcessBase<JizenShinsaKekkaRe
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(false).
+                hasHeader(true).
                 build();
     }
 
@@ -161,9 +161,9 @@ public class JizenShinsaKekkaProcess extends BatchProcessBase<JizenShinsaKekkaRe
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(false).
+                hasHeader(true).
                 build();
     }
 

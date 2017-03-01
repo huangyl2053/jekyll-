@@ -542,7 +542,11 @@ public enum ReportIdDBE {
     /**
      * センター送信対象者一覧の帳票ＩＤです。
      */
-    DBE561001(new ReportId("DBE561001_CenterSoshinTaishoshaIchiran"), new RString("センター送信対象者一覧"));
+    DBE561001(new ReportId("DBE561001_CenterSoshinTaishoshaIchiran"), new RString("センター送信対象者一覧")),
+    /**
+     * 要介護認定情報提供一式の帳票ＩＤです。
+     */
+    DBE091101(new ReportId("DBE091101_JohoTeikyoShiryo"), new RString("要介護認定情報提供一式"));
 
     private final ReportId reportId;
 

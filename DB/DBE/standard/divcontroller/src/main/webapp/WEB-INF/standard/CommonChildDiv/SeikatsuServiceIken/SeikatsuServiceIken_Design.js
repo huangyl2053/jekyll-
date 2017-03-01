@@ -8,6 +8,10 @@ var DBE;
                 return "onChange_chkHokohojoShiyo";
             };
 
+            Events.onChange_chkHokohojo = function () {
+                return "onChange_chkHokohojo";
+            };
+
             Events.onChange_radGenzaiEiyoJotai = function () {
                 return "onChange_radGenzaiEiyoJotai";
             };
@@ -93,6 +97,10 @@ var DBE;
 
             Controls.prototype.chkHokohojoShiyo = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkHokohojoShiyo"));
+            };
+
+            Controls.prototype.chkHokohojo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHokohojo"));
             };
 
             Controls.prototype.EiyoShokuseikatsu = function () {

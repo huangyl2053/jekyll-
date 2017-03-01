@@ -70,7 +70,8 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class Masking {
 
     private static final RString CSVファイルID_マスキング一覧 = new RString("DBE208001");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
     private static final RString 完了可能 = new RString("2");
     private static final RString 一次判定後 = new RString("1");
@@ -186,8 +187,13 @@ public class Masking {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 if (row.getSelected()) {
@@ -258,6 +264,7 @@ public class Masking {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
+            List<PersonalData> personalDataList = new ArrayList<>();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 if (!row.getSelected()) {
                     continue;
@@ -270,10 +277,13 @@ public class Masking {
                             new NinteiKanryoJohoIdentifier(new ShinseishoKanriNo(申請書管理番号)));
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
-                    AccessLogger.log(AccessLogType.更新, PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                            new RString("申請書管理番号"), row.getShinseishoKanriNo())));
+                    PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                                row.getShinseishoKanriNo()));
+                    personalDataList.add(personalData);
                 }
             }
+            AccessLogger.log(AccessLogType.更新, personalDataList);
             div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキングの保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2080001StateName.完了);

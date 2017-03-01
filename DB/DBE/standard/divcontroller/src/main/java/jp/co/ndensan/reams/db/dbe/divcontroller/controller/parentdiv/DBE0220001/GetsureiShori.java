@@ -75,10 +75,12 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 public class GetsureiShori {
 
     private static final RString UICONTAINERID_DBEUC56101 = new RString("DBEUC56101");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_DELIMITER = new RString(",");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString EUC_ENTITY_ID = new RString("DBE202001");
     private static final RString KEY = new RString("key");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
+    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
     private static final RString センター送信 = new RString("センター送信");
     private static final RString センター送信_完了日登録方法_バッチ実行時 = new RString("1");
 
@@ -192,8 +194,13 @@ public class GetsureiShori {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<CenterSoshinIchiranCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
+                = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build()) {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
@@ -256,7 +263,12 @@ public class GetsureiShori {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             RString センター送信_完了日登録方法 = DbBusinessConfig.get(DbeConfigKey.センター送信_完了日登録方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (!センター送信_完了日登録方法_バッチ実行時.equals(センター送信_完了日登録方法)) {
+            if (センター送信_完了日登録方法_バッチ実行時.equals(センター送信_完了日登録方法)) {
+                RString uiContainerID = ResponseHolder.getUIContainerId();
+                if (UICONTAINERID_DBEUC56101.equals(uiContainerID)) {
+                    FlowParameters fp = FlowParameters.of(KEY, WORKFLOW_KEY_BATCH);
+                    FlowParameterAccessor.merge(fp);
+                }
                 return ResponseData.of(div).setState(DBE0220001StateName.完了);
             }
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
@@ -273,14 +285,14 @@ public class GetsureiShori {
                 }
                 PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
                         .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"),
-                        new RString("申請書管理番号"), row.getShinseishoKanriNo()));
+                                new RString("申請書管理番号"), row.getShinseishoKanriNo()));
                 personalData.addExpandedInfo(new ExpandedInformation(new Code("0002"), new RString("被保険者番号"),
                         row.getHihoNumber()));
                 personalDataList.add(personalData);
             }
             AccessLogger.log(AccessLogType.更新, personalDataList);
 
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・センター送信の保存処理が完了しました。"),
+            div.getCcdKanryoMsg().setMessage(new RString("基本運用・センター送信の保存処理が完了しました。"),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             RString uiContainerID = ResponseHolder.getUIContainerId();
             if (UICONTAINERID_DBEUC56101.equals(uiContainerID)) {

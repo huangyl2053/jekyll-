@@ -289,7 +289,7 @@ public class YokaigoNinteiTaskListHandler {
             RString マスキングタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().
                     getマスキングモード(YokaigoNinteiTaskListParameter.
-                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()), new RString("1").equals(マスキングタイミング)).records();
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
             if (!マスキングList.isEmpty()) {
                 ShinSaKaiBusiness 前マスキングModel = YokaigoNinteiTaskListFinder.createInstance().
                         get前マスキング(YokaigoNinteiTaskListParameter.

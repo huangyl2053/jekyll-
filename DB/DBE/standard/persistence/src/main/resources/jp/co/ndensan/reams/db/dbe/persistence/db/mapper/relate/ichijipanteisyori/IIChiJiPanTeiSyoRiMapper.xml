@@ -42,7 +42,8 @@
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoSakuseiIraiKanryoYMD" column="ikenshoSakuseiIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ikenshoTorokuKanryoYMD" column="ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-
+        <result property="ikenshoTorokuKanryoYMD" column="ikenshoTorokuKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
     </resultMap>
 
     <select id="get対象者一覧" resultMap="resultMap_IChiJiPanTeiSyoRiRelateEntity"
@@ -54,6 +55,7 @@
         ,DbT5101."hihokenshaName"
         ,DbT5101."ninteiShinseiYMD"
         ,DbT5101."ninteiShinseiShinseijiKubunCode"
+        ,DbT5101."shoKisaiHokenshaNo"
         ,"DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun"
         ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiYMD"
         ,"DbT5116IchijiHanteiKekkaJoho"."ichijiHanteiKekkaCode"

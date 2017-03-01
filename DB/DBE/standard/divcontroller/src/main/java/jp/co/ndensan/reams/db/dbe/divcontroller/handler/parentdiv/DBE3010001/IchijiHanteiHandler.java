@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -41,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -261,11 +264,11 @@ public class IchijiHanteiHandler {
      * 対象者一覧の編集。
      *
      * @param 一次判定対象者一覧List List<IChiJiPanTeiSyoRiBusiness>
-     * @param personalData PersonalData
      */
-    public void 対象者一覧の編集(List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List, PersonalData personalData) {
+    public void 対象者一覧の編集(List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List) {
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = new ArrayList<>();
+        List<PersonalData> personalDataList = new ArrayList<>();
         for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
 
             dgIchijiHanteiTaishoshaIchiran_Row row = new dgIchijiHanteiTaishoshaIchiran_Row();
@@ -337,11 +340,14 @@ public class IchijiHanteiHandler {
             }
             row.setShinseishoKanriNo(business.get申請書管理番号().value());
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
-            personalData.addExpandedInfo(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    business.get申請書管理番号().value()));
-
+            row.setShoKisaiHokenshaNo(business.get証記載保険者番号().getColumnValue());
+            PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
+                    .concat(row.getHihokenNo())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                            row.getShinseishoKanriNo()));
+            personalDataList.add(personalData);
             rowList.add(row);
         }
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().setDataSource(rowList);
         setDisplayNoneOfIchijiHanteiDialigButton(div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran());
     }

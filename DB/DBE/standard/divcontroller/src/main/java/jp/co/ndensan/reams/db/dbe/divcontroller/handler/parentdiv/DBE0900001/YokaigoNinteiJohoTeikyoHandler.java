@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0900001;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoBusiness;
@@ -57,6 +58,8 @@ public class YokaigoNinteiJohoTeikyoHandler {
     private final RString 同意なし = new RString("key1");
     private final RString なし = new RString("0");
     private final RString あり = new RString("1");
+    private final RString 出力方法_一式 = new RString("0");
+    private final RString KEY0 = new RString("key0");
     private final RString 検索へ戻るボタン名 = new RString("btnToSearch");
     private final RString 発行するボタン名 = new RString("btnPrint");
 
@@ -77,6 +80,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
      */
     public void onLoad(RString 申請書管理番号, NinnteiRiriBusiness business) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(検索へ戻るボタン名, false);
+        div.getRadOutputHoho().setSelectedKey(出力方法_一式);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(申請書管理番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());
@@ -136,71 +140,26 @@ public class YokaigoNinteiJohoTeikyoHandler {
                     business.get主治医医療機関コード(), business.get医療機関名称(), business.get主治医コード(), business.get主治医氏名());
             div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(getNull(business.get審査会開催予定日()));
             div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(getNull(business.get審査会開催日()));
-            set発行する帳票CheckBox(business);
+            set発行する帳票(business);
         }
     }
 
     /**
-     * 認定調査票チェックボックス変更します。
+     * 発行する帳票に関するコントロールを設定します。
+     *
+     * @param business NinnteiRiriBusiness
      */
-    public void chkNinteiChosahyo() {
-        if (div.getHakkoChohyo().getChkNinteiChosahyo().getSelectedItems().isEmpty()) {
-            div.getHakkoChohyo().getRadNinteiChosaMasking().setDisabled(true);
-            div.getHakkoChohyo().getRadNinteiChosaMasking().setSelectedKey(なし);
-        } else {
-            div.getHakkoChohyo().getRadNinteiChosaMasking().setDisabled(false);
-        }
-    }
-
-    /**
-     * 特記事項チェックボックス変更します。
-     */
-    public void chkTokkiJiko() {
-        if (div.getHakkoChohyo().getChkTokkiJiko().getSelectedItems().isEmpty()) {
-            div.getHakkoChohyo().getRadTokkiJikoMasking().setDisabled(true);
-            div.getHakkoChohyo().getRadTokkiJikoMasking().setSelectedKey(あり);
-        } else {
-            div.getHakkoChohyo().getRadTokkiJikoMasking().setDisabled(false);
-        }
-    }
-
-    /**
-     * 主治医意見書チェックボックス変更します。
-     */
-    public void chkShujiiIkensho() {
-        if (div.getHakkoChohyo().getChkShujiiIkensho().getSelectedItems().isEmpty()) {
-            div.getHakkoChohyo().getRadShujii().setDisabled(true);
-            div.getHakkoChohyo().getRadShujii().setSelectedKey(あり);
-        } else {
-            div.getHakkoChohyo().getRadShujii().setDisabled(false);
-        }
-    }
-
-    /**
-     * その他資料チェックボックス変更します。
-     */
-    public void chkSonotaShiryo() {
-        if (div.getHakkoChohyo().getChkSonotaShiryo().getSelectedItems().isEmpty()) {
-            div.getHakkoChohyo().getRadSohotaShiryoMasking().setDisabled(true);
-            div.getHakkoChohyo().getRadSohotaShiryoMasking().setSelectedKey(あり);
-        } else {
-            div.getHakkoChohyo().getRadSohotaShiryoMasking().setDisabled(false);
-        }
-    }
-
-    /**
-     * 一次判定結果チェックボックス変更します。
-     */
-    public void chkIchijiHanteikekka() {
-        if (div.getHakkoChohyo().getChkIchijiHanteiKekka().getSelectedItems().isEmpty()) {
-            div.getHakkoChohyo().getRadIchijiHanteiMasking().setDisabled(true);
-            div.getHakkoChohyo().getRadIchijiHanteiMasking().setSelectedKey(なし);
-        } else {
-            div.getHakkoChohyo().getRadIchijiHanteiMasking().setDisabled(false);
-        }
-    }
-
-    private void set発行する帳票CheckBox(NinnteiRiriBusiness business) {
+    public void set発行する帳票(NinnteiRiriBusiness business) {
+        div.getChkNinteiChosahyo().setDisabled(true);
+        div.getChkTokkiJiko().setDisabled(true);
+        div.getChkShujiiIkensho().setDisabled(true);
+        div.getChkSonotaShiryo().setDisabled(true);
+        div.getChkIchijiHanteiKekka().setDisabled(true);
+        div.getRadNinteiChosaMasking().setDisabled(true);
+        div.getRadTokkiJikoMasking().setDisabled(true);
+        div.getRadShujii().setDisabled(true);
+        div.getRadSonotaShiryoMasking().setDisabled(true);
+        div.getRadIchijiHanteiMasking().setDisabled(true);
         if (同意あり.equals(div.getRadHihokenshaJohoTeikyoDoi().getSelectedKey())) {
             set認定調査票CheckBox(business);
             set特記事項CheckBox(business);
@@ -210,20 +169,96 @@ public class YokaigoNinteiJohoTeikyoHandler {
         }
     }
 
+    /**
+     * 認定調査票チェックボックス変更します。
+     */
+    public void chkNinteiChosahyo() {
+        if (div.getChkNinteiChosahyo().getSelectedItems().isEmpty()) {
+            div.getRadNinteiChosaMasking().setDisabled(true);
+            div.getRadNinteiChosaMasking().setSelectedKey(なし);
+        } else {
+            div.getRadNinteiChosaMasking().setDisabled(false);
+        }
+    }
+
+    /**
+     * 特記事項チェックボックス変更します。
+     */
+    public void chkTokkiJiko() {
+        if (div.getChkTokkiJiko().getSelectedItems().isEmpty()) {
+            div.getRadTokkiJikoMasking().setDisabled(true);
+            div.getRadTokkiJikoMasking().setSelectedKey(あり);
+        } else {
+            div.getRadTokkiJikoMasking().setDisabled(false);
+        }
+    }
+
+    /**
+     * 主治医意見書チェックボックス変更します。
+     */
+    public void chkShujiiIkensho() {
+        if (div.getChkShujiiIkensho().getSelectedItems().isEmpty()) {
+            div.getRadShujii().setDisabled(true);
+            div.getRadShujii().setSelectedKey(あり);
+        } else {
+            div.getRadShujii().setDisabled(false);
+        }
+    }
+
+    /**
+     * その他資料チェックボックス変更します。
+     */
+    public void chkSonotaShiryo() {
+        if (div.getChkSonotaShiryo().getSelectedItems().isEmpty()) {
+            div.getRadSonotaShiryoMasking().setDisabled(true);
+            div.getRadSonotaShiryoMasking().setSelectedKey(あり);
+        } else {
+            div.getRadSonotaShiryoMasking().setDisabled(false);
+        }
+    }
+
+    /**
+     * 一次判定結果チェックボックス変更します。
+     */
+    public void chkIchijiHanteikekka() {
+        if (div.getChkIchijiHanteiKekka().getSelectedItems().isEmpty()) {
+            div.getRadIchijiHanteiMasking().setDisabled(true);
+            div.getRadIchijiHanteiMasking().setSelectedKey(なし);
+        } else {
+            div.getRadIchijiHanteiMasking().setDisabled(false);
+        }
+    }
+
     private void set認定調査票CheckBox(NinnteiRiriBusiness business) {
         ChosaKekkaInfoGaikyoFinder finder = ChosaKekkaInfoGaikyoFinder.createInstance();
         ChosaKekkaInfoGaikyoParameter gaikyoParameter = ChosaKekkaInfoGaikyoParameter.
                 createGamenParam(business.get申請書管理番号(), business.get認定調査依頼履歴番号(), RString.EMPTY, RString.EMPTY);
         List<ChosaKekkaInfoGaikyoBusiness> chosaKekkaInfoGaikyoList = finder.getChosaKekkaInfoGaikyo(gaikyoParameter).records();
         if (!chosaKekkaInfoGaikyoList.isEmpty()) {
-            div.getChkNinteiChosahyo().setDisabled(false);
+            if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+                List<RString> keys = new ArrayList<>();
+                keys.add(KEY0);
+                div.getChkNinteiChosahyo().setSelectedItemsByKey(keys);
+                div.getRadNinteiChosaMasking().setDisabled(false);
+            } else {
+                div.getChkNinteiChosahyo().setDisabled(false);
+                div.getChkNinteiChosahyo().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         } else {
             gaikyoParameter = ChosaKekkaInfoGaikyoParameter.createGamenParam(business.get申請書管理番号(), business.get認定調査依頼履歴番号(),
                     TokkijikoTextImageKubun.テキスト.getコード(), TokkijikoTextImageKubun.テキスト.getコード());
             List<RembanServiceJokyoBusiness> serviceJokyos = finder.getRembanServiceJokyo(gaikyoParameter).records();
             List<NinteichosahyoShisetsuRiyo> shisetsuRiyos = finder.get5210NinteichosahyoShisetsu(gaikyoParameter).records();
             if (!serviceJokyos.isEmpty() || !shisetsuRiyos.isEmpty()) {
-                div.getChkNinteiChosahyo().setDisabled(false);
+                if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+                    List<RString> keys = new ArrayList<>();
+                    keys.add(KEY0);
+                    div.getChkNinteiChosahyo().setSelectedItemsByKey(keys);
+                    div.getRadNinteiChosaMasking().setDisabled(false);
+                } else {
+                    div.getChkNinteiChosahyo().setDisabled(false);
+                    div.getChkNinteiChosahyo().setSelectedItemsByKey(new ArrayList<RString>());
+                }
             }
         }
     }
@@ -232,7 +267,15 @@ public class YokaigoNinteiJohoTeikyoHandler {
         List<NinteichosaRelate> 特記事項List
                 = YokaigoNinteiJohoTeikyoFinder.createInstance().get特記事項List(new ShinseishoKanriNo(business.get申請書管理番号()), なし);
         if (!特記事項List.isEmpty()) {
-            div.getChkTokkiJiko().setDisabled(false);
+            if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+                List<RString> keys = new ArrayList<>();
+                keys.add(KEY0);
+                div.getChkTokkiJiko().setSelectedItemsByKey(keys);
+                div.getRadTokkiJikoMasking().setDisabled(false);
+            } else {
+                div.getChkTokkiJiko().setDisabled(false);
+                div.getChkTokkiJiko().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
     }
 
@@ -241,7 +284,15 @@ public class YokaigoNinteiJohoTeikyoHandler {
             List<ShujiiIkenshoIkenItemEntity> entityList = ShujiiIkenshoIkenItemManager.createInstance()
                     .select主治医意見書(new ShinseishoKanriNo(business.get申請書管理番号()), business.get主治医意見書作成依頼履歴番号());
             if (!entityList.isEmpty()) {
-                div.getChkShujiiIkensho().setDisabled(false);
+                if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+                    List<RString> keys = new ArrayList<>();
+                    keys.add(KEY0);
+                    div.getChkShujiiIkensho().setSelectedItemsByKey(keys);
+                    div.getRadShujii().setDisabled(false);
+                } else {
+                    div.getChkShujiiIkensho().setDisabled(false);
+                    div.getChkShujiiIkensho().setSelectedItemsByKey(new ArrayList<RString>());
+                }
             }
         }
     }
@@ -260,7 +311,15 @@ public class YokaigoNinteiJohoTeikyoHandler {
             List<RString> otherFileList = ImageFileItem.getOtherFileImageFileList_Mask();
             for (RString otherFile : otherFileList) {
                 if (!RString.isNullOrEmpty(DBEImageUtil.getMaskOrOriginalImageFilePath(toCopyPath, otherFile))) {
-                    div.getChkSonotaShiryo().setDisabled(false);
+                    if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+                        List<RString> keys = new ArrayList<>();
+                        keys.add(KEY0);
+                        div.getChkSonotaShiryo().setSelectedItemsByKey(keys);
+                        div.getRadSonotaShiryoMasking().setDisabled(false);
+                    } else {
+                        div.getChkSonotaShiryo().setDisabled(false);
+                        div.getChkSonotaShiryo().setSelectedItemsByKey(new ArrayList<RString>());
+                    }
                     break;
                 }
             }
@@ -272,7 +331,15 @@ public class YokaigoNinteiJohoTeikyoHandler {
         IchijiHanteiKekkaJoho 一次判定結果情報
                 = YokaigoNinteiJohoTeikyoFinder.createInstance().get一次判定結果情報(new ShinseishoKanriNo(business.get申請書管理番号()));
         if (一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
-            div.getChkIchijiHanteiKekka().setDisabled(false);
+            if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
+                List<RString> keys = new ArrayList<>();
+                keys.add(KEY0);
+                div.getChkIchijiHanteiKekka().setSelectedItemsByKey(keys);
+                div.getRadIchijiHanteiMasking().setDisabled(false);
+            } else {
+                div.getChkIchijiHanteiKekka().setDisabled(false);
+                div.getChkIchijiHanteiKekka().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
     }
 
