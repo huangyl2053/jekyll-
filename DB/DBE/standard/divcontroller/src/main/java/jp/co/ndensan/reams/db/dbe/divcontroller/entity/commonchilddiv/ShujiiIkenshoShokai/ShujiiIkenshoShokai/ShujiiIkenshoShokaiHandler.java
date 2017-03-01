@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIkenshoShokai.ShujiiIkenshoShokai;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshojohoshokai.ShujiiIkenshoJohoShokaiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
+import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiilenshoitem.ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -18,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.ShujiiIkenshoIkenItemManage
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshojohoshokai.ShujiiIkenshoJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku04;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
@@ -29,15 +29,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoK
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping99A;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -48,10 +40,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShujiiIkenshoShokaiHandler {
 
     private final ShujiiIkenshoShokaiDiv div;
-    private final RString ファイル名_主治医意見書_表 = new RString("E0001.png");
-    private final RString ファイル名_主治医意見書_表BAK = new RString("E0001_BAK.png");
-    private final RString ファイル名_主治医意見書_裏 = new RString("E0002.png");
-    private final RString ファイル名_主治医意見書_裏BAK = new RString("E0002_BAK.png");
 
     /**
      * コンストラクタです。
@@ -78,15 +66,15 @@ public class ShujiiIkenshoShokaiHandler {
                 .select主治医意見書(申請書管理番号, 主治医意見書作成依頼履歴番号).records();
         set主治医医療機関主治医(shujiiIkenshoJohoShokaiBusinessList);
         if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(厚労省IF識別コード)) {
-            set必須５項目_99A(entityList);
+            set主治医意見書項目_99A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(厚労省IF識別コード)) {
-            set必須５項目_02A(entityList);
+            set主治医意見書項目_02A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(厚労省IF識別コード)) {
-            set必須５項目_06A(entityList);
+            set主治医意見書項目_06A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
-            set必須５項目_09A(entityList);
+            set主治医意見書項目_09A(entityList);
         } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
-            set必須５項目_09B(entityList);
+            set主治医意見書項目_09B(entityList);
         }
 
         ImageManager imageManager = InstanceProvider.create(ImageManager.class);
@@ -99,9 +87,13 @@ public class ShujiiIkenshoShokaiHandler {
             RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
             RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
             RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
-            RString 出力イメージフォルダパス = copySharedFiles(イメージ情報, 共有ファイル名);
-            List<RString> イメージ原本パスリスト = get原本FilePathList(出力イメージフォルダパス);
-            List<RString> イメージマスクパスリスト = getマスクFilePathList(出力イメージフォルダパス);
+            RString 出力イメージフォルダパス = DBEImageUtil.copySharedFiles(イメージ情報.getイメージ共有ファイルID(), 共有ファイル名);
+            List<RString> イメージ原本パスリスト = new ArrayList<>();
+            イメージ原本パスリスト.add(DBEImageUtil.getOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.主治医意見書表.getImageFileName()));
+            イメージ原本パスリスト.add(DBEImageUtil.getOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.主治医意見書裏.getImageFileName()));
+            List<RString> イメージマスクパスリスト = new ArrayList<>();
+            イメージマスクパスリスト.add(DBEImageUtil.getMaskImageFilePath(出力イメージフォルダパス, ImageFileName.主治医意見書表.getImageFileName()));
+            イメージマスクパスリスト.add(DBEImageUtil.getMaskImageFilePath(出力イメージフォルダパス, ImageFileName.主治医意見書裏.getImageFileName()));
 
             イメージ原本バイナリリスト = createImageBinaryList(イメージ原本パスリスト);
             イメージマスクバイナリリスト = createImageBinaryList(イメージマスクパスリスト);
@@ -114,159 +106,109 @@ public class ShujiiIkenshoShokaiHandler {
         div.getCcdChosaTokkiShiryoShokai().initialize(イメージ原本バイナリリスト, イメージマスクバイナリリスト, 原本タイトルリスト, マスクタイトルリスト);
     }
 
-    private List<RString> createImageBinaryList(List<RString> imagePathList) {
-        List<RString> imageBinaryList = new ArrayList<>();
-        for (RString imagePath : imagePathList) {
-            imageBinaryList.add(sanitizePath(imagePath));
-        }
-        return imageBinaryList;
-    }
-
-    private RString sanitizePath(RString イメージパス) {
-        RString DATAURI_BMP = new RString("data:image/png;base64,");
-        return !イメージパス.isEmpty() ? DATAURI_BMP.concat(base64encode(イメージパス)) : RString.EMPTY;
-    }
-
-    private RString base64encode(RString イメージパス) {
-        RString imgBase64 = RString.EMPTY;
-        try {
-            imgBase64 = _Base64Converter.encodeBase64RString(Files.readAllBytes(Paths.get(イメージパス.toString())));
-        } catch (IOException ex) {
-            throw new SystemException(ex);
-        }
-        return imgBase64;
-    }
-
-    private void set必須５項目_99A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+    private void set主治医意見書項目_99A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (Integer.parseInt(IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
-                div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping99A.短期記憶.getコード().toString()) == entity.getRemban()) {
+            if (RString.isNullOrEmpty(entity.getIkenItem())) {
+                continue;
+            }
+            if (IkenshoKomokuMapping99A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping99A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping99A.認知能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping99A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping99A.伝達能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping99A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping99A.食事.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping99A.食事.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
     }
 
-    private void set必須５項目_02A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+    private void set主治医意見書項目_02A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (Integer.parseInt(IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
-                div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping02A.短期記憶.getコード().toString()) == entity.getRemban()) {
+            if (RString.isNullOrEmpty(entity.getIkenItem())) {
+                continue;
+            }
+            if (IkenshoKomokuMapping02A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping02A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping02A.認知能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping02A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping02A.伝達能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping02A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping02A.食事.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping02A.食事.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
     }
 
-    private void set必須５項目_06A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+    private void set主治医意見書項目_06A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (Integer.parseInt(IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
-                div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping06A.短期記憶.getコード().toString()) == entity.getRemban()) {
+            if (RString.isNullOrEmpty(entity.getIkenItem())) {
+                continue;
+            }
+            if (IkenshoKomokuMapping06A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping06A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping06A.認知能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping06A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping06A.伝達能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping06A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping06A.食事行為.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping06A.食事行為.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
     }
 
-    private void set必須５項目_09A(List<ShujiiIkenshoIkenItemEntity> entityList) {
+    private void set主治医意見書項目_09A(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (Integer.parseInt(IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
-                div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09A.短期記憶.getコード().toString()) == entity.getRemban()) {
+            if (RString.isNullOrEmpty(entity.getIkenItem())) {
+                continue;
+            }
+            if (IkenshoKomokuMapping09A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping09A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09A.認知能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping09A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09A.伝達能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping09A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09A.食事行為.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping09A.食事行為.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
     }
 
-    private void set必須５項目_09B(List<ShujiiIkenshoIkenItemEntity> entityList) {
+    private void set主治医意見書項目_09B(List<ShujiiIkenshoIkenItemEntity> entityList) {
         for (ShujiiIkenshoIkenItemEntity entity : entityList) {
-            if (Integer.parseInt(IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
-                div.getTxtJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09B.短期記憶.getコード().toString()) == entity.getRemban()) {
+            if (RString.isNullOrEmpty(entity.getIkenItem())) {
+                continue;
+            }
+            if (IkenshoKomokuMapping09B.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+                div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
+            } else if (IkenshoKomokuMapping09B.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09B.認知能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping09B.認知能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09B.伝達能力.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping09B.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (Integer.parseInt(IkenshoKomokuMapping09B.食事行為.getコード().toString()) == entity.getRemban()) {
+            } else if (IkenshoKomokuMapping09B.食事行為.getコード().equals(new RString(entity.getRemban()))) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
-    }
-
-    private List<RString> get原本FilePathList(RString 出力イメージフォルダパス) {
-        List<RString> イメージファイルパス = new ArrayList<>();
-        RString イメージパス_表;
-        RString イメージパス_裏;
-
-        イメージパス_表 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_表BAK);
-        if (RString.isNullOrEmpty(イメージパス_表)) {
-            イメージパス_表 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_表);
-        }
-        イメージファイルパス.add(イメージパス_表);
-
-        イメージパス_裏 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏BAK);
-        if (RString.isNullOrEmpty(イメージパス_裏)) {
-            イメージパス_裏 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏);
-        }
-        イメージファイルパス.add(イメージパス_裏);
-
-        return イメージファイルパス;
-    }
-
-    private List<RString> getマスクFilePathList(RString 出力イメージフォルダパス) {
-        List<RString> イメージファイルパス = new ArrayList<>();
-        RString イメージパス_表 = RString.EMPTY;
-        RString イメージパス_裏 = RString.EMPTY;
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名_主治医意見書_表BAK))) {
-            イメージパス_表 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_表);
-        }
-        イメージファイルパス.add(イメージパス_表);
-
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏BAK))) {
-            イメージパス_裏 = getFilePath(出力イメージフォルダパス, ファイル名_主治医意見書_裏);
-        }
-        イメージファイルパス.add(イメージパス_裏);
-
-        return イメージファイルパス;
-    }
-
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString copySharedFiles(Image イメージ情報, RString 共有ファイル名) {
-        RString 出力イメージフォルダパス = Directory.createTmpDirectory();
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(共有ファイル名),
-                        イメージ情報.getイメージ共有ファイルID());
-        return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(出力イメージフォルダパス)).getCanonicalPath());
     }
 
     private List<RString> getTitleList(List<RString> 表示イメージ) {
@@ -275,6 +217,14 @@ public class ShujiiIkenshoShokaiHandler {
             titleList.add(new RString(index).concat("枚目"));
         }
         return titleList;
+    }
+
+    private List<RString> createImageBinaryList(List<RString> imagePathList) {
+        List<RString> imageBinaryList = new ArrayList<>();
+        for (RString imagePath : imagePathList) {
+            imageBinaryList.add(DBEImageUtil.sanitizePath(imagePath));
+        }
+        return imageBinaryList;
     }
 
     private void set主治医医療機関主治医(List<ShujiiIkenshoJohoShokaiBusiness> shujiiIkenshoJohoShokaiBusinessList) {

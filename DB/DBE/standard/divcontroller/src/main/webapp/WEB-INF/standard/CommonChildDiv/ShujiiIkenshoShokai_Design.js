@@ -51,8 +51,12 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtShujiiName"));
             };
 
-            Controls.prototype.txtJiritsudo = function () {
-                return new UZA.TextBox(this.convFiledName("txtJiritsudo"));
+            Controls.prototype.txtShogaiJiritsudo = function () {
+                return new UZA.TextBox(this.convFiledName("txtShogaiJiritsudo"));
+            };
+
+            Controls.prototype.txtNinchishoJiritsudo = function () {
+                return new UZA.TextBox(this.convFiledName("txtNinchishoJiritsudo"));
             };
 
             Controls.prototype.txtTankiKioku = function () {

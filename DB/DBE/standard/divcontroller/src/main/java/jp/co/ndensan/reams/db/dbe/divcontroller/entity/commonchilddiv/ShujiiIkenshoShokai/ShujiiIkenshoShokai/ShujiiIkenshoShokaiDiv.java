@@ -27,8 +27,10 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
      */
     @JsonProperty("ShujiiIryokikaknAndShujiiInput")
     private ShujiiIryokikaknAndShujiiInputDiv ShujiiIryokikaknAndShujiiInput;
-    @JsonProperty("txtJiritsudo")
-    private TextBox txtJiritsudo;
+    @JsonProperty("txtShogaiJiritsudo")
+    private TextBox txtShogaiJiritsudo;
+    @JsonProperty("txtNinchishoJiritsudo")
+    private TextBox txtNinchishoJiritsudo;
     @JsonProperty("txtTankiKioku")
     private TextBox txtTankiKioku;
     @JsonProperty("txtNinchiNoryoku")
@@ -79,21 +81,39 @@ public class ShujiiIkenshoShokaiDiv extends Panel implements IShujiiIkenshoShoka
     }
 
     /*
-     * gettxtJiritsudo
-     * @return txtJiritsudo
+     * gettxtShogaiJiritsudo
+     * @return txtShogaiJiritsudo
      */
-    @JsonProperty("txtJiritsudo")
-    public TextBox getTxtJiritsudo() {
-        return txtJiritsudo;
+    @JsonProperty("txtShogaiJiritsudo")
+    public TextBox getTxtShogaiJiritsudo() {
+        return txtShogaiJiritsudo;
     }
 
     /*
-     * settxtJiritsudo
-     * @param txtJiritsudo txtJiritsudo
+     * settxtShogaiJiritsudo
+     * @param txtShogaiJiritsudo txtShogaiJiritsudo
      */
-    @JsonProperty("txtJiritsudo")
-    public void setTxtJiritsudo(TextBox txtJiritsudo) {
-        this.txtJiritsudo = txtJiritsudo;
+    @JsonProperty("txtShogaiJiritsudo")
+    public void setTxtShogaiJiritsudo(TextBox txtShogaiJiritsudo) {
+        this.txtShogaiJiritsudo = txtShogaiJiritsudo;
+    }
+
+    /*
+     * gettxtNinchishoJiritsudo
+     * @return txtNinchishoJiritsudo
+     */
+    @JsonProperty("txtNinchishoJiritsudo")
+    public TextBox getTxtNinchishoJiritsudo() {
+        return txtNinchishoJiritsudo;
+    }
+
+    /*
+     * settxtNinchishoJiritsudo
+     * @param txtNinchishoJiritsudo txtNinchishoJiritsudo
+     */
+    @JsonProperty("txtNinchishoJiritsudo")
+    public void setTxtNinchishoJiritsudo(TextBox txtNinchishoJiritsudo) {
+        this.txtNinchishoJiritsudo = txtNinchishoJiritsudo;
     }
 
     /*
