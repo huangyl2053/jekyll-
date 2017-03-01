@@ -18,14 +18,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -112,7 +109,6 @@ public class NinteiChosaJissekiShokaiHandler {
                     data.get認定調査依頼履歴番号()
             );
             rowList.add(row);
-            personalData.add(toPersonalData(data.get申請書管理番号()));
         }
         AccessLogger.log(AccessLogType.照会, personalData);
         
@@ -127,11 +123,6 @@ public class NinteiChosaJissekiShokaiHandler {
         return str == null ? RString.EMPTY : str;
     }
     
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInformation);
-    }
-
     /**
      * バッチパラメータを作成します。
      *

@@ -19,15 +19,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -93,9 +87,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
 
     private void setRecords(List<IkenshoJissekiIchiran> ikenshoJissekiIchiranList) {
         List<dgIkenshoSakuseiJisseki_Row> rowList = new ArrayList<>();
-        List<PersonalData> personalData = new ArrayList<>();
         for (IkenshoJissekiIchiran data : ikenshoJissekiIchiranList) {
-            personalData.add(toPersonalData(data.get申請書管理番号()));
             RString 在宅_新 = RString.EMPTY;
             RString 在宅_継 = RString.EMPTY;
             RString 施設_新 = RString.EMPTY;
@@ -137,17 +129,11 @@ public class IkenshoSakuseiJissekiShokaiHandler {
             );
             rowList.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
         div.getDgIkenshoSakuseiJisseki().setDataSource(rowList);
     }
 
     private RString get保険者(IkenshoJissekiIchiran data) {
         return data.get証記載保険者番号().concat(RString.HALF_SPACE).concat(data.get市町村名称());
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

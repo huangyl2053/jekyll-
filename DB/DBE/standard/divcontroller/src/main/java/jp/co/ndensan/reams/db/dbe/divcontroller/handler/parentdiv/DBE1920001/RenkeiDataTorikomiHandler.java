@@ -284,10 +284,6 @@ public class RenkeiDataTorikomiHandler {
                         rowData.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         rowData.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
                         list.add(rowData);
-                        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                                new ExpandedInformation(new Code("0001"),
-                                        new RString("被保険者番号"), rowData.getHihono()));
-                        AccessLogger.log(AccessLogType.照会, personalData);
                     }
                 }
             } else if (厚労省_174 == size) {
@@ -324,10 +320,6 @@ public class RenkeiDataTorikomiHandler {
                         rowData.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         rowData.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(rowData);
-                        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                                new ExpandedInformation(new Code("0001"),
-                                        new RString("被保険者番号"), rowData.getHihono()));
-                        AccessLogger.log(AccessLogType.照会, personalData);
                     }
                 }
             } else if (東芝版_197 == size) {
@@ -361,10 +353,6 @@ public class RenkeiDataTorikomiHandler {
                         row.getNenrei().setValue(new Decimal(String.valueOf(年齢)));
                         row.setSeibetsu(Seibetsu.toValue(csvEntity.get性別()).get名称());
                         list.add(row);
-                        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY,
-                                new ExpandedInformation(new Code("0001"),
-                                        new RString("被保険者番号"), row.getHihono()));
-                        AccessLogger.log(AccessLogType.照会, personalData);
                     }
                 }
             }

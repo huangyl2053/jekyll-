@@ -15,15 +15,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.dgIk
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -65,7 +62,6 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         List<dgIkenshoSakuseiHoshu_Row> row_list = new ArrayList<>();
         List<PersonalData> personalData = new ArrayList<>();
         for (IkenshoHoshuShokaiBusiness date : ikenshoHoshuShokaiBusinessList) {
-            personalData.add(toPersonalData(date.get申請書管理番号()));
             dgIkenshoSakuseiHoshu_Row row = new dgIkenshoSakuseiHoshu_Row();
             row.setIryoKikanCode(date.get主治医医療機関コード());
             row.setIryoKikanMei(date.get医療機関名称());
@@ -156,12 +152,6 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         RString 保険者 = div.getCcdHokensya().getSelectedItem().get市町村コード().value();
         RString 保険者名称 = div.getCcdHokensya().getSelectedItem().get市町村名称();
         return new DBE601004_IkenshosakuseiHoshuParameter(帳票出力区分, 作成依頼日開始, 作成依頼日終了, 保険者, 保険者名称, keyJohoList);
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        // TODO 介護認定用アクセスクラスへ変更
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

@@ -40,17 +40,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
@@ -363,8 +358,8 @@ public class KanryoshoriIchijihanteiHandler {
 
         row.setShinseishoKanriNo(business.get申請書管理番号().value());
         row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
-
         row.setHanteiKekka(RString.EMPTY);
+        row.setShoKisaiHokenshaNo(business.get証記載保険者番号().getColumnValue());
         setStatusOfGridData(row, business);
         return row;
     }
@@ -470,19 +465,6 @@ public class KanryoshoriIchijihanteiHandler {
             models.add(kekkaJoho);
         }
         ViewStateHolder.put(ViewStateKeys.要介護認定一次判定結果情報, models);
-    }
-
-    /**
-     * 個人情報につながるデータについて、アクセスログを記録します。
-     *
-     * @param row dgHanteiTaishosha_Row
-     * @param accessType AccessLogType
-     */
-    public void setLogOfPersonalData(dgHanteiTaishosha_Row row, AccessLogType accessType) {
-
-        PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, new ExpandedInformation(new Code("0001"),
-                new RString("申請書管理番号"), row.getShinseishoKanriNo()));
-        AccessLogger.log(accessType, personalData);
     }
 
     /**
