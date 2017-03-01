@@ -53,6 +53,7 @@ public class ShinsakaiKaisaiKekkaHandler {
      * @param saiYoteiJoho ヘッドエリア内容
      */
     public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho, List<ShinsakaiOnseiJoho2> 音声情報リスト) {
+        boolean is新規 = false;
         for (int i = 0; i < saiYoteiJoho.size(); i++) {
             ShinsakaiKaisaiYoteiJohoBusiness business = saiYoteiJoho.get(i);
             div.getTxtShinsakaiMeisho().setValue(business.get審査会名称());
@@ -74,6 +75,7 @@ public class ShinsakaiKaisaiKekkaHandler {
                     div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
                 }
             } else {
+                is新規 = true;
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催予定日());
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get予定開始時間()));
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiEndTime().setValue(strToTime(business.get予定終了時間()));
@@ -83,7 +85,7 @@ public class ShinsakaiKaisaiKekkaHandler {
                 }
             }
         }
-        if (div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue() == null || div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue().isEmpty()) {
+        if (is新規) {
             div.setModel(new RString("新規モード"));
         } else {
             div.setModel(new RString("更新モード"));
