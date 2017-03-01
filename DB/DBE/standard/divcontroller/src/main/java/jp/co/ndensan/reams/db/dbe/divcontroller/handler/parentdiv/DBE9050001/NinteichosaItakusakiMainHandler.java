@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
@@ -39,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * その他機関マスタ画面のハンドラークラスです。
@@ -366,7 +368,7 @@ public class NinteichosaItakusakiMainHandler {
     public void setSonotaKikanichiran(RString eventJotai) {
         dgSonotaKikanIchiran_Row row = new dgSonotaKikanIchiran_Row();
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
+             row = ViewStateHolder.get(ViewStateKeys.その他機関マスタ選択行, dgSonotaKikanIchiran_Row.class);
         }
         row.setHokensha(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaName()));
         row.setHokenshaCode(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()));
@@ -402,7 +404,7 @@ public class NinteichosaItakusakiMainHandler {
         row.setKinyuKikanMeisho(null);
         row.setShitenMeisho(null);
 
-        int index = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedRowId();
+        int index = row.getId();
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource().add(row);
@@ -414,6 +416,7 @@ public class NinteichosaItakusakiMainHandler {
             row.setJotai(eventJotai);
             div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource().set(index, row);
         }
+        ViewStateHolder.put(ViewStateKeys.その他機関マスタ選択行, row);
     }
 
     private RString editYubinNoToIchiran(RString yubinNo) {

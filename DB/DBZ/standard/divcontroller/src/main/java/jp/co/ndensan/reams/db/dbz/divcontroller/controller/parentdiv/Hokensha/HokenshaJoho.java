@@ -1,17 +1,19 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.Hokensha;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoHandler;
-import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
-import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -34,8 +36,17 @@ public class HokenshaJoho {
             div.getTxtHokenshaMeisho().setValue(RString.EMPTY);
             return ResponseData.of(div).respond();
         }
-        Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(div.getTxtHokenshaNo().getValue()));
-        getHandler(div).onBlur_txtHokenshaNo(hokensha);
+        //Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(div.getTxtHokenshaNo().getValue()));
+        List<HokenshaSummary> hokenshaList = new ArrayList<>(HokenshaListLoader.createInstance()
+                .getShichosonCodeNameList(GyomuBunrui.介護認定)
+                .getAll());
+        RString hokenshaName = new RString("");
+        for (HokenshaSummary koseiShichoson : hokenshaList) {
+            if(koseiShichoson.get証記載保険者番号().getColumnValue().equals(div.getTxtHokenshaNo().getValue())){
+                hokenshaName = koseiShichoson.get市町村名称();
+            }
+        }
+        getHandler(div).onBlur_txtHokenshaNo(hokenshaName);
         return ResponseData.of(div).respond();
     }
 
