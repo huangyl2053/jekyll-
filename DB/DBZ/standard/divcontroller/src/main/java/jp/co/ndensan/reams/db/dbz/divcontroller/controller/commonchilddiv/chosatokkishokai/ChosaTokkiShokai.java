@@ -15,7 +15,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
- * 認定調査特記事項照会のDivControllerです。
+ * 認定調査特記事項照会のDivControllerです。btnSavebtnSave *
+ * 認定調査特記事項照会のDivControllerです。btnSavebtnSave
+ * 認定調査特記事項照会のDivControllerです。btnSavebtnSave
+ *
  *
  * @reamsid_L DBE-3000-200 liangbc
  */

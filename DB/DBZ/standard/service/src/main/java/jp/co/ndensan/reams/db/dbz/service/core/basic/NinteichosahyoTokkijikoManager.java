@@ -10,6 +10,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikos;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5205NinteichosahyoTokkijikoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -144,5 +146,19 @@ public class NinteichosahyoTokkijikoManager {
             businessList.add(new NinteichosahyoTokkijiko(entity));
         }
         return businessList;
+    }
+
+    /**
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param テキストイメージ区分 テキスト・イメージ区分
+     * @return 指定の内容に合致する特記事項の情報すべて
+     */
+    public NinteichosahyoTokkijikos find特記事項s(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, TokkijikoTextImageKubun テキストイメージ区分) {
+        List<NinteichosahyoTokkijiko> list = new ArrayList<>();
+        for (DbT5205NinteichosahyoTokkijikoEntity e : dac.selectFrom(申請書管理番号, 認定調査依頼履歴番号, テキストイメージ区分)) {
+            list.add(new NinteichosahyoTokkijiko(e));
+        }
+        return new NinteichosahyoTokkijikos(list);
     }
 }

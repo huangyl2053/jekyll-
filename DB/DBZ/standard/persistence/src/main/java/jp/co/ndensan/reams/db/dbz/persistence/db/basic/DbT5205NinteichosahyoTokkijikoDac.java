@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.genponMaskKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaRirekiNo;
@@ -212,5 +213,26 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
                                 eq(genponMaskKubun, 原本マスク区分)
                         )).
                 toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+    }
+
+    /**
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 特記事項テキスト_イメージ区分 特記事項テキスト_イメージ区分
+     * @return DbT5205NinteichosahyoTokkijikoEntityのlist
+     */
+    public List<DbT5205NinteichosahyoTokkijikoEntity> selectFrom(ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号, TokkijikoTextImageKubun 特記事項テキスト_イメージ区分) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        requireNonNull(特記事項テキスト_イメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項テキスト_イメージ区分"));
+        return new DbAccessorNormalType(session)
+                .select()
+                .table(DbT5205NinteichosahyoTokkijiko.class)
+                .where(and(eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
+                                eq(tokkijikoTextImageKubun, 特記事項テキスト_イメージ区分.getコード())
+                        ))
+                .toList(DbT5205NinteichosahyoTokkijikoEntity.class);
     }
 }

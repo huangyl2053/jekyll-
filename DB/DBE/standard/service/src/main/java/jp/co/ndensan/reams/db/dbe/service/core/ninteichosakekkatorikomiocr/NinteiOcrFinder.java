@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.N
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosahyoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekkatorikomiocr.INinteiOcrMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

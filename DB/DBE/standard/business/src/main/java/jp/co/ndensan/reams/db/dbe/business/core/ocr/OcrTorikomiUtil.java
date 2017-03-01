@@ -6,13 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
 import java.io.File;
-import java.io.IOException;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbz.business.util.Files;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
@@ -41,22 +41,7 @@ public final class OcrTorikomiUtil {
     private static List<RString> readAllOcrDataFileTo(RString tempDirPath, ReadOnlySharedFileEntryDescriptor rosfd) {
         File tempDir = new File(tempDirPath.toString());
         SharedFile.copyToLocal(rosfd, new FilesystemPath(tempDirPath));
-        return setFilePath(tempDir);
-    }
-
-    private static List<RString> setFilePath(File directory) {
-        List<RString> list = new ArrayList<>();
-        for (File file : directory.listFiles()) {
-            if (file.isFile()) {
-                try {
-                    list.add(new RString(file.getCanonicalPath()));
-                } catch (IOException ex) {
-                }
-            } else {
-                list.addAll(setFilePath(file));
-            }
-        }
-        return list;
+        return Files.findFilePathsIn(tempDir);
     }
 
     /**

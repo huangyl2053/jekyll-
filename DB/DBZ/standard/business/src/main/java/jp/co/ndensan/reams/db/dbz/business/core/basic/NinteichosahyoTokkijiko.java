@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -127,6 +130,15 @@ public class NinteichosahyoTokkijiko extends
     }
 
     /**
+     * @return 対応する{@link NinteiChosaTokkiJikou}
+     */
+    public NinteiChosaTokkiJikou getTokkiJiko() {
+        return NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(
+                get認定調査特記事項番号()
+        );
+    }
+
+    /**
      * 認定調査特記事項連番を返します。
      *
      * @return 認定調査特記事項連番
@@ -142,6 +154,28 @@ public class NinteichosahyoTokkijiko extends
      */
     public RString get特記事項テキスト_イメージ区分() {
         return entity.getTokkijikoTextImageKubun();
+    }
+
+    /**
+     * @return イメージファイル名を判定するパターン
+     */
+    public Pattern compileEffectiveImagePathPattern() {
+        return Pattern.compile(new RStringBuilder()
+                .append(".*")
+                .append(getTokkiJiko().getComposedImageFileName(get認定調査特記事項連番()))
+                .replace(".png", "\\.png")
+                .toString(), Pattern.UNICODE_CASE);
+    }
+
+    /**
+     * @return イメージファイル名を判定するパターン
+     */
+    public Pattern compileBackupImagePathPattern() {
+        return Pattern.compile(new RStringBuilder()
+                .append(".*")
+                .append(getTokkiJiko().getComposedImageFileName(get認定調査特記事項連番()))
+                .replace(".png", "\\_BAK.png")
+                .toString(), Pattern.UNICODE_CASE);
     }
 
     /**

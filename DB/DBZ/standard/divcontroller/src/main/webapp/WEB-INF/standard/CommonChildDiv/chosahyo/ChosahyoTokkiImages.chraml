@@ -1,0 +1,92 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;chosahyo&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ChosahyoTokkiImages&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;anchorPosition&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBZ.ChosahyoTokkiImages"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="ChosahyoTokkiImages" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChosahyoTokkiImages&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ChosahyoTokkiImages&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ChosahyoTokkiImages&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ChosahyoTokkiImages_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ChosahyoTokkiImages_panel_body_area"><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlTokkiJikoNos" style="position: relative;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlTokkiJikoNos&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;330px&quot;,&quot;selectControlID&quot;:&quot;ddlTokkiJikoNos_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;特医-11 特別な対応（じょくそうの処置）&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;labelLText&quot;:&quot;特記事項&quot;,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="ddlTokkiJikoNos_labelL"><span>特記事項</span></span><select class="CoreElement" id="ddlTokkiJikoNos_core" style="width: 330px;"><option value="key0">特医-11 特別な対応（じょくそうの処置）</option><option value="key1">value1</option></select></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S ui-processing-button-event UzCompositeChild" id="btnToDisplay" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToDisplay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnToDisplay&quot;,&quot;text&quot;:&quot;表示する&quot;}"><span>表示する</span></button></div></div>      <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['CHOSAHYOTOKKIIMAGES'] = {};
+DBZ['CHOSAHYOTOKKIIMAGES'].ChosahyoTokkiImagesRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosahyoTokkiImages').getProperty();parameter0.ddlTokkiJikoNos = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlTokkiJikoNos').getProperty();parameter0.btnToDisplay = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToDisplay').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (ChosahyoTokkiImages) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ChosahyoTokkiImages.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ChosahyoTokkiImages";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ChosahyoTokkiImages.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.ChosahyoTokkiImages.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ChosahyoTokkiImages = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlTokkiJikoNos = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTokkiJikoNos"));
+            };
+
+            Controls.prototype.btnToDisplay = function () {
+                return new UZA.Button(this.convFiledName("btnToDisplay"));
+            };
+            return Controls;
+        })();
+        ChosahyoTokkiImages.Controls = Controls;
+    })(DBZ.ChosahyoTokkiImages || (DBZ.ChosahyoTokkiImages = {}));
+    var ChosahyoTokkiImages = DBZ.ChosahyoTokkiImages;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ChosahyoTokkiImages) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ChosahyoTokkiImages.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ChosahyoTokkiImages.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ChosahyoTokkiImages.ModeController = ModeController;
+    })(DBZ.ChosahyoTokkiImages || (DBZ.ChosahyoTokkiImages = {}));
+    var ChosahyoTokkiImages = DBZ.ChosahyoTokkiImages;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ChosahyoTokkiImages) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ChosahyoTokkiImages.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ChosahyoTokkiImages.PublicProperties = PublicProperties;
+    })(DBZ.ChosahyoTokkiImages || (DBZ.ChosahyoTokkiImages = {}));
+    var ChosahyoTokkiImages = DBZ.ChosahyoTokkiImages;
+})(DBZ || (DBZ = {}));
+</script></div>

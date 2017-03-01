@@ -1,0 +1,106 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;chosahyo&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;TokkiImagesPerChosa&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;700px&quot;,&quot;firstFocusFieldName&quot;:&quot;ddlTokkiJikoNos&quot;,&quot;lastFocusFieldName&quot;:&quot;btnSave&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;&quot;,&quot;minHeight&quot;:&quot;&quot;,&quot;widthPercent&quot;:&quot;&quot;,&quot;heightPercent&quot;:&quot;&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.TokkiImagesPerChosa"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel UzCompositeChild" id="TokkiImagesPerChosa" style="width: 790px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;TokkiImagesPerChosa&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;790px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;TokkiImagesPerChosa&quot;,&quot;title&quot;:&quot;特記事項一覧&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;TokkiImagesPerChosa&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="TokkiImagesPerChosa_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">特記事項一覧</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="TokkiImagesPerChosa_panel_body_area"><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlTokkiJikoNos" style="position: relative;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlTokkiJikoNos&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;330px&quot;,&quot;selectControlID&quot;:&quot;ddlTokkiJikoNos_core&quot;,&quot;labelLText&quot;:&quot;特記事項&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;特医-11 特別な対応（じょくそうの処置）&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlTokkiJikoNos_labelL" style="width: 80px;"><span>特記事項</span></span><select class="CoreElement" id="ddlTokkiJikoNos_core" style="width: 330px;"><option value="key0">特医-11 特別な対応（じょくそうの処置）</option><option value="key1">value1</option></select></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S ui-processing-button-event UzCompositeChild" id="btnToDisplay" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToDisplay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnToDisplay&quot;,&quot;text&quot;:&quot;表示する&quot;}"><span>表示する</span></button><div class="UzControlRepeater JSControl FloatLeft marginLeft-XS marginRight-XS Width-XS controlMargin-M UzCompositeChild" id="repTokkiJikos" data-control-type="ControlRepeater" data-obj="{&quot;fieldName&quot;:&quot;repTokkiJikos&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ControlRepeater&quot;,&quot;selectControlID&quot;:&quot;repTokkiJikos&quot;,&quot;repeateData&quot;:[]}"><div class="UzControlRepeaterBody ui-widget-content ui-droppable ui-sortable"><div class="JSControl UzCompositeControl FloatLeft Width-XS marginLeft-XS marginTop-XS marginRight-XS marginBottom-XS" id="ccdImagesPerKomoku" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdImagesPerKomoku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ccdImagesPerKomoku&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;authorityID&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;chosahyo&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;TokkiImagesPerKomoku&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCloseEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;txtNewRemban1&quot;,&quot;lastFocusFieldName&quot;:&quot;txtNewRemban9&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;responsiveType&quot;:0,&quot;minWidth&quot;:&quot;100px&quot;,&quot;minHeight&quot;:&quot;200px&quot;,&quot;widthPercent&quot;:&quot;80&quot;,&quot;heightPercent&quot;:&quot;80&quot;,&quot;enterKeyAssignedControl&quot;:&quot;&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.TokkiImagesPerKomoku"></div></div></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S ui-processing-button-event UzCompositeChild" id="btnReturn" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnReturn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnReturn&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButton JSControl controlMargin-M Width-S ui-processing-button-event FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnSave" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSave&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnSave&quot;,&quot;text&quot;:&quot;保存する&quot;}"><span>保存する</span></button></div></div>        
+               
+   <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['TOKKIIMAGESPERCHOSA'] = {};
+DBE['TOKKIIMAGESPERCHOSA'].TokkiImagesPerChosaRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TokkiImagesPerChosa').getProperty();parameter0.ddlTokkiJikoNos = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlTokkiJikoNos').getProperty();parameter0.btnToDisplay = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToDisplay').getProperty();parameter0.repTokkiJikos = Uz.JSControlUtil.getJSControl(parentFieldName + '_repTokkiJikos').getProperty();parameter0.btnReturn = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnReturn').getProperty();parameter0.btnSave = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSave').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (TokkiImagesPerChosa) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TokkiImagesPerChosa.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TokkiImagesPerChosa";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.TokkiImagesPerChosa.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.TokkiImagesPerChosa.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TokkiImagesPerChosa = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlTokkiJikoNos = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTokkiJikoNos"));
+            };
+
+            Controls.prototype.btnToDisplay = function () {
+                return new UZA.Button(this.convFiledName("btnToDisplay"));
+            };
+
+            Controls.prototype.repTokkiJikos = function () {
+                return new UZA.ControlRepeater(this.convFiledName("repTokkiJikos"));
+            };
+
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
+            };
+
+            Controls.prototype.btnSave = function () {
+                return new UZA.Button(this.convFiledName("btnSave"));
+            };
+            return Controls;
+        })();
+        TokkiImagesPerChosa.Controls = Controls;
+    })(DBE.TokkiImagesPerChosa || (DBE.TokkiImagesPerChosa = {}));
+    var TokkiImagesPerChosa = DBE.TokkiImagesPerChosa;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (TokkiImagesPerChosa) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokkiImagesPerChosa.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new TokkiImagesPerChosa.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TokkiImagesPerChosa.ModeController = ModeController;
+    })(DBE.TokkiImagesPerChosa || (DBE.TokkiImagesPerChosa = {}));
+    var TokkiImagesPerChosa = DBE.TokkiImagesPerChosa;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (TokkiImagesPerChosa) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokkiImagesPerChosa.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TokkiImagesPerChosa.PublicProperties = PublicProperties;
+    })(DBE.TokkiImagesPerChosa || (DBE.TokkiImagesPerChosa = {}));
+    var TokkiImagesPerChosa = DBE.TokkiImagesPerChosa;
+})(DBE || (DBE = {}));
+</script></div>
