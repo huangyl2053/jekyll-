@@ -58,8 +58,12 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtShujiiName"));
             }
 
-            public txtJiritsudo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJiritsudo"));
+            public txtShogaiJiritsudo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtShogaiJiritsudo"));
+            }
+
+            public txtNinchishoJiritsudo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtNinchishoJiritsudo"));
             }
 
             public txtTankiKioku(): UZA.TextBox {
