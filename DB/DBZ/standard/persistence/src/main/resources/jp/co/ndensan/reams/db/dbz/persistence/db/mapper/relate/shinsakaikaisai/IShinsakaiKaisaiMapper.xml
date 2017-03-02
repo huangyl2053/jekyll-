@@ -77,12 +77,19 @@
                         FROM rgdb."DbT5512ShinsakaiOnseiJoho" AS shinsakaiOnseiJoho
                         GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo"	) AS TB1
                 ON TB1."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
-        LEFT JOIN (SELECT "shinsakaiKaisaiNo",count(*) as shinsakaiShiryoMisakuseiKensu
-                    FROM rgdb."DbT5502ShinsakaiWariateJoho"
-                    WHERE "shinsakaiShiryoSakuseiYMD"=NULL
-                    OR "shinsakaiShiryoSakuseiYMD"=''
-                    GROUP BY "shinsakaiKaisaiNo") as DbT5502
-                ON DbT5502."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
+        LEFT JOIN (
+            SELECT
+                "shinsakaiKaisaiNo",
+                SUM (
+                    CASE WHEN "shinsakaiShiryoSakuseiYMD" IS NULL THEN 1
+                         WHEN "shinsakaiShiryoSakuseiYMD" = '' THEN 1
+                         ELSE 0 END
+                ) AS shinsakaiShiryoMisakuseiKensu
+            FROM
+                rgdb."DbT5502ShinsakaiWariateJoho"
+            GROUP BY "shinsakaiKaisaiNo"
+        ) AS DbT5502
+            ON DbT5502."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
         <if test="is結果登録審査会未完了のみ">
         INNER JOIN  (SELECT shinsakaiWariateJoho."shinsakaiKaisaiNo"
                         FROM rgdb."DbT5502ShinsakaiWariateJoho" AS shinsakaiWariateJoho
