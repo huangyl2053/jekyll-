@@ -51,6 +51,10 @@ var DBZ;
                 return new UZA.TextBoxNum(this.convFiledName("txtSaidaiHyojiKensu"));
             };
 
+            Controls.prototype.radDammyShinsakai = function () {
+                return new UZA.RadioButton(this.convFiledName("radDammyShinsakai"));
+            };
+
             Controls.prototype.radHyojiJokenWaritsukeMikanryo = function () {
                 return new UZA.RadioButton(this.convFiledName("radHyojiJokenWaritsukeMikanryo"));
             };
@@ -65,10 +69,6 @@ var DBZ;
 
             Controls.prototype.radHyojiJokenShinsakaiKanryo = function () {
                 return new UZA.RadioButton(this.convFiledName("radHyojiJokenShinsakaiKanryo"));
-            };
-
-            Controls.prototype.radDammyShinsakai = function () {
-                return new UZA.RadioButton(this.convFiledName("radDammyShinsakai"));
             };
 
             Controls.prototype.btnKensaku = function () {

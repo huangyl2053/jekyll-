@@ -77,7 +77,46 @@ module DBZ {
                     this.controls.radDammyShinsakai().displayNone = false;
 
                     var gridSetting = this.controls.dgShinsakaiIchiran().gridSetting;
-                    this.controls.dgShinsakaiIchiran().width = this.controls.dgShinsakaiIchiran().width = 1085;
+                    this.controls.dgShinsakaiIchiran().width = 1085;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isMultiSelectable = true;
+                    gridSetting.isShowFilter = false;
+
+                    gridSetting.columns[0].visible = true;
+                    gridSetting.columns[1].visible = true;
+                    gridSetting.columns[2].visible = true;
+                    gridSetting.columns[3].visible = true;
+                    gridSetting.columns[4].visible = true;
+                    gridSetting.columns[5].visible = true;
+                    gridSetting.columns[6].visible = true;
+                    gridSetting.columns[7].visible = false;
+                    gridSetting.columns[8].visible = false;
+                    gridSetting.columns[9].visible = false;
+                    gridSetting.columns[10].visible = true;
+                    gridSetting.columns[11].visible = true;
+                    gridSetting.columns[12].visible = false;
+                    gridSetting.columns[13].visible = false;
+                    gridSetting.columns[14].visible = false;
+                    gridSetting.columns[15].visible = false;
+                    gridSetting.columns[16].visible = true;
+                    gridSetting.columns[17].visible = true;
+
+                    this.controls.dgShinsakaiIchiran().gridSetting = gridSetting;
+                    this.controls.dgShinsakaiIchiran()._control.afterPropertiesSet();
+                }
+
+                public TaishoshaWaritsuke_UnUseAutoWaritsuke(): void {
+
+                    this.controls.radHyojiJokenWaritsukeMikanryo().displayNone = false;
+                    this.controls.radHyojiJokenWaritsukeMikanryo().visible = false;
+                    this.controls.radHyojiJokenWaritsukeKanryo().displayNone = true;
+                    this.controls.radHyojiJokenShinsakaiMikanryo().displayNone = true;
+                    this.controls.radHyojiJokenShinsakaiKanryo().displayNone = true;
+                    this.controls.radDammyShinsakai().displayNone = false;
+
+                    var gridSetting = this.controls.dgShinsakaiIchiran().gridSetting;
+                    this.controls.dgShinsakaiIchiran().width = 1085;
 
                     gridSetting.isShowSelectButtonColumn = true;
                     gridSetting.isMultiSelectable = false;

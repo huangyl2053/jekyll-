@@ -57,6 +57,10 @@ module DBZ {
                 return new UZA.TextBoxNum(this.convFiledName("txtSaidaiHyojiKensu"));
             }
 
+            public radDammyShinsakai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radDammyShinsakai"));
+            }
+
             public radHyojiJokenWaritsukeMikanryo(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radHyojiJokenWaritsukeMikanryo"));
             }
@@ -71,10 +75,6 @@ module DBZ {
 
             public radHyojiJokenShinsakaiKanryo(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radHyojiJokenShinsakaiKanryo"));
-            }
-
-            public radDammyShinsakai(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radDammyShinsakai"));
             }
 
             public btnKensaku(): UZA.Button {

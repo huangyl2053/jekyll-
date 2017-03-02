@@ -43,6 +43,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
 
     private static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
     private static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
+    private static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
     private static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");
     private static final RString モード_審査結果登録 = new RString("shinsaKekkaToroku");
     private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
@@ -78,6 +79,10 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.TaishoshaWaritsuke);
             div.getRadDammyShinsakai().setSelectedKey(KEY0);
         }
+        if (モード_対象者割付_自動割付使用不可.equals(モード)) {
+            div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.TaishoshaWaritsuke_UnUseAutoWaritsuke);
+            div.getRadDammyShinsakai().setSelectedKey(KEY0);
+        }
         if (モード_審査会資料.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.ShinsakaiShiryoSakusei);
         }
@@ -101,7 +106,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             dataGridSetting.setIsShowSelectButtonColumn(true);
             div.getDgShinsakaiIchiran().setGridSetting(dataGridSetting);
         }
-        
+
     }
 
     /**

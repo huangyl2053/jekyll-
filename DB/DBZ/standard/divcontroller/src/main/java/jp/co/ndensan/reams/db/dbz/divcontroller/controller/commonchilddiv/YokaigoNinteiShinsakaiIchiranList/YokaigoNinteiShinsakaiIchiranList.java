@@ -31,6 +31,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
     private static final RString ラジオボタン初期化_key0 = new RString("key0");
     private static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
     private static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
+    private static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
     private static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");
     private static final RString モード_審査結果登録 = new RString("shinsaKekkaToroku");
     private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
@@ -90,7 +91,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
         if (最大表示件数 == null || 最大表示件数.intValue() == 0) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        if (モード_開催予定登録.equals(モード) || モード_対象者割付.equals(モード)) {
+        if (モード_開催予定登録.equals(モード) || モード_対象者割付.equals(モード) || モード_対象者割付_自動割付使用不可.equals(モード)) {
             ダミー審査会 = div.getRadDammyShinsakai().getSelectedValue();
             表示条件 = div.getRadHyojiJokenWaritsukeMikanryo().getSelectedValue();
         }

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
@@ -24,8 +26,10 @@ import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFi
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -40,7 +44,8 @@ public class KaigoNinteiShinsakai {
 
     private static final RString 遷移モード_審査会個人別状況照会 = new RString("hanteiKekka");
     private static final RString 遷移モード_介護認定審査会審査対象データ出力 = new RString("dataShutsuryoku");
-    private static final RString 遷移モード_介護認定審査会対象者割付 = new RString("kaisaiYoteiToroku");
+    private static final RString 遷移モード_介護認定審査会対象者割付 = new RString("taishoshaWaritsuke");
+    private static final RString 遷移モード_介護認定審査会対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
     private static final RString 遷移モード_介護認定審査会資料作成 = new RString("shinsakaiShiryoSakusei");
     private static final RString 遷移モード_介護認定審査会委員事前審査結果登録 = new RString("jizenKekkaToroku");
     private static final RString 遷移モード_介護認定審査会委員事前審査 = new RString("jizenKekkaToroku");
@@ -61,6 +66,8 @@ public class KaigoNinteiShinsakai {
     private static final RString メニューID_介護認定審査会委員割付 = new RString("DBEMN61010");
     private static final int 数字_0 = 0;
     private static final int LENGTH_4 = 4;
+    private static final RString 審査会自動割付使用しない = new RString("2");
+    private static final RString 自動割当ボタン名 = new RString("btnAutoWaritsuke");
 
     /**
      * 審査会一覧初期化の設定します。
@@ -71,7 +78,15 @@ public class KaigoNinteiShinsakai {
     public ResponseData<KaigoNinteiShinsakaiDiv> onLoad(KaigoNinteiShinsakaiDiv div) {
 
         RString menuID = ResponseHolder.getMenuID();
-        div.getCcdShinsakaiItiran().initialize(getMode().get(menuID));
+        RString mode = getMode().get(menuID);
+        if (遷移モード_介護認定審査会対象者割付.equals(mode)) {
+            RString 審査会自動割付使用有無 = DbBusinessConfig.get(ConfigNameDBE.審査会自動割付使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (審査会自動割付使用しない.equals(審査会自動割付使用有無)) {
+                mode = 遷移モード_介護認定審査会対象者割付_自動割付使用不可;
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(自動割当ボタン名, true);
+            }
+        }
+        div.getCcdShinsakaiItiran().initialize(mode);
         IParentResponse<KaigoNinteiShinsakaiDiv> response = ResponseData.of(div);
         response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName());
         response.setState(getState().get(menuID));
@@ -264,6 +279,12 @@ public class KaigoNinteiShinsakai {
         }
 
         div.getCcdShinsakaiItiran().getSelectedGridLine();
+        RString menuID = ResponseHolder.getMenuID();
+        if (メニューID_介護認定審査会対象者割付.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
+            return ResponseData.of(div)
+                    .forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
+        }
         return ResponseData.of(div)
                 .forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class HyojiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class HyojiJokenDiv extends Panel {
     private TextBoxDateRange txtHyojiKikan;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
+    @JsonProperty("radDammyShinsakai")
+    private RadioButton radDammyShinsakai;
     @JsonProperty("radHyojiJokenWaritsukeMikanryo")
     private RadioButton radHyojiJokenWaritsukeMikanryo;
     @JsonProperty("radHyojiJokenWaritsukeKanryo")
@@ -33,8 +35,6 @@ public class HyojiJokenDiv extends Panel {
     private RadioButton radHyojiJokenShinsakaiMikanryo;
     @JsonProperty("radHyojiJokenShinsakaiKanryo")
     private RadioButton radHyojiJokenShinsakaiKanryo;
-    @JsonProperty("radDammyShinsakai")
-    private RadioButton radDammyShinsakai;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
     @JsonProperty("btnClear")
@@ -80,6 +80,24 @@ public class HyojiJokenDiv extends Panel {
     @JsonProperty("txtSaidaiHyojiKensu")
     public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
+    }
+
+    /*
+     * getradDammyShinsakai
+     * @return radDammyShinsakai
+     */
+    @JsonProperty("radDammyShinsakai")
+    public RadioButton getRadDammyShinsakai() {
+        return radDammyShinsakai;
+    }
+
+    /*
+     * setradDammyShinsakai
+     * @param radDammyShinsakai radDammyShinsakai
+     */
+    @JsonProperty("radDammyShinsakai")
+    public void setRadDammyShinsakai(RadioButton radDammyShinsakai) {
+        this.radDammyShinsakai = radDammyShinsakai;
     }
 
     /*
@@ -152,24 +170,6 @@ public class HyojiJokenDiv extends Panel {
     @JsonProperty("radHyojiJokenShinsakaiKanryo")
     public void setRadHyojiJokenShinsakaiKanryo(RadioButton radHyojiJokenShinsakaiKanryo) {
         this.radHyojiJokenShinsakaiKanryo = radHyojiJokenShinsakaiKanryo;
-    }
-
-    /*
-     * getradDammyShinsakai
-     * @return radDammyShinsakai
-     */
-    @JsonProperty("radDammyShinsakai")
-    public RadioButton getRadDammyShinsakai() {
-        return radDammyShinsakai;
-    }
-
-    /*
-     * setradDammyShinsakai
-     * @param radDammyShinsakai radDammyShinsakai
-     */
-    @JsonProperty("radDammyShinsakai")
-    public void setRadDammyShinsakai(RadioButton radDammyShinsakai) {
-        this.radDammyShinsakai = radDammyShinsakai;
     }
 
     /*

@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -111,6 +111,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
 
         KaisaiYoteiToroku("KaisaiYoteiToroku"),
         TaishoshaWaritsuke("TaishoshaWaritsuke"),
+        TaishoshaWaritsuke_UnUseAutoWaritsuke("TaishoshaWaritsuke_UnUseAutoWaritsuke"),
         ShinsakaiShiryoSakusei("ShinsakaiShiryoSakusei"),
         ShinsaKekkaToroku("ShinsaKekkaToroku"),
         JizenKekkaToroku("JizenKekkaToroku"),
@@ -173,6 +174,16 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
+    public RadioButton getRadDammyShinsakai() {
+        return this.getHyojiJoken().getRadDammyShinsakai();
+    }
+
+    @JsonIgnore
+    public void  setRadDammyShinsakai(RadioButton radDammyShinsakai) {
+        this.getHyojiJoken().setRadDammyShinsakai(radDammyShinsakai);
+    }
+
+    @JsonIgnore
     public RadioButton getRadHyojiJokenWaritsukeMikanryo() {
         return this.getHyojiJoken().getRadHyojiJokenWaritsukeMikanryo();
     }
@@ -210,16 +221,6 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @JsonIgnore
     public void  setRadHyojiJokenShinsakaiKanryo(RadioButton radHyojiJokenShinsakaiKanryo) {
         this.getHyojiJoken().setRadHyojiJokenShinsakaiKanryo(radHyojiJokenShinsakaiKanryo);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadDammyShinsakai() {
-        return this.getHyojiJoken().getRadDammyShinsakai();
-    }
-
-    @JsonIgnore
-    public void  setRadDammyShinsakai(RadioButton radDammyShinsakai) {
-        this.getHyojiJoken().setRadDammyShinsakai(radDammyShinsakai);
     }
 
     @JsonIgnore
