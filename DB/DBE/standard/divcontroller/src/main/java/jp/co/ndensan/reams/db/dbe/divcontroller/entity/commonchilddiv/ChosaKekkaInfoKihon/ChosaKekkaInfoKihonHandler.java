@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.INinteichosaKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -65,6 +66,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -484,43 +486,20 @@ public class ChosaKekkaInfoKihonHandler {
         for (TokiJikouBusiness chosaItem : serviceJokyos) {
             dgKihonChosa_Row dgJigyoshaItiran = new dgKihonChosa_Row();
             ArrayList<RString> 認定調査特記事項番号List = new ArrayList<>();
+            INinteichosaKomokuMapping 認定調査項目マッピング = null;
             if (KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
-                dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).get表示番号());
-                dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).get名称());
-                dgJigyoshaItiran.setKaitou(get回答(chosaItem, NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).getパターンNo()));
-                認定調査特記事項番号List.add(NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
-                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
+                認定調査項目マッピング = NinteichosaKomokuMapping02A.toValue(new RString(chosaItem.get連番()));
+            } else if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
+                認定調査項目マッピング = NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番()));
+            } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
+                認定調査項目マッピング = NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番()));
+            } else if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
+                認定調査項目マッピング = NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番()));
+            } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
+                認定調査項目マッピング = NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番()));
             }
-            if (KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
-                dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).get表示番号());
-                dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).get名称());
-                dgJigyoshaItiran.setKaitou(get回答(chosaItem, NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).getパターンNo()));
-                認定調査特記事項番号List.add(NinteichosaKomokuMapping06A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
-                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
-                dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).get表示番号());
-                dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).get名称());
-                dgJigyoshaItiran.setKaitou(get回答(chosaItem, NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).getパターンNo()));
-                認定調査特記事項番号List.add(NinteichosaKomokuMapping09A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
-                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
-            }
-            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
-                dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).get表示番号());
-                dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).get名称());
-                dgJigyoshaItiran.setKaitou(get回答(chosaItem, NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).getパターンNo()));
-                認定調査特記事項番号List.add(NinteichosaKomokuMapping99A.toValue(new RString(chosaItem.get連番())).get特記事項番号());
-                dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
-            }
-            if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(chosaItem.get厚労省IF識別コード().value())) {
-                for (NinteichosaKomokuMapping09B value : NinteichosaKomokuMapping09B.values()) {
-                    if (new RString(chosaItem.get連番()).equals(value.getコード())) {
-                        dgJigyoshaItiran.setKihonResearchItemCode(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get表示番号());
-                        dgJigyoshaItiran.setKihonResearchItemName(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get名称());
-                        dgJigyoshaItiran.setKaitou(get回答(chosaItem, NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).getパターンNo()));
-                        認定調査特記事項番号List.add(NinteichosaKomokuMapping09B.toValue(new RString(chosaItem.get連番())).get特記事項番号());
-                    }
-                }
+            if (認定調査項目マッピング != null) {
+                set認定調査特記情報(dgJigyoshaItiran, chosaItem, 認定調査項目マッピング, 認定調査特記事項番号List);
                 dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
             }
             NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
@@ -534,6 +513,48 @@ public class ChosaKekkaInfoKihonHandler {
         }
         kihonDiv.getKihonChosaPanel().getDgKihonChosa().setDataSource(grdSinsaSeiList);
         return grdSinsaSeiList;
+    }
+
+    private void set認定調査特記情報(dgKihonChosa_Row dgJigyoshaItiran, TokiJikouBusiness chosaItem,
+            INinteichosaKomokuMapping 認定調査項目マッピング, ArrayList<RString> 認定調査特記事項番号List) {
+        dgJigyoshaItiran.setKihonResearchItemCode(認定調査項目マッピング.get表示番号());
+        dgJigyoshaItiran.setKihonResearchItemName(認定調査項目マッピング.get名称());
+        dgJigyoshaItiran.setKaitou(get回答(chosaItem, 認定調査項目マッピング.getパターンNo()));
+        認定調査特記事項番号List.add(認定調査項目マッピング.get特記事項番号());
+        setBgColor(dgJigyoshaItiran, 認定調査項目マッピング);
+    }
+
+    private void setBgColor(dgKihonChosa_Row dgJigyoshaItiran, INinteichosaKomokuMapping 認定調査項目マッピング) {
+        switch (Integer.parseInt(認定調査項目マッピング.get群番号().toString())) {
+            case 1:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightBlue);
+                break;
+            case 2:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
+                break;
+            case 3:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightYellow);
+                break;
+            case 4:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
+                break;
+            case 5:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorBlue);
+                break;
+            case 6:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+                break;
+            case 7:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorYellow);
+                break;
+            case 8:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+                break;
+            default:
+                dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGray);
+                break;
+        }
+
     }
 
     private RString get回答(TokiJikouBusiness chosaItem, RString 回答パターン) {

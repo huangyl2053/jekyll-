@@ -37,6 +37,8 @@
         DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5593."gogitaiYukoKikanKaishiYMD"
         AND
         DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DbT5593."gogitaiYukoKikanShuryoYMD"
+        AND
+        DbT5593."isDeleted" = FALSE
         INNER JOIN
         rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
         ON
