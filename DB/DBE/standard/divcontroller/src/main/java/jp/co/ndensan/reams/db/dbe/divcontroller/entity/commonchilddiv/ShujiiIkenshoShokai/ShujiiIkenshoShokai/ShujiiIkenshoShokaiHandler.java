@@ -111,17 +111,17 @@ public class ShujiiIkenshoShokaiHandler {
             if (RString.isNullOrEmpty(entity.getIkenItem())) {
                 continue;
             }
-            if (IkenshoKomokuMapping99A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+            if (Integer.parseInt(IkenshoKomokuMapping99A.寝たきり度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping99A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping99A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping99A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping99A.食事.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping99A.食事.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -132,17 +132,17 @@ public class ShujiiIkenshoShokaiHandler {
             if (RString.isNullOrEmpty(entity.getIkenItem())) {
                 continue;
             }
-            if (IkenshoKomokuMapping02A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+            if (Integer.parseInt(IkenshoKomokuMapping02A.寝たきり度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping02A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping02A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping02A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping02A.食事.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping02A.食事.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -153,17 +153,17 @@ public class ShujiiIkenshoShokaiHandler {
             if (RString.isNullOrEmpty(entity.getIkenItem())) {
                 continue;
             }
-            if (IkenshoKomokuMapping06A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+            if (Integer.parseInt(IkenshoKomokuMapping06A.寝たきり度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping06A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping06A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping06A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping06A.食事行為.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping06A.食事行為.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -174,17 +174,17 @@ public class ShujiiIkenshoShokaiHandler {
             if (RString.isNullOrEmpty(entity.getIkenItem())) {
                 continue;
             }
-            if (IkenshoKomokuMapping09A.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+            if (Integer.parseInt(IkenshoKomokuMapping09A.寝たきり度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09A.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09A.認知能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09A.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09A.食事行為.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09A.食事行為.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
@@ -195,17 +195,17 @@ public class ShujiiIkenshoShokaiHandler {
             if (RString.isNullOrEmpty(entity.getIkenItem())) {
                 continue;
             }
-            if (IkenshoKomokuMapping09B.寝たきり度.getコード().equals(new RString(entity.getRemban()))) {
+            if (Integer.parseInt(IkenshoKomokuMapping09B.寝たきり度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShogaiJiritsudo().setValue(IkenKomoku02.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.認知症高齢者の日常生活自立度.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchishoJiritsudo().setValue(IkenKomoku03.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09B.短期記憶.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.短期記憶.getコード().toString()) == entity.getRemban()) {
                 div.getTxtTankiKioku().setValue(IkenKomoku04.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09B.認知能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.認知能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtNinchiNoryoku().setValue(IkenKomoku05.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09B.伝達能力.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.伝達能力.getコード().toString()) == entity.getRemban()) {
                 div.getTxtDentatsuNoryoku().setValue(IkenKomoku06.toValue(entity.getIkenItem()).get名称());
-            } else if (IkenshoKomokuMapping09B.食事行為.getコード().equals(new RString(entity.getRemban()))) {
+            } else if (Integer.parseInt(IkenshoKomokuMapping09B.食事行為.getコード().toString()) == entity.getRemban()) {
                 div.getTxtShokujiKoi().setValue(IkenKomoku14.toValue(entity.getIkenItem()).get名称());
             }
         }
