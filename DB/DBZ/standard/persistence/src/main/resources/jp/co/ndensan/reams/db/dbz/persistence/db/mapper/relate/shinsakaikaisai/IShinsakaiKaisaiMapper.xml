@@ -29,7 +29,7 @@
         <result property="合議体番号" column="gogitaiJoho_gogitaiNo"/>
         <result property="資料作成" column="資料作成" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <select resultOrdered="true" id="get審査会一覧"
             resultMap="resultMap_ShinsakaiKaisaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter" fetchSize="500">
@@ -42,7 +42,7 @@
                 gogitaiJoho."gogitaiNo" AS gogitaiJoho_gogitaiNo,
                 '第'||shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"||'回審査会' AS 審査会名称,
                 gogitaiJoho."gogitaiMei" AS "gogitaiJoho_gogitaiMei",
-                CASE WHEN gogitaiJoho."gogitaiSeishinkaSonzaiFlag" = True 
+                CASE WHEN gogitaiJoho."gogitaiSeishinkaSonzaiFlag" = True
                 THEN '精' ELSE '' END AS 種類,
                 shinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoName",
                 shinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu" AS "shinsakaiKaisaiYoteiJoho_shinsakaiWariateZumiNinzu",
@@ -57,13 +57,13 @@
                 shinsakaiKaisaiYoteiJoho."shiryoSakuseiZumiFlag" AS "shinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag",
                 shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" AS "shinsakaiKaisaiYoteiJoho_ShinsakaiShinchokuJokyo",
                 gogitaiJoho."gogitaiDummyFlag" AS "gogitaiJoho_gogitaiDummyFlag",
-                CASE 	
-                    WHEN DbT5502.shinsakaiShiryoMisakuseiKensu IS NULL 	
-                        THEN '割当なし' 	
-                    WHEN DbT5502.shinsakaiShiryoMisakuseiKensu = 0	
-                        THEN '作成済' 	
-                    ELSE '未作成あり' 	
-                END AS 資料作成	
+                CASE
+                    WHEN DbT5502.shinsakaiShiryoMisakuseiKensu IS NULL
+                        THEN '割当なし'
+                    WHEN DbT5502.shinsakaiShiryoMisakuseiKensu = 0
+                        THEN '作成済'
+                    ELSE '未作成あり'
+                END AS 資料作成
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
                 ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
@@ -77,19 +77,19 @@
                         FROM rgdb."DbT5512ShinsakaiOnseiJoho" AS shinsakaiOnseiJoho
                         GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo"	) AS TB1
                 ON TB1."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
-        LEFT JOIN (SELECT "shinsakaiKaisaiNo",count(*) as shinsakaiShiryoMisakuseiKensu							
-                    FROM rgdb."DbT5502ShinsakaiWariateJoho"							
-                    WHERE "shinsakaiShiryoSakuseiYMD"=NULL							
-                    OR "shinsakaiShiryoSakuseiYMD"=''							
-                    GROUP BY "shinsakaiKaisaiNo") as DbT5502							
-                ON DbT5502."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo" 							
+        LEFT JOIN (SELECT "shinsakaiKaisaiNo",count(*) as shinsakaiShiryoMisakuseiKensu
+                    FROM rgdb."DbT5502ShinsakaiWariateJoho"
+                    WHERE "shinsakaiShiryoSakuseiYMD"=NULL
+                    OR "shinsakaiShiryoSakuseiYMD"=''
+                    GROUP BY "shinsakaiKaisaiNo") as DbT5502
+                ON DbT5502."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
         <if test="is結果登録審査会未完了のみ">
-        RIGHT JOIN  (SELECT shinsakaiWariateJoho."shinsakaiKaisaiNo" 
-                        FROM rgdb."DbT5502ShinsakaiWariateJoho" AS shinsakaiWariateJoho 
-                        WHERE shinsakaiWariateJoho."hanteiKekkaCode" IS NULL OR shinsakaiWariateJoho."hanteiKekkaCode" = '' 
+        INNER JOIN  (SELECT shinsakaiWariateJoho."shinsakaiKaisaiNo"
+                        FROM rgdb."DbT5502ShinsakaiWariateJoho" AS shinsakaiWariateJoho
+                        WHERE shinsakaiWariateJoho."hanteiKekkaCode" IS NULL OR shinsakaiWariateJoho."hanteiKekkaCode" = ''
                         GROUP BY shinsakaiWariateJoho."shinsakaiKaisaiNo")  AS TB2
-        ON TB2."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"    
-        </if>        
+        ON TB2."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        </if>
         WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
                 AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{表示期間From}
          	AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{表示期間To}
@@ -120,7 +120,7 @@
         ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD", shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LIMIT #{saidaiHyojiKensu}
     </select>
-    
+
     <select resultOrdered="true" id="get審査会"
             resultMap="resultMap_ShinsakaiKaisaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter" fetchSize="500">
@@ -133,7 +133,7 @@
                 gogitaiJoho."gogitaiNo" AS gogitaiJoho_gogitaiNo,
                 '第'||shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"||'回審査会' AS 審査会名称,
                 gogitaiJoho."gogitaiMei" AS "gogitaiJoho_gogitaiMei",
-                CASE WHEN gogitaiJoho."gogitaiSeishinkaSonzaiFlag" = True 
+                CASE WHEN gogitaiJoho."gogitaiSeishinkaSonzaiFlag" = True
                 THEN '精' ELSE '' END AS 種類,
                 shinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoJoho_shinsakaiKaisaiBashoName",
                 shinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu" AS "shinsakaiKaisaiYoteiJoho_shinsakaiWariateZumiNinzu",

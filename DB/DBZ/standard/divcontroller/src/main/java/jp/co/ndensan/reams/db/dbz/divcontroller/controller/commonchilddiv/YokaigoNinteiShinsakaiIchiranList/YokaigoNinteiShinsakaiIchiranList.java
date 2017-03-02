@@ -37,8 +37,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
     private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
     private static final RString モード_データ出力 = new RString("dataShutsuryoku");
     private static final RString モード_判定結果 = new RString("hanteiKekka");
-    private static final RString 結果登録審査会未完了のみ = new RString("結果登録審査会未完了のみ");
-    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
+    private static final RString UI_CONTAINER_ID_審査会審査結果登録 = new RString("DBEUC52301");
     private RString モード;
     private RString 表示条件;
     private RString ダミー審査会;
@@ -79,7 +78,6 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        RString menuID = ResponseHolder.getMenuID();
         div.getDgShinsakaiIchiran().getDataSource().clear();
         div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(0);
         div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(0);
@@ -104,11 +102,8 @@ public class YokaigoNinteiShinsakaiIchiranList {
         }
         if (モード_判定結果.equals(モード)) {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
+        }
 
-        }
-        if (モード_事前結果登録.equals(モード) && メニューID_審査会審査結果登録.equals(menuID)) {
-            表示条件 = 結果登録審査会未完了のみ;
-        }
         RString 期間From;
         RString 期間To;
         if (表示期間From != null && 表示期間To != null) {
@@ -125,7 +120,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
             期間From = RDate.MIN.toDateString();
             期間To = RDate.MAX.toDateString();
         }
-        ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(
+        ShinsakaiKaisaiParameter parameter = createParam(
                 期間From, 期間To, モード, 表示条件, 最大表示件数, ダミー審査会);
         SearchResult<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
                 createInstance().get審査会一覧(parameter);
@@ -135,6 +130,15 @@ public class YokaigoNinteiShinsakaiIchiranList {
         }
         getHandler(div).set審査会委員一覧(審査会一覧, div.getTxtSaidaiHyojiKensu().getValue());
         return ResponseData.of(div).respond();
+    }
+
+    private static ShinsakaiKaisaiParameter createParam(RString 期間From, RString 期間To,
+            RString モード, RString 表示条件, Decimal 最大表示件数, RString ダミー審査会) {
+        if (UI_CONTAINER_ID_審査会審査結果登録.equals(ResponseHolder.getUIContainerId())) {
+            return ShinsakaiKaisaiParameter.create審査結果登録Param(期間From, 期間To, 表示条件, 最大表示件数);
+        }
+        return ShinsakaiKaisaiParameter.createParam(
+                期間From, 期間To, モード, 表示条件, 最大表示件数, ダミー審査会);
     }
 
     /**

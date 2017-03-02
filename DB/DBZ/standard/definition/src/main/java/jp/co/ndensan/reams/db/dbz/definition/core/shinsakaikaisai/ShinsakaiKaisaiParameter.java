@@ -22,7 +22,7 @@ public final class ShinsakaiKaisaiParameter {
     private static final RString 審査会未完了のみ = new RString("審査会未完了分のみ");
     private static final RString 審査会完了のみ = new RString("審査会完了分のみ");
     private static final RString 審査会未開催分のみ = new RString("審査会未開催分のみ");
-    private static final RString 全ての審査会 = new RString("全ての審査会");
+    public static final RString 全ての審査会 = new RString("全ての審査会");
     private static final RString 結果登録審査会未完了のみ = new RString("結果登録審査会未完了のみ");
     private static final RString 表示しない = new RString("表示しない");
     private static final RString 開催予定登録 = new RString("kaisaiYoteiToroku");
@@ -185,5 +185,38 @@ public final class ShinsakaiKaisaiParameter {
                 審査会開催番号,
                 false,
                 false);
+    }
+
+    /**
+     * 審査結果登録用のパラメータを生成します。
+     *
+     * @param 表示期間From 表示期間From
+     * @param 表示期間To 表示期間To
+     * @param 表示条件 表示条件
+     * @param 最大表示件数 最大表示件数
+     * @return 介護認定審査会検索パラメータ
+     */
+    public static ShinsakaiKaisaiParameter create審査結果登録Param(
+            RString 表示期間From,
+            RString 表示期間To,
+            RString 表示条件,
+            Decimal 最大表示件数) {
+        return new ShinsakaiKaisaiParameter(
+                /* 表示期間From */表示期間From,
+                /* 表示期間To */ 表示期間To,
+                /* モード */ RString.EMPTY,
+                /* 表示条件 */ RString.EMPTY,
+                /* ダミー審査会 */ RString.EMPTY,
+                /* saidaiHyojiKensu */ 最大表示件数,
+                /* is割付未完了のみ */ false,
+                /* is割付完了のみ */ false,
+                /* is審査会未完了のみ */ false,
+                /* is審査会完了のみ */ false,
+                /* is開催予定登録OR対象者割付 */ false,
+                /* is表示しない */ false,
+                /* 審査会開催番号 */ RString.EMPTY,
+                /* is結果登録審査会未完了のみ */ !全ての審査会.equals(表示条件),
+                /* is審査会未開催分のみ*/ false
+        );
     }
 }
