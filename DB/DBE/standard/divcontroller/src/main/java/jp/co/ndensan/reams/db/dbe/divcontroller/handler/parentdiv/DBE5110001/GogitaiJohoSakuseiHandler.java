@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgSh
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -86,6 +88,7 @@ public class GogitaiJohoSakuseiHandler {
      */
     public void init最大表示件数() {
         div.getTxtDispMax().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtDispMax().setMaxValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**
@@ -101,13 +104,12 @@ public class GogitaiJohoSakuseiHandler {
         for (GogitaiJoho result : resultList) {
             if (i < div.getKensakujyoken().getTxtDispMax().getValue().intValue()) {
                 dgGogitaiIchiran_Row row = new dgGogitaiIchiran_Row();
-                if (result.get合議体有効期間開始年月日().isBeforeOrEquals(現在日付) && 現在日付.isBeforeOrEquals(result.get合議体有効期間終了年月日())) {
-                    row.setModifyButtonState(DataGridButtonState.Enabled);
-                    row.setDeleteButtonState(DataGridButtonState.Enabled);
-                } else {
+                if (result.get合議体有効期間終了年月日().isBefore(現在日付)) {
                     row.setModifyButtonState(DataGridButtonState.Disabled);
-                    row.setDeleteButtonState(DataGridButtonState.Disabled);
+                } else {
+                    row.setModifyButtonState(DataGridButtonState.Enabled);
                 }
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
                 row.setJyotai(RString.EMPTY);
                 row.getGogitaiNumber().setValue(new Decimal(result.get合議体番号()));
                 row.setGogitaiName(result.get合議体名称());
@@ -237,10 +239,11 @@ public class GogitaiJohoSakuseiHandler {
         各ボタン活性設定(Boolean.TRUE);
 
     }
-    
+
     /**
      *
      * 削除モードの場合、合議体詳細情報の設定します。
+     *
      * @param flag setDisabledFlag
      *
      */
@@ -426,7 +429,13 @@ public class GogitaiJohoSakuseiHandler {
 
         dgGogitaiIchiran_Row row = new dgGogitaiIchiran_Row();
         if (!JYOTAI_NAME_ADD.equals(jyotai)) {
-            row = div.getDgGogitaiIchiran().getActiveRow();
+            int id = ViewStateHolder.get(ViewStateKeys.番号, int.class);
+            for (dgGogitaiIchiran_Row refRow : div.getDgGogitaiIchiran().getDataSource()) {
+                if (refRow.getId() == id) {
+                    row = refRow;
+                    break;
+                }
+            }
         }
         row.getGogitaiNumber().setValue(div.getTxtGogitaiNumber().getValue());
         row.setGogitaiName(div.getTxtGogitaiMeisho().getValue());
@@ -442,7 +451,7 @@ public class GogitaiJohoSakuseiHandler {
         row.setGogitaiDummyFlag(RAD_KEY_1.equals(div.getRadDummyFlag().getSelectedKey()));
         row.setSeishinkaiSonzai(RAD_KEY_0.equals(div.getRadSeishinkaiSonzai().getSelectedKey()));
 
-        int index = div.getDgGogitaiIchiran().getClickedRowId();
+        int index = row.getId();
 
         if (JYOTAI_NAME_ADD.equals(jyotai)) {
             row.setJyotai(JYOTAI_NAME_ADD);
@@ -479,7 +488,7 @@ public class GogitaiJohoSakuseiHandler {
         gogitaiJohoBuilder = 合議体割当審査員情報編集(gogitaiJohoBuilder);
         return gogitaiJohoBuilder.build();
     }
-    
+
     private GogitaiJohoBuilder 合議体割当審査員情報編集(GogitaiJohoBuilder gogitaiJohoBuilder) {
         for (dgShinsainList_Row shinsainRow : div.getDgShinsainList().getDataSource()) {
             GogitaiWariateIinJoho gogitaiWariateIinJoho = new GogitaiWariateIinJoho(
@@ -502,7 +511,7 @@ public class GogitaiJohoSakuseiHandler {
             gogitaiWariateIinJoho = gogitaiWariateIinJohoBuilder.build();
             gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
         }
-        
+
         for (dgHoketsuShinsainList_Row hoketsuShinsainRow : div.getDgHoketsuShinsainList().getDataSource()) {
             GogitaiWariateIinJoho gogitaiWariateIinJoho = new GogitaiWariateIinJoho(
                     Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()),

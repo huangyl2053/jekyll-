@@ -83,13 +83,13 @@ public class GogitaiJohoSakuseiValidationHandler {
     public ValidationMessageControlPairs 使用状況チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
-        
-        boolean isUsed = service.isUsed(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(), 
-                div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toFlexibleDate(), 
+
+        boolean isUsed = service.isUsed(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
+                div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toFlexibleDate(),
                 div.getDgGogitaiIchiran().getClickedItem().getYukoShuryoYMD().getValue().toFlexibleDate());
-       if (isUsed) {
-           validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.削除不可));
-       }
+        if (isUsed) {
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.削除不可));
+        }
 
         return validationMessages;
     }
@@ -238,24 +238,6 @@ public class GogitaiJohoSakuseiValidationHandler {
 
     /**
      *
-     * 「入力内容を確定する」をクリック時委員の人数チをチェックします。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 委員人数チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        List<dgShinsainList_Row> rowList = div.getDgShinsainList().getDataSource();
-        int 最低定員数 = DbBusinessConfig.get(ConfigNameDBE.審査会最低定員数, RDate.getNowDate()).toInt();
-        if (最低定員数 > rowList.size()) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.審査会最低定員数不足));
-            return validationMessages;
-        }
-
-        return validationMessages;
-    }
-
-    /**
-     *
      * 合議体一覧データの存在をチェックします。
      *
      * @return ValidationMessageControlPairs
@@ -270,8 +252,8 @@ public class GogitaiJohoSakuseiValidationHandler {
 
         return validationMessages;
     }
-    
-     /**
+
+    /**
      *
      * 合議体一覧データの存在をチェックします。
      *
@@ -293,7 +275,7 @@ public class GogitaiJohoSakuseiValidationHandler {
             }
             if (shinsakaiIinJoho.get介護認定審査会委員開始年月日() != null) {
                 if (shinsakaiIinJoho.get介護認定審査会委員開始年月日().
-                    isAfter(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()))) {
+                        isAfter(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()))) {
                     validationMessages.add(new ValidationMessageControlPair(new RRVMessages(DbzErrorMessages.理由付き確定不可, i + "行目の審査会委員が期間外")));
                     return validationMessages;
                 }
@@ -312,7 +294,7 @@ public class GogitaiJohoSakuseiValidationHandler {
             }
             if (shinsakaiIinJoho.get介護認定審査会委員開始年月日() != null) {
                 if (shinsakaiIinJoho.get介護認定審査会委員開始年月日().
-                    isAfter(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()))) {
+                        isAfter(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString()))) {
                     validationMessages.add(new ValidationMessageControlPair(new RRVMessages(DbzErrorMessages.理由付き確定不可, j + "行目の補欠委員が期間外")));
                     return validationMessages;
                 }
@@ -382,13 +364,13 @@ public class GogitaiJohoSakuseiValidationHandler {
         private GogitaiJohoSakuseiMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
-        
+
         @Override
         public Message getMessage() {
             return message;
         }
     }
-    
+
     private static final class RRVMessages implements IValidationMessage {
 
         private final Message message;
