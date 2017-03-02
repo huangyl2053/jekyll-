@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class ShinsakaiKaisaiParameter {
 
     private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
-    private static final RString 割付完了のみ = new RString("割付完了分のみ");
+    private static final RString 未開催分のみ = new RString("未開催分のみ");
     private static final RString 審査会未完了のみ = new RString("審査会未完了分のみ");
     private static final RString 審査会完了のみ = new RString("審査会完了分のみ");
     private static final RString 審査会未開催分のみ = new RString("審査会未開催分のみ");
@@ -34,7 +34,7 @@ public final class ShinsakaiKaisaiParameter {
     private final RString ダミー審査会;
     private final Decimal saidaiHyojiKensu;
     private final boolean is割付未完了のみ;
-    private final boolean is割付完了のみ;
+    private final boolean is未開催分のみ;
     private final boolean is審査会未完了のみ;
     private final boolean is結果登録審査会未完了のみ;
     private final boolean is審査会完了のみ;
@@ -53,7 +53,7 @@ public final class ShinsakaiKaisaiParameter {
      * @param ダミー審査会 ダミー審査会
      * @param saidaiHyojiKensu saidaiHyojiKensu
      * @param is割付未完了のみ is割付未完了のみ
-     * @param is割付完了のみ is割付完了のみ
+     * @param is未開催分のみ is未開催分のみ
      * @param is審査会未完了のみ is審査会未完了のみ
      * @param is審査会完了のみ is審査会完了のみ
      * @param is開催予定登録OR対象者割付 is開催予定登録OR対象者割付
@@ -68,7 +68,7 @@ public final class ShinsakaiKaisaiParameter {
             RString ダミー審査会,
             Decimal saidaiHyojiKensu,
             boolean is割付未完了のみ,
-            boolean is割付完了のみ,
+            boolean is未開催分のみ,
             boolean is審査会未完了のみ,
             boolean is審査会完了のみ,
             boolean is開催予定登録OR対象者割付,
@@ -83,7 +83,7 @@ public final class ShinsakaiKaisaiParameter {
         this.ダミー審査会 = ダミー審査会;
         this.saidaiHyojiKensu = saidaiHyojiKensu;
         this.is割付未完了のみ = is割付未完了のみ;
-        this.is割付完了のみ = is割付完了のみ;
+        this.is未開催分のみ = is未開催分のみ;
         this.is審査会未完了のみ = is審査会未完了のみ;
         this.is審査会完了のみ = is審査会完了のみ;
         this.is開催予定登録OR対象者割付 = is開催予定登録OR対象者割付;
@@ -112,7 +112,7 @@ public final class ShinsakaiKaisaiParameter {
             Decimal 最大表示件数,
             RString ダミー審査会) {
         boolean is割付未完了のみ = false;
-        boolean is割付完了のみ = false;
+        boolean is未開催分のみ = false;
         boolean is審査会未完了のみ = false;
         boolean is審査会完了のみ = false;
         boolean is開催予定登録OR対象者割付 = false;
@@ -124,8 +124,8 @@ public final class ShinsakaiKaisaiParameter {
             if (割付未完了のみ.equals(表示条件)) {
                 is割付未完了のみ = true;
             }
-            if (割付完了のみ.equals(表示条件)) {
-                is割付完了のみ = true;
+            if (未開催分のみ.equals(表示条件)) {
+                is未開催分のみ = true;
             }
             if (審査会未完了のみ.equals(表示条件)) {
                 is審査会未完了のみ = true;
@@ -152,7 +152,7 @@ public final class ShinsakaiKaisaiParameter {
                 RString.EMPTY,
                 最大表示件数,
                 is割付未完了のみ,
-                is割付完了のみ,
+                is未開催分のみ,
                 is審査会未完了のみ,
                 is審査会完了のみ,
                 is開催予定登録OR対象者割付,
@@ -209,7 +209,7 @@ public final class ShinsakaiKaisaiParameter {
                 /* ダミー審査会 */ RString.EMPTY,
                 /* saidaiHyojiKensu */ 最大表示件数,
                 /* is割付未完了のみ */ false,
-                /* is割付完了のみ */ false,
+                /* is未開催分のみ */ false,
                 /* is審査会未完了のみ */ false,
                 /* is審査会完了のみ */ false,
                 /* is開催予定登録OR対象者割付 */ false,
