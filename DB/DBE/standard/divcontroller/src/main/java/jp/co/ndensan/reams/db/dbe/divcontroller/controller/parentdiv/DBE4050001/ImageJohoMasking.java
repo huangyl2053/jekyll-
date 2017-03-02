@@ -108,7 +108,7 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTorikeshi(ImageJohoMaskingDiv div) {
         getHandler(div).deleteEditedData();
-        getHandler(div).setDisabledStateToButton();
+        getHandler(div).changeButtonState();
         return ResponseData.of(div).respond();
     }
 
@@ -120,7 +120,7 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnSakujo(ImageJohoMaskingDiv div) {
         getHandler(div).deleteMaskingData();
-        getHandler(div).setDisabledStateToButton();
+        getHandler(div).changeButtonState();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
@@ -167,8 +167,12 @@ public class ImageJohoMasking {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
             boolean マスキング完了済 = ViewStateHolder.get(ViewStateKeys.保存フラグ, boolean.class);
             if (マスキング完了済) {
+                div.getCcdKanryoMessage().setMessage(new RString("マスキングの保存処理が完了しました。"),
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBE4050001StateName.完了表示基本運用遷移無);
             } else {
+                div.getCcdKanryoMessage().setMessage(new RString("マスキングの保存処理が完了しました。"),
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBE4050001StateName.完了表示基本運用遷移有);
             }
         } else {
@@ -183,7 +187,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onBefore_onClickbtnMaskingGenpon(ImageJohoMaskingDiv div) {
-        dgImageMaskingTaisho_Row row = div.getDgImageMaskingTaisho().getActiveRow();
+        dgImageMaskingTaisho_Row row = ViewStateHolder.get(ViewStateKeys.詳細データ, dgImageMaskingTaisho_Row.class);
         div.setHiddenImagePath(row.getImagePath());
         return ResponseData.of(div).respond();
     }
@@ -195,10 +199,11 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onBefore_onClickbtnMaskingMask(ImageJohoMaskingDiv div) {
-        if (div.getDgImageMaskingTaisho().getActiveRow().getEditImagePath().isEmpty()) {
-            div.setHiddenImagePath(div.getDgImageMaskingTaisho().getActiveRow().getMaskImagePath());
+        dgImageMaskingTaisho_Row row = ViewStateHolder.get(ViewStateKeys.詳細データ, dgImageMaskingTaisho_Row.class);
+        if (row.getEditImagePath().isEmpty()) {
+            div.setHiddenImagePath(row.getMaskImagePath());
         } else {
-            div.setHiddenImagePath(div.getDgImageMaskingTaisho().getActiveRow().getEditImagePath());
+            div.setHiddenImagePath(row.getEditImagePath());
         }
         return ResponseData.of(div).respond();
     }
@@ -212,7 +217,7 @@ public class ImageJohoMasking {
     public ResponseData<ImageJohoMaskingDiv> onOkClose(ImageJohoMaskingDiv div) {
         RString newImagePath = div.getHiddenImagePath();
         getHandler(div).updateRow(newImagePath);
-        getHandler(div).setDisabledStateToButton();
+        getHandler(div).changeButtonState();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
         return ResponseData.of(div).respond();
     }
@@ -224,6 +229,7 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onSelect_dgImageMaskingTaisho(ImageJohoMaskingDiv div) {
+        ViewStateHolder.put(ViewStateKeys.詳細データ, div.getDgImageMaskingTaisho().getActiveRow());
         getHandler(div).changeButtonState();
         return ResponseData.of(div).respond();
     }

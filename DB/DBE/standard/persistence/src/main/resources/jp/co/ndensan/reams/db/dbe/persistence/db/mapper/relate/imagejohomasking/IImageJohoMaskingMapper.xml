@@ -86,7 +86,16 @@
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202 
         ON T5202."shinseishoKanriNo" = T5201."shinseishoKanriNo" 
         AND T5202."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo" 
-        AND T5202."gaikyoChosaTextImageKubun" = '2'
+        AND NOT EXISTS	(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" slv
+        WHERE
+        T5202."shinseishoKanriNo" = slv."shinseishoKanriNo"
+        AND T5202."ninteichosaRirekiNo" = slv."ninteichosaRirekiNo"
+        AND T5202."gaikyoChosaTextImageKubun" <![CDATA[<]]> slv."gaikyoChosaTextImageKubun"
+        )
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051 
         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo" 
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" T5116 
