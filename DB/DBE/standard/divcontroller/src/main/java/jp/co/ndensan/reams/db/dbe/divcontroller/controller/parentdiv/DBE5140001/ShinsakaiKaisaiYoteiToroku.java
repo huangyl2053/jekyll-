@@ -125,8 +125,10 @@ public class ShinsakaiKaisaiYoteiToroku {
             DbeQuestionMessages.審査会予定_中止.getMessage().evaluate());
     private static final QuestionMessage CHUSHIMESSAGE_CANCEL = new QuestionMessage(DbeQuestionMessages.審査会予定_中止解除.getMessage().getCode(),
             DbeQuestionMessages.審査会予定_中止解除.getMessage().evaluate());
-    private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+    private static final QuestionMessage HOZONMESSAGE = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
             UrQuestionMessages.保存の確認.getMessage().evaluate());
+    private static final QuestionMessage SHORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+            UrQuestionMessages.処理実行の確認.getMessage().evaluate());
     private static final QuestionMessage SAKUJOMESSAGE = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
             UrQuestionMessages.削除の確認.getMessage().evaluate());
     private static final WarningMessage 操作可否 = new WarningMessage(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode(),
@@ -197,6 +199,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setMonthBefore();
         }
+        div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -226,6 +229,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setMonthAfter();
         }
+        div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -278,6 +282,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             setYearMonth();
         }
         div.getBtnHyojiTsukiHenko().setDisabled(true);
+        div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -305,6 +310,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(Integer.valueOf(nichi.toString()) - 1).setSelected(false);
             div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(div.getTxtSeteibi().getValue().getDayValue() - 1).setSelected(true);
         }
+        div.getDgKaisaiYoteiNyuryokuran().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -658,6 +664,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         set開催予定入力欄(div.getTxtSeteibi().getValue());
         div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
+        div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 
@@ -694,7 +701,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         }
 
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
+            return ResponseData.of(div).addMessage(SHORIMESSAGE).respond();
         }
 
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
@@ -724,6 +731,10 @@ public class ShinsakaiKaisaiYoteiToroku {
             for (int i = 0; i < INDEX_7; i++) {
                 FlexibleDate 開始日 = 週コピー開始日.plusDay(i);
                 FlexibleDate から日 = 週コピーから日.plusDay(i);
+                int 開始月 = 週コピー開始日.plusDay(0).getMonthValue();
+                if (開始月 != 開始日.getMonthValue()) {
+                    break;
+                }
                 if (!holiDayList.contains(new RString(開始日.toString())) && !holiDayList.contains(
                         new RString(から日.toString()))) {
                     List<ShinsakaiKaisaiYoteiJohoBusiness> businessList = new ArrayList<>();
@@ -815,7 +826,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         RString 年月 = div.getLblMonth2().getText();
         this.div = div;
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
+            return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
