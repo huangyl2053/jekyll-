@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -41,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class PublicationShiryoShinsakai {
 
-    private final RString 印刷帳票_すべて選択 = new RString("0");
     private final RString マスキング完了処理_一次判定後 = new RString("1");
 
     /**
@@ -63,7 +61,7 @@ public class PublicationShiryoShinsakai {
         KaisaiYoteiJohoBusiness 開催予定情報
                 = ShiryoShinsakaiFinder.createInstance().get開催予定情報(審査会一覧_開催番号);
         div.getTxtShinsakaiKaisaiNo().setValue(審査会一覧_開催番号);
-
+        getHandler(div).onLoad(開催予定情報);
         ShinsakaiWariateJohoManager 審査会割当情報Manager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
         List<ShinsakaiWariateJoho> 審査会割当情報リスト = 審査会割当情報Manager.get介護認定審査会割当情報By介護認定審査会開催番号(審査会一覧_開催番号);
         NinteiKanryoJohoManager 認定完了情報Manager = InstanceProvider.create(NinteiKanryoJohoManager.class);
@@ -83,18 +81,6 @@ public class PublicationShiryoShinsakai {
                 }
             }
         }
-        getHandler(div).onLoad(開催予定情報);
-        if (div.getChkPrintChoyoJimu().getSelectedKeys().contains(印刷帳票_すべて選択)) {
-            div.setHdnChkSubeteJimuFlag(new RString(Boolean.TRUE.toString()));
-        } else {
-            div.setHdnChkSubeteJimuFlag(new RString(Boolean.FALSE.toString()));
-        }
-        if (div.getChkPrintChohyoIin().getSelectedKeys().contains(印刷帳票_すべて選択)) {
-            div.setHdnChkSubeteIinFlag(new RString(Boolean.TRUE.toString()));
-        } else {
-            div.setHdnChkSubeteIinFlag(new RString(Boolean.FALSE.toString()));
-        }
-
         return ResponseData.of(div).respond();
     }
 

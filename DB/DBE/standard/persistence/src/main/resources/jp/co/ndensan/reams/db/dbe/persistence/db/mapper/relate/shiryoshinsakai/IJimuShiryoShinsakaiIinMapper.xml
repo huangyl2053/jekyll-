@@ -358,14 +358,12 @@
     <select id="get事務局委員氏名" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
-        FROM rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
-        WHERE dbt5594."shinsakaiIinCode" IN (
-        SELECT dbt5503."shinsakaiIinCode"
         FROM rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
+        INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
+        ON dbt5594."shinsakaiIinCode" = dbt5503."shinsakaiIinCode"
         WHERE dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
-        )
-        ORDER BY
-        dbt5594."shinsakaiIinCode"
+        ORDER BY dbt5503."kaigoninteiShinsakaiGichoKubunCode" DESC
+        , dbt5594."shinsakaiIinCode"
     </select>
     <select id="get事務局特記情報" resultMap="Result_事務局特記情報"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">

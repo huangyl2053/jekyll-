@@ -68,7 +68,11 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
             }
         } else {
             if (選択.equals(getParameter().getChohyoIin_taishoushaFalg())) {
-                executeStep(委員_審査対象者一覧);
+                if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+                    executeStep(委員_追加資料鑑);
+                } else {
+                    executeStep(委員_審査対象者一覧);
+                }
             }
             if (選択.equals(getParameter().getChohyoIin_tokkiJikouFalg())) {
                 executeStep(委員_特記事項);
@@ -83,9 +87,6 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
             if (選択.equals(getParameter().getChohyoIin_sonotaSiryoFalg())) {
                 executeStep(委員_その他資料);
             }
-//            if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-//                executeStep(委員_追加資料鑑);
-//            }
         }
         putFlowResult(new RString("出力帳票一覧"), 出力帳票一覧);
     }
@@ -123,7 +124,7 @@ public class DBE517002_ShinsakaiShiryoIin extends BatchFlowBase<DBE517002_Shinsa
         return loopBatch(IinTokkiJikouDataSakuseiA4Process.class)
                 .arguments(getParameter().toIinTokkiJikouItiziHanteiProcessParameter()).define();
     }
-    
+
     /**
      * 委員特記事項+一次判定結果情報データの作成を行います。
      *

@@ -136,20 +136,16 @@ public class NinnteiChousaKekkaTouroku1 {
         ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
         boolean 審査会割当済 = shinsakaiWariateManager.get審査会割当データ(申請書管理番号);
         if (審査会割当済) {
-            if (!ResponseHolder.isReRequest()) {
-                ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.審査会割当済のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode(),
+                    DbeErrorMessages.審査会割当済のため処理不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         NinteiKanryoJohoManager ninteiKanryoJohoManager = InstanceProvider.create(NinteiKanryoJohoManager.class);
         NinteiKanryoJoho 認定完了情報 = ninteiKanryoJohoManager.get要介護認定完了情報(申請書管理番号);
         if (認定完了情報.get要介護認定一次判定完了年月日() != null) {
-            if (!ResponseHolder.isReRequest()) {
-                InformationMessage message = new InformationMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            InformationMessage message = new InformationMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode(),
+                    DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -426,11 +422,13 @@ public class NinnteiChousaKekkaTouroku1 {
         ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
         ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
         ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
-        if (!第1群List.isEmpty() || 第2群List.isEmpty() || 第3群List.isEmpty() || 第4群List.isEmpty()
-                || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
-            WarningMessage message = new WarningMessage(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode(),
-                    DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if (!ResponseHolder.isReRequest()) {
+            if (!第1群List.isEmpty() || 第2群List.isEmpty() || 第3群List.isEmpty() || 第4群List.isEmpty()
+                    || 第5群List.isEmpty() || 特別な医療List.isEmpty() || 自立度List.isEmpty()) {
+                WarningMessage message = new WarningMessage(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode(),
+                        DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
         if (new RString(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
