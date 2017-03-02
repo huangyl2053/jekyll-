@@ -66,11 +66,13 @@ public class ShujiiIryokikanAndShujiiGuide {
                 市町村コード = dataPassModel.get市町村コード();
                 div.getHokenshaList().setSelectedShichosonIfExist(new LasdecCode(市町村コード));
             }
-            if (!RString.isNullOrEmpty(dataPassModel.get主治医医療機関コード())
-                    && new RString(TaishoMode.ShujiiMode.toString()).equals(dataPassModel.get対象モード())) {
-                div.getTxtIryoKikanCodeFrom().setValue(dataPassModel.get主治医医療機関コード());
-                div.getTxtIryoKikanCodeTo().setValue(dataPassModel.get主治医医療機関コード());
-                div.getTxtIryoKikanName().setValue(dataPassModel.get主治医医療機関名称());
+            div.getTxtIryoKikanCodeFrom().setValue(RString.EMPTY);
+            div.getTxtIryoKikanCodeTo().setValue(RString.EMPTY);
+            div.getTxtIryoKikanName().setValue(RString.EMPTY);
+            if (dataPassModel.get対象モード().equals(new RString(TaishoMode.ShujiiMode.toString()))) {
+                div.getTxtIryoKikanCodeFrom().setValue(dataPassModel.get主治医医療機関コード() != null ? dataPassModel.get主治医医療機関コード() : RString.EMPTY);
+                div.getTxtIryoKikanCodeTo().setValue(dataPassModel.get主治医医療機関コード() != null ? dataPassModel.get主治医医療機関コード() : RString.EMPTY);
+                div.getTxtIryoKikanName().setValue(dataPassModel.get主治医医療機関名称() != null ? dataPassModel.get主治医医療機関名称() : RString.EMPTY);
             }
 
             if (!RString.isNullOrEmpty(div.getHdnCanJokyoMuko())) {

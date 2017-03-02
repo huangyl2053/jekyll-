@@ -62,31 +62,31 @@
                 AND "shinsakaiIinShikakuCode" = #{審査会委員資格}
             </if>
             <if test="uses審査員氏名">
-               <if test="uses審査員氏名前方一致">
-                     AND "shinsakaiIinShimei" LIKE #{審査員氏名} || '%'
+                <if test="uses審査員氏名前方一致">
+                    AND "shinsakaiIinShimei" LIKE #{審査員氏名} || '%'
                 </if>
                 <if test="uses審査員氏名後方一致">
-                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名}
+                    AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名}
                 </if>
                 <if test="uses審査員氏名完全一致">
-                     AND "shinsakaiIinShimei" = #{審査員氏名}
+                    AND "shinsakaiIinShimei" = #{審査員氏名}
                 </if>
                 <if test="uses審査員氏名部分一致">
-                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名} || '%'
+                    AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名} || '%'
                 </if>  
             </if>     
             <if test="uses審査員カナ名称">
-               <if test="uses審査員カナ名称前方一致">
-                     AND "shinsakaiIinKanaShimei" LIKE #{審査員カナ名称} || '%'
+                <if test="uses審査員カナ名称前方一致">
+                    AND "shinsakaiIinKanaShimei" LIKE #{審査員カナ名称} || '%'
                 </if>
                 <if test="uses審査員カナ名称後方一致">
-                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称}
+                    AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称}
                 </if>
                 <if test="uses審査員カナ名称完全一致">
-                     AND "shinsakaiIinKanaShimei" = #{審査員カナ名称}
+                    AND "shinsakaiIinKanaShimei" = #{審査員カナ名称}
                 </if>
                 <if test="uses審査員カナ名称部分一致">
-                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称} || '%'
+                    AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称} || '%'
                 </if>  
             </if>   
         </where>
@@ -106,8 +106,8 @@
     </select>
 
     <select resultOrdered="true" id="get審査会委員情報By表示条件件数"
-                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
-                 resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
+            resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
         SELECT
         dbT5594ShinsakaiIinJoho.*,
         dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.*
@@ -134,31 +134,31 @@
                 AND "shinsakaiIinShikakuCode" = #{審査会委員資格}
             </if>
             <if test="uses審査員氏名">
-               <if test="uses審査員氏名前方一致">
-                     AND "shinsakaiIinShimei" LIKE #{審査員氏名} || '%'
+                <if test="uses審査員氏名前方一致">
+                    AND "shinsakaiIinShimei" LIKE #{審査員氏名} || '%'
                 </if>
                 <if test="uses審査員氏名後方一致">
-                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名}
+                    AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名}
                 </if>
                 <if test="uses審査員氏名完全一致">
-                     AND "shinsakaiIinShimei" = #{審査員氏名}
+                    AND "shinsakaiIinShimei" = #{審査員氏名}
                 </if>
                 <if test="uses審査員氏名部分一致">
-                     AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名} || '%'
+                    AND "shinsakaiIinShimei" LIKE '%' || #{審査員氏名} || '%'
                 </if>  
             </if>     
             <if test="uses審査員カナ名称">
-               <if test="uses審査員カナ名称前方一致">
-                     AND "shinsakaiIinKanaShimei" LIKE #{審査員カナ名称} || '%'
+                <if test="uses審査員カナ名称前方一致">
+                    AND "shinsakaiIinKanaShimei" LIKE #{審査員カナ名称} || '%'
                 </if>
                 <if test="uses審査員カナ名称後方一致">
-                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称}
+                    AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称}
                 </if>
                 <if test="uses審査員カナ名称完全一致">
-                     AND "shinsakaiIinKanaShimei" = #{審査員カナ名称}
+                    AND "shinsakaiIinKanaShimei" = #{審査員カナ名称}
                 </if>
                 <if test="uses審査員カナ名称部分一致">
-                     AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称} || '%'
+                    AND "shinsakaiIinKanaShimei" LIKE '%' || #{審査員カナ名称} || '%'
                 </if>  
             </if>   
         </where>
@@ -221,6 +221,17 @@
         SELECT COUNT(0)
         FROM rgdb."DbT5594ShinsakaiIinJoho" DbT5594
         WHERE DbT5594."shinsakaiIinCode" = #{shinsakaiIinCode}
+    </select>
+    
+    <select resultOrdered="true" id="is審査会委員使用中" resultType="boolean"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter"
+            fetchSize="500">
+        SELECT
+        (
+        EXISTS ( SELECT * FROM rgdb."DbT5593GogitaiWariateIinJoho" WHERE "shinsakaiIinCode" = #{shinsakaiIinCode} AND "isDeleted" = FALSE)
+        OR
+        EXISTS ( SELECT * FROM rgdb."DbT5503ShinsakaiWariateIinJoho" WHERE "shinsakaiIinCode" = #{shinsakaiIinCode} AND "isDeleted" = FALSE)
+        ) AS 審査会委員使用中
     </select>
 
     <resultMap id="resultMap_ShozokuKikanIchiranEntity"

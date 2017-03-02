@@ -81,7 +81,11 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
             }
         } else {
             if (選択.equals(getParameter().getChoyoJimu_taishoushaFalg())) {
-                executeStep(事務局_審査対象者一覧);
+                if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
+                    executeStep(事務局_追加資料鑑);
+                } else {
+                    executeStep(事務局_審査対象者一覧);
+                }
             }
             if (選択.equals(getParameter().getChoyoJimu_tokkiJikouFalg())) {
                 executeStep(事務局_特記事項);
@@ -96,9 +100,6 @@ public class DBE517001_ShinsakaiShiryoJImukyoku extends BatchFlowBase<DBE517001_
             if (選択.equals(getParameter().getChoyoJimu_sonotaSiryoFalg())) {
                 executeStep(事務局_その他資料);
             }
-//        if (作成条件_追加分.equals(getParameter().getSakuseiJoken())) {
-//            executeStep(事務局_追加資料鑑);
-//        }
         }
         putFlowResult(new RString("出力帳票一覧"), 出力帳票一覧);
 

@@ -105,7 +105,6 @@ public class MaskingHandler {
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分申請時コード().getKey()).get名称());
                 if (business.has意見書マスク()) {
                     completeCount++;
-                    row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
                     row.setJohtai(KihonunyoShoriJotai.処理可能.get略称());
                 } else {
                     mishoriCount++;
@@ -172,6 +171,9 @@ public class MaskingHandler {
         }
         if (business.get主治医意見書作成依頼完了年月日() != null && !business.get主治医意見書作成依頼完了年月日().isEmpty()) {
             row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
+        }
+        if (business.get主治医意見書登録完了年月日() != null && !business.get主治医意見書登録完了年月日().isEmpty()) {
+            row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
         }
     }
 

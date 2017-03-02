@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide.SoNoTaKikanGuide
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -56,6 +57,9 @@ public class SonotaKikanGuide {
      * @return ResponseData<SonotaKikanGuideDiv>
      */
     public ResponseData<SonotaKikanGuideDiv> onClick_Kensaku(SonotaKikanGuideDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairs = getHandler(div).大小関係チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -64,7 +68,7 @@ public class SonotaKikanGuide {
         if (有効.equals(div.getRadHaisi().getSelectedKey())) {
             状況フラグ = true;
         } else if (無効.equals(div.getRadHaisi().getSelectedKey())) {
-             状況フラグ = false;
+            状況フラグ = false;
         }
         List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
                 .createその他機関情報の取得キー作成(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
@@ -93,7 +97,7 @@ public class SonotaKikanGuide {
      * @return ResponseData<SonotaKikanGuideDiv>
      */
     public ResponseData<SonotaKikanGuideDiv> onClick_Clear(SonotaKikanGuideDiv div) {
-        getHandler(div).load();
+        getHandler(div).clear();
         return ResponseData.of(div).respond();
     }
 

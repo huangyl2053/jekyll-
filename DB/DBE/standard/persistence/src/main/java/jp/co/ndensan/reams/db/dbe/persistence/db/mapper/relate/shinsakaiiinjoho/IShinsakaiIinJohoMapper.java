@@ -56,4 +56,12 @@ public interface IShinsakaiIinJohoMapper {
      * @return int 審査会委員カウント
      */
     int get審査会委員カウント(ShinsakaiIinJohoMapperParameter parameter);
+    
+    /**
+     * 審査会委員の使用を取得します。
+     *
+     * @param parameter 介護認定審査会委員情報検索条件
+     * @return booleam 審査会委員使用中
+     */
+    boolean is審査会委員使用中(ShinsakaiIinJohoMapperParameter parameter);
 }

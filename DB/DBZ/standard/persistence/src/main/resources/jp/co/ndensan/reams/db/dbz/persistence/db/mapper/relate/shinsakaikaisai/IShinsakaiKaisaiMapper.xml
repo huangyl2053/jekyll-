@@ -103,8 +103,9 @@
         <if test="is割付未完了のみ">
             AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0'
         </if>
-        <if test="is割付完了のみ">
-            AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1'
+        <if test="is未開催分のみ">
+            AND (shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1'
+                 OR shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '0')
         </if>
         <if test="is審査会未完了のみ">
             AND shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" = '1'

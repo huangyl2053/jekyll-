@@ -140,6 +140,19 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
     }
 
     /**
+     * 削除処理とき、バリデーションチェックを行う。
+     *
+     * @param 審査会委員コード
+     */
+    public void 削除可否チェック(RString 審査会委員コード) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (ShinsakaiIinJohoManager.createInstance().is審査会委員使用中(
+                ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(審査会委員コード))) {
+            throw new ApplicationException(ShinsakaiIinJohoTorokuValidationMessage.削除不可.getMessage());
+        }
+    }
+
+    /**
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
      */
@@ -181,7 +194,8 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         コードマスタなし(UrErrorMessages.コードマスタなし),
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
         該当データなし(UrErrorMessages.該当データなし),
-        編集後更新指示(DbzErrorMessages.編集後更新指示);
+        編集後更新指示(DbzErrorMessages.編集後更新指示),
+        削除不可(UrErrorMessages.削除不可, "既に割り当てられてる審査会委員の");
 
         private final Message message;
 
