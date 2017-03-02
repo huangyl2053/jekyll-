@@ -76,6 +76,19 @@ public class SoNoTaKikanGuideHandler {
     }
 
     /**
+     * その他機関選択ガイドをクリア処理します。
+     */
+    public void clear() {
+        div.getTxtSonotaKikanCodefrom().clearValue();
+        div.getTxtSonotaKikanCodeto().clearValue();
+        div.getRadHaisi().setSelectedKey(含まない);
+        div.getTxtSonotaKikanName().clearValue();
+        set調査委託先区();
+        div.getTxtMaxDisp().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+    }
+
+    /**
      * その他機関選択ガイド一覧データを作成処理します。
      *
      * @param businessList その他機関情報のビジネスリスト

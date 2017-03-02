@@ -174,6 +174,19 @@ public class ShinsakaiIinJohoManager {
     }
 
     /**
+     * 審査会委員の使用状況を取得する。
+     *
+     * @param parameter ShinsakaiIinJohoMapperParameter
+     * @return boolean 審査会委員の使用状況
+     */
+    @Transaction
+    public boolean is審査会委員使用中(ShinsakaiIinJohoMapperParameter parameter) {
+        IShinsakaiIinJohoMapper mapper = mapperProvider.create(IShinsakaiIinJohoMapper.class);
+
+        return mapper.is審査会委員使用中(parameter);
+    }
+
+    /**
      * 主キーに合致する介護認定審査会委員情報を返します。
      *
      * @param 介護認定審査会委員情報検索条件 介護認定審査会委員情報検索条件
