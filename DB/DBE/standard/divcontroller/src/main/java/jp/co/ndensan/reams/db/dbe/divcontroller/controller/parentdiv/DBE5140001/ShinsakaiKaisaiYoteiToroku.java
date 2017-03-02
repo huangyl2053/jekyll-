@@ -948,6 +948,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         div.getBtnDayAfter().setDisabled(true);
         div.getBtnClear().setDisabled(true);
         div.getBtnToroku().setDisabled(true);
+        div.getTxtYearMonth().clearValue();
         List<dgKaisaiYoteiNyuryokuran_Row> rowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
         for (dgKaisaiYoteiNyuryokuran_Row row : rowList) {
             row.getKaisaiGogitai1().setValue(RString.EMPTY);
