@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.message;
 
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -39,7 +38,9 @@ public enum DbeQuestionMessages implements IMessageGettable {
     主治医意見書登録完了申請者ですが割付解除(19, "主治医意見書登録完了申請者ですが割付解除を行いますか？"),
     取下区分の更新可否確認(20, "取下区分を上書きします。よろしいですか？"),
     審査会資料作成済みイメージ_削除確認(21, "審査会資料を作成済みですが、イメージの削除処理へ進みますか？"),
-    審査会割付完了申請者ですが割付解除(22, "審査会割付完了申請者ですが割付解除を行いますか？");
+    審査会割付完了申請者ですが割付解除(22, "審査会割付完了申請者ですが割付解除を行いますか？"),
+    審査会予定_中止(23, "審査会予定を「中止」で登録しますがよろしいですか？"),
+    審査会予定_中止解除(24, "審査会予定中止を「解除」しますがよろしいですか？");
 
     private final Message message;
 

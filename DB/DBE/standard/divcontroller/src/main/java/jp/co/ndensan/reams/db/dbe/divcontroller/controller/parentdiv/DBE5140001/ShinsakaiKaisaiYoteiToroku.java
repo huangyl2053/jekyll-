@@ -76,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 
 /**
  *
@@ -116,8 +117,14 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_登録 = new RString("登録");
     private static final RString モード_中止 = new RString("中止");
     private static final RString モード_週COPY = new RString("週COPY");
+    private static final RString 開催状況_中止 = ShinsakaiShinchokuJokyo.中止.getコード();
+    private static final RString 開催状況_未開催 = ShinsakaiShinchokuJokyo.未開催.getコード();
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+    private static final QuestionMessage CHUSHIMESSAGE = new QuestionMessage(DbeQuestionMessages.審査会予定_中止.getMessage().getCode(),
+            DbeQuestionMessages.審査会予定_中止.getMessage().evaluate());
+    private static final QuestionMessage CHUSHIMESSAGE_CANCEL = new QuestionMessage(DbeQuestionMessages.審査会予定_中止解除.getMessage().getCode(),
+            DbeQuestionMessages.審査会予定_中止解除.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
             UrQuestionMessages.保存の確認.getMessage().evaluate());
     private static final QuestionMessage SAKUJOMESSAGE = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
@@ -367,7 +374,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
+            return get中止メッセージ(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai1());
         }
         モード = モード_中止;
         set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai1());
@@ -388,7 +395,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
+            return get中止メッセージ(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai2());
         }
         モード = モード_中止;
         set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai2());
@@ -409,7 +416,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
+            return get中止メッセージ(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai3());
         }
         モード = モード_中止;
         set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai3());
@@ -430,10 +437,27 @@ public class ShinsakaiKaisaiYoteiToroku {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
+            return get中止メッセージ(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai4());
         }
         モード = モード_中止;
         set中止Or未開催(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai4());
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> get中止メッセージ(TextBox kaisaiGogitai) {
+        RString 開催時間 = getFormat時間枠(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiTime().getValue());
+        RString 開催合議体 = new RString(kaisaiGogitai.getValue().toString());
+        for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
+            if (new RString(entity.get日付().toString()).equals(div.getTxtSeteibi().getValue().toDateString())
+                    && get検索時間枠(entity.get開始予定時刻(), entity.get終了予定時刻()).equals(開催時間)
+                    && entity.get合議体番号() == Integer.valueOf(開催合議体.toString())) {
+                if (entity.get介護認定審査会進捗状況().equals(未開催)) {
+                    return ResponseData.of(div).addMessage(CHUSHIMESSAGE).respond();
+                } else {
+                    return ResponseData.of(div).addMessage(CHUSHIMESSAGE_CANCEL).respond();
+                }
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -453,10 +477,14 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
         }
-        delete開催予定(div);
-        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
-        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-        init();
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            delete開催予定(div);
+            List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+            init();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -476,10 +504,14 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
         }
-        delete開催予定(div);
-        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
-        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-        init();
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            delete開催予定(div);
+            List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+            init();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -499,10 +531,14 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
         }
-        delete開催予定(div);
-        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
-        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-        init();
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            delete開催予定(div);
+            List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+            init();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -522,11 +558,16 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SAKUJOMESSAGE).respond();
         }
-        delete開催予定(div);
-        List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
-        div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-        init();
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            delete開催予定(div);
+            List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+            init();
+        }
         return ResponseData.of(div).respond();
+
     }
 
     /**
@@ -536,7 +577,8 @@ public class ShinsakaiKaisaiYoteiToroku {
      */
     private void delete開催予定(ShinsakaiKaisaiYoteiTorokuDiv div) {
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
-                = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class
+                );
 
         dgKaisaiYoteiNyuryokuran_Row row = div.getDgKaisaiYoteiNyuryokuran().getActiveRow();
         RString 合議体番号 = row.getKaisaiGogitai1().getValue();
@@ -850,7 +892,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getShinsakaiKaisaiYoteiIchiran()
                     .setWidth(width_1225);
 
-            div.getLblMonth2().setText(年月);
+            div.getLblMonth2()
+                    .setText(年月);
             div.getCcdKanryoMessege()
                     .setMessage(new RString(
                                     UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -934,7 +977,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void set番号(ShinsakaiKaisaiYoteiTorokuDiv div) {
         List<ShinsakaiKaisaiYoteiJohoParameter> shinkiList = new ArrayList<>();
         for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
-            if (!entity.is存在() && 審査会名称.equals(entity.get審査会名称())) {
+            if (!entity.is存在() && 審査会名称.substring(0, 4).equals(entity.get審査会名称().substring(0, 4))) {
                 shinkiList.add(entity);
             }
         }
@@ -1070,7 +1113,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         entity.set自動割当定員(yoteiJohoBusiness.get自動割当定員());
         entity.set催予定場所コード(yoteiJohoBusiness.get催予定場所コード() == null ? RString.EMPTY : yoteiJohoBusiness.get催予定場所コード());
         entity.set開催番号(yoteiJohoBusiness.get開催番号());
-        entity.set審査会名称(審査会名称);
+        entity.set審査会名称(審査会名称.replace(BATU, new RString(yoteiJohoBusiness.get合議体番号())));
         yoteiJohoEntityList2.add(entity);
     }
 
@@ -1234,13 +1277,15 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private void set中止Or未開催(TextBox kaisaiGogitai) {
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if ((new RString(DbeQuestionMessages.審査会予定_中止.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
+                || (new RString(DbeQuestionMessages.審査会予定_中止解除.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             RString 開催時間 = getFormat時間枠(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiTime().getValue());
             RString 開催合議体 = new RString(kaisaiGogitai.getValue().toString());
             set内部中止Or未開催(開催時間, 開催合議体);
-            set介護認定審査会開催予定一覧(div.getTxtSeteibi().getValue().getYearMonth().toDateString());
         }
     }
 
@@ -1251,17 +1296,41 @@ public class ShinsakaiKaisaiYoteiToroku {
                     && entity.get合議体番号() == Integer.valueOf(開催合議体.toString())) {
                 set中止Or未開催(entity);
                 break;
+
             }
         }
     }
 
     private void set中止Or未開催(ShinsakaiKaisaiYoteiJohoParameter entity) {
-        if (entity.get介護認定審査会進捗状況().equals(未開催)) {
+        Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
+                = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class
+                );
+        if (entity.get介護認定審査会進捗状況()
+                .equals(未開催)) {
+            ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(entity.get開催番号());
+            ShinsakaiKaisaiYoteiJoho yoteiJoho = models.get(key);
+            ShinsakaiKaisaiYoteiJohoBuilder builder = yoteiJoho.createBuilderForEdit();
+            builder.set介護認定審査会進捗状況(new Code(開催状況_中止));
+            yoteiJoho.toEntity().setState(EntityDataState.Modified);
+            yoteiTorokuManager.insertOrUpdate(builder.build());
             entity.set介護認定審査会進捗状況(中止);
             set変更(entity);
-        } else if (entity.get介護認定審査会進捗状況().equals(中止)) {
+            List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+            init();
+        } else if (entity.get介護認定審査会進捗状況()
+                .equals(中止)) {
+            ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(entity.get開催番号());
+            ShinsakaiKaisaiYoteiJoho yoteiJoho = models.get(key);
+            ShinsakaiKaisaiYoteiJohoBuilder builder = yoteiJoho.createBuilderForEdit();
+            builder.set介護認定審査会進捗状況(new Code(開催状況_未開催));
+            yoteiJoho.toEntity().setState(EntityDataState.Modified);
+            yoteiTorokuManager.insertOrUpdate(builder.build());
             entity.set介護認定審査会進捗状況(未開催);
             set変更(entity);
+            List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
+            div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
+            init();
         }
 
     }
