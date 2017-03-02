@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Feb 16 11:40:31 JST 2017 
+ * Thu Mar 02 22:56:13 JST 2017 
  */
 
 
@@ -34,6 +34,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private RString shinseiKubunLaw;
     private RString shinseiKubunLawCode;
     private TextBoxFlexibleDate shinseiDay;
+    private RString konkaiNijiHantei;
+    private RString konkaiNijiHanteiCode;
+    private TextBoxFlexibleDate ninteiKikanKaishi;
+    private TextBoxFlexibleDate ninteiKikanShuryo;
+    private RString ninteiKikanTukisu;
+    private TextBoxFlexibleDate nijiHanteiDate;
     private RString torisageKubunTx;
     private RString torisageKubunCode;
     private TextBoxFlexibleDate zenkaiYukoKikanShuryoDay;
@@ -41,17 +47,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     private RString konkaiIchijiHantei;
     private RString zenkaiNijiHantei;
     private RString zenkaiNijiHanteiCode;
-    private RString konkaiNijiHantei;
-    private RString konkaiNijiHanteiCode;
     private RString hanteiKekka;
     private RString hanteiKekkaCode;
-    private TextBoxFlexibleDate nijiHanteiDate;
     private RString tokuteiShippei;
     private RString jotaizo;
     private RString jotaizoCode;
-    private TextBoxFlexibleDate ninteiKikanKaishi;
-    private TextBoxFlexibleDate ninteiKikanShuryo;
-    private RString ninteiKikanTukisu;
     private Boolean shinsakaiMemo;
     private Boolean shinsakaiIken;
     private RString shinsakaiIkenShurui;
@@ -81,6 +81,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shinseiKubunLaw = RString.EMPTY;
         this.shinseiKubunLawCode = RString.EMPTY;
         this.shinseiDay = new TextBoxFlexibleDate();
+        this.konkaiNijiHantei = RString.EMPTY;
+        this.konkaiNijiHanteiCode = RString.EMPTY;
+        this.ninteiKikanKaishi = new TextBoxFlexibleDate();
+        this.ninteiKikanShuryo = new TextBoxFlexibleDate();
+        this.ninteiKikanTukisu = RString.EMPTY;
+        this.nijiHanteiDate = new TextBoxFlexibleDate();
         this.torisageKubunTx = RString.EMPTY;
         this.torisageKubunCode = RString.EMPTY;
         this.zenkaiYukoKikanShuryoDay = new TextBoxFlexibleDate();
@@ -88,17 +94,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.konkaiIchijiHantei = RString.EMPTY;
         this.zenkaiNijiHantei = RString.EMPTY;
         this.zenkaiNijiHanteiCode = RString.EMPTY;
-        this.konkaiNijiHantei = RString.EMPTY;
-        this.konkaiNijiHanteiCode = RString.EMPTY;
         this.hanteiKekka = RString.EMPTY;
         this.hanteiKekkaCode = RString.EMPTY;
-        this.nijiHanteiDate = new TextBoxFlexibleDate();
         this.tokuteiShippei = RString.EMPTY;
         this.jotaizo = RString.EMPTY;
         this.jotaizoCode = RString.EMPTY;
-        this.ninteiKikanKaishi = new TextBoxFlexibleDate();
-        this.ninteiKikanShuryo = new TextBoxFlexibleDate();
-        this.ninteiKikanTukisu = RString.EMPTY;
         this.shinsakaiMemo = false;
         this.shinsakaiIken = false;
         this.shinsakaiIkenShurui = RString.EMPTY;
@@ -125,6 +125,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseiKubunLaw", shinseiKubunLaw);
         this.setOriginalData("shinseiKubunLawCode", shinseiKubunLawCode);
         this.setOriginalData("shinseiDay", shinseiDay);
+        this.setOriginalData("konkaiNijiHantei", konkaiNijiHantei);
+        this.setOriginalData("konkaiNijiHanteiCode", konkaiNijiHanteiCode);
+        this.setOriginalData("ninteiKikanKaishi", ninteiKikanKaishi);
+        this.setOriginalData("ninteiKikanShuryo", ninteiKikanShuryo);
+        this.setOriginalData("ninteiKikanTukisu", ninteiKikanTukisu);
+        this.setOriginalData("nijiHanteiDate", nijiHanteiDate);
         this.setOriginalData("torisageKubunTx", torisageKubunTx);
         this.setOriginalData("torisageKubunCode", torisageKubunCode);
         this.setOriginalData("zenkaiYukoKikanShuryoDay", zenkaiYukoKikanShuryoDay);
@@ -132,17 +138,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("konkaiIchijiHantei", konkaiIchijiHantei);
         this.setOriginalData("zenkaiNijiHantei", zenkaiNijiHantei);
         this.setOriginalData("zenkaiNijiHanteiCode", zenkaiNijiHanteiCode);
-        this.setOriginalData("konkaiNijiHantei", konkaiNijiHantei);
-        this.setOriginalData("konkaiNijiHanteiCode", konkaiNijiHanteiCode);
         this.setOriginalData("hanteiKekka", hanteiKekka);
         this.setOriginalData("hanteiKekkaCode", hanteiKekkaCode);
-        this.setOriginalData("nijiHanteiDate", nijiHanteiDate);
         this.setOriginalData("tokuteiShippei", tokuteiShippei);
         this.setOriginalData("jotaizo", jotaizo);
         this.setOriginalData("jotaizoCode", jotaizoCode);
-        this.setOriginalData("ninteiKikanKaishi", ninteiKikanKaishi);
-        this.setOriginalData("ninteiKikanShuryo", ninteiKikanShuryo);
-        this.setOriginalData("ninteiKikanTukisu", ninteiKikanTukisu);
         this.setOriginalData("shinsakaiMemo", shinsakaiMemo);
         this.setOriginalData("shinsakaiIken", shinsakaiIken);
         this.setOriginalData("shinsakaiIkenShurui", shinsakaiIkenShurui);
@@ -159,7 +159,7 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("henkoMaeTorisageKubunCode", henkoMaeTorisageKubunCode);
     }
 
-    public dgTaishoshaIchiran_Row(RString jotai, RString shinsakaiJunjo, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString shimei, RString hihoKubun, RString shinseiKubunShinseiji, RString shinseiKubunShinseijiCode, RString shinseiKubunLaw, RString shinseiKubunLawCode, TextBoxFlexibleDate shinseiDay, RString torisageKubunTx, RString torisageKubunCode, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString zenkaiIchijiHantei, RString konkaiIchijiHantei, RString zenkaiNijiHantei, RString zenkaiNijiHanteiCode, RString konkaiNijiHantei, RString konkaiNijiHanteiCode, RString hanteiKekka, RString hanteiKekkaCode, TextBoxFlexibleDate nijiHanteiDate, RString tokuteiShippei, RString jotaizo, RString jotaizoCode, TextBoxFlexibleDate ninteiKikanKaishi, TextBoxFlexibleDate ninteiKikanShuryo, RString ninteiKikanTukisu, Boolean shinsakaiMemo, Boolean shinsakaiIken, RString shinsakaiIkenShurui, RString ichijiHanteiKekkaHenkoRiyu, RString seiNenGaBi, RString hidMemo, RString hidIken, RString hidIkenCode, RString hidIchiHenKou, RString md5, RString shinseishoKanriNo, RString ichijiHantei, RString koroshoIfShikibetsuCode, RString henkoMaeTorisageKubunCode) {
+    public dgTaishoshaIchiran_Row(RString jotai, RString shinsakaiJunjo, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString shimei, RString hihoKubun, RString shinseiKubunShinseiji, RString shinseiKubunShinseijiCode, RString shinseiKubunLaw, RString shinseiKubunLawCode, TextBoxFlexibleDate shinseiDay, RString konkaiNijiHantei, RString konkaiNijiHanteiCode, TextBoxFlexibleDate ninteiKikanKaishi, TextBoxFlexibleDate ninteiKikanShuryo, RString ninteiKikanTukisu, TextBoxFlexibleDate nijiHanteiDate, RString torisageKubunTx, RString torisageKubunCode, TextBoxFlexibleDate zenkaiYukoKikanShuryoDay, RString zenkaiIchijiHantei, RString konkaiIchijiHantei, RString zenkaiNijiHantei, RString zenkaiNijiHanteiCode, RString hanteiKekka, RString hanteiKekkaCode, RString tokuteiShippei, RString jotaizo, RString jotaizoCode, Boolean shinsakaiMemo, Boolean shinsakaiIken, RString shinsakaiIkenShurui, RString ichijiHanteiKekkaHenkoRiyu, RString seiNenGaBi, RString hidMemo, RString hidIken, RString hidIkenCode, RString hidIchiHenKou, RString md5, RString shinseishoKanriNo, RString ichijiHantei, RString koroshoIfShikibetsuCode, RString henkoMaeTorisageKubunCode) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shinsakaiJunjo", shinsakaiJunjo);
@@ -173,6 +173,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shinseiKubunLaw", shinseiKubunLaw);
         this.setOriginalData("shinseiKubunLawCode", shinseiKubunLawCode);
         this.setOriginalData("shinseiDay", shinseiDay);
+        this.setOriginalData("konkaiNijiHantei", konkaiNijiHantei);
+        this.setOriginalData("konkaiNijiHanteiCode", konkaiNijiHanteiCode);
+        this.setOriginalData("ninteiKikanKaishi", ninteiKikanKaishi);
+        this.setOriginalData("ninteiKikanShuryo", ninteiKikanShuryo);
+        this.setOriginalData("ninteiKikanTukisu", ninteiKikanTukisu);
+        this.setOriginalData("nijiHanteiDate", nijiHanteiDate);
         this.setOriginalData("torisageKubunTx", torisageKubunTx);
         this.setOriginalData("torisageKubunCode", torisageKubunCode);
         this.setOriginalData("zenkaiYukoKikanShuryoDay", zenkaiYukoKikanShuryoDay);
@@ -180,17 +186,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("konkaiIchijiHantei", konkaiIchijiHantei);
         this.setOriginalData("zenkaiNijiHantei", zenkaiNijiHantei);
         this.setOriginalData("zenkaiNijiHanteiCode", zenkaiNijiHanteiCode);
-        this.setOriginalData("konkaiNijiHantei", konkaiNijiHantei);
-        this.setOriginalData("konkaiNijiHanteiCode", konkaiNijiHanteiCode);
         this.setOriginalData("hanteiKekka", hanteiKekka);
         this.setOriginalData("hanteiKekkaCode", hanteiKekkaCode);
-        this.setOriginalData("nijiHanteiDate", nijiHanteiDate);
         this.setOriginalData("tokuteiShippei", tokuteiShippei);
         this.setOriginalData("jotaizo", jotaizo);
         this.setOriginalData("jotaizoCode", jotaizoCode);
-        this.setOriginalData("ninteiKikanKaishi", ninteiKikanKaishi);
-        this.setOriginalData("ninteiKikanShuryo", ninteiKikanShuryo);
-        this.setOriginalData("ninteiKikanTukisu", ninteiKikanTukisu);
         this.setOriginalData("shinsakaiMemo", shinsakaiMemo);
         this.setOriginalData("shinsakaiIken", shinsakaiIken);
         this.setOriginalData("shinsakaiIkenShurui", shinsakaiIkenShurui);
@@ -217,6 +217,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shinseiKubunLaw = shinseiKubunLaw;
         this.shinseiKubunLawCode = shinseiKubunLawCode;
         this.shinseiDay = shinseiDay;
+        this.konkaiNijiHantei = konkaiNijiHantei;
+        this.konkaiNijiHanteiCode = konkaiNijiHanteiCode;
+        this.ninteiKikanKaishi = ninteiKikanKaishi;
+        this.ninteiKikanShuryo = ninteiKikanShuryo;
+        this.ninteiKikanTukisu = ninteiKikanTukisu;
+        this.nijiHanteiDate = nijiHanteiDate;
         this.torisageKubunTx = torisageKubunTx;
         this.torisageKubunCode = torisageKubunCode;
         this.zenkaiYukoKikanShuryoDay = zenkaiYukoKikanShuryoDay;
@@ -224,17 +230,11 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.konkaiIchijiHantei = konkaiIchijiHantei;
         this.zenkaiNijiHantei = zenkaiNijiHantei;
         this.zenkaiNijiHanteiCode = zenkaiNijiHanteiCode;
-        this.konkaiNijiHantei = konkaiNijiHantei;
-        this.konkaiNijiHanteiCode = konkaiNijiHanteiCode;
         this.hanteiKekka = hanteiKekka;
         this.hanteiKekkaCode = hanteiKekkaCode;
-        this.nijiHanteiDate = nijiHanteiDate;
         this.tokuteiShippei = tokuteiShippei;
         this.jotaizo = jotaizo;
         this.jotaizoCode = jotaizoCode;
-        this.ninteiKikanKaishi = ninteiKikanKaishi;
-        this.ninteiKikanShuryo = ninteiKikanShuryo;
-        this.ninteiKikanTukisu = ninteiKikanTukisu;
         this.shinsakaiMemo = shinsakaiMemo;
         this.shinsakaiIken = shinsakaiIken;
         this.shinsakaiIkenShurui = shinsakaiIkenShurui;
@@ -299,6 +299,30 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         return shinseiDay;
     }
 
+    public RString getKonkaiNijiHantei() {
+        return konkaiNijiHantei;
+    }
+
+    public RString getKonkaiNijiHanteiCode() {
+        return konkaiNijiHanteiCode;
+    }
+
+    public TextBoxFlexibleDate getNinteiKikanKaishi() {
+        return ninteiKikanKaishi;
+    }
+
+    public TextBoxFlexibleDate getNinteiKikanShuryo() {
+        return ninteiKikanShuryo;
+    }
+
+    public RString getNinteiKikanTukisu() {
+        return ninteiKikanTukisu;
+    }
+
+    public TextBoxFlexibleDate getNijiHanteiDate() {
+        return nijiHanteiDate;
+    }
+
     public RString getTorisageKubunTx() {
         return torisageKubunTx;
     }
@@ -327,24 +351,12 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         return zenkaiNijiHanteiCode;
     }
 
-    public RString getKonkaiNijiHantei() {
-        return konkaiNijiHantei;
-    }
-
-    public RString getKonkaiNijiHanteiCode() {
-        return konkaiNijiHanteiCode;
-    }
-
     public RString getHanteiKekka() {
         return hanteiKekka;
     }
 
     public RString getHanteiKekkaCode() {
         return hanteiKekkaCode;
-    }
-
-    public TextBoxFlexibleDate getNijiHanteiDate() {
-        return nijiHanteiDate;
     }
 
     public RString getTokuteiShippei() {
@@ -357,18 +369,6 @@ public class dgTaishoshaIchiran_Row extends DataRow {
 
     public RString getJotaizoCode() {
         return jotaizoCode;
-    }
-
-    public TextBoxFlexibleDate getNinteiKikanKaishi() {
-        return ninteiKikanKaishi;
-    }
-
-    public TextBoxFlexibleDate getNinteiKikanShuryo() {
-        return ninteiKikanShuryo;
-    }
-
-    public RString getNinteiKikanTukisu() {
-        return ninteiKikanTukisu;
     }
 
     public Boolean getShinsakaiMemo() {
@@ -487,6 +487,36 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.shinseiDay = shinseiDay;
     }
 
+    public void setKonkaiNijiHantei(RString konkaiNijiHantei) {
+        this.setOriginalData("konkaiNijiHantei", konkaiNijiHantei);
+        this.konkaiNijiHantei = konkaiNijiHantei;
+    }
+
+    public void setKonkaiNijiHanteiCode(RString konkaiNijiHanteiCode) {
+        this.setOriginalData("konkaiNijiHanteiCode", konkaiNijiHanteiCode);
+        this.konkaiNijiHanteiCode = konkaiNijiHanteiCode;
+    }
+
+    public void setNinteiKikanKaishi(TextBoxFlexibleDate ninteiKikanKaishi) {
+        this.setOriginalData("ninteiKikanKaishi", ninteiKikanKaishi);
+        this.ninteiKikanKaishi = ninteiKikanKaishi;
+    }
+
+    public void setNinteiKikanShuryo(TextBoxFlexibleDate ninteiKikanShuryo) {
+        this.setOriginalData("ninteiKikanShuryo", ninteiKikanShuryo);
+        this.ninteiKikanShuryo = ninteiKikanShuryo;
+    }
+
+    public void setNinteiKikanTukisu(RString ninteiKikanTukisu) {
+        this.setOriginalData("ninteiKikanTukisu", ninteiKikanTukisu);
+        this.ninteiKikanTukisu = ninteiKikanTukisu;
+    }
+
+    public void setNijiHanteiDate(TextBoxFlexibleDate nijiHanteiDate) {
+        this.setOriginalData("nijiHanteiDate", nijiHanteiDate);
+        this.nijiHanteiDate = nijiHanteiDate;
+    }
+
     public void setTorisageKubunTx(RString torisageKubunTx) {
         this.setOriginalData("torisageKubunTx", torisageKubunTx);
         this.torisageKubunTx = torisageKubunTx;
@@ -522,16 +552,6 @@ public class dgTaishoshaIchiran_Row extends DataRow {
         this.zenkaiNijiHanteiCode = zenkaiNijiHanteiCode;
     }
 
-    public void setKonkaiNijiHantei(RString konkaiNijiHantei) {
-        this.setOriginalData("konkaiNijiHantei", konkaiNijiHantei);
-        this.konkaiNijiHantei = konkaiNijiHantei;
-    }
-
-    public void setKonkaiNijiHanteiCode(RString konkaiNijiHanteiCode) {
-        this.setOriginalData("konkaiNijiHanteiCode", konkaiNijiHanteiCode);
-        this.konkaiNijiHanteiCode = konkaiNijiHanteiCode;
-    }
-
     public void setHanteiKekka(RString hanteiKekka) {
         this.setOriginalData("hanteiKekka", hanteiKekka);
         this.hanteiKekka = hanteiKekka;
@@ -540,11 +560,6 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setHanteiKekkaCode(RString hanteiKekkaCode) {
         this.setOriginalData("hanteiKekkaCode", hanteiKekkaCode);
         this.hanteiKekkaCode = hanteiKekkaCode;
-    }
-
-    public void setNijiHanteiDate(TextBoxFlexibleDate nijiHanteiDate) {
-        this.setOriginalData("nijiHanteiDate", nijiHanteiDate);
-        this.nijiHanteiDate = nijiHanteiDate;
     }
 
     public void setTokuteiShippei(RString tokuteiShippei) {
@@ -560,21 +575,6 @@ public class dgTaishoshaIchiran_Row extends DataRow {
     public void setJotaizoCode(RString jotaizoCode) {
         this.setOriginalData("jotaizoCode", jotaizoCode);
         this.jotaizoCode = jotaizoCode;
-    }
-
-    public void setNinteiKikanKaishi(TextBoxFlexibleDate ninteiKikanKaishi) {
-        this.setOriginalData("ninteiKikanKaishi", ninteiKikanKaishi);
-        this.ninteiKikanKaishi = ninteiKikanKaishi;
-    }
-
-    public void setNinteiKikanShuryo(TextBoxFlexibleDate ninteiKikanShuryo) {
-        this.setOriginalData("ninteiKikanShuryo", ninteiKikanShuryo);
-        this.ninteiKikanShuryo = ninteiKikanShuryo;
-    }
-
-    public void setNinteiKikanTukisu(RString ninteiKikanTukisu) {
-        this.setOriginalData("ninteiKikanTukisu", ninteiKikanTukisu);
-        this.ninteiKikanTukisu = ninteiKikanTukisu;
     }
 
     public void setShinsakaiMemo(Boolean shinsakaiMemo) {

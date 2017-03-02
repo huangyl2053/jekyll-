@@ -74,8 +74,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShinsakaiKekkaToroku {
 
     private static final RString 認定調査状況ダイアログ_照会モード = new RString("1");
-    private static final RString 審査会メモ定型文GroupCode = new RString("5101");
-    private static final RString 意見書定型文GroupCode = new RString("5201");
+    private static final RString 審査会メモ定型文GroupCode = new RString("5102");
+    private static final RString 審査会意見定型文GroupCode = new RString("5201");
     private static final RString 一次判定結果変更理由定型文GroupCode = new RString("5103");
     private static final Code 二次判定結果入力方法_画面入力 = new Code("1");
     private static final RString 一_五次判定ダイアログ_照会モード = new RString("照会");
@@ -218,7 +218,7 @@ public class ShinsakaiKekkaToroku {
     private ResponseData<ShinsakaiKekkaTorokuDiv> checkCanKakuteiIfPossibleReturnNull(ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row row, OperationMode mode) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         if (mode.is更新()) {
-            if (Objects.equals(row.getHenkoMaeTorisageKubunCode(), handler.calculateTorisageKubunCodeBy個別入力欄())) {
+            if (!Objects.equals(row.getHenkoMaeTorisageKubunCode(), handler.calculateTorisageKubunCodeBy個別入力欄())) {
                 return ResponseData.of(div)
                         .addMessage(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage())
                         .respond();
@@ -509,36 +509,39 @@ public class ShinsakaiKekkaToroku {
      * @param div 介護認定審査会審査結果登録Div
      * @return responseData
      */
-    public ResponseData onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
+    public ResponseData<ShinsakaiKekkaTorokuDiv> onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
+        YokaigoJotaiKubun09 今回二次判定 = handler.get今回二次判定();
+        handler.set判定結果DDLFrom(今回二次判定);
+        if (ShinsakaiKekkaTorokuHandler.is要支援要介護(今回二次判定) || 今回二次判定 == YokaigoJotaiKubun09.なし) {
+            return onChange_NijiHantei_when要介護Or要支援(今回二次判定, div, handler);
+        }
+        handler.set状態像Deisabled(true);
+        div.getDdlNinteiKikanMonth().setDisabled(true);
+        div.getDdlNinteiKikanMonth().setSelectedKey(div.getDdlNinteiKikanMonth().getDataSource().get(0).getKey());
+        div.getTxtNinteiKikanFrom().setDisabled(true);
+        div.getTxtNinteiKikanFrom().clearValue();
+        div.getTxtNinteiKikanTo().setDisabled(true);
+        div.getTxtNinteiKikanTo().clearValue();
+        return ResponseData.of(div).respond();
+    }
+
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> onChange_NijiHantei_when要介護Or要支援(
+            YokaigoJotaiKubun09 今回二次判定, ShinsakaiKekkaTorokuDiv div, ShinsakaiKekkaTorokuHandler handler) {
+        handler.set認定期間Disabled(false);
         handler.set認定期間月数from申請内容();
         handler.change有効月数に関連するコントロール();
         handler.set認定期間開始日();
         handler.set認定期間終了日();
-
-        handler.set判定結果DDLfrom二次判定();
-
-        if (handler.get今回二次判定() == YokaigoJotaiKubun09.非該当) {
-            handler.set認定期間Deisabled(true);
-        } else {
-            handler.set認定期間Deisabled(false);
-        }
-
-        if (handler.get今回二次判定() == YokaigoJotaiKubun09.要介護1) {
-            handler.set状態像Deisabled(false);
-        } else {
-            handler.set状態像Deisabled(true);
-        }
-
+        handler.set状態像Deisabled(今回二次判定 != YokaigoJotaiKubun09.要介護1);
         NinteiShinseiKubunShinsei 申請時申請区分 = handler.get申請時申請区分();
         YokaigoJotaiKubun09 前回二次判定 = handler.get前回二次判定();
         FlexibleDate 前回有効期間終了日 = handler.get前回有効期間終了日();
-        YokaigoJotaiKubun09 今回二次判定 = handler.get今回二次判定();
         FlexibleDate 申請日 = div.getTxtShinseiDay().getValue();
-        NinteiShinseiKubunHorei 法令申請区分 = NinteiShinseiKubunHoreiCalculator.calculate(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
-        TorisageKubun 取下区分 = TorisageKubun.toValue(申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日);
-        handler.set法令申請区分(法令申請区分);
-        handler.set取下区分(取下区分);
+        handler.set法令申請区分(NinteiShinseiKubunHoreiCalculator.calculate(
+                申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日));
+        handler.set取下区分(TorisageKubun.toValue(
+                申請時申請区分, 前回二次判定, 前回有効期間終了日, 今回二次判定, 申請日));
         return ResponseData.of(div).respond();
     }
 
@@ -589,14 +592,14 @@ public class ShinsakaiKekkaToroku {
     }
 
     /**
-     * 意見書定型文ダイアログ表示前、データを設定します。
+     * 審査会意見定型文ダイアログ表示前、データを設定します。
      *
      * @param div 介護認定審査会審査結果登録Div
      * @return ResponseData
      */
     public ResponseData<ShinsakaiKekkaTorokuDiv> onBefore_btnIkenTeikeibunGuide(ShinsakaiKekkaTorokuDiv div) {
         div.setHdnSubGyomuCd(GyomuCode.DB介護保険.value());
-        div.setHdnGroupCd(意見書定型文GroupCode);
+        div.setHdnGroupCd(審査会意見定型文GroupCode);
         return ResponseData.of(div).respond();
     }
 

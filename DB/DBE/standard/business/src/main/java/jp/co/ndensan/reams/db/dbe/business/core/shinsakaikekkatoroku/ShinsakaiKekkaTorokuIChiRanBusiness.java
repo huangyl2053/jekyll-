@@ -93,7 +93,7 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
      * @return 被保区分
      */
     public RString get被保区分() {
-        return HihokenshaKubunCode.to名称OrDefault(entity.get被保険者区分コード(), RString.EMPTY);
+        return HihokenshaKubunCode.to略称2OrDefault(entity.get被保険者区分コード(), RString.EMPTY);
     }
 
     /**

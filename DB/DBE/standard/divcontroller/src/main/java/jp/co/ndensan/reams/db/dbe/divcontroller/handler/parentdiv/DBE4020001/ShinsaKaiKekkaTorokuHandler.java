@@ -92,6 +92,9 @@ public class ShinsaKaiKekkaTorokuHandler {
         div.getTxtMaxKensu().setMaxLength(Integer.toString(div.getTxtMaxKensu().getMaxValue().intValue()).length());
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        二次判定モード();
+        initTextOf処理を進めるボタン();
+        setDisplayOCR結果登録ボタン(uses審査会結果登録OCR());
         if (is完了のみの登録State()) {
             div.getRadTaishosyaJotai().setDisabled(true);
             div.getRadTaishosyaJotai().setSelectedKey(KEY1);
@@ -105,9 +108,6 @@ public class ShinsaKaiKekkaTorokuHandler {
         } else {
             setDisabled登録ボタンfrom選択状態();
         }
-        二次判定モード();
-        initTextOf処理を進めるボタン();
-        setDisplayOCR結果登録ボタン(uses審査会結果登録OCR());
     }
 
     public static boolean is完了のみの登録State() {
@@ -164,7 +164,7 @@ public class ShinsaKaiKekkaTorokuHandler {
      * OCR結果登録共通ボタンの表示を制御します。
      */
     public void setDisabled登録ボタンfrom選択状態() {
-        boolean isDisabled登録ボタン = is未処理Selected(this.div) || !hasAnyData(this.div);
+        boolean isDisabled登録ボタン = !hasAnyData(this.div);
         if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELD_NAME_審査会結果登録共通ボタン, true);
         } else {
@@ -172,10 +172,6 @@ public class ShinsaKaiKekkaTorokuHandler {
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, isDisabled登録ボタン);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_処理を進めるボタン, isDisabled登録ボタン);
-    }
-
-    private static boolean is未処理Selected(ShinsaKaiKekkaTorokuDiv div) {
-        return KEY0.equals(div.getRadTaishosyaJotai().getSelectedKey());
     }
 
     private static boolean hasAnyData(ShinsaKaiKekkaTorokuDiv div) {

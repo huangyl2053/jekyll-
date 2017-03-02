@@ -134,6 +134,12 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get申請区分_法令(),
                     business.get申請区分_法令コード(),
                     認定申請日,
+                    business.get今回二次判定(),
+                    business.get二次判定コード(),
+                    認定期間開始,
+                    認定期間終了,
+                    business.get認定期間月数(),
+                    二次判定日,
                     business.get取下区分名称(),
                     business.get取下区分コード(),
                     前回有効期間終了日,
@@ -141,17 +147,11 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get今回一次判定(),
                     business.get前回二次判定(),
                     business.get前回二次判定コード(),
-                    business.get今回二次判定(),
-                    business.get二次判定コード(),
                     business.get判定結果(),
                     business.get判定結果コード(),
-                    二次判定日,
                     business.get特定疾病(),
                     business.get状態像(),
                     business.get状態像コード(),
-                    認定期間開始,
-                    認定期間終了,
-                    business.get認定期間月数(),
                     メモフラグ,
                     意見フラグ,
                     business.get審査会意見種類(),
@@ -642,7 +642,6 @@ public class ShinsakaiKekkaTorokuHandler {
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護4.getコード(), YokaigoJotaiKubun09.要介護4.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護5.getコード(), YokaigoJotaiKubun09.要介護5.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.非該当.getコード(), YokaigoJotaiKubun09.非該当.get名称()));
-        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.再調査.getコード(), YokaigoJotaiKubun09.再調査.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.取消.getコード(), YokaigoJotaiKubun09.取消.get名称()));
 
         div.getKobetsuHyojiArea().getDdlNijiHantei().setDataSource(二次判定リスト);
@@ -803,11 +802,19 @@ public class ShinsakaiKekkaTorokuHandler {
     /**
      * 「二次判定」ドロップダウンリストの選択変更の場合、判定結果を設定します。
      *
+     * @param 今回二次判定 二次判定結果
+     */
+    public void set判定結果DDLFrom(YokaigoJotaiKubun09 今回二次判定) {
+        RString selectedKey = (今回二次判定 == YokaigoJotaiKubun09.再調査 || 今回二次判定 == YokaigoJotaiKubun09.なし)
+                ? RString.EMPTY : HanteiKekkaCode.認定.getコード();
+        div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(selectedKey);
+    }
+
+    /**
+     * 「二次判定」ドロップダウンリストの選択変更の場合、判定結果を設定します。
      */
     public void set判定結果DDLfrom二次判定() {
-        YokaigoJotaiKubun09 今回二次判定 = get今回二次判定();
-        RString selectedKey = (is要支援要介護(今回二次判定)) ? HanteiKekkaCode.認定.getコード() : RString.EMPTY;
-        div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(selectedKey);
+        this.set判定結果DDLFrom(get今回二次判定());
     }
 
     /**
@@ -966,7 +973,7 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      * @param isDisabled {@code true}のとき非活性
      */
-    public void set認定期間Deisabled(boolean isDisabled) {
+    public void set認定期間Disabled(boolean isDisabled) {
         div.getTxtNinteiKikanFrom().setDisabled(isDisabled);
         div.getTxtNinteiKikanTo().setDisabled(isDisabled);
     }
@@ -1107,8 +1114,7 @@ public class ShinsakaiKekkaTorokuHandler {
         return Integer.compare(前回二次判定code, 今回二次判定code);
     }
 
-    private static boolean is要支援要介護(YokaigoJotaiKubun09 判定内容) {
-        // TODO 再調査の取り扱い
+    public static boolean is要支援要介護(YokaigoJotaiKubun09 判定内容) {
         return !(判定内容 == YokaigoJotaiKubun09.なし
                 || 判定内容 == YokaigoJotaiKubun09.再調査
                 || 判定内容 == YokaigoJotaiKubun09.取消

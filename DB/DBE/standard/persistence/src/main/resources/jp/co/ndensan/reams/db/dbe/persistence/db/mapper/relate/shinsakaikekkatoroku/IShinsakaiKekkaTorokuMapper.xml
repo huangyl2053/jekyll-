@@ -400,8 +400,8 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho"
                 ON  "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT4102NinteiKekkaJoho" DbT4102
-                ON  DbT4102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT5102NinteiKekkaJoho" DbT5102
+                ON  DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
                 ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
@@ -432,12 +432,12 @@
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="状態区分 == 1" >
-            AND (DbT4102."nijiHanteiKekkaInputYMD" is NULL
-            OR  DbT4102."nijiHanteiKekkaInputYMD" = '')
+            AND (DbT5102."nijiHanteiKekkaInputYMD" is NULL
+            OR  DbT5102."nijiHanteiKekkaInputYMD" = '')
         </if>
         <if test="状態区分 == 2" >
-            AND (DbT4102."nijiHanteiKekkaInputYMD" is NOT NULL
-            AND  DbT4102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> '')
+            AND (DbT5102."nijiHanteiKekkaInputYMD" is NOT NULL
+            AND  DbT5102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> '')
         </if>
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
@@ -466,12 +466,12 @@
             DbT5501."shinsakaiKaishiYoteiTime",
             DbT5501."shinsakaiKaisaiNo",
             DbT5501."gogitaiNo",
-            DbT4102."nijiHanteiYMD",
-            DbT4102."nijiHanteiKekkaInputYMD",
-            DbT4102."nijiHanteiKekkaInputHoho",
-            DbT4102."nijiHanteiYokaigoJotaiKubunCode",
-            DbT4102."nijiHanteiNinteiYukoKikan",
-            DbT4102."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo_temp,
+            DbT5102."nijiHanteiYMD",
+            DbT5102."nijiHanteiKekkaInputYMD",
+            DbT5102."nijiHanteiKekkaInputHoho",
+            DbT5102."nijiHanteiYokaigoJotaiKubunCode",
+            DbT5102."nijiHanteiNinteiYukoKikan",
+            DbT5102."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo_temp,
             DbT5511."shinsakaiKaisaiYMD"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
@@ -479,8 +479,8 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT4102NinteiKekkaJoho" DbT4102
-                ON  DbT4102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+            INNER  JOIN  rgdb."DbT5102NinteiKekkaJoho" DbT5102
+                ON  DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
                 ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
             INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
@@ -511,12 +511,12 @@
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
         <if test="状態区分 == 1" >
-            AND (DbT4102."nijiHanteiKekkaInputYMD" is NULL
-            OR  DbT4102."nijiHanteiKekkaInputYMD" = '')
+            AND (DbT5102."nijiHanteiKekkaInputYMD" is NULL
+            OR  DbT5102."nijiHanteiKekkaInputYMD" = '')
         </if>
         <if test="状態区分 == 2" >
-            AND (DbT4102."nijiHanteiKekkaInputYMD" is NOT NULL
-            AND  DbT4102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> '')
+            AND (DbT5102."nijiHanteiKekkaInputYMD" is NOT NULL
+            AND  DbT5102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> '')
         </if>
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",

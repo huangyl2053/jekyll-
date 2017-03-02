@@ -16,30 +16,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HihokenshaKubunCode {
 
     /**
-     * コード:1 名称:第１号被保険者 略称:1号
+     * コード:1 名称:第１号被保険者 略称:1号 略称2:１号
      */
-    第１号被保険者("1", "第１号被保険者", "1号"),
+    第１号被保険者("1", "第１号被保険者", "1号", "１号"),
     /**
-     * コード:2 名称:第２号被保険者 略称:1号
+     * コード:2 名称:第２号被保険者 略称:1号 略称2:２号
      */
-    第２号被保険者("2", "第２号被保険者", "1号"),
+    第２号被保険者("2", "第２号被保険者", "1号", "２号"),
     /**
-     * コード:8 名称:生活保護 略称:生保
+     * コード:8 名称:生活保護 略称:生保 略称2:生保
      */
-    生活保護("8", "生活保護", "生保"),
+    生活保護("8", "生活保護", "生保", "生保"),
     /**
-     * コード:3 名称:その他 略称:他
+     * コード:3 名称:その他 略称:他 略称2:その他
      */
-    その他("9", "その他", "他");
+    その他("9", "その他", "他", "その他");
 
     private final RString code;
     private final RString fullName;
     private final RString shortName;
+    private final RString shortName2;
 
-    private HihokenshaKubunCode(String code, String fullname, String shortName) {
+    private HihokenshaKubunCode(String code, String fullname, String shortName, String shortName2) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
         this.shortName = new RString(shortName);
+        this.shortName2 = new RString(shortName2);
     }
 
     /**
@@ -70,6 +72,15 @@ public enum HihokenshaKubunCode {
     }
 
     /**
+     * 被保険者区分コードの略称を返します。
+     *
+     * @return 被保険者区分コードの略称
+     */
+    public RString get略称2() {
+        return shortName2;
+    }
+
+    /**
      * 被保険者区分コードのコードと一致する内容を探します。
      *
      * @param code 被保険者区分コードのコード
@@ -93,8 +104,7 @@ public enum HihokenshaKubunCode {
     }
 
     /**
-     * 第1引数のコードから名称を取得して返却します。
-     * コードに対応する要素が無い場合は、第2引数の値を返します。
+     * 第1引数のコードから名称を取得して返却します。 コードに対応する要素が無い場合は、第2引数の値を返します。
      *
      * @param code コード
      * @param defaultValue コードに該当する要素が存在しなかった場合のデフォルト値
@@ -103,5 +113,17 @@ public enum HihokenshaKubunCode {
     public static RString to名称OrDefault(RString code, RString defaultValue) {
         HihokenshaKubunCode value = toValueOrNull(code);
         return value == null ? defaultValue : value.get名称();
+    }
+
+    /**
+     * 第1引数のコードから略称2を取得して返却します。 コードに対応する要素が無い場合は、第2引数の値を返します。
+     *
+     * @param code コード
+     * @param defaultValue コードに該当する要素が存在しなかった場合のデフォルト値
+     * @return コードに該当する要素の名称.もしくは、デフォルト値.
+     */
+    public static RString to略称2OrDefault(RString code, RString defaultValue) {
+        HihokenshaKubunCode value = toValueOrNull(code);
+        return value == null ? defaultValue : value.get略称2();
     }
 }

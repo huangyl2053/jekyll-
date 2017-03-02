@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -45,7 +47,6 @@ public class ShinsakaiKekkaTorokuValidationHandler {
         ShinsakaiKekkaTorokuHandler handler = getHandler();
 
         if (handler.get判定結果() == HanteiKekkaCode.認定) {
-            有効月数チェック(validationMessages);
             有効月数範囲チェック(validationMessages);
             認定期間開始チェック(validationMessages);
             認定期間終了チェック(validationMessages);
@@ -102,26 +103,25 @@ public class ShinsakaiKekkaTorokuValidationHandler {
     }
 
     /**
-     * 有効月数チェック
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs ValidationMessageControlPairs
-     */
-    void 有効月数チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().isNullOrEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "有効月数")));
-        }
-    }
-
-    /**
      * 有効月数範囲チェック
      *
      * @param validPairs ValidationMessageControlPairs
      * @return validPairs ValidationMessageControlPairs
      */
     void 有効月数範囲チェック(ValidationMessageControlPairs validPairs) {
-        Decimal ninteiKikanMonth = new Decimal(div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue().toString());
+        ShinsakaiKekkaTorokuHandler handler = new ShinsakaiKekkaTorokuHandler(div);
+        YokaigoJotaiKubun09 yokaigodo = handler.get今回二次判定();
+        if (!ShinsakaiKekkaTorokuHandler.is要支援要介護(yokaigodo)) {
+            return;
+        }
+        RString value = div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue();
+        if (RString.isNullOrEmpty(value)) {
+            validPairs.add(new ValidationMessageControlPair(
+                    new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.項目に対する制約, "有効月数", "1以上"),
+                    div.getDdlNinteiKikanMonth()));
+            return;
+        }
+        Decimal ninteiKikanMonth = new Decimal(value.toString());
         if ((NinteiShinseiShinseijiKubunCode.新規申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue())
                 || NinteiShinseiShinseijiKubunCode.区分変更申請.get名称().equals(div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().getValue()))
                 && !((ninteiKikanMonth.compareTo(Decimal.ONE) >= 0)
