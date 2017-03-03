@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJoho.shinsakaiKaisaiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJoho.shinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -45,6 +46,27 @@ public class DbT5511ShinsakaiKaisaiKekkaJohoDac implements ISaveable<DbT5511Shin
                 where(
                         eq(shinsakaiKaisaiNo, 介護認定審査会開催番号)).
                 toObject(DbT5511ShinsakaiKaisaiKekkaJohoEntity.class);
+    }
+
+    /**
+     * 開催場所コードで介護認定審査会開催結果情報を取得します。
+     *
+     * @param 開催場所コード RString
+     * @return List<DbT5591GogitaiJohoEntity>
+     * @throws NullPointerException 引数がnullの場合
+     */
+    @Transaction
+    public List<DbT5511ShinsakaiKaisaiKekkaJohoEntity> selectBy開催場所コード(
+            RString 開催場所コード) throws NullPointerException {
+        requireNonNull(開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("開催場所コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5511ShinsakaiKaisaiKekkaJoho.class).
+                where(
+                        eq(shinsakaiKaisaiBashoCode, 開催場所コード)).
+                toList(DbT5511ShinsakaiKaisaiKekkaJohoEntity.class);
     }
 
     /**

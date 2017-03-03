@@ -79,6 +79,27 @@ public class ShinsakaiKaisaiYoteiJohoManager {
     }
 
     /**
+     * 開催場所コードに合致する介護認定審査会開催予定情報のリストを返します。
+     *
+     * @param 開催場所コード 開催場所コード
+     * @return DbT5501ShinsakaiKaisaiYoteiJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<ShinsakaiKaisaiYoteiJoho> get介護認定審査会開催予定情報リストBy開催場所コード(RString 開催場所コード) {
+        requireNonNull(開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("開催場所コード"));
+
+        List<ShinsakaiKaisaiYoteiJoho> businessList = new ArrayList<>();
+
+        for (DbT5501ShinsakaiKaisaiYoteiJohoEntity entity : dac.selectBy開催場所コード(開催場所コード)) {
+            entity.initializeMd5();
+            businessList.add(new ShinsakaiKaisaiYoteiJoho(entity));
+        }
+
+        return businessList;
+
+    }
+
+    /**
      * 介護認定審査会開催予定情報{@link ShinsakaiKaisaiYoteiJoho}を保存します。
      *
      * @param 介護認定審査会開催予定情報 {@link ShinsakaiKaisaiYoteiJoho}

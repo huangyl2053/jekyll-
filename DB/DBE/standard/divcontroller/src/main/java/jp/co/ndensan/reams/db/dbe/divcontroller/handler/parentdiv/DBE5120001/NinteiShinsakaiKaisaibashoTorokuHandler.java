@@ -159,6 +159,24 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     }
 
     /**
+     * 新規モード或いは更新モードの場合開催場所編集エリアの制御です。
+     *
+     */
+    public void set削除の場合開催場所編集エリア() {
+        div.getShinakaiKaisaIbashoShosai().setJyotai(削除モード);
+        dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
+        RStringBuilder selectedItem = new RStringBuilder(clickedItem.getKaisaibashoCode());
+        selectedItem.append(clickedItem.getKaisaibashoMeisho())
+                .append(clickedItem.getKaisaibashoJusho())
+                .append(clickedItem.getKaisaibashoTelNo())
+                .append(clickedItem.getKaisaibashoJokyo())
+                .append(clickedItem.getKaisaiChikuCode());
+        div.getShinakaiKaisaIbashoShosai().setSelectItem(selectedItem.toRString());
+        setSelectItem(clickedItem);
+        set削除時開催場所編集エリア非活性();
+    }
+
+    /**
      * 開催場所編集エリア初期化設定します。
      *
      */
@@ -191,6 +209,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
             clickedItemNew.setJyotai(追加モード);
             setYiChiRanItem(clickedItemNew);
             rowList.add(clickedItemNew);
+        } else if (削除モード.equals(モード)) {
+            clickedItem.setJyotai(削除モード);
+            setYiChiRanItem(clickedItem);
+            rowList.set(clickedItemId, clickedItem);
         }
         div.getDgKaisaibashoIchiran().setDataSource(rowList);
         clear開催場所編集エリア();
@@ -288,6 +310,18 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getTxtTelNumber().setReadOnly(false);
         div.getDdlKaisaiBashoJokyo().setReadOnly(false);
         div.getCcdKaisaiChikuCode().setReadOnly(false);
+        div.getBtnback().setDisabled(false);
+        div.getBtnupdate().setDisabled(false);
+        div.getBtnTsuika().setDisabled(false);
+    }
+
+    private void set削除時開催場所編集エリア非活性() {
+        div.getTxtKaisaibashoCode().setReadOnly(true);
+        div.getTxtKaisaibashoMeisho().setReadOnly(true);
+        div.getTxtKaisaibashoJusho().setReadOnly(true);
+        div.getTxtTelNumber().setReadOnly(true);
+        div.getDdlKaisaiBashoJokyo().setReadOnly(true);
+        div.getCcdKaisaiChikuCode().setReadOnly(true);
         div.getBtnback().setDisabled(false);
         div.getBtnupdate().setDisabled(false);
         div.getBtnTsuika().setDisabled(false);

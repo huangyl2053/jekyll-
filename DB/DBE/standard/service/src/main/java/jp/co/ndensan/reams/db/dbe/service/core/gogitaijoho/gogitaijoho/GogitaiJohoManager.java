@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashoj
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5591GogitaiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -111,6 +112,20 @@ public class GogitaiJohoManager {
             合議体情報List.add(new GogitaiJoho(relateEntity));
         }
         return 合議体情報List;
+
+    }
+
+    /**
+     * 開催場所コードに合致する合議体情報のリストを返します。
+     *
+     * @param 開催場所コード 開催場所コード
+     * @return GogitaiJohoの{@code list}
+     */
+    @Transaction
+    public int count合議体情報リストBy開催場所コード(RString 開催場所コード) {
+        requireNonNull(開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("開催場所コード"));
+
+        return 合議体情報Dac.selectBy開催場所コード(開催場所コード).size();
 
     }
 
