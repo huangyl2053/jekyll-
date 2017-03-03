@@ -102,6 +102,8 @@ public class ShinsaKaiKekkaToroku {
         ShinsaKaiKekkaTorokuHandler handler = getHandler(div);
         handler.setJyotaiKubun();
         handler.setDisabled登録ボタンfrom選択状態();
+        handler.initTextOf処理を進めるボタン();
+        handler.setDisplayOCR結果登録ボタン();
         return ResponseData.of(div).respond();
     }
 

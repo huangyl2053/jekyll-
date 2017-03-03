@@ -7,13 +7,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001;
 
 import java.util.Objects;
 import javax.annotation.CheckForNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
-import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -107,25 +104,28 @@ public class TaishoshaIchiranRow {
     /**
      * @return 認定有効期間開始日
      */
+    @Nonnull
     public FlexibleDate getNinteiYukoKikanKaishiYMD() {
-        return aRow.getNinteiKikanKaishi().getValue();
+        FlexibleDate f = aRow.getNinteiKikanKaishi().getValue();
+        return f == null ? FlexibleDate.EMPTY : f;
     }
 
     /**
      * @return 認定有効期間終了日
      */
+    @Nonnull
     public FlexibleDate getNinteiYukoKikanShuryoYMD() {
-        return aRow.getNinteiKikanShuryo().getValue();
+        FlexibleDate f = aRow.getNinteiKikanShuryo().getValue();
+        return f == null ? FlexibleDate.EMPTY : f;
     }
 
     /**
-     * @return 月数
+     * @return 月数、空の場合は0.
      */
-    @CheckForNull
-    public Integer getNinteiKikanTsukiSu() {
+    public int getNinteiKikanTsukiSu() {
         RString num = aRow.getNinteiKikanTukisu();
         if (RString.isNullOrEmpty(num)) {
-            return null;
+            return 0;
         }
         return Integer.parseInt(num.toString());
     }

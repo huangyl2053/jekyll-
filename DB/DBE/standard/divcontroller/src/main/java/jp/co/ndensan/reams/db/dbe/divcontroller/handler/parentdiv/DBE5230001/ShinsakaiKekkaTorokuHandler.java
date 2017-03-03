@@ -47,6 +47,7 @@ public class ShinsakaiKekkaTorokuHandler {
 
     private final ShinsakaiKekkaTorokuDiv div;
     private static final RString ダミーキー = new RString("key0");
+    private static final RString ZERO = new RString(0);
     private static final int 認定期間月数なし = 0;
     private static final int 認定期間月数12ヶ月 = 12;
     private static final int 認定期間月数24ヶ月 = 24;
@@ -119,6 +120,7 @@ public class ShinsakaiKekkaTorokuHandler {
             認定期間開始.setValue(business.get認定期間開始());
             TextBoxFlexibleDate 認定期間終了 = new TextBoxFlexibleDate();
             認定期間終了.setValue(business.get認定期間終了());
+            RString 認定期間月数 = business.get認定期間月数();
             boolean メモフラグ = !RString.isNullOrEmpty(business.get審査会メモ());
             boolean 意見フラグ = !RString.isNullOrEmpty(business.get審査会意見());
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row(
@@ -138,7 +140,7 @@ public class ShinsakaiKekkaTorokuHandler {
                     business.get二次判定コード(),
                     認定期間開始,
                     認定期間終了,
-                    business.get認定期間月数(),
+                    ZERO.equals(認定期間月数) ? RString.EMPTY : 認定期間月数,
                     二次判定日,
                     business.get取下区分名称(),
                     business.get取下区分コード(),
@@ -216,7 +218,7 @@ public class ShinsakaiKekkaTorokuHandler {
         /**
          * 二次判断が「要介護１」の場合のみ、状態像の入力が必須となるがを設定
          */
-        set状態像Deisabled(get今回二次判定() != YokaigoJotaiKubun09.要介護1);
+        set状態像Disabled(get今回二次判定() != YokaigoJotaiKubun09.要介護1);
         boolean is認定 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード());
         set個別入力制御変更By判定結果(is認定);
         if (!is認定) {
@@ -359,8 +361,8 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getTxtShinsakaiIken().setReadOnly(!hyojiSeigyoFlag);
         div.getKobetsuHyojiArea().getBtnIchijiHanteiTeikeibunGuide().setDisabled(!hyojiSeigyoFlag);
         div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setReadOnly(!hyojiSeigyoFlag);
-        div.getKobetsuHyojiArea().getBtnNinteiChosaJokyoShokai().setDisabled(!hyojiSeigyoFlag);
         div.getKobetsuHyojiArea().getBtnIchigoHantei().setDisabled(!hyojiSeigyoFlag);
+
     }
 
     public RString calculateTorisageKubunCodeBy個別入力欄() {
@@ -610,7 +612,6 @@ public class ShinsakaiKekkaTorokuHandler {
         div.getKobetsuHyojiArea().getTxtShinsakaiMemo().clearValue();
         div.getKobetsuHyojiArea().getTxtShinsakaiIken().clearValue();
         div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().setSelectedKey(RString.EMPTY);
-        div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().clearValue();
     }
     //</editor-fold>
 
@@ -633,7 +634,7 @@ public class ShinsakaiKekkaTorokuHandler {
 
     private void set二次判定ドロップダウン() {
         List<KeyValueDataSource> 二次判定リスト = new ArrayList();
-        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.なし.getコード(), YokaigoJotaiKubun09.なし.get名称()));
+        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.なし.getコード(), RString.EMPTY));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要支援1.getコード(), YokaigoJotaiKubun09.要支援1.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要支援2.getコード(), YokaigoJotaiKubun09.要支援2.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護1.getコード(), YokaigoJotaiKubun09.要介護1.get名称()));
@@ -677,6 +678,7 @@ public class ShinsakaiKekkaTorokuHandler {
                 RDate rData = new RDate(div.getTxtKaisaiNichiji().getValue().seireki().toDateString().toString());
                 div.getTxtNijiHanteiDay().setValue(rData);
             }
+            set状態像Disabled(get今回二次判定() != YokaigoJotaiKubun09.要介護1);
         }
     }
 
@@ -797,24 +799,6 @@ public class ShinsakaiKekkaTorokuHandler {
             return get翌日(前回有効期間終了日);
         }
         return null;
-    }
-
-    /**
-     * 「二次判定」ドロップダウンリストの選択変更の場合、判定結果を設定します。
-     *
-     * @param 今回二次判定 二次判定結果
-     */
-    public void set判定結果DDLFrom(YokaigoJotaiKubun09 今回二次判定) {
-        RString selectedKey = (今回二次判定 == YokaigoJotaiKubun09.再調査 || 今回二次判定 == YokaigoJotaiKubun09.なし)
-                ? RString.EMPTY : HanteiKekkaCode.認定.getコード();
-        div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(selectedKey);
-    }
-
-    /**
-     * 「二次判定」ドロップダウンリストの選択変更の場合、判定結果を設定します。
-     */
-    public void set判定結果DDLfrom二次判定() {
-        this.set判定結果DDLFrom(get今回二次判定());
     }
 
     /**
@@ -983,7 +967,7 @@ public class ShinsakaiKekkaTorokuHandler {
      *
      * @param isDisabled {@code true}のとき非活性
      */
-    public void set状態像Deisabled(boolean isDisabled) {
+    public void set状態像Disabled(boolean isDisabled) {
         if (isDisabled) {
             div.getDdlJotaiZo().setSelectedKey(RString.EMPTY);
         }
