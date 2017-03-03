@@ -81,8 +81,8 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     }
 
     @Override
-    public void loadHokenshaList(GyomuBunrui 業務分類, RString 証記載保険者番号) {
-        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類), Objects.requireNonNull(証記載保険者番号));
+    public void loadHokenshaList(GyomuBunrui 業務分類, LasdecCode 市町村コード) {
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類), Objects.requireNonNull(市町村コード));
         if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
             this.ddlHokenshaList.setSelectedIndex(0);
         }
@@ -101,6 +101,11 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     @Override
     public HokenshaSummary getSelectedItem() {
         return this.createHandler().getSelectedItemAsHokenshaSummary();
+    }
+
+    @Override
+    public void setLabelLText(RString text) {
+        this.ddlHokenshaList.setLabelLText(text);
     }
 
     private HokenshaListDivHandler createHandler() {

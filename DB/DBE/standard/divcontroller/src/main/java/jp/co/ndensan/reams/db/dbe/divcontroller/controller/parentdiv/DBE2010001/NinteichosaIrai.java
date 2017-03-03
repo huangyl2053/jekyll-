@@ -31,15 +31,16 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteichosairaijoho.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -425,6 +426,7 @@ public class NinteichosaIrai {
             NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
             NinteiShinseiJohoManager ninteiShinseiJohoManager = NinteiShinseiJohoManager.createInstance();
             NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
+            NinteichosahyoGaikyoChosaManager ninteichosahyoGaikyoChosaManager = NinteichosahyoGaikyoChosaManager.createInstance();
 
             for (dgNinteiTaskList_Row row : requestDiv.getDgNinteiTaskList().getDataSource()) {
                 RString 状態 = new RString(row.getRowState().toString());
@@ -440,9 +442,10 @@ public class NinteichosaIrai {
                 JigyoshaNo 認定調査委託先コード = new JigyoshaNo(row.getKonkaiChosaItakusakiCode());
                 RString 認定調査員コード = row.getKonkaiChosainCode();
                 RString 認定調査依頼区分コード = row.getChosaIraiKubunCode();
-                Code 調査区分コード = (NinteiChousaIraiKubunCode.初回.getコード().equals(認定調査依頼区分コード))
-                        ? new Code(ChosaKubun.新規調査.getコード())
-                        : new Code(ChosaKubun.再調査.getコード());
+                List<NinteichosahyoGaikyoChosa> 認定調査票概況調査 = ninteichosahyoGaikyoChosaManager.get認定調査票_概況調査_子(申請書管理番号);
+                Code 調査区分コード = (認定調査票概況調査.isEmpty())
+                        ? ChosaKubun.新規調査.asCode()
+                        : ChosaKubun.再調査.asCode();
                 FlexibleDate 認定調査依頼年月日 = FlexibleDate.EMPTY;
                 if (row.getNinteichosaIraiYmd().getValue() != null) {
                     認定調査依頼年月日 = new FlexibleDate(row.getNinteichosaIraiYmd().getValue().toDateString());

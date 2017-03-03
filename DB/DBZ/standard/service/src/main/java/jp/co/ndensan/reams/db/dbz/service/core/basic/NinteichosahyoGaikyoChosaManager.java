@@ -42,6 +42,15 @@ public class NinteichosahyoGaikyoChosaManager {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link NinteichosahyoGaikyoChosaManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosahyoGaikyoChosaManager}のインスタンス
+     */
+    public static NinteichosahyoGaikyoChosaManager createInstance() {
+        return InstanceProvider.create(NinteichosahyoGaikyoChosaManager.class);
+    }
+
+    /**
      * 主キーに合致する認定調査票_概況調査_子を返します。
      *
      * @param 申請書管理番号 申請書管理番号
@@ -125,4 +134,22 @@ public class NinteichosahyoGaikyoChosaManager {
 
         return SearchResult.of(ninteichosahyoGaikyoChosaList, 0, false);
     }
+
+    /**
+     * 合致する認定調査票_概況調査_子を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 認定調査票_概況調査_子
+     */
+    @Transaction
+    public List<NinteichosahyoGaikyoChosa> get認定調査票_概況調査_子(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        List<DbT5202NinteichosahyoGaikyoChosaEntity> entities = dac.selectByKey(申請書管理番号);
+        List<NinteichosahyoGaikyoChosa> result = new ArrayList<>();
+        for (DbT5202NinteichosahyoGaikyoChosaEntity entity : entities) {
+            result.add(new NinteichosahyoGaikyoChosa(entity));
+        }
+        return result;
+    }
+
 }

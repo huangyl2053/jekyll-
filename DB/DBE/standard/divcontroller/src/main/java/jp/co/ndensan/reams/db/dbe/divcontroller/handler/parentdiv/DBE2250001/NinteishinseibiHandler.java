@@ -177,12 +177,15 @@ public class NinteishinseibiHandler {
         row.setTokubetsuKyufuService(entity.get市町村特別給付サービス種類名());
         row.setZaitakuService(entity.get介護保険給付以外の在宅サービス種類名());
         row.setNinteichousaIraiKubunCode(
-                (!RString.isNullOrEmpty(entity.get認定調査依頼区分コード()))
+                !RString.isNullOrEmpty(entity.get認定調査依頼区分コード())
                 ? entity.get認定調査依頼区分コード()
-                : RString.EMPTY);
+                : (認定調査情報 != null ? 認定調査情報.get認定調査依頼区分コード() : RString.EMPTY));
         row.setNinteichosaIraiKaisu(entity.get認定調査回数());
         row.getNinteichosaJuryoYMD().setValue(受領年月日);
-        row.setNinteiChosaKubunCode(entity.get認定調査区分コード());
+        row.setNinteiChosaKubunCode(
+                !RString.isNullOrEmpty(entity.get認定調査区分コード())
+                ? entity.get認定調査区分コード()
+                : (認定調査情報 != null ? 認定調査情報.get認定調査区分コード() : RString.EMPTY));
         row.setChosaJisshiBashoCode(entity.get認定調査実施場所コード());
         row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所());
         row.setServiceKubunCode(

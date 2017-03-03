@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.gogitaiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.gogitaiYukoKikanKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.gogitaiYukoKikanShuryoYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJoho.shinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -82,6 +84,27 @@ public class DbT5591GogitaiJohoDac implements ISaveable<DbT5591GogitaiJohoEntity
                                 eq(gogitaiYukoKikanKaishiYMD, 合議体有効期間開始年月日),
                                 eq(gogitaiYukoKikanShuryoYMD, 合議体有効期間終了年月日))).
                 toObject(DbT5591GogitaiJohoEntity.class);
+    }
+
+    /**
+     * 開催場所コードで合議体情報を取得します。
+     *
+     * @param 開催場所コード RString
+     * @return List<DbT5591GogitaiJohoEntity>
+     * @throws NullPointerException 引数がnullの場合
+     */
+    @Transaction
+    public List<DbT5591GogitaiJohoEntity> selectBy開催場所コード(
+            RString 開催場所コード) throws NullPointerException {
+        requireNonNull(開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("開催場所コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5591GogitaiJoho.class).
+                where(
+                        eq(shinsakaiKaisaiBashoCode, 開催場所コード)).
+                toList(DbT5591GogitaiJohoEntity.class);
     }
 
     /**

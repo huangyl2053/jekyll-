@@ -30,18 +30,18 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -51,8 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -191,19 +189,18 @@ public class NinteiChosaIraiShudou {
         JigyoshaNo 認定調査委託先コード = new JigyoshaNo(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
         RString 認定調査員コード = div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue();
         Code 認定調査依頼区分コード = new Code(div.getNinteichosaIraiByHand().getDdlIraiKubun().getSelectedKey());
-        Code 調査区分コード;
-        if (NinteiChousaIraiKubunCode.初回.getコード().equals(認定調査依頼区分コード.value())) {
-            調査区分コード = new Code(ChosaKubun.新規調査.getコード());
-        } else {
-            調査区分コード = new Code(ChosaKubun.再調査.getコード());
-        }
+        NinteichosahyoGaikyoChosaManager ninteichosahyoGaikyoChosaManager = NinteichosahyoGaikyoChosaManager.createInstance();
+        List<NinteichosahyoGaikyoChosa> 認定調査票概況調査 = ninteichosahyoGaikyoChosaManager.get認定調査票_概況調査_子(申請書管理番号);
+        ChosaKubun 調査区分 = (認定調査票概況調査.isEmpty())
+                ? ChosaKubun.新規調査
+                : ChosaKubun.再調査;
         FlexibleDate 認定調査依頼年月日 = FlexibleDate.EMPTY;
         if (div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null) {
             認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
         }
 
         認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
-                .set調査区分(調査区分コード)
+                .set調査区分(調査区分.asCode())
                 .set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード.value()))
                 .set認定調査員コード(new ChosainCode(認定調査員コード)).build();
         jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoManager
@@ -231,8 +228,8 @@ public class NinteiChosaIraiShudou {
             updateBuilder.build().toEntity().setState(EntityDataState.Modified);
             updateNinteichosaIraiJoho = updateBuilder.build();
             NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(updateNinteichosaIraiJoho.modifiedModel());
-            
-            NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 
+
+            NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号,
                     Integer.parseInt(認定調査依頼履歴番号.toString()) + 履歴番号インクリメント);
             ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit().set厚労省IF識別コード(new Code(厚労省IF識別コード))
                     .set認定調査委託先コード(認定調査委託先コード)
@@ -247,7 +244,7 @@ public class NinteiChosaIraiShudou {
             NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho);
         }
     }
-    
+
     private void 完了データ更新() {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
@@ -392,7 +389,6 @@ public class NinteiChosaIraiShudou {
 //            NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho.modifiedModel());
 //        }
 //    }
-
     private void printData(NinteiChosaIraiShudouDiv div, ReportManager reportManager) {
         NinnteiChousairaiShudouPrintService printService = new NinnteiChousairaiShudouPrintService(reportManager);
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
@@ -580,7 +576,6 @@ public class NinteiChosaIraiShudou {
 //        }
 //        return ResponseData.of(div).respond();
 //    }
-
     /**
      * 「戻る」ボタンを押す処理です。
      *
@@ -591,10 +586,10 @@ public class NinteiChosaIraiShudou {
         RealInitialLocker.release(get排他キー());
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「依頼書等を印刷する」ボタン押下時
-     * 
+     *
      * @param div NinteiChosaIraiShudouDiv
      * @return ResponseData<SourceDataCollection>
      */

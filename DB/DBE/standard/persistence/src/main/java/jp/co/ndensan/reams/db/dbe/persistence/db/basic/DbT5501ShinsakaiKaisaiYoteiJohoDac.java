@@ -76,6 +76,27 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoDac implements ISaveable<DbT5501Shin
     }
 
     /**
+     * 開催場所コードで介護認定審査会開催予定情報を取得します。
+     *
+     * @param 開催場所コード RString
+     * @return List<DbT5501ShinsakaiKaisaiYoteiJohoEntity>
+     * @throws NullPointerException 引数がnullの場合
+     */
+    @Transaction
+    public List<DbT5501ShinsakaiKaisaiYoteiJohoEntity> selectBy開催場所コード(
+            RString 開催場所コード) throws NullPointerException {
+        requireNonNull(開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("開催場所コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5501ShinsakaiKaisaiYoteiJoho.class).
+                where(
+                        eq(DbT5501ShinsakaiKaisaiYoteiJoho.shinsakaiKaisaiYoteiBashoCode, 開催場所コード)).
+                toList(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
+    }
+
+    /**
      * 介護認定審査会開催予定情報を全件返します。
      *
      * @return DbT5501ShinsakaiKaisaiYoteiJohoEntityの{@code list}

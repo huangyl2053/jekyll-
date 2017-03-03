@@ -171,7 +171,6 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onDoubleClick_shinsaInJohoIchiranGyo(ShinsakaiIinJohoTorokuDiv div) {
-        createHandOf(div).set部品状態_修正ボタン();
         return onClick_btnModifyShinsaInJohoIchiran(div);
     }
 
@@ -233,7 +232,6 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnDeleteShozokuKikanIchiran(ShinsakaiIinJohoTorokuDiv div) {
         div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getClickedItem());
-        createHandOf(div).set所属機関追加ボタンBy一覧();
         return ResponseData.of(div).respond();
     }
 

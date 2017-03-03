@@ -13,11 +13,15 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -56,6 +60,9 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private static final boolean 有効 = true;
     private static final boolean 全て = false;
     private final RString 開催場所登録 = new RString("開催場所登録");
+    private final RString 合議体情報 = new RString("合議体情報");
+    private final RString 介護認定審査会開催予定情報 = new RString("介護認定審査会開催予定情報");
+    private final RString 介護認定審査会開催結果情報 = new RString("介護認定審査会開催結果情報");
 
     /**
      * 介護認定審査会開催場所登録の初期処理を表示します。
@@ -94,7 +101,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
      */
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
             onClick_btnKensaku(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        if (is変更有無(div)) {
+        boolean ChangeFlg = is変更有無(div);
+        if (ChangeFlg) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -102,12 +110,12 @@ public class NinteiShinsakaiKaisaibashoToroku {
             }
         }
 
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+        if (!ChangeFlg || new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
             div.getBtnTsuika().setDisabled(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -149,18 +157,24 @@ public class NinteiShinsakaiKaisaibashoToroku {
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             RString 状態 = div.getDgKaisaibashoIchiran().getClickedItem().getJyotai();
-            Message message = 削除モード.equals(状態)
-                    ? DbzQuestionMessages.削除取消の確認.getMessage() : UrQuestionMessages.削除の確認.getMessage();
-            return ResponseData.of(div).addMessage(message).respond();
+            if (削除モード.equals(状態)) {
+                Message message = DbzQuestionMessages.削除取消の確認.getMessage();
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
-        if ((new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || new RString(DbzQuestionMessages.削除取消の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
+        if (new RString(DbzQuestionMessages.削除取消の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).set開催場所一覧の削除();
-            div.getBtnTsuika().setDisabled(false);
-            div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
+//            div.getBtnTsuika().setDisabled(false);
+//            div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
+        } else {
+            getHandler(div).set削除の場合開催場所編集エリア();
         }
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+//        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        
+//        getHandler(div).set開催場所一覧の削除();
+//        div.getBtnTsuika().setDisabled(true);
+//        div.getShinsakaiKaisaibashokensaku().setReadOnly(true);
         return ResponseData.of(div).respond();
     }
 
@@ -245,6 +259,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         開催場所コードの重複チェック(div);
         開催地区コードの存在チェック(div);
+        開催場所コードの使用チェック(div);
         getHandler(div).開催場所一覧の更新();
         div.getBtnTsuika().setDisabled(false);
         div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
@@ -380,6 +395,46 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
             }
         }
+    }
+
+    private void 開催場所コードの使用チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+        if (div.getShinakaiKaisaIbashoShosai().getJyotai().equals(削除モード)) {
+
+            //チェック対象
+            //　合議体情報(DbT5591GogitaiJoho)
+            //　介護認定審査会開催予定情報(DbT5501ShinsakaiKaisaiYoteiJoho)
+            //　介護認定審査会開催結果情報(Dbt5511ShinsakaiKaisaiKekkaJoho)
+            RString ret = 開催場所コードの使用各テーブルチェック(div.getDgKaisaibashoIchiran().getClickedItem());
+
+            if (!ret.equals(RString.EMPTY)) {
+                // DbzErrorMessages.実行不可(?ため?できません。)
+                throw new ApplicationException(DbzErrorMessages.実行不可.getMessage().replace(ret.concat("で開催場所コードが使用されている").toString(), "削除"));
+            }
+        }
+    }
+
+    private RString 開催場所コードの使用各テーブルチェック(dgKaisaibashoIchiran_Row row) {
+
+        RString 開催場所コード = row.getKaisaibashoCode();
+
+        //　合議体情報(DbT5591GogitaiJoho)
+        if (GogitaiJohoManager.createInstance().count合議体情報リストBy開催場所コード(開催場所コード) > 0) {
+            return 合議体情報;
+        }
+
+        //　介護認定審査会開催予定情報(DbT5501ShinsakaiKaisaiYoteiJoho)
+        ShinsakaiKaisaiYoteiJohoManager shinsakaiKaisaiYoteiJohoManager = new ShinsakaiKaisaiYoteiJohoManager();
+        if (!shinsakaiKaisaiYoteiJohoManager.get介護認定審査会開催予定情報リストBy開催場所コード(開催場所コード).isEmpty()) {
+            return 介護認定審査会開催予定情報;
+        }
+
+        //　介護認定審査会開催結果情報(Dbt5511ShinsakaiKaisaiKekkaJoho)
+        if (!ShinsakaiKaisaiKekkaJohoManager.createInstance().get介護認定審査会開催結果情報リストBy開催場所コード(開催場所コード).isEmpty()) {
+            return 介護認定審査会開催結果情報;
+        }
+
+        return RString.EMPTY;
+       
     }
 
     private NinteiShinsakaiKaisaibashoTorokuHandler getHandler(NinteiShinsakaiKaisaibashoTorokuDiv div) {

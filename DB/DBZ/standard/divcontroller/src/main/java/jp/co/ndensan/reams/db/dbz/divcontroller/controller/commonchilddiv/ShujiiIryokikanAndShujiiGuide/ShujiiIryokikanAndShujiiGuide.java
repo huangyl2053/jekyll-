@@ -64,7 +64,7 @@ public class ShujiiIryokikanAndShujiiGuide {
                 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
             } else {
                 市町村コード = dataPassModel.get市町村コード();
-                div.getHokenshaList().setSelectedShichosonIfExist(new LasdecCode(市町村コード));
+                div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, new LasdecCode(市町村コード));
             }
             div.getTxtIryoKikanCodeFrom().setValue(RString.EMPTY);
             div.getTxtIryoKikanCodeTo().setValue(RString.EMPTY);

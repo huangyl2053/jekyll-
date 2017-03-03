@@ -71,6 +71,27 @@ public class ShinsakaiKaisaiKekkaJohoManager {
     }
 
     /**
+     * 開催場所コードに合致する介護認定審査会開催結果情報のリストを返します。
+     *
+     * @param 開催場所コード 開催場所コード
+     * @return GogitaiJohoの{@code list}
+     */
+    @Transaction
+    public List<ShinsakaiKaisaiKekkaJoho2> get介護認定審査会開催結果情報リストBy開催場所コード(RString 開催場所コード) {
+        requireNonNull(開催場所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("開催場所コード"));
+
+        List<ShinsakaiKaisaiKekkaJoho2> businessList = new ArrayList<>();
+
+        for (DbT5511ShinsakaiKaisaiKekkaJohoEntity entity : dac.selectBy開催場所コード(開催場所コード)) {
+            entity.initializeMd5();
+            businessList.add(new ShinsakaiKaisaiKekkaJoho2(entity));
+        }
+
+        return businessList;
+
+    }
+
+    /**
      * 介護認定審査会開催結果情報を全件返します。
      *
      * @return ShinsakaiKaisaiKekkaJohoの{@code list}

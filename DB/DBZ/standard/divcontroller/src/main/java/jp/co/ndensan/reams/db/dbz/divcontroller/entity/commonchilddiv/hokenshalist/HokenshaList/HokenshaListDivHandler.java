@@ -40,8 +40,7 @@ public class HokenshaListDivHandler {
     }
 
     /**
-     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
-     * また、共有子Div内に、取得した保険者のリストを保持します。
+     * 全市町村（広域保険者以外）を保険者DDLに設定します。
      */
     void loadAndHoldHokenshaList(GyomuBunrui 業務分類) {
         List<HokenshaSummary> hokenshaList = getHokenshaList(業務分類);
@@ -55,8 +54,7 @@ public class HokenshaListDivHandler {
     }
 
     /**
-     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
-     * また、共有子Div内に、取得した保険者のリストを保持します。
+     * 指定されたHokenshaDDLPattemを保険者DDLに設定します。
      */
     void loadAndHoldHokenshaList(GyomuBunrui 業務分類, HokenshaDDLPattem 保険者パターン) {
         List<HokenshaSummary> hokenshaList = getHokenshaList(業務分類);
@@ -74,6 +72,9 @@ public class HokenshaListDivHandler {
                     chokenshaList.add(s);
                 }
             }
+            if (保険者パターン.equals(HokenshaDDLPattem.構成市町村全て_空白含む)) {
+                chokenshaList.add(0, HokenshaSummary.EMPTY);
+            }
             createMaping(chokenshaList, list);
         } else {
             createMaping(hokenshaList, list);
@@ -81,10 +82,9 @@ public class HokenshaListDivHandler {
     }
 
     /**
-     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
-     * また、共有子Div内に、取得した保険者のリストを保持します。
+     * 指定された市町村コードのみを保険者DDLに設定します。
      */
-    void loadAndHoldHokenshaList(GyomuBunrui 業務分類, RString 証記載保険者番号) {
+    void loadAndHoldHokenshaList(GyomuBunrui 業務分類, LasdecCode 市町村コード) {
         List<HokenshaSummary> hokenshaList = getHokenshaList(業務分類);
 
         List<KeyValueDataSource> list = new ArrayList<>();
@@ -92,7 +92,7 @@ public class HokenshaListDivHandler {
         List<HokenshaSummary> chokenshaList = new ArrayList<>();
         if (1 < hokenshaList.size()) {
             for (HokenshaSummary s : hokenshaList) {
-                if (s.get証記載保険者番号().value().equals(証記載保険者番号)) {
+                if (s.get市町村コード().equals(市町村コード)) {
                     chokenshaList.add(s);
                 }
             }

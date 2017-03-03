@@ -1133,6 +1133,7 @@
         A."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
         ORDER BY
-        A."shinseishoKanriNo"
+        A."hihokenshaNo" ASC
+        , A."shinseishoKanriNo" ASC
     </select>
 </mapper>
