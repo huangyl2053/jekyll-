@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi.DataTorikomiEdit;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
@@ -31,8 +32,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEntity> {
 
     private static final RString 判定結果 = new RString(
-        "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi."
-        + "IShinsakaiKekkaDataTorikomiMapper.getNijiHanteikekkaTourokuJoho");
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi."
+            + "IShinsakaiKekkaDataTorikomiMapper.getNijiHanteikekkaTourokuJoho");
     private IShinsakaiKekkaDataTorikomiMapper mapper;
     private ShinsakaiKekkaDataTorikomiProcessParameter processParameter;
     private ShinsakaiKekkaDataTorikomiMybatisParameter mybatisParameter;
@@ -90,7 +91,7 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
         FlexibleDate 審査会資料作成年月日 = FlexibleDate.EMPTY;
         DbT5102NinteiKekkaJohoEntity dbt5102 = mapper.getNinteiKekkan(new ShinseishoKanriNo(entity.get申請書管理番号()));
         mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(entity.get申請書管理番号(),
-                                                                                  entity.get今回_審査会開催番号(), RString.EMPTY);
+                entity.get今回_審査会開催番号(), RString.EMPTY);
         DbT5502ShinsakaiWariateJohoEntity dbt5502 = mapper.getShinsakaiWariateJoho(mybatisParameter);
         if (null != dbt5502) {
             審査会資料作成年月日 = dbt5502.getShinsakaiShiryoSakuseiYMD();
@@ -105,8 +106,7 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
     private void syoriDbT5105(TempShinsakaiKekkaEntity entity) {
         DbT5105NinteiKanryoJohoEntity dbt5105 = mapper.getNinteiKanryo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         if (null != dbt5105) {
-            dbt5105.setNinteiShinsakaiKanryoYMD(FlexibleDate.getNowDate());
-            dbT5105Writer.update(dbt5105);
+            dbT5105Writer.update(edit.editDbT5105Entity(entity, dbt5105));
         }
     }
 }
