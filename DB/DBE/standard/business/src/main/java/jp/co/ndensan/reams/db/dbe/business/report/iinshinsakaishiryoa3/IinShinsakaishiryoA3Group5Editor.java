@@ -70,7 +70,7 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
             source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);
             source.imgSonotashiryo2 = business.getその他資料イメージパス(2 * index - 1);
         } else {
-            source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);            
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(index);            
         }
         source.layout = IinShinsakaiShiryoA3Layouts.委員用その他資料.index();
         return source;

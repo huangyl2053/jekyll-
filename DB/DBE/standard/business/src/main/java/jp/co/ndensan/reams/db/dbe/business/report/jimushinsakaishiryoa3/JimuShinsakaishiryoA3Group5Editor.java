@@ -70,9 +70,9 @@ public class JimuShinsakaishiryoA3Group5Editor implements IJimuShinsakaishiryoA3
             source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);
             source.imgSonotashiryo2 = business.getその他資料イメージパス(2 * index - 1);
         } else {
-            source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);            
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(index);            
         }
-        source.layout = JimuShinsakaiShiryoA3Layouts.事務局用その他資料.index();;
+        source.layout = JimuShinsakaiShiryoA3Layouts.事務局用その他資料.index();
         return source;
     }
 
