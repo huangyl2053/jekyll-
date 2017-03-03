@@ -46,6 +46,8 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
             new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final int 満ページ件数 = 10;
+    private static final int 通知文_パターン番号 = 1;
+    private static final int 通知文_項目番号 = 0;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private List<ShinsakaiIinJohoEntity> shinsakaiIinJohoList;
     private IShiryoShinsakaiIinMapper mapper;
@@ -95,7 +97,7 @@ public class IinTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsak
         entity.setHihokenshaNo(RString.EMPTY);
         business = new JimuTuikaSiryoBusiness(entity, shinsakaiIinJohoList, paramter, count,
                 ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
-                        KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+                        KamokuCode.EMPTY, 通知文_パターン番号, 通知文_項目番号, FlexibleDate.getNowDate()));
         TsuikashiryokagamiA3Report report = new TsuikashiryokagamiA3Report(business);
         report.writeBy(reportSourceWriterA3);
         データ件数 = データ件数 + 1;
