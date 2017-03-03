@@ -92,9 +92,6 @@ public class ShinsaKaiKekkaTorokuHandler {
         div.getTxtMaxKensu().setMaxLength(Integer.toString(div.getTxtMaxKensu().getMaxValue().intValue()).length());
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.get(
                 ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        二次判定モード();
-        initTextOf処理を進めるボタン();
-        setDisplayOCR結果登録ボタン(uses審査会結果登録OCR());
         if (is完了のみの登録State()) {
             div.getRadTaishosyaJotai().setDisabled(true);
             div.getRadTaishosyaJotai().setSelectedKey(KEY1);
@@ -108,16 +105,13 @@ public class ShinsaKaiKekkaTorokuHandler {
         } else {
             setDisabled登録ボタンfrom選択状態();
         }
+        二次判定モード();
+        initTextOf処理を進めるボタン();
+        setDisplayOCR結果登録ボタン();
     }
 
     public static boolean is完了のみの登録State() {
         return ResponseHolder.getState().equals(DBE4020001StateName.完了のみの登録.getName());
-    }
-
-    private static boolean uses審査会結果登録OCR() {
-        RString 審査会結果登録OCR使用可否
-                = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        return (審査会結果登録OCR使用可否.equals(運用する));
     }
 
     /**
@@ -180,13 +174,15 @@ public class ShinsaKaiKekkaTorokuHandler {
 
     /**
      * 与えられた引数よりOCR結果登録共通ボタンの表示を制御します。
-     *
-     * @param is審査会結果登録OCR使用可 審査会結果登録OCR を利用するかどうか
      */
-    public void setDisplayOCR結果登録ボタン(boolean is審査会結果登録OCR使用可) {
-        if (!is審査会結果登録OCR使用可) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, true);
-        }
+    public void setDisplayOCR結果登録ボタン() {
+        CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(FIELD_NAME_OCR結果登録共通ボタン, !uses審査会結果登録OCR());
+    }
+
+    private static boolean uses審査会結果登録OCR() {
+        RString 審査会結果登録OCR使用可否
+                = DbBusinessConfig.get(ConfigNameDBE.審査会結果OCR使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        return (審査会結果登録OCR使用可否.equals(運用する));
     }
 
     /**
@@ -355,6 +351,9 @@ public class ShinsaKaiKekkaTorokuHandler {
     }
 
     private RString 二次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 二次判定結果コード) {
+        if (isNullOrEmpty(二次判定結果コード)) {
+            return RString.EMPTY;
+        }
         if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
             return YokaigoJotaiKubun99.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
@@ -366,5 +365,9 @@ public class ShinsaKaiKekkaTorokuHandler {
             return YokaigoJotaiKubun09.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード.getKey()).get名称();
         }
         return RString.EMPTY;
+    }
+
+    private static boolean isNullOrEmpty(Code code) {
+        return code == null || code.isEmpty();
     }
 }

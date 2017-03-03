@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001.Tai
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.IShinsaKekkaPreserver;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.IShinsakakKekksaTorokuManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuService;
-import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -79,7 +78,8 @@ public class ShinsakaiKekkaToroku {
     private static final RString 一次判定結果変更理由定型文GroupCode = new RString("5103");
     private static final Code 二次判定結果入力方法_画面入力 = new Code("1");
     private static final RString 一_五次判定ダイアログ_照会モード = new RString("照会");
-    private static final RString UICONTAINERID = new RString("DBEUC52101");
+    private static final RString SUB_MENU_UICONTAINERID = new RString("DBEUC52101");
+    private static final RString KIHON_UNYO_UICONTAINERID = new RString("DBEUC40201");
     private static final RString 戻るBTN = new RString("btnBack");
 
     private enum _ViewStateKey {
@@ -136,10 +136,12 @@ public class ShinsakaiKekkaToroku {
         Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho = Models.create(ninteiKanryoJohoList);
         ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, ninteiKanryoJoho);
         ViewStateHolder.put(_ViewStateKey.削除候補, new HashMap<>(service.get削除候補情報(開催番号)));
-        if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るBTN, true);
-        }
 
+        if (SUB_MENU_UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(戻るBTN, true);
+        } else if (KIHON_UNYO_UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+            ViewStateHolder.put(ViewStateKeys.処理モード, OperationMode.更新);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -220,7 +222,7 @@ public class ShinsakaiKekkaToroku {
         if (mode.is更新()) {
             if (!Objects.equals(row.getHenkoMaeTorisageKubunCode(), handler.calculateTorisageKubunCodeBy個別入力欄())) {
                 return ResponseData.of(div)
-                        .addMessage(DbeQuestionMessages.審査結果登録完了データ修正確認.getMessage())
+                        .addMessage(DbeQuestionMessages.取下区分の更新可否確認.getMessage())
                         .respond();
             }
             if (had審査結果登録(row.getShinseishoKanriNo())) {
@@ -288,9 +290,12 @@ public class ShinsakaiKekkaToroku {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             service.saveBy(new ShinsaKekkaPreserver(div));
+            if (KIHON_UNYO_UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
+            }
             div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()));
-            if (UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
+            if (SUB_MENU_UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
                 return ResponseData.of(div).setState(DBE5230001StateName.開催から終了);
             } else {
                 return ResponseData.of(div).setState(DBE5230001StateName.完了);
@@ -451,10 +456,7 @@ public class ShinsakaiKekkaToroku {
             NinteiKekkaJohoBuilder builder = o.createBuilderForEdit();
             builder.set二次判定年月日(row.getNijiHanteiYMD());
             builder.set二次判定要介護状態区分コード(row.getKonkaiNijiHanteiCode());
-            Integer tsukiSu = row.getNinteiKikanTsukiSu();
-            if (tsukiSu != null) {
-                builder.set二次判定認定有効期間(tsukiSu);
-            }
+            builder.set二次判定認定有効期間(row.getNinteiKikanTsukiSu());
             builder.set二次判定認定有効開始年月日(row.getNinteiYukoKikanKaishiYMD());
             builder.set二次判定認定有効終了年月日(row.getNinteiYukoKikanShuryoYMD());
             builder.set介護認定審査会開催番号(開催番号);
@@ -512,28 +514,35 @@ public class ShinsakaiKekkaToroku {
     public ResponseData<ShinsakaiKekkaTorokuDiv> onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         YokaigoJotaiKubun09 今回二次判定 = handler.get今回二次判定();
-        handler.set判定結果DDLFrom(今回二次判定);
-        if (ShinsakaiKekkaTorokuHandler.is要支援要介護(今回二次判定) || 今回二次判定 == YokaigoJotaiKubun09.なし) {
+        setNinteiYukoKikanToOperatable(div, handler, 今回二次判定);
+        if (ShinsakaiKekkaTorokuHandler.is要支援要介護(今回二次判定)) {
             return onChange_NijiHantei_when要介護Or要支援(今回二次判定, div, handler);
         }
-        handler.set状態像Deisabled(true);
-        div.getDdlNinteiKikanMonth().setDisabled(true);
-        div.getDdlNinteiKikanMonth().setSelectedKey(div.getDdlNinteiKikanMonth().getDataSource().get(0).getKey());
-        div.getTxtNinteiKikanFrom().setDisabled(true);
-        div.getTxtNinteiKikanFrom().clearValue();
-        div.getTxtNinteiKikanTo().setDisabled(true);
-        div.getTxtNinteiKikanTo().clearValue();
         return ResponseData.of(div).respond();
+    }
+
+    private static boolean setNinteiYukoKikanToOperatable(
+            ShinsakaiKekkaTorokuDiv div, ShinsakaiKekkaTorokuHandler handler, YokaigoJotaiKubun09 yokaigodo) {
+        boolean operatable = ShinsakaiKekkaTorokuHandler.is要支援要介護(yokaigodo) || yokaigodo == YokaigoJotaiKubun09.なし;
+        boolean disabled = !operatable;
+        div.getDdlNinteiKikanMonth().setDisabled(disabled);
+        div.getTxtNinteiKikanFrom().setDisabled(disabled);
+        div.getTxtNinteiKikanTo().setDisabled(disabled);
+        if (disabled) {
+            div.getDdlNinteiKikanMonth().setSelectedKey(div.getDdlNinteiKikanMonth().getDataSource().get(0).getKey());
+            div.getTxtNinteiKikanFrom().clearValue();
+            div.getTxtNinteiKikanTo().clearValue();
+        }
+        handler.set状態像Disabled(yokaigodo != YokaigoJotaiKubun09.要介護1);
+        return operatable;
     }
 
     private static ResponseData<ShinsakaiKekkaTorokuDiv> onChange_NijiHantei_when要介護Or要支援(
             YokaigoJotaiKubun09 今回二次判定, ShinsakaiKekkaTorokuDiv div, ShinsakaiKekkaTorokuHandler handler) {
-        handler.set認定期間Disabled(false);
         handler.set認定期間月数from申請内容();
         handler.change有効月数に関連するコントロール();
         handler.set認定期間開始日();
         handler.set認定期間終了日();
-        handler.set状態像Deisabled(今回二次判定 != YokaigoJotaiKubun09.要介護1);
         NinteiShinseiKubunShinsei 申請時申請区分 = handler.get申請時申請区分();
         YokaigoJotaiKubun09 前回二次判定 = handler.get前回二次判定();
         FlexibleDate 前回有効期間終了日 = handler.get前回有効期間終了日();
