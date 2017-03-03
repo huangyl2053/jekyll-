@@ -491,11 +491,11 @@ public class ShinsakaiIinJohoTorokuHandler {
         shinsakaiIinJohoBuilder.set郵便番号(div.getTxtYubinNo().getValue());
         shinsakaiIinJohoBuilder.set審査員郵送区分(div.getDdlYusoKubun().getSelectedKey());
         shinsakaiIinJohoBuilder.set住所(div.getTxtJusho().getDomain());
-        if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+        if (KEY_有効.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             shinsakaiIinJohoBuilder.set廃止フラグ(true);
-            shinsakaiIinJohoBuilder.set廃止年月日(edit日付RDateToFlexibleDate(div.getTxtHaishiYMD().getValue()));
         } else {
             shinsakaiIinJohoBuilder.set廃止フラグ(false);
+            shinsakaiIinJohoBuilder.set廃止年月日(edit日付RDateToFlexibleDate(div.getTxtHaishiYMD().getValue()));
         }
         shinsakaiIinJohoBuilder.set電話番号(div.getTxtTelNo1().getDomain());
         shinsakaiIinJohoBuilder.setFAX番号(div.getTxtFaxNo().getDomain());
@@ -789,7 +789,6 @@ public class ShinsakaiIinJohoTorokuHandler {
      */
     public void 審査会委員追加ボタンHandler(ShinsakaiIinJohoTorokuDiv div) {
         div.getShinsakaiIinJohoTorokuInput().setStatus(状態_追加);
-        div.getShinsakaiIinJohoTorokuInput().setStatus(状態_修正);
         setDdlDataSource(div);
         set部品状態_追加ボタン();
         clear審査会委員詳細情報();
