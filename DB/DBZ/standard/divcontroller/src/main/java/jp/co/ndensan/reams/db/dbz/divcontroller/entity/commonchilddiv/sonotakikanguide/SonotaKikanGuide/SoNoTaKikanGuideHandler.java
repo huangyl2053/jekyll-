@@ -57,14 +57,7 @@ public class SoNoTaKikanGuideHandler {
             }
             if (!RString.isNullOrEmpty(その他機関.get市町村コード())) {
                 RString 市町村コード = その他機関.get市町村コード();
-                div.getCcdHokenshaList().setSelectedShichosonIfExist(new LasdecCode(市町村コード));
-            }
-            if (!RString.isNullOrEmpty(その他機関.getその他機関コード())) {
-                div.getTxtSonotaKikanCodefrom().setValue(その他機関.getその他機関コード());
-                div.getTxtSonotaKikanCodeto().setValue(その他機関.getその他機関コード());
-            } else {
-                div.getTxtSonotaKikanCodefrom().clearValue();
-                div.getTxtSonotaKikanCodeto().clearValue();
+                div.getCcdHokenshaList().loadHokenshaList(その他機関.get業務分類(), new LasdecCode(市町村コード));
             }
         }
 

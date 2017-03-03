@@ -64,7 +64,9 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
-            div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(dataPassModel.get市町村コード()));
+            if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定, new LasdecCode(dataPassModel.get市町村コード()));
+            }
             div.getTxtChosaItakusakiCodeFrom().setValue(RString.EMPTY);
             div.getTxtChosaItakuaskiCodeTo().setValue(RString.EMPTY);
             div.getTxtChosaItakusakiName().setValue(RString.EMPTY);
