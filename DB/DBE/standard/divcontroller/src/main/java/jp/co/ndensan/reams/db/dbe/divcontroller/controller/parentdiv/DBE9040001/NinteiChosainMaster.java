@@ -137,6 +137,8 @@ public class NinteiChosainMaster {
         }
         searchChosainInfo(div);
         if (div.getChosainIchiran().getDgChosainIchiran().getDataSource().isEmpty()) {
+            div.getChosainSearch().setDisabled(false);
+            div.getChosainIchiran().setDisabled(true);
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).setState(DBE9040001StateName.一覧);
