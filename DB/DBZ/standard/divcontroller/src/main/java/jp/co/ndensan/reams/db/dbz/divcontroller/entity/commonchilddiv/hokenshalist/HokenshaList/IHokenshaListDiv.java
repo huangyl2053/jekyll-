@@ -44,15 +44,15 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
     void loadHokenshaList(GyomuBunrui 業務分類, HokenshaDDLPattem 保険者DDLパターン);
 
     /**
-     * 保険者の情報を読み込み、DDLに設定します。 業務分類、証記載保険者番号を指定しなければいけません。
+     * 保険者の情報を読み込み、DDLに設定します。 業務分類、市町村コードを指定しなければいけません。
      * <p/>
      * このメソッドは、この共有子Divを使用する各画面の最初のロード処理で実行される必要があります。
      *
      * @param 業務分類
-     * @param 証記載保険者番号
+     * @param 市町村コード
      * @throws NullPointerException 引数が{@code null}の場合
      */
-    void loadHokenshaList(GyomuBunrui 業務分類, RString 証記載保険者番号);
+    void loadHokenshaList(GyomuBunrui 業務分類, LasdecCode 市町村コード);
 
     /**
      * 画面で選択されている保険者の情報を返却します。
