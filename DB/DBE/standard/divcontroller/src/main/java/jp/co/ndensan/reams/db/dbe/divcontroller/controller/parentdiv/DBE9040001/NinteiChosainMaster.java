@@ -132,12 +132,14 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onClick_btnSearchShujii(NinteiChosainMasterDiv div) {
-
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         searchChosainInfo(div);
         if (div.getChosainIchiran().getDgChosainIchiran().getDataSource().isEmpty()) {
-            getValidationHandler(div).validateBtnReSearchNoResult();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9040001StateName.一覧);
     }
 
     /**

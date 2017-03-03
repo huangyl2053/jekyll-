@@ -103,14 +103,6 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
     }
 
     /**
-     * 検索ボタンを押下するとき、検索結果がゼロ件の場合チェックを行う。
-     *
-     */
-    public void validateBtnReSearchNoResult() {
-        throw new ApplicationException(InfoMesssages.該当データなし.getMessage());
-    }
-
-    /**
      * 調査員情報登録エリアの編集チェック処理です。
      *
      * @return 判定結果(true:変更あり,false:変更なし)

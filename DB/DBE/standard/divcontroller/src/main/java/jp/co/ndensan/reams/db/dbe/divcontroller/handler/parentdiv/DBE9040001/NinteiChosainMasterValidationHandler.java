@@ -127,14 +127,6 @@ public class NinteiChosainMasterValidationHandler {
     }
 
     /**
-     * 検索ボタンを押下するとき、検索結果がゼロ件の場合チェックを行う。
-     *
-     */
-    public void validateBtnReSearchNoResult() {
-        throw new ApplicationException(InfoMesssages.該当データなし.getMessage());
-    }
-
-    /**
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
      * @param ninteiShinseiJohoCount 要介護認定申請情報件数

@@ -103,6 +103,9 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onClick_btnSearch(NinteiChosaIraiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
@@ -112,10 +115,10 @@ public class NinteiChosaIrai {
         NinteiChosaIraiHandler handler = getHandler(div);
         NinnteiChousairaiParameter parameter = handler.create調査委託先取得パラメータ(保険者番号, 支所コード, 市町村コード);
         SearchResult<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().get認定調査委託先(parameter);
-        if (認定調査委託先List.records().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        }
         handler.set認定調査委託先一覧(認定調査委託先List);
+        if (認定調査委託先List.records().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 

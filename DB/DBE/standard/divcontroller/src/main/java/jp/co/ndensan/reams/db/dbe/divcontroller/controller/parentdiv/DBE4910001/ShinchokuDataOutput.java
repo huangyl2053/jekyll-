@@ -16,9 +16,11 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -95,6 +97,9 @@ public class ShinchokuDataOutput {
      * @return ResponseData<ShinchokuDataOutputDiv>
      */
     public ResponseData<ShinchokuDataOutputDiv> onClick_btnKensaku(ShinchokuDataOutputDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validation = getValidatisonHandler(div).抽出期間チェック();
         if (validation.iterator().hasNext()) {
 
@@ -108,7 +113,7 @@ public class ShinchokuDataOutput {
         getHandler(div).setdgShinchokuIchiran(調査員情報Lis);
         if (div.getDgShinchokuIchiran().getDataSource() == null
                 || div.getDgShinchokuIchiran().getDataSource().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).setState(DBE4910001StateName.一覧照会);
     }

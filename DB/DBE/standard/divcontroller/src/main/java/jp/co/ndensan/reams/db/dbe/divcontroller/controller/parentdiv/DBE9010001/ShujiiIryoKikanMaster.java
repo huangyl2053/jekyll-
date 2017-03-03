@@ -163,14 +163,17 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnSearchKoseiShujiiIryoKikan(
             ShujiiIryoKikanMasterDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         searchKoseiShujiiIryoKikanInfo(div);
         if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty()) {
-            getValidationHandler(div).validateBtnReSearchNoResult();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getShujiiIchiran().setDisabled(false);
         div.setHdnShichosonCode(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         div.setHdnShichosonName(div.getCcdHokenshaList().getSelectedItem().get市町村名称());
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9010001StateName.医療機関一覧);
     }
 
     private void searchKoseiShujiiIryoKikanInfo(ShujiiIryoKikanMasterDiv div) {
