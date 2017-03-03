@@ -12,7 +12,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2270001.NinteiChosaDataOutputHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2270001.NinteiChosaDataOutputValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosadataoutput.NinteiChosaDataOutputFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -41,7 +43,9 @@ public class NinteiChosaDataOutput {
      * @return ResponseData<NinteiChosaDataOutputDiv>
      */
     public ResponseData<NinteiChosaDataOutputDiv> onClick_btnKensaku(NinteiChosaDataOutputDiv div) {
-
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         SearchResult<NinteiChosaDataOutputBusiness> searchResult
                 = NinteiChosaDataOutputFinder.createInstance().getChosaChikuList(getHandler(div).setParameter());
         //getHandler(div).set共通ボタン();
@@ -49,7 +53,9 @@ public class NinteiChosaDataOutput {
         if (searchResult.records().isEmpty()) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(getValidationHandler().checkデータ存在());
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            }
         }
         return ResponseData.of(div).setState(DBE2270001StateName.データ一覧);
     }

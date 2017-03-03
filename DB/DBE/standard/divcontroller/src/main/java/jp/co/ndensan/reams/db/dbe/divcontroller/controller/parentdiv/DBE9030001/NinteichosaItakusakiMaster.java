@@ -167,13 +167,13 @@ public class NinteichosaItakusakiMaster {
      * @return ResponseData<NinteichosaItakusakiMasterDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnSearchShujii(NinteichosaItakusakiMasterDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         List<KoseiShichosonMaster> list = getHandler(div).searchShujii();
         getHandler(div).setDataSource(list);
         if (list.isEmpty()) {
-            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-            DBE9030001ErrorMessage 該当データなし = new DBE9030001ErrorMessage(UrErrorMessages.該当データなし);
-            pairs.add(new ValidationMessageControlPair(該当データなし));
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).setState(DBE9030001StateName.一覧);
     }

@@ -127,6 +127,9 @@ public class ShujiiMaster {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnSearch(ShujiiMasterDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         searchChosainInfo(div);
         boolean 検索条件初期値 = true;
         if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isEmpty()
@@ -140,9 +143,9 @@ public class ShujiiMaster {
             検索条件初期値 = false;
         }
         if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty() && !検索条件初期値) {
-            getValidationHandler(div).validateBtnReSearchNoResult();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_保存ボタン非活性);
     }
 
     /**
