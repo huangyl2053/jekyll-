@@ -486,7 +486,9 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            delete開催予定(div);
+
+            RString 開催合議体 = new RString(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai1().getValue().toString());
+            delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
             init();
@@ -513,7 +515,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            delete開催予定(div);
+            RString 開催合議体 = new RString(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai2().getValue().toString());
+            delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
             init();
@@ -540,7 +543,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            delete開催予定(div);
+            RString 開催合議体 = new RString(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai3().getValue().toString());
+            delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
             init();
@@ -567,7 +571,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            delete開催予定(div);
+            RString 開催合議体 = new RString(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai4().getValue().toString());
+            delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
             init();
@@ -581,26 +586,25 @@ public class ShinsakaiKaisaiYoteiToroku {
      *
      * @param div ShinsakaiKaisaiYoteiTorokuDiv
      */
-    private void delete開催予定(ShinsakaiKaisaiYoteiTorokuDiv div) {
+    private void delete開催予定(ShinsakaiKaisaiYoteiTorokuDiv div, RString 開催合議体) {
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
                 = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class
                 );
 
         dgKaisaiYoteiNyuryokuran_Row row = div.getDgKaisaiYoteiNyuryokuran().getActiveRow();
-        RString 合議体番号 = row.getKaisaiGogitai1().getValue();
         RString 開催時間 = getFormat時間枠(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiTime().getValue());
 
         for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
             if (new RString(entity.get日付().toString()).equals(div.getTxtSeteibi().getValue().toDateString())
                     && get検索時間枠(entity.get開始予定時刻(), entity.get終了予定時刻()).equals(開催時間)
-                    && entity.get合議体番号() == Integer.valueOf(合議体番号.toString())) {
+                    && entity.get合議体番号() == Integer.valueOf(開催合議体.toString())) {
                 ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(entity.get開催番号());
                 ShinsakaiKaisaiYoteiJoho yoteiJoho = models.get(key);
                 ShinsakaiKaisaiYoteiJohoBuilder builder = yoteiJoho.createBuilderForEdit();
                 yoteiJoho.toEntity().setState(EntityDataState.Deleted);
                 yoteiTorokuManager.insertOrUpdate(builder.build().deleted());
 
-                delete割当委員情報(entity, 合議体番号);
+                delete割当委員情報(entity, 開催合議体);
             }
         }
     }
