@@ -325,6 +325,18 @@ public class CreateTarget {
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, ファイル名), response);
     }
 
+    /**
+     * CSV出力後の対象者一覧更新処理です。
+     *
+     * @param div CreateTargetDiv
+     * @return ResponseData<CreateTargetDiv>
+     */
+    public ResponseData<CreateTargetDiv> onFinish_fileDownload(CreateTargetDiv div) {
+        getHandler(div).updateファイル作成日(RDate.getNowDate());
+        return ResponseData.of(div).respond();
+
+    }
+
     private CreateTargetCsvEntity get主治医意見書(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().get識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())) {

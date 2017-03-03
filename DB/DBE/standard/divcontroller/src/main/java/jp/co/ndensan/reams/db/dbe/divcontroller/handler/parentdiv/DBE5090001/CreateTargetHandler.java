@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusines
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.CreateTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.dgCreateTargetSummary_Row;
-import jp.co.ndensan.reams.db.dbe.service.core.createtarget.CreateTargetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -70,6 +69,8 @@ public class CreateTargetHandler {
      */
     public void onClick_btnClear() {
         div.getTxtHihokenshaNo().clearValue();
+        div.getTxtKijunYMD().clearFromValue();
+        div.getTxtKijunYMD().clearToValue();
         onLoad();
     }
 
@@ -139,14 +140,20 @@ public class CreateTargetHandler {
     }
 
     /**
-     * CSV出力した後にデータグリッドの送信日を更新します。
-     * Todo:共通ボタンのDownloadにonFinishが公開されていない。基本コントロールのDownLoadButtonを使用するか確認し、当メソッドを使用する場合は使用するように修正を行う。不要な場合は削除する。
+     * CSV出力した後にファイル作成日を更新します。
+     *
+     * @param ファイル作成日 ファイル作成日
      */
-    public void setDataGrid再読込() {
-        div.getDgCreateTargetSummary().getDataSource().clear();
-        CreateTargetMapperParameter param = createParam();
-        SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
-        onClick_btnKensaku(business);
+    public void updateファイル作成日(RDate ファイル作成日) {
+
+        List<dgCreateTargetSummary_Row> rows = new ArrayList<>();
+        for (dgCreateTargetSummary_Row row : div.getDgCreateTargetSummary().getDataSource()) {
+            if (row.getSelected()) {
+                row.getDataShutsuryoku().setValue(ファイル作成日);
+            }
+            rows.add(row);
+        }
+        div.getDgCreateTargetSummary().setDataSource(rows);
     }
 
     /**
