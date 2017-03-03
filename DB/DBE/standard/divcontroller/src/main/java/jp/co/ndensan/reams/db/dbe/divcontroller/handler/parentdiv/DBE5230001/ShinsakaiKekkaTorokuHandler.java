@@ -110,6 +110,7 @@ public class ShinsakaiKekkaTorokuHandler {
     private void setTaishoshaIchiran(List<ShinsakaiKekkaTorokuIChiRanBusiness> iChiRanList) {
         List<dgTaishoshaIchiran_Row> dataSource = new ArrayList<>();
         for (ShinsakaiKekkaTorokuIChiRanBusiness business : iChiRanList) {
+            RString 審査会順序 = new RString(business.get審査会順序());
             TextBoxFlexibleDate 認定申請日 = new TextBoxFlexibleDate();
             認定申請日.setValue(business.get認定申請日());
             TextBoxFlexibleDate 前回有効期間終了日 = new TextBoxFlexibleDate();
@@ -125,7 +126,8 @@ public class ShinsakaiKekkaTorokuHandler {
             boolean 意見フラグ = !RString.isNullOrEmpty(business.get審査会意見());
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row(
                     RString.EMPTY,
-                    new RString(business.get審査会順序()),
+                    審査会順序,
+                    審査会順序.padZeroToLeft(4),
                     business.get保険者番号(),
                     business.get保険者(),
                     business.get被保番号(),
@@ -215,10 +217,6 @@ public class ShinsakaiKekkaTorokuHandler {
         if (mode != OperationMode.更新) {
             return;
         }
-        /**
-         * 二次判断が「要介護１」の場合のみ、状態像の入力が必須となるがを設定
-         */
-        set状態像Disabled(get今回二次判定() != YokaigoJotaiKubun09.要介護1);
         boolean is認定 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード());
         set個別入力制御変更By判定結果(is認定);
         if (!is認定) {
@@ -256,6 +254,10 @@ public class ShinsakaiKekkaTorokuHandler {
 
     private void reflectClickedRowTo個別事項表示欄(dgTaishoshaIchiran_Row row) throws IllegalArgumentException {
         clear個別表示欄();
+        div.getTxtHokenshaName().setValue(row.getHokenshaMeisho());
+        div.getTxtHihokenshaNo().setValue(row.getHihokenshaNo());
+        div.getTxtHihokenshaShimei().setValue(row.getShimei());
+        div.getTxtHihoKubun().setValue(row.getHihoKubun());
         div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().setValue(row.getShinsakaiJunjo());
         div.getKobetsuHyojiArea().getTxtShinseiDay().setValue(row.getShinseiDay().getValue());
         div.getKobetsuHyojiArea().getTxtBirthYMD().setValue(new FlexibleDate(row.getSeiNenGaBi()));
@@ -581,6 +583,10 @@ public class ShinsakaiKekkaTorokuHandler {
      */
     private void clear個別表示欄今回入力外内容() {
         div.getKobetsuHyojiArea().getTxtShinsakaiJunjo().clearValue();
+        div.getTxtHokenshaName().clearValue();
+        div.getTxtHihokenshaNo().clearValue();
+        div.getTxtHihokenshaShimei().clearValue();
+        div.getTxtHihoKubun().clearValue();
         div.getKobetsuHyojiArea().getTxtShinseiDay().clearValue();
         div.getKobetsuHyojiArea().getTxtBirthYMD().clearValue();
         div.getKobetsuHyojiArea().getTxtShinseiKubunShinseiji().clearValue();

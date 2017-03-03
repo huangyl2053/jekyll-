@@ -444,6 +444,46 @@ public class ShinsakaiKekkaTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtHokenshaName() {
+        return this.getKobetsuHyojiArea().getTxtHokenshaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokenshaName(TextBox txtHokenshaName) {
+        this.getKobetsuHyojiArea().setTxtHokenshaName(txtHokenshaName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHihokenshaNo() {
+        return this.getKobetsuHyojiArea().getTxtHihokenshaNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.getKobetsuHyojiArea().setTxtHihokenshaNo(txtHihokenshaNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHihokenshaShimei() {
+        return this.getKobetsuHyojiArea().getTxtHihokenshaShimei();
+    }
+
+    @JsonIgnore
+    public void  setTxtHihokenshaShimei(TextBox txtHihokenshaShimei) {
+        this.getKobetsuHyojiArea().setTxtHihokenshaShimei(txtHihokenshaShimei);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHihoKubun() {
+        return this.getKobetsuHyojiArea().getTxtHihoKubun();
+    }
+
+    @JsonIgnore
+    public void  setTxtHihoKubun(TextBox txtHihoKubun) {
+        this.getKobetsuHyojiArea().setTxtHihoKubun(txtHihoKubun);
+    }
+
+    @JsonIgnore
     public TextBoxFlexibleDate getTxtShinseiDay() {
         return this.getKobetsuHyojiArea().getTxtShinseiDay();
     }

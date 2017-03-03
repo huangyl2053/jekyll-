@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.VerticalScrollPosition;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -175,6 +176,7 @@ public class ShinsakaiKekkaToroku {
         if (updatingRow == null) {
             handler.set個別表示欄入力可();
             handler.displayTo個別表示欄(clickedRow, mode);
+            setNinteiYukoKikanToOperatable(div, handler, handler.get今回二次判定());
             ViewStateHolder.put(ViewStateKeys.処理モード, mode);
             return ResponseData.of(div).respond();
         }
@@ -294,7 +296,9 @@ public class ShinsakaiKekkaToroku {
                 return ResponseData.of(div).forwardWithEventName(DBE5230001TransitionEventName.一覧に戻る).respond();
             }
             div.getKanryoMessagePanel().getCcdKaigoKanryoMessage().setSuccessMessage(
-                    new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()));
+                    new RString(UrInformationMessages.正常終了.getMessage().replace("保存").evaluate()),
+                    new RStringBuilder().append("審査会名称：").append(div.getTxtShinsakaiName().getValue()).toRString(),
+                    RString.EMPTY);
             if (SUB_MENU_UICONTAINERID.equals(ResponseHolder.getUIContainerId())) {
                 return ResponseData.of(div).setState(DBE5230001StateName.開催から終了);
             } else {
@@ -327,7 +331,7 @@ public class ShinsakaiKekkaToroku {
                 switch (state) {
                     case 追加:
                         saveBy(manager, row2, 開催番号, state);
-                        return;
+                        continue;
                     case 修正:
                         saveBy(manager, row2, 開催番号, state);
                         continue;

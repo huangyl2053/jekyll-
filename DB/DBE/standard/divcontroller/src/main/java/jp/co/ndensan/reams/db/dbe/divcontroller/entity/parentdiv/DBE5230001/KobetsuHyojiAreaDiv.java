@@ -24,6 +24,14 @@ public class KobetsuHyojiAreaDiv extends Panel {
      */
     @JsonProperty("txtShinsakaiJunjo")
     private TextBox txtShinsakaiJunjo;
+    @JsonProperty("txtHokenshaName")
+    private TextBox txtHokenshaName;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBox txtHihokenshaNo;
+    @JsonProperty("txtHihokenshaShimei")
+    private TextBox txtHihokenshaShimei;
+    @JsonProperty("txtHihoKubun")
+    private TextBox txtHihoKubun;
     @JsonProperty("txtShinseiDay")
     private TextBoxFlexibleDate txtShinseiDay;
     @JsonProperty("txtBirthYMD")
@@ -111,6 +119,78 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("txtShinsakaiJunjo")
     public void setTxtShinsakaiJunjo(TextBox txtShinsakaiJunjo) {
         this.txtShinsakaiJunjo = txtShinsakaiJunjo;
+    }
+
+    /*
+     * gettxtHokenshaName
+     * @return txtHokenshaName
+     */
+    @JsonProperty("txtHokenshaName")
+    public TextBox getTxtHokenshaName() {
+        return txtHokenshaName;
+    }
+
+    /*
+     * settxtHokenshaName
+     * @param txtHokenshaName txtHokenshaName
+     */
+    @JsonProperty("txtHokenshaName")
+    public void setTxtHokenshaName(TextBox txtHokenshaName) {
+        this.txtHokenshaName = txtHokenshaName;
+    }
+
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public TextBox getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.txtHihokenshaNo = txtHihokenshaNo;
+    }
+
+    /*
+     * gettxtHihokenshaShimei
+     * @return txtHihokenshaShimei
+     */
+    @JsonProperty("txtHihokenshaShimei")
+    public TextBox getTxtHihokenshaShimei() {
+        return txtHihokenshaShimei;
+    }
+
+    /*
+     * settxtHihokenshaShimei
+     * @param txtHihokenshaShimei txtHihokenshaShimei
+     */
+    @JsonProperty("txtHihokenshaShimei")
+    public void setTxtHihokenshaShimei(TextBox txtHihokenshaShimei) {
+        this.txtHihokenshaShimei = txtHihokenshaShimei;
+    }
+
+    /*
+     * gettxtHihoKubun
+     * @return txtHihoKubun
+     */
+    @JsonProperty("txtHihoKubun")
+    public TextBox getTxtHihoKubun() {
+        return txtHihoKubun;
+    }
+
+    /*
+     * settxtHihoKubun
+     * @param txtHihoKubun txtHihoKubun
+     */
+    @JsonProperty("txtHihoKubun")
+    public void setTxtHihoKubun(TextBox txtHihoKubun) {
+        this.txtHihoKubun = txtHihoKubun;
     }
 
     /*
