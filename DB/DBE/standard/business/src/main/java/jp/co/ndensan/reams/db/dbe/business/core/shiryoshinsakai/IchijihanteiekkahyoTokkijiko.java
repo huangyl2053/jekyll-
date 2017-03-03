@@ -260,6 +260,7 @@ public class IchijihanteiekkahyoTokkijiko {
     }
 
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {
+        int 特記事項連番_イメージファイル = 特記事項連番 -1; 
         RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名;
         try {
@@ -270,8 +271,8 @@ public class IchijihanteiekkahyoTokkijiko {
         if (!RString.isNullOrEmpty(ファイル名)) {
             イメージファイル.append(ファイル名);
             for (int i = 0; i <= 最大連番; i++) {
-                if (i == 特記事項連番) {
-                    イメージファイル.replace(new RString("xx"), new RString(特記事項連番).padZeroToLeft(2));
+                if (i == 特記事項連番_イメージファイル) {
+                    イメージファイル.replace(new RString("xx"), new RString(特記事項連番_イメージファイル).padZeroToLeft(2));
                     イメージファイル.replace(".png", "");
                     break;
                 }

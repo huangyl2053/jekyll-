@@ -9,6 +9,30 @@ module DBZ {
 
         export class Events {
 
+            public static onOKClose_chosaItakusakiGuide(): string {
+                return "onOKClose_chosaItakusakiGuide";
+            }
+
+            public static onBefore_chosaItakusakiGuide(): string {
+                return "onBefore_chosaItakusakiGuide";
+            }
+
+            public static onOKClose_iryoKikanGuide(): string {
+                return "onOKClose_iryoKikanGuide";
+            }
+
+            public static onBefore_iryoKikanGuide(): string {
+                return "onBefore_iryoKikanGuide";
+            }
+
+            public static onOKClose_sonotaKikanGuide(): string {
+                return "onOKClose_sonotaKikanGuide";
+            }
+
+            public static onBefore_sonotaKikanGuide(): string {
+                return "onBefore_sonotaKikanGuide";
+            }
+
             public static onClick_btnKensakku(): string {
                 return "onClick_btnKensakku";
             }
@@ -82,10 +106,6 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             }
 
-            public ccdHokensha(): DBZ.HokenshaList.ModeController {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
-            }
-
             public txtKijunbi(): UZA.TextBoxDate {
                 return new UZA.TextBoxDate(this.convFiledName("txtKijunbi"));
             }
@@ -98,6 +118,50 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkHaishi"));
             }
 
+            public pnlShosaiJoken(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("pnlShosaiJoken"));
+            }
+
+            public ccdHokensha(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
+            }
+
+            public txtChosaItakusakiCode(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiCode"));
+            }
+
+            public btnChosaItakusaki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChosaItakusaki"));
+            }
+
+            public txtChosaItakusakiName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            }
+
+            public txtIryoKikanCode(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtIryoKikanCode"));
+            }
+
+            public btnIryoKikan(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnIryoKikan"));
+            }
+
+            public txtIryoKikanName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtIryoKikanName"));
+            }
+
+            public txtSonotaJigyoshaCode(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtSonotaJigyoshaCode"));
+            }
+
+            public btnSonotaJigyosha(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSonotaJigyosha"));
+            }
+
+            public txtSonotaJigyoshaName(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtSonotaJigyoshaName"));
+            }
+
             public txtMaxKensu(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
             }
@@ -108,26 +172,6 @@ module DBZ {
 
             public btnClear(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnClear"));
-            }
-
-            public ShosaiJoken(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShosaiJoken"));
-            }
-
-            public lblShozoku(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShozoku"));
-            }
-
-            public ddlIryoKikan(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlIryoKikan"));
-            }
-
-            public ddlKaigoJigyosha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKaigoJigyosha"));
-            }
-
-            public ddlSonotaJigyosha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlSonotaJigyosha"));
             }
 
             public ShinsakaiIinIchiran(): UZA.Panel {

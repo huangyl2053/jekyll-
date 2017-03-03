@@ -46,6 +46,8 @@ public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
     private static final List<RString> PAGE_BREAK_KEYS_A3 = Collections.unmodifiableList(Arrays.asList(
             new RString(TsuikashiryokagamiA3ReportSource.ReportSourceFields.shinsakaiNo.name())));
     private static final int 満ページ件数 = 10;
+    private static final int 通知文_パターン番号 = 1;
+    private static final int 通知文_項目番号 = 0;
     private IinShinsakaiIinJohoProcessParameter paramter;
     private IJimuShiryoShinsakaiIinMapper mapper;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
@@ -98,7 +100,7 @@ public class JimuTuikaSiryoDataSakuseiA3Process extends BatchKeyBreakBase<Shinsa
                 paramter,
                 データ件数,
                 ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE517009.getReportId(),
-                        KamokuCode.EMPTY, 1, 1, FlexibleDate.getNowDate()));
+                        KamokuCode.EMPTY, 通知文_パターン番号, 通知文_項目番号, FlexibleDate.getNowDate()));
         TsuikashiryokagamiA3Report report = new TsuikashiryokagamiA3Report(business);
         report.writeBy(reportSourceWriterA3);
     }

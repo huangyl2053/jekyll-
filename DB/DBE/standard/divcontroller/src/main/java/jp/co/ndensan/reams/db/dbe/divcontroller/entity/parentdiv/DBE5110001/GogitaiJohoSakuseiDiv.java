@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiJohoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-13_17-59-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-28_12-26-08">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,6 +42,10 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     private RString hiddenFileName;
     @JsonProperty("wfParameter")
     private RString wfParameter;
+    @JsonProperty("hiddenKijunYMD")
+    private RString hiddenKijunYMD;
+    @JsonProperty("hiddenMode")
+    private RString hiddenMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -191,6 +195,42 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonProperty("wfParameter")
     public void setWfParameter(RString wfParameter) {
         this.wfParameter = wfParameter;
+    }
+
+    /*
+     * gethiddenKijunYMD
+     * @return hiddenKijunYMD
+     */
+    @JsonProperty("hiddenKijunYMD")
+    public RString getHiddenKijunYMD() {
+        return hiddenKijunYMD;
+    }
+
+    /*
+     * sethiddenKijunYMD
+     * @param hiddenKijunYMD hiddenKijunYMD
+     */
+    @JsonProperty("hiddenKijunYMD")
+    public void setHiddenKijunYMD(RString hiddenKijunYMD) {
+        this.hiddenKijunYMD = hiddenKijunYMD;
+    }
+
+    /*
+     * gethiddenMode
+     * @return hiddenMode
+     */
+    @JsonProperty("hiddenMode")
+    public RString getHiddenMode() {
+        return hiddenMode;
+    }
+
+    /*
+     * sethiddenMode
+     * @param hiddenMode hiddenMode
+     */
+    @JsonProperty("hiddenMode")
+    public void setHiddenMode(RString hiddenMode) {
+        this.hiddenMode = hiddenMode;
     }
 
     /*

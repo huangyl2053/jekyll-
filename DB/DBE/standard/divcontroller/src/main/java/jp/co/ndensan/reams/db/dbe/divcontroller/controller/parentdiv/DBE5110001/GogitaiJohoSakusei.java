@@ -682,6 +682,16 @@ public class GogitaiJohoSakusei {
         return ResponseData.of(batchParam).respond();
     }
 
+    public ResponseData<GogitaiJohoSakuseiDiv> onBefore_shinsakaiIinGuid(GogitaiJohoSakuseiDiv div) {
+        RDate 基準日 = RDate.getNowDate();
+        if (div.getTxtYukoKaishiYMD().getValue() != null) {
+            基準日 = div.getTxtYukoKaishiYMD().getValue();
+        }
+        div.setHiddenKijunYMD(new RString(基準日.toString()));
+        div.setHiddenMode(new RString("合議体情報作成"));
+        return ResponseData.of(div).respond();
+    }
+
     private GogitaiJohoSakuseiHandler getHandler(GogitaiJohoSakuseiDiv div) {
         return new GogitaiJohoSakuseiHandler(div);
     }

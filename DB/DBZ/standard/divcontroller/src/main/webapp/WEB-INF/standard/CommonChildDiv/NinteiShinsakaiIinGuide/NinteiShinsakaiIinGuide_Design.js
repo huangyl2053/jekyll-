@@ -4,6 +4,30 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onOKClose_chosaItakusakiGuide = function () {
+                return "onOKClose_chosaItakusakiGuide";
+            };
+
+            Events.onBefore_chosaItakusakiGuide = function () {
+                return "onBefore_chosaItakusakiGuide";
+            };
+
+            Events.onOKClose_iryoKikanGuide = function () {
+                return "onOKClose_iryoKikanGuide";
+            };
+
+            Events.onBefore_iryoKikanGuide = function () {
+                return "onBefore_iryoKikanGuide";
+            };
+
+            Events.onOKClose_sonotaKikanGuide = function () {
+                return "onOKClose_sonotaKikanGuide";
+            };
+
+            Events.onBefore_sonotaKikanGuide = function () {
+                return "onBefore_sonotaKikanGuide";
+            };
+
             Events.onClick_btnKensakku = function () {
                 return "onClick_btnKensakku";
             };
@@ -75,10 +99,6 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             };
 
-            Controls.prototype.ccdHokensha = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
-            };
-
             Controls.prototype.txtKijunbi = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtKijunbi"));
             };
@@ -91,6 +111,50 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkHaishi"));
             };
 
+            Controls.prototype.pnlShosaiJoken = function () {
+                return new UZA.Panel(this.convFiledName("pnlShosaiJoken"));
+            };
+
+            Controls.prototype.ccdHokensha = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
+            };
+
+            Controls.prototype.txtChosaItakusakiCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiCode"));
+            };
+
+            Controls.prototype.btnChosaItakusaki = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnChosaItakusaki"));
+            };
+
+            Controls.prototype.txtChosaItakusakiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            };
+
+            Controls.prototype.txtIryoKikanCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoKikanCode"));
+            };
+
+            Controls.prototype.btnIryoKikan = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnIryoKikan"));
+            };
+
+            Controls.prototype.txtIryoKikanName = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoKikanName"));
+            };
+
+            Controls.prototype.txtSonotaJigyoshaCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtSonotaJigyoshaCode"));
+            };
+
+            Controls.prototype.btnSonotaJigyosha = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnSonotaJigyosha"));
+            };
+
+            Controls.prototype.txtSonotaJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtSonotaJigyoshaName"));
+            };
+
             Controls.prototype.txtMaxKensu = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
             };
@@ -101,26 +165,6 @@ var DBZ;
 
             Controls.prototype.btnClear = function () {
                 return new UZA.Button(this.convFiledName("btnClear"));
-            };
-
-            Controls.prototype.ShosaiJoken = function () {
-                return new UZA.Panel(this.convFiledName("ShosaiJoken"));
-            };
-
-            Controls.prototype.lblShozoku = function () {
-                return new UZA.Label(this.convFiledName("lblShozoku"));
-            };
-
-            Controls.prototype.ddlIryoKikan = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlIryoKikan"));
-            };
-
-            Controls.prototype.ddlKaigoJigyosha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlKaigoJigyosha"));
-            };
-
-            Controls.prototype.ddlSonotaJigyosha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlSonotaJigyosha"));
             };
 
             Controls.prototype.ShinsakaiIinIchiran = function () {

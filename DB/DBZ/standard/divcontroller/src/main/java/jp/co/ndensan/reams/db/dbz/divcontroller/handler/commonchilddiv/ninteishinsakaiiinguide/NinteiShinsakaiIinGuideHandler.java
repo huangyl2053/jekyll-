@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,9 +26,9 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 認定審査会委員ガイドDivの操作を行うクラスです。
@@ -56,8 +56,11 @@ public class NinteiShinsakaiIinGuideHandler {
         set全部クリア();
         set性別();
         set審査会委員資格();
-        div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         画面表示制御();
+        RString 基準日 = div.getHiddenKijunYMD();
+        if (基準日 != null && !基準日.isEmpty()) {
+            div.getTxtKijunbi().setValue(new RDate(基準日.toString()));
+        }
     }
 
     /**
@@ -73,9 +76,12 @@ public class NinteiShinsakaiIinGuideHandler {
         div.getKensakuJoken().getTxtMaxKensu().clearValue();
         div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数());
         div.getBtnSaikensaku().setVisible(false);
-        div.getDdlIryoKikan().getDataSource().clear();
-        div.getDdlKaigoJigyosha().getDataSource().clear();
-        div.getDdlSonotaJigyosha().getDataSource().clear();
+        div.getTxtChosaItakusakiCode().clearValue();
+        div.getTxtChosaItakusakiName().clearValue();
+        div.getTxtIryoKikanCode().clearValue();
+        div.getTxtIryoKikanName().clearValue();
+        div.getTxtSonotaJigyoshaCode().clearValue();
+        div.getTxtSonotaJigyoshaName().clearValue();
         List<RString> list = new ArrayList();
         list.add(KEY0);
         div.getKensakuJoken().getChkHaishi().setSelectedItemsByKey(list);
@@ -124,73 +130,26 @@ public class NinteiShinsakaiIinGuideHandler {
     }
 
     /**
-     * 医療機関情報ドロップダウンリストの設定です。
-     *
-     * @param 市町村コード 市町村コード
-     */
-    private void set医療機関() {
-        LasdecCode 市町村コード = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村コード();
-        List<KeyValueDataSource> 医療機関リスト = createInstanceOfManager().get主治医医療機関情報(市町村コード).records();
-        div.getKensakuJoken().getDdlIryoKikan().setDataSource(医療機関リスト);
-        div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setSelectedKey(RString.EMPTY);
-    }
-
-    /**
-     * 介護事業者ドロップダウンリストの設定です。
-     *
-     * @param 市町村コード 市町村コード
-     */
-    private void set介護事業者() {
-        LasdecCode 市町村コード = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村コード();
-        List<KeyValueDataSource> 介護事業者リスト = createInstanceOfManager().get認定調査委託先情報(市町村コード).records();
-        div.getDdlKaigoJigyosha().setDataSource(介護事業者リスト);
-        div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setSelectedKey(RString.EMPTY);
-    }
-
-    /**
-     * 介護事業者ドロップダウンリストの設定です。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     */
-    private void setその他事業者() {
-        ShoKisaiHokenshaNo 証記載保険者番号 = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号();
-        List<KeyValueDataSource> その他事業者リスト = createInstanceOfManager().getその他機関情報(証記載保険者番号).records();
-        div.getDdlSonotaJigyosha().setDataSource(その他事業者リスト);
-        div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setSelectedKey(RString.EMPTY);
-    }
-    
-    /**
      * 保険者選択の処理です。
      *
      */
     public void set保険者選択() {
-        画面表示制御();
         List<dgShinsakaiIinIchiran_Row> 検索一覧データ = new ArrayList<>();
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(検索一覧データ);
         div.getShinsakaiIinIchiran().setIsOpen(false);
         div.getBtnSaikensaku().setVisible(false);
     }
-    
+
     private void 画面表示制御() {
-        if (RString.isNullOrEmpty(div.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村名称())) {
-            div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setDisplayNone(Boolean.TRUE);
-            div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setDisplayNone(Boolean.TRUE);
-            div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setDisplayNone(Boolean.TRUE);
-            div.getKensakuJoken().getShosaiJoken().getLblShozoku().setDisplayNone(Boolean.TRUE);
-
+        if (new RString("合議体情報作成").equals(div.getHiddenMode())) {
+            div.getPnlShosaiJoken().setDisplayNone(true);
         } else {
-            div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().setDisplayNone(Boolean.FALSE);
-            div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().setDisplayNone(Boolean.FALSE);
-            div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().setDisplayNone(Boolean.FALSE);
-            div.getKensakuJoken().getShosaiJoken().getLblShozoku().setDisplayNone(Boolean.FALSE);
-            set医療機関();
-            set介護事業者();
-            setその他事業者();
+            div.getKensakuJoken().getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            div.getKensakuJoken().getCcdHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
         }
-
     }
-    
-    
+
     /**
      * 審査会委員一覧情報の設定です。
      *
@@ -237,6 +196,7 @@ public class NinteiShinsakaiIinGuideHandler {
 
     private NinteiShinsakaiIinGuideManager createInstanceOfManager() {
         return NinteiShinsakaiIinGuideManager.createInstance();
+
     }
 
     private static enum NinteiShinsakaiIinGuideHandlerMessages implements IValidationMessage {

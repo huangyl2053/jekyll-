@@ -21,25 +21,7 @@
         rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode" 
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
-        LEFT JOIN (
-        SELECT
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode" AS "shinsakaiIinCode",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."remban" AS "remban",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiIryokikanCode" AS "shujiiIryokikanCode",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiCode" AS "shujiiCode",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteiChosainNo" AS "ninteiChosainNo",
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."sonotaKikanCode" AS "sonotaKikanCode",
-        row_number() 
-        OVER(PARTITION BY rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode" 
-        ORDER BY rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."remban" DESC) AS rnbn
-        FROM
-        rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
-        ) AS DbT5595
-        ON rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = DbT5595."shinsakaiIinCode"
-        <where>
-            DbT5595.rnbn = 1
+        <where>        
             <if test="isShinsakaiIinKaishiYMDFlag">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" <![CDATA[>=]]> #{shinsakaiIinCodeFrom}
             </if>
@@ -55,15 +37,6 @@
             <if test="isShinsakaiIinShikakuCodeFlag">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode" = #{shinsakaiIinShikakuCode}
             </if>
-            <if test="isShujiiIryokikanCodeFlag">
-                AND DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode}
-            </if>
-            <if test="isNinteiChosainNoFlag">
-                AND DbT5595."ninteiChosainNo" = #{ninteiChosainNo}
-            </if> 
-            <if test="isSonotaKikanCodeFlag">
-                AND DbT5595."sonotaKikanCode" = #{sonotaKikanCode}
-            </if>
             <if test="kikenFlag.toString() == 'key0'">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[<=]]> #{systemDate}
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{systemDate}
@@ -78,8 +51,27 @@
             <if test="haishiFlag.toString() == 2">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = false
             </if>
-            <if test="isShoKisaiHokenshaNoFlag">
-                AND DbT5595."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+            <if test="isShosaiJoken">
+                AND EXISTS (
+                SELECT
+                'X'
+                FROM
+                rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" as DbT5595
+                WHERE
+                rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = DbT5595."shinsakaiIinCode"
+                <if test="isShujiiIryokikanCodeFlag">
+                    AND DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode}
+                </if>
+                <if test="isNinteiChosainNoFlag">
+                    AND DbT5595."ninteichosaItakusakiCode" = #{ninteiChosainNo}
+                </if> 
+                <if test="isSonotaKikanCodeFlag">
+                    AND DbT5595."sonotaKikanCode" = #{sonotaKikanCode}
+                </if>
+                <if test="isShoKisaiHokenshaNoFlag">
+                    AND DbT5595."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+                </if>
+                )
             </if>
         </where>
         LIMIT(#{maxKensu})
