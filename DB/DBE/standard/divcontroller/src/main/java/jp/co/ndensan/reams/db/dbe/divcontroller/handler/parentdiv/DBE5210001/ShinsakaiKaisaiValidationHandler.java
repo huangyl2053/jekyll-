@@ -11,19 +11,14 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajo
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsChikokuUmu;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -88,20 +83,6 @@ public class ShinsakaiKaisaiValidationHandler {
             }
         }
         return 結果情報 == null || 結果情報.isEmpty() || is資料作成年月日無;
-    }
-
-    /**
-     * 開催日についてチェックします。
-     *
-     * @param validationMessages バリデーションメッセージ
-     *
-     */
-    public void 開催日チェック(ValidationMessageControlPairs validationMessages) {
-        boolean is未来日 = div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().getValue().isAfter(FlexibleDate.getNowDate().plusDay(1));
-        if (is未来日) {
-            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKaisaiMessages(DbeWarningMessages.開催日が未来日),
-                    div.getShinsakaiKaisaiInfo().getTxtKaisaiBi()));
-        }
     }
 
     /**

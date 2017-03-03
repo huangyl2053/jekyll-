@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2Builder;
@@ -18,7 +19,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
@@ -34,9 +37,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJo
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -73,14 +81,26 @@ public class ShinsakaiKaisaiKekka {
         onseiJohoManager = new ShinsakaiOnseiJohoManager();
     }
 
+    private static void releaseRealInitialLock(RString 開催番号) {
+        RealInitialLocker.release(LockingKeys.介護認定審査会開催番号.appended(開催番号));
+    }
+
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアです。
      *
      * @param div 介護認定審査会開催結果登録div
-     * @return ResponseData<ShinsakaiKaisaiKekkaDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
-        ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
+        if (ResponseHolder.isReRequest()) {
+            if (Objects.equals(new RString(DbeWarningMessages.開催日が未来日.getMessage().getCode()), ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                releaseRealInitialLock(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
+                return ResponseData.of(div).forwardWithEventName(DBE5210001TransitionEventName.審査会一覧に戻る).respond();
+            }
+            return ResponseData.of(div).respond();
+        }
+
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         div.getShinsakaiKaisaiInfo().getDdlKaisaiBasho().setDataSource(service.get開催会場());
@@ -102,19 +122,32 @@ public class ShinsakaiKaisaiKekka {
 
         SearchResult<ShinsakaiWariateJoho> wariateJohoResult = kekkaTorokuservice.get介護認定審査会割当情報(開催番号);
         ShinsakaiKaisaiValidationHandler validationHandler = getValidationHandler(div);
-        if (!ResponseHolder.isReRequest() && validationHandler.is未作成データあり(wariateJohoResult.records())) {
+        if (validationHandler.is未作成データあり(wariateJohoResult.records())) {
             div.setReadOnly(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(更新BTN, true);
             return ResponseData.of(div).addMessage(DbeErrorMessages.審査会資料未作成あり.getMessage()).respond();
         }
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationHandler.開催日チェック(validationMessages);
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        if (!RealInitialLocker.tryGetLock(LockingKeys.介護認定審査会開催番号.appended(開催番号))) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(更新BTN, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
+        if (is未来予定の審査会開催結果の新規登録(saiYoteiJoho)) {
+            return ResponseData.of(div).addMessage(DbeWarningMessages.開催日が未来日.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
 
-        responseData.data = div;
-        return responseData;
+    private static boolean is未来予定の審査会開催結果の新規登録(List<ShinsakaiKaisaiYoteiJohoBusiness> yotei) {
+        if (yotei.isEmpty()) {
+            return false;
+        }
+        ShinsakaiKaisaiYoteiJohoBusiness b = yotei.get(0);
+        return !isValid(b.get開催日()) && isValid(b.get開催予定日()) && b.get開催予定日().isAfter(FlexibleDate.getNowDate());
+    }
+
+    private static boolean isValid(FlexibleDate fDate) {
+        return fDate != null && fDate.isValid();
     }
 
     /**
@@ -215,6 +248,7 @@ public class ShinsakaiKaisaiKekka {
                 && new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 || ResponseHolder.isWarningIgnoredRequest()) {
             setYotei(div);
+            releaseRealInitialLock(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
             return ResponseData.of(div).setState(DBE5210001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -227,6 +261,7 @@ public class ShinsakaiKaisaiKekka {
      * @return ResponseData<ShinsakaiKaisaiKekkaDiv>
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnRetuen(ShinsakaiKaisaiKekkaDiv div) {
+        releaseRealInitialLock(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
         return ResponseData.of(div).forwardWithEventName(DBE5210001TransitionEventName.審査会一覧に戻る).respond();
     }
 
