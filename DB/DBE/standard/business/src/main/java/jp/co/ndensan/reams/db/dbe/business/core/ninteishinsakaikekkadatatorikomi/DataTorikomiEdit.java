@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -241,6 +243,50 @@ public class DataTorikomiEdit {
         return dbt5511Entity;
     }
 
+      /**
+     * DbT5511ShinsakaiKaisaiKekkaJohoEntityのupdateメッソドです。
+     *
+     * @param entity TempShinsakaiJohoEntity
+     * @param dbt5105Entity DbT5105NinteiKanryoJohoEntity
+     * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
+     */
+    public DbT5105NinteiKanryoJohoEntity editDbT5105Entity(TempShinsakaiKekkaEntity entity,
+                                                                    DbT5105NinteiKanryoJohoEntity dbt5105Entity) {
+        switch (HanteiKekkaCode.toValue(entity.get今回_二次判定())) {
+                case 再調査_意見書のみ:
+                    dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
+                    dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
+                    dbt5105Entity.setIchijiHanteiKanryoYMD(null);
+                    dbt5105Entity.setMaskingKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                case 再調査_調査_意見書:
+                    dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
+                    dbt5105Entity.setNinteichosaKanryoYMD(null);
+                    dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
+                    dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
+                    dbt5105Entity.setIchijiHanteiKanryoYMD(null);
+                    dbt5105Entity.setMaskingKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                case 再調査_調査のみ:
+                    dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
+                    dbt5105Entity.setNinteichosaKanryoYMD(null);
+                    dbt5105Entity.setIchijiHanteiKanryoYMD(null);
+                    dbt5105Entity.setMaskingKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                case 再審査:
+                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                case 未審査:
+                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                default:
+
+            }
+        return dbt5105Entity;
+    }
     /**
      * 所要時間を計算します。終了時刻が開始時刻より後である前提で計算します。
      *
