@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -51,6 +51,8 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     private Label lblShinsakaiIinIchiran;
     @JsonProperty("btnZentaiHyoji")
     private Button btnZentaiHyoji;
+    @JsonProperty("txtKijunYMD")
+    private TextBoxDate txtKijunYMD;
     @JsonProperty("dgShinsakaiIinIchiran")
     private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
 
@@ -328,6 +330,24 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
     @JsonProperty("btnZentaiHyoji")
     public void setBtnZentaiHyoji(Button btnZentaiHyoji) {
         this.btnZentaiHyoji = btnZentaiHyoji;
+    }
+
+    /*
+     * gettxtKijunYMD
+     * @return txtKijunYMD
+     */
+    @JsonProperty("txtKijunYMD")
+    public TextBoxDate getTxtKijunYMD() {
+        return txtKijunYMD;
+    }
+
+    /*
+     * settxtKijunYMD
+     * @param txtKijunYMD txtKijunYMD
+     */
+    @JsonProperty("txtKijunYMD")
+    public void setTxtKijunYMD(TextBoxDate txtKijunYMD) {
+        this.txtKijunYMD = txtKijunYMD;
     }
 
     /*

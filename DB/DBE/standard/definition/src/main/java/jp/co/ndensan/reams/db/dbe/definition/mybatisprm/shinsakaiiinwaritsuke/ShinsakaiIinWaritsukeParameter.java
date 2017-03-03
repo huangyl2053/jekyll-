@@ -21,7 +21,7 @@ public final class ShinsakaiIinWaritsukeParameter {
     private final RString kaisaiNo;
     private final LasdecCode shichousonCode;
     private final RString kaisaiYMD;
-    private final RDate kijunYMD;
+    private final RString kijunYMD;
 
     /**
      * コンストラクタです。
@@ -35,7 +35,7 @@ public final class ShinsakaiIinWaritsukeParameter {
             RString kaisaiNo,
             LasdecCode shichousonCode,
             RString kaisaiYMD,
-            RDate kijunYMD) {
+            RString kijunYMD) {
         this.kaisaiNo = kaisaiNo;
         this.shichousonCode = shichousonCode;
         this.kaisaiYMD = kaisaiYMD;
@@ -56,7 +56,10 @@ public final class ShinsakaiIinWaritsukeParameter {
             LasdecCode shichousonCode,
             RString kaisaiYMD,
             RDate kijunYMD) {
-
-        return new ShinsakaiIinWaritsukeParameter(kaisaiNo, shichousonCode, kaisaiYMD, kijunYMD);
+        RString 基準日 = RString.EMPTY;
+        if (kijunYMD != null) {
+            基準日 = kijunYMD.toDateString();
+        }
+        return new ShinsakaiIinWaritsukeParameter(kaisaiNo, shichousonCode, kaisaiYMD, 基準日);
     }
 }

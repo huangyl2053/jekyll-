@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinwari
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiIinKoseIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiiinJohoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,5 +41,13 @@ public interface IShinsakaiIinWaritsukeMapper {
      * @param parameter 審査会内容検索パラメータクラス
      * @return List<ShinsakaiiinJohoRelateEntity>
      */
-    List<ShinsakaiiinJohoRelateEntity> get審査会委員情報By開催年月日(ShinsakaiIinWaritsukeParameter parameter);
+    List<ShinsakaiiinJohoRelateEntity> get審査会委員情報_全体表示(ShinsakaiIinWaritsukeParameter parameter);
+
+    /**
+     * g審査会委員構成一覧情報を取得します。
+     *
+     * @param parameter 審査会内容検索パラメータクラス
+     * @return List<ShinsakaiIinKoseIchiranRelateEntity >
+     */
+    List<ShinsakaiIinKoseIchiranRelateEntity> get審査会委員構成一覧(ShinsakaiIinWaritsukeParameter parameter);
 }

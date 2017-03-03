@@ -7,19 +7,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiIinKoseIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsGogitaiSeishinkaSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinKoseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -87,7 +86,7 @@ public class ShinsakaiIinWaritsukeHandler {
         }
         div.getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);
     }
-    
+
     public void setShinsakaiWariateIinJohoList(List<ShinsakaiiinJoho> iinJoholist,
             List<RString> shinsakaiWariateIinCodeList,
             List<ShinsakaiiinJoho> shinsakaiWariateIinJohoList,
@@ -104,37 +103,18 @@ public class ShinsakaiIinWaritsukeHandler {
     /**
      * 介護認定審査会委員(構成)一覧gridエリア。
      *
-     * @param shinsakaiWariateIinJohoList 審査会割当委員情報リスト
-     * @param shinsakaiNotWariateIinJohoList 審査会Not割当委員情報リスト
+     * @param iinKoseList 審査会委員構成一覧リスト
+     * @param iinJoholist 審査会委員一覧リスト
      */
-    public void setShinsakaiIinDataGrid(List<ShinsakaiiinJoho> shinsakaiWariateIinJohoList,
-            List<ShinsakaiiinJoho> shinsakaiNotWariateIinJohoList) {
+    public void setShinsakaiIinDataGrid(List<ShinsakaiIinKoseIchiran> iinKoseList,
+            List<ShinsakaiiinJoho> iinJoholist) {
         List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = new ArrayList<>();
         List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
-        for (ShinsakaiiinJoho shinsakaiIinJoho : shinsakaiWariateIinJohoList) {
-            set構成一覧DataGrid(koseiIchiranGridList, shinsakaiIinJoho);
+        for (ShinsakaiIinKoseIchiran item : iinKoseList) {
+            set構成一覧DataGrid(koseiIchiranGridList, item);
         }
-        for (ShinsakaiiinJoho shinsakaiIinJoho : shinsakaiNotWariateIinJohoList) {
-            set一覧DataGrid(ichiranGridList, shinsakaiIinJoho);
-        }
-        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
-        div.getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
-    }
-
-    /**
-     * 介護認定審査会委員(構成)一覧gridエリア。
-     *
-     * @param list 一覧エリア内容
-     */
-    public void setDataGrid(List<ShinsakaiiinJoho> list) {
-        List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = new ArrayList<>();
-        List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
-        for (ShinsakaiiinJoho shinsakaiIinJoho : list) {
-            if (shinsakaiIinJoho.is補欠区分()) {
-                set一覧DataGrid(ichiranGridList, shinsakaiIinJoho);
-            } else {
-                set構成一覧DataGrid(koseiIchiranGridList, shinsakaiIinJoho);
-            }
+        for (ShinsakaiiinJoho item : iinJoholist) {
+            set一覧DataGrid(ichiranGridList, item);
         }
         div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
         div.getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
@@ -148,18 +128,8 @@ public class ShinsakaiIinWaritsukeHandler {
     public void setAllDataGrid(List<ShinsakaiiinJoho> list) {
         List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = div.getDgShinsakaiIinKoseiIchiran().getDataSource();
         List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            different = true;
-            ShinsakaiiinJoho business = list.get(i);
-            for (int j = 0; j < koseiIchiranGridList.size(); j++) {
-                if (koseiIchiranGridList.get(j).getShinsakaiIinCode().equals(business.get介護認定審査会委員コード())) {
-                    different = false;
-                    break;
-                }
-            }
-            if (different) {
-                set一覧DataGrid(ichiranGridList, business);
-            }
+        for (ShinsakaiiinJoho business : list) {
+            set一覧DataGrid(ichiranGridList, business);
         }
         div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
     }
@@ -176,11 +146,19 @@ public class ShinsakaiIinWaritsukeHandler {
         row.setShozokuKikan(shinsakaiIinIchiranRow.getShozokuKikan());
         row.setSex(shinsakaiIinIchiranRow.getSex());
         row.setShinsakaiInnShikaku(shinsakaiIinIchiranRow.getShinsakaiIinShikaku());
-        row.setGogitaichoKubun(shinsakaiIinIchiranRow.getGogitaichoKubun());
+        row.setGogitaichoKubun(get議長区分名称変換(shinsakaiIinIchiranRow.getGogitaichoKubun()));
         row.setShukketsuKubun(shinsakaiIinIchiranRow.getShukketsuKubun());
         row.setShinsakaiIinKaishibi(shinsakaiIinIchiranRow.getShinsakaiIinKaishibi());
         row.setShinsakaiIinShuryobi(shinsakaiIinIchiranRow.getShinsakaiIinShuryobi());
         div.getDgShinsakaiIinKoseiIchiran().getDataSource().add(row);
+    }
+
+    private RString get議長区分名称変換(RString 合議体長区分) {
+        RString 議長区分名称 = KaigoninteiShinsakaiGichoKubunCode.委員.get名称();
+        if (GogitaichoKubunCode.合議体長.get名称().equals(合議体長区分)) {
+            議長区分名称 = KaigoninteiShinsakaiGichoKubunCode.議長.get名称();
+        }
+        return 議長区分名称;
     }
 
     /**
@@ -224,9 +202,9 @@ public class ShinsakaiIinWaritsukeHandler {
         LockingKey lockingKey = new LockingKey(new RString("ShinsakaiNo"));
         RealInitialLocker.release(lockingKey);
     }
-    
+
     private void set構成一覧DataGrid(List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList,
-            ShinsakaiiinJoho shinsakaiIinJoho) {
+            ShinsakaiIinKoseIchiran shinsakaiIinJoho) {
         dgShinsakaiIinKoseiIchiran_Row koseiIchiran_Row = new dgShinsakaiIinKoseiIchiran_Row();
         koseiIchiran_Row.setShinsakaiIinCode(nullToEmpty(shinsakaiIinJoho.get介護認定審査会委員コード()));
         koseiIchiran_Row.setShinsakaiIinName(nullToEmpty(shinsakaiIinJoho.get介護認定審査会委員氏名()));
@@ -234,9 +212,10 @@ public class ShinsakaiIinWaritsukeHandler {
         koseiIchiran_Row.setSex(Seibetsu.toValue(nullToEmpty(shinsakaiIinJoho.get性別())).get名称());
         koseiIchiran_Row.setShinsakaiInnShikaku(Sikaku.toValue(
                 nullToEmpty(shinsakaiIinJoho.get介護認定審査会委員資格())).get名称());
-        koseiIchiran_Row.setGogitaichoKubun(通常.equals(nullToEmpty(shinsakaiIinJoho.get合議体長区分())) ? RString.EMPTY
-                : GogitaichoKubunCode.toValue(nullToEmpty(shinsakaiIinJoho.get合議体長区分())).get名称());
-        koseiIchiran_Row.setShukketsuKubun(IsShusseki.出席.get名称());
+        koseiIchiran_Row.setGogitaichoKubun(!RString.isNullOrEmpty(shinsakaiIinJoho.get合議体長区分())
+                ? get議長区分名称(shinsakaiIinJoho.get合議体長区分()) : RString.EMPTY
+        );
+        koseiIchiran_Row.setShukketsuKubun(shinsakaiIinJoho.get出欠区分() ? IsShusseki.出席.get名称() : IsShusseki.欠席.get名称());
         koseiIchiran_Row.setShinsakaiIinKaishibi(kaishiYMDtoEmpty(shinsakaiIinJoho.get介護認定審査会委員開始日()).isEmpty() ? null
                 : new RDate(shinsakaiIinJoho.get介護認定審査会委員開始日()
                         .toString()).wareki().toDateString());
@@ -245,7 +224,17 @@ public class ShinsakaiIinWaritsukeHandler {
                         .toString()).wareki().toDateString());
         koseiIchiranGridList.add(koseiIchiran_Row);
     }
-    
+
+    private RString get議長区分名称(RString 区分コード) {
+        RString 議長区分名称 = RString.EMPTY;
+        for (KaigoninteiShinsakaiGichoKubunCode item : KaigoninteiShinsakaiGichoKubunCode.values()) {
+            if (item.getコード().equals(区分コード)) {
+                議長区分名称 = item.get名称();
+            }
+        }
+        return 議長区分名称;
+    }
+
     private void set一覧DataGrid(List<dgShinsakaiIinIchiran_Row> ichiranGridList, ShinsakaiiinJoho business) {
         dgShinsakaiIinIchiran_Row ichiran_Row = new dgShinsakaiIinIchiran_Row();
         ichiran_Row.setShinsakaiIinCode(nullToEmpty(business.get介護認定審査会委員コード()));

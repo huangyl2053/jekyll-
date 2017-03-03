@@ -9,16 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiIinKoseIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiIinKoseIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiiinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinwaritsuke.IShinsakaiIinWaritsukeMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -34,7 +36,6 @@ public class ShinsakaiiinJohoManager {
 
     private final MapperProvider mapperProvider;
     private final DbT5503ShinsakaiWariateIinJohoDac dac;
-    private final RDate 基準日 = RDate.getNowDate();
 
     /**
      * コンストラクタです。
@@ -75,16 +76,16 @@ public class ShinsakaiiinJohoManager {
      * @return SearchResult<ShinsakaiiinJoho>
      */
     @Transaction
-    public SearchResult<ShinsakaiiinJoho> search審査会委員情報Of開催番号(RString kaisaiNo, RString kaisaiYMD) {
+    public SearchResult<ShinsakaiiinJoho> search審査会委員情報(RString kaisaiNo, RString kaisaiYMD) {
         requireNonNull(kaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
         IShinsakaiIinWaritsukeMapper mapper = mapperProvider.create(IShinsakaiIinWaritsukeMapper.class);
         List<ShinsakaiiinJohoRelateEntity> shinsakaiiinJohoList
                 = mapper.get審査会委員情報By開催番号(
                         ShinsakaiIinWaritsukeParameter.createShinsakaiIinWaritsukeParameter(
                                 kaisaiNo,
-                                AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
+                                LasdecCode.EMPTY,
                                 kaisaiYMD,
-                                基準日));
+                                null));
         List<ShinsakaiiinJoho> businessList = new ArrayList();
         for (ShinsakaiiinJohoRelateEntity entity : shinsakaiiinJohoList) {
             businessList.add(new ShinsakaiiinJoho(entity));
@@ -99,18 +100,41 @@ public class ShinsakaiiinJohoManager {
      * @return SearchResult<ShinsakaiiinJoho>
      */
     @Transaction
-    public SearchResult<ShinsakaiiinJoho> searchAll審査会委員情報(RString kaisaiYMD) {
+    public SearchResult<ShinsakaiiinJoho> searchAll審査会委員情報(RString kaisaiYMD, RDate 基準日) {
         requireNonNull(kaisaiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("開催年月日"));
         IShinsakaiIinWaritsukeMapper mapper = mapperProvider.create(IShinsakaiIinWaritsukeMapper.class);
         List<ShinsakaiiinJohoRelateEntity> shinsakaiiinJohoList
-                = mapper.get審査会委員情報By開催年月日(
+                = mapper.get審査会委員情報_全体表示(
                         ShinsakaiIinWaritsukeParameter.createShinsakaiIinWaritsukeParameter(
                                 RString.EMPTY,
-                                AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
+                                LasdecCode.EMPTY,
                                 kaisaiYMD, 基準日));
         List<ShinsakaiiinJoho> businessList = new ArrayList();
         for (ShinsakaiiinJohoRelateEntity entity : shinsakaiiinJohoList) {
             businessList.add(new ShinsakaiiinJoho(entity));
+        }
+        return SearchResult.of(businessList, 0, false);
+    }
+
+    /**
+     * 審査会委員構成一覧情報を取得します。
+     *
+     * @param kaisaiNo 開催番号
+     * @return SearchResult<ShinsakaiiinJoho>
+     */
+    @Transaction
+    public SearchResult<ShinsakaiIinKoseIchiran> search審査会委員構成一覧情報(RString kaisaiNo) {
+        requireNonNull(kaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
+        IShinsakaiIinWaritsukeMapper mapper = mapperProvider.create(IShinsakaiIinWaritsukeMapper.class);
+        List<ShinsakaiIinKoseIchiranRelateEntity> shinsakaiiinKoseList
+                = mapper.get審査会委員構成一覧(
+                        ShinsakaiIinWaritsukeParameter.createShinsakaiIinWaritsukeParameter(
+                                kaisaiNo,
+                                LasdecCode.EMPTY,
+                                RString.EMPTY, null));
+        List<ShinsakaiIinKoseIchiran> businessList = new ArrayList();
+        for (ShinsakaiIinKoseIchiranRelateEntity entity : shinsakaiiinKoseList) {
+            businessList.add(new ShinsakaiIinKoseIchiran(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }

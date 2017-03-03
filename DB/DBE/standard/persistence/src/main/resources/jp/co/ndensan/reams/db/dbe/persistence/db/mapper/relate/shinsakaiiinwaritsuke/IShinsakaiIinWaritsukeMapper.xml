@@ -38,6 +38,61 @@
         WHERE
             dbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
     </select>
+     <!--ShinsakaiIinKoseIchiranRelateEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_getShinsakaiIinKoseIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiIinKoseIchiranRelateEntity" autoMapping="true">
+    <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shozokukikan" column="shozokukikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="seibetsu" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="gogitaichoKubunCode" column="gogitaichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinKaishiYMD" column="shinsakaiIinKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shinsakaiIinShuryoYMD" column="shinsakaiIinShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    <result property="shussekiFlag" column="shussekiFlag"/>
+    </resultMap>
+    <select resultOrdered="true" id="get審査会委員構成一覧" resultMap="resultMap_getShinsakaiIinKoseIchiran" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
+        SELECT
+            dbt5594."shinsakaiIinCode" AS "shinsakaiIinCode"
+            , dbt5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+            , CASE
+                WHEN dbt5595."shujiiIryokikanCode" IS NOT NULL
+                THEN dbt5911."iryoKikanMeisho"
+                WHEN dbt5595."ninteichosaItakusakiCode" IS NOT NULL
+                THEN dbt5910."jigyoshaMeisho"
+                ELSE dbt5914."kikanMeisho"
+                END AS "shozokukikan"
+            , dbt5594."seibetsu" AS "seibetsu"
+            , dbt5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
+            , dbt5503."kaigoninteiShinsakaiGichoKubunCode"
+            , dbt5503."shussekiFlag" AS "shussekiFlag"
+            , dbt5503."kaigoninteiShinsakaiGichoKubunCode" AS "gogitaichoKubunCode"
+            , dbt5594."haishiFlag" AS "haishiFlag"
+            , dbt5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
+            , dbt5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
+        FROM
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbt5501
+        INNER JOIN rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
+            ON dbt5501."shinsakaiKaisaiNo" = dbt5503."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" dbt5594
+            ON dbt5594."shinsakaiIinCode" = dbt5503."shinsakaiIinCode"
+        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbt5595
+            ON dbt5595."shinsakaiIinCode" = dbt5594."shinsakaiIinCode"
+            AND dbt5595."remban" = 1
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
+            ON dbt5595."shoKisaiHokenshaNo" = dbt7051."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbt5910
+            ON dbt5595."ninteichosaItakusakiCode" = dbt5910."ninteichosaItakusakiCode"
+            AND dbt5910."shichosonCode" = dbt7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbt5911
+            ON dbt5595."shujiiIryokikanCode" = dbt5911."shujiiIryokikanCode"
+            AND dbt5911."shichosonCode" = dbt7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbt5914
+            ON dbt5595."sonotaKikanCode" = dbt5914."sonotaKikanCode"
+            AND dbt5595."shoKisaiHokenshaNo" = dbt5914."shoKisaiHokenshaNo"
+        WHERE
+            dbt5501."shinsakaiKaisaiNo" = #{kaisaiNo}
+    </select>
     <!--ShinsakaiiinJohoRelateEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getShinsakaiiinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiiinJohoRelateEntity" autoMapping="true">
     <result property="shinsakaiIinCode" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -55,51 +110,107 @@
     <select resultOrdered="true" id="get審査会委員情報By開催番号" resultMap="resultMap_getShinsakaiiinJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
         SELECT
-            dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
-            ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
-            ,CASE WHEN  dbT5595."shujiiIryokikanCode" IS NOT NULL THEN
-                    dbT5911."iryoKikanMeisho"
-                WHEN  dbT5595."ninteichosaItakusakiCode" IS NOT NULL THEN
-                     dbT5910."jigyoshaMeisho"
-                ELSE
-                    dbT5914."kikanMeisho"
+            dbt5594."shinsakaiIinCode" AS "shinsakaiIinCode"
+            , dbt5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+            , CASE
+                WHEN dbt5595."shujiiIryokikanCode" IS NOT NULL
+                THEN dbt5911."iryoKikanMeisho"
+                WHEN dbt5595."ninteichosaItakusakiCode" IS NOT NULL
+                THEN dbt5910."jigyoshaMeisho"
+                ELSE dbt5914."kikanMeisho"
             END AS "shozokukikan"
-            ,dbT5594."seibetsu" AS "seibetsu"
-            ,dbT5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
-            ,dbT5593."gogitaichoKubunCode" AS "gogitaichoKubunCode"
-            ,'1' AS "shukketukubun"
-            ,dbT5594."haishiFlag" AS "haishiFlag"
-            ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
-            ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
-            ,dbT5593."substituteFlag" AS "substituteFlag"
+            , dbt5594."seibetsu" AS "seibetsu"
+            , dbt5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
+            , dbt5593."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+            , '1' AS "shukketukubun"
+            , dbt5594."haishiFlag" AS "haishiFlag"
+            , dbt5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
+            , dbt5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
+            , dbt5593."substituteFlag" AS "substituteFlag"
         FROM
-            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501
-                INNER JOIN  rgdb."DbT5591GogitaiJoho" dbT5591
-                    ON dbT5591."gogitaiNo" = dbT5501."gogitaiNo"
-                    AND dbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
-                    AND dbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> dbT5501."shinsakaiKaisaiYoteiYMD"
-                INNER JOIN  rgdb."DbT5593GogitaiWariateIinJoho" dbT5593
-                    ON dbT5591."gogitaiNo" = dbT5593."gogitaiNo"
-                    AND dbT5591."gogitaiYukoKikanKaishiYMD" = dbT5593."gogitaiYukoKikanKaishiYMD"
-                    AND dbT5591."gogitaiYukoKikanShuryoYMD" = dbT5593."gogitaiYukoKikanShuryoYMD"
-                INNER JOIN  rgdb."DbT5594ShinsakaiIinJoho" dbT5594
-                    ON dbT5594."shinsakaiIinCode" = dbT5593."shinsakaiIinCode"
-                INNER JOIN  rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbT5595
-                    ON dbT5595."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
-                    AND  dbT5595."remban" = 1
-                LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
-                    ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
-                        AND dbT5910."shichosonCode" = #{shichousonCode}
-                LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbT5911
-                    ON dbT5595."shujiiIryokikanCode" = dbT5911."shujiiIryokikanCode"
-                        AND dbT5911."shichosonCode" = #{shichousonCode}
-                LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbT5914
-                    ON dbT5595."sonotaKikanCode" = dbT5914."sonotaKikanCode"
-                        AND dbT5595."shoKisaiHokenshaNo" = dbT5914."shoKisaiHokenshaNo"
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbt5501
+        INNER JOIN rgdb."DbT5591GogitaiJoho" dbt5591
+            ON dbt5591."gogitaiNo" = dbt5501."gogitaiNo"
+            AND dbt5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbt5501."shinsakaiKaisaiYoteiYMD"
+            AND dbt5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> dbt5501."shinsakaiKaisaiYoteiYMD"
+        INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" dbt5593
+            ON dbt5591."gogitaiNo" = dbt5593."gogitaiNo"
+            AND dbt5591."gogitaiYukoKikanKaishiYMD" = dbt5593."gogitaiYukoKikanKaishiYMD"
+            AND dbt5591."gogitaiYukoKikanShuryoYMD" = dbt5593."gogitaiYukoKikanShuryoYMD"
+            AND dbt5593."isDeleted" = FALSE
+        INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" dbt5594
+            ON dbt5594."shinsakaiIinCode" = dbt5593."shinsakaiIinCode"
+        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbt5595
+            ON dbt5595."shinsakaiIinCode" = dbt5594."shinsakaiIinCode"
+            AND dbt5595."remban" = 1
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
+            ON dbt5595."shoKisaiHokenshaNo" = dbt7051."shoKisaiHokenshaNo"
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbt5910
+            ON dbt5595."ninteichosaItakusakiCode" = dbt5910."ninteichosaItakusakiCode"
+            AND dbt5910."shichosonCode" = dbt7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbt5911
+            ON dbt5595."shujiiIryokikanCode" = dbt5911."shujiiIryokikanCode"
+            AND dbt5911."shichosonCode" = dbt7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbt5914
+            ON dbt5595."sonotaKikanCode" = dbt5914."sonotaKikanCode"
+            AND dbt5595."shoKisaiHokenshaNo" = dbt5914."shoKisaiHokenshaNo"
         WHERE
-            dbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
-        AND dbT5594."haishiFlag" = false
-        AND "shinsakaiIinShuryoYMD" >= #{kaisaiYMD}
+            dbt5501."shinsakaiKaisaiNo" = #{kaisaiNo}
+            AND "shinsakaiIinKaishiYMD" <![CDATA[<=]]> #{kaisaiYMD}
+            AND "shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{kaisaiYMD}
+            AND (dbt5594."haishiFlag" = TRUE
+            OR #{kaisaiYMD} <![CDATA[<]]> dbt5594."haishiYMD")
+    </select>
+        <select resultOrdered="true" id="get審査会委員情報_全体表示" resultMap="resultMap_getShinsakaiiinJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
+       SELECT DISTINCT
+            ON ("shinsakaiIinCode", "shinsakaiIinShimei") dbt5594."shinsakaiIinCode" AS "shinsakaiIinCode"
+            , dbt5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+            , CASE
+                WHEN dbt5595."shujiiIryokikanCode" IS NOT NULL
+                THEN dbt5911."iryoKikanMeisho"
+                WHEN dbt5595."ninteichosaItakusakiCode" IS NOT NULL
+                THEN dbt5910."jigyoshaMeisho"
+                ELSE dbt5914."kikanMeisho"
+            END AS "shozokukikan"
+            , dbt5594."seibetsu" AS "seibetsu"
+            , dbt5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
+            , '0' AS "gogitaichoKubunCode"
+            , '1' AS "shukketukubun"
+            , dbt5594."haishiFlag" AS "haishiFlag"
+            , dbt5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
+            , dbt5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
+        FROM
+        rgdb."DbT5594ShinsakaiIinJoho" dbt5594
+        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbt5595
+            ON dbt5595."shinsakaiIinCode" = dbt5594."shinsakaiIinCode"
+            AND dbt5595."remban" = 1
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbt5910
+            ON dbt5595."ninteichosaItakusakiCode" = dbt5910."ninteichosaItakusakiCode"
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
+            ON dbt5595."shoKisaiHokenshaNo" = dbt7051."shoKisaiHokenshaNo"
+            AND dbt5910."shichosonCode" = dbt7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbt5911
+            ON dbt5595."shujiiIryokikanCode" = dbt5911."shujiiIryokikanCode"
+            AND dbt5911."shichosonCode" = dbt7051."shichosonCode"
+        LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbt5914
+            ON dbt5595."sonotaKikanCode" = dbt5914."sonotaKikanCode"
+            AND dbt5595."shoKisaiHokenshaNo" = dbt5914."shoKisaiHokenshaNo"
+        WHERE
+            dbt5594."shinsakaiIinCode" NOT IN (
+                SELECT
+                    dbt5503."shinsakaiIinCode"
+                FROM
+                    rgdb."DbT5503ShinsakaiWariateIinJoho" dbt5503
+                WHERE
+                    dbt5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
+            )
+            AND "shinsakaiIinKaishiYMD" <![CDATA[<=]]> #{kijunYMD}
+            AND "shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{kijunYMD}
+            AND (dbt5594."haishiFlag" = TRUE
+                OR #{kijunYMD} <![CDATA[<]]> dbt5594."haishiYMD")
+        ORDER BY
+            "shinsakaiIinCode"
     </select>
     <select resultOrdered="true" id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
