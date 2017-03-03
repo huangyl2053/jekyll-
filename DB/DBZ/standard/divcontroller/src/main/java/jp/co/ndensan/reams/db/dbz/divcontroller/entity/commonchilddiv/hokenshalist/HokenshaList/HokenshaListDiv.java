@@ -103,6 +103,11 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
         return this.createHandler().getSelectedItemAsHokenshaSummary();
     }
 
+    @Override
+    public void setLabelLText(RString text) {
+        this.ddlHokenshaList.setLabelLText(text);
+    }
+
     private HokenshaListDivHandler createHandler() {
         return new HokenshaListDivHandler(this);
     }

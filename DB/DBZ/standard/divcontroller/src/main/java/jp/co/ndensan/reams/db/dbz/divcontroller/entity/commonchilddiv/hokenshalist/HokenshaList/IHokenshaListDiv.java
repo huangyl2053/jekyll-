@@ -31,7 +31,7 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
      * @throws NullPointerException 引数が{@code null}の場合
      */
     void loadHokenshaList(GyomuBunrui 業務分類);
-    
+
     /**
      * 保険者の情報を読み込み、DDLに設定します。 業務分類、保険者DDLパターンを指定しなければいけません。
      * <p/>
@@ -41,8 +41,8 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
      * @param 保険者DDLパターン
      * @throws NullPointerException 引数が{@code null}の場合
      */
-    void loadHokenshaList(GyomuBunrui 業務分類, HokenshaDDLPattem 保険者DDLパターン );
-    
+    void loadHokenshaList(GyomuBunrui 業務分類, HokenshaDDLPattem 保険者DDLパターン);
+
     /**
      * 保険者の情報を読み込み、DDLに設定します。 業務分類、証記載保険者番号を指定しなければいけません。
      * <p/>
@@ -55,7 +55,8 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
     void loadHokenshaList(GyomuBunrui 業務分類, RString 証記載保険者番号);
 
     /**
-     * 画面で選択されている保険者の情報を返却します。 画面で「全市町村」が選択されている場合は、{@link HokenshaSummary#EMPTY}を返却します。
+     * 画面で選択されている保険者の情報を返却します。
+     * 画面で「全市町村」が選択されている場合は、{@link HokenshaSummary#EMPTY}を返却します。
      *
      * @return 画面で指定されている保険者名の保険者の情報を持った{@link HokenshaSummary}
      */
@@ -75,4 +76,10 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
      */
     void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号);
 
+    /**
+     * DDLのラベルテキストを設定します。
+     *
+     * @param text 設定するテキスト
+     */
+    void setLabelLText(RString text);
 }
