@@ -224,7 +224,7 @@ public class GogitaiJohoSakusei {
                 }
                 for (GogitaiWariateIinJoho wariateIinJoho : gogitaiJoho.getGogitaiWariateIinJohoList()) {
                     entity.setShinsakaiIinCode(wariateIinJoho.get介護認定審査会委員コード());
-                    entity.setSubstituteFlag(wariateIinJoho.is補欠() ? new RString("0") : new RString("1"));
+                    entity.setSubstituteFlag(wariateIinJoho.is補欠() ? new RString("1") : new RString("0"));
                     entity.setGogitaichoKubunCode(wariateIinJoho.get合議体長区分コード().value());
                     csvWriter.writeLine(entity);
                 }
