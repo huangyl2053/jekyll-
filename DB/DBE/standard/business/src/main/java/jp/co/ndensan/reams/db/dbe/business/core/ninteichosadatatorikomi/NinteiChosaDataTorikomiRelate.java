@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosadatatorikomi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadatatorikomi.NinteiChosaDataTorikomiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査データ取込のRelateクラスです。
@@ -102,5 +103,29 @@ public class NinteiChosaDataTorikomiRelate {
      */
     public boolean exist認定調査依頼情報() {
         return entity.get認定調査依頼情報Entity() != null;
+    }
+
+    /**
+     * 認定調査完了日を返します。
+     *
+     * @return 認定調査完了日
+     */
+    public RString get認定調査依頼区分コード() {
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? (entity.get認定調査依頼情報Entity().getNinteichosaIraiKubunCode() != null && !entity.get認定調査依頼情報Entity().getNinteichosaIraiKubunCode().isEmpty()
+                ? entity.get認定調査依頼情報Entity().getNinteichosaIraiKubunCode().value() : RString.EMPTY)
+                : RString.EMPTY;
+    }
+
+    /**
+     * 認定調査完了日を返します。
+     *
+     * @return 認定調査完了日
+     */
+    public RString get認定調査区分コード() {
+        return (entity.get認定申請情報Entity() != null)
+                ? (entity.get認定申請情報Entity().getChosaKubun() != null && !entity.get認定申請情報Entity().getChosaKubun().isEmpty()
+                ? entity.get認定申請情報Entity().getChosaKubun().value() : RString.EMPTY)
+                : RString.EMPTY;
     }
 }

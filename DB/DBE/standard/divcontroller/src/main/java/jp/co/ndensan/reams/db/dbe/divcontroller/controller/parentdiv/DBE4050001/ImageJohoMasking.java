@@ -133,6 +133,7 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnBackIchiran(ImageJohoMaskingDiv div) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
+        getHandler(div).backIchiran();
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
             return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         } else {
