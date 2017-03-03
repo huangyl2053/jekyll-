@@ -47,6 +47,12 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     private RString hdnShinsakaiIinCode;
     @JsonProperty("hdnShinsakaiIinName")
     private RString hdnShinsakaiIinName;
+    @JsonProperty("hiddenMode")
+    private RString hiddenMode;
+    @JsonProperty("hiddenKijunYMD")
+    private RString hiddenKijunYMD;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -163,6 +169,60 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     }
 
     /*
+     * gethiddenMode
+     * @return hiddenMode
+     */
+    @JsonProperty("hiddenMode")
+    public RString getHiddenMode() {
+        return hiddenMode;
+    }
+
+    /*
+     * sethiddenMode
+     * @param hiddenMode hiddenMode
+     */
+    @JsonProperty("hiddenMode")
+    public void setHiddenMode(RString hiddenMode) {
+        this.hiddenMode = hiddenMode;
+    }
+
+    /*
+     * gethiddenKijunYMD
+     * @return hiddenKijunYMD
+     */
+    @JsonProperty("hiddenKijunYMD")
+    public RString getHiddenKijunYMD() {
+        return hiddenKijunYMD;
+    }
+
+    /*
+     * sethiddenKijunYMD
+     * @param hiddenKijunYMD hiddenKijunYMD
+     */
+    @JsonProperty("hiddenKijunYMD")
+    public void setHiddenKijunYMD(RString hiddenKijunYMD) {
+        this.hiddenKijunYMD = hiddenKijunYMD;
+    }
+
+    /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -226,11 +286,6 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensha() {
-        return this.getKensakuJoken().getKensakuJokenInput().getCcdHokensha();
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtKijunbi() {
         return this.getKensakuJoken().getKensakuJokenInput().getTxtKijunbi();
     }
@@ -261,6 +316,111 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     }
 
     @JsonIgnore
+    public pnlShosaiJokenDiv getPnlShosaiJoken() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken();
+    }
+
+    @JsonIgnore
+    public void  setPnlShosaiJoken(pnlShosaiJokenDiv pnlShosaiJoken) {
+        this.getKensakuJoken().getKensakuJokenInput().setPnlShosaiJoken(pnlShosaiJoken);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokensha() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getCcdHokensha();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChosaItakusakiCode() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getTxtChosaItakusakiCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaItakusakiCode(TextBox txtChosaItakusakiCode) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setTxtChosaItakusakiCode(txtChosaItakusakiCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnChosaItakusaki() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getBtnChosaItakusaki();
+    }
+
+    @JsonIgnore
+    public void  setBtnChosaItakusaki(ButtonDialog btnChosaItakusaki) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setBtnChosaItakusaki(btnChosaItakusaki);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChosaItakusakiName() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getTxtChosaItakusakiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setTxtChosaItakusakiName(txtChosaItakusakiName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtIryoKikanCode() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getTxtIryoKikanCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtIryoKikanCode(TextBox txtIryoKikanCode) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setTxtIryoKikanCode(txtIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIryoKikan() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getBtnIryoKikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnIryoKikan(ButtonDialog btnIryoKikan) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setBtnIryoKikan(btnIryoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtIryoKikanName() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getTxtIryoKikanName();
+    }
+
+    @JsonIgnore
+    public void  setTxtIryoKikanName(TextBox txtIryoKikanName) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setTxtIryoKikanName(txtIryoKikanName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSonotaJigyoshaCode() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getTxtSonotaJigyoshaCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtSonotaJigyoshaCode(TextBox txtSonotaJigyoshaCode) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setTxtSonotaJigyoshaCode(txtSonotaJigyoshaCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnSonotaJigyosha() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getBtnSonotaJigyosha();
+    }
+
+    @JsonIgnore
+    public void  setBtnSonotaJigyosha(ButtonDialog btnSonotaJigyosha) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setBtnSonotaJigyosha(btnSonotaJigyosha);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSonotaJigyoshaName() {
+        return this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().getTxtSonotaJigyoshaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtSonotaJigyoshaName(TextBox txtSonotaJigyoshaName) {
+        this.getKensakuJoken().getKensakuJokenInput().getPnlShosaiJoken().setTxtSonotaJigyoshaName(txtSonotaJigyoshaName);
+    }
+
+    @JsonIgnore
     public TextBoxNum getTxtMaxKensu() {
         return this.getKensakuJoken().getTxtMaxKensu();
     }
@@ -288,56 +448,6 @@ public class NinteiShinsakaiIinGuideDiv extends Panel implements INinteiShinsaka
     @JsonIgnore
     public void  setBtnClear(Button btnClear) {
         this.getKensakuJoken().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
-    public ShosaiJokenDiv getShosaiJoken() {
-        return this.getKensakuJoken().getShosaiJoken();
-    }
-
-    @JsonIgnore
-    public void  setShosaiJoken(ShosaiJokenDiv ShosaiJoken) {
-        this.getKensakuJoken().setShosaiJoken(ShosaiJoken);
-    }
-
-    @JsonIgnore
-    public Label getLblShozoku() {
-        return this.getKensakuJoken().getShosaiJoken().getLblShozoku();
-    }
-
-    @JsonIgnore
-    public void  setLblShozoku(Label lblShozoku) {
-        this.getKensakuJoken().getShosaiJoken().setLblShozoku(lblShozoku);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlIryoKikan() {
-        return this.getKensakuJoken().getShosaiJoken().getDdlIryoKikan();
-    }
-
-    @JsonIgnore
-    public void  setDdlIryoKikan(DropDownList ddlIryoKikan) {
-        this.getKensakuJoken().getShosaiJoken().setDdlIryoKikan(ddlIryoKikan);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaigoJigyosha() {
-        return this.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaigoJigyosha(DropDownList ddlKaigoJigyosha) {
-        this.getKensakuJoken().getShosaiJoken().setDdlKaigoJigyosha(ddlKaigoJigyosha);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlSonotaJigyosha() {
-        return this.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha();
-    }
-
-    @JsonIgnore
-    public void  setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
-        this.getKensakuJoken().getShosaiJoken().setDdlSonotaJigyosha(ddlSonotaJigyosha);
     }
 
     @JsonIgnore

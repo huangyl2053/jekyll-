@@ -9,15 +9,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -26,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定審査会委員ガイドのDivControllerです
@@ -74,11 +82,17 @@ public class NinteiShinsakaiIinGuide {
         }
         RString shinsakaiIinName = div.getKensakuJoken().getTxtShinsakaiIinName().getValue();
         RString seibetsu = div.getKensakuJoken().getDdlSeibetsu().getSelectedKey();
-        ShoKisaiHokenshaNo hokensha = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号();
         RString shinsainShikakuCode = div.getKensakuJoken().getDdlShinsainShikakuCode().getSelectedKey();
-        RString iryoKikan = div.getKensakuJoken().getShosaiJoken().getDdlIryoKikan().getSelectedKey();
-        RString kaigoJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlKaigoJigyosha().getSelectedKey();
-        RString sonotaJigyosha = div.getKensakuJoken().getShosaiJoken().getDdlSonotaJigyosha().getSelectedKey();
+        ShoKisaiHokenshaNo hokensha = ShoKisaiHokenshaNo.EMPTY;
+        RString kaigoJigyosha = RString.EMPTY;
+        RString iryoKikan = RString.EMPTY;
+        RString sonotaJigyosha = RString.EMPTY;
+        if (!div.getPnlShosaiJoken().isDisplayNone()) {
+            hokensha = div.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号();
+            kaigoJigyosha = div.getKensakuJoken().getTxtChosaItakusakiCode().getValue();
+            iryoKikan = div.getKensakuJoken().getTxtIryoKikanCode().getValue();
+            sonotaJigyosha = div.getKensakuJoken().getTxtSonotaJigyoshaCode().getValue();
+        }
         Decimal maxKensu = div.getKensakuJoken().getTxtMaxKensu().getValue();
         if (maxKensu.intValue() > get最大取得件数上限().intValue()) {
             throw new ApplicationException("最大取得件数上限が超過しています。最大取得件数上限(" + get最大取得件数上限().intValue() + ")以下に調整してください。");
@@ -134,7 +148,6 @@ public class NinteiShinsakaiIinGuide {
      */
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_btnSaikensaku(NinteiShinsakaiIinGuideDiv div) {
         div.getKensakuJoken().setIsOpen(true);
-        div.getShosaiJoken().setIsOpen(false);
         div.getShinsakaiIinIchiran().setIsOpen(false);
         div.getBtnSaikensaku().setVisible(false);
         return ResponseData.of(div).respond();
@@ -166,6 +179,89 @@ public class NinteiShinsakaiIinGuide {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinsakaiIinGuideDiv> onBefore_chosaItakusakiGuide(NinteiShinsakaiIinGuideDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
+        LasdecCode 市町村コード = div.getCcdHokensha().getSelectedItem().get市町村コード();
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(市町村コード.value());
+        dataPassModel.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinsakaiIinGuideDiv> onBefore_iryoKikanGuide(NinteiShinsakaiIinGuideDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
+        LasdecCode 市町村コード = div.getCcdHokensha().getSelectedItem().get市町村コード();
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(市町村コード.value());
+        dataPassModel.set対象モード(new RString(ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinsakaiIinGuideDiv> onBefore_sonotaKikanGuide(NinteiShinsakaiIinGuideDiv div) {
+        SoNoTaKikanGuideModel dataPassModel = new SoNoTaKikanGuideModel();
+        LasdecCode 市町村コード = div.getCcdHokensha().getSelectedItem().get市町村コード();
+        dataPassModel.set業務分類(GyomuBunrui.介護認定);
+        dataPassModel.set市町村コード(市町村コード.value());
+        dataPassModel.setその他機関コード(RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.その他機関選択ガイド_モード, dataPassModel);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinsakaiIinGuideDiv> onOKClose_chosaItakusakiGuide(NinteiShinsakaiIinGuideDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel
+                = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getTxtChosaItakusakiCode().setValue(dataPassModel.get委託先コード());
+        div.getTxtChosaItakusakiName().setValue(dataPassModel.get委託先名());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinsakaiIinGuideDiv> onOKClose_iryoKikanGuide(NinteiShinsakaiIinGuideDiv div) {
+        ShujiiIryokikanandshujiiDataPassModel model
+                = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getTxtIryoKikanCode().setValue(model.get主治医医療機関コード());
+        div.getTxtIryoKikanName().setValue(model.get主治医医療機関名称());
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div
+     * @return
+     */
+    public ResponseData<NinteiShinsakaiIinGuideDiv> onOKClose_sonotaKikanGuide(NinteiShinsakaiIinGuideDiv div) {
+        SoNoTaKikanGuideModel その他機関 = ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, SoNoTaKikanGuideModel.class);
+        div.getTxtSonotaJigyoshaCode().setValue(その他機関.getその他機関コード());
+        div.getTxtSonotaJigyoshaName().setValue(その他機関.getその他機関名称());
+        return ResponseData.of(div).respond();
+    }
+
     private Decimal get最大取得件数上限() {
         Decimal 最大取得件数上限 = new Decimal(0);
         if (DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) != null) {
@@ -189,7 +285,7 @@ public class NinteiShinsakaiIinGuide {
         }
         return chkFlag;
     }
-    
+
     private FlexibleDate get基準日(RDate 基準日) {
         RDate sysDate = RDate.getNowDate();
         if (基準日 == null || 基準日.toDateString().isEmpty() || 基準日.isBeforeOrEquals(sysDate)) {
@@ -197,7 +293,7 @@ public class NinteiShinsakaiIinGuide {
         } else {
             return new FlexibleDate(基準日.toDateString());
         }
-     }
+    }
 
     @JsonIgnore
     private NinteiShinsakaiIinGuideHandler getHandler(NinteiShinsakaiIinGuideDiv div) {

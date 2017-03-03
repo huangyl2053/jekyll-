@@ -11,7 +11,6 @@ module DBZ
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
                 
-                this.controls.ShosaiJoken().isOpen = false;
                 this.controls.ShinsakaiIinIchiran().isOpen = false;
             }
 

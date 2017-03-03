@@ -44,6 +44,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
     private final boolean isNinteiChosainNoFlag;
     private final boolean isSonotaKikanCodeFlag;
     private final boolean isShoKisaiHokenshaNoFlag;
+    private final boolean isShosaiJoken;
 
     /**
      * コンストラクタです。
@@ -86,7 +87,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
             boolean isShujiiIryokikanCodeFlag,
             boolean isNinteiChosainNoFlag,
             boolean isSonotaKikanCodeFlag,
-            boolean isShoKisaiHokenshaNoFlag) {
+            boolean isShoKisaiHokenshaNoFlag,
+            boolean isShosaiJoken) {
         this.shinsakaiIinCodeFrom = shinsakaiIinCodeFrom;
         this.shinsakaiIinCodeTo = shinsakaiIinCodeTo;
         this.shinsakaiIinShimei = shinsakaiIinShimei;
@@ -109,6 +111,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         this.isNinteiChosainNoFlag = isNinteiChosainNoFlag;
         this.isSonotaKikanCodeFlag = isSonotaKikanCodeFlag;
         this.isShoKisaiHokenshaNoFlag = isShoKisaiHokenshaNoFlag;
+        this.isShosaiJoken = isShosaiJoken;
 
     }
 
@@ -153,6 +156,7 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         boolean isNinteiChosainNoFlag = false;
         boolean isSonotaKikanCodeFlag = false;
         boolean isShoKisaiHokenshaNoFlag = false;
+        boolean isShosaiJoken = false;
 
         if (shinsakaiIinKaishiYMD != null && !shinsakaiIinKaishiYMD.isEmpty()) {
             isShinsakaiIinKaishiYMDFlag = true;
@@ -181,6 +185,10 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
         if (shoKisaiHokenshaNo != null && !shoKisaiHokenshaNo.isEmpty()) {
             isShoKisaiHokenshaNoFlag = true;
         }
+        if (isShujiiIryokikanCodeFlag || isNinteiChosainNoFlag
+                || isSonotaKikanCodeFlag || isShoKisaiHokenshaNoFlag) {
+            isShosaiJoken = true;
+        }
         return new NinteiShinsakaiIinGuideMapperParameter(
                 shinsakaiIinKaishiYMD,
                 shinsakaiIinShuryoYMD,
@@ -203,7 +211,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
                 isShujiiIryokikanCodeFlag,
                 isNinteiChosainNoFlag,
                 isSonotaKikanCodeFlag,
-                isShoKisaiHokenshaNoFlag);
+                isShoKisaiHokenshaNoFlag,
+                isShosaiJoken);
     }
 
 }

@@ -6,7 +6,6 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new NinteiShinsakaiIinGuide.Controls(fieldName);
 
-                this.controls.ShosaiJoken().isOpen = false;
                 this.controls.ShinsakaiIinIchiran().isOpen = false;
             }
             ModeController.prototype.Properties = function () {

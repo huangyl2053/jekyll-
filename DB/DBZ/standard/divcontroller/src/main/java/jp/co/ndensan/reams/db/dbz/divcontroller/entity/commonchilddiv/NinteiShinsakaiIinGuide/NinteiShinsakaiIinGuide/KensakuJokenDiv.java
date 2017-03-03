@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
@@ -33,8 +34,6 @@ public class KensakuJokenDiv extends Panel {
     private Button btnKensakku;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("ShosaiJoken")
-    private ShosaiJokenDiv ShosaiJoken;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -115,24 +114,6 @@ public class KensakuJokenDiv extends Panel {
     }
 
     /*
-     * getShosaiJoken
-     * @return ShosaiJoken
-     */
-    @JsonProperty("ShosaiJoken")
-    public ShosaiJokenDiv getShosaiJoken() {
-        return ShosaiJoken;
-    }
-
-    /*
-     * setShosaiJoken
-     * @param ShosaiJoken ShosaiJoken
-     */
-    @JsonProperty("ShosaiJoken")
-    public void setShosaiJoken(ShosaiJokenDiv ShosaiJoken) {
-        this.ShosaiJoken = ShosaiJoken;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -186,11 +167,6 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensha() {
-        return this.getKensakuJokenInput().getCcdHokensha();
-    }
-
-    @JsonIgnore
     public TextBoxDate getTxtKijunbi() {
         return this.getKensakuJokenInput().getTxtKijunbi();
     }
@@ -221,43 +197,108 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblShozoku() {
-        return this.getShosaiJoken().getLblShozoku();
+    public pnlShosaiJokenDiv getPnlShosaiJoken() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken();
     }
 
     @JsonIgnore
-    public void  setLblShozoku(Label lblShozoku) {
-        this.getShosaiJoken().setLblShozoku(lblShozoku);
+    public void  setPnlShosaiJoken(pnlShosaiJokenDiv pnlShosaiJoken) {
+        this.getKensakuJokenInput().setPnlShosaiJoken(pnlShosaiJoken);
     }
 
     @JsonIgnore
-    public DropDownList getDdlIryoKikan() {
-        return this.getShosaiJoken().getDdlIryoKikan();
+    public IHokenshaListDiv getCcdHokensha() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getCcdHokensha();
     }
 
     @JsonIgnore
-    public void  setDdlIryoKikan(DropDownList ddlIryoKikan) {
-        this.getShosaiJoken().setDdlIryoKikan(ddlIryoKikan);
+    public TextBox getTxtChosaItakusakiCode() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getTxtChosaItakusakiCode();
     }
 
     @JsonIgnore
-    public DropDownList getDdlKaigoJigyosha() {
-        return this.getShosaiJoken().getDdlKaigoJigyosha();
+    public void  setTxtChosaItakusakiCode(TextBox txtChosaItakusakiCode) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setTxtChosaItakusakiCode(txtChosaItakusakiCode);
     }
 
     @JsonIgnore
-    public void  setDdlKaigoJigyosha(DropDownList ddlKaigoJigyosha) {
-        this.getShosaiJoken().setDdlKaigoJigyosha(ddlKaigoJigyosha);
+    public ButtonDialog getBtnChosaItakusaki() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getBtnChosaItakusaki();
     }
 
     @JsonIgnore
-    public DropDownList getDdlSonotaJigyosha() {
-        return this.getShosaiJoken().getDdlSonotaJigyosha();
+    public void  setBtnChosaItakusaki(ButtonDialog btnChosaItakusaki) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setBtnChosaItakusaki(btnChosaItakusaki);
     }
 
     @JsonIgnore
-    public void  setDdlSonotaJigyosha(DropDownList ddlSonotaJigyosha) {
-        this.getShosaiJoken().setDdlSonotaJigyosha(ddlSonotaJigyosha);
+    public TextBox getTxtChosaItakusakiName() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getTxtChosaItakusakiName();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setTxtChosaItakusakiName(txtChosaItakusakiName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtIryoKikanCode() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getTxtIryoKikanCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtIryoKikanCode(TextBox txtIryoKikanCode) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setTxtIryoKikanCode(txtIryoKikanCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnIryoKikan() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getBtnIryoKikan();
+    }
+
+    @JsonIgnore
+    public void  setBtnIryoKikan(ButtonDialog btnIryoKikan) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setBtnIryoKikan(btnIryoKikan);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtIryoKikanName() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getTxtIryoKikanName();
+    }
+
+    @JsonIgnore
+    public void  setTxtIryoKikanName(TextBox txtIryoKikanName) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setTxtIryoKikanName(txtIryoKikanName);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSonotaJigyoshaCode() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getTxtSonotaJigyoshaCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtSonotaJigyoshaCode(TextBox txtSonotaJigyoshaCode) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setTxtSonotaJigyoshaCode(txtSonotaJigyoshaCode);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnSonotaJigyosha() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getBtnSonotaJigyosha();
+    }
+
+    @JsonIgnore
+    public void  setBtnSonotaJigyosha(ButtonDialog btnSonotaJigyosha) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setBtnSonotaJigyosha(btnSonotaJigyosha);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSonotaJigyoshaName() {
+        return this.getKensakuJokenInput().getPnlShosaiJoken().getTxtSonotaJigyoshaName();
+    }
+
+    @JsonIgnore
+    public void  setTxtSonotaJigyoshaName(TextBox txtSonotaJigyoshaName) {
+        this.getKensakuJokenInput().getPnlShosaiJoken().setTxtSonotaJigyoshaName(txtSonotaJigyoshaName);
     }
 
     // </editor-fold>
