@@ -90,8 +90,8 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(ValidationMessages.対象行を選択));
         } else {
-            if (is異なった保険者(div.getDgNinteiTaskList().getSelectedItems())) {
-                validationMessages.add(new ValidationMessageControlPair(ValidationMessages.複数選択不可_保険者));
+            if (is複数市町村選択(div.getDgNinteiTaskList().getSelectedItems())) {
+                validationMessages.add(new ValidationMessageControlPair(ValidationMessages.複数選択不可_市町村));
             }
         }
         return validationMessages;
@@ -188,7 +188,7 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         意見書出力年月日が未確定の完了必須チェック(DbzErrorMessages.理由付き完了不可,
                 "意見書出力年月日が未確定"),
         意見書依頼未保存のため印刷不可(DbeErrorMessages.未保存で帳票印刷不可, "意見書依頼"),
-        複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
+        複数選択不可_市町村(DbeErrorMessages.複数選択不可, "市町村"),
         主治医入力必須(UrErrorMessages.必須, "主治医"),
         医療機関_主治医未割付のため更新不可(UrErrorMessages.更新不可_汎用, "意見書依頼が未設定のデータが選択されている"),
         未編集(UrErrorMessages.編集なしで更新不可);
@@ -205,13 +205,13 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
         }
     }
 
-    private boolean is異なった保険者(List<dgNinteiTaskList_Row> 選択されたデータ) {
-        RString 保険者 = RString.EMPTY;
+    private boolean is複数市町村選択(List<dgNinteiTaskList_Row> 選択されたデータ) {
+        RString 市町村コード = RString.EMPTY;
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            if (!RString.isNullOrEmpty(保険者) && !保険者.equals(row.getHokensha())) {
+            if (!RString.isNullOrEmpty(市町村コード) && !市町村コード.equals(row.getShichosonCode())) {
                 return true;
             }
-            保険者 = row.getHokensha();
+            市町村コード = row.getShichosonCode();
         }
         return false;
     }

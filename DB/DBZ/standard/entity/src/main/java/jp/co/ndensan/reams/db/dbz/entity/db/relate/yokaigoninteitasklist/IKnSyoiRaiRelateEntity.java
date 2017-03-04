@@ -43,7 +43,8 @@ public class IKnSyoiRaiRelateEntity implements Serializable {
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
     private AtenaMeisho jigyoshaName;
     private RString shichosonCode;
-    private RString shichosonMeisho;
+    private RString shoKisaiHokenshaName;
+    private RString shozokuShichosonMeisho;
     private int ikenshoIraiRirekiNo;
     private RString ikenshoIraiKubun;
     private FlexibleDate ikenshoSakuseiTokusokuYMD;

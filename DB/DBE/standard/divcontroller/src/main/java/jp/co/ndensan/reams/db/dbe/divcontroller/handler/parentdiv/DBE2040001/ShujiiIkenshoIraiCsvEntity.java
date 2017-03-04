@@ -74,6 +74,10 @@ public class ShujiiIkenshoIraiCsvEntity {
     private final RString 意見書督促期限;
     @CsvField(order = 280, name = "経過日数")
     private final int 経過日数;
+    @CsvField(order = 290, name = "市町村コード")
+    private final RString 市町村コード;
+    @CsvField(order = 300, name = "市町村名")
+    private final RString 市町村名;
 
     /**
      * コンストラクタです。
@@ -106,6 +110,8 @@ public class ShujiiIkenshoIraiCsvEntity {
      * @param 意見書督促回数 意見書督促回数
      * @param 意見書督促期限 意見書督促期限
      * @param 経過日数 経過日数
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
      */
     public ShujiiIkenshoIraiCsvEntity(
             RString 申請書管理番号,
@@ -135,7 +141,9 @@ public class ShujiiIkenshoIraiCsvEntity {
             RString 意見書督促方法,
             Decimal 意見書督促回数,
             RString 意見書督促期限,
-            int 経過日数) {
+            int 経過日数,
+            RString 市町村コード,
+            RString 市町村名) {
         this.申請書管理番号 = 申請書管理番号;
         this.状態 = 状態;
         this.保険者 = 保険者;
@@ -164,5 +172,7 @@ public class ShujiiIkenshoIraiCsvEntity {
         this.意見書督促回数 = 意見書督促回数;
         this.意見書督促期限 = 意見書督促期限;
         this.経過日数 = 経過日数;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
     }
 }

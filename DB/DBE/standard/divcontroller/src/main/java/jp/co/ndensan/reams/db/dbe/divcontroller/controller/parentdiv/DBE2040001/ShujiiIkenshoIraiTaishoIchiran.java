@@ -464,7 +464,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 row.getIkenshoTokusokuHoho(),
                 row.getIkenshoTokusokuCount().getValue(),
                 getパターン32(row.getIkenshoTokusokuLimit().getValue()),
-                RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()));
+                RDate.getNowDate().getBetweenDays(row.getNinteiShinseiDay().getValue()),
+                row.getShichosonCode(),
+                row.getShichoson()
+        );
     }
 
     /**

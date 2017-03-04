@@ -442,6 +442,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setShichosonCode(business.get市町村コード());
         row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
         row.setIkenshoIraiKubun(business.get主治医意見書依頼区分() == null ? RString.EMPTY : business.get主治医意見書依頼区分());
+        row.setShichoson(business.get所属市町村名());
         row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(business.get作成料請求区分()));
         意見書依頼モードの日付設定(row, business);
         row.setCancelButtonState(DataGridButtonState.Disabled);

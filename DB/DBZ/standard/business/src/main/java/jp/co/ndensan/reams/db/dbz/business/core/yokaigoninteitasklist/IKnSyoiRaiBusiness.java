@@ -167,7 +167,16 @@ public class IKnSyoiRaiBusiness implements Serializable {
      * @return 保険者名
      */
     public RString get保険者名() {
-        return entity.getShichosonMeisho();
+        return entity.getShoKisaiHokenshaName();
+    }
+
+    /**
+     * 所属市町村名を返します。
+     *
+     * @return 所属市町村名
+     */
+    public RString get所属市町村名() {
+        return entity.getShozokuShichosonMeisho();
     }
 
     /**
