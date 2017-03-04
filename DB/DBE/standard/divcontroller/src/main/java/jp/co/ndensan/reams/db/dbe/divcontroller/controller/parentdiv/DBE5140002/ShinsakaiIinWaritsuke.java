@@ -23,12 +23,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -84,14 +86,14 @@ public class ShinsakaiIinWaritsuke {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_WaritukeruBtn(ShinsakaiIinWaritsukeDiv div) {
-        List<dgShinsakaiIinIchiran_Row> selectedItems = div.getDgShinsakaiIinIchiran().getSelectedItems();
+        List<dgShinsakaiIinIchiran_Row> selectedItems = div.getWaritsuke().getDgShinsakaiIinIchiran().getSelectedItems();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForWaritukeruBtn();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         for (dgShinsakaiIinIchiran_Row row : selectedItems) {
             getHandler(div).set介護認定審査会委員構成一覧(row);
-            div.getDgShinsakaiIinIchiran().getDataSource().remove(row);
+            div.getWaritsuke().getDgShinsakaiIinIchiran().getDataSource().remove(row);
         }
         return ResponseData.of(div).respond();
     }
@@ -103,18 +105,18 @@ public class ShinsakaiIinWaritsuke {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_KaijoBtn(ShinsakaiIinWaritsukeDiv div) {
-        List<dgShinsakaiIinKoseiIchiran_Row> selectedItems = div.getDgShinsakaiIinKoseiIchiran().getSelectedItems();
+        List<dgShinsakaiIinKoseiIchiran_Row> selectedItems = div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getSelectedItems();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKaijoBtn();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<dgShinsakaiIinIchiran_Row> 既存Data退避 = div.getDgShinsakaiIinIchiran().getDataSource();
-        div.getDgShinsakaiIinIchiran().setDataSource(new ArrayList<dgShinsakaiIinIchiran_Row>());
+        List<dgShinsakaiIinIchiran_Row> 既存Data退避 = div.getWaritsuke().getDgShinsakaiIinIchiran().getDataSource();
+        div.getWaritsuke().getDgShinsakaiIinIchiran().setDataSource(new ArrayList<dgShinsakaiIinIchiran_Row>());
         for (dgShinsakaiIinKoseiIchiran_Row row : selectedItems) {
             getHandler(div).set介護認定審査会委員一覧(row);
-            div.getDgShinsakaiIinKoseiIchiran().getDataSource().remove(row);
+            div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource().remove(row);
         }
-        div.getDgShinsakaiIinIchiran().getDataSource().addAll(selectedItems.size(), 既存Data退避);
+        div.getWaritsuke().getDgShinsakaiIinIchiran().getDataSource().addAll(selectedItems.size(), 既存Data退避);
         return ResponseData.of(div).respond();
     }
 
@@ -129,7 +131,7 @@ public class ShinsakaiIinWaritsuke {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        RDate 基準日 = div.getTxtKijunYMD().getValue();
+        RDate 基準日 = div.getWaritsuke().getTxtKijunYMD().getValue();
         List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.searchAll審査会委員情報(開催年月日, 基準日).records();
         getHandler(div).setAllDataGrid(iinJoholist);
         return ResponseData.of(div).respond();
@@ -167,21 +169,21 @@ public class ShinsakaiIinWaritsuke {
                 iinJohomanager.deletePhysicalByKaisaiNo(iinJoho.toEntity());
             }
             List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList
-                    = div.getDgShinsakaiIinKoseiIchiran().getDataSource();
+                    = div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource();
 
             for (dgShinsakaiIinKoseiIchiran_Row row : koseiIchiranGridList) {
                 ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(開催番号, row.getShinsakaiIinCode());
                 ShinsakaiWariateIinJoho2Builder builder = wariateIinJoho.createBuilderForEdit();
-                builder.set介護認定審査会開催年月日(new FlexibleDate(div.getTxtKaisaiYoteibi().getValue().toDateString()));
+                builder.set介護認定審査会開催年月日(new FlexibleDate(div.getWaritsuke().getTxtKaisaiYoteibi().getValue().toDateString()));
 
                 builder.set介護認定審査会議長区分コード(get議長区分コード(row.getGogitaichoKubun()));
                 builder.set委員出席(true);
                 builder.set委員遅刻有無(false);
                 builder.set委員出席時間(new RString(
-                        div.getTxtKaishiYoteiTime().getValue().toString().replace(":", "").substring(0, 時刻桁数)));
+                        div.getWaritsuke().getTxtKaishiYoteiTime().getValue().toString().replace(":", "").substring(0, 時刻桁数)));
                 builder.set委員早退有無(false);
                 builder.set委員退席時間(new RString(
-                        div.getTxtShuryoYoteiTime().getValue().toString().replace(":", "").substring(0, 時刻桁数)));
+                        div.getWaritsuke().getTxtShuryoYoteiTime().getValue().toString().replace(":", "").substring(0, 時刻桁数)));
                 builder.build().isAdded();
                 iinJohomanager.save(builder.build().toEntity());
             }
@@ -190,6 +192,11 @@ public class ShinsakaiIinWaritsuke {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).setState(DBE5140002StateName.初期表示);
         }
+        RStringBuilder builder = new RStringBuilder();
+        builder.append("審査会名称：");
+        builder.append(div.getWaritsuke().getTxtKaigoNinteiShinsakai().getValue());
+        div.getKanryo().getCcdKanryoMsg().setMessage(new RString(
+                UrInformationMessages.保存終了.getMessage().evaluate()), builder.toRString(), RString.EMPTY, true);
         return ResponseData.of(div).setState(DBE5140002StateName.完了);
     }
 

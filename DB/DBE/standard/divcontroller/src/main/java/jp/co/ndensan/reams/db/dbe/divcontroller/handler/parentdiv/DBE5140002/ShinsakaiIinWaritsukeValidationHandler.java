@@ -40,12 +40,12 @@ public class ShinsakaiIinWaritsukeValidationHandler {
      */
     public ValidationMessageControlPairs validateForKaijoBtn() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getDgShinsakaiIinKoseiIchiran().getDataSource().isEmpty()) {
+        if (div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
-                    IdocheckMessages.Validate審査会委員構成一覧データなし, div.getDgShinsakaiIinKoseiIchiran()));
-        } else if (div.getDgShinsakaiIinKoseiIchiran().getSelectedItems().isEmpty()) {
+                    IdocheckMessages.Validate審査会委員構成一覧データなし, div.getWaritsuke().getDgShinsakaiIinKoseiIchiran()));
+        } else if (div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getSelectedItems().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
-                    IdocheckMessages.Validate未選択, div.getDgShinsakaiIinKoseiIchiran()));
+                    IdocheckMessages.Validate未選択, div.getWaritsuke().getDgShinsakaiIinKoseiIchiran()));
         }
         return validPairs;
     }
@@ -57,12 +57,12 @@ public class ShinsakaiIinWaritsukeValidationHandler {
      */
     public ValidationMessageControlPairs validateForWaritukeruBtn() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getDgShinsakaiIinIchiran().getDataSource().isEmpty()) {
+        if (div.getWaritsuke().getDgShinsakaiIinIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
-                    IdocheckMessages.Validate審査会委員一覧データなし, div.getDgShinsakaiIinIchiran()));
-        } else if (div.getDgShinsakaiIinIchiran().getSelectedItems().isEmpty()) {
+                    IdocheckMessages.Validate審査会委員一覧データなし, div.getWaritsuke().getDgShinsakaiIinIchiran()));
+        } else if (div.getWaritsuke().getDgShinsakaiIinIchiran().getSelectedItems().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
-                    IdocheckMessages.Validate未選択, div.getDgShinsakaiIinIchiran()));
+                    IdocheckMessages.Validate未選択, div.getWaritsuke().getDgShinsakaiIinIchiran()));
         }
         return validPairs;
     }
@@ -74,9 +74,9 @@ public class ShinsakaiIinWaritsukeValidationHandler {
      */
     public ValidationMessageControlPairs validateForAllDisplayBtn() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtKijunYMD().getValue() == null) {
+        if (div.getWaritsuke().getTxtKijunYMD().getValue() == null) {
             validPairs.add(new ValidationMessageControlPair(
-                    IdocheckMessages.Validate全体表示不可, div.getTxtKijunYMD()));
+                    IdocheckMessages.Validate全体表示不可, div.getWaritsuke().getTxtKijunYMD()));
         }
         return validPairs;
     }
@@ -88,9 +88,9 @@ public class ShinsakaiIinWaritsukeValidationHandler {
      */
     public ValidationMessageControlPairs validateForHozonnBtn() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getDgShinsakaiIinKoseiIchiran().getDataSource().isEmpty()) {
+        if (div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource().isEmpty()) {
             validPairs.add(new ValidationMessageControlPair(
-                    IdocheckMessages.Validate審査会委員構成一覧データなし, div.getDgShinsakaiIinKoseiIchiran()));
+                    IdocheckMessages.Validate審査会委員構成一覧データなし, div.getWaritsuke().getDgShinsakaiIinKoseiIchiran()));
         }
         return validPairs;
     }
