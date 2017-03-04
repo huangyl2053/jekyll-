@@ -29,6 +29,7 @@ public class DBE514001_ShinsakaiScheduleParameter extends BatchParameterBase {
     private static final String NENDO = "shinsakaiKaisaiKikanTo";
     private static final String CHOHYOSHUTSURYOKUKUBUN = "chohyoShutsuryokuKubun";
     private static final String SHINSAKAIIINCODE = "shinsakaiIinCodeList";
+    private static final String COUNT = "count";
 
     @BatchParameter(key = SHINSAKAIKAISAIKIKANFROM, name = "介護認定審査会開催予定期間From")
     private RString shinsakaiKaisaiKikanFrom;
@@ -40,6 +41,8 @@ public class DBE514001_ShinsakaiScheduleParameter extends BatchParameterBase {
     private RString chohyoShutsuryokuKubun;
     @BatchParameter(key = SHINSAKAIIINCODE, name = "審査会委員コードリスト")
     private List<RString> shinsakaiIinCodeList;
+    @BatchParameter(key = COUNT, name = "count")
+    private int count;
 
     /**
      * コンストラクタです。
@@ -55,6 +58,7 @@ public class DBE514001_ShinsakaiScheduleParameter extends BatchParameterBase {
      * @param 年度 年度
      * @param 帳票出力区分 帳票出力区分
      * @param 審査会委員コードリスト 審査会委員コードリスト
+     * @param count int
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public DBE514001_ShinsakaiScheduleParameter(
@@ -62,12 +66,14 @@ public class DBE514001_ShinsakaiScheduleParameter extends BatchParameterBase {
             RString 介護認定審査会開催予定期間To,
             RString 年度,
             RString 帳票出力区分,
-            List<RString> 審査会委員コードリスト) {
+            List<RString> 審査会委員コードリスト,
+            int count) {
         this.shinsakaiKaisaiKikanFrom = 介護認定審査会開催予定期間From;
         this.shinsakaiKaisaiKikanTo = 介護認定審査会開催予定期間To;
         this.nendo = 年度;
         this.chohyoShutsuryokuKubun = 帳票出力区分;
         this.shinsakaiIinCodeList = 審査会委員コードリスト;
+        this.count = count;
     }
 
     /**
@@ -80,7 +86,8 @@ public class DBE514001_ShinsakaiScheduleParameter extends BatchParameterBase {
                 shinsakaiKaisaiKikanTo,
                 nendo,
                 chohyoShutsuryokuKubun,
-                shinsakaiIinCodeList);
+                shinsakaiIinCodeList,
+                count);
     }
 
     /**

@@ -15,15 +15,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiScheduleSrchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
-    private TextBoxDateRange txtShinsakaiKaisaiYoteiKikan;
     @JsonProperty("ScheduleSpace")
     private Space ScheduleSpace;
     @JsonProperty("radPrintType")
@@ -37,24 +35,6 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtShinsakaiKaisaiYoteiKikan
-     * @return txtShinsakaiKaisaiYoteiKikan
-     */
-    @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
-    public TextBoxDateRange getTxtShinsakaiKaisaiYoteiKikan() {
-        return txtShinsakaiKaisaiYoteiKikan;
-    }
-
-    /*
-     * settxtShinsakaiKaisaiYoteiKikan
-     * @param txtShinsakaiKaisaiYoteiKikan txtShinsakaiKaisaiYoteiKikan
-     */
-    @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
-    public void setTxtShinsakaiKaisaiYoteiKikan(TextBoxDateRange txtShinsakaiKaisaiYoteiKikan) {
-        this.txtShinsakaiKaisaiYoteiKikan = txtShinsakaiKaisaiYoteiKikan;
-    }
-
     /*
      * getScheduleSpace
      * @return ScheduleSpace
@@ -120,6 +100,16 @@ public class ShinsakaiScheduleSrchDiv extends Panel {
     @JsonIgnore
     public void  setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
         this.getSchedulePrintOption().setChkShinsakaiScheduleKagami(chkShinsakaiScheduleKagami);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtShinsakaiKaisaiYoteiKikan() {
+        return this.getSchedulePrintOption().getTxtShinsakaiKaisaiYoteiKikan();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiKaisaiYoteiKikan(TextBoxDateRange txtShinsakaiKaisaiYoteiKikan) {
+        this.getSchedulePrintOption().setTxtShinsakaiKaisaiYoteiKikan(txtShinsakaiKaisaiYoteiKikan);
     }
 
     @JsonIgnore

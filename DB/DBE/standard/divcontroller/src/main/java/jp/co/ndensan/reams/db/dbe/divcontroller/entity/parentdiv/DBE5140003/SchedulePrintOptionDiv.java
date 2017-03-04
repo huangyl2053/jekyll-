@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SchedulePrintOptionDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +23,8 @@ public class SchedulePrintOptionDiv extends Panel {
      */
     @JsonProperty("chkShinsakaiScheduleKagami")
     private CheckBoxList chkShinsakaiScheduleKagami;
+    @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
+    private TextBoxDateRange txtShinsakaiKaisaiYoteiKikan;
     @JsonProperty("txtNendo")
     private TextBoxDate txtNendo;
 
@@ -48,6 +50,24 @@ public class SchedulePrintOptionDiv extends Panel {
     @JsonProperty("chkShinsakaiScheduleKagami")
     public void setChkShinsakaiScheduleKagami(CheckBoxList chkShinsakaiScheduleKagami) {
         this.chkShinsakaiScheduleKagami = chkShinsakaiScheduleKagami;
+    }
+
+    /*
+     * gettxtShinsakaiKaisaiYoteiKikan
+     * @return txtShinsakaiKaisaiYoteiKikan
+     */
+    @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
+    public TextBoxDateRange getTxtShinsakaiKaisaiYoteiKikan() {
+        return txtShinsakaiKaisaiYoteiKikan;
+    }
+
+    /*
+     * settxtShinsakaiKaisaiYoteiKikan
+     * @param txtShinsakaiKaisaiYoteiKikan txtShinsakaiKaisaiYoteiKikan
+     */
+    @JsonProperty("txtShinsakaiKaisaiYoteiKikan")
+    public void setTxtShinsakaiKaisaiYoteiKikan(TextBoxDateRange txtShinsakaiKaisaiYoteiKikan) {
+        this.txtShinsakaiKaisaiYoteiKikan = txtShinsakaiKaisaiYoteiKikan;
     }
 
     /*

@@ -77,6 +77,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
 import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 
 /**
  *
@@ -616,10 +617,9 @@ public class ShinsakaiKaisaiYoteiToroku {
      * @param 合議体番号 RString
      */
     private void delete割当委員情報(ShinsakaiKaisaiYoteiJohoParameter entity, RString 合議体番号) {
-        SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
-                = gogitaiManager.get合議体情報By開催予定日(new RString(entity.get日付().toString()), 合議体番号);
-        for (GogitaiJohoShinsaRelateBusiness 審査会委員 : gogitaiBusinessList.records()) {
-            ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(entity.get開催番号(), 審査会委員.get介護認定審査会委員コード());
+        List<DbT5503ShinsakaiWariateIinJohoEntity> shinsaIinEntity = yoteiTorokuManager.get審査会割当委員情報(entity.get開催番号());
+        for (DbT5503ShinsakaiWariateIinJohoEntity 審査会委員 : shinsaIinEntity) {
+            ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(entity.get開催番号(), 審査会委員.getShinsakaiIinCode());
             ShinsakaiWariateIinJoho2Builder builderIinJoho = wariateIinJoho.createBuilderForEdit();
             yoteiTorokuManager.deleteShinsakai(builderIinJoho.build().toEntity());
         }

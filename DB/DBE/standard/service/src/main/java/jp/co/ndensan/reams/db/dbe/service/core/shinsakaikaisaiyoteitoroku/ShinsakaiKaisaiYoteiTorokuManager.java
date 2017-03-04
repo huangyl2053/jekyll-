@@ -147,4 +147,17 @@ public class ShinsakaiKaisaiYoteiTorokuManager {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
         return 0 < dbt5503dac.deletePhysical(entity);
     }
+
+    /**
+     * 開催番号に合致した審査会割当委員情報を取得します。
+     *
+     * @param 開催番号 RString
+     * @return List<DbT5503ShinsakaiWariateIinJohoEntity>
+     */
+    @Transaction
+    public List<DbT5503ShinsakaiWariateIinJohoEntity> get審査会割当委員情報(RString 開催番号) {
+        requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
+        List<DbT5503ShinsakaiWariateIinJohoEntity> shinsakaiIinList = dbt5503dac.selectBy開催番号(開催番号);
+        return shinsakaiIinList;
+    }
 }

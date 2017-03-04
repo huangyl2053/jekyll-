@@ -76,19 +76,21 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
 
     @Override
     protected void afterExecute() {
-        RString 帳票ID = REPORT_ID.value();
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
-        RString 市町村名 = 導入団体クラス.get市町村名();
-        RString ジョブ番号 = new RString(JobContextHolder.getJobId());
-        RString 帳票名 = ReportIdDBE.DBE514001.getReportName();
-        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        RString csv出力有無 = new RString("無し");
-        RString csvファイル名 = new RString("-");
-        List<RString> 出力条件 = create出力条件();
-        OutputJokenhyoFactory.createInstance(
-                new ReportOutputJokenhyoItem(帳票ID, 導入団体コード, 市町村名, ジョブ番号, 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件))
-                .print();
+        if (processParamter.getCount() < 1) {
+            RString 帳票ID = REPORT_ID.value();
+            Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+            RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
+            RString 市町村名 = 導入団体クラス.get市町村名();
+            RString ジョブ番号 = new RString(JobContextHolder.getJobId());
+            RString 帳票名 = ReportIdDBE.DBE514001.getReportName();
+            RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+            RString csv出力有無 = new RString("無し");
+            RString csvファイル名 = new RString("-");
+            List<RString> 出力条件 = create出力条件();
+            OutputJokenhyoFactory.createInstance(
+                    new ReportOutputJokenhyoItem(帳票ID, 導入団体コード, 市町村名, ジョブ番号, 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件))
+                    .print();
+        }
     }
 
     private List<RString> create出力条件() {

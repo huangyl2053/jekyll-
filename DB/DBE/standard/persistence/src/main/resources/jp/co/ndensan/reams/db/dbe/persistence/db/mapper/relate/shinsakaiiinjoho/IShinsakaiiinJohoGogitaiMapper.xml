@@ -34,9 +34,8 @@
         AND 
             DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
-        DBT5594."haishiFlag" = TRUE
         <if test="usesFrom">
-              AND  DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{KaisaiYoteiKikanFrom}
+              DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{KaisaiYoteiKikanFrom}
         </if>
         <if test="usesTo">
               AND  DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{KaisaiYoteiKikanTo}       

@@ -51,6 +51,8 @@ public class ShinsakaiScheduleHakko {
         div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().clearValue();
         div.getShinsakaiScheduleSrch().getChkShinsakaiScheduleKagami().setReadOnly(true);
         div.getShinsakaiScheduleSrch().getTxtNendo().setDisabled(true);
+        div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setFromReadOnly(true);
+        div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setToReadOnly(true);
         return ResponseData.of(div).respond();
     }
 
@@ -80,6 +82,8 @@ public class ShinsakaiScheduleHakko {
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().clearValue();
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().setDisabled(true);
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().setReadOnly(false);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setFromReadOnly(false);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setToReadOnly(false);
             } else if (スケジュール表_年間.equals(帳票種類)) {
                 List<dgShinsakaiScheduleKagami_Row> dgShinsakaiScheduleKagamiRow = new ArrayList<>();
                 div.getDgShinsakaiScheduleKagami().setDataSource(dgShinsakaiScheduleKagamiRow);
@@ -89,6 +93,8 @@ public class ShinsakaiScheduleHakko {
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().getSelectedItems().clear();
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().setDisabled(false);
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().setReadOnly(true);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setFromReadOnly(true);
+                div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setToReadOnly(true);
             }
         }
         return ResponseData.of(div).respond();
@@ -167,6 +173,7 @@ public class ShinsakaiScheduleHakko {
     }
 
     private DBE514001_ShinsakaiScheduleParameter getParamter(ShinsakaiScheduleHakkoDiv div) {
+        int count = 0;
         List<dgShinsakaiScheduleKagami_Row> rowList = div.getDgShinsakaiScheduleKagami().getSelectedItems();
         List<RString> 審査会委員コードリスト = new ArrayList<>();
         for (dgShinsakaiScheduleKagami_Row row : rowList) {
@@ -195,7 +202,7 @@ public class ShinsakaiScheduleHakko {
         return new DBE514001_ShinsakaiScheduleParameter(
                 From期間,
                 To期間,
-                nendoParameter, kubun, 審査会委員コードリスト);
+                nendoParameter, kubun, 審査会委員コードリスト, count);
     }
 
     private ValidationMessageControlPairs getCheck(ShinsakaiScheduleHakkoValidationHandler validationHandler) {
