@@ -246,6 +246,7 @@ public class ShinsakaiKaisaiKekka {
                 || ResponseHolder.isWarningIgnoredRequest()) {
             setYotei(div);
             releaseRealInitialLock(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
+            getHandler(div).set完了メッセージ(getHandler(div).get審査会名称());
             return ResponseData.of(div).setState(DBE5210001StateName.完了);
         }
         return ResponseData.of(div).respond();

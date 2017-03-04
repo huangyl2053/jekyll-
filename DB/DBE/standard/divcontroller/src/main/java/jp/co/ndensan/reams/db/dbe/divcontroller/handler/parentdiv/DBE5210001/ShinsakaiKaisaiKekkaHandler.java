@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -36,6 +37,7 @@ public class ShinsakaiKaisaiKekkaHandler {
 
     private final ShinsakaiKaisaiKekkaDiv div;
     private static final RString BUTTON_UPDATE = new RString("btnUpdate");
+    private static final RString 完了メッセージ文言 = new RString("審査会名称：");
 
     /**
      * コンストラクタです。
@@ -216,6 +218,25 @@ public class ShinsakaiKaisaiKekkaHandler {
         } else {
             div.getCrOnseiFiles().getRepeateData().add(音声情報共有子Div);
         }
+    }
+
+    /**
+     * 完了メッセージを設定します。
+     *
+     * @param 審査会名称 審査会名称
+     */
+    public void set完了メッセージ(RString 審査会名称) {
+        div.getKanryoPanel().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
+                完了メッセージ文言.concat(審査会名称), RString.EMPTY, true);
+    }
+
+    /**
+     * 審査会名称を取得します。
+     *
+     * @return 審査会名称 審査会名称
+     */
+    public RString get審査会名称() {
+        return div.getTxtShinsakaiMeisho().getValue();
     }
 
     private void set音声情報(List<ShinsakaiOnseiJoho2> 音声情報リスト) {
