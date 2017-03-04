@@ -25,15 +25,22 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sonotakikanguide.SoNoTaKikanGuideParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide.SoNoTaKikanGuideFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -41,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -76,6 +84,9 @@ public class ShinsakaiIinJohoTorokuHandler {
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
     private final KoikiShichosonJohoFinder shichosonJohoFinder;
+    private final ChosaItakusakiAndChosainInputFinder chosaItakusakiFinder;
+    private final ShujiiIryokikanAndShujiiInputFinder shujiiIryokikanFinder;
+    private final SoNoTaKikanGuideFinder sonotakikanFinder;
 
     /**
      * コンストラクタです。
@@ -87,6 +98,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         manager = ShinsakaiIinJohoManager.createInstance();
         finder = ShozokuKikanIchiranFinder.createInstance();
         shichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
+        chosaItakusakiFinder = ChosaItakusakiAndChosainInputFinder.createInstance();
+        shujiiIryokikanFinder = ShujiiIryokikanAndShujiiInputFinder.createInstance();
+        sonotakikanFinder = SoNoTaKikanGuideFinder.createInstance();
     }
 
     /**
@@ -199,38 +213,6 @@ public class ShinsakaiIinJohoTorokuHandler {
             審査会委員一覧.add(row);
         }
         return 審査会委員一覧;
-    }
-
-    /**
-     * 所属機関情報で所属機関一覧をセットする。
-     *
-     * @param list 所属機関一覧情報
-     * @return List<dgShozokuKikanIchiran_Row>
-     */
-    public List<dgShozokuKikanIchiran_Row> setShozokuKikanIchiranDiv(List<ShozokuKikanIchiranFinderBusiness> list) {
-        List<dgShozokuKikanIchiran_Row> 所属機関一覧 = new ArrayList<>();
-        for (ShozokuKikanIchiranFinderBusiness 所属機関情報 : list) {
-            dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
-            row.setShokisaiHokenshaNo(所属機関情報.get証記載保険者番号() == null ? RString.EMPTY : 所属機関情報.get証記載保険者番号().value());
-            row.setHokenshaName(所属機関情報.get市町村名称() == null ? RString.EMPTY : 所属機関情報.get市町村名称());
-            row.getNinteiItakusakiCode().setValue(所属機関情報.get認定調査委託先コード() == null ? RString.EMPTY : 所属機関情報.get認定調査委託先コード());
-            row.setNinteiChosainCode(所属機関情報.get認定調査員コード() == null ? RString.EMPTY : 所属機関情報.get認定調査員コード());
-            row.getNinteiChosaItakusakiName().setValue(所属機関情報.get認定調査委託先名() == null ? RString.EMPTY : 所属機関情報.get認定調査委託先名());
-            row.getShujiiIryoKikanCode().setValue(所属機関情報.get主治医医療機関コード() == null ? RString.EMPTY : 所属機関情報.get主治医医療機関コード());
-            row.setShujiiCode(所属機関情報.get主治医コード() == null ? RString.EMPTY : 所属機関情報.get主治医コード());
-            row.getShujiiIryoKikanName().setValue(所属機関情報.get主治医医療機関名称() == null ? RString.EMPTY : 所属機関情報.get主治医医療機関名称());
-            row.getSonotaKikanCode().setValue(所属機関情報.getその他機関コード() == null ? RString.EMPTY : 所属機関情報.getその他機関コード());
-            row.getSonotaKikanName().setValue(所属機関情報.getその他機関名() == null ? RString.EMPTY : 所属機関情報.getその他機関名());
-            row.setShichosonCode(所属機関情報.get市町村コード() == null ? RString.EMPTY : 所属機関情報.get市町村コード());
-            row.setHdnColumn(row.getShokisaiHokenshaNo()
-                    .concat(row.getNinteiItakusakiCode().getValue())
-                    .concat(row.getNinteiChosainCode())
-                    .concat(row.getShujiiIryoKikanCode().getValue())
-                    .concat(row.getShujiiCode())
-                    .concat(row.getSonotaKikanCode().getValue()));
-            所属機関一覧.add(row);
-        }
-        return 所属機関一覧;
     }
 
     /**
@@ -603,7 +585,6 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.getShujiiIryoKikanName().setValue(RString.EMPTY);
         row.getSonotaKikanCode().setValue(RString.EMPTY);
         row.getSonotaKikanName().setValue(RString.EMPTY);
-        row.setShichosonCode(RString.EMPTY);
         row.setHdnColumn(row.getShokisaiHokenshaNo()
                 .concat(row.getNinteiItakusakiCode().getValue())
                 .concat(row.getNinteiChosainCode())
@@ -739,9 +720,9 @@ public class ShinsakaiIinJohoTorokuHandler {
     }
 
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
+        RString 審査会委員コード = div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode();
         List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(
-                ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(
-                        div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
+                ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(審査会委員コード)).records();
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> models
                 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報更新, Models.class);
         Iterator<ShinsakaiIinJoho> 審査会委員情報 = models.iterator();
@@ -752,17 +733,54 @@ public class ShinsakaiIinJohoTorokuHandler {
                 for (KaigoNinteiShinsakaiIinShozokuKikanJoho joho : shinsakaiIinJoho.getKaigoNinteiShinsakaiIinShozokuKikanJohoList()) {
                     dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
                     row.setShokisaiHokenshaNo(joho.get証記載保険者番号() != null ? joho.get証記載保険者番号().value() : RString.EMPTY);
+                    if (RString.isNullOrEmpty(row.getShokisaiHokenshaNo())) {
+                        所属機関 = setShozokuKikanIchiranDiv(所属機関一覧);
+                        break;
+                    }
                     row.setHokenshaName(RString.EMPTY);
                     row.setShichosonCode(RString.EMPTY);
+                    if (!RString.isNullOrEmpty(row.getShokisaiHokenshaNo())) {
+                        for (KoseiShichoson city : shichosonJohoFinder.getKoseiShichosonList().records()) {
+                            if (city.get証記載保険者番号().value().equals(row.getShokisaiHokenshaNo())) {
+                                row.setHokenshaName(city.get市町村名称());
+                                row.setShichosonCode(city.get市町村コード().value());
+
+                                break;
+                            }
+                        }
+                    }
                     row.getNinteiItakusakiCode().setValue(joho.get認定調査委託先コード() != null ? joho.get認定調査委託先コード() : RString.EMPTY);
-                    row.setNinteiChosainCode(RString.EMPTY);
-                    row.getNinteiChosaItakusakiName().setValue(RString.EMPTY);
                     row.getShujiiIryoKikanCode().setValue(joho.get主治医医療機関コード() != null ? joho.get主治医医療機関コード() : RString.EMPTY);
-                    row.setShujiiCode(RString.EMPTY);
-                    row.getShujiiIryoKikanName().setValue(RString.EMPTY);
                     row.getSonotaKikanCode().setValue(joho.getその他機関コード() != null ? joho.getその他機関コード() : RString.EMPTY);
-                    row.getSonotaKikanName().setValue(RString.EMPTY);
-                    row.setShichosonCode(RString.EMPTY);
+                    if (!RString.isNullOrEmpty(row.getShichosonCode())) {
+                        if (!RString.isNullOrEmpty(row.getNinteiItakusakiCode().getValue())) {
+                            NinteichosaItakusakiJoho 調査委託先名称 = chosaItakusakiFinder.onBlurTxtChosaItakusakiCode(new LasdecCode(row.getShichosonCode()), row.getNinteiItakusakiCode().getValue());
+                            row.getNinteiChosaItakusakiName().setValue(調査委託先名称 != null ? 調査委託先名称.get事業者名称() : RString.EMPTY);
+                        } else {
+                            row.getNinteiChosaItakusakiName().setValue(RString.EMPTY);
+                        }
+                        if (!RString.isNullOrEmpty(row.getShujiiIryoKikanCode().getValue())) {
+                            RString 主治医医療機関名称 = shujiiIryokikanFinder.getIryoKikanMeisho(new LasdecCode(row.getShichosonCode()), row.getShujiiIryoKikanCode().getValue());
+                            row.getShujiiIryoKikanName().setValue(!RString.isNullOrEmpty(主治医医療機関名称) ? 主治医医療機関名称 : RString.EMPTY);
+                        } else {
+                            row.getShujiiIryoKikanName().setValue(RString.EMPTY);
+                        }
+                        if (!RString.isNullOrEmpty(row.getSonotaKikanCode().getValue())) {
+                            List<SoNoTaKikanGuide> その他機関リスト = sonotakikanFinder.getKoseiShichoson(SoNoTaKikanGuideParameter
+                                    .createその他機関情報の取得キー作成(row.getShokisaiHokenshaNo(),
+                                            row.getSonotaKikanCode().getValue(),
+                                            row.getSonotaKikanCode().getValue(), false,
+                                            RString.EMPTY,
+                                            RString.EMPTY,
+                                            1)).records();
+                            RString その他機関名称 = !その他機関リスト.isEmpty() ? その他機関リスト.get(INDEX_0).get機関名称() : RString.EMPTY;
+                            row.getSonotaKikanName().setValue(その他機関名称);
+                        } else {
+                            row.getSonotaKikanName().setValue(RString.EMPTY);
+                        }
+                    }
+                    row.setNinteiChosainCode(RString.EMPTY);
+                    row.setShujiiCode(RString.EMPTY);
                     row.setHdnColumn(row.getShokisaiHokenshaNo()
                             .concat(row.getNinteiItakusakiCode().getValue())
                             .concat(row.getNinteiChosainCode())
@@ -771,13 +789,37 @@ public class ShinsakaiIinJohoTorokuHandler {
                             .concat(row.getSonotaKikanCode().getValue()));
                     所属機関.add(row);
                 }
-                div.getDgShozokuKikanIchiran().setDataSource(所属機関);
-                setShozokuKikanIchiranDiv(所属機関一覧);
-                div.getDgShozokuKikanIchiran().setDataSource(setShozokuKikanIchiranDiv(所属機関一覧));
+                div.getDgShozokuKikanIchiran().setDataSource(sort所属機関dg(所属機関));
                 break;
             }
         }
         setDisabledBy所属機関コード(div);
+    }
+
+    private List<dgShozokuKikanIchiran_Row> setShozokuKikanIchiranDiv(List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧) {
+        List<dgShozokuKikanIchiran_Row> 所属機関 = new ArrayList<>();
+        for (ShozokuKikanIchiranFinderBusiness joho : 所属機関一覧) {
+            dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
+            row.setShokisaiHokenshaNo(joho.get証記載保険者番号() != null ? joho.get証記載保険者番号().value() : RString.EMPTY);
+            row.setHokenshaName(joho.get市町村名称() != null ? joho.get市町村名称() : RString.EMPTY);
+            row.setShichosonCode(joho.get市町村コード() != null ? joho.get市町村コード() : RString.EMPTY);
+            row.getNinteiItakusakiCode().setValue(joho.get認定調査委託先コード() != null ? joho.get認定調査委託先コード() : RString.EMPTY);
+            row.getShujiiIryoKikanCode().setValue(joho.get主治医医療機関コード() != null ? joho.get主治医医療機関コード() : RString.EMPTY);
+            row.getSonotaKikanCode().setValue(joho.getその他機関コード() != null ? joho.getその他機関コード() : RString.EMPTY);
+            row.getNinteiChosaItakusakiName().setValue(joho.get認定調査委託先名() != null ? joho.get認定調査委託先名() : RString.EMPTY);
+            row.getShujiiIryoKikanName().setValue(joho.get主治医医療機関名称() != null ? joho.get主治医医療機関名称() : RString.EMPTY);
+            row.getSonotaKikanName().setValue(joho.getその他機関名() != null ? joho.getその他機関名() : RString.EMPTY);
+            row.setNinteiChosainCode(RString.EMPTY);
+            row.setShujiiCode(RString.EMPTY);
+            row.setHdnColumn(row.getShokisaiHokenshaNo()
+                    .concat(row.getNinteiItakusakiCode().getValue())
+                    .concat(row.getNinteiChosainCode())
+                    .concat(row.getShujiiIryoKikanCode().getValue())
+                    .concat(row.getShujiiCode())
+                    .concat(row.getSonotaKikanCode().getValue()));
+            所属機関.add(row);
+        }
+        return 所属機関;
     }
 
     private void set審査会委員情報詳細(ShinsakaiIinJohoTorokuDiv div) {

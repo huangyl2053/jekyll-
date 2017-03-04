@@ -145,7 +145,6 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
      * @param 審査会委員コード
      */
     public void 削除可否チェック(RString 審査会委員コード) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (ShinsakaiIinJohoManager.createInstance().is審査会委員使用中(
                 ShinsakaiIinJohoMapperParameter.createParamByShinsakaiIinCode(審査会委員コード))) {
             throw new ApplicationException(ShinsakaiIinJohoTorokuValidationMessage.削除不可.getMessage());
