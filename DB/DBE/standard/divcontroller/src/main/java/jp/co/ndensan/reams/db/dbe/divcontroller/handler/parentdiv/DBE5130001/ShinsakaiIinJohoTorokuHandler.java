@@ -432,17 +432,24 @@ public class ShinsakaiIinJohoTorokuHandler {
             return true;
         }
         for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
-            if (!row.getHdnColumn().equals(row.getShokisaiHokenshaNo()
-                    .concat(row.getNinteiItakusakiCode().getValue())
-                    .concat(row.getNinteiChosainCode())
-                    .concat(row.getShujiiIryoKikanCode().getValue())
-                    .concat(row.getShujiiCode())
-                    .concat(row.getSonotaKikanCode().getValue()))) {
+            if (!row.getHdnColumn().equals(nullToEmpty(row.getShokisaiHokenshaNo())
+                    .concat(nullToEmpty(row.getNinteiItakusakiCode().getValue()))
+                    .concat(nullToEmpty(row.getNinteiChosainCode()))
+                    .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
+                    .concat(nullToEmpty(row.getShujiiCode()))
+                    .concat((row.getSonotaKikanCode().getValue())))) {
                 return true;
             }
         }
         return false;
 
+    }
+
+    private RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
     }
 
     /**
@@ -585,12 +592,12 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.getShujiiIryoKikanName().setValue(RString.EMPTY);
         row.getSonotaKikanCode().setValue(RString.EMPTY);
         row.getSonotaKikanName().setValue(RString.EMPTY);
-        row.setHdnColumn(row.getShokisaiHokenshaNo()
-                .concat(row.getNinteiItakusakiCode().getValue())
-                .concat(row.getNinteiChosainCode())
-                .concat(row.getShujiiIryoKikanCode().getValue())
-                .concat(row.getShujiiCode())
-                .concat(row.getSonotaKikanCode().getValue()));
+        row.setHdnColumn(nullToEmpty(row.getShokisaiHokenshaNo())
+                .concat(nullToEmpty(row.getNinteiItakusakiCode().getValue()))
+                .concat(nullToEmpty(row.getNinteiChosainCode()))
+                .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
+                .concat(nullToEmpty(row.getShujiiCode()))
+                .concat((row.getSonotaKikanCode().getValue())));
         所属機関.add(row);
         div.getDgShozokuKikanIchiran().setDataSource(所属機関);
         div.getDgShozokuKikanIchiran().setVerticalScrollPosition(VerticalScrollPosition.BOTTOM);
@@ -781,12 +788,12 @@ public class ShinsakaiIinJohoTorokuHandler {
                     }
                     row.setNinteiChosainCode(RString.EMPTY);
                     row.setShujiiCode(RString.EMPTY);
-                    row.setHdnColumn(row.getShokisaiHokenshaNo()
-                            .concat(row.getNinteiItakusakiCode().getValue())
-                            .concat(row.getNinteiChosainCode())
-                            .concat(row.getShujiiIryoKikanCode().getValue())
-                            .concat(row.getShujiiCode())
-                            .concat(row.getSonotaKikanCode().getValue()));
+                    row.setHdnColumn(nullToEmpty(row.getShokisaiHokenshaNo())
+                            .concat(nullToEmpty(row.getNinteiItakusakiCode().getValue()))
+                            .concat(nullToEmpty(row.getNinteiChosainCode()))
+                            .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
+                            .concat(nullToEmpty(row.getShujiiCode()))
+                            .concat((row.getSonotaKikanCode().getValue())));
                     所属機関.add(row);
                 }
                 div.getDgShozokuKikanIchiran().setDataSource(sort所属機関dg(所属機関));
@@ -811,12 +818,12 @@ public class ShinsakaiIinJohoTorokuHandler {
             row.getSonotaKikanName().setValue(joho.getその他機関名() != null ? joho.getその他機関名() : RString.EMPTY);
             row.setNinteiChosainCode(RString.EMPTY);
             row.setShujiiCode(RString.EMPTY);
-            row.setHdnColumn(row.getShokisaiHokenshaNo()
-                    .concat(row.getNinteiItakusakiCode().getValue())
-                    .concat(row.getNinteiChosainCode())
-                    .concat(row.getShujiiIryoKikanCode().getValue())
-                    .concat(row.getShujiiCode())
-                    .concat(row.getSonotaKikanCode().getValue()));
+            row.setHdnColumn(nullToEmpty(row.getShokisaiHokenshaNo())
+                    .concat(nullToEmpty(row.getNinteiItakusakiCode().getValue()))
+                    .concat(nullToEmpty(row.getNinteiChosainCode()))
+                    .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
+                    .concat(nullToEmpty(row.getShujiiCode()))
+                    .concat((row.getSonotaKikanCode().getValue())));
             所属機関.add(row);
         }
         return 所属機関;

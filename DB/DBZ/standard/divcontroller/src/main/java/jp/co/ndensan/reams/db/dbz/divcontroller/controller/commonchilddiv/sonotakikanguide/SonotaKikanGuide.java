@@ -120,8 +120,8 @@ public class SonotaKikanGuide {
      */
     public ResponseData<SonotaKikanGuideDiv> onClick_Select(SonotaKikanGuideDiv div) {
         SoNoTaKikanGuideModel model = new SoNoTaKikanGuideModel();
-        model.setその他機関コード(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikancode());
-        model.setその他機関名称(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikanname());
+        model.setその他機関コード(nullToEmpty(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikancode()));
+        model.setその他機関名称(nullToEmpty(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikanname()));
 
         ViewStateHolder.put(ViewStateKeys.その他機関選択ガイド_モード, model);
         return ResponseData.of(div).respond();
@@ -139,5 +139,12 @@ public class SonotaKikanGuide {
 
     private SoNoTaKikanGuideHandler getHandler(SonotaKikanGuideDiv div) {
         return new SoNoTaKikanGuideHandler(div);
+    }
+
+    private RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
     }
 }

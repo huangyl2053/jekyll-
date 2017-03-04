@@ -266,7 +266,7 @@ public class ShinsakaiIinJohoToroku {
         KijuntsukiShichosonjohoiDataPassModel 認定調査委託先 = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (!createHandOf(div).is認定調査委託先存在(認定調査委託先)) {
-            div.getDgShozokuKikanIchiran().getClickedItem().setNinteiChosainCode(認定調査委託先.get調査員コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().setNinteiChosainCode(RString.EMPTY);
             div.getDgShozokuKikanIchiran().getClickedItem().getNinteiItakusakiCode().setValue(認定調査委託先.get委託先コード());
             div.getDgShozokuKikanIchiran().getClickedItem().getNinteiChosaItakusakiName().setValue(認定調査委託先.get委託先名());
         }
@@ -307,7 +307,7 @@ public class ShinsakaiIinJohoToroku {
         ShujiiIryokikanandshujiiDataPassModel 主治医医療機関 = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (!createHandOf(div).is主治医医療機関存在(主治医医療機関)) {
-            div.getDgShozokuKikanIchiran().getClickedItem().setShujiiCode(主治医医療機関.get主治医コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().setShujiiCode(RString.EMPTY);
             div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().setValue(主治医医療機関.get主治医医療機関コード());
             div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanName().setValue(主治医医療機関.get主治医医療機関名称());
         }

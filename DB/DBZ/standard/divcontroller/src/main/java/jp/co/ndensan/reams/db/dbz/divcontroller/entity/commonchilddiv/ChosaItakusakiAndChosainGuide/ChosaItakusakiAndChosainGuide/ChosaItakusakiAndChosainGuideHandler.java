@@ -148,17 +148,17 @@ public class ChosaItakusakiAndChosainGuideHandler {
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 dataPassModel.set市町村コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShichosonCode());
             }
-            dataPassModel.set郵便番号(div.getDgKensakuKekkaIchiran().getClickedItem().getYubiBango());
-            dataPassModel.set住所(div.getDgKensakuKekkaIchiran().getClickedItem().getJyuSho());
-            dataPassModel.set電話番号(div.getDgKensakuKekkaIchiran().getClickedItem().getTelCode());
+            dataPassModel.set郵便番号(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getYubiBango()));
+            dataPassModel.set住所(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getJyuSho()));
+            dataPassModel.set電話番号(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getTelCode()));
             if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
-                dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
-                dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
+                dataPassModel.set委託先コード(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue()));
+                dataPassModel.set委託先名(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho()));
             } else {
-                dataPassModel.set調査員コード(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainCode());
-                dataPassModel.set調査員名(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainShimei());
-                dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
-                dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
+                dataPassModel.set調査員コード(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainCode()));
+                dataPassModel.set調査員名(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainShimei()));
+                dataPassModel.set委託先コード(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue()));
+                dataPassModel.set委託先名(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho()));
             }
             div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         }
