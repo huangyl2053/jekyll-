@@ -82,4 +82,18 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
      * @param text 設定するテキスト
      */
     void setLabelLText(RString text);
+
+    /**
+     * DDLの必須選択を設定します。
+     *
+     * @param isRequired trueなら必須選択
+     */
+    void setRequired(boolean isRequired);
+
+    /**
+     * DDLの活性非活性を設定します。
+     *
+     * @param isDisabled trueなら非活性
+     */
+    void setDdlDisabled(boolean isDisabled);
 }

@@ -11,8 +11,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinse
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.AtenaInfoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
@@ -60,6 +63,7 @@ public class NinteiShinseiTorokuHandler {
     private static final RString 歳 = new RString("歳");
     private static final RString みなし２号対象 = new RString("みなし２号");
     private static final RString KEY1 = new RString("key1");
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -150,7 +154,7 @@ public class NinteiShinseiTorokuHandler {
 
         if (市町村コード.isEmpty()) {
             市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
-        } 
+        }
         div.getCcdShikakuInfo().initialize(市町村コード.value(), business.get被保険者番号().value().padZeroToLeft(ZERO_10));
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
@@ -212,8 +216,8 @@ public class NinteiShinseiTorokuHandler {
             if (result.get申請サービス削除の理由() == null || result.get申請サービス削除の理由().isEmpty()) {
                 div.getServiceDel().setIsOpen(false);
             }
-            if (result.get取下区分コード() == null 
-                    || TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value()) 
+            if (result.get取下区分コード() == null
+                    || TorisageKubunCode.認定申請有効.getコード().equals(result.get取下区分コード().value())
                     || result.get取下区分コード().isEmpty()) {
                 div.getSinseiTorisage().setIsOpen(false);
             }
@@ -226,8 +230,8 @@ public class NinteiShinseiTorokuHandler {
             if (result.get訪問調査先名称() == null || RString.isNullOrEmpty(result.get訪問調査先名称().getColumnValue())) {
                 div.getHomonSaki().setIsOpen(false);
             }
-            if (result.get入所施設名称() == null ||
-                    RString.isNullOrEmpty(result.get入所施設名称().getColumnValue())) {
+            if (result.get入所施設名称() == null
+                    || RString.isNullOrEmpty(result.get入所施設名称().getColumnValue())) {
                 div.getShisetsuJoho().setIsOpen(false);
             }
 
@@ -251,7 +255,7 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdNinteiInput().setDisplayNone(true);
         div.getCcdShinseiSonotaJohoInput().setDisplayNone(true);
     }
-    
+
     /**
      * パネルを閉じる
      *
@@ -265,12 +269,14 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().setIsOpen(false);
         div.getServiceDel().setIsOpen(false);
     }
-    
+
     /**
      * 申請者情報パネルの初期化です
      *
+     * @param 所属市町村コード 所属市町村コード
+     * @param isみなし2号登録 みなし2号登録ならTrue
      */
-    public void loadPnlSinseishaJoho() {
+    public void loadPnlSinseishaJoho(LasdecCode 所属市町村コード, boolean isみなし2号登録) {
         AtenaInfoTorokuDiv atenaDiv = div.getHeadPanel().getAtenaInfoToroku();
         div.getTplShinseishaJoho().getTxtJohoAtenaMeisho().setDomain(atenaDiv.getMeisho().getDomain());
         div.getTplShinseishaJoho().getTxtJohoAtenaKanaMeisho().setDomain(atenaDiv.getTxtKanaMeisho().getDomain());
@@ -281,6 +287,15 @@ public class NinteiShinseiTorokuHandler {
         div.getTplShinseishaJoho().getTxtJohoJusho().setDomain(atenaDiv.getJusho().getDomain());
         div.getTplShinseishaJoho().getTxtJohoTelNo().setDomain(atenaDiv.getTelNo().getDomain());
         div.getTplShinseishaJoho().getTxtJohoNenrei().setValue(atenaDiv.getNenrei().getValue());
+        if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+            div.getTplShinseishaJoho().getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.構成市町村全て);
+            div.getTplShinseishaJoho().getCcdShozokuShichoson().setSelectedShichosonIfExist(所属市町村コード);
+        } else {
+            div.getTplShinseishaJoho().getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
+        }
+        div.getTplShinseishaJoho().getCcdShozokuShichoson().setLabelLText(new RString("市町村"));
+        div.getTplShinseishaJoho().getCcdShozokuShichoson().setRequired(true);
+        div.getTplShinseishaJoho().getCcdShozokuShichoson().setDdlDisabled(!isみなし2号登録);
     }
 
     /**

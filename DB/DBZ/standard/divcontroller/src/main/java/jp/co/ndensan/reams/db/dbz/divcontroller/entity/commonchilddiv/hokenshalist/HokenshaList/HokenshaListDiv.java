@@ -108,6 +108,16 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
         this.ddlHokenshaList.setLabelLText(text);
     }
 
+    @Override
+    public void setRequired(boolean isRequired) {
+        this.ddlHokenshaList.setRequired(isRequired);
+    }
+
+    @Override
+    public void setDdlDisabled(boolean isDisabled) {
+        this.ddlHokenshaList.setDisabled(isDisabled);
+    }
+
     private HokenshaListDivHandler createHandler() {
         return new HokenshaListDivHandler(this);
     }
