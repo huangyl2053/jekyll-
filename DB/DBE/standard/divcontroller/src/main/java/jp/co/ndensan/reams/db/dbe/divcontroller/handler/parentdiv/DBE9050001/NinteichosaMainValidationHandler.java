@@ -27,7 +27,6 @@ public class NinteichosaMainValidationHandler {
     private final NinteichosaItakusakiMainDiv div;
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
-    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -192,16 +191,30 @@ public class NinteichosaMainValidationHandler {
     }
 
     private boolean is口座情報あり_必須項目入力あり(NinteichosaItakusakiMainDiv div) {
-        if (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            if (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
+            return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+        }
+        } else {
+            if (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
                 || !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
-                || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
                 || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
                 || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
             return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
                     && !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
-                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                    && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
                     && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
                     && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+        }
         }
         return true;
 

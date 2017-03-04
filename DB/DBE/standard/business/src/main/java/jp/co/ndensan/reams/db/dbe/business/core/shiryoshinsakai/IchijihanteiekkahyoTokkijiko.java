@@ -212,11 +212,11 @@ public class IchijihanteiekkahyoTokkijiko {
      */
     public RString get特記事項テキスト_イメージ区分() {
         for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
-                return TokkijikoTextImageKubun.テキスト.getコード();
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.getTokkijikoTextImageKubun())) {
+                return TokkijikoTextImageKubun.イメージ.getコード();
             }
         }
-        return TokkijikoTextImageKubun.イメージ.getコード();
+        return TokkijikoTextImageKubun.テキスト.getコード();
     }
 
     private List<RString> getTextByテキスト全面イメージ() {

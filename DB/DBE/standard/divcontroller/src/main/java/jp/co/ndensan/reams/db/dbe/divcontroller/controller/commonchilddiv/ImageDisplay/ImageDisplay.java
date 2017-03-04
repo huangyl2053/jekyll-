@@ -192,7 +192,9 @@ public class ImageDisplay {
                         break;
                     }
                 }
-                imageFilePathList.add(imageFilePath);
+                if (!RString.isNullOrEmpty(imageFilePath)) {
+                    imageFilePathList.add(imageFilePath);
+                }
                 imageFilePath = RString.EMPTY;
             }
         }

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiInfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +27,10 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     private TextBoxTime txtKaisaiStartTime;
     @JsonProperty("txtKaisaiEndTime")
     private TextBoxTime txtKaisaiEndTime;
-    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
-    private Button btnReflectKaisaiTimeToShinsakaiIinIchiran;
     @JsonProperty("txtShoyoTime")
     private TextBoxNum txtShoyoTime;
+    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
+    private Button btnReflectKaisaiTimeToShinsakaiIinIchiran;
     @JsonProperty("btnCalcShoyoTime")
     private Button btnCalcShoyoTime;
     @JsonProperty("txtJissiSu")
@@ -99,24 +99,6 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     }
 
     /*
-     * getbtnReflectKaisaiTimeToShinsakaiIinIchiran
-     * @return btnReflectKaisaiTimeToShinsakaiIinIchiran
-     */
-    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
-    public Button getBtnReflectKaisaiTimeToShinsakaiIinIchiran() {
-        return btnReflectKaisaiTimeToShinsakaiIinIchiran;
-    }
-
-    /*
-     * setbtnReflectKaisaiTimeToShinsakaiIinIchiran
-     * @param btnReflectKaisaiTimeToShinsakaiIinIchiran btnReflectKaisaiTimeToShinsakaiIinIchiran
-     */
-    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
-    public void setBtnReflectKaisaiTimeToShinsakaiIinIchiran(Button btnReflectKaisaiTimeToShinsakaiIinIchiran) {
-        this.btnReflectKaisaiTimeToShinsakaiIinIchiran = btnReflectKaisaiTimeToShinsakaiIinIchiran;
-    }
-
-    /*
      * gettxtShoyoTime
      * @return txtShoyoTime
      */
@@ -132,6 +114,24 @@ public class ShinsakaiKaisaiInfoDiv extends Panel {
     @JsonProperty("txtShoyoTime")
     public void setTxtShoyoTime(TextBoxNum txtShoyoTime) {
         this.txtShoyoTime = txtShoyoTime;
+    }
+
+    /*
+     * getbtnReflectKaisaiTimeToShinsakaiIinIchiran
+     * @return btnReflectKaisaiTimeToShinsakaiIinIchiran
+     */
+    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
+    public Button getBtnReflectKaisaiTimeToShinsakaiIinIchiran() {
+        return btnReflectKaisaiTimeToShinsakaiIinIchiran;
+    }
+
+    /*
+     * setbtnReflectKaisaiTimeToShinsakaiIinIchiran
+     * @param btnReflectKaisaiTimeToShinsakaiIinIchiran btnReflectKaisaiTimeToShinsakaiIinIchiran
+     */
+    @JsonProperty("btnReflectKaisaiTimeToShinsakaiIinIchiran")
+    public void setBtnReflectKaisaiTimeToShinsakaiIinIchiran(Button btnReflectKaisaiTimeToShinsakaiIinIchiran) {
+        this.btnReflectKaisaiTimeToShinsakaiIinIchiran = btnReflectKaisaiTimeToShinsakaiIinIchiran;
     }
 
     /*

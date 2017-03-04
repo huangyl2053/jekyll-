@@ -68,23 +68,23 @@ public class ShinsakaiIinWaritsukeHandler {
         builder.append(介護認定審査会の前);
         builder.append(開催番号);
         builder.append(介護認定審査会の後);
-        div.getTxtKaigoNinteiShinsakai().setValue(builder.toRString());
-        div.getTxtGogitai().setValue(nullToEmpty(business.get合議体()));
-        div.getTxtKaishiYoteiTime().setValue(new RTime(nullToEmpty(business.get開始予定時間())));
+        div.getWaritsuke().getTxtKaigoNinteiShinsakai().setValue(builder.toRString());
+        div.getWaritsuke().getTxtGogitai().setValue(nullToEmpty(business.get合議体()));
+        div.getWaritsuke().getTxtKaishiYoteiTime().setValue(new RTime(nullToEmpty(business.get開始予定時間())));
         if (IsGogitaiDummy.toValue(business.isダミー区分()).is合議体ダミーフラグTrue()) {
             chkDummyKubunlist.add(SELECTEDKEY);
         }
-        div.getChkDummyKubun().setSelectedItemsByKey(chkDummyKubunlist);
-        div.getTxtKaisaiYoteibi().setValue(RString.isNullOrEmpty(business.get開催予定日()) ? null
+        div.getWaritsuke().getChkDummyKubun().setSelectedItemsByKey(chkDummyKubunlist);
+        div.getWaritsuke().getTxtKaisaiYoteibi().setValue(RString.isNullOrEmpty(business.get開催予定日()) ? null
                 : new RDate(business.get開催予定日().toString()));
-        div.getTxtKaisaiBasho().setValue(nullToEmpty(business.get開催場所()));
-        div.getTxtShuryoYoteiTime().setValue(RString.isNullOrEmpty(business.get終了予定時間()) ? null
+        div.getWaritsuke().getTxtKaisaiBasho().setValue(nullToEmpty(business.get開催場所()));
+        div.getWaritsuke().getTxtShuryoYoteiTime().setValue(RString.isNullOrEmpty(business.get終了予定時間()) ? null
                 : new RTime(business.get終了予定時間()));
-        div.getTxtYoteiTeiin().setValue(new RString(String.valueOf(business.get予定定員())));
+        div.getWaritsuke().getTxtYoteiTeiin().setValue(new RString(String.valueOf(business.get予定定員())));
         if (IsGogitaiSeishinkaSonzai.toValue(business.is精神科医()).is合議体精神科医存在()) {
             chkSeishinkailist.add(SELECTEDKEY);
         }
-        div.getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);
+        div.getWaritsuke().getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);
     }
 
     public void setShinsakaiWariateIinJohoList(List<ShinsakaiiinJoho> iinJoholist,
@@ -116,8 +116,8 @@ public class ShinsakaiIinWaritsukeHandler {
         for (ShinsakaiiinJoho item : iinJoholist) {
             set一覧DataGrid(ichiranGridList, item);
         }
-        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
-        div.getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
+        div.getWaritsuke().getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
+        div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().setDataSource(koseiIchiranGridList);
     }
 
     /**
@@ -126,12 +126,12 @@ public class ShinsakaiIinWaritsukeHandler {
      * @param list 一覧全件内容
      */
     public void setAllDataGrid(List<ShinsakaiiinJoho> list) {
-        List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = div.getDgShinsakaiIinKoseiIchiran().getDataSource();
+        List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource();
         List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
         for (ShinsakaiiinJoho business : list) {
             set一覧DataGrid(ichiranGridList, business);
         }
-        div.getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
+        div.getWaritsuke().getDgShinsakaiIinIchiran().setDataSource(ichiranGridList);
     }
 
     /**
@@ -150,7 +150,7 @@ public class ShinsakaiIinWaritsukeHandler {
         row.setShukketsuKubun(shinsakaiIinIchiranRow.getShukketsuKubun());
         row.setShinsakaiIinKaishibi(shinsakaiIinIchiranRow.getShinsakaiIinKaishibi());
         row.setShinsakaiIinShuryobi(shinsakaiIinIchiranRow.getShinsakaiIinShuryobi());
-        div.getDgShinsakaiIinKoseiIchiran().getDataSource().add(row);
+        div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource().add(row);
     }
 
     private RString get議長区分名称変換(RString 合議体長区分) {
@@ -181,7 +181,7 @@ public class ShinsakaiIinWaritsukeHandler {
                         .toString()).wareki().toDateString());
         row.setGogitaichoKubun(shinsakaiIinKoseiIchiranRow.getGogitaichoKubun());
         row.setShukketsuKubun(shinsakaiIinKoseiIchiranRow.getShukketsuKubun());
-        div.getDgShinsakaiIinIchiran().getDataSource().add(row);
+        div.getWaritsuke().getDgShinsakaiIinIchiran().getDataSource().add(row);
     }
 
     /**

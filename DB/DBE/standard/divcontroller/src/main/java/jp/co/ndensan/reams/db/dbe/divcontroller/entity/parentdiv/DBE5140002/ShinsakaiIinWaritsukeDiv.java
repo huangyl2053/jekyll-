@@ -4,8 +4,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,40 +23,10 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtKaigoNinteiShinsakai")
-    private TextBox txtKaigoNinteiShinsakai;
-    @JsonProperty("txtGogitai")
-    private TextBox txtGogitai;
-    @JsonProperty("txtYoteiTeiin")
-    private TextBox txtYoteiTeiin;
-    @JsonProperty("chkDummyKubun")
-    private CheckBoxList chkDummyKubun;
-    @JsonProperty("txtKaisaiBasho")
-    private TextBox txtKaisaiBasho;
-    @JsonProperty("txtKaisaiYoteibi")
-    private TextBoxDate txtKaisaiYoteibi;
-    @JsonProperty("txtKaishiYoteiTime")
-    private TextBoxTime txtKaishiYoteiTime;
-    @JsonProperty("txtShuryoYoteiTime")
-    private TextBoxTime txtShuryoYoteiTime;
-    @JsonProperty("chkSeishinkai")
-    private CheckBoxList chkSeishinkai;
-    @JsonProperty("lblShinsakaiIinKoseiIchiran")
-    private Label lblShinsakaiIinKoseiIchiran;
-    @JsonProperty("dgShinsakaiIinKoseiIchiran")
-    private DataGrid<dgShinsakaiIinKoseiIchiran_Row> dgShinsakaiIinKoseiIchiran;
-    @JsonProperty("btnKoseiIchiranWaritsuke")
-    private Button btnKoseiIchiranWaritsuke;
-    @JsonProperty("btnKoseiIchiranKaijo")
-    private Button btnKoseiIchiranKaijo;
-    @JsonProperty("lblShinsakaiIinIchiran")
-    private Label lblShinsakaiIinIchiran;
-    @JsonProperty("btnZentaiHyoji")
-    private Button btnZentaiHyoji;
-    @JsonProperty("txtKijunYMD")
-    private TextBoxDate txtKijunYMD;
-    @JsonProperty("dgShinsakaiIinIchiran")
-    private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
+    @JsonProperty("Waritsuke")
+    private WaritsukeDiv Waritsuke;
+    @JsonProperty("Kanryo")
+    private KanryoDiv Kanryo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -63,309 +35,47 @@ public class ShinsakaiIinWaritsukeDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtKaigoNinteiShinsakai
-     * @return txtKaigoNinteiShinsakai
+     * getWaritsuke
+     * @return Waritsuke
      */
-    @JsonProperty("txtKaigoNinteiShinsakai")
-    public TextBox getTxtKaigoNinteiShinsakai() {
-        return txtKaigoNinteiShinsakai;
+    @JsonProperty("Waritsuke")
+    public WaritsukeDiv getWaritsuke() {
+        return Waritsuke;
     }
 
     /*
-     * settxtKaigoNinteiShinsakai
-     * @param txtKaigoNinteiShinsakai txtKaigoNinteiShinsakai
+     * setWaritsuke
+     * @param Waritsuke Waritsuke
      */
-    @JsonProperty("txtKaigoNinteiShinsakai")
-    public void setTxtKaigoNinteiShinsakai(TextBox txtKaigoNinteiShinsakai) {
-        this.txtKaigoNinteiShinsakai = txtKaigoNinteiShinsakai;
+    @JsonProperty("Waritsuke")
+    public void setWaritsuke(WaritsukeDiv Waritsuke) {
+        this.Waritsuke = Waritsuke;
     }
 
     /*
-     * gettxtGogitai
-     * @return txtGogitai
+     * getKanryo
+     * @return Kanryo
      */
-    @JsonProperty("txtGogitai")
-    public TextBox getTxtGogitai() {
-        return txtGogitai;
+    @JsonProperty("Kanryo")
+    public KanryoDiv getKanryo() {
+        return Kanryo;
     }
 
     /*
-     * settxtGogitai
-     * @param txtGogitai txtGogitai
+     * setKanryo
+     * @param Kanryo Kanryo
      */
-    @JsonProperty("txtGogitai")
-    public void setTxtGogitai(TextBox txtGogitai) {
-        this.txtGogitai = txtGogitai;
+    @JsonProperty("Kanryo")
+    public void setKanryo(KanryoDiv Kanryo) {
+        this.Kanryo = Kanryo;
     }
 
     /*
-     * gettxtYoteiTeiin
-     * @return txtYoteiTeiin
+     * [ ショートカットの作成 ]
      */
-    @JsonProperty("txtYoteiTeiin")
-    public TextBox getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
-    }
-
-    /*
-     * settxtYoteiTeiin
-     * @param txtYoteiTeiin txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBox txtYoteiTeiin) {
-        this.txtYoteiTeiin = txtYoteiTeiin;
-    }
-
-    /*
-     * getchkDummyKubun
-     * @return chkDummyKubun
-     */
-    @JsonProperty("chkDummyKubun")
-    public CheckBoxList getChkDummyKubun() {
-        return chkDummyKubun;
-    }
-
-    /*
-     * setchkDummyKubun
-     * @param chkDummyKubun chkDummyKubun
-     */
-    @JsonProperty("chkDummyKubun")
-    public void setChkDummyKubun(CheckBoxList chkDummyKubun) {
-        this.chkDummyKubun = chkDummyKubun;
-    }
-
-    /*
-     * gettxtKaisaiBasho
-     * @return txtKaisaiBasho
-     */
-    @JsonProperty("txtKaisaiBasho")
-    public TextBox getTxtKaisaiBasho() {
-        return txtKaisaiBasho;
-    }
-
-    /*
-     * settxtKaisaiBasho
-     * @param txtKaisaiBasho txtKaisaiBasho
-     */
-    @JsonProperty("txtKaisaiBasho")
-    public void setTxtKaisaiBasho(TextBox txtKaisaiBasho) {
-        this.txtKaisaiBasho = txtKaisaiBasho;
-    }
-
-    /*
-     * gettxtKaisaiYoteibi
-     * @return txtKaisaiYoteibi
-     */
-    @JsonProperty("txtKaisaiYoteibi")
-    public TextBoxDate getTxtKaisaiYoteibi() {
-        return txtKaisaiYoteibi;
-    }
-
-    /*
-     * settxtKaisaiYoteibi
-     * @param txtKaisaiYoteibi txtKaisaiYoteibi
-     */
-    @JsonProperty("txtKaisaiYoteibi")
-    public void setTxtKaisaiYoteibi(TextBoxDate txtKaisaiYoteibi) {
-        this.txtKaisaiYoteibi = txtKaisaiYoteibi;
-    }
-
-    /*
-     * gettxtKaishiYoteiTime
-     * @return txtKaishiYoteiTime
-     */
-    @JsonProperty("txtKaishiYoteiTime")
-    public TextBoxTime getTxtKaishiYoteiTime() {
-        return txtKaishiYoteiTime;
-    }
-
-    /*
-     * settxtKaishiYoteiTime
-     * @param txtKaishiYoteiTime txtKaishiYoteiTime
-     */
-    @JsonProperty("txtKaishiYoteiTime")
-    public void setTxtKaishiYoteiTime(TextBoxTime txtKaishiYoteiTime) {
-        this.txtKaishiYoteiTime = txtKaishiYoteiTime;
-    }
-
-    /*
-     * gettxtShuryoYoteiTime
-     * @return txtShuryoYoteiTime
-     */
-    @JsonProperty("txtShuryoYoteiTime")
-    public TextBoxTime getTxtShuryoYoteiTime() {
-        return txtShuryoYoteiTime;
-    }
-
-    /*
-     * settxtShuryoYoteiTime
-     * @param txtShuryoYoteiTime txtShuryoYoteiTime
-     */
-    @JsonProperty("txtShuryoYoteiTime")
-    public void setTxtShuryoYoteiTime(TextBoxTime txtShuryoYoteiTime) {
-        this.txtShuryoYoteiTime = txtShuryoYoteiTime;
-    }
-
-    /*
-     * getchkSeishinkai
-     * @return chkSeishinkai
-     */
-    @JsonProperty("chkSeishinkai")
-    public CheckBoxList getChkSeishinkai() {
-        return chkSeishinkai;
-    }
-
-    /*
-     * setchkSeishinkai
-     * @param chkSeishinkai chkSeishinkai
-     */
-    @JsonProperty("chkSeishinkai")
-    public void setChkSeishinkai(CheckBoxList chkSeishinkai) {
-        this.chkSeishinkai = chkSeishinkai;
-    }
-
-    /*
-     * getlblShinsakaiIinKoseiIchiran
-     * @return lblShinsakaiIinKoseiIchiran
-     */
-    @JsonProperty("lblShinsakaiIinKoseiIchiran")
-    public Label getLblShinsakaiIinKoseiIchiran() {
-        return lblShinsakaiIinKoseiIchiran;
-    }
-
-    /*
-     * setlblShinsakaiIinKoseiIchiran
-     * @param lblShinsakaiIinKoseiIchiran lblShinsakaiIinKoseiIchiran
-     */
-    @JsonProperty("lblShinsakaiIinKoseiIchiran")
-    public void setLblShinsakaiIinKoseiIchiran(Label lblShinsakaiIinKoseiIchiran) {
-        this.lblShinsakaiIinKoseiIchiran = lblShinsakaiIinKoseiIchiran;
-    }
-
-    /*
-     * getdgShinsakaiIinKoseiIchiran
-     * @return dgShinsakaiIinKoseiIchiran
-     */
-    @JsonProperty("dgShinsakaiIinKoseiIchiran")
-    public DataGrid<dgShinsakaiIinKoseiIchiran_Row> getDgShinsakaiIinKoseiIchiran() {
-        return dgShinsakaiIinKoseiIchiran;
-    }
-
-    /*
-     * setdgShinsakaiIinKoseiIchiran
-     * @param dgShinsakaiIinKoseiIchiran dgShinsakaiIinKoseiIchiran
-     */
-    @JsonProperty("dgShinsakaiIinKoseiIchiran")
-    public void setDgShinsakaiIinKoseiIchiran(DataGrid<dgShinsakaiIinKoseiIchiran_Row> dgShinsakaiIinKoseiIchiran) {
-        this.dgShinsakaiIinKoseiIchiran = dgShinsakaiIinKoseiIchiran;
-    }
-
-    /*
-     * getbtnKoseiIchiranWaritsuke
-     * @return btnKoseiIchiranWaritsuke
-     */
-    @JsonProperty("btnKoseiIchiranWaritsuke")
-    public Button getBtnKoseiIchiranWaritsuke() {
-        return btnKoseiIchiranWaritsuke;
-    }
-
-    /*
-     * setbtnKoseiIchiranWaritsuke
-     * @param btnKoseiIchiranWaritsuke btnKoseiIchiranWaritsuke
-     */
-    @JsonProperty("btnKoseiIchiranWaritsuke")
-    public void setBtnKoseiIchiranWaritsuke(Button btnKoseiIchiranWaritsuke) {
-        this.btnKoseiIchiranWaritsuke = btnKoseiIchiranWaritsuke;
-    }
-
-    /*
-     * getbtnKoseiIchiranKaijo
-     * @return btnKoseiIchiranKaijo
-     */
-    @JsonProperty("btnKoseiIchiranKaijo")
-    public Button getBtnKoseiIchiranKaijo() {
-        return btnKoseiIchiranKaijo;
-    }
-
-    /*
-     * setbtnKoseiIchiranKaijo
-     * @param btnKoseiIchiranKaijo btnKoseiIchiranKaijo
-     */
-    @JsonProperty("btnKoseiIchiranKaijo")
-    public void setBtnKoseiIchiranKaijo(Button btnKoseiIchiranKaijo) {
-        this.btnKoseiIchiranKaijo = btnKoseiIchiranKaijo;
-    }
-
-    /*
-     * getlblShinsakaiIinIchiran
-     * @return lblShinsakaiIinIchiran
-     */
-    @JsonProperty("lblShinsakaiIinIchiran")
-    public Label getLblShinsakaiIinIchiran() {
-        return lblShinsakaiIinIchiran;
-    }
-
-    /*
-     * setlblShinsakaiIinIchiran
-     * @param lblShinsakaiIinIchiran lblShinsakaiIinIchiran
-     */
-    @JsonProperty("lblShinsakaiIinIchiran")
-    public void setLblShinsakaiIinIchiran(Label lblShinsakaiIinIchiran) {
-        this.lblShinsakaiIinIchiran = lblShinsakaiIinIchiran;
-    }
-
-    /*
-     * getbtnZentaiHyoji
-     * @return btnZentaiHyoji
-     */
-    @JsonProperty("btnZentaiHyoji")
-    public Button getBtnZentaiHyoji() {
-        return btnZentaiHyoji;
-    }
-
-    /*
-     * setbtnZentaiHyoji
-     * @param btnZentaiHyoji btnZentaiHyoji
-     */
-    @JsonProperty("btnZentaiHyoji")
-    public void setBtnZentaiHyoji(Button btnZentaiHyoji) {
-        this.btnZentaiHyoji = btnZentaiHyoji;
-    }
-
-    /*
-     * gettxtKijunYMD
-     * @return txtKijunYMD
-     */
-    @JsonProperty("txtKijunYMD")
-    public TextBoxDate getTxtKijunYMD() {
-        return txtKijunYMD;
-    }
-
-    /*
-     * settxtKijunYMD
-     * @param txtKijunYMD txtKijunYMD
-     */
-    @JsonProperty("txtKijunYMD")
-    public void setTxtKijunYMD(TextBoxDate txtKijunYMD) {
-        this.txtKijunYMD = txtKijunYMD;
-    }
-
-    /*
-     * getdgShinsakaiIinIchiran
-     * @return dgShinsakaiIinIchiran
-     */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
-        return dgShinsakaiIinIchiran;
-    }
-
-    /*
-     * setdgShinsakaiIinIchiran
-     * @param dgShinsakaiIinIchiran dgShinsakaiIinIchiran
-     */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
-        this.dgShinsakaiIinIchiran = dgShinsakaiIinIchiran;
+    @JsonIgnore
+    public IKanryoMessageDiv getCcdKanryoMsg() {
+        return this.getKanryo().getCcdKanryoMsg();
     }
 
     // </editor-fold>

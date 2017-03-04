@@ -607,16 +607,6 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKakunin() {
-        return this.getUploadFileToroku().getBtnKakunin();
-    }
-
-    @JsonIgnore
-    public void  setBtnKakunin(Button btnKakunin) {
-        this.getUploadFileToroku().setBtnKakunin(btnKakunin);
-    }
-
-    @JsonIgnore
     public IKanryoMessageDiv getCcdKanryoMsg() {
         return this.getKanryoMsg().getCcdKanryoMsg();
     }

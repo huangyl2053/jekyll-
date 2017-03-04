@@ -252,6 +252,9 @@ public class DataTorikomiEdit {
      */
     public DbT5105NinteiKanryoJohoEntity editDbT5105Entity(TempShinsakaiKekkaEntity entity,
                                                                     DbT5105NinteiKanryoJohoEntity dbt5105Entity) {
+       if (!HanteiKekkaCode.existsCode(entity.get今回_二次判定())) {
+            return dbt5105Entity;
+        }
         switch (HanteiKekkaCode.toValue(entity.get今回_二次判定())) {
                 case 再調査_意見書のみ:
                     dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);

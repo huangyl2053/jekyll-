@@ -169,7 +169,7 @@
         , T5116."kijunJikanIryoKanren"
         , T5116."kijunJikanNinchishoKasan"
         , T5116."ichijiHnateiKeikokuCode"
-        , T5511."shinsakaiKaisaiNo"
+        , T5501."shinsakaiKaisaiNo"
         , T5102."nijiHanteiNinteiYukoKaishiYMD"
         , T5102."nijiHanteiNinteiYukoShuryoYMD"
         , T5102."nijiHanteiNinteiYukoKikan"
@@ -182,9 +182,9 @@
         , T5102."shinsakaiIken"
         , T5502."shinsakaiOrder"
         FROM
-        rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511 
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS T5501
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS T5502 
-        ON T5502."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
+        ON T5502."shinsakaiKaisaiNo" = T5501."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101 
         ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
         AND T5101."logicalDeletedFlag" = false 
@@ -243,7 +243,7 @@
         ON T5910."shichosonCode" = T5101."shichosonCode"
         AND T5910."ninteichosaItakusakiCode" = T5202."chosaItakusakiCode"
         WHERE
-        T5511."shinsakaiKaisaiNo" = #{kaisaiBangou} 
+        T5501."shinsakaiKaisaiNo" = #{kaisaiBangou} 
         ORDER BY
         T5502."shinsakaiOrder"
     </select>

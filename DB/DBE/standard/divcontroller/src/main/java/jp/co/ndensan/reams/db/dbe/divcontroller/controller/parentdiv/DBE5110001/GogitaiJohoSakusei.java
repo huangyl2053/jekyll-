@@ -617,26 +617,21 @@ public class GogitaiJohoSakusei {
      * アップロードファイルを設定の場合、「一括登録する」ポタンを設定します。
      *
      * @param div 合議体情報作成Div
-     * @return ResponseData<GogitaiJohoSakuseiDiv>
-     */
-    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnKakunin(GogitaiJohoSakuseiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * アップロードファイルを設定の場合、「一括登録する」ポタンを設定します。
-     *
-     * @param div 合議体情報作成Div
      * @param files 画面から渡されるファイルデータ
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnRegistUploadFile(GogitaiJohoSakuseiDiv div, FileData[] files) {
-        for (FileData file : files) {
-            copyFile(file, div);
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            for (FileData file : files) {
+                copyFile(file, div);
+            }
         }
         return ResponseData.of(div).respond();
     }

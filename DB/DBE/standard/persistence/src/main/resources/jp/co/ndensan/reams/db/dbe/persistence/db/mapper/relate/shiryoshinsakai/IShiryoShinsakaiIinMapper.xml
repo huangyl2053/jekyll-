@@ -35,11 +35,19 @@
         AND dbt5101."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" dbt5202
         ON dbt5202."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
-        AND NOT EXISTS
-        (SELECT 'X'
-        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" A1
-        WHERE A1."shinseishoKanriNo" = dbt5202."shinseishoKanriNo"
-        AND dbt5202."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo")
+        AND NOT EXISTS (
+          SELECT 'X'
+          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" A1
+          WHERE A1."shinseishoKanriNo" = dbt5202."shinseishoKanriNo"
+          AND dbt5202."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+        )
+        AND NOT EXISTS (
+          SELECT 'X'
+          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" A2
+          WHERE A2."shinseishoKanriNo" = dbt5202."shinseishoKanriNo"
+          AND A2."ninteichosaRirekiNo" = dbt5202."ninteichosaRirekiNo"
+          AND dbt5202."gaikyoChosaTextImageKubun" <![CDATA[<]]> A2."gaikyoChosaTextImageKubun"
+        )
         LEFT JOIN rgdb."DbT5115Image" dbt5115
         ON dbt5115."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
         WHERE dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}

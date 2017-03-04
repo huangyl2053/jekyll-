@@ -5,15 +5,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiIinToroku のクラスファイル 
+ * kanryoPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShinsakaiIinTorokuDiv extends Panel {
+public class kanryoPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
@@ -21,8 +22,8 @@ public class ShinsakaiIinTorokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +32,12 @@ public class ShinsakaiIinTorokuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getdgShinsakaiIinIchiran
-     * @return dgShinsakaiIinIchiran
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
      */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
-        return dgShinsakaiIinIchiran;
-    }
-
-    /*
-     * setdgShinsakaiIinIchiran
-     * @param dgShinsakaiIinIchiran dgShinsakaiIinIchiran
-     */
-    @JsonProperty("dgShinsakaiIinIchiran")
-    public void setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
-        this.dgShinsakaiIinIchiran = dgShinsakaiIinIchiran;
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     // </editor-fold>
