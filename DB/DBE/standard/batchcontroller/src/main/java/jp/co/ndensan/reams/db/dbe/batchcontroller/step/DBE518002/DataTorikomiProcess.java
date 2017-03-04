@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi.DataTorikomiEdit;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;

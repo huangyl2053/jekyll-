@@ -120,38 +120,38 @@ public class DataTorikomiEdit {
 
     private void set基準時間(TempShinsakaiKekkaEntity entity, DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
         dbt5510Entity.setKijunJikan(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間())
-                                    ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間().toString()));
+                                    ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間().toString()));
         dbt5510Entity.setKijunJikanShokuji(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_食事())
-                                           ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_食事().toString()));
+                                           ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_食事().toString()));
         dbt5510Entity.setKijunJikanHaisetsu(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_排泄())
-                                            ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_排泄().toString()));
+                                            ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_排泄().toString()));
         dbt5510Entity.setKijunJikanIdo(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_移動())
-                                       ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_移動().toString()));
+                                       ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_移動().toString()));
         dbt5510Entity.setKijunJikanSeiketsuHoji(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_清潔保持())
-                                                ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_清潔保持().toString()));
+                                                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_清潔保持().toString()));
         dbt5510Entity.setKijunJikanKansetsuCare(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_間接ケア())
-                                                ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_間接ケア().toString()));
+                                                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_間接ケア().toString()));
         dbt5510Entity.setKijunJikanBPSDKanren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_BPSD関連())
-                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_BPSD関連().toString()));
+                                              ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_BPSD関連().toString()));
         dbt5510Entity.setKijunJikanKinoKunren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_機能訓練())
-                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_機能訓練().toString()));
+                                              ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_機能訓練().toString()));
         dbt5510Entity.setKijunJikanIryoKanren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_医療関連())
-                                              ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_医療関連().toString()));
+                                              ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_医療関連().toString()));
         dbt5510Entity.setKijunJikanNinchishoKasan(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_認知症加算())
-                                                  ? 0 : (int) Double.parseDouble(entity.get一点五次要介護認定等基準時間_認知症加算().toString()));
+                                                  ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_認知症加算().toString()));
     }
 
     private void set点数(TempShinsakaiKekkaEntity entity, DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
         dbt5510Entity.setChukanHyokaKomoku1gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第1群())
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第1群().toString()));
+                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第1群().toString()));
         dbt5510Entity.setChukanHyokaKomoku2gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第2群())
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第2群().toString()));
+                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第2群().toString()));
         dbt5510Entity.setChukanHyokaKomoku3gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第3群())
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第3群().toString()));
+                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第3群().toString()));
         dbt5510Entity.setChukanHyokaKomoku4gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第4群())
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第4群().toString()));
+                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第4群().toString()));
         dbt5510Entity.setChukanHyokaKomoku5gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第5群())
-                                               ? 0 : (int) Double.parseDouble(entity.get一点五次中間評価項目得点第5群().toString()));
+                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第5群().toString()));
     }
 
     /**
