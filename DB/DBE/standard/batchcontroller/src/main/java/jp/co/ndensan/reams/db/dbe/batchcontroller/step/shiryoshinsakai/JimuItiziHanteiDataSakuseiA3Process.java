@@ -204,10 +204,10 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     
     private RString get特記事項テキストイメージ区分(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
         for (DbT5205NinteichosahyoTokkijikoEntity 特記情報 : 特記情報List) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記情報.getTokkijikoTextImageKubun())) {
-                return TokkijikoTextImageKubun.テキスト.getコード();
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記情報.getTokkijikoTextImageKubun())) {
+                return TokkijikoTextImageKubun.イメージ.getコード();
             }
         }
-        return 特記情報List.isEmpty() ? TokkijikoTextImageKubun.テキスト.getコード() : TokkijikoTextImageKubun.イメージ.getコード();
+        return TokkijikoTextImageKubun.テキスト.getコード();
     }
 }

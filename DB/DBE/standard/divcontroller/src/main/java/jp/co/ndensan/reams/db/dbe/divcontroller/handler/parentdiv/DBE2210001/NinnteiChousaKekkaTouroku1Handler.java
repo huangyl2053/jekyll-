@@ -288,7 +288,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
         } else {
             div.getRadGenzaiservis().setSelectedKey(なし_選択);
-            利用サービスGrid非表示();
+            div.getDgRiyoServiceJyokyo().setDisabled(true);
         }
     }
 
@@ -401,12 +401,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     概況調査サービス状況 = null;
                 }
                 if (概況調査サービス状況 != null) {
-                    if (予防給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
-                        if (予防給付サービス.equals(概況調査サービス状況.get給付区分())) {
+                    if (介護給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
+                        if (予防給付サービス.equals(概況調査サービス状況.get給付区分()) || 介護給付サービス.equals(概況調査サービス状況.get給付区分())) {
                             サービス利用リスト.add(getサービス状況レコード(認定調査票サービス状況, 概況調査サービス状況));
                         }
-                    } else if (介護給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
-                        if (予防給付サービス.equals(概況調査サービス状況.get給付区分()) || 介護給付サービス.equals(概況調査サービス状況.get給付区分())) {
+                    } else {
+                        if (予防給付サービス.equals(概況調査サービス状況.get給付区分())) {
                             サービス利用リスト.add(getサービス状況レコード(認定調査票サービス状況, 概況調査サービス状況));
                         }
                     }
@@ -433,12 +433,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<dgRiyoServiceJyokyo_Row> サービス利用リスト = new ArrayList<>();
         if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
             for (CKGaikyoChosahyouServiceJyouk09B 概況調査サービス状況 : CKGaikyoChosahyouServiceJyouk09B.values()) {
-                if (予防給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
-                    if (予防給付サービス.equals(概況調査サービス状況.get給付区分())) {
+                if (介護給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
+                    if (予防給付サービス.equals(概況調査サービス状況.get給付区分()) || 介護給付サービス.equals(概況調査サービス状況.get給付区分())) {
                         サービス利用リスト.add(getサービス状況レコード_OnlyName(概況調査サービス状況));
                     }
-                } else if (介護給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
-                    if (予防給付サービス.equals(概況調査サービス状況.get給付区分()) || 介護給付サービス.equals(概況調査サービス状況.get給付区分())) {
+                } else {
+                    if (予防給付サービス.equals(概況調査サービス状況.get給付区分())) {
                         サービス利用リスト.add(getサービス状況レコード_OnlyName(概況調査サービス状況));
                     }
                 }
@@ -540,19 +540,14 @@ public class NinnteiChousaKekkaTouroku1Handler {
      */
     public void サービス区分の切り替え() {
         if (なし_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
-            利用サービスGridのクリア();
-            利用サービスGrid非表示();
+            div.getNinteiChosaNyuryoku().getTplGaikyoChosa().getDgRiyoServiceJyokyo().getDataSource().clear();
+            List<dgRiyoServiceJyokyo_Row> DgRiyoServiceJokyo = 給付サービスの新規設定();
+            div.getNinteiChosaNyuryoku().getTplGaikyoChosa().getDgRiyoServiceJyokyo().setDataSource(DgRiyoServiceJokyo);
+            div.getDgRiyoServiceJyokyo().setDisabled(true);
         } else {
+            div.getDgRiyoServiceJyokyo().setDisabled(false);
             利用サービスGrid切り替え();
         }
-    }
-
-    private void 利用サービスGridのクリア() {
-        div.getDgRiyoServiceJyokyo().getDataSource().clear();
-    }
-
-    private void 利用サービスGrid非表示() {
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(false);
     }
 
     private void 利用サービスGrid切り替え() {
@@ -570,41 +565,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         div.getDgRiyoServiceJyokyo().setDataSource(newDgRiyoServiceJokyo);
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
-    }
-
-    /**
-     * 利用サービスGridの破棄を行います。
-     *
-     * @param 変更前の設定値 変更前の設定値
-     * @param map 切り替え前の設定値
-     */
-    public void 利用サービスGridの破棄(RString 変更前の設定値, Map<Integer, Decimal> map) {
-
-        if (map != null) {
-            return;
-        }
-        List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
-
-        if (変更前の設定値 == null || 変更前の設定値.isEmpty()) {
-            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
-                row.getServiceJokyo().clearValue();
-            }
-            return;
-        }
-
-        List<RString> 変更前の設定値List = 変更前の設定値.split(カンマ.toString());
-        int index = 0;
-        RString 数値;
-        for (dgRiyoServiceJyokyo_Row row : fistHalf) {
-            row.setSelected(Boolean.FALSE);
-            数値 = 変更前の設定値List.get(index);
-            if (数値.isEmpty()) {
-                row.getServiceJokyo().clearValue();
-            } else {
-                row.getServiceJokyo().setValue(new Decimal(数値.toString()));
-            }
-            index++;
-        }
     }
 
     /**
@@ -964,7 +924,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, list);
 
         住宅改修と記入項目のクリア();
-        利用サービスGridのクリア();
+        div.getDgRiyoServiceJyokyo().getDataSource().clear();
         施設tplのクリア();
         div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().clearValue();
     }
@@ -1597,7 +1557,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             dbt5207Builder.setサービスの状況(利用状況.intValue());
             dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
         }
-        if (予防給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
+        if (!介護給付サービス_選択.equals(div.getRadGenzaiservis().getSelectedKey())) {
             給付サービス状況の更新_介護給付サービス(temp_申請書管理番号, temp_認定調査履歴番号, temp_厚労省IF識別コード, dbt5207Manager);
         }
     }
