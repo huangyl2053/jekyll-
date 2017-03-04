@@ -198,7 +198,12 @@ public class ShinsakaiToroku {
             return ResponseData.of(div).addValidationMessages(選択チェック).respond();
         }
         ValidationMessageControlPairs 完了処理事前チェック = getValidationHandler(div).完了処理事前チェック();
-        ValidationMessageControlPairs validation = getValidationHandler(div).マスキング完了チェック(完了処理事前チェック);
+        ValidationMessageControlPairs validation = new ValidationMessageControlPairs();
+        RString マスキングチェックタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        boolean is一次判定後 = 一次判定後.equals(マスキングチェックタイミング);
+        if (is一次判定後) {
+            validation = getValidationHandler(div).マスキング完了チェック(完了処理事前チェック);
+        }
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
