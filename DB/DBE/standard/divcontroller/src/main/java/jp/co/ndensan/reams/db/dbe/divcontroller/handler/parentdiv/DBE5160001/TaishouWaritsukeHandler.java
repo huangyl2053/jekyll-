@@ -347,6 +347,10 @@ public class TaishouWaritsukeHandler {
             } else {
                 builder.set介護認定審査会進捗状況(new Code(ShinsakaiShinchokuJokyo.未開催_割付完了.getコード()));
             }
+            List<dgTaishoshaIchiran_Row> taishoshaIchiranList = div.getDgTaishoshaIchiran().getDataSource();
+            if (taishoshaIchiranList == null || taishoshaIchiranList.isEmpty()) {
+                builder.set介護認定審査会進捗状況(new Code(ShinsakaiShinchokuJokyo.未開催.getコード()));
+            }
             johoManager.save(builder.build().modifiedModel());
         }
     }

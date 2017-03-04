@@ -48,8 +48,8 @@
             AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
             AND (DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
             AND DbT5105."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
-            AND (DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND DbT5105."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+            AND (DbT5105."ninteichosaKanryoYMD" IS NOT NULL
+            AND DbT5105."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
             AND (DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
             AND DbT5105."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
             AND (DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
@@ -60,12 +60,28 @@
                 AND (DbT5105."maskingKanryoYMD" IS NOT NULL
                 AND DbT5105."maskingKanryoYMD" <![CDATA[<>]]> '')
             </if>
+            AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+            OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
             AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             OR  DbT5105."ninteiShinsakaiKanryoYMD" = '')
             AND (DbT5105."centerSoshinYMD" IS NULL
             OR  DbT5105."centerSoshinYMD" = '')
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
-            AND DbT5101."logicalDeletedFlag" = FALSE            
+            AND DbT5101."logicalDeletedFlag" = FALSE
+            AND NOT EXISTS(
+            SELECT
+            *
+            FROM
+            rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
+            WHERE
+            (
+            DbT5502."hanteiKekkaCode" = '01'
+            OR DbT5502."hanteiKekkaCode" IS NULL
+            OR DbT5502."hanteiKekkaCode" = ''
+            )
+            AND
+            DbT5105."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
+            )
         <if test="状態区分 == 1" >
             AND (DbT5502."shinsakaiWariateYMD" is NULL
             OR  DbT5502."shinsakaiWariateYMD" = '')

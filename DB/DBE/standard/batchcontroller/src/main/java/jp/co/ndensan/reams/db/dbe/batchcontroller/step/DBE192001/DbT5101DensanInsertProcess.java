@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
@@ -52,6 +53,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     BatchPermanentTableWriter<DbT5130ShiboEntity> dbT5130Writer;
     @BatchWriter
     BatchPermanentTableWriter<DbT5120ShinseitodokedeJohoEntity> dbT5120Writer;
+    @BatchWriter
+    BatchPermanentTableWriter<DbT5102NinteiKekkaJohoEntity> dbt5102Writer;
 
     @Override
     protected void initialize() {
@@ -67,6 +70,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         dbT5129Writer = new BatchPermanentTableWriter(DbT5129TennyuEntity.class);
         dbT5130Writer = new BatchPermanentTableWriter(DbT5130ShiboEntity.class);
         dbT5120Writer = new BatchPermanentTableWriter(DbT5120ShinseitodokedeJohoEntity.class);
+        dbt5102Writer = new BatchPermanentTableWriter(DbT5102NinteiKekkaJohoEntity.class);
     }
 
     @Override
@@ -90,6 +94,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
         } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード())) {
             dbT5105Writer.insert(business.getDbT5105Entity(entity, false, processParamter));
             dbT5129Writer.insert(business.getDbT5129Entity(entity));
+            dbt5102Writer.insert(business.getDbT5102Entity(entity));
         } else if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
             dbT5105Writer.insert(business.getDbT5105Entity(entity, false, processParamter));
             dbT5130Writer.insert(business.getDbT5130Entity(entity));

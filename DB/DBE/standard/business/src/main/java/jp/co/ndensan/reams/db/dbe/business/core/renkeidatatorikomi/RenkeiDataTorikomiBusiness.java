@@ -59,6 +59,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
@@ -789,6 +790,32 @@ public class RenkeiDataTorikomiBusiness {
             return new FlexibleDate(value).plusDay(Integer.parseInt(config.toString()));
         }
         return null;
+    }
+    
+    public DbT5102NinteiKekkaJohoEntity getDbT5102Entity(DbT5101RelateEntity entity) {
+        DbT5102NinteiKekkaJohoEntity dbt5102Entity = new DbT5102NinteiKekkaJohoEntity();
+        DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        dbt5102Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
+        dbt5102Entity.setNijiHanteiYMD(new FlexibleDate(dbt5101tempEntity.get認定申請日()));
+        dbt5102Entity.setNijiHanteiYokaigoJotaiKubunCode(new Code(dbt5101tempEntity.get前回の審査会結果()));
+        FlexibleDate 前回認定有効開始期間 = new FlexibleDate(RString.EMPTY);
+        FlexibleDate 前回認定有効終了期間 = new FlexibleDate(RString.EMPTY);
+        if (dbt5101tempEntity.get前回の認定有効開始期間() != null && !dbt5101tempEntity.get前回の認定有効開始期間().isEmpty()) {
+            前回認定有効開始期間 = new FlexibleDate(dbt5101tempEntity.get前回の認定有効開始期間());
+        }
+        if (dbt5101tempEntity.get前回の認定有効終了期間() != null && !dbt5101tempEntity.get前回の認定有効終了期間().isEmpty()) {
+            前回認定有効終了期間 = new FlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間());
+        }
+        int 前回認定有効期間 = 0;
+        if (前回認定有効開始期間.isEmpty() && 前回認定有効終了期間.isEmpty()) {
+            前回認定有効期間 = 前回認定有効終了期間.getBetweenMonths(前回認定有効開始期間);
+        }
+        dbt5102Entity.setNijiHanteiNinteiYukoKikan(前回認定有効期間);
+        dbt5102Entity.setNijiHanteiNinteiYukoKaishiYMD(前回認定有効開始期間);
+        dbt5102Entity.setNijiHanteiNinteiYukoShuryoYMD(前回認定有効終了期間);
+        dbt5102Entity.setShinsakaiKaisaiNo(new RString("0"));
+        dbt5102Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
+        return dbt5102Entity;
     }
 
     /**

@@ -82,7 +82,7 @@ public enum TaishouWaritsukeDivSpec implements IPredicate<TaishouWaritsukeDiv> {
                 @Override
                 public boolean apply(TaishouWaritsukeDiv div) {
                     return div.getTxtWaritsukeNinzu().getValue().intValue() + div.getDgWaritsukeKohoshaIchiran().getSelectedItems().size()
-                    < div.getTxtYoteiTeiin().getValue().intValue();
+                    <= div.getTxtYoteiTeiin().getValue().intValue();
                 }
             };
 

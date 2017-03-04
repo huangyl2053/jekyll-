@@ -27,6 +27,7 @@ public final class ShinsakaiKaisaiParameter {
     private static final RString 表示しない = new RString("表示しない");
     private static final RString 開催予定登録 = new RString("kaisaiYoteiToroku");
     private static final RString 対象者割付 = new RString("taishoshaWaritsuke");
+    private static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
     private final RString 表示期間From;
     private final RString 表示期間To;
     private final RString モード;
@@ -140,7 +141,7 @@ public final class ShinsakaiKaisaiParameter {
                 is審査会未開催分のみ = true;
             }
         }
-        if ((開催予定登録.equals(モード) || 対象者割付.equals(モード)) && 表示しない.equals(ダミー審査会)) {
+        if ((開催予定登録.equals(モード) || 対象者割付.equals(モード) || モード_対象者割付_自動割付使用不可.equals(モード)) && 表示しない.equals(ダミー審査会)) {
             is開催予定登録OR対象者割付 = true;
             is表示しない = true;
         }
