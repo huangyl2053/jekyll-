@@ -28,7 +28,7 @@
         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS dbt5595
         ON
         dbt5595."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
-        dbt5595."remban" = '1'
+        AND dbt5595."remban" = '1'
         WHERE
         <if test= "shinsakaiIinCodeList.size() > 0">
             dbT5594."shinsakaiIinCode" IN
