@@ -16,15 +16,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KozaJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlYokinShubetsu")
-    private DropDownList ddlYokinShubetsu;
+    @JsonProperty("ddlYokinShu")
+    private DropDownList ddlYokinShu;
+    @JsonProperty("txtTenBan")
+    private TextBoxCode txtTenBan;
+    @JsonProperty("txtTenMei")
+    private TextBox txtTenMei;
     @JsonProperty("txtGinkoKozaNo")
     private TextBoxCode txtGinkoKozaNo;
     @JsonProperty("txtKozaMeiginin")
@@ -41,21 +45,57 @@ public class KozaJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlYokinShubetsu
-     * @return ddlYokinShubetsu
+     * getddlYokinShu
+     * @return ddlYokinShu
      */
-    @JsonProperty("ddlYokinShubetsu")
-    public DropDownList getDdlYokinShubetsu() {
-        return ddlYokinShubetsu;
+    @JsonProperty("ddlYokinShu")
+    public DropDownList getDdlYokinShu() {
+        return ddlYokinShu;
     }
 
     /*
-     * setddlYokinShubetsu
-     * @param ddlYokinShubetsu ddlYokinShubetsu
+     * setddlYokinShu
+     * @param ddlYokinShu ddlYokinShu
      */
-    @JsonProperty("ddlYokinShubetsu")
-    public void setDdlYokinShubetsu(DropDownList ddlYokinShubetsu) {
-        this.ddlYokinShubetsu = ddlYokinShubetsu;
+    @JsonProperty("ddlYokinShu")
+    public void setDdlYokinShu(DropDownList ddlYokinShu) {
+        this.ddlYokinShu = ddlYokinShu;
+    }
+
+    /*
+     * gettxtTenBan
+     * @return txtTenBan
+     */
+    @JsonProperty("txtTenBan")
+    public TextBoxCode getTxtTenBan() {
+        return txtTenBan;
+    }
+
+    /*
+     * settxtTenBan
+     * @param txtTenBan txtTenBan
+     */
+    @JsonProperty("txtTenBan")
+    public void setTxtTenBan(TextBoxCode txtTenBan) {
+        this.txtTenBan = txtTenBan;
+    }
+
+    /*
+     * gettxtTenMei
+     * @return txtTenMei
+     */
+    @JsonProperty("txtTenMei")
+    public TextBox getTxtTenMei() {
+        return txtTenMei;
+    }
+
+    /*
+     * settxtTenMei
+     * @param txtTenMei txtTenMei
+     */
+    @JsonProperty("txtTenMei")
+    public void setTxtTenMei(TextBox txtTenMei) {
+        this.txtTenMei = txtTenMei;
     }
 
     /*
