@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class SeikatsuhogoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,6 +32,8 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     private HihokenshaNoSaibanDiv HihokenshaNoSaiban;
     @JsonProperty("SeikatsuHogoshaJohoInput")
     private SeikatsuHogoshaJohoInputDiv SeikatsuHogoshaJohoInput;
+    @JsonProperty("btnClear")
+    private Button btnClear;
     @JsonProperty("hdnKey_Dialog")
     private RString hdnKey_Dialog;
     @JsonProperty("hdnKey_GyomuCode")
@@ -85,6 +87,24 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     @JsonProperty("SeikatsuHogoshaJohoInput")
     public void setSeikatsuHogoshaJohoInput(SeikatsuHogoshaJohoInputDiv SeikatsuHogoshaJohoInput) {
         this.SeikatsuHogoshaJohoInput = SeikatsuHogoshaJohoInput;
+    }
+
+    /*
+     * getbtnClear
+     * @return btnClear
+     */
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    /*
+     * setbtnClear
+     * @param btnClear btnClear
+     */
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear = btnClear;
     }
 
     /*
@@ -356,6 +376,11 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     @JsonIgnore
     public IZenkokuJushoInputDiv getCcdZenkokuJushoInput() {
         return this.getSeikatsuHogoshaJohoInput().getCcdZenkokuJushoInput();
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdShozokuShichoson() {
+        return this.getSeikatsuHogoshaJohoInput().getCcdShozokuShichoson();
     }
 
     // </editor-fold>

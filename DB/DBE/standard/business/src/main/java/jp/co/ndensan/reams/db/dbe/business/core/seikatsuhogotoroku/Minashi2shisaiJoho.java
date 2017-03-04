@@ -53,12 +53,13 @@ public class Minashi2shisaiJoho implements Serializable {
     private RString 年齢;
     private ShinseishoKanriNo 前回申請書管理番号;
     private LasdecCode 市町村コード;
+    private LasdecCode 申請者所属市町村コード;
 
     /**
      * 市町村コードを取得します。
      *
-     * @return 市町村コード 
-     */    
+     * @return 市町村コード
+     */
     public LasdecCode get市町村コード() {
         return 市町村コード;
     }
@@ -386,7 +387,7 @@ public class Minashi2shisaiJoho implements Serializable {
     public SubGyomuCode getサブ業務コード() {
         return サブ業務コード;
     }
-    
+
     /**
      * 年齢を取得します。
      *
@@ -395,13 +396,31 @@ public class Minashi2shisaiJoho implements Serializable {
     public RString get年齢() {
         return 年齢;
     }
-    
+
     /**
      * 年齢を設定します。
      *
-     * @param 年齢 
+     * @param 年齢
      */
     public void set年齢(RString 年齢) {
         this.年齢 = 年齢;
-    }    
+    }
+
+    /**
+     * 申請者の所属市町村コードを取得します。
+     *
+     * @return 申請者所属市町村コード
+     */
+    public LasdecCode get申請者所属市町村コード() {
+        return 申請者所属市町村コード;
+    }
+
+    /**
+     * 申請者の所属市町村コードを設定します。
+     *
+     * @param 申請者所属市町村コード 申請者所属市町村コード
+     */
+    public void set申請者所属市町村コード(LasdecCode 申請者所属市町村コード) {
+        this.申請者所属市町村コード = 申請者所属市町村コード;
+    }
 }

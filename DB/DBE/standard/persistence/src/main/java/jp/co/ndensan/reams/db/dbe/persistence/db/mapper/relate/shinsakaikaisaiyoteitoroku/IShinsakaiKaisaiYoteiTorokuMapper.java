@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteitoroku;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 
 /**
  *
@@ -30,4 +32,12 @@ public interface IShinsakaiKaisaiYoteiTorokuMapper {
      * @return count数
      */
     int getDbT5501Count(RString 開催番号);
+
+    /**
+     * 審査会割当委員情報を取得します。
+     *
+     * @param 開催番号 RString
+     * @return List<DbT5503ShinsakaiWariateIinJohoEntity>
+     */
+    List<DbT5503ShinsakaiWariateIinJohoEntity> get審査会割当委員情報(RString 開催番号);
 }

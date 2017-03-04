@@ -25,6 +25,7 @@ public class KaigoNinteiShinsakaiScheduleProcessParamter implements IBatchProces
     private final RString nendo;
     private final RString chohyoShutsuryokuKubun;
     private final List<RString> shinsakaiIinCodeList;
+    private final int count;
 
     /**
      * コンストラクタです。
@@ -34,6 +35,7 @@ public class KaigoNinteiShinsakaiScheduleProcessParamter implements IBatchProces
      * @param 年度 年度
      * @param 帳票出力区分 帳票出力区分
      * @param 審査会委員コードリスト 審査会委員コードリスト
+     * @param count int
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     public KaigoNinteiShinsakaiScheduleProcessParamter(
@@ -41,12 +43,14 @@ public class KaigoNinteiShinsakaiScheduleProcessParamter implements IBatchProces
             RString 介護認定審査会開催予定期間To,
             RString 年度,
             RString 帳票出力区分,
-            List<RString> 審査会委員コードリスト) {
+            List<RString> 審査会委員コードリスト,
+            int count) {
         this.shinsakaiKaisaiKikanFrom = 介護認定審査会開催予定期間From;
         this.shinsakaiKaisaiKikanTo = 介護認定審査会開催予定期間To;
         this.nendo = 年度;
         this.chohyoShutsuryokuKubun = 帳票出力区分;
         this.shinsakaiIinCodeList = 審査会委員コードリスト;
+        this.count = count;
     }
 
     /**

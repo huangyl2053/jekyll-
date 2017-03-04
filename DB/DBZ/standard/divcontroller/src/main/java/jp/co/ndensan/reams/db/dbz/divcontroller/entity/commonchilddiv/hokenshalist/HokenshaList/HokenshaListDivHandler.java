@@ -123,11 +123,16 @@ public class HokenshaListDivHandler {
     private void createMaping(List<HokenshaSummary> hokenshaList, List<KeyValueDataSource> list) {
         Map<RString, HokenshaSummary> map = new HashMap<>();
         for (HokenshaSummary s : hokenshaList) {
-            RString key = new RString(UUID.randomUUID().toString());
-            list.add(new KeyValueDataSource(key, create表示名(s)));
+            RString key;
+            if (LasdecCode.EMPTY.equals(s.get市町村コード())) {
+                key = RString.EMPTY;
+                div.getDdlHokenshaList().setIsBlankLine(true);
+            } else {
+                key = new RString(UUID.randomUUID().toString());
+                list.add(new KeyValueDataSource(key, create表示名(s)));
+            }
             map.put(key, s);
         }
-
         div.getDdlHokenshaList().setDataSource(list);
         ShichosonListHolder.putTo(div, map);
     }

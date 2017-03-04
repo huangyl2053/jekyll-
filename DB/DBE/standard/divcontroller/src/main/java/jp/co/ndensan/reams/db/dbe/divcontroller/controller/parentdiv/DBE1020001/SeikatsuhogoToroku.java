@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.basic.KoseiShichosonShishoMasterManager;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
@@ -58,6 +59,7 @@ public class SeikatsuhogoToroku {
     private final SeikatsuhogoTorokuFinder finder;
     private final NinteiShinseiJohoManager shinseiJohoManager;
     private boolean ninteiTandokuDounyuFlag;
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -100,6 +102,14 @@ public class SeikatsuhogoToroku {
         } else {
             div.getBtnSaiban().setDisabled(false);
         }
+        div.getCcdShozokuShichoson().setLabelLText(new RString("市町村"));
+        div.getCcdShozokuShichoson().setRequired(true);
+        if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+            div.getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.構成市町村全て_空白含む);
+            div.getCcdShozokuShichoson().setSelectedShichosonIfExist(LasdecCode.EMPTY);
+        } else {
+            div.getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
+        }
         getHandler(div).load(result, list, ninteiTandokuDounyuFlag);
         return ResponseData.of(div).respond();
     }
@@ -138,6 +148,7 @@ public class SeikatsuhogoToroku {
             if (ninteiShinseiJoho.get識別コード() != null) {
                 div.getTxtShikibetsuCode().setValue(ninteiShinseiJoho.get識別コード().value());
             }
+            div.getCcdShozokuShichoson().setSelectedShichosonIfExist(ninteiShinseiJoho.get市町村コード());
         }
         if (ninteiTandokuDounyuFlag) {
             ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
@@ -210,6 +221,9 @@ public class SeikatsuhogoToroku {
         div.getRadSeibetsu().clearSelectedItem();
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getDdlShisho().setSelectedIndex(0);
+        if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+            div.getCcdShozokuShichoson().setSelectedShichosonIfExist(LasdecCode.EMPTY);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -312,5 +326,5 @@ public class SeikatsuhogoToroku {
         }
         return list;
     }
-    
+
 }

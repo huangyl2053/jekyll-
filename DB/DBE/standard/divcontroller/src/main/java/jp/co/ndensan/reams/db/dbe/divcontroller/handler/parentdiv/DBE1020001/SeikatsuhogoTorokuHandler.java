@@ -11,20 +11,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisa
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.SeikatsuhogoTorokuResult;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.SeikatsuhogoTorokuDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -48,7 +41,7 @@ public class SeikatsuhogoTorokuHandler {
      */
     public SeikatsuhogoTorokuHandler(SeikatsuhogoTorokuDiv div) {
         this.div = div;
-        
+
     }
 
     /**
@@ -62,10 +55,10 @@ public class SeikatsuhogoTorokuHandler {
     public void load(SeikatsuhogoTorokuResult result, List<KoseiShichosonShishoMaster> list, boolean ninteiTandokuDounyuFlag) {
         div.getCcdZenkokuJushoInput().initialize();
         if (ninteiTandokuDounyuFlag) {
-            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setVisible(false);
-            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
-            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
-            ((ZenkokuJushoInputDiv)div.getCcdZenkokuJushoInput()).getTxtJusho().setLabelLWidth(new RString("0px"));
+            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setVisible(false);
+            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
+            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
+            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtJusho().setLabelLWidth(new RString("0px"));
             div.getBtnAtenaKensaku().setVisible(false);
         }
         List<KeyValueDataSource> sourceList = new ArrayList<>();
@@ -80,14 +73,14 @@ public class SeikatsuhogoTorokuHandler {
             }
             div.getRadSeibetsu().setSelectedKey(result.get性別().value());
             div.getTxtYubinNo().setValue(result.get郵便番号());
-            
+
             div.getCcdZenkokuJushoInput().load(ZenkokuJushoCode.EMPTY, result.get住所().value());
             div.getTxtTelNo().setDomain(result.get電話番号());
         }
         for (KoseiShichosonShishoMaster master : list) {
             sourceList.add(new KeyValueDataSource(master.get支所名(), master.get支所コード().value()));
         }
-        
+
         div.getDdlShisho().setDataSource(sourceList);
         div.setHdnKey_Dialog(new RString("1"));
         div.setHdnKey_GyomuCode(GyomuCode.DB介護保険.value());
@@ -103,15 +96,7 @@ public class SeikatsuhogoTorokuHandler {
      */
     public Minashi2shisaiJoho setBusiness(ShinseishoKanriNo 前回申請書管理番号) {
         Minashi2shisaiJoho business = new Minashi2shisaiJoho();
-        ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (security.get導入形態コード().equals(new Code("211"))) {
-            Association association = AssociationFinderFactory.createInstance().getAssociation();
-            HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護認定);
-            business.set保険者(hokenshaList.get(association.get地方公共団体コード()));
-        } else {
-            business.set保険者(div.getCcdHokenshaList().getSelectedItem());
-        }
+        business.set保険者(div.getCcdHokenshaList().getSelectedItem());
         business.set被保険者番号(div.getTxtHihokenshaNo().getValue());
         business.set氏名(div.getTxtShimei().getValue());
         business.setカナ氏名(div.getTxtKanaShimei().getValue());
@@ -136,6 +121,7 @@ public class SeikatsuhogoTorokuHandler {
             business.set前回申請書管理番号(前回申請書管理番号);
         }
         business.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        business.set申請者所属市町村コード(div.getCcdShozokuShichoson().getSelectedItem().get市町村コード());
         return business;
     }
 }
