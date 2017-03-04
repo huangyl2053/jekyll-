@@ -648,7 +648,8 @@ public class NinteichosaIrai {
                 row.getChosaIraiKigen().getValue() != null
                 ? row.getChosaIraiKigen().getValue().seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString() : RString.EMPTY,
                 row.getChikuCode(),
-                row.getChosaTokusokuChiku());
+                row.getChosaTokusokuChiku(),
+                row.getShichosonName());
         return data;
     }
 

@@ -77,6 +77,8 @@ public class NinteichosaIraiItiranCsvEntity {
     private final RString chikuCode;
     @CsvField(order = 30, name = "(調査督促)地区")
     private final RString chikuName;
+    @CsvField(order = 31, name = "市町村")
+    private final RString shichosonName;
 
     /**
      * コンストラクタです。
@@ -111,39 +113,40 @@ public class NinteichosaIraiItiranCsvEntity {
      * @param ninteichosaKusokuKigenYMD (調査督促)期限
      * @param chikuCode (調査督促)地区コード
      * @param chikuName (調査督促)地区
-     *
+     * @param shichosonName 市町村名
      */
     public NinteichosaIraiItiranCsvEntity(
-        RString jotai,
-        RString shinseishoKanriNo,
-        RString hihokensha,
-        RString ninteiShinseiYMD,
-        RString hihokenshaNo,
-        RString hihokenshaName,
-        RString ninteiShinseiShinseijiKubunCode,
-        RString ninteiShinseiShinseijiKubunName,
-        RString saiChosaIraiKaisu,
-        RString iraishoHakkoYMD,
-        RString chosahyoTouShutsuryokuYMD,
-        RString dataShutsuryokuYMD,
-        RString ninteichosaKigenYMD,
-        RString ninteichosaIraiKubun,
-        RString ninteichosaItakusaki,
-        RString chosainShimei,
-        RString ninteichosaIraiKaisu,
-        RString zenkaiChosaItakusaki,
-        RString zenkaiChosain,
-        RString zenzenkaiChosaItakusaki,
-        RString zenzenkaiChosain,
-        RString yubinNo,
-        RString jusho,
-        RString nyushoShisetsu,
-        RString ninteichosaTokusokuYMD,
-        RString ninteichosaTokusokuHoho,
-        RString ninteichosaTokusokuKaisu,
-        RString ninteichosaKusokuKigenYMD,
-        RString chikuCode,
-        RString chikuName) {
+            RString jotai,
+            RString shinseishoKanriNo,
+            RString hihokensha,
+            RString ninteiShinseiYMD,
+            RString hihokenshaNo,
+            RString hihokenshaName,
+            RString ninteiShinseiShinseijiKubunCode,
+            RString ninteiShinseiShinseijiKubunName,
+            RString saiChosaIraiKaisu,
+            RString iraishoHakkoYMD,
+            RString chosahyoTouShutsuryokuYMD,
+            RString dataShutsuryokuYMD,
+            RString ninteichosaKigenYMD,
+            RString ninteichosaIraiKubun,
+            RString ninteichosaItakusaki,
+            RString chosainShimei,
+            RString ninteichosaIraiKaisu,
+            RString zenkaiChosaItakusaki,
+            RString zenkaiChosain,
+            RString zenzenkaiChosaItakusaki,
+            RString zenzenkaiChosain,
+            RString yubinNo,
+            RString jusho,
+            RString nyushoShisetsu,
+            RString ninteichosaTokusokuYMD,
+            RString ninteichosaTokusokuHoho,
+            RString ninteichosaTokusokuKaisu,
+            RString ninteichosaKusokuKigenYMD,
+            RString chikuCode,
+            RString chikuName,
+            RString shichosonName) {
         this.jotai = jotai;
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.hihokensha = hihokensha;
@@ -174,5 +177,6 @@ public class NinteichosaIraiItiranCsvEntity {
         this.ninteichosaKusokuKigenYMD = ninteichosaKusokuKigenYMD;
         this.chikuCode = chikuCode;
         this.chikuName = chikuName;
+        this.shichosonName = shichosonName;
     }
 }

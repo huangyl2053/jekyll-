@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
@@ -16,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaIraiTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,12 +29,12 @@ public class NinteichosaIraiTorokuDiv extends Panel {
     private DropDownList ddlIraiKubun;
     @JsonProperty("txtChosaIraiYmd")
     private TextBoxDate txtChosaIraiYmd;
-    @JsonProperty("ccdItakusakiAndChosainInput")
-    private ChosaItakusakiAndChosainInputDiv ccdItakusakiAndChosainInput;
     @JsonProperty("btnWaritsukeKakutei")
     private Button btnWaritsukeKakutei;
     @JsonProperty("btnWaritukenaideModoru")
     private Button btnWaritukenaideModoru;
+    @JsonProperty("ccdItakusakiAndChosainInput")
+    private ChosaItakusakiAndChosainInputDiv ccdItakusakiAndChosainInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,15 +79,6 @@ public class NinteichosaIraiTorokuDiv extends Panel {
     }
 
     /*
-     * getccdItakusakiAndChosainInput
-     * @return ccdItakusakiAndChosainInput
-     */
-    @JsonProperty("ccdItakusakiAndChosainInput")
-    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
-        return ccdItakusakiAndChosainInput;
-    }
-
-    /*
      * getbtnWaritsukeKakutei
      * @return btnWaritsukeKakutei
      */
@@ -119,6 +112,15 @@ public class NinteichosaIraiTorokuDiv extends Panel {
     @JsonProperty("btnWaritukenaideModoru")
     public void setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
         this.btnWaritukenaideModoru = btnWaritukenaideModoru;
+    }
+
+    /*
+     * getccdItakusakiAndChosainInput
+     * @return ccdItakusakiAndChosainInput
+     */
+    @JsonProperty("ccdItakusakiAndChosainInput")
+    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
+        return ccdItakusakiAndChosainInput;
     }
 
     // </editor-fold>

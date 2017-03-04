@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  */
 public class NinteichosaIraiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -248,11 +248,6 @@ public class NinteichosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
-    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
-        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getCcdItakusakiAndChosainInput();
-    }
-
-    @JsonIgnore
     public Button getBtnWaritsukeKakutei() {
         return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getBtnWaritsukeKakutei();
     }
@@ -270,6 +265,11 @@ public class NinteichosaIraiDiv extends Panel {
     @JsonIgnore
     public void setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
         this.getNinteichosaIraiList().getNinteichosaIraiToroku().setBtnWaritukenaideModoru(btnWaritukenaideModoru);
+    }
+
+    @JsonIgnore
+    public IChosaItakusakiAndChosainInputDiv getCcdItakusakiAndChosainInput() {
+        return this.getNinteichosaIraiList().getNinteichosaIraiToroku().getCcdItakusakiAndChosainInput();
     }
 
     // </editor-fold>

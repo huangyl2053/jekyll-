@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2010001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaiRaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
@@ -26,6 +29,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.Ninteich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -105,6 +109,7 @@ public class NinteichosaIraiHandler {
      * DataGridを更新します。
      */
     public void initDataGrid() {
+        Map<RString, KoseiShichoson> 構成市町村map = get構成市町村map();
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         RString 状態 = div.getRadShoriJyotai().getSelectedKey();
         Decimal 最大件数 = div.getTxtMaxCount().getValue();
@@ -121,7 +126,7 @@ public class NinteichosaIraiHandler {
         completeCount = 0;
         notUpdateCount = 0;
         for (CyoSaiRaiBusiness business : 調査依頼List) {
-            dataSource.add(createNinteiTaskList_Row(business));
+            dataSource.add(createNinteiTaskList_Row(business, 構成市町村map));
         }
         div.getDgNinteiTaskList().setDataSource(dataSource);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(totalCount);
@@ -247,13 +252,14 @@ public class NinteichosaIraiHandler {
      * 割付けた情報を取り消して対象者一覧データグリッドの表示を変更前に戻します。
      */
     public void cancel割付け() {
+        Map<RString, KoseiShichoson> 構成市町村map = get構成市町村map();
         dgNinteiTaskList_Row cancelRow = div.getDgNinteiTaskList().getClickedItem();
         List<CyoSaiRaiBusiness> 調査依頼List = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, ArrayList.class);
         List<dgNinteiTaskList_Row> dataSource = div.getDgNinteiTaskList().getDataSource();
         int index = dataSource.indexOf(cancelRow);
         for (CyoSaiRaiBusiness business : 調査依頼List) {
             if (cancelRow.getShinseishoKanriNo().equals(business.get申請書管理番号().value())) {
-                dataSource.set(index, createNinteiTaskList_Row(business));
+                dataSource.set(index, createNinteiTaskList_Row(business, 構成市町村map));
                 break;
             }
         }
@@ -274,7 +280,7 @@ public class NinteichosaIraiHandler {
         return changedRowList;
     }
 
-    private dgNinteiTaskList_Row createNinteiTaskList_Row(CyoSaiRaiBusiness business) {
+    private dgNinteiTaskList_Row createNinteiTaskList_Row(CyoSaiRaiBusiness business, Map<RString, KoseiShichoson> 構成市町村map) {
         dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
         row.setHokenshaCode(business.get保険者コード() == null ? RString.EMPTY : business.get保険者コード());
         row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
@@ -316,6 +322,11 @@ public class NinteichosaIraiHandler {
         row.getNinteichosaIraiYmd().setValue(business.get認定調査依頼年月日() == null || business.get認定調査依頼年月日().isEmpty()
                 ? null : new RDate(business.get認定調査依頼年月日().toString()));
         row.setShichosonCode(business.get市町村コード());
+        if (構成市町村map.containsKey(business.get市町村コード())) {
+            row.setShichosonName(構成市町村map.get(business.get市町村コード()).get市町村名称());
+        } else {
+            row.setShichosonName(RString.EMPTY);
+        }
         調査依頼モードの日付設定(row, business);
         if (RString.isNullOrEmpty(row.getKonkaiChosaItakusaki())
                 || row.getNinteichosaIraiYmd().getValue() == null
@@ -432,4 +443,15 @@ public class NinteichosaIraiHandler {
             row.getChosaTokusokuHakkoDay().setValue(new RDate(business.get認定調査督促年月日().toString()));
         }
     }
+
+    private Map<RString, KoseiShichoson> get構成市町村map() {
+        Map<RString, KoseiShichoson> result = new HashMap<>();
+        KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
+        List<KoseiShichoson> 構成市町村情報list = finder.getKoseiShichosonList().records();
+        for (KoseiShichoson 構成市町村情報 : 構成市町村情報list) {
+            result.put(構成市町村情報.get市町村コード().value(), 構成市町村情報);
+        }
+        return result;
+    }
+
 }

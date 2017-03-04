@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteichosaIraiListDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -161,7 +162,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadShoriJyotai(RadioButton radShoriJyotai) {
+    public void setRadShoriJyotai(RadioButton radShoriJyotai) {
         this.getChosairaitaishoshaichiran().setRadShoriJyotai(radShoriJyotai);
     }
 
@@ -171,7 +172,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTotalCount(TextBoxNum txtTotalCount) {
+    public void setTxtTotalCount(TextBoxNum txtTotalCount) {
         this.getChosairaitaishoshaichiran().setTxtTotalCount(txtTotalCount);
     }
 
@@ -181,7 +182,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtCompleteCount(TextBoxNum txtCompleteCount) {
+    public void setTxtCompleteCount(TextBoxNum txtCompleteCount) {
         this.getChosairaitaishoshaichiran().setTxtCompleteCount(txtCompleteCount);
     }
 
@@ -191,7 +192,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNoUpdate(TextBoxNum txtNoUpdate) {
+    public void setTxtNoUpdate(TextBoxNum txtNoUpdate) {
         this.getChosairaitaishoshaichiran().setTxtNoUpdate(txtNoUpdate);
     }
 
@@ -201,7 +202,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
+    public void setBatchParamPanel(BatchParamPanelDiv BatchParamPanel) {
         this.getChosairaitaishoshaichiran().setBatchParamPanel(BatchParamPanel);
     }
 
@@ -211,7 +212,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
+    public void setDgNinteiTaskList(DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList) {
         this.getChosairaitaishoshaichiran().getBatchParamPanel().setDgNinteiTaskList(dgNinteiTaskList);
     }
 
@@ -221,7 +222,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtMaxCount(TextBoxNum txtMaxCount) {
+    public void setTxtMaxCount(TextBoxNum txtMaxCount) {
         this.getChosairaitaishoshaichiran().setTxtMaxCount(txtMaxCount);
     }
 
@@ -236,7 +237,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlIraiKubun(DropDownList ddlIraiKubun) {
+    public void setDdlIraiKubun(DropDownList ddlIraiKubun) {
         this.getNinteichosaIraiToroku().setDdlIraiKubun(ddlIraiKubun);
     }
 
@@ -246,7 +247,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChosaIraiYmd(TextBoxDate txtChosaIraiYmd) {
+    public void setTxtChosaIraiYmd(TextBoxDate txtChosaIraiYmd) {
         this.getNinteichosaIraiToroku().setTxtChosaIraiYmd(txtChosaIraiYmd);
     }
 
@@ -261,7 +262,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnWaritsukeKakutei(Button btnWaritsukeKakutei) {
+    public void setBtnWaritsukeKakutei(Button btnWaritsukeKakutei) {
         this.getNinteichosaIraiToroku().setBtnWaritsukeKakutei(btnWaritsukeKakutei);
     }
 
@@ -271,7 +272,7 @@ public class NinteichosaIraiListDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
+    public void setBtnWaritukenaideModoru(Button btnWaritukenaideModoru) {
         this.getNinteichosaIraiToroku().setBtnWaritukenaideModoru(btnWaritukenaideModoru);
     }
 

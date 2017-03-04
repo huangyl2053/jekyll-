@@ -135,8 +135,8 @@ public class NinteichosaIraiValidationHandler {
         } else if (選択されたデータ == null || 選択されたデータ.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
-            if (is異なった保険者(選択されたデータ)) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_保険者));
+            if (is複数市町村にまたがる対象者を選択(選択されたデータ)) {
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_市町村));
             }
             if (is割付済申請者選択(選択されたデータ)) {
                 validationMessages.add(new ValidationMessageControlPair(RRVMessages.割付済申請者選択不可));
@@ -158,8 +158,8 @@ public class NinteichosaIraiValidationHandler {
         } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
         } else {
-            if (is異なった保険者(div.getDgNinteiTaskList().getSelectedItems())) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_保険者));
+            if (is複数市町村にまたがる対象者を選択(div.getDgNinteiTaskList().getSelectedItems())) {
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.複数選択不可_市町村));
             }
         }
         return validationMessages;
@@ -277,7 +277,7 @@ public class NinteichosaIraiValidationHandler {
 
         該当データなし(UrErrorMessages.該当データなし),
         対象行を選択(UrErrorMessages.対象行を選択),
-        複数選択不可_保険者(DbeErrorMessages.複数選択不可, "保険者"),
+        複数選択不可_市町村(DbeErrorMessages.複数選択不可, "割付対象者の市町村"),
         割付済申請者選択不可(DbeErrorMessages.割付済申請者選択不可),
         選択割付必須(DbeErrorMessages.選択必須, "割付のデータ"),
         存在しない(UrErrorMessages.存在しない, "割付可能な調査委託先"),
@@ -321,13 +321,13 @@ public class NinteichosaIraiValidationHandler {
 
     }
 
-    private boolean is異なった保険者(List<dgNinteiTaskList_Row> 選択されたデータ) {
-        RString 保険者 = RString.EMPTY;
+    private boolean is複数市町村にまたがる対象者を選択(List<dgNinteiTaskList_Row> 選択されたデータ) {
+        RString 市町村コード = RString.EMPTY;
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
-            if (!RString.isNullOrEmpty(保険者) && !保険者.equals(row.getHokensha())) {
+            if (!RString.isNullOrEmpty(市町村コード) && !市町村コード.equals(row.getShichosonCode())) {
                 return true;
             }
-            保険者 = row.getHokensha();
+            市町村コード = row.getShichosonCode();
         }
         return false;
     }
