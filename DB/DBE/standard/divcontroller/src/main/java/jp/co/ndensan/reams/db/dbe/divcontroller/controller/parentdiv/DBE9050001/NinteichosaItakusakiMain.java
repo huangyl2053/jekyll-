@@ -69,6 +69,7 @@ public class NinteichosaItakusakiMain {
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表（その他機関）.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * 画面初期化処理です。
@@ -100,7 +101,9 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onBlur_kinyuKikanCode(NinteichosaItakusakiMainDiv div) {
         getHandler(div).setKozaJoho();
-        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedIndex(0);
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
+        }
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -138,7 +141,9 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onOkClose_KinyuKikan(NinteichosaItakusakiMainDiv div) {
         getHandler(div).setKozaJoho();
-        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedIndex(0);
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
+        }
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -438,6 +443,10 @@ public class NinteichosaItakusakiMain {
             models.deleteOrRemove(key);
             models.add(sonotaKikanJoho);
         } else if (状態_削除.equals(イベント状態)) {
+            validPairs = validateForDelete(div);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             SonotaKikanJohoIdentifier key = new SonotaKikanJohoIdentifier(
                     new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue());
@@ -476,10 +485,6 @@ public class NinteichosaItakusakiMain {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            validPairs = validateForDelete(div);
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
             Models<SonotaKikanJohoIdentifier, SonotaKikanJoho> models = ViewStateHolder.get(
                     ViewStateKeys.その他機関マスタ検索結果, Models.class);
             SonotaKikanJohoManager sonotaKikanJohoManager = new SonotaKikanJohoManager();
@@ -493,18 +498,12 @@ public class NinteichosaItakusakiMain {
     }
 
     private ValidationMessageControlPairs validateForDelete(NinteichosaItakusakiMainDiv div) {
-        List<dgSonotaKikanIchiran_Row> dataList = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getDataSource();
         NinteichosaMasterFinder masterFinder = NinteichosaMasterFinder.createInstance();
-        for (dgSonotaKikanIchiran_Row row : dataList) {
-            if (状態_削除.equals(row.getJotai())) {
-                NinteichosaMasterSearchParameter parameter = NinteichosaMasterSearchParameter.createParamForSelectByKey(
-                        new ShoKisaiHokenshaNo(row.getHokensha()),
-                        row.getSonotaKikanCode());
-                return getValidationHandler(div).validateForDelete(
-                        masterFinder.getKaigoNinteiShinsakaiCount(parameter));
-            }
-        }
-        return new ValidationMessageControlPairs();
+        NinteichosaMasterSearchParameter parameter = NinteichosaMasterSearchParameter.createParamForSelectByKey(
+                new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
+                div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue());
+        return getValidationHandler(div).validateForDelete(
+                masterFinder.getKaigoNinteiShinsakaiCount(parameter));
     }
 
     /**
