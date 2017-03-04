@@ -7,13 +7,14 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.business.core.shinchokudataoutput.shickdateoutput.ShinchokuDataOutputBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinchokudataoutput.ShinchokuDataOutputProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -58,6 +59,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     private RString eucFilePath;
     private ShinchokuDataOutputBusiness business;
     private FileSpoolManager manager;
+    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
@@ -72,6 +74,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.set概況調査テキス(イメージ区分);
         HIHOKENSHANOLIST = new ArrayList<>();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -110,7 +113,8 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     protected void process(ShinchokuDataOutputRelateEntity entity) {
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         HIHOKENSHANOLIST.add(entity.getHihokenshaNo());
-        new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo());
+        accessLog.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(),expandedInfo);
     }
 
     @Override
@@ -118,6 +122,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         eucCsvWriterJunitoJugo.close();
         manager.spool(eucFilePath);
         outputJokenhyoFactory();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     /**

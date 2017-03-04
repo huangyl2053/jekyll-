@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -27,6 +28,7 @@ public class HoshuShiharaiJunbiRelateEntity implements Serializable {
 
     private static final long serialVersionUID = -1244659535082903837L;
     private ShinseishoKanriNo shinseishoKanriNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString shujiiIryoKikanCode;
     private YubinNo yubinNo;
     private RString jusho;

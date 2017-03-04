@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -46,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -250,6 +253,7 @@ public class CreateTarget {
         RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<dgCreateTargetSummary_Row> rowList = div.getDgCreateTargetSummary().getDataSource();
+        DbAccessLogger accessLog = new DbAccessLogger();
         List<RString> shinsei = new ArrayList();
         for (dgCreateTargetSummary_Row row : rowList) {
             if (row.getSelected()) {
@@ -312,10 +316,10 @@ public class CreateTarget {
                 CreateTargetManager.createInstance().insertUpdate(business.getCsvBusiness().get申請書管理番号());
 
                 ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(business.getCsvBusiness().get保険者番号());
-                NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会,
-                        shoKisaiHokenshaNo, business.getCsvBusiness().get被保険者番号());
-                ninteiAccessLogger.log();
+                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.getCsvBusiness().get申請書管理番号());
+                accessLog.store(shoKisaiHokenshaNo, business.getCsvBusiness().get被保険者番号(), expandedInfo);
             }
+            accessLog.flushBy(AccessLogType.照会);
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(ファイル名));

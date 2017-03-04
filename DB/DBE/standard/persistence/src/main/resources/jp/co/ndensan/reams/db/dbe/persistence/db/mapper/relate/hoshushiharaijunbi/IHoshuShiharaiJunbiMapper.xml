@@ -8,6 +8,7 @@
     <resultMap id="resultMap_HoshuShiharaiJunbiRelateEntity"
                 type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="shujiiIryoKikanCode" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="jusho" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -134,6 +135,7 @@
             resultOrdered="true" fetchSize="500">
         SELECT  
                 T5101."shinseishoKanriNo" AS "shinseishoKanriNo",
+                T5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
                 T5601."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
                 T7051."shichosonMeisho" AS "shichosonMeisho",
                 T5910."jigyoshaMeisho" AS "jigyoshaMeisho",
@@ -181,6 +183,7 @@
             resultOrdered="true" fetchSize="500">
         SELECT  
                 T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
+                T5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
                 T5911."yubinNo" AS "yubinNo",
                 T5911."jusho" AS "jusho",
                 T5911."iryoKikanMeisho" AS "iryoKikanMeisho",
@@ -280,6 +283,7 @@
             resultOrdered="true" fetchSize="500">
         SELECT  
                 T5101."shinseishoKanriNo" AS "shinseishoKanriNo",
+                T5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
                 T5602."shujiiIryoKikanCode" AS "shujiiIryoKikanCode",
                 T7051."shichosonMeisho" AS "shichosonMeisho",
                 T5911."iryoKikanMeisho" AS "iryoKikanMeisho",

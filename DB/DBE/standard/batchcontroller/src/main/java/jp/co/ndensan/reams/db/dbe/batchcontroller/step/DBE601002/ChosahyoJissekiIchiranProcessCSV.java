@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.chosahyojissekiichiran.C
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.IChosahyoJissekiIchiranCsvEucEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -22,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -35,9 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -60,6 +59,7 @@ public class ChosahyoJissekiIchiranProcessCSV extends BatchProcessBase<ChosahyoJ
     private RString eucFilePath;
     private RString 導入団体コード;
     private RString 市町村名;
+    private DbAccessLogger accessLog;
 
     @BatchWriter
     private CsvWriter<IChosahyoJissekiIchiranCsvEucEntity> csvWriter;
@@ -70,6 +70,7 @@ public class ChosahyoJissekiIchiranProcessCSV extends BatchProcessBase<ChosahyoJ
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -93,13 +94,15 @@ public class ChosahyoJissekiIchiranProcessCSV extends BatchProcessBase<ChosahyoJ
 
     @Override
     protected void process(ChosahyoJissekiIchiranRelateEntity relateEntity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(relateEntity));
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), relateEntity.get申請書管理番号());
+        accessLog.store(new ShoKisaiHokenshaNo(relateEntity.get証記載保険者番号()), relateEntity.get被保険者番号(), expandedInfo);
         IChosahyoJissekiIchiranCsvEucEntity entity = new ChosahyoJissekiIchiranEntity(relateEntity);
         csvWriter.writeLine(entity);
     }
 
     @Override
     protected void afterExecute() {
+        accessLog.flushBy(AccessLogType.照会);
         csvWriter.close();
         manager.spool(eucFilePath);
         バッチ出力条件リストの出力();
@@ -151,12 +154,6 @@ public class ChosahyoJissekiIchiranProcessCSV extends BatchProcessBase<ChosahyoJ
                 .append("（To）】")
                 .append(dateFormat(paramter.get基準日TO()))
                 .toRString();
-    }
-
-    private PersonalData toPersonalData(ChosahyoJissekiIchiranRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                entity.get申請書管理番号());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private static RString dateFormat(RString date) {

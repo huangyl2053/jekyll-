@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiha
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahoshumeisai.ChosaHoshumeisaiReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -32,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -41,9 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -72,6 +70,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     private Decimal 合計金額 = Decimal.ZERO;
     private RString chosaItakusakiNam = RString.EMPTY;
     private RString ninteichosainCode = RString.EMPTY;
+    private DbAccessLogger accessLog;
 
     @BatchWriter
     private BatchReportWriter<ChosaHoshumeisaiReportSource> batchWrite;
@@ -89,6 +88,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
         消費税率 = getMapper(IHoshuShiharaiJunbiMapper.class).get消費税率(processParameter.toHoshuShiharaiJunbiProcessParameter());
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -107,6 +107,7 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
     @Override
     protected void afterExecute() {
         バッチ出力条件リストの出力();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     @Override
@@ -115,7 +116,10 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
 
     @Override
     protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                get申請書管理番号(entity.getShinseishoKanriNo()));
+        accessLog.store(entity.getShoKisaiHokenshaNo(), entity.getHihokenshaNo(), expandedInfo);
+
         ChosaHoshumeisaiEdit edit = new ChosaHoshumeisaiEdit();
         ChosaHoshumeisai chosaHoshumeisai = edit.getChosaHoshumeisai(entity);
         chosaHoshumeisai = getChosaHoshumeisai(chosaHoshumeisai, entity);
@@ -123,16 +127,6 @@ public class ChosaHoshumeisaiProcess extends BatchKeyBreakBase<HoshuShiharaiJunb
         ChosaHoshumeisaiReport report = new ChosaHoshumeisaiReport(chosaHoshumeisai);
         report.writeBy(reportSourceWriter);
         index_tmp++;
-    }
-
-    private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
-        RString shinseishoKanriNo = RString.EMPTY;
-        if (entity.getShinseishoKanriNo() != null && !entity.getShinseishoKanriNo().isEmpty()) {
-            shinseishoKanriNo = entity.getShinseishoKanriNo().value();
-        }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                shinseishoKanriNo);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {
