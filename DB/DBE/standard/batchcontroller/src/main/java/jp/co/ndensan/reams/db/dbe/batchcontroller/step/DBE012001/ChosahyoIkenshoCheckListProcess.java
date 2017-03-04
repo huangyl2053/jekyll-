@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.Chos
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosairaihenko.NinteichosaIraiHenkoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -33,14 +35,11 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -61,6 +60,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString なし = new RString("無し");
     private ChosahyoIkenshoCheckListProcessParamter paramter;
+    private DbAccessLogger accessLog;
     @BatchWriter
     private BatchReportWriter<ChosahyoIkenshoCheckListReportSource> batchWrite;
     private ReportSourceWriter<ChosahyoIkenshoCheckListReportSource> reportSourceWriter;
@@ -77,6 +77,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -107,12 +108,15 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     @Override
     protected void usualProcess(ChosahyoIkenshoCheckListRelateEntity entity) {
         if (getBefore() != null && !hasBrek(getBefore(), entity)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    entity.getDbT5101_shinseishoKanriNo().value());
+            accessLog.store(new ShoKisaiHokenshaNo(entity.getDbT5101_shoKisaiHokenshaNo()), entity.getDbT5101_hihokenshaNo(), expandedInfo);
             index_tmp++;
             ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
             reportData = data.get帳票データ(reportData);
@@ -122,7 +126,9 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     @Override
     protected void keyBreakProcess(ChosahyoIkenshoCheckListRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    current.getDbT5101_shinseishoKanriNo().value());
+            accessLog.store(new ShoKisaiHokenshaNo(current.getDbT5101_shoKisaiHokenshaNo()), current.getDbT5101_hihokenshaNo(), expandedInfo);
             ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
             report.writeBy(reportSourceWriter);
             ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(current);
@@ -134,13 +140,6 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
 
     private boolean hasBrek(ChosahyoIkenshoCheckListRelateEntity before, ChosahyoIkenshoCheckListRelateEntity current) {
         return !before.getDbT5101_shinseishoKanriNo().equals(current.getDbT5101_shinseishoKanriNo());
-    }
-
-    private PersonalData toPersonalData(ChosahyoIkenshoCheckListRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                entity.getDbT5101_shinseishoKanriNo().value());
-        return PersonalData.of(new ShikibetsuCode(entity.getDbT5101_shoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
-                .concat(entity.getDbT5101_hihokenshaNo())), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

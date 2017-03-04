@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.NinteichosaYoteiMiteiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosayoteimitei.NinteichosaYoteiMiteiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosayoteimitei.NinteichosaYoteiMiteiReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -30,14 +32,11 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -66,6 +65,7 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
     private RString 市町村名;
     private static final RString 全市町村 = new RString("全市町村");
     private static final RString 保険者タイトル = new RString("保険者：");
+    private DbAccessLogger accessLog;
 
     @Override
     protected void beforeExecute() {
@@ -73,6 +73,7 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -97,21 +98,17 @@ public class NinteichosaYoteiMiteiProcess extends BatchProcessBase<NinteichosaYo
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     @Override
     protected void process(NinteichosaYoteiMiteiRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                entity.getDbT5101_shinseishoKanriNo().value());
+        accessLog.store(new ShoKisaiHokenshaNo(entity.getDbT5101_shoKisaiHokenshaNo()), entity.getDbT5101_hihokenshaNo(), expandedInfo);
         NinteichosaYoteiMiteiReport report = new NinteichosaYoteiMiteiReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);
         index_tmp++;
-    }
-
-    private PersonalData toPersonalData(NinteichosaYoteiMiteiRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                entity.getDbT5101_shinseishoKanriNo().value());
-        return PersonalData.of(new ShikibetsuCode(entity.getDbT5101_shoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
-                .concat(entity.getDbT5101_hihokenshaNo())), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力() {

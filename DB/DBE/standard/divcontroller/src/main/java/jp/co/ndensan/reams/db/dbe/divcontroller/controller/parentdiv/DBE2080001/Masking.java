@@ -21,10 +21,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KihonunyoShoriJotai;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -185,7 +187,7 @@ public class Masking {
     public IDownLoadServletResponse onClick_btnOutputCsv(MaskingDiv div, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_マスキング一覧);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
-        List<PersonalData> personalDataList = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -197,10 +199,9 @@ public class Masking {
             List<dgYokaigoNinteiTaskList_Row> rowList = div.getDgYokaigoNinteiTaskList().getDataSource();
             for (dgYokaigoNinteiTaskList_Row row : rowList) {
                 if (row.getSelected()) {
-                    ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5).concat(row.getHihoNumber()));
-                    PersonalData personalData = PersonalData.of(shikibetsuCode, new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                            row.getShinseishoKanriNo()));
-                    personalDataList.add(personalData);
+                    ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                            row.getShinseishoKanriNo());
+                    accessLog.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihoNumber(), expandedInfo);
                     csvWriter.writeLine(getCsvData(row));
                 }
             }
@@ -210,7 +211,7 @@ public class Masking {
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        AccessLogger.log(AccessLogType.照会, personalDataList);
+        accessLog.flushBy(AccessLogType.照会);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
 
@@ -278,8 +279,8 @@ public class Masking {
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
                     PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
-                        .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                                row.getShinseishoKanriNo()));
+                            .concat(row.getHihoNumber())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                                    row.getShinseishoKanriNo()));
                     personalDataList.add(personalData);
                 }
             }

@@ -27,14 +27,15 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajoh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -50,8 +51,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -122,6 +121,7 @@ public class ChosaOCRTorikomiMain {
     }
 
     private List<TorikomiEntity> csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
+        DbAccessLogger accessLog = new DbAccessLogger();
         if (dataList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
@@ -150,9 +150,6 @@ public class ChosaOCRTorikomiMain {
                 List<ChosaOCRTorikomiBusiness> 関連データList
                         = ChosaOCRTorikomiFinder.createInstance().getChosahyoTorikomiKekka(param).records();
                 for (ChosaOCRTorikomiBusiness 関連データ : 関連データList) {
-//                     ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(関連データ.get証記載保険者番号());
-//                     NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, 関連データ.get被保険者番号());
-//                     ninteiAccessLogger.log();
                     if (関連データ.get証記載保険者番号().equals(csvData.get保険者番号()) && 関連データ.get被保険者番号().equals(csvData.get被保険者番号())) {
                         TorikomiData data = getHandler(div).setDB更新用データ(csvData);
                         data.setNo(関連データ.getNo());
@@ -176,10 +173,9 @@ public class ChosaOCRTorikomiMain {
                     }
                 }
             }
-            AccessLogger.log(AccessLogType.照会,
-                    PersonalData.of(new ShikibetsuCode(csvData.get保険者番号().padZeroToLeft(6).substring(0, 5)
-                                    .concat(csvData.get被保険者番号()))));
+            accessLog.store(new ShoKisaiHokenshaNo(csvData.get保険者番号()), csvData.get被保険者番号());
         }
+        accessLog.flushBy(AccessLogType.照会);
         return dB更新用;
     }
 
@@ -414,6 +410,7 @@ public class ChosaOCRTorikomiMain {
     }
 
     private void db更新(ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
+        DbAccessLogger accessLog = new DbAccessLogger();
         List<TorikomiEntity> dataList = ViewStateHolder.get(ViewStateKeys.介護認定審査会審査結果登録, TorikomiEntityCollection.class).getDataList();
         for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
             if (row.getSelected() && チェックOK.equals(row.getOkOrNg())) {
@@ -423,13 +420,12 @@ public class ChosaOCRTorikomiMain {
                         updateDbT5102(div, row, data, 審査会開催番号);
                         updateDbT5503(div, row, data, 審査会開催番号);
                         updateDbT5511(div, row, data, 審査会開催番号);
-                        AccessLogger.log(AccessLogType.更新,
-                                PersonalData.of(new ShikibetsuCode(data.get保険者番号().padZeroToLeft(6).substring(0, 5)
-                                                .concat(data.get被保険者番号()))));
+                        accessLog.store(new ShoKisaiHokenshaNo(data.get保険者番号()), data.get被保険者番号());
                     }
                 }
             }
         }
+        accessLog.flushBy(AccessLogType.更新);
     }
 
     private void updateDbT5102(ChosaOCRTorikomiMainDiv div, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data, RString 審査会開催番号) {
