@@ -381,20 +381,22 @@ public class ShinsakaiKekkaTorokuHandler {
      * 対象者一覧リストの値を設定します。
      *
      * @param mode {@link OperationMode}
+     * @return 変更後のrow
      */
-    public void set個別表示欄To更新中Row(OperationMode mode) {
+    public dgTaishoshaIchiran_Row set個別表示欄To更新中Row(OperationMode mode) {
         dgTaishoshaIchiran_Row row = find更新中RowOrNull();
         if (row == null) {
-            return;
+            return null;
         }
         switch (mode) {
             case 更新:
                 update更新対象Row(row);
-                return;
+                return row;
             case 削除:
                 delete更新対象Row(row);
-                return;
+                return row;
             default:
+                return null;
         }
     }
 
@@ -540,11 +542,33 @@ public class ShinsakaiKekkaTorokuHandler {
 
     private dgTaishoshaIchiran_Row delete更新対象Row(dgTaishoshaIchiran_Row row) {
         row.setDeleteButtonState(DataGridButtonState.Disabled);
-        if (row.getMd5().isEmpty()) {
-            row.setJotai(KaigoRowState.空白.getStateName());
-        } else {
+        if (!row.getMd5().isEmpty()) {
             row.setJotai(KaigoRowState.削除.getStateName());
+            return row;
         }
+        row.setJotai(KaigoRowState.空白.getStateName());
+        row.setShinseiKubunLaw(RString.EMPTY);
+        row.setShinseiKubunLawCode(RString.EMPTY);
+        row.setKonkaiNijiHantei(RString.EMPTY);
+        row.setKonkaiNijiHanteiCode(RString.EMPTY);
+        row.getNinteiKikanKaishi().setValue(FlexibleDate.EMPTY);
+        row.getNinteiKikanShuryo().setValue(FlexibleDate.EMPTY);
+        row.setNinteiKikanTukisu(RString.EMPTY);
+        row.getNijiHanteiDate().setValue(FlexibleDate.EMPTY);
+        TorisageKubun t = TorisageKubun.toValue(row.getHenkoMaeTorisageKubunCode());
+        row.setTorisageKubunTx(t == null ? RString.EMPTY : t.getName());
+        row.setTorisageKubunCode(row.getHenkoMaeTorisageKubunCode());
+        row.setHanteiKekka(RString.EMPTY);
+        row.setHanteiKekkaCode(RString.EMPTY);
+        row.setJotaizo(RString.EMPTY);
+        row.setJotaizoCode(RString.EMPTY);
+        row.setShinsakaiMemo(false);
+        row.setShinsakaiIken(false);
+        row.setShinsakaiIkenShurui(RString.EMPTY);
+        row.setIchijiHanteiKekkaHenkoRiyu(RString.EMPTY);
+        row.setHidMemo(RString.EMPTY);
+        row.setHidIken(RString.EMPTY);
+        row.setHidIkenCode(RString.EMPTY);
         return row;
     }
     //</editor-fold>

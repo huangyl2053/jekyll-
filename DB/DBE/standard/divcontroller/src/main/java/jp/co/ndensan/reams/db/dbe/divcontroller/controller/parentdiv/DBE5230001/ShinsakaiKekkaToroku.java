@@ -5,10 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5230001;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJohoIdentifier;
@@ -18,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeNotificationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.DBE5230001TransitionEventName;
@@ -56,9 +62,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.VerticalScrollPosition;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -82,6 +88,13 @@ public class ShinsakaiKekkaToroku {
     private static final RString SUB_MENU_UICONTAINERID = new RString("DBEUC52101");
     private static final RString KIHON_UNYO_UICONTAINERID = new RString("DBEUC40201");
     private static final RString 戻るBTN = new RString("btnBack");
+    private static final Comparator<dgTaishoshaIchiran_Row> ORDER_BY_SHINSA_JUNJO_ASC
+            = new Comparator<dgTaishoshaIchiran_Row>() {
+                @Override
+                public int compare(dgTaishoshaIchiran_Row o1, dgTaishoshaIchiran_Row o2) {
+                    return o1.getShinsakaiJunjoSort().compareTo(o2.getShinsakaiJunjoSort());
+                }
+            };
 
     private enum _ViewStateKey {
 
@@ -166,21 +179,32 @@ public class ShinsakaiKekkaToroku {
         return _onSelect_dgTaishoshaIchiran(div, OperationMode.削除);
     }
 
-    private ResponseData<ShinsakaiKekkaTorokuDiv> _onSelect_dgTaishoshaIchiran(ShinsakaiKekkaTorokuDiv div, OperationMode mode) {
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> _onSelect_dgTaishoshaIchiran(ShinsakaiKekkaTorokuDiv div, OperationMode mode) {
+        return reflectSpecificRowToKobetsuHyojiRanToEdit(div, div.getDgTaishoshaIchiran().getClickedItem(), mode);
+    }
+
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> reflectSpecificRowToKobetsuHyojiRanToEdit(
+            ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row row, OperationMode mode) {
+        return reflectSpecificRowToKobetsuHyojiRanToEditWithMessage(div, row, mode, null);
+    }
+
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> reflectSpecificRowToKobetsuHyojiRanToEditWithMessage(
+            ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row row, OperationMode mode, Message message) {
+        if (row == null) {
+            return ResponseData.of(div).respond();
+        }
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        dgTaishoshaIchiran_Row clickedRow = div.getShinseishaIchiran().getDgTaishoshaIchiran().getClickedItem();
-        if (clickedRow == null) {
-            return ResponseData.of(div).respond();
+        handler.set個別表示欄入力可();
+        handler.displayTo個別表示欄(row, mode);
+        if (mode.is更新()) {
+            setNinteiYukoKikanOperatable(div, handler, handler.get今回二次判定());
         }
-        dgTaishoshaIchiran_Row updatingRow = handler.find更新中RowOrNull();
-        if (updatingRow == null) {
-            handler.set個別表示欄入力可();
-            handler.displayTo個別表示欄(clickedRow, mode);
-            setNinteiYukoKikanToOperatable(div, handler, handler.get今回二次判定());
-            ViewStateHolder.put(ViewStateKeys.処理モード, mode);
+        ViewStateHolder.put(ViewStateKeys.処理モード, mode);
+        if (message == null) {
             return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).addMessage(message).respond();
         }
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -189,37 +213,82 @@ public class ShinsakaiKekkaToroku {
      * @param div 介護認定審査会審査結果登録Div
      * @return responseData
      */
-    public ResponseData onClick_KaKuTeiButton(ShinsakaiKekkaTorokuDiv div) {
-        OperationMode mode = ViewStateHolder.get(ViewStateKeys.処理モード, OperationMode.class);
+    public ResponseData<ShinsakaiKekkaTorokuDiv> onClick_KaKuTeiButton(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        dgTaishoshaIchiran_Row row = handler.find更新中RowOrNull();
-        if (row == null) {
-            return ResponseData.of(div).respond();
-        }
+        OperationMode mode = ViewStateHolder.get(ViewStateKeys.処理モード, OperationMode.class);
         if (!ResponseHolder.isReRequest()) {
+            dgTaishoshaIchiran_Row row = handler.find更新中RowOrNull();
+            if (row == null) {
+                return ResponseData.of(div).respond();
+            }
             ResponseData r = checkCanKakuteiIfPossibleReturnNull(div, row, mode);
             if (r != null) {
                 return r;
             }
         }
         if (ResponseHolder.getMessageCode().toString().equals(DbeErrorMessages.審査結果登録済のため処理不可.getMessage().getCode())) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).respond(); //何もしない。
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).respond(); //何もしない。
         }
-
         ValidationMessageControlPairs validationMessages = getValidationHandler(div).validate個別();
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        handler.set個別表示欄To更新中Row(mode);
-        handler.clear個別表示欄();
-        handler.set個別表示欄入力不可();
-        return ResponseData.of(div).respond();
+        dgTaishoshaIchiran_Row currentRow = handler.set個別表示欄To更新中Row(mode);
+        if (mode.is削除()) {
+            return clearKobetsuHyojiRanSettingDisable(div, handler);
+        }
+        dgTaishoshaIchiran_Row next = findNext(div, currentRow);
+        if (next == null) {
+            return clearKobetsuHyojiRanSettingDisableWithMessage(div, handler,
+                    DbeNotificationMessages.全審査結果登録完了.getMessage());
+        }
+        div.getDgTaishoshaIchiran().setSelectedItems(Arrays.asList(next));
+        return reflectSpecificRowToKobetsuHyojiRanToEditWithMessage(div, next, OperationMode.更新,
+                DbeNotificationMessages.審査会結果登録_未判定被保険者表示
+                .getMessage()
+                .replace(
+                        next.getShinsakaiJunjo().toString(),
+                        next.getHihokenshaNo().toString(),
+                        next.getShimei().toString()
+                )
+        );
     }
 
-    private ResponseData<ShinsakaiKekkaTorokuDiv> checkCanKakuteiIfPossibleReturnNull(ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row row, OperationMode mode) {
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> clearKobetsuHyojiRanSettingDisableWithMessage(
+            ShinsakaiKekkaTorokuDiv div, ShinsakaiKekkaTorokuHandler handler, Message message) {
+        handler.clear個別表示欄();
+        handler.set個別表示欄入力不可();
+        if (message == null) {
+            return ResponseData.of(div).respond();
+        } else {
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+    }
+
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> clearKobetsuHyojiRanSettingDisable(
+            ShinsakaiKekkaTorokuDiv div, ShinsakaiKekkaTorokuHandler handler) {
+        return clearKobetsuHyojiRanSettingDisableWithMessage(div, handler, null);
+    }
+
+    @CheckForNull
+    private static dgTaishoshaIchiran_Row findNext(ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row currentRow) {
+        List<dgTaishoshaIchiran_Row> list = new ArrayList<>(div.getDgTaishoshaIchiran().getDataSource());
+        Collections.sort(list, ORDER_BY_SHINSA_JUNJO_ASC);
+        for (dgTaishoshaIchiran_Row row : list) {
+            if (0 <= currentRow.getShinsakaiJunjoSort().compareTo(row.getShinsakaiJunjoSort())) {
+                continue;
+            }
+            if (RString.isNullOrEmpty(row.getHanteiKekkaCode())) {
+                return row;
+            }
+        }
+        return null;
+    }
+
+    private static ResponseData<ShinsakaiKekkaTorokuDiv> checkCanKakuteiIfPossibleReturnNull(ShinsakaiKekkaTorokuDiv div, dgTaishoshaIchiran_Row row, OperationMode mode) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         if (mode.is更新()) {
             if (!Objects.equals(row.getHenkoMaeTorisageKubunCode(), handler.calculateTorisageKubunCodeBy個別入力欄())) {
@@ -255,10 +324,7 @@ public class ShinsakaiKekkaToroku {
      * @return responseData
      */
     public ResponseData onClick_btnCancel(ShinsakaiKekkaTorokuDiv div) {
-        ShinsakaiKekkaTorokuHandler handler = getHandler(div);
-        handler.clear個別表示欄();
-        handler.set個別表示欄入力不可();
-        return ResponseData.of(div).respond();
+        return clearKobetsuHyojiRanSettingDisable(div, getHandler(div));
     }
 
     /**
@@ -518,14 +584,14 @@ public class ShinsakaiKekkaToroku {
     public ResponseData<ShinsakaiKekkaTorokuDiv> onChange_NijiHantei(ShinsakaiKekkaTorokuDiv div) {
         ShinsakaiKekkaTorokuHandler handler = getHandler(div);
         YokaigoJotaiKubun09 今回二次判定 = handler.get今回二次判定();
-        setNinteiYukoKikanToOperatable(div, handler, 今回二次判定);
+        setNinteiYukoKikanOperatable(div, handler, 今回二次判定);
         if (ShinsakaiKekkaTorokuHandler.is要支援要介護(今回二次判定)) {
             return onChange_NijiHantei_when要介護Or要支援(今回二次判定, div, handler);
         }
         return ResponseData.of(div).respond();
     }
 
-    private static boolean setNinteiYukoKikanToOperatable(
+    private static boolean setNinteiYukoKikanOperatable(
             ShinsakaiKekkaTorokuDiv div, ShinsakaiKekkaTorokuHandler handler, YokaigoJotaiKubun09 yokaigodo) {
         boolean operatable = ShinsakaiKekkaTorokuHandler.is要支援要介護(yokaigodo) || yokaigodo == YokaigoJotaiKubun09.なし;
         boolean disabled = !operatable;
@@ -729,11 +795,11 @@ public class ShinsakaiKekkaToroku {
         return ResponseData.of(div).respond();
     }
 
-    private ShinsakaiKekkaTorokuHandler getHandler(ShinsakaiKekkaTorokuDiv div) {
+    private static ShinsakaiKekkaTorokuHandler getHandler(ShinsakaiKekkaTorokuDiv div) {
         return new ShinsakaiKekkaTorokuHandler(div);
     }
 
-    private ShinsakaiKekkaTorokuValidationHandler getValidationHandler(ShinsakaiKekkaTorokuDiv div) {
+    private static ShinsakaiKekkaTorokuValidationHandler getValidationHandler(ShinsakaiKekkaTorokuDiv div) {
         return new ShinsakaiKekkaTorokuValidationHandler(div);
     }
 
