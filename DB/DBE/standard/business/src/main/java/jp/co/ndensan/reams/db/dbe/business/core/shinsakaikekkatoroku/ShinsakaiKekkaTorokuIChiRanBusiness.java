@@ -200,6 +200,16 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
     }
 
     /**
+     * @return 前回の一次判定結果コード
+     */
+    public RString get前回一次判定コード() {
+        if (entity.get前回一次判定() == null || entity.get前回一次判定().isEmpty()) {
+            return RString.EMPTY;
+        }
+        return entity.get前回一次判定().value();
+    }
+
+    /**
      * 今回一次判定を取得します。
      *
      * @return 今回一次判定
@@ -209,6 +219,16 @@ public class ShinsakaiKekkaTorokuIChiRanBusiness {
             return RString.EMPTY;
         }
         return IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード().value()).get名称();
+    }
+
+    /**
+     * @return 今回の一次判定結果コード
+     */
+    public RString get今回一次判定コード() {
+        if (entity.get要介護認定一次判定結果コード() == null || entity.get要介護認定一次判定結果コード().isEmpty()) {
+            return RString.EMPTY;
+        }
+        return entity.get要介護認定一次判定結果コード().value();
     }
 
     /**

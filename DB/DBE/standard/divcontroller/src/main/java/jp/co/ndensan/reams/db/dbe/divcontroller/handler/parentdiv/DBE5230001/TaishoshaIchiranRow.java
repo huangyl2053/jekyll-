@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -123,11 +124,11 @@ public class TaishoshaIchiranRow {
      * @return 月数、空の場合は0.
      */
     public int getNinteiKikanTsukiSu() {
-        RString num = aRow.getNinteiKikanTukisu();
-        if (RString.isNullOrEmpty(num)) {
+        Decimal num = aRow.getNinteiKikanTukisu().getValue();
+        if (num == null) {
             return 0;
         }
-        return Integer.parseInt(num.toString());
+        return num.intValue();
     }
 
     /**

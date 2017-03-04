@@ -32,9 +32,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
@@ -121,55 +123,58 @@ public class ShinsakaiKekkaTorokuHandler {
             認定期間開始.setValue(business.get認定期間開始());
             TextBoxFlexibleDate 認定期間終了 = new TextBoxFlexibleDate();
             認定期間終了.setValue(business.get認定期間終了());
-            RString 認定期間月数 = business.get認定期間月数();
+            TextBoxNum 認定有効期間月数 = new TextBoxNum();
+            RString tsukisu = business.get認定期間月数();
+            認定有効期間月数.setValue(ZERO.equals(tsukisu) ? null : new Decimal(tsukisu.toString()));
             boolean メモフラグ = !RString.isNullOrEmpty(business.get審査会メモ());
             boolean 意見フラグ = !RString.isNullOrEmpty(business.get審査会意見());
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row(
-                    RString.EMPTY,
-                    審査会順序,
-                    審査会順序.padZeroToLeft(4),
-                    business.get保険者番号(),
-                    business.get保険者(),
-                    business.get被保番号(),
-                    business.get氏名(),
-                    business.get被保区分(),
-                    business.get申請区分_申請時(),
-                    business.get申請区分_申請時コード(),
-                    business.get申請区分_法令(),
-                    business.get申請区分_法令コード(),
-                    認定申請日,
-                    business.get今回二次判定(),
-                    business.get二次判定コード(),
-                    認定期間開始,
-                    認定期間終了,
-                    ZERO.equals(認定期間月数) ? RString.EMPTY : 認定期間月数,
-                    二次判定日,
-                    business.get取下区分名称(),
-                    business.get取下区分コード(),
-                    前回有効期間終了日,
-                    business.get前回一次判定(),
-                    business.get今回一次判定(),
-                    business.get前回二次判定(),
-                    business.get前回二次判定コード(),
-                    business.get判定結果(),
-                    business.get判定結果コード(),
-                    business.get特定疾病(),
-                    business.get状態像(),
-                    business.get状態像コード(),
-                    メモフラグ,
-                    意見フラグ,
-                    business.get審査会意見種類(),
-                    business.get一次判定結果変更理由(),
-                    business.get生年月日(),
-                    business.get審査会メモ(),
-                    business.get審査会意見(),
-                    business.get審査会意見種類コード(),
-                    business.get一次判定結果変更理由(),
-                    RString.EMPTY,
-                    business.get申請書管理番号(),
-                    business.get一次判定(),
-                    business.厚労省IF識別コード(),
-                    business.get取下区分コード()
+                    /* jotai */RString.EMPTY,
+                    /* shinsakaiJunjo */ 審査会順序,
+                    /* shinsakaiJunjoSort */ 審査会順序.padZeroToLeft(4),
+                    /* hokenshaNo */ business.get保険者番号(),
+                    /* hokenshaMeisho */ business.get保険者(),
+                    /* hihokenshaNo */ business.get被保番号(),
+                    /* shimei */ business.get氏名(),
+                    /* hihoKubun */ business.get被保区分(),
+                    /* shinseiKubunShinseiji */ business.get申請区分_申請時(),
+                    /* shinseiKubunShinseijiCode */ business.get申請区分_申請時コード(),
+                    /* shinseiKubunLaw */ business.get申請区分_法令(),
+                    /* shinseiKubunLawCode */ business.get申請区分_法令コード(),
+                    /* shinseiDay */ 認定申請日,
+                    /* hanteiKekka */ business.get判定結果(),
+                    /* hanteiKekkaCode */ business.get判定結果コード(),
+                    /* konkaiNijiHantei */ business.get今回二次判定(),
+                    /* konkaiNijiHanteiCode */ business.get二次判定コード(),
+                    /* ninteiKikanKaishi */ 認定期間開始,
+                    /* ninteiKikanShuryo */ 認定期間終了,
+                    /* ninteiKikanTukisu */ 認定有効期間月数,
+                    /* nijiHanteiDate */ 二次判定日,
+                    /* torisageKubunTx */ business.get取下区分名称(),
+                    /* torisageKubunCode */ business.get取下区分コード(),
+                    /* zenkaiYukoKikanShuryoDay */ 前回有効期間終了日,
+                    /* zenkaiIchijiHantei */ business.get前回一次判定(),
+                    /* zenkaiIchijiHanteiCode */ business.get前回一次判定コード(),
+                    /* konkaiIchijiHantei */ business.get今回一次判定(),
+                    /* konkaiIchijiHanteiCode */ business.get今回一次判定コード(),
+                    /* zenkaiNijiHantei */ business.get前回二次判定(),
+                    /* zenkaiNijiHanteiCode */ business.get前回二次判定コード(),
+                    /* tokuteiShippei */ business.get特定疾病(),
+                    /* jotaizo */ business.get状態像(),
+                    /* jotaizoCode */ business.get状態像コード(),
+                    /* shinsakaiMemo */ メモフラグ,
+                    /* shinsakaiIken */ 意見フラグ,
+                    /* shinsakaiIkenShurui */ business.get審査会意見種類(),
+                    /* ichijiHanteiKekkaHenkoRiyu */ business.get一次判定結果変更理由(),
+                    /* seiNenGaBi */ business.get生年月日(),
+                    /* hidMemo */ business.get審査会メモ(),
+                    /* hidIken */ business.get審査会意見(),
+                    /* hidIkenCode */ business.get審査会意見種類コード(),
+                    /* md5 */ RString.EMPTY,
+                    /* shinseishoKanriNo */ business.get申請書管理番号(),
+                    /* ichijiHantei */ business.get一次判定(),
+                    /* koroshoIfShikibetsuCode */ business.厚労省IF識別コード(),
+                    /* henkoMaeTorisageKubunCode */ business.get取下区分コード()
             );
             if (!row.getHanteiKekkaCode().isEmpty()) {
                 row.setMd5(new TaishoshaIchiranRow(row).toMd5());
@@ -299,14 +304,13 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             div.getKobetsuHyojiArea().getTxtNinteiKikanTo().clearValue();
         }
-        if (!RString.isNullOrEmpty(row.getNinteiKikanTukisu())) {
-            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(row.getNinteiKikanTukisu());
-            div.getKobetsuHyojiArea().setPrevNinteiKikanMonth(row.getNinteiKikanTukisu());
+        if (row.getNinteiKikanTukisu().getValue() != null) {
+            div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(new RString(row.getNinteiKikanTukisu().getValue().intValue()));
+            div.getKobetsuHyojiArea().setPrevNinteiKikanMonth(new RString(row.getNinteiKikanTukisu().getValue().intValue()));
         } else {
             div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().setSelectedKey(new RString(認定期間月数なし));
             div.getKobetsuHyojiArea().setPrevNinteiKikanMonth(new RString(認定期間月数なし));
         }
-        div.getKobetsuHyojiArea().setPrevNinteiKikanMonth(row.getNinteiKikanTukisu());
         if (!RString.isNullOrEmpty(row.getHidMemo())) {
             div.getKobetsuHyojiArea().getTxtShinsakaiMemo().setValue(row.getHidMemo());
         } else {
@@ -488,9 +492,9 @@ public class ShinsakaiKekkaTorokuHandler {
         }
         RString 調定期間月数 = div.getKobetsuHyojiArea().getDdlNinteiKikanMonth().getSelectedValue();
         if (!RString.isNullOrEmpty(調定期間月数)) {
-            row.setNinteiKikanTukisu(調定期間月数);
+            row.getNinteiKikanTukisu().setValue(new Decimal(調定期間月数.toString()));
         } else {
-            row.setNinteiKikanTukisu(RString.EMPTY);
+            row.getNinteiKikanTukisu().clearValue();
         }
         RString 審査会意見種類 = div.getKobetsuHyojiArea().getDdlShinsakaiIkenShurui().getSelectedValue();
         if (!RString.isNullOrEmpty(審査会意見種類)) {
@@ -553,7 +557,7 @@ public class ShinsakaiKekkaTorokuHandler {
         row.setKonkaiNijiHanteiCode(RString.EMPTY);
         row.getNinteiKikanKaishi().setValue(FlexibleDate.EMPTY);
         row.getNinteiKikanShuryo().setValue(FlexibleDate.EMPTY);
-        row.setNinteiKikanTukisu(RString.EMPTY);
+        row.getNinteiKikanTukisu().clearValue();
         row.getNijiHanteiDate().setValue(FlexibleDate.EMPTY);
         TorisageKubun t = TorisageKubun.toValue(row.getHenkoMaeTorisageKubunCode());
         row.setTorisageKubunTx(t == null ? RString.EMPTY : t.getName());
