@@ -64,11 +64,11 @@ public class SonotaKikanGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        boolean 状況フラグ = true;
+        boolean 状況フラグ = false;
         if (有効.equals(div.getRadHaisi().getSelectedKey())) {
-            状況フラグ = true;
-        } else if (無効.equals(div.getRadHaisi().getSelectedKey())) {
             状況フラグ = false;
+        } else if (無効.equals(div.getRadHaisi().getSelectedKey())) {
+            状況フラグ = true;
         }
         List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
                 .createその他機関情報の取得キー作成(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
