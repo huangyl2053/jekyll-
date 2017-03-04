@@ -262,7 +262,7 @@
 
     <sql id="kensakuJyokenKyotsu_getJisshiJokyoTokei">
         <if test="isShinseiji">
-            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
+            AND A."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3','5')
         </if>
         <if test="isHorei">
             AND A."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
@@ -334,12 +334,7 @@
             ,A."ninteiShinseiHoreiKubunCode"
         </if>
         FROM rgdb."DbT5101NinteiShinseiJoho" A
-        INNER JOIN
-        (
-        select * from rgdb."DbT5102NinteiKekkaJoho"
-        UNION
-        select * from rgdb."DbT5129Tennyu"
-        ) B
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
@@ -600,9 +595,7 @@
                 <foreach collection="gogitaiNoList" item="gogitaiNo" open="(" separator="," close=")"> #{gogitaiNo} </foreach>
             </otherwise>
         </choose>
-        <if test="isShinseiji">
             AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
         <if test="isHorei">
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
@@ -671,9 +664,7 @@
                 AND C."hihokenshaKubunCode" IN ('2', '9')
             </when>
         </choose>
-        <if test="isShinseiji">
             AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
         <if test="isHorei">
             AND C."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
@@ -1314,9 +1305,7 @@
         <if test="!isEmptyGogitaiNo">
             AND Dbt5511."gogitaiNo" = #{gogitaiNo}
         </if>
-        <if test="isShinseiji">
             AND Dbt5101."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
-        </if>
         <if test="isHorei">
             AND Dbt5101."ninteiShinseiHoreiKubunCode" IN ('1', '2', '3')
         </if>
@@ -1346,6 +1335,7 @@
         ON I."shinseishoKanriNo" = H."zenkaiShinseishoKanriNo"
         WHERE #{taishoGeppiFrom} <![CDATA[<=]]> A."shinsakaiKaisaiYMD"
         AND A."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{taishoGeppiTo}
+        AND C."ninteiShinseiShinseijiKubunCode" IN ('1', '2', '3')
         AND E."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND E."ninteichosaKanryoYMD" IS NOT NULL
         AND E."ikenshoTorokuKanryoYMD" IS NOT NULL
