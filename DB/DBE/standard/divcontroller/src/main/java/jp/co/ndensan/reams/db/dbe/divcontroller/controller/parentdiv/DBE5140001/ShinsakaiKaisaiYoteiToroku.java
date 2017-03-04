@@ -656,8 +656,9 @@ public class ShinsakaiKaisaiYoteiToroku {
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onClick_BtnToroku(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
+        RDate 指定日 = div.getTxtSeteibi().getValue();
         ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler = new ShinsakaiKaisaiYoteiTorokuValidationHandler(div);
-        ValidationMessageControlPairs validPairs = getTorokuCheck(validationHandler);
+        ValidationMessageControlPairs validPairs = getTorokuCheck(validationHandler, 指定日);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -665,7 +666,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         ViewStateHolder.put(ViewStateKeys.押下フラグ, 登録ボタン押下);
         モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
-        set開催予定入力欄(div.getTxtSeteibi().getValue());
+        set開催予定入力欄(指定日);
         div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
         div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
@@ -1074,9 +1075,9 @@ public class ShinsakaiKaisaiYoteiToroku {
                 .toDateString();
     }
 
-    private ValidationMessageControlPairs getTorokuCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
+    private ValidationMessageControlPairs getTorokuCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler, RDate 指定日) {
         ValidationMessageControlPairs validPairs = validationHandler.保存可否Check(yoteiJohoEntityList2);
-        validPairs = validationHandler.合議体存在Check(validPairs);
+        validPairs = validationHandler.合議体存在Check(validPairs, 指定日);
         validPairs = validationHandler.合議体重複チェック(validPairs);
         validPairs = validationHandler.設定日未選択チェック(validPairs);
         return validationHandler.審査会の1日最大登録件数チェック(validPairs);
@@ -1654,6 +1655,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             gogitaiJohoRow.setShurui(種類);
         }
         gogitaiJohoRow.setShinsakaiIin1(business.get介護認定審査会委員氏名());
+        gogitaiJohoRow.getYukoKikanKaishiYMD().setValue(new RDate(business.get有効期間開始年月日().toString()));
+        gogitaiJohoRow.getYukoKikanShuryoYMD().setValue(new RDate(business.get有効期間終了年月日().toString()));
         gogitaiJohoRowList.add(gogitaiJohoRow);
     }
 

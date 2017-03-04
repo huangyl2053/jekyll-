@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 20 11:59:02 JST 2017 
+ * Sat Mar 04 22:26:04 JST 2017 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
 
     private TextBoxNum number;
     private RString gogitaiMeisho;
@@ -35,6 +36,8 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
     private RString shinsakaiIin8;
     private RString shinsakaiIin9;
     private RString shinsakaiIin10;
+    private TextBoxDate yukoKikanKaishiYMD;
+    private TextBoxDate yukoKikanShuryoYMD;
 
     public dgShinsakaiKaisaiGogitaiJoho_Row() {
         super();
@@ -51,6 +54,8 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.shinsakaiIin8 = RString.EMPTY;
         this.shinsakaiIin9 = RString.EMPTY;
         this.shinsakaiIin10 = RString.EMPTY;
+        this.yukoKikanKaishiYMD = new TextBoxDate();
+        this.yukoKikanShuryoYMD = new TextBoxDate();
         this.setOriginalData("number", number);
         this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
         this.setOriginalData("shurui", shurui);
@@ -64,9 +69,11 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.setOriginalData("shinsakaiIin8", shinsakaiIin8);
         this.setOriginalData("shinsakaiIin9", shinsakaiIin9);
         this.setOriginalData("shinsakaiIin10", shinsakaiIin10);
+        this.setOriginalData("yukoKikanKaishiYMD", yukoKikanKaishiYMD);
+        this.setOriginalData("yukoKikanShuryoYMD", yukoKikanShuryoYMD);
     }
 
-    public dgShinsakaiKaisaiGogitaiJoho_Row(TextBoxNum number, RString gogitaiMeisho, RString shurui, RString shinsakaiIin1, RString shinsakaiIin2, RString shinsakaiIin3, RString shinsakaiIin4, RString shinsakaiIin5, RString shinsakaiIin6, RString shinsakaiIin7, RString shinsakaiIin8, RString shinsakaiIin9, RString shinsakaiIin10) {
+    public dgShinsakaiKaisaiGogitaiJoho_Row(TextBoxNum number, RString gogitaiMeisho, RString shurui, RString shinsakaiIin1, RString shinsakaiIin2, RString shinsakaiIin3, RString shinsakaiIin4, RString shinsakaiIin5, RString shinsakaiIin6, RString shinsakaiIin7, RString shinsakaiIin8, RString shinsakaiIin9, RString shinsakaiIin10, TextBoxDate yukoKikanKaishiYMD, TextBoxDate yukoKikanShuryoYMD) {
         super();
         this.setOriginalData("number", number);
         this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
@@ -81,6 +88,8 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.setOriginalData("shinsakaiIin8", shinsakaiIin8);
         this.setOriginalData("shinsakaiIin9", shinsakaiIin9);
         this.setOriginalData("shinsakaiIin10", shinsakaiIin10);
+        this.setOriginalData("yukoKikanKaishiYMD", yukoKikanKaishiYMD);
+        this.setOriginalData("yukoKikanShuryoYMD", yukoKikanShuryoYMD);
         this.number = number;
         this.gogitaiMeisho = gogitaiMeisho;
         this.shurui = shurui;
@@ -94,6 +103,8 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.shinsakaiIin8 = shinsakaiIin8;
         this.shinsakaiIin9 = shinsakaiIin9;
         this.shinsakaiIin10 = shinsakaiIin10;
+        this.yukoKikanKaishiYMD = yukoKikanKaishiYMD;
+        this.yukoKikanShuryoYMD = yukoKikanShuryoYMD;
     }
 
     public TextBoxNum getNumber() {
@@ -146,6 +157,14 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
 
     public RString getShinsakaiIin10() {
         return shinsakaiIin10;
+    }
+
+    public TextBoxDate getYukoKikanKaishiYMD() {
+        return yukoKikanKaishiYMD;
+    }
+
+    public TextBoxDate getYukoKikanShuryoYMD() {
+        return yukoKikanShuryoYMD;
     }
 
     public void setNumber(TextBoxNum number) {
@@ -211,6 +230,16 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
     public void setShinsakaiIin10(RString shinsakaiIin10) {
         this.setOriginalData("shinsakaiIin10", shinsakaiIin10);
         this.shinsakaiIin10 = shinsakaiIin10;
+    }
+
+    public void setYukoKikanKaishiYMD(TextBoxDate yukoKikanKaishiYMD) {
+        this.setOriginalData("yukoKikanKaishiYMD", yukoKikanKaishiYMD);
+        this.yukoKikanKaishiYMD = yukoKikanKaishiYMD;
+    }
+
+    public void setYukoKikanShuryoYMD(TextBoxDate yukoKikanShuryoYMD) {
+        this.setOriginalData("yukoKikanShuryoYMD", yukoKikanShuryoYMD);
+        this.yukoKikanShuryoYMD = yukoKikanShuryoYMD;
     }
 
     // </editor-fold>

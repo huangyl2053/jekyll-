@@ -103,23 +103,38 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 合議体存在Check(ValidationMessageControlPairs validationMessages) {
+    public ValidationMessageControlPairs 合議体存在Check(ValidationMessageControlPairs validationMessages, RDate 指定日) {
         List<dgShinsakaiKaisaiGogitaiJoho_Row> dgGogitaiRowList = div.getDgShinsakaiKaisaiGogitaiJoho().getDataSource();
         for (dgKaisaiYoteiNyuryokuran_Row dgNyuryokuRow : div.getDgKaisaiYoteiNyuryokuran().getDataSource()) {
             if (!isAru(dgNyuryokuRow.getKaisaiGogitai1(), dgGogitaiRowList)) {
                 set合議体存在Message(validationMessages);
                 break;
+            } else if (is有効期間外(dgNyuryokuRow.getKaisaiGogitai1(), dgGogitaiRowList, 指定日)) {
+                set有効期間外Message(validationMessages);
+                break;
             }
+
             if (!isAru(dgNyuryokuRow.getKaisaiGogitai2(), dgGogitaiRowList)) {
                 set合議体存在Message(validationMessages);
                 break;
+            } else if (is有効期間外(dgNyuryokuRow.getKaisaiGogitai2(), dgGogitaiRowList, 指定日)) {
+                set有効期間外Message(validationMessages);
+                break;
             }
+
             if (!isAru(dgNyuryokuRow.getKaisaiGogitai3(), dgGogitaiRowList)) {
                 set合議体存在Message(validationMessages);
                 break;
+            } else if (is有効期間外(dgNyuryokuRow.getKaisaiGogitai3(), dgGogitaiRowList, 指定日)) {
+                set有効期間外Message(validationMessages);
+                break;
             }
+
             if (!isAru(dgNyuryokuRow.getKaisaiGogitai4(), dgGogitaiRowList)) {
                 set合議体存在Message(validationMessages);
+                break;
+            } else if (is有効期間外(dgNyuryokuRow.getKaisaiGogitai4(), dgGogitaiRowList, 指定日)) {
+                set有効期間外Message(validationMessages);
                 break;
             }
         }
@@ -331,6 +346,36 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
         return false;
     }
 
+    private boolean is有効期間外(TextBox kaisaiGogitai, List<dgShinsakaiKaisaiGogitaiJoho_Row> dgGogitaiRowList, RDate 指定日) {
+        boolean is有効期間外 = false;
+        if (!kaisaiGogitai.isDisabled() && !kaisaiGogitai.getValue().isEmpty()) {
+            for (dgShinsakaiKaisaiGogitaiJoho_Row dgGogitaiRow : dgGogitaiRowList) {
+                is有効期間外 = is期間外(kaisaiGogitai, dgGogitaiRow, 指定日);
+                if (is有効期間外) {
+                    break;
+                }
+            }
+        }
+        return is有効期間外;
+    }
+
+    private boolean is期間外(TextBox kaisaiGogitai, dgShinsakaiKaisaiGogitaiJoho_Row dgGogitaiRow, RDate 指定日) {
+        boolean is有効期間外 = false;
+        if (kaisaiGogitai.getValue().equals(dgGogitaiRow.getNumber().getText())) {
+            if (指定日.isBefore(dgGogitaiRow.getYukoKikanKaishiYMD().getValue())
+                    || 指定日.isAfter(dgGogitaiRow.getYukoKikanShuryoYMD().getValue())) {
+                is有効期間外 = true;
+            }
+        }
+        return is有効期間外;
+    }
+
+    private void set有効期間外Message(ValidationMessageControlPairs validationMessages) {
+        validationMessages.add(new ValidationMessageControlPair(
+                new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
+                        DbeErrorMessages.合議体無効)));
+    }
+
     private void set合議体存在Message(ValidationMessageControlPairs validationMessages) {
         validationMessages.add(new ValidationMessageControlPair(
                 new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
@@ -423,13 +468,6 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     }
 
     private static final class ValidationMessage implements IValidationMessage {
-//        週コピーから日が日付ではない(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピーから日"),
-//        週コピー開始日が日付ではない(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピー開始日"),
-//        週コピー開始日期間が不正(UrErrorMessages.入力値が不正_追加メッセージあり, "週コピー開始日"),
-//        週コピー開始日以降予定が存在(DbeErrorMessages.週コピー不可),
-//        合議体が未選択(UrErrorMessages.選択されていない, "開催合議体"),
-//        選択の開催合議体が開催予定情報は登録されていない(DbeErrorMessages.審査会委員割付不可),
-//        割付可能(DbeErrorMessages.既に開催結果が作成済で審査会委員割付不可),
 
         private final Message message;
 

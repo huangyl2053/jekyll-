@@ -32,4 +32,6 @@ public class GogitaiJohoShinsaRelateEntity {
     private RString 介護認定審査会開始予定時刻;
     private RString 介護認定審査会終了予定時刻;
     private RString 合議体長区分コード;
+    private FlexibleDate 有効期間開始年月日;
+    private FlexibleDate 有効期間終了年月日;
 }

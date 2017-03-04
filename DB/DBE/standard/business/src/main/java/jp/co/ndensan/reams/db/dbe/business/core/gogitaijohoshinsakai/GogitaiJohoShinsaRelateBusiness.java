@@ -146,4 +146,21 @@ public class GogitaiJohoShinsaRelateBusiness {
         return entity.get合議体長区分コード();
     }
 
+    /**
+     * 有効期間開始年月日のgetメソッドです。
+     *
+     * @return 介護認定審査会委員コード
+     */
+    public FlexibleDate get有効期間開始年月日() {
+        return entity.get有効期間開始年月日();
+    }
+
+    /**
+     * 有効期間終了年月日のgetメソッドです。
+     *
+     * @return 介護認定審査会委員コード
+     */
+    public FlexibleDate get有効期間終了年月日() {
+        return entity.get有効期間終了年月日();
+    }
 }
