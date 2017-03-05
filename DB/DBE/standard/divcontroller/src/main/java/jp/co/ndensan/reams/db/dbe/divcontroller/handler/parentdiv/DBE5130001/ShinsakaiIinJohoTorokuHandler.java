@@ -562,27 +562,29 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setKozaMeigininKana(div.getKozaJoho().getTxtKozaMeiginin().getValue());
         row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
 
-        int index = row.getId() != -1 ? row.getId() : 0;
         if (状態_追加.equals(eventJotai)) {
             row.setStatus(eventJotai);
             div.getDgShinsaInJohoIchiran().getDataSource().add(row);
         } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(jotai)) {
-            for (dgShinsaInJohoIchiran_Row kensaku : div.getDgShinsaInJohoIchiran().getDataSource()) {
-                if (kensaku.getShinsainCode().equals(div.getDgShinsaInJohoIchiran().getActiveRow().getShinsainCode())) {
-                    div.getDgShinsaInJohoIchiran().getDataSource().remove(div.getDgShinsaInJohoIchiran().getActiveRow().getId());
-                    break;
-                }
-            }
+            set審査会委員一覧_作業後(row, true);
         } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(jotai)) {
-            for (dgShinsaInJohoIchiran_Row kensaku : div.getDgShinsaInJohoIchiran().getDataSource()) {
-                if (kensaku.getShinsainCode().equals(div.getDgShinsaInJohoIchiran().getActiveRow().getShinsainCode())) {
-                    div.getDgShinsaInJohoIchiran().getDataSource().set(div.getDgShinsaInJohoIchiran().getActiveRow().getId(), row);
-                    break;
-                }
-            }
+            set審査会委員一覧_作業後(row, false);
         } else {
             row.setStatus(eventJotai);
-            div.getDgShinsaInJohoIchiran().getDataSource().set(index, row);
+            set審査会委員一覧_作業後(row, false);
+        }
+    }
+
+    private void set審査会委員一覧_作業後(dgShinsaInJohoIchiran_Row row, boolean 対象を表示しない) {
+        for (dgShinsaInJohoIchiran_Row kensaku : div.getDgShinsaInJohoIchiran().getDataSource()) {
+            if (kensaku.getShinsainCode().equals(div.getDgShinsaInJohoIchiran().getActiveRow().getShinsainCode())) {
+                if (対象を表示しない) {
+                    div.getDgShinsaInJohoIchiran().getDataSource().remove(div.getDgShinsaInJohoIchiran().getActiveRow().getId());
+                } else {
+                    div.getDgShinsaInJohoIchiran().getDataSource().set(div.getDgShinsaInJohoIchiran().getActiveRow().getId(), row);
+                }
+                break;
+            }
         }
     }
 

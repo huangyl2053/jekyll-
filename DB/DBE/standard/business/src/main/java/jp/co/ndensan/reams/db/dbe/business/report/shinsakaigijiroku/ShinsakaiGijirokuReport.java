@@ -71,10 +71,12 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
         ShinsakaiGijirokuBodyEditor5 bodyEditor5 = null;
         for (int i = 0; i < INDEX_5; i++) {
             editor = new ShinsakaiGijirokuEditor(item);
-            if (i < 2) {
+            if (i < INDEX_3) {
                 bodyEditor1 = new ShinsakaiGijirokuBodyEditor1(新規と更新と区変の件数リスト.get(i));
                 bodyEditor2 = new ShinsakaiGijirokuBodyEditor2(新規と更新と区変の件数上リスト.get(i));
                 bodyEditor3 = new ShinsakaiGijirokuBodyEditor3(新規と更新と区変の件数下リスト.get(i));
+            }
+            if (i < INDEX_2) {
                 if (i < 委員情報リスト.size()) {
                     bodyEditor4 = new ShinsakaiGijirokuBodyEditor4(委員情報リスト.get(i));
                     bodyEditor5 = new ShinsakaiGijirokuBodyEditor5(合計数リスト.get(i));
@@ -229,7 +231,7 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
     private List<SanGyoumeYonJyoIchiRanEntity> get新規と更新と区変の件数(ShinsakaiGijirokuEntity item) {
         List<SanGyoumeYonJyoIchiRanEntity> resultList = new ArrayList<>();
         ShinsakaiKekkaJohoRelateEntity entity = item.get審査会審査結果等();
-        resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get新規申請_状態区分変更件数()),
+        resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get新規申請件数()),
                 new RString(entity.get新規_状変の内2号被保険者数()),
                 new RString(entity.get新規_状変在宅数()),
                 new RString(entity.get新規_状変施設数())));

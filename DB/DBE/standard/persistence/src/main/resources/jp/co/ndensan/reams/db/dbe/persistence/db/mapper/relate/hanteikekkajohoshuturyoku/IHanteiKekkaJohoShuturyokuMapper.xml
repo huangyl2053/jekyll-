@@ -598,87 +598,87 @@
         CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '3'
         THEN 1
         ELSE 0 END AS "状態区分変更件数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の内2号被保険者数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5101."shisetsuNyushoFlag" = FALSE
         THEN 1
         ELSE 0 END AS "新規_状変の在宅数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5101."shisetsuNyushoFlag" = TRUE
         THEN 1
         ELSE 0 END AS "新規_状変の施設数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '01'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定非該当数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '12'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要支援1数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '13'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要支援2数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '21'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護1数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '22'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護2数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '23'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護3数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '24'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護4数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '25'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護5数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5101."chosaKubun" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定再調査数",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '01' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定非該当数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '12' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要支援1数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '13' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要支援2数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '21' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護1数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '22' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護2数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '23' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護3数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '24' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護4数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5116."ichijiHanteiKekkaCode" = '25' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定要介護5数_2号被保険者",
-        CASE WHEN (DbT5101."ninteiShinseiShinseijiKubunCode" = '1' OR DbT5101."ninteiShinseiShinseijiKubunCode" = '3')
+        CASE WHEN DbT5101."ninteiShinseiShinseijiKubunCode" = '1'
         AND DbT5101."chosaKubun" = '1' AND DbT5101."hihokenshaKubunCode" = '1'
         THEN 1
         ELSE 0 END AS "新規_状変の一次判定再調査数_2号被保険者",
