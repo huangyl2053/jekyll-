@@ -524,10 +524,11 @@ public class ShinsakaiIinJohoTorokuHandler {
      * 審査会委員情報を設定します。
      *
      * @param eventJotai 状態
+     * @param jotai
      */
-    public void setShinsakiToIchiran(RString eventJotai) {
+    public void setShinsakiToIchiran(RString eventJotai, RString jotai) {
         dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
-        if (!状態_追加.equals(eventJotai)) {
+        if (!状態_追加.equals(eventJotai) && ViewStateHolder.get(ViewStateKeys.介護認定審査会委員登録情報, dgShinsaInJohoIchiran_Row.class) != null) {
             row = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員登録情報, dgShinsaInJohoIchiran_Row.class);
         }
         row.setShinsainCode(div.getTxtShinsainCode().getValue());
@@ -561,14 +562,24 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setKozaMeigininKana(div.getKozaJoho().getTxtKozaMeiginin().getValue());
         row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
 
-        int index = row.getId();
+        int index = row.getId() != -1 ? row.getId() : 0;
         if (状態_追加.equals(eventJotai)) {
             row.setStatus(eventJotai);
             div.getDgShinsaInJohoIchiran().getDataSource().add(row);
-        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(row.getStatus())) {
-            div.getDgShinsaInJohoIchiran().getDataSource().remove(index);
-        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(row.getStatus())) {
-            div.getDgShinsaInJohoIchiran().getDataSource().set(index, row);
+        } else if (状態_削除.equals(eventJotai) && 状態_追加.equals(jotai)) {
+            for (dgShinsaInJohoIchiran_Row kensaku : div.getDgShinsaInJohoIchiran().getDataSource()) {
+                if (kensaku.getShinsainCode().equals(div.getDgShinsaInJohoIchiran().getActiveRow().getShinsainCode())) {
+                    div.getDgShinsaInJohoIchiran().getDataSource().remove(div.getDgShinsaInJohoIchiran().getActiveRow().getId());
+                    break;
+                }
+            }
+        } else if (状態_修正.equals(eventJotai) && 状態_追加.equals(jotai)) {
+            for (dgShinsaInJohoIchiran_Row kensaku : div.getDgShinsaInJohoIchiran().getDataSource()) {
+                if (kensaku.getShinsainCode().equals(div.getDgShinsaInJohoIchiran().getActiveRow().getShinsainCode())) {
+                    div.getDgShinsaInJohoIchiran().getDataSource().set(div.getDgShinsaInJohoIchiran().getActiveRow().getId(), row);
+                    break;
+                }
+            }
         } else {
             row.setStatus(eventJotai);
             div.getDgShinsaInJohoIchiran().getDataSource().set(index, row);
@@ -776,10 +787,19 @@ public class ShinsakaiIinJohoTorokuHandler {
                             List<SoNoTaKikanGuide> その他機関リスト = sonotakikanFinder.getKoseiShichoson(SoNoTaKikanGuideParameter
                                     .createその他機関情報の取得キー作成(row.getShokisaiHokenshaNo(),
                                             row.getSonotaKikanCode().getValue(),
-                                            row.getSonotaKikanCode().getValue(), false,
+                                            row.getSonotaKikanCode().getValue(), true,
                                             RString.EMPTY,
                                             RString.EMPTY,
                                             1)).records();
+                            if (その他機関リスト.isEmpty()) {
+                                その他機関リスト = sonotakikanFinder.getKoseiShichoson(SoNoTaKikanGuideParameter
+                                        .createその他機関情報の取得キー作成(row.getShokisaiHokenshaNo(),
+                                                row.getSonotaKikanCode().getValue(),
+                                                row.getSonotaKikanCode().getValue(), false,
+                                                RString.EMPTY,
+                                                RString.EMPTY,
+                                                1)).records();
+                            }
                             RString その他機関名称 = !その他機関リスト.isEmpty() ? その他機関リスト.get(INDEX_0).get機関名称() : RString.EMPTY;
                             row.getSonotaKikanName().setValue(その他機関名称);
                         } else {

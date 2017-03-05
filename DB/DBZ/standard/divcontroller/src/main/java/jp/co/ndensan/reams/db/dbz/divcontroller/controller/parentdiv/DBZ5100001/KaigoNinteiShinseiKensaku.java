@@ -140,6 +140,9 @@ public class KaigoNinteiShinseiKensaku {
      * @return ResponseData<ShinseiKensakuDiv>
      */
     public ResponseData<KaigoNinteiShinseiKensakuDiv> onSaikinshorishaClick(KaigoNinteiShinseiKensakuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().validate();
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();

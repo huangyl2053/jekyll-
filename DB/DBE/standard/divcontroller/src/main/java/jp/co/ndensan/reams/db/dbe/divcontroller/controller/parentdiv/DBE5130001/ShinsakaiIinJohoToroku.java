@@ -381,19 +381,20 @@ public class ShinsakaiIinJohoToroku {
 
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> models = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報更新, Models.class);
         RString イベント状態 = div.getShinsakaiIinJohoTorokuInput().getStatus();
+        RString jotai = RString.EMPTY;
         if (状態_追加.equals(イベント状態)) {
             ShinsakaiIinJoho shinsakaiJoho = new ShinsakaiIinJoho(div.getTxtShinsainCode().getValue());
             shinsakaiJoho = createHandOf(div).setShinsakaiJoho(shinsakaiJoho);
             models.add(shinsakaiJoho);
         } else if (状態_修正.equals(イベント状態)) {
+            jotai = div.getDgShinsaInJohoIchiran().getActiveRow().getStatus();
             ShinsakaiIinJohoIdentifier key = new ShinsakaiIinJohoIdentifier(div.getTxtShinsainCode().getValue());
             ShinsakaiIinJoho shinsakaiJoho = createHandOf(div).setShinsakaiJoho(models.get(key).modifiedModel());
             shinsakaiJoho = shinsakaiJoho.modifiedModel();
             models.add(shinsakaiJoho);
-
         } else if (状態_削除.equals(イベント状態)) {
             ShinsakaiIinJohoIdentifier key = new ShinsakaiIinJohoIdentifier(div.getTxtShinsainCode().getValue());
-            RString jotai = div.getDgShinsaInJohoIchiran().getActiveRow().getStatus();
+            jotai = div.getDgShinsaInJohoIchiran().getActiveRow().getStatus();
             if (状態_追加.equals(jotai)) {
                 models.deleteOrRemove(key);
             } else {
@@ -402,7 +403,7 @@ public class ShinsakaiIinJohoToroku {
             }
         }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, models);
-        createHandOf(div).setShinsakiToIchiran(イベント状態);
+        createHandOf(div).setShinsakiToIchiran(イベント状態, jotai);
         return responseWithSettingState(div);
     }
 

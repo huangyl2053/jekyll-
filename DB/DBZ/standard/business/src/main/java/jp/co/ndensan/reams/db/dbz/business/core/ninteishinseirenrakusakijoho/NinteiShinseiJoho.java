@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -750,5 +751,14 @@ public class NinteiShinseiJoho {
      */
     public boolean is論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
+    }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return entity.getShichosonCode();
     }
 }

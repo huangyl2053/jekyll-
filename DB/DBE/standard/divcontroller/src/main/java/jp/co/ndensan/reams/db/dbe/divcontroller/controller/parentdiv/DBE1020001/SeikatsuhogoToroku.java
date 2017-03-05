@@ -105,7 +105,7 @@ public class SeikatsuhogoToroku {
         div.getCcdShozokuShichoson().setLabelLText(new RString("市町村"));
         div.getCcdShozokuShichoson().setRequired(true);
         if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
-            div.getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.構成市町村全て_空白含む);
+            div.getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.構成市町村全て_市町村コード);
             div.getCcdShozokuShichoson().setSelectedShichosonIfExist(LasdecCode.EMPTY);
         } else {
             div.getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
@@ -219,7 +219,7 @@ public class SeikatsuhogoToroku {
         div.getTxtYubinNo().clearValue();
         div.getCcdZenkokuJushoInput().clear();
         div.getRadSeibetsu().clearSelectedItem();
-        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
         div.getDdlShisho().setSelectedIndex(0);
         if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
             div.getCcdShozokuShichoson().setSelectedShichosonIfExist(LasdecCode.EMPTY);

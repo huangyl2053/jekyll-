@@ -617,7 +617,7 @@
             AND (DbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND DbT5201."chosahyoTouShutsuryokuYMD" != ''))
         </if>
         <if test="市町村コード.toString() != ''.toString()">
-            AND DbT5101."shichosonCode" = #{市町村コード}
+            AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY
         DbT5101."ninteiShinseiYMD",
@@ -966,7 +966,7 @@
             </if>
         </if>
         <if test="市町村コード.toString() != ''.toString()">
-            AND DbT5101."shichosonCode" = #{市町村コード}
+            AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY
         DbT5101."ninteiShinseiYMD",
@@ -1081,7 +1081,7 @@
             </if>
         </if>
         <if test = "市町村コード.toString() != ''.toString()">
-            AND DbT5101."shichosonCode" = #{市町村コード}
+            AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY
         DbT5101."ninteiShinseiYMD",
@@ -1217,7 +1217,7 @@
             AND DbT4302."ikenshoReadYMD" is NOT NULL
         </if>
         <if test = "市町村コード.toString() != ''.toString()">
-            AND DbT5101."shichosonCode" = #{市町村コード}
+            AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY
         DbT5101."ninteiShinseiYMD",
@@ -1237,6 +1237,9 @@
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" DbT5105
         ON  DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
         LEFT JOIN
         (
         SELECT
@@ -1285,7 +1288,7 @@
             AND DbT4302."ikenshoReadYMD" is NOT NULL
         </if>
         <if test = "市町村コード.toString() != ''.toString()">
-            AND DbT5101."shichosonCode" = #{市町村コード}
+            AND DbT7051."shichosonCode" = #{市町村コード}
         </if>
     </select>
     <resultMap id="resultMap_IkenSyoNyuSyuRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
