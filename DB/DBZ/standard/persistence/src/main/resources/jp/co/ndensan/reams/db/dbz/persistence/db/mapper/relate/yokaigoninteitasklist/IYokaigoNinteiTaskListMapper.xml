@@ -1551,6 +1551,8 @@
         AND T5305b."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5305."shinseishoKanriNo"
+        AND (T5305."ChoyoID" = '701'
+        OR T5305."ChoyoID" = '777')
         LEFT JOIN
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213
         ON  T5213."gaikyoChosaTextImageKubun" = '2'
