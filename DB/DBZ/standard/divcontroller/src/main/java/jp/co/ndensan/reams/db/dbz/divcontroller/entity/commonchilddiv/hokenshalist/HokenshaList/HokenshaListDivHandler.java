@@ -75,7 +75,7 @@ public class HokenshaListDivHandler {
             if (保険者パターン.equals(HokenshaDDLPattem.構成市町村全て_空白含む)) {
                 chokenshaList.add(0, HokenshaSummary.EMPTY);
             }
-            createMaping(chokenshaList, list);
+            createMaping(chokenshaList, list, 保険者パターン);
         } else {
             createMaping(hokenshaList, list);
         }
@@ -129,7 +129,28 @@ public class HokenshaListDivHandler {
                 div.getDdlHokenshaList().setIsBlankLine(true);
             } else {
                 key = new RString(UUID.randomUUID().toString());
-                list.add(new KeyValueDataSource(key, create表示名(s)));
+                list.add(new KeyValueDataSource(key, create表示名_証記載保険者番号(s)));
+            }
+            map.put(key, s);
+        }
+        div.getDdlHokenshaList().setDataSource(list);
+        ShichosonListHolder.putTo(div, map);
+    }
+
+    private void createMaping(List<HokenshaSummary> hokenshaList, List<KeyValueDataSource> list, HokenshaDDLPattem 保険者パターン) {
+        Map<RString, HokenshaSummary> map = new HashMap<>();
+        for (HokenshaSummary s : hokenshaList) {
+            RString key;
+            if (LasdecCode.EMPTY.equals(s.get市町村コード())) {
+                key = RString.EMPTY;
+                div.getDdlHokenshaList().setIsBlankLine(true);
+            } else {
+                key = new RString(UUID.randomUUID().toString());
+                if (保険者パターン.equals(HokenshaDDLPattem.構成市町村全て_市町村コード)) {
+                    list.add(new KeyValueDataSource(key, create表示名_市町村コード(s)));
+                } else {
+                    list.add(new KeyValueDataSource(key, create表示名_証記載保険者番号(s)));
+                }
             }
             map.put(key, s);
         }
@@ -175,9 +196,17 @@ public class HokenshaListDivHandler {
         }
     }
 
-    private RString create表示名(HokenshaSummary s) {
+    private RString create表示名_証記載保険者番号(HokenshaSummary s) {
         return new RStringBuilder()
                 .append(s.get証記載保険者番号().value())
+                .append(RString.HALF_SPACE)
+                .append(s.get市町村名称())
+                .toRString();
+    }
+
+    private RString create表示名_市町村コード(HokenshaSummary s) {
+        return new RStringBuilder()
+                .append(s.get市町村コード().value())
                 .append(RString.HALF_SPACE)
                 .append(s.get市町村名称())
                 .toRString();

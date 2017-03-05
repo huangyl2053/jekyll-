@@ -42,6 +42,8 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
     private static final RString 審査会単価パターン = DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     private static final RString 審査会単価パターン_委員 = ShisakaiIinJissekiIchiranShinsakaiTanka.審査会単価パターン_委員.getコード();
     private static final RString 審査会単価パターン_医師 = ShisakaiIinJissekiIchiranShinsakaiTanka.審査会単価パターン_医師.getコード();
+    RString 審査会委員実績照会_医師範囲_歯科医師 = DbBusinessConfig.get(ConfigNameDBE.審査会委員実績照会_医師範囲_歯科医師, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+    private static final RString 医師範囲に歯科医師含む = new RString("1");
     private static final RString 所属機関_医療機関 = ShisakaiIinJissekiIchiranShozokuKikan.医療機関.get名称();
     private static final RString 所属機関_調査委託先 = ShisakaiIinJissekiIchiranShozokuKikan.調査委託先.get名称();
     private static final RString 所属機関_その他機関 = ShisakaiIinJissekiIchiranShozokuKikan.その他機関.get名称();
@@ -108,7 +110,9 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
             }
         }
         if (審査会単価パターン.equals(審査会単価パターン_医師)) {
-            if (item.get審査員資格コード().equals(Sikaku.医師.getコード()) || item.get審査員資格コード().equals(Sikaku.歯科医師.getコード())) {
+            if (item.get審査員資格コード().equals(Sikaku.医師.getコード())) {
+                return ShinsakaiIinShubetsu.医師.get名称();
+            } else if (医師範囲に歯科医師含む.equals(審査会委員実績照会_医師範囲_歯科医師) && item.get審査員資格コード().equals(Sikaku.歯科医師.getコード())) {
                 return ShinsakaiIinShubetsu.医師.get名称();
             } else {
                 return ShinsakaiIinShubetsu.医師以外.get名称();

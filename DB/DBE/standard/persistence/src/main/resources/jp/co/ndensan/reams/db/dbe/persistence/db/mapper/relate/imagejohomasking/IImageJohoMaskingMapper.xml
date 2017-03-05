@@ -160,7 +160,8 @@
         rgdb."DbT5305IkenshoImageJoho" T5305a
         on T5305a."genponMaskKubun" = #{イメージ区分}
         AND T5305a."remban" = T5305."remban"
-        AND T5305a."ChoyoID" = T5305."ChoyoID"
+        AND (T5305a."ChoyoID" = '701'
+        OR T5305a."ChoyoID" = '777')
         AND T5305a."iraiRirekiNo" = T5305."iraiRirekiNo"
         AND T5305a."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         LEFT JOIN
