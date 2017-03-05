@@ -18,7 +18,7 @@
     </resultMap>
     <select resultOrdered="true" id="get合議体情報"
             resultMap="resultMap_GogitaiJoho"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyotei.GogitaiIchiranJohoMapperParameter"          
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyotei.GogitaiIchiranJohoMapperParameter"
             fetchSize="500">
         SELECT
         DbT5591."gogitaiNo" AS "gogitaiNo"
@@ -46,12 +46,13 @@
         ON
         DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
         WHERE
-        DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{YukoYMDFrom}
+        DbT5593."substituteFlag" = false
+        AND DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{YukoYMDFrom}
         AND
         #{YukoYMDTo} <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
         <if test="usesGogitaiNo">
         AND DbT5591."gogitaiNo" = #{GogitaiNo}
-        </if>    
+        </if>
         ORDER BY
         "gogitaiNo"
     </select>
