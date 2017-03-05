@@ -255,9 +255,9 @@ public class NinteichosaItakusakiMainHandler {
             row.setKikanKubun(nullToEmpty(ChosaKikanKubun.toValue(kikanKubun).get名称()));
         }
         if (jokyoFlag) {
-            row.setJokyoFlag(表示値_無効);
-        } else {
             row.setJokyoFlag(表示値_有効);
+        } else {
+            row.setJokyoFlag(表示値_無効);
         }
         //口座情報
         KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
@@ -511,7 +511,7 @@ public class NinteichosaItakusakiMainHandler {
                 .set割付定員(割付定員)
                 .set割付地区(new ChikuCode(div.getChosaitakusakiJohoInput().getCcdChiku().getCode().value()))
                 .set機関の区分(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedKey())
-                .set廃止フラグ(CODE_無効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey()))
+                .set廃止フラグ(CODE_有効.equals(div.getChosaitakusakiJohoInput().getRadHaishiFlag().getSelectedKey()))
                 .set金融機関コード(金融機関コード)
                 .set金融機関支店コード(金融機関支店コード)
                 .set預金種別(預金種別コード)
