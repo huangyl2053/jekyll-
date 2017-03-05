@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -179,10 +180,10 @@ public class NinteiShinseiToroku {
         RString menuID = ResponseHolder.getMenuID();
         ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         RString 介護導入形態 = RString.EMPTY;
-        if (shichosonSecurity.get導入形態コード().value().equals(new RString("211"))) {
+        if (shichosonSecurity.get導入形態コード().value().equals(DonyuKeitaiCode.認定広域.getCode())) {
             介護導入形態 = new RString("4");
         }
-        if (shichosonSecurity.get導入形態コード().value().equals(new RString("220"))) {
+        if (shichosonSecurity.get導入形態コード().value().equals(DonyuKeitaiCode.認定単一.getCode())) {
             介護導入形態 = new RString("1");
         }
         List<KeyValueDataSource> dataSource = new ArrayList<>();
@@ -272,6 +273,7 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkShikakuShutokuMae().setReadOnly(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
             getHandler(div).setCcdShinseiTodokedesha(div, ninteiTandokuDounyuFlag);
             div.getCcdNinteiInput().setDisabled(true);
@@ -320,6 +322,7 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiShubetsu(JukyuShinseiJiyu.初回申請);
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.新規申請);
             div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.生活保護);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
 
             div.getCcdShinseiTodokedesha().initialize(new NinteiShinseiTodokedeshaDataPassModel());
             getHandler(div).setCcdShinseiTodokedesha(div, ninteiTandokuDounyuFlag);
@@ -1121,7 +1124,7 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set主治医コード(div.getCcdShujiiIryokikanAndShujiiInput().getShujiiCode());
         shinseiJohoBuilder.set指定医フラグ(div.getCcdShujiiIryokikanAndShujiiInput().hasShiteii());
         shinseiJohoBuilder.set主治医への連絡事項(div.getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko());
-        shinseiJohoBuilder.set市町村コード(new LasdecCode(div.getCcdShikakuInfo().getHookenshaCode()));
+        shinseiJohoBuilder.set市町村コード(div.getTplShinseishaJoho().getCcdShozokuShichoson().getSelectedItem().get市町村コード());
         shinseiJohoBuilder.set認定延期通知発行しないことに対する同意有無(div.getChkNinteiTsuchishoDoi().isAllSelected());
         if (RString.isNullOrEmpty(div.getShisetsuJoho().getTxtNyushoShisetsu().getValue())) {
             shinseiJohoBuilder.set施設入所の有無(false);
@@ -1389,14 +1392,9 @@ public class NinteiShinseiToroku {
     }
 
     private ShinseishoKanriNo get申請書管理番号(NinteiShinseiTorokuDiv div) {
-        LasdecCode 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, LasdecCode.class);
         RString 連番 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
         RStringBuilder rsb = new RStringBuilder();
-        if (ZERO_6.equals(div.getCcdShikakuInfo().getHookenshaCode()) || 市町村コード == null) {
-            rsb.append(ZERO_6);
-        } else {
-            rsb.append(市町村コード.code市町村());
-        }
+        rsb.append(div.getCcdShikakuInfo().getTxtHookenshaCode().getValue());
         rsb.append(RDate.getNowDate().getYearMonth().toDateString());
         rsb.append(連番.padZeroToLeft(ZERO_5));
         return new ShinseishoKanriNo(rsb.toRString());

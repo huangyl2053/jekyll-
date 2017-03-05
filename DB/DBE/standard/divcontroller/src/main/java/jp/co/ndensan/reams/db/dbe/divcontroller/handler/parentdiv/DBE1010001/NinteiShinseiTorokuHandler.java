@@ -288,7 +288,7 @@ public class NinteiShinseiTorokuHandler {
         div.getTplShinseishaJoho().getTxtJohoTelNo().setDomain(atenaDiv.getTelNo().getDomain());
         div.getTplShinseishaJoho().getTxtJohoNenrei().setValue(atenaDiv.getNenrei().getValue());
         if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
-            div.getTplShinseishaJoho().getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.構成市町村全て);
+            div.getTplShinseishaJoho().getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.構成市町村全て_市町村コード);
             div.getTplShinseishaJoho().getCcdShozokuShichoson().setSelectedShichosonIfExist(所属市町村コード);
         } else {
             div.getTplShinseishaJoho().getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
