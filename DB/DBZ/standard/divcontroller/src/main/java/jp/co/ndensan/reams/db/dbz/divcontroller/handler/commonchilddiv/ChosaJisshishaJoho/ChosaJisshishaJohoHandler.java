@@ -87,11 +87,9 @@ public class ChosaJisshishaJohoHandler {
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
         List<NinteiShinseiJoho> ninteiShinseiJohoList = service.get認定申請情報(key.get申請書管理番号()).records();
         if (ninteiShinseiJohoList != null && !ninteiShinseiJohoList.isEmpty()) {
-            div.getTxtNinteiShinseiDate().setValue(ninteiShinseiJohoList.get(0).get認定申請年月日());
-            List<KoseiShichosonMaster> koseiShichosonMasterList = service.get市町村コード(ninteiShinseiJohoList.get(0).get証記載保険者番号()).records();
-            if (koseiShichosonMasterList != null && !koseiShichosonMasterList.isEmpty()) {
-                div.setHdnShichosonCode(koseiShichosonMasterList.get(0).get市町村コード().value());
-            }
+            NinteiShinseiJoho 認定申請情報 = ninteiShinseiJohoList.get(0);
+            div.getTxtNinteiShinseiDate().setValue(認定申請情報.get認定申請年月日());
+            div.setHdnShichosonCode(認定申請情報.get市町村コード().value());
         }
         chosaJisshiBasho.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaJisshiBashoCode code : ChosaJisshiBashoCode.values()) {

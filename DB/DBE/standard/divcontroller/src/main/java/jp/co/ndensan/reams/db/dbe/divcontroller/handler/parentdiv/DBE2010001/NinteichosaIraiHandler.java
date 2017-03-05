@@ -164,6 +164,7 @@ public class NinteichosaIraiHandler {
             div.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiName().setValue(row.getKonkaiChosaItakusaki());
             div.getCcdItakusakiAndChosainInput().getTxtChosainCode().setValue(row.getKonkaiChosainCode());
             div.getCcdItakusakiAndChosainInput().getTxtChosainName().setValue(row.getKonkaiChosain());
+            div.getCcdItakusakiAndChosainInput().setHdnShichosonCode(row.getShichosonCode());
             div.getDdlIraiKubun().setSelectedKey(
                     (!row.getChosaIraiKubunCode().isEmpty())
                     ? row.getChosaIraiKubunCode()
