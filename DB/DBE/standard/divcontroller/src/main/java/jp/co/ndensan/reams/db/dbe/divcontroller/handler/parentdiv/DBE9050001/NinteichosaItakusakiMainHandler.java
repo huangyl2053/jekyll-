@@ -167,6 +167,7 @@ public class NinteichosaItakusakiMainHandler {
      * @param sonotaKikanJohoList その他機関一覧List
      */
     public void setSonotaKikanichiran(List<SonotaKikanJohoEntity> sonotaKikanJohoList) {
+        List<KinyuKikan> kinyuKikans = KinyuKikanManager.createInstance().getValidKinyuKikansOn(FlexibleDate.getNowDate());
         List<dgSonotaKikanIchiran_Row> dataGridList = new ArrayList<>();
         for (SonotaKikanJohoEntity sonotaKikanJohoEntity : sonotaKikanJohoList) {
             dataGridList.add(createDgSonotaKikanichiranRow(
@@ -190,7 +191,8 @@ public class NinteichosaItakusakiMainHandler {
                     sonotaKikanJohoEntity.getYokinShubetsu(),
                     sonotaKikanJohoEntity.getKozaNo(),
                     sonotaKikanJohoEntity.getKozaMeigininKana(),
-                    sonotaKikanJohoEntity.getKozaMeiginin()
+                    sonotaKikanJohoEntity.getKozaMeiginin(),
+                    kinyuKikans
             ));
         }
         if (dataGridList.isEmpty()) {
@@ -223,7 +225,8 @@ public class NinteichosaItakusakiMainHandler {
             RString yokinShubetsu,
             RString kozaNo,
             AtenaKanaMeisho kozaMeigininKana,
-            AtenaMeisho kozaMeiginin
+            AtenaMeisho kozaMeiginin,
+            List<KinyuKikan> 金融機関情報
     ) {
         dgSonotaKikanIchiran_Row row = new dgSonotaKikanIchiran_Row();
         row.setJotai(nullToEmpty(jotai));
@@ -260,9 +263,6 @@ public class NinteichosaItakusakiMainHandler {
             row.setJokyoFlag(表示値_無効);
         }
         //口座情報
-        KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
-        List<KinyuKikan> 金融機関情報 = new ArrayList<>();
-        金融機関情報 = kinyuKikanManager.getValidKinyuKikansOn(FlexibleDate.getNowDate());
         row.setKinyuKikanCode(kinyuKikanCode == null ? RString.EMPTY : kinyuKikanCode.value());
         row.setKinyuKikanShitenCode(kinyuKikanShitenCode == null ? RString.EMPTY : kinyuKikanShitenCode.value());
         row.setYokinShu(nullToEmpty(yokinShubetsu));
