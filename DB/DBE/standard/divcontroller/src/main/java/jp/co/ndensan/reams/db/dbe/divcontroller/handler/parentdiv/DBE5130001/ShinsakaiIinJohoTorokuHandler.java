@@ -787,10 +787,19 @@ public class ShinsakaiIinJohoTorokuHandler {
                             List<SoNoTaKikanGuide> その他機関リスト = sonotakikanFinder.getKoseiShichoson(SoNoTaKikanGuideParameter
                                     .createその他機関情報の取得キー作成(row.getShokisaiHokenshaNo(),
                                             row.getSonotaKikanCode().getValue(),
-                                            row.getSonotaKikanCode().getValue(), false,
+                                            row.getSonotaKikanCode().getValue(), true,
                                             RString.EMPTY,
                                             RString.EMPTY,
                                             1)).records();
+                            if (その他機関リスト.isEmpty()) {
+                                その他機関リスト = sonotakikanFinder.getKoseiShichoson(SoNoTaKikanGuideParameter
+                                        .createその他機関情報の取得キー作成(row.getShokisaiHokenshaNo(),
+                                                row.getSonotaKikanCode().getValue(),
+                                                row.getSonotaKikanCode().getValue(), false,
+                                                RString.EMPTY,
+                                                RString.EMPTY,
+                                                1)).records();
+                            }
                             RString その他機関名称 = !その他機関リスト.isEmpty() ? その他機関リスト.get(INDEX_0).get機関名称() : RString.EMPTY;
                             row.getSonotaKikanName().setValue(その他機関名称);
                         } else {
