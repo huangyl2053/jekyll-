@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Feb 15 20:02:13 JST 2017 
+ * Sun Mar 05 10:26:04 JST 2017 
  */
 
 

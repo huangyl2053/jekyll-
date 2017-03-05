@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class NinteichosaMasterMapperParameter {
+public final class SonotaKikanMasterMapperParameter {
 
-    private final boolean 廃止フラグ;
+    private final boolean 状況フラグ;
     private final ShoKisaiHokenshaNo 保険者;
     private final RString 機関コードFrom;
     private final RString 機関コードTo;
@@ -41,8 +41,8 @@ public final class NinteichosaMasterMapperParameter {
     private final Integer ddlKikanMeishoKey;
     private final Integer ddlKikanKanaMeishoKey;
 
-    private NinteichosaMasterMapperParameter(
-            boolean 廃止フラグ,
+    private SonotaKikanMasterMapperParameter(
+            boolean 状況フラグ,
             ShoKisaiHokenshaNo 保険者,
             RString 機関コードFrom,
             RString 機関コードTo,
@@ -62,7 +62,7 @@ public final class NinteichosaMasterMapperParameter {
             RString ddlKikanMeishoKey,
             RString ddlKikanKanaMeishoKey
     ) {
-        this.廃止フラグ = 廃止フラグ;
+        this.状況フラグ = 状況フラグ;
         this.保険者 = 保険者;
         this.機関コードFrom = 機関コードFrom;
         this.機関コードTo = 機関コードTo;
@@ -86,7 +86,7 @@ public final class NinteichosaMasterMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 廃止フラグ 廃止フラグ
+     * @param 状況フラグ 状況フラグ
      * @param 保険者 保険者
      * @param 機関コードFrom 機関コードFrom
      * @param 機関コードTo 機関コードTo
@@ -99,8 +99,8 @@ public final class NinteichosaMasterMapperParameter {
      * @param ddlKikanKanaMeishoKey 画面で入力した機関カナ名称検索条件
      * @return 主治医マスタ検索パラメータ
      */
-    public static NinteichosaMasterMapperParameter createSelectByKeyParam(
-            boolean 廃止フラグ,
+    public static SonotaKikanMasterMapperParameter createSelectByKeyParam(
+            boolean 状況フラグ,
             ShoKisaiHokenshaNo 保険者,
             RString 機関コードFrom,
             RString 機関コードTo,
@@ -112,7 +112,7 @@ public final class NinteichosaMasterMapperParameter {
             RString ddlKikanMeishoKey,
             RString ddlKikanKanaMeishoKey
     ) {
-        return new NinteichosaMasterMapperParameter(廃止フラグ,
+        return new SonotaKikanMasterMapperParameter(状況フラグ,
                 保険者,
                 機関コードFrom,
                 機関コードTo,

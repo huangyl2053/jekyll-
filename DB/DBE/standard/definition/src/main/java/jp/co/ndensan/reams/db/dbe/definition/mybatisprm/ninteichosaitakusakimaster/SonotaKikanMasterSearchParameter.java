@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public final class NinteichosaMasterSearchParameter {
+public final class SonotaKikanMasterSearchParameter {
 
     private final ShoKisaiHokenshaNo 保険者番号;
     private final RString その他機関コード;
 
-    private NinteichosaMasterSearchParameter(
+    private SonotaKikanMasterSearchParameter(
             ShoKisaiHokenshaNo 保険者番号,
             RString その他機関コード
     ) {
@@ -36,11 +36,11 @@ public final class NinteichosaMasterSearchParameter {
      *
      * @return 主治医マスタパラメータ
      */
-    public static NinteichosaMasterSearchParameter createParamForSelectByKey(
+    public static SonotaKikanMasterSearchParameter createParamForSelectByKey(
             ShoKisaiHokenshaNo 保険者番号,
             RString その他機関コード
     ) {
-        return new NinteichosaMasterSearchParameter(
+        return new SonotaKikanMasterSearchParameter(
                 保険者番号, その他機関コード);
     }
 }

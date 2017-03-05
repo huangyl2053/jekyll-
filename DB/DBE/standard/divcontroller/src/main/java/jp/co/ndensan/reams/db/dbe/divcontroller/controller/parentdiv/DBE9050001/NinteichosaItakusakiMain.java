@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJohoIdentifier;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.NinteichosaMasterSearchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.SonotaKikanMasterMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.SonotaKikanMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.DBE9020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.DBE9050001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.NinteichosaItakusakiCsvEntity;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9050001.Nin
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoCSVEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.sonotakikanmaster.SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.SonotaKikanJohoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaster.NinteichosaMasterFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaster.SonotaKikanMasterFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -55,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * その他機関処理のクラスです。。
+ * その他機関処理のクラスです。
  *
  * @reamsid_L DBE-1360-010 suguangjun
  */
@@ -92,7 +92,7 @@ public class NinteichosaItakusakiMain {
         getHandler(div).clearKensakuJoken();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 金融機関コードのonBlur。
      *
@@ -111,7 +111,7 @@ public class NinteichosaItakusakiMain {
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 店番のonBlur。
      *
@@ -122,10 +122,10 @@ public class NinteichosaItakusakiMain {
         RString tenBan = div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue();
         if (!RString.isNullOrEmpty(tenBan)) {
             RString shitenMeisho = getHandler(div).getShitenMeisho(tenBan);
-            if(!RString.EMPTY.equals(tenBan)){
+            if (!RString.EMPTY.equals(tenBan)) {
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().
-                    setValue(shitenMeisho);
-            }else{
+                        setValue(shitenMeisho);
+            } else {
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
             }
@@ -178,7 +178,7 @@ public class NinteichosaItakusakiMain {
         if (div.getRadSearchHaisiFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
         }
-        NinteichosaMasterMapperParameter parameter = NinteichosaMasterMapperParameter.createSelectByKeyParam(jokyoFlag,
+        SonotaKikanMasterMapperParameter parameter = SonotaKikanMasterMapperParameter.createSelectByKeyParam(jokyoFlag,
                 div.getChosainSearch().getCcdhokensha().getSelectedItem().get証記載保険者番号(),
                 div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue(),
                 div.getChosainSearch().getTxtSearchSonotaKikanCodeTo().getValue(),
@@ -189,21 +189,27 @@ public class NinteichosaItakusakiMain {
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue(),
                 div.getDdlKikanMeisho().getSelectedKey(),
                 div.getDdlKikanKanaMeisho().getSelectedKey());
-        List<SonotaKikanJohoEntity> sonotaKikanJohoList = NinteichosaMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
+        List<SonotaKikanJohoEntity> sonotaKikanJohoList = SonotaKikanMasterFinder.createInstance().getSonotaKikanichiranList(parameter).records();
 
         boolean 検索条件初期値 = true;
         if (parameter.isUser機関カナ名称() || parameter.isUser機関の区分() || parameter.isUser機関コードFrom() || parameter.isUser機関コードTo()
-                || parameter.isUser機関名称() || parameter.isUser調査委託区分() || !parameter.is廃止フラグ()) {
+                || parameter.isUser機関名称() || parameter.isUser調査委託区分() || !parameter.is状況フラグ()) {
             検索条件初期値 = false;
         }
-
         if (sonotaKikanJohoList.isEmpty() && !検索条件初期値) {
             ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(new ArrayList<SonotaKikanJoho>()));
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setSonotaKikanichiran(sonotaKikanJohoList);
-        List<SonotaKikanJoho> その他機関マスタList = NinteichosaMasterFinder.createInstance().getSonotaKikanJohoList(parameter).records();
-        ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(その他機関マスタList));
+        ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(toSonotaKikanJohos(sonotaKikanJohoList)));
+    }
+
+    private static List<SonotaKikanJoho> toSonotaKikanJohos(List<SonotaKikanJohoEntity> entities) {
+        List<SonotaKikanJoho> list = new ArrayList<>();
+        for (SonotaKikanJohoEntity entity : entities) {
+            list.add(new SonotaKikanJoho(entity.getEntity()));
+        }
+        return list;
     }
 
     /**
@@ -332,9 +338,9 @@ public class NinteichosaItakusakiMain {
         }
         Code chikuCode = new Code(row.getChiku());
         RString chikuMei = new RString("");
-        if (!Code.EMPTY.equals(chikuCode)){
-            chikuMei = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),chikuCode).getコード名称();
-        }   
+        if (!Code.EMPTY.equals(chikuCode)) {
+            chikuMei = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(), chikuCode).getコード名称();
+        }
         NinteichosaItakusakiCsvEntity data = new NinteichosaItakusakiCsvEntity(
                 row.getHokenshaCode(),
                 row.getHokensha(),
@@ -348,37 +354,37 @@ public class NinteichosaItakusakiMain {
                 row.getChosaItakuKubun(),
                 waritsukeTeiin,
                 !RString.isNullOrEmpty(chikuMei)
-                ? chikuMei
-                : RString.EMPTY,
+                        ? chikuMei
+                        : RString.EMPTY,
                 row.getKikanKubun(),
                 row.getJokyoFlag(),
                 row.getKinyuKikanCode() != null
-                ? row.getKinyuKikanCode()
-                : RString.EMPTY,
+                        ? row.getKinyuKikanCode()
+                        : RString.EMPTY,
                 row.getKinyuKikanMeisho() != null
-                ? row.getKinyuKikanMeisho()
-                : RString.EMPTY,
+                        ? row.getKinyuKikanMeisho()
+                        : RString.EMPTY,
                 row.getKinyuKikanShitenCode() != null
-                ? row.getKinyuKikanShitenCode()
-                : RString.EMPTY,
+                        ? row.getKinyuKikanShitenCode()
+                        : RString.EMPTY,
                 row.getShitenMeisho() != null
-                ? row.getShitenMeisho()
-                : RString.EMPTY,
+                        ? row.getShitenMeisho()
+                        : RString.EMPTY,
                 row.getYokinShu() != null
-                ? row.getYokinShu()
-                : RString.EMPTY,
-                row.getYokinShuMei()!= null
-                ? row.getYokinShuMei()
-                : RString.EMPTY,
+                        ? row.getYokinShu()
+                        : RString.EMPTY,
+                row.getYokinShuMei() != null
+                        ? row.getYokinShuMei()
+                        : RString.EMPTY,
                 row.getKozaNo() != null
-                ? row.getKozaNo()
-                : RString.EMPTY,
+                        ? row.getKozaNo()
+                        : RString.EMPTY,
                 row.getKozaMeigininKana() != null
-                ? row.getKozaMeigininKana()
-                : RString.EMPTY,
+                        ? row.getKozaMeigininKana()
+                        : RString.EMPTY,
                 row.getKozaMeiginin() != null
-                ? row.getKozaMeiginin()
-                : RString.EMPTY
+                        ? row.getKozaMeiginin()
+                        : RString.EMPTY
         );
         return data;
     }
@@ -418,7 +424,7 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnKakutei(NinteichosaItakusakiMainDiv div) {
         RString イベント状態 = div.getChosaitakusakiJohoInput().getState();
-        int sonotaKikanJohoCount = NinteichosaMasterFinder.createInstance().getSonotaKikanJohoCount(NinteichosaMasterSearchParameter.
+        int sonotaKikanJohoCount = SonotaKikanMasterFinder.createInstance().getSonotaKikanJohoCount(SonotaKikanMasterSearchParameter.
                 createParamForSelectByKey(new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                         div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue())
         );
@@ -498,8 +504,8 @@ public class NinteichosaItakusakiMain {
     }
 
     private ValidationMessageControlPairs validateForDelete(NinteichosaItakusakiMainDiv div) {
-        NinteichosaMasterFinder masterFinder = NinteichosaMasterFinder.createInstance();
-        NinteichosaMasterSearchParameter parameter = NinteichosaMasterSearchParameter.createParamForSelectByKey(
+        SonotaKikanMasterFinder masterFinder = SonotaKikanMasterFinder.createInstance();
+        SonotaKikanMasterSearchParameter parameter = SonotaKikanMasterSearchParameter.createParamForSelectByKey(
                 new ShoKisaiHokenshaNo(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                 div.getChosaitakusakiJohoInput().getTxtSonotaKikanCode().getValue());
         return getValidationHandler(div).validateForDelete(
@@ -638,9 +644,9 @@ public class NinteichosaItakusakiMain {
         }
         Code chikuCode = new Code(row.getChiku());
         RString chikuMei = new RString("");
-        if (!Code.EMPTY.equals(chikuCode)){
-            chikuMei = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),chikuCode).getコード名称();
-        }   
+        if (!Code.EMPTY.equals(chikuCode)) {
+            chikuMei = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(), chikuCode).getコード名称();
+        }
         SonotaKikanJohoCSVEntity data = new SonotaKikanJohoCSVEntity(
                 row.getHokenshaCode(),
                 row.getHokensha(),
@@ -654,8 +660,8 @@ public class NinteichosaItakusakiMain {
                 row.getChosaItakuKubun(),
                 waritsukeTeiin,
                 !RString.isNullOrEmpty(chikuMei)
-                ? chikuMei
-                : RString.EMPTY,
+                        ? chikuMei
+                        : RString.EMPTY,
                 row.getKikanKubun(),
                 row.getJokyoFlag());
         return data;

@@ -169,14 +169,9 @@ public class NinteichosaItakusakiMainHandler {
     public void setSonotaKikanichiran(List<SonotaKikanJohoEntity> sonotaKikanJohoList) {
         List<dgSonotaKikanIchiran_Row> dataGridList = new ArrayList<>();
         for (SonotaKikanJohoEntity sonotaKikanJohoEntity : sonotaKikanJohoList) {
-            List<ShichosonMeishoBusiness> list = KoseiShujiiIryoKikanMasterFinder.createInstance().getHokensyaMeisho(sonotaKikanJohoEntity.getShoKisaiHokenshaNo()).records();
-            RString hokensya = RString.EMPTY;
-            if (!list.isEmpty()) {
-                hokensya = list.get(0).getShichosonMeisho();
-            }
             dataGridList.add(createDgSonotaKikanichiranRow(
                     RString.EMPTY,
-                    hokensya,
+                    sonotaKikanJohoEntity.getHokenshaName(),
                     sonotaKikanJohoEntity.getShoKisaiHokenshaNo(),
                     sonotaKikanJohoEntity.getSonotaKikanCode(),
                     sonotaKikanJohoEntity.getKikanMeisho(),
@@ -189,7 +184,7 @@ public class NinteichosaItakusakiMainHandler {
                     sonotaKikanJohoEntity.getWaritsukeTeiin(),
                     sonotaKikanJohoEntity.getWaritsukeChiku(),
                     sonotaKikanJohoEntity.getKikanKubun(),
-                    sonotaKikanJohoEntity.isHaishiFlag(),
+                    sonotaKikanJohoEntity.isYuko(),
                     sonotaKikanJohoEntity.getKinyuKikanCode(),
                     sonotaKikanJohoEntity.getKinyuKikanShitenCode(),
                     sonotaKikanJohoEntity.getYokinShubetsu(),
@@ -391,7 +386,7 @@ public class NinteichosaItakusakiMainHandler {
     public void setSonotaKikanichiran(RString eventJotai) {
         dgSonotaKikanIchiran_Row row = new dgSonotaKikanIchiran_Row();
         if (!状態_追加.equals(eventJotai)) {
-             row = ViewStateHolder.get(ViewStateKeys.その他機関マスタ選択行, dgSonotaKikanIchiran_Row.class);
+            row = ViewStateHolder.get(ViewStateKeys.その他機関マスタ選択行, dgSonotaKikanIchiran_Row.class);
         }
         row.setHokensha(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaName()));
         row.setHokenshaCode(nullToEmpty(div.getChosaitakusakiJohoInput().getCcdHokenshaJoho().getHokenjaNo()));
@@ -493,8 +488,8 @@ public class NinteichosaItakusakiMainHandler {
         KinyuKikanCode 金融機関コード = KinyuKikanCode.EMPTY;
         KinyuKikanShitenCode 金融機関支店コード = new KinyuKikanShitenCode(new RString(""));
         RString 預金種別コード = new RString("");
-        if(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null
-                && div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode() != null){
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null
+                && div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode() != null) {
             金融機関コード = div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode();
         }
         if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
