@@ -622,16 +622,8 @@ public class GogitaiJohoSakusei {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnRegistUploadFile(GogitaiJohoSakuseiDiv div, FileData[] files) {
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            for (FileData file : files) {
-                copyFile(file, div);
-            }
+        for (FileData file : files) {
+            copyFile(file, div);
         }
         return ResponseData.of(div).respond();
     }
