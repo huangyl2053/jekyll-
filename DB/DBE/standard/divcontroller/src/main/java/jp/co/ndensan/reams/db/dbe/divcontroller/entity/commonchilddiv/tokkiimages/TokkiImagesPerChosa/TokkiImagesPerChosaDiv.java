@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.TokkiImagesPerKomokuDiv;
+import java.util.List;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.TokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * TokkiImagesPerChosa のクラスファイル
@@ -33,7 +35,6 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("ddlTokkiJikoNos")
     private DropDownList ddlTokkiJikoNos;
     @JsonProperty("btnToDisplay")
@@ -44,6 +45,18 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     private Button btnReturn;
     @JsonProperty("btnSave")
     private Button btnSave;
+    @JsonProperty("hdnOperation")
+    private RString hdnOperation;
+    @JsonProperty("hdnSharedFileID")
+    private RString hdnSharedFileID;
+    @JsonProperty("hdnShinseishoKanriNoValue")
+    private RString hdnShinseishoKanriNoValue;
+    @JsonProperty("hdnChosaIraiRirekiNo")
+    private RString hdnChosaIraiRirekiNo;
+    @JsonProperty("directoryPath")
+    private RString directoryPath;
+    @JsonProperty("sharedFileNameValue")
+    private RString sharedFileNameValue;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -141,17 +154,126 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
         this.btnSave = btnSave;
     }
 
+    /*
+     * gethdnOperation
+     * @return hdnOperation
+     */
+    @JsonProperty("hdnOperation")
+    public RString getHdnOperation() {
+        return hdnOperation;
+    }
+
+    /*
+     * sethdnOperation
+     * @param hdnOperation hdnOperation
+     */
+    @JsonProperty("hdnOperation")
+    public void setHdnOperation(RString hdnOperation) {
+        this.hdnOperation = hdnOperation;
+    }
+
+    /*
+     * gethdnSharedFileID
+     * @return hdnSharedFileID
+     */
+    @JsonProperty("hdnSharedFileID")
+    public RString getHdnSharedFileID() {
+        return hdnSharedFileID;
+    }
+
+    /*
+     * sethdnSharedFileID
+     * @param hdnSharedFileID hdnSharedFileID
+     */
+    @JsonProperty("hdnSharedFileID")
+    public void setHdnSharedFileID(RString hdnSharedFileID) {
+        this.hdnSharedFileID = hdnSharedFileID;
+    }
+
+    /*
+     * gethdnShinseishoKanriNoValue
+     * @return hdnShinseishoKanriNoValue
+     */
+    @JsonProperty("hdnShinseishoKanriNoValue")
+    public RString getHdnShinseishoKanriNoValue() {
+        return hdnShinseishoKanriNoValue;
+    }
+
+    /*
+     * sethdnShinseishoKanriNoValue
+     * @param hdnShinseishoKanriNoValue hdnShinseishoKanriNoValue
+     */
+    @JsonProperty("hdnShinseishoKanriNoValue")
+    public void setHdnShinseishoKanriNoValue(RString hdnShinseishoKanriNoValue) {
+        this.hdnShinseishoKanriNoValue = hdnShinseishoKanriNoValue;
+    }
+
+    /*
+     * gethdnChosaIraiRirekiNo
+     * @return hdnChosaIraiRirekiNo
+     */
+    @JsonProperty("hdnChosaIraiRirekiNo")
+    public RString getHdnChosaIraiRirekiNo() {
+        return hdnChosaIraiRirekiNo;
+    }
+
+    /*
+     * sethdnChosaIraiRirekiNo
+     * @param hdnChosaIraiRirekiNo hdnChosaIraiRirekiNo
+     */
+    @JsonProperty("hdnChosaIraiRirekiNo")
+    public void setHdnChosaIraiRirekiNo(RString hdnChosaIraiRirekiNo) {
+        this.hdnChosaIraiRirekiNo = hdnChosaIraiRirekiNo;
+    }
+
+    /*
+     * getdirectoryPath
+     * @return directoryPath
+     */
+    @JsonProperty("directoryPath")
+    public RString getDirectoryPath() {
+        return directoryPath;
+    }
+
+    /*
+     * setdirectoryPath
+     * @param directoryPath directoryPath
+     */
+    @JsonProperty("directoryPath")
+    public void setDirectoryPath(RString directoryPath) {
+        this.directoryPath = directoryPath;
+    }
+
+    /*
+     * getsharedFileNameValue
+     * @return sharedFileNameValue
+     */
+    @JsonProperty("sharedFileNameValue")
+    public RString getSharedFileNameValue() {
+        return sharedFileNameValue;
+    }
+
+    /*
+     * setsharedFileNameValue
+     * @param sharedFileNameValue sharedFileNameValue
+     */
+    @JsonProperty("sharedFileNameValue")
+    public void setSharedFileNameValue(RString sharedFileNameValue) {
+        this.sharedFileNameValue = sharedFileNameValue;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     //
     @Override
     public void initialize(RString directortyPath) {
-
+        this.setDirectoryPath(directoryPath);
+        newHandler(this).initialize();
     }
 
-    //TODO
-    public RString getDirectoryPath() {
-        return RString.EMPTY;
+    @Override
+    public FilesystemName getSharedFileName() {
+        return newHandler(this).createSharedFileName();
     }
 
     @Override
@@ -161,41 +283,46 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
 
     @Override
     @CheckForNull
-    public ITokkiImagesPerKomokuDiv getEditting() {
+    public ITokkiImagesPerKomokuDiv getEditing() {
         if (getOperation().is修正()) {
-            return getRepTokkiJikos().getRepeateData().get(0);
+            List<ITokkiImagesPerKomokuDiv> list = getRepTokkiJikos().getRepeateData();
+            return list.isEmpty() ? null : list.get(0);
         }
         return null;
     }
 
     @Override
-    public void haveSelfDisplaySelectedTokkiJiko() {
-
+    public void renderSelectedTokkiJiko() {
+        newHandler(this).renderSelectedTokkiJiko();
     }
 
+    @Override
     public ShinseishoKanriNo getShinseishoKanriNo() {
-        //TODO
-        throw new UnsupportedOperationException();
+        return new ShinseishoKanriNo(DataPassingConverter.deserialize(this.hdnShinseishoKanriNoValue, RString.class));
     }
 
+    @Override
     public int getNinteichosaIraiRirekiNo() {
-        //TODO
-        throw new UnsupportedOperationException();
+        return DataPassingConverter.deserialize(this.hdnChosaIraiRirekiNo, Integer.class);
     }
 
-    //TODO
+    @Override
     public Operation getOperation() {
-        return Operation.修正;
+        return DataPassingConverter.deserialize(this.hdnOperation, Operation.class);
     }
 
-    //TODO
-    public FilesystemName getSharedFileName() {
-        return null;
-    }
-
-    //TODO
+    @Override
     public RDateTime getSharedFileID() {
-        return RDateTime.MIN;
+        if (RString.isNullOrEmpty(this.hdnSharedFileID)) {
+            RDateTime rt = newHandler(this).findSharedFileID();
+            this.hdnSharedFileID = DataPassingConverter.serialize(rt);
+            return rt;
+        }
+        return DataPassingConverter.deserialize(this.hdnSharedFileID, RDateTime.class);
+    }
+
+    private static TokkiImagesPerChosaDivHandler newHandler(TokkiImagesPerChosaDiv div) {
+        return new TokkiImagesPerChosaDivHandler(div);
     }
 
 }

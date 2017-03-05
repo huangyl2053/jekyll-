@@ -12,7 +12,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikos;
 import jp.co.ndensan.reams.db.dbz.business.util.Files;
-import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,8 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 final class TokkiJikoPieces {
 
+    private static final int MAX_REMBAN = 9;
     private final Map<Integer, TokkiJikoPiece> elements;
 
+    /**
+     * @param div {@link TokkiImagesPerKomokuDiv}
+     */
     TokkiJikoPieces(TokkiImagesPerKomokuDiv div) {
         this.elements = toMap(div);
     }
@@ -48,12 +51,11 @@ final class TokkiJikoPieces {
      * @param tokkiJiko 対象の特記事項
      * @param op 処理
      */
-    void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, NinteiChosaTokkiJikou tokkiJiko, Operation op) {
+    void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, Operation op) {
         List<RString> filePaths = Collections.unmodifiableList(Files.findFilePathsIn(directoryPath));
-        NinteichosahyoTokkijikos filterd = nts.tokkiJiko(tokkiJiko);
-        for (int remban = 1; remban <= 9; remban++) {
+        for (int remban = 1; remban <= MAX_REMBAN; remban++) {
             TokkiJikoPiece tp = this.elements.get(remban);
-            tp.initialize(filePaths, filterd, remban, op);
+            tp.initialize(filePaths, nts.remban(remban), op);
         }
     }
 

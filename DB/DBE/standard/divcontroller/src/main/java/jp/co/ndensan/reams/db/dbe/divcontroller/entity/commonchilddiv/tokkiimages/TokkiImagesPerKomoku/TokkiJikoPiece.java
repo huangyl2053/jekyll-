@@ -30,6 +30,12 @@ final class TokkiJikoPiece {
     private final TextBoxNum newRemban;
     private final Collection<ViewControl> refsToAll;
 
+    /**
+     * @param no 特記事項番号を保持するTextBox
+     * @param remban 特記事項連番を保持するTextBod
+     * @param image イメージ
+     * @param newRemban 新しい連番
+     */
     TokkiJikoPiece(TextBox no, TextBox remban, DynamicImage image, TextBoxNum newRemban) {
         this.no = no;
         this.remban = remban;
@@ -46,16 +52,15 @@ final class TokkiJikoPiece {
      * @param remban 連番
      * @param op 処理
      */
-    void initialize(List<RString> filePaths, NinteichosahyoTokkijikos nts, int remban, Operation op) {
+    void initialize(List<RString> filePaths, NinteichosahyoTokkijikos nts, Operation op) {
         this.clearAll();
-        NinteichosahyoTokkijikos filterd = nts.remban(remban);
-        if (filterd.isEmpty()) {
+        if (nts.isEmpty()) {
             this.setDisplayNone(true);
         }
         this.setDisplayNone(false);
-        boolean maskExists = filterd.containsMasked();
-        NinteichosahyoTokkijiko nt = filterd.findAny().get();
-        this.remban.setValue(new RString(remban));
+        boolean maskExists = nts.containsMasked();
+        NinteichosahyoTokkijiko nt = nts.findAny().get();
+        this.remban.setValue(new RString(nt.get認定調査特記事項連番()));
         this.no.setValue(nt.getTokkiJiko().get画面表示用特記事項番号());
         this.image.setSrc(Images.toBinaryString(findFilePathFrom(
                 filePaths,

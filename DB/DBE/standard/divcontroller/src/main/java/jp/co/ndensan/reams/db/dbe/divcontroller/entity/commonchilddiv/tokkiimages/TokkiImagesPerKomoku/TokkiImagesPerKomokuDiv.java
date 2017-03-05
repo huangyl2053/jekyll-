@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  * @author 自動生成
  */
 public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKomokuDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
@@ -759,7 +761,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @Override
     public void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, NinteiChosaTokkiJikou tokkiJiko, Operation op) {
         this.setTokkijiko(tokkiJiko);
-        new TokkiJikoPieces(this).initialize(directoryPath, nts, tokkiJiko, op);
+        new TokkiJikoPieces(this).initialize(directoryPath, nts.tokkiJiko(tokkiJiko), op);
     }
 
     @Override
@@ -770,10 +772,18 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     private static final TypeSafeKey<NinteiChosaTokkiJikou> TOKKIJIKO_NO_KEY
             = TypeSafeKey.create(NinteiChosaTokkiJikou.class, "tokkiJikoNo");
 
+    /**
+     * この共有子Divで扱う「特記事項」の種類を設定します。
+     *
+     * @param tokkiJiko 特記事項
+     */
     void setTokkijiko(NinteiChosaTokkiJikou tokkiJiko) {
         PanelSessionAccessor.put(this, TOKKIJIKO_NO_KEY.value(), tokkiJiko);
     }
 
+    /**
+     * @return この共有子Divで扱う「特記事項」の種類
+     */
     NinteiChosaTokkiJikou getTokkijiko() {
         return PanelSessionAccessor.get(this, TOKKIJIKO_NO_KEY.value(), TOKKIJIKO_NO_KEY.type());
     }

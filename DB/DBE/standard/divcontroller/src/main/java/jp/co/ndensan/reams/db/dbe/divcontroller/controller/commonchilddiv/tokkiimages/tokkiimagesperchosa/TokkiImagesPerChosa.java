@@ -39,7 +39,7 @@ public class TokkiImagesPerChosa {
      * @return
      */
     public ResponseData<TokkiImagesPerChosaDiv> onClick_btnDisplay(TokkiImagesPerChosaDiv div) {
-        if (!ResponseHolder.isReRequest() && isDirty(div.getEditting())) {
+        if (!ResponseHolder.isReRequest() && isDirty(div.getEditing())) {
             return ResponseData.of(div)
                     .addMessage(UrQuestionMessages.入力内容の破棄.getMessage())
                     .respond();
@@ -47,7 +47,7 @@ public class TokkiImagesPerChosa {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        div.haveSelfDisplaySelectedTokkiJiko();
+        div.renderSelectedTokkiJiko();
         return ResponseData.of(div).respond();
     }
 
