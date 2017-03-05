@@ -86,7 +86,6 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
         source.nigoKensu = new RString(審査会審査結果等.get判定件数_2号被保険者数());
         source.zaitakuKensu = new RString(審査会審査結果等.get判定件数_在宅数());
         source.shisetsuKensu = new RString(審査会審査結果等.get判定件数_施設数());
-        source.hokengaiShisetsuKensu = new RString("0");
         source.shinkiKensu = new RString(審査会審査結果等.get判定件数_の新規件数());
         source.kubunHenkoKensu = new RString(審査会審査結果等.get判定件数_の状態区分変更件数());
         source.koshinKensu = new RString(審査会審査結果等.get判定件数_の更新件数());

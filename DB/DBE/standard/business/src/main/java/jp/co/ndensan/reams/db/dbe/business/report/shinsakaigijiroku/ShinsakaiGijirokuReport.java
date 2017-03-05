@@ -239,10 +239,10 @@ public class ShinsakaiGijirokuReport extends Report<ShinsakaiGijirokuReportSourc
                 new RString(entity.get更新申請内2号被保険者数()),
                 new RString(entity.get更新申請在宅数()),
                 new RString(entity.get更新申請施設数())));
-        resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get判定件数()),
-                new RString(entity.get判定件数_2号被保険者数()),
-                new RString(entity.get判定件数_在宅数()),
-                new RString(entity.get判定件数_施設数())));
+        resultList.add(new SanGyoumeYonJyoIchiRanEntity(new RString(entity.get状態区分変更件数()),
+                new RString(entity.get状変の内2号被保険者数()),
+                new RString(entity.get状変在宅数()),
+                new RString(entity.get状変施設数())));
 
         return resultList;
     }
