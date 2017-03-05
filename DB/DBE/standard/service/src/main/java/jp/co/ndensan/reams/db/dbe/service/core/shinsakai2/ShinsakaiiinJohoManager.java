@@ -96,17 +96,26 @@ public class ShinsakaiiinJohoManager {
     /**
      * 介護認定審査会委員全件情報を取得します。
      *
+     * 以下の全条件に該当する人を抽出します。
+     * <ul>
+     * <li>指定の開催番号に該当しない。</li>
+     * <li>指定の開催年月日に割り当てられていない。</li>
+     * <li>指定の基準日で有効。</li>
+     * </ul>
+     *
+     * @param 開催番号 開催番号
      * @param kaisaiYMD 開催年月日
+     * @param 基準日 基準日
      * @return SearchResult<ShinsakaiiinJoho>
      */
     @Transaction
-    public SearchResult<ShinsakaiiinJoho> searchAll審査会委員情報(RString kaisaiYMD, RDate 基準日) {
+    public SearchResult<ShinsakaiiinJoho> searchAll審査会委員情報(RString 開催番号, RString kaisaiYMD, RDate 基準日) {
         requireNonNull(kaisaiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("開催年月日"));
         IShinsakaiIinWaritsukeMapper mapper = mapperProvider.create(IShinsakaiIinWaritsukeMapper.class);
         List<ShinsakaiiinJohoRelateEntity> shinsakaiiinJohoList
                 = mapper.get審査会委員情報_全体表示(
                         ShinsakaiIinWaritsukeParameter.createShinsakaiIinWaritsukeParameter(
-                                RString.EMPTY,
+                                開催番号,
                                 LasdecCode.EMPTY,
                                 kaisaiYMD, 基準日));
         List<ShinsakaiiinJoho> businessList = new ArrayList();

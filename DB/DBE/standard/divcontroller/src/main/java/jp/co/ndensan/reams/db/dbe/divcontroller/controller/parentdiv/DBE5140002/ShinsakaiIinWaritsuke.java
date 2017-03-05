@@ -64,7 +64,7 @@ public class ShinsakaiIinWaritsuke {
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onLoad(ShinsakaiIinWaritsukeDiv div) {
         List<ShinsakaiKaisaiYoteiJoho> kaisaiYoteiJohoList = kaisaiYoteiJohomanager
@@ -83,7 +83,7 @@ public class ShinsakaiIinWaritsuke {
      * 「構成一覧に割り付ける」ボタン押下、「介護認定審査会委員構成一覧」に移動処理します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_WaritukeruBtn(ShinsakaiIinWaritsukeDiv div) {
         List<dgShinsakaiIinIchiran_Row> selectedItems = div.getWaritsuke().getDgShinsakaiIinIchiran().getSelectedItems();
@@ -102,7 +102,7 @@ public class ShinsakaiIinWaritsuke {
      * 「構成一覧から解除する」ボタン押下、「介護認定審査会委員一覧」に移動処理します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_KaijoBtn(ShinsakaiIinWaritsukeDiv div) {
         List<dgShinsakaiIinKoseiIchiran_Row> selectedItems = div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getSelectedItems();
@@ -124,7 +124,7 @@ public class ShinsakaiIinWaritsuke {
      * 「全体を表示する」ボタン押下、介護認定審査会委員一覧Grid検索します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_ZenntaiBtn(ShinsakaiIinWaritsukeDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForAllDisplayBtn();
@@ -132,8 +132,8 @@ public class ShinsakaiIinWaritsuke {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         RDate 基準日 = div.getWaritsuke().getTxtKijunYMD().getValue();
-        List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.searchAll審査会委員情報(開催年月日, 基準日).records();
-        getHandler(div).setAllDataGrid(iinJoholist);
+        List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.searchAll審査会委員情報(開催番号, 開催年月日, 基準日).records();
+        getHandler(div).setGridToDataRemovingCurrentKoseiIins(iinJoholist);
         return ResponseData.of(div).respond();
     }
 
@@ -141,7 +141,7 @@ public class ShinsakaiIinWaritsuke {
      * 「開催予定に戻る」ボタン押下、元画面へ移転します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_ModoruBtn(ShinsakaiIinWaritsukeDiv div) {
         return ResponseData.of(div).respond();
@@ -151,7 +151,7 @@ public class ShinsakaiIinWaritsuke {
      * 「保存する」ボタン押下、更新実施。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_HozonnBtn(ShinsakaiIinWaritsukeDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForHozonnBtn();
