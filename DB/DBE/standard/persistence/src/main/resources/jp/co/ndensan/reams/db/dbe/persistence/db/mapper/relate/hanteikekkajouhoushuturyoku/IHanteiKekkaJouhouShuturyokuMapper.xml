@@ -36,7 +36,7 @@
         INNER JOIN
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" as DbT5501
         ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT7211GaibuRenkeiDataoutputJoho" as DbT7211
         ON DbT7211."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         INNER JOIN

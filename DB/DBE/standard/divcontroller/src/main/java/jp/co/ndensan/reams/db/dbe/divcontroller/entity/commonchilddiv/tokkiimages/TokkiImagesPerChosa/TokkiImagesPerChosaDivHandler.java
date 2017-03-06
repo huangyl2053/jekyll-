@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerChosa;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 
 /**
  * {@link TokkiImagesPerChosaDiv}の制御を行います。
@@ -200,15 +202,13 @@ public class TokkiImagesPerChosaDivHandler {
         }
 
         private static List<KeyValueDataSource> createDataSource(NinteichosahyoTokkijikos nts) {
-            List<KeyValueDataSource> list = new ArrayList<>();
+            Map<RString, RString> map = new HashMap<>();
             for (NinteichosahyoTokkijiko n : nts) {
                 NinteiChosaTokkiJikou tokki = n.getTokkiJiko();
                 RString tokkiNo = tokki.get認定調査票_特記情報_認定調査特記事項番号();
-                list.add(new KeyValueDataSource(
-                        tokkiNo,
-                        tokkiNo.concat(tokki.get特記事項名())
-                ));
+                map.put(tokkiNo, tokkiNo.concat(tokki.get特記事項名()));
             }
+            List<KeyValueDataSource> list = KeyValueDataSourceConverter.getDataSource(map);
             Collections.sort(list, VALUE_ASC);
             return list;
         }

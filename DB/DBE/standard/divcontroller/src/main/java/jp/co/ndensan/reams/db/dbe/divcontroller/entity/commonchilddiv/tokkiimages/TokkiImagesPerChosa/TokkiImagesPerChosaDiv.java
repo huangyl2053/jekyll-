@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -35,7 +37,6 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("TokkiJikoSelecting")
     private TokkiJikoSelectingDiv TokkiJikoSelecting;
     @JsonProperty("repTokkiJikos")
@@ -309,7 +310,7 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
 
     @Override
     public ShinseishoKanriNo getShinseishoKanriNo() {
-        return new ShinseishoKanriNo(DataPassingConverter.deserialize(this.hdnShinseishoKanriNoValue, RString.class));
+        return new ShinseishoKanriNo(this.hdnShinseishoKanriNoValue);
     }
 
     @Override
