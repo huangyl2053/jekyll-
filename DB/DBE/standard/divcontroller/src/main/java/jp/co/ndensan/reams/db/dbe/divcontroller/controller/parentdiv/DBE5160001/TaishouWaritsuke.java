@@ -104,11 +104,17 @@ public class TaishouWaritsuke {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         候補者一覧データ空チェック(pairs, div);
         候補者未選択チェック(pairs, div);
-        割付人数チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
+            if (!getHandler(div).is割付チェックOK(div)) {
+                return ResponseData.of(div).addMessage(DbeWarningMessages.予定定員を超過割付確認.getMessage()).respond();
+            }
+        }
+        if (!ResponseHolder.isReRequest()
+                || (new RString(DbeWarningMessages.予定定員を超過割付確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes))) {
             for (dgWaritsukeKohoshaIchiran_Row row : div.getDgWaritsukeKohoshaIchiran().getSelectedItems()) {
                 if (!getHandler(div).isオブザーバーチェックOK(row)) {
                     return ResponseData.of(div).addMessage(DbeWarningMessages.申請者と介護認定審査会委員に関係.getMessage()).respond();
@@ -369,16 +375,6 @@ public class TaishouWaritsuke {
                 .thenAdd(選択されていない).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
                 選択されていない, div.getDgTaishoshaIchiran()).build().check(messages));
-        return pairs;
-    }
-
-    private ValidationMessageControlPairs 割付人数チェック(ValidationMessageControlPairs pairs, TaishouWaritsukeDiv div) {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        DBE5160001ErrorMessage 割付可能人数は0です_割付不可 = new DBE5160001ErrorMessage(DbeErrorMessages.割付可能人数は0です_割付不可);
-        messages.add(ValidateChain.validateStart(div).ifNot(TaishouWaritsukeDivSpec.割付人数チェック)
-                .thenAdd(割付可能人数は0です_割付不可).messages());
-        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                割付可能人数は0です_割付不可, div.getBtnWaritsuke()).build().check(messages));
         return pairs;
     }
 

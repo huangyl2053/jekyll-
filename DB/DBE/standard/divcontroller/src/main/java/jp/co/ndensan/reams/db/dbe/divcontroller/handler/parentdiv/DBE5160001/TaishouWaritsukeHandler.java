@@ -368,6 +368,17 @@ public class TaishouWaritsukeHandler {
                 && !row.getObserverCheckSonota().getIcon().equals(IconType.Warning);
     }
 
+    /**
+     * is割付チェックOK。
+     *
+     * @param div 介護認定審査会対象者割付
+     * @return true:予定定員内 false:予定定員外
+     */
+    public boolean is割付チェックOK(TaishouWaritsukeDiv div) {
+        return div.getTxtWaritsukeNinzu().getValue().intValue() + div.getDgWaritsukeKohoshaIchiran().getSelectedItems().size()
+                <= div.getTxtYoteiTeiin().getValue().intValue();
+    }
+
     private boolean isオブザーバーチェックOK(ShinseishoKanriNo shinseishoKanriNo, boolean is主治医, boolean is調査員, boolean is入所施設) {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         ParamEntity entity = finder.getParamData(shinseishoKanriNo);
