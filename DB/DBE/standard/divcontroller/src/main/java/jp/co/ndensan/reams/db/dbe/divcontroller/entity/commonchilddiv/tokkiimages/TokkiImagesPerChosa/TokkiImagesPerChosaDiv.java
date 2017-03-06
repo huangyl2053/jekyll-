@@ -4,23 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.TokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.TokkiImagesPerKomokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -29,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChosaDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
@@ -253,7 +249,7 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     }
 
     @JsonIgnore
-    public void setDdlTokkiJikoNos(DropDownList ddlTokkiJikoNos) {
+    public void  setDdlTokkiJikoNos(DropDownList ddlTokkiJikoNos) {
         this.getTokkiJikoSelecting().setDdlTokkiJikoNos(ddlTokkiJikoNos);
     }
 
@@ -263,7 +259,7 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     }
 
     @JsonIgnore
-    public void setBtnToDisplay(Button btnToDisplay) {
+    public void  setBtnToDisplay(Button btnToDisplay) {
         this.getTokkiJikoSelecting().setBtnToDisplay(btnToDisplay);
     }
 

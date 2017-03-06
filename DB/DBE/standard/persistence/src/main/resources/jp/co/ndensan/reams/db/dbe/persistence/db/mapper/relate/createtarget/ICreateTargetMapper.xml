@@ -35,6 +35,8 @@
               ON dbt5101."shoKisaiHokenshaNo" = dbt7051."shoKisaiHokenshaNo" 
             INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbt5102 
               ON dbt5101."shinseishoKanriNo" = dbt5102."shinseishoKanriNo" 
+             AND not exists(select 'x' from rgdb."DbT5129Tennyu" as dbt5129 
+                where dbt5129."shinseishoKanriNo" = dbt5102."shinseishoKanriNo")
             INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbt5105 
               ON dbt5101."shinseishoKanriNo" = dbt5105."shinseishoKanriNo" 
               AND dbt5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
@@ -60,10 +62,10 @@
                 AND dbt5101."ninteiShinseiYMD" <![CDATA[<=]]> #{申請日_終了}
             </if>
             <if test="ninnteiKaishi">
-                AND #{認定日_開始} <![CDATA[<=]]> dbt5102."nijiHanteiNinteiYukoKaishiYMD"
+                AND #{認定日_開始} <![CDATA[<=]]> dbt5102."nijiHanteiYMD"
             </if>
             <if test="ninnteiShuuryou">
-                AND dbt5102."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{認定日_終了}
+                AND dbt5102."nijiHanteiYMD" <![CDATA[<=]]> #{認定日_終了}
             </if>
             <if test="hihokenshaNo!=null and hihokenshaNo.toString()!=''">
                 AND dbt5101."hihokenshaNo" = #{hihokenshaNo}
@@ -97,6 +99,8 @@
               ON dbt5101."shoKisaiHokenshaNo" = dbt7051."shoKisaiHokenshaNo" 
             INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbt5102 
               ON dbt5101."shinseishoKanriNo" = dbt5102."shinseishoKanriNo" 
+             AND not exists(select 'x' from rgdb."DbT5129Tennyu" as dbt5129 
+                where dbt5129."shinseishoKanriNo" = dbt5102."shinseishoKanriNo")
             INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbt5105 
               ON dbt5101."shinseishoKanriNo" = dbt5105."shinseishoKanriNo" 
               AND dbt5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 

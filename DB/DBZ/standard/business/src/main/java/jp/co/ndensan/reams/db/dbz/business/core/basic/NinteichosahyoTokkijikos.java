@@ -87,7 +87,7 @@ public class NinteichosahyoTokkijikos implements Iterable<NinteichosahyoTokkijik
         return new IPredicate<NinteichosahyoTokkijiko>() {
             @Override
             public boolean evaluate(NinteichosahyoTokkijiko t) {
-                return Objects.equals(t.get認定調査依頼履歴番号(), remban);
+                return Objects.equals(t.get認定調査特記事項連番(), remban);
             }
         };
     }

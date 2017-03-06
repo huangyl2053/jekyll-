@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoMana
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -192,13 +193,15 @@ public class TokkiImagesPerChosaDivHandler {
             }
             RString key = dataSource.get(0).getKey();
             div.getDdlTokkiJikoNos().setSelectedKey(key);
-            div.getRepTokkiJikos().getNewRepeatControlInstance()
-                    .initialize(
-                            div.getDirectoryPath(),
-                            nts,
-                            NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
-                            OPERATION
-                    );
+            div.getRepTokkiJikos().setRepeateData(new ArrayList<ITokkiImagesPerKomokuDiv>());
+            ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
+            komoku.initialize(
+                    div.getDirectoryPath(),
+                    nts,
+                    NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
+                    OPERATION
+            );
+            div.getRepTokkiJikos().getRepeateData().add(komoku);
         }
 
         private static List<KeyValueDataSource> createDataSource(NinteichosahyoTokkijikos nts) {
@@ -206,7 +209,7 @@ public class TokkiImagesPerChosaDivHandler {
             for (NinteichosahyoTokkijiko n : nts) {
                 NinteiChosaTokkiJikou tokki = n.getTokkiJiko();
                 RString tokkiNo = tokki.get認定調査票_特記情報_認定調査特記事項番号();
-                map.put(tokkiNo, tokkiNo.concat(tokki.get特記事項名()));
+                map.put(tokkiNo, new RStringBuilder().append(tokkiNo).append(RString.HALF_SPACE).append(tokki.get特記事項名()).toRString());
             }
             List<KeyValueDataSource> list = KeyValueDataSourceConverter.getDataSource(map);
             Collections.sort(list, VALUE_ASC);
@@ -216,14 +219,15 @@ public class TokkiImagesPerChosaDivHandler {
         @Override
         protected void renderSelectedTokkiJiko() {
             RString key = div.getDdlTokkiJikoNos().getSelectedKey();
-            div.getRepTokkiJikos().setRepeateData(Collections.<ITokkiImagesPerKomokuDiv>emptyList());
-            div.getRepTokkiJikos().getNewRepeatControlInstance()
-                    .initialize(
-                            div.getDirectoryPath(),
-                            findNinteiChosaTokkiJikos(),
-                            NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
-                            OPERATION
-                    );
+            div.getRepTokkiJikos().setRepeateData(new ArrayList<ITokkiImagesPerKomokuDiv>());
+            ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
+            komoku.initialize(
+                    div.getDirectoryPath(),
+                    findNinteiChosaTokkiJikos(),
+                    NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
+                    OPERATION
+            );
+            div.getRepTokkiJikos().getRepeateData().add(komoku);
         }
     }
 
@@ -238,7 +242,7 @@ public class TokkiImagesPerChosaDivHandler {
         @Override
         protected void initialize() {
             controlsForEdit().setDisplayNone(true);
-
+            div.getRepTokkiJikos().setRepeateData(new ArrayList<ITokkiImagesPerKomokuDiv>());
             final RString directoryPath = div.getDirectoryPath();
             final NinteichosahyoTokkijikos nts = findNinteiChosaTokkiJikos();
             for (NinteiChosaTokkiJikou t : NinteiChosaTokkiJikou.values()) {
@@ -248,6 +252,7 @@ public class TokkiImagesPerChosaDivHandler {
                 }
                 ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
                 komoku.initialize(directoryPath, nts, t, OPERATION);
+                div.getRepTokkiJikos().getRepeateData().add(komoku);
             }
         }
     }

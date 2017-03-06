@@ -787,7 +787,9 @@
         , "nijiHanteiKekkaInputHoho"
         , "nijiHanteiKekkaInputYMD" 
         FROM
-        rgdb."DbT5102NinteiKekkaJoho" 
+        rgdb."DbT5102NinteiKekkaJoho" as dbt5102
+        where not exists(select 'x' from rgdb."DbT5129Tennyu" as dbt5129 
+            where dbt5129."shinseishoKanriNo" = dbt5102."shinseishoKanriNo")
         <if test="isTennyuShiboSyuturyoku">
             UNION ALL
             SELECT
@@ -846,9 +848,9 @@
         ON "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo" = "SoshonDataSakuseiTaishosha"."shinseishoKanriNo"
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" "dbT5105_NinteiKanryoJoho" ON "dbT5105_NinteiKanryoJoho"."shinseishoKanriNo" = "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5502ShinsakaiWariateJoho" DbT5502 ON DbT5502."shinseishoKanriNo" = "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo"
-        INNER JOIN
+        LEFT JOIN
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501 ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS "dbT5121_ShinseiRirekiJoho" 
         ON "dbT5101_NinteiShinseiJoho"."shinseishoKanriNo" = "dbT5121_ShinseiRirekiJoho"."shinseishoKanriNo" 

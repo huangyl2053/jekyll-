@@ -57,6 +57,7 @@ final class TokkiJikoPiece {
         this.clearAll();
         if (nts.isEmpty()) {
             this.setDisplayNone(true);
+            return;
         }
         this.setDisplayNone(false);
         boolean maskExists = nts.containsMasked();
