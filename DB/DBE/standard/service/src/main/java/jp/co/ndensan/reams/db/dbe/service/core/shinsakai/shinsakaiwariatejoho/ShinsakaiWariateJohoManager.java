@@ -172,7 +172,6 @@ public class ShinsakaiWariateJohoManager {
         if (!介護認定審査会割当情報.hasChanged()) {
             return false;
         }
-        save要介護認定申請情報リスト(介護認定審査会割当情報.getNinteiShinseiJoho2List());
         return 1 == dac.saveOrDeletePhysicalBy(介護認定審査会割当情報.toEntity());
     }
 
