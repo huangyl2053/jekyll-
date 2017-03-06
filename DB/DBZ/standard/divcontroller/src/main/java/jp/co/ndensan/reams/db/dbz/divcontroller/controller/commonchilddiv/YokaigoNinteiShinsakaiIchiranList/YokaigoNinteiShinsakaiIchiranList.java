@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisa
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigoninteishinsakaiichiranlist.YokaigoNinteiShinsakaiIchiranListHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,6 +79,9 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         div.getDgShinsakaiIchiran().getDataSource().clear();
         div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(0);
         div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(0);
@@ -126,7 +130,9 @@ public class YokaigoNinteiShinsakaiIchiranList {
                 createInstance().get審査会一覧(parameter);
         if (審査会一覧 == null || 審査会一覧.records().isEmpty()) {
             validationMessages = getHandler(div).該当データが存在のチェック();
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            }
         }
         getHandler(div).set審査会委員一覧(審査会一覧, div.getTxtSaidaiHyojiKensu().getValue());
         return ResponseData.of(div).respond();

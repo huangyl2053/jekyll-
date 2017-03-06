@@ -13,11 +13,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -97,6 +99,9 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnDisplay(NinteiChosaSchedulePanelDiv ninteiDiv) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(ninteiDiv).respond();
+        }
         Seireki date2 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
         FlexibleDate date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()), Integer.parseInt(date2.getMonth().toString()), 1);
         NinteiChousaSukejuruParameter ninteiParameter = NinteiChousaSukejuruParameter.
@@ -108,7 +113,8 @@ public class NinteiChosaSchedulePanel {
         if (ninteiList == null || ninteiList.isEmpty()) {
             ValidationMessageControlPairs validationMessages = createHandlerOf(ninteiDiv).check_btnKakuninn(ninteiDiv);
             if (validationMessages.iterator().hasNext()) {
-                return ResponseData.of(ninteiDiv).addValidationMessages(validationMessages).respond();
+                ninteiDiv.getDgNinteiChosaSchedule().clearSource();
+                return ResponseData.of(ninteiDiv).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
         }
         createHandlerOf(ninteiDiv).kennsaku(ninteiList);
