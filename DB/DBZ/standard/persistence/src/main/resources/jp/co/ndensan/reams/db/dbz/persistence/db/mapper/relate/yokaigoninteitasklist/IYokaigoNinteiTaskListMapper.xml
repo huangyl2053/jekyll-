@@ -1000,8 +1000,8 @@
         DbT5913."chosainShimei",
         DbT5913."chikuCode",
         DbT5201."ninteichosaIraiRirekiNo",
-        DbT5101."ninteiChosaItakusakiCode",
-        DbT5101."ninteiChosainCode",
+        DbT5202."chosaItakusakiCode" AS "ninteiChosaItakusakiCode",
+        DbT5202."chosainCode" AS "ninteiChosainCode",
         DbT5203."shinseishoKanriNo" AS "DbT5203_shinseishoKanriNo",
         DbT5205."shinseishoKanriNo" AS "DbT5205_shinseishoKanriNo",
         DbT5206."shinseishoKanriNo" AS "DbT5206_shinseishoKanriNo"
@@ -1033,11 +1033,11 @@
         AND DbT5202_temp."gaikyoChosaTextImageKubun" > DbT5202."gaikyoChosaTextImageKubun"
         )
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
-        ON  DbT5101."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+        ON  DbT5202."chosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
         AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" DbT5913
-        ON  DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+        ON  DbT5913."ninteiChosaItakusakiCode" = DbT5202."chosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5202."chosainCode"
         AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
         LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" DbT5203
         ON DbT5203."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
