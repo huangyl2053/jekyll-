@@ -271,12 +271,12 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     //--------------- この行より下にコードを追加してください -------------------
     //
     @Override
-    public void initialize(RString directortyPath) {
+    public void initialize(RString directoryPath) {
         newHandler(this).initialize(directoryPath);
     }
 
     @Override
-    public void refresh(RString directortyPath) {
+    public void refresh(RString directoryPath) {
         newHandler(this).refresh(directoryPath);
     }
 
