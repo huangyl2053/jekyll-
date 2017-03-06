@@ -200,7 +200,8 @@ public class TokkiImagesPerChosaDivHandler {
                     NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
                     OPERATION
             );
-            div.getRepTokkiJikos().getRepeateData().add(0, komoku);
+            div.getRepTokkiJikos().getRepeateData().add(komoku);
+            div.getRepTokkiJikos().getRepeateData().remove(0);
         }
 
         private static List<KeyValueDataSource> createDataSource(NinteichosahyoTokkijikos nts) {
@@ -225,7 +226,8 @@ public class TokkiImagesPerChosaDivHandler {
                     NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
                     OPERATION
             );
-            div.getRepTokkiJikos().getRepeateData().add(0, komoku);
+            div.getRepTokkiJikos().getRepeateData().add(komoku);
+            div.getRepTokkiJikos().getRepeateData().remove(0);
         }
     }
 
