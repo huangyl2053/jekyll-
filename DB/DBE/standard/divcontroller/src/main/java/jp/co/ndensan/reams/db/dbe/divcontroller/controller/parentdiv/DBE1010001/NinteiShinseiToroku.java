@@ -89,7 +89,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -326,6 +325,7 @@ public class NinteiShinseiToroku {
 
             div.getCcdShinseiTodokedesha().initialize(new NinteiShinseiTodokedeshaDataPassModel());
             getHandler(div).setCcdShinseiTodokedesha(div, ninteiTandokuDounyuFlag);
+            div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().setSelectedKey(ShinseiTodokedeDaikoKubunCode.本人.getCode());
             if (result == null) {
                 div.getCcdKaigoNinteiShinseiKihon().setInputMode(new RString("ShinkiShinseiMode"));
                 div.getCcdZenkaiNinteiKekkaJoho().getTxtYukoKikanFrom().setDisabled(true);
