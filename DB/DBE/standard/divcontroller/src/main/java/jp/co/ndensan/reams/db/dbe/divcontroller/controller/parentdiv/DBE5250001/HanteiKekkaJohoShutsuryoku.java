@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class HanteiKekkaJohoShutsuryoku {
 
     private static final RString モード = new RString("hanteiKekka");
-    private static final RString 帳票発行ボタン = new RString("btnHanteiKekkaIchiran");
     private static final RString 一覧グリッド高さ = new RString("300");
     private static final RString config_1 = new RString("1");
     private static final RString config_2 = new RString("2");
@@ -44,7 +42,6 @@ public class HanteiKekkaJohoShutsuryoku {
      * @return ResponseData<HanteiKekkaJohoShutsuryokuDiv> 判定結果情報出力（介護認定審査会）Div
      */
     public ResponseData<HanteiKekkaJohoShutsuryokuDiv> onLoad(HanteiKekkaJohoShutsuryokuDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(帳票発行ボタン, false);
         div.getCcdIShinsakaiIchiranList().initialize(モード);
         Map<RString, RString> map = new LinkedHashMap<>();
         map.put(DBE525001SelectChohyoType.要介護認定判定結果一覧表A3版.getKey(), DBE525001SelectChohyoType.要介護認定判定結果一覧表A3版.get帳票名称());
