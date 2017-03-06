@@ -925,13 +925,15 @@ public class NinteiShinseiToroku {
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().replace(削除.toString()).getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            if (認定申請情報登録完了年月日 != null && !認定申請情報登録完了年月日.isEmpty()) {
+            NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
+            ShujiiIkenshoIraiJohoManager shujiiIkenshoIraiJohoManager = ShujiiIkenshoIraiJohoManager.createInstance();
+            List<NinteichosaIraiJoho> ninteichosaIraiJohoList = ninteichosaIraiJohoManager.get認定調査依頼情報リストBy申請書管理番号(申請書管理番号);
+            List<ShujiiIkenshoIraiJoho> shujiiIkenshoIraiJohoList = shujiiIkenshoIraiJohoManager.get主治医意見書作成依頼情報リストBy申請書管理番号(申請書管理番号);
+            if (!ninteichosaIraiJohoList.isEmpty() || !shujiiIkenshoIraiJohoList.isEmpty()) {
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv(), shinseiJoho);
                 shinseiJohoBuilder.set論理削除フラグ(true);
                 manager.save要介護認定申請情報(shinseiJohoBuilder.build().modifiedModel());
-                doDel認定調査and主治医意見書作成依頼情報(申請書管理番号);
-
+                doDel認定調査and主治医意見書作成依頼情報(ninteichosaIraiJohoList, shujiiIkenshoIraiJohoList);
             } else {
                 manager.deleteAllBy申請書管理番号(申請書管理番号.value());
             }
@@ -945,15 +947,12 @@ public class NinteiShinseiToroku {
         return response.respond();
     }
 
-    private void doDel認定調査and主治医意見書作成依頼情報(ShinseishoKanriNo 申請書管理番号) {
+    private void doDel認定調査and主治医意見書作成依頼情報(List<NinteichosaIraiJoho> ninteichosaIraiJohoList, List<ShujiiIkenshoIraiJoho> shujiiIkenshoIraiJohoList) {
         NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
-        List<NinteichosaIraiJoho> list = ninteichosaIraiJohoManager.get認定調査依頼情報リストBy申請書管理番号(申請書管理番号);
-        for (NinteichosaIraiJoho ninteichosaIraiJoho : list) {
+        for (NinteichosaIraiJoho ninteichosaIraiJoho : ninteichosaIraiJohoList) {
             ninteichosaIraiJohoManager.save(ninteichosaIraiJoho.createBuilderForEdit().set論理削除フラグ(true).build());
         }
-
         ShujiiIkenshoIraiJohoManager shujiiIkenshoIraiJohoManager = ShujiiIkenshoIraiJohoManager.createInstance();
-        List<ShujiiIkenshoIraiJoho> shujiiIkenshoIraiJohoList = shujiiIkenshoIraiJohoManager.get主治医意見書作成依頼情報リストBy申請書管理番号(申請書管理番号);
         for (ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho : shujiiIkenshoIraiJohoList) {
             shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho.createBuilderForEdit().set論理削除フラグ(true).build());
         }

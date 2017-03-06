@@ -148,6 +148,7 @@ public class NinteiShinseiTorokuManager {
         mapper.deleteDbT5123PhysicalByShinseishoKanriNo(申請書管理番号);
         mapper.deleteDbT5150PhysicalByShinseishoKanriNo(申請書管理番号);
         mapper.deleteDbT5590PhysicalByShinseishoKanriNo(申請書管理番号);
+        mapper.deleteDbT5105PhysicalByShinseishoKanriNo(申請書管理番号);
         mapper.deleteDbT5102PhysicalByShinseishoKanriNo(申請書管理番号);
         mapper.deleteDbT5101PhysicalByShinseishoKanriNo(申請書管理番号);
     }

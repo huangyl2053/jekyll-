@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjohogogitai.ShinsakaiIinJohoGoitaiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE514001.DBE514001_ShinsakaiScheduleParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.DBE5140003TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.ShinsakaiScheduleHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.dgShinsakaiScheduleKagami_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.ShinsakaiScheduleHakkoValidationHandler;
@@ -143,7 +144,7 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<ShinsakaiScheduleHakkoDiv>
      */
     public ResponseData<ShinsakaiScheduleHakkoDiv> onClick_btnBackToKaisaiYotei(ShinsakaiScheduleHakkoDiv div) {
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(DBE5140003TransitionEventName.開催予定登録に戻る).respond();
     }
 
     /**

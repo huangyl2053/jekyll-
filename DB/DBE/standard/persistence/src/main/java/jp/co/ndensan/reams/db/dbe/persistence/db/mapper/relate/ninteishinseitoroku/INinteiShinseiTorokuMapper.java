@@ -41,11 +41,18 @@ public interface INinteiShinseiTorokuMapper {
     void deleteDbT5101PhysicalByShinseishoKanriNo(RString 申請書管理番号);
 
     /**
-     * を削除します。
+     * DbT5102を削除します。
      *
      * @param 申請書管理番号 RString
      */
     void deleteDbT5102PhysicalByShinseishoKanriNo(RString 申請書管理番号);
+
+    /**
+     * DbT5105を削除します。
+     *
+     * @param 申請書管理番号 RString
+     */
+    void deleteDbT5105PhysicalByShinseishoKanriNo(RString 申請書管理番号);
 
     /**
      * DbT5120を削除します。

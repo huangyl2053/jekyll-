@@ -370,6 +370,7 @@
 
     <delete id="deleteDbT5101PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5101NinteiShinseiJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo} </delete>
     <delete id="deleteDbT5102PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5102NinteiKekkaJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
+    <delete id="deleteDbT5105PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5105NinteiKanryoJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5120PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5120ShinseitodokedeJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5121PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5121ShinseiRirekiJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5123PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5123NinteiKeikakuJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
