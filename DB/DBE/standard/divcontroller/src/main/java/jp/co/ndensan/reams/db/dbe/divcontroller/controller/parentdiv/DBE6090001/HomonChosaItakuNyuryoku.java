@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6090001.Hom
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahoshujissekijoho.INinteiChosaHoshuJissekiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -76,6 +77,9 @@ public class HomonChosaItakuNyuryoku {
      * @return ResponseData<HomonChosaItakuNyuryokuDiv>
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnKensaku(HomonChosaItakuNyuryokuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairs = getValidatisonHandlerr(div).必須入力チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -84,7 +88,7 @@ public class HomonChosaItakuNyuryoku {
         getHandler(div).setDgChosain(調査員情報List);
         ValidationMessageControlPairs validationMessages = getValidatisonHandlerr(div).データ空のチェック();
         if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).setState(DBE6090001StateName.調査員一覧);
     }

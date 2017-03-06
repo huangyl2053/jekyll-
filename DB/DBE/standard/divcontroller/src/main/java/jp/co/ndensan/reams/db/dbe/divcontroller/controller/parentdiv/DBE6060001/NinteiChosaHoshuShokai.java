@@ -20,12 +20,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -61,6 +63,9 @@ public class NinteiChosaHoshuShokai {
      * @return ResponseData<NinteiChosaHoshuShokaiDiv>
      */
     public ResponseData<NinteiChosaHoshuShokaiDiv> onClick_btnKensaku(NinteiChosaHoshuShokaiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         RString 依頼日開始 = RString.EMPTY;
         RString 依頼日終了 = RString.EMPTY;
         if (div.getTxtChosaIraibi().getFromValue() != null) {
@@ -76,7 +81,7 @@ public class NinteiChosaHoshuShokai {
                 div.getChosaIraibi().getCcdHokensya().getSelectedItem().get市町村名称(), getHandler(div).is広域(), getHandler(div).get市町村名());
         List<NinteichosahoshushokaiBusiness> 調査情報 = NinteiChosaHoshuShokaiFinder.createInstance().get認定調査報酬情報(chosaParamter).records();
         if (調査情報.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).onClick_btnKensaku(調査情報);
         div.getChosaIraibi().setDisplayNone(true);
