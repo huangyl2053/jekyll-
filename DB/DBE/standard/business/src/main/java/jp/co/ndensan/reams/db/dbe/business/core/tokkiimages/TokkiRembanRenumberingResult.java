@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public final class TokkiRembanRenumberingResult {
 
-    private static final RString SEPARATOR = new RString(java.io.File.separator);
     private final NinteichosahyoTokkijikos tokkiJikos;
     private final Map</* 変更前連番 */ Integer, /* 変更後連番 */ Integer> editedRembans;
 
@@ -31,34 +30,76 @@ public final class TokkiRembanRenumberingResult {
     }
 
     /**
-     * @param fromDirectory コピー元のディレクトリ
-     * @param destDirectory コピー先のディレクトリ
+     * @return 変更のあったイメージファイル名すべて
      */
-    public void copyImagesRenaming(RString fromDirectory, RString destDirectory) {
+    public List<FileNameBeforeAfter> getRenamedImageNames() {
         final NinteiChosaTokkiJikou komoku = tokkiJikos.asTokkiJikoSet().iterator().next();
         Map<Integer, NinteichosahyoTokkijikos> mapByRemban = tokkiJikos.mapByRemban();
+        List<FileNameBeforeAfter> list = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : this.editedRembans.entrySet()) {
             int before = entry.getKey();
             int after = entry.getValue();
-            File.copy(composeImagePath(fromDirectory, komoku, before), composeImagePath(destDirectory, komoku, after));
+            list.add(FileNameBeforeAfter.effective(komoku, before, after));
             if (mapByRemban.get(before).containsMasked()) {
-                File.copy(composeBakImagePath(fromDirectory, komoku, before), composeBakImagePath(destDirectory, komoku, after));
+                list.add(FileNameBeforeAfter.backup(komoku, before, after));
             }
         }
+        return list;
     }
 
-    private static RString composeImagePath(RString directory, NinteiChosaTokkiJikou komoku, int remban) {
-        return new RStringBuilder(directory).append(SEPARATOR).append(komoku.getComposedImageFileName(remban)).toRString();
-    }
+    public static final class FileNameBeforeAfter {
 
-    private static RString composeBakImagePath(RString directory, NinteiChosaTokkiJikou komoku, int remban) {
-        return new RStringBuilder(directory).append(SEPARATOR).append(komoku.getComposedBakImageFileName(remban)).toRString();
+        private static final RString SEPARATOR = new RString(java.io.File.separator);
+        private final RString before;
+        private final RString after;
+
+        private FileNameBeforeAfter(RString before, RString after) {
+            this.before = before;
+            this.after = after;
+        }
+
+        private static FileNameBeforeAfter effective(NinteiChosaTokkiJikou komoku, int before, int after) {
+            return new FileNameBeforeAfter(
+                    komoku.getComposedImageFileName(before),
+                    komoku.getComposedImageFileName(after)
+            );
+        }
+
+        private static FileNameBeforeAfter backup(NinteiChosaTokkiJikou komoku, int before, int after) {
+            return new FileNameBeforeAfter(
+                    komoku.getComposedBakImageFileName(before),
+                    komoku.getComposedBakImageFileName(after)
+            );
+        }
+
+        /**
+         * @return 変更前のイメージファイル名
+         */
+        public RString getBeforeFileName() {
+            return this.before;
+        }
+
+        /**
+         * @param directory ディレクトリのパス
+         * @return 連番変更前の画像が指定のディレクトリに存在するとした場合のファイルパス文字列
+         */
+        public RString composeBeforePathAsIn(RString directory) {
+            return new RStringBuilder(directory).append(SEPARATOR).append(before).toRString();
+        }
+
+        /**
+         * @param directory ディレクトリのパス
+         * @return 連番変更後の画像が指定のディレクトリに存在するとした場合のファイルパス文字列
+         */
+        public RString composeAfterPathAsIn(RString directory) {
+            return new RStringBuilder(directory).append(SEPARATOR).append(after).toRString();
+        }
     }
 
     /**
      * @return 削除する要素（連番の変更ある物すべて）
      */
-    public Iterable<NinteichosahyoTokkijiko> deleting() {
+    public Iterable<NinteichosahyoTokkijiko> targetsToDelete() {
         List<NinteichosahyoTokkijiko> list = new ArrayList<>();
         Map<Integer, NinteichosahyoTokkijikos> mapByRemban = tokkiJikos.mapByRemban();
         for (Map.Entry<Integer, Integer> entry : this.editedRembans.entrySet()) {
@@ -78,7 +119,7 @@ public final class TokkiRembanRenumberingResult {
     /**
      * @return 追加する要素
      */
-    public Iterable<NinteichosahyoTokkijiko> adding() {
+    public Iterable<NinteichosahyoTokkijiko> targetsToAdd() {
         List<NinteichosahyoTokkijiko> list = new ArrayList<>();
         Map<Integer, NinteichosahyoTokkijikos> mapByRemban = tokkiJikos.mapByRemban();
         for (Map.Entry<Integer, Integer> entry : this.editedRembans.entrySet()) {

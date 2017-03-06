@@ -6,6 +6,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.Imagekan
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ShinsakaiWariateHistories;
 import static jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages.審査会結果登録済み_イメージ削除不可;
 import static jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages.審査会資料作成済みイメージ_削除確認;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.DBE5710001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710001.YokaigoninteiimagekanriDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710001.YokaigoninteiimagekanriHandler;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 要介護認定イメージ情報管理のコントローラです。
@@ -165,6 +167,21 @@ public class Yokaigoninteiimagekanri {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnNinteichosaRirekiNo(認定調査依頼履歴番号);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 特記連番修正ボタンがクリックされたときの処理です。
+     *
+     * @param div {@link YokaigoninteiimagekanriDiv}
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnTokkiRembanShusei(YokaigoninteiimagekanriDiv div) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        int 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+        div.setHdnShinseishoKanriNo(申請書管理番号);
+        div.setHdnNinteichosaRirekiNo(DataPassingConverter.serialize(認定調査依頼履歴番号));
+        div.setHdnTokkiShuseiOperation(DataPassingConverter.serialize(Operation.修正));
         return ResponseData.of(div).respond();
     }
 

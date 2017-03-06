@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImagePanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class ImagePanelDiv extends Panel {
     private ButtonDialog btnGaikyoChosa;
     @JsonProperty("btnChosahyoTokuki")
     private ButtonDialog btnChosahyoTokuki;
+    @JsonProperty("btnTokkiRembanShusei")
+    private ButtonDialog btnTokkiRembanShusei;
     @JsonProperty("btnGaikyoTokki")
     private ButtonDialog btnGaikyoTokki;
     @JsonProperty("btnIkenshoTeikei")
@@ -104,6 +106,24 @@ public class ImagePanelDiv extends Panel {
     @JsonProperty("btnChosahyoTokuki")
     public void setBtnChosahyoTokuki(ButtonDialog btnChosahyoTokuki) {
         this.btnChosahyoTokuki = btnChosahyoTokuki;
+    }
+
+    /*
+     * getbtnTokkiRembanShusei
+     * @return btnTokkiRembanShusei
+     */
+    @JsonProperty("btnTokkiRembanShusei")
+    public ButtonDialog getBtnTokkiRembanShusei() {
+        return btnTokkiRembanShusei;
+    }
+
+    /*
+     * setbtnTokkiRembanShusei
+     * @param btnTokkiRembanShusei btnTokkiRembanShusei
+     */
+    @JsonProperty("btnTokkiRembanShusei")
+    public void setBtnTokkiRembanShusei(ButtonDialog btnTokkiRembanShusei) {
+        this.btnTokkiRembanShusei = btnTokkiRembanShusei;
     }
 
     /*

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoninteiimagekanriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,6 +41,8 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     private RString hdnShokisaiHokenshaNo;
     @JsonProperty("hdnImageLocalCopyPath")
     private RString hdnImageLocalCopyPath;
+    @JsonProperty("hdnTokkiShuseiOperation")
+    private RString hdnTokkiShuseiOperation;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -184,6 +186,24 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     }
 
     /*
+     * gethdnTokkiShuseiOperation
+     * @return hdnTokkiShuseiOperation
+     */
+    @JsonProperty("hdnTokkiShuseiOperation")
+    public RString getHdnTokkiShuseiOperation() {
+        return hdnTokkiShuseiOperation;
+    }
+
+    /*
+     * sethdnTokkiShuseiOperation
+     * @param hdnTokkiShuseiOperation hdnTokkiShuseiOperation
+     */
+    @JsonProperty("hdnTokkiShuseiOperation")
+    public void setHdnTokkiShuseiOperation(RString hdnTokkiShuseiOperation) {
+        this.hdnTokkiShuseiOperation = hdnTokkiShuseiOperation;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -214,6 +234,16 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     @JsonIgnore
     public void  setBtnChosahyoTokuki(ButtonDialog btnChosahyoTokuki) {
         this.getImagePanel().setBtnChosahyoTokuki(btnChosahyoTokuki);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTokkiRembanShusei() {
+        return this.getImagePanel().getBtnTokkiRembanShusei();
+    }
+
+    @JsonIgnore
+    public void  setBtnTokkiRembanShusei(ButtonDialog btnTokkiRembanShusei) {
+        this.getImagePanel().setBtnTokkiRembanShusei(btnTokkiRembanShusei);
     }
 
     @JsonIgnore
