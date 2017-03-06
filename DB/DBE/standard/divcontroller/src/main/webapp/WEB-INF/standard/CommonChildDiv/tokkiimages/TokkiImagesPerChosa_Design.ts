@@ -1,13 +1,25 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="./../chosahyo/TokkiImagesPerKomoku.ts" />
+// <reference path="./../tokkiimages/TokkiImagesPerKomoku.ts" />
 
 module DBE {
 
      export module TokkiImagesPerChosa {
 
         export class Events {
+
+            public static onClick_btnDisplay(): string {
+                return "onClick_btnDisplay";
+            }
+
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+
+            public static onClick_btnSave(): string {
+                return "onClick_btnSave";
+            }
 
         }
 
@@ -32,6 +44,10 @@ module DBE {
 
             public TokkiImagesPerChosa(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public TokkiJikoSelecting(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TokkiJikoSelecting"));
             }
 
             public ddlTokkiJikoNos(): UZA.DropDownList {

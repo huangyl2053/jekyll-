@@ -293,9 +293,13 @@ public enum NinteiChosaTokkiJikou {
     認知症高齢者自立度("7-2", "認知症高齢者自立度", "702", "C3076-xx.png");
 
     public static final RString REMBAN_REPLACEE;
+    private static final RString PNG;
+    private static final RString BAK_PNG;
 
     static {
         REMBAN_REPLACEE = new RString("xx");
+        PNG = new RString(".png");
+        BAK_PNG = new RString("_BAK.png");
     }
 
     private final RString gamenJikouNo;
@@ -352,6 +356,14 @@ public enum NinteiChosaTokkiJikou {
      */
     public RString getComposedImageFileName(int remban) {
         return imageFile.replace(REMBAN_REPLACEE, new RString(remban - 1).padZeroToLeft(2));
+    }
+
+    /**
+     * @param remban 連番
+     * @return 連番を設定したイメージファイル名
+     */
+    public RString getComposedBakImageFileName(int remban) {
+        return getComposedImageFileName(remban).replace(PNG, BAK_PNG);
     }
 
     /**

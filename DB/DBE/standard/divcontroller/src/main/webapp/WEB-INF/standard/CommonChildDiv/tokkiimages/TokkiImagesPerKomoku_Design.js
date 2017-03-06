@@ -33,7 +33,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban1 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban1"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban1"));
             };
 
             Controls.prototype.imgTokki1 = function () {
@@ -49,7 +49,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban2 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban2"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban2"));
             };
 
             Controls.prototype.imgTokki2 = function () {
@@ -65,7 +65,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban3 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban3"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban3"));
             };
 
             Controls.prototype.imgTokki3 = function () {
@@ -81,7 +81,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban4 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban4"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban4"));
             };
 
             Controls.prototype.imgTokki4 = function () {
@@ -97,7 +97,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban5 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban5"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban5"));
             };
 
             Controls.prototype.imgTokki5 = function () {
@@ -113,7 +113,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban6 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban6"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban6"));
             };
 
             Controls.prototype.imgTokki6 = function () {
@@ -129,7 +129,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban7 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban7"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban7"));
             };
 
             Controls.prototype.imgTokki7 = function () {
@@ -145,7 +145,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban8 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban8"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban8"));
             };
 
             Controls.prototype.imgTokki8 = function () {
@@ -161,7 +161,7 @@ var DBE;
             };
 
             Controls.prototype.txtRemban9 = function () {
-                return new UZA.TextBox(this.convFiledName("txtRemban9"));
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban9"));
             };
 
             Controls.prototype.imgTokki9 = function () {

@@ -7,36 +7,42 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.tokki
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerChosa.TokkiImagesPerChosaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
+import jp.co.ndensan.reams.db.dbe.service.core.tokkiimages.TokkiRembanRenumberingService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.ExclusiveLock;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
+ * {@link TokkiImagesPerChosaDiv}のイベントを保持します。
  */
 public class TokkiImagesPerChosa {
 
     /**
-     *
-     * @param div
-     * @return
+     * @param div {@link TokkiImagesPerChosaDiv}
+     * @return response
      */
     public ResponseData<TokkiImagesPerChosaDiv> onLoad(TokkiImagesPerChosaDiv div) {
-        RString directoryPath = Directory.createTmpDirectory();
-        SharedFile.copyToLocal(div.getSharedFileEntryDescriptor(), new FilesystemPath(directoryPath));
-        div.initialize(directoryPath);
+        div.initialize(copyToLocalDirectory(div.getSharedFileEntryDescriptor()));
         return ResponseData.of(div).respond();
     }
 
+    private static RString copyToLocalDirectory(ReadOnlySharedFileEntryDescriptor rosfed) {
+        RString directoryPath = Directory.createTmpDirectory();
+        SharedFile.copyToLocal(rosfed, new FilesystemPath(directoryPath));
+        return directoryPath;
+    }
+
     /**
-     *
-     * @param div
-     * @return
+     * @param div {@link TokkiImagesPerChosaDiv}
+     * @return response
      */
     public ResponseData<TokkiImagesPerChosaDiv> onClick_btnDisplay(TokkiImagesPerChosaDiv div) {
         if (!ResponseHolder.isReRequest() && isDirty(div.getEditing())) {
@@ -56,13 +62,32 @@ public class TokkiImagesPerChosa {
     }
 
     /**
-     *
-     * @param div
-     * @return
+     * @param div {@link TokkiImagesPerChosaDiv}
+     * @return response
      */
     public ResponseData<TokkiImagesPerChosaDiv> onClick_btnSave(TokkiImagesPerChosaDiv div) {
         ITokkiImagesPerKomokuDiv edited = div.getRepTokkiJikos().getRepeateData().get(0);
+        ValidationMessageControlPairs result = edited.validate();
+        if (result.existsError()) {
+            return ResponseData.of(div).addValidationMessages(result).respond();
+        }
 
+        ExclusiveLock.isLocked(ResponseHolder.getUIContainerId());
+        ReadOnlySharedFileEntryDescriptor rosfed = div.getSharedFileEntryDescriptor();
+        TokkiRembanRenumberingService.createInstance().save(
+                rosfed,
+                div.getDirectoryPath(),
+                edited.asRenumberingResult()
+        );
+        div.refresh(copyToLocalDirectory(rosfed));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link TokkiImagesPerChosaDiv}
+     * @return response
+     */
+    public ResponseData<TokkiImagesPerChosaDiv> onClick_btnReturn(TokkiImagesPerChosaDiv div) {
         return ResponseData.of(div).respond();
     }
 }

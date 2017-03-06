@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkiimages.TokkiRembanRenumberingResult;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikos;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.TypeSafeKey;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
 /**
@@ -32,7 +34,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo1")
     private TextBox txtNo1;
     @JsonProperty("txtRemban1")
-    private TextBox txtRemban1;
+    private TextBoxNum txtRemban1;
     @JsonProperty("imgTokki1")
     private DynamicImage imgTokki1;
     @JsonProperty("txtNewRemban1")
@@ -40,7 +42,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo2")
     private TextBox txtNo2;
     @JsonProperty("txtRemban2")
-    private TextBox txtRemban2;
+    private TextBoxNum txtRemban2;
     @JsonProperty("imgTokki2")
     private DynamicImage imgTokki2;
     @JsonProperty("txtNewRemban2")
@@ -48,7 +50,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo3")
     private TextBox txtNo3;
     @JsonProperty("txtRemban3")
-    private TextBox txtRemban3;
+    private TextBoxNum txtRemban3;
     @JsonProperty("imgTokki3")
     private DynamicImage imgTokki3;
     @JsonProperty("txtNewRemban3")
@@ -56,7 +58,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo4")
     private TextBox txtNo4;
     @JsonProperty("txtRemban4")
-    private TextBox txtRemban4;
+    private TextBoxNum txtRemban4;
     @JsonProperty("imgTokki4")
     private DynamicImage imgTokki4;
     @JsonProperty("txtNewRemban4")
@@ -64,7 +66,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo5")
     private TextBox txtNo5;
     @JsonProperty("txtRemban5")
-    private TextBox txtRemban5;
+    private TextBoxNum txtRemban5;
     @JsonProperty("imgTokki5")
     private DynamicImage imgTokki5;
     @JsonProperty("txtNewRemban5")
@@ -72,7 +74,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo6")
     private TextBox txtNo6;
     @JsonProperty("txtRemban6")
-    private TextBox txtRemban6;
+    private TextBoxNum txtRemban6;
     @JsonProperty("imgTokki6")
     private DynamicImage imgTokki6;
     @JsonProperty("txtNewRemban6")
@@ -80,7 +82,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo7")
     private TextBox txtNo7;
     @JsonProperty("txtRemban7")
-    private TextBox txtRemban7;
+    private TextBoxNum txtRemban7;
     @JsonProperty("imgTokki7")
     private DynamicImage imgTokki7;
     @JsonProperty("txtNewRemban7")
@@ -88,7 +90,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo8")
     private TextBox txtNo8;
     @JsonProperty("txtRemban8")
-    private TextBox txtRemban8;
+    private TextBoxNum txtRemban8;
     @JsonProperty("imgTokki8")
     private DynamicImage imgTokki8;
     @JsonProperty("txtNewRemban8")
@@ -96,7 +98,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNo9")
     private TextBox txtNo9;
     @JsonProperty("txtRemban9")
-    private TextBox txtRemban9;
+    private TextBoxNum txtRemban9;
     @JsonProperty("imgTokki9")
     private DynamicImage imgTokki9;
     @JsonProperty("txtNewRemban9")
@@ -131,7 +133,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban1
      */
     @JsonProperty("txtRemban1")
-    public TextBox getTxtRemban1() {
+    public TextBoxNum getTxtRemban1() {
         return txtRemban1;
     }
 
@@ -140,7 +142,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban1 txtRemban1
      */
     @JsonProperty("txtRemban1")
-    public void setTxtRemban1(TextBox txtRemban1) {
+    public void setTxtRemban1(TextBoxNum txtRemban1) {
         this.txtRemban1 = txtRemban1;
     }
 
@@ -203,7 +205,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban2
      */
     @JsonProperty("txtRemban2")
-    public TextBox getTxtRemban2() {
+    public TextBoxNum getTxtRemban2() {
         return txtRemban2;
     }
 
@@ -212,7 +214,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban2 txtRemban2
      */
     @JsonProperty("txtRemban2")
-    public void setTxtRemban2(TextBox txtRemban2) {
+    public void setTxtRemban2(TextBoxNum txtRemban2) {
         this.txtRemban2 = txtRemban2;
     }
 
@@ -275,7 +277,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban3
      */
     @JsonProperty("txtRemban3")
-    public TextBox getTxtRemban3() {
+    public TextBoxNum getTxtRemban3() {
         return txtRemban3;
     }
 
@@ -284,7 +286,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban3 txtRemban3
      */
     @JsonProperty("txtRemban3")
-    public void setTxtRemban3(TextBox txtRemban3) {
+    public void setTxtRemban3(TextBoxNum txtRemban3) {
         this.txtRemban3 = txtRemban3;
     }
 
@@ -347,7 +349,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban4
      */
     @JsonProperty("txtRemban4")
-    public TextBox getTxtRemban4() {
+    public TextBoxNum getTxtRemban4() {
         return txtRemban4;
     }
 
@@ -356,7 +358,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban4 txtRemban4
      */
     @JsonProperty("txtRemban4")
-    public void setTxtRemban4(TextBox txtRemban4) {
+    public void setTxtRemban4(TextBoxNum txtRemban4) {
         this.txtRemban4 = txtRemban4;
     }
 
@@ -419,7 +421,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban5
      */
     @JsonProperty("txtRemban5")
-    public TextBox getTxtRemban5() {
+    public TextBoxNum getTxtRemban5() {
         return txtRemban5;
     }
 
@@ -428,7 +430,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban5 txtRemban5
      */
     @JsonProperty("txtRemban5")
-    public void setTxtRemban5(TextBox txtRemban5) {
+    public void setTxtRemban5(TextBoxNum txtRemban5) {
         this.txtRemban5 = txtRemban5;
     }
 
@@ -491,7 +493,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban6
      */
     @JsonProperty("txtRemban6")
-    public TextBox getTxtRemban6() {
+    public TextBoxNum getTxtRemban6() {
         return txtRemban6;
     }
 
@@ -500,7 +502,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban6 txtRemban6
      */
     @JsonProperty("txtRemban6")
-    public void setTxtRemban6(TextBox txtRemban6) {
+    public void setTxtRemban6(TextBoxNum txtRemban6) {
         this.txtRemban6 = txtRemban6;
     }
 
@@ -563,7 +565,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban7
      */
     @JsonProperty("txtRemban7")
-    public TextBox getTxtRemban7() {
+    public TextBoxNum getTxtRemban7() {
         return txtRemban7;
     }
 
@@ -572,7 +574,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban7 txtRemban7
      */
     @JsonProperty("txtRemban7")
-    public void setTxtRemban7(TextBox txtRemban7) {
+    public void setTxtRemban7(TextBoxNum txtRemban7) {
         this.txtRemban7 = txtRemban7;
     }
 
@@ -635,7 +637,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban8
      */
     @JsonProperty("txtRemban8")
-    public TextBox getTxtRemban8() {
+    public TextBoxNum getTxtRemban8() {
         return txtRemban8;
     }
 
@@ -644,7 +646,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban8 txtRemban8
      */
     @JsonProperty("txtRemban8")
-    public void setTxtRemban8(TextBox txtRemban8) {
+    public void setTxtRemban8(TextBoxNum txtRemban8) {
         this.txtRemban8 = txtRemban8;
     }
 
@@ -707,7 +709,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @return txtRemban9
      */
     @JsonProperty("txtRemban9")
-    public TextBox getTxtRemban9() {
+    public TextBoxNum getTxtRemban9() {
         return txtRemban9;
     }
 
@@ -716,7 +718,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
      * @param txtRemban9 txtRemban9
      */
     @JsonProperty("txtRemban9")
-    public void setTxtRemban9(TextBox txtRemban9) {
+    public void setTxtRemban9(TextBoxNum txtRemban9) {
         this.txtRemban9 = txtRemban9;
     }
 
@@ -760,31 +762,44 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, NinteiChosaTokkiJikou tokkiJiko, Operation op) {
-        this.setTokkijiko(tokkiJiko);
-        new TokkiJikoPieces(this).initialize(directoryPath, nts.tokkiJiko(tokkiJiko), op);
+        newHandler(this).initialize(directoryPath, nts, tokkiJiko, op);
     }
 
     @Override
     public boolean isDirty() {
-        return new TokkiJikoPieces(this).isDirty();
+        return newHandler(this).isDirty();
     }
 
-    private static final TypeSafeKey<NinteiChosaTokkiJikou> TOKKIJIKO_NO_KEY
-            = TypeSafeKey.create(NinteiChosaTokkiJikou.class, "tokkiJikoNo");
+    @Override
+    public TokkiRembanRenumberingResult asRenumberingResult() {
+        return newHandler(this).createRenumberingResult();
+    }
+
+    private static final TypeSafeKey<NinteichosahyoTokkijikos> TOKKIJIKO_KEY
+            = TypeSafeKey.create(NinteichosahyoTokkijikos.class, "tokkiJiko");
 
     /**
      * この共有子Divで扱う「特記事項」の種類を設定します。
      *
      * @param tokkiJiko 特記事項
      */
-    void setTokkijiko(NinteiChosaTokkiJikou tokkiJiko) {
-        PanelSessionAccessor.put(this, TOKKIJIKO_NO_KEY.value(), tokkiJiko);
+    void setTokkijiko(NinteichosahyoTokkijikos tokkiJiko) {
+        PanelSessionAccessor.put(this, TOKKIJIKO_KEY.value(), tokkiJiko);
     }
 
     /**
-     * @return この共有子Divで扱う「特記事項」の種類
+     * @return この共有子Divで扱う「特記事項」
      */
-    NinteiChosaTokkiJikou getTokkijiko() {
-        return PanelSessionAccessor.get(this, TOKKIJIKO_NO_KEY.value(), TOKKIJIKO_NO_KEY.type());
+    public NinteichosahyoTokkijikos getTokkijiko() {
+        return PanelSessionAccessor.get(this, TOKKIJIKO_KEY.value(), TOKKIJIKO_KEY.type());
+    }
+
+    @Override
+    public ValidationMessageControlPairs validate() {
+        return newHandler(this).validate();
+    }
+
+    private static TokkiImagesPerKomokuDivHandler newHandler(TokkiImagesPerKomokuDiv div) {
+        return new TokkiImagesPerKomokuDivHandler(div);
     }
 }

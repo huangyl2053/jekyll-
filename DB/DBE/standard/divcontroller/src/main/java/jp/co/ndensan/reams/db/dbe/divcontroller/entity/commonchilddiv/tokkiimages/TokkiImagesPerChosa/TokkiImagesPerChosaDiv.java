@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.TokkiImagesPerKomokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
+import java.util.List;
 import javax.annotation.CheckForNull;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.TokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -35,10 +35,9 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlTokkiJikoNos")
-    private DropDownList ddlTokkiJikoNos;
-    @JsonProperty("btnToDisplay")
-    private Button btnToDisplay;
+
+    @JsonProperty("TokkiJikoSelecting")
+    private TokkiJikoSelectingDiv TokkiJikoSelecting;
     @JsonProperty("repTokkiJikos")
     private ControlRepeater<TokkiImagesPerKomokuDiv> repTokkiJikos;
     @JsonProperty("btnReturn")
@@ -65,39 +64,21 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlTokkiJikoNos
-     * @return ddlTokkiJikoNos
+     * getTokkiJikoSelecting
+     * @return TokkiJikoSelecting
      */
-    @JsonProperty("ddlTokkiJikoNos")
-    public DropDownList getDdlTokkiJikoNos() {
-        return ddlTokkiJikoNos;
+    @JsonProperty("TokkiJikoSelecting")
+    public TokkiJikoSelectingDiv getTokkiJikoSelecting() {
+        return TokkiJikoSelecting;
     }
 
     /*
-     * setddlTokkiJikoNos
-     * @param ddlTokkiJikoNos ddlTokkiJikoNos
+     * setTokkiJikoSelecting
+     * @param TokkiJikoSelecting TokkiJikoSelecting
      */
-    @JsonProperty("ddlTokkiJikoNos")
-    public void setDdlTokkiJikoNos(DropDownList ddlTokkiJikoNos) {
-        this.ddlTokkiJikoNos = ddlTokkiJikoNos;
-    }
-
-    /*
-     * getbtnToDisplay
-     * @return btnToDisplay
-     */
-    @JsonProperty("btnToDisplay")
-    public Button getBtnToDisplay() {
-        return btnToDisplay;
-    }
-
-    /*
-     * setbtnToDisplay
-     * @param btnToDisplay btnToDisplay
-     */
-    @JsonProperty("btnToDisplay")
-    public void setBtnToDisplay(Button btnToDisplay) {
-        this.btnToDisplay = btnToDisplay;
+    @JsonProperty("TokkiJikoSelecting")
+    public void setTokkiJikoSelecting(TokkiJikoSelectingDiv TokkiJikoSelecting) {
+        this.TokkiJikoSelecting = TokkiJikoSelecting;
     }
 
     /*
@@ -262,18 +243,48 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
         this.sharedFileNameValue = sharedFileNameValue;
     }
 
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DropDownList getDdlTokkiJikoNos() {
+        return this.getTokkiJikoSelecting().getDdlTokkiJikoNos();
+    }
+
+    @JsonIgnore
+    public void setDdlTokkiJikoNos(DropDownList ddlTokkiJikoNos) {
+        this.getTokkiJikoSelecting().setDdlTokkiJikoNos(ddlTokkiJikoNos);
+    }
+
+    @JsonIgnore
+    public Button getBtnToDisplay() {
+        return this.getTokkiJikoSelecting().getBtnToDisplay();
+    }
+
+    @JsonIgnore
+    public void setBtnToDisplay(Button btnToDisplay) {
+        this.getTokkiJikoSelecting().setBtnToDisplay(btnToDisplay);
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     //
     @Override
     public void initialize(RString directortyPath) {
-        this.setDirectoryPath(directoryPath);
-        newHandler(this).initialize();
+        newHandler(this).initialize(directoryPath);
+    }
+
+    @Override
+    public void refresh(RString directortyPath) {
+        newHandler(this).refresh(directoryPath);
+    }
+
+    public TokkiImagesPerChosaDiv() {
     }
 
     @Override
     public FilesystemName getSharedFileName() {
-        return newHandler(this).createSharedFileName();
+        return newHandler(this).createOrFindSharedFileName();
     }
 
     @Override

@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
@@ -88,6 +90,30 @@ public class NinteichosahyoTokkijikos implements Iterable<NinteichosahyoTokkijik
                 return Objects.equals(t.get認定調査依頼履歴番号(), remban);
             }
         };
+    }
+
+    /**
+     * @return
+     */
+    public Map<Integer, NinteichosahyoTokkijikos> mapByRemban() {
+        Map<Integer, NinteichosahyoTokkijikos> result = new HashMap<>();
+        for (Map.Entry<Integer, List<NinteichosahyoTokkijiko>> entry
+                : groupingByRemban(this.elements).entrySet()) {
+            result.put(entry.getKey(), new NinteichosahyoTokkijikos(entry.getValue()));
+        }
+        return null;
+    }
+
+    private static Map<Integer, List<NinteichosahyoTokkijiko>> groupingByRemban(List<NinteichosahyoTokkijiko> tokkiJikos) {
+        Map<Integer, List<NinteichosahyoTokkijiko>> map = new HashMap<>();
+        for (NinteichosahyoTokkijiko tokki : tokkiJikos) {
+            int remban = tokki.get認定調査依頼履歴番号();
+            if (!map.containsKey(remban)) {
+                map.put(remban, new ArrayList<NinteichosahyoTokkijiko>());
+            }
+            map.get(remban).add(tokki);
+        }
+        return map;
     }
 
     /**

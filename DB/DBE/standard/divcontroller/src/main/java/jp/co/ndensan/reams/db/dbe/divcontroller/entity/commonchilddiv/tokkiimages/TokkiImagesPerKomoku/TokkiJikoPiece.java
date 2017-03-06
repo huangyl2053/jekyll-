@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikos;
 import jp.co.ndensan.reams.db.dbz.business.util.Images;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DynamicImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 final class TokkiJikoPiece {
 
     private final TextBox no;
-    private final TextBox remban;
+    private final TextBoxNum remban;
     private final DynamicImage image;
     private final TextBoxNum newRemban;
     private final Collection<ViewControl> refsToAll;
@@ -36,7 +37,7 @@ final class TokkiJikoPiece {
      * @param image イメージ
      * @param newRemban 新しい連番
      */
-    TokkiJikoPiece(TextBox no, TextBox remban, DynamicImage image, TextBoxNum newRemban) {
+    TokkiJikoPiece(TextBox no, TextBoxNum remban, DynamicImage image, TextBoxNum newRemban) {
         this.no = no;
         this.remban = remban;
         this.image = image;
@@ -60,7 +61,7 @@ final class TokkiJikoPiece {
         this.setDisplayNone(false);
         boolean maskExists = nts.containsMasked();
         NinteichosahyoTokkijiko nt = nts.findAny().get();
-        this.remban.setValue(new RString(nt.get認定調査特記事項連番()));
+        this.remban.setValue(new Decimal(nt.get認定調査特記事項連番()));
         this.no.setValue(nt.getTokkiJiko().get画面表示用特記事項番号());
         this.image.setSrc(Images.toBinaryString(findFilePathFrom(
                 filePaths,
@@ -92,10 +93,24 @@ final class TokkiJikoPiece {
     }
 
     /**
+     * @return 現在の連番
+     */
+    int getCurrentRemban() {
+        return this.remban.getValue().intValue();
+    }
+
+    /**
      * @return 新しい連番
      */
     int getNewRemban() {
-        return this.newRemban.getValue().intValue();
+        if (isDirty()) {
+            return this.newRemban.getValue().intValue();
+        }
+        return getCurrentRemban();
+    }
+
+    TextBoxNum getTxtNewRemban() {
+        return this.newRemban;
     }
 
     /**

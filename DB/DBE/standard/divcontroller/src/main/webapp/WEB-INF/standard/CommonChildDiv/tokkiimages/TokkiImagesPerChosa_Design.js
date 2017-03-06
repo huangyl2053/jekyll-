@@ -4,6 +4,17 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnDisplay = function () {
+                return "onClick_btnDisplay";
+            };
+
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
+            };
+
+            Events.onClick_btnSave = function () {
+                return "onClick_btnSave";
+            };
             return Events;
         })();
         TokkiImagesPerChosa.Events = Events;
@@ -26,6 +37,10 @@ var DBE;
 
             Controls.prototype.TokkiImagesPerChosa = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.TokkiJikoSelecting = function () {
+                return new UZA.Panel(this.convFiledName("TokkiJikoSelecting"));
             };
 
             Controls.prototype.ddlTokkiJikoNos = function () {

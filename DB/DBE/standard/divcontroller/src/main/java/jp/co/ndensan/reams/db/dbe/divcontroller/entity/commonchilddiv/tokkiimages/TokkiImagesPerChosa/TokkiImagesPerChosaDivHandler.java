@@ -51,7 +51,7 @@ public class TokkiImagesPerChosaDivHandler {
     /**
      * @return 共有ファイル名
      */
-    FilesystemName createSharedFileName() {
+    FilesystemName createOrFindSharedFileName() {
         if (RString.isNullOrEmpty(div.getSharedFileNameValue())) {
             NinteiShinseiJoho n = NinteiShinseiJohoManager.createInstance().get要介護認定申請情報(div.getShinseishoKanriNo());
             div.setSharedFileNameValue(n.get証記載保険者番号().concat(n.get被保険者番号()));
@@ -68,17 +68,27 @@ public class TokkiImagesPerChosaDivHandler {
 
     /**
      * 初期化します。
+     *
+     * @param directoryPath イメージが展開されたフォルダのパス
      */
-    void initialize() {
-        getHandler(div).initialize();
+    void initialize(RString directoryPath) {
+        div.setDirectoryPath(directoryPath);
+        getBehaviorIn(div.getOperation(), div).initialize();
     }
 
-    private static BaseHandler getHandler(TokkiImagesPerChosaDiv div) {
-        switch (div.getOperation()) {
+    /**
+     * {@link TokkiImagesPerChosaDiv}の処理モード毎の振る舞いを取得します。
+     *
+     * @param op 処理
+     * @param div 対象の{@link TokkiImagesPerChosaDiv}のインスタンス
+     * @return 振る舞い
+     */
+    private static TokkiImagesPerChosaDivBehavior getBehaviorIn(Operation op, TokkiImagesPerChosaDiv div) {
+        switch (op) {
             case 修正:
-                return new ShuseiMode(div);
+                return new ModifingMode(div);
             default:
-                return new ShokaiMode(div);
+                return new ReferringMode(div);
         }
     }
 
@@ -86,7 +96,17 @@ public class TokkiImagesPerChosaDivHandler {
      * 選択された特記事項について画面描画を行います。
      */
     void renderSelectedTokkiJiko() {
-        getHandler(div).renderSelectedTokkiJiko();
+        getBehaviorIn(div.getOperation(), div).renderSelectedTokkiJiko();
+    }
+
+    /**
+     * 指定のディレクトリのイメージを使って、再描画します。
+     *
+     * @param directoryPath イメージが展開されたフォルダのパス
+     */
+    void refresh(RString directoryPath) {
+        div.setDirectoryPath(directoryPath);
+        renderSelectedTokkiJiko();
     }
 
     //<editor-fold defaultstate="collapsed" desc="private static class ControlsForEdit {...}">
@@ -116,13 +136,13 @@ public class TokkiImagesPerChosaDivHandler {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="private static abstract class BaseHandler {...}">
-    private static abstract class BaseHandler {
+    //<editor-fold defaultstate="collapsed" desc="private static abstract class TokkiImagesPerChosaDivBehavior {...}">
+    private static abstract class TokkiImagesPerChosaDivBehavior {
 
         protected final TokkiImagesPerChosaDiv div;
         private final ControlsForEdit cfe;
 
-        protected BaseHandler(TokkiImagesPerChosaDiv div) {
+        protected TokkiImagesPerChosaDivBehavior(TokkiImagesPerChosaDiv div) {
             this.div = div;
             this.cfe = new ControlsForEdit(div);
         }
@@ -148,9 +168,11 @@ public class TokkiImagesPerChosaDivHandler {
     }
     //</editor-fold>
 
-    private static class ShuseiMode extends BaseHandler {
+    private static class ModifingMode extends TokkiImagesPerChosaDivBehavior {
 
-        protected ShuseiMode(TokkiImagesPerChosaDiv div) {
+        private static final Operation OPERATION = Operation.修正;
+
+        protected ModifingMode(TokkiImagesPerChosaDiv div) {
             super(div);
         }
 
@@ -173,7 +195,7 @@ public class TokkiImagesPerChosaDivHandler {
                             div.getDirectoryPath(),
                             nts,
                             NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
-                            Operation.修正
+                            OPERATION
                     );
         }
 
@@ -200,14 +222,16 @@ public class TokkiImagesPerChosaDivHandler {
                             div.getDirectoryPath(),
                             findNinteiChosaTokkiJikos(),
                             NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
-                            Operation.照会
+                            OPERATION
                     );
         }
     }
 
-    private static class ShokaiMode extends BaseHandler {
+    private static class ReferringMode extends TokkiImagesPerChosaDivBehavior {
 
-        private ShokaiMode(TokkiImagesPerChosaDiv div) {
+        private static final Operation OPERATION = Operation.照会;
+
+        private ReferringMode(TokkiImagesPerChosaDiv div) {
             super(div);
         }
 
@@ -223,7 +247,7 @@ public class TokkiImagesPerChosaDivHandler {
                     continue;
                 }
                 ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
-                komoku.initialize(directoryPath, nts, t, Operation.照会);
+                komoku.initialize(directoryPath, nts, t, OPERATION);
             }
         }
     }

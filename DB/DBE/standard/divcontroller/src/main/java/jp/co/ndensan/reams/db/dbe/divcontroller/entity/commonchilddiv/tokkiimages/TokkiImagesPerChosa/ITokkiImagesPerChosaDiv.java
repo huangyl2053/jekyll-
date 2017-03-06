@@ -18,9 +18,16 @@ public interface ITokkiImagesPerChosaDiv extends ICommonChildDivBaseProperties {
     /**
      * 初期化します。
      *
-     * @param directoryPath イメージを展開するフォルダのパス
+     * @param directoryPath イメージが展開されたフォルダのパス
      */
     void initialize(RString directoryPath);
+
+    /**
+     * 指定のパスのイメージを利用して再描画します。設定された連番はすべてクリアされます。
+     *
+     * @param directoryPath イメージが展開されたフォルダのパス
+     */
+    void refresh(RString directoryPath);
 
     /**
      * @return 照会モードの場合、{@code null}.

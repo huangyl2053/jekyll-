@@ -37,8 +37,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo1"));
             }
 
-            public txtRemban1(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban1"));
+            public txtRemban1(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban1"));
             }
 
             public imgTokki1(): UZA.DynamicImage {
@@ -53,8 +53,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo2"));
             }
 
-            public txtRemban2(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban2"));
+            public txtRemban2(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban2"));
             }
 
             public imgTokki2(): UZA.DynamicImage {
@@ -69,8 +69,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo3"));
             }
 
-            public txtRemban3(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban3"));
+            public txtRemban3(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban3"));
             }
 
             public imgTokki3(): UZA.DynamicImage {
@@ -85,8 +85,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo4"));
             }
 
-            public txtRemban4(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban4"));
+            public txtRemban4(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban4"));
             }
 
             public imgTokki4(): UZA.DynamicImage {
@@ -101,8 +101,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo5"));
             }
 
-            public txtRemban5(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban5"));
+            public txtRemban5(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban5"));
             }
 
             public imgTokki5(): UZA.DynamicImage {
@@ -117,8 +117,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo6"));
             }
 
-            public txtRemban6(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban6"));
+            public txtRemban6(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban6"));
             }
 
             public imgTokki6(): UZA.DynamicImage {
@@ -133,8 +133,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo7"));
             }
 
-            public txtRemban7(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban7"));
+            public txtRemban7(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban7"));
             }
 
             public imgTokki7(): UZA.DynamicImage {
@@ -149,8 +149,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo8"));
             }
 
-            public txtRemban8(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban8"));
+            public txtRemban8(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban8"));
             }
 
             public imgTokki8(): UZA.DynamicImage {
@@ -165,8 +165,8 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtNo9"));
             }
 
-            public txtRemban9(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtRemban9"));
+            public txtRemban9(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtRemban9"));
             }
 
             public imgTokki9(): UZA.DynamicImage {
