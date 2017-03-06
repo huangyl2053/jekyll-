@@ -193,7 +193,6 @@ public class TokkiImagesPerChosaDivHandler {
             }
             RString key = dataSource.get(0).getKey();
             div.getDdlTokkiJikoNos().setSelectedKey(key);
-            div.getRepTokkiJikos().setRepeateData(new ArrayList<ITokkiImagesPerKomokuDiv>());
             ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
             komoku.initialize(
                     div.getDirectoryPath(),
@@ -201,7 +200,7 @@ public class TokkiImagesPerChosaDivHandler {
                     NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
                     OPERATION
             );
-            div.getRepTokkiJikos().getRepeateData().add(komoku);
+            div.getRepTokkiJikos().getRepeateData().add(0, komoku);
         }
 
         private static List<KeyValueDataSource> createDataSource(NinteichosahyoTokkijikos nts) {
@@ -219,7 +218,6 @@ public class TokkiImagesPerChosaDivHandler {
         @Override
         protected void renderSelectedTokkiJiko() {
             RString key = div.getDdlTokkiJikoNos().getSelectedKey();
-            div.getRepTokkiJikos().setRepeateData(new ArrayList<ITokkiImagesPerKomokuDiv>());
             ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
             komoku.initialize(
                     div.getDirectoryPath(),
@@ -227,7 +225,7 @@ public class TokkiImagesPerChosaDivHandler {
                     NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
                     OPERATION
             );
-            div.getRepTokkiJikos().getRepeateData().add(komoku);
+            div.getRepTokkiJikos().getRepeateData().add(0, komoku);
         }
     }
 
@@ -242,7 +240,6 @@ public class TokkiImagesPerChosaDivHandler {
         @Override
         protected void initialize() {
             controlsForEdit().setDisplayNone(true);
-            div.getRepTokkiJikos().setRepeateData(new ArrayList<ITokkiImagesPerKomokuDiv>());
             final RString directoryPath = div.getDirectoryPath();
             final NinteichosahyoTokkijikos nts = findNinteiChosaTokkiJikos();
             for (NinteiChosaTokkiJikou t : NinteiChosaTokkiJikou.values()) {
@@ -254,7 +251,7 @@ public class TokkiImagesPerChosaDivHandler {
                 komoku.initialize(directoryPath, nts, t, OPERATION);
                 div.getRepTokkiJikos().getRepeateData().add(komoku);
             }
+            div.getRepTokkiJikos().getRepeateData().remove(0);
         }
     }
-
 }
