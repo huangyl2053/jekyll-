@@ -55,6 +55,7 @@
         </if>
         ORDER BY
         "gogitaiNo"
+        ,"gogitaichoKubunCode" DESC
     </select>
     <resultMap id="resultMap_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
         <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

@@ -722,7 +722,7 @@ public class RenkeiDataTorikomiBusiness {
             前回認定有効終了期間 = new FlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間());
         }
         int 前回認定有効期間 = 0;
-        if (前回認定有効開始期間.isEmpty() && 前回認定有効終了期間.isEmpty()) {
+        if (!前回認定有効開始期間.isEmpty() && !前回認定有効終了期間.isEmpty()) {
             前回認定有効期間 = 前回認定有効終了期間.getBetweenMonths(前回認定有効開始期間);
         }
         dbt5129Entity.setNijiHanteiNinteiYukoKikan(前回認定有効期間);
@@ -807,7 +807,7 @@ public class RenkeiDataTorikomiBusiness {
             前回認定有効終了期間 = new FlexibleDate(dbt5101tempEntity.get前回の認定有効終了期間());
         }
         int 前回認定有効期間 = 0;
-        if (前回認定有効開始期間.isEmpty() && 前回認定有効終了期間.isEmpty()) {
+        if (!前回認定有効開始期間.isEmpty() && !前回認定有効終了期間.isEmpty()) {
             前回認定有効期間 = 前回認定有効終了期間.getBetweenMonths(前回認定有効開始期間);
         }
         dbt5102Entity.setNijiHanteiNinteiYukoKikan(前回認定有効期間);
