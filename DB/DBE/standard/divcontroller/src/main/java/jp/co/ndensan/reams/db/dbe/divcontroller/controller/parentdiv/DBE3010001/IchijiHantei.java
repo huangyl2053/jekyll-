@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -133,7 +134,9 @@ public class IchijiHantei {
      * @return ResponseData
      */
     public ResponseData<IchijiHanteiDiv> btn_kenSaKu(IchijiHanteiDiv div) {
-
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         RString hihokenshaNo = div.getIchijiHanteiKensakuJoken().getTxtHihokenshaNo().getValue();
@@ -141,7 +144,7 @@ public class IchijiHantei {
         List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, hihokenshaNo, shinseishoKanriNoList);
 
         if (一次判定対象者一覧List.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
 
         getHandler(div).対象者一覧の編集(一次判定対象者一覧List);

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -159,21 +160,27 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onClick_btnSearchShujii(NinteichosaItakusakiMainDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         RString kanCodeFrom = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
         RString kanCodeTo = div.getChosainSearch().getTxtSearchSonotaKikanCodeTo().getValue();
         RString kikanKubun = div.getChosainSearch().getDdlkikankubun().getSelectedKey();
         RString itakuKubun = div.getChosainSearch().getDdlitakukubun().getSelectedKey();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSearchShujii(kanCodeFrom, kanCodeTo, kikanKubun, itakuKubun);
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).
+                validateForSearchShujii(kanCodeFrom, kanCodeTo, kikanKubun, itakuKubun);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        searchChosainInfo(div);
+        if (searchChosainInfo(div) == 0) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         div.setHdnShichosonCode(div.getCcdhokensha().getSelectedItem().get証記載保険者番号().value());
         div.setHdnShichosonName(div.getCcdhokensha().getSelectedItem().get市町村名称());
         return ResponseData.of(div).setState(DBE9050001StateName.一覧);
     }
 
-    private void searchChosainInfo(NinteichosaItakusakiMainDiv div) {
+    private int searchChosainInfo(NinteichosaItakusakiMainDiv div) {
         boolean jokyoFlag = false;
         if (div.getRadSearchHaisiFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
@@ -198,10 +205,11 @@ public class NinteichosaItakusakiMain {
         }
         if (sonotaKikanJohoList.isEmpty() && !検索条件初期値) {
             ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(new ArrayList<SonotaKikanJoho>()));
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            return 0;
         }
         getHandler(div).setSonotaKikanichiran(sonotaKikanJohoList);
         ViewStateHolder.put(ViewStateKeys.その他機関マスタ検索結果, Models.create(toSonotaKikanJohos(sonotaKikanJohoList)));
+        return sonotaKikanJohoList.size();
     }
 
     private static List<SonotaKikanJoho> toSonotaKikanJohos(List<SonotaKikanJohoEntity> entities) {
@@ -354,37 +362,37 @@ public class NinteichosaItakusakiMain {
                 row.getChosaItakuKubun(),
                 waritsukeTeiin,
                 !RString.isNullOrEmpty(chikuMei)
-                        ? chikuMei
-                        : RString.EMPTY,
+                ? chikuMei
+                : RString.EMPTY,
                 row.getKikanKubun(),
                 row.getJokyoFlag(),
                 row.getKinyuKikanCode() != null
-                        ? row.getKinyuKikanCode()
-                        : RString.EMPTY,
+                ? row.getKinyuKikanCode()
+                : RString.EMPTY,
                 row.getKinyuKikanMeisho() != null
-                        ? row.getKinyuKikanMeisho()
-                        : RString.EMPTY,
+                ? row.getKinyuKikanMeisho()
+                : RString.EMPTY,
                 row.getKinyuKikanShitenCode() != null
-                        ? row.getKinyuKikanShitenCode()
-                        : RString.EMPTY,
+                ? row.getKinyuKikanShitenCode()
+                : RString.EMPTY,
                 row.getShitenMeisho() != null
-                        ? row.getShitenMeisho()
-                        : RString.EMPTY,
+                ? row.getShitenMeisho()
+                : RString.EMPTY,
                 row.getYokinShu() != null
-                        ? row.getYokinShu()
-                        : RString.EMPTY,
+                ? row.getYokinShu()
+                : RString.EMPTY,
                 row.getYokinShuMei() != null
-                        ? row.getYokinShuMei()
-                        : RString.EMPTY,
+                ? row.getYokinShuMei()
+                : RString.EMPTY,
                 row.getKozaNo() != null
-                        ? row.getKozaNo()
-                        : RString.EMPTY,
+                ? row.getKozaNo()
+                : RString.EMPTY,
                 row.getKozaMeigininKana() != null
-                        ? row.getKozaMeigininKana()
-                        : RString.EMPTY,
+                ? row.getKozaMeigininKana()
+                : RString.EMPTY,
                 row.getKozaMeiginin() != null
-                        ? row.getKozaMeiginin()
-                        : RString.EMPTY
+                ? row.getKozaMeiginin()
+                : RString.EMPTY
         );
         return data;
     }
@@ -660,8 +668,8 @@ public class NinteichosaItakusakiMain {
                 row.getChosaItakuKubun(),
                 waritsukeTeiin,
                 !RString.isNullOrEmpty(chikuMei)
-                        ? chikuMei
-                        : RString.EMPTY,
+                ? chikuMei
+                : RString.EMPTY,
                 row.getKikanKubun(),
                 row.getJokyoFlag());
         return data;

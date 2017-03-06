@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6080001.Val
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiryonyuryoku.ShujiiIkenshoSakuseiryoNyuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -69,6 +70,9 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
      * @return ResponseData<ShujiiIkenshoSakuseiryoNyuryokuDiv>
      */
     public ResponseData<ShujiiIkenshoSakuseiryoNyuryokuDiv> onClik_Search(ShujiiIkenshoSakuseiryoNyuryokuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxCount();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -78,7 +82,7 @@ public class ShujiiIkenshoSakuseiryoNyuryoku {
         getHandler(div).onClik_SearchBtn(businessList);
         ValidationMessageControlPairs pairs = getValidationHandler(div).validateData(businessList);
         if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).setState(DBE6080001StateName.主治医状態);
     }

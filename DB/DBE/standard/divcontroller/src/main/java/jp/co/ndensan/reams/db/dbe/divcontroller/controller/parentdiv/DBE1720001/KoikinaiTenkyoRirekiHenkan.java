@@ -61,12 +61,17 @@ public class KoikinaiTenkyoRirekiHenkan {
      * @return ResponseData<KoikinaiTenkyoRirekiHenkanDiv>
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_Kensaku(KoikinaiTenkyoRirekiHenkanDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).認定申請日範囲チェック(validationMessages);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        searchShinseisyaInfo(div);
+        if (0 == searchShinseisyaInfo(div)) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -130,7 +135,7 @@ public class KoikinaiTenkyoRirekiHenkan {
         return ResponseData.of(div).respond();
     }
 
-    private void searchShinseisyaInfo(KoikinaiTenkyoRirekiHenkanDiv div) {
+    private int searchShinseisyaInfo(KoikinaiTenkyoRirekiHenkanDiv div) {
         KoikinaiTenkyoRirekiHenkanMapperParameter parameter = KoikinaiTenkyoRirekiHenkanMapperParameter.createSelectByKeyParam(
                 div.getTxtHihokenshaNumber().getValue(),
                 new AtenaMeisho(div.getTxtHihokenshaNameJyouken().getValue()),
@@ -155,6 +160,11 @@ public class KoikinaiTenkyoRirekiHenkan {
                 = Models.create(一覧情報);
         ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
         getHandler(div).setShinseisyaitiran(申請者一覧情報List);
+        if (null != 申請者一覧情報List) {
+            return 申請者一覧情報List.size();
+        } else {
+            return 0;
+        }
     }
 
     private KoikinaiTenkyoRirekiHenkanHandler getHandler(KoikinaiTenkyoRirekiHenkanDiv div) {

@@ -292,6 +292,13 @@
         *
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
+        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+        ON DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5591GogitaiJoho" AS DbT5591
+        ON DbT5591."gogitaiNo" = DbT5501."gogitaiNo"
+        AND DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5501."shinsakaiKaisaiYoteiYMD"
+        AND DbT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
+        AND DbT5591."gogitaiDummyFlag" = FALSE
         WHERE
         (
         DbT5502."hanteiKekkaCode" = '01'

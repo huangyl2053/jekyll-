@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6070001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ShinsakaiIinHoshuJissekiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shinsakaiiinhoshunyuryoku.ShinsakaiIinHoshuNyuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -89,6 +90,9 @@ public class ShinsakaiIinHoshuNyuryoku {
      * @return ResponseData<ShinsakaiIinHoshuNyuryokuDiv>
      */
     public ResponseData<ShinsakaiIinHoshuNyuryokuDiv> onClick_Check(ShinsakaiIinHoshuNyuryokuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         div.getShinsakaiJisseki().setDisplayNone(true);
         div.getShinsakaiJissekiMeisai().setDisplayNone(true);
         ボタン制御_戻る_保存する();
@@ -125,11 +129,12 @@ public class ShinsakaiIinHoshuNyuryoku {
                 .createInstance().get審査会委員一覧(ShinsakaiIinHoshuNyuryokuMapperParameter.createSelectListParam(
                                 介護認定審査会委員氏名, is前方一致, is後方一致, is完全一致, is部分一致, 最大表示件数, null,
                                 null, null, null, false, false, null)).records();
-        ValidationMessageControlPairs validPairs実績一覧データ空チェック = getValidatison(div).validateFor実績一覧データ空チェック(shinsakaiIinHoshuNyuryoku);
+        ValidationMessageControlPairs validPairs実績一覧データ空チェック = getValidatison(div).
+                validateFor実績一覧データ空チェック(shinsakaiIinHoshuNyuryoku);
         if (validPairs実績一覧データ空チェック.iterator().hasNext()) {
             div.getShinsakaiIin().getDgShinsakaiIin().getDataSource().clear();
             div.getShinsakaiJisseki().setVisible(false);
-            return ResponseData.of(div).addValidationMessages(validPairs実績一覧データ空チェック).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getShinsakaiIin().setVisible(true);
         getHandler(div).edit審査会委員一覧情報(shinsakaiIinHoshuNyuryoku);

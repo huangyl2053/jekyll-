@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgKa
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiGogitaiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -364,6 +366,7 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
         if (kaisaiGogitai.getValue().equals(dgGogitaiRow.getNumber().getText())) {
             if (指定日.isBefore(dgGogitaiRow.getYukoKikanKaishiYMD().getValue())
                     || 指定日.isAfter(dgGogitaiRow.getYukoKikanShuryoYMD().getValue())) {
+                ViewStateHolder.put(ViewStateKeys.合議体番号, kaisaiGogitai.getValue());
                 is有効期間外 = true;
             }
         }
@@ -371,9 +374,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
     }
 
     private void set有効期間外Message(ValidationMessageControlPairs validationMessages) {
+        RString 合議体番号 = ViewStateHolder.get(ViewStateKeys.合議体番号, RString.class);
         validationMessages.add(new ValidationMessageControlPair(
                 new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
-                        DbeErrorMessages.合議体無効)));
+                        DbeErrorMessages.合議体無効, 合議体番号.toString())));
     }
 
     private void set合議体存在Message(ValidationMessageControlPairs validationMessages) {

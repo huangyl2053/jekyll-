@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteizumidatashutsuryoku.I
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -100,6 +102,9 @@ public class IchijiHanteizumiDataShutsuryoku {
      * @return ResponseData<IchijiHanteizumiDataShutsuryokuDiv>
      */
     public ResponseData<IchijiHanteizumiDataShutsuryokuDiv> onClick_btnKensaku(IchijiHanteizumiDataShutsuryokuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPairsMessage = new ValidationMessageControlPairs();
         if (申請日.equals(div.getRadJyoken().getSelectedKey())) {
             validPairsMessage = getValidatisonHandlerr(div).get申請日必須入力チェック();
@@ -111,6 +116,9 @@ public class IchijiHanteizumiDataShutsuryoku {
             return ResponseData.of(div).addValidationMessages(validPairsMessage).respond();
         }
         List<IchijiHanteizumiDataShutsuryokuBusiness> 一次判定情報List = finder.get次判定済みデータ(getHandler(div).createParam()).records();
+        if (null == 一次判定情報List || 一次判定情報List.isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         getHandler(div).setdgIchijiHanteiZumi(一次判定情報List);
         return ResponseData.of(div).setState(DBE3090001StateName.検索結果);
     }

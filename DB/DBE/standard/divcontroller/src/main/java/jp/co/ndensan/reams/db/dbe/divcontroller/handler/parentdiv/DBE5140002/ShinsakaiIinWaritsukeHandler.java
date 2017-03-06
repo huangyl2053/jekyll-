@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
  * 介護認定審査会割当委員情報のHandlerクラスです。
@@ -85,6 +84,7 @@ public class ShinsakaiIinWaritsukeHandler {
             chkSeishinkailist.add(SELECTEDKEY);
         }
         div.getWaritsuke().getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);
+        div.getWaritsuke().getTxtKijunYMD().setValue(RDate.getNowDate());
     }
 
     /**

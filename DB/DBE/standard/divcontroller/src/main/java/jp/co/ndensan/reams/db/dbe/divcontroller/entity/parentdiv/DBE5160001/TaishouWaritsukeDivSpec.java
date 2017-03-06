@@ -71,19 +71,6 @@ public enum TaishouWaritsukeDivSpec implements IPredicate<TaishouWaritsukeDiv> {
                 public boolean apply(TaishouWaritsukeDiv div) {
                     return !div.getDgTaishoshaIchiran().getSelectedItems().isEmpty();
                 }
-            },
-    割付人数チェック {
-                /**
-                 * 割付人数チェックです。
-                 *
-                 * @param div TaishouWaritsukeDiv
-                 * @return true:割付人数＋選択候補者数は予定人数より少ない、false:割付人数＋選択候補者数>=予定人数
-                 */
-                @Override
-                public boolean apply(TaishouWaritsukeDiv div) {
-                    return div.getTxtWaritsukeNinzu().getValue().intValue() + div.getDgWaritsukeKohoshaIchiran().getSelectedItems().size()
-                    <= div.getTxtYoteiTeiin().getValue().intValue();
-                }
             };
 
 }
