@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.ShinsakaiScheduleHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -38,6 +40,7 @@ public class ShinsakaiScheduleHakko {
     private final RString 帳票出力区分4 = new RString("4");
     private final RString スケジュール表 = new RString("key0");
     private final RString スケジュール表_年間 = new RString("key1");
+    private final RString 年度初日 = new RString("0401");
 
     /**
      * 画面初期化処理です。
@@ -93,6 +96,12 @@ public class ShinsakaiScheduleHakko {
                 div.getDgShinsakaiScheduleKagami().setVisible(false);
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().getSelectedItems().clear();
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().setDisabled(false);
+
+                RStringBuilder builder = new RStringBuilder();
+                RString nendo = RDate.getNowDate().getNendo().toDateString();
+                builder.append(nendo);
+                builder.append(年度初日);
+                div.getShinsakaiScheduleSrch().getSchedulePrintOption().getTxtNendo().setValue(new RDate(builder.toString()));
                 div.getShinsakaiScheduleSrch().getSchedulePrintOption().getChkShinsakaiScheduleKagami().setReadOnly(true);
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setFromReadOnly(true);
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().setToReadOnly(true);
