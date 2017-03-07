@@ -214,8 +214,8 @@ public class GogitaiJohoSakusei {
                 entity.setGogitaiKaishiYoteiTime(gogitaiJoho.get合議体開始予定時刻());
                 entity.setGogitaiShuryoYoteiTime(gogitaiJoho.get合議体終了予定時刻());
                 entity.setShinsakaiKaisaiBasho(gogitaiJoho.get介護認定審査会開催場所コード());
-                entity.setGogitaiSeishinkaSonzaiFlag(gogitaiJoho.is合議体精神科医存在フラグ() ? new RString("0") : new RString("1"));
-                entity.setGogitaiDummyFlag(gogitaiJoho.is合議体ダミーフラグ() ? new RString("0") : new RString("1"));
+                entity.setGogitaiSeishinkaSonzaiFlag(gogitaiJoho.is合議体精神科医存在フラグ() ? new RString("1") : new RString("0"));
+                entity.setGogitaiDummyFlag(gogitaiJoho.is合議体ダミーフラグ() ? new RString("1") : new RString("0"));
                 entity.setShinsakaiJidoWariateTeiin(new RString(gogitaiJoho.get介護認定審査会自動割当定員()));
                 entity.setShinsakaiIinTeiin(new RString(gogitaiJoho.get介護認定審査会委員定員()));
                 entity.setShinsakaiYoteiTeiin(new RString(gogitaiJoho.get介護認定審査会予定定員()));
@@ -224,7 +224,7 @@ public class GogitaiJohoSakusei {
                 }
                 for (GogitaiWariateIinJoho wariateIinJoho : gogitaiJoho.getGogitaiWariateIinJohoList()) {
                     entity.setShinsakaiIinCode(wariateIinJoho.get介護認定審査会委員コード());
-                    entity.setSubstituteFlag(wariateIinJoho.is補欠() ? new RString("1") : new RString("0"));
+                    entity.setSubstituteFlag(wariateIinJoho.is補欠() ? new RString("0") : new RString("1"));
                     entity.setGogitaichoKubunCode(wariateIinJoho.get合議体長区分コード().value());
                     csvWriter.writeLine(entity);
                 }
