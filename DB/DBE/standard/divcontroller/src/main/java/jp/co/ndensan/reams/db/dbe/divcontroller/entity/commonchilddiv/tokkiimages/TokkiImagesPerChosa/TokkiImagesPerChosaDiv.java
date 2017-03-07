@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
@@ -26,7 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * @author 自動生成
  */
 public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChosaDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -249,7 +251,7 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     }
 
     @JsonIgnore
-    public void  setDdlTokkiJikoNos(DropDownList ddlTokkiJikoNos) {
+    public void setDdlTokkiJikoNos(DropDownList ddlTokkiJikoNos) {
         this.getTokkiJikoSelecting().setDdlTokkiJikoNos(ddlTokkiJikoNos);
     }
 
@@ -259,7 +261,7 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     }
 
     @JsonIgnore
-    public void  setBtnToDisplay(Button btnToDisplay) {
+    public void setBtnToDisplay(Button btnToDisplay) {
         this.getTokkiJikoSelecting().setBtnToDisplay(btnToDisplay);
     }
 
@@ -292,11 +294,7 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     @Override
     @CheckForNull
     public ITokkiImagesPerKomokuDiv getEditing() {
-        if (getOperation().is修正()) {
-            List<ITokkiImagesPerKomokuDiv> list = getRepTokkiJikos().getRepeateData();
-            return list.isEmpty() ? null : list.get(0);
-        }
-        return null;
+        return newHandler(this).getEditing();
     }
 
     @Override

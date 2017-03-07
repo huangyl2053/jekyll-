@@ -36,6 +36,11 @@ public final class TokkiImagesPerKomokuDivHandler {
      */
     void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, NinteiChosaTokkiJikou tokkiJiko, Operation op) {
         NinteichosahyoTokkijikos filterd = nts.tokkiJiko(tokkiJiko);
+        if (filterd.isEmpty()) {
+            this.div.setDisplayNone(true);
+            return;
+        }
+        this.div.setDisplayNone(false);
         this.div.setTokkijiko(filterd);
         this.pieces.initialize(directoryPath, filterd, op);
     }

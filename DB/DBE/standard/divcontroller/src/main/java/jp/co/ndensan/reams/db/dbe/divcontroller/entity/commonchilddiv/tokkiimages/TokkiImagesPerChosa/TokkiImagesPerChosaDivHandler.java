@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ControlRepeater;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
@@ -34,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
  */
 public class TokkiImagesPerChosaDivHandler {
 
+    private static final int INDEX_OF_ORIGINAL = 0;
+    private static final int INDEX_OF_EDITING_DIV = 1;
     private static final Comparator<KeyValueDataSource> VALUE_ASC
             = new Comparator<KeyValueDataSource>() {
                 @Override
@@ -76,7 +80,20 @@ public class TokkiImagesPerChosaDivHandler {
      */
     void initialize(RString directoryPath) {
         div.setDirectoryPath(directoryPath);
+        hideOriginalInstance(div.getRepTokkiJikos());
         getBehaviorIn(div.getOperation(), div).initialize();
+    }
+
+    private static void hideOriginalInstance(ControlRepeater<ITokkiImagesPerKomokuDiv> komokuDivs) {
+        komokuDivs.getRepeateData().get(INDEX_OF_ORIGINAL).setDisplayNone(true);
+    }
+
+    /**
+     * @return 編集中の{@link ITokkiImagesPerKomokuDiv}
+     */
+    @CheckForNull
+    ITokkiImagesPerKomokuDiv getEditing() {
+        return getBehaviorIn(div.getOperation(), div).getEditing();
     }
 
     /**
@@ -166,6 +183,10 @@ public class TokkiImagesPerChosaDivHandler {
 
         protected abstract void initialize();
 
+        protected ITokkiImagesPerKomokuDiv getEditing() {
+            return null;
+        }
+
         protected void renderSelectedTokkiJiko() {
         }
     }
@@ -200,8 +221,16 @@ public class TokkiImagesPerChosaDivHandler {
                     NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
                     OPERATION
             );
-            div.getRepTokkiJikos().getRepeateData().add(komoku);
-            div.getRepTokkiJikos().getRepeateData().remove(0);
+        }
+
+        @Override
+        protected ITokkiImagesPerKomokuDiv getEditing() {
+            return findEditingKomokuDivFrom(div.getRepTokkiJikos());
+        }
+
+        private static ITokkiImagesPerKomokuDiv findEditingKomokuDivFrom(ControlRepeater<ITokkiImagesPerKomokuDiv> cp) {
+            List<ITokkiImagesPerKomokuDiv> list = cp.getRepeateData();
+            return list.size() <= INDEX_OF_EDITING_DIV ? null : list.get(INDEX_OF_EDITING_DIV);
         }
 
         private static List<KeyValueDataSource> createDataSource(NinteichosahyoTokkijikos nts) {
@@ -219,15 +248,18 @@ public class TokkiImagesPerChosaDivHandler {
         @Override
         protected void renderSelectedTokkiJiko() {
             RString key = div.getDdlTokkiJikoNos().getSelectedKey();
-            ITokkiImagesPerKomokuDiv komoku = div.getRepTokkiJikos().getNewRepeatControlInstance();
+            ITokkiImagesPerKomokuDiv komoku = findKomokuDivForEdit(div.getRepTokkiJikos());
             komoku.initialize(
                     div.getDirectoryPath(),
                     findNinteiChosaTokkiJikos(),
                     NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(key),
                     OPERATION
             );
-            div.getRepTokkiJikos().getRepeateData().add(komoku);
-            div.getRepTokkiJikos().getRepeateData().remove(0);
+        }
+
+        private static ITokkiImagesPerKomokuDiv findKomokuDivForEdit(ControlRepeater<ITokkiImagesPerKomokuDiv> cp) {
+            ITokkiImagesPerKomokuDiv editing = findEditingKomokuDivFrom(cp);
+            return editing != null ? editing : cp.getNewRepeatControlInstance();
         }
     }
 
@@ -253,7 +285,6 @@ public class TokkiImagesPerChosaDivHandler {
                 komoku.initialize(directoryPath, nts, t, OPERATION);
                 div.getRepTokkiJikos().getRepeateData().add(komoku);
             }
-            div.getRepTokkiJikos().getRepeateData().remove(0);
         }
     }
 }

@@ -66,12 +66,14 @@ public class TokkiImagesPerChosa {
      * @return response
      */
     public ResponseData<TokkiImagesPerChosaDiv> onClick_btnSave(TokkiImagesPerChosaDiv div) {
-        ITokkiImagesPerKomokuDiv edited = div.getRepTokkiJikos().getRepeateData().get(0);
+        ITokkiImagesPerKomokuDiv edited = div.getEditing();
+        if (edited == null) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs result = edited.validate();
         if (result.existsError()) {
             return ResponseData.of(div).addValidationMessages(result).respond();
         }
-
         ExclusiveLock.isLocked(ResponseHolder.getUIContainerId());
         ReadOnlySharedFileEntryDescriptor rosfed = div.getSharedFileEntryDescriptor();
         TokkiRembanRenumberingService.createInstance().save(
