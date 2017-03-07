@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
@@ -16,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -74,10 +74,10 @@ public class ShinsakaiKaisaiValidationHandler {
      * @param 結果情報 結果情報
      * @return true:あり/falseなし
      */
-    public boolean is未作成データあり(List<ShinsakaiWariateJoho> 結果情報) {
+    public boolean is未作成データあり(List<DbT5504ShinsakaiWariateJohoKenshuEntity> 結果情報) {
         boolean is資料作成年月日無 = false;
-        for (ShinsakaiWariateJoho joho : 結果情報) {
-            if (joho.get審査会資料作成年月日() == null || joho.get審査会資料作成年月日().isEmpty()) {
+        for (DbT5504ShinsakaiWariateJohoKenshuEntity joho : 結果情報) {
+            if (joho.getShinsakaiShiryoSakuseiYMD() == null || joho.getShinsakaiShiryoSakuseiYMD().isEmpty()) {
                 is資料作成年月日無 = true;
                 break;
             }

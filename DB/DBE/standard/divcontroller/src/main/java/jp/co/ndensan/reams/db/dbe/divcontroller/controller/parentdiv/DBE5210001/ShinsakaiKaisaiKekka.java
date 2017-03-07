@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2Identifier;
@@ -34,6 +33,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaikekka.ShinsakaiKai
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -50,7 +50,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 介護認定審査会開催結果登録するクラスです。
@@ -68,6 +67,7 @@ public class ShinsakaiKaisaiKekka {
     private static final RString 更新モード文言 = new RString("更新モード");
     private static final RString 更新BTN = new RString("btnUpdate");
     private static final RString 審査結果 = new RString("審査結果");
+    private static final RString 審査結果_模擬 = new RString("模擬");
 
     /**
      * コンストラクタです。
@@ -118,9 +118,9 @@ public class ShinsakaiKaisaiKekka {
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, shinsakaiKaisaiYoteiJoho);
 
-        SearchResult<ShinsakaiWariateJoho> wariateJohoResult = kekkaTorokuservice.get介護認定審査会割当情報(開催番号);
+        List<DbT5504ShinsakaiWariateJohoKenshuEntity> kenshuList = kekkaTorokuservice.select介護認定審査会割当情報(開催番号);
         ShinsakaiKaisaiValidationHandler validationHandler = getValidationHandler(div);
-        if (validationHandler.is未作成データあり(wariateJohoResult.records())) {
+        if (validationHandler.is未作成データあり(kenshuList)) {
             div.setReadOnly(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(更新BTN, true);
             return ResponseData.of(div).addMessage(DbeErrorMessages.審査会資料未作成あり.getMessage()).respond();
@@ -245,10 +245,10 @@ public class ShinsakaiKaisaiKekka {
         if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))
                 || ResponseHolder.isWarningIgnoredRequest()) {
-            setYotei(div);
+            RString 利用モード = ViewStateHolder.get(ViewStateKeys.利用モード, RString.class);
+            setYotei(div, 利用モード);
             releaseRealInitialLock(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
             getHandler(div).set完了メッセージ(getHandler(div).get審査会名称());
-            RString 利用モード = ViewStateHolder.get(ViewStateKeys.利用モード, RString.class);
             if (利用モード.equals(審査結果)) {
                 return ResponseData.of(div).setState(DBE5210001StateName.完了);
             } else {
@@ -269,13 +269,16 @@ public class ShinsakaiKaisaiKekka {
         return ResponseData.of(div).forwardWithEventName(DBE5210001TransitionEventName.審査会一覧に戻る).respond();
     }
 
-    private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
+    private void setYotei(ShinsakaiKaisaiKekkaDiv div, RString 利用モード) {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
         if (新規モード文言.equals(div.getModel())) {
             manager.updateBy開催無(getYoteiJoho(div, 開催番号));
         }
         if (更新モード文言.equals(div.getModel())) {
             manager.updateBy開催(getKekkaJoho(div, 開催番号));
+        }
+        if (利用モード.equals(審査結果_模擬)) {
+            kekkaTorokuservice.update介護認定審査会割当情報(開催番号);
         }
     }
 
