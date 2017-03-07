@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Mar 04 10:50:06 JST 2017 
+ * Tue Mar 07 21:11:52 JST 2017 
  */
 
 

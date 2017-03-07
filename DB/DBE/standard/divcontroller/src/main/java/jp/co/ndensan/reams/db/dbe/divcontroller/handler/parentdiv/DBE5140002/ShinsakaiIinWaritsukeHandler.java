@@ -19,10 +19,13 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakai
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinKoseiIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -30,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 介護認定審査会割当委員情報のHandlerクラスです。
@@ -85,6 +90,9 @@ public class ShinsakaiIinWaritsukeHandler {
         }
         div.getWaritsuke().getChkSeishinkai().setSelectedItemsByKey(chkSeishinkailist);
         div.getWaritsuke().getTxtKijunYMD().setValue(RDate.getNowDate());
+        div.getWaritsuke().getTxtChikuCode().setValue(business.get開催地区コード());
+        div.getWaritsuke().getTxtChikuMeisho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(), new Code(business.get開催地区コード())));
+        div.getWaritsuke().getTxtWaritsuke().setValue(new Decimal(business.get割当人数()));
     }
 
     /**

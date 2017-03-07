@@ -15,6 +15,8 @@
     <result property="shinsakaiShuryoYoteiTime" column="shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     <result property="shinsakaiKaisaiBashoName" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     <result property="shinsakaiYoteiTeiin" column="shinsakaiYoteiTeiin" />
+    <result property="shinsakaiWariateZumiNinzu" column="shinsakaiWariateZumiNinzu" />
+    <result property="shinsakaiKaisaiChikuCode" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="get審査会開催予定情報By開催番号" resultMap="resultMap_getShinsakaiKaisaiYoteiJoho"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
@@ -27,6 +29,8 @@
             ,dbT5592."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName"
             ,dbT5501."shinsakaiShuryoYoteiTime" AS "shinsakaiShuryoYoteiTime"
             ,dbT5501."shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
+            ,dbT5501."shinsakaiWariateZumiNinzu" AS "shinsakaiWariateZumiNinzu"
+            ,dbT5592."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode"
         FROM
             rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" dbT5501
         INNER JOIN rgdb."DbT5591GogitaiJoho" dbT5591

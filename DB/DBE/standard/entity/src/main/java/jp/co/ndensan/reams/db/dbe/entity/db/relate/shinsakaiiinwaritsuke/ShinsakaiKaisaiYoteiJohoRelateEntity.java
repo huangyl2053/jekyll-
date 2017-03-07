@@ -27,4 +27,6 @@ public class ShinsakaiKaisaiYoteiJohoRelateEntity {
     private RString shinsakaiKaisaiYoteiYMD;
     private int shinsakaiYoteiTeiin;
     private RString shinsakaiKaisaiBashoName;
+    private int shinsakaiWariateZumiNinzu;
+    private RString shinsakaiKaisaiChikuCode;
 }

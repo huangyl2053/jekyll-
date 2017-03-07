@@ -97,4 +97,22 @@ public class ShinsakaiKaisaiYoteiJoho {
     public boolean is精神科医() {
         return entity.isGogitaiSeishinkaSonzaiFlag();
     }
+
+    /**
+     * 割当人数を取得します。
+     *
+     * @return 割当人数
+     */
+    public int get割当人数() {
+        return entity.getShinsakaiWariateZumiNinzu();
+    }
+
+    /**
+     * 開催地区コードを取得します。
+     *
+     * @return 開催地区コード
+     */
+    public RString get開催地区コード() {
+        return entity.getShinsakaiKaisaiChikuCode();
+    }
 }
