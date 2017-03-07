@@ -236,4 +236,22 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
     public boolean is合議体ダミーフラグ() {
         return entity.is合議体ダミーフラグ();
     }
+
+    /**
+     * 開催地区コードを返します。
+     *
+     * @return 開催地区コード
+     */
+    public RString get開催地区コード() {
+        return entity.get開催地区コード();
+    }
+
+    /**
+     * 精神科存在フラグを返します。
+     *
+     * @return 精神科存在フラグ
+     */
+    public boolean is精神科存在フラグ() {
+        return entity.is精神科存在フラグ();
+    }
 }

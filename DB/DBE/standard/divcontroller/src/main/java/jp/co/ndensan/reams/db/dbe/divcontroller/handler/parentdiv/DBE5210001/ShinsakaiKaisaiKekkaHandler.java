@@ -18,10 +18,13 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.IOnseiFileOperatorDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -29,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 介護認定審査会開催結果登録するクラスです。
@@ -41,6 +45,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     private static final RString BUTTON_UPDATE = new RString("btnUpdate");
     private static final RString 完了メッセージ文言 = new RString("審査会名称：");
     private static final RString 模擬 = new RString("key0");
+    private static final RString 精神科医所属 = new RString("key0");
     private static final RString 審査結果 = new RString("審査結果");
     private static final RString 審査結果_模擬 = new RString("模擬");
 
@@ -61,19 +66,27 @@ public class ShinsakaiKaisaiKekkaHandler {
      */
     public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho, List<ShinsakaiOnseiJoho2> 音声情報リスト) {
         List<RString> chkMogiKey = new ArrayList();
+        List<RString> shurui = new ArrayList<>();
         chkMogiKey.add(模擬);
+        shurui.add(精神科医所属);
         boolean is新規 = false;
         for (int i = 0; i < saiYoteiJoho.size(); i++) {
             ShinsakaiKaisaiYoteiJohoBusiness business = saiYoteiJoho.get(i);
             div.getTxtShinsakaiMeisho().setValue(business.get審査会名称());
             div.setGogitaiNo(new RString(String.valueOf(business.get合議体番号())));
             div.getTxtGogitai().setValue(business.get合議体名称());
-            div.getTxtYoteiTeiin().setValue(new Decimal(business.get予定人数()));
+            div.getTxtYoteiTeiin().setValue(new Decimal(business.get予定定員()));
+            div.getTxtWaritsuke().setValue(new Decimal(business.get予定人数()));
             div.getTxtYoteiKaijo().setValue(business.get介護認定審査会開催場所名称());
             div.getTxtKaisaiYoteibi().setValue(business.get開催予定日());
             div.getTxtYoteiStartTime().setValue(strToTime(business.get予定開始時間()));
             div.getTxtYoteiEndTime().setValue(strToTime(business.get予定終了時間()));
             div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new Decimal(business.get所要時間()));
+            div.getTxtChikuCode().setValue(business.get開催地区コード());
+            div.getTxtChikuMeisho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(), new Code(business.get開催地区コード())));
+            if (business.is精神科存在フラグ()) {
+                div.getChkShurui().setSelectedItemsByKey(shurui);
+            }
             if (business.is合議体ダミーフラグ()) {
                 div.getChkMogi().setSelectedItemsByKey(chkMogiKey);
                 ViewStateHolder.put(ViewStateKeys.利用モード, 審査結果_模擬);
