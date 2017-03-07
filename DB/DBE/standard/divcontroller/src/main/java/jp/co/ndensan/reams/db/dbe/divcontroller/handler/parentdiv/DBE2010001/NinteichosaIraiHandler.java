@@ -229,8 +229,7 @@ public class NinteichosaIraiHandler {
         for (dgNinteiTaskList_Row row : div.getDgNinteiTaskList().getSelectedItems()) {
             int 認定調査依頼履歴番号 = manager.getMax認定調査依頼履歴番号(row.getShinseishoKanriNo());
             int index = dataSource.indexOf(row);
-            row.getChosaIraiKigen().setValue(div.getTxtChosaIraiYmd().getValue()
-                    .plusDay(Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString())));
+            row.getChosaIraiKigen().setValue(get提出期限(row.getNinteiShinseiDay().getValue()));
             row.setChosaIraiKubunCode(div.getDdlIraiKubun().getSelectedKey());
             row.setChosaIraiKubun(NinteiChousaIraiKubunCode.toValue(div.getDdlIraiKubun().getSelectedKey()).get名称());
             row.setKonkaiChosaItakusakiCode(div.getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
@@ -247,6 +246,20 @@ public class NinteichosaIraiHandler {
             dataSource.set(index, row);
         }
         div.getDgNinteiTaskList().setDataSource(dataSource);
+    }
+
+    private RDate get提出期限(RDate 申請日) {
+        RDate 提出期限;
+        int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援, div.getCcdHokenshaList().getSelectedItem().get市町村コード().value()).toString());
+        RString 期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援, div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+        if (new RString("1").equals(期限設定方法)) {
+            提出期限 = div.getTxtChosaIraiYmd().getValue().plusDay(期限日数);
+        } else {
+            提出期限 = 申請日.plusDay(期限日数);
+        }
+        return 提出期限;
     }
 
     /**
