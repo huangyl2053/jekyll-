@@ -89,7 +89,11 @@ public class NinteiShinsakaiKaisaibashoToroku {
         div.getShinsakaiKaisaibashokensaku().getRadHyojiJoken().setSelectedKey(デフォルト検索条件);
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getShinsakaiKaisaibashokensaku().getTxtDispMax().setValue(new Decimal(最大表示件数.toString()));
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        if (isHasModify(div)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -246,7 +250,12 @@ public class NinteiShinsakaiKaisaibashoToroku {
             getHandler(div).set開催場所編集エリアを初期化処理();
         }
         div.getShinsakaiKaisaibashokensaku().setReadOnly(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        if (isHasModify(div)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), false);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnUpdate"), true);
+        }
+        
         return ResponseData.of(div).respond();
     }
 
@@ -375,6 +384,17 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 || !通常.equals(div.getDdlKaisaiBashoJokyo().getSelectedValue())
                 || !div.getCcdKaisaiChikuCode().getCode().isEmpty()
                 || !div.getCcdKaisaiChikuCode().getCodeMeisho().isEmpty();
+    }
+
+    private boolean isHasModify(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+
+        for (dgKaisaibashoIchiran_Row row : div.getDgKaisaibashoIchiran().getDataSource()) {
+            if (!row.getJyotai().isNull() && !row.getJyotai().isEmpty()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
