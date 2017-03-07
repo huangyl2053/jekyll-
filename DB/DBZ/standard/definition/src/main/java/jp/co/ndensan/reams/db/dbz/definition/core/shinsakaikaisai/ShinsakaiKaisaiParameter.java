@@ -213,8 +213,8 @@ public final class ShinsakaiKaisaiParameter {
                 /* is未開催分のみ */ false,
                 /* is審査会未完了のみ */ false,
                 /* is審査会完了のみ */ false,
-                /* is開催予定登録OR対象者割付 */ false,
-                /* is表示しない */ false,
+                /* is開催予定登録OR対象者割付 */ true,
+                /* is表示しない */ true,
                 /* 審査会開催番号 */ RString.EMPTY,
                 /* is結果登録審査会未完了のみ */ !全ての審査会.equals(表示条件),
                 /* is審査会未開催分のみ*/ false

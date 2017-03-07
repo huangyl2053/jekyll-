@@ -57,12 +57,20 @@
                 shinsakaiKaisaiYoteiJoho."shiryoSakuseiZumiFlag" AS "shinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag",
                 shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" AS "shinsakaiKaisaiYoteiJoho_ShinsakaiShinchokuJokyo",
                 gogitaiJoho."gogitaiDummyFlag" AS "gogitaiJoho_gogitaiDummyFlag",
-                CASE
-                    WHEN DbT5502.shinsakaiShiryoMisakuseiKensu IS NULL
-                        THEN '割当なし'
-                    WHEN DbT5502.shinsakaiShiryoMisakuseiKensu = 0
-                        THEN '作成済'
-                    ELSE '未作成あり'
+                CASE gogitaiJoho."gogitaiDummyFlag"
+                    WHEN true THEN (
+                        CASE
+                            WHEN DbT5504.shinsakaiShiryoMisakuseiKensu IS NULL THEN '割当なし'
+                            WHEN DbT5504.shinsakaiShiryoMisakuseiKensu = 0     THEN '作成済'
+                            ELSE '未作成あり'
+                        END
+                    ) ELSE (
+                        CASE
+                            WHEN DbT5502.shinsakaiShiryoMisakuseiKensu IS NULL THEN '割当なし'
+                            WHEN DbT5502.shinsakaiShiryoMisakuseiKensu = 0     THEN '作成済'
+                            ELSE '未作成あり'
+                        END
+                    )
                 END AS 資料作成
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
@@ -90,6 +98,19 @@
             GROUP BY "shinsakaiKaisaiNo"
         ) AS DbT5502
             ON DbT5502."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
+        LEFT JOIN (
+            SELECT
+                "shinsakaiKaisaiNo",
+                SUM (
+                    CASE WHEN "shinsakaiShiryoSakuseiYMD" IS NULL THEN 1
+                         WHEN "shinsakaiShiryoSakuseiYMD" = '' THEN 1
+                         ELSE 0 END
+                ) AS shinsakaiShiryoMisakuseiKensu
+            FROM
+                rgdb."DbT5504ShinsakaiWariateJohoKenshu"
+            GROUP BY "shinsakaiKaisaiNo"
+        ) AS DbT5504
+            ON DbT5504."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
         <if test="is結果登録審査会未完了のみ">
         INNER JOIN  (SELECT shinsakaiWariateJoho."shinsakaiKaisaiNo"
                         FROM rgdb."DbT5502ShinsakaiWariateJoho" AS shinsakaiWariateJoho

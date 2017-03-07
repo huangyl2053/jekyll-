@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.IYokaigoNinteiShinsakaiIchiranListDiv.*;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -42,17 +43,6 @@ import jp.co.ndensan.reams.uz.uza.workflow.menu.Menus;
  */
 public class KaigoNinteiShinsakai {
 
-    private static final RString 遷移モード_審査会個人別状況照会 = new RString("hanteiKekka");
-    private static final RString 遷移モード_介護認定審査会審査対象データ出力 = new RString("dataShutsuryoku");
-    private static final RString 遷移モード_介護認定審査会対象者割付 = new RString("taishoshaWaritsuke");
-    private static final RString 遷移モード_介護認定審査会対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
-    private static final RString 遷移モード_介護認定審査会資料作成 = new RString("shinsakaiShiryoSakusei");
-    private static final RString 遷移モード_介護認定審査会委員事前審査結果登録 = new RString("jizenKekkaToroku");
-    private static final RString 遷移モード_介護認定審査会委員事前審査 = new RString("jizenKekkaToroku");
-    private static final RString 遷移モード_審査会結果登録 = new RString("shinsaKekkaToroku");
-    private static final RString 遷移モード_介護認定審査会審査結果データ取込み = new RString("dataShutsuryoku");
-    private static final RString 遷移モード_介護認定審査会審査結果登録 = new RString("shinsaKekkaToroku");
-    private static final RString 遷移モード_介護認定審査会委員割付 = new RString("shinsakaiShiryoSakusei");
     private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN21004");
     private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN61004");
     private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN61005");
@@ -79,10 +69,10 @@ public class KaigoNinteiShinsakai {
 
         RString menuID = ResponseHolder.getMenuID();
         RString mode = getMode().get(menuID);
-        if (遷移モード_介護認定審査会対象者割付.equals(mode)) {
+        if (モード_対象者割付.equals(mode)) {
             RString 審査会自動割付使用有無 = DbBusinessConfig.get(ConfigNameDBE.審査会自動割付使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (審査会自動割付使用しない.equals(審査会自動割付使用有無)) {
-                mode = 遷移モード_介護認定審査会対象者割付_自動割付使用不可;
+                mode = モード_対象者割付_自動割付使用不可;
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(自動割当ボタン名, true);
             }
         }
@@ -337,17 +327,17 @@ public class KaigoNinteiShinsakai {
 
     private Map<RString, RString> getMode() {
         Map<RString, RString> mode = new HashMap<>();
-        mode.put(メニューID_審査会個人別状況照会, 遷移モード_審査会個人別状況照会);
-        mode.put(メニューID_介護認定審査会審査対象データ出力, 遷移モード_介護認定審査会審査対象データ出力);
-        mode.put(メニューID_介護認定審査会対象者割付, 遷移モード_介護認定審査会対象者割付);
-        mode.put(メニューID_介護認定審査会資料作成, 遷移モード_介護認定審査会資料作成);
-        mode.put(メニューID_介護認定審査会委員事前審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
-        mode.put(メニューID_介護認定審査会委員事前審査, 遷移モード_介護認定審査会委員事前審査);
-        mode.put(メニューID_審査会開催結果登録, 遷移モード_審査会結果登録);
-        mode.put(メニューID_審査会審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
-        mode.put(メニューID_介護認定審査会審査結果データ取込み, 遷移モード_介護認定審査会審査結果データ取込み);
-        mode.put(メニューID_介護認定審査会審査結果登録, 遷移モード_介護認定審査会審査結果登録);
-        mode.put(メニューID_介護認定審査会委員割付, 遷移モード_介護認定審査会委員割付);
+        mode.put(メニューID_審査会個人別状況照会, モード_判定結果);
+        mode.put(メニューID_介護認定審査会審査対象データ出力, モード_データ出力);
+        mode.put(メニューID_介護認定審査会対象者割付, モード_対象者割付);
+        mode.put(メニューID_介護認定審査会資料作成, モード_審査会資料);
+        mode.put(メニューID_介護認定審査会委員事前審査結果登録, モード_事前結果登録);
+        mode.put(メニューID_介護認定審査会委員事前審査, モード_事前結果登録);
+        mode.put(メニューID_審査会開催結果登録, モード_審査結果登録);
+        mode.put(メニューID_審査会審査結果登録, モード_事前結果登録);
+        mode.put(メニューID_介護認定審査会審査結果データ取込み, モード_データ出力);
+        mode.put(メニューID_介護認定審査会審査結果登録, モード_審査結果登録);
+        mode.put(メニューID_介護認定審査会委員割付, モード_審査会資料);
         return mode;
     }
 

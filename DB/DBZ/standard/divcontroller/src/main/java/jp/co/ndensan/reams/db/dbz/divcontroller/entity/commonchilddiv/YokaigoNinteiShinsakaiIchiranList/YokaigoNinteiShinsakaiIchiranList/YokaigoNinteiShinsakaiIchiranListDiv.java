@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * YokaigoNinteiShinsakaiIchiranList のクラスファイル
@@ -27,13 +27,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBE-0120-010 lishengli
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("HyojiJoken")
     private HyojiJokenDiv HyojiJoken;
     @JsonProperty("dgShinsakaiIchiran")
@@ -128,7 +130,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
             GridDisplayMode[] enumArray = GridDisplayMode.values();
 
             for (GridDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -143,11 +145,11 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     public GridDisplayMode getMode_GridDisplayMode() {
-        return (GridDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, GridDisplayMode.class );
+        return (GridDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, GridDisplayMode.class);
     }
 
-    public void setMode_GridDisplayMode( GridDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, GridDisplayMode.class , value );
+    public void setMode_GridDisplayMode(GridDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, GridDisplayMode.class, value);
     }
 
     /*
@@ -159,7 +161,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setTxtHyojiKikan(TextBoxDateRange txtHyojiKikan) {
+    public void setTxtHyojiKikan(TextBoxDateRange txtHyojiKikan) {
         this.getHyojiJoken().setTxtHyojiKikan(txtHyojiKikan);
     }
 
@@ -169,7 +171,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.getHyojiJoken().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
@@ -179,7 +181,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setRadDammyShinsakai(RadioButton radDammyShinsakai) {
+    public void setRadDammyShinsakai(RadioButton radDammyShinsakai) {
         this.getHyojiJoken().setRadDammyShinsakai(radDammyShinsakai);
     }
 
@@ -189,7 +191,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setRadHyojiJokenWaritsukeMikanryo(RadioButton radHyojiJokenWaritsukeMikanryo) {
+    public void setRadHyojiJokenWaritsukeMikanryo(RadioButton radHyojiJokenWaritsukeMikanryo) {
         this.getHyojiJoken().setRadHyojiJokenWaritsukeMikanryo(radHyojiJokenWaritsukeMikanryo);
     }
 
@@ -199,7 +201,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setRadHyojiJokenWaritsukeKanryo(RadioButton radHyojiJokenWaritsukeKanryo) {
+    public void setRadHyojiJokenWaritsukeKanryo(RadioButton radHyojiJokenWaritsukeKanryo) {
         this.getHyojiJoken().setRadHyojiJokenWaritsukeKanryo(radHyojiJokenWaritsukeKanryo);
     }
 
@@ -209,7 +211,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setRadHyojiJokenShinsakaiMikanryo(RadioButton radHyojiJokenShinsakaiMikanryo) {
+    public void setRadHyojiJokenShinsakaiMikanryo(RadioButton radHyojiJokenShinsakaiMikanryo) {
         this.getHyojiJoken().setRadHyojiJokenShinsakaiMikanryo(radHyojiJokenShinsakaiMikanryo);
     }
 
@@ -219,7 +221,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setRadHyojiJokenShinsakaiKanryo(RadioButton radHyojiJokenShinsakaiKanryo) {
+    public void setRadHyojiJokenShinsakaiKanryo(RadioButton radHyojiJokenShinsakaiKanryo) {
         this.getHyojiJoken().setRadHyojiJokenShinsakaiKanryo(radHyojiJokenShinsakaiKanryo);
     }
 
@@ -229,7 +231,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
+    public void setBtnKensaku(Button btnKensaku) {
         this.getHyojiJoken().setBtnKensaku(btnKensaku);
     }
 
@@ -239,7 +241,7 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getHyojiJoken().setBtnClear(btnClear);
     }
 

@@ -14,13 +14,12 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
     /**
      * 共有子Divの初期化を行います。
      *
-     * @param モード
+     * @param モード モード
      */
     void initialize(RString モード);
 
     /**
      * 選択アイコン押下を行います。
-     *
      */
     void get開催番号();
 
@@ -50,4 +49,37 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
      * @param height 指定する高さ
      */
     void set一覧グリッド高さ指定(RString height);
+
+    /**
+     * モード_開催予定登録
+     */
+    public static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
+    /**
+     * モード_対象者割付
+     */
+    public static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
+    /**
+     * モード_対象者割付_自動割付使用不可
+     */
+    public static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
+    /**
+     * モード_審査会資料
+     */
+    public static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");
+    /**
+     * モード_審査結果登録
+     */
+    public static final RString モード_審査結果登録 = new RString("shinsaKekkaToroku");
+    /**
+     * モード_事前結果登録
+     */
+    public static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
+    /**
+     * モード_データ出力
+     */
+    public static final RString モード_データ出力 = new RString("dataShutsuryoku");
+    /**
+     * モード_判定結果
+     */
+    public static final RString モード_判定結果 = new RString("hanteiKekka");
 }

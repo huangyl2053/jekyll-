@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiM
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.IYokaigoNinteiShinsakaiIchiranListDiv.*;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -41,14 +42,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class YokaigoNinteiShinsakaiIchiranListHandler {
 
-    private static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
-    private static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
-    private static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
-    private static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");
-    private static final RString モード_審査結果登録 = new RString("shinsaKekkaToroku");
-    private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
-    private static final RString モード_データ出力 = new RString("dataShutsuryoku");
-    private static final RString モード_判定結果 = new RString("hanteiKekka");
     private static final RString KEY0 = new RString("key0");
     private static final int LENGTH_4 = 4;
     private final YokaigoNinteiShinsakaiIchiranListDiv div;
@@ -135,11 +128,6 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             row.getTaishoNinzu().setValue(shinsakaiKaisai.get介護認定審査会実施人数());
             row.setOnseiKiroku(shinsakaiKaisai.get音声記録());
             row.getDataShutsuryoku().setValue(shinsakaiKaisai.getモバイルデータ出力年月日());
-//            if (shinsakaiKaisai.is資料作成済フラグ()) {
-//                row.setShiryoSakuseiKubun(IsShiryoSakuseiZumi.toValue(shinsakaiKaisai.is資料作成済フラグ()).get名称());
-//            } else {
-//                row.setShiryoSakuseiKubun(RString.EMPTY);
-//            }
             row.setShiryoSakuseiKubun(shinsakaiKaisai.get資料作成状況());
             if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                 row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get画面表示名称());
@@ -162,7 +150,6 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
 
     /**
      * 選択アイコン押下処理です。
-     *
      */
     public void get開催番号() {
         RString 開催番号 = div.getDgShinsakaiIchiran().getActiveRow().getShinsakaiKaisaiNo();
@@ -203,7 +190,6 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
 
     /**
      * 最大取得件数を設定します。
-     *
      */
     public void set最大取得件数() {
         RString 検索制御_最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
@@ -214,7 +200,6 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
 
     /**
      * SelectedGridLineを取得する。
-     *
      */
     public void getSelectedGridLine() {
         ShinsakaiKaisaiMode mode = new ShinsakaiKaisaiMode();

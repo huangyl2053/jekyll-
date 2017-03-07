@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigoninteishinsakaiichiranlist.YokaigoNinteiShinsakaiIchiranListHandler;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.IYokaigoNinteiShinsakaiIchiranListDiv.*;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaikaisai.ShinsakaiKaisaiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -28,18 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class YokaigoNinteiShinsakaiIchiranList {
 
-    private static final RString ラジオボタン初期化_key1 = new RString("key1");
     private static final RString ラジオボタン初期化_key0 = new RString("key0");
-    private static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
-    private static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
-    private static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
-    private static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");
-    private static final RString モード_審査結果登録 = new RString("shinsaKekkaToroku");
-    private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
-    private static final RString モード_データ出力 = new RString("dataShutsuryoku");
-    private static final RString モード_判定結果 = new RString("hanteiKekka");
     private static final RString UI_CONTAINER_ID_審査会審査結果登録 = new RString("DBEUC52301");
-    private RString モード;
     private RString 表示条件;
     private RString ダミー審査会;
 
@@ -85,14 +76,13 @@ public class YokaigoNinteiShinsakaiIchiranList {
         div.getDgShinsakaiIchiran().getDataSource().clear();
         div.getDgShinsakaiIchiran().getGridSetting().setLimitRowCount(0);
         div.getDgShinsakaiIchiran().getGridSetting().setSelectedRowCount(0);
-        モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
-        RDate 表示期間From = div.getTxtHyojiKikan().getFromValue();
-        RDate 表示期間To = div.getTxtHyojiKikan().getToValue();
         Decimal 最大表示件数 = div.getTxtSaidaiHyojiKensu().getValue();
         ValidationMessageControlPairs validationMessages = getHandler(div).最大表示件数チェック();
         if (最大表示件数 == null || 最大表示件数.intValue() == 0) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+
+        final RString モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
         if (モード_開催予定登録.equals(モード) || モード_対象者割付.equals(モード) || モード_対象者割付_自動割付使用不可.equals(モード)) {
             ダミー審査会 = div.getRadDammyShinsakai().getSelectedValue();
             表示条件 = div.getRadHyojiJokenWaritsukeMikanryo().getSelectedValue();
@@ -100,14 +90,15 @@ public class YokaigoNinteiShinsakaiIchiranList {
         if (モード_審査会資料.equals(モード)) {
             表示条件 = div.getRadHyojiJokenWaritsukeKanryo().getSelectedValue();
         }
-        if (モード_審査結果登録.equals(モード) || モード_事前結果登録.equals(モード)
-                || モード_データ出力.equals(モード)) {
+        if (モード_審査結果登録.equals(モード) || モード_事前結果登録.equals(モード) || モード_データ出力.equals(モード)) {
             表示条件 = div.getRadHyojiJokenShinsakaiMikanryo().getSelectedValue();
         }
         if (モード_判定結果.equals(モード)) {
             表示条件 = div.getRadHyojiJokenShinsakaiKanryo().getSelectedValue();
         }
 
+        RDate 表示期間From = div.getTxtHyojiKikan().getFromValue();
+        RDate 表示期間To = div.getTxtHyojiKikan().getToValue();
         RString 期間From;
         RString 期間To;
         if (表示期間From != null && 表示期間To != null) {
@@ -116,7 +107,6 @@ public class YokaigoNinteiShinsakaiIchiranList {
         } else if (表示期間From != null && 表示期間To == null) {
             期間From = 表示期間From.toDateString();
             期間To = RDate.MAX.toDateString();
-
         } else if (表示期間From == null && 表示期間To != null) {
             期間From = RDate.MIN.toDateString();
             期間To = 表示期間To.toDateString();
@@ -126,8 +116,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
         }
         ShinsakaiKaisaiParameter parameter = createParam(
                 期間From, 期間To, モード, 表示条件, 最大表示件数, ダミー審査会);
-        SearchResult<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.
-                createInstance().get審査会一覧(parameter);
+        SearchResult<ShinsakaiKaisai> 審査会一覧 = ShinsakaiKaisaiFinder.createInstance().get審査会一覧(parameter);
         if (審査会一覧 == null || 審査会一覧.records().isEmpty()) {
             validationMessages = getHandler(div).該当データが存在のチェック();
             if (validationMessages.iterator().hasNext()) {
