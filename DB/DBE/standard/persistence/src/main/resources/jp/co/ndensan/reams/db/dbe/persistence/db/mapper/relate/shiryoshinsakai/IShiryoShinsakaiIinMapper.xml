@@ -27,7 +27,13 @@
         , dbt5202."riyoShisetsuJusho"
         , dbt5202."riyoShisetsuTelNo"
         , dbt5115."imageSharedFileId"
-        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        FROM
+        <if test="isGogitaiDummyFlag">
+            rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
+        </if>
+        <if test="!isGogitaiDummyFlag">
+            rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502            
+        </if>
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         AND dbt5101."shoriJotaiKubun" IN
@@ -94,7 +100,8 @@
         dbt5501."shinsakaiYoteiTeiin" AS dbt5501_yoteiTeiin,
         dbt5501."shinsakaiWariateZumiNinzu" AS dbt5501_wariateZumiNinzu,
         dbt5591."gogitaiMei" AS dbt5591_gogitaiMei,
-        dbt5501."shinsakaiShiryoSakuseiYMD" AS dbt5501_shiryoSakuseiYMD
+        dbt5501."shinsakaiShiryoSakuseiYMD" AS dbt5501_shiryoSakuseiYMD,
+        dbt5591."gogitaiDummyFlag" AS dbt5591_gogitaiDummyFlag
         FROM
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS dbt5501
         INNER JOIN
@@ -714,7 +721,13 @@
         ZenShinsakaiWariateJoho."nijiHanteiNinteiYukoKikan" AS dbt5102_yukoKikan,
         dbt5116."ichijiHanteiKekkaCode" AS dbt5116_ichijiHanteiKekkaCode,
         dbt5116."ichijiHnateiKeikokuCode" AS dbt5116_ichijiHnateiKeikokuCode
-        FROM rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
+        FROM
+        <if test="isGogitaiDummyFlag">
+            rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
+        </if>
+        <if test="!isGogitaiDummyFlag">
+            rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502            
+        </if>
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         AND dbt5101."shoriJotaiKubun" IN
@@ -781,7 +794,13 @@
         , dbt5116."ichijiHanteiKekkaNinchishoKasanCode"
         , dbt5116."ichijiHnateiKeikokuCode"
         , dbt5116."kijunJikan"
-        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        FROM
+        <if test="isGogitaiDummyFlag">
+            rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
+        </if>
+        <if test="!isGogitaiDummyFlag">
+            rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502            
+        </if>
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         AND (dbt5101."shoriJotaiKubun" = '0' OR dbt5101."shoriJotaiKubun" = '3')
@@ -818,7 +837,13 @@
     <select id="getShinsakaiTaiyosyaJohoCount" resultType="java.lang.Integer"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT COUNT(*)
-        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        FROM
+        <if test="isGogitaiDummyFlag">
+            rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
+        </if>
+        <if test="!isGogitaiDummyFlag">
+            rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502            
+        </if>
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         AND (dbt5101."shoriJotaiKubun" = '0' OR dbt5101."shoriJotaiKubun" = '3')
@@ -874,6 +899,23 @@
         </if>
         <if test="isSakuseiJokenTsuika">
             AND "DbT5502ShinsakaiWariateJoho"."shinsakaiShiryoSakuseiYMD" IS NULL
+        </if>
+    </select>
+
+    <select id="getSelectByKey_DbT5504ShinsakaiWariateJohoKenshu" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper.ResultMap_DbT5504ShinsakaiWariateJohoKenshuEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.ShinsakaiShiryoUpdateMyBatisParameter" fetchSize="500"  resultOrdered="true">
+        SELECT
+          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper.allColumns_DbT5504ShinsakaiWariateJohoKenshu" />
+        FROM
+          rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS "DbT5504ShinsakaiWariateJohoKenshu"
+        WHERE
+          "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        <if test="isSakuseiJokenHani">
+            AND #{bangoStart} <![CDATA[<=]]> "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiOrder"
+            AND "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiOrder" <![CDATA[<=]]> #{bangoEnd}
+        </if>
+        <if test="isSakuseiJokenTsuika">
+            AND "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiShiryoSakuseiYMD" IS NULL
         </if>
     </select>
 
@@ -946,6 +988,7 @@
         <result property="割当済み人数" column="dbt5501_wariateZumiNinzu" />
         <result property="合議体名称" column="dbt5591_gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="資料作成年月日" column="dbt5501_shiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="合議体ダミーフラグ" column="dbt5591_gogitaiDummyFlag" />
     </resultMap>
     
     <select id="getTokkiJikouItiziHantei"
@@ -1060,7 +1103,13 @@
         , dbt5502."shinsakaiOrder"
         , dbt5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
         , dbt5101."hihokenshaNo" AS hihokenshaNo
-        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        FROM
+        <if test="isGogitaiDummyFlag">
+            rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
+        </if>
+        <if test="!isGogitaiDummyFlag">
+            rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502            
+        </if>
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" dbt5201
@@ -1134,7 +1183,13 @@
             fetchSize="500"
             resultOrdered="true">
         SELECT COUNT(*)
-        FROM rgdb."DbT5502ShinsakaiWariateJoho" dbt5502
+        FROM
+        <if test="isGogitaiDummyFlag">
+            rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
+        </if>
+        <if test="!isGogitaiDummyFlag">
+            rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502            
+        </if>
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
         ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" dbt5201

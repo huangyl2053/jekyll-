@@ -125,4 +125,13 @@ public class KaisaiYoteiJohoBusiness {
     public FlexibleDate get資料作成年月日() {
         return entity.get資料作成年月日();
     }
+
+    /**
+     * 合議体ダミーフラグを取得します。
+     *
+     * @return 合議体ダミーフラグ
+     */
+    public boolean is合議体ダミーフラグ() {
+        return entity.is合議体ダミーフラグ();
+    }
 }

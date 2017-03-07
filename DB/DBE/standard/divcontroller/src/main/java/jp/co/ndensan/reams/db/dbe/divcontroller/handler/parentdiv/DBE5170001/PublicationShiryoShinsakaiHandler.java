@@ -57,6 +57,7 @@ public class PublicationShiryoShinsakaiHandler {
     private final RString 印刷帳票_概況特記一覧 = new RString("4");
     private final RString 概況特記出力しない = new RString("2");
     private final RString 概況特記一覧出力しない = new RString("2");
+    private final RString ダミー = new RString("0");
     private final PublicationShiryoShinsakaiDiv div;
     private static final int INT_4 = 4;
     private static final int INT_0 = 0;
@@ -92,6 +93,11 @@ public class PublicationShiryoShinsakaiHandler {
             div.getTxtYoteiTeiin().setValue(new Decimal(開催予定情報.get予定定員()));
             div.getTxtWariateNinzu().setValue(new Decimal(開催予定情報.get割当済み人数()));
             div.getTxtOperationDate().setValue(to日期転換(開催予定情報.get資料作成年月日()));
+            if (開催予定情報.is合議体ダミーフラグ()) {
+                List<RString> dummy = new ArrayList<>();
+                dummy.add(ダミー);
+                div.getChkGogitaiDummyFlag().setSelectedItemsByKey(dummy);
+            }
         }
         出力条件の設定();
 //        set審査会資料選択可能の設定();
@@ -232,6 +238,7 @@ public class PublicationShiryoShinsakaiHandler {
         RString 委員用その他資料フラグ = new RString("0");
         RString 委員用審査会開催通知書フラグ = new RString("0");
         RString 委員用予備判定記入表フラグ = new RString("0");
+        RString 合議体ダミーフラグ = new RString("0");
 
         List<RString> 事務用出力条件組み合わせ = div.getChkPrintChoyoJimu().getSelectedKeys();
         List<RString> 事務用出力条件帳票 = div.getChkPrintChoyoJimu2().getSelectedKeys();
@@ -297,6 +304,9 @@ public class PublicationShiryoShinsakaiHandler {
         if (委員用出力条件資料.contains(印刷帳票_その他資料)) {
             委員用その他資料フラグ = new RString("1");
         }
+        if (!div.getChkGogitaiDummyFlag().getSelectedKeys().isEmpty()) {
+            合議体ダミーフラグ = new RString("1");
+        }
         return set項目(事務局審査会資料組み合わせフラグ,
                 事務局審査会対象者一覧フラグ,
                 事務局特記事項フラグ,
@@ -315,7 +325,8 @@ public class PublicationShiryoShinsakaiHandler {
                 委員用主治医意見書フラグ,
                 委員用その他資料フラグ,
                 委員用審査会開催通知書フラグ,
-                委員用予備判定記入表フラグ);
+                委員用予備判定記入表フラグ,
+                合議体ダミーフラグ);
     }
 
     private DBE517000_ShinsakaiShiryoParameter set項目(
@@ -337,7 +348,8 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員用主治医意見書フラグ,
             RString 委員用その他資料フラグ,
             RString 委員用審査会開催通知書フラグ,
-            RString 委員用予備判定記入表フラグ) {
+            RString 委員用予備判定記入表フラグ,
+            RString 合議体ダミーフラグ) {
         return new DBE517000_ShinsakaiShiryoParameter(
                 div.getTxtShinsakaiKaisaiNo().getValue().padZeroToLeft(INT_8),
                 div.getTxtShinsakaiKaijo().getValue(),
@@ -373,6 +385,7 @@ public class PublicationShiryoShinsakaiHandler {
                 委員用その他資料フラグ,
                 委員用審査会開催通知書フラグ,
                 委員用予備判定記入表フラグ,
+                合議体ダミーフラグ,
                 div.getCcdBunshoNoInput().get文書番号());
     }
 
@@ -614,7 +627,6 @@ public class PublicationShiryoShinsakaiHandler {
 //        div.getChkPrintChohyoShinsakaiJimu().setDisabledItemsByKey(審査会資料リスト);
 //        div.getChkPrintChohyoShinsakaiIin().setDisabledItemsByKey(審査会資料リスト);
 //    }
-
     private void setCcdBunshoNoInputControl() {
         if (div.getChkPrintChohyoIin2().getSelectedKeys().contains(印刷帳票_審査会開催のお知らせ)) {
             div.getCcdBunshoNoInput().setDisabled(false);

@@ -50,6 +50,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
     private static final String CHOYOJIMU_HANTEIFALG = "choyoJimu_hanteiFalg";
     private static final String CHOYOJIMU_GAIKYOUTOKKIIRANFALG = "choyoJimu_gaikyouTokkiIranFalg";
     private static final String CHOYOJIMU_SONOTASIRYOFALG = "choyoJimu_sonotaSiryoFalg";
+    private static final String GOGITAIDUMMYFLAG = "gogitaiDummyFlag";
     private static final String BUNSHOKANRINO = "bunshoKanriNo";
 
     @BatchParameter(key = SHINSAKAIKAISAINO, name = "介護認定審査会開催番号")
@@ -96,6 +97,8 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
     private RString choyoJimu_hanteiFalg;
     @BatchParameter(key = CHOYOJIMU_GAIKYOUTOKKIIRANFALG, name = "事務局概況特記一覧フラグ")
     private RString choyoJimu_gaikyouTokkiIranFalg;
+    @BatchParameter(key = GOGITAIDUMMYFLAG, name = "合議体ダミーフラグ")
+    private RString gogitaiDummyFlag;
     @BatchParameter(key = BUNSHOKANRINO, name = "文書管理番号")
     private RString bunshoKanriNo;
 
@@ -132,6 +135,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
      * @param choyoJimu_gaikyouTokkiFalg 事務_概況特記フラグ
      * @param choyoJimu_hanteiFalg 事務_予備判定記入表フラグ
      * @param choyoJimu_gaikyouTokkiIranFalg 事務_概況特記一覧フラグ
+     * @param gogitaiDummyFlag
      * @param bunshoKanriNo 文書管理番号
      * @param 帳票一覧Map 帳票一覧Map
      */
@@ -158,6 +162,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
             RString choyoJimu_gaikyouTokkiFalg,
             RString choyoJimu_hanteiFalg,
             RString choyoJimu_gaikyouTokkiIranFalg,
+            RString gogitaiDummyFlag,
             RString bunshoKanriNo,
             Map<RString, RString> 帳票一覧Map) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
@@ -182,6 +187,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
         this.choyoJimu_gaikyouTokkiFalg = choyoJimu_gaikyouTokkiFalg;
         this.choyoJimu_hanteiFalg = choyoJimu_hanteiFalg;
         this.choyoJimu_gaikyouTokkiIranFalg = choyoJimu_gaikyouTokkiIranFalg;
+        this.gogitaiDummyFlag = gogitaiDummyFlag;
         this.bunshoKanriNo = bunshoKanriNo;
         this.帳票一覧Map = 帳票一覧Map;
     }
@@ -218,7 +224,9 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
                 printHou,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
-                gogitaiName, gogitaiNo);
+                gogitaiName,
+                gogitaiNo,
+                gogitaiDummyFlag);
     }
 
     /**
@@ -233,7 +241,11 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                shinsakaiKaishiYoteiTime, sakuseiJoken, bangoStart, bangoEnd);
+                shinsakaiKaishiYoteiTime,
+                sakuseiJoken,
+                gogitaiDummyFlag,
+                bangoStart,
+                bangoEnd);
     }
 
     /**
@@ -256,9 +268,10 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
      */
     public ShinsakaiShiryoUpdateProcessParameter toShinsakaiShiryoUpdateProcessParameter() {
         return new ShinsakaiShiryoUpdateProcessParameter(shinsakaiKaisaiNo,
-        sakuseiJoken,
-        bangoStart,
-        bangoEnd);
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                gogitaiDummyFlag);
     }
 
 }

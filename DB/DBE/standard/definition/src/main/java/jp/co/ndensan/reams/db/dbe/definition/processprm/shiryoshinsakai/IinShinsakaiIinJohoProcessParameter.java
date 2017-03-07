@@ -33,8 +33,10 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
     private Decimal chohyoIinHusu;
     private RString shinsakaiKaishiYoteiTime;
     private RString sakuseiJoken;
+    private RString gogitaiDummyFlag;
     private final RString 作成条件_範囲指定 = new RString("範囲指定");
     private final RString 作成条件_追加分 = new RString("追加分");
+    private final RString ダミー = new RString("1");
 
     /**
      * コンストラクタです。
@@ -47,6 +49,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
      * @param printHou 印刷方法
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      * @param sakuseiJoken 作成条件
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      * @param bangoStart 開始資料番号
      * @param bangoEnd 終了資料番号
      */
@@ -59,6 +62,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
             RString printHou,
             RString shinsakaiKaishiYoteiTime,
             RString sakuseiJoken,
+            RString gogitaiDummyFlag,
             int bangoStart,
             int bangoEnd) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
@@ -69,6 +73,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         this.printHou = printHou;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.sakuseiJoken = sakuseiJoken;
+        this.gogitaiDummyFlag = gogitaiDummyFlag;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
     }
@@ -82,6 +87,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         boolean isShuturyokuJunEmpty = false;
         boolean isSakuseiJokenHani = false;
         boolean isSakuseiJokenTuika = false;
+        boolean isGogitaiDummyFlag = false;
         if (作成条件_範囲指定.equals(sakuseiJoken)) {
             isSakuseiJokenHani = true;
         }
@@ -91,8 +97,19 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJunEmpty = true;
         }
-        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, bangoStart, bangoEnd,
-                shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJunEmpty);
+        if (ダミー.equals(gogitaiDummyFlag)) {
+            isGogitaiDummyFlag = true;
+        }
+        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo,
+                bangoStart,
+                bangoEnd,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaisaiNo,
+                shuturyokuJun,
+                isSakuseiJokenHani,
+                isSakuseiJokenTuika,
+                isShuturyokuJunEmpty,
+                isGogitaiDummyFlag);
     }
 
     /**
@@ -104,6 +121,7 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         boolean isShuturyokuJun = false;
         boolean isSakuseiJokenHani = false;
         boolean isSakuseiJokenTuika = false;
+        boolean isGogitaiDummyFlag = false;
         if (作成条件_範囲指定.equals(sakuseiJoken)) {
             isSakuseiJokenHani = true;
         }
@@ -113,7 +131,18 @@ public class IinShinsakaiIinJohoProcessParameter implements IBatchProcessParamet
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart, bangoEnd, shuturyokuJun,
-                isShuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, shinsakaiKaisaiNo, gogitaiNo, shinsakaiKaisaiYoteiYMD);
+        if (ダミー.equals(gogitaiDummyFlag)) {
+            isGogitaiDummyFlag = true;
+        }
+        return new JimuShinsakaiIinJohoMyBatisParameter(bangoStart,
+                bangoEnd,
+                shuturyokuJun,
+                isShuturyokuJun,
+                isSakuseiJokenHani,
+                isSakuseiJokenTuika,
+                shinsakaiKaisaiNo,
+                gogitaiNo,
+                shinsakaiKaisaiYoteiYMD,
+                isGogitaiDummyFlag);
     }
 }

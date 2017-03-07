@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5504ShinsakaiWariateJohoKenshuマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5504ShinsakaiWariateJohoKenshu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper.allColumns_DbT5504ShinsakaiWariateJohoKenshu" />
+     FROM
+         rgdb."DbT5504ShinsakaiWariateJohoKenshu"
+     WHERE
+         rgdb."DbT5504ShinsakaiWariateJohoKenshu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5504ShinsakaiWariateJohoKenshu">
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiKaisaiNo" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiKaisaiNo",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinseishoKanriNo" as "dbT5504ShinsakaiWariateJohoKenshu_shinseishoKanriNo",
+         "DbT5504ShinsakaiWariateJohoKenshu"."insertDantaiCd" as "dbT5504ShinsakaiWariateJohoKenshu_insertDantaiCd",
+         "DbT5504ShinsakaiWariateJohoKenshu"."insertTimestamp" as "dbT5504ShinsakaiWariateJohoKenshu_insertTimestamp",
+         "DbT5504ShinsakaiWariateJohoKenshu"."insertReamsLoginId" as "dbT5504ShinsakaiWariateJohoKenshu_insertReamsLoginId",
+         "DbT5504ShinsakaiWariateJohoKenshu"."insertContextId" as "dbT5504ShinsakaiWariateJohoKenshu_insertContextId",
+         "DbT5504ShinsakaiWariateJohoKenshu"."isDeleted" as "dbT5504ShinsakaiWariateJohoKenshu_isDeleted",
+         "DbT5504ShinsakaiWariateJohoKenshu"."updateCount" as "dbT5504ShinsakaiWariateJohoKenshu_updateCount",
+         "DbT5504ShinsakaiWariateJohoKenshu"."lastUpdateTimestamp" as "dbT5504ShinsakaiWariateJohoKenshu_lastUpdateTimestamp",
+         "DbT5504ShinsakaiWariateJohoKenshu"."lastUpdateReamsLoginId" as "dbT5504ShinsakaiWariateJohoKenshu_lastUpdateReamsLoginId",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiKaisaiYMD" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiKaisaiYMD",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiWariateYMD" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiWariateYMD",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiOrder" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiOrder",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiOrderKakuteiFlag" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiOrderKakuteiFlag",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiJidoWaritsukeFlag" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiJidoWaritsukeFlag",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiShiryoSakuseiYMD" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiShiryoSakuseiYMD",
+         "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiShiryoSofuYMD" as "dbT5504ShinsakaiWariateJohoKenshu_shinsakaiShiryoSofuYMD",
+         "DbT5504ShinsakaiWariateJohoKenshu"."hanteiKekkaCode" as "dbT5504ShinsakaiWariateJohoKenshu_hanteiKekkaCode"
+    </sql>
+
+
+    <!--テーブルDbT5504ShinsakaiWariateJohoKenshuの項目をDbT5504ShinsakaiWariateJohoKenshuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5504ShinsakaiWariateJohoKenshuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity" autoMapping="true">
+        <id property="shinsakaiKaisaiNo" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="shinseishoKanriNo" column="dbT5504ShinsakaiWariateJohoKenshu_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="insertDantaiCd" column="dbT5504ShinsakaiWariateJohoKenshu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="insertTimestamp" column="dbT5504ShinsakaiWariateJohoKenshu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="insertReamsLoginId" column="dbT5504ShinsakaiWariateJohoKenshu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="insertContextId" column="dbT5504ShinsakaiWariateJohoKenshu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler" />
+        <result property="isDeleted" column="dbT5504ShinsakaiWariateJohoKenshu_isDeleted" />
+        <result property="updateCount" column="dbT5504ShinsakaiWariateJohoKenshu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5504ShinsakaiWariateJohoKenshu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="lastUpdateReamsLoginId" column="dbT5504ShinsakaiWariateJohoKenshu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinsakaiKaisaiYMD" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shinsakaiWariateYMD" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiWariateYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shinsakaiOrder" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiOrder" />
+        <result property="shinsakaiOrderKakuteiFlag" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiOrderKakuteiFlag" />
+        <result property="shinsakaiJidoWaritsukeFlag" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiJidoWaritsukeFlag" />
+        <result property="shinsakaiShiryoSakuseiYMD" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="shinsakaiShiryoSofuYMD" column="dbT5504ShinsakaiWariateJohoKenshu_shinsakaiShiryoSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="hanteiKekkaCode" column="dbT5504ShinsakaiWariateJohoKenshu_hanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5504ShinsakaiWariateJohoKenshuEntity">
+        SELECT
+        <include refid="allColumns_DbT5504ShinsakaiWariateJohoKenshu"/>
+        FROM
+        rgdb."DbT5504ShinsakaiWariateJohoKenshu"
+    </select>
+
+</mapper>

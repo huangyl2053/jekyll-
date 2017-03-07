@@ -51,6 +51,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
     private static final String CHOHYOIIN_HANTEIFALG = "chohyoIin_hanteiFalg";
     private static final String CHOHYOIIN_TAISHOUSHAFALG = "chohyoIin_taishoushaFalg";
     private static final String CHOYOIIN_SONOTASIRYOFALG = "choyoIin_sonotaSiryoFalg";
+    private static final String GOGITAIDUMMYFLAG = "gogitaiDummyFlag";
     private static final String BUNSHOKANRINO = "bunshoKanriNo";
 
     @BatchParameter(key = SHINSAKAIKAISAINO, name = "介護認定審査会開催番号")
@@ -95,6 +96,8 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
     private RString chohyoIin_tuutishoFalg;
     @BatchParameter(key = CHOHYOIIN_HANTEIFALG, name = "委員用予備判定記入表フラグ")
     private RString chohyoIin_hanteiFalg;
+    @BatchParameter(key = GOGITAIDUMMYFLAG, name = "合議体ダミーフラグ")
+    private RString gogitaiDummyFlag;
     @BatchParameter(key = BUNSHOKANRINO, name = "文書管理番号")
     private RString bunshoKanriNo;
 
@@ -129,6 +132,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      * @param bunshoKanriNo 文書管理番号
      */
     public DBE517002_ShinsakaiShiryoIinParameter(
@@ -152,6 +156,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg,
+            RString gogitaiDummyFlag,
             RString bunshoKanriNo) {
         this(shinsakaiKaisaiNo,
                 RString.EMPTY,
@@ -174,6 +179,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 chohyoIin_sonotaSiryoFalg,
                 chohyoIin_tuutishoFalg,
                 chohyoIin_hanteiFalg,
+                gogitaiDummyFlag,
                 bunshoKanriNo,
                 new HashMap<RString, RString>());
     }
@@ -201,6 +207,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      * @param bunshoKanriNo 文書管理番号
      * @param 帳票一覧Map 帳票一覧Map
      */
@@ -225,6 +232,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg,
+            RString gogitaiDummyFlag,
             RString bunshoKanriNo,
             Map<RString, RString> 帳票一覧Map) {
         this(shinsakaiKaisaiNo,
@@ -248,6 +256,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 chohyoIin_sonotaSiryoFalg,
                 chohyoIin_tuutishoFalg,
                 chohyoIin_hanteiFalg,
+                gogitaiDummyFlag,
                 bunshoKanriNo,
                 帳票一覧Map);
     }
@@ -276,6 +285,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      * @param chohyoIin_sonotaSiryoFalg 委員用その他資料フラグ
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      * @param bunshoKanriNo 文書管理番号
      * @param 帳票一覧Map 帳票一覧Map
      */
@@ -301,6 +311,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
             RString chohyoIin_sonotaSiryoFalg,
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg,
+            RString gogitaiDummyFlag,
             RString bunshoKanriNo,
             Map<RString, RString> 帳票一覧Map) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
@@ -324,6 +335,7 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
         this.chohyoIin_sonotaSiryoFalg = chohyoIin_sonotaSiryoFalg;
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
+        this.gogitaiDummyFlag = gogitaiDummyFlag;
         this.bunshoKanriNo = bunshoKanriNo;
         this.帳票一覧Map = 帳票一覧Map;
     }
@@ -360,7 +372,9 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 printHou,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
-                gogitaiName, gogitaiNo);
+                gogitaiName,
+                gogitaiNo,
+                gogitaiDummyFlag);
     }
 
     /**
@@ -375,7 +389,11 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                shinsakaiKaishiYoteiTime, sakuseiJoken, bangoStart, bangoEnd);
+                shinsakaiKaishiYoteiTime, 
+                sakuseiJoken, 
+                gogitaiDummyFlag, 
+                bangoStart, 
+                bangoEnd);
     }
 
     /**
@@ -398,9 +416,10 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
      */
     public ShinsakaiShiryoUpdateProcessParameter toShinsakaiShiryoUpdateProcessParameter() {
         return new ShinsakaiShiryoUpdateProcessParameter(shinsakaiKaisaiNo,
-        sakuseiJoken,
-        bangoStart,
-        bangoEnd);
+                sakuseiJoken,
+                bangoStart,
+                bangoEnd,
+                gogitaiDummyFlag);
     }
 
     /**
@@ -419,7 +438,8 @@ public class DBE517002_ShinsakaiShiryoIinParameter extends BatchParameterBase {
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiName,
-                gogitaiNo);
+                gogitaiNo,
+                gogitaiDummyFlag);
     }
 
 }

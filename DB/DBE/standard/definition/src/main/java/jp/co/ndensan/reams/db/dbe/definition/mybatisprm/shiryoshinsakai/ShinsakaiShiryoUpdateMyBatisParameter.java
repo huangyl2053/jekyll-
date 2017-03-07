@@ -23,6 +23,7 @@ public class ShinsakaiShiryoUpdateMyBatisParameter implements IMyBatisParameter 
     private int bangoEnd;
     private boolean isSakuseiJokenHani;
     private boolean isSakuseiJokenTsuika;
+    private boolean isGogitaiDummyFlag;
 
     /**
      * コンストラクタです。
@@ -32,13 +33,15 @@ public class ShinsakaiShiryoUpdateMyBatisParameter implements IMyBatisParameter 
      * @param bangoEnd int
      * @param isSakuseiJokenHani 作成条件が範囲指定かどうか
      * @param isSakuseiJokenTsuika 作成条件が追加かどうか
+     * @param isGogitaiDummyFlag 合議体ダミーフラグ
      */
     public ShinsakaiShiryoUpdateMyBatisParameter(RString shinsakaiKaisaiNo, int bangoStart, int bangoEnd,
-            boolean isSakuseiJokenHani, boolean isSakuseiJokenTsuika) {
+            boolean isSakuseiJokenHani, boolean isSakuseiJokenTsuika, boolean isGogitaiDummyFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
         this.isSakuseiJokenHani = isSakuseiJokenHani;
         this.isSakuseiJokenTsuika = isSakuseiJokenTsuika;
+        this.isGogitaiDummyFlag = isGogitaiDummyFlag;
     }
 }

@@ -24,6 +24,7 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
 
     private final RString 作成条件_範囲指定 = new RString("範囲指定");
     private final RString 作成条件_追加分 = new RString("追加分");
+    private final RString ダミー = new RString("1");
     private int gogitaiNo;
     private int bangoStart;
     private int bangoEnd;
@@ -36,6 +37,7 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
     private RString shinsakaiKaishiYoteiTime;
     private RString gogitaiName;
     private Decimal chohyoIinHusu;
+    private RString gogitaiDummyFlag;
 
     /**
      * コンストラクタです。
@@ -51,6 +53,7 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      * @param gogitaiName 合議体名称
      * @param gogitaiNo 合議体番号
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      */
     public ShinsakaiSiryouKumiawaseA3ProcessParameter(
             RString shinsakaiKaisaiNo,
@@ -63,7 +66,8 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
             RString gogitaiName,
-            int gogitaiNo) {
+            int gogitaiNo,
+            RString gogitaiDummyFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.sakuseiJoken = sakuseiJoken;
@@ -75,6 +79,7 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.gogitaiName = gogitaiName;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiDummyFlag = gogitaiDummyFlag;
     }
 
     /**
@@ -86,6 +91,7 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
         boolean isShuturyokuJunEmpty = false;
         boolean isSakuseiJokenHani = false;
         boolean isSakuseiJokenTuika = false;
+        boolean isGogitaiDummyFlag = false;
         if (作成条件_範囲指定.equals(sakuseiJoken)) {
             isSakuseiJokenHani = true;
         }
@@ -95,8 +101,19 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJunEmpty = true;
         }
-        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo, bangoStart, bangoEnd,
-                shinsakaiKaisaiYoteiYMD, shinsakaiKaisaiNo, shuturyokuJun, isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJunEmpty);
+        if (ダミー.equals(gogitaiDummyFlag)) {
+            isGogitaiDummyFlag = true;
+        }
+        return new IinShinsakaiIinJohoMyBatisParameter(gogitaiNo,
+                bangoStart,
+                bangoEnd,
+                shinsakaiKaisaiYoteiYMD,
+                shinsakaiKaisaiNo,
+                shuturyokuJun,
+                isSakuseiJokenHani,
+                isSakuseiJokenTuika,
+                isShuturyokuJunEmpty,
+                isGogitaiDummyFlag);
     }
 
     /**
@@ -108,6 +125,7 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
         boolean isShuturyokuJun = false;
         boolean isSakuseiJokenHani = false;
         boolean isSakuseiJokenTuika = false;
+        boolean isGogitaiDummyFlag = false;
         if (作成条件_範囲指定.equals(sakuseiJoken)) {
             isSakuseiJokenHani = true;
         }
@@ -117,8 +135,17 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart, bangoEnd,
-                isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJun);
+        if (ダミー.equals(gogitaiDummyFlag)) {
+            isGogitaiDummyFlag = true;
+        }
+        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo,
+                shuturyokuJun,
+                bangoStart,
+                bangoEnd,
+                isSakuseiJokenHani,
+                isSakuseiJokenTuika,
+                isShuturyokuJun,
+                isGogitaiDummyFlag);
     }
 
     /**
@@ -133,6 +160,10 @@ public class ShinsakaiSiryouKumiawaseA3ProcessParameter implements IBatchProcess
                 shuturyokuJun,
                 shuturyokuSutairu,
                 printHou,
-                shinsakaiKaishiYoteiTime, sakuseiJoken, bangoStart, bangoEnd);
+                shinsakaiKaishiYoteiTime, 
+                sakuseiJoken, 
+                gogitaiDummyFlag, 
+                bangoStart,
+                bangoEnd);
     }
 }

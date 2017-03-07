@@ -41,6 +41,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
     private int ikenshoIraiRirekiNo;
     private ShinseishoKanriNo shinseishoKanriNoZ;
     private RString genponMaskKubun;
+    private boolean isGogitaiDummyFlag;
     private List<ShinseishoKanriNo> shinseishoKanriNoList;
     private List<Integer> ninteichosaRirekiNoList;
 
@@ -56,6 +57,7 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      * @param gogitaiNo 合議体番号
      * @param shinsakaiKaisaiYoteiYMD 介護認定審査会開催予定年月日
+     * @param isGogitaiDummyFlag 合議体ダミーフラグ
      */
     public JimuShinsakaiIinJohoMyBatisParameter(
             int bangoStart,
@@ -66,7 +68,8 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
             boolean isSakuseiJokenTuika,
             RString shinsakaiKaisaiNo,
             int gogitaiNo,
-            FlexibleDate shinsakaiKaisaiYoteiYMD) {
+            FlexibleDate shinsakaiKaisaiYoteiYMD,
+            boolean isGogitaiDummyFlag) {
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
         this.shuturyokuJun = shuturyokuJun;
@@ -76,5 +79,6 @@ public class JimuShinsakaiIinJohoMyBatisParameter implements IMyBatisParameter {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.gogitaiNo = gogitaiNo;
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
+        this.isGogitaiDummyFlag = isGogitaiDummyFlag;
     }
 }
