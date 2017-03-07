@@ -82,6 +82,31 @@ public class NinteichosahyoTokkijikoManager {
     }
 
     /**
+     * 認定調査票（特記情報）{@link NinteichosahyoTokkijiko}を取得します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 認定調査依頼履歴番号 int
+     * @param 特記事項テキスト_イメージ区分 RString
+     * @param 原本マスク区分 RString
+     * @return List<NinteichosahyoTokkijiko>
+     */
+    @Transaction
+    public List<NinteichosahyoTokkijiko> get認定調査票_特記情報(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号,
+            RString 特記事項テキスト_イメージ区分,
+            Code 原本マスク区分) {
+        List<DbT5205NinteichosahyoTokkijikoEntity> resultList
+                = dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 特記事項テキスト_イメージ区分, 原本マスク区分);
+
+        List<NinteichosahyoTokkijiko> returnList = new ArrayList<>();
+        for (DbT5205NinteichosahyoTokkijikoEntity 特記事項Entity : resultList) {
+            returnList.add(new NinteichosahyoTokkijiko(特記事項Entity));
+        }
+        return returnList;
+    }
+    
+    /**
      * 認定調査票（特記情報）{@link NinteichosahyoTokkijiko}を取得します(ByKey)。
      *
      * @param 申請書管理番号 申請書管理番号

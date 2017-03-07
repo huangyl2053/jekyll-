@@ -5,9 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査結果登録1バリデーションクラスです。
@@ -157,6 +162,19 @@ public enum NinnteiChousaKekkaTouroku1DivSpec implements IPredicate<NinnteiChous
                 public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
                     RString 基本調査入力OK = new RString("1");
                     return 基本調査入力OK.equals(div.getHiddenKihonChosaInput7Flag());
+                }
+            },
+    特記事項の非空チェック {
+                /**
+                 * 特記事項の非空チェックです。
+                 *
+                 * @param div NinnteiChousaKekkaTouroku1Div
+                 * @return true:特記事項記入済み、false:特記事項未記入。
+                 */
+                @Override
+                public boolean apply(NinnteiChousaKekkaTouroku1Div div) {
+                    HashMap<RString, TokkiJikoInputModel> tokkiJikoMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
+                    return !tokkiJikoMap.isEmpty();
                 }
             },
     実施場所名称の非空チェック {

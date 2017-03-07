@@ -26,14 +26,14 @@ public class ChosaJisshishaJoho {
      * @return レスポンス
      */
     public ResponseData<ChosaJisshishaJohoDiv> onClick_btnChosainGuide(ChosaJisshishaJohoDiv div) {
-        KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
-        modle.set市町村コード(div.getHdnShichosonCode());
-        modle.set委託先コード(div.getTxtShozokuKikanCode().getValue());
-        modle.set委託先名(div.getTxtShozokuKikanName().getValue());
-        modle.set調査員コード(div.getTxtKinyushaCode().getValue());
-        modle.set調査員名(div.getTxtKinyushaName().getValue());
-        modle.set対象モード(new RString(TaishoMode.Chosain.toString()));
-        div.setHdnDataPass(DataPassingConverter.serialize(modle));
+        KijuntsukiShichosonjohoiDataPassModel model = new KijuntsukiShichosonjohoiDataPassModel();
+        model.set市町村コード(div.getHdnShichosonCode());
+        model.set委託先コード(div.getTxtShozokuKikanCode().getValue());
+        model.set委託先名(div.getTxtShozokuKikanName().getValue());
+        model.set調査員コード(div.getTxtKinyushaCode().getValue());
+        model.set調査員名(div.getTxtKinyushaName().getValue());
+        model.set対象モード(new RString(TaishoMode.Chosain.toString()));
+        div.setHdnDataPass(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
 
@@ -44,11 +44,11 @@ public class ChosaJisshishaJoho {
      * @return レスポンス
      */
     public ResponseData<ChosaJisshishaJohoDiv> onOKClose_btnChosainGuide(ChosaJisshishaJohoDiv div) {
-        KijuntsukiShichosonjohoiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        div.getTxtShozokuKikanCode().setValue(modle.get委託先コード());
-        div.getTxtShozokuKikanName().setValue(modle.get委託先名());
-        div.getTxtKinyushaCode().setValue(modle.get調査員コード());
-        div.getTxtKinyushaName().setValue(modle.get調査員名());
+        KijuntsukiShichosonjohoiDataPassModel model = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getTxtShozokuKikanCode().setValue(model.get委託先コード());
+        div.getTxtShozokuKikanName().setValue(model.get委託先名());
+        div.getTxtKinyushaCode().setValue(model.get調査員コード());
+        div.getTxtKinyushaName().setValue(model.get調査員名());
         return ResponseData.of(div).respond();
     }
 }

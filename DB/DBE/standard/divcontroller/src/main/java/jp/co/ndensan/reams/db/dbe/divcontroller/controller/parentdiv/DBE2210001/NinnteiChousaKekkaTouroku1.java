@@ -6,11 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputComparator;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
 import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
@@ -81,6 +85,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString KEY7 = new RString("自立度群");
     private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
     private static final RString 概況特記出力しない = new RString("2");
+    private static final RString 認定調査結果入手_必須調査票_特記事項不要 = new RString("1");
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -129,7 +134,7 @@ public class NinnteiChousaKekkaTouroku1 {
         List<NinteichosahyoTokkijiko> 特記事項リスト = manager.get認定調査票_特記情報(申請書管理番号, 認定調査履歴番号);
         for (NinteichosahyoTokkijiko 特記事項 : 特記事項リスト) {
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項.get特記事項テキスト_イメージ区分())) {
-                CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnTokkiJikoIchiran"), true);
+                div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().setDisabled(true);
                 break;
             }
         }
@@ -316,6 +321,27 @@ public class NinnteiChousaKekkaTouroku1 {
 
         div.setShinseishoKanriNo(temp_申請書管理番号.getColumnValue());
         div.setRecordNumber(new RString(String.valueOf(temp_認定調査履歴番号)));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「特記事項」ボタンを押下する処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnTokkiJiko(NinnteiChousaKekkaTouroku1Div div) {
+        HashMap<RString, TokkiJikoInputModel> tokkiJikoMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
+        List<TokkiJikoInputModel> tokkiJikoList = new ArrayList<>(tokkiJikoMap.values());
+        Collections.sort(tokkiJikoList, new TokkiJikoInputComparator());
+        HashMap<RString, TokkiJikoInputModel> newTokkiJikoMap = new LinkedHashMap<>();
+        int newTokkiJikoMapKey = 1;
+        for (TokkiJikoInputModel model : tokkiJikoList) {
+            newTokkiJikoMap.put(new RString(newTokkiJikoMapKey), model);
+            newTokkiJikoMapKey++;
+        }
+        set画面遷移パラメータ(div);
+        ViewStateHolder.put(ViewStateKeys.特記事項一覧, newTokkiJikoMap);
         return ResponseData.of(div).respond();
     }
 
@@ -525,28 +551,28 @@ public class NinnteiChousaKekkaTouroku1 {
         set画面遷移パラメータ(div);
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.概況特記入力を表示).respond();
     }
-
-    /**
-     * ボタン「特記事項一覧を表示する」を押下する処理です。（DBE2210003　特記事項一覧画面へ遷移する）
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnTokkiJikoIchiran(NinnteiChousaKekkaTouroku1Div div) {
-
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
-        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
-        getValidationHandler().validateFor実施場所の必須入力(pairs, div);
-        getValidationHandler().validateFor所属機関の必須入力(pairs, div);
-        getValidationHandler().validateFor記入者の必須入力(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        前排他キーの解除();
-        set画面遷移パラメータ(div);
-        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.特記事項一覧を表示).respond();
-    }
+//
+//    /**
+//     * ボタン「特記事項一覧を表示する」を押下する処理です。（DBE2210003　特記事項一覧画面へ遷移する）
+//     *
+//     * @param div コントロールdiv
+//     * @return レスポンスデータ
+//     */
+//    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnTokkiJikoIchiran(NinnteiChousaKekkaTouroku1Div div) {
+//
+//        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+//        getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
+//        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
+//        getValidationHandler().validateFor実施場所の必須入力(pairs, div);
+//        getValidationHandler().validateFor所属機関の必須入力(pairs, div);
+//        getValidationHandler().validateFor記入者の必須入力(pairs, div);
+//        if (pairs.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(pairs).respond();
+//        }
+//        前排他キーの解除();
+//        set画面遷移パラメータ(div);
+//        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.特記事項一覧を表示).respond();
+//    }
 
     /**
      * ボタン「入力内容をクリアする」を押下する処理です。
@@ -609,6 +635,10 @@ public class NinnteiChousaKekkaTouroku1 {
             getValidationHandler().validateFor第4群の必須入力(pairs, div);
             getValidationHandler().validateFor第5群の必須入力(pairs, div);
             getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+            if (!認定調査結果入手_必須調査票_特記事項不要.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))
+                    && !div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().isDisabled()) {
+                getValidationHandler().validateFor特記事項の必須入力(pairs, div);
+            }
             pairs.add(div.getCcdChosaJisshishaJoho().validate());
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -742,7 +772,6 @@ public class NinnteiChousaKekkaTouroku1 {
         div.getNinteiChosaNyuryoku().getChosaJisshisha().setDisabled(isDisabled);
         div.getNinteiChosaNyuryoku().getTabChosaShurui().setDisabled(isDisabled);
         div.getNinteiChosaNyuryoku().getBtnClear().setDisabled(isDisabled);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnTokkiJikoIchiran"), isDisabled);
         if (!概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), isDisabled);
         }
@@ -751,7 +780,6 @@ public class NinnteiChousaKekkaTouroku1 {
     private void setDisabledControl_Error(NinnteiChousaKekkaTouroku1Div div) {
         div.setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnChosaKekkaUpdate"), true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnTokkiJikoIchiran"), true);
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         } else {

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -141,13 +141,13 @@ public class NinteiChosaNyuryokuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
@@ -493,6 +493,16 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
         this.getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().setBtnKihonchosa7(btnKihonchosa7);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTokkiJiko() {
+        return this.getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().getBtnTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setBtnTokkiJiko(ButtonDialog btnTokkiJiko) {
+        this.getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().setBtnTokkiJiko(btnTokkiJiko);
     }
 
     // </editor-fold>

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotok
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.CKGaikyoChosahyouServiceJyouk09B;
@@ -68,6 +70,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
@@ -98,6 +101,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -120,13 +124,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final RString 住宅改修_有 = new RString("key0");
     private static final RString 住宅改修_無 = new RString("key1");
     private static final RString なし_選択 = new RString("key2");
-    private static final RString 介護予防 = new RString("（介護予防）");
     private static final RString カンマ = new RString(",");
-    private static final RString 厚労省IF識別コード_02A = new RString("02A");
-    private static final RString 厚労省IF識別コード_06A = new RString("06A");
-    private static final RString 厚労省IF識別コード_09A = new RString("09A");
-    private static final RString 厚労省IF識別コード_09B = new RString("09B");
-    private static final RString 厚労省IF識別コード_99A = new RString("99A");
     private static final RString png拡張子 = new RString(".png");
     private static final RString 予防給付サービス = new RString("介護予防");
     private static final RString 介護給付サービス = new RString("介護");
@@ -148,17 +146,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final int データベース内連番_7 = 7;
     private static final int データベース内連番_8 = 8;
     private static final int データベース内連番_9 = 9;
-    private static final int データベース内連番_10 = 10;
-    private static final int データベース内連番_11 = 11;
-    private static final int データベース内連番_12 = 12;
-    private static final int データベース内連番_13 = 13;
-    private static final int データベース内連番_14 = 14;
-    private static final int データベース内連番_15 = 15;
-    private static final int データベース内連番_16 = 16;
-    private static final int データベース内連番_17 = 17;
-    private static final int データベース内連番_18 = 18;
-    private static final int データベース内連番_19 = 19;
-    private static final int データベース内連番_20 = 20;
     private static final int 第二群開始連番 = 21;
     private static final int 第三群開始連番 = 33;
     private static final int 第四群開始連番 = 42;
@@ -245,6 +232,48 @@ public class NinnteiChousaKekkaTouroku1Handler {
         概況調査_住宅改修情報の初期化(申請書管理番号, 認定調査履歴番号);
         概況調査_給付関連情報の初期化(概況調査情報, 申請書管理番号, 認定調査履歴番号);
         initialize一次判定(申請書管理番号);
+        特記事項情報の初期化(申請書管理番号, 認定調査履歴番号);
+    }
+
+    private void 特記事項情報の初期化(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号) {
+        NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+        List<NinteichosahyoTokkijiko> returnList = manager.get認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号,
+                TokkijikoTextImageKubun.テキスト.getコード(), new Code(GenponMaskKubun.原本.getコード()));
+        List<GaikyoTokkiYichiranNyurokuBusiness> tokkiJikoList = new ArrayList<>();
+        for (NinteichosahyoTokkijiko 特記事項Entity : returnList) {
+            GaikyoTokkiYichiranNyurokuBusiness business = get概況特記一覧Entity(特記事項Entity);
+            tokkiJikoList.add(business);
+        }
+        HashMap<RString, TokkiJikoInputModel> tokkiJikoMap = new LinkedHashMap<>();
+        int tokkiJikoMapKey = 1;
+        for (GaikyoTokkiYichiranNyurokuBusiness business : tokkiJikoList) {
+            TokkiJikoInputModel model = new TokkiJikoInputModel();
+            setTokkiJikoInputModel(model, business);
+            tokkiJikoMap.put(new RString(tokkiJikoMapKey), model);
+            tokkiJikoMapKey++;
+        }
+        ViewStateHolder.put(ViewStateKeys.特記事項一覧, tokkiJikoMap);
+    }
+
+    private GaikyoTokkiYichiranNyurokuBusiness get概況特記一覧Entity(NinteichosahyoTokkijiko 認定調査票特記事項) {
+        GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_認定調査特記事項番号(認定調査票特記事項.get認定調査特記事項番号());
+        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                setTemp_認定調査特記事項連番(new RString(String.valueOf(認定調査票特記事項.get認定調査特記事項連番())));
+        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_特記事項テキストイメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
+        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(GenponMaskKubun.原本.getコード());
+        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_特記事項名称(
+                NinteichosaKomoku09B.getAllBy調査特記事項番(認定調査票特記事項.get認定調査特記事項番号()).get名称());
+        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_特記事項(認定調査票特記事項.get特記事項());
+        return entity;
+    }
+
+    private void setTokkiJikoInputModel(TokkiJikoInputModel model, GaikyoTokkiYichiranNyurokuBusiness business) {
+        model.set特記事項番号(business.getTemp_認定調査特記事項番号());
+        model.set特記連番(Integer.parseInt(business.getTemp_認定調査特記事項連番().toString()));
+        model.set特記事項(business.getTemp_特記事項());
+        model.setBeforeRowState(RowState.Unchanged);
+        model.setRowState(RowState.Unchanged);
     }
 
     private void 概況調査の初期化(TempData 概況調査情報, ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
@@ -915,6 +944,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
      */
     public void DataReset() {
         ArrayList<KihonChosaInput> list = new ArrayList<>();
+        HashMap<RString, TokkiJikoInputModel> map = new LinkedHashMap<>();
         ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, list);
         ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, list);
         ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, list);
@@ -922,6 +952,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ViewStateHolder.put(ViewStateKeys.第五群認定調査基本情報リスト, list);
         ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, list);
         ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, list);
+        ViewStateHolder.put(ViewStateKeys.特記事項一覧, map);
 
         住宅改修と記入項目のクリア();
         div.getDgRiyoServiceJyokyo().getDataSource().clear();
@@ -1117,7 +1148,9 @@ public class NinnteiChousaKekkaTouroku1Handler {
         記入項目の更新();
         施設利用の更新();
         調査項目の更新(false);
-        特記事項の更新();
+        if (!div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().isDisabled()) {
+            特記事項の更新();
+        }
     }
 
     @Transaction
@@ -1140,41 +1173,36 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private void 特記事項の更新() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, HashMap.class);
+        HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
         if (gaikyoTokkiNyurokuMap != null && !gaikyoTokkiNyurokuMap.isEmpty()) {
             特記事項の削除();
             save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap.entrySet());
-        }
-        HashMap gaikyoTokkiNyurokuMap_MASK = ViewStateHolder.get(ViewStateKeys.特記事項マスク一覧, HashMap.class);
-        if (gaikyoTokkiNyurokuMap_MASK != null && !gaikyoTokkiNyurokuMap_MASK.isEmpty()) {
-            save認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, gaikyoTokkiNyurokuMap_MASK.entrySet());
         }
     }
 
     private void save認定調査票_特記情報(ShinseishoKanriNo temp_申請書管理番号,
             int temp_認定調査履歴番号,
-            Set<Map.Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set) {
+            Set<Map.Entry<RString, TokkiJikoInputModel>> set) {
         NinteichosahyoTokkijikoManager dbt5205Manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
-        Iterator<Map.Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
+        Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
         RString 認定調査特記事項番号;
 
         while (it.hasNext()) {
-            Map.Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
-            GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
-            認定調査特記事項番号 = NinteichosaKomoku09B.toValue(
-                    entry.getValue().getTemp_認定調査特記事項番号()).get調査特記事項番序();
-            if (value.isDelete() || value.getTemp_特記事項() == null) {
+            Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
+            TokkiJikoInputModel value = entry.getValue();
+            認定調査特記事項番号 = value.get特記事項番号();
+            if (RowState.Deleted.equals(value.getRowState())) {
                 continue;
             }
             NinteichosahyoTokkijiko ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(
                     temp_申請書管理番号,
                     temp_認定調査履歴番号,
                     認定調査特記事項番号,
-                    Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()),
-                    value.getTemp_特記事項テキストイメージ区分(),
-                    new Code(value.getTemp_原本マスク区分()));
+                    value.get特記連番(),
+                    TokkijikoTextImageKubun.テキスト.getコード(),
+                    GenponMaskKubun.原本.getCode());
             NinteichosahyoTokkijikoBuilder builder = ninteichosahyoTokkijiko.createBuilderForEdit();
-            builder.set特記事項(value.getTemp_特記事項());
+            builder.set特記事項(value.get特記事項());
             dbt5205Manager.save認定調査票_特記情報(builder.build());
         }
     }

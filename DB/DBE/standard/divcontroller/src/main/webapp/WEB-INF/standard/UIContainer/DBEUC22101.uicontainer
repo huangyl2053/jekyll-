@@ -74,34 +74,6 @@
     },
     {
      "id": "6",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2210001",
-     "layoutTitle": "認定調査結果登録",
-     "eventName": "特記事項一覧を表示",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2210003",
-     "toLayoutTitle": "特記一覧登録",
-     "toState": "特記一覧"
-    },
-    {
-     "id": "7",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2210003",
-     "layoutTitle": "特記一覧登録",
-     "eventName": "認定調査結果登録に戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2210001",
-     "toLayoutTitle": "認定調査結果登録",
-     "toState": "調査結果登録"
-    },
-    {
-     "id": "8",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2210001",
@@ -111,7 +83,7 @@
      "condition": ""
     },
     {
-     "id": "9",
+     "id": "7",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2210001",
@@ -125,7 +97,7 @@
      "toState": "申請検索"
     },
     {
-     "id": "10",
+     "id": "8",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2210001",
@@ -139,7 +111,7 @@
      "toState": "登録_完了可能"
     },
     {
-     "id": "11",
+     "id": "9",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2060001",

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2210002
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.gaikyotokki.GaikyoTokkiBuilder;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.DBE2210002StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.DBE2210002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.GaikyoTokkiNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210002.GaikyoTokkiNyurokuHandler;
@@ -55,6 +56,9 @@ public class GaikyoTokkiNyuroku {
      * @return レスポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onLoad(GaikyoTokkiNyurokuDiv div) {
+        if (DBE2210002StateName.画面破棄.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).forwardWithEventName(DBE2210002TransitionEventName.基本運用に戻る).respond();
+        }
 
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
@@ -88,6 +92,9 @@ public class GaikyoTokkiNyuroku {
      * @return レスポンスデータ
      */
     public ResponseData<GaikyoTokkiNyurokuDiv> onActive(GaikyoTokkiNyurokuDiv div) {
+        if (DBE2210002StateName.画面破棄.getName().equals(ResponseHolder.getState())) {
+            return ResponseData.of(div).forwardWithEventName(DBE2210002TransitionEventName.基本運用に戻る).respond();
+        }
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
 
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();

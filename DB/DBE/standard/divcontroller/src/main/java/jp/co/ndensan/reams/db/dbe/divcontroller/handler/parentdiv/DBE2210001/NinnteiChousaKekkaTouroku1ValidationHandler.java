@@ -240,6 +240,24 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         return pairs;
     }
 
+    /**
+     * 特記事項の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor特記事項の必須入力(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
+
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(NinnteiChousaKekkaTouroku1DivSpec.特記事項の非空チェック)
+                .thenAdd(NoInputMessages.特記事項の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.特記事項の必須入力,
+                div.getTplKihonChosa().getBtnTokkiJiko()).build().check(messages));
+        return pairs;
+    }
+
     private static enum NoInputMessages implements IValidationMessage {
 
         調査実施日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "調査実施日"),
@@ -253,7 +271,8 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         第3群の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の第3群"),
         第4群の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の第4群"),
         第5群の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の第5群"),
-        生活自立度の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の生活自立度");
+        生活自立度の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の生活自立度"),
+        特記事項の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "特記事項");
         private final Message message;
 
         private NoInputMessages(IMessageGettable message, String... replacements) {

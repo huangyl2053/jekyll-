@@ -54,8 +54,8 @@
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2210003",
-     "toLayoutTitle": "基本運用・認定調査結果入手",
+     "toLayoutName": "DBE2210002",
+     "toLayoutTitle": "概況特記登録",
      "toState": "画面破棄"
     },
     {
@@ -88,34 +88,6 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2210001",
      "layoutTitle": "認定調査結果登録",
-     "eventName": "特記事項一覧を表示",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2210003",
-     "toLayoutTitle": "特記一覧登録",
-     "toState": "特記一覧"
-    },
-    {
-     "id": "8",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2210003",
-     "layoutTitle": "特記一覧登録",
-     "eventName": "認定調査結果登録に戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE2210001",
-     "toLayoutTitle": "認定調査結果登録",
-     "toState": "調査結果登録_基本運用"
-    },
-    {
-     "id": "9",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2210001",
-     "layoutTitle": "認定調査結果登録",
      "eventName": "概況特記入力を表示",
      "destroy": false,
      "condition": "",
@@ -125,7 +97,7 @@
      "toState": "概況特記"
     },
     {
-     "id": "10",
+     "id": "8",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2210002",
@@ -139,7 +111,7 @@
      "toState": "調査結果登録_基本運用"
     },
     {
-     "id": "11",
+     "id": "9",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2210001",
@@ -153,17 +125,17 @@
      "toState": "登録"
     },
     {
-     "id": "12",
+     "id": "10",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
-     "layoutName": "DBE2210003",
-     "layoutTitle": "特記一覧登録",
+     "layoutName": "DBE2210002",
+     "layoutTitle": "概況特記登録",
      "eventName": "基本運用に戻る",
      "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE2060001",
-     "toLayoutTitle": "基本運用・認定調査結果入手",
+     "toLayoutTitle": "認定調査結果入手",
      "toState": "登録"
     }
    ]

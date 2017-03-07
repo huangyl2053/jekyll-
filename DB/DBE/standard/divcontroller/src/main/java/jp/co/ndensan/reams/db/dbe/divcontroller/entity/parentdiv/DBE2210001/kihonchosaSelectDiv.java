@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class kihonchosaSelectDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,8 @@ public class kihonchosaSelectDiv extends Panel {
     private ButtonDialog btnKihonchosa6;
     @JsonProperty("btnKihonchosa7")
     private ButtonDialog btnKihonchosa7;
+    @JsonProperty("btnTokkiJiko")
+    private ButtonDialog btnTokkiJiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -166,6 +168,24 @@ public class kihonchosaSelectDiv extends Panel {
     @JsonProperty("btnKihonchosa7")
     public void setBtnKihonchosa7(ButtonDialog btnKihonchosa7) {
         this.btnKihonchosa7 = btnKihonchosa7;
+    }
+
+    /*
+     * getbtnTokkiJiko
+     * @return btnTokkiJiko
+     */
+    @JsonProperty("btnTokkiJiko")
+    public ButtonDialog getBtnTokkiJiko() {
+        return btnTokkiJiko;
+    }
+
+    /*
+     * setbtnTokkiJiko
+     * @param btnTokkiJiko btnTokkiJiko
+     */
+    @JsonProperty("btnTokkiJiko")
+    public void setBtnTokkiJiko(ButtonDialog btnTokkiJiko) {
+        this.btnTokkiJiko = btnTokkiJiko;
     }
 
     // </editor-fold>
