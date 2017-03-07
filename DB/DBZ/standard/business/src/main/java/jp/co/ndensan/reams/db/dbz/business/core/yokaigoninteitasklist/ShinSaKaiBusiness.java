@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 
@@ -19,4 +20,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 public class ShinSaKaiBusiness {
 
     private List<NinteiKanryoJoho> 要介護認定完了情報Lsit;
+
+    /**
+     * インスタンスを生成します。
+     */
+    public ShinSaKaiBusiness() {
+        this.要介護認定完了情報Lsit = new ArrayList<>();
+    }
 }

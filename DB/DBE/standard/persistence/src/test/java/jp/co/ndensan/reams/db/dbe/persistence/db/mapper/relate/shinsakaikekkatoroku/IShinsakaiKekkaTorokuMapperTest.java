@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikekkato
 
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikekkatoroku.ShinsakaiKekkaTorokuParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -26,6 +28,36 @@ public class IShinsakaiKekkaTorokuMapperTest extends DbeTestDacBase {
     @BeforeClass
     public static void setUpClass() {
         DbeTestDacBase.beforeSetUpClass();
+    }
+
+    public static class get二次判定 {
+
+        @Test
+        public void get二次判定_状態区分_1() {
+            RString 状態区分 = new RString("1");
+            IShinsakaiKekkaTorokuMapper sut = sqlSession.getMapper(IShinsakaiKekkaTorokuMapper.class);
+            YokaigoNinteiTaskListParameter param = YokaigoNinteiTaskListParameter
+                    .createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分);
+            sut.get二次判定(param);
+        }
+
+        @Test
+        public void get二次判定_状態区分_2() {
+            RString 状態区分 = new RString("2");
+            IShinsakaiKekkaTorokuMapper sut = sqlSession.getMapper(IShinsakaiKekkaTorokuMapper.class);
+            YokaigoNinteiTaskListParameter param = YokaigoNinteiTaskListParameter
+                    .createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分);
+            sut.get二次判定(param);
+        }
+
+        @Test
+        public void get二次判定_状態区分_空() {
+            RString 状態区分 = new RString("");
+            IShinsakaiKekkaTorokuMapper sut = sqlSession.getMapper(IShinsakaiKekkaTorokuMapper.class);
+            YokaigoNinteiTaskListParameter param = YokaigoNinteiTaskListParameter
+                    .createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分);
+            sut.get二次判定(param);
+        }
     }
 
     public static class get関連情報 {

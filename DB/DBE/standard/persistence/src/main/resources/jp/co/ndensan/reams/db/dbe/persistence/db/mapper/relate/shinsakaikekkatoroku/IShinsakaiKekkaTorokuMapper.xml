@@ -462,31 +462,73 @@
             DbT5105."maskingKanryoYMD",
             DbT5105."ninteiShinsakaiKanryoYMD",
             DbT5105."ninteiShinsakaiWariateKanryoYMD",
-            DbT5501."shinsakaiKaisaiYoteiYMD",
-            DbT5501."shinsakaiKaishiYoteiTime",
-            DbT5501."shinsakaiKaisaiNo",
-            DbT5501."gogitaiNo",
-            DbT5102."nijiHanteiYMD",
             DbT5102."nijiHanteiKekkaInputYMD",
             DbT5102."nijiHanteiKekkaInputHoho",
             DbT5102."nijiHanteiYokaigoJotaiKubunCode",
             DbT5102."nijiHanteiNinteiYukoKikan",
             DbT5102."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo_temp,
-            DbT5511."shinsakaiKaisaiYMD"
+            DbT5102."nijiHanteiYMD",
+            <choose>
+                <when test='"1".equals(状態区分.toString()) or "2".equals(状態区分.toString())'>
+                    DbT5501."shinsakaiKaisaiYoteiYMD",
+                    DbT5501."shinsakaiKaishiYoteiTime",
+                    DbT5501."shinsakaiKaisaiNo",
+                    DbT5501."gogitaiNo",
+                    DbT5511."shinsakaiKaisaiYMD"
+                </when>
+                <otherwise>
+                    CASE DbT5102."shinseishoKanriNo" WHEN NULL THEN DbT5501a."shinsakaiKaisaiYoteiYMD"
+                         ELSE DbT5501b."shinsakaiKaisaiYoteiYMD" END AS "shinsakaiKaisaiYoteiYMD",
+                    CASE DbT5102."shinseishoKanriNo" WHEN NULL THEN DbT5501a."shinsakaiKaishiYoteiTime"
+                         ELSE DbT5501b."shinsakaiKaishiYoteiTime" END AS "shinsakaiKaishiYoteiTime",
+                    CASE DbT5102."shinseishoKanriNo" WHEN NULL THEN DbT5501a."shinsakaiKaisaiNo"
+                         ELSE DbT5501b."shinsakaiKaisaiNo" END AS "shinsakaiKaisaiNo",
+                    CASE DbT5102."shinseishoKanriNo" WHEN NULL THEN DbT5501a."gogitaiNo"
+                         ELSE DbT5501b."gogitaiNo" END AS "gogitaiNo",
+                    CASE DbT5102."shinseishoKanriNo" WHEN NULL THEN DbT5511a."shinsakaiKaisaiYMD"
+                         ELSE DbT5511b."shinsakaiKaisaiYMD" END AS "shinsakaiKaisaiYMD"
+                </otherwise>
+            </choose>
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
             INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster" DbT7051
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT  JOIN  rgdb."DbT5102NinteiKekkaJoho" DbT5102
-                ON  DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
-                ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            INNER  JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
-                ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
-            INNER  JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
-                ON  DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+            <choose>
+                    <when test='"1".equals(状態区分.toString())'>
+                        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
+                            ON  DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+                            ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
+                            ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+                        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+                            ON  DbT5511."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+                    </when>
+                    <when test='"2".equals(状態区分.toString())'>
+                        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
+                          ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
+                          ON DbT5501."shinsakaiKaisaiNo" = DbT5102."shinsakaiKaisaiNo"
+                        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511
+                          ON DbT5511."shinsakaiKaisaiNo" = DbT5102."shinsakaiKaisaiNo"
+                    </when>
+                    <otherwise>
+                        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
+                          ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+                          ON DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                        INNER JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501a
+                          ON DbT5501a."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+                        INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511a
+                          ON DbT5511a."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
+                        LEFT  JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501b
+                          ON DbT5501b."shinsakaiKaisaiNo" = DbT5102."shinsakaiKaisaiNo"
+                        LEFT  JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511b
+                          ON DbT5511b."shinsakaiKaisaiNo" = DbT5102."shinsakaiKaisaiNo"
+                    </otherwise>
+            </choose>
         WHERE
                 (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
@@ -510,14 +552,32 @@
             OR  DbT5105."centerSoshinYMD" = '')
             AND DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
             AND DbT5101."logicalDeletedFlag" = FALSE
-        <if test="状態区分 == 1" >
-            AND (DbT5102."nijiHanteiKekkaInputYMD" is NULL
-            OR  DbT5102."nijiHanteiKekkaInputYMD" = '')
-        </if>
-        <if test="状態区分 == 2" >
-            AND (DbT5102."nijiHanteiKekkaInputYMD" is NOT NULL
-            AND  DbT5102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> '')
-        </if>
+            <choose>
+                <when test='"1".equals(状態区分.toString())'>
+                    AND (
+                        DbT5102."nijiHanteiKekkaInputYMD" is NULL
+                     OR DbT5102."nijiHanteiKekkaInputYMD" = ''
+                    )
+                    AND (
+                        DbT5502."hanteiKekkaCode" IS NULL
+                     OR DbT5502."hanteiKekkaCode" = ''
+                    )
+                </when>
+                <when test='"2".equals(状態区分.toString())'>
+                    AND (DbT5102."nijiHanteiKekkaInputYMD" is NOT NULL
+                    AND  DbT5102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> '')
+                </when>
+                <otherwise>
+                    AND (
+                           DbT5502."hanteiKekkaCode" IS NULL
+                        OR DbT5502."hanteiKekkaCode" = ''
+                        OR (
+                             DbT5102."nijiHanteiKekkaInputYMD" IS NOT NULL
+                         AND DbT5102."nijiHanteiKekkaInputYMD" <![CDATA[<>]]> ''
+                        )
+                    )
+                </otherwise>
+            </choose>
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
                   DbT5101."shoKisaiHokenshaNo"
