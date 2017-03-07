@@ -53,6 +53,9 @@
         L."shinsakaiKaisaiYMD" as "L_shinsakaiKaisaiYMD"  
         FROM  
         rgdb."DbT5101NinteiShinseiJoho" AS A
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+        ON A."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho"  AS C 
         ON A."shinseishoKanriNo" = C ."shinseishoKanriNo"  
         AND C ."logicalDeletedFlag" = False  
@@ -113,6 +116,7 @@
         <if test="被保険者番号フラグ">
             AND  A."hihokenshaNo" = #{被保険者番号}
         </if>
+        AND A."ninteiShinseiShinseijiKubunCode" NOT IN ('5', '6')
         AND A."hihokenshaKubunCode" IN ('1', '2')
         ORDER BY
         A."hihokenshaNo" desc
@@ -175,6 +179,7 @@
         rgdb."DbT5101NinteiShinseiJoho" 
         WHERE
         "hihokenshaKubunCode" IN ('1', '2')
+        AND "ninteiShinseiShinseijiKubunCode" NOT IN ('5', '6')
         <if test="証記載保険者番号フラグ">
             AND  "shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>

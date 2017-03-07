@@ -535,16 +535,22 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set前回の認定審査会結果(nullToEmpty(entity.getZenYokaigoKubunCode()));
         eucEntity.set前回の認定有効期間開始(nullToEmpty(entity.getZenkaiYukoKikanStart()));
         eucEntity.set前回の認定有効期間終了(nullToEmpty(entity.getZenkaiYukoKikanEnd()));
-        eucEntity.set主治医医療機関番号(nullToEmpty(entity.getShujiiIryokikanCode()));
-        eucEntity.set主治医番号(nullToEmpty(entity.getShujiiCode()));
+        eucEntity.set主治医医療機関番号(!RString.isNullOrEmpty(entity.getDbT5302_shujiiIryokikanCode()) 
+                ? nullToEmpty(entity.getDbT5302_shujiiIryokikanCode()) : nullToEmpty(entity.getDbT5301_shujiiIryokikanCode()));
+        eucEntity.set主治医番号(!RString.isNullOrEmpty(entity.getDbT5302_shujiiCode())
+                ? nullToEmpty(entity.getDbT5302_shujiiCode()) : nullToEmpty(entity.getDbT5301_shujiiCode()));
         eucEntity.set意見書依頼日(nullToEmpty(entity.getIkenshoSakuseiIraiYMD()));
         eucEntity.set意見書入手日(nullToEmpty(entity.getIkenshoJuryoYMD()));
         eucEntity.set調査依頼日(nullToEmpty(entity.getNinteichosaIraiYMD()));
         eucEntity.set調査実施日(nullToEmpty(entity.getNinteichosaJisshiYMD()));
-        eucEntity.set指定居宅介護支援事業者等番号(nullToEmpty(entity.getNinteichosaItakusakiCode()));
-        eucEntity.set委託区分(nullToEmpty(entity.getChosaItakuKubun()));
-        eucEntity.set認定調査員番号(nullToEmpty(entity.getNinteiChosainCode()));
-        eucEntity.set認定調査員資格コード(nullToEmpty(entity.getChosainShikaku()));
+        eucEntity.set指定居宅介護支援事業者等番号(!RString.isNullOrEmpty(entity.getDbT5202_ninteichosaItakusakiCode())
+                ? nullToEmpty(entity.getDbT5202_ninteichosaItakusakiCode()) : nullToEmpty(entity.getDbT5201_ninteichosaItakusakiCode()));
+        eucEntity.set委託区分(!RString.isNullOrEmpty(entity.getDbT5202_chosaItakuKubun()) 
+                ? nullToEmpty(entity.getDbT5202_chosaItakuKubun()) : nullToEmpty(entity.getDbT5201_chosaItakuKubun()));
+        eucEntity.set認定調査員番号(!RString.isNullOrEmpty(entity.getDbT5202_ninteiChosainCode())
+                ? nullToEmpty(entity.getDbT5202_ninteiChosainCode()) : nullToEmpty(entity.getDbT5201_ninteiChosainCode()));
+        eucEntity.set認定調査員資格コード(!RString.isNullOrEmpty(entity.getDbT5202_chosainShikaku())
+                ? nullToEmpty(entity.getDbT5202_chosainShikaku()) : nullToEmpty(entity.getDbT5201_chosainShikaku()));
         eucEntity.set一次判定日(nullToEmpty(entity.getIchijiHanteiYMD()));
         eucEntity.set一次判定結果(nullToEmpty(entity.getIchijiHanteiKekkaCode()));
         eucEntity.set一次判定結果認知症加算(nullToEmpty(entity.getIchijiHanteiKekkaNinchishoKasanCode()));
@@ -575,8 +581,9 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set二次判定結果(nullToEmpty(entity.getNijiHanteiYokaigoJotaiKubunCode()));
         eucEntity.set認定有効期間開始(nullToEmpty(entity.getNijiHanteiNinteiYukoKaishiYMD()));
         eucEntity.set認定有効期間終了(nullToEmpty(entity.getNijiHanteiNinteiYukoShuryoYMD()));
-        eucEntity.set特定疾病コード(nullToEmpty(entity.getNigoTokuteiShippeiCode()));
-        eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getZenYokaigoKubunCode()));
+        eucEntity.set特定疾病コード(!RString.isNullOrEmpty(entity.getNijiHanteiYMD()) 
+                ? nullToEmpty(entity.getNigoTokuteiShippeiCode()) : RString.EMPTY);
+        eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getYokaigoJotaizoReiCode()));
         eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
         eucEntity.set現在の状況(nullToEmpty(entity.getRemban()));
         if (entity.getKoroshoIfShikibetsuCode() != null

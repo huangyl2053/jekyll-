@@ -257,8 +257,10 @@
         <result property="zenYokaigoKubunCode" column= "A_zenYokaigoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenkaiYukoKikanStart" column="A_zenkaiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenkaiYukoKikanEnd" column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shujiiIryokikanCode" column="A_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shujiiCode" column="A_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5301_shujiiIryokikanCode" column="D_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5302_shujiiIryokikanCode" column="E_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5301_shujiiCode" column="D_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5302_shujiiCode" column="E_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoJuryoYMD" column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="主治医一時remban14" column= "要介護認定主治医一時テーブル_remban14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -270,10 +272,14 @@
         <result property="主治医一時remban69" column="要介護認定主治医一時テーブル_remban69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteichosaIraiYMD" column= "G_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaJisshiYMD" column="H_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteichosaItakusakiCode" column="I_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="chosaItakuKubun" column="I_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteiChosainCode" column="G_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="chosainShikaku" column="J_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5201_ninteichosaItakusakiCode" column="G_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_ninteichosaItakusakiCode" column="H_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5201_chosaItakuKubun" column="G_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_chosaItakuKubun" column="H_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5201_ninteiChosainCode" column="G_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_ninteiChosainCode" column="H_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5201_chosainShikaku" column="J_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_chosainShikaku" column="J2_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ichijiHanteiYMD" column="K_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ichijiHanteiKekkaCode" column="K_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ichijiHanteiKekkaNinchishoKasanCode" column= "K_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -579,10 +585,12 @@
         , A."zenYokaigoKubunCode"                    AS "A_zenYokaigoKubunCode"
         , A."zenkaiYukoKikanStart"                   AS "A_zenkaiYukoKikanStart"
         , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
-        , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
-        , A."shujiiCode"                             AS "A_shujiiCode"
-        , D."ikenshoSakuseiIraiYMD"                    AS "D_ikenshoSakuseiIraiYMD"
+        , D."ikenshoSakuseiIraiYMD"                  AS "D_ikenshoSakuseiIraiYMD"
+        , D."shujiiIryokikanCode"                    AS "D_shujiiIryokikanCode"
+        , D."shujiiCode"                             AS "D_shujiiCode"
         , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
+        , E."shujiiIryokikanCode"                    AS "E_shujiiIryokikanCode"
+        , E."shujiiCode"                             AS "E_shujiiCode"
         ,要介護認定主治医一時テーブル."remban14" as "要介護認定主治医一時テーブル_remban14"
         ,要介護認定主治医一時テーブル."remban15" as "要介護認定主治医一時テーブル_remban15"
         ,要介護認定主治医一時テーブル."remban16" as "要介護認定主治医一時テーブル_remban16"
@@ -591,11 +599,15 @@
         ,要介護認定主治医一時テーブル."remban19" as "要介護認定主治医一時テーブル_remban19"
         ,要介護認定主治医一時テーブル."remban69" as "要介護認定主治医一時テーブル_remban69"
         , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
-        , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
-        , I."ninteichosaItakusakiCode"                             AS "I_ninteichosaItakusakiCode"
-        , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
+        , G."ninteichosaItakusakiCode"               AS "G_ninteichosaItakusakiCode"
+        , G."chosaItakuKubun"                        AS "G_chosaItakuKubun"
         , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
+        , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
+        , H."ninteichosaItakusakiCode"               AS "H_ninteichosaItakusakiCode"
+        , H."chosaItakuKubun"                        AS "H_chosaItakuKubun"
+        , H."ninteiChosainCode"                      AS "H_ninteiChosainCode"
         , J."chosainShikaku"                         AS "J_chosainShikaku"
+        , J2."chosainShikaku"                        AS "J2_chosainShikaku"
         , K."ichijiHanteiYMD"                        AS "K_ichijiHanteiYMD"
         , K."ichijiHanteiKekkaCode"                  AS "K_ichijiHanteiKekkaCode"
         , K."ichijiHanteiKekkaNinchishoKasanCode"    AS "K_ichijiHanteiKekkaNinchishoKasanCode"
@@ -625,8 +637,8 @@
         , N."nijiHanteiYokaigoJotaiKubunCode"        AS "N_nijiHanteiYokaigoJotaiKubunCode"
         , N."nijiHanteiNinteiYukoKaishiYMD"          AS "N_nijiHanteiNinteiYukoKaishiYMD"
         , N."nijiHanteiNinteiYukoShuryoYMD"          AS "N_nijiHanteiNinteiYukoShuryoYMD"
-        , A."nigoTokuteiShippeiCode"                 AS "A_nigoTokuteiShippeiCode"
         , N."yokaigoJotaizoReiCode"                  AS "N_yokaigoJotaizoReiCode"
+        , A."nigoTokuteiShippeiCode"                 AS "A_nigoTokuteiShippeiCode"
         , H."serviceKubunCode"                       AS "H_serviceKubunCode"
         , PO1."PO1_remban"                           AS "PO1_PO1_remban"
         ,サービスの状況一時テーブル."remban1" as "サービスの状況一時テーブル_remban1"
@@ -875,6 +887,8 @@
         , N."shinsakaiMemo" AS "N_shinsakaiMemo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
+        LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" DbT5105
+        ON A."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5120ShinseitodokedeJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS C
@@ -891,6 +905,8 @@
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS D
         ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
         AND D."logicalDeletedFlag" = FALSE
+        AND D."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -903,6 +919,8 @@
         )
         LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS E
         ON A."shinseishoKanriNo" = E."shinseishoKanriNo"
+        AND E."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -915,9 +933,13 @@
         LEFT JOIN
         "ShujiiIkenshoJohoTemp" as 要介護認定主治医一時テーブル
         ON A."shinseishoKanriNo" =  要介護認定主治医一時テーブル."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = 要介護認定主治医一時テーブル."shinseishoKanriNo"
+        AND DbT5105."ikenshoTorokuKanryoYMD" IS NOT NULL
         LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS G
         ON A."shinseishoKanriNo" = G."shinseishoKanriNo"
         AND G."logicalDeletedFlag" = FALSE
+        AND DbT5105."shinseishoKanriNo" = G."shinseishoKanriNo"
+        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -930,6 +952,8 @@
         )
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H
         ON A."shinseishoKanriNo" = H."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = H."shinseishoKanriNo"
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -939,29 +963,37 @@
         H."shinseishoKanriNo" = H1."shinseishoKanriNo"
         AND H."ninteichosaRirekiNo" <![CDATA[<]]> H1."ninteichosaRirekiNo"
         )
-        AND H."gaikyoChosaTextImageKubun" = #{イメージ区分}
-        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I
-        ON G."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode"
-        AND I."shichosonCode" = A."shichosonCode"
-        AND I."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS J
         ON G."ninteichosaItakusakiCode" = J."ninteiChosaItakusakiCode"
         AND G."ninteiChosainCode" = J."ninteiChosainCode"
         AND J."shichosonCode" = A."shichosonCode"
         AND J."jokyoFlag" = TRUE
+        LEFT JOIN rgdb."DbT5913ChosainJoho" AS J2
+        ON H."ninteichosaItakusakiCode" = J2."ninteiChosaItakusakiCode"
+        AND H."ninteiChosainCode" = J2."ninteiChosainCode"
+        AND J2."shichosonCode" = A."shichosonCode"
+        AND J2."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS K
         ON A."shinseishoKanriNo" = K."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = K."shinseishoKanriNo"
+        AND DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS L
         ON A."shinseishoKanriNo" = L."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS M
         ON L."shinsakaiKaisaiNo" = M."shinsakaiKaisaiNo"
+        AND DbT5105."shinsakaiKaisaiNo" = M."shinsakaiKaisaiNo"
+        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS N
         ON A."shinseishoKanriNo" = N."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = N."shinseishoKanriNo"
+        AND DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
         LEFT JOIN
         "NinteichosaJohoTemp" as サービスの状況一時テーブル
         ON A."shinseishoKanriNo" = サービスの状況一時テーブル."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" AS P
         ON A."shinseishoKanriNo" = P."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = P."shinseishoKanriNo"
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -982,6 +1014,8 @@
         , rgdb."DbT5101NinteiShinseiJoho" AS A
         WHERE
         P001."shinseishoKanriNo" = A."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = P001."shinseishoKanriNo"
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -1000,8 +1034,12 @@
         LEFT JOIN
         "ChosaItemJohoTemp" as 認定調査票基本調査一時テーブル
         ON A."shinseishoKanriNo" =認定調査票基本調査一時テーブル."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = 認定調査票基本調査一時テーブル."shinseishoKanriNo"
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" AS R
         ON A."shinseishoKanriNo" = R."shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = R."shinseishoKanriNo"
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -1052,7 +1090,6 @@
         X."shinseishoKanriNo" = X1."shinseishoKanriNo"
         AND X."ninteichosaRirekiNo" <![CDATA[<]]> X1."ninteichosaRirekiNo"
         )
-        AND X."gaikyoChosaTextImageKubun" = #{イメージ区分}
         LEFT JOIN (
         SELECT
         P003."remban" AS "P02_remban"
