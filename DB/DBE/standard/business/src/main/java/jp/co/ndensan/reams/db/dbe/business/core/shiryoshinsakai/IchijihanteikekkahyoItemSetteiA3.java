@@ -1605,36 +1605,46 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             RString 主治医意見書項目連番 = new RString(主治医意見書項目.getRemban());
             if (主治医意見書項目連番.equals(settei.get日常生活自立度(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_0);
-                調査結果 = IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY : 
+                        IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY : 
+                        IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set調査結果(調査結果);
                 主治医意見書.set調査結果コード(調査結果コード);
                 主治医意見書リスト.set(INT_0, 主治医意見書);
             } else if (主治医意見書項目連番.equals(settei.get短期記憶意見書(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_1);
-                調査結果 = IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY :
+                        IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set調査結果(調査結果);
                 主治医意見書.set調査結果コード(調査結果コード);
                 主治医意見書リスト.set(INT_1, 主治医意見書);
             } else if (主治医意見書項目連番.equals(settei.get認知能力(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_2);
-                調査結果 = IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY :
+                        IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set調査結果(調査結果);
                 主治医意見書.set調査結果コード(調査結果コード);
                 主治医意見書リスト.set(INT_2, 主治医意見書);
             } else if (主治医意見書項目連番.equals(settei.get伝達能力(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_3);
-                調査結果 = IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY :
+                        IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set調査結果(調査結果);
                 主治医意見書.set調査結果コード(調査結果コード);
                 主治医意見書リスト.set(INT_3, 主治医意見書);
             } else if (主治医意見書項目連番.equals(settei.get食事行為(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_4);
-                調査結果 = IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY :
+                        IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set調査結果(調査結果);
                 主治医意見書.set調査結果コード(調査結果コード);
                 主治医意見書リスト.set(INT_4, 主治医意見書);
@@ -1655,32 +1665,42 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             RString 前主治医意見書項目連番 = new RString(前主治医意見書項目.getRemban());
             if (前主治医意見書項目連番.equals(settei.get日常生活自立度(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_0);
-                前回調査結果 = IkenKomoku03.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
-                前回調査結果コード = IkenKomoku03.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
+                前回調査結果 = RString.isNullOrEmpty(前主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku03.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
+                前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY :
+                        IkenKomoku03.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set前回結果(get前回結果(is前回結果, 前回調査結果));
                 kekka.set日常生活自立度今回結果前回結果比(主治医意見書.get調査結果コード(), 前回調査結果コード, 主治医意見書);
             } else if (前主治医意見書項目連番.equals(settei.get短期記憶意見書(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_1);
-                前回調査結果 = IkenKomoku04.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
-                前回調査結果コード = IkenKomoku04.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
+                前回調査結果 = RString.isNullOrEmpty(前主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku04.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
+                前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY :
+                        IkenKomoku04.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set前回結果(get前回結果(is前回結果, 前回調査結果));
                 kekka.set短期記憶意見書今回結果前回結果比(主治医意見書.get調査結果コード(), 前回調査結果コード, 主治医意見書);
             } else if (前主治医意見書項目連番.equals(settei.get認知能力(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_2);
-                前回調査結果 = IkenKomoku05.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
-                前回調査結果コード = IkenKomoku05.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
+                前回調査結果 = RString.isNullOrEmpty(前主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku05.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
+                前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY :
+                        IkenKomoku05.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set前回結果(get前回結果(is前回結果, 前回調査結果));
                 kekka.set認知能力今回結果前回結果比(主治医意見書.get調査結果コード(), 前回調査結果コード, 主治医意見書);
             } else if (前主治医意見書項目連番.equals(settei.get伝達能力(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_3);
-                前回調査結果 = IkenKomoku06.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
-                前回調査結果コード = IkenKomoku06.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
+                前回調査結果 = RString.isNullOrEmpty(前主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku06.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
+                前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY :
+                        IkenKomoku06.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set前回結果(get前回結果(is前回結果, 前回調査結果));
                 kekka.set伝達能力今回結果前回結果比(主治医意見書.get調査結果コード(), 前回調査結果コード, 主治医意見書);
             } else if (前主治医意見書項目連番.equals(settei.get食事行為(厚労省IF識別コード))) {
                 主治医意見書 = 主治医意見書リスト.get(INT_4);
-                前回調査結果 = IkenKomoku14.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
-                前回調査結果コード = IkenKomoku14.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
+                前回調査結果 = RString.isNullOrEmpty(前主治医意見書項目.getIkenItem()) ? RString.EMPTY :
+                        IkenKomoku14.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).get略称();
+                前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY :
+                        IkenKomoku14.toValue(getコード_半角スペース除去(前主治医意見書項目.getIkenItem())).getコード();
                 主治医意見書.set前回結果(get前回結果(is前回結果, 前回調査結果));
                 kekka.set食事行為今回結果前回結果比(主治医意見書.get調査結果コード(), 前回調査結果コード, 主治医意見書);
             }
