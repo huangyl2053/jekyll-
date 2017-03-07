@@ -1,0 +1,10 @@
+﻿shinsakaiKaisaiNo,bpchar,RString,,,,,介護認定審査会開催番号,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催年月日,A
+shinsakaiWariateYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会割当年月日,A
+shinsakaiOrder,int2,int,,,,,介護認定審査会審査順,A
+shinsakaiOrderKakuteiFlag,bool,boolean,,,,,介護認定審査会審査順確定フラグ,A
+shinsakaiJidoWaritsukeFlag,bool,boolean,,,,,審査会自動割付フラグ,A
+shinsakaiShiryoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,審査会資料作成年月日,A
+shinsakaiShiryoSofuYMD,UDD015YMD,FlexibleDate,,,,,審査会資料送付年月日,A
+hanteiKekkaCode,UDD035Code,Code,,,,,判定結果コード,A
