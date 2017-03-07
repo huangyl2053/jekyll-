@@ -77,10 +77,6 @@ module DBE {
                 return new UZA.TextBox(this.convFiledName("txtChosaKomokuMeisho"));
             }
 
-            public spcTokkiMask(): UZA.Space {
-                return new UZA.Space(this.convFiledName("spcTokkiMask"));
-            }
-
             public celTableCell4(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celTableCell4"));
             }

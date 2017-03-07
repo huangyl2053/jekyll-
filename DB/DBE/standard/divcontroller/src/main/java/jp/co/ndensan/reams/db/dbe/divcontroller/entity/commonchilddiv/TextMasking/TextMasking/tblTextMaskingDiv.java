@@ -65,11 +65,6 @@ public class tblTextMaskingDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Space getSpcTokkiMask() {
-        return this.celTableCell6.getSpcTokkiMask();
-    }
-
-    @JsonIgnore
     public Label getLblBeforeMasking() {
         return this.celTableCell4.getLblBeforeMasking();
     }
@@ -340,8 +335,6 @@ class celTableCell6AttblTextMasking extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("txtChosaKomokuMeisho")
     private TextBox txtChosaKomokuMeisho;
-    @JsonProperty("spcTokkiMask")
-    private Space spcTokkiMask;
 
     /*
      * gettxtChosaKomokuMeisho
@@ -359,24 +352,6 @@ class celTableCell6AttblTextMasking extends TableCell {
     @JsonProperty("txtChosaKomokuMeisho")
     public void setTxtChosaKomokuMeisho(TextBox txtChosaKomokuMeisho) {
         this.txtChosaKomokuMeisho = txtChosaKomokuMeisho;
-    }
-
-    /*
-     * getspcTokkiMask
-     * @return spcTokkiMask
-     */
-    @JsonProperty("spcTokkiMask")
-    public Space getSpcTokkiMask() {
-        return spcTokkiMask;
-    }
-
-    /*
-     * setspcTokkiMask
-     * @param spcTokkiMask spcTokkiMask
-     */
-    @JsonProperty("spcTokkiMask")
-    public void setSpcTokkiMask(Space spcTokkiMask) {
-        this.spcTokkiMask = spcTokkiMask;
     }
 
     // </editor-fold>
