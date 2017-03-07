@@ -16,7 +16,8 @@ public enum DBE5210001StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default"),
-    完了("完了");
+    完了("完了"),
+    完了_模擬("完了_模擬");
 
     private final RString name;
 

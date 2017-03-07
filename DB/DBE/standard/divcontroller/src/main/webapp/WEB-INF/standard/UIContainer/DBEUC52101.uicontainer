@@ -115,6 +115,16 @@
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "10",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5210001",
+     "layoutTitle": "介護認定審査会開催結果登録",
+     "eventName": "処理完了_模擬",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

@@ -41,4 +41,5 @@ public class ShinsakaiKaisaiYoteiJohoEntity {
     private int 予定定員;
     private int 自動割当定員;
     private int 委員定員;
+    private boolean 合議体ダミーフラグ;
 }

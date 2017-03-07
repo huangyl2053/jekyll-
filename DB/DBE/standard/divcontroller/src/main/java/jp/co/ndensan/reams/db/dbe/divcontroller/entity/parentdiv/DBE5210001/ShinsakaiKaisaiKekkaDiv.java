@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -236,6 +236,16 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtGogitai() {
+        return this.getShinsakaiYoteiInfo().getTxtGogitai();
+    }
+
+    @JsonIgnore
+    public void  setTxtGogitai(TextBox txtGogitai) {
+        this.getShinsakaiYoteiInfo().setTxtGogitai(txtGogitai);
+    }
+
+    @JsonIgnore
     public TextBox getTxtShinsakaiMeisho() {
         return this.getShinsakaiYoteiInfo().getTxtShinsakaiMeisho();
     }
@@ -246,13 +256,13 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtGogitai() {
-        return this.getShinsakaiYoteiInfo().getTxtGogitai();
+    public CheckBoxList getChkMogi() {
+        return this.getShinsakaiYoteiInfo().getChkMogi();
     }
 
     @JsonIgnore
-    public void  setTxtGogitai(TextBox txtGogitai) {
-        this.getShinsakaiYoteiInfo().setTxtGogitai(txtGogitai);
+    public void  setChkMogi(CheckBoxList chkMogi) {
+        this.getShinsakaiYoteiInfo().setChkMogi(chkMogi);
     }
 
     @JsonIgnore

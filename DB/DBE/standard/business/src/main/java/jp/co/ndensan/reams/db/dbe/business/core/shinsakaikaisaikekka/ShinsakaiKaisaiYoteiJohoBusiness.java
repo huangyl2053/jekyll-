@@ -91,7 +91,7 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
     public RString get介護認定審査会開催場所名称() {
         return entity.get介護認定審査会開催場所名称();
     }
-    
+
     /**
      * 介護認定審査会開催予定場所コードを返します。
      *
@@ -228,4 +228,12 @@ public class ShinsakaiKaisaiYoteiJohoBusiness {
         return entity.get委員定員();
     }
 
+    /**
+     * 合議体ダミーフラグを返します。
+     *
+     * @return 合議体ダミーフラグ
+     */
+    public boolean is合議体ダミーフラグ() {
+        return entity.is合議体ダミーフラグ();
+    }
 }
