@@ -232,7 +232,7 @@ public class ShujiiIkenshoBusiness {
         item.setJushoText(entity.get医療機関住所());
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
-        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
+        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             item.setMeishoFuyo(RString.EMPTY);
         }
@@ -404,7 +404,7 @@ public class ShujiiIkenshoBusiness {
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
                     int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                            基準日, SubGyomuCode.DBE認定支援).toString());
+                            基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()).toString());
                     if (文字列1.equals(主治医意見書作成期限設定方法)) {
                         FlexibleDate 作成依頼日 = entity.get主治医意見書作成依頼年月日();
                         dbT5301Entity.setIkenshoSakuseiKigenYMD(作成依頼日.plusDay(期限日数));
@@ -490,7 +490,7 @@ public class ShujiiIkenshoBusiness {
         item.setJushoText(entity.get医療機関住所());
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
-        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
+        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             item.setMeishoFuyo(RString.EMPTY);
         }
@@ -620,10 +620,10 @@ public class ShujiiIkenshoBusiness {
     private RString get提出期限() {
 
         RString 提出期限 = RString.EMPTY;
-        if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
+        if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()))) {
             if (文字列0.equals(processParamter.getTeishutsuKigen())) {
                 int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                        基準日, SubGyomuCode.DBE認定支援).toString());
+                        基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()).toString());
                 if (entity.get主治医意見書作成期限年月日() != null && !entity.get主治医意見書作成期限年月日().isEmpty()) {
                     提出期限 = get和暦(new RString(entity.get主治医意見書作成期限年月日().plusDay(期限日数).toString()));
                 }
@@ -646,8 +646,8 @@ public class ShujiiIkenshoBusiness {
         RString 提出期限 = RString.EMPTY;
         if (文字列0.equals(processParamter.getTeishutsuKigen())) {
             int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                    基準日, SubGyomuCode.DBE認定支援).toString());
-            if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
+                    基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()).toString());
+            if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()))) {
                 提出期限 = entity.get主治医意見書作成依頼年月日() != null && !entity.get主治医意見書作成依頼年月日().isEmpty()
                         ? get和暦(new RString(entity.get主治医意見書作成依頼年月日().plusDay(期限日数).toString()), 年号フラグ) : RString.EMPTY;
             } else {
@@ -693,7 +693,7 @@ public class ShujiiIkenshoBusiness {
     }
 
     private RString get名称付与() {
-        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
+        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         RString 名称付与 = RString.EMPTY;
         if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             名称付与 = RString.EMPTY;

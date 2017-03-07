@@ -188,11 +188,12 @@ public class NinteiChosaBusiness {
     public DbT5201NinteichosaIraiJohoEntity update認定調査依頼情報(HomonChosaIraishoRelateEntity entity) {
         DbT5201NinteichosaIraiJohoEntity dbT5201Entity = entity.getDbt5201Entity();
         if (processParamter.is認定調査依頼一覧表() || processParamter.is認定調査依頼書()) {
-            RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法,
+                    RDate.getNowDate(), SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
             switch (processParamter.getTeishutsuKigen().toString()) {
                 case "0":
                     int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数,
-                            RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
+                            RDate.getNowDate(), SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()).toString());
                     if (文字列1.equals(認定調査期限設定方法)) {
                         FlexibleDate 認定調査依頼日 = entity.get認定調査依頼年月日();
                         if (認定調査依頼日 != null && !認定調査依頼日.isEmpty()) {
@@ -295,8 +296,8 @@ public class NinteiChosaBusiness {
         RString 提出期限 = RString.EMPTY;
         if (文字列0.equals(processParamter.getTeishutsuKigen())) {
             int 期限日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数,
-                    基準日, SubGyomuCode.DBE認定支援).toString());
-            if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援))) {
+                    基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()).toString());
+            if (文字列1.equals(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode()))) {
                 提出期限 = entity.get認定調査依頼年月日() != null && !entity.get認定調査依頼年月日().isEmpty()
                         ? new RString(entity.get認定調査依頼年月日().plusDay(期限日数).toString()) : RString.EMPTY;
             } else {
@@ -312,7 +313,7 @@ public class NinteiChosaBusiness {
     }
 
     private RString get認定調査依頼一覧表名称付与() {
-        RString key = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼一覧表_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
+        RString key = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼一覧表_宛先敬称, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         RString meishoFuyo = RString.EMPTY;
         if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             meishoFuyo = RString.EMPTY;
@@ -648,7 +649,7 @@ public class NinteiChosaBusiness {
     }
 
     private RString get認定調査依頼書名称付与() {
-        RString key = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援);
+        RString key = DbBusinessConfig.get(ConfigNameDBE.認定調査依頼書_宛先敬称, 基準日, SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         RString meishoFuyo = RString.EMPTY;
         if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             meishoFuyo = RString.EMPTY;

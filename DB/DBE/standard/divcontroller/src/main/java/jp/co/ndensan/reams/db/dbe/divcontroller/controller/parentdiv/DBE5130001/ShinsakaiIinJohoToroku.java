@@ -106,6 +106,10 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnKensaku(ShinsakaiIinJohoTorokuDiv div) {
 
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
         RString 審査会委員コードFrom = RString.EMPTY;
         RString 審査会委員コードTo = RString.EMPTY;
 
@@ -138,11 +142,15 @@ public class ShinsakaiIinJohoToroku {
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報 = Models.create(審査会委員一覧情報);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報, 介護認定審査会委員情報);
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, 介護認定審査会委員情報);
+        if (null == 審査会委員一覧情報 || 審査会委員一覧情報.isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         div.getDgShinsaInJohoIchiran().setDataSource(createHandOf(div).setShinsaInJohoIchiranDiv(審査会委員一覧情報));
         div.getDgShinsaInJohoIchiran().getGridSetting().setLimitRowCount(div.getTxtDispMax().getValue().intValue());
         List<ShinsakaiIinJoho> 審査会委員一覧情報件数 = manager.get審査会委員一覧件数(parameter).records();
         div.getDgShinsaInJohoIchiran().getGridSetting().setSelectedRowCount(審査会委員一覧情報件数.size());
-        return ResponseData.of(div).respond();
+
+        return ResponseData.of(div).setState(DBE5130001StateName.審査会一覧_保存ボタン非活性);
     }
 
     /**
