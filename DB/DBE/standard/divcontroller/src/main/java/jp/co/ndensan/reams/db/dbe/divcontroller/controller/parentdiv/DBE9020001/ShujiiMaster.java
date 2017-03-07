@@ -143,6 +143,8 @@ public class ShujiiMaster {
             検索条件初期値 = false;
         }
         if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty() && !検索条件初期値) {
+            div.getShujiiSearch().setDisabled(false);
+            div.getShujiiIchiran().setDisabled(true);
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_保存ボタン非活性);
