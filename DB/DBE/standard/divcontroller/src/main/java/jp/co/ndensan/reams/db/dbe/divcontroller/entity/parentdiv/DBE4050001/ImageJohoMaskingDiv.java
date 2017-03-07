@@ -41,6 +41,8 @@ public class ImageJohoMaskingDiv extends Panel {
     private KanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("hiddenImagePath")
     private RString hiddenImagePath;
+    @JsonProperty("hdnTextMasking")
+    private RString hdnTextMasking;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -145,6 +147,24 @@ public class ImageJohoMaskingDiv extends Panel {
     @JsonProperty("hiddenImagePath")
     public void setHiddenImagePath(RString hiddenImagePath) {
         this.hiddenImagePath = hiddenImagePath;
+    }
+
+    /*
+     * gethdnTextMasking
+     * @return hdnTextMasking
+     */
+    @JsonProperty("hdnTextMasking")
+    public RString getHdnTextMasking() {
+        return hdnTextMasking;
+    }
+
+    /*
+     * sethdnTextMasking
+     * @param hdnTextMasking hdnTextMasking
+     */
+    @JsonProperty("hdnTextMasking")
+    public void setHdnTextMasking(RString hdnTextMasking) {
+        this.hdnTextMasking = hdnTextMasking;
     }
 
     /*
@@ -258,6 +278,26 @@ public class ImageJohoMaskingDiv extends Panel {
     @JsonIgnore
     public void  setBtnMaskingMask(ButtonDialog btnMaskingMask) {
         this.getImageMaskTaishoShiji().setBtnMaskingMask(btnMaskingMask);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnMaskingGenponText() {
+        return this.getImageMaskTaishoShiji().getBtnMaskingGenponText();
+    }
+
+    @JsonIgnore
+    public void  setBtnMaskingGenponText(ButtonDialog btnMaskingGenponText) {
+        this.getImageMaskTaishoShiji().setBtnMaskingGenponText(btnMaskingGenponText);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnMaskingMaskText() {
+        return this.getImageMaskTaishoShiji().getBtnMaskingMaskText();
+    }
+
+    @JsonIgnore
+    public void  setBtnMaskingMaskText(ButtonDialog btnMaskingMaskText) {
+        this.getImageMaskTaishoShiji().setBtnMaskingMaskText(btnMaskingMaskText);
     }
 
     @JsonIgnore

@@ -10,7 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.imagejohomasking.ImageJohoMaskingResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.ImageJohoMaskingParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.TextMaskingParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.ImageJohoMaskingRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingGaikyoChosaTokkiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingKihonChosaTokkiEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imagejohomasking.IImageJohoMaskingMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -59,7 +62,8 @@ public class ImageJohoMaskingFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ImageJohoMaskingFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ImageJohoMaskingFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ImageJohoMaskingFinder}のインスタンス
      */
     public static ImageJohoMaskingFinder createInstance() {
         return InstanceProvider.create(ImageJohoMaskingFinder.class);
@@ -82,6 +86,26 @@ public class ImageJohoMaskingFinder {
             resultList.add(new ImageJohoMaskingResult(entity));
         }
         return SearchResult.of(resultList, 0, false);
+    }
+
+    /**
+     *
+     * @param param
+     * @return
+     */
+    public List<MaskingKihonChosaTokkiEntity> getNinteiChosaTokkijiko(TextMaskingParameter param) {
+        List<MaskingKihonChosaTokkiEntity> resultList = mapperProvider.create(IImageJohoMaskingMapper.class).getNinteiChosaTokkiData(param);
+        return resultList;
+    }
+
+    /**
+     *
+     * @param param
+     * @return
+     */
+    public List<MaskingGaikyoChosaTokkiEntity> getGaikyoChosaTokkijiko(TextMaskingParameter param) {
+        List<MaskingGaikyoChosaTokkiEntity> resultList = mapperProvider.create(IImageJohoMaskingMapper.class).getGaikyoChosaTokkiData(param);
+        return resultList;
     }
 
     /**

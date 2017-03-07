@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblTextMaskingDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -67,11 +67,6 @@ public class tblTextMaskingDiv extends TablePanel {
     @JsonIgnore
     public Space getSpcTokkiMask() {
         return this.celTableCell6.getSpcTokkiMask();
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkDelete() {
-        return this.celTableCell6.getChkDelete();
     }
 
     @JsonIgnore
@@ -252,7 +247,7 @@ public class tblTextMaskingDiv extends TablePanel {
  * @author 自動生成
  */
 class celTableCell1AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("txtChosaKomokuNo")
     private TextBox txtChosaKomokuNo;
 
@@ -282,7 +277,7 @@ class celTableCell1AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell2AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("lblHyphen")
     private Label lblHyphen;
 
@@ -312,7 +307,7 @@ class celTableCell2AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell3AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("txtChosaKomokuRenban")
     private TextBoxNum txtChosaKomokuRenban;
 
@@ -342,13 +337,11 @@ class celTableCell3AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell6AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("txtChosaKomokuMeisho")
     private TextBox txtChosaKomokuMeisho;
     @JsonProperty("spcTokkiMask")
     private Space spcTokkiMask;
-    @JsonProperty("chkDelete")
-    private CheckBoxList chkDelete;
 
     /*
      * gettxtChosaKomokuMeisho
@@ -386,24 +379,6 @@ class celTableCell6AttblTextMasking extends TableCell {
         this.spcTokkiMask = spcTokkiMask;
     }
 
-    /*
-     * getchkDelete
-     * @return chkDelete
-     */
-    @JsonProperty("chkDelete")
-    public CheckBoxList getChkDelete() {
-        return chkDelete;
-    }
-
-    /*
-     * setchkDelete
-     * @param chkDelete chkDelete
-     */
-    @JsonProperty("chkDelete")
-    public void setChkDelete(CheckBoxList chkDelete) {
-        this.chkDelete = chkDelete;
-    }
-
     // </editor-fold>
 }
 /**
@@ -412,7 +387,7 @@ class celTableCell6AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell4AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("lblBeforeMasking")
     private Label lblBeforeMasking;
 
@@ -442,7 +417,7 @@ class celTableCell4AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell5AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("txtBeforeMasking")
     private TextBoxMultiLine txtBeforeMasking;
 
@@ -472,7 +447,7 @@ class celTableCell5AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell7AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("lblAfterMasking")
     private Label lblAfterMasking;
 
@@ -502,7 +477,7 @@ class celTableCell7AttblTextMasking extends TableCell {
  * @author 自動生成
  */
 class celTableCell8AttblTextMasking extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     @JsonProperty("txtAfterMasking")
     private TextBoxMultiLine txtAfterMasking;
 

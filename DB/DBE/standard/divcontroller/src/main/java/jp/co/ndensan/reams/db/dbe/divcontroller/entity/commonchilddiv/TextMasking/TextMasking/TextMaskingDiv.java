@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class TextMaskingDiv extends Panel implements ITextMaskingDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -141,11 +141,6 @@ public class TextMaskingDiv extends Panel implements ITextMaskingDiv {
     @JsonIgnore
     public Space getSpcTokkiMask() {
         return this.getTblTextMasking().getSpcTokkiMask();
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkDelete() {
-        return this.getTblTextMasking().getChkDelete();
     }
 
     @JsonIgnore

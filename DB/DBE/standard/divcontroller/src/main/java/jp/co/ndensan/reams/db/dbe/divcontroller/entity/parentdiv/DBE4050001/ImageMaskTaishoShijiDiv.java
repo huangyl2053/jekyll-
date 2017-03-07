@@ -27,6 +27,10 @@ public class ImageMaskTaishoShijiDiv extends Panel {
     private ButtonDialog btnMaskingGenpon;
     @JsonProperty("btnMaskingMask")
     private ButtonDialog btnMaskingMask;
+    @JsonProperty("btnMaskingGenponText")
+    private ButtonDialog btnMaskingGenponText;
+    @JsonProperty("btnMaskingMaskText")
+    private ButtonDialog btnMaskingMaskText;
     @JsonProperty("btnSakujo")
     private Button btnSakujo;
     @JsonProperty("btnTorikeshi")
@@ -90,6 +94,42 @@ public class ImageMaskTaishoShijiDiv extends Panel {
     @JsonProperty("btnMaskingMask")
     public void setBtnMaskingMask(ButtonDialog btnMaskingMask) {
         this.btnMaskingMask = btnMaskingMask;
+    }
+
+    /*
+     * getbtnMaskingGenponText
+     * @return btnMaskingGenponText
+     */
+    @JsonProperty("btnMaskingGenponText")
+    public ButtonDialog getBtnMaskingGenponText() {
+        return btnMaskingGenponText;
+    }
+
+    /*
+     * setbtnMaskingGenponText
+     * @param btnMaskingGenponText btnMaskingGenponText
+     */
+    @JsonProperty("btnMaskingGenponText")
+    public void setBtnMaskingGenponText(ButtonDialog btnMaskingGenponText) {
+        this.btnMaskingGenponText = btnMaskingGenponText;
+    }
+
+    /*
+     * getbtnMaskingMaskText
+     * @return btnMaskingMaskText
+     */
+    @JsonProperty("btnMaskingMaskText")
+    public ButtonDialog getBtnMaskingMaskText() {
+        return btnMaskingMaskText;
+    }
+
+    /*
+     * setbtnMaskingMaskText
+     * @param btnMaskingMaskText btnMaskingMaskText
+     */
+    @JsonProperty("btnMaskingMaskText")
+    public void setBtnMaskingMaskText(ButtonDialog btnMaskingMaskText) {
+        this.btnMaskingMaskText = btnMaskingMaskText;
     }
 
     /*

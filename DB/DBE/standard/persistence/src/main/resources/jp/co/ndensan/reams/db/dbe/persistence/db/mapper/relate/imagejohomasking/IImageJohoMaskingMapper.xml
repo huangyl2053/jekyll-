@@ -129,8 +129,7 @@
         </if>
         LEFT JOIN
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205
-        on T5205."tokkijikoTextImageKubun" = #{イメージ区分}
-        AND T5205."genponMaskKubun" ='2'
+        on T5205."genponMaskKubun" ='2'
         AND NOT EXISTS (
         SELECT
         'X'
@@ -138,6 +137,16 @@
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
         WHERE
         T5205."ninteichosaRirekiNo" <![CDATA[<]]> T5205b."ninteichosaRirekiNo"
+        AND T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
+        )
+        AND NOT EXISTS (
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
+        WHERE
+        T5205."tokkijikoTextImageKubun" <![CDATA[<]]> T5205b."tokkijikoTextImageKubun"
+        AND T5205."ninteichosaRirekiNo" = T5205b."ninteichosaRirekiNo"
         AND T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
         )
         AND T5205."shinseishoKanriNo" = T5101."shinseishoKanriNo"
@@ -160,15 +169,12 @@
         rgdb."DbT5305IkenshoImageJoho" T5305a
         on T5305a."genponMaskKubun" = #{イメージ区分}
         AND T5305a."remban" = T5305."remban"
-        AND (T5305a."ChoyoID" = '701'
-        OR T5305a."ChoyoID" = '777')
+        AND T5305a."ChoyoID" = T5305."ChoyoID"
         AND T5305a."iraiRirekiNo" = T5305."iraiRirekiNo"
         AND T5305a."shinseishoKanriNo" = T5305."shinseishoKanriNo"
         LEFT JOIN
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213
-        ON
-        T5213."gaikyoChosaTextImageKubun" = #{イメージ区分}
-        AND NOT EXISTS	(
+        ON NOT EXISTS	(
         SELECT
         'X'
         FROM
@@ -177,8 +183,17 @@
         T5213."ninteichosaRirekiNo" <![CDATA[<]]> T5213b."ninteichosaRirekiNo"
         AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
         )
+        AND NOT EXISTS	(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
+        WHERE
+        T5213."gaikyoChosaTextImageKubun" <![CDATA[<]]> T5213b."gaikyoChosaTextImageKubun"
+        AND T5213."ninteichosaRirekiNo" = T5213b."ninteichosaRirekiNo"
+        AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
+        )
         AND T5101."shinseishoKanriNo" = T5213."shinseishoKanriNo"
-
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" T5502 
         ON T5101."shinseishoKanriNo" = T5502."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" T5501 
@@ -264,4 +279,97 @@
         <result property="概況マスク有無" column="hasGaikyoMask"/>
         <result property="ISマスキング完了済" column="isMaskingKanryo"/>
     </resultMap>
+    
+    <resultMap id="resultMap_MaskingKihonChosaTokkiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingKihonChosaTokkiEntity" autoMapping="true">
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="認定調査履歴番号" column="ninteichosaRirekiNo"/>
+        <result property="認定調査特記事項番号" column="ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査特記事項連番" column="ninteichosaTokkijikoRemban"/>
+        <result property="特記事項原本" column="genponTokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="特記事項マスク" column="maskTokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getNinteiChosaTokkiData" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.TextMaskingParameter"
+            resultMap="resultMap_MaskingKihonChosaTokkiEntity" fetchSize="500">
+        SELECT
+        genpon."shinseishoKanriNo" AS "shinseishoKanriNo",
+        genpon."ninteichosaRirekiNo" AS "ninteichosaRirekiNo",
+        genpon."ninteichosaTokkijikoNo" AS "ninteichosaTokkijikoNo",
+        genpon."ninteichosaTokkijikoRemban" AS "ninteichosaTokkijikoRemban",
+        genpon."tokkiJiko" AS "genponTokki",
+        mask."tokkiJiko" AS "maskTokki"
+        FROM
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" mst
+        WHERE
+        mst."genponMaskKubun" = '1'
+        AND NOT EXISTS	(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" slv
+        WHERE
+        mst."tokkijikoTextImageKubun" <![CDATA[<]]> slv."tokkijikoTextImageKubun"
+        AND mst."shinseishoKanriNo" = slv."shinseishoKanriNo"
+        AND mst."ninteichosaRirekiNo" = slv."ninteichosaRirekiNo"
+        )
+        AND mst."tokkijikoTextImageKubun" = '1'
+        AND mst."shinseishoKanriNo" = #{申請書管理番号}
+        AND mst."ninteichosaRirekiNo" = #{認定調査履歴番号}
+        )AS genpon
+        LEFT JOIN
+        rgdb."DbT5205NinteichosahyoTokkijiko"AS mask
+        ON genpon."shinseishoKanriNo" = mask."shinseishoKanriNo"
+        AND genpon."ninteichosaRirekiNo" = mask."ninteichosaRirekiNo"
+        AND genpon."ninteichosaTokkijikoNo" = mask."ninteichosaTokkijikoNo"
+        AND genpon."ninteichosaTokkijikoRemban" = mask."ninteichosaTokkijikoRemban"
+        AND genpon."tokkijikoTextImageKubun" = mask."tokkijikoTextImageKubun"
+        AND mask."genponMaskKubun" = '2'
+    </select>
+  
+    <resultMap id="resultMap_MaskingGaikyoChosaTokkiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingGaikyoChosaTokkiEntity" autoMapping="true">
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <result property="認定調査履歴番号" column="ninteichosaRirekiNo"/>
+        <result property="概況調査特記事項原本" column="genponTokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="概況調査特記事項マスク" column="maskTokki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="getGaikyoChosaTokkiData" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.TextMaskingParameter"
+            resultMap="resultMap_MaskingGaikyoChosaTokkiEntity" fetchSize="500">
+        SELECT
+        genpon."shinseishoKanriNo" AS "shinseishoKanriNo",
+        genpon."ninteichosaRirekiNo" AS "ninteichosaRirekiNo",
+        genpon.tokki AS "genponTokki",
+        mask.tokki AS "maskTokki"
+        FROM
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" mst
+        WHERE
+        NOT EXISTS
+        (
+        SELECT
+        *
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" slv
+        WHERE
+        mst."shinseishoKanriNo" = slv."shinseishoKanriNo"
+        AND mst."ninteichosaRirekiNo" = slv."ninteichosaRirekiNo"
+        AND mst."gaikyoChosaTextImageKubun" <![CDATA[<]]> slv."gaikyoChosaTextImageKubun"
+        )
+        AND mst."gaikyoChosaTextImageKubun" = '1'
+        AND mst."shinseishoKanriNo" = #{申請書管理番号}
+        AND mst."ninteichosaRirekiNo" =  #{認定調査履歴番号}
+        )AS genpon
+        LEFT JOIN
+        rgdb."DbT5213GaikyoChosaTokkiMask" mask
+        ON genpon."gaikyoChosaTextImageKubun" = mask."gaikyoChosaTextImageKubun"
+        AND genpon."shinseishoKanriNo" = mask."shinseishoKanriNo"
+        AND genpon."ninteichosaRirekiNo" = mask."ninteichosaRirekiNo"
+    </select>
 </mapper>

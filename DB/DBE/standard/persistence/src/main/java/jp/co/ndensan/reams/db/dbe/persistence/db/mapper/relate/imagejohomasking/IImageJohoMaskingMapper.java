@@ -7,7 +7,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.imagejohomasking
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.ImageJohoMaskingParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.TextMaskingParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.ImageJohoMaskingRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingGaikyoChosaTokkiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingKihonChosaTokkiEntity;
 
 /**
  * イメージ情報マスキングのマッパーインタフェースです。
@@ -23,4 +26,18 @@ public interface IImageJohoMaskingMapper {
      * @return イメージ情報マスキング
      */
     List<ImageJohoMaskingRelateEntity> getDataForLoad(ImageJohoMaskingParameter param);
+
+    /**
+     *
+     * @param param
+     * @return
+     */
+    List<MaskingKihonChosaTokkiEntity> getNinteiChosaTokkiData(TextMaskingParameter param);
+
+    /**
+     *
+     * @param param
+     * @return
+     */
+    List<MaskingGaikyoChosaTokkiEntity> getGaikyoChosaTokkiData(TextMaskingParameter param);
 }

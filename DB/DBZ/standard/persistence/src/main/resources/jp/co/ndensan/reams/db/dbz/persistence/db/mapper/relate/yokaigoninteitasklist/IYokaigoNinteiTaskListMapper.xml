@@ -1529,7 +1529,6 @@
         LEFT JOIN
         rgdb."DbT5205NinteichosahyoTokkijiko" T5205
         on  T5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        and T5205."tokkijikoTextImageKubun" = '2'
         AND T5205."genponMaskKubun" = '2'
         AND NOT EXISTS(
         SELECT
@@ -1539,6 +1538,16 @@
         WHERE
         T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
         AND T5205."ninteichosaRirekiNo" <![CDATA[ < ]]> T5205b."ninteichosaRirekiNo"
+        )
+        AND NOT EXISTS	(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5205NinteichosahyoTokkijiko" T5205b
+        WHERE
+        T5205."tokkijikoTextImageKubun" <![CDATA[ < ]]> T5205b."tokkijikoTextImageKubun"
+        AND T5205."ninteichosaRirekiNo" = T5205b."ninteichosaRirekiNo"
+        AND T5205."shinseishoKanriNo" = T5205b."shinseishoKanriNo"
         )
         LEFT JOIN
         rgdb."DbT5305IkenshoImageJoho" T5305
@@ -1558,14 +1567,23 @@
         OR T5305."ChoyoID" = '777')
         LEFT JOIN
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213
-        ON  T5213."gaikyoChosaTextImageKubun" = '2'
-        AND NOT EXISTS(
+        ON  NOT EXISTS(
         SELECT
         'X'
         FROM
         rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
         WHERE
         T5213."ninteichosaRirekiNo" <![CDATA[ < ]]> T5213b."ninteichosaRirekiNo"
+        AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
+        )
+        AND NOT EXISTS	(
+        SELECT
+        'X'
+        FROM
+        rgdb."DbT5213GaikyoChosaTokkiMask" T5213b
+        WHERE
+        T5213."gaikyoChosaTextImageKubun" <![CDATA[ < ]]> T5213b."gaikyoChosaTextImageKubun"
+        AND T5213."ninteichosaRirekiNo" = T5213b."ninteichosaRirekiNo"
         AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo"

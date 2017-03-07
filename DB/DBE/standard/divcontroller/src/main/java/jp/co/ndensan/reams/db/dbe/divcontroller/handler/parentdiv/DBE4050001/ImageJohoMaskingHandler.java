@@ -7,13 +7,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4050001;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.imagejohomasking.ImageJohoMaskingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
+import jp.co.ndensan.reams.db.dbe.business.core.textmasking.TextMaskingModel;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.ImageJohoMaskingParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.imagejohomasking.TextMaskingParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.ImageJohoMaskingDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.dgImageMaskShoriTaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.dgImageMaskingTaisho_Row;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingGaikyoChosaTokkiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.imagejohomasking.MaskingKihonChosaTokkiEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.imagejohomasking.ImageJohoMaskingFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -82,6 +88,21 @@ public class ImageJohoMaskingHandler {
     private static final RString イメージファイル終端 = new RString(".png");
     private static final RString BAKファイル終端 = new RString("_BAK.png");
     private static final RString 編集後ファイル終端 = new RString("_NEW.png");
+    private static final RString テキスト = new RString("1");
+    private static final RString イメージ = new RString("2");
+    private static final RString FLAG_TRUE = new RString("1");
+    private static final RString FLAG_FALSE = new RString("0");
+    private static final Comparator<dgImageMaskingTaisho_Row> 表示順
+            = new Comparator<dgImageMaskingTaisho_Row>() {
+                @Override
+                public int compare(dgImageMaskingTaisho_Row o1, dgImageMaskingTaisho_Row o2) {
+                    int 比較用１ = Integer.parseInt(o1.getSortNo().toString());
+                    int 比較用２ = Integer.parseInt(o2.getSortNo().toString());
+                    int 特記連番１ = Integer.parseInt(o1.getTokkijikoRenban().toString());
+                    int 特記連番２ = Integer.parseInt(o2.getTokkijikoRenban().toString());
+                    return 比較用１ == 比較用２ ? 特記連番１ - 特記連番２ : 比較用１ - 比較用２;
+                }
+            };
 
     /**
      * コンストラクタです。
@@ -261,16 +282,20 @@ public class ImageJohoMaskingHandler {
         前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
 
         File file = new File(imagePath.toString());
+        List<dgImageMaskingTaisho_Row> rowList = new ArrayList<>();
         if (file.exists()) {
-            setMaskingTaisho(file);
+            setMaskingTaisho(file, rowList);
         }
+        setTxetMaskingTaisho(rowList);
+        setTextGaikyo(rowList);
+        Collections.sort(rowList, 表示順);
+        div.getDgImageMaskingTaisho().setDataSource(rowList);
     }
 
-    private void setMaskingTaisho(File file) {
-        List<dgImageMaskingTaisho_Row> rowList = new ArrayList<>();
+    private List<dgImageMaskingTaisho_Row> setMaskingTaisho(File file, List<dgImageMaskingTaisho_Row> rowList) {
         String[] files = file.list();
         if (files.length == 0) {
-            return;
+            return rowList;
         }
 
         RString imagePath = ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class);
@@ -278,6 +303,8 @@ public class ImageJohoMaskingHandler {
             dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
             row.setImageName(new RString(imageFile));
             row.setImagePath(Path.combinePath(imagePath, new RString(imageFile)));
+            row.setTextImageKubun(イメージ);
+            row.setGaikyoFlag(FLAG_FALSE);
             rowList.add(row);
         }
 
@@ -298,11 +325,13 @@ public class ImageJohoMaskingHandler {
         for (int i = 0; i < rowList.size(); i++) {
             dgImageMaskingTaisho_Row 検索対象 = rowList.get(i);
             if (!検索対象.getState().equals(状態_削除)) {
-                RString 日本語名称 = マスク有りイメージ一覧.getEnumToImageName(検索対象.getImageName()).getイメージ日本語名称();
-                if (日本語名称.isEmpty()) {
+                マスク有りイメージ一覧 イメージ情報 = マスク有りイメージ一覧.getEnumToImageName(検索対象.getImageName());
+                if (イメージ情報.getイメージ日本語名称().isEmpty()) {
                     検索対象.setState(状態_削除);
                 } else {
-                    検索対象.setImageName(日本語名称);
+                    検索対象.setImageName(イメージ情報.getイメージ日本語名称());
+                    検索対象.setTokkijikoRenban(get特記事項連番(イメージ情報, 検索対象));
+                    検索対象.setSortNo(new RString(イメージ情報.get番号()));
                 }
             }
         }
@@ -313,8 +342,85 @@ public class ImageJohoMaskingHandler {
                 rowList.remove(i);
             }
         }
+        return rowList;
+    }
 
-        div.getDgImageMaskingTaisho().setDataSource(rowList);
+    private RString get特記事項連番(マスク有りイメージ一覧 イメージ情報, dgImageMaskingTaisho_Row 検索対象) {
+        if (new RString("特記").equals(イメージ情報.getイメージ日本語名称().substring(0, 2))) {
+            int 連番;
+            if (検索対象.getMaskImagePath().isEmpty()) {
+                連番 = Integer.parseInt(検索対象.getImagePath().substring(
+                        検索対象.getImagePath().length() - 特記事項連番開始位置, 検索対象.getImagePath().length() - 特記事項連番終了位置).toString()) + 1;
+            } else {
+                連番 = Integer.parseInt(検索対象.getMaskImagePath().substring(
+                        検索対象.getMaskImagePath().length() - 特記事項連番開始位置, 検索対象.getMaskImagePath().length() - 特記事項連番終了位置).toString()) + 1;
+            }
+            return new RString(連番);
+        } else {
+            return new RString("0");
+        }
+    }
+
+    private List<dgImageMaskingTaisho_Row> setTxetMaskingTaisho(List<dgImageMaskingTaisho_Row> rowList) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class);
+        TextMaskingParameter param = TextMaskingParameter.createTextMaskingParameter(申請書管理番号, 認定調査依頼履歴番号);
+        List<MaskingKihonChosaTokkiEntity> tokkiList = ImageJohoMaskingFinder.createInstance().getNinteiChosaTokkijiko(param);
+
+        if (tokkiList.isEmpty()) {
+            return rowList;
+        }
+
+        for (MaskingKihonChosaTokkiEntity item : tokkiList) {
+            dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
+            マスク有りイメージ一覧 tokki = マスク有りイメージ一覧.getEnumToTokkiNo(item.get認定調査特記事項番号());
+            row.setTextImageKubun(テキスト);
+            row.setImageName(tokki.イメージ日本語名称);
+            row.setImagePath(item.get特記事項原本());
+            row.setGaikyoFlag(FLAG_FALSE);
+            row.setSortNo(new RString(tokki.get番号()));
+            row.setTokkijikoRenban(new RString(item.get認定調査特記事項連番()));
+            if (item.get特記事項マスク() != null && !item.get特記事項マスク().isEmpty()) {
+                row.setMaskImagePath(item.get特記事項マスク());
+                row.setHasMask(マスク有);
+            } else {
+                row.setMaskImagePath(RString.EMPTY);
+                row.setHasMask(RString.EMPTY);
+            }
+            rowList.add(row);
+        }
+        return rowList;
+    }
+
+    private List<dgImageMaskingTaisho_Row> setTextGaikyo(List<dgImageMaskingTaisho_Row> rowList) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 認定調査依頼履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class);
+        TextMaskingParameter param = TextMaskingParameter.createTextMaskingParameter(申請書管理番号, 認定調査依頼履歴番号);
+        List<MaskingGaikyoChosaTokkiEntity> gaikyoTokkiList = ImageJohoMaskingFinder.createInstance().getGaikyoChosaTokkijiko(param);
+
+        if (gaikyoTokkiList.isEmpty()) {
+            return rowList;
+        }
+
+        for (MaskingGaikyoChosaTokkiEntity gaikyoTokki : gaikyoTokkiList) {
+            dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
+            マスク有りイメージ一覧 tokki = マスク有りイメージ一覧.C0007;
+            row.setTextImageKubun(テキスト);
+            row.setImageName(tokki.イメージ日本語名称);
+            row.setImagePath(gaikyoTokki.get概況調査特記事項原本());
+            row.setGaikyoFlag(FLAG_TRUE);
+            row.setSortNo(new RString(tokki.get番号()));
+            row.setTokkijikoRenban(new RString("0"));
+            if (gaikyoTokki.get概況調査特記事項マスク() != null && !gaikyoTokki.get概況調査特記事項マスク().isEmpty()) {
+                row.setMaskImagePath(gaikyoTokki.get概況調査特記事項マスク());
+                row.setHasMask(マスク有);
+            } else {
+                row.setMaskImagePath(RString.EMPTY);
+                row.setHasMask(RString.EMPTY);
+            }
+            rowList.add(row);
+        }
+        return rowList;
     }
 
     /**
@@ -323,7 +429,9 @@ public class ImageJohoMaskingHandler {
     public void deleteEditedData() {
         dgImageMaskingTaisho_Row row = ViewStateHolder.get(ViewStateKeys.詳細データ, dgImageMaskingTaisho_Row.class);
         if (row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
-            new File(row.getEditImagePath().toString()).delete();
+            if (イメージ.equals(row.getTextImageKubun())) {
+                new File(row.getEditImagePath().toString()).delete();
+            }
             row.setEditImagePath(RString.EMPTY);
         }
         if (!row.getMaskImagePath().isEmpty()) {
@@ -371,9 +479,13 @@ public class ImageJohoMaskingHandler {
         gaikyoManager = GaikyoChosaTokkiManager.createInstance();
         for (dgImageMaskingTaisho_Row row : div.getDgImageMaskingTaisho().getDataSource()) {
             if (!RString.isNullOrEmpty(row.getState())) {
-                saveLocalFile(row);
-                saveGamenData(row);
-                saveSharedFile(row);
+                if (イメージ.equals(row.getTextImageKubun())) {
+                    saveLocalFile(row);
+                    saveGamenData(row);
+                    saveSharedFile(row);
+                } else {
+                    saveGamenDataText(row);
+                }
             }
         }
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
@@ -535,6 +647,93 @@ public class ImageJohoMaskingHandler {
         }
     }
 
+    private void saveGamenDataText(dgImageMaskingTaisho_Row row) {
+        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        int 認定調査依頼履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.認定調査依頼履歴番号, RString.class).toString());
+        if (row.getState().equals(状態_追加)) {
+            if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
+                GaikyoChosaTokki gaikyotokki = new GaikyoChosaTokki(申請書管理番号,
+                        認定調査依頼履歴番号,
+                        TokkijikoTextImageKubun.テキスト.getコード());
+
+                GaikyoChosaTokkiBuilder builder = gaikyotokki.createBuilderForEdit();
+
+                builder.set特記(row.getEditImagePath());
+
+                gaikyoManager.save概況調査特記(builder.build());
+            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
+                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+                NinteichosahyoTokkijiko tokkijiko = new NinteichosahyoTokkijiko(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        Integer.parseInt(row.getTokkijikoRenban().toString()),
+                        TokkijikoTextImageKubun.テキスト.getコード(),
+                        new Code(GenponMaskKubun.マスク.getコード()));
+
+                NinteichosahyoTokkijikoBuilder builder = tokkijiko.createBuilderForEdit();
+
+                builder.set特記事項(row.getEditImagePath());
+
+                tokkijikoManager.save認定調査票_特記情報(builder.build());
+            }
+        } else if (row.getState().equals(状態_削除)) {
+            if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
+                GaikyoChosaTokkiManager dbt5213Manager = InstanceProvider.create(GaikyoChosaTokkiManager.class);
+                GaikyoChosaTokki gaikyotokki = dbt5213Manager.get概況調査特記マスク(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        TokkijikoTextImageKubun.テキスト.getコード());
+                if (gaikyotokki != null) {
+                    gaikyotokki = gaikyotokki.deleted();
+                    gaikyoManager.save概況調査特記(gaikyotokki);
+                }
+            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
+                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+                NinteichosahyoTokkijikoManager dbt5205 = NinteichosahyoTokkijikoManager.createInstance();
+                NinteichosahyoTokkijiko tokkijiko = dbt5205.get認定調査票_特記情報(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        Integer.parseInt(row.getTokkijikoRenban().toString()),
+                        TokkijikoTextImageKubun.テキスト.getコード(),
+                        new Code(GenponMaskKubun.マスク.getコード()));
+                if (tokkijiko != null) {
+                    tokkijiko = tokkijiko.deleted();
+                    tokkijikoManager.save認定調査票_特記情報(tokkijiko);
+                }
+            }
+        } else if (row.getState().equals(状態_修正)) {
+            if (row.getImageName().equals(マスク有りイメージ一覧.C0007.getイメージ日本語名称())) {
+                GaikyoChosaTokkiManager dbt5213Manager = InstanceProvider.create(GaikyoChosaTokkiManager.class);
+                GaikyoChosaTokki gaikyotokki = dbt5213Manager.get概況調査特記マスク(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        TokkijikoTextImageKubun.テキスト.getコード());
+                if (gaikyotokki != null) {
+                    GaikyoChosaTokkiBuilder builder = gaikyotokki.createBuilderForEdit();
+                    builder.set特記(row.getEditImagePath());
+                    gaikyoManager.save概況調査特記(builder.build());
+                }
+            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
+                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+                NinteichosahyoTokkijikoManager dbt5205 = NinteichosahyoTokkijikoManager.createInstance();
+                NinteichosahyoTokkijiko tokkijiko = dbt5205.get認定調査票_特記情報(
+                        申請書管理番号,
+                        認定調査依頼履歴番号,
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        Integer.parseInt(row.getTokkijikoRenban().toString()),
+                        TokkijikoTextImageKubun.テキスト.getコード(),
+                        new Code(GenponMaskKubun.マスク.getコード()));
+                if (tokkijiko != null) {
+                    NinteichosahyoTokkijikoBuilder builder = tokkijiko.createBuilderForEdit();
+                    builder.set特記事項(row.getEditImagePath());
+                    tokkijikoManager.save認定調査票_特記情報(builder.build());
+                }
+            }
+        }
+    }
+
     /**
      * 一覧画面に戻るときは前排他を解除します
      */
@@ -548,15 +747,36 @@ public class ImageJohoMaskingHandler {
      */
     public void changeButtonState() {
         dgImageMaskingTaisho_Row row = ViewStateHolder.get(ViewStateKeys.詳細データ, dgImageMaskingTaisho_Row.class);
-        if (row.getHasMask().isEmpty() && !row.getState().equals(状態_追加) && !row.getState().equals(状態_修正)) {
-            div.getBtnMaskingGenpon().setDisabled(false);
+        if (イメージ.equals(row.getTextImageKubun())) {
+            div.getBtnMaskingGenpon().setDisplayNone(false);
+            div.getBtnMaskingMask().setDisplayNone(false);
+            div.getBtnMaskingGenponText().setDisplayNone(true);
+            div.getBtnMaskingMaskText().setDisplayNone(true);
+            if (row.getHasMask().isEmpty() && !row.getState().equals(状態_追加) && !row.getState().equals(状態_修正)) {
+                div.getBtnMaskingGenpon().setDisabled(false);
+            } else {
+                div.getBtnMaskingGenpon().setDisabled(true);
+            }
+            if (row.getHasMask().equals(マスク有) || row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
+                div.getBtnMaskingMask().setDisabled(false);
+            } else {
+                div.getBtnMaskingMask().setDisabled(true);
+            }
         } else {
-            div.getBtnMaskingGenpon().setDisabled(true);
-        }
-        if (row.getHasMask().equals(マスク有) || row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
-            div.getBtnMaskingMask().setDisabled(false);
-        } else {
-            div.getBtnMaskingMask().setDisabled(true);
+            div.getBtnMaskingGenpon().setDisplayNone(true);
+            div.getBtnMaskingMask().setDisplayNone(true);
+            div.getBtnMaskingGenponText().setDisplayNone(false);
+            div.getBtnMaskingMaskText().setDisplayNone(false);
+            if (row.getHasMask().isEmpty() && !row.getState().equals(状態_追加) && !row.getState().equals(状態_修正)) {
+                div.getBtnMaskingGenponText().setDisabled(false);
+            } else {
+                div.getBtnMaskingGenponText().setDisabled(true);
+            }
+            if (row.getHasMask().equals(マスク有) || row.getState().equals(状態_追加) || row.getState().equals(状態_修正)) {
+                div.getBtnMaskingMaskText().setDisabled(false);
+            } else {
+                div.getBtnMaskingMaskText().setDisabled(true);
+            }
         }
         if (row.getHasMask().equals(マスク有) && row.getState().isEmpty()) {
             div.getBtnSakujo().setDisabled(false);
@@ -568,6 +788,28 @@ public class ImageJohoMaskingHandler {
         } else {
             div.getBtnTorikeshi().setDisabled(true);
         }
+    }
+
+    public void setTextMaskingData(TextMaskingModel model, dgImageMaskingTaisho_Row row) {
+        model.set編集タイトル(row.getImageName());
+        model.set原本テキスト(row.getImagePath());
+        if (new RString("0").equals(row.getTokkijikoRenban())) {
+            model.set調査項目番号(RString.EMPTY);
+        } else {
+            model.set調査項目番号(マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号());
+        }
+        model.set特記連番(Integer.parseInt(row.getTokkijikoRenban().toString()));
+    }
+
+    public boolean hasChanged() {
+        boolean hasChanged = false;
+        for (dgImageMaskingTaisho_Row item : div.getDgImageMaskingTaisho().getDataSource()) {
+            if (!item.getState().isEmpty()) {
+                hasChanged = true;
+                break;
+            }
+        }
+        return hasChanged;
     }
 
     public void setDisabledStateToButton() {
@@ -591,99 +833,100 @@ public class ImageJohoMaskingHandler {
 
     private enum マスク有りイメージ一覧 {
 
-        C0007("C0007.png", "特記事項", ""),
-        C3001("C3001.png", "特記1-1", "101"),
-        C3006("C3006.png", "特記1-2", "102"),
-        C3010("C3010.png", "特記1-3", "103"),
-        C3011("C3011.png", "特記1-4", "104"),
-        C3012("C3012.png", "特記1-5", "105"),
-        C3013("C3013.png", "特記1-6", "106"),
-        C3014("C3014.png", "特記1-7", "107"),
-        C3015("C3015.png", "特記1-8", "108"),
-        C3016("C3016.png", "特記1-9", "109"),
-        C3017("C3017.png", "特記1-10", "110"),
-        C3018("C3018.png", "特記1-11", "111"),
-        C3019("C3019.png", "特記1-12", "112"),
-        C3020("C3020.png", "特記1-13", "113"),
-        C3021("C3021.png", "特記2-1", "201"),
-        C3022("C3022.png", "特記2-2", "202"),
-        C3023("C3023.png", "特記2-3", "203"),
-        C3024("C3024.png", "特記2-4", "204"),
-        C3025("C3025.png", "特記2-5", "205"),
-        C3026("C3026.png", "特記2-6", "206"),
-        C3027("C3027.png", "特記2-7", "207"),
-        C3028("C3028.png", "特記2-8", "208"),
-        C3029("C3029.png", "特記2-9", "209"),
-        C3030("C3030.png", "特記2-10", "210"),
-        C3031("C3031.png", "特記2-11", "211"),
-        C3032("C3032.png", "特記2-12", "212"),
-        C3033("C3033.png", "特記3-1", "301"),
-        C3034("C3034.png", "特記3-2", "302"),
-        C3035("C3035.png", "特記3-3", "303"),
-        C3036("C3036.png", "特記3-4", "304"),
-        C3037("C3037.png", "特記3-5", "305"),
-        C3038("C3038.png", "特記3-6", "306"),
-        C3039("C3039.png", "特記3-7", "307"),
-        C3040("C3040.png", "特記3-8", "308"),
-        C3041("C3041.png", "特記3-9", "309"),
-        C3042("C3042.png", "特記4-1", "401"),
-        C3043("C3043.png", "特記4-2", "402"),
-        C3044("C3044.png", "特記4-3", "403"),
-        C3045("C3045.png", "特記4-4", "404"),
-        C3046("C3046.png", "特記4-5", "405"),
-        C3047("C3047.png", "特記4-6", "406"),
-        C3048("C3048.png", "特記4-7", "407"),
-        C3049("C3049.png", "特記4-8", "408"),
-        C3050("C3050.png", "特記4-9", "409"),
-        C3051("C3051.png", "特記4-10", "410"),
-        C3052("C3052.png", "特記4-11", "411"),
-        C3053("C3053.png", "特記4-12", "412"),
-        C3054("C3054.png", "特記4-13", "413"),
-        C3055("C3055.png", "特記4-14", "414"),
-        C3056("C3056.png", "特記4-15", "415"),
-        C3057("C3057.png", "特記5-1", "501"),
-        C3058("C3058.png", "特記5-2", "502"),
-        C3059("C3059.png", "特記5-3", "503"),
-        C3060("C3060.png", "特記5-4", "504"),
-        C3061("C3061.png", "特記5-5", "505"),
-        C3062("C3062.png", "特記5-6", "506"),
-        C3063("C3063.png", "特記6-1", "601"),
-        C3064("C3064.png", "特記6-2", "602"),
-        C3065("C3065.png", "特記6-3", "603"),
-        C3066("C3066.png", "特記6-4", "604"),
-        C3067("C3067.png", "特記6-5", "605"),
-        C3068("C3068.png", "特記6-6", "606"),
-        C3069("C3069.png", "特記6-7", "607"),
-        C3070("C3070.png", "特記6-8", "608"),
-        C3071("C3071.png", "特記6-9", "609"),
-        C3072("C3072.png", "特記6-10", "610"),
-        C3073("C3073.png", "特記6-11", "611"),
-        C3074("C3074.png", "特記6-12", "612"),
-        C3075("C3075.png", "特記7-1", "701"),
-        C3076("C3076.png", "特記7-2", "702"),
-        C4101("C4101.png", "特記資料1", "T001"),
-        C4102("C4102.png", "特記資料2", "T002"),
-        C4103("C4103.png", "特記資料3", "T003"),
-        C4104("C4104.png", "特記資料4", "T004"),
-        C4105("C4105.png", "特記資料5", "T005"),
-        C4106("C4106.png", "特記資料6", "T006"),
-        E0001("E0001.png", "主治医意見書：表", ""),
-        E0002("E0002.png", "主治医意見書：裏", ""),
-        D1005("D1005.png", "傷病特別疾病の経過及び投薬内容を含む治療内容", ""),
-        D1008("D1008.png", "専門医受診の有無", ""),
-        D1026("D1026.png", "意見書特記", ""),
-        D1027("D1027.png", "症状としての安定性_不安定", ""),
-        F1401A("F1401A.png", "その他資料1", ""),
-        F1401B("F1401B.png", "その他資料2", ""),
-        F1401C("F1401C.png", "その他資料3", ""),
-        F1401D("F1401D.png", "その他資料4", ""),
-        F1401E("F1401E.png", "その他資料5", ""),
-        F1401F("F1401F.png", "その他資料6", ""),
-        対象なし("", "", "");
+        C0007("C0007.png", "概況調査・特記事項", "", 3),
+        C3001("C3001.png", "特記1-1", "101", 4),
+        C3006("C3006.png", "特記1-2", "102", 5),
+        C3010("C3010.png", "特記1-3", "103", 6),
+        C3011("C3011.png", "特記1-4", "104", 7),
+        C3012("C3012.png", "特記1-5", "105", 8),
+        C3013("C3013.png", "特記1-6", "106", 9),
+        C3014("C3014.png", "特記1-7", "107", 10),
+        C3015("C3015.png", "特記1-8", "108", 11),
+        C3016("C3016.png", "特記1-9", "109", 12),
+        C3017("C3017.png", "特記1-10", "110", 13),
+        C3018("C3018.png", "特記1-11", "111", 14),
+        C3019("C3019.png", "特記1-12", "112", 15),
+        C3020("C3020.png", "特記1-13", "113", 16),
+        C3021("C3021.png", "特記2-1", "201", 17),
+        C3022("C3022.png", "特記2-2", "202", 18),
+        C3023("C3023.png", "特記2-3", "203", 19),
+        C3024("C3024.png", "特記2-4", "204", 20),
+        C3025("C3025.png", "特記2-5", "205", 21),
+        C3026("C3026.png", "特記2-6", "206", 22),
+        C3027("C3027.png", "特記2-7", "207", 23),
+        C3028("C3028.png", "特記2-8", "208", 24),
+        C3029("C3029.png", "特記2-9", "209", 25),
+        C3030("C3030.png", "特記2-10", "210", 26),
+        C3031("C3031.png", "特記2-11", "211", 27),
+        C3032("C3032.png", "特記2-12", "212", 28),
+        C3033("C3033.png", "特記3-1", "301", 29),
+        C3034("C3034.png", "特記3-2", "302", 30),
+        C3035("C3035.png", "特記3-3", "303", 31),
+        C3036("C3036.png", "特記3-4", "304", 32),
+        C3037("C3037.png", "特記3-5", "305", 33),
+        C3038("C3038.png", "特記3-6", "306", 34),
+        C3039("C3039.png", "特記3-7", "307", 35),
+        C3040("C3040.png", "特記3-8", "308", 36),
+        C3041("C3041.png", "特記3-9", "309", 37),
+        C3042("C3042.png", "特記4-1", "401", 38),
+        C3043("C3043.png", "特記4-2", "402", 39),
+        C3044("C3044.png", "特記4-3", "403", 40),
+        C3045("C3045.png", "特記4-4", "404", 41),
+        C3046("C3046.png", "特記4-5", "405", 42),
+        C3047("C3047.png", "特記4-6", "406", 43),
+        C3048("C3048.png", "特記4-7", "407", 44),
+        C3049("C3049.png", "特記4-8", "408", 45),
+        C3050("C3050.png", "特記4-9", "409", 46),
+        C3051("C3051.png", "特記4-10", "410", 47),
+        C3052("C3052.png", "特記4-11", "411", 48),
+        C3053("C3053.png", "特記4-12", "412", 49),
+        C3054("C3054.png", "特記4-13", "413", 50),
+        C3055("C3055.png", "特記4-14", "414", 51),
+        C3056("C3056.png", "特記4-15", "415", 52),
+        C3057("C3057.png", "特記5-1", "501", 53),
+        C3058("C3058.png", "特記5-2", "502", 54),
+        C3059("C3059.png", "特記5-3", "503", 55),
+        C3060("C3060.png", "特記5-4", "504", 56),
+        C3061("C3061.png", "特記5-5", "505", 57),
+        C3062("C3062.png", "特記5-6", "506", 58),
+        C3063("C3063.png", "特記6-1", "601", 59),
+        C3064("C3064.png", "特記6-2", "602", 60),
+        C3065("C3065.png", "特記6-3", "603", 61),
+        C3066("C3066.png", "特記6-4", "604", 62),
+        C3067("C3067.png", "特記6-5", "605", 63),
+        C3068("C3068.png", "特記6-6", "606", 64),
+        C3069("C3069.png", "特記6-7", "607", 65),
+        C3070("C3070.png", "特記6-8", "608", 66),
+        C3071("C3071.png", "特記6-9", "609", 67),
+        C3072("C3072.png", "特記6-10", "610", 68),
+        C3073("C3073.png", "特記6-11", "611", 69),
+        C3074("C3074.png", "特記6-12", "612", 70),
+        C3075("C3075.png", "特記7-1", "701", 71),
+        C3076("C3076.png", "特記7-2", "702", 72),
+        C4101("C4101.png", "特記資料1", "T001", 73),
+        C4102("C4102.png", "特記資料2", "T002", 74),
+        C4103("C4103.png", "特記資料3", "T003", 75),
+        C4104("C4104.png", "特記資料4", "T004", 76),
+        C4105("C4105.png", "特記資料5", "T005", 77),
+        C4106("C4106.png", "特記資料6", "T006", 78),
+        E0001("E0001.png", "主治医意見書：表", "", 1),
+        E0002("E0002.png", "主治医意見書：裏", "", 2),
+        D1005("D1005.png", "傷病特別疾病の経過及び投薬内容を含む治療内容", "", 79),
+        D1008("D1008.png", "専門医受診の有無", "", 80),
+        D1026("D1026.png", "意見書特記", "", 81),
+        D1027("D1027.png", "症状としての安定性_不安定", "", 82),
+        F1401A("F1401A.png", "その他資料1", "", 83),
+        F1401B("F1401B.png", "その他資料2", "", 84),
+        F1401C("F1401C.png", "その他資料3", "", 85),
+        F1401D("F1401D.png", "その他資料4", "", 86),
+        F1401E("F1401E.png", "その他資料5", "", 87),
+        F1401F("F1401F.png", "その他資料6", "", 88),
+        対象なし("", "", "", 0);
 
         private final RString イメージ名;
         private final RString イメージ日本語名称;
         private final RString 特記事項番号;
+        private final int ソート用番号;
         private static final RString 特記事項イメージ名称頭文字 = new RString("C30");
         private static final RString その他資料イメージ名称頭文字 = new RString("F1401");
         private static final int ファイル名開始位置 = 0;
@@ -694,10 +937,11 @@ public class ImageJohoMaskingHandler {
         private static final int その他資料帳票名文字数 = 6;
         private static final int 拡張子開始位置 = 8;
 
-        private マスク有りイメージ一覧(String imageName, String 日本語名称, String 特記事項番号) {
+        private マスク有りイメージ一覧(String imageName, String 日本語名称, String 特記事項番号, int ソート用番号) {
             this.イメージ名 = new RString(imageName);
             this.イメージ日本語名称 = new RString(日本語名称);
             this.特記事項番号 = new RString(特記事項番号);
+            this.ソート用番号 = ソート用番号;
         }
 
         public RString getイメージ名() {
@@ -712,6 +956,10 @@ public class ImageJohoMaskingHandler {
             return 特記事項番号;
         }
 
+        public int get番号() {
+            return ソート用番号;
+        }
+
         public static マスク有りイメージ一覧 getEnumToImageName(RString imageName) {
             if (imageName.length() == 連番有ファイル名文字数) {
                 if (特記事項イメージ名称頭文字.equals(imageName.substring(ファイル名開始位置, 特記事項頭文字数))) {
@@ -722,6 +970,15 @@ public class ImageJohoMaskingHandler {
             }
             for (マスク有りイメージ一覧 image : マスク有りイメージ一覧.values()) {
                 if (image.イメージ名.equals(imageName)) {
+                    return image;
+                }
+            }
+            return 対象なし;
+        }
+
+        public static マスク有りイメージ一覧 getEnumToTokkiNo(RString tokkiNo) {
+            for (マスク有りイメージ一覧 image : マスク有りイメージ一覧.values()) {
+                if (image.特記事項番号.equals(tokkiNo)) {
                     return image;
                 }
             }

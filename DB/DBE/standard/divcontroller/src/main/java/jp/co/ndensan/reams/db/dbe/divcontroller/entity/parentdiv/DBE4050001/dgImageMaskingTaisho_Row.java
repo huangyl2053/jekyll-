@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 28 10:50:26 JST 2017 
+ * Mon Mar 06 18:59:54 JST 2017 
  */
 
 
@@ -27,6 +27,10 @@ public class dgImageMaskingTaisho_Row extends DataRow {
     private RString imagePath;
     private RString maskImagePath;
     private RString editImagePath;
+    private RString sortNo;
+    private RString textImageKubun;
+    private RString gaikyoFlag;
+    private RString tokkijikoRenban;
 
     public dgImageMaskingTaisho_Row() {
         super();
@@ -36,15 +40,23 @@ public class dgImageMaskingTaisho_Row extends DataRow {
         this.imagePath = RString.EMPTY;
         this.maskImagePath = RString.EMPTY;
         this.editImagePath = RString.EMPTY;
+        this.sortNo = RString.EMPTY;
+        this.textImageKubun = RString.EMPTY;
+        this.gaikyoFlag = RString.EMPTY;
+        this.tokkijikoRenban = RString.EMPTY;
         this.setOriginalData("imageName", imageName);
         this.setOriginalData("hasMask", hasMask);
         this.setOriginalData("state", state);
         this.setOriginalData("imagePath", imagePath);
         this.setOriginalData("maskImagePath", maskImagePath);
         this.setOriginalData("editImagePath", editImagePath);
+        this.setOriginalData("sortNo", sortNo);
+        this.setOriginalData("textImageKubun", textImageKubun);
+        this.setOriginalData("gaikyoFlag", gaikyoFlag);
+        this.setOriginalData("tokkijikoRenban", tokkijikoRenban);
     }
 
-    public dgImageMaskingTaisho_Row(RString imageName, RString hasMask, RString state, RString imagePath, RString maskImagePath, RString editImagePath) {
+    public dgImageMaskingTaisho_Row(RString imageName, RString hasMask, RString state, RString imagePath, RString maskImagePath, RString editImagePath, RString sortNo, RString textImageKubun, RString gaikyoFlag, RString tokkijikoRenban) {
         super();
         this.setOriginalData("imageName", imageName);
         this.setOriginalData("hasMask", hasMask);
@@ -52,12 +64,20 @@ public class dgImageMaskingTaisho_Row extends DataRow {
         this.setOriginalData("imagePath", imagePath);
         this.setOriginalData("maskImagePath", maskImagePath);
         this.setOriginalData("editImagePath", editImagePath);
+        this.setOriginalData("sortNo", sortNo);
+        this.setOriginalData("textImageKubun", textImageKubun);
+        this.setOriginalData("gaikyoFlag", gaikyoFlag);
+        this.setOriginalData("tokkijikoRenban", tokkijikoRenban);
         this.imageName = imageName;
         this.hasMask = hasMask;
         this.state = state;
         this.imagePath = imagePath;
         this.maskImagePath = maskImagePath;
         this.editImagePath = editImagePath;
+        this.sortNo = sortNo;
+        this.textImageKubun = textImageKubun;
+        this.gaikyoFlag = gaikyoFlag;
+        this.tokkijikoRenban = tokkijikoRenban;
     }
 
     public RString getImageName() {
@@ -82,6 +102,22 @@ public class dgImageMaskingTaisho_Row extends DataRow {
 
     public RString getEditImagePath() {
         return editImagePath;
+    }
+
+    public RString getSortNo() {
+        return sortNo;
+    }
+
+    public RString getTextImageKubun() {
+        return textImageKubun;
+    }
+
+    public RString getGaikyoFlag() {
+        return gaikyoFlag;
+    }
+
+    public RString getTokkijikoRenban() {
+        return tokkijikoRenban;
     }
 
     public void setImageName(RString imageName) {
@@ -112,6 +148,26 @@ public class dgImageMaskingTaisho_Row extends DataRow {
     public void setEditImagePath(RString editImagePath) {
         this.setOriginalData("editImagePath", editImagePath);
         this.editImagePath = editImagePath;
+    }
+
+    public void setSortNo(RString sortNo) {
+        this.setOriginalData("sortNo", sortNo);
+        this.sortNo = sortNo;
+    }
+
+    public void setTextImageKubun(RString textImageKubun) {
+        this.setOriginalData("textImageKubun", textImageKubun);
+        this.textImageKubun = textImageKubun;
+    }
+
+    public void setGaikyoFlag(RString gaikyoFlag) {
+        this.setOriginalData("gaikyoFlag", gaikyoFlag);
+        this.gaikyoFlag = gaikyoFlag;
+    }
+
+    public void setTokkijikoRenban(RString tokkijikoRenban) {
+        this.setOriginalData("tokkijikoRenban", tokkijikoRenban);
+        this.tokkijikoRenban = tokkijikoRenban;
     }
 
     // </editor-fold>
