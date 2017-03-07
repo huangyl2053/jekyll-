@@ -12,17 +12,13 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE518002.DBE518002_Nintei
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiValidationHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBE5220001_介護認定審査会審査結果データ取込み（モバイル）画面クラスです
@@ -31,11 +27,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class NinteiShinsakaiKekkaDataTorikomi {
 
+    private enum ViewStateKeys {
+
+        TorikomiFileDirectoryPath;
+    }
+
     /**
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
+     * @return ResponseData
      */
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onLoad(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         getHandler(div).setOnLoad();
@@ -46,10 +47,13 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      * 実行ボタン処理です。
      *
      * @param div 画面情報
-     * @return NinteiShinsakaiKekkaDataTorikomiDiv
+     * @return DBE518002_NinteiShinsaIraiIfTorikomiParameter
      */
     public ResponseData<DBE518002_NinteiShinsaIraiIfTorikomiParameter> onClick_Jikkou(NinteiShinsakaiKekkaDataTorikomiDiv div) {
-        return ResponseData.of(getHandler(div).setBatchParameter()).respond();
+        return ResponseData.of(getHandler(div)
+                .setBatchParameter(ViewStateHolder.get(ViewStateKeys.TorikomiFileDirectoryPath, RString.class)))
+                .respond();
+
     }
 
     /**
@@ -57,7 +61,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      *
      * @param div 画面情報
      * @param files ファイル
-     * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
+     * @return ResponseData
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onclick_BtnUpload(NinteiShinsakaiKekkaDataTorikomiDiv div, FileData[] files) {
@@ -66,13 +70,15 @@ public class NinteiShinsakaiKekkaDataTorikomi {
         if (fileNumCheck.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(fileNumCheck).respond();
         }
+        RString tempDirectory = Directory.createTmpDirectory();
         for (File file : unzipped(files[0].getFilePath())) {
             ValidationMessageControlPairs validPairs = getValidationHandler(div).一致性チェック(validationMessages, file);
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-            savaCsvファイル(file, div);
+            savaCsvファイル(tempDirectory, file, div);
         }
+        ViewStateHolder.put(ViewStateKeys.TorikomiFileDirectoryPath, tempDirectory);
         return ResponseData.of(div).respond();
     }
 
@@ -86,7 +92,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      * 入力チェックです。
      *
      * @param div 画面情報
-     * @return ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv>
+     * @return ResponseData
      */
     public ResponseData<NinteiShinsakaiKekkaDataTorikomiDiv> onClick_Check(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -98,28 +104,14 @@ public class NinteiShinsakaiKekkaDataTorikomi {
         return ResponseData.of(div).respond();
     }
 
-    private boolean savaCsvファイル(File local, NinteiShinsakaiKekkaDataTorikomiDiv div) {
-        RString path = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        File サーバ = new File(path.toString());
-        boolean mkdirsFlag = false;
-        boolean delFileFlag = false;
-        File tmpfile;
-        if (!サーバ.exists()) {
-            mkdirsFlag = サーバ.mkdirs();
-        } else {
-            mkdirsFlag = true;
+    private boolean savaCsvファイル(RString tempDirectory, File local, NinteiShinsakaiKekkaDataTorikomiDiv div) {
+        File tmpfile = new File(tempDirectory.toString(), getHandler(div).getFileName(local).toString());
+        boolean delFileFlag = true;
+        if (tmpfile.exists()) {
+            delFileFlag = tmpfile.delete();
         }
-        if (mkdirsFlag) {
-            tmpfile = new File(サーバ, getHandler(div).getFileName(local).toString());
-            if (tmpfile.exists()) {
-                delFileFlag = tmpfile.delete();
-            } else {
-                delFileFlag = true;
-            }
-            if (delFileFlag) {
-                return local.renameTo(tmpfile);
-            }
+        if (delFileFlag) {
+            return local.renameTo(tmpfile);
         }
         return true;
     }

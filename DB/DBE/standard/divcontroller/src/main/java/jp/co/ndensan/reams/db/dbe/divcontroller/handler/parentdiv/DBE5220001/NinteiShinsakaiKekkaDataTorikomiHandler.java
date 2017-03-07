@@ -76,9 +76,10 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
     /**
      * バッチ用パラメータクラスを作成します。
      *
+     * @param torikomiFileDirectoryPath 取込対象ファイルの存在するディレクトリパス
      * @return DBE518002_NinteiShinsaIraiIfTorikomiParameter
      */
-    public DBE518002_NinteiShinsaIraiIfTorikomiParameter setBatchParameter() {
+    public DBE518002_NinteiShinsaIraiIfTorikomiParameter setBatchParameter(RString torikomiFileDirectoryPath) {
         DBE518002_NinteiShinsaIraiIfTorikomiParameter batchParameter = new DBE518002_NinteiShinsaIraiIfTorikomiParameter();
         List<RString> fileList = new ArrayList<>();
         for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getDataSource()) {
@@ -89,8 +90,7 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
         batchParameter.setTorikomidatakubun(c.get取込対象データ().code());
         batchParameter.setTorikominaiyoukubun(c.get取込内容().code());
         batchParameter.setShinsakaiiintorikomikubun(c.get審査員出欠取込区分());
-        batchParameter.setMediapath(DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        batchParameter.setMediapath(torikomiFileDirectoryPath);
         return batchParameter;
     }
 
