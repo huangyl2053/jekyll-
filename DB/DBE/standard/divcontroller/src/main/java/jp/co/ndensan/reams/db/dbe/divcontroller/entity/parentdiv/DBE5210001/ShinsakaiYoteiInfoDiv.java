@@ -14,17 +14,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiYoteiInfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShinsakaiMeisho")
-    private TextBox txtShinsakaiMeisho;
     @JsonProperty("txtGogitai")
     private TextBox txtGogitai;
+    @JsonProperty("txtShinsakaiMeisho")
+    private TextBox txtShinsakaiMeisho;
+    @JsonProperty("chkMogi")
+    private CheckBoxList chkMogi;
     @JsonProperty("txtKaisaiYoteibi")
     private TextBoxFlexibleDate txtKaisaiYoteibi;
     @JsonProperty("txtYoteiStartTime")
@@ -42,6 +44,24 @@ public class ShinsakaiYoteiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtGogitai
+     * @return txtGogitai
+     */
+    @JsonProperty("txtGogitai")
+    public TextBox getTxtGogitai() {
+        return txtGogitai;
+    }
+
+    /*
+     * settxtGogitai
+     * @param txtGogitai txtGogitai
+     */
+    @JsonProperty("txtGogitai")
+    public void setTxtGogitai(TextBox txtGogitai) {
+        this.txtGogitai = txtGogitai;
+    }
+
     /*
      * gettxtShinsakaiMeisho
      * @return txtShinsakaiMeisho
@@ -61,21 +81,21 @@ public class ShinsakaiYoteiInfoDiv extends Panel {
     }
 
     /*
-     * gettxtGogitai
-     * @return txtGogitai
+     * getchkMogi
+     * @return chkMogi
      */
-    @JsonProperty("txtGogitai")
-    public TextBox getTxtGogitai() {
-        return txtGogitai;
+    @JsonProperty("chkMogi")
+    public CheckBoxList getChkMogi() {
+        return chkMogi;
     }
 
     /*
-     * settxtGogitai
-     * @param txtGogitai txtGogitai
+     * setchkMogi
+     * @param chkMogi chkMogi
      */
-    @JsonProperty("txtGogitai")
-    public void setTxtGogitai(TextBox txtGogitai) {
-        this.txtGogitai = txtGogitai;
+    @JsonProperty("chkMogi")
+    public void setChkMogi(CheckBoxList chkMogi) {
+        this.chkMogi = chkMogi;
     }
 
     /*

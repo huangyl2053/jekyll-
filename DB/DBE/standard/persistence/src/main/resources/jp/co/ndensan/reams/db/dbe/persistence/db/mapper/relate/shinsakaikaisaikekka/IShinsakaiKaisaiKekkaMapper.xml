@@ -23,6 +23,7 @@
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shoyoJikanGokei" AS "shoyoJikanGokei"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBasho"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" AS "kekkaShinsakaiKaisaiNo"
+        ,DbT5591GogitaiJoho."gogitaiDummyFlag"
         FROM
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
         LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
@@ -53,6 +54,7 @@
         <result property="所要時間" column="shoyoJikanGokei"/>
         <result property="開催会場" column="shinsakaiKaisaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催番号" column="kekkaShinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合議体ダミーフラグ" column="gogitaiDummyFlag"/>
     </resultMap>
 
     <select resultOrdered="true" id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"

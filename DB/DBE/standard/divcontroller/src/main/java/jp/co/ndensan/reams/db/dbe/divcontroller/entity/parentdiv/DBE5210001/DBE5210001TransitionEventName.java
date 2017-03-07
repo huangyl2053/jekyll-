@@ -16,7 +16,8 @@ public enum DBE5210001TransitionEventName implements IContainerEvents {
 
     審査会一覧に戻る("審査会一覧に戻る"),
     処理完了("処理完了"),
-    審査会結果登録へ("審査会結果登録へ");
+    審査会結果登録へ("審査会結果登録へ"),
+    処理完了_模擬("処理完了_模擬");
 
     private final RString name;
 

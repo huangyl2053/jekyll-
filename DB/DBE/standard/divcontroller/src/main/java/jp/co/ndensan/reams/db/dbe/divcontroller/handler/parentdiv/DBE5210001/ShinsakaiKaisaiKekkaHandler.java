@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.IOnseiFileOperatorDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 介護認定審査会開催結果登録するクラスです。
@@ -38,6 +40,9 @@ public class ShinsakaiKaisaiKekkaHandler {
     private final ShinsakaiKaisaiKekkaDiv div;
     private static final RString BUTTON_UPDATE = new RString("btnUpdate");
     private static final RString 完了メッセージ文言 = new RString("審査会名称：");
+    private static final RString 模擬 = new RString("key0");
+    private static final RString 審査結果 = new RString("審査結果");
+    private static final RString 審査結果_模擬 = new RString("模擬");
 
     /**
      * コンストラクタです。
@@ -55,6 +60,8 @@ public class ShinsakaiKaisaiKekkaHandler {
      * @param saiYoteiJoho ヘッドエリア内容
      */
     public void onLoad(List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho, List<ShinsakaiOnseiJoho2> 音声情報リスト) {
+        List<RString> chkMogiKey = new ArrayList();
+        chkMogiKey.add(模擬);
         boolean is新規 = false;
         for (int i = 0; i < saiYoteiJoho.size(); i++) {
             ShinsakaiKaisaiYoteiJohoBusiness business = saiYoteiJoho.get(i);
@@ -67,7 +74,12 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.getTxtYoteiStartTime().setValue(strToTime(business.get予定開始時間()));
             div.getTxtYoteiEndTime().setValue(strToTime(business.get予定終了時間()));
             div.getShinsakaiKaisaiInfo().getTxtShoyoTime().setValue(new Decimal(business.get所要時間()));
-
+            if (business.is合議体ダミーフラグ()) {
+                div.getChkMogi().setSelectedItemsByKey(chkMogiKey);
+                ViewStateHolder.put(ViewStateKeys.利用モード, 審査結果_模擬);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.利用モード, 審査結果);
+            }
             if (business.get介護認定審査会開催番号() != null && !business.get介護認定審査会開催番号().isEmpty()) {
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiBi().setValue(business.get開催日());
                 div.getShinsakaiKaisaiInfo().getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));

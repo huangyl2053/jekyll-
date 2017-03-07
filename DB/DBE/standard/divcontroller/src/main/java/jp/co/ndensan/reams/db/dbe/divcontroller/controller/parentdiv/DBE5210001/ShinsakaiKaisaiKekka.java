@@ -67,6 +67,7 @@ public class ShinsakaiKaisaiKekka {
     private static final RString 新規モード文言 = new RString("新規モード");
     private static final RString 更新モード文言 = new RString("更新モード");
     private static final RString 更新BTN = new RString("btnUpdate");
+    private static final RString 審査結果 = new RString("審査結果");
 
     /**
      * コンストラクタです。
@@ -247,7 +248,12 @@ public class ShinsakaiKaisaiKekka {
             setYotei(div);
             releaseRealInitialLock(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
             getHandler(div).set完了メッセージ(getHandler(div).get審査会名称());
-            return ResponseData.of(div).setState(DBE5210001StateName.完了);
+            RString 利用モード = ViewStateHolder.get(ViewStateKeys.利用モード, RString.class);
+            if (利用モード.equals(審査結果)) {
+                return ResponseData.of(div).setState(DBE5210001StateName.完了);
+            } else {
+                return ResponseData.of(div).setState(DBE5210001StateName.完了_模擬);
+            }
         }
         return ResponseData.of(div).respond();
     }
