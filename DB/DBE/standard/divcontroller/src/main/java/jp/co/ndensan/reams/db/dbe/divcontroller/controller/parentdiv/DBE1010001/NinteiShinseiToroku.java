@@ -129,6 +129,7 @@ public class NinteiShinseiToroku {
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
     private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
+    private static final RString UICONTAINERID_DBEUC11001 = new RString("DBEUC11001");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
     private static final RString BTNRESEARCH_FILENAME = new RString("btnReSearch");
     private static final RString BTNBACK_FILENAME = new RString("btnBackToIchiran");
@@ -204,7 +205,7 @@ public class NinteiShinseiToroku {
         div.getDdlShinsakaiYusenKubun().setSelectedKey(ShinsakaiYusenWaritsukeKubunCode.通常.getコード());
         div.getDdlWariateKubun().setSelectedKey(JidoWariateJyogaishaKubun.除外.getコード());
 
-        if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID)) {
+        if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             try {
                 RStringBuilder 前排他制御 = new RStringBuilder();
@@ -280,7 +281,7 @@ public class NinteiShinseiToroku {
             div.getRadMode().setDisplayNone(false);
             setShinseiJiyu(result, div);
             getHandler(div).loadPnlSinseishaJoho(result.get市町村コード(), false);
-            if (MENUID_DBEMN21003.equals(menuID)) {
+            if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)) {
                 div.setReadOnly(true);
                 return ResponseData.of(div).rootMenuTitle(new RString("審査受付照会")).respond();
             }
