@@ -39,6 +39,8 @@ public class PublicationTargetShinsakaiDiv extends Panel {
     private TextBoxNum txtYoteiTeiin;
     @JsonProperty("txtWariateNinzu")
     private TextBoxNum txtWariateNinzu;
+    @JsonProperty("chkGogitaiDummyFlag")
+    private CheckBoxList chkGogitaiDummyFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -206,6 +208,24 @@ public class PublicationTargetShinsakaiDiv extends Panel {
     @JsonProperty("txtWariateNinzu")
     public void setTxtWariateNinzu(TextBoxNum txtWariateNinzu) {
         this.txtWariateNinzu = txtWariateNinzu;
+    }
+
+    /*
+     * getchkGogitaiDummyFlag
+     * @return chkGogitaiDummyFlag
+     */
+    @JsonProperty("chkGogitaiDummyFlag")
+    public CheckBoxList getChkGogitaiDummyFlag() {
+        return chkGogitaiDummyFlag;
+    }
+
+    /*
+     * setchkGogitaiDummyFlag
+     * @param chkGogitaiDummyFlag chkGogitaiDummyFlag
+     */
+    @JsonProperty("chkGogitaiDummyFlag")
+    public void setChkGogitaiDummyFlag(CheckBoxList chkGogitaiDummyFlag) {
+        this.chkGogitaiDummyFlag = chkGogitaiDummyFlag;
     }
 
     // </editor-fold>

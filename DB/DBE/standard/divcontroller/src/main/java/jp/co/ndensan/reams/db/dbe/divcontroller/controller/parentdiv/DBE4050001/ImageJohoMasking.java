@@ -37,6 +37,7 @@ public class ImageJohoMasking {
 
     private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
     private static final RString 保存ボタン = new RString("btnUpdate");
+    private static final RString 保存ボタン完了処理 = new RString("btnSavefromKanryo");
 
     /**
      * コンストラクタです。
@@ -100,7 +101,11 @@ public class ImageJohoMasking {
     public ResponseData<ImageJohoMaskingDiv> onSelectBySelectButton_dgImageMaskShoriTaishosha(ImageJohoMaskingDiv div) {
         getHandler(div).setMeisai();
         getHandler(div).setDisabledStateToButton();
-        return ResponseData.of(div).setState(DBE4050001StateName.イメージ情報表示);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            return ResponseData.of(div).setState(DBE4050001StateName.イメージ表示完了処理);
+        } else {
+            return ResponseData.of(div).setState(DBE4050001StateName.イメージ情報表示);
+        }
     }
 
     /**
@@ -112,7 +117,11 @@ public class ImageJohoMasking {
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTorikeshi(ImageJohoMaskingDiv div) {
         getHandler(div).deleteEditedData();
         getHandler(div).changeButtonState();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, !getHandler(div).hasChanged());
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, !getHandler(div).hasChanged());
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, !getHandler(div).hasChanged());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -125,7 +134,11 @@ public class ImageJohoMasking {
     public ResponseData<ImageJohoMaskingDiv> onClick_btnSakujo(ImageJohoMaskingDiv div) {
         getHandler(div).deleteMaskingData();
         getHandler(div).changeButtonState();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, false);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -136,11 +149,12 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnBackIchiran(ImageJohoMaskingDiv div) {
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
-        getHandler(div).backIchiran();
+        getHandler(div).releaseLock();
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, true);
             return ResponseData.of(div).setState(DBE4050001StateName.完了処理遷移表示);
         } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
             return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
         }
     }
@@ -162,7 +176,11 @@ public class ImageJohoMasking {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).update();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, true);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
+            }
             boolean マスキング完了済 = ViewStateHolder.get(ViewStateKeys.保存フラグ, boolean.class);
             if (マスキング完了済) {
                 div.getCcdKanryoMessage().setMessage(new RString("マスキングの保存処理が完了しました。"),
@@ -250,7 +268,11 @@ public class ImageJohoMasking {
         RString newImagePath = div.getHiddenImagePath();
         getHandler(div).updateRow(newImagePath);
         getHandler(div).changeButtonState();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, false);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -264,7 +286,11 @@ public class ImageJohoMasking {
         TextMaskingModel model = DataPassingConverter.deserialize(div.getHdnTextMasking(), TextMaskingModel.class);
         getHandler(div).updateRow(model.getマスキング対象テキスト());
         getHandler(div).changeButtonState();
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, false);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -328,6 +354,33 @@ public class ImageJohoMasking {
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnKihonUnyou(ImageJohoMaskingDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.基本運用へ遷移).respond();
+    }
+
+    /**
+     * 対象者一覧画面「再検索」ボタン押下時のイベントです
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnSaiKensaku(ImageJohoMaskingDiv div) {
+        return ResponseData.of(div).setState(DBE4050001StateName.初期表示);
+    }
+
+    /**
+     * マスキング選択画面「再検索」ボタン押下時のイベントです
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnReSearch(ImageJohoMaskingDiv div) {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン完了処理, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, true);
+        }
+        getHandler(div).releaseLock();
+        getHandler(div).clear();
+        return ResponseData.of(div).setState(DBE4050001StateName.初期表示);
     }
 
     private ImageJohoMaskingHandler getHandler(ImageJohoMaskingDiv div) {

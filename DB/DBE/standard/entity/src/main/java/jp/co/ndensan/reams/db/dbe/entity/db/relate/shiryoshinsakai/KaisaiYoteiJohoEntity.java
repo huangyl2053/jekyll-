@@ -29,4 +29,5 @@ public class KaisaiYoteiJohoEntity {
     private int 割当済み人数;
     private RString 合議体名称;
     private FlexibleDate 資料作成年月日;
+    private boolean 合議体ダミーフラグ;
 }

@@ -329,8 +329,13 @@ public class ImageJohoMaskingHandler {
                 if (イメージ情報.getイメージ日本語名称().isEmpty()) {
                     検索対象.setState(状態_削除);
                 } else {
-                    検索対象.setImageName(イメージ情報.getイメージ日本語名称());
-                    検索対象.setTokkijikoRenban(get特記事項連番(イメージ情報, 検索対象));
+                    RString 特記事項連番 = get特記事項連番(イメージ情報, 検索対象);
+                    if (new RString("0").equals(特記事項連番)) {
+                        検索対象.setImageName(イメージ情報.getイメージ日本語名称());
+                    } else {
+                        検索対象.setImageName(イメージ情報.getイメージ日本語名称().concat(new RString("_")).concat(特記事項連番));
+                    }
+                    検索対象.setTokkijikoRenban(特記事項連番);
                     検索対象.setSortNo(new RString(イメージ情報.get番号()));
                 }
             }
@@ -375,7 +380,7 @@ public class ImageJohoMaskingHandler {
             dgImageMaskingTaisho_Row row = new dgImageMaskingTaisho_Row();
             マスク有りイメージ一覧 tokki = マスク有りイメージ一覧.getEnumToTokkiNo(item.get認定調査特記事項番号());
             row.setTextImageKubun(テキスト);
-            row.setImageName(tokki.イメージ日本語名称);
+            row.setImageName(tokki.getイメージ日本語名称().concat(new RString("_")).concat(new RString(item.get認定調査特記事項連番())));
             row.setImagePath(item.get特記事項原本());
             row.setGaikyoFlag(FLAG_FALSE);
             row.setSortNo(new RString(tokki.get番号()));
@@ -573,13 +578,12 @@ public class ImageJohoMaskingHandler {
 
                 imageJohoManager.save要介護認定意見書イメージ情報(builder.build());
 
-            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
-                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+            } else if (new RString("特記").equals(row.getImageName().substring(0, 2))) {
                 int 連番 = Integer.parseInt(row.getEditImagePath().substring(row.getEditImagePath().length() - 特記事項連番開始位置, row.getEditImagePath().length() - 特記事項連番終了位置).toString()) + 1;
                 NinteichosahyoTokkijiko tokkijiko = new NinteichosahyoTokkijiko(
                         申請書管理番号,
                         認定調査依頼履歴番号,
-                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName().substring(0, 6)).get特記事項番号(),
                         連番,
                         TokkijikoTextImageKubun.イメージ.getコード(),
                         new Code(GenponMaskKubun.マスク.getコード()));
@@ -628,14 +632,13 @@ public class ImageJohoMaskingHandler {
                     imageJoho = imageJoho.deleted();
                     imageJohoManager.save要介護認定意見書イメージ情報(imageJoho);
                 }
-            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
-                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+            } else if (new RString("特記").equals(row.getImageName().substring(0, 2))) {
                 int 連番 = Integer.parseInt(row.getImagePath().substring(row.getImagePath().length() - 特記事項連番開始位置, row.getImagePath().length() - 特記事項連番終了位置).toString()) + 1;
                 NinteichosahyoTokkijikoManager dbt5205 = NinteichosahyoTokkijikoManager.createInstance();
                 NinteichosahyoTokkijiko tokkijiko = dbt5205.get認定調査票_特記情報(
                         申請書管理番号,
                         認定調査依頼履歴番号,
-                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName().substring(0, 6)).get特記事項番号(),
                         連番,
                         TokkijikoTextImageKubun.イメージ.getコード(),
                         new Code(GenponMaskKubun.マスク.getコード()));
@@ -661,12 +664,11 @@ public class ImageJohoMaskingHandler {
                 builder.set特記(row.getEditImagePath());
 
                 gaikyoManager.save概況調査特記(builder.build());
-            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
-                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+            } else if (new RString("特記").equals(row.getImageName().substring(0, 2))) {
                 NinteichosahyoTokkijiko tokkijiko = new NinteichosahyoTokkijiko(
                         申請書管理番号,
                         認定調査依頼履歴番号,
-                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName().substring(0, 6)).get特記事項番号(),
                         Integer.parseInt(row.getTokkijikoRenban().toString()),
                         TokkijikoTextImageKubun.テキスト.getコード(),
                         new Code(GenponMaskKubun.マスク.getコード()));
@@ -688,13 +690,12 @@ public class ImageJohoMaskingHandler {
                     gaikyotokki = gaikyotokki.deleted();
                     gaikyoManager.save概況調査特記(gaikyotokki);
                 }
-            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
-                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+            } else if (new RString("特記").equals(row.getImageName().substring(0, 2))) {
                 NinteichosahyoTokkijikoManager dbt5205 = NinteichosahyoTokkijikoManager.createInstance();
                 NinteichosahyoTokkijiko tokkijiko = dbt5205.get認定調査票_特記情報(
                         申請書管理番号,
                         認定調査依頼履歴番号,
-                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName().substring(0, 6)).get特記事項番号(),
                         Integer.parseInt(row.getTokkijikoRenban().toString()),
                         TokkijikoTextImageKubun.テキスト.getコード(),
                         new Code(GenponMaskKubun.マスク.getコード()));
@@ -715,13 +716,12 @@ public class ImageJohoMaskingHandler {
                     builder.set特記(row.getEditImagePath());
                     gaikyoManager.save概況調査特記(builder.build());
                 }
-            } else if (マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号() != null
-                    && !マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号().isEmpty()) {
+            } else if (new RString("特記").equals(row.getImageName().substring(0, 2))) {
                 NinteichosahyoTokkijikoManager dbt5205 = NinteichosahyoTokkijikoManager.createInstance();
                 NinteichosahyoTokkijiko tokkijiko = dbt5205.get認定調査票_特記情報(
                         申請書管理番号,
                         認定調査依頼履歴番号,
-                        マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号(),
+                        マスク有りイメージ一覧.getEnumToName(row.getImageName().substring(0, 6)).get特記事項番号(),
                         Integer.parseInt(row.getTokkijikoRenban().toString()),
                         TokkijikoTextImageKubun.テキスト.getコード(),
                         new Code(GenponMaskKubun.マスク.getコード()));
@@ -737,7 +737,7 @@ public class ImageJohoMaskingHandler {
     /**
      * 一覧画面に戻るときは前排他を解除します
      */
-    public void backIchiran() {
+    public void releaseLock() {
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         前排他キーの解除(前排他用文字列.concat(申請書管理番号));
     }
@@ -796,7 +796,7 @@ public class ImageJohoMaskingHandler {
         if (new RString("0").equals(row.getTokkijikoRenban())) {
             model.set調査項目番号(RString.EMPTY);
         } else {
-            model.set調査項目番号(マスク有りイメージ一覧.getEnumToName(row.getImageName()).get特記事項番号());
+            model.set調査項目番号(マスク有りイメージ一覧.getEnumToName(row.getImageName().substring(0, 6)).get特記事項番号());
         }
         model.set特記連番(Integer.parseInt(row.getTokkijikoRenban().toString()));
     }
@@ -834,75 +834,75 @@ public class ImageJohoMaskingHandler {
     private enum マスク有りイメージ一覧 {
 
         C0007("C0007.png", "概況調査・特記事項", "", 3),
-        C3001("C3001.png", "特記1-1", "101", 4),
-        C3006("C3006.png", "特記1-2", "102", 5),
-        C3010("C3010.png", "特記1-3", "103", 6),
-        C3011("C3011.png", "特記1-4", "104", 7),
-        C3012("C3012.png", "特記1-5", "105", 8),
-        C3013("C3013.png", "特記1-6", "106", 9),
-        C3014("C3014.png", "特記1-7", "107", 10),
-        C3015("C3015.png", "特記1-8", "108", 11),
-        C3016("C3016.png", "特記1-9", "109", 12),
+        C3001("C3001.png", "特記1-01", "101", 4),
+        C3006("C3006.png", "特記1-02", "102", 5),
+        C3010("C3010.png", "特記1-03", "103", 6),
+        C3011("C3011.png", "特記1-04", "104", 7),
+        C3012("C3012.png", "特記1-05", "105", 8),
+        C3013("C3013.png", "特記1-06", "106", 9),
+        C3014("C3014.png", "特記1-07", "107", 10),
+        C3015("C3015.png", "特記1-08", "108", 11),
+        C3016("C3016.png", "特記1-09", "109", 12),
         C3017("C3017.png", "特記1-10", "110", 13),
         C3018("C3018.png", "特記1-11", "111", 14),
         C3019("C3019.png", "特記1-12", "112", 15),
         C3020("C3020.png", "特記1-13", "113", 16),
-        C3021("C3021.png", "特記2-1", "201", 17),
-        C3022("C3022.png", "特記2-2", "202", 18),
-        C3023("C3023.png", "特記2-3", "203", 19),
-        C3024("C3024.png", "特記2-4", "204", 20),
-        C3025("C3025.png", "特記2-5", "205", 21),
-        C3026("C3026.png", "特記2-6", "206", 22),
-        C3027("C3027.png", "特記2-7", "207", 23),
-        C3028("C3028.png", "特記2-8", "208", 24),
-        C3029("C3029.png", "特記2-9", "209", 25),
+        C3021("C3021.png", "特記2-01", "201", 17),
+        C3022("C3022.png", "特記2-02", "202", 18),
+        C3023("C3023.png", "特記2-03", "203", 19),
+        C3024("C3024.png", "特記2-04", "204", 20),
+        C3025("C3025.png", "特記2-05", "205", 21),
+        C3026("C3026.png", "特記2-06", "206", 22),
+        C3027("C3027.png", "特記2-07", "207", 23),
+        C3028("C3028.png", "特記2-08", "208", 24),
+        C3029("C3029.png", "特記2-09", "209", 25),
         C3030("C3030.png", "特記2-10", "210", 26),
         C3031("C3031.png", "特記2-11", "211", 27),
         C3032("C3032.png", "特記2-12", "212", 28),
-        C3033("C3033.png", "特記3-1", "301", 29),
-        C3034("C3034.png", "特記3-2", "302", 30),
-        C3035("C3035.png", "特記3-3", "303", 31),
-        C3036("C3036.png", "特記3-4", "304", 32),
-        C3037("C3037.png", "特記3-5", "305", 33),
-        C3038("C3038.png", "特記3-6", "306", 34),
-        C3039("C3039.png", "特記3-7", "307", 35),
-        C3040("C3040.png", "特記3-8", "308", 36),
-        C3041("C3041.png", "特記3-9", "309", 37),
-        C3042("C3042.png", "特記4-1", "401", 38),
-        C3043("C3043.png", "特記4-2", "402", 39),
-        C3044("C3044.png", "特記4-3", "403", 40),
-        C3045("C3045.png", "特記4-4", "404", 41),
-        C3046("C3046.png", "特記4-5", "405", 42),
-        C3047("C3047.png", "特記4-6", "406", 43),
-        C3048("C3048.png", "特記4-7", "407", 44),
-        C3049("C3049.png", "特記4-8", "408", 45),
-        C3050("C3050.png", "特記4-9", "409", 46),
+        C3033("C3033.png", "特記3-01", "301", 29),
+        C3034("C3034.png", "特記3-02", "302", 30),
+        C3035("C3035.png", "特記3-03", "303", 31),
+        C3036("C3036.png", "特記3-04", "304", 32),
+        C3037("C3037.png", "特記3-05", "305", 33),
+        C3038("C3038.png", "特記3-06", "306", 34),
+        C3039("C3039.png", "特記3-07", "307", 35),
+        C3040("C3040.png", "特記3-08", "308", 36),
+        C3041("C3041.png", "特記3-09", "309", 37),
+        C3042("C3042.png", "特記4-01", "401", 38),
+        C3043("C3043.png", "特記4-02", "402", 39),
+        C3044("C3044.png", "特記4-03", "403", 40),
+        C3045("C3045.png", "特記4-04", "404", 41),
+        C3046("C3046.png", "特記4-05", "405", 42),
+        C3047("C3047.png", "特記4-06", "406", 43),
+        C3048("C3048.png", "特記4-07", "407", 44),
+        C3049("C3049.png", "特記4-08", "408", 45),
+        C3050("C3050.png", "特記4-09", "409", 46),
         C3051("C3051.png", "特記4-10", "410", 47),
         C3052("C3052.png", "特記4-11", "411", 48),
         C3053("C3053.png", "特記4-12", "412", 49),
         C3054("C3054.png", "特記4-13", "413", 50),
         C3055("C3055.png", "特記4-14", "414", 51),
         C3056("C3056.png", "特記4-15", "415", 52),
-        C3057("C3057.png", "特記5-1", "501", 53),
-        C3058("C3058.png", "特記5-2", "502", 54),
-        C3059("C3059.png", "特記5-3", "503", 55),
-        C3060("C3060.png", "特記5-4", "504", 56),
-        C3061("C3061.png", "特記5-5", "505", 57),
-        C3062("C3062.png", "特記5-6", "506", 58),
-        C3063("C3063.png", "特記6-1", "601", 59),
-        C3064("C3064.png", "特記6-2", "602", 60),
-        C3065("C3065.png", "特記6-3", "603", 61),
-        C3066("C3066.png", "特記6-4", "604", 62),
-        C3067("C3067.png", "特記6-5", "605", 63),
-        C3068("C3068.png", "特記6-6", "606", 64),
-        C3069("C3069.png", "特記6-7", "607", 65),
-        C3070("C3070.png", "特記6-8", "608", 66),
-        C3071("C3071.png", "特記6-9", "609", 67),
+        C3057("C3057.png", "特記5-01", "501", 53),
+        C3058("C3058.png", "特記5-02", "502", 54),
+        C3059("C3059.png", "特記5-03", "503", 55),
+        C3060("C3060.png", "特記5-04", "504", 56),
+        C3061("C3061.png", "特記5-05", "505", 57),
+        C3062("C3062.png", "特記5-06", "506", 58),
+        C3063("C3063.png", "特記6-01", "601", 59),
+        C3064("C3064.png", "特記6-02", "602", 60),
+        C3065("C3065.png", "特記6-03", "603", 61),
+        C3066("C3066.png", "特記6-04", "604", 62),
+        C3067("C3067.png", "特記6-05", "605", 63),
+        C3068("C3068.png", "特記6-06", "606", 64),
+        C3069("C3069.png", "特記6-07", "607", 65),
+        C3070("C3070.png", "特記6-08", "608", 66),
+        C3071("C3071.png", "特記6-09", "609", 67),
         C3072("C3072.png", "特記6-10", "610", 68),
         C3073("C3073.png", "特記6-11", "611", 69),
         C3074("C3074.png", "特記6-12", "612", 70),
-        C3075("C3075.png", "特記7-1", "701", 71),
-        C3076("C3076.png", "特記7-2", "702", 72),
+        C3075("C3075.png", "特記7-01", "701", 71),
+        C3076("C3076.png", "特記7-02", "702", 72),
         C4101("C4101.png", "特記資料1", "T001", 73),
         C4102("C4102.png", "特記資料2", "T002", 74),
         C4103("C4103.png", "特記資料3", "T003", 75),

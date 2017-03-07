@@ -71,10 +71,6 @@ var DBE;
                 return new UZA.TextBox(this.convFiledName("txtChosaKomokuMeisho"));
             };
 
-            Controls.prototype.spcTokkiMask = function () {
-                return new UZA.Space(this.convFiledName("spcTokkiMask"));
-            };
-
             Controls.prototype.celTableCell4 = function () {
                 return new UZA.TableCell(this.convFiledName("celTableCell4"));
             };

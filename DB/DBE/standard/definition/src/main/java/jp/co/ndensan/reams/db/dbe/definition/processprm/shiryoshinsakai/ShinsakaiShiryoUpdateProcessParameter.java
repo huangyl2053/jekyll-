@@ -25,6 +25,8 @@ public class ShinsakaiShiryoUpdateProcessParameter implements IBatchProcessParam
     private RString sakuseiJoken;
     private int bangoStart;
     private int bangoEnd;
+    private RString gogitaiDummyFlag;
+    private final RString ダミー = new RString("1");
 
     /**
      * コンストラクタです。
@@ -33,12 +35,14 @@ public class ShinsakaiShiryoUpdateProcessParameter implements IBatchProcessParam
      * @param sakuseiJoken 作成条件（すべて・範囲・追加）
      * @param bangoStart int
      * @param bangoEnd int
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      */
-    public ShinsakaiShiryoUpdateProcessParameter(RString shinsakaiKaisaiNo, RString sakuseiJoken, int bangoStart, int bangoEnd) {
+    public ShinsakaiShiryoUpdateProcessParameter(RString shinsakaiKaisaiNo, RString sakuseiJoken, int bangoStart, int bangoEnd, RString gogitaiDummyFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.sakuseiJoken = sakuseiJoken;
         this.bangoStart = bangoStart;
         this.bangoEnd = bangoEnd;
+        this.gogitaiDummyFlag = gogitaiDummyFlag;
     }
 
     /**
@@ -49,12 +53,16 @@ public class ShinsakaiShiryoUpdateProcessParameter implements IBatchProcessParam
     public ShinsakaiShiryoUpdateMyBatisParameter toShinsakaiShiryoUpdateMyBatisParameter() {
         boolean isSakuseiJokenHani = false;
         boolean isSakuseiJokenTsuika = false;
+        boolean isGogitaiDummyFlag = false;
         if (作成条件_範囲指定.equals(sakuseiJoken)) {
             isSakuseiJokenHani = true;
         }
         if (作成条件_追加分.equals(sakuseiJoken)) {
             isSakuseiJokenTsuika = true;
         }
-        return new ShinsakaiShiryoUpdateMyBatisParameter(shinsakaiKaisaiNo, bangoStart, bangoEnd, isSakuseiJokenHani, isSakuseiJokenTsuika);
+        if (ダミー.equals(gogitaiDummyFlag)) {
+            isGogitaiDummyFlag = true;
+        }
+        return new ShinsakaiShiryoUpdateMyBatisParameter(shinsakaiKaisaiNo, bangoStart, bangoEnd, isSakuseiJokenHani, isSakuseiJokenTsuika, isGogitaiDummyFlag);
     }
 }

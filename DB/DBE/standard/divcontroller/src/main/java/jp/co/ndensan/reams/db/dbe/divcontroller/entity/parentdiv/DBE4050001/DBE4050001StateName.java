@@ -21,7 +21,8 @@ public enum DBE4050001StateName implements IStateEnumerations {
     Default("default"),
     完了表示基本運用遷移無("完了表示基本運用遷移無"),
     完了処理遷移表示("完了処理遷移表示"),
-    完了表示基本運用遷移有("完了表示基本運用遷移有");
+    完了表示基本運用遷移有("完了表示基本運用遷移有"),
+    イメージ表示完了処理("イメージ表示完了処理");
 
     private final RString name;
 

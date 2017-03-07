@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5504ShinsakaiWariateJohoKenshuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,14 +45,16 @@ public class ShinsakaiKekkaTorokuService {
 
     private static final RString REPLACEDMESSAGE = new RString("開催番号");
     private final MapperProvider mapperProvider;
-    private final DbT5504ShinsakaiWariateJohoKenshuDac 介護認定審査会割当情報Dac;
+    private final DbT5504ShinsakaiWariateJohoKenshuDac 介護認定審査会割当研修情報Dac;
+    private final DbT5502ShinsakaiWariateJohoDac 介護認定審査会割当情報Dac;
 
     /**
      * コンストラクタです。
      */
     ShinsakaiKekkaTorokuService() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.介護認定審査会割当情報Dac = InstanceProvider.create(DbT5504ShinsakaiWariateJohoKenshuDac.class);
+        this.介護認定審査会割当研修情報Dac = InstanceProvider.create(DbT5504ShinsakaiWariateJohoKenshuDac.class);
+        this.介護認定審査会割当情報Dac = InstanceProvider.create(DbT5502ShinsakaiWariateJohoDac.class);
     }
 
     /**
@@ -235,38 +238,54 @@ public class ShinsakaiKekkaTorokuService {
     }
 
     /**
-     * 開催番号に合致する介護認定審査会割当情報の判定結果コードを更新します。
+     * 開催番号に合致する介護認定審査会割当研修情報の判定結果コードを更新します。
      *
      * @param 開催番号 RString
      * @return 更新あり:true、更新なし:false <br>
      * いずれかのテーブルに更新があればtrueを返す、いずれのテーブルもunchangedで更新無しの場合falseを返す
      */
     @Transaction
-    public boolean update介護認定審査会割当情報(RString 開催番号) {
+    public boolean update介護認定審査会割当研修情報(RString 開催番号) {
         boolean 更新 = false;
         requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        List<DbT5504ShinsakaiWariateJohoKenshuEntity> relateEntity = 介護認定審査会割当情報Dac.selectByShinsakaiKaisaiNo(開催番号);
+        List<DbT5504ShinsakaiWariateJohoKenshuEntity> relateEntity = 介護認定審査会割当研修情報Dac.selectByShinsakaiKaisaiNo(開催番号);
         if (relateEntity == null) {
             return 更新;
         }
         for (DbT5504ShinsakaiWariateJohoKenshuEntity item : relateEntity) {
             item.setHanteiKekkaCode(new Code(HanteiKekkaCode.認定.getコード()));
-            介護認定審査会割当情報Dac.save(item);
+            介護認定審査会割当研修情報Dac.save(item);
             更新 = true;
         }
         return 更新;
     }
 
     /**
+     * 開催番号に合致する介護認定審査会割当研修情報を返します。
+     *
+     * @param 開催番号 RString
+     * @return 介護認定審査会割当研修情報 List<DbT5504ShinsakaiWariateJohoKenshuEntity>
+     */
+    @Transaction
+    public List<DbT5504ShinsakaiWariateJohoKenshuEntity> select介護認定審査会割当研修情報(RString 開催番号) {
+        requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
+        List<DbT5504ShinsakaiWariateJohoKenshuEntity> relateEntity = 介護認定審査会割当研修情報Dac.selectByShinsakaiKaisaiNo(開催番号);
+        if (relateEntity == null) {
+            return null;
+        }
+        return relateEntity;
+    }
+
+    /**
      * 開催番号に合致する介護認定審査会割当情報を返します。
      *
      * @param 開催番号 RString
-     * @return 介護認定審査会割当情報 List<DbT5504ShinsakaiWariateJohoKenshuEntity>
+     * @return 介護認定審査会割当情報 List<DbT5502ShinsakaiWariateJohoEntity>
      */
     @Transaction
-    public List<DbT5504ShinsakaiWariateJohoKenshuEntity> select介護認定審査会割当情報(RString 開催番号) {
+    public List<DbT5502ShinsakaiWariateJohoEntity> select介護認定審査会割当情報(RString 開催番号) {
         requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        List<DbT5504ShinsakaiWariateJohoKenshuEntity> relateEntity = 介護認定審査会割当情報Dac.selectByShinsakaiKaisaiNo(開催番号);
+        List<DbT5502ShinsakaiWariateJohoEntity> relateEntity = 介護認定審査会割当情報Dac.selectByShinsakaiKaisaiNo(開催番号);
         if (relateEntity == null) {
             return null;
         }

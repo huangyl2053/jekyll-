@@ -103,7 +103,7 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
      */
     @Step(審査会情報更新)
     protected IBatchFlowCommand createKosinData() {
-        return loopBatch(ShinsakaiJohoUpdateProcess.class)
+        return simpleBatch(ShinsakaiJohoUpdateProcess.class)
                 .arguments(getParameter().toShinsakaiShiryoUpdateProcessParameter()).define();
     }
 

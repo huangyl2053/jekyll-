@@ -28,12 +28,14 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
     private int bangoEnd;
     private final RString 作成条件_範囲指定 = new RString("範囲指定");
     private final RString 作成条件_追加分 = new RString("追加分");
+    private final RString ダミー = new RString("1");
     private RString shuturyokuSutairu;
     private RString printHou;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private RString gogitaiName;
     private int gogitaiNo;
+    private RString gogitaiDummyFlag;
 
     /**
      * コンストラクタです。
@@ -49,6 +51,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
      * @param shinsakaiKaishiYoteiTime 介護認定審査会開始予定時刻
      * @param gogitaiName 合議体名称
      * @param gogitaiNo 合議体番号
+     * @param gogitaiDummyFlag 合議体ダミーフラグ
      */
     public IinTokkiJikouItiziHanteiProcessParameter(
             RString shinsakaiKaisaiNo,
@@ -61,7 +64,8 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
             RString gogitaiName,
-            int gogitaiNo) {
+            int gogitaiNo,
+            RString gogitaiDummyFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.sakuseiJoken = sakuseiJoken;
@@ -73,6 +77,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.gogitaiName = gogitaiName;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiDummyFlag = gogitaiDummyFlag;
     }
 
     /**
@@ -84,6 +89,7 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
         boolean isShuturyokuJun = false;
         boolean isSakuseiJokenHani = false;
         boolean isSakuseiJokenTuika = false;
+        boolean isGogitaiDummyFlag = false;
         if (作成条件_範囲指定.equals(sakuseiJoken)) {
             isSakuseiJokenHani = true;
         }
@@ -93,8 +99,17 @@ public class IinTokkiJikouItiziHanteiProcessParameter implements IBatchProcessPa
         if (RString.isNullOrEmpty(shuturyokuJun)) {
             isShuturyokuJun = true;
         }
-        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo, shuturyokuJun, bangoStart, bangoEnd,
-                isSakuseiJokenHani, isSakuseiJokenTuika, isShuturyokuJun);
+        if (ダミー.equals(gogitaiDummyFlag)) {
+            isGogitaiDummyFlag = true;
+        }
+        return new IinTokkiJikouItiziHanteiMyBatisParameter(shinsakaiKaisaiNo,
+                shuturyokuJun,
+                bangoStart,
+                bangoEnd,
+                isSakuseiJokenHani,
+                isSakuseiJokenTuika,
+                isShuturyokuJun,
+                isGogitaiDummyFlag);
     }
 
     /**

@@ -33,6 +33,7 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
     private boolean isSakuseiJokenHani;
     private boolean isSakuseiJokenTuika;
     private boolean isOrderKakuteiFlg;
+    private boolean isGogitaiDummyFlag;
     private List<RString> shoriJotaiKubunList;
     private List<ShinseishoKanriNo> shinseishoKanriNoList;
     private List<Integer> ninteichosaRirekiNoList;
@@ -47,6 +48,7 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
      * @param isSakuseiJokenHani 作成条件_範囲指定ファグ
      * @param isSakuseiJokenTuika 作成条件_追加分ファグ
      * @param isShuturyokuJunEmpty 出力順ファグ
+     * @param isGogitaiDummyFlag 合議体ダミーフラグ
      */
     public IinTokkiJikouItiziHanteiMyBatisParameter(
             RString shinsakaiKaisaiNo,
@@ -55,7 +57,8 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
             int bangoEnd,
             boolean isSakuseiJokenHani,
             boolean isSakuseiJokenTuika,
-            boolean isShuturyokuJunEmpty) {
+            boolean isShuturyokuJunEmpty,
+            boolean isGogitaiDummyFlag) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shuturyokuJun = shuturyokuJun;
         this.bangoStart = bangoStart;
@@ -63,5 +66,6 @@ public class IinTokkiJikouItiziHanteiMyBatisParameter implements IMyBatisParamet
         this.isSakuseiJokenHani = isSakuseiJokenHani;
         this.isSakuseiJokenTuika = isSakuseiJokenTuika;
         this.isShuturyokuJunEmpty = isShuturyokuJunEmpty;
+        this.isGogitaiDummyFlag = isGogitaiDummyFlag;
     }
 }

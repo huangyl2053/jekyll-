@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -71,18 +72,35 @@ public class ShinsakaiKaisaiValidationHandler {
     /**
      * 審査会資料未作成データ有無についてチェックします。
      *
-     * @param 結果情報 結果情報
+     * @param kenshuEntity List<DbT5504ShinsakaiWariateJohoKenshuEntity>
      * @return true:あり/falseなし
      */
-    public boolean is未作成データあり(List<DbT5504ShinsakaiWariateJohoKenshuEntity> 結果情報) {
+    public boolean is未作成データあり_研修(List<DbT5504ShinsakaiWariateJohoKenshuEntity> kenshuEntity) {
         boolean is資料作成年月日無 = false;
-        for (DbT5504ShinsakaiWariateJohoKenshuEntity joho : 結果情報) {
+        for (DbT5504ShinsakaiWariateJohoKenshuEntity joho : kenshuEntity) {
             if (joho.getShinsakaiShiryoSakuseiYMD() == null || joho.getShinsakaiShiryoSakuseiYMD().isEmpty()) {
                 is資料作成年月日無 = true;
                 break;
             }
         }
-        return 結果情報 == null || 結果情報.isEmpty() || is資料作成年月日無;
+        return kenshuEntity == null || kenshuEntity.isEmpty() || is資料作成年月日無;
+    }
+
+    /**
+     * 審査会資料未作成データ有無についてチェックします。
+     *
+     * @param kenshuEntity List<DbT5502ShinsakaiWariateJohoEntity>
+     * @return true:あり/falseなし
+     */
+    public boolean is未作成データあり(List<DbT5502ShinsakaiWariateJohoEntity> kenshuEntity) {
+        boolean is資料作成年月日無 = false;
+        for (DbT5502ShinsakaiWariateJohoEntity joho : kenshuEntity) {
+            if (joho.getShinsakaiShiryoSakuseiYMD() == null || joho.getShinsakaiShiryoSakuseiYMD().isEmpty()) {
+                is資料作成年月日無 = true;
+                break;
+            }
+        }
+        return kenshuEntity == null || kenshuEntity.isEmpty() || is資料作成年月日無;
     }
 
     /**

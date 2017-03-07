@@ -229,6 +229,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
                 RString.EMPTY,
                 tuutiFlag,
                 yobiHenteiFlag,
+                RString.EMPTY,
                 bunshoKanriNo,
                 帳票一覧Map
         );

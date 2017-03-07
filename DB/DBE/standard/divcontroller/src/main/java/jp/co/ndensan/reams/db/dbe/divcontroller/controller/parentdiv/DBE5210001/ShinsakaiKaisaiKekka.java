@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaikekka.ShinsakaiKai
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -118,9 +119,17 @@ public class ShinsakaiKaisaiKekka {
         Models<ShinsakaiKaisaiYoteiJoho2Identifier, ShinsakaiKaisaiYoteiJoho2> shinsakaiKaisaiYoteiJoho = Models.create(yoteiJohoList);
         ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, shinsakaiKaisaiYoteiJoho);
 
-        List<DbT5504ShinsakaiWariateJohoKenshuEntity> kenshuList = kekkaTorokuservice.select介護認定審査会割当情報(開催番号);
         ShinsakaiKaisaiValidationHandler validationHandler = getValidationHandler(div);
-        if (validationHandler.is未作成データあり(kenshuList)) {
+        boolean is資料未作成 = false;
+        RString 利用モード = ViewStateHolder.get(ViewStateKeys.利用モード, RString.class);
+        if (利用モード.equals(審査結果)) {
+            List<DbT5502ShinsakaiWariateJohoEntity> entity = kekkaTorokuservice.select介護認定審査会割当情報(開催番号);
+            is資料未作成 = validationHandler.is未作成データあり(entity);
+        } else {
+            List<DbT5504ShinsakaiWariateJohoKenshuEntity> kenshuEntity = kekkaTorokuservice.select介護認定審査会割当研修情報(開催番号);
+            is資料未作成 = validationHandler.is未作成データあり_研修(kenshuEntity);
+        }
+        if (is資料未作成) {
             div.setReadOnly(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(更新BTN, true);
             return ResponseData.of(div).addMessage(DbeErrorMessages.審査会資料未作成あり.getMessage()).respond();
@@ -278,7 +287,7 @@ public class ShinsakaiKaisaiKekka {
             manager.updateBy開催(getKekkaJoho(div, 開催番号));
         }
         if (利用モード.equals(審査結果_模擬)) {
-            kekkaTorokuservice.update介護認定審査会割当情報(開催番号);
+            kekkaTorokuservice.update介護認定審査会割当研修情報(開催番号);
         }
     }
 

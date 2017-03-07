@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuR
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity;
 
 /**
@@ -236,6 +237,14 @@ public interface IShiryoShinsakaiIinMapper {
      * @return DbT5502ShinsakaiWariateJohoEntity
      */
     List<DbT5502ShinsakaiWariateJohoEntity> getSelectByKey_DbT5502ShinsakaiWariateJoho(ShinsakaiShiryoUpdateMyBatisParameter parameter);
+
+    /**
+     * 介護認定審査会割当情報のSelectBy審査会開催番号処理です。
+     *
+     * @param parameter IinShinsakaiIinJohoMyBatisParameter
+     * @return DbT5504ShinsakaiWariateJohoKenshuEntity
+     */
+    List<DbT5504ShinsakaiWariateJohoKenshuEntity> getSelectByKey_DbT5504ShinsakaiWariateJohoKenshu(ShinsakaiShiryoUpdateMyBatisParameter parameter);
 
     /**
      * 委員用一次判定結果と特記事項情報を取得します。

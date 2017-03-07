@@ -227,6 +227,16 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkGogitaiDummyFlag() {
+        return this.getPublicationTargetShinsakai().getChkGogitaiDummyFlag();
+    }
+
+    @JsonIgnore
+    public void  setChkGogitaiDummyFlag(CheckBoxList chkGogitaiDummyFlag) {
+        this.getPublicationTargetShinsakai().setChkGogitaiDummyFlag(chkGogitaiDummyFlag);
+    }
+
+    @JsonIgnore
     public TextBoxFlexibleDate getTxtOperationDate() {
         return this.getLatestPublication().getTxtOperationDate();
     }
