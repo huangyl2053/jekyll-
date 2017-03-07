@@ -723,7 +723,7 @@ public class RenkeiDataTorikomiBusiness {
         }
         int 前回認定有効期間 = 0;
         if (!前回認定有効開始期間.isEmpty() && !前回認定有効終了期間.isEmpty()) {
-            前回認定有効期間 = 前回認定有効終了期間.getBetweenMonths(前回認定有効開始期間);
+            前回認定有効期間 = getNinteiYukoKikan(前回認定有効開始期間, 前回認定有効終了期間);
         }
         dbt5129Entity.setNijiHanteiNinteiYukoKikan(前回認定有効期間);
         dbt5129Entity.setNijiHanteiNinteiYukoKaishiYMD(前回認定有効開始期間);
@@ -808,7 +808,7 @@ public class RenkeiDataTorikomiBusiness {
         }
         int 前回認定有効期間 = 0;
         if (!前回認定有効開始期間.isEmpty() && !前回認定有効終了期間.isEmpty()) {
-            前回認定有効期間 = 前回認定有効終了期間.getBetweenMonths(前回認定有効開始期間);
+            前回認定有効期間 = getNinteiYukoKikan(前回認定有効開始期間, 前回認定有効終了期間);
         }
         dbt5102Entity.setNijiHanteiNinteiYukoKikan(前回認定有効期間);
         dbt5102Entity.setNijiHanteiNinteiYukoKaishiYMD(前回認定有効開始期間);
@@ -816,6 +816,18 @@ public class RenkeiDataTorikomiBusiness {
         dbt5102Entity.setShinsakaiKaisaiNo(new RString("0"));
         dbt5102Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
         return dbt5102Entity;
+    }
+    
+    private int getNinteiYukoKikan(FlexibleDate fromDate, FlexibleDate toDate) {
+        int month = 0;
+        int fromDay = fromDate.getDayValue();
+        int fromMonth = fromDate.getMonthValue();
+        int toMonth = toDate.getMonthValue();
+        if (fromDay == 1) {
+            fromMonth--;
+        }
+        month = toMonth - fromMonth;
+        return month;
     }
 
     /**
