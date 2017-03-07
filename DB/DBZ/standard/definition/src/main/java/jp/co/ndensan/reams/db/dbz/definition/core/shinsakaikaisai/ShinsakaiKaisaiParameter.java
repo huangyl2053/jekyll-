@@ -220,4 +220,70 @@ public final class ShinsakaiKaisaiParameter {
                 /* is審査会未開催分のみ*/ false
         );
     }
+
+    /**
+     * 審査会委員割付のパラメータを生成します。
+     *
+     * @param 表示期間From 表示期間From
+     * @param 表示期間To 表示期間To
+     * @param 表示条件 表示条件
+     * @param 最大表示件数 最大表示件数
+     * @return 介護認定審査会検索パラメータ
+     */
+    public static ShinsakaiKaisaiParameter create審査会委員割付Param(
+            RString 表示期間From,
+            RString 表示期間To,
+            RString 表示条件,
+            Decimal 最大表示件数) {
+        return new ShinsakaiKaisaiParameter(
+                /* 表示期間From */表示期間From,
+                /* 表示期間To */ 表示期間To,
+                /* モード */ RString.EMPTY,
+                /* 表示条件 */ RString.EMPTY,
+                /* ダミー審査会 */ RString.EMPTY,
+                /* saidaiHyojiKensu */ 最大表示件数,
+                /* is割付未完了のみ */ false,
+                /* is未開催分のみ */ !全ての審査会.equals(表示条件),
+                /* is審査会未完了のみ */ false,
+                /* is審査会完了のみ */ false,
+                /* is開催予定登録OR対象者割付 */ false,
+                /* is表示しない */ false,
+                /* 審査会開催番号 */ RString.EMPTY,
+                /* is結果登録審査会未完了のみ */ false,
+                /* is審査会未開催分のみ*/ false
+        );
+    }
+
+    /**
+     * 審査会資料作成のパラメータを生成します。
+     *
+     * @param 表示期間From 表示期間From
+     * @param 表示期間To 表示期間To
+     * @param 表示条件 表示条件
+     * @param 最大表示件数 最大表示件数
+     * @return 介護認定審査会検索パラメータ
+     */
+    public static ShinsakaiKaisaiParameter create審査会資料作成Param(
+            RString 表示期間From,
+            RString 表示期間To,
+            RString 表示条件,
+            Decimal 最大表示件数) {
+        return new ShinsakaiKaisaiParameter(
+                /* 表示期間From */表示期間From,
+                /* 表示期間To */ 表示期間To,
+                /* モード */ RString.EMPTY,
+                /* 表示条件 */ RString.EMPTY,
+                /* ダミー審査会 */ RString.EMPTY,
+                /* saidaiHyojiKensu */ 最大表示件数,
+                /* is割付未完了のみ */ false,
+                /* is未開催分のみ */ false,
+                /* is審査会未完了のみ */ !全ての審査会.equals(表示条件),
+                /* is審査会完了のみ */ false,
+                /* is開催予定登録OR対象者割付 */ false,
+                /* is表示しない */ false,
+                /* 審査会開催番号 */ RString.EMPTY,
+                /* is結果登録審査会未完了のみ */ false,
+                /* is審査会未開催分のみ*/ false
+        );
+    }
 }

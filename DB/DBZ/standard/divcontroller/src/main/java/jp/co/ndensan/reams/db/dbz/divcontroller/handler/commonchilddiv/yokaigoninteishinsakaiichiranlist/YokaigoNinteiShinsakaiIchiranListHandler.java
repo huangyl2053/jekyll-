@@ -76,7 +76,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.TaishoshaWaritsuke_UnUseAutoWaritsuke);
             div.getRadDammyShinsakai().setSelectedKey(KEY0);
         }
-        if (モード_審査会資料.equals(モード)) {
+        if (モード_審査会資料.equals(モード) || モード_委員割付.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.ShinsakaiShiryoSakusei);
         }
         if (モード_審査結果登録.equals(モード)) {

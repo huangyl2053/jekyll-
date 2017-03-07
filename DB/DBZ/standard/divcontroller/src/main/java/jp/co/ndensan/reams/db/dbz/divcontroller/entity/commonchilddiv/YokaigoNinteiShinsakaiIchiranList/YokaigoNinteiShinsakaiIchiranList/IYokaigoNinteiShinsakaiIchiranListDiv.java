@@ -63,6 +63,10 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
      */
     public static final RString モード_対象者割付_自動割付使用不可 = new RString("taishoshaWaritsuke_UnUseAutoWaritsuke");
     /**
+     * モード_委員割付
+     */
+    public static final RString モード_委員割付 = new RString("iinWaritsuke");
+    /**
      * モード_審査会資料
      */
     public static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");

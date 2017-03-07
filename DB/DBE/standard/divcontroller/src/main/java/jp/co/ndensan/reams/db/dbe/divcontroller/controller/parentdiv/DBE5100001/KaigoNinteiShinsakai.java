@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,21 +44,80 @@ import jp.co.ndensan.reams.uz.uza.workflow.menu.Menus;
  */
 public class KaigoNinteiShinsakai {
 
-    private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN21004");
-    private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN61004");
-    private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN61005");
-    private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN61007");
-    private static final RString メニューID_介護認定審査会委員事前審査 = new RString("DBEMN61008");
-    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN61009");
-    private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN62001");
-    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
-    private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN62002");
-    private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN62004");
-    private static final RString メニューID_介護認定審査会委員割付 = new RString("DBEMN61010");
     private static final int 数字_0 = 0;
     private static final int LENGTH_4 = 4;
     private static final RString 審査会自動割付使用しない = new RString("2");
     private static final RString 自動割当ボタン名 = new RString("btnAutoWaritsuke");
+
+    /**
+     * この親Divを経由するすべての機能の定義です。
+     */
+    private enum Functions {
+
+        審査会個人別状況照会("DBEUC01201", モード_判定結果, DBE5100001StateName.審査会個人別状況照会),
+        介護認定審査会審査対象データ出力_モバイル("DBEUC51801", モード_データ出力, DBE5100001StateName.データ出力_モバイル),
+        介護認定審査会対象者割付("DBEUC51601", モード_対象者割付, DBE5100001StateName.対象者割付),
+        介護認定審査会資料作成("DBEUC51701", モード_審査会資料, DBE5100001StateName.審査会資料),
+        介護認定審査会委員事前審査結果登録("DBEUC52001", モード_事前結果登録, DBE5100001StateName.事前審査結果登録),
+        介護認定審査会委員事前審査("DBEUC52010", モード_事前結果登録, DBE5100001StateName.事前審査),
+        審査会開催結果登録("DBEUC52101", モード_審査結果登録, DBE5100001StateName.開催結果登録),
+        審査会審査結果登録("DBEUC52301", モード_事前結果登録, DBE5100001StateName.審査結果登録),
+        介護認定審査会審査結果データ取込み_モバイル("DBEUC52201", モード_データ出力, DBE5100001StateName.データ取込み_モバイル),
+        介護認定審査会審査結果登録_OCR("DBEUC52401", モード_審査結果登録, DBE5100001StateName.結果登録_OCR),
+        介護認定審査会委員割付("DBEUC51410", モード_委員割付, DBE5100001StateName.審査会資料);
+
+        private final RString uiContainerID;
+        private final RString mode;
+        private final DBE5100001StateName state;
+
+        private Functions(String uiContainerID, RString mode, DBE5100001StateName state) {
+            this.uiContainerID = new RString(uiContainerID);
+            this.mode = mode;
+            this.state = state;
+        }
+
+        private static Functions toValue(RString uiContainerID) {
+            return UIContainerIDToValue.get(uiContainerID);
+        }
+
+        /**
+         * {@link IYokaigoNinteiShinsakaiIchiranListDiv}の動作に関わる概念「モード」を返します。
+         *
+         * @param uiContainerID UIコンテナID
+         * @return モード
+         */
+        private static RString getMode(RString uiContainerID) {
+            return toValue(uiContainerID).mode;
+        }
+
+        private static DBE5100001StateName getState(RString uiContainerID) {
+            return toValue(uiContainerID).state;
+        }
+
+        private static boolean is審査会一覧更新(RString uiContainerID) {
+            Functions f = toValue(uiContainerID);
+            return f == 審査会開催結果登録 || f == 審査会審査結果登録 || f == 介護認定審査会対象者割付 || f == 介護認定審査会委員割付;
+        }
+
+        //<editor-fold defaultstate="collapsed" desc="UIContainerIDToValue">
+        private static final class UIContainerIDToValue {
+
+            private static final Map<RString, Functions> DICTHIONARY;
+
+            static {
+                Map<RString, Functions> map = new HashMap<>();
+                for (Functions value : values()) {
+                    map.put(value.uiContainerID, value);
+                }
+                DICTHIONARY = Collections.unmodifiableMap(map);
+            }
+
+            static Functions get(RString uiContainerID) {
+                return DICTHIONARY.get(uiContainerID);
+            }
+        }
+        //</editor-fold>
+    }
 
     /**
      * 審査会一覧初期化の設定します。
@@ -66,9 +126,7 @@ public class KaigoNinteiShinsakai {
      * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onLoad(KaigoNinteiShinsakaiDiv div) {
-
-        RString menuID = ResponseHolder.getMenuID();
-        RString mode = getMode().get(menuID);
+        RString mode = Functions.getMode(ResponseHolder.getUIContainerId());
         if (モード_対象者割付.equals(mode)) {
             RString 審査会自動割付使用有無 = DbBusinessConfig.get(ConfigNameDBE.審査会自動割付使用有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (審査会自動割付使用しない.equals(審査会自動割付使用有無)) {
@@ -79,7 +137,7 @@ public class KaigoNinteiShinsakai {
         div.getCcdShinsakaiItiran().initialize(mode);
         IParentResponse<KaigoNinteiShinsakaiDiv> response = ResponseData.of(div);
         response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName());
-        response.setState(getState().get(menuID));
+        response.setState(Functions.getState(ResponseHolder.getUIContainerId()));
         return response.respond();
     }
 
@@ -90,9 +148,9 @@ public class KaigoNinteiShinsakai {
      * @return ResponseData<KaigoNinteiShinsakaiDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onActive_KaigoNinteiShinsakai(KaigoNinteiShinsakaiDiv div) {
-        RString menuID = ResponseHolder.getMenuID();
-        if (!is審査会一覧更新(menuID)) {
-            return onActive_return(div, menuID);
+        RString uiContainerID = ResponseHolder.getUIContainerId();
+        if (!Functions.is審査会一覧更新(uiContainerID)) {
+            return onActive_return(div, uiContainerID);
         }
 
         RString 開催番号;
@@ -100,7 +158,7 @@ public class KaigoNinteiShinsakai {
         ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.create審査会検索Param(開催番号);
         ShinsakaiKaisai shinsakaiKaisai = ShinsakaiKaisaiFinder.createInstance().get審査会(parameter);
         if (shinsakaiKaisai == null) {
-            return onActive_return(div, menuID);
+            return onActive_return(div, uiContainerID);
         }
 
         List<dgShinsakaiIchiran_Row> selectedRow = new ArrayList<>();
@@ -142,14 +200,7 @@ public class KaigoNinteiShinsakai {
             seledted++;
         }
         div.getCcdShinsakaiItiran().getDgShinsakaiIchiran().setSelectedItems(selectedRow);
-        return onActive_return(div, menuID);
-    }
-
-    private boolean is審査会一覧更新(RString menuID) {
-        return メニューID_審査会開催結果登録.equals(menuID)
-                || メニューID_審査会審査結果登録.equals(menuID)
-                || メニューID_介護認定審査会対象者割付.equals(menuID)
-                || メニューID_介護認定審査会委員割付.equals(menuID);
+        return onActive_return(div, uiContainerID);
     }
 
     private RTime getRStringToRtime(RString time) {
@@ -160,10 +211,10 @@ public class KaigoNinteiShinsakai {
         return RTime.of(0, 0, 0, 0);
     }
 
-    private ResponseData<KaigoNinteiShinsakaiDiv> onActive_return(KaigoNinteiShinsakaiDiv div, RString menuID) {
+    private ResponseData<KaigoNinteiShinsakaiDiv> onActive_return(KaigoNinteiShinsakaiDiv div, RString uiContainerID) {
         IParentResponse<KaigoNinteiShinsakaiDiv> response = ResponseData.of(div);
-        response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, menuID).getMenuName());
-        response.setState(getState().get(menuID));
+        response.rootTitle(Menus.getMenuInfo(SubGyomuCode.DBE認定支援, ResponseHolder.getMenuID()).getMenuName());
+        response.setState(Functions.getState(uiContainerID));
         return response.respond();
     }
 
@@ -269,8 +320,7 @@ public class KaigoNinteiShinsakai {
         }
 
         div.getCcdShinsakaiItiran().getSelectedGridLine();
-        RString menuID = ResponseHolder.getMenuID();
-        if (メニューID_介護認定審査会対象者割付.equals(menuID)) {
+        if (Functions.介護認定審査会対象者割付 == Functions.toValue(ResponseHolder.getUIContainerId())) {
             ViewStateHolder.put(ViewStateKeys.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
             return ResponseData.of(div)
                     .forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
@@ -325,35 +375,4 @@ public class KaigoNinteiShinsakai {
         return validationMessages;
     }
 
-    private Map<RString, RString> getMode() {
-        Map<RString, RString> mode = new HashMap<>();
-        mode.put(メニューID_審査会個人別状況照会, モード_判定結果);
-        mode.put(メニューID_介護認定審査会審査対象データ出力, モード_データ出力);
-        mode.put(メニューID_介護認定審査会対象者割付, モード_対象者割付);
-        mode.put(メニューID_介護認定審査会資料作成, モード_審査会資料);
-        mode.put(メニューID_介護認定審査会委員事前審査結果登録, モード_事前結果登録);
-        mode.put(メニューID_介護認定審査会委員事前審査, モード_事前結果登録);
-        mode.put(メニューID_審査会開催結果登録, モード_審査結果登録);
-        mode.put(メニューID_審査会審査結果登録, モード_事前結果登録);
-        mode.put(メニューID_介護認定審査会審査結果データ取込み, モード_データ出力);
-        mode.put(メニューID_介護認定審査会審査結果登録, モード_審査結果登録);
-        mode.put(メニューID_介護認定審査会委員割付, モード_審査会資料);
-        return mode;
-    }
-
-    private Map<RString, DBE5100001StateName> getState() {
-        Map<RString, DBE5100001StateName> state = new HashMap<>();
-        state.put(メニューID_審査会個人別状況照会, DBE5100001StateName.審査会個人別状況照会);
-        state.put(メニューID_介護認定審査会審査対象データ出力, DBE5100001StateName.データ出力_モバイル);
-        state.put(メニューID_介護認定審査会対象者割付, DBE5100001StateName.対象者割付);
-        state.put(メニューID_介護認定審査会資料作成, DBE5100001StateName.審査会資料);
-        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前審査結果登録);
-        state.put(メニューID_介護認定審査会委員事前審査, DBE5100001StateName.事前審査);
-        state.put(メニューID_審査会開催結果登録, DBE5100001StateName.開催結果登録);
-        state.put(メニューID_審査会審査結果登録, DBE5100001StateName.審査結果登録);
-        state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);
-        state.put(メニューID_介護認定審査会審査結果登録, DBE5100001StateName.結果登録_OCR);
-        state.put(メニューID_介護認定審査会委員割付, DBE5100001StateName.審査会資料);
-        return state;
-    }
 }

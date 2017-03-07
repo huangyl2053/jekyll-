@@ -87,7 +87,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
             ダミー審査会 = div.getRadDammyShinsakai().getSelectedValue();
             表示条件 = div.getRadHyojiJokenWaritsukeMikanryo().getSelectedValue();
         }
-        if (モード_審査会資料.equals(モード)) {
+        if (モード_審査会資料.equals(モード) || モード_委員割付.equals(モード)) {
             表示条件 = div.getRadHyojiJokenWaritsukeKanryo().getSelectedValue();
         }
         if (モード_審査結果登録.equals(モード) || モード_事前結果登録.equals(モード) || モード_データ出力.equals(モード)) {
@@ -131,6 +131,12 @@ public class YokaigoNinteiShinsakaiIchiranList {
             RString モード, RString 表示条件, Decimal 最大表示件数, RString ダミー審査会) {
         if (UI_CONTAINER_ID_審査会審査結果登録.equals(ResponseHolder.getUIContainerId())) {
             return ShinsakaiKaisaiParameter.create審査結果登録Param(期間From, 期間To, 表示条件, 最大表示件数);
+        }
+        if (モード_審査会資料.equals(モード)) {
+            return ShinsakaiKaisaiParameter.create審査会資料作成Param(期間From, 期間To, 表示条件, 最大表示件数);
+        }
+        if (モード_委員割付.equals(モード)) {
+            return ShinsakaiKaisaiParameter.create審査会委員割付Param(期間From, 期間To, 表示条件, 最大表示件数);
         }
         return ShinsakaiKaisaiParameter.createParam(
                 期間From, 期間To, モード, 表示条件, 最大表示件数, ダミー審査会);
