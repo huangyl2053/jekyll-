@@ -222,26 +222,26 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
                 ? RString.EMPTY : JotaiAnteiseiCode.toValue(entity.get状態の安定性コード()).get名称());
         csvEntity.set二号特定疾病コード(entity.get二号特定疾病コード());
         csvEntity.set認定申請理由(entity.get認定申請理由());
-        csvEntity.set要介護認定一次判定結果コード(entity.get要介護認定一次判定結果コード());
+        csvEntity.set要介護認定一次判定結果コード(entity.get要介護認定一次判定結果認知症加算コード());
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
-                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode02.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode02.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
-                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode06.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode06.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
-                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
-                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode99.toValue(entity.get要介護認定一次判定結果コード()).get名称());
+                    RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
+                    ? RString.EMPTY : IchijiHanteiKekkaCode99.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         }
-        csvEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間());
+        csvEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間().add(entity.get要介護認定等基準時間_認知症加算()));
         csvEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
         csvEntity.set要介護認定等基準時間_排泄(entity.get要介護認定等基準時間_排泄());
         csvEntity.set要介護認定等基準時間_移動(entity.get要介護認定等基準時間_移動());

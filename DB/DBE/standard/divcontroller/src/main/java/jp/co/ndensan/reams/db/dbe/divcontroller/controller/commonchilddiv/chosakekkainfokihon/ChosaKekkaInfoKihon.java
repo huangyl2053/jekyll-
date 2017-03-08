@@ -32,7 +32,7 @@ public class ChosaKekkaInfoKihon {
     public ResponseData<ChosaKekkaInfoKihonDiv> onLoad(ChosaKekkaInfoKihonDiv div) {
         int 認定調査依頼履歴番号 = 0;
         RString 申請書管理番号 = div.getShinseishoKanriNo();
-        if (!div.getNinteichosaRirekiNo().isEmpty() && div.getNinteichosaRirekiNo() != null) {
+        if (div.getNinteichosaRirekiNo() != null && !div.getNinteichosaRirekiNo().isEmpty()) {
             認定調査依頼履歴番号 = Integer.parseInt(String.valueOf(div.getNinteichosaRirekiNo()));
         } else {
             return createResponse(div);

@@ -40,6 +40,7 @@ public class TaishouWaritsukeHead {
         headEntity.set予定開始時間(checkNullForRString(entity.get予定開始時間()));
         headEntity.set予定終了時間(checkNullForRString(entity.get予定終了時間()));
         headEntity.set合議体精神科医存在フラグ(entity.is合議体精神科医存在フラグ());
+        headEntity.set合議体ダミーフラグ(entity.is合議体ダミーフラグ());
     }
 
     /**
@@ -139,5 +140,14 @@ public class TaishouWaritsukeHead {
      */
     public boolean is合議体精神科医存在フラグ() {
         return headEntity.is合議体精神科医存在フラグ();
+    }
+
+    /**
+     * is合議体ダミーフラグ
+     *
+     * @return 合議体ダミーフラグ
+     */
+    public boolean is合議体ダミーフラグ() {
+        return headEntity.is合議体ダミーフラグ();
     }
 }

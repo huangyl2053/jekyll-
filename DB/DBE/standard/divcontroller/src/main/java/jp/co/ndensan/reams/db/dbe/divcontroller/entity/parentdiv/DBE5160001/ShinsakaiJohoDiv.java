@@ -25,18 +25,16 @@ public class ShinsakaiJohoDiv extends Panel {
     private TextBox txtShinsakaiName;
     @JsonProperty("txtGogitaiNumber")
     private TextBox txtGogitaiNumber;
-    @JsonProperty("txtYoteiTeiin")
-    private TextBoxNum txtYoteiTeiin;
     @JsonProperty("txtWaritsukeNinzu")
     private TextBoxNum txtWaritsukeNinzu;
-    @JsonProperty("txtStatus")
-    private TextBox txtStatus;
     @JsonProperty("txtShinsakaiKaijo")
     private TextBox txtShinsakaiKaijo;
     @JsonProperty("txtShinsakaiChiku")
     private TextBox txtShinsakaiChiku;
     @JsonProperty("txtShinsakauChikuName")
     private TextBox txtShinsakauChikuName;
+    @JsonProperty("txtYoteiTeiin")
+    private TextBoxNum txtYoteiTeiin;
     @JsonProperty("txtKaisaiDate")
     private TextBoxFlexibleDate txtKaisaiDate;
     @JsonProperty("txtYoteiKaishiTime")
@@ -45,6 +43,10 @@ public class ShinsakaiJohoDiv extends Panel {
     private TextBoxTime txtYoteiShuryoTime;
     @JsonProperty("chkNinchishoOnly")
     private CheckBoxList chkNinchishoOnly;
+    @JsonProperty("chkKenshuMogi")
+    private CheckBoxList chkKenshuMogi;
+    @JsonProperty("txtStatus")
+    private TextBox txtStatus;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,24 +91,6 @@ public class ShinsakaiJohoDiv extends Panel {
     }
 
     /*
-     * gettxtYoteiTeiin
-     * @return txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public TextBoxNum getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
-    }
-
-    /*
-     * settxtYoteiTeiin
-     * @param txtYoteiTeiin txtYoteiTeiin
-     */
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.txtYoteiTeiin = txtYoteiTeiin;
-    }
-
-    /*
      * gettxtWaritsukeNinzu
      * @return txtWaritsukeNinzu
      */
@@ -122,24 +106,6 @@ public class ShinsakaiJohoDiv extends Panel {
     @JsonProperty("txtWaritsukeNinzu")
     public void setTxtWaritsukeNinzu(TextBoxNum txtWaritsukeNinzu) {
         this.txtWaritsukeNinzu = txtWaritsukeNinzu;
-    }
-
-    /*
-     * gettxtStatus
-     * @return txtStatus
-     */
-    @JsonProperty("txtStatus")
-    public TextBox getTxtStatus() {
-        return txtStatus;
-    }
-
-    /*
-     * settxtStatus
-     * @param txtStatus txtStatus
-     */
-    @JsonProperty("txtStatus")
-    public void setTxtStatus(TextBox txtStatus) {
-        this.txtStatus = txtStatus;
     }
 
     /*
@@ -194,6 +160,24 @@ public class ShinsakaiJohoDiv extends Panel {
     @JsonProperty("txtShinsakauChikuName")
     public void setTxtShinsakauChikuName(TextBox txtShinsakauChikuName) {
         this.txtShinsakauChikuName = txtShinsakauChikuName;
+    }
+
+    /*
+     * gettxtYoteiTeiin
+     * @return txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public TextBoxNum getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
+    }
+
+    /*
+     * settxtYoteiTeiin
+     * @param txtYoteiTeiin txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.txtYoteiTeiin = txtYoteiTeiin;
     }
 
     /*
@@ -266,6 +250,42 @@ public class ShinsakaiJohoDiv extends Panel {
     @JsonProperty("chkNinchishoOnly")
     public void setChkNinchishoOnly(CheckBoxList chkNinchishoOnly) {
         this.chkNinchishoOnly = chkNinchishoOnly;
+    }
+
+    /*
+     * getchkKenshuMogi
+     * @return chkKenshuMogi
+     */
+    @JsonProperty("chkKenshuMogi")
+    public CheckBoxList getChkKenshuMogi() {
+        return chkKenshuMogi;
+    }
+
+    /*
+     * setchkKenshuMogi
+     * @param chkKenshuMogi chkKenshuMogi
+     */
+    @JsonProperty("chkKenshuMogi")
+    public void setChkKenshuMogi(CheckBoxList chkKenshuMogi) {
+        this.chkKenshuMogi = chkKenshuMogi;
+    }
+
+    /*
+     * gettxtStatus
+     * @return txtStatus
+     */
+    @JsonProperty("txtStatus")
+    public TextBox getTxtStatus() {
+        return txtStatus;
+    }
+
+    /*
+     * settxtStatus
+     * @param txtStatus txtStatus
+     */
+    @JsonProperty("txtStatus")
+    public void setTxtStatus(TextBox txtStatus) {
+        this.txtStatus = txtStatus;
     }
 
     // </editor-fold>

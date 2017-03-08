@@ -21,6 +21,7 @@
             DbT5105."maskingKanryoYMD",
             DbT5105."ninteiShinsakaiKanryoYMD",
             DbT5105."ninteiShinsakaiWariateKanryoYMD",
+        <if test="状態区分 != 1" >
             DbT5501."shinsakaiKaisaiYoteiYMD",
             DbT5501."shinsakaiKaishiYoteiTime",
             DbT5501."shinsakaiKaisaiNo",
@@ -28,6 +29,16 @@
             DbT5502."shinsakaiWariateYMD",
             DbT5502."shinsakaiOrder",
             DbT5591."gogitaiMei",
+        </if>
+        <if test="状態区分 == 1" >
+            NULL AS "shinsakaiKaisaiYoteiYMD",
+            NULL AS "shinsakaiKaishiYoteiTime",
+            NULL AS "shinsakaiKaisaiNo",
+            NULL AS "gogitaiNo",
+            NULL AS "shinsakaiWariateYMD",
+            NULL AS "shinsakaiOrder",
+            NULL AS "gogitaiMei",
+        </if>
             DbT5105.*
         FROM
             rgdb."DbT5101NinteiShinseiJoho" DbT5101
@@ -35,14 +46,23 @@
                 ON  DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
             INNER  JOIN  rgdb."DbT5105NinteiKanryoJoho" DbT5105
                 ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-            LEFT   JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+        <if test="状態区分 != 1" >
+            <if test="状態区分 == 2" >
+                INNER   JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+            </if>
+            <if test="状態区分 == 3" >
+                LEFT   JOIN  rgdb."DbT5502ShinsakaiWariateJoho" DbT5502
+            </if>
                 ON  DbT5502."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+                AND (DbT5502."hanteiKekkaCode" IS NULL
+                OR DbT5502."hanteiKekkaCode" = '')
             LEFT   JOIN  rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" DbT5501
                 ON  DbT5501."shinsakaiKaisaiNo" = DbT5502."shinsakaiKaisaiNo"
             LEFT   JOIN  rgdb."DbT5591GogitaiJoho" DbT5591
                 ON DbT5591."gogitaiNo" = DbT5501."gogitaiNo"
                 AND DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  DbT5501."shinsakaiKaisaiYoteiYMD"
                 AND DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  DbT5501."shinsakaiKaisaiYoteiYMD"
+        </if>
         WHERE
                 (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
@@ -56,10 +76,10 @@
             AND DbT5105."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
             AND (DbT5105."ichijiHanteiKanryoYMD" IS NOT NULL
             AND DbT5105."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
-            <if test="isItijiHannteiAto">
-                AND (DbT5105."maskingKanryoYMD" IS NOT NULL
-                AND DbT5105."maskingKanryoYMD" <![CDATA[<>]]> '')
-            </if>
+        <if test="isItijiHannteiAto">
+            AND (DbT5105."maskingKanryoYMD" IS NOT NULL
+            AND DbT5105."maskingKanryoYMD" <![CDATA[<>]]> '')
+        </if>
             AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
             OR DbT5105."ninteiShinsakaiWariateKanryoYMD" = '')
             AND (DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
@@ -83,14 +103,22 @@
             AND
             DbT5105."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
             )
-            AND (DbT5502."shinsakaiWariateYMD" is NULL
-            OR  DbT5502."shinsakaiWariateYMD" = '')
         </if>
         <if test="状態区分 == 2" >
             AND (DbT5502."shinsakaiWariateYMD" is NOT NULL
             AND  DbT5502."shinsakaiWariateYMD" <![CDATA[<>]]> '')
-            AND (DbT5502."hanteiKekkaCode" IS NULL 
-            OR DbT5502."hanteiKekkaCode" = '')
+        </if>
+        <if test="状態区分 == 3" >
+            AND NOT EXISTS(
+            SELECT
+            *
+            FROM
+            rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
+            WHERE
+            DbT5502."hanteiKekkaCode" = '01'
+            AND
+            DbT5105."shinseishoKanriNo" = DbT5502."shinseishoKanriNo"
+            )
         </if>
         ORDER BY  DbT5101."hihokenshaKana",
                   DbT5101."ninteiShinseiYMD",
@@ -156,6 +184,7 @@
                 ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
                AND gogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
                AND gogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+               AND gogitaiJoho."gogitaiDummyFlag" = FALSE
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS shinsakaiKaisaiKekkaJoho
                 ON shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS shinsakaiKaisaiBashoJoho

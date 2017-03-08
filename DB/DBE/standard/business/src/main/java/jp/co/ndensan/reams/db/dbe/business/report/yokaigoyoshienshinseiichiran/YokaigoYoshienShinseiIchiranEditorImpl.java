@@ -43,7 +43,8 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
      * ReportSourceの編集処理です。
      *
      * @param reportSource 要支援認定等申請者一覧表ReportSourceクラス
-     * @return YokaigoYoshienShinseiIchiranReportSource 要支援認定等申請者一覧表ReportSourceクラス
+     * @return YokaigoYoshienShinseiIchiranReportSource
+     * 要支援認定等申請者一覧表ReportSourceクラス
      */
     @Override
     public YokaigoYoshienShinseiIchiranReportSource edit(YokaigoYoshienShinseiIchiranReportSource reportSource) {
@@ -67,8 +68,8 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
                     ? RString.EMPTY : Seibetsu.toValue(seibetsu.value()).get名称();
         }
         editListShinseiIchiran8(reportSource);
-        if(!item.getNijiHanteiNinteiYukoKikan().equals(new RString("0"))){
-            reportSource.listShinseiIchiran_9 = new RString(String.valueOf(item.getNijiHanteiNinteiYukoKikan()));
+        if (item.getNijiHanteiNinteiYukoKikan() != null && !item.getNijiHanteiNinteiYukoKikan().equals(new RString("0"))) {
+            reportSource.listShinseiIchiran_9 = item.getNijiHanteiNinteiYukoKikan();
         }
         FlexibleDate nijiHanteiNinteiYukoKaishiYMD = item.getNijiHanteiNinteiYukoKaishiYMD();
         if (nijiHanteiNinteiYukoKaishiYMD != null) {

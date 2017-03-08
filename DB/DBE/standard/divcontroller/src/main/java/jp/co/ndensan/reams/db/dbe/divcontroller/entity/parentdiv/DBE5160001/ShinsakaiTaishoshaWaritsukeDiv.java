@@ -214,16 +214,6 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtYoteiTeiin() {
-        return this.getShinsakaiJoho().getTxtYoteiTeiin();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.getShinsakaiJoho().setTxtYoteiTeiin(txtYoteiTeiin);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtWaritsukeNinzu() {
         return this.getShinsakaiJoho().getTxtWaritsukeNinzu();
     }
@@ -231,16 +221,6 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setTxtWaritsukeNinzu(TextBoxNum txtWaritsukeNinzu) {
         this.getShinsakaiJoho().setTxtWaritsukeNinzu(txtWaritsukeNinzu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtStatus() {
-        return this.getShinsakaiJoho().getTxtStatus();
-    }
-
-    @JsonIgnore
-    public void  setTxtStatus(TextBox txtStatus) {
-        this.getShinsakaiJoho().setTxtStatus(txtStatus);
     }
 
     @JsonIgnore
@@ -271,6 +251,16 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setTxtShinsakauChikuName(TextBox txtShinsakauChikuName) {
         this.getShinsakaiJoho().setTxtShinsakauChikuName(txtShinsakauChikuName);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYoteiTeiin() {
+        return this.getShinsakaiJoho().getTxtYoteiTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.getShinsakaiJoho().setTxtYoteiTeiin(txtYoteiTeiin);
     }
 
     @JsonIgnore
@@ -311,6 +301,26 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setChkNinchishoOnly(CheckBoxList chkNinchishoOnly) {
         this.getShinsakaiJoho().setChkNinchishoOnly(chkNinchishoOnly);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkKenshuMogi() {
+        return this.getShinsakaiJoho().getChkKenshuMogi();
+    }
+
+    @JsonIgnore
+    public void  setChkKenshuMogi(CheckBoxList chkKenshuMogi) {
+        this.getShinsakaiJoho().setChkKenshuMogi(chkKenshuMogi);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtStatus() {
+        return this.getShinsakaiJoho().getTxtStatus();
+    }
+
+    @JsonIgnore
+    public void  setTxtStatus(TextBox txtStatus) {
+        this.getShinsakaiJoho().setTxtStatus(txtStatus);
     }
 
     @JsonIgnore

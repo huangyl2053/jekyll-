@@ -97,16 +97,6 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtYoteiTeiin() {
-        return this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().getTxtYoteiTeiin();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtYoteiTeiin(txtYoteiTeiin);
-    }
-
-    @JsonIgnore
     public TextBoxNum getTxtWaritsukeNinzu() {
         return this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().getTxtWaritsukeNinzu();
     }
@@ -114,16 +104,6 @@ public class TaishouWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setTxtWaritsukeNinzu(TextBoxNum txtWaritsukeNinzu) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtWaritsukeNinzu(txtWaritsukeNinzu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtStatus() {
-        return this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().getTxtStatus();
-    }
-
-    @JsonIgnore
-    public void  setTxtStatus(TextBox txtStatus) {
-        this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtStatus(txtStatus);
     }
 
     @JsonIgnore
@@ -154,6 +134,16 @@ public class TaishouWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setTxtShinsakauChikuName(TextBox txtShinsakauChikuName) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtShinsakauChikuName(txtShinsakauChikuName);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYoteiTeiin() {
+        return this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().getTxtYoteiTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtYoteiTeiin(txtYoteiTeiin);
     }
 
     @JsonIgnore
@@ -194,6 +184,26 @@ public class TaishouWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setChkNinchishoOnly(CheckBoxList chkNinchishoOnly) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setChkNinchishoOnly(chkNinchishoOnly);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkKenshuMogi() {
+        return this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().getChkKenshuMogi();
+    }
+
+    @JsonIgnore
+    public void  setChkKenshuMogi(CheckBoxList chkKenshuMogi) {
+        this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setChkKenshuMogi(chkKenshuMogi);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtStatus() {
+        return this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().getTxtStatus();
+    }
+
+    @JsonIgnore
+    public void  setTxtStatus(TextBox txtStatus) {
+        this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtStatus(txtStatus);
     }
 
     @JsonIgnore

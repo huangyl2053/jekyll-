@@ -126,6 +126,7 @@ public class ShinsakaiTorokuHandler {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(完了するボタン, false);
             }
         } else {
+            状態区分 = new RString("3");
             div.getTxtMishoriCount().setDisplayNone(false);
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(false);
@@ -220,7 +221,6 @@ public class ShinsakaiTorokuHandler {
             row.setShinsakaiKaijo(shinsakaiKaisai.get介護認定審査会開催場所名称());
             row.getYoteiTeiin().setValue(shinsakaiKaisai.get介護認定審査会予定定員());
             row.getWariateZumiNinzu().setValue(shinsakaiKaisai.get介護認定審査会割当済み人数());
-            row.getDummyFlag().setValue(shinsakaiKaisai.isダミーフラグ());
             row.getMaxShinsakaiOrder().setValue(shinsakaiKaisai.get最大審査順() == null || shinsakaiKaisai.get最大審査順().isEmpty()
                     ? new Decimal(0) : new Decimal(shinsakaiKaisai.get最大審査順().toString()));
             list.add(row);
