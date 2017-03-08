@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 認定調査依頼情報・福祉Newestテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<DbV7514NinteichosaIraiJohoFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7514NinteichosaIraiJohoFukushi");
 
@@ -39,7 +42,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * shinseishoKanriNoのgetメソッドです。
-     * 
+     *
      * @return shinseishoKanriNo
      */
     @CheckForNull
@@ -49,7 +52,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * shinseishoKanriNoのsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo shinseishoKanriNo
      */
     public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
@@ -58,7 +61,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiRirekiNoのgetメソッドです。
-     * 
+     *
      * @return ninteichosaIraiRirekiNo
      */
     @CheckForNull
@@ -68,7 +71,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiRirekiNoのsetメソッドです。
-     * 
+     *
      * @param ninteichosaIraiRirekiNo ninteichosaIraiRirekiNo
      */
     public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
@@ -77,7 +80,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * koroshoIfShikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return koroshoIfShikibetsuCode
      */
     @CheckForNull
@@ -87,7 +90,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * koroshoIfShikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param koroshoIfShikibetsuCode koroshoIfShikibetsuCode
      */
     public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
@@ -96,7 +99,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaItakusakiCodeのgetメソッドです。
-     * 
+     *
      * @return ninteichosaItakusakiCode
      */
     @CheckForNull
@@ -106,7 +109,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaItakusakiCodeのsetメソッドです。
-     * 
+     *
      * @param ninteichosaItakusakiCode ninteichosaItakusakiCode
      */
     public void setNinteichosaItakusakiCode(JigyoshaNo ninteichosaItakusakiCode) {
@@ -115,7 +118,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteiChosainCodeのgetメソッドです。
-     * 
+     *
      * @return ninteiChosainCode
      */
     @CheckForNull
@@ -125,7 +128,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteiChosainCodeのsetメソッドです。
-     * 
+     *
      * @param ninteiChosainCode ninteiChosainCode
      */
     public void setNinteiChosainCode(RString ninteiChosainCode) {
@@ -134,7 +137,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return ninteichosaIraiKubunCode
      */
     @CheckForNull
@@ -144,7 +147,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param ninteichosaIraiKubunCode ninteichosaIraiKubunCode
      */
     public void setNinteichosaIraiKubunCode(Code ninteichosaIraiKubunCode) {
@@ -153,7 +156,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiKaisuのgetメソッドです。
-     * 
+     *
      * @return ninteichosaIraiKaisu
      */
     @CheckForNull
@@ -163,7 +166,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiKaisuのsetメソッドです。
-     * 
+     *
      * @param ninteichosaIraiKaisu ninteichosaIraiKaisu
      */
     public void setNinteichosaIraiKaisu(int ninteichosaIraiKaisu) {
@@ -172,7 +175,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiYMDのgetメソッドです。
-     * 
+     *
      * @return ninteichosaIraiYMD
      */
     @CheckForNull
@@ -182,7 +185,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaIraiYMDのsetメソッドです。
-     * 
+     *
      * @param ninteichosaIraiYMD ninteichosaIraiYMD
      */
     public void setNinteichosaIraiYMD(FlexibleDate ninteichosaIraiYMD) {
@@ -191,7 +194,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaKigenYMDのgetメソッドです。
-     * 
+     *
      * @return ninteichosaKigenYMD
      */
     @CheckForNull
@@ -201,7 +204,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaKigenYMDのsetメソッドです。
-     * 
+     *
      * @param ninteichosaKigenYMD ninteichosaKigenYMD
      */
     public void setNinteichosaKigenYMD(FlexibleDate ninteichosaKigenYMD) {
@@ -210,7 +213,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * chosaIraishoShutsuryokuYMDのgetメソッドです。
-     * 
+     *
      * @return chosaIraishoShutsuryokuYMD
      */
     @CheckForNull
@@ -220,7 +223,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * chosaIraishoShutsuryokuYMDのsetメソッドです。
-     * 
+     *
      * @param chosaIraishoShutsuryokuYMD chosaIraishoShutsuryokuYMD
      */
     public void setChosaIraishoShutsuryokuYMD(FlexibleDate chosaIraishoShutsuryokuYMD) {
@@ -229,7 +232,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * chosahyoTouShutsuryokuYMDのgetメソッドです。
-     * 
+     *
      * @return chosahyoTouShutsuryokuYMD
      */
     @CheckForNull
@@ -239,7 +242,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * chosahyoTouShutsuryokuYMDのsetメソッドです。
-     * 
+     *
      * @param chosahyoTouShutsuryokuYMD chosahyoTouShutsuryokuYMD
      */
     public void setChosahyoTouShutsuryokuYMD(FlexibleDate chosahyoTouShutsuryokuYMD) {
@@ -248,7 +251,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * mobileDataShutsuryokuZumiFlagのgetメソッドです。
-     * 
+     *
      * @return mobileDataShutsuryokuZumiFlag
      */
     @CheckForNull
@@ -258,7 +261,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * mobileDataShutsuryokuZumiFlagのsetメソッドです。
-     * 
+     *
      * @param mobileDataShutsuryokuZumiFlag mobileDataShutsuryokuZumiFlag
      */
     public void setMobileDataShutsuryokuZumiFlag(boolean mobileDataShutsuryokuZumiFlag) {
@@ -267,7 +270,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * jizenChosaFlagのgetメソッドです。
-     * 
+     *
      * @return jizenChosaFlag
      */
     @CheckForNull
@@ -277,7 +280,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * jizenChosaFlagのsetメソッドです。
-     * 
+     *
      * @param jizenChosaFlag jizenChosaFlag
      */
     public void setJizenChosaFlag(boolean jizenChosaFlag) {
@@ -286,7 +289,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuYMDのgetメソッドです。
-     * 
+     *
      * @return ninteichosaTokusokuYMD
      */
     @CheckForNull
@@ -296,7 +299,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuYMDのsetメソッドです。
-     * 
+     *
      * @param ninteichosaTokusokuYMD ninteichosaTokusokuYMD
      */
     public void setNinteichosaTokusokuYMD(FlexibleDate ninteichosaTokusokuYMD) {
@@ -305,7 +308,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuHohoのgetメソッドです。
-     * 
+     *
      * @return ninteichosaTokusokuHoho
      */
     @CheckForNull
@@ -315,7 +318,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuHohoのsetメソッドです。
-     * 
+     *
      * @param ninteichosaTokusokuHoho ninteichosaTokusokuHoho
      */
     public void setNinteichosaTokusokuHoho(RString ninteichosaTokusokuHoho) {
@@ -324,7 +327,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuKaisuのgetメソッドです。
-     * 
+     *
      * @return ninteichosaTokusokuKaisu
      */
     @CheckForNull
@@ -334,7 +337,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuKaisuのsetメソッドです。
-     * 
+     *
      * @param ninteichosaTokusokuKaisu ninteichosaTokusokuKaisu
      */
     public void setNinteichosaTokusokuKaisu(int ninteichosaTokusokuKaisu) {
@@ -343,7 +346,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuMemoのgetメソッドです。
-     * 
+     *
      * @return ninteichosaTokusokuMemo
      */
     @CheckForNull
@@ -353,7 +356,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * ninteichosaTokusokuMemoのsetメソッドです。
-     * 
+     *
      * @param ninteichosaTokusokuMemo ninteichosaTokusokuMemo
      */
     public void setNinteichosaTokusokuMemo(RString ninteichosaTokusokuMemo) {
@@ -362,7 +365,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * logicalDeletedFlagのgetメソッドです。
-     * 
+     *
      * @return logicalDeletedFlag
      */
     @CheckForNull
@@ -372,7 +375,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * logicalDeletedFlagのsetメソッドです。
-     * 
+     *
      * @param logicalDeletedFlag logicalDeletedFlag
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -381,9 +384,9 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbV7514NinteichosaIraiJohoFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7514NinteichosaIraiJohoFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -421,6 +424,7 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -429,5 +433,4 @@ public class DbV7514NinteichosaIraiJohoFukushiEntity extends DbTableEntityBase<D
     }
 
 // </editor-fold>
-
 }

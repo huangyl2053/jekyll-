@@ -10,12 +10,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 高額介護サービス費支給判定結果・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBase<DbV7509KogakuShikyuHanteiKekkaFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7509KogakuShikyuHanteiKekkaFukushi");
 
@@ -38,7 +41,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -48,7 +51,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -57,7 +60,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceTeikyoYMのgetメソッドです。
-     * 
+     *
      * @return serviceTeikyoYM
      */
     @CheckForNull
@@ -67,7 +70,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceTeikyoYMのsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -76,7 +79,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shoKisaiHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return shoKisaiHokenshaNo
      */
     @CheckForNull
@@ -86,7 +89,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shoKisaiHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
     public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
@@ -95,7 +98,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -105,7 +108,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -114,7 +117,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * ketteiYMDのgetメソッドです。
-     * 
+     *
      * @return ketteiYMD
      */
     @CheckForNull
@@ -124,7 +127,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * ketteiYMDのsetメソッドです。
-     * 
+     *
      * @param ketteiYMD ketteiYMD
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -133,7 +136,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * honninShiharaiGakuのgetメソッドです。
-     * 
+     *
      * @return honninShiharaiGaku
      */
     @CheckForNull
@@ -143,7 +146,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * honninShiharaiGakuのsetメソッドです。
-     * 
+     *
      * @param honninShiharaiGaku honninShiharaiGaku
      */
     public void setHonninShiharaiGaku(Decimal honninShiharaiGaku) {
@@ -152,7 +155,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shikyuKubunCodeのgetメソッドです。
-     * 
+     *
      * @return shikyuKubunCode
      */
     @CheckForNull
@@ -162,7 +165,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shikyuKubunCodeのsetメソッドです。
-     * 
+     *
      * @param shikyuKubunCode shikyuKubunCode
      */
     public void setShikyuKubunCode(RString shikyuKubunCode) {
@@ -171,7 +174,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shikyuKingakuのgetメソッドです。
-     * 
+     *
      * @return shikyuKingaku
      */
     @CheckForNull
@@ -181,7 +184,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shikyuKingakuのsetメソッドです。
-     * 
+     *
      * @param shikyuKingaku shikyuKingaku
      */
     public void setShikyuKingaku(Decimal shikyuKingaku) {
@@ -190,7 +193,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * fushikyuRiyuのgetメソッドです。
-     * 
+     *
      * @return fushikyuRiyu
      */
     @CheckForNull
@@ -200,7 +203,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * fushikyuRiyuのsetメソッドです。
-     * 
+     *
      * @param fushikyuRiyu fushikyuRiyu
      */
     public void setFushikyuRiyu(RString fushikyuRiyu) {
@@ -209,7 +212,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shinsaHohoKubunのgetメソッドです。
-     * 
+     *
      * @return shinsaHohoKubun
      */
     @CheckForNull
@@ -219,7 +222,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shinsaHohoKubunのsetメソッドです。
-     * 
+     *
      * @param shinsaHohoKubun shinsaHohoKubun
      */
     public void setShinsaHohoKubun(RString shinsaHohoKubun) {
@@ -228,7 +231,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * hanteiKekkaSofuYMのgetメソッドです。
-     * 
+     *
      * @return hanteiKekkaSofuYM
      */
     @CheckForNull
@@ -238,7 +241,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * hanteiKekkaSofuYMのsetメソッドです。
-     * 
+     *
      * @param hanteiKekkaSofuYM hanteiKekkaSofuYM
      */
     public void setHanteiKekkaSofuYM(FlexibleYearMonth hanteiKekkaSofuYM) {
@@ -247,7 +250,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * saiSofuFlagのgetメソッドです。
-     * 
+     *
      * @return saiSofuFlag
      */
     @CheckForNull
@@ -257,7 +260,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * saiSofuFlagのsetメソッドです。
-     * 
+     *
      * @param saiSofuFlag saiSofuFlag
      */
     public void setSaiSofuFlag(boolean saiSofuFlag) {
@@ -266,7 +269,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * hanteiKekkaSofuFuyoFlagのgetメソッドです。
-     * 
+     *
      * @return hanteiKekkaSofuFuyoFlag
      */
     @CheckForNull
@@ -276,7 +279,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * hanteiKekkaSofuFuyoFlagのsetメソッドです。
-     * 
+     *
      * @param hanteiKekkaSofuFuyoFlag hanteiKekkaSofuFuyoFlag
      */
     public void setHanteiKekkaSofuFuyoFlag(boolean hanteiKekkaSofuFuyoFlag) {
@@ -285,7 +288,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shinsaKekkaHaneiKubunのgetメソッドです。
-     * 
+     *
      * @return shinsaKekkaHaneiKubun
      */
     @CheckForNull
@@ -295,7 +298,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * shinsaKekkaHaneiKubunのsetメソッドです。
-     * 
+     *
      * @param shinsaKekkaHaneiKubun shinsaKekkaHaneiKubun
      */
     public void setShinsaKekkaHaneiKubun(RString shinsaKekkaHaneiKubun) {
@@ -304,7 +307,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * ketteiTsuchishoSakuseiYMDのgetメソッドです。
-     * 
+     *
      * @return ketteiTsuchishoSakuseiYMD
      */
     @CheckForNull
@@ -314,7 +317,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * ketteiTsuchishoSakuseiYMDのsetメソッドです。
-     * 
+     *
      * @param ketteiTsuchishoSakuseiYMD ketteiTsuchishoSakuseiYMD
      */
     public void setKetteiTsuchishoSakuseiYMD(FlexibleDate ketteiTsuchishoSakuseiYMD) {
@@ -323,7 +326,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * furikomiMeisaishoSakuseiYMDのgetメソッドです。
-     * 
+     *
      * @return furikomiMeisaishoSakuseiYMD
      */
     @CheckForNull
@@ -333,7 +336,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * furikomiMeisaishoSakuseiYMDのsetメソッドです。
-     * 
+     *
      * @param furikomiMeisaishoSakuseiYMD furikomiMeisaishoSakuseiYMD
      */
     public void setFurikomiMeisaishoSakuseiYMD(FlexibleDate furikomiMeisaishoSakuseiYMD) {
@@ -342,9 +345,9 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * このエンティティの主キーが他の{@literal DbV7509KogakuShikyuHanteiKekkaFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7509KogakuShikyuHanteiKekkaFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -380,6 +383,7 @@ public class DbV7509KogakuShikyuHanteiKekkaFukushiEntity extends DbTableEntityBa
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

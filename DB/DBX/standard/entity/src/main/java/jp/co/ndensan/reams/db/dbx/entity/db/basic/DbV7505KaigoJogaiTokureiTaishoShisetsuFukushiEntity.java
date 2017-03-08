@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -10,15 +9,16 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import java.util.Objects;
 import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護除外住所地特例対象施設・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTableEntityBase<DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7505KaigoJogaiTokureiTaishoShisetsuFukushi");
 
@@ -47,7 +47,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaShubetsuのgetメソッドです。
-     * 
+     *
      * @return jigyoshaShubetsu
      */
     @CheckForNull
@@ -57,7 +57,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaShubetsuのsetメソッドです。
-     * 
+     *
      * @param jigyoshaShubetsu jigyoshaShubetsu
      */
     public void setJigyoshaShubetsu(RString jigyoshaShubetsu) {
@@ -66,7 +66,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaNoのgetメソッドです。
-     * 
+     *
      * @return jigyoshaNo
      */
     @CheckForNull
@@ -76,7 +76,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaNoのsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo jigyoshaNo
      */
     public void setJigyoshaNo(RString jigyoshaNo) {
@@ -85,7 +85,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yukoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return yukoKaishiYMD
      */
     @CheckForNull
@@ -95,7 +95,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yukoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param yukoKaishiYMD yukoKaishiYMD
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -104,7 +104,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yukoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return yukoShuryoYMD
      */
     @CheckForNull
@@ -114,7 +114,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yukoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param yukoShuryoYMD yukoShuryoYMD
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -123,7 +123,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * kannaiKangaiKubunのgetメソッドです。
-     * 
+     *
      * @return kannaiKangaiKubun
      */
     @CheckForNull
@@ -133,7 +133,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * kannaiKangaiKubunのsetメソッドです。
-     * 
+     *
      * @param kannaiKangaiKubun kannaiKangaiKubun
      */
     public void setKannaiKangaiKubun(RString kannaiKangaiKubun) {
@@ -142,7 +142,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaMeishoのgetメソッドです。
-     * 
+     *
      * @return jigyoshaMeisho
      */
     @CheckForNull
@@ -152,7 +152,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaMeishoのsetメソッドです。
-     * 
+     *
      * @param jigyoshaMeisho jigyoshaMeisho
      */
     public void setJigyoshaMeisho(AtenaMeisho jigyoshaMeisho) {
@@ -161,7 +161,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaKanaMeishoのgetメソッドです。
-     * 
+     *
      * @return jigyoshaKanaMeisho
      */
     @CheckForNull
@@ -171,7 +171,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaKanaMeishoのsetメソッドです。
-     * 
+     *
      * @param jigyoshaKanaMeisho jigyoshaKanaMeisho
      */
     public void setJigyoshaKanaMeisho(AtenaKanaMeisho jigyoshaKanaMeisho) {
@@ -180,7 +180,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yubinNoのgetメソッドです。
-     * 
+     *
      * @return yubinNo
      */
     @CheckForNull
@@ -190,7 +190,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yubinNoのsetメソッドです。
-     * 
+     *
      * @param yubinNo yubinNo
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -199,7 +199,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaJushoのgetメソッドです。
-     * 
+     *
      * @return jigyoshaJusho
      */
     @CheckForNull
@@ -209,7 +209,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaJushoのsetメソッドです。
-     * 
+     *
      * @param jigyoshaJusho jigyoshaJusho
      */
     public void setJigyoshaJusho(RString jigyoshaJusho) {
@@ -218,7 +218,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaKanaJushoのgetメソッドです。
-     * 
+     *
      * @return jigyoshaKanaJusho
      */
     @CheckForNull
@@ -228,7 +228,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoshaKanaJushoのsetメソッドです。
-     * 
+     *
      * @param jigyoshaKanaJusho jigyoshaKanaJusho
      */
     public void setJigyoshaKanaJusho(RString jigyoshaKanaJusho) {
@@ -237,7 +237,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * telNoのgetメソッドです。
-     * 
+     *
      * @return telNo
      */
     @CheckForNull
@@ -247,7 +247,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * telNoのsetメソッドです。
-     * 
+     *
      * @param telNo telNo
      */
     public void setTelNo(TelNo telNo) {
@@ -256,7 +256,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * faxNoのgetメソッドです。
-     * 
+     *
      * @return faxNo
      */
     @CheckForNull
@@ -266,7 +266,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * faxNoのsetメソッドです。
-     * 
+     *
      * @param faxNo faxNo
      */
     public void setFaxNo(TelNo faxNo) {
@@ -275,7 +275,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * idoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return idoJiyuCode
      */
     @CheckForNull
@@ -285,7 +285,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * idoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param idoJiyuCode idoJiyuCode
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
@@ -294,7 +294,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * idoYMDのgetメソッドです。
-     * 
+     *
      * @return idoYMD
      */
     @CheckForNull
@@ -304,7 +304,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * idoYMDのsetメソッドです。
-     * 
+     *
      * @param idoYMD idoYMD
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -313,7 +313,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * daihyoshaMeishoのgetメソッドです。
-     * 
+     *
      * @return daihyoshaMeisho
      */
     @CheckForNull
@@ -323,7 +323,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * daihyoshaMeishoのsetメソッドです。
-     * 
+     *
      * @param daihyoshaMeisho daihyoshaMeisho
      */
     public void setDaihyoshaMeisho(AtenaMeisho daihyoshaMeisho) {
@@ -332,7 +332,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * daihyoshaKanaMeishoのgetメソッドです。
-     * 
+     *
      * @return daihyoshaKanaMeisho
      */
     @CheckForNull
@@ -342,7 +342,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * daihyoshaKanaMeishoのsetメソッドです。
-     * 
+     *
      * @param daihyoshaKanaMeisho daihyoshaKanaMeisho
      */
     public void setDaihyoshaKanaMeisho(AtenaKanaMeisho daihyoshaKanaMeisho) {
@@ -351,7 +351,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yakushokuのgetメソッドです。
-     * 
+     *
      * @return yakushoku
      */
     @CheckForNull
@@ -361,7 +361,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * yakushokuのsetメソッドです。
-     * 
+     *
      * @param yakushoku yakushoku
      */
     public void setYakushoku(RString yakushoku) {
@@ -370,7 +370,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * bikoのgetメソッドです。
-     * 
+     *
      * @return biko
      */
     @CheckForNull
@@ -380,7 +380,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * bikoのsetメソッドです。
-     * 
+     *
      * @param biko biko
      */
     public void setBiko(RString biko) {
@@ -389,7 +389,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoKaishiYMD
      */
     @CheckForNull
@@ -399,7 +399,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoKaishiYMD jigyoKaishiYMD
      */
     public void setJigyoKaishiYMD(FlexibleDate jigyoKaishiYMD) {
@@ -408,7 +408,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoKyushiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoKyushiYMD
      */
     @CheckForNull
@@ -418,7 +418,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoKyushiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoKyushiYMD jigyoKyushiYMD
      */
     public void setJigyoKyushiYMD(FlexibleDate jigyoKyushiYMD) {
@@ -427,7 +427,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoHaishiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoHaishiYMD
      */
     @CheckForNull
@@ -437,7 +437,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoHaishiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoHaishiYMD jigyoHaishiYMD
      */
     public void setJigyoHaishiYMD(FlexibleDate jigyoHaishiYMD) {
@@ -446,7 +446,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoSaikaiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoSaikaiYMD
      */
     @CheckForNull
@@ -456,7 +456,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * jigyoSaikaiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoSaikaiYMD jigyoSaikaiYMD
      */
     public void setJigyoSaikaiYMD(FlexibleDate jigyoSaikaiYMD) {
@@ -465,9 +465,9 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * このエンティティの主キーが他の{@literal DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -509,6 +509,7 @@ public class DbV7505KaigoJogaiTokureiTaishoShisetsuFukushiEntity extends DbTable
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

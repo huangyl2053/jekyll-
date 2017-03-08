@@ -7,12 +7,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 総合事業対象者・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<DbV7510SogoJigyoTaishoshaFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7510SogoJigyoTaishoshaFukushi");
 
@@ -26,7 +29,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -36,7 +39,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -45,7 +48,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -55,7 +58,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -64,7 +67,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * tekiyoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoKaishiYMD
      */
     @CheckForNull
@@ -74,7 +77,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * tekiyoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYMD tekiyoKaishiYMD
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
@@ -83,7 +86,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * tekiyoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoShuryoYMD
      */
     @CheckForNull
@@ -93,7 +96,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * tekiyoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYMD tekiyoShuryoYMD
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
@@ -102,7 +105,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * uketsukeYMDのgetメソッドです。
-     * 
+     *
      * @return uketsukeYMD
      */
     @CheckForNull
@@ -112,7 +115,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * uketsukeYMDのsetメソッドです。
-     * 
+     *
      * @param uketsukeYMD uketsukeYMD
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -121,7 +124,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * ketteiYMDのgetメソッドです。
-     * 
+     *
      * @return ketteiYMD
      */
     @CheckForNull
@@ -131,7 +134,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * ketteiYMDのsetメソッドです。
-     * 
+     *
      * @param ketteiYMD ketteiYMD
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -140,7 +143,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * checklistJisshiYMDのgetメソッドです。
-     * 
+     *
      * @return checklistJisshiYMD
      */
     @CheckForNull
@@ -150,7 +153,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * checklistJisshiYMDのsetメソッドです。
-     * 
+     *
      * @param checklistJisshiYMD checklistJisshiYMD
      */
     public void setChecklistJisshiYMD(FlexibleDate checklistJisshiYMD) {
@@ -159,9 +162,9 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbV7510SogoJigyoTaishoshaFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7510SogoJigyoTaishoshaFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -188,6 +191,7 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -196,5 +200,4 @@ public class DbV7510SogoJigyoTaishoshaFukushiEntity extends DbTableEntityBase<Db
     }
 
 // </editor-fold>
-
 }

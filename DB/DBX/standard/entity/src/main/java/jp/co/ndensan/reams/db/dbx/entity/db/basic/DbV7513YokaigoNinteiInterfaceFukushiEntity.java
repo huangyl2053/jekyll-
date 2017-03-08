@@ -10,12 +10,15 @@ import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 要介護認定インタフェース情報・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBase<DbV7513YokaigoNinteiInterfaceFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7513YokaigoNinteiInterfaceFukushi");
 
@@ -70,7 +73,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinseishoKanriNoのgetメソッドです。
-     * 
+     *
      * @return shinseishoKanriNo
      */
     @CheckForNull
@@ -80,7 +83,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinseishoKanriNoのsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo shinseishoKanriNo
      */
     public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
@@ -89,7 +92,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -99,7 +102,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -108,7 +111,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -118,7 +121,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(RString rirekiNo) {
@@ -127,7 +130,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * torikomiTimestampのgetメソッドです。
-     * 
+     *
      * @return torikomiTimestamp
      */
     @CheckForNull
@@ -137,7 +140,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * torikomiTimestampのsetメソッドです。
-     * 
+     *
      * @param torikomiTimestamp torikomiTimestamp
      */
     public void setTorikomiTimestamp(YMDHMS torikomiTimestamp) {
@@ -146,7 +149,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * torikomiKubunのgetメソッドです。
-     * 
+     *
      * @return torikomiKubun
      */
     @CheckForNull
@@ -156,7 +159,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * torikomiKubunのsetメソッドです。
-     * 
+     *
      * @param torikomiKubun torikomiKubun
      */
     public void setTorikomiKubun(RString torikomiKubun) {
@@ -165,7 +168,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinseiShubetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shinseiShubetsuCode
      */
     @CheckForNull
@@ -175,7 +178,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinseiShubetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shinseiShubetsuCode shinseiShubetsuCode
      */
     public void setShinseiShubetsuCode(RString shinseiShubetsuCode) {
@@ -184,7 +187,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * torisageKubunCodeのgetメソッドです。
-     * 
+     *
      * @return torisageKubunCode
      */
     @CheckForNull
@@ -194,7 +197,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * torisageKubunCodeのsetメソッドです。
-     * 
+     *
      * @param torisageKubunCode torisageKubunCode
      */
     public void setTorisageKubunCode(RString torisageKubunCode) {
@@ -203,7 +206,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinseiYMDのgetメソッドです。
-     * 
+     *
      * @return shinseiYMD
      */
     @CheckForNull
@@ -213,7 +216,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinseiYMDのsetメソッドです。
-     * 
+     *
      * @param shinseiYMD shinseiYMD
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -222,7 +225,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * iryoKikanCodeのgetメソッドです。
-     * 
+     *
      * @return iryoKikanCode
      */
     @CheckForNull
@@ -232,7 +235,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * iryoKikanCodeのsetメソッドです。
-     * 
+     *
      * @param iryoKikanCode iryoKikanCode
      */
     public void setIryoKikanCode(RString iryoKikanCode) {
@@ -241,7 +244,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shujiiCodeのgetメソッドです。
-     * 
+     *
      * @return shujiiCode
      */
     @CheckForNull
@@ -251,7 +254,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shujiiCodeのsetメソッドです。
-     * 
+     *
      * @param shujiiCode shujiiCode
      */
     public void setShujiiCode(RString shujiiCode) {
@@ -260,7 +263,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ikenshoIraiYMDのgetメソッドです。
-     * 
+     *
      * @return ikenshoIraiYMD
      */
     @CheckForNull
@@ -270,7 +273,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ikenshoIraiYMDのsetメソッドです。
-     * 
+     *
      * @param ikenshoIraiYMD ikenshoIraiYMD
      */
     public void setIkenshoIraiYMD(FlexibleDate ikenshoIraiYMD) {
@@ -279,7 +282,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ikenshoToriyoseYMDのgetメソッドです。
-     * 
+     *
      * @return ikenshoToriyoseYMD
      */
     @CheckForNull
@@ -289,7 +292,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ikenshoToriyoseYMDのsetメソッドです。
-     * 
+     *
      * @param ikenshoToriyoseYMD ikenshoToriyoseYMD
      */
     public void setIkenshoToriyoseYMD(FlexibleDate ikenshoToriyoseYMD) {
@@ -298,7 +301,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosaItakuYMDのgetメソッドです。
-     * 
+     *
      * @return chosaItakuYMD
      */
     @CheckForNull
@@ -308,7 +311,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosaItakuYMDのsetメソッドです。
-     * 
+     *
      * @param chosaItakuYMD chosaItakuYMD
      */
     public void setChosaItakuYMD(FlexibleDate chosaItakuYMD) {
@@ -317,7 +320,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosaShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return chosaShuryoYMD
      */
     @CheckForNull
@@ -327,7 +330,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosaShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param chosaShuryoYMD chosaShuryoYMD
      */
     public void setChosaShuryoYMD(FlexibleDate chosaShuryoYMD) {
@@ -336,7 +339,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosaItakusakiCodeのgetメソッドです。
-     * 
+     *
      * @return chosaItakusakiCode
      */
     @CheckForNull
@@ -346,7 +349,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosaItakusakiCodeのsetメソッドです。
-     * 
+     *
      * @param chosaItakusakiCode chosaItakusakiCode
      */
     public void setChosaItakusakiCode(JigyoshaNo chosaItakusakiCode) {
@@ -355,7 +358,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosainCodeのgetメソッドです。
-     * 
+     *
      * @return chosainCode
      */
     @CheckForNull
@@ -365,7 +368,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * chosainCodeのsetメソッドです。
-     * 
+     *
      * @param chosainCode chosainCode
      */
     public void setChosainCode(RString chosainCode) {
@@ -374,7 +377,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiYMDのgetメソッドです。
-     * 
+     *
      * @return ichijiHanteiYMD
      */
     @CheckForNull
@@ -384,7 +387,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiYMDのsetメソッドです。
-     * 
+     *
      * @param ichijiHanteiYMD ichijiHanteiYMD
      */
     public void setIchijiHanteiYMD(FlexibleDate ichijiHanteiYMD) {
@@ -393,7 +396,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiKekkaCodeのgetメソッドです。
-     * 
+     *
      * @return ichijiHanteiKekkaCode
      */
     @CheckForNull
@@ -403,7 +406,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiKekkaCodeのsetメソッドです。
-     * 
+     *
      * @param ichijiHanteiKekkaCode ichijiHanteiKekkaCode
      */
     public void setIchijiHanteiKekkaCode(RString ichijiHanteiKekkaCode) {
@@ -412,7 +415,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiKekkaKasanCodeのgetメソッドです。
-     * 
+     *
      * @return ichijiHanteiKekkaKasanCode
      */
     @CheckForNull
@@ -422,7 +425,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiKekkaKasanCodeのsetメソッドです。
-     * 
+     *
      * @param ichijiHanteiKekkaKasanCode ichijiHanteiKekkaKasanCode
      */
     public void setIchijiHanteiKekkaKasanCode(RString ichijiHanteiKekkaKasanCode) {
@@ -431,7 +434,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinsakaiShiryoSakuseiYMDのgetメソッドです。
-     * 
+     *
      * @return shinsakaiShiryoSakuseiYMD
      */
     @CheckForNull
@@ -441,7 +444,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinsakaiShiryoSakuseiYMDのsetメソッドです。
-     * 
+     *
      * @param shinsakaiShiryoSakuseiYMD shinsakaiShiryoSakuseiYMD
      */
     public void setShinsakaiShiryoSakuseiYMD(FlexibleDate shinsakaiShiryoSakuseiYMD) {
@@ -450,7 +453,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinsakaiYoteiYMDのgetメソッドです。
-     * 
+     *
      * @return shinsakaiYoteiYMD
      */
     @CheckForNull
@@ -460,7 +463,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinsakaiYoteiYMDのsetメソッドです。
-     * 
+     *
      * @param shinsakaiYoteiYMD shinsakaiYoteiYMD
      */
     public void setShinsakaiYoteiYMD(FlexibleDate shinsakaiYoteiYMD) {
@@ -469,7 +472,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * gogitaiNoのgetメソッドです。
-     * 
+     *
      * @return gogitaiNo
      */
     @CheckForNull
@@ -479,7 +482,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * gogitaiNoのsetメソッドです。
-     * 
+     *
      * @param gogitaiNo gogitaiNo
      */
     public void setGogitaiNo(int gogitaiNo) {
@@ -488,7 +491,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * nijiHanteiYMDのgetメソッドです。
-     * 
+     *
      * @return nijiHanteiYMD
      */
     @CheckForNull
@@ -498,7 +501,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * nijiHanteiYMDのsetメソッドです。
-     * 
+     *
      * @param nijiHanteiYMD nijiHanteiYMD
      */
     public void setNijiHanteiYMD(FlexibleDate nijiHanteiYMD) {
@@ -507,7 +510,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * nijiHanteiKekkaCodeのgetメソッドです。
-     * 
+     *
      * @return nijiHanteiKekkaCode
      */
     @CheckForNull
@@ -517,7 +520,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * nijiHanteiKekkaCodeのsetメソッドです。
-     * 
+     *
      * @param nijiHanteiKekkaCode nijiHanteiKekkaCode
      */
     public void setNijiHanteiKekkaCode(RString nijiHanteiKekkaCode) {
@@ -526,7 +529,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ninteiYukoKikanStartのgetメソッドです。
-     * 
+     *
      * @return ninteiYukoKikanStart
      */
     @CheckForNull
@@ -536,7 +539,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ninteiYukoKikanStartのsetメソッドです。
-     * 
+     *
      * @param ninteiYukoKikanStart ninteiYukoKikanStart
      */
     public void setNinteiYukoKikanStart(FlexibleDate ninteiYukoKikanStart) {
@@ -545,7 +548,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ninteiYukoKikanEndのgetメソッドです。
-     * 
+     *
      * @return ninteiYukoKikanEnd
      */
     @CheckForNull
@@ -555,7 +558,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ninteiYukoKikanEndのsetメソッドです。
-     * 
+     *
      * @param ninteiYukoKikanEnd ninteiYukoKikanEnd
      */
     public void setNinteiYukoKikanEnd(FlexibleDate ninteiYukoKikanEnd) {
@@ -564,7 +567,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * serviceHenkoRiyuCodeのgetメソッドです。
-     * 
+     *
      * @return serviceHenkoRiyuCode
      */
     @CheckForNull
@@ -574,7 +577,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * serviceHenkoRiyuCodeのsetメソッドです。
-     * 
+     *
      * @param serviceHenkoRiyuCode serviceHenkoRiyuCode
      */
     public void setServiceHenkoRiyuCode(RString serviceHenkoRiyuCode) {
@@ -583,7 +586,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * tokuteiShippeiCodeのgetメソッドです。
-     * 
+     *
      * @return tokuteiShippeiCode
      */
     @CheckForNull
@@ -593,7 +596,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * tokuteiShippeiCodeのsetメソッドです。
-     * 
+     *
      * @param tokuteiShippeiCode tokuteiShippeiCode
      */
     public void setTokuteiShippeiCode(RString tokuteiShippeiCode) {
@@ -602,7 +605,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shogaiKoreiJiritsudoのgetメソッドです。
-     * 
+     *
      * @return shogaiKoreiJiritsudo
      */
     @CheckForNull
@@ -612,7 +615,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shogaiKoreiJiritsudoのsetメソッドです。
-     * 
+     *
      * @param shogaiKoreiJiritsudo shogaiKoreiJiritsudo
      */
     public void setShogaiKoreiJiritsudo(RString shogaiKoreiJiritsudo) {
@@ -621,7 +624,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ninchishoKoreiJiritsudoのgetメソッドです。
-     * 
+     *
      * @return ninchishoKoreiJiritsudo
      */
     @CheckForNull
@@ -631,7 +634,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ninchishoKoreiJiritsudoのsetメソッドです。
-     * 
+     *
      * @param ninchishoKoreiJiritsudo ninchishoKoreiJiritsudo
      */
     public void setNinchishoKoreiJiritsudo(RString ninchishoKoreiJiritsudo) {
@@ -640,7 +643,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinsakaiIkenのgetメソッドです。
-     * 
+     *
      * @return shinsakaiIken
      */
     @CheckForNull
@@ -650,7 +653,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * shinsakaiIkenのsetメソッドです。
-     * 
+     *
      * @param shinsakaiIken shinsakaiIken
      */
     public void setShinsakaiIken(RString shinsakaiIken) {
@@ -659,7 +662,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * versionNoのgetメソッドです。
-     * 
+     *
      * @return versionNo
      */
     @CheckForNull
@@ -669,7 +672,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * versionNoのsetメソッドです。
-     * 
+     *
      * @param versionNo versionNo
      */
     public void setVersionNo(RString versionNo) {
@@ -678,7 +681,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiNaiyoのgetメソッドです。
-     * 
+     *
      * @return ichijiHanteiNaiyo
      */
     @CheckForNull
@@ -688,7 +691,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiNaiyoのsetメソッドです。
-     * 
+     *
      * @param ichijiHanteiNaiyo ichijiHanteiNaiyo
      */
     public void setIchijiHanteiNaiyo(RString ichijiHanteiNaiyo) {
@@ -697,7 +700,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiNaiyo2のgetメソッドです。
-     * 
+     *
      * @return ichijiHanteiNaiyo2
      */
     @CheckForNull
@@ -707,7 +710,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * ichijiHanteiNaiyo2のsetメソッドです。
-     * 
+     *
      * @param ichijiHanteiNaiyo2 ichijiHanteiNaiyo2
      */
     public void setIchijiHanteiNaiyo2(RString ichijiHanteiNaiyo2) {
@@ -716,7 +719,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * zenTorikomiTimestampのgetメソッドです。
-     * 
+     *
      * @return zenTorikomiTimestamp
      */
     @CheckForNull
@@ -726,7 +729,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * zenTorikomiTimestampのsetメソッドです。
-     * 
+     *
      * @param zenTorikomiTimestamp zenTorikomiTimestamp
      */
     public void setZenTorikomiTimestamp(YMDHMS zenTorikomiTimestamp) {
@@ -735,7 +738,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * keshikomiFlagのgetメソッドです。
-     * 
+     *
      * @return keshikomiFlag
      */
     @CheckForNull
@@ -745,7 +748,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * keshikomiFlagのsetメソッドです。
-     * 
+     *
      * @param keshikomiFlag keshikomiFlag
      */
     public void setKeshikomiFlag(RString keshikomiFlag) {
@@ -754,7 +757,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * keshikomiTimestampのgetメソッドです。
-     * 
+     *
      * @return keshikomiTimestamp
      */
     @CheckForNull
@@ -764,7 +767,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * keshikomiTimestampのsetメソッドです。
-     * 
+     *
      * @param keshikomiTimestamp keshikomiTimestamp
      */
     public void setKeshikomiTimestamp(YMDHMS keshikomiTimestamp) {
@@ -773,7 +776,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku1のgetメソッドです。
-     * 
+     *
      * @return yobiKomoku1
      */
     @CheckForNull
@@ -783,7 +786,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku1のsetメソッドです。
-     * 
+     *
      * @param yobiKomoku1 yobiKomoku1
      */
     public void setYobiKomoku1(RString yobiKomoku1) {
@@ -792,7 +795,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku2のgetメソッドです。
-     * 
+     *
      * @return yobiKomoku2
      */
     @CheckForNull
@@ -802,7 +805,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku2のsetメソッドです。
-     * 
+     *
      * @param yobiKomoku2 yobiKomoku2
      */
     public void setYobiKomoku2(RString yobiKomoku2) {
@@ -811,7 +814,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku3のgetメソッドです。
-     * 
+     *
      * @return yobiKomoku3
      */
     @CheckForNull
@@ -821,7 +824,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku3のsetメソッドです。
-     * 
+     *
      * @param yobiKomoku3 yobiKomoku3
      */
     public void setYobiKomoku3(RString yobiKomoku3) {
@@ -830,7 +833,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku4のgetメソッドです。
-     * 
+     *
      * @return yobiKomoku4
      */
     @CheckForNull
@@ -840,7 +843,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku4のsetメソッドです。
-     * 
+     *
      * @param yobiKomoku4 yobiKomoku4
      */
     public void setYobiKomoku4(RString yobiKomoku4) {
@@ -849,7 +852,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku5のgetメソッドです。
-     * 
+     *
      * @return yobiKomoku5
      */
     @CheckForNull
@@ -859,7 +862,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKomoku5のsetメソッドです。
-     * 
+     *
      * @param yobiKomoku5 yobiKomoku5
      */
     public void setYobiKomoku5(RString yobiKomoku5) {
@@ -868,7 +871,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun1のgetメソッドです。
-     * 
+     *
      * @return yobiKubun1
      */
     @CheckForNull
@@ -878,7 +881,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun1のsetメソッドです。
-     * 
+     *
      * @param yobiKubun1 yobiKubun1
      */
     public void setYobiKubun1(RString yobiKubun1) {
@@ -887,7 +890,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun2のgetメソッドです。
-     * 
+     *
      * @return yobiKubun2
      */
     @CheckForNull
@@ -897,7 +900,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun2のsetメソッドです。
-     * 
+     *
      * @param yobiKubun2 yobiKubun2
      */
     public void setYobiKubun2(RString yobiKubun2) {
@@ -906,7 +909,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun3のgetメソッドです。
-     * 
+     *
      * @return yobiKubun3
      */
     @CheckForNull
@@ -916,7 +919,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun3のsetメソッドです。
-     * 
+     *
      * @param yobiKubun3 yobiKubun3
      */
     public void setYobiKubun3(RString yobiKubun3) {
@@ -925,7 +928,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun4のgetメソッドです。
-     * 
+     *
      * @return yobiKubun4
      */
     @CheckForNull
@@ -935,7 +938,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun4のsetメソッドです。
-     * 
+     *
      * @param yobiKubun4 yobiKubun4
      */
     public void setYobiKubun4(RString yobiKubun4) {
@@ -944,7 +947,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun5のgetメソッドです。
-     * 
+     *
      * @return yobiKubun5
      */
     @CheckForNull
@@ -954,7 +957,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * yobiKubun5のsetメソッドです。
-     * 
+     *
      * @param yobiKubun5 yobiKubun5
      */
     public void setYobiKubun5(RString yobiKubun5) {
@@ -963,7 +966,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * reserveのgetメソッドです。
-     * 
+     *
      * @return reserve
      */
     @CheckForNull
@@ -973,7 +976,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * reserveのsetメソッドです。
-     * 
+     *
      * @param reserve reserve
      */
     public void setReserve(RString reserve) {
@@ -982,9 +985,9 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * このエンティティの主キーが他の{@literal DbV7513YokaigoNinteiInterfaceFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7513YokaigoNinteiInterfaceFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -1052,6 +1055,7 @@ public class DbV7513YokaigoNinteiInterfaceFukushiEntity extends DbTableEntityBas
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護保険施設入退所・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV7504ShisetsuNyutaishoFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7504ShisetsuNyutaishoFukushi");
 
@@ -32,7 +35,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * shikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shikibetsuCode
      */
     @CheckForNull
@@ -42,7 +45,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * shikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -51,7 +54,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -61,7 +64,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -70,7 +73,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * shichosonCodeのgetメソッドです。
-     * 
+     *
      * @return shichosonCode
      */
     @CheckForNull
@@ -80,7 +83,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * shichosonCodeのsetメソッドです。
-     * 
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -89,7 +92,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * daichoShubetsuのgetメソッドです。
-     * 
+     *
      * @return daichoShubetsu
      */
     @CheckForNull
@@ -99,7 +102,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * daichoShubetsuのsetメソッドです。
-     * 
+     *
      * @param daichoShubetsu daichoShubetsu
      */
     public void setDaichoShubetsu(RString daichoShubetsu) {
@@ -108,7 +111,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoShisetsuShuruiのgetメソッドです。
-     * 
+     *
      * @return nyushoShisetsuShurui
      */
     @CheckForNull
@@ -118,7 +121,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoShisetsuShuruiのsetメソッドです。
-     * 
+     *
      * @param nyushoShisetsuShurui nyushoShisetsuShurui
      */
     public void setNyushoShisetsuShurui(RString nyushoShisetsuShurui) {
@@ -127,7 +130,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoShisetsuCodeのgetメソッドです。
-     * 
+     *
      * @return nyushoShisetsuCode
      */
     @CheckForNull
@@ -137,7 +140,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoShisetsuCodeのsetメソッドです。
-     * 
+     *
      * @param nyushoShisetsuCode nyushoShisetsuCode
      */
     public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
@@ -146,7 +149,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoShoriYMDのgetメソッドです。
-     * 
+     *
      * @return nyushoShoriYMD
      */
     @CheckForNull
@@ -156,7 +159,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoShoriYMDのsetメソッドです。
-     * 
+     *
      * @param nyushoShoriYMD nyushoShoriYMD
      */
     public void setNyushoShoriYMD(FlexibleDate nyushoShoriYMD) {
@@ -165,7 +168,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoYMDのgetメソッドです。
-     * 
+     *
      * @return nyushoYMD
      */
     @CheckForNull
@@ -175,7 +178,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * nyushoYMDのsetメソッドです。
-     * 
+     *
      * @param nyushoYMD nyushoYMD
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
@@ -184,7 +187,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * taishoShoriYMDのgetメソッドです。
-     * 
+     *
      * @return taishoShoriYMD
      */
     @CheckForNull
@@ -194,7 +197,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * taishoShoriYMDのsetメソッドです。
-     * 
+     *
      * @param taishoShoriYMD taishoShoriYMD
      */
     public void setTaishoShoriYMD(FlexibleDate taishoShoriYMD) {
@@ -203,7 +206,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * taishoYMDのgetメソッドです。
-     * 
+     *
      * @return taishoYMD
      */
     @CheckForNull
@@ -213,7 +216,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * taishoYMDのsetメソッドです。
-     * 
+     *
      * @param taishoYMD taishoYMD
      */
     public void setTaishoYMD(FlexibleDate taishoYMD) {
@@ -222,7 +225,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * roomKigoNoのgetメソッドです。
-     * 
+     *
      * @return roomKigoNo
      */
     @CheckForNull
@@ -232,7 +235,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * roomKigoNoのsetメソッドです。
-     * 
+     *
      * @param roomKigoNo roomKigoNo
      */
     public void setRoomKigoNo(RString roomKigoNo) {
@@ -241,9 +244,9 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * このエンティティの主キーが他の{@literal DbV7504ShisetsuNyutaishoFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7504ShisetsuNyutaishoFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -274,6 +277,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

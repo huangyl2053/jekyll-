@@ -13,10 +13,12 @@ import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護徴収方法テーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
