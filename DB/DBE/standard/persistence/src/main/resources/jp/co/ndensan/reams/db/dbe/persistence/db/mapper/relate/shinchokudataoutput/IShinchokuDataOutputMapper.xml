@@ -989,7 +989,6 @@
         ON A."shinseishoKanriNo" = L."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS M
         ON L."shinsakaiKaisaiNo" = M."shinsakaiKaisaiNo"
-        AND DbT5105."shinsakaiKaisaiNo" = M."shinsakaiKaisaiNo"
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS N
         ON A."shinseishoKanriNo" = N."shinseishoKanriNo"

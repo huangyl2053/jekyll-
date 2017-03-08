@@ -344,6 +344,6 @@ public class IchijiHanteiKekkaResultConveter {
         if (d.equals(new Decimal(-1))) {
             return d;
         }
-        return d.divide(DIVISION_NUM);
+        return d.divide(DIVISION_NUM).roundUpTo(2);
     }
 }
