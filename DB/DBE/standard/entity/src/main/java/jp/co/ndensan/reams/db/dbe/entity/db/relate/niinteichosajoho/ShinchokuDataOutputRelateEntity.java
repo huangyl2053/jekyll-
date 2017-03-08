@@ -58,11 +58,11 @@ public class ShinchokuDataOutputRelateEntity {
     private RString ninteichosaIraiYMD;
     private RString ninteichosaJisshiYMD;
     private RString DbT5201_ninteichosaItakusakiCode;
-    private RString DbT5202_ninteichosaItakusakiCode;
+    private RString DbT5202_chosaItakusakiCode;
     private RString DbT5201_chosaItakuKubun;
     private RString DbT5202_chosaItakuKubun;
     private RString DbT5201_ninteiChosainCode;
-    private RString DbT5202_ninteiChosainCode;
+    private RString DbT5202_chosainCode;
     private RString DbT5201_chosainShikaku;
     private RString DbT5202_chosainShikaku;
     private RString ichijiHanteiYMD;

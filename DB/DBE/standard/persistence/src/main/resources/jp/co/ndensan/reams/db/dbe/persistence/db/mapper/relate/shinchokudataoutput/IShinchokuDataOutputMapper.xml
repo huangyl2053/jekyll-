@@ -273,11 +273,11 @@
         <result property="ninteichosaIraiYMD" column= "G_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteichosaJisshiYMD" column="H_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="DbT5201_ninteichosaItakusakiCode" column="G_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="DbT5202_ninteichosaItakusakiCode" column="H_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="DbT5201_chosaItakuKubun" column="G_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="DbT5202_chosaItakuKubun" column="H_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_chosaItakusakiCode" column="H_chosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5201_chosaItakuKubun" column="I_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_chosaItakuKubun" column="I2_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="DbT5201_ninteiChosainCode" column="G_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="DbT5202_ninteiChosainCode" column="H_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5202_chosainCode" column="H_chosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="DbT5201_chosainShikaku" column="J_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="DbT5202_chosainShikaku" column="J2_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ichijiHanteiYMD" column="K_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -600,12 +600,12 @@
         ,要介護認定主治医一時テーブル."remban69" as "要介護認定主治医一時テーブル_remban69"
         , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
         , G."ninteichosaItakusakiCode"               AS "G_ninteichosaItakusakiCode"
-        , G."chosaItakuKubun"                        AS "G_chosaItakuKubun"
         , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
         , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
-        , H."ninteichosaItakusakiCode"               AS "H_ninteichosaItakusakiCode"
-        , H."chosaItakuKubun"                        AS "H_chosaItakuKubun"
-        , H."ninteiChosainCode"                      AS "H_ninteiChosainCode"
+        , H."chosaItakusakiCode"                     AS "H_chosaItakusakiCode"
+        , H."chosainCode"                            AS "H_chosainCode"
+        , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
+        , I2."chosaItakuKubun"                       AS "I2_chosaItakuKubun"
         , J."chosainShikaku"                         AS "J_chosainShikaku"
         , J2."chosainShikaku"                        AS "J2_chosainShikaku"
         , K."ichijiHanteiYMD"                        AS "K_ichijiHanteiYMD"
@@ -963,6 +963,14 @@
         H."shinseishoKanriNo" = H1."shinseishoKanriNo"
         AND H."ninteichosaRirekiNo" <![CDATA[<]]> H1."ninteichosaRirekiNo"
         )
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I
+        ON G."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode"
+        AND I."shichosonCode" = A."shichosonCode"
+        AND I."jokyoFlag" = TRUE
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I2
+        ON H."chosaItakusakiCode" = I2."ninteichosaItakusakiCode"
+        AND I2."shichosonCode" = A."shichosonCode"
+        AND I2."jokyoFlag" = TRUE    
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS J
         ON G."ninteichosaItakusakiCode" = J."ninteiChosaItakusakiCode"
         AND G."ninteiChosainCode" = J."ninteiChosainCode"

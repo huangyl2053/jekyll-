@@ -543,12 +543,12 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set意見書入手日(nullToEmpty(entity.getIkenshoJuryoYMD()));
         eucEntity.set調査依頼日(nullToEmpty(entity.getNinteichosaIraiYMD()));
         eucEntity.set調査実施日(nullToEmpty(entity.getNinteichosaJisshiYMD()));
-        eucEntity.set指定居宅介護支援事業者等番号(!RString.isNullOrEmpty(entity.getDbT5202_ninteichosaItakusakiCode())
-                ? nullToEmpty(entity.getDbT5202_ninteichosaItakusakiCode()) : nullToEmpty(entity.getDbT5201_ninteichosaItakusakiCode()));
+        eucEntity.set指定居宅介護支援事業者等番号(!RString.isNullOrEmpty(entity.getDbT5202_chosaItakusakiCode())
+                ? nullToEmpty(entity.getDbT5202_chosaItakusakiCode()) : nullToEmpty(entity.getDbT5201_ninteichosaItakusakiCode()));
         eucEntity.set委託区分(!RString.isNullOrEmpty(entity.getDbT5202_chosaItakuKubun()) 
                 ? nullToEmpty(entity.getDbT5202_chosaItakuKubun()) : nullToEmpty(entity.getDbT5201_chosaItakuKubun()));
-        eucEntity.set認定調査員番号(!RString.isNullOrEmpty(entity.getDbT5202_ninteiChosainCode())
-                ? nullToEmpty(entity.getDbT5202_ninteiChosainCode()) : nullToEmpty(entity.getDbT5201_ninteiChosainCode()));
+        eucEntity.set認定調査員番号(!RString.isNullOrEmpty(entity.getDbT5202_chosainCode())
+                ? nullToEmpty(entity.getDbT5202_chosainCode()) : nullToEmpty(entity.getDbT5201_ninteiChosainCode()));
         eucEntity.set認定調査員資格コード(!RString.isNullOrEmpty(entity.getDbT5202_chosainShikaku())
                 ? nullToEmpty(entity.getDbT5202_chosainShikaku()) : nullToEmpty(entity.getDbT5201_chosainShikaku()));
         eucEntity.set一次判定日(nullToEmpty(entity.getIchijiHanteiYMD()));
