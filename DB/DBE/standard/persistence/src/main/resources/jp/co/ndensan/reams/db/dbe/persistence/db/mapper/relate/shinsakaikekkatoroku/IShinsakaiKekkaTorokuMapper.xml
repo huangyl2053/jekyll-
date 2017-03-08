@@ -7,30 +7,33 @@
     <select resultOrdered="true" id="getヘッドエリア内容検索" resultMap="resultMap_ShinsakaiKekkaTorokuRelateEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"  fetchSize="500">
         SELECT
-        '第' || DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
-        ,DbT5591GogitaiJoho."gogitaiMei" AS "gogitaiMei"
-        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"AS "shinsakaiWariateZumiNinzu"
-        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiJisshiNinzu" AS "shinsakaiJisshiNinzu"
-        ,DbT5501ShinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
-        ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName"
-        ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode"
-        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD"
-        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaishiTime" AS "shinsakaiKaishiTime"
-        ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiShuryoTime" AS "shinsakaiShuryoTime"
-        ,DbT5591GogitaiJoho."gogitaiSeishinkaSonzaiFlag" AS "gogitaiSeishinkaSonzaiFlag"
-        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
+            '第' || DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
+            ,DbT5591GogitaiJoho."gogitaiMei" AS "gogitaiMei"
+            ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiWariateZumiNinzu"AS "shinsakaiWariateZumiNinzu"
+            ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiJisshiNinzu" AS "shinsakaiJisshiNinzu"
+            ,DbT5501ShinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
+            ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName"
+            ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode"
+            ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" AS "shinsakaiKaisaiYMD"
+            ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaishiTime" AS "shinsakaiKaishiTime"
+            ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiShuryoTime" AS "shinsakaiShuryoTime"
+            ,DbT5591GogitaiJoho."gogitaiSeishinkaSonzaiFlag" AS "gogitaiSeishinkaSonzaiFlag"
+            ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
         FROM
-        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
-        LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
-        ON DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5591GogitaiJoho" DbT5591GogitaiJoho
-        ON DbT5591GogitaiJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
-        AND DbT5591GogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
-        AND DbT5591GogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
-        INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592ShinsakaiKaisaiBashoJoho
-        ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
+        LEFT JOIN
+            rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
+             ON DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        INNER JOIN
+            rgdb."DbT5591GogitaiJoho" DbT5591GogitaiJoho
+             ON DbT5591GogitaiJoho."gogitaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."gogitaiNo"
+            AND DbT5591GogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD"
+            AND DbT5591GogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD"
+        INNER JOIN
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho" DbT5592ShinsakaiKaisaiBashoJoho
+             ON DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiBashoCode"
         WHERE
-        TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo") =TRIM(#{開催番号})
+            TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo") = TRIM(#{開催番号})
     </select>
 
     <resultMap id="resultMap_ShinsakaiKekkaTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuRelateEntity" autoMapping="true">
