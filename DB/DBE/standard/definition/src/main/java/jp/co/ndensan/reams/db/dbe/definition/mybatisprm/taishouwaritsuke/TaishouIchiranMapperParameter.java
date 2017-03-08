@@ -25,13 +25,14 @@ public final class TaishouIchiranMapperParameter {
     private final RString ennki;
     private final boolean isSort;
     private final boolean isShiryosakuseizumiKomi;
+    private final boolean isDummyGogitai;
 
     /**
      * コンストラクタです。 「審査会順番を振りなおす」ボタンを押下しない場合
      *
      * @param kaisaiNo 開催番号
      */
-    private TaishouIchiranMapperParameter(RString kaisaiNo) {
+    private TaishouIchiranMapperParameter(RString kaisaiNo, boolean isDummyGogitai) {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = false;
         this.customOrder = RString.EMPTY;
@@ -39,6 +40,7 @@ public final class TaishouIchiranMapperParameter {
         this.ennki = ShoriJotaiKubun.延期.getコード();
         this.isSort = false;
         this.isShiryosakuseizumiKomi = false;
+        this.isDummyGogitai = isDummyGogitai;
     }
     
     /**
@@ -48,7 +50,7 @@ public final class TaishouIchiranMapperParameter {
      * @param isSort ソート検索有無
      * @param isShiryosakuseizumiKomi 審査会資料作成済みデータも含むかフラグ
      */
-    private TaishouIchiranMapperParameter(RString kaisaiNo, boolean isSort, boolean isShiryosakuseizumiKomi) {
+    private TaishouIchiranMapperParameter(RString kaisaiNo, boolean isSort, boolean isShiryosakuseizumiKomi, boolean isDummyGogitai) {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = false;
         this.customOrder = RString.EMPTY;
@@ -56,6 +58,7 @@ public final class TaishouIchiranMapperParameter {
         this.ennki = ShoriJotaiKubun.延期.getコード();
         this.isSort = isSort;
         this.isShiryosakuseizumiKomi = isShiryosakuseizumiKomi;
+        this.isDummyGogitai = isDummyGogitai;
     }
 
     /**
@@ -66,7 +69,7 @@ public final class TaishouIchiranMapperParameter {
      * @param isSort ソート検索有無
      * @param isShiryosakuseizumiKomi 審査会資料作成済みデータも含むかフラグ
      */
-    private TaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder, boolean isSort, boolean isShiryosakuseizumiKomi) {
+    private TaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder, boolean isSort, boolean isShiryosakuseizumiKomi, boolean isDummyGogitai) {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = true;
         this.tsujou = ShoriJotaiKubun.通常.getコード();
@@ -79,6 +82,7 @@ public final class TaishouIchiranMapperParameter {
                 .replace("DbT5912ShujiiJoho", "DbT5912");
         this.isSort = isSort;
         this.isShiryosakuseizumiKomi = isShiryosakuseizumiKomi;
+        this.isDummyGogitai = isDummyGogitai;
     }
 
     /**
@@ -91,8 +95,8 @@ public final class TaishouIchiranMapperParameter {
      * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
      */
     public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(
-            RString kaisaiNo, RString customOrder, boolean isSort, boolean isShiryosakuseizumiKomi) {
-        return new TaishouIchiranMapperParameter(kaisaiNo, customOrder, isSort, isShiryosakuseizumiKomi);
+            RString kaisaiNo, RString customOrder, boolean isSort, boolean isShiryosakuseizumiKomi, boolean isDummyGogitai) {
+        return new TaishouIchiranMapperParameter(kaisaiNo, customOrder, isSort, isShiryosakuseizumiKomi, isDummyGogitai);
     }
 
     /**
@@ -110,8 +114,8 @@ public final class TaishouIchiranMapperParameter {
      * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
      */
     public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(
-            RString kaisaiNo, boolean isSort, boolean isShiryosakuseizumiKomi) {
-        return new TaishouIchiranMapperParameter(kaisaiNo, isSort, isShiryosakuseizumiKomi);
+            RString kaisaiNo, boolean isSort, boolean isShiryosakuseizumiKomi, boolean isDummyGogitai) {
+        return new TaishouIchiranMapperParameter(kaisaiNo, isSort, isShiryosakuseizumiKomi, isDummyGogitai);
     }
 
     /**
@@ -121,7 +125,7 @@ public final class TaishouIchiranMapperParameter {
      * @return 介護認定審査会対象者対象者一覧エリア内容検索パラメータ
      */
     public static TaishouIchiranMapperParameter createTaishouIchiranMapperParameter(
-            RString kaisaiNo) {
-        return new TaishouIchiranMapperParameter(kaisaiNo);
+            RString kaisaiNo, boolean isDummyGogitai) {
+        return new TaishouIchiranMapperParameter(kaisaiNo, isDummyGogitai);
     }
 }

@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshuBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
@@ -50,6 +52,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShinsakaiWariateJohoKenshuManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -90,6 +93,8 @@ public class TaishouWaritsukeHandler {
     private static final RString 厚労省IF識別コード_02 = new RString("02");
     private static final RString 厚労省IF識別コード_99 = new RString("99");
     private static final RString ZERO = new RString("0");
+    private static final RString 合議体精神科医存在フラグ_KEY = new RString("key0");
+    private static final RString 研修模擬_KEY = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -139,8 +144,9 @@ public class TaishouWaritsukeHandler {
      */
     public void 対象者一覧検索() {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
+        boolean isダミー = div.getChkKenshuMogi().getSelectedKeys().contains(研修模擬_KEY);
         TaishouIchiranMapperParameter parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo());
+                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), isダミー);
         List<Taishouichiran> ichiranList = finder.get対象者一覧(parameter);
         set対象者一覧(ichiranList);
     }
@@ -152,8 +158,9 @@ public class TaishouWaritsukeHandler {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         RString マスキングチェックタイミング = DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         boolean is一次判定後 = 一次判定後.equals(マスキングチェックタイミング);
+        boolean isダミー = div.getChkKenshuMogi().getSelectedKeys().contains(研修模擬_KEY);
         KohoshaIchiranMapperParameter parameter = KohoshaIchiranMapperParameter.createKohoshaIchiranMapperParameter(
-                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), is一次判定後);
+                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), is一次判定後, isダミー);
         List<KohoshaIchiran> ichiranList = finder.get候補者一覧(parameter);
         set候補者一覧(ichiranList);
     }
@@ -218,13 +225,14 @@ public class TaishouWaritsukeHandler {
         List<dgTaishoshaIchiran_Row> ソート対象者リスト = new ArrayList<>();
         List<Taishouichiran> ichiranList;
         TaishouIchiranMapperParameter parameter;
+        boolean isダミー = div.getChkKenshuMogi().getSelectedKeys().contains(研修模擬_KEY);
         if (審査会資料作成済込み有無) {
             if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
                 parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), true, 審査会資料作成済込み有無);
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), true, 審査会資料作成済込み有無, isダミー);
             } else {
                 parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序, true, 審査会資料作成済込み有無);
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序, true, 審査会資料作成済込み有無, isダミー);
             }
             ichiranList = finder.get対象者一覧(parameter);
             for (Taishouichiran taishoshaichiran : ichiranList) {
@@ -247,10 +255,10 @@ public class TaishouWaritsukeHandler {
             }
             if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
                 parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), true, 審査会資料作成済込み有無);
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), true, 審査会資料作成済込み有無, isダミー);
             } else {
                 parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序, true, 審査会資料作成済込み有無);
+                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序, true, 審査会資料作成済込み有無, isダミー);
             }
             ichiranList = finder.get対象者一覧(parameter);
             for (Taishouichiran taishoshaichiran : ichiranList) {
@@ -447,15 +455,24 @@ public class TaishouWaritsukeHandler {
             div.getTxtYoteiKaishiTime().setValue(new RTime(waritsukeHead.get予定開始時間()));
             div.getTxtYoteiShuryoTime().setValue(new RTime(waritsukeHead.get予定終了時間()));
             set審査会種類_精神科医所属(waritsukeHead.is合議体精神科医存在フラグ());
+            set研修模擬(waritsukeHead.is合議体ダミーフラグ());
         }
     }
 
     private void set審査会種類_精神科医所属(boolean 合議体精神科医存在フラグ) {
         List<RString> list = new ArrayList<>();
         if (合議体精神科医存在フラグ) {
-            list.add(new RString("key0"));
+            list.add(合議体精神科医存在フラグ_KEY);
         }
         div.getChkNinchishoOnly().setSelectedItemsByKey(list);
+    }
+
+    private void set研修模擬(boolean 合議体ダミーフラグ) {
+        List<RString> list = new ArrayList<>();
+        if (合議体ダミーフラグ) {
+            list.add(研修模擬_KEY);
+        }
+        div.getChkKenshuMogi().setSelectedItemsByKey(list);
     }
 
     private void set対象者一覧(List<Taishouichiran> ichiranList) {
@@ -932,56 +949,121 @@ public class TaishouWaritsukeHandler {
     }
 
     private void 対象者一覧更新() {
-        ShinsakaiWariateJohoManager johoManager = ShinsakaiWariateJohoManager.createInstance();
+        boolean isダミー = div.getChkKenshuMogi().getSelectedKeys().contains(研修模擬_KEY);
         for (dgTaishoshaIchiran_Row row : div.getDgTaishoshaIchiran().getDataSource()) {
-            if (row.getJotaiFlag().equals(new RString("1"))) {
-                ShinsakaiWariateJohoMapperParameter mapperParameter
-                        = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
-                                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
-                                new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
-                if (shinsakaiWariateJoho != null && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定)) {
-                    ShinsakaiWariateJoho2Builder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
-                    johoBuilder.set介護認定審査会審査順(row.getNo().toInt());
-                    johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ());
-                    johoManager.save介護認定審査会割当情報(johoBuilder.build().modifiedModel());
-                }
-            }
-            if (row.getJotaiFlag().equals(new RString("2"))) {
-                ShinsakaiWariateJoho2 shinsakaiWariateJoho = new ShinsakaiWariateJoho2(
-                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
-                        new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                ShinsakaiWariateJoho2Builder builder = shinsakaiWariateJoho.createBuilderForEdit();
-                builder.set介護認定審査会開催年月日(div.getTxtKaisaiDate().getValue());
-                builder.set介護認定審査会割当年月日(new FlexibleDate(RDate.getNowDate().toString()));
-                builder.set介護認定審査会審査順(row.getNo().toInt());
-                builder.set介護認定審査会審査順確定フラグ(row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定));
-                builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付());
-                johoManager.save介護認定審査会割当情報(builder.build().modifiedModel());
+            if (isダミー) {
+                対象者一覧更新_研修(row);
+            } else {
+                対象者一覧更新_通常(row);
             }
         }
     }
 
-    private void 候補者一覧更新() {
+    private void 対象者一覧更新_通常(dgTaishoshaIchiran_Row row) {
         ShinsakaiWariateJohoManager johoManager = ShinsakaiWariateJohoManager.createInstance();
+        if (row.getJotaiFlag().equals(new RString("1"))) {
+            ShinsakaiWariateJohoMapperParameter mapperParameter
+                    = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
+                            div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
+                            new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
+            if (shinsakaiWariateJoho != null && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定)) {
+                ShinsakaiWariateJoho2Builder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
+                johoBuilder.set介護認定審査会審査順(row.getNo().toInt());
+                johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ());
+                johoManager.save介護認定審査会割当情報(johoBuilder.build().modifiedModel());
+            }
+        }
+        if (row.getJotaiFlag().equals(new RString("2"))) {
+            ShinsakaiWariateJoho2 shinsakaiWariateJoho = new ShinsakaiWariateJoho2(
+                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
+                    new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            ShinsakaiWariateJoho2Builder builder = shinsakaiWariateJoho.createBuilderForEdit();
+            builder.set介護認定審査会開催年月日(div.getTxtKaisaiDate().getValue());
+            builder.set介護認定審査会割当年月日(new FlexibleDate(RDate.getNowDate().toString()));
+            builder.set介護認定審査会審査順(row.getNo().toInt());
+            builder.set介護認定審査会審査順確定フラグ(row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定));
+            builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付());
+            johoManager.save介護認定審査会割当情報(builder.build().modifiedModel());
+        }
+    }
+
+    private void 対象者一覧更新_研修(dgTaishoshaIchiran_Row row) {
+        ShinsakaiWariateJohoKenshuManager johoManager = ShinsakaiWariateJohoKenshuManager.createInstance();
+        if (row.getJotaiFlag().equals(new RString("1"))) {
+            RString shinsakaiKaisaiNo = div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo();
+            ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(row.getShinseishoKanriNo());
+            ShinsakaiWariateJohoKenshu shinsakaiWariateJohoKenshu = johoManager.get審査会割当情報研修(shinsakaiKaisaiNo, shinseishoKanriNo);
+            if (shinsakaiWariateJohoKenshu != null && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定)) {
+                ShinsakaiWariateJohoKenshuBuilder johoBuilder = shinsakaiWariateJohoKenshu.createBuilderForEdit();
+                johoBuilder.set介護認定審査会審査順(row.getNo().toInt());
+                johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJohoKenshu.is介護認定審査会審査順確定フラグ());
+                johoManager.save介護認定審査会割当情報研修(johoBuilder.build().modifiedModel());
+            }
+        }
+        if (row.getJotaiFlag().equals(new RString("2"))) {
+            ShinsakaiWariateJohoKenshu shinsakaiWariateJohoKenshu = new ShinsakaiWariateJohoKenshu(
+                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), 
+                    new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            ShinsakaiWariateJohoKenshuBuilder builder = shinsakaiWariateJohoKenshu.createBuilderForEdit();
+            builder.set介護認定審査会開催年月日(div.getTxtKaisaiDate().getValue());
+            builder.set介護認定審査会割当年月日(new FlexibleDate(RDate.getNowDate().toString()));
+            builder.set介護認定審査会審査順(row.getNo().toInt());
+            builder.set介護認定審査会審査順確定フラグ(row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定));
+            builder.set審査会自動割付フラグ(IsShinsakaiJidoWaritsuke.手動.is審査会自動割付());
+            johoManager.save介護認定審査会割当情報研修(builder.build().modifiedModel());
+        }
+    }
+
+    private void 候補者一覧更新() {
+        boolean isダミー = div.getChkKenshuMogi().getSelectedKeys().contains(研修模擬_KEY);
         for (dgWaritsukeKohoshaIchiran_Row row : div.getDgWaritsukeKohoshaIchiran().getDataSource()) {
-            if (row.getJotaiFlag().equals(new RString("1"))) {
-                ShinsakaiWariateJohoMapperParameter parameter
-                        = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
-                                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
-                                new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(parameter);
-                if (shinsakaiWariateJoho != null) {
-                    johoManager.saveOrDeletePhysicalBy介護認定審査会割当情報(shinsakaiWariateJoho.deleted());
-                }
-                NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
-                NinteiKanryoJoho ninteiKanryoJoho = manager.get要介護認定完了情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                if (ninteiKanryoJoho != null) {
-                    ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit()
-                            .set認定審査会割当完了年月日(null)
-                            .build();
-                    manager.save要介護認定完了情報(ninteiKanryoJoho);
-                }
+            if (isダミー) {
+                候補者一覧更新_研修(row);
+            } else {
+                候補者一覧更新_通常(row);
+            }
+        }
+    }
+
+    private void 候補者一覧更新_通常(dgWaritsukeKohoshaIchiran_Row row) {
+        ShinsakaiWariateJohoManager johoManager = ShinsakaiWariateJohoManager.createInstance();
+        if (row.getJotaiFlag().equals(new RString("1"))) {
+            ShinsakaiWariateJohoMapperParameter parameter
+                    = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
+                            div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
+                            new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(parameter);
+            if (shinsakaiWariateJoho != null) {
+                johoManager.saveOrDeletePhysicalBy介護認定審査会割当情報(shinsakaiWariateJoho.deleted());
+            }
+            NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
+            NinteiKanryoJoho ninteiKanryoJoho = manager.get要介護認定完了情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            if (ninteiKanryoJoho != null) {
+                ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit()
+                        .set認定審査会割当完了年月日(null)
+                        .build();
+                manager.save要介護認定完了情報(ninteiKanryoJoho);
+            }
+        }
+    }
+
+    private void 候補者一覧更新_研修(dgWaritsukeKohoshaIchiran_Row row) {
+        ShinsakaiWariateJohoKenshuManager shinsakaiWariateJohoKenshuManager = ShinsakaiWariateJohoKenshuManager.createInstance();
+        if (row.getJotaiFlag().equals(new RString("1"))) {
+            RString shinsakaiKaisaiNo = div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo();
+            ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(row.getShinseishoKanriNo());
+            ShinsakaiWariateJohoKenshu shinsakaiWariateJohoKenshu = shinsakaiWariateJohoKenshuManager.get審査会割当情報研修(shinsakaiKaisaiNo, shinseishoKanriNo);
+            if (shinsakaiWariateJohoKenshu != null) {
+                shinsakaiWariateJohoKenshuManager.saveOrDeletePhysicalBy介護認定審査会割当情報研修(shinsakaiWariateJohoKenshu.deleted());
+            }
+            NinteiKanryoJohoManager manager = new NinteiKanryoJohoManager();
+            NinteiKanryoJoho ninteiKanryoJoho = manager.get要介護認定完了情報(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            if (ninteiKanryoJoho != null) {
+                ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit()
+                        .set認定審査会割当完了年月日(null)
+                        .build();
+                manager.save要介護認定完了情報(ninteiKanryoJoho);
             }
         }
     }

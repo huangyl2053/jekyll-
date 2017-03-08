@@ -3,19 +3,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 21 20:25:32 JST 2017 
+ * Wed Mar 08 13:17:50 JST 2017 
  */
 
 
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumnCheckBox;
 
 
 /**
@@ -25,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumnCheckBox;
  */
 
 public class dgShinsakaiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
 
     private Button btnWritsuke;
     private TextBoxFlexibleDate kaisaiYoteiYmd;
@@ -38,7 +36,6 @@ public class dgShinsakaiList_Row extends DataRow {
     private RString shinsakaiKaijo;
     private TextBoxNum yoteiTeiin;
     private TextBoxNum wariateZumiNinzu;
-    private DataGridColumnCheckBox dummyFlag;
     private TextBoxNum maxShinsakaiOrder;
 
     public dgShinsakaiList_Row() {
@@ -54,7 +51,6 @@ public class dgShinsakaiList_Row extends DataRow {
         this.shinsakaiKaijo = RString.EMPTY;
         this.yoteiTeiin = new TextBoxNum();
         this.wariateZumiNinzu = new TextBoxNum();
-        this.dummyFlag = new DataGridColumnCheckBox();
         this.maxShinsakaiOrder = new TextBoxNum();
         this.setOriginalData("btnWritsuke", btnWritsuke);
         this.setOriginalData("kaisaiYoteiYmd", kaisaiYoteiYmd);
@@ -67,11 +63,10 @@ public class dgShinsakaiList_Row extends DataRow {
         this.setOriginalData("shinsakaiKaijo", shinsakaiKaijo);
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
         this.setOriginalData("wariateZumiNinzu", wariateZumiNinzu);
-        this.setOriginalData("dummyFlag", dummyFlag);
         this.setOriginalData("maxShinsakaiOrder", maxShinsakaiOrder);
     }
 
-    public dgShinsakaiList_Row(Button btnWritsuke, TextBoxFlexibleDate kaisaiYoteiYmd, TextBoxTime kaisaiYoteiTime, RString shinsakaiKaisaiNo, RString shinsakaiMeisho, RString gogitaiNo, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxNum yoteiTeiin, TextBoxNum wariateZumiNinzu, DataGridColumnCheckBox dummyFlag, TextBoxNum maxShinsakaiOrder) {
+    public dgShinsakaiList_Row(Button btnWritsuke, TextBoxFlexibleDate kaisaiYoteiYmd, TextBoxTime kaisaiYoteiTime, RString shinsakaiKaisaiNo, RString shinsakaiMeisho, RString gogitaiNo, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxNum yoteiTeiin, TextBoxNum wariateZumiNinzu, TextBoxNum maxShinsakaiOrder) {
         super();
         this.setOriginalData("btnWritsuke", btnWritsuke);
         this.setOriginalData("kaisaiYoteiYmd", kaisaiYoteiYmd);
@@ -84,7 +79,6 @@ public class dgShinsakaiList_Row extends DataRow {
         this.setOriginalData("shinsakaiKaijo", shinsakaiKaijo);
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
         this.setOriginalData("wariateZumiNinzu", wariateZumiNinzu);
-        this.setOriginalData("dummyFlag", dummyFlag);
         this.setOriginalData("maxShinsakaiOrder", maxShinsakaiOrder);
         this.btnWritsuke = btnWritsuke;
         this.kaisaiYoteiYmd = kaisaiYoteiYmd;
@@ -97,38 +91,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.shinsakaiKaijo = shinsakaiKaijo;
         this.yoteiTeiin = yoteiTeiin;
         this.wariateZumiNinzu = wariateZumiNinzu;
-        this.dummyFlag = dummyFlag;
         this.maxShinsakaiOrder = maxShinsakaiOrder;
-    }
-
-    public dgShinsakaiList_Row(DataGridSetting gridSetting) {
-        super();
-        this.btnWritsuke = new Button();
-        this.kaisaiYoteiYmd = new TextBoxFlexibleDate();
-        this.kaisaiYoteiTime = new TextBoxTime();
-        this.shinsakaiKaisaiNo = RString.EMPTY;
-        this.shinsakaiMeisho = RString.EMPTY;
-        this.gogitaiNo = RString.EMPTY;
-        this.gogitaiMeisho = RString.EMPTY;
-        this.shurui = RString.EMPTY;
-        this.shinsakaiKaijo = RString.EMPTY;
-        this.yoteiTeiin = new TextBoxNum();
-        this.wariateZumiNinzu = new TextBoxNum();
-        this.dummyFlag = DataGridColumnCheckBox.createInstance(gridSetting.getColumn("dummyFlag").getCellDetails());
-        this.maxShinsakaiOrder = new TextBoxNum();
-        this.setOriginalData("btnWritsuke", btnWritsuke);
-        this.setOriginalData("kaisaiYoteiYmd", kaisaiYoteiYmd);
-        this.setOriginalData("kaisaiYoteiTime", kaisaiYoteiTime);
-        this.setOriginalData("shinsakaiKaisaiNo", shinsakaiKaisaiNo);
-        this.setOriginalData("shinsakaiMeisho", shinsakaiMeisho);
-        this.setOriginalData("gogitaiNo", gogitaiNo);
-        this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
-        this.setOriginalData("shurui", shurui);
-        this.setOriginalData("shinsakaiKaijo", shinsakaiKaijo);
-        this.setOriginalData("yoteiTeiin", yoteiTeiin);
-        this.setOriginalData("wariateZumiNinzu", wariateZumiNinzu);
-        this.setOriginalData("dummyFlag", dummyFlag);
-        this.setOriginalData("maxShinsakaiOrder", maxShinsakaiOrder);
     }
 
     public Button getBtnWritsuke() {
@@ -173,10 +136,6 @@ public class dgShinsakaiList_Row extends DataRow {
 
     public TextBoxNum getWariateZumiNinzu() {
         return wariateZumiNinzu;
-    }
-
-    public DataGridColumnCheckBox getDummyFlag() {
-        return dummyFlag;
     }
 
     public TextBoxNum getMaxShinsakaiOrder() {
@@ -236,11 +195,6 @@ public class dgShinsakaiList_Row extends DataRow {
     public void setWariateZumiNinzu(TextBoxNum wariateZumiNinzu) {
         this.setOriginalData("wariateZumiNinzu", wariateZumiNinzu);
         this.wariateZumiNinzu = wariateZumiNinzu;
-    }
-
-    public void setDummyFlag(DataGridColumnCheckBox dummyFlag) {
-        this.setOriginalData("dummyFlag", dummyFlag);
-        this.dummyFlag = dummyFlag;
     }
 
     public void setMaxShinsakaiOrder(TextBoxNum maxShinsakaiOrder) {
