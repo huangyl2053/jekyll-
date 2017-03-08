@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 
 /**
  * 介護認定審査会割当情報RelateEntityクラスです。
@@ -28,15 +27,6 @@ public class ShinsakaiWariateJohoRelateEntity {
      * @param 介護認定審査会割当情報Entity 介護認定審査会割当情報Entity
      */
     private DbT5502ShinsakaiWariateJohoEntity 介護認定審査会割当情報Entity;
-    
-    /**
-     * -- GETTER -- 介護認定審査会割当情報研修EntityListを返します。
-     *
-     * @return 介護認定審査会割当情報研修Entity -- SETTER -- 介護認定審査会割当情報研修Entityを設定します。
-     *
-     * @param 介護認定審査会割当情報研修Entity 介護認定審査会割当情報研修Entity
-     */
-    private DbT5504ShinsakaiWariateJohoKenshuEntity 介護認定審査会割当情報研修Entity;
 
     /**
      * -- GETTER -- 要介護認定申請情報EntityListを返します。
@@ -53,7 +43,6 @@ public class ShinsakaiWariateJohoRelateEntity {
     public ShinsakaiWariateJohoRelateEntity() {
 
         介護認定審査会割当情報Entity = new DbT5502ShinsakaiWariateJohoEntity();
-        介護認定審査会割当情報研修Entity = new DbT5504ShinsakaiWariateJohoKenshuEntity();
         要介護認定申請情報Entity = new ArrayList<>();
 
     }
@@ -61,11 +50,10 @@ public class ShinsakaiWariateJohoRelateEntity {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * ShinsakaiKaisaiYoteiJohoEntityが持つ{@link DbT5101NinteiShinseiJohoEntity}と<br/> {@link DbT5502ShinsakaiWariateJohoEntity}と<br/>{@link DbT5504ShinsakaiWariateJohoKenshuEntity}のMD5値を計算し、設定します。
+     * ShinsakaiKaisaiYoteiJohoEntityが持つ{@link DbT5101NinteiShinseiJohoEntity}と<br/> {@link DbT5502ShinsakaiWariateJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.介護認定審査会割当情報Entity.initializeMd5();
-        this.介護認定審査会割当情報研修Entity.initializeMd5();
 
         for (DbT5101NinteiShinseiJohoEntity entity : this.要介護認定申請情報Entity) {
             entity.initializeMd5();
