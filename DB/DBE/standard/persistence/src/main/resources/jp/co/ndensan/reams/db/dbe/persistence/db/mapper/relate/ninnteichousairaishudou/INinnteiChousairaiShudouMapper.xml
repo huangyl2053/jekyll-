@@ -53,6 +53,7 @@
         <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="remban" property="remban"/>
         <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="researchItem" property="researchItem"/>
         <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="shichosonCode" property="shichosonCode"/>
+        <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="T5101shichosonCode" property="T5101shichosonCode"/>
     </resultMap>
 
     <select id="select認定調査依頼情報" fetchSize="500"
@@ -72,6 +73,7 @@
         ,T5101."koroshoIfShikibetsuCode"
         ,T5101."ninteiShinseiYMD"
         ,T7051."shichosonCode"
+        ,T5101."shichosonCode" AS "T5101shichosonCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" T5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051

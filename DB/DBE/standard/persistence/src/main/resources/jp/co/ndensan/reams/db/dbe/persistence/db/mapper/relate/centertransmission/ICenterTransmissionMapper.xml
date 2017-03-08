@@ -762,7 +762,7 @@
         AND Z."remban" = 1 
         AND Z."koroshoIfShikibetsuCode" = A2."koroshoIfShikibetsuCode" 
         WHERE
-        A."hihokenshaNo" NOT IN ('02A', '06A', '09A', '99A')
+        A."koroshoIfShikibetsuCode" NOT IN ('02A', '06A', '09A', '99A')
         ORDER BY
         A."ninteiShinseiYMD"
         , A."shoKisaiHokenshaNo"

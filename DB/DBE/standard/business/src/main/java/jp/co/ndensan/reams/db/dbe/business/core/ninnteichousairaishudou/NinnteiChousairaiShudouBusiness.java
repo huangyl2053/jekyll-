@@ -449,4 +449,13 @@ public class NinnteiChousairaiShudouBusiness {
     public RString get市町村コード() {
         return entity.getShichosonCode();
     }
+
+    /**
+     * 申請情報（5101）の市町村コードを取得します。
+     *
+     * @return 申請情報市町村コード
+     */
+    public RString get申請情報市町村コード() {
+        return entity.getT5101shichosonCode();
+    }
 }
