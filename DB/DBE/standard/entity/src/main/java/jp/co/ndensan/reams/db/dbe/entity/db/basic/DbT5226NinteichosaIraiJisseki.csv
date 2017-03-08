@@ -1,0 +1,3 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteichosaIraiKensu,int4,int,,,,,認定調査依頼件数,A
