@@ -2,6 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 // <reference path="./../tokkiimages/TokkiImagesPerKomoku.ts" />
+// <reference path="./../tokkiimages/TokkiImagesPerKomoku.ts" />
 
 module DBE {
 
@@ -57,6 +58,10 @@ module DBE {
             public btnToDisplay(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnToDisplay"));
             }
+
+            //public ccdRembanEditor(): DBE.TokkiImagesPerKomoku.ModeController {
+            //    return new DBE.TokkiImagesPerKomoku.ModeController(this.convFiledName("ccdRembanEditor"));
+            //}
 
             public repTokkiJikos(): UZA.ControlRepeater {
                 return new UZA.ControlRepeater(this.convFiledName("repTokkiJikos"));

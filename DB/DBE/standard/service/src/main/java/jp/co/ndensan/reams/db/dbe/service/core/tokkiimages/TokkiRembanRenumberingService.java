@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.tokkiimages.TokkiRembanRenumberi
 import jp.co.ndensan.reams.db.dbe.business.core.tokkiimages.TokkiRembanRenumberingResult.FileNameBeforeAfter;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
-//import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-//import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
@@ -37,17 +37,17 @@ public class TokkiRembanRenumberingService {
     public void save(ReadOnlySharedFileEntryDescriptor rosfed, RString currentImageDirectory, TokkiRembanRenumberingResult result) {
         NinteichosahyoTokkijikoManager manager = NinteichosahyoTokkijikoManager.createInstance();
         for (NinteichosahyoTokkijiko t : result.targetsToDelete()) {
-//            manager.save認定調査票_特記情報(t);
+            manager.save認定調査票_特記情報(t);
         }
         for (NinteichosahyoTokkijiko t : result.targetsToAdd()) {
-//            manager.save認定調査票_特記情報(t);
+            manager.save認定調査票_特記情報(t);
         }
         RString workDirectory = Directory.createTmpDirectory();
         for (FileNameBeforeAfter ba : result.getRenamedImageNames()) {
             File.copy(ba.composeBeforePathAsIn(currentImageDirectory), ba.composeAfterPathAsIn(workDirectory));
-//            SharedFile.deleteFileInEntry(rosfed, ba.getBeforeFileName().toString());
+            SharedFile.deleteFileInEntry(rosfed, ba.getBeforeFileName().toString());
         }
-//        SharedFile.appendNewFile(rosfed, FilesystemPath.fromString(workDirectory), "", overWrite());
+        SharedFile.appendNewFile(rosfed, FilesystemPath.fromString(workDirectory), "", overWrite());
     }
 
     private static SharedAppendOption overWrite() {

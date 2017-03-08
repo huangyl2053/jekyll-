@@ -6,13 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.business.core.tokkiimages;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikos;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
-import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -26,7 +26,7 @@ public final class TokkiRembanRenumberingResult {
 
     private TokkiRembanRenumberingResult(Builder builder) {
         this.tokkiJikos = builder.tokkiJikos;
-        this.editedRembans = builder.map;
+        this.editedRembans = Collections.unmodifiableMap(builder.map);
     }
 
     /**

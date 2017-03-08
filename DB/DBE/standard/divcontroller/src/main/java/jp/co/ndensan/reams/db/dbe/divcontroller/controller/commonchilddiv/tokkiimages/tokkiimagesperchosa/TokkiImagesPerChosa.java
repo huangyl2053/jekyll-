@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.tokkiimages.tokkiimagesperchosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeNotificationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerChosa.TokkiImagesPerChosaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.tokkiimages.TokkiRembanRenumberingService;
@@ -82,7 +83,7 @@ public class TokkiImagesPerChosa {
                 edited.asRenumberingResult()
         );
         div.refresh(copyToLocalDirectory(rosfed));
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).addMessage(DbeNotificationMessages.保存完了.getMessage().replace("連番の変更を")).respond();
     }
 
     /**

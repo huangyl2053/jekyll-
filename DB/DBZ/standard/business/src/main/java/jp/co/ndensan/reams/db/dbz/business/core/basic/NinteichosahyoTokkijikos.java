@@ -93,7 +93,7 @@ public class NinteichosahyoTokkijikos implements Iterable<NinteichosahyoTokkijik
     }
 
     /**
-     * @return
+     * @return 連番で要素を分類した結果
      */
     public Map<Integer, NinteichosahyoTokkijikos> mapByRemban() {
         Map<Integer, NinteichosahyoTokkijikos> result = new HashMap<>();
@@ -101,13 +101,13 @@ public class NinteichosahyoTokkijikos implements Iterable<NinteichosahyoTokkijik
                 : groupingByRemban(this.elements).entrySet()) {
             result.put(entry.getKey(), new NinteichosahyoTokkijikos(entry.getValue()));
         }
-        return null;
+        return result;
     }
 
     private static Map<Integer, List<NinteichosahyoTokkijiko>> groupingByRemban(List<NinteichosahyoTokkijiko> tokkiJikos) {
         Map<Integer, List<NinteichosahyoTokkijiko>> map = new HashMap<>();
         for (NinteichosahyoTokkijiko tokki : tokkiJikos) {
-            int remban = tokki.get認定調査依頼履歴番号();
+            int remban = tokki.get認定調査特記事項連番();
             if (!map.containsKey(remban)) {
                 map.put(remban, new ArrayList<NinteichosahyoTokkijiko>());
             }

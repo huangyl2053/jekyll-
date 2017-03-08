@@ -36,12 +36,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban1"));
             };
 
+            Controls.prototype.ImageTokki1 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki1"));
+            };
+
             Controls.prototype.imgTokki1 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki1"));
             };
 
             Controls.prototype.txtNewRemban1 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban1"));
+            };
+
+            Controls.prototype.lin2 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin2"));
             };
 
             Controls.prototype.txtNo2 = function () {
@@ -52,12 +60,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban2"));
             };
 
+            Controls.prototype.ImageTokki2 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki2"));
+            };
+
             Controls.prototype.imgTokki2 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki2"));
             };
 
             Controls.prototype.txtNewRemban2 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban2"));
+            };
+
+            Controls.prototype.lin3 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin3"));
             };
 
             Controls.prototype.txtNo3 = function () {
@@ -68,12 +84,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban3"));
             };
 
+            Controls.prototype.ImageTokki3 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki3"));
+            };
+
             Controls.prototype.imgTokki3 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki3"));
             };
 
             Controls.prototype.txtNewRemban3 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban3"));
+            };
+
+            Controls.prototype.lin4 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin4"));
             };
 
             Controls.prototype.txtNo4 = function () {
@@ -84,12 +108,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban4"));
             };
 
+            Controls.prototype.ImageTokki4 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki4"));
+            };
+
             Controls.prototype.imgTokki4 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki4"));
             };
 
             Controls.prototype.txtNewRemban4 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban4"));
+            };
+
+            Controls.prototype.lin5 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin5"));
             };
 
             Controls.prototype.txtNo5 = function () {
@@ -100,12 +132,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban5"));
             };
 
+            Controls.prototype.ImageTokki5 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki5"));
+            };
+
             Controls.prototype.imgTokki5 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki5"));
             };
 
             Controls.prototype.txtNewRemban5 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban5"));
+            };
+
+            Controls.prototype.lin6 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin6"));
             };
 
             Controls.prototype.txtNo6 = function () {
@@ -116,12 +156,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban6"));
             };
 
+            Controls.prototype.ImageTokki6 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki6"));
+            };
+
             Controls.prototype.imgTokki6 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki6"));
             };
 
             Controls.prototype.txtNewRemban6 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban6"));
+            };
+
+            Controls.prototype.lin7 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin7"));
             };
 
             Controls.prototype.txtNo7 = function () {
@@ -132,12 +180,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban7"));
             };
 
+            Controls.prototype.ImageTokki7 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki7"));
+            };
+
             Controls.prototype.imgTokki7 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki7"));
             };
 
             Controls.prototype.txtNewRemban7 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban7"));
+            };
+
+            Controls.prototype.lin8 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin8"));
             };
 
             Controls.prototype.txtNo8 = function () {
@@ -148,6 +204,10 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban8"));
             };
 
+            Controls.prototype.ImageTokki8 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki8"));
+            };
+
             Controls.prototype.imgTokki8 = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgTokki8"));
             };
@@ -156,12 +216,20 @@ var DBE;
                 return new UZA.TextBoxNum(this.convFiledName("txtNewRemban8"));
             };
 
+            Controls.prototype.lin9 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin9"));
+            };
+
             Controls.prototype.txtNo9 = function () {
                 return new UZA.TextBox(this.convFiledName("txtNo9"));
             };
 
             Controls.prototype.txtRemban9 = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtRemban9"));
+            };
+
+            Controls.prototype.ImageTokki9 = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki9"));
             };
 
             Controls.prototype.imgTokki9 = function () {

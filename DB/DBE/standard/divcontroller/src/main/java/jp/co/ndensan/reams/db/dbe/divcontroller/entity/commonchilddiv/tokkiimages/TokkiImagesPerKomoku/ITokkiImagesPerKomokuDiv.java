@@ -22,6 +22,13 @@ public interface ITokkiImagesPerKomokuDiv extends ICommonChildDivBaseProperties 
     void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, NinteiChosaTokkiJikou tokkiJiko, Operation op);
 
     /**
+     * @param directoryPath イメージを展開したディレクトリのパス
+     * @param nts 最新の全特記事項
+     * @param op 処理内容
+     */
+    void refresh(RString directoryPath, NinteichosahyoTokkijikos nts, Operation op);
+
+    /**
      * @return 変更有りの場合、{@code true}.
      */
     boolean isDirty();

@@ -40,15 +40,24 @@ final class TokkiJikoPieces {
 
     private static Map<Integer, TokkiJikoPiece> toMap(TokkiImagesPerKomokuDiv div) {
         Map<Integer, TokkiJikoPiece> map = new HashMap<>();
-        map.put(1, new TokkiJikoPiece(div.getTxtNo1(), div.getTxtRemban1(), div.getImgTokki1(), div.getTxtNewRemban1()));
-        map.put(2, new TokkiJikoPiece(div.getTxtNo2(), div.getTxtRemban2(), div.getImgTokki2(), div.getTxtNewRemban2()));
-        map.put(3, new TokkiJikoPiece(div.getTxtNo3(), div.getTxtRemban3(), div.getImgTokki3(), div.getTxtNewRemban3()));
-        map.put(4, new TokkiJikoPiece(div.getTxtNo4(), div.getTxtRemban4(), div.getImgTokki4(), div.getTxtNewRemban4()));
-        map.put(5, new TokkiJikoPiece(div.getTxtNo5(), div.getTxtRemban5(), div.getImgTokki5(), div.getTxtNewRemban5()));
-        map.put(6, new TokkiJikoPiece(div.getTxtNo6(), div.getTxtRemban6(), div.getImgTokki6(), div.getTxtNewRemban6()));
-        map.put(7, new TokkiJikoPiece(div.getTxtNo7(), div.getTxtRemban7(), div.getImgTokki7(), div.getTxtNewRemban7()));
-        map.put(8, new TokkiJikoPiece(div.getTxtNo8(), div.getTxtRemban8(), div.getImgTokki8(), div.getTxtNewRemban8()));
-        map.put(9, new TokkiJikoPiece(div.getTxtNo9(), div.getTxtRemban9(), div.getImgTokki9(), div.getTxtNewRemban9()));
+        map.put(1, new TokkiJikoPiece(div.getTxtNo1(), div.getTxtRemban1(), div.getImageTokki1(), div.getImgTokki1(),
+                div.getTxtNewRemban1()));
+        map.put(2, new TokkiJikoPiece(div.getTxtNo2(), div.getTxtRemban2(), div.getImageTokki2(), div.getImgTokki2(),
+                div.getTxtNewRemban2(), div.getLin2()));
+        map.put(3, new TokkiJikoPiece(div.getTxtNo3(), div.getTxtRemban3(), div.getImageTokki3(), div.getImgTokki3(),
+                div.getTxtNewRemban3(), div.getLin3()));
+        map.put(4, new TokkiJikoPiece(div.getTxtNo4(), div.getTxtRemban4(), div.getImageTokki4(), div.getImgTokki4(),
+                div.getTxtNewRemban4(), div.getLin4()));
+        map.put(5, new TokkiJikoPiece(div.getTxtNo5(), div.getTxtRemban5(), div.getImageTokki5(), div.getImgTokki5(),
+                div.getTxtNewRemban5(), div.getLin5()));
+        map.put(6, new TokkiJikoPiece(div.getTxtNo6(), div.getTxtRemban6(), div.getImageTokki6(), div.getImgTokki6(),
+                div.getTxtNewRemban6(), div.getLin6()));
+        map.put(7, new TokkiJikoPiece(div.getTxtNo7(), div.getTxtRemban7(), div.getImageTokki7(), div.getImgTokki7(),
+                div.getTxtNewRemban7(), div.getLin7()));
+        map.put(8, new TokkiJikoPiece(div.getTxtNo8(), div.getTxtRemban8(), div.getImageTokki8(), div.getImgTokki8(),
+                div.getTxtNewRemban8(), div.getLin8()));
+        map.put(9, new TokkiJikoPiece(div.getTxtNo9(), div.getTxtRemban9(), div.getImageTokki9(), div.getImgTokki9(),
+                div.getTxtNewRemban9(), div.getLin9()));
         return map;
     }
 
@@ -78,9 +87,11 @@ final class TokkiJikoPieces {
      */
     void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, Operation op) {
         List<RString> filePaths = Collections.unmodifiableList(Files.findFilePathsIn(directoryPath));
+        boolean mayBeTop = true;
         for (int remban = 1; remban <= MAX_REMBAN; remban++) {
             TokkiJikoPiece tp = this.elements.get(remban);
-            tp.initialize(filePaths, nts.remban(remban), op);
+            tp.initialize(filePaths, nts.remban(remban), op, mayBeTop);
+            mayBeTop = mayBeTop ? tp.isDisplayNone() : false;
         }
     }
 

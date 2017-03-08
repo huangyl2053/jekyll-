@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 認定調査特記事項マッピングクラスです。
@@ -330,6 +331,13 @@ public enum NinteiChosaTokkiJikou {
      */
     public RString get特記事項名() {
         return tokkiJikouMei;
+    }
+
+    /**
+     * @return 「999 特記事項名」の形式で編集された文字列
+     */
+    public RString compose3桁番号HalfSpace名称() {
+        return new RStringBuilder().append(dbt5205JikouNo).append(RString.HALF_SPACE).append(tokkiJikouMei).toRString();
     }
 
     /**

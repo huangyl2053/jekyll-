@@ -40,9 +40,19 @@ public final class TokkiImagesPerKomokuDivHandler {
             this.div.setDisplayNone(true);
             return;
         }
+        this.div.setTitle(filterd.findAny().get().getTokkiJiko().compose3桁番号HalfSpace名称());
         this.div.setDisplayNone(false);
         this.div.setTokkijiko(filterd);
         this.pieces.initialize(directoryPath, filterd, op);
+    }
+
+    /**
+     * @param directoryPath イメージが格納されているディレクトリのパス
+     * @param nts 最新の特記事項全件
+     * @param op 処理
+     */
+    void refresh(RString directoryPath, NinteichosahyoTokkijikos nts, Operation op) {
+        initialize(directoryPath, nts, this.div.getTokkijiko().findAny().get().getTokkiJiko(), op);
     }
 
     /**
@@ -59,6 +69,9 @@ public final class TokkiImagesPerKomokuDivHandler {
         return this.pieces.createRenumberingResult(div.getTokkijiko());
     }
 
+    /**
+     * @return バリデーション結果
+     */
     ValidationMessageControlPairs validate() {
         return this.pieces.validate();
     }

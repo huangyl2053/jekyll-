@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimag
  * 不正な動作の原因になります。
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
  */
 public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKomokuDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,72 +36,88 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     private TextBox txtNo1;
     @JsonProperty("txtRemban1")
     private TextBoxNum txtRemban1;
-    @JsonProperty("imgTokki1")
-    private DynamicImage imgTokki1;
+    @JsonProperty("ImageTokki1")
+    private ImageTokki1Div ImageTokki1;
     @JsonProperty("txtNewRemban1")
     private TextBoxNum txtNewRemban1;
+    @JsonProperty("lin2")
+    private HorizontalLine lin2;
     @JsonProperty("txtNo2")
     private TextBox txtNo2;
     @JsonProperty("txtRemban2")
     private TextBoxNum txtRemban2;
-    @JsonProperty("imgTokki2")
-    private DynamicImage imgTokki2;
+    @JsonProperty("ImageTokki2")
+    private ImageTokki2Div ImageTokki2;
     @JsonProperty("txtNewRemban2")
     private TextBoxNum txtNewRemban2;
+    @JsonProperty("lin3")
+    private HorizontalLine lin3;
     @JsonProperty("txtNo3")
     private TextBox txtNo3;
     @JsonProperty("txtRemban3")
     private TextBoxNum txtRemban3;
-    @JsonProperty("imgTokki3")
-    private DynamicImage imgTokki3;
+    @JsonProperty("ImageTokki3")
+    private ImageTokki3Div ImageTokki3;
     @JsonProperty("txtNewRemban3")
     private TextBoxNum txtNewRemban3;
+    @JsonProperty("lin4")
+    private HorizontalLine lin4;
     @JsonProperty("txtNo4")
     private TextBox txtNo4;
     @JsonProperty("txtRemban4")
     private TextBoxNum txtRemban4;
-    @JsonProperty("imgTokki4")
-    private DynamicImage imgTokki4;
+    @JsonProperty("ImageTokki4")
+    private ImageTokki4Div ImageTokki4;
     @JsonProperty("txtNewRemban4")
     private TextBoxNum txtNewRemban4;
+    @JsonProperty("lin5")
+    private HorizontalLine lin5;
     @JsonProperty("txtNo5")
     private TextBox txtNo5;
     @JsonProperty("txtRemban5")
     private TextBoxNum txtRemban5;
-    @JsonProperty("imgTokki5")
-    private DynamicImage imgTokki5;
+    @JsonProperty("ImageTokki5")
+    private ImageTokki5Div ImageTokki5;
     @JsonProperty("txtNewRemban5")
     private TextBoxNum txtNewRemban5;
+    @JsonProperty("lin6")
+    private HorizontalLine lin6;
     @JsonProperty("txtNo6")
     private TextBox txtNo6;
     @JsonProperty("txtRemban6")
     private TextBoxNum txtRemban6;
-    @JsonProperty("imgTokki6")
-    private DynamicImage imgTokki6;
+    @JsonProperty("ImageTokki6")
+    private ImageTokki6Div ImageTokki6;
     @JsonProperty("txtNewRemban6")
     private TextBoxNum txtNewRemban6;
+    @JsonProperty("lin7")
+    private HorizontalLine lin7;
     @JsonProperty("txtNo7")
     private TextBox txtNo7;
     @JsonProperty("txtRemban7")
     private TextBoxNum txtRemban7;
-    @JsonProperty("imgTokki7")
-    private DynamicImage imgTokki7;
+    @JsonProperty("ImageTokki7")
+    private ImageTokki7Div ImageTokki7;
     @JsonProperty("txtNewRemban7")
     private TextBoxNum txtNewRemban7;
+    @JsonProperty("lin8")
+    private HorizontalLine lin8;
     @JsonProperty("txtNo8")
     private TextBox txtNo8;
     @JsonProperty("txtRemban8")
     private TextBoxNum txtRemban8;
-    @JsonProperty("imgTokki8")
-    private DynamicImage imgTokki8;
+    @JsonProperty("ImageTokki8")
+    private ImageTokki8Div ImageTokki8;
     @JsonProperty("txtNewRemban8")
     private TextBoxNum txtNewRemban8;
+    @JsonProperty("lin9")
+    private HorizontalLine lin9;
     @JsonProperty("txtNo9")
     private TextBox txtNo9;
     @JsonProperty("txtRemban9")
     private TextBoxNum txtRemban9;
-    @JsonProperty("imgTokki9")
-    private DynamicImage imgTokki9;
+    @JsonProperty("ImageTokki9")
+    private ImageTokki9Div ImageTokki9;
     @JsonProperty("txtNewRemban9")
     private TextBoxNum txtNewRemban9;
 
@@ -147,21 +164,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki1
-     * @return imgTokki1
+     * getImageTokki1
+     * @return ImageTokki1
      */
-    @JsonProperty("imgTokki1")
-    public DynamicImage getImgTokki1() {
-        return imgTokki1;
+    @JsonProperty("ImageTokki1")
+    public ImageTokki1Div getImageTokki1() {
+        return ImageTokki1;
     }
 
     /*
-     * setimgTokki1
-     * @param imgTokki1 imgTokki1
+     * setImageTokki1
+     * @param ImageTokki1 ImageTokki1
      */
-    @JsonProperty("imgTokki1")
-    public void setImgTokki1(DynamicImage imgTokki1) {
-        this.imgTokki1 = imgTokki1;
+    @JsonProperty("ImageTokki1")
+    public void setImageTokki1(ImageTokki1Div ImageTokki1) {
+        this.ImageTokki1 = ImageTokki1;
     }
 
     /*
@@ -180,6 +197,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban1")
     public void setTxtNewRemban1(TextBoxNum txtNewRemban1) {
         this.txtNewRemban1 = txtNewRemban1;
+    }
+
+    /*
+     * getlin2
+     * @return lin2
+     */
+    @JsonProperty("lin2")
+    public HorizontalLine getLin2() {
+        return lin2;
+    }
+
+    /*
+     * setlin2
+     * @param lin2 lin2
+     */
+    @JsonProperty("lin2")
+    public void setLin2(HorizontalLine lin2) {
+        this.lin2 = lin2;
     }
 
     /*
@@ -219,21 +254,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki2
-     * @return imgTokki2
+     * getImageTokki2
+     * @return ImageTokki2
      */
-    @JsonProperty("imgTokki2")
-    public DynamicImage getImgTokki2() {
-        return imgTokki2;
+    @JsonProperty("ImageTokki2")
+    public ImageTokki2Div getImageTokki2() {
+        return ImageTokki2;
     }
 
     /*
-     * setimgTokki2
-     * @param imgTokki2 imgTokki2
+     * setImageTokki2
+     * @param ImageTokki2 ImageTokki2
      */
-    @JsonProperty("imgTokki2")
-    public void setImgTokki2(DynamicImage imgTokki2) {
-        this.imgTokki2 = imgTokki2;
+    @JsonProperty("ImageTokki2")
+    public void setImageTokki2(ImageTokki2Div ImageTokki2) {
+        this.ImageTokki2 = ImageTokki2;
     }
 
     /*
@@ -252,6 +287,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban2")
     public void setTxtNewRemban2(TextBoxNum txtNewRemban2) {
         this.txtNewRemban2 = txtNewRemban2;
+    }
+
+    /*
+     * getlin3
+     * @return lin3
+     */
+    @JsonProperty("lin3")
+    public HorizontalLine getLin3() {
+        return lin3;
+    }
+
+    /*
+     * setlin3
+     * @param lin3 lin3
+     */
+    @JsonProperty("lin3")
+    public void setLin3(HorizontalLine lin3) {
+        this.lin3 = lin3;
     }
 
     /*
@@ -291,21 +344,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki3
-     * @return imgTokki3
+     * getImageTokki3
+     * @return ImageTokki3
      */
-    @JsonProperty("imgTokki3")
-    public DynamicImage getImgTokki3() {
-        return imgTokki3;
+    @JsonProperty("ImageTokki3")
+    public ImageTokki3Div getImageTokki3() {
+        return ImageTokki3;
     }
 
     /*
-     * setimgTokki3
-     * @param imgTokki3 imgTokki3
+     * setImageTokki3
+     * @param ImageTokki3 ImageTokki3
      */
-    @JsonProperty("imgTokki3")
-    public void setImgTokki3(DynamicImage imgTokki3) {
-        this.imgTokki3 = imgTokki3;
+    @JsonProperty("ImageTokki3")
+    public void setImageTokki3(ImageTokki3Div ImageTokki3) {
+        this.ImageTokki3 = ImageTokki3;
     }
 
     /*
@@ -324,6 +377,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban3")
     public void setTxtNewRemban3(TextBoxNum txtNewRemban3) {
         this.txtNewRemban3 = txtNewRemban3;
+    }
+
+    /*
+     * getlin4
+     * @return lin4
+     */
+    @JsonProperty("lin4")
+    public HorizontalLine getLin4() {
+        return lin4;
+    }
+
+    /*
+     * setlin4
+     * @param lin4 lin4
+     */
+    @JsonProperty("lin4")
+    public void setLin4(HorizontalLine lin4) {
+        this.lin4 = lin4;
     }
 
     /*
@@ -363,21 +434,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki4
-     * @return imgTokki4
+     * getImageTokki4
+     * @return ImageTokki4
      */
-    @JsonProperty("imgTokki4")
-    public DynamicImage getImgTokki4() {
-        return imgTokki4;
+    @JsonProperty("ImageTokki4")
+    public ImageTokki4Div getImageTokki4() {
+        return ImageTokki4;
     }
 
     /*
-     * setimgTokki4
-     * @param imgTokki4 imgTokki4
+     * setImageTokki4
+     * @param ImageTokki4 ImageTokki4
      */
-    @JsonProperty("imgTokki4")
-    public void setImgTokki4(DynamicImage imgTokki4) {
-        this.imgTokki4 = imgTokki4;
+    @JsonProperty("ImageTokki4")
+    public void setImageTokki4(ImageTokki4Div ImageTokki4) {
+        this.ImageTokki4 = ImageTokki4;
     }
 
     /*
@@ -396,6 +467,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban4")
     public void setTxtNewRemban4(TextBoxNum txtNewRemban4) {
         this.txtNewRemban4 = txtNewRemban4;
+    }
+
+    /*
+     * getlin5
+     * @return lin5
+     */
+    @JsonProperty("lin5")
+    public HorizontalLine getLin5() {
+        return lin5;
+    }
+
+    /*
+     * setlin5
+     * @param lin5 lin5
+     */
+    @JsonProperty("lin5")
+    public void setLin5(HorizontalLine lin5) {
+        this.lin5 = lin5;
     }
 
     /*
@@ -435,21 +524,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki5
-     * @return imgTokki5
+     * getImageTokki5
+     * @return ImageTokki5
      */
-    @JsonProperty("imgTokki5")
-    public DynamicImage getImgTokki5() {
-        return imgTokki5;
+    @JsonProperty("ImageTokki5")
+    public ImageTokki5Div getImageTokki5() {
+        return ImageTokki5;
     }
 
     /*
-     * setimgTokki5
-     * @param imgTokki5 imgTokki5
+     * setImageTokki5
+     * @param ImageTokki5 ImageTokki5
      */
-    @JsonProperty("imgTokki5")
-    public void setImgTokki5(DynamicImage imgTokki5) {
-        this.imgTokki5 = imgTokki5;
+    @JsonProperty("ImageTokki5")
+    public void setImageTokki5(ImageTokki5Div ImageTokki5) {
+        this.ImageTokki5 = ImageTokki5;
     }
 
     /*
@@ -468,6 +557,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban5")
     public void setTxtNewRemban5(TextBoxNum txtNewRemban5) {
         this.txtNewRemban5 = txtNewRemban5;
+    }
+
+    /*
+     * getlin6
+     * @return lin6
+     */
+    @JsonProperty("lin6")
+    public HorizontalLine getLin6() {
+        return lin6;
+    }
+
+    /*
+     * setlin6
+     * @param lin6 lin6
+     */
+    @JsonProperty("lin6")
+    public void setLin6(HorizontalLine lin6) {
+        this.lin6 = lin6;
     }
 
     /*
@@ -507,21 +614,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki6
-     * @return imgTokki6
+     * getImageTokki6
+     * @return ImageTokki6
      */
-    @JsonProperty("imgTokki6")
-    public DynamicImage getImgTokki6() {
-        return imgTokki6;
+    @JsonProperty("ImageTokki6")
+    public ImageTokki6Div getImageTokki6() {
+        return ImageTokki6;
     }
 
     /*
-     * setimgTokki6
-     * @param imgTokki6 imgTokki6
+     * setImageTokki6
+     * @param ImageTokki6 ImageTokki6
      */
-    @JsonProperty("imgTokki6")
-    public void setImgTokki6(DynamicImage imgTokki6) {
-        this.imgTokki6 = imgTokki6;
+    @JsonProperty("ImageTokki6")
+    public void setImageTokki6(ImageTokki6Div ImageTokki6) {
+        this.ImageTokki6 = ImageTokki6;
     }
 
     /*
@@ -540,6 +647,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban6")
     public void setTxtNewRemban6(TextBoxNum txtNewRemban6) {
         this.txtNewRemban6 = txtNewRemban6;
+    }
+
+    /*
+     * getlin7
+     * @return lin7
+     */
+    @JsonProperty("lin7")
+    public HorizontalLine getLin7() {
+        return lin7;
+    }
+
+    /*
+     * setlin7
+     * @param lin7 lin7
+     */
+    @JsonProperty("lin7")
+    public void setLin7(HorizontalLine lin7) {
+        this.lin7 = lin7;
     }
 
     /*
@@ -579,21 +704,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki7
-     * @return imgTokki7
+     * getImageTokki7
+     * @return ImageTokki7
      */
-    @JsonProperty("imgTokki7")
-    public DynamicImage getImgTokki7() {
-        return imgTokki7;
+    @JsonProperty("ImageTokki7")
+    public ImageTokki7Div getImageTokki7() {
+        return ImageTokki7;
     }
 
     /*
-     * setimgTokki7
-     * @param imgTokki7 imgTokki7
+     * setImageTokki7
+     * @param ImageTokki7 ImageTokki7
      */
-    @JsonProperty("imgTokki7")
-    public void setImgTokki7(DynamicImage imgTokki7) {
-        this.imgTokki7 = imgTokki7;
+    @JsonProperty("ImageTokki7")
+    public void setImageTokki7(ImageTokki7Div ImageTokki7) {
+        this.ImageTokki7 = ImageTokki7;
     }
 
     /*
@@ -612,6 +737,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban7")
     public void setTxtNewRemban7(TextBoxNum txtNewRemban7) {
         this.txtNewRemban7 = txtNewRemban7;
+    }
+
+    /*
+     * getlin8
+     * @return lin8
+     */
+    @JsonProperty("lin8")
+    public HorizontalLine getLin8() {
+        return lin8;
+    }
+
+    /*
+     * setlin8
+     * @param lin8 lin8
+     */
+    @JsonProperty("lin8")
+    public void setLin8(HorizontalLine lin8) {
+        this.lin8 = lin8;
     }
 
     /*
@@ -651,21 +794,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki8
-     * @return imgTokki8
+     * getImageTokki8
+     * @return ImageTokki8
      */
-    @JsonProperty("imgTokki8")
-    public DynamicImage getImgTokki8() {
-        return imgTokki8;
+    @JsonProperty("ImageTokki8")
+    public ImageTokki8Div getImageTokki8() {
+        return ImageTokki8;
     }
 
     /*
-     * setimgTokki8
-     * @param imgTokki8 imgTokki8
+     * setImageTokki8
+     * @param ImageTokki8 ImageTokki8
      */
-    @JsonProperty("imgTokki8")
-    public void setImgTokki8(DynamicImage imgTokki8) {
-        this.imgTokki8 = imgTokki8;
+    @JsonProperty("ImageTokki8")
+    public void setImageTokki8(ImageTokki8Div ImageTokki8) {
+        this.ImageTokki8 = ImageTokki8;
     }
 
     /*
@@ -684,6 +827,24 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     @JsonProperty("txtNewRemban8")
     public void setTxtNewRemban8(TextBoxNum txtNewRemban8) {
         this.txtNewRemban8 = txtNewRemban8;
+    }
+
+    /*
+     * getlin9
+     * @return lin9
+     */
+    @JsonProperty("lin9")
+    public HorizontalLine getLin9() {
+        return lin9;
+    }
+
+    /*
+     * setlin9
+     * @param lin9 lin9
+     */
+    @JsonProperty("lin9")
+    public void setLin9(HorizontalLine lin9) {
+        this.lin9 = lin9;
     }
 
     /*
@@ -723,21 +884,21 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
     }
 
     /*
-     * getimgTokki9
-     * @return imgTokki9
+     * getImageTokki9
+     * @return ImageTokki9
      */
-    @JsonProperty("imgTokki9")
-    public DynamicImage getImgTokki9() {
-        return imgTokki9;
+    @JsonProperty("ImageTokki9")
+    public ImageTokki9Div getImageTokki9() {
+        return ImageTokki9;
     }
 
     /*
-     * setimgTokki9
-     * @param imgTokki9 imgTokki9
+     * setImageTokki9
+     * @param ImageTokki9 ImageTokki9
      */
-    @JsonProperty("imgTokki9")
-    public void setImgTokki9(DynamicImage imgTokki9) {
-        this.imgTokki9 = imgTokki9;
+    @JsonProperty("ImageTokki9")
+    public void setImageTokki9(ImageTokki9Div ImageTokki9) {
+        this.ImageTokki9 = ImageTokki9;
     }
 
     /*
@@ -758,11 +919,109 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
         this.txtNewRemban9 = txtNewRemban9;
     }
 
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgTokki1() {
+        return this.getImageTokki1().getImgTokki1();
+    }
+
+    @JsonIgnore
+    public void setImgTokki1(DynamicImage imgTokki1) {
+        this.getImageTokki1().setImgTokki1(imgTokki1);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki2() {
+        return this.getImageTokki2().getImgTokki2();
+    }
+
+    @JsonIgnore
+    public void setImgTokki2(DynamicImage imgTokki2) {
+        this.getImageTokki2().setImgTokki2(imgTokki2);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki3() {
+        return this.getImageTokki3().getImgTokki3();
+    }
+
+    @JsonIgnore
+    public void setImgTokki3(DynamicImage imgTokki3) {
+        this.getImageTokki3().setImgTokki3(imgTokki3);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki4() {
+        return this.getImageTokki4().getImgTokki4();
+    }
+
+    @JsonIgnore
+    public void setImgTokki4(DynamicImage imgTokki4) {
+        this.getImageTokki4().setImgTokki4(imgTokki4);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki5() {
+        return this.getImageTokki5().getImgTokki5();
+    }
+
+    @JsonIgnore
+    public void setImgTokki5(DynamicImage imgTokki5) {
+        this.getImageTokki5().setImgTokki5(imgTokki5);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki6() {
+        return this.getImageTokki6().getImgTokki6();
+    }
+
+    @JsonIgnore
+    public void setImgTokki6(DynamicImage imgTokki6) {
+        this.getImageTokki6().setImgTokki6(imgTokki6);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki7() {
+        return this.getImageTokki7().getImgTokki7();
+    }
+
+    @JsonIgnore
+    public void setImgTokki7(DynamicImage imgTokki7) {
+        this.getImageTokki7().setImgTokki7(imgTokki7);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki8() {
+        return this.getImageTokki8().getImgTokki8();
+    }
+
+    @JsonIgnore
+    public void setImgTokki8(DynamicImage imgTokki8) {
+        this.getImageTokki8().setImgTokki8(imgTokki8);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokki9() {
+        return this.getImageTokki9().getImgTokki9();
+    }
+
+    @JsonIgnore
+    public void setImgTokki9(DynamicImage imgTokki9) {
+        this.getImageTokki9().setImgTokki9(imgTokki9);
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void initialize(RString directoryPath, NinteichosahyoTokkijikos nts, NinteiChosaTokkiJikou tokkiJiko, Operation op) {
         newHandler(this).initialize(directoryPath, nts, tokkiJiko, op);
+    }
+
+    @Override
+    public void refresh(RString directoryPath, NinteichosahyoTokkijikos nts, Operation op) {
+        newHandler(this).refresh(directoryPath, nts, op);
     }
 
     @Override
@@ -787,10 +1046,7 @@ public class TokkiImagesPerKomokuDiv extends Panel implements ITokkiImagesPerKom
         PanelSessionAccessor.put(this, TOKKIJIKO_KEY.value(), tokkiJiko);
     }
 
-    /**
-     * @return この共有子Divで扱う「特記事項」
-     */
-    public NinteichosahyoTokkijikos getTokkijiko() {
+    NinteichosahyoTokkijikos getTokkijiko() {
         return PanelSessionAccessor.get(this, TOKKIJIKO_KEY.value(), TOKKIJIKO_KEY.type());
     }
 

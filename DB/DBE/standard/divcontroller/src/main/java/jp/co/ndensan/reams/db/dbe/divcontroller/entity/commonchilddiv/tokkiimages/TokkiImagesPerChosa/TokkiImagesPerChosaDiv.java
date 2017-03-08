@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimage
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import java.util.List;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -37,6 +36,8 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
      */
     @JsonProperty("TokkiJikoSelecting")
     private TokkiJikoSelectingDiv TokkiJikoSelecting;
+    @JsonProperty("ccdRembanEditor")
+    private TokkiImagesPerKomokuDiv ccdRembanEditor;
     @JsonProperty("repTokkiJikos")
     private ControlRepeater<TokkiImagesPerKomokuDiv> repTokkiJikos;
     @JsonProperty("btnReturn")
@@ -78,6 +79,15 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     @JsonProperty("TokkiJikoSelecting")
     public void setTokkiJikoSelecting(TokkiJikoSelectingDiv TokkiJikoSelecting) {
         this.TokkiJikoSelecting = TokkiJikoSelecting;
+    }
+
+    /*
+     * getccdRembanEditor
+     * @return ccdRembanEditor
+     */
+    @JsonProperty("ccdRembanEditor")
+    public ITokkiImagesPerKomokuDiv getCcdRembanEditor() {
+        return ccdRembanEditor;
     }
 
     /*
@@ -267,7 +277,6 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    //
     @Override
     public void initialize(RString directoryPath) {
         newHandler(this).initialize(directoryPath);
@@ -330,5 +339,4 @@ public class TokkiImagesPerChosaDiv extends Panel implements ITokkiImagesPerChos
     private static TokkiImagesPerChosaDivHandler newHandler(TokkiImagesPerChosaDiv div) {
         return new TokkiImagesPerChosaDivHandler(div);
     }
-
 }

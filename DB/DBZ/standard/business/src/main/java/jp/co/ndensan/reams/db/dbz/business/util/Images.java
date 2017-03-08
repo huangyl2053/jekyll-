@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.business.util;
 
 import java.io.File;
 import java.nio.file.Files;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.util._Base64Converter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.util.serialization.Base64Serializer;
 
 /**
- *
+ * UIでイメージファイルを扱う際の共通的な処理を提供します。
  */
 public final class Images {
 
@@ -24,6 +24,9 @@ public final class Images {
     private Images() {
     }
 
+    /**
+     * 扱うイメージファイルの拡張子です。
+     */
     public static enum FileExtentions {
 
         PNG("png");
@@ -49,8 +52,8 @@ public final class Images {
     }
 
     /**
-     * @param filePath
-     * @return
+     * @param filePath イメージファイルのパス
+     * @return 指定のイメージファイルをhtmlで表示可能な形式へ変換した結果の文字列
      */
     public static RString toBinaryString(RString filePath) {
         File file = new File(filePath.toString());
@@ -64,7 +67,7 @@ public final class Images {
         try {
             return new RStringBuilder()
                     .append(IMAGE_HEADER.replace(REPLACEE, ext.value()))
-                    .append(Base64Serializer.serialize(Files.readAllBytes(file.toPath())))
+                    .append(_Base64Converter.encodeBase64RString(Files.readAllBytes(file.toPath())))
                     .toRString();
         } catch (Exception e) {
             throw new SystemException(e);
