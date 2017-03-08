@@ -9,12 +9,15 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 被保険者台帳管理・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7501HihokenshaDaichoFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7501HihokenshaDaichoFukushi");
 
@@ -50,7 +53,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -60,7 +63,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -69,7 +72,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * idoYMDのgetメソッドです。
-     * 
+     *
      * @return idoYMD
      */
     @CheckForNull
@@ -79,7 +82,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * idoYMDのsetメソッドです。
-     * 
+     *
      * @param idoYMD idoYMD
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -88,7 +91,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * edaNoのgetメソッドです。
-     * 
+     *
      * @return edaNo
      */
     @CheckForNull
@@ -98,7 +101,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * edaNoのsetメソッドです。
-     * 
+     *
      * @param edaNo edaNo
      */
     public void setEdaNo(RString edaNo) {
@@ -107,7 +110,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * idoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return idoJiyuCode
      */
     @CheckForNull
@@ -117,7 +120,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * idoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param idoJiyuCode idoJiyuCode
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
@@ -126,7 +129,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shichosonCodeのgetメソッドです。
-     * 
+     *
      * @return shichosonCode
      */
     @CheckForNull
@@ -136,7 +139,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shichosonCodeのsetメソッドです。
-     * 
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -145,7 +148,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shikibetsuCode
      */
     @CheckForNull
@@ -155,7 +158,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -164,7 +167,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuShutokuJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return shikakuShutokuJiyuCode
      */
     @CheckForNull
@@ -174,7 +177,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuShutokuJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuJiyuCode shikakuShutokuJiyuCode
      */
     public void setShikakuShutokuJiyuCode(RString shikakuShutokuJiyuCode) {
@@ -183,7 +186,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuShutokuYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuShutokuYMD
      */
     @CheckForNull
@@ -193,7 +196,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuShutokuYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuYMD shikakuShutokuYMD
      */
     public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
@@ -202,7 +205,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuShutokuTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuShutokuTodokedeYMD
      */
     @CheckForNull
@@ -212,7 +215,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuShutokuTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuTodokedeYMD shikakuShutokuTodokedeYMD
      */
     public void setShikakuShutokuTodokedeYMD(FlexibleDate shikakuShutokuTodokedeYMD) {
@@ -221,7 +224,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * ichigoShikakuShutokuYMDのgetメソッドです。
-     * 
+     *
      * @return ichigoShikakuShutokuYMD
      */
     @CheckForNull
@@ -231,7 +234,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * ichigoShikakuShutokuYMDのsetメソッドです。
-     * 
+     *
      * @param ichigoShikakuShutokuYMD ichigoShikakuShutokuYMD
      */
     public void setIchigoShikakuShutokuYMD(FlexibleDate ichigoShikakuShutokuYMD) {
@@ -240,7 +243,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * hihokennshaKubunCodeのgetメソッドです。
-     * 
+     *
      * @return hihokennshaKubunCode
      */
     @CheckForNull
@@ -250,7 +253,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * hihokennshaKubunCodeのsetメソッドです。
-     * 
+     *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
     public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
@@ -259,7 +262,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return shikakuSoshitsuJiyuCode
      */
     @CheckForNull
@@ -269,7 +272,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuJiyuCode shikakuSoshitsuJiyuCode
      */
     public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
@@ -278,7 +281,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuSoshitsuYMD
      */
     @CheckForNull
@@ -288,7 +291,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuYMD shikakuSoshitsuYMD
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
@@ -297,7 +300,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuYMDCmpのgetメソッドです。
-     * 
+     *
      * @return shikakuSoshitsuYMDCmp
      */
     @CheckForNull
@@ -307,7 +310,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuYMDCmpのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuYMDCmp shikakuSoshitsuYMDCmp
      */
     public void setShikakuSoshitsuYMDCmp(RString shikakuSoshitsuYMDCmp) {
@@ -316,7 +319,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuSoshitsuTodokedeYMD
      */
     @CheckForNull
@@ -326,7 +329,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuSoshitsuTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuTodokedeYMD shikakuSoshitsuTodokedeYMD
      */
     public void setShikakuSoshitsuTodokedeYMD(FlexibleDate shikakuSoshitsuTodokedeYMD) {
@@ -335,7 +338,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuHenkoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return shikakuHenkoJiyuCode
      */
     @CheckForNull
@@ -345,7 +348,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuHenkoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param shikakuHenkoJiyuCode shikakuHenkoJiyuCode
      */
     public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
@@ -354,7 +357,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuHenkoYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuHenkoYMD
      */
     @CheckForNull
@@ -364,7 +367,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuHenkoYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuHenkoYMD shikakuHenkoYMD
      */
     public void setShikakuHenkoYMD(FlexibleDate shikakuHenkoYMD) {
@@ -373,7 +376,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuHenkoTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuHenkoTodokedeYMD
      */
     @CheckForNull
@@ -383,7 +386,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * shikakuHenkoTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuHenkoTodokedeYMD shikakuHenkoTodokedeYMD
      */
     public void setShikakuHenkoTodokedeYMD(FlexibleDate shikakuHenkoTodokedeYMD) {
@@ -392,7 +395,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiTekiyoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return jushochitokureiTekiyoJiyuCode
      */
     @CheckForNull
@@ -402,7 +405,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiTekiyoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param jushochitokureiTekiyoJiyuCode jushochitokureiTekiyoJiyuCode
      */
     public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
@@ -411,7 +414,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiTekiyoYMDのgetメソッドです。
-     * 
+     *
      * @return jushochitokureiTekiyoYMD
      */
     @CheckForNull
@@ -421,7 +424,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiTekiyoYMDのsetメソッドです。
-     * 
+     *
      * @param jushochitokureiTekiyoYMD jushochitokureiTekiyoYMD
      */
     public void setJushochitokureiTekiyoYMD(FlexibleDate jushochitokureiTekiyoYMD) {
@@ -430,7 +433,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiTekiyoTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return jushochitokureiTekiyoTodokedeYMD
      */
     @CheckForNull
@@ -440,7 +443,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiTekiyoTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param jushochitokureiTekiyoTodokedeYMD jushochitokureiTekiyoTodokedeYMD
      */
     public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate jushochitokureiTekiyoTodokedeYMD) {
@@ -449,7 +452,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiKaijoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return jushochitokureiKaijoJiyuCode
      */
     @CheckForNull
@@ -459,7 +462,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiKaijoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param jushochitokureiKaijoJiyuCode jushochitokureiKaijoJiyuCode
      */
     public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
@@ -468,7 +471,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiKaijoYMDのgetメソッドです。
-     * 
+     *
      * @return jushochitokureiKaijoYMD
      */
     @CheckForNull
@@ -478,7 +481,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiKaijoYMDのsetメソッドです。
-     * 
+     *
      * @param jushochitokureiKaijoYMD jushochitokureiKaijoYMD
      */
     public void setJushochitokureiKaijoYMD(FlexibleDate jushochitokureiKaijoYMD) {
@@ -487,7 +490,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiKaijoTodokedeYMDのgetメソッドです。
-     * 
+     *
      * @return jushochitokureiKaijoTodokedeYMD
      */
     @CheckForNull
@@ -497,7 +500,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochitokureiKaijoTodokedeYMDのsetメソッドです。
-     * 
+     *
      * @param jushochitokureiKaijoTodokedeYMD jushochitokureiKaijoTodokedeYMD
      */
     public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate jushochitokureiKaijoTodokedeYMD) {
@@ -506,7 +509,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochiTokureiFlagのgetメソッドです。
-     * 
+     *
      * @return jushochiTokureiFlag
      */
     @CheckForNull
@@ -516,7 +519,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * jushochiTokureiFlagのsetメソッドです。
-     * 
+     *
      * @param jushochiTokureiFlag jushochiTokureiFlag
      */
     public void setJushochiTokureiFlag(RString jushochiTokureiFlag) {
@@ -525,7 +528,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * koikinaiJushochiTokureiFlagのgetメソッドです。
-     * 
+     *
      * @return koikinaiJushochiTokureiFlag
      */
     @CheckForNull
@@ -535,7 +538,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * koikinaiJushochiTokureiFlagのsetメソッドです。
-     * 
+     *
      * @param koikinaiJushochiTokureiFlag koikinaiJushochiTokureiFlag
      */
     public void setKoikinaiJushochiTokureiFlag(RString koikinaiJushochiTokureiFlag) {
@@ -544,7 +547,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * koikinaiTokureiSochimotoShichosonCodeのgetメソッドです。
-     * 
+     *
      * @return koikinaiTokureiSochimotoShichosonCode
      */
     @CheckForNull
@@ -554,8 +557,9 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * koikinaiTokureiSochimotoShichosonCodeのsetメソッドです。
-     * 
-     * @param koikinaiTokureiSochimotoShichosonCode koikinaiTokureiSochimotoShichosonCode
+     *
+     * @param koikinaiTokureiSochimotoShichosonCode
+     * koikinaiTokureiSochimotoShichosonCode
      */
     public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
         this.koikinaiTokureiSochimotoShichosonCode = koikinaiTokureiSochimotoShichosonCode;
@@ -563,7 +567,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * kyuShichosonCodeのgetメソッドです。
-     * 
+     *
      * @return kyuShichosonCode
      */
     @CheckForNull
@@ -573,7 +577,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * kyuShichosonCodeのsetメソッドです。
-     * 
+     *
      * @param kyuShichosonCode kyuShichosonCode
      */
     public void setKyuShichosonCode(LasdecCode kyuShichosonCode) {
@@ -582,7 +586,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * logicalDeletedFlagのgetメソッドです。
-     * 
+     *
      * @return logicalDeletedFlag
      */
     @CheckForNull
@@ -592,7 +596,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * logicalDeletedFlagのsetメソッドです。
-     * 
+     *
      * @param logicalDeletedFlag logicalDeletedFlag
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -601,9 +605,9 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * このエンティティの主キーが他の{@literal DbV7501HihokenshaDaichoFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7501HihokenshaDaichoFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -652,6 +656,7 @@ public class DbV7501HihokenshaDaichoFukushiEntity extends DbTableEntityBase<DbV7
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

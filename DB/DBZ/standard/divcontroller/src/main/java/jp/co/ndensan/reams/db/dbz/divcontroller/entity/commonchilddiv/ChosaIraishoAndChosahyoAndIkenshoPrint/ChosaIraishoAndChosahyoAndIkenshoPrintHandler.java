@@ -213,6 +213,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgNinteiChosa().setDataSource(rowList);
+            div.getTxtHakkoYMD().setValue(RDate.getNowDate());
             RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
@@ -280,6 +281,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 rowList.add(row);
             }
             div.getDgShujiiIkensho().setDataSource(rowList);
+            div.getTxtHakkoYMD().setValue(RDate.getNowDate());
             RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定,
                     RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());

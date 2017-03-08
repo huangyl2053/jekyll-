@@ -15,12 +15,15 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護賦課・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7506FukaFukushi");
 
@@ -76,7 +79,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiNendoのgetメソッドです。
-     * 
+     *
      * @return choteiNendo
      */
     @CheckForNull
@@ -86,7 +89,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiNendoのsetメソッドです。
-     * 
+     *
      * @param choteiNendo choteiNendo
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -95,7 +98,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fukaNendoのgetメソッドです。
-     * 
+     *
      * @return fukaNendo
      */
     @CheckForNull
@@ -105,7 +108,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fukaNendoのsetメソッドです。
-     * 
+     *
      * @param fukaNendo fukaNendo
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -114,7 +117,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsuchishoNoのgetメソッドです。
-     * 
+     *
      * @return tsuchishoNo
      */
     @CheckForNull
@@ -124,7 +127,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsuchishoNoのsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo tsuchishoNo
      */
     public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
@@ -133,7 +136,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -143,7 +146,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -152,7 +155,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -162,7 +165,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -171,7 +174,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return shikibetsuCode
      */
     @CheckForNull
@@ -181,7 +184,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -190,7 +193,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * setaiCodeのgetメソッドです。
-     * 
+     *
      * @return setaiCode
      */
     @CheckForNull
@@ -200,7 +203,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * setaiCodeのsetメソッドです。
-     * 
+     *
      * @param setaiCode setaiCode
      */
     public void setSetaiCode(SetaiCode setaiCode) {
@@ -209,7 +212,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * setaiInsuのgetメソッドです。
-     * 
+     *
      * @return setaiInsu
      */
     @CheckForNull
@@ -219,7 +222,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * setaiInsuのsetメソッドです。
-     * 
+     *
      * @param setaiInsu setaiInsu
      */
     public void setSetaiInsu(int setaiInsu) {
@@ -228,7 +231,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuShutokuYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuShutokuYMD
      */
     @CheckForNull
@@ -238,7 +241,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuShutokuYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuYMD shikakuShutokuYMD
      */
     public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
@@ -247,7 +250,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuShutokuJiyuのgetメソッドです。
-     * 
+     *
      * @return shikakuShutokuJiyu
      */
     @CheckForNull
@@ -257,7 +260,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuShutokuJiyuのsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuJiyu shikakuShutokuJiyu
      */
     public void setShikakuShutokuJiyu(RString shikakuShutokuJiyu) {
@@ -266,7 +269,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuSoshitsuYMDのgetメソッドです。
-     * 
+     *
      * @return shikakuSoshitsuYMD
      */
     @CheckForNull
@@ -276,7 +279,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuSoshitsuYMDのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuYMD shikakuSoshitsuYMD
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
@@ -285,7 +288,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuSoshitsuJiyuのgetメソッドです。
-     * 
+     *
      * @return shikakuSoshitsuJiyu
      */
     @CheckForNull
@@ -295,7 +298,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shikakuSoshitsuJiyuのsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuJiyu shikakuSoshitsuJiyu
      */
     public void setShikakuSoshitsuJiyu(RString shikakuSoshitsuJiyu) {
@@ -304,7 +307,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * seihofujoShuruiのgetメソッドです。
-     * 
+     *
      * @return seihofujoShurui
      */
     @CheckForNull
@@ -314,7 +317,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * seihofujoShuruiのsetメソッドです。
-     * 
+     *
      * @param seihofujoShurui seihofujoShurui
      */
     public void setSeihofujoShurui(RString seihofujoShurui) {
@@ -323,7 +326,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * seihoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return seihoKaishiYMD
      */
     @CheckForNull
@@ -333,7 +336,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * seihoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param seihoKaishiYMD seihoKaishiYMD
      */
     public void setSeihoKaishiYMD(FlexibleDate seihoKaishiYMD) {
@@ -342,7 +345,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * seihoHaishiYMDのgetメソッドです。
-     * 
+     *
      * @return seihoHaishiYMD
      */
     @CheckForNull
@@ -352,7 +355,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * seihoHaishiYMDのsetメソッドです。
-     * 
+     *
      * @param seihoHaishiYMD seihoHaishiYMD
      */
     public void setSeihoHaishiYMD(FlexibleDate seihoHaishiYMD) {
@@ -361,7 +364,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * ronenKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return ronenKaishiYMD
      */
     @CheckForNull
@@ -371,7 +374,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * ronenKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param ronenKaishiYMD ronenKaishiYMD
      */
     public void setRonenKaishiYMD(FlexibleDate ronenKaishiYMD) {
@@ -380,7 +383,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * ronenHaishiYMDのgetメソッドです。
-     * 
+     *
      * @return ronenHaishiYMD
      */
     @CheckForNull
@@ -390,7 +393,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * ronenHaishiYMDのsetメソッドです。
-     * 
+     *
      * @param ronenHaishiYMD ronenHaishiYMD
      */
     public void setRonenHaishiYMD(FlexibleDate ronenHaishiYMD) {
@@ -399,7 +402,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fukaYMDのgetメソッドです。
-     * 
+     *
      * @return fukaYMD
      */
     @CheckForNull
@@ -409,7 +412,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fukaYMDのsetメソッドです。
-     * 
+     *
      * @param fukaYMD fukaYMD
      */
     public void setFukaYMD(FlexibleDate fukaYMD) {
@@ -418,7 +421,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kazeiKubunのgetメソッドです。
-     * 
+     *
      * @return kazeiKubun
      */
     @CheckForNull
@@ -428,7 +431,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kazeiKubunのsetメソッドです。
-     * 
+     *
      * @param kazeiKubun kazeiKubun
      */
     public void setKazeiKubun(RString kazeiKubun) {
@@ -437,7 +440,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * setaikazeiKubunのgetメソッドです。
-     * 
+     *
      * @return setaikazeiKubun
      */
     @CheckForNull
@@ -447,7 +450,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * setaikazeiKubunのsetメソッドです。
-     * 
+     *
      * @param setaikazeiKubun setaikazeiKubun
      */
     public void setSetaikazeiKubun(RString setaikazeiKubun) {
@@ -456,7 +459,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * gokeiShotokuGakuのgetメソッドです。
-     * 
+     *
      * @return gokeiShotokuGaku
      */
     @CheckForNull
@@ -466,7 +469,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * gokeiShotokuGakuのsetメソッドです。
-     * 
+     *
      * @param gokeiShotokuGaku gokeiShotokuGaku
      */
     public void setGokeiShotokuGaku(Decimal gokeiShotokuGaku) {
@@ -475,7 +478,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * nenkinShunyuGakuのgetメソッドです。
-     * 
+     *
      * @return nenkinShunyuGaku
      */
     @CheckForNull
@@ -485,7 +488,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * nenkinShunyuGakuのsetメソッドです。
-     * 
+     *
      * @param nenkinShunyuGaku nenkinShunyuGaku
      */
     public void setNenkinShunyuGaku(Decimal nenkinShunyuGaku) {
@@ -494,7 +497,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankaiのgetメソッドです。
-     * 
+     *
      * @return hokenryoDankai
      */
     @CheckForNull
@@ -504,7 +507,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankaiのsetメソッドです。
-     * 
+     *
      * @param hokenryoDankai hokenryoDankai
      */
     public void setHokenryoDankai(RString hokenryoDankai) {
@@ -513,7 +516,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankai1のgetメソッドです。
-     * 
+     *
      * @return hokenryoDankai1
      */
     @CheckForNull
@@ -523,7 +526,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankai1のsetメソッドです。
-     * 
+     *
      * @param hokenryoDankai1 hokenryoDankai1
      */
     public void setHokenryoDankai1(RString hokenryoDankai1) {
@@ -532,7 +535,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * nengakuHokenryo1のgetメソッドです。
-     * 
+     *
      * @return nengakuHokenryo1
      */
     @CheckForNull
@@ -542,7 +545,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * nengakuHokenryo1のsetメソッドです。
-     * 
+     *
      * @param nengakuHokenryo1 nengakuHokenryo1
      */
     public void setNengakuHokenryo1(Decimal nengakuHokenryo1) {
@@ -551,7 +554,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariStartYM1のgetメソッドです。
-     * 
+     *
      * @return tsukiwariStartYM1
      */
     @CheckForNull
@@ -561,7 +564,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariStartYM1のsetメソッドです。
-     * 
+     *
      * @param tsukiwariStartYM1 tsukiwariStartYM1
      */
     public void setTsukiwariStartYM1(FlexibleYearMonth tsukiwariStartYM1) {
@@ -570,7 +573,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariEndYM1のgetメソッドです。
-     * 
+     *
      * @return tsukiwariEndYM1
      */
     @CheckForNull
@@ -580,7 +583,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariEndYM1のsetメソッドです。
-     * 
+     *
      * @param tsukiwariEndYM1 tsukiwariEndYM1
      */
     public void setTsukiwariEndYM1(FlexibleYearMonth tsukiwariEndYM1) {
@@ -589,7 +592,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankai2のgetメソッドです。
-     * 
+     *
      * @return hokenryoDankai2
      */
     @CheckForNull
@@ -599,7 +602,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankai2のsetメソッドです。
-     * 
+     *
      * @param hokenryoDankai2 hokenryoDankai2
      */
     public void setHokenryoDankai2(RString hokenryoDankai2) {
@@ -608,7 +611,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * nengakuHokenryo2のgetメソッドです。
-     * 
+     *
      * @return nengakuHokenryo2
      */
     @CheckForNull
@@ -618,7 +621,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * nengakuHokenryo2のsetメソッドです。
-     * 
+     *
      * @param nengakuHokenryo2 nengakuHokenryo2
      */
     public void setNengakuHokenryo2(Decimal nengakuHokenryo2) {
@@ -627,7 +630,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariStartYM2のgetメソッドです。
-     * 
+     *
      * @return tsukiwariStartYM2
      */
     @CheckForNull
@@ -637,7 +640,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariStartYM2のsetメソッドです。
-     * 
+     *
      * @param tsukiwariStartYM2 tsukiwariStartYM2
      */
     public void setTsukiwariStartYM2(FlexibleYearMonth tsukiwariStartYM2) {
@@ -646,7 +649,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariEndYM2のgetメソッドです。
-     * 
+     *
      * @return tsukiwariEndYM2
      */
     @CheckForNull
@@ -656,7 +659,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tsukiwariEndYM2のsetメソッドです。
-     * 
+     *
      * @param tsukiwariEndYM2 tsukiwariEndYM2
      */
     public void setTsukiwariEndYM2(FlexibleYearMonth tsukiwariEndYM2) {
@@ -665,7 +668,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiNichijiのgetメソッドです。
-     * 
+     *
      * @return choteiNichiji
      */
     @CheckForNull
@@ -675,7 +678,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiNichijiのsetメソッドです。
-     * 
+     *
      * @param choteiNichiji choteiNichiji
      */
     public void setChoteiNichiji(YMDHMS choteiNichiji) {
@@ -684,7 +687,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu1のgetメソッドです。
-     * 
+     *
      * @return choteiJiyu1
      */
     @CheckForNull
@@ -694,7 +697,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu1のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu1 choteiJiyu1
      */
     public void setChoteiJiyu1(RString choteiJiyu1) {
@@ -703,7 +706,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu2のgetメソッドです。
-     * 
+     *
      * @return choteiJiyu2
      */
     @CheckForNull
@@ -713,7 +716,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu2のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu2 choteiJiyu2
      */
     public void setChoteiJiyu2(RString choteiJiyu2) {
@@ -722,7 +725,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu3のgetメソッドです。
-     * 
+     *
      * @return choteiJiyu3
      */
     @CheckForNull
@@ -732,7 +735,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu3のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu3 choteiJiyu3
      */
     public void setChoteiJiyu3(RString choteiJiyu3) {
@@ -741,7 +744,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu4のgetメソッドです。
-     * 
+     *
      * @return choteiJiyu4
      */
     @CheckForNull
@@ -751,7 +754,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choteiJiyu4のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu4 choteiJiyu4
      */
     public void setChoteiJiyu4(RString choteiJiyu4) {
@@ -760,7 +763,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * koseiMのgetメソッドです。
-     * 
+     *
      * @return koseiM
      */
     @CheckForNull
@@ -770,7 +773,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * koseiMのsetメソッドです。
-     * 
+     *
      * @param koseiM koseiM
      */
     public void setKoseiM(RString koseiM) {
@@ -779,7 +782,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * gemmenMaeHokenryoのgetメソッドです。
-     * 
+     *
      * @return gemmenMaeHokenryo
      */
     @CheckForNull
@@ -789,7 +792,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * gemmenMaeHokenryoのsetメソッドです。
-     * 
+     *
      * @param gemmenMaeHokenryo gemmenMaeHokenryo
      */
     public void setGemmenMaeHokenryo(Decimal gemmenMaeHokenryo) {
@@ -798,7 +801,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * gemmenGakuのgetメソッドです。
-     * 
+     *
      * @return gemmenGaku
      */
     @CheckForNull
@@ -808,7 +811,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * gemmenGakuのsetメソッドです。
-     * 
+     *
      * @param gemmenGaku gemmenGaku
      */
     public void setGemmenGaku(Decimal gemmenGaku) {
@@ -817,7 +820,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kakuteiHokenryoのgetメソッドです。
-     * 
+     *
      * @return kakuteiHokenryo
      */
     @CheckForNull
@@ -827,7 +830,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kakuteiHokenryoのsetメソッドです。
-     * 
+     *
      * @param kakuteiHokenryo kakuteiHokenryo
      */
     public void setKakuteiHokenryo(Decimal kakuteiHokenryo) {
@@ -836,7 +839,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankaiKarisannteiのgetメソッドです。
-     * 
+     *
      * @return hokenryoDankaiKarisanntei
      */
     @CheckForNull
@@ -846,7 +849,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * hokenryoDankaiKarisannteiのsetメソッドです。
-     * 
+     *
      * @param hokenryoDankaiKarisanntei hokenryoDankaiKarisanntei
      */
     public void setHokenryoDankaiKarisanntei(RString hokenryoDankaiKarisanntei) {
@@ -855,7 +858,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choshuHohoRirekiNoのgetメソッドです。
-     * 
+     *
      * @return choshuHohoRirekiNo
      */
     @CheckForNull
@@ -865,7 +868,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * choshuHohoRirekiNoのsetメソッドです。
-     * 
+     *
      * @param choshuHohoRirekiNo choshuHohoRirekiNo
      */
     public void setChoshuHohoRirekiNo(int choshuHohoRirekiNo) {
@@ -874,7 +877,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * idoKijunNichijiのgetメソッドです。
-     * 
+     *
      * @return idoKijunNichiji
      */
     @CheckForNull
@@ -884,7 +887,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * idoKijunNichijiのsetメソッドです。
-     * 
+     *
      * @param idoKijunNichiji idoKijunNichiji
      */
     public void setIdoKijunNichiji(YMDHMS idoKijunNichiji) {
@@ -893,7 +896,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kozaKubunのgetメソッドです。
-     * 
+     *
      * @return kozaKubun
      */
     @CheckForNull
@@ -903,7 +906,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kozaKubunのsetメソッドです。
-     * 
+     *
      * @param kozaKubun kozaKubun
      */
     public void setKozaKubun(RString kozaKubun) {
@@ -912,7 +915,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kyokaisoKubunのgetメソッドです。
-     * 
+     *
      * @return kyokaisoKubun
      */
     @CheckForNull
@@ -922,7 +925,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * kyokaisoKubunのsetメソッドです。
-     * 
+     *
      * @param kyokaisoKubun kyokaisoKubun
      */
     public void setKyokaisoKubun(RString kyokaisoKubun) {
@@ -931,7 +934,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shokkenKubunのgetメソッドです。
-     * 
+     *
      * @return shokkenKubun
      */
     @CheckForNull
@@ -941,7 +944,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * shokkenKubunのsetメソッドです。
-     * 
+     *
      * @param shokkenKubun shokkenKubun
      */
     public void setShokkenKubun(RString shokkenKubun) {
@@ -950,7 +953,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fukaShichosonCodeのgetメソッドです。
-     * 
+     *
      * @return fukaShichosonCode
      */
     @CheckForNull
@@ -960,7 +963,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fukaShichosonCodeのsetメソッドです。
-     * 
+     *
      * @param fukaShichosonCode fukaShichosonCode
      */
     public void setFukaShichosonCode(LasdecCode fukaShichosonCode) {
@@ -969,7 +972,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tkSaishutsuKampuGakuのgetメソッドです。
-     * 
+     *
      * @return tkSaishutsuKampuGaku
      */
     @CheckForNull
@@ -979,7 +982,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * tkSaishutsuKampuGakuのsetメソッドです。
-     * 
+     *
      * @param tkSaishutsuKampuGaku tkSaishutsuKampuGaku
      */
     public void setTkSaishutsuKampuGaku(Decimal tkSaishutsuKampuGaku) {
@@ -988,7 +991,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fuSaishutsuKampuGakuのgetメソッドです。
-     * 
+     *
      * @return fuSaishutsuKampuGaku
      */
     @CheckForNull
@@ -998,7 +1001,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * fuSaishutsuKampuGakuのsetメソッドです。
-     * 
+     *
      * @param fuSaishutsuKampuGaku fuSaishutsuKampuGaku
      */
     public void setFuSaishutsuKampuGaku(Decimal fuSaishutsuKampuGaku) {
@@ -1007,9 +1010,9 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * このエンティティの主キーが他の{@literal DbV7506FukaFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7506FukaFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -1078,6 +1081,7 @@ public class DbV7506FukaFukushiEntity extends DbTableEntityBase<DbV7506FukaFukus
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

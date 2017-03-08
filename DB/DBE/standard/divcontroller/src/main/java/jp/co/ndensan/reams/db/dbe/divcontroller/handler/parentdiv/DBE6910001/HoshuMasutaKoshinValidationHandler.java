@@ -220,6 +220,7 @@ public class HoshuMasutaKoshinValidationHandler {
 
         if (追加モード.equals(div.getShinsakaiIinBetuTankaState())) {
             validationMessages.add(check開始年月が必須(開始年月));
+            validationMessages.add(check終了年月が必須(終了年月));
             validationMessages.add(check審査委員コードが必須(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue()));
             validationMessages.add(check審査委員コードが登録済み(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue()));
             validationMessages.add(check期間が不正(開始年月, 終了年月));

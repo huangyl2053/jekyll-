@@ -7,12 +7,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 特徴非課税年金判定テーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<DbV2503TokuchoHikazeiNenkinHanteiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV2503TokuchoHikazeiNenkinHantei");
 
@@ -24,7 +27,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * tsuchishoNoのgetメソッドです。
-     * 
+     *
      * @return tsuchishoNo
      */
     @CheckForNull
@@ -34,7 +37,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * tsuchishoNoのsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo tsuchishoNo
      */
     public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
@@ -43,7 +46,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * choteiNendoのgetメソッドです。
-     * 
+     *
      * @return choteiNendo
      */
     @CheckForNull
@@ -53,7 +56,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * choteiNendoのsetメソッドです。
-     * 
+     *
      * @param choteiNendo choteiNendo
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -62,7 +65,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * kazeiNendoのgetメソッドです。
-     * 
+     *
      * @return kazeiNendo
      */
     @CheckForNull
@@ -72,7 +75,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * kazeiNendoのsetメソッドです。
-     * 
+     *
      * @param kazeiNendo kazeiNendo
      */
     public void setKazeiNendo(FlexibleYear kazeiNendo) {
@@ -81,7 +84,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * kiのgetメソッドです。
-     * 
+     *
      * @return ki
      */
     @CheckForNull
@@ -91,7 +94,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * kiのsetメソッドです。
-     * 
+     *
      * @param ki ki
      */
     public void setKi(int ki) {
@@ -100,7 +103,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * isHikazeiNenkinのgetメソッドです。
-     * 
+     *
      * @return isHikazeiNenkin
      */
     @CheckForNull
@@ -110,7 +113,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * isHikazeiNenkinのsetメソッドです。
-     * 
+     *
      * @param isHikazeiNenkin isHikazeiNenkin
      */
     public void setIsHikazeiNenkin(boolean isHikazeiNenkin) {
@@ -119,9 +122,9 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbV2503TokuchoHikazeiNenkinHanteiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV2503TokuchoHikazeiNenkinHanteiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -146,6 +149,7 @@ public class DbV2503TokuchoHikazeiNenkinHanteiEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -13,12 +13,15 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護事業者・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516KaigoJigyoshaFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7516KaigoJigyoshaFukushi");
 
@@ -52,7 +55,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaNoのgetメソッドです。
-     * 
+     *
      * @return jigyoshaNo
      */
     @CheckForNull
@@ -62,7 +65,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaNoのsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo jigyoshaNo
      */
     public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -71,7 +74,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * yukoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return yukoKaishiYMD
      */
     @CheckForNull
@@ -81,7 +84,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * yukoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param yukoKaishiYMD yukoKaishiYMD
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -90,7 +93,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * yukoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return yukoShuryoYMD
      */
     @CheckForNull
@@ -100,7 +103,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * yukoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param yukoShuryoYMD yukoShuryoYMD
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -109,7 +112,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * idoYMDのgetメソッドです。
-     * 
+     *
      * @return idoYMD
      */
     @CheckForNull
@@ -119,7 +122,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * idoYMDのsetメソッドです。
-     * 
+     *
      * @param idoYMD idoYMD
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -128,7 +131,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * idoJiyuCodeのgetメソッドです。
-     * 
+     *
      * @return idoJiyuCode
      */
     @CheckForNull
@@ -138,7 +141,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * idoJiyuCodeのsetメソッドです。
-     * 
+     *
      * @param idoJiyuCode idoJiyuCode
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
@@ -147,7 +150,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoKaishiYMD
      */
     @CheckForNull
@@ -157,7 +160,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoKaishiYMD jigyoKaishiYMD
      */
     public void setJigyoKaishiYMD(FlexibleDate jigyoKaishiYMD) {
@@ -166,7 +169,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoKyushiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoKyushiYMD
      */
     @CheckForNull
@@ -176,7 +179,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoKyushiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoKyushiYMD jigyoKyushiYMD
      */
     public void setJigyoKyushiYMD(FlexibleDate jigyoKyushiYMD) {
@@ -185,7 +188,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoSaikaiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoSaikaiYMD
      */
     @CheckForNull
@@ -195,7 +198,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoSaikaiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoSaikaiYMD jigyoSaikaiYMD
      */
     public void setJigyoSaikaiYMD(FlexibleDate jigyoSaikaiYMD) {
@@ -204,7 +207,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoHaishiYMDのgetメソッドです。
-     * 
+     *
      * @return jigyoHaishiYMD
      */
     @CheckForNull
@@ -214,7 +217,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoHaishiYMDのsetメソッドです。
-     * 
+     *
      * @param jigyoHaishiYMD jigyoHaishiYMD
      */
     public void setJigyoHaishiYMD(FlexibleDate jigyoHaishiYMD) {
@@ -223,7 +226,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaNameのgetメソッドです。
-     * 
+     *
      * @return jigyoshaName
      */
     @CheckForNull
@@ -233,7 +236,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaNameのsetメソッドです。
-     * 
+     *
      * @param jigyoshaName jigyoshaName
      */
     public void setJigyoshaName(AtenaMeisho jigyoshaName) {
@@ -242,7 +245,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaNameKanaのgetメソッドです。
-     * 
+     *
      * @return jigyoshaNameKana
      */
     @CheckForNull
@@ -252,7 +255,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaNameKanaのsetメソッドです。
-     * 
+     *
      * @param jigyoshaNameKana jigyoshaNameKana
      */
     public void setJigyoshaNameKana(AtenaKanaMeisho jigyoshaNameKana) {
@@ -261,7 +264,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * yubinNoのgetメソッドです。
-     * 
+     *
      * @return yubinNo
      */
     @CheckForNull
@@ -271,7 +274,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * yubinNoのsetメソッドです。
-     * 
+     *
      * @param yubinNo yubinNo
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -280,7 +283,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaAddressのgetメソッドです。
-     * 
+     *
      * @return jigyoshaAddress
      */
     @CheckForNull
@@ -290,7 +293,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaAddressのsetメソッドです。
-     * 
+     *
      * @param jigyoshaAddress jigyoshaAddress
      */
     public void setJigyoshaAddress(AtenaJusho jigyoshaAddress) {
@@ -299,7 +302,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaKanaAddressのgetメソッドです。
-     * 
+     *
      * @return jigyoshaKanaAddress
      */
     @CheckForNull
@@ -309,7 +312,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * jigyoshaKanaAddressのsetメソッドです。
-     * 
+     *
      * @param jigyoshaKanaAddress jigyoshaKanaAddress
      */
     public void setJigyoshaKanaAddress(RString jigyoshaKanaAddress) {
@@ -318,7 +321,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * telNoのgetメソッドです。
-     * 
+     *
      * @return telNo
      */
     @CheckForNull
@@ -328,7 +331,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * telNoのsetメソッドです。
-     * 
+     *
      * @param telNo telNo
      */
     public void setTelNo(TelNo telNo) {
@@ -337,7 +340,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * faxNoのgetメソッドです。
-     * 
+     *
      * @return faxNo
      */
     @CheckForNull
@@ -347,7 +350,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * faxNoのsetメソッドです。
-     * 
+     *
      * @param faxNo faxNo
      */
     public void setFaxNo(TelNo faxNo) {
@@ -356,7 +359,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * atesakiBushoのgetメソッドです。
-     * 
+     *
      * @return atesakiBusho
      */
     @CheckForNull
@@ -366,7 +369,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * atesakiBushoのsetメソッドです。
-     * 
+     *
      * @param atesakiBusho atesakiBusho
      */
     public void setAtesakiBusho(RString atesakiBusho) {
@@ -375,7 +378,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * atesakininNameのgetメソッドです。
-     * 
+     *
      * @return atesakininName
      */
     @CheckForNull
@@ -385,7 +388,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * atesakininNameのsetメソッドです。
-     * 
+     *
      * @param atesakininName atesakininName
      */
     public void setAtesakininName(AtenaMeisho atesakininName) {
@@ -394,7 +397,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * atesakininNamekanaのgetメソッドです。
-     * 
+     *
      * @return atesakininNamekana
      */
     @CheckForNull
@@ -404,7 +407,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * atesakininNamekanaのsetメソッドです。
-     * 
+     *
      * @param atesakininNamekana atesakininNamekana
      */
     public void setAtesakininNamekana(AtenaKanaMeisho atesakininNamekana) {
@@ -413,7 +416,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * shiteiKijungaitoJigyoshaKubunのgetメソッドです。
-     * 
+     *
      * @return shiteiKijungaitoJigyoshaKubun
      */
     @CheckForNull
@@ -423,7 +426,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * shiteiKijungaitoJigyoshaKubunのsetメソッドです。
-     * 
+     *
      * @param shiteiKijungaitoJigyoshaKubun shiteiKijungaitoJigyoshaKubun
      */
     public void setShiteiKijungaitoJigyoshaKubun(Code shiteiKijungaitoJigyoshaKubun) {
@@ -432,7 +435,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * shozaiShichosonのgetメソッドです。
-     * 
+     *
      * @return shozaiShichoson
      */
     @CheckForNull
@@ -442,7 +445,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * shozaiShichosonのsetメソッドです。
-     * 
+     *
      * @param shozaiShichoson shozaiShichoson
      */
     public void setShozaiShichoson(RString shozaiShichoson) {
@@ -451,7 +454,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * serviceJisshiChiikiのgetメソッドです。
-     * 
+     *
      * @return serviceJisshiChiiki
      */
     @CheckForNull
@@ -461,7 +464,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * serviceJisshiChiikiのsetメソッドです。
-     * 
+     *
      * @param serviceJisshiChiiki serviceJisshiChiiki
      */
     public void setServiceJisshiChiiki(RString serviceJisshiChiiki) {
@@ -470,7 +473,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * hojinShubetsuのgetメソッドです。
-     * 
+     *
      * @return hojinShubetsu
      */
     @CheckForNull
@@ -480,7 +483,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * hojinShubetsuのsetメソッドです。
-     * 
+     *
      * @param hojinShubetsu hojinShubetsu
      */
     public void setHojinShubetsu(Code hojinShubetsu) {
@@ -489,7 +492,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * bedSuのgetメソッドです。
-     * 
+     *
      * @return bedSu
      */
     @CheckForNull
@@ -499,7 +502,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * bedSuのsetメソッドです。
-     * 
+     *
      * @param bedSu bedSu
      */
     public void setBedSu(int bedSu) {
@@ -508,7 +511,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * shozokuNinzuのgetメソッドです。
-     * 
+     *
      * @return shozokuNinzu
      */
     @CheckForNull
@@ -518,7 +521,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * shozokuNinzuのsetメソッドです。
-     * 
+     *
      * @param shozokuNinzu shozokuNinzu
      */
     public void setShozokuNinzu(int shozokuNinzu) {
@@ -527,7 +530,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * riyoshaSuのgetメソッドです。
-     * 
+     *
      * @return riyoshaSu
      */
     @CheckForNull
@@ -537,7 +540,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * riyoshaSuのsetメソッドです。
-     * 
+     *
      * @param riyoshaSu riyoshaSu
      */
     public void setRiyoshaSu(int riyoshaSu) {
@@ -546,7 +549,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * bikoのgetメソッドです。
-     * 
+     *
      * @return biko
      */
     @CheckForNull
@@ -556,7 +559,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * bikoのsetメソッドです。
-     * 
+     *
      * @param biko biko
      */
     public void setBiko(RString biko) {
@@ -565,9 +568,9 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * このエンティティの主キーが他の{@literal DbV7516KaigoJigyoshaFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7516KaigoJigyoshaFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -614,6 +617,7 @@ public class DbV7516KaigoJigyoshaFukushiEntity extends DbTableEntityBase<DbV7516
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

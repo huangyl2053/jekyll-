@@ -23,7 +23,10 @@
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shoyoJikanGokei" AS "shoyoJikanGokei"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBasho"
         ,DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" AS "kekkaShinsakaiKaisaiNo"
-        ,DbT5591GogitaiJoho."gogitaiDummyFlag"
+        ,DbT5591GogitaiJoho."gogitaiDummyFlag" AS "gogitaiDummyFlag"
+        ,DbT5591GogitaiJoho."gogitaiSeishinkaSonzaiFlag" AS "gogitaiSeishinkaSonzaiFlag"
+        ,DbT5501ShinsakaiKaisaiYoteiJoho."shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
+        ,DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode"
         FROM
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  DbT5501ShinsakaiKaisaiYoteiJoho
         LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" DbT5511ShinsakaiKaisaiKekkaJoho
@@ -55,6 +58,9 @@
         <result property="開催会場" column="shinsakaiKaisaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催番号" column="kekkaShinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合議体ダミーフラグ" column="gogitaiDummyFlag"/>
+        <result property="精神科存在フラグ" column="gogitaiSeishinkaSonzaiFlag"/>
+        <result property="予定定員" column="shinsakaiYoteiTeiin"/>
+        <result property="開催地区コード" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"

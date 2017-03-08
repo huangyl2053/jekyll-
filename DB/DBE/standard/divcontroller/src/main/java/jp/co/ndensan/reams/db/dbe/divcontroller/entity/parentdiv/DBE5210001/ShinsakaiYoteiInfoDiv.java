@@ -21,22 +21,30 @@ public class ShinsakaiYoteiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtGogitai")
-    private TextBox txtGogitai;
     @JsonProperty("txtShinsakaiMeisho")
     private TextBox txtShinsakaiMeisho;
-    @JsonProperty("chkMogi")
-    private CheckBoxList chkMogi;
+    @JsonProperty("txtGogitai")
+    private TextBox txtGogitai;
+    @JsonProperty("txtWaritsuke")
+    private TextBoxNum txtWaritsuke;
+    @JsonProperty("txtYoteiKaijo")
+    private TextBox txtYoteiKaijo;
+    @JsonProperty("txtChikuCode")
+    private TextBox txtChikuCode;
+    @JsonProperty("txtChikuMeisho")
+    private TextBox txtChikuMeisho;
+    @JsonProperty("txtYoteiTeiin")
+    private TextBoxNum txtYoteiTeiin;
     @JsonProperty("txtKaisaiYoteibi")
     private TextBoxFlexibleDate txtKaisaiYoteibi;
     @JsonProperty("txtYoteiStartTime")
     private TextBoxTime txtYoteiStartTime;
     @JsonProperty("txtYoteiEndTime")
     private TextBoxTime txtYoteiEndTime;
-    @JsonProperty("txtYoteiTeiin")
-    private TextBoxNum txtYoteiTeiin;
-    @JsonProperty("txtYoteiKaijo")
-    private TextBox txtYoteiKaijo;
+    @JsonProperty("chkShurui")
+    private CheckBoxList chkShurui;
+    @JsonProperty("chkMogi")
+    private CheckBoxList chkMogi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,24 +52,6 @@ public class ShinsakaiYoteiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * gettxtGogitai
-     * @return txtGogitai
-     */
-    @JsonProperty("txtGogitai")
-    public TextBox getTxtGogitai() {
-        return txtGogitai;
-    }
-
-    /*
-     * settxtGogitai
-     * @param txtGogitai txtGogitai
-     */
-    @JsonProperty("txtGogitai")
-    public void setTxtGogitai(TextBox txtGogitai) {
-        this.txtGogitai = txtGogitai;
-    }
-
     /*
      * gettxtShinsakaiMeisho
      * @return txtShinsakaiMeisho
@@ -81,21 +71,111 @@ public class ShinsakaiYoteiInfoDiv extends Panel {
     }
 
     /*
-     * getchkMogi
-     * @return chkMogi
+     * gettxtGogitai
+     * @return txtGogitai
      */
-    @JsonProperty("chkMogi")
-    public CheckBoxList getChkMogi() {
-        return chkMogi;
+    @JsonProperty("txtGogitai")
+    public TextBox getTxtGogitai() {
+        return txtGogitai;
     }
 
     /*
-     * setchkMogi
-     * @param chkMogi chkMogi
+     * settxtGogitai
+     * @param txtGogitai txtGogitai
      */
-    @JsonProperty("chkMogi")
-    public void setChkMogi(CheckBoxList chkMogi) {
-        this.chkMogi = chkMogi;
+    @JsonProperty("txtGogitai")
+    public void setTxtGogitai(TextBox txtGogitai) {
+        this.txtGogitai = txtGogitai;
+    }
+
+    /*
+     * gettxtWaritsuke
+     * @return txtWaritsuke
+     */
+    @JsonProperty("txtWaritsuke")
+    public TextBoxNum getTxtWaritsuke() {
+        return txtWaritsuke;
+    }
+
+    /*
+     * settxtWaritsuke
+     * @param txtWaritsuke txtWaritsuke
+     */
+    @JsonProperty("txtWaritsuke")
+    public void setTxtWaritsuke(TextBoxNum txtWaritsuke) {
+        this.txtWaritsuke = txtWaritsuke;
+    }
+
+    /*
+     * gettxtYoteiKaijo
+     * @return txtYoteiKaijo
+     */
+    @JsonProperty("txtYoteiKaijo")
+    public TextBox getTxtYoteiKaijo() {
+        return txtYoteiKaijo;
+    }
+
+    /*
+     * settxtYoteiKaijo
+     * @param txtYoteiKaijo txtYoteiKaijo
+     */
+    @JsonProperty("txtYoteiKaijo")
+    public void setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
+        this.txtYoteiKaijo = txtYoteiKaijo;
+    }
+
+    /*
+     * gettxtChikuCode
+     * @return txtChikuCode
+     */
+    @JsonProperty("txtChikuCode")
+    public TextBox getTxtChikuCode() {
+        return txtChikuCode;
+    }
+
+    /*
+     * settxtChikuCode
+     * @param txtChikuCode txtChikuCode
+     */
+    @JsonProperty("txtChikuCode")
+    public void setTxtChikuCode(TextBox txtChikuCode) {
+        this.txtChikuCode = txtChikuCode;
+    }
+
+    /*
+     * gettxtChikuMeisho
+     * @return txtChikuMeisho
+     */
+    @JsonProperty("txtChikuMeisho")
+    public TextBox getTxtChikuMeisho() {
+        return txtChikuMeisho;
+    }
+
+    /*
+     * settxtChikuMeisho
+     * @param txtChikuMeisho txtChikuMeisho
+     */
+    @JsonProperty("txtChikuMeisho")
+    public void setTxtChikuMeisho(TextBox txtChikuMeisho) {
+        this.txtChikuMeisho = txtChikuMeisho;
+    }
+
+    /*
+     * gettxtYoteiTeiin
+     * @return txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public TextBoxNum getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
+    }
+
+    /*
+     * settxtYoteiTeiin
+     * @param txtYoteiTeiin txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.txtYoteiTeiin = txtYoteiTeiin;
     }
 
     /*
@@ -153,39 +233,39 @@ public class ShinsakaiYoteiInfoDiv extends Panel {
     }
 
     /*
-     * gettxtYoteiTeiin
-     * @return txtYoteiTeiin
+     * getchkShurui
+     * @return chkShurui
      */
-    @JsonProperty("txtYoteiTeiin")
-    public TextBoxNum getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
+    @JsonProperty("chkShurui")
+    public CheckBoxList getChkShurui() {
+        return chkShurui;
     }
 
     /*
-     * settxtYoteiTeiin
-     * @param txtYoteiTeiin txtYoteiTeiin
+     * setchkShurui
+     * @param chkShurui chkShurui
      */
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.txtYoteiTeiin = txtYoteiTeiin;
+    @JsonProperty("chkShurui")
+    public void setChkShurui(CheckBoxList chkShurui) {
+        this.chkShurui = chkShurui;
     }
 
     /*
-     * gettxtYoteiKaijo
-     * @return txtYoteiKaijo
+     * getchkMogi
+     * @return chkMogi
      */
-    @JsonProperty("txtYoteiKaijo")
-    public TextBox getTxtYoteiKaijo() {
-        return txtYoteiKaijo;
+    @JsonProperty("chkMogi")
+    public CheckBoxList getChkMogi() {
+        return chkMogi;
     }
 
     /*
-     * settxtYoteiKaijo
-     * @param txtYoteiKaijo txtYoteiKaijo
+     * setchkMogi
+     * @param chkMogi chkMogi
      */
-    @JsonProperty("txtYoteiKaijo")
-    public void setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
-        this.txtYoteiKaijo = txtYoteiKaijo;
+    @JsonProperty("chkMogi")
+    public void setChkMogi(CheckBoxList chkMogi) {
+        this.chkMogi = chkMogi;
     }
 
     // </editor-fold>

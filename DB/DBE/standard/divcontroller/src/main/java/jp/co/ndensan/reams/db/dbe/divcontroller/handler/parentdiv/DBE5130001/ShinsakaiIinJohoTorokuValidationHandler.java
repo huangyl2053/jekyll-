@@ -58,7 +58,7 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         ShinsakaiIinJohoTorokuHandler handler = new ShinsakaiIinJohoTorokuHandler(div);
         if (!状態_削除.equals(状態)) {
             if (!handler.hasChanged合議体詳細情報()) {
-                validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.編集なしで更新不可));
+                validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.編集なしで確定不可));
             }
         }
 
@@ -194,7 +194,8 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         編集なしで更新不可(UrErrorMessages.編集なしで更新不可),
         該当データなし(UrErrorMessages.該当データなし),
         編集後更新指示(DbzErrorMessages.編集後更新指示),
-        削除不可(UrErrorMessages.削除不可, "既に割り当てられてる審査会委員の");
+        削除不可(UrErrorMessages.削除不可, "既に割り当てられてる審査会委員の"),
+        編集なしで確定不可(DbzErrorMessages.確定不可, "未編集");
 
         private final Message message;
 

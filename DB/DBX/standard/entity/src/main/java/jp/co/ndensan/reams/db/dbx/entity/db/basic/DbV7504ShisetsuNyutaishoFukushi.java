@@ -50,7 +50,11 @@ public enum DbV7504ShisetsuNyutaishoFukushi implements IColumnDefinition {
     /**
      * roomKigoNo
      */
-    roomKigoNo(20, 0);
+    roomKigoNo(20, 0),
+    /**
+     * hokenshaNo
+     */
+    hokenshaNo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

@@ -8,12 +8,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 保険料段階テーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013HokenryoDankaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
@@ -203,7 +205,8 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
      * このエンティティの主キーが他の{@literal DbT2013HokenryoDankaiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2013HokenryoDankaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2013HokenryoDankaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2013HokenryoDankaiEntity other) {

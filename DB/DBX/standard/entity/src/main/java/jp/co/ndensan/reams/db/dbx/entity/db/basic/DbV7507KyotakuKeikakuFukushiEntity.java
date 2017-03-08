@@ -8,12 +8,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 居宅給付計画・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV7507KyotakuKeikakuFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7507KyotakuKeikakuFukushi");
 
@@ -35,7 +38,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -45,7 +48,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -54,7 +57,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * taishoYMのgetメソッドです。
-     * 
+     *
      * @return taishoYM
      */
     @CheckForNull
@@ -64,7 +67,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * taishoYMのsetメソッドです。
-     * 
+     *
      * @param taishoYM taishoYM
      */
     public void setTaishoYM(FlexibleYearMonth taishoYM) {
@@ -73,7 +76,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -83,7 +86,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -92,7 +95,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * kyotaku_SogoJigyoKubunのgetメソッドです。
-     * 
+     *
      * @return kyotaku_SogoJigyoKubun
      */
     @CheckForNull
@@ -102,7 +105,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * kyotaku_SogoJigyoKubunのsetメソッドです。
-     * 
+     *
      * @param kyotaku_SogoJigyoKubun kyotaku_SogoJigyoKubun
      */
     public void setKyotaku_SogoJigyoKubun(RString kyotaku_SogoJigyoKubun) {
@@ -111,7 +114,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * todokedeKubunのgetメソッドです。
-     * 
+     *
      * @return todokedeKubun
      */
     @CheckForNull
@@ -121,7 +124,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * todokedeKubunのsetメソッドです。
-     * 
+     *
      * @param todokedeKubun todokedeKubun
      */
     public void setTodokedeKubun(RString todokedeKubun) {
@@ -130,7 +133,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * sakuseiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return sakuseiKubunCode
      */
     @CheckForNull
@@ -140,7 +143,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * sakuseiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param sakuseiKubunCode sakuseiKubunCode
      */
     public void setSakuseiKubunCode(RString sakuseiKubunCode) {
@@ -149,7 +152,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * keikakuJigyoshaNoのgetメソッドです。
-     * 
+     *
      * @return keikakuJigyoshaNo
      */
     @CheckForNull
@@ -159,7 +162,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * keikakuJigyoshaNoのsetメソッドです。
-     * 
+     *
      * @param keikakuJigyoshaNo keikakuJigyoshaNo
      */
     public void setKeikakuJigyoshaNo(RString keikakuJigyoshaNo) {
@@ -168,7 +171,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * tekiyoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoKaishiYMD
      */
     @CheckForNull
@@ -178,7 +181,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * tekiyoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYMD tekiyoKaishiYMD
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
@@ -187,7 +190,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * tekiyoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return tekiyoShuryoYMD
      */
     @CheckForNull
@@ -197,7 +200,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * tekiyoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYMD tekiyoShuryoYMD
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
@@ -206,7 +209,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * sakuseiYMDのgetメソッドです。
-     * 
+     *
      * @return sakuseiYMD
      */
     @CheckForNull
@@ -216,7 +219,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * sakuseiYMDのsetメソッドです。
-     * 
+     *
      * @param sakuseiYMD sakuseiYMD
      */
     public void setSakuseiYMD(RString sakuseiYMD) {
@@ -225,7 +228,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * todokedeYMDのgetメソッドです。
-     * 
+     *
      * @return todokedeYMD
      */
     @CheckForNull
@@ -235,7 +238,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * todokedeYMDのsetメソッドです。
-     * 
+     *
      * @param todokedeYMD todokedeYMD
      */
     public void setTodokedeYMD(FlexibleDate todokedeYMD) {
@@ -244,7 +247,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * henkoYMDのgetメソッドです。
-     * 
+     *
      * @return henkoYMD
      */
     @CheckForNull
@@ -254,7 +257,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * henkoYMDのsetメソッドです。
-     * 
+     *
      * @param henkoYMD henkoYMD
      */
     public void setHenkoYMD(FlexibleDate henkoYMD) {
@@ -263,7 +266,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * henkoJiyuのgetメソッドです。
-     * 
+     *
      * @return henkoJiyu
      */
     @CheckForNull
@@ -273,7 +276,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * henkoJiyuのsetメソッドです。
-     * 
+     *
      * @param henkoJiyu henkoJiyu
      */
     public void setHenkoJiyu(RString henkoJiyu) {
@@ -282,7 +285,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * zanteiKubunのgetメソッドです。
-     * 
+     *
      * @return zanteiKubun
      */
     @CheckForNull
@@ -292,7 +295,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * zanteiKubunのsetメソッドです。
-     * 
+     *
      * @param zanteiKubun zanteiKubun
      */
     public void setZanteiKubun(RString zanteiKubun) {
@@ -301,7 +304,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * itakusakiJigyoshaNoのgetメソッドです。
-     * 
+     *
      * @return itakusakiJigyoshaNo
      */
     @CheckForNull
@@ -311,7 +314,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * itakusakiJigyoshaNoのsetメソッドです。
-     * 
+     *
      * @param itakusakiJigyoshaNo itakusakiJigyoshaNo
      */
     public void setItakusakiJigyoshaNo(RString itakusakiJigyoshaNo) {
@@ -320,9 +323,9 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * このエンティティの主キーが他の{@literal DbV7507KyotakuKeikakuFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7507KyotakuKeikakuFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -357,6 +360,7 @@ public class DbV7507KyotakuKeikakuFukushiEntity extends DbTableEntityBase<DbV750
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

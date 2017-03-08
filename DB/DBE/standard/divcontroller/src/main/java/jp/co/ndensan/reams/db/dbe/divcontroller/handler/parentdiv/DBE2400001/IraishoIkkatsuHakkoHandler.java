@@ -144,7 +144,7 @@ public class IraishoIkkatsuHakkoHandler {
     public void setNinteiChosa() {
         initializeNinteiChkShinseiTani();
         setNinteiChkShinseiTani();
-        setHakkobiAndTeishutsuKigen();
+        setHakkobiAndTeishutsuKigen(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
         RString 証記載保険者番号 = div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value();
         KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
         List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
@@ -167,7 +167,7 @@ public class IraishoIkkatsuHakkoHandler {
     public void setShuJiiIKensho() {
         initializeShujiiChkShinseiTani();
         setShujiiChkShinseiTani();
-        setHakkobiAndTeishutsuKigen();
+        setHakkobiAndTeishutsuKigen(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value());
         RString 証記載保険者番号 = div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value();
         KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
         List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
@@ -493,10 +493,9 @@ public class IraishoIkkatsuHakkoHandler {
         return DbBusinessConfig.get(key, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード).equals(出力する);
     }
 
-    private void setHakkobiAndTeishutsuKigen() {
+    private void setHakkobiAndTeishutsuKigen(RString 市町村コード) {
         div.getTxtHakkobi().setValue(RDate.getNowDate());
-        RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 依頼書期限設定 = DbBusinessConfig.get(ConfigNameDBE.依頼書期限設定, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
         if (依頼書期限設定.equals(依頼書期限設定_自動)) {
             div.getRadTeishutsuKigen().setSelectedKey(依頼書期限ラジオボタン_自動);
         } else if (依頼書期限設定.equals(依頼書期限設定_空欄)) {

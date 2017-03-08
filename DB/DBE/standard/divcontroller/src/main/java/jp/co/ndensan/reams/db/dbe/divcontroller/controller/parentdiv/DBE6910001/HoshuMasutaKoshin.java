@@ -969,13 +969,14 @@ public class HoshuMasutaKoshin {
         Models<ShinsakaiIinBetsuTankaIdentifier, ShinsakaiIinBetsuTanka> 審査会委員別単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.審査会委員別単価マスタ情報, Models.class);
         for (dgShinsakaiIinBetuTanka_Row row : 審査会委員別単価一覧情報) {
+            FlexibleYearMonth 開始年月 = !row.getKaishiYM().getValue().isEmpty() ? row.getKaishiYM().getValue().getYearMonth() : FlexibleYearMonth.MIN;
             FlexibleYearMonth 既存終了年月 = !row.getShuryoYMbak().getValue().isEmpty() ? row.getShuryoYMbak().getValue().getYearMonth() : FlexibleYearMonth.MAX;
             FlexibleYearMonth 新規終了年月 = !row.getShuryoYM().getValue().isEmpty() ? row.getShuryoYM().getValue().getYearMonth() : FlexibleYearMonth.MAX;
             RString 氏名 = null != row.getShinsakaiIinName() ? row.getShinsakaiIinName() : RString.EMPTY;
             if (追加モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTanka 新規情報 = new ShinsakaiIinBetsuTanka(
                         row.getShinsakaiIinCode(),
-                        row.getKaishiYM().getValue().getYearMonth(),
+                        開始年月,
                         新規終了年月,
                         氏名);
                 新規情報 = 新規情報.createBuilderForEdit().
@@ -986,7 +987,7 @@ public class HoshuMasutaKoshin {
             } else if (更新モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
                         row.getShinsakaiIinCode(),
-                        row.getKaishiYM().getValue().getYearMonth(),
+                        開始年月,
                         既存終了年月);
                 if (既存終了年月.equals(新規終了年月)) {
                     ShinsakaiIinBetsuTanka 更新情報 = 審査会委員別単価情報Model.get(識別子).createBuilderForEdit().
@@ -1000,7 +1001,7 @@ public class HoshuMasutaKoshin {
                     審査会委員別単価情報Model.add(削除情報);
                     ShinsakaiIinBetsuTanka 新規情報 = new ShinsakaiIinBetsuTanka(
                             row.getShinsakaiIinCode(),
-                            row.getKaishiYM().getValue().getYearMonth(),
+                            開始年月,
                             新規終了年月,
                             氏名);
                     新規情報 = 新規情報.createBuilderForEdit().
@@ -1012,7 +1013,7 @@ public class HoshuMasutaKoshin {
             } else if (削除モード.equals(row.getColumnState())) {
                 ShinsakaiIinBetsuTankaIdentifier 識別子 = new ShinsakaiIinBetsuTankaIdentifier(
                         row.getShinsakaiIinCode(),
-                        row.getKaishiYM().getValue().getYearMonth(),
+                        開始年月,
                         既存終了年月);
                 ShinsakaiIinBetsuTanka 削除情報 = 審査会委員別単価情報Model.get(識別子).deleted();
                 審査会委員別単価情報Model.add(削除情報);

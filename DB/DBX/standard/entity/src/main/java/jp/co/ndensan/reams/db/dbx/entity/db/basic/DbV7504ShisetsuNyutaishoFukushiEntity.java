@@ -8,13 +8,17 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import javax.annotation.CheckForNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 介護保険施設入退所・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV7504ShisetsuNyutaishoFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7504ShisetsuNyutaishoFukushi");
 
@@ -29,6 +33,7 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
     private FlexibleDate taishoShoriYMD;
     private FlexibleDate taishoYMD;
     private RString roomKigoNo;
+    private HokenshaNo hokenshaNo;
 
     /**
      * shikibetsuCodeのgetメソッドです。
@@ -240,6 +245,25 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
     }
 
     /**
+     * hokenshaNoのgetメソッドです。
+     * 
+     * @return hokenshaNo
+     */
+    @CheckForNull
+    public HokenshaNo getHokenshaNo() {
+        return hokenshaNo;
+    }
+
+    /**
+     * hokenshaNoのsetメソッドです。
+     * 
+     * @param hokenshaNo hokenshaNo
+     */
+    public void setHokenshaNo(HokenshaNo hokenshaNo) {
+        this.hokenshaNo = hokenshaNo;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbV7504ShisetsuNyutaishoFukushiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
@@ -270,16 +294,20 @@ public class DbV7504ShisetsuNyutaishoFukushiEntity extends DbTableEntityBase<DbV
         this.taishoShoriYMD = entity.taishoShoriYMD;
         this.taishoYMD = entity.taishoYMD;
         this.roomKigoNo = entity.roomKigoNo;
+        this.hokenshaNo = entity.hokenshaNo;
     }
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoShoriYMD, nyushoYMD, taishoShoriYMD, taishoYMD, roomKigoNo);
+        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoShoriYMD, nyushoYMD, taishoShoriYMD, taishoYMD, roomKigoNo, hokenshaNo);
     }
 
 // </editor-fold>
+
+
 }

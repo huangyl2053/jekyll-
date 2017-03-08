@@ -1,12 +1,15 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 要介護認定インタフェース情報・福祉Viewテーブルの項目定義クラスです。
  */
+@OnNextSchema("rgdb")
 public enum DbV7513YokaigoNinteiInterfaceFukushi implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     /**
      * shinseishoKanriNo
      */
@@ -210,7 +213,7 @@ public enum DbV7513YokaigoNinteiInterfaceFukushi implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -219,7 +222,7 @@ public enum DbV7513YokaigoNinteiInterfaceFukushi implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

@@ -11,12 +11,15 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 利用者負担割合・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<DbV7511RiyoshaFutanWariaiFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7511RiyoshaFutanWariaiFukushi");
 
@@ -47,7 +50,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * nendoのgetメソッドです。
-     * 
+     *
      * @return nendo
      */
     @CheckForNull
@@ -57,7 +60,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * nendoのsetメソッドです。
-     * 
+     *
      * @param nendo nendo
      */
     public void setNendo(FlexibleYear nendo) {
@@ -66,7 +69,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hihokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hihokenshaNo
      */
     @CheckForNull
@@ -76,7 +79,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hihokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -85,7 +88,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * rirekiNoのgetメソッドです。
-     * 
+     *
      * @return rirekiNo
      */
     @CheckForNull
@@ -95,7 +98,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * rirekiNoのsetメソッドです。
-     * 
+     *
      * @param rirekiNo rirekiNo
      */
     public void setRirekiNo(int rirekiNo) {
@@ -104,7 +107,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hakoFuyoFlagのgetメソッドです。
-     * 
+     *
      * @return hakoFuyoFlag
      */
     @CheckForNull
@@ -114,7 +117,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hakoFuyoFlagのsetメソッドです。
-     * 
+     *
      * @param hakoFuyoFlag hakoFuyoFlag
      */
     public void setHakoFuyoFlag(boolean hakoFuyoFlag) {
@@ -123,7 +126,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * shokenFlagのgetメソッドです。
-     * 
+     *
      * @return shokenFlag
      */
     @CheckForNull
@@ -133,7 +136,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * shokenFlagのsetメソッドです。
-     * 
+     *
      * @param shokenFlag shokenFlag
      */
     public void setShokenFlag(boolean shokenFlag) {
@@ -142,7 +145,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hanteiYMDのgetメソッドです。
-     * 
+     *
      * @return hanteiYMD
      */
     @CheckForNull
@@ -152,7 +155,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hanteiYMDのsetメソッドです。
-     * 
+     *
      * @param hanteiYMD hanteiYMD
      */
     public void setHanteiYMD(FlexibleDate hanteiYMD) {
@@ -161,7 +164,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hanteiKubunのgetメソッドです。
-     * 
+     *
      * @return hanteiKubun
      */
     @CheckForNull
@@ -171,7 +174,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hanteiKubunのsetメソッドです。
-     * 
+     *
      * @param hanteiKubun hanteiKubun
      */
     public void setHanteiKubun(RString hanteiKubun) {
@@ -180,7 +183,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * koseiJiyuのgetメソッドです。
-     * 
+     *
      * @return koseiJiyu
      */
     @CheckForNull
@@ -190,7 +193,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * koseiJiyuのsetメソッドです。
-     * 
+     *
      * @param koseiJiyu koseiJiyu
      */
     public void setKoseiJiyu(Code koseiJiyu) {
@@ -199,7 +202,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hakoKubunのgetメソッドです。
-     * 
+     *
      * @return hakoKubun
      */
     @CheckForNull
@@ -209,7 +212,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hakoKubunのsetメソッドです。
-     * 
+     *
      * @param hakoKubun hakoKubun
      */
     public void setHakoKubun(RString hakoKubun) {
@@ -218,7 +221,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hakoYMDのgetメソッドです。
-     * 
+     *
      * @return hakoYMD
      */
     @CheckForNull
@@ -228,7 +231,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * hakoYMDのsetメソッドです。
-     * 
+     *
      * @param hakoYMD hakoYMD
      */
     public void setHakoYMD(FlexibleDate hakoYMD) {
@@ -237,7 +240,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * kofuYMDのgetメソッドです。
-     * 
+     *
      * @return kofuYMD
      */
     @CheckForNull
@@ -247,7 +250,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * kofuYMDのsetメソッドです。
-     * 
+     *
      * @param kofuYMD kofuYMD
      */
     public void setKofuYMD(FlexibleDate kofuYMD) {
@@ -256,7 +259,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * logicalDeletedFlagのgetメソッドです。
-     * 
+     *
      * @return logicalDeletedFlag
      */
     @CheckForNull
@@ -266,7 +269,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * logicalDeletedFlagのsetメソッドです。
-     * 
+     *
      * @param logicalDeletedFlag logicalDeletedFlag
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -275,7 +278,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * edaNoのgetメソッドです。
-     * 
+     *
      * @return edaNo
      */
     @CheckForNull
@@ -285,7 +288,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * edaNoのsetメソッドです。
-     * 
+     *
      * @param edaNo edaNo
      */
     public void setEdaNo(int edaNo) {
@@ -294,7 +297,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * shikakuKubunのgetメソッドです。
-     * 
+     *
      * @return shikakuKubun
      */
     @CheckForNull
@@ -304,7 +307,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * shikakuKubunのsetメソッドです。
-     * 
+     *
      * @param shikakuKubun shikakuKubun
      */
     public void setShikakuKubun(RString shikakuKubun) {
@@ -313,7 +316,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * futanWariaiKubunのgetメソッドです。
-     * 
+     *
      * @return futanWariaiKubun
      */
     @CheckForNull
@@ -323,7 +326,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * futanWariaiKubunのsetメソッドです。
-     * 
+     *
      * @param futanWariaiKubun futanWariaiKubun
      */
     public void setFutanWariaiKubun(RString futanWariaiKubun) {
@@ -332,7 +335,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * yukoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return yukoKaishiYMD
      */
     @CheckForNull
@@ -342,7 +345,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * yukoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param yukoKaishiYMD yukoKaishiYMD
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -351,7 +354,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * yukoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return yukoShuryoYMD
      */
     @CheckForNull
@@ -361,7 +364,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * yukoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param yukoShuryoYMD yukoShuryoYMD
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -370,7 +373,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * honninGoukeiShotokuGakuのgetメソッドです。
-     * 
+     *
      * @return honninGoukeiShotokuGaku
      */
     @CheckForNull
@@ -380,7 +383,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * honninGoukeiShotokuGakuのsetメソッドです。
-     * 
+     *
      * @param honninGoukeiShotokuGaku honninGoukeiShotokuGaku
      */
     public void setHonninGoukeiShotokuGaku(Decimal honninGoukeiShotokuGaku) {
@@ -389,7 +392,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * setaiIchigouHihokenshaSuのgetメソッドです。
-     * 
+     *
      * @return setaiIchigouHihokenshaSu
      */
     @CheckForNull
@@ -399,7 +402,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * setaiIchigouHihokenshaSuのsetメソッドです。
-     * 
+     *
      * @param setaiIchigouHihokenshaSu setaiIchigouHihokenshaSu
      */
     public void setSetaiIchigouHihokenshaSu(int setaiIchigouHihokenshaSu) {
@@ -408,7 +411,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * nenkinShunyuGoukeiのgetメソッドです。
-     * 
+     *
      * @return nenkinShunyuGoukei
      */
     @CheckForNull
@@ -418,7 +421,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * nenkinShunyuGoukeiのsetメソッドです。
-     * 
+     *
      * @param nenkinShunyuGoukei nenkinShunyuGoukei
      */
     public void setNenkinShunyuGoukei(Decimal nenkinShunyuGoukei) {
@@ -427,7 +430,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * sonotanoGoukeiShotokuKingakuGoukeiのgetメソッドです。
-     * 
+     *
      * @return sonotanoGoukeiShotokuKingakuGoukei
      */
     @CheckForNull
@@ -437,8 +440,9 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * sonotanoGoukeiShotokuKingakuGoukeiのsetメソッドです。
-     * 
-     * @param sonotanoGoukeiShotokuKingakuGoukei sonotanoGoukeiShotokuKingakuGoukei
+     *
+     * @param sonotanoGoukeiShotokuKingakuGoukei
+     * sonotanoGoukeiShotokuKingakuGoukei
      */
     public void setSonotanoGoukeiShotokuKingakuGoukei(Decimal sonotanoGoukeiShotokuKingakuGoukei) {
         this.sonotanoGoukeiShotokuKingakuGoukei = sonotanoGoukeiShotokuKingakuGoukei;
@@ -446,7 +450,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * koseiRiyuのgetメソッドです。
-     * 
+     *
      * @return koseiRiyu
      */
     @CheckForNull
@@ -456,7 +460,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * koseiRiyuのsetメソッドです。
-     * 
+     *
      * @param koseiRiyu koseiRiyu
      */
     public void setKoseiRiyu(RString koseiRiyu) {
@@ -465,7 +469,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * setaiCdのgetメソッドです。
-     * 
+     *
      * @return setaiCd
      */
     @CheckForNull
@@ -475,7 +479,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * setaiCdのsetメソッドです。
-     * 
+     *
      * @param setaiCd setaiCd
      */
     public void setSetaiCd(SetaiCode setaiCd) {
@@ -484,7 +488,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * meisailogicalDeletedFlagのgetメソッドです。
-     * 
+     *
      * @return meisailogicalDeletedFlag
      */
     @CheckForNull
@@ -494,7 +498,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * meisailogicalDeletedFlagのsetメソッドです。
-     * 
+     *
      * @param meisailogicalDeletedFlag meisailogicalDeletedFlag
      */
     public void setMeisailogicalDeletedFlag(boolean meisailogicalDeletedFlag) {
@@ -503,9 +507,9 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbV7511RiyoshaFutanWariaiFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7511RiyoshaFutanWariaiFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -549,6 +553,7 @@ public class DbV7511RiyoshaFutanWariaiFukushiEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

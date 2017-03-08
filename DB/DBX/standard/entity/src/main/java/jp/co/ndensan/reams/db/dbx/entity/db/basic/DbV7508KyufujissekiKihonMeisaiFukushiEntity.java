@@ -16,12 +16,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikib
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 給付実績基本明細・福祉Viewテーブルのエンティティクラスです。
  */
+@OnNextSchema("rgdb")
 public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBase<DbV7508KyufujissekiKihonMeisaiFukushiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7508KyufujissekiKihonMeisaiFukushi");
 
@@ -149,7 +152,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokanShikibetsuNoのgetメソッドです。
-     * 
+     *
      * @return kokanShikibetsuNo
      */
     @CheckForNull
@@ -159,7 +162,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokanShikibetsuNoのsetメソッドです。
-     * 
+     *
      * @param kokanShikibetsuNo kokanShikibetsuNo
      */
     public void setKokanShikibetsuNo(KokanShikibetsuNo kokanShikibetsuNo) {
@@ -168,7 +171,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * inputShikibetsuNoのgetメソッドです。
-     * 
+     *
      * @return inputShikibetsuNo
      */
     @CheckForNull
@@ -178,7 +181,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * inputShikibetsuNoのsetメソッドです。
-     * 
+     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
@@ -187,7 +190,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * recodeShubetsuCodeのgetメソッドです。
-     * 
+     *
      * @return recodeShubetsuCode
      */
     @CheckForNull
@@ -197,7 +200,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * recodeShubetsuCodeのsetメソッドです。
-     * 
+     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -206,7 +209,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyufuSakuseiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return kyufuSakuseiKubunCode
      */
     @CheckForNull
@@ -216,7 +219,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyufuSakuseiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param kyufuSakuseiKubunCode kyufuSakuseiKubunCode
      */
     public void setKyufuSakuseiKubunCode(RString kyufuSakuseiKubunCode) {
@@ -225,7 +228,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * shokisaiHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return shokisaiHokenshaNo
      */
     @CheckForNull
@@ -235,7 +238,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * shokisaiHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
@@ -244,7 +247,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * hiHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return hiHokenshaNo
      */
     @CheckForNull
@@ -254,7 +257,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * hiHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -263,7 +266,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceTeikyoYMのgetメソッドです。
-     * 
+     *
      * @return serviceTeikyoYM
      */
     @CheckForNull
@@ -273,7 +276,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceTeikyoYMのsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -282,7 +285,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyufuJissekiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return kyufuJissekiKubunCode
      */
     @CheckForNull
@@ -292,7 +295,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyufuJissekiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param kyufuJissekiKubunCode kyufuJissekiKubunCode
      */
     public void setKyufuJissekiKubunCode(RString kyufuJissekiKubunCode) {
@@ -301,7 +304,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * jigyoshoNoのgetメソッドです。
-     * 
+     *
      * @return jigyoshoNo
      */
     @CheckForNull
@@ -311,7 +314,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * jigyoshoNoのsetメソッドです。
-     * 
+     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -320,7 +323,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * toshiNoのgetメソッドです。
-     * 
+     *
      * @return toshiNo
      */
     @CheckForNull
@@ -330,7 +333,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * toshiNoのsetメソッドです。
-     * 
+     *
      * @param toshiNo toshiNo
      */
     public void setToshiNo(RString toshiNo) {
@@ -339,7 +342,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1FutanshaNoのgetメソッドです。
-     * 
+     *
      * @return kohi1FutanshaNo
      */
     @CheckForNull
@@ -349,7 +352,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1FutanshaNoのsetメソッドです。
-     * 
+     *
      * @param kohi1FutanshaNo kohi1FutanshaNo
      */
     public void setKohi1FutanshaNo(RString kohi1FutanshaNo) {
@@ -358,7 +361,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1JukyushaNoのgetメソッドです。
-     * 
+     *
      * @return kohi1JukyushaNo
      */
     @CheckForNull
@@ -368,7 +371,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1JukyushaNoのsetメソッドです。
-     * 
+     *
      * @param kohi1JukyushaNo kohi1JukyushaNo
      */
     public void setKohi1JukyushaNo(RString kohi1JukyushaNo) {
@@ -377,7 +380,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2FutanshaNoのgetメソッドです。
-     * 
+     *
      * @return kohi2FutanshaNo
      */
     @CheckForNull
@@ -387,7 +390,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2FutanshaNoのsetメソッドです。
-     * 
+     *
      * @param kohi2FutanshaNo kohi2FutanshaNo
      */
     public void setKohi2FutanshaNo(RString kohi2FutanshaNo) {
@@ -396,7 +399,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2JukyushaNoのgetメソッドです。
-     * 
+     *
      * @return kohi2JukyushaNo
      */
     @CheckForNull
@@ -406,7 +409,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2JukyushaNoのsetメソッドです。
-     * 
+     *
      * @param kohi2JukyushaNo kohi2JukyushaNo
      */
     public void setKohi2JukyushaNo(RString kohi2JukyushaNo) {
@@ -415,7 +418,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3FutanshaNoのgetメソッドです。
-     * 
+     *
      * @return kohi3FutanshaNo
      */
     @CheckForNull
@@ -425,7 +428,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3FutanshaNoのsetメソッドです。
-     * 
+     *
      * @param kohi3FutanshaNo kohi3FutanshaNo
      */
     public void setKohi3FutanshaNo(RString kohi3FutanshaNo) {
@@ -434,7 +437,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3JukyushaNoのgetメソッドです。
-     * 
+     *
      * @return kohi3JukyushaNo
      */
     @CheckForNull
@@ -444,7 +447,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3JukyushaNoのsetメソッドです。
-     * 
+     *
      * @param kohi3JukyushaNo kohi3JukyushaNo
      */
     public void setKohi3JukyushaNo(RString kohi3JukyushaNo) {
@@ -453,7 +456,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * umareYMDのgetメソッドです。
-     * 
+     *
      * @return umareYMD
      */
     @CheckForNull
@@ -463,7 +466,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * umareYMDのsetメソッドです。
-     * 
+     *
      * @param umareYMD umareYMD
      */
     public void setUmareYMD(FlexibleDate umareYMD) {
@@ -472,7 +475,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * seibetsuCodeのgetメソッドです。
-     * 
+     *
      * @return seibetsuCode
      */
     @CheckForNull
@@ -482,7 +485,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * seibetsuCodeのsetメソッドです。
-     * 
+     *
      * @param seibetsuCode seibetsuCode
      */
     public void setSeibetsuCode(RString seibetsuCode) {
@@ -491,7 +494,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * yoKaigoJotaiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return yoKaigoJotaiKubunCode
      */
     @CheckForNull
@@ -501,7 +504,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * yoKaigoJotaiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param yoKaigoJotaiKubunCode yoKaigoJotaiKubunCode
      */
     public void setYoKaigoJotaiKubunCode(RString yoKaigoJotaiKubunCode) {
@@ -510,7 +513,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyuSochiNyushoshaTokureiCodeのgetメソッドです。
-     * 
+     *
      * @return kyuSochiNyushoshaTokureiCode
      */
     @CheckForNull
@@ -520,7 +523,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyuSochiNyushoshaTokureiCodeのsetメソッドです。
-     * 
+     *
      * @param kyuSochiNyushoshaTokureiCode kyuSochiNyushoshaTokureiCode
      */
     public void setKyuSochiNyushoshaTokureiCode(RString kyuSochiNyushoshaTokureiCode) {
@@ -529,7 +532,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * ninteiYukoKaishiYMDのgetメソッドです。
-     * 
+     *
      * @return ninteiYukoKaishiYMD
      */
     @CheckForNull
@@ -539,7 +542,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * ninteiYukoKaishiYMDのsetメソッドです。
-     * 
+     *
      * @param ninteiYukoKaishiYMD ninteiYukoKaishiYMD
      */
     public void setNinteiYukoKaishiYMD(FlexibleDate ninteiYukoKaishiYMD) {
@@ -548,7 +551,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * ninteiYukoShuryoYMDのgetメソッドです。
-     * 
+     *
      * @return ninteiYukoShuryoYMD
      */
     @CheckForNull
@@ -558,7 +561,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * ninteiYukoShuryoYMDのsetメソッドです。
-     * 
+     *
      * @param ninteiYukoShuryoYMD ninteiYukoShuryoYMD
      */
     public void setNinteiYukoShuryoYMD(FlexibleDate ninteiYukoShuryoYMD) {
@@ -567,7 +570,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * rojinHokenShichosonNoのgetメソッドです。
-     * 
+     *
      * @return rojinHokenShichosonNo
      */
     @CheckForNull
@@ -577,7 +580,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * rojinHokenShichosonNoのsetメソッドです。
-     * 
+     *
      * @param rojinHokenShichosonNo rojinHokenShichosonNo
      */
     public void setRojinHokenShichosonNo(RString rojinHokenShichosonNo) {
@@ -586,7 +589,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * rojinhokenJukyushaNoのgetメソッドです。
-     * 
+     *
      * @return rojinhokenJukyushaNo
      */
     @CheckForNull
@@ -596,7 +599,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * rojinhokenJukyushaNoのsetメソッドです。
-     * 
+     *
      * @param rojinhokenJukyushaNo rojinhokenJukyushaNo
      */
     public void setRojinhokenJukyushaNo(RString rojinhokenJukyushaNo) {
@@ -605,7 +608,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokiHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return kokiHokenshaNo
      */
     @CheckForNull
@@ -615,7 +618,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokiHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param kokiHokenshaNo kokiHokenshaNo
      */
     public void setKokiHokenshaNo(RString kokiHokenshaNo) {
@@ -624,7 +627,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokiHiHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return kokiHiHokenshaNo
      */
     @CheckForNull
@@ -634,7 +637,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokiHiHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param kokiHiHokenshaNo kokiHiHokenshaNo
      */
     public void setKokiHiHokenshaNo(RString kokiHiHokenshaNo) {
@@ -643,7 +646,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokuhoHokenshaNoのgetメソッドです。
-     * 
+     *
      * @return kokuhoHokenshaNo
      */
     @CheckForNull
@@ -653,7 +656,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokuhoHokenshaNoのsetメソッドです。
-     * 
+     *
      * @param kokuhoHokenshaNo kokuhoHokenshaNo
      */
     public void setKokuhoHokenshaNo(RString kokuhoHokenshaNo) {
@@ -662,7 +665,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokuhoHiHokenshashoNoのgetメソッドです。
-     * 
+     *
      * @return kokuhoHiHokenshashoNo
      */
     @CheckForNull
@@ -672,7 +675,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokuhoHiHokenshashoNoのsetメソッドです。
-     * 
+     *
      * @param kokuhoHiHokenshashoNo kokuhoHiHokenshashoNo
      */
     public void setKokuhoHiHokenshashoNo(RString kokuhoHiHokenshashoNo) {
@@ -681,7 +684,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokuhoKojinNoのgetメソッドです。
-     * 
+     *
      * @return kokuhoKojinNo
      */
     @CheckForNull
@@ -691,7 +694,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kokuhoKojinNoのsetメソッドです。
-     * 
+     *
      * @param kokuhoKojinNo kokuhoKojinNo
      */
     public void setKokuhoKojinNo(RString kokuhoKojinNo) {
@@ -700,7 +703,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyotakuServiceSakuseiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return kyotakuServiceSakuseiKubunCode
      */
     @CheckForNull
@@ -710,7 +713,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyotakuServiceSakuseiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param kyotakuServiceSakuseiKubunCode kyotakuServiceSakuseiKubunCode
      */
     public void setKyotakuServiceSakuseiKubunCode(RString kyotakuServiceSakuseiKubunCode) {
@@ -719,7 +722,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyotakuKaigoShienJigyoshoNoのgetメソッドです。
-     * 
+     *
      * @return kyotakuKaigoShienJigyoshoNo
      */
     @CheckForNull
@@ -729,7 +732,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kyotakuKaigoShienJigyoshoNoのsetメソッドです。
-     * 
+     *
      * @param kyotakuKaigoShienJigyoshoNo kyotakuKaigoShienJigyoshoNo
      */
     public void setKyotakuKaigoShienJigyoshoNo(JigyoshaNo kyotakuKaigoShienJigyoshoNo) {
@@ -738,7 +741,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kaishiYMDのgetメソッドです。
-     * 
+     *
      * @return kaishiYMD
      */
     @CheckForNull
@@ -748,7 +751,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kaishiYMDのsetメソッドです。
-     * 
+     *
      * @param kaishiYMD kaishiYMD
      */
     public void setKaishiYMD(FlexibleDate kaishiYMD) {
@@ -757,7 +760,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * chushiYMDのgetメソッドです。
-     * 
+     *
      * @return chushiYMD
      */
     @CheckForNull
@@ -767,7 +770,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * chushiYMDのsetメソッドです。
-     * 
+     *
      * @param chushiYMD chushiYMD
      */
     public void setChushiYMD(FlexibleDate chushiYMD) {
@@ -776,7 +779,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * chushiRiyuNyushomaeJyokyoCodeのgetメソッドです。
-     * 
+     *
      * @return chushiRiyuNyushomaeJyokyoCode
      */
     @CheckForNull
@@ -786,7 +789,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * chushiRiyuNyushomaeJyokyoCodeのsetメソッドです。
-     * 
+     *
      * @param chushiRiyuNyushomaeJyokyoCode chushiRiyuNyushomaeJyokyoCode
      */
     public void setChushiRiyuNyushomaeJyokyoCode(RString chushiRiyuNyushomaeJyokyoCode) {
@@ -795,7 +798,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * nyushoYMDのgetメソッドです。
-     * 
+     *
      * @return nyushoYMD
      */
     @CheckForNull
@@ -805,7 +808,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * nyushoYMDのsetメソッドです。
-     * 
+     *
      * @param nyushoYMD nyushoYMD
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
@@ -814,7 +817,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * taishoYMDのgetメソッドです。
-     * 
+     *
      * @return taishoYMD
      */
     @CheckForNull
@@ -824,7 +827,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * taishoYMDのsetメソッドです。
-     * 
+     *
      * @param taishoYMD taishoYMD
      */
     public void setTaishoYMD(FlexibleDate taishoYMD) {
@@ -833,7 +836,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * nyushoJitsunissuのgetメソッドです。
-     * 
+     *
      * @return nyushoJitsunissu
      */
     @CheckForNull
@@ -843,7 +846,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * nyushoJitsunissuのsetメソッドです。
-     * 
+     *
      * @param nyushoJitsunissu nyushoJitsunissu
      */
     public void setNyushoJitsunissu(int nyushoJitsunissu) {
@@ -852,7 +855,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * gaihakuNissuのgetメソッドです。
-     * 
+     *
      * @return gaihakuNissu
      */
     @CheckForNull
@@ -862,7 +865,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * gaihakuNissuのsetメソッドです。
-     * 
+     *
      * @param gaihakuNissu gaihakuNissu
      */
     public void setGaihakuNissu(int gaihakuNissu) {
@@ -871,7 +874,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * taishogoJotaiCodeのgetメソッドです。
-     * 
+     *
      * @return taishogoJotaiCode
      */
     @CheckForNull
@@ -881,7 +884,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * taishogoJotaiCodeのsetメソッドです。
-     * 
+     *
      * @param taishogoJotaiCode taishogoJotaiCode
      */
     public void setTaishogoJotaiCode(RString taishogoJotaiCode) {
@@ -890,7 +893,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * hokenKyufuritsuのgetメソッドです。
-     * 
+     *
      * @return hokenKyufuritsu
      */
     @CheckForNull
@@ -900,7 +903,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * hokenKyufuritsuのsetメソッドです。
-     * 
+     *
      * @param hokenKyufuritsu hokenKyufuritsu
      */
     public void setHokenKyufuritsu(HokenKyufuRitsu hokenKyufuritsu) {
@@ -909,7 +912,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1Kyufuritsuのgetメソッドです。
-     * 
+     *
      * @return kohi1Kyufuritsu
      */
     @CheckForNull
@@ -919,7 +922,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1Kyufuritsuのsetメソッドです。
-     * 
+     *
      * @param kohi1Kyufuritsu kohi1Kyufuritsu
      */
     public void setKohi1Kyufuritsu(HokenKyufuRitsu kohi1Kyufuritsu) {
@@ -928,7 +931,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2Kyufuritsuのgetメソッドです。
-     * 
+     *
      * @return kohi2Kyufuritsu
      */
     @CheckForNull
@@ -938,7 +941,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2Kyufuritsuのsetメソッドです。
-     * 
+     *
      * @param kohi2Kyufuritsu kohi2Kyufuritsu
      */
     public void setKohi2Kyufuritsu(HokenKyufuRitsu kohi2Kyufuritsu) {
@@ -947,7 +950,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3Kyufuritsuのgetメソッドです。
-     * 
+     *
      * @return kohi3Kyufuritsu
      */
     @CheckForNull
@@ -957,7 +960,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3Kyufuritsuのsetメソッドです。
-     * 
+     *
      * @param kohi3Kyufuritsu kohi3Kyufuritsu
      */
     public void setKohi3Kyufuritsu(HokenKyufuRitsu kohi3Kyufuritsu) {
@@ -966,7 +969,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return maeHokenServiceTanisu
      */
     @CheckForNull
@@ -976,7 +979,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param maeHokenServiceTanisu maeHokenServiceTanisu
      */
     public void setMaeHokenServiceTanisu(int maeHokenServiceTanisu) {
@@ -985,7 +988,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeHokenSeikyugaku
      */
     @CheckForNull
@@ -995,7 +998,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenSeikyugakuのsetメソッドです。
-     * 
+     *
      * @param maeHokenSeikyugaku maeHokenSeikyugaku
      */
     public void setMaeHokenSeikyugaku(Decimal maeHokenSeikyugaku) {
@@ -1004,7 +1007,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenRiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return maeHokenRiyoshaFutangaku
      */
     @CheckForNull
@@ -1014,7 +1017,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenRiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param maeHokenRiyoshaFutangaku maeHokenRiyoshaFutangaku
      */
     public void setMaeHokenRiyoshaFutangaku(int maeHokenRiyoshaFutangaku) {
@@ -1023,7 +1026,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenKinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeHokenKinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1033,8 +1036,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenKinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param maeHokenKinkyuShisetsuRyoyoSeikyugaku maeHokenKinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param maeHokenKinkyuShisetsuRyoyoSeikyugaku
+     * maeHokenKinkyuShisetsuRyoyoSeikyugaku
      */
     public void setMaeHokenKinkyuShisetsuRyoyoSeikyugaku(Decimal maeHokenKinkyuShisetsuRyoyoSeikyugaku) {
         this.maeHokenKinkyuShisetsuRyoyoSeikyugaku = maeHokenKinkyuShisetsuRyoyoSeikyugaku;
@@ -1042,7 +1046,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenTokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeHokenTokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1052,8 +1056,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenTokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeHokenTokuteiShinryohiSeikyugaku maeHokenTokuteiShinryohiSeikyugaku
+     *
+     * @param maeHokenTokuteiShinryohiSeikyugaku
+     * maeHokenTokuteiShinryohiSeikyugaku
      */
     public void setMaeHokenTokuteiShinryohiSeikyugaku(Decimal maeHokenTokuteiShinryohiSeikyugaku) {
         this.maeHokenTokuteiShinryohiSeikyugaku = maeHokenTokuteiShinryohiSeikyugaku;
@@ -1061,7 +1066,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1071,8 +1076,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku = maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1080,7 +1086,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1ServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return maeKohi1ServiceTanisu
      */
     @CheckForNull
@@ -1090,7 +1096,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1ServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param maeKohi1ServiceTanisu maeKohi1ServiceTanisu
      */
     public void setMaeKohi1ServiceTanisu(int maeKohi1ServiceTanisu) {
@@ -1099,7 +1105,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1Seikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi1Seikyugaku
      */
     @CheckForNull
@@ -1109,7 +1115,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1Seikyugakuのsetメソッドです。
-     * 
+     *
      * @param maeKohi1Seikyugaku maeKohi1Seikyugaku
      */
     public void setMaeKohi1Seikyugaku(int maeKohi1Seikyugaku) {
@@ -1118,7 +1124,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1RiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi1RiyoshaFutangaku
      */
     @CheckForNull
@@ -1128,7 +1134,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1RiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param maeKohi1RiyoshaFutangaku maeKohi1RiyoshaFutangaku
      */
     public void setMaeKohi1RiyoshaFutangaku(int maeKohi1RiyoshaFutangaku) {
@@ -1137,7 +1143,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1KinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi1KinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1147,8 +1153,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1KinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi1KinkyuShisetsuRyoyoSeikyugaku maeKohi1KinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param maeKohi1KinkyuShisetsuRyoyoSeikyugaku
+     * maeKohi1KinkyuShisetsuRyoyoSeikyugaku
      */
     public void setMaeKohi1KinkyuShisetsuRyoyoSeikyugaku(int maeKohi1KinkyuShisetsuRyoyoSeikyugaku) {
         this.maeKohi1KinkyuShisetsuRyoyoSeikyugaku = maeKohi1KinkyuShisetsuRyoyoSeikyugaku;
@@ -1156,7 +1163,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1TokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi1TokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1166,8 +1173,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1TokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi1TokuteiShinryohiSeikyugaku maeKohi1TokuteiShinryohiSeikyugaku
+     *
+     * @param maeKohi1TokuteiShinryohiSeikyugaku
+     * maeKohi1TokuteiShinryohiSeikyugaku
      */
     public void setMaeKohi1TokuteiShinryohiSeikyugaku(int maeKohi1TokuteiShinryohiSeikyugaku) {
         this.maeKohi1TokuteiShinryohiSeikyugaku = maeKohi1TokuteiShinryohiSeikyugaku;
@@ -1175,7 +1183,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1185,8 +1193,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1194,7 +1203,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2ServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return maeKohi2ServiceTanisu
      */
     @CheckForNull
@@ -1204,7 +1213,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2ServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param maeKohi2ServiceTanisu maeKohi2ServiceTanisu
      */
     public void setMaeKohi2ServiceTanisu(int maeKohi2ServiceTanisu) {
@@ -1213,7 +1222,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2Seikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi2Seikyugaku
      */
     @CheckForNull
@@ -1223,7 +1232,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2Seikyugakuのsetメソッドです。
-     * 
+     *
      * @param maeKohi2Seikyugaku maeKohi2Seikyugaku
      */
     public void setMaeKohi2Seikyugaku(int maeKohi2Seikyugaku) {
@@ -1232,7 +1241,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2RiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi2RiyoshaFutangaku
      */
     @CheckForNull
@@ -1242,7 +1251,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2RiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param maeKohi2RiyoshaFutangaku maeKohi2RiyoshaFutangaku
      */
     public void setMaeKohi2RiyoshaFutangaku(int maeKohi2RiyoshaFutangaku) {
@@ -1251,7 +1260,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2KinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi2KinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1261,8 +1270,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2KinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi2KinkyuShisetsuRyoyoSeikyugaku maeKohi2KinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param maeKohi2KinkyuShisetsuRyoyoSeikyugaku
+     * maeKohi2KinkyuShisetsuRyoyoSeikyugaku
      */
     public void setMaeKohi2KinkyuShisetsuRyoyoSeikyugaku(int maeKohi2KinkyuShisetsuRyoyoSeikyugaku) {
         this.maeKohi2KinkyuShisetsuRyoyoSeikyugaku = maeKohi2KinkyuShisetsuRyoyoSeikyugaku;
@@ -1270,7 +1280,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2TokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi2TokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1280,8 +1290,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2TokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi2TokuteiShinryohiSeikyugaku maeKohi2TokuteiShinryohiSeikyugaku
+     *
+     * @param maeKohi2TokuteiShinryohiSeikyugaku
+     * maeKohi2TokuteiShinryohiSeikyugaku
      */
     public void setMaeKohi2TokuteiShinryohiSeikyugaku(int maeKohi2TokuteiShinryohiSeikyugaku) {
         this.maeKohi2TokuteiShinryohiSeikyugaku = maeKohi2TokuteiShinryohiSeikyugaku;
@@ -1289,7 +1300,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1299,8 +1310,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1308,7 +1320,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3ServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return maeKohi3ServiceTanisu
      */
     @CheckForNull
@@ -1318,7 +1330,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3ServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param maeKohi3ServiceTanisu maeKohi3ServiceTanisu
      */
     public void setMaeKohi3ServiceTanisu(int maeKohi3ServiceTanisu) {
@@ -1327,7 +1339,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3Seikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi3Seikyugaku
      */
     @CheckForNull
@@ -1337,7 +1349,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3Seikyugakuのsetメソッドです。
-     * 
+     *
      * @param maeKohi3Seikyugaku maeKohi3Seikyugaku
      */
     public void setMaeKohi3Seikyugaku(int maeKohi3Seikyugaku) {
@@ -1346,7 +1358,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3RiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi3RiyoshaFutangaku
      */
     @CheckForNull
@@ -1356,7 +1368,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3RiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param maeKohi3RiyoshaFutangaku maeKohi3RiyoshaFutangaku
      */
     public void setMaeKohi3RiyoshaFutangaku(int maeKohi3RiyoshaFutangaku) {
@@ -1365,7 +1377,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3KinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi3KinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1375,8 +1387,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3KinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi3KinkyuShisetsuRyoyoSeikyugaku maeKohi3KinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param maeKohi3KinkyuShisetsuRyoyoSeikyugaku
+     * maeKohi3KinkyuShisetsuRyoyoSeikyugaku
      */
     public void setMaeKohi3KinkyuShisetsuRyoyoSeikyugaku(int maeKohi3KinkyuShisetsuRyoyoSeikyugaku) {
         this.maeKohi3KinkyuShisetsuRyoyoSeikyugaku = maeKohi3KinkyuShisetsuRyoyoSeikyugaku;
@@ -1384,7 +1397,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3TokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi3TokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1394,8 +1407,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3TokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi3TokuteiShinryohiSeikyugaku maeKohi3TokuteiShinryohiSeikyugaku
+     *
+     * @param maeKohi3TokuteiShinryohiSeikyugaku
+     * maeKohi3TokuteiShinryohiSeikyugaku
      */
     public void setMaeKohi3TokuteiShinryohiSeikyugaku(int maeKohi3TokuteiShinryohiSeikyugaku) {
         this.maeKohi3TokuteiShinryohiSeikyugaku = maeKohi3TokuteiShinryohiSeikyugaku;
@@ -1403,7 +1417,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1413,8 +1427,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(int maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku = maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1422,7 +1437,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoHokenServiceTanisu
      */
     @CheckForNull
@@ -1432,7 +1447,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoHokenServiceTanisu atoHokenServiceTanisu
      */
     public void setAtoHokenServiceTanisu(int atoHokenServiceTanisu) {
@@ -1441,7 +1456,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoHokenSeikyugaku
      */
     @CheckForNull
@@ -1451,7 +1466,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenSeikyugakuのsetメソッドです。
-     * 
+     *
      * @param atoHokenSeikyugaku atoHokenSeikyugaku
      */
     public void setAtoHokenSeikyugaku(Decimal atoHokenSeikyugaku) {
@@ -1460,7 +1475,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenRiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return atoHokenRiyoshaFutangaku
      */
     @CheckForNull
@@ -1470,7 +1485,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenRiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param atoHokenRiyoshaFutangaku atoHokenRiyoshaFutangaku
      */
     public void setAtoHokenRiyoshaFutangaku(int atoHokenRiyoshaFutangaku) {
@@ -1479,7 +1494,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenKinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoHokenKinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1489,8 +1504,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenKinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param atoHokenKinkyuShisetsuRyoyoSeikyugaku atoHokenKinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param atoHokenKinkyuShisetsuRyoyoSeikyugaku
+     * atoHokenKinkyuShisetsuRyoyoSeikyugaku
      */
     public void setAtoHokenKinkyuShisetsuRyoyoSeikyugaku(Decimal atoHokenKinkyuShisetsuRyoyoSeikyugaku) {
         this.atoHokenKinkyuShisetsuRyoyoSeikyugaku = atoHokenKinkyuShisetsuRyoyoSeikyugaku;
@@ -1498,7 +1514,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenTokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoHokenTokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1508,8 +1524,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenTokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoHokenTokuteiShinryohiSeikyugaku atoHokenTokuteiShinryohiSeikyugaku
+     *
+     * @param atoHokenTokuteiShinryohiSeikyugaku
+     * atoHokenTokuteiShinryohiSeikyugaku
      */
     public void setAtoHokenTokuteiShinryohiSeikyugaku(Decimal atoHokenTokuteiShinryohiSeikyugaku) {
         this.atoHokenTokuteiShinryohiSeikyugaku = atoHokenTokuteiShinryohiSeikyugaku;
@@ -1517,7 +1534,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1527,8 +1544,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku = atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1536,7 +1554,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1ServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1ServiceTanisu
      */
     @CheckForNull
@@ -1546,7 +1564,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1ServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi1ServiceTanisu atoKohi1ServiceTanisu
      */
     public void setAtoKohi1ServiceTanisu(int atoKohi1ServiceTanisu) {
@@ -1555,7 +1573,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1Seikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1Seikyugaku
      */
     @CheckForNull
@@ -1565,7 +1583,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1Seikyugakuのsetメソッドです。
-     * 
+     *
      * @param atoKohi1Seikyugaku atoKohi1Seikyugaku
      */
     public void setAtoKohi1Seikyugaku(int atoKohi1Seikyugaku) {
@@ -1574,7 +1592,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1RiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1RiyoshaFutangaku
      */
     @CheckForNull
@@ -1584,7 +1602,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1RiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param atoKohi1RiyoshaFutangaku atoKohi1RiyoshaFutangaku
      */
     public void setAtoKohi1RiyoshaFutangaku(int atoKohi1RiyoshaFutangaku) {
@@ -1593,7 +1611,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1KinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1KinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1603,8 +1621,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1KinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi1KinkyuShisetsuRyoyoSeikyugaku atoKohi1KinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param atoKohi1KinkyuShisetsuRyoyoSeikyugaku
+     * atoKohi1KinkyuShisetsuRyoyoSeikyugaku
      */
     public void setAtoKohi1KinkyuShisetsuRyoyoSeikyugaku(int atoKohi1KinkyuShisetsuRyoyoSeikyugaku) {
         this.atoKohi1KinkyuShisetsuRyoyoSeikyugaku = atoKohi1KinkyuShisetsuRyoyoSeikyugaku;
@@ -1612,7 +1631,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1TokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1622,8 +1641,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi1TokuteiShinryohiSeikyugaku atoKohi1TokuteiShinryohiSeikyugaku
+     *
+     * @param atoKohi1TokuteiShinryohiSeikyugaku
+     * atoKohi1TokuteiShinryohiSeikyugaku
      */
     public void setAtoKohi1TokuteiShinryohiSeikyugaku(int atoKohi1TokuteiShinryohiSeikyugaku) {
         this.atoKohi1TokuteiShinryohiSeikyugaku = atoKohi1TokuteiShinryohiSeikyugaku;
@@ -1631,7 +1651,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1641,8 +1661,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1650,7 +1671,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2ServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2ServiceTanisu
      */
     @CheckForNull
@@ -1660,7 +1681,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2ServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi2ServiceTanisu atoKohi2ServiceTanisu
      */
     public void setAtoKohi2ServiceTanisu(int atoKohi2ServiceTanisu) {
@@ -1669,7 +1690,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2Seikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2Seikyugaku
      */
     @CheckForNull
@@ -1679,7 +1700,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2Seikyugakuのsetメソッドです。
-     * 
+     *
      * @param atoKohi2Seikyugaku atoKohi2Seikyugaku
      */
     public void setAtoKohi2Seikyugaku(int atoKohi2Seikyugaku) {
@@ -1688,7 +1709,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2RiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2RiyoshaFutangaku
      */
     @CheckForNull
@@ -1698,7 +1719,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2RiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param atoKohi2RiyoshaFutangaku atoKohi2RiyoshaFutangaku
      */
     public void setAtoKohi2RiyoshaFutangaku(int atoKohi2RiyoshaFutangaku) {
@@ -1707,7 +1728,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2KinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2KinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1717,8 +1738,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2KinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi2KinkyuShisetsuRyoyoSeikyugaku atoKohi2KinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param atoKohi2KinkyuShisetsuRyoyoSeikyugaku
+     * atoKohi2KinkyuShisetsuRyoyoSeikyugaku
      */
     public void setAtoKohi2KinkyuShisetsuRyoyoSeikyugaku(int atoKohi2KinkyuShisetsuRyoyoSeikyugaku) {
         this.atoKohi2KinkyuShisetsuRyoyoSeikyugaku = atoKohi2KinkyuShisetsuRyoyoSeikyugaku;
@@ -1726,7 +1748,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2TokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1736,8 +1758,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi2TokuteiShinryohiSeikyugaku atoKohi2TokuteiShinryohiSeikyugaku
+     *
+     * @param atoKohi2TokuteiShinryohiSeikyugaku
+     * atoKohi2TokuteiShinryohiSeikyugaku
      */
     public void setAtoKohi2TokuteiShinryohiSeikyugaku(int atoKohi2TokuteiShinryohiSeikyugaku) {
         this.atoKohi2TokuteiShinryohiSeikyugaku = atoKohi2TokuteiShinryohiSeikyugaku;
@@ -1745,7 +1768,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1755,8 +1778,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1764,7 +1788,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3ServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3ServiceTanisu
      */
     @CheckForNull
@@ -1774,7 +1798,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3ServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi3ServiceTanisu atoKohi3ServiceTanisu
      */
     public void setAtoKohi3ServiceTanisu(int atoKohi3ServiceTanisu) {
@@ -1783,7 +1807,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3Seikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3Seikyugaku
      */
     @CheckForNull
@@ -1793,7 +1817,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3Seikyugakuのsetメソッドです。
-     * 
+     *
      * @param atoKohi3Seikyugaku atoKohi3Seikyugaku
      */
     public void setAtoKohi3Seikyugaku(int atoKohi3Seikyugaku) {
@@ -1802,7 +1826,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3RiyoshaFutangakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3RiyoshaFutangaku
      */
     @CheckForNull
@@ -1812,7 +1836,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3RiyoshaFutangakuのsetメソッドです。
-     * 
+     *
      * @param atoKohi3RiyoshaFutangaku atoKohi3RiyoshaFutangaku
      */
     public void setAtoKohi3RiyoshaFutangaku(int atoKohi3RiyoshaFutangaku) {
@@ -1821,7 +1845,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3KinkyuShisetsuRyoyoSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3KinkyuShisetsuRyoyoSeikyugaku
      */
     @CheckForNull
@@ -1831,8 +1855,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3KinkyuShisetsuRyoyoSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi3KinkyuShisetsuRyoyoSeikyugaku atoKohi3KinkyuShisetsuRyoyoSeikyugaku
+     *
+     * @param atoKohi3KinkyuShisetsuRyoyoSeikyugaku
+     * atoKohi3KinkyuShisetsuRyoyoSeikyugaku
      */
     public void setAtoKohi3KinkyuShisetsuRyoyoSeikyugaku(int atoKohi3KinkyuShisetsuRyoyoSeikyugaku) {
         this.atoKohi3KinkyuShisetsuRyoyoSeikyugaku = atoKohi3KinkyuShisetsuRyoyoSeikyugaku;
@@ -1840,7 +1865,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TokuteiShinryohiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3TokuteiShinryohiSeikyugaku
      */
     @CheckForNull
@@ -1850,8 +1875,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TokuteiShinryohiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi3TokuteiShinryohiSeikyugaku atoKohi3TokuteiShinryohiSeikyugaku
+     *
+     * @param atoKohi3TokuteiShinryohiSeikyugaku
+     * atoKohi3TokuteiShinryohiSeikyugaku
      */
     public void setAtoKohi3TokuteiShinryohiSeikyugaku(int atoKohi3TokuteiShinryohiSeikyugaku) {
         this.atoKohi3TokuteiShinryohiSeikyugaku = atoKohi3TokuteiShinryohiSeikyugaku;
@@ -1859,7 +1885,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugakuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     @CheckForNull
@@ -1869,8 +1895,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugakuのsetメソッドです。
-     * 
-     * @param atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     *
+     * @param atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
+     * atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku
      */
     public void setAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku(int atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku) {
         this.atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku = atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku;
@@ -1878,7 +1905,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * keikaiKubunCodeのgetメソッドです。
-     * 
+     *
      * @return keikaiKubunCode
      */
     @CheckForNull
@@ -1888,7 +1915,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * keikaiKubunCodeのsetメソッドです。
-     * 
+     *
      * @param keikaiKubunCode keikaiKubunCode
      */
     public void setKeikaiKubunCode(RString keikaiKubunCode) {
@@ -1897,7 +1924,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * shinsaYMのgetメソッドです。
-     * 
+     *
      * @return shinsaYM
      */
     @CheckForNull
@@ -1907,7 +1934,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * shinsaYMのsetメソッドです。
-     * 
+     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -1916,7 +1943,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * seiriNoのgetメソッドです。
-     * 
+     *
      * @return seiriNo
      */
     @CheckForNull
@@ -1926,7 +1953,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * seiriNoのsetメソッドです。
-     * 
+     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -1935,7 +1962,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * sofuYMのgetメソッドです。
-     * 
+     *
      * @return sofuYM
      */
     @CheckForNull
@@ -1945,7 +1972,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * sofuYMのsetメソッドです。
-     * 
+     *
      * @param sofuYM sofuYM
      */
     public void setSofuYM(FlexibleYearMonth sofuYM) {
@@ -1954,7 +1981,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * torikomiYMのgetメソッドです。
-     * 
+     *
      * @return torikomiYM
      */
     @CheckForNull
@@ -1964,7 +1991,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * torikomiYMのsetメソッドです。
-     * 
+     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -1973,7 +2000,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * dokujiSakuseiKubunのgetメソッドです。
-     * 
+     *
      * @return dokujiSakuseiKubun
      */
     @CheckForNull
@@ -1983,7 +2010,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * dokujiSakuseiKubunのsetメソッドです。
-     * 
+     *
      * @param dokujiSakuseiKubun dokujiSakuseiKubun
      */
     public void setDokujiSakuseiKubun(RString dokujiSakuseiKubun) {
@@ -1992,7 +2019,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * hokenshaHoyuKyufujissekiJohoSakujoFlagのgetメソッドです。
-     * 
+     *
      * @return hokenshaHoyuKyufujissekiJohoSakujoFlag
      */
     @CheckForNull
@@ -2002,8 +2029,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * hokenshaHoyuKyufujissekiJohoSakujoFlagのsetメソッドです。
-     * 
-     * @param hokenshaHoyuKyufujissekiJohoSakujoFlag hokenshaHoyuKyufujissekiJohoSakujoFlag
+     *
+     * @param hokenshaHoyuKyufujissekiJohoSakujoFlag
+     * hokenshaHoyuKyufujissekiJohoSakujoFlag
      */
     public void setHokenshaHoyuKyufujissekiJohoSakujoFlag(boolean hokenshaHoyuKyufujissekiJohoSakujoFlag) {
         this.hokenshaHoyuKyufujissekiJohoSakujoFlag = hokenshaHoyuKyufujissekiJohoSakujoFlag;
@@ -2011,7 +2039,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceShuruiCodeのgetメソッドです。
-     * 
+     *
      * @return serviceShuruiCode
      */
     @CheckForNull
@@ -2021,7 +2049,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceShuruiCodeのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode serviceShuruiCode
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -2030,7 +2058,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceKomokuCodeのgetメソッドです。
-     * 
+     *
      * @return serviceKomokuCode
      */
     @CheckForNull
@@ -2040,7 +2068,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceKomokuCodeのsetメソッドです。
-     * 
+     *
      * @param serviceKomokuCode serviceKomokuCode
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
@@ -2049,7 +2077,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * tanisuのgetメソッドです。
-     * 
+     *
      * @return tanisu
      */
     @CheckForNull
@@ -2059,7 +2087,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * tanisuのsetメソッドです。
-     * 
+     *
      * @param tanisu tanisu
      */
     public void setTanisu(int tanisu) {
@@ -2068,7 +2096,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * nissuKaisuのgetメソッドです。
-     * 
+     *
      * @return nissuKaisu
      */
     @CheckForNull
@@ -2078,7 +2106,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * nissuKaisuのsetメソッドです。
-     * 
+     *
      * @param nissuKaisu nissuKaisu
      */
     public void setNissuKaisu(int nissuKaisu) {
@@ -2087,7 +2115,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1TaishoNissuKaisuのgetメソッドです。
-     * 
+     *
      * @return kohi1TaishoNissuKaisu
      */
     @CheckForNull
@@ -2097,7 +2125,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1TaishoNissuKaisuのsetメソッドです。
-     * 
+     *
      * @param kohi1TaishoNissuKaisu kohi1TaishoNissuKaisu
      */
     public void setKohi1TaishoNissuKaisu(int kohi1TaishoNissuKaisu) {
@@ -2106,7 +2134,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2TaishoNissuKaisuのgetメソッドです。
-     * 
+     *
      * @return kohi2TaishoNissuKaisu
      */
     @CheckForNull
@@ -2116,7 +2144,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2TaishoNissuKaisuのsetメソッドです。
-     * 
+     *
      * @param kohi2TaishoNissuKaisu kohi2TaishoNissuKaisu
      */
     public void setKohi2TaishoNissuKaisu(int kohi2TaishoNissuKaisu) {
@@ -2125,7 +2153,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3TaishoNissuKaisuのgetメソッドです。
-     * 
+     *
      * @return kohi3TaishoNissuKaisu
      */
     @CheckForNull
@@ -2135,7 +2163,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3TaishoNissuKaisuのsetメソッドです。
-     * 
+     *
      * @param kohi3TaishoNissuKaisu kohi3TaishoNissuKaisu
      */
     public void setKohi3TaishoNissuKaisu(int kohi3TaishoNissuKaisu) {
@@ -2144,7 +2172,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceTanisuのgetメソッドです。
-     * 
+     *
      * @return serviceTanisu
      */
     @CheckForNull
@@ -2154,7 +2182,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * serviceTanisuのsetメソッドです。
-     * 
+     *
      * @param serviceTanisu serviceTanisu
      */
     public void setServiceTanisu(int serviceTanisu) {
@@ -2163,7 +2191,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1TaishoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return kohi1TaishoServiceTanisu
      */
     @CheckForNull
@@ -2173,7 +2201,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi1TaishoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param kohi1TaishoServiceTanisu kohi1TaishoServiceTanisu
      */
     public void setKohi1TaishoServiceTanisu(int kohi1TaishoServiceTanisu) {
@@ -2182,7 +2210,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2TaishoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return kohi2TaishoServiceTanisu
      */
     @CheckForNull
@@ -2192,7 +2220,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi2TaishoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param kohi2TaishoServiceTanisu kohi2TaishoServiceTanisu
      */
     public void setKohi2TaishoServiceTanisu(int kohi2TaishoServiceTanisu) {
@@ -2201,7 +2229,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3TaishoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return kohi3TaishoServiceTanisu
      */
     @CheckForNull
@@ -2211,7 +2239,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kohi3TaishoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param kohi3TaishoServiceTanisu kohi3TaishoServiceTanisu
      */
     public void setKohi3TaishoServiceTanisu(int kohi3TaishoServiceTanisu) {
@@ -2220,7 +2248,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * tekiyoのgetメソッドです。
-     * 
+     *
      * @return tekiyo
      */
     @CheckForNull
@@ -2230,7 +2258,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * tekiyoのsetメソッドです。
-     * 
+     *
      * @param tekiyo tekiyo
      */
     public void setTekiyo(RString tekiyo) {
@@ -2239,7 +2267,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoTanisuのgetメソッドです。
-     * 
+     *
      * @return atoTanisu
      */
     @CheckForNull
@@ -2249,7 +2277,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoTanisuのsetメソッドです。
-     * 
+     *
      * @param atoTanisu atoTanisu
      */
     public void setAtoTanisu(int atoTanisu) {
@@ -2258,7 +2286,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoNissuKaisuのgetメソッドです。
-     * 
+     *
      * @return atoNissuKaisu
      */
     @CheckForNull
@@ -2268,7 +2296,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoNissuKaisuのsetメソッドです。
-     * 
+     *
      * @param atoNissuKaisu atoNissuKaisu
      */
     public void setAtoNissuKaisu(int atoNissuKaisu) {
@@ -2277,7 +2305,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TaishoNissuKaisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1TaishoNissuKaisu
      */
     @CheckForNull
@@ -2287,7 +2315,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TaishoNissuKaisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi1TaishoNissuKaisu atoKohi1TaishoNissuKaisu
      */
     public void setAtoKohi1TaishoNissuKaisu(int atoKohi1TaishoNissuKaisu) {
@@ -2296,7 +2324,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TaishoNissukaisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2TaishoNissukaisu
      */
     @CheckForNull
@@ -2306,7 +2334,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TaishoNissukaisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi2TaishoNissukaisu atoKohi2TaishoNissukaisu
      */
     public void setAtoKohi2TaishoNissukaisu(int atoKohi2TaishoNissukaisu) {
@@ -2315,7 +2343,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TaishoNissuKaisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3TaishoNissuKaisu
      */
     @CheckForNull
@@ -2325,7 +2353,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TaishoNissuKaisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi3TaishoNissuKaisu atoKohi3TaishoNissuKaisu
      */
     public void setAtoKohi3TaishoNissuKaisu(int atoKohi3TaishoNissuKaisu) {
@@ -2334,7 +2362,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoServiceTanisu
      */
     @CheckForNull
@@ -2344,7 +2372,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoServiceTanisu atoServiceTanisu
      */
     public void setAtoServiceTanisu(int atoServiceTanisu) {
@@ -2353,7 +2381,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TaishoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi1TaishoServiceTanisu
      */
     @CheckForNull
@@ -2363,7 +2391,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi1TaishoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi1TaishoServiceTanisu atoKohi1TaishoServiceTanisu
      */
     public void setAtoKohi1TaishoServiceTanisu(int atoKohi1TaishoServiceTanisu) {
@@ -2372,7 +2400,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TaishoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi2TaishoServiceTanisu
      */
     @CheckForNull
@@ -2382,7 +2410,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi2TaishoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi2TaishoServiceTanisu atoKohi2TaishoServiceTanisu
      */
     public void setAtoKohi2TaishoServiceTanisu(int atoKohi2TaishoServiceTanisu) {
@@ -2391,7 +2419,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TaishoServiceTanisuのgetメソッドです。
-     * 
+     *
      * @return atoKohi3TaishoServiceTanisu
      */
     @CheckForNull
@@ -2401,7 +2429,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * atoKohi3TaishoServiceTanisuのsetメソッドです。
-     * 
+     *
      * @param atoKohi3TaishoServiceTanisu atoKohi3TaishoServiceTanisu
      */
     public void setAtoKohi3TaishoServiceTanisu(int atoKohi3TaishoServiceTanisu) {
@@ -2410,7 +2438,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * saishinsaKaisuのgetメソッドです。
-     * 
+     *
      * @return saishinsaKaisu
      */
     @CheckForNull
@@ -2420,7 +2448,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * saishinsaKaisuのsetメソッドです。
-     * 
+     *
      * @param saishinsaKaisu saishinsaKaisu
      */
     public void setSaishinsaKaisu(int saishinsaKaisu) {
@@ -2429,7 +2457,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kagoKaisuのgetメソッドです。
-     * 
+     *
      * @return kagoKaisu
      */
     @CheckForNull
@@ -2439,7 +2467,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * kagoKaisuのsetメソッドです。
-     * 
+     *
      * @param kagoKaisu kagoKaisu
      */
     public void setKagoKaisu(int kagoKaisu) {
@@ -2448,9 +2476,9 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * このエンティティの主キーが他の{@literal DbV7508KyufujissekiKihonMeisaiFukushiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbV7508KyufujissekiKihonMeisaiFukushiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -2591,6 +2619,7 @@ public class DbV7508KyufujissekiKihonMeisaiFukushiEntity extends DbTableEntityBa
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

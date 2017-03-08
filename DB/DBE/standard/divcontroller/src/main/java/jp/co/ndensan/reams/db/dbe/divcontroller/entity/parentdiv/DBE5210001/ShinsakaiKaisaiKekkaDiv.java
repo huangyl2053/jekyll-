@@ -236,16 +236,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtGogitai() {
-        return this.getShinsakaiYoteiInfo().getTxtGogitai();
-    }
-
-    @JsonIgnore
-    public void  setTxtGogitai(TextBox txtGogitai) {
-        this.getShinsakaiYoteiInfo().setTxtGogitai(txtGogitai);
-    }
-
-    @JsonIgnore
     public TextBox getTxtShinsakaiMeisho() {
         return this.getShinsakaiYoteiInfo().getTxtShinsakaiMeisho();
     }
@@ -256,13 +246,63 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public CheckBoxList getChkMogi() {
-        return this.getShinsakaiYoteiInfo().getChkMogi();
+    public TextBox getTxtGogitai() {
+        return this.getShinsakaiYoteiInfo().getTxtGogitai();
     }
 
     @JsonIgnore
-    public void  setChkMogi(CheckBoxList chkMogi) {
-        this.getShinsakaiYoteiInfo().setChkMogi(chkMogi);
+    public void  setTxtGogitai(TextBox txtGogitai) {
+        this.getShinsakaiYoteiInfo().setTxtGogitai(txtGogitai);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtWaritsuke() {
+        return this.getShinsakaiYoteiInfo().getTxtWaritsuke();
+    }
+
+    @JsonIgnore
+    public void  setTxtWaritsuke(TextBoxNum txtWaritsuke) {
+        this.getShinsakaiYoteiInfo().setTxtWaritsuke(txtWaritsuke);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtYoteiKaijo() {
+        return this.getShinsakaiYoteiInfo().getTxtYoteiKaijo();
+    }
+
+    @JsonIgnore
+    public void  setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
+        this.getShinsakaiYoteiInfo().setTxtYoteiKaijo(txtYoteiKaijo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChikuCode() {
+        return this.getShinsakaiYoteiInfo().getTxtChikuCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtChikuCode(TextBox txtChikuCode) {
+        this.getShinsakaiYoteiInfo().setTxtChikuCode(txtChikuCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChikuMeisho() {
+        return this.getShinsakaiYoteiInfo().getTxtChikuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtChikuMeisho(TextBox txtChikuMeisho) {
+        this.getShinsakaiYoteiInfo().setTxtChikuMeisho(txtChikuMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYoteiTeiin() {
+        return this.getShinsakaiYoteiInfo().getTxtYoteiTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.getShinsakaiYoteiInfo().setTxtYoteiTeiin(txtYoteiTeiin);
     }
 
     @JsonIgnore
@@ -296,23 +336,23 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtYoteiTeiin() {
-        return this.getShinsakaiYoteiInfo().getTxtYoteiTeiin();
+    public CheckBoxList getChkShurui() {
+        return this.getShinsakaiYoteiInfo().getChkShurui();
     }
 
     @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.getShinsakaiYoteiInfo().setTxtYoteiTeiin(txtYoteiTeiin);
+    public void  setChkShurui(CheckBoxList chkShurui) {
+        this.getShinsakaiYoteiInfo().setChkShurui(chkShurui);
     }
 
     @JsonIgnore
-    public TextBox getTxtYoteiKaijo() {
-        return this.getShinsakaiYoteiInfo().getTxtYoteiKaijo();
+    public CheckBoxList getChkMogi() {
+        return this.getShinsakaiYoteiInfo().getChkMogi();
     }
 
     @JsonIgnore
-    public void  setTxtYoteiKaijo(TextBox txtYoteiKaijo) {
-        this.getShinsakaiYoteiInfo().setTxtYoteiKaijo(txtYoteiKaijo);
+    public void  setChkMogi(CheckBoxList chkMogi) {
+        this.getShinsakaiYoteiInfo().setChkMogi(chkMogi);
     }
 
     @JsonIgnore

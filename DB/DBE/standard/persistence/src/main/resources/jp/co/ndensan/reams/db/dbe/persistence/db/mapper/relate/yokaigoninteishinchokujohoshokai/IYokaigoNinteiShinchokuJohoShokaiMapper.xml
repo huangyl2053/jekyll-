@@ -97,7 +97,7 @@
         DbT5105."ninteiShinsakaiWariateKanryoYMD",
         DbT5105."ninteiShinsakaiKanryoYMD",
         DbT5201."ninteichosaIraiYMD",
-        DbT4202."ninteichosaJuryoYMD",
+        DbT5202."ninteichosaJuryoYMD",
         DbT5910."jigyoshaMeisho",
         DbT5913."chosainShimei",
         DbT5301."ikenshoSakuseiIraiYMD",
@@ -207,22 +207,39 @@
         ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
         AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
-        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
-        ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5201."ninteichosaIraiRirekiNo" = (
-        SELECT MAX("ninteichosaIraiRirekiNo")
-        FROM rgdb."DbT5201NinteichosaIraiJoho"
-        WHERE "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        )
-        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
-        ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT5301."ikenshoIraiRirekiNo" = (
-        SELECT MAX("ikenshoIraiRirekiNo")
-        FROM rgdb."DbT5301ShujiiIkenshoIraiJoho"
-        WHERE "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        )
-        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT4202
-        ON DbT4202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" DbT5201 
+        ON DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo" 
+        AND NOT EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho" xDbT5201 
+        WHERE
+        DbT5201."shinseishoKanriNo" = xDbT5201."shinseishoKanriNo" 
+        AND DbT5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> xDbT5201."ninteichosaIraiRirekiNo"
+        ) 
+        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301 
+        ON DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo" 
+        AND NOT EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT5301ShujiiIkenshoIraiJoho" xDbT5301 
+        WHERE
+        DbT5301."shinseishoKanriNo" = xDbT5301."shinseishoKanriNo" 
+        AND DbT5301."ikenshoIraiRirekiNo" <![CDATA[<]]> xDbT5301."ikenshoIraiRirekiNo"
+        ) 
+        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202 
+        ON DbT5101."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
+        AND NOT EXISTS ( 
+        SELECT
+        'X' 
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" xDbT5202 
+        WHERE
+        DbT5202."shinseishoKanriNo" = xDbT5202."shinseishoKanriNo" 
+        AND DbT5202."ninteichosaRirekiNo" <![CDATA[<]]> xDbT5202."ninteichosaRirekiNo"
+        ) 
         INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"

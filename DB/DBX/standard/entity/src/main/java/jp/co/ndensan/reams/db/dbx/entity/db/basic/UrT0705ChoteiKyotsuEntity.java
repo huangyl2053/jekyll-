@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * UrT0705ChoteiKyotsuの項目定義クラスです
- *
  */
+@OnNextSchema("rgdb")
 public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKyotsuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
@@ -347,7 +348,8 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      * このエンティティの主キーが他の{@literal UrT0705ChoteiKyotsuEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal UrT0705ChoteiKyotsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal UrT0705ChoteiKyotsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(UrT0705ChoteiKyotsuEntity other) {

@@ -25,12 +25,16 @@ public class WaritsukeDiv extends Panel {
     private TextBox txtKaigoNinteiShinsakai;
     @JsonProperty("txtGogitai")
     private TextBox txtGogitai;
-    @JsonProperty("txtYoteiTeiin")
-    private TextBox txtYoteiTeiin;
-    @JsonProperty("chkDummyKubun")
-    private CheckBoxList chkDummyKubun;
+    @JsonProperty("txtWaritsuke")
+    private TextBoxNum txtWaritsuke;
     @JsonProperty("txtKaisaiBasho")
     private TextBox txtKaisaiBasho;
+    @JsonProperty("txtChikuCode")
+    private TextBox txtChikuCode;
+    @JsonProperty("txtChikuMeisho")
+    private TextBox txtChikuMeisho;
+    @JsonProperty("txtYoteiTeiin")
+    private TextBox txtYoteiTeiin;
     @JsonProperty("txtKaisaiYoteibi")
     private TextBoxDate txtKaisaiYoteibi;
     @JsonProperty("txtKaishiYoteiTime")
@@ -39,6 +43,8 @@ public class WaritsukeDiv extends Panel {
     private TextBoxTime txtShuryoYoteiTime;
     @JsonProperty("chkSeishinkai")
     private CheckBoxList chkSeishinkai;
+    @JsonProperty("chkDummyKubun")
+    private CheckBoxList chkDummyKubun;
     @JsonProperty("lblShinsakaiIinKoseiIchiran")
     private Label lblShinsakaiIinKoseiIchiran;
     @JsonProperty("dgShinsakaiIinKoseiIchiran")
@@ -99,39 +105,21 @@ public class WaritsukeDiv extends Panel {
     }
 
     /*
-     * gettxtYoteiTeiin
-     * @return txtYoteiTeiin
+     * gettxtWaritsuke
+     * @return txtWaritsuke
      */
-    @JsonProperty("txtYoteiTeiin")
-    public TextBox getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
+    @JsonProperty("txtWaritsuke")
+    public TextBoxNum getTxtWaritsuke() {
+        return txtWaritsuke;
     }
 
     /*
-     * settxtYoteiTeiin
-     * @param txtYoteiTeiin txtYoteiTeiin
+     * settxtWaritsuke
+     * @param txtWaritsuke txtWaritsuke
      */
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBox txtYoteiTeiin) {
-        this.txtYoteiTeiin = txtYoteiTeiin;
-    }
-
-    /*
-     * getchkDummyKubun
-     * @return chkDummyKubun
-     */
-    @JsonProperty("chkDummyKubun")
-    public CheckBoxList getChkDummyKubun() {
-        return chkDummyKubun;
-    }
-
-    /*
-     * setchkDummyKubun
-     * @param chkDummyKubun chkDummyKubun
-     */
-    @JsonProperty("chkDummyKubun")
-    public void setChkDummyKubun(CheckBoxList chkDummyKubun) {
-        this.chkDummyKubun = chkDummyKubun;
+    @JsonProperty("txtWaritsuke")
+    public void setTxtWaritsuke(TextBoxNum txtWaritsuke) {
+        this.txtWaritsuke = txtWaritsuke;
     }
 
     /*
@@ -150,6 +138,60 @@ public class WaritsukeDiv extends Panel {
     @JsonProperty("txtKaisaiBasho")
     public void setTxtKaisaiBasho(TextBox txtKaisaiBasho) {
         this.txtKaisaiBasho = txtKaisaiBasho;
+    }
+
+    /*
+     * gettxtChikuCode
+     * @return txtChikuCode
+     */
+    @JsonProperty("txtChikuCode")
+    public TextBox getTxtChikuCode() {
+        return txtChikuCode;
+    }
+
+    /*
+     * settxtChikuCode
+     * @param txtChikuCode txtChikuCode
+     */
+    @JsonProperty("txtChikuCode")
+    public void setTxtChikuCode(TextBox txtChikuCode) {
+        this.txtChikuCode = txtChikuCode;
+    }
+
+    /*
+     * gettxtChikuMeisho
+     * @return txtChikuMeisho
+     */
+    @JsonProperty("txtChikuMeisho")
+    public TextBox getTxtChikuMeisho() {
+        return txtChikuMeisho;
+    }
+
+    /*
+     * settxtChikuMeisho
+     * @param txtChikuMeisho txtChikuMeisho
+     */
+    @JsonProperty("txtChikuMeisho")
+    public void setTxtChikuMeisho(TextBox txtChikuMeisho) {
+        this.txtChikuMeisho = txtChikuMeisho;
+    }
+
+    /*
+     * gettxtYoteiTeiin
+     * @return txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public TextBox getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
+    }
+
+    /*
+     * settxtYoteiTeiin
+     * @param txtYoteiTeiin txtYoteiTeiin
+     */
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBox txtYoteiTeiin) {
+        this.txtYoteiTeiin = txtYoteiTeiin;
     }
 
     /*
@@ -222,6 +264,24 @@ public class WaritsukeDiv extends Panel {
     @JsonProperty("chkSeishinkai")
     public void setChkSeishinkai(CheckBoxList chkSeishinkai) {
         this.chkSeishinkai = chkSeishinkai;
+    }
+
+    /*
+     * getchkDummyKubun
+     * @return chkDummyKubun
+     */
+    @JsonProperty("chkDummyKubun")
+    public CheckBoxList getChkDummyKubun() {
+        return chkDummyKubun;
+    }
+
+    /*
+     * setchkDummyKubun
+     * @param chkDummyKubun chkDummyKubun
+     */
+    @JsonProperty("chkDummyKubun")
+    public void setChkDummyKubun(CheckBoxList chkDummyKubun) {
+        this.chkDummyKubun = chkDummyKubun;
     }
 
     /*
