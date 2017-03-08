@@ -258,7 +258,7 @@
         <result property="zenkaiYukoKikanStart" column="A_zenkaiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenkaiYukoKikanEnd" column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="DbT5301_shujiiIryokikanCode" column="D_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="DbT5302_shujiiIryokikanCode" column="E_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="DbT5302_shujiiIryokikanCode" column="E_shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="DbT5301_shujiiCode" column="D_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="DbT5302_shujiiCode" column="E_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ikenshoSakuseiIraiYMD" column="D_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -589,7 +589,7 @@
         , D."shujiiIryokikanCode"                    AS "D_shujiiIryokikanCode"
         , D."shujiiCode"                             AS "D_shujiiCode"
         , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
-        , E."shujiiIryokikanCode"                    AS "E_shujiiIryokikanCode"
+        , E."shujiiIryoKikanCode"                    AS "E_shujiiIryoKikanCode"
         , E."shujiiCode"                             AS "E_shujiiCode"
         ,要介護認定主治医一時テーブル."remban14" as "要介護認定主治医一時テーブル_remban14"
         ,要介護認定主治医一時テーブル."remban15" as "要介護認定主治医一時テーブル_remban15"
@@ -1021,8 +1021,6 @@
         , rgdb."DbT5101NinteiShinseiJoho" AS A
         WHERE
         P001."shinseishoKanriNo" = A."shinseishoKanriNo"
-        AND DbT5105."shinseishoKanriNo" = P001."shinseishoKanriNo"
-        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         AND NOT EXISTS (
         SELECT
         'X'
@@ -1038,6 +1036,8 @@
         P001."remban"
         ) AS PO1
         ON A."shinseishoKanriNo" = PO1."PO1_shinseishoKanriNo"
+        AND DbT5105."shinseishoKanriNo" = PO1."PO1_shinseishoKanriNo"
+        AND DbT5105."ninteichosaKanryoYMD" IS NOT NULL
         LEFT JOIN
         "ChosaItemJohoTemp" as 認定調査票基本調査一時テーブル
         ON A."shinseishoKanriNo" =認定調査票基本調査一時テーブル."shinseishoKanriNo"
