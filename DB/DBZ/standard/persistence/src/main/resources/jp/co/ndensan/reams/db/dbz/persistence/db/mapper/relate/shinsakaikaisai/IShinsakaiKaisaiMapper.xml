@@ -75,15 +75,19 @@
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
                 ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
-               AND gogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
-               AND gogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+               AND gogitaiJoho."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
+               AND gogitaiJoho."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD"
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS shinsakaiKaisaiKekkaJoho
                 ON shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS shinsakaiKaisaiBashoJoho
-                ON shinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode"
-        LEFT JOIN(SELECT shinsakaiOnseiJoho."shinsakaiKaisaiNo"
+                ON shinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = (
+                    CASE WHEN shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo" IS NOT NULL
+                                THEN shinsakaiKaisaiKekkaJoho."shinsakaiKaisaiBashoCode"
+                         ELSE shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiBashoCode" END
+                )
+        LEFT JOIN ( SELECT shinsakaiOnseiJoho."shinsakaiKaisaiNo"
                         FROM rgdb."DbT5512ShinsakaiOnseiJoho" AS shinsakaiOnseiJoho
-                        GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo"	) AS TB1
+                        GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo" ) AS TB1
                 ON TB1."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
         LEFT JOIN (
             SELECT
