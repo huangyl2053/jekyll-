@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshu;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShinsakaiWariateJohoKenshuManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -40,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class PublicationShiryoShinsakai {
 
-    private final RString マスキング完了処理_一次判定後 = new RString("1");
+    private final RString マスキング完了処理_審査会割当後 = new RString("2");
 
     /**
      * 画面初期化処理です。
@@ -60,21 +62,32 @@ public class PublicationShiryoShinsakai {
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         KaisaiYoteiJohoBusiness 開催予定情報
                 = ShiryoShinsakaiFinder.createInstance().get開催予定情報(審査会一覧_開催番号);
-        div.getTxtShinsakaiKaisaiNo().setValue(審査会一覧_開催番号);
         getHandler(div).onLoad(開催予定情報);
+        
         ShinsakaiWariateJohoManager 審査会割当情報Manager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
         List<ShinsakaiWariateJoho> 審査会割当情報リスト = 審査会割当情報Manager.get介護認定審査会割当情報By介護認定審査会開催番号(審査会一覧_開催番号);
+        ShinsakaiWariateJohoKenshuManager 審査会割当情報研修Manager = InstanceProvider.create(ShinsakaiWariateJohoKenshuManager.class);
+        List<ShinsakaiWariateJohoKenshu> 審査会割当情報研修リスト = 審査会割当情報研修Manager.get審査会割当情報研修By審査会開催番号(審査会一覧_開催番号);
         NinteiKanryoJohoManager 認定完了情報Manager = InstanceProvider.create(NinteiKanryoJohoManager.class);
         for (ShinsakaiWariateJoho 審査会割当情報 : 審査会割当情報リスト) {
             NinteiKanryoJoho 認定完了情報 = 認定完了情報Manager.get要介護認定完了情報(審査会割当情報.get申請書管理番号());
-            if (マスキング完了処理_一次判定後.equals(DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.get認定審査会割当完了年月日() == null) {
-                    ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().getCode(),
-                            DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().evaluate());
+            if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.get認定審査会割当完了年月日() == null) {
+                ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().getCode(),
+                        DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (マスキング完了処理_審査会割当後.equals(DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.getマスキング完了年月日() == null) {
+                    ErrorMessage message = new ErrorMessage(DbeErrorMessages.マスキング未完了のため処理不可.getMessage().getCode(),
+                            DbeErrorMessages.マスキング未完了のため処理不可.getMessage().evaluate());
                     return ResponseData.of(div).addMessage(message).respond();
                 }
-            } else {
-                if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.getマスキング完了年月日() == null) {
+            }
+        }
+        for (ShinsakaiWariateJohoKenshu 審査会割当情報研修 : 審査会割当情報研修リスト) {
+            NinteiKanryoJoho 認定完了情報 = 認定完了情報Manager.get要介護認定完了情報(審査会割当情報研修.get申請書管理番号());
+            if (マスキング完了処理_審査会割当後.equals(DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+                if ((審査会割当情報研修.get判定結果コード() == null || 審査会割当情報研修.get判定結果コード().isEmpty()) && 認定完了情報.getマスキング完了年月日() == null) {
                     ErrorMessage message = new ErrorMessage(DbeErrorMessages.マスキング未完了のため処理不可.getMessage().getCode(),
                             DbeErrorMessages.マスキング未完了のため処理不可.getMessage().evaluate());
                     return ResponseData.of(div).addMessage(message).respond();
@@ -91,7 +104,7 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onClick_radSakuseiJoken(PublicationShiryoShinsakaiDiv div) {
-        getHandler(div).活性と非活性設定();
+        getHandler(div).onChange作成条件();
         return ResponseData.of(div).respond();
     }
 
@@ -113,9 +126,7 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onClick_chkPrintChoyoJimu(PublicationShiryoShinsakaiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).onClick_chkPrintChoyoJimu();
-        }
+        getHandler(div).onClickChk組み合わせ帳票_事務();
         return ResponseData.of(div).respond();
     }
 
@@ -126,9 +137,7 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onClick_chkPrintChohyoIin(PublicationShiryoShinsakaiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).onClick_chkPrintChohyoIin();
-        }
+        getHandler(div).onClickChk組み合わせ帳票_委員();
         return ResponseData.of(div).respond();
     }
 
@@ -139,9 +148,7 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onClick_chkPrintChohyoIin2(PublicationShiryoShinsakaiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            getHandler(div).onClick_chkPrintChohyoIin2();
-        }
+        getHandler(div).onClickChk審査会資料以外帳票_委員();
         return ResponseData.of(div).respond();
     }
 

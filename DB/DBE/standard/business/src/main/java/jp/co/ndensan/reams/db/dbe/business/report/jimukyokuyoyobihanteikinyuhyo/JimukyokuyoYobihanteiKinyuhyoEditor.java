@@ -13,7 +13,10 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -46,6 +49,8 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
      */
     @Override
     public JimukyokuyoYobihanteiKinyuhyoReportSource edit(JimukyokuyoYobihanteiKinyuhyoReportSource source) {
+        source.printTimeStamp = business.get作成年月日();
+        source.title = new RString("予備判定記入表(事務局用)");
         source.listTaishoshaIchiran_1 = business.get被保険者番号();
         source.listTaishoshaIchiran_2 = business.get被保険者氏名();
         source.listTaishoshaIchiran_3 = business.get性別();

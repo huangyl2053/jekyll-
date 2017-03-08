@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai;
 
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,7 +23,9 @@ public class KaisaiYoteiJohoEntity {
     private FlexibleDate 予定年月日;
     private RString 予定場所コード;
     private RString 開催場所名称;
+    private Code 開催地区コード;
     private RString 開始予定時刻;
+    private RString 終了予定時刻;
     private boolean 資料作成済フラグ;
     private int 合議体番号;
     private int 予定定員;
@@ -30,4 +33,5 @@ public class KaisaiYoteiJohoEntity {
     private RString 合議体名称;
     private FlexibleDate 資料作成年月日;
     private boolean 合議体ダミーフラグ;
+    private boolean 精神科医所属フラグ;
 }

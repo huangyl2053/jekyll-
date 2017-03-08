@@ -36,6 +36,10 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     private RString hdnChkSubeteJimuFlag;
     @JsonProperty("hdnChkSubeteIinFlag")
     private RString hdnChkSubeteIinFlag;
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    private RString hdnShinsakaiKaisaiNo;
+    @JsonProperty("hdnGogitaiNo")
+    private RString hdnGogitaiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -134,86 +138,62 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     }
 
     /*
+     * gethdnShinsakaiKaisaiNo
+     * @return hdnShinsakaiKaisaiNo
+     */
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    public RString getHdnShinsakaiKaisaiNo() {
+        return hdnShinsakaiKaisaiNo;
+    }
+
+    /*
+     * sethdnShinsakaiKaisaiNo
+     * @param hdnShinsakaiKaisaiNo hdnShinsakaiKaisaiNo
+     */
+    @JsonProperty("hdnShinsakaiKaisaiNo")
+    public void setHdnShinsakaiKaisaiNo(RString hdnShinsakaiKaisaiNo) {
+        this.hdnShinsakaiKaisaiNo = hdnShinsakaiKaisaiNo;
+    }
+
+    /*
+     * gethdnGogitaiNo
+     * @return hdnGogitaiNo
+     */
+    @JsonProperty("hdnGogitaiNo")
+    public RString getHdnGogitaiNo() {
+        return hdnGogitaiNo;
+    }
+
+    /*
+     * sethdnGogitaiNo
+     * @param hdnGogitaiNo hdnGogitaiNo
+     */
+    @JsonProperty("hdnGogitaiNo")
+    public void setHdnGogitaiNo(RString hdnGogitaiNo) {
+        this.hdnGogitaiNo = hdnGogitaiNo;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxCode getTxtShinsakaiKaisaiNo() {
-        return this.getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo();
+    public TextBoxCode getTxtShinsakaiName() {
+        return this.getPublicationTargetShinsakai().getTxtShinsakaiName();
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiKaisaiNo(TextBoxCode txtShinsakaiKaisaiNo) {
-        this.getPublicationTargetShinsakai().setTxtShinsakaiKaisaiNo(txtShinsakaiKaisaiNo);
+    public void  setTxtShinsakaiName(TextBoxCode txtShinsakaiName) {
+        this.getPublicationTargetShinsakai().setTxtShinsakaiName(txtShinsakaiName);
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtShinsakaiYoteiDate() {
-        return this.getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsakaiYoteiDate(TextBoxFlexibleDate txtShinsakaiYoteiDate) {
-        this.getPublicationTargetShinsakai().setTxtShinsakaiYoteiDate(txtShinsakaiYoteiDate);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShinsakaiKaijo() {
-        return this.getPublicationTargetShinsakai().getTxtShinsakaiKaijo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsakaiKaijo(TextBox txtShinsakaiKaijo) {
-        this.getPublicationTargetShinsakai().setTxtShinsakaiKaijo(txtShinsakaiKaijo);
-    }
-
-    @JsonIgnore
-    public TextBoxTime getTxtShinsakaiKaishiYoteiTime() {
-        return this.getPublicationTargetShinsakai().getTxtShinsakaiKaishiYoteiTime();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsakaiKaishiYoteiTime(TextBoxTime txtShinsakaiKaishiYoteiTime) {
-        this.getPublicationTargetShinsakai().setTxtShinsakaiKaishiYoteiTime(txtShinsakaiKaishiYoteiTime);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShiryoSakusei() {
-        return this.getPublicationTargetShinsakai().getTxtShiryoSakusei();
-    }
-
-    @JsonIgnore
-    public void  setTxtShiryoSakusei(TextBox txtShiryoSakusei) {
-        this.getPublicationTargetShinsakai().setTxtShiryoSakusei(txtShiryoSakusei);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtGogitaiNo() {
-        return this.getPublicationTargetShinsakai().getTxtGogitaiNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtGogitaiNo(TextBoxCode txtGogitaiNo) {
-        this.getPublicationTargetShinsakai().setTxtGogitaiNo(txtGogitaiNo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtGogitaiName() {
+    public TextBoxCode getTxtGogitaiName() {
         return this.getPublicationTargetShinsakai().getTxtGogitaiName();
     }
 
     @JsonIgnore
-    public void  setTxtGogitaiName(TextBox txtGogitaiName) {
+    public void  setTxtGogitaiName(TextBoxCode txtGogitaiName) {
         this.getPublicationTargetShinsakai().setTxtGogitaiName(txtGogitaiName);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtYoteiTeiin() {
-        return this.getPublicationTargetShinsakai().getTxtYoteiTeiin();
-    }
-
-    @JsonIgnore
-    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.getPublicationTargetShinsakai().setTxtYoteiTeiin(txtYoteiTeiin);
     }
 
     @JsonIgnore
@@ -227,6 +207,76 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtShinsakaiKaijo() {
+        return this.getPublicationTargetShinsakai().getTxtShinsakaiKaijo();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiKaijo(TextBox txtShinsakaiKaijo) {
+        this.getPublicationTargetShinsakai().setTxtShinsakaiKaijo(txtShinsakaiKaijo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShinsakaiChikuCode() {
+        return this.getPublicationTargetShinsakai().getTxtShinsakaiChikuCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiChikuCode(TextBox txtShinsakaiChikuCode) {
+        this.getPublicationTargetShinsakai().setTxtShinsakaiChikuCode(txtShinsakaiChikuCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShinsakaiChikuName() {
+        return this.getPublicationTargetShinsakai().getTxtShinsakaiChikuName();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiChikuName(TextBox txtShinsakaiChikuName) {
+        this.getPublicationTargetShinsakai().setTxtShinsakaiChikuName(txtShinsakaiChikuName);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYoteiTeiin() {
+        return this.getPublicationTargetShinsakai().getTxtYoteiTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.getPublicationTargetShinsakai().setTxtYoteiTeiin(txtYoteiTeiin);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtShinsakaiYoteiDate() {
+        return this.getPublicationTargetShinsakai().getTxtShinsakaiYoteiDate();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiYoteiDate(TextBoxFlexibleDate txtShinsakaiYoteiDate) {
+        this.getPublicationTargetShinsakai().setTxtShinsakaiYoteiDate(txtShinsakaiYoteiDate);
+    }
+
+    @JsonIgnore
+    public TextBoxTimeRange getTxtKaisaiTimeRange() {
+        return this.getPublicationTargetShinsakai().getTxtKaisaiTimeRange();
+    }
+
+    @JsonIgnore
+    public void  setTxtKaisaiTimeRange(TextBoxTimeRange txtKaisaiTimeRange) {
+        this.getPublicationTargetShinsakai().setTxtKaisaiTimeRange(txtKaisaiTimeRange);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShinsakaiShurui() {
+        return this.getPublicationTargetShinsakai().getChkShinsakaiShurui();
+    }
+
+    @JsonIgnore
+    public void  setChkShinsakaiShurui(CheckBoxList chkShinsakaiShurui) {
+        this.getPublicationTargetShinsakai().setChkShinsakaiShurui(chkShinsakaiShurui);
+    }
+
+    @JsonIgnore
     public CheckBoxList getChkGogitaiDummyFlag() {
         return this.getPublicationTargetShinsakai().getChkGogitaiDummyFlag();
     }
@@ -234,6 +284,16 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     @JsonIgnore
     public void  setChkGogitaiDummyFlag(CheckBoxList chkGogitaiDummyFlag) {
         this.getPublicationTargetShinsakai().setChkGogitaiDummyFlag(chkGogitaiDummyFlag);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShiryoSakusei() {
+        return this.getPublicationTargetShinsakai().getTxtShiryoSakusei();
+    }
+
+    @JsonIgnore
+    public void  setTxtShiryoSakusei(TextBox txtShiryoSakusei) {
+        this.getPublicationTargetShinsakai().setTxtShiryoSakusei(txtShiryoSakusei);
     }
 
     @JsonIgnore

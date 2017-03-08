@@ -60,10 +60,8 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
             if (帳票Map2 != null) {
                 帳票Map.putAll(帳票Map2);
             }
-            if (帳票Map.containsKey(ReportIdDBE.DBE517901.getReportId().getColumnValue())
-                    || 帳票Map.containsKey(ReportIdDBE.DBE517902.getReportId().getColumnValue())
-                    || 帳票Map.containsKey(ReportIdDBE.DBE517903.getReportId().getColumnValue())
-                    || 帳票Map.containsKey(ReportIdDBE.DBE517904.getReportId().getColumnValue())) {
+            if (選択.equals(getParameter().getChoyoJimu_kumiawaseFlag())
+                    || 選択.equals(getParameter().getChohyoIin_kumiawaseFlag())) {
                 executeStep(審査会情報更新);
             }
             executeStep(出力条件表出力);
