@@ -13,21 +13,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.DBE2410001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.KojinIraiNaiyouKoshinDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410001.KojinIraiNaiyouKoshinHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.kojinirainaiyoukoshin.KojinIraiNaiyouKoshinFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
-import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -71,9 +66,9 @@ public class KojinIraiNaiyouKoshin {
             }
         }
         RString モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
-        if(モード != null && モード.equals(new RString("1件"))){
+        if (モード != null && モード.equals(new RString("1件"))) {
             return ResponseData.of(div).setState(DBE2410001StateName.初期表示_一件);
-        }else{
+        } else {
             return ResponseData.of(div).respond();
         }
     }
@@ -91,8 +86,8 @@ public class KojinIraiNaiyouKoshin {
     public ResponseData<KojinIraiNaiyouKoshinDiv> btn_Back(KojinIraiNaiyouKoshinDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE2410001TransitionEventName.検索へ戻る).respond();
     }
-    
-     /**
+
+    /**
      * btn_ReSearch処理。
      *
      * @param div KojinIraiNaiyouKoshinDiv
@@ -102,10 +97,10 @@ public class KojinIraiNaiyouKoshin {
         ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 調査の「依頼書等を印刷する」ボタン押下時
-     * 
+     *
      * @param div KojinIraiNaiyouKoshinDiv
      * @return ResponseData<KojinIraiNaiyouKoshinDiv>
      */
@@ -119,10 +114,10 @@ public class KojinIraiNaiyouKoshin {
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 意見書の「依頼書等を印刷する」ボタン押下時
-     * 
+     *
      * @param div KojinIraiNaiyouKoshinDiv
      * @return ResponseData<KojinIraiNaiyouKoshinDiv>
      */

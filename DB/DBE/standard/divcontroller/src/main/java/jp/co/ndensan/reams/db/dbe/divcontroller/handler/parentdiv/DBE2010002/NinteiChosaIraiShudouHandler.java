@@ -121,7 +121,7 @@ public class NinteiChosaIraiShudouHandler {
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().initialize(new RString("SimpleInputMode"),
                     認定調査依頼.get認定調査委託先コード(), 認定調査依頼.get事業者名称(),
                     認定調査依頼.get認定調査員コード(), 認定調査依頼.get調査員氏名());
-            div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShichosonCode(認定調査依頼.get市町村コード());
+            div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShichosonCode(認定調査依頼.get申請情報市町村コード());
             div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().setHdnShinseishoKanriNo(認定調査依頼.get申請書管理番号());
             div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(認定調査依頼.get申請書管理番号()));
             List<KeyValueDataSource> dataSource = new ArrayList<>();
