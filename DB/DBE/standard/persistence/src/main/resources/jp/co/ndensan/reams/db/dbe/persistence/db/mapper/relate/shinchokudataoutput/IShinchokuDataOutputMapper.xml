@@ -977,8 +977,8 @@
         AND J."shichosonCode" = A."shichosonCode"
         AND J."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS J2
-        ON H."ninteichosaItakusakiCode" = J2."ninteiChosaItakusakiCode"
-        AND H."ninteiChosainCode" = J2."ninteiChosainCode"
+        ON H."chosaItakusakiCode" = J2."ninteiChosaItakusakiCode"
+        AND H."chosainCode" = J2."ninteiChosainCode"
         AND J2."shichosonCode" = A."shichosonCode"
         AND J2."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS K
