@@ -239,7 +239,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onClick_btnDeleteShozokuKikanIchiran(ShinsakaiIinJohoTorokuDiv div) {
-        div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getClickedItem());
+        div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getActiveRow());
         return ResponseData.of(div).respond();
     }
 
