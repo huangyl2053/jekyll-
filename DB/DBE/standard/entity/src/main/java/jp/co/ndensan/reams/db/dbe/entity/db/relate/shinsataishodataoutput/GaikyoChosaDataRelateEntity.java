@@ -75,6 +75,7 @@ public class GaikyoChosaDataRelateEntity {
     private RString 二号特定疾病コード;
     private RString 認定申請理由;
     private RString 要介護認定一次判定結果コード;
+    private RString 要介護認定一次判定結果認知症加算コード;
     private Decimal 要介護認定等基準時間;
     private Decimal 要介護認定等基準時間_食事;
     private Decimal 要介護認定等基準時間_排泄;

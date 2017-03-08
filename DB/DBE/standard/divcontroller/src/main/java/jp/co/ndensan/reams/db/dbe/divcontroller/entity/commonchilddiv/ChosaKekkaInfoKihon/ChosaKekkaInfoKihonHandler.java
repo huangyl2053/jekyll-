@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.ChosaKekkaInfoKihonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfokihon.TokiJikouBusiness;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -55,7 +54,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -63,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
@@ -483,6 +480,7 @@ public class ChosaKekkaInfoKihonHandler {
      */
     private List<dgKihonChosa_Row> setDataSourcre2(List<TokiJikouBusiness> serviceJokyos) {
         List<dgKihonChosa_Row> grdSinsaSeiList = new ArrayList<>();
+        RString 比較用特記事項番号 = RString.EMPTY;
         for (TokiJikouBusiness chosaItem : serviceJokyos) {
             dgKihonChosa_Row dgJigyoshaItiran = new dgKihonChosa_Row();
             ArrayList<RString> 認定調査特記事項番号List = new ArrayList<>();
@@ -501,13 +499,14 @@ public class ChosaKekkaInfoKihonHandler {
             if (認定調査項目マッピング != null) {
                 set認定調査特記情報(dgJigyoshaItiran, chosaItem, 認定調査項目マッピング, 認定調査特記事項番号List);
                 dgJigyoshaItiran.setNinteichosaTokkijikoNo(DataPassingConverter.serialize(認定調査特記事項番号List));
-            }
-            NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
-            ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(chosaItem.get申請書管理番号(), chosaItem.get認定調査依頼履歴番号(), 認定調査特記事項番号List);
-            if (list.isEmpty()) {
-                dgJigyoshaItiran.getBtnTokkiJiko().setDisplayNone(true);
-            } else {
-                dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(false);
+                NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
+                ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(chosaItem.get申請書管理番号(), chosaItem.get認定調査依頼履歴番号(), 認定調査特記事項番号List);
+                if (list.isEmpty() || 比較用特記事項番号.equals(認定調査項目マッピング.get特記事項番号())) {
+                    dgJigyoshaItiran.getBtnTokkiJiko().setDisplayNone(true);
+                } else {
+                    dgJigyoshaItiran.getBtnTokkiJiko().setDisabled(false);
+                }
+                比較用特記事項番号 = 認定調査項目マッピング.get特記事項番号();
             }
             grdSinsaSeiList.add(dgJigyoshaItiran);
         }
