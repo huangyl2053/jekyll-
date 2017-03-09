@@ -52,6 +52,7 @@ module DBZ
                     this.controls.EnkiTsuchi().readOnly = true;
                     this.controls.btnAllClear().displayNone = true; 
                     this.controls.btnKakutei().displayNone = true; 
+                    this.controls.btnTorikeshi().text = "閉じる";
                 }
             }
         }

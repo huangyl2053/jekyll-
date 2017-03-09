@@ -413,11 +413,11 @@ public class ShinsakaiKekkaToroku {
             if (hanteiKekka == null) {
                 return;
             }
-            update介護認定審査会割当情報(manager, row, 開催番号, hanteiKekka);
+            ShinsakaiWariateJoho wariateUpdated = update介護認定審査会割当情報(manager, row, 開催番号, hanteiKekka);
             update要介護認定完了情報(manager, row, hanteiKekka);
             if (hanteiKekka == HanteiKekkaCode.認定) {
                 update要介護認定申請情報(manager, row);
-                save要介護認定結果情報(manager, row, 開催番号);
+                save要介護認定結果情報(manager, row, wariateUpdated);
                 return;
             }
             if (hanteiKekka.is再調査()) {
@@ -435,7 +435,7 @@ public class ShinsakaiKekkaToroku {
             update介護認定審査会割当情報(manager, row, 開催番号, null);
         }
 
-        private static void update介護認定審査会割当情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row,
+        private static ShinsakaiWariateJoho update介護認定審査会割当情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row,
                 RString 開催番号, HanteiKekkaCode hanteiKekka) {
             Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiWariateJohoJoho
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
@@ -446,6 +446,7 @@ public class ShinsakaiKekkaToroku {
             shinsakaiWariate.set判定結果コード(hanteiKekka == null ? Code.EMPTY : hanteiKekka.getCode());
             shinsakaiWariateJoho = shinsakaiWariate.build();
             manager.save介護認定審査会割当情報(shinsakaiWariateJoho);
+            return shinsakaiWariateJoho;
         }
 
         private static void update要介護認定完了情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, HanteiKekkaCode code) {
@@ -510,26 +511,27 @@ public class ShinsakaiKekkaToroku {
             manager.save要介護認定結果情報(ninteiKekka.deleted());
         }
 
-        private static void save要介護認定結果情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号) {
+        private static void save要介護認定結果情報(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, ShinsakaiWariateJoho 審査会割当) {
             Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho
                     = ViewStateHolder.get(ViewStateKeys.要介護認定結果情報, Models.class);
             NinteiKekkaJohoIdentifier identifier = new NinteiKekkaJohoIdentifier(row.getShinseishoKanriNo());
             NinteiKekkaJoho ninteiKekka = ninteiKekkaJoho.get(identifier);
             if (ninteiKekka == null) {
-                manager.save要介護認定結果情報(edited(new NinteiKekkaJoho(identifier.get申請書管理番号()), row, 開催番号));
+                manager.save要介護認定結果情報(edited(new NinteiKekkaJoho(identifier.get申請書管理番号()), row, 審査会割当));
                 return;
             }
-            manager.save要介護認定結果情報(edited(ninteiKekka, row, 開催番号));
+            manager.save要介護認定結果情報(edited(ninteiKekka, row, 審査会割当));
         }
 
-        private static NinteiKekkaJoho edited(NinteiKekkaJoho o, TaishoshaIchiranRow row, RString 開催番号) {
+        private static NinteiKekkaJoho edited(NinteiKekkaJoho o, TaishoshaIchiranRow row, ShinsakaiWariateJoho 審査会割当) {
             NinteiKekkaJohoBuilder builder = o.createBuilderForEdit();
             builder.set二次判定年月日(row.getNijiHanteiYMD());
             builder.set二次判定要介護状態区分コード(row.getKonkaiNijiHanteiCode());
             builder.set二次判定認定有効期間(row.getNinteiKikanTsukiSu());
             builder.set二次判定認定有効開始年月日(row.getNinteiYukoKikanKaishiYMD());
             builder.set二次判定認定有効終了年月日(row.getNinteiYukoKikanShuryoYMD());
-            builder.set介護認定審査会開催番号(開催番号);
+            builder.set介護認定審査会資料作成年月日(審査会割当.get審査会資料作成年月日());
+            builder.set介護認定審査会開催番号(審査会割当.get介護認定審査会開催番号());
             builder.set介護認定審査会意見(row.getShinsakaiIken());
             builder.set一次判定結果変更理由(row.getIchijiHanteiKekkaHenkoRiyu());
             builder.set要介護状態像例コード(row.getJotaiZoReiCode());
@@ -739,13 +741,37 @@ public class ShinsakaiKekkaToroku {
             div.setHdnNinteiChosaJokyo(null);
         } else {
             NinteiChosaJokyoFinder finder = NinteiChosaJokyoFinder.createInstance();
-            NinteiChosaJokyoDataPass konkaiDataPass = finder.get認定調査状況DataPass(new ShinseishoKanriNo(申請書管理番号));
+            ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(申請書管理番号);
+            NinteiChosaJokyoDataPass konkaiDataPass = finder.get認定調査状況DataPass(shinseishoKanriNo);
             RDate 予定年月日 = (div.getKyotsuHyojiArea().getTxtShinsakaiKaisaiYoteiYMD().getValue() == null) ? null
                     : new RDate(div.getKyotsuHyojiArea().getTxtShinsakaiKaisaiYoteiYMD().getValue().toString());
             konkaiDataPass.set認定審査会予定年月日(予定年月日);
+            if (konkaiDataPass.get介護認定審査会資料作成年月日() == null) {
+                ShinsakaiWariateJoho shinsakaiWariateJoho = find審査会割当情報(shinseishoKanriNo);
+                konkaiDataPass.set介護認定審査会資料作成年月日(
+                        shinsakaiWariateJoho == null ? null : toRDate(shinsakaiWariateJoho.get審査会資料作成年月日())
+                );
+            }
             div.setHdnNinteiChosaJokyo(DataPassingConverter.serialize(konkaiDataPass));
         }
         return ResponseData.of(div).respond();
+    }
+
+    private static ShinsakaiWariateJoho find審査会割当情報(ShinseishoKanriNo 申請書管理番号) {
+        Models<ShinsakaiWariateJohoIdentifier, ShinsakaiWariateJoho> shinsakaiWariateJohos
+                = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
+        if (shinsakaiWariateJohos == null) {
+            return null;
+        }
+        ShinsakaiWariateJohoIdentifier identifier = new ShinsakaiWariateJohoIdentifier(
+                ViewStateHolder.get(ViewStateKeys.開催番号, RString.class),
+                申請書管理番号
+        );
+        return shinsakaiWariateJohos.get(identifier);
+    }
+
+    private static RDate toRDate(FlexibleDate fDate) {
+        return fDate == null ? null : !fDate.isValid() ? null : new RDate(fDate.toString());
     }
 
     /**

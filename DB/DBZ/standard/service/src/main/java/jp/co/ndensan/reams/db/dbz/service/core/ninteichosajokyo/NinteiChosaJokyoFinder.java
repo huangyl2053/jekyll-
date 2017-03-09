@@ -7,10 +7,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.ninteichosajokyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
@@ -135,7 +133,8 @@ public class NinteiChosaJokyoFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiChosaJokyoFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteiChosaJokyoFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteiChosaJokyoFinder}のインスタンス
      */
     public static NinteiChosaJokyoFinder createInstance() {
         return InstanceProvider.create(NinteiChosaJokyoFinder.class);
@@ -168,7 +167,6 @@ public class NinteiChosaJokyoFinder {
      * @return 認定調査状況共有子Div用データ構造
      */
     public NinteiChosaJokyoDataPass get認定調査状況DataPass(ShinseishoKanriNo 申請者管理番号) {
-        // TODO 本来であれば適切な業務概念を導入するべき
         NinteiChosaJokyoDataPass 認定調査状況 = new NinteiChosaJokyoDataPass();
 
         NinteiShinseiJoho 認定申請情報 = get要介護認定申請情報(申請者管理番号);
@@ -176,27 +174,18 @@ public class NinteiChosaJokyoFinder {
             return 認定調査状況;
         }
         認定調査状況.set認定申請情報(認定申請情報);
-        LasdecCode 市町村コード = get市町村コード(new ShoKisaiHokenshaNo(認定申請情報.get証記載保険者番号()));
+        LasdecCode 市町村コード = 認定申請情報.get市町村コード();
         if (市町村コード != null) {
             認定調査状況.set市町村コード(市町村コード);
-            add認定調査依頼情報(認定調査状況, 認定申請情報, 市町村コード);
-            add主治医医療機関(認定調査状況, 認定申請情報, 市町村コード);
+            add認定調査関連情報(認定調査状況, 認定申請情報, 市町村コード);
+            add意見書関連情報(認定調査状況, 認定申請情報, 市町村コード);
         }
-        add意見書情報(認定調査状況, 認定申請情報);
         add要介護認定一次判定結果情報(認定調査状況, 認定申請情報);
-        add要介護認定申請情報(認定調査状況, 認定申請情報);
+        add要介護認定結果情報(認定調査状況, 認定申請情報);
         return 認定調査状況;
     }
 
-    private LasdecCode get市町村コード(ShoKisaiHokenshaNo 証記載保険者番号) {
-        KoseiShichosonMaster 構成市町村マスタ = get構成市町村マスタ(証記載保険者番号);
-        if (構成市町村マスタ == null) {
-            return null;
-        }
-        return 構成市町村マスタ.get市町村コード();
-    }
-
-    private void add認定調査依頼情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報, LasdecCode 市町村コード) {
+    private void add認定調査関連情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報, LasdecCode 市町村コード) {
         NinteichosaIraiJoho 認定調査依頼情報 = get最新認定調査依頼情報(認定申請情報.get申請書管理番号());
         if (認定調査依頼情報 == null) {
             return;
@@ -205,59 +194,70 @@ public class NinteiChosaJokyoFinder {
 
         NinteichosahyoGaikyoChosa 認定調査票概況調査_子
                 = get認定調査票概況調査_子(認定調査依頼情報.get申請書管理番号(), 認定調査依頼情報.get認定調査依頼履歴番号());
-        if (認定調査票概況調査_子 != null) {
-            認定調査状況.set認定調査票概況調査_子(認定調査票概況調査_子);
+        if (認定調査票概況調査_子 == null) {
+            add調査員_委託先(認定調査状況, 市町村コード, 認定調査依頼情報.get認定調査委託先コード(), 認定調査依頼情報.get認定調査員コード());
+            return;
         }
+        認定調査状況.set認定調査票概況調査_子(認定調査票概況調査_子);
+        add調査員_委託先(認定調査状況, 市町村コード, 認定調査票概況調査_子.get認定調査委託先コード(), 認定調査票概況調査_子.get認定調査員コード());
+    }
 
+    private void add調査員_委託先(NinteiChosaJokyoDataPass 認定調査状況, LasdecCode 市町村コード, JigyoshaNo 認定調査委託先コード, RString 認定調査員コード) {
         NinteichosaItakusakiJoho 認定調査委託先情報
-                = get認定調査委託先情報(市町村コード, 認定調査依頼情報.get認定調査委託先コード().value());
+                = get認定調査委託先情報(市町村コード, 認定調査委託先コード.value());
         if (認定調査委託先情報 != null) {
             認定調査状況.set認定調査委託先情報(認定調査委託先情報);
         }
 
-        ChosainJoho 認定調査員情報 = get調査員情報(
-                市町村コード,
-                認定申請情報.get認定調査委託先コード(),
-                認定申請情報.get認定調査員コード());
+        ChosainJoho 認定調査員情報
+                = get調査員情報(
+                        市町村コード,
+                        new ChosaItakusakiCode(認定調査委託先コード.value()),
+                        new ChosainCode(認定調査員コード)
+                );
         if (認定調査員情報 != null) {
             認定調査状況.set認定調査員情報(認定調査員情報);
         }
     }
 
-    private void add主治医医療機関(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報, LasdecCode 市町村コード) {
+    private void add意見書関連情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報, LasdecCode 市町村コード) {
+        ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報.get申請書管理番号());
+        if (主治医意見書作成依頼情報 == null) {
+            return;
+        }
+        認定調査状況.set主治医意見書作成依頼情報(主治医意見書作成依頼情報);
+
+        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = get要介護認定主治医意見書情報(認定申請情報.get申請書管理番号());
+        if (要介護認定主治医意見書情報 == null) {
+            add主治医医療機関(認定調査状況, 市町村コード, 主治医意見書作成依頼情報.get主治医医療機関コード(), 主治医意見書作成依頼情報.get主治医コード());
+            return;
+        }
+        認定調査状況.set要介護認定主治医意見書情報(要介護認定主治医意見書情報);
+        add主治医医療機関(認定調査状況, 市町村コード, 要介護認定主治医意見書情報.get主治医医療機関コード(), 要介護認定主治医意見書情報.get主治医コード());
+    }
+
+    private void add主治医医療機関(NinteiChosaJokyoDataPass 認定調査状況, LasdecCode 市町村コード, RString 主治医医療機関コード, RString 主治医コード) {
         ShujiiIryoKikanJoho 主治医医療機関情報 = get主治医医療機関情報(
                 市町村コード,
-                new ShujiiIryokikanCode(認定申請情報.get主治医医療機関コード()));
+                new ShujiiIryokikanCode(主治医医療機関コード));
         if (主治医医療機関情報 != null) {
             認定調査状況.set主治医医療機関情報(主治医医療機関情報);
         }
 
-        ShujiiJoho 主治医情報 = get主治医情報(市町村コード, 認定申請情報.get主治医医療機関コード(), 認定申請情報.get主治医コード());
+        ShujiiJoho 主治医情報 = get主治医情報(市町村コード, 主治医医療機関コード, 主治医コード);
         if (主治医情報 != null) {
             認定調査状況.set主治医情報(主治医情報);
         }
     }
 
-    private void add意見書情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報) {
-        ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報.get申請書管理番号());
-        if (主治医意見書作成依頼情報 != null) {
-            認定調査状況.set主治医意見書作成依頼情報(主治医意見書作成依頼情報);
-        }
-        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = get要介護認定主治医意見書情報(認定申請情報.get申請書管理番号());
-        if (要介護認定主治医意見書情報 != null) {
-            認定調査状況.set要介護認定主治医意見書情報(要介護認定主治医意見書情報);
-        }
-    }
-
     private void add要介護認定一次判定結果情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報) {
-        // businessクラスの導入が必要
         DbT5116IchijiHanteiKekkaJohoEntity entity = get要介護認定一次判定結果情報(認定申請情報.get申請書管理番号());
         if (entity != null) {
             認定調査状況.set要介護認定一次判定結果情報(entity);
         }
     }
 
-    private void add要介護認定申請情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報) {
+    private void add要介護認定結果情報(NinteiChosaJokyoDataPass 認定調査状況, NinteiShinseiJoho 認定申請情報) {
         NinteiKekkaJoho 要介護認定申請情報 = get要介護認定結果情報(認定申請情報.get申請書管理番号());
         if (要介護認定申請情報 != null) {
             認定調査状況.set要介護認定結果情報(要介護認定申請情報);
@@ -277,16 +277,6 @@ public class NinteiChosaJokyoFinder {
         }
         entity.initializeMd5();
         return new NinteiShinseiJoho(entity);
-    }
-
-    @Transaction
-    private KoseiShichosonMaster get構成市町村マスタ(ShoKisaiHokenshaNo 証記載保険者番号) {
-        DbT7051KoseiShichosonMasterEntity entity = dbT7051Dac.shichosonCode(証記載保険者番号);
-        if (entity == null) {
-            return null;
-        }
-        entity.initializeMd5();
-        return new KoseiShichosonMaster(entity);
     }
 
     @Transaction

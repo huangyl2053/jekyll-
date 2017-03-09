@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoNinteiShinsakaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,12 +29,12 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
     private TextBoxDate txtNijiHanteiDate;
     @JsonProperty("ddlNijiHanteiKekka")
     private DropDownList ddlNijiHanteiKekka;
-    @JsonProperty("txtNijiHanteiYukoKikan")
-    private DropDownList txtNijiHanteiYukoKikan;
     @JsonProperty("txtNinteiYukoKikanFrom")
     private TextBoxFlexibleDate txtNinteiYukoKikanFrom;
     @JsonProperty("txtNinteiYukoKikanTo")
     private TextBoxFlexibleDate txtNinteiYukoKikanTo;
+    @JsonProperty("txtNijiHanteiYukoKikan")
+    private DropDownList txtNijiHanteiYukoKikan;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -115,24 +115,6 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
     }
 
     /*
-     * gettxtNijiHanteiYukoKikan
-     * @return txtNijiHanteiYukoKikan
-     */
-    @JsonProperty("txtNijiHanteiYukoKikan")
-    public DropDownList getTxtNijiHanteiYukoKikan() {
-        return txtNijiHanteiYukoKikan;
-    }
-
-    /*
-     * settxtNijiHanteiYukoKikan
-     * @param txtNijiHanteiYukoKikan txtNijiHanteiYukoKikan
-     */
-    @JsonProperty("txtNijiHanteiYukoKikan")
-    public void setTxtNijiHanteiYukoKikan(DropDownList txtNijiHanteiYukoKikan) {
-        this.txtNijiHanteiYukoKikan = txtNijiHanteiYukoKikan;
-    }
-
-    /*
      * gettxtNinteiYukoKikanFrom
      * @return txtNinteiYukoKikanFrom
      */
@@ -166,6 +148,24 @@ public class KaigoNinteiShinsakaiDiv extends Panel {
     @JsonProperty("txtNinteiYukoKikanTo")
     public void setTxtNinteiYukoKikanTo(TextBoxFlexibleDate txtNinteiYukoKikanTo) {
         this.txtNinteiYukoKikanTo = txtNinteiYukoKikanTo;
+    }
+
+    /*
+     * gettxtNijiHanteiYukoKikan
+     * @return txtNijiHanteiYukoKikan
+     */
+    @JsonProperty("txtNijiHanteiYukoKikan")
+    public DropDownList getTxtNijiHanteiYukoKikan() {
+        return txtNijiHanteiYukoKikan;
+    }
+
+    /*
+     * settxtNijiHanteiYukoKikan
+     * @param txtNijiHanteiYukoKikan txtNijiHanteiYukoKikan
+     */
+    @JsonProperty("txtNijiHanteiYukoKikan")
+    public void setTxtNijiHanteiYukoKikan(DropDownList txtNijiHanteiYukoKikan) {
+        this.txtNijiHanteiYukoKikan = txtNijiHanteiYukoKikan;
     }
 
     // </editor-fold>

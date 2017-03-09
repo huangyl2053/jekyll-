@@ -293,16 +293,16 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlNijiHanteiKekka"));
             }
 
-            public txtNijiHanteiYukoKikan(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("txtNijiHanteiYukoKikan"));
-            }
-
             public txtNinteiYukoKikanFrom(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoKikanFrom"));
             }
 
             public txtNinteiYukoKikanTo(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYukoKikanTo"));
+            }
+
+            public txtNijiHanteiYukoKikan(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("txtNijiHanteiYukoKikan"));
             }
 
             public EnkiTsuchi(): UZA.Panel {

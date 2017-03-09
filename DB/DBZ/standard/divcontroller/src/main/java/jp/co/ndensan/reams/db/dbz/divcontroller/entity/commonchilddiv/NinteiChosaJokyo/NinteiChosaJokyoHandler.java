@@ -163,7 +163,6 @@ public class NinteiChosaJokyoHandler {
         if (!div.getDdlNijiHanteiKekka().getDataSource().isEmpty() && div.getDdlNijiHanteiKekka().getDataSource() != null) {
             div.getDdlNijiHanteiKekka().setSelectedIndex(0);
         }
-//        div.getTxtNijiHanteiYukoKikan().clearValue();
         div.getTxtNinteiYukoKikanFrom().clearValue();
         div.getTxtNinteiYukoKikanTo().clearValue();
         div.getTxtEnkiTsuchiHakkoDay().clearValue();
@@ -387,11 +386,11 @@ public class NinteiChosaJokyoHandler {
                 && !konkaiDataPass.get二次判定要介護状態区分コード().isEmpty()) {
             div.getDdlNijiHanteiKekka().setSelectedKey(konkaiDataPass.get二次判定要介護状態区分コード().value());
         }
-        if(konkaiDataPass.get二次判定認定有効期間()!=0){
-         div.getTxtNijiHanteiYukoKikan().setSelectedValue(new RString(konkaiDataPass.get二次判定認定有効期間()));
-        }else{
-        div.getTxtNijiHanteiYukoKikan().setSelectedValue(RString.EMPTY);
-        }    
+        if (konkaiDataPass.get二次判定認定有効期間() != 0) {
+            div.getTxtNijiHanteiYukoKikan().setSelectedValue(new RString(konkaiDataPass.get二次判定認定有効期間()));
+        } else {
+            div.getTxtNijiHanteiYukoKikan().setSelectedValue(RString.EMPTY);
+        }
         div.getTxtNinteiYukoKikanFrom().setValue(konkaiDataPass.get二次判定認定有効開始年月日());
         div.getTxtNinteiYukoKikanTo().setValue(konkaiDataPass.get二次判定認定有効終了年月日());
         div.getTxtEnkiTsuchiHakkoDay().setValue(konkaiDataPass.get延期通知発行年月日());

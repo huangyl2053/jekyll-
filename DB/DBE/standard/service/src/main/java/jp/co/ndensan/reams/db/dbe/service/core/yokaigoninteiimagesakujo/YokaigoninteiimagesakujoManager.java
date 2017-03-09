@@ -18,14 +18,11 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -38,7 +35,6 @@ public class YokaigoninteiimagesakujoManager {
 
     private final DbT5601NinteiChosaHoshuJissekiJohoDac dbT5601Dac;
     private final DbT5602ShujiiIkenshoHoshuJissekiJohoDac dbT5602Dac;
-    private final DbT5105NinteiKanryoJohoDac dbT5105Dac;
     private final MapperProvider mapperProvider;
     private static final RString 原本マスクを削除 = new RString("1");
     private static final RString マスクを削除 = new RString("2");
@@ -52,7 +48,6 @@ public class YokaigoninteiimagesakujoManager {
     YokaigoninteiimagesakujoManager() {
         dbT5601Dac = InstanceProvider.create(DbT5601NinteiChosaHoshuJissekiJohoDac.class);
         dbT5602Dac = InstanceProvider.create(DbT5602ShujiiIkenshoHoshuJissekiJohoDac.class);
-        dbT5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
         mapperProvider = InstanceProvider.create(MapperProvider.class);
 
     }
@@ -62,16 +57,13 @@ public class YokaigoninteiimagesakujoManager {
      *
      * @param dbT5601Dac {@link DbT5601NinteiChosaHoshuJissekiJohoDac}
      * @param dbT5602Dac {@link DbT5602ShujiiIkenshoHoshuJissekiJohoDac}
-     * @param dbT5105Dac {@link DbT5105NinteiKanryoJohoDac}
      * @param mapperProvider {@link MapperProvider}
      */
     YokaigoninteiimagesakujoManager(DbT5601NinteiChosaHoshuJissekiJohoDac dbT5601Dac,
             DbT5602ShujiiIkenshoHoshuJissekiJohoDac dbT5602Dac,
-            DbT5105NinteiKanryoJohoDac dbT5105Dac,
             MapperProvider mapperProvider) {
         this.dbT5601Dac = dbT5601Dac;
         this.dbT5602Dac = dbT5602Dac;
-        this.dbT5105Dac = dbT5105Dac;
         this.mapperProvider = mapperProvider;
     }
 
@@ -177,13 +169,7 @@ public class YokaigoninteiimagesakujoManager {
     @Transaction
     private void update調査票特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
-        DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本マスクを削除.equals(削除対象区分)) {
-            要介護認定完了情報.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setIkenshoTorokuKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setMaskingKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setState(EntityDataState.Modified);
-            dbT5105Dac.save(要介護認定完了情報);
             mapper.deleteDbT5205PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
                     申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(),
                     RString.EMPTY, false));
@@ -220,13 +206,7 @@ public class YokaigoninteiimagesakujoManager {
     @Transaction
     private void update調査票概況(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
-        DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本マスクを削除.equals(削除対象区分)) {
-            要介護認定完了情報.setNinteichosaKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setIkenshoTorokuKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setMaskingKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setState(EntityDataState.Modified);
-            dbT5105Dac.save(要介護認定完了情報);
             mapper.deleteDbT5206PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
                     申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(), RString.EMPTY, false));
         }
@@ -235,20 +215,13 @@ public class YokaigoninteiimagesakujoManager {
     @Transaction
     private void update主治医意見書(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
-        DbT5105NinteiKanryoJohoEntity 要介護認定完了情報 = dbT5105Dac.selectByKey(申請書管理番号);
         if (原本マスクを削除.equals(削除対象区分)) {
-            要介護認定完了情報.setIkenshoTorokuKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setMaskingKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setState(EntityDataState.Modified);
             mapper.deleteDbT5305PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
                     申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
         } else if (マスクを削除.equals(削除対象区分)) {
-            要介護認定完了情報.setMaskingKanryoYMD(FlexibleDate.EMPTY);
-            要介護認定完了情報.setState(EntityDataState.Modified);
             mapper.deleteDbT5305PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
                     申請書管理番号, 主治医意見書作成依頼履歴番号, GenponMaskKubun.マスク.getコード(), true));
-        } 
-        dbT5105Dac.save(要介護認定完了情報);
+        }
         if (原本マスクを削除.equals(削除対象区分)) {
             mapper.deleteDbT5302PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
                     申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));

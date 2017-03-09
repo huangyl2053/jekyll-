@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-10-31_12-59-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -832,16 +832,6 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     }
 
     @JsonIgnore
-    public DropDownList getTxtNijiHanteiYukoKikan() {
-        return this.getKaigoNinteiShinsakai().getTxtNijiHanteiYukoKikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtNijiHanteiYukoKikan(DropDownList txtNijiHanteiYukoKikan) {
-        this.getKaigoNinteiShinsakai().setTxtNijiHanteiYukoKikan(txtNijiHanteiYukoKikan);
-    }
-
-    @JsonIgnore
     public TextBoxFlexibleDate getTxtNinteiYukoKikanFrom() {
         return this.getKaigoNinteiShinsakai().getTxtNinteiYukoKikanFrom();
     }
@@ -859,6 +849,16 @@ public class NinteiChosaJokyoDiv extends Panel implements INinteiChosaJokyoDiv {
     @JsonIgnore
     public void  setTxtNinteiYukoKikanTo(TextBoxFlexibleDate txtNinteiYukoKikanTo) {
         this.getKaigoNinteiShinsakai().setTxtNinteiYukoKikanTo(txtNinteiYukoKikanTo);
+    }
+
+    @JsonIgnore
+    public DropDownList getTxtNijiHanteiYukoKikan() {
+        return this.getKaigoNinteiShinsakai().getTxtNijiHanteiYukoKikan();
+    }
+
+    @JsonIgnore
+    public void  setTxtNijiHanteiYukoKikan(DropDownList txtNijiHanteiYukoKikan) {
+        this.getKaigoNinteiShinsakai().setTxtNijiHanteiYukoKikan(txtNijiHanteiYukoKikan);
     }
 
     @JsonIgnore

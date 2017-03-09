@@ -120,6 +120,8 @@ public class NinteiChosaJokyoDataPass implements Serializable {
      * @param 認定調査票概況調査_子 認定調査票概況調査_子
      */
     public void set認定調査票概況調査_子(NinteichosahyoGaikyoChosa 認定調査票概況調査_子) {
+        認定調査員コード = 認定調査票概況調査_子.get認定調査員コード();
+        認定調査委託先コード = 認定調査票概況調査_子.get認定調査委託先コード().value();
         認定調査実施年月日 = convertToRDate(認定調査票概況調査_子.get認定調査実施年月日());
     }
 
@@ -129,6 +131,7 @@ public class NinteiChosaJokyoDataPass implements Serializable {
      * @param 認定調査委託先情報 認定調査委託先情報
      */
     public void set認定調査委託先情報(NinteichosaItakusakiJoho 認定調査委託先情報) {
+        認定調査委託先コード = 認定調査委託先情報.get認定調査委託先コード();
         事業者名称 = 認定調査委託先情報.get事業者名称();
         認定郵便番号 = 認定調査委託先情報.get郵便番号();
         認定住所 = 認定調査委託先情報.get住所();
@@ -175,6 +178,8 @@ public class NinteiChosaJokyoDataPass implements Serializable {
      * @param 主治医意見書作成依頼情報 主治医意見書作成依頼情報
      */
     public void set主治医意見書作成依頼情報(ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報) {
+        主治医医療機関コード = 主治医意見書作成依頼情報.get主治医医療機関コード();
+        主治医コード = 主治医意見書作成依頼情報.get主治医コード();
         主治医意見書作成依頼年月日 = convertToRDate(主治医意見書作成依頼情報.get主治医意見書作成依頼年月日());
         主治医意見書登録予定年月日 = convertToRDate(主治医意見書作成依頼情報.get主治医意見書作成期限年月日());
     }
@@ -185,13 +190,15 @@ public class NinteiChosaJokyoDataPass implements Serializable {
      * @param 要介護認定主治医意見書情報 要介護認定主治医意見書情報
      */
     public void set要介護認定主治医意見書情報(ShujiiIkenshoJoho 要介護認定主治医意見書情報) {
+        主治医医療機関コード = 要介護認定主治医意見書情報.get主治医医療機関コード();
+        主治医コード = 要介護認定主治医意見書情報.get主治医コード();
         主治医意見書記入年月日 = convertToRDate(要介護認定主治医意見書情報.get主治医意見書受領年月日());
     }
 
     /**
      * 要介護認定一次判定結果情報に関連する項目に内容をセットします。
      *
-     * @param 要介護認定一次判定結果情報entity 要介護認定一次判定結果情報entity
+     * @param entity 要介護認定一次判定結果情報entity
      */
     public void set要介護認定一次判定結果情報(DbT5116IchijiHanteiKekkaJohoEntity entity) {
         要介護認定一次判定結果コード = entity.getIchijiHanteiKekkaCode();
