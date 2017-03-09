@@ -51,6 +51,7 @@
           , T5301."ikenshoIraiKubun" AS 主治医意見書依頼区分
           , T5301."ikenshoIraiRirekiNo" AS 主治医意見書作成依頼履歴番号
           , T5105."ikenshoSakuseiIraiKanryoYMD" AS 意見書作成依頼完了日
+          , T5105."ninteiShinsakaiKanryoYMD" AS 認定審査会完了日
           , T5116."kariIchijiHanteiKubun" AS 仮一次判定区分
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho"/>
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5305IkenshoImageJohoMapper.allColumns_DbT5305IkenshoImageJoho" />
@@ -116,6 +117,7 @@
         <result property="主治医意見書依頼区分" column="主治医意見書依頼区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="主治医意見書作成依頼履歴番号" column="主治医意見書作成依頼履歴番号"/>
         <result property="意見書作成依頼完了日" column="意見書作成依頼完了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定審査会完了日" column="認定審査会完了日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="仮一次判定区分" column="仮一次判定区分"/>
         <result property="matches指定申請日" column="matches指定申請日"/>
         <collection property="主治医意見書情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
@@ -138,6 +140,7 @@
           , T5115."imageSharedFileId" AS "imageSharedFileId"
           , T5105."ninteichosaIraiKanryoYMD" AS "ninteichosaIraiKanryoYMD"
           , T5105."ikenshoSakuseiIraiKanryoYMD" AS "ikenshoSakuseiIraiKanryoYMD"
+          , T5105."ninteiShinsakaiKanryoYMD" AS "ninteiShinsakaiKanryoYMD"
           , T5116."kariIchijiHanteiKubun" AS "kariIchijiHanteiKubun"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS T5101
@@ -171,5 +174,6 @@
         <result property="kariIchijiHanteiKubun"   column="kariIchijiHanteiKubun" />
         <result property="ninteichosaIraiKanryoYMD"      column="ninteichosaIraiKanryoYMD"    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="ikenshoSakuseiIraiKanryoYMD"   column="ikenshoSakuseiIraiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="ninteiShinsakaiKanryoYMD"   column="ninteiShinsakaiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
 </mapper>

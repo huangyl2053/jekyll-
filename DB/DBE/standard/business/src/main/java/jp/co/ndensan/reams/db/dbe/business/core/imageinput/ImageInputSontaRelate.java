@@ -63,6 +63,11 @@ public class ImageInputSontaRelate extends RelatedDataBase {
     }
 
     @Override
+    protected boolean had二次判定() {
+        return isValid(entity.getNinteiShinsakaiKanryoYMD());
+    }
+
+    @Override
     public RString get被保険者氏名() {
         return this.entity.getHihokenshaName();
     }

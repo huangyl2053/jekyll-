@@ -74,6 +74,11 @@ public abstract class RelatedDataBase implements IRelatedData {
     protected abstract boolean had一次判定();
 
     /**
+     * @return 二次判定実施済みの場合、{@code true}.
+     */
+    protected abstract boolean had二次判定();
+
+    /**
      * {@link RelatedDataBase}生成時の処理状況を持ちます。
      */
     protected interface IContext {
@@ -119,6 +124,9 @@ public abstract class RelatedDataBase implements IRelatedData {
                             ? createResults(context.getOcrData(), IProcessingResult.Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告_要再判定)
                             : createResults(context.getOcrData(), IProcessingResult.Type.WARNING, OcrTorikomiMessages.一次判定済みの申請_警告);
             }
+        }
+        if (had二次判定()) {
+            return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.審査結果登録済み);
         }
         return ProcessingResults.EMPTY;
     }

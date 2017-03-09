@@ -23,6 +23,7 @@
           , T5201."ninteichosaIraiKaisu" AS 認定調査回数
           , T5201."ninteichosaIraiYMD" AS 認定調査依頼日
           , T5105."ninteichosaIraiKanryoYMD" AS 認定調査依頼完了日
+          , T5105."ninteiShinsakaiKanryoYMD" AS 認定審査会完了日
           , T5116."kariIchijiHanteiKubun" AS 仮一次判定区分
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
         FROM

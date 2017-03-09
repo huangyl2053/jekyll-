@@ -203,6 +203,11 @@ public class NinteiOcrRelate extends RelatedDataBase {
     }
 
     @Override
+    protected boolean had二次判定() {
+        return isValid(entity.get認定審査会完了日());
+    }
+
+    @Override
     protected boolean had依頼() {
         return isValid(entity.get認定調査依頼完了日());
     }

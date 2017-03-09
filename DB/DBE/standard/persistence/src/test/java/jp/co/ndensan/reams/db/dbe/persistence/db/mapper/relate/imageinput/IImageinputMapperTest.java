@@ -33,7 +33,7 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
 //        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
 //        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000287539"), new RString("19990917"));
-        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000001970"), new RString("20150501"));
+        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000124231"), new RString("20991020"));
         List<ImageinputRelateEntity> entities = sut.get意見書関連データ(param);
         System.out.println(entities.isEmpty());
         ImageinputRelateEntity entity = entities.get(0);
@@ -44,13 +44,14 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println("\t意依完日：" + entity.get意見書作成依頼完了日());
         System.out.println("\t仮一次区：" + entity.get仮一次判定区分());
         System.out.println("\tイメージ：" + entity.get意見書イメージ情報().isEmpty());
+        System.out.println("\t審会完日：" + entity.get認定審査会完了日());
     }
 
     @Test
     public void getその他資料関連データ() {
         System.out.println("- getその他資料関連データ() -------------------------");
         IImageinputMapper sut = this.sqlSession.getMapper(IImageinputMapper.class);
-        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000008281"), new RString("20150601"));
+        ImageinputMapperParamter param = ImageinputMapperParamter.createParamter(new RString("202119"), new RString("0000124231"), new RString("20991020"));
         List<ImageInputSontaRelateEntity> entities = sut.getその他資料関連データ(param);
         ImageInputSontaRelateEntity entity = entities.get(0);
         System.out.println("\t被保カナ：" + entity.getHihokenshaKana());
@@ -59,5 +60,6 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println("\t意依完日：" + entity.getIkenshoSakuseiIraiKanryoYMD());
         System.out.println("\t調依完日：" + entity.getNinteichosaIraiKanryoYMD());
         System.out.println("\t仮一次区：" + entity.getKariIchijiHanteiKubun());
+        System.out.println("\t審会完日：" + entity.getNinteiShinsakaiKanryoYMD());
     }
 }

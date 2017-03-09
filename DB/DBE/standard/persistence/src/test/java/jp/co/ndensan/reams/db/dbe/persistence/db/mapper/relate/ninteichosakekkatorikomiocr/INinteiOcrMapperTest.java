@@ -36,7 +36,7 @@ public class INinteiOcrMapperTest extends DbeTestDacBase {
         public void get関連データ() {
             System.out.println("- get関連データ() -------------------------------");
 //            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("202119"), new RString("0000241181"), new RString("20150501"));
-            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("206029"), new RString("0610000001"), new RString("20161127"));
+            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("205625"), new RString("0000041157"), new RString("19990913"));
             INinteiOcrMapper sut = sqlSession.getMapper(INinteiOcrMapper.class);
 
             List<NinteiChosaKekkaTorikomiOcrRelateEntity> list = sut.get関連データ(param);
@@ -44,9 +44,9 @@ public class INinteiOcrMapperTest extends DbeTestDacBase {
             System.out.println(entity.get被保険者氏名());
             System.out.println(entity.is論理削除フラグ());
             System.out.println(entity.isMatches指定申請日());
-//            System.out.println(entity.get認定調査依頼日().wareki().toDateString());
             System.out.println(entity.get認定調査依頼完了日());
             System.out.println(entity.get仮一次判定区分());
+            System.out.println("審査会完了日：" + entity.get認定審査会完了日());
         }
 
         @Test

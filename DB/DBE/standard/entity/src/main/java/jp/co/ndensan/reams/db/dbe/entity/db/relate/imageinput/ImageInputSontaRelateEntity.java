@@ -32,6 +32,7 @@ public class ImageInputSontaRelateEntity {
     private RDateTime imageSharedFileId;
     private FlexibleDate ninteichosaIraiKanryoYMD;
     private FlexibleDate ikenshoSakuseiIraiKanryoYMD;
+    private FlexibleDate ninteiShinsakaiKanryoYMD;
     private Boolean kariIchijiHanteiKubun;
 
 }
