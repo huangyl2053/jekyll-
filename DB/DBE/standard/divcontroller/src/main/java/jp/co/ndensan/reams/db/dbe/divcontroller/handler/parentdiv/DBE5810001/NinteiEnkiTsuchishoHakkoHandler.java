@@ -18,20 +18,16 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteienkitsuchishohakko.NinteiEn
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoDbT5101Child;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -96,7 +92,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
             div.getDgHakkotaishosha().getGridSetting().setLimitRowCount(div.getTxtMaxDisp().getValue().intValue());
         }
-        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
         div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(new ReportId(帳票分類ID));
