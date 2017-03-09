@@ -5,27 +5,28 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchFlowTestHelper;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 
 /**
  * {@link DBE224001_NinteichosaDataOutput}のテストクラスです。
  */
-@Ignore
-public class DBE224001_NinteichosaDataOutputTest {
+@RunWith(Enclosed.class)
+public class DBE224001_NinteichosaDataOutputTest extends DbeTestDacBase {
 
-    private static DBE517000_ShinsakaiShiryoParameter batchParameter;
+    private static DBE224001_NinteichosaDataOutputParameter batchParameter;
     private static BatchFlowTestHelper batchFlowTestHelper;
 
     @BeforeClass
@@ -35,45 +36,46 @@ public class DBE224001_NinteichosaDataOutputTest {
         batchParameter = setBatchParameter();
     }
 
-    private static DBE517000_ShinsakaiShiryoParameter setBatchParameter() {
-        DBE517000_ShinsakaiShiryoParameter param = new DBE517000_ShinsakaiShiryoParameter();
+    @PrepareForTest({DBE224001_NinteichosaDataOutput.class})
+    public static class バッチフローテスト extends DbeTestDacBase {
 
-        param.setChoyoJimu_sonotaSiryoFalg(new RString("1"));
-        param.setChoyoJimu_itiziHanteiFalg(new RString("0"));
-        param.setChoyoJimu_ikenshoFalg(new RString("0"));
-        param.setChoyoJimu_hanteiFalg(new RString("0"));
-        param.setChoyoJimu_taishoushaFalg(new RString("1"));
-        param.setChoyoJimu_gaikyouTokkiFalg(new RString("0"));
-        param.setChoyoJimu_gaikyouTokkiIranFalg(new RString("0"));
-        param.setChoyoJimu_tokkiJikouHanteiFalg(new RString("0"));
-        param.setChoyoJimu_tokkiJikouFalg(new RString("0"));
-        param.setShinsakaiKaisaiYoteiYMD(new FlexibleDate("20161227"));
-        param.setShinsakaiKaisaiNo(new RString("00000118"));
-        param.setShinsakaiKaishiYoteiTime(new RString("10:00:00.000"));
-        param.setSakuseiJoken(new RString("範囲指定"));
-        param.setShuturyokuSutairu(new RString("1"));
-        param.setShuturyokuJun(new RString("審査順"));
-        param.setPrintHou(new RString("1"));
-        param.setGogitaiName(new RString("第０１合議体"));
-        param.setGogitaiNo(1);
-        param.setChohyoIin_sonotaSiryoFalg(new RString("0"));
-        param.setChohyoIin_itiziHanteiFalg(new RString("0"));
-        param.setChohyoIin_ikenshoFalg(new RString("0"));
-        param.setChohyoIin_hanteiFalg(new RString("0"));
-        param.setChohyoIin_taishoushaFalg(new RString("1"));
-        param.setChohyoIin_tuutishoFalg(new RString("0"));
-        param.setChohyoIin_tokkiJikouHanteiFalg(new RString("0"));
-        param.setChohyoIin_tokkiJikouFalg(new RString("0"));
-        param.setBangoStart(1);
-        param.setBangoEnd(99999);
-
-        return param;
-    }
 
     @Test
     public void BatchExitStatusTest() {
-        BatchExitStatus.Status status = batchFlowTestHelper.executeFlow(new RString("DBE517000_ShinsakaiShiryo"),
-                new RString("審査会資料一括作成"), DBE517000_ShinsakaiShiryo.class, batchParameter).getStatus();
+        BatchExitStatus.Status status = batchFlowTestHelper.executeFlow(new RString("DBE224001_NinteichosaDataOutput"),
+                new RString("審査会資料一括作成"), DBE224001_NinteichosaDataOutput.class, batchParameter).getStatus();
         assertThat(status, is(BatchExitStatus.Status.SUCCESS));
+        }
+    }
+
+    private static DBE224001_NinteichosaDataOutputParameter setBatchParameter() {
+        DBE224001_NinteichosaDataOutputParameter param = new DBE224001_NinteichosaDataOutputParameter();
+
+        param.setAddedFileName(new RString("0000000001"));
+        param.setTempFilePath(new RString("/home/D209007/tmp/~TMP_c811db7a-97d0-4e40-8979-8a801b8ae1ad"));
+
+        param.setShichosonCode(new RString("202118"));
+
+        List<RString> shinseishoKanriNoList = new ArrayList<>();
+        shinseishoKanriNoList.add(new RString("20211920150400041"));
+        shinseishoKanriNoList.add(new RString("20211920150500384"));
+        shinseishoKanriNoList.add(new RString("20211920150200059"));
+        shinseishoKanriNoList.add(new RString("20211920150400076"));
+        shinseishoKanriNoList.add(new RString("20211920150100029"));
+        shinseishoKanriNoList.add(new RString("20211920131200484"));
+        param.setShinseishoKanriNoList(shinseishoKanriNoList);
+
+        List<RString> hihokenshaNoList = new ArrayList<>();
+        hihokenshaNoList.add(new RString("0000329576"));
+        hihokenshaNoList.add(new RString("0002149541"));
+        hihokenshaNoList.add(new RString("0002139936"));
+        hihokenshaNoList.add(new RString("0000023621"));
+        hihokenshaNoList.add(new RString("0000141500"));
+        hihokenshaNoList.add(new RString("0000106267"));
+        param.setHihokenshaNoList(hihokenshaNoList);
+        param.setNinteiChosainCode(null);
+        param.setNinteichosaItakusakiCode(new RString("0000000001"));
+
+        return param;
     }
 }
