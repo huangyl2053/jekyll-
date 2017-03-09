@@ -151,7 +151,11 @@ public class ImageJohoUpdater {
             if (entity.getFilesEntity() == null) {
                 continue;
             }
-            list.add(entity.getFilesEntity().getPathname());
+            RString pathName = entity.getFilesEntity().getPathname();
+            if (pathName == null) {
+                continue;
+            }
+            list.add(pathName);
         }
         return list;
     }

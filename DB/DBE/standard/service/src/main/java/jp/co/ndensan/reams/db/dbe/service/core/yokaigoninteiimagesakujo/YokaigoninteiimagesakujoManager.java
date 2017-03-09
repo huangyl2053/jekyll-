@@ -109,9 +109,14 @@ public class YokaigoninteiimagesakujoManager {
         List<RString> 存在したイメージファイル名 = new ArrayList<>();
         List<SharedFileEntryInfoEntity> sharedFileEntryInfoEntity = SharedFile.getEntryInfo(descriptor);
         for (SharedFileEntryInfoEntity info : sharedFileEntryInfoEntity) {
-            if (info.getFilesEntity() != null) {
-                存在したイメージファイル名.add(info.getFilesEntity().getPathname());
+            if (info.getFilesEntity() == null) {
+                continue;
             }
+            RString pathName = info.getFilesEntity().getPathname();
+            if (pathName == null) {
+                continue;
+            }
+            存在したイメージファイル名.add(pathName);
         }
         return 存在したイメージファイル名;
     }
