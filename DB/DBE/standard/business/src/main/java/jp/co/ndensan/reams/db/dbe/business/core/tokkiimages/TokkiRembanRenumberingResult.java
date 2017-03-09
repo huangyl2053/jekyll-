@@ -47,6 +47,9 @@ public final class TokkiRembanRenumberingResult {
         return list;
     }
 
+    /**
+     * 変更前後のファイル名を保持します。
+     */
     public static final class FileNameBeforeAfter {
 
         private static final RString SEPARATOR = new RString(java.io.File.separator);
@@ -77,14 +80,6 @@ public final class TokkiRembanRenumberingResult {
          */
         public RString getBeforeFileName() {
             return this.before;
-        }
-
-        /**
-         * @param directory ディレクトリのパス
-         * @return 連番変更前の画像が指定のディレクトリに存在するとした場合のファイルパス文字列
-         */
-        public RString composeBeforePathAsIn(RString directory) {
-            return new RStringBuilder(directory).append(SEPARATOR).append(before).toRString();
         }
 
         /**

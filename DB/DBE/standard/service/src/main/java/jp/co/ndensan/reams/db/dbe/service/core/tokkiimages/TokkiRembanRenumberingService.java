@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.tokkiimages;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkiimages.TokkiRembanRenumberingResult;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkiimages.TokkiRembanRenumberingResult.FileNameBeforeAfter;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
+import jp.co.ndensan.reams.db.dbz.business.util.Files;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -43,11 +45,25 @@ public class TokkiRembanRenumberingService {
             manager.save認定調査票_特記情報(t);
         }
         RString workDirectory = Directory.createTmpDirectory();
+        Map<RString, RString> filePathByFileName = Files.filePathByFileName(currentImageDirectory);
         for (FileNameBeforeAfter ba : result.getRenamedImageNames()) {
-            File.copy(ba.composeBeforePathAsIn(currentImageDirectory), ba.composeAfterPathAsIn(workDirectory));
+            RString beforeFilePath = findFilePath(filePathByFileName, ba.getBeforeFileName());
+            if (beforeFilePath.isEmpty()) {
+                continue;
+            }
+            File.copy(beforeFilePath, ba.composeAfterPathAsIn(workDirectory));
             SharedFile.deleteFileInEntry(rosfed, ba.getBeforeFileName().toString());
         }
         SharedFile.appendNewFile(rosfed, FilesystemPath.fromString(workDirectory), "", overWrite());
+    }
+
+    private static RString findFilePath(Map<RString, RString> filePathByFileName, RString fileName) {
+        for (Map.Entry<RString, RString> entry : filePathByFileName.entrySet()) {
+            if (java.util.Objects.equals(entry.getKey().toLowerCase(), fileName.toLowerCase())) {
+                return entry.getValue();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static SharedAppendOption overWrite() {
