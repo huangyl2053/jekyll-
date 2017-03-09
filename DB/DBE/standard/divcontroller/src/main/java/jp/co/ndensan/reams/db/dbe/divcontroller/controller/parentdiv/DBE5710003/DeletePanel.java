@@ -138,7 +138,7 @@ public class DeletePanel {
             return イメージファイル存在チェック;
         }
         DeletableImages di = イメージ管理情報.get審査会割当履歴().findDeletableImages();
-        RString 認定調査委託先コード = イメージ管理情報.get認定調査委託先コード().value();
+        RString 認定調査委託先コード = イメージ管理情報.get認定調査委託先コード();
         RString 認定調査員コード = イメージ管理情報.get認定調査員コード();
         RString 申請書管理番号 = イメージ管理情報.get申請書管理番号().value();
         int 認定調査依頼履歴番号 = イメージ管理情報.get認定調査依頼履歴番号();

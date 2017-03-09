@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -93,8 +92,8 @@ public class ImagekanriJoho implements Serializable {
      *
      * @return 認定調査委託先コード
      */
-    public JigyoshaNo get認定調査委託先コード() {
-        return entity.getChosaItakusakiCode();
+    public RString get認定調査委託先コード() {
+        return entity.getChosaItakusakiCode() == null ? RString.EMPTY : entity.getChosaItakusakiCode().value();
     }
 
     /**
