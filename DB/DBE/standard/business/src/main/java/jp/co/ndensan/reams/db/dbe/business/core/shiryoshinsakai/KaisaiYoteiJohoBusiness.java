@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.KaisaiYoteiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 介護認定審査会開催予定情報ビジネスクラスです。
@@ -34,6 +36,17 @@ public class KaisaiYoteiJohoBusiness {
      */
     public RString get開催番号() {
         return entity.get開催番号();
+    }
+    
+    /**
+     * 審査会開催名称を取得します。
+     *
+     * @return 審査会開催名称
+     */
+    public RString get審査会開催名称() {
+        RStringBuilder 審査会開催名称 = new RStringBuilder();
+        審査会開催名称.append(new RString("第")).append(entity.get開催番号()).append(new RString("回審査会"));
+        return 審査会開催名称.toRString();
     }
 
     /**
@@ -64,12 +77,34 @@ public class KaisaiYoteiJohoBusiness {
     }
 
     /**
+     * 開催地区コードを取得します。
+     *
+     * @return 開催地区コード
+     */
+    public RString get開催地区コード() {
+        Code 開催地区コード = entity.get開催地区コード();
+        if (開催地区コード != null) {
+            return entity.get開催地区コード().getColumnValue();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
      * 開始予定時刻を取得します。
      *
      * @return 開始予定時刻
      */
     public RString get開始予定時刻() {
         return entity.get開始予定時刻();
+    }
+
+    /**
+     * 終了予定時刻を取得します。
+     *
+     * @return 終了予定時刻
+     */
+    public RString get終了予定時刻() {
+        return entity.get終了予定時刻();
     }
 
     /**
@@ -133,5 +168,14 @@ public class KaisaiYoteiJohoBusiness {
      */
     public boolean is合議体ダミーフラグ() {
         return entity.is合議体ダミーフラグ();
+    }
+
+    /**
+     * 精神科医所属フラグを取得します。
+     *
+     * @return 精神科医所属フラグ
+     */
+    public boolean is精神科医所属フラグ() {
+        return entity.is精神科医所属フラグ();
     }
 }

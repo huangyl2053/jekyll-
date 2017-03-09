@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -36,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -113,6 +111,20 @@ public class IchijiHantei {
 
         }
         return ResponseData.of(response.data).rootTitle(title).respond();
+    }
+
+    /**
+     * onActive処理。
+     *
+     * @param div NinteishinseibiDiv
+     * @return ResponseData
+     */
+    public ResponseData<IchijiHanteiDiv> onActive(IchijiHanteiDiv div) {
+        if(!RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class))){
+            getHandler(div).clear();
+            ViewStateHolder.remove(ViewStateKeys.申請書管理番号);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
