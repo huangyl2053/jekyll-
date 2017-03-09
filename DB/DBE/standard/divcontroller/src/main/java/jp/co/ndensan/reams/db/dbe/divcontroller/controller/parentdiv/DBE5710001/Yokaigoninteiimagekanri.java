@@ -264,6 +264,7 @@ public class Yokaigoninteiimagekanri {
         div.getRadSonota().setSelectedIndex(1);
         div.getBtnGaikyoChosa().setDisabled(true);
         div.getBtnChosahyoTokuki().setDisabled(true);
+        div.getBtnTokkiRembanShusei().setDisabled(true);
         div.getBtnGaikyoTokki().setDisabled(true);
         div.getBtnIkenshoTeikei().setDisabled(true);
         div.getBtnIkenshoTeikeigai().setDisabled(true);
@@ -280,6 +281,7 @@ public class Yokaigoninteiimagekanri {
             }
             if (getHandler(div).isExistsChosahyoTokkiImageFile(存在したイメージファイル名)) {
                 div.getBtnChosahyoTokuki().setDisabled(false);
+                div.getBtnTokkiRembanShusei().setDisabled(false);
                 setDisabledCommonBtnField(false);
             }
             if (getHandler(div).isExistsGaikyoTokkiImageFile(存在したイメージファイル名)) {
