@@ -66,7 +66,7 @@
         ON T5503."shinsakaiIinCode" = T5594."shinsakaiIinCode"
         INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS T5511
         ON T5503."shinsakaiKaisaiNo" = T5511."shinsakaiKaisaiNo"
-        INNER JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595 
+        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS T5595 
         ON T5594."shinsakaiIinCode" = T5595."shinsakaiIinCode" 
         AND T5595."remban" = 1 
         INNER JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS T5592 
@@ -78,7 +78,7 @@
         AND UzT0007."code" = T5592."shinsakaiKaisaiChikuCode" 
         AND ((UzT0007."yukoKaishiYMD" <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD" AND T5511."shinsakaiKaisaiYMD" <![CDATA[<=]]> UzT0007."yukoShuryoYMD" )
         OR (UzT0007."yukoKaishiYMD" <![CDATA[<=]]> T5511."shinsakaiKaisaiYMD" AND UzT0007."yukoShuryoYMD" IS NULL))
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051 
         ON T7051."shoKisaiHokenshaNo" = T5595."shoKisaiHokenshaNo" 
         LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911 
         ON T5911."shichosonCode" = T7051."shichosonCode" 
