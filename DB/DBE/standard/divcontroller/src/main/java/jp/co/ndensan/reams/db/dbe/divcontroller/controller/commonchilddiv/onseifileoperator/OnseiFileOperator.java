@@ -9,9 +9,12 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.OnseiFileOperatorDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.OnseiFileOperator.OnseiFileOperator.OnseiFileOperatorHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 音声情報操作用共有子Divのコントローラクラスです。
@@ -28,9 +31,15 @@ public class OnseiFileOperator {
     }
 
     public ResponseData<OnseiFileOperatorDiv> onClick_btnDelete(OnseiFileOperatorDiv div) {
-        delete音声情報(div);
-        OnseiFileOperatorHandler handler = new OnseiFileOperatorHandler(div);
-        handler.set削除状態();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
+        }
+        if ((ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                && new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
+            delete音声情報(div);
+            OnseiFileOperatorHandler handler = new OnseiFileOperatorHandler(div);
+            handler.set削除状態();
+        }
         return ResponseData.of(div).respond();
     }
 
