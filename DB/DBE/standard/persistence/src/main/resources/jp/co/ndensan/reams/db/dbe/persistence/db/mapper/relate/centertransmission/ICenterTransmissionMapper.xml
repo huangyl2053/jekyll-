@@ -21,7 +21,7 @@
         INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
         LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON "shinseishoKanriNo" = A."shinseishoKanriNo"
+        ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
@@ -62,7 +62,7 @@
         INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
         LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON "shinseishoKanriNo" = A."shinseishoKanriNo"
+        ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
@@ -103,7 +103,7 @@
         INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
         LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON "shinseishoKanriNo" = A."shinseishoKanriNo"
+        ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
@@ -144,7 +144,7 @@
         INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" B 
         ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = B."shinseishoKanriNo" 
         LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON "shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
+        ON dbT5101."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
@@ -185,7 +185,7 @@
         INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" B 
         ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = B."shinseishoKanriNo" 
         LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON "shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
+        ON dbT5101."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
