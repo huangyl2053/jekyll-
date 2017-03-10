@@ -687,9 +687,9 @@
         <association property="dbT5123Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.ResultMap_DbT5123NinteiKeikakuJohoEntity"/>
         <association property="dbT5102Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5102NinteiKekkaJohoMapper.ResultMap_DbT5102NinteiKekkaJohoEntity"/>
         <association property="dbT7051Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
-        <association property="dbT5910Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
-        <association property="dbT5911Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
-        <association property="dbT5912Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="dbT5910Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
+        <association property="dbT5911Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+        <association property="dbT5912Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
     </resultMap>
 
     <select resultOrdered="true" id="get更新対象情報_電算版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
