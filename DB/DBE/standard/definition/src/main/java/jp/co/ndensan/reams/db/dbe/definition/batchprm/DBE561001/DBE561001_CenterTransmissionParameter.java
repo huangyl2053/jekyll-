@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionProcessParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +30,9 @@ public class DBE561001_CenterTransmissionParameter extends BatchParameterBase {
     private static final String DATASHUTSURYOKUKUBUN = "dataShutsuryokuKubun";
     private static final String NIJIHANTEIKAISHIYMD = "nijiHanteiKaishiYMD";
     private static final String NIJIHANTEISHURYOYMD = "nijiHanteiShuryoYMD";
+    private static final String SHICHOSONCODE = "shichosonCode";
+    private static final String SHICHOSONMEI = "shichosonMei";
+    private static final String SHOKISAIHOKENSHAN = "ShoKisaiHokenshaNo";
     private static final RString 出力する = new RString(0);
     private static final RString 未出力のみ = new RString(0);
 
@@ -41,6 +46,12 @@ public class DBE561001_CenterTransmissionParameter extends BatchParameterBase {
     private RString 二次判定開始日;
     @BatchParameter(key = NIJIHANTEISHURYOYMD, name = "二次判定終了日")
     private RString 二次判定終了日;
+    @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
+    private LasdecCode 市町村コード;
+    @BatchParameter(key = SHICHOSONMEI, name = "市町村名")
+    private RString 市町村名;
+    @BatchParameter(key = SHOKISAIHOKENSHAN, name = "証記載保険者番号")
+    private ShoKisaiHokenshaNo 証記載保険者番号;
 
     /**
      * コンストラクタです。
@@ -62,6 +73,9 @@ public class DBE561001_CenterTransmissionParameter extends BatchParameterBase {
                 二次判定開始日,
                 二次判定終了日,
                 RString.isNullOrEmpty(二次判定開始日),
-                RString.isNullOrEmpty(二次判定終了日));
+                RString.isNullOrEmpty(二次判定終了日),
+                市町村コード,
+                市町村名,
+                証記載保険者番号);
     }
 }

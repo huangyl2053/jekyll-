@@ -104,7 +104,7 @@ public class CenterTransmissionEditEntity {
                 entity.getIkenItemKoban15(), entity.getIkenItemKoban14()));
         csvEntity.set調査依頼日(getValue(entity.getNinteichosaIraiYMD()));
         csvEntity.set調査実施日(getValue(entity.getNinteichosaJisshiYMD()));
-        csvEntity.set指定居宅介護支援事業者等番号(get番号(entity.getJigyoshaNo()));
+        csvEntity.set指定居宅介護支援事業者等番号(entity.getNinteichosaItakusakiCode());
         csvEntity.set委託区分(get調査委託区分(entity.getChosaItakuKubun()));
         csvEntity.set認定調査員番号(entity.getNinteiChosainCode());
         csvEntity.set認定調査員資格コード(entity.getChosainShikaku());

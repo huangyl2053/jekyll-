@@ -2047,23 +2047,10 @@
             DbT5105."centerSoshinYMD" is NULL
             OR DbT5105."centerSoshinYMD" = ''
             )
-            <if test="状態区分 == 1" >
-                AND NOT EXISTS (
-                SELECT
-                'X'
-                FROM
-                rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
-                WHERE
-                DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
-                AND (
-                DbT7211."centerSoshinChushutsuYMD" IS NOT NULL
-                OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
-                )
-                )
-            </if>
-            <if test="状態区分 == 2" >
-                AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
-                AND DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+            AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
+            AND DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+            <if test="市町村コード.toString() != ''.toString()">
+                AND DbT7051."shichosonCode" = #{市町村コード}
             </if>
         </where>
         ORDER BY  DbT5101."hihokenshaKana",
@@ -2115,23 +2102,10 @@
             "DbT5105NinteiKanryoJoho"."centerSoshinYMD" is NULL
             OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = ''
             )
-            <if test="状態区分 == 1" >
-                AND NOT EXISTS (
-                SELECT
-                'X'
-                FROM
-                rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
-                WHERE
-                DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
-                AND (
-                DbT7211."centerSoshinChushutsuYMD" IS NOT NULL
-                OR DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
-                )
-                )
-            </if>
-            <if test="状態区分 == 2" >
-                AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
-                AND DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+            AND DbT7211."centerSoshinChushutsuYMD" is NOT NULL
+            AND DbT7211."centerSoshinChushutsuYMD" <![CDATA[<>]]> ''
+            <if test="市町村コード.toString() != ''.toString()">
+                AND DbT7051."shichosonCode" = #{市町村コード}
             </if>
         </where>
         ORDER BY  DbT5101."hihokenshaKana",

@@ -20,6 +20,11 @@
         "SoshinDataSakuseiTaishoshaTemp" 
         INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
+        ON "shinseishoKanriNo" = A."shinseishoKanriNo"
+        AND "logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
         WHERE
         NOT EXISTS ( 
         SELECT
@@ -31,16 +36,11 @@
         AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
         ) 
         AND 1 <![CDATA[<=]]> A."remban" 
-        AND A."remban" <![CDATA[<=]]> 20 
-        AND A."koroshoIfShikibetsuCode" = ( 
-        SELECT
-        dbT5101."koroshoIfShikibetsuCode" 
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" dbT5101 
-        WHERE
-        dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo" 
-        AND dbT5101."logicalDeletedFlag" = FALSE
-        ) 
+        AND A."remban" <![CDATA[<=]]> 20
+        AND A."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode" 
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         A."shinseishoKanriNo"
         , A."koroshoIfShikibetsuCode"
@@ -61,6 +61,11 @@
         "SoshinDataSakuseiTaishoshaTemp" 
         INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
+        ON "shinseishoKanriNo" = A."shinseishoKanriNo"
+        AND "logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
         WHERE
         NOT EXISTS ( 
         SELECT
@@ -73,15 +78,10 @@
         ) 
         AND 1 <![CDATA[<=]]> A."remban" 
         AND A."remban" <![CDATA[<=]]> 85 
-        AND A."koroshoIfShikibetsuCode" = ( 
-        SELECT
-        dbT5101."koroshoIfShikibetsuCode" 
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" dbT5101 
-        WHERE
-        dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo" 
-        AND dbT5101."logicalDeletedFlag" = FALSE
-        ) 
+        AND A."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode" 
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         A."shinseishoKanriNo"
         , A."koroshoIfShikibetsuCode"
@@ -102,6 +102,11 @@
         "SoshinDataSakuseiTaishoshaTemp" 
         INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" A 
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
+        ON "shinseishoKanriNo" = A."shinseishoKanriNo"
+        AND "logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
         WHERE
         NOT EXISTS ( 
         SELECT
@@ -112,16 +117,11 @@
         A."shinseishoKanriNo" = A1."shinseishoKanriNo" 
         AND A."ikenshoIraiRirekiNo" <![CDATA[<]]> A1."ikenshoIraiRirekiNo"
         ) 
-        AND A."remban" IN (14, 15, 16, 17, 18, 19, 69) 
-        AND A."koroshoIfShikibetsuCode" = ( 
-        SELECT
-        dbT5101."koroshoIfShikibetsuCode" 
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" dbT5101 
-        WHERE
-        dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo" 
-        AND dbT5101."logicalDeletedFlag" = FALSE
-        ) 
+        AND A."remban" IN (14, 15, 16, 17, 18, 19, 69)
+        AND A."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode" 
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         A."shinseishoKanriNo"
         , A."koroshoIfShikibetsuCode"
@@ -143,6 +143,11 @@
         "SoshinDataSakuseiTaishoshaTemp"  
         INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" B 
         ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = B."shinseishoKanriNo" 
+        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
+        ON "shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
+        AND "logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
         AND NOT EXISTS ( 
         SELECT
         'X' 
@@ -154,15 +159,10 @@
         ) 
         AND 1 <![CDATA[<=]]> B."remban" 
         AND B."remban" <![CDATA[<=]]> 20 
-        AND B."koroshoIfShikibetsuCode" = ( 
-        SELECT
-        dbT5101."koroshoIfShikibetsuCode" 
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" dbT5101 
-        WHERE
-        dbT5101."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
-        AND dbT5101."logicalDeletedFlag" = FALSE
-        ) 
+        AND B."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode" 
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
         , B."koroshoIfShikibetsuCode"
@@ -184,6 +184,11 @@
         "SoshinDataSakuseiTaishoshaTemp" 
         INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" B 
         ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = B."shinseishoKanriNo" 
+        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
+        ON "shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
+        AND "logicalDeletedFlag" = FALSE
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
         AND NOT EXISTS ( 
         SELECT
         'X' 
@@ -195,15 +200,10 @@
         ) 
         AND 1 <![CDATA[<=]]> B."remban" 
         AND B."remban" <![CDATA[<=]]> 85 
-        AND B."koroshoIfShikibetsuCode" = ( 
-        SELECT
-        dbT5101."koroshoIfShikibetsuCode" 
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" dbT5101 
-        WHERE
-        dbT5101."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
-        AND dbT5101."logicalDeletedFlag" = FALSE
-        ) 
+        AND B."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode" 
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051."shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
         , B."koroshoIfShikibetsuCode"
@@ -254,7 +254,7 @@
         , F."koban69" AS ikenItemKoban69
         , G."ninteichosaIraiYMD"
         , H."ninteichosaJisshiYMD"
-        , I."jigyoshaNo"
+        , I."ninteichosaItakusakiCode"
         , I."chosaItakuKubun"
         , G."ninteiChosainCode"
         , J."chosainShikaku"
@@ -618,7 +618,7 @@
         ) 
         AND H."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" I 
-        ON G."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode" 
+        ON H."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode" 
         AND I."shichosonCode" = A."shichosonCode" 
         AND I."jokyoFlag" = TRUE 
         LEFT JOIN rgdb."DbT5913ChosainJoho" J 
@@ -763,6 +763,9 @@
         AND Z."koroshoIfShikibetsuCode" = A2."koroshoIfShikibetsuCode" 
         WHERE
         A."koroshoIfShikibetsuCode" NOT IN ('02A', '06A', '09A', '99A')
+        <if test="市町村コード.toString() != ''.toString()">
+            AND DbT7051KoseiShichosonMaster"shichosonCode" = #{市町村コード}
+        </if>
         ORDER BY
         A."ninteiShinseiYMD"
         , A."shoKisaiHokenshaNo"
@@ -898,6 +901,9 @@
             </if>
             <if test="!isNijiHanteiShuryoYMDEmpty">
                 AND "SoshonDataSakuseiTaishosha"."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiShuryoYMD}
+            </if>
+            <if test="市町村コード.toString() != ''.toString()">
+                AND DbT7051"shichosonCode" = #{市町村コード}
             </if>
         </where>          
         ORDER BY

@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,4 +34,7 @@ public class CenterTransmissionMybitisParamter implements IMyBatisParameter {
     private boolean isNijiHanteiKaishiYMDEmpty;
     private boolean isNijiHanteiShuryoYMDEmpty;
     private RString gaikyoChosaTextImageKubun;
+    private LasdecCode shichosonCode;
+    private RString shichosonMei;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 }

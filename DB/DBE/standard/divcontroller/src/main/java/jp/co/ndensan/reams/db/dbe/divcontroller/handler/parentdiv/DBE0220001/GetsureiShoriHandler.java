@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.KanryoShoriStatus;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.GetsureiShoriDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -16,12 +15,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -31,8 +29,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class GetsureiShoriHandler {
 
-    private static final String JotaiColumnName = "jyotai";
-    private static final RString FIELDNAME_月例処理を完了する = new RString("btnCompleteGetsureiShori");
     private final GetsureiShoriDiv div;
 
     /**
@@ -47,12 +43,10 @@ public class GetsureiShoriHandler {
     /**
      * 完了処理・センター送信の初期化です。
      *
-     * @param 状態区分 状態区分
      * @param 最大取得件数 最大取得件数
      * @param 最大取得件数上限 最大取得件数上限
      */
-    public void initialize(RString 状態区分, Decimal 最大取得件数, Decimal 最大取得件数上限) {
-        div.getRadJyotaiKubun().setSelectedKey(状態区分);
+    public void initialize(Decimal 最大取得件数, Decimal 最大取得件数上限) {
         div.getTxtDispMax().setValue(最大取得件数);
         div.getTxtDispMax().setMaxValue(最大取得件数上限);
     }
@@ -60,37 +54,12 @@ public class GetsureiShoriHandler {
     /**
      * 画面の内容で検索条件を生成します。
      *
-     * @param 状態区分 状態区分
      * @param 最大取得件数 最大取得件数
+     * @param 市町村コード LasdecCode
      * @return 検索条件
      */
-    public YokaigoNinteiTaskListParameter create検索条件(RString 状態区分, Decimal 最大取得件数) {
-        return YokaigoNinteiTaskListParameter.createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), 状態区分, 最大取得件数);
-    }
-
-    /**
-     * 検索結果表示時の状態を設定します。
-     *
-     * @param 状態区分 状態区分
-     */
-    public void set検索結果表示時の制御(RString 状態区分) {
-        KanryoShoriStatus 状態 = KanryoShoriStatus.toValue(状態区分);
-        if (状態 == KanryoShoriStatus.未処理) {
-            div.getTxtMisyori().setDisplayNone(false);
-            div.getTxtKanryouKano().setDisplayNone(true);
-            div.getTxtGokei().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELDNAME_月例処理を完了する, true);
-        } else if (状態 == KanryoShoriStatus.完了可能) {
-            div.getTxtMisyori().setDisplayNone(true);
-            div.getTxtKanryouKano().setDisplayNone(false);
-            div.getTxtGokei().setDisplayNone(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELDNAME_月例処理を完了する, false);
-        } else {
-            div.getTxtMisyori().setDisplayNone(false);
-            div.getTxtKanryouKano().setDisplayNone(false);
-            div.getTxtGokei().setDisplayNone(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELDNAME_月例処理を完了する, false);
-        }
+    public YokaigoNinteiTaskListParameter create検索条件(Decimal 最大取得件数, LasdecCode 市町村コード) {
+        return YokaigoNinteiTaskListParameter.createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード(), new RString(""), 最大取得件数, 市町村コード);
     }
 
     /**
@@ -101,17 +70,10 @@ public class GetsureiShoriHandler {
     public void set対象者一覧(SearchResult<GeTuReiSyoRiBusiness> 検索結果) {
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
-        int notCount = 0;
         for (GeTuReiSyoRiBusiness business : 検索結果.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
-            if (business.getセンター送信情報抽出年月日() == null || business.getセンター送信情報抽出年月日().isEmpty()) {
-                row.setJyotai(KanryoShoriStatus.未処理.get略称());
-                row.setCellBgColor(JotaiColumnName, DataGridCellBgColor.bgColorRed);
-                notCount++;
-            } else if (business.getセンター送信情報抽出年月日() != null || !business.getセンター送信情報抽出年月日().isEmpty()) {
-                row.setJyotai(KanryoShoriStatus.完了可能.get略称());
-                row.setCellBgColor(JotaiColumnName, DataGridCellBgColor.bgColorNormal);
+            if (business.getセンター送信情報抽出年月日() != null || !business.getセンター送信情報抽出年月日().isEmpty()) {
                 completeCount++;
             }
             row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
@@ -134,9 +96,7 @@ public class GetsureiShoriHandler {
             rowList.add(row);
         }
         Decimal 最大表示件数 = div.getTxtDispMax().getValue();
-        div.getTxtMisyori().setValue(new RString(String.valueOf(notCount)));
         div.getTxtKanryouKano().setValue(new RString(String.valueOf(completeCount)));
-        div.getTxtGokei().setValue(new RString(String.valueOf(検索結果.records().size())));
         div.getDgNinteiTaskList().setDataSource(rowList);
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大表示件数.intValue());
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(検索結果.totalCount());

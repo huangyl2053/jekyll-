@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0220001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GetsureiShoriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -95,26 +97,6 @@ public class GetsureiShoriDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public RadioButton getRadJyotaiKubun() {
-        return this.getCenterSoshinTaishoshaIchiran().getRadJyotaiKubun();
-    }
-
-    @JsonIgnore
-    public void  setRadJyotaiKubun(RadioButton radJyotaiKubun) {
-        this.getCenterSoshinTaishoshaIchiran().setRadJyotaiKubun(radJyotaiKubun);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtGokei() {
-        return this.getCenterSoshinTaishoshaIchiran().getTxtGokei();
-    }
-
-    @JsonIgnore
-    public void  setTxtGokei(TextBox txtGokei) {
-        this.getCenterSoshinTaishoshaIchiran().setTxtGokei(txtGokei);
-    }
-
-    @JsonIgnore
     public TextBox getTxtKanryouKano() {
         return this.getCenterSoshinTaishoshaIchiran().getTxtKanryouKano();
     }
@@ -125,13 +107,8 @@ public class GetsureiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMisyori() {
-        return this.getCenterSoshinTaishoshaIchiran().getTxtMisyori();
-    }
-
-    @JsonIgnore
-    public void  setTxtMisyori(TextBox txtMisyori) {
-        this.getCenterSoshinTaishoshaIchiran().setTxtMisyori(txtMisyori);
+    public IHokenshaListDiv getCcdHokensyaList() {
+        return this.getCenterSoshinTaishoshaIchiran().getCcdHokensyaList();
     }
 
     @JsonIgnore

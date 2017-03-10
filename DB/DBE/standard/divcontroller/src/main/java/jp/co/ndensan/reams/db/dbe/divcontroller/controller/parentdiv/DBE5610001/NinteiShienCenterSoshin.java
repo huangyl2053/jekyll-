@@ -42,7 +42,7 @@ public class NinteiShienCenterSoshin {
     }
 
     /**
-     * 送信データの作成を実行するボタンの押下処理です。
+     * 送信ファイル作成を実行するボタンの押下処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -58,7 +58,7 @@ public class NinteiShienCenterSoshin {
     }
 
     /**
-     * 送信データの作成を実行するボタンの押下処理です。
+     * 基本運用に戻るボタンの押下処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ

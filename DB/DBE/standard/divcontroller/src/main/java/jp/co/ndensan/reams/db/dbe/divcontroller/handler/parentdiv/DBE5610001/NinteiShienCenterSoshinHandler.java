@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5610001;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5610001.NinteiShienCenterSoshinDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,6 +37,7 @@ public class NinteiShienCenterSoshinHandler {
      * 初期化の項目設定処理です。
      */
     public void onLoad() {
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getRadDataShutsuryoku().setSelectedKey(未出力);
         div.getRadTennyuShiboJoho().setSelectedKey(出力する);
         RDate システム日付 = RDate.getNowDate();
@@ -64,6 +68,13 @@ public class NinteiShienCenterSoshinHandler {
         } else {
             parameter.set転入死亡情報出力区分(new RString("1"));
         }
+        LasdecCode 市町村コード
+                = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
+        parameter.set市町村コード(市町村コード);
+        RString 市町村名 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+        parameter.set市町村名(市町村名);
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        parameter.set証記載保険者番号(証記載保険者番号);
         return parameter;
     }
 }

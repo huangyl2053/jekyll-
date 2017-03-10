@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001.Cen
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001.GetsureiShoriHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0220001.GetsureiShoriValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -93,18 +94,18 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData<GetsureiShoriDiv> onLoad(GetsureiShoriDiv div) {
+        div.getCcdHokensyaList().loadHokenshaList(GyomuBunrui.介護認定);
+        LasdecCode 市町村コード
+                = div.getCcdHokensyaList().getSelectedItem().get市町村コード();
         RDate 基準日 = RDate.getNowDate();
-        RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, 基準日, SubGyomuCode.DBE認定支援);
         RString 最大取得件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, 基準日, SubGyomuCode.DBU介護統計報告);
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, 基準日, SubGyomuCode.DBU介護統計報告);
-        状態区分 = RString.isNullOrEmpty(状態区分) ? KanryoShoriStatus.すべて.getコード() : 状態区分;
-        YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, toDecimal(最大取得件数));
+        YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(toDecimal(最大取得件数), 市町村コード);
         YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
         SearchResult<GeTuReiSyoRiBusiness> 検索結果 = finder.get月例処理モード(検索条件);
         ShinSaKaiBusiness 認定完了情報 = finder.get前月例処理(検索条件);
-        getHandler(div).initialize(状態区分, toDecimal(最大取得件数), toDecimal(最大取得件数上限));
+        getHandler(div).initialize(toDecimal(最大取得件数), toDecimal(最大取得件数上限));
         getHandler(div).set対象者一覧(検索結果);
-        getHandler(div).set検索結果表示時の制御(状態区分);
         if (認定完了情報 == null || 認定完了情報.get要介護認定完了情報Lsit() == null || 認定完了情報.get要介護認定完了情報Lsit().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
         } else {
@@ -120,21 +121,20 @@ public class GetsureiShori {
      * @return レスポンスデータ
      */
     public ResponseData onActive(GetsureiShoriDiv div) {
-        RString 状態区分 = div.getRadJyotaiKubun().getSelectedKey();
         Decimal 最大取得件数 = div.getTxtDispMax().getValue();
         Decimal 最大取得件数上限 = div.getTxtDispMax().getMaxValue();
-
         ValidationMessageControlPairs vallidation = getValidationHandler(div).check最大表示件数(最大取得件数, 最大取得件数上限);
         if (vallidation.existsError()) {
             最大取得件数 = new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
             div.getTxtDispMax().setValue(最大取得件数);
         }
-        YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(状態区分, 最大取得件数);
+        LasdecCode 市町村コード
+                = div.getCcdHokensyaList().getSelectedItem().get市町村コード();
+        YokaigoNinteiTaskListParameter 検索条件 = getHandler(div).create検索条件(最大取得件数, 市町村コード);
         YokaigoNinteiTaskListFinder finder = YokaigoNinteiTaskListFinder.createInstance();
         SearchResult<GeTuReiSyoRiBusiness> 検索結果 = finder.get月例処理モード(検索条件);
         ShinSaKaiBusiness 認定完了情報 = finder.get前月例処理(検索条件);
         getHandler(div).set対象者一覧(検索結果);
-        getHandler(div).set検索結果表示時の制御(状態区分);
 
         if (認定完了情報 == null || 認定完了情報.get要介護認定完了情報Lsit() == null || 認定完了情報.get要介護認定完了情報Lsit().isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
@@ -145,12 +145,12 @@ public class GetsureiShori {
     }
 
     /**
-     * 状態ラジオボタンの押下チェック処理です。
+     * 保険者の値が変更された際の動作です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<GetsureiShoriDiv> onChange_jyotaiKubun(GetsureiShoriDiv div) {
+    public ResponseData<GetsureiShoriDiv> onChange_ccdHokensha(GetsureiShoriDiv div) {
         return onActive(div);
     }
 
@@ -221,7 +221,7 @@ public class GetsureiShori {
     }
 
     /**
-     * センター送信準備ボタンの押下処理です。
+     * 送信ファイル作成画面へボタンの押下処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -316,7 +316,6 @@ public class GetsureiShori {
 
     private CenterSoshinIchiranCsvEntity getCsvData(dgNinteiTaskList_Row row) {
         return new CenterSoshinIchiranCsvEntity(
-                get状態名称(row.getJyotai()),
                 row.getHokensha(),
                 to西暦(row.getNinteiShinseiDay().getValue()),
                 row.getHihoNumber(),
@@ -325,15 +324,6 @@ public class GetsureiShori {
                 row.getShinseiKubunHorei(),
                 to西暦(row.getGetsureiShoriKanryoDay().getValue()),
                 to西暦(row.getCenterSoshinDay().getValue()));
-    }
-
-    private RString get状態名称(RString ryakusho) {
-        if (KanryoShoriStatus.未処理.get略称().equals(ryakusho)) {
-            return KanryoShoriStatus.未処理.toRString();
-        } else if (KanryoShoriStatus.完了可能.get略称().equals(ryakusho)) {
-            return KanryoShoriStatus.完了可能.toRString();
-        }
-        return RString.EMPTY;
     }
 
     private RString to西暦(RDate date) {
