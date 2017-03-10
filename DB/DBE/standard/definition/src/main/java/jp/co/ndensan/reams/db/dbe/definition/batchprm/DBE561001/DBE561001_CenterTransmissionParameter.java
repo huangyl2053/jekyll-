@@ -7,10 +7,8 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionProcessParameter;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,11 +45,11 @@ public class DBE561001_CenterTransmissionParameter extends BatchParameterBase {
     @BatchParameter(key = NIJIHANTEISHURYOYMD, name = "二次判定終了日")
     private RString 二次判定終了日;
     @BatchParameter(key = SHICHOSONCODE, name = "市町村コード")
-    private LasdecCode 市町村コード;
+    private RString 市町村コード;
     @BatchParameter(key = SHICHOSONMEI, name = "市町村名")
     private RString 市町村名;
     @BatchParameter(key = SHOKISAIHOKENSHAN, name = "証記載保険者番号")
-    private ShoKisaiHokenshaNo 証記載保険者番号;
+    private RString 証記載保険者番号;
 
     /**
      * コンストラクタです。

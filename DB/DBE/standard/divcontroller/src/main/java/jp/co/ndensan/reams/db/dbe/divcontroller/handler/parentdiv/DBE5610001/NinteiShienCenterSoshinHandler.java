@@ -70,11 +70,15 @@ public class NinteiShienCenterSoshinHandler {
         }
         LasdecCode 市町村コード
                 = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
-        parameter.set市町村コード(市町村コード);
+        if (!RString.isNullOrEmpty(市町村コード.getColumnValue())) {
+            parameter.set市町村コード(市町村コード.code市町村RString());
+        } else {
+            parameter.set市町村コード(RString.EMPTY);
+        }
         RString 市町村名 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
         parameter.set市町村名(市町村名);
         ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
-        parameter.set証記載保険者番号(証記載保険者番号);
+        parameter.set証記載保険者番号(証記載保険者番号.getColumnValue());
         return parameter;
     }
 }
