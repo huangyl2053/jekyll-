@@ -256,14 +256,18 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private void printReport(CenterTransmissionEntity currentEntity) {
         centerSoshinTaishoshaIchiranEntity = new CenterSoshinTaishoshaIchiranEntity();
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_1(nullToEmpty(currentEntity.getShoKisaiHokenshaNo()));
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_2(nullToEmpty(currentEntity.getShichosonMeisho()));
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_3(nullToEmpty(currentEntity.getHihokenshaNo()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_1(currentEntity.getShoKisaiHokenshaNo() != null ? currentEntity.getShoKisaiHokenshaNo() : RString.EMPTY);
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_2(currentEntity.getShichosonMeisho() != null ? currentEntity.getShichosonMeisho() : RString.EMPTY);
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_3(currentEntity.getHihokenshaNo() != null ? currentEntity.getHihokenshaNo() : RString.EMPTY);
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_4(get被保険者氏名(currentEntity.getHihokenshaName()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_5(get認定申請日_共通ポリシーパターン1(currentEntity.getNinteiShinseiYMD()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_6(get認定申請区分_申請時_コード(currentEntity.getNinteiShinseiShinseijiKubunCode()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_7(get認定申請区分_法令_コード(currentEntity.getNinteiShinseiHoreiKubunCode()));
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_8(get二次判定結果(currentEntity.getKoroshoIfShikibetsuCode().value(), currentEntity.getNijiHanteiYokaigoJotaiKubunCode().value()));
+        if (currentEntity.getKoroshoIfShikibetsuCode() != null && currentEntity.getNijiHanteiYokaigoJotaiKubunCode() != null) {
+            centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_8(get二次判定結果(currentEntity.getKoroshoIfShikibetsuCode().value(), currentEntity.getNijiHanteiYokaigoJotaiKubunCode().value()));
+        } else {
+            centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_8(RString.EMPTY);
+        }
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_9(get認定有効期間(currentEntity.getNijiHanteiNinteiYukoKikan()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_10(get開始日(currentEntity.getNijiHanteiNinteiYukoKaishiYMD()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_11(get終了日(currentEntity.getNijiHanteiNinteiYukoShuryoYMD()));
@@ -310,9 +314,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     }
 
     private RString get二次判定結果(RString 厚労省IF識別コード, RString 二次判定要介護状態区分コード) {
-        if(RString.isNullOrEmpty(厚労省IF識別コード) || RString.isNullOrEmpty(二次判定要介護状態区分コード)){
-            return RString.EMPTY;
-        }
         RString 二次判定結果;
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
             二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
