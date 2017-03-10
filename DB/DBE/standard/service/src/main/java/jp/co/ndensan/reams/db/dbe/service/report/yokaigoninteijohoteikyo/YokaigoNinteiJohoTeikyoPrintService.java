@@ -127,8 +127,11 @@ public class YokaigoNinteiJohoTeikyoPrintService {
      * @param 前回認定調査票調査項目List 前回認定調査票調査項目List
      * @param 主治医意見書意見項目List 主治医意見書意見項目List
      * @param 前回主治医意見書意見項目List 前回主治医意見書意見項目List
+     * @param 特記事項符号印刷有無
      * @param 正常選択肢印刷有無 正常選択肢印刷有無
+     * @param 前回との結果比較印刷有無
      * @param 認定調査前回結果印刷有無 認定調査前回結果印刷有無
+     * @param 前回正常選択肢印刷有無
      */
     public void print(boolean is認定調査票出力,
             boolean is特記事項出力,
@@ -153,8 +156,11 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             List<NinteichosahyoChosaItem> 前回認定調査票調査項目List,
             List<ShujiiIkenshoIkenItem> 主治医意見書意見項目List,
             List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目List,
+            RString 特記事項符号印刷有無,
             RString 正常選択肢印刷有無,
-            RString 認定調査前回結果印刷有無) {
+            RString 前回との結果比較印刷有無,
+            RString 認定調査前回結果印刷有無,
+            RString 前回正常選択肢印刷有無) {
         try (ReportAssembler<YokaigoNinteiJohoTeikyoIsshikiReportSource> assembler
                 = createAssembler(new JohoTeikyoIsshikiProperty(), reportManager)) {
             if (is認定調査票出力) {
@@ -173,7 +179,8 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             if (is一次判定結果出力) {
                 print一次判定結果(business, 認定調査特記事項番号List, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
                         認定調査票調査項目List, 前回認定調査票調査項目List, 主治医意見書意見項目List, 前回主治医意見書意見項目List,
-                        一次判定結果マスキング区分, 正常選択肢印刷有無, 認定調査前回結果印刷有無, assembler);
+                        一次判定結果マスキング区分, 特記事項符号印刷有無, 正常選択肢印刷有無, 前回との結果比較印刷有無,
+                        認定調査前回結果印刷有無, 前回正常選択肢印刷有無, assembler);
             }
         }
     }
@@ -438,15 +445,18 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             List<ShujiiIkenshoIkenItem> 主治医意見書意見項目List,
             List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目List,
             RString 一次判定結果マスキング区分,
+            RString 特記事項符号印刷有無,
             RString 正常選択肢印刷有無,
+            RString 前回との結果比較印刷有無,
             RString 認定調査前回結果印刷有無,
+            RString 前回正常選択肢印刷有無,
             ReportAssembler<YokaigoNinteiJohoTeikyoIsshikiReportSource> assembler) {
         ReportSourceWriter<YokaigoNinteiJohoTeikyoIsshikiReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
         JohoTeikyoIsshikiIchijihanteikekkahyoReport report
                 = new JohoTeikyoIsshikiIchijihanteikekkahyoReport(IchijihanteikekkahyoEntityEditor.edit(business.toEntity(),
                                 認定調査特記事項番号List, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
-                                認定調査票調査項目List, 前回認定調査票調査項目List, 主治医意見書意見項目List, 前回主治医意見書意見項目List,
-                                正常選択肢印刷有無, 認定調査前回結果印刷有無, 一次判定結果マスキング区分));
+                                認定調査票調査項目List, 前回認定調査票調査項目List, 主治医意見書意見項目List, 前回主治医意見書意見項目List, 特記事項符号印刷有無,
+                                正常選択肢印刷有無, 前回との結果比較印刷有無, 認定調査前回結果印刷有無, 前回正常選択肢印刷有無, 一次判定結果マスキング区分));
         report.writeBy(reportSourceWriter);
     }
 

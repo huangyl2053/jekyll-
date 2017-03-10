@@ -109,16 +109,21 @@ public class DBE090002_NinteikekkaJohoteikyoParameter extends BatchParameterBase
      * @param 特記事項判定日 特記事項判定日
      * @param 総合事業開始区分 総合事業開始区分
      * @param 情報提供資料の特記事項編集パターン 情報提供資料の特記事項編集パターン
+     * @param 特記事項符号印刷有無
      * @param 正常選択肢印刷有無 正常選択肢印刷有無
+     * @param 前回との結果比較印刷有無
      * @param 認定調査前回結果印刷有無 認定調査前回結果印刷有無
+     * @param 前回正常選択肢印刷有無
      * @return 要介護認定情報提供作成プロセスパラメータークラス
      */
     public YokaigoBatchProcessParamter toYokaigoBatchProcessParamter(FlexibleDate 特記事項判定日,
             RString 総合事業開始区分, RString 情報提供資料の特記事項編集パターン,
-            RString 正常選択肢印刷有無, RString 認定調査前回結果印刷有無) {
+            RString 特記事項符号印刷有無, RString 正常選択肢印刷有無, RString 前回との結果比較印刷有無,
+            RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無) {
         return new YokaigoBatchProcessParamter(申請書管理番号, 認定調査票出力, 特記事項出力, 主治医意見書出力,
                 その他資料出力, 一次判定結果出力, 認定調査票マスキング区分, 特記事項マスキング区分, 主治医意見書マスキング区分,
                 その他資料マスキング区分, 一次判定結果マスキング区分, 特記事項判定日, 総合事業開始区分,
-                情報提供資料の特記事項編集パターン, 正常選択肢印刷有無, 認定調査前回結果印刷有無);
+                情報提供資料の特記事項編集パターン, 特記事項符号印刷有無, 正常選択肢印刷有無,
+                前回との結果比較印刷有無, 認定調査前回結果印刷有無, 前回正常選択肢印刷有無);
     }
 }

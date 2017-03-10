@@ -223,26 +223,34 @@ public final class NinteiChosaTokkiImageEntityEditor {
             List<NinteichosaRelate> 特記事項区分, YokaigoNinteiJohoTeikyoEntity entity, RString 特記事項マスキング区分) {
         List<RString> 特記事項リスト4 = new ArrayList<>();
         RString 共有ファイル名 = entity.get保険者番号().concat(entity.get被保険者番号());
+        RString path = copySharedFiles(特記事項区分.get(0).getイメージID(), 共有ファイル名);
+        set概況特記事項(ninteiChosaTokkiImageEntity, path, 特記事項マスキング区分);
         for (int i = 0; i < 特記事項区分.size(); i++) {
-            RString path = copySharedFiles(getイメージID(特記事項区分, i), 共有ファイル名);
             RString fileName = get共有ファイル(get特記事項番号(特記事項区分, i), entity.get厚労省IF識別コード());
-            RString fileFullPath = RString.EMPTY;
-            set概況特記事項(ninteiChosaTokkiImageEntity, path, entity, 特記事項マスキング区分);
+//            RString fileFullPath = RString.EMPTY;
             for (int currentNumber = 0; currentNumber <= 最大共有ファイル下二桁; currentNumber++) {
                 RString currentFileName = fileName.concat(new RString(String.format("%02d", currentNumber))).concat(拡張子_PNG);
                 RString currentFilefullPath = getFilePath(path, currentFileName);
                 if (!RString.isNullOrEmpty(currentFilefullPath)) {
-                    fileFullPath = currentFilefullPath;
-                    break;
+                    boolean hasMask = !getFilePath(path, currentFileName.replace(拡張子_PNG.toString(), "_BAK.png")).isEmpty();
+                    if (マスキングあり.equals(特記事項マスキング区分) && hasMask) {
+                        特記事項リスト4.add(currentFilefullPath);
+                    } else if (マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
+                        特記事項リスト4.add(RString.EMPTY);
+                    } else if (!マスキングあり.equals(特記事項マスキング区分) && hasMask) {
+                        特記事項リスト4.add(currentFilefullPath.replace(拡張子_PNG.toString(), "_BAK.png"));
+                    } else if (!マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
+                        特記事項リスト4.add(currentFilefullPath);
+                    }
                 }
             }
-            if (!RString.isNullOrEmpty(fileFullPath)) {
-                if (!マスキングあり.equals(特記事項マスキング区分)) {
-                    特記事項リスト4.add(fileFullPath);
-                } else {
-                    特記事項リスト4.add(fileFullPath.replace(拡張子_PNG.toString(), "_BAK.png"));
-                }
-            }
+//            if (!RString.isNullOrEmpty(fileFullPath)) {
+//                if (!マスキングあり.equals(特記事項マスキング区分)) {
+//                    特記事項リスト4.add(fileFullPath);
+//                } else {
+//                    特記事項リスト4.add(fileFullPath.replace(拡張子_PNG.toString(), "_BAK.png"));
+//                }
+//            }
         }
         ninteiChosaTokkiImageEntity.set特記事項リストイメージ(特記事項リスト4);
     }
@@ -327,16 +335,37 @@ public final class NinteiChosaTokkiImageEntityEditor {
     }
 
     private static void set概況特記事項(NinteiChosaTokkiImageEntity ninteiChosaTokkiImageEntity,
-            RString path, YokaigoNinteiJohoTeikyoEntity entity, RString 特記事項マスキング区分) {
-        RString fileName = マスキングあり.equals(特記事項マスキング区分) ? C0007_FILENAME_BAK : C0007_FILENAME;
-        RString 概況特記イメージPath = getFilePath(path, fileName);
-        if (RString.isNullOrEmpty(概況特記イメージPath)) {
+            RString path, RString 特記事項マスキング区分) {
+        Boolean hasImage = !getFilePath(path, C0007_FILENAME).isEmpty();
+        Boolean hasImageMask = !getFilePath(path, C0007_FILENAME_BAK).isEmpty();
+        ninteiChosaTokkiImageEntity.set概況特記事項テキスト(RString.EMPTY);
+        if (!hasImage) {
             ninteiChosaTokkiImageEntity.set概況特記事項イメージ(RString.EMPTY);
-            ninteiChosaTokkiImageEntity.set概況特記事項テキスト(entity.get概況調査特記事項());
-        } else {
-            ninteiChosaTokkiImageEntity.set概況特記事項イメージ(概況特記イメージPath);
-            ninteiChosaTokkiImageEntity.set概況特記事項テキスト(RString.EMPTY);
+            return;
         }
+        if (マスキングあり.equals(特記事項マスキング区分)) {
+            if (hasImageMask) {
+                ninteiChosaTokkiImageEntity.set概況特記事項イメージ(getFilePath(path, C0007_FILENAME));
+            } else {
+                ninteiChosaTokkiImageEntity.set概況特記事項イメージ(RString.EMPTY);
+            }
+        } else {
+            if (hasImageMask) {
+                ninteiChosaTokkiImageEntity.set概況特記事項イメージ(getFilePath(path, C0007_FILENAME_BAK));
+            } else {
+                ninteiChosaTokkiImageEntity.set概況特記事項イメージ(getFilePath(path, C0007_FILENAME));
+            }
+        }
+//
+//        RString fileName = マスキングあり.equals(特記事項マスキング区分) ? C0007_FILENAME_BAK : C0007_FILENAME;
+//        RString 概況特記イメージPath = getFilePath(path, fileName);
+//        if (RString.isNullOrEmpty(概況特記イメージPath)) {
+//            ninteiChosaTokkiImageEntity.set概況特記事項イメージ(RString.EMPTY);
+//            ninteiChosaTokkiImageEntity.set概況特記事項テキスト(entity.get概況調査特記事項());
+//        } else {
+//            ninteiChosaTokkiImageEntity.set概況特記事項イメージ(概況特記イメージPath);
+//            ninteiChosaTokkiImageEntity.set概況特記事項テキスト(RString.EMPTY);
+//        }
     }
 
     private static RDateTime getイメージID(List<NinteichosaRelate> 特記事項, int 連番) {

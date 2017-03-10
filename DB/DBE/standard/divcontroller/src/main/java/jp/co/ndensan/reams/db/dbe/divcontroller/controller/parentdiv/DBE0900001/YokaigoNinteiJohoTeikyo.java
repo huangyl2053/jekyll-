@@ -257,8 +257,11 @@ public class YokaigoNinteiJohoTeikyo {
         List<NinteichosahyoChosaItem> 前回認定調査票調査項目List = new ArrayList<>();
         List<ShujiiIkenshoIkenItem> 主治医意見書意見項目List = new ArrayList<>();
         List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目List = new ArrayList<>();
+        RString 特記事項符号印刷有無 = RString.EMPTY;
         RString 正常選択肢印刷有無 = RString.EMPTY;
+        RString 前回との結果比較印刷有無 = RString.EMPTY;
         RString 認定調査前回結果印刷有無 = RString.EMPTY;
+        RString 前回正常選択肢印刷有無 = RString.EMPTY;
         if (div.getChkNinteiChosahyo().isAllSelected()) {
             認定調査票記入項目List = finder.get認定調査票記入項目List(申請書管理番号);
             総合事業開始区分 = DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
@@ -277,10 +280,16 @@ public class YokaigoNinteiJohoTeikyo {
             前回認定調査票調査項目List = finder.get前回認定調査票調査項目List(申請書管理番号);
             主治医意見書意見項目List = finder.get主治医意見書意見項目List(申請書管理番号);
             前回主治医意見書意見項目List = finder.get前回主治医意見書意見項目List(申請書管理番号);
+            特記事項符号印刷有無
+                    = DbBusinessConfig.get(ConfigNameDBE.特記事項符号印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             正常選択肢印刷有無
                     = DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            前回との結果比較印刷有無
+                    = DbBusinessConfig.get(ConfigNameDBE.前回との結果比較印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             認定調査前回結果印刷有無
                     = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            前回正常選択肢印刷有無
+                    = DbBusinessConfig.get(ConfigNameDBE.今回前回比較で変化有で前回正常選択肢表示印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         }
         new YokaigoNinteiJohoTeikyoPrintService(reportManager).print(
                 div.getChkNinteiChosahyo().isAllSelected(),
@@ -306,8 +315,11 @@ public class YokaigoNinteiJohoTeikyo {
                 前回認定調査票調査項目List,
                 主治医意見書意見項目List,
                 前回主治医意見書意見項目List,
+                特記事項符号印刷有無,
                 正常選択肢印刷有無,
-                認定調査前回結果印刷有無);
+                前回との結果比較印刷有無,
+                認定調査前回結果印刷有無,
+                前回正常選択肢印刷有無);
     }
 
     private void print帳票ごと(YokaigoNinteiJohoTeikyoDiv div,

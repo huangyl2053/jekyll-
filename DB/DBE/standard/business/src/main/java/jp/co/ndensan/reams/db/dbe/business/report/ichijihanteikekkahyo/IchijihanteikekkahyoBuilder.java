@@ -122,7 +122,7 @@ class IchijihanteikekkahyoBuilder implements IIchijihanteikekkahyoBuilder {
             while (-1 < 警告コード.indexOf("1", len)) {
                 int index1 = 警告コード.indexOf("1", len);
                 rstringBuilder.append(index1 + 1 < TEN ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
-                rstringBuilder.append("、");
+                rstringBuilder.append(",");
                 len = index1 + 1;
             }
             if (!RString.isNullOrEmpty(rstringBuilder.toRString())) {
@@ -317,7 +317,7 @@ class IchijihanteikekkahyoBuilder implements IIchijihanteikekkahyoBuilder {
     private RString dateformat(RString date) {
         if (!RString.isNullOrEmpty(date)) {
             return new FlexibleDate(date).wareki().eraType(EraType.KANJI_RYAKU)
-                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         } else {
             return RString.EMPTY;
         }

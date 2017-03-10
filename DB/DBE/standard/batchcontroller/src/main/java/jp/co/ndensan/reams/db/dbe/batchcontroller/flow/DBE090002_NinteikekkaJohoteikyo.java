@@ -50,12 +50,19 @@ public class DBE090002_NinteikekkaJohoteikyo extends BatchFlowBase<DBE090002_Nin
         RString 総合事業開始区分 = DbBusinessConfig.get(ConfigNameDBE.総合事業開始区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 情報提供資料の特記事項編集パターン
                 = DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 特記事項符号印刷有無
+                = DbBusinessConfig.get(ConfigNameDBE.特記事項符号印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 正常選択肢印刷有無
                 = DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 前回との結果比較印刷有無
+                = DbBusinessConfig.get(ConfigNameDBE.前回との結果比較印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 認定調査前回結果印刷有無
                 = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 前回正常選択肢印刷有無
+                = DbBusinessConfig.get(ConfigNameDBE.今回前回比較で変化有で前回正常選択肢表示印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         processParameter = getParameter().toYokaigoBatchProcessParamter(特記事項判定日, 総合事業開始区分,
-                情報提供資料の特記事項編集パターン, 正常選択肢印刷有無, 認定調査前回結果印刷有無);
+                情報提供資料の特記事項編集パターン, 特記事項符号印刷有無, 正常選択肢印刷有無,
+                前回との結果比較印刷有無, 認定調査前回結果印刷有無, 前回正常選択肢印刷有無);
     }
 
     @Override

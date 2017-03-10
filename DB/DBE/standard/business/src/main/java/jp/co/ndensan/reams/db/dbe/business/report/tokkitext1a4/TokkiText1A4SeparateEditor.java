@@ -127,30 +127,34 @@ public final class TokkiText1A4SeparateEditor {
     private static RString get特記事項番号(List<NinteichosaRelate> 特記事項区分, int 連番, TokkiText1A4Entity ninteiEntity) {
         RString 特記事項番号 = RString.EMPTY;
         if (連番 < 特記事項区分.size()) {
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                NinteichosaKomoku09B 認定調査項目 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
-                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku09B.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                NinteichosaKomoku09A 認定調査項目 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
-                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku09A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                NinteichosaKomoku06A 認定調査項目 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
-                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku06A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                NinteichosaKomoku02A 認定調査項目 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
-                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku02A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                NinteichosaKomoku99A 認定調査項目 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
-                特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku99A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+            try {
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    NinteichosaKomoku09B 認定調査項目 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                    特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku09B.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    NinteichosaKomoku09A 認定調査項目 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                    特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku09A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    NinteichosaKomoku06A 認定調査項目 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                    特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku06A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    NinteichosaKomoku02A 認定調査項目 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                    特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku02A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    NinteichosaKomoku99A 認定調査項目 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号());
+                    特記事項番号 = (!認定調査項目.equals(NinteichosaKomoku99A.その他特記事項)) ? 認定調査項目.get特記事項番号() : RString.EMPTY;
+                }
+            } catch (IllegalArgumentException ex) {
+                特記事項番号 = RString.EMPTY;
             }
         }
         return 特記事項番号;
@@ -159,25 +163,29 @@ public final class TokkiText1A4SeparateEditor {
     private static RString get特記事項名称(List<NinteichosaRelate> 特記事項区分, int 連番, TokkiText1A4Entity ninteiEntity) {
         RString 名称 = RString.EMPTY;
         if (連番 < 特記事項区分.size()) {
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
-            }
-            if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
-                    && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
-                名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
+            try {
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    名称 = NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    名称 = NinteichosaKomoku09A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    名称 = NinteichosaKomoku06A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    名称 = NinteichosaKomoku02A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
+                }
+                if (!RString.isNullOrEmpty(特記事項区分.get(連番).get特記事項番号())
+                        && KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
+                    名称 = NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項区分.get(連番).get特記事項番号()).get帳票印字用名称();
+                }
+            } catch (IllegalArgumentException ex) {
+                名称 = RString.EMPTY;
             }
         }
         return 名称;
