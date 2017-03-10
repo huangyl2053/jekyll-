@@ -618,7 +618,7 @@
         ) 
         AND H."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun} 
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" I 
-        ON H."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode" 
+        ON H."chosaItakusakiCode" = I."ninteichosaItakusakiCode" 
         AND I."shichosonCode" = A."shichosonCode" 
         AND I."jokyoFlag" = TRUE 
         LEFT JOIN rgdb."DbT5913ChosainJoho" J 
