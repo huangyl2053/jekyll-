@@ -1,10 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.service.core.shinsakaikekkatoroku;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.OcrImageClassification;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidate;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidateEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -20,10 +16,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5116IchijiHanteiKekkaJ
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5301ShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -77,8 +69,6 @@ class ShinsakaiKekkaTorokuManager implements IShinsakakKekksaTorokuManager {
     @Override
     public void delete削除候補(ShinsakaiKekkaTorokuDeletionCandidate o) {
         ShinsakaiKekkaTorokuDeletionCandidateEntity e = o.toEntity();
-        save調査依頼情報(e.getChosaIraiEntity());
-        save意見書依頼情報(e.getIkenshoIraiEntity());
         save一次判定結果情報(e.getIchijiHanteiEntity());
     }
 
