@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
@@ -45,15 +48,18 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
      *
      * @param value 値
      */
-    public ShoKisaiHokenshaNo(RString value) {
+    @JsonCreator
+    public ShoKisaiHokenshaNo(@JsonProperty("theValue")RString value) {
         this.theValue = value;
     }
 
+    @JsonProperty("theValue")
     @Override
     public RString value() {
         return this.theValue;
     }
 
+    @JsonIgnore
     @Override
     public RString getColumnValue() {
         return this.theValue;
@@ -69,6 +75,7 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
      *
      * @return 保持する値が{@link #EMPTY EMPTY}と等しい時、{@code true}
      */
+    @JsonIgnore
     public boolean isEmpty() {
         return Objects.equals(EMPTY.theValue, this.theValue);
     }
@@ -91,4 +98,4 @@ public final class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparab
         hash = 83 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
-}
+} 

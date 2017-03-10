@@ -216,7 +216,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private List<RString> contribute() {
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(条件(new RString("【保険者】"), parameter.get証記載保険者番号().
+        出力条件.add(条件(new RString("【保険者】"), parameter.get証記載保険者番号().getColumnValue().
                 concat(new RString(" ")).concat(parameter.get市町村名())));
         出力条件.add(条件(new RString("【データ出力区分】"), getデータ出力区分For出力条件(parameter.is未出力のみ())));
         if (FlexibleDate.canConvert(parameter.get二次判定開始日())) {

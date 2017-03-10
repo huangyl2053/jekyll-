@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -28,9 +30,9 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
     private final RString 二次判定終了日;
     private final boolean is二次判定開始日Empty;
     private final boolean is二次判定終了日Empty;
-    private final RString 市町村コード;
+    private final LasdecCode 市町村コード;
     private final RString 市町村名;
-    private final RString 証記載保険者番号;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
 
     /**
      * コンストラクタです。
@@ -42,9 +44,9 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
      * @param 二次判定終了日 二次判定終了日
      * @param is二次判定開始日Empty boolean
      * @param is二次判定終了日Empty boolean
-     * @param 市町村コード RString
+     * @param 市町村コード LasdecCode
      * @param 市町村名 RString
-     * @param 証記載保険者番号 RString
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      */
     public CenterTransmissionProcessParameter(
             List<RString> 申請書管理番号リスト,
@@ -54,9 +56,9 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
             RString 二次判定終了日,
             boolean is二次判定開始日Empty,
             boolean is二次判定終了日Empty,
-            RString 市町村コード,
+            LasdecCode 市町村コード,
             RString 市町村名,
-            RString 証記載保険者番号) {
+            ShoKisaiHokenshaNo 証記載保険者番号) {
         this.申請書管理番号リスト = 申請書管理番号リスト;
         this.is未出力のみ = is未出力のみ;
         this.is転入死亡情報出力 = is転入死亡情報出力;
@@ -85,7 +87,7 @@ public class CenterTransmissionProcessParameter implements IBatchProcessParamete
         paramter.setNijiHanteiShuryoYMD(二次判定終了日);
         paramter.setNijiHanteiKaishiYMDEmpty(is二次判定開始日Empty);
         paramter.setNijiHanteiShuryoYMDEmpty(is二次判定終了日Empty);
-        paramter.setShichosonCode(市町村コード);
+        paramter.set市町村コード(市町村コード);
         paramter.setShichosonMei(市町村名);
         paramter.setShoKisaiHokenshaNo(証記載保険者番号);
         return paramter;
