@@ -378,7 +378,7 @@
             AND <foreach collection="ninteiChosaIraiList" item="item" open="(" separator="OR" close=")">
                 ("DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode}
                 AND "DbT5201NinteichosaIraiJoho"."ninteiChosainCode" = #{item.ninteiChosainCode}
-                AND "DbT5201NinteichosaIraiJoho"."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
+                AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
             </foreach>
         </where>
     </sql>
