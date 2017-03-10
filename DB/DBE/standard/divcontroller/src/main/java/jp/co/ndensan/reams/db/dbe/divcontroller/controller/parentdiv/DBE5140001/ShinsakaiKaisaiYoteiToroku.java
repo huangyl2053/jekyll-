@@ -170,7 +170,8 @@ public class ShinsakaiKaisaiYoteiToroku {
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onLoad(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
-        init();
+        init(RString.EMPTY);
+        ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         return ResponseData.of(div).respond();
     }
 
@@ -191,7 +192,8 @@ public class ShinsakaiKaisaiYoteiToroku {
                 setMonthBefore();
             } else if (is変更(div.getDgKaisaiYoteiNyuryokuran().getDataSource())) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
-            } else if (!is保存()) {
+            } else if (!is保存()
+                    && !ViewStateHolder.get(ViewStateKeys.保存フラグ, boolean.class)) {
                 return ResponseData.of(div).addMessage(操作可否).respond();
             } else {
                 setMonthBefore();
@@ -224,7 +226,8 @@ public class ShinsakaiKaisaiYoteiToroku {
                 setMonthAfter();
             } else if (is変更(div.getDgKaisaiYoteiNyuryokuran().getDataSource())) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
-            } else if (!is保存()) {
+            } else if (!is保存()
+                    && !ViewStateHolder.get(ViewStateKeys.保存フラグ, boolean.class)) {
                 return ResponseData.of(div).addMessage(操作可否).respond();
             } else {
                 setMonthAfter();
@@ -279,7 +282,8 @@ public class ShinsakaiKaisaiYoteiToroku {
                 setYearMonth();
             } else if (is変更(div.getDgKaisaiYoteiNyuryokuran().getDataSource())) {
                 return ResponseData.of(div).addMessage(HAKIMESSAGE).respond();
-            } else if (!is保存()) {
+            } else if (!is保存()
+                    && !ViewStateHolder.get(ViewStateKeys.保存フラグ, boolean.class)) {
                 return ResponseData.of(div).addMessage(操作可否).respond();
             } else {
                 setYearMonth();
@@ -501,7 +505,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-            init();
+            RString 年月日 = div.getTxtSeteibi().getText();
+            init(年月日);
         }
         return ResponseData.of(div).respond();
     }
@@ -529,7 +534,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-            init();
+            RString 年月日 = div.getTxtSeteibi().getText();
+            init(年月日);
         }
         return ResponseData.of(div).respond();
     }
@@ -557,7 +563,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-            init();
+            RString 年月日 = div.getTxtSeteibi().getText();
+            init(年月日);
         }
         return ResponseData.of(div).respond();
     }
@@ -585,7 +592,8 @@ public class ShinsakaiKaisaiYoteiToroku {
             delete開催予定(div, 開催合議体);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-            init();
+            RString 年月日 = div.getTxtSeteibi().getText();
+            init(年月日);
         }
         return ResponseData.of(div).respond();
 
@@ -899,8 +907,10 @@ public class ShinsakaiKaisaiYoteiToroku {
                 }
             }
 
-            init();
-
+            ViewStateHolder.put(ViewStateKeys.保存フラグ, true);
+            div.getLblMonth2()
+                    .setText(年月);
+            set介護認定審査会開催予定一覧(new RString(div.getTxtSeteibi().getValue().getYearMonth().toString()));
             div.getDgShinsakaiKaisaiYoteiIchiran()
                     .setDisabled(true);
             div.getTxtCopyFrom()
@@ -920,8 +930,6 @@ public class ShinsakaiKaisaiYoteiToroku {
             div.getShinsakaiKaisaiYoteiIchiran()
                     .setWidth(width_1225);
 
-            div.getLblMonth2()
-                    .setText(年月);
             div.getCcdKanryoMessege()
                     .setMessage(new RString(
                                     UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -1200,8 +1208,12 @@ public class ShinsakaiKaisaiYoteiToroku {
         return validationHandler.割付可能チェック(validPairs);
     }
 
-    private void init() {
-        date = RDate.getNowDate();
+    private void init(RString 年月日) {
+        if (RString.isNullOrEmpty(年月日)) {
+            date = RDate.getNowDate();
+        } else {
+            date = new RDate(年月日.toString());
+        }
         RString 年月 = date.getYearMonth().toDateString();
         div.getLblMonth().setText(setLblMonth(date.getYearMonth()));
         div.getLblMonth2().setText(setLblMonthWareki(date.getYearMonth()));
@@ -1366,7 +1378,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set変更(entity);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-            init();
+            init(RString.EMPTY);
         } else if (entity.get介護認定審査会進捗状況()
                 .equals(中止)) {
             ShinsakaiKaisaiYoteiJohoIdentifier key = new ShinsakaiKaisaiYoteiJohoIdentifier(entity.get開催番号());
@@ -1379,7 +1391,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             set変更(entity);
             List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
             div.getDgShinsakaiKaisaiYoteiIchiran().setDataSource(dgShinsakaRowList);
-            init();
+            init(RString.EMPTY);
         }
 
     }
