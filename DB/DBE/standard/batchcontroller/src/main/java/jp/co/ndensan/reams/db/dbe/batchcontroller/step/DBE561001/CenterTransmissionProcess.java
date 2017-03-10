@@ -256,9 +256,9 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private void printReport(CenterTransmissionEntity currentEntity) {
         centerSoshinTaishoshaIchiranEntity = new CenterSoshinTaishoshaIchiranEntity();
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_1(currentEntity.getShoKisaiHokenshaNo());
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_2(currentEntity.getShichosonMeisho());
-        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_3(currentEntity.getHihokenshaNo());
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_1(nullToEmpty(currentEntity.getShoKisaiHokenshaNo()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_2(nullToEmpty(currentEntity.getShichosonMeisho()));
+        centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_3(nullToEmpty(currentEntity.getHihokenshaNo()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_4(get被保険者氏名(currentEntity.getHihokenshaName()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_5(get認定申請日_共通ポリシーパターン1(currentEntity.getNinteiShinseiYMD()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_6(get認定申請区分_申請時_コード(currentEntity.getNinteiShinseiShinseijiKubunCode()));
@@ -306,7 +306,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     }
 
     private RString get認定申請区分_申請時_コード(Code 申請時code) {
-        return NinteiShinseiShinseijiKubunCode.toValue(申請時code.value()).get名称();
+        return 申請時code == null ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(申請時code.value()).get名称();
     }
 
     private RString get二次判定結果(RString 厚労省IF識別コード, RString 二次判定要介護状態区分コード) {
@@ -345,5 +345,12 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     private RString get認定有効期間(int 二次判定認定有効期間) {
         return new RString(二次判定認定有効期間).concat(DATE_ヶ月);
+    }
+
+    private static RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
     }
 }
