@@ -11,48 +11,71 @@
         "DbT5913ChosainJoho"."chosainShimei" AS "chosainShimei",
         "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
         FROM
-        rgdb."DbT5201NinteichosaIraiJoho",
-        rgdb."DbT7051KoseiShichosonMaster",
-        rgdb."DbT5910NinteichosaItakusakiJoho",
-        rgdb."DbT5913ChosainJoho",
-        rgdb."DbT5105NinteiKanryoJoho",
+        (
+        SELECT
+        *
+        FROm
         rgdb."DbT5101NinteiShinseiJoho"
+        WHERE
+        "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false
+        AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})
+        AND 
+        ("DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{転入}
+        AND "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{喪失})
+        )AS "DbT5101NinteiShinseiJoho"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster"
+        ON "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
+        <if test="is保険者">
+            AND "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = #{保険者}
+        </if>
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho"
+        ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+        AND	(
+        "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+        AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> ''
+        )
+        AND	(
+        "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
+        OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" = ''
+        )
+        AND	(
+        "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
+        OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" = ''
+        )
+        AND	(
+        "DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
+        OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = ''
+        )
+        INNER JOIN
+        rgdb."DbT5201NinteichosaIraiJoho"
+        ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" =	(
+        SELECT
+        MAX("ninteichosaIraiRirekiNo")
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+        )
+        AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false
+        <if test="is依頼日From">
+            AND #{依頼日From} <![CDATA[<=]]> "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"
+        </if>
+        <if test="is依頼日To">
+            AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD" <![CDATA[<=]]> #{依頼日To}
+        </if>
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho"
+        ON "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+        AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho"
+        ON "DbT5913ChosainJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
+        AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"
+        AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"
         <where>
-            AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
-            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"
-            AND "DbT5913ChosainJoho"."shichosonCode" = "DbT5101NinteiShinseiJoho"."shichosonCode"
-            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"
-            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"
-            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" =
-            (SELECT
-            MAX("ninteichosaIraiRirekiNo")
-            FROM
-            rgdb."DbT5201NinteichosaIraiJoho"
-            WHERE
-            "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            )
-            AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false
-            AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"
-            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})
-            AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false
-            AND ("DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
-            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
-            OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" = '')
-            AND ("DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
-            OR "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" = '')
-            AND ("DbT5105NinteiKanryoJoho"."centerSoshinYMD" IS NULL
-            OR "DbT5105NinteiKanryoJoho"."centerSoshinYMD" = '')
-            AND ("DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{転入}
-            AND "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" <![CDATA[<>]]> #{喪失})
-            <if test="is依頼日From">
-                AND #{依頼日From} <![CDATA[<=]]> "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"
-            </if>
-            <if test="is依頼日To">
-                AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD" <![CDATA[<=]]> #{依頼日To}
-            </if>
             <if test="!is認定調査依頼書未印刷_印刷済">
                 <if test="is認定調査依頼書未印刷">
                     AND ("DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL
@@ -62,10 +85,6 @@
                     AND ("DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
                     AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
                 </if>
-            </if>
-            <if test="is保険者">
-                AND "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = #{保険者}
-                <!--AND "DbT5101NinteiShinseiJoho"."shishoCode" = #{}-->
             </if>
             <if test="!is認定調査票未印刷_印刷済">
                 <if test="is認定調査票未印刷">
@@ -82,11 +101,11 @@
 
     <select resultOrdered="true" id="getNinteiChousaIrai" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.iraisho.IraishoIkkatsuHakkoParameter" resultMap="resultMap_IraishoIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
-        MAX(sabuKueri."ninteichosaItakusakiCode") AS "ninteichosaItakusakiCode",
-        MAX(sabuKueri."jigyoshaMeisho") AS "jigyoshaMeisho",
-        MAX(sabuKueri."ninteiChosainCode") AS "ninteiChosainCode",
-        MAX(sabuKueri."chosainShimei") AS "chosainShimei",
-        MAX(sabuKueri."shoKisaiHokenshaNo") AS "shoKisaiHokenshaNo",
+        sabuKueri."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",
+        sabuKueri."jigyoshaMeisho" AS "jigyoshaMeisho",
+        sabuKueri."ninteiChosainCode" AS "ninteiChosainCode",
+        sabuKueri."chosainShimei" AS "chosainShimei",
+        sabuKueri."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
         COUNT(0) AS "shinseishaCount"
         FROM
         (<include refid="selectNinteiChousaIrai" />) AS sabuKueri
@@ -94,7 +113,8 @@
         sabuKueri."ninteichosaItakusakiCode",
         sabuKueri."jigyoshaMeisho",
         sabuKueri."ninteiChosainCode",
-        sabuKueri."chosainShimei"
+        sabuKueri."chosainShimei",
+        sabuKueri."shoKisaiHokenshaNo"
         ORDER BY
         sabuKueri."ninteichosaItakusakiCode",
         sabuKueri."ninteiChosainCode"
