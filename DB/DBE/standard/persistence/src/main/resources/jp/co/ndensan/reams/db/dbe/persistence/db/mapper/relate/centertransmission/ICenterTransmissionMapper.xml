@@ -764,7 +764,7 @@
         WHERE
         A."koroshoIfShikibetsuCode" NOT IN ('02A', '06A', '09A', '99A')
         <if test="市町村コード.toString() != ''.toString()">
-            AND DbT7051KoseiShichosonMaster"shichosonCode" = #{市町村コード}
+            AND DbT7051KoseiShichosonMaster."shichosonCode" = #{市町村コード}
         </if>
         ORDER BY
         A."ninteiShinseiYMD"
