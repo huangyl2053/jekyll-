@@ -592,9 +592,12 @@ public class NinteiShinseirenkeiDataInsert {
                     && !entity.getDbT5101Entity().getTorisageKubunCode().equals(new Code(TorisageKubunCode.認定申請有効.getコード()))) {
                 return errorBuilder;
             }
+            if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
+                return errorBuilder;
+            }
             if (entity.getDbt5101TempEntity().get認定申請日() != null 
                     && !entity.getDbt5101TempEntity().get認定申請日().isEmpty() 
-                    && new FlexibleDate(entity.getDbt5101TempEntity().get認定申請日().toString()).isAfter(entity.getDbT5101Entity().getNinteiShinseiYMD())) {
+                    && new FlexibleDate(entity.getDbt5101TempEntity().get認定申請日().toString()).isBeforeOrEquals(entity.getDbT5101Entity().getNinteiShinseiYMD())) {
                 errorBuilder.append(new RString("取込データの認定申請日より新しい認定申請日の申請情報が存在します;"));
             }
             if (entity.getDbT5102Entity() == null
