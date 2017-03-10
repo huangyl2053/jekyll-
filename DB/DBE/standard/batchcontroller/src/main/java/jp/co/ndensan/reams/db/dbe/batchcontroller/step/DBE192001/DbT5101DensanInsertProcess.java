@@ -32,8 +32,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEntity> {
 
-    private static final RString 更新対象情報_電算東芝版 = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_電算東芝版");
+    private static final RString 更新対象情報_電算版 = new RString(
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_電算版");
+    private static final RString 更新対象情報_東芝版 = new RString(
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_東芝版");
     private static final RString 更新対象情報_厚労省 = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_厚労省");
     private static final RString 登録 = new RString("3");
@@ -77,8 +79,10 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     protected IBatchReader createReader() {
         if (processParamter.is厚労省フラグ()) {
             return new BatchDbReader(更新対象情報_厚労省);
+        } else if (processParamter.is東芝版フラグ()) {
+            return new BatchDbReader(更新対象情報_東芝版);
         } else {
-            return new BatchDbReader(更新対象情報_電算東芝版);
+            return new BatchDbReader(更新対象情報_電算版);
         }
 
     }
