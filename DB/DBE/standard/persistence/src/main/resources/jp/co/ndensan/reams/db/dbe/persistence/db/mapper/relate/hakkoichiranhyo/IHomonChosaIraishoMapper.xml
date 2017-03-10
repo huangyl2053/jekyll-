@@ -262,39 +262,39 @@
     <sql id="HomonChosaIraisho">
         SELECT
         DISTINCT
-        dbT5101."shinseishoKanriNo"
-        , dbT5101."hihokenshaNo"
-        , dbT5101."hihokenshaKana"
-        , dbT5101."hihokenshaName"
-        , dbT5101."jusho" AS "dbT5101jusho"
-        , dbT5101."seinengappiYMD"
-        , dbT5101."seibetsu"
-        , dbT5101."yubinNo" AS "dbT5101yubinNo"
-        , dbT5101."telNo"
-        , dbT5101."ninteiShinseiYMD"
-        , dbT5101."ninteiShinseiShinseijiKubunCode"
-        , dbT5101."shoKisaiHokenshaNo"
-        , dbT5101."age"
-        , dbT5101."homonChosasakiJusho"
-        , dbT5101."homonChosasakiTelNo"
-        , dbT5101."homonChosasakiName"
-        , dbT5101."homonChosasakiYubinNo"
-        , dbT5101."zenkaiNinteiYMD"
-        , dbT5101."zenYokaigoKubunCode"
-        , dbT5910."daihyoshaName"
-        , dbT5910."jusho" AS "dbT5910jusho"
-        , dbT5910."jigyoshaMeisho"
-        , dbT5910."yubinNo" AS "dbT5910yubinNo"
-        , dbT5910."jigyoshaNo"
-        , dbT5913."chosainShimei"
-        , dbT5201."ninteichosaIraiYMD"
-        , dbT5201."ninteichosaIraiRirekiNo"
-        , dbT5201."ninteichosaKigenYMD"
-        , dbT5201."ninteiChosainCode"
-        , dbT5201."ninteichosaItakusakiCode"
-        , dbT5101."ninteiChosaItakusakiCode" AS "dbT5101ninteiChosaItakusakiCode"
-        , dbT5101."ninteiChosainCode" AS "dbT5101ninteiChosainCode"
-        , dbT5101."koroshoIfShikibetsuCode"
+        "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        , "DbT5101NinteiShinseiJoho"."hihokenshaNo"
+        , "DbT5101NinteiShinseiJoho"."hihokenshaKana"
+        , "DbT5101NinteiShinseiJoho"."hihokenshaName"
+        , "DbT5101NinteiShinseiJoho"."jusho" AS "dbT5101jusho"
+        , "DbT5101NinteiShinseiJoho"."seinengappiYMD"
+        , "DbT5101NinteiShinseiJoho"."seibetsu"
+        , "DbT5101NinteiShinseiJoho"."yubinNo" AS "dbT5101yubinNo"
+        , "DbT5101NinteiShinseiJoho"."telNo"
+        , "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD"
+        , "DbT5101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode"
+        , "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"
+        , "DbT5101NinteiShinseiJoho"."age"
+        , "DbT5101NinteiShinseiJoho"."homonChosasakiJusho"
+        , "DbT5101NinteiShinseiJoho"."homonChosasakiTelNo"
+        , "DbT5101NinteiShinseiJoho"."homonChosasakiName"
+        , "DbT5101NinteiShinseiJoho"."homonChosasakiYubinNo"
+        , "DbT5101NinteiShinseiJoho"."zenkaiNinteiYMD"
+        , "DbT5101NinteiShinseiJoho"."zenYokaigoKubunCode"
+        , "DbT5910NinteichosaItakusakiJoho"."daihyoshaName"
+        , "DbT5910NinteichosaItakusakiJoho"."jusho" AS "dbT5910jusho"
+        , "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho"
+        , "DbT5910NinteichosaItakusakiJoho"."yubinNo" AS "dbT5910yubinNo"
+        , "DbT5910NinteichosaItakusakiJoho"."jigyoshaNo"
+        , "DbT5913ChosainJoho"."chosainShimei"
+        , "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD"
+        , "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo"
+        , "DbT5201NinteichosaIraiJoho"."ninteichosaKigenYMD"
+        , "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"
+        , "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"
+        , "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" AS "dbT5101ninteiChosaItakusakiCode"
+        , "DbT5101NinteiShinseiJoho"."ninteiChosainCode" AS "dbT5101ninteiChosainCode"
+        , "DbT5101NinteiShinseiJoho"."koroshoIfShikibetsuCode"
         <!-- jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper.selectNinteiChousaIrai
         と同じ。//TODO 引数の関係でまとめていない。できたらまとめる START -->
         FROM
@@ -302,7 +302,7 @@
         SELECT
         *
         FROm
-        rgdb."DbT5101NinteiShinseiJoho"
+        rgdb."DbT5101NinteiShinseiJoho" 
         WHERE
         "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false
         AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})
@@ -359,26 +359,26 @@
         <where>
             <if test="!is認定調査依頼書未印刷_印刷済">
                 <if test="is認定調査依頼書未印刷">
-                    AND (dbT5201."iraishoShutsuryokuYMD" IS NULL OR DbT5201."iraishoShutsuryokuYMD" = '')
+                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL OR "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" = '')
                 </if>
                 <if test="is認定調査依頼書印刷済">
-                    AND (dbT5201."iraishoShutsuryokuYMD" IS NOT NULL AND dbT5201."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
+                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
                 </if>
             </if>
             <if test="!is認定調査票未印刷_印刷済">
                 <if test="is認定調査票未印刷">
-                    AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NULL OR DbT5201."chosahyoTouShutsuryokuYMD" = '')
+                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL OR "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" = '')
                 </if>
                 <if test="is認定調査票印刷済">
-                    AND (dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL AND dbT5201."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
+                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
                 </if>
             </if>
             <!-- jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper.selectNinteiChousaIrai
             と同じ。//TODO 引数の関係でまとめていない。できたらまとめる END-->
             AND <foreach collection="ninteiChosaIraiList" item="item" open="(" separator="OR" close=")">
-                (dbT5201."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode}
-                AND dbT5201."ninteiChosainCode" = #{item.ninteiChosainCode}
-                AND dbT5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
+                "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode}
+                AND "DbT5201NinteichosaIraiJoho"."ninteiChosainCode" = #{item.ninteiChosainCode}
+                AND "DbT5201NinteichosaIraiJoho"."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
             </foreach>
         </where>
     </sql>
