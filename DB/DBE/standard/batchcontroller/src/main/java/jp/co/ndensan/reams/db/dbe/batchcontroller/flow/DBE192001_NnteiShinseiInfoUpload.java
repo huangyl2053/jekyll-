@@ -110,8 +110,8 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
                     共有ファイルID), new FilesystemPath(path));
         }
         if (取込み対象ファイルリスト != null && !取込み対象ファイルリスト.isEmpty()) {
-            RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援);
-            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, 基準日, SubGyomuCode.DBE認定支援);
+            RString 認定申請IF種類 = DbBusinessConfig.get(ConfigNameDBE.認定申請IF種類, 基準日, SubGyomuCode.DBE認定支援, getParameter().get市町村コード());
+            RString マスタIF種類 = DbBusinessConfig.get(ConfigNameDBE.四マスタIF種類, 基準日, SubGyomuCode.DBE認定支援, getParameter().get市町村コード());
             RenkeiDataTorikomiProcessParamter processParamter = getParameter().toRenkeiDataTorikomiProcessParamter();
             if (!processParamter.is法改正後フラグ()) {
                 認定申請ファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, getParameter().get市町村コード());
@@ -164,7 +164,7 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
     }
 
     private Encode set文字コード() {
-        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援);
+        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援, getParameter().get市町村コード());
         Encode コード = null;
         if (SJIS.equals(文字コード)) {
             コード = Encode.SJIS;

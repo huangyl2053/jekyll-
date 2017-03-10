@@ -196,7 +196,7 @@ public class NinteiShinseirenkeiDataInsert {
         checkDbT5911同情報(entity, errorBuilder);
         if (entity.getDbt5911TempEntity().get医療機関コード() == null
                 || entity.getDbt5911TempEntity().get医療機関コード() == ShujiiIryokikanCode.EMPTY) {
-            errorBuilder = errorBuilder.append(new RString("医療機関コードが未入力です；"));
+            errorBuilder = errorBuilder.append(new RString("医療機関コードが未入力です;"));
         }
         return errorBuilder.toRString();
     }
@@ -584,17 +584,22 @@ public class NinteiShinseirenkeiDataInsert {
                 return errorBuilder;
             }
             if (entity.getDbT5101Entity().getTorisageKubunCode() != null
-                    && entity.getDbT5101Entity().getTorisageKubunCode().equals(new Code(TorisageKubunCode.取り下げ.getコード()))) {
+                    && !entity.getDbT5101Entity().getTorisageKubunCode().equals(new Code(TorisageKubunCode.認定申請有効.getコード()))) {
                 return errorBuilder;
+            }
+            if (entity.getDbt5101TempEntity().get認定申請日() != null 
+                    && !entity.getDbt5101TempEntity().get認定申請日().isEmpty() 
+                    && new FlexibleDate(entity.getDbt5101TempEntity().get認定申請日().toString()).isAfter(entity.getDbT5101Entity().getNinteiShinseiYMD())) {
+                errorBuilder.append(new RString("取込データの認定申請日より新しい認定申請日の申請情報が存在します;"));
             }
             if (entity.getDbT5102Entity() == null
                     || entity.getDbT5102Entity().getNijiHanteiYMD() == null
                     || entity.getDbT5102Entity().getNijiHanteiYMD().isEmpty()) {
-                errorBuilder.append(new RString("二次判定結果の出ていない申請が存在します；"));
+                errorBuilder.append(new RString("二次判定結果の出ていない申請が存在します;"));
             }
         } else {
             if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
-                errorBuilder.append(new RString("申請データが存在しません；"));
+                errorBuilder.append(new RString("申請データが存在しません;"));
             }
         }
         return errorBuilder;
@@ -602,28 +607,28 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RStringBuilder checkDbT5910同情報(DbT5910RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5910Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています；"));
+            errorBuilder.append(new RString("既に登録されています;"));
         }
         return errorBuilder;
     }
 
     private RStringBuilder checkDbT5911同情報(DbT5911RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5911Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています；"));
+            errorBuilder.append(new RString("既に登録されています;"));
         }
         return errorBuilder;
     }
 
     private RStringBuilder checkDbT5912同情報(DbT5912RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5912Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています；"));
+            errorBuilder.append(new RString("既に登録されています;"));
         }
         return errorBuilder;
     }
 
     private RStringBuilder checkDbT5913同情報(DbT5913RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5913Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています；"));
+            errorBuilder.append(new RString("既に登録されています;"));
         }
         return errorBuilder;
     }

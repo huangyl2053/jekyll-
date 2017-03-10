@@ -24,9 +24,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -48,10 +46,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 
@@ -101,17 +95,19 @@ public class RenkeiDataTorikomiHandler {
      * @param 認定調査員データ取込み_ファイル名 認定調査員データ取込み_ファイル名
      * @param 主治医医療機関データ取込み_ファイル名 主治医医療機関データ取込み_ファイル名
      * @param 主治医データ取込み_ファイル名 主治医データ取込み_ファイル名
+     * @param 市町村コード 市町村コード
      */
     public void onLoad(RString path, RString 要介護認定申請連携データ取込み_ファイル名,
             RString 認定調査委託先データ取込み_ファイル名, RString 認定調査員データ取込み_ファイル名,
-            RString 主治医医療機関データ取込み_ファイル名, RString 主治医データ取込み_ファイル名) {
+            RString 主治医医療機関データ取込み_ファイル名, RString 主治医データ取込み_ファイル名,
+            RString 市町村コード) {
         div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().loadHokenshaList(GyomuBunrui.介護認定);
         要介護認定申請連携データ取込みファイル名 = 要介護認定申請連携データ取込み_ファイル名;
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
         div.getUploadArea().getBtnDataTorikomi().setDisabled(true);
         div.getDgTorikomiTaisho().setReadOnly(true);
         initDgTorikomiTaisho(path, 要介護認定申請連携データ取込み_ファイル名, 認定調査委託先データ取込み_ファイル名, 
-                認定調査員データ取込み_ファイル名, 主治医医療機関データ取込み_ファイル名, 主治医データ取込み_ファイル名);
+                認定調査員データ取込み_ファイル名, 主治医医療機関データ取込み_ファイル名, 主治医データ取込み_ファイル名, 市町村コード);
     }
     
     /**
@@ -123,10 +119,12 @@ public class RenkeiDataTorikomiHandler {
      * @param 認定調査員データ取込み_ファイル名 認定調査員データ取込み_ファイル名
      * @param 主治医医療機関データ取込み_ファイル名 主治医医療機関データ取込み_ファイル名
      * @param 主治医データ取込み_ファイル名 主治医データ取込み_ファイル名
+     * @param 市町村コード 市町村コード
      */
-    public void initDgTorikomiTaisho(RString path, RString 要介護認定申請連携データ取込み_ファイル名,
+    private void initDgTorikomiTaisho(RString path, RString 要介護認定申請連携データ取込み_ファイル名,
             RString 認定調査委託先データ取込み_ファイル名, RString 認定調査員データ取込み_ファイル名,
-            RString 主治医医療機関データ取込み_ファイル名, RString 主治医データ取込み_ファイル名) {
+            RString 主治医医療機関データ取込み_ファイル名, RString 主治医データ取込み_ファイル名,
+            RString 市町村コード) {
         RString 要介護認定申請_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI201ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査委託先_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI101ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
         RString 認定調査員_名称 = DbBusinessConfig.get(ConfigNameDBE.NCI111ファイル名称, 基準日, SubGyomuCode.DBE認定支援);
@@ -135,26 +133,33 @@ public class RenkeiDataTorikomiHandler {
         List<dgTorikomiTaisho_Row> list = new ArrayList<>();
         list.add(setRowFile(path, フォーマット_要介護認定申請,
                 要介護認定申請_名称,
-                要介護認定申請連携データ取込み_ファイル名));
+                要介護認定申請連携データ取込み_ファイル名,
+                市町村コード));
         list.add(setRowFile(path, フォーマット_認定調査委託先,
                 認定調査委託先_名称,
-                認定調査委託先データ取込み_ファイル名));
+                認定調査委託先データ取込み_ファイル名,
+                市町村コード));
         list.add(setRowFile(path, フォーマット_認定調査員,
                 認定調査員_名称,
-                認定調査員データ取込み_ファイル名));
+                認定調査員データ取込み_ファイル名,
+                市町村コード));
         list.add(setRowFile(path, フォーマット_主治医医療機関,
                 主治医医療機関_名称,
-                主治医医療機関データ取込み_ファイル名));
+                主治医医療機関データ取込み_ファイル名,
+                市町村コード));
         list.add(setRowFile(path, フォーマット_主治医,
                 主治医_名称,
-                主治医データ取込み_ファイル名));
+                主治医データ取込み_ファイル名,
+                市町村コード));
         div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().addAll(list);
     }
 
     /**
      * 取込みファイルデータを取得します。
+     * 
+     * @param 市町村コード 市町村コード
      */
-    public void getFileData() {
+    public void getFileData(RString 市町村コード) {
         RString path = Directory.createTmpDirectory();
         List<RString> filedIdList = div.getHiddenFileId().split(",");
         for (RString filedId : filedIdList) {
@@ -166,7 +171,7 @@ public class RenkeiDataTorikomiHandler {
         RString filePath = Path.combinePath(path, 要介護認定申請連携データ取込みファイル名);
         File file = new File(filePath.toString());
         if (file.exists() && !なし.equals(div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource().get(0).getTotal())) {
-            setRowFileData(set文字コード(), path, filePath);
+            setRowFileData(set文字コード(市町村コード), path, filePath);
         }
     }
 
@@ -175,9 +180,10 @@ public class RenkeiDataTorikomiHandler {
      *
      * @param file ファイルデータ
      * @param buider buider
+     * @param 市町村コード 市町村コード
      * @return SharedFileEntryDescriptor
      */
-    public SharedFileEntryDescriptor upLoadFile(FileData file, RStringBuilder buider) {
+    public SharedFileEntryDescriptor upLoadFile(FileData file, RStringBuilder buider, RString 市町村コード) {
         FilesystemPath path = new FilesystemPath(file.getFilePath());
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(共有ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
@@ -189,7 +195,7 @@ public class RenkeiDataTorikomiHandler {
         List<dgTorikomiTaisho_Row> dataSource = div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource();
         for (dgTorikomiTaisho_Row rowData : dataSource) {
             if (rowData.getFileName().equals(file.getFileName())) {
-                getFileCount(path.toRString(), RString.EMPTY, rowData);
+                getFileCount(path.toRString(), RString.EMPTY, rowData, 市町村コード);
                 if (!rowData.getTotal().equals(なし)) {
                     div.getDgTorikomiTaisho().setReadOnly(false);
                     rowData.setSelectable(Boolean.TRUE);
@@ -360,13 +366,13 @@ public class RenkeiDataTorikomiHandler {
         }
     }
 
-    private void getFileCount(RString path, RString ファイル, dgTorikomiTaisho_Row row) {
+    private void getFileCount(RString path, RString ファイル, dgTorikomiTaisho_Row row, RString 市町村コード) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(path).append(File.separator).append(ファイル);
         File file = new File(builder.toString());
         if (file.exists()) {
             List<RString> list = new ArrayList<>();
-            ITextReadable reader = new FileReader(builder.toRString(), set文字コード());
+            ITextReadable reader = new FileReader(builder.toRString(), set文字コード(市町村コード));
             RString stemp;
             while (true) {
                 stemp = reader.readLine();
@@ -386,17 +392,17 @@ public class RenkeiDataTorikomiHandler {
         }
     }
 
-    private dgTorikomiTaisho_Row setRowFile(RString path, RString フォーマット, RString 名称, RString ファイル名) {
+    private dgTorikomiTaisho_Row setRowFile(RString path, RString フォーマット, RString 名称, RString ファイル名, RString 市町村コード) {
         dgTorikomiTaisho_Row row = new dgTorikomiTaisho_Row();
         row.setFileFormat(フォーマット);
         row.setMeisho(名称);
         row.setFileName(ファイル名);
-        getFileCount(path, ファイル名, row);
+        getFileCount(path, ファイル名, row, 市町村コード);
         return row;
     }
 
-    private Encode set文字コード() {
-        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援);
+    private Encode set文字コード(RString 市町村コード) {
+        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
         Encode コード = null;
         if (SJIS.equals(文字コード)) {
             コード = Encode.SJIS;

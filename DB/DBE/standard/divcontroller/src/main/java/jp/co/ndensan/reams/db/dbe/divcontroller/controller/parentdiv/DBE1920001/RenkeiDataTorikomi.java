@@ -54,6 +54,7 @@ public class RenkeiDataTorikomi {
     private static RString path;
     private static boolean 前回認定申請情報ファイルチェックフラグ;
     private static final int なし = 0;
+    private static RString 市町村コード;
 
     /**
      * 初期化の設定します。
@@ -62,19 +63,19 @@ public class RenkeiDataTorikomi {
      * @return ResponseData<RenkeiDataTorikomiDiv>
      */
     public ResponseData<RenkeiDataTorikomiDiv> onLoad(RenkeiDataTorikomiDiv div) {
-        try {
-            path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        } catch (SystemException e) {
-            throw new ApplicationException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(ConfigNameDBE.認定申請連携データ出力先.name()));
-        }
         RDate 基準日 = RDate.getNowDate();
-        RString 市町村コード = RString.EMPTY;
+        市町村コード = RString.EMPTY;
         ShichosonSecurityJohoFinder finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
         ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         if (市町村セキュリティ情報 != null) {
             if (!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new ShichosonShikibetsuID("00"))) {
                 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
             }
+        }
+        try {
+            path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
+        } catch (SystemException e) {
+            throw new ApplicationException(DbxErrorMessages.業務コンフィグなし.getMessage().replace(ConfigNameDBE.認定申請連携データ出力先.name()));
         }
         if (RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate())) {
             div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setSelectedKey(法改正前);
@@ -99,7 +100,8 @@ public class RenkeiDataTorikomi {
                 認定調査委託先データ取込みファイル名,
                 認定調査員データ取込みファイル名,
                 主治医医療機関データ取込みファイル名,
-                主治医データ取込みファイル名);
+                主治医データ取込みファイル名,
+                市町村コード);
         for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource()) {
             row.setSelectable(Boolean.FALSE);
         }
@@ -135,7 +137,7 @@ public class RenkeiDataTorikomi {
         RStringBuilder buider = new RStringBuilder();
         if (RString.isNullOrEmpty(error) && RString.isNullOrEmpty(不正ファイル名)) {
             for (FileData file : files) {
-                getHandler(div).upLoadFile(file, buider);
+                getHandler(div).upLoadFile(file, buider, 市町村コード);
             }
         }
         boolean flag = false;
@@ -168,7 +170,7 @@ public class RenkeiDataTorikomi {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<RenkeiDataTorikomiDiv> onClick_SetItiran(RenkeiDataTorikomiDiv div) {
-        getHandler(div).getFileData();
+        getHandler(div).getFileData(市町村コード);
         return ResponseData.of(div).setState(DBE1920001StateName.一覧表示);
     }
 
@@ -265,7 +267,7 @@ public class RenkeiDataTorikomi {
      */
     public ResponseData<RenkeiDataTorikomiDiv> onChange_radHokaisei(RenkeiDataTorikomiDiv div) {
         RDate 基準日 = RDate.getNowDate();
-        RString 市町村コード = RString.EMPTY;
+        市町村コード = RString.EMPTY;
         ShichosonSecurityJohoFinder finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
         ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         if (市町村セキュリティ情報 != null) {
