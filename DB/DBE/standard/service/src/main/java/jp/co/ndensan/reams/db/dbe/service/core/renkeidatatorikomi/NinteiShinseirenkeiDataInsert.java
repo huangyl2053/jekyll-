@@ -431,6 +431,9 @@ public class NinteiShinseirenkeiDataInsert {
                 entity.getDbt5101TempEntity().get前回の認定有効終了期間(),
                 entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
         check市町村コード(entity, errorBuilder);
+        check認定調査委託先コード(entity, errorBuilder);
+        check主治医医療機関コード(entity, errorBuilder);
+        check主治医コード(entity, errorBuilder);
         return errorBuilder.toRString();
     }
 
@@ -454,6 +457,8 @@ public class NinteiShinseirenkeiDataInsert {
                 entity.getDbt5101TempEntity().get前回の認定有効終了期間(),
                 entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
         check市町村コード(entity, errorBuilder);
+        check主治医医療機関コード(entity, errorBuilder);
+        check主治医コード(entity, errorBuilder);
         return errorBuilder.toRString();
     }
 
@@ -629,6 +634,30 @@ public class NinteiShinseirenkeiDataInsert {
     private RStringBuilder checkDbT5913同情報(DbT5913RelateEntity entity, RStringBuilder errorBuilder) {
         if (entity.getDbT5913Entity() != null) {
             errorBuilder.append(new RString("既に登録されています;"));
+        }
+        return errorBuilder;
+    }
+
+    private RStringBuilder check認定調査委託先コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
+        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get調査委託先コード()) 
+                && entity.getDbT5910Entity() == null) {
+            errorBuilder.append(new RString("調査委託先コードが不正です;"));
+        }
+        return errorBuilder;
+    }
+
+    private RStringBuilder check主治医医療機関コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
+        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get主治医医療機関コード()) 
+                && entity.getDbT5911Entity() == null) {
+            errorBuilder.append(new RString("主治医医療機関コードが不正です;"));
+        }
+        return errorBuilder;
+    }
+
+    private RStringBuilder check主治医コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
+        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get主治医番号()) 
+                && entity.getDbT5912Entity() == null) {
+            errorBuilder.append(new RString("主治医コードが不正です;"));
         }
         return errorBuilder;
     }

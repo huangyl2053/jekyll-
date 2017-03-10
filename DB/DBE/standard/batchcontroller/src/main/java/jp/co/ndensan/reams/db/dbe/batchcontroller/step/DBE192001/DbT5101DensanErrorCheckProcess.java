@@ -25,8 +25,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101RelateEntity> {
 
-    private static final RString 申請一時電算_東芝情報 = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_電算東芝版");
+    private static final RString 申請一時電算情報 = new RString(
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_電算版");
+    private static final RString 申請一時東芝情報 = new RString(
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_東芝版");
     private static final RString 申請一時厚労省情報 = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_厚労省");
     private RenkeiDataTorikomiProcessParamter processParamter;
@@ -47,8 +49,10 @@ public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101Rela
     protected IBatchReader createReader() {
         if (processParamter.is厚労省フラグ()) {
             return new BatchDbReader(申請一時厚労省情報);
+        } else if (processParamter.is東芝版フラグ()) {
+            return new BatchDbReader(申請一時東芝情報);
         } else {
-            return new BatchDbReader(申請一時電算_東芝情報);
+            return new BatchDbReader(申請一時電算情報);
         }
     }
 

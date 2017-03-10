@@ -47,11 +47,18 @@ public interface IDbT5101TempMapper {
     List<DbT5101TempEntity> get申請エラー一時テーブル();
 
     /**
-     * 要介護認定申請電算東芝版情報一時テーブルキー項目ある情報を取得します。
+     * 要介護認定申請電算版情報一時テーブルキー項目ある情報を取得します。
      *
      * @return List<DbT5101RelateEntity>
      */
-    List<DbT5101RelateEntity> get更新対象情報_電算東芝版();
+    List<DbT5101RelateEntity> get更新対象情報_電算版();
+
+    /**
+     * 要介護認定申請東芝版情報一時テーブルキー項目ある情報を取得します。
+     *
+     * @return List<DbT5101RelateEntity>
+     */
+    List<DbT5101RelateEntity> get更新対象情報_東芝版();
 
     /**
      * 要介護認定申請厚労省情報一時テーブルキー項目ある情報を取得します。
