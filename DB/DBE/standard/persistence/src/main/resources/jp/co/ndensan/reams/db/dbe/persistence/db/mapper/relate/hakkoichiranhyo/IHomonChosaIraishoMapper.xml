@@ -342,10 +342,10 @@
         )
         AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false
         <if test= "is依頼日From">
-            AND dbT5201."ninteichosaIraiYMD" <![CDATA[>=]]> #{iraiFromYMD}
+            AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD" <![CDATA[>=]]> #{iraiFromYMD}
         </if>
         <if test= "is依頼日To">
-            AND dbT5201."ninteichosaIraiYMD" <![CDATA[<=]]> #{iraiToYMD}
+            AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD" <![CDATA[<=]]> #{iraiToYMD}
         </if>
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"
@@ -359,24 +359,24 @@
         <where>
             <if test="!is認定調査依頼書未印刷_印刷済">
                 <if test="is認定調査依頼書未印刷">
-                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL OR "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" = '')
+                    AND ("DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL OR "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" = '')
                 </if>
                 <if test="is認定調査依頼書印刷済">
-                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
+                    AND ("DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" <![CDATA[<>]]> '')
                 </if>
             </if>
             <if test="!is認定調査票未印刷_印刷済">
                 <if test="is認定調査票未印刷">
-                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL OR "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" = '')
+                    AND ("DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL OR "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" = '')
                 </if>
                 <if test="is認定調査票印刷済">
-                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
+                    AND ("DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" <![CDATA[<>]]> '')
                 </if>
             </if>
             <!-- jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.iraisho.IIraishoIkkatsuHakkoMapper.selectNinteiChousaIrai
             と同じ。//TODO 引数の関係でまとめていない。できたらまとめる END-->
             AND <foreach collection="ninteiChosaIraiList" item="item" open="(" separator="OR" close=")">
-                "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode}
+                ("DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode}
                 AND "DbT5201NinteichosaIraiJoho"."ninteiChosainCode" = #{item.ninteiChosainCode}
                 AND "DbT5201NinteichosaIraiJoho"."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
             </foreach>
