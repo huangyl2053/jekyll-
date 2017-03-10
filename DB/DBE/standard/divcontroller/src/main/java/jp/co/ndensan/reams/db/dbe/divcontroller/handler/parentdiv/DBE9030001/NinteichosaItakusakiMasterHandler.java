@@ -43,6 +43,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -82,6 +84,8 @@ public class NinteichosaItakusakiMasterHandler {
     private static final RString 四マスタ優先表示市町村識別ID
             = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+    private static final RString 預金種別 = new RString("預金種別");
+    private static final RString 預金種目 = new RString("預金種目");
 
     /**
      * コンストラクタです。
@@ -195,6 +199,49 @@ public class NinteichosaItakusakiMasterHandler {
      */
     public void setDataSource(List<KoseiShichosonMaster> list) {
         div.getChosaitakusakichiran().getDgChosainIchiran().setDataSource(converterDataSourceFromKoseiShichosonMaster(list));
+    }
+
+    public void setKozaJoho() {
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return;
+        }
+        List<YokinShubetsuPattern> yokinShubetsuPatternlist = div.getChosaitakusakiJohoInput().getKozaJoho().
+                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get預金種別リスト();
+        List<KeyValueDataSource> yokinShubetsuList = new ArrayList<>();
+        yokinShubetsuList.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
+        for (YokinShubetsuPattern yokinShubetsuPattern : yokinShubetsuPatternlist) {
+            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
+            keyValueDataSource.setKey(yokinShubetsuPattern.get預金種別コード());
+            keyValueDataSource.setValue(yokinShubetsuPattern.get預金種別略称());
+            yokinShubetsuList.add(keyValueDataSource);
+        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setDataSource(yokinShubetsuList);
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種目);
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().setDisplayNone(false);
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().setDisplayNone(false);
+            } else {
+                div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種別);
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().setDisplayNone(true);
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().setDisplayNone(true);
+            }
+        }
+    }
+
+    public RString getShitenMeisho(RString shitenCode) {
+        RString 支店名 = new RString("");
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return 支店名;
+        }
+        List<KinyuKikanShiten> kinyuKikanShitenlist = div.getChosaitakusakiJohoInput().getKozaJoho().
+                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get支店リスト();
+        for (KinyuKikanShiten shiten : kinyuKikanShitenlist) {
+            if (new RString(shiten.get支店コード().toString()).equals(shitenCode)) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
     }
 
     /**

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosainSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-24_17-32-43">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -43,8 +43,6 @@ public class ChosainSearchDiv extends Panel {
     private RadioButton radSearchChosainJokyo;
     @JsonProperty("txtSaidaiHyojiKensu")
     private TextBoxNum txtSaidaiHyojiKensu;
-    @JsonProperty("btnSearchShujii")
-    private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
     @JsonProperty("ccdHokenshaList")
@@ -234,24 +232,6 @@ public class ChosainSearchDiv extends Panel {
     @JsonProperty("txtSaidaiHyojiKensu")
     public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
-    }
-
-    /*
-     * getbtnSearchShujii
-     * @return btnSearchShujii
-     */
-    @JsonProperty("btnSearchShujii")
-    public Button getBtnSearchShujii() {
-        return btnSearchShujii;
-    }
-
-    /*
-     * setbtnSearchShujii
-     * @param btnSearchShujii btnSearchShujii
-     */
-    @JsonProperty("btnSearchShujii")
-    public void setBtnSearchShujii(Button btnSearchShujii) {
-        this.btnSearchShujii = btnSearchShujii;
     }
 
     /*

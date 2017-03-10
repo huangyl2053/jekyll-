@@ -116,6 +116,7 @@ public class NinteichosaItakusakiMaster {
     private static final RString 貯蓄 = new RString("貯蓄");
     private static final RString その他 = new RString("その他");
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("口座情報未登録機関一覧表.csv");
+    private static final RString SELECTKEY_空白 = new RString("blank");
 
     /**
      * 画面初期化処理です。
@@ -343,7 +344,7 @@ public class NinteichosaItakusakiMaster {
     /**
      * 口座未登録csvを出力するボタンが押下された場合、ＣＳＶを出力します。
      *
-     * @param div NinteichosaItakusakiMainDiv
+     * @param div NinteichosaItakusakiMasterDiv
      * @param response
      * @return IDownLoadServletResponse
      */
@@ -813,6 +814,65 @@ public class NinteichosaItakusakiMaster {
                 break;
             }
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 金融機関コードのonBlur。
+     *
+     * @param div NinteichosaItakusakiMasterDiv
+     * @return ResponseData<NinteichosaItakusakiMasterDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onBlur_kinyuKikanCode(NinteichosaItakusakiMasterDiv div) {
+        getHandler(div).setKozaJoho();
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 店番のonBlur。
+     *
+     * @param div NinteichosaItakusakiMasterDiv
+     * @return ResponseData<NinteichosaItakusakiMasterDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onBlur_txtTenBan(NinteichosaItakusakiMasterDiv div) {
+        RString tenBan = div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue();
+        if (!RString.isNullOrEmpty(tenBan)) {
+            RString shitenMeisho = getHandler(div).getShitenMeisho(tenBan);
+            if (!RString.EMPTY.equals(tenBan)) {
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().
+                        setValue(shitenMeisho);
+            } else {
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+                div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 金融機関のonOkClose
+     *
+     * @param div NinteichosaItakusakiMasterDiv
+     * @return ResponseData<NinteichosaItakusakiMasterDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onOkClose_KinyuKikan(NinteichosaItakusakiMasterDiv div) {
+        getHandler(div).setKozaJoho();
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
         return ResponseData.of(div).respond();
     }
 
