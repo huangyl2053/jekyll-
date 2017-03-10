@@ -24,7 +24,7 @@
         ON "shinseishoKanriNo" = A."shinseishoKanriNo"
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
         NOT EXISTS ( 
         SELECT
@@ -65,7 +65,7 @@
         ON "shinseishoKanriNo" = A."shinseishoKanriNo"
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
         NOT EXISTS ( 
         SELECT
@@ -106,7 +106,7 @@
         ON "shinseishoKanriNo" = A."shinseishoKanriNo"
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
         NOT EXISTS ( 
         SELECT
@@ -147,7 +147,7 @@
         ON "shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         AND NOT EXISTS ( 
         SELECT
         'X' 
@@ -188,7 +188,7 @@
         ON "shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" 
         AND "logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101"shoKisaiHokenshaNo"
+        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         AND NOT EXISTS ( 
         SELECT
         'X' 
