@@ -75,7 +75,7 @@ public class YokaigoYoshienShinseiIchiranReport extends Report<YokaigoYoshienShi
     public void writeBy(ReportSourceWriter<YokaigoYoshienShinseiIchiranReportSource> reportSourceWriter) {
         RString date = RDate.getNowDate().wareki()
                 .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString time = RDate.getNowTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(date);

@@ -60,7 +60,7 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         if (seinengappiYMD != null) {
             reportSource.listShinseiIchiran_6 = seinengappiYMD.wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         Code seibetsu = item.getSeibetsu();
         if (seibetsu != null) {
@@ -75,19 +75,19 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         if (nijiHanteiNinteiYukoKaishiYMD != null) {
             reportSource.listShinseiIchiran_10 = nijiHanteiNinteiYukoKaishiYMD.wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         FlexibleDate nijiHanteiNinteiYukoShuryoYMD = item.getNijiHanteiNinteiYukoShuryoYMD();
         if (nijiHanteiNinteiYukoShuryoYMD != null) {
             reportSource.listShinseiIchiran_11 = nijiHanteiNinteiYukoShuryoYMD.wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         FlexibleDate ninteiShinseiYMD = item.getNinteiShinseiYMD();
         if (ninteiShinseiYMD != null) {
             reportSource.listShinseiIchiran_12 = ninteiShinseiYMD.wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                    .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
         Code shinseijiKubunCode = item.getNinteiShinseiShinseijiKubun();
         if (shinseijiKubunCode != null) {

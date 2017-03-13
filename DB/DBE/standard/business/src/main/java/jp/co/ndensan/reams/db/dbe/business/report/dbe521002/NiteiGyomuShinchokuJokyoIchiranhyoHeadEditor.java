@@ -50,7 +50,7 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoHeadEditor implements INiteiGyomu
         RStringBuilder printTimeStampSb = new RStringBuilder();
         printTimeStampSb.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", printdate.getHour()));
         printTimeStampSb.append(DATE_時);
