@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 介護認定審査会委員報酬実績集計表のEditorです。
@@ -78,7 +80,7 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         source.listShinsainJissekiIchiran_10 = dateFormat(item.get実施日());
         source.listShinsainJissekiIchiran_11 = set時刻(item.get開始());
         source.listShinsainJissekiIchiran_12 = set時刻(item.get終了());
-        source.listShinsainJissekiIchiran_13 = get報酬単価(item);
+        source.listShinsainJissekiIchiran_13 = get数値(get報酬単価(item));
 
         return source;
     }
@@ -188,4 +190,7 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         return date_tem.wareki().toDateString();
     }
 
+    private RString get数値(RString 単価) {
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(単価.toString()), 0);
+    }
 }

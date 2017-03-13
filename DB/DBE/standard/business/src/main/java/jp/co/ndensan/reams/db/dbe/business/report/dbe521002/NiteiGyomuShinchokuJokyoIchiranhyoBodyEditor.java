@@ -60,12 +60,12 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
         source.listIchiranhyo1_9 = item.getListIchiranhyo1_9();
         source.listIchiranhyo1_10 = item.getListIchiranhyo1_10().isEmpty() ? RString.EMPTY : new FlexibleDate(item.
                 getListIchiranhyo1_10()).wareki().separator(Separator.PERIOD).
-                fillType(FillType.BLANK).toDateString();
+                fillType(FillType.ZERO).toDateString();
         source.listHihokenshaName_1 = item.getListHihokenshaName_1();
         source.listHihokenshaJusho_1 = item.getListHihokenshaJusho_1();
         source.listIchiranhyo2_1 = item.getListIchiranhyo2_1().isEmpty() ? RString.EMPTY : new FlexibleDate(item.
                 getListIchiranhyo2_1()).wareki().separator(Separator.PERIOD).
-                fillType(FillType.BLANK).toDateString();
+                fillType(FillType.ZERO).toDateString();
         source.listIchiranhyo2_2 = item.getListIchiranhyo2_2();
         source.listIchiranhyo2_3 = item.getListIchiranhyo2_3();
         source.listChosaItakusakiName_1 = item.getListChosaItakusakiName_1();
@@ -74,7 +74,7 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
         source.listIshiName_1 = item.getListIshiName_1();
         source.listShinsaYoteiYMD_1 = item.getListShinsaYoteiYMD_1().isEmpty() ? RString.EMPTY : new FlexibleDate(item.
                 getListShinsaYoteiYMD_1()).wareki().separator(Separator.PERIOD).
-                fillType(FillType.BLANK).toDateString();
+                fillType(FillType.ZERO).toDateString();
         return source;
     }
 

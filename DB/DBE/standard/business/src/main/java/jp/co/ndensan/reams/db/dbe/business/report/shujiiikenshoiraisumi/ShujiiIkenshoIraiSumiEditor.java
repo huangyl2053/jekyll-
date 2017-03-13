@@ -51,7 +51,7 @@ public class ShujiiIkenshoIraiSumiEditor implements IShujiiIkenshoIraiSumiEditor
         hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         hakkoYMD.append(RString.HALF_SPACE);
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         source.title = title;
@@ -109,6 +109,6 @@ public class ShujiiIkenshoIraiSumiEditor implements IShujiiIkenshoIraiSumiEditor
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 }

@@ -64,7 +64,7 @@ public class YokaigoyoShienchiran {
         hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         hakkoYMD.append(RString.HALF_SPACE);
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         return hakkoYMD.toRString();

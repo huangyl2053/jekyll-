@@ -85,7 +85,7 @@ public class NinteichosaIraiHenkoEditor implements INinteichosaIraiHenkoEditor {
             return RString.EMPTY;
         }
         return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
     private RString get作成年月日時() {
