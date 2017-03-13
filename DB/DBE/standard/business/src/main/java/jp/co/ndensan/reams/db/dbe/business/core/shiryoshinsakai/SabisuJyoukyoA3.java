@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
@@ -1194,7 +1195,9 @@ public class SabisuJyoukyoA3 {
         項目.set認定調査員番号(entity.getNinteiChosainCode());
         項目.set認定調査員氏名(entity.getChosainShimei());
         項目.set調査日(entity.getNinteichosaJisshiYMD());
-        項目.set調査実施場所(entity.getChosaJisshiBashoMeisho());
+        if (entity.getChosaJisshiBashoCode() != null) {
+            項目.set調査実施場所(ChosaJisshiBashoCode.toValue(entity.getChosaJisshiBashoCode().getColumnValue()).get名称());
+        }
         項目.set医療機関番号(entity.getShujiiIryokikanCode());
         項目.set医療機関名称(entity.getIryoKikanMeisho());
         項目.set主治医番号(entity.getShujiiCode());

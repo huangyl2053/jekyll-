@@ -1053,7 +1053,7 @@
         , dbt5116Zenkai."kijunJikanIryoKanren" AS zKijunJikanIryoKanren
         , dbt5116Zenkai."kijunJikanNinchishoKasan" AS zKijunJikanNinchishoKasan
         , dbt5202."ninteichosaJisshiYMD"
-        , dbt5202."chosaJisshiBashoMeisho"
+        , dbt5202."chosaJisshiBashoCode"
         , dbt5101."nigoTokuteiShippeiCode"
         , dbt5116."ichijiHnateiKeikokuCode"
         , dbt5116."chukanHyokaKomoku1gun"
@@ -1313,7 +1313,7 @@
         <result property="zKijunJikanIryoKanren" column="zKijunJikanIryoKanren" />
         <result property="zKijunJikanNinchishoKasan" column="zKijunJikanNinchishoKasan" />
         <result property="ninteichosaJisshiYMD" column="ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-        <result property="chosaJisshiBashoMeisho" column="chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosaJisshiBashoCode" column="chosaJisshiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nigoTokuteiShippeiCode" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ichijiHnateiKeikokuCode" column="ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chukanHyokaKomoku1gun" column="chukanHyokaKomoku1gun" />

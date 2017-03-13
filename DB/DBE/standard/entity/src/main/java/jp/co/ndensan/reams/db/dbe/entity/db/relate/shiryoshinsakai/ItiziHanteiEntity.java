@@ -67,7 +67,7 @@ public class ItiziHanteiEntity {
     private int zKijunJikanIryoKanren;
     private int zKijunJikanNinchishoKasan;
     private FlexibleDate ninteichosaJisshiYMD;
-    private RString chosaJisshiBashoMeisho;
+    private Code chosaJisshiBashoCode;
     private Code nigoTokuteiShippeiCode;
     private RString ichijiHnateiKeikokuCode;
     private int chukanHyokaKomoku1gun;
