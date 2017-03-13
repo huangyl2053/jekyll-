@@ -163,7 +163,7 @@ public class NinteichosaItakusakiMasterHandler {
             調査委託先コードFrom = div.getTxtSearchChosaItakusakiCodeFrom().getValue();
             調査委託先コードTo = div.getTxtSearchChosaItakusakiCodeTo().getValue();
         }
-        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getChosainSearch().getCcdHokenshaList().getSelectedItem().get証記載保険者番号());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, div.getChosainSearch().getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         ViewStateHolder.put(ViewStateKeys.市町村選択データ, div.getChosainSearch().getCcdHokenshaList().getSelectedItem().get市町村名称());
         NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件 = NinteichosaItakusakiKensakuParameter.createParam(
                 状況フラグ有効.equals(div.getChosainSearch().getRadSearchChosainJokyo().getSelectedValue()),
@@ -291,8 +291,8 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
                 new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         clear();
-        RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class).value();
-        div.getChosaitakusakiJohoInput().getTxtShichoson().setValue(証記載保険者番号);
+        RString 市町村コード = ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class);
+        div.getChosaitakusakiJohoInput().getTxtShichoson().setValue(市町村コード);
         div.getChosaitakusakiJohoInput().getTxtShichosonmei().setValue(ViewStateHolder.get(ViewStateKeys.市町村選択データ, RString.class));
         div.getChosaitakusakiJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(
                 SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), FlexibleDate.getNowDate());
