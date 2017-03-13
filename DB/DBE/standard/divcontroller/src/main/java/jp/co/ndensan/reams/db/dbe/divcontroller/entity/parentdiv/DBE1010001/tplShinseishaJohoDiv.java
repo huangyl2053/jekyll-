@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
@@ -17,31 +18,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class tplShinseishaJohoDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtJohoAtenaMeisho")
-    private TextBoxAtenaMeisho txtJohoAtenaMeisho;
-    @JsonProperty("txtJohoAtenaKanaMeisho")
-    private TextBoxAtenaKanaMeisho txtJohoAtenaKanaMeisho;
-    @JsonProperty("txtJohoBirthday")
-    private TextBoxDate txtJohoBirthday;
-    @JsonProperty("radJohoSeibetsu")
-    private RadioButton radJohoSeibetsu;
-    @JsonProperty("txtJohoYubinNo")
-    private TextBoxYubinNo txtJohoYubinNo;
-    @JsonProperty("txtJohoJusho")
-    private TextBoxJusho txtJohoJusho;
-    @JsonProperty("txtJohoTelNo")
-    private TextBoxTelNo txtJohoTelNo;
-    @JsonProperty("txtJohoNenrei")
-    private TextBox txtJohoNenrei;
-    @JsonProperty("ccdShozokuShichoson")
-    private HokenshaListDiv ccdShozokuShichoson;
+    @JsonProperty("pnlShinseishaJoho")
+    private pnlShinseishaJohoDiv pnlShinseishaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,156 +35,109 @@ public class tplShinseishaJohoDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtJohoAtenaMeisho
-     * @return txtJohoAtenaMeisho
+     * getpnlShinseishaJoho
+     * @return pnlShinseishaJoho
      */
-    @JsonProperty("txtJohoAtenaMeisho")
+    @JsonProperty("pnlShinseishaJoho")
+    public pnlShinseishaJohoDiv getPnlShinseishaJoho() {
+        return pnlShinseishaJoho;
+    }
+
+    /*
+     * setpnlShinseishaJoho
+     * @param pnlShinseishaJoho pnlShinseishaJoho
+     */
+    @JsonProperty("pnlShinseishaJoho")
+    public void setPnlShinseishaJoho(pnlShinseishaJohoDiv pnlShinseishaJoho) {
+        this.pnlShinseishaJoho = pnlShinseishaJoho;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
     public TextBoxAtenaMeisho getTxtJohoAtenaMeisho() {
-        return txtJohoAtenaMeisho;
+        return this.getPnlShinseishaJoho().getTxtJohoAtenaMeisho();
     }
 
-    /*
-     * settxtJohoAtenaMeisho
-     * @param txtJohoAtenaMeisho txtJohoAtenaMeisho
-     */
-    @JsonProperty("txtJohoAtenaMeisho")
-    public void setTxtJohoAtenaMeisho(TextBoxAtenaMeisho txtJohoAtenaMeisho) {
-        this.txtJohoAtenaMeisho = txtJohoAtenaMeisho;
+    @JsonIgnore
+    public void  setTxtJohoAtenaMeisho(TextBoxAtenaMeisho txtJohoAtenaMeisho) {
+        this.getPnlShinseishaJoho().setTxtJohoAtenaMeisho(txtJohoAtenaMeisho);
     }
 
-    /*
-     * gettxtJohoAtenaKanaMeisho
-     * @return txtJohoAtenaKanaMeisho
-     */
-    @JsonProperty("txtJohoAtenaKanaMeisho")
+    @JsonIgnore
     public TextBoxAtenaKanaMeisho getTxtJohoAtenaKanaMeisho() {
-        return txtJohoAtenaKanaMeisho;
+        return this.getPnlShinseishaJoho().getTxtJohoAtenaKanaMeisho();
     }
 
-    /*
-     * settxtJohoAtenaKanaMeisho
-     * @param txtJohoAtenaKanaMeisho txtJohoAtenaKanaMeisho
-     */
-    @JsonProperty("txtJohoAtenaKanaMeisho")
-    public void setTxtJohoAtenaKanaMeisho(TextBoxAtenaKanaMeisho txtJohoAtenaKanaMeisho) {
-        this.txtJohoAtenaKanaMeisho = txtJohoAtenaKanaMeisho;
+    @JsonIgnore
+    public void  setTxtJohoAtenaKanaMeisho(TextBoxAtenaKanaMeisho txtJohoAtenaKanaMeisho) {
+        this.getPnlShinseishaJoho().setTxtJohoAtenaKanaMeisho(txtJohoAtenaKanaMeisho);
     }
 
-    /*
-     * gettxtJohoBirthday
-     * @return txtJohoBirthday
-     */
-    @JsonProperty("txtJohoBirthday")
+    @JsonIgnore
     public TextBoxDate getTxtJohoBirthday() {
-        return txtJohoBirthday;
+        return this.getPnlShinseishaJoho().getTxtJohoBirthday();
     }
 
-    /*
-     * settxtJohoBirthday
-     * @param txtJohoBirthday txtJohoBirthday
-     */
-    @JsonProperty("txtJohoBirthday")
-    public void setTxtJohoBirthday(TextBoxDate txtJohoBirthday) {
-        this.txtJohoBirthday = txtJohoBirthday;
+    @JsonIgnore
+    public void  setTxtJohoBirthday(TextBoxDate txtJohoBirthday) {
+        this.getPnlShinseishaJoho().setTxtJohoBirthday(txtJohoBirthday);
     }
 
-    /*
-     * getradJohoSeibetsu
-     * @return radJohoSeibetsu
-     */
-    @JsonProperty("radJohoSeibetsu")
+    @JsonIgnore
     public RadioButton getRadJohoSeibetsu() {
-        return radJohoSeibetsu;
+        return this.getPnlShinseishaJoho().getRadJohoSeibetsu();
     }
 
-    /*
-     * setradJohoSeibetsu
-     * @param radJohoSeibetsu radJohoSeibetsu
-     */
-    @JsonProperty("radJohoSeibetsu")
-    public void setRadJohoSeibetsu(RadioButton radJohoSeibetsu) {
-        this.radJohoSeibetsu = radJohoSeibetsu;
+    @JsonIgnore
+    public void  setRadJohoSeibetsu(RadioButton radJohoSeibetsu) {
+        this.getPnlShinseishaJoho().setRadJohoSeibetsu(radJohoSeibetsu);
     }
 
-    /*
-     * gettxtJohoYubinNo
-     * @return txtJohoYubinNo
-     */
-    @JsonProperty("txtJohoYubinNo")
+    @JsonIgnore
     public TextBoxYubinNo getTxtJohoYubinNo() {
-        return txtJohoYubinNo;
+        return this.getPnlShinseishaJoho().getTxtJohoYubinNo();
     }
 
-    /*
-     * settxtJohoYubinNo
-     * @param txtJohoYubinNo txtJohoYubinNo
-     */
-    @JsonProperty("txtJohoYubinNo")
-    public void setTxtJohoYubinNo(TextBoxYubinNo txtJohoYubinNo) {
-        this.txtJohoYubinNo = txtJohoYubinNo;
+    @JsonIgnore
+    public void  setTxtJohoYubinNo(TextBoxYubinNo txtJohoYubinNo) {
+        this.getPnlShinseishaJoho().setTxtJohoYubinNo(txtJohoYubinNo);
     }
 
-    /*
-     * gettxtJohoJusho
-     * @return txtJohoJusho
-     */
-    @JsonProperty("txtJohoJusho")
+    @JsonIgnore
     public TextBoxJusho getTxtJohoJusho() {
-        return txtJohoJusho;
+        return this.getPnlShinseishaJoho().getTxtJohoJusho();
     }
 
-    /*
-     * settxtJohoJusho
-     * @param txtJohoJusho txtJohoJusho
-     */
-    @JsonProperty("txtJohoJusho")
-    public void setTxtJohoJusho(TextBoxJusho txtJohoJusho) {
-        this.txtJohoJusho = txtJohoJusho;
+    @JsonIgnore
+    public void  setTxtJohoJusho(TextBoxJusho txtJohoJusho) {
+        this.getPnlShinseishaJoho().setTxtJohoJusho(txtJohoJusho);
     }
 
-    /*
-     * gettxtJohoTelNo
-     * @return txtJohoTelNo
-     */
-    @JsonProperty("txtJohoTelNo")
+    @JsonIgnore
     public TextBoxTelNo getTxtJohoTelNo() {
-        return txtJohoTelNo;
+        return this.getPnlShinseishaJoho().getTxtJohoTelNo();
     }
 
-    /*
-     * settxtJohoTelNo
-     * @param txtJohoTelNo txtJohoTelNo
-     */
-    @JsonProperty("txtJohoTelNo")
-    public void setTxtJohoTelNo(TextBoxTelNo txtJohoTelNo) {
-        this.txtJohoTelNo = txtJohoTelNo;
+    @JsonIgnore
+    public void  setTxtJohoTelNo(TextBoxTelNo txtJohoTelNo) {
+        this.getPnlShinseishaJoho().setTxtJohoTelNo(txtJohoTelNo);
     }
 
-    /*
-     * gettxtJohoNenrei
-     * @return txtJohoNenrei
-     */
-    @JsonProperty("txtJohoNenrei")
+    @JsonIgnore
     public TextBox getTxtJohoNenrei() {
-        return txtJohoNenrei;
+        return this.getPnlShinseishaJoho().getTxtJohoNenrei();
     }
 
-    /*
-     * settxtJohoNenrei
-     * @param txtJohoNenrei txtJohoNenrei
-     */
-    @JsonProperty("txtJohoNenrei")
-    public void setTxtJohoNenrei(TextBox txtJohoNenrei) {
-        this.txtJohoNenrei = txtJohoNenrei;
+    @JsonIgnore
+    public void  setTxtJohoNenrei(TextBox txtJohoNenrei) {
+        this.getPnlShinseishaJoho().setTxtJohoNenrei(txtJohoNenrei);
     }
 
-    /*
-     * getccdShozokuShichoson
-     * @return ccdShozokuShichoson
-     */
-    @JsonProperty("ccdShozokuShichoson")
+    @JsonIgnore
     public IHokenshaListDiv getCcdShozokuShichoson() {
-        return ccdShozokuShichoson;
+        return this.getPnlShinseishaJoho().getCcdShozokuShichoson();
     }
 
     // </editor-fold>

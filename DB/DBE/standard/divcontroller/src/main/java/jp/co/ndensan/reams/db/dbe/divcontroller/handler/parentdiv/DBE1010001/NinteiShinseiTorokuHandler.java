@@ -354,6 +354,49 @@ public class NinteiShinseiTorokuHandler {
         }
     }
 
+    public void setSinseiTorisageOnlyUsed(NinteiShinseiTorokuDiv div) {
+        div.getCcdKaigoNinteiShinseiKihon().setReadOnly(true);
+        div.getCcdShinseiTodokedesha().setReadOnly(true);
+        div.getServiceDel().setReadOnly(true);
+        div.getCcdZenkaiNinteiKekkaJoho().setReadOnly(true);
+        div.getShujiiAndShujiiIryoKikan().setReadOnly(true);
+        div.getChosainAndChosainInput().setReadOnly(true);
+        div.getCcdNinteiInput().setReadOnly(true);
+        div.getCcdShinseiSonotaJohoInput().setReadOnly(true);
+        div.getHomonSaki().setReadOnly(true);
+        div.getShisetsuJoho().setReadOnly(true);
+        div.getPnlEnki().setReadOnly(true);
+        div.getPnlShinseishaJoho().setReadOnly(true);
+
+        div.getSinseiTorisage().setReadOnly(false);
+    }
+
+    public void setSinseiTorisageOnlyRequired(NinteiShinseiTorokuDiv div) {
+        if (RString.isNullOrEmpty(div.getSinseiTorisage().getDdlTorisageJiyu().getSelectedKey())) {
+            div.getSinseiTorisage().getDdlTorisageJiyu().setRequired(true);
+            div.getSinseiTorisage().getTxtTorisageDate().setRequired(true);
+            div.getSinseiTorisage().getTxtTorisageJiyu().setRequired(true);
+        } else {
+            div.getSinseiTorisage().getDdlTorisageJiyu().setRequired(false);
+            div.getSinseiTorisage().getTxtTorisageDate().setRequired(false);
+            div.getSinseiTorisage().getTxtTorisageJiyu().setRequired(false);
+        }
+    }
+
+    public void setSinseiTorisageOnlyOpen(NinteiShinseiTorokuDiv div) {
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getServiceSakujo().setIsOpen(false);
+        div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().setIsOpen(false);
+        div.getCcdShinseiTodokedesha().setIsOpen(false);
+        div.getServiceDel().setIsOpen(false);
+        div.getCcdZenkaiNinteiKekkaJoho().setIsOpen(false);
+        div.getShujiiAndShujiiIryoKikan().setIsOpen(false);
+        div.getChosainAndChosainInput().setIsOpen(false);
+        div.getHomonSaki().setIsOpen(false);
+        div.getShisetsuJoho().setIsOpen(false);
+
+        div.getSinseiTorisage().setIsOpen(true);
+    }
+
     private void setCommonDiv(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号) {
 //        if (result.is旧措置者フラグ()) {
 //            List<RString> keyList = new ArrayList<>();

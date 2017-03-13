@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
@@ -14,27 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplEnkiDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtEnkiKetteiYMD")
-    private TextBoxDate txtEnkiKetteiYMD;
-    @JsonProperty("txtEnkiMikomiKikan")
-    private TextBoxDateRange txtEnkiMikomiKikan;
-    @JsonProperty("lblEnkiRiyu")
-    private Label lblEnkiRiyu;
-    @JsonProperty("btnEnkiRiyuTeikeibun")
-    private ButtonDialog btnEnkiRiyuTeikeibun;
-    @JsonProperty("txtEnkiRiyu")
-    private TextBoxMultiLine txtEnkiRiyu;
-    @JsonProperty("txtEnkiTsuchiHakkoYMD")
-    private TextBoxDate txtEnkiTsuchiHakkoYMD;
-    @JsonProperty("txtEnkiTsuchishoHakkoCount")
-    private TextBoxNum txtEnkiTsuchishoHakkoCount;
+    @JsonProperty("pnlEnki")
+    private pnlEnkiDiv pnlEnki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,129 +32,94 @@ public class tplEnkiDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtEnkiKetteiYMD
-     * @return txtEnkiKetteiYMD
+     * getpnlEnki
+     * @return pnlEnki
      */
-    @JsonProperty("txtEnkiKetteiYMD")
+    @JsonProperty("pnlEnki")
+    public pnlEnkiDiv getPnlEnki() {
+        return pnlEnki;
+    }
+
+    /*
+     * setpnlEnki
+     * @param pnlEnki pnlEnki
+     */
+    @JsonProperty("pnlEnki")
+    public void setPnlEnki(pnlEnkiDiv pnlEnki) {
+        this.pnlEnki = pnlEnki;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
     public TextBoxDate getTxtEnkiKetteiYMD() {
-        return txtEnkiKetteiYMD;
+        return this.getPnlEnki().getTxtEnkiKetteiYMD();
     }
 
-    /*
-     * settxtEnkiKetteiYMD
-     * @param txtEnkiKetteiYMD txtEnkiKetteiYMD
-     */
-    @JsonProperty("txtEnkiKetteiYMD")
-    public void setTxtEnkiKetteiYMD(TextBoxDate txtEnkiKetteiYMD) {
-        this.txtEnkiKetteiYMD = txtEnkiKetteiYMD;
+    @JsonIgnore
+    public void  setTxtEnkiKetteiYMD(TextBoxDate txtEnkiKetteiYMD) {
+        this.getPnlEnki().setTxtEnkiKetteiYMD(txtEnkiKetteiYMD);
     }
 
-    /*
-     * gettxtEnkiMikomiKikan
-     * @return txtEnkiMikomiKikan
-     */
-    @JsonProperty("txtEnkiMikomiKikan")
+    @JsonIgnore
     public TextBoxDateRange getTxtEnkiMikomiKikan() {
-        return txtEnkiMikomiKikan;
+        return this.getPnlEnki().getTxtEnkiMikomiKikan();
     }
 
-    /*
-     * settxtEnkiMikomiKikan
-     * @param txtEnkiMikomiKikan txtEnkiMikomiKikan
-     */
-    @JsonProperty("txtEnkiMikomiKikan")
-    public void setTxtEnkiMikomiKikan(TextBoxDateRange txtEnkiMikomiKikan) {
-        this.txtEnkiMikomiKikan = txtEnkiMikomiKikan;
+    @JsonIgnore
+    public void  setTxtEnkiMikomiKikan(TextBoxDateRange txtEnkiMikomiKikan) {
+        this.getPnlEnki().setTxtEnkiMikomiKikan(txtEnkiMikomiKikan);
     }
 
-    /*
-     * getlblEnkiRiyu
-     * @return lblEnkiRiyu
-     */
-    @JsonProperty("lblEnkiRiyu")
+    @JsonIgnore
     public Label getLblEnkiRiyu() {
-        return lblEnkiRiyu;
+        return this.getPnlEnki().getLblEnkiRiyu();
     }
 
-    /*
-     * setlblEnkiRiyu
-     * @param lblEnkiRiyu lblEnkiRiyu
-     */
-    @JsonProperty("lblEnkiRiyu")
-    public void setLblEnkiRiyu(Label lblEnkiRiyu) {
-        this.lblEnkiRiyu = lblEnkiRiyu;
+    @JsonIgnore
+    public void  setLblEnkiRiyu(Label lblEnkiRiyu) {
+        this.getPnlEnki().setLblEnkiRiyu(lblEnkiRiyu);
     }
 
-    /*
-     * getbtnEnkiRiyuTeikeibun
-     * @return btnEnkiRiyuTeikeibun
-     */
-    @JsonProperty("btnEnkiRiyuTeikeibun")
+    @JsonIgnore
     public ButtonDialog getBtnEnkiRiyuTeikeibun() {
-        return btnEnkiRiyuTeikeibun;
+        return this.getPnlEnki().getBtnEnkiRiyuTeikeibun();
     }
 
-    /*
-     * setbtnEnkiRiyuTeikeibun
-     * @param btnEnkiRiyuTeikeibun btnEnkiRiyuTeikeibun
-     */
-    @JsonProperty("btnEnkiRiyuTeikeibun")
-    public void setBtnEnkiRiyuTeikeibun(ButtonDialog btnEnkiRiyuTeikeibun) {
-        this.btnEnkiRiyuTeikeibun = btnEnkiRiyuTeikeibun;
+    @JsonIgnore
+    public void  setBtnEnkiRiyuTeikeibun(ButtonDialog btnEnkiRiyuTeikeibun) {
+        this.getPnlEnki().setBtnEnkiRiyuTeikeibun(btnEnkiRiyuTeikeibun);
     }
 
-    /*
-     * gettxtEnkiRiyu
-     * @return txtEnkiRiyu
-     */
-    @JsonProperty("txtEnkiRiyu")
+    @JsonIgnore
     public TextBoxMultiLine getTxtEnkiRiyu() {
-        return txtEnkiRiyu;
+        return this.getPnlEnki().getTxtEnkiRiyu();
     }
 
-    /*
-     * settxtEnkiRiyu
-     * @param txtEnkiRiyu txtEnkiRiyu
-     */
-    @JsonProperty("txtEnkiRiyu")
-    public void setTxtEnkiRiyu(TextBoxMultiLine txtEnkiRiyu) {
-        this.txtEnkiRiyu = txtEnkiRiyu;
+    @JsonIgnore
+    public void  setTxtEnkiRiyu(TextBoxMultiLine txtEnkiRiyu) {
+        this.getPnlEnki().setTxtEnkiRiyu(txtEnkiRiyu);
     }
 
-    /*
-     * gettxtEnkiTsuchiHakkoYMD
-     * @return txtEnkiTsuchiHakkoYMD
-     */
-    @JsonProperty("txtEnkiTsuchiHakkoYMD")
+    @JsonIgnore
     public TextBoxDate getTxtEnkiTsuchiHakkoYMD() {
-        return txtEnkiTsuchiHakkoYMD;
+        return this.getPnlEnki().getTxtEnkiTsuchiHakkoYMD();
     }
 
-    /*
-     * settxtEnkiTsuchiHakkoYMD
-     * @param txtEnkiTsuchiHakkoYMD txtEnkiTsuchiHakkoYMD
-     */
-    @JsonProperty("txtEnkiTsuchiHakkoYMD")
-    public void setTxtEnkiTsuchiHakkoYMD(TextBoxDate txtEnkiTsuchiHakkoYMD) {
-        this.txtEnkiTsuchiHakkoYMD = txtEnkiTsuchiHakkoYMD;
+    @JsonIgnore
+    public void  setTxtEnkiTsuchiHakkoYMD(TextBoxDate txtEnkiTsuchiHakkoYMD) {
+        this.getPnlEnki().setTxtEnkiTsuchiHakkoYMD(txtEnkiTsuchiHakkoYMD);
     }
 
-    /*
-     * gettxtEnkiTsuchishoHakkoCount
-     * @return txtEnkiTsuchishoHakkoCount
-     */
-    @JsonProperty("txtEnkiTsuchishoHakkoCount")
+    @JsonIgnore
     public TextBoxNum getTxtEnkiTsuchishoHakkoCount() {
-        return txtEnkiTsuchishoHakkoCount;
+        return this.getPnlEnki().getTxtEnkiTsuchishoHakkoCount();
     }
 
-    /*
-     * settxtEnkiTsuchishoHakkoCount
-     * @param txtEnkiTsuchishoHakkoCount txtEnkiTsuchishoHakkoCount
-     */
-    @JsonProperty("txtEnkiTsuchishoHakkoCount")
-    public void setTxtEnkiTsuchishoHakkoCount(TextBoxNum txtEnkiTsuchishoHakkoCount) {
-        this.txtEnkiTsuchishoHakkoCount = txtEnkiTsuchishoHakkoCount;
+    @JsonIgnore
+    public void  setTxtEnkiTsuchishoHakkoCount(TextBoxNum txtEnkiTsuchishoHakkoCount) {
+        this.getPnlEnki().setTxtEnkiTsuchishoHakkoCount(txtEnkiTsuchishoHakkoCount);
     }
 
     // </editor-fold>

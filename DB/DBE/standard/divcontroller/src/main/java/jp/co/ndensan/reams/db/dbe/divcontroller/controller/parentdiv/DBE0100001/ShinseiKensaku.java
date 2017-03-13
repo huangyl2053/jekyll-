@@ -51,6 +51,7 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN42002 = new RString("DBEMN42002");
     private static final RString MENUID_DBEMN41005 = new RString("DBEMN41005");
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
+    private static final RString MENUID_DBEMN31002 = new RString("DBEMN31002");
     private static final RString MENUID_DBEMN43001 = new RString("DBEMN43001");
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
     private static final RString MENUID_DBEMN71003 = new RString("DBEMN71003");
@@ -269,6 +270,9 @@ public class ShinseiKensaku {
             ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 証記載保険者番号);
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.認定調査結果登録1へ).respond();
         } else if (MENUID_DBEMN31001.equals(menuID)) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
+        } else if (MENUID_DBEMN31002.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(申請書管理番号));
             return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.審査依頼受付へ).respond();
         } else if (MENUID_DBEMN43001.equals(menuID)) {

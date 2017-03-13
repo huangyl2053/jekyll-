@@ -130,7 +130,9 @@ public class NinteiShinseiToroku {
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
     private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
     private static final RString UICONTAINERID_DBEUC11001 = new RString("DBEUC11001");
+    private static final RString UICONTAINERID_DBEUC10002 = new RString("DBEUC10002");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
+    private static final RString BTNUPDATE_FILENAME_TORISAGE = new RString("btnUpdate_torisage");
     private static final RString BTNRESEARCH_FILENAME = new RString("btnReSearch");
     private static final RString BTNBACK_FILENAME = new RString("btnBackToIchiran");
     private static final int INT_0 = 0;
@@ -205,7 +207,9 @@ public class NinteiShinseiToroku {
         div.getDdlShinsakaiYusenKubun().setSelectedKey(ShinsakaiYusenWaritsukeKubunCode.通常.getコード());
         div.getDdlWariateKubun().setSelectedKey(JidoWariateJyogaishaKubun.除外.getコード());
 
-        if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)) {
+        if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID)
+                || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)
+                || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             try {
                 RStringBuilder 前排他制御 = new RStringBuilder();
@@ -213,7 +217,7 @@ public class NinteiShinseiToroku {
                 前排他制御.append(管理番号.getColumnValue());
                 前排他ロックキー(前排他制御.toRString());
             } catch (PessimisticLockingException e) {
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, true);
+                setBtnUpdateDisableTrue();
             }
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
 
@@ -224,9 +228,13 @@ public class NinteiShinseiToroku {
 
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
-            if (result != null) {
+            if (result != null && !ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
                 validationMessages.add(getValidationHandler(div).審査会割付データ存在チェック(result));
                 validationMessages.add(getValidationHandler(div).依頼完了チェック(result));
+                getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
+                div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
+                getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
+            } else if (result != null && ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
                 getHandler(div).set医療保険(manager.get医療保険履歴(result.get識別コード()));
                 div.setHdnShichosonRenrakuJiko(result.get市町村連絡事項());
                 getHandler(div).set市町村連絡事項(result.get市町村連絡事項());
@@ -277,17 +285,29 @@ public class NinteiShinseiToroku {
             div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
             getHandler(div).setCcdShinseiTodokedesha(div, ninteiTandokuDounyuFlag);
             div.getCcdNinteiInput().setDisabled(true);
-            div.getRadMode().setVisible(true);
-            div.getRadMode().setDisplayNone(false);
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
+                div.getRadMode().setVisible(false);
+                div.getRadMode().setDisplayNone(true);
+            } else {
+                div.getRadMode().setVisible(true);
+                div.getRadMode().setDisplayNone(false);
+            }
             setShinseiJiyu(result, div);
             getHandler(div).loadPnlSinseishaJoho(result.get市町村コード(), false);
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
+                getHandler(div).setSinseiTorisageOnlyUsed(div);
+                getHandler(div).setSinseiTorisageOnlyOpen(div);
+                getHandler(div).setSinseiTorisageOnlyRequired(div);
+                div.getBtnRenrakusaki().setDisabled(true);
+                div.getBtnJogaiShinsakaiIinGuide().setDisabled(true);
+            }
             if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)) {
                 div.setReadOnly(true);
                 return ResponseData.of(div).rootMenuTitle(new RString("審査受付照会")).respond();
             }
             if (validationMessages.iterator().hasNext()) {
                 div.setReadOnly(true);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, true);
+                setBtnUpdateDisableTrue();
                 return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).addValidationMessages(validationMessages).respond();
             }
             return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
@@ -353,6 +373,14 @@ public class NinteiShinseiToroku {
         div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
 
         return ResponseData.of(div).respond();
+    }
+
+    private void setBtnUpdateDisableTrue() {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME_TORISAGE, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, true);
+        }
     }
 
     private ShinsakaiIinItiranData getShinsakaiIinItiranData(ShinseishoKanriNo 管理番号) {
@@ -782,8 +810,9 @@ public class NinteiShinseiToroku {
             return ResponseData.of(div).respond();
         } else {
             NinteiShinseiJoho shinseiJoho = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, NinteiShinseiJoho.class);
-
-            if (KEY1.equals(div.getRadMode().getSelectedKey())) {
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
+                return doUpdate(response, div, validationMessages, zenkaiJoho, dataList, shinseiJoho);
+            } else if (KEY1.equals(div.getRadMode().getSelectedKey())) {
                 return doSakujo(response, div, validationMessages, shinseiJoho);
             } else {
                 return doUpdate(response, div, validationMessages, zenkaiJoho, dataList, shinseiJoho);
@@ -1159,6 +1188,8 @@ public class NinteiShinseiToroku {
 
         if (!RString.isNullOrEmpty(div.getDdlTorisageJiyu().getSelectedKey())) {
             shinseiJohoBuilder.set取下区分コード(new Code(div.getDdlTorisageJiyu().getSelectedKey()));
+        } else {
+            shinseiJohoBuilder.set取下区分コード(new Code(TorisageKubunCode.認定申請有効.getコード()));
         }
         shinseiJohoBuilder.set入所施設名称(new AtenaMeisho(div.getTxtNyushoShisetsu().getValue()));
         //shinseiJohoBuilder.set市町村コード(LasdecCode.EMPTY)
@@ -1181,6 +1212,8 @@ public class NinteiShinseiToroku {
             shinseiJohoBuilder.set取下年月日(FlexibleDate.EMPTY);
             shinseiJohoBuilder.set取下理由(RString.EMPTY);
         } else {
+            shinseiJohoBuilder.set処理状態区分(new Code(ShoriJotaiKubun.通常.getコード()));
+            shinseiJohoBuilder.set認定申請有効区分(new Code(NinteiShinseiYukoKubunCode.有効.getコード()));
             shinseiJohoBuilder.set取下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());
             shinseiJohoBuilder.set取下理由(div.getTxtTorisageJiyu().getValue());
             shinseiJohoBuilder.set却下年月日(div.getTxtTorisageDate().getValue() == null ? FlexibleDate.EMPTY : div.getTxtTorisageDate().getValue().toFlexibleDate());

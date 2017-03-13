@@ -1,0 +1,108 @@
+﻿{
+ "uiContainerName": "DBEUC10002",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "審査依頼受付",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "対象検索",
+     "toState": "審査依頼受付"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0100001",
+     "layoutTitle": "対象検索",
+     "eventName": "審査依頼受付へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE1010001",
+     "toLayoutTitle": "要介護認定申請（みなし２号）登録",
+     "toState": "取下げ"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "対象検索",
+     "toState": "検索結果一覧"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0100001",
+     "layoutTitle": "対象検索",
+     "eventName": "完了処理",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": "GoToKiHonUnyo",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE1030001",
+     "toLayoutTitle": "審査受付",
+     "toState": "登録"
+    },
+    {
+     "id": "7",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1030001",
+     "layoutTitle": "審査受付",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0100001",
+     "toLayoutTitle": "対象検索",
+     "toState": "default"
+    }
+   ]
+  }
+ ]
+}
