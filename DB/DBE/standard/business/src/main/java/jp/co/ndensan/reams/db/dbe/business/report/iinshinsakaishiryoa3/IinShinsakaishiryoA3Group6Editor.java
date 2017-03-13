@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3;
 
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.IinShinsakaiShiryoA3Layouts;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.IinShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iinshinsakaishiryoa3.IinShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

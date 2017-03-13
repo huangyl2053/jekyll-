@@ -343,6 +343,20 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString jusho;
     @ReportItem(name = "telNo", length = 3, order = 195)
     public RString telNo;
+    @ReportItem(name = "notes1", length = 15, order = 196)
+    public RString notes1;
+    @ReportItem(name = "notes2", length = 15, order = 197)
+    public RString notes2;
+    @ReportItem(name = "notes3", length = 15, order = 198)
+    public RString notes3;
+    @ReportItem(name = "notes4", length = 15, order = 199)
+    public RString notes4;
+    @ReportItem(name = "notes5", length = 15, order = 200)
+    public RString notes5;
+    @ReportItem(name = "notes6", length = 15, order = 201)
+    public RString notes6;
+    @ReportItem(name = "oldVersion", length = 3, order = 202)
+    public RString oldVersion;
 
     //DBE517041
     @ReportItem(name = "gaikyotokkiImg", order = 156)

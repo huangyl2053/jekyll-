@@ -325,31 +325,31 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get麻痺_右上肢(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_1);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get麻痺_左下肢(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_2);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get麻痺_右下肢(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_3);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get麻痺_その他(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_4);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             }
         }
         set前回結果比(厚労省IF識別コード, 前回調査票調査項目, 第１群リスト, is前回結果);
@@ -369,37 +369,37 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get拘縮_股関節(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_6);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get拘縮_膝関節(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_7);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get拘縮_その他(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_8);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set麻痺今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン１(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get寝返り(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_9);
                 前回調査結果 = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set寝返起き上今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン２(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get起き上(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_10);
                 前回調査結果 = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set寝返起き上今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン２(第１群, 前回調査結果コード);
             }
         }
         set前回結果１(厚労省IF識別コード, 前回調査票調査項目, 第１群リスト, is前回結果);
@@ -419,25 +419,25 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果 = ChosaAnser03.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser03.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set座位保持今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン３(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get両足での立位(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_12);
                 前回調査結果 = ChosaAnser04.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser04.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set両足での立位今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン４(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get歩行(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_13);
                 前回調査結果 = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set寝返起き上今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン２(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get立ち上(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_14);
                 前回調査結果 = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser02.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set寝返起き上今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン２(第１群, 前回調査結果コード);
             }
         }
         set前回結果比１(厚労省IF識別コード, 前回調査票調査項目, 第１群リスト, is前回結果);
@@ -457,31 +457,31 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果 = ChosaAnser04.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser04.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set両足での立位今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン４(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get洗身(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_16);
                 前回調査結果 = ChosaAnser06.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser06.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set洗身今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン６(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.getつめ切り(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_17);
                 前回調査結果 = ChosaAnser07.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser07.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.setつめ切り今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン７(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get視力(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_18);
                 前回調査結果 = ChosaAnser08.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser08.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set視力今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン８(第１群, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get聴力(厚労省IF識別コード))) {
                 第１群 = 第１群リスト.get(INT_19);
                 前回調査結果 = ChosaAnser09.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser09.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 第１群.set前回結果(get前回結果(is前回結果, 前回調査結果));
-                kekka.set聴力今回結果前回結果比(第１群.get調査結果コード(), 前回調査結果コード, 第１群);
+                kekka.set前回今回比較結果_回答パターン９(第１群, 前回調査結果コード);
             }
         }
     }
@@ -1264,37 +1264,37 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療１.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療１.get調査結果コード(), 前回調査結果コード, 特別な医療１);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療１, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get中心静脈栄養(厚労省IF識別コード))) {
                 特別な医療１ = 特別な医療リスト１.get(INT_1);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療１.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療１.get調査結果コード(), 前回調査結果コード, 特別な医療１);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療１, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get透析(厚労省IF識別コード))) {
                 特別な医療１ = 特別な医療リスト１.get(INT_2);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療１.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療１.get調査結果コード(), 前回調査結果コード, 特別な医療１);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療１, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.getストーマの処置(厚労省IF識別コード))) {
                 特別な医療１ = 特別な医療リスト１.get(INT_3);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療１.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療１.get調査結果コード(), 前回調査結果コード, 特別な医療１);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療１, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get酸素療法(厚労省IF識別コード))) {
                 特別な医療１ = 特別な医療リスト１.get(INT_4);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療１.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療１.get調査結果コード(), 前回調査結果コード, 特別な医療１);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療１, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.getレスピレーター(厚労省IF識別コード))) {
                 特別な医療１ = 特別な医療リスト１.get(INT_5);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療１.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療１.get調査結果コード(), 前回調査結果コード, 特別な医療１);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療１, 前回調査結果コード);
             }
         }
     }
@@ -1371,37 +1371,37 @@ public class IchijihanteikekkahyoItemSettei {
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療２.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療２.get調査結果コード(), 前回調査結果コード, 特別な医療２);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療２, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get疼痛の看護(厚労省IF識別コード))) {
                 特別な医療２ = 特別な医療リスト２.get(INT_1);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療２.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療２.get調査結果コード(), 前回調査結果コード, 特別な医療２);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療２, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.get経管栄養(厚労省IF識別コード))) {
                 特別な医療２ = 特別な医療リスト２.get(INT_2);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療２.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療２.get調査結果コード(), 前回調査結果コード, 特別な医療２);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療２, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.getモニター測定(厚労省IF識別コード))) {
                 特別な医療２ = 特別な医療リスト２.get(INT_3);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療２.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療２.get調査結果コード(), 前回調査結果コード, 特別な医療２);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療２, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.getじょくそうの処置(厚労省IF識別コード))) {
                 特別な医療２ = 特別な医療リスト２.get(INT_4);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療２.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療２.get調査結果コード(), 前回調査結果コード, 特別な医療２);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療２, 前回調査結果コード);
             } else if (前回調査票調査連番.equals(settei.getカテーテル(厚労省IF識別コード))) {
                 特別な医療２ = 特別な医療リスト２.get(INT_5);
                 前回調査結果 = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).get名称();
                 前回調査結果コード = ChosaAnser01.toValue(getコード_半角スペース除去(前回調査票調査.getResearchItem())).getコード();
                 特別な医療２.set前回結果(前回調査結果);
-                kekka.set麻痺今回結果前回結果比(特別な医療２.get調査結果コード(), 前回調査結果コード, 特別な医療２);
+                kekka.set前回今回比較結果_回答パターン１(特別な医療２, 前回調査結果コード);
             }
         }
     }

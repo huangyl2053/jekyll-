@@ -17,9 +17,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KumiawaseCommonB
 import jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3.JimuShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
@@ -226,12 +227,13 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                     特記情報 = get特記情報(審査会資料共通Entity);
                 }
                 主治医意見書情報.addAll(主治医意見書);
-                return new IchijihanteikekkahyoA3Business(new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
+                IchijihanteikekkahyoItemSetteiA3 一次判定結果票Item = new IchijihanteikekkahyoItemSetteiA3();
+                IchijihanteikekkahyoA3Entity 一次判定結果票Entity = 一次判定結果票Item.set項目(entity, 特記事項,
                         調査票調査項目, 前回調査票調査項目, 主治医意見書情報,
                         前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                         審査会資料共通Entity, 主治医意見書,
-                        new RString(myBatisParameter.getGogitaiNo()), 特記情報, batchReportWriter.getImageFolderPath()),
-                        true);
+                        new RString(myBatisParameter.getGogitaiNo()), 特記情報, batchReportWriter.getImageFolderPath());
+                return new IchijihanteikekkahyoA3Business(一次判定結果票Entity, true);
             }
         }
         return null;

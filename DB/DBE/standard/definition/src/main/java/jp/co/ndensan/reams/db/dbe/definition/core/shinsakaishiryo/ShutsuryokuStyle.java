@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei;
+package jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

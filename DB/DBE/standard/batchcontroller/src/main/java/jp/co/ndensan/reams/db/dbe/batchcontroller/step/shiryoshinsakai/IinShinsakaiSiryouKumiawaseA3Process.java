@@ -17,10 +17,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KumiawaseCommonB
 import jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3.IinShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.IinShinsakaiShiryoA3Layouts;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.IinShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.ShinsakaiSiryouKumiawaseA3ProcessParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
@@ -221,12 +222,13 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                 if (審査会資料共通Entity != null) {
                     特記情報 = get特記情報(審査会資料共通Entity);
                 }
-                return new IchijihanteikekkahyoA3Business(
-                        new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
+                IchijihanteikekkahyoItemSetteiA3 一次判定結果票Item = new IchijihanteikekkahyoItemSetteiA3();
+                IchijihanteikekkahyoA3Entity 一次判定結果票Entity = 一次判定結果票Item.set項目(entity, 特記事項,
                                 調査票調査項目, 前回調査票調査項目, 主治医意見書,
                                 前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
                                 審査会資料共通Entity, 主治医意見書, new RString(paramter.getGogitaiNo()),
-                                特記情報, batchReportWriter.getImageFolderPath()), false);
+                                特記情報, batchReportWriter.getImageFolderPath());
+                return new IchijihanteikekkahyoA3Business(一次判定結果票Entity, false);
             }
         }
         return null;

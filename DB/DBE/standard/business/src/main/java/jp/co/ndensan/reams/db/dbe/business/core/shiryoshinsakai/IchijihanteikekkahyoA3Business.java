@@ -1246,4 +1246,67 @@ public class IchijihanteikekkahyoA3Business {
     public RString get一次判定結果() {
         return entity.get一次判定結果();
     }
+
+    /**
+     * 凡例文言1を取得します。
+     *
+     * @return 凡例1
+     */
+    public RString get凡例1() {
+        return entity.get凡例1();
+    }
+
+    /**
+     * 凡例文言2を取得します。
+     *
+     * @return 凡例2
+     */
+    public RString get凡例2() {
+        return entity.get凡例2();
+    }
+
+    /**
+     * 凡例文言3を取得します。
+     *
+     * @return 凡例3
+     */
+    public RString get凡例3() {
+        return entity.get凡例3();
+    }
+
+    /**
+     * 凡例文言4を取得します。
+     *
+     * @return 凡例4
+     */
+    public RString get凡例4() {
+        return entity.get凡例4();
+    }
+
+    /**
+     * 凡例文言5を取得します。
+     *
+     * @return 凡例5
+     */
+    public RString get凡例5() {
+        return entity.get凡例5();
+    }
+
+    /**
+     * 凡例文言6を取得します。
+     *
+     * @return 凡例6
+     */
+    public RString get凡例6() {
+        return entity.get凡例6();
+    }
+
+    /**
+     * 前回結果の認定ソフトバージョン記号を取得します。
+     *
+     * @return 前回結果の認定ソフトバージョン記号
+     */
+    public RString get前回結果バージョン記号() {
+        return entity.get前回結果バージョン記号();
+    }
 }

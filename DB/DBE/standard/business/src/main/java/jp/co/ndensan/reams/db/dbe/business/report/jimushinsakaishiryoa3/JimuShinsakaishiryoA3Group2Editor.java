@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.JimuShinsakaiShiryoA3Layouts;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.JimuShinsakaiShiryoA3Layouts;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
@@ -187,6 +187,13 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
             source.jusho = new RString("住所　〒");
             source.telNo = new RString("TEL");
         }
+        source.notes1 = item.get凡例1();
+        source.notes2 = item.get凡例2();
+        source.notes3 = item.get凡例3();
+        source.notes4 = item.get凡例4();
+        source.notes5 = item.get凡例5();
+        source.notes6 = item.get凡例6();
+        source.oldVersion = item.get前回結果バージョン記号();
 //        ToDo:
 //        組み合わせ帳票はサービス区分ごとにlayoutを切り替えなくても、サービス区分『なし』のフォームの組み合わせで
 //        すべて賄うことができるため、条件分けしない。
@@ -453,7 +460,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         }
         return 年月日.wareki().eraType(EraType.ALPHABET)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+                .fillType(FillType.ZERO).toDateString();
     }
 
     private RString パターン17(FlexibleDate 年月日) {
@@ -461,7 +468,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
             return RString.EMPTY;
         }
         return 年月日.wareki().eraType(EraType.ALPHABET)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
-                .fillType(FillType.BLANK).toDateString();
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.ZERO).toDateString();
     }
 }

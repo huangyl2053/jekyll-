@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryosakusei.ShutsuryokuStyle;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.ShutsuryokuStyle;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
@@ -465,6 +465,7 @@ public class PublicationShiryoShinsakaiHandler {
         } else {
             div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
         }
+        setCcdBunshoNoInputControl();
     }
 
     private void 事務局用印刷帳票の初期化(RDate 日期, RString 出力スタイル, List<RString> 印刷帳票_審査会資料組み合わせ,

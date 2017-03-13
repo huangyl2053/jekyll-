@@ -147,6 +147,13 @@ public class IchijihanteikekkahyoA3Entity {
     private List<RString> 特記事項_tokkiText;
     private List<RString> 特記事項_tokkiImg;
     private int 審査番号;
+    private RString 凡例1;
+    private RString 凡例2;
+    private RString 凡例3;
+    private RString 凡例4;
+    private RString 凡例5;
+    private RString 凡例6;
+    private RString 前回結果バージョン記号;
 
     private RString 名前;
     private FlexibleDate 認定申請年月日;
