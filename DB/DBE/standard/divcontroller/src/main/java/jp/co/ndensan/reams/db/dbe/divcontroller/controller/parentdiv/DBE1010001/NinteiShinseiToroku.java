@@ -48,12 +48,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseitodokedeJohoBuilder
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiran;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiranData;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinRelateJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiBusinessCollection;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -149,6 +151,7 @@ public class NinteiShinseiToroku {
     private static final RString 完了param = new RString("GoToKiHonUnyo");
     private static final String 重複質問MSG = "同一被保険者番号、申請書区分、申請区分(申請時)、申請区分(法令)のデータが既に登録されています。データの追加";
     private static final RString 所属機関_TMP = new RString("・");
+    private static final RString 申請書管理番号_空 = new RString("00000000000000000");
     private boolean ninteiTandokuDounyuFlag;
 
     /**
@@ -243,28 +246,38 @@ public class NinteiShinseiToroku {
             ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
             getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
             set連絡先(管理番号, div, false);
-            RirekiJohoResult comResult = manager.get共有子データ(被保険者番号);
+            RirekiJohoResult comResult = manager.get共有子データ(管理番号.getColumnValue());
+            ShinseiRirekiJoho zenkaiShinseiRirekiJoho = dbt5121Manager.get申請履歴情報ByKey(管理番号);
+            RirekiJohoResult comZenkaiResult = new RirekiJohoResult(null);
+            if (!zenkaiShinseiRirekiJoho.get前回申請管理番号().getColumnValue().equals(申請書管理番号_空)) {
+                comZenkaiResult = manager.get共有子データ(zenkaiShinseiRirekiJoho.get前回申請管理番号().getColumnValue());
+            }
             if (comResult != null) {
-                div.setHdnKonkai(DataPassingConverter.serialize(comResult.get今回履歴情報()));
-                div.setHdnZenkai(DataPassingConverter.serialize(comResult.get前回履歴情報()));
+                div.setHdnKonkai(DataPassingConverter.serialize(comResult.get申請情報()));
+                if (comZenkaiResult != null) {
+                    div.setHdnZenkai(DataPassingConverter.serialize(comZenkaiResult.get申請情報()));
+                } else {
+                    div.setHdnZenkai(DataPassingConverter.serialize(new NinteiChosaJokyoDataPass()));
+                }
                 div.setHdnDisplayModeKey(new RString("1"));
                 div.setHdnSubGyomuCd(SubGyomuCode.DBE認定支援.value());
-                if (comResult.get前回履歴情報() != null && comResult.get前回履歴情報().get二次判定認定有効開始年月日() != null
-                        && !comResult.get前回履歴情報().get二次判定認定有効開始年月日().isEmpty()) {
-                    div.getCcdShikakuInfo().getTxtNinteiKaishiYmd().setValue(new RDate(comResult.get前回履歴情報().get二次判定認定有効開始年月日().toString()));
+                if (comZenkaiResult != null && comZenkaiResult.get申請情報() != null && comZenkaiResult.get申請情報().get二次判定認定有効開始年月日() != null
+                        && !comZenkaiResult.get申請情報().get二次判定認定有効開始年月日().isEmpty()) {
+                    div.getCcdShikakuInfo().getTxtNinteiKaishiYmd().setValue(new RDate(comZenkaiResult.get申請情報().get二次判定認定有効開始年月日().toString()));
                 }
-                if (comResult.get前回履歴情報() != null && comResult.get前回履歴情報().get二次判定認定有効終了年月日() != null
-                        && !comResult.get前回履歴情報().get二次判定認定有効終了年月日().isEmpty()) {
-                    div.getCcdShikakuInfo().getTxtNinteiShuryoYmd().setValue(new RDate(comResult.get前回履歴情報().get二次判定認定有効終了年月日().toString()));
+                if (comZenkaiResult != null && comZenkaiResult.get申請情報() != null && comZenkaiResult.get申請情報().get二次判定認定有効終了年月日() != null
+                        && !comZenkaiResult.get申請情報().get二次判定認定有効終了年月日().isEmpty()) {
+                    div.getCcdShikakuInfo().getTxtNinteiShuryoYmd().setValue(new RDate(comZenkaiResult.get申請情報().get二次判定認定有効終了年月日().toString()));
                 }
-                if (comResult.get前回履歴情報() != null && comResult.get前回履歴情報().get二次判定要介護状態区分コード() != null
-                        && !comResult.get前回履歴情報().get二次判定要介護状態区分コード().isEmpty()) {
-                    div.getCcdShikakuInfo().getTxtYokaigodo().setValue(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
-                            new RString(comResult.get前回履歴情報().get二次判定要介護状態区分コード().toString())).getName());
+                if (comZenkaiResult != null && comZenkaiResult.get申請情報() != null && comZenkaiResult.get申請情報().get二次判定要介護状態区分コード() != null
+                        && !comZenkaiResult.get申請情報().get二次判定要介護状態区分コード().isEmpty()) {
+                    div.getCcdShikakuInfo().getTxtYokaigodo().setValue(
+                            YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(comZenkaiResult.get申請情報().get厚労省IF識別コード().getColumnValue()),
+                            new RString(comZenkaiResult.get申請情報().get二次判定要介護状態区分コード().toString())).getName());
                 }
 
-                if (comResult.get今回履歴情報() != null
-                        && comResult.get今回履歴情報().get二次判定年月日() != null) {
+                if (comResult.get申請情報() != null
+                        && comResult.get申請情報().get二次判定年月日() != null) {
                     div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiJokyo().setValue(ShinseiJokyoKubun.認定完了.get名称());
                 } else {
                     div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiJokyo().setValue(ShinseiJokyoKubun.申請中.get名称());
@@ -1124,7 +1137,7 @@ public class NinteiShinseiToroku {
             KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv, NinteiShinseiJoho shinseiJoho) {
         NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
         shinseiJohoBuilder.set申請年度(new FlexibleYear(kihonJohoInputDiv
-                .getTxtShinseiYMD().getValue().getYear().toDateString()));
+                .getTxtShinseiYMD().getValue().getNendo().toDateString()));
         shinseiJohoBuilder.set認定申請年月日(rDateTOFlexDate(kihonJohoInputDiv
                 .getTxtShinseiYMD().getValue()));
         shinseiJohoBuilder.set被保険者区分コード(kihonJohoInputDiv.getDdlHihokenshaKubun().getSelectedKey());
@@ -1310,7 +1323,7 @@ public class NinteiShinseiToroku {
         shinseiJohoBuilder.set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()));
         shinseiJohoBuilder.set証記載保険者番号(div.getCcdShikakuInfo().getHookenshaCode());
         shinseiJohoBuilder.set申請年度(new FlexibleYear(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv()
-                .getTxtShinseiYMD().getValue().getYear().toDateString()));
+                .getTxtShinseiYMD().getValue().getNendo().toDateString()));
         shinseiJohoBuilder.set被保険者番号(div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue());
         shinseiJohoBuilder.set認定申請年月日(rDateTOFlexDate(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv()
                 .getTxtShinseiYMD().getValue()));

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinseitoroku;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,12 +25,12 @@ public interface INinteiShinseiTorokuMapper {
     NinteiShinseiTorokuRelateEntity getShuseiJohoForLoad(RString 申請書管理番号);
 
     /**
-     * 被保険者番号から、履歴情報データを取得します。
+     * 申請書管理番号から、申請情報データを取得します。
      *
-     * @param 被保険者番号 被保険者番号
-     * @return 履歴情報
+     * @param 申請書管理番号 申請書管理番号
+     * @return 申請情報
      */
-    List<RirekiJohoRelateEntity> getDataForCom(RString 被保険者番号);
+    RirekiJohoRelateEntity getDataForCom(RString 申請書管理番号);
             
     /**
      * DbT5101を削除します。

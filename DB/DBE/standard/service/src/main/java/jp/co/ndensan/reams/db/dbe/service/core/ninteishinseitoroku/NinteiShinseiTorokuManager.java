@@ -156,16 +156,13 @@ public class NinteiShinseiTorokuManager {
     /**
      * 各共有子Divのデータを取得します。
      *
-     * @param 被保険者番号 被保険者番号
+     * @param 申請書管理番号 申請書管理番号
      * @return 各共有子Divのデータ
      */
-    public RirekiJohoResult get共有子データ(RString 被保険者番号) {
-        List<RirekiJohoRelateEntity> entityList
-                = mapperProvider.create(INinteiShinseiTorokuMapper.class).getDataForCom(被保険者番号);
-        if (entityList == null || entityList.isEmpty()) {
-            return null;
-        }
-        return new RirekiJohoResult(entityList);
+    public RirekiJohoResult get共有子データ(RString 申請書管理番号) {
+        RirekiJohoRelateEntity rirekiJohoRelateEntity
+                = mapperProvider.create(INinteiShinseiTorokuMapper.class).getDataForCom(申請書管理番号);
+        return new RirekiJohoResult(rirekiJohoRelateEntity);
     }
 
     /**
