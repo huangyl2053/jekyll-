@@ -487,7 +487,7 @@ public class NinteichosaItakusakiMainHandler {
         }
         KinyuKikanCode 金融機関コード = KinyuKikanCode.EMPTY;
         KinyuKikanShitenCode 金融機関支店コード = new KinyuKikanShitenCode(new RString(""));
-        RString 預金種別コード = new RString("");
+        RString 預金種別コード = RString.EMPTY;
         if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null
                 && div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode() != null) {
             金融機関コード = div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode();
@@ -498,7 +498,9 @@ public class NinteichosaItakusakiMainHandler {
             } else {
                 金融機関支店コード = div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode();
             }
-            預金種別コード = div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedKey();
+            if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+                預金種別コード = div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedKey();
+            }
         }
         return sonotaKikanJoho.createBuilderForEdit()
                 .set機関名称(div.getChosaitakusakiJohoInput().getTxtSonotaKikanname().getValue())
