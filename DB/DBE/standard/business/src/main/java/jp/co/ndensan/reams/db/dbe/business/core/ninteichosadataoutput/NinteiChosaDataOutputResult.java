@@ -162,36 +162,38 @@ public class NinteiChosaDataOutputResult {
 
     private void set前回分Entity(NinteiChosaBasicDataRelateEntity entityParam, NinteiChosaDataOutputEucCsvEntity eucCsvEntity) {
         NinteiChosaDataOutputBatchRelateZenkaiEntity entityZenkai = entityParam.get前回分Entity();
-        eucCsvEntity.set前回_証記載保険者番号(entityZenkai.get証記載保険者番号_前回());
-        eucCsvEntity.set前回_被保険者番号(entityZenkai.get被保険者番号_前回());
-        eucCsvEntity.set前回_認定申請年月日(entityZenkai.get認定申請年月日_前回());
-        eucCsvEntity.set前回_認定調査_サービス区分コード(entityZenkai.getサービス区分コード_前回());
-        if (RString.isNullOrEmpty(entityZenkai.getサービス区分コード_前回())) {
-            eucCsvEntity.set前回_認定調査_サービス区分(RString.EMPTY);
-        } else {
-            eucCsvEntity.set前回_認定調査_サービス区分(ServiceKubunCode.toValue(entityZenkai.getサービス区分コード_前回()).get名称());
-        }
-        setサービス状況_前回(eucCsvEntity, entityZenkai);
-        setサービス状況フラグ_前回(eucCsvEntity, entityZenkai);
-        setサービス状況記入_前回(eucCsvEntity, entityZenkai);
-        set施設利用_前回(eucCsvEntity, entityZenkai);
+        if (entityZenkai != null) {
+            eucCsvEntity.set前回_証記載保険者番号(entityZenkai.get証記載保険者番号_前回());
+            eucCsvEntity.set前回_被保険者番号(entityZenkai.get被保険者番号_前回());
+            eucCsvEntity.set前回_認定申請年月日(entityZenkai.get認定申請年月日_前回());
+            eucCsvEntity.set前回_認定調査_サービス区分コード(entityZenkai.getサービス区分コード_前回());
+            if (RString.isNullOrEmpty(entityZenkai.getサービス区分コード_前回())) {
+                eucCsvEntity.set前回_認定調査_サービス区分(RString.EMPTY);
+            } else {
+                eucCsvEntity.set前回_認定調査_サービス区分(ServiceKubunCode.toValue(entityZenkai.getサービス区分コード_前回()).get名称());
+            }
+            setサービス状況_前回(eucCsvEntity, entityZenkai);
+            setサービス状況フラグ_前回(eucCsvEntity, entityZenkai);
+            setサービス状況記入_前回(eucCsvEntity, entityZenkai);
+            set施設利用_前回(eucCsvEntity, entityZenkai);
 
-        eucCsvEntity.set前回_認定調査_認知症高齢者の日常生活自立度コード(entityZenkai.get認知症日常生活自立度コード_前回());
-        if (RString.isNullOrEmpty(entityZenkai.get認知症日常生活自立度コード_前回())) {
-            eucCsvEntity.set前回_認定調査_認知症高齢者の日常生活自立度(RString.EMPTY);
-        } else {
-            eucCsvEntity.set前回_認定調査_認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(entityZenkai.get認知症日常生活自立度コード_前回()).get名称());
+            eucCsvEntity.set前回_認定調査_認知症高齢者の日常生活自立度コード(entityZenkai.get認知症日常生活自立度コード_前回());
+            if (RString.isNullOrEmpty(entityZenkai.get認知症日常生活自立度コード_前回())) {
+                eucCsvEntity.set前回_認定調査_認知症高齢者の日常生活自立度(RString.EMPTY);
+            } else {
+                eucCsvEntity.set前回_認定調査_認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(entityZenkai.get認知症日常生活自立度コード_前回()).get名称());
+            }
+            eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度コード(entityZenkai.get障害日常生活自立度コード_前回());
+            if (RString.isNullOrEmpty(entityZenkai.get障害日常生活自立度コード_前回())) {
+                eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度(RString.EMPTY);
+            } else {
+                eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entityZenkai.get障害日常生活自立度コード_前回()).get名称());
+            }
+            set調査項目_前回(eucCsvEntity, entityZenkai);
+            eucCsvEntity.set前回_厚労省IF識別コード(entityZenkai.get厚労省IF識別コード_前回());
+            eucCsvEntity.set前回_認定日(entityParam.get認定日_前回());
+            eucCsvEntity.set前回_認定結果コード(entityParam.get認定結果コード_前回());
         }
-        eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度コード(entityZenkai.get障害日常生活自立度コード_前回());
-        if (RString.isNullOrEmpty(entityZenkai.get障害日常生活自立度コード_前回())) {
-            eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度(RString.EMPTY);
-        } else {
-            eucCsvEntity.set前回_認定調査_障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(entityZenkai.get障害日常生活自立度コード_前回()).get名称());
-        }
-        set調査項目_前回(eucCsvEntity, entityZenkai);
-        eucCsvEntity.set前回_厚労省IF識別コード(entityZenkai.get厚労省IF識別コード_前回());
-        eucCsvEntity.set前回_認定日(entityParam.get認定日_前回());
-        eucCsvEntity.set前回_認定結果コード(entityParam.get認定結果コード_前回());
     }
 
     private void setサービス状況_今回(NinteiChosaDataOutputEucCsvEntity eucCsvEntity, NinteiChosaDataOutputBatchRelateEntity entity) {
