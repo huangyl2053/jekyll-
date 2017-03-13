@@ -179,13 +179,20 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
-        source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
-                .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
         if (!ServiceKubunCode.なし.getコード().equals(item.getServiceKubunCode().getColumnValue())) {
             source.shisetsuName = new RString("施設名　：");
             source.jusho = new RString("住所　〒");
             source.telNo = new RString("TEL");
         }
+        source.notes1 = item.get凡例1();
+        source.notes2 = item.get凡例2();
+        source.notes3 = item.get凡例3();
+        source.notes4 = item.get凡例4();
+        source.notes5 = item.get凡例5();
+        source.notes6 = item.get凡例6();
+        source.oldVersion = item.get前回結果バージョン記号();
+        source.layout = HanteiKekkaHyoA3ReportFormGroupIndex
+                .getFormGroupIndex(item.getServiceKubunCode(), item.get特記事項テキスト_イメージ区分(), item.get特記パターン());
         return editSource1(source);
     }
 

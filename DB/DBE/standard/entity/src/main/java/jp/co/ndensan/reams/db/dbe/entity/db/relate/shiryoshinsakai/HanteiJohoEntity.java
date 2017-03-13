@@ -29,8 +29,10 @@ public class HanteiJohoEntity {
     private Code seibetsu;
     private int age;
     private Code nigoTokuteiShippeiCode;
+    private Code koroshoIfShikibetsuCode;
     private Code yokaigoJotaiKubunCode;
     private int hanteiNinteiYukoKikan;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;
+    private Code ichijiHanteiKekkaNinchishoKasanCode;
 }

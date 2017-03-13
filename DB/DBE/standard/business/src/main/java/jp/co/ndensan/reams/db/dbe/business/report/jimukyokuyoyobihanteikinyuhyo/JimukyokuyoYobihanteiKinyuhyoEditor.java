@@ -13,13 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事務局用予備判定記入表のEditorです。
@@ -67,8 +63,8 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.listShinseiKubun_1 = business.get申請区分();
         source.listNo_1 = business.getNo();
         source.listHokenshaName_1 = business.get保険者();
-        source.shinsakaiKaisaiNo = business.get審査会開催番号().length() <= INT_LENGTH ? new RString(business.get審査会開催番号().toInt())
-                : new RString(new Decimal(business.get審査会開催番号().toString().substring(business.get審査会開催番号().length() - INT_LENGTH)).toString());
+        source.shinsakaiKaisaiNo = new RString("第").concat(new RString(business.get審査会開催番号().substring(business.get審査会開催番号()
+                .length() - INT_LENGTH).toInt())).concat(new RString("回　審査会"));
         if (business.get開催年月日() != null && !business.get開催年月日().isEmpty()) {
             source.kaisaiYMD = getパターン33(business.get開催年月日(), FillType.BLANK);
         }

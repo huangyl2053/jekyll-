@@ -541,6 +541,20 @@ public class JimuTokkiTextA3ReportSource implements IReportSource {
     public RString shinsaDD;
     @ReportItem(name = "shinsakaiOrder", order = 296)
     public RString shinsakaiOrder;
+    @ReportItem(name = "notes1", length = 15, order = 300)
+    public RString notes1;
+    @ReportItem(name = "notes2", length = 15, order = 301)
+    public RString notes2;
+    @ReportItem(name = "notes3", length = 15, order = 302)
+    public RString notes3;
+    @ReportItem(name = "notes4", length = 15, order = 303)
+    public RString notes4;
+    @ReportItem(name = "notes5", length = 15, order = 304)
+    public RString notes5;
+    @ReportItem(name = "notes6", length = 15, order = 305)
+    public RString notes6;
+    @ReportItem(name = "oldVersion", length = 3, order = 306)
+    public RString oldVersion;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

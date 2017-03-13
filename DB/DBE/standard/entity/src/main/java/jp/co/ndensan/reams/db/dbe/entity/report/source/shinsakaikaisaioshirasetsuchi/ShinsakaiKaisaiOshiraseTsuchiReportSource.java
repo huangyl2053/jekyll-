@@ -44,7 +44,7 @@ public class ShinsakaiKaisaiOshiraseTsuchiReportSource implements IReportSource 
     public RString meishoFuyo;
     @ReportItem(name = "customerBarCode", order = 16)
     public RString customerBarCode;
-    @ReportItem(name = "pageCount", length = 8, order = 17)
+    @ReportItem(name = "pageCount", length = 4, order = 17)
     public RString pageCount;
     @ReportItem(name = "title", length = 30, order = 18)
     public RString title;

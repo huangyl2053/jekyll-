@@ -1209,13 +1209,23 @@ public class SabisuJyoukyoA3 {
         項目.set要介護認定等基準時間_医療関連(new RString(new Decimal(entity.getKijunJikanIryoKanren()).divide(基準時間算出用_10).toString()));
         項目.set要介護認定等基準時間_認知症加算(new RString(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10).toString()));
         if (!RString.isNullOrEmpty(entity.getIchijiHnateiKeikokuCode())) {
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(entity.getIchijiHnateiKeikokuCode());
-            if (matcher.find()) {
-                項目.set警告コード(entity.getIchijiHnateiKeikokuCode());
+            RString 警告コード = entity.getIchijiHnateiKeikokuCode();
+            RStringBuilder rstringBuilder = new RStringBuilder();
+            int len = 0;
+            while (-1 < 警告コード.indexOf("1", len)) {
+                int index1 = 警告コード.indexOf("1", len);
+                rstringBuilder.append(index1 + 1 < 10 ? "0" + String.valueOf(index1 + 1) : String.valueOf(index1 + 1));
+                rstringBuilder.append(",");
+                len = index1 + 1;
+            }
+            if (!RString.isNullOrEmpty(rstringBuilder.toRString())) {
+                RString result = rstringBuilder.toRString().substring(0, rstringBuilder.toRString().length() - 1);
+                項目.set警告コード(result);
             } else {
                 項目.set警告コード(RString.EMPTY);
             }
+        } else {
+            項目.set警告コード(RString.EMPTY);
         }
         List<TyukanHyouka> 中間評価リスト = new ArrayList<>();
         TyukanHyouka 中間評価項目 = new TyukanHyouka();
@@ -1329,7 +1339,7 @@ public class SabisuJyoukyoA3 {
         } else {
             項目.set調査員資格(Sikaku.toValue(getName_半角スペース削除(entity.getChosainShikaku())).get名称());
         }
-        if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null) {
+        if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null || entity.getNinchishoJiritsudoIIijoNoGaizensei().intValue() == -1) {
             項目.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
         } else {
             項目.set認知症自立度Ⅱ以上の蓋然性(new RString(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));

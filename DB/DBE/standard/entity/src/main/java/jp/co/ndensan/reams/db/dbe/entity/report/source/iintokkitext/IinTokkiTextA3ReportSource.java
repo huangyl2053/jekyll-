@@ -505,6 +505,20 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
     public RString shinsaDD;
     @ReportItem(name = "shinsakaiOrder", length = 2, order = 296)
     public RString shinsakaiOrder;
+    @ReportItem(name = "notes1", length = 15, order = 300)
+    public RString notes1;
+    @ReportItem(name = "notes2", length = 15, order = 301)
+    public RString notes2;
+    @ReportItem(name = "notes3", length = 15, order = 302)
+    public RString notes3;
+    @ReportItem(name = "notes4", length = 15, order = 303)
+    public RString notes4;
+    @ReportItem(name = "notes5", length = 15, order = 304)
+    public RString notes5;
+    @ReportItem(name = "notes6", length = 15, order = 305)
+    public RString notes6;
+    @ReportItem(name = "oldVersion", length = 3, order = 306)
+    public RString oldVersion;
     //なし
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

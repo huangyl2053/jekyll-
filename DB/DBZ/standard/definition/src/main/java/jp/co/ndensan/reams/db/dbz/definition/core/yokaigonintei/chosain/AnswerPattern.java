@@ -153,6 +153,95 @@ public enum AnswerPattern {
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("回答パターン"));
     }
 
+    public RString get回答コード(RString researchItem) {
+        if (researchItem == null) {
+            return RString.EMPTY;
+        }
+
+        if (AnswerPattern.回答パターン1.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser01.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン2.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser02.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン3.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser03.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン4.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser04.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン5.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser05.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン6.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser06.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン7.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser07.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン8.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser08.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン9.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser09.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン10.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser10.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン11.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser11.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン12.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser12.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン13.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser13.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン14.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser14.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン15.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser15.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン16.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser16.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン17.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser17.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン20.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser20.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン21.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser21.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン22.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser22.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン23.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser23.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン24.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser24.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン30.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser30.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン31.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser31.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン32.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser32.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン33.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser33.toValue(researchItem).getコード();
+        }
+        if (AnswerPattern.回答パターン34.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser34.toValue(researchItem).getコード();
+        }
+        return RString.EMPTY;
+    }
+
     public RString get回答(RString researchItem) {
         if (researchItem == null) {
             return RString.EMPTY;
@@ -238,6 +327,107 @@ public enum AnswerPattern {
         }
         if (AnswerPattern.回答パターン34.getコード().equals(this.answerPatternCode)) {
             return ChosaAnser34.toValue(researchItem).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    public RString get回答略称(RString researchItem) {
+        if (researchItem == null) {
+            return RString.EMPTY;
+        }
+
+        if (AnswerPattern.回答パターン1.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser01.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン2.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser02.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン3.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser03.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン4.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser04.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン5.getコード().equals(this.answerPatternCode)) {
+//            Todo：
+//            略称がないためとりあえず名称を返す。
+            return ChosaAnser05.toValue(researchItem).get名称();
+        }
+        if (AnswerPattern.回答パターン6.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser06.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン7.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser07.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン8.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser08.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン9.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser09.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン10.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser10.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン11.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser11.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン12.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser12.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン13.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser13.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン14.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser14.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン15.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser15.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン16.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser16.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン17.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser17.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン20.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser20.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン21.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser21.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン22.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser22.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン23.getコード().equals(this.answerPatternCode)) {
+//            Todo：
+//            略称がないためとりあえず名称を返す。
+            return ChosaAnser23.toValue(researchItem).get名称();
+        }
+        if (AnswerPattern.回答パターン24.getコード().equals(this.answerPatternCode)) {
+//            Todo：
+//            略称がないためとりあえず名称を返す。
+            return ChosaAnser24.toValue(researchItem).get名称();
+        }
+        if (AnswerPattern.回答パターン30.getコード().equals(this.answerPatternCode)) {
+//            Todo：
+//            略称がないためとりあえず名称を返す。
+            return ChosaAnser30.toValue(researchItem).get名称();
+        }
+        if (AnswerPattern.回答パターン31.getコード().equals(this.answerPatternCode)) {
+//            Todo：
+//            略称がないためとりあえず名称を返す。
+            return ChosaAnser31.toValue(researchItem).get名称();
+        }
+        if (AnswerPattern.回答パターン32.getコード().equals(this.answerPatternCode)) {
+//            Todo：
+//            略称がないためとりあえず名称を返す。
+            return ChosaAnser32.toValue(researchItem).get名称();
+        }
+        if (AnswerPattern.回答パターン33.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser33.toValue(researchItem).get略称();
+        }
+        if (AnswerPattern.回答パターン34.getコード().equals(this.answerPatternCode)) {
+            return ChosaAnser34.toValue(researchItem).get略称();
         }
         return RString.EMPTY;
     }

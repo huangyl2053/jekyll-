@@ -27,6 +27,7 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
     private RString shinsakaiKaishiYoteiTime;
     private int gogitaiNo;
+    private RString gogitaiName;
     private RString bunshoKanriNo;
 
     /**
@@ -39,6 +40,7 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
      * @param shinsakaiKaisaiYoteiYMD 開催予定年月日
      * @param shinsakaiKaishiYoteiTime 予定時刻
      * @param gogitaiNo 合議体番号
+     * @param gogitaiName
      * @param bunshoKanriNo 文書管理番号
      */
     public IinTuutishoProcessParameter(
@@ -49,6 +51,7 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
             FlexibleDate shinsakaiKaisaiYoteiYMD,
             RString shinsakaiKaishiYoteiTime,
             int gogitaiNo,
+            RString gogitaiName,
             RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiBasho = shinsakaiKaisaiBasho;
@@ -57,6 +60,7 @@ public class IinTuutishoProcessParameter implements IBatchProcessParameter {
         this.shinsakaiKaisaiYoteiYMD = shinsakaiKaisaiYoteiYMD;
         this.shinsakaiKaishiYoteiTime = shinsakaiKaishiYoteiTime;
         this.gogitaiNo = gogitaiNo;
+        this.gogitaiName = gogitaiName;
         this.bunshoKanriNo = bunshoKanriNo;
     }
 

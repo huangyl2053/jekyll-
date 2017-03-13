@@ -206,6 +206,7 @@ public class DBE517001_ShinsakaiShiryoJImukyokuParameter extends BatchParameterB
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiNo,
+                gogitaiName,
                 bunshoKanriNo);
     }
 

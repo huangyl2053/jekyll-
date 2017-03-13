@@ -514,7 +514,8 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         dbt5211."remban" ,
-        dbt5211."researchItem"
+        dbt5211."researchItem",
+        dbt5211."koroshoIfShikibetsuCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
         INNER JOIN
@@ -561,7 +562,8 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT
         dbt5304."remban" ,
-        dbt5304."ikenItem"
+        dbt5304."ikenItem",
+        dbt5304."koroshoIfShikibetsuCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
         INNER JOIN
@@ -819,10 +821,12 @@
         dbt5101."seibetsu" AS dbt5101_seibetsu,
         dbt5101."age" AS dbt5101_age,
         dbt5101."nigoTokuteiShippeiCode" AS dbt5101_nigoTokuteiShippeiCode,
+        dbt5101."koroshoIfShikibetsuCode" AS dbt5101_konkaiIfShikibetsuCode,
         ZenShinsakaiWariateJoho."nijiHanteiYokaigoJotaiKubunCode" AS dbt5102_jotaiKubunCode,
         ZenShinsakaiWariateJoho."nijiHanteiNinteiYukoKikan" AS dbt5102_yukoKikan,
         dbt5116."ichijiHanteiKekkaCode" AS dbt5116_ichijiHanteiKekkaCode,
-        dbt5116."ichijiHnateiKeikokuCode" AS dbt5116_ichijiHnateiKeikokuCode
+        dbt5116."ichijiHnateiKeikokuCode" AS dbt5116_ichijiHnateiKeikokuCode,
+        dbt5116."ichijiHanteiKekkaNinchishoKasanCode" AS dbt5116_ichijiHanteiKekkaNinchishoKasanCode
         FROM
         <if test="isGogitaiDummyFlag">
             rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502            
@@ -877,10 +881,12 @@
         <result property="seibetsu" column="dbt5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="age" column="dbt5101_age" />
         <result property="nigoTokuteiShippeiCode" column="dbt5101_nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="koroshoIfShikibetsuCode" column="dbt5101_konkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="yokaigoJotaiKubunCode" column="dbt5102_jotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="hanteiNinteiYukoKikan" column="dbt5102_yukoKikan" />
         <result property="ichijiHanteiKekkaCode" column="dbt5116_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ichijiHnateiKeikokuCode" column="dbt5116_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ichijiHanteiKekkaNinchishoKasanCode" column="dbt5116_ichijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
     <select id="getJimuGaikyoTokki" resultMap="Result_GaikyoTokki"

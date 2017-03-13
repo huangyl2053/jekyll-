@@ -85,9 +85,10 @@ public class JimuHanteiDataSakuseiA4Process extends BatchKeyBreakBase<HanteiJoho
 
     @Override
     protected void keyBreakProcess(HanteiJohoEntity t) {
-        if (データ件数 % 満ページ件数 == 0) {
-            JimukyokuyoYobihanteiKinyuhyoReport report = new JimukyokuyoYobihanteiKinyuhyoReport(business);
-            report.writeBy(reportSourceWriter);
-        }
+        //TODO n8178 城間 ブレーク時にデータを出力する意図が不明。帳票に入りきらなくなったら次ページに自動で印字されるはず。
+//        if (データ件数 % 満ページ件数 == 0) {
+//            JimukyokuyoYobihanteiKinyuhyoReport report = new JimukyokuyoYobihanteiKinyuhyoReport(business);
+//            report.writeBy(reportSourceWriter);
+//        }
     }
 }

@@ -258,6 +258,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiNo,
+                gogitaiName,
                 bunshoKanriNo);
     }
 
