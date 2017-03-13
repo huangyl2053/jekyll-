@@ -71,6 +71,8 @@ public class SonotashiryoA3Editor implements ISonotashiryoA3Editor {
         if (index != 0) {
             source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);
             source.imgSonotashiryo2 = business.getその他資料イメージパス(2 * index - 1);
+        } else {
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(index);            
         }
 
         source.shikibetuCode = new ShikibetsuCode(business.get識別コード());

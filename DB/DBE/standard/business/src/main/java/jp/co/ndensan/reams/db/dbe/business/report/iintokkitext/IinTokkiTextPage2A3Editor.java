@@ -92,27 +92,22 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
         source.hokenshaNo = RString.EMPTY;
         source.hihokenshaNo = RString.EMPTY;
         source.hihokenshaName = RString.EMPTY;
-        source.sakuseiGengo = get元号(item.get認定申請年月日());
-        source.sakuseiYY = get年(item.get認定申請年月日()).replace(get元号(item.get認定申請年月日()),
-                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.sakuseiMM = new RString(item.get認定申請年月日().getMonthValue());
-        source.sakuseiDD = new RString(item.get認定申請年月日().getDayValue());
-        FlexibleDate システム日付 = FlexibleDate.getNowDate();
-        source.chosaGengo = get元号(システム日付);
-        source.chosaYY = get年(システム日付).replace(get元号(システム日付), RString.EMPTY)
-                .replace(new RString("年"), RString.EMPTY);
-        source.chosaMM = new RString(システム日付.getMonthValue());
-        source.chosaDD = new RString(システム日付.getDayValue());
-        source.shinseiGengo = get元号(item.get認定調査実施年月日());
-        source.shinseiYY = get年(item.get認定調査実施年月日()).replace(get元号(item.get認定調査実施年月日()),
-                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.shinseiMM = new RString(item.get認定調査実施年月日().getMonthValue());
-        source.shinseiDD = new RString(item.get認定調査実施年月日().getDayValue());
-        source.shinsaGengo = get元号(item.get介護認定審査会開催年月日());
-        source.shinsaYY = get年(item.get介護認定審査会開催年月日()).replace(get元号(item.get介護認定審査会開催年月日()),
-                RString.EMPTY).replace(new RString("年"), RString.EMPTY);
-        source.shinsaMM = new RString(item.get介護認定審査会開催年月日().getMonthValue());
-        source.shinsaDD = new RString(item.get介護認定審査会開催年月日().getDayValue());
+        source.shinseiGengo = get元号(item.get今回認定申請年月日());
+        source.shinseiYY = get年(item.get今回認定申請年月日());
+        source.shinseiMM = get月(item.get今回認定申請年月日());
+        source.shinseiDD = get日(item.get今回認定申請年月日());
+        source.sakuseiGengo = get元号(item.get審査会資料作成年月日());
+        source.sakuseiYY = get年(item.get審査会資料作成年月日());
+        source.sakuseiMM = get月(item.get審査会資料作成年月日());
+        source.sakuseiDD = get日(item.get審査会資料作成年月日());
+        source.chosaGengo = get元号(item.get今回認定調査実施年月日());
+        source.chosaYY = get年(item.get今回認定調査実施年月日());
+        source.chosaMM = get月(item.get今回認定調査実施年月日());
+        source.chosaDD = get日(item.get今回認定調査実施年月日());
+        source.shinsaGengo = get元号(item.get今回認定審査年月日());
+        source.shinsaYY = get年(item.get今回認定審査年月日());
+        source.shinsaMM = get月(item.get今回認定審査年月日());
+        source.shinsaDD = get日(item.get今回認定審査年月日());
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
             if (全面.equals(item.get特記パターン())) {
                 source.tokkiText1 = get特記事項_tokkiText((page - 1) * 2 - 1);
@@ -416,6 +411,20 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
         return パターン12(年月日).getYear();
     }
 
+    private RString get月(FlexibleDate 年月日) {
+        if (年月日 != null && !年月日.isEmpty()) {
+            return new RString(年月日.getMonthValue());
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get日(FlexibleDate 年月日) {
+        if (年月日 != null && !年月日.isEmpty()) {
+            return new RString(年月日.getDayValue());
+        }
+        return RString.EMPTY;
+    }
+    
     private FillTypeFormatted パターン12(FlexibleDate 年月日) {
 
         return 年月日.wareki().eraType(EraType.KANJI)

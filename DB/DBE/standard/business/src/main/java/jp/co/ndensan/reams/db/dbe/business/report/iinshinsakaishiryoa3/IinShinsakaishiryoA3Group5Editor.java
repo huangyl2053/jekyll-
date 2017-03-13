@@ -51,26 +51,26 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
         source.hihokenshaName = business.get名前();
         source.shinseiGengo = get元号(business.get認定申請年月日());
         source.shinseiYY = get年(business.get認定申請年月日());
-        source.shinseiMM = new RString(business.get認定申請年月日().getMonthValue());
-        source.shinseiDD = new RString(business.get認定申請年月日().getDayValue());
+        source.shinseiMM = get月(business.get認定申請年月日());
+        source.shinseiDD = get日(business.get認定申請年月日());
         FlexibleDate システム日付 = FlexibleDate.getNowDate();
         source.sakuseiGengo = get元号(システム日付);
         source.sakuseiYY = get年(システム日付);
-        source.sakuseiMM = new RString(システム日付.getMonthValue());
-        source.sakuseiDD = new RString(システム日付.getDayValue());
+        source.sakuseiMM = get月(システム日付);
+        source.sakuseiDD = get日(システム日付);
         source.chosaGengo = get元号(business.get認定調査実施年月日());
         source.chosaYY = get年(business.get認定調査実施年月日());
-        source.chosaMM = new RString(business.get認定調査実施年月日().getMonthValue());
-        source.chosaDD = new RString(business.get認定調査実施年月日().getDayValue());
+        source.chosaMM = get月(business.get認定調査実施年月日());
+        source.chosaDD = get日(business.get認定調査実施年月日());
         source.shinsaGengo = get元号(business.get介護認定審査会開催年月日());
         source.shinsaYY = get年(business.get介護認定審査会開催年月日());
-        source.shinsaMM = new RString(business.get介護認定審査会開催年月日().getMonthValue());
-        source.shinsaDD = new RString(business.get介護認定審査会開催年月日().getDayValue());
+        source.shinsaMM = get月(business.get介護認定審査会開催年月日());
+        source.shinsaDD = get日(business.get介護認定審査会開催年月日());
         if (index != 0) {
             source.imgSonotashiryo1 = business.getその他資料イメージパス(2 * index - 2);
             source.imgSonotashiryo2 = business.getその他資料イメージパス(2 * index - 1);
         } else {
-            source.imgSonotashiryo1 = business.getその他資料イメージパス(index);            
+            source.imgSonotashiryo1 = business.getその他資料イメージパス(index);
         }
         source.layout = IinShinsakaiShiryoA3Layouts.委員用その他資料.index();
         return source;
@@ -86,6 +86,20 @@ public class IinShinsakaishiryoA3Group5Editor implements IIinShinsakaishiryoA3Ed
     private RString get年(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return パターン12(年月日).substring(2, INT_4);
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get月(FlexibleDate 年月日) {
+        if (年月日 != null && !年月日.isEmpty()) {
+            return new RString(年月日.getMonthValue());
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get日(FlexibleDate 年月日) {
+        if (年月日 != null && !年月日.isEmpty()) {
+            return new RString(年月日.getDayValue());
         }
         return RString.EMPTY;
     }
