@@ -51,7 +51,7 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
         printTimeStamp.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         printTimeStamp.append(new RString("　"));
         printTimeStamp.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         RStringBuilder nendoBuilder = new RStringBuilder();
@@ -70,9 +70,11 @@ public class ShinsakaiGijirokuEditor implements IShinsakaiGijirokuEditor {
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RStringBuilder temp = new RStringBuilder();
-        temp.append(new RTime(審査会情報.getShinsakaiKaishiTime()).toFormattedTimeString(DisplayTimeFormat.HH_mm));
-        temp.append("～");
-        temp.append(new RTime(審査会情報.getShinsakaiShuryoTime()).toFormattedTimeString(DisplayTimeFormat.HH_mm));
+        long temp時間 = new RTime(審査会情報.getShinsakaiKaishiTime()).minutesDuration(new RTime(審査会情報.getShinsakaiShuryoTime()));
+        temp.append(temp時間 / 一時間);
+        temp.append("時間");
+        temp.append(temp時間 % 一時間);
+        temp.append("分");
         source.kaisaiTime = temp.toRString();
         source.kaisaiKaijo = 審査会情報.getShinsakaiKaisaiBashoName();
         RStringBuilder date = new RStringBuilder();

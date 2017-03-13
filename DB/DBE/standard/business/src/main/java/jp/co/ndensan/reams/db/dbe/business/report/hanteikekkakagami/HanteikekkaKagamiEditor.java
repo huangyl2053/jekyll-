@@ -60,7 +60,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
     private void editCompNinshosha(HanteikekkaKagamiReportSource source) {
         if (item.getNinshoshaSource() != null) {
             source.hakkoYMD1 = new RDate(item.getNinshoshaSource().hakkoYMD.toString()).wareki()
-                    .eraType(EraType.KANJI_RYAKU)
+                    .eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();

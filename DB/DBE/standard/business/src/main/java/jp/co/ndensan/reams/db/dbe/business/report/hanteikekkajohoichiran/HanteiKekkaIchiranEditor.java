@@ -42,7 +42,7 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         hakkoYMD.append(new RString("　"));
         hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         source.title = item.getTitle();
@@ -61,11 +61,11 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listNo_5 = new RDate(item.get認定申請日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
-                fillType(FillType.BLANK).toDateString();
+                fillType(FillType.ZERO).toDateString();
         source.listNo_6 = new RDate(item.get二次判定年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).
-                fillType(FillType.BLANK).toDateString();
+                fillType(FillType.ZERO).toDateString();
         source.listHokenshaName_1 = item.get市町村名称();
         source.listHokenshaNo_1 = item.get証記載保険者番号();
         source.listHihokenshaNo_1 = item.get被保険者番号();
@@ -86,12 +86,12 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
                     .eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).
-                    fillType(FillType.BLANK).toDateString());
+                    fillType(FillType.ZERO).toDateString());
             tempTokuteishippei_2.append("～")
                     .append(new RDate(item.get二次判定認定有効終了年月日().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                             firstYear(FirstYear.GAN_NEN).
                             separator(Separator.PERIOD).
-                            fillType(FillType.BLANK).toDateString());
+                            fillType(FillType.ZERO).toDateString());
         }
 
         source.listYukokikan_1 = tempTokuteishippei_1.toRString();
