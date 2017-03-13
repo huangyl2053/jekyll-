@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 
 /**
  * 一次判定を1対象者ずつ実行する画面の処理を定義します。
@@ -48,9 +49,18 @@ public class IchijiHanteiExecuter {
             RString shinseishoKanriNoStr = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
             ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(shinseishoKanriNoStr);
             if (Boolean.TRUE.equals(manager.get審査会割当データ(shinseishoKanriNo))) {
+                QuestionMessage message = new QuestionMessage(DbeQuestionMessages.審査会割付完了_修正.getMessage().getCode(),
+                        DbeQuestionMessages.審査会割付完了_修正.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+        }
+        if (new RString(DbeQuestionMessages.審査会割付完了_修正.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                div.getShoriSelectPanel().getRadShoriSelect().setSelectedKey(KEY0);
+                div.getShoriSelectPanel().getRadShoriSelect().setDisabled(true);
+            } else if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 div.getShoriSelectPanel().getRadShoriSelect().clearSelectedItem();
                 div.setReadOnly(true);
-                return ResponseData.of(div).addMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage()).respond();
             }
         }
         return ResponseData.of(div).respond();
