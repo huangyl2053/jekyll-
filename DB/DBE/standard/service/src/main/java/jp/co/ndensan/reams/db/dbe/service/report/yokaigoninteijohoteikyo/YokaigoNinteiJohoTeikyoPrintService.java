@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiSonoTashiryoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiImage1A4SeparateReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiText1A4Report;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshiki;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.yokaigoninteijohoteikyoisshiki.YokaigoNinteiJohoTeikyoIsshikiReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -162,7 +163,8 @@ public class YokaigoNinteiJohoTeikyoPrintService {
             RString 認定調査前回結果印刷有無,
             RString 前回正常選択肢印刷有無) {
         try (ReportAssembler<YokaigoNinteiJohoTeikyoIsshikiReportSource> assembler
-                = createAssembler(new JohoTeikyoIsshikiProperty(), reportManager)) {
+                = createAssembler(new JohoTeikyoIsshikiProperty(), reportManager,
+                        getStartForm(is認定調査票出力, is特記事項出力, is主治医意見書出力, isその他資料出力, is一次判定結果出力, business, 総合事業開始区分, 特記事項区分List))) {
             if (is認定調査票出力) {
                 print認定調査票(business, イメージ共有ファイルID, 認定調査票サービス状況List, 認定調査票サービス状況フラグList,
                         認定調査票調査項目List, 認定調査票記入項目List, 認定調査票マスキング区分, 総合事業開始区分, assembler);
@@ -183,6 +185,59 @@ public class YokaigoNinteiJohoTeikyoPrintService {
                         認定調査前回結果印刷有無, 前回正常選択肢印刷有無, assembler);
             }
         }
+    }
+
+    private int getStartForm(boolean is認定調査票出力,
+            boolean is特記事項出力,
+            boolean is主治医意見書出力,
+            boolean isその他資料出力,
+            boolean is一次判定結果出力,
+            YokaigoNinteiJohoTeikyoBusiness business,
+            RString 総合事業開始区分,
+            List<RString> 特記事項区分List) {
+        int index = 1;
+        if (is認定調査票出力) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(business.get厚労省IF識別コード())) {
+                if (総合事業実施済.equals(総合事業開始区分)) {
+                    index = JohoTeikyoIsshiki.NinteiChosaJohohyo_DBE091002.getFormGroupIndex();
+                } else if (総合事業未実施.equals(総合事業開始区分)) {
+                    index = JohoTeikyoIsshiki.NinteiChosaJohohyo_DBE091012.getFormGroupIndex();
+                }
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(business.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki.NinteiChosaJohohyo_DBE091022.getFormGroupIndex();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(business.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki._06ANinteiChosaJohohyo.getFormGroupIndex();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki._02ANinteiChosaJohohyo.getFormGroupIndex();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki._99ANinteiChosaJohohyo.getFormGroupIndex();
+            }
+        } else if (is特記事項出力) {
+            RString 情報提供資料の特記事項編集パターン
+                    = DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
+                FlexibleDate 特記事項判定日 = new FlexibleDate(DbBusinessConfig
+                        .get(ConfigNameDBE.特記事項判定日, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+                if (business.toEntity().get認定申請年月日().isBeforeOrEquals(特記事項判定日)) {
+                    index = JohoTeikyoIsshiki.NinteiChosaTokkiImage1.getFormGroupIndex();
+                } else {
+                    index = JohoTeikyoIsshiki.TokkiImageSeparate1.getFormGroupIndex();
+                }
+            } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
+                if (すべて.equals(情報提供資料の特記事項編集パターン)) {
+                    index = JohoTeikyoIsshiki.TokkiTextAll_image_separate.getFormGroupIndex();
+                } else {
+                    index = JohoTeikyoIsshiki.TokkiTextSeparate1.getFormGroupIndex();
+                }
+            }
+        } else if (is主治医意見書出力) {
+            index = JohoTeikyoIsshiki.Shujiiikensho1.getFormGroupIndex();
+        } else if (isその他資料出力) {
+            index = JohoTeikyoIsshiki.Sonotashiryo.getFormGroupIndex();
+        } else if (is一次判定結果出力) {
+            index = JohoTeikyoIsshiki.Ichijihanteikekkahyo.getFormGroupIndex();
+        }
+        return index;
     }
 
     private void print認定調査票(YokaigoNinteiJohoTeikyoBusiness business,
@@ -558,13 +613,14 @@ public class YokaigoNinteiJohoTeikyoPrintService {
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
-            IReportProperty<T> property, ReportManager manager) {
+            IReportProperty<T> property, ReportManager manager, int layoutIndex) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
         for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
             builder.addBreak(breaker);
         }
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
+        builder.setFormGroupIndex(layoutIndex);
         return builder.<T>create();
     }
 }

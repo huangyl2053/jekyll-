@@ -118,6 +118,16 @@ public class YokaigoNinteiJohoTeikyoFinder {
         return new YokaigoNinteiJohoTeikyoBusiness(entityList.get(0));
     }
 
+    @Transaction
+    public YokaigoNinteiJohoTeikyoEntity get要介護認定申請者(YokaigoBatchMybitisParamter paramter) {
+        IYokaigoNinteiJohoTeikyoMapper mapper = mapperProvider.create(IYokaigoNinteiJohoTeikyoMapper.class);
+        List<YokaigoNinteiJohoTeikyoEntity> entityList = mapper.get要介護認定申請者(paramter);
+        if (entityList.isEmpty()) {
+            return null;
+        }
+        return entityList.get(0);
+    }
+
     /**
      * 申請書管理番号を元に認定履歴情報を取得します。
      *

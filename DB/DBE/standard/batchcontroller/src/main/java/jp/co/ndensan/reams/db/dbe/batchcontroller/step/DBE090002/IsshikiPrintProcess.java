@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiImage1A4SeparateReport;
 import jp.co.ndensan.reams.db.dbe.business.report.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshikiTokkiText1A4Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteijohoteikyoisshiki.JohoTeikyoIsshiki;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.yokaigoninteijohoteikyo.YokaigoBatchProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyoa4.IchijihanteikekkahyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
@@ -144,10 +145,18 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
 
     @Override
     protected void createWriter() {
+        YokaigoNinteiJohoTeikyoEntity entity = finder.get要介護認定申請者(processPrm.toYokaigoBatchMybitisParamter());
+        List<NinteichosaRelate> 特記事項List = finder.get特記事項List(new ShinseishoKanriNo(entity.get申請書管理番号()), processPrm.get特記事項マスキング区分());
+        if (マスキングあり.equals(processPrm.get特記事項マスキング区分()) && 特記事項List.isEmpty()) {
+            特記事項List = finder.get特記事項List(new ShinseishoKanriNo(entity.get申請書管理番号()), マスキングなし);
+        }
+        List<RString> 特記事項区分List = new ArrayList<>();
+        for (NinteichosaRelate 特記事項 : 特記事項List) {
+            特記事項区分List.add(特記事項.get特記事項区分());
+        }
+
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE091101.getReportId().value())
                 .addBreak(new BreakerCatalog<YokaigoNinteiJohoTeikyoIsshikiReportSource>().new SimpleLayoutBreaker(
-
-
                     YokaigoNinteiJohoTeikyoIsshikiReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<YokaigoNinteiJohoTeikyoIsshikiReportSource> occuredBreak(
@@ -161,7 +170,9 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
                                 }
                                 return currentRecord;
                             }
-                }).create();
+                })
+                .setStartFormGroup(getStartForm(entity, 特記事項区分List))
+                .create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 
@@ -461,6 +472,51 @@ public class IsshikiPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTeiky
             return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
         }
         return RString.EMPTY;
+    }
+
+    private int getStartForm(YokaigoNinteiJohoTeikyoEntity entity,
+            List<RString> 特記事項区分List) {
+        int index = 1;
+        if (processPrm.is認定調査票出力()) {
+            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())) {
+                if (総合事業開始区分_実施済.equals(processPrm.get総合事業開始区分())) {
+                    index = JohoTeikyoIsshiki.NinteiChosaJohohyo_DBE091002.getFormGroupIndex();
+                } else if (総合事業開始区分_未実施.equals(processPrm.get総合事業開始区分())) {
+                    index = JohoTeikyoIsshiki.NinteiChosaJohohyo_DBE091012.getFormGroupIndex();
+                }
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki.NinteiChosaJohohyo_DBE091022.getFormGroupIndex();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki._06ANinteiChosaJohohyo.getFormGroupIndex();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki._02ANinteiChosaJohohyo.getFormGroupIndex();
+            } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード())) {
+                index = JohoTeikyoIsshiki._99ANinteiChosaJohohyo.getFormGroupIndex();
+            }
+        } else if (processPrm.is特記事項出力()) {
+            RString 情報提供資料の特記事項編集パターン
+                    = DbBusinessConfig.get(ConfigNameDBE.情報提供資料の特記事項編集パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
+                if (entity.get認定申請年月日().isBeforeOrEquals(processPrm.get特記事項判定日())) {
+                    index = JohoTeikyoIsshiki.NinteiChosaTokkiImage1.getFormGroupIndex();
+                } else {
+                    index = JohoTeikyoIsshiki.TokkiImageSeparate1.getFormGroupIndex();
+                }
+            } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
+                if (すべて.equals(情報提供資料の特記事項編集パターン)) {
+                    index = JohoTeikyoIsshiki.TokkiTextAll_image_separate.getFormGroupIndex();
+                } else {
+                    index = JohoTeikyoIsshiki.TokkiTextSeparate1.getFormGroupIndex();
+                }
+            }
+        } else if (processPrm.is主治医意見書出力()) {
+            index = JohoTeikyoIsshiki.Shujiiikensho1.getFormGroupIndex();
+        } else if (processPrm.isその他資料出力()) {
+            index = JohoTeikyoIsshiki.Sonotashiryo.getFormGroupIndex();
+        } else if (processPrm.is一次判定結果出力()) {
+            index = JohoTeikyoIsshiki.Ichijihanteikekkahyo.getFormGroupIndex();
+        }
+        return index;
     }
 
     @Override
