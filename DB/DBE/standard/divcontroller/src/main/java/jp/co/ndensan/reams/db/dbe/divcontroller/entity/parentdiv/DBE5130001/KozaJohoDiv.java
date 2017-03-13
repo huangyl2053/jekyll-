@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KozaJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-24_17-32-43">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,10 @@ public class KozaJohoDiv extends Panel {
      */
     @JsonProperty("ddlYokinShubetsu")
     private DropDownList ddlYokinShubetsu;
+    @JsonProperty("txtTenBan")
+    private TextBoxCode txtTenBan;
+    @JsonProperty("txtTenMei")
+    private TextBox txtTenMei;
     @JsonProperty("txtGinkoKozaNo")
     private TextBoxCode txtGinkoKozaNo;
     @JsonProperty("txtKozaMeiginin")
@@ -56,6 +60,42 @@ public class KozaJohoDiv extends Panel {
     @JsonProperty("ddlYokinShubetsu")
     public void setDdlYokinShubetsu(DropDownList ddlYokinShubetsu) {
         this.ddlYokinShubetsu = ddlYokinShubetsu;
+    }
+
+    /*
+     * gettxtTenBan
+     * @return txtTenBan
+     */
+    @JsonProperty("txtTenBan")
+    public TextBoxCode getTxtTenBan() {
+        return txtTenBan;
+    }
+
+    /*
+     * settxtTenBan
+     * @param txtTenBan txtTenBan
+     */
+    @JsonProperty("txtTenBan")
+    public void setTxtTenBan(TextBoxCode txtTenBan) {
+        this.txtTenBan = txtTenBan;
+    }
+
+    /*
+     * gettxtTenMei
+     * @return txtTenMei
+     */
+    @JsonProperty("txtTenMei")
+    public TextBox getTxtTenMei() {
+        return txtTenMei;
+    }
+
+    /*
+     * settxtTenMei
+     * @param txtTenMei txtTenMei
+     */
+    @JsonProperty("txtTenMei")
+    public void setTxtTenMei(TextBox txtTenMei) {
+        this.txtTenMei = txtTenMei;
     }
 
     /*

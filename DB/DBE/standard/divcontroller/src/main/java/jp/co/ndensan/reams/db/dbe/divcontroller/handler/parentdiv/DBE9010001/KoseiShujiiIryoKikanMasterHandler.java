@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -52,6 +55,9 @@ public class KoseiShujiiIryoKikanMasterHandler {
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private final ShujiiIryoKikanMasterDiv div;
+    private static final RString 預金種別 = new RString("預金種別");
+    private static final RString 預金種目 = new RString("預金種目");
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -118,6 +124,49 @@ public class KoseiShujiiIryoKikanMasterHandler {
             div.getDgShujiiIchiran().getGridSetting().setLimitRowCount(最大表示件数.intValue());
             div.getDgShujiiIchiran().getGridSetting().setSelectedRowCount(主治医医療機関情報一覧.totalCount());
         }
+    }
+
+    public void setKozaJoho() {
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return;
+        }
+        List<YokinShubetsuPattern> yokinShubetsuPatternlist = div.getShujiiJohoInput().getKozaJoho().
+                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get預金種別リスト();
+        List<KeyValueDataSource> yokinShubetsuList = new ArrayList<>();
+        yokinShubetsuList.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
+        for (YokinShubetsuPattern yokinShubetsuPattern : yokinShubetsuPatternlist) {
+            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
+            keyValueDataSource.setKey(yokinShubetsuPattern.get預金種別コード());
+            keyValueDataSource.setValue(yokinShubetsuPattern.get預金種別略称());
+            yokinShubetsuList.add(keyValueDataSource);
+        }
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setDataSource(yokinShubetsuList);
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種目);
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().setDisplayNone(false);
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().setDisplayNone(false);
+            } else {
+                div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種別);
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().setDisplayNone(true);
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().setDisplayNone(true);
+            }
+        }
+    }
+
+    public RString getShitenMeisho(RString shitenCode) {
+        RString 支店名 = RString.EMPTY;
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return 支店名;
+        }
+        List<KinyuKikanShiten> kinyuKikanShitenlist = div.getShujiiJohoInput().getKozaJoho().
+                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get支店リスト();
+        for (KinyuKikanShiten shiten : kinyuKikanShitenlist) {
+            if (new RString(shiten.get支店コード().toString()).equals(shitenCode)) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
     }
 
     private dgShujiiIchiran_Row createDgShujiiIchiranRow(

@@ -97,6 +97,7 @@ public class ShujiiIryoKikanMaster {
     private static final RString カーソル位置 = new RString("txtSearchShujiiIryokikanCodeFrom");
     private static final RString 検索モード = new RString("検索");
     private static final RString 非検索モード = new RString("非検索");
+    private static final RString SELECTKEY_空白 = new RString("blank");
 
     /**
      * コンストラクタです。
@@ -274,6 +275,65 @@ public class ShujiiIryoKikanMaster {
                 break;
             }
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 金融機関コードのonBlur。
+     *
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_kinyuKikanCode(ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).setKozaJoho();
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        }
+        div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 店番のonBlur。
+     *
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtTenBan(ShujiiIryoKikanMasterDiv div) {
+        RString tenBan = div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().getValue();
+        if (!RString.isNullOrEmpty(tenBan)) {
+            RString shitenMeisho = getHandler(div).getShitenMeisho(tenBan);
+            if (!RString.EMPTY.equals(tenBan)) {
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().
+                        setValue(shitenMeisho);
+            } else {
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+                div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 金融機関のonOkClose
+     *
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onOkClose_KinyuKikan(ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).setKozaJoho();
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        }
+        div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
         return ResponseData.of(div).respond();
     }
 
@@ -919,4 +979,5 @@ public class ShujiiIryoKikanMaster {
                 row.getJokyoFlag());
         return data;
     }
+
 }

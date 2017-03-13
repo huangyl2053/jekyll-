@@ -41,6 +41,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.chosaitakusakiandchosaininput.Cho
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide.SoNoTaKikanGuideFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -88,6 +90,9 @@ public class ShinsakaiIinJohoTorokuHandler {
     private final ShujiiIryokikanAndShujiiInputFinder shujiiIryokikanFinder;
     private final SoNoTaKikanGuideFinder sonotakikanFinder;
     private static final RString 初回選択時 = RString.EMPTY;
+    private static final RString 預金種別 = new RString("預金種別");
+    private static final RString 預金種目 = new RString("預金種目");
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -922,6 +927,49 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getCcdHokenshaDDL().setDisabled(false);
         div.getCcdHokenshaDDL().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
         div.getBtnShozokuKikanAdd().setDisabled(false);
+    }
+
+    public void setKozaJoho() {
+        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return;
+        }
+        List<YokinShubetsuPattern> yokinShubetsuPatternlist = div.getShinsakaiIinJohoTorokuInput().getKozaJoho().
+                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get預金種別リスト();
+        List<KeyValueDataSource> yokinShubetsuList = new ArrayList<>();
+        yokinShubetsuList.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
+        for (YokinShubetsuPattern yokinShubetsuPattern : yokinShubetsuPatternlist) {
+            KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
+            keyValueDataSource.setKey(yokinShubetsuPattern.get預金種別コード());
+            keyValueDataSource.setValue(yokinShubetsuPattern.get預金種別略称());
+            yokinShubetsuList.add(keyValueDataSource);
+        }
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setDataSource(yokinShubetsuList);
+        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種目);
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().setDisplayNone(false);
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().setDisplayNone(false);
+            } else {
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種別);
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().setDisplayNone(true);
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().setDisplayNone(true);
+            }
+        }
+    }
+
+    public RString getShitenMeisho(RString shitenCode) {
+        RString 支店名 = RString.EMPTY;
+        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return 支店名;
+        }
+        List<KinyuKikanShiten> kinyuKikanShitenlist = div.getShinsakaiIinJohoTorokuInput().getKozaJoho().
+                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get支店リスト();
+        for (KinyuKikanShiten shiten : kinyuKikanShitenlist) {
+            if (new RString(shiten.get支店コード().toString()).equals(shitenCode)) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
     }
 
     private List<dgShozokuKikanIchiran_Row> get所属機関List() {

@@ -76,6 +76,7 @@ public class ShinsakaiIinJohoToroku {
     private static final RString 納税準備 = new RString("納税準備");
     private static final RString 貯蓄 = new RString("貯蓄");
     private static final RString その他 = new RString("その他");
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * コンストラクタです。
@@ -707,6 +708,65 @@ public class ShinsakaiIinJohoToroku {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 金融機関コードのonBlur。
+     *
+     * @param div ShinsakaiIinJohoTorokuDiv
+     * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
+     */
+    public ResponseData<ShinsakaiIinJohoTorokuDiv> onBlur_kinyuKikanCode(ShinsakaiIinJohoTorokuDiv div) {
+        createHandOf(div).setKozaJoho();
+        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        }
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 店番のonBlur。
+     *
+     * @param div ShinsakaiIinJohoTorokuDiv
+     * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
+     */
+    public ResponseData<ShinsakaiIinJohoTorokuDiv> onBlur_txtTenBan(ShinsakaiIinJohoTorokuDiv div) {
+        RString tenBan = div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().getValue();
+        if (!RString.isNullOrEmpty(tenBan)) {
+            RString shitenMeisho = createHandOf(div).getShitenMeisho(tenBan);
+            if (!RString.EMPTY.equals(tenBan)) {
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().
+                        setValue(shitenMeisho);
+            } else {
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().clearValue();
+                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().clearValue();
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 金融機関のonOkClose
+     *
+     * @param div ShinsakaiIinJohoTorokuDiv
+     * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
+     */
+    public ResponseData<ShinsakaiIinJohoTorokuDiv> onOkClose_KinyuKikan(ShinsakaiIinJohoTorokuDiv div) {
+        createHandOf(div).setKozaJoho();
+        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
+            div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        }
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
         return ResponseData.of(div).respond();
     }
 

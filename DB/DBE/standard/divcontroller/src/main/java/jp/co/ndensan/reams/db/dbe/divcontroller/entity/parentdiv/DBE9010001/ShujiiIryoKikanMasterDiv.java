@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIryoKikanMasterDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-24_17-32-43">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -326,16 +326,6 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     @JsonIgnore
     public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
-    }
-
-    @JsonIgnore
-    public Button getBtnSearchShujii() {
-        return this.getShujiiSearch().getBtnSearchShujii();
-    }
-
-    @JsonIgnore
-    public void  setBtnSearchShujii(Button btnSearchShujii) {
-        this.getShujiiSearch().setBtnSearchShujii(btnSearchShujii);
     }
 
     @JsonIgnore
