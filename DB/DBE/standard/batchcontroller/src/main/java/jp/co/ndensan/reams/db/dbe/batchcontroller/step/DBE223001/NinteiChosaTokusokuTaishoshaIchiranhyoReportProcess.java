@@ -126,7 +126,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     @Override
     protected void beforeExecute() {
         RString 印刷年月日 = new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString());
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString());
 
         RTime time = RDate.getNowTime();
         RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);

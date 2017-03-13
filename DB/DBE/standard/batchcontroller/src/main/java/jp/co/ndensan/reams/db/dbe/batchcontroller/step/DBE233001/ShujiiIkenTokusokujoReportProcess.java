@@ -196,7 +196,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 宛名名称付与,
                 edited郵便番号,
                 宛名住所,
-                entity.getTemp_診療科名称() == null ? RString.EMPTY : entity.getTemp_診療科名称(),
+                entity.getTemp_事業者名称() == null ? RString.EMPTY : entity.getTemp_事業者名称(),
                 entity.getTemp_主治医氏名() == null ? RString.EMPTY : entity.getTemp_主治医氏名(),
                 ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称,
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),

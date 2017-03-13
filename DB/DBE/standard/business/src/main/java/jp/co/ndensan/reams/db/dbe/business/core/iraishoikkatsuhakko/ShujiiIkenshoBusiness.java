@@ -278,6 +278,8 @@ public class ShujiiIkenshoBusiness {
      * @return ShujiiIkenshoSakuseiRyoSeikyushoItem
      */
     public ShujiiIkenshoSakuseiRyoSeikyushoItem setDBE234001Item() {
+        RString 作成料印字 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_作成料_印字有無, RDate.getNowDate(),
+                SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
         item.setGengo(get和暦(processParamter.getHakkobi(), true));
         item.setAtesakiHokenshaName(entity.get保険者名());
@@ -300,33 +302,48 @@ public class ShujiiIkenshoBusiness {
         item.setHihokenshaName(entity.get被保険者氏名());
         item.setBirthYMD(get和暦(entity.get生年月日(), true));
         item.setSeibetsu(Seibetsu.toValue(entity.get性別()).get名称());
-        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            item.setShubetsuZaitaku(記号);
-            item.setShubetsuShisetsu(RString.EMPTY);
-            item.setShubetsuShinki(記号);
-            item.setShubetsuKeizoku(RString.EMPTY);
-        } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+        if (文字列1.equals(作成料印字)) {
+            if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+                item.setShubetsuZaitaku(記号);
+                item.setShubetsuShisetsu(RString.EMPTY);
+                item.setShubetsuShinki(記号);
+                item.setShubetsuKeizoku(RString.EMPTY);
+            } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+                item.setShubetsuZaitaku(RString.EMPTY);
+                item.setShubetsuShisetsu(記号);
+                item.setShubetsuShinki(記号);
+                item.setShubetsuKeizoku(RString.EMPTY);
+            } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+                item.setShubetsuZaitaku(記号);
+                item.setShubetsuShisetsu(RString.EMPTY);
+                item.setShubetsuShinki(RString.EMPTY);
+                item.setShubetsuKeizoku(記号);
+            } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+                item.setShubetsuZaitaku(RString.EMPTY);
+                item.setShubetsuShisetsu(記号);
+                item.setShubetsuShinki(RString.EMPTY);
+                item.setShubetsuKeizoku(記号);
+            }
+            set意見書作成料(entity, item);
+        } else {
             item.setShubetsuZaitaku(RString.EMPTY);
-            item.setShubetsuShisetsu(記号);
-            item.setShubetsuShinki(記号);
-            item.setShubetsuKeizoku(RString.EMPTY);
-        } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            item.setShubetsuZaitaku(記号);
             item.setShubetsuShisetsu(RString.EMPTY);
             item.setShubetsuShinki(RString.EMPTY);
-            item.setShubetsuKeizoku(記号);
-        } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            item.setShubetsuZaitaku(RString.EMPTY);
-            item.setShubetsuShisetsu(記号);
-            item.setShubetsuShinki(RString.EMPTY);
-            item.setShubetsuKeizoku(記号);
+            item.setShubetsuKeizoku(RString.EMPTY);
+            item.setIkenshoSakuseiRyo1(RString.EMPTY);
+            item.setIkenshoSakuseiRyo2(RString.EMPTY);
+            item.setIkenshoSakuseiRyo3(RString.EMPTY);
+            item.setIkenshoSakuseiRyo4(RString.EMPTY);
+            item.setSeikyugakuIkenshoSakuseiRyo1(RString.EMPTY);
+            item.setSeikyugakuIkenshoSakuseiRyo2(RString.EMPTY);
+            item.setSeikyugakuIkenshoSakuseiRyo3(RString.EMPTY);
+            item.setSeikyugakuIkenshoSakuseiRyo4(RString.EMPTY);
         }
         item.setSeikyuIryokikanName(entity.get医療機関名称());
         item.setSeikyuIryokikanDaihyoName(entity.get代表者名());
         item.setSeikyuIryokikanYubinNo(getYubinNo(entity.get医療機関郵便番号()));
         item.setSeikyuIryokikanJusho(entity.get医療機関住所());
         item.setSeikyuIryokikanTel(entity.get医療機関電話番号());
-        set意見書作成料(entity, item);
         return item;
     }
 

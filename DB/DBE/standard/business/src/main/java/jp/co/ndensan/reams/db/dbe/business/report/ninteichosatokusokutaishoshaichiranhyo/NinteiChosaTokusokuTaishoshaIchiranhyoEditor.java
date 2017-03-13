@@ -53,7 +53,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(String.format("%02d", datetime.getHour()));
         systemDateTime.append(new RString("時"));
@@ -80,12 +80,12 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
                 .eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+                .fillType(FillType.ZERO).toDateString();
         source.listTokusokujoHakkoYMD_1 = item.getListTokusokujoHakkoYMD_1().wareki()
                 .eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString();
+                .fillType(FillType.ZERO).toDateString();
         source.listLower2_1 = item.getListLower2_1();
         source.listUpper2_1 = item.getListUpper2_1();
         source.listUpper2_2 = item.getListUpper2_2();

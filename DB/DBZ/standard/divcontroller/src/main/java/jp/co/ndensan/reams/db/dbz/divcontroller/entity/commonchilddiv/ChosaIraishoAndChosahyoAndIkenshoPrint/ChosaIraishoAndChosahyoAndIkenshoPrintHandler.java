@@ -800,7 +800,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                         Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                         business.get住所(),
-                        business.get郵便番号(),
+                        new YubinNo(business.get郵便番号()).getEditedYubinNo(),
                         business.get電話番号(),
                         年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                         年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
@@ -810,7 +810,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         年号.substring(INDEX_8),
                         business.get年齢(),
                         business.get連絡先住所(),
-                        business.get連絡先郵便番号(),
+                        new YubinNo(business.get連絡先郵便番号()).getEditedYubinNo(),
                         business.get連絡先電話番号(),
                         business.get連絡先携帯番号(),
                         business.get連絡先氏名(),
@@ -1344,13 +1344,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
             RString 生年月日 = new FlexibleDate(business.get生年月日()).wareki()
                     .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                    separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
             RString 意見書作成提出期限 = set意見書作成提出期限(business);
             RString 提出期限 = RString.EMPTY;
             if (!RString.isNullOrEmpty(意見書作成提出期限)) {
                 提出期限 = new FlexibleDate(意見書作成提出期限).wareki()
                         .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                        separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
             }
             IkenshoSakuseiIraiIchiranhyoItem item = new IkenshoSakuseiIraiIchiranhyoItem(
                     div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
@@ -1393,6 +1393,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoSakuseiRyoSeikyushoItem> create主治医意見書作成料請求書_パラメータ() {
         List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList = new ArrayList<>();
+        RString 作成料印字 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_作成料_印字有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
@@ -1429,33 +1431,48 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 }
                 item.setBirthYMD(生年月日);
                 item.setSeibetsu(Seibetsu.toValue(business.get性別()).get名称());
-                if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(business.get作成料請求区分())) {
-                    item.setShubetsuZaitaku(記号);
-                    item.setShubetsuShisetsu(RString.EMPTY);
-                    item.setShubetsuShinki(記号);
-                    item.setShubetsuKeizoku(RString.EMPTY);
-                } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(business.get作成料請求区分())) {
+                if (文字列1.equals(作成料印字)) {
+                    if (SakuseiryoSeikyuKubun.在宅新規.getコード().equals(business.get作成料請求区分())) {
+                        item.setShubetsuZaitaku(記号);
+                        item.setShubetsuShisetsu(RString.EMPTY);
+                        item.setShubetsuShinki(記号);
+                        item.setShubetsuKeizoku(RString.EMPTY);
+                    } else if (SakuseiryoSeikyuKubun.施設新規.getコード().equals(business.get作成料請求区分())) {
+                        item.setShubetsuZaitaku(RString.EMPTY);
+                        item.setShubetsuShisetsu(記号);
+                        item.setShubetsuShinki(記号);
+                        item.setShubetsuKeizoku(RString.EMPTY);
+                    } else if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(business.get作成料請求区分())) {
+                        item.setShubetsuZaitaku(記号);
+                        item.setShubetsuShisetsu(RString.EMPTY);
+                        item.setShubetsuShinki(RString.EMPTY);
+                        item.setShubetsuKeizoku(記号);
+                    } else if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(business.get作成料請求区分())) {
+                        item.setShubetsuZaitaku(RString.EMPTY);
+                        item.setShubetsuShisetsu(記号);
+                        item.setShubetsuShinki(RString.EMPTY);
+                        item.setShubetsuKeizoku(記号);
+                    }
+                    set意見書作成料(business, item);
+                } else {
                     item.setShubetsuZaitaku(RString.EMPTY);
-                    item.setShubetsuShisetsu(記号);
-                    item.setShubetsuShinki(記号);
-                    item.setShubetsuKeizoku(RString.EMPTY);
-                } else if (SakuseiryoSeikyuKubun.在宅継続.getコード().equals(business.get作成料請求区分())) {
-                    item.setShubetsuZaitaku(記号);
                     item.setShubetsuShisetsu(RString.EMPTY);
                     item.setShubetsuShinki(RString.EMPTY);
-                    item.setShubetsuKeizoku(記号);
-                } else if (SakuseiryoSeikyuKubun.施設継続.getコード().equals(business.get作成料請求区分())) {
-                    item.setShubetsuZaitaku(RString.EMPTY);
-                    item.setShubetsuShisetsu(記号);
-                    item.setShubetsuShinki(RString.EMPTY);
-                    item.setShubetsuKeizoku(記号);
+                    item.setShubetsuKeizoku(RString.EMPTY);
+                    item.setIkenshoSakuseiRyo1(RString.EMPTY);
+                    item.setIkenshoSakuseiRyo2(RString.EMPTY);
+                    item.setIkenshoSakuseiRyo3(RString.EMPTY);
+                    item.setIkenshoSakuseiRyo4(RString.EMPTY);
+                    item.setSeikyugakuIkenshoSakuseiRyo1(RString.EMPTY);
+                    item.setSeikyugakuIkenshoSakuseiRyo2(RString.EMPTY);
+                    item.setSeikyugakuIkenshoSakuseiRyo3(RString.EMPTY);
+                    item.setSeikyugakuIkenshoSakuseiRyo4(RString.EMPTY);
                 }
                 item.setSeikyuIryokikanName(business.get医療機関名称());
                 item.setSeikyuIryokikanDaihyoName(business.get代表者名());
                 item.setSeikyuIryokikanYubinNo(business.get医療機関郵便番号());
                 item.setSeikyuIryokikanJusho(business.get医療機関住所());
                 item.setSeikyuIryokikanTel(business.get医療機関電話番号());
-                set意見書作成料(business, item);
                 itemList.add(item);
             }
         }
@@ -1793,6 +1810,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
 
             受診日時または期間.append(ymd.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            受診日時または期間.append(new RString("　"));
             受診日時または期間.append(time.toFormattedTimeString(DisplayTimeFormat.HH時mm分));
 //            受診日時または期間.append(文字列_まで);
         } else {

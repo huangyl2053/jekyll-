@@ -54,7 +54,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(String.format("%02d", datetime.getHour()));
         systemDateTime.append(new RString("時"));

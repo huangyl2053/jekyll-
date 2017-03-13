@@ -66,7 +66,7 @@ public class ChosairairirekiIchiranEditorImpl implements IChosairairirekiIchiran
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         systemDateTime.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         systemDateTime.append(new RString("作成"));
         return systemDateTime.toRString();

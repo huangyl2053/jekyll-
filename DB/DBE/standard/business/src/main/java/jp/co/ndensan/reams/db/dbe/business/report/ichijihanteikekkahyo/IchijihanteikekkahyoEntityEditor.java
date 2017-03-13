@@ -92,6 +92,7 @@ public final class IchijihanteikekkahyoEntityEditor {
     private static final RString 印刷しない = new RString("2");
     private static final RString 差分のみ印刷 = new RString("3");
     private static final RString 印字する = new RString("1");
+    private static final RString 主事意見_記載なし = new RString("9");
     private static final RString 認定情報_事務局用 = new RString("認定情報(事務局用)");
     private static final int 連番1 = 1;
     private static final int 連番2 = 2;
@@ -414,7 +415,7 @@ public final class IchijihanteikekkahyoEntityEditor {
                 前回調査 = 前回調査項目.get(前回連番).get意見項目();
             }
         }
-        if (RString.isNullOrEmpty(前回調査)) {
+        if (RString.isNullOrEmpty(前回調査) || 主事意見_記載なし.equals(今回調査)) {
             return 状況改善;
         }
         if ((RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) < Integer.parseInt(前回調査.toString())) {
@@ -482,7 +483,7 @@ public final class IchijihanteikekkahyoEntityEditor {
                 前回調査 = 前回調査項目.get(前回連番).get意見項目();
             }
         }
-        if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査)) {
+        if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査) || 主事意見_記載なし.equals(今回調査)) {
             return RString.EMPTY;
         }
         int 結果 = (RString.isNullOrEmpty(今回調査) ? 0 : Integer.parseInt(今回調査.toString())) - Integer.parseInt(前回調査.toString());

@@ -62,13 +62,13 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
     private void edit申請日(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
         source.listShinseiYMD_1 = entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
     private void edit督促状発行日(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
         source.listTokusokujoHakkoYMD_1 = entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
     }
 
     private void edit事業者名称(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
