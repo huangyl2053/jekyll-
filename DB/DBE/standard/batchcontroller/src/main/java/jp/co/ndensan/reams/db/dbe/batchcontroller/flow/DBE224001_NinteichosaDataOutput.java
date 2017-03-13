@@ -16,7 +16,8 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.DbT
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaDataOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaFileOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaGaikyoTokkiDataOutputProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaMainDataGetProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaKonkaiDataGetProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaZenkaiDataGetProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosaTokkiDataOutputProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput.NinteiChosainDataOutputProcess;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJoho;
@@ -39,6 +40,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
     private static final RString 認定調査CSV一時テーブル名 = new RString("DbT9999CSV");
     private static final RString 認定調査CSV一時テーブル名_前回分 = new RString("DbT9999CSV_Zenkai");
     private static final String NINTEICHOSAMAINDATAGET = "ninteichosamaindataget";
+    private static final String NINTEICHOSAKONKAIDATAGET = "ninteichosakonkaidataget";
     private static final String NINTEICHOSADBT5207DATAGET = "ninteichosadbt5207dataget";
     private static final String NINTEICHOSADBT5208DATAGET = "ninteichosadbt5208dataget";
     private static final String NINTEICHOSADBT5209DATAGET = "ninteichosadbt5209dataget";
@@ -68,7 +70,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
         //今回分を一時テーブルへ保存
         ninteiChosaCsvTempTableName = 認定調査CSV一時テーブル名;
         shinseishoKanriNoList = null;
-        executeStep(NINTEICHOSAMAINDATAGET);
+        executeStep(NINTEICHOSAKONKAIDATAGET);
         executeStep(NINTEICHOSADBT5207DATAGET);
         executeStep(NINTEICHOSADBT5208DATAGET);
         executeStep(NINTEICHOSADBT5209DATAGET);
@@ -109,7 +111,18 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
      */
     @Step(NINTEICHOSAMAINDATAGET)
     protected IBatchFlowCommand callMainDataGetProcess() {
-        return loopBatch(NinteiChosaMainDataGetProcess.class)
+        return loopBatch(NinteiChosaZenkaiDataGetProcess.class)
+                .arguments(getProcessParameter(ninteiChosaCsvTempTableName, shinseishoKanriNoList)).define();
+    }
+
+    /**
+     * 認定調査依頼情報のメインデータを一時テーブルに保存するProcessです。
+     *
+     * @return 認定調査データ出力（モバイル）
+     */
+    @Step(NINTEICHOSAKONKAIDATAGET)
+    protected IBatchFlowCommand callKonkaiDataGetProcess() {
+        return loopBatch(NinteiChosaKonkaiDataGetProcess.class)
                 .arguments(getProcessParameter(ninteiChosaCsvTempTableName, shinseishoKanriNoList)).define();
     }
 

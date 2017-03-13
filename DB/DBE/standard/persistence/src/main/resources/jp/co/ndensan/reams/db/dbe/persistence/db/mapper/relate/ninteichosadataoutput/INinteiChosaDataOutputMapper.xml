@@ -598,6 +598,127 @@
             AND DbT7051."shichosonCode" = #{shichosonCode}
         </if>
     </select>
+    
+    <select resultOrdered="true" id="get認定調査今回データ出力" resultMap="resultMap_getNinteiChosaData"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo",
+        DbT5121."zenkaiShinseishoKanriNo",
+        DbT5101."koroshoIfShikibetsuCode",
+        DbT5101."shoKisaiHokenshaNo",
+        DbT5101."hihokenshaNo",
+        DbT5101."ninteiShinseiYMD",
+        DbT5101."ninteiShinseiShinseijiKubunCode",
+        DbT5101."hihokenshaName",
+        DbT5101."hihokenshaKana",
+        DbT5101."seinengappiYMD",
+        DbT5101."age",
+        DbT5101."seibetsu",
+        DbT5101."yubinNo",
+        DbT5101."jusho",
+        DbT5101."telNo",
+        DbT5101."ninteiChosaItakusakiCode",
+        DbT5101."ninteiChosainCode",
+        DbT5101."hihokenshaKubunCode",
+        DbT5120."shinseiTodokedeshaYubinNo",
+        DbT5120."shinseiTodokedeshaTelNo",
+        DbT5120."shinseiTodokedeshaJusho",
+        DbT5120."shinseiTodokedeshaShimei",
+        DbT5120."shinseiTodokedeshaTsuzukigara",
+        DbT7051."shichosonMeisho",
+        DbT5105."ninteichosaIraiKanryoYMD",
+        DbT5201."ninteichosaIraiRirekiNo",
+        DbT5910."jigyoshaMeisho",
+        DbT5913."chosainShimei",
+        #{imageKubun} AS "gaikyoChosaTextImageKubun",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."ninteichousaIraiKubunCode" ELSE DbT5201."ninteichosaIraiKubunCode" END AS "ninteichousaIraiKubunCode",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."ninteichosaIraiKaisu" ELSE DbT5201."ninteichosaIraiKaisu" END AS "ninteichosaIraiKaisu",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."ninteichosaJisshiYMD" ELSE '' END AS "ninteichosaJisshiYMD",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."ninteichosaJuryoYMD" ELSE '' END AS "ninteichosaJuryoYMD",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."ninteiChosaKubunCode" ELSE DbT5101."chosaKubun" END AS "ninteiChosaKubunCode",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."chosaJisshiBashoCode" ELSE '' END AS "chosaJisshiBashoCode",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."chosaJisshiBashoMeisho" ELSE '' END AS "chosaJisshiBashoMeisho",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."serviceKubunCode" ELSE '' END AS "serviceKubunCode",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."riyoShisetsuShimei" ELSE '' END AS "riyoShisetsuShimei",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."riyoShisetsuJusho" ELSE '' END AS "riyoShisetsuJusho",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."riyoShisetsuTelNo" ELSE '' END AS "riyoShisetsuTelNo",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."riyoShisetsuYubinNo" ELSE '' END AS "riyoShisetsuYubinNo",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN regexp_replace(DbT5202."tokki",E'(\r\n|\r|\n|\t)','','g') ELSE '' END AS "tokki",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."tokkijikoUketsukeYMD" ELSE '' END AS "tokkijikoUketsukeYMD",
+        CASE WHEN DbT5202."shinseishoKanriNo" IS NOT NULL AND DbT5202."shinseishoKanriNo" <![CDATA[<>]]> '' THEN DbT5202."tokkijikoJuryoYMD" ELSE '' END AS "tokkijikoJuryoYMD",
+        DbT5203."ninchishoNichijoSeikatsuJiritsudoCode",
+        DbT5203."shogaiNichijoSeikatsuJiritsudoCode",
+        DbT5910."shichosonCode"
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        INNER JOIN
+        rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+        ON
+        DbT5101."shinseishoKanriNo" = DbT5105."shinseishoKanriNo"
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        ON
+        DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+        rgdb."DbT5120ShinseitodokedeJoho" AS DbT5120
+        ON
+        DbT5120."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
+        ON
+        DbT5121."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
+        ON
+        DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5201."ninteichosaIraiRirekiNo" = ( SELECT
+        MAX("ninteichosaIraiRirekiNo")
+        FROM
+        rgdb."DbT5201NinteichosaIraiJoho"
+        WHERE
+        "shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        )
+        AND DbT5201."logicalDeletedFlag" = false
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+        ON
+        DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+        AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" AS DbT5913
+        ON
+        DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
+        AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
+        AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
+        ON
+        DbT5202."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+        AND  DbT5202."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+        AND DbT5202."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode"
+        AND DbT5202."gaikyoChosaTextImageKubun" = #{imageKubun}
+        LEFT JOIN
+        rgdb."DbT5203NinteichosahyoKihonChosa"AS DbT5203
+        ON
+        DbT5203."shinseishoKanriNo" = DbT5201."shinseishoKanriNo"
+        AND DbT5203."ninteichosaRirekiNo" = DbT5201."ninteichosaIraiRirekiNo"
+        AND DbT5203."koroshoIfShikibetsuCode" = DbT5201."koroshoIfShikibetsuCode"
+        WHERE
+        true
+        <if test= "isNinteichosaItakusakiCode">
+            AND DbT5201."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+        </if>
+        <if test= "isNinteiChosainCode">
+            AND DbT5201."ninteiChosainCode" = #{ninteiChosainCode}
+        </if>
+        <if test= "isShinseishoKanriNo">
+            AND DbT5201."shinseishoKanriNo" IN
+            <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+        </if>
+        <if test= "isShichoson">
+            AND DbT7051."shichosonCode" = #{shichosonCode}
+        </if>
+    </select>
 
     <select resultOrdered="true" id="getDbT5207" resultMap="resultMap_getCsvTable"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputBatchMybitisParameter" fetchSize="500">

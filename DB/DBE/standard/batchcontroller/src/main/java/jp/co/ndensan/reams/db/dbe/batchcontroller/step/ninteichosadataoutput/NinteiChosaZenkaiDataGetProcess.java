@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定調査データ出力（モバイル）のメイン情報を取得し一時テーブルへ保存処理するクラスです。
  */
-public class NinteiChosaMainDataGetProcess extends BatchProcessBase<NinteiChosaDataOutputBatchRelateEntity> {
+public class NinteiChosaZenkaiDataGetProcess extends BatchProcessBase<NinteiChosaDataOutputBatchRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosadataoutput.INinteiChosaDataOutputMapper."

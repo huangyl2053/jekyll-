@@ -43,6 +43,14 @@ public interface INinteiChosaDataOutputMapper {
     List<NinteiChosaDataOutputRelateEntity> get認定調査データ出力(NinteiChosaDataOutputMybitisParameter param);
 
     /**
+     * 認定調査一覧データを取得します。
+     *
+     * @param param 認定調査データ出力（モバイル）のパラメータ
+     * @return List<NinteiChosaDataOutputRelateEntity>
+     */
+    List<NinteiChosaDataOutputRelateEntity> get認定調査今回データ出力(NinteiChosaDataOutputMybitisParameter param);
+
+    /**
      * 申請履歴情報データを取得します。
      *
      * @param param 申請履歴情報取得用のパラメータ
