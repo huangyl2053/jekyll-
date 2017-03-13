@@ -222,7 +222,9 @@ public class ShinsakaiKekkaTorokuHandler {
         if (mode != OperationMode.更新) {
             return;
         }
-        boolean is認定 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード());
+        boolean is認定 = row.getHanteiKekkaCode().equals(HanteiKekkaCode.認定.getコード())
+                || div.getKobetsuHyojiArea().getDdlHanteiKekka().getSelectedKey().equals(HanteiKekkaCode.認定.getコード());
+
         set個別入力制御変更By判定結果(is認定);
         if (!is認定) {
             clear個別表示欄今回入力内容判定結果以外();
@@ -287,7 +289,8 @@ public class ShinsakaiKekkaTorokuHandler {
         if (!RString.isNullOrEmpty(row.getHanteiKekkaCode())) {
             div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(row.getHanteiKekkaCode());
         } else {
-            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
+//            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
+            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(HanteiKekkaCode.認定.getコード());
         }
         if (!RString.isNullOrEmpty(row.getKonkaiNijiHantei())) {
             div.getKobetsuHyojiArea().getDdlNijiHantei().setSelectedValue(row.getKonkaiNijiHantei());
