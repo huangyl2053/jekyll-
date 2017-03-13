@@ -104,8 +104,8 @@
         AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
         AND DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-        AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL
-        AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL
+        <!-- AND DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL -->
+        <!-- AND DbT5105NinteiKanryoJoho."centerSoshinYMD" IS NULL -->
         INNER JOIN
         rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
         ON
