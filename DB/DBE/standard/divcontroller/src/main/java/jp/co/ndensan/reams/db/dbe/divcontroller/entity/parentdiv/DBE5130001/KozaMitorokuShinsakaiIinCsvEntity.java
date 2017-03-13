@@ -40,6 +40,23 @@ public class KozaMitorokuShinsakaiIinCsvEntity {
 
     /**
      * コンストラクタです。
+     */
+    public KozaMitorokuShinsakaiIinCsvEntity() {
+        this.shinsakaiIinCode = new RString("介護認定審査会委員コード");
+        this.shinsakaiIinStYMD = new RString("介護認定審査会委員開始年月日");
+        this.shinsakaiIinEdYMD = new RString("介護認定審査会委員終了年月日");
+        this.shisakaiIinShimei = new RString("介護認定審査会委員氏名");
+        this.shinsakaiIinShimeiKana = new RString("介護認定審査会委員氏名カナ");
+        this.seibetsu = new RString("性別");
+        this.BarthYMD = new RString("生年月日");
+        this.shinsainShikakuCode = new RString("介護認定審査員資格コード");
+        this.shinsainShikaku = new RString("介護認定審査員資格");
+        this.jokyo = new RString("状況");
+        this.biko = new RString("備考");
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param shinsakaiIinCode 介護認定審査会委員コード
      * @param shinsakaiIinStYMD 介護認定審査会委員開始年月日

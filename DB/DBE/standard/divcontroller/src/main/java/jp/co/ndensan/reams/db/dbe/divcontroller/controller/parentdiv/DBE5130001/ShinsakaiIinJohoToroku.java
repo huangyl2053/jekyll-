@@ -467,7 +467,9 @@ public class ShinsakaiIinJohoToroku {
         } else {
             div.getKensakuJoken().setDisplayNone(false);
             div.getKensakuJoken().setDisabled(false);
-            createHandOf(div).load();
+            ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
+            handler.load();
+            handler.clearKensakuJoken();
             return ResponseData.of(div).setState(DBE5130001StateName.検索);
         }
         return ResponseData.of(div).respond();
@@ -610,8 +612,9 @@ public class ShinsakaiIinJohoToroku {
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(true).
+                hasHeader(false).
                 build()) {
+            csvWriter.writeLine(new KozaMitorokuShinsakaiIinCsvEntity());
             List<dgShinsaInJohoIchiran_Row> dataList = div.getDgShinsaInJohoIchiran().getDataSource();
             for (dgShinsaInJohoIchiran_Row row : dataList) {
                 if (isOutKozaMitorokuCsv(row)) {
