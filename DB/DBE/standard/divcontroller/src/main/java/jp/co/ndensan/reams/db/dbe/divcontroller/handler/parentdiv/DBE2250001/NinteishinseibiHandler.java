@@ -187,7 +187,7 @@ public class NinteishinseibiHandler {
                 ? entity.get認定調査区分コード()
                 : (認定調査情報 != null ? 認定調査情報.get認定調査区分コード() : RString.EMPTY));
         row.setChosaJisshiBashoCode(entity.get認定調査実施場所コード());
-        row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所());
+        row.setChosaJisshiBashoMeisho(entity.get認定調査実施場所名称());
         row.setServiceKubunCode(
                 (!RString.isNullOrEmpty(entity.get認定調査_サービス区分コード()))
                 ? entity.get認定調査_サービス区分コード()

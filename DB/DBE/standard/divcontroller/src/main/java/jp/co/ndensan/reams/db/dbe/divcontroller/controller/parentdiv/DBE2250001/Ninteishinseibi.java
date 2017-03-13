@@ -437,7 +437,7 @@ public class Ninteishinseibi {
             if (RString.isNullOrEmpty(entry.getValue())) {
                 施設利用フラグ = false;
             } else {
-                施設利用フラグ = Boolean.getBoolean(entry.getValue().toString());
+                施設利用フラグ = Boolean.parseBoolean(entry.getValue().toString());
             }
             result施設利用List.add(
                     new NinteichosahyoShisetsuRiyo(
