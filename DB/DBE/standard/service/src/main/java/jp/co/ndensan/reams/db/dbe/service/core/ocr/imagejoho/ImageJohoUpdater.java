@@ -36,11 +36,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- *
+ * イメージ情報を更新します。
  */
 public class ImageJohoUpdater {
 
     private static final RString SEPARATOR = new RString(java.io.File.separator);
+    private static final RString DOT = new RString(".");
+    private static final RString EFFECTIVE_OR_BAK_PNG = new RString("(_BAK)*\\.(png|PNG)");
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final RString 証記載保険者番号;
@@ -62,7 +64,13 @@ public class ImageJohoUpdater {
         this.ocrData = builder.ocrData;
     }
 
-    public static IStartBuilder shinseiKey(ShinseishoKanriNo 申請書管理番号, RString 証記載保険者番号, RString 被保険者番号) {
+    /**
+     * @param 申請書管理番号 申請書管理番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @return
+     */
+    public static IFirstBuilder shinseiKey(ShinseishoKanriNo 申請書管理番号, RString 証記載保険者番号, RString 被保険者番号) {
         return new Builder(申請書管理番号, 証記載保険者番号, 被保険者番号);
     }
 
@@ -100,7 +108,7 @@ public class ImageJohoUpdater {
         return builder.toRString();
     }
 
-    //<editor-fold defaultstate="collapsed" desc="comment">
+    //<editor-fold defaultstate="collapsed" desc="main logic">
     private static CopyImageResult copyImageFilesToDirectory(List<RString> targetImageFileNames, RString targetDirectoryPath,
             OcrFiles imageFilePaths, IFileNameConvertionTheory fileNameTheory) {
         List<RString> imagesNotFound = new ArrayList<>(),
@@ -124,7 +132,7 @@ public class ImageJohoUpdater {
     }
 
     private static SharedFileEntryDescriptor defineAndCopyToSharedFile(FilesystemPath targetDirectoryPath, FilesystemName sharedFileName) {
-        SharedFileDescriptor sfd = SharedFile.defineSharedFile(sharedFileName);
+        SharedFileDescriptor sfd = SharedFile.defineSharedFile(sharedFileName, Integer.MAX_VALUE, SharedFile.GROUP_ALL, null, false, null);
         CopyToSharedFileOpts option = new CopyToSharedFileOpts().dateToDelete(RDate.MAX);
         SharedFileEntryDescriptor sfed = SharedFile.copyToSharedFile(sfd, targetDirectoryPath, option);
         return sfed;
@@ -160,8 +168,6 @@ public class ImageJohoUpdater {
         return list;
     }
 
-    private static final RString PNG_EXTENTION = new RString("\\.(png|PNG)");
-
     private static void deletePastFiles(RString fileName, List<RString> filePaths,
             ReadOnlySharedFileEntryDescriptor ro_sfd) {
         for (RString filePath : filePaths) {
@@ -172,7 +178,11 @@ public class ImageJohoUpdater {
     }
 
     private static Pattern fileNamePattern(RString fileName) {
-        return Pattern.compile(new RStringBuilder().append(fileName).append(PNG_EXTENTION).toString());
+        return Pattern.compile(toRegularExpression(fileName).toString());
+    }
+
+    private static RString toRegularExpression(RString fileName) {
+        return new RStringBuilder().append(fileName.substringEmptyOnError(0, fileName.indexOf(DOT))).append(EFFECTIVE_OR_BAK_PNG).toRString();
     }
     //</editor-fold>
 
@@ -183,29 +193,29 @@ public class ImageJohoUpdater {
     }
 
     /**
-     *
+     * 処理結果です。
      */
     @lombok.Value
-    public static class Result {
+    public static final class Result {
 
         private RDateTime sharedFileID;
         private IProcessingResults processingResults;
     }
 
+    /**
+     * 共有ファイルIDの指定に用いられます。
+     */
     public interface IShareFileIDBuilder {
 
+        /**
+         * @param 共有ファイルID 共有ファイルID
+         * @return {@link IOcrFilesBuilder}
+         */
         IOcrFilesBuilder sharedFileID(RDateTime 共有ファイルID);
-
     }
 
     /**
-     *
-     */
-    public interface IStartBuilder extends IShareFileIDBuilder, IOcrFilesBuilder {
-    }
-
-    /**
-     * {@link OcrFiles}を指定します。
+     * {@link OcrFiles}の指定に用いられます。
      */
     public interface IOcrFilesBuilder {
 
@@ -217,7 +227,13 @@ public class ImageJohoUpdater {
     }
 
     /**
-     * {@link IFileNameConvertionTheory}を指定します。
+     * メソッドチェイン上、最初のビルダです。
+     */
+    public interface IFirstBuilder extends IShareFileIDBuilder, IOcrFilesBuilder {
+    }
+
+    /**
+     * {@link IFileNameConvertionTheory}の指定に用いられます。
      */
     public interface ITheoryBuilder {
 
@@ -229,19 +245,30 @@ public class ImageJohoUpdater {
     }
 
     /**
-     *
+     * 対象のイメージファイル名の指定に用いられます。
      */
     public interface ITargetImageFileNamesBuilder {
 
+        /**
+         * @param targetImageFileNames 対象の共有ファイル名
+         * @return {@link IOcrDataBuilder}
+         */
         IOcrDataBuilder targetImageFileNames(Collection<? extends RString> targetImageFileNames);
     }
 
+    /**
+     * {@link IOcrData}の指定に用いられます。
+     */
     public interface IOcrDataBuilder {
 
+        /**
+         * @param ocrData {@link IOcrData}
+         * @return {@link ImageJohoUpdater}
+         */
         ImageJohoUpdater ocrData(IOcrData ocrData);
     }
 
-    private static final class Builder implements IStartBuilder, IOcrFilesBuilder, ITheoryBuilder,
+    private static final class Builder implements IFirstBuilder, IOcrFilesBuilder, ITheoryBuilder,
             ITargetImageFileNamesBuilder, IOcrDataBuilder {
 
         private final ShinseishoKanriNo 申請書管理番号;
