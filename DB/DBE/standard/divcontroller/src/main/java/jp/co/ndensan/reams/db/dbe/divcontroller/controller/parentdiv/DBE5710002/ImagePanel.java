@@ -9,14 +9,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001.Yokaigoninteiimagekanri;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710002.ImagePanelDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesyutsuryoku.YokaigoninteiimageShutsuryokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza._Console;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -56,9 +57,21 @@ public class ImagePanel {
      * @return ResponseData
      */
     public ResponseData<ImagePanelDiv> onLoad(ImagePanelDiv div) {
-        ResponseData<ImagePanelDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
+        if (!Yokaigoninteiimagekanri.uses概況特記()) {
+            div.getChkImage().setDataSource(removed概況特記(div.getChkImage().getDataSource()));
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private static List<KeyValueDataSource> removed概況特記(List<KeyValueDataSource> defaultDataSource) {
+        List<KeyValueDataSource> list = new ArrayList<>();
+        for (KeyValueDataSource v : defaultDataSource) {
+            if (Objects.equals(v.getKey(), 調査票概況)) {
+                continue;
+            }
+            list.add(v);
+        }
+        return list;
     }
 
     /**
