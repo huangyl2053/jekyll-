@@ -240,10 +240,10 @@ public final class ChkIchijiHanteiKekkaBusiness {
         RString 意見書認知症 = RString.EMPTY;
         if (識別コード09B.equals(bodyItem.get厚労省IF識別コード()) || 識別コード09A.equals(bodyItem.get厚労省IF識別コード())
                 || 識別コード06A.equals(bodyItem.get厚労省IF識別コード())) {
-            意見書認知症 = get意見書名称03(dbt5304Entity, 連番13);
+            意見書認知症 = get意見書名称03(dbt5304Entity, 連番14);
         }
         if (識別コード02A.equals(bodyItem.get厚労省IF識別コード()) || 識別コード99A.equals(bodyItem.get厚労省IF識別コード())) {
-            意見書認知症 = get意見書名称03(dbt5304Entity, 連番14);
+            意見書認知症 = get意見書名称03(dbt5304Entity, 連番15);
         }
         return 意見書認知症;
     }
@@ -1525,12 +1525,17 @@ public final class ChkIchijiHanteiKekkaBusiness {
     }
 
     private static RString get意見書名称03(List<DbT5304ShujiiIkenshoIkenItemEntity> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size()) {
-            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
-                return RString.EMPTY;
+        for (DbT5304ShujiiIkenshoIkenItemEntity entity : dbt5304Entity) {
+            if (連番 == entity.getRemban()) {
+                return IkenKomoku03.toValue(remove半角スペース(entity.getIkenItem())).get名称();
             }
-            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
         }
+//        if (連番 < dbt5304Entity.size()) {
+//            if (RString.isNullOrEmpty(dbt5304Entity.get(連番).getIkenItem())) {
+//                return RString.EMPTY;
+//            }
+//            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).getIkenItem())).get名称();
+//        }
         return RString.EMPTY;
     }
 

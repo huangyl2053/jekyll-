@@ -4579,34 +4579,34 @@ public final class IchijihanteikekkahyoEntityEditor {
         if (印字する.equals(正常選択肢印刷有無)) {
             if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
                     || 識別コード06A.equals(厚労省IF識別コード)) {
-                主治医意見書項目1リスト.add(get意見書名称03(dbt5304Entity, 連番13));
-                主治医意見書項目1リスト.add(get意見書名称04(dbt5304Entity, 連番14));
-                主治医意見書項目1リスト.add(get意見書名称05(dbt5304Entity, 連番15));
-                主治医意見書項目1リスト.add(get意見書名称06(dbt5304Entity, 連番16));
-                主治医意見書項目1リスト.add(get意見書名称14(dbt5304Entity, 連番68));
-            }
-            if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
                 主治医意見書項目1リスト.add(get意見書名称03(dbt5304Entity, 連番14));
                 主治医意見書項目1リスト.add(get意見書名称04(dbt5304Entity, 連番15));
                 主治医意見書項目1リスト.add(get意見書名称05(dbt5304Entity, 連番16));
                 主治医意見書項目1リスト.add(get意見書名称06(dbt5304Entity, 連番17));
-                主治医意見書項目1リスト.add(get意見書名称14(dbt5304Entity, 連番18));
+                主治医意見書項目1リスト.add(get意見書名称14(dbt5304Entity, 連番69));
+            }
+            if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
+                主治医意見書項目1リスト.add(get意見書名称03(dbt5304Entity, 連番15));
+                主治医意見書項目1リスト.add(get意見書名称04(dbt5304Entity, 連番16));
+                主治医意見書項目1リスト.add(get意見書名称05(dbt5304Entity, 連番17));
+                主治医意見書項目1リスト.add(get意見書名称06(dbt5304Entity, 連番18));
+                主治医意見書項目1リスト.add(get意見書名称14(dbt5304Entity, 連番19));
             }
         } else {
             if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
                     || 識別コード06A.equals(厚労省IF識別コード)) {
-                主治医意見書項目1リスト.add(get意見書名称03_正常選択肢印刷無(dbt5304Entity, 連番13));
-                主治医意見書項目1リスト.add(get意見書名称04_正常選択肢印刷無(dbt5304Entity, 連番14));
-                主治医意見書項目1リスト.add(get意見書名称05_正常選択肢印刷無(dbt5304Entity, 連番15));
-                主治医意見書項目1リスト.add(get意見書名称06_正常選択肢印刷無(dbt5304Entity, 連番16));
-                主治医意見書項目1リスト.add(get意見書名称14_正常選択肢印刷無(dbt5304Entity, 連番68));
-            }
-            if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
                 主治医意見書項目1リスト.add(get意見書名称03_正常選択肢印刷無(dbt5304Entity, 連番14));
                 主治医意見書項目1リスト.add(get意見書名称04_正常選択肢印刷無(dbt5304Entity, 連番15));
                 主治医意見書項目1リスト.add(get意見書名称05_正常選択肢印刷無(dbt5304Entity, 連番16));
                 主治医意見書項目1リスト.add(get意見書名称06_正常選択肢印刷無(dbt5304Entity, 連番17));
-                主治医意見書項目1リスト.add(get意見書名称14_正常選択肢印刷無(dbt5304Entity, 連番18));
+                主治医意見書項目1リスト.add(get意見書名称14_正常選択肢印刷無(dbt5304Entity, 連番69));
+            }
+            if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
+                主治医意見書項目1リスト.add(get意見書名称03_正常選択肢印刷無(dbt5304Entity, 連番15));
+                主治医意見書項目1リスト.add(get意見書名称04_正常選択肢印刷無(dbt5304Entity, 連番16));
+                主治医意見書項目1リスト.add(get意見書名称05_正常選択肢印刷無(dbt5304Entity, 連番17));
+                主治医意見書項目1リスト.add(get意見書名称06_正常選択肢印刷無(dbt5304Entity, 連番18));
+                主治医意見書項目1リスト.add(get意見書名称14_正常選択肢印刷無(dbt5304Entity, 連番19));
             }
         }
         return 主治医意見書項目1リスト;
@@ -5082,37 +5082,62 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static RString get意見書名称14(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()) {
+                return IkenKomoku14.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
     private static RString get意見書名称06(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()) {
+                return IkenKomoku06.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
     private static RString get意見書名称05(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()) {
+                return IkenKomoku05.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
     private static RString get意見書名称04(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()) {
+                return IkenKomoku04.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
     private static RString get意見書名称03(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()) {
+                return IkenKomoku03.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
@@ -5306,20 +5331,34 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static RString get意見書名称14_正常選択肢印刷無(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size()
-                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-                && !IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()
+                    && !RString.isNullOrEmpty(item.get意見項目())
+                    && !IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(item.get意見項目())) {
+                return IkenKomoku14.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size()
+//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
+//                && !IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
     private static RString get意見書名称06_正常選択肢印刷無(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size()
-                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-                && !IkenKomoku06.伝えられる.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()
+                    && !RString.isNullOrEmpty(item.get意見項目())
+                    && !IkenKomoku06.伝えられる.getコード().equals(item.get意見項目())) {
+                return IkenKomoku06.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size()
+//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
+//                && !IkenKomoku06.伝えられる.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
@@ -5333,20 +5372,34 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static RString get意見書名称04_正常選択肢印刷無(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size()
-                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-                && !IkenKomoku04.問題なし.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()
+                    && !RString.isNullOrEmpty(item.get意見項目())
+                    && !IkenKomoku04.問題なし.getコード().equals(item.get意見項目())) {
+                return IkenKomoku04.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size()
+//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
+//                && !IkenKomoku04.問題なし.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
     private static RString get意見書名称03_正常選択肢印刷無(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size()
-                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-                && !IkenKomoku03.自立.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()
+                    && !RString.isNullOrEmpty(item.get意見項目())
+                    && !IkenKomoku03.自立.getコード().equals(item.get意見項目())) {
+                return IkenKomoku03.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size()
+//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
+//                && !IkenKomoku03.自立.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 
