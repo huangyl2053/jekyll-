@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -25,6 +26,8 @@ public class GaikyoTokkiInputDiv extends Panel {
     private Label lblGaigyoTokkiComment;
     @JsonProperty("txtGaikyoTokkiNyuroku")
     private TextBoxMultiLine txtGaikyoTokkiNyuroku;
+    @JsonProperty("Tokki")
+    private TokkiDiv Tokki;
     @JsonProperty("btnTeikeibun")
     private ButtonDialog btnTeikeibun;
 
@@ -71,6 +74,24 @@ public class GaikyoTokkiInputDiv extends Panel {
     }
 
     /*
+     * getTokki
+     * @return Tokki
+     */
+    @JsonProperty("Tokki")
+    public TokkiDiv getTokki() {
+        return Tokki;
+    }
+
+    /*
+     * setTokki
+     * @param Tokki Tokki
+     */
+    @JsonProperty("Tokki")
+    public void setTokki(TokkiDiv Tokki) {
+        this.Tokki = Tokki;
+    }
+
+    /*
      * getbtnTeikeibun
      * @return btnTeikeibun
      */
@@ -86,6 +107,19 @@ public class GaikyoTokkiInputDiv extends Panel {
     @JsonProperty("btnTeikeibun")
     public void setBtnTeikeibun(ButtonDialog btnTeikeibun) {
         this.btnTeikeibun = btnTeikeibun;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgTokkiJiko() {
+        return this.getTokki().getImgTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setImgTokkiJiko(DynamicImage imgTokkiJiko) {
+        this.getTokki().setImgTokkiJiko(imgTokkiJiko);
     }
 
     // </editor-fold>

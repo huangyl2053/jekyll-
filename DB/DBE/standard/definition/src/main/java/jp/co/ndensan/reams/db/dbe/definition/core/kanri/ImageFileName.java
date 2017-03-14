@@ -84,7 +84,11 @@ public enum ImageFileName {
     /**
      * 名称:主治医意見書裏 ファイル名:E0002 略称:定義なし
      */
-    主治医意見書裏("E0002");
+    主治医意見書裏("E0002"),
+    /**
+     * 名称:概況調査特記（原本） ファイル名:C0007_BAK 略称:定義なし
+     */
+    概況調査特記_原本("C0007_BAK");
 
     private final RString imageFileName;
 

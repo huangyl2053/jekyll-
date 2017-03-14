@@ -65,6 +65,14 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     private RString ichijiHanteiKekkaJoho;
     @JsonProperty("hanteiArgument")
     private RString hanteiArgument;
+    @JsonProperty("hiddenイメージパス")
+    private RString hiddenイメージパス;
+    @JsonProperty("hdnShinseishoKanriNoValue")
+    private RString hdnShinseishoKanriNoValue;
+    @JsonProperty("hdnChosaIraiRirekiNo")
+    private RString hdnChosaIraiRirekiNo;
+    @JsonProperty("hdnOperation")
+    private RString hdnOperation;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -352,6 +360,78 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     /*
+     * gethiddenイメージパス
+     * @return hiddenイメージパス
+     */
+    @JsonProperty("hiddenイメージパス")
+    public RString getHiddenイメージパス() {
+        return hiddenイメージパス;
+    }
+
+    /*
+     * sethiddenイメージパス
+     * @param hiddenイメージパス hiddenイメージパス
+     */
+    @JsonProperty("hiddenイメージパス")
+    public void setHiddenイメージパス(RString hiddenイメージパス) {
+        this.hiddenイメージパス = hiddenイメージパス;
+    }
+
+    /*
+     * gethdnShinseishoKanriNoValue
+     * @return hdnShinseishoKanriNoValue
+     */
+    @JsonProperty("hdnShinseishoKanriNoValue")
+    public RString getHdnShinseishoKanriNoValue() {
+        return hdnShinseishoKanriNoValue;
+    }
+
+    /*
+     * sethdnShinseishoKanriNoValue
+     * @param hdnShinseishoKanriNoValue hdnShinseishoKanriNoValue
+     */
+    @JsonProperty("hdnShinseishoKanriNoValue")
+    public void setHdnShinseishoKanriNoValue(RString hdnShinseishoKanriNoValue) {
+        this.hdnShinseishoKanriNoValue = hdnShinseishoKanriNoValue;
+    }
+
+    /*
+     * gethdnChosaIraiRirekiNo
+     * @return hdnChosaIraiRirekiNo
+     */
+    @JsonProperty("hdnChosaIraiRirekiNo")
+    public RString getHdnChosaIraiRirekiNo() {
+        return hdnChosaIraiRirekiNo;
+    }
+
+    /*
+     * sethdnChosaIraiRirekiNo
+     * @param hdnChosaIraiRirekiNo hdnChosaIraiRirekiNo
+     */
+    @JsonProperty("hdnChosaIraiRirekiNo")
+    public void setHdnChosaIraiRirekiNo(RString hdnChosaIraiRirekiNo) {
+        this.hdnChosaIraiRirekiNo = hdnChosaIraiRirekiNo;
+    }
+
+    /*
+     * gethdnOperation
+     * @return hdnOperation
+     */
+    @JsonProperty("hdnOperation")
+    public RString getHdnOperation() {
+        return hdnOperation;
+    }
+
+    /*
+     * sethdnOperation
+     * @param hdnOperation hdnOperation
+     */
+    @JsonProperty("hdnOperation")
+    public void setHdnOperation(RString hdnOperation) {
+        this.hdnOperation = hdnOperation;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -375,13 +455,13 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
@@ -480,6 +560,36 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
+    public ShichosonTokubetsuKyufuDiv getShichosonTokubetsuKyufu() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setShichosonTokubetsuKyufu(ShichosonTokubetsuKyufuDiv ShichosonTokubetsuKyufu) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setShichosonTokubetsuKyufu(ShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
+    public Label getLblShichosonTokubetsuKyufu() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().getLblShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setLblShichosonTokubetsuKyufu(Label lblShichosonTokubetsuKyufu) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().setLblShichosonTokubetsuKyufu(lblShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgShichosonTokubetsuKyufu() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().getImgShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setImgShichosonTokubetsuKyufu(DynamicImage imgShichosonTokubetsuKyufu) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().setImgShichosonTokubetsuKyufu(imgShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
         return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getTxtShichosonTokubetsuKyufu();
     }
@@ -497,6 +607,36 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
         this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+    }
+
+    @JsonIgnore
+    public ZaitakuServiceDiv getZaitakuService() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setZaitakuService(ZaitakuServiceDiv ZaitakuService) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setZaitakuService(ZaitakuService);
+    }
+
+    @JsonIgnore
+    public Label getLblZaitakuService() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().getLblZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setLblZaitakuService(Label lblZaitakuService) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().setLblZaitakuService(lblZaitakuService);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgZaitakuService() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().getImgZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setImgZaitakuService(DynamicImage imgZaitakuService) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().setImgZaitakuService(imgZaitakuService);
     }
 
     @JsonIgnore
@@ -580,6 +720,76 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
+    public ImageGaigyoShisetsuRenrakusakiDiv getImageGaigyoShisetsuRenrakusaki() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki();
+    }
+
+    @JsonIgnore
+    public void  setImageGaigyoShisetsuRenrakusaki(ImageGaigyoShisetsuRenrakusakiDiv ImageGaigyoShisetsuRenrakusaki) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().setImageGaigyoShisetsuRenrakusaki(ImageGaigyoShisetsuRenrakusaki);
+    }
+
+    @JsonIgnore
+    public Label getLblShisetsuMeisho() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getLblShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setLblShisetsuMeisho(Label lblShisetsuMeisho) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setLblShisetsuMeisho(lblShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgShisetsuMeisho() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgShisetsuMeisho(DynamicImage imgShisetsuMeisho) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setImgShisetsuMeisho(imgShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public Label getLblJusho() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getLblJusho();
+    }
+
+    @JsonIgnore
+    public void  setLblJusho(Label lblJusho) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setLblJusho(lblJusho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgJusho() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgJusho();
+    }
+
+    @JsonIgnore
+    public void  setImgJusho(DynamicImage imgJusho) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setImgJusho(imgJusho);
+    }
+
+    @JsonIgnore
+    public Label getLbTel() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getLbTel();
+    }
+
+    @JsonIgnore
+    public void  setLbTel(Label lbTel) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setLbTel(lbTel);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTel() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgTel();
+    }
+
+    @JsonIgnore
+    public void  setImgTel(DynamicImage imgTel) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setImgTel(imgTel);
+    }
+
+    @JsonIgnore
     public GaikyoTokkiInputDiv getGaikyoTokkiInput() {
         return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getGaikyoTokkiInput();
     }
@@ -607,6 +817,26 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setTxtGaikyoTokkiNyuroku(TextBoxMultiLine txtGaikyoTokkiNyuroku) {
         this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getGaikyoTokkiInput().setTxtGaikyoTokkiNyuroku(txtGaikyoTokkiNyuroku);
+    }
+
+    @JsonIgnore
+    public TokkiDiv getTokki() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getGaikyoTokkiInput().getTokki();
+    }
+
+    @JsonIgnore
+    public void  setTokki(TokkiDiv Tokki) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getGaikyoTokkiInput().setTokki(Tokki);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokkiJiko() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getGaikyoTokkiInput().getTokki().getImgTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setImgTokkiJiko(DynamicImage imgTokkiJiko) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplGaikyoChosa().getGaikyoTokkiInput().getTokki().setImgTokkiJiko(imgTokkiJiko);
     }
 
     @JsonIgnore
@@ -757,6 +987,16 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setBtnTokkiJiko(ButtonDialog btnTokkiJiko) {
         this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().setBtnTokkiJiko(btnTokkiJiko);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnImageTokkiJiko() {
+        return this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().getBtnImageTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setBtnImageTokkiJiko(ButtonDialog btnImageTokkiJiko) {
+        this.getNinteiChosaNyuryoku().getTabChosaShurui().getTplKihonChosa().getKihonchosaSelect().setBtnImageTokkiJiko(btnImageTokkiJiko);
     }
 
     @JsonIgnore

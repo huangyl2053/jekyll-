@@ -212,5 +212,15 @@ public class tplKihonChosaDiv extends TabPanel {
         this.getKihonchosaSelect().setBtnTokkiJiko(btnTokkiJiko);
     }
 
+    @JsonIgnore
+    public ButtonDialog getBtnImageTokkiJiko() {
+        return this.getKihonchosaSelect().getBtnImageTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setBtnImageTokkiJiko(ButtonDialog btnImageTokkiJiko) {
+        this.getKihonchosaSelect().setBtnImageTokkiJiko(btnImageTokkiJiko);
+    }
+
     // </editor-fold>
 }

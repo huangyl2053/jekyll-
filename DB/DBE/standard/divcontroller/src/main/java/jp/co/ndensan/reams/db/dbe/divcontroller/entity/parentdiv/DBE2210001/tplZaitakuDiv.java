@@ -26,10 +26,14 @@ public class tplZaitakuDiv extends TabPanel {
     private RadioButton radJutakuKaishu;
     @JsonProperty("JutakuGaikyoChosa")
     private JutakuGaikyoChosaDiv JutakuGaikyoChosa;
+    @JsonProperty("ShichosonTokubetsuKyufu")
+    private ShichosonTokubetsuKyufuDiv ShichosonTokubetsuKyufu;
     @JsonProperty("txtShichosonTokubetsuKyufu")
     private TextBoxMultiLine txtShichosonTokubetsuKyufu;
     @JsonProperty("txtKyufuIgaiJutakuService")
     private TextBoxMultiLine txtKyufuIgaiJutakuService;
+    @JsonProperty("ZaitakuService")
+    private ZaitakuServiceDiv ZaitakuService;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,6 +78,24 @@ public class tplZaitakuDiv extends TabPanel {
     }
 
     /*
+     * getShichosonTokubetsuKyufu
+     * @return ShichosonTokubetsuKyufu
+     */
+    @JsonProperty("ShichosonTokubetsuKyufu")
+    public ShichosonTokubetsuKyufuDiv getShichosonTokubetsuKyufu() {
+        return ShichosonTokubetsuKyufu;
+    }
+
+    /*
+     * setShichosonTokubetsuKyufu
+     * @param ShichosonTokubetsuKyufu ShichosonTokubetsuKyufu
+     */
+    @JsonProperty("ShichosonTokubetsuKyufu")
+    public void setShichosonTokubetsuKyufu(ShichosonTokubetsuKyufuDiv ShichosonTokubetsuKyufu) {
+        this.ShichosonTokubetsuKyufu = ShichosonTokubetsuKyufu;
+    }
+
+    /*
      * gettxtShichosonTokubetsuKyufu
      * @return txtShichosonTokubetsuKyufu
      */
@@ -110,6 +132,24 @@ public class tplZaitakuDiv extends TabPanel {
     }
 
     /*
+     * getZaitakuService
+     * @return ZaitakuService
+     */
+    @JsonProperty("ZaitakuService")
+    public ZaitakuServiceDiv getZaitakuService() {
+        return ZaitakuService;
+    }
+
+    /*
+     * setZaitakuService
+     * @param ZaitakuService ZaitakuService
+     */
+    @JsonProperty("ZaitakuService")
+    public void setZaitakuService(ZaitakuServiceDiv ZaitakuService) {
+        this.ZaitakuService = ZaitakuService;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -120,6 +160,46 @@ public class tplZaitakuDiv extends TabPanel {
     @JsonIgnore
     public void  setDgRiyoServiceJyokyo(DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo) {
         this.getJutakuGaikyoChosa().setDgRiyoServiceJyokyo(dgRiyoServiceJyokyo);
+    }
+
+    @JsonIgnore
+    public Label getLblShichosonTokubetsuKyufu() {
+        return this.getShichosonTokubetsuKyufu().getLblShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setLblShichosonTokubetsuKyufu(Label lblShichosonTokubetsuKyufu) {
+        this.getShichosonTokubetsuKyufu().setLblShichosonTokubetsuKyufu(lblShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgShichosonTokubetsuKyufu() {
+        return this.getShichosonTokubetsuKyufu().getImgShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setImgShichosonTokubetsuKyufu(DynamicImage imgShichosonTokubetsuKyufu) {
+        this.getShichosonTokubetsuKyufu().setImgShichosonTokubetsuKyufu(imgShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
+    public Label getLblZaitakuService() {
+        return this.getZaitakuService().getLblZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setLblZaitakuService(Label lblZaitakuService) {
+        this.getZaitakuService().setLblZaitakuService(lblZaitakuService);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgZaitakuService() {
+        return this.getZaitakuService().getImgZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setImgZaitakuService(DynamicImage imgZaitakuService) {
+        this.getZaitakuService().setImgZaitakuService(imgZaitakuService);
     }
 
     // </editor-fold>

@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.IGaikyoCh
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyoukinyukomoku.GaikyoChosahyouKinyuKomoku09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyouNiteichosahyouSisetuRiy09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
+import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
@@ -107,6 +109,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 
 /**
  * 認定調査結果登録1のクラスです。
@@ -280,7 +283,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (概況調査情報 != null) {
             在宅施設タブの設定(概況調査情報.getTemp_現在の状況コード());
             サービス区分の設定(概況調査情報.getTemp_現在のサービス区分コード());
-            施設関連の詳細設定(概況調査情報);
+            施設関連の詳細設定(概況調査情報, 申請書管理番号, 認定調査履歴番号);
             概況調査特記の設定(概況調査情報);
         } else {
             div.getRadGenzaiservis().setSelectedKey(予防給付サービス_選択);
@@ -294,10 +297,25 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     private void 概況調査特記の設定(TempData 概況調査情報) {
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
-            div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().setDisabled(true);
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().setDisplayNone(true);
+            setImage概況特記();
         } else {
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTokki().setDisplayNone(true);
             div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().setValue(概況調査情報.getTemp_特記());
         }
+    }
+
+    private void setImage概況特記() {
+        RString 出力イメージフォルダパス = ViewStateHolder.get(ViewStateKeys.イメージ取込み, RString.class);
+
+        RString 概況調査特記原本ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.概況調査特記_原本.getImageFileName());
+        if (!RString.isNullOrEmpty(概況調査特記原本ImagePath)) {
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTokki().getImgTokkiJiko().setSrc(DBEImageUtil.sanitizePath(概況調査特記原本ImagePath));
+        } else {
+            RString 概況調査特記ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.概況調査特記.getImageFileName());
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTokki().getImgTokkiJiko().setSrc(DBEImageUtil.sanitizePath(概況調査特記ImagePath));
+        }
+        div.getTabChosaShurui().getGaikyoTokkiInput().getBtnTeikeibun().setDisplayNone(true);
     }
 
     private void 在宅施設タブの設定(RString 現在の状況コード) {
@@ -321,13 +339,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
     }
 
-    private void 施設関連の詳細設定(TempData 概況調査情報) {
+    private void 施設関連の詳細設定(TempData 概況調査情報, ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setDisabled(true);
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo().setDisabled(true);
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho().setDisabled(true);
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().setDisabled(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setDisplayNone(true);
+            setImage施設連絡先(申請書管理番号, 認定調査履歴番号);
         } else {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setDisplayNone(true);
             div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().setValue(概況調査情報.getTemp_利用施設名());
             div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuYubinNo()
                     .setValue(new YubinNo(概況調査情報.getTemp_利用施設郵便番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設郵便番号()));
@@ -336,6 +353,36 @@ public class NinnteiChousaKekkaTouroku1Handler {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo()
                     .setDomain(new TelNo(概況調査情報.getTemp_利用施設電話番号() == null ? RString.EMPTY : 概況調査情報.getTemp_利用施設電話番号()));
         }
+    }
+
+    private void setImage施設連絡先(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
+        RString toCopyPath = get出力イメージフォルダパス(申請書管理番号, 認定調査履歴番号);
+        ViewStateHolder.put(ViewStateKeys.イメージ取込み, toCopyPath);
+        RString 出力イメージフォルダパス = ViewStateHolder.get(ViewStateKeys.イメージ取込み, RString.class);
+
+        RString 施設名称ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.施設名.getImageFileName());
+        RString 住所ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.施設住所.getImageFileName());
+        RString 電話番号ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.施設電話番号.getImageFileName());
+        if (!RString.isNullOrEmpty(施設名称ImagePath)) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgShisetsuMeisho().setSrc(DBEImageUtil.sanitizePath(施設名称ImagePath));
+        }
+        if (!RString.isNullOrEmpty(住所ImagePath)) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgJusho().setSrc(DBEImageUtil.sanitizePath(住所ImagePath));
+        }
+        if (!RString.isNullOrEmpty(電話番号ImagePath)) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgTel().setSrc(DBEImageUtil.sanitizePath(電話番号ImagePath));
+        }
+    }
+
+    private RString get出力イメージフォルダパス(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号) {
+        ChosaKekkaInfoGaikyoParameter gaikyoParameter = ChosaKekkaInfoGaikyoParameter.
+                createGamenParam(申請書管理番号.value(), 認定調査履歴番号, RString.EMPTY, RString.EMPTY);
+        Image image = ChosaKekkaInfoGaikyoFinder.createInstance().get5115Image(gaikyoParameter);
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
+        RString 共有ファイル名 = 証記載保険者番号.concat(被保険者番号);
+        RString 出力イメージフォルダパス = DBEImageUtil.copySharedFiles(image.getイメージ共有ファイルID(), 共有ファイル名);
+        return 出力イメージフォルダパス;
     }
 
     private void setChosaJisshishaJohoModel(ChosaJisshishaJohoModel model, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
@@ -412,7 +459,19 @@ public class NinnteiChousaKekkaTouroku1Handler {
         div.getCcdChosaJisshishaJoho().intialize(model);
         RString 概況調査テキストイメージ区分 = ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class);
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査テキストイメージ区分)) {
-            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisabled(true);
+            div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().setDisplayNone(true);
+            setImage認定調査実施場所();
+        } else {
+            div.getCcdChosaJisshishaJoho().getImage().setDisplayNone(true);
+        }
+    }
+
+    private void setImage認定調査実施場所() {
+        RString 出力イメージフォルダパス = ViewStateHolder.get(ViewStateKeys.イメージ取込み, RString.class);
+
+        RString 実施場所ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.調査実施場所.getImageFileName());
+        if (!RString.isNullOrEmpty(実施場所ImagePath)) {
+            div.getCcdChosaJisshishaJoho().getImage().getImgChosaJisshiBashoMeisho().setSrc(DBEImageUtil.sanitizePath(実施場所ImagePath));
         }
     }
 
@@ -548,9 +607,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     private void 概況調査_給付関連情報の初期化(TempData 概況調査情報, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号) {
         if (概況調査情報 != null && TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().setDisabled(true);
-            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setDisabled(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().setDisplayNone(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setDisplayNone(true);
+            setImage給付関連();
         } else {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getShichosonTokubetsuKyufu().setDisplayNone(true);
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getZaitakuService().setDisplayNone(true);
             NinteichosahyoKinyuItemManager manager = new NinteichosahyoKinyuItemManager();
             List<NinteichosahyoKinyuItem> 認定調査記入項目List = manager.get認定調査票_概況調査_記入項目List(申請書管理番号, 認定調査履歴番号);
             for (NinteichosahyoKinyuItem 認定調査記入項目 : 認定調査記入項目List) {
@@ -560,6 +622,19 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setValue(認定調査記入項目.getサービスの状況記入());
                 }
             }
+        }
+    }
+
+    private void setImage給付関連() {
+        RString 出力イメージフォルダパス = ViewStateHolder.get(ViewStateKeys.イメージ取込み, RString.class);
+
+        RString 特別給付ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.市町村特別給付.getImageFileName());
+        if (!RString.isNullOrEmpty(特別給付ImagePath)) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getShichosonTokubetsuKyufu().getImgShichosonTokubetsuKyufu().setSrc(DBEImageUtil.sanitizePath(特別給付ImagePath));
+        }
+        RString 在宅サービスImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.介護保険給付外のサービス.getImageFileName());
+        if (!RString.isNullOrEmpty(在宅サービスImagePath)) {
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getZaitakuService().getImgZaitakuService().setSrc(DBEImageUtil.sanitizePath(在宅サービスImagePath));
         }
     }
 

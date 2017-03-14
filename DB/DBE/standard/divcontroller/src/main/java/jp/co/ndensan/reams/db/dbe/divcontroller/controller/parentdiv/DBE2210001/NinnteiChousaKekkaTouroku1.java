@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
@@ -132,11 +133,16 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         List<NinteichosahyoTokkijiko> 特記事項リスト = manager.get認定調査票_特記情報(申請書管理番号, 認定調査履歴番号);
+        boolean isイメージ = false;
         for (NinteichosahyoTokkijiko 特記事項 : 特記事項リスト) {
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記事項.get特記事項テキスト_イメージ区分())) {
-                div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().setDisabled(true);
+                div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().setDisplayNone(true);
+                isイメージ = true;
                 break;
             }
+        }
+        if (!isイメージ) {
+            div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnImageTokkiJiko().setDisplayNone(true);
         }
         ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
         boolean 審査会割当済 = shinsakaiWariateManager.get審査会割当データ(申請書管理番号);
@@ -342,6 +348,21 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         set画面遷移パラメータ(div);
         ViewStateHolder.put(ViewStateKeys.特記事項一覧, newTokkiJikoMap);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「特記事項」ボタンを押下する処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnImageTokkiJiko(NinnteiChousaKekkaTouroku1Div div) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        Integer 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+        div.setHdnShinseishoKanriNoValue(申請書管理番号.value());
+        div.setHdnChosaIraiRirekiNo(DataPassingConverter.serialize(認定調査履歴番号));
+        div.setHdnOperation(DataPassingConverter.serialize(Operation.照会));
         return ResponseData.of(div).respond();
     }
 
@@ -636,7 +657,7 @@ public class NinnteiChousaKekkaTouroku1 {
             getValidationHandler().validateFor第5群の必須入力(pairs, div);
             getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
             if (!認定調査結果入手_必須調査票_特記事項不要.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))
-                    && !div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().isDisabled()) {
+                    && !div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().isDisplayNone()) {
                 getValidationHandler().validateFor特記事項の必須入力(pairs, div);
             }
             pairs.add(div.getCcdChosaJisshishaJoho().validate());

@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJiss
 
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DynamicImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -144,4 +145,27 @@ public interface IChosaJisshishaJohoDiv extends ICommonChildDivBaseProperties {
      */
     public void setTxtChosaKubun(TextBox txtChosaKubun);
 
+    /*
+     * getImgChosaJisshiBashoMeisho
+     * @return DynamicImage
+     */
+    public DynamicImage getImgChosaJisshiBashoMeisho();
+
+    /*
+     * setImgChosaJisshiBashoMeisho
+     * @param DynamicImage
+     */
+    public void setImgChosaJisshiBashoMeisho(DynamicImage imgChosaJisshiBashoMeisho);
+
+    /*
+     * getImage
+     * @return ImageDiv
+     */
+    public ImageDiv getImage();
+
+    /*
+     * setImage
+     * @param Image ImageDiv
+     */
+    public void setImage(ImageDiv Image);
 }

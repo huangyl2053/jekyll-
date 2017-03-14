@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJiss
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -26,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-19_22-43-59">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -49,6 +50,8 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     private DropDownList ddlChosaJisshiBasho;
     @JsonProperty("txtJisshiBashoMeisho")
     private TextBox txtJisshiBashoMeisho;
+    @JsonProperty("Image")
+    private ImageDiv Image;
     @JsonProperty("txtKinyushaCode")
     private TextBoxCode txtKinyushaCode;
     @JsonProperty("btnChosainGuide")
@@ -213,6 +216,24 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     }
 
     /*
+     * getImage
+     * @return Image
+     */
+    @JsonProperty("Image")
+    public ImageDiv getImage() {
+        return Image;
+    }
+
+    /*
+     * setImage
+     * @param Image Image
+     */
+    @JsonProperty("Image")
+    public void setImage(ImageDiv Image) {
+        this.Image = Image;
+    }
+
+    /*
      * gettxtKinyushaCode
      * @return txtKinyushaCode
      */
@@ -361,6 +382,19 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
 
     public void setMode_State( State value ) {
         _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DynamicImage getImgChosaJisshiBashoMeisho() {
+        return this.getImage().getImgChosaJisshiBashoMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgChosaJisshiBashoMeisho(DynamicImage imgChosaJisshiBashoMeisho) {
+        this.getImage().setImgChosaJisshiBashoMeisho(imgChosaJisshiBashoMeisho);
     }
 
     // </editor-fold>

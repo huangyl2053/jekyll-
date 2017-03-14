@@ -27,6 +27,8 @@ public class tplShisetsuDiv extends TabPanel {
     private GaikyoTokkiShisetsuDiv GaikyoTokkiShisetsu;
     @JsonProperty("GaigyoShisetsuRenrakusaki")
     private GaigyoShisetsuRenrakusakiDiv GaigyoShisetsuRenrakusaki;
+    @JsonProperty("ImageGaigyoShisetsuRenrakusaki")
+    private ImageGaigyoShisetsuRenrakusakiDiv ImageGaigyoShisetsuRenrakusaki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,6 +70,24 @@ public class tplShisetsuDiv extends TabPanel {
     @JsonProperty("GaigyoShisetsuRenrakusaki")
     public void setGaigyoShisetsuRenrakusaki(GaigyoShisetsuRenrakusakiDiv GaigyoShisetsuRenrakusaki) {
         this.GaigyoShisetsuRenrakusaki = GaigyoShisetsuRenrakusaki;
+    }
+
+    /*
+     * getImageGaigyoShisetsuRenrakusaki
+     * @return ImageGaigyoShisetsuRenrakusaki
+     */
+    @JsonProperty("ImageGaigyoShisetsuRenrakusaki")
+    public ImageGaigyoShisetsuRenrakusakiDiv getImageGaigyoShisetsuRenrakusaki() {
+        return ImageGaigyoShisetsuRenrakusaki;
+    }
+
+    /*
+     * setImageGaigyoShisetsuRenrakusaki
+     * @param ImageGaigyoShisetsuRenrakusaki ImageGaigyoShisetsuRenrakusaki
+     */
+    @JsonProperty("ImageGaigyoShisetsuRenrakusaki")
+    public void setImageGaigyoShisetsuRenrakusaki(ImageGaigyoShisetsuRenrakusakiDiv ImageGaigyoShisetsuRenrakusaki) {
+        this.ImageGaigyoShisetsuRenrakusaki = ImageGaigyoShisetsuRenrakusaki;
     }
 
     /*
@@ -121,6 +141,66 @@ public class tplShisetsuDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.getGaigyoShisetsuRenrakusaki().setTxtTelNo(txtTelNo);
+    }
+
+    @JsonIgnore
+    public Label getLblShisetsuMeisho() {
+        return this.getImageGaigyoShisetsuRenrakusaki().getLblShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setLblShisetsuMeisho(Label lblShisetsuMeisho) {
+        this.getImageGaigyoShisetsuRenrakusaki().setLblShisetsuMeisho(lblShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgShisetsuMeisho() {
+        return this.getImageGaigyoShisetsuRenrakusaki().getImgShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgShisetsuMeisho(DynamicImage imgShisetsuMeisho) {
+        this.getImageGaigyoShisetsuRenrakusaki().setImgShisetsuMeisho(imgShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public Label getLblJusho() {
+        return this.getImageGaigyoShisetsuRenrakusaki().getLblJusho();
+    }
+
+    @JsonIgnore
+    public void  setLblJusho(Label lblJusho) {
+        this.getImageGaigyoShisetsuRenrakusaki().setLblJusho(lblJusho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgJusho() {
+        return this.getImageGaigyoShisetsuRenrakusaki().getImgJusho();
+    }
+
+    @JsonIgnore
+    public void  setImgJusho(DynamicImage imgJusho) {
+        this.getImageGaigyoShisetsuRenrakusaki().setImgJusho(imgJusho);
+    }
+
+    @JsonIgnore
+    public Label getLbTel() {
+        return this.getImageGaigyoShisetsuRenrakusaki().getLbTel();
+    }
+
+    @JsonIgnore
+    public void  setLbTel(Label lbTel) {
+        this.getImageGaigyoShisetsuRenrakusaki().setLbTel(lbTel);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTel() {
+        return this.getImageGaigyoShisetsuRenrakusaki().getImgTel();
+    }
+
+    @JsonIgnore
+    public void  setImgTel(DynamicImage imgTel) {
+        this.getImageGaigyoShisetsuRenrakusaki().setImgTel(imgTel);
     }
 
     // </editor-fold>

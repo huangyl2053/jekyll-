@@ -37,6 +37,8 @@ public class kihonchosaSelectDiv extends Panel {
     private ButtonDialog btnKihonchosa7;
     @JsonProperty("btnTokkiJiko")
     private ButtonDialog btnTokkiJiko;
+    @JsonProperty("btnImageTokkiJiko")
+    private ButtonDialog btnImageTokkiJiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -186,6 +188,24 @@ public class kihonchosaSelectDiv extends Panel {
     @JsonProperty("btnTokkiJiko")
     public void setBtnTokkiJiko(ButtonDialog btnTokkiJiko) {
         this.btnTokkiJiko = btnTokkiJiko;
+    }
+
+    /*
+     * getbtnImageTokkiJiko
+     * @return btnImageTokkiJiko
+     */
+    @JsonProperty("btnImageTokkiJiko")
+    public ButtonDialog getBtnImageTokkiJiko() {
+        return btnImageTokkiJiko;
+    }
+
+    /*
+     * setbtnImageTokkiJiko
+     * @param btnImageTokkiJiko btnImageTokkiJiko
+     */
+    @JsonProperty("btnImageTokkiJiko")
+    public void setBtnImageTokkiJiko(ButtonDialog btnImageTokkiJiko) {
+        this.btnImageTokkiJiko = btnImageTokkiJiko;
     }
 
     // </editor-fold>

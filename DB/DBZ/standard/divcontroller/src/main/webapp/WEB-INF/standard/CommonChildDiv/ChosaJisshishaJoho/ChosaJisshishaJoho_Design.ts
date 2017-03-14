@@ -77,6 +77,14 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
             }
 
+            public Image(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Image"));
+            }
+
+            public imgChosaJisshiBashoMeisho(): UZA.DynamicImage {
+                return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
+            }
+
             public txtKinyushaCode(): UZA.TextBoxCode {
                 return new UZA.TextBoxCode(this.convFiledName("txtKinyushaCode"));
             }

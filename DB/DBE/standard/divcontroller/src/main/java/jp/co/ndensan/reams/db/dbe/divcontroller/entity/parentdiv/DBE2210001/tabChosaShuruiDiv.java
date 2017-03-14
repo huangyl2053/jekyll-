@@ -135,6 +135,36 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public ShichosonTokubetsuKyufuDiv getShichosonTokubetsuKyufu() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setShichosonTokubetsuKyufu(ShichosonTokubetsuKyufuDiv ShichosonTokubetsuKyufu) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setShichosonTokubetsuKyufu(ShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
+    public Label getLblShichosonTokubetsuKyufu() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().getLblShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setLblShichosonTokubetsuKyufu(Label lblShichosonTokubetsuKyufu) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().setLblShichosonTokubetsuKyufu(lblShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgShichosonTokubetsuKyufu() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().getImgShichosonTokubetsuKyufu();
+    }
+
+    @JsonIgnore
+    public void  setImgShichosonTokubetsuKyufu(DynamicImage imgShichosonTokubetsuKyufu) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getShichosonTokubetsuKyufu().setImgShichosonTokubetsuKyufu(imgShichosonTokubetsuKyufu);
+    }
+
+    @JsonIgnore
     public TextBoxMultiLine getTxtShichosonTokubetsuKyufu() {
         return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getTxtShichosonTokubetsuKyufu();
     }
@@ -152,6 +182,36 @@ public class tabChosaShuruiDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtKyufuIgaiJutakuService(TextBoxMultiLine txtKyufuIgaiJutakuService) {
         this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setTxtKyufuIgaiJutakuService(txtKyufuIgaiJutakuService);
+    }
+
+    @JsonIgnore
+    public ZaitakuServiceDiv getZaitakuService() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setZaitakuService(ZaitakuServiceDiv ZaitakuService) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().setZaitakuService(ZaitakuService);
+    }
+
+    @JsonIgnore
+    public Label getLblZaitakuService() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().getLblZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setLblZaitakuService(Label lblZaitakuService) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().setLblZaitakuService(lblZaitakuService);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgZaitakuService() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().getImgZaitakuService();
+    }
+
+    @JsonIgnore
+    public void  setImgZaitakuService(DynamicImage imgZaitakuService) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplZaitaku().getZaitakuService().setImgZaitakuService(imgZaitakuService);
     }
 
     @JsonIgnore
@@ -235,6 +295,76 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public ImageGaigyoShisetsuRenrakusakiDiv getImageGaigyoShisetsuRenrakusaki() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki();
+    }
+
+    @JsonIgnore
+    public void  setImageGaigyoShisetsuRenrakusaki(ImageGaigyoShisetsuRenrakusakiDiv ImageGaigyoShisetsuRenrakusaki) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().setImageGaigyoShisetsuRenrakusaki(ImageGaigyoShisetsuRenrakusaki);
+    }
+
+    @JsonIgnore
+    public Label getLblShisetsuMeisho() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getLblShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setLblShisetsuMeisho(Label lblShisetsuMeisho) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setLblShisetsuMeisho(lblShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgShisetsuMeisho() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgShisetsuMeisho();
+    }
+
+    @JsonIgnore
+    public void  setImgShisetsuMeisho(DynamicImage imgShisetsuMeisho) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setImgShisetsuMeisho(imgShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public Label getLblJusho() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getLblJusho();
+    }
+
+    @JsonIgnore
+    public void  setLblJusho(Label lblJusho) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setLblJusho(lblJusho);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgJusho() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgJusho();
+    }
+
+    @JsonIgnore
+    public void  setImgJusho(DynamicImage imgJusho) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setImgJusho(imgJusho);
+    }
+
+    @JsonIgnore
+    public Label getLbTel() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getLbTel();
+    }
+
+    @JsonIgnore
+    public void  setLbTel(Label lbTel) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setLbTel(lbTel);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTel() {
+        return this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().getImgTel();
+    }
+
+    @JsonIgnore
+    public void  setImgTel(DynamicImage imgTel) {
+        this.getTplGaikyoChosa().getTabChosaBasho().getTplShisetsu().getImageGaigyoShisetsuRenrakusaki().setImgTel(imgTel);
+    }
+
+    @JsonIgnore
     public GaikyoTokkiInputDiv getGaikyoTokkiInput() {
         return this.getTplGaikyoChosa().getGaikyoTokkiInput();
     }
@@ -262,6 +392,26 @@ public class tabChosaShuruiDiv extends TabContainer {
     @JsonIgnore
     public void  setTxtGaikyoTokkiNyuroku(TextBoxMultiLine txtGaikyoTokkiNyuroku) {
         this.getTplGaikyoChosa().getGaikyoTokkiInput().setTxtGaikyoTokkiNyuroku(txtGaikyoTokkiNyuroku);
+    }
+
+    @JsonIgnore
+    public TokkiDiv getTokki() {
+        return this.getTplGaikyoChosa().getGaikyoTokkiInput().getTokki();
+    }
+
+    @JsonIgnore
+    public void  setTokki(TokkiDiv Tokki) {
+        this.getTplGaikyoChosa().getGaikyoTokkiInput().setTokki(Tokki);
+    }
+
+    @JsonIgnore
+    public DynamicImage getImgTokkiJiko() {
+        return this.getTplGaikyoChosa().getGaikyoTokkiInput().getTokki().getImgTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setImgTokkiJiko(DynamicImage imgTokkiJiko) {
+        this.getTplGaikyoChosa().getGaikyoTokkiInput().getTokki().setImgTokkiJiko(imgTokkiJiko);
     }
 
     @JsonIgnore
@@ -402,6 +552,16 @@ public class tabChosaShuruiDiv extends TabContainer {
     @JsonIgnore
     public void  setBtnTokkiJiko(ButtonDialog btnTokkiJiko) {
         this.getTplKihonChosa().getKihonchosaSelect().setBtnTokkiJiko(btnTokkiJiko);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnImageTokkiJiko() {
+        return this.getTplKihonChosa().getKihonchosaSelect().getBtnImageTokkiJiko();
+    }
+
+    @JsonIgnore
+    public void  setBtnImageTokkiJiko(ButtonDialog btnImageTokkiJiko) {
+        this.getTplKihonChosa().getKihonchosaSelect().setBtnImageTokkiJiko(btnImageTokkiJiko);
     }
 
     // </editor-fold>

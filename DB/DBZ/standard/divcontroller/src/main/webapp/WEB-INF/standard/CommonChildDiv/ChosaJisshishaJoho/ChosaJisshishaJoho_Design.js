@@ -71,6 +71,14 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
             };
 
+            Controls.prototype.Image = function () {
+                return new UZA.Panel(this.convFiledName("Image"));
+            };
+
+            Controls.prototype.imgChosaJisshiBashoMeisho = function () {
+                return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
+            };
+
             Controls.prototype.txtKinyushaCode = function () {
                 return new UZA.TextBoxCode(this.convFiledName("txtKinyushaCode"));
             };
