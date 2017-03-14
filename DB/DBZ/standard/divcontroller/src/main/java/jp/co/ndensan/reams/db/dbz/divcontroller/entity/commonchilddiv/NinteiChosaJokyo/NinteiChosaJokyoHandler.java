@@ -55,6 +55,7 @@ public class NinteiChosaJokyoHandler {
             div.setMode_DisplayType(NinteiChosaJokyoDiv.DisplayType.input);
         }
         List<KeyValueDataSource> keyValueList = new ArrayList<>();
+        keyValueList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaItakuKubunCode chosaItaku : ChosaItakuKubunCode.values()) {
             keyValueList.add(new KeyValueDataSource(chosaItaku.getコード(), chosaItaku.get名称()));
         }
@@ -344,6 +345,8 @@ public class NinteiChosaJokyoHandler {
         div.getDdlNinteiChosaItakusakiKubun().setIsBlankLine(true);
         if (konkaiDataPass.get調査委託区分() != null && !konkaiDataPass.get調査委託区分().trim().isEmpty()) {
             div.getDdlNinteiChosaItakusakiKubun().setSelectedKey(konkaiDataPass.get調査委託区分());
+        } else {
+            div.getDdlNinteiChosaItakusakiKubun().setSelectedIndex(0);
         }
         if (konkaiDataPass.get訪問調査先名称() != null && !konkaiDataPass.get訪問調査先名称().isEmpty()) {
             div.getTxtChosasakiName().setValue(konkaiDataPass.get訪問調査先名称().value());
