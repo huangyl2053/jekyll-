@@ -164,7 +164,8 @@ public enum NinteichosaItakusakiMasterDivSpec implements IPredicate<NinteichosaI
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
                         return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
-                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                        && (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                        || (new RString("9900").equals(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value())))
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();

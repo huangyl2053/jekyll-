@@ -242,7 +242,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
                 表示値_有効.equals(row.getJokyoFlag()) ? CODE_有効 : CODE_無効);
         div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
                 new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(row.getKinyuKikanShitenCode()), FlexibleDate.getNowDate());
-        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu() == null ? new RString(0) : row.getYokinShubetsu());
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey((row.getYokinShubetsu() == null
+                || row.getYokinShubetsu().isEmpty()) ? new RString(0) : row.getYokinShubetsu());
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
         div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
         div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());
@@ -302,7 +303,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
         row.setJokyoFlag(CODE_有効.equals(jokyoFlag) ? 表示値_有効 : 表示値_無効);
         row.setKinyuKikanCode(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
         row.setKinyuKikanShitenCode(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
-        row.setYokinShubetsu(div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        row.setYokinShubetsu(convertYokinShubetsu(div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey()));
         row.setKozaNo(div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue());
         row.setKozaMeigininKana(div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue());
         row.setKozaMeiginin(div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue());
@@ -352,7 +353,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
                 .set状況フラグ(CODE_有効.equals(div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey()))
                 .set金融機関コード(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode())
                 .set支店コード(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode())
-                .set預金種別(div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey())
+                .set預金種別(convertYokinShubetsu(div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey()))
                 .set口座番号(div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getText())
                 .set口座名義人カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getText()))
                 .set口座名義人(new AtenaMeisho(div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getText()))
@@ -470,5 +471,13 @@ public class KoseiShujiiIryoKikanMasterHandler {
      */
     public void onBlur_txtShichoson(RString 市町村コード) {
         div.getShujiiJohoInput().getTxtShichosonmei().setValue(市町村コード);
+    }
+
+    private RString convertYokinShubetsu(RString yokinShubetsu) {
+        if (new RString("0").equals(yokinShubetsu)) {
+            return RString.EMPTY;
+        } else {
+        }
+        return yokinShubetsu;
     }
 }

@@ -563,7 +563,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setFaxNo(div.getTxtFaxNo().getDomain().value());
         row.setKinyuKikanCode(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value());
         row.setKinyuKikanShitenCode(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value());
-        row.setYokinShubetsu(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
+        row.setYokinShubetsu(convertYokinShubetsu(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey()));
         row.setKozaNo(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
         row.setKozaMeigininKana(div.getKozaJoho().getTxtKozaMeiginin().getValue());
         row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
@@ -1011,5 +1011,13 @@ public class ShinsakaiIinJohoTorokuHandler {
 
     private FlexibleDate edit日付RDateToFlexibleDate(RDate 日付) {
         return 日付 != null ? new FlexibleDate(日付.toDateString()) : FlexibleDate.EMPTY;
+    }
+
+    private RString convertYokinShubetsu(RString yokinShubetsu) {
+        if (new RString("0").equals(yokinShubetsu)) {
+            return RString.EMPTY;
+        } else {
+        }
+        return yokinShubetsu;
     }
 }

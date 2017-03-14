@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -415,7 +414,7 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value(),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value(),
-                div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey(),
+                convertYokinShubetsu(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey()),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue(),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue(),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue()
@@ -429,6 +428,14 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakichiran().getDgChosainIchiran().getDataSource().set(selectID, row);
             }
         }
+    }
+
+    private RString convertYokinShubetsu(RString yokinShubetsu) {
+        if (new RString("0").equals(yokinShubetsu)) {
+            return RString.EMPTY;
+        } else {
+        }
+        return yokinShubetsu;
     }
 
     private RString change状態(RString 状態, boolean 処理状態, int selectID) {
