@@ -184,6 +184,7 @@ public class ImageJohoMaskingHandler {
      */
     public void setDataGrid(List<ImageJohoMaskingResult> resultList) {
         List<dgImageMaskShoriTaishosha_Row> rowList = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (ImageJohoMaskingResult result : resultList) {
             dgImageMaskShoriTaishosha_Row row = new dgImageMaskShoriTaishosha_Row();
             row.set保険者(result.get証記載保険者番号());
@@ -232,10 +233,11 @@ public class ImageJohoMaskingHandler {
                 row.setマスキング完了済(RString.EMPTY);
             }
             ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(result.get証記載保険者番号());
-            NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, result.get被保険者番号());
-            ninteiAccessLogger.log();
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), result.get申請書管理番号().value());
+            accessLog.store(shoKisaiHokenshaNo, result.get被保険者番号(), expandedInfo);
             rowList.add(row);
         }
+        accessLog.flushBy(AccessLogType.照会);
         div.getDgImageMaskShoriTaishosha().setDataSource(rowList);
     }
 

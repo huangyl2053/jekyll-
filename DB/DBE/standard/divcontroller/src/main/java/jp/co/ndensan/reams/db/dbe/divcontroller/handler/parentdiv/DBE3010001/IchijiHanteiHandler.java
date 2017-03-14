@@ -32,9 +32,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Jot
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -43,9 +43,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -268,7 +266,7 @@ public class IchijiHanteiHandler {
     public void 対象者一覧の編集(List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List) {
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = new ArrayList<>();
-        List<PersonalData> personalDataList = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
 
             dgIchijiHanteiTaishoshaIchiran_Row row = new dgIchijiHanteiTaishoshaIchiran_Row();
@@ -341,13 +339,13 @@ public class IchijiHanteiHandler {
             row.setShinseishoKanriNo(business.get申請書管理番号().value());
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().getColumnValue());
-            PersonalData personalData = PersonalData.of(new ShikibetsuCode(row.getShoKisaiHokenshaNo().padZeroToLeft(6).substring(0, 5)
-                    .concat(row.getHihokenNo())), new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                            row.getShinseishoKanriNo()));
-            personalDataList.add(personalData);
+            
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
+            accessLog.store(shoKisaiHokenshaNo, row.getHihokenNo(), expandedInfo);
             rowList.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalDataList);
+        accessLog.flushBy(AccessLogType.照会);
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().setDataSource(rowList);
         setDisplayNoneOfIchijiHanteiDialigButton(div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran());
     }

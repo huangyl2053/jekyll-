@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601005.NinteiChosaHoshu
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.NinteiChosaHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6060001.dgNinteiChosaHoshu_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -24,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -62,7 +64,7 @@ public class NinteiChosaHoshuShokaiHandler {
         int 施設_初 = 0;
         int 施設_再 = 0;
         Decimal 委託料 = Decimal.ZERO;
-        List<PersonalData> personalData = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (NinteichosahoshushokaiBusiness 調査一覧 : 調査情報) {
             dgNinteiChosaHoshu_Row row = new dgNinteiChosaHoshu_Row();
             row.setHokensha(get保険者(調査一覧));
@@ -117,9 +119,12 @@ public class NinteiChosaHoshuShokaiHandler {
             if (!調査一覧.get認定調査受領年月日().isEmpty()) {
                 委託料 = 委託料.add(new Decimal(調査一覧.get認定調査委託料()));
             }
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(調査一覧.get証記載保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 調査一覧.get申請書管理番号().value());
+            accessLog.store(shoKisaiHokenshaNo, 調査一覧.get被保険者番号(), expandedInfo);
             listRow.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
+        accessLog.flushBy(AccessLogType.照会);
         div.getDgNinteiChosaHoshu().setDataSource(listRow);
         div.getTxtZaitakuSaichosa().setValue(new Decimal(在宅_再));
         div.getTxtZaitakuShokai().setValue(new Decimal(在宅_初));

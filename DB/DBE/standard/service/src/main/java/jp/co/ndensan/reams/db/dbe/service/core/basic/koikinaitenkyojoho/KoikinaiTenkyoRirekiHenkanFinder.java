@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.koikinaitenkyojoho.KoikinaiTe
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.koikinaitenkyojoho.IKoikinaiTenkyoRirekiHenkanMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -22,15 +23,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -89,10 +88,14 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
             return SearchResult.of(Collections.<KoikinaiTenkyoRirekiHenkan>emptyList(), 0, false);
         }
         List<KoikinaiTenkyoRirekiHenkan> 申請者一覧情報List = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (KoikinaiTenkyoRirekiHenkanRelateEntity entity : relateEntity) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
             申請者一覧情報List.add(new KoikinaiTenkyoRirekiHenkan(entity));
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo().value());
+            accessLog.store(shoKisaiHokenshaNo, entity.getHihokenshaNo(), expandedInfo);
         }
+        accessLog.flushBy(AccessLogType.照会);
         return SearchResult.of(申請者一覧情報List, 0, false);
     }
 
@@ -116,12 +119,6 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
             updateDataList.add(new NinteiShinseiJoho(entity));
         }
         return SearchResult.of(updateDataList, 0, false);
-    }
-
-    private PersonalData toPersonalData(KoikinaiTenkyoRirekiHenkanRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
-                entity.getShinseishoKanriNo().value());
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

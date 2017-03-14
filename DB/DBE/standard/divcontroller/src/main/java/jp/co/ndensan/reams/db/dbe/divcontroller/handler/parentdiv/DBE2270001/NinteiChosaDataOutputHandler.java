@@ -17,15 +17,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -152,7 +154,7 @@ public class NinteiChosaDataOutputHandler {
     public void get認定調査一覧(SearchResult<NinteiChosaDataOutputBusiness> searchResult) {
         List<dgNinteiChosaData_Row> rowList = new ArrayList<>();
         boolean 共通ボタン活性フラグ = false;
-        List<PersonalData> personalData = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (NinteiChosaDataOutputBusiness master : searchResult.records()) {
             共通ボタン活性フラグ = true;
             dgNinteiChosaData_Row row = new dgNinteiChosaData_Row();
@@ -168,9 +170,12 @@ public class NinteiChosaDataOutputHandler {
             row.getNinteiShinseiYMD().setValue(master.get認定申請年月日());
             row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.toValue(master.get認定申請区分_申請時_コード()).get名称());
             row.setShinseishoKanriNo(master.get申請書管理番号());
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(master.get証記載保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), master.get申請書管理番号());
+            accessLog.store(shoKisaiHokenshaNo, master.get被保険者番号(), expandedInfo);
             rowList.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
+        accessLog.flushBy(AccessLogType.照会);
         if (共通ボタン活性フラグ) {
             //CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNEXECUTE, false);
         }

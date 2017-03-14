@@ -30,5 +30,6 @@ public class NinteiChosaDataOutputRelateEntity {
     private RString 保険者;
     private RString 調査委託先名称;
     private RString 調査員氏名;
+    private RString 証記載保険者番号;
 
 }
