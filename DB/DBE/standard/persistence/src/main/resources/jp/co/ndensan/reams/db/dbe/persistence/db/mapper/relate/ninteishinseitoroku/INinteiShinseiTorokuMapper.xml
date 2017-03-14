@@ -103,17 +103,21 @@
         AND B1."logicalDeletedFlag" = False
         AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
         )
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202
-        ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5202NinteichosahyoGaikyoChosa" AS A1
-        WHERE
-        T5202."shinseishoKanriNo" = A1."shinseishoKanriNo"
-        AND T5202."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+        LEFT JOIN (
+        SELECT * 
+        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS T5202_SUB1 
+        WHERE 
+        T5202_SUB1."shinseishoKanriNo" = #{申請書管理番号}
+        AND NOT EXISTS(
+        SELECT 'X' 
+        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" T5202_SUB2 
+        WHERE T5202_SUB1."shinseishoKanriNo" = T5202_SUB2."shinseishoKanriNo" 
+        AND T5202_SUB1."ninteichosaRirekiNo" <![CDATA[<]]> T5202_SUB2."ninteichosaRirekiNo"
         )
+        ORDER BY T5202_SUB1."gaikyoChosaTextImageKubun" DESC 
+        LIMIT 1
+        ) AS T5202
+        ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" T5910_Shinsei
         ON T5101."ninteiChosaItakusakiCode" = T5910_Shinsei."ninteichosaItakusakiCode"
         AND T5101."shichosonCode" = T5910_Shinsei."shichosonCode"
