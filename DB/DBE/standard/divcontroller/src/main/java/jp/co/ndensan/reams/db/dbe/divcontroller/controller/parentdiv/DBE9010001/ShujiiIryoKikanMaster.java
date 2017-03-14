@@ -97,7 +97,7 @@ public class ShujiiIryoKikanMaster {
     private static final RString カーソル位置 = new RString("txtSearchShujiiIryokikanCodeFrom");
     private static final RString 検索モード = new RString("検索");
     private static final RString 非検索モード = new RString("非検索");
-    private static final RString SELECTKEY_空白 = new RString("blank");
+    private static final RString SELECTKEY_空白 = RString.EMPTY;
 
     /**
      * コンストラクタです。

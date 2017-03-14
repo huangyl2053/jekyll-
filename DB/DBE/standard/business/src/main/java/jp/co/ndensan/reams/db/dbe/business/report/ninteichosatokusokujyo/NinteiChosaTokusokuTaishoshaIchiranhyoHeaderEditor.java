@@ -71,7 +71,7 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoHeaderEditor implements INinteiChosa
 
         source.printTimeStamp = new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString().toString() + RString.HALF_SPACE + timeFormat);
+                fillType(FillType.BLANK).toDateString().toString() + RString.HALF_SPACE + timeFormat);
     }
 
     private void edit市町村コード(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {

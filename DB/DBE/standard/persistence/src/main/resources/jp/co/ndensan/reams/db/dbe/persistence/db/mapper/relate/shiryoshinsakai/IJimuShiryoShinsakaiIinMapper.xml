@@ -1198,6 +1198,9 @@
         GROUP BY dbt5301."shinseishoKanriNo") AS maxRireki_2
         ON maxRireki_2."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND maxRireki_2."ikenshoIraiRirekiNo" = dbt5301."ikenshoIraiRirekiNo"
+        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" dbt5302
+        ON dbt5302."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
+        AND dbt5302."ikenshoIraiRirekiNo" = dbt5301."ikenshoIraiRirekiNo"
         INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" dbt5304
         ON dbt5304."shinseishoKanriNo" = dbt5301."shinseishoKanriNo"
         AND dbt5301."ikenshoIraiRirekiNo" = (SELECT MAX(dbt5304."ikenshoIraiRirekiNo")
