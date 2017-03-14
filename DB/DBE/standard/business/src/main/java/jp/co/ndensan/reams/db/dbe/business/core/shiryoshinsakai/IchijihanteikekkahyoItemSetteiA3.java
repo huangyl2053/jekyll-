@@ -332,8 +332,11 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     private void set特記事項有無(Code 厚労省IF識別コード, List<RString> 認定調査票_特記情報, TiyosaKekka 調査結果, int index) {
         IchijihanteikekkahyoItemSetteiTwoA3 一次判定結果票特記事項設定 = new IchijihanteikekkahyoItemSetteiTwoA3();
         switch (index) {
-            case 1:
+            case 0:
                 調査結果.set特記事項有無(一次判定結果票特記事項設定.get麻痺特記事項有無(厚労省IF識別コード, 認定調査票_特記情報));
+                break;
+            case 1:
+                調査結果.set特記事項有無(RString.EMPTY);
                 break;
             case 2:
                 調査結果.set特記事項有無(RString.EMPTY);

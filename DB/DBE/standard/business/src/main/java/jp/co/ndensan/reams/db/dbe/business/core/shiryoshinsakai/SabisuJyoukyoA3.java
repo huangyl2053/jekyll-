@@ -1315,14 +1315,14 @@ public class SabisuJyoukyoA3 {
         if (entity.getKijunJikanNinchishoKasan() > 0) {
             基準時間.append(decimalFormat.format(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)))
                     .append(分)
-                    .append(RString.FULL_SPACE)
+                    .append(RString.HALF_SPACE)
                     .append(加算)
-                    .append(RString.FULL_SPACE)
+                    .append(RString.HALF_SPACE)
                     .append(decimalFormat.format(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10)))
                     .append(分)
-                    .append(RString.FULL_SPACE)
+                    .append(RString.HALF_SPACE)
                     .append(等号)
-                    .append(RString.FULL_SPACE)
+                    .append(RString.HALF_SPACE)
                     .append(decimalFormat.format(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)
                                     .add(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10))))
                     .append(分);
