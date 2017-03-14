@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.Sh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -56,6 +58,8 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -128,6 +132,15 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).addMessage(message).respond();
         }
         getHandler(div).onLoad(申請書管理番号, 認定調査履歴番号);
+
+        RString 被保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get被保険者番号();
+        RString 証記載保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"),
+                new RString("申請書管理番号"), 申請書管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);
+
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         }

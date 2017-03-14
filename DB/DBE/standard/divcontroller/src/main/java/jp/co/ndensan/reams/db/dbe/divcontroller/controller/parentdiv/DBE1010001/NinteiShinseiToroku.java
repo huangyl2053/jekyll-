@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
@@ -76,6 +77,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinte
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoHokenshaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShinseiRirekiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.jogaishinsainjoho.JogaiShinsainJohoFinder;
@@ -104,6 +106,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -223,6 +227,7 @@ public class NinteiShinseiToroku {
                 setBtnUpdateDisableTrue();
             }
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
+            RString 証記載保険者番号 = manager.get証記載保険者番号(管理番号);
 
             ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, manager.get要介護認定申請情報(管理番号));
             ViewStateHolder.put(ViewStateKeys.要介護認定申請届出情報, manager.get認定申請届出情報(管理番号));
@@ -273,7 +278,7 @@ public class NinteiShinseiToroku {
                         && !comZenkaiResult.get申請情報().get二次判定要介護状態区分コード().isEmpty()) {
                     div.getCcdShikakuInfo().getTxtYokaigodo().setValue(
                             YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(comZenkaiResult.get申請情報().get厚労省IF識別コード().getColumnValue()),
-                            new RString(comZenkaiResult.get申請情報().get二次判定要介護状態区分コード().toString())).getName());
+                                    new RString(comZenkaiResult.get申請情報().get二次判定要介護状態区分コード().toString())).getName());
                 }
 
                 if (comResult.get申請情報() != null
@@ -307,6 +312,10 @@ public class NinteiShinseiToroku {
             }
             setShinseiJiyu(result, div);
             getHandler(div).loadPnlSinseishaJoho(result.get市町村コード(), false);
+            DbAccessLogger accessLog = new DbAccessLogger();
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 管理番号.value());
+            accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+            accessLog.flushBy(AccessLogType.照会);
             if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
                 getHandler(div).setSinseiTorisageOnlyUsed(div);
                 getHandler(div).setSinseiTorisageOnlyOpen(div);

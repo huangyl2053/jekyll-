@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgCh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMiwaritsukeShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseitoroku.NinteiShinseiTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -34,6 +36,8 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -575,9 +579,17 @@ public class NinteiChosaIraiHandler {
      */
     public List<ShinseishoKanriNo> getSelected申請書管理番号リスト() {
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        NinteiShinseiTorokuManager manager;
+        manager = NinteiShinseiTorokuManager.createInstance();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems()) {
             申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
+            RString 被保険者番号 = manager.get被保険者番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            RString 証記載保険者番号 = manager.get証記載保険者番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+            accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
         }
+        accessLog.flushBy(AccessLogType.照会);
         return 申請書管理番号リスト;
     }
 

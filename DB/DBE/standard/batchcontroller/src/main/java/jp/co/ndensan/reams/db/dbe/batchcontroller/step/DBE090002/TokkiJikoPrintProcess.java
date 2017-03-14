@@ -27,7 +27,9 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNi
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -39,11 +41,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -92,10 +97,12 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
     private static final RString すべて = new RString("1");
     private final RString マスキングなし = new RString("0");
     private final RString マスキングあり = new RString("1");
+    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
         finder = YokaigoNinteiJohoTeikyoFinder.createInstance();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -131,6 +138,8 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
         tokkiText1A4AllReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+
+
                     TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
@@ -150,6 +159,8 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
         tokkiText1A4SeparateReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517132.getReportId().value())
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
+
+
                     TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<TokkiText1ReportSource> occuredBreak(
@@ -178,18 +189,21 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
         for (NinteichosaRelate 特記事項 : 特記事項List) {
             特記事項区分List.add(特記事項.get特記事項区分());
         }
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号.value());
         if (特記事項区分List.contains(TokkijikoTextImageKubun.イメージ.getコード())) {
             if (entity.get認定申請年月日().isBeforeOrEquals(processPrm.get特記事項判定日())) {
                 NinteiChosaTokkiImageEntity ninteiChosaTokkiImageEntity
                         = NinteiChosaTokkiImageEntityEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分());
                 NinteiChosaTokkiImageReport report = new NinteiChosaTokkiImageReport(ninteiChosaTokkiImageEntity);
                 report.writeBy(ninteiChosaTokkiImageReportSourceWriter);
+                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             } else {
                 RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
                 TokkiText1A4Entity tokkiText1A4Entity
                         = TokkiImage1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分(), イメージ共有ファイルID);
                 TokkiText1A4Report report = new TokkiText1A4Report(tokkiText1A4Entity);
                 report.writeBy(tokkiImage1A4SeparateReportSourceWriter);
+                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
         } else if (特記事項区分List.contains(TokkijikoTextImageKubun.テキスト.getコード())) {
 
@@ -197,10 +211,12 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
                 TokkiText1A4Entity tokkiText1A4Entity = TokkiText1A4AllEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分());
                 TokkiText1A4Report report = new TokkiText1A4Report(tokkiText1A4Entity);
                 report.writeBy(tokkiText1A4AllReportSourceWriter);
+                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             } else {
                 TokkiText1A4Report report
                         = new TokkiText1A4Report(TokkiText1A4SeparateEditor.edit(entity, 特記事項List, processPrm.get特記事項マスキング区分()));
                 report.writeBy(tokkiText1A4SeparateReportSourceWriter);
+                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
         }
     }
@@ -208,6 +224,7 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
     @Override
     protected void afterExecute() {
         set出力条件表();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void set出力条件表() {

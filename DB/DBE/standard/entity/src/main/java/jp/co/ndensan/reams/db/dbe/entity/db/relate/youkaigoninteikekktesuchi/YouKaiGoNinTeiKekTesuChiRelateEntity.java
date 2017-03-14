@@ -47,4 +47,5 @@ public class YouKaiGoNinTeiKekTesuChiRelateEntity {
     private RString shinsakaiIken;
     private RString ikenshoIraiRirekiNo;
     private RString shichosonCode;
+    private RString shoKisaiHokenshaNo;
 }

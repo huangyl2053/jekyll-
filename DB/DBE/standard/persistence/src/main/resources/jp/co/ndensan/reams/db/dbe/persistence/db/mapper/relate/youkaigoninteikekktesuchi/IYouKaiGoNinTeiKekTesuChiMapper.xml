@@ -196,7 +196,8 @@
         rgdb."DbT5102NinteiKekkaJoho"."shinsakaiIken" AS dbT5102NinteiKekkaJoho_shinsakaiIken,
         rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"  AS dbT5101NinteiShinseiJoho_shinseishoKanriNo,
         rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" AS dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo,
-        rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo
+        rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo,
+        rgdb."DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" AS dbT5101NinteiShinseiJoho_shoKisaiHokenshaNo
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
         INNER JOIN  rgdb."DbT7051KoseiShichosonMaster"

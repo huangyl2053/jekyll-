@@ -37,7 +37,9 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNi
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -49,11 +51,14 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
@@ -102,10 +107,12 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
     private static final RString 総合事業開始区分_実施済 = new RString("2");
     private static final RString 総合事業未実施 = new RString("総合事業未実施");
     private static final RString 総合事業実施済 = new RString("総合事業実施済");
+    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
         finder = YokaigoNinteiJohoTeikyoFinder.createInstance();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -137,6 +144,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
         List<NinteichosahyoChosaItem> 認定調査票調査項目List = finder.get認定調査票調査項目List(申請書管理番号);
         List<NinteichosahyoKinyuItem> 認定調査票記入項目List = finder.get認定調査票記入項目List(申請書管理番号);
         RDateTime イメージ共有ファイルID = finder.getイメージ共有ファイルID(申請書管理番号);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号());
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
                 && 総合事業開始区分_実施済.equals(processPrm.get総合事業開始区分())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
@@ -150,6 +158,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo02Report report = new NinteiChosaJohohyo02Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter02);
+            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())
                 && 総合事業開始区分_未実施.equals(processPrm.get総合事業開始区分())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
@@ -163,6 +172,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo12Report report = new NinteiChosaJohohyo12Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter12);
+            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                     = NinteiChosaJohohyo22EntityEditor.edit(
@@ -175,6 +185,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo22Report report = new NinteiChosaJohohyo22Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter22);
+            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                     = NinteiChosaJohohyo32EntityEditor.edit(
@@ -187,6 +198,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo32Report report = new NinteiChosaJohohyo32Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter32);
+            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                     = NinteiChosaJohohyo42EntityEditor.edit(
@@ -199,6 +211,7 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo42Report report = new NinteiChosaJohohyo42Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter42);
+            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード())) {
             NinteiChosaJohohyoEntity ninteiChosaJohohyoEntity
                     = NinteiChosaJohohyo52EntityEditor.edit(
@@ -211,12 +224,14 @@ public class NinteiChosahyoPrintProcess extends BatchProcessBase<YokaigoNinteiJo
                             processPrm.get認定調査票マスキング区分());
             NinteiChosaJohohyo52Report report = new NinteiChosaJohohyo52Report(ninteiChosaJohohyoEntity);
             report.writeBy(reportSourceWriter52);
+            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         }
     }
 
     @Override
     protected void afterExecute() {
         set出力条件表();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void set出力条件表() {
