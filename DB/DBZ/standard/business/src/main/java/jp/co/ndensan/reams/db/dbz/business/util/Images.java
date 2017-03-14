@@ -58,11 +58,11 @@ public final class Images {
     public static RString toBinaryString(RString filePath) {
         File file = new File(filePath.toString());
         if (!file.exists()) {
-            throw new SystemException("ファイルが見つかりません。：" + filePath);
+            return RString.EMPTY;
         }
         FileExtentions ext = FileExtentions.acquireFromPath(filePath);
         if (ext == null) {
-            throw new SystemException("未定義の拡張子です。：" + filePath);
+            return RString.EMPTY;
         }
         try {
             return new RStringBuilder()
