@@ -18,10 +18,13 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001.Ich
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001.IchijiHanteizumiDataShutsuryokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3090001.ItiziHanteiZumiItiranEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -37,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -132,6 +136,7 @@ public class IchijiHanteizumiDataShutsuryoku {
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(IchijiHanteizumiDataShutsuryokuDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        DbAccessLogger accessLog = new DbAccessLogger();
         try (CsvWriter<ItiziHanteiZumiItiranEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -143,6 +148,9 @@ public class IchijiHanteizumiDataShutsuryoku {
             List<dgIchijiHanteiZumi_Row> dgChosainList = div.getDgIchijiHanteiZumi().getSelectedItems();
             for (dgIchijiHanteiZumi_Row row : dgChosainList) {
                 csvWriter.writeLine(set一次判定済一覧(row));
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
+                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
+                accessLog.store(shoKisaiHokenshaNo, row.getHihoBango(), expandedInfo);
             }
             csvWriter.close();
         }

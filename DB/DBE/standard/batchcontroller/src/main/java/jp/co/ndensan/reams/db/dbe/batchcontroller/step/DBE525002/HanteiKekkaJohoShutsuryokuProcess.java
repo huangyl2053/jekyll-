@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshutsuryo
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchiranReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -31,10 +33,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -64,6 +69,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
     private int index;
     private RString 導入団体コード;
     private RString 市町村名;
+    private DbAccessLogger accessLog;
     @BatchWriter
     private BatchReportWriter<KekkatsuchiTaishoshaIchiranReportSource> batchWrite;
     private ReportSourceWriter<KekkatsuchiTaishoshaIchiranReportSource> reportSourceWriter;
@@ -73,6 +79,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
         mybatisPrm = processPrm.toHanteiKekkaJohoShutsuryokuMybitisParamter();
         page_break_keys = Collections.unmodifiableList(Arrays.asList(改ページ));
         index = 1;
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -97,8 +104,12 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
 
     @Override
     protected void usualProcess(HanteiKekkaJohoShutsuryokuRelateEntity entity) {
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = entity.getShoKisaiHokenshaNo();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                entity.getShinseishoKanriNo());
+        accessLog.store(shoKisaiHokenshaNo, entity.getHihokenshaNo(), expandedInfo);
         bodyItem = setBodyItem(entity, index);
-
+        
         headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
                 entity.getShichosonMeisho(),
                 processPrm.getChushutsuHoho(),
@@ -134,6 +145,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
 
     @Override
     protected void afterExecute() {
+        accessLog.flushBy(AccessLogType.照会);
         帳票バッチ出力条件リストの出力();
     }
 

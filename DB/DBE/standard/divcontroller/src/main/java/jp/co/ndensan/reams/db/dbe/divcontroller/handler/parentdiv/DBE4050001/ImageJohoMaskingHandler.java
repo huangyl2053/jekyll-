@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijikoBui
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.GaikyoChosaTokkiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.IkenshoImageJohoManager;
@@ -61,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -254,7 +256,7 @@ public class ImageJohoMaskingHandler {
      * イメージ情報パネルの設定
      */
     public void setMeisai() {
-
+        DbAccessLogger accessLog = new DbAccessLogger();
         dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         RString outputImagePath = Directory.createTmpDirectory();
         RString imagePath = RString.EMPTY;
@@ -280,6 +282,10 @@ public class ImageJohoMaskingHandler {
         }
 
         前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
+        
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(taishoshaRow.get保険者());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taishoshaRow.get申請書管理番号());
+        accessLog.store(shoKisaiHokenshaNo, taishoshaRow.get保険者(), expandedInfo);
 
         File file = new File(imagePath.toString());
         List<dgImageMaskingTaisho_Row> rowList = new ArrayList<>();
@@ -290,6 +296,7 @@ public class ImageJohoMaskingHandler {
         setTextGaikyo(rowList);
         Collections.sort(rowList, 表示順);
         div.getDgImageMaskingTaisho().setDataSource(rowList);
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private List<dgImageMaskingTaisho_Row> setMaskingTaisho(File file, List<dgImageMaskingTaisho_Row> rowList) {

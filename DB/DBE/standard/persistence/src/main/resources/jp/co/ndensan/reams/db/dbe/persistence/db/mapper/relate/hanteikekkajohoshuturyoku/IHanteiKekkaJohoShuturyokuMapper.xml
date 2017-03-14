@@ -28,6 +28,7 @@
         <result property="二号特定疾病コード" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="介護認定審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="合議体番号" column="gogitaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <!--判定結果一覧クエリ部品-->
     <sql id="HanteiKekkaIchiranList">
@@ -57,6 +58,7 @@
         ,dbT5502."shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
         ,dbT7051."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo"
         ,dbT5511."gogitaiNo" AS gogitaiNo
+        ,dbT5502."shinseishoKanriNo" AS shinseishoKanriNo
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS dbT5502
         INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102

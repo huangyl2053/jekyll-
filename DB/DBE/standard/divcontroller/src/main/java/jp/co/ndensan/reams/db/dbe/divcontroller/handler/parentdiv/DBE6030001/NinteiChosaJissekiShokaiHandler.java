@@ -16,13 +16,17 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.dgNi
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -89,7 +93,7 @@ public class NinteiChosaJissekiShokaiHandler {
     
     private void setRecords(List<ChosahyoJissekiIchiran> chosahyoJissekiIchiransList) {
         List<dgNinteiChosaJisseki_Row> rowList = new ArrayList<>();
-        
+        DbAccessLogger accessLog = new DbAccessLogger();
         List<PersonalData> personalData = new ArrayList<>();
         for (ChosahyoJissekiIchiran data : chosahyoJissekiIchiransList) {
             dgNinteiChosaJisseki_Row row = new dgNinteiChosaJisseki_Row(
@@ -108,9 +112,12 @@ public class NinteiChosaJissekiShokaiHandler {
                     data.get申請書管理番号(),
                     data.get認定調査依頼履歴番号()
             );
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(data.get証記載保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), data.get申請書管理番号());
+            accessLog.store(shoKisaiHokenshaNo, data.get被保険者番号(), expandedInfo);
             rowList.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
+        accessLog.flushBy(AccessLogType.照会);
         
         div.getDgNinteiChosaJisseki().setDataSource(rowList);
     }

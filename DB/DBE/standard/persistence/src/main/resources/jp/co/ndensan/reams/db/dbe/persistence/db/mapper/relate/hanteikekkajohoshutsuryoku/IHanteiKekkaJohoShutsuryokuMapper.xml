@@ -18,6 +18,7 @@
         <result property="seibetsu"  column="seibetsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="seinengappiYMD"  column="seinengappiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nijiHanteiKekka"  column="nijiHanteiYokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <select resultOrdered="true" id="get出力対象者明細一覧" resultMap="resultMap_getHanteiKekkaJohoShutsuryoku"
@@ -33,7 +34,8 @@
         dbT5101."hihokenshaKana",
         dbT5101."seinengappiYMD",
         dbT5101."seibetsu",
-        dbT5102."nijiHanteiYokaigoJotaiKubunCode"
+        dbT5102."nijiHanteiYokaigoJotaiKubunCode",
+        dbT5101."shinseishoKanriNo"
         FROM
         rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
         INNER JOIN

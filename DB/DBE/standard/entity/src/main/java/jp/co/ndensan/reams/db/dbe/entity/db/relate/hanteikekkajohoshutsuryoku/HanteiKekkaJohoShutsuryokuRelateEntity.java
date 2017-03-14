@@ -29,5 +29,6 @@ public class HanteiKekkaJohoShutsuryokuRelateEntity {
     private RString nijiHanteiKekka;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString shichosonMeisho;
+    private RString shinseishoKanriNo;
 
 }

@@ -13,13 +13,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710001.Yok
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -53,6 +58,7 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onLoad(YokaigoninteiimagekanriDiv div) {
+        DbAccessLogger accessLog = new DbAccessLogger();
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
@@ -81,6 +87,11 @@ public class Yokaigoninteiimagekanri {
                     イメージ管理情報.getイメージ共有ファイルID());
             setBtnControllerDisabled(div, descriptor);
         }
+        
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), イメージ管理情報.get申請書管理番号().value());
+        accessLog.store(shoKisaiHokenshaNo, イメージ管理情報.get被保険者番号(), expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);
         return ResponseData.of(div).respond();
     }
 

@@ -56,12 +56,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -347,7 +349,8 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号());
 
             ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(business.get証記載保険者番号());
-            accessLog.store(shoKisaiHokenshaNo, business.get被保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
+            accessLog.store(shoKisaiHokenshaNo, business.get被保険者番号(), expandedInfo);
 
             dgChosainList.add(row);
             ボタン制御フラグ = false;
