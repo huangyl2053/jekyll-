@@ -1353,5 +1353,26 @@
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
+    
+    <select id="get認定調査票概況調査" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo" fetchSize="500"  resultOrdered="true">
+        SELECT
+          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5202NinteichosahyoGaikyoChosaMapper.allColumns_DbT5202NinteichosahyoGaikyoChosa" />
+        FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" AS "DbT5202NinteichosahyoGaikyoChosa"
+        WHERE "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo" = #{申請書管理番号}
+        AND NOT EXISTS (
+          SELECT 'X'
+          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" A1
+          WHERE A1."shinseishoKanriNo" = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+          AND "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+        )
+        AND NOT EXISTS (
+          SELECT 'X'
+          FROM rgdb."DbT5202NinteichosahyoGaikyoChosa" A2
+          WHERE A2."shinseishoKanriNo" = "DbT5202NinteichosahyoGaikyoChosa"."shinseishoKanriNo"
+          AND A2."ninteichosaRirekiNo" = "DbT5202NinteichosahyoGaikyoChosa"."ninteichosaRirekiNo"
+          AND "DbT5202NinteichosahyoGaikyoChosa"."gaikyoChosaTextImageKubun" <![CDATA[<]]> A2."gaikyoChosaTextImageKubun"
+        )
+    </select>
 
 </mapper>

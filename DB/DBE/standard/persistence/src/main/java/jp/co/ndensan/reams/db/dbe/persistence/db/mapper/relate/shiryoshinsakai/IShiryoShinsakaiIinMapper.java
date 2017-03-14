@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJ
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiYoteiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
@@ -261,5 +263,13 @@ public interface IShiryoShinsakaiIinMapper {
      * @return ItiziHanteiEntity 一次判定結果
      */
     int getTokkiJikouItiziHanteiCount(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+
+    /**
+     * 申請書管理番号を指定して最大の履歴番号の認定調査票概況調査情報を取得します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return DbT5202NinteichosahyoGaikyoChosaEntity 認定調査票概況調査Entity
+     */
+    DbT5202NinteichosahyoGaikyoChosaEntity get認定調査票概況調査(ShinseishoKanriNo 申請書管理番号);
 
 }

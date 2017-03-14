@@ -18,19 +18,22 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.ShinsakaiWariateJohoManager
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shiryoshinsakai.ShiryoShinsakaiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshu;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShinsakaiWariateJohoKenshuManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -51,49 +54,10 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onLoad(PublicationShiryoShinsakaiDiv div) {
-        if (new RString(DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.マスキング未完了のため処理不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            div.setDisabled(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToPrint"), true);
-            return ResponseData.of(div).respond();
-        }
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         KaisaiYoteiJohoBusiness 開催予定情報
                 = ShiryoShinsakaiFinder.createInstance().get開催予定情報(審査会一覧_開催番号);
         getHandler(div).onLoad(開催予定情報);
-        
-        ShinsakaiWariateJohoManager 審査会割当情報Manager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
-        List<ShinsakaiWariateJoho> 審査会割当情報リスト = 審査会割当情報Manager.get介護認定審査会割当情報By介護認定審査会開催番号(審査会一覧_開催番号);
-        ShinsakaiWariateJohoKenshuManager 審査会割当情報研修Manager = InstanceProvider.create(ShinsakaiWariateJohoKenshuManager.class);
-        List<ShinsakaiWariateJohoKenshu> 審査会割当情報研修リスト = 審査会割当情報研修Manager.get審査会割当情報研修By審査会開催番号(審査会一覧_開催番号);
-        NinteiKanryoJohoManager 認定完了情報Manager = InstanceProvider.create(NinteiKanryoJohoManager.class);
-        for (ShinsakaiWariateJoho 審査会割当情報 : 審査会割当情報リスト) {
-            NinteiKanryoJoho 認定完了情報 = 認定完了情報Manager.get要介護認定完了情報(審査会割当情報.get申請書管理番号());
-            if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.get認定審査会割当完了年月日() == null) {
-                ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.審査会割当未完了のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (マスキング完了処理_審査会割当後.equals(DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.getマスキング完了年月日() == null) {
-                    ErrorMessage message = new ErrorMessage(DbeErrorMessages.マスキング未完了のため処理不可.getMessage().getCode(),
-                            DbeErrorMessages.マスキング未完了のため処理不可.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            }
-        }
-        for (ShinsakaiWariateJohoKenshu 審査会割当情報研修 : 審査会割当情報研修リスト) {
-            NinteiKanryoJoho 認定完了情報 = 認定完了情報Manager.get要介護認定完了情報(審査会割当情報研修.get申請書管理番号());
-            if (マスキング完了処理_審査会割当後.equals(DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
-                if ((審査会割当情報研修.get判定結果コード() == null || 審査会割当情報研修.get判定結果コード().isEmpty()) && 認定完了情報.getマスキング完了年月日() == null) {
-                    ErrorMessage message = new ErrorMessage(DbeErrorMessages.マスキング未完了のため処理不可.getMessage().getCode(),
-                            DbeErrorMessages.マスキング未完了のため処理不可.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            }
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -163,6 +127,41 @@ public class PublicationShiryoShinsakai {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        ShinsakaiWariateJohoManager 審査会割当情報Manager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
+        List<ShinsakaiWariateJoho> 審査会割当情報リスト = 審査会割当情報Manager.get介護認定審査会割当情報By介護認定審査会開催番号(審査会一覧_開催番号);
+        ShinsakaiWariateJohoKenshuManager 審査会割当情報研修Manager = InstanceProvider.create(ShinsakaiWariateJohoKenshuManager.class);
+        List<ShinsakaiWariateJohoKenshu> 審査会割当情報研修リスト = 審査会割当情報研修Manager.get審査会割当情報研修By審査会開催番号(審査会一覧_開催番号);
+        NinteiKanryoJohoManager 認定完了情報Manager = InstanceProvider.create(NinteiKanryoJohoManager.class);
+        ErrorMessage message;
+        for (ShinsakaiWariateJoho 審査会割当情報 : 審査会割当情報リスト) {
+            message = check概況調査情報(審査会割当情報.get申請書管理番号());
+            if (message != null) {
+                throw new ApplicationException(message);
+            }
+            if (div.getPublishingCondition().getChkTestPrint().getSelectedKeys().isEmpty()) {
+                NinteiKanryoJoho 認定完了情報 = 認定完了情報Manager.get要介護認定完了情報(審査会割当情報.get申請書管理番号());
+                if ((審査会割当情報.get判定結果コード() == null || 審査会割当情報.get判定結果コード().isEmpty()) && 認定完了情報.get認定審査会割当完了年月日() == null) {
+                    throw new ApplicationException(DbeErrorMessages.審査会割当未完了のため処理不可.getMessage());
+                }
+                message = checkマスキング完了日(審査会割当情報.get申請書管理番号(), 審査会割当情報.get判定結果コード());
+                if (message != null) {
+                    throw new ApplicationException(message);
+                }
+            }
+        }
+        for (ShinsakaiWariateJohoKenshu 審査会割当情報研修 : 審査会割当情報研修リスト) {
+            message = check概況調査情報(審査会割当情報研修.get申請書管理番号());
+            if (message != null) {
+                throw new ApplicationException(message);
+            }
+            if (div.getPublishingCondition().getChkTestPrint().getSelectedKeys().isEmpty()) {
+                message = checkマスキング完了日(審査会割当情報研修.get申請書管理番号(), 審査会割当情報研修.get判定結果コード());
+                if (message != null) {
+                    throw new ApplicationException(message);
+                }
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -178,6 +177,37 @@ public class PublicationShiryoShinsakai {
         builder.append(new RString("DBEShinsakaiNo"))
                 .append(審査会一覧_開催番号);
         return ResponseData.of(getHandler(div).onClick_btnKogakuParamSave()).respond();
+    }
+
+    private ErrorMessage check概況調査情報(ShinseishoKanriNo 申請書管理番号) {
+        ErrorMessage message = null;
+        NinteichosahyoGaikyoChosa 認定調査票概況調査情報
+                = ShiryoShinsakaiFinder.createInstance().get認定調査票概況調査(申請書管理番号);
+        if (認定調査票概況調査情報 != null) {
+            if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(認定調査票概況調査情報.get厚労省IF識別コード().getColumnValue())
+                    || KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(認定調査票概況調査情報.get厚労省IF識別コード().getColumnValue())
+                    || KoroshoInterfaceShikibetsuCode.V06A.getCode().equals(認定調査票概況調査情報.get厚労省IF識別コード().getColumnValue())) {
+                message = new ErrorMessage(DbeErrorMessages.厚労省IF識別番号が09A以前.getMessage().getCode(),
+                        DbeErrorMessages.厚労省IF識別番号が09A以前.getMessage().evaluate());
+            }
+        } else {
+            message = new ErrorMessage(UrErrorMessages.存在しない.getMessage().getCode(),
+                    UrErrorMessages.存在しない.getMessage().replace("概況調査情報").evaluate());
+        }
+        return message;
+    }
+
+    private ErrorMessage checkマスキング完了日(ShinseishoKanriNo 申請書管理番号, Code 判定結果コード) {
+        ErrorMessage message = null;
+        NinteiKanryoJohoManager 認定完了情報Manager = InstanceProvider.create(NinteiKanryoJohoManager.class);
+        NinteiKanryoJoho 認定完了情報 = 認定完了情報Manager.get要介護認定完了情報(申請書管理番号);
+        if (マスキング完了処理_審査会割当後.equals(DbBusinessConfig.get(ConfigNameDBE.マスキングチェックタイミング, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            if ((判定結果コード == null || 判定結果コード.isEmpty()) && 認定完了情報.getマスキング完了年月日() == null) {
+                message = new ErrorMessage(DbeErrorMessages.マスキング未完了のため処理不可.getMessage().getCode(),
+                        DbeErrorMessages.マスキング未完了のため処理不可.getMessage().evaluate());
+            }
+        }
+        return message;
     }
 
     private PublicationShiryoShinsakaiHandler getHandler(PublicationShiryoShinsakaiDiv div) {
