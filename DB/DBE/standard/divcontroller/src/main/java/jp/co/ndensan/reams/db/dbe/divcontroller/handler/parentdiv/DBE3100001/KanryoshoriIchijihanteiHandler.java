@@ -343,7 +343,7 @@ public class KanryoshoriIchijihanteiHandler {
         }
 
         if (business.get認知症自立度Ⅱ以上の蓋然性() != null) {
-            row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(business.get認知症自立度Ⅱ以上の蓋然性());
+            row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(パーセント変換(business.get認知症自立度Ⅱ以上の蓋然性()));
             if (business.get認知症自立度Ⅱ以上の蓋然性().compareTo(Decimal.ZERO) < 0) {
                 row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(null);
             }
@@ -593,7 +593,7 @@ public class KanryoshoriIchijihanteiHandler {
         }
 
         if (ichijiHantei.get認知症自立度Ⅱ以上の蓋然性() != null) {
-            row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(ichijiHantei.get認知症自立度Ⅱ以上の蓋然性());
+            row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(パーセント変換(ichijiHantei.get認知症自立度Ⅱ以上の蓋然性()));
             if (ichijiHantei.get認知症自立度Ⅱ以上の蓋然性().compareTo(Decimal.ZERO) < 0) {
                 row.getNinchishoJiritsudoIIijoNoGaizensei().setValue(null);
             }
@@ -925,5 +925,9 @@ public class KanryoshoriIchijihanteiHandler {
 
     private boolean is警告コードAllZERO(RString 警告コード) {
         return 警告コード.toString().matches("^0+$");
+    }
+    
+    private Decimal パーセント変換(Decimal 数値) {
+        return 数値.divide(DIVIDE_VALUE).roundUpTo(1);
     }
 }
