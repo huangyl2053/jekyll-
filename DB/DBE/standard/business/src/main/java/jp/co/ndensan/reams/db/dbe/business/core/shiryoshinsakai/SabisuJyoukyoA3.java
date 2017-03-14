@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
@@ -127,10 +125,12 @@ public class SabisuJyoukyoA3 {
     private static final RString 電話ファイル名 = new RString("C0006_BAK.png");
     private static final RString SEPARATOR = new RString("/");
     private static final RString COMMA = new RString(".");
+    private static final RString 分 = new RString("分");
+    private static final RString 加算 = new RString("＋");
+    private static final RString 等号 = new RString("＝");
     private static final int 基準時間算出用_10 = 10;
     private static final int 基準時間算出用_5 = 5;
     private static final int 基準時間算出用_12 = 12;
-    private final String regex = "[^0]";
     private final boolean is調査意見書比較結果印字する;
     private final RString 印字する = new RString("1");
 
@@ -1274,8 +1274,9 @@ public class SabisuJyoukyoA3 {
         項目.set審査人数(new RString(entity.getShinsakaiOrder()));
         項目.set一次判定結果(set一次判定結果(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKekkaNinchishoKasanCode()));
-        項目.set要介護認定等基準時間(new RString(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10).toString()));
-        項目.set前回要介護認定等基準時間(new RString(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10).toString()));
+        項目.set要介護認定等基準時間(get要介護認定等基準時間(entity));
+        項目.set前回要介護認定等基準時間(new RString(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10)
+                .add(new Decimal(entity.getZKijunJikanNinchishoKasan()).divide(基準時間算出用_10)).toString()));
         set基準時間の積み上げグラフ(項目, entity);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
@@ -1305,6 +1306,28 @@ public class SabisuJyoukyoA3 {
         setコード(項目, entity);
     }
 
+    private RString get要介護認定等基準時間(ItiziHanteiEntity entity) {
+        RStringBuilder 基準時間 = new RStringBuilder();
+        if (entity.getKijunJikanNinchishoKasan() > 0) {
+            基準時間.append(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10))
+                    .append(分)
+                    .append(RString.FULL_SPACE)
+                    .append(加算)
+                    .append(RString.FULL_SPACE)
+                    .append(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10))
+                    .append(分)
+                    .append(RString.FULL_SPACE)
+                    .append(等号)
+                    .append(RString.FULL_SPACE)
+                    .append(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)
+                            .add(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10)))
+                    .append(分);
+        } else {
+            基準時間.append(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)).append(分);
+        }
+        return 基準時間.toRString();
+    }
+
     private RString trimFormat前回中間評価点(RString score) {
         RStringBuilder scoreBuilder = new RStringBuilder();
         if (2 == score.indexOf(COMMA)) {
@@ -1312,7 +1335,7 @@ public class SabisuJyoukyoA3 {
         } else if (1 == score.indexOf(COMMA)) {
             scoreBuilder.append(RString.HALF_SPACE).append(RString.HALF_SPACE).append(score);
         }
-        return scoreBuilder.toRString();
+        return scoreBuilder.substringEmptyOnError(0, 5);
     }
 
     private void setコード(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
@@ -1345,7 +1368,9 @@ public class SabisuJyoukyoA3 {
         if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null || entity.getNinchishoJiritsudoIIijoNoGaizensei().intValue() == -1) {
             項目.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
         } else {
-            項目.set認知症自立度Ⅱ以上の蓋然性(new RString(entity.getNinchishoJiritsudoIIijoNoGaizensei().toString()));
+            RStringBuilder 蓋然性 = new RStringBuilder();
+            蓋然性.append(entity.getNinchishoJiritsudoIIijoNoGaizensei().divide(基準時間算出用_10)).append(new RString("%"));
+            項目.set認知症自立度Ⅱ以上の蓋然性(蓋然性.toRString());
         }
         if (entity.getJotaiAnteiseiCode() == null || entity.getJotaiAnteiseiCode().isEmpty()) {
             項目.set状態の安定性(RString.EMPTY);
