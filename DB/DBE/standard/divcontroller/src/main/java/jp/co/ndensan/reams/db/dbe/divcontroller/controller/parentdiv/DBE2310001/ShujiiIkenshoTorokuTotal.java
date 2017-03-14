@@ -76,6 +76,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -181,6 +185,15 @@ public class ShujiiIkenshoTorokuTotal {
         getHandler(div).load(result);
         div.setHdnHasChanged(getHandler(div).getDataRString());
         div.getCcdNinteiShinseishaKihonInfo().initialize(管理番号);
+
+        RString 被保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get被保険者番号();
+        RString 証記載保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"),
+                new RString("申請書管理番号"), 管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);
+
         getHandler(div).setChkTakaJushin(result);
         ViewStateHolder.put(ViewStateKeys.意見書情報, ninteiShinseiJoho);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, image);
@@ -220,6 +233,7 @@ public class ShujiiIkenshoTorokuTotal {
         前排他制御開催番号.append(管理番号);
         前排他ロックキー(前排他制御開催番号.toRString());
         div.getRadJotaiKubun().setSelectedKey(登録_修正);
+
         return ResponseData.of(div).respond();
     }
 

@@ -118,7 +118,8 @@ public class NinteiShinseiTorokuManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiTorokuManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiTorokuManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiTorokuManager}のインスタンス
      */
     public static NinteiShinseiTorokuManager createInstance() {
         return InstanceProvider.create(NinteiShinseiTorokuManager.class);
@@ -138,8 +139,7 @@ public class NinteiShinseiTorokuManager {
         }
         return new NinteiShinseiTorokuResult(entity);
     }
-    
-    
+
     @Transaction
     public void deleteAllBy申請書管理番号(RString 申請書管理番号) {
         INinteiShinseiTorokuMapper mapper = mapperProvider.create(INinteiShinseiTorokuMapper.class);
@@ -178,7 +178,21 @@ public class NinteiShinseiTorokuManager {
         }
         return RString.EMPTY;
     }
-    
+
+    /**
+     * 申請書管理番号により、証記載保険者番号の取得
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号(ShinseishoKanriNo 申請書管理番号) {
+        DbT5101NinteiShinseiJohoEntity entity = dbt5101Dac.selectByKey(申請書管理番号);
+        if (entity != null) {
+            return entity.getShoKisaiHokenshaNo();
+        }
+        return RString.EMPTY;
+    }
+
     /**
      * 申請書管理番号により、介護連絡先情報の取得
      *
@@ -381,7 +395,7 @@ public class NinteiShinseiTorokuManager {
     public boolean save認定結果情報(NinteiKekkaJoho 認定結果情報) {
         return 1 == dbt5102Dac.save(認定結果情報.toEntity());
     }
-    
+
     /**
      * 申請計画情報{@link NinteiKeikakuJoho}を保存します。
      *
@@ -464,4 +478,4 @@ public class NinteiShinseiTorokuManager {
                 被保険者番号, 認定申請年月日, 申請書区分, 認定申請区分_申請時_コード, 認定申請区分_法令_コード);
         return null != retList && !retList.isEmpty();
     }
-        }
+}
