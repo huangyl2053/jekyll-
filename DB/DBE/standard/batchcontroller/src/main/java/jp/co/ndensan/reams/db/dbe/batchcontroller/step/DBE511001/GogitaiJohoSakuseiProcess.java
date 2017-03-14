@@ -56,7 +56,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
-    private static final int INT_8 = 8;
+    private static final int INT_10 = 10;
     private static final int INT_40 = 40;
     private static final RString POSITIVE_INTEGERS_REGEX = new RString("^[0-9]\\d*$");
     private static final RString FLAG_TRUE = new RString("1");
@@ -185,9 +185,9 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             noErrorFlag = false;
         }
 
-        if (合議体情報.get有効開始日().length() != INT_8 || !FlexibleDate.canConvert(合議体情報.get有効開始日())
-                || 合議体情報.get有効終了日().length() != INT_8 || !FlexibleDate.canConvert(合議体情報.get有効終了日())) {
-            RString message = new RString(UrErrorMessages.項目に対する制約.getMessage().replace("日付項目", "yyyymmddの形式").evaluate());
+        if (合議体情報.get有効開始日().length() != INT_10 || !FlexibleDate.canConvert(合議体情報.get有効開始日())
+                || 合議体情報.get有効終了日().length() != INT_10 || !FlexibleDate.canConvert(合議体情報.get有効終了日())) {
+            RString message = new RString(UrErrorMessages.項目に対する制約.getMessage().replace("日付項目", "yyyy/mm/ddの形式").evaluate());
             errorMessage = errorMessage.concat(message);
             RLogger.error(message);
             noErrorFlag = false;

@@ -38,8 +38,9 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
     private GogitaiJohoSakuseiProcessParamter parameter;
     private FileSpoolManager manager;
     private int sequence;
-    
+
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE511001"));
     private static final int ZERO8 = 8;
 
@@ -64,8 +65,12 @@ public class GogitaiJohoTorikomiProcess extends BatchProcessBase<GogitaiJohoSaku
                 parameter.getSharedFileID()), new FilesystemPath(spoolWorkPath));
         RString filePath = Path.combinePath(spoolWorkPath, parameter.getInputFileName());
         CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, GogitaiJohoSakuseiCSVEntity.class)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
-                .hasHeader(false).setNewLine(NewLine.CRLF).build();
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEnclosure(CSV_WRITER_ENCLOSURE)
+                .setEncode(Encode.UTF_8withBOM)
+                .setNewLine(NewLine.CRLF)
+                .hasHeader(true)
+                .build();
 
         return new BatchCsvReader(csvReader);
     }

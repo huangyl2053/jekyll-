@@ -202,8 +202,7 @@ public class GogitaiJohoSakuseiFinder {
      */
     public boolean isUsed(int 合議体番号, FlexibleDate 合議体有効期間開始年月日, FlexibleDate 合議体有効期間終了年月日) {
         int yoteiJohoCount = dbt5501dac.countYoteiJoho(合議体番号, 合議体有効期間開始年月日, 合議体有効期間終了年月日);
-        int iinJohoCount = dbt5593dac.countByKey(合議体番号, 合議体有効期間開始年月日, 合議体有効期間終了年月日);
-        return yoteiJohoCount > 0 || iinJohoCount > 0;
+        return yoteiJohoCount > 0;
     }
 
 //    /**
@@ -253,7 +252,6 @@ public class GogitaiJohoSakuseiFinder {
 //        }
 //        return SearchResult.of(resultList, 0, false);
 //    }
-
     /**
      * 合議体割当委員情報が存在しているをチェックします。
      *

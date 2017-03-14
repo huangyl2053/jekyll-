@@ -411,6 +411,9 @@
         INNER JOIN 
         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" DbT5595 
         ON DbT5503."shinsakaiIinCode"=DbT5595."shinsakaiIinCode" 
+        LEFT JOIN 
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051 
+        ON DbT5595."shoKisaiHokenshaNo" = DbT7051."shoKisaiHokenshaNo" 
         WHERE 
         DbT5503."shinsakaiKaisaiNo" = #{kaisaiNo} 
         <if test="isKikannMade"> 
@@ -419,13 +422,17 @@
             <if test="isIryoKikan"> 
                 AND 
                 DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode} 
+                AND 
+                DbT7051."shichosonCode" = #{shichosonCode} 
             </if> 
             <if test="isItakusaki"> 
                 AND 
                 DbT5595."ninteichosaItakusakiCode" = #{ninteiChosaItakusakiCode} 
+                AND 
+                DbT7051."shichosonCode" = #{shichosonCode} 
             </if> 
             <if test="isNyushoShisetsu"> 
-                AND 
+                AND ( 
                 DbT5595."shujiiIryokikanCode" IN (
                 SELECT DbT5910."ninteichosaItakusakiCode" 
                 FROM 
@@ -440,7 +447,7 @@
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
                 WHERE DbT5911."iryokikanCode" = #{nyushoShisetsuCode} 
                 AND 
-                DbT5911."shichosonCode" = #{shichosonCode}) 
+                DbT5911."shichosonCode" = #{shichosonCode})) 
             </if> 
             ) 
         </if> 
@@ -452,12 +459,16 @@
                 DbT5595."shujiiIryokikanCode" = #{shujiiIryokikanCode} 
                 AND 
                 DbT5595."shujiiCode" = #{shujiiCode} 
+                AND 
+                DbT7051."shichosonCode" = #{shichosonCode} 
             </if> 
             <if test="isItakusaki"> 
                 AND 
                 DbT5595."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode} 
                 AND 
                 DbT5595."ninteiChosainNo" = #{ninteiChosainNo} 
+                AND 
+                DbT7051."shichosonCode" = #{shichosonCode} 
             </if> 
             ) 
         </if>
