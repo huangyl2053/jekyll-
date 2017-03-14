@@ -87,7 +87,7 @@ public class Yokaigoninteiimagekanri {
                     イメージ管理情報.getイメージ共有ファイルID());
             setBtnControllerDisabled(div, descriptor);
         }
-        
+
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), イメージ管理情報.get申請書管理番号().value());
         accessLog.store(shoKisaiHokenshaNo, イメージ管理情報.get被保険者番号(), expandedInfo);
@@ -162,6 +162,7 @@ public class Yokaigoninteiimagekanri {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, div.getHdnShokisaiHokenshaNo());
         div.setHdnShinseishoKanriNo(申請書管理番号);
         div.setHdnNinteichosaRirekiNo(認定調査依頼履歴番号);
+        div.setHdnNinteiShinseibi(div.getCcdNinteiShinseishaKihonInfo().get認定申請日().toDateString());
         return ResponseData.of(div).respond();
     }
 

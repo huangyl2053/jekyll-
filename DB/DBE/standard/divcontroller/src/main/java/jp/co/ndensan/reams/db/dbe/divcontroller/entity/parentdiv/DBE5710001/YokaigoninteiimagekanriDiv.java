@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class YokaigoninteiimagekanriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -43,6 +43,8 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     private RString hdnImageLocalCopyPath;
     @JsonProperty("hdnTokkiShuseiOperation")
     private RString hdnTokkiShuseiOperation;
+    @JsonProperty("hdnNinteiShinseibi")
+    private RString hdnNinteiShinseibi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -201,6 +203,24 @@ public class YokaigoninteiimagekanriDiv extends Panel {
     @JsonProperty("hdnTokkiShuseiOperation")
     public void setHdnTokkiShuseiOperation(RString hdnTokkiShuseiOperation) {
         this.hdnTokkiShuseiOperation = hdnTokkiShuseiOperation;
+    }
+
+    /*
+     * gethdnNinteiShinseibi
+     * @return hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public RString getHdnNinteiShinseibi() {
+        return hdnNinteiShinseibi;
+    }
+
+    /*
+     * sethdnNinteiShinseibi
+     * @param hdnNinteiShinseibi hdnNinteiShinseibi
+     */
+    @JsonProperty("hdnNinteiShinseibi")
+    public void setHdnNinteiShinseibi(RString hdnNinteiShinseibi) {
+        this.hdnNinteiShinseibi = hdnNinteiShinseibi;
     }
 
     /*
