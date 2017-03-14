@@ -117,6 +117,9 @@ public class RenkeiDataTorikomi {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<RenkeiDataTorikomiDiv> onClick_TorikomiBtn(RenkeiDataTorikomiDiv div, FileData[] files) {
+        div.setHiddenErrorFiles(RString.EMPTY);
+        div.setHiddenFileNameError(RString.EMPTY);
+        div.setHiddenZeroError(RString.EMPTY);
         RString error = RString.EMPTY;
         RString 不正ファイル名 = RString.EMPTY;
         for (FileData file : files) {
