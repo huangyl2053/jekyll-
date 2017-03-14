@@ -85,9 +85,9 @@ public class ImagePanelValidationHandler {
     private enum ImageValidationMessage implements IValidationMessage {
 
         存在しない(UrErrorMessages.存在しない, "イメージファイル"),
-        調査票(UrErrorMessages.存在しない, "調査票(概況+調査票特記)のイメージファイル"),
-        調査票概況(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
-        主治医意見書(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),
+        調査票(UrErrorMessages.存在しない, "調査票（概況調査＋調査票特記）のイメージファイル"),
+        調査票概況(UrErrorMessages.存在しない, "概況特記のイメージファイル"),
+        主治医意見書(UrErrorMessages.存在しない, "主治医意見書（定型・定型外）のイメージファイル"),
         その他資料(UrErrorMessages.存在しない, "その他資料のイメージファイル"),
         出力項目を指定(UrErrorMessages.出力項目を指定);
 
