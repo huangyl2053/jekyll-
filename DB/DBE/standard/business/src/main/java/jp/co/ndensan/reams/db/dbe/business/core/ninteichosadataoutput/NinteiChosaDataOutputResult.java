@@ -162,7 +162,9 @@ public class NinteiChosaDataOutputResult {
 
     private void set前回分Entity(NinteiChosaBasicDataRelateEntity entityParam, NinteiChosaDataOutputEucCsvEntity eucCsvEntity) {
         NinteiChosaDataOutputBatchRelateZenkaiEntity entityZenkai = entityParam.get前回分Entity();
-        if (entityZenkai != null) {
+        if (entityZenkai != null
+                && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entityZenkai.get厚労省IF識別コード_前回())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entityZenkai.get厚労省IF識別コード_前回()))) {
             eucCsvEntity.set前回_証記載保険者番号(entityZenkai.get証記載保険者番号_前回());
             eucCsvEntity.set前回_被保険者番号(entityZenkai.get被保険者番号_前回());
             eucCsvEntity.set前回_認定申請年月日(entityZenkai.get認定申請年月日_前回());
