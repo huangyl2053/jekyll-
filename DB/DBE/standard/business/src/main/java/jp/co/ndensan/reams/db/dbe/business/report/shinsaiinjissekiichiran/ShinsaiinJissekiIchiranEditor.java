@@ -80,7 +80,7 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
         source.listShinsainJissekiIchiran_10 = dateFormat(item.get実施日());
         source.listShinsainJissekiIchiran_11 = set時刻(item.get開始());
         source.listShinsainJissekiIchiran_12 = set時刻(item.get終了());
-        source.listShinsainJissekiIchiran_13 = get数値(get報酬単価(item));
+        source.listShinsainJissekiIchiran_13 = get報酬単価(item);
 
         return source;
     }
@@ -165,10 +165,10 @@ class ShinsaiinJissekiIchiranEditor implements IShinsaiinJissekiIchiranEditor {
     private RString get報酬単価(ShinsaiinJissekiIchiranRelateEntity item) {
         if (item.is出欠()) {
             if (審査会単価パターン.equals(審査会単価パターン_委員)) {
-                return item.get単価_委員();
+                return item.get単価_委員() != null ? get数値(item.get単価_委員()) : item.get単価_委員();
             }
             if (審査会単価パターン.equals(審査会単価パターン_医師)) {
-                return item.get単価_医師();
+                return item.get単価_医師() != null ? get数値(item.get単価_医師()) : item.get単価_医師();
             }
         }
         return new RString("0");
