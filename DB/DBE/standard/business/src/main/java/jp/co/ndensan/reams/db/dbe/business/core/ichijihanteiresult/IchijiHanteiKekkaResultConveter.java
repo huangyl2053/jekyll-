@@ -319,7 +319,7 @@ public class IchijiHanteiKekkaResultConveter {
             builder.set要介護認定一次判定警告コード(keikokuCode);
 
             RString gaizenseiP = resultList.get(IchijiHanteiPoint.蓋然性.value());
-            builder.set認知症自立度Ⅱ以上の蓋然性(rStringToDecimalAndDivide10(gaizenseiP));
+            builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(gaizenseiP.toString()));
 
             RString anteisei = resultList.get(IchijiHanteiPoint.安定性.value());
             builder.set要介護認定状態の安定性コード(new Code(anteisei));
@@ -337,13 +337,5 @@ public class IchijiHanteiKekkaResultConveter {
         int i = Integer.parseInt(str.toString());
         //n8178 城間 10で割るのは、画面に表示するタイミングに変更。値を正しく保持するために、データそのものの数値はいじらない。
         return i;// / DIVISION_NUM;
-    }
-
-    private Decimal rStringToDecimalAndDivide10(RString str) {
-        Decimal d = new Decimal(str.toString());
-        if (d.equals(new Decimal(-1))) {
-            return d;
-        }
-        return d.divide(DIVISION_NUM).roundUpTo(2);
     }
 }

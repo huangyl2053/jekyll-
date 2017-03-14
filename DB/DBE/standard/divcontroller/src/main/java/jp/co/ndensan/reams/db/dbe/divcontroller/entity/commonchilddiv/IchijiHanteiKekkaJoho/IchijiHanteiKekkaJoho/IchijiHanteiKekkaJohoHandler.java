@@ -47,6 +47,7 @@ public class IchijiHanteiKekkaJohoHandler {
     private final IchijiHanteiKekkaJohoDiv div;
     private static final RString VALUE_ISBLANKLINE = new RString("isBlankLine");
     private static final double DOUBLE_10 = 10;
+    private static final int DIVISION_NUM = 10;
 
     private enum MiSumiKubun {
 
@@ -272,9 +273,9 @@ public class IchijiHanteiKekkaJohoHandler {
         if (hasNot主治医意見書(shinseishoKanriNo) || hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().equals(new Decimal(-1))) {
             div.getTxtGaizensei().clearValue();
         } else {
-            div.getTxtGaizensei().setValue(change小数第1位(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性()));
+            div.getTxtGaizensei().setValue(パーセント変換(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性()));
         }
-        div.setHiddenGaizensei(new RString(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().roundUpTo(2).toString()));
+        div.setHiddenGaizensei(new RString(hanteiKekka.get認知症自立度Ⅱ以上の蓋然性().toString()));
 
         Code jotaiAnteiseiCode = hanteiKekka.get要介護認定状態の安定性コード();
         RString jotaiAnteiseiCodeValue = jotaiAnteiseiCode == null ? RString.EMPTY : jotaiAnteiseiCode.value();
@@ -315,8 +316,8 @@ public class IchijiHanteiKekkaJohoHandler {
         return new Decimal(DecimalFormatter.toRString(new Decimal(基準時間).divide(DOUBLE_10), 1).toString());
     }
     
-    private Decimal change小数第1位(Decimal パーセント) {
-        return new Decimal(DecimalFormatter.toRString(パーセント, 1).toString());
+    private Decimal パーセント変換(Decimal 数値) {
+        return 数値.divide(DIVISION_NUM).roundUpTo(1);
     }
 
     private void set認知症自立度(ShinseishoKanriNo shinseishoKanriNo) {
