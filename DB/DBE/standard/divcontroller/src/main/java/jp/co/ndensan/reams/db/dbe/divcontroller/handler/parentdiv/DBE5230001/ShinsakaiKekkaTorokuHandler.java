@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaShokiHyoji;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunHorei;
@@ -290,7 +291,13 @@ public class ShinsakaiKekkaTorokuHandler {
             div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(row.getHanteiKekkaCode());
         } else {
 //            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
-            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(HanteiKekkaCode.認定.getコード());
+            RString cfgHanteiKekkaShokiHyoji
+                    = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会結果登録_判定結果初期表示, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (cfgHanteiKekkaShokiHyoji.equals(HanteiKekkaShokiHyoji.なし.getコード())) {
+                div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(HanteiKekkaShokiHyoji.なし.get名称());
+            } else if (cfgHanteiKekkaShokiHyoji.equals(HanteiKekkaShokiHyoji.認定.getコード())) {
+                div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedValue(HanteiKekkaShokiHyoji.認定.get名称());
+            }
         }
         if (!RString.isNullOrEmpty(row.getKonkaiNijiHantei())) {
             div.getKobetsuHyojiArea().getDdlNijiHantei().setSelectedValue(row.getKonkaiNijiHantei());
