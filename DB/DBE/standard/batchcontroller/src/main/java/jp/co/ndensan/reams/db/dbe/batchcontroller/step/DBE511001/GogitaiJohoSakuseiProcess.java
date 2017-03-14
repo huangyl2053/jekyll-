@@ -51,7 +51,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             + "gogitaijohosakusei.IGogitaiJohoSakuseiMapper.getTempGogitaiJohoSakuseiSearchResult");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString 日付分割記号 = new RString("/");
+//    private static final RString 日付分割記号 = new RString("/");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -186,14 +186,14 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
             noErrorFlag = false;
         }
 
-        if (合議体情報.get有効開始日().length() != INT_10 || !FlexibleDate.canConvert(合議体情報.get有効開始日().replace(日付分割記号, RString.EMPTY))
-                || 合議体情報.get有効終了日().length() != INT_10 || !FlexibleDate.canConvert(合議体情報.get有効終了日().replace(日付分割記号, RString.EMPTY))) {
+        if (合議体情報.get有効開始日().length() != INT_10 || !FlexibleDate.canConvert(合議体情報.get有効開始日().replace("/", ""))
+                || 合議体情報.get有効終了日().length() != INT_10 || !FlexibleDate.canConvert(合議体情報.get有効終了日().replace("/", ""))) {
             RString message = new RString(UrErrorMessages.項目に対する制約.getMessage().replace("日付項目", "yyyy/mm/ddの形式").evaluate());
             errorMessage = errorMessage.concat(message);
             RLogger.error(message);
             noErrorFlag = false;
-        } else if (new FlexibleDate(合議体情報.get有効開始日().replace(日付分割記号, RString.EMPTY)).
-                isAfter(new FlexibleDate(合議体情報.get有効終了日().replace(日付分割記号, RString.EMPTY)))) {
+        } else if (new FlexibleDate(合議体情報.get有効開始日().replace("/", "")).
+                isAfter(new FlexibleDate(合議体情報.get有効終了日().replace("/", "")))) {
             RString message = GogitaiJohoIkkatuSakuseiErrorMessage.有効開始日大有効終了日.getMessage();
             errorMessage = errorMessage.concat(message);
             RLogger.error(message);
@@ -207,7 +207,7 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                         FlexibleDate.MAX,
                         true,
                         合議体情報.get合議体NO().toInt(),
-                        new FlexibleDate(合議体情報.get有効開始日().replace(日付分割記号, RString.EMPTY)),
+                        new FlexibleDate(合議体情報.get有効開始日().replace("/", "")),
                         FlexibleDate.EMPTY,
                         RString.EMPTY,
                         INT_0
@@ -342,8 +342,8 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
                 FlexibleDate.MAX,
                 true,
                 合議体情報.get合議体NO().toInt(),
-                new FlexibleDate(合議体情報.get有効開始日().replace(日付分割記号, RString.EMPTY)),
-                new FlexibleDate(合議体情報.get有効終了日().replace(日付分割記号, RString.EMPTY)),
+                new FlexibleDate(合議体情報.get有効開始日().replace("/", "")),
+                new FlexibleDate(合議体情報.get有効終了日().replace("/", "")),
                 合議体情報.get審査会委員コード(),
                 INT_0
         ));
@@ -384,8 +384,8 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         DbT5591GogitaiJohoEntity entity = new DbT5591GogitaiJohoEntity();
 
         entity.setGogitaiNo(合議体情報.get合議体NO().toInt());
-        entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(合議体情報.get有効開始日().replace(日付分割記号, RString.EMPTY)));
-        entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(合議体情報.get有効終了日().replace(日付分割記号, RString.EMPTY)));
+        entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(合議体情報.get有効開始日().replace("/", "")));
+        entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(合議体情報.get有効終了日().replace("/", "")));
         entity.setGogitaiMei(合議体情報.get合議体名称());
         entity.setGogitaiKaishiYoteiTime(合議体情報.get合議体開始予定時刻());
         entity.setGogitaiShuryoYoteiTime(合議体情報.get合議体終了予定時刻());
@@ -403,8 +403,8 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
         DbT5593GogitaiWariateIinJohoEntity entity = new DbT5593GogitaiWariateIinJohoEntity();
 
         entity.setGogitaiNo(合議体情報.get合議体NO().toInt());
-        entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(合議体情報.get有効開始日().replace(日付分割記号, RString.EMPTY)));
-        entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(合議体情報.get有効終了日().replace(日付分割記号, RString.EMPTY)));
+        entity.setGogitaiYukoKikanKaishiYMD(new FlexibleDate(合議体情報.get有効開始日().replace("/", "")));
+        entity.setGogitaiYukoKikanShuryoYMD(new FlexibleDate(合議体情報.get有効終了日().replace("/", "")));
         entity.setShinsakaiIinCode(合議体情報.get審査会委員コード());
         entity.setGogitaichoKubunCode(new Code(合議体情報.get合議体長区分コード()));
         entity.setSubstituteFlag(strToBoolean(合議体情報.get補欠()));
