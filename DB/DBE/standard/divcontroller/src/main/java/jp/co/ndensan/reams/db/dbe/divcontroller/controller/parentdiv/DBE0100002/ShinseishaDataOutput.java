@@ -20,10 +20,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -192,6 +194,7 @@ public class ShinseishaDataOutput {
         }
         SearchResult<ShinseiKensakuBusiness> searchResult
                 = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createSearchParameter(hihokenshaNo));
+        DbAccessLogger accessLogger = new DbAccessLogger();
         if (!searchResult.records().isEmpty()) {
             int lastShinseiYmdIndex = findLastIndex(searchResult);
             div.getCcdNinteishinseishaFinder()
@@ -199,10 +202,11 @@ public class ShinseishaDataOutput {
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
             getHandler(div).set申請一覧データグリッド(searchResult);
             for (dgShinseiJoho_Row row : div.getDgShinseiJoho().getDataSource()) {
-                DbAccessLogger accessLogger = new DbAccessLogger();
-                accessLogger.flushBy(AccessLogType.照会);
-                accessLogger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo());
+                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                        row.getShinseishoKanriNo());
+                accessLogger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(), expandedInfo);
             }
+            accessLogger.flushBy(AccessLogType.照会);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();

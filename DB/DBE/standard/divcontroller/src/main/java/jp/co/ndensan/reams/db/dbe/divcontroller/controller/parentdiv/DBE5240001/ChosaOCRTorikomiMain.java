@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -173,7 +174,8 @@ public class ChosaOCRTorikomiMain {
                     }
                 }
             }
-            accessLog.store(new ShoKisaiHokenshaNo(csvData.get保険者番号()), csvData.get被保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), csvData.get申請書管理番号().getColumnValue());
+            accessLog.store(new ShoKisaiHokenshaNo(csvData.get保険者番号()), csvData.get被保険者番号(), expandedInfo);
         }
         accessLog.flushBy(AccessLogType.照会);
         return dB更新用;
@@ -420,6 +422,7 @@ public class ChosaOCRTorikomiMain {
                         updateDbT5102(div, row, data, 審査会開催番号);
                         updateDbT5503(div, row, data, 審査会開催番号);
                         updateDbT5511(div, row, data, 審査会開催番号);
+                        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), data.get申請書管理番号().getColumnValue());
                         accessLog.store(new ShoKisaiHokenshaNo(data.get保険者番号()), data.get被保険者番号());
                     }
                 }

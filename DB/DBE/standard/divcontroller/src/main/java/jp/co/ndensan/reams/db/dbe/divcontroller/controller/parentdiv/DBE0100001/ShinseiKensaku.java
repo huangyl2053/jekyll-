@@ -34,9 +34,11 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
-import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -229,9 +231,11 @@ public class ShinseiKensaku {
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
         }
 
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);
-        NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, 被保険者番号);
-        ninteiAccessLogger.log();
+        DbAccessLogger accessLogger = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                        row.getShinseishoKanriNo());
+        accessLogger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(), expandedInfo);
+        accessLogger.flushBy(AccessLogType.照会);
         
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);

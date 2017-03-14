@@ -70,6 +70,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
@@ -152,10 +153,12 @@ public class Ninteishinseibi {
                 filePath_概況特記データ, filePath_特記情報データ, 認定調査結果入手_必須調査票);
 
         DbAccessLogger accessLogger = new DbAccessLogger();
-        accessLogger.flushBy(AccessLogType.照会);
         for (ChosaKekkaNyuryokuCsvEntity entity : 基本調査データCsvEntityList) {
-            accessLogger.store(new ShoKisaiHokenshaNo(entity.get証記載保険者番号()), entity.get被保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    entity.get申請書管理番号());
+            accessLogger.store(new ShoKisaiHokenshaNo(entity.get証記載保険者番号()), entity.get被保険者番号(), expandedInfo);
         }
+        accessLogger.flushBy(AccessLogType.更新);
         Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
         return ResponseData.of(div).respond();
     }

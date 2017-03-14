@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
-import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -66,6 +66,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -175,14 +176,16 @@ public class NinteichosaIrai {
                 hasHeader(true).
                 build()) {
             List<dgNinteiTaskList_Row> dataList = requestDiv.getChosairaitaishoshaichiran().getDgNinteiTaskList().getSelectedItems();
+            DbAccessLogger accessLog = new DbAccessLogger();
             for (dgNinteiTaskList_Row row : dataList) {
 
                 csvWriter.writeLine(getCsvData(row));
-
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getGetShoKisaiHokenshaNo());
-                NinteiAccessLogger ninteiAccessLogger = new NinteiAccessLogger(AccessLogType.照会, shoKisaiHokenshaNo, row.getHihoNumber());
-                ninteiAccessLogger.log();
+                
+                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                        row.getShinseishoKanriNo());
+                accessLog.store(new ShoKisaiHokenshaNo(row.getGetShoKisaiHokenshaNo()), row.getHihoNumber(), expandedInfo);
             }
+            accessLog.flushBy(AccessLogType.照会);
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
