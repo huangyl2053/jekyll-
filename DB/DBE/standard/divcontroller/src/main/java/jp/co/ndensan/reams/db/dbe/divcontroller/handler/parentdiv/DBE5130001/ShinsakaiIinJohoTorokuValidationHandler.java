@@ -99,7 +99,8 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
                 || !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
                 || !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
             return !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
-                    && !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                    && (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                    || (new RString("9900").equals(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value())))
                     && !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
                     && !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
                     && !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
