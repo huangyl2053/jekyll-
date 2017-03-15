@@ -166,13 +166,13 @@ public class NinteiShinseiTorokuHandler {
         if (!RString.isNullOrEmpty(business.get支所コード())) {
             div.getCcdKaigoNinteiShinseiKihon().setShisho(new ShishoCode(business.get支所コード()));
         }
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(市町村コード,
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(business.get申請者所属市町村コード(),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         div.getCcdChodsItakusakiAndChosainInput().initialize(new RString("InputMode"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         div.getCcdChodsItakusakiAndChosainInput().setHdnShinseishoKanriNo(RString.EMPTY);
-        div.getCcdChodsItakusakiAndChosainInput().setHdnShichosonCode(市町村コード.value());
+        div.getCcdChodsItakusakiAndChosainInput().setHdnShichosonCode(business.get申請者所属市町村コード().value());
         //2 set今回情報
         if (business.get前回申請書管理番号() != null) {
             div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, business.get前回申請書管理番号(), new RString("1"));

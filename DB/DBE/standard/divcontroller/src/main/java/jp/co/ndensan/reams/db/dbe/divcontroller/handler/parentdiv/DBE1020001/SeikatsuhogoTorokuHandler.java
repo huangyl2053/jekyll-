@@ -17,9 +17,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,12 +51,7 @@ public class SeikatsuhogoTorokuHandler {
      * @param ninteiTandokuDounyuFlag 支所コードリスト
      */
     public void load(SeikatsuhogoTorokuResult result, List<KoseiShichosonShishoMaster> list, boolean ninteiTandokuDounyuFlag) {
-        div.getCcdZenkokuJushoInput().initialize();
         if (ninteiTandokuDounyuFlag) {
-            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setVisible(false);
-            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
-            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
-            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtJusho().setLabelLWidth(new RString("0px"));
             div.getBtnAtenaKensaku().setVisible(false);
         }
         List<KeyValueDataSource> sourceList = new ArrayList<>();
@@ -73,8 +66,7 @@ public class SeikatsuhogoTorokuHandler {
             }
             div.getRadSeibetsu().setSelectedKey(result.get性別().value());
             div.getTxtYubinNo().setValue(result.get郵便番号());
-
-            div.getCcdZenkokuJushoInput().load(ZenkokuJushoCode.EMPTY, result.get住所().value());
+            div.getTxtJusho().setValue(result.get住所().value());
             div.getTxtTelNo().setDomain(result.get電話番号());
         }
         for (KoseiShichosonShishoMaster master : list) {
@@ -113,8 +105,7 @@ public class SeikatsuhogoTorokuHandler {
         }
         business.set性別コード(div.getRadSeibetsu().getSelectedKey());
         business.set郵便番号(div.getTxtYubinNo().getValue());
-        business.set住所コード(div.getCcdZenkokuJushoInput().get全国住所コード());
-        business.set住所名称(div.getCcdZenkokuJushoInput().get全国住所名称());
+        business.set住所名称(div.getTxtJusho().getValue());
         business.set電話番号(div.getTxtTelNo().getDomain());
         business.set支所コード(div.getDdlShisho().getSelectedKey());
         if (前回申請書管理番号 != null) {

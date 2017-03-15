@@ -26,16 +26,15 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -58,6 +57,7 @@ public class SeikatsuhogoToroku {
     private final KoseiShichosonShishoMasterManager manager;
     private final SeikatsuhogoTorokuFinder finder;
     private final NinteiShinseiJohoManager shinseiJohoManager;
+    private final int INDEX0 = 0;
     private boolean ninteiTandokuDounyuFlag;
     private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
@@ -110,6 +110,8 @@ public class SeikatsuhogoToroku {
         } else {
             div.getCcdShozokuShichoson().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
         }
+        ((HokenshaListDiv) div.getCcdShozokuShichoson()).getDdlHokenshaList().getDataSource().add(INDEX0, new KeyValueDataSource(RString.FULL_SPACE, RString.EMPTY));
+        ((HokenshaListDiv) div.getCcdShozokuShichoson()).getDdlHokenshaList().setSelectedIndex(INDEX0);
         getHandler(div).load(result, list, ninteiTandokuDounyuFlag);
         return ResponseData.of(div).respond();
     }
@@ -143,7 +145,7 @@ public class SeikatsuhogoToroku {
                 div.getRadSeibetsu().setSelectedKey(ninteiShinseiJoho.get性別().getKey());
             }
             div.getTxtYubinNo().setValue(ninteiShinseiJoho.get郵便番号());
-            div.getSeikatsuHogoshaJohoInput().getCcdZenkokuJushoInput().load(ZenkokuJushoCode.EMPTY, ninteiShinseiJoho.get住所().value());
+            div.getTxtJusho().setValue(ninteiShinseiJoho.get住所().value());
             div.getTxtTelNo().setDomain(ninteiShinseiJoho.get電話番号());
             if (ninteiShinseiJoho.get識別コード() != null) {
                 div.getTxtShikibetsuCode().setValue(ninteiShinseiJoho.get識別コード().value());
@@ -151,8 +153,8 @@ public class SeikatsuhogoToroku {
             div.getCcdShozokuShichoson().setSelectedShichosonIfExist(ninteiShinseiJoho.get市町村コード());
         }
         if (ninteiTandokuDounyuFlag) {
-            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
-            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
+//            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getBtnZenkokuJushoGuide().setDisplayNone(true);
+//            ((ZenkokuJushoInputDiv) div.getCcdZenkokuJushoInput()).getTxtZenkokuJushoCode().setDisplayNone(true);
             div.getBtnAtenaKensaku().setVisible(false);
         }
         return ResponseData.of(div).respond();
@@ -172,19 +174,6 @@ public class SeikatsuhogoToroku {
             sourceList.add(new KeyValueDataSource(master.get支所名(), master.get支所コード().value()));
         }
         div.getDdlShisho().setDataSource(sourceList);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 選択されている住所に該当する郵便番号をセットします。
-     *
-     * @param div みなし2号登録Div
-     * @return ResponseData<SeikatsuhogoTorokuDiv>
-     */
-    public ResponseData<SeikatsuhogoTorokuDiv> onOkClose_txtZenkokuJushoCode(SeikatsuhogoTorokuDiv div) {
-        if (!div.getCcdZenkokuJushoInput().get郵便番号().isEmpty()) {
-            div.getTxtYubinNo().setValue(div.getCcdZenkokuJushoInput().get郵便番号());
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -217,7 +206,7 @@ public class SeikatsuhogoToroku {
         div.getTxtShimei().clearValue();
         div.getTxtTelNo().clearDomain();
         div.getTxtYubinNo().clearValue();
-        div.getCcdZenkokuJushoInput().clear();
+        div.getTxtJusho().clearValue();
         div.getRadSeibetsu().clearSelectedItem();
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
         div.getDdlShisho().setSelectedIndex(0);
@@ -292,7 +281,7 @@ public class SeikatsuhogoToroku {
             }
             div.getRadSeibetsu().setSelectedKey(kojin.get性別().getCode());
             div.getTxtYubinNo().setValue(kojin.get住所().get郵便番号());
-            div.getCcdZenkokuJushoInput().load(kojin.get住所().get全国住所コード());
+            div.getTxtJusho().setValue(kojin.get住所().get住所());
             div.getTxtTelNo().setDomain(kojin.get連絡先１());
         }
         return ResponseData.of(div).respond();

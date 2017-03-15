@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -21,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class SeikatsuhogoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -364,6 +362,16 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtJusho() {
+        return this.getSeikatsuHogoshaJohoInput().getTxtJusho();
+    }
+
+    @JsonIgnore
+    public void  setTxtJusho(TextBox txtJusho) {
+        this.getSeikatsuHogoshaJohoInput().setTxtJusho(txtJusho);
+    }
+
+    @JsonIgnore
     public TextBoxTelNo getTxtTelNo() {
         return this.getSeikatsuHogoshaJohoInput().getTxtTelNo();
     }
@@ -371,11 +379,6 @@ public class SeikatsuhogoTorokuDiv extends Panel {
     @JsonIgnore
     public void  setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.getSeikatsuHogoshaJohoInput().setTxtTelNo(txtTelNo);
-    }
-
-    @JsonIgnore
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput() {
-        return this.getSeikatsuHogoshaJohoInput().getCcdZenkokuJushoInput();
     }
 
     @JsonIgnore

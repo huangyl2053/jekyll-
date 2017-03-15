@@ -6,11 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.entity.csv.ocr;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
@@ -20,9 +21,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 @lombok.Getter
 @lombok.Setter
 public class OcrTorikomiKekkaCsvEntity {
-
-    private static final int HOKENSHANO_LENGTH = 6;
-    private static final int HIHOKENSHANO_LENGTH = 10;
 
     @CsvField(order = 10, name = "ID")
     private RString oCRID;
@@ -43,21 +41,17 @@ public class OcrTorikomiKekkaCsvEntity {
     private int kekkaCode;
     @CsvField(order = 90, name = "備考")
     private RString 備考;
+    private RString 申請書管理番号;
 
     /**
      * @return PersonalDataへ変換可能な場合、変換結果を保持したインスタンス.　不可能な場合、空.
      */
     public Optional<PersonalData> toPersonalDataIfPossible() {
-        if (RString.isNullOrEmpty(this.証記載保険者番号)
-                && RString.isNullOrEmpty(this.被保険者番号)) {
+        if (RString.isNullOrEmpty(this.申請書管理番号)) {
             return Optional.empty();
         }
-        if (this.証記載保険者番号.length() != HOKENSHANO_LENGTH
-                && this.被保険者番号.length() != HIHOKENSHANO_LENGTH) {
-            return Optional.empty();
-        }
-        return Optional.of(PersonalData.of(new ShikibetsuCode(this.証記載保険者番号.substring(0, 5).concat(this.被保険者番号)),
-                ExpandedInformations.被保険者番号.fromValue(this.被保険者番号)));
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return Optional.of(PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo));
     }
 
     @Override
@@ -72,6 +66,7 @@ public class OcrTorikomiKekkaCsvEntity {
         hash = 13 * hash + Objects.hashCode(this.氏名カナ);
         hash = 13 * hash + Objects.hashCode(this.結果);
         hash = 13 * hash + Objects.hashCode(this.備考);
+        hash = 13 * hash + Objects.hashCode(this.申請書管理番号);
         return hash;
     }
 
@@ -111,6 +106,9 @@ public class OcrTorikomiKekkaCsvEntity {
         if (!Objects.equals(this.備考, other.備考)) {
             return false;
         }
+        if (!Objects.equals(this.申請書管理番号, other.申請書管理番号)) {
+            return false;
+        }
         return true;
     }
 
@@ -130,5 +128,6 @@ public class OcrTorikomiKekkaCsvEntity {
         this.結果 = other.結果;
         this.kekkaCode = other.kekkaCode;
         this.備考 = other.備考;
+        this.申請書管理番号 = other.申請書管理番号;
     }
 }

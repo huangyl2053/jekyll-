@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class SeikatsuHogoshaJohoInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,10 +46,10 @@ public class SeikatsuHogoshaJohoInputDiv extends Panel {
     private RadioButton radSeibetsu;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
+    @JsonProperty("txtJusho")
+    private TextBox txtJusho;
     @JsonProperty("txtTelNo")
     private TextBoxTelNo txtTelNo;
-    @JsonProperty("ccdZenkokuJushoInput")
-    private ZenkokuJushoInputDiv ccdZenkokuJushoInput;
     @JsonProperty("ccdShozokuShichoson")
     private HokenshaListDiv ccdShozokuShichoson;
 
@@ -260,6 +258,24 @@ public class SeikatsuHogoshaJohoInputDiv extends Panel {
     }
 
     /*
+     * gettxtJusho
+     * @return txtJusho
+     */
+    @JsonProperty("txtJusho")
+    public TextBox getTxtJusho() {
+        return txtJusho;
+    }
+
+    /*
+     * settxtJusho
+     * @param txtJusho txtJusho
+     */
+    @JsonProperty("txtJusho")
+    public void setTxtJusho(TextBox txtJusho) {
+        this.txtJusho = txtJusho;
+    }
+
+    /*
      * gettxtTelNo
      * @return txtTelNo
      */
@@ -275,15 +291,6 @@ public class SeikatsuHogoshaJohoInputDiv extends Panel {
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBoxTelNo txtTelNo) {
         this.txtTelNo = txtTelNo;
-    }
-
-    /*
-     * getccdZenkokuJushoInput
-     * @return ccdZenkokuJushoInput
-     */
-    @JsonProperty("ccdZenkokuJushoInput")
-    public IZenkokuJushoInputDiv getCcdZenkokuJushoInput() {
-        return ccdZenkokuJushoInput;
     }
 
     /*

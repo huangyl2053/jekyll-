@@ -16,14 +16,19 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiMessages;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrTorikomiKekkaCsvEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -117,6 +122,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
 
         private final CsvWriter<OcrTorikomiKekkaCsvEntity> writer;
         private final Set<PersonalData> personalData;
+        private final DbAccessLogger accessLog;
 
         private CsvWriterWrapper(RString filePath) {
             this.writer = new CsvWriter.InstanceBuilder(filePath)
@@ -127,10 +133,14 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
                     .hasHeader(true)
                     .build();
             this.personalData = new HashSet<>();
+            this.accessLog = new DbAccessLogger();
         }
 
         private OcrTorikomiKekkaCsvEntity writeLine(OcrTorikomiKekkaCsvEntity entity) {
             this.writer.writeLine(entity);
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                entity.get申請書管理番号());
+            this.accessLog.store(new ShoKisaiHokenshaNo(entity.get証記載保険者番号()), entity.get被保険者番号(), expandedInfo);
             Optional<PersonalData> p = entity.toPersonalDataIfPossible();
             if (p.isPresent()) {
                 this.personalData.add(p.get());
@@ -143,6 +153,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
             if (this.personalData.isEmpty()) {
                 return Optional.empty();
             }
+            accessLog.flushBy(AccessLogType.照会);
             return Optional.of(AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, this.personalData));
         }
     }
