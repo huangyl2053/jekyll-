@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
@@ -63,7 +65,9 @@ public class NinteiChosaDataOutputHandler {
             div.setDisabled(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNKENSAKU, true);
         } else if (広域業務範囲コード.equals(KoikiGyomuHaniCodeType.広域審査会のみと依頼業務)) {
-            div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+            div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            div.getCcdHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
             //CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNEXECUTE, false);
             div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(get市町村コード());
             div.getCcdChosaltakusakiAndChosainInput().initialize(new RString("InputMode"),
@@ -93,16 +97,12 @@ public class NinteiChosaDataOutputHandler {
      * @return NinteiChosaDataOutputMybitisParameter
      */
     public NinteiChosaDataOutputMybitisParameter setParameter() {
-        boolean isShutsuryokuZumiFukumu = false;
-        if (div.getChkShutsuryokuZumi().getSelectedKeys().contains(KEY_出力済みも含むチェックボックス)) {
-            isShutsuryokuZumiFukumu = true;
-        }
         return NinteiChosaDataOutputMybitisParameter.createSelectByKeyParam(
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue(),
                 div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue(),
                 div.getTxtMaxCount().getValue(),
                 div.getCcdHokensha().getSelectedItem().get市町村コード().value(),
-                isShutsuryokuZumiFukumu);
+                div.getChkShutsuryokuZumi().getSelectedKeys().contains(KEY_出力済みも含むチェックボックス));
     }
 
     /**
@@ -111,8 +111,10 @@ public class NinteiChosaDataOutputHandler {
     public void clear検索条件() {
         div.getCcdChosaltakusakiAndChosainInput().clear();
         div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(get市町村コード());
         div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+        div.getChkShutsuryokuZumi().setSelectedItemsByKey(new ArrayList<RString>());
     }
 
     /**
