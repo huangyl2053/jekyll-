@@ -580,7 +580,7 @@
             ON  ShinseiRirekiJoho."shinseishoKanriNo" = NinteiShinseiJoho1."shinseishoKanriNo"
             LEFT JOIN
                 rgdb."DbT5301ShujiiIkenshoIraiJoho" AS ShujiiIkenshoIraiJoho2
-            ON  ShujiiIkenshoIraiJoho2."shinseishoKanriNo" = ShinseiRirekiJoho."shinseishoKanriNo"
+            ON  ShujiiIkenshoIraiJoho2."shinseishoKanriNo" = ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
             AND ShujiiIkenshoIraiJoho2."ikenshoIraiRirekiNo" = (
                     SELECT
                         MAX(DbT5301Shujii."ikenshoIraiRirekiNo")
@@ -591,7 +591,7 @@
                 )
             LEFT JOIN
                 rgdb."DbT5302ShujiiIkenshoJoho" AS ShujiiIkenshoJoho2
-            ON  ShujiiIkenshoJoho2."shinseishoKanriNo" = ShinseiRirekiJoho."shinseishoKanriNo"
+            ON  ShujiiIkenshoJoho2."shinseishoKanriNo" = ShinseiRirekiJoho."zenkaiShinseishoKanriNo"
             AND ShujiiIkenshoJoho2."ikenshoIraiRirekiNo" = (
                     SELECT
                         MAX(DbT5302Shujii."ikenshoIraiRirekiNo")
