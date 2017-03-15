@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710003;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.DeletableImages;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001.Yokaigoninteiimagekanri;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelValidationHandler;
@@ -24,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -53,7 +57,21 @@ public class DeletePanel {
      * @return ResponseData
      */
     public ResponseData<DeletePanelDiv> onLoad(DeletePanelDiv div) {
+        if (!Yokaigoninteiimagekanri.uses概況特記()) {
+            div.getChkImage().setDataSource(removed概況特記(div.getChkImage().getDataSource()));
+        }
         return ResponseData.of(div).respond();
+    }
+
+    private static List<KeyValueDataSource> removed概況特記(List<KeyValueDataSource> defaultDataSource) {
+        List<KeyValueDataSource> list = new ArrayList<>();
+        for (KeyValueDataSource v : defaultDataSource) {
+            if (Objects.equals(v.getKey(), KEY_調査票概況)) {
+                continue;
+            }
+            list.add(v);
+        }
+        return list;
     }
 
     /**

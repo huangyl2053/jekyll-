@@ -105,8 +105,8 @@ public class ShinsakaiShukeihyoShinseiBetsuProcess extends BatchProcessBase<Shin
     }
 
     private RString dateForMat(RDate 年月日) {
-        return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
 }

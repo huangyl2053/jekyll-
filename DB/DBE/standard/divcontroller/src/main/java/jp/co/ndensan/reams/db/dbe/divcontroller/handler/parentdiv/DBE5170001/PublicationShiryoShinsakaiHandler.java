@@ -227,6 +227,7 @@ public class PublicationShiryoShinsakaiHandler {
         RString 委員用審査会開催通知書フラグ = new RString("0");
         RString 委員用予備判定記入表フラグ = new RString("0");
         RString 合議体ダミーフラグ = new RString("0");
+        RString テストプリントフラグ = new RString("0");
 
         List<RString> 事務用出力条件組み合わせ = div.getChkPrintChoyoJimu().getSelectedKeys();
         List<RString> 事務用出力条件帳票 = div.getChkPrintChoyoJimu2().getSelectedKeys();
@@ -295,6 +296,9 @@ public class PublicationShiryoShinsakaiHandler {
         if (!div.getChkGogitaiDummyFlag().getSelectedKeys().isEmpty()) {
             合議体ダミーフラグ = new RString("1");
         }
+        if (!div.getPublishingCondition().getChkTestPrint().getSelectedKeys().isEmpty()) {
+            テストプリントフラグ = new RString("1");
+        }
         return set項目(事務局審査会資料組み合わせフラグ,
                 事務局審査会対象者一覧フラグ,
                 事務局特記事項フラグ,
@@ -314,7 +318,8 @@ public class PublicationShiryoShinsakaiHandler {
                 委員用その他資料フラグ,
                 委員用審査会開催通知書フラグ,
                 委員用予備判定記入表フラグ,
-                合議体ダミーフラグ);
+                合議体ダミーフラグ,
+                テストプリントフラグ);
     }
 
     private DBE517000_ShinsakaiShiryoParameter set項目(
@@ -337,7 +342,8 @@ public class PublicationShiryoShinsakaiHandler {
             RString 委員用その他資料フラグ,
             RString 委員用審査会開催通知書フラグ,
             RString 委員用予備判定記入表フラグ,
-            RString 合議体ダミーフラグ) {
+            RString 合議体ダミーフラグ,
+            RString テストプリントフラグ) {
         return new DBE517000_ShinsakaiShiryoParameter(
                 div.getHdnShinsakaiKaisaiNo().padZeroToLeft(INT_8),
                 div.getTxtShinsakaiKaijo().getValue(),
@@ -373,6 +379,7 @@ public class PublicationShiryoShinsakaiHandler {
                 委員用審査会開催通知書フラグ,
                 委員用予備判定記入表フラグ,
                 合議体ダミーフラグ,
+                テストプリントフラグ,
                 div.getCcdBunshoNoInput().get文書番号());
     }
 

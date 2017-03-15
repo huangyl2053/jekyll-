@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
@@ -1307,23 +1308,26 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString get要介護認定等基準時間(ItiziHanteiEntity entity) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        decimalFormat.setMinimumFractionDigits(1);
+        decimalFormat.setMaximumFractionDigits(1);
         RStringBuilder 基準時間 = new RStringBuilder();
         if (entity.getKijunJikanNinchishoKasan() > 0) {
-            基準時間.append(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10))
+            基準時間.append(decimalFormat.format(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)))
                     .append(分)
-                    .append(RString.FULL_SPACE)
+                    .append(RString.HALF_SPACE)
                     .append(加算)
-                    .append(RString.FULL_SPACE)
-                    .append(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10))
+                    .append(RString.HALF_SPACE)
+                    .append(decimalFormat.format(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10)))
                     .append(分)
-                    .append(RString.FULL_SPACE)
+                    .append(RString.HALF_SPACE)
                     .append(等号)
-                    .append(RString.FULL_SPACE)
-                    .append(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)
-                            .add(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10)))
+                    .append(RString.HALF_SPACE)
+                    .append(decimalFormat.format(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)
+                                    .add(new Decimal(entity.getKijunJikanNinchishoKasan()).divide(基準時間算出用_10))))
                     .append(分);
         } else {
-            基準時間.append(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10)).append(分);
+            基準時間.append(decimalFormat.format(new Decimal(entity.getKijunJikan()).divide(基準時間算出用_10))).append(分);
         }
         return 基準時間.toRString();
     }
@@ -1368,8 +1372,11 @@ public class SabisuJyoukyoA3 {
         if (entity.getNinchishoJiritsudoIIijoNoGaizensei() == null || entity.getNinchishoJiritsudoIIijoNoGaizensei().intValue() == -1) {
             項目.set認知症自立度Ⅱ以上の蓋然性(RString.EMPTY);
         } else {
+            DecimalFormat decimalFormat = new DecimalFormat("#.#");
+            decimalFormat.setMinimumFractionDigits(1);
+            decimalFormat.setMaximumFractionDigits(1);
             RStringBuilder 蓋然性 = new RStringBuilder();
-            蓋然性.append(entity.getNinchishoJiritsudoIIijoNoGaizensei().divide(基準時間算出用_10)).append(new RString("%"));
+            蓋然性.append(decimalFormat.format(entity.getNinchishoJiritsudoIIijoNoGaizensei().divide(基準時間算出用_10))).append(new RString("%"));
             項目.set認知症自立度Ⅱ以上の蓋然性(蓋然性.toRString());
         }
         if (entity.getJotaiAnteiseiCode() == null || entity.getJotaiAnteiseiCode().isEmpty()) {

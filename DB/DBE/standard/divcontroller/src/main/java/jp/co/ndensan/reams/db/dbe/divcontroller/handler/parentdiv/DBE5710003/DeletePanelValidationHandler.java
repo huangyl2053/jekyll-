@@ -159,9 +159,9 @@ public class DeletePanelValidationHandler {
     private static enum RRVMessages implements IValidationMessage {
 
         存在しない(UrErrorMessages.存在しない, "イメージファイル"),
-        調査票特記存在しない(UrErrorMessages.存在しない, "調査票(概況+調査票特記)のイメージファイル"),
-        調査票概況存在しない(UrErrorMessages.存在しない, "調査票概況のイメージファイル"),
-        主治医意見書存在しない(UrErrorMessages.存在しない, "主治医意見書のイメージファイル"),
+        調査票特記存在しない(UrErrorMessages.存在しない, "調査票（概況調査＋調査票特記）のイメージファイル"),
+        調査票概況存在しない(UrErrorMessages.存在しない, "概況特記のイメージファイル"),
+        主治医意見書存在しない(UrErrorMessages.存在しない, "主治医意見書（定型・定型外）のイメージファイル"),
         その他資料存在しない(UrErrorMessages.存在しない, "その他資料のイメージファイル"),
         マスクイメージ存在しない(UrErrorMessages.存在しない, "マスクイメージファイル"),
         削除ファイル未指定(UrErrorMessages.未指定, "削除ファイルを"),

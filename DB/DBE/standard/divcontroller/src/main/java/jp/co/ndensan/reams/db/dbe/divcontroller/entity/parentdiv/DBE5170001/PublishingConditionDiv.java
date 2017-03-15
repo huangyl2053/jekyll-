@@ -30,6 +30,10 @@ public class PublishingConditionDiv extends Panel {
     private DropDownList ddlShutsuryokuStyleZenken;
     @JsonProperty("radShutsuryokuStyleZenken")
     private RadioButton radShutsuryokuStyleZenken;
+    @JsonProperty("spSpace5")
+    private Space spSpace5;
+    @JsonProperty("chkTestPrint")
+    private CheckBoxList chkTestPrint;
     @JsonProperty("radSakuseiJokenType")
     private RadioButton radSakuseiJokenType;
     @JsonProperty("txtShiryoNoStart")
@@ -101,6 +105,42 @@ public class PublishingConditionDiv extends Panel {
     @JsonProperty("radShutsuryokuStyleZenken")
     public void setRadShutsuryokuStyleZenken(RadioButton radShutsuryokuStyleZenken) {
         this.radShutsuryokuStyleZenken = radShutsuryokuStyleZenken;
+    }
+
+    /*
+     * getspSpace5
+     * @return spSpace5
+     */
+    @JsonProperty("spSpace5")
+    public Space getSpSpace5() {
+        return spSpace5;
+    }
+
+    /*
+     * setspSpace5
+     * @param spSpace5 spSpace5
+     */
+    @JsonProperty("spSpace5")
+    public void setSpSpace5(Space spSpace5) {
+        this.spSpace5 = spSpace5;
+    }
+
+    /*
+     * getchkTestPrint
+     * @return chkTestPrint
+     */
+    @JsonProperty("chkTestPrint")
+    public CheckBoxList getChkTestPrint() {
+        return chkTestPrint;
+    }
+
+    /*
+     * setchkTestPrint
+     * @param chkTestPrint chkTestPrint
+     */
+    @JsonProperty("chkTestPrint")
+    public void setChkTestPrint(CheckBoxList chkTestPrint) {
+        this.chkTestPrint = chkTestPrint;
     }
 
     /*

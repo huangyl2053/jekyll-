@@ -16,6 +16,7 @@
         <result property="保険者" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査委託先名称" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="調査員氏名" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <resultMap id="resultMap_getChosain" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosainDataRelateEntity" autoMapping="true">
@@ -357,6 +358,7 @@
         , DbT7051."shichosonMeisho"
         , DbT5910."jigyoshaMeisho"
         , DbT5913."chosainShimei"
+        , DbT5101."shoKisaiHokenshaNo"
         FROM
         rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101

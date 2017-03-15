@@ -30,6 +30,8 @@ public class ShinsakaiShukeihyoGenzaiEditor {
     private static final RString パーセント = new RString("%");
     private static final RString 上段なし = new RString("0.00%");
     private static final RString 全て = new RString("100%");
+    private static final RString ゼロパーセント整数 = new RString ("0%");
+    private static final RString ゼロパーセント小第2位 = new RString("0.00%");
     private static final int ひゃく = 100;
     private static final int 新規申請 = 0;
     private static final int 更新申請 = 1;
@@ -76,6 +78,7 @@ public class ShinsakaiShukeihyoGenzaiEditor {
         set全体24ヶ月();
         set全体その他();
         set全体合計();
+        check現在状況();
     }
 
     private void set市町村() {
@@ -1020,6 +1023,193 @@ public class ShinsakaiShukeihyoGenzaiEditor {
         genzainojokyo.set全体合計_要介護4_下段(format下段(genzainojokyo.get全体合計_要介護4_上段(), genzainojokyo.get全体合計_計_上段()));
         genzainojokyo.set全体合計_要介護5_下段(format下段(genzainojokyo.get全体合計_要介護5_上段(), genzainojokyo.get全体合計_計_上段()));
         genzainojokyo.set全体合計_計_下段(全て);
+    }
+    
+    private void check現在状況(){
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要介護1_下段())){genzainojokyo.set全体12ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要介護2_下段())){genzainojokyo.set全体12ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要介護3_下段())){genzainojokyo.set全体12ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要介護4_下段())){genzainojokyo.set全体12ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要介護5_下段())){genzainojokyo.set全体12ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要支援1_下段())){genzainojokyo.set全体12ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_要支援2_下段())){genzainojokyo.set全体12ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体12ヶ月_計_下段())){genzainojokyo.set全体12ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要介護1_下段())){genzainojokyo.set全体24ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要介護2_下段())){genzainojokyo.set全体24ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要介護3_下段())){genzainojokyo.set全体24ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要介護4_下段())){genzainojokyo.set全体24ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要介護5_下段())){genzainojokyo.set全体24ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要支援1_下段())){genzainojokyo.set全体24ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_要支援2_下段())){genzainojokyo.set全体24ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体24ヶ月_計_下段())){genzainojokyo.set全体24ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要介護1_下段())){genzainojokyo.set全体6ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要介護2_下段())){genzainojokyo.set全体6ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要介護3_下段())){genzainojokyo.set全体6ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要介護4_下段())){genzainojokyo.set全体6ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要介護5_下段())){genzainojokyo.set全体6ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要支援1_下段())){genzainojokyo.set全体6ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_要支援2_下段())){genzainojokyo.set全体6ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体6ヶ月_計_下段())){genzainojokyo.set全体6ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要介護1_下段())){genzainojokyo.set全体その他_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要介護2_下段())){genzainojokyo.set全体その他_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要介護3_下段())){genzainojokyo.set全体その他_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要介護4_下段())){genzainojokyo.set全体その他_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要介護5_下段())){genzainojokyo.set全体その他_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要支援1_下段())){genzainojokyo.set全体その他_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_要支援2_下段())){genzainojokyo.set全体その他_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体その他_計_下段())){genzainojokyo.set全体その他_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要介護1_下段())){genzainojokyo.set全体合計_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要介護2_下段())){genzainojokyo.set全体合計_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要介護3_下段())){genzainojokyo.set全体合計_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要介護4_下段())){genzainojokyo.set全体合計_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要介護5_下段())){genzainojokyo.set全体合計_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要支援1_下段())){genzainojokyo.set全体合計_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_要支援2_下段())){genzainojokyo.set全体合計_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get全体合計_計_下段())){genzainojokyo.set全体合計_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要介護1_下段())){genzainojokyo.set区分変更12ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要介護2_下段())){genzainojokyo.set区分変更12ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要介護3_下段())){genzainojokyo.set区分変更12ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要介護4_下段())){genzainojokyo.set区分変更12ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要介護5_下段())){genzainojokyo.set区分変更12ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要支援1_下段())){genzainojokyo.set区分変更12ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_要支援2_下段())){genzainojokyo.set区分変更12ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更12ヶ月_計_下段())){genzainojokyo.set区分変更12ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要介護1_下段())){genzainojokyo.set区分変更24ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要介護2_下段())){genzainojokyo.set区分変更24ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要介護3_下段())){genzainojokyo.set区分変更24ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要介護4_下段())){genzainojokyo.set区分変更24ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要介護5_下段())){genzainojokyo.set区分変更24ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要支援1_下段())){genzainojokyo.set区分変更24ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_要支援2_下段())){genzainojokyo.set区分変更24ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更24ヶ月_計_下段())){genzainojokyo.set区分変更24ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要介護1_下段())){genzainojokyo.set区分変更6ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要介護2_下段())){genzainojokyo.set区分変更6ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要介護3_下段())){genzainojokyo.set区分変更6ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要介護4_下段())){genzainojokyo.set区分変更6ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要介護5_下段())){genzainojokyo.set区分変更6ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要支援1_下段())){genzainojokyo.set区分変更6ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_要支援2_下段())){genzainojokyo.set区分変更6ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更6ヶ月_計_下段())){genzainojokyo.set区分変更6ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要介護1_下段())){genzainojokyo.set区分変更その他_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要介護2_下段())){genzainojokyo.set区分変更その他_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要介護3_下段())){genzainojokyo.set区分変更その他_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要介護4_下段())){genzainojokyo.set区分変更その他_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要介護5_下段())){genzainojokyo.set区分変更その他_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要支援1_下段())){genzainojokyo.set区分変更その他_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_要支援2_下段())){genzainojokyo.set区分変更その他_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更その他_計_下段())){genzainojokyo.set区分変更その他_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要介護1_下段())){genzainojokyo.set区分変更合計_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要介護2_下段())){genzainojokyo.set区分変更合計_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要介護3_下段())){genzainojokyo.set区分変更合計_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要介護4_下段())){genzainojokyo.set区分変更合計_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要介護5_下段())){genzainojokyo.set区分変更合計_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要支援1_下段())){genzainojokyo.set区分変更合計_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_要支援2_下段())){genzainojokyo.set区分変更合計_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get区分変更合計_計_下段())){genzainojokyo.set区分変更合計_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要介護1_下段())){genzainojokyo.set新規12ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要介護2_下段())){genzainojokyo.set新規12ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要介護3_下段())){genzainojokyo.set新規12ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要介護4_下段())){genzainojokyo.set新規12ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要介護5_下段())){genzainojokyo.set新規12ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要支援1_下段())){genzainojokyo.set新規12ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_要支援2_下段())){genzainojokyo.set新規12ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規12ヶ月_計_下段())){genzainojokyo.set新規12ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要介護1_下段())){genzainojokyo.set新規24ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要介護2_下段())){genzainojokyo.set新規24ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要介護3_下段())){genzainojokyo.set新規24ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要介護4_下段())){genzainojokyo.set新規24ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要介護5_下段())){genzainojokyo.set新規24ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要支援1_下段())){genzainojokyo.set新規24ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_要支援2_下段())){genzainojokyo.set新規24ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規24ヶ月_計_下段())){genzainojokyo.set新規24ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護1_下段())){genzainojokyo.set新規6ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護2_下段())){genzainojokyo.set新規6ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護3_下段())){genzainojokyo.set新規6ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護4_下段())){genzainojokyo.set新規6ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護5_下段())){genzainojokyo.set新規6ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護1_下段())){genzainojokyo.set新規6ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_要介護2_下段())){genzainojokyo.set新規6ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規6ヶ月_計_下段())){genzainojokyo.set新規6ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要介護1_下段())){genzainojokyo.set新規その他_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要介護2_下段())){genzainojokyo.set新規その他_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要介護3_下段())){genzainojokyo.set新規その他_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要介護4_下段())){genzainojokyo.set新規その他_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要介護5_下段())){genzainojokyo.set新規その他_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要支援1_下段())){genzainojokyo.set新規その他_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_要支援2_下段())){genzainojokyo.set新規その他_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規その他_計_下段())){genzainojokyo.set新規その他_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要介護1_下段())){genzainojokyo.set新規合計_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要介護2_下段())){genzainojokyo.set新規合計_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要介護3_下段())){genzainojokyo.set新規合計_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要介護4_下段())){genzainojokyo.set新規合計_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要介護5_下段())){genzainojokyo.set新規合計_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要支援1_下段())){genzainojokyo.set新規合計_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_要支援2_下段())){genzainojokyo.set新規合計_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get新規合計_計_下段())){genzainojokyo.set新規合計_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要介護1_下段())){genzainojokyo.set更新12ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要介護2_下段())){genzainojokyo.set更新12ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要介護3_下段())){genzainojokyo.set更新12ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要介護4_下段())){genzainojokyo.set更新12ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要介護5_下段())){genzainojokyo.set更新12ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要支援1_下段())){genzainojokyo.set更新12ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_要支援2_下段())){genzainojokyo.set更新12ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新12ヶ月_計_下段())){genzainojokyo.set更新12ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要介護1_下段())){genzainojokyo.set更新24ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要介護2_下段())){genzainojokyo.set更新24ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要介護3_下段())){genzainojokyo.set更新24ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要介護4_下段())){genzainojokyo.set更新24ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要介護5_下段())){genzainojokyo.set更新24ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要支援1_下段())){genzainojokyo.set更新24ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_要支援2_下段())){genzainojokyo.set更新24ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新24ヶ月_計_下段())){genzainojokyo.set更新24ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要介護1_下段())){genzainojokyo.set更新6ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要介護2_下段())){genzainojokyo.set更新6ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要介護3_下段())){genzainojokyo.set更新6ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要介護4_下段())){genzainojokyo.set更新6ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要介護5_下段())){genzainojokyo.set更新6ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要支援1_下段())){genzainojokyo.set更新6ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_要支援2_下段())){genzainojokyo.set更新6ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新6ヶ月_計_下段())){genzainojokyo.set更新6ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要介護1_下段())){genzainojokyo.set更新その他_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要介護2_下段())){genzainojokyo.set更新その他_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要介護3_下段())){genzainojokyo.set更新その他_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要介護4_下段())){genzainojokyo.set更新その他_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要介護5_下段())){genzainojokyo.set更新その他_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要支援1_下段())){genzainojokyo.set更新その他_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_要支援2_下段())){genzainojokyo.set更新その他_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新その他_計_下段())){genzainojokyo.set更新その他_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要介護1_下段())){genzainojokyo.set更新合計_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要介護2_下段())){genzainojokyo.set更新合計_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要介護3_下段())){genzainojokyo.set更新合計_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要介護4_下段())){genzainojokyo.set更新合計_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要介護5_下段())){genzainojokyo.set更新合計_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要支援1_下段())){genzainojokyo.set更新合計_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_要支援2_下段())){genzainojokyo.set更新合計_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get更新合計_計_下段())){genzainojokyo.set更新合計_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要介護1_下段())){genzainojokyo.set転入6ヶ月_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要介護2_下段())){genzainojokyo.set転入6ヶ月_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要介護3_下段())){genzainojokyo.set転入6ヶ月_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要介護4_下段())){genzainojokyo.set転入6ヶ月_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要介護5_下段())){genzainojokyo.set転入6ヶ月_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要支援1_下段())){genzainojokyo.set転入6ヶ月_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_要支援2_下段())){genzainojokyo.set転入6ヶ月_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入6ヶ月_計_下段())){genzainojokyo.set転入6ヶ月_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要介護1_下段())){genzainojokyo.set転入その他_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要介護2_下段())){genzainojokyo.set転入その他_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要介護3_下段())){genzainojokyo.set転入その他_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要介護4_下段())){genzainojokyo.set転入その他_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要介護5_下段())){genzainojokyo.set転入その他_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要支援1_下段())){genzainojokyo.set転入その他_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_要支援2_下段())){genzainojokyo.set転入その他_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入その他_計_下段())){genzainojokyo.set転入その他_計_下段(ゼロパーセント整数);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要介護1_下段())){genzainojokyo.set転入合計_要介護1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要介護2_下段())){genzainojokyo.set転入合計_要介護2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要介護3_下段())){genzainojokyo.set転入合計_要介護3_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要介護4_下段())){genzainojokyo.set転入合計_要介護4_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要介護5_下段())){genzainojokyo.set転入合計_要介護5_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要支援1_下段())){genzainojokyo.set転入合計_要支援1_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_要支援2_下段())){genzainojokyo.set転入合計_要支援2_下段(ゼロパーセント小第2位);}
+        if(RString.isNullOrEmpty(genzainojokyo.get転入合計_計_下段())){genzainojokyo.set転入合計_計_下段(ゼロパーセント整数);}
     }
 
     private void set全体合計_計_上段() {

@@ -66,6 +66,22 @@ public class ImageJohoMasking {
         return ResponseData.of(div).respond();
     }
 
+    public ResponseData<ImageJohoMaskingDiv> onActive(ImageJohoMaskingDiv div) {
+        if (ResponseHolder.getState().equals(DBE4050001StateName.検索結果表示.getName())
+                || ResponseHolder.getState().equals(DBE4050001StateName.完了処理遷移表示.getName())) {
+            List<ImageJohoMaskingResult> resultList;
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
+                ShinseishoKanriNoList shinseishoKanriNoList = ViewStateHolder.get(ViewStateKeys.申請書管理番号リスト, ShinseishoKanriNoList.class);
+                resultList = getHandler(div).get対象者forリスト(shinseishoKanriNoList);
+                getHandler(div).setDataGrid(resultList);
+            } else {
+                resultList = getHandler(div).get対象者for画面();
+                getHandler(div).setDataGrid(resultList);
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
     /**
      * 画面検索条件より、処理対象者データを取得する
      *
@@ -381,6 +397,11 @@ public class ImageJohoMasking {
         getHandler(div).releaseLock();
         getHandler(div).clear();
         return ResponseData.of(div).setState(DBE4050001StateName.初期表示);
+    }
+
+    public ResponseData<ImageJohoMaskingDiv> onClick_btnKekkaToroku(ImageJohoMaskingDiv div) {
+        getHandler(div).getKekkaTorokuParam();
+        return ResponseData.of(div).forwardWithEventName(DBE4050001TransitionEventName.認定調査結果登録に遷移).respond();
     }
 
     private ImageJohoMaskingHandler getHandler(ImageJohoMaskingDiv div) {

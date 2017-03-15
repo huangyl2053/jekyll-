@@ -60,8 +60,9 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
             if (帳票Map2 != null) {
                 帳票Map.putAll(帳票Map2);
             }
-            if (選択.equals(getParameter().getChoyoJimu_kumiawaseFlag())
-                    || 選択.equals(getParameter().getChohyoIin_kumiawaseFlag())) {
+            if (!選択.equals(getParameter().getTestPrintFlag())
+                    && (選択.equals(getParameter().getChoyoJimu_kumiawaseFlag())
+                    || 選択.equals(getParameter().getChohyoIin_kumiawaseFlag()))) {
                 executeStep(審査会情報更新);
             }
             executeStep(出力条件表出力);

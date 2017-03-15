@@ -14,14 +14,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.Iken
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6050001.dgIkenshoSakuseiHoshu_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -60,7 +62,7 @@ public class IkenshoSakuseiHoshuShokaiHandler {
         Decimal 診療費_合計 = Decimal.ZERO;
         Decimal 報酬_合計 = Decimal.ZERO;
         List<dgIkenshoSakuseiHoshu_Row> row_list = new ArrayList<>();
-        List<PersonalData> personalData = new ArrayList<>();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (IkenshoHoshuShokaiBusiness date : ikenshoHoshuShokaiBusinessList) {
             dgIkenshoSakuseiHoshu_Row row = new dgIkenshoSakuseiHoshu_Row();
             row.setIryoKikanCode(date.get主治医医療機関コード());
@@ -108,9 +110,13 @@ public class IkenshoSakuseiHoshuShokaiHandler {
             報酬_合計 = 報酬_合計.add(date.get主治医意見書報酬());
             row.setShinseishoKanriNo(date.get申請書管理番号());
             row.setIkenshoIraiRirekiNo(new RString(date.get主治医意見書作成依頼履歴番号()));
+            
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(date.get証記載保険者番号());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), date.get申請書管理番号());
+            accessLog.store(shoKisaiHokenshaNo, date.get被保険者番号(), expandedInfo);
             row_list.add(row);
         }
-        AccessLogger.log(AccessLogType.照会, personalData);
+        accessLog.flushBy(AccessLogType.照会);
 
         div.getTxtZaitakuShinki().setValue(在宅新規_合計);
         div.getTxtZaitakuKeizoku().setValue(在宅継続_合計);

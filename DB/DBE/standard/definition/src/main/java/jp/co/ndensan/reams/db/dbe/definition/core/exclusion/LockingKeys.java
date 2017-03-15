@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public enum LockingKeys {
 
     /**
+     * DBEShinseishoKanriNo + 申請書管理番号
+     */
+    申請書管理番号("DBEShinseishoKanriNo"),
+    /**
      * DBEShinsakaiNo + 介護認定審査会開催番号
      */
     介護認定審査会開催番号("DBEShinsakaiNo");

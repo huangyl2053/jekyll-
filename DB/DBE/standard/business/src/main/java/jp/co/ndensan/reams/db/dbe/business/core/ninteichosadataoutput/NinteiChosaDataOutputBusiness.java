@@ -129,5 +129,14 @@ public class NinteiChosaDataOutputBusiness {
     public RString get調査員氏名() {
         return entity.get調査員氏名();
     }
+    
+    /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return get証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.get証記載保険者番号();
+    }
 
 }

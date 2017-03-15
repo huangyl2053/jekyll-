@@ -337,6 +337,26 @@ public class PublicationShiryoShinsakaiDiv extends Panel {
     }
 
     @JsonIgnore
+    public Space getSpSpace5() {
+        return this.getPublishingCondition().getSpSpace5();
+    }
+
+    @JsonIgnore
+    public void  setSpSpace5(Space spSpace5) {
+        this.getPublishingCondition().setSpSpace5(spSpace5);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkTestPrint() {
+        return this.getPublishingCondition().getChkTestPrint();
+    }
+
+    @JsonIgnore
+    public void  setChkTestPrint(CheckBoxList chkTestPrint) {
+        this.getPublishingCondition().setChkTestPrint(chkTestPrint);
+    }
+
+    @JsonIgnore
     public RadioButton getRadSakuseiJokenType() {
         return this.getPublishingCondition().getRadSakuseiJokenType();
     }

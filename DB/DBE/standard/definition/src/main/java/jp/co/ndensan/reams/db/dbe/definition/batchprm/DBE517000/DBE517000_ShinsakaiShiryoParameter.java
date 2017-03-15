@@ -63,6 +63,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     private static final String CHOHYOIIN_TAISHOUSHAFALG = "chohyoIin_taishoushaFalg";
     private static final String CHOYOIIN_SONOTASIRYOFALG = "choyoIin_sonotaSiryoFalg";
     private static final String GOGITAIDUMMYFLAG = "gogitaiDummyFlag";
+    private static final String TESTPRINTFLAG = "testPrintFlag";
     private static final String BUNSHOKANRINO = "bunshoKanriNo";
 
     @BatchParameter(key = SHINSAKAIKAISAINO, name = "介護認定審査会開催番号")
@@ -129,6 +130,8 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
     private RString chohyoIin_hanteiFalg;
     @BatchParameter(key = GOGITAIDUMMYFLAG, name = "合議体ダミーフラグ")
     private RString gogitaiDummyFlag;
+    @BatchParameter(key = TESTPRINTFLAG, name = "テストプリントフラグ")
+    private RString testPrintFlag;
     @BatchParameter(key = BUNSHOKANRINO, name = "文書管理番号")
     private RString bunshoKanriNo;
 
@@ -173,6 +176,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
      * @param chohyoIin_ikenshoFalg 委員_主治医意見書フラグ
      * @param chohyoIin_hanteiFalg 委員_予備判定記入表フラグ
      * @param gogitaiDummyFlag 合議体ダミーフラグ
+     * @param testPrintFlag テストプリントフラグ
      * @param bunshoKanriNo 文書管理番号
      */
     public DBE517000_ShinsakaiShiryoParameter(
@@ -208,6 +212,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
             RString chohyoIin_tuutishoFalg,
             RString chohyoIin_hanteiFalg,
             RString gogitaiDummyFlag,
+            RString testPrintFlag,
             RString bunshoKanriNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
         this.shinsakaiKaisaiBasho = shinsakaiKaisaiBasho;
@@ -241,6 +246,7 @@ public class DBE517000_ShinsakaiShiryoParameter extends BatchParameterBase {
         this.chohyoIin_tuutishoFalg = chohyoIin_tuutishoFalg;
         this.chohyoIin_hanteiFalg = chohyoIin_hanteiFalg;
         this.gogitaiDummyFlag = gogitaiDummyFlag;
+        this.testPrintFlag = testPrintFlag;
         this.bunshoKanriNo = bunshoKanriNo;
     }
 
