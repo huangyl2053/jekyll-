@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
-import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai.ShinsakaiKaisaiParameter;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.IYokaigoNinteiShinsakaiIchiranListDiv.*;
@@ -181,11 +180,12 @@ public class KaigoNinteiShinsakai {
                 row.getTaishoNinzu().setValue(shinsakaiKaisai.get介護認定審査会実施人数());
                 row.setOnseiKiroku(shinsakaiKaisai.get音声記録());
                 row.getDataShutsuryoku().setValue(shinsakaiKaisai.getモバイルデータ出力年月日());
-                if (shinsakaiKaisai.is資料作成済フラグ()) {
-                    row.setShiryoSakuseiKubun(IsShiryoSakuseiZumi.toValue(shinsakaiKaisai.is資料作成済フラグ()).get名称());
-                } else {
-                    row.setShiryoSakuseiKubun(RString.EMPTY);
-                }
+//                if (shinsakaiKaisai.is資料作成済フラグ()) {
+//                    row.setShiryoSakuseiKubun(IsShiryoSakuseiZumi.toValue(shinsakaiKaisai.is資料作成済フラグ()).get名称());
+//                } else {
+//                    row.setShiryoSakuseiKubun(RString.EMPTY);
+//                }
+                row.setShiryoSakuseiKubun(shinsakaiKaisai.get資料作成状況());
                 if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                     row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get画面表示名称());
                 } else {

@@ -180,7 +180,22 @@
                 shinsakaiKaisaiYoteiJoho."mobileDataOutputYMD" AS "shinsakaiKaisaiYoteiJoho_mobileDataOutputYMD",
                 shinsakaiKaisaiYoteiJoho."shiryoSakuseiZumiFlag" AS "shinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag",
                 shinsakaiKaisaiYoteiJoho."ShinsakaiShinchokuJokyo" AS "shinsakaiKaisaiYoteiJoho_ShinsakaiShinchokuJokyo",
-                gogitaiJoho."gogitaiDummyFlag" AS "gogitaiJoho_gogitaiDummyFlag"
+                gogitaiJoho."gogitaiDummyFlag" AS "gogitaiJoho_gogitaiDummyFlag",
+                CASE gogitaiJoho."gogitaiDummyFlag"
+                    WHEN true THEN (
+                        CASE
+                            WHEN DbT5504.shinsakaiShiryoMisakuseiKensu IS NULL THEN '割当なし'
+                            WHEN DbT5504.shinsakaiShiryoMisakuseiKensu = 0     THEN '作成済'
+                            ELSE '未作成あり'
+                        END
+                    ) ELSE (
+                        CASE
+                            WHEN DbT5502.shinsakaiShiryoMisakuseiKensu IS NULL THEN '割当なし'
+                            WHEN DbT5502.shinsakaiShiryoMisakuseiKensu = 0     THEN '作成済'
+                            ELSE '未作成あり'
+                        END
+                    )
+                END AS 資料作成
         FROM rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS shinsakaiKaisaiYoteiJoho
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS gogitaiJoho
                 ON gogitaiJoho."gogitaiNo" = shinsakaiKaisaiYoteiJoho."gogitaiNo"
@@ -194,6 +209,32 @@
                         FROM rgdb."DbT5512ShinsakaiOnseiJoho" AS shinsakaiOnseiJoho
                         GROUP BY shinsakaiOnseiJoho."shinsakaiKaisaiNo"	) AS TB1
                 ON TB1."shinsakaiKaisaiNo" = shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
+        LEFT JOIN (
+            SELECT
+                "shinsakaiKaisaiNo",
+                SUM (
+                    CASE WHEN "shinsakaiShiryoSakuseiYMD" IS NULL THEN 1
+                         WHEN "shinsakaiShiryoSakuseiYMD" = '' THEN 1
+                         ELSE 0 END
+                ) AS shinsakaiShiryoMisakuseiKensu
+            FROM
+                rgdb."DbT5502ShinsakaiWariateJoho"
+            GROUP BY "shinsakaiKaisaiNo"
+        ) AS DbT5502
+            ON DbT5502."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
+        LEFT JOIN (
+            SELECT
+                "shinsakaiKaisaiNo",
+                SUM (
+                    CASE WHEN "shinsakaiShiryoSakuseiYMD" IS NULL THEN 1
+                         WHEN "shinsakaiShiryoSakuseiYMD" = '' THEN 1
+                         ELSE 0 END
+                ) AS shinsakaiShiryoMisakuseiKensu
+            FROM
+                rgdb."DbT5504ShinsakaiWariateJohoKenshu"
+            GROUP BY "shinsakaiKaisaiNo"
+        ) AS DbT5504
+            ON DbT5504."shinsakaiKaisaiNo" = shinsakaikaisaiyoteijoho."shinsakaiKaisaiNo"
         WHERE shinsakaiKaisaiYoteiJoho."isDeleted" = false
           AND shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo" = #{審査会開催番号}
     </select>

@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HanteiKekkaShokiHyoji {
 
     /**
-     * コード:01 名称:認定 略称:定義なし
+     * コード:1 名称:なし 略称:定義なし
      */
     なし("1", ""),
     /**
-     * コード:11 名称:未審査 略称:定義なし
+     * コード:01 名称:認定 略称:定義なし
      */
     認定("01", "認定");
 
