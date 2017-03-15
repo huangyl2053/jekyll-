@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class CenterSoshinTaishoshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,12 +25,12 @@ public class CenterSoshinTaishoshaIchiranDiv extends Panel {
      */
     @JsonProperty("txtKanryouKano")
     private TextBox txtKanryouKano;
-    @JsonProperty("ccdHokensyaList")
-    private HokenshaListDiv ccdHokensyaList;
     @JsonProperty("dgNinteiTaskList")
     private DataGrid<dgNinteiTaskList_Row> dgNinteiTaskList;
     @JsonProperty("txtDispMax")
     private TextBoxNum txtDispMax;
+    @JsonProperty("ccdHokensyaList")
+    private HokenshaListDiv ccdHokensyaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,15 +54,6 @@ public class CenterSoshinTaishoshaIchiranDiv extends Panel {
     @JsonProperty("txtKanryouKano")
     public void setTxtKanryouKano(TextBox txtKanryouKano) {
         this.txtKanryouKano = txtKanryouKano;
-    }
-
-    /*
-     * getccdHokensyaList
-     * @return ccdHokensyaList
-     */
-    @JsonProperty("ccdHokensyaList")
-    public IHokenshaListDiv getCcdHokensyaList() {
-        return ccdHokensyaList;
     }
 
     /*
@@ -99,6 +90,15 @@ public class CenterSoshinTaishoshaIchiranDiv extends Panel {
     @JsonProperty("txtDispMax")
     public void setTxtDispMax(TextBoxNum txtDispMax) {
         this.txtDispMax = txtDispMax;
+    }
+
+    /*
+     * getccdHokensyaList
+     * @return ccdHokensyaList
+     */
+    @JsonProperty("ccdHokensyaList")
+    public IHokenshaListDiv getCcdHokensyaList() {
+        return ccdHokensyaList;
     }
 
     // </editor-fold>
