@@ -203,7 +203,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
 
     private void edit申請区分(NinteiChosaTokusokujoReportSource source) {
         RString 申請区分コード = entity.getNinteiShinseiShinseijiKubunCode().getColumnValue();
-        RString 申請区分 = NinteiShinseiShinseijiKubunCode.toValue(申請区分コード).get名称();
+        RString 申請区分 = NinteiShinseiShinseijiKubunCode.toValue(申請区分コード).get略称();
 
         source.shinseiKubun = 申請区分;
     }

@@ -221,7 +221,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
                 entity.getTemp_申請区分コード() == null
-                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.getTemp_申請区分コード().getColumnValue()).get名称(),
+                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.getTemp_申請区分コード().getColumnValue()).get略称(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
                 entity.get主治医意見書依頼情報().getIkenshoSakuseiIraiYMD(),
