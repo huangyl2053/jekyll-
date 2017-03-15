@@ -53,6 +53,7 @@ public class IkenshogetHandler {
     private static final RString SELECTED_KEY2 = new RString("3");
     private static final RString 主治医意見書入手を完了するボタン = new RString("btnIkenshoNyushuKanryo");
     private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
+    private static final RString UIContainer_DBEUC20702 = new RString("DBEUC20702");
 
     /**
      * コンストラクタです。
@@ -72,6 +73,9 @@ public class IkenshogetHandler {
         RDate システム日付 = RDate.getNowDate();
         RString 状態区分 = DbBusinessConfig.get(ConfigNameDBE.基本運用_対象者一覧表示区分, システム日付, SubGyomuCode.DBE認定支援);
         if (UIContainer_DBEUC23101.equals(ResponseHolder.getUIContainerId())) {
+            状態区分 = SELECTED_KEY1;
+            div.getRadJyotaiKubun().setDisabled(true);
+        } else if (UIContainer_DBEUC20702.equals(ResponseHolder.getUIContainerId())) {
             状態区分 = SELECTED_KEY1;
             div.getRadJyotaiKubun().setDisabled(true);
         } else {

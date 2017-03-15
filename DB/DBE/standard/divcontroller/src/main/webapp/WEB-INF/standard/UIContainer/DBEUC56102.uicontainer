@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC56102",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "完了処理・センター送信",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0220001",
+     "toLayoutTitle": "センター送信",
+     "toState": "完了のみ"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0220001",
+     "layoutTitle": "基本運用・センター送信",
+     "eventName": "完了状態",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GetsureiShoriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -107,11 +107,6 @@ public class GetsureiShoriDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCcdHokensyaList() {
-        return this.getCenterSoshinTaishoshaIchiran().getCcdHokensyaList();
-    }
-
-    @JsonIgnore
     public DataGrid<dgNinteiTaskList_Row> getDgNinteiTaskList() {
         return this.getCenterSoshinTaishoshaIchiran().getDgNinteiTaskList();
     }
@@ -129,6 +124,11 @@ public class GetsureiShoriDiv extends Panel {
     @JsonIgnore
     public void  setTxtDispMax(TextBoxNum txtDispMax) {
         this.getCenterSoshinTaishoshaIchiran().setTxtDispMax(txtDispMax);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokensyaList() {
+        return this.getCenterSoshinTaishoshaIchiran().getCcdHokensyaList();
     }
 
     @JsonIgnore

@@ -56,6 +56,7 @@ public class NinteichosaKekkaNyushuHandler {
     private static final RString 調査結果を登録するボタン = new RString("btnKekkaTouroku");
     private static final RString 調査票入手を完了するボタン = new RString("btnChousaResultKanryo");
     private static final RString UIContainer_DBEUC22101 = new RString("DBEUC22101");
+    private static final RString UIContainer_DBEUC20602 = new RString("DBEUC20602");
     private static final RString 概況基本調査 = new RString("1");
     private static final RString 概況基本調査_特記 = new RString("2");
     private static final RString 概況基本調査_特記_概況特記 = new RString("3");
@@ -185,6 +186,9 @@ public class NinteichosaKekkaNyushuHandler {
             div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(状態区分);
         }
         if (UIContainer_DBEUC22101.equals(ResponseHolder.getUIContainerId())) {
+            div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(KanryoShoriStatus.完了可能.getコード());
+            div.getNinteichosakekkainput().getRadJotaiKubun().setDisabled(true);
+        } else if(UIContainer_DBEUC20602.equals(ResponseHolder.getUIContainerId())) {
             div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(KanryoShoriStatus.完了可能.getコード());
             div.getNinteichosakekkainput().getRadJotaiKubun().setDisabled(true);
         } else {

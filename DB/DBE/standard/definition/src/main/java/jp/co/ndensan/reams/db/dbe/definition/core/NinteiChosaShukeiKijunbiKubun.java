@@ -24,7 +24,7 @@ public enum NinteiChosaShukeiKijunbiKubun {
     /**
      * 入手日を表します。
      */
-    入手日("3", "調査入手日");
+    受領日("3", "調査票受領日");
 
     private final RString kubun;
     private final RString title;

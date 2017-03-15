@@ -66,6 +66,7 @@ public class Ikenshoget {
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
+    private static final RString UIContainer_DBEUC20702 = new RString("DBEUC20702");
 
     /**
      * 完了処理・主治医意見書入手の初期化。(オンロード)<br/>
@@ -76,6 +77,8 @@ public class Ikenshoget {
     public ResponseData<IkenshogetDiv> onLoad(IkenshogetDiv div) {
         getHandler(div).initialize();
         if (UIContainer_DBEUC23101.equals(ResponseHolder.getUIContainerId())) {
+            return ResponseData.of(div).setState(DBE2070001StateName.登録_完了可能);
+        } else if (UIContainer_DBEUC20702.equals(ResponseHolder.getUIContainerId())) {
             return ResponseData.of(div).setState(DBE2070001StateName.登録_完了可能);
         }
         return ResponseData.of(div).setState(DBE2070001StateName.登録);

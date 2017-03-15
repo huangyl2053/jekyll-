@@ -11,15 +11,9 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijihanteisumidataif.I
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIf09AEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIfEucEntity;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -927,20 +921,6 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set前回結果モニター測定(entity.get前回結果モニター測定());
         eucEntity.set前回結果じょくそうの処置(entity.get前回結果じょくそうの処置());
         eucEntity.set前回結果カテーテル(entity.get前回結果カテーテル());
-    }
-
-    /**
-     * アクセスログを出力するメッソドです。
-     *
-     * @param 被保険者番号 RString
-     */
-    public void getアクセスログ(RString 被保険者番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(被保険者番号));
-    }
-
-    private PersonalData toPersonalData(RString 被保険者番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

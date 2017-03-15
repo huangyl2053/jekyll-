@@ -112,7 +112,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         HIHOKENSHANOLIST.add(entity.getHihokenshaNo());
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo());
-        accessLog.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(),expandedInfo);
+        accessLog.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(), expandedInfo);
     }
 
     @Override
@@ -121,20 +121,6 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
         manager.spool(eucFilePath);
         outputJokenhyoFactory();
         accessLog.flushBy(AccessLogType.照会);
-    }
-
-    /**
-     * アクセスログを出力するメッソドです。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     */
-    public void getアクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     private void outputJokenhyoFactory() {
