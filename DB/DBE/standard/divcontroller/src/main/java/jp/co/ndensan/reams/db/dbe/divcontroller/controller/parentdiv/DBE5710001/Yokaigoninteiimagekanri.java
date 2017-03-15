@@ -4,6 +4,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ShinsakaiWariateHistories;
+import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import static jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages.審査会結果登録済み_イメージ削除不可;
 import static jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages.審査会資料作成済みイメージ_削除確認;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
@@ -20,10 +21,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -63,11 +66,22 @@ public class Yokaigoninteiimagekanri {
      * @return ResponseData
      */
     public ResponseData<YokaigoninteiimagekanriDiv> onLoad(YokaigoninteiimagekanriDiv div) {
-        DbAccessLogger accessLog = new DbAccessLogger();
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+
         ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
+        if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(申請書管理番号))) {
+            div.getBtnGaikyoTokki().setDisplayNone(!uses概況特記());
+            div.setReadOnly(true);
+            setDisabledCommonBtnField(true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
+
         if (イメージ管理情報.get申請書管理番号() != null && !イメージ管理情報.get申請書管理番号().isEmpty()) {
             div.setHdnShinseishoKanriNo(イメージ管理情報.get申請書管理番号().value());
             div.setHdnHihokenshaNo(イメージ管理情報.get被保険者番号());
@@ -95,6 +109,7 @@ public class Yokaigoninteiimagekanri {
         div.getBtnGaikyoTokki().setDisplayNone(!uses概況特記());
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), イメージ管理情報.get申請書管理番号().value());
+        DbAccessLogger accessLog = new DbAccessLogger();
         accessLog.store(shoKisaiHokenshaNo, イメージ管理情報.get被保険者番号(), expandedInfo);
         accessLog.flushBy(AccessLogType.照会);
         return ResponseData.of(div).respond();
@@ -121,6 +136,10 @@ public class Yokaigoninteiimagekanri {
         return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.要介護認定イメージ情報出力へ).respond();
     }
 
+    private static void releaseRealInitialLock() {
+        RealInitialLocker.release(LockingKeys.申請書管理番号.appended(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class)));
+    }
+
     /**
      * btnReSearch処理。
      *
@@ -129,7 +148,19 @@ public class Yokaigoninteiimagekanri {
      */
     public ResponseData<YokaigoninteiimagekanriDiv> btnReSearch(YokaigoninteiimagekanriDiv div) {
         ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
+        releaseRealInitialLock();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 検索結果一覧へ戻るボタンクリック時の処理です。
+     *
+     * @param div {@link YokaigoninteiimagekanriDiv}
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onClick_btnSearchResult(YokaigoninteiimagekanriDiv div) {
+        releaseRealInitialLock();
+        return ResponseData.of(div).forwardWithEventName(DBE5710001TransitionEventName.一覧に戻る).respond();
     }
 
     /**
