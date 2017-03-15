@@ -60,17 +60,17 @@ public class IchijihanteiekkahyoTokkijiko {
      *
      * @param 特記情報List 特記情報List
      * @param kyotsuEntity kyotsuEntity
-     * @param ファイルパス ファイルパス
+     * @param path ローカルコピーしたファイルパス
      */
     public IchijihanteiekkahyoTokkijiko(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List,
-            ShinsakaiSiryoKyotsuEntity kyotsuEntity, RString ファイルパス) {
+            ShinsakaiSiryoKyotsuEntity kyotsuEntity, RString path) {
         特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(
                 ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.特記情報List = 特記情報List;
         this.kyotsuEntity = kyotsuEntity;
-        this.path = ファイルパス;
+        this.path = path;
     }
 
     /**
@@ -152,13 +152,11 @@ public class IchijihanteiekkahyoTokkijiko {
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(get特記事項テキスト_イメージ区分())) {
                     短冊情報.setテキストとイメージ(entity.getTokkiJiko());
                 } else {
-                    RString filePath = copySharedFilesBatch(kyotsuEntity.getImageSharedFileId(),
-                            kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo()));
                     if (kyotsuEntity.isJimukyoku()) {
-                        短冊情報.setテキストとイメージ(DBEImageUtil.getOriginalImageFilePath(filePath,
+                        短冊情報.setテキストとイメージ(DBEImageUtil.getOriginalImageFilePath(path,
                                 getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                     } else {
-                        短冊情報.setテキストとイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(filePath,
+                        短冊情報.setテキストとイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path,
                                 getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
                     }
                 }
@@ -175,15 +173,13 @@ public class IchijihanteiekkahyoTokkijiko {
      */
     public List<RString> getTokkiImg() {
         List<RString> filePathList = new ArrayList<>();
-        RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
-        RString filePath = copySharedFilesBatch(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
         List<RString> 特記事項全面イメージファイルリスト = get特記事項全面イメージファイルリスト();
         for (RString 特記事項全面イメージファイル : 特記事項全面イメージファイルリスト) {
             RString tokkiImgPath;
             if (kyotsuEntity.isJimukyoku()) {
-                tokkiImgPath = DBEImageUtil.getOriginalImageFilePath(filePath, 特記事項全面イメージファイル);
+                tokkiImgPath = DBEImageUtil.getOriginalImageFilePath(path, 特記事項全面イメージファイル);
             } else {
-                tokkiImgPath = DBEImageUtil.getMaskOrOriginalImageFilePath(filePath, 特記事項全面イメージファイル);
+                tokkiImgPath = DBEImageUtil.getMaskOrOriginalImageFilePath(path, 特記事項全面イメージファイル);
             }
             if (!RString.isNullOrEmpty(tokkiImgPath)) {
                 filePathList.add(tokkiImgPath);
@@ -280,17 +276,6 @@ public class IchijihanteiekkahyoTokkijiko {
             return イメージファイル.toRString();
         }
         return RString.EMPTY;
-    }
-
-    private RString copySharedFilesBatch(RDateTime sharedFileId, RString filename) {
-        if (sharedFileId == null || RString.isNullOrEmpty(filename)) {
-            return RString.EMPTY;
-        }
-        try {
-            return DBEImageUtil.copySharedFiles(sharedFileId, filename, path);
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
     }
 
     private RString get特記事項テキスト(Code 厚労省IF識別コード, RString 調査特記事項番号, int 特記事項連番) {

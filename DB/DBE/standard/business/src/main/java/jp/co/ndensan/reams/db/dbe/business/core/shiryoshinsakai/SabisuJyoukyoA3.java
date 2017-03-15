@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg99A;
+import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.NotesComparisonResultChosaIkensho;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.NitijouSeikatsu;
@@ -45,6 +47,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJis
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku01;
@@ -152,11 +155,11 @@ public class SabisuJyoukyoA3 {
      * @param 介護給付 介護給付
      * @param サービス状況フラグ サービス状況フラグ
      * @param 共通情報 ShinsakaiSiryoKyotsuEntity
-     * @param ファイルパス ファイルパス
+     * @param path ローカルコピーしたファイルパス
      */
     public void setサービスの状況(ItiziHanteiEntity entity, IchijihanteikekkahyoA3Entity 項目,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付, List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付,
-            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, ShinsakaiSiryoKyotsuEntity 共通情報, RString ファイルパス) {
+            DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ, ShinsakaiSiryoKyotsuEntity 共通情報, RString path) {
         RStringBuilder builder;
         if (予防給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("予防給付・総合事業"));
@@ -226,7 +229,6 @@ public class SabisuJyoukyoA3 {
                         break;
                 }
             }
-            setサービス(項目, 共通情報, ファイルパス);
         } else if (介護給付サービス.equals(entity.getServiceKubunCode())) {
             項目.setSabisuKubun(new RString("介護給付"));
             for (DbT5207NinteichosahyoServiceJokyoEntity dbt5207Entity : 介護給付) {
@@ -296,11 +298,10 @@ public class SabisuJyoukyoA3 {
                         break;
                 }
             }
-            setサービス(項目, 共通情報, ファイルパス);
         } else {
             項目.setSabisuKubun(new RString("なし"));
-            setサービス(項目, null, ファイルパス);
         }
+        setサービス(項目, 共通情報, path);
         項目.setServiceKubunCode(entity.getServiceKubunCode());
     }
 
@@ -561,61 +562,15 @@ public class SabisuJyoukyoA3 {
         return RString.EMPTY;
     }
 
-    private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報, RString ファイルパス) {
-        if (共通情報 == null) {
-            項目.set施設名テキスト(RString.EMPTY);
-            項目.set施設名イメージ(RString.EMPTY);
-            項目.set住所テキスト(RString.EMPTY);
-            項目.set住所イメージ(RString.EMPTY);
-            項目.set電話番号テキスト(RString.EMPTY);
-            項目.set電話番号イメージ(RString.EMPTY);
+    private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報, RString path) {
+        if (TokkijikoTextImageKubun.テキスト.getコード().equals(共通情報.getGaikyoChosaTextImageKubun())) {
+            項目.set施設名テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei()) ? RString.EMPTY : 共通情報.getRiyoShisetsuShimei());
+            項目.set住所テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho()) ? RString.EMPTY : 共通情報.getRiyoShisetsuJusho());
+            項目.set電話番号テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo()) ? RString.EMPTY : 共通情報.getRiyoShisetsuTelNo());
         } else {
-            RString 共有ファイル名 = 共通情報.getShoKisaiHokenshaNo().concat(共通情報.getHihokenshaNo());
-            RString path = getFilePath(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
-            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei())) {
-                項目.set施設名テキスト(共通情報.getRiyoShisetsuShimei());
-            } else {
-                項目.set施設名イメージ(共有ファイルを引き出す(path, 施設名ファイル名));
-            }
-            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho())) {
-                項目.set住所テキスト(共通情報.getRiyoShisetsuJusho());
-            } else {
-                項目.set住所イメージ(共有ファイルを引き出す(path, 住所ファイル名));
-            }
-            if (!RString.isNullOrEmpty(共通情報.getRiyoShisetsuTelNo())) {
-                項目.set電話番号テキスト(共通情報.getRiyoShisetsuTelNo());
-            } else {
-                項目.set電話番号イメージ(共有ファイルを引き出す(path, 電話ファイル名));
-            }
-        }
-    }
-
-    private RString 共有ファイルを引き出す(RString path, RString fileName) {
-        RString fileFullPath = getFilePath(path, fileName);
-        if (!RString.isNullOrEmpty(fileFullPath)) {
-            return fileFullPath;
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RString 出力イメージフォルダパス, RString ファイル名) {
-        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
-            return Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名);
-        }
-        return RString.EMPTY;
-    }
-
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName, RString ファイルパス) {
-        if (sharedFileId == null || RString.isNullOrEmpty(sharedFileName)) {
-            return RString.EMPTY;
-        }
-        ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        try {
-            return new RString(SharedFile.copyToLocal(descriptor, new FilesystemPath(ファイルパス)).getCanonicalPath());
-        } catch (Exception e) {
-            return RString.EMPTY;
+            項目.set施設名イメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, ImageFileName.施設名.getImageFileName()));
+            項目.set住所イメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, ImageFileName.施設住所.getImageFileName()));
+            項目.set電話番号イメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, ImageFileName.施設電話番号.getImageFileName()));
         }
     }
 
@@ -1170,9 +1125,8 @@ public class SabisuJyoukyoA3 {
      *
      * @param 項目 IchijihanteikekkahyoA3Entity
      * @param entity ItiziHanteiEntity
-     * @param ファイルパス ファイルパス
      */
-    public void set項目(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity, RString ファイルパス) {
+    public void set項目(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
         項目.set前々回認定有効期間(set有効期間(entity.getZzNijiHanteiNinteiYukoKikan()));
