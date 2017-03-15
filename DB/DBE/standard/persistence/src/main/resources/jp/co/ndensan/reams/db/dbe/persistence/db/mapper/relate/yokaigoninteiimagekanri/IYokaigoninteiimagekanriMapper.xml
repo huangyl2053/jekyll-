@@ -40,7 +40,10 @@
         LEFT JOIN
             rgdb."DbT5201NinteichosaIraiJoho" T5201
             ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-            AND T5101."logicalDeletedFlag" = FALSE
+            AND (
+                   T5201."logicalDeletedFlag" = FALSE
+                OR T5201."logicalDeletedFlag" IS NULL
+            )
             AND NOT EXISTS (
                 SELECT
                     'X'
@@ -55,7 +58,7 @@
             rgdb."DbT5301ShujiiIkenshoIraiJoho" T5301
             ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
             AND (
-                T5301."logicalDeletedFlag" = FALSE
+                   T5301."logicalDeletedFlag" = FALSE
                 OR T5301."logicalDeletedFlag" is NULL
             )
             AND NOT EXISTS (

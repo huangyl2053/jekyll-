@@ -8,27 +8,37 @@ package jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri;
 import java.util.Objects;
 
 /**
- *
+ * イメージ情報管理での、イメージ削除やイメージ出力の処理対象です。
  */
-@lombok.AllArgsConstructor(access = lombok.AccessLevel.PACKAGE)
-public class OperationTarget {
+public final class OperationTarget {
 
     private final ImageType aType;
-    private final boolean deletesMaskOnlyFlag;
+    private final DeletionMethod aDeletionMethod;
 
+    OperationTarget(ImageType aType, DeletionMethod aDeletionMethod) {
+        this.aType = aType;
+        this.aDeletionMethod = aDeletionMethod;
+    }
+
+    /**
+     * @return イメージの種類
+     */
     public ImageType type() {
         return this.aType;
     }
 
-    public boolean deletesMaskOnly() {
-        return this.deletesMaskOnlyFlag;
+    /**
+     * @return 削除の方法
+     */
+    public DeletionMethod deletionMethod() {
+        return this.aDeletionMethod;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.aType);
-        hash = 67 * hash + (this.deletesMaskOnlyFlag ? 1 : 0);
+        hash = 41 * hash + Objects.hashCode(this.aType);
+        hash = 41 * hash + Objects.hashCode(this.aDeletionMethod);
         return hash;
     }
 
@@ -44,10 +54,7 @@ public class OperationTarget {
         if (this.aType != other.aType) {
             return false;
         }
-        if (this.deletesMaskOnlyFlag != other.deletesMaskOnlyFlag) {
-            return false;
-        }
-        return true;
+        return this.aDeletionMethod == other.aDeletionMethod;
     }
 
 }

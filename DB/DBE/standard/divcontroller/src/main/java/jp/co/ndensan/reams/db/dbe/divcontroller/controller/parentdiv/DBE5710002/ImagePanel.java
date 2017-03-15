@@ -48,7 +48,6 @@ public class ImagePanel {
     private static final RString 調査票概況 = new RString("2");
     private static final RString 主治医意見書 = new RString("3");
     private static final RString その他資料 = new RString("4");
-    private static final RString 拡張子 = new RString(".png");
 
     /**
      * 要介護認定イメージ情報出力画面をloadします。
@@ -157,17 +156,6 @@ public class ImagePanel {
         for (RString fileName : fileList) {
             if (Directory.exists(Path.combinePath(localCopyPath, fileName))) {
                 result.add(Path.combinePath(localCopyPath, fileName));
-            }
-        }
-        return result.isEmpty() ? Collections.EMPTY_LIST : result;
-    }
-
-    private List<RString> existFileList(List<RString> fileList, ReadOnlySharedFileEntryDescriptor ro_sfed) {
-        List<RString> result = new ArrayList<>();
-        for (RString fileName : fileList) {
-            File file = new File(ro_sfed.getDirectAccessPath().concat("\\IMG").concat(fileName).toString());
-            if (file.exists()) {
-                result.add(fileName);
             }
         }
         return result.isEmpty() ? Collections.EMPTY_LIST : result;

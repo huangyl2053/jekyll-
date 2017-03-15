@@ -13,9 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n3423
  */
-public class ImageFileItem {
+public final class ImageFileItem {
 
     private static final RString イメージファイル原本名 = new RString("_BAK");
+
+    private ImageFileItem() {
+    }
 
     /**
      * 概況調査に関するイメージファイルの名前のリストを返します。

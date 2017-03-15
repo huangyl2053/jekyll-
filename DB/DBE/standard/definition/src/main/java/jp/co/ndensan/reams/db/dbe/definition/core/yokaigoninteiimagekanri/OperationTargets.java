@@ -5,16 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Map;
 
 /**
- *
+ * 複数の{@link OperationTarget}を保持します。
  */
 public final class OperationTargets implements Iterable<OperationTarget> {
 
-    private final Set<OperationTarget> targets;
+    private final Map<ImageType, OperationTarget> targets;
 
     private OperationTargets(Builder builder) {
         this.targets = builder.targets;
@@ -22,22 +22,44 @@ public final class OperationTargets implements Iterable<OperationTarget> {
 
     @Override
     public Iterator<OperationTarget> iterator() {
-        return this.targets.iterator();
+        return this.targets.values().iterator();
     }
 
+    /**
+     * @param imageType イメージの種類
+     * @return 指定された種類のイメージを含む場合、{@code true}.
+     */
+    public boolean contains(ImageType imageType) {
+        return this.targets.containsKey(imageType);
+    }
+
+    /**
+     * {@link OperationTargets}のビルダです。
+     */
     public static final class Builder {
 
-        private final Set<OperationTarget> targets;
+        private final Map<ImageType, OperationTarget> targets;
 
+        /**
+         * インスタンスを生成します。
+         */
         public Builder() {
-            this.targets = new HashSet<>();
+            this.targets = new HashMap<>();
         }
 
-        public Builder add(ImageType type, boolean deletesMaskOnly) {
-            this.targets.add(new OperationTarget(type, deletesMaskOnly));
+        /**
+         * @param type イメージの種類
+         * @param deletionMethod 削除の方法
+         * @return ビルダ
+         */
+        public Builder add(ImageType type, DeletionMethod deletionMethod) {
+            this.targets.put(type, new OperationTarget(type, deletionMethod));
             return this;
         }
 
+        /**
+         * @return {@link OperationTargets}
+         */
         public OperationTargets build() {
             return new OperationTargets(this);
         }
