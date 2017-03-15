@@ -14,6 +14,7 @@
         , T5101."hihokenshaName"
         , T5101."ninteiShinseiYMD"
         , T5101."ninteiShinseiShinseijiKubunCode"
+        , T5501."shinsakaiKaisaiNo"
         , T5501."shinsakaiKaisaiYoteiYMD"
         , T5302."ikenshoJuryoYMD"
         , T5202."ninteichosaJuryoYMD"
@@ -249,7 +250,10 @@
                 <if test="is日付範囲終了">  
                     AND C."ninteiShinseiYMD" <![CDATA[<=]]> #{日付範囲終了}
                 </if>
-            </if>                                                                          
+            </if>       
+            <if test="is審査会開催番号">
+                AND C."shinsakaiKaisaiNo" = #{審査会開催番号}
+            </if>                                                                   
         </if>                                                                                
         ORDER BY C."ninteiShinseiYMD"  
         LIMIT #{最大表示件数}

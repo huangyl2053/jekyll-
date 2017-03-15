@@ -211,6 +211,16 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtShinsakaiKaisaiNo() {
+        return this.getShoriTaishoshaKensakuShiji().getTxtShinsakaiKaisaiNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtShinsakaiKaisaiNo(TextBoxNum txtShinsakaiKaisaiNo) {
+        this.getShoriTaishoshaKensakuShiji().setTxtShinsakaiKaisaiNo(txtShinsakaiKaisaiNo);
+    }
+
+    @JsonIgnore
     public Button getBtnClear() {
         return this.getShoriTaishoshaKensakuShiji().getBtnClear();
     }

@@ -149,6 +149,7 @@ public class ImageJohoMaskingHandler {
                 div.getDdlKensakuTaisho().getSelectedKey(),
                 null,
                 div.getTxtHihokenshaNumber().getValue(),
+                div.getTxtShinsakaiKaisaiNo().getText(),
                 div.getTxtMaxDisp().getValue(),
                 new RString("1").equals(マスキングタイミング),
                 !div.getChkMasking().getSelectedKeys().isEmpty());
@@ -169,6 +170,7 @@ public class ImageJohoMaskingHandler {
                 FlexibleDate.MAX,
                 RString.EMPTY,
                 shinseishoKanriNoList.getShinseishoKanriNoS(),
+                RString.EMPTY,
                 RString.EMPTY,
                 div.getTxtMaxDisp().getValue(),
                 new RString("1").equals(マスキングタイミング),

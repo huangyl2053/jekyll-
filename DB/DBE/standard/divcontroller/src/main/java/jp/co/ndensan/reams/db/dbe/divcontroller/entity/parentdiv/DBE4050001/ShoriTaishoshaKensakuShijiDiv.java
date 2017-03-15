@@ -31,6 +31,8 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     private TextBoxDateRange txtSearchYMD;
     @JsonProperty("chkMasking")
     private CheckBoxList chkMasking;
+    @JsonProperty("txtShinsakaiKaisaiNo")
+    private TextBoxNum txtShinsakaiKaisaiNo;
     @JsonProperty("btnClear")
     private Button btnClear;
     @JsonProperty("txtMaxDisp")
@@ -114,6 +116,24 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("chkMasking")
     public void setChkMasking(CheckBoxList chkMasking) {
         this.chkMasking = chkMasking;
+    }
+
+    /*
+     * gettxtShinsakaiKaisaiNo
+     * @return txtShinsakaiKaisaiNo
+     */
+    @JsonProperty("txtShinsakaiKaisaiNo")
+    public TextBoxNum getTxtShinsakaiKaisaiNo() {
+        return txtShinsakaiKaisaiNo;
+    }
+
+    /*
+     * settxtShinsakaiKaisaiNo
+     * @param txtShinsakaiKaisaiNo txtShinsakaiKaisaiNo
+     */
+    @JsonProperty("txtShinsakaiKaisaiNo")
+    public void setTxtShinsakaiKaisaiNo(TextBoxNum txtShinsakaiKaisaiNo) {
+        this.txtShinsakaiKaisaiNo = txtShinsakaiKaisaiNo;
     }
 
     /*
