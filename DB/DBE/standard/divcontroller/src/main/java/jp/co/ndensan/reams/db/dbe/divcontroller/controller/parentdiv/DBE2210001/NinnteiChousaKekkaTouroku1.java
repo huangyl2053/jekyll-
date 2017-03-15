@@ -89,6 +89,8 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString KEY6 = new RString("特別な医療群");
     private static final RString KEY7 = new RString("自立度群");
     private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
+    private static final RString UICONTAINERID_DBEUC20801 = new RString("DBEUC20801");
+    private static final RString UICONTAINERID_DBEUC40501 = new RString("DBEUC40501");
     private static final RString 概況特記出力しない = new RString("2");
     private static final RString 認定調査結果入手_必須調査票_特記事項不要 = new RString("1");
 
@@ -118,10 +120,13 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = InstanceProvider.create(NinteichosaIraiJohoManager.class);
         NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(申請書管理番号, 認定調査履歴番号);
-        if (認定調査依頼情報 == null) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.存在しない.getMessage().getCode(),
-                    UrErrorMessages.存在しない.getMessage().replace("認定調査依頼").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
+                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
+            if (認定調査依頼情報 == null) {
+                ErrorMessage message = new ErrorMessage(UrErrorMessages.存在しない.getMessage().getCode(),
+                        UrErrorMessages.存在しない.getMessage().replace("認定調査依頼").evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
         RString 厚労省IF識別コード = 認定調査依頼情報.get厚労省IF識別コード().value();
         ViewStateHolder.put(ViewStateKeys.厚労省IF識別コード, 厚労省IF識別コード);
@@ -159,17 +164,23 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
         boolean 審査会割当済 = shinsakaiWariateManager.get審査会割当データ(申請書管理番号);
-        if (審査会割当済) {
-            ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode(),
-                    DbeErrorMessages.審査会割当済のため処理不可.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
+                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
+            if (審査会割当済) {
+                ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode(),
+                        DbeErrorMessages.審査会割当済のため処理不可.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
         NinteiKanryoJohoManager ninteiKanryoJohoManager = InstanceProvider.create(NinteiKanryoJohoManager.class);
         NinteiKanryoJoho 認定完了情報 = ninteiKanryoJohoManager.get要介護認定完了情報(申請書管理番号);
-        if (認定完了情報.get要介護認定一次判定完了年月日() != null) {
-            InformationMessage message = new InformationMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode(),
-                    DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
+                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
+            if (認定完了情報.get要介護認定一次判定完了年月日() != null) {
+                InformationMessage message = new InformationMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode(),
+                        DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -646,7 +657,13 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(UrInformationMessages.削除終了.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に戻る).respond();
+
+            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.マスキングに戻る).respond();
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に戻る).respond();
+            }
         }
 
         boolean isDelete = !KEY_登録修正.equals(div.getRadUpdateKind().getSelectedKey());
@@ -696,7 +713,9 @@ public class NinnteiChousaKekkaTouroku1 {
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
-            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
                 if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                         .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                     return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
@@ -751,6 +770,17 @@ public class NinnteiChousaKekkaTouroku1 {
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnBackKihonUnyo(NinnteiChousaKekkaTouroku1Div div) {
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.基本運用に戻る).respond();
+    }
+
+    /**
+     * ボタン「マスキングに戻る」押下時の処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnBackMasking(NinnteiChousaKekkaTouroku1Div div) {
+        前排他キーの解除();
+        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.マスキングに戻る).respond();
     }
 
     /**
