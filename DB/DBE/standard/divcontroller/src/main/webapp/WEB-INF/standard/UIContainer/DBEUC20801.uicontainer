@@ -85,7 +85,7 @@
      "layoutName": "DBE2210001",
      "layoutTitle": "認定調査結果登録",
      "eventName": "マスキングに戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE4050001",
