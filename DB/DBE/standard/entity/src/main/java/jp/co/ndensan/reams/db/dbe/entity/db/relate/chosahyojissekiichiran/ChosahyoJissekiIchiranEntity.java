@@ -41,7 +41,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
     private final RString 被保険者氏名;
     @CsvField(order = 9, name = "調査実施日")
     private final RString 調査実施日;
-    @CsvField(order = 10, name = "入手日")
+    @CsvField(order = 10, name = "調査票受領日")
     private final RString 入手日;
     @CsvField(order = 11, name = "調査区分")
     private final RString 調査区分;
@@ -115,7 +115,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         }
         this.単価 = relateEntity.get単価();
     }
-    
+
     private static RString dateFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;

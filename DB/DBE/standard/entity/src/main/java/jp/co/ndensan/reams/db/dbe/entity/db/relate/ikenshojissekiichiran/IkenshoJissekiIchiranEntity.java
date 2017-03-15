@@ -42,9 +42,9 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 被保険者氏名;
     @CsvField(order = 9, name = "記入日")
     private final RString 記入日;
-    @CsvField(order = 10, name = "入手日")
+    @CsvField(order = 10, name = "受領日")
     private final RString 入手日;
-    @CsvField(order = 11, name = "処理日")
+    @CsvField(order = 11, name = "読取日")
     private final RString 処理日;
     @CsvField(order = 12, name = "在宅_新")
     private final RString 入手パターン_在新;
@@ -56,7 +56,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 入手パターン_施継;
     @CsvField(order = 16, name = "単価")
     private final RString 単価;
-    
+
     private static final RString MARU = new RString("○");
 
     /**
@@ -142,7 +142,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.主治医氏名 = relateEntity.get主治医氏名();
         this.被保険者番号 = relateEntity.get被保険者番号();
         this.被保険者氏名 = relateEntity.get申請者氏名();
-        this.記入日 = dateFormat(relateEntity. get記入日());
+        this.記入日 = dateFormat(relateEntity.get記入日());
         this.入手日 = dateFormat(relateEntity.get入手日());
         this.処理日 = dateFormat(relateEntity.get処理日());
         this.入手パターン_在新 = 在宅_新;
