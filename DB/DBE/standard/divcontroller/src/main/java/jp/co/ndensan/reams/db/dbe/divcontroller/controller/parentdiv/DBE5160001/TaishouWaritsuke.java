@@ -123,6 +123,8 @@ public class TaishouWaritsuke {
         }
         if (!ResponseHolder.isReRequest()
                 || (new RString(DbeWarningMessages.申請者と介護認定審査会委員に関係.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes))
+                || (new RString(DbeWarningMessages.予定定員を超過割付確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes))) {
             getHandler(div).割付処理();
         }

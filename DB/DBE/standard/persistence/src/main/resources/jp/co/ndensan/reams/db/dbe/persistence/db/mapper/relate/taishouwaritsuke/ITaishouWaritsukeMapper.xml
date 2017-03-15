@@ -433,7 +433,7 @@
             </if> 
             <if test="isNyushoShisetsu"> 
                 AND ( 
-                DbT5595."shujiiIryokikanCode" IN (
+                DbT5595."ninteichosaItakusakiCode" IN (
                 SELECT DbT5910."ninteichosaItakusakiCode" 
                 FROM 
                 rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910 
@@ -441,8 +441,8 @@
                 AND 
                 DbT5910."shichosonCode" = #{shichosonCode}) 
                 OR 
-                DbT5595."ninteichosaItakusakiCode" IN (
-                SELECT DbT5911."iryokikanCode" 
+                DbT5595."shujiiIryokikanCode" IN (
+                SELECT DbT5911."shujiiIryokikanCode" 
                 FROM 
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
                 WHERE DbT5911."iryokikanCode" = #{nyushoShisetsuCode} 

@@ -392,7 +392,7 @@ public class TaishouWaritsukeHandler {
         ParamEntity entity = finder.getParamData(shinseishoKanriNo);
         boolean is機関まで = DbBusinessConfig.get(ConfigNameDBE.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援).equals(機関まで);
         if (entity != null) {
-            if (is入所施設 && entity.get入所施設コード() == null) {
+            if (is入所施設 && (entity.get入所施設コード() == null || entity.get入所施設コード().isEmpty())) {
                 return true;
             }
             CountShinsakaiWariateIinJohoMapperParameter param = CountShinsakaiWariateIinJohoMapperParameter.createCountKohoshaIchiranMapperParameter(
