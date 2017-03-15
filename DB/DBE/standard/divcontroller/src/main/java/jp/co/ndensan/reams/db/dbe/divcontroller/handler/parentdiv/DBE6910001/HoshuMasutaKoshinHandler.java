@@ -119,7 +119,7 @@ public class HoshuMasutaKoshinHandler {
      */
     public void onSelect_btnChosainModify(dgChosainhoshuTankaIchiran_Row 選択行の審査委員報酬単価情報) {
         set審査員報酬単価マスタ明細状態_活性();
-        set審査員報酬DDL();
+        set審査員報酬DDL(選択行の審査委員報酬単価情報);
         set審査員報酬単価マスタ明細内容(選択行の審査委員報酬単価情報);
         div.getHoshuMasutaTab().getTxtChoKaishiYM().setDisabled(true);
         div.getHoshuMasutaTab().getTxtChoShuryoYM().setDisabled(false);
@@ -133,7 +133,7 @@ public class HoshuMasutaKoshinHandler {
      * @param 選択行の審査委員報酬単価情報 選択行の審査委員報酬単価情報
      */
     public void onSelect_btnChosainDelete(dgChosainhoshuTankaIchiran_Row 選択行の審査委員報酬単価情報) {
-        set審査員報酬DDL();
+        set審査員報酬DDL(選択行の審査委員報酬単価情報);
         set審査員報酬単価マスタ明細内容(選択行の審査委員報酬単価情報);
         set審査員報酬単価マスタ明細状態_非活性();
         div.setChosainhoshuTankaState(削除モード);
@@ -580,6 +580,35 @@ public class HoshuMasutaKoshinHandler {
         }
         div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().setDataSource(dataSource);
     }
+    
+    private void set審査員報酬DDL(dgChosainhoshuTankaIchiran_Row row) {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        if (ShinsakaiIinShubetsu.委員.getコード().equals(row.getKaigoNinteiShinsaIinShubetsuCode())
+                || ShinsakaiIinShubetsu.委員長.getコード().equals(row.getKaigoNinteiShinsaIinShubetsuCode())) {
+            for (ShinsakaiIinShubetsu 介護認定審査委員種別 : ShinsakaiIinShubetsu.values()) {
+                if (ShinsakaiIinShubetsu.委員.getコード().equals(介護認定審査委員種別.getコード())
+                        || ShinsakaiIinShubetsu.委員長.getコード().equals(介護認定審査委員種別.getコード())) {
+                    KeyValueDataSource keyValue = new KeyValueDataSource();
+                    keyValue.setKey(介護認定審査委員種別.getコード());
+                    keyValue.setValue(介護認定審査委員種別.get名称());
+                    dataSource.add(keyValue);
+                }
+            }
+        }
+        if (ShinsakaiIinShubetsu.医師.getコード().equals(row.getKaigoNinteiShinsaIinShubetsuCode())
+                || ShinsakaiIinShubetsu.医師以外.getコード().equals(row.getKaigoNinteiShinsaIinShubetsuCode())) {
+            for (ShinsakaiIinShubetsu 介護認定審査委員種別 : ShinsakaiIinShubetsu.values()) {
+                if (ShinsakaiIinShubetsu.医師.getコード().equals(介護認定審査委員種別.getコード())
+                        || ShinsakaiIinShubetsu.医師以外.getコード().equals(介護認定審査委員種別.getコード())) {
+                    KeyValueDataSource keyValue = new KeyValueDataSource();
+                    keyValue.setKey(介護認定審査委員種別.getコード());
+                    keyValue.setValue(介護認定審査委員種別.get名称());
+                    dataSource.add(keyValue);
+                }
+            }
+        }
+        div.getHoshuMasutaTab().getTabHoshuMasutaKoshin().getDdlKaigoNinteiShinsaIinShubetsu().setDataSource(dataSource);
+    }
 
     private void set意見書報酬単価一覧情報(List<ShujiiIkenshoHoshuTanka> 意見書報酬単価マスタ情報) {
         List<dgIkenShohoshuTankaIchiran_Row> 意見書報酬単価一覧情報 = new ArrayList<>();
@@ -951,10 +980,10 @@ public class HoshuMasutaKoshinHandler {
             if (o2.getShinsakaiIinCode().compareTo(o1.getShinsakaiIinCode()) != 0) {
                 return o2.getShinsakaiIinCode().compareTo(o1.getShinsakaiIinCode());
             } else {
-                if (o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue()) != 0) {
-                    return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
+                if (o2.getKaishiYM().getValue().toString().equals(o1.getKaishiYM().getValue().toString()) != true) {
+                    return -1;
                 } else {
-                    return o2.getShuryoYM().getValue().compareTo(o1.getShuryoYM().getValue());
+                    return 0;
                 }
             }
         }

@@ -144,6 +144,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnChoTsuika();
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.審査明細);
     }
 
@@ -172,6 +173,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnChosainModify(div.getHoshuMasutaTab().getDgChosainhoshuTankaIchiran().getActiveRow());
+        ViewStateHolder.put(ViewStateKeys.選択行番号, div.getHoshuMasutaTab().getDgChosainhoshuTankaIchiran().getActiveRow().getId());
         return ResponseData.of(div).setState(DBE6910001StateName.審査明細);
     }
 
@@ -200,6 +202,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnChosainDelete(div.getHoshuMasutaTab().getDgChosainhoshuTankaIchiran().getActiveRow());
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.審査明細);
     }
 
@@ -228,6 +231,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnChoTorikesu();
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -251,6 +255,7 @@ public class HoshuMasutaKoshin {
         }
         getHandler(div).onClick_btnChoKousin();
         update審査員報酬単価マスタ情報(div);
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -279,6 +284,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnIkenTsuika();
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.意見明細);
     }
 
@@ -307,6 +313,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnIkenShoModify(div.getHoshuMasutaTab().getDgIkenShohoshuTankaIchiran().getActiveRow());
+        ViewStateHolder.put(ViewStateKeys.選択行番号, div.getHoshuMasutaTab().getDgIkenShohoshuTankaIchiran().getActiveRow().getId());
         return ResponseData.of(div).setState(DBE6910001StateName.意見明細);
     }
 
@@ -335,6 +342,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnIkenShoDelete(div.getHoshuMasutaTab().getDgIkenShohoshuTankaIchiran().getActiveRow());
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.意見明細);
     }
 
@@ -363,6 +371,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnIkenTorikesu();
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -386,6 +395,7 @@ public class HoshuMasutaKoshin {
         }
         getHandler(div).onClick_btnIkenKousin();
         update意見書報酬単価マスタ情報(div);
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -414,6 +424,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnHomTsuika();
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.訪問明細);
     }
 
@@ -442,6 +453,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnHomonChosaModify(div.getHoshuMasutaTab().getDgHomonChosahoshuTankaIchiran().getActiveRow());
+        ViewStateHolder.put(ViewStateKeys.選択行番号, div.getHoshuMasutaTab().getDgHomonChosahoshuTankaIchiran().getActiveRow().getId());
         return ResponseData.of(div).setState(DBE6910001StateName.訪問明細);
     }
 
@@ -470,6 +482,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnHomonChosaDelete(div.getHoshuMasutaTab().getDgHomonChosahoshuTankaIchiran().getActiveRow());
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.訪問明細);
     }
 
@@ -498,6 +511,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onClick_btnHomTorikesu();
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -522,6 +536,7 @@ public class HoshuMasutaKoshin {
         }
         getHandler(div).onClick_btnHomKousin();
         update訪問調査報酬単価マスタ情報(div);
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -551,6 +566,7 @@ public class HoshuMasutaKoshin {
         }
         getHandler(div).onClick_btnBetuTsuika();
         div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide().setDisabled(false);
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
 
@@ -579,6 +595,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnShinsakaiIinBetuModify(div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow());
+        ViewStateHolder.put(ViewStateKeys.選択行番号, div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow().getId());
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
 
@@ -607,6 +624,7 @@ public class HoshuMasutaKoshin {
             }
         }
         getHandler(div).onSelect_btnShinsakaiIinBetuDelete(div.getHoshuMasutaTab().getDgShinsakaiIinBetuTanka().getActiveRow());
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.委員別明細);
     }
 
@@ -636,6 +654,7 @@ public class HoshuMasutaKoshin {
         }
         getHandler(div).onClick_btnBetuTorikesu();
         div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide().setDisabled(true);
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -676,6 +695,7 @@ public class HoshuMasutaKoshin {
         getHandler(div).onClick_btnBetuKousin();
         update審査会委員別単価マスタ情報(div);
         div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getBtnShinsakaiIinGuide().setDisabled(true);
+        ViewStateHolder.remove(ViewStateKeys.選択行番号);
         return ResponseData.of(div).setState(DBE6910001StateName.照会);
     }
 
@@ -728,7 +748,7 @@ public class HoshuMasutaKoshin {
     public ResponseData<HoshuMasutaKoshinDiv> onBefore_ShinsakaiIinGuide(HoshuMasutaKoshinDiv div) {
         return ResponseData.of(div).respond();
     }
-
+    
     private void set審査員報酬単価マスタ情報(HoshuMasutaKoshinDiv div) {
         List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ情報;
         Models<ShinsakaiIinHoshuTankaIdentifier, ShinsakaiIinHoshuTanka> 審査員報酬単価情報Model

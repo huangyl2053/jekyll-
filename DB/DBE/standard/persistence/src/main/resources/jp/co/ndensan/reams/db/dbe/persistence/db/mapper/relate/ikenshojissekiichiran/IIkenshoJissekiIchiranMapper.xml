@@ -56,7 +56,6 @@
         , T5302."shujiiCode"
         <include refid="core" />
         <include refid="group" />
-        <include refid="order" />
         ) AS A
     </select>
 
