@@ -417,6 +417,9 @@
         WHERE 
         DbT5503."shinsakaiKaisaiNo" = #{kaisaiNo} 
         <if test="isKikannMade"> 
+            <if test="isNyushoShisetsu"> 
+                AND DbT7051."shichosonCode" = #{shichosonCode}
+            </if>
             AND( 
             1 = 1
             <if test="isIryoKikan"> 
