@@ -767,15 +767,15 @@ public class RenkeiDataTorikomiBusiness {
             } else {
                 dbt5120Entity.setShinseiTodokedeshaShimei(dbt5101tempEntity.get申請者氏名());
                 dbt5120Entity.setShinseiTodokedeshaKanaShimei(dbt5101tempEntity.get申請者氏名カナ());
+                if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者郵便番号())) {
+                    dbt5120Entity.setShinseiTodokedeshaYubinNo(new YubinNo(dbt5101tempEntity.get申請者郵便番号()));
+                }
+                dbt5120Entity.setShinseiTodokedeshaJusho(dbt5101tempEntity.get申請者住所());
+                if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者連絡先())) {
+                    dbt5120Entity.setShinseiTodokedeshaTelNo(new TelNo(dbt5101tempEntity.get申請者連絡先()));
+                }
             }
             dbt5120Entity.setShinseiTodokedeshaTsuzukigara(dbt5101tempEntity.get申請者関係コード());
-            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者郵便番号())) {
-                dbt5120Entity.setShinseiTodokedeshaYubinNo(new YubinNo(dbt5101tempEntity.get申請者郵便番号()));
-            }
-            dbt5120Entity.setShinseiTodokedeshaJusho(dbt5101tempEntity.get申請者住所());
-            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者連絡先())) {
-                dbt5120Entity.setShinseiTodokedeshaTelNo(new TelNo(dbt5101tempEntity.get申請者連絡先()));
-            }
         }
         return dbt5120Entity;
     }
@@ -786,7 +786,7 @@ public class RenkeiDataTorikomiBusiness {
         }
         return null;
     }
-    
+
     public DbT5102NinteiKekkaJohoEntity getDbT5102Entity(DbT5101RelateEntity entity) {
         DbT5102NinteiKekkaJohoEntity dbt5102Entity = new DbT5102NinteiKekkaJohoEntity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
@@ -812,7 +812,7 @@ public class RenkeiDataTorikomiBusiness {
         dbt5102Entity.setNijiHanteiKekkaInputHoho(new Code(NijiHanteiKekkaInputHoho.画面入力.getコード()));
         return dbt5102Entity;
     }
-    
+
     private int getNinteiYukoKikan(FlexibleDate fromDate, FlexibleDate toDate) {
         int month = 0;
         int fromDay = fromDate.getDayValue();
