@@ -831,6 +831,8 @@ public class ImageJohoMaskingHandler {
         dgImageMaskShoriTaishosha_Row row = div.getDgImageMaskShoriTaishosha().getActiveRow();
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(row.get申請書管理番号()));
         ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.parseInt(row.get認定調査依頼履歴番号().toString()));
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, row.get保険者());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, row.get被保番号());
     }
 
     private void 前排他ロックキー(RString 排他ロックキー) {
