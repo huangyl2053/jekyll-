@@ -194,11 +194,9 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         source.imgShisetsuName = item.get施設名イメージ();
         source.imgShisetsuAddress = item.get住所イメージ();
         source.imgShisetsuTel = item.get電話番号イメージ();
-        if (!ServiceKubunCode.なし.getコード().equals(item.getServiceKubunCode().getColumnValue())) {
-            source.shisetsuName = new RString("施設名　：");
-            source.jusho = new RString("住所　〒");
-            source.telNo = new RString("TEL");
-        }
+        source.shisetsuName = new RString("施設名　：");
+        source.jusho = new RString("住所　〒");
+        source.telNo = new RString("TEL");
         source.notes1 = item.get凡例1();
         source.notes2 = item.get凡例2();
         source.notes3 = item.get凡例3();
@@ -465,7 +463,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         }
         return RString.EMPTY;
     }
-    
+
     private RString get元号(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return パターン12(年月日).substring(0, 2);
@@ -493,7 +491,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         }
         return RString.EMPTY;
     }
-    
+
     private RString パターン12(FlexibleDate 年月日) {
         return 年月日.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
