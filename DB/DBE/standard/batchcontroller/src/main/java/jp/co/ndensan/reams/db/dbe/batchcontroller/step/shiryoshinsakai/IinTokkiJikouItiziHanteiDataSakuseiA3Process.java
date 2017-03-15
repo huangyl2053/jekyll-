@@ -93,7 +93,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
 
     @Override
     protected void createWriter() {
-        List<ItiziHanteiEntity> 一次判定EntityList = mapper.getItiziHantei(myBatisParameter);
+        List<ItiziHanteiEntity> 一次判定EntityList = mapper.getTokkiJikouItiziHantei(myBatisParameter);
         List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
         for (ItiziHanteiEntity entity : 一次判定EntityList) {
             if (get共通情報(共通情報, entity.getShinseishoKanriNo()) != null) {
