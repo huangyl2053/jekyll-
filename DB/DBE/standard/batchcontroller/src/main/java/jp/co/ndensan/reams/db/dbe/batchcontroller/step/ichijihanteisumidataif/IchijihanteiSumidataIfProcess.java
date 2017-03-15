@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.Ichiji
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIferaEucEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -31,6 +34,8 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -60,6 +65,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
     private final RString ファイル09Aエラ = new RString("IchijiHanteiErr_09A.CSV");
     private final RString 文字コード = new RString("1");
     private final RString 文字 = new RString("2");
+    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
@@ -70,6 +76,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         RString 仮一次判定区分 = KariIchijiHanteiKubun.本一次判定.get名称();
         paramter.set仮一次判定区分(Boolean.valueOf(仮一次判定区分.toString()));
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -120,7 +127,8 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
             getファイル名(entity);
             eucCsvWriterJunitoJugo.writeLine(bunisess.set一次判定済データ09A(entity));
         }
-        bunisess.getアクセスログ(entity.get被保険者番号());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号());
+        accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
     }
 
     @Override
@@ -128,6 +136,7 @@ public class IchijihanteiSumidataIfProcess extends BatchProcessBase<Ichijihantei
         eucCsvWriterJunitoJugo.close();
         manager.spool(eucFilePath);
         outputJokenhyoFactory();
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void getファイル名(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity) {

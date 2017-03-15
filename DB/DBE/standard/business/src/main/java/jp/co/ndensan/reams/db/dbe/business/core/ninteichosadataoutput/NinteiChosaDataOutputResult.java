@@ -30,8 +30,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -894,20 +892,6 @@ public class NinteiChosaDataOutputResult {
         jokenBuilder.append(new RString(")"));
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
-    }
-
-    /**
-     * アクセスログを出力するメッソドです。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     */
-    public void getアクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
     /**

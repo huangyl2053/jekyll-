@@ -13,10 +13,12 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.ShinsakaiKaisaiYoteiJohoMan
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -98,6 +100,7 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
             final RString 申請者オブザーバーチェック = new RString("申請者オブザーバーチェックエラー  開催番号： 第");
             final RString 審査会委員除外存在チェック = new RString("審査会委員除外存在チェックエラー  開催番号： 第");
             final RString 対象者 = new RString("回審査会 対象者： ");
+            DbAccessLogger accessLog = new DbAccessLogger();
             for (int j = 0; j < taisyosya.size(); j++) {
                 if (!(shinsakaiWaritsukeNinsu.get(i) < shinsakaiJidoWariateTeiin.get(i))) {
                     break;
@@ -131,13 +134,15 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 }
                 insert介護認定審査会割付情報(shinsakaiKaisaiNo.get(i), taisyosya.get(j), shinsakaiKaisaiYMD.get(i));
                 is介護認定審査会割付情報Insert = true;
-                AccessLogger.log(AccessLogType.更新,
-                        toPersonalData(shinsakaiKaisaiNo.get(i), taisyosya.get(j).getShinseishoKanriNo().value()));
+                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taisyosya.get(j).getShinseishoKanriNo().value());
+                accessLog.store(new ShoKisaiHokenshaNo(taisyosya.get(j).getShoKisaiHokenshaNo()),
+                        taisyosya.get(j).getHihokenshaNo(), expandedInfo);
                 割付人数++;
                 if (!(shinsakaiWaritsukeNinsu.get(i) + 割付人数 < shinsakaiJidoWariateTeiin.get(i))) {
                     break;
                 }
             }
+            accessLog.flushBy(AccessLogType.更新);
             if (is介護認定審査会割付情報Insert) {
                 ShinsakaiKaisaiYoteiJoho kaisaiYoteiJoho = 審査会開催予定Manager.get介護認定審査会開催予定情報(shinsakaiKaisaiNo.get(i));
                 kaisaiYoteiJoho = kaisaiYoteiJoho.createBuilderForEdit()

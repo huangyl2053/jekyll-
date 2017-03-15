@@ -5,6 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuMapper">
 <resultMap id="resultMap_IchijihanteiSumidataIDataShutsuryokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuRelateEntity" autoMapping="true">
+    <result property="申請書管理番号" column="dbT5101Nintei_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="保険者番号" column="保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -333,6 +334,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteisumidataif.IchijihanteiSumidataIftMybitisParamter" fetchSize="500">
         	SELECT
                        DbT5101."koroshoIfShikibetsuCode" AS "厚労省IF識別コード",
+                       DbT5101."shinseishoKanriNo" AS "申請書管理番号",
                        DbT7051."shoKisaiHokenshaNo" AS "保険者番号",
                        DbT5101."hihokenshaNo" AS "被保険者番号",
                        DbT5101."ninteiShinseiYMD" AS "認定申請年月日",

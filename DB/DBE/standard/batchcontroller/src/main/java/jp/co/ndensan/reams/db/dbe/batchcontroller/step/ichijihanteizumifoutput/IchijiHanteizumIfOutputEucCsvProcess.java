@@ -6,12 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ichijihanteizumifoutput;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteizumifoutput.ichijihanteizumi.IchijiHanteizumIfOutputBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.itizihanteishori.ItziHanteiShoriProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumifoutput.IchijiHanteizumIfOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -58,6 +59,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     private ItziHanteiShoriProcessParamter paramter;
     private RString eucFilePath;
     private FileSpoolManager manager;
+    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
@@ -67,6 +69,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         RString イメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
         paramter.setイメージ区分(イメージ区分);
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -88,7 +91,8 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
     @Override
     protected void process(IchijiHanteizumIfOutputRelateEntity entity) {
         eucCsvWriterJunitoJugo.writeLine(IchijiHanteizumIfOutputBusiness.setEucCsvEntity(entity));
-        new NinteiChosaDataOutputResult().getアクセスログ(entity.getShinseishoKanriNo());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo());
+        accessLog.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(), expandedInfo);
     }
 
     @Override
@@ -96,20 +100,7 @@ public class IchijiHanteizumIfOutputEucCsvProcess extends BatchProcessBase<Ichij
         eucCsvWriterJunitoJugo.close();
         manager.spool(eucFilePath);
         outputJokenhyoFactory();
-    }
-
-    /**
-     * アクセスログを出力するメッソドです。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     */
-    public void getアクセスログ(RString 申請書管理番号) {
-        AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void outputJokenhyoFactory() {

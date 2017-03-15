@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTran
 import jp.co.ndensan.reams.db.dbe.entity.report.centersoshintaishoshaichiran.CenterSoshinTaishoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
@@ -40,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -59,9 +60,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -101,6 +100,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private static final RString DATE_ヶ月 = new RString("ヶ月");
     private CenterSoshinTaishoshaIchiranEntity centerSoshinTaishoshaIchiranEntity;
     private RString printTimeStamp;
+    private DbAccessLogger accessLog;
 
     /**
      * データ有無の判定です。
@@ -143,6 +143,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
+        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -169,7 +170,9 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         RString 申請書管理番号 = currentEntity.getShinseishoKanriNo().value();
         if (!出力された申請書管理番号.contains(申請書管理番号)) {
             出力された申請書管理番号.add(申請書管理番号);
-            AccessLogger.log(AccessLogType.照会, toPersonalData(申請書管理番号));
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+            accessLog.store(new ShoKisaiHokenshaNo(currentEntity.getShoKisaiHokenshaNo()),
+                    currentEntity.getHihokenshaNo(), expandedInfo);
         }
         printReport(currentEntity);
     }
@@ -193,11 +196,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         if (出力データ件数 != 0) {
             manager.spool(filename);
         }
-    }
-
-    private PersonalData toPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void outputJokenhyoFactory() {

@@ -14,17 +14,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum IkenshoShukeiKijunbiKubun {
 
     /**
-     * 依頼日を表します。
+     * 読取日を表します。
      */
-    依頼日("1", "意見書依頼日"),
+    読取日("1", "意見書読取日"),
     /**
      * 記入日を表します。
      */
     記入日("2", "意見書記入日"),
     /**
-     * 入手日を表します。
+     * 受領日を表します。
      */
-    入手日("3", "意見書入手日");
+    受領日("3", "意見書受領日");
 
     private final RString kubun;
     private final RString title;
