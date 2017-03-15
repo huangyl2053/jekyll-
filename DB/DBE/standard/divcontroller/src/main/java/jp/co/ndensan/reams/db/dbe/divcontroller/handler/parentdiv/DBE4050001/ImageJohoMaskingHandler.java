@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
-import jp.co.ndensan.reams.db.dbz.service.core.NinteiAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.GaikyoChosaTokkiManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.IkenshoImageJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
@@ -284,7 +283,7 @@ public class ImageJohoMaskingHandler {
         }
 
         前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
-        
+
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(taishoshaRow.get保険者());
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taishoshaRow.get申請書管理番号());
         accessLog.store(shoKisaiHokenshaNo, taishoshaRow.get保険者(), expandedInfo);
@@ -826,6 +825,12 @@ public class ImageJohoMaskingHandler {
         div.getBtnMaskingMask().setDisabled(true);
         div.getBtnSakujo().setDisabled(true);
         div.getBtnTorikeshi().setDisabled(true);
+    }
+
+    public void getKekkaTorokuParam() {
+        dgImageMaskShoriTaishosha_Row row = div.getDgImageMaskShoriTaishosha().getActiveRow();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(row.get申請書管理番号()));
+        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, Integer.parseInt(row.get認定調査依頼履歴番号().toString()));
     }
 
     private void 前排他ロックキー(RString 排他ロックキー) {
