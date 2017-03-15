@@ -75,8 +75,8 @@ public class IchijihanteikekkahyoPrintService {
                 = DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 前回との結果比較印刷有無
                 = DbBusinessConfig.get(ConfigNameDBE.前回との結果比較印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 認定調査前回結果印刷有無
-                = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 認定調査前回結果印刷有無
+//                = DbBusinessConfig.get(ConfigNameDBE.認定調査前回結果印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         RString 前回正常選択肢印刷有無
                 = DbBusinessConfig.get(ConfigNameDBE.今回前回比較で変化有で前回正常選択肢表示印刷有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         try (ReportAssembler<IchijihanteikekkahyoReportSource> assembler = createAssembler(new IchijihanteikekkahyoProperty(), reportManager)) {
@@ -84,7 +84,7 @@ public class IchijihanteikekkahyoPrintService {
             IchijihanteikekkahyoReport report = new IchijihanteikekkahyoReport(IchijihanteikekkahyoEntityEditor.edit(business.toEntity(),
                     認定調査特記事項番号List, 認定調査票サービス状況List, 認定調査票サービス状況フラグList, 認定調査票調査項目List,
                     前回認定調査票調査項目List, 主治医意見書意見項目List, 前回主治医意見書意見項目List, 特記事項符号印刷有無, 正常選択肢印刷有無,
-                    前回との結果比較印刷有無, 認定調査前回結果印刷有無, 前回正常選択肢印刷有無, 一次判定結果マスキング区分));
+                    前回との結果比較印刷有無, 前回正常選択肢印刷有無, 一次判定結果マスキング区分));
             report.writeBy(reportSourceWriter);
         }
     }

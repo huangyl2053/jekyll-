@@ -185,6 +185,7 @@ public final class IchijihanteikekkahyoEntityEditor {
     private static final int IMAGE_HEIGHT = 40;
     private static final int 合議体番号_LENGTH = 6;
     private static final RString アスタリスク = new RString("* * * * * *");
+    private static final RString ハイフン = new RString("―");
 
     private IchijihanteikekkahyoEntityEditor() {
     }
@@ -203,7 +204,6 @@ public final class IchijihanteikekkahyoEntityEditor {
      * @param 特記事項符号印刷有無
      * @param 正常選択肢印刷有無 正常選択肢印刷有無
      * @param 前回との結果比較印刷有無
-     * @param 認定調査前回結果印刷有無 認定調査前回結果印刷有無
      * @param 前回正常選択肢印刷有無
      * @param 一次判定結果マスキング区分 一次判定結果マスキング区分
      * @return IchijihanteikekkahyoEntity
@@ -219,7 +219,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 特記事項符号印刷有無,
             RString 正常選択肢印刷有無,
             RString 前回との結果比較印刷有無,
-            RString 認定調査前回結果印刷有無,
+            //            RString 認定調査前回結果印刷有無,
             RString 前回正常選択肢印刷有無,
             RString 一次判定結果マスキング区分) {
         List<RString> EMPTYLIST = new ArrayList<>();
@@ -317,22 +317,22 @@ public final class IchijihanteikekkahyoEntityEditor {
 
         //前回の調査結果
         ichijihanteikekkahyoEntity.set主治医意見書項目4リスト(set主治医意見書項目4リスト(主治医意見書意見項目List, 前回主治医意見書意見項目List,
-                認定調査前回結果印刷有無, 前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
+                前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
                 yokaigoNinteiJohoTeikyoEntity.get前回厚労省IF識別コード()));
         ichijihanteikekkahyoEntity.set身体機能_起居動作4リスト(set身体機能_起居動作4リスト(認定調査票調査項目List, 前回認定調査票調査項目List,
-                認定調査前回結果印刷有無, 前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
+                前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
                 yokaigoNinteiJohoTeikyoEntity.get前回厚労省IF識別コード()));
         ichijihanteikekkahyoEntity.set生活機能4リスト(set生活機能4リスト(認定調査票調査項目List, 前回認定調査票調査項目List,
-                認定調査前回結果印刷有無, 前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
+                前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
                 yokaigoNinteiJohoTeikyoEntity.get前回厚労省IF識別コード()));
         ichijihanteikekkahyoEntity.set認知機能4リスト(set認知機能4リスト(認定調査票調査項目List, 前回認定調査票調査項目List,
-                認定調査前回結果印刷有無, 前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
+                前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
                 yokaigoNinteiJohoTeikyoEntity.get前回厚労省IF識別コード()));
         ichijihanteikekkahyoEntity.set精神_行動障害4リスト(set精神_行動障害4リスト(認定調査票調査項目List, 前回認定調査票調査項目List,
-                認定調査前回結果印刷有無, 前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
+                前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
                 yokaigoNinteiJohoTeikyoEntity.get前回厚労省IF識別コード()));
         ichijihanteikekkahyoEntity.set社会生活への適応4リスト(set社会生活への適応4リスト(認定調査票調査項目List, 前回認定調査票調査項目List,
-                認定調査前回結果印刷有無, 前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
+                前回正常選択肢印刷有無, yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード(),
                 yokaigoNinteiJohoTeikyoEntity.get前回厚労省IF識別コード()));
 
         //特別な医療
@@ -1414,31 +1414,31 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static List<RString> set社会生活への適応4リスト(List<NinteichosahyoChosaItem> dbt5211Entity,
-            List<NinteichosahyoChosaItem> 前回調査項目, RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無,
+            List<NinteichosahyoChosaItem> 前回調査項目, RString 前回正常選択肢印刷有無,
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 社会生活への適応4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
-                return 社会生活機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
-            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-                社会生活への適応4リスト.add(RString.EMPTY);
-            }
-            if (印刷する.equals(認定調査前回結果印刷有無)) {
-                return 社会生活機能全部(前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
+//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
+            return 社会生活機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
+//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
+//                社会生活への適応4リスト.add(RString.EMPTY);
+//                社会生活への適応4リスト.add(RString.EMPTY);
+//                社会生活への適応4リスト.add(RString.EMPTY);
+//                社会生活への適応4リスト.add(RString.EMPTY);
+//                社会生活への適応4リスト.add(RString.EMPTY);
+//                社会生活への適応4リスト.add(RString.EMPTY);
+//            }
+//            if (印刷する.equals(認定調査前回結果印刷有無)) {
+//                return 社会生活機能全部(前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
         } else {
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
-            社会生活への適応4リスト.add(RString.EMPTY);
+            社会生活への適応4リスト.add(ハイフン);
+            社会生活への適応4リスト.add(ハイフン);
+            社会生活への適応4リスト.add(ハイフン);
+            社会生活への適応4リスト.add(ハイフン);
+            社会生活への適応4リスト.add(ハイフン);
+            社会生活への適応4リスト.add(ハイフン);
         }
         return 社会生活への適応4リスト;
     }
@@ -2012,24 +2012,24 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static List<RString> set精神_行動障害4リスト(List<NinteichosahyoChosaItem> dbt5211Entity,
-            List<NinteichosahyoChosaItem> 前回調査項目, RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無,
+            List<NinteichosahyoChosaItem> 前回調査項目, RString 前回正常選択肢印刷有無,
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 精神_行動障害4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
-                return 精神機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
-            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-                for (int count = 1; count <= COUNT_15; count++) {
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                }
-            }
-            if (印刷する.equals(認定調査前回結果印刷有無)) {
-                return 精神機能全部(前回調査項目, 前回厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
+//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
+            return 精神機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
+//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
+//                for (int count = 1; count <= COUNT_15; count++) {
+//                    精神_行動障害4リスト.add(RString.EMPTY);
+//                }
+//            }
+//            if (印刷する.equals(認定調査前回結果印刷有無)) {
+//                return 精神機能全部(前回調査項目, 前回厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
         } else {
             for (int count = 1; count <= COUNT_15; count++) {
-                精神_行動障害4リスト.add(RString.EMPTY);
+                精神_行動障害4リスト.add(ハイフン);
             }
         }
         return 精神_行動障害4リスト;
@@ -2634,43 +2634,43 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static List<RString> set生活機能4リスト(List<NinteichosahyoChosaItem> 調査項目,
-            List<NinteichosahyoChosaItem> 前回調査項目, RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無,
+            List<NinteichosahyoChosaItem> 前回調査項目, RString 前回正常選択肢印刷有無,
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 生活機能4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
-                return 生活機能差分(調査項目, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
-            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-            }
-            if (印刷する.equals(認定調査前回結果印刷有無)) {
-                return 生活機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
+//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
+            return 生活機能差分(調査項目, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
+//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//                生活機能4リスト.add(RString.EMPTY);
+//            }
+//            if (印刷する.equals(認定調査前回結果印刷有無)) {
+//                return 生活機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
         } else {
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
-            生活機能4リスト.add(RString.EMPTY);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
+            生活機能4リスト.add(ハイフン);
         }
         return 生活機能4リスト;
     }
@@ -4055,23 +4055,23 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static List<RString> set身体機能_起居動作4リスト(List<NinteichosahyoChosaItem> 調査項目, List<NinteichosahyoChosaItem> 前回調査項目,
-            RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無, RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
+            RString 前回正常選択肢印刷有無, RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 身体機能_起居動作4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
-                return 身体機能差分(調査項目, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
-            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-                for (int count = 1; count <= COUNT_20; count++) {
-                    身体機能_起居動作4リスト.add(RString.EMPTY);
-                }
-            }
-            if (印刷する.equals(認定調査前回結果印刷有無)) {
-                return 身体機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
+//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
+            return 身体機能差分(調査項目, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
+//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
+//                for (int count = 1; count <= COUNT_20; count++) {
+//                    身体機能_起居動作4リスト.add(RString.EMPTY);
+//                }
+//            }
+//            if (印刷する.equals(認定調査前回結果印刷有無)) {
+//                return 身体機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
         } else {
             for (int count = 1; count <= COUNT_20; count++) {
-                身体機能_起居動作4リスト.add(RString.EMPTY);
+                身体機能_起居動作4リスト.add(ハイフン);
             }
         }
         return 身体機能_起居動作4リスト;
@@ -4315,37 +4315,37 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static List<RString> set認知機能4リスト(List<NinteichosahyoChosaItem> dbt5211Entity,
-            List<NinteichosahyoChosaItem> 前回調査項目, RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無,
+            List<NinteichosahyoChosaItem> 前回調査項目, RString 前回正常選択肢印刷有無,
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 認知機能4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
-                return 認知機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
-            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-                認知機能4リスト.add(RString.EMPTY);
-            }
-            if (印刷する.equals(認定調査前回結果印刷有無)) {
-                return 認知機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
+//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
+            return 認知機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
+//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//                認知機能4リスト.add(RString.EMPTY);
+//            }
+//            if (印刷する.equals(認定調査前回結果印刷有無)) {
+//                return 認知機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
         } else {
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
-            認知機能4リスト.add(RString.EMPTY);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
+            認知機能4リスト.add(ハイフン);
         }
         return 認知機能4リスト;
     }
@@ -4504,29 +4504,29 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static List<RString> set主治医意見書項目4リスト(List<ShujiiIkenshoIkenItem> 意見書項目,
-            List<ShujiiIkenshoIkenItem> 前回意見書項目, RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無,
+            List<ShujiiIkenshoIkenItem> 前回意見書項目, RString 前回正常選択肢印刷有無,
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 主治医意見書項目4リスト = new ArrayList<>();
         if (!前回意見書項目.isEmpty()) {
-            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
-                return 主治医差分(意見書項目, 前回意見書項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
-            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-                主治医意見書項目4リスト.add(RString.EMPTY);
-                主治医意見書項目4リスト.add(RString.EMPTY);
-                主治医意見書項目4リスト.add(RString.EMPTY);
-                主治医意見書項目4リスト.add(RString.EMPTY);
-                主治医意見書項目4リスト.add(RString.EMPTY);
-            }
-            if (印刷する.equals(認定調査前回結果印刷有無)) {
-                return 主治医全部(前回意見書項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-            }
+//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
+            return 主治医差分(意見書項目, 前回意見書項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
+//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
+//                主治医意見書項目4リスト.add(RString.EMPTY);
+//                主治医意見書項目4リスト.add(RString.EMPTY);
+//                主治医意見書項目4リスト.add(RString.EMPTY);
+//                主治医意見書項目4リスト.add(RString.EMPTY);
+//                主治医意見書項目4リスト.add(RString.EMPTY);
+//            }
+//            if (印刷する.equals(認定調査前回結果印刷有無)) {
+//                return 主治医全部(前回意見書項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
+//            }
         } else {
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
-            主治医意見書項目4リスト.add(RString.EMPTY);
+            主治医意見書項目4リスト.add(ハイフン);
+            主治医意見書項目4リスト.add(ハイフン);
+            主治医意見書項目4リスト.add(ハイフン);
+            主治医意見書項目4リスト.add(ハイフン);
+            主治医意見書項目4リスト.add(ハイフン);
         }
         return 主治医意見書項目4リスト;
     }

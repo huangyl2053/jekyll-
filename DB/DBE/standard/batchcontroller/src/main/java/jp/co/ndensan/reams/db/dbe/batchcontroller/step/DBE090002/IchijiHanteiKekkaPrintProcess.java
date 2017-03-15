@@ -105,8 +105,8 @@ public class IchijiHanteiKekkaPrintProcess extends BatchProcessBase<YokaigoNinte
         IchijihanteikekkahyoEntity ichijihanteikekkahyoEntity
                 = IchijihanteikekkahyoEntityEditor.edit(entity, 認定調査特記事項番号List, 認定調査票サービス状況List,
                         認定調査票サービス状況フラグList, 認定調査票調査項目List, 前回認定調査票調査項目List,
-                        主治医意見書意見項目List, 前回主治医意見書意見項目List, processPrm.get特記事項符号印刷有無(), processPrm.get正常選択肢印刷有無(),
-                        processPrm.get前回との結果比較印刷有無(), processPrm.get認定調査前回結果印刷有無(),
+                        主治医意見書意見項目List, 前回主治医意見書意見項目List, processPrm.get特記事項符号印刷有無(),
+                        processPrm.get正常選択肢印刷有無(), processPrm.get前回との結果比較印刷有無(),
                         processPrm.get前回正常選択肢印刷有無(), processPrm.get一次判定結果マスキング区分());
         IchijihanteikekkahyoReport report = new IchijihanteikekkahyoReport(ichijihanteikekkahyoEntity);
         report.writeBy(reportSourceWriter);

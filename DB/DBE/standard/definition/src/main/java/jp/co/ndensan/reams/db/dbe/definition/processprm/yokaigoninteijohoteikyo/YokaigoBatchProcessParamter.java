@@ -38,7 +38,6 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
     private final RString 特記事項符号印刷有無;
     private final RString 正常選択肢印刷有無;
     private final RString 前回との結果比較印刷有無;
-    private final RString 認定調査前回結果印刷有無;
     private final RString 前回正常選択肢印刷有無;
 
 //    /**
@@ -105,7 +104,6 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
      * @param 特記事項符号印刷有無
      * @param 正常選択肢印刷有無 正常選択肢印刷有無
      * @param 前回との結果比較印刷有無
-     * @param 認定調査前回結果印刷有無 認定調査前回結果印刷有無
      * @param 前回正常選択肢印刷有無
      */
     public YokaigoBatchProcessParamter(List<RString> 申請書管理番号, boolean 認定調査票出力,
@@ -113,7 +111,7 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
             RString 認定調査票マスキング区分, RString 特記事項マスキング区分, RString 主治医意見書マスキング区分,
             RString その他資料マスキング区分, RString 一次判定結果マスキング区分, FlexibleDate 特記事項判定日,
             RString 総合事業開始区分, RString 情報提供資料の特記事項編集パターン, RString 特記事項符号印刷有無,
-            RString 正常選択肢印刷有無, RString 前回との結果比較印刷有無, RString 認定調査前回結果印刷有無, RString 前回正常選択肢印刷有無) {
+            RString 正常選択肢印刷有無, RString 前回との結果比較印刷有無, RString 前回正常選択肢印刷有無) {
         this.申請書管理番号 = 申請書管理番号;
         this.認定調査票出力 = 認定調査票出力;
         this.特記事項出力 = 特記事項出力;
@@ -131,7 +129,6 @@ public class YokaigoBatchProcessParamter implements IBatchProcessParameter {
         this.特記事項符号印刷有無 = 特記事項符号印刷有無;
         this.正常選択肢印刷有無 = 正常選択肢印刷有無;
         this.前回との結果比較印刷有無 = 前回との結果比較印刷有無;
-        this.認定調査前回結果印刷有無 = 認定調査前回結果印刷有無;
         this.前回正常選択肢印刷有無 = 前回正常選択肢印刷有無;
     }
 
