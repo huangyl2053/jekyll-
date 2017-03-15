@@ -12,8 +12,8 @@ module DBE {
                 return "onClick_btnModoru";
             }
 
-            public static onClick_btnHozon(): string {
-                return "onClick_btnHozon";
+            public static onClick_btnTextHozon(): string {
+                return "onClick_btnTextHozon";
             }
 
         }
@@ -113,8 +113,8 @@ module DBE {
                 return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
-            public btnHozon(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHozon"));
+            public btnTextHozon(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTextHozon"));
             }
 
         }

@@ -33,9 +33,9 @@ public class TextMasking {
      * @param div TextMaskingDiv
      * @return ResponseData<TextMaskingDiv>
      */
-    public ResponseData<TextMaskingDiv> onClick_btnHozon(TextMaskingDiv div) {
-        getHandler(div).onClick_btnHozon();
-        return ResponseData.of(div).respond();
+    public ResponseData<TextMaskingDiv> onClick_btnTextHozon(TextMaskingDiv div) {
+        getHandler(div).onClick_btnTextHozon();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**

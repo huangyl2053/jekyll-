@@ -1,12 +1,13 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TextMasking.TextMasking;
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
 /**
  * このコードはツールによって生成されました。
  *
  * @reamsid_L DBE-3000-250 jinjue
  */
-public interface ITextMaskingDiv extends ICommonChildDivBaseProperties {
+public interface ITextMaskingDiv extends ICommonChildDivBaseProperties, IDialogDiv {
 
 }

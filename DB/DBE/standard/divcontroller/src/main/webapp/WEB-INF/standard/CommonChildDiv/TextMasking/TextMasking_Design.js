@@ -8,8 +8,8 @@ var DBE;
                 return "onClick_btnModoru";
             };
 
-            Events.onClick_btnHozon = function () {
-                return "onClick_btnHozon";
+            Events.onClick_btnTextHozon = function () {
+                return "onClick_btnTextHozon";
             };
             return Events;
         })();
@@ -107,8 +107,8 @@ var DBE;
                 return new UZA.Button(this.convFiledName("btnModoru"));
             };
 
-            Controls.prototype.btnHozon = function () {
-                return new UZA.Button(this.convFiledName("btnHozon"));
+            Controls.prototype.btnTextHozon = function () {
+                return new UZA.Button(this.convFiledName("btnTextHozon"));
             };
             return Controls;
         })();

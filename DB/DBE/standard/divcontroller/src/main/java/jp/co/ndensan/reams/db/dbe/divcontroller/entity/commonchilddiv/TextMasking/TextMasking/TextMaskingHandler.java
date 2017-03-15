@@ -48,7 +48,7 @@ public class TextMaskingHandler {
     /**
      * 画面で編集するマスキング後の情報を保存します。
      */
-    public void onClick_btnHozon() {
+    public void onClick_btnTextHozon() {
         TextMaskingModel 特記事項情報 = DataPassingConverter.deserialize(div.getHdnTextMasking(), TextMaskingModel.class);
         特記事項情報.setマスキング対象テキスト(div.getTxtAfterMasking().getValue());
         div.setHdnTextMasking(DataPassingConverter.serialize(特記事項情報));

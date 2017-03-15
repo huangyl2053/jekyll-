@@ -251,8 +251,10 @@ public class ImageJohoMaskingHandler {
         div.getDdlKensakuTaisho().setSelectedIndex(0);
         div.getTxtSearchYMD().clearFromValue();
         div.getTxtSearchYMD().clearToValue();
+        div.getTxtShinsakaiKaisaiNo().clearValue();
         RString 最大表示件数 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtMaxDisp().setValue(new Decimal(最大表示件数.toString()));
+        div.getChkMasking().setSelectedItemsByKey(new ArrayList<RString>());
     }
 
     /**

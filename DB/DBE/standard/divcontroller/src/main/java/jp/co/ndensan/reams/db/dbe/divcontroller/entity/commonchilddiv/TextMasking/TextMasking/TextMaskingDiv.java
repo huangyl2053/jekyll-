@@ -32,8 +32,8 @@ public class TextMaskingDiv extends Panel implements ITextMaskingDiv {
     private tblTextMaskingDiv tblTextMasking;
     @JsonProperty("btnModoru")
     private Button btnModoru;
-    @JsonProperty("btnHozon")
-    private Button btnHozon;
+    @JsonProperty("btnTextHozon")
+    private Button btnTextHozon;
     @JsonProperty("hdnTextMasking")
     private RString hdnTextMasking;
 
@@ -80,21 +80,21 @@ public class TextMaskingDiv extends Panel implements ITextMaskingDiv {
     }
 
     /*
-     * getbtnHozon
-     * @return btnHozon
+     * getbtnTextHozon
+     * @return btnTextHozon
      */
-    @JsonProperty("btnHozon")
-    public Button getBtnHozon() {
-        return btnHozon;
+    @JsonProperty("btnTextHozon")
+    public Button getBtnTextHozon() {
+        return btnTextHozon;
     }
 
     /*
-     * setbtnHozon
-     * @param btnHozon btnHozon
+     * setbtnTextHozon
+     * @param btnTextHozon btnTextHozon
      */
-    @JsonProperty("btnHozon")
-    public void setBtnHozon(Button btnHozon) {
-        this.btnHozon = btnHozon;
+    @JsonProperty("btnTextHozon")
+    public void setBtnTextHozon(Button btnTextHozon) {
+        this.btnTextHozon = btnTextHozon;
     }
 
     /*
