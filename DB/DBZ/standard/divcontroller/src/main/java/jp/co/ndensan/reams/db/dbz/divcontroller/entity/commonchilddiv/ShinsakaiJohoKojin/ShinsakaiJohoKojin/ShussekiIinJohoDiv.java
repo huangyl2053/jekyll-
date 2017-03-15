@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShussekiIinJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-09-23_20-45-52">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
