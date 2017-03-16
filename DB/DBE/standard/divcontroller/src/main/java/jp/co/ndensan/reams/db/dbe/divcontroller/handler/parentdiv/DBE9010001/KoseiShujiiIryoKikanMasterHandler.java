@@ -264,11 +264,13 @@ public class KoseiShujiiIryoKikanMasterHandler {
      */
     public void setShujiiIryoKikanJohoToIchiran(RString eventJotai, boolean 状態) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
+        int index = -1;
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
+            row = div.getShujiiIchiran().getDgShujiiIchiran().getSelectedItems().get(0);
+            index = div.getShujiiIchiran().getDgShujiiIchiran().getSelectedItems().get(0).getId();
         }
         setRow(row);
-        int index = div.getShujiiIchiran().getDgShujiiIchiran().getClickedRowId();
+
         if (状態_追加.equals(eventJotai)) {
             if (状態) {
                 row.setJotai(eventJotai);

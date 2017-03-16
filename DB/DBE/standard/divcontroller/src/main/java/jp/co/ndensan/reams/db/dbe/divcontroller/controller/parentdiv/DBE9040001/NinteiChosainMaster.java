@@ -439,7 +439,7 @@ public class NinteiChosainMaster {
                     new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
                     new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
                     new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue()));
-            RString jotai = div.getChosainIchiran().getDgChosainIchiran().getActiveRow().getJotai();
+            RString jotai = div.getChosainIchiran().getDgChosainIchiran().getSelectedItems().get(0).getJotai();
             if (状態_追加.equals(jotai)) {
                 models.deleteOrRemove(key);
             } else {

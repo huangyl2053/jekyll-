@@ -454,7 +454,7 @@ public class ShujiiMaster {
                     new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue(),
                     div.getShujiiJohoInput().getTxtShujiiCode().getValue());
-            RString jotai = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow().getJotai();
+            RString jotai = div.getShujiiIchiran().getDgShujiiIchiran().getSelectedItems().get(0).getJotai();
             if (状態_追加.equals(jotai)) {
                 models.deleteOrRemove(key);
             } else {

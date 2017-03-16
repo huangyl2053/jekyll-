@@ -261,8 +261,10 @@ public class NinteiChosainMasterHandler {
      */
     public void setChosainJohoToIchiran(RString eventJotai) {
         dgChosainIchiran_Row row = new dgChosainIchiran_Row();
+        int index = -1;
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getChosainIchiran().getDgChosainIchiran().getActiveRow();
+            row = div.getChosainIchiran().getDgChosainIchiran().getSelectedItems().get(0);
+            index = div.getChosainIchiran().getDgChosainIchiran().getSelectedItems().get(0).getId();
         }
 
         row.setShichoson(nullToEmpty(div.getChosainJohoInput().getTxtShichosonmei().getValue()));
@@ -290,7 +292,7 @@ public class NinteiChosainMasterHandler {
         row.setTelNo(nullToEmpty(div.getChosainJohoInput().getTxtTelNo().getDomain().value()));
         row.setFaxNo(nullToEmpty(div.getChosainJohoInput().getTxtFaxNo().getDomain().value()));
         row.setShozokuKikanName(nullToEmpty(div.getChosainJohoInput().getTextBoxShozokuKikan().getValue()));
-        int index = div.getChosainIchiran().getDgChosainIchiran().getClickedRowId();
+
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getChosainIchiran().getDgChosainIchiran().getDataSource().add(row);
