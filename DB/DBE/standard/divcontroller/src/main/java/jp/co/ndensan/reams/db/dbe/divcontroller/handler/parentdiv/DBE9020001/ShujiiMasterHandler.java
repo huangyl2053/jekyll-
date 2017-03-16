@@ -221,8 +221,10 @@ public class ShujiiMasterHandler {
      */
     public void setShujiiJohoToIchiran(RString eventJotai) {
         dgShujiiIchiran_Row row = new dgShujiiIchiran_Row();
+        int index = -1;
         if (!状態_追加.equals(eventJotai)) {
-            row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
+            row = div.getShujiiIchiran().getDgShujiiIchiran().getSelectedItems().get(0);
+            index = div.getShujiiIchiran().getDgShujiiIchiran().getSelectedItems().get(0).getId();
         }
         row.setShichoson(nullToEmpty(div.getShujiiJohoInput().getTxtShichosonmei().getValue()));
         row.setShichosonCode(nullToEmpty(div.getShujiiJohoInput().getTxtShichoson().getValue()));
@@ -252,7 +254,7 @@ public class ShujiiMasterHandler {
         row.setJusho(nullToEmpty(div.getShujiiJohoInput().getTxtJusho().getDomain().value()));
         row.setTelNo(nullToEmpty(div.getShujiiJohoInput().getTxtTelNo().getDomain().value()));
         row.setFaxNo(nullToEmpty(div.getShujiiJohoInput().getTxtFaxNo().getDomain().value()));
-        int index = div.getShujiiIchiran().getDgShujiiIchiran().getClickedRowId();
+
         if (状態_追加.equals(eventJotai)) {
             row.setJotai(eventJotai);
             div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().add(row);
