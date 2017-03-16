@@ -111,7 +111,7 @@ public class KojinJokyoShokaiResult {
     public FlexibleDate getセンター送信予定年月日() {
         return entity.getCenterSoshinYoteiYMD();
     }
-    
+
     /**
      * 認定申請情報登録完了日を返します。
      *
@@ -119,8 +119,8 @@ public class KojinJokyoShokaiResult {
      */
     public FlexibleDate get認定申請情報登録完了日() {
         return entity.getNinteiShinseiJohoTorokuKanryoYMD();
-    }  
-    
+    }
+
     /**
      * 認定調査依頼完了年月日を返します。
      *
@@ -1525,5 +1525,23 @@ public class KojinJokyoShokaiResult {
      */
     public RString get取下事由() {
         return entity.getTorisageRiyu();
+    }
+
+    /**
+     * 却下年月日を返します。
+     *
+     * @return 却下年月日
+     */
+    public FlexibleDate get却下年月日() {
+        return entity.getKyakkaYMD();
+    }
+
+    /**
+     * 却下事由を返します。
+     *
+     * @return 却下事由
+     */
+    public RString get却下事由() {
+        return entity.getKyakkaRiyu();
     }
 }

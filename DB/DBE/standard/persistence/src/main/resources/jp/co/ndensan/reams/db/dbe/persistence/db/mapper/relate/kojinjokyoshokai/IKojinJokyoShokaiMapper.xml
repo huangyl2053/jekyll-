@@ -31,6 +31,8 @@
         <result property="torisageKubunCode" column="DbT5101Nintei_torisageKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="torisageYMD" column="DbT5101Nintei_torisageYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="torisageRiyu" column="DbT5101Nintei_torisageRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kyakkaYMD" column="DbT5101Nintei_kyakkaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="kyakkaRiyu" column="DbT5101Nintei_kyakkaRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nijiHanteiYokaigoJotaiKubunCode" column="DbT5102Nintei_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="nijiHanteiYMD" column="DbT5102Nintei_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="DbT5102Nintei_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -199,6 +201,8 @@
               , DbT5101Nintei."torisageKubunCode" AS "DbT5101Nintei_torisageKubunCode"
               , DbT5101Nintei."torisageYMD" AS "DbT5101Nintei_torisageYMD"
               , DbT5101Nintei."torisageRiyu" AS "DbT5101Nintei_torisageRiyu"
+              , DbT5101Nintei."kyakkaYMD" AS "DbT5101Nintei_kyakkaYMD"
+              , DbT5101Nintei."kyakkaRiyu" AS "DbT5101Nintei_kyakkaRiyu"
               , DbT5102Nintei."nijiHanteiYokaigoJotaiKubunCode" AS "DbT5102Nintei_nijiHanteiYokaigoJotaiKubunCode"
               , DbT5102Nintei."nijiHanteiYMD" AS "DbT5102Nintei_nijiHanteiYMD"
               , DbT5102Nintei."nijiHanteiNinteiYukoKaishiYMD" AS "DbT5102Nintei_nijiHanteiNinteiYukoKaishiYMD"

@@ -50,6 +50,8 @@ public class KojinJokyoShokaiRelateEntity {
     private Code torisageKubunCode;
     private FlexibleDate torisageYMD;
     private RString torisageRiyu;
+    private FlexibleDate kyakkaYMD;
+    private RString kyakkaRiyu;
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private FlexibleDate nijiHanteiYMD;
     private FlexibleDate nijiHanteiNinteiYukoKaishiYMD;

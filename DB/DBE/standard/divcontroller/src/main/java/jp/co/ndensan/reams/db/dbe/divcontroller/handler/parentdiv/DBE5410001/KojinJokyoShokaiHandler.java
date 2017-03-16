@@ -63,7 +63,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -115,13 +114,19 @@ public class KojinJokyoShokaiHandler {
         div.getChosaItakusakiAndChosainGuide().getTxtChosaIraiDate().setValue(kojinJokyoShokaiList.get(0).get認定調査依頼年月日());
         if (!RString.isNullOrEmpty(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue())
                 && !TorisageKubun.認定申請有効.get取下げ区分コード().equals(kojinJokyoShokaiList.get(0).get取下区分コード())) {
-                    div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(
-                        TorisageKubunCode.toValue(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue()).get名称());
+            div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(
+                    TorisageKubunCode.toValue(kojinJokyoShokaiList.get(0).get取下区分コード().getColumnValue()).get名称());
         } else {
             div.getShinseiTorisage().getTxtTorisageJiyuCode().setValue(RString.EMPTY);
         }
-        div.getShinseiTorisage().getTxtTorisageDate().setValue(kojinJokyoShokaiList.get(0).get取下年月日());
-        div.getShinseiTorisage().getTxtTorisageJiyu().setValue(kojinJokyoShokaiList.get(0).get取下事由());
+        if (TorisageKubun.取下げ.get取下げ区分コード().equals(kojinJokyoShokaiList.get(0).get取下区分コード())) {
+            div.getShinseiTorisage().getTxtTorisageDate().setValue(kojinJokyoShokaiList.get(0).get取下年月日());
+            div.getShinseiTorisage().getTxtTorisageJiyu().setValue(kojinJokyoShokaiList.get(0).get取下事由());
+        } else if (TorisageKubun.却下.get取下げ区分コード().equals(kojinJokyoShokaiList.get(0).get取下区分コード())
+                || TorisageKubun.区分変更却下.get取下げ区分コード().equals(kojinJokyoShokaiList.get(0).get取下区分コード())) {
+            div.getShinseiTorisage().getTxtTorisageDate().setValue(kojinJokyoShokaiList.get(0).get却下年月日());
+            div.getShinseiTorisage().getTxtTorisageJiyu().setValue(kojinJokyoShokaiList.get(0).get却下事由());
+        }
         getchkShiteii(kojinJokyoShokaiList);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
@@ -270,8 +275,8 @@ public class KojinJokyoShokaiHandler {
         if (kojinJokyoShokaiList.get(0).get認定申請年月日() != null) {
             div.getTxtNinteiShinsakaiYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定申請年月日().plusDay(Integer.parseInt(
-                            DbBusinessConfig.get(ConfigNameDBE.認定審査会受付予定年月日, RDate.getNowDate(),
-                                    kojinJokyoShokaiList.get(0).get市町村コード().getColumnValue()).toString())).toString()));
+                                    DbBusinessConfig.get(ConfigNameDBE.認定審査会受付予定年月日, RDate.getNowDate(),
+                                            kojinJokyoShokaiList.get(0).get市町村コード().getColumnValue()).toString())).toString()));
         }
         if (kojinJokyoShokaiList.get(0).get認定調査依頼予定年月日() != null) {
             div.getTxtChosaIraiYoteiDate().setValue(new RDate(kojinJokyoShokaiList.get(0).get認定調査依頼予定年月日().toString()));
@@ -307,7 +312,7 @@ public class KojinJokyoShokaiHandler {
             div.getTxtCenterSoshinYoteiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).getセンター送信予定年月日().toString()));
         }
-        if (kojinJokyoShokaiList.get(0).get認定申請情報登録完了日()!= null) {
+        if (kojinJokyoShokaiList.get(0).get認定申請情報登録完了日() != null) {
             div.getTxtNinteiShinsakaiJissekiDate().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get認定申請情報登録完了日().toString()));
         }
