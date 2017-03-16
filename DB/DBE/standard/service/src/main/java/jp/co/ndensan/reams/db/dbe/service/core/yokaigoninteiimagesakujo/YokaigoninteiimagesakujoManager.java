@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.DeletionMethod;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.OperationTarget;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.OperationTargets;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5601NinteiChosaHoshuJissekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5602ShujiiIkenshoHoshuJissekiJohoEntity;
@@ -36,11 +39,6 @@ public class YokaigoninteiimagesakujoManager {
     private final DbT5601NinteiChosaHoshuJissekiJohoDac dbT5601Dac;
     private final DbT5602ShujiiIkenshoHoshuJissekiJohoDac dbT5602Dac;
     private final MapperProvider mapperProvider;
-    private static final RString 原本マスクを削除 = new RString("1");
-    private static final RString マスクを削除 = new RString("2");
-    private static final RString KEY_調査票特記 = new RString("1");
-    private static final RString KEY_調査票概況 = new RString("2");
-    private static final RString KEY_主治医意見書 = new RString("3");
 
     /**
      * コンストラクタです。
@@ -143,97 +141,94 @@ public class YokaigoninteiimagesakujoManager {
     }
 
     /**
-     * 「削除」ボタンを押下する場合、イメージを削除して、DBを更新します。
-     *
      * @param イメージ管理情報 イメージ管理情報
-     * @param 選択されたイメージ対象 選択されたイメージ対象
-     * @param 削除対象 削除対象
+     * @param 処理対象s 全削除対象
      */
     @Transaction
-    public void updateOrDelete(ImagekanriJoho イメージ管理情報, List<RString> 選択されたイメージ対象, RString 削除対象) {
-        for (RString key : 選択されたイメージ対象) {
-            if (KEY_調査票特記.equals(key)) {
-                update調査票特記(
-                        イメージ管理情報.get申請書管理番号(),
-                        イメージ管理情報.get認定調査依頼履歴番号(),
-                        削除対象);
-            } else if (KEY_調査票概況.equals(key)) {
-                update調査票概況(
-                        イメージ管理情報.get申請書管理番号(),
-                        イメージ管理情報.get認定調査依頼履歴番号(),
-                        削除対象);
-            } else if (KEY_主治医意見書.equals(key)) {
-                update主治医意見書(
-                        イメージ管理情報.get申請書管理番号(),
-                        イメージ管理情報.get主治医意見書作成依頼履歴番号(),
-                        削除対象);
-            }
+    public void updateOrDelete(ImagekanriJoho イメージ管理情報, OperationTargets 処理対象s) {
+        for (OperationTarget t : 処理対象s) {
+            _updateOrDelete(イメージ管理情報, t);
         }
     }
 
-    @Transaction
-    private void update調査票特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
-        IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
-        if (原本マスクを削除.equals(削除対象区分)) {
-            mapper.deleteDbT5205PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(),
-                    RString.EMPTY, false));
-        } else if (マスクを削除.equals(削除対象区分)) {
-            mapper.deleteDbT5205PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(),
-                    GenponMaskKubun.マスク.getコード(), true));
+    private void _updateOrDelete(ImagekanriJoho imageKanriInfo, OperationTarget target) {
+        switch (target.type()) {
+            case 調査票:
+                update調査票特記(imageKanriInfo.get申請書管理番号(), imageKanriInfo.get認定調査依頼履歴番号(), target.deletionMethod());
+                return;
+            case 概況特記:
+                update調査票概況(imageKanriInfo.get申請書管理番号(), imageKanriInfo.get認定調査依頼履歴番号(), target.deletionMethod());
+                return;
+            case 意見書:
+                update主治医意見書(imageKanriInfo.get申請書管理番号(), imageKanriInfo.get主治医意見書作成依頼履歴番号(), target.deletionMethod());
+            default:
         }
-        if (原本マスクを削除.equals(削除対象区分)) {
-            mapper.deleteDbT5202PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(), RString.EMPTY, false));
-            mapper.deleteDbT5203PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5204PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5207PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5208PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5209PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5210PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5211PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
-            mapper.deleteDbT5212PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
-                    申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+    }
+
+    private void update調査票特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, DeletionMethod 削除対象区分) {
+        IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
+        switch (削除対象区分) {
+            case 原本マスクを削除:
+                mapper.deleteDbT5202PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(), RString.EMPTY, false));
+                mapper.deleteDbT5203PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5204PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5205PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(),
+                        RString.EMPTY, false));
+                mapper.deleteDbT5207PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5208PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5209PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5210PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5211PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                mapper.deleteDbT5212PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, RString.EMPTY, RString.EMPTY, false));
+                break;
+            case マスクのみを削除:
+                mapper.deleteDbT5205PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
+                        申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(),
+                        GenponMaskKubun.マスク.getコード(), true));
+                break;
+            default:
+                break;
         }
         mapper.deleteDbT5213PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
                 申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(),
                 RString.EMPTY, false));
     }
 
-    @Transaction
-    private void update調査票概況(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 削除対象区分) {
+    private void update調査票概況(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, DeletionMethod 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
-        if (原本マスクを削除.equals(削除対象区分)) {
+        if (削除対象区分 == DeletionMethod.原本マスクを削除) {
             mapper.deleteDbT5206PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_認定調査票(
                     申請書管理番号, 認定調査依頼履歴番号, TokkijikoTextImageKubun.イメージ.getコード(), RString.EMPTY, false));
         }
     }
 
-    @Transaction
-    private void update主治医意見書(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 削除対象区分) {
+    private void update主治医意見書(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号, DeletionMethod 削除対象区分) {
         IYokaigoninteiimagesakujoMapper mapper = mapperProvider.create(IYokaigoninteiimagesakujoMapper.class);
-        if (原本マスクを削除.equals(削除対象区分)) {
-            mapper.deleteDbT5305PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
-                    申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
-        } else if (マスクを削除.equals(削除対象区分)) {
-            mapper.deleteDbT5305PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
-                    申請書管理番号, 主治医意見書作成依頼履歴番号, GenponMaskKubun.マスク.getコード(), true));
-        }
-        if (原本マスクを削除.equals(削除対象区分)) {
-            mapper.deleteDbT5302PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
-                    申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
-            mapper.deleteDbT5303PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
-                    申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
-            mapper.deleteDbT5304PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
-                    申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
+        switch (削除対象区分) {
+            case 原本マスクを削除:
+                mapper.deleteDbT5302PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
+                        申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
+                mapper.deleteDbT5303PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
+                        申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
+                mapper.deleteDbT5304PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
+                        申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
+                mapper.deleteDbT5305PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
+                        申請書管理番号, 主治医意見書作成依頼履歴番号, RString.EMPTY, false));
+                return;
+            case マスクのみを削除:
+                mapper.deleteDbT5305PhysicalBy(YokaigoninteiimagesakujoMapperParameter.createDeleteByKeyParam_主治医意見書(
+                        申請書管理番号, 主治医意見書作成依頼履歴番号, GenponMaskKubun.マスク.getコード(), true));
+            default:
         }
     }
 

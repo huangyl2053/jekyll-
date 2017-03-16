@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.tokkiimages.tokkiimagesperchosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeNotificationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerChosa.TokkiImagesPerChosaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.TokkiImagesPerKomoku.ITokkiImagesPerKomokuDiv;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.ExclusiveLock;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -67,6 +69,10 @@ public class TokkiImagesPerChosa {
      * @return response
      */
     public ResponseData<TokkiImagesPerChosaDiv> onClick_btnSave(TokkiImagesPerChosaDiv div) {
+        if (ExclusiveLock.isLocked(ResponseHolder.getUIContainerId())) {
+            throw new ApplicationException(DbeErrorMessages.バッチとの機能間排他.getMessage());
+        }
+
         ITokkiImagesPerKomokuDiv edited = div.getEditing();
         if (edited == null) {
             return ResponseData.of(div).respond();
@@ -75,7 +81,6 @@ public class TokkiImagesPerChosa {
         if (result.existsError()) {
             return ResponseData.of(div).addValidationMessages(result).respond();
         }
-        ExclusiveLock.isLocked(ResponseHolder.getUIContainerId());
         ReadOnlySharedFileEntryDescriptor rosfed = div.getSharedFileEntryDescriptor();
         TokkiRembanRenumberingService.createInstance().save(
                 rosfed,

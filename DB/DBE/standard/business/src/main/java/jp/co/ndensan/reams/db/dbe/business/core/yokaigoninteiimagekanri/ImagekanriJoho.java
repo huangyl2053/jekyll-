@@ -6,8 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteiimagekanri.ImagekanriJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -209,5 +215,33 @@ public class ImagekanriJoho implements Serializable {
      */
     public ShinsakaiWariateHistories get審査会割当履歴() {
         return this.shinsakaiWariateHistories;
+    }
+
+    /**
+     * @return {@link ReadOnlySharedFileEntryDescriptor}
+     */
+    public ReadOnlySharedFileEntryDescriptor toReadOnlySharedFileEntryDescriptor() {
+        return new ReadOnlySharedFileEntryDescriptor(
+                new FilesystemName(get証記載保険者番号().concat(get被保険者番号())),
+                getイメージ共有ファイルID()
+        );
+    }
+
+    /**
+     * @return 関連する全てのイメージファイル名
+     */
+    public ImageFileNames collectImageNames() {
+        List<RString> list = new ArrayList<>();
+        for (SharedFileEntryInfoEntity info : SharedFile.getEntryInfo(toReadOnlySharedFileEntryDescriptor())) {
+            if (info.getFilesEntity() == null) {
+                continue;
+            }
+            RString pathName = info.getFilesEntity().getPathname();
+            if (pathName == null) {
+                continue;
+            }
+            list.add(pathName);
+        }
+        return new ImageFileNames(list);
     }
 }

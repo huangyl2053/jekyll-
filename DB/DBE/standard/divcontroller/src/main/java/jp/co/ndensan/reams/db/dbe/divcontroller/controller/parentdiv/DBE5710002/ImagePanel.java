@@ -9,9 +9,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
+import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileNames;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.ImageType;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001.Yokaigoninteiimagekanri;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710002.ImagePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelValidationHandler;
@@ -33,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -44,11 +47,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ImagePanel {
 
-    private static final RString 調査票 = new RString("1");
-    private static final RString 調査票概況 = new RString("2");
-    private static final RString 主治医意見書 = new RString("3");
-    private static final RString その他資料 = new RString("4");
-    private static final RString 拡張子 = new RString(".png");
+    private static final RString 調査票 = ImageType.調査票.key();
+    private static final RString 調査票概況 = ImageType.概況特記.key();
+    private static final RString 主治医意見書 = ImageType.意見書.key();
+    private static final RString その他資料 = ImageType.その他資料.key();
 
     /**
      * 要介護認定イメージ情報出力画面をloadします。
@@ -57,21 +59,28 @@ public class ImagePanel {
      * @return ResponseData
      */
     public ResponseData<ImagePanelDiv> onLoad(ImagePanelDiv div) {
-        if (!Yokaigoninteiimagekanri.uses概況特記()) {
-            div.getChkImage().setDataSource(removed概況特記(div.getChkImage().getDataSource()));
-        }
+        div.getChkImage().setDataSource(
+                createDataSourceFromDownloadableImageTypes(ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class))
+        );
         return ResponseData.of(div).respond();
     }
 
-    private static List<KeyValueDataSource> removed概況特記(List<KeyValueDataSource> defaultDataSource) {
-        List<KeyValueDataSource> list = new ArrayList<>();
-        for (KeyValueDataSource v : defaultDataSource) {
-            if (Objects.equals(v.getKey(), 調査票概況)) {
-                continue;
-            }
-            list.add(v);
+    private static List<KeyValueDataSource> createDataSourceFromDownloadableImageTypes(ImagekanriJoho imageKanriJoho) {
+        ImageFileNames imageFileNames = imageKanriJoho.collectImageNames();
+        Map<RString, RString> map = ImageType.toMap();
+        if (!imageFileNames.confirmChosahyoImagesPresent().exists()) {
+            map.remove(調査票);
         }
-        return list;
+        if (!Yokaigoninteiimagekanri.uses概況特記() || !imageFileNames.confirmGaikyoTokkiImagesPresent().exists()) {
+            map.remove(調査票概況);
+        }
+        if (!imageFileNames.confirmIkenshoImagesPresent().exists()) {
+            map.remove(主治医意見書);
+        }
+        if (!imageFileNames.confirmSonotaShiryoImagesPresent().exists()) {
+            map.remove(その他資料);
+        }
+        return KeyValueDataSourceConverter.getDataSource(map);
     }
 
     /**
@@ -157,17 +166,6 @@ public class ImagePanel {
         for (RString fileName : fileList) {
             if (Directory.exists(Path.combinePath(localCopyPath, fileName))) {
                 result.add(Path.combinePath(localCopyPath, fileName));
-            }
-        }
-        return result.isEmpty() ? Collections.EMPTY_LIST : result;
-    }
-
-    private List<RString> existFileList(List<RString> fileList, ReadOnlySharedFileEntryDescriptor ro_sfed) {
-        List<RString> result = new ArrayList<>();
-        for (RString fileName : fileList) {
-            File file = new File(ro_sfed.getDirectAccessPath().concat("\\IMG").concat(fileName).toString());
-            if (file.exists()) {
-                result.add(fileName);
             }
         }
         return result.isEmpty() ? Collections.EMPTY_LIST : result;
