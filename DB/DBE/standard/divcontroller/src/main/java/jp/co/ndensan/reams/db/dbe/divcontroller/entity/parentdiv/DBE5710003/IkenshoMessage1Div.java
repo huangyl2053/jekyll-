@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SonotaMessage のクラスファイル 
+ * IkenshoMessage1 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SonotaMessageDiv extends Panel {
+public class IkenshoMessage1Div extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
@@ -21,8 +21,8 @@ public class SonotaMessageDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSonotaMessage")
-    private Label lblSonotaMessage;
+    @JsonProperty("lblIkenshoMessage1")
+    private Label lblIkenshoMessage1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class SonotaMessageDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblSonotaMessage
-     * @return lblSonotaMessage
+     * getlblIkenshoMessage1
+     * @return lblIkenshoMessage1
      */
-    @JsonProperty("lblSonotaMessage")
-    public Label getLblSonotaMessage() {
-        return lblSonotaMessage;
+    @JsonProperty("lblIkenshoMessage1")
+    public Label getLblIkenshoMessage1() {
+        return lblIkenshoMessage1;
     }
 
     /*
-     * setlblSonotaMessage
-     * @param lblSonotaMessage lblSonotaMessage
+     * setlblIkenshoMessage1
+     * @param lblIkenshoMessage1 lblIkenshoMessage1
      */
-    @JsonProperty("lblSonotaMessage")
-    public void setLblSonotaMessage(Label lblSonotaMessage) {
-        this.lblSonotaMessage = lblSonotaMessage;
+    @JsonProperty("lblIkenshoMessage1")
+    public void setLblIkenshoMessage1(Label lblIkenshoMessage1) {
+        this.lblIkenshoMessage1 = lblIkenshoMessage1;
     }
 
     // </editor-fold>

@@ -26,8 +26,8 @@ public class GaikyoTokkiDiv extends Panel {
     private CheckBoxList chkGaikyoTokki;
     @JsonProperty("radGaikyoTokkiDeleteTarget")
     private RadioButton radGaikyoTokkiDeleteTarget;
-    @JsonProperty("GaikyoTokkiMessage")
-    private GaikyoTokkiMessageDiv GaikyoTokkiMessage;
+    @JsonProperty("GaikyoTokkiMessage1")
+    private GaikyoTokkiMessage1Div GaikyoTokkiMessage1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,34 +72,34 @@ public class GaikyoTokkiDiv extends Panel {
     }
 
     /*
-     * getGaikyoTokkiMessage
-     * @return GaikyoTokkiMessage
+     * getGaikyoTokkiMessage1
+     * @return GaikyoTokkiMessage1
      */
-    @JsonProperty("GaikyoTokkiMessage")
-    public GaikyoTokkiMessageDiv getGaikyoTokkiMessage() {
-        return GaikyoTokkiMessage;
+    @JsonProperty("GaikyoTokkiMessage1")
+    public GaikyoTokkiMessage1Div getGaikyoTokkiMessage1() {
+        return GaikyoTokkiMessage1;
     }
 
     /*
-     * setGaikyoTokkiMessage
-     * @param GaikyoTokkiMessage GaikyoTokkiMessage
+     * setGaikyoTokkiMessage1
+     * @param GaikyoTokkiMessage1 GaikyoTokkiMessage1
      */
-    @JsonProperty("GaikyoTokkiMessage")
-    public void setGaikyoTokkiMessage(GaikyoTokkiMessageDiv GaikyoTokkiMessage) {
-        this.GaikyoTokkiMessage = GaikyoTokkiMessage;
+    @JsonProperty("GaikyoTokkiMessage1")
+    public void setGaikyoTokkiMessage1(GaikyoTokkiMessage1Div GaikyoTokkiMessage1) {
+        this.GaikyoTokkiMessage1 = GaikyoTokkiMessage1;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Label getLblGaikyoTokkiMessage() {
-        return this.getGaikyoTokkiMessage().getLblGaikyoTokkiMessage();
+    public Label getLblGaikyoTokkiMessage1() {
+        return this.getGaikyoTokkiMessage1().getLblGaikyoTokkiMessage1();
     }
 
     @JsonIgnore
-    public void  setLblGaikyoTokkiMessage(Label lblGaikyoTokkiMessage) {
-        this.getGaikyoTokkiMessage().setLblGaikyoTokkiMessage(lblGaikyoTokkiMessage);
+    public void  setLblGaikyoTokkiMessage1(Label lblGaikyoTokkiMessage1) {
+        this.getGaikyoTokkiMessage1().setLblGaikyoTokkiMessage1(lblGaikyoTokkiMessage1);
     }
 
     // </editor-fold>

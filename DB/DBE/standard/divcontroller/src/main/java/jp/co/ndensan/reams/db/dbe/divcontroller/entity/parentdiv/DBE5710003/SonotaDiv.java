@@ -26,8 +26,10 @@ public class SonotaDiv extends Panel {
     private CheckBoxList chkSonota;
     @JsonProperty("radSonotaDeleteTarget")
     private RadioButton radSonotaDeleteTarget;
-    @JsonProperty("SonotaMessage")
-    private SonotaMessageDiv SonotaMessage;
+    @JsonProperty("SonotaMessage1")
+    private SonotaMessage1Div SonotaMessage1;
+    @JsonProperty("SonotaMessage2")
+    private SonotaMessage2Div SonotaMessage2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,34 +74,62 @@ public class SonotaDiv extends Panel {
     }
 
     /*
-     * getSonotaMessage
-     * @return SonotaMessage
+     * getSonotaMessage1
+     * @return SonotaMessage1
      */
-    @JsonProperty("SonotaMessage")
-    public SonotaMessageDiv getSonotaMessage() {
-        return SonotaMessage;
+    @JsonProperty("SonotaMessage1")
+    public SonotaMessage1Div getSonotaMessage1() {
+        return SonotaMessage1;
     }
 
     /*
-     * setSonotaMessage
-     * @param SonotaMessage SonotaMessage
+     * setSonotaMessage1
+     * @param SonotaMessage1 SonotaMessage1
      */
-    @JsonProperty("SonotaMessage")
-    public void setSonotaMessage(SonotaMessageDiv SonotaMessage) {
-        this.SonotaMessage = SonotaMessage;
+    @JsonProperty("SonotaMessage1")
+    public void setSonotaMessage1(SonotaMessage1Div SonotaMessage1) {
+        this.SonotaMessage1 = SonotaMessage1;
+    }
+
+    /*
+     * getSonotaMessage2
+     * @return SonotaMessage2
+     */
+    @JsonProperty("SonotaMessage2")
+    public SonotaMessage2Div getSonotaMessage2() {
+        return SonotaMessage2;
+    }
+
+    /*
+     * setSonotaMessage2
+     * @param SonotaMessage2 SonotaMessage2
+     */
+    @JsonProperty("SonotaMessage2")
+    public void setSonotaMessage2(SonotaMessage2Div SonotaMessage2) {
+        this.SonotaMessage2 = SonotaMessage2;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Label getLblSonotaMessage() {
-        return this.getSonotaMessage().getLblSonotaMessage();
+    public Label getLblSonotaMessage1() {
+        return this.getSonotaMessage1().getLblSonotaMessage1();
     }
 
     @JsonIgnore
-    public void  setLblSonotaMessage(Label lblSonotaMessage) {
-        this.getSonotaMessage().setLblSonotaMessage(lblSonotaMessage);
+    public void  setLblSonotaMessage1(Label lblSonotaMessage1) {
+        this.getSonotaMessage1().setLblSonotaMessage1(lblSonotaMessage1);
+    }
+
+    @JsonIgnore
+    public Label getLblSonotaMessage2() {
+        return this.getSonotaMessage2().getLblSonotaMessage2();
+    }
+
+    @JsonIgnore
+    public void  setLblSonotaMessage2(Label lblSonotaMessage2) {
+        this.getSonotaMessage2().setLblSonotaMessage2(lblSonotaMessage2);
     }
 
     // </editor-fold>

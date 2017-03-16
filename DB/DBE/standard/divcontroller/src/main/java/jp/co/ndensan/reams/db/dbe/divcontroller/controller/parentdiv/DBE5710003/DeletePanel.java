@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710003
 
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.OperationTargets;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DBE5710003TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.ImageDeletor;
@@ -38,7 +40,50 @@ public class DeletePanel {
      * @return ResponseData
      */
     public ResponseData<DeletePanelDiv> onLoad(DeletePanelDiv div) {
-        new DeletePanelPresentationHandler(div).initialize(ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class));
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+        boolean existsAnyImages
+                = getPresentationHandler(div).initialize(ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class));
+        if (!existsAnyImages) {
+            return ResponseData.of(div).addMessage(DbeInformationMessages.削除可能なイメージ情報なし.getMessage()).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div 要介護認定イメージ情報削除Div
+     * @return ResponseData
+     */
+    public ResponseData<DeletePanelDiv> onChange_Chosahyo(DeletePanelDiv div) {
+        getPresentationHandler(div).displayMessageByChosahyosState();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div 要介護認定イメージ情報削除Div
+     * @return ResponseData
+     */
+    public ResponseData<DeletePanelDiv> onChange_GaikyoTokki(DeletePanelDiv div) {
+        getPresentationHandler(div).displayMessageByGaikyoTokkisState();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div 要介護認定イメージ情報削除Div
+     * @return ResponseData
+     */
+    public ResponseData<DeletePanelDiv> onChange_Ikensho(DeletePanelDiv div) {
+        getPresentationHandler(div).displayMessageByIkenshosState();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div 要介護認定イメージ情報削除Div
+     * @return ResponseData
+     */
+    public ResponseData<DeletePanelDiv> onChange_Sonota(DeletePanelDiv div) {
+        getPresentationHandler(div).displayMessageBySonotasState();
         return ResponseData.of(div).respond();
     }
 
@@ -56,7 +101,15 @@ public class DeletePanel {
         }
         if (new RString(UrInformationMessages.削除終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            boolean existsAnyImages
+                    = getPresentationHandler(div).initialize(ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class));
+            if (!existsAnyImages) {
+                return ResponseData.of(div).addMessage(DbeInformationMessages.削除可能なイメージ情報なし.getMessage()).respond();
+            }
             return ResponseData.of(div).respond();
+        }
+        if (new RString(DbeInformationMessages.削除可能なイメージ情報なし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).forwardWithEventName(DBE5710003TransitionEventName.要介護認定イメージ情報管理へ戻る).respond();
         }
 
         ValidationMessageControlPairs controlPairs = getValidationHandler(div).validateInput();
@@ -77,6 +130,10 @@ public class DeletePanel {
             return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private static DeletePanelPresentationHandler getPresentationHandler(DeletePanelDiv div) {
+        return new DeletePanelPresentationHandler(div);
     }
 
     private static DeletePanelHandler getHandler(DeletePanelDiv div) {

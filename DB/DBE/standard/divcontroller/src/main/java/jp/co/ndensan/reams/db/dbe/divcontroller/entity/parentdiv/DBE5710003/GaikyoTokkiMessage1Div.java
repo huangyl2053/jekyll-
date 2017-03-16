@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosahyoMessage のクラスファイル 
+ * GaikyoTokkiMessage1 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ChosahyoMessageDiv extends Panel {
+public class GaikyoTokkiMessage1Div extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
@@ -21,8 +21,8 @@ public class ChosahyoMessageDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblChosahyoMessage")
-    private Label lblChosahyoMessage;
+    @JsonProperty("lblGaikyoTokkiMessage1")
+    private Label lblGaikyoTokkiMessage1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class ChosahyoMessageDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblChosahyoMessage
-     * @return lblChosahyoMessage
+     * getlblGaikyoTokkiMessage1
+     * @return lblGaikyoTokkiMessage1
      */
-    @JsonProperty("lblChosahyoMessage")
-    public Label getLblChosahyoMessage() {
-        return lblChosahyoMessage;
+    @JsonProperty("lblGaikyoTokkiMessage1")
+    public Label getLblGaikyoTokkiMessage1() {
+        return lblGaikyoTokkiMessage1;
     }
 
     /*
-     * setlblChosahyoMessage
-     * @param lblChosahyoMessage lblChosahyoMessage
+     * setlblGaikyoTokkiMessage1
+     * @param lblGaikyoTokkiMessage1 lblGaikyoTokkiMessage1
      */
-    @JsonProperty("lblChosahyoMessage")
-    public void setLblChosahyoMessage(Label lblChosahyoMessage) {
-        this.lblChosahyoMessage = lblChosahyoMessage;
+    @JsonProperty("lblGaikyoTokkiMessage1")
+    public void setLblGaikyoTokkiMessage1(Label lblGaikyoTokkiMessage1) {
+        this.lblGaikyoTokkiMessage1 = lblGaikyoTokkiMessage1;
     }
 
     // </editor-fold>

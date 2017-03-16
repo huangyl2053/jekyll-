@@ -139,4 +139,11 @@ public final class ImageFileNames {
     public List<RString> asList() {
         return this.imageFileNames;
     }
+
+    /**
+     * @return イメージファイルが一件も存在しない場合、{@code true}.
+     */
+    public boolean isEmpty() {
+        return this.imageFileNames.isEmpty();
+    }
 }

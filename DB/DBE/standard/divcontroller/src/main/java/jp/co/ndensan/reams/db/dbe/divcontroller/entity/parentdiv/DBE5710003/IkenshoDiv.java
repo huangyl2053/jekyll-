@@ -26,8 +26,10 @@ public class IkenshoDiv extends Panel {
     private CheckBoxList chkIkensho;
     @JsonProperty("radIkenshoDeleteTarget")
     private RadioButton radIkenshoDeleteTarget;
-    @JsonProperty("IkenshoMessage")
-    private IkenshoMessageDiv IkenshoMessage;
+    @JsonProperty("IkenshoMessage1")
+    private IkenshoMessage1Div IkenshoMessage1;
+    @JsonProperty("IkenshoMessage2")
+    private IkenshoMessage2Div IkenshoMessage2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,34 +74,62 @@ public class IkenshoDiv extends Panel {
     }
 
     /*
-     * getIkenshoMessage
-     * @return IkenshoMessage
+     * getIkenshoMessage1
+     * @return IkenshoMessage1
      */
-    @JsonProperty("IkenshoMessage")
-    public IkenshoMessageDiv getIkenshoMessage() {
-        return IkenshoMessage;
+    @JsonProperty("IkenshoMessage1")
+    public IkenshoMessage1Div getIkenshoMessage1() {
+        return IkenshoMessage1;
     }
 
     /*
-     * setIkenshoMessage
-     * @param IkenshoMessage IkenshoMessage
+     * setIkenshoMessage1
+     * @param IkenshoMessage1 IkenshoMessage1
      */
-    @JsonProperty("IkenshoMessage")
-    public void setIkenshoMessage(IkenshoMessageDiv IkenshoMessage) {
-        this.IkenshoMessage = IkenshoMessage;
+    @JsonProperty("IkenshoMessage1")
+    public void setIkenshoMessage1(IkenshoMessage1Div IkenshoMessage1) {
+        this.IkenshoMessage1 = IkenshoMessage1;
+    }
+
+    /*
+     * getIkenshoMessage2
+     * @return IkenshoMessage2
+     */
+    @JsonProperty("IkenshoMessage2")
+    public IkenshoMessage2Div getIkenshoMessage2() {
+        return IkenshoMessage2;
+    }
+
+    /*
+     * setIkenshoMessage2
+     * @param IkenshoMessage2 IkenshoMessage2
+     */
+    @JsonProperty("IkenshoMessage2")
+    public void setIkenshoMessage2(IkenshoMessage2Div IkenshoMessage2) {
+        this.IkenshoMessage2 = IkenshoMessage2;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Label getLblIkenshoMessage() {
-        return this.getIkenshoMessage().getLblIkenshoMessage();
+    public Label getLblIkenshoMessage1() {
+        return this.getIkenshoMessage1().getLblIkenshoMessage1();
     }
 
     @JsonIgnore
-    public void  setLblIkenshoMessage(Label lblIkenshoMessage) {
-        this.getIkenshoMessage().setLblIkenshoMessage(lblIkenshoMessage);
+    public void  setLblIkenshoMessage1(Label lblIkenshoMessage1) {
+        this.getIkenshoMessage1().setLblIkenshoMessage1(lblIkenshoMessage1);
+    }
+
+    @JsonIgnore
+    public Label getLblIkenshoMessage2() {
+        return this.getIkenshoMessage2().getLblIkenshoMessage2();
+    }
+
+    @JsonIgnore
+    public void  setLblIkenshoMessage2(Label lblIkenshoMessage2) {
+        this.getIkenshoMessage2().setLblIkenshoMessage2(lblIkenshoMessage2);
     }
 
     // </editor-fold>

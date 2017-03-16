@@ -52,12 +52,13 @@ public enum DeletionMethod {
         return this == マスクのみを削除;
     }
 
-    public static Map<RString, RString> toMap(boolean hasMasked) {
+    /**
+     * @return {@link #key()}の戻り値をキーに、{@link #displayName()}の値をマッピングした形式
+     */
+    public static Map<RString, RString> toMap() {
         Map<RString, RString> map = new LinkedHashMap<>();
         map.put(原本マスクを削除.key(), 原本マスクを削除.diplayName());
-        if (hasMasked) {
-            map.put(マスクのみを削除.key(), マスクのみを削除.diplayName());
-        }
+        map.put(マスクのみを削除.key(), マスクのみを削除.diplayName());
         return map;
     }
 

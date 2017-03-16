@@ -26,8 +26,10 @@ public class ChosahyoDiv extends Panel {
     private CheckBoxList chkChosahyo;
     @JsonProperty("radChosahyoDeleteTarget")
     private RadioButton radChosahyoDeleteTarget;
-    @JsonProperty("ChosahyoMessage")
-    private ChosahyoMessageDiv ChosahyoMessage;
+    @JsonProperty("ChosahyoMessage1")
+    private ChosahyoMessage1Div ChosahyoMessage1;
+    @JsonProperty("ChosahyoMessage2")
+    private ChosahyoMessage2Div ChosahyoMessage2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,34 +74,62 @@ public class ChosahyoDiv extends Panel {
     }
 
     /*
-     * getChosahyoMessage
-     * @return ChosahyoMessage
+     * getChosahyoMessage1
+     * @return ChosahyoMessage1
      */
-    @JsonProperty("ChosahyoMessage")
-    public ChosahyoMessageDiv getChosahyoMessage() {
-        return ChosahyoMessage;
+    @JsonProperty("ChosahyoMessage1")
+    public ChosahyoMessage1Div getChosahyoMessage1() {
+        return ChosahyoMessage1;
     }
 
     /*
-     * setChosahyoMessage
-     * @param ChosahyoMessage ChosahyoMessage
+     * setChosahyoMessage1
+     * @param ChosahyoMessage1 ChosahyoMessage1
      */
-    @JsonProperty("ChosahyoMessage")
-    public void setChosahyoMessage(ChosahyoMessageDiv ChosahyoMessage) {
-        this.ChosahyoMessage = ChosahyoMessage;
+    @JsonProperty("ChosahyoMessage1")
+    public void setChosahyoMessage1(ChosahyoMessage1Div ChosahyoMessage1) {
+        this.ChosahyoMessage1 = ChosahyoMessage1;
+    }
+
+    /*
+     * getChosahyoMessage2
+     * @return ChosahyoMessage2
+     */
+    @JsonProperty("ChosahyoMessage2")
+    public ChosahyoMessage2Div getChosahyoMessage2() {
+        return ChosahyoMessage2;
+    }
+
+    /*
+     * setChosahyoMessage2
+     * @param ChosahyoMessage2 ChosahyoMessage2
+     */
+    @JsonProperty("ChosahyoMessage2")
+    public void setChosahyoMessage2(ChosahyoMessage2Div ChosahyoMessage2) {
+        this.ChosahyoMessage2 = ChosahyoMessage2;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Label getLblChosahyoMessage() {
-        return this.getChosahyoMessage().getLblChosahyoMessage();
+    public Label getLblChosahyoMessage1() {
+        return this.getChosahyoMessage1().getLblChosahyoMessage1();
     }
 
     @JsonIgnore
-    public void  setLblChosahyoMessage(Label lblChosahyoMessage) {
-        this.getChosahyoMessage().setLblChosahyoMessage(lblChosahyoMessage);
+    public void  setLblChosahyoMessage1(Label lblChosahyoMessage1) {
+        this.getChosahyoMessage1().setLblChosahyoMessage1(lblChosahyoMessage1);
+    }
+
+    @JsonIgnore
+    public Label getLblChosahyoMessage2() {
+        return this.getChosahyoMessage2().getLblChosahyoMessage2();
+    }
+
+    @JsonIgnore
+    public void  setLblChosahyoMessage2(Label lblChosahyoMessage2) {
+        this.getChosahyoMessage2().setLblChosahyoMessage2(lblChosahyoMessage2);
     }
 
     // </editor-fold>

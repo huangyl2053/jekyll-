@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * GaikyoTokkiMessage のクラスファイル 
+ * SonotaMessage2 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class GaikyoTokkiMessageDiv extends Panel {
+public class SonotaMessage2Div extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
@@ -21,8 +21,8 @@ public class GaikyoTokkiMessageDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblGaikyoTokkiMessage")
-    private Label lblGaikyoTokkiMessage;
+    @JsonProperty("lblSonotaMessage2")
+    private Label lblSonotaMessage2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +31,21 @@ public class GaikyoTokkiMessageDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getlblGaikyoTokkiMessage
-     * @return lblGaikyoTokkiMessage
+     * getlblSonotaMessage2
+     * @return lblSonotaMessage2
      */
-    @JsonProperty("lblGaikyoTokkiMessage")
-    public Label getLblGaikyoTokkiMessage() {
-        return lblGaikyoTokkiMessage;
+    @JsonProperty("lblSonotaMessage2")
+    public Label getLblSonotaMessage2() {
+        return lblSonotaMessage2;
     }
 
     /*
-     * setlblGaikyoTokkiMessage
-     * @param lblGaikyoTokkiMessage lblGaikyoTokkiMessage
+     * setlblSonotaMessage2
+     * @param lblSonotaMessage2 lblSonotaMessage2
      */
-    @JsonProperty("lblGaikyoTokkiMessage")
-    public void setLblGaikyoTokkiMessage(Label lblGaikyoTokkiMessage) {
-        this.lblGaikyoTokkiMessage = lblGaikyoTokkiMessage;
+    @JsonProperty("lblSonotaMessage2")
+    public void setLblSonotaMessage2(Label lblSonotaMessage2) {
+        this.lblSonotaMessage2 = lblSonotaMessage2;
     }
 
     // </editor-fold>
