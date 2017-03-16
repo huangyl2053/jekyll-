@@ -19,10 +19,6 @@ var DBZ;
             Events.onClick_Moderu = function () {
                 return "onClick_Moderu";
             };
-
-            Events.onClick_SaiKenSaKu = function () {
-                return "onClick_SaiKenSaKu";
-            };
             return Events;
         })();
         SonotaKikanGuide.Events = Events;
@@ -49,6 +45,10 @@ var DBZ;
 
             Controls.prototype.KensakuJoken = function () {
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
+            };
+
+            Controls.prototype.ccdHokenshaList = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
             };
 
             Controls.prototype.txtSonotaKikanCodefrom = function () {
@@ -97,10 +97,6 @@ var DBZ;
 
             Controls.prototype.btnback = function () {
                 return new UZA.Button(this.convFiledName("btnback"));
-            };
-
-            Controls.prototype.btnResearch = function () {
-                return new UZA.Button(this.convFiledName("btnResearch"));
             };
             return Controls;
         })();

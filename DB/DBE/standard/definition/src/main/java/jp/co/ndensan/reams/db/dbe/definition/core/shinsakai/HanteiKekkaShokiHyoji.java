@@ -19,7 +19,7 @@ public enum HanteiKekkaShokiHyoji {
     /**
      * コード:01 名称:認定 略称:定義なし
      */
-    認定("01", "認定");
+    認定("2", "認定");
 
     private final RString codeValue;
     private final Code aCode;

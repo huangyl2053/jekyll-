@@ -1,7 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="./../hokenshalist/HokenshaList.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
@@ -23,10 +23,6 @@ module DBZ {
 
             public static onClick_Moderu(): string {
                 return "onClick_Moderu";
-            }
-
-            public static onClick_SaiKenSaKu(): string {
-                return "onClick_SaiKenSaKu";
             }
 
         }
@@ -58,9 +54,9 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
             }
 
-            //public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
-            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
-            //}
+            public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
+            }
 
             public txtSonotaKikanCodefrom(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtSonotaKikanCodefrom"));
@@ -108,10 +104,6 @@ module DBZ {
 
             public btnback(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnback"));
-            }
-
-            public btnResearch(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnResearch"));
             }
 
         }

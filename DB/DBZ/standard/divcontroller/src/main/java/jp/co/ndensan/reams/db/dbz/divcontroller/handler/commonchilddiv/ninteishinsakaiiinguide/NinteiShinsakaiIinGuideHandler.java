@@ -86,6 +86,7 @@ public class NinteiShinsakaiIinGuideHandler {
         list.add(KEY0);
         div.getKensakuJoken().getChkHaishi().setSelectedItemsByKey(list);
         div.getKensakuJoken().getRadKikan().setSelectedKey(KEY0);
+        div.getKensakuJoken().getTxtKijunbi().clearValue();
     }
 
     /**
