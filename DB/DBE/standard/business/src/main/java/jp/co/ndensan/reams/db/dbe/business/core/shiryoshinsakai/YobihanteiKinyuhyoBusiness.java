@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -16,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class YobihanteiKinyuhyoBusiness {
 
     private static final int INDEX_5 = 5;
-    private final String regex = "[^0]";
     private final HanteiJohoEntity entity;
     private final IinTokkiJikouItiziHanteiProcessParameter paramter;
 
@@ -135,6 +131,15 @@ public class YobihanteiKinyuhyoBusiness {
     public RString get前回二次判定() {
         if (entity.getYokaigoJotaiKubunCode() == null || entity.getYokaigoJotaiKubunCode().isEmpty()) {
             return RString.EMPTY;
+        }
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.getZenKoroshoIfShikibetsuCode().getColumnValue())) {
+            return YokaigoJotaiKubun99.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
+        }
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.getZenKoroshoIfShikibetsuCode().getColumnValue())) {
+            return YokaigoJotaiKubun02.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
+        }
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.getZenKoroshoIfShikibetsuCode().getColumnValue())) {
+            return YokaigoJotaiKubun06.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
         }
         return YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
     }
@@ -335,7 +340,7 @@ public class YobihanteiKinyuhyoBusiness {
                 .append("作成")
                 .toRString();
     }
-    
+
     private RString get要介護認定一次判定結果(Code 厚労省IF識別コード, Code 一次判定結果コード, Code 一次判定結果コード_認知症加算) {
         RString 一次判定結果 = RString.EMPTY;
         RStringBuilder builder = new RStringBuilder();
