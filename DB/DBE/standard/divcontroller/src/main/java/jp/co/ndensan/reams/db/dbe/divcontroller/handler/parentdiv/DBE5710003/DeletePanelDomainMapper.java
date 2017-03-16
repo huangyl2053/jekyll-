@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.Dele
 /**
  * DeletePanelDivの操作をハンドリングします。
  */
-public class DeletePanelHandler {
+public class DeletePanelDomainMapper {
 
     private final DeletePanelDiv div;
 
     /**
      * @param div {@link DeletePanelDiv}
      */
-    public DeletePanelHandler(DeletePanelDiv div) {
+    public DeletePanelDomainMapper(DeletePanelDiv div) {
         this.div = div;
     }
 
@@ -29,16 +29,16 @@ public class DeletePanelHandler {
      */
     public OperationTargets toOperationTargets() {
         OperationTargets.Builder builder = new OperationTargets.Builder();
-        if (!div.getChkChosahyo().getSelectedKeys().isEmpty()) {
+        if (!div.getChosahyo().isDisplayNone() && !div.getChkChosahyo().getSelectedKeys().isEmpty()) {
             builder.add(ImageType.調査票, DeletionMethod.toValue(div.getRadChosahyoDeleteTarget().getSelectedKey()));
         }
-        if (!div.getChkGaikyoTokki().getSelectedKeys().isEmpty()) {
+        if (!div.getGaikyoTokki().isDisplayNone() && !div.getChkGaikyoTokki().getSelectedKeys().isEmpty()) {
             builder.add(ImageType.概況特記, DeletionMethod.toValue(div.getRadGaikyoTokkiDeleteTarget().getSelectedKey()));
         }
-        if (!div.getChkIkensho().getSelectedKeys().isEmpty()) {
+        if (!div.getIkensho().isDisplayNone() && !div.getChkIkensho().getSelectedKeys().isEmpty()) {
             builder.add(ImageType.意見書, DeletionMethod.toValue(div.getRadIkenshoDeleteTarget().getSelectedKey()));
         }
-        if (!div.getChkSonota().getSelectedKeys().isEmpty()) {
+        if (!div.getSonota().isDisplayNone() && !div.getChkSonota().getSelectedKeys().isEmpty()) {
             builder.add(ImageType.その他資料, DeletionMethod.toValue(div.getRadSonotaDeleteTarget().getSelectedKey()));
         }
         return builder.build();

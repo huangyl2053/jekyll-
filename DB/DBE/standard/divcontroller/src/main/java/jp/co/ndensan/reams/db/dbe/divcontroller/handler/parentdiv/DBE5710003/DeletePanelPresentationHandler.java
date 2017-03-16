@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003;
 
+import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileNames;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.DeletionMethod;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.ImageF
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001.Yokaigoninteiimagekanri;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 
 /**
@@ -36,6 +38,7 @@ public class DeletePanelPresentationHandler {
      * 初期化します。
      *
      * @param imageKanriJoho イメージ管理情報
+     * @return
      */
     public boolean initialize(ImagekanriJoho imageKanriJoho) {
         ImageFileNames imageFiles = imageKanriJoho.collectImageNames();
@@ -94,6 +97,7 @@ public class DeletePanelPresentationHandler {
         }
 
         private void initialize(ImageFilesPresentState chosaImages) {
+            div.getChkChosahyo().setSelectedItems(Collections.<KeyValueDataSource>emptyList());
             if (!chosaImages.exists()) {
                 div.setDisplayNone(true);
                 return;
@@ -101,13 +105,18 @@ public class DeletePanelPresentationHandler {
             div.getRadChosahyoDeleteTarget().setDataSource(KeyValueDataSourceConverter.getDataSource(DeletionMethod.toMap()));
             div.getRadChosahyoDeleteTarget().setSelectedIndex(0);
             div.getRadChosahyoDeleteTarget().setVisible(chosaImages.hasMasked());
+            setMessageDisplayNone(true);
+        }
+
+        private void setMessageDisplayNone(boolean displayNone) {
+            div.getChosahyoMessage1().setDisplayNone(displayNone);
+            div.getChosahyoMessage2().setDisplayNone(displayNone);
         }
 
         private void displayMessageByState() {
             boolean isOn = !div.getChkChosahyo().getSelectedKeys().isEmpty();
             if (!isOn) {
-                div.getChosahyoMessage1().setDisplayNone(true);
-                div.getChosahyoMessage2().setDisplayNone(true);
+                setMessageDisplayNone(true);
                 return;
             }
             boolean deletesMaskedOnly = willDeletesMaskedOnly();
@@ -129,12 +138,14 @@ public class DeletePanelPresentationHandler {
         }
 
         private void initialize(ImageFilesPresentState gaikyoTokkiImages) {
+            div.getChkGaikyoTokki().setSelectedItems(Collections.<KeyValueDataSource>emptyList());
             if (!Yokaigoninteiimagekanri.uses概況特記() || !gaikyoTokkiImages.exists()) {
                 div.setDisplayNone(true);
                 return;
             }
             div.getRadGaikyoTokkiDeleteTarget().setDataSource(KeyValueDataSourceConverter.getDataSource(DeletionMethod.toMap()));
             div.getRadGaikyoTokkiDeleteTarget().setSelectedIndex(0);
+            div.getGaikyoTokkiMessage1().setDisplayNone(true);
         }
 
         private void displayMessageByState() {
@@ -156,6 +167,7 @@ public class DeletePanelPresentationHandler {
         }
 
         private void initialize(ImageFilesPresentState ikenshoImages) {
+            div.getChkIkensho().setSelectedItems(Collections.<KeyValueDataSource>emptyList());
             if (!ikenshoImages.exists()) {
                 div.setDisplayNone(true);
                 return;
@@ -163,13 +175,18 @@ public class DeletePanelPresentationHandler {
             div.getRadIkenshoDeleteTarget().setDataSource(KeyValueDataSourceConverter.getDataSource(DeletionMethod.toMap()));
             div.getRadIkenshoDeleteTarget().setSelectedIndex(0);
             div.getRadIkenshoDeleteTarget().setVisible(ikenshoImages.hasMasked());
+            setMessageDisplayNone(true);
+        }
+
+        private void setMessageDisplayNone(boolean displayNone) {
+            div.getIkenshoMessage1().setDisplayNone(displayNone);
+            div.getIkenshoMessage2().setDisplayNone(displayNone);
         }
 
         private void displayMessageByState() {
             boolean isOn = !div.getChkIkensho().getSelectedKeys().isEmpty();
             if (!isOn) {
-                div.getIkenshoMessage1().setDisplayNone(true);
-                div.getIkenshoMessage2().setDisplayNone(true);
+                setMessageDisplayNone(true);
                 return;
             }
             boolean delelesMaskedOnly = willDeletesMaskedOnly();
@@ -191,6 +208,7 @@ public class DeletePanelPresentationHandler {
         }
 
         private void initialize(ImageFilesPresentState sonotaImages) {
+            div.getChkSonota().setSelectedItems(Collections.<KeyValueDataSource>emptyList());
             if (!sonotaImages.exists()) {
                 div.setDisplayNone(true);
                 return;
@@ -198,13 +216,18 @@ public class DeletePanelPresentationHandler {
             div.getRadSonotaDeleteTarget().setDataSource(KeyValueDataSourceConverter.getDataSource(DeletionMethod.toMap()));
             div.getRadSonotaDeleteTarget().setSelectedIndex(0);
             div.getRadSonotaDeleteTarget().setVisible(sonotaImages.hasMasked());
+            setMessageDisplayNone(true);
+        }
+
+        private void setMessageDisplayNone(boolean displayNone) {
+            div.getSonotaMessage1().setDisplayNone(displayNone);
+            div.getSonotaMessage2().setDisplayNone(displayNone);
         }
 
         private void displayMessageByState() {
             boolean isOn = !div.getChkSonota().getSelectedKeys().isEmpty();
             if (!isOn) {
-                div.getSonotaMessage1().setDisplayNone(true);
-                div.getSonotaMessage2().setDisplayNone(true);
+                setMessageDisplayNone(true);
                 return;
             }
             boolean delelesMaskedOnly = willDeletesMaskedOnly();

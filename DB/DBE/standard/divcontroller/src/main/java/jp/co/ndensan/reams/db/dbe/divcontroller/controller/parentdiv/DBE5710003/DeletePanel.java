@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.Operat
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DBE5710003TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelDomainMapper;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.ImageDeletor;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelPresentationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710003.DeletePanelValidationHandler;
@@ -117,7 +117,7 @@ public class DeletePanel {
             return ResponseData.of(div).addValidationMessages(controlPairs).respond();
         }
         ImagekanriJoho imageKanriJoho = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-        OperationTargets targets = getHandler(div).toOperationTargets();
+        OperationTargets targets = getMapper(div).toOperationTargets();
         ValidationMessageControlPairs イメージ削除チェック = getValidationHandler(div).validateDeletable(targets, imageKanriJoho);
         if (イメージ削除チェック.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
@@ -136,8 +136,8 @@ public class DeletePanel {
         return new DeletePanelPresentationHandler(div);
     }
 
-    private static DeletePanelHandler getHandler(DeletePanelDiv div) {
-        return new DeletePanelHandler(div);
+    private static DeletePanelDomainMapper getMapper(DeletePanelDiv div) {
+        return new DeletePanelDomainMapper(div);
     }
 
     private static DeletePanelValidationHandler getValidationHandler(DeletePanelDiv div) {
