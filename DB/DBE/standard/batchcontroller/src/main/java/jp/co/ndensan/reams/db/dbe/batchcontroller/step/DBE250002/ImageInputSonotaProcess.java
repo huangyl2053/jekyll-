@@ -252,7 +252,11 @@ public class ImageInputSonotaProcess extends BatchProcessBase<TempOcrCsvEntity> 
                 @Override
                 public RString apply(SharedFileEntryInfoEntity t) {
                     UzT0887SharedFileEntryFilesEntity entity = t.getFilesEntity();
-                    return entity == null ? RString.EMPTY : entity.getPathname();
+                    if (entity == null) {
+                        return RString.EMPTY;
+                    }
+                    RString pathName = entity.getPathname();
+                    return pathName == null ? RString.EMPTY : pathName;
                 }
             };
 
