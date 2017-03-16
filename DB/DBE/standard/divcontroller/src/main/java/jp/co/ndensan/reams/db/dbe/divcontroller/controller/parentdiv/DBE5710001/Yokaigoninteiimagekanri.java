@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class Yokaigoninteiimagekanri {
 
+    private static final RString 出力する = new RString("1");
     private static final RString イメージ区分_調査票概況 = new RString("1");
     private static final RString イメージ区分_意見書定型 = new RString("2");
     private static final RString イメージ区分_その他資料 = new RString("3");
@@ -60,6 +61,18 @@ public class Yokaigoninteiimagekanri {
     }
 
     /**
+     * @return 概況特記を利用する場合、{@code true}.
+     */
+    public static boolean uses概況特記() {
+        ShichosonSecurityJoho ss = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (ss == null || ss.get市町村情報().get市町村識別ID().is広域s()) {
+            return 出力する.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()));
+        }
+        return 出力する.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate(),
+                ss.get市町村情報().get市町村コード().value()));
+    }
+
+    /**
      * 画面初期化表示です。
      *
      * @param div 要介護認定イメージ情報管理
@@ -71,9 +84,6 @@ public class Yokaigoninteiimagekanri {
         }
 
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
-        ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
         if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(申請書管理番号))) {
             div.getBtnGaikyoTokki().setDisplayNone(!uses概況特記());
@@ -82,6 +92,19 @@ public class Yokaigoninteiimagekanri {
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
 
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
+        ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
+
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), イメージ管理情報.get申請書管理番号().value());
+        DbAccessLogger accessLog = new DbAccessLogger();
+        accessLog.store(shoKisaiHokenshaNo, イメージ管理情報.get被保険者番号(), expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);
+
+        return present(div, イメージ管理情報);
+    }
+
+    private ResponseData<YokaigoninteiimagekanriDiv> present(YokaigoninteiimagekanriDiv div, ImagekanriJoho イメージ管理情報) {
         if (イメージ管理情報.get申請書管理番号() != null && !イメージ管理情報.get申請書管理番号().isEmpty()) {
             div.setHdnShinseishoKanriNo(イメージ管理情報.get申請書管理番号().value());
             div.setHdnHihokenshaNo(イメージ管理情報.get被保険者番号());
@@ -107,23 +130,21 @@ public class Yokaigoninteiimagekanri {
             setBtnControllerDisabled(div, descriptor);
         }
         div.getBtnGaikyoTokki().setDisplayNone(!uses概況特記());
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), イメージ管理情報.get申請書管理番号().value());
-        DbAccessLogger accessLog = new DbAccessLogger();
-        accessLog.store(shoKisaiHokenshaNo, イメージ管理情報.get被保険者番号(), expandedInfo);
-        accessLog.flushBy(AccessLogType.照会);
         return ResponseData.of(div).respond();
     }
 
-    private static final RString 出力する = new RString("1");
-
-    public static boolean uses概況特記() {
-        ShichosonSecurityJoho ss = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (ss == null || ss.get市町村情報().get市町村識別ID().is広域s()) {
-            return 出力する.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()));
+    /**
+     * @param div 要介護認定イメージ情報管理
+     * @return ResponseData
+     */
+    public ResponseData<YokaigoninteiimagekanriDiv> onActive(YokaigoninteiimagekanriDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
         }
-        return 出力する.equals(BusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate(),
-                ss.get市町村情報().get市町村コード().value()));
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
+        ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
+        return present(div, イメージ管理情報);
     }
 
     /**

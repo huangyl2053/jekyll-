@@ -99,7 +99,7 @@
      "layoutName": "DBE5710001",
      "layoutTitle": "要介護認定イメージ情報管理",
      "eventName": "要介護認定イメージ情報削除へ",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5710003",
