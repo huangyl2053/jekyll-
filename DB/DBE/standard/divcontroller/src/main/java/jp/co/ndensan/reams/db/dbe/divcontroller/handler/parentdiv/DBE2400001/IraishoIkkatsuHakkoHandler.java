@@ -243,9 +243,11 @@ public class IraishoIkkatsuHakkoHandler {
             RDate systemDate = RDate.getNowDate();
             RString 加算日数 = new RString("0");
             if (SELECTED_NINTEI_CHOSA.equals(div.getRadTaishoSentaku().getSelectedKey())) {
-                加算日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                加算日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, RDate.getNowDate(),
+                        SubGyomuCode.DBE認定支援, div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
             } else if (SELECTED_SHUJII_IKENSHO.equals(div.getRadTaishoSentaku().getSelectedKey())) {
-                加算日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+                加算日数 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, RDate.getNowDate(),
+                        SubGyomuCode.DBE認定支援, div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value());
             }
             systemDate = systemDate.plusDay(Integer.parseInt(加算日数.toString()));
             div.getTxtKyotsuHizuke().setValue(systemDate);
