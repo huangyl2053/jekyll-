@@ -362,8 +362,8 @@ public class GogitaiJohoSakuseiProcess extends BatchProcessBase<TempGogitaiJohoS
 
     private boolean is数字チェック1(TempGogitaiJohoSakusei 合議体情報) {
         return RStringUtil.matchesRegex(合議体情報.get合議体NO(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get有効開始日(), POSITIVE_INTEGERS_REGEX)
-                && RStringUtil.matchesRegex(合議体情報.get有効終了日(), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get有効開始日().replace("/", ""), POSITIVE_INTEGERS_REGEX)
+                && RStringUtil.matchesRegex(合議体情報.get有効終了日().replace("/", ""), POSITIVE_INTEGERS_REGEX)
                 && RStringUtil.matchesRegex(合議体情報.get合議体開始予定時刻(), POSITIVE_INTEGERS_REGEX)
                 && RStringUtil.matchesRegex(合議体情報.get合議体終了予定時刻(), POSITIVE_INTEGERS_REGEX);
     }

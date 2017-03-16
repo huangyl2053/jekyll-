@@ -127,6 +127,7 @@
         ,A.nigoTokuteiShippeiCode AS nigoTokuteiShippeiCode
         ,A.shinsakaiIken AS shinsakaiIken
         ,A.gogitaiNo AS gogitaiNo
+        ,A.shinseishoKanriNo AS shinseishoKanriNo
         FROM
         <include refid="HanteiKekkaIchiranList" />
         ORDER BY
