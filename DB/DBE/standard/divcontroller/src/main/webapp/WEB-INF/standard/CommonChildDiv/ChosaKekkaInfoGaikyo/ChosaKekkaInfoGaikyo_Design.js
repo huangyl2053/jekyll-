@@ -127,16 +127,8 @@ var DBE;
                 return new UZA.Label(this.convFiledName("lblShisetsuShimei"));
             };
 
-            Controls.prototype.lblTelNo = function () {
-                return new UZA.Label(this.convFiledName("lblTelNo"));
-            };
-
             Controls.prototype.txtRiyoShisetsuMeisho = function () {
                 return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuMeisho"));
-            };
-
-            Controls.prototype.txtTelNo = function () {
-                return new UZA.TextBox(this.convFiledName("txtTelNo"));
             };
 
             Controls.prototype.ShisetsuMeishoPanel = function () {
@@ -149,6 +141,14 @@ var DBE;
 
             Controls.prototype.lblNoImageRiyoShisetsuMeisho = function () {
                 return new UZA.Label(this.convFiledName("lblNoImageRiyoShisetsuMeisho"));
+            };
+
+            Controls.prototype.lblTelNo = function () {
+                return new UZA.Label(this.convFiledName("lblTelNo"));
+            };
+
+            Controls.prototype.txtTelNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
             };
 
             Controls.prototype.TelNoPanel = function () {
@@ -165,6 +165,10 @@ var DBE;
 
             Controls.prototype.lblRiyoShisetsuJusho = function () {
                 return new UZA.Label(this.convFiledName("lblRiyoShisetsuJusho"));
+            };
+
+            Controls.prototype.txtYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
             };
 
             Controls.prototype.txtRiyoShisetsuJusho = function () {

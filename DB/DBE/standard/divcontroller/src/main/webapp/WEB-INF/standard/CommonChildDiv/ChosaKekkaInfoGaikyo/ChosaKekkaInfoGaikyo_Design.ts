@@ -133,16 +133,8 @@ module DBE {
                 return new UZA.Label(this.convFiledName("lblShisetsuShimei"));
             }
 
-            public lblTelNo(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTelNo"));
-            }
-
             public txtRiyoShisetsuMeisho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtRiyoShisetsuMeisho"));
-            }
-
-            public txtTelNo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtTelNo"));
             }
 
             public ShisetsuMeishoPanel(): UZA.Panel {
@@ -155,6 +147,14 @@ module DBE {
 
             public lblNoImageRiyoShisetsuMeisho(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblNoImageRiyoShisetsuMeisho"));
+            }
+
+            public lblTelNo(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTelNo"));
+            }
+
+            public txtTelNo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
             }
 
             public TelNoPanel(): UZA.Panel {
@@ -171,6 +171,10 @@ module DBE {
 
             public lblRiyoShisetsuJusho(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblRiyoShisetsuJusho"));
+            }
+
+            public txtYubinNo(): UZA.TextBoxYubinNo {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
             }
 
             public txtRiyoShisetsuJusho(): UZA.TextBox {

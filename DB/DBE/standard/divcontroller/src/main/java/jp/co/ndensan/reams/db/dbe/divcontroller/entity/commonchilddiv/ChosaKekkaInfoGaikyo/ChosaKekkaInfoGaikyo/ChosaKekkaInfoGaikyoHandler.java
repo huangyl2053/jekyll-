@@ -111,6 +111,7 @@ public class ChosaKekkaInfoGaikyoHandler {
         gaikyoDiv.getShisetsuRiyoPanel().getTxtRiyoShisetsuMeisho().setDisplayNone(true);
         gaikyoDiv.getShisetsuRiyoPanel().getTxtTelNo().setDisplayNone(true);
         gaikyoDiv.getShisetsuRiyoPanel().getTxtRiyoShisetsuJusho().setDisplayNone(true);
+        gaikyoDiv.getShisetsuRiyoPanel().getTxtYubinNo().setDisplayNone(true);
         gaikyoDiv.getTokubetsuKyufuPanel().getTxtTokubetsuKyufu().setDisplayNone(true);
         gaikyoDiv.getZaitakuServicePanel().getTxtZaitakuService().setDisplayNone(true);
         gaikyoDiv.getGaikyoTokkiPanel().getLblJutakuKaishu().setDisplayNone(true);
@@ -463,8 +464,13 @@ public class ChosaKekkaInfoGaikyoHandler {
 
     private void setText利用施設情報(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness) {
         gaikyoDiv.getTxtRiyoShisetsuMeisho().setValue(gaikyoBusiness.get利用施設名());
+        gaikyoDiv.getTxtYubinNo().setValue(gaikyoBusiness.get利用施設郵便番号());
         gaikyoDiv.getTxtRiyoShisetsuJusho().setValue(gaikyoBusiness.get利用施設住所());
         gaikyoDiv.getTxtTelNo().setValue(gaikyoBusiness.get利用施設電話番号());
+
+        gaikyoDiv.getShisetsuRiyoPanel().getShisetsuMeishoPanel().setDisplayNone(true);
+        gaikyoDiv.getShisetsuRiyoPanel().getShisetsuJushoPanel().setDisplayNone(true);
+        gaikyoDiv.getShisetsuRiyoPanel().getTelNoPanel().setDisplayNone(true);
     }
 
     private void setText概況特記(ChosaKekkaInfoGaikyoBusiness gaikyoBusiness) {

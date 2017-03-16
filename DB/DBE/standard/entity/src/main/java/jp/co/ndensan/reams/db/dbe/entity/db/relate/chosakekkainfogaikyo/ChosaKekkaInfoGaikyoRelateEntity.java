@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo;
 
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class ChosaKekkaInfoGaikyoRelateEntity {
     private RString riyoShisetsuShimei;
     private RString riyoShisetsuJusho;
     private RString riyoShisetsuTelNo;
+    private YubinNo riyoShisetsuYubinNo;
     private Code koroshoIfShikibetsuCode;
     private RString gaikyoChosaTextImageKubun;
     private int remban;

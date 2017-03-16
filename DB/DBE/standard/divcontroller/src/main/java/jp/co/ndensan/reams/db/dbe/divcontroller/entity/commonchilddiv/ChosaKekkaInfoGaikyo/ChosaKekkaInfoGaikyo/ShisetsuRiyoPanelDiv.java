@@ -28,18 +28,20 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     private TextBox txtRiyoShisetsuShurui;
     @JsonProperty("lblShisetsuShimei")
     private Label lblShisetsuShimei;
-    @JsonProperty("lblTelNo")
-    private Label lblTelNo;
     @JsonProperty("txtRiyoShisetsuMeisho")
     private TextBox txtRiyoShisetsuMeisho;
-    @JsonProperty("txtTelNo")
-    private TextBox txtTelNo;
     @JsonProperty("ShisetsuMeishoPanel")
     private ShisetsuMeishoPanelDiv ShisetsuMeishoPanel;
+    @JsonProperty("lblTelNo")
+    private Label lblTelNo;
+    @JsonProperty("txtTelNo")
+    private TextBox txtTelNo;
     @JsonProperty("TelNoPanel")
     private TelNoPanelDiv TelNoPanel;
     @JsonProperty("lblRiyoShisetsuJusho")
     private Label lblRiyoShisetsuJusho;
+    @JsonProperty("txtYubinNo")
+    private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtRiyoShisetsuJusho")
     private TextBox txtRiyoShisetsuJusho;
     @JsonProperty("ShisetsuJushoPanel")
@@ -106,24 +108,6 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     }
 
     /*
-     * getlblTelNo
-     * @return lblTelNo
-     */
-    @JsonProperty("lblTelNo")
-    public Label getLblTelNo() {
-        return lblTelNo;
-    }
-
-    /*
-     * setlblTelNo
-     * @param lblTelNo lblTelNo
-     */
-    @JsonProperty("lblTelNo")
-    public void setLblTelNo(Label lblTelNo) {
-        this.lblTelNo = lblTelNo;
-    }
-
-    /*
      * gettxtRiyoShisetsuMeisho
      * @return txtRiyoShisetsuMeisho
      */
@@ -142,24 +126,6 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     }
 
     /*
-     * gettxtTelNo
-     * @return txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public TextBox getTxtTelNo() {
-        return txtTelNo;
-    }
-
-    /*
-     * settxtTelNo
-     * @param txtTelNo txtTelNo
-     */
-    @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBox txtTelNo) {
-        this.txtTelNo = txtTelNo;
-    }
-
-    /*
      * getShisetsuMeishoPanel
      * @return ShisetsuMeishoPanel
      */
@@ -175,6 +141,42 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     @JsonProperty("ShisetsuMeishoPanel")
     public void setShisetsuMeishoPanel(ShisetsuMeishoPanelDiv ShisetsuMeishoPanel) {
         this.ShisetsuMeishoPanel = ShisetsuMeishoPanel;
+    }
+
+    /*
+     * getlblTelNo
+     * @return lblTelNo
+     */
+    @JsonProperty("lblTelNo")
+    public Label getLblTelNo() {
+        return lblTelNo;
+    }
+
+    /*
+     * setlblTelNo
+     * @param lblTelNo lblTelNo
+     */
+    @JsonProperty("lblTelNo")
+    public void setLblTelNo(Label lblTelNo) {
+        this.lblTelNo = lblTelNo;
+    }
+
+    /*
+     * gettxtTelNo
+     * @return txtTelNo
+     */
+    @JsonProperty("txtTelNo")
+    public TextBox getTxtTelNo() {
+        return txtTelNo;
+    }
+
+    /*
+     * settxtTelNo
+     * @param txtTelNo txtTelNo
+     */
+    @JsonProperty("txtTelNo")
+    public void setTxtTelNo(TextBox txtTelNo) {
+        this.txtTelNo = txtTelNo;
     }
 
     /*
@@ -211,6 +213,24 @@ public class ShisetsuRiyoPanelDiv extends Panel {
     @JsonProperty("lblRiyoShisetsuJusho")
     public void setLblRiyoShisetsuJusho(Label lblRiyoShisetsuJusho) {
         this.lblRiyoShisetsuJusho = lblRiyoShisetsuJusho;
+    }
+
+    /*
+     * gettxtYubinNo
+     * @return txtYubinNo
+     */
+    @JsonProperty("txtYubinNo")
+    public TextBoxYubinNo getTxtYubinNo() {
+        return txtYubinNo;
+    }
+
+    /*
+     * settxtYubinNo
+     * @param txtYubinNo txtYubinNo
+     */
+    @JsonProperty("txtYubinNo")
+    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+        this.txtYubinNo = txtYubinNo;
     }
 
     /*

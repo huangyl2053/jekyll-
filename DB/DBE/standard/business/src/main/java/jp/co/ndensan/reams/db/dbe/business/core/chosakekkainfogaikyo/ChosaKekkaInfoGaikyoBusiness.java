@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.chosakekkainfogaikyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -36,7 +37,7 @@ public class ChosaKekkaInfoGaikyoBusiness {
     public FlexibleDate get認定調査実施年月日() {
         return choentity.getNinteichosaJisshiYMD();
     }
-    
+
     /**
      * 認定調査実施場所コードを返します。
      *
@@ -101,6 +102,15 @@ public class ChosaKekkaInfoGaikyoBusiness {
     }
 
     /**
+     * 利用施設郵便番号を返します。
+     *
+     * @return 利用施設郵便番号
+     */
+    public YubinNo get利用施設郵便番号() {
+        return choentity.getRiyoShisetsuYubinNo();
+    }
+
+    /**
      * 厚労省IF識別コードを返します。
      *
      * @return 厚労省IF識別コード
@@ -108,7 +118,7 @@ public class ChosaKekkaInfoGaikyoBusiness {
     public Code get厚労省IF識別コード() {
         return choentity.getKoroshoIfShikibetsuCode();
     }
-    
+
     /**
      * 概況調査テキストイメージ区分を返します。
      *

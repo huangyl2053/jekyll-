@@ -665,16 +665,6 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     }
 
     @JsonIgnore
-    public Label getLblTelNo() {
-        return this.getShisetsuRiyoPanel().getLblTelNo();
-    }
-
-    @JsonIgnore
-    public void  setLblTelNo(Label lblTelNo) {
-        this.getShisetsuRiyoPanel().setLblTelNo(lblTelNo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtRiyoShisetsuMeisho() {
         return this.getShisetsuRiyoPanel().getTxtRiyoShisetsuMeisho();
     }
@@ -682,16 +672,6 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonIgnore
     public void  setTxtRiyoShisetsuMeisho(TextBox txtRiyoShisetsuMeisho) {
         this.getShisetsuRiyoPanel().setTxtRiyoShisetsuMeisho(txtRiyoShisetsuMeisho);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTelNo() {
-        return this.getShisetsuRiyoPanel().getTxtTelNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtTelNo(TextBox txtTelNo) {
-        this.getShisetsuRiyoPanel().setTxtTelNo(txtTelNo);
     }
 
     @JsonIgnore
@@ -722,6 +702,26 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonIgnore
     public void  setLblNoImageRiyoShisetsuMeisho(Label lblNoImageRiyoShisetsuMeisho) {
         this.getShisetsuRiyoPanel().getShisetsuMeishoPanel().setLblNoImageRiyoShisetsuMeisho(lblNoImageRiyoShisetsuMeisho);
+    }
+
+    @JsonIgnore
+    public Label getLblTelNo() {
+        return this.getShisetsuRiyoPanel().getLblTelNo();
+    }
+
+    @JsonIgnore
+    public void  setLblTelNo(Label lblTelNo) {
+        this.getShisetsuRiyoPanel().setLblTelNo(lblTelNo);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTelNo() {
+        return this.getShisetsuRiyoPanel().getTxtTelNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtTelNo(TextBox txtTelNo) {
+        this.getShisetsuRiyoPanel().setTxtTelNo(txtTelNo);
     }
 
     @JsonIgnore
@@ -762,6 +762,16 @@ public class ChosaKekkaInfoGaikyoDiv extends Panel implements IChosaKekkaInfoGai
     @JsonIgnore
     public void  setLblRiyoShisetsuJusho(Label lblRiyoShisetsuJusho) {
         this.getShisetsuRiyoPanel().setLblRiyoShisetsuJusho(lblRiyoShisetsuJusho);
+    }
+
+    @JsonIgnore
+    public TextBoxYubinNo getTxtYubinNo() {
+        return this.getShisetsuRiyoPanel().getTxtYubinNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+        this.getShisetsuRiyoPanel().setTxtYubinNo(txtYubinNo);
     }
 
     @JsonIgnore

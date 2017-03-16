@@ -14,6 +14,7 @@
         <result property="riyoShisetsuShimei" column="DbT5202_riyoShisetsuShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuJusho" column="DbT5202_riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuTelNo" column="DbT5202_riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="riyoShisetsuYubinNo" column="DbT5202_riyoShisetsuYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="koroshoIfShikibetsuCode" column="DbT5202_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="gaikyoChosaTextImageKubun" column="DbT5202_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="remban" column="DbT5209_remban" />
@@ -42,6 +43,7 @@
         ,DbT5202."riyoShisetsuShimei" as "DbT5202_riyoShisetsuShimei"
         ,DbT5202."riyoShisetsuJusho" as "DbT5202_riyoShisetsuJusho"
         ,DbT5202."riyoShisetsuTelNo" as "DbT5202_riyoShisetsuTelNo"
+        ,DbT5202."riyoShisetsuYubinNo" as "DbT5202_riyoShisetsuYubinNo"
         ,DbT5202."koroshoIfShikibetsuCode" as "DbT5202_koroshoIfShikibetsuCode"
         ,DbT5202."gaikyoChosaTextImageKubun" as "DbT5202_gaikyoChosaTextImageKubun"
         ,DbT5209."remban" as "DbT5209_remban"
