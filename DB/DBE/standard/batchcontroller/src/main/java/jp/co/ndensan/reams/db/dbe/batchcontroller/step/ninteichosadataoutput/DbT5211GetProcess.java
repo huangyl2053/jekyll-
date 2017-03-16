@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.DbT5211GetProcessKeyBreakCore;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -55,12 +56,17 @@ public class DbT5211GetProcess extends BatchKeyBreakBase<NinteiChosaDataOutputBa
 
     @Override
     protected void usualProcess(NinteiChosaDataOutputBatchRelateEntity current) {
-        keyBreakCore.usualProcess(current);
+        if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(current.get厚労省IF識別コード())
+                || KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(current.get厚労省IF識別コード())) {
+            keyBreakCore.usualProcess(current);
+        }
     }
 
     @Override
     protected void afterExecute() {
-        tempTableWriter.update(keyBreakCore.getLastLow());
+        if (keyBreakCore.getLastLow() != null) {
+            tempTableWriter.update(keyBreakCore.getLastLow());
+        }
     }
 
 }
