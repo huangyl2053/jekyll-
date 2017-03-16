@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.Operat
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710003.DeletePanelDiv;
 
 /**
- * DeletePanelDivの操作をハンドリングします。
+ * DeletePanelDivからドメインオブジェクトへのマッピングを行います。
  */
 public class DeletePanelDomainMapper {
 
