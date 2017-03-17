@@ -312,16 +312,6 @@ public class TaishouWaritsuke {
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
     }
 
-    /**
-     * 完了するボタン押下時の動作
-     *
-     * @param div
-     * @return ResponseData
-     */
-    public ResponseData<TaishouWaritsukeDiv> onClick_btnComplete(TaishouWaritsukeDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
-    }
-
     private TaishouWaritsukeHandler getHandler(TaishouWaritsukeDiv div) {
         return new TaishouWaritsukeHandler(div);
     }
