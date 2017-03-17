@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami.HanteikekkaKagamiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -12,9 +13,14 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyok
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -47,6 +53,8 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
     private RDateTime システム時刻;
     private Map<Integer, RString> 通知文;
     private boolean 初回判定フラグ;
+    private boolean is認定広域 = false;
+    NinshoshaSource ninshoshaSource;
 
     @BatchWriter
     private BatchReportWriter<HanteikekkaKagamiReportSource> batchReportWriter;
@@ -86,8 +94,14 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
     }
 
     @Override
-    protected void afterExecute() {
-
+    protected void beforeExecute() {
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                is認定広域 = true;
+            }
+        }
     }
 
     private void writeReport(KekkatsuchiIchiranhyoEntity entity) {
@@ -95,16 +109,28 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
         hanteikekkaKagamiEntity.setPrintTimeStamp(システム時刻);
         hanteikekkaKagamiEntity.setShinsakaiKaisaiYMD(entity.getShinsakaiKaisaiYMD());
         hanteikekkaKagamiEntity.setShinsakaiKaisaiNo(processParameter.getKaisaiBangou());
-        hanteikekkaKagamiEntity.setNinshoshaSource(ReportUtil.get認証者情報(
-                SubGyomuCode.DBE認定支援, ID,
-                new FlexibleDate(システム時刻.getDate().toDateString()),
-                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(),
-                KenmeiFuyoKubunType.付与なし,
-                reportSourceWriter));
+        if (is認定広域) {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    ID,
+                    new FlexibleDate(システム時刻.getDate().toDateString()),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter, entity.getShoKisaiHokenshaNo());
+        } else {
+            ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
+                    ID,
+                    new FlexibleDate(システム時刻.getDate().toDateString()),
+                    NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし,
+                    reportSourceWriter);
+        }
+        hanteikekkaKagamiEntity.setNinshoshaSource(ninshoshaSource);
         hanteikekkaKagamiEntity.setTsuchibun1(通知文.get(INDEX_1));
         hanteikekkaKagamiEntity.setTsuchibun2(通知文.get(INDEX_2));
         hanteikekkaKagamiEntity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
         HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);
         report.writeBy(reportSourceWriter);
+    }
+
+    @Override
+    protected void afterExecute() {
     }
 }

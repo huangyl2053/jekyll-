@@ -65,6 +65,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
             source.koinShoryaku = item.getNinshoshaSource().koinShoryaku;
+            source.denshiKoin = item.getNinshoshaSource().denshiKoin;
             source.ninshoshaShimeiKakeru = item.getNinshoshaSource().ninshoshaShimeiKakeru;
             source.ninshoshaShimeiKakenai = item.getNinshoshaSource().ninshoshaShimeiKakenai;
             source.ninshoshaYakushokuMei = item.getNinshoshaSource().ninshoshaYakushokuMei;
