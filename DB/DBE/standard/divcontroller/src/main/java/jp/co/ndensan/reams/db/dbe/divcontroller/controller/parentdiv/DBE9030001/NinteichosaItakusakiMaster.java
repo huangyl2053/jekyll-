@@ -664,6 +664,9 @@ public class NinteichosaItakusakiMaster {
             if (is一覧エリア編集有り(div)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.検索画面遷移の確認.getMessage()).respond();
             } else {
+                if (!DBE9030001StateName.一覧.toString().equals(ResponseHolder.getState().toString())) {
+                    onLoad(div);
+                }
                 return ResponseData.of(div).setState(DBE9030001StateName.検索);
             }
         } else {
@@ -736,6 +739,7 @@ public class NinteichosaItakusakiMaster {
      * @return ResponseData<NinteichosaItakusakiMasterDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnBackSearchShujii(NinteichosaItakusakiMasterDiv div) {
+        onLoad(div);
         return ResponseData.of(div).setState(DBE9030001StateName.検索);
     }
 

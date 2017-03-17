@@ -170,12 +170,14 @@ public class NinteiChosainMaster {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                onLoad(div);
                 div.getChosainSearch().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9040001StateName.検索);
             }
         } else {
-            onLoad(div);
+            if (!(DBE9040001StateName.一覧.toString().equals(ResponseHolder.getState().toString())
+                    || DBE9040001StateName.一覧_認定調査委託先マスタから遷移.toString().equals(ResponseHolder.getState().toString()))) {
+                onLoad(div);
+            }
             div.getChosainSearch().setDisabled(false);
             return ResponseData.of(div).setState(DBE9040001StateName.検索);
         }
@@ -716,6 +718,7 @@ public class NinteiChosainMaster {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getChosainSearch().setDisabled(false);
             div.getChosainIchiran().setDisabled(false);
+            onLoad(div);
             return ResponseData.of(div).setState(DBE9040001StateName.検索);
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
@@ -726,6 +729,7 @@ public class NinteiChosainMaster {
             }
             return ResponseData.of(div).setState(DBE9040001StateName.詳細);
         }
+        onLoad(div);
         div.getChosainSearch().setDisabled(false);
         div.getChosainIchiran().setDisabled(false);
         return ResponseData.of(div).setState(DBE9040001StateName.検索);

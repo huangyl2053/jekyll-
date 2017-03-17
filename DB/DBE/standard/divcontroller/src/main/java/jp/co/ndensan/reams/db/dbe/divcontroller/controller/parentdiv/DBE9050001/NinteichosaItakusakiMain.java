@@ -575,14 +575,14 @@ public class NinteichosaItakusakiMain {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).load();
                 return ResponseData.of(div).setState(DBE9050001StateName.検索);
             }
         } else {
-            getHandler(div).load();
+            if (!DBE9050001StateName.一覧.toString().equals(ResponseHolder.getState().toString())) {
+                getHandler(div).load();
+            }
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
-//        getHandler(div).load();
         return ResponseData.of(div).respond();
     }
 

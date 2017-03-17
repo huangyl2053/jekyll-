@@ -102,6 +102,10 @@ public class NinteichosaItakusakiMainHandler {
         div.getCcdhokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChosaitakusakiJohoInput().getCcdChiku().load(DBECodeShubetsu.調査地区コード.getコード());
         div.getRadSearchHaisiFlag().setSelectedKey(KEY0);
+        div.getTxtSearchSonotaKikanCodeFrom().clearValue();
+        div.getTxtSearchSonotaKikanCodeTo().clearValue();
+        div.getTxtSearchSonotaKikanMeisho().clearValue();
+        div.getTxtSearchSonotaKikanKanaMeisho().clearValue();
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getDdlitakukubun().setDataSource(setItakukubun());

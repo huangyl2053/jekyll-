@@ -756,13 +756,14 @@ public class ShujiiIryoKikanMaster {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.
                     getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                onLoad(div);
                 div.getShujiiSearch().setDisabled(false);
                 ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
                 return ResponseData.of(div).setState(DBE9010001StateName.検索);
             }
         } else {
-            onLoad(div);
+            if (!DBE9010001StateName.医療機関一覧.toString().equals(ResponseHolder.getState().toString())) {
+                onLoad(div);
+            }
             div.getShujiiSearch().setDisabled(false);
             ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
             return ResponseData.of(div).setState(DBE9010001StateName.検索);

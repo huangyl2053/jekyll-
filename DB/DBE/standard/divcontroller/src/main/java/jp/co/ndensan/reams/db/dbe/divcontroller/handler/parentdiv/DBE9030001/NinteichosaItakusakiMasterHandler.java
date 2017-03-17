@@ -104,6 +104,8 @@ public class NinteichosaItakusakiMasterHandler {
     public void onLoad() {
         div.getChosainSearch().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChosainSearch().getRadSearchChosainJokyo().setSelectedKey(new RString("key0"));
+        div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().clearValue();
+        div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().clearValue();
         List<KeyValueDataSource> chosaItakuKubunCodes = new ArrayList<>();
         chosaItakuKubunCodes.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
         chosaItakuKubunCodes.addAll(createListFromChosaItakuKubunCodeASC());

@@ -179,10 +179,14 @@ public class ShujiiMaster {
         } else {
             div.getShujiiSearch().setDisplayNone(false);
             div.getShujiiSearch().setDisabled(false);
-            getHandler(div).load();
+            if (!(DBE9020001StateName.主治医一覧.toString().equals(ResponseHolder.getState().toString())
+                    || DBE9020001StateName.主治医一覧_保存ボタン非活性.toString().equals(ResponseHolder.getState().toString())
+                    || DBE9020001StateName.主治医一覧_医療機関登録から遷移.toString().equals(ResponseHolder.getState().toString()))) {
+                getHandler(div).load();
+            }
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
-        getHandler(div).load();
+
         return ResponseData.of(div).respond();
     }
 
