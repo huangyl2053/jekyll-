@@ -52,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -187,12 +188,12 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set利用施設住所(entity.get利用施設住所());
         csvEntity.set利用施設電話番号(entity.get利用施設電話番号());
         csvEntity.set利用施設郵便番号(entity.get利用施設郵便番号());
-        csvEntity.set特記(entity.get特記());
+        csvEntity.set特記(convert改行(entity.get特記()));
         csvEntity.set認定調査特記事項受付年月日(entity.get認定調査特記事項受付年月日());
         csvEntity.set認定調査特記事項受領年月日(entity.get認定調査特記事項受領年月日());
-        csvEntity.set住宅改修_改修箇所(entity.get住宅改修_改修箇所());
-        csvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
-        csvEntity.set介護保険給付以外の在宅サービス種類名(entity.get介護保険給付以外の在宅サービス種類名());
+        csvEntity.set住宅改修_改修箇所(convert改行(entity.get住宅改修_改修箇所()));
+        csvEntity.set市町村特別給付サービス種類名(convert改行(entity.get市町村特別給付サービス種類名()));
+        csvEntity.set介護保険給付以外の在宅サービス種類名(convert改行(entity.get介護保険給付以外の在宅サービス種類名()));
         csvEntity.set認定調査認知症高齢者の日常生活自立度コード(entity.get認定調査認知症高齢者の日常生活自立度コード());
         csvEntity.set認定調査認知症高齢者の日常生活自立度(
                 RString.isNullOrEmpty(entity.get認定調査認知症高齢者の日常生活自立度コード())
@@ -576,5 +577,11 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         }
 
         return csvEntity;
+    }
+
+    private static RString convert改行(RString text) {
+        return (text != null)
+                ? new RStringBuilder(text).replace("\r", "").replace("\n", "↓").toRString()
+                : RString.EMPTY;
     }
 }
