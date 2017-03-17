@@ -11,8 +11,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiKekkaResultConveter;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputComparator;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
 import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
@@ -30,7 +32,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -596,28 +597,6 @@ public class NinnteiChousaKekkaTouroku1 {
         set画面遷移パラメータ(div);
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.概況特記入力を表示).respond();
     }
-//
-//    /**
-//     * ボタン「特記事項一覧を表示する」を押下する処理です。（DBE2210003　特記事項一覧画面へ遷移する）
-//     *
-//     * @param div コントロールdiv
-//     * @return レスポンスデータ
-//     */
-//    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnTokkiJikoIchiran(NinnteiChousaKekkaTouroku1Div div) {
-//
-//        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//        getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
-//        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
-//        getValidationHandler().validateFor実施場所の必須入力(pairs, div);
-//        getValidationHandler().validateFor所属機関の必須入力(pairs, div);
-//        getValidationHandler().validateFor記入者の必須入力(pairs, div);
-//        if (pairs.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(pairs).respond();
-//        }
-//        前排他キーの解除();
-//        set画面遷移パラメータ(div);
-//        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.特記事項一覧を表示).respond();
-//    }
 
     /**
      * ボタン「入力内容をクリアする」を押下する処理です。
@@ -649,6 +628,47 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onclick_btnChosaKekkaUpdate(NinnteiChousaKekkaTouroku1Div div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一次判定処理前のチェック処理・引数作成処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnIchijiHanteiValidate(NinnteiChousaKekkaTouroku1Div div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+        div.setIchijiHanteiArgument(manager.get一次判定引数(申請書管理番号));
+        validationMessages.add(getValidationHandler().validate一次判定引数(div));
+        if (validationMessages.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査結果および一次判定処理結果を保存する処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnHanteishoriAto(NinnteiChousaKekkaTouroku1Div div) {
+
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        RString result = div.getIchijiHanteiResult();
+        if (RString.isNullOrEmpty(result)) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
+        }
+        IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
+        List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
+
+        if (kekkaList == null || kekkaList.isEmpty()) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
+        }
+
         if (new RString(DbeInformationMessages.一次判定再処理.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
@@ -709,6 +729,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 getHandler(div).削除処理();
             } else {
                 getHandler(div).更新処理();
+                getHandler(div).updateGridAndViewStateData(kekkaList);
             }
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
@@ -725,12 +746,6 @@ public class NinnteiChousaKekkaTouroku1 {
                 }
             }
             if (!isDelete) {
-                ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-                IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
-                IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(申請書管理番号);
-                if (一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
-                    return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
-                }
                 return ResponseData.of(div).setState(DBE2210001StateName.完了);
             }
             return ResponseData.of(div).setState(DBE2210001StateName.完了_削除);

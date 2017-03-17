@@ -106,6 +106,29 @@ public class IChiJiPanTeiSyoRiManager {
     }
 
     /**
+     * 認定調査結果入手一次判定結果情報を取得します。
+     *
+     * @param parameter IChiJiPanTeiSyoRiParameter
+     * @return 一次判定結果情報リスト
+     */
+    @Transaction
+    public SearchResult<IchijiHanteiKekkaJoho> get一次判定結果情報_調査結果(IChiJiPanTeiSyoRiParameter parameter) {
+        List<IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報List = new ArrayList<>();
+        IIChiJiPanTeiSyoRiMapper mapper = mapperProvider.create(IIChiJiPanTeiSyoRiMapper.class);
+        List<DbT5116IchijiHanteiKekkaJohoEntity> entityList = mapper.get一次判定結果情報_調査結果(parameter);
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<IChiJiPanTeiSyoRiBusiness>emptyList(), 0, false);
+        }
+        for (DbT5116IchijiHanteiKekkaJohoEntity entity : entityList) {
+            if (entity != null) {
+                entity.initializeMd5();
+                要介護認定一次判定結果情報List.add(new IchijiHanteiKekkaJoho(entity));
+            }
+        }
+        return SearchResult.of(要介護認定一次判定結果情報List, 0, false);
+    }
+
+    /**
      * 要介護認定一次判定結果情報の検索と同条件で取得できる実際の件数を返します。
      *
      * @param parameter IChiJiPanTeiSyoRiParameter
@@ -131,7 +154,7 @@ public class IChiJiPanTeiSyoRiManager {
         }
         return 1 == dbT5116Dac.save(要介護認定一次判定結果情報.toEntity());
     }
-    
+
     /**
      * 認定調査票（概況調査）を削除する。
      *
