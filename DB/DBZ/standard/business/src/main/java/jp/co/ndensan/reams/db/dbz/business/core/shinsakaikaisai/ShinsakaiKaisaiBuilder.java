@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaikaisai.ShinsakaiKaisaiRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -52,6 +53,14 @@ public class ShinsakaiKaisaiBuilder {
     }
 
     /**
+     * @param time 開始予定時刻
+     * @return {@link ShinsakaiKaisaiBuilder}
+     */
+    public ShinsakaiKaisaiBuilder set介護認定審査会開始予定時刻(RTime time) {
+        return set介護認定審査会開始予定時刻(time == null ? RString.EMPTY : new RString(time.toString()));
+    }
+
+    /**
      * 介護認定審査会終了予定時刻を設定します。
      *
      * @param 介護認定審査会終了予定時刻 介護認定審査会終了予定時刻
@@ -60,6 +69,14 @@ public class ShinsakaiKaisaiBuilder {
     public ShinsakaiKaisaiBuilder set介護認定審査会終了予定時刻(RString 介護認定審査会終了予定時刻) {
         entity.setShinsakaiShuryoYoteiTime(介護認定審査会終了予定時刻);
         return this;
+    }
+
+    /**
+     * @param time 終了予定時刻
+     * @return {@link ShinsakaiKaisaiBuilder}
+     */
+    public ShinsakaiKaisaiBuilder set介護認定審査会終了予定時刻(RTime time) {
+        return set介護認定審査会終了予定時刻(time == null ? RString.EMPTY : new RString(time.toString()));
     }
 
     /**
@@ -129,6 +146,14 @@ public class ShinsakaiKaisaiBuilder {
     }
 
     /**
+     * @param time 開始時刻
+     * @return {@link ShinsakaiKaisaiBuilder}
+     */
+    public ShinsakaiKaisaiBuilder set介護認定審査会開始時刻(RTime time) {
+        return set介護認定審査会開始時刻(time == null ? RString.EMPTY : new RString(time.toString()));
+    }
+
+    /**
      * 介護認定審査会終了時刻を設定します。
      *
      * @param 介護認定審査会終了時刻 介護認定審査会終了時刻
@@ -137,6 +162,14 @@ public class ShinsakaiKaisaiBuilder {
     public ShinsakaiKaisaiBuilder set介護認定審査会終了時刻(RString 介護認定審査会終了時刻) {
         entity.setShinsakaiShuryoTime(介護認定審査会終了時刻);
         return this;
+    }
+
+    /**
+     * @param time 終了時刻
+     * @return {@link ShinsakaiKaisaiBuilder}
+     */
+    public ShinsakaiKaisaiBuilder set介護認定審査会終了時刻(RTime time) {
+        return set介護認定審査会終了時刻(time == null ? RString.EMPTY : new RString(time.toString()));
     }
 
     /**

@@ -211,15 +211,15 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                     ShinsakaiKaisai shinsakaiKaisai = new ShinsakaiKaisai();
                     shinsakaiKaisai = shinsakaiKaisai.createBuilderForEdit()
                             .set介護認定審査会開催予定年月日(row.getKaisaiYoteiDate().getValue())
-                            .set介護認定審査会開始予定時刻(new RString(row.getYoteiKaishiTime().getValue().toString()))
-                            .set介護認定審査会終了予定時刻(new RString(row.getYoteiShuryoTime().getValue().toString()))
+                            .set介護認定審査会開始予定時刻(row.getYoteiKaishiTime().getValue())
+                            .set介護認定審査会終了予定時刻(row.getYoteiShuryoTime().getValue())
                             .set編集審査会名称(row.getShinsakaiMeisho())
                             .set合議体名称(row.getGogitaiMeisho())
                             .set種類(row.getShurui())
                             .set介護認定審査会開催場所名称(row.getShinsakaiKaijo())
                             .set介護認定審査会開催年月日(row.getKaisaiDay().getValue())
-                            .set介護認定審査会開始時刻(new RString(row.getKaisaiTime().getValue().toString()))
-                            .set介護認定審査会終了時刻(new RString(row.getShuryoTime().getValue().toString()))
+                            .set介護認定審査会開始時刻(row.getKaisaiTime().getValue())
+                            .set介護認定審査会終了時刻(row.getShuryoTime().getValue())
                             .set介護認定審査会予定定員(row.getYoteiTeiin().getValue())
                             .set介護認定審査会割当済み人数(row.getWariateNinzu().getValue())
                             .set介護認定審査会実施人数(row.getTaishoNinzu().getValue())
@@ -294,7 +294,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             time = time.padZeroToLeft(LENGTH_4);
             return RTime.of(Integer.valueOf(time.substring(0, 2).toString()), Integer.valueOf(time.substring(2).toString()));
         }
-        return RTime.of(0, 0, 0, 0);
+        return null;
     }
 
     private static class YokaigoNinteiShinsakaiIchiranListMessage implements IValidationMessage {
