@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -74,8 +75,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ShinsakaiToroku {
 
     private static final RString CSVファイルID_審査会登録一覧 = new RString("DBE401001");
-    private final RString 介護認定審査会登録 = new RString("完了処理・介護認定審査会登録");
-    private final RString 介護認定審査会割当 = new RString("完了処理・介護認定審査会割当");
+    private final RString 介護認定審査会登録 = new RString("基本運用・介護認定審査会登録");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
@@ -218,7 +218,7 @@ public class ShinsakaiToroku {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(div).要介護認定完了更新(models);
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+            div.getCcdKanryoMsg().setMessage(new RString(DbeInformationMessages.基本運用_完了.getMessage().
                     replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
             return ResponseData.of(div).setState(DBE4010001StateName.完了);
@@ -343,51 +343,30 @@ public class ShinsakaiToroku {
     }
 
     /**
-     * 保存するボタンクリックイベントです。
+     * 「審査会を保存する」ボタンクリックイベントです。
      *
      * @param div ShinsakaiTorokuDiv
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnSave(ShinsakaiTorokuDiv div) {
-        ValidationMessageControlPairs 対象者データ有無チェック = getValidationHandler(div).対象者データ有無チェック();
-        List<dgNinteiTaskList_Row> 修正リスト = get修正リスト(div);
-        if (修正リスト.isEmpty()) {
-            return ResponseData.of(div).addValidationMessages(対象者データ有無チェック).respond();
-        }
-
         if (!ResponseHolder.isReRequest()) {
+            if (get修正リスト(div).isEmpty()) {
+                return ResponseData.of(div).addValidationMessages(getValidationHandler(div).対象者データ有無チェック()).respond();
+            }
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
+
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return onLoad(div);
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).onClick_btnSave(修正リスト);
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace(介護認定審査会割当.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-            div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
-            return ResponseData.of(div).setState(DBE4010001StateName.完了);
-
+            getHandler(div).onClick_btnSave(get修正リスト(div));
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        return ResponseData.of(div).setState(DBE4010001StateName.登録);
-    }
-
-    /**
-     * 継続ボタン押下動作です。
-     *
-     * @param div ShinsakaiTorokuDiv
-     * @return ResponseData<ShinsakaiTorokuDiv>
-     */
-    public ResponseData<ShinsakaiTorokuDiv> onClick_btnContinue(ShinsakaiTorokuDiv div) {
-        DBE4010001StateName stateName;
-        if (UIコンテナID_DBEUC51601.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
-            stateName = DBE4010001StateName.完了のみ登録;
-        } else {
-            stateName = DBE4010001StateName.登録;
-        }
-        getHandler(div).onLoad(ResponseHolder.getState());
-        return ResponseData.of(div).setState(stateName);
+        return ResponseData.of(div).respond();
     }
 
     private List<dgNinteiTaskList_Row> get修正リスト(ShinsakaiTorokuDiv div) {

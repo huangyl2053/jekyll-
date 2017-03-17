@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2080001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.DBE2080001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.DBE2080001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2080001.MaskingDiv;
@@ -144,21 +145,6 @@ public class Masking {
     }
 
     /**
-     * 一覧表の表示データを制御する処理です。
-     *
-     * @param div MaskingDiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<MaskingDiv> onClick_btnShorikeizoku(MaskingDiv div) {
-        getHandler(div).initialize();
-        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
-            return ResponseData.of(div).setState(DBE2080001StateName.登録);
-        } else {
-            return ResponseData.of(div).setState(DBE2080001StateName.登録fromサブメニュー);
-        }
-    }
-
-    /**
      * 一覧表を出力するボタンの押下チェック処理です。
      *
      * @param div コントロールdiv
@@ -285,7 +271,8 @@ public class Masking {
                 }
             }
             AccessLogger.log(AccessLogType.更新, personalDataList);
-            div.getCcdKanryoMsg().setMessage(new RString("完了処理・マスキングの保存処理が完了しました。"),
+            div.getCcdKanryoMsg().setMessage(
+                    new RString(DbeInformationMessages.基本運用_完了.getMessage().replace("基本運用・マスキング").evaluate()),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2080001StateName.完了);
         }

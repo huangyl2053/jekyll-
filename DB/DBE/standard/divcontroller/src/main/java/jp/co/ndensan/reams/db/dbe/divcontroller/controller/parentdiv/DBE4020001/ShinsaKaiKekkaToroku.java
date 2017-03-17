@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4020001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.DBE4020001TransitionEventName;
@@ -27,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -71,7 +71,7 @@ public class ShinsaKaiKekkaToroku {
     private static final RString CSVファイルID_審査会結果登録一覧 = new RString("DBE402001");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString 完了処理_審査会結果登録 = new RString("完了処理・審査会結果登録");
+    private static final RString 基本運用_審査会結果登録 = new RString("基本運用・審査会結果登録");
     private static final RString 審査会結果登録 = new RString("審査会結果登録");
     private static final RString 認定ｿﾌﾄ99 = new RString("99A");
     private static final RString 認定ｿﾌﾄ2002 = new RString("02A");
@@ -273,11 +273,6 @@ public class ShinsaKaiKekkaToroku {
         }
     }
 
-    public ResponseData<ShinsaKaiKekkaTorokuDiv> onClick_shorikeizoku(ShinsaKaiKekkaTorokuDiv div) {
-        onLoad(div);
-        return ResponseData.of(div).setState(DBE4020001StateName.登録);
-    }
-
     /**
      * 結果登録を完了するボタンを押下する場合、審査会結果登録完了処理を行う。
      *
@@ -308,8 +303,9 @@ public class ShinsaKaiKekkaToroku {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(div).要介護認定完了更新(models);
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace(完了処理_審査会結果登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMsg().setMessage(
+                    new RString(DbeInformationMessages.基本運用_完了.getMessage().replace(基本運用_審査会結果登録.toString()).evaluate()),
+                    RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakaikanryooutput().setDisplayNone(true);
             return ResponseData.of(div).setState(DBE4020001StateName.完了);
         }

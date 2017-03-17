@@ -72,7 +72,6 @@ public class KanryoshoriIchijihantei {
     private static final RString CSVファイルID = new RString("DBE310001");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString ROOTTITLE = new RString("一次判定結果を完了しました。");
 
     /**
      * 画面初期化。(オンロード)<br/>
@@ -312,10 +311,8 @@ public class KanryoshoriIchijihantei {
                 outputNinteiKanryoJohoList.add(joho.createBuilderForEdit().set要介護認定一次判定完了年月日(nowDate).build());
             }
             ninteiKanryoManager.save要介護認定完了情報List(outputNinteiKanryoJohoList);
-
-            div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定を完了しました。"));
-
-            div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessage().setMessage(new RString(DbeInformationMessages.基本運用_完了.getMessage().
+                    replace("基本運用・一次判定").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE3100001StateName.完了);
         }
         return ResponseData.of(div).respond();
@@ -328,24 +325,6 @@ public class KanryoshoriIchijihantei {
     private KanryoshoriIchijihanteiValidationHandler getValidationHandler(KanryoshoriIchijihanteiDiv div) {
         return new KanryoshoriIchijihanteiValidationHandler(div);
     }
-
-    /**
-     * グリッド上の照会BTNをクリックした場合の処理です。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     *//*
-     public ResponseData<KanryoshoriIchijihanteiDiv> onBeforeDialog_HanteiKekkaShokai(KanryoshoriIchijihanteiDiv div) {
-
-     dgHanteiTaishosha_Row selectedRow = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getClickedItem();
-     if (selectedRow == null || RString.isNullOrEmpty(selectedRow.getShinseishoKanriNo())) {
-     return ResponseData.of(div).respond();
-     }
-
-     ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(selectedRow.getShinseishoKanriNo());
-     getHandler(div).setClickedIchijiHanteiData(shinseishoKanriNo);
-     return ResponseData.of(div).respond();
-     }*/
 
     /**
      * 一次判定処理前のチェック処理・引数作成処理を行います。
