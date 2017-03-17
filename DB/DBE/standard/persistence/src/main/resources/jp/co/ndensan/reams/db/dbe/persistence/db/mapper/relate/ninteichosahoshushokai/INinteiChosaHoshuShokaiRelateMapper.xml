@@ -24,12 +24,7 @@
         T5601."chosaItakuryo",
         T5601."shinseishoKanriNo",
         T5601."ninteichosaIraiRirekiNo",
-        <if test="isKoiki">
-            #{広域_市町村名} AS shichosonMeisho
-        </if>
-        <if test="!isKoiki">
-            T7051."shichosonMeisho"
-        </if>
+        T7051."shichosonMeisho"
         FROM		rgdb."DbT5601NinteiChosaHoshuJissekiJoho" AS  T5601
         INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101
         ON			T5101."shinseishoKanriNo"=T5601."shinseishoKanriNo"
