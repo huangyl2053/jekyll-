@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg99A;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.ChosahyoIkenshoComparisonItem09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.NotesComparisonResultChosaIkensho;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.NitijouSeikatsu;
@@ -30,6 +31,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEn
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.INinteichosaKomokuMapping;
+import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
@@ -1609,6 +1613,49 @@ public class SabisuJyoukyoA3 {
         }
     }
 
+//    public void set認定調査と主治医意見書比較(ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目,
+//            INinteichosaKomokuMapping 認定調査項目マッピング,
+//            TiyosaKekka 調査結果,
+//            List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
+//        RString 主治医意見書連番;
+//        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
+//            主治医意見書連番 = new RString(主治医意見書.getRemban());
+//            if (主治医意見書連番.equals(調査票意見書比較項目.get意見書項目連番())) {
+//                if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+//                    set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+//                } else if (IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+//
+//                }
+//            } else if (主治医意見書連番.equals(get主治医意見麻痺_右上肢(厚労省IF識別コード))) {
+//                調査結果 = 調査結果リスト.get(連番_1);
+//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+//            } else if (主治医意見書連番.equals(get主治医意見麻痺_左下肢(厚労省IF識別コード))) {
+//                調査結果 = 調査結果リスト.get(連番_2);
+//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+//            } else if (主治医意見書連番.equals(get主治医意見麻痺_右下肢(厚労省IF識別コード))) {
+//                調査結果 = 調査結果リスト.get(連番_3);
+//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+//            } else if (主治医意見書連番.equals(get主治医意見麻痺_その他(厚労省IF識別コード))) {
+//                調査結果 = 調査結果リスト.get(連番_4);
+//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+//            } else if (主治医意見書連番.equals(get主治医意見拘縮_肩関節(厚労省IF識別コード))) {
+//                調査結果 = 調査結果リスト.get(連番_5);
+//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+//            }
+//        }
+//    }
+//
+//    private boolean is特別な医療項目(ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目) {
+//        if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(調査票意見書比較項目.get意見書項目連番())
+//                || IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+//                || IkenshoKomokuMapping09B.透析.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+//                || IkenshoKomokuMapping09B.ストーマの処置.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+//                || IkenshoKomokuMapping09B.ストーマの処置.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+//            return true;
+//        }
+//        return false;
+//    }
+
     /**
      * 認定調査と主治医意見書比較設定する。
      *
@@ -1771,6 +1818,59 @@ public class SabisuJyoukyoA3 {
      * @param 調査結果リスト 調査結果リスト
      * @param 主治医意見書項目 主治医意見書項目
      */
+    public void set特別な医療リスト認定調査と主治医意見書比較(Code 厚労省IF識別コード, List<TiyosaKekka> 調査結果リスト,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
+        TiyosaKekka 調査結果;
+        RString 主治医意見書連番;
+        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
+            主治医意見書連番 = new RString(主治医意見書.getRemban());
+            if (主治医意見書連番.equals(get主治医意見点滴の管理(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_0);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見中心静脈栄養(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_1);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見透析(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_2);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見ストーマの処置(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_3);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見酸素療法(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_4);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見レスピレーター(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_5);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見気管切開の処置(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_6);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見疼痛の看護(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_7);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見経管栄養(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_8);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見モニター測定(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_9);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見じょくそうの処置(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_10);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            } else if (主治医意見書連番.equals(get主治医意見カテーテル(厚労省IF識別コード))) {
+                調査結果 = 調査結果リスト.get(連番_11);
+                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
+            }
+        }
+    }
+
+    /**
+     * 認定調査と主治医意見書比較設定する。
+     *
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 調査結果リスト 調査結果リスト
+     * @param 主治医意見書項目 主治医意見書項目
+     */
     public void set特別な医療リスト認定調査と主治医意見書比較１(Code 厚労省IF識別コード, List<TiyosaKekka> 調査結果リスト,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
         TiyosaKekka 調査結果;
@@ -1810,25 +1910,24 @@ public class SabisuJyoukyoA3 {
             List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
         TiyosaKekka 調査結果;
         RString 主治医意見書連番;
-        SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
         for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
             主治医意見書連番 = new RString(主治医意見書.getRemban());
-            if (主治医意見書連番.equals(settei.get主治医意見気管切開の処置(厚労省IF識別コード))) {
+            if (主治医意見書連番.equals(get主治医意見気管切開の処置(厚労省IF識別コード))) {
                 調査結果 = 調査結果リスト.get(連番_0);
                 set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-            } else if (主治医意見書連番.equals(settei.get主治医意見疼痛の看護(厚労省IF識別コード))) {
+            } else if (主治医意見書連番.equals(get主治医意見疼痛の看護(厚労省IF識別コード))) {
                 調査結果 = 調査結果リスト.get(連番_1);
                 set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-            } else if (主治医意見書連番.equals(settei.get主治医意見経管栄養(厚労省IF識別コード))) {
+            } else if (主治医意見書連番.equals(get主治医意見経管栄養(厚労省IF識別コード))) {
                 調査結果 = 調査結果リスト.get(連番_2);
                 set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-            } else if (主治医意見書連番.equals(settei.get主治医意見モニター測定(厚労省IF識別コード))) {
+            } else if (主治医意見書連番.equals(get主治医意見モニター測定(厚労省IF識別コード))) {
                 調査結果 = 調査結果リスト.get(連番_3);
                 set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-            } else if (主治医意見書連番.equals(settei.get主治医意見じょくそうの処置(厚労省IF識別コード))) {
+            } else if (主治医意見書連番.equals(get主治医意見じょくそうの処置(厚労省IF識別コード))) {
                 調査結果 = 調査結果リスト.get(連番_4);
                 set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-            } else if (主治医意見書連番.equals(settei.get主治医意見カテーテル(厚労省IF識別コード))) {
+            } else if (主治医意見書連番.equals(get主治医意見カテーテル(厚労省IF識別コード))) {
                 調査結果 = 調査結果リスト.get(連番_5);
                 set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
             }
